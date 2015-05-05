@@ -1,0 +1,160 @@
+<template name="home">
+<div id="skrollr-body">
+    {{> skrollrBackground}}
+    <section id="intro" class="colored text-center">
+        <header>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="row">
+                        <a class="navbar-brand" href="{{pathFor 'home'}}">{{Config.name}}</a>
+                        <div id="main-nav" class="navbar-collapse">
+                            <ul class="social-links">
+                                {{#unless User}}
+                                <a id="home-login" href="{{pathFor route='atSignIn'}}"><li>{{_ "login2"}}</li></a>
+                                {{/unless}}
+                                {{#each socialMedia}}
+                                <a href="{{url}}" target="_blank"><li class="fa fa-{{icon}}"></li></a>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="intro-well wow animated bounceIn">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <h1>{{Config.title}}</h1>
+                        <h2 style="color:white;" class="hidden-xs">{{Config.subtitle}}</h2>
+                        {{#if User}}
+                        <a href="{{pathFor 'dashboard'}}" class="btn btn-success"><i class="fa fa-dashboard"></i> {{_ "dashboard"}}</a>
+                        {{else}}
+                        <a class="btn btn-success" href="{{pathFor 'dashboard'}}">{{_ "getstarted"}}</a>
+                        {{/if}}
+                    </div>
+                    <!--                 <div class="col-lg-6 col-sm-6">
+                                                <img class="img-responsive" src="/img/image-header1.png" alt="">
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="how-it-works" class="text-center">
+        <div class="container wow fadeIn animated">
+            <div class="row col-md-12">
+                <h3>{{_ "how"}}</h3>
+                <h4>{{Config.name}} - {{Config.subtitle}}</h4>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="icon-row">
+                <div class="col-md-4 wow fadeInLeft animated" data-wow-delay="0.4s">
+                    <div class="iconbox">
+                        <i class="fa fa-plane fa-3x"></i>
+                    </div>
+                    <p class="icntitle">1. {{_ "step_1"}}</p>
+                    <p class="icnp">{{_ "step_1_text"}}</p>
+                </div>
+                <div class="col-md-4 wow fadeInUp animated" data-wow-delay="0.8s">
+                    <div class="iconbox">
+                        <i class="fa fa-bolt fa-3x"></i>
+                    </div>
+                    <p class="icntitle">2. {{_ "step_2"}}</p>
+                    <p class="icnp">{{_ "step_2_text"}}</p>
+                </div>
+                <div class="col-md-4 wow fadeInRight animated" data-wow-delay="1.2s">
+                    <div class="iconbox">
+                        <i class="fa fa-check fa-3x"></i>
+                    </div>
+                    <p class="icntitle">3. {{_ "step_3"}}</p>
+                    <p class="icnp">{{_ "step_3_text"}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section id="examples">
+                <div class="container wow fadeInUp animated">
+                        <h1>Great features!</h1>
+                        <h2>You can use {{Config.siteName}} to do anything</h2>
+                </div>
+    </section> -->
+    <section id="ipad" class="colored text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>{{_ "section_ipad_header"}}</h3>
+                    <p>{{_ "section_ipad_text"}}</p>
+                    <p class="text-center">
+                    <a href="{{Config.about}}" target="_blank" class="btn btn-success">
+                    {{_ "section_ipad_btn"}}
+                    </a>
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <img id="ipad" src="/img/ipad.png" alt="" class="wow animated fadeInRight" data-wow-delay="1s">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="final">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center wow fadeInDown animated" data-wow-delay="0.8s">
+                    <h3>
+                    {{_ "final_text"}}
+                    </h3>
+                    <div class="text-center">
+                        <a class="btn btn-primary" href="{{pathFor 'dashboard'}}">{{_ "final_cta"}}</a>
+                    </div>
+                </div>
+                <div class="col-md-8  wow fadeInUp animated">
+                    <img src="img/screenshot.png" class="img-responsive wow" data-wow-delay="0.6s" alt="picture">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{{> footerHome}}
+</template>
+<template name="skrollrBackground">
+<div
+    id="skroll-background-intro"
+    class="parallax-image-wrapper parallax-image-wrapper-100"
+    data-anchor-target="#intro"
+    data-bottom-top="transform:translate3d(0px, 200%, 0px)"
+    data-top-bottom="transform:translate3d(0px, 0%, 0px)">
+    <div
+        class="parallax-image parallax-image-100"
+        data-anchor-target="#intro"
+        data-bottom-top="transform: translate3d(0px, -80%, 0px);"
+        data-top-bottom="transform: translate3d(0px, 80%, 0px);"
+    ></div>
+    <!--the +/-80% translation can be adjusted to control the speed difference of the image-->
+</div>
+</template>
+<template name="footerHome">
+    <footer id="footer-home">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-offset-2 col-md-8">
+                    <ul class="social-networks">
+                        {{#each socialMedia}}
+                        <li><a href="{{url}}" target="_blank">
+                        <span class="fa-stack fa-2x">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-{{icon}} fa-stack-1x fa-inverse"></i>
+                        </span></a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    {{{Config.footer}}}
+                </div>
+            </div>
+        </div>
+    </footer>
+</template>
