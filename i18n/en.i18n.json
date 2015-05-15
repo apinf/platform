@@ -1,25 +1,25 @@
 {
 
 	/*Config*/
-	"configName": "My App",
-	"configTitle": "Make Meteor Apps. Fast.",
-	"configSubtitle": "Create beautiful and functioning Meteor apps really quick",
-	
+	"configName": "Apinf",
+	"configTitle": "Build custom APIs. Fast.",
+	"configSubtitle": "Create custom API mashups, really quick.",
+
 	/*Home*/
 	"getstarted": "Get Started",
 	"dashboard": "Go to dashboard",
 	"learn": "Learn more",
 	"intro": "Make Meteor Apps. Fast.",
 	"how": "How It Works",
-	"step_1": "Step 1",
-	"step_1_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-	"step_2": "Step 2",
-	"step_2_text": "Oratio me istius philosophi non offendit; Qua tu etiam inprudens utebare non numquam.",
-	"step_3": "Step 3",
-	"step_3_text": "Et ille ridens: Video, inquit, quid agas; Duo Reges: constructio interrete.",
-	"section_ipad_header": "A revolutionary product",
-	"section_ipad_text": "Do really cool stuff really quickly",
-	"section_ipad_btn": "Made by MeteorFactory",
+	"step_1": "Consumer registration",
+	"step_1_text": "Users create accounts to access your API via personal API keys.",
+	"step_2": "Configuration",
+	"step_2_text": "Configure API endpoints, structure, and access control.",
+	"step_3": "Analytics",
+	"step_3_text": "Track the usage of your API, discover patterns, plan improvements.",
+	"section_ipad_header": "Unified API Lifecycle services",
+	"section_ipad_text": "We provide full lifecycle tools and services",
+	"section_ipad_btn": "Powered by Sampo Software",
 	"final_text": "Your life will be instantly better.",
 	"final_cta": "Take a look",
 
@@ -70,7 +70,7 @@
 	"profilePicture": "Profile Picture"
 
 
-	
+
 
 
 }
