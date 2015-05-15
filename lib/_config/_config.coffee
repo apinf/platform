@@ -4,7 +4,7 @@
 @Config =
 
 	# Basic Details
-	name: 'My App'
+	name: 'Apinf'
 	title: ->
 			TAPi18n.__ 'configTitle'
 	subtitle: ->
@@ -21,7 +21,7 @@
 
 	# Username - if true, users are forced to set a username
 	username: false
-	
+
 	# Localisation
 	defaultLanguage: 'en'
 	dateFormat: 'D/M/YYYY'
@@ -36,8 +36,8 @@
 		name: 'Meteor Factory'
 		url: 'http://benjaminpeterjones.com'
 
-	about: 'http://meteorfactory.io'
-	blog: 'http://learn.meteorfactory.io'
+	about: 'http://samposoftware.com'
+	blog: 'http://blog.samposoftware.com'
 
 	socialMedia:
 		facebook:
