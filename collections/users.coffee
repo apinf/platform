@@ -9,7 +9,7 @@ Schemas.UserProfile = new SimpleSchema(
         type: 'fileUpload'
         collection: 'ProfilePictures'
 
-   Name:
+  Name:
     type: String
     optional: true
 
