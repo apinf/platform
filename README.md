@@ -11,7 +11,12 @@ Architecture and ecosystem
 -------------
 Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
 
-Currently, there are two options for the architecture. The decision on the architecture to be made once we understand the API Umbrella Admin API better.
+Currently, there are two options for the architecture:
+
+* In option A, we will develop our own dashboard and use the API Umbrella Admin API to build Apinf features.
+* In option B, we will extend the current API Umbrella Web platform to include a dashboard.
+
+The decision on the architecture to be made once we understand the API Umbrella Admin API better.
 
 ![Architecture diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_architecture.svg)
 
