@@ -1,6 +1,6 @@
 @AdminConfig =
 	name: Config.name
-	collections : 
+	collections :
 		Posts: {
 			color: 'red'
 			icon: 'pencil'
@@ -8,6 +8,15 @@
 			tableColumns: [
               {label: 'Title',name:'title'}
               {label:'User',name:'owner',collection:'Users'}
+            ]
+		}
+		ApiUmbrellaUsers: {
+			color: 'yellow'
+			icon: 'pencil'
+			tableColumns: [
+              {label: 'Email',name:'email'}
+							{label: 'First Name',name:'first_name'}
+              {label: 'Last Name',name:'last_name'}
             ]
 		}
 		Comments: {
@@ -35,5 +44,5 @@
 		# 			class: 'col-lg-3 col-xs-6'
 		# 	}
 		# ]
-	autoForm: 
+	autoForm:
 	        omitFields: ['createdAt', 'updatedAt']
