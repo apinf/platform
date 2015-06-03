@@ -16,4 +16,3 @@ Schemas.NewApi = new SimpleSchema
 
   balance_algorithm:
     type: String
-
