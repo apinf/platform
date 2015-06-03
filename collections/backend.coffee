@@ -1,9 +1,13 @@
-Schemas.NewApi = new SimpleSchema
+Schemas.Api = new SimpleSchema
   name:
     type: String
 
   backend_protocol:
     type: String
+    allowedValues:
+      'http',
+      'https'
+    label: 'Backend protocol'
 
   backend_host:
     type: String
@@ -14,5 +18,14 @@ Schemas.NewApi = new SimpleSchema
   frontend_host:
     type: String
 
-  balance_algorithm:
-    type: String
+server:
+  type: Array
+
+"server.$":
+  type: Object
+
+"server.$. backend_host":
+  type: String
+
+"server.$.backend_port":
+  type: Number
