@@ -6,6 +6,7 @@ Schemas.ApiBackends = new SimpleSchema(
 
   backend_protocol:
     type: String
+    allowedValues: ['http', 'https']
     label: 'Backend protocol'
 
   backend_host:
@@ -18,16 +19,26 @@ Schemas.ApiBackends = new SimpleSchema(
     type: String
 
   server:
-    type: Array
+    type: [Object]
 
-  "server.$":
-    type: Object
-
-  "server.$. backend_host":
+  "server.$.backend_host":
     type: String
 
   "server.$.backend_port":
-    type: Number
+    type: String
+    regEx: /^[0-9]{2,5}$/
+
+  matching:
+    type: [Object]
+
+  "matching.$.frontend_prefix":
+    label: 'Frontend Prefix'
+    type: String
+
+  "matching.$.backend_prefix":
+    label: 'Backend Prefix'
+    type: String
+    regEx: /^[a-z0-9A-Z_]{3,15}$/
 )
 
 ApiBackends.attachSchema(Schemas.ApiBackends)
