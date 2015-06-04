@@ -1,7 +1,23 @@
 <template name="apiBackends">
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3">
-  {{> quickForm collection="ApiBackends" doc=this id="apiBackends" type="update"}}
+      {{#autoForm collection="ApiBackends" doc=this id="apiBackends"}}
+      {{> afQuickField name='name'}}
+      <div class="row">
+        <div class="col-lg-3">
+          {{> afQuickField name='backend_protocol'}}
+        </div>
+        <div class="col-lg-6">
+          {{> afQuickField name='backend_host'}}
+        </div>
+        <div class="col-lg-3">
+          {{> afQuickField name='backend_port'}}
+        </div>
+      </div>
+      {{> afQuickField name='frontend_host'}}
+      {{> afQuickField name='server'}}
+      {{> afQuickField name='matching'}}
+      {{/autoForm}}
     </div>
   </div>
 </template>
