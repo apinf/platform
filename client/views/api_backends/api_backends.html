@@ -16,7 +16,11 @@
       </div>
       {{> afQuickField name='frontend_host'}}
       {{> afQuickField name='server'}}
-      {{> afQuickField name='matching'}}
+      <form>
+        <div class="form-inline">
+          {{> afQuickField name='matching'}}
+        </div>
+      </form>
       {{/autoForm}}
     </div>
   </div>
