@@ -11,7 +11,13 @@ Accounts.onCreateUser (options, user) ->
         user.profile.firstName = user.services.google.given_name
         user.profile.lastName = user.services.google.family_name
     if user.services?.github
-        user.emails = [{address: user.services.github.email, verified: true}]
+        user.profile.name = user.services.github.username;
+        if(user.services.github.email == null or user.services.github.email == "")
+          user.emails = [{address: "", verified: true}]
+        else
+          user.emails = [{address: user.services.github.email, verified: true}]
+        console.log user.services.github
+
 
     if user.services?.facebook?.id
         profileImageUrl = 'https://graph.facebook.com/v2.3/' + user.services.facebook.id + '/picture?type=normal'
