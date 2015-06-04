@@ -93,6 +93,7 @@ momentjs:moment@2.9.0
 mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
+mrt:chartjs@0.0.6
 mrt:googlemaps@0.1.1
 mrt:moment@2.8.1
 multiply:iron-router-progress@1.0.1
