@@ -11,12 +11,14 @@ Accounts.onCreateUser (options, user) ->
         user.profile.firstName = user.services.google.given_name
         user.profile.lastName = user.services.google.family_name
     if user.services?.github
-        user.profile.name = user.services.github.username;
+
         if(user.services.github.email == null or user.services.github.email == "")
-          user.emails = [{address: "", verified: true}]
+            user.emails = [{address: "", verified: false}]
         else
-          user.emails = [{address: user.services.github.email, verified: true}]
-        console.log user.services.github
+            user.emails = [{address: user.services.github.email, verified: true}]
+
+        user.profile.name = user.services.github.username;
+
 
 
     if user.services?.facebook?.id
@@ -48,3 +50,26 @@ Accounts.onCreateUser (options, user) ->
         user.profile.picture = profilePicture._id
 
     user
+
+
+Accounts.onLogin (info) ->
+  user = info.user
+  console.log "So far"
+  console.log GitHub
+  if user
+    github = new GitHub(
+      version: '3.0.0'
+      timeout: 5000)
+    github.authenticate
+      type: 'oauth'
+      token: user.services.github.accessToken
+    try
+      result = github.user.getEmails(user: user.services.github.username)
+      email = _(result).findWhere(primary: true)
+      ###Meteor.users.update { _id: user._id }, $set:
+        'profile.email': email.email
+        'services.github.email': email.email###
+      user.emails = [{address: email.email, verified: true}]
+      console.log user
+    catch e
+      console.log e.message
