@@ -107,6 +107,7 @@ observe-sequence@1.0.6
 ordered-dict@1.0.3
 percolate:momentum@0.7.2
 percolate:momentum-iron-router@0.7.0
+percolate:synced-cron@1.2.1
 percolate:velocityjs@1.1.0
 raix:eventemitter@0.1.2
 raix:handlebar-helpers@0.2.4
