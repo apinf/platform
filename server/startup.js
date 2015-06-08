@@ -2,7 +2,7 @@ Meteor.startup(function () {
   // Check if API Umbrella settings are available
   if (Meteor.settings.api_umbrella) {
     // Get users from API Umbrella instance
-    var response = apiUmbrellaWeb.getUsers();
+    var response = apiUmbrellaWeb.adminApi.v1.apiUsers.getUsers();
 
     // Add each user to collection if not already there
     _.each(response.data.data, function (item) {
