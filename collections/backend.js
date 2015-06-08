@@ -3,6 +3,9 @@ Schemas.ApiBackends = new SimpleSchema({
   name: {
     type: String
   },
+  sort_order: {
+    type: Integer
+  },
   backend_protocol: {
     type: String,
     allowedValues: ['http', 'https'],
@@ -15,6 +18,9 @@ Schemas.ApiBackends = new SimpleSchema({
     type: Number
   },
   frontend_host: {
+    type: String
+  },
+  balance_algorithm: {
     type: String
   },
   server: {
