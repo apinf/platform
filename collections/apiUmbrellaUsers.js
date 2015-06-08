@@ -6,7 +6,8 @@ ApiUmbrellaUsersSchema = new SimpleSchema({
     optional: true
   },
   created_at: {
-    type: Date
+    type: Date,
+    optional: true
   },
   first_name: {
     type: String,
@@ -21,7 +22,8 @@ ApiUmbrellaUsersSchema = new SimpleSchema({
     optional: true
   },
   email_verified: {
-    type: Boolean
+    type: Boolean,
+    optional: true
   },
   website: {
     type: String,
@@ -35,11 +37,13 @@ ApiUmbrellaUsersSchema = new SimpleSchema({
     type: Boolean
   },
   disabled_at: {
-    type: Date
+    type: Date,
+    optional: true
   },
   roles: {
-    type: [String]
-  },
+    type: [String],
+    optional: true
+  }
 });
 
 ApiUmbrellaUsers.attachSchema(ApiUmbrellaUsersSchema);
