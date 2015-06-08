@@ -34,7 +34,8 @@ ApiUmbrellaUsersSchema = new SimpleSchema({
     optional: true
   },
   throttle_by_ip: {
-    type: Boolean
+    type: Boolean,
+    optional: true
   },
   disabled_at: {
     type: Date,
