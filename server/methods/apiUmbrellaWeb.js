@@ -21,7 +21,7 @@ Meteor.methods({
     _.each(response.data.data, function (item) {
       var user = Meteor.users.findOne({'emails.address': item.email});
       if (user) {
-        Meteor.users.update(user._id, {$set:{'apiUserUmbrellaId': item._id}}, { validate: false });
+        Meteor.users.update(user._id, {$set:{'apiUmbrellaUserId': item._id}}, { validate: false });
       }
     });
   }
