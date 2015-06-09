@@ -4,10 +4,11 @@ Meteor.startup(function () {
     name: 'Sync API Umbrella Users',
     schedule: function(parser) {
       // parser is a later.parse object
-      return parser.text('every 1 day');
+      return parser.text('every 5 seconds');
     },
     job: function() {
       Meteor.call("syncApiUmbrellaUsers");
+      Meteor.call("addApiUbmrellaUserKey");
     }
   });
 });
