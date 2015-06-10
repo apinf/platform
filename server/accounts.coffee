@@ -41,4 +41,17 @@ Accounts.onCreateUser (options, user) ->
         profilePicture = ProfilePictures.insert picture
         user.profile.picture = profilePicture._id
 
+    apiUmbrellaUserObj = {
+      "user":{
+        "email": user.emails[0].address,
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "terms_and_conditions":true
+      }
+    }
+
+    response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj)
+    user.apiUmbrellaUserId = response.data.user.id
+    user.profile.apiKey = response.data.user.api_key
+
     user

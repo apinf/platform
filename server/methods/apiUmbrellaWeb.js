@@ -15,14 +15,5 @@ Meteor.methods({
         }
       });
     };
-  },
-  "addApiUbmrellaUserKey": function () {
-    var response = apiUmbrellaWeb.adminApi.v1.apiUsers.getUsers();
-    _.each(response.data.data, function (item) {
-      var user = Meteor.users.findOne({'emails.address': item.email});
-      if (user) {
-        Meteor.users.update(user._id, {$set:{'apiUmbrellaUserId': item._id}}, { validate: false });
-      }
-    });
   }
 });
