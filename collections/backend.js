@@ -44,6 +44,96 @@ Schemas.ApiBackends = new SimpleSchema({
     label: 'Backend Prefix',
     type: String,
     regEx: /^[a-z0-9A-Z_]{3,15}$/
+  },
+  duration: {
+    type: Number
+  },
+  accuracy:{
+    type: Number
+  },
+  limit_by: {
+    type: String
+  },
+  limit: {
+    type: Number
+  },
+  distributed: {
+    type: Boolean
+  },
+  response_headers: {
+    type: Boolean
+  },
+  matcher_type: {
+    type: String
+  },
+  http_method: {
+    type: String
+  },
+  frontend_matcher: {
+    type: String
+  },
+  backend_replacement: {
+    type: String
+  },
+  matcher: {
+    type: String
+  },
+  http_method: {
+    type: String
+  },
+  from: {
+    type: String
+  },
+  to: {
+    type: String
+  },
+  set_headers: {
+    type: [Object]
+  },
+  append_query_string: {
+    type: String
+  },
+  http_basic_auth: {
+    type: String
+  },
+  require_https: {
+    type: String
+  },
+  require_https_transition_start_at: {
+    type: Date
+  },
+  disable_api_key: {
+    type: Boolean
+  },
+  api_key_verification_level: {
+    type: String
+  },
+  api_key_verification_transition_start_at: {
+    type: Date
+  },
+  required_roles: {
+    type: Array
+  },
+  rate_limit_mode: {
+    type: String
+  },
+  anonymous_rate_limit_behavior: {
+    type: String
+  },
+  authenticated_rate_limit_behavior: {
+    type: String
+  },
+  pass_api_key_header: {
+    type: Boolean
+  },
+  pass_api_key_query_param: {
+    type: Boolean
+  },
+  error_templates: {
+    type: [Object]
+  },
+  error_data: {
+    type: [Object]
   }
 });
 
