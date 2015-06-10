@@ -1,5 +1,6 @@
-ApiBackends = new Meteor.Collection('apiBackends');
-Schemas.ApiBackends = new SimpleSchema({
+ApiBackends = new Mongo.Collection('apiBackends');
+
+ApiBackendsSchema = new SimpleSchema({
   name: {
     type: String
   },
@@ -146,4 +147,5 @@ Schemas.ApiBackends = new SimpleSchema({
   }
 });
 
-ApiBackends.attachSchema(Schemas.ApiBackends);
+ApiBackends.attachSchema(ApiBackendsSchema);
+
