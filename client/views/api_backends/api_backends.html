@@ -5,7 +5,7 @@
       {{> afQuickField name='name'}}
       <div class="row">
         <div class="col-lg-3">
-          {{> afQuickField name='backend_protocol'}}
+          {{> afQuickField name='backend_protocol' options="allowed"}}
         </div>
         <div class="col-lg-6">
           {{> afQuickField name='backend_host'}}
@@ -24,6 +24,13 @@
       </form>
 -->
       {{> afQuickField name='matching'}}
+      <h4>Global Request Settings</h4>
+      {{> afQuickField name='append_query_string'}}
+      {{> afQuickField name='set_headers'}}
+      {{> afQuickField name='http_basic_auth'}}
+      {{> afQuickField name='require_https' options="allowed"}}
+      {{> afQuickField name='api_key_verification_level' options="allowed"}}
+      {{> afQuickField name='required_roles' options="allowed"}}
       {{/autoForm}}
     </div>
   </div>
