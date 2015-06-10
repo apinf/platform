@@ -60,4 +60,7 @@ Accounts.onCreateUser (options, user) ->
     # TODO: make apiKey field not editable or display api key on profile page separately from form - as a plain text
     user.profile.apiKey = response.data.user.api_key
 
+    # adding umbrella user to apinf database
+    ApiUmbrellaUsers.insert(response.data.user)
+
     user
