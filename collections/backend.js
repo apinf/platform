@@ -4,7 +4,7 @@ Schemas.ApiBackends = new SimpleSchema({
     type: String
   },
   sort_order: {
-    type: Integer
+    type: Number
   },
   backend_protocol: {
     type: String,
@@ -46,7 +46,8 @@ Schemas.ApiBackends = new SimpleSchema({
     regEx: /^[a-z0-9A-Z_]{3,15}$/
   },
   duration: {
-    type: Number
+    type: Number,
+    label: 'Duration'
   },
   accuracy:{
     type: Number
@@ -88,7 +89,8 @@ Schemas.ApiBackends = new SimpleSchema({
     type: String
   },
   set_headers: {
-    type: [Object]
+//    type: [Object]
+    type: String
   },
   append_query_string: {
     type: String
@@ -97,7 +99,9 @@ Schemas.ApiBackends = new SimpleSchema({
     type: String
   },
   require_https: {
-    type: String
+    type: String,
+    allowedValues: ['Inherit (default - optional)', 'Optional - HTTPS is optional', 'Required - HTTPS is mandatory'],
+    label: 'HTTPS Requirements'
   },
   require_https_transition_start_at: {
     type: Date
@@ -112,10 +116,13 @@ Schemas.ApiBackends = new SimpleSchema({
     type: Date
   },
   required_roles: {
-    type: Array
+//    type: Array
+    type: String
   },
   rate_limit_mode: {
-    type: String
+    type: String,
+    allowedValues: ['Default rate limits', 'Custom rate limits', 'Unlimited requests'],
+    label: 'Rate limit'
   },
   anonymous_rate_limit_behavior: {
     type: String
@@ -130,11 +137,13 @@ Schemas.ApiBackends = new SimpleSchema({
     type: Boolean
   },
   error_templates: {
-    type: [Object]
+//    type: [Object]
+    type: String
   },
   error_data: {
-    type: [Object]
+//    type: [Object]
+    type: String
   }
 });
 
-ApiBackends.attachSchema(Schemas.ApiBackends)
+ApiBackends.attachSchema(Schemas.ApiBackends);
