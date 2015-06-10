@@ -16,12 +16,12 @@
       </div>
       {{> afQuickField name='frontend_host'}}
       {{> afQuickField name='server'}}
-<!-- TODO: show fields inline
-      <form>
-        <div class="form-inline">
-          {{> afQuickField name='matching'}}
-        </div>
-      </form>
+      <!-- TODO: show fields inline
+<form>
+<div class="form-inline">
+{{> afQuickField name='matching'}}
+</div>
+</form>
 -->
       {{> afQuickField name='matching'}}
       <h4>Global Request Settings</h4>
@@ -31,6 +31,10 @@
       {{> afQuickField name='require_https' options="allowed"}}
       {{> afQuickField name='api_key_verification_level' options="allowed"}}
       {{> afQuickField name='required_roles' options="allowed"}}
+      <h5>Pass API Key to Backend (deprecated)</h5>
+      {{> afQuickField name='pass_api_key_header'}}
+      {{> afQuickField name='pass_api_key_query_param'}}
+      {{> afQuickField name='rate_limit_mode' options="allowed"}}
       {{/autoForm}}
     </div>
   </div>

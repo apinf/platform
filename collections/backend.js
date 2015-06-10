@@ -211,10 +211,15 @@ ApiBackendsSchema = new SimpleSchema({
   },
   pass_api_key_header: {
     type: Boolean,
-    optional: true
+    optional: true,
+    defaultValue: false,
+    label: 'Via HTTP header'
   },
   pass_api_key_query_param: {
-    type: Boolean
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+    label: 'Via GET query parameter'
   },
   error_templates: {
 //    type: [Object]
