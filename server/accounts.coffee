@@ -73,11 +73,10 @@ Accounts.onCreateUser (options, user) ->
 
     user
 
-
+# This part is still under development since there was an issue in github-accounts package
+# TODO: GitHub authentication with user's private email address
 Accounts.onLogin (info) ->
   user = info.user
-  console.log "So far"
-  console.log GitHub
   if user
     github = new GitHub(
       version: '3.0.0'
