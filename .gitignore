@@ -2,3 +2,5 @@
 .meteor/meteorite
 .meteor/.id
 /config.json
+settings.json
+.idea/
