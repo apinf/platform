@@ -13,7 +13,10 @@ Router.map ->
       ]
     data: ->
       posts: Posts.find({},{sort: {createdAt: -1}}).fetch()
+<<<<<<< HEAD
 
   @route "chart",
     path: "/chart"
     layoutTemplate: "chartLayout"
+=======
+>>>>>>> develop
