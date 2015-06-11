@@ -45,8 +45,8 @@ Accounts.onCreateUser (options, user) ->
     apiUmbrellaUserObj = {
       "user":{
         "email": user.emails[0].address,
-        "first_name": "First Name",
-        "last_name": "Last Name",
+        "first_name": "-",
+        "last_name": "-",
         "terms_and_conditions":true
       }
     }
