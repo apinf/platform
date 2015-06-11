@@ -1,3 +1,4 @@
 .meteor/local
 .meteor/meteorite
 .meteor/.id
+/config.json
