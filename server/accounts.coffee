@@ -41,4 +41,26 @@ Accounts.onCreateUser (options, user) ->
         profilePicture = ProfilePictures.insert picture
         user.profile.picture = profilePicture._id
 
+    # apiumbrella user obect to be send to apiUmbrellaWeb
+    apiUmbrellaUserObj = {
+      "user":{
+        "email": user.emails[0].address,
+        "first_name": "-",
+        "last_name": "-",
+        "terms_and_conditions":true
+      }
+    }
+
+    response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj)
+
+    # adding to Aping user object ID of just created apiUmbrella User
+    user.apiUmbrellaUserId = response.data.user.id
+
+    # adding Api key to user profile
+    # TODO: make apiKey field not editable or display api key on profile page separately from form - as a plain text
+    user.profile.apiKey = response.data.user.api_key
+
+    # adding umbrella user to apinf database
+    ApiUmbrellaUsers.insert(response.data.user)
+
     user
