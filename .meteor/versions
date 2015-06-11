@@ -22,6 +22,7 @@ boilerplate-generator@1.0.3
 bootstrap@0.3.1
 bruz:github-api@0.2.4_1
 brylie:api-umbrella@0.2.4
+brylie:api-umbrella@0.2.3
 callback-hook@1.0.3
 cfs:access-point@0.1.49
 cfs:base-package@0.0.30
@@ -41,6 +42,7 @@ cfs:storage-adapter@0.2.2
 cfs:tempstore@0.1.5
 cfs:upload-http@0.0.20
 cfs:worker@0.1.4
+chart:chart@1.0.1-beta.4
 check@1.0.5
 cmather:handlebars-server@0.2.0
 coffeescript@1.0.6
