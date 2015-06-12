@@ -3,6 +3,8 @@
     <div class="col-lg-6 col-lg-offset-3">
       {{#autoForm collection="ApiBackends" doc=this id="apiBackends"}}
       {{> afQuickField name='name'}}
+      <h4>Host</h4>
+      <hr />
       <div class="row">
         <div class="col-lg-3">
           {{> afQuickField name='backend_protocol' options="allowed"}}
@@ -14,7 +16,6 @@
           {{> afQuickField name='backend_port'}}
         </div>
       </div>
-      {{> afQuickField name='frontend_host'}}
       {{> afQuickField name='server'}}
       <!-- TODO: show fields inline
 <form>
