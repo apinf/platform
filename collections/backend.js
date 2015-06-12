@@ -36,7 +36,8 @@ ApiBackendsSchema = new SimpleSchema({
   },
   server: {
     type: [Object],
-    optional: true
+    optional: true,
+    label: 'Host'
   },
   "server.$.backend_host": {
     type: String,
@@ -228,6 +229,26 @@ ApiBackendsSchema = new SimpleSchema({
   error_data: {
 //    type: [Object]
     type: String
+  },
+  created_at: {
+    type: Date,
+    optional: true
+  },
+  created_at: {
+    type: Date,
+    optional: true
+  },
+  created_by: {
+    type: String,
+    optional: true
+  },
+  updated_at: {
+    type: Date,
+    optional: true
+  },
+  updated_by: {
+    type: String,
+    optional: true
   }
 });
 
