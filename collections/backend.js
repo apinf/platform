@@ -1,6 +1,10 @@
 ApiBackends = new Mongo.Collection('apiBackends');
 
 ApiBackendsSchema = new SimpleSchema({
+  id: {
+  type: String,
+  optional: true
+},
   name: {
     type: String,
     optional: true
@@ -151,10 +155,12 @@ ApiBackendsSchema = new SimpleSchema({
     label: 'HTTPS Requirements'
   },
   require_https_transition_start_at: {
-    type: Date
+    type: Date,
+    optional: true
   },
   disable_api_key: {
-    type: Boolean
+    type: Boolean,
+    optional: true
   },
   api_key_verification_level: {
     type: String,
@@ -167,7 +173,8 @@ ApiBackendsSchema = new SimpleSchema({
     label: 'API Key Checks'
   },
   api_key_verification_transition_start_at: {
-    type: Date
+    type: Date,
+    optional: true
   },
   required_roles: {
     type: Array,
@@ -193,10 +200,12 @@ ApiBackendsSchema = new SimpleSchema({
     }
   },
   "required_roles.$": {
-      type: String
+      type: String,
+    optional: true
    },
   rate_limit_mode: {
     type: String,
+    optional: true,
     allowedValues: [
       'Default rate limits',
       'Custom rate limits',
@@ -205,10 +214,12 @@ ApiBackendsSchema = new SimpleSchema({
     label: 'Rate limit'
   },
   anonymous_rate_limit_behavior: {
-    type: String
+    type: String,
+    optional: true
   },
   authenticated_rate_limit_behavior: {
-    type: String
+    type: String,
+    optional: true
   },
   pass_api_key_header: {
     type: Boolean,
@@ -224,14 +235,12 @@ ApiBackendsSchema = new SimpleSchema({
   },
   error_templates: {
 //    type: [Object]
-    type: String
+    type: String,
+    optional: true
   },
   error_data: {
 //    type: [Object]
-    type: String
-  },
-  created_at: {
-    type: Date,
+    type: String,
     optional: true
   },
   created_at: {
@@ -248,6 +257,10 @@ ApiBackendsSchema = new SimpleSchema({
   },
   updated_by: {
     type: String,
+    optional: true
+  },
+  version: {
+    type: Number,
     optional: true
   }
 });
