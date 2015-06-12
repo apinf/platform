@@ -22,6 +22,10 @@ Schemas.UserProfile = new SimpleSchema(
     type: String,
     regEx: /^[a-z0-9A-Z]{40}$/,
     optional: true,
+    autoform:{
+      readonly: true
+      template: "plain"
+    }
 
 )
 
