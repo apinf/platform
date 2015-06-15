@@ -21,7 +21,7 @@
     }
     ApiUmbrellaAdmins: {
       color: 'blue'
-      icon: 'user'
+      icon: 'user-md'
       tableColumns: [
               {label: 'Email',name:'email'}
               {label: 'Username',name:'username'}
