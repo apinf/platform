@@ -34,7 +34,7 @@ ApiUmbrellaAdminsSchema = new SimpleSchema({
     optional: true
   },
   sign_in_count: {
-    type: Integer,
+    type: NUmber,
     optional: true
   },
   current_sign_in_at: {
