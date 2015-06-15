@@ -14,23 +14,23 @@ ApiUmbrellaAdminsSchema = new SimpleSchema({
     optional: true
   },
   name: {
-    type:String,
+    type: String,
     optional: true
   },
   notes:{
-    type:String,
+    type: String,
     optional: true
   },
   superuser:{
-    type:Boolean,
+    type: Boolean,
     optional: true
   },
   authentication_token:{
-    type:String,
+    type: String,
     optional: true
     },
   last_sign_in_provider:{
-    type:String,
+    type: String,
     optional: true
   }
 });
