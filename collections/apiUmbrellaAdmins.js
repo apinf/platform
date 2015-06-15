@@ -32,6 +32,26 @@ ApiUmbrellaAdminsSchema = new SimpleSchema({
   last_sign_in_provider:{
     type: String,
     optional: true
+  },
+  sign_in_count: {
+    type: Integer,
+    optional: true
+  },
+  current_sign_in_at: {
+  type: Date,
+    optional: true
+  },
+  last_sign_in_at: {
+    type: Date,
+    optional: true
+  },
+  current_sign_in_ip: {
+    type: String,
+    optional: true
+  },
+  last_sign_in_ip: {
+    type: String,
+    optional: true
   }
 });
 
