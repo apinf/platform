@@ -3,6 +3,10 @@ Router.map ->
     path: "/"
     layoutTemplate: "homeLayout"
 
+  @route "apiBackends",
+    path: "/apibackends"
+    layoutTemplate: "homeLayout"
+
   @route "dashboard",
     path: "/dashboard"
     waitOn: ->
