@@ -1,6 +1,6 @@
 .meteor/local
 .meteor/meteorite
 .meteor/.id
+/config.json
 settings.json
 .idea/
-settings.json
