@@ -23,8 +23,16 @@
       color: 'blue'
       icon: 'gear'
       tableColumns: [
-              {label: 'Name',name:'name'}
-              {label: 'Backend Host',name:'backend_host'}
+        {label: 'Name', name: 'name'}
+        {label: 'Backend Host', name: 'backend_host'}
+      ]
+    }
+    ApiUmbrellaAdmins: {
+      color: 'blue'
+      icon: 'user-md'
+      tableColumns: [
+              {label: 'Email',name:'email'}
+              {label: 'Username',name:'username'}
             ]
     }
     Comments: {
@@ -32,9 +40,9 @@
       icon: 'comments'
       auxCollections: ['Posts']
       tableColumns: [
-              {label: 'Content';name:'content'}
-              {label:'Post';name:'doc',collection: 'Posts',collection_property:'title'}
-              {label:'User',name:'owner',collection:'Users'}
+              {label: 'Content', name:'content'}
+              {label:'Post', name:'doc',collection: 'Posts',collection_property:'title'}
+              {label:'User', name:'owner',collection:'Users'}
             ]
     }
   dashboard:
