@@ -17,6 +17,16 @@ Schemas.UserProfile = new SimpleSchema(
     type: String
     optional: true
 
+  apiKey:
+    label: 'API key (optional)'
+    type: String,
+    regEx: /^[a-z0-9A-Z]{40}$/,
+    optional: true,
+    autoform:{
+      readonly: true
+      template: "plain"
+    }
+
 )
 
 Schemas.User = new SimpleSchema(
@@ -26,7 +36,10 @@ Schemas.User = new SimpleSchema(
     regEx: /^[a-z0-9A-Z_]{3,15}$/
     optional: true
 
-  
+  apiUmbrellaUserId:
+    type: String
+    optional: true
+
   emails:
     type: [Object]
     optional: true

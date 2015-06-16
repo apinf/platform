@@ -3,6 +3,10 @@ Router.map ->
     path: "/"
     layoutTemplate: "homeLayout"
 
+  @route "apiBackends",
+    path: "/apibackends"
+    layoutTemplate: "homeLayout"
+
   @route "dashboard",
     path: "/dashboard"
     waitOn: ->
@@ -13,3 +17,7 @@ Router.map ->
       ]
     data: ->
       posts: Posts.find({},{sort: {createdAt: -1}}).fetch()
+
+  @route "chart",
+      path: "/chart"
+      layoutTemplate: "chartLayout"
