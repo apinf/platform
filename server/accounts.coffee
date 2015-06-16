@@ -91,6 +91,6 @@ Accounts.onLogin (info) ->
         'profile.email': email.email
         'services.github.email': email.email###
       user.emails = [{address: email.email, verified: true}]
-      console.log user
+      #console.log user
     catch e
-      console.log e.message
+      #console.log e.message
