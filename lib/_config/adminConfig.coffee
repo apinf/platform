@@ -19,6 +19,19 @@
               {label: 'Last Name',name:'last_name'}
             ]
     }
+    RateLimit: {
+      color: 'black'
+      icon: 'plus'
+      tableColumns: [
+              {label: 'Name',name:'name'}
+              {label: 'Duration',name:'duration'}
+              {label:'Accuracy',name:'accuracy'}
+              {label: 'Limit by',name:'limit_by'}
+              {label: 'Limit',name:'limit'}
+              {label: 'Distributed',name:'distributed'}
+              {label: 'Response Headers',name:'response_headers'}
+            ]
+    }
     ApiBackends: {
       color: 'blue'
       icon: 'gear'
