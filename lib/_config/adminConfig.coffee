@@ -6,6 +6,7 @@
       icon: 'pencil'
       auxCollections: ['Attachments']
       tableColumns: [
+<<<<<<< HEAD
               {label: 'Test',name:'title'}
               {label:'User',name:'owner',collection:'Users'}
             ]
@@ -25,6 +26,12 @@
             ]
     }
 
+=======
+              {label: 'Title',name:'title'}
+              {label:'User',name:'owner',collection:'Users'}
+            ]
+    }
+>>>>>>> develop
     ApiUmbrellaUsers: {
       color: 'yellow'
       icon: 'pencil'
@@ -34,14 +41,39 @@
               {label: 'Last Name',name:'last_name'}
             ]
     }
+<<<<<<< HEAD
+=======
+    ApiBackends: {
+      color: 'blue'
+      icon: 'gear'
+      tableColumns: [
+        {label: 'Name', name: 'name'}
+        {label: 'Backend Host', name: 'backend_host'}
+      ]
+    }
+    ApiUmbrellaAdmins: {
+      color: 'blue'
+      icon: 'user-md'
+      tableColumns: [
+              {label: 'Email',name:'email'}
+              {label: 'Username',name:'username'}
+            ]
+    }
+>>>>>>> develop
     Comments: {
       color: 'green'
       icon: 'comments'
       auxCollections: ['Posts']
       tableColumns: [
+<<<<<<< HEAD
               {label: 'Content';name:'content'}
               {label:'Post';name:'doc',collection: 'Posts',collection_property:'title'}
               {label:'User',name:'owner',collection:'Users'}
+=======
+              {label: 'Content', name:'content'}
+              {label:'Post', name:'doc',collection: 'Posts',collection_property:'title'}
+              {label:'User', name:'owner',collection:'Users'}
+>>>>>>> develop
             ]
     }
   dashboard:
