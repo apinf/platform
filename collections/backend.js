@@ -17,8 +17,8 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      'http',
-      'https'
+      'HTTP',
+      'HTTPS'
     ],
     label: 'Backend protocol'
   },
@@ -57,12 +57,12 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true,
   },
   "matching.$.frontend_prefix": {
-    label: 'Frontend Prefix',
+    label: 'Frontend prefix',
     optional: true,
     type: String
   },
   "matching.$.backend_prefix": {
-    label: 'Backend Prefix',
+    label: 'Backend prefix',
     optional: true,
     type: String,
     regEx: /^[a-z0-9A-Z_]{3,15}$/
@@ -97,6 +97,7 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true
   },
   http_method: {
+    label: 'HTTP method',
     type: String,
     optional: true
   },
@@ -109,10 +110,6 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true
   },
   matcher: {
-    type: String,
-    optional: true
-  },
-  http_method: {
     type: String,
     optional: true
   },
@@ -132,17 +129,17 @@ ApiBackendsSchema = new SimpleSchema({
       autoform: {
          rows: 2
       },
-    label: 'Set Headers'
+    label: 'Set headers'
   },
   append_query_string: {
     type: String,
     optional: true,
-    label: 'Append Query String Parameters'
+    label: 'Append query string parameters'
   },
   http_basic_auth: {
     type: String,
     optional: true,
-    label: 'HTTP Basic Authentication'
+    label: 'HTTP basic authentication'
   },
   require_https: {
     type: String,
@@ -152,9 +149,10 @@ ApiBackendsSchema = new SimpleSchema({
       'Optional - HTTPS is optional',
       'Required - HTTPS is mandatory'
     ],
-    label: 'HTTPS Requirements'
+    label: 'HTTPS requirements'
   },
   require_https_transition_start_at: {
+    label: 'Require HTTPS transition starts at:',
     type: Date,
     optional: true
   },
@@ -181,7 +179,7 @@ ApiBackendsSchema = new SimpleSchema({
     minCount: 1,
     maxCount: 3,
     optional: true,
-    label: 'Required Roles',
+    label: 'Required roles',
     autoform: {
       options: [
         {
@@ -234,13 +232,11 @@ ApiBackendsSchema = new SimpleSchema({
     label: 'Via GET query parameter'
   },
   error_templates: {
-//    type: [Object]
-    type: String,
+    type: [Object],
     optional: true
   },
   error_data: {
-//    type: [Object]
-    type: String,
+    type: [Object],
     optional: true
   },
   created_at: {
