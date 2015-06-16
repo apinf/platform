@@ -77,20 +77,21 @@ Accounts.onCreateUser (options, user) ->
 # TODO: GitHub authentication with user's private email address
 Accounts.onLogin (info) ->
   user = info.user
-  if user
-    github = new GitHub(
-      version: '3.0.0'
-      timeout: 5000)
-    github.authenticate
-      type: 'oauth'
-      token: user.services.github.accessToken
-    try
-      result = github.user.getEmails(user: user.services.github.username)
-      email = _(result).findWhere(primary: true)
-      ###Meteor.users.update { _id: user._id }, $set:
-        'profile.email': email.email
-        'services.github.email': email.email###
-      user.emails = [{address: email.email, verified: true}]
-      console.log user
-    catch e
-      console.log e.message
+  if user.services?.github
+    if user
+      github = new GitHub(
+        version: '3.0.0'
+        timeout: 5000)
+      github.authenticate
+        type: 'oauth'
+        token: user.services.github.accessToken
+      try
+        result = github.user.getEmails(user: user.services.github.username)
+        email = _(result).findWhere(primary: true)
+        ###Meteor.users.update { _id: user._id }, $set:
+          'profile.email': email.email
+          'services.github.email': email.email###
+        user.emails = [{address: email.email, verified: true}]
+        console.log user
+      catch e
+        console.log e.message
