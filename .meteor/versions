@@ -20,6 +20,7 @@ blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 bootstrap@0.3.1
+brishin:meteor-elasticsearch@0.0.9
 bruz:github-api@0.2.4_1
 brylie:api-umbrella@0.2.4
 callback-hook@1.0.3
@@ -97,6 +98,7 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
 mrt:googlemaps@0.1.1
+mrt:log@0.0.2
 mrt:moment@2.8.1
 multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
