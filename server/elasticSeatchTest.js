@@ -25,10 +25,15 @@ ES.search({
     values.push(date);
   });
 
-  for(var j=0;j<values.length;j++){
-    console.log(values[j]);
-  }
+  values.forEach(function (j) {
+    for(var k=1;k<=31;k++){
+      if(k==j){
+        dates[j]++;
+      }
+    }
+  });
 
+  console.log(dates);
 
 
 }, function (err) {
