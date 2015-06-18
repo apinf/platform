@@ -1,7 +1,7 @@
 ApiUmbrellaAdmins = new Mongo.Collection('apiUmbrellaAdmins');
 
 ApiUmbrellaAdminsSchema = new SimpleSchema({
-  _id: {
+  id: {
     type: String,
     optional: true
   },
