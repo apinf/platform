@@ -1,6 +1,12 @@
 html, body
 {
   height:100%;
+  font-weight: 400 !important;
+  background-color: #ececec !important;
+}
+
+.navbar .dropdown li a:hover {
+  color: #2196f3 !important;
 }
 
 .layout {
@@ -16,10 +22,32 @@ button.navbar-toggle {
  }
 
 #iron-router-progress {
-    background-color : darken(@brand-primary,20%);
-    box-shadow       : 0 0 5px darken(@brand-primary,20%);
+  background-color: darken(@brand-primary,20%);
+  box-shadow: 0 0 5px darken(@brand-primary,20%);
 }
 
 #iron-router-progress.spinner:before {
-    border-color : darken(@brand-primary,20%);
+  border-color : darken(@brand-primary,20%);
+}
+
+.navbar-inverse.navbar {
+  background-color: #2196f3 !important;
+}
+
+.admin-layout .skin-blue .navbar, .admin-layout .skin-blue .logo {
+  background-color: #2196f3 !important;
+}
+#at-btn {
+  background-color: #4caf50 !important;
+  color: rgba(255,255,255,.84) !important;
+  border-color : darken(@brand-primary,20%);
+}
+
+.admin-layout .skin-blue .navbar .nav > li > a:hover, .admin-layout .skin-blue .navbar .nav > li > a:active, .admin-layout .skin-blue .navbar .nav > li > a:focus, .admin-layout .skin-blue .navbar .nav .open > a, .admin-layout .skin-blue .navbar .nav .open > a:hover, .admin-layout .skin-blue .navbar .nav .open > a:focus {
+  background: rgba(0, 0, 0, 0);
+  color: #f6f6f6;
+}
+
+.admin-layout .navbar .navbar-nav > li > a {
+  padding-top: 1em !important;
 }

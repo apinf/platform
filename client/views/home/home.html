@@ -12,9 +12,6 @@
                                 {{#unless User}}
                                 <a id="home-login" href="{{pathFor route='atSignIn'}}"><li>{{_ "login2"}}</li></a>
                                 {{/unless}}
-                                {{#each socialMedia}}
-                                <a href="{{url}}" target="_blank"><li class="fa fa-{{icon}}"></li></a>
-                                {{/each}}
                             </ul>
                         </div>
                     </div>
@@ -30,6 +27,7 @@
                         {{#if User}}
                         <a href="{{pathFor 'dashboard'}}" class="btn btn-success"><i class="fa fa-dashboard"></i> {{_ "dashboard"}}</a>
                         {{else}}
+                        <br/>
                         <a class="btn btn-success" href="{{pathFor 'dashboard'}}">{{_ "getstarted"}}</a>
                         {{/if}}
                     </div>
