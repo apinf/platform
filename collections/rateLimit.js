@@ -1,9 +1,7 @@
 RateLimit = new Mongo.Collection('rateLimit');
-
 RateLimitSchema = new SimpleSchema({
-
   name: {
-   type: String,
+    type: String,
     optional: true
   },
 
@@ -19,20 +17,18 @@ RateLimitSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-
   limit: {
-   type: Number,
-   optional: true
+    type: Number,
+    optional: true
   },
-
   distributed: {
-  type: Boolean,
-  optional: true
-},
+    type: Boolean,
+    optional: true
+  },
   response_headers: {
-  type: Boolean,
-  optional: true
-}
+    type: Boolean,
+    optional: true
+  }
 
 });
 
