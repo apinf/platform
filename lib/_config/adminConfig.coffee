@@ -27,6 +27,12 @@
         {label: 'Backend Host', name: 'backend_host'}
       ]
     }
+    'Meteor.roles': {
+      label: 'Roles',
+      tableColumns: [
+        {label: 'Name', name: 'name'}
+        ]
+      }
     ApiUmbrellaAdmins: {
       color: 'blue'
       icon: 'user-md'
