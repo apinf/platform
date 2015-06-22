@@ -1,6 +1,6 @@
 html, body
 {
-  height:100%;
+  height: 100%;
   font-weight: 400 !important;
   background-color: #ececec !important;
 }
@@ -19,6 +19,7 @@ button.navbar-toggle {
 
 .navbar {
   margin-left: 0;
+  min-height: 49px;
 }
 
 #iron-router-progress {
@@ -27,7 +28,7 @@ button.navbar-toggle {
 }
 
 #iron-router-progress.spinner:before {
-  border-color : darken(@brand-primary,20%);
+  border-color: darken(@brand-primary,20%);
 }
 
 .navbar-inverse.navbar {
@@ -40,7 +41,7 @@ button.navbar-toggle {
 #at-btn {
   background-color: #4caf50 !important;
   color: rgba(255,255,255,.84) !important;
-  border-color : darken(@brand-primary,20%);
+  border-colorm: darken(@brand-primary,20%);
 }
 
 .admin-layout .skin-blue .navbar .nav > li > a:hover, .admin-layout .skin-blue .navbar .nav > li > a:active, .admin-layout .skin-blue .navbar .nav > li > a:focus, .admin-layout .skin-blue .navbar .nav .open > a, .admin-layout .skin-blue .navbar .nav .open > a:hover, .admin-layout .skin-blue .navbar .nav .open > a:focus {
@@ -64,8 +65,34 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 .side-nav a {
   text-decoration: none;
   font-size: inherit;
+}
 
-  &:hover {
-    text-decoration: none;
+.side-nav li,
+.side-nav li:hover,
+.side-nav li.active {
+  line-height: 64px;
+}
+
+
+nav ul > li > a {
+  font-size: inherit;
+}
+
+.admin-layout {
+  .header .navbar {
+    margin-left: 0 !important;
   }
+  .dropdown-menu > li > a:hover {
+    background-color: inherit;
+  }
+}
+
+.master-layout {
+  .navbar-nav > li > a {
+    line-height: 37px;
+  }
+  .navbar-brand {
+    padding: 10px 20px;
+  }
+
 }
