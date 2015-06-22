@@ -18,8 +18,8 @@ button.navbar-toggle {
 }
 
 .navbar {
-   margin-left: 0;
- }
+  margin-left: 0;
+}
 
 #iron-router-progress {
   background-color: darken(@brand-primary,20%);
@@ -50,4 +50,22 @@ button.navbar-toggle {
 
 .admin-layout .navbar .navbar-nav > li > a {
   padding-top: 1em !important;
+}
+
+label {
+  font-size: inherit;
+}
+
+
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+  font-size: inherit;
+}
+
+.side-nav a {
+  text-decoration: none;
+  font-size: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
 }

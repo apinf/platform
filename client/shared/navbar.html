@@ -3,6 +3,7 @@
     <div class="navbar navbar-inverse">
       <div class="container close-navbar">
         <div class="navbar-header">
+          <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
           <button type="button" class="navbar-toggle">
             <i class="fa fa-bars"></i>
           </button>
@@ -10,8 +11,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-          {{#if User}}
-<!--            {{> notificationsDropdown}} not part of MVP-->
+            {{#if User}}
+            <!--            {{> notificationsDropdown}} not part of MVP-->
             {{#if isInRole 'admin'}}
             <li><a href="{{pathFor 'adminDashboard'}}">{{_ "admin"}}</a></li>
             {{/if}}
@@ -30,14 +31,14 @@
             <li class="visible-xs">
               <a class="close-navbar" href="/sign-out">{{_ "signout"}}</a>
             </li>
-          {{else}}
+            {{else}}
             <li>
               <a class="close-navbar" href="/sign-up">{{_ "signup"}}</a>
             </li>
             <li>
               <a class="close-navbar" href="/sign-in">{{_ "login"}}</a>
             </li>
-          {{/if}}
+            {{/if}}
           </ul>
         </div>
       </div>
