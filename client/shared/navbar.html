@@ -3,10 +3,9 @@
     <div class="navbar navbar-inverse">
       <div class="container close-navbar">
         <div class="navbar-header">
-          <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-          <button type="button" class="navbar-toggle">
-            <i class="fa fa-bars"></i>
-          </button>
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a></li>
+          </ul>
           <a class="navbar-brand" href="{{#if User}}{{Config.dashboardRoute}}{{else}}{{Config.homeRoute}}{{/if}}">{{{Config.logoImage}}}</a>
         </div>
         <div class="navbar-collapse collapse">
@@ -16,8 +15,8 @@
             {{#if isInRole 'admin'}}
             <li><a href="{{pathFor 'adminDashboard'}}">{{_ "admin"}}</a></li>
             {{/if}}
-            <li class="dropdown hidden-xs">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{niceName User._id}} <i class="fa fa-chevron-down i-xs"></i></a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
                 <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
                 <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
