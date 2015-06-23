@@ -1,25 +1,29 @@
-html, body
-{
+/// global variables
+@label-text: #212121;
+
+html, body {
   height: 100%;
   font-weight: 400 !important;
   background-color: #ececec !important;
-}
-
-.navbar .dropdown li a:hover {
-  color: #2196f3 !important;
 }
 
 .layout {
   min-height: 80%;
 }
 
-button.navbar-toggle {
-  background: inherit;
+.btn.btn-primary {
+  background-color: @brand-primary !important;
+  border-color: @brand-primary !important;
+}
+
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid @brand-primary !important;
+  box-shadow: 0 1px 0 0 @brand-primary !important;
 }
 
 .navbar {
   margin-left: 0;
-  min-height: 49px;
+  height: 55px;
 }
 
 #iron-router-progress {
@@ -35,47 +39,24 @@ button.navbar-toggle {
   background-color: #2196f3 !important;
 }
 
-.admin-layout .skin-blue .navbar, .admin-layout .skin-blue .logo {
-  background-color: #2196f3 !important;
-}
-#at-btn {
-  background-color: #4caf50 !important;
-  color: rgba(255,255,255,.84) !important;
-  border-colorm: darken(@brand-primary,20%);
-}
-
-.admin-layout .skin-blue .navbar .nav > li > a:hover, .admin-layout .skin-blue .navbar .nav > li > a:active, .admin-layout .skin-blue .navbar .nav > li > a:focus, .admin-layout .skin-blue .navbar .nav .open > a, .admin-layout .skin-blue .navbar .nav .open > a:hover, .admin-layout .skin-blue .navbar .nav .open > a:focus {
-  background: rgba(0, 0, 0, 0);
-  color: #f6f6f6;
-}
-
-.admin-layout .navbar .navbar-nav > li > a {
-  padding-top: 1em !important;
-}
-
-label {
-  font-size: inherit;
-}
+//#at-btn {
+//  background-color: #4caf50 !important;
+//  color: rgba(255,255,255,.84) !important;
+//  border-colorm: darken(@brand-primary,20%);
+//}
 
 
 input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
   font-size: inherit;
 }
 
-.side-nav a {
-  text-decoration: none;
-  font-size: inherit;
-}
-
-.side-nav li,
-.side-nav li:hover,
-.side-nav li.active {
-  line-height: 64px;
-}
-
-
 nav ul > li > a {
   font-size: inherit;
+}
+
+label {
+  font-size: inherit;
+  color: @label-text;
 }
 
 .admin-layout {
@@ -85,14 +66,47 @@ nav ul > li > a {
   .dropdown-menu > li > a:hover {
     background-color: inherit;
   }
+  .dropdown-menu > li {
+    width: 100%;
+  }
+  .navbar .navbar-nav > li > a {
+    padding-top: 16px;
+    padding-bottom: 13px;
+  }
+  .skin-blue .navbar .nav > li > a:hover, .admin-layout .skin-blue .navbar .nav > li > a:active, .admin-layout .skin-blue .navbar .nav > li > a:focus, .admin-layout .skin-blue .navbar .nav .open > a, .admin-layout .skin-blue .navbar .nav .open > a:hover, .admin-layout .skin-blue .navbar .nav .open > a:focus {
+    background: rgba(0, 0, 0, 0);
+    color: #f6f6f6;
+  }
+  .skin-blue .navbar, .admin-layout .skin-blue .logo {
+    background-color: #2196f3 !important;
+  }
 }
 
 .master-layout {
-  .navbar-nav > li > a {
-    line-height: 37px;
+  .navbar-right li > a {
+    padding-top: 21px;
+    padding-bottom: 13px;
   }
   .navbar-brand {
     padding: 10px 20px;
   }
-
+  .side-nav a {
+    text-decoration: none;
+    font-size: inherit;
+  }
+  .side-nav li,
+  .side-nav li:hover,
+  .side-nav li.active {
+    line-height: 64px;
+  }
+  .button-collapse {
+    padding-top: 18px;
+    padding-bottom: 13px;
+  }
+  .dropdown-menu > li > a {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+  }
 }
