@@ -27,12 +27,19 @@
         {label: 'Backend Host', name: 'backend_host'}
       ]
     }
-    'Meteor.roles': {
-      label: 'Roles',
+    RateLimit: {
+      color: 'black'
+      icon: 'plus'
       tableColumns: [
-        {label: 'Name', name: 'name'}
-        ]
-      }
+        {label: 'Name',name:'name'}
+        {label: 'Duration',name:'duration'}
+        {label:'Accuracy',name:'accuracy'}
+        {label: 'Limit by',name:'limit_by'}
+        {label: 'Limit',name:'limit'}
+        {label: 'Distributed',name:'distributed'}
+        {label: 'Response Headers',name:'response_headers'}
+            ]
+    }
     ApiUmbrellaAdmins: {
       color: 'blue'
       icon: 'user-md'
