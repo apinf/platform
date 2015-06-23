@@ -4,7 +4,6 @@ RateLimitSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-
   duration: {
     type: Number,
     optional: true
@@ -29,7 +28,6 @@ RateLimitSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   }
-
 });
 
 RateLimit.attachSchema(RateLimitSchema);
