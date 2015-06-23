@@ -15,7 +15,7 @@ ES.search({
   var values = [];
   var dates = {};
 
-  for(var i=1;i<=31;i++){
+  for (var i = 1; i <= 31; i++) {
     dates[i] = 0;
   }
 
@@ -26,16 +26,23 @@ ES.search({
   });
 
   values.forEach(function (j) {
-    for(var k=1;k<=31;k++){
-      if(k==j){
+    for (var k = 1; k <= 31; k++) {
+      if (k == j) {
         dates[j]++;
       }
     }
   });
 
-  console.log(dates);
+  //"dates" is an object that contains data to be used in chart
+
+  var val = new ReactiveVar();
+  val.set(dates);
 
 
 }, function (err) {
   console.trace(err.message);
 });
+
+//here, for testing I am using reactive-var pakage to handle "dates" object, but it is not possible to fetch data from
+//the function above.
+console.log(val.get());

@@ -61,3 +61,4 @@ chart:chart
 brylie:api-umbrella
 percolate:synced-cron
 brishin:meteor-elasticsearch
+reactive-var
