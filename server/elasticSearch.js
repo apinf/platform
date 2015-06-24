@@ -19,4 +19,36 @@ var searchQuery = EsClient.search({
     size: 1000
   }
 });
-console.log(searchQuery);
+if(searchQuery.hits.hits){
+  var hits = searchQuery.hits.hits;
+  var total = searchQuery.hits.total;
+
+  var values = [];
+  var dates = {};
+
+  for (var i = 1; i <= 31; i++) {
+    dates[i] = 0;
+  }
+
+  hits.forEach(function (e) {
+    var stamp = new Date(e._source.request_at);
+    var date = stamp.getDate();
+    values.push(date);
+  });
+
+  values.forEach(function (j) {
+    for (var k = 1; k <= 31; k++) {
+      if (k == j) {
+        dates[j]++;
+      }
+    }
+  });
+
+  //"dates" is an object that contains data to be used in chart
+
+  //var val = new ReactiveVar();
+  //val.set(dates);
+  console.log(dates);
+}else{
+  console.log('Nothing found')
+}
