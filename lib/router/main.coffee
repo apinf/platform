@@ -8,7 +8,7 @@ Router.map ->
     layoutTemplate: "homeLayout"
 
   @route "catalog",
-    path: "/catalog"
+    path: "/catalogue"
     layoutTemplate: "homeLayout"
 
   @route "dashboard",
