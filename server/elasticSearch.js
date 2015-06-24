@@ -25,6 +25,11 @@ if(searchQuery.hits.hits){
 
   var values = [];
   var dates = {};
+  var chartDataArr = [];
+  var monthFrames = {
+    monthStart: 1,
+    monthEnd  : 31
+  };
 
   for (var i = 1; i <= 31; i++) {
     dates[i] = 0;
@@ -37,18 +42,19 @@ if(searchQuery.hits.hits){
   });
 
   values.forEach(function (j) {
-    for (var k = 1; k <= 31; k++) {
+    for (var k = monthFrames.monthStart; k <= monthFrames.monthEnd; k++) {
       if (k == j) {
         dates[j]++;
       }
     }
   });
 
-  //"dates" is an object that contains data to be used in chart
+  for (var l = monthFrames.monthStart; l <= monthFrames.monthEnd; l++){
+    chartDataArr.push(dates[l]);
+  }
 
-  //var val = new ReactiveVar();
-  //val.set(dates);
-  console.log(dates);
+  console.log(chartDataArr);
+
 }else{
   console.log('Nothing found')
 }
