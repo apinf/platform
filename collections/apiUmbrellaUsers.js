@@ -44,6 +44,24 @@ ApiUmbrellaUsersSchema = new SimpleSchema({
   roles: {
     type: [String],
     optional: true
+  },
+  userId: {
+    type: String,
+    label: 'User',
+    optional: true,
+    autoform: {
+      options: function() {
+        // Get all Meteor users as array
+        var users = Meteor.users.find().fetch();
+        // Create an array of label value pairs for autoform select
+        return _.map(users, function(user) {
+          return {
+            label: user.emails[0].address,
+            value: user._id
+          };
+        });
+      }
+    }
   }
 });
 
