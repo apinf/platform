@@ -1,0 +1,43 @@
+<template name="chartLayout">
+    <div class="layout master-layout ">
+        {{> navbar}}
+        <div class="sampleChart">
+            <canvas id="canvasChart"></canvas>
+        </div>
+    </div>
+    <script>
+        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+        var chartData = $('#vals').html();
+        var lineChartData = {
+            labels : ["January","February","March","April","May","June","July","August","September","October","November","December"],
+            datasets : [
+                {
+                    label: "My First dataset",
+                    fillColor : "rgba(220,220,220,0.2)",
+                    strokeColor : "rgba(220,220,220,1)",
+                    pointColor : "rgba(220,220,220,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(220,220,220,1)",
+                    data : [{{chartData}}]
+                }
+            ]
+        };
+
+
+        window.onload = function(){
+            function checkData() {
+
+                if(chartData!=""){
+
+                    var ctx = document.getElementById("canvasChart").getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive: true
+                    });
+                }
+
+            }
+            setTimeout("checkData()",1000);
+        }
+    </script>
+</template>
