@@ -3,9 +3,11 @@
     <div class="navbar navbar-inverse">
       <div class="container close-navbar">
         <div class="navbar-header">
+          {{#if User}}
           <ul class="nav navbar-nav navbar-left">
             <li><a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a></li>
           </ul>
+          {{/if}}
           <a class="navbar-brand" href="{{#if User}}{{Config.dashboardRoute}}{{else}}{{Config.homeRoute}}{{/if}}">{{{Config.logoImage}}}</a>
         </div>
         <div class="navbar-collapse collapse">
