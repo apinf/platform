@@ -7,8 +7,8 @@ Router.map ->
     path: "/apibackends"
     layoutTemplate: "homeLayout"
 
-  @route "catalogue",
-    path: "/catalogue"
+  @route "catalog",
+    path: "/catalog"
     layoutTemplate: "homeLayout"
 
   @route "dashboard",
