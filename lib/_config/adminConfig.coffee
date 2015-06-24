@@ -38,7 +38,7 @@
         {label: 'Limit',name:'limit'}
         {label: 'Distributed',name:'distributed'}
         {label: 'Response Headers',name:'response_headers'}
-            ]
+      ]
     }
     ApiUmbrellaAdmins: {
       color: 'blue'
