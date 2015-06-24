@@ -20,7 +20,6 @@ blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 bootstrap@0.3.1
-brishin:meteor-elasticsearch@0.0.9
 bruz:github-api@0.2.4_1
 brylie:api-umbrella@0.2.4
 callback-hook@1.0.3
@@ -87,7 +86,9 @@ logging@1.0.7
 manuelschoebel:ms-seo@0.4.1
 meteor@1.1.6
 meteor-platform@1.2.2
+meteorhacks:async@1.0.0
 meteorhacks:meteorx@1.0.2
+meteorhacks:npm@1.3.0
 meteorhacks:subs-manager@1.3.0
 meteorhacks:unblock@1.1.0
 minifiers@1.1.5
@@ -98,12 +99,12 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
 mrt:googlemaps@0.1.1
-mrt:log@0.0.2
 mrt:moment@2.8.1
 multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
 notifications@0.0.7
 npm-bcrypt@0.7.8_2
+npm-container@1.0.0
 oauth@1.1.4
 oauth1@1.1.4
 oauth2@1.1.3
