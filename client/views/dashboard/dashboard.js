@@ -1,4 +1,4 @@
-Template.navbar.rendered = function() {
+Template.dashboard.rendered = function() {
 
   // Initialize collapse button
   $('.button-collapse').sideNav({'edge': 'left'});
