@@ -9,3 +9,14 @@ EsClientSource = new ElasticSearch.Client({
 // make it fiber aware
 EsClient = Async.wrap(EsClientSource, ['index', 'search']);
 
+var searchQuery = EsClient.search({
+  index: 'api-umbrella-logs-v1-2014-12',
+  type: 'log',
+  body: {
+    query: {
+      match_all: {}
+    },
+    size: 1000
+  }
+});
+console.log(searchQuery);
