@@ -110,16 +110,21 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   .side-nav li.active {
     line-height: 64px;
   }
-  .button-collapse {
-    padding-top: 18px;
-    padding-bottom: 13px;
-  }
   .dropdown-menu > li > a {
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 3px;
     padding-top: 3px;
   }
+  .sidenav-button {
+    float: left;
+    padding-top: 12px;
+    padding-right: 10px;
+
+    &:hover { color: darken(#fff, 10%); }
+    &:focus { color: darken(#fff, 10%); }
+  }
+
 }
 
 footer {
@@ -134,3 +139,4 @@ footer {
     }
   }
 }
+

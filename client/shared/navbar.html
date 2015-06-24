@@ -4,9 +4,8 @@
       <div class="container close-navbar">
         <div class="navbar-header">
           {{#if User}}
-          <ul class="nav navbar-nav navbar-left">
-            <li><a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a></li>
-          </ul>
+          <a href="#" data-activates="slide-out" class="sidenav-button button-collapse"><i class="mdi-navigation-menu"></i>
+          </a>
           {{/if}}
           <a class="navbar-brand" href="{{#if User}}{{Config.dashboardRoute}}{{else}}{{Config.homeRoute}}{{/if}}">{{{Config.logoImage}}}</a>
         </div>
