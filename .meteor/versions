@@ -86,7 +86,9 @@ logging@1.0.7
 manuelschoebel:ms-seo@0.4.1
 meteor@1.1.6
 meteor-platform@1.2.2
+meteorhacks:async@1.0.0
 meteorhacks:meteorx@1.0.2
+meteorhacks:npm@1.3.0
 meteorhacks:subs-manager@1.3.0
 meteorhacks:unblock@1.1.0
 minifiers@1.1.5
@@ -102,6 +104,7 @@ multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
 notifications@0.0.7
 npm-bcrypt@0.7.8_2
+npm-container@1.0.0
 oauth@1.1.4
 oauth1@1.1.4
 oauth2@1.1.3

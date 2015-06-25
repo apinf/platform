@@ -1,9 +1,3 @@
-.sampleChart{
-    position: absolute;
-    top:100px;
-    left:100px;
-    right:100px;
-}
 #canvasChart{
     height:400px;
 }

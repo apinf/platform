@@ -88,10 +88,12 @@ Accounts.onLogin (info) ->
       try
         result = github.user.getEmails(user: user.services.github.username)
         email = _(result).findWhere(primary: true)
-        ###Meteor.users.update { _id: user._id }, $set:
-          'profile.email': email.email
-          'services.github.email': email.email###
-        user.emails = [{address: email.email, verified: true}]
-        console.log user
+        
+        # TODO: Work still in progress
+        # Meteor.users.update { _id: user._id }, $set:
+        #  'profile.email': email.email
+        #  'services.github.email': email.email
+        # user.emails = [{address: email.email, verified: true}]
+        #console.log user
       catch e
-        console.log e.message
+        #console.log e.message
