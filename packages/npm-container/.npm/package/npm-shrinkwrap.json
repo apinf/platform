@@ -1,0 +1,48 @@
+{
+  "dependencies": {
+    "elasticsearch": {
+      "version": "3.0.2",
+      "dependencies": {
+        "bluebird": {
+          "version": "2.2.2"
+        },
+        "chalk": {
+          "version": "0.5.1",
+          "dependencies": {
+            "ansi-styles": {
+              "version": "1.1.0"
+            },
+            "escape-string-regexp": {
+              "version": "1.0.3"
+            },
+            "has-ansi": {
+              "version": "0.1.0",
+              "dependencies": {
+                "ansi-regex": {
+                  "version": "0.2.1"
+                }
+              }
+            },
+            "strip-ansi": {
+              "version": "0.3.0",
+              "dependencies": {
+                "ansi-regex": {
+                  "version": "0.2.1"
+                }
+              }
+            },
+            "supports-color": {
+              "version": "0.2.0"
+            }
+          }
+        },
+        "forever-agent": {
+          "version": "0.5.2"
+        },
+        "lodash-node": {
+          "version": "2.4.1"
+        }
+      }
+    }
+  }
+}
