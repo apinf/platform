@@ -74,6 +74,15 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 .at-pwd-form .at-input input {
   padding-right: 0;
 }
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  left: 0;
+}
+
+.radio input[type="radio"], .radio-inline input[type="radio"],
+.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+  margin-left: 0;
+}
 ////
 
 .admin-layout {
