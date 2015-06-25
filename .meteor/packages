@@ -62,7 +62,5 @@ brylie:api-umbrella
 percolate:synced-cron
 reactive-var
 meteorhacks:npm
-
-
 npm-container
 aldeed:tabular
