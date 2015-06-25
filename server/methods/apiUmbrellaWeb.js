@@ -1,17 +1,17 @@
 Meteor.methods({
   "syncApiUmbrellaUsers": function () {
     if (Meteor.settings.api_umbrella) {
-    // Get users from API Umbrella instance
+      // Get users from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiUsers.getUsers();
 
       // Add each user to collection if not already there
-      _.each(response.data.data, function (item) {
+      var apiUsers = response.data.data;
+      _.each(apiUsers, function (apiUser) {
         // Get existing user
-        var existingUser = ApiUmbrellaUsers.findOne({'id': item.id});
-
+        var existingUser = ApiUmbrellaUsers.findOne({'id': apiUser.id});
         // If user doesn't exist in collection, insert into collection
-        if (! existingUser ) {
-          ApiUmbrellaUsers.insert(item);
+        if (existingUser === undefined) {
+          ApiUmbrellaUsers.insert(apiUser);
         }
       });
     };
