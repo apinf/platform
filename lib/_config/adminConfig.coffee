@@ -6,18 +6,19 @@
       icon: 'pencil'
       auxCollections: ['Attachments']
       tableColumns: [
-              {label: 'Title',name:'title'}
-              {label:'User',name:'owner',collection:'Users'}
-            ]
+        {label: 'Title',name:'title'}
+        {label:'User',name:'owner',collection:'Users'}
+      ]
     }
     ApiUmbrellaUsers: {
       color: 'yellow'
       icon: 'pencil'
       tableColumns: [
-              {label: 'Email',name:'email'}
-              {label: 'First Name',name:'first_name'}
-              {label: 'Last Name',name:'last_name'}
-            ]
+        {label: 'Email',name:'email'}
+        {label: 'First Name',name:'first_name'}
+        {label: 'Last Name',name:'last_name'}
+      ],
+      auxCollections: ['Meteor.users']
     }
     ApiBackends: {
       color: 'blue'
@@ -27,29 +28,36 @@
         {label: 'Backend Host', name: 'backend_host'}
       ]
     }
-    'Meteor.roles': {
-      label: 'Roles',
+    RateLimit: {
+      color: 'black'
+      icon: 'plus'
       tableColumns: [
-        {label: 'Name', name: 'name'}
-        ]
-      }
+        {label: 'Name',name:'name'}
+        {label: 'Duration',name:'duration'}
+        {label:'Accuracy',name:'accuracy'}
+        {label: 'Limit by',name:'limit_by'}
+        {label: 'Limit',name:'limit'}
+        {label: 'Distributed',name:'distributed'}
+        {label: 'Response Headers',name:'response_headers'}
+      ]
+    }
     ApiUmbrellaAdmins: {
       color: 'blue'
       icon: 'user-md'
       tableColumns: [
-              {label: 'Email',name:'email'}
-              {label: 'Username',name:'username'}
-            ]
+        {label: 'Email',name:'email'}
+        {label: 'Username',name:'username'}
+      ]
     }
     Comments: {
       color: 'green'
       icon: 'comments'
       auxCollections: ['Posts']
       tableColumns: [
-              {label: 'Content', name:'content'}
-              {label:'Post', name:'doc',collection: 'Posts',collection_property:'title'}
-              {label:'User', name:'owner',collection:'Users'}
-            ]
+        {label: 'Content', name:'content'}
+        {label:'Post', name:'doc',collection: 'Posts',collection_property:'title'}
+        {label:'User', name:'owner',collection:'Users'}
+      ]
     }
   dashboard:
     homeUrl: '/dashboard'
@@ -67,4 +75,4 @@
     # 	}
     # ]
   autoForm:
-          omitFields: ['createdAt', 'updatedAt']
+    omitFields: ['createdAt', 'updatedAt']
