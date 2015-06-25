@@ -61,3 +61,4 @@ brylie:api-umbrella
 percolate:synced-cron
 materialize:materialize
 twbs:bootstrap
+aldeed:tabular

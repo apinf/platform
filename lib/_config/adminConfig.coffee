@@ -6,18 +6,18 @@
       icon: 'pencil'
       auxCollections: ['Attachments']
       tableColumns: [
-              {label: 'Title',name:'title'}
-              {label:'User',name:'owner',collection:'Users'}
-            ]
+        {label: 'Title',name:'title'}
+        {label:'User',name:'owner',collection:'Users'}
+      ]
     }
     ApiUmbrellaUsers: {
       color: 'yellow'
       icon: 'pencil'
       tableColumns: [
-              {label: 'Email',name:'email'}
-              {label: 'First Name',name:'first_name'}
-              {label: 'Last Name',name:'last_name'}
-            ],
+        {label: 'Email',name:'email'}
+        {label: 'First Name',name:'first_name'}
+        {label: 'Last Name',name:'last_name'}
+      ],
       auxCollections: ['Meteor.users']
     }
     ApiBackends: {
@@ -45,19 +45,19 @@
       color: 'blue'
       icon: 'user-md'
       tableColumns: [
-              {label: 'Email',name:'email'}
-              {label: 'Username',name:'username'}
-            ]
+        {label: 'Email',name:'email'}
+        {label: 'Username',name:'username'}
+      ]
     }
     Comments: {
       color: 'green'
       icon: 'comments'
       auxCollections: ['Posts']
       tableColumns: [
-              {label: 'Content', name:'content'}
-              {label:'Post', name:'doc',collection: 'Posts',collection_property:'title'}
-              {label:'User', name:'owner',collection:'Users'}
-            ]
+        {label: 'Content', name:'content'}
+        {label:'Post', name:'doc',collection: 'Posts',collection_property:'title'}
+        {label:'User', name:'owner',collection:'Users'}
+      ]
     }
   dashboard:
     homeUrl: '/dashboard'
@@ -75,4 +75,4 @@
     # 	}
     # ]
   autoForm:
-          omitFields: ['createdAt', 'updatedAt']
+    omitFields: ['createdAt', 'updatedAt']
