@@ -1,36 +1,41 @@
 <template name="dashboard">
   <div class="template-dashboard">
     <div class="container">
-      <div class="row" id="champion-messages">
-        <div class="col-md-3">
-          {{> addPost}}
-          {{> favoritesSidebar}}
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <p> Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam
+          </p>
         </div>
-        <div class="col-md-9">
-          {{> posts}}
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <p>
+            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam
+          </p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <p>
+            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <p>
+            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <p>
+            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <p>
+            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam
+          </p>
         </div>
       </div>
     </div>
-  </div>
-</template>
-
-<template name="favoritesSidebar">
-  <div class="template-favorites-sidebar">
-    {{#if myFavorites.count}}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-          <h3 class="panel-title">{{_ "favorites"}}</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        {{#each myFavorites}}
-          <li>
-            <a>{{_id}}</a>
-          </li>
-        {{/each}}
-        </ul>
-      </div>
-    </div>
-    {{/if}}
   </div>
 </template>
