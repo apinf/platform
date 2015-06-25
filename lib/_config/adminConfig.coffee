@@ -17,7 +17,8 @@
         {label: 'Email',name:'email'}
         {label: 'First Name',name:'first_name'}
         {label: 'Last Name',name:'last_name'}
-      ]
+      ],
+      auxCollections: ['Meteor.users']
     }
     ApiBackends: {
       color: 'blue'
