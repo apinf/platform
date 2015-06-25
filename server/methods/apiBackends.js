@@ -6,13 +6,13 @@ Meteor.methods({
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
       var apiBackends = response.data.data;
 
-      _.each(apiBackends, function (backend) {
+      _.each(apiBackends, function (apiBackend) {
         // Get existing API Backend
-        var existingApiBackend = ApiBackends.findOne({'id': backend.id});
+        var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
 
         // If API Backend doesn't exist in collection, insert into collection
-        if (! existingApiBackend ) {
-          ApiBackends.insert(backend);
+        if (existingApiBackend === undefined) {
+          ApiBackends.insert(apiBackend);
         };
       });
     };
