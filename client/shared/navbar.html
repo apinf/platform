@@ -7,17 +7,23 @@
           <a href="#" data-activates="slide-out" class="sidenav-button button-collapse"><i class="mdi-navigation-menu"></i>
           </a>
           {{/if}}
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="{{#if User}}{{Config.dashboardRoute}}{{else}}{{Config.homeRoute}}{{/if}}">{{{Config.logoImage}}}</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             {{#if User}}
-            <!--            {{> notificationsDropdown}} not part of MVP-->
             {{#if isInRole 'admin'}}
             <li><a href="{{pathFor 'adminDashboard'}}">{{_ "admin"}}</a></li>
             {{/if}}
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
               <ul class="dropdown-menu">
                 <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
                 <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>

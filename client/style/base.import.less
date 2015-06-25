@@ -4,7 +4,7 @@
 html, body {
   height: 100%;
   font-weight: 400 !important;
-  background-color: #ececec !important;
+  background-color: #ececec;
 }
 
 .layout {
@@ -21,7 +21,7 @@ html, body {
 }
 
 .navbar-inverse.navbar {
-  background-color: #2196f3 !important;
+  background-color: #2196f3;
 }
 
 //// Overriding global styles
@@ -67,6 +67,7 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   &:focus { text-decoration: none; }
 }
 
+
 .navbar-inverse {
   border: none;
 }
@@ -95,6 +96,9 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   .dropdown-menu > li {
     width: 100%;
   }
+  .nav > li {
+    z-index: 1;
+  }
   .navbar .navbar-nav > li > a {
     padding-top: 16px;
     padding-bottom: 13px;
@@ -109,6 +113,12 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 }
 
 .master-layout {
+  position: relative !important;
+  z-index: 2;
+  .template-navbar {
+    position: relative !important;
+    z-index: 2;
+  }
   .navbar-right li > a {
     padding-top: 21px;
     padding-bottom: 13px;
@@ -141,6 +151,9 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   }
   .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin-left: 0;
+  }
+  .navbar-right > li {
+    background-color: #2196F3 !important;
   }
 
 }
