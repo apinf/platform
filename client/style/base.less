@@ -1,6 +1,19 @@
-/// global variables
+/* Bootstrap */
+@import "/client/style/variables.import.less";
+@import "/client/style/bootstrap-variables.import.less";
+
+/* Utils */
+@import "/client/style/utils/fonts.import.less";
+
+/* Views */
+@import "/client/views/home/home.import.less";
+
+
+/* Global custom variables */
 @label-text: #212121;
 
+
+/* Global styles */
 html, body {
   height: 100%;
   font-weight: 400 !important;
@@ -24,15 +37,16 @@ html, body {
   background-color: #2196f3;
 }
 
-//// Overriding global styles
+
+/* Global overriding */
 input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
   font-size: inherit;
 }
 
 input[name='profile.apiKey']{
-  width:100%;
-  border:0px solid #fff;
-  outline:none
+  width: 100%;
+  border: 0px solid #fff;
+  outline: none
 }
 
 nav ul > li > a {
@@ -67,7 +81,6 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   &:focus { text-decoration: none; }
 }
 
-
 .navbar-inverse {
   border: none;
 }
@@ -84,8 +97,9 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
 .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
   margin-left: 0;
 }
-////
 
+
+/* Admin dashoboard */
 .admin-layout {
   .header .navbar {
     margin-left: 0 !important;
@@ -96,9 +110,6 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   .dropdown-menu > li {
     width: 100%;
   }
-  ////  .nav > li {
-  ////    z-index: 1;
-  //  }
   .navbar .navbar-nav > li > a {
     padding-top: 16px;
     padding-bottom: 13px;
@@ -112,6 +123,7 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
   }
 }
 
+/* User dashboard */
 .master-layout {
   .template-navbar {
     position: relative !important;
@@ -157,9 +169,9 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
     margin-bottom: 0px;
     margin-top: 12px
   }
-
 }
 
+/* Footer */
 footer {
   margin-top: 150px;
   background-color: #333;
@@ -172,4 +184,11 @@ footer {
     }
   }
 }
+
+
+/* Chart */
+#canvasChart {
+  height: 400px;
+}
+
 
