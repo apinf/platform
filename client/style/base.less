@@ -118,8 +118,13 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
     background: rgba(0, 0, 0, 0);
     color: #f6f6f6;
   }
-  .skin-blue .navbar, .admin-layout .skin-blue .logo {
+  .skin-blue .navbar,
+  .skin-blue .logo {
     background-color: #2196f3 !important;
+  }
+  .skin-blue .logo {
+    position: relative !important;
+    z-index: 10000 !important;
   }
 }
 
