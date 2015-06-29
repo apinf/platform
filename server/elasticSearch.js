@@ -13,6 +13,25 @@ var es = function () {
 
   EsClient = Async.wrap(EsClientSource, ['index', 'search']);
 
+  this.doSearch = function () {
+    var searchData = EsClient.search({
+      index: searchIndex,
+      type: searchType,
+      body: {
+        query: {
+          match_all: {}
+        },
+        size: searchItemsCount
+      }
+    });
+
+    return searchData;
+  };
+
 
 
 };
+
+var newSeach =  new es();
+
+console.log(newSeach.doSearch());
