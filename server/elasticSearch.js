@@ -1,36 +1,35 @@
 es = function () {
 
-  var host = 'http://apinf.com:14002';
-  var searchIndex = 'api-umbrella-logs-v1-2014-12';
-  var searchType = 'log';
-  var searchItemsCount = 1000;
+  var host = 'http://46.101.247.242:14002';
 
   ElasticSearch = Meteor.npmRequire('elasticsearch');
 
   EsClientSource = new ElasticSearch.Client({
-    host: host
+    host: Meteor.settings.elasticsearch.host
   });
 
   EsClient = Async.wrap(EsClientSource, ['index', 'search']);
 
-  this.doSearch = function () {
+  // index: index provided within the query
+  // type : type of records ro be returned
+  // count: limit of records to be returned
+
+  this.doSearch = function (index, type, limit) {
     var searchData = EsClient.search({
-      index: searchIndex,
-      type: searchType,
+      index: index,
+      type: type,
       body: {
         query: {
           match_all: {}
         },
-        size: searchItemsCount
+        size: limit
       }
     });
 
     return searchData;
   };
 
-  this.getMonthAnalytics = function () {
-
-    var data = this.doSearch();
+  this.getMonthAnalytics = function (data) {
 
     var items = data.hits.hits;
 
