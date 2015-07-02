@@ -7,20 +7,20 @@ Meteor.methods({
 
     // create the client
     EsClientSource = new ElasticSearch.Client({
-      host: 'http://apinf.com:14002'
+      host: 'http://46.101.247.242:14002'
     });
 
     // make it fiber aware
     EsClient = Async.wrap(EsClientSource, ['index', 'search']);
 
     var searchQuery = EsClient.search({
-      index: 'api-umbrella-logs-v1-2014-12',
+      index: 'api-umbrella-logs-v1-2015-07',
       type: 'log',
       body: {
         query: {
           match_all: {}
         },
-        size: 1000
+        size: 10000
       }
     });
     if(searchQuery.hits.hits){
