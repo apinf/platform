@@ -5,11 +5,11 @@ Router.map ->
 
   @route "apiBackends",
     path: "/apibackends"
-    layoutTemplate: "homeLayout"
+    layoutTemplate: "masterLayout"
 
   @route "catalogue",
     path: "/catalogue"
-    layoutTemplate: "homeLayout"
+    layoutTemplate: "masterLayout"
 
   @route "dashboard",
     path: "/dashboard"

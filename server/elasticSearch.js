@@ -1,7 +1,5 @@
 es = function () {
 
-  var host = 'http://46.101.247.242:14002';
-
   ElasticSearch = Meteor.npmRequire('elasticsearch');
 
   EsClientSource = new ElasticSearch.Client({

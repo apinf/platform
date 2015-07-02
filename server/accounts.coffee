@@ -88,7 +88,7 @@ Accounts.onLogin (info) ->
       try
         result = github.user.getEmails(user: user.services.github.username)
         email = _(result).findWhere(primary: true)
-        
+
         # TODO: Work still in progress
         # Meteor.users.update { _id: user._id }, $set:
         #  'profile.email': email.email

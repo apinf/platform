@@ -8,7 +8,7 @@ coffeescript
 less
 accounts-base
 accounts-password
-aldeed:autoform@5.1.2
+aldeed:autoform
 alanning:roles
 aldeed:collection2
 aldeed:simple-schema
@@ -30,7 +30,6 @@ spiderable
 accounts-facebook
 accounts-google
 accounts-twitter
-bootstrap
 accounts-ui
 jparker:gravatar
 tap:i18n
@@ -60,6 +59,8 @@ bruz:github-api
 chart:chart
 brylie:api-umbrella
 percolate:synced-cron
+materialize:materialize
+twbs:bootstrap
 reactive-var
 meteorhacks:npm
 npm-container
