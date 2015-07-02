@@ -45,17 +45,18 @@ ApiUmbrellaElastic = function () {
         monthEnd  : 31
       };
 
-      items.forEach(function (e) {
-        var stamp = new Date(e._source.request_at);
+
+      items.forEach(function (item) {
+        var stamp = new Date(item._source.request_at);
         var date = stamp.getDate();
         datesArray.push(date);
       });
 
-      datesArray.forEach(function (j) {
-        for (var k = monthFrames.monthStart; k <= monthFrames.monthEnd; k++) {
-          if (k == j) {
-            if(monthData[j]) monthData[j]++;
-            else monthData[j] = 1;
+      datesArray.forEach(function (dateInArray) {
+        for (var monthDay = monthFrames.monthStart; monthDay <= monthFrames.monthEnd; monthDay++) {
+          if (monthDay == dateInArray) {
+            if(monthData[dateInArray]) monthData[dateInArray]++;
+            else monthData[dateInArray] = 1;
           }
         }
       });
