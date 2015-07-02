@@ -1,4 +1,4 @@
-es = function () {
+ApiUmbrellaElastic = function () {
 
   ElasticSearch = Meteor.npmRequire('elasticsearch');
 
