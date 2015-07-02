@@ -8,7 +8,6 @@ Meteor.methods({
     var returnItemsLimit = 1000;
 
     var data = newSearch.doSearch(searchIndex, searchType, returnItemsLimit);
-
     return newSearch.getMonthAnalytics(data);
   }
 });
