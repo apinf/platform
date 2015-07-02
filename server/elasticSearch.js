@@ -15,7 +15,7 @@ ApiUmbrellaElastic = function () {
    * index: index provided within the query
    * type : type of records ro be returned
    * count: limit of records to be returned
-    */
+   */
   this.doSearch = function (index, type, limit) {
     var searchData = EsClient.search({
       index: index,
@@ -37,39 +37,48 @@ ApiUmbrellaElastic = function () {
 
     if(items){
 
-      var datesArray = [];
-      var monthData = {};
-      var chartDataArr = [];
-      var monthFrames = {
-        monthStart: 1,
-        monthEnd  : 31
+      var datesArray = []; // long array that contains all the request dates
+      var labels = [];     // last two weeks month days - labels to display on chart
+      var values = [];     // exact values that are used in chart
+      var counts = {};     // object that handles dates and amount of requests this day
+
+      // time filter for fetching data
+      var timeFrames = {
+        start: moment().subtract(2, "weeks"),
+        end  : moment()
       };
 
-
+      // looping items, getting the date value from an item and pushing it to datesArray
       items.forEach(function (item) {
         var stamp = new Date(item._source.request_at);
         var date = stamp.getDate();
         datesArray.push(date);
       });
 
-      datesArray.forEach(function (dateInArray) {
-        for (var monthDay = monthFrames.monthStart; monthDay <= monthFrames.monthEnd; monthDay++) {
-          if (monthDay == dateInArray) {
-            if(monthData[dateInArray]) monthData[dateInArray]++;
-            else monthData[dateInArray] = 1;
-          }
-        }
-      });
 
-      for (var l = monthFrames.monthStart; l <= monthFrames.monthEnd; l++){
-        chartDataArr.push(monthData[l]);
-      }
+      //counting total number of requests per day
+      datesArray.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
+
+      var loopThroughDates = moment().range(timeFrames.start, timeFrames.end).by('days', function(moment){
+
+        var date = moment.date();
+        labels.push(date);
+        if(date in counts){
+          values.push(counts[date]);
+        }else{
+          values.push(0);
+        }
+
+      });
 
     }else {
       console.log("Data not found");
     }
 
-    return chartDataArr;
+    return {
+      labels: labels,
+      values: values
+    };
   }
 
 };

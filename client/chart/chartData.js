@@ -11,10 +11,8 @@ Template.chartLayout.created = function () {
 
       } else {
 
-        var thisData = response;
-
         var lineChart = {
-          labels : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+          labels : response.labels,
           datasets : [
             {
               label: "apiUmbrellaAnalytics for July 2015",
@@ -24,7 +22,7 @@ Template.chartLayout.created = function () {
               pointStrokeColor : "#fff",
               pointHighlightFill : "#fff",
               pointHighlightStroke : "rgba(220,220,220,1)",
-              data : thisData
+              data : response.values
             }
           ]
         };
