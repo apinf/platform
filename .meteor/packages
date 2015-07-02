@@ -65,3 +65,4 @@ reactive-var
 meteorhacks:npm
 npm-container
 aldeed:tabular
+benmgreene:moment-range

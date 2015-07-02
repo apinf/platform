@@ -15,6 +15,7 @@ aldeed:tabular@1.2.0
 aldeed:template-extension@3.4.3
 autoupdate@1.2.1
 base64@1.0.3
+benmgreene:moment-range@1.0.7
 binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
