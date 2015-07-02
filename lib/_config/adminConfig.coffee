@@ -10,16 +10,6 @@
         {label:'User',name:'owner',collection:'Users'}
       ]
     }
-    ApiUmbrellaUsers: {
-      color: 'yellow'
-      icon: 'pencil'
-      tableColumns: [
-        {label: 'Email',name:'email'}
-        {label: 'First Name',name:'first_name'}
-        {label: 'Last Name',name:'last_name'}
-      ],
-      auxCollections: ['Meteor.users']
-    }
     ApiBackends: {
       color: 'blue'
       icon: 'gear'
