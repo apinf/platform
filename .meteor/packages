@@ -59,7 +59,6 @@ bruz:github-api
 chart:chart
 brylie:api-umbrella
 percolate:synced-cron
-materialize:materialize
 twbs:bootstrap
 reactive-var
 meteorhacks:npm
