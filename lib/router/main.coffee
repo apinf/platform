@@ -14,3 +14,7 @@ Router.map ->
   @route "dashboard",
     path: "/dashboard"
     layoutTemplate: "masterLayout"
+
+  @route "swagger",
+    path: "/swagger"
+    layoutTemplate: "masterLayout"
