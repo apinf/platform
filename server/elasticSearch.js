@@ -56,13 +56,21 @@ ApiUmbrellaElastic = function () {
       });
 
 
-      //counting total number of requests per day
+      // counting total number of requests per day
       datesArray.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
 
+      // looping through all the dates that are in needed range
       var loopThroughDates = moment().range(timeFrames.start, timeFrames.end).by('days', function(moment){
 
-        var date = moment.date();
-        labels.push(date);
+        var date = moment.date(); // variable handling current date
+
+        labels.push(date); // pushing dates to labels variable - array
+
+        /**
+         * if current date is present in counts object, then pushing it to values array
+         * if current date is not present in counts object, then pushing 0
+         * this is needed for displaying the chart with correctly provided values next to labels
+         */
         if(date in counts){
           values.push(counts[date]);
         }else{
