@@ -64,3 +64,4 @@ reactive-var
 meteorhacks:npm
 npm-container
 aldeed:tabular
+zimme:active-route
