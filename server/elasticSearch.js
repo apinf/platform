@@ -16,14 +16,15 @@ ApiUmbrellaElastic = function () {
    * type : type of records ro be returned
    * count: limit of records to be returned
    */
-  this.doSearch = function (index, type, limit) {
+  this.doSearch = function (index, type, limit, query) {
+
+    if(!query || query=={} || query=="") query = { match_all: {} };
+
     var searchData = EsClient.search({
       index: index,
       type: type,
       body: {
-        query: {
-          match_all: {}
-        },
+        query: query,
         size: limit
       }
     });
