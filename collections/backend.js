@@ -17,8 +17,8 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      'HTTP',
-      'HTTPS'
+      'http',
+      'https'
     ],
     label: 'Backend protocol'
   },
@@ -38,9 +38,9 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      'Least connections',
-      'Round robin',
-      'Source IP Hash'
+      'least_conn',
+      'round_robin',
+      'ip_hash'
     ],
   },
   server: {
@@ -211,8 +211,8 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true,
     allowedValues: [
       'Default rate limits',
-      'Custom rate limits',
-      'Unlimited requests'
+      'custom',
+      'unlimited'
     ],
     label: 'Rate limit'
   },
