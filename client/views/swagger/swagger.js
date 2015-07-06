@@ -1,5 +1,4 @@
 Template.swagger.rendered = function () {
-  console.log("rendered");
   $(function() {
     // Pass window url parameters into Swagger IFRAME
     // http://stackoverflow.com/a/12944835/1191545
