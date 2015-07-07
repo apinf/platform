@@ -23,3 +23,9 @@ The decision on the architecture to be made once we understand the API Umbrella 
 For the ecosystem, we will concentrate on open APIs in the MVP phase. For the API consumer side, there are two API consumer personas: [Jukka and Minh](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/UX/APINF%20consumer%20personas.pdf). API owner personas to be added later.
 
 ![Ecosystem diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_ecosystem.svg)
+
+Nightly build
+-------------
+You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
+* username: test@test.test
+* password: testuser
