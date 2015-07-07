@@ -26,7 +26,7 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 Nightly build
 -------------
-You can find out our latest version at [nightly.apinf.com](http://nightly.apinf.com).
+You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
 username: test@test.test
 password: testuser
 
