@@ -1,16 +1,7 @@
 Meteor.methods({
-  "getChartData": function () {
+  "getChartData": function (data) {
 
-
-    // TODO: dynamic input data
-    var index = 'api-umbrella-logs-v1-2015-07';
-    var type = 'log';
-    var limit = 1000;
-    var query = {
-      match_all: {}
-    };
-
-    var newSearch = new ElasticRest(index, type, limit, query);
+    var newSearch = new ElasticRest(data.index, data.type, data.limit, data.query);
 
     return getMonthAnalytics(newSearch.doSearch());
   }

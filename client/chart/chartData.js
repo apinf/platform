@@ -1,10 +1,22 @@
 Template.chartLayout.rendered = function () {
-  this.drawChart()
+
+  // TODO: dynamic input data
+  var data = {
+    index : "api-umbrella-logs-v1-2015-07",
+    type  : "log",
+    limit : 1000,
+    query : {
+      match_all: {}
+    }
+  };
+
+  this.drawChart(data);
 };
 
 Template.chartLayout.created = function () {
-  this.drawChart = function () {
-    Meteor.call("getChartData", function (err, response) {
+  this.drawChart = function (data) {
+
+    Meteor.call("getChartData", data, function (err, response) {
       if (err) {
 
         dataArr.set(err)
