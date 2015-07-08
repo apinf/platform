@@ -5,6 +5,9 @@ Template.bookmarks.helpers({
   2. Get all bookmarkedApis from the collection for current user
   */
     var currentUserId = Meteor.userId();
-    return ApiBookmarks.find({user: currentUserId});
+    return ApiBookmarks.find({userId: currentUserId});
   }
 });
+
+
+
