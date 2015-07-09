@@ -75,4 +75,4 @@
     # 	}
     # ]
   autoForm:
-    omitFields: ['createdAt', 'updatedAt']
+    omitFields: ['createdAt', 'updatedAt', 'roles']
