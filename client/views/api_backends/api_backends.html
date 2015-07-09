@@ -25,16 +25,17 @@
 </form>
 -->
       {{> afQuickField name='matching'}}
-      <h4>Global Request Settings</h4>
+      <h3>Global Request Settings</h3>
       {{> afQuickField name='append_query_string'}}
       {{> afQuickField name='set_headers'}}
       {{> afQuickField name='http_basic_auth'}}
       {{> afQuickField name='require_https' options="allowed"}}
       {{> afQuickField name='api_key_verification_level' options="allowed"}}
       {{> afQuickField name='required_roles' options="allowed"}}
-      <h5>Pass API Key to Backend (deprecated)</h5>
+      <h4>Pass API Key to Backend (deprecated)</h4>
       {{> afQuickField name='pass_api_key_header'}}
       {{> afQuickField name='pass_api_key_query_param'}}
+      <h4>Rate limiting</h4>
       {{> afQuickField name='rate_limit_mode' options="allowed"}}
       {{> afQuickField name='duration'}}
       {{> afQuickField name='accuracy'}}
@@ -55,7 +56,6 @@
       {{> afQuickField name='authenticated_rate_limit_behavior'}}
       {{> afQuickField name='pass_api_key_header'}}
       {{> afQuickField name='error_templates'}}
-      {{> afQuickField name='error_data'}}
       {{/autoForm}}
     </div>
   </div>
