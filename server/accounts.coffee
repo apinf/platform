@@ -70,7 +70,7 @@ Accounts.onCreateUser (options, user) ->
 
     # adding umbrella user to apinf database
     ApiUmbrellaUsers.insert(response.data.user)
-
+    Meteor.call("sendmail", user.emails[0].address)
     user
 
 # This part is still under development since there was an issue in github-accounts package
