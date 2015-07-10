@@ -1,6 +1,11 @@
 +Meteor.startup(function() {
-  var username = "xxxx"; //add mail server username eg. from Mailgun
-  var password = "xxxx"; // add mail password here
+  /*extend settings.json with username and password:
+  "mail": {
+    "username" : "xxxx",
+      "password" : "xxxx"
+  }*/
+  var username = Meteor.settings.mail.username;
+  var password = Meteor.settings.mail.password;
   var server = "smtp.mailgun.org";
   var port = "587"
 
