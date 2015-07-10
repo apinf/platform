@@ -1,6 +1,6 @@
 +Meteor.startup(function() {
-  var username = "postmaster@sandbox2b56b3a814c1462eb48ae9ee598c8321.mailgun.org";
-  var password = "d85b4c55755388e4449549092e035153";
+  var username = "xxxx"; //add mail server username eg. from Mailgun
+  var password = "xxxx"; // add mail password here
   var server = "smtp.mailgun.org";
   var port = "587"
 
