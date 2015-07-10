@@ -60,10 +60,11 @@ bruz:github-api
 chart:chart
 brylie:api-umbrella
 percolate:synced-cron
-materialize:materialize
 twbs:bootstrap
 reactive-var
 meteorhacks:npm
 npm-container
 aldeed:tabular
 benmgreene:moment-range
+email
+zimme:active-route

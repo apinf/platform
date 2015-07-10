@@ -1,0 +1,29 @@
+ID,User story,Priority,MVP,Roadmap,Comment,Github issue id,Parent task name
+US03,"As Minh (API consumer), I want to get an API key.",1,x,,,68,Documentation browser
+US01,"As Minh (API consumer), I want to find Apinf hosted APIs.",2,x,,catalogue?,67,Create a catalogue view for APIs
+US21,"As Harri (API administrator), I want to view visualised data of API usage",3,x,,,27,Analytics
+US24,"As Apinf administrator, I want to synchronise all data between Apinf and API Umbrella.",4,x,x,,,
+US13,"As Harri (API administrator), I want to import API configurations to Apinf",5,x,,"MVP will support only importing API Umbrella configurations, importing RAML configurations is for roadmap",72,Create a form or button for importing basic API configuration (API Umbrella)
+US14,"As Harri (API administrator), I want to configure my API backend",6,x,,,73,Create a form for API definition based on API Umbrella UI
+US05,"As Apinf user (Minh/Jukka/Harri/Apinf), I want to be able to access my information.",7,x,,,32,Authentication
+US19,"As Apinf user (Minh/Jukka/Harri/Apinf), I want to be able to log into Apinf",8,x,,,32,Authentication
+US25,"As Apinf administrator, I want to control which privileges different user roles have.",9,x,,,,
+US16,"As Harri (API administrator), I want to view API usage logs",10,x,,,27,Analytics
+US17,"As Harri (API administrator), I want to view API analytics by user, by location, by time(?)",11,x,,,27,Analytics
+US07,"As Jukka (API consumer), I want to be able to reset my forgotten password.",12,x,,,33,User profile
+US06,"As Jukka (API consumer), I want to be able to change my password.",13,x,,,33,User profile
+US18,"As Harri (API administrator), I want to define limits to API usage by user, by location, by time, and rate",14,x,x,"MVP will only support rate limiting, other limitations implemented later (roadmap)",75,Add rate limiting to API configuration form
+US04,"As Minh (API consumer), I want to retrieve my API key.",15,x,,,69,Add API key field to user profile
+US09,"As Minh (API consumer), I want to view my API statistics to be able to see, how frequently my application is used.",16,x,,,27,Analytics
+US02,"As Minh (API consumer), I want to access API documentation.",17,x,x,,30,
+US08,"A Minh (API consumer), I want to be able to use my Github account to log into Apinf.",18,x,,,50,Add Github authentication option
+US10,"As Minh (API consumer), I want to create custom API's mixing sources",999,,x,,31,Custom API's
+US11,"As Minh (API consumer), I want to be able to report API problems or bugs to API administrator",999,,x,,70,Create a contact or message form for feedback to API administrators
+US12,"As Jukka (API consumer), I want to view code examples of APIs",999,,x,,71,Generate code examples from API structure
+US15,"As Harri (API administrator), I want to add brand elements to our organisations Apinf installation",999,,x,,74,"Create a form for choosing basic brand elements, for example, colors and logo"
+US20,"As Harri (API administrator), I want to manage the lifecycle of APIs",999,,x,EPIC rather than story,,
+US22,"As Minh (API consumer), I want to test API calls in a sandbox.",999,,x,,76,"Create API sandbox functionality, or integrate service that does this for example Swagger."
+US23,"As API owner, I want my organisation to have a custom landing page",999,,x,,,Create landing page functionality for organisations
+US26,"As Harri (API administrator), I want to adjust and filter API analytics charts according to my needs.",999,,x,,,
+US27,"As Jukka (API consumer), I want to know, whether the API I'm using or interested in is alive or down.",999,,x,,,
+US28,"As Harri/Jukka/Minh, I want to know, whether the Apinf service is available.",999,,x,,,
