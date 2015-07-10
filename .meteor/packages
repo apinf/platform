@@ -66,8 +66,5 @@ meteorhacks:npm
 npm-container
 aldeed:tabular
 benmgreene:moment-range
-<<<<<<< HEAD
 email
-=======
 zimme:active-route
->>>>>>> origin/develop
