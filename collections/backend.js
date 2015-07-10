@@ -2,9 +2,9 @@ ApiBackends = new Mongo.Collection('apiBackends');
 
 ApiBackendsSchema = new SimpleSchema({
   id: {
-  type: String,
-  optional: true
-},
+    type: String,
+    optional: true
+  },
   name: {
     type: String,
     optional: true
@@ -42,6 +42,7 @@ ApiBackendsSchema = new SimpleSchema({
       'round_robin',
       'ip_hash'
     ],
+    label: 'Balance algorithm'
   },
   server: {
     type: [Object],
@@ -130,21 +131,28 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true,
     min: 20,
-      max: 1000,
-      autoform: {
-         rows: 2
-      },
+    max: 1000,
+    autoform: {
+      rows: 2,
+      placeholder: 'X-Example-Header: value'
+    },
     label: 'Set headers'
   },
   append_query_string: {
     type: String,
     optional: true,
-    label: 'Append query string parameters'
+    label: 'Append query string parameters',
+    autoform: {
+      placeholder: 'param1=value&param2=value'
+    }
   },
   http_basic_auth: {
     type: String,
     optional: true,
-    label: 'HTTP basic authentication'
+    label: 'HTTP basic authentication',
+    autoform: {
+      placeholder: 'username:password'
+    }
   },
   require_https: {
     type: String,
@@ -181,7 +189,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   required_roles: {
     type: Array,
-    minCount: 1,
+    minCount: 2,
     maxCount: 3,
     optional: true,
     label: 'Required roles',
@@ -203,16 +211,16 @@ ApiBackendsSchema = new SimpleSchema({
     }
   },
   "required_roles.$": {
-      type: String,
-      optional: true
-   },
+    type: String,
+    optional: true
+  },
   rate_limit_mode: {
     type: String,
     optional: true,
     allowedValues: [
       'Default rate limits',
-      'custom',
-      'unlimited'
+      'Custom rate limits',
+      'Unlimited requests'
     ],
     label: 'Rate limit'
   },
@@ -308,7 +316,7 @@ ApiBackendsSchema = new SimpleSchema({
     type: [Object],
     optional: true,
   },
-   "api_key_unauthorized.$.status_code": {
+  "api_key_unauthorized.$.status_code": {
     type: Number,
     optional: true,
   },
