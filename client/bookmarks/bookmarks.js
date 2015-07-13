@@ -9,5 +9,10 @@ Template.bookmarks.helpers({
   }
 });
 
+Template.bookmarks.created = function () {
+  // subscribe to user bookmarks
+  this.subscribe('myApiBookmarks');
+}
+
 
 
