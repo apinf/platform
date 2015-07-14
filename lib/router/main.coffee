@@ -11,6 +11,10 @@ Router.map ->
     path: "/catalogue"
     layoutTemplate: "masterLayout"
 
+  @route "bookmarks",
+    path: "/bookmarks"
+    layoutTemplate: "masterLayout"
+
   @route "dashboard",
     path: "/dashboard"
     layoutTemplate: "masterLayout"
