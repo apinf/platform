@@ -29,7 +29,7 @@ getMonthAnalytics = function (data) {
     // looping through all the dates that are in needed range
     var loopThroughDates = moment().range(timeFrames.start, timeFrames.end).by('days', function(moment){
 
-      var date = moment.date(); // variable handling current date
+      var date = moment.date(); // variable handling current day of month
 
       labels.push(date); // pushing dates to labels variable - array
 
