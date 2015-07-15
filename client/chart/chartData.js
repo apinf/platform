@@ -34,7 +34,6 @@ Template.chartLayout.created = function () {
 
           var stamp = moment(d._source.request_at);
           stamp = stamp.format();
-          console.log(stamp);
           d.ymd = dateFormat.parse(stamp);
 
         });
@@ -47,8 +46,6 @@ Template.chartLayout.created = function () {
         var maxDate = d3.max(items, function(d) { return d.ymd; });
 
         var timeScale = d3.time.scale().domain([minDate, maxDate]);
-
-        console.log(minDate, maxDate);
 
         var chart = dc.lineChart("#chart");
         chart
