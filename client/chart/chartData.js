@@ -1,7 +1,7 @@
 Template.chartLayout.rendered = function () {
 
   // TODO: dynamic input data
-  var data = {
+  var input = {
     index : "api-umbrella-logs-v1-2015-07",
     type  : "log",
     limit : 1000,
@@ -10,39 +10,55 @@ Template.chartLayout.rendered = function () {
     }
   };
 
-  this.drawChart(data);
+  this.drawChart(input);
 };
 
 Template.chartLayout.created = function () {
-  this.drawChart = function (data) {
 
-    Meteor.call("getChartData", data, function (err, response) {
+  this.drawChart = function (input) {
+
+    Meteor.call("getChartData", input, function (err, data) {
       if (err) {
 
-        dataArr.set(err)
+        console.log(err)
 
       } else {
 
-        var lineChart = {
-          labels : response.labels,
-          datasets : [
-            {
-              label: "apiUmbrellaAnalytics for July 2015",
-              fillColor : "rgba(33,150,243,.7)",
-              strokeColor : "rgba(220,220,220,1)",
-              pointColor : "rgba(220,220,220,1)",
-              pointStrokeColor : "#fff",
-              pointHighlightFill : "#fff",
-              pointHighlightStroke : "rgba(220,220,220,1)",
-              data : response.values
-            }
-          ]
-        };
+        var items = data.hits.hits;
 
-        var ctx = document.getElementById("canvasChart").getContext("2d");
-        window.myLine = new Chart(ctx).Line(lineChart, {
-          responsive: true
+        var index = new crossfilter(items);
+
+        var dateFormat = d3.time.format.iso;
+
+        items.forEach(function (d) {
+
+          var stamp = moment(d._source.request_at);
+          stamp = stamp.format();
+          console.log(stamp);
+          d.ymd = dateFormat.parse(stamp);
+
         });
+
+        var dimension = index.dimension(function(d){ return d.ymd; });
+
+        var group = dimension.group();
+
+        var minDate = d3.min(items, function(d) { return d.ymd; });
+        var maxDate = d3.max(items, function(d) { return d.ymd; });
+
+        var timeScale = d3.time.scale().domain([minDate, maxDate]);
+
+        console.log(minDate, maxDate);
+
+        var chart = dc.lineChart("#chart");
+        chart
+          .width(570)
+          .height(480)
+          .x(timeScale)
+          .dimension(dimension)
+          .group(group);
+        chart.render();
+
       }
     });
   }
