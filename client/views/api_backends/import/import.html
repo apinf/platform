@@ -1,16 +1,23 @@
 <template name="importApiConfiguration">
-  <form class="form-horizontal">
+  <form id="apiConfigurationUploadForm" class="form">
     <fieldset>
       <!-- Form Name -->
       <legend>Upload API Configuration</legend>
 
       <!-- File Button -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="apiCofigurationFile">API Configuration File</label>
+        <label class="control-label" for="apiCofigurationFile">API Configuration File</label>
 
-        <input id="apiCofigurationFile" name="apiCofigurationFile" class="input-file" type="file">
+        <input
+        id="apiCofigurationFile"
+        name="apiCofigurationFile"
+        class="input-file"
+        type="file"
+        >
       </div>
-
+      <div class="form-group">
+        <button class="btn btn-success" type="submit">Upload</button>
+      </div>
     </fieldset>
   </form>
 </template>
