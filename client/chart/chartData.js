@@ -1,21 +1,23 @@
+var drawChart;
+
 Template.chartLayout.rendered = function () {
 
   // TODO: dynamic input data
   var input = {
     index : "api-umbrella-logs-v1-2015-07",
     type  : "log",
-    limit : 1000,
+    limit : 30000,
     query : {
       match_all: {}
     }
   };
 
-  this.drawChart(input);
+  drawChart(input);
 };
 
 Template.chartLayout.created = function () {
 
-  this.drawChart = function (input) {
+  drawChart = function (input) {
 
     Meteor.call("getChartData", input, function (err, data) {
       if (err) {
@@ -28,12 +30,12 @@ Template.chartLayout.created = function () {
 
         var index = new crossfilter(items);
 
-        var dateFormat = d3.time.format.iso;
+        var dateFormat = d3.time.format("%Y-%m-%d-%H");
 
         items.forEach(function (d) {
 
           var stamp = moment(d._source.request_at);
-          stamp = stamp.format();
+          stamp = stamp.format("YYYY-MM-DD-HH");
           d.ymd = dateFormat.parse(stamp);
 
         });
@@ -51,12 +53,39 @@ Template.chartLayout.created = function () {
         chart
           .width(570)
           .height(480)
+          .elasticX(true)
           .x(timeScale)
           .dimension(dimension)
-          .group(group);
+          .group(group)
+          .renderArea(true)
+          .dotRadius(3)
+          .renderHorizontalGridLines(true)
+          .renderVerticalGridLines(true);
         chart.render();
 
       }
     });
   }
+
 };
+
+Template.chartLayout.events({
+  "submit .filtering" : function(e){
+    e.preventDefault();
+
+    var month = e.target.month.value;
+    var year  = e.target.year.value;
+
+    var input = {
+      index : "api-umbrella-logs-v1-"+year+"-"+month,
+      type  : "log",
+      limit : 1000,
+      query : {
+        match_all: {}
+      }
+    };
+
+    drawChart(input)
+  }
+});
+
