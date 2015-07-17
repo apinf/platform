@@ -3,6 +3,6 @@ Meteor.methods({
 
     var newSearch = new ElasticRest(data.index, data.type, data.limit, data.query);
 
-    return getMonthAnalytics(newSearch.doSearch());
+    return newSearch.doSearch();
   }
 });
