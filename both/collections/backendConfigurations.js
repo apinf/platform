@@ -9,6 +9,9 @@ if (Meteor.isServer) {
       // allow insert by default
       // TODO: determine proper upload/insert permisison
       return true;
+    },
+    update: function (userId, doc) {
+      return true;
     }
   });
 }
