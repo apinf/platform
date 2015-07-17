@@ -1,15 +1,12 @@
 <template name="masterLayout">
-  <div class="layout master-layout {{$.Session.get 'sidebar'}}">
-    {{> navbar}}
+  {{#AdminLTE skin="blue"}}
+  {{> navbar}}
+  {{> sidebar}}
+  <div class="content-wrapper">
     {{#momentum plugin='iron-router' options=momentumIRTransition}}
     {{> yield }}
     {{/momentum}}
   </div>
-
-  <!-- Prevent footer from popping up when route loading -->
-  {{#if isRouteReady}}
-  {{> footer}}
-  {{/if}}
-
+  {{/AdminLTE}}
   {{> autoformModals}}
 </template>
