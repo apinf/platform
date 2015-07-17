@@ -22,3 +22,7 @@ Router.map ->
   @route "swagger",
     path: "/swagger"
     layoutTemplate: "masterLayout"
+
+  @route "consumerDashboard",
+    path: "/consumerDashboard"
+    layoutTemplate: "consumerDashboardLayout"
