@@ -1,12 +1,14 @@
 <template name="masterLayout">
-  {{#AdminLTE skin="blue"}}
-  {{> navbar}}
-  {{> sidebar}}
-  <div class="content-wrapper">
-    {{#momentum plugin='iron-router' options=momentumIRTransition}}
-    {{> yield }}
-    {{/momentum}}
+  <div class="master-layout">
+    {{#AdminLTE skin="blue"}}
+    {{> navbar}}
+    {{> sidebar}}
+    <div class="content-wrapper">
+      {{#momentum plugin='iron-router' options=momentumIRTransition}}
+      {{> yield }}
+      {{/momentum}}
+    </div>
+    {{/AdminLTE}}
+    {{> autoformModals}}
   </div>
-  {{/AdminLTE}}
-  {{> autoformModals}}
 </template>
