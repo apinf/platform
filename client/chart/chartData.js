@@ -6,7 +6,7 @@ Template.chartLayout.rendered = function () {
   var input = {
     index : "api-umbrella-logs-v1-2015-07",
     type  : "log",
-    limit : 30000,
+    limit : 10000,
     query : {
       match_all: {}
     }
@@ -45,6 +45,11 @@ Template.chartLayout.created = function () {
 
         var timeStampGroup = timeStampDimension.group();
         var countryGroup = countryDimension.group();
+        var all = index.groupAll();
+
+        dc.dataCount("#row-selection")
+          .dimension(index)
+          .group(all);
 
         var totalCountries = countryGroup.reduceSum(function(d) {
           return d.itemsCount;
@@ -59,7 +64,7 @@ Template.chartLayout.created = function () {
         var country = dc.barChart("#barChart");
 
         chart
-          .width(570)
+          .width(1140)
           .height(480)
           .elasticX(true)
           .x(timeScale)
@@ -72,13 +77,13 @@ Template.chartLayout.created = function () {
 
         country
           .width(570)
-          .height(480)
+          .height(250)
+          .x(d3.scale.ordinal().domain(countryDimension))
           .dimension(countryDimension)
           .group(totalCountries)
           .centerBar(false)
           .gap(5)
           .elasticY(true)
-          .x(d3.scale.ordinal().domain(countryDimension))
           .xUnits(dc.units.ordinal)
           .renderHorizontalGridLines(true)
           .renderVerticalGridLines(true);

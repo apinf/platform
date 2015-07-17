@@ -22,6 +22,14 @@
       <option value="2015" selected>2015</option>
     </select>
     <button id="doFilter" type="submit">Apply</button>
+
+    <span class="3u dc-data-count dc-chart" id="row-selection" style="margin:0">
+      <span class="filter-count">_</span> selected out of <span class="total-count">_</span> records
+						<span>
+							<a href='javascript:dc.filterAll();dc.redrawAll();'>Reset All</a>
+						</span>
+    </span>
+
   </form>
   <div class="sampleChart" id="chart">
   </div>
