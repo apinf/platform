@@ -1,9 +1,9 @@
 <template name="profile">
   <div class="container">
-    <div class="row" id="champion-messages">
+    <div class="row userProfile" id="champion-messages">
       {{#autoForm id="updatePicture" collection=Users doc=User type="update"}}
       <div class="col-md-4">
-          {{> afQuickField name="profile.picture"}}
+        {{> afQuickField name="profile.picture"}}
       </div>
       {{/autoForm}}
       {{#autoForm id="updateProfile" collection=Users doc=User type="update"}}
