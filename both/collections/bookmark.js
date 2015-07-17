@@ -5,6 +5,13 @@ ApiBookmarks.helpers({
   return ApiBackends.find({_id :{$in: this.apiIds}})
 }
 
+});
 
-
+ApiBookmarks.allow({
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  }
 });
