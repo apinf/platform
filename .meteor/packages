@@ -66,6 +66,7 @@ meteorhacks:npm
 npm-container
 aldeed:tabular
 benmgreene:moment-range
+frenchbread:elastic-rest
 email
 zimme:active-route
 mfactory:admin-lte
