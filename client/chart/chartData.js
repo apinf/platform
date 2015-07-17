@@ -31,18 +31,24 @@ Template.chartLayout.created = function () {
         var index = new crossfilter(items);
 
         var dateFormat = d3.time.format("%Y-%m-%d-%H");
-
         items.forEach(function (d) {
 
           var stamp = moment(d._source.request_at);
           stamp = stamp.format("YYYY-MM-DD-HH");
           d.ymd = dateFormat.parse(stamp);
+          d.itemsCount =+ data.hits.total;
 
         });
 
-        var dimension = index.dimension(function(d){ return d.ymd; });
+        var timeStampDimension = index.dimension(function(d){ return d.ymd; });
+        var countryDimension = index.dimension(function (d) { return d._source.request_ip_country });
 
-        var group = dimension.group();
+        var timeStampGroup = timeStampDimension.group();
+        var countryGroup = countryDimension.group();
+
+        var totalCountries = countryGroup.reduceSum(function(d) {
+          return d.itemsCount;
+        });
 
         var minDate = d3.min(items, function(d) { return d.ymd; });
         var maxDate = d3.max(items, function(d) { return d.ymd; });
@@ -50,18 +56,34 @@ Template.chartLayout.created = function () {
         var timeScale = d3.time.scale().domain([minDate, maxDate]);
 
         var chart = dc.lineChart("#chart");
+        var country = dc.barChart("#barChart");
+
         chart
           .width(570)
           .height(480)
           .elasticX(true)
           .x(timeScale)
-          .dimension(dimension)
-          .group(group)
+          .dimension(timeStampDimension)
+          .group(timeStampGroup)
           .renderArea(true)
           .dotRadius(3)
           .renderHorizontalGridLines(true)
           .renderVerticalGridLines(true);
-        chart.render();
+
+        country
+          .width(570)
+          .height(480)
+          .dimension(countryDimension)
+          .group(totalCountries)
+          .centerBar(false)
+          .gap(5)
+          .elasticY(true)
+          .x(d3.scale.ordinal().domain(countryDimension))
+          .xUnits(dc.units.ordinal)
+          .renderHorizontalGridLines(true)
+          .renderVerticalGridLines(true);
+
+        dc.renderAll();
 
       }
     });
