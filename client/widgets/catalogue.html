@@ -1,6 +1,16 @@
 <template name="catalogue">
-  <div class="col-md-12">
-    <h3>Available APIs</h3>
-      {{> tabular table=TabularTables.ApiTable class="table table-striped table-bordered table-condensed"}}
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Available APIs</h3>
+      <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+        <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+      <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        {{> tabular table=TabularTables.ApiTable class="table table-striped table-bordered table-condensed"}}
+      </div>
+    </div>
   </div>
 </template>
