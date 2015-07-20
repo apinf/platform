@@ -62,7 +62,7 @@ Template.chartLayout.created = function () {
 
         var timeScale = d3.time.scale().domain([minDate, maxDate]);
 
-        var chart = dc.lineChart("#chart");
+        var chart = dc.lineChart("#lineChart");
         var country = dc.barChart("#barChart");
 
         chart
