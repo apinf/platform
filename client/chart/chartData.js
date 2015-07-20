@@ -63,7 +63,7 @@ Template.chartLayout.created = function () {
         var timeScale = d3.time.scale().domain([minDate, maxDate]);
 
         var chart = dc.lineChart("#lineChart");
-        var country = dc.barChart("#barChart");
+        var countryChart = dc.barChart("#barChart");
 
         chart
           .width(1140)
@@ -77,7 +77,7 @@ Template.chartLayout.created = function () {
           .renderHorizontalGridLines(true)
           .renderVerticalGridLines(true);
 
-        country
+        countryChart
           .width(570)
           .height(250)
           .x(d3.scale.ordinal().domain(countryDimension))
