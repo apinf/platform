@@ -17,3 +17,6 @@ https://apinf.com/api/v1/.../
 
 ## API Documentation
 Initially, the Apinf Administrative API will be documented in [Swagger format](http://swagger.io). Swagger is chosen as it is open-source, vender-neutral, and supported by the Apinf platform itself.
+
+## System Model
+The Apinf system model contains several related data collections. Each collection will be represented by an unique endpoint, with the ability to perform traversals to related data sets.
