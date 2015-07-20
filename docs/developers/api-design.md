@@ -26,3 +26,8 @@ Apinf users will be available via the `/users/` endpoint.
 
 #### Individual Users
 Individual users will be available via `/users/<userId>`
+
+### API Backends
+API Backends will be available via the `/backends/` endpoint.
+
+
