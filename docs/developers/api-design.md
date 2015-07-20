@@ -23,3 +23,6 @@ The Apinf system model contains several related data collections. Each collectio
 
 ### Users
 Apinf users will be available via the `/users/` endpoint.
+
+#### Individual Users
+Individual users will be available via `/users/<userId>`
