@@ -99,16 +99,17 @@ Template.chartLayout.created = function () {
 };
 
 Template.chartLayout.events({
-  "submit .filtering" : function(e){
+  "submit #filtering" : function(e){
     e.preventDefault();
 
     var month = e.target.month.value;
     var year  = e.target.year.value;
+    var limit = e.target.limit.value;
 
     var input = {
       index : "api-umbrella-logs-v1-"+year+"-"+month,
       type  : "log",
-      limit : 1000,
+      limit : limit,
       query : {
         match_all: {}
       }
