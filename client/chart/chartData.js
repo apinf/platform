@@ -1,6 +1,6 @@
 var drawChart;
 
-Template.chartLayout.rendered = function () {
+Template.lineChart.rendered = function () {
 
   // getting current month and year -> providing them for initial query
   var currentYearAndMonth = moment().format("YYYY-MM");
@@ -17,7 +17,7 @@ Template.chartLayout.rendered = function () {
   drawChart(input);
 };
 
-Template.chartLayout.created = function () {
+Template.lineChart.created = function () {
 
   drawChart = function (input) {
 
@@ -38,7 +38,7 @@ Template.chartLayout.created = function () {
           var stamp = moment(d._source.request_at);
           stamp = stamp.format();
           d.ymd = dateFormat.parse(stamp);
-          d.itemsCount =+ data.hits.total;
+          d.itemsCount = +data.hits.total;
 
         });
 
@@ -61,9 +61,10 @@ Template.chartLayout.created = function () {
         var maxDate = d3.max(items, function(d) { return d.ymd; });
 
         var timeScale = d3.time.scale().domain([minDate, maxDate]);
+        var countryScale = d3.scale.ordinal().domain(countryDimension);
 
-        var chart = dc.lineChart("#lineChart");
-        var countryChart = dc.barChart("#barChart");
+        var chart = dc.lineChart("#line-chart");
+        var countryChart = dc.barChart("#bar-chart");
 
         chart
           .width(1140)
@@ -80,7 +81,7 @@ Template.chartLayout.created = function () {
         countryChart
           .width(570)
           .height(250)
-          .x(d3.scale.ordinal().domain(countryDimension))
+          .x(countryScale)
           .dimension(countryDimension)
           .group(totalCountries)
           .centerBar(false)
@@ -98,7 +99,7 @@ Template.chartLayout.created = function () {
 
 };
 
-Template.chartLayout.events({
+Template.lineChart.events({
   "submit #filtering" : function(e){
     e.preventDefault();
 
