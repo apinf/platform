@@ -35,9 +35,9 @@ Template.lineChart.created = function () {
         var dateFormat = d3.time.format.iso;
         items.forEach(function (d) {
 
-          var stamp = moment(d._source.request_at);
-          stamp = stamp.format();
-          d.ymd = dateFormat.parse(stamp);
+          var timeStamp = moment(d._source.request_at);
+          timeStamp = timeStamp.format();
+          d.ymd = dateFormat.parse(timeStamp);
           d.itemsCount = +data.hits.total;
 
         });
