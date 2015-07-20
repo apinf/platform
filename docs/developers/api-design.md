@@ -20,3 +20,6 @@ Initially, the Apinf Administrative API will be documented in [Swagger format](h
 
 ## System Model
 The Apinf system model contains several related data collections. Each collection will be represented by an unique endpoint, with the ability to perform traversals to related data sets.
+
+### Users
+Apinf users will be available via the `/users/` endpoint.
