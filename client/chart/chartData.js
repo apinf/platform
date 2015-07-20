@@ -81,15 +81,16 @@ Template.lineChart.created = function () {
         countryChart
           .width(570)
           .height(250)
-          .x(countryScale)
           .dimension(countryDimension)
           .group(totalCountries)
           .centerBar(false)
           .gap(5)
           .elasticY(true)
+          .x(countryScale)
           .xUnits(dc.units.ordinal)
           .renderHorizontalGridLines(true)
-          .renderVerticalGridLines(true);
+          .renderVerticalGridLines(true)
+          .yAxis();
 
         dc.renderAll();
 
