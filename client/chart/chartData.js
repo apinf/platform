@@ -2,9 +2,11 @@ var drawChart;
 
 Template.chartLayout.rendered = function () {
 
-  // TODO: dynamic input data
+  // getting current month and year -> providing them for initial query
+  var currentYearAndMonth = moment().format("YYYY-MM");
+
   var input = {
-    index : "api-umbrella-logs-v1-2015-07",
+    index : "api-umbrella-logs-v1-"+currentYearAndMonth,
     type  : "log",
     limit : 10000,
     query : {
@@ -30,11 +32,11 @@ Template.chartLayout.created = function () {
 
         var index = new crossfilter(items);
 
-        var dateFormat = d3.time.format("%Y-%m-%d-%H");
+        var dateFormat = d3.time.format.iso;
         items.forEach(function (d) {
 
           var stamp = moment(d._source.request_at);
-          stamp = stamp.format("YYYY-MM-DD-HH");
+          stamp = stamp.format();
           d.ymd = dateFormat.parse(stamp);
           d.itemsCount =+ data.hits.total;
 
