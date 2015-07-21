@@ -1,6 +1,7 @@
-var drawChart;
-
 Template.lineChart.rendered = function () {
+
+  // appending loading state
+  $('#loadingState').html("Loading...");
 
   // getting current month and year -> providing them for initial query
   var currentYearAndMonth = moment().format("YYYY-MM");
@@ -24,6 +25,8 @@ Template.lineChart.created = function () {
     Meteor.call("getChartData", input, function (err, data) {
       if (err) {
 
+        // removing loading state once loaded
+        $('#loadingState').html("Loaded");
         alert("Data is not found!");
 
       } else {
@@ -92,6 +95,9 @@ Template.lineChart.created = function () {
           .renderVerticalGridLines(true)
           .yAxis();
 
+        // removing loading state once loaded
+        $('#loadingState').html("Loaded");
+
         dc.renderAll();
 
       }
@@ -99,28 +105,3 @@ Template.lineChart.created = function () {
   }
 
 };
-
-Template.filtering.events({
-  "change #filteringForm" : function(e){
-    console.log("Changed");
-
-    e.preventDefault();
-
-    var month = e.currentTarget.month.value;
-    var year  = e.currentTarget.year.value;
-    var limit = e.currentTarget.limit.value;
-
-    var input = {
-      index : "api-umbrella-logs-v1-"+year+"-"+month,
-      type  : "log",
-      limit : limit,
-      query : {
-        match_all: {}
-      }
-    };
-
-
-    drawChart(input);
-  }
-});
-
