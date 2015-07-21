@@ -9,11 +9,6 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  documentation_link: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url
-  },
   sort_order: {
     type: Number,
     optional: true
