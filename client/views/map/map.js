@@ -1,5 +1,4 @@
 // Creates variable that can be used in both .rendered and .created
-var drawMap;
 Template.map.rendered = function() {
   var input = {
     index : "api-umbrella-logs-v1-2015-07",
