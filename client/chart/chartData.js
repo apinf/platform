@@ -7,8 +7,8 @@ Template.lineChart.rendered = function () {
   var currentYearAndMonth = moment().format("YYYY-MM");
 
   var input = {
-    index : "api-umbrella-logs-v1-"+currentYearAndMonth,
-    type  : "log",
+    index : "",
+    type  : "",
     limit : 10000,
     query : {
       match_all: {}
@@ -68,6 +68,7 @@ Template.lineChart.created = function () {
 
         var chart = dc.lineChart("#line-chart");
         var countryChart = dc.barChart("#bar-chart");
+        var dataTable = dc.dataTable("#data-table");
 
         chart
           .width(1140)
@@ -82,18 +83,28 @@ Template.lineChart.created = function () {
           .renderVerticalGridLines(true);
 
         countryChart
-          .width(570)
+          .width(1140)
           .height(250)
           .dimension(countryDimension)
           .group(totalCountries)
-          .centerBar(false)
-          .gap(5)
-          .elasticY(true)
           .x(countryScale)
           .xUnits(dc.units.ordinal)
           .renderHorizontalGridLines(true)
-          .renderVerticalGridLines(true)
-          .yAxis();
+          .renderVerticalGridLines(true);
+
+        dataTable.width(960).height(800)
+          .dimension(timeStampDimension)
+          .group(function(d) { return "Logs"
+          })
+          .size(100)							// number of rows to return
+          .columns([
+            function(d) { return d.ymd; },
+            function(d) { return d._source.request_ip; },
+            function(d) { return d._source.response_time; },
+            function(d) { return d._source.request_ip_country; }
+          ])
+          .sortBy(function(d){ return -d.ymd; })
+          .order(d3.ascending);
 
         // removing loading state once loaded
         $('#loadingState').html("Loaded");

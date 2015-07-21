@@ -3,13 +3,14 @@
   <form id="filteringForm">
     Month:
     <select name="month" >
+      <option value="00">-</option>
       <option value="01">January</option>
       <option value="02">February</option>
       <option value="03">March</option>
       <option value="04">April</option>
       <option value="05">May</option>
       <option value="06">June</option>
-      <option value="07" selected>July</option>
+      <option value="07">July</option>
       <option value="08">August</option>
       <option value="09">September</option>
       <option value="10">October</option>
@@ -18,8 +19,9 @@
     </select>
     Year:
     <select name="year">
+      <option value="0000">-</option>
       <option value="2014">2014</option>
-      <option value="2015" selected>2015</option>
+      <option value="2015">2015</option>
     </select>
     Limit:
     <input name="limit" type="text" value="10000" />
@@ -45,4 +47,21 @@
 <template name="barChart">
   <div id="bar-chart">
   </div>
+</template>
+
+<template name="dataTable">
+  <table class='table table-hover' id='data-table'>
+    <thead>
+    <tr class='header'>
+      <th>Time</th>
+      <th>Request IP</th>
+      <th>Response time</th>
+      <th>Request country</th>
+    </tr>
+    </thead>
+  </table>
+</template>
+
+<template name="volumeChart">
+  <div id="volume-chart"></div>
 </template>
