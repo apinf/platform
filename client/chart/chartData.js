@@ -24,7 +24,7 @@ Template.lineChart.created = function () {
     Meteor.call("getChartData", input, function (err, data) {
       if (err) {
 
-        console.log(err)
+        alert("Data is not found!");
 
       } else {
 
@@ -100,13 +100,15 @@ Template.lineChart.created = function () {
 
 };
 
-Template.lineChart.events({
-  "submit #filtering" : function(e){
+Template.filtering.events({
+  "change #filteringForm" : function(e){
+    console.log("Changed");
+
     e.preventDefault();
 
-    var month = e.target.month.value;
-    var year  = e.target.year.value;
-    var limit = e.target.limit.value;
+    var month = e.currentTarget.month.value;
+    var year  = e.currentTarget.year.value;
+    var limit = e.currentTarget.limit.value;
 
     var input = {
       index : "api-umbrella-logs-v1-"+year+"-"+month,
@@ -117,7 +119,8 @@ Template.lineChart.events({
       }
     };
 
-    drawChart(input)
+
+    drawChart(input);
   }
 });
 
