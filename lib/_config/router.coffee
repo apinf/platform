@@ -7,7 +7,8 @@ Router.configure
   routeControllerNameConverter: "camelCase"
 
   onBeforeAction: ->
-  	# Redirect to set username if required
+    $('body').addClass('sidebar-mini')
+    # Redirect to set username if required
     if Config.username and Meteor.userId() and not Meteor.user().username
       @redirect '/setUserName'
     @next()
