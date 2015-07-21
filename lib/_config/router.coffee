@@ -12,6 +12,12 @@ Router.configure
     if Config.username and Meteor.userId() and not Meteor.user().username
       @redirect '/setUserName'
     @next()
+# TODO: redirect to Sign in page from any page of master layout, ex. dashboard
+#    if !Meteor.user()
+#      @redirect 'atSignIn'
+#      @next()
+#    else
+#      @next()
 
 
 Router.waitOn ->
