@@ -4,9 +4,11 @@
     {{> navbar}}
     {{> sidebar}}
     <div class="content-wrapper">
-      {{#momentum plugin='iron-router' options=momentumIRTransition}}
-      {{> yield }}
-      {{/momentum}}
+      <section class="content">
+        {{#momentum plugin='iron-router' options=momentumIRTransition}}
+        {{> yield }}
+        {{/momentum}}
+      </section>
     </div>
     {{/AdminLTE}}
     {{> autoformModals}}
