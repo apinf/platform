@@ -45,3 +45,12 @@ paths:
       user_id:
         type: string
         description: Unique identifier representing a specific user.
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
