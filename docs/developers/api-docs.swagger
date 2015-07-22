@@ -39,12 +39,42 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /backends:
+    get:
+      summary: API Backends
+      description: |
+        API Backends returns an array of configured API Endpoints with their associated backend.
+      parameters:
+        - name: id
+          in: query
+          description: ID of a given API Backend.
+          required: false
+          type: string
+          format: uuid
+      tags:
+        - Backends
+      responses:
+        200:
+          description: An array of API backends
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Backends'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   definitions:
   User:
     properties:
       user_id:
         type: string
         description: Unique identifier representing a specific user.
+  Backends:
+    properties:
+      id:
+        type: string
+        description: Unique identifier representing a specific API Backend
   Error:
     properties:
       code:
