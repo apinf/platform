@@ -5,11 +5,12 @@ Template.lineChart.rendered = function () {
 
   // getting current month and year -> providing them for initial query
   var currentYearAndMonth = moment().format("YYYY-MM");
+  var initialLimit = 10000;
 
   var input = {
-    index : "",
-    type  : "",
-    limit : 10000,
+    index : "api-umbrella-logs-v1-"+currentYearAndMonth,
+    type  : "log",
+    limit : initialLimit,
     query : {
       match_all: {}
     }
@@ -99,9 +100,10 @@ Template.lineChart.created = function () {
           .size(100)							// number of rows to return
           .columns([
             function(d) { return d.ymd; },
+            function(d) { return d._source.request_ip_country; },
             function(d) { return d._source.request_ip; },
             function(d) { return d._source.response_time; },
-            function(d) { return d._source.request_ip_country; }
+            function(d) { return d._source.request_path; }
           ])
           .sortBy(function(d){ return -d.ymd; })
           .order(d3.ascending);
