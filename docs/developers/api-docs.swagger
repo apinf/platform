@@ -20,7 +20,7 @@ paths:
       description: |
         The Users endpoint returns information about Apinf users
       parameters:
-        - name: user_id
+        - name: id
           in: query
           description: ID of a given user.
           required: false
@@ -67,7 +67,7 @@ paths:
   definitions:
   Users:
     properties:
-      user_id:
+      id:
         type: string
         description: Unique identifier representing a specific user.
   Backends:
