@@ -1,4 +1,4 @@
-Template.filtering.events({
+Template.filterData.events({
   "change #filteringForm" : function(e){
 
     // appending loading state
