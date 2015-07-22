@@ -1,6 +1,6 @@
 ApiBackendConfigurations = new FS.Collection("apiBackendConfigurations", {
   // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("apiBackendConfigurations", {path: "~/apinf/apiConfigurations"})]
+  stores: [new FS.Store.FileSystem("apiBackendConfigurations", {path: "~/Dev/meteorApps/api-umbrella-dashboard/uploads/apiBackendConfigs"})]
 });
 
 if (Meteor.isServer) {

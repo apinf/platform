@@ -1,0 +1,118 @@
+---
+apis:
+- _id: 95d0e433-91e8-4c8d-8c31-97afcfe7de7e
+  backend_host: maps.googleapis.com
+  backend_protocol: http
+  balance_algorithm: least_conn
+  created_at: 2014-11-12 15:42:27.461000000 Z
+  created_by: bf9c6314-8946-4204-b106-79d26260fb94
+  frontend_host: apinf.com
+  name: Google Maps
+  servers:
+  - _id: 17f52375-4984-4348-9588-bee179404f22
+    host: maps.googleapis.com
+    port: 80
+  settings:
+    _id: 6c58a7a4-3e56-46c7-b604-748e88b7a3c7
+    disable_api_key: 
+    error_data: {}
+    error_templates: {}
+    rate_limit_mode: 
+    require_https: 
+  sort_order: 1
+  updated_at: 2014-11-13 07:37:58.264000000 Z
+  updated_by: bf9c6314-8946-4204-b106-79d26260fb94
+  url_matches:
+  - _id: 7240c758-d380-436b-b658-730d3737ddc0
+    backend_prefix: "/"
+    frontend_prefix: "/google/"
+  version: 2
+- _id: 6de92ad1-1994-4fbf-9faa-bec521025e70
+  backend_host: api.avoindata.net
+  backend_protocol: http
+  balance_algorithm: least_conn
+  created_at: 2014-11-13 07:19:50.254000000 Z
+  created_by: bf9c6314-8946-4204-b106-79d26260fb94
+  frontend_host: apinf.com
+  name: Avoin Data
+  servers:
+  - _id: 69fea0cb-8084-49a7-93fb-230394c0513c
+    host: api.avoindata.net
+    port: 80
+  settings:
+    _id: b3694fa7-6127-42b8-919d-16f5bd5ad9d5
+    anonymous_rate_limit_behavior: ip_fallback
+    authenticated_rate_limit_behavior: all
+    disable_api_key: true
+    error_data: {}
+    error_templates: {}
+    pass_api_key_query_param: false
+    rate_limit_mode: 
+    require_https: 
+  sort_order: 2
+  updated_at: 2014-11-14 09:54:57.729000000 Z
+  updated_by: 733dff2a-3b61-48c9-a899-a8ee7841151f
+  url_matches:
+  - _id: 5ffe3c49-01a1-4786-92ea-4ac31b27d9ce
+    backend_prefix: "/"
+    frontend_prefix: "/avoindata/"
+  version: 7
+- _id: af3490f6-5a06-486c-b9a2-e9e82f7bcbac
+  backend_host: bazaar.educloudalliance.org
+  backend_protocol: https
+  balance_algorithm: least_conn
+  created_at: 2014-11-13 09:19:07.805000000 Z
+  created_by: bf9c6314-8946-4204-b106-79d26260fb94
+  frontend_host: apinf.com
+  name: Educloud
+  servers:
+  - _id: 613a5e97-682f-4f17-9f7e-63a3f990788b
+    host: bazaar.educloudalliance.org
+    port: 443
+  settings:
+    _id: e9ff66a6-beaf-4702-8f38-532f9a073011
+    anonymous_rate_limit_behavior: ip_fallback
+    append_query_string: ''
+    authenticated_rate_limit_behavior: all
+    disable_api_key: true
+    error_data: {}
+    error_templates: {}
+    rate_limit_mode: 
+    require_https: 
+  sort_order: 3
+  updated_at: 2014-11-13 09:21:06.020000000 Z
+  updated_by: bf9c6314-8946-4204-b106-79d26260fb94
+  url_matches:
+  - _id: 502e2b4a-85f0-4e84-bd46-62c488335ce7
+    backend_prefix: "/api/"
+    frontend_prefix: "/educloudalliance/"
+  version: 3
+- _id: 40e03c80-affa-49c0-8db7-60a75f2889bf
+  backend_host: apisuomi.fi
+  backend_protocol: http
+  balance_algorithm: least_conn
+  created_at: 2015-01-01 11:07:23.167000000 Z
+  created_by: 733dff2a-3b61-48c9-a899-a8ee7841151f
+  frontend_host: apinf.com
+  name: Lentodiilit API
+  servers:
+  - _id: 90591a50-a6e0-4f06-9bf8-767fbc0a352e
+    host: apisuomi.fi
+    port: 80
+  settings:
+    _id: d174999e-57aa-4df8-b6dc-7b5e18da39cc
+    anonymous_rate_limit_behavior: ip_fallback
+    authenticated_rate_limit_behavior: all
+    disable_api_key: true
+    error_data: {}
+    error_templates: {}
+    rate_limit_mode: unlimited
+    require_https: 
+  sort_order: 4
+  updated_at: 2015-01-01 11:34:35.709000000 Z
+  updated_by: 733dff2a-3b61-48c9-a899-a8ee7841151f
+  url_matches:
+  - _id: 5e2426d1-9341-4f23-9fb2-89a0f288bb70
+    backend_prefix: "/apis/lentodiilit/api/"
+    frontend_prefix: "/lentodiilit/"
+  version: 13

@@ -5,6 +5,14 @@ Template.importApiConfiguration.events({
 
     // Insert into filesystem collection
     var insertedFile = ApiBackendConfigurations.insert(file);
-    console.log(insertedFile);
+
+    // Converting YAML file to JSON
+    if(insertedFile){
+      Meteor.call("convertYamlToJson", file.name, function (err, file) {
+        if (err) console.log(err);
+        console.log(file);
+      });
+    }
+
   }
-})
+});
