@@ -34,7 +34,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/Users'
         default:
           description: Unexpected error
           schema:
@@ -65,7 +65,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   definitions:
-  User:
+  Users:
     properties:
       user_id:
         type: string
