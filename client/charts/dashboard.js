@@ -1,4 +1,4 @@
-Template.lineChart.rendered = function () {
+Template.chartsLayout.rendered = function () {
 
   // appending loading state
   $('#loadingState').html("Loading...");
@@ -19,7 +19,7 @@ Template.lineChart.rendered = function () {
   drawChart(input);
 };
 
-Template.lineChart.created = function () {
+Template.chartsLayout.created = function () {
 
   drawChart = function (input) {
 

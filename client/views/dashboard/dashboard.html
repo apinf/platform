@@ -1,24 +1,7 @@
 <template name="dashboard">
   <div class="template-dashboard">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          {{> filterData}}
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          {{> lineChart}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          {{> barChart}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          {{> dataTable}}
-        </div>
-      </div>
+      {{> chartsLayout}}
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12">
           <p>
