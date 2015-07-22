@@ -13,3 +13,35 @@ schemes:
 basePath: /api/v1
 produces:
   - application/json
+paths:
+  /users:
+    get:
+      summary: Apinf Users
+      description: |
+        The Users endpoint returns information about Apinf users
+      parameters:
+        - name: id
+          in: query
+          description: ID of a given user.
+          required: false
+          type: string
+          format: uuid
+      tags:
+        - Users
+      responses:
+        200:
+          description: An array of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  definitions:
+  User:
+    properties:
+      user_id:
+        type: string
+        description: Unique identifier representing a specific user.
