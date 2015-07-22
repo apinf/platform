@@ -1,0 +1,15 @@
+# This document describes the Apinf Administrative API
+swagger: '2.0'
+info:
+  title: Apinf API
+  description: Manage the Apinf platform via an Administrative API
+  version: "0.1.0"
+# the domain of the service
+host: apinf.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /api/v1
+produces:
+  - application/json
