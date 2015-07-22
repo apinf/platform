@@ -30,7 +30,6 @@ Template.map.created = function() {
     var density = 1000;
     var blur = 5;
 
-
     // Gets data from the ElasticSearch
     Meteor.call("getChartData", input, function(err, data) {
       var items = data.hits.hits;
