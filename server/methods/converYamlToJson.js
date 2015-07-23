@@ -13,11 +13,16 @@ Meteor.methods({
 
       try {
         jsonFile = YAML.safeLoad(fs.readFileSync(path, 'utf8'));
+
+        jsonFile.apis.forEach(function (api) {
+          ApiBackends.insert(api);
+        });
+
       } catch (e) {
         console.log(e);
       }
 
-      return jsonFile;
+      return "Done";
     }else{
       return "Ooops";
     }
