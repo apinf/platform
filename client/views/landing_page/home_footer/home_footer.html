@@ -14,8 +14,12 @@
         </div>
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
+            {{#if User}}
+            <li><a href="/dashboard">Dashboard</a></li>
+            {{else}}
             <li><a href="/sign-in">Sign in</a></li>
             <li><a href="/sign-up">Sign up</a></li>
+            {{/if}}
           </ul>
         </div>
       </div>
