@@ -5,18 +5,21 @@ Meteor.methods({
 
     var item = ApiBackendConfigurations.findOne({ "original.name": fileName},{sort: {uploadedAt: -1}});
 
+    if (item) {
+      var fileFullName = item.copies.apiBackendConfigurations.key;
+      var path = projectRoot + "/uploads/apiBackendConfigs/" + fileFullName;
 
-    var fileFullName = item.copies.apiBackendConfigurations.key;
-    var path = projectRoot + "/uploads/apiBackendConfigs/" + fileFullName;
+      var jsonFile;
 
-    var jsonFile;
+      try {
+        jsonFile = YAML.safeLoad(fs.readFileSync(path, 'utf8'));
+      } catch (e) {
+        console.log(e);
+      }
 
-    try {
-      jsonFile = YAML.safeLoad(fs.readFileSync(path, 'utf8'));
-    } catch (e) {
-      console.log(e);
+      return jsonFile;
+    }else{
+      return "Ooops";
     }
-
-    return jsonFile;
   }
 });
