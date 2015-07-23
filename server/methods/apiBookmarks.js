@@ -1,5 +1,5 @@
 Meteor.methods({
-  "bookmarkApi": function (backendId, currentUserId) {
+  "toggleBookmarkApi": function (backendId, currentUserId) {
 
     var apiBackendIds = [];
     apiBackendIds.push(backendId);
@@ -11,28 +11,30 @@ Meteor.methods({
     if (existingUserBookmarks) {
       var apiIds = existingUserBookmarks.apiIds;
 
-
       // Check if bookmark exists (returns -1 if not)
       var bookmarkIndex = apiIds.indexOf(backendId);
 
       // Converts bookmarkIndex to boolean for easier comparison
       var bookmarkExists = (bookmarkIndex >= 0) ? true : false;
 
-
       // Checks if bookmark doesnt exist.
       if (!bookmarkExists) {
-        // appending backendid to apiIds
+        // appending backendId to apiIds
         apiIds.push(backendId);
-        // Updating current user apiBookmarks
-        ApiBookmarks.update({userId: currentUserId},{$set: {apiIds: apiIds} });
+      } else {
+        // removing backendId from apiIds
+        apiIds.splice(bookmarkIndex, 1);
       }
-    }
-    else {
+
+      // Updating current user apiBookmarks
+      ApiBookmarks.update({userId: currentUserId},{$set: {apiIds: apiIds} });
+
+    } else {
       // Insert bookmark to database
       ApiBookmarks.insert(userBookmarks);
     }
+
+    return apiIds;
   }
-
-
 });
 
