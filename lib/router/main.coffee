@@ -22,3 +22,13 @@ Router.map ->
   @route "swagger",
     path: "/swagger"
     layoutTemplate: "masterLayout"
+
+  @route "importApiConfiguration",
+    path: "import/api"
+    layoutTemplate: "masterLayout"
+    render: "importApiConfiguration"
+
+  @route "importSwaggerConfiguration",
+    path: "import/swagger"
+    layoutTemplate: "masterLayout"
+    render: "importSwaggerConfiguration"
