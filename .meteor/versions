@@ -16,12 +16,14 @@ aldeed:template-extension@3.4.3
 autoupdate@1.2.1
 base64@1.0.3
 benmgreene:moment-range@1.0.7
+bevanhunt:leaflet@0.3.18
 binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 bruz:github-api@0.2.4_1
 brylie:api-umbrella@0.2.8
+brylie:leaflet-heat@0.1.0
 callback-hook@1.0.3
 cfs:access-point@0.1.49
 cfs:base-package@0.0.30
