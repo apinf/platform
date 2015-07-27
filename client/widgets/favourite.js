@@ -14,7 +14,7 @@ Template.favourite.events({
 
 Template.favourite.helpers({
   isBookmarked: function () {
-
+    /7 Get current user bookmark (should be only one API Bookmarks result available)
     var userBookmarks = ApiBookmarks.findOne();
     // get array of API IDs
     var apiIds = userBookmarks.apiIds;
