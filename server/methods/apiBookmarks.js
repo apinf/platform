@@ -12,6 +12,7 @@ Meteor.methods({
     
     // Check if user has existing bookmarks
     if (existingUserBookmarks) {
+      // Get an array of bookmark IDs
       var apiIds = existingUserBookmarks.apiIds;
 
       // Check if bookmark exists (returns -1 if not)
