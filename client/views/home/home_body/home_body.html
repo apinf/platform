@@ -89,7 +89,10 @@
           <div class="clearfix"></div>
           <h2 class="section-heading">Getting started</h2>
           <p class="lead">Just create an account and be on your way! The developer dashboard offers you a one-stop location from discovering APIs to tracking the API calls from your application.</p>
+          {{#if User}}
+          {{else}}
           <p class="lead"><a href="/sign-up">Sign up</a> to see all features.</p>
+          {{/if}}
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
           <i class="mdi mdi-view-dashboard"></i>
