@@ -7,4 +7,6 @@ Material Design Icons
 https://materialdesignicons.com/
 
 Usage
+```html
 <i class="mdi mdi-icon-name"></i>
+```
