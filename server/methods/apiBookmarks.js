@@ -6,7 +6,8 @@ Meteor.methods({
 
     // object to store currentUserId and the Api ID
     var userBookmarks = {userId: currentUserId, apiIds: apiBackendIds};
-
+    
+    // If possible, get the bookmarks for current user.
     var existingUserBookmarks = ApiBookmarks.findOne({userId: currentUserId});
     if (existingUserBookmarks) {
       var apiIds = existingUserBookmarks.apiIds;
