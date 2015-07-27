@@ -3,6 +3,10 @@ Router.map ->
     path: "/"
     layoutTemplate: "homeLayout"
 
+  @route "landingPage",
+    path: "/landing"
+    layoutTemplate: "homeLayout"
+
   @route "apiBackends",
     path: "/apibackends"
     layoutTemplate: "masterLayout"

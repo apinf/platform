@@ -49,6 +49,7 @@ cmather:handlebars-server@2.0.0
 coffeescript@1.0.6
 comments@0.1.0
 d3js:d3@3.5.5
+dapearce:material-icons@0.1.2
 dburles:collection-helpers@1.0.3
 dburles:google-maps@1.1.1
 ddp@1.1.0
