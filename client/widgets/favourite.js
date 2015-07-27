@@ -30,5 +30,4 @@ Template.favourite.helpers({
 Template.favourite.created = function () {
   // subscribe to user bookmarks
   this.subscribe('myApiBookmarks');
-  this.subscribe('myBookmarkedApis');
 }
