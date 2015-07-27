@@ -1,27 +1,25 @@
 <template name="homeFooter">
   <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10">
-          <ul class="list-inline social-icons icon-circle">
-            <li><a href="https://twitter.com/APInf_Suomi"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li><a href="https://www.facebook.com/apinf"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li><a href="https://github.com/apinf/api-umbrella-dashboard"><i class="fa fa-github"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-2">
-          <ul class="list-inline quicklinks">
-            {{#if User}}
-            <li><a href="/dashboard">Dashboard</a></li>
-            {{else}}
-            <li><a href="/sign-in">Sign in</a></li>
-            <li><a href="/sign-up">Sign up</a></li>
-            {{/if}}
-          </ul>
-        </div>
+    <div class="row">
+      <div class="col-lg-10">
+        <ul class="list-inline social-icons icon-circle">
+          <li><a href="https://twitter.com/APInf_Suomi"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li><a href="https://www.facebook.com/apinf"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li><a href="https://github.com/apinf/api-umbrella-dashboard"><i class="fa fa-github"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+        <ul class="list-inline quicklinks">
+          {{#if User}}
+          <li><a href="/dashboard">Dashboard</a></li>
+          {{else}}
+          <li><a href="/sign-in">Sign in</a></li>
+          <li><a href="/sign-up">Sign up</a></li>
+          {{/if}}
+        </ul>
       </div>
     </div>
   </footer>
