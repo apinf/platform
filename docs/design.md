@@ -1,4 +1,4 @@
-Icons
+# Icons
 
 Package
 https://atmospherejs.com/dapearce/material-icons
@@ -8,4 +8,3 @@ https://materialdesignicons.com/
 
 Usage
 <i class="mdi mdi-icon-name"></i>
-
