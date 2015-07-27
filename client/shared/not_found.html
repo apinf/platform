@@ -1,3 +1,12 @@
 <template name="notFound">
-	<h1>{{_ "not_found"}}</h1>
+  <div class="error-page">
+    <h2 class="headline text-yellow"> 404</h2>
+    <div class="error-content">
+      <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+      <p>
+        We could not find the page you were looking for.<br>
+        Meanwhile, you may <a href="javascript:void(0)" onClick="history.go(-1); return false;">return to a previous page</a>.
+      </p>
+    </div>
+  </div>
 </template>
