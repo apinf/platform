@@ -9,6 +9,8 @@ Meteor.methods({
     
     // If possible, get the bookmarks for current user.
     var existingUserBookmarks = ApiBookmarks.findOne({userId: currentUserId});
+    
+    // Check if user has existing bookmarks
     if (existingUserBookmarks) {
       var apiIds = existingUserBookmarks.apiIds;
 
