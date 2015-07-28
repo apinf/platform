@@ -24,7 +24,7 @@ Schema.contact = new SimpleSchema({
     max: 1000,
     optional: false,
     autoform: {
-      rows: 3,
+      rows: 5,
       placeholder: 'Your message'
     }
   }
