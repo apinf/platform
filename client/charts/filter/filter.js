@@ -1,4 +1,4 @@
-Template.filterData.events({
+Template.chartsLayout.events({
   "change #filteringForm" : function(e){
 
     // appending loading state
@@ -35,7 +35,6 @@ Template.filterData.events({
       ]
     };
 
-
-    drawChart(input);
+    getData(input);
   }
 });
