@@ -6,13 +6,7 @@ Meteor.methods({
       data.type,
       data.limit,
       data.query,
-      [
-        'request_at',
-        'request_ip_country',
-        'request_ip',
-        'response_time',
-        'request_path'
-      ]
+      data.fields
     );
 
     return newSearch.doSearch();
