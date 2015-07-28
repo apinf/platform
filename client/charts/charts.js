@@ -13,7 +13,14 @@ Template.chartsLayout.rendered = function () {
     limit : initialLimit,
     query : {
       match_all: {}
-    }
+    },
+    fields: [
+      'request_at',
+      'request_ip_country',
+      'request_ip',
+      'response_time',
+      'request_path'
+    ]
   };
 
   drawChart(input);
@@ -39,15 +46,15 @@ Template.chartsLayout.created = function () {
         var dateFormat = d3.time.format.iso;
         items.forEach(function (d) {
 
-          var timeStamp = moment(d._source.request_at);
+          var timeStamp = moment(d.fields.request_at[0]);
           timeStamp = timeStamp.format();
-          d.ymd = dateFormat.parse(timeStamp);
-          d.itemsCount = +data.hits.total;
+          d.fields.ymd = dateFormat.parse(timeStamp);
+          d.fields.itemsCount = +data.hits.total;
 
         });
 
-        var timeStampDimension = index.dimension(function(d){ return d.ymd; });
-        var countryDimension = index.dimension(function (d) { return d._source.request_ip_country });
+        var timeStampDimension = index.dimension(function(d){ return d.fields.ymd; });
+        var countryDimension = index.dimension(function (d) { return d.fields.request_ip_country });
 
         var timeStampGroup = timeStampDimension.group();
         var countryGroup = countryDimension.group();
@@ -58,11 +65,11 @@ Template.chartsLayout.created = function () {
           .group(all);
 
         var totalCountries = countryGroup.reduceSum(function(d) {
-          return d.itemsCount;
+          return d.fields.itemsCount;
         });
 
-        var minDate = d3.min(items, function(d) { return d.ymd; });
-        var maxDate = d3.max(items, function(d) { return d.ymd; });
+        var minDate = d3.min(items, function(d) { return d.fields.ymd; });
+        var maxDate = d3.max(items, function(d) { return d.fields.ymd; });
 
         var timeScale = d3.time.scale().domain([minDate, maxDate]);
         var countryScale = d3.scale.ordinal().domain(countryDimension);
@@ -99,17 +106,17 @@ Template.chartsLayout.created = function () {
           })
           .size(100)							// number of rows to return
           .columns([
-            function(d) { return d.ymd; },
-            function(d) { return d._source.request_ip_country; },
-            function(d) { return d._source.request_ip; },
-            function(d) { return d._source.response_time; },
-            function(d) { return d._source.request_path; }
+            function(d) { return d.fields.ymd; },
+            function(d) { return d.fields.request_ip_country; },
+            function(d) { return d.fields.request_ip; },
+            function(d) { return d.fields.response_time; },
+            function(d) { return d.fields.request_path; }
           ])
-          .sortBy(function(d){ return -d.ymd; })
+          .sortBy(function(d){ return -d.fields.ymd; })
           .order(d3.ascending);
 
         // removing loading state once loaded
-        $('#loadingState').html("Loaded");
+        $('#loadingState').html("Loaded! Took <b>" + data.took + "</b>ms");
 
         dc.renderAll();
 

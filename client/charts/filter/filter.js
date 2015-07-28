@@ -25,7 +25,14 @@ Template.filterData.events({
       limit : limit,
       query : {
         match_all: {}
-      }
+      },
+      fields: [
+        'request_at',
+        'request_ip_country',
+        'request_ip',
+        'response_time',
+        'request_path'
+      ]
     };
 
 
