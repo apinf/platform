@@ -89,6 +89,7 @@ Template.chartsLayout.created = function () {
     var timeScale = d3.time.scale().domain([minDate, maxDate]);
     var countryScale = d3.scale.ordinal().domain(countryDimension);
 
+
     return {
       timeStampDimension  : timeStampDimension,
       countryDimension    : countryDimension,
@@ -97,8 +98,7 @@ Template.chartsLayout.created = function () {
       totalCountries      : totalCountries,
       timeScale           : timeScale,
       countryScale        : countryScale,
-      took                : data.took,
-      items               : items
+      took                : data.took
 
     };
 
@@ -114,6 +114,28 @@ Template.chartsLayout.created = function () {
     var timeScale           = parsedData.timeScale;
     var countryScale        = parsedData.countryScale;
     var took                = parsedData.took;
+
+    var dataSet = []
+
+    console.log(countryDimension.top(Infinity));
+    console.log(timeStampDimension.top(Infinity))
+
+    timeStampDimension.top(Infinity).forEach(function (e) {
+
+      var country;
+
+      try{
+        country = e.fields.request_ip_country[0]
+      }catch(e){
+        country = ""
+        console.log("error")
+      }
+
+      dataSet.push({
+        "time": e.fields.request_at[0],
+        "country": country
+      });
+    });
 
     var chart = dc.lineChart("#line-chart");
     var countryChart = dc.barChart("#bar-chart");
@@ -160,16 +182,7 @@ Template.chartsLayout.created = function () {
         pushState: false
       },
       dataset: {
-        records: [
-          {
-            "band": "Weezer",
-            "song": "El Scorcho"
-          },
-          {
-            "band": "Chevelle",
-            "song": "Family System"
-          }
-        ],
+        records: dataSet,
         perPageDefault: 50,
         perPageOptions: [50, 100, 200, 500, 1000, 2000, 5000 ,10000]
       }
@@ -177,16 +190,24 @@ Template.chartsLayout.created = function () {
 
     function RefreshTable() {
       dc.events.trigger(function () {
-        dynatable.settings.dataset.originalRecords = [
-          {
-            "band": "Weezer",
-            "song": "El Scorcho"
-          },
-          {
-            "band": "Chevelle",
-            "song": "Family System"
+        var dataSet = []
+        timeStampDimension.top(Infinity).forEach(function (e) {
+
+          var country;
+
+          try{
+            country = e.fields.request_ip_country[0]
+          }catch(e){
+            country = ""
+            console.log("error")
           }
-        ];
+
+          dataSet.push({
+            "time": e.fields.request_at[0],
+            "country": country
+          });
+        });
+        dynatable.settings.dataset.originalRecords = dataSet;
         dynatable.process();
       });
     };
