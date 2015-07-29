@@ -82,10 +82,6 @@ ApiBackendsSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
-  response_headers: {
-    type: Boolean,
-    optional: true
-  },
   matcher_type: {
     type: String,
     optional: true
@@ -242,6 +238,10 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true
   },
 
+  "custom_rate_limits.$.response_headers": {
+    type: Boolean,
+    optional: true
+},
   anonymous_rate_limit_behavior: {
     type: String,
     optional: true
