@@ -78,23 +78,6 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
     regEx: /^[a-z0-9A-Z_]{3,15}$/
   },
-  duration: {
-    type: Number,
-    optional: true,
-    label: 'Duration'
-  },
-  accuracy:{
-    type: Number,
-    optional: true
-  },
-  limit_by: {
-    type: String,
-    optional: true
-  },
-  limit: {
-    type: Number,
-    optional: true
-  },
   distributed: {
     type: Boolean,
     optional: true
@@ -227,8 +210,38 @@ ApiBackendsSchema = new SimpleSchema({
       'Custom rate limits',
       'Unlimited requests'
     ],
-    label: 'Rate limit'
   },
+
+  custom_rate_limits: {
+    type: [Object],
+    optional: true
+  },
+  "custom_rate_limits.$.duration": {
+    type: String,
+    optional: true
+  },
+  "custom_rate_limits.$.accuracy": {
+    type: Number,
+    optional: true,
+    allowedValues: [
+      'Seconds',
+      'Minutes',
+      'Hours'
+    ]
+  },
+  "custom_rate_limits.$.limit_by": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'API key',
+      'IP Address'
+    ]
+  },
+  "custom_rate_limits.$.limit": {
+    type: Number,
+    optional: true
+  },
+
   anonymous_rate_limit_behavior: {
     type: String,
     optional: true
