@@ -115,27 +115,8 @@ Template.chartsLayout.created = function () {
     var countryScale        = parsedData.countryScale;
     var took                = parsedData.took;
 
-    var dataSet = []
-
-    console.log(countryDimension.top(Infinity));
     console.log(timeStampDimension.top(Infinity))
 
-    timeStampDimension.top(Infinity).forEach(function (e) {
-
-      var country;
-
-      try{
-        country = e.fields.request_ip_country[0]
-      }catch(e){
-        country = ""
-        console.log("error")
-      }
-
-      dataSet.push({
-        "time": e.fields.request_at[0],
-        "country": country
-      });
-    });
 
     var chart = dc.lineChart("#line-chart");
     var countryChart = dc.barChart("#bar-chart");
@@ -182,32 +163,15 @@ Template.chartsLayout.created = function () {
         pushState: false
       },
       dataset: {
-        records: dataSet,
-        perPageDefault: 50,
-        perPageOptions: [50, 100, 200, 500, 1000, 2000, 5000 ,10000]
+        records: setUpDataSet(),
+        perPageDefault: 20,
+        perPageOptions: [10, 20, 50, 100]
       }
     }).data('dynatable');
 
     function RefreshTable() {
       dc.events.trigger(function () {
-        var dataSet = []
-        timeStampDimension.top(Infinity).forEach(function (e) {
-
-          var country;
-
-          try{
-            country = e.fields.request_ip_country[0]
-          }catch(e){
-            country = ""
-            console.log("error")
-          }
-
-          dataSet.push({
-            "time": e.fields.request_at[0],
-            "country": country
-          });
-        });
-        dynatable.settings.dataset.originalRecords = dataSet;
+        dynatable.settings.dataset.originalRecords = setUpDataSet();
         dynatable.process();
       });
     };
@@ -215,6 +179,52 @@ Template.chartsLayout.created = function () {
     for (var i = 0; i < dc.chartRegistry.list().length; i++) {
       var chartI = dc.chartRegistry.list()[i];
       chartI.on("filtered", RefreshTable);
+    }
+
+    function setUpDataSet() {
+      var dataSet = [];
+      timeStampDimension.top(Infinity).forEach(function (e) {
+
+
+        var country;
+        var path;
+        var request_ip;
+        var response_time;
+
+        try{
+          country = e.fields.request_ip_country[0]
+        }catch(e){
+          country = "";
+        }
+
+        try{
+          path = e.fields.request_path[0];
+        }catch(e){
+          path = "";
+        }
+
+        try{
+          request_ip = e.fields.request_ip[0];
+        }catch(e){
+          request_ip = "";
+        }
+
+        try{
+          response_time = e.fields.response_time[0];
+        }catch(e){
+          response_time = "";
+        }
+
+        dataSet.push({
+          "time"          : e.fields.request_at[0],
+          "country"       : country,
+          "path"          : path,
+          "ip"            : request_ip,
+          "response"      : response_time
+        });
+      });
+
+      return dataSet;
     }
 
 
