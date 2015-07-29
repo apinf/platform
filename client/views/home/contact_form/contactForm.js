@@ -7,12 +7,26 @@ Template.contactForm.helpers({
 AutoForm.hooks({
   contactForm: {
     beginSubmit: function () {
-      // disable form elements while submitting form
+      // Disable form elements while submitting form
       $('[data-schema-key],button').attr("disabled", "disabled");
     },
     endSubmit: function () {
-      // enable form elements after form submission
+      // Enable form elements after form submission
       $('[data-schema-key],button').removeAttr("disabled");
     }
   }
 });
+
+AutoForm.addHooks(['contactForm'], {
+  onSuccess: function () {
+    FlashMessages.sendSuccess('Thank you! Your message has been successfully sent.');
+  }
+});
+
+FlashMessages.configure({
+  // Configuration for FlashMessages.
+  autoHide: true,
+  hideDelay: 5000,
+  autoScroll: false
+});
+
