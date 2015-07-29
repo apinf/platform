@@ -46,7 +46,7 @@ Template.chartsLayout.created = function () {
 
         var parsedData = parseData(data);
         renderCharts(parsedData);
-        
+
       }
     });
   };
@@ -97,7 +97,8 @@ Template.chartsLayout.created = function () {
       totalCountries      : totalCountries,
       timeScale           : timeScale,
       countryScale        : countryScale,
-      took                : data.took
+      took                : data.took,
+      items               : items
 
     };
 
@@ -116,7 +117,7 @@ Template.chartsLayout.created = function () {
 
     var chart = dc.lineChart("#line-chart");
     var countryChart = dc.barChart("#bar-chart");
-    var dataTable = dc.dataTable("#data-table");
+    //var dataTable = dc.dataTable("#data-table");
 
     chart
       .width(1140)
@@ -140,19 +141,63 @@ Template.chartsLayout.created = function () {
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true);
 
-    dataTable.width(960).height(800)
-      .dimension(timeStampDimension)
-      .group(function(d) { return "Logs" })
-      .size(100)							// number of rows to return
-      .columns([
-        function(d) { return d.fields.ymd; },
-        function(d) { return d.fields.request_ip_country; },
-        function(d) { return d.fields.request_ip; },
-        function(d) { return d.fields.response_time; },
-        function(d) { return d.fields.request_path; }
-      ])
-      .sortBy(function(d){ return -d.fields.ymd; })
-      .order(d3.ascending);
+    //dataTable.width(960).height(800)
+    //  .dimension(timeStampDimension)
+    //  .group(function(d) { return "Logs" })
+    //  .size(100)							// number of rows to return
+    //  .columns([
+    //    function(d) { return d.fields.ymd; },
+    //    function(d) { return d.fields.request_ip_country; },
+    //    function(d) { return d.fields.request_ip; },
+    //    function(d) { return d.fields.response_time; },
+    //    function(d) { return d.fields.request_path; }
+    //  ])
+    //  .sortBy(function(d){ return -d.fields.ymd; })
+    //  .order(d3.ascending);
+
+    var dynatable = $('#dc-data-table').dynatable({
+      features: {
+        pushState: false
+      },
+      dataset: {
+        records: [
+          {
+            "band": "Weezer",
+            "song": "El Scorcho"
+          },
+          {
+            "band": "Chevelle",
+            "song": "Family System"
+          }
+        ],
+        perPageDefault: 50,
+        perPageOptions: [50, 100, 200, 500, 1000, 2000, 5000 ,10000]
+      }
+    }).data('dynatable');
+
+    function RefreshTable() {
+      dc.events.trigger(function () {
+        dynatable.settings.dataset.originalRecords = [
+          {
+            "band": "Weezer",
+            "song": "El Scorcho"
+          },
+          {
+            "band": "Chevelle",
+            "song": "Family System"
+          }
+        ];
+        dynatable.process();
+      });
+    };
+
+    for (var i = 0; i < dc.chartRegistry.list().length; i++) {
+      var chartI = dc.chartRegistry.list()[i];
+      chartI.on("filtered", RefreshTable);
+    }
+
+
+    RefreshTable();
 
     // removing loading state once loaded
     $('#loadingState').html("Loaded! Took <b>" + took + "</b>ms");
@@ -162,3 +207,5 @@ Template.chartsLayout.created = function () {
   };
 
 };
+
+
