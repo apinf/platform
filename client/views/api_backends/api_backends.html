@@ -35,7 +35,7 @@
     <hr />
     <span class="help-block">What URL prefixes should be routed to this backend?</span>
     {{> afQuickField name='matching'}}
-    <legend  data-toggle="collapse" data-target="#global-request-block" aria-expanded="false">Global Request Settings</legend>
+    <legend  data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="glyphicon glyphicon-large glyphicon-chevron-right"> Global Request Settings</i></legend>
     <div id="global-request-block" class="collapse in">
       {{> afQuickField name='append_query_string'}}
       {{> afQuickField name='set_headers'}}
@@ -51,7 +51,7 @@
       {{> afQuickField name='limit_by'}}
       {{> afQuickField name='limit'}}
     </div>
-    <legend  data-toggle="collapse" data-target="#sub-url-block" aria-expanded="false">Sub-URL Request Settings</legend>
+    <legend  data-toggle="collapse" data-target="#sub-url-block" aria-expanded="false"><i class="glyphicon glyphicon-large glyphicon-chevron-right"> Sub-URL Request Settings</i></legend>
     <div id="sub-url-block" class="collapse in">
       <span class="help-block">Change settings for specific sub-URLs within this API.</span>
       {{> afQuickField name='distributed'}}
@@ -69,7 +69,7 @@
       {{> afQuickField name='authenticated_rate_limit_behavior'}}
       {{> afQuickField name='pass_api_key_header'}}
     </div>
-    <legend  data-toggle="collapse" data-target="#advanced-block" aria-expanded="false">Advanced Settings</legend>
+    <legend  data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="glyphicon glyphicon-large glyphicon-chevron-right"> Advanced Settings</i></legend>
     <div id="advanced-block" class="collapse in">
       {{> afQuickField name='balance_algorithm' options="allowed"}}
       {{> afQuickField name='error_templates'}}
