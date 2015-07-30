@@ -102,6 +102,7 @@ momentjs:moment@2.10.3
 mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
+mrt:flash-messages@1.0.1
 mrt:moment@2.8.1
 multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
