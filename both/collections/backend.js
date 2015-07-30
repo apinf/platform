@@ -235,7 +235,8 @@ ApiBackendsSchema = new SimpleSchema({
   },
   "custom_rate_limits.$.limit": {
     type: Number,
-    optional: true
+    optional: true,
+    label: 'Number of requests',
   },
 
   "custom_rate_limits.$.response_headers": {
