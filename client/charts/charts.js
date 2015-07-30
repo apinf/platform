@@ -22,10 +22,8 @@ Template.chartsLayout.rendered = function () {
       'request_path'
     ]
   };
-
-  //drawChart(input);
+//drawChart(input);
   getData(input)
-
 };
 
 Template.chartsLayout.created = function () {
@@ -89,7 +87,6 @@ Template.chartsLayout.created = function () {
     var timeScale = d3.time.scale().domain([minDate, maxDate]);
     var countryScale = d3.scale.ordinal().domain(countryDimension);
 
-
     return {
       timeStampDimension  : timeStampDimension,
       countryDimension    : countryDimension,
@@ -99,9 +96,7 @@ Template.chartsLayout.created = function () {
       timeScale           : timeScale,
       countryScale        : countryScale,
       took                : data.took
-
     };
-
   }
 
   renderCharts = function (parsedData) {
@@ -115,12 +110,8 @@ Template.chartsLayout.created = function () {
     var countryScale        = parsedData.countryScale;
     var took                = parsedData.took;
 
-    console.log(timeStampDimension.top(Infinity))
-
-
     var chart = dc.lineChart("#line-chart");
     var countryChart = dc.barChart("#bar-chart");
-    //var dataTable = dc.dataTable("#data-table");
 
     chart
       .width(1140)
@@ -144,31 +135,20 @@ Template.chartsLayout.created = function () {
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true);
 
-    //dataTable.width(960).height(800)
-    //  .dimension(timeStampDimension)
-    //  .group(function(d) { return "Logs" })
-    //  .size(100)							// number of rows to return
-    //  .columns([
-    //    function(d) { return d.fields.ymd; },
-    //    function(d) { return d.fields.request_ip_country; },
-    //    function(d) { return d.fields.request_ip; },
-    //    function(d) { return d.fields.response_time; },
-    //    function(d) { return d.fields.request_path; }
-    //  ])
-    //  .sortBy(function(d){ return -d.fields.ymd; })
-    //  .order(d3.ascending);
 
+    // Creates Dynatable
     var dynatable = $('#dc-data-table').dynatable({
       features: {
         pushState: false
       },
       dataset: {
         records: setUpDataSet(),
-        perPageDefault: 20,
+        perPageDefault: 10,
         perPageOptions: [10, 20, 50, 100]
       }
     }).data('dynatable');
 
+    // Function to refresh table on a change
     function RefreshTable() {
       dc.events.trigger(function () {
         dynatable.settings.dataset.originalRecords = setUpDataSet();
@@ -185,12 +165,12 @@ Template.chartsLayout.created = function () {
       var dataSet = [];
       timeStampDimension.top(Infinity).forEach(function (e) {
 
-
         var country;
         var path;
         var request_ip;
         var response_time;
 
+  // Error handling for empty fields
         try{
           country = e.fields.request_ip_country[0]
         }catch(e){
@@ -223,16 +203,13 @@ Template.chartsLayout.created = function () {
           "response"      : response_time
         });
       });
-
       return dataSet;
     }
-
 
     RefreshTable();
 
     // removing loading state once loaded
     $('#loadingState').html("Loaded! Took <b>" + took + "</b>ms");
-
     dc.renderAll();
 
   };
