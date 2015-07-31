@@ -22,14 +22,14 @@ Template.chartsLayout.rendered = function () {
       'request_path'
     ]
   };
-//drawChart(input);
-  getData(input)
+  // Drawing the chart
+  drawChart(input)
 };
 
 Template.chartsLayout.created = function () {
 
   // function that sets chart data to be available in template
-  getData = function (input) {
+  drawChart = function (input) {
 
     Meteor.call("getChartData", input, function (err, data) {
 
@@ -55,10 +55,10 @@ Template.chartsLayout.created = function () {
     var items = data.hits.hits;
 
     var index = new crossfilter(items);
-
     var dateFormat = d3.time.format.iso;
     items.forEach(function (d) {
 
+      // Parsing timestamp to ISO format
       var timeStamp = moment(d.fields.request_at[0]);
       timeStamp = timeStamp.format();
       d.fields.ymd = dateFormat.parse(timeStamp);
@@ -73,14 +73,17 @@ Template.chartsLayout.created = function () {
     var countryGroup = countryDimension.group();
     var all = index.groupAll();
 
+    // Providing information about current data selection
     dc.dataCount("#row-selection")
       .dimension(index)
       .group(all);
 
+    // total amount of countries within filtering
     var totalCountries = countryGroup.reduceSum(function(d) {
       return d.fields.itemsCount;
     });
 
+    // set up a range of dates for charts
     var minDate = d3.min(items, function(d) { return d.fields.ymd; });
     var maxDate = d3.max(items, function(d) { return d.fields.ymd; });
 
@@ -148,7 +151,7 @@ Template.chartsLayout.created = function () {
       }
     }).data('dynatable');
 
-    // Function to refresh table on a change
+    // Listens to filtering event and refreshes the table on a change
     function RefreshTable() {
       dc.events.trigger(function () {
         dynatable.settings.dataset.originalRecords = setUpDataSet();

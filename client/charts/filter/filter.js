@@ -35,7 +35,7 @@ Template.chartsLayout.events({
       ]
     };
 
-    getData(input);
+    drawChart(input);
 
   }
 });
