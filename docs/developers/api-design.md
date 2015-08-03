@@ -5,14 +5,14 @@ This document contains the design overview for the Apinf Administrative API.
 The Apinf Administrative API will be designated by the `/api/` URL route:
 
 ```
-https://apinf.com/api/.../
+https://example.com/api/.../
 ```
 
 ## Versioning
 The Apinf API will change over time. As such, we will use a numbered versioning scheme. Versions will be indicated by integers, starting with **1**. Version numbers will be located in the project URL, such as:
 
 ```
-https://apinf.com/api/v1/.../
+https://example.com/api/v1/.../
 ```
 
 ## API Documentation
