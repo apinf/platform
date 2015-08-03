@@ -104,7 +104,7 @@ Template.chartsLayout.created = function () {
           .group(timeStampGroup)
           .centerBar(true)
           .gap(1)
-          .x(d3.time.scale().domain([new Date(2015, 1, 1), new Date()]))
+          .x(timeScale)
           .alwaysUseRounding(true)
           .yAxis().ticks(0);
 
