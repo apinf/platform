@@ -7,7 +7,6 @@ ApiBackendsSchema = new SimpleSchema({
   },
   name: {
     type: String,
-    optional: true
   },
   documentation_link: {
     type: String,
@@ -29,7 +28,6 @@ ApiBackendsSchema = new SimpleSchema({
   },
   backend_host: {
     type: String,
-    optional: true
   },
   backend_port: {
     type: Number,
