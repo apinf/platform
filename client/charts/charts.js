@@ -188,17 +188,18 @@ Template.chartsLayout.created = function () {
       var chartI = dc.chartRegistry.list()[i];
       chartI.on("filtered", RefreshTable);
     }
-
+    
+    // Parse data into array for chart
     function setUpDataSet() {
       var dataSet = [];
       timeStampDimension.top(Infinity).forEach(function (e) {
-
+      
         var country;
         var path;
         var request_ip;
         var response_time;
 
-  // Error handling for empty fields
+        // Error handling for empty fields
         try{
           country = e.fields.request_ip_country[0]
         }catch(e){
