@@ -76,12 +76,20 @@ Template.chartsLayout.created = function () {
       // Add item count from total hits
       d.fields.itemsCount = +data.hits.total;
     });
-
+    
+    // Create timestamp dimension from YMD field
     var timeStampDimension = index.dimension(function(d){ return d.fields.ymd; });
+    
+    // Create country dimension from Request IP Country field
     var countryDimension = index.dimension(function (d) { return d.fields.request_ip_country });
-
+    
+    // Group entries by timestamp dimension
     var timeStampGroup = timeStampDimension.group();
+    
+    // Group entries by country
     var countryGroup = countryDimension.group();
+    
+    // Create index by all dimensions
     var all = index.groupAll();
 
     // Providing information about current data selection
@@ -97,10 +105,15 @@ Template.chartsLayout.created = function () {
     // set up a range of dates for charts
     var minDate = d3.min(items, function(d) { return d.fields.ymd; });
     var maxDate = d3.max(items, function(d) { return d.fields.ymd; });
-
+    
+    // Create time scale from min and max dates
     var timeScale = d3.time.scale().domain([minDate, maxDate]);
+    
+    // Create country scale from country dimension
     var countryScale = d3.scale.ordinal().domain(countryDimension);
 
+
+    // Return object with all key values created above
     return {
       timeStampDimension  : timeStampDimension,
       countryDimension    : countryDimension,
