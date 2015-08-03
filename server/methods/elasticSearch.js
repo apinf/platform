@@ -12,7 +12,7 @@ Meteor.methods({
     return newSearch.doSearch();
   },
   "getChartDataByApiId": function (apiId) {
-    var newSearch = new ElasticRest("", "", 1000, {
+    var newSearch = new ElasticRest("api-umbrella-logs-v1-2015-08", "log", 1000, {
       "match" : {
         "api_key" : apiId
       }
