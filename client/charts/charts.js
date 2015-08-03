@@ -43,7 +43,7 @@ Template.chartsLayout.created = function () {
       } else {
         // Parse the returned data for DC
         var parsedData = parseData(data);
-        
+
         // Render the charts using parsed data
         renderCharts(parsedData);
 
@@ -55,40 +55,40 @@ Template.chartsLayout.created = function () {
   parseData = function (data) {
     // Get chart data from within data object
     var items = data.hits.hits;
-    
+
     // Create CrossFilter index using chart data
     var index = new crossfilter(items);
-    
+
     // Create ISO date format
     var dateFormat = d3.time.format.iso;
-    
+
     // Parse each item adding timestamp as YMD and count the items
     items.forEach(function (d) {
       // Parse timestamp to Moment .jsobject
       var timeStamp = moment(d.fields.request_at[0]);
-      
+
       // Format the timestamp using Moment.js format method
       timeStamp = timeStamp.format();
-      
+
       // Add YMD field to item
       d.fields.ymd = dateFormat.parse(timeStamp);
-      
+
       // Add item count from total hits
       d.fields.itemsCount = +data.hits.total;
     });
-    
+
     // Create timestamp dimension from YMD field
     var timeStampDimension = index.dimension(function(d){ return d.fields.ymd; });
-    
+
     // Create country dimension from Request IP Country field
     var countryDimension = index.dimension(function (d) { return d.fields.request_ip_country });
-    
+
     // Group entries by timestamp dimension
     var timeStampGroup = timeStampDimension.group();
-    
+
     // Group entries by country
     var countryGroup = countryDimension.group();
-    
+
     // Create index by all dimensions
     var all = index.groupAll();
 
@@ -105,10 +105,10 @@ Template.chartsLayout.created = function () {
     // set up a range of dates for charts
     var minDate = d3.min(items, function(d) { return d.fields.ymd; });
     var maxDate = d3.max(items, function(d) { return d.fields.ymd; });
-    
+
     // Create time scale from min and max dates
     var timeScale = d3.time.scale().domain([minDate, maxDate]);
-    
+
     // Create country scale from country dimension
     var countryScale = d3.scale.ordinal().domain(countryDimension);
 
@@ -182,18 +182,18 @@ Template.chartsLayout.created = function () {
         dynatable.process();
       });
     };
-    
+
     // Add each chart to the DC Chart Registry
     for (var i = 0; i < dc.chartRegistry.list().length; i++) {
       var chartI = dc.chartRegistry.list()[i];
       chartI.on("filtered", RefreshTable);
     }
-    
+
     // Parse data into array for chart
     function setUpDataSet() {
       var dataSet = [];
       timeStampDimension.top(Infinity).forEach(function (e) {
-      
+
         var country;
         var path;
         var request_ip;
@@ -240,9 +240,5 @@ Template.chartsLayout.created = function () {
     // removing loading state once loaded
     $('#loadingState').html("Loaded! Took <b>" + took + "</b>ms");
     dc.renderAll();
-
   };
-
 };
-
-
