@@ -41,8 +41,10 @@ Template.chartsLayout.created = function () {
         alert("Data is not found!");
 
       } else {
-
+        // Parse the returned data for DC
         var parsedData = parseData(data);
+        
+        // Render the charts using parsed data
         renderCharts(parsedData);
 
       }
