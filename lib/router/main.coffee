@@ -3,13 +3,36 @@ Router.map ->
     path: "/"
     layoutTemplate: "homeLayout"
 
+  @route "landingPage",
+    path: "/landing"
+    layoutTemplate: "homeLayout"
+
+  @route "apiBackends",
+    path: "/apibackends"
+    layoutTemplate: "masterLayout"
+
+  @route "catalogue",
+    path: "/catalogue"
+    layoutTemplate: "masterLayout"
+
+  @route "bookmarks",
+    path: "/bookmarks"
+    layoutTemplate: "masterLayout"
+
   @route "dashboard",
     path: "/dashboard"
-    waitOn: ->
-      [
-        subs.subscribe 'posts'
-        subs.subscribe 'comments'
-        subs.subscribe 'attachments'
-      ]
-    data: ->
-      posts: Posts.find({},{sort: {createdAt: -1}}).fetch()
+    layoutTemplate: "masterLayout"
+
+  @route "swagger",
+    path: "/swagger"
+    layoutTemplate: "masterLayout"
+
+  @route "importApiConfiguration",
+    path: "import/api"
+    layoutTemplate: "masterLayout"
+    render: "importApiConfiguration"
+
+  @route "importSwaggerConfiguration",
+    path: "import/swagger"
+    layoutTemplate: "masterLayout"
+    render: "importSwaggerConfiguration"
