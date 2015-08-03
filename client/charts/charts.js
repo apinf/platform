@@ -51,6 +51,7 @@ Template.chartsLayout.created = function () {
           d.fields.ymd = dateFormat.parse(timeStamp);
           d.fields.itemsCount = +data.hits.total;
 
+
         });
 
         var timeStampDimension = index.dimension(function(d){ return d.fields.ymd; });
@@ -77,18 +78,35 @@ Template.chartsLayout.created = function () {
         var chart = dc.lineChart("#line-chart");
         var countryChart = dc.barChart("#bar-chart");
         var dataTable = dc.dataTable("#data-table");
+        var overview = dc.barChart("#overview-chart");
 
         chart
           .width(1140)
           .height(480)
-          .elasticX(true)
+          .transitionDuration(1500)
+          .elasticY(true)
           .x(timeScale)
           .dimension(timeStampDimension)
           .group(timeStampGroup)
+          .mouseZoomable(true)
+          .rangeChart(overview)
           .renderArea(true)
           .dotRadius(3)
+          .brushOn(false)
           .renderHorizontalGridLines(true)
           .renderVerticalGridLines(true);
+
+        overview
+          .width(1140)
+          .height(40)
+          .margins({top: 0, right: 50, bottom: 20, left: 40})
+          .dimension(timeStampDimension)
+          .group(timeStampGroup)
+          .centerBar(true)
+          .gap(1)
+          .x(d3.time.scale().domain([new Date(2015, 1, 1), new Date()]))
+          .alwaysUseRounding(true)
+          .yAxis().ticks(0);
 
         countryChart
           .width(1140)
