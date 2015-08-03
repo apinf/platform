@@ -46,10 +46,9 @@
     {{> afQuickField name='pass_api_key_header'}}
     {{> afQuickField name='pass_api_key_query_param'}}
     {{> afQuickField name='rate_limit_mode' options="allowed"}}
-    {{> afQuickField name='duration'}}
-    {{> afQuickField name='accuracy'}}
-    {{> afQuickField name='limit_by'}}
-    {{> afQuickField name='limit'}}
+    {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
+    {{> afQuickField name='custom_rate_limits'}}
+    {{/if}}
     <h4>Sub-URL Request Settings</h4>
     <hr />
     <span class="help-block">Change settings for specific sub-URLs within this API.</span>
