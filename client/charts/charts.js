@@ -158,7 +158,8 @@ Template.chartsLayout.created = function () {
         dynatable.process();
       });
     };
-
+    
+    // Add each chart to the DC Chart Registry
     for (var i = 0; i < dc.chartRegistry.list().length; i++) {
       var chartI = dc.chartRegistry.list()[i];
       chartI.on("filtered", RefreshTable);
