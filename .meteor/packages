@@ -27,9 +27,6 @@ yogiben:autoform-map
 multiply:iron-router-progress
 manuelschoebel:ms-seo
 spiderable
-accounts-facebook
-accounts-google
-accounts-twitter
 accounts-ui
 jparker:gravatar
 tap:i18n
@@ -72,3 +69,6 @@ zimme:active-route
 mfactory:admin-lte
 charts:dc
 cfs:filesystem
+dapearce:material-icons
+mrt:flash-messages
+frenchbread:dynatable

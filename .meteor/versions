@@ -1,10 +1,7 @@
 accounts-base@1.2.0
-accounts-facebook@1.0.4
 accounts-github@1.0.4
-accounts-google@1.0.4
 accounts-oauth@1.1.5
 accounts-password@1.1.1
-accounts-twitter@1.0.4
 accounts-ui@1.1.5
 accounts-ui-unstyled@1.1.7
 alanning:roles@1.2.13
@@ -49,20 +46,20 @@ cmather:handlebars-server@2.0.0
 coffeescript@1.0.6
 comments@0.1.0
 d3js:d3@3.5.5
+dapearce:material-icons@0.1.2
 dburles:collection-helpers@1.0.3
 dburles:google-maps@1.1.1
 ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
 email@1.0.6
-facebook@1.2.0
 fastclick@1.0.3
 favorites@0.0.4
 fortawesome:fontawesome@4.3.0
+frenchbread:dynatable@0.1.0
 frenchbread:elastic-rest@0.2.0
 geojson-utils@1.0.3
 github@1.1.3
-google@1.1.5
 handlebars@1.0.3
 html-tools@1.0.4
 htmljs@1.0.4
@@ -106,6 +103,7 @@ momentjs:moment@2.10.3
 mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
+mrt:flash-messages@1.0.1
 mrt:moment@2.8.1
 multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
@@ -113,7 +111,6 @@ notifications@0.0.7
 npm-bcrypt@0.7.8_2
 npm-container@1.0.0
 oauth@1.1.4
-oauth1@1.1.4
 oauth2@1.1.3
 observe-sequence@1.0.6
 ordered-dict@1.0.3
@@ -145,7 +142,6 @@ timmyg:wow@1.0.1
 tracker@1.0.7
 tsega:skrollr@0.0.2
 twbs:bootstrap@3.3.5
-twitter@1.1.4
 ui@1.0.6
 underscore@1.0.3
 underscorestring:underscore.string@3.0.3_1

@@ -3,12 +3,19 @@
 @import "/packages/bootstrap/bootstrap.import.less";
 
 /* Views */
-@import "/client/views/home/home.import.less";
+@import "/client/views/home/home.less";
 
 
 /* Global variables */
 @font-family-default: 'Roboto', sans-serif;
 
+html, body, h1, h2, h3, h4, h5, h6, p {
+  font-family: @font-family-default;
+}
+
+.layout {
+  min-height: 80%;
+}
 
 #iron-router-progress {
   background-color: darken(@brand-primary,20%);
@@ -23,6 +30,15 @@
   background-color: #2196f3;
   border: none;
   border-radius: 0;
+}
+
+/*Styles for Dynatable*/
+th a {
+  color: #1c4862;
+}
+
+.dynatable-active-page {
+  background-color: #1c4862;
 }
 
 .help-block {
