@@ -1,6 +1,5 @@
 Accounts.onCreateUser(function(options, user) {
-  var apiUmbrellaUserObj, attachData, email, picture, profileImageUrl, profilePicture, ref, ref1, ref2, ref3, ref4, response;
-  profileImageUrl = void 0;
+  var apiUmbrellaUserObj, attachData, email, ref, ref1, ref2, ref3, ref4, response;
   user.profile = user.profile || {};
   if ((ref = user.services) != null ? ref.github : void 0) {
     if (user.services.github.email === null || user.services.github.email === "") {
@@ -22,20 +21,6 @@ Accounts.onCreateUser(function(options, user) {
   }
   if ((ref1 = user.services) != null ? (ref2 = ref1.github) != null ? ref2.id : void 0 : void 0) {
     profileImageUrl = user.services.github.avatar_url;
-  }
-  if (!profileImageUrl) {
-    email = ((ref3 = user.emails) != null ? (ref4 = ref3[0]) != null ? ref4.address : void 0 : void 0) || '';
-    profileImageUrl = Gravatar.imageUrl(email, {
-      "default": 'identicon'
-    });
-  }
-  if (profileImageUrl) {
-    picture = new FS.File();
-    attachData = Meteor.wrapAsync(picture.attachData, picture);
-    attachData(profileImageUrl);
-    picture.name('picture ' + user._id + '.png');
-    profilePicture = ProfilePictures.insert(picture);
-    user.profile.picture = profilePicture._id;
   }
   apiUmbrellaUserObj = {
     "user": {
