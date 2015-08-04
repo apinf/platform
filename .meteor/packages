@@ -16,7 +16,6 @@ raix:handlebar-helpers
 cfs:standard-packages
 cfs:gridfs
 aldeed:template-extension
-cfs:graphicsmagick
 yogiben:helpers
 iron:router
 yogiben:autoform-modals
@@ -39,8 +38,6 @@ zimme:iron-router-active
 matb33:collection-hooks
 dburles:collection-helpers
 reywood:publish-composite
-percolate:momentum-iron-router
-percolate:momentum
 natestrauser:animate-css
 meteorhacks:subs-manager
 fastclick
