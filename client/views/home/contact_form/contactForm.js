@@ -1,6 +1,6 @@
 Template.contactForm.helpers({
   contactFormSchema: function() {
-    return Schema.contact;
+    return Schemas.contact;
   }
 });
 
@@ -29,4 +29,3 @@ FlashMessages.configure({
   hideDelay: 5000,
   autoScroll: false
 });
-
