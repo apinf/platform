@@ -44,7 +44,6 @@ charts:dc@1.7.4
 check@1.0.5
 cmather:handlebars-server@2.0.0
 coffeescript@1.0.6
-comments@0.1.0
 d3js:d3@3.5.5
 dapearce:material-icons@0.1.2
 dburles:collection-helpers@1.0.3
@@ -54,7 +53,6 @@ deps@1.0.7
 ejson@1.0.6
 email@1.0.6
 fastclick@1.0.3
-favorites@0.0.4
 fortawesome:fontawesome@4.3.0
 frenchbread:dynatable@0.1.0
 frenchbread:elastic-rest@0.2.0
@@ -90,10 +88,8 @@ matb33:collection-hooks@0.7.13
 meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:async@1.0.0
-meteorhacks:meteorx@1.0.2
 meteorhacks:npm@1.3.0
 meteorhacks:subs-manager@1.4.0
-meteorhacks:unblock@1.1.0
 meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
 minifiers@1.1.5
@@ -104,10 +100,8 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.1
-mrt:moment@2.8.1
 multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
-notifications@0.0.7
 npm-bcrypt@0.7.8_2
 npm-container@1.0.0
 oauth@1.1.4
@@ -146,12 +140,10 @@ ui@1.0.6
 underscore@1.0.3
 underscorestring:underscore.string@3.0.3_1
 url@1.0.4
-user-thumbs@0.0.8
 useraccounts:bootstrap@1.11.1
 useraccounts:core@1.11.1
 webapp@1.2.0
 webapp-hashing@1.0.3
-yogiben:admin@1.2.0
 yogiben:autoform-file@0.2.7
 yogiben:autoform-map@0.1.3
 yogiben:autoform-modals@0.3.6

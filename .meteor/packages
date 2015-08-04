@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-coffeescript
 less
 accounts-base
 accounts-password
@@ -37,10 +36,7 @@ juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 momentjs:moment
 zimme:iron-router-active
-user-thumbs
 matb33:collection-hooks
-comments
-favorites
 dburles:collection-helpers
 reywood:publish-composite
 percolate:momentum-iron-router
@@ -48,8 +44,6 @@ percolate:momentum
 natestrauser:animate-css
 meteorhacks:subs-manager
 fastclick
-notifications
-yogiben:admin
 timmyg:wow
 tsega:skrollr
 accounts-github
