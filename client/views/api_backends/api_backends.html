@@ -43,6 +43,11 @@
     <legend data-toggle="collapse" data-target="#sub-url-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Sub-URL Request Settings</legend>
     <div id="sub-url-block" class="collapse in">
       <span class="help-block">Change settings for specific sub-URLs within this API.</span>
+      {{> afQuickField name='sub_settings'}}
+    </div>
+    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
+    <div id="advanced-rewriting-block" class="collapse in">
+      <span class="help-block">Modify the incoming request's URL or headers before passing it to the backend.</span>
       {{> afQuickField name='distributed'}}
       {{> afQuickField name='response_headers'}}
       {{> afQuickField name='matcher_type'}}
@@ -57,10 +62,6 @@
       {{> afQuickField name='anonymous_rate_limit_behavior'}}
       {{> afQuickField name='authenticated_rate_limit_behavior'}}
       {{> afQuickField name='pass_api_key_header'}}
-    </div>
-    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
-    <div id="advanced-rewriting-block" class="collapse in">
-      <span class="help-block">Modify the incoming request's URL or headers before passing it to the backend.</span>
     </div>
     <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Settings</legend>
     <div id="advanced-block" class="collapse in">
