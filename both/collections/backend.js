@@ -261,12 +261,99 @@ ApiBackendsSchema = new SimpleSchema({
     defaultValue: false,
     label: 'Via GET query parameter'
   },
-  regex: {
+  sub_settings: {
+    type: [Object],
+    optional: true
+  },
+  "sub_settings.$.http_method": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'HEAD',
+      'TRACE',
+      'OPTIONS',
+      'CONNECT',
+      'PATCH'
+    ],
+    label: 'HTTP method'
+  },
+  "sub_settings.$.regex": {
     type: String,
     optional: true,
     autoform: {
-      placeholder: 'username:password'
+      placeholder: '^/example.*param1=.+'
     }
+  },
+  "sub_settings.$.api_key_verification_level": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'Inherit (default - required)',
+      'Required - API keys are mandatory',
+      'Disabled - API keys are optional'
+    ],
+    label: 'API Key Checks'
+  },
+  "sub_settings.$.require_https": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'Inherit (default - optional)',
+      'Optional - HTTPS is optional',
+      'Required - HTTPS is mandatory'
+    ],
+    label: 'HTTPS requirements'
+  },
+  "sub_settings.$.required_roles": {
+    type: Array,
+    minCount: 2,
+    maxCount: 3,
+    optional: true,
+    label: 'Required roles',
+    autoform: {
+      options: [
+        {
+          label: 'api-umbrella-contact-form',
+          value: 'api-umbrella-contact-form'
+        },
+        {
+          label: 'api-umbrella-key-creator',
+          value: 'api-umbrella-key-creator'
+        },
+        {
+          label: 'write_access',
+          value: 'write_access'
+        }
+      ]
+    }
+  },
+  "sub_settings.$.required_roles.$": {
+    type: String
+  },
+  "sub_settings.$.pass_api_key_header": {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+    label: 'Via HTTP header'
+  },
+  "sub_settings.$.pass_api_key_query_param": {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+    label: 'Via GET query parameter'
+  },
+  "sub_settings.$.rate_limit_mode": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'Default rate limits',
+      'Custom rate limits',
+      'Unlimited requests'
+    ],
   },
   error_templates: {
     type: [Object],
