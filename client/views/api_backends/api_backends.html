@@ -48,20 +48,7 @@
     <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
     <div id="advanced-rewriting-block" class="collapse in">
       <span class="help-block">Modify the incoming request's URL or headers before passing it to the backend.</span>
-      {{> afQuickField name='distributed'}}
-      {{> afQuickField name='response_headers'}}
-      {{> afQuickField name='matcher_type'}}
-      {{> afQuickField name='http_method'}}
-      {{> afQuickField name='frontend_matcher'}}
-      {{> afQuickField name='backend_replacement'}}
-      {{> afQuickField name='matcher'}}
-      {{> afQuickField name='from'}}
-      {{> afQuickField name='to'}}
-      {{> afQuickField name='anonymous_rate_limit_behavior'}}
-      {{> afQuickField name='api_key_verification_transition_start_at'}}
-      {{> afQuickField name='anonymous_rate_limit_behavior'}}
-      {{> afQuickField name='authenticated_rate_limit_behavior'}}
-      {{> afQuickField name='pass_api_key_header'}}
+      {{> afQuickField name='rewrite'}}
     </div>
     <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Settings</legend>
     <div id="advanced-block" class="collapse in">
