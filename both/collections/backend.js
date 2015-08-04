@@ -240,7 +240,7 @@ ApiBackendsSchema = new SimpleSchema({
   "custom_rate_limits.$.response_headers": {
     type: Boolean,
     optional: true
-},
+  },
   anonymous_rate_limit_behavior: {
     type: String,
     optional: true
@@ -260,6 +260,13 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true,
     defaultValue: false,
     label: 'Via GET query parameter'
+  },
+  regex: {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'username:password'
+    }
   },
   error_templates: {
     type: [Object],
