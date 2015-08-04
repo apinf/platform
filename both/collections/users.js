@@ -1,15 +1,4 @@
 Schemas.UserProfile = new SimpleSchema({
-  picture: {
-    type: String,
-    optional: true,
-    label: 'Profile picture',
-    autoform: {
-      afFieldInput: {
-        type: 'fileUpload',
-        collection: 'ProfilePictures'
-      }
-    }
-  },
   name: {
     type: String,
     optional: true
