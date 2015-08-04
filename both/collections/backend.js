@@ -355,6 +355,50 @@ ApiBackendsSchema = new SimpleSchema({
       'Unlimited requests'
     ],
   },
+  rewrite: {
+    type: [Object],
+    optional: true
+  },
+  "rewrite.$.matcher_type": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'Route Pattern',
+      'Regular Expression',
+    ],
+  },
+  "rewrite.$.http_method": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'HEAD',
+      'TRACE',
+      'OPTIONS',
+      'CONNECT',
+      'PATCH'
+    ],
+    label: 'HTTP method'
+  },
+  "rewrite.$.frontend_matcher": {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: '/example'
+    },
+    label: 'Frontend matcher'
+  },
+  "rewrite.$.backend_replacement": {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: '/example'
+    },
+    label: 'Backend replacement'
+  },
   error_templates: {
     type: [Object],
     optional: true,
