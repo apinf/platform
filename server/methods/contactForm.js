@@ -1,7 +1,7 @@
 Meteor.methods({
   sendEmail: function(doc) {
     // Important server-side check for security and data integrity
-    check(doc, Schema.contact);
+    check(doc, Schemas.contact);
 
     // Build the e-mail text
     var text = "Name: " + doc.name + "\n\n"
