@@ -11,11 +11,6 @@ Template.chartsLayout.rendered = function () {
     index : "api-umbrella-logs-v1-"+currentYearAndMonth,
     type  : "log",
     limit : initialLimit,
-    query : {
-      "match" : {
-        "api_key" : Meteor.user().profile.apiKey
-      }
-    },
     fields: [
       'request_at',
       'request_ip_country',

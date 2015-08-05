@@ -1,34 +1,40 @@
 Meteor.methods({
   "getChartData": function (data) {
 
-    // get userId
+    // initialise variables
+    var loggedInUser;
+    var apiKey;
+    var query;
 
     // get user object
+    loggedInUser = Meteor.user();
 
-    // get user's api_key
-
-    // get user role
-
-    // check user role
-
-    // construct query depending on user role
-
-    // if admin - match_all
-
-    // else - match api_key: api_key
-
-    var loggedInUser = Meteor.user();
-
+    // get user role & check user role
     if (Roles.userIsInRole(loggedInUser, ['admin'])) {
-      // NOTE: This example assumes the user is not using groups.
-      console.log("User is admin");
+
+      // construct query depending on user role
+      // if admin - match_all
+      query = {
+        match_all: {}
+      }
+    }else{
+
+      // get user's api_key
+      apiKey  = loggedInUser.profile.apiKey;
+
+      // else - match api_key: api_key
+      query   = {
+        "match": {
+          "api_key": apiKey
+        }
+      }
     }
 
     var newSearch = new ElasticRest(
       data.index,
       data.type,
       data.limit,
-      data.apiKey,
+      query,
       data.fields
     );
 
