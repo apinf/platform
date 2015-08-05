@@ -3,16 +3,14 @@
 @import "/packages/bootstrap/bootstrap.import.less";
 
 /* Views */
-@import "/client/views/home/home.import.less";
+@import "/client/views/home/home.less";
 
 
 /* Global variables */
 @font-family-default: 'Roboto', sans-serif;
 
-/* Global styles */
-html, body {
-  height: 100%;
-  font-weight: 400;
+html, body, h1, h2, h3, h4, h5, h6, p {
+  font-family: @font-family-default;
 }
 
 .layout {
@@ -34,6 +32,15 @@ html, body {
   border-radius: 0;
 }
 
+/*Styles for Dynatable*/
+th a {
+  color: #1c4862;
+}
+
+.dynatable-active-page {
+  background-color: #1c4862;
+}
+
 .help-block {
   margin-bottom: 1.4em;
 }
@@ -53,4 +60,8 @@ input[name='profile.apiKey']{
 .row {
   margin-left: 0;
   margin-right: 0;
+}
+
+.wrapper {
+  position: inherit !important;
 }

@@ -1,0 +1,24 @@
+<template name="importApiConfiguration">
+  <form id="apiConfigurationUploadForm" class="form" method="post">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Upload API Configuration</legend>
+
+      <!-- File Button -->
+      <div class="form-group">
+        <label class="control-label" for="apiCofigurationFile">API Configuration File</label>
+
+        <input
+        id="apiCofigurationFile"
+        name="apiCofigurationFile"
+        class="input-file"
+        type="file"
+        >
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success" type="submit">Upload</button>
+      </div>
+    </fieldset>
+  </form>
+  {{> flashMessages}}
+</template>

@@ -1,78 +1,75 @@
 <template name="apiBackends">
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-      <h1>Add API</h1>
-      {{#autoForm collection="ApiBackends" doc=this id="apiBackends"}}
-      {{> afQuickField name='name'}}
-      <span class="help-block">API's name</span>
-      {{> afQuickField name='documentation_link'}}
-      <span class="help-block">Link to documentation</span>
-      {{> importSwaggerConfiguration}}
-      <h4>Host</h4>
-      <hr />
-      <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
-      <div class="row">
-        <div class="col-lg-3">
-          {{> afQuickField name='backend_protocol' options="allowed"}}
-        </div>
-        <div class="col-lg-6">
-          {{> afQuickField name='backend_host'}}
-        </div>
-        <div class="col-lg-3">
-          {{> afQuickField name='backend_port'}}
-        </div>
+    <h1>Add API</h1>
+    {{#autoForm collection="ApiBackends" doc=this id="apiBackends"}}
+    {{> afQuickField name='name'}}
+    <span class="help-block">API's name</span>
+    {{> afQuickField name='documentation_link'}}
+    <span class="help-block">Link to documentation</span>
+    {{> importSwaggerConfiguration}}
+    <h4>Host</h4>
+    <hr />
+    <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
+    <div class="row">
+      <div class="col-lg-3">
+        {{> afQuickField name='backend_protocol' options="allowed"}}
       </div>
-      <h4>Host</h4>
-      <hr />
-      {{> afQuickField name='server'}}
-      <!-- TODO: show fields inline
+      <div class="col-lg-6">
+        {{> afQuickField name='backend_host'}}
+      </div>
+      <div class="col-lg-3">
+        {{> afQuickField name='backend_port'}}
+      </div>
+    </div>
+    <h4>Host</h4>
+    <hr />
+    {{> afQuickField name='server'}}
+    <!-- TODO: show fields inline
 <form>
 <div class="form-inline">
 {{> afQuickField name='matching'}}
 </div>
 </form>
 -->
-      <h4>Matching URL Prefixes</h4>
-      <hr />
-      <span class="help-block">What URL prefixes should be routed to this backend?</span>
-      {{> afQuickField name='matching'}}
-      <h4>Global Request Settings</h4>
-      <hr />
-      {{> afQuickField name='append_query_string'}}
-      {{> afQuickField name='set_headers'}}
-      {{> afQuickField name='http_basic_auth'}}
-      {{> afQuickField name='require_https' options="allowed"}}
-      {{> afQuickField name='api_key_verification_level' options="allowed"}}
-      {{> afQuickField name='required_roles'}}
-      {{> afQuickField name='pass_api_key_header'}}
-      {{> afQuickField name='pass_api_key_query_param'}}
-      {{> afQuickField name='rate_limit_mode' options="allowed"}}
-      {{> afQuickField name='duration'}}
-      {{> afQuickField name='accuracy'}}
-      {{> afQuickField name='limit_by'}}
-      {{> afQuickField name='limit'}}
-      <h4>Sub-URL Request Settings</h4>
-      <hr />
-      <span class="help-block">Change settings for specific sub-URLs within this API.</span>
-      {{> afQuickField name='distributed'}}
-      {{> afQuickField name='response_headers'}}
-      {{> afQuickField name='matcher_type'}}
-      {{> afQuickField name='http_method'}}
-      {{> afQuickField name='frontend_matcher'}}
-      {{> afQuickField name='backend_replacement'}}
-      {{> afQuickField name='matcher'}}
-      {{> afQuickField name='from'}}
-      {{> afQuickField name='to'}}
-      {{> afQuickField name='anonymous_rate_limit_behavior'}}
-      {{> afQuickField name='api_key_verification_transition_start_at'}}
-      {{> afQuickField name='anonymous_rate_limit_behavior'}}
-      {{> afQuickField name='authenticated_rate_limit_behavior'}}
-      {{> afQuickField name='pass_api_key_header'}}
-      <h4>Advanced Settings</h4>
-      <hr />
-      {{> afQuickField name='balance_algorithm' options="allowed"}}
-      {{> afQuickField name='error_templates'}}
-      {{/autoForm}}
-    </div>
+    <h4>Matching URL Prefixes</h4>
+    <hr />
+    <span class="help-block">What URL prefixes should be routed to this backend?</span>
+    {{> afQuickField name='matching'}}
+    <h4>Global Request Settings</h4>
+    <hr />
+    {{> afQuickField name='append_query_string'}}
+    {{> afQuickField name='set_headers'}}
+    {{> afQuickField name='http_basic_auth'}}
+    {{> afQuickField name='require_https' options="allowed"}}
+    {{> afQuickField name='api_key_verification_level' options="allowed"}}
+    {{> afQuickField name='required_roles'}}
+    {{> afQuickField name='pass_api_key_header'}}
+    {{> afQuickField name='pass_api_key_query_param'}}
+    {{> afQuickField name='rate_limit_mode' options="allowed"}}
+    {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
+    {{> afQuickField name='custom_rate_limits'}}
+    {{/if}}
+    <h4>Sub-URL Request Settings</h4>
+    <hr />
+    <span class="help-block">Change settings for specific sub-URLs within this API.</span>
+    {{> afQuickField name='distributed'}}
+    {{> afQuickField name='response_headers'}}
+    {{> afQuickField name='matcher_type'}}
+    {{> afQuickField name='http_method'}}
+    {{> afQuickField name='frontend_matcher'}}
+    {{> afQuickField name='backend_replacement'}}
+    {{> afQuickField name='matcher'}}
+    {{> afQuickField name='from'}}
+    {{> afQuickField name='to'}}
+    {{> afQuickField name='anonymous_rate_limit_behavior'}}
+    {{> afQuickField name='api_key_verification_transition_start_at'}}
+    {{> afQuickField name='anonymous_rate_limit_behavior'}}
+    {{> afQuickField name='authenticated_rate_limit_behavior'}}
+    {{> afQuickField name='pass_api_key_header'}}
+    <h4>Advanced Settings</h4>
+    <hr />
+    {{> afQuickField name='balance_algorithm' options="allowed"}}
+    {{> afQuickField name='error_templates'}}
+    {{/autoForm}}
   </div>
 </template>
