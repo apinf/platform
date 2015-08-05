@@ -8,11 +8,16 @@ Template.importApiConfiguration.events({
     // Insert into filesystem collection
     var insertedFile = ApiBackendConfigurations.insert(file);
     console.log(insertedFile)
+
   },
   'submit #apiConfigurationUploadForm': function (event, template) {
     Meteor.call("convertYamlToJson", template.reactiveFile.get().name, function (err, file) {
       if (err) console.log(err);
       console.log(file);
+      $('#apiBackends').attr({
+        'doc'   : JSON.stringify(file),
+        'type'  : "update"
+      });
     });
 
     return false;
