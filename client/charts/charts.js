@@ -12,7 +12,9 @@ Template.chartsLayout.rendered = function () {
     type  : "log",
     limit : initialLimit,
     query : {
-      match_all: {}
+      "match" : {
+        "api_key" : Meteor.user().profile.apiKey
+      }
     },
     fields: [
       'request_at',
