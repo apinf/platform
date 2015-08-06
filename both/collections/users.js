@@ -31,7 +31,7 @@ Schemas.User = new SimpleSchema({
   },
   emails: {
     type: [Object],
-    optional: true
+    optional: false
   },
   "emails.$.address": {
     type: String,
