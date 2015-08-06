@@ -9,19 +9,21 @@
     {{> importSwaggerConfiguration}}
     <legend>Backend</legend>
     <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
+    {{> afQuickField name='backend_protocol' options="allowed"}}
+    {{> afQuickField name='server'}}
+    <legend>Host</legend>
     <div class="row">
-      <div class="col-lg-3">
-        {{> afQuickField name='backend_protocol' options="allowed"}}
-      </div>
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         {{> afQuickField name='backend_host'}}
       </div>
-      <div class="col-lg-3">
-        {{> afQuickField name='backend_port'}}
+      <div class="col-lg-4 arrow">
+        <i class="fa fa-arrow-right fa-2x"></i>
+        <div>rewrite to</div>
+      </div>
+      <div class="col-lg-4">
+        {{> afQuickField name='frontend_host'}}
       </div>
     </div>
-    <legend>Host</legend>
-    {{> afQuickField name='server'}}
     <legend>Matching URL Prefixes</legend>
     <span class="help-block">What URL prefixes should be routed to this backend?</span>
     {{> afQuickField name='matching'}}
