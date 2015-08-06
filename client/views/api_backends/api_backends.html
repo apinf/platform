@@ -1,7 +1,7 @@
 <template name="apiBackends">
   <div class="api-backends-content">
     <h1>Add API</h1>
-    {{#autoForm collection="ApiBackends" doc=this id="apiBackends"}}
+    {{#autoForm collection="ApiBackends" doc=this id="apiBackends" type="insert"}}
     {{> afQuickField name='name'}}
     <span class="help-block">API's name</span>
     {{> afQuickField name='documentation_link'}}
@@ -54,6 +54,9 @@
     <div id="advanced-block" class="collapse in">
       {{> afQuickField name='balance_algorithm' options="allowed"}}
       {{> afQuickField name='error_templates'}}
+    </div>
+    <div id="form-buttons">
+      <button type="submit" class="btn btn-lg btn-success">Submit</button>
     </div>
     {{/autoForm}}
   </div>
