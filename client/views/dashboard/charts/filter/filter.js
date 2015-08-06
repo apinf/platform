@@ -23,9 +23,6 @@ Template.chartsLayout.events({
       index : "api-umbrella-logs-v1-"+year+"-"+month,
       type  : "log",
       limit : limit,
-      query : {
-        match_all: {}
-      },
       fields: [
         'request_at',
         'request_ip_country',
