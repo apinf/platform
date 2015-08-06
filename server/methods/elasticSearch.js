@@ -10,19 +10,26 @@ Meteor.methods({
     loggedInUser = Meteor.user();
 
     // get user role & check user role
+    // if admin - match_all
     if (Roles.userIsInRole(loggedInUser, ['admin'])) {
 
-      // construct query depending on user role
-      // if admin - match_all
+      // construct query
       query = {
         match_all: {}
       }
+    } else
+    // if owner ...
+    if (Roles.userIsInRole(loggedInUser, ['owner'])) {
+
+      // ,,,
+
     }else{
 
+      // else - user - match api_key: api_key
       // get user's api_key
       apiKey  = loggedInUser.profile.apiKey;
 
-      // else - match api_key: api_key
+      // construct query
       query   = {
         "match": {
           "api_key": apiKey
