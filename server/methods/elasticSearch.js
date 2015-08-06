@@ -18,12 +18,7 @@ Meteor.methods({
         match_all: {}
       }
 
-    } else if (Roles.userIsInRole(loggedInUser, ['owner'])) {
-
-      // if owner ...
-      // ,,,
-
-    }else{
+    } else{
 
       // else - user - match api_key: api_key
 
