@@ -356,6 +356,41 @@ ApiBackendsSchema = new SimpleSchema({
       'Unlimited requests'
     ],
   },
+  "sub_settings.$.custom_rate_limits": {
+    type: [Object],
+    optional: true
+  },
+  "sub_settings.$.custom_rate_limits.$.duration": {
+    type: String,
+    optional: true
+  },
+  "sub_settings.$.custom_rate_limits.$.accuracy": {
+    type: Number,
+    optional: true,
+    allowedValues: [
+      'Seconds',
+      'Minutes',
+      'Hours'
+    ]
+  },
+  "sub_settings.$.custom_rate_limits.$.limit_by": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'API key',
+      'IP Address'
+    ]
+  },
+  "sub_settings.$.custom_rate_limits.$.limit": {
+    type: Number,
+    optional: true,
+    label: 'Number of requests',
+  },
+
+  "sub_settings.$.custom_rate_limits.$.response_headers": {
+    type: Boolean,
+    optional: true
+  },
   rewrite: {
     type: [Object],
     optional: true
