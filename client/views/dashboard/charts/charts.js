@@ -11,9 +11,6 @@ Template.chartsLayout.rendered = function () {
     index : "api-umbrella-logs-v1-"+currentYearAndMonth,
     type  : "log",
     limit : initialLimit,
-    query : {
-      match_all: {}
-    },
     fields: [
       'request_at',
       'request_ip_country',

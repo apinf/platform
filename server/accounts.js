@@ -9,6 +9,8 @@ Accounts.onCreateUser(function(options, user) {
           verified: false
         }
       ];
+      // rewriting original error message if github email isn't public
+      throw new Meteor.Error(500, 'Please, make your github email public in order to login.');
     } else {
       user.emails = [
         {
