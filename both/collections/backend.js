@@ -68,7 +68,8 @@ ApiBackendsSchema = new SimpleSchema({
   "matching.$.frontend_prefix": {
     label: 'Frontend prefix',
     optional: true,
-    type: String
+    type: String,
+    regEx: /^\/[a-z0-9A-Z_\-\/]*$/
   },
   "matching.$.backend_prefix": {
     label: 'Backend prefix',
