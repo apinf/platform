@@ -406,14 +406,23 @@ ApiBackendsSchema = new SimpleSchema({
   "error_templates.$.json": {
     type: String,
     optional: true,
+    autoform: {
+      rows: 5
+    }
   },
   "error_templates.$.xml": {
     type: String,
     optional: true,
+    autoform: {
+      rows: 5
+    }
   },
   "error_templates.$.csv": {
     type: String,
     optional: true,
+    autoform: {
+      rows: 5
+    }
   },
   error_data: {
     type: [Object],
