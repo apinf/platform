@@ -41,6 +41,5 @@ Template.map.created = function() {
 
     // adds the heatpoints to the map
     var heat = L.heatLayer(addressPoints).addTo(map);
-    map.invalidateSize();
   }
 }
