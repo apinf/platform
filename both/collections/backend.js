@@ -42,6 +42,7 @@ ApiBackendsSchema = new SimpleSchema({
   balance_algorithm: {
     type: String,
     optional: false,
+    defaultValue: 'least_conn',
     allowedValues: [
       'least_conn',
       'round_robin',
@@ -56,11 +57,11 @@ ApiBackendsSchema = new SimpleSchema({
   },
   "server.$.backend_host": {
     type: String,
-    optional: false
+    optional: true
   },
   "server.$.backend_port": {
     type: String,
-    optional: false,
+    optional: true,
     regEx: /^[0-9]{2,5}$/
   },
   matching: {
@@ -69,13 +70,13 @@ ApiBackendsSchema = new SimpleSchema({
   },
   "matching.$.frontend_prefix": {
     label: 'Frontend prefix',
-    optional: false,
+    optional: true,
     type: String,
     regEx: /^\/[a-z0-9A-Z_\-\/]*$/
   },
   "matching.$.backend_prefix": {
     label: 'Backend prefix',
-    optional: false,
+    optional: true,
     type: String,
     regEx: /^\/[a-z0-9A-Z_\-\/]*$/
   },
