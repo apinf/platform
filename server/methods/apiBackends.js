@@ -18,11 +18,14 @@ Meteor.methods({
     };
   },
   'createApiBackendOnApiUmbrella': function (apiBackendId) {
+    console.log('Submitting Backend to API Umbrella.')
     // Get the API Backend object
     var apiBackend = ApiBackends.findOne(apiBackendId);
 
+    var apiBackendJSON = JSON.stringify(apiBackend);
+
     // Send the API Backend to API Umbrella
-    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(apiBackend);
+    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(apiBackendJSON);
 
     console.log(response);
   }
