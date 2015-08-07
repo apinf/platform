@@ -15,7 +15,7 @@ Template.map.created = function() {
   drawMap = function (input) {
 
     // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
-    var map = L.map('map').setView([-37.8839, 175.3745188667], 6);
+    var map = L.map('map').setView([61.5000, 23.7667], 4);
 
     // adds tilelayer
     var tiles = L.tileLayer('http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -41,5 +41,6 @@ Template.map.created = function() {
 
     // adds the heatpoints to the map
     var heat = L.heatLayer(addressPoints).addTo(map);
+    map.invalidateSize();
   }
 }
