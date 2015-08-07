@@ -1,5 +1,8 @@
 Meteor.methods({
-  "createAdminRoleIfNotDefined": function () {
+  "createAdminRoleIfNotDefined": function (adminRole) {
+    // TODO: Refactor this process to allow user to specify  admin role as parameter
+    // E.g. a config page where the user can input the desired string
+    
     // Define the admin role
     var adminRole = 'admin';
 
@@ -20,8 +23,8 @@ Meteor.methods({
 
     // Create the admin role if it is not already defined
     if (!adminIsDefined) {
-      console.log('Defining "admin" role.');
-      Roles.createRole('admin');
+      console.log('Defining "' + adminRole + '" role.');
+      Roles.createRole(adminRole);
     }
   }
 });
