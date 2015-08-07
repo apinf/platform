@@ -7,6 +7,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   name: {
     type: String,
+    optional: false
   },
   documentation_link: {
     type: String,
@@ -19,7 +20,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   backend_protocol: {
     type: String,
-    optional: true,
+    optional: false,
     allowedValues: [
       'http',
       'https'
@@ -28,6 +29,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   backend_host: {
     type: String,
+    optional: false
   },
   backend_port: {
     type: Number,
@@ -35,11 +37,11 @@ ApiBackendsSchema = new SimpleSchema({
   },
   frontend_host: {
     type: String,
-    optional: true
+    optional: false
   },
   balance_algorithm: {
     type: String,
-    optional: true,
+    optional: false,
     allowedValues: [
       'least_conn',
       'round_robin',
@@ -49,31 +51,31 @@ ApiBackendsSchema = new SimpleSchema({
   },
   server: {
     type: [Object],
-    optional: true,
+    optional: false,
     label: 'Server'
   },
   "server.$.backend_host": {
     type: String,
-    optional: true
+    optional: false
   },
   "server.$.backend_port": {
     type: String,
-    optional: true,
+    optional: false,
     regEx: /^[0-9]{2,5}$/
   },
   matching: {
     type: [Object],
-    optional: true,
+    optional: false
   },
   "matching.$.frontend_prefix": {
     label: 'Frontend prefix',
-    optional: true,
+    optional: false,
     type: String,
     regEx: /^\/[a-z0-9A-Z_\-\/]*$/
   },
   "matching.$.backend_prefix": {
     label: 'Backend prefix',
-    optional: true,
+    optional: false,
     type: String,
     regEx: /^\/[a-z0-9A-Z_\-\/]*$/
   },
