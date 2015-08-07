@@ -1,5 +1,8 @@
 <template name="filterData">
-  <h3>Filter by:</h3>
+
+    <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Filter</h3>
   <form id="filteringForm">
     Month:
     <select name="month" >
@@ -28,13 +31,15 @@
 
     <span class="dc-data-count dc-chart" id="row-selection" style="margin:0">
       <span class="filter-count">_</span> selected out of <span class="total-count">_</span> records
-						<span>
-							<a href='javascript:dc.filterAll();dc.redrawAll();'>Reset All</a>
-						</span>
+            <span>
+              <a href='javascript:dc.filterAll();dc.redrawAll();'>Reset All</a>
+            </span>
     </span>
     <span id="loadingState">
 
     </span>
 
   </form>
+      </div>
+  </div>
 </template>
