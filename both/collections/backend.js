@@ -7,6 +7,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   name: {
     type: String,
+    optional: false
   },
   documentation_link: {
     type: String,
@@ -30,8 +31,9 @@ ApiBackendsSchema = new SimpleSchema({
     type: String,
   },
   backend_port: {
-    type: Number,
-    optional: true
+    type: String,
+    optional: true,
+    regEx: /^[0-9]{2,5}$/
   },
   frontend_host: {
     type: String,
