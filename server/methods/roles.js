@@ -3,26 +3,25 @@ Meteor.methods({
     // Define the admin role
     var adminRole = 'admin';
 
+    // Placceholder variable for admin check
+    var adminIsDefined;
+
     // Get all existing roles
     var roles = Roles.getAllRoles().fetch();
 
-    // Placceholder variable for admin check
-    var adminIsDefined;
-    
+    // Flatten the roles to an array of role names
+    var rolesArray = _.map(roles, function (role) {
+      // Return the name of the role
+      return role.name;
+    });
+
     // Check if admin role is defined in Roles collection
-    _.each(roles, function (role) {
-      // Check if role is admin
-      if (role.name === 'admin') {
-        // Indicate that admin has been defined
-        adminIsDefined = true;
-      }
-    })
+    adminIsDefined = _.contains(rolesArray, adminRole);
 
     // Create the admin role if it is not already defined
     if (!adminIsDefined) {
-      //Roles.createRole('admin');
-      console.log('admin is not defined');
-      console.log(Roles.getAllRoles().fetch());
+      console.log('Defining "admin" role.');
+      Roles.createRole('admin');
     }
   }
 });
