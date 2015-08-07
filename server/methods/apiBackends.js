@@ -22,10 +22,18 @@ Meteor.methods({
     // Get the API Backend object
     var apiBackend = ApiBackends.findOne(apiBackendId);
 
-    var apiBackendJSON = JSON.stringify(apiBackend);
+    // Construct an API Backend object for API Umbrella with one 'api' key
+    var constructedBackend = {
+      "api": apiBackend
+    };
 
+    // TODO: Make sure the Array fields validate
+    /*
+    {"errors":{"base":["must have at least one servers","must have at least one url_matches"],"sub_settings[0].http_method":["is not included in the list"]}}
+    */
+    
     // Send the API Backend to API Umbrella
-    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(apiBackendJSON);
+    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
 
     console.log(response);
   }
