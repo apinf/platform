@@ -1,5 +1,4 @@
-Schema = {};
-Schema.contact = new SimpleSchema({
+Schemas.contact = new SimpleSchema({
   name: {
     type: String,
     label: "Your name",
