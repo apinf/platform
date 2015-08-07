@@ -1,0 +1,86 @@
+# This document describes the Apinf Administrative API
+swagger: '2.0'
+info:
+  title: Apinf API
+  description: Manage the Apinf platform via an Administrative API
+  version: "0.1.0"
+# the domain of the service
+host: apinf.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /api/v1
+produces:
+  - application/json
+paths:
+  /users:
+    get:
+      summary: Apinf Users
+      description: |
+        The Users endpoint returns information about Apinf users
+      parameters:
+        - name: id
+          in: query
+          description: ID of a given user.
+          required: false
+          type: string
+          format: uuid
+      tags:
+        - Users
+      responses:
+        200:
+          description: An array of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Users'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /backends:
+    get:
+      summary: API Backends
+      description: |
+        API Backends returns an array of configured API Endpoints with their associated backend.
+      parameters:
+        - name: id
+          in: query
+          description: ID of a given API Backend.
+          required: false
+          type: string
+          format: uuid
+      tags:
+        - Backends
+      responses:
+        200:
+          description: An array of API backends
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Backends'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  definitions:
+  Users:
+    properties:
+      id:
+        type: string
+        description: Unique identifier representing a specific user.
+  Backends:
+    properties:
+      id:
+        type: string
+        description: Unique identifier representing a specific API Backend
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
