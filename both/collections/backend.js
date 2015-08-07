@@ -567,3 +567,9 @@ ApiBackendsSchema = new SimpleSchema({
 });
 
 ApiBackends.attachSchema(ApiBackendsSchema);
+
+ApiBackends.allow({
+  insert: function () {
+    return true;
+  }
+});
