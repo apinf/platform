@@ -16,5 +16,14 @@ Meteor.methods({
         };
       });
     };
+  },
+  'createApiBackendOnApiUmbrella': function (apiBackendId) {
+    // Get the API Backend object
+    var apiBackend = ApiBackends.findOne(apiBackendId);
+
+    // Send the API Backend to API Umbrella
+    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(apiBackend);
+
+    console.log(response);
   }
 });
