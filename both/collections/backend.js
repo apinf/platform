@@ -6,7 +6,7 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true
   },
   name: {
-    type: String,
+    type: String
   },
   documentation_link: {
     type: String,
@@ -49,7 +49,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   server: {
     type: [Object],
-    optional: false,
+    optional: true,
     label: 'Server'
   },
   "server.$.backend_host": {
@@ -63,7 +63,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   matching: {
     type: [Object],
-    optional: false,
+    optional: true
   },
   "matching.$.frontend_prefix": {
     label: 'Frontend prefix',
