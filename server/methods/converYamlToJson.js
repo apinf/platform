@@ -10,13 +10,9 @@ Meteor.methods({
       var path = projectRoot + "/uploads/apiBackendConfigs/" + fileFullName;
 
       var jsonFile;
-      var apiOne;
 
       try {
-
         jsonFile = YAML.safeLoad(fs.readFileSync(path, 'utf8'));
-
-        apiOne   = jsonFile.apis[0];
 
         jsonFile.apis.forEach(function (api) {
           ApiBackends.insert(api);
@@ -26,7 +22,7 @@ Meteor.methods({
         console.log(e);
       }
 
-      return apiOne;
+      return "Done";
     }else{
       return "Ooops";
     }

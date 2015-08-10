@@ -4,6 +4,7 @@
 # but you can also edit it by hand.
 
 meteor-platform
+coffeescript
 less
 accounts-base
 accounts-password
@@ -16,6 +17,7 @@ raix:handlebar-helpers
 cfs:standard-packages
 cfs:gridfs
 aldeed:template-extension
+cfs:graphicsmagick
 yogiben:helpers
 iron:router
 yogiben:autoform-modals
@@ -25,6 +27,9 @@ yogiben:autoform-map
 multiply:iron-router-progress
 manuelschoebel:ms-seo
 spiderable
+accounts-facebook
+accounts-google
+accounts-twitter
 accounts-ui
 jparker:gravatar
 tap:i18n
@@ -35,12 +40,19 @@ juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 momentjs:moment
 zimme:iron-router-active
+user-thumbs
 matb33:collection-hooks
+comments
+favorites
 dburles:collection-helpers
 reywood:publish-composite
+percolate:momentum-iron-router
+percolate:momentum
 natestrauser:animate-css
 meteorhacks:subs-manager
 fastclick
+notifications
+yogiben:admin
 timmyg:wow
 tsega:skrollr
 accounts-github
@@ -57,9 +69,6 @@ benmgreene:moment-range
 frenchbread:elastic-rest
 email
 zimme:active-route
-mfactory:admin-lte
+charts:dc
 cfs:filesystem
 udondan:yml
-dapearce:material-icons
-mrt:flash-messages
-frenchbread:dynatable
