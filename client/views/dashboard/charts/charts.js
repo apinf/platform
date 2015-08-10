@@ -139,7 +139,6 @@ Template.chartsLayout.created = function () {
     var overview = dc.barChart("#overview-chart");
 
     chart
-      .width(1140)
       .height(480)
       .transitionDuration(1500)
       .elasticY(true)
@@ -155,7 +154,6 @@ Template.chartsLayout.created = function () {
       .renderVerticalGridLines(true);
 
     overview
-      .width(1140)
       .height(40)
       .margins({top: 0, right: 50, bottom: 20, left: 40})
       .dimension(timeStampDimension)
@@ -167,7 +165,6 @@ Template.chartsLayout.created = function () {
       .yAxis().ticks(0);
 
     countryChart
-      .width(1140)
       .height(250)
       .dimension(countryDimension)
       .group(totalCountries)
