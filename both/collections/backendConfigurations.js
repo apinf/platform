@@ -1,18 +1,6 @@
 ApiBackendConfigurations = new FS.Collection("apiBackendConfigurations", {
   // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("apiBackendConfigurations", {path: "~/apinf/apiConfigurations"})]
-});
-
-ApiBackendConfigurations.filters({
-  allow: {
-    // ~ 10Mbs.
-    maxSize: 10048567,
-    extensions: ['json', 'yaml', 'txt']
-  },
-  onInvalid: function (message) {
-    // Show error message if it doesn't pass filter settings
-    FlashMessages.sendError(message);
-  }
+  stores: [new FS.Store.FileSystem("apiBackendConfigurations", {path: "~/Dev/meteorApps/api-umbrella-dashboard/uploads/apiBackendConfigs"})]
 });
 
 if (Meteor.isServer) {
