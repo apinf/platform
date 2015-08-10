@@ -18,11 +18,9 @@ Meteor.methods({
 
         apiOne   = jsonFile.apis[0];
 
-        /*jsonFile.apis.forEach(function (api) {
+        jsonFile.apis.forEach(function (api) {
           ApiBackends.insert(api);
-        });*/
-
-        console.log()
+        });
 
       } catch (e) {
         console.log(e);
