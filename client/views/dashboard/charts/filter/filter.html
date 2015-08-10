@@ -1,0 +1,46 @@
+<template name="filterData">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Filter</h3>
+    </div>
+    <div class="box-body">
+      <form id="filteringForm">
+        Month:
+        <select name="month" >
+          <option value="00">-</option>
+          <option value="01">January</option>
+          <option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
+          <option value="05">May</option>
+          <option value="06">June</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        Year:
+        <select name="year">
+          <option value="0000">-</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+        </select>
+        Limit:
+        <input name="limit" type="text" value="10000" />
+
+        <span class="dc-data-count dc-chart" id="row-selection" style="margin:0">
+          <span class="filter-count">_</span> selected out of <span class="total-count">_</span> records
+          <span>
+            <a href='javascript:dc.filterAll();dc.redrawAll();'>Reset All</a>
+          </span>
+        </span>
+        <span id="loadingState">
+
+        </span>
+
+      </form>
+    </div>
+  </div>
+</template>
