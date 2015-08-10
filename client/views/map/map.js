@@ -1,6 +1,6 @@
 // Creates variable that can be used in both .rendered and .created
 Template.map.rendered = function() {
-    var input = {
+  var input = {
     index : "api-umbrella-logs-v1-2015-07",
     type  : "log",
     limit : 1000,
@@ -26,16 +26,15 @@ Template.map.created = function() {
     // Empty array for addressPoints
     var addressPoints = [];
 
-    // Defines the density for the heatmap
-    var density = 1000;
-    var blur = 5;
+    // Defines the intensity for the heatmap
+    var intensity = 1000;
 
     // Gets data from the ElasticSearch
     Meteor.call("getChartData", input, function(err, data) {
       var items = data.hits.hits;
       //loops throught the array of objects
       items.forEach(function(item) {
-        addressPoints.push([item._source.request_ip_location.lat, item._source.request_ip_location.lon, density, blur])
+        addressPoints.push([item._source.request_ip_location.lat, item._source.request_ip_location.lon, intensity])
       });
     });
 
