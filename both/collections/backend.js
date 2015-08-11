@@ -53,7 +53,7 @@ ApiBackendsSchema = new SimpleSchema({
   servers: {
     type: [Object],
     optional: false,
-    label: 'Server'
+    label: 'Servers'
   },
   "servers.$.backend_host": {
     type: String,
