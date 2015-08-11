@@ -64,17 +64,17 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true,
     regEx: /^[0-9]{2,5}$/
   },
-  matching: {
+  url_matches: {
     type: [Object],
     optional: false,
   },
-  "matching.$.frontend_prefix": {
+  "url_matches.$.frontend_prefix": {
     label: 'Frontend prefix',
     optional: true,
     type: String,
     regEx: /^\/[a-z0-9A-Z_\-\/]*$/
   },
-  "matching.$.backend_prefix": {
+  "url_matches.$.backend_prefix": {
     label: 'Backend prefix',
     optional: true,
     type: String,
