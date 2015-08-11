@@ -205,12 +205,19 @@ Template.chartsLayout.created = function () {
       var dataSet = [];
       timeStampDimension.top(Infinity).forEach(function (e) {
 
+        var timeStamp;
         var country;
         var path;
-        var request_ip;
-        var response_time;
+        var requestIp;
+        var responseTime;
 
         // Error handling for empty fields
+        try{
+          timeStamp = e.fields.request_at[0];
+        }catch(e){
+          timeStamp = "";
+        }
+
         try{
           country = e.fields.request_ip_country[0]
         }catch(e){
@@ -236,11 +243,11 @@ Template.chartsLayout.created = function () {
         }
 
         dataSet.push({
-          "time"          : e.fields.request_at[0],
+          "time"          : timeStamp,
           "country"       : country,
           "path"          : path,
-          "ip"            : request_ip,
-          "response"      : response_time
+          "ip"            : requestIp,
+          "response"      : responseTime
         });
       });
       return dataSet;
