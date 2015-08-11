@@ -256,13 +256,11 @@ ApiBackendsSchema = new SimpleSchema({
   pass_api_key_header: {
     type: Boolean,
     optional: true,
-    defaultValue: false,
     label: 'Via HTTP header'
   },
   pass_api_key_query_param: {
     type: Boolean,
     optional: true,
-    defaultValue: false,
     label: 'Via GET query parameter'
   },
   sub_settings: {
@@ -341,13 +339,11 @@ ApiBackendsSchema = new SimpleSchema({
   "sub_settings.$.pass_api_key_header": {
     type: Boolean,
     optional: true,
-    defaultValue: false,
     label: 'Via HTTP header'
   },
   "sub_settings.$.pass_api_key_query_param": {
     type: Boolean,
     optional: true,
-    defaultValue: false,
     label: 'Via GET query parameter'
   },
   "sub_settings.$.rate_limit_mode": {
