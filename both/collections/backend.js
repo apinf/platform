@@ -55,11 +55,11 @@ ApiBackendsSchema = new SimpleSchema({
     optional: false,
     label: 'Servers'
   },
-  "servers.$.backend_host": {
+  "servers.$.host": {
     type: String,
     optional: true
   },
-  "servers.$.backend_port": {
+  "servers.$.port": {
     type: String,
     optional: true,
     regEx: /^[0-9]{2,5}$/
