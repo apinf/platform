@@ -27,14 +27,9 @@ Meteor.methods({
       "api": apiBackend
     };
 
-    // TODO: Make sure the Array fields validate
-    /*
-    {"errors":{"base":["must have at least one servers","must have at least one url_matches"],"sub_settings[0].http_method":["is not included in the list"]}}
-    */
-    
     // Send the API Backend to API Umbrella
     var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
 
-    console.log(response);
+    // TODO: Add error checking to ensure backend successfully inserted in API Umbrella
   }
 });
