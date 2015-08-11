@@ -263,137 +263,181 @@ ApiBackendsSchema = new SimpleSchema({
     optional: true,
     label: 'Via GET query parameter'
   },
-  sub_settings: {
-    type: [Object],
-    optional: true
-  },
-  "sub_settings.$.http_method": {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'GET',
-      'POST',
-      'PUT',
-      'DELETE',
-      'HEAD',
-      'TRACE',
-      'OPTIONS',
-      'CONNECT',
-      'PATCH'
-    ],
-    label: 'HTTP method'
-  },
-  "sub_settings.$.regex": {
-    type: String,
-    optional: true,
-    autoform: {
-      placeholder: '^/example.*param1=.+'
-    }
-  },
-  "sub_settings.$.api_key_verification_level": {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'Inherit (default - required)',
-      'Required - API keys are mandatory',
-      'Disabled - API keys are optional'
-    ],
-    label: 'API Key Checks'
-  },
-  "sub_settings.$.require_https": {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'Inherit (default - optional)',
-      'Optional - HTTPS is optional',
-      'Required - HTTPS is mandatory'
-    ],
-    label: 'HTTPS requirements'
-  },
-  "sub_settings.$.required_roles": {
-    type: Array,
-    minCount: 2,
-    maxCount: 3,
-    optional: true,
-    label: 'Required roles',
-    autoform: {
-      options: [
-        {
-          label: 'api-umbrella-contact-form',
-          value: 'api-umbrella-contact-form'
-        },
-        {
-          label: 'api-umbrella-key-creator',
-          value: 'api-umbrella-key-creator'
-        },
-        {
-          label: 'write_access',
-          value: 'write_access'
-        }
-      ]
-    }
-  },
-  "sub_settings.$.required_roles.$": {
-    type: String
-  },
-  "sub_settings.$.pass_api_key_header": {
-    type: Boolean,
-    optional: true,
-    label: 'Via HTTP header'
-  },
-  "sub_settings.$.pass_api_key_query_param": {
-    type: Boolean,
-    optional: true,
-    label: 'Via GET query parameter'
-  },
-  "sub_settings.$.rate_limit_mode": {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'Default rate limits',
-      'Custom rate limits',
-      'Unlimited requests'
-    ],
-  },
-  "sub_settings.$.custom_rate_limits": {
-    type: [Object],
-    optional: true
-  },
-  "sub_settings.$.custom_rate_limits.$.duration": {
-    type: String,
-    optional: true
-  },
-  "sub_settings.$.custom_rate_limits.$.accuracy": {
-    type: Number,
-    optional: true,
-    allowedValues: [
-      'Seconds',
-      'Minutes',
-      'Hours'
-    ]
-  },
-  "sub_settings.$.custom_rate_limits.$.limit_by": {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'API key',
-      'IP Address'
-    ]
-  },
-  "sub_settings.$.custom_rate_limits.$.limit": {
-    type: Number,
-    optional: true,
-    label: 'Number of requests',
-  },
-
-  "sub_settings.$.custom_rate_limits.$.response_headers": {
-    type: Boolean,
-    optional: true
-  },
-  rewrite: {
-    type: [Object],
-    optional: true
-  },
+  // sub_settings: {
+  //   type: [Object],
+  //   optional: true
+  // },
+  // "sub_settings.$.http_method": {
+  //   type: String,
+  //   optional: true,
+  //   allowedValues: [
+  //     'GET',
+  //     'POST',
+  //     'PUT',
+  //     'DELETE',
+  //     'HEAD',
+  //     'TRACE',
+  //     'OPTIONS',
+  //     'CONNECT',
+  //     'PATCH'
+  //   ],
+  //   label: 'HTTP method'
+  // },
+  // "sub_settings.$.regex": {
+  //   type: String,
+  //   optional: true,
+  //   autoform: {
+  //     placeholder: '^/example.*param1=.+'
+  //   }
+  // },
+  // "sub_settings.$.api_key_verification_level": {
+  //   type: String,
+  //   optional: true,
+  //   allowedValues: [
+  //     'Inherit (default - required)',
+  //     'Required - API keys are mandatory',
+  //     'Disabled - API keys are optional'
+  //   ],
+  //   label: 'API Key Checks'
+  // },
+  // "sub_settings.$.require_https": {
+  //   type: String,
+  //   optional: true,
+  //   allowedValues: [
+  //     'Inherit (default - optional)',
+  //     'Optional - HTTPS is optional',
+  //     'Required - HTTPS is mandatory'
+  //   ],
+  //   label: 'HTTPS requirements'
+  // },
+  // "sub_settings.$.required_roles": {
+  //   type: Array,
+  //   minCount: 2,
+  //   maxCount: 3,
+  //   optional: true,
+  //   label: 'Required roles',
+  //   autoform: {
+  //     options: [
+  //       {
+  //         label: 'api-umbrella-contact-form',
+  //         value: 'api-umbrella-contact-form'
+  //       },
+  //       {
+  //         label: 'api-umbrella-key-creator',
+  //         value: 'api-umbrella-key-creator'
+  //       },
+  //       {
+  //         label: 'write_access',
+  //         value: 'write_access'
+  //       }
+  //     ]
+  //   }
+  // },
+  // "sub_settings.$.required_roles.$": {
+  //   type: String
+  // },
+  // "sub_settings.$.pass_api_key_header": {
+  //   type: Boolean,
+  //   optional: true,
+  //   autoValue: function (backend) {
+  //     // Unset the value if it is set to false
+  //     // TODO: determine how to accept false values
+  //     //        without requiring other sub-settings fields
+  //     //        I.e. the form checkbox defaults to false,
+  //     //        so false is passed in by default
+  //     if (!this.value) {
+  //       this.unset();
+  //     } else {
+  //       return undefined;
+  //     }
+  //   },
+  //   label: 'Via HTTP header'
+  // },
+  // "sub_settings.$.pass_api_key_query_param": {
+  //   type: Boolean,
+  //   optional: true,
+  //   autoValue: function (backend) {
+  //     // Unset the value if it is set to false
+  //     // TODO: determine how to accept false values
+  //     //        without requiring other sub-settings fields
+  //     //        I.e. the form checkbox defaults to false,
+  //     //        so false is passed in by default
+  //     if (!this.value) {
+  //       this.unset();
+  //     } else {
+  //       return undefined;
+  //     }
+  //   },
+  //   label: 'Via GET query parameter'
+  // },
+  // "sub_settings.$.rate_limit_mode": {
+  //   type: String,
+  //   optional: true,
+  //   allowedValues: [
+  //     'Default rate limits',
+  //     'Custom rate limits',
+  //     'Unlimited requests'
+  //   ],
+  // },
+  // // TODO: Add custom rate limits
+  // //       They are currently cauing a 'bug' where the custom rate limit
+  // //       is set to an empty object, because the Boolean fields automatically return false
+  // "sub_settings.$.custom_rate_limits": {
+  //   type: [Object],
+  //   optional: true,
+  //   autoValue: function () {
+  //     var fieldValue = this.value[0];
+  //     console.log(fieldValue);
+  //     return undefined;
+  //   }
+  // },
+  // "sub_settings.$.custom_rate_limits.$.duration": {
+  //   type: String,
+  //   optional: true
+  // },
+  // "sub_settings.$.custom_rate_limits.$.accuracy": {
+  //   type: Number,
+  //   optional: true,
+  //   allowedValues: [
+  //     'Seconds',
+  //     'Minutes',
+  //     'Hours'
+  //   ]
+  // },
+  // "sub_settings.$.custom_rate_limits.$.limit_by": {
+  //   type: String,
+  //   optional: true,
+  //   allowedValues: [
+  //     'API key',
+  //     'IP Address'
+  //   ]
+  // },
+  // "sub_settings.$.custom_rate_limits.$.limit": {
+  //   type: Number,
+  //   optional: true,
+  //   label: 'Number of requests',
+  // },
+  //
+  // "sub_settings.$.custom_rate_limits.$.response_headers": {
+  //   type: Boolean,
+  //   optional: true,
+  //   autoValue: function (backend) {
+  //     // Unset the value if it is set to false
+  //     // TODO: determine how to accept false values
+  //     //        without requiring other sub-settings fields
+  //     //        I.e. the form checkbox defaults to false,
+  //     //        so false is passed in by default
+  //     if (!this.value) {
+  //       this.unset();
+  //     } else {
+  //       return undefined;
+  //     }
+  //   }
+  // },
+  // rewrite: {
+  //   type: [Object],
+  //   optional: true
+  // },
   "rewrite.$.matcher_type": {
     type: String,
     optional: true,
