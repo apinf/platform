@@ -50,16 +50,16 @@ ApiBackendsSchema = new SimpleSchema({
     ],
     label: 'Balance algorithm'
   },
-  server: {
+  servers: {
     type: [Object],
     optional: false,
     label: 'Server'
   },
-  "server.$.backend_host": {
+  "servers.$.backend_host": {
     type: String,
     optional: true
   },
-  "server.$.backend_port": {
+  "servers.$.backend_port": {
     type: String,
     optional: true,
     regEx: /^[0-9]{2,5}$/
