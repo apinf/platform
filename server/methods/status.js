@@ -28,7 +28,7 @@ Meteor.methods({
         message     : ""
       };
 
-      var apiUmbrellaHost       = "https://umbrella.apinf.io/";
+      var apiUmbrellaHost     = "https://umbrella.apinf.io/";
       var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);
 
 
