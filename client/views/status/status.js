@@ -37,6 +37,9 @@ Template.statusCheck.rendered = function () {
     if (status.apinf.operational && status.apiUmbrella.operational && status.elasticsearch.operational){
       fullState.addClass('alert-success');
       fullState.html('All systems operational.')
+    }else{
+      fullState.addClass('alert-danger');
+      fullState.html('Something is wrong.');
     }
 
   })
