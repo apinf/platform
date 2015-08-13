@@ -83,11 +83,11 @@ livedata@1.0.13
 localstorage@1.0.3
 logging@1.0.7
 manuelschoebel:ms-seo@0.4.1
-matb33:collection-hooks@0.7.13
+matb33:collection-hooks@0.7.14
 meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:async@1.0.0
-meteorhacks:npm@1.3.0
+meteorhacks:npm@1.4.0
 meteorhacks:subs-manager@1.4.0
 meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
@@ -102,7 +102,7 @@ mrt:flash-messages@1.0.1
 multiply:iron-router-progress@1.0.1
 natestrauser:animate-css@3.2.6
 npm-bcrypt@0.7.8_2
-npm-container@1.0.0
+npm-container@1.1.0
 oauth@1.1.4
 oauth2@1.1.3
 observe-sequence@1.0.6
