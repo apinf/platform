@@ -46,7 +46,6 @@ tsega:skrollr
 accounts-github
 bruz:github-api
 chart:chart
-brylie:api-umbrella
 percolate:synced-cron
 twbs:bootstrap
 reactive-var
@@ -62,3 +61,6 @@ cfs:filesystem
 dapearce:material-icons
 mrt:flash-messages
 frenchbread:dynatable
+brylie:api-umbrella
+bevanhunt:leaflet
+brylie:leaflet-heat

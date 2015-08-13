@@ -136,21 +136,35 @@ Template.chartsLayout.created = function () {
 
     var chart = dc.lineChart("#line-chart");
     var countryChart = dc.barChart("#bar-chart");
+    var overview = dc.barChart("#overview-chart");
 
     chart
-      .width(1140)
       .height(480)
-      .elasticX(true)
+      .transitionDuration(1500)
+      .elasticY(true)
       .x(timeScale)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
+      .mouseZoomable(true)
+      .rangeChart(overview)
       .renderArea(true)
       .dotRadius(3)
+      .brushOn(false)
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true);
 
+    overview
+      .height(40)
+      .margins({top: 0, right: 50, bottom: 20, left: 40})
+      .dimension(timeStampDimension)
+      .group(timeStampGroup)
+      .centerBar(true)
+      .gap(1)
+      .x(timeScale)
+      .alwaysUseRounding(true)
+      .yAxis().ticks(0);
+
     countryChart
-      .width(1140)
       .height(250)
       .dimension(countryDimension)
       .group(totalCountries)

@@ -10,7 +10,7 @@
     <legend>Backend</legend>
     <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
     {{> afQuickField name='backend_protocol' options="allowed"}}
-    {{> afQuickField name='server'}}
+    {{> afQuickField name='servers'}}
     <legend>Host</legend>
     <div class="row">
       <div class="col-lg-4">
@@ -26,7 +26,7 @@
     </div>
     <legend>Matching URL Prefixes</legend>
     <span class="help-block">What URL prefixes should be routed to this backend?</span>
-    {{> afQuickField name='matching'}}
+    {{> afQuickField name='url_matches'}}
     <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Global Request Settings</legend>
     <div id="global-request-block" class="collapse in">
       {{> afQuickField name='append_query_string'}}
@@ -41,29 +41,6 @@
       {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
       {{> afQuickField name='custom_rate_limits'}}
       {{/if}}
-    </div>
-    <legend data-toggle="collapse" data-target="#sub-url-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Sub-URL Request Settings</legend>
-    <div id="sub-url-block" class="collapse in">
-      <span class="help-block">Change settings for specific sub-URLs within this API.</span>
-      {{#afEachArrayItem name='sub_settings'}}
-      {{> afQuickField name=this.current.http_method}}
-      {{> afQuickField name=this.current.regex}}
-      {{> afQuickField name=this.current.api_key_verification_level}}
-      {{> afQuickField name=this.current.require_https}}
-      {{> afQuickField name=this.current.required_roles}}
-      {{> afQuickField name=this.current.pass_api_key_header}}
-      {{> afQuickField name=this.current.pass_api_key_query_param}}
-      {{> afQuickField name=this.current.rate_limit_mode options="allowed"}}
-      <div id="sub-settings-custom-rate-limit">
-        {{#afEachArrayItem name=this.current.custom_rate_limits}}
-        {{> afQuickField name=this.current.duration}}
-        {{> afQuickField name=this.current.accuracy}}
-        {{> afQuickField name=this.current.limit_by}}
-        {{> afQuickField name=this.current.limit}}
-        {{> afQuickField name=this.current.response_headers}}
-        {{/afEachArrayItem}}
-      </div>
-      {{/afEachArrayItem}}
     </div>
     <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
     <div id="advanced-rewriting-block" class="collapse in">
