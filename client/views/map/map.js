@@ -1,5 +1,8 @@
 // Creates variable that can be used in both .rendered and .created
 Template.map.rendered = function() {
+
+  var self = this;
+
   var input = {
     index : "api-umbrella-logs-v1-2015-07",
     type  : "log",
@@ -9,10 +12,16 @@ Template.map.rendered = function() {
     }
   };
 
-  drawMap(input);
-}
+  self.getMapData(input);
+  self.drawMap();
+};
+
 Template.map.created = function() {
-  drawMap = function (input) {
+
+  var self = this;
+  self.mapData = new ReactiveVar();
+
+  self.drawMap = function () {
 
     // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
     var map = L.map('map').setView([61.5000, 23.7667], 4);
@@ -23,11 +32,21 @@ Template.map.created = function() {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    // Empty array for addressPoints
-    var addressPoints = [];
 
     // Defines the intensity for the heatmap
     var intensity = 100;
+
+    var addressPoints = self.mapData.get();
+
+    // adds the heatpoints to the map
+    var heat = L.heatLayer(addressPoints).addTo(map);
+
+  };
+
+  self.getMapData = function (input) {
+
+    // Empty array for addressPoints
+    var addressPoints = [];
 
     // Gets data from the ElasticSearch
     Meteor.call("getChartData", input, function(err, data) {
@@ -39,11 +58,12 @@ Template.map.created = function() {
         }catch(e){
           console.log("err");
         }
+
+        self.mapData.set(addressPoints);
+
       });
     });
 
-    // adds the heatpoints to the map
-    var heat = L.heatLayer(addressPoints).addTo(map);
+  }
 
-  };
 }
