@@ -606,6 +606,23 @@ ApiBackendsSchema = new SimpleSchema({
   version: {
     type: Number,
     optional: true
+  },
+  managerIds: {
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id,
+    autoValue: function () {
+      // If the field is already set, leave it as-is
+      if (this.isSet) {
+        return undefined;
+      } else {
+        // Otherwise, return an array containing only the current User ID
+        return [Meteor.userId()];
+      }
+    },
+    autoform: {
+      type: "hidden",
+      label: false
+    }
   }
 });
 
