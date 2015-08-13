@@ -8,3 +8,7 @@ Meteor.publish('myBookmarkedApis', function () {
   // get apibackends by id
   return ApiBackends.find({_id: {$in: bookmarkedApiIds}});
 });
+
+Meteor.publish('singleApiBackend', function (backendId) {
+  return ApiBackends.find({_id: backendId});
+});
