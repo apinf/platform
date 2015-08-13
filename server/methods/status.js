@@ -27,7 +27,6 @@ Meteor.methods({
         status.message      = "Apinf is down for some reason. Please contact support.";
       }
 
-      ç
       return status;
     }
 
