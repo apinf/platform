@@ -9,22 +9,30 @@ Meteor.methods({
         message     : ""
       };
 
-      // initial host for apinf
-      var apinfHost     = "https://apinf.com";
+      try{
 
-      // response object from apinf GET request
-      var apinfResponse = Meteor.http.call("GET", apinfHost);
+        // initial host for apinf
+        var apinfHost     = "https://apinf.com";
 
-      // checks is the status code matches 200
-      if (apinfResponse.statusCode == 200) {
+        // response object from apinf GET request
+        var apinfResponse = Meteor.http.call("GET", apinfHost);
 
-        // if status code is 200 changes operational state to TRUE and provides success message
-        status.operational  = true;
-        status.message      = "Apinf is operating normally.";
-      }else{
+        // checks is the status code matches 200
+        if (apinfResponse.statusCode == 200) {
 
-        // if not, operational state remains false and provides different message
-        status.message      = "Apinf is down for some reason. Please contact support.";
+          // if status code is 200 changes operational state to TRUE and provides success message
+          status.operational  = true;
+          status.message      = "Apinf is operating normally.";
+        }else{
+
+          // if not, operational state remains false and provides different message
+          status.message      = "Apinf is down for some reason. Please contact support.";
+        }
+
+      }catch(e){
+
+        // if http call crashes, sending different message
+        status.message = "Not able to access Apinf.";
       }
 
       return status;
@@ -38,22 +46,31 @@ Meteor.methods({
         message     : ""
       };
 
-      // initial host for API umbrella
-      var apiUmbrellaHost     = "https://umbrella.apinf.io/";
+      try{
 
-      // response object from API Umbrella GET request
-      var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);
+        // initial host for API umbrella
+        var apiUmbrellaHost     = "https://umbrella.apinf.io/";
 
-      // checks is the status code matches 200
-      if (apiUmbrellaResponse.statusCode == 200) {
+        // response object from API Umbrella GET request
+        var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);
 
-        // if status code is 200 changes operational state to TRUE and provides success message
-        status.operational  = true;
-        status.message      = "API Umbrella is operating normally.";
-      }else{
+        // checks is the status code matches 200
+        if (apiUmbrellaResponse.statusCode == 200) {
 
-        // if not, operational state remains false and provides different message
-        status.message      = "API Umbrella is down for some reason. Please contact support.";
+          // if status code is 200 changes operational state to TRUE and provides success message
+          status.operational  = true;
+          status.message      = "API Umbrella is operating normally.";
+        }else{
+
+          // if not, operational state remains false and provides different message
+          status.message      = "API Umbrella is down for some reason. Please contact support.";
+        }
+
+      }catch(e){
+
+        // if http call crashes, sending different message
+        status.message = "Not able to reach API Umbrella.";
+
       }
 
       // if not, operational state remains false and provides different message
@@ -68,22 +85,28 @@ Meteor.methods({
         message     : ""
       };
 
-      // initial host for elasticsearch instance
-      var elasticsearchInstance = "http://apinf.com:14002/";
+      try{
+        // initial host for elasticsearch instance
+        var elasticsearchInstance = "http://apinf.com:14002/";
 
-      // response object from elasticsearch GET request
-      var elasticsearchResponse =  Meteor.http.call("GET", elasticsearchInstance);
+        // response object from elasticsearch GET request
+        var elasticsearchResponse =  Meteor.http.call("GET", elasticsearchInstance);
 
-      // checks is the status code matches 200
-      if (elasticsearchResponse.statusCode == 200) {
+        // checks is the status code matches 200
+        if (elasticsearchResponse.statusCode == 200) {
 
-        // if status code is 200 changes operational state to TRUE and provides success message
-        status.operational  = true;
-        status.message      = "Elasticsearch is operating normally.";
-      }else{
+          // if status code is 200 changes operational state to TRUE and provides success message
+          status.operational  = true;
+          status.message      = "Elasticsearch is operating normally.";
+        }else{
 
-        // if not, operational state remains false and provides different message
-        status.message      = "Elasticsearch is down for some reason. Please contact support.";
+          // if not, operational state remains false and provides different message
+          status.message      = "Elasticsearch is down for some reason. Please contact support.";
+        }
+      }catch(e){
+
+        // if http call crashes, sending different message
+        status.message = "Not able to reach Elasticsearch.";
       }
 
       // if not, operational state remains false and provides different message
