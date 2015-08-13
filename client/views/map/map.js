@@ -27,7 +27,7 @@ Template.map.created = function() {
     var addressPoints = [];
 
     // Defines the intensity for the heatmap
-    var intensity = 1000;
+    var intensity = 100;
 
     // Gets data from the ElasticSearch
     Meteor.call("getChartData", input, function(err, data) {
