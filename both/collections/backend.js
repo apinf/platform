@@ -631,5 +631,32 @@ ApiBackends.attachSchema(ApiBackendsSchema);
 ApiBackends.allow({
   insert: function () {
     return true;
-  }
+  },
+  update: function (userId, backend) {
+    // Get the backend managers
+    var managerIds = backend.managerIds;
+
+    // Make sure current user is a backend manager
+    if (_.contains(managerIds, userId)) {
+      // User is allowed to perform action
+      return true;
+    } else {
+      // User is not allowded to perform action
+      return false;
+    }
+  },
+  delete: function (userId, backend) {
+    // Get the backend managers
+    var managerIds = backend.managerIds;
+
+    // Make sure current user is a backend manager
+    if (_.contains(managerIds, userId)) {
+      // User is allowed to perform action
+      return true;
+    } else {
+      // User is not allowded to perform action
+      return false;
+    }
+  },
+  fetch: ['managerIds']
 });
