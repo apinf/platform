@@ -18,9 +18,9 @@ Template.map.created = function() {
     var map = L.map('map').setView([61.5000, 23.7667], 4);
 
     // adds tilelayer
-    var tiles = L.tileLayer('http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.mapbox.com/about/maps/">Terms and Feedback</a>',
-      id: 'examples.map-20v6611k'
+    var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     // Empty array for addressPoints
@@ -34,11 +34,16 @@ Template.map.created = function() {
       var items = data.hits.hits;
       //loops throught the array of objects
       items.forEach(function(item) {
-        addressPoints.push([item._source.request_ip_location.lat, item._source.request_ip_location.lon, intensity])
+        try{
+          addressPoints.push([item._source.request_ip_location.lat, item._source.request_ip_location.lon, intensity])
+        }catch(e){
+          console.log("err");
+        }
       });
     });
 
     // adds the heatpoints to the map
     var heat = L.heatLayer(addressPoints).addTo(map);
-  }
+
+  };
 }
