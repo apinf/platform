@@ -8,3 +8,13 @@ Meteor.publish('myBookmarkedApis', function () {
   // get apibackends by id
   return ApiBackends.find({_id: {$in: bookmarkedApiIds}});
 });
+
+Meteor.publish('myManagedApis', function () {
+  // get current user id
+  var userId = this.userId;
+
+  // Get API Backends that user manages
+  var userManagedApis = ApiBackends.find({managerIds: userId});
+
+  return userManagedApis;
+})
