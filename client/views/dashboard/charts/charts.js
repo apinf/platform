@@ -1,5 +1,7 @@
 Template.chartsLayout.rendered = function () {
 
+  var self = this;
+
   // appending loading state
   $('#loadingState').html("Loading...");
 
@@ -20,13 +22,17 @@ Template.chartsLayout.rendered = function () {
     ]
   };
   // Drawing the chart
-  drawChart(input)
+  self.drawChart(input);
+  self.drawMap();
 };
 
 Template.chartsLayout.created = function () {
 
+  var self = this;
+  self.mapData = new ReactiveVar();
+
   // function that sets chart data to be available in template
-  drawChart = function (input) {
+  self.drawChart = function (input) {
 
     Meteor.call("getChartData", input, function (err, data) {
 
@@ -253,10 +259,54 @@ Template.chartsLayout.created = function () {
       return dataSet;
     }
 
+
     RefreshTable();
 
     // removing loading state once loaded
     $('#loadingState').html("Loaded! Took <b>" + took + "</b>ms");
     dc.renderAll();
   };
+
+  self.drawMap = function () {
+
+    // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
+    var map = L.map('map').setView([61.5000, 23.7667], 4);
+
+    // adds tilelayer
+    var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+
+    // Defines the intensity for the heatmap
+    var intensity = 100;
+
+    // adds the heatpoints to the map
+    var heat = L.heatLayer(addressPoints).addTo(map);
+
+  };
+
+  self.getMapData = function (input) {
+
+    // Empty array for addressPoints
+    var addressPoints = [];
+
+    // Gets data from the ElasticSearch
+    Meteor.call("getChartData", input, function (err, data) {
+      var items = data.hits.hits;
+      //loops throught the array of objects
+      items.forEach(function (item) {
+        try {
+          addressPoints.push([item._source.request_ip_location.lat, item._source.request_ip_location.lon, intensity])
+        } catch (e) {
+          console.log("err");
+        }
+
+        self.mapData.set(addressPoints);
+
+      });
+    });
+  }
+
 };
