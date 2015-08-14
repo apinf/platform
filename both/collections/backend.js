@@ -645,7 +645,7 @@ ApiBackends.allow({
       return false;
     }
   },
-  delete: function (userId, backend) {
+  remove: function (userId, backend) {
     // Get the backend managers
     var managerIds = backend.managerIds;
 

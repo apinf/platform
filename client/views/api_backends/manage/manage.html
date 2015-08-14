@@ -1,3 +1,8 @@
 <template name='apiBackendsManage'>
-  <p>My managed APIs</p>
+  <h2 class="page-heading">My managed APIs</h2>
+  <div class="list-group">
+  {{# each managedApis }}
+  <div class="list-group-item"><b>Name:</b> {{name}} <p><b>Backend host:</b> {{backend_host}}</p></div>
+  {{/ each }}
+</div>
 </template>
