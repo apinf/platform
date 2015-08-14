@@ -7,8 +7,25 @@
         <li class="{{isActiveRoute 'dashboard'}}">
           <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>Analytics</span></a>
         </li>
-        <li class="{{isActiveRoute 'apiBackends'}}">
-          <a href="/apibackends"><i class="fa fa-code"></i><span>API Backends</span></a>
+        <li class="{{isActiveRoute 'apiBackends'}} {{isActiveRoute 'manageApiBackends'}} treeview">
+          <a href="#">
+            <i class="fa fa-code"></i>
+            <span>API Backends</span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{isActiveRoute 'apiBackends'}} treeview">
+              <a href="/apibackends">
+                <i class="fa fa-circle-o"></i>
+                <span>Add API Backend</span>
+                </a>
+            </li>
+            <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
+              <a href="/manage">
+                <i class="fa fa-circle-o"></i>
+                <span>Manage API Backends</span>
+                </a>
+            </li>
+          </ul>
         </li>
         <li class="{{isActiveRoute 'catalogue'}}">
           <a href="/catalogue"><i class="fa fa-list-alt"></i><span>Catalogue</span></a>
