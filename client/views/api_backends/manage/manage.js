@@ -7,3 +7,15 @@ Template.apiBackendsManage.rendered = function () {
 
   //console.log(myManagedApis);
 };
+
+Template.apiBackendsManage.helpers({
+  'managedApis': function () {
+    // Get the current user
+    var userId = Meteor.user()._id;
+
+    // Get API Backends managed by user (provided by subscription)
+    var managedApis = ApiBackends.find({managerIds: userId});
+
+    return managedApis;
+  }
+});
