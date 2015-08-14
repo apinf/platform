@@ -1,14 +1,14 @@
-Template.apiBackendsManage.created = function () {
+Template.manageApiBackends.created = function () {
   this.subscribe('myManagedApis');
 };
 
-Template.apiBackendsManage.rendered = function () {
+Template.manageApiBackends.rendered = function () {
   var myManagedApis = ApiBackends.find().fetch();
 
   //console.log(myManagedApis);
 };
 
-Template.apiBackendsManage.helpers({
+Template.manageApiBackends.helpers({
   'managedApis': function () {
     // Get the current user
     var userId = Meteor.user()._id;
