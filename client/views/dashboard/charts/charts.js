@@ -333,7 +333,7 @@ Template.chartsLayout.created = function () {
 
     var mapData = data.hits.hits;
 
-    var intensity = 500;
+    var intensity = 100;
     var addressPoints = [];
 
     mapData.forEach(function (item) {
