@@ -32,8 +32,6 @@ Template.chartsLayout.rendered = function () {
   // render map
   instance.renderMap();
 
-  console.log(instance.dashboardData.get())
-
   instance.autorun(function () {
 
     //instance.map.removeLayer(instance.heat);
@@ -41,35 +39,21 @@ Template.chartsLayout.rendered = function () {
     console.log("Autorun ->");
 
     // dashboard data from reactive variable
-    var dashboardData = instance.dashboardData.get();
+    var mapData = instance.mapData.get();
 
-    // create heat layer
-    //instance.heatLayer = L.heatLayer(heatData);
+    if (typeof mapData === 'object') {
 
-
-    if (typeof dashboardData === 'object') {
-
-      // parse map data
-      var heatData = instance.parseMapData(dashboardData.hits.hits);
-
-      console.log(heatData)
+      console.log(mapData);
 
       // create heat layer
-      instance.heatLayer = L.heatLayer(heatData);
+      instance.heatLayer = L.heatLayer(mapData);
 
       // adds heat to map
       instance.heatLayer.addTo(instance.map);
 
     }
 
-    //instance.heat = L.heatLayer(mapData);
-    //
-    //instance.heat.addTo(instance.map)
-
   });
-
-  // Drawing the chart
-  //instance.getData(input);
 
 
 };
@@ -78,7 +62,7 @@ Template.chartsLayout.created = function () {
 
   var instance = this;
 
-  instance.dashboardData = new ReactiveVar("No data");
+  instance.mapData       = new ReactiveVar("No data");
 
   // function that sets chart data to be available in template
   instance.getDashboardData = function (input) {
@@ -94,13 +78,15 @@ Template.chartsLayout.created = function () {
 
       } else {
 
-        instance.dashboardData.set(data);
-
         // Parse the returned data for DC
-        var parsedData = instance.parseChartData(data);
+        var parsedChartData = instance.parseChartData(data);
+
+        var parsedMapData   = instance.parseMapData(data);
+
+        instance.mapData.set(parsedMapData);
 
         // Render the charts using parsed data
-        instance.renderCharts(parsedData);
+        instance.renderCharts(parsedChartData);
 
       }
     });
@@ -343,67 +329,28 @@ Template.chartsLayout.created = function () {
 
   };
 
-  instance.parseMapData = function (dashboardData) {
+  instance.parseMapData = function (data) {
+
+    var mapData = data.hits.hits;
 
     var intensity = 500;
     var addressPoints = [];
 
-    dashboardData.forEach(function (item) {
+    mapData.forEach(function (item) {
 
       try{
 
-        console.log(item.fields["request_ip_location.lat"][0], item.fields["request_ip_location.lon"][0]);
         addressPoints.push([item.fields["request_ip_location.lat"][0], item.fields["request_ip_location.lon"][0], intensity])
 
       }catch(e){
         console.log("not found");
       }
 
-
     });
+
+    console.log(addressPoints)
 
     return addressPoints;
   };
-
-
-  //
-  //instance.getMapData = function (input) {
-  //
-  //  // Empty array for addressPoints
-  //  var addressPoints = [];
-  //
-  //  // Gets data from the ElasticSearch
-  //  Meteor.call("getChartData", input, function (err, data) {
-  //    var items = data.hits.hits;
-  //    //loops throught the array of objects
-  //    items.forEach(function (item) {
-  //      try {
-  //        addressPoints.push([item.fields.request_ip_location.lat, item.fields.request_ip_location.lon, intensity])
-  //      } catch (e) {
-  //        console.log("err");
-  //      }
-  //
-  //      instance.dashboardData.set(addressPoints);
-  //
-  //    });
-  //  });
-  //};
-  //
-  //var input = {
-  //  index : "api-umbrella-logs-v1-2015-07",
-  //  type  : "log",
-  //  limit : 100,
-  //  fields: [
-  //    'request_at',
-  //    'request_ip_country',
-  //    'request_ip',
-  //    'response_time',
-  //    'request_path',
-  //    'request_ip_location'
-  //  ]
-  //};
-  //
-  //
-  //instance.getMapData(input);
 
 };
