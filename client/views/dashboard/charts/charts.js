@@ -99,6 +99,7 @@ Template.chartsLayout.created = function () {
 
   // function that parses chart data
   instance.parseChartData = function (data) {
+
     // Get chart data from within data object
     var items = data.hits.hits;
 
@@ -126,14 +127,8 @@ Template.chartsLayout.created = function () {
     // Create timestamp dimension from YMD field
     var timeStampDimension = index.dimension(function(d){ return d.fields.ymd; });
 
-    // Create country dimension from Request IP Country field
-    var countryDimension = index.dimension(function (d) { return d.fields.request_ip_country });
-
     // Group entries by timestamp dimension
     var timeStampGroup = timeStampDimension.group();
-
-    // Group entries by country
-    var countryGroup = countryDimension.group();
 
     // Create index by all dimensions
     var all = index.groupAll();
@@ -143,11 +138,6 @@ Template.chartsLayout.created = function () {
       .dimension(index)
       .group(all);
 
-    // total amount of countries within filtering
-    var totalCountries = countryGroup.reduceSum(function(d) {
-      return d.fields.itemsCount;
-    });
-
     // set up a range of dates for charts
     var minDate = d3.min(items, function(d) { return d.fields.ymd; });
     var maxDate = d3.max(items, function(d) { return d.fields.ymd; });
@@ -155,19 +145,13 @@ Template.chartsLayout.created = function () {
     // Create time scale from min and max dates
     var timeScale = d3.time.scale().domain([minDate, maxDate]);
 
-    // Create country scale from country dimension
-    var countryScale = d3.scale.ordinal().domain(countryDimension);
 
 
     // Return object with all key values created above
     return {
       timeStampDimension  : timeStampDimension,
-      countryDimension    : countryDimension,
       timeStampGroup      : timeStampGroup,
-      countryGroup        : countryGroup,
-      totalCountries      : totalCountries,
       timeScale           : timeScale,
-      countryScale        : countryScale,
       took                : data.took
     };
   };
@@ -175,20 +159,15 @@ Template.chartsLayout.created = function () {
   instance.renderCharts = function (parsedData) {
 
     var timeStampDimension  = parsedData.timeStampDimension;
-    var countryDimension    = parsedData.countryDimension;
     var timeStampGroup      = parsedData.timeStampGroup;
-    var countryGroup        = parsedData.countryGroup;
-    var totalCountries      = parsedData.totalCountries;
     var timeScale           = parsedData.timeScale;
-    var countryScale        = parsedData.countryScale;
     var took                = parsedData.took;
 
     var chart = dc.lineChart("#line-chart");
-    var countryChart = dc.barChart("#bar-chart");
     var overview = dc.barChart("#overview-chart");
 
     chart
-      .height(480)
+      .height(250)
       .transitionDuration(1500)
       .elasticY(true)
       .x(timeScale)
@@ -212,16 +191,6 @@ Template.chartsLayout.created = function () {
       .x(timeScale)
       .alwaysUseRounding(true)
       .yAxis().ticks(0);
-
-    countryChart
-      .height(250)
-      .dimension(countryDimension)
-      .group(totalCountries)
-      .x(countryScale)
-      .xUnits(dc.units.ordinal)
-      .renderHorizontalGridLines(true)
-      .renderVerticalGridLines(true);
-
 
     // Creates Dynatable
     var dynatable = $('#dc-data-table').dynatable({
