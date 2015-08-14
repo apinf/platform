@@ -17,4 +17,8 @@ Meteor.publish('myManagedApis', function () {
   var userManagedApis = ApiBackends.find({managerIds: userId});
 
   return userManagedApis;
-})
+});
+
+Meteor.publish('apiBackend', function (backendId) {
+  return ApiBackends.find({_id: backendId});
+});
