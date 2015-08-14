@@ -21,29 +21,52 @@ Template.chartsLayout.rendered = function () {
       'request_ip',
       'response_time',
       'request_path',
-      'request_ip_location'
+      'request_ip_location.lon',
+      'request_ip_location.lat'
     ]
   };
 
+  // get data
   instance.getDashboardData(input);
+
+  // render map
+  instance.renderMap();
 
   console.log(instance.dashboardData.get())
 
-  //instance.autorun(function () {
-  //
-  //  //instance.map.removeLayer(instance.heat);
-  //
-  //  console.log("Autorun ->");
-  //
-  //  var mapData = instance.dashboardData.get();
-  //
-  //
-  //
-  //  //instance.heat = L.heatLayer(mapData);
-  //  //
-  //  //instance.heat.addTo(instance.map)
-  //
-  //});
+  instance.autorun(function () {
+
+    //instance.map.removeLayer(instance.heat);
+
+    console.log("Autorun ->");
+
+    // dashboard data from reactive variable
+    var dashboardData = instance.dashboardData.get();
+
+    // create heat layer
+    //instance.heatLayer = L.heatLayer(heatData);
+
+
+    if (typeof dashboardData === 'object') {
+
+      // parse map data
+      var heatData = instance.parseMapData(dashboardData.hits.hits);
+
+      console.log(heatData)
+
+      // create heat layer
+      instance.heatLayer = L.heatLayer(heatData);
+
+      // adds heat to map
+      instance.heatLayer.addTo(instance.map);
+
+    }
+
+    //instance.heat = L.heatLayer(mapData);
+    //
+    //instance.heat.addTo(instance.map)
+
+  });
 
   // Drawing the chart
   //instance.getData(input);
@@ -297,28 +320,52 @@ Template.chartsLayout.created = function () {
     dc.renderAll();
   };
 
-  //instance.drawMap = function (mapData) {
-  //
-  //  // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
-  //  instance.map = L.map('map').setView([61.5000, 23.7667], 4);
-  //
-  //  // adds tilelayer
-  //  var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //    maxZoom: 19,
-  //    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  //  }).addTo(instance.map);
-  //
-  //
-  //  // Defines the intensity for the heatmap
-  //  var intensity = 100;
-  //
-  //  if (mapData) {
-  //    // adds the heatpoints to the map
-  //    instance.heat = L.heatLayer(mapData).addTo(instance.map);
-  //  }
-  //
-  //
-  //};
+  instance.renderMap = function (mapData) {
+
+    // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
+    instance.map = L.map('map').setView([61.5000, 23.7667], 4);
+
+    // adds tilelayer
+    var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(instance.map);
+
+
+    // Defines the intensity for the heatmap
+    var intensity = 100;
+
+    if (mapData) {
+      // adds the heatpoints to the map
+      instance.heat = L.heatLayer(mapData).addTo(instance.map);
+    }
+
+
+  };
+
+  instance.parseMapData = function (dashboardData) {
+
+    var intensity = 500;
+    var addressPoints = [];
+
+    dashboardData.forEach(function (item) {
+
+      try{
+
+        console.log(item.fields["request_ip_location.lat"][0], item.fields["request_ip_location.lon"][0]);
+        addressPoints.push([item.fields["request_ip_location.lat"][0], item.fields["request_ip_location.lon"][0], intensity])
+
+      }catch(e){
+        console.log("not found");
+      }
+
+
+    });
+
+    return addressPoints;
+  };
+
+
   //
   //instance.getMapData = function (input) {
   //
