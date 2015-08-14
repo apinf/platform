@@ -1,3 +1,5 @@
+
+
 Template.chartsLayout.rendered = function () {
 
   var instance = this;
@@ -23,39 +25,40 @@ Template.chartsLayout.rendered = function () {
     ]
   };
 
-  instance.drawMap();
+  instance.getDashboardData(input);
 
+  console.log(instance.dashboardData.get())
 
-  console.log(instance)
-
-  instance.autorun(function () {
-
-    console.log(instance)
-
-    //instance.map.removeLayer(instance.heat);
-
-    console.log("Autorun ->");
-    var mapData = instance.dashboardData.get();
-    console.log(mapData);
-
-    //instance.heat = L.heatLayer(mapData);
-    //
-    //instance.heat.addTo(instance.map)
-
-  });
+  //instance.autorun(function () {
+  //
+  //  //instance.map.removeLayer(instance.heat);
+  //
+  //  console.log("Autorun ->");
+  //
+  //  var mapData = instance.dashboardData.get();
+  //
+  //
+  //
+  //  //instance.heat = L.heatLayer(mapData);
+  //  //
+  //  //instance.heat.addTo(instance.map)
+  //
+  //});
 
   // Drawing the chart
-  instance.getData(input);
+  //instance.getData(input);
+
+
 };
 
 Template.chartsLayout.created = function () {
 
   var instance = this;
 
-  instance.dashboardData = new ReactiveVar();
+  instance.dashboardData = new ReactiveVar("No data");
 
   // function that sets chart data to be available in template
-  instance.getData = function (input) {
+  instance.getDashboardData = function (input) {
 
     Meteor.call("getChartData", input, function (err, data) {
 
@@ -71,17 +74,17 @@ Template.chartsLayout.created = function () {
         instance.dashboardData.set(data);
 
         // Parse the returned data for DC
-        var parsedData = parseChartData(data);
+        var parsedData = instance.parseChartData(data);
 
         // Render the charts using parsed data
-        renderCharts(parsedData);
+        instance.renderCharts(parsedData);
 
       }
     });
   };
 
   // function that parses chart data
-  parseChartData = function (data) {
+  instance.parseChartData = function (data) {
     // Get chart data from within data object
     var items = data.hits.hits;
 
@@ -155,7 +158,7 @@ Template.chartsLayout.created = function () {
     };
   };
 
-  renderCharts = function (parsedData) {
+  instance.renderCharts = function (parsedData) {
 
     var timeStampDimension  = parsedData.timeStampDimension;
     var countryDimension    = parsedData.countryDimension;
@@ -263,15 +266,15 @@ Template.chartsLayout.created = function () {
         }
 
         try{
-          request_ip = e.fields.request_ip[0];
+          requestIp = e.fields.request_ip[0];
         }catch(e){
-          request_ip = "";
+          requestIp = "";
         }
 
         try{
-          response_time = e.fields.response_time[0];
+          responseTime = e.fields.response_time[0];
         }catch(e){
-          response_time = "";
+          responseTime = "";
         }
 
         dataSet.push({
@@ -282,8 +285,6 @@ Template.chartsLayout.created = function () {
           "response"      : responseTime
         });
       });
-
-      instance.mapData.set(dataSet);
 
       return dataSet;
     }
@@ -296,65 +297,66 @@ Template.chartsLayout.created = function () {
     dc.renderAll();
   };
 
-  instance.drawMap = function (mapData) {
-
-    // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
-    instance.map = L.map('map').setView([61.5000, 23.7667], 4);
-
-    // adds tilelayer
-    var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(instance.map);
-
-
-    // Defines the intensity for the heatmap
-    var intensity = 100;
-
-    if (mapData) {
-      // adds the heatpoints to the map
-      instance.heat = L.heatLayer(mapData).addTo(instance.map);
-    }
-
-
-  };
-
-  instance.getMapData = function (input) {
-
-    // Empty array for addressPoints
-    var addressPoints = [];
-
-    // Gets data from the ElasticSearch
-    Meteor.call("getChartData", input, function (err, data) {
-      var items = data.hits.hits;
-      //loops throught the array of objects
-      items.forEach(function (item) {
-        try {
-          addressPoints.push([item.fields.request_ip_location.lat, item.fields.request_ip_location.lon, intensity])
-        } catch (e) {
-          console.log("err");
-        }
-
-        instance.dashboardData.set(addressPoints);
-
-      });
-    });
-  };
-
-  var input = {
-    index : "api-umbrella-logs-v1-2015-07",
-    type  : "log",
-    limit : 100,
-    fields: [
-      'request_at',
-      'request_ip_country',
-      'request_ip',
-      'response_time',
-      'request_path'
-    ]
-  };
-
-
-  instance.getMapData(input);
+  //instance.drawMap = function (mapData) {
+  //
+  //  // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
+  //  instance.map = L.map('map').setView([61.5000, 23.7667], 4);
+  //
+  //  // adds tilelayer
+  //  var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //    maxZoom: 19,
+  //    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  //  }).addTo(instance.map);
+  //
+  //
+  //  // Defines the intensity for the heatmap
+  //  var intensity = 100;
+  //
+  //  if (mapData) {
+  //    // adds the heatpoints to the map
+  //    instance.heat = L.heatLayer(mapData).addTo(instance.map);
+  //  }
+  //
+  //
+  //};
+  //
+  //instance.getMapData = function (input) {
+  //
+  //  // Empty array for addressPoints
+  //  var addressPoints = [];
+  //
+  //  // Gets data from the ElasticSearch
+  //  Meteor.call("getChartData", input, function (err, data) {
+  //    var items = data.hits.hits;
+  //    //loops throught the array of objects
+  //    items.forEach(function (item) {
+  //      try {
+  //        addressPoints.push([item.fields.request_ip_location.lat, item.fields.request_ip_location.lon, intensity])
+  //      } catch (e) {
+  //        console.log("err");
+  //      }
+  //
+  //      instance.dashboardData.set(addressPoints);
+  //
+  //    });
+  //  });
+  //};
+  //
+  //var input = {
+  //  index : "api-umbrella-logs-v1-2015-07",
+  //  type  : "log",
+  //  limit : 100,
+  //  fields: [
+  //    'request_at',
+  //    'request_ip_country',
+  //    'request_ip',
+  //    'response_time',
+  //    'request_path',
+  //    'request_ip_location'
+  //  ]
+  //};
+  //
+  //
+  //instance.getMapData(input);
 
 };
