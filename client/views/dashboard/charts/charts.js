@@ -45,9 +45,14 @@ Template.chartsLayout.rendered = function () {
 
       console.log(mapData);
 
+      if (instance.map.hasLayer(instance.heatLayer)) {
+
+        instance.map.removeLayer(instance.heatLayer);
+
+      }
+
       // create heat layer
       instance.heatLayer = L.heatLayer(mapData);
-
       // adds heat to map
       instance.heatLayer.addTo(instance.map);
 

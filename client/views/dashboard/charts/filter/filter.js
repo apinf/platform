@@ -30,11 +30,13 @@ Template.chartsLayout.events({
         'request_ip_country',
         'request_ip',
         'response_time',
-        'request_path'
+        'request_path',
+        'request_ip_location.lon',
+        'request_ip_location.lat'
       ]
     };
 
-    instance.drawChart(input);
+    instance.getDashboardData(input)
 
   }
 });
