@@ -216,6 +216,37 @@ Template.chartsLayout.created = function () {
     for (var i = 0; i < dc.chartRegistry.list().length; i++) {
       var chartI = dc.chartRegistry.list()[i];
       chartI.on("filtered", RefreshTable);
+      chartI.on("filtered", refreshMapData);
+    }
+
+    function refreshMapData () {
+      var dataSet = [];
+
+      timeStampDimension.top(Infinity).forEach(function (e) {
+
+        var lat;
+        var lon;
+
+        try{
+          lat = e.fields["request_ip_location.lat"][0];
+        }catch(e){
+          console.log("Coords not found")
+        }
+
+        try {
+          lon = e.fields["request_ip_location.lon"][0];
+        }catch(e){
+          console.log("Coords not found");
+        }
+
+        dataSet.push([lat, lon, 1000])
+
+      });
+
+      console.log(dataSet);
+
+      instance.mapData.set(dataSet);
+
     }
 
     // Parse data into array for chart
