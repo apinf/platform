@@ -204,7 +204,7 @@ Template.chartsLayout.created = function () {
         pushState: false
       },
       dataset: {
-        records: setUpDataSet(),
+        records: setUpDataTable(),
         perPageDefault: 10,
         perPageOptions: [10, 20, 50, 100]
       }
@@ -213,7 +213,7 @@ Template.chartsLayout.created = function () {
     // Listens to filtering event and refreshes the table on a change
     function refreshTable() {
       dc.events.trigger(function () {
-        dynatable.settings.dataset.originalRecords = setUpDataSet();
+        dynatable.settings.dataset.originalRecords = setUpDataTable();
         dynatable.process();
       });
     }
@@ -245,7 +245,7 @@ Template.chartsLayout.created = function () {
     }
 
     // Parse data into array for data table
-    function setUpDataSet() {
+    function setUpDataTable() {
       var dataSet = [];
       timeStampDimension.top(Infinity).forEach(function (e) {
 
