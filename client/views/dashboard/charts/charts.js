@@ -1,16 +1,18 @@
-
-
 Template.chartsLayout.rendered = function () {
 
+  // assigning current template instance to a variable
   var instance = this;
 
   // appending loading state
   $('#loadingState').html("Loading...");
 
-  // getting current month and year -> providing them for initial query
+  // gets current month and year -> providing them for initial query
   var currentYearAndMonth = moment().format("YYYY-MM");
+
+  // sets default items amount to be returned
   var initialLimit = 10000;
 
+  // sets query for elastic search
   var input = {
     index : "api-umbrella-logs-v1-"+currentYearAndMonth,
     type  : "log",
@@ -32,28 +34,31 @@ Template.chartsLayout.rendered = function () {
   // render map
   instance.renderMap();
 
+  // set an autorun function
   instance.autorun(function () {
-
-    //instance.map.removeLayer(instance.heat);
 
     console.log("Autorun ->");
 
     // dashboard data from reactive variable
     var mapData = instance.mapData.get();
 
+    // checks if data has type of object, by default it is string
     if (typeof mapData === 'object') {
 
       console.log(mapData);
 
+      // checks if map already has layer with heat points
       if (instance.map.hasLayer(instance.heatLayer)) {
 
+        // removes heat layer in one is set
         instance.map.removeLayer(instance.heatLayer);
 
       }
 
-      // create heat layer
+      // creates new heat layer
       instance.heatLayer = L.heatLayer(mapData);
-      // adds heat to map
+
+      // adds heat to a map
       instance.heatLayer.addTo(instance.map);
 
     }
