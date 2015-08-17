@@ -72,6 +72,9 @@ Template.chartsLayout.created = function () {
   // default value for reactive variable with "String" type
   instance.mapData = new ReactiveVar("No data");
 
+  // defines the intensity for the heatmap with default value of 100
+  instance.heatIntensity= new ReactiveVar(100);
+
   // function that sets chart data to be available in template
   instance.getDashboardData = function (input) {
 
@@ -329,7 +332,7 @@ Template.chartsLayout.created = function () {
     var mapData = data;
 
     // defines the intensity for the heatmap
-    var intensity = 100;
+    var intensity = instance.heatIntensity.get();
 
     // empty array with address points
     var addressPoints = [];
