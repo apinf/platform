@@ -227,11 +227,11 @@ Template.chartsLayout.created = function () {
     // function that refreshes both map and data table
     function refreshMapAndTable () {
       refreshTable();
-      refreshMapData();
+      refreshMap();
     }
 
     // parse data into array for map
-    function refreshMapData () {
+    function refreshMap () {
 
       // current data set which is being passed through crossfilter
       var currentDataSet = timeStampDimension.top(Infinity);
