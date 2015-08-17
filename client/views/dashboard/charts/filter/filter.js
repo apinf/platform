@@ -1,16 +1,16 @@
 Template.chartsLayout.events({
-  "change #filteringForm" : function(e){
+  "change #filteringForm" : function(event, template){
+
+    var instance = Template.instance();
 
     // appending loading state
     $('#loadingState').html("Loading...");
 
-    console.log("Changed");
+    event.preventDefault();
 
-    e.preventDefault();
-
-    var month = e.currentTarget.month.value;
-    var year  = e.currentTarget.year.value;
-    var limit = e.currentTarget.limit.value;
+    var month = event.currentTarget.month.value;
+    var year  = event.currentTarget.year.value;
+    var limit = event.currentTarget.limit.value;
 
     var now = moment().format("YYYY-MM");
 
@@ -28,11 +28,13 @@ Template.chartsLayout.events({
         'request_ip_country',
         'request_ip',
         'response_time',
-        'request_path'
+        'request_path',
+        'request_ip_location.lon',
+        'request_ip_location.lat'
       ]
     };
 
-    drawChart(input);
+    instance.getDashboardData(input)
 
   }
 });
