@@ -6,8 +6,6 @@ Template.chartsLayout.events({
     // appending loading state
     $('#loadingState').html("Loading...");
 
-    console.log("Changed");
-
     event.preventDefault();
 
     var month = event.currentTarget.month.value;
