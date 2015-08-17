@@ -228,37 +228,53 @@ Template.chartsLayout.created = function () {
       chartI.on("filtered", refreshMapData);
     }
 
+    // parse data into array for map
     function refreshMapData () {
+
+      // initial empty array
       var dataSet = [];
 
-      timeStampDimension.top(Infinity).forEach(function (e) {
+      // iterates through current dc dataset
+      timeStampDimension.top(Infinity).forEach(function (item) {
 
         var lat;
         var lon;
+        var intensity = 100;
 
+        // try-catch while getting location data, because some of items may not have any coordinates, so avoiding crashes
         try{
-          lat = e.fields["request_ip_location.lat"][0];
+
+          lat = item.fields["request_ip_location.lat"][0];
+
         }catch(e){
-          console.log("Coords not found")
+
+          console.log("Coordinates are not found");
+
         }
 
         try {
-          lon = e.fields["request_ip_location.lon"][0];
+
+          lon = item.fields["request_ip_location.lon"][0];
+
         }catch(e){
-          console.log("Coords not found");
+
+          console.log("Coordinates are not found");
+
         }
 
-        dataSet.push([lat, lon, 100])
+        // pushes data to an array with required "intensity" parameter
+        dataSet.push([lat, lon, intensity]);
 
       });
 
       console.log(dataSet);
 
+      // sets new dataset to a reactive variable
       instance.mapData.set(dataSet);
 
     }
 
-    // Parse data into array for chart
+    // Parse data into array for data table
     function setUpDataSet() {
       var dataSet = [];
       timeStampDimension.top(Infinity).forEach(function (e) {
@@ -312,7 +328,7 @@ Template.chartsLayout.created = function () {
       return dataSet;
     }
 
-
+    // initial function call that refreshes table
     RefreshTable();
 
     // removing loading state once loaded
@@ -332,40 +348,46 @@ Template.chartsLayout.created = function () {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(instance.map);
 
-
-    // Defines the intensity for the heatmap
-    var intensity = 100;
-
+    // checks if map data is passed to a renderMap function
     if (mapData) {
       // adds the heatpoints to the map
       instance.heat = L.heatLayer(mapData).addTo(instance.map);
     }
-
 
   };
 
   // function that parses map
   instance.parseMapData = function (data) {
 
+    // gets to needed level of an object
     var mapData = data.hits.hits;
 
+    // defines the intensity for the heatmap
     var intensity = 100;
+
+    // empty array with address points
     var addressPoints = [];
 
+    // iterates through all heat points
     mapData.forEach(function (item) {
 
+      // parses location data
       try{
 
+        // pushes location data to an array
         addressPoints.push([item.fields["request_ip_location.lat"][0], item.fields["request_ip_location.lon"][0], intensity])
 
       }catch(e){
+
         console.log("not found");
+
       }
 
     });
 
-    console.log(addressPoints)
+    console.log(addressPoints);
 
+    // returns heat data
     return addressPoints;
   };
 
