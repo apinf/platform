@@ -87,11 +87,14 @@ Template.chartsLayout.created = function () {
 
       } else {
 
+        // gets to level in object with needed data
+        var dashboardData = data.hits.hits;
+
         // parse the returned data for DC
-        var parsedChartData = instance.parseChartData(data);
+        var parsedChartData = instance.parseChartData(dashboardData);
 
         // parse data for map
-        var parsedMapData   = instance.parseMapData(data);
+        var parsedMapData   = instance.parseMapData(dashboardData);
 
         // set reactive variable with parsed map data
         instance.mapData.set(parsedMapData);
@@ -107,7 +110,7 @@ Template.chartsLayout.created = function () {
   instance.parseChartData = function (data) {
 
     // Get chart data from within data object
-    var items = data.hits.hits;
+    var items = data;
 
     // Create CrossFilter index using chart data
     var index = new crossfilter(items);
@@ -126,8 +129,6 @@ Template.chartsLayout.created = function () {
       // Add YMD field to item
       d.fields.ymd = dateFormat.parse(timeStamp);
 
-      // Add item count from total hits
-      d.fields.itemsCount = +data.hits.total;
     });
 
     // Create timestamp dimension from YMD field
@@ -155,8 +156,7 @@ Template.chartsLayout.created = function () {
     return {
       timeStampDimension  : timeStampDimension,
       timeStampGroup      : timeStampGroup,
-      timeScale           : timeScale,
-      took                : data.took
+      timeScale           : timeScale
     };
   };
 
@@ -166,8 +166,6 @@ Template.chartsLayout.created = function () {
     var timeStampDimension  = parsedData.timeStampDimension;
     var timeStampGroup      = parsedData.timeStampGroup;
     var timeScale           = parsedData.timeScale;
-    var took                = parsedData.took;
-
     var chart = dc.lineChart("#line-chart");
     var overview = dc.barChart("#overview-chart");
 
@@ -232,34 +230,14 @@ Template.chartsLayout.created = function () {
     // parse data into array for map
     function refreshMapData () {
 
-      // initial empty array
-      var dataSet = [];
+      // current data set which is being passed through crossfilter
+      var currentDataSet = timeStampDimension.top(Infinity);
 
-      // iterates through current dc dataset
-      timeStampDimension.top(Infinity).forEach(function (item) {
+      // runs current data set through parser, selecting just needed fields for heat points
+      var parsedDataSet = instance.parseMapData(currentDataSet);
 
-        var lat;
-        var lon;
-
-        // try-catch while getting location data, because some of items may not have any coordinates, so avoiding crashes
-        try{
-
-          lat = item.fields["request_ip_location.lat"][0];
-          lon = item.fields["request_ip_location.lon"][0];
-
-        }catch(e){
-
-          console.log("Coordinates are not found");
-
-        }
-
-        // pushes data to an array with required "intensity" parameter
-        dataSet.push([lat, lon, intensity]);
-
-      });
-
-      // sets new dataset to a reactive variable
-      instance.mapData.set(dataSet);
+      // sets new parsed data to a reactive variable
+      instance.mapData.set(parsedDataSet);
 
     }
 
@@ -321,7 +299,7 @@ Template.chartsLayout.created = function () {
     refreshTable();
 
     // removing loading state once loaded
-    $('#loadingState').html("Loaded! Took <b>" + took + "</b>ms");
+    $('#loadingState').html("Loaded!");
     dc.renderAll();
   };
 
@@ -348,8 +326,7 @@ Template.chartsLayout.created = function () {
   // function that parses map
   instance.parseMapData = function (data) {
 
-    // gets to needed level of an object
-    var mapData = data.hits.hits;
+    var mapData = data;
 
     // defines the intensity for the heatmap
     var intensity = 100;
