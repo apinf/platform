@@ -239,7 +239,7 @@ Template.chartsLayout.created = function () {
           console.log("Coords not found");
         }
 
-        dataSet.push([lat, lon, 1000])
+        dataSet.push([lat, lon, 100])
 
       });
 
