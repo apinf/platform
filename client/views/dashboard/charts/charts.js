@@ -315,6 +315,7 @@ Template.chartsLayout.created = function () {
     // adds tilelayer
     var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
+      minZoom: 2,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(instance.map);
 
