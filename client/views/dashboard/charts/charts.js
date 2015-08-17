@@ -328,9 +328,7 @@ Template.chartsLayout.created = function () {
   };
 
   // function that parses map
-  instance.parseMapData = function (data) {
-
-    var mapData = data;
+  instance.parseMapData = function (mapData) {
 
     // defines the intensity for the heatmap
     var intensity = instance.heatIntensity.get();
