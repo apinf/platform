@@ -70,13 +70,16 @@ Template.chartsLayout.rendered = function () {
 
 Template.chartsLayout.created = function () {
 
+  // assigning current template instance to a variable
   var instance = this;
 
-  instance.mapData       = new ReactiveVar("No data");
+  // default value for reactive variable with "String" type
+  instance.mapData = new ReactiveVar("No data");
 
   // function that sets chart data to be available in template
   instance.getDashboardData = function (input) {
 
+    // calling method that returns data from elastic search
     Meteor.call("getChartData", input, function (err, data) {
 
       // error checking
@@ -88,11 +91,13 @@ Template.chartsLayout.created = function () {
 
       } else {
 
-        // Parse the returned data for DC
+        // parse the returned data for DC
         var parsedChartData = instance.parseChartData(data);
 
+        // parse data for map
         var parsedMapData   = instance.parseMapData(data);
 
+        // set reactive variable with parsed map data
         instance.mapData.set(parsedMapData);
 
         // Render the charts using parsed data
@@ -150,8 +155,6 @@ Template.chartsLayout.created = function () {
     // Create time scale from min and max dates
     var timeScale = d3.time.scale().domain([minDate, maxDate]);
 
-
-
     // Return object with all key values created above
     return {
       timeStampDimension  : timeStampDimension,
@@ -161,6 +164,7 @@ Template.chartsLayout.created = function () {
     };
   };
 
+  // function that renders charts
   instance.renderCharts = function (parsedData) {
 
     var timeStampDimension  = parsedData.timeStampDimension;
@@ -316,6 +320,7 @@ Template.chartsLayout.created = function () {
     dc.renderAll();
   };
 
+  // function that renders map
   instance.renderMap = function (mapData) {
 
     // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
@@ -339,6 +344,7 @@ Template.chartsLayout.created = function () {
 
   };
 
+  // function that parses map
   instance.parseMapData = function (data) {
 
     var mapData = data.hits.hits;
