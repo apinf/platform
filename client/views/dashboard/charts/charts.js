@@ -37,15 +37,11 @@ Template.chartsLayout.rendered = function () {
   // set an autorun function
   instance.autorun(function () {
 
-    console.log("Autorun ->");
-
     // dashboard data from reactive variable
     var mapData = instance.mapData.get();
 
     // checks if data has type of object, by default it is string
     if (typeof mapData === 'object') {
-
-      console.log(mapData);
 
       // checks if map already has layer with heat points
       if (instance.map.hasLayer(instance.heatLayer)) {
@@ -244,21 +240,11 @@ Template.chartsLayout.created = function () {
 
         var lat;
         var lon;
-        var intensity = 100;
 
         // try-catch while getting location data, because some of items may not have any coordinates, so avoiding crashes
         try{
 
           lat = item.fields["request_ip_location.lat"][0];
-
-        }catch(e){
-
-          console.log("Coordinates are not found");
-
-        }
-
-        try {
-
           lon = item.fields["request_ip_location.lon"][0];
 
         }catch(e){
@@ -271,8 +257,6 @@ Template.chartsLayout.created = function () {
         dataSet.push([lat, lon, intensity]);
 
       });
-
-      console.log(dataSet);
 
       // sets new dataset to a reactive variable
       instance.mapData.set(dataSet);
@@ -389,8 +373,6 @@ Template.chartsLayout.created = function () {
       }
 
     });
-
-    console.log(addressPoints);
 
     // returns heat data
     return addressPoints;
