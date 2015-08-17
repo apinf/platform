@@ -214,7 +214,7 @@ Template.chartsLayout.created = function () {
     }).data('dynatable');
 
     // Listens to filtering event and refreshes the table on a change
-    function RefreshTable() {
+    function refreshTable() {
       dc.events.trigger(function () {
         dynatable.settings.dataset.originalRecords = setUpDataSet();
         dynatable.process();
@@ -224,8 +224,13 @@ Template.chartsLayout.created = function () {
     // Add each chart to the DC Chart Registry
     for (var i = 0; i < dc.chartRegistry.list().length; i++) {
       var chartI = dc.chartRegistry.list()[i];
-      chartI.on("filtered", RefreshTable);
-      chartI.on("filtered", refreshMapData);
+      chartI.on("filtered", refreshMapAndTable);
+    }
+
+    // function that refreshes both map and data table
+    function refreshMapAndTable () {
+      refreshTable();
+      refreshMapData();
     }
 
     // parse data into array for map
@@ -329,7 +334,7 @@ Template.chartsLayout.created = function () {
     }
 
     // initial function call that refreshes table
-    RefreshTable();
+    refreshTable();
 
     // removing loading state once loaded
     $('#loadingState').html("Loaded! Took <b>" + took + "</b>ms");
