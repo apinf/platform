@@ -1,16 +1,33 @@
 Template.importApiConfiguration.events({
   'change #apiCofigurationFile': function (event, template) {
-    // Get the submitted file
-    var file = event.target.files[0];
 
-    template.reactiveFile.set(file);
+    FS.Utility.eachFile(event, function(file) {
 
-    // Insert into filesystem collection
-    var insertedFile = ApiBackendConfigurations.insert(file);
-    console.log(insertedFile)
+      ApiBackendConfigurations.insert(file, function (err, fileObj) {
+        if (err){
+          // handle error
+          console.log(err);
+        } else {
+          // handle success
+          console.log("File: ");
+          console.log(fileObj);
+
+          template.reactiveFile.set(fileObj);
+
+        }
+      });
+
+    });
+
+    return false;
+
   },
   'submit #apiConfigurationUploadForm': function (event, template) {
-    Meteor.call("convertYamlToJson", template.reactiveFile.get().name, function (err, file) {
+
+    var fileObj = template.reactiveFile.get();
+    var fileId  = fileObj._id;
+
+    Meteor.call("convertYamlToJson", fileId, function (err, file) {
       if (err) console.log(err);
       console.log(file);
     });

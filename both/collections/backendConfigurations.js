@@ -1,6 +1,8 @@
+var apiConfigStore = new FS.Store.GridFS("apiConfigs");
+configFiles = new Mongo.Collection('cfs_gridfs.apiConfigs.chunks');
+
 ApiBackendConfigurations = new FS.Collection("apiBackendConfigurations", {
-  // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("apiBackendConfigurations", {path: "~/Dev/meteorApps/api-umbrella-dashboard/uploads/apiBackendConfigs"})]
+  stores: [apiConfigStore]
 });
 
 ApiBackendConfigurations.filters({

@@ -1,26 +1,33 @@
 Meteor.methods({
-  'convertYamlToJson': function(fileName){
-    var fs = Npm.require('fs');
-    var projectRoot = process.env.PWD;
+  'convertYamlToJson': function(fileId){
+    //var fs = Npm.require('fs');
 
-    var item = ApiBackendConfigurations.findOne({ "original.name": fileName},{sort: {uploadedAt: -1}});
+    var item = ApiBackendConfigurations.findOne(fileId);
 
     if (item) {
-      var fileFullName = item.copies.apiBackendConfigurations.key;
-      var path = projectRoot + "/uploads/apiBackendConfigs/" + fileFullName;
 
-      var jsonFile;
+      var Id = item.copies.apiConfigs.key;
 
-      try {
-        jsonFile = YAML.safeLoad(fs.readFileSync(path, 'utf8'));
+      console.log(Id)
 
-        jsonFile.apis.forEach(function (api) {
-          ApiBackends.insert(api);
-        });
+      //var file = configFiles.findOne({ "files_id['_str']": Id });
 
-      } catch (e) {
-        console.log(e);
-      }
+      //console.log(file)
+
+      //var path = "/uploads/apiBackendConfigs/" + fileFullName;
+      //
+      //var jsonFile;
+      //
+      //try {
+      //  jsonFile = YAML.safeLoad(fs.readFileSync(path, 'utf8'));
+      //
+      //  jsonFile.apis.forEach(function (api) {
+      //    ApiBackends.insert(api);
+      //  });
+      //
+      //} catch (e) {
+      //  console.log(e);
+      //}
 
       return "Done";
     }else{
