@@ -6,7 +6,6 @@ Dashboard component for the open-source API management platform [API Umbrella](h
 
 All planning documents, meeting minutes, etc. can be found on the [Apinf Hackpad](http://apinf.hackpad.com).
 
-
 # Architecture and ecosystem
 Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
 
@@ -68,6 +67,8 @@ The mail object contains a username and password for the Mailgun service.
 ## elasticsearch
 Elasticsearch takes a host value that contains the host and port of the API Umbrella ElasticSearch instance.
 
+## githubConfiguration
+The Github configuration takes two values, a Client ID and Secret key. You can obtain these values by setting up a Github application from your Github user account.
 
 # Nightly build
 You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
