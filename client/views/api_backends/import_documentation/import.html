@@ -1,0 +1,21 @@
+<template name="importDocumentationConfiguration">
+  <form id="documentationConfigurationUploadForm" class="form" method="post">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Upload documentation Configuration</legend>
+
+      <!-- File Button -->
+      <div class="form-group">
+        <label class="control-label" for="documentationCofigurationFile">Documentation Configuration File</label>
+
+        <input
+               id="documentationCofigurationFile"
+               name="documentationCofigurationFile"
+               class="input-file"
+               type="file"
+               >
+      </div>
+    </fieldset>
+  </form>
+  {{> flashMessages}}
+</template>

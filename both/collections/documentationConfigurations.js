@@ -1,13 +1,13 @@
-SwaggerBackendConfigurations = new FS.Collection("swaggerBackendConfigurations", {
+apiDocumentation = new FS.Collection("documentationBackendConfigurations", {
   // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("swaggerBackendConfigurations", {path: "~/apinf/swaggerConfigurations"})],
+  stores: [new FS.Store.FileSystem("documentationBackendConfigurations", {path: "~/apinf/documentationConfigurations"})],
 });
 
-SwaggerBackendConfigurations.filters({
+apiDocumentation.filters({
   allow: {
     // ~ 10Mbs.
     maxSize: 10048567,
-    extensions: ['json', 'yaml', 'txt', 'swagger']
+    extensions: ['json', 'yaml', 'txt', 'documentation']
   },
   onInvalid: function (message) {
     // Show error message if it doesn't pass filter settings
@@ -16,7 +16,7 @@ SwaggerBackendConfigurations.filters({
 });
 
 if (Meteor.isServer) {
-  SwaggerBackendConfigurations.allow({
+  apiDocumentation.allow({
     insert: function (userId, doc) {
       // allow insert by default
       // TODO: determine proper upload/insert permisison
