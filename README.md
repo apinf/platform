@@ -28,42 +28,17 @@ Installation
 ---
 1. Install API Umbrella using the official packages:
 http://apiumbrella.io/download/
-
 2. Install Meteor using the official packages:
 https://www.meteor.com/install
-
 3. Clone Apinf project repository:
 https://github.com/apinf/api-umbrella-dashboard
-
 4. Checkout the 'develop' branch
-
 5. Configure the Meteor/API Umbrella integration plugin by following these instructions:
 https://github.com/brylie/meteor-api-umbrella#installation
-
-6. Configure your `settings.json` with the following structure:
-
-```
-{
-  "api_umbrella": {
-    "api_key": "xxx",
-    "auth_token": "xxx",
-    "base_url": "https://example.com/api-umbrella/"
-  },
-  "mail": {
-    "username": "xxx",
-    "password": "xxx"
-  },
-  "elasticsearch": {
-    "host": "http://example.com:14002/"
-  },
-  "githubConfiguration": {
-    "clientId" : "xxx",
-    "secret" : "xxx"
-  }
-}
-```
-
+6. Configure your `settings.json`
 7. Type `meteor` in the project directory
+ 
+
 
 Nightly build
 -------------
