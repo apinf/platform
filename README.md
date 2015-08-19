@@ -32,10 +32,8 @@ https://www.meteor.com/install
 3. Clone Apinf project repository:
 https://github.com/apinf/api-umbrella-dashboard
 4. Checkout the 'develop' branch
-5. Configure the Meteor/API Umbrella integration plugin by following these instructions:
-https://github.com/brylie/meteor-api-umbrella#installation
-6. Configure your `settings.json`
-7. Type `meteor` in the project directory
+5. Configure your `settings.json`
+6. Type `meteor` in the project directory
  
 # Settings.json
 
@@ -61,6 +59,9 @@ Your `settings.json` file should have the following structure:
   }
 }
 ```
+
+## api_umbrella
+The `api_umbrella` settings include an API Key, Admin Auth Token, and API Umbrella base URL. You can get the API Key and Admin Auth Token from API Umbrella, by following the instructions in the [Meteor - API Umbrella integration package](https://github.com/brylie/meteor-api-umbrella#installation).
 
 # Nightly build
 You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
