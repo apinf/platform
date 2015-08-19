@@ -108,7 +108,7 @@
       <g class="com.sun.star.drawing.CustomShape">
        <g id="id5">
         <path fill="none" stroke="rgb(52,101,164)" d="M 2302,7363 L 1288,7363 1288,6658 3316,6658 3316,7363 2302,7363 Z"/>
-        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="1925" y="7157"><tspan fill="rgb(0,0,0)" stroke="none">io.js</tspan></tspan></tspan></text>
+        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="1616" y="7157"><tspan fill="rgb(0,0,0)" stroke="none">node.js</tspan></tspan></tspan></text>
        </g>
       </g>
       <g class="com.sun.star.drawing.CustomShape">
