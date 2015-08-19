@@ -135,24 +135,22 @@
       </g>
      </g>
      <g class="Group">
-      <g class="Group">
-       <g class="com.sun.star.drawing.CustomShape">
-        <g id="id10">
-         <path fill="none" stroke="rgb(52,101,164)" d="M 12570,8818 L 11567,8818 11567,7803 13572,7803 13572,8818 12570,8818 Z"/>
-         <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="11731" y="8218"><tspan fill="rgb(0,0,0)" stroke="none">Swagger</tspan></tspan></tspan><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="12015" y="8696"><tspan fill="rgb(0,0,0)" stroke="none">Editor</tspan></tspan></tspan></text>
-        </g>
-       </g>
-       <g class="com.sun.star.drawing.CustomShape">
-        <g id="id11">
-         <path fill="none" stroke="rgb(52,101,164)" d="M 10565,8819 L 9562,8819 9562,7803 11567,7803 11567,8819 10565,8819 Z"/>
-         <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="9726" y="8218"><tspan fill="rgb(0,0,0)" stroke="none">Swagger</tspan></tspan></tspan><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="10353" y="8696"><tspan fill="rgb(0,0,0)" stroke="none">UI</tspan></tspan></tspan></text>
-        </g>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id10">
+        <path fill="none" stroke="rgb(52,101,164)" d="M 12570,8818 L 11567,8818 11567,7803 13572,7803 13572,8818 12570,8818 Z"/>
+        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="11731" y="8218"><tspan fill="rgb(0,0,0)" stroke="none">Swagger</tspan></tspan></tspan><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="12015" y="8696"><tspan fill="rgb(0,0,0)" stroke="none">Editor</tspan></tspan></tspan></text>
        </g>
       </g>
-      <g class="com.sun.star.drawing.TextShape">
-       <g id="id12">
-        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="10318" y="7162"><tspan fill="rgb(0,0,0)" stroke="none">Swagger</tspan></tspan></tspan></text>
+      <g class="com.sun.star.drawing.CustomShape">
+       <g id="id11">
+        <path fill="none" stroke="rgb(52,101,164)" d="M 10565,8819 L 9562,8819 9562,7803 11567,7803 11567,8819 10565,8819 Z"/>
+        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="9726" y="8218"><tspan fill="rgb(0,0,0)" stroke="none">Swagger</tspan></tspan></tspan><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="10353" y="8696"><tspan fill="rgb(0,0,0)" stroke="none">UI</tspan></tspan></tspan></text>
        </g>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.TextShape">
+      <g id="id12">
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="9553" y="7597"><tspan fill="rgb(0,0,0)" stroke="none">Swagger</tspan></tspan></tspan></text>
       </g>
      </g>
      <g class="Group">
