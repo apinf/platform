@@ -24,12 +24,9 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 # Installation
 
-1. Install API Umbrella using the official packages:
-http://apiumbrella.io/download/
-2. Install Meteor using the official packages:
-https://www.meteor.com/install
-3. Clone Apinf project repository:
-https://github.com/apinf/api-umbrella-dashboard
+1. Install [API Umbrella](http://apiumbrella.io/download/)
+2. Install [Meteor.js](https://www.meteor.com/install)
+3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
 4. Configure your [`settings.json`](#Settings.json)
 5. Type `meteor --settings /path/to/settings.json` in the project directory
  
