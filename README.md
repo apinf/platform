@@ -2,13 +2,12 @@
 # API Umbrella Dashboard
 Dashboard component for the open-source API management platform [API Umbrella](http://nrel.github.io/api-umbrella/).
 
-Documentation
--------------
+# Documentation
+
 All planning documents, meeting minutes, etc. can be found on the [Apinf Hackpad](http://apinf.hackpad.com).
 
 
-Architecture and ecosystem
--------------
+# Architecture and ecosystem
 Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
 
 Currently, there are two options for the architecture:
@@ -24,8 +23,8 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 ![Ecosystem diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_ecosystem.svg)
 
-Installation
----
+# Installation
+
 1. Install API Umbrella using the official packages:
 http://apiumbrella.io/download/
 2. Install Meteor using the official packages:
@@ -38,8 +37,8 @@ https://github.com/brylie/meteor-api-umbrella#installation
 6. Configure your `settings.json`
 7. Type `meteor` in the project directory
  
-Settings.json
----
+# Settings.json
+
 Your `settings.json` file should have the following structure:
 
 ```
@@ -63,8 +62,7 @@ Your `settings.json` file should have the following structure:
 }
 ```
 
-Nightly build
--------------
+# Nightly build
 You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
 
 * username: test@test.test
