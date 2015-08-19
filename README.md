@@ -63,6 +63,9 @@ Your `settings.json` file should have the following structure:
 ## api_umbrella
 The `api_umbrella` settings include an API Key, Admin Auth Token, and API Umbrella base URL. You can get the API Key and Admin Auth Token from API Umbrella, by following the instructions in the [Meteor - API Umbrella integration package](https://github.com/brylie/meteor-api-umbrella#installation).
 
+## mail
+The mail object contains a username and password for the Mailgun service.
+
 # Nightly build
 You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
 
