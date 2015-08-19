@@ -66,6 +66,10 @@ The `api_umbrella` settings include an API Key, Admin Auth Token, and API Umbrel
 ## mail
 The mail object contains a username and password for the Mailgun service.
 
+## elasticsearch
+Elasticsearch takes a host value that contains the host and port of the API Umbrella ElasticSearch instance.
+
+
 # Nightly build
 You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
 
