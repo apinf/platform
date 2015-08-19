@@ -1,13 +1,13 @@
-apiDocumentation = new FS.Collection("documentationBackendConfigurations", {
+apiDocumentation = new FS.Collection("apiDocumentation", {
   // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("documentationBackendConfigurations", {path: "~/apinf/documentationConfigurations"})],
+  stores: [new FS.Store.FileSystem("apiDocumentation", {path: "~/apinf/documentationConfigurations"})],
 });
 
 apiDocumentation.filters({
   allow: {
     // ~ 10Mbs.
     maxSize: 10048567,
-    extensions: ['json', 'yaml', 'txt', 'documentation']
+    extensions: ['json', 'yaml', 'txt', 'swagger']
   },
   onInvalid: function (message) {
     // Show error message if it doesn't pass filter settings
