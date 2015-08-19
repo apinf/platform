@@ -32,7 +32,7 @@ https://www.meteor.com/install
 3. Clone Apinf project repository:
 https://github.com/apinf/api-umbrella-dashboard
 4. Checkout the 'develop' branch
-5. Configure your `settings.json`
+5. Configure your [`settings.json`](#Settings.json)
 6. Type `meteor` in the project directory
  
 # Settings.json
