@@ -38,7 +38,30 @@ https://github.com/brylie/meteor-api-umbrella#installation
 6. Configure your `settings.json`
 7. Type `meteor` in the project directory
  
+Settings.json
+---
+Your `settings.json` file should have the following structure:
 
+```
+{
+  "api_umbrella": {
+    "api_key": "xxx",
+    "auth_token": "xxx",
+    "base_url": "https://example.com/api-umbrella/"
+  },
+  "mail": {
+    "username": "xxx",
+    "password": "xxx"
+  },
+  "elasticsearch": {
+    "host": "http://example.com:14002/"
+  },
+  "githubConfiguration": {
+    "clientId" : "xxx",
+    "secret" : "xxx"
+  }
+}
+```
 
 Nightly build
 -------------
