@@ -26,21 +26,21 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 Installation
 ---
-1) Install API Umbrella using the official packages:
+1. Install API Umbrella using the official packages:
 http://apiumbrella.io/download/
 
-2) Install Meteor using the official packages:
+2. Install Meteor using the official packages:
 https://www.meteor.com/install
 
-3) Clone Apinf project repository:
+3. Clone Apinf project repository:
 https://github.com/apinf/api-umbrella-dashboard
 
-4) Checkout the 'develop' branch
+4. Checkout the 'develop' branch
 
-5) Configure the Meteor/API Umbrella integration plugin by following these instructions:
+5. Configure the Meteor/API Umbrella integration plugin by following these instructions:
 https://github.com/brylie/meteor-api-umbrella#installation
 
-6) Configure your `settings.json` with the following structure:
+6. Configure your `settings.json` with the following structure:
 
 ```
 {
@@ -63,7 +63,7 @@ https://github.com/brylie/meteor-api-umbrella#installation
 }
 ```
 
-7) Type `meteor` in the project directory
+7. Type `meteor` in the project directory
 
 Nightly build
 -------------
