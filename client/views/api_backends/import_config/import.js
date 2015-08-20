@@ -73,6 +73,13 @@ Template.importApiConfiguration.events({
             jsonObj = importedFile;
           }
 
+          // notifies user if file extention is not as expected
+          if (!endsWith(file.name, 'json') && !endsWith(file.name, 'yaml') && !endsWith(file.name, 'yml')){
+
+            FlashMessages.sendError("Config file should be .YAML, .YML or .JSON only!");
+
+          }
+
           // pastes converted file to ace editor
           instance.editor.setValue(jsonObj);
         }
@@ -92,6 +99,7 @@ Template.importApiConfiguration.events({
     // gets current data from ace editor
     var jsonString = instance.editor.getValue();
 
+    // try catch here, so that page does not reload if JSON is incorrect
     try {
 
       // parses JSON String to JSON Object
@@ -125,12 +133,9 @@ Template.importApiConfiguration.events({
 
     return false;
   }
+
 });
 
-// configs for flash messages
-FlashMessages.configure({
-  autoHide: false
-});
 
 // function for file extension check (since it is not provided other way)
 function endsWith(str, suffix) {
