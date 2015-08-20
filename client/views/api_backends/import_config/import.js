@@ -11,7 +11,9 @@ Template.importApiConfiguration.rendered = function () {
 
 
 Template.importApiConfiguration.events({
-  'change #apiCofigurationFile': function (event, template) {
+  'dropped #dropzone': function (event, template) {
+
+    console.log("file dropped")
 
     var instance = Template.instance();
 
