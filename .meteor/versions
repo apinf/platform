@@ -112,6 +112,7 @@ ordered-dict@1.0.3
 percolate:synced-cron@1.2.1
 raix:eventemitter@0.1.2
 raix:handlebar-helpers@0.2.4
+raix:ui-dropped-event@0.0.7
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5
