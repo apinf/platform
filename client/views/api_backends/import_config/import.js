@@ -60,7 +60,12 @@ Template.importApiConfiguration.events({
           if (endsWith(file.name, 'yaml')) {
 
             // converts YAML to JSON
-            jsonObj = jsyaml.load(importedFile);
+            var yamlToJson = jsyaml.load(importedFile);
+
+            console.log(yamlToJson)
+
+            // parses JSON obj to JSON String with indentation
+            jsonObj = JSON.stringify(yamlToJson,  null, '\t');
           }
 
           // checks if file extension js .JSON
@@ -70,11 +75,8 @@ Template.importApiConfiguration.events({
             jsonObj = importedFile;
           }
 
-          // parses JSON obj to JSON String with indentation
-          var jsonString = JSON.stringify(jsonObj,  null, '\t');
-
           // pastes converted file to ace editor
-          instance.editor.setValue(jsonString);
+          instance.editor.setValue(jsonObj);
         }
 
       }
