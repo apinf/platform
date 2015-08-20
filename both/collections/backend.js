@@ -606,6 +606,23 @@ ApiBackendsSchema = new SimpleSchema({
   version: {
     type: Number,
     optional: true
+  },
+  managerIds: {
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id,
+    autoValue: function () {
+      // If the field is already set, leave it as-is
+      if (this.isSet) {
+        return undefined;
+      } else {
+        // Otherwise, return an array containing only the current User ID
+        return [Meteor.userId()];
+      }
+    },
+    autoform: {
+      type: "hidden",
+      label: false
+    }
   }
 });
 
@@ -614,5 +631,32 @@ ApiBackends.attachSchema(ApiBackendsSchema);
 ApiBackends.allow({
   insert: function () {
     return true;
-  }
+  },
+  update: function (userId, backend) {
+    // Get the backend managers
+    var managerIds = backend.managerIds;
+
+    // Make sure current user is a backend manager
+    if (_.contains(managerIds, userId)) {
+      // User is allowed to perform action
+      return true;
+    } else {
+      // User is not allowded to perform action
+      return false;
+    }
+  },
+  remove: function (userId, backend) {
+    // Get the backend managers
+    var managerIds = backend.managerIds;
+
+    // Make sure current user is a backend manager
+    if (_.contains(managerIds, userId)) {
+      // User is allowed to perform action
+      return true;
+    } else {
+      // User is not allowded to perform action
+      return false;
+    }
+  },
+  fetch: ['managerIds']
 });
