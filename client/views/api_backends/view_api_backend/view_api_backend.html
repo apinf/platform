@@ -1,0 +1,14 @@
+<template name="viewApiBackend">
+  <h1>View API backend</h1>
+
+  <p>Name: <b>{{apiBackend.name}}</b></p>
+  <p>Backend Protocol: <b>{{apiBackend.backend_protocol}}</b></p>
+  <p>Frontend host: <b>{{apiBackend.frontend_host}}</b></p>
+  <p>Balance Algorithm: <b>{{apiBackend.balance_algorithm}}</b></p>
+  <p>Servers: <b>{{apiBackend.backend_host}}</b></p>
+
+  {{#each apiBackend.url_matches}}
+  <p>Backend prefix: <b>{{backend_prefix}}</b></p>
+  <p>Frontend prefix: <b>{{frontend_prefix}}</b></p>
+  {{/each}}
+</template>
