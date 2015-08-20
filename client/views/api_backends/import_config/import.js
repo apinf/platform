@@ -1,12 +1,18 @@
 Template.importApiConfiguration.rendered = function () {
 
+  // keep current template instance
   var instance = this;
 
+  // initialises ace editor
   instance.editor = ace.edit("editor");
 
+  // theme for editor
   instance.editor.setTheme("ace/theme/idle_fingers");
+
+  // code highlights for editor (JSON)
   instance.editor.getSession().setMode("ace/mode/json");
 
+  // custom message (tutorial) in json format
   var tips = {
     "How_to_import_configurations": {
       "option_1" : "Upload existing config file",
@@ -14,7 +20,11 @@ Template.importApiConfiguration.rendered = function () {
     }
   };
 
-  instance.editor.setValue(JSON.stringify(tips, null, '\t'));
+  // parses json object to string with indentation (parsing to string needed for ace editor)
+  var jsonString = JSON.stringify(tips, null, '\t');
+
+  // pasting initial value to editor
+  instance.editor.setValue();
 
 };
 
