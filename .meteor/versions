@@ -93,6 +93,8 @@ meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
 minifiers@1.1.5
 minimongo@1.0.8
+mizzao:sharejs@0.7.4
+mizzao:sharejs-ace@1.1.8_1
 mobile-status-bar@1.0.3
 momentjs:moment@2.10.3
 mongo@1.1.0
@@ -131,7 +133,6 @@ timmyg:wow@1.0.1
 tracker@1.0.7
 tsega:skrollr@0.0.2
 twbs:bootstrap@3.3.5
-udondan:yml@3.2.2_1
 ui@1.0.6
 underscore@1.0.3
 underscorestring:underscore.string@3.0.3_1
