@@ -57,7 +57,7 @@ Template.importApiConfiguration.events({
           var jsonObj;
 
           // checks if file extension js .YAML
-          if (endsWith(file.name, 'yaml')) {
+          if (endsWith(file.name, 'yaml') || endsWith(file.name, 'yml')) {
 
             // converts YAML to JSON
             var yamlToJson = jsyaml.load(importedFile);
@@ -92,28 +92,36 @@ Template.importApiConfiguration.events({
     // gets current data from ace editor
     var jsonString = instance.editor.getValue();
 
-    // parses JSON String to JSON Object
-    var jsonObj = JSON.parse(jsonString);
+    try {
 
-    // calls method and passing jsonObj there - expects status object as callback
-    Meteor.call("importApiConfigs", jsonObj, function (err, status) {
+      // parses JSON String to JSON Object
+      var jsonObj = JSON.parse(jsonString);
 
-      // error handing
-      if (err) FlashMessages.sendError(err);
+      // calls method and passing jsonObj there - expects status object as callback
+      Meteor.call("importApiConfigs", jsonObj, function (err, status) {
 
-      // checks of status is successfull
-      if (status.isSuccessful) {
+        // error handing
+        if (err) FlashMessages.sendError(err);
 
-        // success message
-        FlashMessages.sendSuccess(status.message);
+        // checks of status is successfull`
+        if (status.isSuccessful) {
 
-      }else{
+          // success message
+          FlashMessages.sendSuccess(status.message);
 
-        // error message
-        FlashMessages.sendError(status.message)
+        }else{
 
-      }
-    });
+          // error message
+          FlashMessages.sendError(status.message)
+
+        }
+      });
+
+    } catch (e) {
+
+      FlashMessages.sendError("Configuration does not look like correct JSON object.");
+
+    }
 
     return false;
   }
