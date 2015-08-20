@@ -1,21 +1,47 @@
+Template.importApiConfiguration.rendered = function () {
+
+  var instance = this;
+
+  instance.editor = ace.edit("editor");
+
+  instance.editor.setTheme("ace/theme/ambiance");
+  instance.editor.getSession().setMode("ace/mode/yaml");
+
+};
+
+
 Template.importApiConfiguration.events({
   'change #apiCofigurationFile': function (event, template) {
 
+    var instance = Template.instance();
+
     FS.Utility.eachFile(event, function(file) {
 
-      ApiBackendConfigurations.insert(file, function (err, fileObj) {
-        if (err){
-          // handle error
-          console.log(err);
-        } else {
-          // handle success
-          console.log("File: ");
-          console.log(fileObj);
+      if (file) {
 
-          template.reactiveFile.set(fileObj);
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
 
+          var importedFile = evt.target.result;
+          instance.editor.setValue(importedFile);
         }
-      });
+
+      }
+
+      //ApiBackendConfigurations.insert(file, function (err, fileObj) {
+      //  if (err){
+      //    // handle error
+      //    console.log(err);
+      //  } else {
+      //    // handle success
+      //    console.log("File: ");
+      //    console.log(fileObj);
+      //
+      //    template.reactiveFile.set(fileObj);
+      //
+      //  }
+      //});
 
     });
 
@@ -36,6 +62,7 @@ Template.importApiConfiguration.events({
   }
 });
 
-Template.importApiConfiguration.created = function () {
-  this.reactiveFile = new ReactiveVar();
-};
+//Template.importApiConfiguration.created = function () {
+//  this.reactiveFile = new ReactiveVar();
+//
+//};
