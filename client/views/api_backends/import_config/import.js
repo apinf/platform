@@ -22,8 +22,6 @@ Template.importApiConfiguration.rendered = function () {
 Template.importApiConfiguration.events({
   'dropped #dropzone': function (event, template) {
 
-    console.log("file dropped")
-
     var instance = Template.instance();
 
     FS.Utility.eachFile(event, function(file) {
