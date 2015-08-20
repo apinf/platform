@@ -38,6 +38,7 @@ Template.importApiConfiguration.events({
     // grabs "dropped" files and iterates through them
     FS.Utility.eachFile(event, function(file) {
 
+
       // checks if file is found
       if (file) {
 
@@ -53,11 +54,24 @@ Template.importApiConfiguration.events({
           // gets file contents
           var importedFile = event.target.result;
 
-          // converts YAML to JSON
-          var doc = jsyaml.load(importedFile);
+          var jsonObj;
+
+          // checks if file extension js .YAML
+          if (endsWith(file.name, 'yaml')) {
+
+            // converts YAML to JSON
+            jsonObj = jsyaml.load(importedFile);
+          }
+
+          // checks if file extension js .JSON
+          if (endsWith(file.name, 'json')) {
+
+            // if JSON - no need to convert anything
+            jsonObj = importedFile;
+          }
 
           // parses JSON obj to JSON String with indentation
-          var jsonString = JSON.stringify(doc,  null, '\t');
+          var jsonString = JSON.stringify(jsonObj,  null, '\t');
 
           // pastes converted file to ace editor
           instance.editor.setValue(jsonString);
@@ -109,3 +123,8 @@ Template.importApiConfiguration.events({
 FlashMessages.configure({
   autoHide: false
 });
+
+// function for file extension check (since it is not provided other way)
+function endsWith(str, suffix) {
+  return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
