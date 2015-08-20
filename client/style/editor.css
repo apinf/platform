@@ -1,6 +1,6 @@
 #editor{
     width:100%;
-    height:500px;
+    height:600px;
 }
 .btn-divider{
     margin:7px 0;
@@ -13,7 +13,7 @@
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    height:500px;
+    height:600px;
     vertical-align: middle;
 }
 .dropzone:hover{
@@ -23,5 +23,5 @@
 .dropzone div{
     text-align: center;
     color: gray;
-    line-height: 500px;
+    line-height: 600px;
 }
