@@ -1,6 +1,4 @@
 var apiConfigStore = new FS.Store.GridFS("apiConfigs");
-configFiles = new Mongo.Collection('cfs_gridfs.apiConfigs.chunks');
-
 ApiBackendConfigurations = new FS.Collection("apiBackendConfigurations", {
   stores: [apiConfigStore]
 });
