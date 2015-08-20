@@ -37,12 +37,15 @@ Accounts.onCreateUser(function(options, user) {
   user.profile.apiKey = response.data.user.api_key;
   ApiUmbrellaUsers.insert(response.data.user);
   Meteor.call("sendmail", user.emails[0].address);
+
   return user;
 });
 
 Accounts.onLogin(function(info) {
   var e, email, github, ref, result, user;
   user = info.user;
+  var userId = user._id;
+
   if ((ref = user.services) != null ? ref.github : void 0) {
     if (user) {
       github = new GitHub({
@@ -65,4 +68,7 @@ Accounts.onLogin(function(info) {
       }
     }
   }
+
+  // Add initial user to admin role
+  Meteor.call('addFirstUserToAdminRole', userId);
 });
