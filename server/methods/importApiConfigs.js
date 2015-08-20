@@ -1,19 +1,22 @@
 Meteor.methods({
   'importApiConfigs': function(jsonObj){
 
+    // initial status obj
     var status = {
       isSuccessful: false,
       message: ""
     };
 
+    // checks if file was passed
     if (jsonObj) {
 
-      // parse json object
-
+      // parses json object
       var parsedJson = apiIsValid(jsonObj);
 
+      // checks if valid
       if (parsedJson.isValid) {
 
+        // additional error handling
         try{
 
           ApiBackends.insert(jsonObj);
@@ -28,6 +31,7 @@ Meteor.methods({
         }
 
       }else{
+        // if validation check failed - passing message returned by validation function
         status.message = parsedJson.message;
       }
 
@@ -42,12 +46,17 @@ Meteor.methods({
   }
 });
 
+// validation function
 function apiIsValid (jsonObj) {
 
+  // initial status obj
   var status = {
     isValid : false,
     message : ""
   };
+
+  // iterates through object keys and checks if required fields are provided
+  // otherwise returns a message with missing field
 
   if (jsonObj.hasOwnProperty("_id")){
 
