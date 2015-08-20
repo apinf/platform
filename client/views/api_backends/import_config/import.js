@@ -24,7 +24,7 @@ Template.importApiConfiguration.rendered = function () {
   var jsonString = JSON.stringify(tips, null, '\t');
 
   // pastes initial value to editor
-  instance.editor.setValue();
+  instance.editor.setValue(jsonString);
 
 };
 
@@ -72,18 +72,32 @@ Template.importApiConfiguration.events({
   },
   'submit #apiConfigurationUploadForm': function (event, template) {
 
+    // current template instance
     var instance = Template.instance();
 
-    var doc = JSON.parse(instance.editor.getValue());
+    // gets current data from ace editor
+    var jsonString = instance.editor.getValue();
 
-    Meteor.call("importApiConfigs", doc, function (err, status) {
+    // parses JSON String to JSON Object
+    var jsonObj = JSON.parse(jsonString);
 
+    // calls method and passing jsonObj there - expects status object as callback
+    Meteor.call("importApiConfigs", jsonObj, function (err, status) {
+
+      // error handing
       if (err) FlashMessages.sendError(err);
 
+      // checks of status is successfull
       if (status.isSuccessful) {
+
+        // success message
         FlashMessages.sendSuccess(status.message);
+
       }else{
+
+        // error message
         FlashMessages.sendError(status.message)
+
       }
     });
 
@@ -91,6 +105,7 @@ Template.importApiConfiguration.events({
   }
 });
 
+// configs for flash messages
 FlashMessages.configure({
   autoHide: false
 });
