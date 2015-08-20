@@ -23,7 +23,7 @@ Template.importApiConfiguration.rendered = function () {
   // parses json object to string with indentation (parsing to string needed for ace editor)
   var jsonString = JSON.stringify(tips, null, '\t');
 
-  // pasting initial value to editor
+  // pastes initial value to editor
   instance.editor.setValue();
 
 };
@@ -32,18 +32,35 @@ Template.importApiConfiguration.rendered = function () {
 Template.importApiConfiguration.events({
   'dropped #dropzone': function (event, template) {
 
+    // current template instance
     var instance = Template.instance();
 
+    // grabs "dropped" files and iterates through them
     FS.Utility.eachFile(event, function(file) {
 
+      // checks if file is found
       if (file) {
 
+        // initialises new reader instance
         var reader = new FileReader();
+
+        // reads file - expecting YAML, JSON or TXT
         reader.readAsText(file, "UTF-8");
-        reader.onload = function (evt) {
-          var importedFile = evt.target.result;
+
+        // once file is loaded, doing smth with it
+        reader.onload = function (event) {
+
+          // gets file contents
+          var importedFile = event.target.result;
+
+          // converts YAML to JSON
           var doc = jsyaml.load(importedFile);
-          instance.editor.setValue(JSON.stringify(doc,  null, '\t'));
+
+          // parses JSON obj to JSON String with indentation
+          var jsonString = JSON.stringify(doc,  null, '\t');
+
+          // pastes converted file to ace editor
+          instance.editor.setValue(jsonString);
         }
 
       }
