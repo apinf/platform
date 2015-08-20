@@ -4,8 +4,17 @@ Template.importApiConfiguration.rendered = function () {
 
   instance.editor = ace.edit("editor");
 
-  instance.editor.setTheme("ace/theme/ambiance");
-  instance.editor.getSession().setMode("ace/mode/yaml");
+  instance.editor.setTheme("ace/theme/idle_fingers");
+  instance.editor.getSession().setMode("ace/mode/json");
+
+  var tips = {
+    "How_to_import_configurations": {
+      "option_1" : "Upload existing config file",
+      "option_2" : "Paste configurations here in JSON."
+    }
+  };
+
+  instance.editor.setValue(JSON.stringify(tips, null, '\t'));
 
 };
 
@@ -24,26 +33,12 @@ Template.importApiConfiguration.events({
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
         reader.onload = function (evt) {
-
           var importedFile = evt.target.result;
-          instance.editor.setValue(importedFile);
+          var doc = jsyaml.load(importedFile);
+          instance.editor.setValue(JSON.stringify(doc,  null, '\t'));
         }
 
       }
-
-      //ApiBackendConfigurations.insert(file, function (err, fileObj) {
-      //  if (err){
-      //    // handle error
-      //    console.log(err);
-      //  } else {
-      //    // handle success
-      //    console.log("File: ");
-      //    console.log(fileObj);
-      //
-      //    template.reactiveFile.set(fileObj);
-      //
-      //  }
-      //});
 
     });
 
@@ -52,19 +47,25 @@ Template.importApiConfiguration.events({
   },
   'submit #apiConfigurationUploadForm': function (event, template) {
 
-    var fileObj = template.reactiveFile.get();
-    var fileId  = fileObj._id;
+    var instance = Template.instance();
 
-    Meteor.call("convertYamlToJson", fileId, function (err, file) {
-      if (err) console.log(err);
-      console.log(file);
+    var doc = JSON.parse(instance.editor.getValue());
+
+    Meteor.call("importApiConfigs", doc, function (err, status) {
+
+      if (err) FlashMessages.sendError(err);
+
+      if (status.isSuccessful) {
+        FlashMessages.sendSuccess(status.message);
+      }else{
+        FlashMessages.sendError(status.message)
+      }
     });
 
     return false;
   }
 });
 
-//Template.importApiConfiguration.created = function () {
-//  this.reactiveFile = new ReactiveVar();
-//
-//};
+FlashMessages.configure({
+  autoHide: false
+});
