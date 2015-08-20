@@ -62,8 +62,6 @@ Template.importApiConfiguration.events({
             // converts YAML to JSON
             var yamlToJson = jsyaml.load(importedFile);
 
-            console.log(yamlToJson)
-
             // parses JSON obj to JSON String with indentation
             jsonObj = JSON.stringify(yamlToJson,  null, '\t');
           }
