@@ -1,29 +1,15 @@
 <template name="viewApiBackend">
   <h1>View API backend</h1>
+<ul class="list-group">
+<li class="list-group-item"><b>Name: </b>{{apiBackend.name}}</li>
+<li class="list-group-item"><b>Backend Protocol: </b>{{apiBackend.backend_protocol}}</li>
+<li class="list-group-item"><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</li>
+<li class="list-group-item"><b>Servers: </b>{{apiBackend.backend_host}}</li>
+{{#each apiBackend.url_matches}}
+<li class="list-group-item"><b>Backend prefix: </b>{{backend_prefix}}</li>
+<li class="list-group-item"><b>Frontend prefix: </b>{{frontend_prefix}}</li>
+{{/each}}
+</ul>
 
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <div class="row">
-        <h4 class="box-title"><b>Name: </b>{{apiBackend.name}}</h4>
-      </div>
-      <div class="row">
-        <h4 class="box-title"><b>Backend Protocol: </b>{{apiBackend.backend_protocol}}</h4>
-      </div>
-      <div class="row">
-        <h4 class="box-title"><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</h4>
-      </div>
-      <div class="row">
-        <h4 class="box-title"><b>Servers: </b>{{apiBackend.backend_host}}</h4>
-      </div>
-      <div class="row">
-        {{#each apiBackend.url_matches}}
-        <h4 class="box-title"><b>Backend prefix: </b>{{backend_prefix}}</h4>
-        <div class="row">
-          <h4 class="box-title"><b>Frontend prefix: </b>{{frontend_prefix}}</h4>
-        </div>
-        {{/each}}
-      </div>
-    </div>
-  </div>
 
 </template>
