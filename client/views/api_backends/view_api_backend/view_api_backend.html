@@ -1,15 +1,18 @@
 <template name="viewApiBackend">
   <h1>View API backend</h1>
-<ul class="list-group">
-<li class="list-group-item"><b>Name: </b>{{apiBackend.name}}</li>
-<li class="list-group-item"><b>Backend Protocol: </b>{{apiBackend.backend_protocol}}</li>
-<li class="list-group-item"><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</li>
-<li class="list-group-item"><b>Servers: </b>{{apiBackend.backend_host}}</li>
-{{#each apiBackend.url_matches}}
-<li class="list-group-item"><b>Backend prefix: </b>{{backend_prefix}}</li>
-<li class="list-group-item"><b>Frontend prefix: </b>{{frontend_prefix}}</li>
-{{/each}}
-</ul>
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">{{apiBackend.name}}</h1>
+  </div>
+  <div class="panel-body">
+    <p><b>Backend Protocol: </b>{{apiBackend.backend_protocol}}</p>
+    <p><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</p>
+    <p><b>Servers: </b>{{apiBackend.backend_host}}</p>
+    {{#each apiBackend.url_matches}}
+    <p><b>Backend prefix: </b>{{backend_prefix}}</p>
+    <p><b>Frontend prefix: </b>{{frontend_prefix}}</p>
+    {{/each}}
+  </div>
+</div>
 
 </template>
