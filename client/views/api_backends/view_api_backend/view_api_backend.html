@@ -9,6 +9,7 @@
     <p><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</p>
     <p><b>Servers: </b>{{apiBackend.backend_host}}</p>
     {{#each apiBackend.url_matches}}
+    <h2>URL Matchers</h2>
     <p><b>Backend prefix: </b>{{backend_prefix}}</p>
     <p><b>Frontend prefix: </b>{{frontend_prefix}}</p>
     {{/each}}
