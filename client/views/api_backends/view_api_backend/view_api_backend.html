@@ -5,19 +5,24 @@
     <h1 class="panel-title">{{apiBackend.name}}</h1>
   </div>
   <div class="panel-body">
-    <p><b>Backend Protocol: </b>{{apiBackend.backend_protocol}}</p>
-    <p><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</p>
-    <h2>Servers</h2>
-    <ul class="list-group">
-      <li class="list-group-item"><b>Backend: </b>{{apiBackend.backend_host}}</li>
-      <li class="list-group-item"><b>Frontend: </b>{{apiBackend.frontend_host}}</li>
-    </ul>
-    {{#each apiBackend.url_matches}}
-    <h2>URL Matchers</h2>
-    <p><b>Backend prefix: </b>{{backend_prefix}}</p>
-    <p><b>Frontend prefix: </b>{{frontend_prefix}}</p>
-    {{/each}}
+    <div class="row">
+      <p><b>Backend Protocol: </b>{{apiBackend.backend_protocol}}</p>
+      <p><b>Balance Algorithm: </b>{{apiBackend.balance_algorithm}}</p>
+    </div>
+    <div class="row">
+      <h2>Servers</h2>
+      <ul class="list-group col-md-4 col-xs-12">
+        <li class="list-group-item"><b>Backend: </b>{{apiBackend.backend_host}}</li>
+        <li class="list-group-item"><b>Frontend: </b>{{apiBackend.frontend_host}}</li>
+      </ul>
+    </div>
+    <div class="row">
+      {{#each apiBackend.url_matches}}
+      <h2 clas="clearfix">URL Matchers</h2>
+      <p><b>Backend prefix: </b>{{backend_prefix}}</p>
+      <p><b>Frontend prefix: </b>{{frontend_prefix}}</p>
+      {{/each}}
+    </div>
   </div>
 </div>
-
 </template>
