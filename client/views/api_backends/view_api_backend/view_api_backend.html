@@ -6,16 +6,13 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <p><b>Backend Protocol: </b>{{ apiBackend.backend_protocol }}</p>
-    </div>
-    <div class="row">
       <h2>Servers</h2>
       <ul class="list-group col-md-3 col-sm-6 col-xs-12">
         <li class="list-group-item">
           <span class="label label-primary">
             Backend
           </span>
-          &nbsp;{{apiBackend.backend_host}}
+          &nbsp;{{apiBackend.backend_host}} <span class="badge">{{ apiBackend.backend_protocol }}</span>
         </li>
         <li class="list-group-item">
           <span class="label label-primary">
