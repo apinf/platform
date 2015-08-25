@@ -19,10 +19,13 @@ Meteor.methods({
         // additional error handling
         try{
 
-          ApiBackends.insert(jsonObj);
+          var newApiBackend = ApiBackends.insert(jsonObj);
 
           status.isSuccessful = true;
-          status.message      = "API config has been successfully imported."
+          status.message      = "API config has been successfully imported.";
+
+          // gets new backend's id and passes it to client to be able to redirect then
+          status.newBackendId  = newApiBackend;
 
         }catch(e){
 
