@@ -68,7 +68,7 @@ Elasticsearch takes a host value that contains the host and port of the API Umbr
 The Github configuration takes two values, a Client ID and Secret key. You can obtain these values by setting up a Github application from your Github user account.
 
 # Nightly build
-You can preview our latest version at [nightly.apinf.com](http://nightly.apinf.com).
+You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io).
 
 * username: test@test.test
 * password: testuser
