@@ -115,7 +115,10 @@ Template.importApiConfiguration.events({
         if (status.isSuccessful) {
 
           // success message
-          FlashMessages.sendSuccess(status.message);
+          //FlashMessages.sendSuccess(status.message);
+
+          // redirects to apiBackend view page
+          Router.go('/api/' + status.newBackendId + '/view');
 
         }else{
 
