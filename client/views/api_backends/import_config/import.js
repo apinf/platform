@@ -5,6 +5,5 @@ Template.importApiConfiguration.events({
 
     // Insert into filesystem collection
     var insertedFile = ApiBackendConfigurations.insert(file);
-    console.log(insertedFile);
   }
-})
+});
