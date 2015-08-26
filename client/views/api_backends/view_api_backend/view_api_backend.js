@@ -8,7 +8,7 @@ Template.viewApiBackend.created = function() {
 
   // Subscribe to a single API Backend, by ID
   instance.subscribe("apiBackend", backendId);
-  
+
 };
 
 Template.viewApiBackend.rendered = function () {
