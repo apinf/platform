@@ -5,13 +5,10 @@ Meteor.methods({
 
     try {
 
-      // response object from apinf GET request
+      // response object from GET request to api host
       var result = Meteor.http.call("GET", apiUrl);
 
-      // Log the HTTP Status Code
-      console.log(result);
-
-      // checks is the status code matches 200
+      // checks is the status code matches 200 and returns boolean
       return result.statusCode == 200;
 
     } catch (error) {
