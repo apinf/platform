@@ -21,6 +21,14 @@ Template.viewApiBackend.rendered = function () {
 
   Meteor.call("getApiStatus", url, function (err, status) {
 
+    // status object contents:
+    // status = {
+    //   isUp            : <boolean>,
+    //   statusCode      : <integer>,
+    //   responseContext : <object>,
+    //   errorMessage    : <String>
+    // };
+
     if (status.isUp) {
 
       // updates layout with success status
@@ -28,8 +36,19 @@ Template.viewApiBackend.rendered = function () {
 
     }else{
 
+      // initial error message
+      var errorMessage = "API backend is down for some reason. Please contact support.";
+
+      // checks if error message has been returned
+      if (status.errorMessage) {
+
+        // updates errorMessage variable with returned error message
+        errorMessage = status.errorMessage;
+
+      }
+
       // updates layout with success status
-      $('#apiState').addClass('alert-danger').html("API backend is down for some reason. Please contact support.");
+      $('#apiState').addClass('alert-danger').html(errorMessage);
 
     }
 
