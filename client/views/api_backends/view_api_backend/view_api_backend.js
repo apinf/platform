@@ -19,9 +19,9 @@ Template.viewApiBackend.rendered = function () {
   // sets up request url based on protocol and host
   var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
 
-  Meteor.call("checkApi", url, function (err, status) {
+  Meteor.call("getApiStatus", url, function (err, status) {
 
-    if (status) {
+    if (status.isUp) {
 
       // updates layout with success status
       $('#apiState').addClass('alert-success').html("API is operating normally.");
