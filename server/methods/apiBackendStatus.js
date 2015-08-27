@@ -1,5 +1,5 @@
 Meteor.methods({
-  'checkApi' : function (apiUrl) {
+  'getApiStatus' : function (apiUrl) {
 
     this.unblock();
 
