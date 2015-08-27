@@ -14,10 +14,10 @@ Template.viewApiBackend.created = function() {
 Template.viewApiBackend.rendered = function () {
 
   // fetches current apiBackend
-  var apiBackend = ApiBackends.find().fetch();
+  var apiBackend = ApiBackends.findOne();
 
   // sets up request url based on protocol and host
-  var url = apiBackend[0].backend_protocol + "://" + apiBackend[0].backend_host;
+  var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
 
   Meteor.call("checkApi", url, function (err, status) {
 
