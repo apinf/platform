@@ -23,14 +23,10 @@ Template.viewApiBackend.rendered = function () {
 
     if (status) {
 
-      console.log("UP!");
-
       // updates layout with success status
       $('#apiState').addClass('alert-success').html("API is operating normally.");
 
     }else{
-
-      console.log("DOWN!");
 
       // updates layout with success status
       $('#apiState').addClass('alert-danger').html("API backend is down for some reason. Please contact support.");
