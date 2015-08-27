@@ -33,6 +33,11 @@
         <li class="{{isActiveRoute 'documentation'}}">
           <a href="/documentation"><i class="fa fa-book"></i><span>Documentation</span></a>
         </li>
+        {{# if isInRole 'admin' }}
+        <li class="{{isActiveRoute 'usersAdmin'}}">
+          <a href="/users"><i class="fa fa-users"></i><span>Users</span></a>
+        </li>
+        {{/ if }}
       </ul>
     </section>
   </aside>
