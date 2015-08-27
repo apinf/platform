@@ -39,18 +39,13 @@ Template.viewApiBackend.rendered = function () {
       // initial error message
       var errorMessage = "API backend is down for some reason. Please contact support.";
 
-      // checks if error message has been returned
-      if (status.errorMessage) {
-
-        // updates errorMessage variable with returned error message
-        errorMessage = status.errorMessage;
-
-      }
-
       // updates layout with success status
       $('#apiState').addClass('alert-danger').html(errorMessage);
 
     }
+
+    // showing when check did happen
+    $('#whenUpdated').html("Just now");
 
   });
 
