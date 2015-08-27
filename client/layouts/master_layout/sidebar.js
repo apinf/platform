@@ -1,5 +1,5 @@
 Template.sidebar.helpers({
-  haveApis : function() {
+  userHasApis : function() {
     // get current user id
     var currentUserId = Meteor.userId();
     // count added apis
