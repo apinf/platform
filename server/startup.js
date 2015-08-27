@@ -14,9 +14,6 @@ Meteor.startup(function () {
   });
   Meteor.call("syncApiUmbrellaUsers");
   Meteor.call("syncApiBackends");
-
-  Meteor.call("createAdminRoleIfNotDefined");
-  
 });
 
 SyncedCron.start();
