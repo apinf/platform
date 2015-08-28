@@ -17,14 +17,16 @@
               <a href="{{pathFor route='apiBackends'}}">
                 <i class="fa fa-circle-o"></i>
                 <span>Add API Backend</span>
-                </a>
+              </a>
             </li>
+            {{#if userHasApis}}
             <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
               <a href="{{pathFor route='manageApiBackends'}}">
                 <i class="fa fa-circle-o"></i>
                 <span>Manage API Backends</span>
-                </a>
+              </a>
             </li>
+            {{/if}}
           </ul>
         </li>
         <li class="{{isActiveRoute 'catalogue'}}">
