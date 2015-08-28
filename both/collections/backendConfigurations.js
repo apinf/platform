@@ -1,6 +1,6 @@
+var apiConfigStore = new FS.Store.GridFS("apiConfigs");
 ApiBackendConfigurations = new FS.Collection("apiBackendConfigurations", {
-  // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("apiBackendConfigurations", {path: "~/apinf/apiConfigurations"})]
+  stores: [apiConfigStore]
 });
 
 ApiBackendConfigurations.filters({

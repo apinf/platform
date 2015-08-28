@@ -28,7 +28,7 @@ ApiBackendsSchema = new SimpleSchema({
     label: 'Backend protocol'
   },
   backend_host: {
-    type: String,
+    type: String
   },
   backend_port: {
     type: String,
@@ -52,7 +52,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   servers: {
     type: [Object],
-    optional: false,
+    optional: true,
     label: 'Servers'
   },
   "servers.$.host": {
@@ -66,7 +66,7 @@ ApiBackendsSchema = new SimpleSchema({
   },
   url_matches: {
     type: [Object],
-    optional: false,
+    optional: true
   },
   "url_matches.$.frontend_prefix": {
     label: 'Frontend prefix',
