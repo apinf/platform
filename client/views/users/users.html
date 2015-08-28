@@ -1,0 +1,7 @@
+<template name="usersAdmin">
+  {{#if isInRole 'admin'}}
+    {{> accountsAdmin}}
+  {{else}}
+    Not authorized.
+  {{/if}}
+</template>
