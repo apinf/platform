@@ -71,10 +71,10 @@ Template.viewApiBackend.events({
     var apiBackend = ApiBackends.findOne(Router.current().params._id);
 
     // converts from json to yaml
-    var yml = jsyaml.safeDump(apiBackend);
+    var yaml = jsyaml.safeDump(apiBackend);
 
     // creates file object with content type of YAML
-    var file = new Blob([yml], {type: "application/x-yaml;charset=utf-8"});
+    var file = new Blob([yaml], {type: "application/x-yaml;charset=utf-8"});
 
     // forces "save As" function allow user download file
     saveAs(file, "apiConfig.yaml");
