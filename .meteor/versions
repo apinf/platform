@@ -93,6 +93,8 @@ meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
 minifiers@1.1.5
 minimongo@1.0.8
+mizzao:sharejs@0.7.4
+mizzao:sharejs-ace@1.1.8_1
 mobile-status-bar@1.0.3
 momentjs:moment@2.10.3
 mongo@1.1.0
@@ -111,6 +113,7 @@ percolate:synced-cron@1.2.1
 pfafman:filesaver@0.2.0_1
 raix:eventemitter@0.1.2
 raix:handlebar-helpers@0.2.4
+raix:ui-dropped-event@0.0.7
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5
