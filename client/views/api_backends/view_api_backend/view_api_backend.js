@@ -57,10 +57,10 @@ Template.viewApiBackend.events({
     var apiBackend = ApiBackends.findOne(Router.current().params._id);
 
     // converts JSON object to JSON string and adds indentation
-    var jsonObj = JSON.stringify(apiBackend, null, '\t');
+    var json = JSON.stringify(apiBackend, null, '\t');
 
     // creates file object with content type of JSON
-    var file = new Blob([jsonObj], {type: "application/json;charset=utf-8"});
+    var file = new Blob([json], {type: "application/json;charset=utf-8"});
 
     // forces "save As" function allow user download file
     saveAs(file, "apiConfig.json");
