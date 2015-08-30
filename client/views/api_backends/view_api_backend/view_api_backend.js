@@ -54,7 +54,7 @@ Template.viewApiBackend.events({
   'click #exportJSONConfig' : function () {
 
     // fetches API object
-    var apiBackend = ApiBackends.find().fetch();
+    var apiBackend = ApiBackends.findOne(Router.current().params._id);
 
     // converts JSON object to JSON string and adds indentation
     var jsonObj = JSON.stringify(apiBackend, null, '\t');
@@ -68,7 +68,7 @@ Template.viewApiBackend.events({
   'click #exportYAMLConfig' : function () {
 
     // fetches API object
-    var apiBackend = ApiBackends.find().fetch();
+    var apiBackend = ApiBackends.findOne(Router.current().params._id);
 
     // converts from json to yaml
     var yml = jsyaml.safeDump(apiBackend);
