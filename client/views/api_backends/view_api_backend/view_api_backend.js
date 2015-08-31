@@ -53,8 +53,11 @@ Template.viewApiBackend.rendered = function () {
 Template.viewApiBackend.events({
   'click #exportJSONConfig' : function () {
 
-    // fetches API object
-    var apiBackend = ApiBackends.findOne(Router.current().params._id);
+    // Get API Backend ID from URL
+    var apiBackendId = Router.current().params._id;
+
+    // Get API Backend from database collection
+    var apiBackend = ApiBackends.findOne(apiBackendId);
 
     // converts JSON object to JSON string and adds indentation
     var json = JSON.stringify(apiBackend, null, '\t');
@@ -70,7 +73,7 @@ Template.viewApiBackend.events({
     // Get API Backend ID from URL
     var apiBackendId = Router.current().params._id;
 
-  // Get API Backend from database collection
+    // Get API Backend from database collection
     var apiBackend = ApiBackends.findOne(apiBackendId);
 
     // converts from json to yaml
