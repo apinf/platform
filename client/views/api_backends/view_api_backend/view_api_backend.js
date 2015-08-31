@@ -67,8 +67,11 @@ Template.viewApiBackend.events({
   },
   'click #exportYAMLConfig' : function () {
 
-    // fetches API object
-    var apiBackend = ApiBackends.findOne(Router.current().params._id);
+    // Get API Backend ID from URL
+    var apiBackendId = Router.current().params._id;
+
+  // Get API Backend from database collection
+    var apiBackend = ApiBackends.findOne(apiBackendId);
 
     // converts from json to yaml
     var yaml = jsyaml.safeDump(apiBackend);
