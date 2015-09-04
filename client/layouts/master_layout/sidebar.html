@@ -1,0 +1,47 @@
+<template name="sidebar">
+  {{#if User}}
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+        <li class="header">Menu</li>
+        <li class="{{isActiveRoute 'dashboard'}}">
+          <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>Analytics</span></a>
+        </li>
+        <li class="{{isActiveRoute 'apiBackends'}} {{isActiveRoute 'manageApiBackends'}} treeview">
+          <a href="#">
+            <i class="fa fa-code"></i>
+            <span>API Backends</span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{isActiveRoute 'apiBackends'}} treeview">
+              <a href="{{pathFor route='apiBackends'}}">
+                <i class="fa fa-circle-o"></i>
+                <span>Add API Backend</span>
+              </a>
+            </li>
+            {{#if userHasApis}}
+            <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
+              <a href="{{pathFor route='manageApiBackends'}}">
+                <i class="fa fa-circle-o"></i>
+                <span>Manage API Backends</span>
+              </a>
+            </li>
+            {{/if}}
+          </ul>
+        </li>
+        <li class="{{isActiveRoute 'catalogue'}}">
+          <a href="/catalogue"><i class="fa fa-list-alt"></i><span>Catalogue</span></a>
+        </li>
+        <li class="{{isActiveRoute 'documentation'}}">
+          <a href="/documentation"><i class="fa fa-book"></i><span>Documentation</span></a>
+        </li>
+        {{# if isInRole 'admin' }}
++        <li class="{{isActiveRoute 'accountsAdmin'}}">
++          <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>Users</span></a>
++        </li>
++        {{/ if }}
+      </ul>
+    </section>
+  </aside>
+  {{/if}}
+</template>

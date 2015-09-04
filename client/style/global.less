@@ -1,0 +1,67 @@
+/* Bootstrap */
+@import "/client/style/bootstrap-variables.import.less";
+@import "/packages/bootstrap/bootstrap.import.less";
+
+/* Views */
+@import "/client/views/home/home.less";
+
+
+/* Global variables */
+@font-family-default: 'Roboto', sans-serif;
+
+html, body, h1, h2, h3, h4, h5, h6, p {
+  font-family: @font-family-default;
+}
+
+.layout {
+  min-height: 80%;
+}
+
+#iron-router-progress {
+  background-color: darken(@brand-primary,20%);
+  box-shadow: 0 0 5px darken(@brand-primary,20%);
+}
+
+#iron-router-progress.spinner:before {
+  border-color: darken(@brand-primary,20%);
+}
+
+.navbar-inverse.navbar {
+  background-color: #2196f3;
+  border: none;
+  border-radius: 0;
+}
+
+/*Styles for Dynatable*/
+th a {
+  color: #1c4862;
+}
+
+.dynatable-active-page {
+  background-color: #1c4862;
+}
+
+.help-block {
+  margin-bottom: 1.4em;
+}
+
+hr {
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+/* Global overriding */
+input[name='profile.apiKey']{
+  width: 100%;
+  border: 0px solid #fff;
+  outline: none;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.wrapper {
+  position: inherit !important;
+}
