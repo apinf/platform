@@ -9,14 +9,9 @@ All planning documents, meeting minutes, etc. can be found on the [Apinf Hackpad
 # Architecture and ecosystem
 Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
 
-Currently, there are two options for the architecture:
+![System diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/outreach/system-diagram-simplified.svg)
 
-* In option A, we will develop our own dashboard and use the API Umbrella Admin API to build Apinf features.
-* In option B, we will extend the current API Umbrella Web platform to include a dashboard.
-
-The decision on the architecture to be made once we understand the API Umbrella Admin API better.
-
-![Architecture diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_architecture.svg)
+![Technology stack](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/outreach/technology-stack.svg)
 
 For the ecosystem, we will concentrate on open APIs in the MVP phase. For the API consumer side, there are two API consumer personas: [Jukka and Minh](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/UX/APINF%20consumer%20personas.pdf). API owner personas to be added later.
 
