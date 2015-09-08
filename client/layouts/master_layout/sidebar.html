@@ -36,10 +36,10 @@
           <a href="/documentation"><i class="fa fa-book"></i><span>Documentation</span></a>
         </li>
         {{# if isInRole 'admin' }}
-+        <li class="{{isActiveRoute 'accountsAdmin'}}">
-+          <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>Users</span></a>
-+        </li>
-+        {{/ if }}
+        <li class="{{isActiveRoute 'accountsAdmin'}}">
+          <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>Users</span></a>
+        </li>
+        {{/ if }}
       </ul>
     </section>
   </aside>
