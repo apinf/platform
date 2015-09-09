@@ -5,12 +5,20 @@
     <div class="panel-heading">
       <h2 class="panel-title">
         {{ name }}
+        <div class="btn-group pull-right">
         <a
           href="{{ pathFor route='viewApiBackend' }}"
-          class="btn btn-default pull-right">
+          class="btn btn-success">
           View
         </a>
-        <div class="clearfix"></div>
+        <a
+          href="{{ pathFor route='editApiBackend' }}"
+          class="btn btn-warning">
+          Edit
+        </a>
+
+      </div>
+      <div class="clearfix"></div>
         </h2>
     </div>
     <div class="panel-body">
