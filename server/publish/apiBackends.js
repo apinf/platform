@@ -1,3 +1,14 @@
+Meteor.publish('allApiBackends', function () {
+  // Check if the user is signed in
+  if (this.userId) {
+    // Return all API Backends
+    return ApiBackends.find();
+  } else {
+    // Return nothing
+    return null;
+  }
+});
+
 Meteor.publish('myBookmarkedApis', function () {
   // get current user id
   var userId = this.userId;
