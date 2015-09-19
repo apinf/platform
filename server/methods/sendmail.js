@@ -2,7 +2,7 @@ Meteor.methods({
 
   "sendmail": function(to) {
     var to = to,
-    from = "register@apinf.com";
+    from = "register@apinf.io";
 
     Email.send({
       from: from,
