@@ -660,3 +660,11 @@ ApiBackends.allow({
   },
   fetch: ['managerIds']
 });
+
+
+SimpleSchema.messages({
+  "regEx": [
+    {msg: "Default Message"},
+    {exp: SimpleSchema.RegEx.Url, msg: "You call that a URL?"}
+  ]
+});
