@@ -188,7 +188,7 @@ Template.chartsLayout.created = function () {
       .renderVerticalGridLines(true);
 
     overview
-      .height(40)
+      .height(60)
       .margins({top: 0, right: 50, bottom: 20, left: 40})
       .dimension(timeStampDimension)
       .group(timeStampGroup)
