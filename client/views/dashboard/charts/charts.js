@@ -169,34 +169,32 @@ Template.chartsLayout.created = function () {
     var timeStampDimension  = parsedData.timeStampDimension;
     var timeStampGroup      = parsedData.timeStampGroup;
     var timeScale           = parsedData.timeScale;
-    var chart = dc.lineChart("#line-chart");
     var overview = dc.barChart("#overview-chart");
+    var chart = dc.barChart("#line-chart");
 
-    chart
-      .height(250)
-      .transitionDuration(1500)
-      .elasticY(true)
-      .x(timeScale)
-      .dimension(timeStampDimension)
-      .group(timeStampGroup)
-      .mouseZoomable(true)
-      .rangeChart(overview)
-      .renderArea(true)
-      .dotRadius(3)
-      .brushOn(false)
-      .renderHorizontalGridLines(true)
-      .renderVerticalGridLines(true);
 
     overview
-      .height(60)
+      .height(40)
       .margins({top: 0, right: 50, bottom: 20, left: 40})
       .dimension(timeStampDimension)
       .group(timeStampGroup)
       .centerBar(true)
       .gap(1)
+      .rangeChart(chart)
+      .transitionDuration(1500)
       .x(timeScale)
       .alwaysUseRounding(true)
       .yAxis().ticks(0);
+
+    chart
+      .height(250)
+      //.elasticY(true)
+      .x(timeScale)
+      .dimension(timeStampDimension)
+      .group(timeStampGroup)
+      .centerBar(true)
+      .renderHorizontalGridLines(true)
+      .renderVerticalGridLines(true);
 
     // Creates Dynatable
     var dynatable = $('#dc-data-table').dynatable({
