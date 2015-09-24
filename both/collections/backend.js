@@ -1,5 +1,9 @@
 ApiBackends = new Mongo.Collection('apiBackends');
 
+// RegEx contants
+SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{2,5}$/);
+SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
+
 ApiBackendsSchema = new SimpleSchema({
   id: {
     type: String,
@@ -33,7 +37,7 @@ ApiBackendsSchema = new SimpleSchema({
   backend_port: {
     type: String,
     optional: true,
-    regEx: /^[0-9]{2,5}$/
+    regEx: SimpleSchema.RegEx.Port
   },
   frontend_host: {
     type: String,
@@ -62,7 +66,7 @@ ApiBackendsSchema = new SimpleSchema({
   "servers.$.port": {
     type: String,
     optional: true,
-    regEx: /^[0-9]{2,5}$/
+    regEx: SimpleSchema.RegEx.Port
   },
   url_matches: {
     type: [Object],
@@ -72,13 +76,13 @@ ApiBackendsSchema = new SimpleSchema({
     label: 'Frontend prefix',
     optional: true,
     type: String,
-    regEx: /^\/[a-z0-9A-Z_\-\/]*$/
+    regEx: SimpleSchema.RegEx.Prefix
   },
   "url_matches.$.backend_prefix": {
     label: 'Backend prefix',
     optional: true,
     type: String,
-    regEx: /^\/[a-z0-9A-Z_\-\/]*$/
+    regEx: SimpleSchema.RegEx.Prefix
   },
   distributed: {
     type: Boolean,
@@ -661,10 +665,10 @@ ApiBackends.allow({
   fetch: ['managerIds']
 });
 
-
+// Global RegEx messages
 SimpleSchema.messages({
-  "regEx": [
-    {msg: "Default Message"},
-    {exp: SimpleSchema.RegEx.Url, msg: "You call that a URL?"}
+  regEx: [
+    {exp: SimpleSchema.RegEx.Port, msg: "Invalid characters. Only 0-9 characters are allowed."},
+    {exp: SimpleSchema.RegEx.Prefix, msg: "Invalid format. Prefix should start with / character."}
   ]
 });
