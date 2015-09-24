@@ -1,6 +1,6 @@
 ApiBackends = new Mongo.Collection('apiBackends');
 
-// RegEx contants
+// RegEx constants
 SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{2,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
@@ -665,7 +665,7 @@ ApiBackends.allow({
   fetch: ['managerIds']
 });
 
-// Global RegEx messages
+// RegEx messages
 SimpleSchema.messages({
   regEx: [
     {exp: SimpleSchema.RegEx.Port, msg: "Invalid characters. Only 0-9 characters are allowed."},
