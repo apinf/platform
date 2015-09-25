@@ -83,6 +83,12 @@ var helpData = {
       placement: 'left'
     }
   },
+  'rate_limit_mode': {
+    message: "Choose backend server protocol",
+    options: {
+      placement: 'left'
+    }
+  },
   'pass_api_key_header': {
     message: "Choose backend server protocol",
     options: {
