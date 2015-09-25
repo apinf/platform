@@ -9,10 +9,12 @@
     <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
     {{>showHelp 'backend_protocol'}}
     {{> afQuickField name='backend_protocol' options="allowed"}}
+    {{>showHelp 'servers'}}
     {{> afQuickField name='servers'}}
     <legend>Host</legend>
     <div class="row">
       <div class="col-lg-4">
+        {{>showHelp 'backend_host'}}
         {{> afQuickField name='backend_host'}}
       </div>
       <div class="col-lg-4 arrow">
@@ -20,41 +22,57 @@
         <div>rewrite to</div>
       </div>
       <div class="col-lg-4">
+        {{>showHelp 'frontend_host'}}
         {{> afQuickField name='frontend_host'}}
       </div>
     </div>
     <legend>Matching URL Prefixes</legend>
     <span class="help-block">What URL prefixes should be routed to this backend?</span>
+    {{>showHelp 'url_matches'}}
     {{> afQuickField name='url_matches'}}
     <legend data-toggle="collapse" data-target="#documentation-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Documentation</legend>
     <div id="documentation-block" class="collapse in">
+      {{>showHelp 'documentation_link'}}
       {{> afQuickField name='documentation_link'}}
       <span class="help-block">Link to documentation</span>
       {{> importApiDocumentation}}
     </div>
     <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Global Request Settings</legend>
     <div id="global-request-block" class="collapse in">
+      {{>showHelp 'append_query_string'}}
       {{> afQuickField name='append_query_string'}}
+      {{>showHelp 'set_headers'}}
       {{> afQuickField name='set_headers'}}
+      {{>showHelp 'http_basic_auth'}}
       {{> afQuickField name='http_basic_auth'}}
+      {{>showHelp 'require_https'}}
       {{> afQuickField name='require_https' options="allowed"}}
+      {{>showHelp 'api_key_verification_level'}}
       {{> afQuickField name='api_key_verification_level' options="allowed"}}
+      {{>showHelp 'required_roles'}}
       {{> afQuickField name='required_roles'}}
+      {{>showHelp 'pass_api_key_header'}}
       {{> afQuickField name='pass_api_key_header'}}
+      {{>showHelp 'pass_api_key_query_param'}}
       {{> afQuickField name='pass_api_key_query_param'}}
+      {{>showHelp 'rate_limit_mode'}}
       {{> afQuickField name='rate_limit_mode' options="allowed"}}
       {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
+      {{>showHelp 'custom_rate_limits'}}
       {{> afQuickField name='custom_rate_limits'}}
       {{/if}}
     </div>
     <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
     <div id="advanced-rewriting-block" class="collapse in">
       <span class="help-block">Modify the incoming request's URL or headers before passing it to the backend.</span>
+      {{>showHelp 'rewrite'}}
       {{> afQuickField name='rewrite'}}
     </div>
     <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Settings</legend>
     <div id="advanced-block" class="collapse in">
+      {{>showHelp 'balance_algorithm'}}
       {{> afQuickField name='balance_algorithm' options="allowed"}}
+      {{>showHelp 'error_templates'}}
       {{> afQuickField name='error_templates'}}
     </div>
     <div id="form-buttons">
