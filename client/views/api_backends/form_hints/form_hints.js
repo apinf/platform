@@ -41,6 +41,12 @@ var helpData = {
       placement: 'right'
     }
   },
+  'importApiDocumentation': {
+    message: "Choose backend server protocol",
+    options: {
+      placement: 'right'
+    }
+  },
   'append_query_string': {
     message: "Choose backend server protocol",
     options: {
