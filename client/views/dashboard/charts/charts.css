@@ -1,6 +1,6 @@
 #move-chart, #overview-chart{
     width:100%
 }
-#move-chart-box, #overview-chart-box, #data-table-box, #filter-box, #map-box{
+#bar-charts-box, #data-table-box, #filter-box, #map-box{
     padding:5px;
 }
