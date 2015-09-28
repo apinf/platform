@@ -170,7 +170,7 @@ Template.chartsLayout.created = function () {
     var timeStampGroup      = parsedData.timeStampGroup;
     var timeScale           = parsedData.timeScale;
     var overviewChart = dc.barChart("#overview-chart");
-    var rangeChart = dc.barChart("#line-chart");
+    var rangeChart = dc.barChart("#range-chart");
 
 
     overviewChart
