@@ -174,7 +174,7 @@ Template.chartsLayout.created = function () {
 
 
     overviewChart
-      .height(60)
+      .height(80)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
       .centerBar(true)
