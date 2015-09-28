@@ -174,25 +174,28 @@ Template.chartsLayout.created = function () {
 
 
     overviewChart
-      .height(40)
-      .margins({top: 0, right: 50, bottom: 20, left: 40})
+      .height(60)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
       .centerBar(true)
       .gap(1)
-      .transitionDuration(1500)
       .x(timeScale)
-      .alwaysUseRounding(true)
+      .round(d3.time.month.round)
+      .xUnits(d3.time.months)
       .yAxis().ticks(0);
 
     rangeChart
       .height(250)
-      //.elasticY(true)
-      .rangeChart(overviewChart)
-      .x(timeScale)
+      .transitionDuration(1000)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
+      .mouseZoomable(false)
+      .x(timeScale)
+      .rangeChart(overviewChart)
+      .round(d3.time.month.round)
       .centerBar(true)
+      .elasticY(true)
+      .brushOn(false)
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true);
 
