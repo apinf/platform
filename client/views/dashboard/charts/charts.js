@@ -229,8 +229,14 @@ Template.chartsLayout.created = function () {
     }
 
     function refreshMoveChart () {
+
+      // gets selected time range
       var timeRange = overviewChart.filter();
+
+      // generating time scale for dc
       var timeScale = d3.time.scale().domain(timeRange);
+
+      // attaching current time range to chart
       moveChart.x(timeScale);
     }
 
