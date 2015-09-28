@@ -170,7 +170,7 @@ Template.chartsLayout.created = function () {
     var timeStampGroup      = parsedData.timeStampGroup;
     var timeScale           = parsedData.timeScale;
     var overviewChart = dc.barChart("#overview-chart");
-    var rangeChart = dc.barChart("#range-chart");
+    var moveChart = dc.barChart("#move-chart");
 
 
     overviewChart
@@ -180,24 +180,20 @@ Template.chartsLayout.created = function () {
       .centerBar(true)
       .gap(1)
       .x(timeScale)
-      .round(d3.time.month.round)
-      .xUnits(d3.time.months)
+      .alwaysUseRounding(true)
       .yAxis().ticks(0);
 
-    rangeChart
+    moveChart
       .height(250)
-      .transitionDuration(1000)
+      .transitionDuration(500)
+      .x(timeScale)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
-      .mouseZoomable(false)
-      .x(timeScale)
       .rangeChart(overviewChart)
-      .round(d3.time.month.round)
-      .centerBar(true)
-      .elasticY(true)
       .brushOn(false)
       .renderHorizontalGridLines(true)
-      .renderVerticalGridLines(true);
+      .renderVerticalGridLines(true)
+      .elasticY(true);
 
     // Creates Dynatable
     var dynatable = $('#dc-data-table').dynatable({
@@ -229,6 +225,13 @@ Template.chartsLayout.created = function () {
     function refreshMapAndTable () {
       refreshTable();
       refreshMap();
+      refreshMoveChart();
+    }
+
+    function refreshMoveChart () {
+      var timeRange = overviewChart.filter();
+      var timeScale = d3.time.scale().domain(timeRange);
+      moveChart.x(timeScale);
     }
 
     // parse data into array for map
