@@ -169,26 +169,26 @@ Template.chartsLayout.created = function () {
     var timeStampDimension  = parsedData.timeStampDimension;
     var timeStampGroup      = parsedData.timeStampGroup;
     var timeScale           = parsedData.timeScale;
-    var overview = dc.barChart("#overview-chart");
-    var chart = dc.barChart("#line-chart");
+    var overviewChart = dc.barChart("#overview-chart");
+    var rangeChart = dc.barChart("#line-chart");
 
 
-    overview
+    overviewChart
       .height(40)
       .margins({top: 0, right: 50, bottom: 20, left: 40})
       .dimension(timeStampDimension)
       .group(timeStampGroup)
       .centerBar(true)
       .gap(1)
-      .rangeChart(chart)
       .transitionDuration(1500)
       .x(timeScale)
       .alwaysUseRounding(true)
       .yAxis().ticks(0);
 
-    chart
+    rangeChart
       .height(250)
       //.elasticY(true)
+      .rangeChart(overviewChart)
       .x(timeScale)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
