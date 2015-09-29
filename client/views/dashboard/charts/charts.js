@@ -169,27 +169,12 @@ Template.chartsLayout.created = function () {
     var timeStampDimension  = parsedData.timeStampDimension;
     var timeStampGroup      = parsedData.timeStampGroup;
     var timeScale           = parsedData.timeScale;
-    var chart = dc.lineChart("#line-chart");
-    var overview = dc.barChart("#overview-chart");
+    var overviewChart = dc.barChart("#overview-chart");
+    var moveChart = dc.barChart("#move-chart");
 
-    chart
-      .height(250)
-      .transitionDuration(1500)
-      .elasticY(true)
-      .x(timeScale)
-      .dimension(timeStampDimension)
-      .group(timeStampGroup)
-      .mouseZoomable(true)
-      .rangeChart(overview)
-      .renderArea(true)
-      .dotRadius(3)
-      .brushOn(false)
-      .renderHorizontalGridLines(true)
-      .renderVerticalGridLines(true);
 
-    overview
-      .height(40)
-      .margins({top: 0, right: 50, bottom: 20, left: 40})
+    overviewChart
+      .height(80)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
       .centerBar(true)
@@ -197,6 +182,18 @@ Template.chartsLayout.created = function () {
       .x(timeScale)
       .alwaysUseRounding(true)
       .yAxis().ticks(0);
+
+    moveChart
+      .height(250)
+      .transitionDuration(500)
+      .x(timeScale)
+      .dimension(timeStampDimension)
+      .group(timeStampGroup)
+      .rangeChart(overviewChart)
+      .brushOn(false)
+      .renderHorizontalGridLines(true)
+      .renderVerticalGridLines(true)
+      .elasticY(true);
 
     // Creates Dynatable
     var dynatable = $('#dc-data-table').dynatable({
@@ -228,6 +225,19 @@ Template.chartsLayout.created = function () {
     function refreshMapAndTable () {
       refreshTable();
       refreshMap();
+      refreshMoveChart();
+    }
+
+    function refreshMoveChart () {
+
+      // gets selected time range
+      var timeRange = overviewChart.filter();
+
+      // generating time scale for dc
+      var timeScale = d3.time.scale().domain(timeRange);
+
+      // attaching current time range to chart
+      moveChart.x(timeScale);
     }
 
     // parse data into array for map
