@@ -80,13 +80,13 @@
     "worker"        : false,    // Web Workers
     "wsh"           : false,    // Windows Scripting Host
     "yui"           : false,    // Yahoo User Interface
-    //"meteor"        : false,    // Meteor.js
+    //"meteor"        : true,    // Meteor.js
 
     // Legacy
     "nomen"         : false,    // true: Prohibit dangling `_` in variables
     "onevar"        : false,    // true: Allow only one `var` statement per function
     "passfail"      : false,    // true: Stop on first error
-    "white"         : false,    // true: Check against strict whitespace and indentation rules
+    "white"         : true,    // true: Check against strict whitespace and indentation rules
 
     // Custom globals, from http://docs.meteor.com, in the order they appear there
     "globals"       : {
@@ -128,6 +128,54 @@
       "Random": false,
       "_": false,               // Underscore.js
       "$": false,               // jQuery
-      "Router": false           // iron-router
+      "Router": false,           // iron-router
+
+      // Apinf internal globals
+      "Config": false,
+      "Schemas": false,
+      "SEO": false,
+      "Utils": false,
+
+      // Apinf collections
+      "ApiBackends": false,
+      "ApiBackendConfigurations": false,
+      "ApiBookmarks": false,
+      "ApiUmbrellaAdmins": false,
+      "ApiUmbrellaUsers": false,
+      "RateLimit": false,
+
+      // Apinf schemas (TODO: combine these under the Schemas object)
+      "ApiBackendsSchema": false,
+      "ApiUmbrellaAdminsSchema": false,
+      "ApiUmbrellaUsersSchema": false,
+      "RateLimitSchema": false,
+
+      // Apinf packages
+      "AccountsTemplates": false,
+      "apiUmbrellaWeb": false,
+      "AutoForm": false,
+      "ElasticRest": false,
+      "FlashMessages": false,
+      "FS": false,
+      "GitHub": false,
+      "NCSchemas": false,
+      "PrettyEmail": false,
+      "Roles": false,
+      "sAlert": false,
+      "ServiceConfiguration": false,
+      "SimpleSchema": false,
+      "SubsManager": false,
+      "SyncedCron": false,
+      "Tabular": false,
+      "TabularTables": false,
+      "TAPi18n": false,
+
+      // JavaScript utilities
+      "ace":false,
+      "crossfilter": false,
+      "d3": false,
+      "dc": false,
+      "jsyaml": false,
+      "moment": false
     }
 }
