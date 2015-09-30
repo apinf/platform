@@ -1,3 +1,4 @@
 client/compatibility
 packages
 .meteor
+public
