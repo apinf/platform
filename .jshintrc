@@ -171,11 +171,12 @@
       "TAPi18n": false,
 
       // JavaScript utilities
-      "ace":false,
-      "crossfilter": false,
-      "d3": false,
-      "dc": false,
-      "jsyaml": false,
-      "moment": false
+      "ace":false,                // Ace editor
+      "crossfilter": false,       // Crossfilter
+      "d3": false,                // D3
+      "dc": false,                // DC
+      "jsyaml": false,            // jsyaml
+      "L",                        // Leaflet
+      "moment": false             // moment
     }
 }
