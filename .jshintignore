@@ -2,3 +2,4 @@ client/compatibility
 packages
 .meteor
 public
+client/lib
