@@ -32,8 +32,19 @@
         <li class="{{isActiveRoute 'catalogue'}}">
           <a href="/catalogue"><i class="fa fa-list-alt"></i><span>Catalogue</span></a>
         </li>
-        <li class="{{isActiveRoute 'documentation'}}">
-          <a href="/documentation"><i class="fa fa-book"></i><span>Documentation</span></a>
+        <li class="{{isActiveRoute 'documentation'}} {{isActiveRoute 'apiDocumentationEditor'}} treeview">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Documentation</span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{isActiveRoute 'apiDocumentationEditor'}}">
+              <a href="/documentation/editor"><i class="fa fa-circle-o"></i><span>Editor</span></a>
+            </li>
+            <li class="{{isActiveRoute 'documentation'}}">
+              <a href="/documentation"><i class="fa fa-circle-o"></i><span>Viewer</span></a>
+            </li>
+          </ul>
         </li>
         {{# if isInRole 'admin' }}
         <li class="{{isActiveRoute 'accountsAdmin'}}">
