@@ -55,15 +55,6 @@
   "not_found": "Nothing here.",
 
 
-  /*Dashboard*/
-  "add_post": "Add a Post",
-  "add_post_btn": "Add Post",
-  "add_post_modal": "Add with a modal",
-  "add_post_modal_btn": "Add a new post",
-  "edit_post": "Edit post",
-  "delete": "Delete",
-  "favorites": "Favorites",
-
   /*Account*/
   "account_details": "Account Details",
   "delete_account": "Delete Account",
@@ -74,17 +65,6 @@
 
   /*Profile*/
   "update": "Update",
-
-  /*Posts*/
-
-  "postTitle": "Title",
-  "postContent": "Content",
-  "postPicture": "Picture",
-  // "uploadLabel": "Choose File"
-  "profilePicture": "Profile Picture"
-
-
-
 
 
 }
