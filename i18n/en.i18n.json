@@ -47,6 +47,9 @@
   "section3TextSocialText": "and",
   "sectionContactUs": "Contact Us",
   "sectionContactUsText": "Contact us to ask anything.",
+  /*Footer*/
+  "collaborationTitle": "Collaboration between",
+  "collaborationTitleExtra": "and",
 
   /*Not Found*/
   "not_found": "Nothing here.",
