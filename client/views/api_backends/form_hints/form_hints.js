@@ -119,5 +119,5 @@ var helpData = {
       placement: 'left'
     }
   }
-}
+};
 InlineHelp.initHelp(helpData);
