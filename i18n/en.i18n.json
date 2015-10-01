@@ -74,6 +74,15 @@
 
   /*Import Api Documentation*/
   "importApiDocumentationTitle": "Upload documentation",
-  "importApiDocumentationFile": "Documentation Configuration File"
+  "importApiDocumentationFile": "Documentation Configuration File",
+
+  /*Manage Api Backends*/
+  "manageApiBackendsTitle": "My managed APIs",
+  "manageApiBackendsRewrite": "Rewrite to",
+  "manageApiBackendsMatches": "URL Matches",
+  "manageApiBackendsBackend": "Backend:",
+  "manageApiBackendsFrontend": "Frontend:",
+  "manageApiBackendsView": "View",
+  "manageApiBackendsEdit": "Edit"
 
 }
