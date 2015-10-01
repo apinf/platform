@@ -156,7 +156,14 @@
   "filterDataRecords": "records",
   "filterDataReset": "Reset All",
   /*Map*/
-  "mapTitle": "Map"
+  "mapTitle": "Map",
+  /*Data Table*/
+  "dataTableTitle": "Table",
+  "dataTableTimeStamp": "Time stamp",
+  "dataTableRequestCountry": "Request country",
+  "dataTableRequestIP": "Request IP",
+  "dataTableRequestPath": "Request path",
+  "dataTableResponseTime": "Response time"
 
 
 }
