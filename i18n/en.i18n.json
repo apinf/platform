@@ -129,7 +129,14 @@
   "favouriteAdd": "Add bookmark",
 
   /*Catalogue*/
-  "catalogueTitle": "Available APIs"
+  "catalogueTitle": "Available APIs",
+
+  /*Charts*/
+  /*Bar chart*/
+  "overviewChartTitle": "Overview chart",
+  "moveChartTitle": "Chart",
+  /*Filter*/
+  "filterDataTitle": "Filter"
 
 
 }
