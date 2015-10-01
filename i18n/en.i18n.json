@@ -88,6 +88,18 @@
   /*Api Backend Status*/
   "apiBackendStatusTitle": "Status",
   "apiBackendStatusUpdated": "Updated:",
-  "apiBackendStatusChecking": "Checking API status. Hold on..."
+  "apiBackendStatusChecking": "Checking API status. Hold on...",
+
+  /*View Api Backend*/
+  "viewApiBackendTitle": "View API backend",
+  "viewApiBackendServers": "Servers",
+  "viewApiBackendBackend": "Backend",
+  "viewApiBackendFrontend": "Frontend",
+  "viewApiBackendMatchers": "URL Matchers",
+  "viewApiBackendBackendPrefix": "Backend prefix",
+  "viewApiBackendFrontendPrefix": "Frontend prefix",
+  "viewApiBackendExportTitle": "Export API configurations",
+  "viewApiBackendExportJson": "Export .json",
+  "viewApiBackendExportYaml": "Export .yaml"
 
 }
