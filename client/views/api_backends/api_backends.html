@@ -1,36 +1,36 @@
 <template name="apiBackends">
   <div class="api-backends-content">
-    <h1>Add API</h1>
+    <h1>{{_ "apiBackendsTitle"}}</h1>
     {{#autoForm collection="ApiBackends" doc=this id="apiBackends" type="insert"}}
     {{> afQuickField name='name'}}
-    <span class="help-block">API's name</span>
-    <legend>Backend</legend>
-    <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
+    <span class="help-block">{{_ "apiBackendsTitleHelp"}}</span>
+    <legend>{{_ "apiBackendsBackendTitle"}}</legend>
+    <span class="help-block">{{_ "apiBackendsBackendHelp"}}</span>
     {{> afQuickField name='backend_protocol' options="allowed"}}
     {{> afQuickField name='servers'}}
-    <legend>Host</legend>
+    <legend>{{_ "apiBackendsHostTitle"}}</legend>
     <div class="row">
       <div class="col-lg-4">
         {{> afQuickField name='frontend_host'}}
       </div>
       <div class="col-lg-4 arrow">
         <i class="fa fa-arrow-right fa-2x"></i>
-        <div>rewrite to</div>
+        <div>{{_ "apiBackendsHostRewrite"}}</div>
       </div>
       <div class="col-lg-4">
         {{> afQuickField name='backend_host'}}
       </div>
     </div>
-    <legend>Matching URL Prefixes</legend>
-    <span class="help-block">What URL prefixes should be routed to this backend?</span>
+    <legend>{{_ "apiBackendsMatchingTitle"}}</legend>
+    <span class="help-block">{{_ "apiBackendsMatchingTitleHelp"}}</span>
     {{> afQuickField name='url_matches'}}
-    <legend data-toggle="collapse" data-target="#documentation-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Documentation</legend>
+    <legend data-toggle="collapse" data-target="#documentation-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackendsDocumentationTitle"}}</legend>
     <div id="documentation-block" class="collapse in">
       {{> afQuickField name='documentation_link'}}
-      <span class="help-block">Link to documentation</span>
+      <span class="help-block">{{_ "apiBackendsDocumentationLink"}}Link to documentation</span>
       {{> importApiDocumentation}}
     </div>
-    <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Global Request Settings</legend>
+    <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackendsGlobalRequestSettingsTitle"}}</legend>
     <div id="global-request-block" class="collapse in">
       {{> afQuickField name='append_query_string'}}
       {{> afQuickField name='set_headers'}}
@@ -45,18 +45,18 @@
       {{> afQuickField name='custom_rate_limits'}}
       {{/if}}
     </div>
-    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
+    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackendsAdvancedRequestsRewriting"}}</legend>
     <div id="advanced-rewriting-block" class="collapse in">
-      <span class="help-block">Modify the incoming request's URL or headers before passing it to the backend.</span>
+      <span class="help-block">{{_ "apiBackendsAdvancedRequestsRewritingHelp"}}</span>
       {{> afQuickField name='rewrite'}}
     </div>
-    <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Settings</legend>
+    <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackendsAdvancedSettings"}}</legend>
     <div id="advanced-block" class="collapse in">
       {{> afQuickField name='balance_algorithm' options="allowed"}}
       {{> afQuickField name='error_templates'}}
     </div>
     <div id="form-buttons">
-      <button type="submit" class="btn btn-lg btn-success">Submit</button>
+      <button type="submit" class="btn btn-lg btn-success">{{_ "apiBackendsSubmit"}}</button>
     </div>
     {{/autoForm}}
   </div>

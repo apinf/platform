@@ -100,6 +100,24 @@
   "viewApiBackendFrontendPrefix": "Frontend prefix",
   "viewApiBackendExportTitle": "Export API configurations",
   "viewApiBackendExportJson": "Export .json",
-  "viewApiBackendExportYaml": "Export .yaml"
+  "viewApiBackendExportYaml": "Export .yaml",
+
+  /*Api Backends*/
+  "apiBackendsTitle": "Add API",
+  "apiBackendsTitleHelp": "API's name",
+  "apiBackendsBackendTitle": "Backend",
+  "apiBackendsBackendHelp": "Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.",
+  "apiBackendsHostTitle": "Host",
+  "apiBackendsHostRewrite": "rewrite to",
+  "apiBackendsMatchingTitle": "Matching URL Prefixes",
+  "apiBackendsMatchingTitleHelp": "What URL prefixes should be routed to this backend?",
+  "apiBackendsDocumentationTitle": "Documentation",
+  "apiBackendsDocumentationLink": "Link to documentation",
+  "apiBackendsGlobalRequestSettingsTitle": "Global Request Settings",
+  "apiBackendsAdvancedRequestsRewriting": "Advanced Requests Rewriting",
+  "apiBackendsAdvancedRequestsRewritingHelp": "Modify the incoming request's URL or headers before passing it to the backend.",
+  "apiBackendsAdvancedSettings": "Advanced Settings",
+  "apiBackendsSubmit": "Submit"
+
 
 }
