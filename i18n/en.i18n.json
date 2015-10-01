@@ -154,7 +154,9 @@
   "filterDataLimit": "Limit:",
   "filterDataSelectedOf": "selected out of",
   "filterDataRecords": "records",
-  "filterDataReset": "Reset All"
+  "filterDataReset": "Reset All",
+  /*Map*/
+  "mapTitle": "Map"
 
 
 }
