@@ -62,9 +62,6 @@
   /*Profile*/
   "update": "Update",
 
-  /*Not Found*/
-  "not_found": "Nothing here.",
-
   /*Import API Configuration*/
   "importApiConfigurationTitle": "Import API Configuration",
   "importApiConfigurationFile": "File:",
@@ -174,7 +171,13 @@
   "notAuthorizedTitle": "Not Authorized",
   "notAuthorizedMessage": "You are not authorized to access this page. Please ensure you are logged in.",
   "notAuthorizedReturnMessagePart1": "You may",
-  "notAuthorizedReturnMessagePart2": "return to a previous page"
+  "notAuthorizedReturnMessagePart2": "return to a previous page",
+
+  /*Not Found*/
+  "notFoundTitle": "Oops! Page not found.",
+  "notFoundMessagePart1": "We could not find the page you were looking for.",
+  "notFoundMessagePart2": "Meanwhile, you may",
+  "notFoundMessagePart3": "return to a previous page"
 
 
 
