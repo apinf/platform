@@ -126,7 +126,10 @@
 
   /*Favourite*/
   "favouriteRemove": "Remove bookmark",
-  "favouriteAdd": "Add bookmark"
+  "favouriteAdd": "Add bookmark",
+
+  /*Catalogue*/
+  "catalogueTitle": "Available APIs"
 
 
 }
