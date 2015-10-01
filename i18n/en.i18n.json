@@ -70,6 +70,10 @@
   "importApiConfigurationFile": "File:",
   "importApiConfigurationDrop": "Drop file to here",
   "importApiConfigurationPreview": "Preview:",
-  "importApiConfigurationUpload": "Upload"
+  "importApiConfigurationUpload": "Upload",
+
+  /*Import Api Documentation*/
+  "importApiDocumentationTitle": "Upload documentation",
+  "importApiDocumentationFile": "Documentation Configuration File"
 
 }
