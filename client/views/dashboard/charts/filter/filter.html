@@ -5,35 +5,35 @@
     </div>
     <div class="box-body">
       <form id="filteringForm">
-        Month:
+        {{_ "filterDataMonth"}}
         <select name="month" >
           <option value="00">-</option>
-          <option value="01">January</option>
-          <option value="02">February</option>
-          <option value="03">March</option>
-          <option value="04">April</option>
-          <option value="05">May</option>
-          <option value="06">June</option>
-          <option value="07">July</option>
-          <option value="08">August</option>
-          <option value="09">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
+          <option value="01">{{_ "filterDataJanuary"}}</option>
+          <option value="02">{{_ "filterDataFebruary"}}</option>
+          <option value="03">{{_ "filterDataMarch"}}</option>
+          <option value="04">{{_ "filterDataApril"}}</option>
+          <option value="05">{{_ "filterDataMay"}}</option>
+          <option value="06">{{_ "filterDataJune"}}</option>
+          <option value="07">{{_ "filterDataJuly"}}</option>
+          <option value="08">{{_ "filterDataAugust"}}</option>
+          <option value="09">{{_ "filterDataSeptember"}}</option>
+          <option value="10">{{_ "filterDataOctober"}}</option>
+          <option value="11">{{_ "filterDataNovember"}}</option>
+          <option value="12">{{_ "filterDataDecember"}}</option>
         </select>
-        Year:
+        {{_ "filterDataYear"}}
         <select name="year">
           <option value="0000">-</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
         </select>
-        Limit:
+        {{_ "filterDataLimit"}}
         <input name="limit" type="text" value="10000" />
 
         <span class="dc-data-count dc-chart" id="row-selection" style="margin:0">
-          <span class="filter-count">_</span> selected out of <span class="total-count">_</span> records
+          <span class="filter-count">_</span> {{_ "filterDataSelectedOf"}} <span class="total-count">_</span> {{_ "filterDataRecords"}}
           <span>
-            <a href='javascript:dc.filterAll();dc.redrawAll();'>Reset All</a>
+            <a href='javascript:dc.filterAll();dc.redrawAll();'>{{_ "filterDataReset"}}</a>
           </span>
         </span>
         <span id="loadingState">

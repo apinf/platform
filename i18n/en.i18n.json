@@ -136,7 +136,25 @@
   "overviewChartTitle": "Overview chart",
   "moveChartTitle": "Chart",
   /*Filter*/
-  "filterDataTitle": "Filter"
+  "filterDataTitle": "Filter",
+  "filterDataMonth": "Month:",
+  "filterDataJanuary": "January",
+  "filterDataFebruary": "February",
+  "filterDataMarch": "March",
+  "filterDataApril": "April",
+  "filterDataMay": "May",
+  "filterDataJune": "June",
+  "filterDataJuly": "July",
+  "filterDataAugust": "August",
+  "filterDataSeptember": "September",
+  "filterDataOctober": "October",
+  "filterDataNovember": "November",
+  "filterDataDecember": "December",
+  "filterDataYear": "Year:",
+  "filterDataLimit": "Limit:",
+  "filterDataSelectedOf": "selected out of",
+  "filterDataRecords": "records",
+  "filterDataReset": "Reset All"
 
 
 }
