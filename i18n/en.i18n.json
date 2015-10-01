@@ -117,7 +117,12 @@
   "apiBackendsAdvancedRequestsRewriting": "Advanced Requests Rewriting",
   "apiBackendsAdvancedRequestsRewritingHelp": "Modify the incoming request's URL or headers before passing it to the backend.",
   "apiBackendsAdvancedSettings": "Advanced Settings",
-  "apiBackendsSubmit": "Submit"
+  "apiBackendsSubmit": "Submit",
+
+  /*Bookmarks*/
+  "bookmarksTitle": "Your bookmarked APIs",
+  "bookmarksName": "Name:",
+  "bookmarksBackend": "Backend host:"
 
 
 }
