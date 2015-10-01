@@ -168,7 +168,13 @@
   /*Status*/
   "statusCheckTitle": "Status",
   "statusCheckUpdated": "Updated:",
-  "statusCheckJustNow": "Just now"
+  "statusCheckJustNow": "Just now",
+
+  /*Not Authorized*/
+  "notAuthorizedTitle": "Not Authorized",
+  "notAuthorizedMessage": "You are not authorized to access this page. Please ensure you are logged in.",
+  "notAuthorizedReturnMessagePart1": "You may",
+  "notAuthorizedReturnMessagePart2": "return to a previous page"
 
 
 
