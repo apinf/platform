@@ -79,11 +79,11 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Getting started</h2>
-          <p class="lead">Just create an account and be on your way! The developer dashboard offers you a one-stop location to discover APIs, track your application API usage, and more.</p>
+          <h2 class="section-heading">{{_ "section1Heading"}}</h2>
+          <p class="lead">{{_ "section1Text"}}</p>
           {{#if User}}
           {{else}}
-          <p class="lead"><a href="/sign-up">Sign up</a> to see all features.</p>
+          <p class="lead"><a href="/sign-up">{{_ "signUp"}}</a> {{_ "section1TextExtra"}}</p>
           {{/if}}
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
@@ -101,9 +101,9 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Reach out to developers</h2>
-          <p class="lead">Apinf provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API trafﬁc.</p>
-          <p class="lead"><a href="#" class="contact-us-link">Contact us</a> for more information.</p>
+          <h2 class="section-heading">{{_ "section2Heading"}}</h2>
+          <p class="lead">{{_ "section2Text"}}</p>
+          <p class="lead"><a href="#" class="contact-us-link">{{_ "contactUs"}}</a> {{_ "section1TextExtra"}}</p>
         </div>
       </div>
     </div>
@@ -114,12 +114,9 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Completely open source</h2>
-          <p class="lead">Apinf is powered by API Umbrella and builds a dashboard on top of the
-            API Umbrella features. The solution is fully open source licensed with MIT.
-            It is written in Meteor.js and D3. We like to collaborate, to listen to our
-            users and want to encourage people to become contributors.</p>
-          <p class="lead">Find us in <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a> and <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a>.</p>
+          <h2 class="section-heading">{{_ "section3Heading"}}</h2>
+          <p class="lead">{{_ "section3Text"}}</p>
+          <p class="lead">{{_ "section3TextExtra"}} <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a> {{_ "section3TextSocialText"}} <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a>.</p>
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
           <img class="img-responsive" src="img/opensource.png" alt="We are Open Source">
@@ -130,9 +127,9 @@
   <div id="contact-us" class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">Contact Us</h2>
+        <h2 class="feature-section-heading">{{_ "sectionContactUs"}}</h2>
         <hr class="primary">
-        <h4 class="text-muted">Contact us to ask anything.</h4>
+        <h4 class="text-muted">{{_ "sectionContactUsText"}}</h4>
       </div>
     </div>
     <div class="row">
