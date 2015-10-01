@@ -122,7 +122,11 @@
   /*Bookmarks*/
   "bookmarksTitle": "Your bookmarked APIs",
   "bookmarksName": "Name:",
-  "bookmarksBackend": "Backend host:"
+  "bookmarksBackend": "Backend host:",
+
+  /*Favourite*/
+  "favouriteRemove": "Remove bookmark",
+  "favouriteAdd": "Add bookmark"
 
 
 }
