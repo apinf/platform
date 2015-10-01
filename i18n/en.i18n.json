@@ -1,74 +1,52 @@
 {
 
-	/*Config*/
-	"configName": "Apinf",
-	"configTitle": "Build custom APIs. Fast.",
-	"configSubtitle": "Create custom API mashups, really quick.",
+  /*Config*/
+  "configName": "Apinf",
+  "configTitle": "Build custom APIs. Fast.",
+  "configSubtitle": "Create custom API mashups, really quick.",
 
-	/*Home*/
-	"getstarted": "Get Started",
-	"dashboard": "Go to dashboard",
-	"learn": "Learn more",
-	"intro": "Make Meteor Apps. Fast.",
-	"how": "How It Works",
-	"step_1": "Consumer registration",
-	"step_1_text": "Users create accounts to access your API via personal API keys.",
-	"step_2": "Configuration",
-	"step_2_text": "Configure API endpoints, structure, and access control.",
-	"step_3": "Analytics",
-	"step_3_text": "Track the usage of your API, discover patterns, plan improvements.",
-	"section_ipad_header": "Unified API Lifecycle services",
-	"section_ipad_text": "We provide full lifecycle tools and services",
-	"section_ipad_btn": "Powered by Sampo Software",
-	"final_text": "Your life will be instantly better.",
-	"final_cta": "Take a look",
+  /*Home*/
+  /*Header*/
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "profile": "Profile",
+  "account": "Account",
+  "signout": "Sign out",
+  "homeMainTitle": "APINF - API Management Platform",
+  "homeSecondaryTitle": "Building a bridge between API owners and users.",
+  "Dashboard": "Go to dashboard",
 
-	/*Shared*/
-
-	"favorite": "Favorite",
-
-	 /*Navbar*/
-	"admin": "Admin",
-	"profile": "Profile",
-	"account": "Account",
-	"signout": "Sign out",
-	"signup": "Sign up",
-	"login": "Log in",
-	"login2": "Login",
-    "signup": "SignUp",
-	"edit_profile": "Edit Profile",
-
-	/*Not Found*/
-	"not_found": "Nothing here.",
+  /*Not Found*/
+  "not_found": "Nothing here.",
 
 
-	/*Dashboard*/
-	"add_post": "Add a Post",
-	"add_post_btn": "Add Post",
-	"add_post_modal": "Add with a modal",
-	"add_post_modal_btn": "Add a new post",
-	"edit_post": "Edit post",
-	"delete": "Delete",
-	"favorites": "Favorites",
+  /*Dashboard*/
+  "add_post": "Add a Post",
+  "add_post_btn": "Add Post",
+  "add_post_modal": "Add with a modal",
+  "add_post_modal_btn": "Add a new post",
+  "edit_post": "Edit post",
+  "delete": "Delete",
+  "favorites": "Favorites",
 
-	/*Account*/
-	"account_details": "Account Details",
-	"delete_account": "Delete Account",
-	"delete_account_warn": "There's no coming back from this one",
-	"delete_account_warn2": "Are you sure you want to delete your account?",
-	"close": "Close",
-	"change_pswd": "Change Password",
+  /*Account*/
+  "account_details": "Account Details",
+  "delete_account": "Delete Account",
+  "delete_account_warn": "There's no coming back from this one",
+  "delete_account_warn2": "Are you sure you want to delete your account?",
+  "close": "Close",
+  "change_pswd": "Change Password",
 
-	/*Profile*/
-	"update": "Update",
+  /*Profile*/
+  "update": "Update",
 
-	/*Posts*/
+  /*Posts*/
 
-	"postTitle": "Title",
-	"postContent": "Content",
-	"postPicture": "Picture",
-	// "uploadLabel": "Choose File"
-	"profilePicture": "Profile Picture"
+  "postTitle": "Title",
+  "postContent": "Content",
+  "postPicture": "Picture",
+  // "uploadLabel": "Choose File"
+  "profilePicture": "Profile Picture"
 
 
 
