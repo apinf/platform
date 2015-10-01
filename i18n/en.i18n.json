@@ -83,6 +83,11 @@
   "manageApiBackendsBackend": "Backend:",
   "manageApiBackendsFrontend": "Frontend:",
   "manageApiBackendsView": "View",
-  "manageApiBackendsEdit": "Edit"
+  "manageApiBackendsEdit": "Edit",
+
+  /*Api Backend Status*/
+  "apiBackendStatusTitle": "Status",
+  "apiBackendStatusUpdated": "Updated:",
+  "apiBackendStatusChecking": "Checking API status. Hold on..."
 
 }
