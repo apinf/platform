@@ -1,16 +1,16 @@
 <template name="importApiConfiguration">
   <form id="apiConfigurationUploadForm" class="form" method="post">
 
-    <legend>Import API Configuration</legend>
+    <legend>{{_ "importApiConfigurationTitle"}}</legend>
     <div class="row">
       <div class="col-lg-5 col-md-5 col-sm-12">
-        <b>File:</b>
+        <b>{{_ "importApiConfigurationFile"}}</b>
         <div id="dropzone" class="dropzone">
-          <div> Drop file to here</div>
+          <div> {{_ "importApiConfigurationDrop"}}</div>
         </div>
       </div>
       <div class="col-lg-7 col-md-7 col-sm-12">
-        <b>Preview:</b>
+        <b>{{_ "importApiConfigurationPreview"}}</b>
         <div id="editor">
 
         </div>
@@ -18,7 +18,7 @@
       <div class="col-lg-12">
         <div class="btn-divider"></div>
         <div class="form-group" style="text-align: right">
-          <button class="btn btn-success" type="submit">Upload</button>
+          <button class="btn btn-success" type="submit">{{_ "importApiConfigurationUpload"}}</button>
         </div>
       </div>
     </div>

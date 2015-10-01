@@ -51,10 +51,6 @@
   "collaborationTitle": "Collaboration between",
   "collaborationTitleExtra": "and",
 
-  /*Not Found*/
-  "not_found": "Nothing here.",
-
-
   /*Account*/
   "account_details": "Account Details",
   "delete_account": "Delete Account",
@@ -64,7 +60,16 @@
   "change_pswd": "Change Password",
 
   /*Profile*/
-  "update": "Update"
+  "update": "Update",
 
+  /*Not Found*/
+  "not_found": "Nothing here.",
+
+  /*Import API Configuration*/
+  "importApiConfigurationTitle": "Import API Configuration",
+  "importApiConfigurationFile": "File:",
+  "importApiConfigurationDrop": "Drop file to here",
+  "importApiConfigurationPreview": "Preview:",
+  "importApiConfigurationUpload": "Upload"
 
 }
