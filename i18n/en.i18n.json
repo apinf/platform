@@ -5,6 +5,17 @@
   "configTitle": "Build custom APIs. Fast.",
   "configSubtitle": "Create custom API mashups, really quick.",
 
+  /*Sidebar*/
+  "sidebarMenu": "Menu",
+  "sidebarAnalytics": "Analytics",
+  "sidebarAPIBackends": "API Backends",
+  "sidebarAddAPIBackend": "Add API Backend",
+  "sidebarManageAPIBackends": "Manage API Backends",
+  "sidebarCatalogue": "Catalogue",
+  "sidebarDocumentation": "Documentation",
+  "sidebarUsers": "Users",
+
+
   /*Home*/
   /*Header*/
   "signIn": "Sign In",

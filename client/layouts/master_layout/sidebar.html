@@ -3,41 +3,41 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu">
-        <li class="header">Menu</li>
+        <li class="header">{{_ "sidebarMenu"}}</li>
         <li class="{{isActiveRoute 'dashboard'}}">
-          <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>Analytics</span></a>
+          <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>{{_ "sidebarAnalytics"}}</span></a>
         </li>
         <li class="{{isActiveRoute 'apiBackends'}} {{isActiveRoute 'manageApiBackends'}} treeview">
           <a href="#">
             <i class="fa fa-code"></i>
-            <span>API Backends</span>
+            <span>{{_ "sidebarAPIBackends"}}</span>
           </a>
           <ul class="treeview-menu">
             <li class="{{isActiveRoute 'apiBackends'}} treeview">
               <a href="{{pathFor route='apiBackends'}}">
                 <i class="fa fa-circle-o"></i>
-                <span>Add API Backend</span>
+                <span>{{_ "sidebarAddAPIBackend"}}</span>
               </a>
             </li>
             {{#if userHasApis}}
             <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
               <a href="{{pathFor route='manageApiBackends'}}">
                 <i class="fa fa-circle-o"></i>
-                <span>Manage API Backends</span>
+                <span>{{_ "sidebarManageAPIBackends"}}</span>
               </a>
             </li>
             {{/if}}
           </ul>
         </li>
         <li class="{{isActiveRoute 'catalogue'}}">
-          <a href="/catalogue"><i class="fa fa-list-alt"></i><span>Catalogue</span></a>
+          <a href="/catalogue"><i class="fa fa-list-alt"></i><span>{{_ "sidebarCatalogue"}}</span></a>
         </li>
         <li class="{{isActiveRoute 'documentation'}}">
-          <a href="/documentation"><i class="fa fa-book"></i><span>Documentation</span></a>
+          <a href="/documentation"><i class="fa fa-book"></i><span>{{_ "sidebarDocumentation"}}</span></a>
         </li>
         {{# if isInRole 'admin' }}
         <li class="{{isActiveRoute 'accountsAdmin'}}">
-          <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>Users</span></a>
+          <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>{{_ "sidebarUsers"}}</span></a>
         </li>
         {{/ if }}
       </ul>
