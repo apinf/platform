@@ -33,9 +33,9 @@
             <h1>{{_ "homeMainTitle"}}<br>
               <small>{{_ "homeSecondaryTitle"}}</small></h1>
             {{#if User}}
-            <a href="/dashboard" class="btn btn-success sign-up" title="Go to dashboard"><i class="mdi mdi-chart-bar"></i> {{_ "Dashboard"}}</a>
+            <a href="/dashboard" class="btn btn-success sign-up" title="{{_ 'Dashboard'}}"><i class="mdi mdi-chart-bar"></i> {{_ "Dashboard"}}</a>
             {{else}}
-            <a href="/sign-up" class="btn btn-success sign-up" title="Sign up"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
+            <a href="/sign-up" class="btn btn-success sign-up" title="{{_ 'signUp'}}"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
             {{/if}}
           </div>
           <div class="col-lg-6">
