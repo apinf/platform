@@ -163,7 +163,13 @@
   "dataTableRequestCountry": "Request country",
   "dataTableRequestIP": "Request IP",
   "dataTableRequestPath": "Request path",
-  "dataTableResponseTime": "Response time"
+  "dataTableResponseTime": "Response time",
+
+  /*Status*/
+  "statusCheckTitle": "Status",
+  "statusCheckUpdated": "Updated:",
+  "statusCheckJustNow": "Just now"
+
 
 
 }
