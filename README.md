@@ -56,7 +56,12 @@ Your `settings.json` file should have the following structure:
 The `api_umbrella` settings include an API Key, Admin Auth Token, and API Umbrella base URL. You can get the API Key and Admin Auth Token from API Umbrella, by following the instructions in the [Meteor - API Umbrella integration package](https://github.com/brylie/meteor-api-umbrella#installation).
 
 ## mail
-The mail object contains a username and password for the Mailgun service.
+The mail object contains a username and password for the Mailgun service. You will need to register with Mailgun. Once registered, you can use your 'sandbox' domain credentials in a development environment or a custom domain in production:
+
+* Default SMTP Login
+* Default Password
+
+For up-to-date instructions, refer to the [Mailgun Help Center](https://help.mailgun.com/hc/en-us)
 
 ## elasticsearch
 Elasticsearch takes a host value that contains the host and port of the API Umbrella ElasticSearch instance.
