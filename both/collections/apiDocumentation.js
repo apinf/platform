@@ -26,4 +26,4 @@ if (Meteor.isServer) {
       return true;
     }
   });
-}
+};
