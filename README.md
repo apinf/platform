@@ -64,7 +64,7 @@ The mail object contains a username and password for the Mailgun service. You wi
 For up-to-date instructions, refer to the [Mailgun Help Center](https://help.mailgun.com/hc/en-us)
 
 ## elasticsearch
-Elasticsearch takes a host value that contains the host and port of the API Umbrella ElasticSearch instance.
+Elasticsearch takes a host value that contains the host and port of the API Umbrella ElasticSearch instance. In a standard API Umbrella deployment, this will be the same as the API Umbrella base URL, with port number 14002. **Note:** Elastic REST API may be exposed via HTTP instead of HTTPS, so double check the protocol.
 
 ## githubConfiguration
 The Github configuration takes two values, a Client ID and Secret key. You can obtain these values by setting up a Github application from your Github user account.
