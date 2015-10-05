@@ -74,3 +74,6 @@ You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io
 
 * username: test@test.test
 * password: testuser
+
+# Contributing
+Please review our [Contributor Guid](https://github.com/apinf/docs/blob/master/docs/develop/contributing.md) for details on how to get involved with the project.
