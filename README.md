@@ -21,7 +21,7 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 # Installation
 
-1. Install [API Umbrella](http://apiumbrella.io/download/)
+1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
 2. Install [Meteor.js](https://www.meteor.com/install)
 3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
 4. Create [`settings.json`](#Settings.json)
