@@ -1,16 +1,17 @@
 AutoForm.hooks({
   updatePassword: {
     onSubmit: function(insertDoc, updateDoc, currentDoc) {
-      if (insertDoc.new !== insertDoc.confirm) {
-        sAlert.error('Passwords do not match');
-        return false;
-      }
+      this.event.preventDefault();
+      var instance = this;
       Accounts.changePassword(insertDoc.old, insertDoc.new, function(e) {
         $('.btn-primary').attr('disabled', null);
         if (e) {
-          return sAlert.error(e.message);
+          sAlert.error(e.message);
+          instance.done(e.message);
         } else {
-          return sAlert.success('Password Updated');
+          sAlert.success('Password Updated');
+          instance.done('Password Updated');
+          AutoForm.resetForm('updatePassword');
         }
       });
       return true;

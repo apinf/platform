@@ -665,10 +665,12 @@ ApiBackends.allow({
   fetch: ['managerIds']
 });
 
-// RegEx messages
 SimpleSchema.messages({
+  // RegEx messages
   regEx: [
     {exp: SimpleSchema.RegEx.Port, msg: "Invalid characters. Only 0-9 characters are allowed."},
     {exp: SimpleSchema.RegEx.Prefix, msg: "Invalid format. Prefix should start with / character."}
-  ]
+  ],
+  //other
+  "updatePassword_passwordsMismatch": "Passwords do not match"
 });
