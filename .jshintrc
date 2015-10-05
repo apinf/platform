@@ -140,6 +140,7 @@
       "ApiBackends": false,
       "ApiBackendConfigurations": false,
       "ApiBookmarks": false,
+      "apiDocumentation": false,
       "ApiUmbrellaAdmins": false,
       "ApiUmbrellaUsers": false,
       "RateLimit": false,
