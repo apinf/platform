@@ -4,6 +4,6 @@ Template.importApiDocumentation.events({
     var file = event.target.files[0];
 
     // Insert into filesystem collection
-    apiDocumentation.insert(file);
+    ApiDocumentation.insert(file);
   }
 });

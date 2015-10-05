@@ -1,5 +1,5 @@
 /*jshint -W020 */
-apiDocumentation = new FS.Collection("apiDocumentation", {
+ApiDocumentation = new FS.Collection("apiDocumentation", {
   // TODO: Determine how to upload files within the project directory
   // without hardcoding FS path
   stores: [
@@ -10,7 +10,7 @@ apiDocumentation = new FS.Collection("apiDocumentation", {
  ],
 });
 
-apiDocumentation.filters({
+ApiDocumentation.filters({
   allow: {
     // ~ 10Mbs.
     maxSize: 10048567,
@@ -23,7 +23,7 @@ apiDocumentation.filters({
 });
 
 if (Meteor.isServer) {
-  apiDocumentation.allow({
+  ApiDocumentation.allow({
     insert: function (/*userId, doc*/) {
       // allow insert by default
       // TODO: determine proper upload/insert permisison
