@@ -1,6 +1,13 @@
+/*jshint -W020 */
 apiDocumentation = new FS.Collection("apiDocumentation", {
-  // TODO: Determine how to upload files within the project directory without hardcoding FS path
-  stores: [new FS.Store.FileSystem("apiDocumentation", {path: "~/apinf/apiDocumentationFiles"})],
+  // TODO: Determine how to upload files within the project directory
+  // without hardcoding FS path
+  stores: [
+    new FS.Store.FileSystem(
+      "apiDocumentation",
+      {path: "~/apinf/apiDocumentationFiles"}
+    )
+ ],
 });
 
 apiDocumentation.filters({
@@ -17,13 +24,13 @@ apiDocumentation.filters({
 
 if (Meteor.isServer) {
   apiDocumentation.allow({
-    insert: function (userId, doc) {
+    insert: function (/*userId, doc*/) {
       // allow insert by default
       // TODO: determine proper upload/insert permisison
       return true;
     },
-    update: function (userId, doc) {
+    update: function (/*userId, doc*/) {
       return true;
     }
   });
-};
+}
