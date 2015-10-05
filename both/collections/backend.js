@@ -671,6 +671,6 @@ SimpleSchema.messages({
     {exp: SimpleSchema.RegEx.Port, msg: "Invalid characters. Only 0-9 characters are allowed."},
     {exp: SimpleSchema.RegEx.Prefix, msg: "Invalid format. Prefix should start with / character."}
   ],
-  //other
+  // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match"
 });
