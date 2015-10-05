@@ -44,7 +44,7 @@
 </template>
 
 <template name="updatePassword">
-  {{#autoForm schema=NCSchemas.updatePassword id="updatePassword"}}
+  {{#autoForm schema=NCSchemas.updatePassword id="updatePassword" validation="keyup"}}
   <fieldset>
     <legend>Change Password</legend>
     {{> afQuickField name="old" type="password"}}
