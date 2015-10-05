@@ -3,22 +3,8 @@ AutoForm.hooks({
     onSuccess: function (formType, backendId) {
       // Send the API Backend to API Umbrella
       Meteor.call('createApiBackendOnApiUmbrella', backendId);
-      sAlert.success('New API was successfully submitted!');
-      Router.go('manageApiBackends');
+      // Redirect to the just created API Backend page
+      Router.go('viewApiBackend', {_id: backendId});
     }
   }
-});
-
-Meteor.startup(function () {
-
-  sAlert.config({
-    effect: '',
-    position: 'top',
-    timeout: 5000,
-    html: false,
-    onRouteClose: true,
-    stack: true,
-    beep: false
-  });
-
 });
