@@ -9,8 +9,8 @@ Template.apiDocumentationSelect.created = function () {
 Template.apiDocumentationSelect.helpers({
   "apiDocumentation": function () {
     // Get API Documentation
-    var apiDocumentation = apiDocumentation.find().fetch();
+    var apiDocumentationArray = ApiDocumentation.find().fetch();
 
-    return apiDocumentation;
+    return apiDocumentationArray;
   }
 });
