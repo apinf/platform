@@ -1,9 +1,9 @@
 <template name="apiDocumentationSelect">
   {{#if Template.subscriptionsReady }}
-  <ul>
+  <select name="selected-documentation">
   {{# each apiDocumentation }}
-    <li>{{ original.name }}</li>
+    <option value="{{ this.url }}">{{ original.name }}</option>
   {{/ each }}
-  </ul>
+  </select>
   {{/ if }}
 </template>
