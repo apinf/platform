@@ -3,7 +3,7 @@ Template.documentation.created = function () {
   var instance = this;
 
   // Create Reactive Variable for selected documentation
-  instance.selectedDocumentation = new ReactiveVar();
+  instance.swaggerDocumentUrl = new ReactiveVar();
 };
 
 Template.documentation.rendered = function () {
@@ -21,3 +21,25 @@ Template.documentation.rendered = function () {
     $("#documentation").attr("src", newSrc);
   });
 };
+
+Template.documentation.events({
+  "change [name='selected-documentation']": function (event) {
+    // Get reference to template instance
+    var instance = Template.instance();
+
+    // Set Swagger document URL to selected value
+    instance.swaggerDocumentUrl.set(event.target.value);
+  }
+});
+
+Template.documentation.helpers({
+  "swaggerDocumentUrl": function () {
+    // Get reference to template instance
+    var instance = Template.instance();
+
+    // Get the Swagger document URL
+    var swaggerDocumentUrl = instance.swaggerDocumentUrl.get();
+
+    return swaggerDocumentUrl;
+  }
+});
