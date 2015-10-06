@@ -1,3 +1,11 @@
+Template.documentation.created = function () {
+  // Get reference to template instance
+  var instance = this;
+
+  // Create Reactive Variable for selected documentation
+  instance.selectedDocumentation = new ReactiveVar();
+};
+
 Template.documentation.rendered = function () {
   $(function() {
     // Pass window url parameters into documentation IFRAME
