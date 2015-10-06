@@ -3,10 +3,7 @@ ApiDocumentation = new FS.Collection("apiDocumentation", {
   // TODO: Determine how to upload files within the project directory
   // without hardcoding FS path
   stores: [
-    new FS.Store.FileSystem(
-      "apiDocumentation",
-      {path: "~/apinf/apiDocumentationFiles"}
-    )
+    new FS.Store.GridFS("apiDocumentation")
  ],
 });
 
@@ -30,6 +27,9 @@ if (Meteor.isServer) {
       return true;
     },
     update: function (/*userId, doc*/) {
+      return true;
+    },
+    download: function(/*userId, fileObj*/) {
       return true;
     }
   });
