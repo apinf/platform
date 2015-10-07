@@ -57,8 +57,8 @@ Template.importApiConfiguration.events({
 
           var jsonObj;
 
-          // checks if file extension is .YAML
-          if (endsWith(file.name, 'yaml') || endsWith(file.name, 'yml')) {
+          // checks if file extension is .YAML or .TXT
+          if (endsWith(file.name, 'yaml') || endsWith(file.name, 'yml') || endsWith(file.name, 'txt')) {
 
             // converts YAML to JSON
             var yamlToJson = jsyaml.load(importedFile);
@@ -74,15 +74,10 @@ Template.importApiConfiguration.events({
             jsonObj = importedFile;
           }
 
-          // checks if file extension is .TXT
-          if (endsWith(file.name, 'txt')) {
-
-          }
-
           // notifies user if file extention is not as expected
-          if (!endsWith(file.name, 'json') && !endsWith(file.name, 'yaml') && !endsWith(file.name, 'yml')){
+          if (!endsWith(file.name, 'json') && !endsWith(file.name, 'yaml') && !endsWith(file.name, 'yml') && !endsWith(file.name, 'txt')){
 
-            FlashMessages.sendError("Config file should be .YAML, .YML or .JSON only!");
+            FlashMessages.sendError("Config file should be .YAML, .YML, .JSON or .TXT only!");
 
           }
 
