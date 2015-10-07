@@ -15,8 +15,9 @@ Template.importApiConfiguration.rendered = function () {
   // custom message (tutorial) in json format
   var tips = {
     "How_to_import_configurations": {
-      "option_1" : "Upload existing config file",
-      "option_2" : "Paste configurations here in JSON."
+      "option_1" : "Upload existing config file.",
+      "option_2" : "Paste configurations here.",
+      "available_file_extensions:" : "JSON, YAML or TXT."
     }
   };
 
