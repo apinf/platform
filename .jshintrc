@@ -169,6 +169,7 @@
       "Tabular": false,
       "TabularTables": false,
       "TAPi18n": false,
+      "InlineHelp": false,
 
       // JavaScript utilities
       "ace":false,                // Ace editor
