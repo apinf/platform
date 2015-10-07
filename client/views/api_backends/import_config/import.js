@@ -57,7 +57,7 @@ Template.importApiConfiguration.events({
 
           var jsonObj;
 
-          // checks if file extension js .YAML
+          // checks if file extension is .YAML
           if (endsWith(file.name, 'yaml') || endsWith(file.name, 'yml')) {
 
             // converts YAML to JSON
@@ -67,11 +67,16 @@ Template.importApiConfiguration.events({
             jsonObj = JSON.stringify(yamlToJson,  null, '\t');
           }
 
-          // checks if file extension js .JSON
+          // checks if file extension is .JSON
           if (endsWith(file.name, 'json')) {
 
             // if JSON - no need to convert anything
             jsonObj = importedFile;
+          }
+
+          // checks if file extension is .TXT
+          if (endsWith(file.name, 'txt')) {
+
           }
 
           // notifies user if file extention is not as expected
