@@ -58,7 +58,7 @@ Template.importApiConfiguration.events({
           var jsonObj;
 
           // checks if file extension is .YAML or .TXT
-          if (endsWith(file.name, 'yaml') || endsWith(file.name, 'yml') || endsWith(file.name, 'txt')) {
+          if (fileExtensionIs(file.name, ["yaml", "yml", "txt"])) {
 
             // converts YAML to JSON
             var yamlToJson = jsyaml.load(importedFile);
@@ -68,14 +68,14 @@ Template.importApiConfiguration.events({
           }
 
           // checks if file extension is .JSON
-          if (endsWith(file.name, 'json')) {
+          if (fileExtensionIs(file.name, ["json"])) {
 
             // if JSON - no need to convert anything
             jsonObj = importedFile;
           }
 
           // notifies user if file extention is not as expected
-          if (!endsWith(file.name, 'json') && !endsWith(file.name, 'yaml') && !endsWith(file.name, 'yml') && !endsWith(file.name, 'txt')){
+          if (!fileExtensionIs(file.name, ["yaml", "yml", "txt", "json"])){
 
             FlashMessages.sendError("Config file should be .YAML, .YML, .JSON or .TXT only.");
 
@@ -141,7 +141,18 @@ Template.importApiConfiguration.events({
 });
 
 
-// function for file extension check (since it is not provided other way)
-function endsWith(str, suffix) {
-  return str.indexOf(suffix, str.length - suffix.length) !== -1;
+// function for file extension check
+function fileExtensionIs(str, suffixList) {
+
+  var state = false;
+
+  for (var i=0; i <suffixList.length; i++){
+
+    var endsWith = str.indexOf(suffixList[i], str.length - suffixList[i].length) !== -1;
+
+    if (endsWith) state = true;
+
+  }
+
+  return state;
 }
