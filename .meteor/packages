@@ -49,7 +49,6 @@ percolate:synced-cron
 twbs:bootstrap
 reactive-var
 meteorhacks:npm
-npm-container
 aldeed:tabular
 benmgreene:moment-range
 frenchbread:elastic-rest
@@ -68,3 +67,6 @@ mizzao:sharejs-ace
 raix:ui-dropped-event
 brylie:accounts-admin-ui
 brylie:first-user-admin
+
+
+npm-container
