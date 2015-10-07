@@ -155,7 +155,7 @@
       "apiUmbrellaWeb": false,
       "AutoForm": false,
       "ElasticRest": false,
-      "FlashMessages":  true,
+      "FlashMessages":  false,
       "FS": false,
       "GitHub": false,
       "NCSchemas": false,
@@ -175,7 +175,7 @@
       "crossfilter": false,       // Crossfilter
       "d3": false,                // D3
       "dc": false,                // DC
-      "jsyaml": true,             // jsyaml
+      "jsyaml": false,             // jsyaml
       "L",                        // Leaflet
       "moment": false             // moment
     }
