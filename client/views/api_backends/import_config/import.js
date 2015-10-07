@@ -77,7 +77,7 @@ Template.importApiConfiguration.events({
           // notifies user if file extention is not as expected
           if (!endsWith(file.name, 'json') && !endsWith(file.name, 'yaml') && !endsWith(file.name, 'yml') && !endsWith(file.name, 'txt')){
 
-            FlashMessages.sendError("Config file should be .YAML, .YML, .JSON or .TXT only!");
+            FlashMessages.sendError("Config file should be .YAML, .YML, .JSON or .TXT only.");
 
           }
 
