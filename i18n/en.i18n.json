@@ -13,6 +13,8 @@
   "sidebarManageAPIBackends": "Manage API Backends",
   "sidebarCatalogue": "Catalogue",
   "sidebarDocumentation": "Documentation",
+  "sidebarDocumentationEditor": "Editor",
+  "sidebarDocumentationViewer": "Viewer",
   "sidebarUsers": "Users",
 
 
