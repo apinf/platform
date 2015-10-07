@@ -29,6 +29,9 @@
       {{> afQuickField name='documentation_link'}}
       <span class="help-block">{{_ "apiBackendsDocumentationLink"}}Link to documentation</span>
       {{> importApiDocumentation}}
+      <legend>Create new documentation</legend>
+      <a href="{{ pathFor 'apiDocumentationEditor' }}" target="_blank" class="btn btn-success"><span class="fa fa-pencil"></span> Create API documentation</a>
+      <span class="help-block">Create a new API documentation file</span>
     </div>
     <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackendsGlobalRequestSettingsTitle"}}</legend>
     <div id="global-request-block" class="collapse in">
