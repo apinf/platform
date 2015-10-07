@@ -147,7 +147,6 @@ useraccounts:bootstrap@1.11.1
 useraccounts:core@1.11.1
 webapp@1.2.0
 webapp-hashing@1.0.3
-yogiben:autoform-file@0.2.7
 yogiben:autoform-map@0.1.3
 yogiben:autoform-modals@0.3.6
 yogiben:helpers@0.0.6
