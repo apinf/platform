@@ -1,6 +1,6 @@
 ApiUmbrellaAdmins = new Mongo.Collection('apiUmbrellaAdmins');
 
-ApiUmbrellaAdminsSchema = new SimpleSchema({
+Schemas.ApiUmbrellaAdminsSchema = new SimpleSchema({
   id: {
     type: String,
     optional: true
@@ -55,4 +55,4 @@ ApiUmbrellaAdminsSchema = new SimpleSchema({
   }
 });
 
-ApiUmbrellaAdmins.attachSchema(ApiUmbrellaAdminsSchema);
+ApiUmbrellaAdmins.attachSchema(Schemas.ApiUmbrellaAdminsSchema);
