@@ -34,6 +34,7 @@ Template.importApiConfiguration.created = function () {
 
   var instance = this;
 
+  // function attached to template instance checks file extension
   instance.endsWith = function (str, suffixList) {
 
     var state = false;
