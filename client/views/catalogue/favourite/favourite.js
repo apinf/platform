@@ -1,6 +1,9 @@
 Template.favourite.created = function () {
+  // Get reference to template instance
+  var instance = this;
+
   // subscribe to user bookmarks
-  var bookmarksSubscription = this.subscribe('myApiBookmarks');
+  instance.subscribe('myApiBookmarks');
 };
 
 Template.favourite.events({
