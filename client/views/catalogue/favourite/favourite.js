@@ -3,7 +3,7 @@ Template.favourite.created = function () {
   var instance = this;
 
   // subscribe to user bookmarks, creating reference to subscription
-  var bookmarksSubscription = instance.subscribe('myApiBookmarks');
+  instance.bookmarksSubscription = instance.subscribe('myApiBookmarks');
 };
 
 Template.favourite.events({
@@ -22,21 +22,30 @@ Template.favourite.events({
 
 Template.favourite.helpers({
   isBookmarked: function () {
-    // Get current user bookmark (should be only one API Bookmarks result available)
-    var userBookmarks = ApiBookmarks.findOne();
+    // Get reference to template instance
+    var instance = Template.instance();
 
-    // get array of API IDs
-    var apiIds = userBookmarks.apiIds;
+    // Make sure bookmark subscription is ready
+    if (instance.bookmarksSubscription.ready()) {
+      // Get current user bookmark (should be only one API Bookmarks result available)
+      var userBookmarks = ApiBookmarks.findOne();
 
-    //Store api id being clicked
-    var backendId = this._id;
+      // Make sure user has bookmarks
+      if (userBookmarks) {
+        // get array of API IDs
+        var apiIds = userBookmarks.apiIds;
 
-    // Get index of current API in user bookmarks, if it exists
-    var bookmarkIndex = apiIds.indexOf(backendId);
+        //Store api id being clicked
+        var backendId = this._id;
 
-    // Check if API has been bookmarked (converting the index to true or false)
-    var isBookmarked = (bookmarkIndex >= 0) ? true : false;
+        // Get index of current API in user bookmarks, if it exists
+        var bookmarkIndex = apiIds.indexOf(backendId);
 
-    return isBookmarked;
+        // Check if API has been bookmarked (converting the index to true or false)
+        var isBookmarked = (bookmarkIndex >= 0) ? true : false;
+
+        return isBookmarked;
+      }
+    }
   }
 });
