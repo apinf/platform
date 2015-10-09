@@ -1,3 +1,8 @@
+Template.favourite.created = function () {
+  // subscribe to user bookmarks
+  var bookmarksSubscription = this.subscribe('myApiBookmarks');
+};
+
 Template.favourite.events({
   'click .bookmark': function () {
 
@@ -32,8 +37,3 @@ Template.favourite.helpers({
     return isBookmarked;
   }
 });
-
-Template.favourite.created = function () {
-  // subscribe to user bookmarks
-  this.subscribe('myApiBookmarks');
-}
