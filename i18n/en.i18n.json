@@ -6,16 +6,16 @@
   "configSubtitle": "Create custom API mashups, really quick.",
 
   /*Sidebar*/
-  "masterLayout.sidebarMenu": "Menu",
-  "masterLayout.sidebarAnalytics": "Analytics",
-  "masterLayout.sidebarAPIBackends": "API Backends",
-  "masterLayout.sidebarAddAPIBackend": "Add API Backend",
-  "masterLayout.sidebarManageAPIBackends": "Manage API Backends",
-  "masterLayout.sidebarCatalogue": "Catalogue",
-  "masterLayout.sidebarDocumentation": "Documentation",
-  "masterLayout.sidebarDocumentationEditor": "Editor",
-  "masterLayout.sidebarDocumentationViewer": "Viewer",
-  "masterLayout.sidebarUsers": "Users",
+  "masterLayout-sidebar-Menu": "Menu",
+  "masterLayout-sidebar-Analytics": "Analytics",
+  "masterLayout-sidebar-APIBackends": "API Backends",
+  "masterLayout-sidebar-AddAPIBackend": "Add API Backend",
+  "masterLayout-sidebar-ManageAPIBackends": "Manage API Backends",
+  "masterLayout-sidebar-Catalogue": "Catalogue",
+  "masterLayout-sidebar-Documentation": "Documentation",
+  "masterLayout-sidebar-DocumentationEditor": "Editor",
+  "masterLayout-sidebar-DocumentationViewer": "Viewer",
+  "masterLayout-sidebar-Users": "Users",
 
 
   /*Home*/
