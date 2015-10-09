@@ -22,6 +22,15 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 ![Ecosystem diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_ecosystem.svg)
 
+
+# Get involved
+
+There are many ways to get involved:
+* Join our community: [Apinf Community](http://community.apinf.io)
+* Contribute to our [Planning Documents](https://apinf.hackpad.com)
+* Add a task to our [Github issue queue](https://github.com/apinf/api-umbrella-dashboard/issues)
+* Send a pull request with your custom code! :-)
+
 # Installation
 
 1. Install [API Umbrella](http://apiumbrella.io/download/)
