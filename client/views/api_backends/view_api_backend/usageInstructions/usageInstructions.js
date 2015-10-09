@@ -13,6 +13,9 @@ Template.apiBackendUsageInstructions.created = function () {
 
 Template.apiBackendUsageInstructions.helpers({
   apiUmbrellaBaseUrl: function () {
+    // Get reference to template instance
+    var instance = Template.instance();
+    
     return "http://example.com";
   }
 });
