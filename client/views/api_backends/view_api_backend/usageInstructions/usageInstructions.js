@@ -4,6 +4,11 @@ Template.apiBackendUsageInstructions.created = function () {
 
   // Create variable to hold API Umbrella base URL
   instance.apiUmbrellaBaseUrl = new ReactiveVar();
+
+  // Get API Umbrella base URL from server
+  Meteor.call("getApiUmbrellaBaseUrl", function (error, apiUmbrellaBaseUrl) {
+    instance.apiUmbrellaBaseUrl.set(apiUmbrellaBaseUrl);
+  });
 };
 
 Template.apiBackendUsageInstructions.helpers({
