@@ -3,7 +3,7 @@ Template.viewApiBackend.rendered = function () {
   // creates reference to "this"
   var instance = this;
 
-  // sets up autorun for doing action once reactive var changes
+  // sets up autorun for doing action once reactive var is changed
   instance.autorun(function () {
 
     // dashboard data from reactive variable
