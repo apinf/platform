@@ -1,53 +1,76 @@
+Template.viewApiBackend.rendered = function () {
+
+  // creates reference to "this"
+  var instance = this;
+
+  // sets up autorun for doing action once reactive var is changed
+  instance.autorun(function () {
+
+    // dashboard data from reactive variable
+    var backendId = instance.backendId.get();
+
+    // gets apiBackend by id
+    var apiBackend = ApiBackends.findOne(backendId);
+
+    // for testing console.log(apiBackend) can be called here to insure that apiBackend is up to date.
+
+    // sets up request url based on protocol and host
+    var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
+
+    // calls function that updates status
+    instance.updateApiStatus(url);
+
+  });
+
+};
+
+
 Template.viewApiBackend.created = function() {
 
   // Create reference to instance
   var instance = this;
 
   // Get the API Backend ID from the route
-  var backendId = Router.current().params.apiBackendId;
+  instance.backendId = new ReactiveVar(Router.current().params._id);
 
   // Subscribe to a single API Backend, by ID
-  instance.subscribe("apiBackend", backendId);
-};
+  instance.subscribe("apiBackend", instance.backendId.get());
 
-Template.viewApiBackend.rendered = function () {
+  // attaches function to template instance to be able to call it in outside
+  instance.updateApiStatus = function (url) {
 
-  // fetches current apiBackend
-  var apiBackend = ApiBackends.findOne();
+    Meteor.call("getApiStatus", url, function (err, status) {
 
-  // sets up request url based on protocol and host
-  var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
+      // status object contents:
+      // status = {
+      //   isUp            : <boolean>,
+      //   statusCode      : <integer>,
+      //   responseContext : <object>,
+      //   errorMessage    : <String>
+      // };
 
-  Meteor.call("getApiStatus", url, function (err, status) {
+      if (status.isUp) {
 
-    // status object contents:
-    // status = {
-    //   isUp            : <boolean>,
-    //   statusCode      : <integer>,
-    //   responseContext : <object>,
-    //   errorMessage    : <String>
-    // };
+        // updates layout with success status
+        $('#apiState').addClass('alert-success').html("API is operating normally.");
+        console.log(status.responseContext)
 
-    if (status.isUp) {
+      }else{
 
-      // updates layout with success status
-      $('#apiState').addClass('alert-success').html("API is operating normally.");
+        // initial error message
+        var errorMessage = "API backend is down for some reason. Please contact support.";
 
-    }else{
+        // updates layout with success status
+        $('#apiState').addClass('alert-danger').html(errorMessage);
 
-      // initial error message
-      var errorMessage = "API backend is down for some reason. Please contact support.";
+      }
 
-      // updates layout with success status
-      $('#apiState').addClass('alert-danger').html(errorMessage);
+      // showing when check did happen
+      $('#whenUpdated').html("Just now");
 
-    }
+    });
 
-    // showing when check did happen
-    $('#whenUpdated').html("Just now");
-
-  });
-
+  }
 };
 
 Template.viewApiBackend.events({
@@ -86,5 +109,3 @@ Template.viewApiBackend.events({
     saveAs(file, "apiConfig.yaml");
   }
 });
-
-
