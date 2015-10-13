@@ -1,18 +1,18 @@
 <template name="dataTable">
   <div class="box box-primary" id="data-table-box">
     <div class="box-header with-border">
-      <h3 class="box-title">{{_ "dataTableTitle"}}</h3>
+      <h3 class="box-title">{{_ "dataTable-Title"}}</h3>
     </div>
-      <table class='table table-hover' id='dc-data-table'>
-        <thead>
-          <tr>
-            <th data-dynatable-column="time" >{{_ "dataTableTimeStamp"}}</th>
-            <th data-dynatable-column="country" >{{_ "dataTableRequestCountry"}}</th>
-            <th data-dynatable-column="ip">{{_ "dataTableRequestIP"}}</th>
-            <th data-dynatable-column="path">{{_ "dataTableRequestPath"}}</th>
-            <th data-dynatable-column="response">{{_ "dataTableResponseTime"}}</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
+    <table class='table table-hover' id='dc-data-table'>
+      <thead>
+        <tr>
+          <th data-dynatable-column="time" >{{_ "dataTable-TimeStamp"}}</th>
+          <th data-dynatable-column="country" >{{_ "dataTable-RequestCountry"}}</th>
+          <th data-dynatable-column="ip">{{_ "dataTable-RequestIP"}}</th>
+          <th data-dynatable-column="path">{{_ "dataTable-RequestPath"}}</th>
+          <th data-dynatable-column="response">{{_ "dataTable-ResponseTime"}}</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
 </template>
