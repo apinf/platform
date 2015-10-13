@@ -4,7 +4,7 @@ ApiBackends = new Mongo.Collection('apiBackends');
 SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{2,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
-ApiBackendsSchema = new SimpleSchema({
+Schemas.ApiBackendsSchema = new SimpleSchema({
   id: {
     type: String,
     optional: true
@@ -630,7 +630,7 @@ ApiBackendsSchema = new SimpleSchema({
   }
 });
 
-ApiBackends.attachSchema(ApiBackendsSchema);
+ApiBackends.attachSchema(Schemas.ApiBackendsSchema);
 
 ApiBackends.allow({
   insert: function () {
