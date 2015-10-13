@@ -1,12 +1,12 @@
-<Template name="bookmarks">
-<h1>{{_ "bookmarksTitle"}}</h1>
+<template name="bookmarks">
+  <h1>{{_ "bookmarks-Title"}}</h1>
   <div class="list-group">
-  {{#each userBookmarks}}
-  {{#each apis}}
-  <a href="#" class="list-group-item"><b>{{_ "bookmarksName"}}</b> {{name}} <p><b>{{_ "bookmarksBackend"}}</b> {{backend_host}}</p></a>
-  {{/each}}
-  {{/each}}
-</div>
-</Template>
+    {{#each userBookmarks}}
+    {{#each apis}}
+    <a href="#" class="list-group-item"><b>{{_ "bookmarks-Name"}}</b> {{name}} <p><b>{{_ "bookmarks-Backend"}}</b> {{backend_host}}</p></a>
+    {{/each}}
+    {{/each}}
+  </div>
+</template>
 
 
