@@ -3,7 +3,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 less
 accounts-base
 accounts-password
@@ -20,7 +19,6 @@ yogiben:helpers
 iron:router
 yogiben:autoform-modals
 yogiben:pretty-email
-yogiben:autoform-file
 yogiben:autoform-map
 multiply:iron-router-progress
 manuelschoebel:ms-seo
@@ -50,7 +48,6 @@ percolate:synced-cron
 twbs:bootstrap
 reactive-var
 meteorhacks:npm
-npm-container
 aldeed:tabular
 benmgreene:moment-range
 frenchbread:elastic-rest
@@ -69,3 +66,21 @@ mizzao:sharejs-ace
 raix:ui-dropped-event
 brylie:accounts-admin-ui
 brylie:first-user-admin
+
+
+npm-container
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+useraccounts:iron-routing
