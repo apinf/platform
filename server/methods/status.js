@@ -12,7 +12,7 @@ Meteor.methods({
       try{
 
         // initial host for apinf
-        var apinfHost     = "https://apinf.com";
+        var apinfHost     = Meteor.settings.apinf.host;
 
         // response object from apinf GET request
         var apinfResponse = Meteor.http.call("GET", apinfHost);
