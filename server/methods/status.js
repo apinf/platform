@@ -87,7 +87,7 @@ Meteor.methods({
 
       try{
         // initial host for elasticsearch instance
-        var elasticsearchInstance = "http://apinf.com:14002/";
+        var elasticsearchInstance = Meteor.settings.elasticsearch.host;
 
         // response object from elasticsearch GET request
         var elasticsearchResponse =  Meteor.http.call("GET", elasticsearchInstance);
