@@ -49,7 +49,7 @@ Meteor.methods({
       try{
 
         // initial host for API umbrella
-        var apiUmbrellaHost     = Meteor.settings.api_umbrella.base_url;
+        var apiUmbrellaHost     = Meteor.settings.api_umbrella.host;
 
         // response object from API Umbrella GET request
         var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);
