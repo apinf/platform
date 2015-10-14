@@ -38,14 +38,18 @@ There are many ways to get involved:
 3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
 4. Create [`settings.json`](#Settings.json)
 5. Type `meteor --settings /path/to/settings.json` in the project directory
- 
+
 # Settings.json
 
 Your `settings.json` file should have the following structure:
 
 ```
 {
+  "apinf": {
+    "host": "https://example.com/"
+  },
   "api_umbrella": {
+    "host": "https://example.com/"
     "api_key": "xxx",
     "auth_token": "xxx",
     "base_url": "https://example.com/api-umbrella/"
