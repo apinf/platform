@@ -12,109 +12,109 @@ var helpData = {
     }
   },
   'servers': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'backend_host': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'frontend_host': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'url_matches': {
-    message: "Choose backend server protocol",
+    message: "Tip: We recommend using trailing slashes when configuring these URL prefixes when possible (for example, using /wind/ instead of /wind). While not necessary, this helps prevent future overlapping conflicts (for example, if someone later wants to set up /windmill/). <br><br>Example: Incoming Frontend Request: <a href='http://api.data.govexample.json?param=value'>http://api.data.govexample.json?param=value</a> Outgoing Backend Request: <a href='http://api.data.govexample.json?param=value'>http://api.data.govexample.json?param=value</a>",
     options: {
       placement: 'left'
     }
   },
   'documentation_link': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'importApiDocumentation': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'append_query_string': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'set_headers': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'http_basic_auth': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'require_https': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'api_key_verification_level': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'required_roles': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'rate_limit_mode': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'pass_api_key_header': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'pass_api_key_query_param': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'rewrite': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'balance_algorithm': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
   },
   'error_templates': {
-    message: "Choose backend server protocol",
+    message: "Hint text",
     options: {
       placement: 'left'
     }
