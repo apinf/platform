@@ -140,6 +140,7 @@
       "ApiBackends": false,
       "ApiBackendConfigurations": false,
       "ApiBookmarks": false,
+      "ApiDocumentation": false,
       "ApiUmbrellaAdmins": false,
       "ApiUmbrellaUsers": false,
       "RateLimit": false,
@@ -172,12 +173,12 @@
       "InlineHelp": false,
 
       // JavaScript utilities
-      "ace":false,                // Ace editor
-      "crossfilter": false,       // Crossfilter
-      "d3": false,                // D3
-      "dc": false,                // DC
-      "jsyaml": false,            // jsyaml
-      "L",                        // Leaflet
-      "moment": false             // moment
+      "ace": false,
+      "crossfilter": false,
+      "d3": false,
+      "dc": false,
+      "jsyaml": false,
+      "L": false,
+      "moment": false
     }
 }

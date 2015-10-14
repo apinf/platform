@@ -1,5 +1,6 @@
 RateLimit = new Mongo.Collection('rateLimit');
-RateLimitSchema = new SimpleSchema({
+
+Schemas.RateLimitSchema = new SimpleSchema({
   name: {
     type: String,
     optional: true
@@ -30,4 +31,4 @@ RateLimitSchema = new SimpleSchema({
   }
 });
 
-RateLimit.attachSchema(RateLimitSchema);
+RateLimit.attachSchema(Schemas.RateLimitSchema);
