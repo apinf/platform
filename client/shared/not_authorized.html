@@ -1,13 +1,13 @@
 <template name="notAuthorized">
   <div class="error-page">
-    <h1 class="headline text-yellow">Not Authorized</h1>
+    <h1 class="headline text-yellow">{{_ "notAuthorized-Title"}}</h1>
     <div class="error-content">
       <p>
         <i class="fa fa-warning text-yellow"></i>&nbsp;
-        You are not authorized to access this page. Please ensure you are logged in.
+        {{_ "notAuthorized-Message"}}
       </p>
       <p>
-        You may <a href="javascript:void(0)" onClick="history.go(-1); return false;">return to a previous page</a>.
+        {{_ "notAuthorized-ReturnMessage-Part1"}} <a href="javascript:void(0)" onClick="history.go(-1); return false;">{{_ "notAuthorized-ReturnMessage-Part2"}}</a>.
       </p>
     </div>
   </div>
