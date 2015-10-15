@@ -12,7 +12,7 @@ var helpData = {
     }
   },
   'servers': {
-    message: "Define the server where the API is hosted.",
+    message: "Define the server where the API is hosted.<br>Host field is for URL of your API without 'http(s)'",
     options: {
       placement: 'left'
     }
@@ -24,7 +24,7 @@ var helpData = {
     }
   },
   'frontend_host': {
-    message: "Define the server where the API is hosted.<br>Frontend host field is for URL of your API without 'http(s)'",
+    message: "Define the server where the API is hosted.",
     options: {
       placement: 'left'
     }
