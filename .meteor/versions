@@ -143,6 +143,7 @@ ui@1.0.6
 underscore@1.0.3
 underscorestring:underscore.string@3.0.3_1
 url@1.0.4
+user-feedback@0.0.1
 useraccounts:bootstrap@1.11.1
 useraccounts:core@1.11.1
 webapp@1.2.0
