@@ -9,10 +9,12 @@
     <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
     {{>showHelp 'backend_protocol'}}
     {{> afQuickField name='backend_protocol' options="allowed"}}
+    {{>showHelp 'servers'}}
     {{> afQuickField name='servers'}}
     <legend>Host</legend>
     <div class="row">
       <div class="col-lg-4">
+        {{>showHelp 'backend_host'}}
         {{> afQuickField name='backend_host'}}
       </div>
       <div class="col-lg-4 arrow">
@@ -20,6 +22,7 @@
         <div>rewrite to</div>
       </div>
       <div class="col-lg-4">
+        {{>showHelp 'frontend_host'}}
         {{> afQuickField name='frontend_host'}}
       </div>
     </div>

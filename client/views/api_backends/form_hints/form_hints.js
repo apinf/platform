@@ -1,6 +1,6 @@
 var helpData = {
   'api_name': {
-    message: "Name your API",
+    message: "Name your API. Enter a name which describes your API the best way.",
     options: {
       placement: 'left'
     }
@@ -12,19 +12,19 @@ var helpData = {
     }
   },
   'servers': {
-    message: "Hint text",
+    message: "Define the server where the API is hosted.",
     options: {
       placement: 'left'
     }
   },
   'backend_host': {
-    message: "Hint text",
+    message: "Define the server where the API Umbrella instance is hosted. <br><br>If API Umbrella installed locally, enter <strong>localhost</strong> as your Backend host.",
     options: {
       placement: 'left'
     }
   },
   'frontend_host': {
-    message: "Hint text",
+    message: "Define the server where the API is hosted.<br>Frontend host field is for URL of your API without 'http(s)'",
     options: {
       placement: 'left'
     }
