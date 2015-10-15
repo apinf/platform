@@ -55,6 +55,7 @@ deps@1.0.7
 ejson@1.0.6
 email@1.0.6
 fastclick@1.0.3
+feedback-management-meteor@0.0.1
 fortawesome:fontawesome@4.3.0
 frenchbread:dynatable@0.1.0
 frenchbread:elastic-rest@0.2.0
@@ -143,7 +144,6 @@ ui@1.0.6
 underscore@1.0.3
 underscorestring:underscore.string@3.0.3_1
 url@1.0.4
-user-feedback@0.0.1
 useraccounts:bootstrap@1.11.1
 useraccounts:core@1.11.1
 webapp@1.2.0
