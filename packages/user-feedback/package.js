@@ -1,6 +1,6 @@
 Package.describe({
-  name: 'viloma:user-feedback',
-  version: '0.5.4',
+  name: 'user-feedback',
+  version: '0.0.1',
   // Brief, one-line summary of the package.
   summary: 'A self-contained user feedback module for Meteor - with Chat',
   // URL to the Git repository containing the source code for this package.
