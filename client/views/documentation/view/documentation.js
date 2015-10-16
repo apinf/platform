@@ -36,6 +36,7 @@ Template.documentation.events({
 
     var apiKey = user.profile.apiKey;
 
+    $('#documentation').contents().find('#input_apiKey').val(apiKey);
   }
 });
 
