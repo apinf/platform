@@ -32,8 +32,10 @@ Template.documentation.events({
   },
   'load #documentation': function () {
 
-    
     var user = Meteor.user();
+
+    var apiKey = user.profile.apiKey;
+
   }
 });
 
