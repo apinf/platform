@@ -29,6 +29,9 @@ Template.documentation.events({
 
     // Set Swagger document URL to selected value
     instance.swaggerDocumentUrl.set(event.target.value);
+  },
+  'load #documentation': function () {
+
   }
 });
 
