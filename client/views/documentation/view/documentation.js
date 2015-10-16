@@ -32,10 +32,13 @@ Template.documentation.events({
   },
   'load #documentation': function () {
 
+    // gets current users object
     var user = Meteor.user();
 
+    // gets current user's apiKey
     var apiKey = user.profile.apiKey;
 
+    // passes api key to iFrame once it is loaded
     $('#documentation').contents().find('#input_apiKey').val(apiKey);
   }
 });
