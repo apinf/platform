@@ -1,56 +1,57 @@
 <template name="viewApiBackend">
   <h1 class="page-heading">View API backend</h1>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    {{> apiBackendsUsageInstructionsButton }}
-    <h1 class="panel-title clearfix">{{apiBackend.name}}</h1>
-  </div>
-  <div class="panel-body">
-    {{> apiBackendUsageInstructions }}
-    <div class="row">
-      {{> apiBackendStatus }}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{> apiBackendsUsageInstructionsButton }}
+      <h1 class="panel-title clearfix">{{apiBackend.name}}</h1>
     </div>
-    <div class="row">
-      <h2>Servers</h2>
-      <ul class="list-group col-md-3 col-sm-6 col-xs-12">
-        <li class="list-group-item">
-          <span class="label label-primary">
-            Backend
-          </span>
-          &nbsp;{{apiBackend.backend_host}} <span class="badge">{{ apiBackend.backend_protocol }}</span>
-        </li>
-        <li class="list-group-item">
-          <span class="label label-primary">
-            Frontend
-          </span>
-          &nbsp;{{apiBackend.frontend_host}}
-        </li>
-      </ul>
-    </div>
-    <div class="row">
-      {{#each apiBackend.url_matches}}
-      <h2>URL Matchers</h2>
-      <ul class="list-group col-md-3 col-sm-6 col-xs-12">
-        <li class="list-group-item">
-          <span class="label label-primary">
-            Backend prefix
-          </span>
-          &nbsp;{{ backend_prefix }}
-        </li>
-        <li class="list-group-item">
-          <span class="label label-primary">
-            Frontend prefix
-          </span>
-          &nbsp;{{ frontend_prefix }}
-        </li>
-      </ul>
-      {{/each}}
-    </div>
-    <div class="row">
+    <div class="panel-body">
+      {{> apiBackendUsageInstructions }}
+      <div class="row">
+        {{> apiBackendStatus }}
+      </div>
+      <div class="row">
+        <h2>Servers</h2>
+        <ul class="list-group col-md-3 col-sm-6 col-xs-12">
+          <li class="list-group-item">
+            <span class="label label-primary">
+              Backend
+            </span>
+            &nbsp;{{apiBackend.backend_host}} <span class="badge">{{ apiBackend.backend_protocol }}</span>
+          </li>
+          <li class="list-group-item">
+            <span class="label label-primary">
+              Frontend
+            </span>
+            &nbsp;{{apiBackend.frontend_host}}
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        {{#each apiBackend.url_matches}}
+        <h2>URL Matchers</h2>
+        <ul class="list-group col-md-3 col-sm-6 col-xs-12">
+          <li class="list-group-item">
+            <span class="label label-primary">
+              Backend prefix
+            </span>
+            &nbsp;{{ backend_prefix }}
+          </li>
+          <li class="list-group-item">
+            <span class="label label-primary">
+              Frontend prefix
+            </span>
+            &nbsp;{{ frontend_prefix }}
+          </li>
+        </ul>
+        {{/each}}
+      </div>
+      <div class="row">
         <h2>Export API configurations</h2>
         <a class="btn btn-lg btn-success" id="exportJSONConfig">Export .json</a>
         <a class="btn btn-lg btn-success" id="exportYAMLConfig">Export .yaml</a>
+      </div>
+      <div class="supportButton">{{> communicationChannel }}</div>
     </div>
   </div>
-</div>
 </template>
