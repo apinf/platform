@@ -55,7 +55,6 @@ deps@1.0.7
 ejson@1.0.6
 email@1.0.6
 fastclick@1.0.3
-feedback-management-meteor@0.0.1
 fortawesome:fontawesome@4.3.0
 frenchbread:dynatable@0.1.0
 frenchbread:elastic-rest@0.2.0
