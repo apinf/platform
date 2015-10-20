@@ -1,17 +1,16 @@
 <template name="apiBackends">
   <div class="api-backends-content">
-    <h1>Add API</h1>
+    <h1>{{_ "apiBackends-Title"}}</h1>
     {{#autoForm collection="ApiBackends" doc=this id="apiBackends" type="insert"}}
     {{>showHelp 'api_name'}}
     {{> afQuickField name='name'}}
-    <span class="help-block">API's name</span>
-    <legend>Backend</legend>
-    <span class="help-block">Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.</span>
-    {{>showHelp 'backend_protocol'}}
+    <span class="help-block">{{_ "apiBackends-Title-Help"}}</span>
+    <legend>{{_ "apiBackends-Backend-Title"}}</legend>
+    <span class="help-block">{{_ "apiBackends-Backend-Help"}}</span>
     {{> afQuickField name='backend_protocol' options="allowed"}}
     {{>showHelp 'servers'}}
     {{> afQuickField name='servers'}}
-    <legend>Host</legend>
+    <legend>{{_ "apiBackends-Host-Title"}}</legend>
     <div class="row">
       <div class="col-lg-4">
         {{>showHelp 'backend_host'}}
@@ -19,29 +18,29 @@
       </div>
       <div class="col-lg-4 arrow">
         <i class="fa fa-arrow-right fa-2x"></i>
-        <div>rewrite to</div>
+        <div>{{_ "apiBackends-Host-Rewrite"}}</div>
       </div>
       <div class="col-lg-4">
         {{>showHelp 'frontend_host'}}
         {{> afQuickField name='frontend_host'}}
       </div>
     </div>
-    <legend>Matching URL Prefixes</legend>
-    <span class="help-block">What URL prefixes should be routed to this backend?</span>
+    <legend>{{_ "apiBackends-Matching-Title"}}</legend>
+    <span class="help-block">{{_ "apiBackends-Matching-Title-Help"}}</span>
     {{>showHelp 'url_matches'}}
     {{> afQuickField name='url_matches'}}
-    <legend data-toggle="collapse" data-target="#documentation-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Documentation</legend>
+    <legend data-toggle="collapse" data-target="#documentation-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-DocumentationTitle"}}</legend>
     <div id="documentation-block" class="collapse in">
       {{>showHelp 'documentation_link'}}
       {{> afQuickField name='documentation_link'}}
-      <span class="help-block">Link to documentation</span>
+      <span class="help-block">{{_ "apiBackends-Documentation-Link"}}</span>
       {{>showHelp 'importApiDocumentation'}}
       {{> importApiDocumentation}}
       <legend>Create new documentation</legend>
       <a href="{{ pathFor 'apiDocumentationEditor' }}" target="_blank" class="btn btn-success"><span class="fa fa-pencil"></span> Create API documentation</a>
       <span class="help-block">Create a new API documentation file</span>
     </div>
-    <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Global Request Settings</legend>
+    <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-GlobalRequestSettings-Title"}}</legend>
     <div id="global-request-block" class="collapse in">
       {{> afQuickField name='append_query_string'}}
       {{> afQuickField name='set_headers'}}
@@ -56,18 +55,18 @@
       {{> afQuickField name='custom_rate_limits'}}
       {{/if}}
     </div>
-    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Requests Rewriting</legend>
+    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-AdvancedRequestsRewriting"}}</legend>
     <div id="advanced-rewriting-block" class="collapse in">
-      <span class="help-block">Modify the incoming request's URL or headers before passing it to the backend.</span>
+      <span class="help-block">{{_ "apiBackends-AdvancedRequestsRewriting-Help"}}</span>
       {{> afQuickField name='rewrite'}}
     </div>
-    <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> Advanced Settings</legend>
+    <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-AdvancedSettings"}}</legend>
     <div id="advanced-block" class="collapse in">
       {{> afQuickField name='balance_algorithm' options="allowed"}}
       {{> afQuickField name='error_templates'}}
     </div>
     <div id="form-buttons">
-      <button type="submit" class="btn btn-lg btn-success">Submit</button>
+      <button type="submit" class="btn btn-lg btn-success">{{_ "apiBackends-Submit"}}</button>
     </div>
     {{/autoForm}}
   </div>
