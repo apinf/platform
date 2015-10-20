@@ -66,7 +66,7 @@ var helpData = {
     }
   },
   'http_basic_auth': {
-    message: "Does your api need a username and password for access? If yes, the must be specified here.",
+    message: "Does your api need a username and password for access? If yes, they must be specified here.",
     options: {
       placement: 'left'
     }
