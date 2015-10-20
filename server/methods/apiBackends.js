@@ -59,7 +59,6 @@ Meteor.methods({
       apiUmbrellaWebResponse.http_status = 422;
     }
 
-    console.log("Returning response - " + apiUmbrellaWebResponse);
     return apiUmbrellaWebResponse;
   }
 });
