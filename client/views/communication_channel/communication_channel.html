@@ -1,3 +1,26 @@
 <template name="communicationChannel">
-  <button type="button" class="btn btn-default btn-xs">Send feedback</button>
+  <button type="button" class="btn btn-default btn-xs feedback-form-button" data-toggle="modal" data-target="#feedbackForm" data-backdrop="static" data-keyboard="false">Send feedback</button>
+  <div class="modal fade" id="feedbackForm" tabindex="-1" role="dialog" aria-labelledby="feedbackFormLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Send feedback or report a problem</h4>
+        </div>
+        <div class="modal-body">
+          <p>We welcome problem reports, feature ideas and general comments.</p>
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="control-label">Your message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
