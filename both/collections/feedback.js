@@ -1,6 +1,6 @@
 Feedback = new Mongo.Collection('feedback');
 
-Schemas.feedbackSchema = new SimpleSchema({
+Schemas.FeedbackSchema = new SimpleSchema({
   topic: {
     type: String,
     label: "Topic",
