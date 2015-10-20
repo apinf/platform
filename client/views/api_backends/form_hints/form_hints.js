@@ -36,7 +36,13 @@ var helpData = {
     }
   },
   'documentation_link': {
-    message: "Link of the wiki / github page / web resource where the documentation of your API is located.",
+    message: "Link of the wiki / github page / web resource where the documentation of your API is located",
+    options: {
+      placement: 'left'
+    }
+  },
+  'apiDocumentationEditor': {
+    message: "You can also choose to create a new documentation for your APIs using swagger at our own server",
     options: {
       placement: 'left'
     }
@@ -108,7 +114,7 @@ var helpData = {
     }
   },
   'balance_algorithm': {
-    message: "Hint text",
+    message: "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
     options: {
       placement: 'left'
     }
