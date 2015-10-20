@@ -37,15 +37,21 @@
       {{>showHelp 'importApiDocumentation'}}
       {{> importApiDocumentation}}
       <legend>Create new documentation</legend>
+      {{>showHelp 'apiDocumentationEditor'}}
       <a href="{{ pathFor 'apiDocumentationEditor' }}" target="_blank" class="btn btn-success"><span class="fa fa-pencil"></span> Create API documentation</a>
       <span class="help-block">Create a new API documentation file</span>
     </div>
     <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-GlobalRequestSettings-Title"}}</legend>
     <div id="global-request-block" class="collapse in">
+      {{>showHelp 'append_query_string'}}
       {{> afQuickField name='append_query_string'}}
+      {{>showHelp 'set_headers'}}
       {{> afQuickField name='set_headers'}}
+      {{>showHelp 'http_basic_auth'}}
       {{> afQuickField name='http_basic_auth'}}
+      {{>showHelp 'require_https'}}
       {{> afQuickField name='require_https' options="allowed"}}
+      {{>showHelp 'api_key_verification_level'}}
       {{> afQuickField name='api_key_verification_level' options="allowed"}}
       {{> afQuickField name='required_roles'}}
       {{> afQuickField name='pass_api_key_header'}}
@@ -62,6 +68,7 @@
     </div>
     <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-AdvancedSettings"}}</legend>
     <div id="advanced-block" class="collapse in">
+      {{>showHelp 'balance_algorithm'}}
       {{> afQuickField name='balance_algorithm' options="allowed"}}
       {{> afQuickField name='error_templates'}}
     </div>
