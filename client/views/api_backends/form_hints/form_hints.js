@@ -1,78 +1,78 @@
 var helpData = {
   'api_name': {
-    message: "Name your API. Enter a name which describes your API the best way.",
+    message: " A name that describes your API",
     options: {
       placement: 'left'
     }
   },
   'backend_protocol': {
-    message: "Choose backend server protocol",
+    message: "Choose the protocol used by your api (e.g. http or https)",
     options: {
       placement: 'left'
     }
   },
   'servers': {
-    message: "Define the server where the API is hosted.<br>Host field is for URL of your API without 'http(s)'",
+    message: "URL of the server that hosts the API. <br><br>The port on the server which exposes your API to internet. <br><br><i>You can add multiple servers if you want us to perform load balancing on your incoming requests</i>",
     options: {
       placement: 'left'
     }
   },
   'backend_host': {
-    message: "Define the server where the API Umbrella instance is hosted. <br><br>If API Umbrella installed locally, enter <strong>localhost</strong> as your Backend host.",
+    message: "Server where umbrella is hosted. <br><br>If API Umbrella installed locally, enter <strong>localhost</strong> as your Backend host",
     options: {
       placement: 'left'
     }
   },
   'frontend_host': {
-    message: "Define the server where the API is hosted.",
+    message: " Usually the same as your Server host",
     options: {
       placement: 'left'
     }
   },
   'url_matches': {
-    message: "Tip: We recommend using trailing slashes when configuring these URL prefixes when possible (for example, using /wind/ instead of /wind). While not necessary, this helps prevent future overlapping conflicts (for example, if someone later wants to set up /windmill/). <br><br>Example: Incoming Frontend Request: <a href='http://api.data.govexample.json?param=value'>http://api.data.govexample.json?param=value</a> Outgoing Backend Request: <a href='http://api.data.govexample.json?param=value'>http://api.data.govexample.json?param=value</a>",
+    message: "We recommend to have a unique URL Front-end prefix for your API so that it does not conflict with other existing APIs.<br> Apart from that, you can also segregate different sections of your API with different prefixes. <br>All the requests made to the 'Front-end host / Front-end prefix' will be re-written to 'Backend host / Backend prefix' <br><br>Frontend prefix: A prefix for your API, recognized by the Umbrella, e.g. /my_dev_api/ <br><br>Backend prefix: Usually a part of your API's url, helpful to shorten the URL used for accessing your API, e.g. /apiv2/staging/experimental OR something as simple as '/'.",
     options: {
       placement: 'left'
     }
   },
   'documentation_link': {
-    message: "Hint text",
+    message: "Link of the wiki / github page / web resource where the documentation of your API is located.",
     options: {
       placement: 'left'
     }
   },
   'importApiDocumentation': {
-    message: "Hint text",
+    message: "If your documentation exists but is not available online, you can host it on APINF.<br> Upload your documentation in Swagger format here.",
     options: {
       placement: 'left'
     }
   },
   'append_query_string': {
-    message: "Hint text",
+    message: "Add the parameters required by your API in <strong>key1=value1&key2=value2</strong> format. <br>This place is best to add those parameters that is not mandatory for your API-users but your API needs them for providing meaningful data.",
     options: {
       placement: 'left'
     }
   },
   'set_headers': {
-    message: "Hint text",
+    message: "If your API requires some specific headers to be set, they should be added here",
     options: {
       placement: 'left'
     }
   },
   'http_basic_auth': {
-    message: "Hint text",
+    message: "Does your api need a username and password for access? If yes, the must be specified here.",
     options: {
       placement: 'left'
     }
   },
   'require_https': {
-    message: "Hint text",
+    message: "Choose <strong>'required'</strong> if HTTPS is mandatory for accessing your apis.",
     options: {
       placement: 'left'
     }
   },
   'api_key_verification_level': {
-    message: "Hint text",
+    message: "Choose <strong>'required'</strong> if API key is required to access your API",
     options: {
       placement: 'left'
     }
