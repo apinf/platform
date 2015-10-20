@@ -1,15 +1,15 @@
-<template name="communicationChannel">
+<template name="feedback">
   <button type="button" class="btn btn-default btn-xs feedback-form-button" data-toggle="modal" data-target="#feedbackForm" data-backdrop="static" data-keyboard="false">Send feedback</button>
   <div class="modal fade" id="feedbackForm" tabindex="-1" role="dialog" aria-labelledby="feedbackFormLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="exampleModalLabel">Send feedback or report a problem</h4>
+          <h4 class="modal-title" id="feedbackFormLabel">Send feedback or report a problem</h4>
         </div>
         <div class="modal-body">
           <p>We welcome problem reports, feature ideas and general comments.</p>
-          {{#autoForm collection="Feedback" doc=this id="communicationChannel" type="insert"}}
+          {{#autoForm collection="Feedback" doc=this id="feedback" type="insert"}}
           {{> afQuickField name='topic' }}
           {{> afQuickField name='message' }}
           <button type="submit" class="btn btn-success">Submit</button>
