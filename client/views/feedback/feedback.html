@@ -9,11 +9,7 @@
         </div>
         <div class="modal-body">
           <p>We welcome problem reports, feature ideas and general comments.</p>
-          {{#autoForm collection="Feedback" doc=this id="feedback" type="insert"}}
-          {{> afQuickField name='topic' }}
-          {{> afQuickField name='message' }}
-          <button type="submit" class="btn btn-success">Submit</button>
-          {{/autoForm}}
+          {{> quickForm collection="Feedback" id="submitFeedbackForm" type="method" meteormethod="submitFeedback"}}
         </div>
       </div>
     </div>
