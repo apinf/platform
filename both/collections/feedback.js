@@ -36,7 +36,10 @@ Schemas.FeedbackSchema = new SimpleSchema({
   },
   author: {
     type: String,
-    optional: true
+    optional: true,
+    autoform: {
+      omit: true
+    }
   },
   createdAt: {
     type: Date,
