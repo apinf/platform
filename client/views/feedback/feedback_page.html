@@ -1,7 +1,6 @@
 <template name="feedbackPage">
   <a href="/feedback-list"><i class="fa fa-arrow-left"></i> Back to list</a>
-  {{#each userFeedback}}
-  <h3>{{ topic }}</h3>
+  <h3>{{ feedback.topic }}</h3>
   <div class="feedback-message">
     <div class="row feedback-meta">
       <div class="col-lg-8">
@@ -10,12 +9,11 @@
     </div>
     <div class="row">
       <div class="col-lg-8">
-        <p class="message-body">{{ message }}</p>
+        <p class="message-body">{{ feedback.message }}</p>
         <hr class="feedback-hr" />
       </div>
     </div>
   </div>
-  {{/each}}
   <div class="feedback-answer">
     <div class="row">
       <div class="col-lg-8">
