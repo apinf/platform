@@ -1,34 +1,21 @@
 <template name="feedbackPage">
+  <a href="/feedback-list"><i class="fa fa-arrow-left"></i> Back to list</a>
+  {{#each userFeedback}}
+  <h3>{{ topic }}</h3>
   <div class="feedback-message">
-    <a href="/feedback-list"><i class="fa fa-arrow-left"></i> Back to list</a>
-    <h3>Feedback or report topic title</h3>
     <div class="row feedback-meta">
       <div class="col-lg-8">
         <span class="user-name">user@email.com</span>
-        <span class="badge pull-right">12:10 AM</span>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-8">
-        <p class="message-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p class="message-body">{{ message }}</p>
         <hr class="feedback-hr" />
       </div>
     </div>
   </div>
-  <div class="feedback-message">
-    <div class="row feedback-meta">
-      <div class="col-lg-8">
-        <span class="user-name">API Admin</span>
-        <span class="badge pull-right">2:10 PM</span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-8">
-        <p class="message-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        <hr class="feedback-hr" />
-      </div>
-    </div>
-  </div>
+  {{/each}}
   <div class="feedback-answer">
     <div class="row">
       <div class="col-lg-8">
@@ -43,3 +30,4 @@
     </div>
   </div>
 </template>
+
