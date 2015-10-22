@@ -7,13 +7,7 @@ Template.feedbackPage.created = function () {
 };
 
 Template.feedbackList.helpers({
-  userFeedback : function() {
-    return Feedback.find().fetch();
-  }
-});
-
-Template.feedbackPage.helpers({
-  'userFeedback' : function () {
+  'userFeedbacks' : function() {
     // Get the current user
     var userId = Meteor.user()._id;
 
