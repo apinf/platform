@@ -5,10 +5,12 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="home">
           <div class="list-group">
-            {{#each userFeedback}}
+            {{#each userFeedbacks}}
             <span class="list-group-item">
+              <span class="badge pull-left">{{ createdAt }}</span>&nbsp;&nbsp;
               <span class="name" style="min-width: 120px; display: inline-block;">{{niceName User._id}}</span>
-              <span class="">{{ topic }}</span><span class="text-muted" style="font-size: 11px;">&nbsp;&nbsp;{{ message }}</span>
+              <span class="">{{ topic }}</span>
+              <span class="text-muted" style="font-size: 11px;">&nbsp;&nbsp;{{ message }}</span>
               <button type="button" class="btn btn-danger btn-xs pull-right delete-feedback">Remove</button>
               <a href="{{ pathFor route='feedbackPage' }}" class="btn btn-success btn-xs pull-right view-feedback">View</a>
             </span>
