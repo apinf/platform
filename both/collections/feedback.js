@@ -19,6 +19,12 @@ Schemas.FeedbackSchema = new SimpleSchema({
       rows: 5,
       placeholder: 'Your message'
     }
+  },
+  author: {
+    type: String,
+    autoValue: function () {
+      return Meteor.userId()
+    }
   }
 });
 
