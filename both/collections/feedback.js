@@ -23,12 +23,12 @@ Schemas.FeedbackSchema = new SimpleSchema({
   messageType: {
     type: String,
     label: "Choose message type",
-    allowedValues: ['feedback', 'error_report', 'feature_request'],
+    allowedValues: ['Feedback', 'Error report', 'Feature request'],
     autoform: {
       options: [
-        {label: "Feedback", value: "feedback"},
-        {label: "Error report", value: "error_report"},
-        {label: "Feature request", value: "feature_request"}
+        {label: "Feedback", value: "Feedback"},
+        {label: "Error report", value: "Error report"},
+        {label: "Feature request", value: "Feature request"}
       ]
     }
   },
