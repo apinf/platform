@@ -1,10 +1,14 @@
 <template name="feedbackList">
+  <div class="pull-right">
+    {{> feedback}}
+  </div>
   <h3>Feedback and report messages</h3>
   <div class="row">
+    {{#if haveFeedback}}
     <div class="tab-content">
       <div class="tab-pane fade in active" id="home">
         <div class="list-group">
-          {{#each userFeedbacks}}
+          {{#each userFeedback}}
           <span class="list-group-item">
             <span class="badge pull-left">{{ createdAt }}</span>&nbsp;&nbsp;
             <span class="name" style="min-width: 120px; display: inline-block;">{{niceName author}}</span>
@@ -17,5 +21,8 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <p>No feedback, yet.</p>
+    {{/if}}
   </div>
 </template>
