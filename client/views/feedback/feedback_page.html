@@ -17,13 +17,7 @@
   <div class="feedback-answer">
     <div class="row">
       <div class="col-lg-8">
-        <div class="form-group" data-required="true">
-          <label class="control-label">Answer</label>
-          <textarea rows="2" placeholder="Your message" name="message" class="form-control"></textarea>
-        </div>
-        <div id="form-buttons">
-          <button type="submit" class="btn btn-primary">Send</button>
-        </div>
+        {{> quickForm collection="FeedbackAnswers" id="feedbackAnswers" type="insert" omitFields="author, createdAt"}}
       </div>
     </div>
   </div>
