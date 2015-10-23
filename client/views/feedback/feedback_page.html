@@ -4,7 +4,7 @@
     <div class="feedback">
       <div class="feedback-content">
         <h1>{{ feedback.topic }}</h1>
-        <span class="user-name">submitted by {{niceName feedback.author}}, </span>
+        <span class="user-name"><strong>{{ feedback.messageType}}</strong>&nbsp;submitted by&nbsp;<strong>{{niceName feedback.author}}</strong>, </span>
         <span class="feedback-date">{{ feedback.createdAt }}</span>
         <div class="row feedback-message">
           <div class="col-lg-8">
