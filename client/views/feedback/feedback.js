@@ -7,8 +7,12 @@ Template.feedbackPage.created = function () {
 };
 
 Template.feedbackList.helpers({
-  'userFeedbacks' : function() {
+  'userFeedback' : function() {
     return Feedback.find();
+  },
+  'haveFeedback' : function() {
+    var backendsCount  = Feedback.find().count();
+    return backendsCount > 0;
   }
 });
 
