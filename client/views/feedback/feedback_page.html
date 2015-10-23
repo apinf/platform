@@ -1,25 +1,25 @@
 <template name="feedbackPage">
-  <a href="/feedback-list"><i class="fa fa-arrow-left"></i> Back to list</a>
-  <h3>{{ feedback.topic }}</h3>
-  <div class="feedback-message">
-    <div class="row feedback-meta">
-      <div class="col-lg-8">
-        <span class="user-name">user@email.com</span>
+  <a href="/feedback-list"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Back to list</a>
+  <div class="feedback-page">
+    <div class="feedback">
+      <div class="feedback-content">
+        <h1>{{ feedback.topic }}</h1>
+        <span class="user-name">submitted by {{niceName feedback.author}}, </span>
+        <span class="feedback-date">{{ feedback.createdAt }}</span>
+        <div class="row feedback-message">
+          <div class="col-lg-8">
+            <p class="message-body">{{ feedback.message }}</p>
+            <hr class="feedback-hr" />
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-8">
-        <p class="message-body">{{ feedback.message }}</p>
-        <hr class="feedback-hr" />
-      </div>
-    </div>
-  </div>
-  <div class="feedback-answer">
-    <div class="row">
-      <div class="col-lg-8">
-        {{> quickForm collection="FeedbackAnswers" id="feedbackAnswers" type="insert" omitFields="author, createdAt"}}
+    <div class="feedback-answer">
+      <div class="row">
+        <div class="col-lg-8">
+          {{> quickForm collection="FeedbackAnswers" id="feedbackAnswers" type="insert" omitFields="author, createdAt"}}
+        </div>
       </div>
     </div>
   </div>
 </template>
-
