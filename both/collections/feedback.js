@@ -22,9 +22,14 @@ Schemas.FeedbackSchema = new SimpleSchema({
   },
   author: {
     type: String,
-    autoValue: function () {
-      return Meteor.userId()
-    }
+    autoValue: function() {
+      if (this.isInsert) {
+        return Meteor.userId();
+      } else {
+        this.unset();
+      }
+    },
+    denyUpdate: true
   },
   createdAt: {
     type: Date,
