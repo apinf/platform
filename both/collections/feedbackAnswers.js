@@ -3,12 +3,12 @@ FeedbackAnswers = new Mongo.Collection('feedbackAnswers');
 Schemas.FeedbackAnswersSchema = new SimpleSchema({
   message: {
     type: String,
-    label: "Your Message",
+    label: "Answer to the message",
     max: 1000,
     optional: false,
     autoform: {
       rows: 5,
-      placeholder: 'Your message'
+      placeholder: 'Type your message here'
     }
   },
   author: {
