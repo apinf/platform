@@ -1,5 +1,13 @@
 AutoForm.hooks({
   apiBackends: {
+    beginSubmit: function () {
+      // Disable form elements while submitting form
+      $('[data-schema-key], button').attr("disabled", "disabled");
+    },
+    endSubmit: function () {
+      // Enable form elements after form submission
+      $('[data-schema-key], button').removeAttr("disabled");
+    },
     onSuccess: function (formType, apiBackendId) {
       // Send the API Backend to API Umbrella
       response = Meteor.call('createApiBackendOnApiUmbrella', apiBackendId, function(error, apiUmbrellaWebResponse) {
@@ -33,9 +41,6 @@ AutoForm.hooks({
             sAlert.error(error, {timeout: 'none'});
             // Figure out a way to send the errors back to the autoform fields, as if it were client validation.
           });
-
-          //Remove apiBackendId from local mongoDB
-          ApiBackends.remove({_id: apiBackendId});
        }
       });
     }
