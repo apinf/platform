@@ -11,9 +11,9 @@
           {{#each userFeedback}}
           <span class="list-group-item">
             <span class="badge pull-left">{{ messageType }}</span>&nbsp;&nbsp;
-            <span class="name" style="min-width: 120px; display: inline-block;">{{niceName author}}</span>
-            <span class="">{{ topic }}</span>
-            <span class="text-muted" style="font-size: 11px;">&nbsp;&nbsp;{{ message }}</span>
+            <span class="author-name">{{niceName author}}</span>
+            <span>{{ topic }}</span>
+            <span class="text-muted feedback-preview">&nbsp;&nbsp;{{ message }}</span>
             <button type="button" class="btn btn-danger btn-xs pull-right delete-feedback">Remove</button>
             <a href="{{ pathFor route='feedbackPage' }}" class="btn btn-success btn-xs pull-right view-feedback">View</a>
           </span>
