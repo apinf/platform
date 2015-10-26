@@ -32,7 +32,7 @@ Schemas.FeedbackSchema = new SimpleSchema({
       ]
     }
   },
-  author: {
+  authorId: {
     type: String,
     autoValue: function() {
       if (this.isInsert) {
@@ -42,6 +42,9 @@ Schemas.FeedbackSchema = new SimpleSchema({
       }
     },
     denyUpdate: true
+  },
+  apiBackendId: {
+    type: String
   },
   createdAt: {
     type: Date,
