@@ -1,8 +1,10 @@
 Template.feedbackList.created = function () {
+  // Subscription to feedback collection
   this.subscribe('feedback');
 };
 
 Template.feedbackPage.created = function () {
+  // Subscription to feedback collection
   this.subscribe('feedback');
 };
 
@@ -11,13 +13,14 @@ Template.feedbackList.helpers({
     return Feedback.find();
   },
   'haveFeedback' : function() {
-    var backendsCount  = Feedback.find().count();
-    return backendsCount > 0;
+    // Count user's feedback in feedback collection
+    var feedbackCount  = Feedback.find().count();
+    return feedbackCount > 0;
   }
 });
 
 Template.feedbackList.events({
-  // delete feedback
+  // Delete feedback
   'click .delete-feedback': function (event) {
     Meteor.call('deleteFeedback', this._id);
   }
@@ -37,13 +40,14 @@ AutoForm.hooks({
 });
 
 AutoForm.addHooks(['feedback'], {
+  // Succes message
   onSuccess: function () {
     FlashMessages.sendSuccess('Thank you! Your feedback has been successfully sent.');
   }
 });
 
 FlashMessages.configure({
-  // Configuration for FlashMessages.
+  // Configuration for FlashMessages
   autoHide: true,
   hideDelay: 5000,
   autoScroll: false
