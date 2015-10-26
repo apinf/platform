@@ -6,14 +6,22 @@
       <div class="tab-pane fade in active" id="home">
         <div class="list-group">
           {{#each userFeedback}}
-          <span class="list-group-item">
-            <span class="badge pull-left">{{ messageType }}</span>&nbsp;&nbsp;
-            <span class="author-name">{{niceName authorId}}</span>
-            <span>{{ topic }}</span>
-            <span class="text-muted feedback-preview">&nbsp;&nbsp;{{ message }}</span>
-            <button type="button" class="btn btn-danger btn-xs pull-right delete-feedback">Remove</button>
-            <a href="{{ pathFor route='feedbackPage' }}" class="btn btn-success btn-xs pull-right view-feedback">View</a>
-          </span>
+          <div class="row list-group-item feedback-list-item">
+            <div class="col-lg-1">
+              <span class="badge">{{ messageType }}</span>
+            </div>
+            <div class="col-lg-3">
+              <span class="author-name">{{niceName authorId}}</span>
+            </div>
+            <div class="col-lg-6">
+              <span>{{ topic }}</span>
+              <span class="text-muted feedback-preview">{{ message }}</span>
+            </div>
+            <div class="col-lg-2 col-lg-push-1">
+              <a href="{{ pathFor route='feedbackPage' }}" class="btn btn-success btn-xs view-feedback">View</a>
+              <button type="button" class="btn btn-danger btn-xs delete-feedback">Remove</button>
+            </div>
+          </div>
           {{/each}}
         </div>
       </div>
