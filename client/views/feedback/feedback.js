@@ -40,7 +40,7 @@ AutoForm.hooks({
 });
 
 AutoForm.addHooks(['feedback'], {
-  // Succes message
+  // Success message
   onSuccess: function () {
     FlashMessages.sendSuccess('Thank you! Your feedback has been successfully sent.');
   }
