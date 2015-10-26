@@ -3,7 +3,7 @@
     <div class="feedback">
       <div class="feedback-content">
         <h1>{{ topic }}</h1>
-        <span class="user-name"><strong>{{ messageType}}</strong>&nbsp;submitted by&nbsp;<strong>{{niceName author}}</strong>, </span>
+        <span class="user-name"><strong>{{ messageType }}</strong>&nbsp;submitted by&nbsp;<strong>{{ niceName author }}</strong>, </span>
         <span class="feedback-date">{{ createdAt }}</span>
         <div class="row feedback-message">
           <div class="col-lg-8">
@@ -13,14 +13,5 @@
         </div>
       </div>
     </div>
-    <!-- moved to a new task
-<div class="feedback-answer">
-<div class="row">
-<div class="col-lg-8">
-{{> quickForm collection="FeedbackAnswers" id="feedbackAnswers" type="insert" omitFields="author, createdAt"}}
-</div>
-</div>
-</div>
--->
   </div>
 </template>
