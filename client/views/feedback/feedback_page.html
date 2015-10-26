@@ -1,25 +1,26 @@
 <template name="feedbackPage">
-  <a href="/feedback-list"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Back to list</a>
   <div class="feedback-page">
     <div class="feedback">
       <div class="feedback-content">
-        <h1>{{ feedback.topic }}</h1>
-        <span class="user-name"><strong>{{ feedback.messageType}}</strong>&nbsp;submitted by&nbsp;<strong>{{niceName feedback.author}}</strong>, </span>
-        <span class="feedback-date">{{ feedback.createdAt }}</span>
+        <h1>{{ topic }}</h1>
+        <span class="user-name"><strong>{{ messageType}}</strong>&nbsp;submitted by&nbsp;<strong>{{niceName author}}</strong>, </span>
+        <span class="feedback-date">{{ createdAt }}</span>
         <div class="row feedback-message">
           <div class="col-lg-8">
-            <p class="message-body">{{ feedback.message }}</p>
+            <p class="message-body">{{ message }}</p>
             <hr class="feedback-hr" />
           </div>
         </div>
       </div>
     </div>
-    <div class="feedback-answer">
-      <div class="row">
-        <div class="col-lg-8">
-          {{> quickForm collection="FeedbackAnswers" id="feedbackAnswers" type="insert" omitFields="author, createdAt"}}
-        </div>
-      </div>
-    </div>
+    <!-- moved to a new task
+<div class="feedback-answer">
+<div class="row">
+<div class="col-lg-8">
+{{> quickForm collection="FeedbackAnswers" id="feedbackAnswers" type="insert" omitFields="author, createdAt"}}
+</div>
+</div>
+</div>
+-->
   </div>
 </template>
