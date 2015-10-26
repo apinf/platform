@@ -4,7 +4,7 @@ Template.feedbackList.created = function () {
   this.subscribe('apiBackendFeedback', currentRouter);
 };
 
-Template.feedbackPage.created = function () {
+Template.feedbackItem.created = function () {
   // Subscription to feedback collection
   this.subscribe('feedback');
 };
