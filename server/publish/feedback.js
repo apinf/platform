@@ -1,5 +1,4 @@
 Meteor.publish('apiBackendFeedback', function(apiBackendId){
-  // If user is admin - show all feedback
-  console.log(apiBackendId);
+  // show feedback to specific API
   return Feedback.find({apiBackendId: apiBackendId});
 });
