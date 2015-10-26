@@ -1,6 +1,7 @@
 Template.feedbackList.created = function () {
   // Subscription to feedback collection
-  this.subscribe('feedback');
+  var currentRouter = Router.current().params._id;
+  this.subscribe('apiBackendFeedback', currentRouter);
 };
 
 Template.feedbackPage.created = function () {
@@ -28,6 +29,12 @@ Template.feedbackList.events({
 
 AutoForm.hooks({
   feedback: {
+    before: {
+      insert: function (feedback) {
+        feedback.apiBackendId = Router.current().params._id;
+        return feedback;
+      }
+    },
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key],button').attr("disabled", "disabled");
