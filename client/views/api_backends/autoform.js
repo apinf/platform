@@ -29,8 +29,8 @@ AutoForm.hooks({
           errors = _.flatten(errors);
           _.each(errors, function(error) {
             console.log(error);
-            //Display error to the user
-            sAlert.error(error);
+            //Display error to the user, keep the sAlert box visible.
+            sAlert.error(error, {timeout: 'none'});
             // Figure out a way to send the errors back to the autoform fields, as if it were client validation.
           });
 
