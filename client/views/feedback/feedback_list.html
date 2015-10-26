@@ -1,33 +1,49 @@
 <template name="feedbackList">
-  <h3>Feedback and report messages</h3>
-  <div class="row">
-    {{#if haveFeedback}}
-    <div class="tab-content">
-      <div class="tab-pane fade in active" id="home">
-        <div class="list-group">
-          {{#each userFeedback}}
-          <div class="row list-group-item feedback-list-item">
-            <div class="col-lg-1">
-              <span class="badge">{{ messageType }}</span>
-            </div>
-            <div class="col-lg-3">
-              <span class="author-name">{{niceName authorId}}</span>
-            </div>
-            <div class="col-lg-6">
-              <span>{{ topic }}</span>
-              <span class="text-muted feedback-preview">{{ message }}</span>
-            </div>
-            <div class="col-lg-2 col-lg-push-1">
-              <a href="{{ pathFor route='feedbackPage' }}" class="btn btn-success btn-xs view-feedback">View</a>
-              <button type="button" class="btn btn-danger btn-xs delete-feedback">Remove</button>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{> feedbackForm }}
+      <h1 class="panel-title clearfix">Feedback and report messages</h1>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        {{#if haveFeedback}}
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="home">
+            <div class="list-group">
+              {{#each userFeedback}}
+              <div class="row list-group-item feedback-list-item">
+                <div class="col-lg-1">
+                  <span class="badge">{{ messageType }}</span>
+                </div>
+                <div class="col-lg-3">
+                  <span class="author-name">{{niceName authorId}}</span>
+                </div>
+                <div class="col-lg-6">
+                  <span>{{ topic }}</span>
+                  <span class="text-muted feedback-preview">{{ message }}</span>
+                </div>
+                <div class="col-lg-2 col-lg-push-1">
+                  <button
+                          type="button"
+                          class="btn btn-success btn-xs view-feedback"
+                          data-toggle="collapse"
+                          data-target="#feedback-{{ _id }}">
+                    View
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs delete-feedback">Remove</button>
+                </div>
+              </div>
+              <div id="feedback-{{ _id }}" class="collapse">
+                {{> feedbackPage }}
+              </div>
+              {{/each}}
             </div>
           </div>
-          {{/each}}
         </div>
+        {{else}}
+        <p>No feedback, yet.</p>
+        {{/if}}
       </div>
     </div>
-    {{else}}
-    <p>No feedback, yet.</p>
-    {{/if}}
   </div>
 </template>
