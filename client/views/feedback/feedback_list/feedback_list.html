@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       {{> feedbackForm }}
-      <h1 class="panel-title clearfix">Feedback and report messages</h1>
+      <h1 class="panel-title clearfix">{{_ "feedback-main-title"}}</h1>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -27,9 +27,9 @@
                           class="btn btn-success btn-xs view-feedback"
                           data-toggle="collapse"
                           data-target="#feedback-{{ _id }}">
-                    View
+                    {{_ "feedback-view-button"}}
                   </button>
-                  <button type="button" class="btn btn-danger btn-xs delete-feedback">Remove</button>
+                  <button type="button" class="btn btn-danger btn-xs delete-feedback">{{_ "feedback-remove-button"}}</button>
                 </div>
               </div>
               <div id="feedback-{{ _id }}" class="collapse">
@@ -40,7 +40,7 @@
           </div>
         </div>
         {{else}}
-        <p>No feedback, yet.</p>
+        <p>{{_ "feedback-no-feedback"}}</p>
         {{/if}}
       </div>
     </div>
