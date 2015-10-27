@@ -16,6 +16,11 @@ TabularTables.ApiTable = new Tabular.Table({
       title: "View Details",
       tmpl: Meteor.isClient && Template.viewApiBackendButton
     },
-    {tmpl: Meteor.isClient && Template.favourite, title: "Bookmark"}
+    {tmpl: Meteor.isClient && Template.favourite, title: "Bookmark"},
+    {
+     data: "_id",
+     tmpl: Meteor.isClient && Template.apiBackendRating,
+     title: "Rating"
+    }
   ]
 });
