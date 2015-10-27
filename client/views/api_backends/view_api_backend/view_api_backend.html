@@ -1,5 +1,5 @@
 <template name="viewApiBackend">
-  <h1 class="page-heading">View API backend</h1>
+  <h1>{{_ "view-ApiBackend-Title"}}</h1>
   <div class="panel panel-default">
     <div class="panel-heading">
       {{> apiBackendsUsageInstructionsButton }}
@@ -11,17 +11,17 @@
         {{> apiBackendStatus }}
       </div>
       <div class="row">
-        <h2>Servers</h2>
+        <h2>{{_ "view-ApiBackend-Servers"}}</h2>
         <ul class="list-group col-md-3 col-sm-6 col-xs-12">
           <li class="list-group-item">
             <span class="label label-primary">
-              Backend
+              {{_ "view-ApiBackend-Backend"}}
             </span>
             &nbsp;{{apiBackend.backend_host}} <span class="badge">{{ apiBackend.backend_protocol }}</span>
           </li>
           <li class="list-group-item">
             <span class="label label-primary">
-              Frontend
+              {{_ "view-ApiBackend-Frontend"}}
             </span>
             &nbsp;{{apiBackend.frontend_host}}
           </li>
@@ -29,17 +29,17 @@
       </div>
       <div class="row">
         {{#each apiBackend.url_matches}}
-        <h2>URL Matchers</h2>
+        <h2>{{_ "view-ApiBackend-Matchers"}}</h2>
         <ul class="list-group col-md-3 col-sm-6 col-xs-12">
           <li class="list-group-item">
             <span class="label label-primary">
-              Backend prefix
+              {{_ "view-ApiBackend-Backend-Prefix"}}
             </span>
             &nbsp;{{ backend_prefix }}
           </li>
           <li class="list-group-item">
             <span class="label label-primary">
-              Frontend prefix
+              {{_ "view-ApiBackend-Frontend-Prefix"}}
             </span>
             &nbsp;{{ frontend_prefix }}
           </li>
@@ -47,9 +47,9 @@
         {{/each}}
       </div>
       <div class="row">
-        <h2>Export API configurations</h2>
-        <a class="btn btn-lg btn-success" id="exportJSONConfig">Export .json</a>
-        <a class="btn btn-lg btn-success" id="exportYAMLConfig">Export .yaml</a>
+        <h2>{{_ "view-ApiBackend-Export-Title"}}</h2>
+        <a class="btn btn-lg btn-success" id="exportJSONConfig">{{_ "view-ApiBackend-ExportJson"}}</a>
+        <a class="btn btn-lg btn-success" id="exportYAMLConfig">{{_ "view-ApiBackend-ExportYaml"}}</a>
       </div>
     </div>
   </div>

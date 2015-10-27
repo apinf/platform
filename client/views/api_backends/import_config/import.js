@@ -15,8 +15,9 @@ Template.importApiConfiguration.rendered = function () {
   // custom message (tutorial) in json format
   var tips = {
     "How_to_import_configurations": {
-      "option_1" : "Upload existing config file",
-      "option_2" : "Paste configurations here in JSON."
+      "option_1" : "Upload existing config file.",
+      "option_2" : "Paste configurations here.",
+      "available_file_extensions:" : "JSON, YAML or TXT."
     }
   };
 
@@ -25,6 +26,34 @@ Template.importApiConfiguration.rendered = function () {
 
   // pastes initial value to editor
   instance.editor.setValue(jsonString);
+
+};
+
+
+// Get reference to template instance
+Template.importApiConfiguration.created = function () {
+
+  var instance = this;
+
+  // function attached to template instance checks file extension
+  instance.endsWith = function (filename, suffixList) {
+
+    // variable that keeps state of is this filename contains provided extensions - false by default
+    var state = false;
+
+    // iterating through extensions passed into suffixList array
+    for (var i=0; i <suffixList.length; i++){
+
+      // parses line to check if filename contains current suffix
+      var endsWith = filename.indexOf(suffixList[i], filename.length - suffixList[i].length) !== -1;
+
+      // if current extension found in filename then change the state variable
+      if (endsWith) state = true;
+
+    }
+
+    return state;
+  };
 
 };
 
@@ -54,29 +83,34 @@ Template.importApiConfiguration.events({
           // gets file contents
           var importedFile = event.target.result;
 
-          var jsonObj;
+          var jsonObj = {};
 
-          // checks if file extension js .YAML
-          if (endsWith(file.name, 'yaml') || endsWith(file.name, 'yml')) {
+          var acceptedExtensions = ["yaml", "yml", "txt", "json"];
 
-            // converts YAML to JSON
-            var yamlToJson = jsyaml.load(importedFile);
+          // checks if file name contains one of accepted extensions
+          if (instance.endsWith(file.name, acceptedExtensions)) {
 
-            // parses JSON obj to JSON String with indentation
-            jsonObj = JSON.stringify(yamlToJson,  null, '\t');
-          }
+            // checks if file extension is .YAML or .TXT
+            if (instance.endsWith(file.name, ["yaml", "yml", "txt"])) {
 
-          // checks if file extension js .JSON
-          if (endsWith(file.name, 'json')) {
+              // converts YAML to JSON
+              var yamlToJson = jsyaml.load(importedFile);
 
-            // if JSON - no need to convert anything
-            jsonObj = importedFile;
-          }
+              // parses JSON obj to JSON String with indentation
+              jsonObj = JSON.stringify(yamlToJson,  null, '\t');
+            }
 
-          // notifies user if file extention is not as expected
-          if (!endsWith(file.name, 'json') && !endsWith(file.name, 'yaml') && !endsWith(file.name, 'yml')){
+            // checks if file extension is .JSON
+            if (instance.endsWith(file.name, ["json"])) {
 
-            FlashMessages.sendError("Config file should be .YAML, .YML or .JSON only!");
+              // if JSON - no need to convert anything
+              jsonObj = importedFile;
+            }
+
+          } else {
+
+            // notifies user if file extension is not as expected
+            FlashMessages.sendError("Config file should be .YAML, .YML, .JSON or .TXT only.");
 
           }
 
@@ -138,9 +172,3 @@ Template.importApiConfiguration.events({
   }
 
 });
-
-
-// function for file extension check (since it is not provided other way)
-function endsWith(str, suffix) {
-  return str.indexOf(suffix, str.length - suffix.length) !== -1;
-}

@@ -2,7 +2,7 @@
   <div class="container features">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">Are you an API user?</h2>
+        <h2 class="feature-section-heading">{{_ "feature-Section-Heading1"}}</h2>
         <hr class="primary">
       </div>
     </div>
@@ -10,35 +10,35 @@
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-magnify"></i>
-          <h3 class="feature-title">Discover APIs</h3>
-          <p class="feature-title-text">Find and bookmark useful APIs</p>
+          <h3 class="feature-title">{{_ "feature-Title1"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title1-Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-auto-fix"></i>
-          <h3 class="feature-title">Mix APIs</h3>
-          <p class="feature-title-text">Mix APIs from several sources (future)</p>
+          <h3 class="feature-title">{{_ "feature-Title2"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title2-Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-library-books"></i>
-          <h3 class="feature-title">Check API documentation</h3>
-          <p class="feature-title-text">Documentation viewer available, RAML planned</p>
+          <h3 class="feature-title">{{_ "feature-Title3"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title3-Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-chart-bar"></i>
-          <h3 class="feature-title">Track application usage</h3>
-          <p class="feature-title-text">View analytics for API calls from your application</p>
+          <h3 class="feature-title">{{_ "feature-Title4"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title4-Text"}}</p>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">Are you an API owner?</h2>
+        <h2 class="feature-section-heading">{{_ "feature-Section-Heading2"}}</h2>
         <hr class="primary">
       </div>
     </div>
@@ -46,29 +46,29 @@
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-arrow-up"></i>
-          <h3 class="feature-title">Publish your APIs</h3>
-          <p class="feature-title-text">Make your APIs easily available for developers</p>
+          <h3 class="feature-title">{{_ "feature-Title5"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title5-Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-settings"></i>
-          <h3 class="feature-title">Manage your APIs</h3>
-          <p class="feature-title-text">Easily manage and configure your API endpoints and access control</p>
+          <h3 class="feature-title">{{_ "feature-Title6"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title6-Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-chart-line"></i>
-          <h3 class="feature-title">Track your APIs</h3>
-          <p class="feature-title-text">View detailed analytics data for your APIs</p>
+          <h3 class="feature-title">{{_ "feature-Title7"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title7-Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-cloud-check"></i>
-          <h3 class="feature-title">Web-based</h3>
-          <p class="feature-title-text">Centralized management for hundreds of users</p>
+          <h3 class="feature-title">{{_ "feature-Title8"}}</h3>
+          <p class="feature-title-text">{{_ "feature-Title8-Text"}}</p>
         </div>
       </div>
     </div>
@@ -79,11 +79,11 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Getting started</h2>
-          <p class="lead">Just create an account and be on your way! The developer dashboard offers you a one-stop location to discover APIs, track your application API usage, and more.</p>
+          <h2 class="section-heading">{{_ "section1-Heading"}}</h2>
+          <p class="lead">{{_ "section1-Text"}}</p>
           {{#if User}}
           {{else}}
-          <p class="lead"><a href="/sign-up">Sign up</a> to see all features.</p>
+          <p class="lead"><a href="/sign-up">{{_ "signUp"}}</a> {{_ "section1-Text-Extra"}}</p>
           {{/if}}
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
@@ -101,9 +101,9 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Reach out to developers</h2>
-          <p class="lead">Apinf provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API trafﬁc.</p>
-          <p class="lead"><a href="#" class="contact-us-link">Contact us</a> for more information.</p>
+          <h2 class="section-heading">{{_ "section2-Heading"}}</h2>
+          <p class="lead">{{_ "section2-Text"}}</p>
+          <p class="lead"><a href="#" class="contact-us-link">{{_ "contactUs"}}</a> {{_ "section1-Text-Extra"}}</p>
         </div>
       </div>
     </div>
@@ -114,12 +114,10 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Completely open source</h2>
-          <p class="lead">Apinf is powered by API Umbrella and builds a dashboard on top of the
-            API Umbrella features. The solution is fully open source licensed with MIT.
-            It is written in Meteor.js and D3. We like to collaborate, to listen to our
-            users and want to encourage people to become contributors.</p>
-          <p class="lead">Find us in <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a>, <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a> and <a href="http://community.apinf.io">Apinf Community</a>.</p>
+          <h2 class="section-heading">{{_ "section3-Heading"}}</h2>
+          <p class="lead">{{_ "section3-Text"}}</p>
+          <p class="lead">{{_ "section3-Text-Extra"}} <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a> {{_ "section3-Text-Social-Text"}} <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a> and <a href="http://community.apinf.io">Apinf Community</a>.
+          </p>
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
           <img class="img-responsive" src="img/opensource.png" alt="We are Open Source">
@@ -130,9 +128,9 @@
   <div id="contact-us" class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">Contact Us</h2>
+        <h2 class="feature-section-heading">{{_ "section-ContactUs"}}</h2>
         <hr class="primary">
-        <h4 class="text-muted">Contact us to ask anything.</h4>
+        <h4 class="text-muted">{{_ "section-ContactUs-Text"}}</h4>
       </div>
     </div>
     <div class="row">
