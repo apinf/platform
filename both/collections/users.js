@@ -8,7 +8,7 @@ Schemas.UserProfile = new SimpleSchema({
     optional: true
   },
   apiKey: {
-    label: 'API key (optional)',
+    label: 'API key',
     type: String,
     regEx: /^[a-z0-9A-Z]{40}$/,
     optional: true,
