@@ -17,15 +17,12 @@ Meteor.methods({
       });
     };
   },
-
-  createApiBackendOnApiUmbrella: function (apiBackendId) {
+  createApiBackendOnApiUmbrella: function (apiBackendForm) {
     console.log('Submitting Backend to API Umbrella.');
-    // Get the API Backend object
-    var apiBackend = ApiBackends.findOne(apiBackendId);
 
     // Construct an API Backend object for API Umbrella with one 'api' key
     var constructedBackend = {
-      "api": apiBackend
+      "api": apiBackendForm
     };
 
     var apiUmbrellaWebResponse = {
