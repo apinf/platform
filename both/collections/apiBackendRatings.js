@@ -15,3 +15,12 @@ Schemas.ApiBackendRating = new SimpleSchema({
     max: 4
   }
 });
+
+ApiBackendRatings.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  }
+});
