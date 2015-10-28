@@ -11,6 +11,9 @@ AutoForm.hooks({
     before: {
       // Replace `formType` with the form `type` attribute to which this hook applies
       insert: function (apiBackendForm) {
+        // Keep the context to use inside the callback function
+        context = this;
+
         // Send the API Backend to API Umbrella
         response = Meteor.call('createApiBackendOnApiUmbrella', apiBackendForm, function(error, apiUmbrellaWebResponse) {
 
@@ -23,10 +26,7 @@ AutoForm.hooks({
 
           if (apiUmbrellaWebResponse.http_status === 200) {
             //Return asynchronously
-            this.result(apiBackendForm);
-
-            //Redirect to the just created API Backend page
-            Router.go('viewApiBackend', {_id: apiBackendId});
+            context.result(apiBackendForm);
           } else {
             // ex 1:
             // {"default":'{"backend_protocol":["is not included in the list"]}}'
@@ -48,10 +48,14 @@ AutoForm.hooks({
             });
 
             //Return error asynchronously
-            this.result(false);
+            context.result(false);
          }
         });
       }
     },
+    onSuccess: function (formType, apiBackendId) {
+      //Redirect to the just created API Backend page
+      Router.go('viewApiBackend', {_id: apiBackendId});
+    }
   }
 });
