@@ -5,6 +5,9 @@ Template.apiBackendRating.rendered = function () {
   // Get API Backend ID from template instance
   var apiBackendId = instance.data._id;
 
+  // Subscribe to rating for current API Backend
+  instance.subscribe('myApiBackendRating', apiBackendId);
+
   // Add the jQuery RateIt widget
   $("#rating-" + apiBackendId).rateit({max: 4, step: 1, resetable: false});
 };
