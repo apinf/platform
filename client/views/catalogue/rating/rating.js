@@ -6,7 +6,7 @@ Template.apiBackendRating.rendered = function () {
   var apiBackendId = instance.data._id;
 
   // Add the jQuery RateIt widget
-  $("#rating-" + apiBackendId).rateit({max: 4, step: 1});
+  $("#rating-" + apiBackendId).rateit({max: 4, step: 1, resetable: false});
 };
 
 Template.apiBackendRating.events({
