@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/apinf/api-umbrella-dashboard.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
 # API Umbrella Dashboard
 The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
 
@@ -7,6 +6,11 @@ For API consumers APInf provides simple key management, key usage analytics and 
 # Documentation
 
 All planning documents, meeting minutes, etc. can be found on the [Apinf Hackpad](http://apinf.hackpad.com).
+
+# Development status
+[![Stories in Ready](https://badge.waffle.io/apinf/api-umbrella-dashboard.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
+
+[![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
 
 # Architecture and ecosystem
 Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
@@ -26,14 +30,18 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
 4. Create [`settings.json`](#Settings.json)
 5. Type `meteor --settings /path/to/settings.json` in the project directory
- 
+
 # Settings.json
 
 Your `settings.json` file should have the following structure:
 
 ```
 {
+  "apinf": {
+    "host": "https://example.com/"
+  },
   "api_umbrella": {
+    "host": "https://example.com/"
     "api_key": "xxx",
     "auth_token": "xxx",
     "base_url": "https://example.com/api-umbrella/"

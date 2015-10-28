@@ -1,0 +1,14 @@
+<template name="notAuthorized">
+  <div class="error-page">
+    <h1 class="headline text-yellow">{{_ "notAuthorized-Title"}}</h1>
+    <div class="error-content">
+      <p>
+        <i class="fa fa-warning text-yellow"></i>&nbsp;
+        {{_ "notAuthorized-Message"}}
+      </p>
+      <p>
+        {{_ "notAuthorized-ReturnMessage-Part1"}} <a href="javascript:void(0)" onClick="history.go(-1); return false;">{{_ "notAuthorized-ReturnMessage-Part2"}}</a>.
+      </p>
+    </div>
+  </div>
+</template>
