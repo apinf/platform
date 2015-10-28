@@ -19,5 +19,31 @@ Template.apiBackendRating.events({
 
     // Get rating from template based on API Backend ID
     var rating = $("#rating-" + apiBackendId).rateit('value');
+
+    // Get current user ID
+    var userId = Meteor.userId();
+
+    // Create an rating object with user ID, API Backend ID, and rating
+    var apiBackendRating = {
+      apiBackendId: apiBackendId,
+      rating: rating,
+      userId: userId
+    };
+
+    // Check if user has previously rated API Backend
+    var previousRating = ApiBackendRatings.findOne({
+      apiBackendId: apiBackendId,
+      userId: userId
+    });
+
+    // If previous rating exists
+    if (previousRating) {
+      // Update the existing rating
+      ApiBackendRatings.update(previousRating._id, {$set: apiBackendRating });
+    } else {
+      console.log('new');
+      // Otherwise, create a new rating
+      ApiBackendRatings.insert(apiBackendRating);
+    }
   }
 });
