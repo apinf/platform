@@ -26,8 +26,8 @@ Template.apiBackendRating.events({
     // Create an rating object with user ID, API Backend ID, and rating
     var apiBackendRating = {
       apiBackendId: apiBackendId,
-      rating: rating,
-      userId: userId
+      userId: userId,
+      rating: rating
     };
 
     // Check if user has previously rated API Backend
