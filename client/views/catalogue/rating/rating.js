@@ -1,4 +1,4 @@
-Template.apiBackendRating.rendered = function () {
+Template.apiBackendRating.created = function () {
   // Get reference to template instance
   var instance = this;
 
@@ -6,13 +6,33 @@ Template.apiBackendRating.rendered = function () {
   var apiBackendId = instance.data._id;
 
   // Subscribe to rating for current API Backend
-  instance.subscribe('myApiBackendRating', apiBackendId);
+  instance.apiRatingSubscription = instance.subscribe('myApiBackendRating', apiBackendId);
+};
 
-  // Add the jQuery RateIt widget
-  $("#rating-" + apiBackendId).rateit({
-    max: 4,
-    step: 1,
-    resetable: false
+Template.apiBackendRating.rendered = function () {
+  // Get reference to template instance
+  var instance = this;
+
+  // Get API Backend ID from template instance
+  var apiBackendId = instance.data._id;
+
+  instance.autorun(function () {
+    // Make sure API Backend Rating subscription is ready
+    if (instance.apiRatingSubscription.ready()) {
+      // Check if user has previously rated API Backend
+      var userRating = ApiBackendRatings.findOne({
+        apiBackendId: apiBackendId,
+        userId: Meteor.userId()
+      });
+
+      // Add the jQuery RateIt widget
+      $("#rating-" + apiBackendId).rateit({
+        max: 4,
+        step: 1,
+        resetable: false,
+        value: userRating ? userRating.rating : 0 // use previous rating, if exists
+      });
+    }
   });
 };
 
@@ -45,7 +65,6 @@ Template.apiBackendRating.events({
       // Update the existing rating
       ApiBackendRatings.update(previousRating._id, {$set: apiBackendRating });
     } else {
-      console.log('new');
       // Otherwise, create a new rating
       ApiBackendRatings.insert(apiBackendRating);
     }
