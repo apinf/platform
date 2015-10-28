@@ -177,5 +177,6 @@ yogiben:autoform-modals@0.3.8
 yogiben:helpers@0.0.6
 yogiben:mixpanel@0.0.7
 yogiben:pretty-email@0.0.6
+zenorocha:clipboard@1.4.2
 zimme:active-route@2.3.2
 zimme:iron-router-active@1.0.4
