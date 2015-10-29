@@ -1,9 +1,9 @@
-Template.projectConfiguration.created = function () {
+Template.settings.created = function () {
   // Subscription to feedback collection
   this.subscribe('settings');
 };
 
-Template.projectConfiguration.helpers({
+Template.settings.helpers({
   settings: function () {
     return Settings.findOne();
   }
