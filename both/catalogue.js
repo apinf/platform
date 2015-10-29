@@ -18,7 +18,7 @@ TabularTables.ApiTable = new Tabular.Table({
     },
     {tmpl: Meteor.isClient && Template.favourite, title: "Bookmark"},
     {
-     data: "_id",
+     data: "getRating()",
      tmpl: Meteor.isClient && Template.apiBackendRating,
      title: "Rating"
     }
