@@ -11,9 +11,9 @@ Template.apiBackendRating.created = function () {
     apiBackendId
   );
 
-  // Subscribe to anonymous ratings for current API Backend
-  instance.apiAnonymousRatings = instance.subscribe(
-    'apiBackendAnonymousRatings',
+  // Subscribe to ratings for current API Backend
+  instance.apiBackendRatings = instance.subscribe(
+    'apiBackendRatings',
     apiBackendId
   );
 };
