@@ -31,5 +31,6 @@ Meteor.methods({
     var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
 
     // TODO: Add error checking to ensure backend successfully inserted in API Umbrella
+    //console.log(response.data) Uncomment for debugging
   }
 });
