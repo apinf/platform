@@ -22,3 +22,14 @@ Meteor.publish('myApiBackendRatings', function () {
 
   return userApiBackendRatings;
 });
+
+// All ratings for a given API Backend, anonymized
+Meteor.publish('apiBackendAnonymousRatings', function (apiBackendId) {
+  // get API Backend Ratings, excluding the User ID field
+  var apiBackendAnonymousRatings = ApiBackendRatings.find(
+    {apiBackendId: apiBackendId},
+    {fields: {userId: 0}}
+  );
+
+  return apiBackendAnonymousRatings;
+});
