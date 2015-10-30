@@ -60,6 +60,7 @@
       {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
       {{> afQuickField name='custom_rate_limits'}}
       {{/if}}
+      {{>showHelp 'settings'}}
       {{> afQuickField name='settings'}}
     </div>
     <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends-AdvancedRequestsRewriting"}}</legend>
