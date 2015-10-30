@@ -18,21 +18,20 @@ Meteor.methods({
     };
   },
   createApiBackendOnApiUmbrella: function (apiBackendForm) {
-    console.log('Submitting Backend to API Umbrella.');
-
     // Construct an API Backend object for API Umbrella with one 'api' key
     var constructedBackend = {
       "api": apiBackendForm
     };
 
+    // Response object to be send back to client layer.
     var apiUmbrellaWebResponse = {
       result: {},
       http_status: 200,
       errors: {}
     };
 
-    // Send the API Backend to API Umbrella
     try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
       apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
     } catch (apiUmbrellaError) {
 

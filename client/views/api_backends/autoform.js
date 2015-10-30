@@ -9,10 +9,9 @@ AutoForm.hooks({
       $('[data-schema-key], button').removeAttr("disabled");
     },
     before: {
-      // Replace `formType` with the form `type` attribute to which this hook applies
       insert: function (apiBackendForm) {
         // Keep the context to use inside the callback function
-        context = this;
+        var context = this;
 
         // Send the API Backend to API Umbrella
         response = Meteor.call('createApiBackendOnApiUmbrella', apiBackendForm, function(error, apiUmbrellaWebResponse) {
@@ -25,29 +24,30 @@ AutoForm.hooks({
           // };
 
           if (apiUmbrellaWebResponse.http_status === 200) {
-            //Return asynchronously
+            // Submit form on meteor:api-umbrella success
             context.result(apiBackendForm);
           } else {
-            // ex 1:
+            // Error data structure returned.
+            // nowadays, jerry-rig solution:
             // {"default":'{"backend_protocol":["is not included in the list"]}}'
-            // ex 2:
-            // {"errors":{"frontend_host":["must be in the format of \"example.com\""],
-            //            "backend_host":["must be in the format of \"example.com\""],
-            //            "base":["must have at least one url_matches"],
-            //            "servers[0].host":["must be in the format of \"example.com\"","Could not resolve host: no address for http://api.example.com"],
-            //            "servers[0].port":["can't be blank","is not included in the list"]}
-            // }
-
+            // after https://github.com/brylie/meteor-api-umbrella/issues/1 is resolved, it should be:
+            // {"frontend_host":["must be in the format of \"example.com\""],
+            //  "backend_host":["must be in the format of \"example.com\""],
+            //  "base":["must have at least one url_matches"],
+            //  "servers[0].host":["must be in the format of \"example.com\"","Could not resolve host: no address for http://api.example.com"],
+            //  "servers[0].port":["can't be blank","is not included in the list"]}
             var errors = _.values(apiUmbrellaWebResponse.errors);
+
+            // Flatten all error descriptions to show using sAlert
             errors = _.flatten(errors);
             _.each(errors, function(error) {
-              console.log(error);
               //Display error to the user, keep the sAlert box visible.
               sAlert.error(error, {timeout: 'none'});
-              // Figure out a way to send the errors back to the autoform fields, as if it were client validation.
+              // TODO: Figure out a way to send the errors back to the autoform fields, as if it were client validation,
+              //   and get rid of sAlert here.
             });
 
-            //Return error asynchronously
+            //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
             context.result(false);
          }
         });
