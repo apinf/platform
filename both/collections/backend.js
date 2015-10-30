@@ -4,6 +4,22 @@ ApiBackends = new Mongo.Collection('apiBackends');
 SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{2,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
+Schemas.Settings = new SimpleSchema({
+  default_response_headers_string: {
+    type: String,
+    optional: true,
+    label: 'Default Response Headers',
+    defaultValue: 'Access-Control-Allow-Origin: *',
+  },
+  override_response_headers_string: {
+    type: String,
+    optional: true,
+    label: 'Override Response Headers',
+    defaultValue: 'Access-Control-Allow-Origin: *',
+  },
+
+});
+
 Schemas.ApiBackendsSchema = new SimpleSchema({
   id: {
     type: String,
@@ -213,7 +229,6 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
       'Unlimited requests'
     ],
   },
-
   custom_rate_limits: {
     type: [Object],
     optional: true
@@ -248,6 +263,11 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   "custom_rate_limits.$.response_headers": {
     type: Boolean,
     optional: true
+  },
+  // Settings, check Schema definition top of file!
+  settings: {
+    type: Schemas.Settings,
+    optional: true,
   },
   anonymous_rate_limit_behavior: {
     type: String,
