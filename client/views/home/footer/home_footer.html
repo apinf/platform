@@ -4,8 +4,9 @@
       <div class="row">
         <div class="col-lg-8 copyright">
           <p class="copyright-title">
-            APInf is brought to you by Sampo Software.<br>
-            © 2015 APInf. All rights reserved.
+            {{_ "collaboration-Title-Part1"}}
+            <br>
+            {{_ "collaboration-Title-Part2"}}
           </p>
         </div>
         <div class="col-lg-2 col-lg-pull-3">
@@ -21,10 +22,10 @@
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
             {{#if User}}
-            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/dashboard">{{_ "Dashboard"}}</a></li>
             {{else}}
-            <li><a href="/sign-in">Sign in</a></li>
-            <li><a href="/sign-up">Sign up</a></li>
+            <li><a href="/sign-in">{{_ "signIn"}}</a></li>
+            <li><a href="/sign-up">{{_ "signUp"}}</a></li>
             {{/if}}
           </ul>
         </div>
