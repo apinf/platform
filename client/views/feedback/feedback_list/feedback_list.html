@@ -12,16 +12,16 @@
             <div class="list-group">
               {{#each userFeedback}}
               <div class="row list-group-item feedback-list-item">
-                <div class="col-lg-1">
+                <div class="col-lg-2 col-md-2">
                   <span class="badge">{{ messageType }}</span>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-3">
                   <span class="author-name">{{niceName authorId}}</span>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4 col-md-3">
                   <span>{{ topic }}</span>
                 </div>
-                <div class="col-lg-2 col-lg-push-1">
+                <div class="col-lg-1 col-md-3 pull-right">
                   <button
                           type="button"
                           class="btn btn-success btn-xs view-feedback"
