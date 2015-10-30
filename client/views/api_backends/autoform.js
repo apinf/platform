@@ -3,10 +3,14 @@ AutoForm.hooks({
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key], button').attr("disabled", "disabled");
+      // Change button text
+      $('#add-apibackends').text('Submitting...');
     },
     endSubmit: function () {
       // Enable form elements after form submission
       $('[data-schema-key], button').removeAttr("disabled");
+      // Change button text to original
+      $('#add-apibackends').text('Submit');
     },
     before: {
       insert: function (apiBackendForm) {
@@ -49,7 +53,7 @@ AutoForm.hooks({
 
             //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
             context.result(false);
-         }
+          }
         });
       }
     },
