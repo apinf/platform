@@ -36,7 +36,6 @@ Accounts.onCreateUser(function(options, user) {
   user.apiUmbrellaUserId = response.data.user.id;
   user.profile.apiKey = response.data.user.api_key;
   ApiUmbrellaUsers.insert(response.data.user);
-  Meteor.call("sendmail", user.emails[0].address);
 
   return user;
 });

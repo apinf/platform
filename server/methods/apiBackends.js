@@ -1,5 +1,5 @@
 Meteor.methods({
-  syncApiBackends: function () {
+  "syncApiBackends":function () {
     // Check if API Umbrella settings are available
     if (Meteor.settings.api_umbrella) {
       // Get API Backends from API Umbrella instance
@@ -54,7 +54,5 @@ Meteor.methods({
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
       apiUmbrellaWebResponse.http_status = 422;
     }
-
-    return apiUmbrellaWebResponse;
   }
 });

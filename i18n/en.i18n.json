@@ -125,7 +125,7 @@
   "apiBackends-Documentation-Link": "Link to documentation",
   "apiBackends-GlobalRequestSettings-Title": "Global Request Settings",
   "apiBackends-AdvancedRequestsRewriting": "Advanced Requests Rewriting",
-  "apiBackends-AdvancedRequestsRewriting-Help": "Modify the incoming request's URL or headers before passing it to the backend.",
+  "apiBackends-AdvancedRequestsRewriting-Help": "Modify the incoming requests made to the Umbrella front-end before they are passed on to your API backend",
   "apiBackends-AdvancedSettings": "Advanced Settings",
   "apiBackends-Submit": "Submit",
 
