@@ -140,6 +140,7 @@
       "ApiBackends": false,
       "ApiBackendConfigurations": false,
       "ApiBookmarks": false,
+      "ApiDocumentation": false,
       "ApiUmbrellaAdmins": false,
       "ApiUmbrellaUsers": false,
       "RateLimit": false,
@@ -169,6 +170,7 @@
       "Tabular": false,
       "TabularTables": false,
       "TAPi18n": false,
+      "InlineHelp": false,
 
       // JavaScript utilities
       "ace": false,

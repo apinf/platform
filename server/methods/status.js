@@ -12,7 +12,7 @@ Meteor.methods({
       try{
 
         // initial host for apinf
-        var apinfHost     = "https://apinf.com";
+        var apinfHost     = Meteor.settings.apinf.host;
 
         // response object from apinf GET request
         var apinfResponse = Meteor.http.call("GET", apinfHost);
@@ -49,7 +49,7 @@ Meteor.methods({
       try{
 
         // initial host for API umbrella
-        var apiUmbrellaHost     = "https://umbrella.apinf.io/";
+        var apiUmbrellaHost     = Meteor.settings.api_umbrella.host;
 
         // response object from API Umbrella GET request
         var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);
@@ -87,7 +87,7 @@ Meteor.methods({
 
       try{
         // initial host for elasticsearch instance
-        var elasticsearchInstance = "http://apinf.com:14002/";
+        var elasticsearchInstance = Meteor.settings.elasticsearch.host;
 
         // response object from elasticsearch GET request
         var elasticsearchResponse =  Meteor.http.call("GET", elasticsearchInstance);
