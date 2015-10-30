@@ -1,0 +1,14 @@
+<template name="feedbackItem">
+  <div class="feedback-page">
+    <div class="feedback">
+      <h1>{{ topic }}</h1>
+      <span class="user-name"><strong>{{ messageType }}</strong>, </span>
+      <span class="feedback-date">{{ createdAt }}</span>
+      <div class="row feedback-message">
+        <div class="col-lg-8">
+          <p class="message-body">{{ message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
