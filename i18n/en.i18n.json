@@ -141,6 +141,16 @@
   /*Catalogue*/
   "catalogue-Title": "Available APIs",
 
+  /*Feedback*/
+  "feedback-submitted-by": "submitted by",
+  "feedback-main-title": "Feedback and report messages",
+  "feedback-view-button": "View",
+  "feedback-no-feedback": "No feedback, yet.",
+  "feedback-remove-button": "Remove",
+  "feedback-feedbackForm-button": "Send feedback",
+  "feedback-feedbackForm-title": "Send feedback or report a problem",
+  "feedback-feedbackForm-description": "We welcome problem reports, feature ideas and general comments.",
+
   /*Charts*/
   /*Bar chart*/
   "overviewChart-Title": "Overview chart",
