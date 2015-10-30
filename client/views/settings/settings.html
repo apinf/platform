@@ -8,10 +8,11 @@
           </div>
           <div class="panel-body">
             {{#if settings}}
-            {{> quickForm collection="Settings" id="updateSettingsForm" type="update" doc=settings}}
+            {{> quickForm collection="Settings" id="settings" type="update" doc=settings}}
             {{else}}
-            {{> quickForm collection="Settings" id="insertSettingsForm" type="insert"}}
+            {{> quickForm collection="Settings" id="settings" type="insert"}}
             {{/if}}
+            {{> flashMessages}}
           </div>
         </div>
       </div>
