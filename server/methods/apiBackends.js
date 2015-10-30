@@ -54,5 +54,6 @@ Meteor.methods({
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
       apiUmbrellaWebResponse.http_status = 422;
     }
+    return apiUmbrellaWebResponse;
   }
 });
