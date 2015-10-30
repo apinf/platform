@@ -13,11 +13,11 @@
           </ul>
         </div>
         <div class="col-lg-8 col-lg-push-1 collaboration">
-          <p class="collaboration-title">Collaboration between</p>
+          <p class="collaboration-title">{{_ "collaboration-Title"}}</p>
           <a href="http://samposoftware.com/">
             <img class="collaboration-image" src="img/sampologo.png" />
           </a>
-          <p class="collaboration-title">&nbsp;and&nbsp;</p>
+          <p class="collaboration-title">&nbsp;{{_ "collaboration-Title-Extra"}}&nbsp;</p>
           <p class="apiumbrella-logo">
             <a href="http://apiumbrella.io/">
               <i class="fa fa-umbrella"></i>
@@ -28,10 +28,10 @@
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
             {{#if User}}
-            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/dashboard">{{_ "Dashboard"}}</a></li>
             {{else}}
-            <li><a href="/sign-in">Sign in</a></li>
-            <li><a href="/sign-up">Sign up</a></li>
+            <li><a href="/sign-in">{{_ "signIn"}}</a></li>
+            <li><a href="/sign-up">{{_ "signUp"}}</a></li>
             {{/if}}
           </ul>
         </div>
