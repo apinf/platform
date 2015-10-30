@@ -61,8 +61,8 @@
   "section-ContactUs": "Contact Us",
   "section-ContactUs-Text": "Contact us to ask anything.",
   /*Footer*/
-  "collaboration-Title": "Collaboration between",
-  "collaboration-Title-Extra": "and",
+  "collaboration-Title-Part1": "APInf is brought to you by Sampo Software.",
+  "collaboration-Title-Part2": "© 2015 APInf. All rights reserved.",
 
   /*Account*/
   "account_details": "Account Details",
