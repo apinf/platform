@@ -4,8 +4,8 @@
     "username" : "xxxx",
       "password" : "xxxx"
   }*/
-  var username = Meteor.settings.mail.username;
-  var password = Meteor.settings.mail.password;
+  var username = Settings.findOne().mailgun_username;
+  var password = Settings.findOne().mailgun_password;
   var server = "smtp.mailgun.org";
   var port = "587"
 
