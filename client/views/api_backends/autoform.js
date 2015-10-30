@@ -3,10 +3,14 @@ AutoForm.hooks({
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key], button').attr("disabled", "disabled");
+      // Change button text
+      $('#add-apibackends').text('Submitting...');
     },
     endSubmit: function () {
       // Enable form elements after form submission
       $('[data-schema-key], button').removeAttr("disabled");
+      // Change button text to original
+      $('#add-apibackends').text('Submit');
     },
     before: {
       // Replace `formType` with the form `type` attribute to which this hook applies
@@ -49,7 +53,7 @@ AutoForm.hooks({
 
             //Return error asynchronously
             context.result(false);
-         }
+          }
         });
       }
     },
