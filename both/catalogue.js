@@ -12,7 +12,6 @@ TabularTables.ApiTable = new Tabular.Table({
     {data: "name", title: "Name"},
     {data: "backend_host", title: "Backend host"},
     {
-      data: "_id",
       title: "View Details",
       tmpl: Meteor.isClient && Template.viewApiBackendButton
     },
