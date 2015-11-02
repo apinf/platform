@@ -23,23 +23,23 @@ Template.apiBackendRating.rendered = function () {
   var instance = this;
 
   // Get API Backend ID from template instance
-  var apiBackendId = instance.data._id;
+  var apiBackend = instance.data;
 
   instance.autorun(function () {
     // Make sure API Backend Rating subscription is ready
     if (instance.apiRatingSubscription.ready()) {
       // Check if user has previously rated API Backend
       var userRating = ApiBackendRatings.findOne({
-        apiBackendId: apiBackendId,
+        apiBackendId: apiBackend._id,
         userId: Meteor.userId()
       });
 
       // Add the jQuery RateIt widget
-      $("#rating-" + apiBackendId).rateit({
+      $("#rating-" + apiBackend._id).rateit({
         max: 4,
         step: 1,
         resetable: false,
-        value: userRating ? userRating.rating : 0 // use previous rating, if exists
+        value: userRating ? userRating.rating : apiBackend.getRating() // use previous rating, if exists
       });
     }
   });
