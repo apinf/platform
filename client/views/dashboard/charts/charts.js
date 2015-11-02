@@ -375,7 +375,7 @@ Template.chartsLayout.created = function () {
 
 
 Template.chartsLayout.events({
-  'click #downloadUsageLogs': function (event, template) {
+  'click #download-usage-logs': function (event, template) {
 
     // Stores reactive variable value (e.g logs) that is attached to a current template
     var dataToExport = template.dataToExport.get();
