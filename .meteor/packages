@@ -66,8 +66,6 @@ mizzao:sharejs-ace
 raix:ui-dropped-event
 brylie:accounts-admin-ui
 brylie:first-user-admin
-
-
 npm-container
 standard-minifiers
 meteor-base
@@ -86,3 +84,4 @@ check
 useraccounts:iron-routing
 pahans:inline-help
 dandv:jquery-rateit
+zenorocha:clipboard
