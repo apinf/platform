@@ -20,5 +20,7 @@ TabularTables.ApiTable = new Tabular.Table({
      tmpl: Meteor.isClient && Template.apiBackendRating,
      title: "Rating"
     }
-  ]
+  ],
+  responsive: true,
+  autoWidth: false
 });
