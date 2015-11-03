@@ -123,5 +123,32 @@ Template.apiBackendRating.helpers({
 
       return apiBackendRatingsCount;
     }
+  },
+  'userHasRating': function () {
+    // Get reference to template instance
+    var instance = Template.instance();
+
+    if (instance.apiRatingSubscription.ready()) {
+      // Determine if user has rated API Backend
+      // Get API Backend ID from template data context
+      var apiBackendId = instance.data._id;
+
+      // Get current user ID
+      var userId = Meteor.userId();
+
+      // Check if user has previously rated API Backend
+      var previousRating = ApiBackendRatings.findOne({
+        apiBackendId: apiBackendId,
+        userId: userId
+      });
+
+      // If previous rating exists
+      if (previousRating) {
+        // Return user rating class
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 });
