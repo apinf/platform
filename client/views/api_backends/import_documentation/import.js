@@ -17,6 +17,10 @@ Template.importApiDocumentation.events({
 
       var dataObj = JSON.parse(fileData);
 
+      dataObj.host = customProxy;
+
+      dataObj.basePath = customBasePath;
+
     };
 
     // Insert into filesystem collection
