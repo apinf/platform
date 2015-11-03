@@ -106,7 +106,7 @@ Template.apiBackendRating.helpers({
       }
     }
   },
-  'ratingsCount': function () {
+  'ratingCount': function () {
     // Get reference to template instance
     var instance = Template.instance();
 
