@@ -27,9 +27,7 @@ Template.importApiDocumentation.events({
 
       var updatedFile = new File([blobData], file.name, {type: "application/json"});
 
+      ApiDocumentation.insert(updatedFile);
     };
-
-    // Insert into filesystem collection
-    ApiDocumentation.insert(file);
   }
 });
