@@ -12,7 +12,9 @@ Template.importApiDocumentation.events({
     reader.readAsText(file, "UTF-8");
 
     reader.onload = function (event) {
-      
+
+      var fileData = event.target.result;
+
     };
 
     // Insert into filesystem collection
