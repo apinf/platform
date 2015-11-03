@@ -15,6 +15,8 @@ Template.importApiDocumentation.events({
 
       var fileData = event.target.result;
 
+      var dataObj = JSON.parse(fileData);
+
     };
 
     // Insert into filesystem collection
