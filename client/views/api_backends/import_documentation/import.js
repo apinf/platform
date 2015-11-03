@@ -8,6 +8,8 @@ Template.importApiDocumentation.events({
     var file = event.target.files[0];
 
     var reader = new FileReader();
+    
+    reader.readAsText(file, "UTF-8");
 
     // Insert into filesystem collection
     ApiDocumentation.insert(file);
