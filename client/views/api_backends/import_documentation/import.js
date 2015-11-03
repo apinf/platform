@@ -7,6 +7,8 @@ Template.importApiDocumentation.events({
     // Get the submitted file
     var file = event.target.files[0];
 
+    var reader = new FileReader();
+
     // Insert into filesystem collection
     ApiDocumentation.insert(file);
   }
