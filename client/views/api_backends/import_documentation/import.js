@@ -23,6 +23,8 @@ Template.importApiDocumentation.events({
 
       var documentationFile = JSON.stringify(dataObj);
 
+      var blobData = new Blob([documentationFile], {type: "application/json"});
+
     };
 
     // Insert into filesystem collection
