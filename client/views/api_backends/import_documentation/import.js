@@ -21,6 +21,8 @@ Template.importApiDocumentation.events({
 
       dataObj.basePath = customBasePath;
 
+      var documentationFile = JSON.stringify(dataObj);
+
     };
 
     // Insert into filesystem collection
