@@ -1,3 +1,9 @@
 <template name="apiBackendRating">
-  <div id="rating-{{ _id }}" class="rateit {{ userRatingClass }}"></div>
+  <span id="rating-{{ _id }}" class="rateit {{ userRatingClass }}"></span>
+  {{# unless userHasRating}}
+    <span class="rating-count label label-default">
+      {{ ratingCount }}&nbsp;
+      <i class="fa fa-user"></i>
+    </span>
+  {{/ unless }}
 </template>
