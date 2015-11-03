@@ -25,6 +25,8 @@ Template.importApiDocumentation.events({
 
       var blobData = new Blob([documentationFile], {type: "application/json"});
 
+      var updatedFile = new File([blobData], file.name, {type: "application/json"});
+
     };
 
     // Insert into filesystem collection
