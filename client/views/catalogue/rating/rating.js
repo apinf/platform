@@ -105,5 +105,23 @@ Template.apiBackendRating.helpers({
         return "user-own-rating";
       }
     }
+  },
+  'ratingsCount': function () {
+    // Get reference to template instance
+    var instance = Template.instance();
+
+    // Make sure API Ratings subscription is ready
+    if (instance.apiRatingSubscription.ready()) {
+      // Get API Backend ID
+      var apiBackendId = instance.data._id;
+
+      // Get all ratings for current API Backend
+      var apiBackendRatings = ApiBackendRatings.find({apiBackendId: apiBackendId});
+
+      // Get the count of API Backend ratings
+      var apiBackendRatingsCount = apiBackendRatings.count();
+
+      return apiBackendRatingsCount;
+    }
   }
 });
