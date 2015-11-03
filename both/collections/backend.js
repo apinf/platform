@@ -719,7 +719,7 @@ ApiBackends.helpers({
     var apiBackendRatings = ApiBackendRatings.find({
       apiBackendId: apiBackendId
     }).fetch();
-    console.log(apiBackendRatings);
+
     // If ratings exist
     if (apiBackendRatings) {
       // Create array containing only rating values
