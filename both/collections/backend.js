@@ -730,7 +730,6 @@ ApiBackends.helpers({
 
       // Get the average (mean) value for API Backend ratings
       var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
-      console.log(apiBackendRatingsArray);
 
       return apiBackendRatingsAverage;
     }
