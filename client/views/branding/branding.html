@@ -1,0 +1,7 @@
+<template name="branding">
+  {{#if branding}}
+  {{> quickForm collection="Branding" id="branding" type="update" doc=branding}}
+  {{else}}
+  {{> quickForm collection="Branding" id="branding" type="insert"}}
+  {{/if}}
+</template>
