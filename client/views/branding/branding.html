@@ -7,11 +7,15 @@
             <h3 class="panel-title">Project Branding</h3>
           </div>
           <div class="panel-body">
-            {{#if branding}}
-            {{> quickForm collection="Branding" id="branding" type="update" doc=branding}}
-            {{else}}
-            {{> quickForm collection="Branding" id="branding" type="insert"}}
-            {{/if}}
+            {{#autoForm collection="Branding" doc=this id="Branding" type="insert"}}
+            {{> afQuickField name="projectLogo"}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-lg btn-success">Submit</button>
+            </div>
+            {{/autoForm}}
+            {{#each Branding.projectLogo}}
+            <img alt="{{this.name}}" src="{{this.url}}">
+            {{/each}}
           </div>
         </div>
       </div>
