@@ -1,9 +1,15 @@
 Branding = new Mongo.Collection('branding');
 
 Schemas.BrandingSchema = new SimpleSchema({
-  logo: {
+  projectLogo: {
     type: String,
-    optional: true
+    label: 'Project Logo',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'ProjectLogo'
+      }
+    }
   },
   primary_color: {
     type: Number,
