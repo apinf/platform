@@ -1,10 +1,12 @@
 <template name="navbar">
   <header class="main-header">
-    <a href="/" class="logo">
+    <a href="/" class="logo" style="background-color:{{ primary_color }};">
+      {{#with projectLogo}}
+      <img class="logo-lg" alt="{{this.name}}" src="{{this.url}}" width="150px;">
       <span class="logo-mini"><b>NF</b></span>
-      <span class="logo-lg"><b>API</b>NF</span>
+      {{/with}}
     </a>
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top" role="navigation" style="background-color:{{ primary_color }};">
       {{#if User}}
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
