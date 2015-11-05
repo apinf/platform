@@ -8,14 +8,29 @@
           </div>
           <div class="panel-body">
             {{#if branding}}
-            {{> quickForm collection="Branding" id="branding" type="update" doc=branding}}
-            {{else}}
-            {{> quickForm collection="Branding" id="branding" type="insert"}}
-            {{/if}}
+            {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
+            {{> afQuickField name='projectLogo'}}
 
             {{#with projectLogo}}
             <img alt="{{this.name}}" src="{{this.url}}">
             {{/with}}
+
+            {{> afQuickField name='primary_color'}}
+            {{> afQuickField name='second_color'}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            {{/autoForm}}
+            {{else}}
+            {{#autoForm collection="Branding" id="branding" type="insert"}}
+            {{> afQuickField name='projectLogo'}}
+            {{> afQuickField name='primary_color'}}
+            {{> afQuickField name='second_color'}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            {{/autoForm}}
+            {{/if}}
           </div>
         </div>
       </div>
