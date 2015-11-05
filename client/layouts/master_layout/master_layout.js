@@ -1,6 +1,10 @@
 Template.masterLayout.helpers({
+  branding: function() {
+    return  Branding.find();
+  },
   brandingOptions: function() {
-    return Branding.find();
+    var brandingCount  = Branding.find().count();
+    return brandingCount > 0;
   }
 })
 
