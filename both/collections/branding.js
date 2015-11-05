@@ -4,6 +4,7 @@ Schemas.BrandingSchema = new SimpleSchema({
   projectLogo: {
     type: String,
     label: 'Project Logo',
+    optional: true,
     autoform: {
       afFieldInput: {
         type: 'fileUpload',
@@ -12,11 +13,11 @@ Schemas.BrandingSchema = new SimpleSchema({
     }
   },
   primary_color: {
-    type: Number,
+    type: String,
     optional: true
   },
   second_color: {
-    type: Number,
+    type: String,
     optional: true
   }
 });
