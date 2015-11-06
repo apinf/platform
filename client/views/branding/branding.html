@@ -21,12 +21,11 @@
             {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
             {{> afQuickField name='projectLogo'}}
 
-            {{#with projectLogo}}
-            <img alt="{{this.name}}" src="{{this.url}}">
-            {{/with}}
+            {{#if projectLogo}}
+            <img alt="{{projectLogo.name}}" src="{{projectLogo.url}}" width="150px">
+            {{/if}}
 
-            {{> afQuickField name='primary_color'}}
-            {{> afQuickField name='second_color'}}
+            {{> afQuickField name='color_theme' options="allowed"}}
             <div id="form-buttons">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
@@ -34,10 +33,9 @@
             {{else}}
             {{#autoForm collection="Branding" id="branding" type="insert"}}
             {{> afQuickField name='projectLogo'}}
-            {{> afQuickField name='primary_color'}}
-            {{> afQuickField name='second_color'}}
+            {{> afQuickField name='color_theme' options="allowed"}}
             <div id="form-buttons">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Save</button>
             </div>
             {{/autoForm}}
             {{/if}}
