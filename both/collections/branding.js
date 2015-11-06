@@ -12,13 +12,15 @@ Schemas.BrandingSchema = new SimpleSchema({
       }
     }
   },
-  primary_color: {
+  color_theme: {
     type: String,
-    optional: true
-  },
-  second_color: {
-    type: String,
-    optional: true
+    optional: true,
+    allowedValues: [
+      'red',
+      'blue',
+      'green'
+    ],
+    label: 'Choose you color theme:'
   }
 });
 
