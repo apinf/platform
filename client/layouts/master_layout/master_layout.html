@@ -1,5 +1,19 @@
 <template name="masterLayout">
   <div class="master-layout">
+    <!--
+{{#if branding}}
+{{#AdminLTE skin="{{branding.color_theme}}"}}
+{{> navbar}}
+{{> sidebar}}
+<div class="content-wrapper">
+<section class="content">
+{{> yield }}
+</section>
+{{> sAlert}}
+</div>
+{{/AdminLTE}}
+{{else}}
+-->
     {{#AdminLTE skin="blue-light"}}
     {{> navbar}}
     {{> sidebar}}
@@ -10,6 +24,7 @@
       {{> sAlert}}
     </div>
     {{/AdminLTE}}
+    <!--    {{/if}}-->
     {{> autoformModals}}
   </div>
 </template>
