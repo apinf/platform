@@ -1,15 +1,15 @@
 <template name="navbar">
   <header class="main-header">
-    <a href="/" class="logo" style="background-color:{{ primary_color }};">
+    <a href="/" class="logo">
       {{#if projectLogo}}
-      <img class="logo-lg" alt="{{projectLogo.name}}" src="{{projectLogo.url}}" width="150px;">
+      <img class="logo-lg" alt="{{projectLogo.name}}" src="{{projectLogo.url}}" style="width:120px;margin-top:0.3em;">
       <span class="logo-mini"><b>NF</b></span>
       {{else}}
       <span class="logo-lg">API<b>NF</b></span>
       <span class="logo-mini"><b>NF</b></span>
       {{/if}}
     </a>
-    <nav class="navbar navbar-static-top" role="navigation" style="background-color:{{ primary_color }};">
+    <nav class="navbar navbar-static-top" role="navigation">
       {{#if User}}
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -30,6 +30,7 @@
             <ul class="dropdown-menu">
               <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
               <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
+              <li><a href="{{pathFor 'branding'}}">Branding</a></li>
               <li class="divider"></li>
               <li><a href="/sign-out">{{_ "signout"}}</a></li>
             </ul>
