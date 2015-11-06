@@ -1,14 +1,21 @@
 Template.masterLayout.helpers({
   branding: function() {
-    return  Branding.find();
+    var theme = Branding.find();
+    if (theme) {
+      return theme
+    }
   },
-  brandingOptions: function() {
-    var brandingCount  = Branding.find().count();
-    return brandingCount > 0;
+  projectLogo: function () {
+    var lastUploadedLogo = ProjectLogo.find({}, {sort: {uploadedAt: -1}}).fetch()[0];
+    if (lastUploadedLogo) {
+      return lastUploadedLogo
+    }
   }
-})
+});
 
 Template.masterLayout.created = function () {
   // Subscription to branding collection
   this.subscribe('branding');
+  // Subscription to projectLogo collection
+  this.subscribe('projectLogo');
 };
