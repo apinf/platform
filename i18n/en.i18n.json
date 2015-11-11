@@ -152,6 +152,8 @@
   "feedback-feedbackForm-description": "We welcome problem reports, feature ideas and general comments.",
 
   /*Charts*/
+  /*Error messages*/
+  "esData-notFound": "You have no API usage statistics. Please make some calls with your API Key."
   /*Bar chart*/
   "overviewChart-Title": "Overview chart",
   "moveChart-Title": "Chart",
