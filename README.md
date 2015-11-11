@@ -42,11 +42,10 @@ Your `settings.json` file should have the following structure:
   "apinf": {
     "host": "https://example.com/"
   },
-  "api_umbrella": {
-    "host": "https://example.com/"
-    "api_key": "xxx",
-    "auth_token": "xxx",
-    "base_url": "https://example.com/api-umbrella/"
+  "apiUmbrella": {
+    "apiKey": "xxx",
+    "authToken": "xxx",
+    "baseUrl": "https://example.com/api-umbrella/"
   },
   "mail": {
     "username": "xxx",
