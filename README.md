@@ -45,7 +45,8 @@ Your `settings.json` file should have the following structure:
   "apiUmbrella": {
     "apiKey": "xxx",
     "authToken": "xxx",
-    "baseUrl": "https://example.com/api-umbrella/"
+    "baseUrl": "https://example.com/api-umbrella/",
+    "host": "https://example.com"
   },
   "mail": {
     "username": "xxx",
