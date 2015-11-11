@@ -87,8 +87,7 @@ Template.chartsLayout.created = function () {
       if (err) {
 
         // removing loading state once loaded
-        $('#loadingState').html("Loaded");
-        alert("Data is not found!");
+        $('#loadingState').html("Data is not found! Please check your filtering options.");
 
       } else {
 
