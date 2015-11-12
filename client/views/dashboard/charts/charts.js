@@ -93,7 +93,7 @@ Template.chartsLayout.created = function () {
       if (err || !response.isOk) {
 
         // Gets custom error message from i18n
-        var errorMessage = TAPi18n.__("filterData-Title");
+        var errorMessage = TAPi18n.__("esData-notFound");
 
         // removing loading state once loaded
         $('#loadingState').html(errorMessage);
