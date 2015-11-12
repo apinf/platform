@@ -3,6 +3,8 @@ Meteor.methods({
 
     // initialise variables
     var loggedInUser, apiKey, query, searchResults;
+
+    // default value for search status
     var isOk = false;
 
     // get user object
@@ -33,6 +35,7 @@ Meteor.methods({
 
     }
 
+    // New instance of ElasticRest class with query as constructor
     var newSearch = new ElasticRest(
       data.index,
       data.type,
@@ -41,10 +44,17 @@ Meteor.methods({
       data.fields
     );
 
+    // Try catch - if search fails, returns user - friendly status
     try{
+
       searchResults = newSearch.doSearch();
+
+      // Changes "isOk" state to true if "try{}" didn't break before
       isOk = true;
+
     }catch(err){
+
+      // Providing empty object to be returned within "isOk:false" for consistency
       searchResults = {};
     }
 
