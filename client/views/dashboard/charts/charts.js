@@ -83,6 +83,12 @@ Template.chartsLayout.created = function () {
     // calling method that returns data from elastic search
     Meteor.call("getChartData", input, function (err, response) {
 
+      // response object:
+      // {
+      //    isOk: Boolean,
+      //    searchResults: Object
+      // }
+
       // error checking
       if (err || !response.isOk) {
 
