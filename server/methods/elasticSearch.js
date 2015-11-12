@@ -4,9 +4,6 @@ Meteor.methods({
     // initialise variables
     var loggedInUser, apiKey, query, searchResults;
 
-    // default value for search status
-    var isOk = false;
-
     // get user object
     loggedInUser = Meteor.user();
 
@@ -44,23 +41,17 @@ Meteor.methods({
       data.fields
     );
 
-    // Try catch - if search fails, returns user - friendly status
+    // Try catch - if search fails, returns user - friendly error
     try{
 
       searchResults = newSearch.doSearch();
 
-      // Changes "isOk" state to true if "try{}" didn't break before
-      isOk = true;
-
     }catch(err){
 
       // Providing empty object to be returned within "isOk:false" for consistency
-      searchResults = {};
+      throw new Meteor.Error(500, 'Analytics data is not found.');
     }
 
-    return {
-      isOk: isOk,
-      searchResults: searchResults
-    };
+    return searchResults;
   }
 });
