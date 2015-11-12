@@ -81,18 +81,21 @@ Template.chartsLayout.created = function () {
   instance.getDashboardData = function (input) {
 
     // calling method that returns data from elastic search
-    Meteor.call("getChartData", input, function (err, data) {
+    Meteor.call("getChartData", input, function (err, response) {
 
       // error checking
-      if (err) {
+      if (err || !response.isOk) {
+
+        // Gets custom error message from i18n
+        var errorMessage = TAPi18n.__("filterData-Title");
 
         // removing loading state once loaded
-        $('#loadingState').html("Data is not found! Please check your filtering options.");
+        $('#loadingState').html(errorMessage);
 
       } else {
 
         // gets to level in object with needed data
-        var dashboardData = data.hits.hits;
+        var dashboardData = response.searchResults.hits.hits;
 
         // parse the returned data for DC
         var parsedChartData = instance.parseChartData(dashboardData);
