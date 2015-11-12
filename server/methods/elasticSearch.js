@@ -2,9 +2,8 @@ Meteor.methods({
   "getChartData": function (data) {
 
     // initialise variables
-    var loggedInUser;
-    var apiKey;
-    var query;
+    var loggedInUser, apiKey, query, searchResults;
+    var isOk = false;
 
     // get user object
     loggedInUser = Meteor.user();
@@ -31,7 +30,7 @@ Meteor.methods({
           "api_key": apiKey
         }
       }
-      
+
     }
 
     var newSearch = new ElasticRest(
@@ -42,6 +41,16 @@ Meteor.methods({
       data.fields
     );
 
-    return newSearch.doSearch();
+    try{
+      searchResults = newSearch.doSearch();
+      isOk = true;
+    }catch(err){
+      searchResults = {};
+    }
+
+    return {
+      isOk: isOk,
+      searchResults: searchResults
+    };
   }
 });
