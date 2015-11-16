@@ -48,7 +48,7 @@ Meteor.methods({
 
     }catch(err){
 
-      // Providing empty object to be returned within "isOk:false" for consistency
+      // Throw a 500 error explaining that the data was not found
       throw new Meteor.Error(500, 'Analytics data is not found.');
     }
 
