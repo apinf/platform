@@ -69,6 +69,8 @@ Template.chartsLayout.created = function () {
   // assigning current template instance to a variable
   var instance = this;
 
+  instance.dataToExport = new ReactiveVar("No data");
+
   // default value for reactive variable with "String" type
   instance.mapData = new ReactiveVar("No data");
 
@@ -308,6 +310,8 @@ Template.chartsLayout.created = function () {
       return dataSet;
     }
 
+    instance.dataToExport.set(setUpDataTable());
+
     // initial function call that refreshes table
     refreshTable();
 
@@ -368,3 +372,22 @@ Template.chartsLayout.created = function () {
   };
 
 };
+
+
+Template.chartsLayout.events({
+  'click #download-usage-logs': function (event, template) {
+
+    // Stores reactive variable value (e.g logs) that is attached to a current template
+    var dataToExport = template.dataToExport.get();
+
+    // Uses Papa Parse package to parse JSON to CSV
+    var csv = Papa.unparse(dataToExport);
+
+    // Creates file object with content type of JSON
+    var file = new Blob([csv], {type: "text/plain;charset=utf-8"});
+
+    // Forces "save As" function allow user download file
+    saveAs(file, moment().format("MMM-YYYY") + "-logs.csv");
+
+  }
+});

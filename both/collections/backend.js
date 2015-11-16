@@ -694,3 +694,44 @@ SimpleSchema.messages({
   // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match"
 });
+
+ApiBackends.helpers({
+  'getRating': function () {
+    // Get API Backend ID
+    apiBackendId = this._id;
+
+    // Check if user is logged in
+    if (Meteor.userId()) {
+      // Check if user has rated API Backend
+      var userRating = ApiBackendRatings.findOne({
+        userId: Meteor.userId(),
+        apiBackendId: apiBackendId
+      });
+
+      if (userRating) {
+        return userRating.rating;
+      }
+    }
+
+    // Otherwise, get average rating
+
+    // Fetch all ratings
+    var apiBackendRatings = ApiBackendRatings.find({
+      apiBackendId: apiBackendId
+    }).fetch();
+
+    // If ratings exist
+    if (apiBackendRatings) {
+      // Create array containing only rating values
+      var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
+        // get only the rating value; omit User ID and API Backend ID fields
+        return rating.rating;
+      });
+
+      // Get the average (mean) value for API Backend ratings
+      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+
+      return apiBackendRatingsAverage;
+    }
+  }
+});
