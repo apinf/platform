@@ -1,4 +1,17 @@
-Template.apiBackends.rendered = function () {
+Template.apiBackendForm.helpers({
+  'formType': function () {
+    //check for router id parametr
+    var router = Router.current()
+    if (router.params._id) {
+      return 'insert';
+    } else {
+      return 'update';
+    }
+  }
+});
+
+
+Template.apiBackendForm.rendered = function () {
   // Hides blocks on template load
   $('#global-request-block, #sub-url-block, #advanced-block, #advanced-rewriting-block, #documentation-block').collapse({
     hide: true
@@ -12,3 +25,4 @@ Template.apiBackends.rendered = function () {
     $(this).prev().find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-right");
   });
 }
+

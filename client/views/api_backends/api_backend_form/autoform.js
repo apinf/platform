@@ -1,5 +1,5 @@
 AutoForm.hooks({
-  apiBackends: {
+  apiBackendForm: {
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key], button').attr("disabled", "disabled");
