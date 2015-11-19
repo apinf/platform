@@ -12,13 +12,3 @@ Template.apiBackends.rendered = function () {
     $(this).prev().find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-right");
   });
 }
-
-UI.registerHelper("formType", function(){
-
-  if(_.isEmpty(this)) {
-    return 'insert'
-  } else {
-    return 'update';
-  }
-
-});
