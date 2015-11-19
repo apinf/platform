@@ -1,7 +1,7 @@
 <template name="editApiBackend">
   <div class="api-backends-content">
     <h1>Edit API</h1>
-    {{#autoForm collection="ApiBackends" doc=apiBackend id="apiBackends" type="update"}}
+    {{#autoForm collection="ApiBackends" doc=apiBackend id="apiBackends" type=formType}}
     {{> afQuickField name='name'}}
     <span class="help-block">API's name</span>
     {{> afQuickField name='documentation_link'}}
