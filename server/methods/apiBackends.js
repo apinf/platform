@@ -12,7 +12,11 @@ Meteor.methods({
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingApiBackend === undefined) {
-          ApiBackends.insert(apiBackend);
+          try {
+            ApiBackends.insert(apiBackend);
+          } catch (error) {
+            console.error("Error inserting apiBackend(" + apiBackend.id + ") : " + error);
+          }
         };
       });
     };
