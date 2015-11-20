@@ -22,8 +22,12 @@ Template.importApiDocumentation.events({
       // Parses file data to JSON object, to be able to modify it
       var dataObj = JSON.parse(fileData);
 
-      dataObj.host = customProxy;
+      // Saving initial values of `host` and `basePath`
+      dataObj.initial_host = dataObj.host;
+      dataObj.initial_basePath = dataObj.basePath;
 
+      // Updating values
+      dataObj.host = customProxy;
       dataObj.basePath = customBasePath;
 
       var documentationFile = JSON.stringify(dataObj);
