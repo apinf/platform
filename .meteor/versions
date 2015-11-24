@@ -151,6 +151,7 @@ service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
 showdown@1.0.5
+simple:json-routes@1.0.4
 softwarerero:accounts-t9n@1.1.4
 spacebars@1.0.7
 spacebars-compiler@1.0.7
