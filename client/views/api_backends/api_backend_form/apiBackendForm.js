@@ -13,7 +13,7 @@ Template.apiBackendForm.helpers({
 
 Template.apiBackendForm.created = function () {
   // Subscription to apiBackends collection
-  this.subscribe('apiBackendForm');
+  this.subscribe('apiBackend');
 };
 
 
