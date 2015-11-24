@@ -1,7 +1,8 @@
 Template.apiBackendForm.helpers({
   'formType': function () {
-    //check for router id parametr
+    // check for router id parameter
     var router = Router.current()
+    // check for form type
     if (router.params._id) {
       return 'insert';
     } else {
@@ -9,6 +10,11 @@ Template.apiBackendForm.helpers({
     }
   }
 });
+
+Template.apiBackendForm.created = function () {
+  // Subscription to apiBackends collection
+  this.subscribe('apiBackendForm');
+};
 
 
 Template.apiBackendForm.rendered = function () {
