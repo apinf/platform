@@ -1,5 +1,4 @@
 {
-
   /*Config*/
   "configName": "Apinf",
   "configTitle": "Build custom APIs. Fast.",
@@ -28,6 +27,7 @@
   "home-MainTitle": "APINF - API Management Platform",
   "home-SecondaryTitle": "Building a bridge between API owners and users.",
   "Dashboard": "Go to dashboard",
+
   /*Body*/
   "feature-Section-Heading1": "Are you an API user?",
   "feature-Title1": "Discover APIs",
@@ -141,10 +141,24 @@
   /*Catalogue*/
   "catalogue-Title": "Available APIs",
 
+  /*Feedback*/
+  "feedback-submitted-by": "submitted by",
+  "feedback-main-title": "Feedback and report messages",
+  "feedback-view-button": "View",
+  "feedback-no-feedback": "No feedback, yet.",
+  "feedback-remove-button": "Remove",
+  "feedback-feedbackForm-button": "Send feedback",
+  "feedback-feedbackForm-title": "Send feedback or report a problem",
+  "feedback-feedbackForm-description": "We welcome problem reports, feature ideas and general comments.",
+
   /*Charts*/
+  /*Error messages*/
+  "esData-notFound": "There are no API usage statistics available.",
+
   /*Bar chart*/
   "overviewChart-Title": "Overview chart",
   "moveChart-Title": "Chart",
+
   /*Filter*/
   "filterData-Title": "Filter",
   "filterData-Month": "Month:",
@@ -165,8 +179,10 @@
   "filterData-SelectedOf": "selected out of",
   "filterData-Records": "records",
   "filterData-Reset": "Reset All",
+
   /*Map*/
   "map-Title": "Map",
+
   /*Data Table*/
   "dataTable-Title": "Table",
   "dataTable-TimeStamp": "Time stamp",
@@ -191,7 +207,4 @@
   "notFound-Message-Part1": "We could not find the page you were looking for.",
   "notFound-Message-Part2": "Meanwhile, you may",
   "notFound-Message-Part3": "return to a previous page"
-
-
-
 }

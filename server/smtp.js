@@ -1,4 +1,4 @@
-+Meteor.startup(function() {
+Meteor.startup(function() {
   /*extend settings.json with username and password:
   "mail": {
     "username" : "xxxx",

@@ -69,6 +69,8 @@ Template.chartsLayout.created = function () {
   // assigning current template instance to a variable
   var instance = this;
 
+  instance.dataToExport = new ReactiveVar("No data");
+
   // default value for reactive variable with "String" type
   instance.mapData = new ReactiveVar("No data");
 
@@ -79,19 +81,21 @@ Template.chartsLayout.created = function () {
   instance.getDashboardData = function (input) {
 
     // calling method that returns data from elastic search
-    Meteor.call("getChartData", input, function (err, data) {
+    Meteor.call("getChartData", input, function (err, response) {
 
       // error checking
       if (err) {
 
+        // Gets custom error message from i18n
+        var errorMessage = TAPi18n.__("esData-notFound");
+
         // removing loading state once loaded
-        $('#loadingState').html("Loaded");
-        alert("Data is not found!");
+        $('#loadingState').html(errorMessage);
 
       } else {
 
         // gets to level in object with needed data
-        var dashboardData = data.hits.hits;
+        var dashboardData = response.hits.hits;
 
         // parse the returned data for DC
         var parsedChartData = instance.parseChartData(dashboardData);
@@ -308,6 +312,8 @@ Template.chartsLayout.created = function () {
       return dataSet;
     }
 
+    instance.dataToExport.set(setUpDataTable());
+
     // initial function call that refreshes table
     refreshTable();
 
@@ -368,3 +374,22 @@ Template.chartsLayout.created = function () {
   };
 
 };
+
+
+Template.chartsLayout.events({
+  'click #download-usage-logs': function (event, template) {
+
+    // Stores reactive variable value (e.g logs) that is attached to a current template
+    var dataToExport = template.dataToExport.get();
+
+    // Uses Papa Parse package to parse JSON to CSV
+    var csv = Papa.unparse(dataToExport);
+
+    // Creates file object with content type of JSON
+    var file = new Blob([csv], {type: "text/plain;charset=utf-8"});
+
+    // Forces "save As" function allow user download file
+    saveAs(file, moment().format("MMM-YYYY") + "-logs.csv");
+
+  }
+});

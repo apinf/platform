@@ -2,9 +2,7 @@ Meteor.methods({
   "getChartData": function (data) {
 
     // initialise variables
-    var loggedInUser;
-    var apiKey;
-    var query;
+    var loggedInUser, apiKey, query, searchResults;
 
     // get user object
     loggedInUser = Meteor.user();
@@ -31,9 +29,10 @@ Meteor.methods({
           "api_key": apiKey
         }
       }
-      
+
     }
 
+    // New instance of ElasticRest class with query as constructor
     var newSearch = new ElasticRest(
       data.index,
       data.type,
@@ -42,6 +41,17 @@ Meteor.methods({
       data.fields
     );
 
-    return newSearch.doSearch();
+    // Try catch - if search fails, returns user - friendly error
+    try{
+
+      searchResults = newSearch.doSearch();
+
+    }catch(err){
+
+      // Throw a 500 error explaining that the data was not found
+      throw new Meteor.Error(500, 'Analytics data is not found.');
+    }
+
+    return searchResults;
   }
 });
