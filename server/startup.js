@@ -1,4 +1,14 @@
 Meteor.startup(function () {
+  // Create config object for API Umbrella Web interface
+  var config = {
+    baseUrl: Meteor.settings.apiUmbrella.baseUrl,
+    apiKey: Meteor.settings.apiUmbrella.apiKey,
+    authToken: Meteor.settings.apiUmbrella.authToken
+  };
+
+  // Create API Umbrella Web object for REST calls
+  apiUmbrellaWeb = new ApiUmbrellaWeb(config);
+
   // Check if API Umbrella settings are available
   SyncedCron.add({
     name: 'Sync API Umbrella Users and API Backends',

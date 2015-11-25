@@ -1,6 +1,6 @@
 Meteor.methods({
   "syncApiUmbrellaUsers": function () {
-    if (Meteor.settings.api_umbrella) {
+    if (Meteor.settings.apiUmbrella) {
       // Get users from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiUsers.getUsers();
 

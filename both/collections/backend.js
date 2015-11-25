@@ -1,8 +1,24 @@
 ApiBackends = new Mongo.Collection('apiBackends');
 
 // RegEx constants
-SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{2,5}$/);
+SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{1,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
+
+Schemas.Settings = new SimpleSchema({
+  default_response_headers_string: {
+    type: String,
+    optional: true,
+    label: 'Default Response Headers',
+    defaultValue: 'Access-Control-Allow-Origin: *',
+  },
+  override_response_headers_string: {
+    type: String,
+    optional: true,
+    label: 'Override Response Headers',
+    defaultValue: 'Access-Control-Allow-Origin: *',
+  },
+
+});
 
 Schemas.ApiBackendsSchema = new SimpleSchema({
   id: {
@@ -213,7 +229,6 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
       'Unlimited requests'
     ],
   },
-
   custom_rate_limits: {
     type: [Object],
     optional: true
@@ -248,6 +263,11 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   "custom_rate_limits.$.response_headers": {
     type: Boolean,
     optional: true
+  },
+  // Settings, check Schema definition top of file!
+  settings: {
+    type: Schemas.Settings,
+    optional: true,
   },
   anonymous_rate_limit_behavior: {
     type: String,
@@ -673,4 +693,45 @@ SimpleSchema.messages({
   ],
   // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match"
+});
+
+ApiBackends.helpers({
+  'getRating': function () {
+    // Get API Backend ID
+    apiBackendId = this._id;
+
+    // Check if user is logged in
+    if (Meteor.userId()) {
+      // Check if user has rated API Backend
+      var userRating = ApiBackendRatings.findOne({
+        userId: Meteor.userId(),
+        apiBackendId: apiBackendId
+      });
+
+      if (userRating) {
+        return userRating.rating;
+      }
+    }
+
+    // Otherwise, get average rating
+
+    // Fetch all ratings
+    var apiBackendRatings = ApiBackendRatings.find({
+      apiBackendId: apiBackendId
+    }).fetch();
+
+    // If ratings exist
+    if (apiBackendRatings) {
+      // Create array containing only rating values
+      var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
+        // get only the rating value; omit User ID and API Backend ID fields
+        return rating.rating;
+      });
+
+      // Get the average (mean) value for API Backend ratings
+      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+
+      return apiBackendRatingsAverage;
+    }
+  }
 });
