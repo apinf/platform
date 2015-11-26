@@ -27,9 +27,7 @@ Template.importApiDocumentation.events({
 
             // Gets file contents
             var importedFile = event.target.result;
-
-            console.log(importedFile);
-
+            
             // Checks for correct JSON or YAML syntax in file contents
             if (JSON.parse(importedFile) || jsyaml.safeLoad(importedFile)) {
 
