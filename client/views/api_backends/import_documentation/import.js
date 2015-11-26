@@ -27,11 +27,23 @@ Template.importApiDocumentation.events({
             // Gets file contents
             var importedFile = event.target.result;
 
+            console.log(importedFile);
+
             // Checks for correct JSON or YAML syntax in file contents
             if (JSON.parse(importedFile) || jsyaml.safeLoad(importedFile)) {
 
+              var doc = {};
+
+              if (instance.endsWith(fileName, ['json'])){
+                doc = JSON.parse(importedFile);
+              }
+
+              if (instance.endsWith(fileName, ['yaml', 'yml'])){
+                doc = jsyaml.load(importedFile);
+              }
+
               // Insert fine contents to a colletion
-              ApiDocs.insert(importedFile);
+              ApiDocs.insert(doc);
 
             } else {
 
