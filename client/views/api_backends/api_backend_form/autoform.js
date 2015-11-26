@@ -57,7 +57,10 @@ AutoForm.hooks({
         });
       }
     },
-    onSuccess: function (formType, apiBackendId) {
+    onSuccess: function (formType) {
+      // Get API Backend ID from form
+      var apiBackendId = this.docId;
+      
       //Redirect to the just created API Backend page
       Router.go('viewApiBackend', {_id: apiBackendId});
     }
