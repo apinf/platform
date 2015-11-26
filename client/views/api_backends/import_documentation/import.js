@@ -36,9 +36,7 @@ Template.importApiDocumentation.events({
 
               if (instance.endsWith(fileName, ['json'])){
                 doc = JSON.parse(importedFile);
-              }
-
-              if (instance.endsWith(fileName, ['yaml', 'yml'])){
+              } else if (instance.endsWith(fileName, ['yaml', 'yml'])){
                 doc = jsyaml.load(importedFile);
               }
 
