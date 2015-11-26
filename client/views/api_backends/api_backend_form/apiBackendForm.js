@@ -1,19 +1,22 @@
 Template.apiBackendForm.helpers({
   'formType': function () {
-    // check for router id parameter
-    var router = Router.current()
-    // check for form type
+    // Get reference to current Router
+    var router = Router.current();
+
+    // Check for '_id' parameter in route
     if (router.params._id) {
-      return 'insert';
-    } else {
+      // Updating existing API Backend
       return 'update';
+    } else {
+      // Editing new API Backend
+      return 'insert';
     }
   }
 });
 
 Template.apiBackendForm.created = function () {
-  // Subscription to apiBackends collection
-  this.subscribe('apiBackend');
+    // Subscription to apiBackends collection
+    this.subscribe('apiBackend');
 };
 
 
@@ -31,4 +34,3 @@ Template.apiBackendForm.rendered = function () {
     $(this).prev().find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-right");
   });
 }
-
