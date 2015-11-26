@@ -9,6 +9,7 @@ Template.importApiDocumentation.events({
 
       if (file) {
 
+        // Get file's name
         var fileName = file.name;
 
         // Allowed file extensions for API documentation file
@@ -34,9 +35,14 @@ Template.importApiDocumentation.events({
 
               var doc = {};
 
+              // Checks file's extension for its secure conversion to JSON object
               if (instance.endsWith(fileName, ['json'])){
+
+                // Converts JSON string to JSON object
                 doc = JSON.parse(importedFile);
               } else if (instance.endsWith(fileName, ['yaml', 'yml'])){
+
+                // Converts YAML string/object to JSON object
                 doc = jsyaml.load(importedFile);
               }
 
