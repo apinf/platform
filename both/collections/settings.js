@@ -4,7 +4,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   apinf_host: {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Apinf host",
+    label: "Host",
     optional: false,
     autoform: {
       placeholder: 'https://example.com/'
@@ -13,7 +13,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   api_umbrella_host: {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Api Umbrella host",
+    label: "Host",
     optional: false,
     autoform: {
       placeholder: 'https://example.com/'
@@ -21,7 +21,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   api_umbrella_api_key: {
     type: String,
-    label: "Api Umbrella api key",
+    label: "API Key",
     optional: false,
     autoform: {
       placeholder: 'xxx'
@@ -29,7 +29,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   api_umbrella_auth_token: {
     type: String,
-    label: "Api Umbrella auth token",
+    label: "Auth Token",
     optional: false,
     autoform: {
       placeholder: 'xxx'
@@ -38,7 +38,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   api_umbrella_base_url: {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Api Umbrella base url",
+    label: "Base URL",
     optional: false,
     autoform: {
       placeholder: 'https://example.com/api-umbrella/'
@@ -47,7 +47,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   elasticsearch_host: {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Elastic search host",
+    label: "Host",
     optional: false,
     autoform: {
       placeholder: 'http://example.com:14002/'
@@ -55,15 +55,15 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   mailgun_username: {
     type: String,
-    label: "Mailgun username",
+    label: "Mailgun Username",
     optional: false,
     autoform: {
-      placeholder: 'Mailgun username'
+      placeholder: 'Mailgun Username'
     }
   },
   mailgun_password: {
     type: String,
-    label: "Mailgun password",
+    label: "Mailgun Password",
     optional: false,
     autoform: {
       placeholder: 'xxx'
@@ -72,7 +72,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   contactForm_toEmail: {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: "Contact form e-mail address",
+    label: "Contact Form E-mail Address",
     optional: false,
     autoform: {
       placeholder: 'mail@example.com'
@@ -80,7 +80,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   githubConfiguration_clientId: {
     type: String,
-    label: "Github client id",
+    label: "Client ID",
     optional: false,
     autoform: {
       placeholder: 'xxx'
@@ -88,7 +88,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   githubConfiguration_secret: {
     type: String,
-    label: "Github secret",
+    label: "Secret",
     optional: false,
     autoform: {
       placeholder: 'xxx'
