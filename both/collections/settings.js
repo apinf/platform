@@ -14,7 +14,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'https://example.com/'
     }
@@ -73,7 +73,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: "Contact Form E-mail Address",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'mail@example.com'
     }
@@ -81,7 +81,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   githubConfiguration_clientId: {
     type: String,
     label: "Client ID",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'xxx'
     }
@@ -89,7 +89,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   githubConfiguration_secret: {
     type: String,
     label: "Secret",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'xxx'
     }
