@@ -7,7 +7,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Apinf host",
     optional: false,
     autoform: {
-      placeholder: 'Apinf host'
+      placeholder: 'https://example.com/'
     }
   },
   api_umbrella_host: {
@@ -16,7 +16,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Api Umbrella host",
     optional: false,
     autoform: {
-      placeholder: 'Api Umbrella host'
+      placeholder: 'https://example.com/'
     }
   },
   api_umbrella_api_key: {
@@ -24,7 +24,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Api Umbrella api key",
     optional: false,
     autoform: {
-      placeholder: 'Api Umbrella api key'
+      placeholder: 'xxx'
     }
   },
   api_umbrella_auth_token: {
@@ -32,7 +32,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Api Umbrella auth token",
     optional: false,
     autoform: {
-      placeholder: 'Api Umbrella auth token'
+      placeholder: 'xxx'
     }
   },
   api_umbrella_base_url: {
@@ -41,7 +41,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Api Umbrella base url",
     optional: false,
     autoform: {
-      placeholder: 'Api Umbrella base url'
+      placeholder: 'https://example.com/api-umbrella/'
     }
   },
   elasticsearch_host: {
@@ -50,7 +50,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Elastic search host",
     optional: false,
     autoform: {
-      placeholder: 'Elastic search host'
+      placeholder: 'http://example.com:14002/'
     }
   },
   mailgun_username: {
@@ -66,7 +66,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Mailgun password",
     optional: false,
     autoform: {
-      placeholder: 'Mailgun password'
+      placeholder: 'xxx'
     }
   },
   contactForm_toEmail: {
@@ -75,7 +75,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Contact form e-mail address",
     optional: false,
     autoform: {
-      placeholder: 'Contact form e-mail address'
+      placeholder: 'mail@example.com'
     }
   },
   githubConfiguration_clientId: {
@@ -83,7 +83,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Github client id",
     optional: false,
     autoform: {
-      placeholder: 'Github client id'
+      placeholder: 'xxx'
     }
   },
   githubConfiguration_secret: {
@@ -91,7 +91,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Github secret",
     optional: false,
     autoform: {
-      placeholder: 'Github secret'
+      placeholder: 'xxx'
     }
   }
 });
