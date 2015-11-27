@@ -4,7 +4,16 @@ Template.settings.created = function () {
 };
 
 Template.settings.helpers({
-  settings: function () {
+  formType: function () {
+    if ( Settings.findOne() ) {
+      // Updating existing Settings
+      return 'update';
+    } else {
+      // Editing Settings
+      return 'insert';
+    }
+  },
+  editDoc: function(){
     return Settings.findOne();
   }
 });
