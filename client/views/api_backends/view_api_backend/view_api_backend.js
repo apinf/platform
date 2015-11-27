@@ -53,7 +53,6 @@ Template.viewApiBackend.created = function() {
 
         // updates layout with success status
         $('#apiState').addClass('alert-success').html("API is operating normally.");
-        console.log(status.responseContext)
 
       }else{
 
@@ -115,8 +114,7 @@ Template.viewApiBackend.helpers({
     // Get API Backend protocol
     var apiBackendProtocol = this.apiBackend.backend_protocol;
 
-    console.log(apiBackendProtocol);
-
+    // Change the class to 'warning' if protocol is HTTP; 'success' if HTTPS
     if (apiBackendProtocol === "http") {
       return "warning";
     } else if (apiBackendProtocol === "https") {
