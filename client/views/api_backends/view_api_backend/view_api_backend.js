@@ -52,7 +52,9 @@ Template.viewApiBackend.created = function() {
       if (status.isUp) {
 
         // updates layout with success status
-        $('#apiState').addClass('alert-success').html("API is operating normally.");
+        $('#apiState')
+          .addClass('alert-success')
+          .html("API is operating normally.");
 
       }else{
 
