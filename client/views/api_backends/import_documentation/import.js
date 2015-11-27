@@ -27,18 +27,18 @@ Template.importApiDocumentation.events({
 
             // Gets file contents
             var importedFile = event.target.result;
-            
+
             // Checks for correct JSON or YAML syntax in file contents
             if (JSON.parse(importedFile) || jsyaml.safeLoad(importedFile)) {
 
               var doc = {};
 
               // Checks file's extension for its secure conversion to JSON object
-              if (instance.endsWith(fileName, ['json'])){
+              if (instance.endsWith(fileName, ['json'])) {
 
                 // Converts JSON string to JSON object
                 doc = JSON.parse(importedFile);
-              } else if (instance.endsWith(fileName, ['yaml', 'yml'])){
+              } else if (instance.endsWith(fileName, ['yaml', 'yml'])) {
 
                 // Converts YAML string/object to JSON object
                 doc = jsyaml.load(importedFile);
@@ -54,7 +54,7 @@ Template.importApiDocumentation.events({
 
             }
           }
-        }else{
+        } else {
 
           // Notifies user if file extension provided is not supported
           FlashMessages.sendError("Only .json and .yaml(.yml) files are supported.");
@@ -75,7 +75,7 @@ Template.importApiDocumentation.created = function () {
     var state = false;
 
     // iterating through extensions passed into suffixList array
-    for (var i=0; i <suffixList.length; i++){
+    for (var i=0; i <suffixList.length; i++) {
 
       // parses line to check if filename contains current suffix
       var endsWith = filename.indexOf(suffixList[i], filename.length - suffixList[i].length) !== -1;
