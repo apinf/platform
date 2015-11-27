@@ -12,14 +12,11 @@ Template.importApiDocumentation.events({
 
       if (file) {
 
-        // Get file's name
-        var fileName = file.name;
-
-        // Parse the file string to URI object
-        var file = new URI(fileName);
+        // Get file's name & parse the file string to URI object
+        var fileName = new URI(file.name);
 
         // Get the file extension
-        var fileExtension = file.suffix().toLowerCase();
+        var fileExtension = fileName.suffix().toLowerCase();
 
         // Check if the file suffix is in the allowed extensions list
         var extensionAllowed = _.contains(acceptedExtensions, fileExtension);
@@ -73,30 +70,3 @@ Template.importApiDocumentation.events({
     });
   }
 });
-
-Template.importApiDocumentation.created = function () {
-
-  // Get reference to template instance
-  var instance = this;
-
-  // Function attached to template instance checks file extension
-  instance.stringEndsWith = function (filename, suffixList) {
-
-    // Variable that keeps state of is this filename contains provided extensions - false by default
-    var state = false;
-
-    // Iterating through extensions passed into suffixList array
-    for (var i=0; i <suffixList.length; i++) {
-
-      // Parse line to check if filename contains current suffix
-      var endsWith = filename.indexOf(suffixList[i], filename.length - suffixList[i].length) !== -1;
-
-      // If current extension found in filename then change the state variable
-      if (endsWith) state = true;
-
-    }
-
-    return state;
-  };
-
-};
