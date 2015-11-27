@@ -1,9 +1,9 @@
 Meteor.startup(function () {
   // Create config object for API Umbrella Web interface
   var config = {
-    baseUrl: Meteor.settings.apiUmbrella.baseUrl,
-    apiKey: Meteor.settings.apiUmbrella.apiKey,
-    authToken: Meteor.settings.apiUmbrella.authToken
+    baseUrl: Settings.findOne().api_umbrella_base_url,
+    apiKey: Settings.findOne().api_umbrella_api_key,
+    authToken: Settings.findOne().api_umbrella_auth_token
   };
 
   // Create API Umbrella Web object for REST calls
