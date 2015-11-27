@@ -109,3 +109,18 @@ Template.viewApiBackend.events({
     saveAs(file, "apiConfig.yaml");
   }
 });
+
+Template.viewApiBackend.helpers({
+  "serverBackendProtocolClass": function () {
+    // Get API Backend protocol
+    var apiBackendProtocol = this.apiBackend.backend_protocol;
+
+    console.log(apiBackendProtocol);
+
+    if (apiBackendProtocol === "http") {
+      return "warning";
+    } else if (apiBackendProtocol === "https") {
+      return "success";
+    }
+  }
+});
