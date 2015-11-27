@@ -17,7 +17,6 @@
             <span class="input-group-addon primary">
               {{_ "view-ApiBackend-Backend"}}
             </span>
-
             <input
               id="frontend-text"
               class="form-control"
@@ -25,8 +24,9 @@
               title="{{apiBackend.backend_host}}"
               readonly="readonly"
             >
-
-            <span class="input-group-addon success">{{ apiBackend.backend_protocol }}</span>
+            <span class="input-group-addon {{ serverBackendProtocolClass }}">
+              {{ apiBackend.backend_protocol }}
+            </span>
           </div>
           <div id="servers-api-frontend" class="input-group">
             <span class="input-group-addon primary">
