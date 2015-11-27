@@ -1,6 +1,9 @@
 Template.importApiDocumentation.events({
   'change #apiDocumentationFile': function (event, template) {
 
+    // Allowed file extensions for API documentation file
+    var acceptedExtensions = ["yaml", "yml", "json"];
+
     // Current template instance
     var instance = Template.instance();
 
@@ -12,10 +15,17 @@ Template.importApiDocumentation.events({
         // Get file's name
         var fileName = file.name;
 
-        // Allowed file extensions for API documentation file
-        var acceptedExtensions = ["yaml", "yml", "json"];
+        // Parse the file string to URI object
+        var file = new URI(fileName);
 
-        if (instance.stringEndsWith(fileName, acceptedExtensions)) {
+        // Get the file extension
+        var fileExtension = file.suffix().toLowerCase();
+
+        // Check if the file suffix is in the allowed extensions list
+        var extensionAllowed = _.contains(acceptedExtensions, fileExtension);
+
+        // Read file if the extension is allowed
+        if (extensionAllowed) {
 
           // Initialises new reader instance
           var reader = new FileReader();
@@ -33,14 +43,14 @@ Template.importApiDocumentation.events({
 
               var doc = {};
 
-              // Checks file's extension for its secure conversion to JSON object
-              if (instance.stringEndsWith(fileName, ['json'])) {
+              // Checks file's extension for its conversion to JSON object
+              if ((fileExtension == 'json')) {
 
-                // Converts JSON string to JSON object
+                // Convert JSON string to JSON object
                 doc = JSON.parse(importedFile);
-              } else if (instance.stringEndsWith(fileName, ['yaml', 'yml'])) {
+              } else if (_.contains(['yaml', 'yml'], fileExtension)) {
 
-                // Converts YAML string/object to JSON object
+                // Convert YAML string/object to JSON object
                 doc = jsyaml.load(importedFile);
               }
 
