@@ -12,21 +12,68 @@
           </div>
         </div>
       </div>
+      {{#autoForm collection="Settings" doc=this id="settings" type=formType}}
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Project Settings</h3>
           </div>
           <div class="panel-body">
-            {{#if settings}}
-            {{> quickForm collection="Settings" id="settings" type="update" doc=settings}}
-            {{else}}
-            {{> quickForm collection="Settings" id="settings" type="insert"}}
-            {{/if}}
-            {{> flashMessages}}
+            {{> afQuickField name='apinf_host'}}
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Project Settings</h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='api_umbrella_host'}}
+            {{> afQuickField name='api_umbrella_api_key'}}
+            {{> afQuickField name='api_umbrella_auth_token'}}
+            {{> afQuickField name='api_umbrella_base_url'}}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Project Settings</h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='elasticsearch_host'}}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Project Settings</h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='mailgun_username'}}
+            {{> afQuickField name='mailgun_password'}}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Project Settings</h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='githubConfiguration_clientId'}}
+            {{> afQuickField name='githubConfiguration_secret'}}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Project Settings</h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='contactForm_toEmail'}}
+          </div>
+        </div>
+        <div id="form-buttons">
+          <button type="submit" class="btn btn-lg btn-success" id="save-settings">Save</button>
+        </div>
+
+        {{> flashMessages}}
       </div>
+      {{/autoForm}}
     </div>
   </div>
 </template>
