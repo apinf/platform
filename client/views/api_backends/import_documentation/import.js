@@ -66,21 +66,22 @@ Template.importApiDocumentation.events({
 
 Template.importApiDocumentation.created = function () {
 
+  // Get reference to template instance
   var instance = this;
 
-  // function attached to template instance checks file extension
+  // Function attached to template instance checks file extension
   instance.endsWith = function (filename, suffixList) {
 
-    // variable that keeps state of is this filename contains provided extensions - false by default
+    // Variable that keeps state of is this filename contains provided extensions - false by default
     var state = false;
 
-    // iterating through extensions passed into suffixList array
+    // Iterating through extensions passed into suffixList array
     for (var i=0; i <suffixList.length; i++) {
 
-      // parses line to check if filename contains current suffix
+      // Parse line to check if filename contains current suffix
       var endsWith = filename.indexOf(suffixList[i], filename.length - suffixList[i].length) !== -1;
 
-      // if current extension found in filename then change the state variable
+      // If current extension found in filename then change the state variable
       if (endsWith) state = true;
 
     }
