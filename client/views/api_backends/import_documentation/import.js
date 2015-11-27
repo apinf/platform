@@ -15,7 +15,7 @@ Template.importApiDocumentation.events({
         // Allowed file extensions for API documentation file
         var acceptedExtensions = ["yaml", "yml", "json"];
 
-        if (instance.endsWith(fileName, acceptedExtensions)) {
+        if (instance.stringEndsWith(fileName, acceptedExtensions)) {
 
           // Initialises new reader instance
           var reader = new FileReader();
@@ -34,11 +34,11 @@ Template.importApiDocumentation.events({
               var doc = {};
 
               // Checks file's extension for its secure conversion to JSON object
-              if (instance.endsWith(fileName, ['json'])) {
+              if (instance.stringEndsWith(fileName, ['json'])) {
 
                 // Converts JSON string to JSON object
                 doc = JSON.parse(importedFile);
-              } else if (instance.endsWith(fileName, ['yaml', 'yml'])) {
+              } else if (instance.stringEndsWith(fileName, ['yaml', 'yml'])) {
 
                 // Converts YAML string/object to JSON object
                 doc = jsyaml.load(importedFile);
@@ -70,7 +70,7 @@ Template.importApiDocumentation.created = function () {
   var instance = this;
 
   // Function attached to template instance checks file extension
-  instance.endsWith = function (filename, suffixList) {
+  instance.stringEndsWith = function (filename, suffixList) {
 
     // Variable that keeps state of is this filename contains provided extensions - false by default
     var state = false;
