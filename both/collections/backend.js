@@ -1,7 +1,7 @@
 ApiBackends = new Mongo.Collection('apiBackends');
 
 // RegEx constants
-SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{2,5}$/);
+SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{1,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
 Schemas.Settings = new SimpleSchema({
