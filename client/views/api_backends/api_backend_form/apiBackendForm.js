@@ -32,7 +32,11 @@ Template.apiBackendForm.helpers({
     var router = Router.current();
 
     // Check router for _id parameter
-    return router.params._id
+    if (router.params._id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 
