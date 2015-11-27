@@ -1,4 +1,14 @@
 Meteor.startup(function () {
+  //TODO: redirect to settings page if there are no settings in Settings Collection
+  //  Router.onBeforeAction(function() {
+  //    if ( Settings.findOne() ) {
+  //      this.next();
+  //    } else {
+  //      this.redirect('/settings');
+  //      this.next();
+  //    }
+  //  });
+
   // Create config object for API Umbrella Web interface
   var config = {
     baseUrl: Settings.findOne().api_umbrella_base_url,
