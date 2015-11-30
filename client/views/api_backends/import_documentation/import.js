@@ -41,7 +41,7 @@ Template.importApiDocumentation.events({
               var doc = {};
 
               // Checks file's extension for its conversion to JSON object
-              if ((fileExtension == 'json')) {
+              if (fileExtension === 'json') {
 
                 // Convert JSON string to JSON object
                 doc = JSON.parse(importedFile);
