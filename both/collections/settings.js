@@ -10,7 +10,11 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'https://example.com/'
     }
   },
-  api_umbrella_host: {
+  apiUmbrella: {
+    type: [Object],
+    optional: false
+  },
+  "apiUmbrella.$.api_umbrella_host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
@@ -19,7 +23,7 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'https://example.com/'
     }
   },
-  api_umbrella_api_key: {
+  "apiUmbrella.$.api_umbrella_api_key": {
     type: String,
     label: "API Key",
     optional: false,
@@ -27,7 +31,7 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'xxx'
     }
   },
-  api_umbrella_auth_token: {
+  "apiUmbrella.$.api_umbrella_auth_token": {
     type: String,
     label: "Auth Token",
     optional: false,
@@ -35,7 +39,7 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'xxx'
     }
   },
-  api_umbrella_base_url: {
+  "apiUmbrella.$.api_umbrella_base_url": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Base URL",
