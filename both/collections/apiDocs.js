@@ -9,3 +9,17 @@ ApiDocs.allow({
   }
 });
 
+ApiDocs.helpers({
+  getApiBackendName: function () {
+    // Get API Backend ID
+    var apiBackendId = this.apiBackendId;
+
+    // Get API Backend
+    var apiBackend = ApiBackends.findOne(apiBackendId);
+
+    // Get API Backend name
+    var apiBackendName = apiBackend.name;
+
+    return apiBackendName;
+  }
+});
