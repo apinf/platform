@@ -69,10 +69,12 @@ AutoForm.hooks({
         // Add the API Backend ID to the API Documentation document
         ApiDocs.update(
           apiDocsId,
-          {$set: {
-            apiBackendId: apiBackendId
+          {
+            $set: {
+              apiBackendId: apiBackendId
+            }
           }
-        });
+        );
 
         // Reset the apiDocsID Session variable
         Session.set('apiDocsId', undefined);
