@@ -1,5 +1,6 @@
 Template.importApiDocumentation.events({
   'change #apiDocumentationFile': function (event, template) {
+    //console.log(AutoForm.reactiveFormData());
 
     // Allowed file extensions for API documentation file
     var acceptedExtensions = ["yaml", "yml", "json"];
@@ -52,8 +53,11 @@ Template.importApiDocumentation.events({
               }
 
               // Insert fine contents to a colletion
-              ApiDocs.insert(doc);
+              var apiDocsId = ApiDocs.insert(doc);
 
+              // Set session variable containing API Docs ID,
+              // used for attaching apiBackendId to apiDocs document on success
+              Session.set('apiDocsId', apiDocsId);
             } else {
 
               // Notifies user if not able to parse the file either as JSON or YAML objects.
