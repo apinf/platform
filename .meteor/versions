@@ -70,7 +70,7 @@ email@1.0.8
 fastclick@1.0.7
 fortawesome:fontawesome@4.4.0
 frenchbread:dynatable@0.1.0
-frenchbread:elastic-rest@0.2.0
+frenchbread:elastic-rest@1.0.0
 geojson-utils@1.0.4
 github@1.1.4
 handlebars@1.0.4
