@@ -1,20 +1,11 @@
 Settings = new Mongo.Collection('Settings');
 
 Schemas.SettingsSchema = new SimpleSchema({
-  apinf_host: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
-    optional: false,
-    autoform: {
-      placeholder: 'https://example.com/'
-    }
+  apinf: {
+    type: Object,
+    optional: true
   },
-  apiUmbrella: {
-    type: [Object],
-    optional: false
-  },
-  "apiUmbrella.$.api_umbrella_host": {
+  "apinf.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
@@ -23,57 +14,82 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'https://example.com/'
     }
   },
-  "apiUmbrella.$.api_umbrella_api_key": {
+  apiUmbrella: {
+    type: Object,
+    optional: true
+  },
+  "apiUmbrella.host": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: "Host",
+    optional: true,
+    autoform: {
+      placeholder: 'https://example.com/'
+    }
+  },
+  "apiUmbrella.apiKey": {
     type: String,
     label: "API Key",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'xxx'
     }
   },
-  "apiUmbrella.$.api_umbrella_auth_token": {
+  "apiUmbrella.authToken": {
     type: String,
     label: "Auth Token",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'xxx'
     }
   },
-  "apiUmbrella.$.api_umbrella_base_url": {
+  "apiUmbrella.baseUrl": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Base URL",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'https://example.com/api-umbrella/'
     }
   },
-  elasticsearch_host: {
+  elasticsearch: {
+    type: Object,
+    optional: true
+  },
+  "elasticsearch.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'http://example.com:14002/'
     }
   },
-  mailgun_username: {
+  mail: {
+    type: Object,
+    optional: true
+  },
+  "mail.username": {
     type: String,
     label: "Mailgun Username",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'Mailgun Username'
     }
   },
-  mailgun_password: {
+  "mail.password": {
     type: String,
     label: "Mailgun Password",
-    optional: false,
+    optional: true,
     autoform: {
       placeholder: 'xxx'
     }
   },
-  contactForm_toEmail: {
+  contactForm: {
+    type: Object,
+    optional: true
+  },
+  "contactForm.toEmail": {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: "Contact Form E-mail Address",
@@ -82,7 +98,11 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'mail@example.com'
     }
   },
-  githubConfiguration_clientId: {
+  githubConfiguration: {
+    type: Object,
+    optional: true
+  },
+  "githubConfiguration.clientId": {
     type: String,
     label: "Client ID",
     optional: true,
@@ -90,7 +110,7 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'xxx'
     }
   },
-  githubConfiguration_secret: {
+  "githubConfiguration.secret": {
     type: String,
     label: "Secret",
     optional: true,
