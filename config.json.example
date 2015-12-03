@@ -1,22 +1,28 @@
 {
-  "apinf": {
-    "host": "https://example.com/"
+  "private": {
+    "apinf": {
+      "host": "https://example.com/"
+    },
+    "apiUmbrella": {
+      "apiKey": "xxx",
+      "authToken": "xxx",
+      "baseUrl": "https://example.com/api-umbrella/",
+      "host": "https://example.com"
+    },
+    "elasticsearch": {
+      "host": "http://example.com:14002/"
+    },
+    "mail": {
+      "username": "xxx",
+      "password": "xxx"
+    },
+    "contactForm": {
+      "toEmail": "mail@example.com"
+    },
+    "githubConfiguration": {
+      "clientId" : "xxx",
+      "secret" : "xxx"
+    }
   },
-  "apiUmbrella": {
-    "apiKey": "xxx",
-    "authToken": "xxx",
-    "baseUrl": "https://example.com/api-umbrella/",
-    "host": "https://example.com"
-  },
-  "mail": {
-    "username": "xxx",
-    "password": "xxx"
-  },
-  "elasticsearch": {
-    "host": "http://example.com:14002/"
-  },
-  "githubConfiguration": {
-    "clientId" : "xxx",
-    "secret" : "xxx"
-  }
+  "public": {}
 }
