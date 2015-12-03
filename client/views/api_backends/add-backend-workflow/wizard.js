@@ -23,6 +23,15 @@ Template.addApiBackendWizard.helpers({
         type: String,
         optional: false,
         regEx: SimpleSchema.RegEx.Port
+      },
+      "protocol": {
+        type: String,
+        optional: false,
+        allowedValues: [
+          'http',
+          'https'
+        ],
+        label: 'Protocol'
       }
     });
 
