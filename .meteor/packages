@@ -28,7 +28,6 @@ jparker:gravatar
 tap:i18n
 useraccounts:bootstrap
 service-configuration
-yogiben:mixpanel
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 momentjs:moment
@@ -86,3 +85,5 @@ pahans:inline-help
 dandv:jquery-rateit
 zenorocha:clipboard
 harrison:papa-parse
+simple:json-routes
+olragon:uri-js

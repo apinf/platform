@@ -1,5 +1,5 @@
 AutoForm.hooks({
-  apiBackends: {
+  apiBackendForm: {
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key], button').attr("disabled", "disabled");
@@ -57,7 +57,30 @@ AutoForm.hooks({
         });
       }
     },
-    onSuccess: function (formType, apiBackendId) {
+    onSuccess: function (formType) {
+      // Get API Backend ID from form
+      var apiBackendId = this.docId;
+
+      // Attach API Backend ID to API Doc, if possible
+      if (Session.get('apiDocsId')) {
+        // Get the API Documentation ID, if available
+        var apiDocsId = Session.get('apiDocsId');
+
+        // Add the API Backend ID to the API Documentation document
+        ApiDocs.update(
+          apiDocsId,
+          {
+            $set: {
+              apiBackendId: apiBackendId
+            }
+          }
+        );
+
+        // Reset the apiDocsID Session variable
+        Session.set('apiDocsId', undefined);
+      }
+
+
       //Redirect to the just created API Backend page
       Router.go('viewApiBackend', {_id: apiBackendId});
     }

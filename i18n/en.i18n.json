@@ -113,7 +113,8 @@
   "view-ApiBackend-ExportYaml": "Export .yaml",
 
   /*Api Backends*/
-  "apiBackends-Title": "Add API",
+  "apiBackends-Add-API-Title": "Add API",
+  "apiBackends-Edit-API-Title": "Edit API",
   "apiBackends-Title-Help": "API's name",
   "apiBackends-Backend-Title": "Backend",
   "apiBackends-Backend-Help": "Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.",
