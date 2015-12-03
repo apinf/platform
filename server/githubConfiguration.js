@@ -10,6 +10,6 @@ ServiceConfiguration.configurations.insert({
     "secret" : "xxxx"
   }*/
   service: 'github',
-  clientId: Meteor.settings.githubConfiguration.clientId,
-  secret: Meteor.settings.githubConfiguration.secret
+  clientId: Meteor.settings.private.githubConfiguration.clientId,
+  secret: Meteor.settings.private.githubConfiguration.secret
 });

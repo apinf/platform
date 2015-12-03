@@ -4,8 +4,8 @@ Meteor.startup(function() {
     "username" : "xxxx",
       "password" : "xxxx"
   }*/
-  var username = Meteor.settings.mail.username;
-  var password = Meteor.settings.mail.password;
+  var username = Meteor.settings.private.mail.username;
+  var password = Meteor.settings.private.mail.password;
   var server = "smtp.mailgun.org";
   var port = "587"
 
