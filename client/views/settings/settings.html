@@ -17,7 +17,7 @@
             <h3 class="panel-title">Apinf</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='apinf_host'}}
+            {{> afQuickField name='apinf.host'}}
           </div>
         </div>
         <div class="panel panel-default">
@@ -25,10 +25,10 @@
             <h3 class="panel-title">API Umbrella</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='apiUmbrella.0.api_umbrella_host'}}
-            {{> afQuickField name='apiUmbrella.0.api_umbrella_api_key'}}
-            {{> afQuickField name='apiUmbrella.0.api_umbrella_auth_token'}}
-            {{> afQuickField name='apiUmbrella.0.api_umbrella_base_url'}}
+            {{> afQuickField name='apiUmbrella.host'}}
+            {{> afQuickField name='apiUmbrella.apiKey'}}
+            {{> afQuickField name='apiUmbrella.authToken'}}
+            {{> afQuickField name='apiUmbrella.baseUrl'}}
           </div>
         </div>
         <div class="panel panel-default">
@@ -36,7 +36,7 @@
             <h3 class="panel-title">Elasticsearch</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='elasticsearch_host'}}
+            {{> afQuickField name='elasticsearch.host'}}
           </div>
         </div>
         <div class="panel panel-default">
@@ -44,8 +44,8 @@
             <h3 class="panel-title">Mail</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='mailgun_username'}}
-            {{> afQuickField name='mailgun_password'}}
+            {{> afQuickField name='mail.username'}}
+            {{> afQuickField name='mail.password'}}
           </div>
         </div>
         <div class="panel panel-default">
@@ -53,8 +53,8 @@
             <h3 class="panel-title">Github</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='githubConfiguration_clientId'}}
-            {{> afQuickField name='githubConfiguration_secret'}}
+            {{> afQuickField name='githubConfiguration.clientId'}}
+            {{> afQuickField name='githubConfiguration.secret'}}
           </div>
         </div>
         <div class="panel panel-default">
@@ -62,7 +62,7 @@
             <h3 class="panel-title">Additional</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='contactForm_toEmail'}}
+            {{> afQuickField name='contactForm.toEmail'}}
           </div>
         </div>
         <div id="form-buttons">
