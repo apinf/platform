@@ -1,0 +1,6 @@
+#add-api-backend-wizard ol li {
+  display: inline;
+  border: solid 1px #777;
+  padding: 1em;
+  margin-bottom: 1em;
+}
