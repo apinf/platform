@@ -49,7 +49,6 @@ reactive-var
 meteorhacks:npm
 aldeed:tabular
 benmgreene:moment-range
-frenchbread:elastic-rest
 email
 zimme:active-route
 mfactory:admin-lte
@@ -87,3 +86,4 @@ zenorocha:clipboard
 harrison:papa-parse
 simple:json-routes
 olragon:uri-js
+frenchbread:elastic-rest
