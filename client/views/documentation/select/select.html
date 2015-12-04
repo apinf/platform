@@ -4,7 +4,7 @@
   <select name="selected-documentation" class="form-control">
     <option value="">Select</option>
     {{# each apiDocumentation }}
-      <option value="{{ this.url }}">{{ original.name }}</option>
+      <option value="/api/{{ _id }}/swagger.json">{{ getApiBackendName }}</option>
     {{/ each }}
   </select>
   {{/ if }}

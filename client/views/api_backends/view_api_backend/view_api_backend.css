@@ -1,0 +1,34 @@
+.supportButton {
+  float: right;
+}
+#frontend-text {
+  background-color: #fff;
+}
+#servers-api-backend {
+  margin-bottom: 1em;
+}
+.input-group-addon.primary {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(50, 118, 177) !important;
+    border-color: rgb(40, 94, 142) !important;
+}
+.input-group-addon.success {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(92, 184, 92) !important;
+    border-color: rgb(76, 174, 76) !important;
+}
+.input-group-addon.info {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(57, 179, 215) !important;
+    border-color: rgb(38, 154, 188) !important;
+}
+.input-group-addon.warning {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(240, 173, 78) !important;
+    border-color: rgb(238, 162, 54) !important;
+}
+.input-group-addon.danger {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(217, 83, 79) !important;
+    border-color: rgb(212, 63, 58) !important;
+}
