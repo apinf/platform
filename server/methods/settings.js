@@ -1,8 +1,7 @@
 Meteor.methods({
-  'getApiUmbrellaBaseUrl': function () {
-    // Get base url from settings file
-    var apiUmbrellaBaseUrl = Meteor.settings.private.apiUmbrella.baseUrl;
-
-    return apiUmbrellaBaseUrl;
+  'updateMeteorSettings': function() {
+    // Updating Meteor.settings from Settings collection
+    settings = Settings.findOne();
+    Meteor.settings.private = settings;
   }
-});
+})
