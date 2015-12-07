@@ -173,7 +173,7 @@
   "dataTable-RequestCountry": "Request country",
   "dataTable-RequestIP": "Request IP",
   "dataTable-RequestPath": "Request path",
-  "dataTable-ResponseTime": "Response time",
+  "dataTable-ResponseTime": "Response time in ms",
 
   /*Status*/
   "statusCheckTitle": "Status",
