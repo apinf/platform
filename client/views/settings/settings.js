@@ -33,6 +33,8 @@ AutoForm.hooks({
 
 AutoForm.addHooks(['settings'], {
   onSuccess: function () {
+    // Call method to update Meteor.settings
+    Meteor.call('updateMeteorSettings');
     FlashMessages.sendSuccess('Settings saved.');
   }
 });
@@ -43,3 +45,4 @@ FlashMessages.configure({
   hideDelay: 5000,
   autoScroll: false
 });
+
