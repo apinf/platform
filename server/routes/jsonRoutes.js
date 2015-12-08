@@ -13,12 +13,12 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   var id = request.params.id;
 
   // Fetch API Document from mongo collection
-  var ApiDoc = ApiDocs.findOne(id);
+  var apiDoc = ApiDocs.findOne(id);
 
   // Updates values to custom ones
-  ApiDoc.host = baseURL.hostname();
-  ApiDoc.basePath = baseURL.path();
+  apiDoc.host = baseURL.hostname();
+  apiDoc.basePath = baseURL.path();
 
   // Sends result back to client
-  JsonRoutes.sendResult(response, 200, ApiDoc);
+  JsonRoutes.sendResult(response, 200, apiDoc);
 });
