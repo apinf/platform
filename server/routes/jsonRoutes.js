@@ -6,7 +6,7 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   // Fetch API Document from mongo collection
   var apiDoc = ApiDocs.findOne(id);
 
-  
+  var apiBackend = ApiBackends.findOne(apiDoc.apiBackendId);
 
   // Updates values to custom ones
   //apiDoc.host = baseURL.hostname();
