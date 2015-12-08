@@ -12,10 +12,13 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   // Fetch API Document from mongo collection
   var apiDoc = ApiDocs.findOne(id);
 
+  // Get apiBackendId foreign key from documentation object
   var apiBackendId = apiDoc.apiBackendId;
 
+  // Fetch related apiBackend document
   var apiBackend = ApiBackends.findOne(apiBackendId);
 
+  // Get apiBackend's frontend prefix
   var urlPrefix = apiBackend.url_matches[0].frontend_prefix;
 
   // Updates values to custom ones
