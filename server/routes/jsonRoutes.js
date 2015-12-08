@@ -1,7 +1,4 @@
 JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next) {
-  
-  // Parse basePath string to URI obj
-  var baseURL = new URI(apiUmbrellaBaseUrl);
 
   // Get current id
   var id = request.params.id;
