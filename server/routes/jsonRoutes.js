@@ -8,6 +8,8 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
 
   var apiBackend = ApiBackends.findOne(apiDoc.apiBackendId);
 
+  var basePath = apiBackend.url_matches[0].frontend_prefix;
+
   // Updates values to custom ones
   //apiDoc.host = baseURL.hostname();
   //apiDoc.basePath = baseURL.path();
