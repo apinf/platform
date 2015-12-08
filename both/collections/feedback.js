@@ -67,3 +67,15 @@ Feedback.allow({
     return true;
   }
 });
+
+Feedback.helpers({
+  'sumOfVotes': function () {
+    //Adds all vote integers together, returns sum of all votes as Integer
+    var feedbacks = FeedbackVotes.find({feedbackId: this._id}).fetch();
+    var votes = _(feedbacks).map(function(feedback){
+      return feedback.vote;
+    });
+    var sum = ss.sum(votes);
+    return sum;
+  }
+});
