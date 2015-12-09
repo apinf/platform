@@ -10,7 +10,7 @@ Meteor.startup(function () {
   //  });
 
   // Get the settings
-  var settings = Meteor.settings.private;
+  var settings = Meteor.settings;
 
   // check is settings are exist
   var dbSettings = Settings.find().fetch();
@@ -24,10 +24,10 @@ Meteor.startup(function () {
   // Updating Meteor.settings from Settings collection
   Meteor.call('updateMeteorSettings');
 
-  if (Meteor.settings.private) {
+  if (Meteor.settings) {
 
     // Store settings object
-    var settings = Meteor.settings.private;
+    var settings = Meteor.settings;
     // Check if something is already in collection
     if ( ! Settings.findOne() ) {
       // if not insert settings object
@@ -43,11 +43,11 @@ Meteor.startup(function () {
         authToken: Settings.findOne().apiUmbrella.authToken
       };
     } else {
-      // Create config object for API Umbrella Web interface from Meteor.settings.private
+      // Create config object for API Umbrella Web interface from Meteor.settings
       var config = {
-        baseUrl: Meteor.settings.private.apiUmbrella.baseUrl,
-        apiKey: Meteor.settings.private.apiUmbrella.apiKey,
-        authToken: Meteor.settings.private.apiUmbrella.authToken
+        baseUrl: Meteor.settings.apiUmbrella.baseUrl,
+        apiKey: Meteor.settings.apiUmbrella.apiKey,
+        authToken: Meteor.settings.apiUmbrella.authToken
       };
     }
 

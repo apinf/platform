@@ -12,8 +12,8 @@ if ( Settings.findOne() ) {
     secret: Settings.findOne().githubConfiguration.secret
   });
 
-  // If settings are available in Meteor.settings.private
-} else if (Meteor.settings.private) {
+  // If settings are available in Meteor.settings
+} else if (Meteor.settings) {
   ServiceConfiguration.configurations.insert({
     /*extend settings.json with Client ID and Client Secret:
   "githubConfiguration": {
@@ -21,8 +21,8 @@ if ( Settings.findOne() ) {
     "secret" : "xxxx"
   }*/
     service: 'github',
-    clientId: Meteor.settings.private.githubConfiguration.clientId,
-    secret: Meteor.settings.private.githubConfiguration.secret
+    clientId: Meteor.settings.githubConfiguration.clientId,
+    secret: Meteor.settings.githubConfiguration.secret
   });
 
 } try {
@@ -34,8 +34,8 @@ if ( Settings.findOne() ) {
     "secret" : "xxxx"
   }*/
     service: 'github',
-    clientId: Meteor.settings.private.githubConfiguration.clientId,
-    secret: Meteor.settings.private.githubConfiguration.secret
+    clientId: Meteor.settings.githubConfiguration.clientId,
+    secret: Meteor.settings.githubConfiguration.secret
   });
   // otherwise show an error
 } catch (_error) {

@@ -9,14 +9,14 @@ Meteor.startup(function() {
     var username = Settings.findOne().mail.username;
     var password = Settings.findOne().mail.password;
 
-    // If settings are available in Meteor.settings.private
-  } else if ( Meteor.settings.private ){
-    var username = Meteor.settings.private.mail.username;
-    var password = Meteor.settings.private.mail.password;
+    // If settings are available in Meteor.settings
+  } else if ( Meteor.settings ){
+    var username = Meteor.settings.mail.username;
+    var password = Meteor.settings.mail.password;
 
   } try {
-    var username = Meteor.settings.private.mail.username;
-    var password = Meteor.settings.private.mail.password;
+    var username = Meteor.settings.mail.username;
+    var password = Meteor.settings.mail.password;
 
     // otherwise show an error
   } catch (_error) {

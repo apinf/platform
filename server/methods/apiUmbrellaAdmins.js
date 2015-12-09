@@ -1,6 +1,6 @@
 Meteor.methods({
   "syncApiUmbrellaAdmins": function () {
-    if (Meteor.settings.private.apiUmbrella) {
+    if (Meteor.settings.apiUmbrella) {
       // Get admin users from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.adminUsers.getAdmins();
 
