@@ -38,22 +38,6 @@ Meteor.methods({
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
       apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
     } catch (apiUmbrellaError) {
-
-      //apiUmbrellaError.message now is a string like
-      // example 1:
-      // '{"default":'{"backend_protocol":["is not included in the list"]}}'
-      // ex 2:
-      // '{"errors":{"frontend_host":["must be in the format of \"example.com\""],
-      //            "backend_host":["must be in the format of \"example.com\""],
-      //            "base":["must have at least one url_matches"],
-      //            "servers[0].host":["must be in the format of \"example.com\"","Could not resolve host: no address for http://api.example.com"],
-      //            "servers[0].port":["can't be blank","is not included in the list"]}'
-      // }
-      //after https://github.com/brylie/meteor-api-umbrella/issues/1 is closed, this code must be changed to something like:
-      // apiUmbrellaWebResponse.errors = error.errors
-      // apiUmbrellaWebResponse.status = error.http_status
-      // or http://docs.meteor.com/#/full/meteor_error should be considered
-
       //set the errors object
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
       apiUmbrellaWebResponse.http_status = 422;
