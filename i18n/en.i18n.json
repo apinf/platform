@@ -21,6 +21,7 @@
   /*Header*/
   "signIn": "Sign In",
   "signUp": "Sign Up",
+  "apiCatalogue": "API Catalogue",
   "profile": "Profile",
   "account": "Account",
   "signout": "Sign out",
