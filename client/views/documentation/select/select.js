@@ -3,13 +3,13 @@ Template.apiDocumentationSelect.created = function () {
   var instance = this;
 
   // Subscribe to All API Documentation
-  instance.subscribe('allApiDocumentation');
+  instance.subscribe('allApiDocs');
 };
 
 Template.apiDocumentationSelect.helpers({
   "apiDocumentation": function () {
     // Get API Documentation
-    var apiDocumentationArray = ApiDocumentation.find().fetch();
+    var apiDocumentationArray = ApiDocs.find().fetch();
 
     return apiDocumentationArray;
   }

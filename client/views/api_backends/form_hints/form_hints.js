@@ -124,6 +124,12 @@ var helpData = {
     options: {
       placement: 'left'
     }
+  },
+  'settings': {
+    message: "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'",
+    options: {
+      placement: 'left'
+    }
   }
 };
 InlineHelp.initHelp(helpData);
