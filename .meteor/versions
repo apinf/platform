@@ -178,7 +178,7 @@ useraccounts:iron-routing@1.12.4
 webapp@1.2.3
 webapp-hashing@1.0.5
 yogiben:autoform-file@0.3.0
-yogiben:autoform-map@0.1.3
+yogiben:autoform-map@0.2.0
 yogiben:autoform-modals@0.3.8
 yogiben:helpers@0.0.6
 yogiben:pretty-email@0.0.7

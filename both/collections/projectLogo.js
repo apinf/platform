@@ -1,7 +1,7 @@
 ProjectLogo = new FS.Collection("projectLogo", {
   stores: [
     new FS.Store.GridFS("projectLogo")
-  ],
+  ]
 });
 
 if (Meteor.isServer) {
