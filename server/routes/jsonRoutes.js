@@ -1,7 +1,7 @@
 JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next) {
 
-  // Get current apiDocument Id
-  var id = request.params.id;
+  // Get current API Document ID
+  var apiDocumentId = request.params.id;
 
   // Get basePath for apiUmbrella from Meteor settings file
   var apiUmbrellaBaseUrl = Meteor.settings.apiUmbrella.baseUrl;
@@ -10,7 +10,7 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   var baseUrl = new URI(apiUmbrellaBaseUrl);
 
   // Fetch API Document from mongo collection
-  var apiDoc = ApiDocs.findOne(id);
+  var apiDoc = ApiDocs.findOne(apiDocumentId);
 
   // Get apiBackendId foreign key from documentation object
   var apiBackendId = apiDoc.apiBackendId;
