@@ -1,6 +1,6 @@
 JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next) {
 
-  // Get current id
+  // Get current apiDocument Id
   var id = request.params.id;
 
   // Get basePath for apiUmbrella from Meteor settings file
