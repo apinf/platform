@@ -7,7 +7,7 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   var apiUmbrellaBaseUrl = Meteor.settings.apiUmbrella.baseUrl;
 
   // Parse basePath string to URI obj
-  var baseURL = new URI(apiUmbrellaBaseUrl);
+  var baseUrl = new URI(apiUmbrellaBaseUrl);
 
   // Fetch API Document from mongo collection
   var apiDoc = ApiDocs.findOne(id);
@@ -22,7 +22,7 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   var urlPrefix = apiBackend.url_matches[0].frontend_prefix;
 
   // Updates values to custom ones
-  apiDoc.host = baseURL.hostname();
+  apiDoc.host = baseUrl.hostname();
   apiDoc.basePath = urlPrefix;
 
   // Sends result back to client
