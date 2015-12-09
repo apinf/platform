@@ -18,28 +18,17 @@ AutoForm.hooks({
         var context = this;
 
         // Send the API Backend to API Umbrella
-        response = Meteor.call('createApiBackendOnApiUmbrella', apiBackendForm, function(error, apiUmbrellaWebResponse) {
-
-          //apiUmbrellaWebResponse contents
-          // apiUmbrellaWebResponse = {
-          //   result: {},
-          //   http_status: 200,
-          //   errors: {}
-          // };
+        Meteor.call('createApiBackendOnApiUmbrella', apiBackendForm, function(error, apiUmbrellaWebResponse) {
 
           if (apiUmbrellaWebResponse.http_status === 200) {
-            // Submit form on meteor:api-umbrella success
+            // Get the API BAckend ID from API Umbrella
+            var apiUmbrellaApiId = apiUmbrellaWebResponse.result.data.api.id;
+
+            // Append the API Umbrella ID to the local API Backend
+            apiBackendForm.id = apiUmbrellaApiId;
+
             context.result(apiBackendForm);
           } else {
-            // Error data structure returned.
-            // nowadays, jerry-rig solution:
-            // {"default":'{"backend_protocol":["is not included in the list"]}}'
-            // after https://github.com/brylie/meteor-api-umbrella/issues/1 is resolved, it should be:
-            // {"frontend_host":["must be in the format of \"example.com\""],
-            //  "backend_host":["must be in the format of \"example.com\""],
-            //  "base":["must have at least one url_matches"],
-            //  "servers[0].host":["must be in the format of \"example.com\"","Could not resolve host: no address for http://api.example.com"],
-            //  "servers[0].port":["can't be blank","is not included in the list"]}
             var errors = _.values(apiUmbrellaWebResponse.errors);
 
             // Flatten all error descriptions to show using sAlert
