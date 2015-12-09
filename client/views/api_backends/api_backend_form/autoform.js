@@ -46,10 +46,7 @@ AutoForm.hooks({
         });
       }
     },
-    onSuccess: function (formType) {
-      // Get API Backend ID from form
-      var apiBackendId = this.docId;
-
+    onSuccess: function (formType, apiBackendId) {
       // Attach API Backend ID to API Doc, if possible
       if (Session.get('apiDocsId')) {
         // Get the API Documentation ID, if available
@@ -72,6 +69,30 @@ AutoForm.hooks({
 
       //Redirect to the just created API Backend page
       Router.go('viewApiBackend', {_id: apiBackendId});
+
+      // Get the API Backend object
+      var apiBackend = ApiBackends.findOne(apiBackendId);
+
+      // Get API Umbrella backend ID from API Backend
+      var apiUmbrellaApiId = apiBackend.id;
+
+      // Publish the API Backend on API Umbrella
+      Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
+        console.log(apiUmbrellaWebResponse);
+
+        if (apiUmbrellaWebResponse.http_status === 201) {
+          sAlert.success("API Backend successfully published.");
+        } else {
+          var errors = _.values(apiUmbrellaWebResponse.errors);
+
+          // Flatten all error descriptions to show using sAlert
+          errors = _.flatten(errors);
+          _.each(errors, function(error) {
+            //Display error to the user, keep the sAlert box visible.
+            sAlert.error(error, {timeout: 'none'});
+          });
+        }
+      });
     }
   }
 });
