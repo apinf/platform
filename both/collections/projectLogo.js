@@ -1,6 +1,4 @@
 ProjectLogo = new FS.Collection("projectLogo", {
-  // TODO: Determine how to upload files within the project directory
-  // without hardcoding FS path
   stores: [
     new FS.Store.GridFS("projectLogo")
   ],
@@ -15,6 +13,9 @@ if (Meteor.isServer) {
       return true;
     },
     download: function(userId) {
+      return true;
+    },
+    remove: function() {
       return true;
     }
   });
