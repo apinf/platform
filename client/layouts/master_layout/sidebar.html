@@ -3,7 +3,7 @@
     <section class="sidebar">
       <ul class="sidebar-menu">
         <li class="header">{{_ "masterLayout-sidebar-Menu"}}</li>
-        {{#if User}}
+        {{# if User }}
         <li class="{{isActiveRoute 'dashboard'}}">
           <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>{{_ "masterLayout-sidebar-Analytics"}}</span></a>
         </li>
@@ -19,21 +19,21 @@
                 <span>{{_ "masterLayout-sidebar-AddAPIBackend"}}</span>
               </a>
             </li>
-            {{#if userHasApis}}
+            {{# if userHasApis }}
             <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
               <a href="{{pathFor route='manageApiBackends'}}">
                 <i class="fa fa-circle-o"></i>
                 <span>{{_ "masterLayout-sidebar-ManageAPIBackends"}}</span>
               </a>
             </li>
-            {{/if}}
+            {{/ if }}
           </ul>
         </li>
-        {{/if}}
+        {{ /if }}
         <li class="{{isActiveRoute 'catalogue'}}">
           <a href="/catalogue"><i class="fa fa-list-alt"></i><span>{{_ "masterLayout-sidebar-Catalogue"}}</span></a>
         </li>
-        {{#if User}}
+        {{# if User }}
         <li class="{{isActiveRoute 'documentation'}} {{isActiveRoute 'apiDocumentationEditor'}} treeview">
           <a href="#">
             <i class="fa fa-book"></i>
@@ -53,7 +53,7 @@
           <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>{{_ "masterLayout-sidebar-Users"}}</span></a>
         </li>
         {{/ if }}
-        {{/if}}
+        {{/ if }}
       </ul>
     </section>
   </aside>
