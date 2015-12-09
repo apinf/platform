@@ -49,12 +49,15 @@ Template.apiBackendRating.events({
   "click .rateit": function (event, instance) {
     // Make sure there is a Meteor user ID for voting
     if (Meteor.userId() === null) {
+      // Get translated user message
+      var userMessage = TAPi18n.__("api-backend-rating-anonymous");
+      
       // Alert the user that they must log in
-      sAlert.error("Please log in to vote.");
+      sAlert.error(userMessage);
 
       return false;
     }
-    
+
     // Get API Backend ID from template data context
     var apiBackendId = instance.data._id;
 
