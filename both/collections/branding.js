@@ -16,9 +16,18 @@ Schemas.BrandingSchema = new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      'red',
+      'blue-light',
       'blue',
-      'green'
+      'black-light',
+      'black',
+      'green-light',
+      'green',
+      'purple-light',
+      'purple',
+      'red-light',
+      'red',
+      'yellow-light',
+      'yellow'
     ],
     label: 'Choose you color theme:'
   }
