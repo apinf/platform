@@ -1,46 +1,49 @@
 {
   "dependencies": {
     "elasticsearch": {
-      "version": "3.0.2",
+      "version": "10.0.1",
       "dependencies": {
-        "bluebird": {
-          "version": "2.2.2"
-        },
         "chalk": {
-          "version": "0.5.1",
+          "version": "1.1.1",
           "dependencies": {
             "ansi-styles": {
-              "version": "1.1.0"
+              "version": "2.1.0"
             },
             "escape-string-regexp": {
               "version": "1.0.3"
             },
             "has-ansi": {
-              "version": "0.1.0",
+              "version": "2.0.0",
               "dependencies": {
                 "ansi-regex": {
-                  "version": "0.2.1"
+                  "version": "2.0.0"
                 }
               }
             },
             "strip-ansi": {
-              "version": "0.3.0",
+              "version": "3.0.0",
               "dependencies": {
                 "ansi-regex": {
-                  "version": "0.2.1"
+                  "version": "2.0.0"
                 }
               }
             },
             "supports-color": {
-              "version": "0.2.0"
+              "version": "2.0.0"
             }
           }
         },
         "forever-agent": {
-          "version": "0.5.2"
+          "version": "0.6.1"
         },
-        "lodash-node": {
-          "version": "2.4.1"
+        "lodash": {
+          "version": "3.10.1"
+        },
+        "lodash-compat": {
+          "version": "3.10.1"
+        },
+        "promise-js": {
+          "version": "0.0.6"
         }
       }
     }

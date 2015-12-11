@@ -8,7 +8,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          {{#if User}}
+          {{#if currentUser}}
           {{#if isInRole 'admin'}}
           <li><a href="{{pathFor 'dashboard'}}">{{_ "Dashboard"}}</a></li>
           {{/if}}
@@ -24,6 +24,7 @@
           {{else}}
           <li><a href="/sign-in">{{_ "signIn"}}</a></li>
           <li><a href="/sign-up">{{_ "signUp"}}</a></li>
+          <li><a href="/catalogue">{{_ "apiCatalogue"}}</a></li>
           {{/if}}
         </ul>
       </div>
@@ -32,7 +33,7 @@
           <div class="col-lg-6">
             <h1>{{_ "home-MainTitle"}}<br>
               <small>{{_ "home-SecondaryTitle"}}</small></h1>
-            {{#if User}}
+            {{#if currentUser}}
             <a href="/dashboard" class="btn btn-success sign-up" title="{{_ 'Dashboard'}}"><i class="mdi mdi-chart-bar"></i> {{_ "Dashboard"}}</a>
             {{else}}
             <a href="/sign-up" class="btn btn-success sign-up" title="{{_ 'signUp'}}"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
