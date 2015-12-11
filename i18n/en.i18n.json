@@ -142,6 +142,7 @@
 
   /*Catalogue*/
   "catalogue-Title": "Available APIs",
+  "api-backend-rating-anonymous": "Please log in to vote.",
 
   /*Feedback*/
   "feedback-submitted-by": "submitted by",
