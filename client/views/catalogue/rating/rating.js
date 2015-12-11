@@ -39,7 +39,10 @@ Template.apiBackendRating.rendered = function () {
         max: 4,
         step: 1,
         resetable: false,
-        value: userRating ? userRating.rating : apiBackend.getRating() // use previous rating, if exists
+        // Only logged in user can rate
+        readonly: Meteor.userId() ? false : true,
+        // use previous rating, if exists
+        value: userRating ? userRating.rating : apiBackend.getRating()
       });
     }
   });
@@ -51,7 +54,7 @@ Template.apiBackendRating.events({
     if (Meteor.userId() === null) {
       // Get translated user message
       var userMessage = TAPi18n.__("api-backend-rating-anonymous");
-      
+
       // Alert the user that they must log in
       sAlert.error(userMessage);
 
