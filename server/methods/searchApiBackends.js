@@ -7,7 +7,28 @@ Meteor.methods({
 
     // parse searchQuery
 
-    // fetch apiBackends
+    // Construct query
+    var query = {
+      $or: [
+        {
+          name: {
+            $regex: searchQuery,
+            $options: 'i'
+          }
+        },
+        {
+          backend_host: {
+            $regex: searchQuery,
+            $options: 'i'
+          }
+        }
+      ]
+    };
 
+    // Fetch apiBackends
+    var foundApiBackends = ApiBackends.find(query).fetch();
+
+    // return found API Backends
+    return foundApiBackends;
   }
 });
