@@ -38,7 +38,7 @@ Meteor.methods({
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
       apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
     } catch (apiUmbrellaError) {
-      //set the errors object
+      // Set the errors object
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
       apiUmbrellaWebResponse.http_status = 422;
     }
@@ -56,7 +56,7 @@ Meteor.methods({
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
       apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.config.publishSingleApiBackend(apiBackendId);
     } catch (apiUmbrellaError) {
-      //set the errors object
+      // Set the errors object
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
       apiUmbrellaWebResponse.http_status = 422;
     }

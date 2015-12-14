@@ -21,7 +21,7 @@ AutoForm.hooks({
         Meteor.call('createApiBackendOnApiUmbrella', apiBackendForm, function(error, apiUmbrellaWebResponse) {
 
           if (apiUmbrellaWebResponse.http_status === 200) {
-            // Get the API BAckend ID from API Umbrella
+            // Get the API Backend ID from API Umbrella
             var apiUmbrellaApiId = apiUmbrellaWebResponse.result.data.api.id;
 
             // Append the API Umbrella ID to the local API Backend
@@ -34,13 +34,13 @@ AutoForm.hooks({
             // Flatten all error descriptions to show using sAlert
             errors = _.flatten(errors);
             _.each(errors, function(error) {
-              //Display error to the user, keep the sAlert box visible.
+              // Display error to the user, keep the sAlert box visible.
               sAlert.error(error, {timeout: 'none'});
               // TODO: Figure out a way to send the errors back to the autoform fields, as if it were client validation,
-              //   and get rid of sAlert here.
+              // and get rid of sAlert here.
             });
 
-            //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
+            // Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
             context.result(false);
           }
         });
@@ -67,7 +67,7 @@ AutoForm.hooks({
       }
 
 
-      //Redirect to the just created API Backend page
+      // Redirect to the just created API Backend page
       Router.go('viewApiBackend', {_id: apiBackendId});
 
       // Get the API Backend object
@@ -88,7 +88,7 @@ AutoForm.hooks({
           // Flatten all error descriptions to show using sAlert
           errors = _.flatten(errors);
           _.each(errors, function(error) {
-            //Display error to the user, keep the sAlert box visible.
+            // Display error to the user, keep the sAlert box visible.
             sAlert.error(error, {timeout: 'none'});
           });
         }
