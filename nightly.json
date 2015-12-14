@@ -1,0 +1,24 @@
+{
+  "apinf": {
+    "host": "http://nightly.apinf.io"
+  },
+  "apiUmbrella": {
+    "baseUrl": "https://umbrella.apinf.io/api-umbrella/",
+    "apiKey": "DUuAR4G3v3bVJhdzCVv0eJJHgLOqtUIa5ggWcWCH",
+    "authToken": "jcyIPAMuTfufwNAw0yY6dNh0ZP7FzrExIEKfVdLb"
+  },
+  "elasticsearch": {
+    "host": "http://umbrella.apinf.io:14002"
+  },
+  "mail": {
+    "username" : "postmaster@sandbox66f9443a9e964293a38a7174a9a3f236.mailgun.org",
+    "password" : "1b5036fd1afc580d4833940a29511856"
+  },
+  "contactForm": {
+    "toEmail": "ville.jyrkka@samposoftware.com"
+  },
+  "githubConfiguration": {
+    "clientId": "1c7e5c2816be8bfb91b1",
+    "secret": "7ecc7bbce2e7f559ca3a7f84946eb6bb757f3a50"
+  }
+}
