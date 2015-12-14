@@ -55,6 +55,40 @@ AutoForm.hooks({
             context.result(false);
           }
         });
+      },
+      update: function (apiBackendForm) {
+        // Keep the context to use inside the callback function
+        var context = this;
+
+        // Get ID of API Umbrella backend
+        var apiUmbrellaBackendId = Router.current().params._id;
+
+        // Send the API Backend to API Umbrella
+        response = Meteor.call(
+          'updateApiBackendOnApiUmbrella',
+          apiUmbrellaBackendId,
+          apiBackendForm,
+          function(error, apiUmbrellaWebResponse) {
+            console.log(apiUmbrellaWebResponse);
+            if (apiUmbrellaWebResponse.http_status === 204) {
+              // Submit form on meteor:api-umbrella success
+              context.result(apiBackendForm);
+            } else {
+              var errors = _.values(apiUmbrellaWebResponse.errors);
+
+              // Flatten all error descriptions to show using sAlert
+              errors = _.flatten(errors);
+              _.each(errors, function(error) {
+                //Display error to the user, keep the sAlert box visible.
+                sAlert.error(error, {timeout: 'none'});
+                // TODO: Figure out a way to send the errors back to the autoform fields, as if it were client validation,
+                //   and get rid of sAlert here.
+              });
+
+              //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
+              context.result(false);
+            }
+        });
       }
     },
     onSuccess: function (formType) {
