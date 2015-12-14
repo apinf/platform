@@ -22,7 +22,9 @@ FeedbackVotes.attachSchema(Schemas.FeedbackVotesSchema);
 
 FeedbackVotes.allow({
   insert: function () {
-    return true;
+    if (Meteor.userId) {
+      return true;
+    }
   },
   update: function () {
     return true;
