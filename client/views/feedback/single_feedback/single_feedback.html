@@ -1,9 +1,9 @@
 <template name="singleFeedback">
   <div class="row list-group-item feedback-list-item">
     <div class="col-lg-2 col-md-2">
-      <i class="fa fa-arrow-up upvote"></i>
-      <span>{{ sumOfVotes }}</span>
-      <i class="fa fa-arrow-down downvote"></i>
+      <span id="upvote-{{ _id }}" class="fa fa-lg fa-arrow-up upvote"></span>
+      <span class="badge sumvotes">{{ sumOfVotes }}</span>
+      <span id="downvote-{{ _id }}" class="fa fa-lg fa-arrow-down downvote"></span>
     </div>
     <div class="col-lg-2 col-md-2">
       <span class="badge">{{ messageType }}</span>

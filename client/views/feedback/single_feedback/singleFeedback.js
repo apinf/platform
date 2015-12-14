@@ -9,11 +9,13 @@ Template.singleFeedback.events({
   'click .upvote': function (event, template) {
     var feedback = this;
     var feedbackId = feedback._id;
+    template.$('#upvote-'+feedbackId).toggleClass('userVote');
     Meteor.call('submitVote', feedbackId, 1);
   },
   'click .downvote': function (event, template) {
     var feedback = this;
     var feedbackId = feedback._id;
+    template.$('#downvote-'+feedbackId).toggleClass('userVote');
     Meteor.call('submitVote', feedbackId, -1);
   }
 });
