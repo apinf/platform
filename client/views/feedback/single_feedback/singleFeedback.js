@@ -1,7 +1,8 @@
 Template.singleFeedback.created = function () {
-  // Subscription to feedback collection
   var feedback = this.data;
+  // Get ID of current feedback object
   var feedbackId = feedback._id;
+  // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
 };
 
@@ -29,12 +30,16 @@ Template.singleFeedback.helpers({
 Template.singleFeedback.events({
   'click .upvote': function (event, template) {
     var feedback = this;
+    // Get ID of current feedback object
     var feedbackId = feedback._id;
+    // Submit upvote (+1) for current feedback
     Meteor.call('submitVote', feedbackId, 1);
   },
   'click .downvote': function (event, template) {
     var feedback = this;
+    // Get ID of current feedback object
     var feedbackId = feedback._id;
+    // Submit downvote (-1) for current feedback
     Meteor.call('submitVote', feedbackId, -1);
   }
 });
