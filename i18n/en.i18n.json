@@ -21,6 +21,7 @@
   /*Header*/
   "signIn": "Sign In",
   "signUp": "Sign Up",
+  "apiCatalogue": "API Catalogue",
   "profile": "Profile",
   "account": "Account",
   "signout": "Sign out",
@@ -141,6 +142,7 @@
 
   /*Catalogue*/
   "catalogue-Title": "Available APIs",
+  "api-backend-rating-anonymous": "Please log in to vote.",
 
   /*Feedback*/
   "feedback-submitted-by": "submitted by",

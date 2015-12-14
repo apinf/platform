@@ -1,9 +1,9 @@
 <template name="sidebar">
-  {{#if User}}
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu">
         <li class="header">{{_ "masterLayout-sidebar-Menu"}}</li>
+        {{# if currentUser }}
         <li class="{{isActiveRoute 'dashboard'}}">
           <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>{{_ "masterLayout-sidebar-Analytics"}}</span></a>
         </li>
@@ -19,40 +19,42 @@
                 <span>{{_ "masterLayout-sidebar-AddAPIBackend"}}</span>
               </a>
             </li>
-            {{#if userHasApis}}
+            {{# if userHasApis }}
             <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
               <a href="{{pathFor route='manageApiBackends'}}">
                 <i class="fa fa-circle-o"></i>
                 <span>{{_ "masterLayout-sidebar-ManageAPIBackends"}}</span>
               </a>
             </li>
-            {{/if}}
+            {{/ if }}
           </ul>
         </li>
+        {{ /if }}
         <li class="{{isActiveRoute 'catalogue'}}">
           <a href="/catalogue"><i class="fa fa-list-alt"></i><span>{{_ "masterLayout-sidebar-Catalogue"}}</span></a>
         </li>
-        <li class="{{isActiveRoute 'documentation'}} {{isActiveRoute 'apiDocumentationEditor'}} treeview">
-          <a href="#">
-            <i class="fa fa-book"></i>
-            <span>{{_ "masterLayout-sidebar-Documentation"}}</span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="{{isActiveRoute 'apiDocumentationEditor'}}">
-              <a href="/documentation/editor"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout-sidebar-DocumentationEditor"}}</span></a>
+        {{# if currentUser }}
+          <li class="{{isActiveRoute 'documentation'}} {{isActiveRoute 'apiDocumentationEditor'}} treeview">
+            <a href="#">
+              <i class="fa fa-book"></i>
+              <span>{{_ "masterLayout-sidebar-Documentation"}}</span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{isActiveRoute 'apiDocumentationEditor'}}">
+                <a href="/documentation/editor"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout-sidebar-DocumentationEditor"}}</span></a>
+              </li>
+              <li class="{{isActiveRoute 'documentation'}}">
+                <a href="/documentation"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout-sidebar-DocumentationViewer"}}</span></a>
+              </li>
+            </ul>
+          </li>
+          {{# if isInRole 'admin' }}
+            <li class="{{isActiveRoute 'accountsAdmin'}}">
+              <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>{{_ "masterLayout-sidebar-Users"}}</span></a>
             </li>
-            <li class="{{isActiveRoute 'documentation'}}">
-              <a href="/documentation"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout-sidebar-DocumentationViewer"}}</span></a>
-            </li>
-          </ul>
-        </li>
-        {{# if isInRole 'admin' }}
-        <li class="{{isActiveRoute 'accountsAdmin'}}">
-          <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>{{_ "masterLayout-sidebar-Users"}}</span></a>
-        </li>
+          {{/ if }}
         {{/ if }}
       </ul>
     </section>
   </aside>
-  {{/if}}
 </template>
