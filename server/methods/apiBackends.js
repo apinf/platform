@@ -59,5 +59,29 @@ Meteor.methods({
       apiUmbrellaWebResponse.http_status = 422;
     }
     return apiUmbrellaWebResponse;
+  },
+  updateApiBackendOnApiUmbrella: function (apiBackendForm) {
+    // Construct an API Backend object for API Umbrella with one 'api' key
+    var constructedBackend = {
+      "api": apiBackendForm
+    };
+
+    // Response object to be send back to client layer.
+    var apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 204,
+      errors: {}
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.updateApiBackend(constructedBackend);
+    } catch (apiUmbrellaError) {
+
+      //set the errors object
+      apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
   }
 });
