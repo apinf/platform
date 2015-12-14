@@ -22,11 +22,19 @@ FeedbackVotes.attachSchema(Schemas.FeedbackVotesSchema);
 
 FeedbackVotes.allow({
   insert: function () {
+    // Only allow logged in user to vote
     if (Meteor.userId) {
       return true;
     }
   },
   update: function () {
-    return true;
+    if (Meteor.userId) {
+      return true;
+    }
+  },
+  remove: function () {
+    if (Meteor.userId) {
+      return true;
+    }
   }
 });
