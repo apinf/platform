@@ -26,9 +26,7 @@ Template.search.helpers({
     Meteor.subscribe("search", searchValue);
 
     var searchResults = ApiBackends.find().fetch();
-
-    console.log(searchResults);
-
+    
     return searchResults;
 
   }

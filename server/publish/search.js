@@ -1,12 +1,6 @@
 Meteor.publish("search", function(searchValue) {
 
-  if (!searchValue || searchValue == "") {
-
-    console.log("search val not defined");
-    return {};
-  }
-
-  console.log("Searching for ", searchValue);
+  if (!searchValue || searchValue == "") return {};
 
   var query = {
     $or: [
