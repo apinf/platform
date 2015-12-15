@@ -1,0 +1,29 @@
+<template name="search">
+
+    <div>
+
+        <h1>Search APIs</h1>
+
+        <form class="search-form" id="search">
+            <div class="search-holder">
+                <input type="text" placeholder="Search.." class="form-control" id="search-text" />
+            </div>
+        </form>
+
+        <hr/>
+        {{#if searchResults}}
+            <p>Search results:</p>
+
+            {{#each searchResults }}
+                <h2>{{name}}</h2>
+                <a href="/api/{{_id}}">View API</a>
+                <p>{{backend_host}}</p>
+                <hr/>
+            {{/each}}
+        {{else}}
+            <i style="text-align:center">Nothing found.</i>
+        {{/if }}
+
+    </div>
+
+</template>
