@@ -4,26 +4,21 @@ Meteor.startup(function() {
     "username" : "xxxx",
       "password" : "xxxx"
   }*/
-  // If settings are already in Settings collection
-  if ( Settings.findOne() ) {
-    var username = Settings.findOne().mail.username;
-    var password = Settings.findOne().mail.password;
 
-    // If settings are available in Meteor.settings
-  } else if ( Meteor.settings ){
+  // If settings are available in Meteor.settings
+  try {
+
     var username = Meteor.settings.mail.username;
     var password = Meteor.settings.mail.password;
 
-  } try {
-    var username = Meteor.settings.mail.username;
-    var password = Meteor.settings.mail.password;
+    var server = "smtp.mailgun.org";
+    var port = "587"
 
-    // otherwise show an error
-  } catch (_error) {
-    e = _error;
+    process.env.MAIL_URL = 'smtp://' + encodeURIComponent(username) + ':' + encodeURIComponent(password) + '@' + encodeURIComponent(server) + ':' + port;
+
   }
-  var server = "smtp.mailgun.org";
-  var port = "587"
-
-  process.env.MAIL_URL = 'smtp://' + encodeURIComponent(username) + ':' + encodeURIComponent(password) + '@' + encodeURIComponent(server) + ':' + port;
+  // otherwise show an error
+  catch (error) {
+    console.log(error);
+  }
 });
