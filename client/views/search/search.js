@@ -11,6 +11,23 @@ Template.search.created = function () {
 
 };
 
+Template.search.rendered = function () {
+
+  // Get reference to Template
+  var instance = this;
+
+  // Check if search parameter is set
+  if (instance.searchParameter.get()) {
+
+    // Update search field with search value provided in the URL
+    $('#search-text').val(instance.searchParameter.get());
+
+  }
+  
+  $('#search-text').focus();
+
+};
+
 Template.search.helpers({
   searchResults: function() {
 
