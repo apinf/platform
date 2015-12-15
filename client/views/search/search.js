@@ -83,7 +83,7 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  "keyup #search-text, submit #search": function (event, template) {
+  "keyup #search-text, submit #search-form": function (event, template) {
 
     event.preventDefault();
 

@@ -8,7 +8,7 @@ Template.navbar.helpers({
 });
 
 Template.navbar.events({
-  'submit #header-search': function (event, template) {
+  'submit #header-search-form': function (event, template) {
 
     event.preventDefault();
 
@@ -16,5 +16,6 @@ Template.navbar.events({
 
     Router.go('search', {}, {query: 'q='+searchValue});
 
+    return false;
   }
 });
