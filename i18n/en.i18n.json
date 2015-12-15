@@ -1,6 +1,6 @@
 {
   /*Config*/
-  "configName": "Apinf",
+  "configName": "Apika",
   "configTitle": "Build custom APIs. Fast.",
   "configSubtitle": "Create custom API mashups, really quick.",
 
@@ -25,7 +25,7 @@
   "profile": "Profile",
   "account": "Account",
   "signout": "Sign out",
-  "home-MainTitle": "APINF - API Management Platform",
+  "home-MainTitle": "APIKA - API Management Platform",
   "home-SecondaryTitle": "Building a bridge between API owners and users.",
   "Dashboard": "Go to dashboard",
 
@@ -52,17 +52,17 @@
   "section1-Text": "Just create an account and be on your way! The developer dashboard offers you a one-stop location to discover APIs, track your application API usage, and more.",
   "section1-Text-Extra": "to see all features.",
   "section2-Heading": "Reach out to developers",
-  "section2-Text": "Apinf provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API trafﬁc.",
+  "section2-Text": "Apika provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API trafﬁc.",
   "contactUs": "Contact us",
   "section2-Text-Extra": "for more information.",
   "section3-Heading": "Completely open source",
-  "section3-Text": "Apinf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with MIT. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
+  "section3-Text": "Apika is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with MIT. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
   "section3-Text-Extra": "Find us in",
   "section3-Text-Social-Text": "and",
   "section-ContactUs": "Contact Us",
   "section-ContactUs-Text": "Contact us to ask anything.",
   /*Footer*/
-  "collaboration-Title": "Collaboration between",
+  "collaboration-Title": "Collaboration with",
   "collaboration-Title-Extra": "and",
 
   /*Account*/
