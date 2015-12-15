@@ -12,16 +12,21 @@
 
         <hr/>
         {{#if searchResults}}
-            <p>Search results:</p>
+
+            <h3>Search results:</h3>
 
             {{#each searchResults }}
-                <h2>{{name}}</h2>
-                <a href="/api/{{_id}}">View API</a>
-                <p>{{backend_host}}</p>
-                <hr/>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/api/{{_id}}">{{name}}</a>
+                    </div>
+                    <div class="panel-body">
+                        <i>{{backend_host}}</i>
+                    </div>
+                </div>
             {{/each}}
         {{else}}
-            <i style="text-align:center">Nothing found.</i>
+            <i>Nothing found.</i>
         {{/if }}
 
     </div>
