@@ -83,7 +83,7 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  "keyup #search-text, submit #search-form": function (event, template) {
+  "keyup #search-text": function (event, template) {
 
     event.preventDefault();
 
@@ -95,6 +95,18 @@ Template.search.events({
 
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
+
+    return false;
+  },
+  "submit #search-form": function (event, template) {
+
+    event.preventDefault();
+
+    // Get search text from a text field.
+    var searchValue = $('#search-text').val();
+
+    // Update current page URL with updated search value
+    Router.go('search', {}, {query: 'q='+searchValue});
 
     return false;
   }
