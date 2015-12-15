@@ -55,8 +55,10 @@ Template.search.helpers({
     // Fetch ApiBackend documents
     var searchResults = ApiBackends.find().fetch();
 
+    // Count the amount of api backends found
     var searchResultsCount = searchResults.length;
 
+    // Assign amount of search results to a reactive variable
     instance.searchResultsCount.set(searchResultsCount);
 
     return searchResults;
@@ -67,6 +69,7 @@ Template.search.helpers({
     // Get reference to Template instance
     var instance = Template.instance();
 
+    // Get the amount of api backends found from reactive var
     var searchResultsCount = instance.searchResultsCount.get();
 
     return searchResultsCount;
