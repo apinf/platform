@@ -2,6 +2,9 @@ Meteor.publish("searchApiBackends", function(searchValue) {
 
   if (!searchValue || searchValue == "") return {};
 
+  // Remove leading & trailing spaces from search value
+  searchValue = searchValue.trim();
+
   var query = {
     $or: [
       {
