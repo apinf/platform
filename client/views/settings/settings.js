@@ -36,6 +36,14 @@ AutoForm.addHooks(['settings'], {
     // Call method to update Meteor.settings
     Meteor.call('updateMeteorSettings');
     FlashMessages.sendSuccess('Settings saved.');
+    // Check if we can create ApiUmbrellaWeb object
+    try {
+      Meteor.call("createApiUmbrellaWeb");
+    }
+    // otherwise show an error
+    catch (error) {
+      console.log(error);
+    }
   }
 });
 
