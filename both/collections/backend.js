@@ -57,7 +57,10 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   },
   frontend_host: {
     type: String,
-    optional: false
+    optional: false,
+    defaultValue: function () {
+      return 'umbrella.apinf.io';
+    }
   },
   balance_algorithm: {
     type: String,
