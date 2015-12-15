@@ -1,4 +1,4 @@
-Meteor.publish("search", function(searchValue) {
+Meteor.publish("searchApiBackends", function(searchValue) {
 
   if (!searchValue || searchValue == "") return {};
 
