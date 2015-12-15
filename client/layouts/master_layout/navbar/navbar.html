@@ -10,6 +10,11 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       {{/if}}
+      <form id="header-search" class="header-search">
+          <div class="search-holder">
+              <input type="text" placeholder="Search.." class="form-control" id="header-search-text" />
+          </div>
+      </form>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           {{#if User}}
