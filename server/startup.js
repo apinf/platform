@@ -24,7 +24,7 @@ Meteor.startup(function () {
   // Updating Meteor.settings from Settings collection
   Meteor.call('updateMeteorSettings');
 
-  if (Meteor.settings) {
+  try {
 
     // Store settings object
     var settings = Meteor.settings;
@@ -34,25 +34,8 @@ Meteor.startup(function () {
       Settings.insert(settings);
     }
 
-    // Check if something is on Settings collection
-    if ( Settings.findOne() ) {
-      // Create config object for API Umbrella Web interface from Settings collection
-      var config = {
-        baseUrl: Settings.findOne().apiUmbrella.baseUrl,
-        apiKey: Settings.findOne().apiUmbrella.apiKey,
-        authToken: Settings.findOne().apiUmbrella.authToken
-      };
-    } else {
-      // Create config object for API Umbrella Web interface from Meteor.settings
-      var config = {
-        baseUrl: Meteor.settings.apiUmbrella.baseUrl,
-        apiKey: Meteor.settings.apiUmbrella.apiKey,
-        authToken: Meteor.settings.apiUmbrella.authToken
-      };
-    }
-
-    // Create API Umbrella Web object for REST calls
-    apiUmbrellaWeb = new ApiUmbrellaWeb(config);
+    // Creating ApiUmbrellaWeb object
+    Meteor.call("createApiUmbrellaWeb");
 
     // Check if API Umbrella settings are available
     SyncedCron.add({
@@ -69,6 +52,10 @@ Meteor.startup(function () {
     });
     Meteor.call("syncApiUmbrellaUsers");
     Meteor.call("syncApiBackends");
+  }
+  // otherwise show an error
+  catch (error) {
+    console.log(error);
   }
 
 });
