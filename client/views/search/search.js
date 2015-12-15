@@ -1,9 +1,12 @@
 Template.search.created = function () {
 
+  // Get reference to Template
   var instance = this;
 
+  // Init reactive var for search value
   instance.searchValue = new ReactiveVar();
 
+  // Init reactive parameter for search parameter
   instance.searchParameter = new ReactiveVar(Router.current().params.query.q);
 
 };
@@ -26,7 +29,7 @@ Template.search.helpers({
     Meteor.subscribe("search", searchValue);
 
     var searchResults = ApiBackends.find().fetch();
-    
+
     return searchResults;
 
   }
