@@ -1,6 +1,6 @@
 Template.search.created = function () {
 
-  // Get reference to Template
+  // Get reference to Template instance
   var instance = this;
 
   // Init reactive var for search value
@@ -8,6 +8,8 @@ Template.search.created = function () {
 
   // Init reactive parameter for search parameter & assign query parameter if one is provided
   instance.searchParameter = new ReactiveVar(Router.current().params.query.q);
+
+  instance.searchResultsCount = new ReactiveVar(0);
 
 };
 
@@ -23,7 +25,7 @@ Template.search.rendered = function () {
     $('#search-text').val(instance.searchParameter.get());
 
   }
-  
+
   $('#search-text').focus();
 
 };
@@ -31,7 +33,7 @@ Template.search.rendered = function () {
 Template.search.helpers({
   searchResults: function() {
 
-    // Get reference to Template
+    // Get reference to Template instance
     var instance = Template.instance();
 
     // Check if query was provided in the URL (e.g. "/search?q=search_param")
@@ -53,15 +55,28 @@ Template.search.helpers({
     // Fetch ApiBackend documents
     var searchResults = ApiBackends.find().fetch();
 
+    var searchResultsCount = searchResults.length;
+
+    instance.searchResultsCount.set(searchResultsCount);
+
     return searchResults;
 
+  },
+  searchResultsCount: function () {
+
+    // Get reference to Template instance
+    var instance = Template.instance();
+
+    var searchResultsCount = instance.searchResultsCount.get();
+
+    return searchResultsCount;
   }
 });
 
 Template.search.events({
   "keyup #search-text": function (event, template) {
 
-    // Get reference to Template
+    // Get reference to Template instance
     var instance = Template.instance();
 
     event.preventDefault();
