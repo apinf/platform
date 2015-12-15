@@ -21,7 +21,7 @@ if ( Meteor.settings ) {
 }
 
 // If settings are available in Settings collection
-if else ( Settings.findOne() ) {
+else if ( Settings.findOne() ) {
 
   ServiceConfiguration.configurations.remove({
     // removing existing configurations
