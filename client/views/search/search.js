@@ -33,3 +33,18 @@ Template.search.helpers({
 
   }
 });
+
+Template.search.events({
+  "keyup #search-text": function (event, template) {
+
+    var instance = Template.instance();
+
+    event.preventDefault();
+
+    instance.searchParameter.set(undefined);
+
+    var searchValue = $('#search-text').val();
+
+    instance.searchValue.set(searchValue);
+  }
+});
