@@ -44,14 +44,18 @@ Template.search.helpers({
 Template.search.events({
   "keyup #search-text": function (event, template) {
 
+    // Get reference to Template
     var instance = Template.instance();
 
     event.preventDefault();
 
+    // Clean searchParameter
     instance.searchParameter.set(undefined);
 
+    // Get search text from a text field.
     var searchValue = $('#search-text').val();
 
+    // Set searchValue to a reactive variable
     instance.searchValue.set(searchValue);
   }
 });
