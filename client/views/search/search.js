@@ -6,10 +6,25 @@ Template.search.created = function () {
   // Init reactive var for search value
   instance.searchValue = new ReactiveVar();
 
-  // Init reactive parameter for search parameter & assign query parameter if one is provided
-  instance.searchParameter = new ReactiveVar(Router.current().params.query.q);
-
+  // Init reactive var for search results count
   instance.searchResultsCount = new ReactiveVar(0);
+
+  instance.autorun(function () {
+
+    // Check if search parameter is set
+    if (Router.current().params.query.q) {
+
+      var searchValue = Router.current().params.query.q;
+
+      // Update search field with current search value
+      $('#search-text').val(searchValue);
+
+      // Assign current search value to the reactive variable
+      instance.searchValue.set(searchValue);
+
+    }
+
+  });
 
 };
 
@@ -19,13 +34,14 @@ Template.search.rendered = function () {
   var instance = this;
 
   // Check if search parameter is set
-  if (instance.searchParameter.get()) {
+  if (instance.searchValue.get()) {
 
     // Update search field with search value provided in the URL
-    $('#search-text').val(instance.searchParameter.get());
+    $('#search-text').val(instance.searchValue.get());
 
   }
 
+  // Put focus of search field on a page
   $('#search-text').focus();
 
 };
@@ -36,18 +52,8 @@ Template.search.helpers({
     // Get reference to Template instance
     var instance = Template.instance();
 
-    // Check if query was provided in the URL (e.g. "/search?q=search_param")
-    if (instance.searchParameter.get()) {
-
-      // Get query parameter & assign it to searchValue
-      var searchValue = instance.searchParameter.get();
-
-    } else {
-
-      // Get searchValue & assign in to searchValue
-      var searchValue = instance.searchValue.get();
-
-    }
+    // Get query parameter & assign it to searchValue
+    var searchValue = instance.searchValue.get();
 
     // Subscribe to a "search" publication
     Meteor.subscribe("searchApiBackends", searchValue);
@@ -77,20 +83,19 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  "keyup #search-text": function (event, template) {
+  "keyup #search-text, submit #search": function (event, template) {
+
+    event.preventDefault();
 
     // Get reference to Template instance
     var instance = Template.instance();
 
-    event.preventDefault();
-
-    // Clean searchParameter
-    instance.searchParameter.set(undefined);
-
     // Get search text from a text field.
     var searchValue = $('#search-text').val();
 
-    // Set searchValue to a reactive variable
+    // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
+
+    return false;
   }
 });
