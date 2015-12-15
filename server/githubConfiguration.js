@@ -1,5 +1,5 @@
 // If settings are already in Meteor.settings
-if ( Meteor.settings ) {
+try {
 
   ServiceConfiguration.configurations.remove({
     // removing existing configurations
@@ -19,21 +19,7 @@ if ( Meteor.settings ) {
   });
 
 }
-
-// If settings are available in Settings collection
-else if ( Settings.findOne() ) {
-
-  ServiceConfiguration.configurations.remove({
-    // removing existing configurations
-    service: 'github'
-  });
-
-  ServiceConfiguration.configurations.insert({
-    service: 'github',
-    clientId: Settings.findOne().githubConfiguration.clientId,
-    secret: Settings.findOne().githubConfiguration.secret
-
-  });
-
-
+//otherwise show an error
+catch (error) {
+  console.log(error);
 }
