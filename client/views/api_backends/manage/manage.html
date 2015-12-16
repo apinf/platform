@@ -1,7 +1,7 @@
 <template name='manageApiBackends'>
   <h1 class="page-heading">{{_ "manage-ApiBackends-Title"}}</h1>
   {{# each managedApis }}
-  <div class="panel panel-default">
+  <div class="panel panel-default managed-apis">
     <div class="panel-heading">
       <h2 class="panel-title">
         {{ name }}
@@ -27,7 +27,7 @@
             <a
                data-toggle="collapse"
                data-target="#api-id-{{ _id }}-backend"
-               href="#api-id-{{ _id }}-backend">
+               class="api-panel-title">
               <h3 class="panel-title">
                 {{ backend_host }} ({{ backend_protocol }})
               </h3>
@@ -53,7 +53,7 @@
             <a
                data-toggle="collapse"
                data-target="#api-id-{{ _id }}-frontend"
-               href="#api-id-{{ _id }}-frontend">
+               class="api-panel-title">
               <h3 class="panel-title">
                 {{ frontend_host }}
               </h3>
