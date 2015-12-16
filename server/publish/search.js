@@ -6,18 +6,19 @@ Meteor.publish("searchApiBackends", function(searchValue) {
   // Remove leading & trailing spaces from search value
   searchValue = searchValue.trim();
 
+  // Construct query using regex
   var query = {
     $or: [
       {
         name: {
           $regex: searchValue,
-          $options: 'i'
+          $options: 'i' // case-insensitive option
         }
       },
       {
         backend_host: {
           $regex: searchValue,
-          $options: 'i'
+          $options: 'i' // case-insensitive option
         }
       }
     ]
