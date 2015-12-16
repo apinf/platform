@@ -1,7 +1,10 @@
 Template.singleFeedback.created = function () {
+  // Get reference to current feedback
   var feedback = this.data;
+  
   // Get ID of current feedback object
   var feedbackId = feedback._id;
+  
   // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
 };
