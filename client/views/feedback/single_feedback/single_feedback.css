@@ -1,0 +1,12 @@
+.user-vote {
+  color: green;
+}
+.up-vote {
+  cursor: pointer;
+}
+.down-vote {
+  cursor: pointer;
+}
+.sum-of-votes {
+  background-color: rgb(50, 118, 177);
+}
