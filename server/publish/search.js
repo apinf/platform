@@ -1,6 +1,7 @@
 Meteor.publish("searchApiBackends", function(searchValue) {
 
-  if (!searchValue || searchValue == "") return {};
+  if (!searchValue || searchValue == "")
+    return ApiBackends.find({});
 
   // Remove leading & trailing spaces from search value
   searchValue = searchValue.trim();
