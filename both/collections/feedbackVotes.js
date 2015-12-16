@@ -28,11 +28,13 @@ FeedbackVotes.allow({
     }
   },
   update: function () {
+    // TODO: only allow user to update own vote
     if (Meteor.userId) {
       return true;
     }
   },
   remove: function () {
+    // TODO: only allow user to remove own vote
     if (Meteor.userId) {
       return true;
     }
