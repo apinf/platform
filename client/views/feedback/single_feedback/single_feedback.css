@@ -1,12 +1,12 @@
-.userVote {
+.user-vote {
   color: green;
 }
-.upvote {
+.up-vote {
   cursor: pointer;
 }
-.downvote {
+.down-vote {
   cursor: pointer;
 }
-.sumvotes {
+.sum-of-votes {
   background-color: rgb(50, 118, 177);
 }
