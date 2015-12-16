@@ -25,6 +25,12 @@ Meteor.startup(function () {
   Meteor.call("syncApiUmbrellaUsers");
   Meteor.call("syncApiBackends");
 
+
+  ApiBackends._ensureIndex({
+    "name": "text",
+    "backend_host": "text"
+  });
+
 });
 
 SyncedCron.start();
