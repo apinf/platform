@@ -22,7 +22,7 @@ Template.singleFeedback.helpers({
     
     // If user vote is plus one, it is an upvote
     if(userVote && userVote.vote === 1) {
-      return 'userVote';
+      return 'user-vote';
     }
   },
   'userDownvote': function() {
@@ -40,7 +40,7 @@ Template.singleFeedback.helpers({
     
     // If user vote is minus one, it is a downvote
     if(userVote && userVote.vote === -1) {
-      return 'userVote';
+      return 'user-vote';
     }
   }
 });
