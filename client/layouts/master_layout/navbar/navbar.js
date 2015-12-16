@@ -12,8 +12,10 @@ Template.navbar.events({
 
     event.preventDefault();
 
+    // Get current search value from the header search field
     var searchValue = $('#header-search-text').val();
 
+    // Redirect user to search page, provide search value as a query parameter e.g. "/search?q=searchValue"
     Router.go('search', {}, {query: 'q='+searchValue});
 
     return false;
