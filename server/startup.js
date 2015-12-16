@@ -26,6 +26,7 @@ Meteor.startup(function () {
   Meteor.call("syncApiBackends");
 
 
+  // Create indexes for fields in MongoDB collection (API backends search functionality)
   ApiBackends._ensureIndex({
     "name": "text",
     "backend_host": "text"
