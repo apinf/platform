@@ -19,9 +19,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a href="/api/{{_id}}">{{name}}</a>
+                        <i class="pull-right">Added <b>{{relative_created_at}}</b></i>
                     </div>
                     <div class="panel-body">
-                        <i>{{backend_host}}</i>
+                        {{backend_host}}
                     </div>
                 </div>
             {{/each}}
