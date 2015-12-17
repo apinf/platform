@@ -1,7 +1,9 @@
 Template.feedbackList.created = function () {
-  // Subscription to feedback collection
-  var currentRouter = Router.current().params._id;
-  this.subscribe('apiBackendFeedback', currentRouter);
+  // Get API Backend ID from URL route
+  var apiBackendId = Router.current().params._id;
+  
+  // Subscribe for all feedback for this API Backend
+  this.subscribe('apiBackendFeedback', apiBackendId);
 };
 
 Template.feedbackList.helpers({
