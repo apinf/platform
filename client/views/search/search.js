@@ -66,6 +66,11 @@ Template.search.helpers({
 
     // Assign amount of search results to a reactive variable
     instance.searchResultsCount.set(searchResultsCount);
+    
+    _.each(searchResults, function (result) {
+
+      result.relative_created_at = moment(result.created_at).fromNow();
+    });
 
     return searchResults;
 
