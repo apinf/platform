@@ -54,7 +54,7 @@ Meteor.methods({
       }catch(err){
 
         // Throw a 500 error explaining that the data was not found
-        throw new Meteor.Error(500, 'Analytics data is not found.');
+        throw new Meteor.Error(500, "Analytics data is not found.");
       }
 
       return searchResults;
