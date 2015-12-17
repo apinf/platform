@@ -1,10 +1,11 @@
 Meteor.methods({
   "getChartData": function (data) {
 
-    // Initialise variables
-    var loggedInUser, apiKey, query, searchResults;
-
+    // Check if user is logged in
     if (Meteor.user()) {
+
+      // Initialise variables
+      var loggedInUser, apiKey, query, searchResults;
 
       // Get user object
       loggedInUser = Meteor.user();
@@ -61,6 +62,7 @@ Meteor.methods({
 
     } else {
 
+      // Throw a 500 error
       throw new Meteor.Error(500, "User is not authorised.");
 
     }
