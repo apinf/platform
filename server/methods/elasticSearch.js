@@ -60,7 +60,8 @@ Meteor.methods({
       return searchResults;
 
     } else {
-      
+
+      throw new Meteor.Error(500, "User is not authorised.");
 
     }
   }
