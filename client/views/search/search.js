@@ -66,9 +66,11 @@ Template.search.helpers({
 
     // Assign amount of search results to a reactive variable
     instance.searchResultsCount.set(searchResultsCount);
-    
+
+    // Iterate through all documents
     _.each(searchResults, function (result) {
 
+      // Return to user human-readable timestamp
       result.relative_created_at = moment(result.created_at).fromNow();
     });
 
