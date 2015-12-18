@@ -7,7 +7,6 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   "apinf.host": {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
     label: "Host",
     optional: true,
     autoform: {
