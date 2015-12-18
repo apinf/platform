@@ -1,13 +1,4 @@
 Meteor.startup(function () {
-  //TODO: redirect to settings page if there are no settings in Settings Collection
-  //  Router.onBeforeAction(function() {
-  //    if ( Settings.findOne() ) {
-  //      this.next();
-  //    } else {
-  //      this.redirect('/settings');
-  //      this.next();
-  //    }
-  //  });
 
   // Get the settings
   var settings = Meteor.settings;
@@ -18,7 +9,6 @@ Meteor.startup(function () {
   if ( dbSettings.length === 0 ) {
     // insert Meteor.settings into Settings Collection
     Settings.insert(settings);
-    // TODO: figure out how to update Settings collection from settings.json
   }
 
   // Updating Meteor.settings from Settings collection
