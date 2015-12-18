@@ -1,48 +1,82 @@
 Template.addApiBackendWizard.helpers({
   "steps": function () {
     var baseInformation = new SimpleSchema({
-      "name": {
+      name: {
         type: String,
         optional: false
-      },
-      "frontend_prefix": {
-        label: 'Frontend prefix',
-        optional: false,
-        type: String,
-        regEx: SimpleSchema.RegEx.Prefix
       }
     });
 
-    var serverInformation = new SimpleSchema({
-      "host": {
-        type: String,
-        label: "Hostname",
-        optional: false
-      },
-      "port": {
-        type: String,
-        optional: false,
-        regEx: SimpleSchema.RegEx.Port
-      },
-      "protocol": {
+    var backendInformation = new SimpleSchema({
+      backend_protocol: {
         type: String,
         optional: false,
         allowedValues: [
           'http',
           'https'
         ],
-        label: 'Protocol'
+        label: 'Backend protocol'
+      },
+      backend_host: {
+        type: String
+      },
+      backend_port: {
+        type: String,
+        optional: true,
+        regEx: SimpleSchema.RegEx.Port
+      }
+    });
+
+    var frontendInformation = new SimpleSchema({
+      frontend_host: {
+        type: String,
+        optional: false
+      }
+    });
+
+    var prefixesInformation = new SimpleSchema({
+      url_matches: {
+        type: Object,
+        optional: true
+      },
+      "url_matches.frontend_prefix": {
+        label: 'Frontend prefix',
+        optional: true,
+        type: String,
+        regEx: SimpleSchema.RegEx.Prefix
+      },
+      "url_matches.backend_prefix": {
+        label: 'Backend prefix',
+        optional: true,
+        type: String,
+        regEx: SimpleSchema.RegEx.Prefix
       }
     });
 
     var steps = [{
       id: 'base-information',
       title: 'Base Information',
+      template: 'baseInformation',
+      formId: 'base-information-form',
       schema: baseInformation
     }, {
-      id: 'server-information',
-      title: 'Servers',
-      schema: serverInformation
+      id: 'backend-information',
+      title: 'Backend',
+      template: 'backendInformation',
+      formId: 'backend-information-form',
+      schema: backendInformation
+    }, {
+      id: 'frontend-information',
+      title: 'Frontend',
+      template: 'frontendInformation',
+      formId: 'frontend-information-form',
+      schema: frontendInformation
+    }, {
+      id: 'prefixes-information',
+      title: 'Matching URL Prefixes',
+      template: 'prefixesInformation',
+      formId: 'prefixes-information-form',
+      schema: prefixesInformation
     }];
 
     return steps;
