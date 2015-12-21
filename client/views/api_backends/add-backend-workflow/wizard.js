@@ -93,11 +93,13 @@ Template.addApiBackendWizard.helpers({
           port: apiBackend.backend_port
         }];
 
+        // Url matches object must be in an array
         apiBackend.url_matches = [apiBackend.url_matches];
 
+        // Add the least connections balance algorithm setting
         apiBackend.balance_algorithm = "least_conn";
 
-        // Delete unneeded properties: insert/update related
+        // Delete unneeded properties: database insert/update related
         delete apiBackend.insertDoc;
         delete apiBackend.updateDoc;
         delete apiBackend.backend_port;
@@ -105,10 +107,32 @@ Template.addApiBackendWizard.helpers({
         Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
           if (apiUmbrellaWebResponse.http_status === 200) {
             // Insert the API Backend
-            ApiBackends.insert(apiBackend);
+            var apiBackendId = ApiBackends.insert(apiBackend);
+            var apiUmbrellaApiId = apiUmbrellaWebResponse.result.data.api.id;
 
-            // Submit form on meteor:api-umbrella success
+            // Tell Wizard the submission is complete
             context.done();
+
+            //Redirect to the just created API Backend page
+            Router.go('viewApiBackend', {_id: apiBackendId});
+
+            // Publish the API Backend on API Umbrella
+            Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
+              console.log(apiUmbrellaWebResponse);
+
+              if (apiUmbrellaWebResponse.http_status === 201) {
+                sAlert.success("API Backend successfully published.");
+              } else {
+                var errors = _.values(apiUmbrellaWebResponse.errors);
+
+                // Flatten all error descriptions to show using sAlert
+                errors = _.flatten(errors);
+                _.each(errors, function(error) {
+                  // Display error to the user, keep the sAlert box visible.
+                  sAlert.error(error, {timeout: 'none'});
+                });
+              }
+            });
           } else {
             var errors = _.values(apiUmbrellaWebResponse.errors);
 
