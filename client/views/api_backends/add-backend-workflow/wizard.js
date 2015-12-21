@@ -118,7 +118,6 @@ Template.addApiBackendWizard.helpers({
 
             // Publish the API Backend on API Umbrella
             Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
-              console.log(apiUmbrellaWebResponse);
 
               if (apiUmbrellaWebResponse.http_status === 201) {
                 sAlert.success("API Backend successfully published.");
