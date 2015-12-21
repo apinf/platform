@@ -21,9 +21,12 @@ Template.addApiBackendWizard.helpers({
         type: String
       },
       backend_port: {
-        type: String,
+        type: Number,
         optional: true,
-        regEx: SimpleSchema.RegEx.Port
+        regEx: SimpleSchema.RegEx.Port,
+        autoform: {
+          defaultValue: 80
+        }
       }
     });
 
