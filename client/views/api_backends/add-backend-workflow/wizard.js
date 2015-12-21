@@ -79,7 +79,15 @@ Template.addApiBackendWizard.helpers({
       title: 'Matching URL Prefixes',
       template: 'prefixesInformation',
       formId: 'prefixes-information-form',
-      schema: prefixesInformation
+      schema: prefixesInformation,
+      onSubmit: function (data, wizard) {
+        // Get API Backend details from form steps
+        var apiBackend = _.extend(wizard.mergedData(), data);
+
+        // Delete unneeded properties: insert/update related
+        delete apiBackend.insertDoc;
+        delete apiBackend.updateDoc;
+      }
     }];
 
     return steps;
