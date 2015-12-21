@@ -16,9 +16,14 @@ Schemas.ApiBackendRating = new SimpleSchema({
   }
 });
 
+ApiBackendRatings.attachSchema(Schemas.ApiBackendRating);
+
 ApiBackendRatings.allow({
   insert: function () {
-    return true;
+    // User must be logged in to vote
+    if (Meteor.userId()) {
+      return true;
+    }
   },
   update: function () {
     return true;
