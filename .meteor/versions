@@ -107,6 +107,7 @@ meteor@1.1.10
 meteor-base@1.0.1
 meteor-platform@1.2.3
 meteorhacks:async@1.0.0
+meteorhacks:inject-initial@1.0.3
 meteorhacks:npm@1.5.0
 meteorhacks:subs-manager@1.6.2
 meteorspark:util@0.2.0
@@ -174,6 +175,7 @@ url@1.0.5
 useraccounts:bootstrap@1.12.4
 useraccounts:core@1.12.4
 useraccounts:iron-routing@1.12.4
+utilities:avatar@0.9.2
 webapp@1.2.3
 webapp-hashing@1.0.5
 yogiben:autoform-map@0.2.0

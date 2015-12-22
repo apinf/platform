@@ -19,6 +19,10 @@ Schemas.UserProfile = new SimpleSchema({
     isEmailPrivate: {
       type: Boolean,
       optional:true
+    },
+    image: {
+      type: String,
+      optional:true
     }
   });
 
