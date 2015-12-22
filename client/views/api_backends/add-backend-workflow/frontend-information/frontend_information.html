@@ -1,0 +1,9 @@
+<template name="frontendInformation">
+  {{#autoForm id="frontend-information-form" doc=step.data schema=step.schema}}
+
+  {{> afQuickField name="frontend_host" defaultValue=frontendHost readonly=true }}
+
+  {{> wizardButtons}}
+
+  {{/autoForm}}
+</template>
