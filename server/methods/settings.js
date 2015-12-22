@@ -1,8 +1,11 @@
 Meteor.methods({
-  'getApiUmbrellaBaseUrl': function () {
-    // Get base url from settings file
-    var apiUmbrellaBaseUrl = Meteor.settings.apiUmbrella.host;
+  'getApiUmbrellaHost': function () {
+    // Get API Umbrella base url from settings object
+    var apiUmbrellaBaseUrl = new URI(Meteor.settings.apiUmbrella.baseUrl);
 
-    return apiUmbrellaBaseUrl;
+    // Get host part of API Umbrella base URL
+    var apiUmbrellaHost = apiUmbrellaBaseUrl.host();
+
+    return apiUmbrellaHost;
   }
 });
