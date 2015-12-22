@@ -15,9 +15,12 @@ Schemas.UserProfile = new SimpleSchema({
     autoform: {
       readonly: true,
       template: "plain"
+    }},
+    isEmailPrivate: {
+      type: Boolean,
+      optional:true
     }
-  }
-});
+  });
 
 Schemas.User = new SimpleSchema({
   username: {
