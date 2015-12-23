@@ -17,8 +17,13 @@ Template.apiBackendUsageInstructions.helpers({
     // Get reference to template instance
     var instance = Template.instance();
 
-    // Create reference to API Umbrella base URL
-    var apiUmbrellaBaseUrl = instance.apiUmbrellaBaseUrl.get();
+    var apiBackendFrontendPrefix = instance.data.apiBackend.url_matches[0].frontend_prefix;
+    
+    var apiUmbrellaBaseUrl = new URI(instance.apiUmbrellaBaseUrl.get());
+
+    apiUmbrellaBaseUrl.segment(0, apiBackendFrontendPrefix);
+
+    apiUmbrellaBaseUrl.normalize();
 
     return apiUmbrellaBaseUrl;
   }
