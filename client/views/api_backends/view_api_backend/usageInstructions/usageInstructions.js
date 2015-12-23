@@ -14,15 +14,20 @@ Template.apiBackendUsageInstructions.created = function () {
 
 Template.apiBackendUsageInstructions.helpers({
   apiUmbrellaBaseUrl: function () {
+
     // Get reference to template instance
     var instance = Template.instance();
 
+    // Fetch API Backend's frontend prefix value
     var apiBackendFrontendPrefix = instance.data.apiBackend.url_matches[0].frontend_prefix;
-    
+
+    // Get reference to API Umbrella base URL & construct a URI object
     var apiUmbrellaBaseUrl = new URI(instance.apiUmbrellaBaseUrl.get());
 
+    // Append a frontend prefix to a API Umbrella base URL
     apiUmbrellaBaseUrl.segment(0, apiBackendFrontendPrefix);
 
+    // Clean up URL & remove extra slashes
     apiUmbrellaBaseUrl.normalize();
 
     return apiUmbrellaBaseUrl;
