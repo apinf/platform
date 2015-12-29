@@ -14,7 +14,7 @@ Template.branding.helpers({
 Template.branding.helpers({
   projectLogo: function () {
     // Get last uploaded image from collection
-    var lastUploadedLogo = ProjectLogo.find({}, {sort: {uploadedAt: -1}}).fetch()[0];
+    var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
     // Check if new logo was uploaded, if so change it with previous
     if (lastUploadedLogo) {
       return lastUploadedLogo
