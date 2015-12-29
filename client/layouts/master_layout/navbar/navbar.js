@@ -6,7 +6,7 @@ Template.navbar.helpers({
     return profilePicture.url();
   },
   projectLogo: function () {
-    var lastUploadedLogo = ProjectLogo.find({}, {sort: {uploadedAt: -1}}).fetch()[0];
+    var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
     if (lastUploadedLogo) {
       return lastUploadedLogo
     }
