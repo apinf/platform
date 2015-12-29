@@ -70,11 +70,15 @@ Feedback.allow({
 
 Feedback.helpers({
   'sumOfVotes': function () {
-    //Adds all vote integers together, returns sum of all votes as Integer
+    // Get all votes for current feedback
     var feedbacks = FeedbackVotes.find({feedbackId: this._id}).fetch();
+    
+    // Create a list of all feedback vote values
     var votes = _(feedbacks).map(function(feedback){
       return feedback.vote;
     });
+    
+    // Calculate the sum of all vote values
     var sum = ss.sum(votes);
     return sum;
   }

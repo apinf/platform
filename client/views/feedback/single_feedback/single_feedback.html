@@ -1,9 +1,9 @@
 <template name="singleFeedback">
   <div class="row list-group-item feedback-list-item">
     <div class="col-lg-2 col-md-2">
-      <span id="upvote-{{ _id }}" class="fa fa-lg fa-arrow-up upvote"></span>
-      <span class="badge sumvotes">{{ sumOfVotes }}</span>
-      <span id="downvote-{{ _id }}" class="fa fa-lg fa-arrow-down downvote"></span>
+      <span id="up-vote-{{ _id }}" class="fa fa-lg fa-arrow-up up-vote {{userUpvote}}"></span>
+      <span class="sum-of-votes badge">{{ sumOfVotes }}</span>
+      <span id="down-vote-{{ _id }}" class="fa fa-lg fa-arrow-down down-vote {{userDownvote}}"></span>
     </div>
     <div class="col-lg-2 col-md-2">
       <span class="badge">{{ messageType }}</span>
@@ -23,6 +23,6 @@
     </div>
   </div>
   <div id="feedback-{{ _id }}" class="collapse">
-    {{> feedbackItem }}
+    {{> feedbackDetails }}
   </div>
 </template>
