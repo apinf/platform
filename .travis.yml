@@ -3,7 +3,9 @@ language: node_js
 node_js:
 - '0.12'
 before_install:
-- curl https://install.meteor.com/ | sh
-- npm install -g mup
+- openssl aes-256-cbc -K $encrypted_1aa04dfd6a62_key -iv $encrypted_1aa04dfd6a62_iv
+  -in secrets.tar.enc -out secrets.tar -d # Decrypt secrets
+- curl https://install.meteor.com/ | sh # Install Meteor
+- npm install -g mup # Install Meteor Up
 script:
-- mup deploy --settings settings.json
+- mup deploy --settings=settings.json # Deploy Apinf
