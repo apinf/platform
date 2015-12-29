@@ -7,10 +7,10 @@ ProjectLogo = new FS.Collection("projectLogo", {
 if (Meteor.isServer) {
   ProjectLogo.allow({
     insert: function(userId, doc) {
-      return true;
+      return Roles.userIsInRole(userId, ['admin']);
     },
     update: function(userId, doc, fieldNames, modifier) {
-      return true;
+      return Roles.userIsInRole(userId, ['admin']);
     },
     download: function(userId) {
       return true;
