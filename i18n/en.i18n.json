@@ -131,6 +131,12 @@
   "apiBackends-AdvancedSettings": "Advanced Settings",
   "apiBackends-Submit": "Submit",
 
+
+  /* Add API Backend - simple */
+  "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
+  "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
+  "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '/'",
+
   /*Bookmarks*/
   "bookmarks-Title": "Your bookmarked APIs",
   "bookmarks-Name": "Name:",
@@ -142,6 +148,7 @@
 
   /*Catalogue*/
   "catalogue-Title": "Available APIs",
+  "api-backend-rating-anonymous": "Please log in to vote.",
 
   /*Feedback*/
   "feedback-submitted-by": "submitted by",
@@ -191,7 +198,7 @@
   "dataTable-RequestCountry": "Request country",
   "dataTable-RequestIP": "Request IP",
   "dataTable-RequestPath": "Request path",
-  "dataTable-ResponseTime": "Response time",
+  "dataTable-ResponseTime": "Response time (in milliseconds)",
 
   /*Status*/
   "statusCheckTitle": "Status",
