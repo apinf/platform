@@ -9,7 +9,7 @@ Template.navbar.helpers({
 
 Template.navbar.events({
   'submit #header-search-form': function (event, template) {
-
+    // Prevent page from refreshing
     event.preventDefault();
 
     // Get current search value from the header search field
@@ -20,7 +20,5 @@ Template.navbar.events({
 
     // Reset value of search bar
     $('#header-search-text').val("");
-
-    return false;
   }
 });
