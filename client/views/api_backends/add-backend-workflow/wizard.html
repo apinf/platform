@@ -10,17 +10,6 @@
   }}
 </template>
 
-
-<template name="baseInformation">
-  {{#autoForm id="base-information-form" doc=step.data schema=step.schema}}
-
-  {{> afQuickField name="name"}}
-
-  {{> wizardButtons}}
-
-  {{/autoForm}}
-</template>
-
 <template name="backendInformation">
   {{#autoForm id="backend-information-form" doc=step.data schema=step.schema}}
 
