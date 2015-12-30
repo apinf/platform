@@ -103,7 +103,7 @@ Template.addApiBackendWizard.helpers({
 
           // Set frontend host to API Umbrella host value
           apiBackend.frontend_host = apiUmbrellaHost;
-          console.log(apiBackend);
+          
           // Create the API Backend on API Umbrella
           Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
             if (apiUmbrellaWebResponse.http_status === 200) {
