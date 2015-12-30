@@ -154,6 +154,15 @@
   "feedback-feedbackForm-title": "Send feedback or report a problem",
   "feedback-feedbackForm-description": "We welcome problem reports, feature ideas and general comments.",
 
+  /* Search page */
+  "searchPage-pageHeader": "Search APIs",
+  "searchPage-currentQueryHeader": "Current query",
+  "searchPage-searchResultsHeader": "Search results",
+  "searchPage-noResults": "Nothing found.",
+  "searchPage-addedPrefix": "Added",
+  "searchPage-searchForm-placeholderText": "Search...",
+  "searchPage-searchForm-helpText": "Edit query text for live search results.",
+
   /*Charts*/
   /*Error messages*/
   "esData-notFound": "There are no API usage statistics available.",
