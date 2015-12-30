@@ -4,6 +4,7 @@
   </div>
 
   <div class="row">
+    <h2>{{_ "searchPage-currentQueryHeader" }}</h2>
     <form id="search-form">
       <div>
         <input
@@ -17,7 +18,7 @@
 
   <div class="row">
   {{#if searchResults}}
-    <h2>Search results <small><em>({{ searchResultsCount }})</em></small></h2>
+    <h2>{{_ "searchPage-searchResultsHeader" }} <small><em>({{ searchResultsCount }})</em></small></h2>
 
     {{#each searchResults }}
       <div class="panel panel-default">
