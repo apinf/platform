@@ -1,0 +1,13 @@
+<template name="prefixesInformation">
+  {{#autoForm id="prefixes-information-form" doc=step.data schema=step.schema}}
+
+  {{> afQuickField name="url_matches"}}
+
+  <p class="help-block">
+    {{_ "addBackend_simple_prefixInformation_helptext"}}
+  </p>
+
+  {{> wizardButtons}}
+
+  {{/autoForm}}
+</template>
