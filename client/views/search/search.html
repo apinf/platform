@@ -5,16 +5,21 @@
 
   <div class="row">
     <h2>{{_ "searchPage-currentQueryHeader" }}</h2>
-    <form id="search-form">
-      <div>
-        <input
-          type="text"
-          placeholder="{{_ 'searchPage-searchForm-placeholderText' }}"
-          class="form-control"
-          id="search-text" />
-      </div>
-    </form>
-    <p class="help-block">{{_ "searchPage-searchForm-helpText" }}</p>
+    <div class="col-md-5">
+      <form id="search-form">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-search"></i>
+          </span>
+          <input
+            type="text"
+            placeholder="{{_ 'searchPage-searchForm-placeholderText' }}"
+            class="form-control"
+            id="search-text" />
+        </div>
+      </form>
+      <p class="help-block">{{_ "searchPage-searchForm-helpText" }}</p>
+    </div>
   </div>
 
   <div class="row">
