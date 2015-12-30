@@ -91,7 +91,6 @@ Template.search.helpers({
 
 Template.search.events({
   "keyup #search-text": function (event, template) {
-
     event.preventDefault();
 
     // Get reference to Template instance
@@ -102,6 +101,9 @@ Template.search.events({
 
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
+
+    // Set query parameter to value of search text
+    UniUtils.url.setQuery("q", searchValue);
 
     return false;
   },
