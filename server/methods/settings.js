@@ -1,4 +1,9 @@
 Meteor.methods({
+  'updateMeteorSettings': function() {
+    // Updating Meteor.settings from Settings collection
+    settings = Settings.findOne();
+    Meteor.settings = settings;
+  },
   'getApiUmbrellaHost': function () {
     // Get API Umbrella base url from settings object
     var apiUmbrellaBaseUrl = new URI(Meteor.settings.apiUmbrella.baseUrl);
