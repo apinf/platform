@@ -10,18 +10,6 @@
   }}
 </template>
 
-<template name="backendInformation">
-  {{#autoForm id="backend-information-form" doc=step.data schema=step.schema}}
-
-  {{> afQuickField name="backend_protocol" options="allowed"}}
-  {{> afQuickField name="backend_host"}}
-  {{> afQuickField name="backend_port"}}
-
-  {{> wizardButtons}}
-
-  {{/autoForm}}
-</template>
-
 <template name="prefixesInformation">
   {{#autoForm id="prefixes-information-form" doc=step.data schema=step.schema}}
 
