@@ -18,6 +18,9 @@ Template.navbar.events({
     // Redirect user to search page, provide search value as a query parameter e.g. "/search?q=searchValue"
     Router.go('search', {}, {query: 'q='+searchValue});
 
+    // Reset value of search bar
+    $('#header-search-text').val("");
+
     return false;
   }
 });
