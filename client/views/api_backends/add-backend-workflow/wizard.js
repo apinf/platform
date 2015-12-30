@@ -69,12 +69,6 @@ Template.addApiBackendWizard.helpers({
       formId: 'backend-information-form',
       schema: backendInformation
     }, {
-      id: 'frontend-information',
-      title: 'Frontend',
-      template: 'frontendInformation',
-      formId: 'frontend-information-form',
-      schema: frontendInformation
-    }, {
       id: 'prefixes-information',
       title: 'Matching URL Prefixes',
       template: 'prefixesInformation',
@@ -104,48 +98,61 @@ Template.addApiBackendWizard.helpers({
         delete apiBackend.updateDoc;
         delete apiBackend.backend_port;
 
-        Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
-          if (apiUmbrellaWebResponse.http_status === 200) {
-            // Insert the API Backend
-            var apiBackendId = ApiBackends.insert(apiBackend);
-            var apiUmbrellaApiId = apiUmbrellaWebResponse.result.data.api.id;
+        Meteor.call("getApiUmbrellaHost", function (error, apiUmbrellaHost) {
 
-            // Tell Wizard the submission is complete
-            context.done();
 
-            //Redirect to the just created API Backend page
-            Router.go('viewApiBackend', {_id: apiBackendId});
+          // Set frontend host to API Umbrella host value
+          apiBackend.frontend_host = apiUmbrellaHost;
+          console.log(apiBackend);
+          // Create the API Backend on API Umbrella
+          Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
+            if (apiUmbrellaWebResponse.http_status === 200) {
+              // Insert the API Backend
+              var apiBackendId = ApiBackends.insert(apiBackend);
 
-            // Publish the API Backend on API Umbrella
-            Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
+              // Get the ID of the newly created API Backend
+              var apiUmbrellaApiId = apiUmbrellaWebResponse.result.data.api.id;
 
-              if (apiUmbrellaWebResponse.http_status === 201) {
-                sAlert.success("API Backend successfully published.");
-              } else {
-                var errors = _.values(apiUmbrellaWebResponse.errors);
+              // Tell Wizard the submission is complete
+              context.done();
 
-                // Flatten all error descriptions to show using sAlert
-                errors = _.flatten(errors);
-                _.each(errors, function(error) {
-                  // Display error to the user, keep the sAlert box visible.
-                  sAlert.error(error, {timeout: 'none'});
-                });
-              }
-            });
-          } else {
-            var errors = _.values(apiUmbrellaWebResponse.errors);
+              //Redirect to the just created API Backend page
+              Router.go('viewApiBackend', {_id: apiBackendId});
 
-            // Flatten all error descriptions to show using sAlert
-            errors = _.flatten(errors);
-            _.each(errors, function(error) {
-              //Display error to the user, keep the sAlert box visible.
-              sAlert.error(error, {timeout: 'none'});
-            });
+              // Publish the API Backend on API Umbrella
+              Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
 
-            //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
-            context.result(false);
-          }
+                if (apiUmbrellaWebResponse.http_status === 201) {
+                  sAlert.success("API Backend successfully published.");
+                } else {
+                  var errors = _.values(apiUmbrellaWebResponse.errors);
+
+                  // Flatten all error descriptions to show using sAlert
+                  errors = _.flatten(errors);
+                  _.each(errors, function(error) {
+                    // Display error to the user, keep the sAlert box visible.
+                    sAlert.error(error, {timeout: 'none'});
+                  });
+                }
+              });
+            } else {
+              var errors = _.values(apiUmbrellaWebResponse.errors);
+
+              // Flatten all error descriptions to show using sAlert
+              errors = _.flatten(errors);
+              _.each(errors, function(error) {
+                //Display error to the user, keep the sAlert box visible.
+                sAlert.error(error, {timeout: 'none'});
+              });
+
+              //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
+              context.result(false);
+            }
+          });
+
         });
+
+
       }
     }];
 
