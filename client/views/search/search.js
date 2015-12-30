@@ -18,9 +18,10 @@ Template.search.created = function () {
   }
 
   instance.autorun(function () {
-    //var instance = this;
-
     var searchValue = instance.searchValue.get();
+
+    // Update API Backends subscription with search value
+    instance.subscribe("searchApiBackends", searchValue);
 
     // Construct query using regex using search value
     instance.query.set({
