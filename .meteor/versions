@@ -170,6 +170,8 @@ twbs:bootstrap@3.3.5
 ui@1.0.8
 underscore@1.0.4
 underscorestring:underscore.string@3.0.3_1
+universe:reactive-queries@1.0.1
+universe:utilities@2.1.0
 url@1.0.5
 useraccounts:bootstrap@1.12.4
 useraccounts:core@1.12.4
