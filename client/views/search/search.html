@@ -1,35 +1,37 @@
 <template name="search">
+  <div class="page-header">
+    <h1>{{_ "searchPage-pageHeader" }}</h1>
+  </div>
 
-    <div>
+  <div class="row">
+    <form id="search-form">
+      <div>
+        <input
+          type="text"
+          placeholder="{{_ 'searchPage-searchForm-placeholderText' }}"
+          class="form-control"
+          id="search-text" />
+      </div>
+    </form>
+  </div>
 
-        <h1>Search APIs</h1>
+  <div class="row">
+  {{#if searchResults}}
+    <h2>Search results <small><em>({{ searchResultsCount }})</em></small></h2>
 
-        <form id="search-form">
-            <div>
-                <input type="text" placeholder="Search.." class="form-control" id="search-text" />
-            </div>
-        </form>
-
-        <hr/>
-        {{#if searchResults}}
-
-            <h3>Search results <b>({{searchResultsCount}})</b>:</h3>
-
-            {{#each searchResults }}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="/api/{{_id}}">{{name}}</a>
-                        <i class="pull-right">Added <b>{{relative_created_at}}</b></i>
-                    </div>
-                    <div class="panel-body">
-                        {{backend_host}}
-                    </div>
-                </div>
-            {{/each}}
-        {{else}}
-            <i>Nothing found.</i>
-        {{/if }}
-
-    </div>
-
+    {{#each searchResults }}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a href="/api/{{_id}}">{{ name }}</a>
+          <i class="pull-right">{{_ "searchPage-addedPrefix" }} <b>{{ relative_created_at }}</b></i>
+        </div>
+        <div class="panel-body">
+          {{ backend_host }}
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+      <i>{{_ "searchPage-noResults" }}</i>
+  {{/if }}
+  </div>
 </template>
