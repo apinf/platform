@@ -62,10 +62,10 @@ Meteor.methods({
     }
     return apiUmbrellaWebResponse;
   },
-  updateApiBackendOnApiUmbrella: function (apiBackendForm) {
+  updateApiBackendOnApiUmbrella: function (apiUmbrellaBackendId, apiBackend) {
     // Construct an API Backend object for API Umbrella with one 'api' key
     var constructedBackend = {
-      "api": apiBackendForm
+      "api": apiBackend
     };
 
     // Response object to be send back to client layer.
@@ -77,7 +77,7 @@ Meteor.methods({
 
     try {
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.updateApiBackend(constructedBackend);
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
     } catch (apiUmbrellaError) {
 
       //set the errors object
