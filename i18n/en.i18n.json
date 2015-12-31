@@ -162,12 +162,11 @@
 
   /* Search page */
   "searchPage-pageHeader": "Search APIs",
-  "searchPage-currentQueryHeader": "Current query",
   "searchPage-searchResultsHeader": "Search results",
   "searchPage-noResults": "Nothing found.",
   "searchPage-addedPrefix": "Added",
   "searchPage-searchForm-placeholderText": "Search...",
-  "searchPage-searchForm-helpText": "Edit query text for live search results.",
+  "searchPage-searchForm-helpText": "Start typing your query for live search results.",
 
   /*Charts*/
   /*Error messages*/
