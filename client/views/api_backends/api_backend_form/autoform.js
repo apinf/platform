@@ -60,6 +60,25 @@ AutoForm.hooks({
         // Keep the context to use inside the callback function
         var context = this;
 
+        // Get current API Backend document for modification
+        var apiBackend = context.currentDoc;
+
+        // Get the set of updated properties
+        var setApiBackendProperties = context.updateDoc.$set;
+
+        // Get the set of properties to remove
+        var unsetApiBackendProperties = context.updateDoc.$unset;
+
+        // Update properties on API Backend document
+        for (var property in setApiBackendProperties) {
+          apiBackend[property] = setApiBackendProperties[property];
+        }
+
+        // Delete unused properties from API Backend object
+        for (var property in unsetApiBackendProperties) {
+          delete apiBackend[property];
+        }
+
         // Get ID of API Umbrella backend
         var apiUmbrellaBackendId = Router.current().params._id;
 
@@ -67,7 +86,7 @@ AutoForm.hooks({
         response = Meteor.call(
           'updateApiBackendOnApiUmbrella',
           apiUmbrellaBackendId,
-          apiBackendForm,
+          apiBackend,
           function(error, apiUmbrellaWebResponse) {
             console.log(apiUmbrellaWebResponse);
             if (apiUmbrellaWebResponse.http_status === 204) {
