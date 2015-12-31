@@ -103,15 +103,18 @@ Template.addApiBackendWizard.helpers({
 
           // Set frontend host to API Umbrella host value
           apiBackend.frontend_host = apiUmbrellaHost;
-          
+
           // Create the API Backend on API Umbrella
           Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
             if (apiUmbrellaWebResponse.http_status === 200) {
+              // Get API Backend from API Umbrella response
+              var apiBackend = apiUmbrellaWebResponse.result.data.api;
+
               // Insert the API Backend
               var apiBackendId = ApiBackends.insert(apiBackend);
 
               // Get the ID of the newly created API Backend
-              var apiUmbrellaApiId = apiUmbrellaWebResponse.result.data.api.id;
+              var apiUmbrellaApiId = apiBackend.id;
 
               // Tell Wizard the submission is complete
               context.done();
