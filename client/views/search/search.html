@@ -4,27 +4,24 @@
   </div>
 
   <div class="row">
-    <h2>{{_ "searchPage-currentQueryHeader" }}</h2>
-    <div class="col-md-5">
-      <form id="search-form">
-        <div class="input-group">
-          <span class="input-group-addon">
-            <i class="fa fa-search"></i>
-          </span>
-          <input
+    <form id="search-form">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-search"></i>
+        </span>
+        <input
             type="text"
             placeholder="{{_ 'searchPage-searchForm-placeholderText' }}"
             class="form-control"
             id="search-text" />
-        </div>
-      </form>
-      <p class="help-block">{{_ "searchPage-searchForm-helpText" }}</p>
-    </div>
+      </div>
+    </form>
+    <p class="help-block">{{_ "searchPage-searchForm-helpText" }}</p>
   </div>
 
   <div class="row">
   {{#if searchResults}}
-    <h2>{{_ "searchPage-searchResultsHeader" }} <small><em>({{ searchResultsCount }})</em></small></h2>
+    <h3>{{_ "searchPage-searchResultsHeader" }} <small><em>({{ searchResultsCount }})</em></small></h3>
 
     {{#each searchResults }}
       <div class="panel panel-default">
