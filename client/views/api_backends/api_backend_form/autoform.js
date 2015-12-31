@@ -59,16 +59,15 @@ AutoForm.hooks({
         var unsetApiBackendProperties = context.updateDoc.$unset;
 
         // Update properties on API Backend document
-        for (var property in setApiBackendProperties) {
+        for (let property in setApiBackendProperties) {
           apiBackend[property] = setApiBackendProperties[property];
         }
 
         // Delete unused properties from API Backend object
-        for (var property in unsetApiBackendProperties) {
-          console.log(property);
+        for (let property in unsetApiBackendProperties) {
           delete apiBackend[property];
         }
-        console.log(apiBackend);
+
         // Get ID of API Umbrella backend (not the Apinf document ID)
         var apiUmbrellaBackendId = apiBackend.id;
 
@@ -78,11 +77,12 @@ AutoForm.hooks({
           apiUmbrellaBackendId,
           apiBackend,
           function(error, apiUmbrellaWebResponse) {
-            console.log(apiUmbrellaWebResponse);
+            // Check for API Umbrella error
             if (apiUmbrellaWebResponse.http_status === 204) {
-              // Submit form on meteor:api-umbrella success
+              // If status is OK, submit form
               context.result(apiBackendForm);
             } else {
+              // If there are errors
               var errors = _.values(apiUmbrellaWebResponse.errors);
 
               // Flatten all error descriptions to show using sAlert
@@ -94,7 +94,8 @@ AutoForm.hooks({
                 //   and get rid of sAlert here.
               });
 
-              //Cancel form submission on error, so user see the sAlert.error message and edit the incorrect fields
+              // Cancel form submission on error,
+              // so user see the error message and edit the incorrect fields
               context.result(false);
             }
         });
@@ -135,11 +136,13 @@ AutoForm.hooks({
 
       // Publish the API Backend on API Umbrella
       Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
-        console.log(apiUmbrellaWebResponse);
 
+        // Check for a successful response
         if (apiUmbrellaWebResponse.http_status === 201) {
+          // Alert the user of the success
           sAlert.success("API Backend successfully published.");
         } else {
+          // If there are errors, inform the user
           var errors = _.values(apiUmbrellaWebResponse.errors);
 
           // Flatten all error descriptions to show using sAlert
