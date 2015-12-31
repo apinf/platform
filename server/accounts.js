@@ -24,18 +24,22 @@ Accounts.onCreateUser(function(options, user) {
   if ((ref1 = user.services) != null ? (ref2 = ref1.github) != null ? ref2.id : void 0 : void 0) {
     profileImageUrl = user.services.github.avatar_url;
   }
-  apiUmbrellaUserObj = {
-    "user": {
-      "email": user.emails[0].address,
-      "first_name": "-",
-      "last_name": "-",
-      "terms_and_conditions": true
-    }
-  };
-  response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
-  user.apiUmbrellaUserId = response.data.user.id;
-  user.profile.apiKey = response.data.user.api_key;
-  ApiUmbrellaUsers.insert(response.data.user);
+  // It doesn't allow to create a user on APIUmbrella side if apiUmbrellaWeb is not created
+  // TODO: show an error message to inform user about it
+  if ( typeof apiUmbrellaWeb !== 'undefined' ) {
+    apiUmbrellaUserObj = {
+      "user": {
+        "email": user.emails[0].address,
+        "first_name": "-",
+        "last_name": "-",
+        "terms_and_conditions": true
+      }
+    };
+    response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
+    user.apiUmbrellaUserId = response.data.user.id;
+    user.profile.apiKey = response.data.user.api_key;
+    ApiUmbrellaUsers.insert(response.data.user);
+  }
 
   return user;
 });

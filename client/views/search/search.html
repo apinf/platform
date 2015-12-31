@@ -1,0 +1,41 @@
+<template name="search">
+  <div class="page-header">
+    <h1>{{_ "searchPage-pageHeader" }}</h1>
+  </div>
+
+  <div class="row">
+    <form id="search-form">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fa fa-search"></i>
+        </span>
+        <input
+            type="text"
+            placeholder="{{_ 'searchPage-searchForm-placeholderText' }}"
+            class="form-control"
+            id="search-text" />
+      </div>
+    </form>
+    <p class="help-block">{{_ "searchPage-searchForm-helpText" }}</p>
+  </div>
+
+  <div class="row">
+  {{#if searchResults}}
+    <h3>{{_ "searchPage-searchResultsHeader" }} <small><em>({{ searchResultsCount }})</em></small></h3>
+
+    {{#each searchResults }}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a href="/api/{{_id}}">{{ name }}</a>
+          <i class="pull-right">{{_ "searchPage-addedPrefix" }} <b>{{ relative_created_at }}</b></i>
+        </div>
+        <div class="panel-body">
+          {{ backend_host }}
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+      <i>{{_ "searchPage-noResults" }}</i>
+  {{/if }}
+  </div>
+</template>

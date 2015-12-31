@@ -10,6 +10,13 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       {{/if}}
+      {{# unless isSearchRoute }}
+      <form id="header-search-form" class="header-search-form">
+          <div>
+              <input type="text" placeholder="Search.." class="form-control" id="header-search-text" />
+          </div>
+      </form>
+      {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           {{#if User}}
@@ -25,6 +32,7 @@
             <ul class="dropdown-menu">
               <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
               <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
+              <li><a href="{{pathFor 'settings'}}">Settings</a></li>
               <li class="divider"></li>
               <li><a href="/sign-out">{{_ "signout"}}</a></li>
             </ul>
