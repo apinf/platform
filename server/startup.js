@@ -48,7 +48,11 @@ Meteor.startup(function () {
     console.log(error);
   }
 
+  // Create indexes for fields in MongoDB collection (API backends search functionality)
+  ApiBackends._ensureIndex({
+    "name": 1,
+    "backend_host": 1
+  });
+
+  SyncedCron.start();
 });
-
-
-SyncedCron.start();
