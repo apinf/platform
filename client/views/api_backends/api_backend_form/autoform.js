@@ -76,11 +76,12 @@ AutoForm.hooks({
 
         // Delete unused properties from API Backend object
         for (var property in unsetApiBackendProperties) {
+          console.log(property);
           delete apiBackend[property];
         }
-
-        // Get ID of API Umbrella backend
-        var apiUmbrellaBackendId = Router.current().params._id;
+        console.log(apiBackend);
+        // Get ID of API Umbrella backend (not the Apinf document ID)
+        var apiUmbrellaBackendId = apiBackend.id;
 
         // Send the API Backend to API Umbrella
         response = Meteor.call(

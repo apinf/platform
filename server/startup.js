@@ -25,6 +25,10 @@ Meteor.startup(function () {
   Meteor.call("syncApiUmbrellaUsers");
   Meteor.call("syncApiBackends");
 
+  var apiBackends = ApiBackends.find().fetch();
+
+  apiBackends.forEach(function (apiBackend) {console.log("id: ", apiBackend.id)});
+
 });
 
 SyncedCron.start();
