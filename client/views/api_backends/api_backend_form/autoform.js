@@ -100,7 +100,10 @@ AutoForm.hooks({
         });
       }
     },
-    onSuccess: function (formType, apiBackendId) {
+    onSuccess: function () {
+      // Get current API Backend ID
+      var apiBackendId = this.docId;
+
       // Attach API Backend ID to API Doc, if possible
       if (Session.get('apiDocsId')) {
         // Get the API Documentation ID, if available
