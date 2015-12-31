@@ -173,6 +173,8 @@ tsega:skrollr@0.0.2
 twbs:bootstrap@3.3.6
 ui@1.0.8
 underscore@1.0.4
+universe:reactive-queries@1.0.1
+universe:utilities@2.1.0
 url@1.0.5
 useraccounts:bootstrap@1.13.1
 useraccounts:core@1.13.1

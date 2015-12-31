@@ -89,5 +89,6 @@ simple:json-routes
 olragon:uri-js
 forwarder:autoform-wizard
 frenchbread:elastic-rest
+universe:reactive-queries
 ecmascript
 simple:reactive-method

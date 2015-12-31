@@ -15,6 +15,13 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       {{/if}}
+      {{# unless isSearchRoute }}
+      <form id="header-search-form" class="header-search-form">
+          <div>
+              <input type="text" placeholder="Search.." class="form-control" id="header-search-text" />
+          </div>
+      </form>
+      {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           {{#if User}}
