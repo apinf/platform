@@ -7,9 +7,6 @@
             <h3 class="panel-title">Profile </h3>
           </div>
           <div class="panel-body">
-            <div class="avatar" style="margin:auto;min-height:75px;">
-              {{> avatar user=this shape="circle" size="large"}}
-            </div>
             {{#autoForm id="updateProfile" collection=Users doc=User type="update"}}
               <div class="form-group">
                 {{>afQuickField name="profile.name"}}
