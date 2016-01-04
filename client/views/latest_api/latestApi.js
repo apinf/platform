@@ -22,7 +22,7 @@ Template.latestApiBackends.helpers({
     // Reference to Template instance
     var instance = Template.instance();
 
-    // Retrieve 6 last API Backends
+    // Retrieve last API Backends
     var latestApiBackendsList = instance.latestApiBackendsList().fetch();
 
     // Iterate through all documents

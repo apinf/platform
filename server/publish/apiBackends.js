@@ -35,6 +35,6 @@ Meteor.publish('apiBackend', function (backendId) {
 });
 
 Meteor.publish('latestApiBackends', function (limit) {
-  // Return cursor to 6 latest API Backends
+  // Return cursor to latest API Backends
   return ApiBackends.find({}, {sort: {created_at: -1}, limit: limit});
 });
