@@ -3,12 +3,15 @@ Template.latestApiBackends.created = function () {
   // Reference to Template instance
   var instance = this;
 
+  // Documents limit for MongoDB to return (6 docs by default)
+  instance.limit = new ReactiveVar(6);
+
   // Subscribe to a publication
-  instance.subscribe("latestApiBackends");
+  instance.subscribe("latestApiBackends", instance.limit.get());
 
   // Cursor
   instance.latestApiBackendsList = function () {
-    return ApiBackends.find({}, {sort: {created_at: -1}, limit: 6});
+    return ApiBackends.find({}, {sort: {created_at: -1}, limit: instance.limit.get()});
   }
 
 };
