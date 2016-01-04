@@ -54,5 +54,12 @@ Meteor.startup(function () {
     "backend_host": 1
   });
 
+  // Fetch all API Backends
+  var apiBackends = ApiBackends.find().fetch();
+
+  // Check each backend to see if it has API Umbrella ID
+  apiBackends.forEach(function (apiBackend) {console.log("id: ", apiBackend.id)});
+
+  // Initialize cron jobs
   SyncedCron.start();
 });
