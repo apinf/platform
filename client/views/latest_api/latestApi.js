@@ -10,7 +10,7 @@ Template.latestApiBackends.created = function () {
   instance.subscribe("latestApiBackends", instance.limit.get());
 
   // Cursor
-  instance.latestApiBackendsList = function () {
+  instance.latestApiBackendsCursor = function () {
     return ApiBackends.find({}, {sort: {created_at: -1}, limit: instance.limit.get()});
   }
 
@@ -23,7 +23,7 @@ Template.latestApiBackends.helpers({
     var instance = Template.instance();
 
     // Retrieve last API Backends
-    var latestApiBackendsList = instance.latestApiBackendsList().fetch();
+    var latestApiBackendsList = instance.latestApiBackendsCursor().fetch();
 
     // Iterate through all documents
     _.each(latestApiBackendsList, function (apiBackend) {
