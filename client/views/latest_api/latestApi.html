@@ -1,19 +1,24 @@
 <template name="latestApiBackends">
-    {{#if latestBackends}}
-
-        <h1> Latest API Backends:</h1>
-        {{#each latestBackends }}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="/api/{{_id}}">{{name}}</a>
-                    <i class="pull-right">Added <b>{{relative_created_at}}</b></i>
-                </div>
-                <div class="panel-body">
-                    {{backend_host}}
+  {{#if latestBackends}}
+    <h2 class="feature-section-heading">{{_ "latest-Api-Backends-Heading"}}</h2>
+    {{#each latestBackends }}
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://placehold.it/800x500" alt="">
+                <div class="caption">
+                    <h3><a href="/api/{{_id}}">{{name}}</a></h3>
+                    <div>
+                      <i>Added <b>{{relative_created_at}}</b></i>
+                    </div>
+                    <p>Backend host: {{backend_host}}</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                    </p>
                 </div>
             </div>
-        {{/each}}
-    {{else}}
-        <i>Nothing found.</i>
-    {{/if }}
+        </div>
+    {{/each}}
+  {{else}}
+    <i>{{_ "latest-Api-Backends-NotFound"}}</i>
+  {{/if }}
 </template>

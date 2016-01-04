@@ -30,6 +30,8 @@
   "Dashboard": "Go to dashboard",
 
   /*Body*/
+  "latest-Api-Backends-Heading": "Latest API Backends",
+  "latest-Api-Backends-NotFound": "Nothing found.",
   "feature-Section-Heading1": "Are you an API user?",
   "feature-Title1": "Discover APIs",
   "feature-Title1-Text": "Find and bookmark useful APIs",
