@@ -1,19 +1,34 @@
+Template.latestApiBackends.created = function () {
+
+  // Reference to Template instance
+  var instance = this;
+
+  // Subscribe to a publication
+  instance.subscribe("latestApiBackends");
+
+  // Cursor
+  instance.latestApiBackendsList = function () {
+    return ApiBackends.find({}, {sort: {created_at: -1}, limit: 6});
+  }
+
+};
+
 Template.latestApiBackends.helpers({
   'latestBackends': function () {
 
-    // Subscribe to a publication
-    Meteor.subscribe("latestApiBackends");
+    // Reference to Template instance
+    var instance = Template.instance();
 
     // Retrieve 6 last API Backends
-    var latestApiBackends = ApiBackends.find({}, {sort: {created_at: -1}, limit: 6}).fetch();
+    var latestApiBackendsList = instance.latestApiBackendsList().fetch();
 
     // Iterate through all documents
-    _.each(latestApiBackends, function (api) {
+    _.each(latestApiBackendsList, function (apiBackend) {
 
       // Return to user human-readable timestamp
-      api.relative_created_at = moment(api.created_at).fromNow();
+      apiBackend.relative_created_at = moment(apiBackend.created_at).fromNow();
     });
 
-    return latestApiBackends;
+    return latestApiBackendsList;
   }
 });
