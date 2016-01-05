@@ -10,7 +10,10 @@ AutoForm.hooks({
 });
 
 Template.profile.rendered = function () {
-
+  
+  if(!Meteor.user().profile.username)
+    {
+      sAlert.warning("Please enter a username first!");
   // initializes button
   var copyButton = $("<a class=\"btn btn-default btn-xs\" id=\"copyApi\"> Copy API to clipboard</a>");
 
