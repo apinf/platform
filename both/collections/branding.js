@@ -37,12 +37,12 @@ Branding.attachSchema(Schemas.BrandingSchema);
 
 Branding.allow({
   insert: function () {
-    return true;
+    return Roles.userIsInRole(userId, ['admin']) && Branding.find().count() === 0;
   },
   update: function () {
-    return true;
+    return Roles.userIsInRole(userId, ['admin']);
   },
   remove: function () {
-    return true;
+    return Roles.userIsInRole(userId, ['admin']);
   }
 });
