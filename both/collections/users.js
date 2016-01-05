@@ -3,6 +3,10 @@ Schemas.UserProfile = new SimpleSchema({
     type: String,
     optional: true
   },
+  username: {
+    type: String,
+    optional:true
+  },
   company: {
     type: String,
     optional: true
@@ -18,6 +22,7 @@ Schemas.UserProfile = new SimpleSchema({
     }},
     isEmailPrivate: {
       type: Boolean,
+      label: 'Is your email private?',
       optional:true
     }
   });
