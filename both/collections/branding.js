@@ -36,13 +36,13 @@ Schemas.BrandingSchema = new SimpleSchema({
 Branding.attachSchema(Schemas.BrandingSchema);
 
 Branding.allow({
-  insert: function () {
+  insert: function (userId) {
     return Roles.userIsInRole(userId, ['admin']) && Branding.find().count() === 0;
   },
-  update: function () {
+  update: function (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  remove: function () {
+  remove: function (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   }
 });
