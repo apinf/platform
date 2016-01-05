@@ -33,3 +33,8 @@ Meteor.publish('myManagedApis', function () {
 Meteor.publish('apiBackend', function (backendId) {
   return ApiBackends.find({_id: backendId});
 });
+
+Meteor.publish('latestApiBackends', function () {
+  // Return cursor to 6 latest API Backends
+  return ApiBackends.find({}, {sort: {created_at: -1}, limit: 6});
+});
