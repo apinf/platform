@@ -1,11 +1,11 @@
 Template.latestApiBackends.helpers({
-  'latestBackends': function () {
+  'latestBackends': function (limit) {
 
     // Subscribe to a publication
     Meteor.subscribe("latestApiBackends");
 
-    // Retrieve 6 last API Backends
-    var latestApiBackends = ApiBackends.find({}, {sort: {created_at: -1}, limit: 6}).fetch();
+    // Retrieve the latest API Backends by given limit parameter
+    var latestApiBackends = ApiBackends.find({}, {sort: {created_at: -1}, limit: limit}).fetch();
 
     // Iterate through all documents
     _.each(latestApiBackends, function (api) {
