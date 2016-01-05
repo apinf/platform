@@ -14,5 +14,8 @@ Meteor.methods({
     var usersCount = users.length;
 
     return usersCount;
+  },
+  usernameExists: function(username) {
+    return !!Meteor.users.find({'username': username}).count();
   }
 });

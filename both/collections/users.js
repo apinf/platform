@@ -1,15 +1,11 @@
 Schemas.UserProfile = new SimpleSchema({
   name: {
     type: String,
-    optional: true
-  },
-  username: {
-    type: String,
-    optional:true
+    optional: true,
   },
   company: {
     type: String,
-    optional: true
+    optional: true,
   },
   apiKey: {
     label: 'API key',
@@ -31,7 +27,7 @@ Schemas.User = new SimpleSchema({
   username: {
     type: String,
     regEx: /^[a-z0-9A-Z_]{3,15}$/,
-    optional: true
+    optional: true,
   },
   apiUmbrellaUserId: {
     type: String,

@@ -2,8 +2,8 @@ AutoForm.hooks({
   updateProfile: {
     before: {
       update: function(doc){
-
-        if (Meteor.call("usernameExists", doc))
+        var formUsername = AutoForm.getFieldValue('username', 'updateProfile');
+         if (Meteor.call("usernameExists", formUsername))
           {
             sAlert.error("Username already taken");
             return false;
@@ -13,6 +13,7 @@ AutoForm.hooks({
             sAlert.success("Username successfully changed");
             return doc;
           }
+        
       }
     }
   }
