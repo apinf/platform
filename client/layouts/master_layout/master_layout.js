@@ -6,7 +6,10 @@ Template.masterLayout.helpers({
     }
   },
   projectLogo: function () {
+
+    // Get last uploaded image from collection
     var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
+    
     if (lastUploadedLogo) {
       return lastUploadedLogo
     }
