@@ -1,6 +1,8 @@
 Template.branding.created = function () {
+
+  var instance = this;
   // Subscription to branding collection
-  this.subscribe('branding');
+  instance.subscribe('branding');
 };
 
 Template.branding.helpers({
