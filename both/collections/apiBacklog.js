@@ -16,7 +16,8 @@ ApiBacklog.attachSchema(new SimpleSchema({
     autoform: {
       rows: 5,
       placeholder: "Description"
-    }
+    },
+    optional: true
   },
   priority: {
     type: String,
@@ -59,12 +60,12 @@ ApiBacklog.attachSchema(new SimpleSchema({
 
 ApiBacklog.allow({
   insert: function (userId, backlog) {
-    return true;
+    return Roles.userIsInRole(Meteor.user(), ['admin']);
   },
   update: function (userId, backlog) {
-    return true;
+    return userId === backlog.userId;
   },
   remove: function (userId, backlog) {
-    return true;
+    return userId === backlog.userId;
   }
 });
