@@ -20,14 +20,16 @@ ApiBacklog.attachSchema(new SimpleSchema({
     optional: true
   },
   priority: {
-    type: String,
+    type: Number,
     label: 'Priority',
-    allowedValues: ['High', 'Middle', 'None'],
+    allowedValues: [2, 1, 0],
+    min:0,
+    max:2,
     autoform: {
       options: [
-        { label: "High", value: "High" },
-        { label: "Middle", value: "Middle" },
-        { label: "None", value: "None" }
+        { label: "High", value: 2 },
+        { label: "Middle", value: 1 },
+        { label: "None", value: 0 }
       ]
     }
   },

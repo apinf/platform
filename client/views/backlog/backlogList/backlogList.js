@@ -13,7 +13,7 @@ Template.apiBacklogList.rendered = function () {
 Template.apiBacklogList.helpers({
   apiBacklogs: function () {
 
-    var apiBacklogs = ApiBacklog.find({}, {sort: {createdAt: -1}}).fetch();
+    var apiBacklogs = ApiBacklog.find({}, {sort: {priority: -1, createdAt: -1}}).fetch();
 
     _.each(apiBacklogs, function (backlog) {
 
@@ -22,22 +22,17 @@ Template.apiBacklogList.helpers({
       backlog.isOwner = Meteor.userId() == backlog.userId;
 
       switch (backlog.priority) {
-        case 'High':
+        case 2:
 
           backlog.priorityColorClass = 'priority priority-high';
 
           break;
-        case 'Middle':
+        case 1:
 
           backlog.priorityColorClass = 'priority priority-middle';
 
           break;
-        case 'None':
-
-          backlog.priorityColorClass = 'priority priority-none';
-
-          break;
-        default:
+        case 0:
 
           backlog.priorityColorClass = 'priority priority-none';
 
