@@ -13,7 +13,7 @@ Template.apiBacklogList.rendered = function () {
 Template.apiBacklogList.helpers({
   apiBacklogs: function () {
 
-    var apiBacklogs = ApiBacklog.find().fetch();
+    var apiBacklogs = ApiBacklog.find({}, {sort: {createdAt: -1}}).fetch();
 
     _.each(apiBacklogs, function (backlog) {
 
