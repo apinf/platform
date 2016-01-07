@@ -3,12 +3,17 @@
     {{#autoForm collection="ApiBacklog" id="apiBacklogForm" type="insert"}}
         <div class="row">
             <div class="col-md-9">
-                {{> afQuickField name="text" }}
+                {{> afQuickField name="title" }}
+                {{> afQuickField name="details" }}
             </div>
             <div class="col-md-3">
                 {{> afQuickField name="priority" }}
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
     {{/autoForm}}
 </template>

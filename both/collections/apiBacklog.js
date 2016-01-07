@@ -1,13 +1,21 @@
 ApiBacklog = new Mongo.Collection("apiBacklog");
 
 ApiBacklog.attachSchema(new SimpleSchema({
-  text: {
+  title: {
     type: String,
-    label: "Text",
+    label: "Title",
+    max: 100,
+    autoform: {
+      placeholder: "Title"
+    }
+  },
+  details: {
+    type: String,
+    label: "Details",
     max: 1000,
     autoform: {
       rows: 5,
-      placeholder: 'Type backlog title/description here'
+      placeholder: "Description"
     }
   },
   priority: {
