@@ -1,7 +1,7 @@
 <template name="latestApiBackends">
   {{#if latestBackends}}
     <h2 class="latest-apis-heading">{{_ "latest-Api-Backends-Heading"}}</h2>
-    {{#each latestBackends 8 }}
+    {{#each latestBackends }}
         <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail api-box">
               <h3><a href="/api/{{_id}}">{{name}}</a></h3>
