@@ -5,15 +5,6 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: Object,
     optional: true
   },
-  "apinf.host": {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
-    optional: true,
-    autoform: {
-      placeholder: 'https://example.com/'
-    }
-  },
   apiUmbrella: {
     type: Object,
     optional: true

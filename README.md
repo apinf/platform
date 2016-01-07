@@ -39,9 +39,6 @@ Your `settings.json` file should have the following structure:
 
 ```
 {
-  "apinf": {
-    "host": "https://example.com/"
-  },
   "apiUmbrella": {
     "apiKey": "xxx",
     "authToken": "xxx",
