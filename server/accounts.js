@@ -1,41 +1,49 @@
 Accounts.onCreateUser(function(options, user) {
-  var apiUmbrellaUserObj, attachData, email, ref, ref1, ref2, ref3, ref4, response;
+  // Initialize API Umbrella related variables
+  var apiUmbrellaUserObj, response;
+
+  // Create empty user profile if none exists
   user.profile = user.profile || {};
-  if ((ref = user.services) != null ? ref.github : void 0) {
-    if (user.services.github.email === null || user.services.github.email === "") {
-      user.emails = [
-        {
-          address: "",
-          verified: false
-        }
-      ];
-      // rewriting original error message if github email isn't public
-      throw new Meteor.Error(500, 'Please, make your github email public in order to login.');
-    } else {
-      user.emails = [
-        {
-          address: user.services.github.email,
-          verified: true
-        }
-      ];
-    }
-    user.profile.name = user.services.github.username;
+
+  // Check for Github authentication
+  if (user.services && user.services.github) {
+    // Set user email address from Github email
+    user.emails = [
+      {
+        address: user.services.github.email,
+        verified: true
+      }
+    ];
+
+    // Set username from Github username
+    user.username = user.services.github.username;
   }
-  if ((ref1 = user.services) != null ? (ref2 = ref1.github) != null ? ref2.id : void 0 : void 0) {
-    profileImageUrl = user.services.github.avatar_url;
+
+  // It doesn't allow to create a user on APIUmbrella side if apiUmbrellaWeb is not created
+  // TODO: show an error message to inform user about it
+  if ( typeof apiUmbrellaWeb !== 'undefined' ) {
+    // Create API Umbrella user object with required fields
+    apiUmbrellaUserObj = {
+      "user": {
+        "email": user.emails[0].address,
+        "first_name": "-",
+        "last_name": "-",
+        "terms_and_conditions": true
+      }
+    };
+
+    // Add user on API Umbrella
+    response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
+
+    // Add API Umbrella User ID to Apinf user
+    user.apiUmbrellaUserId = response.data.user.id;
+
+    // Add API Umbrella User API Key to Apinf user
+    user.profile.apiKey = response.data.user.api_key;
+
+    // Insert full API Umbrella user object into API Umbrella Users collection
+    ApiUmbrellaUsers.insert(response.data.user);
   }
-  apiUmbrellaUserObj = {
-    "user": {
-      "email": user.emails[0].address,
-      "first_name": "-",
-      "last_name": "-",
-      "terms_and_conditions": true
-    }
-  };
-  response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
-  user.apiUmbrellaUserId = response.data.user.id;
-  user.profile.apiKey = response.data.user.api_key;
-  ApiUmbrellaUsers.insert(response.data.user);
 
   return user;
 });

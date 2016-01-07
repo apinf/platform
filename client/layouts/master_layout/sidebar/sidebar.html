@@ -7,14 +7,14 @@
         <li class="{{isActiveRoute 'dashboard'}}">
           <a href="/dashboard"><i class="fa fa-bar-chart"></i><span>{{_ "masterLayout-sidebar-Analytics"}}</span></a>
         </li>
-        <li class="{{isActiveRoute 'apiBackends'}} {{isActiveRoute 'manageApiBackends'}} treeview">
+        <li class="{{isActiveRoute 'addApiBackend-simple'}} {{isActiveRoute 'manageApiBackends'}} treeview">
           <a href="#">
             <i class="fa fa-code"></i>
             <span>{{_ "masterLayout-sidebar-APIBackends"}}</span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{isActiveRoute 'apiBackends'}} treeview">
-              <a href="{{pathFor route='apiBackends'}}">
+            <li class="{{isActiveRoute 'addApiBackend-simple'}} treeview">
+              <a href="{{pathFor route='addApiBackend-simple'}}">
                 <i class="fa fa-circle-o"></i>
                 <span>{{_ "masterLayout-sidebar-AddAPIBackend"}}</span>
               </a>
