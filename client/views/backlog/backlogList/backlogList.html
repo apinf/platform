@@ -3,17 +3,24 @@
         {{#each apiBacklogs}}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <b>{{title}}</b>
-                        <i class="pull-right">{{relativeTime}}</i>
+                        <b>
+                            <div class="{{ priorityColorClass }}"></div>
+                            {{title}}
+                        </b>
                     </div>
                     <div class="panel-body">
                         <p>{{details}}</p>
-                        <p>
-                            <span class="{{priorityColorClass}}">{{priority}} priority</span>
+                        <div style="border-top: 1px solid #eee;padding-top: 7px;">
+                            <i>
+                                {{#if isOwner}}
+                                    By <b>You</b>
+                                {{/if}}
+                                {{relativeTime}}
+                            </i>
                             <button type="button" class="btn btn-danger btn-xs pull-right delete-backlog">
                                 Remove
                             </button>
-                        </p>
+                        </div>
                     </div>
                 </div>
         {{/each}}

@@ -19,35 +19,37 @@ Template.apiBacklogList.helpers({
 
       backlog.relativeTime = moment(backlog.createdAt).fromNow();
 
+      backlog.isOwner = Meteor.userId() == backlog.userId;
+
       switch (backlog.priority) {
         case 'Critical':
 
-          backlog.priorityColorClass = 'label label-danger';
+          backlog.priorityColorClass = 'priority priority-critical';
 
           break;
         case 'High':
 
-          backlog.priorityColorClass = 'label label-warning';
+          backlog.priorityColorClass = 'priority priority-high';
 
           break;
         case 'Middle':
 
-          backlog.priorityColorClass = 'label label-primary';
+          backlog.priorityColorClass = 'priority priority-middle';
 
           break;
         case 'Low':
 
-          backlog.priorityColorClass = 'label label-default';
+          backlog.priorityColorClass = 'priority priority-low';
 
           break;
         case 'None':
 
-          backlog.priorityColorClass = 'label label-default';
+          backlog.priorityColorClass = 'priority priority-none';
 
           break;
         default:
 
-          backlog.priorityColorClass = 'label label-default';
+          backlog.priorityColorClass = 'priority priority-none';
 
           break;
       }
