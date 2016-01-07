@@ -8,7 +8,12 @@
                     </div>
                     <div class="panel-body">
                         <p>{{details}}</p>
-                        <p><span class="{{priorityColorClass}}">{{priority}} priority</span></p>
+                        <p>
+                            <span class="{{priorityColorClass}}">{{priority}} priority</span>
+                            <button type="button" class="btn btn-danger btn-xs pull-right delete-backlog">
+                                Remove
+                            </button>
+                        </p>
                     </div>
                 </div>
         {{/each}}

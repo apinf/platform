@@ -60,3 +60,12 @@ Template.apiBacklogList.helpers({
     return ApiBacklog.find().count() > 0;
   }
 });
+
+
+Template.apiBacklogList.events({
+  // Delete backlog item
+  'click .delete-backlog': function (event) {
+    //Meteor.call('deleteBacklogItem', this._id);
+    ApiBacklog.remove(this._id);
+  }
+});
