@@ -10,6 +10,11 @@ AutoForm.hooks({
 });
 
 Template.profile.rendered = function () {
+  
+  if (!Meteor.user().username)
+  {
+    sAlert.info("Please set your username.");
+  }
 
   // initializes button
   var copyButton = $("<a class=\"btn btn-default btn-xs\" id=\"copyApi\"> Copy API to clipboard</a>");
