@@ -22,13 +22,11 @@ ApiBacklog.attachSchema(new SimpleSchema({
   priority: {
     type: String,
     label: 'Priority',
-    allowedValues: ['Critical', 'High', 'Middle', 'Low', 'None'],
+    allowedValues: ['High', 'Middle', 'None'],
     autoform: {
       options: [
-        { label: "Critical", value: "Critical" },
         { label: "High", value: "High" },
         { label: "Middle", value: "Middle" },
-        { label: "Low", value: "Low" },
         { label: "None", value: "None" }
       ]
     }

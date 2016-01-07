@@ -22,11 +22,6 @@ Template.apiBacklogList.helpers({
       backlog.isOwner = Meteor.userId() == backlog.userId;
 
       switch (backlog.priority) {
-        case 'Critical':
-
-          backlog.priorityColorClass = 'priority priority-critical';
-
-          break;
         case 'High':
 
           backlog.priorityColorClass = 'priority priority-high';
@@ -35,11 +30,6 @@ Template.apiBacklogList.helpers({
         case 'Middle':
 
           backlog.priorityColorClass = 'priority priority-middle';
-
-          break;
-        case 'Low':
-
-          backlog.priorityColorClass = 'priority priority-low';
 
           break;
         case 'None':
