@@ -1,16 +1,5 @@
-<template name="apiBacklogForm">
+<template name="apiBacklog">
     <div class="backlog-container">
-        <h1>Backlog</h1>
-        {{#autoForm collection="ApiBacklog" id="apiBacklogForm" type="insert"}}
-            <div class="row">
-                <div class="col-md-9">
-                    {{> afQuickField name="text" }}
-                </div>
-                <div class="col-md-3">
-                    {{> afQuickField name="priority" }}
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        {{/autoForm}}
+        {{> apiBackendForm}}
     </div>
 </template>
