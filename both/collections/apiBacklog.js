@@ -26,7 +26,10 @@ ApiBacklog.attachSchema(new SimpleSchema({
   },
   userId: {
     type: String,
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    autoValue: function () {
+      return Meteor.userId();
+    }
   },
   createdAt: {
     type: Date,
@@ -45,3 +48,15 @@ ApiBacklog.attachSchema(new SimpleSchema({
     optional: true
   }
 }));
+
+ApiBacklog.allow({
+  insert: function (userId, backlog) {
+    return true;
+  },
+  update: function (userId, backlog) {
+    return true;
+  },
+  remove: function (userId, backlog) {
+    return true;
+  }
+});
