@@ -34,7 +34,7 @@ Meteor.publish('apiBackend', function (backendId) {
   return ApiBackends.find({_id: backendId});
 });
 
-Meteor.publish('latestApiBackends', function () {
-  // Return cursor to 8 latest API Backends
-  return ApiBackends.find({}, {sort: {created_at: -1}, limit: 8});
+Meteor.publish('latestApiBackends', function (limit) {
+  // Return cursor to latest API Backends
+  return ApiBackends.find({}, {sort: {created_at: -1}, limit: limit});
 });
