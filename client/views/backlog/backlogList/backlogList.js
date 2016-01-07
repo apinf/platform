@@ -13,5 +13,8 @@ Template.apiBacklogList.rendered = function () {
 Template.apiBacklogList.helpers({
   apiBacklogs: function () {
     return ApiBacklog.find();
+  },
+  hasApiBacklogs: function () {
+    return ApiBacklog.find().count() > 0;
   }
 });
