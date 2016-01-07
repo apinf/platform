@@ -1,21 +1,16 @@
-ApiBacklog = new Mongo.Collection('apiBacklog');
+ApiBacklog = new Mongo.Collection("apiBacklog");
 
-Schemas.ApiBacklog = new SimpleSchema({
-  'userId': {
-    type: String,
-    regEx: SimpleSchema.RegEx.Id
-  },
-  'text': {
+ApiBacklog.attachSchema(new SimpleSchema({
+  text: {
     type: String,
     label: "Text",
     max: 1000,
-    optional: false,
     autoform: {
       rows: 5,
       placeholder: 'Type backlog title/description here'
     }
   },
-  'priority': {
+  priority: {
     type: String,
     label: 'Priority',
     allowedValues: ['Critical', 'High', 'Middle', 'Low', 'None'],
@@ -28,6 +23,10 @@ Schemas.ApiBacklog = new SimpleSchema({
         { label: "None", value: "None" }
       ]
     }
+  },
+  userId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
   },
   createdAt: {
     type: Date,
@@ -45,16 +44,4 @@ Schemas.ApiBacklog = new SimpleSchema({
     type: Date,
     optional: true
   }
-});
-
-ApiBacklog.allow({
-  insert: function () {
-    return true;
-  },
-  update: function () {
-    return true;
-  },
-  remove: function () {
-    return true;
-  }
-});
+}));
