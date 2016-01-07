@@ -12,7 +12,14 @@ Template.apiBacklogList.rendered = function () {
 
 Template.apiBacklogList.helpers({
   apiBacklogs: function () {
-    return ApiBacklog.find();
+
+    var apiBacklogs = ApiBacklog.find().fetch();
+
+    _.each(apiBacklogs, function (backlog) {
+      backlog.relativeTime = moment(backlog.createdAt).fromNow();
+    });
+
+    return apiBacklogs;
   },
   hasApiBacklogs: function () {
     return ApiBacklog.find().count() > 0;
