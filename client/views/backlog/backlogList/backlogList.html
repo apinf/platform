@@ -1,0 +1,14 @@
+<template name="apiBacklogList">
+    <h3>Feature requests / bug reports</h3>
+    {{#each apiBacklogs}}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>{{priority}}</b>
+                <i class="pull-right">{{createdAt}}</i>
+            </div>
+            <div class="panel-body">
+                {{text}}
+            </div>
+        </div>
+    {{/each}}
+</template>
