@@ -1,5 +1,11 @@
 AutoForm.hooks({
-  apiBacklog: {
+  apiBacklogForm: {
+    before: {
+      insert: function (backlog) {
+        backlog.apiBackendId = Router.current().params._id;
+        return backlog;
+      }
+    },
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('#apiBacklogFormSubmit').attr("disabled", "disabled");
@@ -11,10 +17,9 @@ AutoForm.hooks({
   }
 });
 
-AutoForm.addHooks(['apiBacklog'], {
+AutoForm.addHooks(['apiBacklogForm'], {
   // Success message
   onSuccess: function () {
-    $('#apiBacklogFormModal').css('display', 'none');
     FlashMessages.sendSuccess('Thank you! Your backlog has been successfully published.');
   }
 });
