@@ -10,9 +10,8 @@ AutoForm.hooks({
 });
 
 Template.profile.rendered = function () {
-  
-  if (!Meteor.user().username)
-  {
+
+  if (Meteor.userId() && !Meteor.user().username) {
     sAlert.info("Please set your username.");
   }
 
