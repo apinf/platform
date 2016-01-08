@@ -40,6 +40,11 @@ ApiBacklog.attachSchema(new SimpleSchema({
       return Meteor.userId();
     }
   },
+  apiBackendId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
   createdAt: {
     type: Date,
     autoValue: function() {
