@@ -57,7 +57,15 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   },
   frontend_host: {
     type: String,
-    optional: false
+    optional: false,
+    defaultValue: function () {
+      if ( Meteor.settings.public.apiUmbrella ) {
+        var frontendHost = new URI(Meteor.settings.public.apiUmbrella.host);
+        return frontendHost.hostname();
+      } else {
+        return 'umbrella.apinf.io';
+      }
+    }
   },
   balance_algorithm: {
     type: String,
