@@ -8,11 +8,11 @@ AutoForm.hooks({
     },
     beginSubmit: function () {
       // Disable form elements while submitting form
-      $('#apiBacklogFormSubmit').attr("disabled", "disabled");
+      $('[data-schema-key],button').attr("disabled", "disabled");
     },
     endSubmit: function () {
       // Enable form elements after form submission
-      $('#apiBacklogFormSubmit').removeAttr("disabled");
+      $('[data-schema-key],button').removeAttr("disabled");
     }
   }
 });
