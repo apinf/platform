@@ -65,12 +65,31 @@ ApiBacklog.attachSchema(new SimpleSchema({
 
 ApiBacklog.allow({
   insert: function (userId, backlog) {
-    return Roles.userIsInRole(Meteor.user(), ['admin']);
+
+    return userIsManager(userId, backlog);
   },
   update: function (userId, backlog) {
-    return userId === backlog.userId;
+
+    return userIsManager(userId, backlog) && (userId === backlog.userId);
   },
   remove: function (userId, backlog) {
-    return userId === backlog.userId;
+
+    return userIsManager(userId, backlog) && (userId === backlog.userId);
   }
 });
+
+
+var userIsManager = function (userId, backlog) {
+
+  var apiBackendId = backlog.apiBackendId;
+
+  var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+
+  var managerId = apiBackend.managerIds;
+
+  var isManager = _.contains(managerId, userId);
+
+  console.log("User is manager - ", isManager);
+
+  return isManager;
+};
