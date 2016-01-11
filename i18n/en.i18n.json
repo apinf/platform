@@ -74,7 +74,8 @@
   "change_pswd": "Change Password",
 
   /*Profile*/
-  "update": "Update",
+  "profile-Header": "Profile",
+  "profile-UpdateButton": "Update",
 
   /*Import API Configuration*/
   "import-ApiConfiguration-Title": "Import API Configuration",

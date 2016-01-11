@@ -3,12 +3,14 @@
     <div class="row userProfile" id="champion-messages">
       {{#autoForm id="updateProfile" collection=Users doc=User type="update"}}
       <div class="panel panel-default">
-        <div class="panel-heading">Profile</div>
+        <div class="panel-heading profile-header">{{_ "profile-Header"}}</div>
         <div class="panel-body">
           {{> afQuickField name="username"}}
           {{> afQuickField name="profile.company"}}
           {{> afQuickField name="profile.apiKey"}}
-          <button type="submit" class="btn btn-success">{{_ "update"}}</button>
+          <button type="submit" class="btn btn-success profile-update">
+            {{_ "profile-UpdateButton"}}
+          </button>
         </div>
       </div>
       {{/autoForm}}
