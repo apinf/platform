@@ -22,7 +22,6 @@ ApiBacklog.attachSchema(new SimpleSchema({
   priority: {
     type: Number,
     label: 'Priority',
-    allowedValues: [2, 1, 0],
     min:0,
     max:2,
     autoform: {
@@ -60,7 +59,7 @@ ApiBacklog.attachSchema(new SimpleSchema({
   updatedAt: {
     type: Date,
     autoValue: function () {
-      return new Date();  
+      return new Date();
     }
   }
 }));
