@@ -20,6 +20,7 @@ AutoForm.hooks({
 AutoForm.addHooks(['apiBacklogForm'], {
   // Success message
   onSuccess: function () {
+    $('#apiBacklogFormModal').modal('hide');
     FlashMessages.sendSuccess('Thank you! Your backlog has been successfully published.');
   }
 });
