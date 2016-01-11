@@ -25,7 +25,7 @@ Template.apiBacklog.helpers({
     try {
 
       // Get managerIds array from API Backend document
-      var managerId = apiBackend.managerIds;
+      var managerIds = apiBackend.managerIds;
 
     } catch (err) {
 
@@ -34,7 +34,7 @@ Template.apiBacklog.helpers({
     }
 
     // Check if an array of managerIds contain user id passed
-    var isManager = _.contains(managerId, userId);
+    var isManager = _.contains(managerIds, userId);
 
     return isManager;
   }
