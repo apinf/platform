@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="apiBacklogForModalLabel">Add Backlog item</h4>
+                    <h4 class="modal-title" id="apiBacklogForModalLabel">{{_ "apiBacklog_addBacklogItem_button"}}</h4>
                 </div>
                 <div class="modal-body">
                     {{#autoForm collection="ApiBacklog" id="apiBacklogForm" type="insert"}}
@@ -20,7 +20,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" id="apiBacklogFormSubmit">Submit</button>
+                                <button type="submit" class="btn btn-primary" id="apiBacklogFormSubmit">{{_ "apiBacklog_addBacklogItem_button"}}</button>
                             </div>
                         </div>
                     {{/autoForm}}

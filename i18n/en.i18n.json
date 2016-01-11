@@ -137,6 +137,11 @@
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '/'",
 
+  /* API Backlog */
+  "apiBacklog_mainTitle": "Backlog",
+  "apiBacklog_addBacklogItem_button": "Add backlog item",
+  "apiBacklog_noApiBacklogItemsFound": "No backlog items found for this API.",
+
   /*Bookmarks*/
   "bookmarks-Title": "Your bookmarked APIs",
   "bookmarks-Name": "Name:",
