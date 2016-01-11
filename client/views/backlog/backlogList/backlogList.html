@@ -24,7 +24,7 @@
                                     collection="ApiBacklog"
                                     operation="remove"
                                     doc=_id}}
-                                    Remove
+                                    {{_ "apiBacklog_removeBacklogItem-button"}}
                                 {{/afModal}}
                                 {{#afModal
                                     class="btn btn-primary btn-xs pull-right do-margin-right"
@@ -32,7 +32,7 @@
                                     operation="update"
                                     doc=_id
                                     fields="title,details,priority"}}
-                                    Edit
+                                    {{_ "apiBacklog_editBacklogItem-button"}}
                                 {{/afModal}}
                             {{/if}}
                         </div>

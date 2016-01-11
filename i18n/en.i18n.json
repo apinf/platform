@@ -141,6 +141,8 @@
   "apiBacklog_mainTitle": "Backlog",
   "apiBacklog_addBacklogItem_button": "Add backlog item",
   "apiBacklog_noApiBacklogItemsFound": "No backlog items found for this API.",
+  "apiBacklog_removeBacklogItem-button": "Remove",
+  "apiBacklog_editBacklogItem-button": "Edit",
 
   /*Bookmarks*/
   "bookmarks-Title": "Your bookmarked APIs",
