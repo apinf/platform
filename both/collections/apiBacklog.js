@@ -16,8 +16,7 @@ ApiBacklog.attachSchema(new SimpleSchema({
     autoform: {
       rows: 5,
       placeholder: "Description"
-    },
-    optional: true
+    }
   },
   priority: {
     type: Number,
