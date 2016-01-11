@@ -91,8 +91,6 @@ var userIsManager = function (userId, backlog) {
   var managerId = apiBackend.managerIds;
 
   var isManager = _.contains(managerId, userId);
-
-  console.log("User is manager - ", isManager);
-
+  
   return isManager;
 };
