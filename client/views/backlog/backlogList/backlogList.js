@@ -52,5 +52,28 @@ Template.apiBacklogList.helpers({
     var instance = Template.instance();
 
     return ApiBacklog.find({ apiBackendId: instance.apiBackendId }).count() > 0;
+  },
+  currentUserIsApiManager: function () {
+
+    var instance = Template.instance();
+
+    var userId = Meteor.userId();
+
+    var apiBackendId = instance.apiBackendId;
+
+    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+
+    try {
+
+      var managerId = apiBackend.managerIds;
+
+    } catch (err) {
+
+      return false;
+    }
+
+    var isManager = _.contains(managerId, userId);
+
+    return isManager;
   }
 });

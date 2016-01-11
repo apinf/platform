@@ -18,21 +18,23 @@
                                 {{/if}}
                                 {{relativeTime}}
                             </i>
-                            {{#afModal
-                                class="btn btn-danger btn-xs pull-right"
-                                collection="ApiBacklog"
-                                operation="remove"
-                                doc=_id}}
-                                Remove
-                            {{/afModal}}
-                            {{#afModal
-                                class="btn btn-primary btn-xs pull-right"
-                                collection="ApiBacklog"
-                                operation="update"
-                                doc=_id
-                                fields="title,details,priority"}}
-                                Edit
-                            {{/afModal}}
+                            {{#if currentUserIsApiManager }}
+                                {{#afModal
+                                    class="btn btn-danger btn-xs pull-right"
+                                    collection="ApiBacklog"
+                                    operation="remove"
+                                    doc=_id}}
+                                    Remove
+                                {{/afModal}}
+                                {{#afModal
+                                    class="btn btn-primary btn-xs pull-right"
+                                    collection="ApiBacklog"
+                                    operation="update"
+                                    doc=_id
+                                    fields="title,details,priority"}}
+                                    Edit
+                                {{/afModal}}
+                            {{/if}}
                         </div>
                     </div>
                 </div>
