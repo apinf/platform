@@ -11,6 +11,7 @@ AutoForm.hooks({
 
 Template.profile.rendered = function () {
 
+  // Ask user to set username if it is not set.
   if (Meteor.userId() && !Meteor.user().username) {
     sAlert.info("Please set your username.");
   }
