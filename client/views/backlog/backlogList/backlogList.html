@@ -1,4 +1,5 @@
 <template name="apiBacklogList">
+    {{> autoformModals}}
     {{#if hasApiBacklogs}}
         {{#each apiBacklogs}}
                 <div class="panel panel-default">
@@ -17,9 +18,21 @@
                                 {{/if}}
                                 {{relativeTime}}
                             </i>
-                            <button type="button" class="btn btn-danger btn-xs pull-right delete-backlog">
+                            {{#afModal
+                                class="btn btn-danger btn-xs pull-right"
+                                collection="ApiBacklog"
+                                operation="remove"
+                                doc=_id}}
                                 Remove
-                            </button>
+                            {{/afModal}}
+                            {{#afModal
+                                class="btn btn-primary btn-xs pull-right"
+                                collection="ApiBacklog"
+                                operation="update"
+                                doc=_id
+                                fields="title,details,priority"}}
+                                Edit
+                            {{/afModal}}
                         </div>
                     </div>
                 </div>
