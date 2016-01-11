@@ -78,7 +78,10 @@ ApiBacklog.allow({
   }
 });
 
-
+// Helper function - checks if User is a API Backend manager
+// @param {String} userId
+// @param {Object} backlog
+// @return {Boolean} true/false
 var userIsManager = function (userId, backlog) {
 
   var apiBackendId = backlog.apiBackendId;
