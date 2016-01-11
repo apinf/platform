@@ -47,7 +47,7 @@ ApiBacklog.attachSchema(new SimpleSchema({
   },
   createdAt: {
     type: Date,
-    autoValue: function() {
+    autoValue: function () {
       if (this.isInsert) {
         return new Date();
       } else if (this.isUpsert) {
@@ -59,7 +59,9 @@ ApiBacklog.attachSchema(new SimpleSchema({
   },
   updatedAt: {
     type: Date,
-    optional: true
+    autoValue: function () {
+      return new Date();  
+    }
   }
 }));
 
