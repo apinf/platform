@@ -8,6 +8,13 @@ Template.apiBacklog.created = function () {
 };
 
 Template.apiBacklog.helpers({
+  apiBackendId: function () {
+
+    // Get reference to a template instance
+    var instance = Template.instance();
+
+    return instance.apiBackendId;
+  },
   currentUserIsApiManager: function () {
 
     // Get reference to a template instance

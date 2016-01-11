@@ -2,20 +2,13 @@
     <div class="backlog-container">
         <h1>
             Backlog
-            {{#if currentUserIsApiManager }}
-                <button type="button"
-                        class="btn btn-info pull-right"
-                        data-toggle="modal"
-                        data-target="#apiBacklogFormModal"
-                        data-backdrop="static"
-                        data-keyboard="true">
-                    + Add backlog item
-                </button>
-            {{/if}}
         </h1>
-        {{#if currentUserIsApiManager }}
-            {{> apiBacklogForm }}
-        {{/if}}
+        <div>
+            <a href="/api/{{apiBackendId}}">API Backend</a>
+            {{#if currentUserIsApiManager }}
+                {{> apiBacklogForm }}
+            {{/if}}
+        </div>
         <hr/>
         {{> apiBacklogList }}
     </div>
