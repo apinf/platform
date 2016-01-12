@@ -18,7 +18,7 @@ Schemas.UserProfile = new SimpleSchema({
     }
   }
 });
-
+// Username must be 3-15 alphanumeric string with hyphens allowed.
 Schemas.RegEx.Username = /^[a-z0-9A-Z_\-]{3,15}$/;
 
 Schemas.User = new SimpleSchema({
