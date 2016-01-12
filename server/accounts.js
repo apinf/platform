@@ -15,13 +15,15 @@ Accounts.onCreateUser(function(options, user) {
       }
     ];
 
+    // Search 'githubUsername' from database.
     var githubUsername = user.services.github.username;
     var existingUser = Meteor.users.findOne({'username': githubUsername});
     if(existingUser === undefined) {
-      // Set username from Github username
-      user.username = user.services.github.username;
+      // Username available, set username to Github username.
+      user.username = githubUsername;
     } else {
-      // Set username empty, asking user to fill out username
+      // Username clashes with existing username, set empty.
+      // Asking user to fill out username in profile page.
       user.username = '';
     }
   }
