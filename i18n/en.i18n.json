@@ -76,6 +76,7 @@
   /*Profile*/
   "profile-Header": "Profile",
   "profile-UpdateButton": "Update",
+  "profile-setUsername": "Please set your username.",
 
   /*Import API Configuration*/
   "import-ApiConfiguration-Title": "Import API Configuration",
