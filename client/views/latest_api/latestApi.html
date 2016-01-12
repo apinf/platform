@@ -1,19 +1,20 @@
 <template name="latestApiBackends">
-    {{#if latestBackends}}
-
-        <h1> Latest API Backends:</h1>
-        {{#each latestBackends }}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="/api/{{_id}}">{{name}}</a>
-                    <i class="pull-right">Added <b>{{relative_created_at}}</b></i>
-                </div>
-                <div class="panel-body">
-                    {{backend_host}}
-                </div>
+  {{#if latestBackends }}
+    <h2 class="latest-apis-heading">{{_ "latestApiBackends-Heading" }}</h2>
+    {{#each latestBackends }}
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail api-box">
+              <h3><a href="/api/{{_id}}">{{ name }}</a></h3>
+              <div>
+                <i>{{_ "latestApiBackends-DateAdded" relative_created_at }}</i>
+              </div>
+              <div class="api-buttons">
+                <a href="/api/{{_id}}" class="btn btn-default">{{_ "latestApiBackends-MoreInfo" }}</a>
+              </div>
             </div>
-        {{/each}}
-    {{else}}
-        <i>Nothing found.</i>
-    {{/if }}
+        </div>
+    {{/each}}
+  {{else}}
+    <i>{{_ "latestApiBackends-NotFound" }}</i>
+  {{/if }}
 </template>
