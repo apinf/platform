@@ -1,9 +1,16 @@
 <template name="homeHeader">
   <div class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
+    <div id="site-options">
+      <div class="container">
+        <ul class="language-selection list-inline">
+          <li><a href="#fi">Finnish</a></li>
+          <li><a href="#sv">Suomeksi</a></li>
+          <li><a href="#en">In English</a></li>
+        </ul>
       </div>
-      <div class="navbar-collapse collapse">
+    </div>
+    <div class="navbar-collapse collapse navigation-bar">
+      <div class="container">
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
           {{#if isInRole 'admin'}}
@@ -25,20 +32,19 @@
           {{/if}}
         </ul>
       </div>
+    </div>
+    <div class="container">
       <div id="headerwrap">
         <div class="row">
-          <div class="col-lg-6">
-            <h1>{{_ "home-MainTitle"}}<br>
-              <small>{{_ "home-SecondaryTitle"}}</small></h1>
-            {{#if currentUser}}
-            <a href="/dashboard" class="btn btn-success sign-up" title="{{_ 'Dashboard'}}"><i class="mdi mdi-chart-bar"></i> {{_ "Dashboard"}}</a>
-            {{else}}
-            <a href="/sign-up" class="btn btn-success sign-up" title="{{_ 'signUp'}}"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
-            {{/if}}
-          </div>
-          <div class="col-lg-6">
-            <img class="img-responsive front-img" src="img/compIllustr.png" alt="">
-          </div>
+          <h1 class="text-center">{{_ "home-MainTitle"}}<br>
+            <small>{{_ "home-SecondaryTitle"}}</small></h1>
+          <!--
+{{#if currentUser}}
+<a href="/dashboard" class="btn btn-success sign-up" title="{{_ 'Dashboard'}}"><i class="mdi mdi-chart-bar"></i> {{_ "Dashboard"}}</a>
+{{else}}
+<a href="/sign-up" class="btn btn-success sign-up" title="{{_ 'signUp'}}"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
+{{/if}}
+-->
         </div>
       </div>
     </div>
