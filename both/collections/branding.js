@@ -45,6 +45,11 @@ Schemas.BrandingSchema = new SimpleSchema({
     type: String,
     optional: true,
     label: 'Site slogan'
+  },
+  siteFooter: {
+    type: String,
+    optional: true,
+    label: 'Site footer'
   }
 });
 
