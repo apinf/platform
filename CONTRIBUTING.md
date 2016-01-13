@@ -94,10 +94,13 @@ When submitting a bug report or support request, include the following details, 
 When contributing code, please follow the [Gitflow guidelines](http://danielkummer.github.io/git-flow-cheatsheet/). Specifically:
 
 1. Create a new feature branch from the `develop` branch
-1. Prefix your feature branch name with `/feature`
+2. Prefix your feature branch name with `/feature`
+ 
+Additionally, the following steps help our team stay coordinated:
+
 1. Immediately open a pull request by comparing your branch against the `develop` branch
-1. Label your pull request as `WIP`, so that other developers can see the work in progress
-1. When ready for review, @mention the development team, so that we know to review your code
+2. Label your pull request as `WIP`, so that other developers can see the work in progress
+3. When ready for review, @mention the development team, so that we know to review your code
  
 **Important:** Getting developer feedback is part of our peer review process. It helps to highlight issues and improvements early in the process.
   
