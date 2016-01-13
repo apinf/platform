@@ -29,7 +29,17 @@ Schemas.BrandingSchema = new SimpleSchema({
       'yellow-light',
       'yellow'
     ],
-    label: 'Choose you color theme:'
+    label: 'Choose you color theme'
+  },
+  siteTitle: {
+    type: String,
+    optional: true,
+    label: 'Site title'
+  },
+  siteAbbreviation: {
+    type: String,
+    optional: true,
+    label: 'Site abbreviation'
   }
 });
 
