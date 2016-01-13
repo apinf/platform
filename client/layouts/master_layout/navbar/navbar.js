@@ -11,6 +11,16 @@ Template.navbar.helpers({
       return lastUploadedLogo
     }
   },
+  siteAbbreviation: function () {
+    // Get site abbreviation from Branding collection
+    var branding = Branding.findOne();
+
+    // Check that site abbreviation exists
+    if(branding && branding.siteAbbreviation) {
+      var siteAbbreviation = branding.siteAbbreviation;
+      return siteAbbreviation;
+    }
+  },
   "isSearchRoute": function () {
     // Get name of current route from Router
     var routeName = Router.current().route.getName();
