@@ -11,11 +11,7 @@
       </a>
       {{/if}}
       {{# unless isSearchRoute }}
-      <form id="header-search-form" class="header-search-form">
-          <div>
-              <input type="text" placeholder="Search.." class="form-control" id="header-search-text" />
-          </div>
-      </form>
+      {{> searchField}}
       {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
