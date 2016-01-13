@@ -4,6 +4,57 @@
     background: url(../img/bg_header_common.jpg) center center no-repeat #ced2d5;
   }
 
+  #site-options {
+    background-color: #2c2c2c;
+    font-size: 12px;
+    text-transform: uppercase;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,.3);
+    position: relative;
+  }
+
+  .language-selection {
+    margin-bottom: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  #site-options .language-selection a {
+    text-decoration: none;
+    color: #b3b7ba;
+    border-top: 4px solid transparent;
+    display: inline-block;
+  }
+
+  #site-options .language-selection a:focus, #site-options .language-selection a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .navigation-bar {
+    background: #f2f2f2;
+    -webkit-box-shadow: 0 4px 0 0 rgba(0,0,0,.15);
+    box-shadow: 0 4px 0 0 rgba(0,0,0,.15);
+    position: relative;
+    z-index: 9;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: #333;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:active {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #e02271;
+    text-decoration: underline;
+  }
+
   #headerwrap {
     background-color: transparent;
 
