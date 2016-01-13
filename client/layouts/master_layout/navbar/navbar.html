@@ -3,10 +3,10 @@
     <a href="/" class="logo">
       {{#if projectLogo}}
       <div class="logo-lg project-logo" style="background-image: url('{{projectLogo.url}}')"></div>
-      <span class="logo-mini"><b>{{ siteAbbreviation }}</b></span>
+      <span class="logo-mini"><b>{{ branding.siteAbbreviation }}</b></span>
       {{else}}
-      <span class="logo-lg">API<b>NF</b></span>
-      <span class="logo-mini"><b>{{ siteAbbreviation }}</b></span>
+      <span class="logo-lg">{{ branding.siteTitle }}</span>
+      <span class="logo-mini">{{ branding.siteAbbreviation }}</span>
       {{/if}}
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
