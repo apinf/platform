@@ -13,6 +13,24 @@ ApiMetadata.schema = new SimpleSchema({
   },
   "organization.description": {
     type: String
+  },
+  "service": {
+    type: Object
+  },
+  "service.name": {
+    type: String
+  },
+  "service.description": {
+    type: String
+  },
+  "service.validSince": {
+    type: Date
+  },
+  "service.validUntil": {
+    type: Date
+  },
+  "service.serviceLevelAgreement": {
+    type: String
   }
 });
 
