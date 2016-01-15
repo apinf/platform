@@ -1,26 +1,28 @@
 <template name="feedbackList">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{#if currentUser}}
-        {{> feedbackForm }}
-        {{/ if }}
-      <h1 class="panel-title clearfix">{{_ "feedback-main-title"}}</h1>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        {{#if haveFeedback}}
-        <div class="tab-content">
-          <div class="tab-pane fade in active" id="home">
-            <div class="list-group">
-              {{#each userFeedback}}
-              {{> singleFeedback }}
-              {{/each}}
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{#if currentUser}}
+          {{> feedbackForm }}
+          {{/ if }}
+        <h1 class="panel-title clearfix">{{_ "feedback-main-title"}}</h1>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          {{#if haveFeedback}}
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+              <div class="list-group">
+                {{#each userFeedback}}
+                {{> singleFeedback }}
+                {{/each}}
+              </div>
             </div>
           </div>
+          {{else}}
+          <p>{{_ "feedback-no-feedback"}}</p>
+          {{/if}}
         </div>
-        {{else}}
-        <p>{{_ "feedback-no-feedback"}}</p>
-        {{/if}}
       </div>
     </div>
   </div>
