@@ -1,39 +1,39 @@
 <template name="viewApiBackend">
   {{#if Template.subscriptionsReady }}
-    <div class="page-heading">
-      {{> apiBackendsUsageInstructionsButton }}
-      <h1 class="page-title">{{ apiBackend.name }}</h1>
-      {{> apiBackendUsageInstructions apiBackend=apiBackend}}
-    </div>
+    {{> viewApiBackendPageHeading apiBackend=apiBackend }}
     <div class="row">
-      <div class="col-xs-12">
-        <ul class="nav nav-pills">
-          <li class="active"><a href="#">Details</a></li>
-          <li><a href="/metadata">Metadata</a></li>
-        </ul>
-        <br />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        {{> viewApiBackendStatus apiBackend=apiBackend }}
-      </div>
-      <div class="col-md-4">
-        {{> viewApiBackendServers apiBackend=apiBackend }}
-      </div>
+      {{> viewApiBackendNavigationMenu apiBackend=apiBackend }}
     </div>
 
-    <div class="row">
-      {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
-    </div>
+    <div class="tab-content">
+      <div id="api-backend-details" class="tab-pane fade in active">
+        <div class="row">
+          <div class="col-md-2">
+            {{> viewApiBackendStatus apiBackend=apiBackend }}
+          </div>
+          <div class="col-md-4">
+            {{> viewApiBackendServers apiBackend=apiBackend }}
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="col-md-4">
+        <div class="row">
+          {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+        </div>
+      </div> <!-- /api-backend-details -->
+
+      <div id="api-backend-metadata" class="tab-pane fade in">
+        {{> viewApiBackendMetadata apiBackend=apiBackend }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-feedback" class="tab-pane fade in">
+        {{> feedbackList apiBackend=apiBackend }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-export" class="tab-pane fade in">
         {{> viewApiBackendExport apiBackend=apiBackend }}
-      </div>
-    </div>
+      </div> <!-- /api-backend-export -->
 
-    {{> feedbackList}}
+    </div> <!-- /tab-content -->
   {{ else }}
     {{> spinner }}
   {{/ if }}
