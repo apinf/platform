@@ -112,6 +112,7 @@
   "view-ApiBackend-Export-Title": "Export API configurations",
   "view-ApiBackend-ExportJson": "Export .json",
   "view-ApiBackend-ExportYaml": "Export .yaml",
+  "view-ApiBackend-Metadata-Title": "Metadata",
 
   /*Api Backends*/
   "apiBackends-Add-API-Title": "Add API",
