@@ -57,16 +57,6 @@ Template.apiBacklogList.helpers({
     return priorityClass;
 
   },
-  hasApiBacklogs: function () {
-
-    // Get reference to a template instance
-    var instance = Template.instance();
-
-    // Check if current API Backend has any backlog items
-    var hasApiBacklogItems = ApiBacklog.find({ apiBackendId: instance.apiBackendId }).count() > 0;
-
-    return hasApiBacklogItems;
-  },
   currentUserIsApiManager: function () {
 
     // Get reference to a template instance
