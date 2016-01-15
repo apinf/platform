@@ -1,0 +1,46 @@
+<template name="branding">
+  <div class="container">
+    <div class="row" id="champion-messages">
+      <div class="col-md-3 settings-menu">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+              <li><a href="#" class="active2">Branding<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Project Branding</h3>
+          </div>
+          <div class="panel-body">
+            {{#if branding}}
+            {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
+            {{> afQuickField name='projectLogo'}}
+
+            {{#if projectLogo}}
+            <img alt="{{projectLogo.name}}" src="{{projectLogo.url}}" width="150px">
+            {{/if}}
+
+            {{> afQuickField name='color_theme' options="allowed"}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            {{/autoForm}}
+            {{else}}
+            {{#autoForm collection="Branding" id="branding" type="insert"}}
+            {{> afQuickField name='projectLogo'}}
+            {{> afQuickField name='color_theme' options="allowed"}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            {{/autoForm}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
