@@ -66,44 +66,50 @@ ApiBacklog.attachSchema(new SimpleSchema({
 ApiBacklog.allow({
   insert: function (userId, backlog) {
 
-    return userIsManager(userId, backlog);
+    var backlogTransformedDocument = ApiBacklog._transform(backlog);
+
+    return backlogTransformedDocument.userIsManager();
   },
   update: function (userId, backlog) {
 
-    return userIsManager(userId, backlog) && (userId === backlog.userId);
+    var backlogTransformedDocument = ApiBacklog._transform(backlog);
+
+    return backlogTransformedDocument.userIsManager() && (userId === backlog.userId);
   },
   remove: function (userId, backlog) {
 
-    return userIsManager(userId, backlog) && (userId === backlog.userId);
+    var backlogTransformedDocument = ApiBacklog._transform(backlog);
+
+    return backlogTransformedDocument.userIsManager() && (userId === backlog.userId);
   }
 });
 
-// Helper function - checks if User is a API Backend manager
-// @param {String} userId
-// @param {Object} backlog
-// @return {Boolean} true/false
-var userIsManager = function (userId, backlog) {
+ApiBacklog.helpers({
+  userIsManager: function () {
 
-  // Get API Backend ID from backlog document
-  var apiBackendId = backlog.apiBackendId;
+    // Get API Backend ID from backlog document
+    var apiBackendId = this.apiBackendId;
 
-  // Find related API Backend that contains "managerIds" field
-  var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+    var currentUserId = Meteor.userId();
 
-  // Try - Catch wrapper here because Mongodb call above can return zero matches
-  try {
+    // Find related API Backend that contains "managerIds" field
+    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
-    // Get managerIds array from API Backend document
-    var managerIds = apiBackend.managerIds;
+    // Try - Catch wrapper here because Mongodb call above can return zero matches
+    try {
 
-  } catch (err) {
+      // Get managerIds array from API Backend document
+      var managerIds = apiBackend.managerIds;
 
-    // If no related document found return false - API Backend does not have any managers listed
-    return false;
+    } catch (err) {
+
+      // If no related document found return false - API Backend does not have any managers listed
+      return false;
+    }
+
+    // Check if an array of managerIds contain user id passed
+    var isManager = _.contains(managerIds, currentUserId);
+
+    return isManager;
   }
-
-  // Check if an array of managerIds contain user id passed
-  var isManager = _.contains(managerIds, userId);
-
-  return isManager;
-};
+});
