@@ -63,7 +63,7 @@ Schemas.User = new SimpleSchema({
 // Define custom validation error messages
 Schemas.User.messages({
   "regEx username": [
-    {exp: Schemas.RegEx.Username, msg: "Username must be 3-15 alphanumeric string."}
+    {exp: Schemas.RegEx.Username, msg: TAPi18n.__("profile-usernameInvalid")}
   ]
 });
 
