@@ -6,8 +6,6 @@ Template.apiBacklogList.created = function () {
   // Get current API Backend Id from URL - (URL should look like "/api/:_id/backlog")
   instance.apiBackendId = Router.current().params._id;
 
-  // Subscribe for apiBacklog publication & pass current API Backend Id
-  instance.subscribe('apiBacklog', instance.apiBackendId);
 };
 
 Template.apiBacklogList.helpers({
