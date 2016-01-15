@@ -1,0 +1,30 @@
+<template name="viewApiBackendUrlMatchers">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">{{_ "view-ApiBackend-Matchers"}}</h2>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        {{#each apiBackend.url_matches}}
+        <div class="col-md-3 col-sm-4 col-xs-12">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="label label-primary">
+                {{_ "view-ApiBackend-Backend-Prefix"}}
+              </span>
+              &nbsp;{{ backend_prefix }}
+            </li>
+            <li class="list-group-item">
+              <span class="label label-primary">
+                {{_ "view-ApiBackend-Frontend-Prefix"}}
+              </span>
+              &nbsp;{{ frontend_prefix }}
+            </li>
+          </ul>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+</template>
