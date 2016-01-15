@@ -77,7 +77,7 @@
   "profile-Header": "Profile",
   "profile-UpdateButton": "Update",
   "profile-setUsername": "Please set your username.",
-  "profile-usernameIsTaken": "User name already exists. Enter another user name.", 
+  "profile-usernameIsTaken": "User name already exists. Enter another user name.........", 
 
   /*Import API Configuration*/
   "import-ApiConfiguration-Title": "Import API Configuration",
