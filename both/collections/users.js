@@ -60,10 +60,13 @@ Schemas.User = new SimpleSchema({
   }
 });
 
+// Fetch username invalid message
+var usernameInvalid = TAPi18n.__("profile-usernameInvalid");
+
 // Define custom validation error messages
 Schemas.User.messages({
   "regEx username": [
-    {exp: Schemas.RegEx.Username, msg: TAPi18n.__("profile-usernameInvalid")}
+    {exp: Schemas.RegEx.Username, msg: usernameInvalid}
   ]
 });
 
