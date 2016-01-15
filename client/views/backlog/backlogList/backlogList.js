@@ -49,7 +49,7 @@ Template.apiBacklogList.helpers({
         break;
       case 0:
 
-        priorityClass = 'priority priority-none';
+        priorityClass = 'priority priority-low';
 
         break;
     }
