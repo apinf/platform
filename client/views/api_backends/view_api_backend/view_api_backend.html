@@ -1,5 +1,10 @@
 <template name="viewApiBackend">
-  <h1>{{_ "view-ApiBackend-Title"}}</h1>
+  <h1>{{apiBackend.name}}</h1>
+  <div class="row">
+    <div class="col-md-4">
+      {{> apiBackendStatus }}
+    </div>
+  </div>
   <div class="panel panel-default">
     <div class="panel-heading">
       {{> apiBackendsUsageInstructionsButton }}
@@ -7,9 +12,6 @@
     </div>
     <div class="panel-body">
       {{> apiBackendUsageInstructions }}
-      <div class="row">
-        {{> apiBackendStatus }}
-      </div>
       <div class="row">
         <h2>{{_ "view-ApiBackend-Servers"}}</h2>
         <div class="form-group">
