@@ -68,27 +68,24 @@ ApiBacklog.allow({
 
     var backlogTransformedDocument = ApiBacklog._transform(backlog);
 
-    return backlogTransformedDocument.userIsManager();
+    return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId);
   },
   update: function (userId, backlog) {
 
     var backlogTransformedDocument = ApiBacklog._transform(backlog);
 
-    return backlogTransformedDocument.userIsManager() && (userId === backlog.userId);
+    return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   },
   remove: function (userId, backlog) {
 
     var backlogTransformedDocument = ApiBacklog._transform(backlog);
 
-    return backlogTransformedDocument.userIsManager() && (userId === backlog.userId);
+    return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   }
 });
 
 ApiBacklog.helpers({
-  userIsManager: function () {
-
-    // Get API Backend ID from backlog document
-    var apiBackendId = this.apiBackendId;
+  currentUserIsApiBackendManager: function (apiBackendId) {
 
     var currentUserId = Meteor.userId();
 
