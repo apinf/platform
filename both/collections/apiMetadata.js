@@ -14,6 +14,18 @@ ApiMetadata.schema = new SimpleSchema({
   "organization.description": {
     type: String
   },
+  "contactInformation": {
+    type: Object
+  },
+  "contactInformation.name": {
+    type: String
+  },
+  "contactInformation.phone": {
+    type: String
+  },
+  "contactInformation.email": {
+    type: String
+  },
   "service": {
     type: Object
   },
