@@ -27,28 +27,35 @@ Template.apiBacklogList.helpers({
       // Check if current user has posted current backlog item
       backlog.isOwner = Meteor.userId() == backlog.userId;
 
-      // Check priority value & return specific CSS class for label to display
-      switch (backlog.priority) {
-        case 2:
-
-          backlog.priorityColorClass = 'priority priority-high';
-
-          break;
-        case 1:
-
-          backlog.priorityColorClass = 'priority priority-middle';
-
-          break;
-        case 0:
-
-          backlog.priorityColorClass = 'priority priority-none';
-
-          break;
-      }
-
     });
 
     return apiBacklogs;
+  },
+  itemPriorityClass: function (priority) {
+
+    var priorityClass = "";
+
+    // Check priority value & return specific CSS class for label to display
+    switch (priority) {
+      case 2:
+
+        priorityClass = 'priority priority-high';
+
+        break;
+      case 1:
+
+        priorityClass = 'priority priority-middle';
+
+        break;
+      case 0:
+
+        priorityClass = 'priority priority-none';
+
+        break;
+    }
+
+    return priorityClass;
+
   },
   hasApiBacklogs: function () {
 
