@@ -22,7 +22,7 @@ Template.apiBacklogList.helpers({
     _.each(apiBacklogs, function (backlog) {
 
       // Check if current user has posted current backlog item
-      backlog.currentUserIsOwner = Meteor.userId() == backlog.userId;
+      backlog.currentUserIsOwner = Meteor.userId() === backlog.userId;
 
     });
 
