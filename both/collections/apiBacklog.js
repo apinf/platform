@@ -66,20 +66,26 @@ ApiBacklog.attachSchema(new SimpleSchema({
 ApiBacklog.allow({
   insert: function (userId, backlog) {
 
+    // Transform backlog document to an ApiBacklog instance
     var backlogTransformedDocument = ApiBacklog._transform(backlog);
 
+    // Call ApiBacklog helper that return boolean
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId);
   },
   update: function (userId, backlog) {
 
+    // Transform backlog document to an ApiBacklog instance
     var backlogTransformedDocument = ApiBacklog._transform(backlog);
 
+    // Call ApiBacklog helper that return boolean
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   },
   remove: function (userId, backlog) {
 
+    // Transform backlog document to an ApiBacklog instance
     var backlogTransformedDocument = ApiBacklog._transform(backlog);
 
+    // Call ApiBacklog helper that return boolean
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   }
 });
@@ -87,6 +93,7 @@ ApiBacklog.allow({
 ApiBacklog.helpers({
   currentUserIsApiBackendManager: function (apiBackendId) {
 
+    // Get current user's id
     var currentUserId = Meteor.userId();
 
     // Find related API Backend that contains "managerIds" field
