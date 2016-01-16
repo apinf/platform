@@ -16,7 +16,7 @@
                                 {{#if currentUserIsOwner}}
                                     By <b>You</b>
                                 {{/if}}
-                                {{relativeTime}}
+                                {{ relativeTimeStamp createdAt }}
                             </i>
                             {{#if currentUserIsApiManager }}
                                 {{#afModal

@@ -21,15 +21,17 @@ Template.apiBacklogList.helpers({
     // Iterate through all backlog items
     _.each(apiBacklogs, function (backlog) {
 
-      // Human-friendly timestamp
-      backlog.relativeTime = moment(backlog.createdAt).fromNow();
-
       // Check if current user has posted current backlog item
       backlog.currentUserIsOwner = Meteor.userId() == backlog.userId;
 
     });
 
     return apiBacklogs;
+  },
+  relativeTimeStamp: function (givenTimeStamp) {
+
+    return moment(givenTimeStamp).fromNow();
+
   },
   itemPriorityClass: function (priority) {
 
