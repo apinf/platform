@@ -1,22 +1,22 @@
 <template name="apiBacklogList">
     {{> autoformModals}}
     {{#if apiBacklogItems}}
-        {{#each apiBacklogItems}}
+        {{#each apiBacklogItem in apiBacklogItems}}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <b>
-                            <div class="{{ itemPriorityClass priority }}"></div>
-                            {{title}}
+                            <div class="{{ itemPriorityClass apiBacklogItem.priority }}"></div>
+                            {{apiBacklogItem.title}}
                         </b>
                     </div>
                     <div class="panel-body">
-                        <p>{{details}}</p>
+                        <p>{{apiBacklogItem.details}}</p>
                         <div class="backlog-item-footer">
                             <i>
-                                {{#if currentUserIsOwner}}
+                                {{#if apiBacklogItem.currentUserIsOwner}}
                                     By <b>You</b>
                                 {{/if}}
-                                {{ relativeTimeStamp createdAt }}
+                                {{ relativeTimeStamp apiBacklogItem.createdAt }}
                             </i>
                             {{#if currentUserIsApiManager }}
                                 {{#afModal
