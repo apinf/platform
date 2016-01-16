@@ -24,7 +24,7 @@
                                     collection="ApiBacklogItems"
                                     operation="remove"
                                     doc=_id}}
-                                    {{_ "apiBacklog_removeBacklogItem-button"}}
+                                    {{_ "apiBacklogItem_removeBacklogItem-button"}}
                                 {{/afModal}}
                                 {{#afModal
                                     class="btn btn-primary btn-xs pull-right do-margin-right"
@@ -32,7 +32,7 @@
                                     operation="update"
                                     doc=_id
                                     fields="title,details,priority"}}
-                                    {{_ "apiBacklog_editBacklogItem-button"}}
+                                    {{_ "apiBacklogItem_editBacklogItem-button"}}
                                 {{/afModal}}
                             {{/if}}
                         </div>
@@ -40,6 +40,6 @@
                 </div>
         {{/each}}
     {{else}}
-        <i>{{_ "apiBacklog_noApiBacklogItemsFound"}}</i>
+        <i>{{_ "apiBacklogList_noApiBacklogItemsFound"}}</i>
     {{/if}}
 </template>

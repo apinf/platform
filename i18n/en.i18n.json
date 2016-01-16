@@ -139,10 +139,10 @@
 
   /* API Backlog */
   "apiBacklog_mainTitle": "Backlog",
-  "apiBacklog_addBacklogItem_button": "Add backlog item",
-  "apiBacklog_noApiBacklogItemsFound": "No backlog items found for this API.",
-  "apiBacklog_removeBacklogItem-button": "Remove",
-  "apiBacklog_editBacklogItem-button": "Edit",
+  "apiBacklogForm_addBacklogItem_button": "Add backlog item",
+  "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
+  "apiBacklogItem_removeBacklogItem-button": "Remove",
+  "apiBacklogItem_editBacklogItem-button": "Edit",
 
   /*Bookmarks*/
   "bookmarks-Title": "Your bookmarked APIs",
