@@ -1,6 +1,9 @@
 <template name="homeBody">
   <div class="container features">
     <div class="row">
+      {{> latestApiBackends limit = 8 }}
+    </div>
+    <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="feature-section-heading">{{_ "feature-Section-Heading1"}}</h2>
         <hr class="primary">
