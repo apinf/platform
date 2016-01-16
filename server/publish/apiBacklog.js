@@ -1,4 +1,4 @@
-Meteor.publish('apiBacklog', function(apiBackendId){
+Meteor.publish('apiBacklogItems', function(apiBackendId){
 
-  return ApiBacklog.find({ apiBackendId: apiBackendId });
+  return ApiBacklogItems.find({ apiBackendId: apiBackendId });
 });

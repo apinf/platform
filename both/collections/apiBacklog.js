@@ -1,6 +1,6 @@
-ApiBacklog = new Mongo.Collection("apiBacklog");
+ApiBacklogItems = new Mongo.Collection("apiBacklogItems");
 
-ApiBacklog.attachSchema(new SimpleSchema({
+ApiBacklogItems.attachSchema(new SimpleSchema({
   title: {
     type: String,
     label: "Title",
@@ -63,11 +63,11 @@ ApiBacklog.attachSchema(new SimpleSchema({
   }
 }));
 
-ApiBacklog.allow({
+ApiBacklogItems.allow({
   insert: function (userId, backlog) {
 
     // Transform backlog document to an ApiBacklog instance
-    var backlogTransformedDocument = ApiBacklog._transform(backlog);
+    var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
 
     // Call ApiBacklog helper that return boolean
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId);
@@ -75,7 +75,7 @@ ApiBacklog.allow({
   update: function (userId, backlog) {
 
     // Transform backlog document to an ApiBacklog instance
-    var backlogTransformedDocument = ApiBacklog._transform(backlog);
+    var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
 
     // Call ApiBacklog helper that return boolean
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
@@ -83,14 +83,14 @@ ApiBacklog.allow({
   remove: function (userId, backlog) {
 
     // Transform backlog document to an ApiBacklog instance
-    var backlogTransformedDocument = ApiBacklog._transform(backlog);
+    var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
 
     // Call ApiBacklog helper that return boolean
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   }
 });
 
-ApiBacklog.helpers({
+ApiBacklogItems.helpers({
   currentUserIsApiBackendManager: function (apiBackendId) {
 
     // Get current user's id

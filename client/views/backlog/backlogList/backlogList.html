@@ -21,14 +21,14 @@
                             {{#if currentUserIsApiManager }}
                                 {{#afModal
                                     class="btn btn-danger btn-xs pull-right"
-                                    collection="ApiBacklog"
+                                    collection="ApiBacklogItems"
                                     operation="remove"
                                     doc=_id}}
                                     {{_ "apiBacklog_removeBacklogItem-button"}}
                                 {{/afModal}}
                                 {{#afModal
                                     class="btn btn-primary btn-xs pull-right do-margin-right"
-                                    collection="ApiBacklog"
+                                    collection="ApiBacklogItems"
                                     operation="update"
                                     doc=_id
                                     fields="title,details,priority"}}

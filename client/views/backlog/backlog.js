@@ -7,7 +7,7 @@ Template.apiBacklog.created = function () {
   instance.apiBackendId = Router.current().params._id;
 
   // Subscribe to API Backlog items for this API Backend
-  instance.subscribe("apiBacklog", instance.apiBackendId);
+  instance.subscribe("apiBacklogItems", instance.apiBackendId);
 };
 
 Template.apiBacklog.helpers({

@@ -16,7 +16,7 @@ Template.apiBacklogList.helpers({
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    var apiBacklogs = ApiBacklog.find({ apiBackendId: instance.apiBackendId }, {sort: {priority: -1, createdAt: -1}}).fetch();
+    var apiBacklogs = ApiBacklogItems.find({ apiBackendId: instance.apiBackendId }, {sort: {priority: -1, createdAt: -1}}).fetch();
 
     // Iterate through all backlog items
     _.each(apiBacklogs, function (backlog) {
