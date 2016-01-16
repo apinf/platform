@@ -9,7 +9,7 @@ Template.apiBacklogList.created = function () {
 };
 
 Template.apiBacklogList.helpers({
-  apiBacklogs: function () {
+  apiBacklogItems: function () {
 
     // Get reference to template instance
     var instance = Template.instance();
@@ -25,7 +25,7 @@ Template.apiBacklogList.helpers({
       backlog.relativeTime = moment(backlog.createdAt).fromNow();
 
       // Check if current user has posted current backlog item
-      backlog.isOwner = Meteor.userId() == backlog.userId;
+      backlog.currentUserIsOwner = Meteor.userId() == backlog.userId;
 
     });
 

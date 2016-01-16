@@ -1,7 +1,7 @@
 <template name="apiBacklogList">
     {{> autoformModals}}
-    {{#if apiBacklogs}}
-        {{#each apiBacklogs}}
+    {{#if apiBacklogItems}}
+        {{#each apiBacklogItems}}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <b>
@@ -13,7 +13,7 @@
                         <p>{{details}}</p>
                         <div class="backlog-item-footer">
                             <i>
-                                {{#if isOwner}}
+                                {{#if currentUserIsOwner}}
                                     By <b>You</b>
                                 {{/if}}
                                 {{relativeTime}}
