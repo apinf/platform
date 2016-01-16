@@ -1,11 +1,11 @@
 <template name="apiBacklogForm">
 
-    <div class="modal fade" id="apiBacklogFormModal" tabindex="-1" role="dialog" aria-labelledby="apiBacklogForModalLabel">
+    <div class="modal fade" id="apiBacklogFormModal" tabindex="-1" role="dialog" aria-labelledby="apiBacklogFormModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="apiBacklogForModalLabel">{{_ "apiBacklog_addBacklogItem_button"}}</h4>
+                    <h4 class="modal-title" id="apiBacklogFormModalLabel">{{_ "apiBacklog_addBacklogItem_button"}}</h4>
                 </div>
                 <div class="modal-body">
                     {{#autoForm collection="ApiBacklogItems" id="apiBacklogForm" type="insert"}}
