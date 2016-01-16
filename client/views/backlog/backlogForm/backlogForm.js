@@ -1,9 +1,10 @@
 AutoForm.hooks({
   apiBacklogForm: {
     before: {
-      insert: function (backlog) {
-        backlog.apiBackendId = Router.current().params._id;
-        return backlog;
+      insert: function (backlogItem) {
+        // Attach API Backend Id to backlog item schema
+        backlogItem.apiBackendId = Router.current().params._id;
+        return backlogItem;
       }
     },
     beginSubmit: function () {
@@ -20,8 +21,10 @@ AutoForm.hooks({
 AutoForm.addHooks(['apiBacklogForm'], {
   // Success message
   onSuccess: function () {
+    // Close modal window "manually" after form submit successfully
     $('#apiBacklogFormModal').modal('hide');
-    FlashMessages.sendSuccess('Thank you! Your backlog has been successfully published.');
+    // Push flash message to user
+    FlashMessages.sendSuccess('Thank you! Your backlog item has been successfully published.');
   }
 });
 
