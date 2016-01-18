@@ -19,9 +19,12 @@
             {{#if branding}}
             {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
             {{> afQuickField name='projectLogo'}}
-
             {{#if projectLogo}}
             <img alt="{{projectLogo.name}}" src="{{projectLogo.url}}" width="150px">
+            {{/if}}
+            {{> afQuickField name='coverPhoto'}}
+            {{#if coverPhoto}}
+            <img alt="{{coverPhoto.name}}" src="{{coverPhoto.url}}" width="300px">
             {{/if}}
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteAbbreviation'}}
@@ -36,6 +39,7 @@
             {{else}}
             {{#autoForm collection="Branding" id="branding" type="insert"}}
             {{> afQuickField name='projectLogo'}}
+            {{> afQuickField name='coverPhoto'}}
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteAbbreviation'}}
             {{> afQuickField name='siteSlogan'}}
