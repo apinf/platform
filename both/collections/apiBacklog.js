@@ -71,7 +71,7 @@ ApiBacklogItems.allow({
     // Transform backlog document to an ApiBacklog instance
     var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
 
-    // Call ApiBacklog helper that return boolean
+    // Call ApiBacklog helper to check that current user is API Manager
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId);
   },
   update: function (userId, backlog) {
@@ -79,7 +79,7 @@ ApiBacklogItems.allow({
     // Transform backlog document to an ApiBacklog instance
     var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
 
-    // Call ApiBacklog helper that return boolean
+    // Call ApiBacklog helper to check that current user is API Manager
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   },
   remove: function (userId, backlog) {
@@ -87,7 +87,7 @@ ApiBacklogItems.allow({
     // Transform backlog document to an ApiBacklog instance
     var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
 
-    // Call ApiBacklog helper that return boolean
+    // Call ApiBacklog helper to check that current user is API Manager
     return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
   }
 });
