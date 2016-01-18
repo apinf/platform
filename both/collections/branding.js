@@ -50,6 +50,21 @@ Schemas.BrandingSchema = new SimpleSchema({
     type: String,
     optional: true,
     label: 'Site footer'
+  },
+  socialMedia: {
+    type: [Object],
+    optional: true
+  },
+  "socialMedia.$.name": {
+  type: String,
+  allowedValues: ["Facebook", "Twitter", "Github"]
+  },
+  "socialMedia.$.url": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    autoform: {
+      placeholder: 'http://example.com/accountname'
+    }
   }
 });
 
