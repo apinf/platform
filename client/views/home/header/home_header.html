@@ -1,5 +1,5 @@
 <template name="homeHeader">
-  <div class="navbar navbar-default">
+  <div class="navbar navbar-default coverphoto" style="background-image: url({{ coverPhoto.url }})">
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">
@@ -38,9 +38,6 @@
             {{else}}
             <a href="/sign-up" class="btn btn-success sign-up" title="{{_ 'signUp'}}"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
             {{/if}}
-          </div>
-          <div class="col-lg-6">
-            <img class="img-responsive front-img" src="img/compIllustr.png" alt="">
           </div>
         </div>
       </div>
