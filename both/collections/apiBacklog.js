@@ -47,12 +47,15 @@ ApiBacklogItems.attachSchema(new SimpleSchema({
     type: Date,
     autoValue: function () {
 
+      // Check if mongoDB insert operation is initial
       if (this.isInsert)
         return new Date();
 
+      // Check if mongoDB insert operation is initial
       else if (this.isUpsert)
         return { $setOnInsert: new Date() };
 
+      // If not - field is not updated
       else
         this.unset();
     }
