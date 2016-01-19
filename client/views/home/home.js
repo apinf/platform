@@ -1,14 +1,13 @@
-Template.branding.created = function () {
-  var instance = this;
+Template.home.created = function () {
   // Subscription to branding collection
-  instance.subscribe('branding');
-  // Subscribe to project logo collection
-  instance.subscribe('projectLogo');
+  this.subscribe('branding');
+  // Subscription to projectLogo collection
+  this.subscribe('projectLogo');
   // Subscription to coverPhoto collection
-  instance.subscribe('coverPhoto');
+  this.subscribe('coverPhoto');
 };
 
-Template.branding.helpers({
+Template.home.helpers({
   branding: function () {
     // Get Branding collection content
     return Branding.findOne();
@@ -18,7 +17,7 @@ Template.branding.helpers({
     var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
     // Check if new logo was uploaded, if so change it with previous
     if (lastUploadedLogo) {
-      return lastUploadedLogo
+      return lastUploadedLogo;
     }
   },
   coverPhoto: function () {
