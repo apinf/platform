@@ -1,4 +1,5 @@
 describe('Search form not present', function () {
+
   beforeEach(function (done) {
     Router.go('/search');
     Tracker.afterFlush(done);
@@ -8,7 +9,9 @@ describe('Search form not present', function () {
 
   it('should not contain search form at "/search" page', function () {
 
-    expect($('form#header-search-form').length).toEqual(0);
+    $(function () {
+      expect($('form#header-search-form').length).toEqual(0);
+    });
 
   });
 });

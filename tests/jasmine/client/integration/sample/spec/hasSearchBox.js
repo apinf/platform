@@ -1,4 +1,5 @@
 describe('Search form present', function () {
+
   beforeEach(function (done) {
     Router.go('/catalogue');
     Tracker.afterFlush(done);
@@ -8,7 +9,9 @@ describe('Search form present', function () {
 
   it('should contain search form at "/catalogue" page', function () {
 
-    expect($('form#header-search-form').length).toEqual(1);
+    $(function () {
+      expect($('form#header-search-form').length).toEqual(1);
+    });
 
   });
 });
