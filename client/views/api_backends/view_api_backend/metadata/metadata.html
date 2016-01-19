@@ -5,7 +5,46 @@
       <h2 class="panel-title">{{_ "view-ApiBackend-Metadata-Title"}}</h2>
     </div>
     <div class="panel-body">
-      <p>Metadata goes here</p>
+      {{# with metadata }}
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Organization</h2>
+            </div>
+            <div class="panel-body">
+              {{# with organization }}
+              <p>Body</p>
+              {{/ with }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Contact</h2>
+            </div>
+            <div class="panel-body">
+              {{# with contact }}
+              <p>Body</p>
+              {{/ with }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Service</h2>
+            </div>
+            <div class="panel-body">
+              {{# with service }}
+              <p>Body</p>
+              {{/ with }}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/ with }}
     </div>
   </div>
   <p></p>
