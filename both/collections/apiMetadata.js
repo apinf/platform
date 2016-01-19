@@ -17,19 +17,19 @@ ApiMetadata.schema = new SimpleSchema({
     type: String,
     optional: true
   },
-  "contactInformation": {
+  "contact": {
     type: Object,
     optional: true
   },
-  "contactInformation.name": {
+  "contact.name": {
     type: String,
     optional: true
   },
-  "contactInformation.phone": {
+  "contact.phone": {
     type: String,
     optional: true
   },
-  "contactInformation.email": {
+  "contact.email": {
     type: String,
     optional: true
   },
