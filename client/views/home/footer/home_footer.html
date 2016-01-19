@@ -5,7 +5,11 @@
         <div class="col-lg-2">
           <ul class="list-inline social-icons icon-circle">
             {{#each network in branding.socialMedia }}
-              <li><a href="{{ network.url }}" target="_blank">{{ network.name }}</a></li>
+              <li>
+                <a href="{{ network.url }}" target="_blank">
+                  <i class="fa fa-{{ socialMediaIcon network.name }}"></i>
+                </a>
+              </li>
             {{/each}}
           </ul>
         </div>
