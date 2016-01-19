@@ -9,6 +9,8 @@ Template.apiBacklog.created = function () {
   // Subscribe to API Backlog items for this API Backend
   instance.subscribe("apiBacklogItems", instance.apiBackendId);
 
+  // TODO: probably remove this sub later
+  // Subscribe to API Backends managed by current user
   instance.subscribe("myManagedApis");
 };
 
