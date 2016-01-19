@@ -12,5 +12,16 @@ AutoForm.addHooks("editApiMetadataForm", {
 
       return metadata;
     }
+  },
+  "onSuccess": function () {
+    // Close modal dialogue
+    $('#apiMetadataModal').modal('hide');
+  }
+});
+
+AutoForm.addHooks("updateApiMetadataForm", {
+  "onSuccess": function () {
+    // Close modal dialogue
+    $('#apiMetadataModal').modal('hide');
   }
 });
