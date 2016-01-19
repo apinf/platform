@@ -15,8 +15,17 @@ Accounts.onCreateUser(function(options, user) {
       }
     ];
 
-    // Set username from Github username
-    user.username = user.services.github.username;
+    // Search 'githubUsername' from database.
+    var githubUsername = user.services.github.username;
+    var existingUser = Meteor.users.findOne({'username': githubUsername});
+    if(existingUser === undefined) {
+      // Username available, set username to Github username.
+      user.username = githubUsername;
+    } else {
+      // Username clashes with existing username, set empty.
+      // Asking user to fill out username in profile page.
+      user.username = '';
+    }
   }
 
   // It doesn't allow to create a user on APIUmbrella side if apiUmbrellaWeb is not created

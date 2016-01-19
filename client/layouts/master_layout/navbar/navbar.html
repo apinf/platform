@@ -1,8 +1,13 @@
 <template name="navbar">
   <header class="main-header">
     <a href="/" class="logo">
-      <span class="logo-mini"><b>NF</b></span>
-      <span class="logo-lg"><b>API</b>NF</span>
+      {{#if projectLogo}}
+      <div class="logo-lg project-logo" style="background-image: url('{{ projectLogo.url }}')"></div>
+      <span class="logo-mini"><b>{{ branding.siteAbbreviation }}</b></span>
+      {{else}}
+      <span class="logo-lg">{{ branding.siteTitle }}</span>
+      <span class="logo-mini">{{ branding.siteAbbreviation }}</span>
+      {{/if}}
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
       {{#if User}}
@@ -32,6 +37,9 @@
             <ul class="dropdown-menu">
               <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
               <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
+              {{#if isInRole 'admin'}}
+                <li><a href="{{pathFor 'branding'}}">Branding</a></li>
+              {{/if}}
               <li><a href="{{pathFor 'settings'}}">Settings</a></li>
               <li class="divider"></li>
               <li><a href="/sign-out">{{_ "signout"}}</a></li>
