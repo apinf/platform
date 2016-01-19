@@ -6,43 +6,56 @@ ApiMetadata.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id
   },
   "organization": {
-    type: Object
+    type: Object,
+    optional: true
   },
   "organization.name": {
-    type: String
+    type: String,
+    optional: true
   },
   "organization.description": {
-    type: String
+    type: String,
+    optional: true
   },
   "contactInformation": {
-    type: Object
+    type: Object,
+    optional: true
   },
   "contactInformation.name": {
-    type: String
+    type: String,
+    optional: true
   },
   "contactInformation.phone": {
-    type: String
+    type: String,
+    optional: true
   },
   "contactInformation.email": {
-    type: String
+    type: String,
+    optional: true
   },
   "service": {
-    type: Object
+    type: Object,
+    optional: true
   },
   "service.name": {
-    type: String
+    type: String,
+    optional: true
   },
   "service.description": {
-    type: String
+    type: String,
+    optional: true
   },
   "service.validSince": {
-    type: Date
+    type: Date,
+    optional: true
   },
   "service.validUntil": {
-    type: Date
+    type: Date,
+    optional: true
   },
   "service.serviceLevelAgreement": {
-    type: String
+    type: String,
+    optional: true
   }
 });
 
