@@ -5,6 +5,7 @@
       <h2 class="panel-title">{{_ "view-ApiBackend-Metadata-Title"}}</h2>
     </div>
     <div class="panel-body">
+      {{# if metadata }}
       {{# with metadata }}
       <div class="row">
         <div class="col-md-4">
@@ -40,6 +41,9 @@
         </div>
       </div>
       {{/ with }}
+      {{ else }}
+      <p>No metadata found.</p>
+      {{/ if }}
     </div>
   </div>
   <p></p>
