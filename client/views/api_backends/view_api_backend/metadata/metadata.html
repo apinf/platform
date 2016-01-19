@@ -15,20 +15,32 @@
               <h2 class="panel-title">Organization</h2>
             </div>
             <div class="panel-body">
-              <h3>{{ organization.name }}</h3>
-              <p>{{ organization.description }}</p>
+              {{# if organization.name }}
+                <h3>{{ organization.name }}</h3>
+              {{/ if }}
+              {{# if organization.name }}
+                <p>{{ organization.description }}</p>
+              {{/ if }}
             </div>
           </div>
         </div>
         {{/ if }}
-        {{# if contact }}}
+        {{# if contact }}
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h2 class="panel-title">Contact</h2>
             </div>
             <div class="panel-body">
-              <p>{{ contact.name }}</p>
+              {{# if contact.name }}
+               <h3>{{ contact.name }}</h3>
+              {{/ if }}
+              {{# if contact.phone }}
+               <p>Phone: {{ contact.phone }}</p>
+              {{/ if }}
+              {{# if contact.email }}
+               <p>Email: {{ contact.email }}</p>
+              {{/ if }}
             </div>
           </div>
         </div>
@@ -40,7 +52,21 @@
               <h2 class="panel-title">Service</h2>
             </div>
             <div class="panel-body">
-              <p>{{ service.name }}</p>
+              {{# if service.name }}
+                <h3>{{ service.name }}</h3>
+              {{/ if }}
+              {{# if service.description }}
+                <p>{{ service.description }}</p>
+              {{/ if }}
+              {{# if service.validSince }}
+                <p>Valid since {{ service.validSince }}</p>
+              {{/ if }}
+              {{# if service.validUntil }}
+                <p>Valid until {{ service.validUntil }}</p>
+              {{/ if }}
+              {{# if service.serviceLevelAgreement }}
+                <p>Service level agreement {{ service.serviceLevelAgreement }}</p>
+              {{/ if }}
             </div>
           </div>
         </div>
