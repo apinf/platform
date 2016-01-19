@@ -47,3 +47,18 @@ ApiMetadata.schema = new SimpleSchema({
 });
 
 ApiMetadata.attachSchema(ApiMetadata.schema);
+
+ApiMetadata.allow({
+  "insert": function () {
+    // TODO: add the following checks
+    // Count existing API Metadata documents for API Backend ID
+    // Make sure there is only one document per API Backend ID
+    // Make sure user is API Backend manager or administrator
+    return true;
+  },
+  "update": function () {
+    // TODO: Add the following checks
+    // Make sure user is manager for API Backend, or administrator
+    return true;
+  }
+});
