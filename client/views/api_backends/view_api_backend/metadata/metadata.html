@@ -13,9 +13,8 @@
               <h2 class="panel-title">Organization</h2>
             </div>
             <div class="panel-body">
-              {{# with organization }}
-              <p>Body</p>
-              {{/ with }}
+              <h3>{{ organization.name }}</h3>
+              <p>{{ organization.description }}</p>
             </div>
           </div>
         </div>
@@ -25,9 +24,7 @@
               <h2 class="panel-title">Contact</h2>
             </div>
             <div class="panel-body">
-              {{# with contact }}
-              <p>Body</p>
-              {{/ with }}
+              <p>{{ contact.name }}</p>
             </div>
           </div>
         </div>
@@ -37,9 +34,7 @@
               <h2 class="panel-title">Service</h2>
             </div>
             <div class="panel-body">
-              {{# with service }}
-              <p>Body</p>
-              {{/ with }}
+              <p>{{ service.name }}</p>
             </div>
           </div>
         </div>
