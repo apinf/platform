@@ -10,9 +10,11 @@ Template.AdminLTE.helpers({
     if (branding && branding.color_theme) {
       // Get color theme from branding collection
       adminLTESkin = branding.color_theme;
-    }
 
-    // Set chosen AdminLTE skin or use default
-    return adminLTESkin || 'blue-light';
+      return adminLTESkin;
+    } else {
+      // Return a default theme
+      return 'blue-light';
+    }
   }
 });
