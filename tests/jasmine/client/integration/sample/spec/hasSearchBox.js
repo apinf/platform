@@ -1,14 +1,14 @@
 describe('Search form present', function () {
   beforeEach(function (done) {
-    Router.go('/search');
+    Router.go('/catalogue');
     Tracker.afterFlush(done);
   });
 
   beforeEach(waitForRouter);
 
-  it('should not contain search form at "/search" page', function () {
+  it('should contain search form at "/catalogue" page', function () {
 
-    expect($('form#header-search-form').length).toEqual(0);
+    expect($('form#header-search-form').length).toEqual(1);
 
   });
 });
