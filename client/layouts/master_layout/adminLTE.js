@@ -8,7 +8,7 @@ Template.AdminLTE.helpers({
 
     // Check if branding and color theme exists
     if (branding && branding.color_theme) {
-      // If branding color theme exists, use it
+      // If branding color theme exists, return it
       adminLTESkin = branding.color_theme;
 
       return adminLTESkin;
