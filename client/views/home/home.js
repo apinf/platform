@@ -15,7 +15,7 @@ Template.home.helpers({
   projectLogo: function () {
     // Get last uploaded image from collection
     var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
-
+    // Check if new logo was uploaded, if so change it with previous
     if (lastUploadedLogo) {
       return lastUploadedLogo;
     }
@@ -23,7 +23,7 @@ Template.home.helpers({
   coverPhoto: function () {
     // Get last uploaded image from collection
     var lastUploadedCover = CoverPhoto.findOne({}, {sort: {uploadedAt: -1}});
-
+    // Check if new cover was uploaded, if so change it with previous
     if (lastUploadedCover) {
       return lastUploadedCover;
     }
