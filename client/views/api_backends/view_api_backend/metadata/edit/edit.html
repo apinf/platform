@@ -21,12 +21,22 @@
           <h4 class="modal-title" id="feedbackFormLabel">{{_ "editApiMetadata-editApiMetadataForm-title"}}</h4>
         </div>
         <div class="modal-body">
+          {{# if metadata }}
+          {{> quickForm
+            collection="ApiMetadata"
+            id="updateApiMetadataForm"
+            type="update"
+            doc=metadata
+            omitFields="apiBackendId"
+          }}
+          {{ else }}
           {{> quickForm
             collection="ApiMetadata"
             id="editApiMetadataForm"
             type="insert"
             omitFields="apiBackendId"
           }}
+          {{/ if }}
         </div>
       </div>
       {{> flashMessages}}
