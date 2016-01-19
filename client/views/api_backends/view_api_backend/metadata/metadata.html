@@ -8,6 +8,7 @@
       {{# if metadata }}
       {{# with metadata }}
       <div class="row">
+        {{# if organization }}
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -19,6 +20,8 @@
             </div>
           </div>
         </div>
+        {{/ if }}
+        {{# if contact }}}
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -29,6 +32,8 @@
             </div>
           </div>
         </div>
+        {{/ if }}
+        {{# if service }}
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -39,6 +44,7 @@
             </div>
           </div>
         </div>
+        {{/ if }}
       </div>
       {{/ with }}
       {{ else }}
