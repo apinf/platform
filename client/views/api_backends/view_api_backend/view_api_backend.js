@@ -25,8 +25,10 @@ Template.viewApiBackend.helpers({
   "metadata": function () {
     // Get the API Backend ID from the route
     let apiBackendId = Router.current().params._id;
-    
+
     // Get API Backend metadata
     let apiMetadata = ApiMetadata.findOne({apiBackendId});
+
+    return apiMetadata;
   }
 });
