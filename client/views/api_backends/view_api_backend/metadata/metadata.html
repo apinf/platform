@@ -36,10 +36,10 @@
                <h3>{{ contact.name }}</h3>
               {{/ if }}
               {{# if contact.phone }}
-               <p>Phone: {{ contact.phone }}</p>
+               <p><b>Phone:</b> {{ contact.phone }}</p>
               {{/ if }}
               {{# if contact.email }}
-               <p>Email: {{ contact.email }}</p>
+               <p><b>Email:</b> {{ contact.email }}</p>
               {{/ if }}
             </div>
           </div>
@@ -59,13 +59,13 @@
                 <p>{{ service.description }}</p>
               {{/ if }}
               {{# if service.validSince }}
-                <p>Valid since {{ service.validSince }}</p>
+                <p><b>Valid since:</b> {{ service.validSince }}</p>
               {{/ if }}
               {{# if service.validUntil }}
-                <p>Valid until {{ service.validUntil }}</p>
+                <p><b>Valid until:</b> {{ service.validUntil }}</p>
               {{/ if }}
               {{# if service.serviceLevelAgreement }}
-                <p>Service level agreement {{ service.serviceLevelAgreement }}</p>
+                <p><b>Service level agreement:</b> {{ service.serviceLevelAgreement }}</p>
               {{/ if }}
             </div>
           </div>
