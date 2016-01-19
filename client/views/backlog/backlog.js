@@ -8,6 +8,8 @@ Template.apiBacklog.created = function () {
 
   // Subscribe to API Backlog items for this API Backend
   instance.subscribe("apiBacklogItems", instance.apiBackendId);
+
+  instance.subscribe("myManagedApis");
 };
 
 Template.apiBacklog.helpers({
