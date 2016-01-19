@@ -120,6 +120,7 @@
   "view-ApiBackend-Export-Title": "Export API configurations",
   "view-ApiBackend-ExportJson": "Export .json",
   "view-ApiBackend-ExportYaml": "Export .yaml",
+  "view-ApiBackend-Metadata-Title": "Metadata",
 
   /*Api Backends*/
   "apiBackends-Add-API-Title": "Add API",
@@ -138,6 +139,8 @@
   "apiBackends-AdvancedRequestsRewriting-Help": "Modify the incoming requests made to the Umbrella front-end before they are passed on to your API backend",
   "apiBackends-AdvancedSettings": "Advanced Settings",
   "apiBackends-Submit": "Submit",
+  "editApiMetadata-editApiMetadataForm-button": "Edit API Metadata",
+  "editApiMetadata-editApiMetadataForm-title": "Edit API Metadata",
 
 
   /* Add API Backend - simple */
