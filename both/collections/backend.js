@@ -733,5 +733,29 @@ ApiBackends.helpers({
 
       return apiBackendRatingsAverage;
     }
+  },
+  currentUserCanEdit: function() {
+    // Get current userId
+    var userId = Meteor.userId();
+
+    // Check that user is logged in
+    if( userId ) {
+      // Check if user is API manager
+      var isManager = _.contains(this.managerIds, userId);
+
+      if (isManager) {
+        return true;
+      }
+
+      // Check if user is administrator
+      var isAdmin = Roles.userIsInRole(userId, ['admin']);
+
+      if (isAdmin) {
+        return true;
+      }
+    } else {
+      // User is not logged in
+      return false;
+    }
   }
 });
