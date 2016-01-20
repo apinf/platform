@@ -118,7 +118,7 @@
   "view-ApiBackend-Matchers": "URL Matchers",
   "view-ApiBackend-Backend-Prefix": "Backend prefix",
   "view-ApiBackend-Frontend-Prefix": "Frontend prefix",
-  "view-ApiBackend-Export-Title": "Export API configurations",
+  "view-ApiBackend-Export-Title": "Export",
   "view-ApiBackend-ExportJson": "Export .json",
   "view-ApiBackend-ExportYaml": "Export .yaml",
   "view-ApiBackend-Metadata-Title": "Metadata",
