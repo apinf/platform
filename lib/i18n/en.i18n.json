@@ -119,7 +119,7 @@
   "view-ApiBackend-Matchers": "URL Matchers",
   "view-ApiBackend-Backend-Prefix": "Backend prefix",
   "view-ApiBackend-Frontend-Prefix": "Frontend prefix",
-  "view-ApiBackend-Export-Title": "Export",
+  "view_ApiBackend_Export_Title": "Export",
   "view-ApiBackend-ExportJson": "Export .json",
   "view-ApiBackend-ExportYaml": "Export .yaml",
   "view-ApiBackend-Metadata-Title": "Metadata",
@@ -165,7 +165,7 @@
 
   /*Feedback*/
   "feedback-submitted-by": "submitted by",
-  "feedback-main-title": "Feedback",
+  "feedback_main_title": "Feedback",
   "feedback-view-button": "View",
   "feedback-no-feedback": "No feedback, yet.",
   "feedback-remove-button": "Remove",
