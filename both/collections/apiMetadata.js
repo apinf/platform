@@ -71,52 +71,18 @@ ApiMetadata.allow({
       // Find related API Backend, select only "managerIds" field
       var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
-      // Try - Catch wrapper here because Mongodb call above can return zero matches
-      try {
-        // Get managerIds array from API Backend document
-        var managerIds = apiBackend.managerIds;
-      } catch (err) {
-        // If manager-ids field does not exist return false - API Backend does not have any managers listed
-        return false;
-      }
-
-      // Check if an array of managerIds contain user id passed
-      var isManager = _.contains(managerIds, userId);
-      // Check if user is administrator
-      var isAdmin = Roles.userIsInRole(userId, ['admin']);
-
-      // Check that user is either API manager OR Admin
-      if(isManager || isAdmin) {
-        return true;
-      } else {
-        return false;
-      }
+      // Check if current user can edit API Backend
+      return apiBackend.currentUserCanEdit();
     }
   },
   "update": function (userId, doc) {
+    // Get API Backend ID
     var apiBackendId = doc.apiBackendId;
+
     // Find related API Backend, select only "managerIds" field
     var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
-    // Try - Catch wrapper here because Mongodb call above can return zero matches
-    try {
-      // Get managerIds array from API Backend document
-      var managerIds = apiBackend.managerIds;
-    } catch (err) {
-      // If manager-ids field does not exist return false - API Backend does not have any managers listed
-      return false;
-    }
-
-    // Check if an array of managerIds contain user id passed
-    var isManager = _.contains(managerIds, userId);
-    // Check if user is administrator
-    var isAdmin = Roles.userIsInRole(userId, ['admin']);
-
-    // Check that user is either API manager OR Admin
-    if(isManager || isAdmin) {
-      return true;
-    } else {
-      return false;
-    }
+    // Check if current user can edit API Backend
+    return apiBackend.currentUserCanEdit();
   }
 });
