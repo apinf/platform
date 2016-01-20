@@ -1,12 +1,14 @@
 <template name="viewApiBackendDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <a
-         href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-         class="btn btn-info pull-right">
-         <i class="fa fa-cog"></i>
-        {{_ "view-ApiBackend-Details-editButtonText" }}
-      </a>
+      {{# if currentUserCanEditApiBackend }}
+        <a
+           href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
+           class="btn btn-info pull-right">
+           <i class="fa fa-cog"></i>
+          {{_ "view-ApiBackend-Details-editButtonText" }}
+        </a>
+      {{/ if }}
       <h2 class="panel-title clearfix">
         <i class="fa fa-info-circle"></i>
         {{_ "view-ApiBackend-Details-Title"}}
