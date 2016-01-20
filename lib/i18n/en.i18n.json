@@ -111,13 +111,15 @@
 
   /*View Api Backend*/
   "view-ApiBackend-Title": "View API backend",
+  "view_ApiBackend_Details_Title": "Details",
+  "view_ApiBackend_Details_editButtonText": "Edit API Settings",
   "view-ApiBackend-Servers": "Servers",
   "view-ApiBackend-Backend": "Backend",
   "view-ApiBackend-Frontend": "Frontend",
   "view-ApiBackend-Matchers": "URL Matchers",
   "view-ApiBackend-Backend-Prefix": "Backend prefix",
   "view-ApiBackend-Frontend-Prefix": "Frontend prefix",
-  "view-ApiBackend-Export-Title": "Export API configurations",
+  "view_ApiBackend_Export_Title": "Export",
   "view-ApiBackend-ExportJson": "Export .json",
   "view-ApiBackend-ExportYaml": "Export .yaml",
   "view-ApiBackend-Metadata-Title": "Metadata",
@@ -170,7 +172,7 @@
 
   /*Feedback*/
   "feedback-submitted-by": "submitted by",
-  "feedback-main-title": "Feedback and report messages",
+  "feedback_main_title": "Feedback",
   "feedback-view-button": "View",
   "feedback-no-feedback": "No feedback, yet.",
   "feedback-remove-button": "Remove",

@@ -7,18 +7,7 @@
 
     <div class="tab-content">
       <div id="api-backend-details" class="tab-pane fade in active">
-        <div class="row">
-          <div class="col-md-3">
-            {{> viewApiBackendStatus apiBackend=apiBackend }}
-          </div>
-          <div class="col-md-4">
-            {{> viewApiBackendServers apiBackend=apiBackend }}
-          </div>
-        </div>
-
-        <div class="row">
-          {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
-        </div>
+        {{> viewApiBackendDetails apiBackend=apiBackend }}
       </div> <!-- /api-backend-details -->
 
       <div id="api-backend-metadata" class="tab-pane fade in">
