@@ -18,7 +18,7 @@
                                 {{/if}}
                                 {{ relativeTimeStamp apiBacklogItem.createdAt }}
                             </i>
-                            {{#if currentUserIsApiManager }}
+                            {{#if currentUserCanEditBacklog }}
                                 {{#afModal
                                     class="btn btn-danger btn-xs pull-right"
                                     collection="ApiBacklogItems"
