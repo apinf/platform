@@ -12,7 +12,7 @@ Template.apiBacklog.created = function () {
 Template.apiBacklog.helpers({
   currentUserCanEditBacklog: function() {
     /*
-     API Metadata shares permissions with the API Backend
+     API Backlog shares permissions with the API Backend
      Make sure user can edit API Backend before allowing Metadata permissions
     */
 
