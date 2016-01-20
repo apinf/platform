@@ -112,6 +112,7 @@
   /*View Api Backend*/
   "view-ApiBackend-Title": "View API backend",
   "view-ApiBackend-Details-Title": "Details",
+  "view-ApiBackend-Details-editButtonText": "Edit API Settings",
   "view-ApiBackend-Servers": "Servers",
   "view-ApiBackend-Backend": "Backend",
   "view-ApiBackend-Frontend": "Frontend",
