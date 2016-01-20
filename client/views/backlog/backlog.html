@@ -1,25 +1,24 @@
 <template name="apiBacklog">
-    <div class="backlog-container">
-        <h1>
-            {{_ "apiBacklog_mainTitle"}}
-        </h1>
-        <div class="backlog-nav-box">
-            <a href="/api/{{ apiBackend._id }}" class="btn btn-success btn-xs">{{_ "view-ApiBackend-Title"}}</a>
-            {{#if currentUserIsApiManager }}
-                <button type="button"
-                        class="btn btn-info btn-xs pull-right"
-                        data-toggle="modal"
-                        data-target="#apiBacklogFormModal"
-                        data-backdrop="static"
-                        data-keyboard="true">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    {{_ "apiBacklogForm_addBacklogItem_button"}}
-                </button>
-            {{/if}}
-        </div>
-        {{#if currentUserIsApiManager }}
-            {{> apiBacklogForm }}
-        {{/if}}
-        {{> apiBacklogList }}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{#if currentUserIsApiManager }}
+          <button type="button"
+                  class="btn btn-info btn-sm pull-right"
+                  data-toggle="modal"
+                  data-target="#apiBacklogFormModal"
+                  data-backdrop="static"
+                  data-keyboard="true">
+              <span class="glyphicon glyphicon-plus"></span>
+              {{_ "apiBacklogForm_addBacklogItem_button"}}
+          </button>
+      {{/if}}
+      <h2 class="panel-title clearfix">{{_ "apiBacklog_mainTitle"}}</h2>
     </div>
+    <div class="panel-body">
+      {{#if currentUserIsApiManager }}
+          {{> apiBacklogForm }}
+      {{/if}}
+      {{> apiBacklogList }}
+    </div>
+  </div>
 </template>
