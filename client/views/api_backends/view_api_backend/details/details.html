@@ -1,0 +1,14 @@
+<template name="viewApiBackendDetails">
+  <div class="row">
+    <div class="col-md-3">
+      {{> viewApiBackendStatus apiBackend=apiBackend }}
+    </div>
+    <div class="col-md-4">
+      {{> viewApiBackendServers apiBackend=apiBackend }}
+    </div>
+  </div>
+
+  <div class="row">
+    {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+  </div>
+</template>
