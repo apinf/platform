@@ -30,40 +30,88 @@
     background-color: inherit;
   }
 
+  /* Site options top-bar */
+
+  #site-options {
+    background-color: #2c2c2c;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    overflow: hidden;
+    border-bottom: 0.063em solid rgba(0,0,0,.3);
+    position: relative;
+
+    .language-selection {
+      margin-bottom: 0;
+      padding-top: 0.313em;
+      padding-bottom: 0.313em;
+    }
+
+    #site-options .language-selection a {
+      text-decoration: none;
+      color: #b3b7ba;
+      border-top: 0.25em solid transparent;
+      display: inline-block;
+    }
+
+    #site-options .language-selection a:focus, #site-options .language-selection a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+  }
+
   /* Cover photo */
 
   .coverphoto {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    background-color: #03a9f4;
   }
 
   /* Header Wrap */
+
   #headerwrap {
-    //background-color: #03a9f4;
+    background-color: transparent;
     padding-top: 2.5em;
     background-size: cover;
     padding-bottom: 2.5em;
-  }
 
-  #headerwrap h1 {
-    margin-top: 1.75em;
-    margin-bottom: 0.7em;
-    color: #fff;
-    font-size: 2.9em;
-  }
+    h1 {
+      margin-top: 1.75em;
+      margin-bottom: 0.7em;
+      color: #fff;
+      font-size: 2.9em;
+    }
 
-  #headerwrap small {
-    color: white;
-    font-size: 50%;
-  }
+    small {
+      color: #fff;
+      font-size: 50%;
+    }
 
-  #headerwrap .sign-up {
-    font-size: 1.2em;
-    padding-right: 1.1em;
-    padding-left: 1.1em;
-    padding-bottom: 0.7em;
-    padding-top: 0.7em;
+    .search-box {
+      margin-bottom: 1.875em;
+      background: #03a9f4;
+      padding: 1.25em 1.875em;
+      text-align: center;
+    }
+
+    .search-field-input {
+      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 2px;
+      color: rgb(97, 101, 104);
+      height: 2.688em;
+      max-width: 100%;
+      min-height: 2.875em;
+      text-align: left;
+      width: 43.144em;
+      border: 0px none rgb(97, 101, 104);
+      border-radius: 4px 4px 4px 4px;
+      margin: 0.188em 1.105em 0px 0px;
+      outline: rgb(97, 101, 104) none 0px;
+      padding: 0.188em 0.625em;
+      transition: box-shadow 0.2s ease 0s;
+    }
+
   }
 
 
