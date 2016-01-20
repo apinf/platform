@@ -1,9 +1,9 @@
 <template name="homeHeader">
   {{> languageBar }}
   <div class="navbar-collapse collapse navigation-bar navbar-default">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img class="img-responsive" src="{{ projectLogo.url }}" style="width: 140px;" alt="">
+    <div class="main-header container">
+      <a class="logo" href="#">
+        <div class="logo-lg project-logo" style="background-image:url({{ projectLogo.url }})"></div>
       </a>
       <ul class="nav navbar-nav navbar-right">
         {{#if currentUser}}
