@@ -21,7 +21,7 @@
       {{#if currentUserCanEditBacklog }}
           {{> apiBacklogForm }}
       {{/if}}
-      {{> apiBacklogList }}
+      {{> apiBacklogList backlogItems=backlogItems apiBackend=apiBackend }}
     </div>
   </div>
 </template>
