@@ -4,15 +4,17 @@
       <div class="row">
         <div class="col-lg-2">
           <ul class="list-inline social-icons icon-circle">
-            <li><a href="https://twitter.com/apinf_io"><i class="fa fa-twitter"></i></a>
+            {{#each network in branding.socialMedia }}
+            <li>
+              <a href="{{ network.url }}" target="_blank">
+                <i class="fa fa-{{ socialMediaIcon network.name }}"></i>
+              </a>
             </li>
-            <li><a href="https://www.facebook.com/apinfio"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li><a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank"><i class="fa fa-github"></i></a>
-            </li>
+            {{/each}}
           </ul>
         </div>
-        <div class="col-lg-8 col-lg-push-1 collaboration">
+        <div class="col-lg-8 col-lg-push-1">
+          <p class="footer-text">{{ branding.siteFooter }}</p>
         </div>
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
