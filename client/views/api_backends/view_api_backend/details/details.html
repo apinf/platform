@@ -1,14 +1,21 @@
 <template name="viewApiBackendDetails">
-  <div class="row">
-    <div class="col-md-3">
-      {{> viewApiBackendStatus apiBackend=apiBackend }}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title clearfix">{{_ "view-ApiBackend-Details-Title"}}</h2>
     </div>
-    <div class="col-md-4">
-      {{> viewApiBackendServers apiBackend=apiBackend }}
-    </div>
-  </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          {{> viewApiBackendStatus apiBackend=apiBackend }}
+        </div>
+        <div class="col-md-4">
+          {{> viewApiBackendServers apiBackend=apiBackend }}
+        </div>
+      </div>
 
-  <div class="row">
-    {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+      <div class="row">
+        {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+      </div>
+    </div>
   </div>
 </template>
