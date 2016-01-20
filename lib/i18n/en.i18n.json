@@ -1,10 +1,7 @@
 {
-  /*Config*/
   "configName": "Apinf",
   "configTitle": "Build custom APIs. Fast.",
   "configSubtitle": "Create custom API mashups, really quick.",
-
-  /*Sidebar*/
   "masterLayout_sidebar_Menu": "Menu",
   "masterLayout_sidebar_Analytics": "Analytics",
   "masterLayout_sidebar_APIBackends": "API Backends",
@@ -15,10 +12,6 @@
   "masterLayout_sidebar_DocumentationEditor": "Editor",
   "masterLayout_sidebar_DocumentationViewer": "Viewer",
   "masterLayout_sidebar_Users": "Users",
-
-
-  /*Home*/
-  /*Header*/
   "signIn": "Sign In",
   "signUp": "Sign Up",
   "apiCatalogue": "API Catalogue",
@@ -28,8 +21,6 @@
   "home_MainTitle": "APIKA - API Management Platform",
   "home_SecondaryTitle": "Building a bridge between API owners and users.",
   "Dashboard": "Go to dashboard",
-
-  /*Body*/
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_DateAdded": "Added %s",
   "latestApiBackends_MoreInfo": "More info",
@@ -65,37 +56,26 @@
   "section3_Text_Social_Text": "and",
   "section_ContactUs": "Contact Us",
   "section_ContactUs_Text": "Contact us to ask anything.",
-  /*Footer*/
   "collaboration_Title": "Collaboration with",
   "collaboration_Title_Extra": "and",
-
-  /*Account*/
   "account_details": "Account Details",
   "delete_account": "Delete Account",
   "delete_account_warn": "There's no coming back from this one",
   "delete_account_warn2": "Are you sure you want to delete your account?",
   "close": "Close",
   "change_pswd": "Change Password",
-
-  /*Profile*/
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
   "profile_setUsername": "Please set your username.",
   "profile_usernameInvalid": "Username must be 3-15 alphanumeric characters. Underscore and hyphens are allowed.",
   "profile_usernameIsTaken": "User name already exists. Enter another user name.",
-
-  /*Import API Configuration*/
   "import_ApiConfiguration_Title": "Import API Configuration",
   "import_ApiConfiguration_File": "File:",
   "import_ApiConfiguration_Drop": "Drop file to here",
   "import_ApiConfiguration_Preview": "Preview:",
   "import_ApiConfiguration_Upload": "Upload",
-
-  /*Import Api Documentation*/
   "import_ApiDocumentation_Title": "Upload documentation",
   "import_ApiDocumentation_File": "Documentation Configuration File",
-
-  /*Manage Api Backends*/
   "manage_ApiBackends_Title": "My managed APIs",
   "manage_ApiBackends_Rewrite": "Rewrite to",
   "manage_ApiBackends_Matches": "URL Matches",
@@ -103,13 +83,9 @@
   "manage_ApiBackends_Frontend": "Frontend:",
   "manage_ApiBackends_View": "View",
   "manage_ApiBackends_Edit": "Edit",
-
-  /*Api Backend Status*/
   "apiBackend_Status_Title": "Status",
   "apiBackend_Status_Updated": "Updated:",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",
-
-  /*View Api Backend*/
   "view_ApiBackend_Title": "View API backend",
   "view_ApiBackend_Servers": "Servers",
   "view_ApiBackend_Backend": "Backend",
@@ -121,8 +97,6 @@
   "view_ApiBackend_ExportJson": "Export .json",
   "view_ApiBackend_ExportYaml": "Export .yaml",
   "view_ApiBackend_Metadata_Title": "Metadata",
-
-  /*Api Backends*/
   "apiBackends_Add_API_Title": "Add API",
   "apiBackends_Edit_API_Title": "Edit API",
   "apiBackends_Title_Help": "API's name",
@@ -141,27 +115,16 @@
   "apiBackends_Submit": "Submit",
   "editApiMetadata_editApiMetadataForm_button": "Edit API Metadata",
   "editApiMetadata_editApiMetadataForm_title": "Edit API Metadata",
-
-
-  /* Add API Backend _ simple */
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '/'",
-
-  /*Bookmarks*/
   "bookmarks_Title": "Your bookmarked APIs",
   "bookmarks_Name": "Name:",
   "bookmarks_Backend": "Backend host:",
-
-  /*Favourite*/
   "favourite_Remove": "Remove bookmark",
   "favourite_Add": "Add bookmark",
-
-  /*Catalogue*/
   "catalogue_Title": "Available APIs",
   "api_backend_rating_anonymous": "Please log in to vote.",
-
-  /*Feedback*/
   "feedback_submitted_by": "submitted by",
   "feedback_main_title": "Feedback and report messages",
   "feedback_view_button": "View",
@@ -170,24 +133,15 @@
   "feedback_feedbackForm_button": "Send feedback",
   "feedback_feedbackForm_title": "Send feedback or report a problem",
   "feedback_feedbackForm_description": "We welcome problem reports, feature ideas and general comments.",
-
-  /* Search page */
   "searchPage_pageHeader": "Search APIs",
   "searchPage_searchResultsHeader": "Search results",
   "searchPage_noResults": "Nothing found.",
   "searchPage_addedPrefix": "Added",
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchForm_helpText": "Start typing your query for live search results.",
-
-  /*Charts*/
-  /*Error messages*/
   "esData_notFound": "There are no API usage statistics available.",
-
-  /*Bar chart*/
   "overviewChart_Title": "Overview chart",
   "moveChart_Title": "Chart",
-
-  /*Filter*/
   "filterData_Title": "Filter",
   "filterData_Month": "Month:",
   "filterData_January": "January",
@@ -207,30 +161,20 @@
   "filterData_SelectedOf": "selected out of",
   "filterData_Records": "records",
   "filterData_Reset": "Reset All",
-
-  /*Map*/
   "map_Title": "Map",
-
-  /*Data Table*/
   "dataTable_Title": "Table",
   "dataTable_TimeStamp": "Time stamp",
   "dataTable_RequestCountry": "Request country",
   "dataTable_RequestIP": "Request IP",
   "dataTable_RequestPath": "Request path",
   "dataTable_ResponseTime": "Response time (in milliseconds)",
-
-  /*Status*/
   "statusCheckTitle": "Status",
   "statusCheckUpdated": "Updated:",
   "statusCheckJustNow": "Just now",
-
-  /*Not Authorized*/
   "notAuthorized_Title": "Not Authorized",
   "notAuthorized_Message": "You are not authorized to access this page. Please ensure you are logged in.",
   "notAuthorized_Return_Message_Part1": "You may",
   "notAuthorized_Return_Message_Part2": "return to a previous page",
-
-  /*Not Found*/
   "notFound_Title": "Oops! Page not found.",
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Message_Part2": "Meanwhile, you may",

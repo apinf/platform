@@ -1,10 +1,7 @@
 {
-  /* Config */
   "configName": "Apinf",
   "configTitle": "Rakenna muokattuja rajapintoja. Nopeasti.",
   "configSubtitle": "Luo rajapintayhdistelmi\u00e4 todella nopeasti.",
-
-  /* Sidebar */
   "masterLayout_sidebar_Menu": "Valikko",
   "masterLayout_sidebar_Analytics": "Analytiikka",
   "masterLayout_sidebar_APIBackends": "Rajapinnan taustaj\u00e4rjestelm\u00e4t",
@@ -15,8 +12,6 @@
   "masterLayout_sidebar_DocumentationEditor": "Muokkaus",
   "masterLayout_sidebar_DocumentationViewer": "Katselu",
   "masterLayout_sidebar_Users": "K\u00e4ytt\u00e4j\u00e4t",
-
-  /* Header */
   "signIn": "Kirjaudu",
   "signUp": "Rekister\u00f6idy",
   "profile": "Profiili",
@@ -25,8 +20,6 @@
   "home_MainTitle": "APINF rajapintojen hallintaj\u00e4rjestelm\u00e4",
   "home_SecondaryTitle": "Rakennamme siltaa rajapintojen omistajien ja hy\u00f6dynt\u00e4jien v\u00e4lille",
   "Dashboard": "Siirry palveluun",
-
-  /* Body */
   "feature_Section_Heading1": "Oletko rajapintojen hy\u00f6dynt\u00e4j\u00e4?",
   "feature_Title1": "Rajapintojen l\u00f6yt\u00e4minen",
   "feature_Title1_Text": "L\u00f6yd\u00e4 ja luo kirjanmerkkej\u00e4 hy\u00f6dyllisist\u00e4 rajapinnoista",
@@ -58,34 +51,22 @@
   "section3_Text_Social_Text": "ja",
   "section_ContactUs": "Ota yhteytt\u00e4",
   "section_ContactUs_Text": "Ota yhteytt\u00e4 ja kysy lis\u00e4tietoja.",
-
-  /* Footer */
   "collaboration_Title": "Yhteisty\u00f6ss\u00e4",
   "collaboration_Title_Extra": "ja",
-
-  /* Account */
   "account_details": "K\u00e4ytt\u00e4j\u00e4tilin tiedot",
   "delete_account": "Poista k\u00e4ytt\u00e4j\u00e4tili",
   "delete_account_warn": "Poistopyynt\u00f6\u00e4 ei voi peruuttaa",
   "delete_account_warn2": "Haluatko varmasti poistaa k\u00e4ytt\u00e4j\u00e4tilisi?",
   "close": "Sulje",
   "change_pswd": "Vaihda salasanaa",
-
-  /* Profile */
   "update": "P\u00e4ivit\u00e4",
-
-  /* Import API Configuration */
   "import_ApiConfiguration_Title": "Tuo rajapinnan konfiguraatio tiedostosta",
   "import_ApiConfiguration_File": "Tiedosto:",
   "import_ApiConfiguration_Drop": "Raahaa tiedosto t\u00e4h\u00e4n",
   "import_ApiConfiguration_Preview": "Esikatselu",
   "import_ApiConfiguration_Upload": "Lataa palvelimelle",
-
-  /* Import Api Documentation */
   "import_ApiDocumentation_Title": "Lataa dokumentaatio palvelimelle",
   "import_ApiDocumentation_File": "M\u00e4\u00e4rittelytiedosto dokumentaatiolle",
-
-  /* Manage Api Backends */
   "manage_ApiBackends_Title": "Hallinnoimani rajapinnat",
   "manage_ApiBackends_Rewrite": "Kirjoita uudelleen",
   "manage_ApiBackends_Matches": "Vastaavat URL:t",
@@ -93,13 +74,9 @@
   "manage_ApiBackends_Frontend": "Frontend:",
   "manage_ApiBackends_View": "Tarkastele",
   "manage_ApiBackends_Edit": "Muokkaa",
-
-  /* Api Backend Status */
   "apiBackend_Status_Title": "Tila",
   "apiBackend_Status_Updated": "P\u00e4ivitetty:",
   "apiBackend_Status_Checking": "API:n tilaa tarkistetaan. Odota hetki...",
-
-  /* View Api Backend */
   "view_ApiBackend_Title": "Api back-end",
   "view_ApiBackend_Servers": "Palvelimet",
   "view_ApiBackend_Backend": "Taustaj\u00e4rjestelm\u00e4",
@@ -110,8 +87,6 @@
   "view_ApiBackend_Export_Title": "Vie rajapinnan asetukset",
   "view_ApiBackend_ExportJson": "Vie json-tiedosto",
   "view_ApiBackend_ExportYaml": "Vie yaml-tiedosto",
-
-  /* Api Backends */
   "apiBackends_Title": "Lis\u00e4\u00e4 rajapinta",
   "apiBackends_Title_Help": "Rajapinnan nimi",
   "apiBackends_Backend_Title": "Taustaj\u00e4rjestelm\u00e4",
@@ -127,24 +102,14 @@
   "apiBackends_AdvancedRequestsRewriting_Help": "Muokkaa Umbrellan front-endiin tehty\u00e4 tulevaa pyynt\u00f6j\u00e4 ennen kuin ne vied\u00e4\u00e4n APIsi back-endiin.",
   "apiBackends_AdvancedSettings": "Lis\u00e4asetukset",
   "apiBackends_Submit": "L\u00e4het\u00e4",
-
-  /* Bookmarks */
   "bookmarks_Title": "API -kirjanmerkit",
   "bookmarks_Name": "Nimi:",
   "bookmarks_Backend": "Taustaj\u00e4rjestelm\u00e4n (API) is\u00e4nt\u00e4:",
-
-  /* Favourite */
   "favourite_Remove": "Poista kirjanmerkki",
   "favourite_Add": "Lis\u00e4\u00e4 kirjanmerkki",
-
-  /* Catalogue */
   "catalogue_Title": "Valittavissa olevat API:t",
-
-  /* Bar chart */
   "overviewChart_Title": "Yhteenveto",
   "moveChart_Title": "Kaavio",
-
-  /* Filter */
   "filterData_Title": "Suodatin",
   "filterData_Month": "Kuukausi:",
   "filterData_January": "Tammikuu",
@@ -164,30 +129,20 @@
   "filterData_SelectedOf": "valittu seuraavista",
   "filterData_Records": "merkint\u00e4\u00e4",
   "filterData_Reset": "Palauta oletusarvot",
-
-  /* Map */
   "map_Title": "Kartta",
-
-  /* Data Table */
   "dataTable_Title": "Taulukko",
   "dataTable_TimeStamp": "Aikaleima",
   "dataTable_RequestCountry": "Maa",
   "dataTable_RequestIP": "Pyynn\u00f6n IP",
   "dataTable_RequestPath": "Pyynn\u00f6n polku",
   "dataTable_ResponseTime": "Vasteaika",
-
-  /* Status */
   "statusCheckTitle": "Tila",
   "statusCheckUpdated": "P\u00e4ivitetty:",
   "statusCheckJustNow": "Juuri \u00e4sken.",
-
-  /* Not Authorized */
   "notAuthorized_Title": "Ei lupaa",
   "notAuthorized_Message": "Sinulla ei ole oikeutta tarkastella t\u00e4t\u00e4 sivua. Varmista, ett\u00e4 olet kirjautunut sis\u00e4\u00e4n.",
   "notAuthorized_Return_Message_Part1": "Voit",
   "notAuthorized_Return_Message_Part2": "palata edelliselle sivulle",
-
-  /* Not Found */
   "notFound_Title": "Sivua ei l\u00f6ytynyt.",
   "notFound_Message_Part1": "Hakemaasi sivua ei l\u00f6ytynyt.",
   "notFound_Message_Part2": "Sill\u00e4 aikaa voit",
