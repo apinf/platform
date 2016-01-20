@@ -1,7 +1,7 @@
 <template name="viewApiBackendMetadata">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#if canEditMetadata }}
+      {{#if currentUserCanEditMetadata }}
         {{> editApiMetadata metadata=metadata }}
       {{/if}}
       <h2 class="panel-title">{{_ "view-ApiBackend-Metadata-Title"}}</h2>

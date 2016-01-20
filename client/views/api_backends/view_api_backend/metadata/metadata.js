@@ -1,5 +1,10 @@
 Template.viewApiBackendMetadata.helpers({
-  canEditMetadata: function() {
+  currentUserCanEditMetadata: function() {
+    /*
+     API Metadata shares permissions with the API Backend
+     Make sure user can edit API Backend before allowing Metadata permissions
+    */
+    
     // Get current API backend ID
     var apiBackendId = this.apiBackend._id;
 
