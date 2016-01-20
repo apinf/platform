@@ -30,6 +30,10 @@
   "Dashboard": "Go to dashboard",
 
   /*Body*/
+  "latestApiBackends-Heading": "Latest APIs",
+  "latestApiBackends-DateAdded": "Added %s",
+  "latestApiBackends-MoreInfo": "More info",
+  "latestApiBackends-NotFound": "Nothing found.",
   "feature-Section-Heading1": "Are you an API user?",
   "feature-Title1": "Discover APIs",
   "feature-Title1-Text": "Find and bookmark useful APIs",
@@ -74,7 +78,11 @@
   "change_pswd": "Change Password",
 
   /*Profile*/
-  "update": "Update",
+  "profile-Header": "Profile",
+  "profile-UpdateButton": "Update",
+  "profile-setUsername": "Please set your username.",
+  "profile-usernameInvalid": "Username must be 3-15 alphanumeric characters. Underscore and hyphens are allowed.",
+  "profile-usernameIsTaken": "User name already exists. Enter another user name.",
 
   /*Import API Configuration*/
   "import-ApiConfiguration-Title": "Import API Configuration",
@@ -112,6 +120,7 @@
   "view-ApiBackend-Export-Title": "Export API configurations",
   "view-ApiBackend-ExportJson": "Export .json",
   "view-ApiBackend-ExportYaml": "Export .yaml",
+  "view-ApiBackend-Metadata-Title": "Metadata",
 
   /*Api Backends*/
   "apiBackends-Add-API-Title": "Add API",
@@ -130,6 +139,8 @@
   "apiBackends-AdvancedRequestsRewriting-Help": "Modify the incoming requests made to the Umbrella front-end before they are passed on to your API backend",
   "apiBackends-AdvancedSettings": "Advanced Settings",
   "apiBackends-Submit": "Submit",
+  "editApiMetadata-editApiMetadataForm-button": "Edit API Metadata",
+  "editApiMetadata-editApiMetadataForm-title": "Edit API Metadata",
 
 
   /* Add API Backend - simple */

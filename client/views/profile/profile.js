@@ -3,13 +3,19 @@ AutoForm.hooks({
     onSuccess: function(operation, result, template) {
       return sAlert.success('Profile updated');
     },
-    onError: function(operation, error, template) {
-      return sAlert.error(error);
+    onError: function() {
+      this.addStickyValidationError('username', 'usernameTaken');
     }
   }
 });
 
 Template.profile.rendered = function () {
+
+  // Ask user to set username if it is not set.
+  var setUsernameMsg = TAPi18n.__("profile-setUsername");
+  if (Meteor.userId() && !Meteor.user().username) {
+    sAlert.info(setUsernameMsg);
+  }
 
   // initializes button
   var copyButton = $("<a class=\"btn btn-default btn-xs\" id=\"copyApi\"> Copy API to clipboard</a>");

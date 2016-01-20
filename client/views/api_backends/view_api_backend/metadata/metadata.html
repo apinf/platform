@@ -1,0 +1,82 @@
+<template name="viewApiBackendMetadata">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{> editApiMetadata metadata=metadata }}
+      <h2 class="panel-title">{{_ "view-ApiBackend-Metadata-Title"}}</h2>
+    </div>
+    <div class="panel-body">
+      {{# if metadata }}
+      {{# with metadata }}
+      <div class="row">
+        {{# if organization }}
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Organization</h2>
+            </div>
+            <div class="panel-body">
+              {{# if organization.name }}
+                <h3>{{ organization.name }}</h3>
+              {{/ if }}
+              {{# if organization.name }}
+                <p>{{ organization.description }}</p>
+              {{/ if }}
+            </div>
+          </div>
+        </div>
+        {{/ if }}
+        {{# if contact }}
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Contact</h2>
+            </div>
+            <div class="panel-body">
+              {{# if contact.name }}
+               <h3>{{ contact.name }}</h3>
+              {{/ if }}
+              {{# if contact.phone }}
+               <p><b>Phone:</b> {{ contact.phone }}</p>
+              {{/ if }}
+              {{# if contact.email }}
+               <p><b>Email:</b> {{ contact.email }}</p>
+              {{/ if }}
+            </div>
+          </div>
+        </div>
+        {{/ if }}
+        {{# if service }}
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Service</h2>
+            </div>
+            <div class="panel-body">
+              {{# if service.name }}
+                <h3>{{ service.name }}</h3>
+              {{/ if }}
+              {{# if service.description }}
+                <p>{{ service.description }}</p>
+              {{/ if }}
+              {{# if service.validSince }}
+                <p><b>Valid since:</b> {{ service.validSince }}</p>
+              {{/ if }}
+              {{# if service.validUntil }}
+                <p><b>Valid until:</b> {{ service.validUntil }}</p>
+              {{/ if }}
+              {{# if service.serviceLevelAgreement }}
+                <p><b>Service level agreement:</b> {{ service.serviceLevelAgreement }}</p>
+              {{/ if }}
+            </div>
+          </div>
+        </div>
+        {{/ if }}
+      </div>
+      {{/ with }}
+      {{ else }}
+      <p>No metadata found.</p>
+      {{/ if }}
+    </div>
+  </div>
+  <p></p>
+</template>

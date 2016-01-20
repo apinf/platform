@@ -83,6 +83,7 @@ useraccounts:iron-routing
 pahans:inline-help
 dandv:jquery-rateit
 zenorocha:clipboard
+yogiben:autoform-file
 harrison:papa-parse
 simple:json-routes
 olragon:uri-js
@@ -91,3 +92,4 @@ frenchbread:elastic-rest
 universe:reactive-queries
 ecmascript
 simple:reactive-method
+sacha:spin

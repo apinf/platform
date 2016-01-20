@@ -1,74 +1,40 @@
 <template name="viewApiBackend">
-  <h1>{{_ "view-ApiBackend-Title"}}</h1>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{> apiBackendsUsageInstructionsButton }}
-      <h1 class="panel-title clearfix">{{apiBackend.name}}</h1>
+  {{#if Template.subscriptionsReady }}
+    {{> viewApiBackendPageHeading apiBackend=apiBackend }}
+    <div class="row">
+      {{> viewApiBackendNavigationMenu apiBackend=apiBackend }}
     </div>
-    <div class="panel-body">
-      {{> apiBackendUsageInstructions }}
-      <div class="row">
-        {{> apiBackendStatus }}
-      </div>
-      <div class="row">
-        <h2>{{_ "view-ApiBackend-Servers"}}</h2>
-        <div class="form-group">
-          <div id="servers-api-backend" class="input-group">
-            <span class="input-group-addon primary">
-              {{_ "view-ApiBackend-Backend"}}
-            </span>
-            <input
-              id="frontend-text"
-              class="form-control"
-              value="{{apiBackend.backend_host}}"
-              title="{{apiBackend.backend_host}}"
-              readonly="readonly"
-            >
-            <span class="input-group-addon {{ serverBackendProtocolClass }}">
-              {{ apiBackend.backend_protocol }}
-            </span>
+
+    <div class="tab-content">
+      <div id="api-backend-details" class="tab-pane fade in active">
+        <div class="row">
+          <div class="col-md-3">
+            {{> viewApiBackendStatus apiBackend=apiBackend }}
           </div>
-          <div id="servers-api-frontend" class="input-group">
-            <span class="input-group-addon primary">
-              {{_ "view-ApiBackend-Frontend"}}
-            </span>
-            <input
-              id="frontend-text"
-              class="form-control"
-              value="{{apiBackend.frontend_host}}"
-              title="{{apiBackend.frontend_host}}"
-              readonly="readonly"
-            >
+          <div class="col-md-4">
+            {{> viewApiBackendServers apiBackend=apiBackend }}
           </div>
         </div>
-      </div>
-      <div class="row">
-        {{#each apiBackend.url_matches}}
-        <h2>{{_ "view-ApiBackend-Matchers"}}</h2>
-        <ul class="list-group col-md-3 col-sm-6 col-xs-12">
-          <li class="list-group-item">
-            <span class="label label-primary">
-              {{_ "view-ApiBackend-Backend-Prefix"}}
-            </span>
-            &nbsp;{{ backend_prefix }}
-          </li>
-          <li class="list-group-item">
-            <span class="label label-primary">
-              {{_ "view-ApiBackend-Frontend-Prefix"}}
-            </span>
-            &nbsp;{{ frontend_prefix }}
-          </li>
-        </ul>
-        {{/each}}
-      </div>
-      <div class="row">
-        <h2>{{_ "view-ApiBackend-Export-Title"}}</h2>
-        <a class="btn btn-lg btn-success" id="exportJSONConfig">{{_ "view-ApiBackend-ExportJson"}}</a>
-        <a class="btn btn-lg btn-success" id="exportYAMLConfig">{{_ "view-ApiBackend-ExportYaml"}}</a>
-      </div>
-    </div>
-  </div>
-  {{#if currentUser}}
-  {{> feedbackList}}
-  {{/if}}
+
+        <div class="row">
+          {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+        </div>
+      </div> <!-- /api-backend-details -->
+
+      <div id="api-backend-metadata" class="tab-pane fade in">
+        {{> viewApiBackendMetadata apiBackend=apiBackend metadata=metadata }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-feedback" class="tab-pane fade in">
+        {{> feedbackList apiBackend=apiBackend }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-export" class="tab-pane fade in">
+        {{> viewApiBackendExport apiBackend=apiBackend }}
+      </div> <!-- /api-backend-export -->
+
+    </div> <!-- /tab-content -->
+  {{ else }}
+    {{> spinner }}
+  {{/ if }}
 </template>
