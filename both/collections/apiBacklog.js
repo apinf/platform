@@ -70,55 +70,45 @@ ApiBacklogItems.attachSchema(new SimpleSchema({
 
 ApiBacklogItems.allow({
   insert: function (userId, backlog) {
+    /*
+    API Backlog shares permissions with API backend
+    */
 
-    // Transform backlog document to an ApiBacklog instance
-    var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
+    // Get API Backend ID
+    var apiBackendId = backlog.apiBackendId;
 
-    // Call ApiBacklog helper to check that current user is API Manager
-    return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId);
-  },
-  update: function (userId, backlog) {
-
-    // Transform backlog document to an ApiBacklog instance
-    var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
-
-    // Call ApiBacklog helper to check that current user is API Manager
-    return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
-  },
-  remove: function (userId, backlog) {
-
-    // Transform backlog document to an ApiBacklog instance
-    var backlogTransformedDocument = ApiBacklogItems._transform(backlog);
-
-    // Call ApiBacklog helper to check that current user is API Manager
-    return backlogTransformedDocument.currentUserIsApiBackendManager(backlog.apiBackendId) && (userId === backlog.userId);
-  }
-});
-
-ApiBacklogItems.helpers({
-  currentUserIsApiBackendManager: function (apiBackendId) {
-
-    // Get current user's id
-    var currentUserId = Meteor.userId();
-
-    // Find related API Backend that contains "managerIds" field
+    // Find related API Backend, select only "managerIds" field
     var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
-    // Try - Catch wrapper here because Mongodb call above can return zero matches
-    try {
+    // Check if current user can edit API Backend
+    return apiBackend.currentUserCanEdit();
+  },
+  update: function (userId, backlog) {
+    /*
+    API Backlog shares permissions with API backend
+    */
 
-      // Get managerIds array from API Backend document
-      var managerIds = apiBackend.managerIds;
+    // Get API Backend ID
+    var apiBackendId = backlog.apiBackendId;
 
-    } catch (err) {
+    // Find related API Backend, select only "managerIds" field
+    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
-      // If no related document found return false - API Backend does not have any managers listed
-      return false;
-    }
+    // Check if current user can edit API Backend
+    return apiBackend.currentUserCanEdit();
+  },
+  remove: function (userId, backlog) {
+    /*
+    API Backlog shares permissions with API backend
+    */
 
-    // Check if an array of managerIds contain user id passed
-    var isManager = _.contains(managerIds, currentUserId);
+    // Get API Backend ID
+    var apiBackendId = backlog.apiBackendId;
 
-    return isManager;
+    // Find related API Backend, select only "managerIds" field
+    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+
+    // Check if current user can edit API Backend
+    return apiBackend.currentUserCanEdit();
   }
 });
