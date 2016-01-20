@@ -8,18 +8,11 @@
       </ul>
     </div>
   </div>
-  <!--
-=======
-<div class="navbar navbar-default coverphoto" style="background-image: url({{ coverPhoto.url }})">
-<div class="container">
-<div class="navbar-header">
-<a class="navbar-brand" href="#">
-<img class="img-responsive" src="{{ projectLogo.url }}" style="width: 140px;" alt="">
-</a>
->>>>>>> origin/develop
--->
   <div class="navbar-collapse collapse navigation-bar">
     <div class="container">
+      <a class="navbar-brand" href="#">
+        <img class="img-responsive" src="{{ projectLogo.url }}" style="width: 140px;" alt="">
+      </a>
       <ul class="nav navbar-nav navbar-right">
         {{#if currentUser}}
         {{#if isInRole 'admin'}}
@@ -42,8 +35,8 @@
       </ul>
     </div>
   </div>
-  <div class="container coverphoto" style="background-image: url({{ coverPhoto.url }})">
-    <div id="headerwrap">
+  <div class="coverphoto" style="background-image: url({{ coverPhoto.url }})">
+    <div class="container" id="headerwrap">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
           <h1 class="text-center">{{ branding.siteTitle }}<br>
