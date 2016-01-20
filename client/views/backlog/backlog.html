@@ -4,7 +4,7 @@
             {{_ "apiBacklog_mainTitle"}}
         </h1>
         <div class="backlog-nav-box">
-            <a href="/api/{{apiBackendId}}" class="btn btn-success btn-xs">{{_ "view-ApiBackend-Title"}}</a>
+            <a href="/api/{{ apiBackend._id }}" class="btn btn-success btn-xs">{{_ "view-ApiBackend-Title"}}</a>
             {{#if currentUserIsApiManager }}
                 <button type="button"
                         class="btn btn-info btn-xs pull-right"
