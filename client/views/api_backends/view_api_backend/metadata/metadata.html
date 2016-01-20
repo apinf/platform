@@ -4,7 +4,10 @@
       {{#if currentUserCanEditMetadata }}
         {{> editApiMetadata metadata=metadata }}
       {{/if}}
-      <h2 class="panel-title">{{_ "view_ApiBackend_Metadata_Title"}}</h2>
+      <h2 class="panel-title clearfix">
+        <i class="fa fa-book"></i>
+        {{_ "view_ApiBackend_Metadata_Title"}}
+      </h2>
     </div>
     <div class="panel-body">
       {{# if metadata }}

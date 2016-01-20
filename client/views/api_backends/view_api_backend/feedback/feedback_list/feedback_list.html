@@ -3,8 +3,11 @@
     <div class="panel-heading">
       {{#if currentUser}}
         {{> feedbackForm }}
-        {{/ if }}
-      <h1 class="panel-title clearfix">{{_ "feedback_main_title"}}</h1>
+      {{/ if }}
+      <h1 class="panel-title clearfix">
+        <i class="fa fa-comments-o"></i>
+        {{_ "feedback_main_title"}}
+      </h1>
     </div>
     <div class="panel-body">
       <div class="row">
