@@ -757,5 +757,17 @@ ApiBackends.helpers({
       // User is not logged in
       return false;
     }
+  },
+  currentUserIsManager: function () {
+    // Get current User ID
+    var userId = Meteor.userId();
+
+    // Get Manager IDs array from API Backend document
+    var managerIds = this.managerIds;
+
+    // Check if User ID is in Manager IDs array
+    var isManager = _.contains(managerIds, userId);
+
+    return isManager;
   }
 });
