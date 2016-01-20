@@ -68,7 +68,7 @@ ApiMetadata.allow({
     if(ApiMetadata.find({apiBackendId}).count() !== 0) {
       return false;
     } else {
-      // Find related API Backend that contains "managerIds" field
+      // Find related API Backend, select only "managerIds" field
       var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
       // Try - Catch wrapper here because Mongodb call above can return zero matches
@@ -76,7 +76,7 @@ ApiMetadata.allow({
         // Get managerIds array from API Backend document
         var managerIds = apiBackend.managerIds;
       } catch (err) {
-        // If no related document found return false - API Backend does not have any managers listed
+        // If manager-ids field does not exist return false - API Backend does not have any managers listed
         return false;
       }
 
@@ -95,7 +95,7 @@ ApiMetadata.allow({
   },
   "update": function (userId, doc) {
     var apiBackendId = doc.apiBackendId;
-    // Find related API Backend that contains "managerIds" field
+    // Find related API Backend, select only "managerIds" field
     var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
 
     // Try - Catch wrapper here because Mongodb call above can return zero matches
@@ -103,7 +103,7 @@ ApiMetadata.allow({
       // Get managerIds array from API Backend document
       var managerIds = apiBackend.managerIds;
     } catch (err) {
-      // If no related document found return false - API Backend does not have any managers listed
+      // If manager-ids field does not exist return false - API Backend does not have any managers listed
       return false;
     }
 
