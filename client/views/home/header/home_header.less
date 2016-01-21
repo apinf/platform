@@ -1,14 +1,47 @@
+@import "/client/style/bootstrap-variables.import.less";
+
 .home-layout {
 
   /* Navbar */
   .navbar-default {
     margin-bottom: 0;
     border: none;
+    border-radius: 0;
     background-color: #03a9f4;
   }
 
+  .home-navigation .navbar-header {
+    padding-left: 0.9em;
+  }
+
   .navbar-brand {
-    padding-top: 0.31em !important;
+    padding: 0;
+  }
+
+  .navbar-brand > img {
+    height: 100%;
+    padding: 14px;
+    width: auto;
+  }
+
+  .home-navigation .navbar-brand {
+    background: center / contain no-repeat;
+    width: 140px;
+  }
+
+  .home-navigation .navbar-toggle {
+    margin-top: 3px;
+    margin-bottom: -1px;
+    margin-left: 0;
+    margin-right: 3px;
+  }
+
+  .home-navigation .navbar-toggle > .icon-bar {
+    background-color: #fff;
+  }
+
+  .home-navigation .navbar-toggle:hover, .navbar-toggle:focus {
+    background-color: darken(@brand-primary, 5%);
   }
 
   .navbar-default .navbar-brand {
