@@ -1,0 +1,38 @@
+<template name="backlogItem">
+  <div class="panel panel-default">
+      <div class="panel-heading">
+          <b>
+              <div class="{{ itemPriorityClass item.priority }}"></div>
+              {{ item.title}}
+          </b>
+      </div>
+      <div class="panel-body">
+          <p>{{ item.details}}</p>
+          <div class="backlog-item-footer">
+              <i>
+                  {{#if item.currentUserIsOwner}}
+                      By <b>You</b>
+                  {{/if}}
+                  {{ relativeTimeStamp item.createdAt }}
+              </i>
+              {{#if currentUserCanEditBacklog }}
+                  {{#afModal
+                      class="btn btn-danger btn-xs pull-right"
+                      collection="ApiBacklogItems"
+                      operation="remove"
+                      doc=item._id}}
+                      {{_ "apiBacklogItem_removeBacklogItem-button"}}
+                  {{/afModal}}
+                  {{#afModal
+                      class="btn btn-primary btn-xs pull-right do-margin-right"
+                      collection="ApiBacklogItems"
+                      operation="update"
+                      doc=item._id
+                      fields="title,details,priority"}}
+                      {{_ "apiBacklogItem_editBacklogItem-button"}}
+                  {{/afModal}}
+              {{/if}}
+          </div>
+      </div>
+  </div>
+</template>
