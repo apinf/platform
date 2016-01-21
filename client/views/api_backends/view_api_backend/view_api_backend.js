@@ -10,6 +10,9 @@ Template.viewApiBackend.created = function () {
 
   // Subscribe to metadata for this API Backend
   instance.subscribe("apiMetadata", apiBackendId);
+
+  // Subscribe to API Backlog items for this API Backend
+  instance.subscribe("apiBacklogItems", apiBackendId);
 };
 
 Template.viewApiBackend.helpers({
@@ -30,5 +33,15 @@ Template.viewApiBackend.helpers({
     let apiMetadata = ApiMetadata.findOne({apiBackendId});
 
     return apiMetadata;
+  },
+  backlogItems: function () {
+    // Get the API Backend ID from the route
+    let apiBackendId = Router.current().params._id;
+
+    // Fetch all backlog items for a specific API Backend
+    // Sort by priority value and created date
+    var backlogItems = ApiBacklogItems.find({apiBackendId: apiBackendId }, {sort: {priority: -1, createdAt: -1}}).fetch();
+
+    return backlogItems;
   }
 });
