@@ -3,22 +3,21 @@
     id="search-form"
     action="{{ pathFor 'search' }}"
     method="GET"
+    class="form-inline"
   >
-    <span class="search-field">
+    <div class="form-group">
       <input
         type="text"
         placeholder="Search..."
-        class="search-field-input"
+        class="search-field-input form-control"
         id="search-text"
         name="q"
       />
-    </span>
-    <span class="search-button">
+    </div>
       <button
         type="submit"
         class="btn btn-default search-form-button">
           Search
       </button>
-    </span>
   </form>
 </template>

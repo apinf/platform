@@ -1,32 +1,44 @@
 <template name="homeHeader">
   {{> languageBar }}
-  <div class="navbar-collapse collapse navigation-bar navbar-default">
+  <nav class="navbar navbar-default">
     <div class="main-header container">
-      <a class="logo" href="#">
-        <div class="logo-lg project-logo" style="background-image:url({{ projectLogo.url }})"></div>
-      </a>
-      <ul class="nav navbar-nav navbar-right">
-        {{#if currentUser}}
-        {{#if isInRole 'admin'}}
-        <li><a href="{{pathFor 'dashboard'}}">{{_ "Dashboard"}}</a></li>
-        {{/if}}
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
-            <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
-            <li class="divider"></li>
-            <li><a href="/sign-out">{{_ "signout"}}</a></li>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="logo" href="#">
+            <div class="logo-lg project-logo" style="background-image:url({{ projectLogo.url }})"></div>
+          </a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            {{#if currentUser}}
+            {{#if isInRole 'admin'}}
+            <li><a href="{{pathFor 'dashboard'}}">{{_ "Dashboard"}}</a></li>
+            {{/if}}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
+                <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
+                <li class="divider"></li>
+                <li><a href="/sign-out">{{_ "signout"}}</a></li>
+              </ul>
+            </li>
+            {{else}}
+            <li><a href="/sign-in">{{_ "signIn"}}</a></li>
+            <li><a href="/sign-up">{{_ "signUp"}}</a></li>
+            <li><a href="/catalogue">{{_ "apiCatalogue"}}</a></li>
+            {{/if}}
           </ul>
-        </li>
-        {{else}}
-        <li><a href="/sign-in">{{_ "signIn"}}</a></li>
-        <li><a href="/sign-up">{{_ "signUp"}}</a></li>
-        <li><a href="/catalogue">{{_ "apiCatalogue"}}</a></li>
-        {{/if}}
-      </ul>
+        </div>
+      </div>
     </div>
-  </div>
+  </nav>
   <div class="coverphoto" style="background-image: url({{ coverPhoto.url }})">
     <div class="container" id="headerwrap">
       <div class="row">
