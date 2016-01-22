@@ -20,11 +20,14 @@
       {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li><!-- language select -->
+          <!-- language select -->
+          <!-- TODO: enable language select when dashboard is translated -->
+          <!-- <li>
             <form class="navbar-form">
               {{> i18n_dropdown }}
             </form>
-          </li><!-- /language select -->
+          </li> -->
+          <!-- /language select -->
           {{#if User}}
           <li>
             <a href="{{pathFor 'dashboard'}}">
