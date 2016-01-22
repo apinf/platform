@@ -1,5 +1,6 @@
 Template.languageBar.helpers({
   languages: function() {
+    // Create Array of Objects with language tag and name
     const languages = TAPi18n.getLanguages();
     let languageOptions = [];
     for (language in languages) {
