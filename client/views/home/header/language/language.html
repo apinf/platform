@@ -4,8 +4,8 @@
       <ul class="language-selection list-inline">
         {{#each language in languages }}
         {{ #with language }}
-        <li class="language-option">
-          <a href="#{{ tag }}">{{ name }}</a>
+        <li class="language-option {{ activeLanguage }}">
+          <span class="language-title">{{ name }}</span>
         </li>
         {{/with}}
         {{/each}}
