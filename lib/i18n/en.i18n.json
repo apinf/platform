@@ -134,6 +134,8 @@
   "feedback_feedbackForm_button": "Send feedback",
   "feedback_feedbackForm_title": "Send feedback or report a problem",
   "feedback_feedbackForm_description": "We welcome problem reports, feature ideas and general comments.",
+  "searchField_button": "Search",
+  "searchField_placeholder": "Search...",
   "searchPage_pageHeader": "Search APIs",
   "searchPage_searchResultsHeader": "Search results",
   "searchPage_noResults": "Nothing found.",

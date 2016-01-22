@@ -134,6 +134,8 @@
   "feedback_feedbackForm_button": "Lähetä palaute",
   "feedback_feedbackForm_title": "Lähetä palautetta tai ilmoita ongelmasta",
   "feedback_feedbackForm_description": "Vikaraportit, ominaisuusideat ja yleiset kommentit ovat tervetulleita.",
+  "searchField_button": "Hae",
+  "searchField_placeholder": "Hae...",
   "searchPage_pageHeader": "Hae rajapintoja",
   "searchPage_searchResultsHeader": "Hakutulokset",
   "searchPage_noResults": "Ei löydetty mitään.",
