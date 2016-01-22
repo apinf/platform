@@ -10,7 +10,8 @@ describe('Search form not present', function () {
   it('should not contain search form at "/search" page', function () {
 
     $(function () {
-      expect($('form#header-search-form').length).toEqual(0);
+      var searchForm = $('form#header-search-form');
+      expect(searchForm.length).toEqual(0);
     });
 
   });
