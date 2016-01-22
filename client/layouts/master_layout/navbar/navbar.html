@@ -20,6 +20,7 @@
       {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          {{> i18n_dropdown }}
           {{#if User}}
           <li>
             <a href="{{pathFor 'dashboard'}}">
