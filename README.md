@@ -1,3 +1,5 @@
+[![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+
 # API Umbrella Dashboard
 The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
 
@@ -37,14 +39,11 @@ Your `settings.json` file should have the following structure:
 
 ```
 {
-  "apinf": {
-    "host": "https://example.com/"
-  },
-  "api_umbrella": {
-    "host": "https://example.com/"
-    "api_key": "xxx",
-    "auth_token": "xxx",
-    "base_url": "https://example.com/api-umbrella/"
+  "apiUmbrella": {
+    "apiKey": "xxx",
+    "authToken": "xxx",
+    "baseUrl": "https://example.com/api-umbrella/",
+    "host": "https://example.com"
   },
   "mail": {
     "username": "xxx",

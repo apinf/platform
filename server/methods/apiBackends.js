@@ -1,7 +1,7 @@
 Meteor.methods({
   "syncApiBackends":function () {
     // Check if API Umbrella settings are available
-    if (Meteor.settings.api_umbrella) {
+    if (Meteor.settings.apiUmbrella) {
       // Get API Backends from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
       var apiBackends = response.data.data;
@@ -12,24 +12,78 @@ Meteor.methods({
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingApiBackend === undefined) {
-          ApiBackends.insert(apiBackend);
+          try {
+            ApiBackends.insert(apiBackend);
+          } catch (error) {
+            console.error("Error inserting apiBackend(" + apiBackend.id + ") : " + error);
+          }
         };
       });
     };
   },
-  'createApiBackendOnApiUmbrella': function (apiBackendId) {
-    console.log('Submitting Backend to API Umbrella.')
-    // Get the API Backend object
-    var apiBackend = ApiBackends.findOne(apiBackendId);
+  createApiBackendOnApiUmbrella: function (apiBackendForm) {
+    // Construct an API Backend object for API Umbrella with one 'api' key
+    var constructedBackend = {
+      "api": apiBackendForm
+    };
 
+    // Response object to be send back to client layer.
+    var apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 200,
+      errors: {}
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
+    } catch (apiUmbrellaError) {
+      // Set the errors object
+      apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
+  },
+  publishApiBackendOnApiUmbrella: function (apiBackendId) {
+    // Response object to be send back to client layer.
+    var apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 201,
+      errors: {}
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.config.publishSingleApiBackend(apiBackendId);
+    } catch (apiUmbrellaError) {
+      // Set the errors object
+      apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
+  },
+  updateApiBackendOnApiUmbrella: function (apiUmbrellaBackendId, apiBackend) {
     // Construct an API Backend object for API Umbrella with one 'api' key
     var constructedBackend = {
       "api": apiBackend
     };
 
-    // Send the API Backend to API Umbrella
-    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
+    // Response object to be send back to client layer.
+    var apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 204,
+      errors: {}
+    };
 
-    // TODO: Add error checking to ensure backend successfully inserted in API Umbrella
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
+    } catch (apiUmbrellaError) {
+
+      //set the errors object
+      apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
   }
 });

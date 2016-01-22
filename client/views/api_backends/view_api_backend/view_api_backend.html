@@ -1,56 +1,33 @@
 <template name="viewApiBackend">
-  <h1>{{_ "view-ApiBackend-Title"}}</h1>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{> apiBackendsUsageInstructionsButton }}
-      <h1 class="panel-title clearfix">{{apiBackend.name}}</h1>
+  {{#if Template.subscriptionsReady }}
+    {{> viewApiBackendPageHeading apiBackend=apiBackend }}
+    <div class="row">
+      {{> viewApiBackendNavigationMenu apiBackend=apiBackend }}
     </div>
-    <div class="panel-body">
-      {{> apiBackendUsageInstructions }}
-      <div class="row">
-        {{> apiBackendStatus }}
-      </div>
-      <div class="row">
-        <h2>{{_ "view-ApiBackend-Servers"}}</h2>
-        <ul class="list-group col-md-3 col-sm-6 col-xs-12">
-          <li class="list-group-item">
-            <span class="label label-primary">
-              {{_ "view-ApiBackend-Backend"}}
-            </span>
-            &nbsp;{{apiBackend.backend_host}} <span class="badge">{{ apiBackend.backend_protocol }}</span>
-          </li>
-          <li class="list-group-item">
-            <span class="label label-primary">
-              {{_ "view-ApiBackend-Frontend"}}
-            </span>
-            &nbsp;{{apiBackend.frontend_host}}
-          </li>
-        </ul>
-      </div>
-      <div class="row">
-        {{#each apiBackend.url_matches}}
-        <h2>{{_ "view-ApiBackend-Matchers"}}</h2>
-        <ul class="list-group col-md-3 col-sm-6 col-xs-12">
-          <li class="list-group-item">
-            <span class="label label-primary">
-              {{_ "view-ApiBackend-Backend-Prefix"}}
-            </span>
-            &nbsp;{{ backend_prefix }}
-          </li>
-          <li class="list-group-item">
-            <span class="label label-primary">
-              {{_ "view-ApiBackend-Frontend-Prefix"}}
-            </span>
-            &nbsp;{{ frontend_prefix }}
-          </li>
-        </ul>
-        {{/each}}
-      </div>
-      <div class="row">
-        <h2>{{_ "view-ApiBackend-Export-Title"}}</h2>
-        <a class="btn btn-lg btn-success" id="exportJSONConfig">{{_ "view-ApiBackend-ExportJson"}}</a>
-        <a class="btn btn-lg btn-success" id="exportYAMLConfig">{{_ "view-ApiBackend-ExportYaml"}}</a>
-      </div>
-    </div>
-  </div>
+
+    <div class="tab-content">
+      <div id="api-backend-details" class="tab-pane fade in active">
+        {{> viewApiBackendDetails apiBackend=apiBackend }}
+      </div> <!-- /api-backend-details -->
+
+      <div id="api-backend-metadata" class="tab-pane fade in">
+        {{> viewApiBackendMetadata apiBackend=apiBackend metadata=metadata }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-feedback" class="tab-pane fade in">
+        {{> feedbackList apiBackend=apiBackend }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-export" class="tab-pane fade in">
+        {{> viewApiBackendExport apiBackend=apiBackend }}
+      </div> <!-- /api-backend-export -->
+
+      <div id="api-backend-backlog" class="tab-pane fade in">
+        {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
+      </div> <!-- /api-backend-export -->
+
+    </div> <!-- /tab-content -->
+  {{ else }}
+    {{> spinner }}
+  {{/ if }}
 </template>

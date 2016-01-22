@@ -1,10 +1,51 @@
+/* Bootstrap */
+@import "/client/style/bootstrap-variables.less";
+
 .home-layout {
 
   /* Navbar */
-  .navbar-default{
+  .home-navigation {
+    background-color: @home-navigation;
+    -webkit-box-shadow: 0 0.25em 0 0 rgba(0,0,0,.15);
+    box-shadow: 0 0.25em 0 0 rgba(0,0,0,.15);
+    position: relative;
+    z-index: 9;
     margin-bottom: 0;
     border: none;
-    background-color: #03a9f4;
+  }
+
+  .home-navigation .navbar-header {
+    padding-left: 0.9em;
+  }
+
+  .navbar-brand {
+    padding: 0;
+  }
+
+  .navbar-brand > img {
+    height: 100%;
+    padding: 0.9em;
+    width: auto;
+  }
+
+  .home-navigation .navbar-brand {
+    background: center / contain no-repeat;
+    width: 140px;
+  }
+
+  .home-navigation .navbar-toggle {
+    margin-top: 0.18em;
+    margin-bottom: 0.06em;
+    margin-left: 0;
+    margin-right: 0.18em;
+  }
+
+  .home-navigation .navbar-toggle > .icon-bar {
+    background-color: #fff;
+  }
+
+  .home-navigation .navbar-toggle:hover, .navbar-toggle:focus {
+    background-color: darken(@brand-primary, 5%);
   }
 
   .navbar-default .navbar-brand {
@@ -12,46 +53,53 @@
   }
 
   .navbar-default .navbar-nav > li > a {
-    color: #fff;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+    color: @home-navigation-link-hover;
   }
 
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a:active {
     color: rgba(255, 255, 255, 0.8);
-    background-color: inherit;
+    background-color: @home-navigation-link-hover-bg;
+    text-decoration: @link-hover-decoration;
   }
 
+
+  /* Cover photo */
+
+  .coverphoto {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    background-color: @brand-primary;
+  }
 
   /* Header Wrap */
+
   #headerwrap {
-    background-color: #03a9f4;
+    background-color: transparent;
     padding-top: 2.5em;
     background-size: cover;
-  }
+    padding-bottom: 2.5em;
 
-  #headerwrap h1 {
-    margin-top: 1.75em;
-    margin-bottom: 0.7em;
-    color: #fff;
-    font-size: 2.9em;
-  }
+    h1 {
+      margin-top: 1.75em;
+      margin-bottom: 0.7em;
+      color: #fff;
+      font-size: 2.9em;
+    }
 
-  #headerwrap small {
-    color: white;
-    font-size: 50%;
-  }
+    small {
+      color: #fff;
+      font-size: 50%;
+    }
 
-  #headerwrap .sign-up {
-    font-size: 1.2em;
-    padding-right: 1.1em;
-    padding-left: 1.1em;
-    padding-bottom: 0.7em;
-    padding-top: 0.7em;
+    .search-box {
+      margin-bottom: 1.875em;
+      background: @brand-primary;
+      padding: 1.25em 1.875em;
+      text-align: center;
+    }
+
   }
 
 

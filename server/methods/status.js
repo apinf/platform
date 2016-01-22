@@ -12,7 +12,7 @@ Meteor.methods({
       try{
 
         // initial host for apinf
-        var apinfHost     = Meteor.settings.apinf.host;
+        var apinfHost     = Meteor.absoluteUrl();
 
         // response object from apinf GET request
         var apinfResponse = Meteor.http.call("GET", apinfHost);
@@ -49,7 +49,7 @@ Meteor.methods({
       try{
 
         // initial host for API umbrella
-        var apiUmbrellaHost     = Meteor.settings.api_umbrella.host;
+        var apiUmbrellaHost     = Meteor.settings.apiUmbrella.host;
 
         // response object from API Umbrella GET request
         var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);

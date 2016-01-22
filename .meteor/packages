@@ -28,7 +28,6 @@ jparker:gravatar
 tap:i18n
 useraccounts:bootstrap
 service-configuration
-yogiben:mixpanel
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 momentjs:moment
@@ -50,7 +49,6 @@ reactive-var
 meteorhacks:npm
 aldeed:tabular
 benmgreene:moment-range
-frenchbread:elastic-rest
 email
 zimme:active-route
 mfactory:admin-lte
@@ -66,8 +64,6 @@ mizzao:sharejs-ace
 raix:ui-dropped-event
 brylie:accounts-admin-ui
 brylie:first-user-admin
-
-
 npm-container
 standard-minifiers
 meteor-base
@@ -85,3 +81,16 @@ spacebars
 check
 useraccounts:iron-routing
 pahans:inline-help
+dandv:jquery-rateit
+zenorocha:clipboard
+yogiben:autoform-file
+harrison:papa-parse
+simple:json-routes
+olragon:uri-js
+forwarder:autoform-wizard
+frenchbread:elastic-rest
+universe:reactive-queries
+ecmascript
+simple:reactive-method
+sacha:spin
+tap:i18n-ui

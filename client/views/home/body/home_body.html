@@ -1,8 +1,11 @@
 <template name="homeBody">
   <div class="container features">
     <div class="row">
+      {{> latestApiBackends limit = 8 }}
+    </div>
+    <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">{{_ "feature-Section-Heading1"}}</h2>
+        <h2 class="feature-section-heading">{{_ "feature_Section_Heading1"}}</h2>
         <hr class="primary">
       </div>
     </div>
@@ -10,35 +13,35 @@
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-magnify"></i>
-          <h3 class="feature-title">{{_ "feature-Title1"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title1-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title1"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title1_Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-auto-fix"></i>
-          <h3 class="feature-title">{{_ "feature-Title2"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title2-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title2"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title2_Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-library-books"></i>
-          <h3 class="feature-title">{{_ "feature-Title3"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title3-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title3"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title3_Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-chart-bar"></i>
-          <h3 class="feature-title">{{_ "feature-Title4"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title4-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title4"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title4_Text"}}</p>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">{{_ "feature-Section-Heading2"}}</h2>
+        <h2 class="feature-section-heading">{{_ "feature_Section_Heading2"}}</h2>
         <hr class="primary">
       </div>
     </div>
@@ -46,29 +49,29 @@
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-arrow-up"></i>
-          <h3 class="feature-title">{{_ "feature-Title5"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title5-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title5"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title5_Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-settings"></i>
-          <h3 class="feature-title">{{_ "feature-Title6"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title6-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title6"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title6_Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-chart-line"></i>
-          <h3 class="feature-title">{{_ "feature-Title7"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title7-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title7"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title7_Text"}}</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <div class="feature-box">
           <i class="mdi mdi-cloud-check"></i>
-          <h3 class="feature-title">{{_ "feature-Title8"}}</h3>
-          <p class="feature-title-text">{{_ "feature-Title8-Text"}}</p>
+          <h3 class="feature-title">{{_ "feature_Title8"}}</h3>
+          <p class="feature-title-text">{{_ "feature_Title8_Text"}}</p>
         </div>
       </div>
     </div>
@@ -79,11 +82,11 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">{{_ "section1-Heading"}}</h2>
-          <p class="lead">{{_ "section1-Text"}}</p>
+          <h2 class="section-heading">{{_ "section1_Heading"}}</h2>
+          <p class="lead">{{_ "section1_Text"}}</p>
           {{#if User}}
           {{else}}
-          <p class="lead"><a href="/sign-up">{{_ "signUp"}}</a> {{_ "section1-Text-Extra"}}</p>
+          <p class="lead"><a href="/sign-up">{{_ "signUp"}}</a> {{_ "section1_Text_Extra"}}</p>
           {{/if}}
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
@@ -101,9 +104,9 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">{{_ "section2-Heading"}}</h2>
-          <p class="lead">{{_ "section2-Text"}}</p>
-          <p class="lead"><a href="#" class="contact-us-link">{{_ "contactUs"}}</a> {{_ "section1-Text-Extra"}}</p>
+          <h2 class="section-heading">{{_ "section2_Heading"}}</h2>
+          <p class="lead">{{_ "section2_Text"}}</p>
+          <p class="lead"><a href="#" class="contact-us-link">{{_ "contactUs"}}</a> {{_ "section1_Text_Extra"}}</p>
         </div>
       </div>
     </div>
@@ -114,9 +117,9 @@
         <div class="col-lg-8 col-sm-6">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">{{_ "section3-Heading"}}</h2>
-          <p class="lead">{{_ "section3-Text"}}</p>
-          <p class="lead">{{_ "section3-Text-Extra"}} <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a> {{_ "section3-Text-Social-Text"}} <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a> and <a href="http://community.apinf.io">Apinf Community</a>.
+          <h2 class="section-heading">{{_ "section3_Heading"}}</h2>
+          <p class="lead">{{_ "section3_Text"}}</p>
+          <p class="lead">{{_ "section3_Text_Extra"}} <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a> {{_ "section3_Text_Social_Text"}} <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a> and <a href="http://community.apinf.io">Apinf Community</a>.
           </p>
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
@@ -128,9 +131,9 @@
   <div id="contact-us" class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">{{_ "section-ContactUs"}}</h2>
+        <h2 class="feature-section-heading">{{_ "section_ContactUs"}}</h2>
         <hr class="primary">
-        <h4 class="text-muted">{{_ "section-ContactUs-Text"}}</h4>
+        <h4 class="text-muted">{{_ "section_ContactUs_Text"}}</h4>
       </div>
     </div>
     <div class="row">
