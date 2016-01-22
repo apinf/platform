@@ -656,12 +656,9 @@ ApiBackends.allow({
   insert: function () {
     return true;
   },
-  update: function (userId, backend) {
-    // Get the backend managers
-    var managerIds = backend.managerIds;
-
-    // Make sure current user is a backend manager
-    if (_.contains(managerIds, userId)) {
+  update: function (userId, apiBackend) {
+    // Make sure current user can edit API Backend
+    if (apiBackend.currentUserCanEdit) {
       // User is allowed to perform action
       return true;
     } else {
