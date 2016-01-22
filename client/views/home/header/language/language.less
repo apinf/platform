@@ -1,3 +1,5 @@
+@import "/client/style/bootstrap-variables-apika.less";
+
 /* Site options top-bar */
 
 #language-bar {
@@ -10,8 +12,20 @@
 
   .language-selection {
     margin-bottom: 0;
-    padding-top: 0.4em;
+  }
+
+  .language-selection > li {
     padding-bottom: 0.4em;
+  }
+
+  .language-selection .active {
+    font-weight: bold;
+  }
+
+  .language-selection .active span {
+    border-top: 4px solid @brand-primary;
+    display: inline-block;
+    padding: 2px 0;
   }
 
   #language-bar .language-selection a {
@@ -26,6 +40,16 @@
     text-decoration: underline;
   }
 
+  .language-title {
+    color: #b3b7ba;
+    cursor: pointer;
+  }
+
+  .language-title:hover,
+  .language-title:focus {
+    text-decoration: underline;
+    color: #fff;
+  }
 }
 
 .language-selection li:first-child:before {
