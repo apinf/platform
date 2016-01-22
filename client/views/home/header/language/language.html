@@ -2,9 +2,11 @@
   <div id="language-bar">
     <div class="container">
       <ul class="language-selection list-inline">
-        <li><a id="fi" href="#fi">Finnish</a></li>
-        <li><a id="sv" href="#sv">Swedish</a></li>
-        <li><a id="en" href="#en">In English</a></li>
+        {{#each language in languages }}
+        <li id="{{ language.tag }}">
+          <a href="#{{ language.tag }}">{{ language.name }}</a>
+        </li>
+        {{/each}}
       </ul>
     </div>
   </div>
