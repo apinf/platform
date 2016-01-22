@@ -1,7 +1,7 @@
 <template name="viewApiBackendDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if currentUserCanEditApiBackend }}
+      {{# if apiBackend.currentUserCanEdit }}
         <a
            href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
            class="btn btn-info pull-right">
