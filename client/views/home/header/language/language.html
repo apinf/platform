@@ -3,9 +3,11 @@
     <div class="container">
       <ul class="language-selection list-inline">
         {{#each language in languages }}
-        <li id="{{ language.tag }}">
-          <a href="#{{ language.tag }}">{{ language.name }}</a>
+        {{ #with language }}
+        <li class="language-option">
+          <a href="#{{ tag }}">{{ name }}</a>
         </li>
+        {{/with}}
         {{/each}}
       </ul>
     </div>
