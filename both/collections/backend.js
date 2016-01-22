@@ -657,21 +657,10 @@ ApiBackends.allow({
     return true;
   },
   update: function (userId, apiBackend) {
-    // Make sure current user can edit API Backend
-    if (apiBackend.currentUserCanEdit) {
-      // User is allowed to perform action
-      return true;
-    } else {
-      // User is not allowded to perform action
-      return false;
-    }
-  },
-  remove: function (userId, backend) {
-    // Get the backend managers
-    var managerIds = backend.managerIds;
+    // Check if current user can edit API Backend
+    let currentUserCanEdit = apiBackend.currentUserCanEdit()
 
-    // Make sure current user is a backend manager
-    if (_.contains(managerIds, userId)) {
+    if (currentUserCanEdit {
       // User is allowed to perform action
       return true;
     } else {
@@ -679,7 +668,17 @@ ApiBackends.allow({
       return false;
     }
   },
-  fetch: ['managerIds']
+  remove: function (userId, apiBackend) {
+    // Check if current user can edit API Backend
+    let currentUserCanEdit = apiBackend.currentUserCanEdit()
+
+    if (currentUserCanEdit) {
+      // User is allowed to perform action
+      return true;
+    } else {
+      // User is not allowded to perform action
+      return false;
+    }
 });
 
 SimpleSchema.messages({
