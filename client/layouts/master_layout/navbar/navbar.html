@@ -16,35 +16,25 @@
       </a>
       {{/if}}
       {{# unless isSearchRoute }}
-      <form id="header-search-form" class="header-search-form">
-          <div>
-              <input type="text" placeholder="Search.." class="form-control" id="header-search-text" />
-          </div>
-      </form>
+        {{> searchField }}
       {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <!-- language select -->
+          <!-- TODO: enable language select when dashboard is translated -->
+          <!-- <li>
+            <form class="navbar-form">
+              {{> i18n_dropdown }}
+            </form>
+          </li> -->
+          <!-- /language select -->
           {{#if User}}
-          {{#if isInRole 'admin'}}
           <li>
             <a href="{{pathFor 'dashboard'}}">
               {{_ "Dashboard"}}
             </a>
           </li>
-          {{/if}}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
-              <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
-              {{#if isInRole 'admin'}}
-                <li><a href="{{pathFor 'branding'}}">Branding</a></li>
-              {{/if}}
-              <li><a href="{{pathFor 'settings'}}">Settings</a></li>
-              <li class="divider"></li>
-              <li><a href="/sign-out">{{_ "signout"}}</a></li>
-            </ul>
-          </li>
+          {{> userMenu }}
           {{else}}
           <li>
             <a class="close-navbar" href="/sign-up">{{_ "signup"}}</a>

@@ -93,3 +93,4 @@ universe:reactive-queries
 ecmascript
 simple:reactive-method
 sacha:spin
+tap:i18n-ui

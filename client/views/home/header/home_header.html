@@ -1,26 +1,23 @@
 <template name="homeHeader">
-  <div class="navbar navbar-default coverphoto" style="background-image: url({{ coverPhoto.url }})">
+  {{> languageBar }}
+  <nav class="navbar navbar-default home-navigation">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <img class="img-responsive" src="{{ projectLogo.url }}" style="width: 140px;" alt="">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#home-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand text-hide" href="/" style="background-image:url({{ projectLogo.url }})">
+          APInf
         </a>
       </div>
-      <div class="navbar-collapse collapse">
+      <div id="home-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
-          {{#if isInRole 'admin'}}
           <li><a href="{{pathFor 'dashboard'}}">{{_ "Dashboard"}}</a></li>
-          {{/if}}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
-              <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
-              <li class="divider"></li>
-              <li><a href="/sign-out">{{_ "signout"}}</a></li>
-            </ul>
-          </li>
+          {{> userMenu }}
           {{else}}
           <li><a href="/sign-in">{{_ "signIn"}}</a></li>
           <li><a href="/sign-up">{{_ "signUp"}}</a></li>
@@ -28,16 +25,19 @@
           {{/if}}
         </ul>
       </div>
-      <div id="headerwrap">
-        <div class="row">
-          <div class="col-lg-6">
-            <h1>{{ branding.siteTitle }}<br>
-              <small>{{ branding.siteSlogan }}</small></h1>
-            {{#if currentUser}}
-            <a href="/dashboard" class="btn btn-success sign-up" title="{{_ 'Dashboard'}}"><i class="mdi mdi-chart-bar"></i> {{_ "Dashboard"}}</a>
-            {{else}}
-            <a href="/sign-up" class="btn btn-success sign-up" title="{{_ 'signUp'}}"><i class="mdi mdi-account-plus"></i> {{_ "signUp"}}</a>
-            {{/if}}
+    </div>
+  </nav>
+  <div class="coverphoto" style="background-image: url({{ coverPhoto.url }})">
+    <div class="container" id="headerwrap">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+          <h1 class="text-center">
+            {{ branding.siteTitle }}
+            <br>
+            <small>{{ branding.siteSlogan }}</small>
+          </h1>
+          <div class="search-box">
+            {{> searchField }}
           </div>
         </div>
       </div>

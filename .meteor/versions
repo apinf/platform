@@ -10,6 +10,7 @@ aldeed:collection2@2.7.0
 aldeed:simple-schema@1.5.1
 aldeed:tabular@1.4.2
 aldeed:template-extension@4.0.0
+amplify@1.0.0
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -166,6 +167,7 @@ srp@1.0.4
 standard-app-packages@1.0.6
 standard-minifiers@1.0.2
 tap:i18n@1.7.0
+tap:i18n-ui@0.7.0
 templating@1.1.5
 templating-tools@1.0.0
 timmyg:wow@1.0.1
