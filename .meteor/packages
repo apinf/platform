@@ -94,3 +94,4 @@ ecmascript
 simple:reactive-method
 sanjo:jasmine
 velocity:html-reporter
+sacha:spin

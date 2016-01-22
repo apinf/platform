@@ -1,8 +1,13 @@
 <template name="feedbackList">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{> feedbackForm }}
-      <h1 class="panel-title clearfix">{{_ "feedback-main-title"}}</h1>
+      {{#if currentUser}}
+        {{> feedbackForm }}
+      {{/ if }}
+      <h1 class="panel-title clearfix">
+        <i class="fa fa-comments-o"></i>
+        {{_ "feedback_main_title"}}
+      </h1>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -17,7 +22,7 @@
           </div>
         </div>
         {{else}}
-        <p>{{_ "feedback-no-feedback"}}</p>
+        <p>{{_ "feedback_no_feedback"}}</p>
         {{/if}}
       </div>
     </div>
