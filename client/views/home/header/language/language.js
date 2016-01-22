@@ -22,7 +22,7 @@ Template.languageBar.helpers({
       // Add language option to array
       languageOptions.push(languageOption);
     }
-    
+
     return languageOptions;
   },
   activeLanguage: function () {
@@ -43,6 +43,8 @@ Template.languageBar.events({
   "click .language-option": function(event, template) {
     // Get language from the current data context
     let language = this.tag;
+
+    // Update site language with selected language
     TAPi18n.setLanguage(language);
   }
 });
