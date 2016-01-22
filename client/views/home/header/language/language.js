@@ -9,6 +9,18 @@ Template.languageBar.helpers({
       languageOptions.push(languageOption);
     }
     return languageOptions;
+  },
+  activeLanguage: function () {
+    // Get current language
+    const activeLanguage = TAPi18n.getLanguage();
+
+    // Get language from the current data context
+    let languageTag = this.tag;
+
+    // Add class "active" to highlight active language
+    if (activeLanguage === languageTag) {
+      return "active";
+    }
   }
 });
 
