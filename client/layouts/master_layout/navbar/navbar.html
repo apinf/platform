@@ -16,11 +16,15 @@
       </a>
       {{/if}}
       {{# unless isSearchRoute }}
-      {{> searchField}}
+        {{> searchField}}
       {{/ unless }}
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          {{> i18n_dropdown }}
+          <li><!-- language select -->
+            <form class="navbar-form">
+              {{> i18n_dropdown }}
+            </form>
+          </li><!-- /language select -->
           {{#if User}}
           <li>
             <a href="{{pathFor 'dashboard'}}">
