@@ -1,13 +1,28 @@
 Template.languageBar.helpers({
   languages: function() {
-    // Create Array of Objects with language tag and name
-    const languages = TAPi18n.getLanguages();
+    /*
+    This helper converts the languages object into an array of objects
+    TODO: determine if there is a simpler way to perform these steps
+    */
+
+    // Placeholder for language options
     let languageOptions = [];
+
+    // Get all site translation languages
+    const languages = TAPi18n.getLanguages();
+
+    // Create Array of Objects with language tag and name
     for (language in languages) {
+      // Get language object
       let languageOption = languages[language];
+
+      // Get language tag (short language name)
       languageOption.tag = language;
+
+      // Add language option to array
       languageOptions.push(languageOption);
     }
+    
     return languageOptions;
   },
   activeLanguage: function () {
