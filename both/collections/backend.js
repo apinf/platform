@@ -656,12 +656,15 @@ ApiBackends.allow({
   insert: function () {
     return true;
   },
-  update: function (userId, backend) {
-    // Get the backend managers
-    var managerIds = backend.managerIds;
+  update: function (userId, apiBackendDoc) {
+    // Save ID of API Backend
+    const apiBackendId = apiBackendDoc._id;
+    // Get API backend with ID
+    const apiBackend = ApiBackends.findOne(apiBackendId);
+    // Check if current user can edit API Backend
+    let currentUserCanEdit = apiBackend.currentUserCanEdit();
 
-    // Make sure current user is a backend manager
-    if (_.contains(managerIds, userId)) {
+    if (currentUserCanEdit) {
       // User is allowed to perform action
       return true;
     } else {
@@ -669,20 +672,22 @@ ApiBackends.allow({
       return false;
     }
   },
-  remove: function (userId, backend) {
-    // Get the backend managers
-    var managerIds = backend.managerIds;
+  remove: function (userId, apiBackendDoc) {
+    // Save ID of API Backend
+    const apiBackendId = apiBackendDoc._id;
+    // Get API backend with ID
+    const apiBackend = ApiBackends.findOne(apiBackendId);
+    // Check if current user can edit API Backend
+    let currentUserCanEdit = apiBackend.currentUserCanEdit();
 
-    // Make sure current user is a backend manager
-    if (_.contains(managerIds, userId)) {
+    if (currentUserCanEdit) {
       // User is allowed to perform action
       return true;
     } else {
       // User is not allowded to perform action
       return false;
     }
-  },
-  fetch: ['managerIds']
+  }
 });
 
 SimpleSchema.messages({

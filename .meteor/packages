@@ -95,3 +95,4 @@ simple:reactive-method
 sanjo:jasmine
 velocity:html-reporter
 sacha:spin
+tap:i18n-ui
