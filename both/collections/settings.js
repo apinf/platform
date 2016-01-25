@@ -5,6 +5,16 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: Object,
     optional: true
   },
+  apiDocumentationEditor: {
+    type: Object,
+    optional: true
+  },
+  "apiDocumentationEditor.host": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: "apiDocumentationEditor-Host"
+    optional:true
+  },
   apiUmbrella: {
     type: Object,
     optional: true
