@@ -8,6 +8,7 @@ Template.sidebar.helpers({
     return backendsCount > 0;
   },
   apiDoc_notEmpty : function() {
+    //Return true if apiDocumentation was set and false if else.
     return Settings.findOne({"apiDocumentationEditor.host": {$exists: true}})
   }
 });
