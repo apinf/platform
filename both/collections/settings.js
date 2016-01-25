@@ -12,7 +12,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   "apiDocumentationEditor.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "apiDocumentationEditor-Host"
+    label: "apiDocumentationEditor-Host",
     optional:true
   },
   apiUmbrella: {
