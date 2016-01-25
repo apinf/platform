@@ -8,11 +8,8 @@ describe('Search form present', function () {
   beforeEach(waitForRouter);
 
   it('should contain search form at "/catalogue" page', function () {
+    var searchForm = $('#header-search-form');
 
-    $(function () {
-      var searchForm = $('form#header-search-form');
-      expect(searchForm.length).toEqual(1);
-    });
-
+    expect(searchForm).toExist();
   });
 });
