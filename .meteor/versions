@@ -70,6 +70,7 @@ ecmascript-runtime@0.2.6
 ejson@1.0.7
 email@1.0.8
 fastclick@1.0.7
+force-ssl@1.0.6
 fortawesome:fontawesome@4.5.0
 forwarder:autoform-wizard@0.9.0
 frenchbread:dynatable@0.1.0
