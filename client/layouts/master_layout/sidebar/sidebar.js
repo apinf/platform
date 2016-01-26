@@ -7,9 +7,12 @@ Template.sidebar.helpers({
     // return true if user has backends
     return backendsCount > 0;
   },
-   apiDocumentationEditorIsEnabled : function() {
-    //Return true if apiDocumentation was set and false if else.
-    return Settings.findOne({"apiDocumentationEditor.host": {$exists: true}})
+  apiDocumentationEditorIsEnabled : function() {
+    // Saving the fields apiDocumentationEditor.enabled into the variable
+    // settings.
+    var settings = Settings.findOne({},{"apiDocumentationEditor.enabled": 1, _id:0})
+    // Accessing the value of enabled in the apiDocumentationEditor Object
+    return settings.apiDocumentationEditor.enabled
   }
 });
 
