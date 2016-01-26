@@ -9,6 +9,11 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: Object,
     optional: true
   },
+  "apiDocumentationEditor.enabled": {
+    type: Boolean,
+    label: "Enable apiDocumentation Editor",
+    optional:true
+  },
   "apiDocumentationEditor.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,

@@ -28,7 +28,10 @@
             <h3 class="panel-title">Api Documentation Editor</h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='apiDocumentationEditor.host'}}
+            {{> afQuickField name='apiDocumentationEditor.enabled'}}
+            {{#if afFieldValueIs name="apiDocumentationEditor.enabled" value=true}}
+              {{> afQuickField name='apiDocumentationEditor.host'}}
+            {{/if}}
           </div>
         </div>
         <div class="panel panel-default">
