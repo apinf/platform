@@ -7,7 +7,7 @@ Template.sidebar.helpers({
     // return true if user has backends
     return backendsCount > 0;
   },
-  apiDoc_notEmpty : function() {
+   apiDocumentationEditorIsEnabled : function() {
     //Return true if apiDocumentation was set and false if else.
     return Settings.findOne({"apiDocumentationEditor.host": {$exists: true}})
   }
