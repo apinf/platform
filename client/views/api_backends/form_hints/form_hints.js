@@ -1,6 +1,6 @@
 var helpData = {
   'api_name': {
-    message: " A name that describes your API",
+    message: "A name that describes your API",
     options: {
       placement: 'left'
     }
@@ -24,7 +24,7 @@ var helpData = {
     }
   },
   'frontend_host': {
-    message: " Usually the same as your Server host",
+    message: "Usually the same as your Server host",
     options: {
       placement: 'left'
     }
@@ -83,44 +83,8 @@ var helpData = {
       placement: 'left'
     }
   },
-  'required_roles': {
-    message: "Hint text",
-    options: {
-      placement: 'left'
-    }
-  },
-  'rate_limit_mode': {
-    message: "Hint text",
-    options: {
-      placement: 'left'
-    }
-  },
-  'pass_api_key_header': {
-    message: "Hint text",
-    options: {
-      placement: 'left'
-    }
-  },
-  'pass_api_key_query_param': {
-    message: "Hint text",
-    options: {
-      placement: 'left'
-    }
-  },
-  'rewrite': {
-    message: "Hint text",
-    options: {
-      placement: 'left'
-    }
-  },
   'balance_algorithm': {
     message: "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
-    options: {
-      placement: 'left'
-    }
-  },
-  'error_templates': {
-    message: "Hint text",
     options: {
       placement: 'left'
     }
