@@ -16,5 +16,4 @@ Template.sidebar.helpers({
 Template.sidebar.created = function () {
   var instance = this;
   instance.subscribe('myManagedApis');
-  instance.subscribe('settings');
 }
