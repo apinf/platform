@@ -30,6 +30,9 @@ Template.apiBackendUsageInstructions.helpers({
     // Clean up URL & remove extra slashes
     apiUmbrellaBaseUrl.normalize();
 
+    // Add api_key parameter to URL (https://host.com/frontend_prefix?api_key=your_api_key)
+    apiUmbrellaBaseUrl.addSearch('api_key', Meteor.user().profile.apiKey);
+
     return apiUmbrellaBaseUrl;
   }
 });
