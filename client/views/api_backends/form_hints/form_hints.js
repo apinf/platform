@@ -1,96 +1,96 @@
 var helpData = {
   'api_name': {
-    message: "A name that describes your API",
+    message: TAPi18n.__('editApi_hints_api_name'),
     options: {
       placement: 'left'
     }
   },
   'backend_protocol': {
-    message: "Choose the protocol used by your api (e.g. http or https)",
+    message: TAPi18n.__('editApi_hints_backend_protocol'),
     options: {
       placement: 'left'
     }
   },
   'servers': {
-    message: "URL of the server that hosts the API. <br><br>The port on the server which exposes your API to internet. <br><br><i>You can add multiple servers if you want us to perform load balancing on your incoming requests</i>",
+    message: `TAPi18n.__('editApi_hints_servers_part1') <br><br> TAPi18n.__('editApi_hints_backend_host_part2') <br><br> TAPi18n.__('editApi_hints_servers_part3')`,
     options: {
       placement: 'left'
     }
   },
   'backend_host': {
-    message: "Server where umbrella is hosted. <br><br>If API Umbrella installed locally, enter <strong>localhost</strong> as your Backend host",
+    message: "TAPi18n.__('editApi_hints_backend_host_part1') <br><br>TAPi18n.__('editApi_hints_backend_host_part2')",
     options: {
       placement: 'left'
     }
   },
   'frontend_host': {
-    message: "Usually the same as your Server host",
+    message: TAPi18n.__('editApi_hints_frontend_host'),
     options: {
       placement: 'left'
     }
   },
   'url_matches': {
-    message: "We recommend to have a unique URL Front-end prefix for your API so that it does not conflict with other existing APIs.<br> Apart from that, you can also segregate different sections of your API with different prefixes. <br>All the requests made to the 'Front-end host / Front-end prefix' will be re-written to 'Backend host / Backend prefix' <br><br>Frontend prefix: A prefix for your API, recognized by the Umbrella, e.g. /my_dev_api/ <br><br>Backend prefix: Usually a part of your API's url, helpful to shorten the URL used for accessing your API, e.g. /apiv2/staging/experimental OR something as simple as '/'.",
+    message: "TAPi18n.__('editApi_hints_url_matches_part1')<br> TAPi18n.__('editApi_hints_url_matches_part2') <br>TAPi18n.__('editApi_hints_url_matches_part3') <br><br>TAPi18n.__('editApi_hints_url_matches_part4') <br><br>TAPi18n.__('editApi_hints_url_matches_part5')",
     options: {
       placement: 'left'
     }
   },
   'documentation_link': {
-    message: "Link of the wiki / github page / web resource where the documentation of your API is located",
+    message: TAPi18n.__('editApi_hints_documentation_link'),
     options: {
       placement: 'left'
     }
   },
   'apiDocumentationEditor': {
-    message: "You can also choose to create a new documentation for your APIs using swagger at our own server",
+    message: TAPi18n.__('editApi_hints_apiDocumentationEditor'),
     options: {
       placement: 'left'
     }
   },
   'importApiDocumentation': {
-    message: "If your documentation exists but is not available online, you can host it on APINF.<br> Upload your documentation in Swagger format here.",
+    message: "TAPi18n.__('editApi_hints_importApiDocumentation_part1')<br> TAPi18n.__('editApi_hints_importApiDocumentation_part2')",
     options: {
       placement: 'left'
     }
   },
   'append_query_string': {
-    message: "Add the parameters required by your API in <strong>key1=value1&key2=value2</strong> format. <br>This place is best to add those parameters that is not mandatory for your API-users but your API needs them for providing meaningful data.",
+    message: "TAPi18n.__('editApi_hints_append_query_string_part1') <br>TAPi18n.__('editApi_hints_append_query_string_part2')",
     options: {
       placement: 'left'
     }
   },
   'set_headers': {
-    message: "If your API requires some specific headers to be set, they should be added here",
+    message: TAPi18n.__('editApi_hints_set_headers'),
     options: {
       placement: 'left'
     }
   },
   'http_basic_auth': {
-    message: "Does your api need a username and password for access? If yes, they must be specified here.",
+    message: TAPi18n.__('editApi_hints_http_basic_auth'),
     options: {
       placement: 'left'
     }
   },
   'require_https': {
-    message: "Choose <strong>'required'</strong> if HTTPS is mandatory for accessing your apis.",
+    message: TAPi18n.__('editApi_hints_require_https'),
     options: {
       placement: 'left'
     }
   },
   'api_key_verification_level': {
-    message: "Choose <strong>'required'</strong> if API key is required to access your API",
+    message: TAPi18n.__('editApi_hints_api_key_verification_level'),
     options: {
       placement: 'left'
     }
   },
   'balance_algorithm': {
-    message: "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
+    message: TAPi18n.__('editApi_hints_api_balance_algorithm'),
     options: {
       placement: 'left'
     }
   },
   'settings': {
-    message: "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'",
+    message: "TAPi18n.__('editApi_hints_settings_part1')<br><br> TAPi18n.__('editApi_hints_settings_part2')<br><br> TAPi18n.__('editApi_hints_settings_part3')",
     options: {
       placement: 'left'
     }
