@@ -29,6 +29,8 @@ Template.apiBackendUsageInstructions.helpers({
 
     // Clean up URL & remove extra slashes
     apiUmbrellaBaseUrl.normalize();
+    
+    apiUmbrellaBaseUrl.addSearch('api_key', Meteor.user().profile.apiKey);
 
     return apiUmbrellaBaseUrl;
   }
