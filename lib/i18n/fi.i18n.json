@@ -189,5 +189,21 @@
   "notFound_Title": "Sivua ei löytynyt.",
   "notFound_Message_Part1": "Hakemaasi sivua ei löytynyt.",
   "notFound_Message_Part2": "Sillä aikaa voit",
-  "notFound_Message_Part3": "palata edelliselle sivulle."
+  "notFound_Message_Part3": "palata edelliselle sivulle.",
+  "editApi_hints_api_name": "A name that describes your API",
+  "editApi_hints_backend_protocol": "Choose the protocol used by your api (e.g. http or https)",
+  "editApi_hints_servers": "URL of the server that hosts the API. <br><br> The port on the server which exposes your API to internet. <br><br> You can add multiple servers if you want us to perform load balancing on your incoming requests",
+  "editApi_hints_backend_host": "Server where umbrella is hosted. <br><br>If API Umbrella installed locally, enter <strong>localhost</strong> as your Backend host",
+  "editApi_hints_frontend_host": "Usually the same as your Server host",
+  "editApi_hints_url_matches": "We recommend to have a unique URL Front-end prefix for your API so that it does not conflict with other existing APIs.<br> Apart from that, you can also segregate different sections of your API with different prefixes. <br>All the requests made to the 'Front-end host / Front-end prefix' will be re-written to 'Backend host / Backend prefix' <br><br>Frontend prefix: A prefix for your API, recognized by the Umbrella, e.g. /my_dev_api/ <br><br>Backend prefix: Usually a part of your API's url, helpful to shorten the URL used for accessing your API, e.g. /apiv2/staging/experimental OR something as simple as '/'.",
+  "editApi_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
+  "editApi_hints_apiDocumentationEditor": "You can also choose to create a new documentation for your APIs using swagger at our own server",
+  "editApi_hints_importApiDocumentation": "If your documentation exists but is not available online, you can host it on APINF.<br> Upload your documentation in Swagger format here.",
+  "editApi_hints_append_query_string": "Add the parameters required by your API in <strong>key1=value1&key2=value2</strong> format. <br>This place is best to add those parameters that is not mandatory for your API-users but your API needs them for providing meaningful data.",
+  "editApi_hints_set_headers": "If your API requires some specific headers to be set, they should be added here",
+  "editApi_hints_http_basic_auth": "Does your api need a username and password for access? If yes, they must be specified here.",
+  "editApi_hints_require_https": "Choose 'required' if HTTPS is mandatory for accessing your apis.",
+  "editApi_hints_api_key_verification_level": "Choose 'required' if API key is required to access your API",
+  "editApi_hints_api_balance_algorithm": "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
+  "editApi_hints_settings": "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'"
 }
