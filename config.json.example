@@ -8,6 +8,9 @@
     "baseUrl": "https://example.com/api-umbrella/",
     "host": "https://example.com"
   },
+  "apiDocumentationEditor": [
+    "host": ""
+  ],
   "elasticsearch": {
     "host": "http://example.com:14002/"
   },

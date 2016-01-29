@@ -40,9 +40,11 @@
               <span>{{_ "masterLayout_sidebar_Documentation"}}</span>
             </a>
             <ul class="treeview-menu">
+              {{# if apiDocumentationEditorIsEnabled}}
               <li class="{{isActiveRoute 'apiDocumentationEditor'}}">
                 <a href="/documentation/editor"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout_sidebar_DocumentationEditor"}}</span></a>
               </li>
+              {{/ if }}
               <li class="{{isActiveRoute 'documentation'}}">
                 <a href="/documentation"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout_sidebar_DocumentationViewer"}}</span></a>
               </li>
