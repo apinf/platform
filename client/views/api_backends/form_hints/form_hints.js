@@ -12,13 +12,13 @@ var helpData = {
     }
   },
   'servers': {
-    message: `TAPi18n.__('editApi_hints_servers_part1') <br><br> TAPi18n.__('editApi_hints_backend_host_part2') <br><br> TAPi18n.__('editApi_hints_servers_part3')`,
+    message: TAPi18n.__('editApi_hints_servers'),
     options: {
       placement: 'left'
     }
   },
   'backend_host': {
-    message: "TAPi18n.__('editApi_hints_backend_host_part1') <br><br>TAPi18n.__('editApi_hints_backend_host_part2')",
+    message: TAPi18n.__('editApi_hints_backend_host'),
     options: {
       placement: 'left'
     }
@@ -30,7 +30,7 @@ var helpData = {
     }
   },
   'url_matches': {
-    message: "TAPi18n.__('editApi_hints_url_matches_part1')<br> TAPi18n.__('editApi_hints_url_matches_part2') <br>TAPi18n.__('editApi_hints_url_matches_part3') <br><br>TAPi18n.__('editApi_hints_url_matches_part4') <br><br>TAPi18n.__('editApi_hints_url_matches_part5')",
+    message: TAPi18n.__('editApi_hints_url_matches'),
     options: {
       placement: 'left'
     }
@@ -48,13 +48,13 @@ var helpData = {
     }
   },
   'importApiDocumentation': {
-    message: "TAPi18n.__('editApi_hints_importApiDocumentation_part1')<br> TAPi18n.__('editApi_hints_importApiDocumentation_part2')",
+    message: TAPi18n.__('editApi_hints_importApiDocumentation'),
     options: {
       placement: 'left'
     }
   },
   'append_query_string': {
-    message: "TAPi18n.__('editApi_hints_append_query_string_part1') <br>TAPi18n.__('editApi_hints_append_query_string_part2')",
+    message: TAPi18n.__('editApi_hints_append_query_string'),
     options: {
       placement: 'left'
     }
@@ -90,7 +90,7 @@ var helpData = {
     }
   },
   'settings': {
-    message: "TAPi18n.__('editApi_hints_settings_part1')<br><br> TAPi18n.__('editApi_hints_settings_part2')<br><br> TAPi18n.__('editApi_hints_settings_part3')",
+    message: TAPi18n.__('editApi_hints_settings'),
     options: {
       placement: 'left'
     }
