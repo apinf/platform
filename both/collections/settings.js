@@ -20,9 +20,8 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Host",
     optional: true, // Optional must be true for custom validation
     custom: function () { // Custom validator logic
-    // get the value of apiDocumentationEditor.enabled field
+      // get the value of apiDocumentationEditor.enabled field
       let enabledFieldValue = this.field("apiDocumentationEditor.enabled").value;
-
       // if enabled is true, host field is required
       if (enabledFieldValue === true) {
         return "required"; // host field is required
