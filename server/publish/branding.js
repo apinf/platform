@@ -18,7 +18,7 @@ Meteor.publish('coverPhoto', function() {
   // Get project logo ID
   let coverPhotoId = branding.coverPhotoId;
 
-  if (projectLogoId) {
+  if (coverPhotoId) {
     // Get ProjectLogo collection object
     return BrandingFiles.find(coverPhotoId);
   }
@@ -26,5 +26,7 @@ Meteor.publish('coverPhoto', function() {
 
 Meteor.publish('branding', function() {
   // Get Branding collection object
-  return Branding.find({});
+  let branding = Branding.find({});
+
+  return branding;
 });
