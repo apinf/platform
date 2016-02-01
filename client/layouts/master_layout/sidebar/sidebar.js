@@ -12,7 +12,10 @@ Template.sidebar.helpers({
     // settings.
     var settings = Settings.findOne({},{"apiDocumentationEditor.enabled": 1, _id:0})
     // Accessing the value of enabled in the apiDocumentationEditor Object
-    return settings.apiDocumentationEditor.enabled
+    if(settings && settings.apiDocumentationEditor) {
+      return settings.apiDocumentationEditor.enabled
+    }
+
   }
 });
 
