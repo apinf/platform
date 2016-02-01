@@ -6,9 +6,17 @@ Template.navbar.helpers({
     return profilePicture.url();
   },
   projectLogo: function () {
-    var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
-    if (lastUploadedLogo) {
-      return lastUploadedLogo
+    // Get branding document
+    let branding = Branding.findOne();
+
+    if (branding) {
+      // Get project logo ID
+      let projectLogoId = branding.projectLogoId;
+
+      if (projectLogoId) {
+        // Get project logo collection object
+        return BrandingFiles.findOne(projectLogoId);
+      }
     }
   },
   "isSearchRoute": function () {
