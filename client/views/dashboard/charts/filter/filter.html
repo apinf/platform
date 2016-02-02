@@ -7,7 +7,7 @@
     <div class="box-body">
       <form id="filteringForm">
         {{_ "filterData_Month"}}
-        <select name="month" >
+        <select id="month" name="month" >
           <option value="00">-</option>
           <option value="01">{{_ "filterData_January"}}</option>
           <option value="02">{{_ "filterData_February"}}</option>
@@ -23,13 +23,13 @@
           <option value="12">{{_ "filterData_December"}}</option>
         </select>
         {{_ "filterData_Year"}}
-        <select name="year">
+        <select id="year" name="year">
           <option value="0000">-</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
         </select>
         {{_ "filterData_Limit"}}
-        <input name="limit" type="text" value="10000" />
+        <input id="limit" name="limit" type="text" value="10000" />
 
         <span class="dc-data-count dc-chart" id="row-selection" style="margin:0">
           <span class="filter-count">_</span> {{_ "filterData_SelectedOf"}} <span class="total-count">_</span> {{_ "filterData_Records"}}
