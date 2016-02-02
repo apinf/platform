@@ -390,10 +390,5 @@ Template.chartsLayout.events({
     // Forces "save As" function allow user download file
     saveAs(file, moment().format("MMM-YYYY") + "-logs.csv");
 
-  },
-  "click #reset": function(event, template){
-    console.log(dc);
-    dc.filterAll();
-    dc.redrawAll();
   }
 });
