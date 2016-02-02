@@ -23,7 +23,7 @@ Template.latestApiBackends.created = function () {
 };
 
 Template.latestApiBackends.helpers({
-  'latestBackends': function (limit) {
+  'latestBackends': function (rowSize) {
 
     // Reference to Template instance
     var instance = Template.instance();
@@ -38,6 +38,15 @@ Template.latestApiBackends.helpers({
       apiBackend.relative_created_at = moment(apiBackend.created_at).fromNow();
     });
 
-    return latestApiBackendsList;
+    // Chunk latestApiBackendsList per rowSize
+    chunks = [];
+    rowSize = 4;
+    while (latestApiBackendsList.length > rowSize) {
+        chunks.push({ row: latestApiBackendsList.slice(0, rowSize)});
+        latestApiBackendsList = latestApiBackendsList.slice(rowSize);
+    }
+    chunks.push({row: latestApiBackendsList});
+
+    return chunks;
   }
 });
