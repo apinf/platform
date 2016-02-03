@@ -36,5 +36,39 @@ Template.chartsLayout.events({
 
     instance.getDashboardData(input)
 
+  },
+  "click #filter-reset": function(event, template){
+    // appending loading state
+    $('#loadingState').html("Loading...");
+
+    // gets current month and year -> providing them for initial query
+    var currentYearAndMonth = moment().format("YYYY-MM");
+
+    // sets default items amount to be returned
+    var initialLimit = 10000;
+
+    // Initialize filter values
+    $('#filter-month').val(undefined);
+    $('#filter-year').val(undefined);
+    $('#filter-limit').val( initialLimit.toString() );
+
+    // sets query for elastic search
+    var input = {
+      index : "api-umbrella-logs-v1-"+currentYearAndMonth,
+      type  : "log",
+      limit : initialLimit,
+      fields: [
+        'request_at',
+        'request_ip_country',
+        'request_ip',
+        'response_time',
+        'request_path',
+        'request_ip_location.lon',
+        'request_ip_location.lat'
+      ]
+    };
+
+    // get data
+    template.getDashboardData(input);
   }
 });

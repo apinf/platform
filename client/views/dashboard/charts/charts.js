@@ -176,7 +176,6 @@ Template.chartsLayout.created = function () {
     var overviewChart = dc.barChart("#overview-chart");
     var moveChart = dc.barChart("#move-chart");
 
-
     overviewChart
       .height(80)
       .dimension(timeStampDimension)
