@@ -95,3 +95,4 @@ simple:reactive-method
 sacha:spin
 tap:i18n-ui
 force-ssl
+forwarder:autoform-wizard-iron-router
