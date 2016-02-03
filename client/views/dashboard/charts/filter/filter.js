@@ -37,11 +37,9 @@ Template.chartsLayout.events({
     instance.getDashboardData(input)
 
   },
-  "click #reset": function(event, template){
+  "click #filter-reset": function(event, template){
     // appending loading state
     $('#loadingState').html("Loading...");
-
-
 
     // gets current month and year -> providing them for initial query
     var currentYearAndMonth = moment().format("YYYY-MM");
@@ -50,9 +48,9 @@ Template.chartsLayout.events({
     var initialLimit = 10000;
 
     // Initialize filter values
-    $('#month option[value="00"]').prop('selected', true);
-    $('#year option[value="0000"]').prop('selected', true);
-    $('#limit').val( initialLimit.toString() );
+    $('#filter-month').val(undefined);
+    $('#filter-year').val(undefined);
+    $('#filter-limit').val( initialLimit.toString() );
 
     // sets query for elastic search
     var input = {
