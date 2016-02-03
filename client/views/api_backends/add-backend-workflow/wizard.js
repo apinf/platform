@@ -1,3 +1,7 @@
+Template.addApiBackendWizard.onCreated(function(){
+  Wizard.useRouter('iron:router');
+});
+
 Template.addApiBackendWizard.helpers({
   "steps": function () {
     var baseInformation = new SimpleSchema({
