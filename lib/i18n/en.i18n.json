@@ -218,5 +218,6 @@
   "editApi_hints_require_https": "Choose 'required' if HTTPS is mandatory for accessing your apis.",
   "editApi_hints_api_key_verification_level": "Choose 'required' if API key is required to access your API",
   "editApi_hints_api_balance_algorithm": "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
-  "editApi_hints_settings": "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'"
+  "editApi_hints_settings": "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'",
+  "apiDocumentationSelect_noApiDocumentation": "No API documentations found."
 }
