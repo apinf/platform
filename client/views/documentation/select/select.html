@@ -1,11 +1,13 @@
 <template name="apiDocumentationSelect">
   {{#if Template.subscriptionsReady }}
+  {{#if apiDocumentation}}
   <legend>Select Documentation file</legend>
   <select name="selected-documentation" class="form-control">
     <option value="">Select</option>
-    {{# each apiDocumentation }}
-      <option value="/api/{{ _id }}/swagger.json">{{ getApiBackendName }}</option>
-    {{/ each }}
+      {{# each apiDocumentation }}
+        <option value="/api/{{ _id }}/swagger.json">{{ getApiBackendName }}</option>
+      {{/ each }}
   </select>
-  {{/ if }}
+  {{/if}}
+  {{/if}}
 </template>
