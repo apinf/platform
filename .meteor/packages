@@ -96,3 +96,4 @@ sacha:spin
 tap:i18n-ui
 force-ssl
 gwendall:autoform-i18n
+forwarder:autoform-wizard-iron-router
