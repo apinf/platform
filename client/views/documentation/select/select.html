@@ -8,6 +8,8 @@
         <option value="/api/{{ _id }}/swagger.json">{{ getApiBackendName }}</option>
       {{/ each }}
   </select>
+  {{else}}
+    <p>{{_ "apiDocumentationSelect_noApiDocumentation"}}</p>
   {{/if}}
   {{/if}}
 </template>
