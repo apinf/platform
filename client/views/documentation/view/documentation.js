@@ -40,6 +40,9 @@ Template.documentation.events({
 
     // passes api key to iFrame once it is loaded
     $("#documentation").contents().find("#input_apiKey").val(apiKey);
+
+    // Click Explore to attach API key to "Try out" request
+    $("#documentation").contents().find("#explore").click();
   }
 });
 
