@@ -4,6 +4,9 @@ Template.apiDocumentationSelect.created = function () {
 
   // Subscribe to All API Documentation
   instance.subscribe('allApiDocs');
+
+  // Subscribe to API backends with Docs
+  instance.subscribe('apiBackendsWithDocs');
 };
 
 Template.apiDocumentationSelect.helpers({
