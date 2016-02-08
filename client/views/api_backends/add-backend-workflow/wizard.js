@@ -159,6 +159,10 @@ Template.addApiBackendWizard.helpers({
         });
 
 
+      },
+      onSuccess: function() {
+        console.log('Success');
+        Roles.addUsersToRoles(Meteor.userId(), ['manager']);
       }
     }];
 
