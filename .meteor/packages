@@ -21,7 +21,6 @@ yogiben:autoform-modals
 yogiben:pretty-email
 yogiben:autoform-map
 multiply:iron-router-progress
-manuelschoebel:ms-seo
 spiderable
 accounts-ui
 jparker:gravatar
@@ -95,3 +94,4 @@ simple:reactive-method
 sacha:spin
 tap:i18n-ui
 force-ssl
+kadira:dochead
