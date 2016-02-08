@@ -29,19 +29,6 @@ Template.apiBackendForm.helpers({
   }
 });
 
-Template.apiBackendForm.created = function () {
-  // Get reference to current Router
-  var router = Router.current();
-
-  // Get the API Backend ID from Router
-  var apiBackendId = router.params._id;
-
-  if (apiBackendId) {
-    // Subscription to apiBackends collection
-    this.subscribe('apiBackend', apiBackendId);
-  }
-};
-
 
 Template.apiBackendForm.rendered = function () {
   // Hides blocks on template load

@@ -1,3 +1,16 @@
+Template.editApiBackend.created = function () {
+  // Get reference to current Router
+  var router = Router.current();
+
+  // Get the API Backend ID from Router
+  var apiBackendId = router.params._id;
+
+  if (apiBackendId) {
+    // Subscription to apiBackends collection
+    this.subscribe('apiBackend', apiBackendId);
+  }
+};
+
 Template.editApiBackend.helpers({
   'currentUserCanEditApi': function () {
     if (Meteor.user()) {
