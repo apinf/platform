@@ -1,7 +1,7 @@
 <template name="editApiBackend">
   <div class="api-backends-content">
     {{# if currentUserCanEditApi }}
-      {{> editApiBackendForm }}
+      {{> editApiBackendForm apiBackend=apiBackend }}
     {{ else }}
       {{> notAuthorized }}
     {{/ if }}
