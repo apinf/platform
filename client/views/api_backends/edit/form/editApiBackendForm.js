@@ -1,20 +1,3 @@
-Template.editApiBackendForm.helpers({
-  'formType': function () {
-    // Get reference to current Router
-    var router = Router.current();
-
-    // Check for '_id' parameter in route
-    if (router.params._id) {
-      // Updating existing API Backend
-      return 'update';
-    } else {
-      // Editing new API Backend
-      return 'insert';
-    }
-  }
-});
-
-
 Template.editApiBackendForm.rendered = function () {
   // Hides blocks on template load
   $('#global-request-block, #sub-url-block, #advanced-block, #advanced-rewriting-block, #documentation-block').collapse({
