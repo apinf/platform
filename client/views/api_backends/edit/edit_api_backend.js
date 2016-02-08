@@ -39,5 +39,20 @@ Template.editApiBackend.helpers({
         }
       }
     }
+  },
+  'apiBackend': function () {
+    // Get the current Router
+    var router = Router.current();
+
+    // Check router for _id parameter
+    if (router.params._id) {
+      // Get the API Backend ID
+      var apiBackendId = router.params._id;
+
+      // Get the API Backend
+      var apiBackend = ApiBackends.findOne(apiBackendId);
+
+      return apiBackend;
+    }
   }
 });
