@@ -130,6 +130,8 @@ Template.addApiBackendWizard.helpers({
 
                 if (apiUmbrellaWebResponse.http_status === 201) {
                   sAlert.success("API Backend successfully published.");
+                  // Add user to manager Role
+                  Roles.addUsersToRoles(Meteor.userId(), ['manager']);
                 } else {
                   var errors = _.values(apiUmbrellaWebResponse.errors);
 
@@ -157,12 +159,6 @@ Template.addApiBackendWizard.helpers({
           });
 
         });
-
-
-      },
-      onSuccess: function() {
-        console.log('Success');
-        Roles.addUsersToRoles(Meteor.userId(), ['manager']);
       }
     }];
 
