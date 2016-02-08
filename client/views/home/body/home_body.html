@@ -84,8 +84,7 @@
           <div class="clearfix"></div>
           <h2 class="section-heading">{{_ "section1_Heading"}}</h2>
           <p class="lead">{{_ "section1_Text"}}</p>
-          {{#if User}}
-          {{else}}
+          {{#if User}} {{else}}
           <p class="lead">{{{_ "section1_Text_Extra"}}}</p>
           {{/if}}
         </div>
@@ -119,7 +118,7 @@
           <div class="clearfix"></div>
           <h2 class="section-heading">{{_ "section3_Heading"}}</h2>
           <p class="lead">{{_ "section3_Text"}}</p>
-          <p class="lead">{{_ "section3_Text_Extra"}} <a href="https://github.com/apinf/api-umbrella-dashboard" target="_blank">Github</a>, <a href="https://twitter.com/APInf_io" target="_blank">Twitter</a> {{_ "section3_Text_Social_Text"}} <a href="https://www.facebook.com/APInf.io" target="_blank">Facebook</a> and <a href="http://community.apinf.io">Apinf Community</a>.
+          <p class="lead">{{{_ "section3_Text_Extra"}}}
           </p>
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
