@@ -27,7 +27,7 @@ Template.editApiBackend.helpers({
       if (instance.subscriptionsReady()) {
         // Get API Backend
         var apiBackend = ApiBackends.findOne(backendId);
-        console.log(apiBackend);
+
         if (apiBackend) {
           // Check if current User can edit the API Backend
           var userCanEdit = apiBackend.currentUserCanEdit();
