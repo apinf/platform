@@ -42,6 +42,18 @@
             {{> afQuickField name='elasticsearch.host'}}
           </div>
         </div>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Email settings</h3>
+                  {{> afQuickField name='email.enabled'}}
+              </div>
+              <div class="panel-body">
+                  {{#if afFieldValueIs name="email.enabled" value=true}}
+                      {{> afQuickField name='email.sitename'}}
+                      {{> afQuickField name='email.domain'}}
+                  {{/if}}
+              </div>
+          </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Mail</h3>
@@ -52,6 +64,20 @@
             {{> afQuickField name='mail.password'}}
           </div>
         </div>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Social Media</h3>
+                  {{> afQuickField name='socialMedia.enabled'}}
+              </div>
+              <div class="panel-body">
+                  {{#if afFieldValueIs name="socialMedia.enabled" value=true}}
+                      {{> afQuickField name='socialMedia.facebook.url'}}
+                      {{> afQuickField name='socialMedia.twitter.url'}}
+                      {{> afQuickField name='socialMedia.github.url'}}
+                      {{> afQuickField name='socialMedia.info.url'}}
+                  {{/if}}
+              </div>
+          </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Github</h3>

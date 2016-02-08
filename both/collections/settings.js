@@ -20,12 +20,12 @@ Schemas.SettingsSchema = new SimpleSchema({
     label: "Host",
     optional: true, // Optional must be true for custom validation
     custom: function () { // Custom validator logic
-      // get the value of apiDocumentationEditor.enabled field
-      let enabledFieldValue = this.field("apiDocumentationEditor.enabled").value;
-      // if enabled is true, host field is required
-      if (enabledFieldValue === true) {
-        return "required"; // host field is required
-      }
+        // get the value of apiDocumentationEditor.enabled field
+        let enabledFieldValue = this.field("apiDocumentationEditor.enabled").value;
+        // if enabled is true, host field is required
+        if (enabledFieldValue === true) {
+          return "required"; // host field is required
+        }
     }
   },
   apiUmbrella: {
@@ -79,6 +79,24 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'http://example.com:14002/'
     }
   },
+  email:{
+    type: Object,
+    optional:true
+  },
+  "email.enabled": {
+    type: Boolean,
+    optional:true
+  },
+  "email.sitename": {
+    type: String,
+    label: "Name of the Site",
+    optional: true
+  },
+  "email.domain": {
+    type: String,
+    label: "Domain of the site",
+    optional: true,
+  },
   mail: {
     type: Object,
     optional: true
@@ -114,6 +132,70 @@ Schemas.SettingsSchema = new SimpleSchema({
         return "required";
       }
     }
+  },
+  "socialMedia": {
+    type: Object,
+    optional:true
+  },
+  "socialMedia.enabled": {
+    type: Boolean,
+    optional:true
+  },
+  "socialMedia.facebook": {
+    type: Object,
+    optional: true,
+  },
+  "socialMedia.facebook.url": {
+    type: String,
+    label: "Facebook URL",
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true
+  },
+  "socialMedia.facebook.icon": {
+    type: String,
+    optional: true,
+  },
+  "socialMedia.twitter": {
+    type: Object,
+    optional: true,
+  },
+  "socialMedia.twitter.url": {
+    type: String,
+    label: "Twitter URL",
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true
+  },
+  "socialMedia.twitter.icon": {
+    type: String,
+    optional: true,
+  },
+  "socialMedia.github": {
+    type: Object,
+    optional: true,
+  },
+  "socialMedia.github.url": {
+    type: String,
+    label: "Github URL",
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true
+  },
+  "socialMedia.github.icon": {
+    type: String,
+    optional: true,
+  },
+  "socialMedia.info": {
+    type: Object,
+    optional: true,
+  },
+  "socialMedia.info.url": {
+    type: String,
+    label: "Info URL",
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true
+  },
+  "socialMedia.info.icon": {
+    type: String,
+    optional: true,
   },
   contactForm: {
     type: Object,
