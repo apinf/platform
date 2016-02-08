@@ -1,4 +1,4 @@
-Template.apiBackendForm.helpers({
+Template.editApiBackendForm.helpers({
   'formType': function () {
     // Get reference to current Router
     var router = Router.current();
@@ -15,7 +15,7 @@ Template.apiBackendForm.helpers({
 });
 
 
-Template.apiBackendForm.rendered = function () {
+Template.editApiBackendForm.rendered = function () {
   // Hides blocks on template load
   $('#global-request-block, #sub-url-block, #advanced-block, #advanced-rewriting-block, #documentation-block').collapse({
     hide: true
