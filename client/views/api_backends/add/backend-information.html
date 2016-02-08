@@ -1,0 +1,14 @@
+<template name="backendInformation">
+  {{#autoForm id="backend-information-form" doc=step.data schema=step.schema}}
+
+  {{>showHelp 'backend_protocol'}}
+  {{> afQuickField name="backend_protocol" options="allowed"}}
+  {{>showHelp 'backend_host'}}
+  {{> afQuickField name="backend_host"}}
+  {{>showHelp 'backend_port'}}
+  {{> afQuickField name="backend_port"}}
+
+  {{> wizardButtons}}
+
+  {{/autoForm}}
+</template>
