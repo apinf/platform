@@ -26,17 +26,6 @@ Template.apiBackendForm.helpers({
 
       return apiBackend;
     }
-  },
-  'editMode': function () {
-    // Get the current Router
-    var router = Router.current();
-
-    // Check router for _id parameter
-    if (router.params._id) {
-      return true;
-    } else {
-      return false;
-    }
   }
 });
 
