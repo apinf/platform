@@ -22,6 +22,7 @@ JsonRoutes.add("get", "api/:id/swagger.json", function (request, response, next)
   var urlPrefix = apiBackend.url_matches[0].frontend_prefix;
 
   // Updates values to custom ones
+  apiDoc.schemes = [ "https" ];
   apiDoc.host = baseUrl.hostname();
   apiDoc.basePath = urlPrefix;
 
