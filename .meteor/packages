@@ -95,3 +95,6 @@ sacha:spin
 tap:i18n-ui
 force-ssl
 kadira:dochead
+gwendall:autoform-i18n
+forwarder:autoform-wizard-iron-router
+

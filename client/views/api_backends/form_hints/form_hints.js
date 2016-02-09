@@ -11,6 +11,12 @@ var helpData = {
       placement: 'left'
     }
   },
+  'backend_port': {
+    message: TAPi18n.__('editApi_hints_backend_port'),
+    options: {
+      placement: 'left'
+    }
+  },
   'servers': {
     message: TAPi18n.__('editApi_hints_servers'),
     options: {
