@@ -1,0 +1,13 @@
+<template name="editApiBackend">
+  <div class="api-backends-content">
+    {{# if Template.subscriptionsReady }}
+      {{# if currentUserCanEditApi }}
+        {{> editApiBackendForm apiBackend=apiBackend }}
+      {{ else }}
+        {{> notAuthorized }}
+      {{/ if }}
+    {{ else }}
+      {{> spinner }}
+    {{/ if }}
+  </div>
+</template>
