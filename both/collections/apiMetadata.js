@@ -59,6 +59,9 @@ ApiMetadata.schema = new SimpleSchema({
   }
 });
 
+// Enable translations (i18n)
+ApiMetadata.schema.i18n("schemas.apiMetadata");
+
 ApiMetadata.attachSchema(ApiMetadata.schema);
 
 ApiMetadata.allow({
