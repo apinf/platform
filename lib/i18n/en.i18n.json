@@ -246,6 +246,47 @@
           "placeholder": "Enter a string to be added to each backend request"
         }
       }
+    },
+    "apiMetadata": {
+      "organization": {
+        "label": "Organization",
+        "name": {
+          "label": "Name"
+        },
+        "description": {
+          "label": "Description"
+        }
+      },
+      "contact": {
+        "label": "Contact",
+        "name": {
+          "label": "Name"
+        },
+        "phone": {
+          "label": "Phone"
+        },
+        "email": {
+          "label": "Email"
+        }
+      },
+      "service": {
+        "label": "Service",
+        "name": {
+          "label": "Name"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "validSince": {
+          "label": "Valid since"
+        },
+        "validUntil": {
+          "label": "Valid until"
+        },
+        "serviceLevelAgreement": {
+          "label": "Service Level Agreement"
+        }
+      }
     }
   }
 }
