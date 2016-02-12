@@ -98,6 +98,6 @@ ApiMetadata.allow({
 SimpleSchema.messages({
   // RegEx messages
   regEx: [
-    {exp: SimpleSchema.RegEx.Phone, msg: "Invalid phone number format."},
+    {exp: SimpleSchema.RegEx.Phone, msg: "Invalid phone number format."}
   ]
 });
