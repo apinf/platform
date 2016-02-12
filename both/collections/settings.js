@@ -155,6 +155,14 @@ Schemas.SettingsSchema = new SimpleSchema({
     autoform: {
       placeholder: 'D/M/YYYY'
     }
+  },
+  "userLocale": {
+    type: String,
+    label: "User Locale",
+    optional: true,
+    autoform: {
+      placeholder: 'en'
+    }
   }
 });
 
