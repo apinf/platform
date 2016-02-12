@@ -1,5 +1,8 @@
 ApiMetadata = new Mongo.Collection("apiMetadata");
 
+// RegEx constant
+SimpleSchema.RegEx.Phone = new RegExp(/(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*$/);
+
 ApiMetadata.schema = new SimpleSchema({
   "apiBackendId": {
     type: String,
@@ -27,11 +30,13 @@ ApiMetadata.schema = new SimpleSchema({
   },
   "contact.phone": {
     type: String,
-    optional: true
+    optional: true,
+    regEx: SimpleSchema.RegEx.Phone
   },
   "contact.email": {
     type: String,
-    optional: true
+    optional: true,
+    regEx: SimpleSchema.RegEx.Email
   },
   "service": {
     type: Object,
@@ -88,4 +93,11 @@ ApiMetadata.allow({
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();
   }
+});
+
+SimpleSchema.messages({
+  // RegEx messages
+  regEx: [
+    {exp: SimpleSchema.RegEx.Phone, msg: "Invalid phone number format."},
+  ]
 });
