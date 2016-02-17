@@ -87,11 +87,6 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: Boolean,
     optional:true
   },
-  "email.sitename": {
-    type: String,
-    label: "Name of the Site",
-    optional: true
-  },
   "email.domain": {
     type: String,
     label: "Domain of the site",
