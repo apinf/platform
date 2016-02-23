@@ -5,13 +5,12 @@ var expect = chai.expect;
 MochaWeb.testOnly(function(){
 
     describe('tests for bookmarking Apis', function() {
-        beforeEach(function(){
 
-            Meteor: sinon.stub({
-                userId: function() {
-                    return 0;
-                }
-            });
+        function helper(name) {
+            return Template.bookmarks.helpers.firstCall.args[0][name];
+        }
+
+        beforeEach(function(){
 
             ApiBookmarks: sinon.stub({
                 find: function(data) {
@@ -21,7 +20,8 @@ MochaWeb.testOnly(function(){
         });
 
         it('tests bookmarked Apis for a particular user Id', function() {
-            expect(1).to.equal(1);
+            helper('userBookmarks')();
+            expect(ApiBookmarks.find.calledOnce).toBeTruthy();
         });
     });
 });
