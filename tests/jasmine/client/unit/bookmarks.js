@@ -1,6 +1,6 @@
 describe("tests for bookmarked Apis", function() {
 
-    beforeEach(function() {
+    beforeAll(function() {
         var Meteor = {
             userId: function() {
                 return 1;
