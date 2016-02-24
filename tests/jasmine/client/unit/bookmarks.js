@@ -1,3 +1,5 @@
+'use strict';
+
 describe("tests for bookmarked Apis", function() {
 
     it("checks if the userId function of Meteor is called", function() {
