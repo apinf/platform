@@ -93,5 +93,6 @@ ecmascript
 simple:reactive-method
 sacha:spin
 tap:i18n-ui
-mike:mocha
 practicalmeteor:sinon
+sanjo:jasmine
+velocity:html-reporter

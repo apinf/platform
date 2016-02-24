@@ -120,8 +120,6 @@ meteorhacks:npm@1.5.0
 meteorhacks:subs-manager@1.6.3
 meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
-mike:mocha@0.6.6
-mike:mocha-core@0.1.0
 minifiers@1.1.7
 minimongo@1.0.10
 mizzao:sharejs@0.7.5
@@ -164,8 +162,10 @@ retry@1.0.4
 reywood:publish-composite@1.4.2
 routepolicy@1.0.6
 sacha:spin@2.3.1
+sanjo:jasmine@0.21.0
+sanjo:karma@3.1.1
 sanjo:long-running-child-process@1.1.5
-sanjo:meteor-files-helpers@1.1.0_7
+sanjo:meteor-files-helpers@1.2.0_1
 sanjo:meteor-version@1.0.0
 service-configuration@1.0.5
 session@1.1.1
@@ -200,6 +200,7 @@ velocity:chokidar@1.2.0_1
 velocity:core@0.10.10
 velocity:html-reporter@0.9.1
 velocity:meteor-internals@1.1.0_7
+velocity:meteor-stubs@1.1.1
 velocity:shim@0.1.0
 webapp@1.2.3
 webapp-hashing@1.0.5
