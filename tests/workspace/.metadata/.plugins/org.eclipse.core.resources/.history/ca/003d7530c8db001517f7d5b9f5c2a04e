@@ -1,0 +1,7 @@
+package testpack;
+
+import junit.framework.TestCase;
+
+public class TestCase3 extends TestCase {
+
+}

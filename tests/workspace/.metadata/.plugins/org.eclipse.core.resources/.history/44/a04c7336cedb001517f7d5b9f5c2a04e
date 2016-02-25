@@ -1,0 +1,38 @@
+package testpack;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import junit.framework.TestCase;
+
+public class SearchTests extends TestCase {
+
+	/*private WebDriver driver;
+	
+	@BeforeClass
+	public void setUp() throws Exception {
+		driver = new FirefoxDriver();
+		driver.get("https://nightly.apinf.io/");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}*/
+	
+	@Test
+	public void testSearchButtonOnHomePage() {
+		DiporeTestSuite.driver.findElement(By.xpath("//span[@class='search-button']")).click();
+		WebElement element = DiporeTestSuite.driver.findElement(By.xpath("//h1[text() = 'Search APIs']"));
+		assertTrue(element.isDisplayed());
+	}
+	
+	/*@Test
+	public void testSearchForNonExistentAPI() {
+		driver.findElement(By.xpath("//input[@id='search-text']")).sendKeys("12344652743928yrkjbe");
+	    String bodyText = driver.findElement(By.tagName("body")).getText();
+	    assertTrue("'Nothing found' not shown!", bodyText.contains("Nothing found."));
+	}*/
+	
+	/*@AfterClass
+	public void tearDown() throws Exception {
+		driver.quit();
+	}*/
+}

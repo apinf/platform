@@ -1,0 +1,14 @@
+package testpack;
+
+import org.junit.Test;
+
+import junit.framework.TestCase;
+
+public class SearchNonExistentApi extends TestCase{
+	
+	@Test
+	public void testSearchResultForNonExistentApi() {
+		
+	}
+
+}
