@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="DiporeTestSuite" project="DiporeFunctionalTests" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="Dipore tests" time="8.463">
+    <testsuite name="testpack.SearchTests" time="8.463">
+      <testcase name="testSearchButtonOnHomePage" classname="testpack.SearchTests" time="8.463"/>
+    </testsuite>
+  </testsuite>
+</testrun>

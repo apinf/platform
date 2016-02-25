@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="DiporeTestSuite" project="DiporeFunctionalTests" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="testpack.DiporeTestSuite" time="3.983">
+    <testsuite name="testpack.SearchButtonTest" time="2.46">
+      <testcase name="testSearchButtonOnHomePage" classname="testpack.SearchButtonTest" time="2.46"/>
+    </testsuite>
+    <testsuite name="testpack.SearchNonExistentApi" time="1.523">
+      <testcase name="testSearchResultForNonExistentApi" classname="testpack.SearchNonExistentApi" time="1.523"/>
+    </testsuite>
+  </testsuite>
+</testrun>

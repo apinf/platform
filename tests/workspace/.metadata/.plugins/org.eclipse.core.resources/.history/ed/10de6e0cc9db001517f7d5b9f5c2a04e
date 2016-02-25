@@ -1,0 +1,42 @@
+package testpack;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import junit.framework.TestCase;
+
+public class SearchTests extends TestCase {
+
+	private WebDriver driver;
+	
+	@BeforeClass
+	public void setUp() throws Exception {
+		driver = new FirefoxDriver();
+		driver.get("https://nightly.apinf.io/");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+	
+	@Test
+	public void testSearchButtonOnHomePage() {
+		driver.findElement(By.xpath("//span[@class='search-button']")).click();
+		WebElement element = driver.findElement(By.xpath("//h1[text() = 'Search APIs']"));
+		assertTrue(element.isDisplayed());
+	}
+	
+	public void testSearchForNonExistentAPI() {
+		
+	}
+	
+	@AfterClass
+	public void tearDown() throws Exception {
+		driver.quit();
+	}
+}
