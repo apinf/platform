@@ -204,6 +204,7 @@ velocity:meteor-stubs@1.1.1
 velocity:shim@0.1.0
 webapp@1.2.3
 webapp-hashing@1.0.5
+xolvio:template-isolator@0.1.0
 yogiben:autoform-file@0.3.0
 yogiben:autoform-map@0.2.0
 yogiben:autoform-modals@0.3.8
