@@ -6,7 +6,7 @@ Suite Teardown    Close All Browsers
 *** Variables ***
 ${BROWSER}    firefox
 ${HOMEPAGE}    https://nightly.apinf.io/
-${EXISTING-API}    Google Search
+${EXISTING-API}    Test API
 
 *** Test Cases ***
 Test Search button functionality
