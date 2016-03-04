@@ -97,3 +97,9 @@ practicalmeteor:sinon
 sanjo:jasmine
 velocity:html-reporter
 xolvio:template-isolator
+cosmos:browserify
+es5-shim
+force-ssl
+forwarder:autoform-wizard-iron-router
+gwendall:autoform-i18n
+kadira:dochead
