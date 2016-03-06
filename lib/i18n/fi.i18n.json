@@ -109,6 +109,7 @@
   "view_ApiBackend_Metadata_Service_serviceLevelAgreement": "Service level agreement",
   "apiBackends_Add_API_Title": "Lisää rajapinta",
   "apiBackends_Edit_API_Title": "Muokkaa rajapintaa",
+  "apiBackends_Delete_API_Title": "FI: Delete API",
   "apiBackends_Title_Help": "Rajapinnan nimi",
   "apiBackends_Backend_Title": "Taustajärjestelmä",
   "apiBackends_Backend_Help": "Määritä API:n palvelin. Voit antaa useamman palvelimen tiedot hyödyntääksesi kuormantasausta.",

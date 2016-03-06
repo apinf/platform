@@ -109,6 +109,7 @@
   "apiBackend_Usage_Instructions_Profile_Page_Link": "View profile.",
   "apiBackends_Add_API_Title": "Add API",
   "apiBackends_Edit_API_Title": "Edit API",
+  "apiBackends_Delete_API_Title": "Delete API",
   "apiBackends_Title_Help": "API's name",
   "apiBackends_Backend_Title": "Backend",
   "apiBackends_Backend_Help": "Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.",
