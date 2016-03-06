@@ -79,6 +79,7 @@
   "manage_ApiBackends_Frontend": "Frontend:",
   "manage_ApiBackends_View": "View",
   "manage_ApiBackends_Edit": "Edit",
+  "manage_ApiBackends_Delete": "Delete",
   "apiBackend_Status_Title": "Status",
   "apiBackend_Status_Updated": "Updated:",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",

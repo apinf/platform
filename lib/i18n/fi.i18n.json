@@ -83,6 +83,7 @@
   "manage_ApiBackends_Frontend": "Frontend:",
   "manage_ApiBackends_View": "Tarkastele",
   "manage_ApiBackends_Edit": "Muokkaa",
+  "manage_ApiBackends_Delete": "FI: Delete",
   "apiBackend_Status_Title": "Tila",
   "apiBackend_Status_Updated": "Päivitetty:",
   "apiBackend_Status_Checking": "API:n tilaa tarkistetaan. Odota hetki...",
