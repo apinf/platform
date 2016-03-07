@@ -20,7 +20,6 @@ Template.deleteApiBackend.helpers({
 
       // get reference to current template
       let instance = Template.instance();
-
       // get reference to current router
       let router = Router.current();
       
@@ -37,6 +36,7 @@ Template.deleteApiBackend.helpers({
 
         if (userCanDelete) {
           // user is authorized to delete
+          alert(userCanDelete);
           return true;
         }
       }
