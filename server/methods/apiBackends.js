@@ -85,5 +85,25 @@ Meteor.methods({
       apiUmbrellaWebResponse.http_status = 422;
     }
     return apiUmbrellaWebResponse;
-  }
+  },
+
+  removeApiBackendOnApiUmbrella: function (backendId) {
+
+    // Response object to be send back to client layer.
+    var apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 200,
+      errors: {}
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.removeApiBackend(backendId);
+    } catch (apiUmbrellaError) {
+      // Set the errors object
+      apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
+  }  
 });
