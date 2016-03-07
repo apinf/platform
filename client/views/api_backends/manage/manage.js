@@ -19,3 +19,12 @@ Template.manageApiBackends.helpers({
     return managedApis;
   }
 });
+
+Template.manageApiBackends.events({
+  "click #deleteModal": function() {
+    var apiBackendId = this._id;
+    Modal.show('deleteApiBackendConfirmation', function() {
+        return ApiBackends.findOne(apiBackendId);
+    });
+  }
+});
