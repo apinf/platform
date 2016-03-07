@@ -1,0 +1,20 @@
+<template name="deleteApiBackendConfirmation">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">{{_ "apiBackends_Delete_API_Title"}}</h3>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete {{ apiBackend }}? </p>
+          <p><span class="text-danger">NOTE: </span> This action cannot be undone!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="deleteApi">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
