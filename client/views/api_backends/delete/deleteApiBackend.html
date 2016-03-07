@@ -1,11 +1,13 @@
 <template name="deleteApiBackend">
-  {{# if Template.subscriptionsReady }}
-    {{# if currentUserCanDeleteApi }}
-      {{> deleteApiBackendConfirmation apiBackend=apiBackend }}
+  <div class="api-backends-content">
+    {{# if Template.subscriptionsReady }}
+      {{# if currentUserCanDeleteApi }}
+        {{> deleteApiBackendConfirmation apiBackend=apiBackend }}
+      {{ else }}
+        {{> notAuthorized }}
+      {{/ if }}
     {{ else }}
-      {{> notAuthorized }}
-    {{/ if}}
-  {{> else }}
-    {{> spinner }}
-  {{/ if}}
+      {{> spinner }}
+    {{/ if }}
+  </div>
 </template>

@@ -36,7 +36,7 @@ Template.deleteApiBackend.helpers({
 
         if (userCanDelete) {
           // user is authorized to delete
-          alert(userCanDelete);
+          //alert(userCanDelete);
           return true;
         }
       }
