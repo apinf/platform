@@ -97,8 +97,8 @@ Meteor.methods({
     };
 
     try {
-      // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.removeApiBackend(backendId);
+      // Send the API Backend to API Umbrella's endpoint for deletion in the backend
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.deleteApiBackend(backendId);
     } catch (apiUmbrellaError) {
       // Set the errors object
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
