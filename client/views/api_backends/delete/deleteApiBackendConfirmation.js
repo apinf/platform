@@ -18,9 +18,9 @@ Template.deleteApiBackendConfirmation.events({
       ApiDocs.remove({apiBackendId: apiBackendId});
     }); 
 
-    Meteor.call('removeApiBackendOnApiUmbrella', function(error, apiUmbrellaWebResponse) {
+    Meteor.call('removeApiBackendOnApiUmbrella', apiBackendId, function(error, apiUmbrellaWebResponse) {
 
-      //alert(apiUmbrellaWebResponse.errors.default);
+      alert(apiUmbrellaWebResponse.errors.default);
 
       if (apiUmbrellaWebResponse.http_status === 200) {
         $('#confirmDelete').hide(function() {
