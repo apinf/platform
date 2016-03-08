@@ -8,6 +8,13 @@ Template.deleteApiBackendConfirmation.helpers({
 Template.deleteApiBackendConfirmation.events({
   'click #deleteApi': function() {
     const apiBackendId = Session.get("apiBackendId");
+    /*const apiBackendDoc = ApiBackends.findOne(Session.get("apiBackendId"));
+    ApiBackends.after.remove(function(Meteor.user()._id, apiBackendDoc) {
+      ApiBacklogItems.remove({apiBackendId: apiBackendId});
+      Feedback.remove({apiBackendId: apiBackendId});
+      ApiMetadata.remove({apiBackendId: apiBackendId});
+      
+    });*/ 
     ApiBackends.remove(apiBackendId);
     Meteor.call('removeApiBackendOnApiUmbrella', function(error, apiUmbrellaWebResponse) {
 
