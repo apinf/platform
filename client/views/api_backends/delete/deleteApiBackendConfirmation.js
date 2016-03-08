@@ -8,14 +8,16 @@ Template.deleteApiBackendConfirmation.helpers({
 Template.deleteApiBackendConfirmation.events({
   'click #deleteApi': function() {
     const apiBackendId = Session.get("apiBackendId");
-    /*const apiBackendDoc = ApiBackends.findOne(Session.get("apiBackendId"));
-    ApiBackends.after.remove(function(Meteor.user()._id, apiBackendDoc) {
-      ApiBacklogItems.remove({apiBackendId: apiBackendId});
+    const apiBackendDoc = ApiBackends.findOne(Session.get("apiBackendId"));
+    const userId = Meteor.user()._id;
+
+    ApiBackends.after.remove(function(userId, apiBackendDoc) {
+      ApiBacklogItems.remove({apiBackendId:apiBackendDoc._id});
       Feedback.remove({apiBackendId: apiBackendId});
       ApiMetadata.remove({apiBackendId: apiBackendId});
-      
-    });*/ 
-    ApiBackends.remove(apiBackendId);
+      ApiDocs.remove({apiBackendId: apiBackendId});
+    }); 
+
     Meteor.call('removeApiBackendOnApiUmbrella', function(error, apiUmbrellaWebResponse) {
 
       //alert(apiUmbrellaWebResponse.errors.default);
@@ -32,6 +34,11 @@ Template.deleteApiBackendConfirmation.events({
   },
 
   'click #closeModal': function() {
-    Router.go('catalogue');
+    const str = Router.current().location.get().path();
+    if (str.search('api') >= 0) {
+      Router.go('catalogue');
+    } else if (str.search('manage') >= 0) {
+      Router.go('manageApiBackends');
+    }
   }
 });

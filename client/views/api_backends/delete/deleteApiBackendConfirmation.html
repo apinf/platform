@@ -8,11 +8,11 @@
         </div>
         <div class="modal-body">
           <div id="confirmDelete">
-            <p>Are you sure you want to delete {{ apiBackend }}? </p>
-            <p><span class="text-danger">NOTE: </span> This action cannot be undone!</p>
+            <p>{{_ "delete_Message"}} {{ apiBackend }}? </p>
+            <p><span class="text-danger">{{_ "delete_Note"}} </span> {{_ "deleteInfo_Modal"}} </p>
           </div>
           <div id="successDelete" class="hide">
-            <p>{{ apiBackend }} was successfully deleted!</p>
+            <p>{{ apiBackend }} {{_ "delete_Success"}}</p>
           </div>
         </div>
         <div class="modal-footer">
