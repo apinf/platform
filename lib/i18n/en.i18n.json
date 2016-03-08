@@ -184,6 +184,7 @@
   "view_ApiBackend_Details_Title": "Details",
   "view_ApiBackend_Details_editButtonText": "Edit API Settings",
   "view_ApiBackend_Details_deleteButtonText":"Delete",
+  "view_ApiBackend_Details_cancelButtonText":"Cancel",
   "view_ApiBackend_Export_Title": "Export",
   "apiBacklog_mainTitle": "Backlog",
   "apiBacklogForm_addBacklogItem_button": "Add backlog item",

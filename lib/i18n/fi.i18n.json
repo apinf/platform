@@ -184,6 +184,7 @@
   "view_ApiBackend_Details_Title": "Tiedot",
   "view_ApiBackend_Details_editButtonText": "Muokkaa rajapinnan asetuksia",
   "view_ApiBackend_Details_deleteButtonText":"FI: Delete",
+  "view_ApiBackend_Details_cancelButtonText":"FI: Cancel",
   "view_ApiBackend_Export_Title": "Vie",
   "apiBacklog_mainTitle": "Tehtävälista",
   "apiBacklogForm_addBacklogItem_button": "Lisää uusi tehtävä",
