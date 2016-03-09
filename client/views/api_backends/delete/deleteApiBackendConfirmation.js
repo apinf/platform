@@ -11,18 +11,20 @@ Template.deleteApiBackendConfirmation.events({
     const apiBackendDoc = ApiBackends.findOne(Session.get("apiBackendId"));
     const userId = Meteor.user()._id;
 
+    ApiBackends.remove(apiBackendId);
+
     ApiBackends.after.remove(function(userId, apiBackendDoc) {
       ApiBacklogItems.remove({apiBackendId:apiBackendDoc._id});
       Feedback.remove({apiBackendId: apiBackendId});
       ApiMetadata.remove({apiBackendId: apiBackendId});
       ApiDocs.remove({apiBackendId: apiBackendId});
-    }); 
+    });
 
-    Meteor.call('removeApiBackendOnApiUmbrella', apiBackendId, function(error, apiUmbrellaWebResponse) {
-
+    Meteor.call('deleteApiBackendOnApiUmbrella', apiBackendId, function(error, apiUmbrellaWebResponse) {
+    
       alert(apiUmbrellaWebResponse.errors.default);
 
-      if (apiUmbrellaWebResponse.http_status === 200) {
+      if (apiUmbrellaWebResponse.http_status === 204) {
         $('#confirmDelete').hide(function() {
           $('#successDelete').removeClass('hide');
         });

@@ -87,12 +87,12 @@ Meteor.methods({
     return apiUmbrellaWebResponse;
   },
 
-  removeApiBackendOnApiUmbrella: function (backendId) {
+  deleteApiBackendOnApiUmbrella: function (backendId) {
 
     // Response object to be send back to client layer.
     var apiUmbrellaWebResponse = {
       result: {},
-      http_status: 200,
+      http_status: 204,
       errors: {}
     };
 
