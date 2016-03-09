@@ -87,7 +87,7 @@ Meteor.methods({
     return apiUmbrellaWebResponse;
   },
 
-  deleteApiBackendOnApiUmbrella: function (backendId) {
+  deleteApiBackendOnApiUmbrella: function (apiUmbrellaApiId) {
 
     // Response object to be send back to client layer.
     var apiUmbrellaWebResponse = {
@@ -98,7 +98,10 @@ Meteor.methods({
 
     try {
       // Send the API Backend to API Umbrella's endpoint for deletion in the backend
-      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.deleteApiBackend(backendId);
+      console.log("RECEIVED: " + apiUmbrellaApiId);
+      //apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.apiBackends.deleteApiBackend(apiUmbrellaApiId);
+      apiUmbrellaWebResponse.result = apiUmbrellaWeb.adminApi.v1.config.publishSingleApiBackend(apiUmbrellaApiId);
+      console.log("RESULT: " + apiUmbrellaWebResponse.result);
     } catch (apiUmbrellaError) {
       // Set the errors object
       apiUmbrellaWebResponse.errors = {'default': [apiUmbrellaError.message]};
