@@ -14,6 +14,9 @@
           <div id="successDelete" class="hide">
             <p>{{ apiBackend }} {{_ "delete_Success"}}</p>
           </div>
+          <div id="failureDelete" class="hide">
+            <p><span class="text-danger">{{_ "delete_Error"}}</span> {{ apiBackend }} {{_ "delete_Failure"}} </p>
+          </div>
         </div>
         <div class="modal-footer">
           <div id="confirmFooter">
@@ -22,6 +25,9 @@
           </div>
           <div id="successFooter" class="hide">
             <button type="button" class="btn btn-primary" id="closeModal">{{_ "close"}}</button>
+          </div>
+          <div id="failureFooter" class="hide">
+            <button type="button" class="btn btn-primary" id="returnfromModal" data-dismiss="modal">{{_ "return_ParentPage"}}</button>
           </div>
         </div>
       </div>
