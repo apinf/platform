@@ -7,22 +7,14 @@ Template.deleteApiBackendConfirmation.helpers({
 
 Template.deleteApiBackendConfirmation.events({
   'click #deleteApi': function() {
-    const apiBackendId = Session.get("apiBackendId");
     const apiBackendDoc = ApiBackends.findOne(Session.get("apiBackendId"));
+    const apiUmbrellaApiId = apiBackendDoc.id;
     const userId = Meteor.user()._id;
 
-    ApiBackends.remove(apiBackendId);
+    const documentId = apiBackendDoc._id;
+    Meteor.call('removeApiBackend', userId, apiBackendDoc);
 
-    ApiBackends.after.remove(function(userId, apiBackendDoc) {
-      ApiBacklogItems.remove({apiBackendId:apiBackendDoc._id});
-      Feedback.remove({apiBackendId: apiBackendId});
-      ApiMetadata.remove({apiBackendId: apiBackendId});
-      ApiDocs.remove({apiBackendId: apiBackendId});
-    });
-
-    Meteor.call('deleteApiBackendOnApiUmbrella', apiBackendId, function(error, apiUmbrellaWebResponse) {
-    
-      alert(apiUmbrellaWebResponse.errors.default);
+    Meteor.call('deleteApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
 
       if (apiUmbrellaWebResponse.http_status === 204) {
         $('#confirmDelete').hide(function() {
@@ -31,16 +23,29 @@ Template.deleteApiBackendConfirmation.events({
         $('#confirmFooter').hide(function() {
           $('#successFooter').removeClass('hide');
         });
+      } else {
+        $('#confirmDelete').hide(function() {
+          $('#failureDelete').removeClass('hide');
+        });
+        $('#confirmFooter').hide(function() {
+          $('#failureFooter').removeClass('hide');
+        });
       }
     });
   },
 
   'click #closeModal': function() {
-    const str = Router.current().location.get().path();
-    if (str.search('api') >= 0) {
+    var currentRoute = Router.current().route.getName();
+    
+    // based on name of current route, load page upon modal closure
+    if (currentRoute === 'manageApiBackends') {
+      Modal.hide();
+    } else if (currentRoute === 'viewApiBackend') {
+      Modal.hide();
       Router.go('catalogue');
-    } else if (str.search('manage') >= 0) {
-      Router.go('manageApiBackends');
     }
   }
 });
+
+
+
