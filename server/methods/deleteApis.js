@@ -1,13 +1,12 @@
 Meteor.methods({
-
-  "removeApiBackend": function(userId, doc) {
-    console.log("TEST");
-    ApiBackends.after.remove(function(userId, doc) {
-      ApiBacklogItems.remove({apiBackendId:doc._id});
-      Feedback.remove({apiBackendId: doc._id});
-      ApiMetadata.remove({apiBackendId: doc._id});
-      ApiDocs.remove({apiBackendId: doc._id});
-    });
-    console.log("DONE");
+  // remove document and its references in ApiBackends, ApiBacklogItems, 
+  // Feedback, ApiMetadata and ApiDocs collections
+  "removeApiBackend": function(apiBackendId) {
+    ApiBackends.remove(apiBackendId);
+    ApiBacklogItems.remove({"apiBackendId": apiBackendId});
+    Feedback.remove({"apiBackendId": apiBackendId});
+    ApiMetadata.remove({"apiBackendId": apiBackendId});
+    ApiDocs.remove(apiBackendId);
   }
+
 });
