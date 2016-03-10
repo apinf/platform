@@ -85,7 +85,6 @@
   "delete_Success": "was successfully deleted!", 
   "delete_Error": "Error:",
   "delete_Failure": "could not be deleted!",
-  "return_ParentPage": "Close", 
   "apiBackend_Status_Title": "Status",
   "apiBackend_Status_Updated": "Updated:",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",

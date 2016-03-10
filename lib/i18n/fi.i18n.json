@@ -89,7 +89,6 @@
   "delete_Success": "FI: was successfully deleted!",
   "delete_Error": "FI: Error:",
   "delete_Failure": "FI: could not be deleted!",
-  "return_ParentPage": "FI: Close", 
   "apiBackend_Status_Title": "Tila",
   "apiBackend_Status_Updated": "Päivitetty:",
   "apiBackend_Status_Checking": "API:n tilaa tarkistetaan. Odota hetki...",
