@@ -11,6 +11,9 @@
             <p>{{_ "delete_Message"}} {{ apiBackend }}? </p>
             <p><span class="text-danger">{{_ "delete_Note"}} </span> {{_ "deleteInfo_Modal"}} </p>
           </div>
+          {{#if restCallStarted }}
+            {{> spinner}}
+          {{/if}}
           <div id="successDelete" class="hide">
             <p>{{ savedBackendName }} {{_ "delete_Success"}}</p>
           </div>
@@ -23,11 +26,8 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "view_ApiBackend_Details_cancelButtonText"}}</button>
             <button type="button" class="btn btn-danger" id="deleteApi">{{_ "view_ApiBackend_Details_deleteButtonText"}}</button>
           </div>
-          <div id="successFooter" class="hide">
-            <button type="button" class="btn btn-primary" id="closeModal">{{_ "close"}}</button>
-          </div>
-          <div id="failureFooter" class="hide">
-            <button type="button" class="btn btn-primary" id="returnfromModal" data-dismiss="modal">{{_ "return_ParentPage"}}</button>
+          <div id="doneFooter" class="hide">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">{{_ "close"}}</button>
           </div>
         </div>
       </div>

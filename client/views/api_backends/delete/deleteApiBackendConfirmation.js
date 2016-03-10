@@ -11,8 +11,11 @@ Template.deleteApiBackendConfirmation.helpers({
   // used even after the backend has been deleted.
   'savedBackendName': function() {
     return Session.get('apiBackendName');
-  }
+  },
 
+  'restCallStarted': function() {
+    return Session.get('restCallStarted');
+  }
 });
 
 Template.deleteApiBackendConfirmation.events({
@@ -21,7 +24,11 @@ Template.deleteApiBackendConfirmation.events({
     const apiUmbrellaApiId = apiBackendDoc.id;
     const apiBackendId = Session.get("apiBackendId");
 
-    //Meteor.call('removeApiBackend', apiBackendId);
+    // Disable delete button to prevent multiple clicks
+    $('#deleteApi').prop("disabled", true);
+
+    // REST call started, start spinner
+    Session.set('restCallStarted', true);
 
     // REST call to Admin API for deletion from Umbrella
     Meteor.call('deleteApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
@@ -34,9 +41,7 @@ Template.deleteApiBackendConfirmation.events({
         $('#confirmDelete').hide(function() {
           $('#successDelete').removeClass('hide');
         });
-        $('#confirmFooter').hide(function() {
-          $('#successFooter').removeClass('hide');
-        });
+
         // based on name of current route, load suitable parent page
         var currentRoute = Router.current().route.getName();
 
@@ -50,16 +55,13 @@ Template.deleteApiBackendConfirmation.events({
         $('#confirmDelete').hide(function() {
           $('#failureDelete').removeClass('hide');
         });
-        $('#confirmFooter').hide(function() {
-          $('#failureFooter').removeClass('hide');
-        });
       }
-
+      // REST call ended, stop spinner
+      Session.set('restCallStarted', false);
+      $('#confirmFooter').hide(function() {
+        $('#doneFooter').removeClass('hide');
+      });
     });
-  },
-
-  'click #closeModal': function() {
-    Modal.hide();
   }
 });
 
