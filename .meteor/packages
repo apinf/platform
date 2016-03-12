@@ -93,8 +93,13 @@ ecmascript
 simple:reactive-method
 sacha:spin
 tap:i18n-ui
+practicalmeteor:sinon
+sanjo:jasmine
+velocity:html-reporter
+xolvio:template-isolator
+cosmos:browserify
+es5-shim
 force-ssl
-kadira:dochead
-gwendall:autoform-i18n
 forwarder:autoform-wizard-iron-router
-
+gwendall:autoform-i18n
+kadira:dochead
