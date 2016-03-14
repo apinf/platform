@@ -14,20 +14,11 @@
           {{#if restCallStarted }}
             {{> spinner}}
           {{/if}}
-          <div id="successDelete" class="hide">
-            <p>{{ savedBackendName }} {{_ "deleteApiBackendConfirmation_successMessage"}}</p>
-          </div>
-          <div id="failureDelete" class="hide">
-            <p><span class="text-danger">{{_ "deleteApiBackendConfirmation_errorMessage"}}</span> {{ savedBackendName }} {{_ "deleteApiBackendConfirmation_failureMessage"}} </p>
-          </div>
         </div>
         <div class="modal-footer">
           <div id="confirmFooter">
             <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "deleteApiBackendConfirmation_CancelButton"}}</button>
             <button type="button" class="btn btn-danger" id="deleteApi">{{_ "deleteApiBackendConfirmation_deleteButton"}}</button>
-          </div>
-          <div id="doneFooter" class="hide">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">{{_ "deleteApiBackendConfirmation_closeButton"}}</button>
           </div>
         </div>
       </div>

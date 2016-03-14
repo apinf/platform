@@ -41,12 +41,8 @@ Template.deleteApiBackendConfirmation.events({
       if (apiUmbrellaWebResponse.http_status === 204) {
 
         // call method to remove API backend from collections
-        Meteor.call('removeApiBackend', apiBackendId);
-
-        $('#confirmDelete').hide(function() {
-          $('#successDelete').removeClass('hide');
-        });
-
+        Meteor.call('removeApiBackend', apiBackendId);        
+        
         // based on name of current route, load suitable parent page
         var currentRoute = Router.current().route.getName();
 
@@ -55,19 +51,16 @@ Template.deleteApiBackendConfirmation.events({
         } else if (currentRoute === 'manageApiBackends') {
           Router.go('manageApiBackends');
         }
+        sAlert.success(instance.backendName + " was successfully deleted!");
 
       } else {
-        $('#confirmDelete').hide(function() {
-          $('#failureDelete').removeClass('hide');
-        });
+        sAlert.error(instance.backendName + " could not be deleted!");
       }
+      Modal.hide();
 
       // REST call ended, stop spinner
       instance.restCallStarted.set(false);
 
-      $('#confirmFooter').hide(function() {
-        $('#doneFooter').removeClass('hide');
-      });
     });
   }
 });
