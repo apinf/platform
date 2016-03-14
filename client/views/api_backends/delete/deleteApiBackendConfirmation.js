@@ -1,34 +1,39 @@
+Template.deleteApiBackendConfirmation.onCreated(function() {
+  // reference to this template
+  const instance = this;
+
+  // instance variables
+  instance.backendId = instance.data._id;
+  instance.backendName = instance.data.name;
+  instance.restCallStarted = new ReactiveVar(false);
+});
+
+
+
 Template.deleteApiBackendConfirmation.helpers({
-  // save the API backend name and ID in session variables
-  'apiBackend': function() {
-    Session.set('apiBackendId', this._id);
-    const apiBackendName = ApiBackends.findOne(this._id).name;
-    Session.set('apiBackendName', apiBackendName);
-    return apiBackendName;
-  },
-  // return saved API name to be displayed in success/error message.
-  // The API backend name is saved separately so that it can be 
-  // used even after the backend has been deleted.
   'savedBackendName': function() {
-    return Session.get('apiBackendName');
+
+    const instance = Template.instance();
+    return instance.backendName;
   },
 
   'restCallStarted': function() {
-    return Session.get('restCallStarted');
+    const instance = Template.instance();
+    return instance.restCallStarted.get();
   }
 });
 
 Template.deleteApiBackendConfirmation.events({
   'click #deleteApi': function() {
-    const apiBackendDoc = ApiBackends.findOne(Session.get("apiBackendId"));
+    const instance = Template.instance();
+    const apiBackendDoc = ApiBackends.findOne(instance.backendId);
     const apiUmbrellaApiId = apiBackendDoc.id;
-    const apiBackendId = Session.get("apiBackendId");
 
     // Disable delete button to prevent multiple clicks
     $('#deleteApi').prop("disabled", true);
 
-    // REST call started, start spinner
-    Session.set('restCallStarted', true);
+    // start spinner when calling API
+    instance.restCallStarted.set(true);
 
     // REST call to Admin API for deletion from Umbrella
     Meteor.call('deleteApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
@@ -56,8 +61,10 @@ Template.deleteApiBackendConfirmation.events({
           $('#failureDelete').removeClass('hide');
         });
       }
+
       // REST call ended, stop spinner
-      Session.set('restCallStarted', false);
+      instance.restCallStarted.set(false);
+
       $('#confirmFooter').hide(function() {
         $('#doneFooter').removeClass('hide');
       });

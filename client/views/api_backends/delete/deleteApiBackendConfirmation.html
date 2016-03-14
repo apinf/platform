@@ -4,30 +4,30 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">{{_ "apiBackends_Delete_API_Title"}}</h3>
+          <h3 class="modal-title">{{_ "deleteApiBackendConfirmation_header"}}</h3>
         </div>
         <div class="modal-body">
           <div id="confirmDelete">
-            <p>{{_ "delete_Message"}} {{ apiBackend }}? </p>
-            <p><span class="text-danger">{{_ "delete_Note"}} </span> {{_ "deleteInfo_Modal"}} </p>
+            <p>{{_ "deleteApiBackendConfirmation_confirmDeleteMessage"}} {{ savedBackendName }}? </p>
+            <p><span class="text-danger">{{_ "deleteApiBackendConfirmation_confirmDeleteNote"}} </span> {{_ "deleteInfo_Modal"}} </p>
           </div>
           {{#if restCallStarted }}
             {{> spinner}}
           {{/if}}
           <div id="successDelete" class="hide">
-            <p>{{ savedBackendName }} {{_ "delete_Success"}}</p>
+            <p>{{ savedBackendName }} {{_ "deleteApiBackendConfirmation_successMessage"}}</p>
           </div>
           <div id="failureDelete" class="hide">
-            <p><span class="text-danger">{{_ "delete_Error"}}</span> {{ savedBackendName }} {{_ "delete_Failure"}} </p>
+            <p><span class="text-danger">{{_ "deleteApiBackendConfirmation_errorMessage"}}</span> {{ savedBackendName }} {{_ "deleteApiBackendConfirmation_failureMessage"}} </p>
           </div>
         </div>
         <div class="modal-footer">
           <div id="confirmFooter">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "view_ApiBackend_Details_cancelButtonText"}}</button>
-            <button type="button" class="btn btn-danger" id="deleteApi">{{_ "view_ApiBackend_Details_deleteButtonText"}}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "deleteApiBackendConfirmation_CancelButton"}}</button>
+            <button type="button" class="btn btn-danger" id="deleteApi">{{_ "deleteApiBackendConfirmation_deleteButton"}}</button>
           </div>
           <div id="doneFooter" class="hide">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">{{_ "close"}}</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">{{_ "deleteApiBackendConfirmation_closeButton"}}</button>
           </div>
         </div>
       </div>
