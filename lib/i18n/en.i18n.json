@@ -189,7 +189,7 @@
   "deleteApiBackendConfirmation_CancelButton":"Cancel",
   "deleteApiBackendConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
   "view_ApiBackend_Export_Title": "Export",
-  "deleteInfo_Modal": "This action cannot be undone! The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
+  "deleteApiBackendConfirmation_confirmDeleteInformation": "This action cannot be undone! The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "apiBacklog_mainTitle": "Backlog",
   "apiBacklogForm_addBacklogItem_button": "Add backlog item",
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
