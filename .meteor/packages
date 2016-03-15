@@ -55,7 +55,6 @@ cfs:filesystem
 dapearce:material-icons
 mrt:flash-messages
 frenchbread:dynatable
-brylie:api-umbrella
 bevanhunt:leaflet
 brylie:leaflet-heat
 pfafman:filesaver
@@ -98,3 +97,4 @@ kadira:dochead
 gwendall:autoform-i18n
 forwarder:autoform-wizard-iron-router
 
+apinf:api-umbrella
