@@ -44,14 +44,24 @@ Template.deleteApiBackendConfirmation.events({
         Meteor.call('removeApiBackend', instance.backendId);        
         
         // based on name of current route, load suitable parent page
-        var currentRoute = Router.current().route.getName();
+        const currentRoute = Router.current().route.getName();
 
-        if (currentRoute === 'viewApiBackend') {
-          Router.go('catalogue');
-        } else if (currentRoute === 'manageApiBackends') {
-          Router.go('manageApiBackends');
+        switch(currentRoute) {
+
+          case 'viewApiBackend':
+            Router.go('catalogue');
+            sAlert.success(instance.backendName + " was successfully deleted!");
+            break;
+
+          case 'manageApiBackends':
+            Router.go('manageApiBackends');
+            sAlert.success(instance.backendName + " was successfully deleted!");
+            break;
+ 
+          default:
+            break;
+
         }
-        sAlert.success(instance.backendName + " was successfully deleted!");
 
       } else {
         sAlert.error(instance.backendName + " could not be deleted!");
