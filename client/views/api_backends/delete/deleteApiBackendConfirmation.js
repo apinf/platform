@@ -28,7 +28,7 @@ Template.deleteApiBackendConfirmation.events({
     const instance = Template.instance();
     const apiBackendDoc = ApiBackends.findOne(instance.backendId);
     const apiUmbrellaApiId = apiBackendDoc.id;
-    
+
     // Disable delete button to prevent multiple clicks
     $('#deleteApi').prop("disabled", true);
 
@@ -41,27 +41,20 @@ Template.deleteApiBackendConfirmation.events({
       if (apiUmbrellaWebResponse.http_status === 204) {
 
         // call method to remove API backend from collections
-        Meteor.call('removeApiBackend', instance.backendId);        
-        
+        Meteor.call('removeApiBackend', instance.backendId);
+
         // based on name of current route, load suitable parent page
         const currentRoute = Router.current().route.getName();
 
-        switch(currentRoute) {
-
-          case 'viewApiBackend':
+        if (currentRoute == 'viewApiBackend') {
+          // Go to catalogue page
             Router.go('catalogue');
-            sAlert.success(instance.backendName + " was successfully deleted!");
-            break;
+        };
 
-          case 'manageApiBackends':
-            Router.go('manageApiBackends');
-            sAlert.success(instance.backendName + " was successfully deleted!");
-            break;
- 
-          default:
-            break;
-
-        }
+        // Wait for template to render before showing alert to user
+        setTimeout(function () {
+          sAlert.success(instance.backendName + " was successfully deleted!");
+        }, 1000);
 
       } else {
         sAlert.error(instance.backendName + " could not be deleted!");
@@ -70,10 +63,7 @@ Template.deleteApiBackendConfirmation.events({
 
       // REST call ended, stop spinner
       instance.restCallStarted.set(false);
-     
+
     });
   }
 });
-
-
-
