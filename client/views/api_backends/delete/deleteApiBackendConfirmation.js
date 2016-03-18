@@ -11,12 +11,19 @@ Template.deleteApiBackendConfirmation.onCreated(function() {
 
 
 Template.deleteApiBackendConfirmation.helpers({
+
+  /* This holds the API backend name for showing the confirmation
+     to the user, even after it has been deleted. */
   'savedBackendName': function() {
 
     const instance = Template.instance();
     return instance.backendName;
   },
 
+  /* this helper is needed to display a spinner on the template 
+     after the user has pressed Delete. The instance.restCallStarted
+     instance variable is set to True when the button
+     is pressed. The spinner starts and continues until the call returns.*/
   'restCallStarted': function() {
     const instance = Template.instance();
     return instance.restCallStarted.get();
@@ -38,6 +45,7 @@ Template.deleteApiBackendConfirmation.events({
     // REST call to Admin API for deletion from Umbrella
     Meteor.call('deleteApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
 
+      // 204 is the HTTP response code when the API has been successfully removed in the umbrella
       if (apiUmbrellaWebResponse.http_status === 204) {
 
         // call method to remove API backend from collections
