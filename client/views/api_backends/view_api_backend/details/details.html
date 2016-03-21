@@ -1,8 +1,8 @@
 <template name="viewApiBackendDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <div class="btn-group pull-right">
       {{# if apiBackend.currentUserCanEdit }}
+      <div class="btn-group pull-right">
         <a
            href="#"
            class="btn btn-danger"
@@ -15,8 +15,8 @@
            <i class="fa fa-cog"></i>
           {{_ "view_ApiBackend_Details_editButtonText" }}
         </a>
-      {{/ if }}
       </div>
+      {{/ if }}
       <h2 class="panel-title clearfix">
         <i class="fa fa-info-circle"></i>
         {{_ "view_ApiBackend_Details_Title"}}
