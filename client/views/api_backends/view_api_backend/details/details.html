@@ -3,18 +3,18 @@
     <div class="panel-heading">
       <div class="btn-group pull-right">
       {{# if apiBackend.currentUserCanEdit }}
-        <a 
+        <a
            href="#"
-           class="btn btn-danger pull-right"
+           class="btn btn-danger"
            id="deleteModal">
           {{_ "viewApiBackendDetails_deleteButton"}}
         </a>
         <a
            href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-           class="btn btn-info pull-right">
+           class="btn btn-info">
            <i class="fa fa-cog"></i>
           {{_ "view_ApiBackend_Details_editButtonText" }}
-        </a>  
+        </a>
       {{/ if }}
       </div>
       <h2 class="panel-title clearfix">
