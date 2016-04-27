@@ -1,6 +1,6 @@
 Meteor.methods({
-  "checkRequiredSettings": function() {
+  "additionalSetupRequired": function() {
     const configRequired = Meteor.settings.initialSetupComplete;  
-    return configRequired;
+    return configRequired === false || configRequired === undefined;
   }
 });
