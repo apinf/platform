@@ -6,7 +6,7 @@ services:
 web:
   admin:
     initial_superusers:
-      - shaliko@ezid.ru
+      - admin@apinf.dev
     auth_strategies:
       enabled:
         - github
