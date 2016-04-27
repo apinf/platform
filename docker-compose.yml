@@ -2,15 +2,17 @@
 # Full instructions https://github.com/apinf/api-umbrella-dashboard/wiki/Development-installation-with-Docker
 web:
   build: .
-#  image: apinf/apinf:latest
+  dockerfile: ./docker/Dockerfile-development
   ports:
-    - "3000:80"
+    - "3000:3000"
   links:
     - apiumbrella
     - mongo
   environment:
     - MONGO_URL=mongodb://mongo/apinf_new_db
     - ROOT_URL=http://apinf.dev:3000
+  volumes:
+    - .:/app:z
 apiumbrella:
   image: nrel/api-umbrella:latest
   volumes:

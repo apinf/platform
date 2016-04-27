@@ -1,6 +1,5 @@
 Meteor.startup(function () {
   try {
-
     // Store settings object
     var settings = Meteor.settings;
     // Check if something is already in collection
