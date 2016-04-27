@@ -5,6 +5,9 @@
     {{> sidebar}}
     <div class="content-wrapper">
       <section class="content">
+        {{ #unless initialSetupComplete }}
+          {{ > settingsAlert }}
+        {{ /unless }}
         {{> yield }}
       </section>
       {{> sAlert}}
