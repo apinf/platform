@@ -1,7 +1,4 @@
 Meteor.startup(function () {
-  // Updating Meteor.settings from Settings collection
-  Meteor.call('updateMeteorSettings');
-
   try {
 
     // Store settings object
