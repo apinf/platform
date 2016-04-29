@@ -59,11 +59,6 @@ Template.settingsWizard.events({
   'click #prev-second-slide': function() {
     // clicking Previous of second slide moves to previous slide
     $('#settingsCarousel').carousel('prev');
-  },
-  'click #save-settings': function() {
-    // when configuration is done, call server method to set initialSetupComplete to true, so that the settings alert is no longer shown
-    Meteor.call("initialSetupCompleteTrue");
-    Router.go("settingsComplete");
   }
 });
 
@@ -88,6 +83,9 @@ AutoForm.addHooks(['settings'], {
     // Check if we can create ApiUmbrellaWeb object
     try {
       Meteor.call("createApiUmbrellaWeb");
+      Meteor.call("initialSetupCompleteTrue", function() {
+        Router.go("settingsComplete");
+      });
     }
     // otherwise show an error
     catch (error) {
