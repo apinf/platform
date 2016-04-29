@@ -17,9 +17,5 @@ Template.masterLayout.helpers({
     if (lastUploadedLogo) {
       return lastUploadedLogo
     }
-  },
-  initialSetupComplete: function() {
-    var initialSetupComplete = Meteor.call('additionalSetupRequired');
-    return initialSetupComplete;
   }
 });
