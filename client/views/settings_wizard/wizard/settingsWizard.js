@@ -61,8 +61,9 @@ Template.settingsWizard.events({
     $('#settingsCarousel').carousel('prev');
   },
   'click #save-settings': function() {
-    // when configuration is done, set initialSetupComplete to true, so that the settings alert is no longer shown
-    Meteor.settings.initialSetupComplete = true;
+    // when configuration is done, call server method to set initialSetupComplete to true, so that the settings alert is no longer shown
+    Meteor.call("initialSetupCompleteTrue");
+    Router.go("settingsComplete");
   }
 });
 
