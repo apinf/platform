@@ -8,6 +8,7 @@ Template.settingsWizard.created = function() {
   instance.subscribe('coverPhoto');
   // Subscription to feedback collection
   instance.subscribe('settings');
+
 };
 
 Template.settingsWizard.helpers({
@@ -47,9 +48,21 @@ Template.settingsWizard.helpers({
 
 Template.settingsWizard.events({
 
+  'click #prev-first-slide': function() {
+    // clicking Previous of first slide moves to previous slide
+    $('#settingsCarousel').carousel('prev');
+  },
   'click #next': function() {
-
+    // clicking Save and next of first slide moves to second slide
     $('#settingsCarousel').carousel('next');
+  },
+  'click #prev-second-slide': function() {
+    // clicking Previous of second slide moves to previous slide
+    $('#settingsCarousel').carousel('prev');
+  },
+  'click #save-settings': function() {
+    // when configuration is done, set initialSetupComplete to true, so that the settings alert is no longer shown
+    Meteor.settings.initialSetupComplete = true;
   }
 });
 
