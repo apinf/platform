@@ -104,8 +104,8 @@ You will also need to [install Docker Compose](https://docs.docker.com/compose/i
 ### Ubuntu
 Install Docker Compose on Ubuntu Linux with the following command:
 
-```js
-sudo apt install docker-compose
+```
+$ sudo apt install docker-compose
 ```
 
 ## Edit API Umbrella configuration
@@ -116,7 +116,7 @@ API Umbrella configuration should be stored in
 You can create `api-umbrella.yml` based on the example:
 * ```[project-root]/docker/api-umbrella/config/api-umbrella.yml.example```
 
-## Prepare Apinf image
+## Prepare APInf image
 
 1. Run application containers (in first time it will build image):
   ```
@@ -125,11 +125,13 @@ You can create `api-umbrella.yml` based on the example:
 2. Add `apinf.dev` and `api-umbrella.dev` hosts entry to `/etc/hosts` file so you can visit them from your browser.
 
 
-See Docker IP address:
+### See Docker IP address (step only for Mac)
 ```
-docker-machine ip
+$ docker-machine ip
 => 127.0.0.1
 ```
+
+### Set hosts
 
 Then add the IP to your `/etc/hosts`:
 ```
@@ -166,6 +168,26 @@ root@ce9de67fdcbe:/#
 Add alias to bash:
 ```
 alias apinf_web='docker exec -it `docker ps | grep web | sed "s/ .*//"` /bin/bash'
+```
+
+## Building Docker Images
+
+### Building Images
+
+To build packages for the current APInf version:
+
+```
+$ docker build -t apinf/apinf:INSERT_VERSION_HERE .
+$ docker tag apinf/apinf:INSERT_VERSION_HERE apinf/apinf:latest
+```
+
+### Pushing to Docker Hub
+
+To publish the new images to our [Docker Hub repository](https://hub.docker.com/r/apinf/apinf/):
+
+```
+$ docker push apinf/apinf:INSERT_VERSION_HERE
+$ docker push apinf/apinf:latest
 ```
 
 # Contributing code
