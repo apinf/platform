@@ -22,7 +22,7 @@ elasticsearch:
   hosts:
     - http://127.0.0.1:14002
 mongodb:
-  url: mongodb://127.0.0.1:14001/api_umbrella_new_db
+  url: mongodb://127.0.0.1:14001/api_umbrella_db
 nginx:
   workers: 4
 gatekeeper:

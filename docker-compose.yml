@@ -1,5 +1,5 @@
 # Developers can set up a local development environment
-# Full instructions https://github.com/apinf/api-umbrella-dashboard/wiki/Development-installation-with-Docker
+# Full instructions https://github.com/apinf/api-umbrella-dashboard/blob/develop/CONTRIBUTING.md#development-installation-with-docker
 web:
   build: .
   dockerfile: ./docker/Dockerfile-development
@@ -9,7 +9,7 @@ web:
     - apiumbrella
     - mongo
   environment:
-    - MONGO_URL=mongodb://mongo/apinf_new_db
+    - MONGO_URL=mongodb://mongo/apinf_db
     - ROOT_URL=http://apinf.dev:3000
   volumes:
     - .:/app:z
