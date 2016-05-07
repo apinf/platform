@@ -4,7 +4,6 @@ Meteor.startup(function () {
 
   try {
 
-    // Check if Settings collection has existing API Umbrella settings
     const settings = Settings.findOne();
 
     if (settings) {
@@ -44,3 +43,4 @@ Meteor.startup(function () {
   }
 
 });
+
