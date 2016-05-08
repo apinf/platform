@@ -8,6 +8,9 @@ Meteor.startup(function () {
 
     if (settings) {
 
+      // Updating Meteor.settings from Settings collection
+      Meteor.call('updateMeteorSettings');
+
       // Creating ApiUmbrellaWeb object
       Meteor.call("createApiUmbrellaWeb");
 
