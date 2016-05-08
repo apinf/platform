@@ -3,6 +3,7 @@ Meteor.methods({
     // check if settings details are complete
     const settings = Settings.findOne();
     const configRequired = settings.initialSetupComplete;  
+    console.log("CONFIG REQUIRED: " + configRequired === false || configRequired === undefined);
     return configRequired === false || configRequired === undefined;
   },
   "initialSetupCompleteTrue": function() {
