@@ -1,10 +1,17 @@
 Meteor.methods({
-  "additionalSetupRequired": function() {
+  "isInitialSetupComplete": function() {
     // check if settings details are complete
+    let setUpComplete = false;
     const settings = Settings.findOne();
-    const configRequired = settings.initialSetupComplete;  
-    console.log("CONFIG REQUIRED: " + configRequired === false || configRequired === undefined);
-    return configRequired === false || configRequired === undefined;
+
+    // set setUpComplete to value of 'initialSetupComplete' property if it exists in Settings object, else return false
+    if (settings !== undefined && settings.hasOwnProperty('initialSetupComplete')) {
+      setUpComplete = settings.initialSetupComplete;
+    } else {
+      setUpComplete = false;
+    }
+
+    return setUpComplete;
   },
   "initialSetupCompleteTrue": function() {
     // get reference to settings object from collection
