@@ -1,7 +1,7 @@
 {
   "name": "apinf",
   "version": "0.2.0",
-  "description": "API community portal and proxy.",
+  "description": "API management portal and proxy.",
   "main": "index.js",
   "directories": {
     "doc": "docs"
@@ -21,6 +21,7 @@
     "url": "git+https://github.com/apinf/api-umbrella-dashboard.git"
   },
   "keywords": [
+    "Analytics",
     "API",
     "Proxy"
   ],
