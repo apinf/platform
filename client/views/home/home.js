@@ -1,10 +1,28 @@
 Template.home.created = function () {
+  // Get reference to template instance
+  const instance = this;
+
   // Subscription to branding collection
-  this.subscribe('branding');
+  instance.subscribe('branding');
   // Subscription to projectLogo collection
-  this.subscribe('projectLogo');
+  instance.subscribe('projectLogo');
   // Subscription to coverPhoto collection
-  this.subscribe('coverPhoto');
+  instance.subscribe('coverPhoto');
+
+  // Run this each time something changes
+  instance.autorun(function () {
+    // Check for template subscriptions
+    if (instance.subscriptionsReady) {
+      // Get Branding collection content
+      var branding = Branding.findOne();
+      // Check if Branding collection and siteTitle are available
+      if (branding && branding.siteTitle) {
+        // Set the page title
+        var title = branding.siteTitle;
+        DocHead.setTitle(title);
+      }
+    }
+  });
 };
 
 Template.home.helpers({

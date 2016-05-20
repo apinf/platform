@@ -2,11 +2,7 @@
   <ul class="nav nav-wizard">
     {{#each wizard.steps}}
     <li class="{{stepClass id}}">
-      {{#if wizard.route}}
       <a href="{{pathForStep id}}">{{title}}</a>
-      {{else}}
-      <span>{{title}}</span>
-      {{/if}}
     </li>
     {{/each}}
   </ul>

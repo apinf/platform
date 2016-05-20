@@ -176,7 +176,6 @@ Template.chartsLayout.created = function () {
     var overviewChart = dc.barChart("#overview-chart");
     var moveChart = dc.barChart("#move-chart");
 
-
     overviewChart
       .height(80)
       .dimension(timeStampDimension)
@@ -329,10 +328,10 @@ Template.chartsLayout.created = function () {
     instance.map = L.map('map').setView([61.5000, 23.7667], 4);
 
     // adds tilelayer
-    var tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       minZoom: 2,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(instance.map);
 
     // checks if map data is passed to a renderMap function

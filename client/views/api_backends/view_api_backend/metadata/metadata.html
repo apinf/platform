@@ -17,7 +17,7 @@
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h2 class="panel-title">Organization</h2>
+              <h2 class="panel-title">{{_ "view_ApiBackend_Metadata_Organization_title" }}</h2>
             </div>
             <div class="panel-body">
               {{# if organization.name }}
@@ -34,17 +34,17 @@
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h2 class="panel-title">Contact</h2>
+              <h2 class="panel-title">{{_ "view_ApiBackend_Metadata_Contact_title" }}</h2>
             </div>
             <div class="panel-body">
               {{# if contact.name }}
                <h3>{{ contact.name }}</h3>
               {{/ if }}
               {{# if contact.phone }}
-               <p><b>Phone:</b> {{ contact.phone }}</p>
+               <p><b>{{_ "view_ApiBackend_Metadata_Contact_phone" }}:</b> {{ contact.phone }}</p>
               {{/ if }}
               {{# if contact.email }}
-               <p><b>Email:</b> {{ contact.email }}</p>
+               <p><b>{{_ "view_ApiBackend_Metadata_Contact_email" }}:</b> {{ contact.email }}</p>
               {{/ if }}
             </div>
           </div>
@@ -54,7 +54,7 @@
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h2 class="panel-title">Service</h2>
+              <h2 class="panel-title">{{_ "view_ApiBackend_Metadata_Service_title" }}</h2>
             </div>
             <div class="panel-body">
               {{# if service.name }}
@@ -64,13 +64,13 @@
                 <p>{{ service.description }}</p>
               {{/ if }}
               {{# if service.validSince }}
-                <p><b>Valid since:</b> {{ service.validSince }}</p>
+                <p><b>{{_ "view_ApiBackend_Metadata_Service_validSince" }}:</b> {{ service.validSince }}</p>
               {{/ if }}
               {{# if service.validUntil }}
-                <p><b>Valid until:</b> {{ service.validUntil }}</p>
+                <p><b>{{_ "view_ApiBackend_Metadata_Service_validUntil" }}:</b> {{ service.validUntil }}</p>
               {{/ if }}
               {{# if service.serviceLevelAgreement }}
-                <p><b>Service level agreement:</b> {{ service.serviceLevelAgreement }}</p>
+                <p><b>{{_ "view_ApiBackend_Metadata_Service_serviceLevelAgreement" }}:</b> {{ service.serviceLevelAgreement }}</p>
               {{/ if }}
             </div>
           </div>

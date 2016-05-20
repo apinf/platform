@@ -1,3 +1,7 @@
+Template.addApiBackendWizard.onCreated(function(){
+  Wizard.useRouter('iron:router');
+});
+
 Template.addApiBackendWizard.helpers({
   "steps": function () {
     var baseInformation = new SimpleSchema({
@@ -7,6 +11,9 @@ Template.addApiBackendWizard.helpers({
       }
     });
 
+    // Attach translation strings to base information schema
+    baseInformation.i18n("schemas.apiWizard_baseInformation");
+
     var backendInformation = new SimpleSchema({
       backend_protocol: {
         type: String,
@@ -14,8 +21,7 @@ Template.addApiBackendWizard.helpers({
         allowedValues: [
           'http',
           'https'
-        ],
-        label: 'Backend protocol'
+        ]
       },
       backend_host: {
         type: String
@@ -30,12 +36,8 @@ Template.addApiBackendWizard.helpers({
       }
     });
 
-    var frontendInformation = new SimpleSchema({
-      frontend_host: {
-        type: String,
-        optional: false
-      }
-    });
+    // Attach translation strings to backend information schema
+    backendInformation.i18n("schemas.apiWizard_backendInformation");
 
     var prefixesInformation = new SimpleSchema({
       url_matches: {
@@ -43,18 +45,19 @@ Template.addApiBackendWizard.helpers({
         optional: true
       },
       "url_matches.frontend_prefix": {
-        label: 'Frontend prefix',
         optional: true,
         type: String,
         regEx: SimpleSchema.RegEx.Prefix
       },
       "url_matches.backend_prefix": {
-        label: 'Backend prefix',
         optional: true,
         type: String,
         regEx: SimpleSchema.RegEx.Prefix
       }
     });
+
+    // Attach translation strings to backend information schema
+    prefixesInformation.i18n("schemas.apiWizard_prefixesInformation");
 
     var steps = [{
       id: 'base-information',
