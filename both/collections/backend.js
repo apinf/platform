@@ -1,3 +1,5 @@
+import ss from 'simple-statistics';
+
 ApiBackends = new Mongo.Collection('apiBackends');
 
 // RegEx constants
