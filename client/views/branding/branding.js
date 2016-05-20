@@ -14,19 +14,31 @@ Template.branding.helpers({
     return Branding.findOne();
   },
   projectLogo: function () {
-    // Get last uploaded image from collection
-    var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
-    // Check if new logo was uploaded, if so change it with previous
-    if (lastUploadedLogo) {
-      return lastUploadedLogo
+    // Get branding document
+    let branding = Branding.findOne();
+
+    if (branding) {
+      // Get project logo ID
+      let projectLogoId = branding.projectLogoId;
+
+      if (projectLogoId) {
+        // Get project logo collection object
+        return BrandingFiles.findOne(projectLogoId);
+      }
     }
   },
   coverPhoto: function () {
-    // Get last uploaded image from collection
-    var lastUploadedCover = CoverPhoto.findOne({}, {sort: {uploadedAt: -1}});
-    // Check if new cover was uploaded, if so change it with previous
-    if (lastUploadedCover) {
-      return lastUploadedCover;
+    // Get branding document
+    let branding = Branding.findOne();
+
+    if (branding) {
+      // Get project logo ID
+      let coverPhotoId = branding.coverPhotoId;
+
+      if (coverPhotoId) {
+        // Get cover photo collection object
+        return BrandingFiles.findOne(coverPhotoId);
+      }
     }
   }
 });

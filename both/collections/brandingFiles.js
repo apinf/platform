@@ -1,10 +1,10 @@
-ProjectLogo = new FS.Collection("projectLogo", {
+BrandingFiles = new FS.Collection("brandingFiles", {
   stores: [
-    new FS.Store.GridFS("projectLogo")
+    new FS.Store.GridFS("brandingFiles")
   ]
 });
 
-ProjectLogo.filters({
+BrandingFiles.filters({
   allow: {
     maxSize: 10048567, // ~ 10Mbs.
     extensions: ['jpg', 'jpeg', 'png', 'gif']
@@ -16,7 +16,7 @@ ProjectLogo.filters({
 });
 
 if (Meteor.isServer) {
-  ProjectLogo.allow({
+  BrandingFiles.allow({
     insert: function(userId, doc) {
       return Roles.userIsInRole(userId, ['admin']);
     },

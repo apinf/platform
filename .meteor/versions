@@ -35,6 +35,7 @@ caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
 cfs:access-point@0.1.49
+cfs:autoform@2.2.1
 cfs:base-package@0.0.30
 cfs:collection@0.5.5
 cfs:collection-filters@0.2.4
