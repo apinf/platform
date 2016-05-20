@@ -44,20 +44,16 @@
   "feature_Title8": "Web-based",
   "feature_Title8_Text": "Centralized management for hundreds of users",
   "section1_Heading": "Getting started",
-  "section1_Text": "Just create an account and be on your way! The developer dashboard offers you a one_stop location to discover APIs, track your application API usage, and more.",
-  "section1_Text_Extra": "to see all features.",
+  "section1_Text": "Just create an account and be on your way! The developer dashboard offers you a one stop location to discover APIs, track your application API usage, and more.",
+  "section1_Text_Extra": "Sign Up",
   "section2_Heading": "Reach out to developers",
   "section2_Text": "APInf provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API trafﬁc.",
-  "contactUs": "Contact us",
-  "section2_Text_Extra": "for more information.",
+  "section2_Text_Extra": "Contact Us",
   "section3_Heading": "Completely open source",
   "section3_Text": "APinf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with MIT. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
-  "section3_Text_Extra": "Find us in",
-  "section3_Text_Social_Text": "and",
+  "section3_Text_Extra": "Find us in ",
   "section_ContactUs": "Contact Us",
   "section_ContactUs_Text": "Contact us to ask anything.",
-  "collaboration_Title": "Collaboration with",
-  "collaboration_Title_Extra": "and",
   "account_details": "Account Details",
   "delete_account": "Delete Account",
   "delete_account_warn": "There's no coming back from this one",
@@ -83,6 +79,8 @@
   "manage_ApiBackends_Frontend": "Frontend:",
   "manage_ApiBackends_View": "View",
   "manage_ApiBackends_Edit": "Edit",
+  "manageApiBackends_deleteButton": "Delete",
+  "deleteApiBackendConfirmation_confirmDeleteNote": "NOTE:",
   "apiBackend_Status_Title": "Status",
   "apiBackend_Status_Updated": "Updated:",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",
@@ -111,7 +109,8 @@
   "apiBackend_Usage_Instructions_Note_Text": "You can find your API Key on your profile page.",
   "apiBackend_Usage_Instructions_Profile_Page_Link": "View profile.",
   "apiBackends_Add_API_Title": "Add API",
-  "apiBackends_Edit_API_Title": "Edit API",
+  "apiBackends_Edit_API_Title": "Edit API", 
+  "deleteApiBackendConfirmation_header": "Delete API",
   "apiBackends_Title_Help": "API's name",
   "apiBackends_Backend_Title": "Backend",
   "apiBackends_Backend_Help": "Define the server where the API is hosted. Multiple servers can be defined to perform load balancing.",
@@ -185,7 +184,12 @@
   "dataTable_ResponseTime": "Response time (in milliseconds)",
   "view_ApiBackend_Details_Title": "Details",
   "view_ApiBackend_Details_editButtonText": "Edit API Settings",
+  "viewApiBackendDetails_deleteButton": "Delete",
+  "deleteApiBackendConfirmation_deleteButton":"Delete",
+  "deleteApiBackendConfirmation_CancelButton":"Cancel",
+  "deleteApiBackendConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
   "view_ApiBackend_Export_Title": "Export",
+  "deleteApiBackendConfirmation_confirmDeleteInformation": "This action cannot be undone! The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "apiBacklog_mainTitle": "Backlog",
   "apiBacklogForm_addBacklogItem_button": "Add backlog item",
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
@@ -200,8 +204,7 @@
   "notAuthorized_Return_Message_Part2": "return to a previous page",
   "notFound_Title": "Oops! Page not found.",
   "notFound_Message_Part1": "We could not find the page you were looking for.",
-  "notFound_Message_Part2": "Meanwhile, you may",
-  "notFound_Message_Part3": "return to a previous page",
+  "notFound_Message_Part2": "Return to a previous page.",
   "editApi_hints_api_name": "A name that describes your API",
   "editApi_hints_backend_protocol": "Choose the protocol used by your API (e.g. http or https)",
   "editApi_hints_backend_port": "Choose port for the backend host",
@@ -219,6 +222,7 @@
   "editApi_hints_api_key_verification_level": "Choose 'required' if API key is required to access your API",
   "editApi_hints_api_balance_algorithm": "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
   "editApi_hints_settings": "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'",
+  "apiDocumentationSelect_noApiDocumentation": "No API documentations found.",
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
@@ -248,6 +252,47 @@
         "backend_prefix": {
           "label": "Backend prefix",
           "placeholder": "Enter a string to be added to each backend request"
+        }
+      }
+    },
+    "apiMetadata": {
+      "organization": {
+        "label": "Organization",
+        "name": {
+          "label": "Name"
+        },
+        "description": {
+          "label": "Description"
+        }
+      },
+      "contact": {
+        "label": "Contact",
+        "name": {
+          "label": "Name"
+        },
+        "phone": {
+          "label": "Phone"
+        },
+        "email": {
+          "label": "Email"
+        }
+      },
+      "service": {
+        "label": "Service",
+        "name": {
+          "label": "Name"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "validSince": {
+          "label": "Valid since"
+        },
+        "validUntil": {
+          "label": "Valid until"
+        },
+        "serviceLevelAgreement": {
+          "label": "Service Level Agreement"
         }
       }
     }

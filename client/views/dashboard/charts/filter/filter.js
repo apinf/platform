@@ -38,6 +38,9 @@ Template.chartsLayout.events({
 
   },
   "click #filter-reset": function(event, template){
+    // Prevent default action; fix redirect in IE
+    event.preventDefault();
+
     // appending loading state
     $('#loadingState').html("Loading...");
 

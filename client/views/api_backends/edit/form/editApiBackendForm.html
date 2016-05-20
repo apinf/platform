@@ -1,11 +1,7 @@
-<template name="apiBackendForm">
+<template name="editApiBackendForm">
   <div class="api-backends-content">
-    {{#unless editMode}}
-    <h1>{{_ "apiBackends_Add_API_Title"}}</h1>
-    {{else}}
     <h1>{{_ "apiBackends_Edit_API_Title"}}</h1>
-    {{/unless}}
-    {{#autoForm collection="ApiBackends" doc=apiBackend id="apiBackendForm" type=formType}}
+    {{#autoForm collection="ApiBackends" doc=apiBackend id="apiBackendForm" type="update"}}
     {{>showHelp 'api_name'}}
     {{> afQuickField name='name'}}
     <span class="help-block">{{_ "apiBackends_Title_Help"}}</span>

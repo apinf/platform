@@ -1,0 +1,27 @@
+<template name="deleteApiBackendConfirmation">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">{{_ "deleteApiBackendConfirmation_header"}}</h3>
+        </div>
+        <div class="modal-body">
+          <div id="confirmDelete">
+            <p>{{_ "deleteApiBackendConfirmation_confirmDeleteMessage"}} {{ savedBackendName }}? </p>
+            <p><span class="text-danger">{{_ "deleteApiBackendConfirmation_confirmDeleteNote"}} </span> {{_ "deleteApiBackendConfirmation_confirmDeleteInformation"}} </p>
+          </div>
+          {{#if restCallStarted }}
+            {{> spinner}}
+          {{/if}}
+        </div>
+        <div class="modal-footer">
+          <div id="confirmFooter">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "deleteApiBackendConfirmation_CancelButton"}}</button>
+            <button type="button" class="btn btn-danger" id="deleteApi">{{_ "deleteApiBackendConfirmation_deleteButton"}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

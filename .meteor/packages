@@ -21,7 +21,6 @@ yogiben:autoform-modals
 yogiben:pretty-email
 yogiben:autoform-map
 multiply:iron-router-progress
-manuelschoebel:ms-seo
 spiderable
 accounts-ui
 jparker:gravatar
@@ -56,7 +55,6 @@ cfs:filesystem
 dapearce:material-icons
 mrt:flash-messages
 frenchbread:dynatable
-brylie:api-umbrella
 bevanhunt:leaflet
 brylie:leaflet-heat
 pfafman:filesaver
@@ -95,6 +93,9 @@ simple:reactive-method
 sacha:spin
 tap:i18n-ui
 force-ssl
+kadira:dochead
 gwendall:autoform-i18n
 forwarder:autoform-wizard-iron-router
 percolate:migrations
+peppelg:bootstrap-3-modal
+apinf:api-umbrella
