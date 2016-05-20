@@ -11,6 +11,7 @@
     "d3": "^3.5.17",
     "elasticsearch": "^11.0.1",
     "jquery.rateit": "^1.0.23",
+    "js-yaml": "^3.6.1",
     "simple-statistics": "^2.0.0-beta1"
   },
   "devDependencies": {},
