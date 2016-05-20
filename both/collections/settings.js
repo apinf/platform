@@ -147,6 +147,22 @@ Schemas.SettingsSchema = new SimpleSchema({
     autoform: {
       placeholder: 'xxx'
     }
+  },
+  "dateFormat": {
+    type: String,
+    label: "Date Format",
+    optional: true,
+    autoform: {
+      placeholder: 'D/M/YYYY'
+    }
+  },
+  "userLocale": {
+    type: String,
+    label: "User Locale",
+    optional: true,
+    autoform: {
+      placeholder: 'en'
+    }
   }
 });
 
