@@ -1,6 +1,6 @@
 Template.viewApiBackendDocumentation.onCreated(function(){
   // Init file uploader
-  //Uploader.init(this);
+  Uploader.init(this);
 });
 
 Template.viewApiBackendDocumentation.events({
