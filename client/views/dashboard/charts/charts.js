@@ -80,9 +80,9 @@ Template.chartsLayout.created = function () {
   // function that sets chart data to be available in template
   instance.getDashboardData = function (input) {
 
+    console.log("Getting chart data.", new Date());
     // calling method that returns data from elastic search
     Meteor.call("getChartData", input, function (err, response) {
-
       // error checking
       if (err) {
 
@@ -93,21 +93,22 @@ Template.chartsLayout.created = function () {
         $('#loadingState').html(errorMessage);
 
       } else {
-
-        // gets to level in object with needed data
-        var dashboardData = response.hits.hits;
-
-        // parse the returned data for DC
-        var parsedChartData = instance.parseChartData(dashboardData);
-
-        // parse data for map
-        var parsedMapData   = instance.parseMapData(dashboardData);
-
-        // set reactive variable with parsed map data
-        instance.mapData.set(parsedMapData);
-
-        // Render the charts using parsed data
-        instance.renderCharts(parsedChartData);
+        console.log("All is well.", new Date());
+        console.log(response);
+        // // gets to level in object with needed data
+        // var dashboardData = response.hits.hits;
+        //
+        // // parse the returned data for DC
+        // var parsedChartData = instance.parseChartData(dashboardData);
+        //
+        // // parse data for map
+        // var parsedMapData   = instance.parseMapData(dashboardData);
+        //
+        // // set reactive variable with parsed map data
+        // instance.mapData.set(parsedMapData);
+        //
+        // // Render the charts using parsed data
+        // instance.renderCharts(parsedChartData);
 
       }
     });
