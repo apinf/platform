@@ -60,11 +60,11 @@ Meteor.methods({
         }
       };
 
-      searchResults = esClient.search(options).then(function (result) {
+      return esClient.search(options).then( (result) => {
         console.log("Got result...");
         //console.log(result);
         return result;
-      }, function (err) {
+      }).catch( (err) => {
         console.trace(err.message);
         // Throw a 500 error explaining that the data was not found
         throw new Meteor.Error(500, "Analytics data is not found.");

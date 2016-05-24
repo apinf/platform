@@ -1,3 +1,5 @@
+import dc from 'dc';
+
 Template.chartsLayout.rendered = function () {
 
   // assigning current template instance to a variable
@@ -95,20 +97,20 @@ Template.chartsLayout.created = function () {
       } else {
         console.log("All is well.", new Date());
         console.log(response);
-        // // gets to level in object with needed data
-        // var dashboardData = response.hits.hits;
-        //
-        // // parse the returned data for DC
-        // var parsedChartData = instance.parseChartData(dashboardData);
-        //
-        // // parse data for map
-        // var parsedMapData   = instance.parseMapData(dashboardData);
-        //
-        // // set reactive variable with parsed map data
-        // instance.mapData.set(parsedMapData);
-        //
-        // // Render the charts using parsed data
-        // instance.renderCharts(parsedChartData);
+        // gets to level in object with needed data
+        var dashboardData = response.hits.hits;
+
+        // parse the returned data for DC
+        var parsedChartData = instance.parseChartData(dashboardData);
+
+        // parse data for map
+        var parsedMapData   = instance.parseMapData(dashboardData);
+
+        // set reactive variable with parsed map data
+        instance.mapData.set(parsedMapData);
+
+        // Render the charts using parsed data
+        instance.renderCharts(parsedChartData);
 
       }
     });
