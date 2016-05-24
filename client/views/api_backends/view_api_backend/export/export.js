@@ -1,3 +1,5 @@
+import jsyaml from 'js-yaml';
+
 Template.viewApiBackendExport.events({
   'click #exportJSONConfig' : function (event, instance) {
     // Get API Backend from database collection
