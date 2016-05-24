@@ -19,7 +19,7 @@
                 <span>{{_ "masterLayout_sidebar_AddAPIBackend"}}</span>
               </a>
             </li>
-            {{# if userHasApis }}
+            {{# if isInRole 'manager' }}
             <li class="{{isActiveRoute 'manageApiBackends'}} treeview">
               <a href="{{pathFor route='manageApiBackends'}}">
                 <i class="fa fa-circle-o"></i>

@@ -1,4 +1,6 @@
 Meteor.startup(function () {
+  // Run migrations first
+  Migrations.migrateTo('latest');
 
   // Get the settings
   var settings = Meteor.settings;
