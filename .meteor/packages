@@ -91,3 +91,6 @@ peppelg:bootstrap-3-modal
 apinf:api-umbrella
 standard-minifier-css
 standard-minifier-js
+
+
+npm-container
