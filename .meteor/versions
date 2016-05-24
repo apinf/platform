@@ -76,7 +76,6 @@ fortawesome:fontawesome@4.5.0
 forwarder:autoform-wizard@0.9.1
 forwarder:autoform-wizard-iron-router@0.1.4
 frenchbread:dynatable@0.1.0
-frenchbread:elastic-rest@1.0.0
 geojson-utils@1.0.8
 github@1.1.8
 gwendall:autoform-i18n@0.1.9_1
@@ -114,8 +113,6 @@ mdg:validation-error@0.2.0
 meteor@1.1.14
 meteor-base@1.0.4
 meteor-platform@1.2.6
-meteorhacks:async@1.0.0
-meteorhacks:npm@1.5.0
 meteorhacks:subs-manager@1.6.4
 meteorspark:util@0.2.0
 mfactory:admin-lte@0.0.2
