@@ -105,7 +105,6 @@
   "view_ApiBackend_Metadata_Service_validUntil": "Valid until",
   "view_ApiBackend_Metadata_Service_serviceLevelAgreement": "Service level agreement",
   "view_ApiBackend_Documentation_Title": "Documentation",
-  "view_ApiBackend_UploadSwaggerFile": "Upload Swagger",
   "apiBackend_Usage_Instructions_Headline": "Make API calls to:",
   "apiBackend_Usage_Instructions_Note": "Note:",
   "apiBackend_Usage_Instructions_Note_Text": "You can find your API Key on your profile page.",
