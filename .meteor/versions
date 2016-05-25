@@ -134,7 +134,6 @@ mrt:flash-messages@1.0.1
 multiply:iron-router-progress@1.0.2
 natestrauser:animate-css@3.5.1
 npm-bcrypt@0.8.5
-npm-container@1.2.0
 npm-mongo@1.4.43
 oauth@1.1.10
 oauth2@1.1.9
