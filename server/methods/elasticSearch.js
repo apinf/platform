@@ -30,11 +30,11 @@ Meteor.methods({
       // Get user role & check user role
       if (Roles.userIsInRole(loggedInUser, ['admin'])) {
 
-      // If current user is Admin
-      // Construct query with no filters (See elasticsearch docs - https://www.elastic.co/guide/index.html)
-      query = {
-        match_all: {}
-      }
+        // If current user is Admin
+        // Construct query with no filters (See elasticsearch docs - https://www.elastic.co/guide/index.html)
+        query = {
+          match_all: {},
+        }
 
       } else {
         // Get user's api_key
