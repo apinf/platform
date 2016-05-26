@@ -10,13 +10,13 @@
       {{> viewApiBackendDetails apiBackend=apiBackend }}
     </div> <!-- /api-backend-details -->
 
-    <div id="api-backend-metadata" class="tab-pane fade in">
-      {{> viewApiBackendMetadata apiBackend=apiBackend metadata=metadata }}
-    </div> <!-- /api-backend-metadata -->
-
     <div id="api-backend-documentation" class="tab-pane fade in">
       {{> documentationViewer }}
     </div> <!-- /api-backend-Documentation -->
+
+    <div id="api-backend-metadata" class="tab-pane fade in">
+      {{> viewApiBackendMetadata apiBackend=apiBackend metadata=metadata }}
+    </div> <!-- /api-backend-metadata -->
 
     <div id="api-backend-feedback" class="tab-pane fade in">
       {{> feedbackList apiBackend=apiBackend }}
