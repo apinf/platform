@@ -33,6 +33,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   },
   documentationFileId: {
     type: String,
+    optional: true,
     autoform: {
       afFieldInput: {
         type: 'fileUpload',
