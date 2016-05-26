@@ -8,21 +8,21 @@
 
         <div class="modal-body">
           {{> showHelp 'importApiDocumentation'}}
-          <h2>Import API description file</h2>
-          {{> importApiDocumentation}}
-          
-          <h2>Create new documentation</h2>
+          <legend>{{_ "import_ApiDocumentation_Title"}}</legend>
+          {{> importApiDocumentation }}
+
           {{> showHelp 'apiDocumentationEditor'}}
+          <legend>Create new documentation</legend>
           <a href="{{ pathFor 'apiDocumentationEditor' }}" target="_blank" class="btn btn-success btn-sm"><span class="fa fa-pencil"></span> Create API documentation</a>
           <span class="help-block">Create a new API documentation file</span>
 
-          <h2>Link to external documentation resource</h2>
+          {{>showHelp 'documentation_link'}}
+          <legend>Link to external documentation resource</legend>
           {{#autoForm
               collection="ApiBackends"
               doc=apiBackend
               id="apiBackendDocumentationLinkForm"
               type="update" }}
-              {{>showHelp 'documentation_link'}}
             {{> afQuickField name='documentation_link'}}
             <span class="help-block">{{_ "apiBackends_Documentation_Link"}}</span>
             <div id="form-buttons">
