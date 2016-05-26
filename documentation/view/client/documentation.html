@@ -1,0 +1,39 @@
+<template name="documentation">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{#if apiBackend.currentUserCanEdit }}
+        <button
+          id="manage-api-documentation"
+          class="btn btn-sm btn-info pull-right">
+          <i class="fa fa-pencil"></i>&nbsp;
+          Manage
+        </button>
+      {{/if}}
+      <h2 class="panel-title clearfix">
+        <i class="fa fa-file-text"></i>
+        Documentation
+      </h2>
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Link</h2>
+        </div>
+        <div class="panel-body">
+          <div class="documentation-link" style="">
+            <i class="fa fa-external-link"></i>&nbsp;
+            <a href="#">documentation.json</a>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Viewer</h2>
+        </div>
+        <div class="panel-body">
+          <iframe src="/swagger/index.html?url=/swagger/swagger.json" width="100%" id="documentation"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
