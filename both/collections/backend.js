@@ -31,6 +31,16 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: false
   },
+  documentationFileId: {
+    type: String,
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'apiDocumentation',
+        label: 'Choose a Swagger file'
+      }
+    }
+  },
   documentation_link: {
     type: String,
     optional: true,
