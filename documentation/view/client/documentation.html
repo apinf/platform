@@ -1,7 +1,13 @@
 <template name="documentation">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2 class="panel-title">
+      {{#if apiBackend.currentUserCanEdit }}
+        <button class="btn btn-sm btn-info pull-right">
+          <i class="fa fa-pencil"></i>&nbsp;
+          Manage
+        </button>
+      {{/if}}
+      <h2 class="panel-title clearfix">
         <i class="fa fa-file-text"></i>
         Documentation
       </h2>
