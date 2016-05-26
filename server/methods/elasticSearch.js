@@ -1,6 +1,8 @@
+import ElasticSearch from "elasticsearch";
+
 Meteor.methods({
   "getChartData": function (data) {
-
+    console.log("getting chart data");
     // Check if user is logged in
     if (Meteor.user()) {
 
@@ -10,17 +12,31 @@ Meteor.methods({
       // Get user object
       loggedInUser = Meteor.user();
 
+      try {
+        var config = {
+          host: Meteor.settings.elasticsearch.host
+        };
+      } catch (error) {
+        // Throw an error to inform the user
+        console.log(error.message);
+
+        // return false to break out of the function
+        return false;
+      }
+
+      // Create a new ElasticRest instance
+      var esClient = new ElasticSearch.Client(config);
+
       // Get user role & check user role
       if (Roles.userIsInRole(loggedInUser, ['admin'])) {
 
         // If current user is Admin
         // Construct query with no filters (See elasticsearch docs - https://www.elastic.co/guide/index.html)
         query = {
-          match_all: {}
+          match_all: {},
         }
 
-      } else{
-
+      } else {
         // Get user's api_key
         apiKey  = loggedInUser.profile.apiKey;
 
@@ -32,39 +48,33 @@ Meteor.methods({
         }
       }
 
-      var config = {
-        host: Meteor.settings.elasticsearch.host
-      };
-
       var options = {
         index: data.index,
         type: data.type,
         size: data.limit,
-        query: query,
-        fields: data.fields
+        body: {
+          query: query,
+          // TODO:
+          // check needs to be implemented, see wrapper meteor-elastic-rest
+          fields: data.fields
+        }
       };
 
-      // Create a new ElasticRest instance
-      var es = new ElasticRest(config, options);
-
-      // Try catch - if search fails, returns user friendly error
-      try{
-
-        searchResults = es.doSearch();
-
-      }catch(err){
-
+      return esClient.search(options).then( (result) => {
+        console.log("Got result...");
+        //console.log(result);
+        return result;
+      }).catch( (err) => {
+        console.trace(err.message);
         // Throw a 500 error explaining that the data was not found
         throw new Meteor.Error(500, "Analytics data is not found.");
-      }
+      });
 
-      return searchResults;
+   } else {
+     // Throw a 500 error
+     throw new Meteor.Error(500, "User is not authorised.");
 
-    } else {
-
-      // Throw a 500 error
-      throw new Meteor.Error(500, "User is not authorised.");
-
-    }
-  }
+     return false;
+   }
+ }
 });

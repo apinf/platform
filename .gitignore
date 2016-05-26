@@ -6,4 +6,5 @@ settings.json
 .idea/
 uploads/
 mup.json
-/node_modules/
+node_modules/
+packages
