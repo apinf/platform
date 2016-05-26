@@ -12,7 +12,7 @@
         <a
            href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
            class="btn btn-info">
-           <i class="fa fa-cog"></i>
+          <i class="fa fa-cog"></i>
           {{_ "view_ApiBackend_Details_editButtonText" }}
         </a>
       </div>
@@ -24,10 +24,10 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6">
           {{> viewApiBackendStatus apiBackend=apiBackend }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           {{> viewApiBackendServers apiBackend=apiBackend }}
         </div>
       </div>
