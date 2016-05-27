@@ -6,3 +6,12 @@ Template.documentation.events({
     Modal.show('manageApiDocumentationModal', { apiBackend })
   }
 });
+
+
+Template.documentation.onCreated(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Subscribe to organization logo collection
+  instance.subscribe('apiDocumentation');
+});
