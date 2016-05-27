@@ -7,28 +7,6 @@
         </div>
 
         <div class="modal-body">
-          <legend>Existing API documentation</legend>
-          {{#autoForm
-              collection="ApiBackends"
-              doc=apiBackend
-              id="apiBackendDocumentationLinkForm"
-              type="update" }}
-
-            {{>showHelp 'documentation_link'}}
-            {{> afQuickField name='documentation_link'}}
-
-            {{> showHelp 'importApiDocumentation'}}
-            {{> afQuickField name='documentationFileId'}}
-
-            <span class="help-block">{{_ "apiBackends_Documentation_Link"}}</span>
-            <div id="form-buttons">
-              <button type="submit" class="btn btn-lg btn-success" id="save-documentation-link">Save</button>
-            </div>
-          {{/ autoForm }}
-          <!--
-          <legend>{{_ "import_ApiDocumentation_Title"}}</legend>
-          {{> importApiDocumentation }} -->
-
           {{> showHelp 'apiDocumentationEditor'}}
           <legend>Create new documentation</legend>
           <a href="{{ pathFor 'apiDocumentationEditor' }}" target="_blank" class="btn btn-success btn-sm"><span class="fa fa-pencil"></span> Create API documentation</a>
