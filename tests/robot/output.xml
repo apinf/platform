@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20160304 11:23:18.184" generator="Robot 2.9.1 (Python 2.7.6 on linux2)">
+<suite source="/home/alapan/Desktop/api-umbrella-dashboard/tests/robot/tests.txt" id="s1" name="Tests">
+<kw type="setup" name="Go to APINF homepage">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>${HOMEPAGE}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20160304 11:23:18.257" level="INFO">Opening browser 'firefox' to base url 'https://nightly.apinf.io/'</msg>
+<status status="PASS" endtime="20160304 11:23:23.117" starttime="20160304 11:23:18.256"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20160304 11:23:23.123" starttime="20160304 11:23:23.118"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>APINF - API Management Platform</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:23.748" starttime="20160304 11:23:23.124"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:23.748" starttime="20160304 11:23:18.256"></status>
+</kw>
+<test id="s1-t1" name="Test Search button functionality">
+<kw name="Click Search button">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//button[text()='Search']</arg>
+</arguments>
+<msg timestamp="20160304 11:23:23.750" level="INFO">Clicking element 'xpath=//button[text()='Search']'.</msg>
+<status status="PASS" endtime="20160304 11:23:24.562" starttime="20160304 11:23:23.750"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Search APIs</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:25.237" starttime="20160304 11:23:24.562"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:25.237" starttime="20160304 11:23:23.749"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:25.238" critical="yes" starttime="20160304 11:23:23.749"></status>
+</test>
+<test id="s1-t2" name="Test searching for non-existent API">
+<kw name="Search for non-existent API">
+<arguments>
+<arg>7328o473ygtlwebhf437</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//input[@id='search-text']</arg>
+<arg>${searchString}</arg>
+</arguments>
+<msg timestamp="20160304 11:23:25.240" level="INFO">Typing text '7328o473ygtlwebhf437' into text field 'xpath=//input[@id='search-text']'</msg>
+<status status="PASS" endtime="20160304 11:23:25.475" starttime="20160304 11:23:25.239"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Nothing found.</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:26.521" starttime="20160304 11:23:25.475"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:26.521" starttime="20160304 11:23:25.239"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:26.521" critical="yes" starttime="20160304 11:23:25.238"></status>
+</test>
+<test id="s1-t3" name="Test searching for existing API">
+<kw name="Search for existing API">
+<arguments>
+<arg>${EXISTING-API}</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=search-text</arg>
+<arg>${searchString}</arg>
+</arguments>
+<msg timestamp="20160304 11:23:26.524" level="INFO">Typing text 'Test API' into text field 'id=search-text'</msg>
+<status status="PASS" endtime="20160304 11:23:26.675" starttime="20160304 11:23:26.523"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains `text`.</doc>
+<arguments>
+<arg>${searchString}</arg>
+</arguments>
+<msg timestamp="20160304 11:23:26.700" level="INFO">Current page contains text 'Test API'.</msg>
+<status status="PASS" endtime="20160304 11:23:26.701" starttime="20160304 11:23:26.675"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:26.701" starttime="20160304 11:23:26.523"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:26.701" critical="yes" starttime="20160304 11:23:26.522"></status>
+</test>
+<test id="s1-t4" name="Test Catalogue option in menu on Search API page">
+<kw name="View Catalogue">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//span[text()='Catalogue']</arg>
+</arguments>
+<msg timestamp="20160304 11:23:26.703" level="INFO">Clicking element 'xpath=//span[text()='Catalogue']'.</msg>
+<status status="PASS" endtime="20160304 11:23:26.860" starttime="20160304 11:23:26.703"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Available APIs</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:27.105" starttime="20160304 11:23:26.861"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:27.105" starttime="20160304 11:23:26.702"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:27.106" critical="yes" starttime="20160304 11:23:26.702"></status>
+</test>
+<test id="s1-t5" name="Test viewing details of existing API">
+<kw name="View details of existing API">
+<arguments>
+<arg>${EXISTING-API}</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=search-text</arg>
+<arg>${searchString}</arg>
+</arguments>
+<msg timestamp="20160304 11:23:27.108" level="INFO">Typing text 'Test API' into text field 'id=search-text'</msg>
+<status status="PASS" endtime="20160304 11:23:27.199" starttime="20160304 11:23:27.107"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//button[text()='Search']</arg>
+</arguments>
+<msg timestamp="20160304 11:23:27.200" level="INFO">Clicking element 'xpath=//button[text()='Search']'.</msg>
+<status status="PASS" endtime="20160304 11:23:27.958" starttime="20160304 11:23:27.199"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Search results</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:28.203" starttime="20160304 11:23:27.958"></status>
+</kw>
+<kw name="Click Link" library="Selenium2Library">
+<doc>Clicks a link identified by locator.</doc>
+<arguments>
+<arg>${searchString}</arg>
+</arguments>
+<msg timestamp="20160304 11:23:28.204" level="INFO">Clicking link 'Test API'.</msg>
+<status status="PASS" endtime="20160304 11:23:28.468" starttime="20160304 11:23:28.203"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${searchString}</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:28.484" starttime="20160304 11:23:28.469"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>Status</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:28.499" starttime="20160304 11:23:28.484"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:28.499" starttime="20160304 11:23:27.107"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:28.499" critical="yes" starttime="20160304 11:23:27.106"></status>
+</test>
+<test id="s1-t6" name="Test API usage instructions div is being shown">
+<kw name="View API usage instructions">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=//button[@data-target='#usage-instructions']</arg>
+</arguments>
+<msg timestamp="20160304 11:23:28.502" level="INFO">Clicking element 'xpath=//button[@data-target='#usage-instructions']'.</msg>
+<status status="PASS" endtime="20160304 11:23:28.573" starttime="20160304 11:23:28.501"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>id=usage-instructions</arg>
+</arguments>
+<status status="PASS" endtime="20160304 11:23:28.583" starttime="20160304 11:23:28.573"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:28.583" starttime="20160304 11:23:28.501"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:28.583" critical="yes" starttime="20160304 11:23:28.500"></status>
+</test>
+<kw type="teardown" name="Close All Browsers" library="Selenium2Library">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" endtime="20160304 11:23:28.623" starttime="20160304 11:23:28.585"></status>
+</kw>
+<status status="PASS" endtime="20160304 11:23:28.623" starttime="20160304 11:23:18.185"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="6">Critical Tests</stat>
+<stat fail="0" pass="6">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="Tests" pass="6">Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

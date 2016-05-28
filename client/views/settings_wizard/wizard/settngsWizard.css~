@@ -1,0 +1,6 @@
+.top-spacing {
+  padding-top: 10%;
+}
+#project-logo, #cover-photo {
+  display: none;
+}
