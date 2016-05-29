@@ -1,10 +1,10 @@
 [![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
 
 # Links
-[Documentation](http://apinf.org/docs) - APInf documentation
-[Discussion](http://community.apinf.io) - APInf discussion
-[Apinf Hackpad](http://apinf.hackpad.com) - Planning documents, meeting minutes
-[Sprint planning](https://waffle.io/apinf/api-umbrella-dashboard) - waffle.io sprint plans
+- [Documentation](http://apinf.org/docs) - APInf documentation
+- [Discussion](http://community.apinf.io) - APInf discussion
+- [Apinf Hackpad](http://apinf.hackpad.com) - Planning documents, meeting minutes
+- [Sprint planning](https://waffle.io/apinf/api-umbrella-dashboard) - waffle.io sprint plans
 
 # API Umbrella Dashboard
 The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
