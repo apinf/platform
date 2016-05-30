@@ -43,7 +43,7 @@
     </div>
     <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_GlobalRequestSettings_Title"}}</legend>
     <div id="global-request-block" class="collapse in">
-      {{>showHelp 'append_query_string'}}
+      <!-- {{>showHelp 'append_query_string'}}
       {{> afQuickField name='append_query_string'}}
       {{>showHelp 'set_headers'}}
       {{> afQuickField name='set_headers'}}
@@ -53,6 +53,7 @@
       {{> afQuickField name='require_https' options="allowed"}}
       {{>showHelp 'api_key_verification_level'}}
       {{> afQuickField name='api_key_verification_level' options="allowed"}}
+      {{> afQuickField name='sub_settings.disable_api_key'}}
       {{> afQuickField name='required_roles'}}
       {{> afQuickField name='pass_api_key_header'}}
       {{> afQuickField name='pass_api_key_query_param'}}
@@ -60,8 +61,10 @@
       {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
       {{> afQuickField name='custom_rate_limits'}}
       {{/if}}
-      {{>showHelp 'settings'}}
+      {{>showHelp 'settings'}} -->
       {{> afQuickField name='settings'}}
+      {{> afQuickField name='sub_settings'}}
+      {{> afQuickField name='rewrites'}}
     </div>
     <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_AdvancedRequestsRewriting"}}</legend>
     <div id="advanced-rewriting-block" class="collapse in">
