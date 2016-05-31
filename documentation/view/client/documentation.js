@@ -1,3 +1,7 @@
+Template.documentation.onCreated(function(){
+  
+});
+
 Template.documentation.events({
   'click #manage-api-documentation' (event, instance) {
     // Get reference to API backend
