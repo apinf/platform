@@ -84,7 +84,7 @@ AutoForm.addHooks(['settings'], {
     try {
       Meteor.call("createApiUmbrellaWeb");
       Meteor.call("initialSetupCompleteTrue", function() {
-        Router.go("settingsComplete");
+        Router.go("dashboard");
       });
     }
     // otherwise show an error
