@@ -79,12 +79,16 @@ AutoForm.addHooks(['settings'], {
   onSuccess: function () {
     // Call method to update Meteor.settings
     Meteor.call('updateMeteorSettings');
-    FlashMessages.sendSuccess('Settings saved.');
+    
     // Check if we can create ApiUmbrellaWeb object
     try {
       Meteor.call("createApiUmbrellaWeb");
       Meteor.call("initialSetupCompleteTrue", function() {
         Router.go("dashboard");
+        // Get success message
+        const successMessage = TAPi18n.__("setupWizard_successMessage");
+        // Show success message to end-user
+        FlashMessages.sendSuccess(successMessage);
       });
     }
     // otherwise show an error
