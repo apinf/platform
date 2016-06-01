@@ -6,11 +6,12 @@
           <h1 class="modal-title">API Documentation</h1>
         </div>
         <div class="modal-body">
+          {{#unless documentationExists }}
             <button class="btn btn-primary fileBrowse">Browse</button>
+          {{else}}
             <span style="text-align: center">{{ fileName }}</span>
-          {{#if documentationExists }}
             <button class="btn btn-danger del-file fa fa-trash pull-right">&nbsp;Delete</button>
-          {{/if}}
+          {{/unless}}
         </div>
       </div>
     </div>
