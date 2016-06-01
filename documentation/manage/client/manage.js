@@ -1,8 +1,7 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
 
 Template.manageApiDocumentationModal.onCreated(function () {
-  // Get current API Backend
-  const currentApiBackend = this.data.apiBackend;
+  const instance = this;
 
   // Subscribe to documentation
   Meteor.subscribe('allDocumentationFiles');
@@ -47,7 +46,7 @@ Template.manageApiDocumentationModal.onCreated(function () {
         const documentationFileId = documentationFile._str;
 
         // Update documenation file id field
-        ApiBackends.update(currentApiBackend._id, {$set: { documentationFileId }});
+        ApiBackends.update(instance.data.apiBackend._id, {$set: { documentationFileId }});
 
         // Hide modal
         Modal.hide('manageApiDocumentationModal');
@@ -83,7 +82,7 @@ Template.manageApiDocumentationModal.onRendered(function() {
 });
 
 Template.manageApiDocumentationModal.events({
-  'click .del-file': function(e, t) {
+  'click .del-file': function(event, instance) {
     if (Session.get("" + this._id)) {
       console.warn("Cancelling active upload to remove file! " + this._id);
       DocumentationFiles.resumable.removeFile(DocumentationFiles.resumable.getFromUniqueIdentifier("" + this._id));
@@ -95,12 +94,19 @@ Template.manageApiDocumentationModal.events({
     const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
     // Remove documentation object
-    return DocumentationFiles.remove(objectId);
+    DocumentationFiles.remove(objectId);
+
+    // Remove documenation file id field
+    ApiBackends.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
+
+    // Hide modal
+    Modal.hide('manageApiDocumentationModal');
 
 
-    // TODO
+    // DONE:
     // 1. Get currentApiBackend documentationFileId
     // 2. Remove documentationFile by MongoDB ObjectID
+
     // 3. $unset documentationFileId field in current ApiBackend
 
     //    return DocumentationFiles.remove({
@@ -121,4 +127,10 @@ Template.manageApiDocumentationModal.helpers({
     var percent = Session.get("" + this._id);
     return percent || 0;
   },
+  documentationExists: function () {
+    const currentApiBackend = this.apiBackend;
+    if (currentApiBackend.documentationFileId) {
+      return true;
+    }
+  }
 });
