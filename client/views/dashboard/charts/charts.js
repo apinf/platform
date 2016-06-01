@@ -213,11 +213,50 @@ Template.chartsLayout.created = function () {
       }
     }).data('dynatable');
 
+    // Init datatable
+    initDatatable();
+
+    // Init datatable function
+    function initDatatable () {
+
+      // Get initial or updated table data
+      const tableData = setUpDataTable();
+
+      // Save reference to datatable body element
+      const datatableBody = $('.datatable tbody');
+
+      // Cleanup datatable if it already has any rows
+      datatableBody.empty()
+
+      // Iterate through each data item and append a row with data to datatable
+      _.each(tableData, (tableItem) => {
+        datatableBody.append(`
+          <tr>
+            <th scope="row">${tableItem.time}</th>
+            <td>${tableItem.country}</td>
+            <td>${tableItem.path}</td>
+            <td>${tableItem.ip}</td>
+            <td>${tableItem.response}</td>
+          </tr>
+          `);
+      });
+
+      // Initialize data table
+      $('.datatable').dataTable();
+    }
+
     // Listens to filtering event and refreshes the table on a change
     function refreshTable() {
       dc.events.trigger(function () {
         dynatable.settings.dataset.originalRecords = setUpDataTable();
         dynatable.process();
+
+        // Destory datatable to drop pagination
+        $('.datatable').dataTable().fnDestroy();
+
+        // Fill datatable with updated data
+        initDatatable();
+
       });
     }
 
