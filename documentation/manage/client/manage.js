@@ -101,17 +101,6 @@ Template.manageApiDocumentationModal.events({
 
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
-
-
-    // DONE:
-    // 1. Get currentApiBackend documentationFileId
-    // 2. Remove documentationFile by MongoDB ObjectID
-
-    // 3. $unset documentationFileId field in current ApiBackend
-
-    //    return DocumentationFiles.remove({
-    //      _id: this._id
-    //    });
   }
 });
 
