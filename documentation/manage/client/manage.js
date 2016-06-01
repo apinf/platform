@@ -98,6 +98,8 @@ Template.manageApiDocumentationModal.events({
 
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
+
+    sAlert.success("File successfully deleted!");
   }
 });
 
