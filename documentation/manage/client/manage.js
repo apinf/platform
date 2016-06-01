@@ -62,11 +62,8 @@ Template.manageApiDocumentationModal.onCreated(function () {
     return Session.set(file.uniqueIdentifier, Math.floor(100 * file.progress()));
   });
   DocumentationFiles.resumable.on('fileSuccess', function(file) {
+    // Inform user about successful upload
     sAlert.success("File successfully uploaded!");
-
-    // TODO
-    // 1. Get documentation file just added by Id?
-    // 2. set documentationFileId for apiBackend
 
     return Session.set(file.uniqueIdentifier, void 0);
   });
