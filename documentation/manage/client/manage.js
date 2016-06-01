@@ -34,11 +34,17 @@ Template.manageApiDocumentationModal.onCreated(function () {
         _id: file.uniqueIdentifier,
         filename: file.fileName,
         contentType: file.file.type
-      }, function(err, _id) {
+      }, function(err, documentationFile) {
         if (err) {
           console.warn("File creation failed!", err);
           return;
         }
+        // Get the id from documentation file object
+        const documentationFileId = documentationFile._str;
+
+        // Update documenation file id field
+        ApiBackends.update(currentApiBackend._id, {$set: { documentationFileId }});
+
         return documentationFiles.resumable.upload();
       });
     } else {
