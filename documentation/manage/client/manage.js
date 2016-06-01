@@ -104,7 +104,13 @@ Template.manageApiDocumentationModal.events({
 
 Template.manageApiDocumentationModal.helpers({
   fileName: function() {
-    return this.filename;
+    const currentDocumentationFileId = this.apiBackend.documentationFileId;
+
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
+    const currentDocumentationFile = DocumentationFiles.findOne(objectId);
+
+    return currentDocumentationFile.filename;
   },
   link: function() {
     return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + this.md5;

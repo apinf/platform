@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
             <button class="btn btn-primary fileBrowse">Browse</button>
-            <span style="text-align: center">Show filename here</span>
+            <span style="text-align: center">{{ fileName }}</span>
           {{#if documentationExists }}
             <button class="btn btn-danger del-file fa fa-trash pull-right">&nbsp;Delete</button>
           {{/if}}
