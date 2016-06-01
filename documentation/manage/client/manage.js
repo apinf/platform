@@ -39,6 +39,7 @@ Template.manageApiDocumentationModal.onCreated(function () {
         contentType: file.file.type
       }, function(err, documentationFile) {
         if (err) {
+          sAlert.error("File creation failed!", err);
           console.warn("File creation failed!", err);
           return;
         }
@@ -48,20 +49,22 @@ Template.manageApiDocumentationModal.onCreated(function () {
         // Update documenation file id field
         ApiBackends.update(currentApiBackend._id, {$set: { documentationFileId }});
 
+        // Hide modal
+        Modal.hide('manageApiDocumentationModal');
+
         return DocumentationFiles.resumable.upload();
       });
     } else {
       // Inform user about file size Limit
-      alert("File size limit 10MB");
+      sAlert.warning("File size limit 10MB");
     }
   });
   DocumentationFiles.resumable.on('fileProgress', function(file) {
     return Session.set(file.uniqueIdentifier, Math.floor(100 * file.progress()));
   });
   DocumentationFiles.resumable.on('fileSuccess', function(file) {
-    alert("File successfully uploaded!");
+    sAlert.success("File successfully uploaded!");
 
-    console.log(file);
     // TODO
     // 1. Get documentation file just added by Id?
     // 2. set documentationFileId for apiBackend
@@ -76,7 +79,6 @@ Template.manageApiDocumentationModal.onCreated(function () {
 
 Template.manageApiDocumentationModal.onRendered(function() {
   // Assign resumable browse to element
-  console.log(this.data.apiBackend);
   DocumentationFiles.resumable.assignBrowse($('.fileBrowse'));
 });
 
@@ -86,12 +88,15 @@ Template.manageApiDocumentationModal.events({
       console.warn("Cancelling active upload to remove file! " + this._id);
       DocumentationFiles.resumable.removeFile(DocumentationFiles.resumable.getFromUniqueIdentifier("" + this._id));
     }
-    console.log("Deleting");
-
     // Get currentApiBackend documentationFileId
     const documentationFileId = this.apiBackend.documentationFileId;
 
-    DocumentationFiles.remove(documentationFileId);
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+
+    // Remove documentation object
+    return DocumentationFiles.remove(objectId);
+
 
     // TODO
     // 1. Get currentApiBackend documentationFileId
