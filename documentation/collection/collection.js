@@ -1,4 +1,4 @@
-const documentationFiles = FileCollection({
+const DocumentationFiles = FileCollection({
   resumable: true,
   resumableIndexName: 'test',
   http: [
@@ -14,4 +14,4 @@ const documentationFiles = FileCollection({
   ]
 });
 
-export { documentationFiles };
+export { DocumentationFiles };

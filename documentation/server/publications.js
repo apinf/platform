@@ -1,8 +1,8 @@
-import { documentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '/documentation/collection/collection';
 
 Meteor.publish(
   'allDocumentationFiles', function() {
-    return documentationFiles.find({
+    return DocumentationFiles.find({
       'metadata._Resumable': {
         $exists: false
       }

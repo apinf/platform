@@ -1,6 +1,6 @@
-import { documentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '/documentation/collection/collection';
 
-documentationFiles.allow({
+DocumentationFiles.allow({
   insert: function(userId, file) {
     return true;
   },
