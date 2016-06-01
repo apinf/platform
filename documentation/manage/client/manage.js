@@ -108,9 +108,14 @@ Template.manageApiDocumentationModal.helpers({
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
+
+    // Get documentation file Object
     const currentDocumentationFile = DocumentationFiles.findOne(objectId);
 
-    return currentDocumentationFile.filename;
+    // Check if documentation file is available
+    if (currentDocumentationFile) {
+      return currentDocumentationFile.filename;
+    }
   },
   link: function() {
     return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + this.md5;
