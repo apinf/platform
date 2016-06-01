@@ -120,7 +120,19 @@ Template.manageApiDocumentationModal.helpers({
     }
   },
   link: function() {
-    return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + this.md5;
+    const currentDocumentationFileId = this.apiBackend.documentationFileId;
+
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
+
+    // Get documentation file Object
+    const currentDocumentationFile = DocumentationFiles.findOne(objectId);
+
+    // Check if documentation file is available
+    if (currentDocumentationFile) {
+      // Get documentation file URL
+      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + currentDocumentationFile.md5;
+    }
   },
   uploadProgress: function() {
     var percent = Session.get("" + this._id);
