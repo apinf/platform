@@ -1,0 +1,11 @@
+### Heuristics and Severity Rating for conducting Usability Tests
+
+Forsell, C., & Johansson, J. (2010, May). An heuristic set for evaluation in information visualization. In Proceedings of the International Conference on Advanced Visual Interfaces (pp. 199-206). ACM.
+
+### Heuristics
+
+- 1. Information coding
+    - Perception of information is directly dependent on the mapping of data elements to visual objects (graphing techniques, color, type and meaning of symbols,
+    shading, transparency, etc). This can be enhanced by using realistic characteristics/techniques or the use of additional symbols (legends, scales, drop lines, grid
+    lines). Is the mapping correct? Is it appropriate for the task at hand, does it support user’s perceptual capabilities?  
+    Another important aspect is the use of alternative visual attributes or objects to represent information derived from the data like groups of elements in clusteredrepresentations. 
