@@ -15,7 +15,3 @@ Meteor.publish("singleSetting", function (setting) {
   return cursor;
 });
 
-Meteor.publish('initialSetupComplete', function() {
-  const settings = Settings.findOne();
-  return settings.initialSetupComplete;
-});
