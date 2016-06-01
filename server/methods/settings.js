@@ -13,7 +13,7 @@ Meteor.methods({
 
     return apiUmbrellaHost;
   },
-  'isSettingsObjectValidAndEmpty': function() {
+  'settingsObjectIsValidAndEmpty': function() {
     // check structure of Meteor.settings object - initially, it should be { public: {} }
 
     // array reference to keys in Meteor.settings object
