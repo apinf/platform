@@ -42,6 +42,17 @@
             {{> afQuickField name='elasticsearch.host'}}
           </div>
         </div>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Email settings</h3>
+                  {{> afQuickField name='email.enabled'}}
+              </div>
+              <div class="panel-body">
+                  {{#if afFieldValueIs name="email.enabled" value=true}}
+                      {{> afQuickField name='email.domain'}}
+                  {{/if}}
+              </div>
+          </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Mail</h3>

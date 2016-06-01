@@ -79,6 +79,19 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'http://example.com:14002/'
     }
   },
+  email:{
+    type: Object,
+    optional:true
+  },
+  "email.enabled": {
+    type: Boolean,
+    optional:true
+  },
+  "email.domain": {
+    type: String,
+    label: "Domain of the site",
+    optional: true,
+  },
   mail: {
     type: Object,
     optional: true
