@@ -57,10 +57,6 @@ Template.manageApiDocumentationModal.onCreated(function () {
       sAlert.warning("File size limit 10MB");
     }
   });
-  DocumentationFiles.resumable.on('fileSuccess', function(file) {
-    // Inform user about successful upload
-    sAlert.success("File successfully uploaded!");
-  });
 });
 
 Template.manageApiDocumentationModal.onRendered(function() {
