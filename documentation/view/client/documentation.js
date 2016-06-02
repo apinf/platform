@@ -2,7 +2,7 @@ import { DocumentationFiles } from '/documentation/collection/collection';
 
 Template.documentation.onCreated(function(){
   const instance = this;
-  
+
   // console.log(instance);
   // Subscribe to documentation
   Meteor.subscribe('allDocumentationFiles');
@@ -22,6 +22,12 @@ Template.documentation.helpers({
     if (currentDocumentationFile) {
       // Get documentation file URL
       return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + currentDocumentationFile.md5;
+    }
+  },
+  documentationExists: function () {
+    const currentApiBackend = this.apiBackend;
+    if (currentApiBackend.documentationFileId) {
+      return true;
     }
   }
 });
