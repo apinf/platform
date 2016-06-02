@@ -220,7 +220,7 @@ Template.chartsLayout.created = function () {
       _.each(tableData, (tableItem) => {
         datatableBody.append(`
           <tr>
-            <th scope="row">${tableItem.time}</th>
+            <td scope="row">${tableItem.time}</td>
             <td>${tableItem.country}</td>
             <td>${tableItem.path}</td>
             <td>${tableItem.ip}</td>
