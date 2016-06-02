@@ -7,3 +7,5 @@ settings.json
 uploads/
 mup.json
 docker/api-umbrella/config/api-umbrella.yml
+node_modules/
+packages

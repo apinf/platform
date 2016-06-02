@@ -1,12 +1,9 @@
+Template.sidebar.onCreated(function () {
+  var instance = this;
+  instance.subscribe("singleSetting", "apiDocumentationEditor");
+});
+
 Template.sidebar.helpers({
-  userHasApis : function() {
-    // get current user id
-    var currentUserId = Meteor.userId();
-    // count added apis
-    var backendsCount  = ApiBackends.find({managerIds: currentUserId}).count();
-    // return true if user has backends
-    return backendsCount > 0;
-  },
   apiDocumentationEditorIsEnabled : function() {
     // Saving the fields apiDocumentationEditor.enabled into the variable
     // settings.
@@ -15,12 +12,5 @@ Template.sidebar.helpers({
     if(settings && settings.apiDocumentationEditor) {
       return settings.apiDocumentationEditor.enabled
     }
-
   }
 });
-
-Template.sidebar.created = function () {
-  var instance = this;
-  instance.subscribe('myManagedApis');
-  instance.subscribe("singleSetting", "apiDocumentationEditor");
-}

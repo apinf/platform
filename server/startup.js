@@ -1,4 +1,21 @@
 Meteor.startup(function () {
+  // Run migrations first
+  Migrations.migrateTo('latest');
+
+  // Get the settings
+  var settings = Meteor.settings;
+
+  // check is settings are exist
+  var dbSettings = Settings.find().fetch();
+
+  if ( dbSettings.length === 0 ) {
+    // insert Meteor.settings into Settings Collection
+    Settings.insert(settings);
+  }
+
+  // Updating Meteor.settings from Settings collection
+  Meteor.call('updateMeteorSettings');
+
   try {
     // Store settings object
     var settings = Meteor.settings;
