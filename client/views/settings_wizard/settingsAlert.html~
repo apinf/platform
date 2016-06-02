@@ -1,9 +1,0 @@
-<template name="settingsAlert">
-  <div class="alert alert-warning">
-    <a href="#" class="close" data-dismiss="alert" aria-label="Close">&times;</a>
-    <p>
-      <strong>Additional configuration required!</strong><br>
-        Hey there, this instance of <strong>APINF</strong> needs additional configuration. Click <a href="{{pathFor route='settingsWizard'}}">here</a> to continue. You must be an admin to do this!!
-    </p>
-  </div>
-</template>

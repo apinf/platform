@@ -1,7 +1,0 @@
-Meteor.methods({
-
-  "checkRequiredSettings": function() {
-
-
-  }
-});

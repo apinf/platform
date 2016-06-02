@@ -1,5 +1,0 @@
-<template name="settingsComplete">
-  <div class="alert alert-success">
-    Settings configured successfully! Click <a href="{{pathFor route='dashboard'}}">here </a> to return to your dashboard.
-  </div>
-</template>
