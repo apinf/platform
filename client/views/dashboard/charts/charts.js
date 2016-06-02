@@ -331,7 +331,7 @@ Template.chartsLayout.created = function () {
         }
 
         dataSet.push({
-          "time"          : timeStamp,
+          "time"          : moment.unix(timeStamp).format("D/MM/YYYY HH:mm:ss"),
           "country"       : country,
           "path"          : path,
           "ip"            : requestIp,
