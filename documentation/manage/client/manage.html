@@ -6,12 +6,24 @@
           <h1 class="modal-title">API Documentation</h1>
         </div>
         <div class="modal-body">
-          {{#unless documentationExists }}
+          <div class="documentation-file">
+            <h4>Documentation File</h4>
+            {{#unless documentationExists }}
             <button class="btn btn-primary fileBrowse">Browse</button>
-          {{else}}
-            <span style="text-align: center">{{ fileName }}</span>
-            <button class="btn btn-danger del-file fa fa-trash pull-right">&nbsp;Delete</button>
-          {{/unless}}
+            {{else}}
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="glyphicon glyphicon-file"></span>
+                {{ fileName }}
+                <span class="pull-right">
+                  <button class="btn btn-xs btn-danger del-file">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </span>
+              </li>
+            </ul>
+            {{/unless}}
+          </div>
         </div>
       </div>
     </div>
