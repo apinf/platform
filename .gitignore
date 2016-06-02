@@ -6,5 +6,6 @@ settings.json
 .idea/
 uploads/
 mup.json
+docker/api-umbrella/config/api-umbrella.yml
 node_modules/
 packages

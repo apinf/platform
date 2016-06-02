@@ -30,40 +30,28 @@ For the ecosystem, we will concentrate on open APIs in the MVP phase. For the AP
 
 # Installation
 
+## From Source Code
+
 1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
 2. Install [Meteor.js](https://www.meteor.com/install)
 3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
-4. Create [`settings.json`](#Settings.json)
-5. Type `meteor --settings /path/to/settings.json` in the project directory
+4. Type `meteor` in the project directory
 
-# Settings.json
+## With Docker
 
-Your `settings.json` file should have the following structure:
+1. Install [Docker Engine for your OS](https://docs.docker.com/engine/installation/)
+2. Run API-umbrella container http://api-umbrella.readthedocs.io/en/latest/getting-started.html#running-with-docker
+3. Obtaining API Key and Authentication token. You can obtain the *Authentication Token* and *API Key* from the API Umbrella platform by following instructions in the [Getting Started](http://apiumbrella.io/docs/getting-started/) and [API Umbrella Admin API](http://apiumbrella.io/docs/admin-api/) documentation.
+4. Run APInf container ```docker run -p 8080:80 -e MONGO_URL=mongodb://localhost:27017/your_db -e MAIL_URL=smtp://some.mailserver.com:25 -e ROOT_URL=http://YOUR_SITE_DOMAIN apinf/apinf:latest```
+5. Configure APInf
 
-```
-{
-  "apiUmbrella": {
-    "apiKey": "xxx",
-    "authToken": "xxx",
-    "baseUrl": "https://example.com/api-umbrella/",
-    "host": "https://example.com"
-  },
-  "mail": {
-    "username": "xxx",
-    "password": "xxx"
-  },
-  "elasticsearch": {
-    "host": "http://example.com:14002/"
-  },
-  "githubConfiguration": {
-    "clientId" : "xxx",
-    "secret" : "xxx"
-  }
-}
-```
+# Configure APInf
 
-## api_umbrella
-The `api_umbrella` settings include an API Key, Admin Auth Token, and API Umbrella base URL. You can get the API Key and Admin Auth Token from API Umbrella, by following the instructions in the [Meteor - API Umbrella integration package](https://github.com/brylie/meteor-api-umbrella#installation).
+Register a new admin account. The first user will become Admin.
+
+ 1. Signup to the APInf http://YOUR_SITE_DOMAIN/sign-up
+ 2. Login to the APInf web admin http://YOUR_SITE_DOMAIN/sign-in
+ 3. Fill APInf settings http://YOUR_SITE_DOMAIN/settings
 
 ## mail
 The mail object contains a username and password for the Mailgun service. You will need to register with Mailgun. Once registered, you can use your 'sandbox' domain credentials in a development environment or a custom domain in production:
