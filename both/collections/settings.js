@@ -147,6 +147,10 @@ Schemas.SettingsSchema = new SimpleSchema({
     autoform: {
       placeholder: 'xxx'
     }
+  },
+  initialSetupComplete: {
+    type: Boolean,
+    optional: true
   }
 });
 

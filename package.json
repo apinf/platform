@@ -14,7 +14,8 @@
     "jquery.rateit": "^1.0.23",
     "js-yaml": "^3.6.1",
     "simple-statistics": "^2.0.0-beta1",
-    "swagger-parser": "^3.4.1"
+    "swagger-parser": "^3.4.1",
+    "simple-statistics": "^2.0.0"
   },
   "devDependencies": {},
   "scripts": {
