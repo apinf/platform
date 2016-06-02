@@ -31,7 +31,6 @@ Template.manageApiDocumentationModal.onCreated(function () {
 
   DocumentationFiles.resumable.on('fileAdded', function(file) {
     if(file && file.size <= 10485760) { // Limit file size to 10 MB
-      Session.set(file.uniqueIdentifier, 0); //Init file progress
       return DocumentationFiles.insert({
         _id: file.uniqueIdentifier,
         filename: file.fileName,
@@ -58,18 +57,9 @@ Template.manageApiDocumentationModal.onCreated(function () {
       sAlert.warning("File size limit 10MB");
     }
   });
-  DocumentationFiles.resumable.on('fileProgress', function(file) {
-    return Session.set(file.uniqueIdentifier, Math.floor(100 * file.progress()));
-  });
   DocumentationFiles.resumable.on('fileSuccess', function(file) {
     // Inform user about successful upload
     sAlert.success("File successfully uploaded!");
-
-    return Session.set(file.uniqueIdentifier, void 0);
-  });
-  return DocumentationFiles.resumable.on('fileError', function(file) {
-    console.warn("Error uploading", file.uniqueIdentifier);
-    return Session.set(file.uniqueIdentifier, void 0);
   });
 });
 
@@ -80,10 +70,7 @@ Template.manageApiDocumentationModal.onRendered(function() {
 
 Template.manageApiDocumentationModal.events({
   'click .del-file': function(event, instance) {
-    if (Session.get("" + this._id)) {
-      console.warn("Cancelling active upload to remove file! " + this._id);
-      DocumentationFiles.resumable.removeFile(DocumentationFiles.resumable.getFromUniqueIdentifier("" + this._id));
-    }
+
     // Get currentApiBackend documentationFileId
     const documentationFileId = this.apiBackend.documentationFileId;
 
@@ -118,10 +105,6 @@ Template.manageApiDocumentationModal.helpers({
     if (currentDocumentationFile) {
       return currentDocumentationFile.filename;
     }
-  },
-  uploadProgress: function() {
-    var percent = Session.get("" + this._id);
-    return percent || 0;
   },
   documentationExists: function () {
     const currentApiBackend = this.apiBackend;
