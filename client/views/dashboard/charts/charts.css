@@ -4,3 +4,9 @@
 #overview-chart-box, #move-chart-box, #data-table-box, #filter-box, #map-box{
     padding:5px;
 }
+
+@media only screen and (max-width: 1551px) {
+    .data-table-container, .map-container {
+        width:100%;
+    }
+}
