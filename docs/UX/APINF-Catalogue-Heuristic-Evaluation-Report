@@ -89,3 +89,7 @@
     - user may wish to remember how he sorted out the available list on returning back to API page after other navigation. The current functionality prevents this.
     - should maintain user's sortiing order when logged in.
     - is also applicable (if implemented) filtering option is used (unless clear filer is performed).
+
+- 20. On landing page search, suggestions not relevant to APIs also appear. [6][2]
+        - Now on typing something in search field, autofilled data appears as suggestion even though they are not related to any API
+        - When user is typing keywords, suggestions related to APIs should only appear. Not auto filled irrelevalent data of users or previous search queries
