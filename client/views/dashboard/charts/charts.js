@@ -1,4 +1,5 @@
 import dc from 'dc';
+import dataTeble from 'datatables';
 
 Template.chartsLayout.rendered = function () {
 
@@ -230,7 +231,9 @@ Template.chartsLayout.created = function () {
       });
 
       // Initialize data table
-      $('.datatable').dataTable();
+      $('.datatable').dataTable({
+        pagingType: 'simple'
+      });
     }
 
     // Listens to filtering event and refreshes the table on a change
