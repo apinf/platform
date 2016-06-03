@@ -1,4 +1,5 @@
 import dc from 'dc';
+import dataTeble from 'datatables';
 
 Template.chartsLayout.rendered = function () {
 
@@ -201,23 +202,50 @@ Template.chartsLayout.created = function () {
       .renderVerticalGridLines(true)
       .elasticY(true);
 
-    // Creates Dynatable
-    var dynatable = $('#dc-data-table').dynatable({
-      features: {
-        pushState: false
-      },
-      dataset: {
-        records: setUpDataTable(),
-        perPageDefault: 10,
-        perPageOptions: [10, 20, 50, 100]
-      }
-    }).data('dynatable');
+    // Init datatable
+    initDatatable();
+
+    // Init datatable function
+    function initDatatable () {
+
+      // Get initial or updated table data
+      const tableData = setUpDataTable();
+
+      // Save reference to datatable body element
+      const datatableBody = $('.datatable tbody');
+
+      // Cleanup datatable if it already has any rows
+      datatableBody.empty()
+
+      // Iterate through each data item and append a row with data to datatable
+      _.each(tableData, (tableItem) => {
+        datatableBody.append(`
+          <tr>
+            <td scope="row">${tableItem.time}</td>
+            <td>${tableItem.country}</td>
+            <td>${tableItem.path}</td>
+            <td>${tableItem.ip}</td>
+            <td>${tableItem.response}</td>
+          </tr>
+          `);
+      });
+
+      // Initialize data table
+      $('.datatable').dataTable({
+        pagingType: 'simple'
+      });
+    }
 
     // Listens to filtering event and refreshes the table on a change
     function refreshTable() {
       dc.events.trigger(function () {
-        dynatable.settings.dataset.originalRecords = setUpDataTable();
-        dynatable.process();
+
+        // Destory datatable to drop pagination
+        $('.datatable').dataTable().fnDestroy();
+
+        // Fill datatable with updated data
+        initDatatable();
+
       });
     }
 
@@ -273,7 +301,7 @@ Template.chartsLayout.created = function () {
 
         // Error handling for empty fields
         try{
-          timeStamp = e.fields.request_at[0];
+          timeStamp = moment(e.fields.request_at[0]);
         }catch(e){
           timeStamp = "";
         }
@@ -303,7 +331,7 @@ Template.chartsLayout.created = function () {
         }
 
         dataSet.push({
-          "time"          : timeStamp,
+          "time"          : timeStamp.format("D/MM/YYYY HH:mm:ss"),
           "country"       : country,
           "path"          : path,
           "ip"            : requestIp,

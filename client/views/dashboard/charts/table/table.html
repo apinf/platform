@@ -3,16 +3,29 @@
     <div class="box-header with-border">
       <h3 class="box-title">{{_ "dataTable_Title"}}</h3>
     </div>
-    <table class='table table-hover display' id='dc-data-table'>
+    <table class="datatable table table-bordered">
       <thead>
         <tr>
-          <th data-dynatable-column="time" >{{_ "dataTable_TimeStamp"}}</th>
-          <th data-dynatable-column="country" >{{_ "dataTable_RequestCountry"}}</th>
-          <th data-dynatable-column="ip">{{_ "dataTable_RequestIP"}}</th>
-          <th data-dynatable-column="path">{{_ "dataTable_RequestPath"}}</th>
-          <th data-dynatable-column="response">{{_ "dataTable_ResponseTime"}}</th>
+          <th>
+            {{_ "dataTable_TimeStamp"}}
+          </th>
+          <th>
+            {{_ "dataTable_RequestCountry"}}
+          </th>
+          <th>
+            {{_ "dataTable_RequestPath"}}
+          </th>
+          <th>
+            {{_ "dataTable_RequestIP"}}
+          </th>
+          <th>
+            {{_ "dataTable_ResponseTime"}}
+          </th>
         </tr>
       </thead>
+      <tbody>
+
+      </tbody>
     </table>
   </div>
 </template>
