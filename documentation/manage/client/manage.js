@@ -29,18 +29,16 @@ Template.manageApiDocumentationModal.onCreated(function () {
   };
   InlineHelp.initHelp(helpTexts);
 
-  // Save apibackend id
-  Session.set('currentApiBackendId', instance.data.apiBackend._id);
-});
-
-Template.manageApiDocumentationModal.onRendered(function() {
-  // Assign resumable browse to element
-  DocumentationFiles.resumable.assignBrowse($('.fileBrowse'));
+  instance.autorun(function () {
+    const apiBackend = ApiBackends.findOne(instance.data.apiBackend._id);
+    // Save apibackend id
+    Session.set('currentApiBackend', apiBackend);
+  });
 });
 
 Template.manageApiDocumentationModal.onDestroyed(function() {
   // Unset session
-  Session.set('currentApiBackendId', undefined);
+  Session.set('currentApiBackend', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
@@ -58,9 +56,6 @@ Template.manageApiDocumentationModal.events({
     // Remove documenation file id field
     ApiBackends.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
 
-    // Hide modal
-    Modal.hide('manageApiDocumentationModal');
-
     sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
   },
   'click #save-documentation-link': function(event, instance) {
@@ -71,8 +66,10 @@ Template.manageApiDocumentationModal.events({
 
 
 Template.manageApiDocumentationModal.helpers({
-  fileName: function() {
-    const currentDocumentationFileId = this.apiBackend.documentationFileId;
+  documentationFile: function() {
+    const currentApiBackend = Session.get('currentApiBackend');
+
+    const currentDocumentationFileId = currentApiBackend.documentationFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
@@ -82,13 +79,7 @@ Template.manageApiDocumentationModal.helpers({
 
     // Check if documentation file is available
     if (currentDocumentationFile) {
-      return currentDocumentationFile.filename;
-    }
-  },
-  documentationExists: function () {
-    const currentApiBackend = this.apiBackend;
-    if (currentApiBackend.documentationFileId) {
-      return true;
+      return currentDocumentationFile;
     }
   }
 });
