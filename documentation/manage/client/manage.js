@@ -9,19 +9,13 @@ Template.manageApiDocumentationModal.onCreated(function () {
   // Initialize help texts
   const helpTexts = {
     'documentation_link': {
-      message: TAPi18n.__('editApi_hints_documentation_link'),
+      message: TAPi18n.__('manageApiDocumentationModal_hints_documentation_link'),
       options: {
         placement: 'left'
       }
     },
-    'apiDocumentationEditor': {
-      message: TAPi18n.__('editApi_hints_apiDocumentationEditor'),
-      options: {
-        placement: 'left'
-      }
-    },
-    'importApiDocumentation': {
-      message: TAPi18n.__('editApi_hints_importApiDocumentation'),
+    'uploadApiDocumentation': {
+      message: TAPi18n.__('manageApiDocumentationModal_hints_uploadApiDocumentation'),
       options: {
         placement: 'left'
       }
@@ -45,7 +39,7 @@ Template.manageApiDocumentationModal.events({
   'click .delete-documentation': function(event, instance) {
 
     // Get currentApiBackend documentationFileId
-    const documentationFileId = this.apiBackend.documentationFileId;1
+    const documentationFileId = this.apiBackend.documentationFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(documentationFileId);

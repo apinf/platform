@@ -212,8 +212,6 @@
   "editApi_hints_backend_host": "Server where your API is hosted.",
   "editApi_hints_frontend_host": "Server where Umbrella is hosted. <br><br> If API Umbrella installed locally, enter <b>localhost</b> as your Backend host.",
   "editApi_hints_url_matches": "We recommend to have a unique URL Front-end prefix for your API so that it does not conflict with other existing APIs.<br> Apart from that, you can also segregate different sections of your API with different prefixes. <br>All the requests made to the 'Front-end host / Front-end prefix' will be re-written to 'Backend host / Backend prefix' <br><br>Frontend prefix: A prefix for your API, recognized by the Umbrella, e.g. /my_dev_api/ <br><br>Backend prefix: Usually a part of your API's url, helpful to shorten the URL used for accessing your API, e.g. /apiv2/staging/experimental OR something as simple as '/'.",
-  "editApi_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
-  "editApi_hints_apiDocumentationEditor": "You can also choose to create a new documentation for your APIs using swagger at our own server",
   "editApi_hints_importApiDocumentation": "If your documentation exists but is not available online, you can host it on APINF.<br> Upload your documentation in Swagger format here.",
   "editApi_hints_append_query_string": "Add the parameters required by your API in <strong>key1=value1&key2=value2</strong> format. <br>This place is best to add those parameters that is not mandatory for your API-users but your API needs them for providing meaningful data.",
   "editApi_hints_set_headers": "If your API requires some specific headers to be set, they should be added here",
@@ -232,7 +230,8 @@
   "manageApiDocumentationModal_AddedFile_Message": "File successfully uploaded!",
   "manageApiDocumentationModal_DeletedFile_Message": "File successfully deleted!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
-
+  "manageApiDocumentationModal_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
+  "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation for your APIs using swagger at our own server",
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
