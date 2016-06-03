@@ -44,19 +44,28 @@ Template.manageApiDocumentationModal.onDestroyed(function() {
 Template.manageApiDocumentationModal.events({
   'click .delete-documentation': function(event, instance) {
 
-    // Get currentApiBackend documentationFileId
-    const documentationFileId = this.apiBackend.documentationFileId;1
+    // Show confirmation dialog to user
+    const confirmation = confirm(TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage'));
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+    // Check if user clicked "OK"
+    if (confirmation === true) {
 
-    // Remove documentation object
-    DocumentationFiles.remove(objectId);
+      // Get currentApiBackend documentationFileId
+      const documentationFileId = this.apiBackend.documentationFileId;1
 
-    // Remove documenation file id field
-    ApiBackends.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-    sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
+      // Remove documentation object
+      DocumentationFiles.remove(objectId);
+
+      // Remove documenation file id field
+      ApiBackends.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
+
+      sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
+
+    }
+
   },
   'click #save-documentation-link': function(event, instance) {
     // Hide modal
