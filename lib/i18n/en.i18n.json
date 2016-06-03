@@ -228,7 +228,8 @@
   "documentation_Viewer_Title": "Viewer",
   "manageApiDocumentationModal_Title": "API Documentation",
   "manageApiDocumentationModal_FileUpload_Title": "Documentation File",
-  "manageApiDocumentationModal_FileUpload_Button": "Choose file",
+  "manageApiDocumentationModalUploadButton": "Choose file",
+  "manageApiDocumentationModal_AddedFile_Message": "File successfully uploaded!",
   "manageApiDocumentationModal_DeletedFile_Message": "File successfully deleted!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
 

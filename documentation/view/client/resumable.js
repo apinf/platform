@@ -21,7 +21,7 @@ Meteor.startup( function() {
         // Update documenation file id field
         ApiBackends.update(apiBackend._id, {$set: { documentationFileId }});
 
-        sAlert.success("Documentation uploaded!");
+        sAlert.success(TAPi18n.__('manageApiDocumentationModal_AddedFile_Message'));
 
         return DocumentationFiles.resumable.upload();
       });
