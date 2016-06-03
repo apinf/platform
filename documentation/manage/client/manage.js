@@ -33,14 +33,14 @@ Template.manageApiDocumentationModal.onCreated(function () {
   Session.set('currentApiBackendId', instance.data.apiBackend._id);
 });
 
-Template.manageApiDocumentationModal.onDestroyed(function() {
-  // Unset session
-  Session.set('currentApiBackendId', undefined);
-})
-
 Template.manageApiDocumentationModal.onRendered(function() {
   // Assign resumable browse to element
   DocumentationFiles.resumable.assignBrowse($('.fileBrowse'));
+});
+
+Template.manageApiDocumentationModal.onDestroyed(function() {
+  // Unset session
+  Session.set('currentApiBackendId', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
