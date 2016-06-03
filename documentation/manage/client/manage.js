@@ -82,6 +82,10 @@ Template.manageApiDocumentationModal.events({
     Modal.hide('manageApiDocumentationModal');
 
     sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
+  },
+  'click #save-documentation-link': function(event, instance) {
+    // Hide modal
+    Modal.hide('manageApiDocumentationModal');
   }
 });
 
