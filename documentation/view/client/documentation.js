@@ -10,6 +10,10 @@ Template.documentation.onCreated(function(){
   Meteor.subscribe('allDocumentationFiles');
 });
 
+Template.documentation.onRendered(function () {
+  $('[data-toggle="popover"]').popover();
+});
+
 Template.documentation.helpers({
   uploadedDocumentationLink: function() {
     const currentDocumentationFileId = this.apiBackend.documentationFileId;
