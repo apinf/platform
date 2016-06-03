@@ -15,25 +15,26 @@
       </h2>
     </div>
     <div class="panel-body">
+      {{#if documentationLink }}
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">{{_ "documentation_Link_Title" }}</h2>
         </div>
         <div class="panel-body">
-          <div class="documentation-link" style="">
+          <div class="documentation-link">
             <i class="fa fa-external-link"></i>&nbsp;
-            <!--  This is a placeholder for actual link-->
-            <a href="#">link-to-documentation</a>
+            <a href="#">{{ documentationLink }}</a>
           </div>
         </div>
       </div>
+      {{/if}}
       {{#if documentationExists }}
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">{{_ "documentation_Viewer_Title" }}</h2>
           </div>
           <div class="panel-body">
-            <iframe src="/swagger/index.html?url={{link}}" width="100%" id="documentation"></iframe>
+            <iframe src="/swagger/index.html?url={{uploadedDocumentationLink}}" width="100%" id="documentation"></iframe>
           </div>
         </div>
       {{/if}}

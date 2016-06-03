@@ -3,13 +3,15 @@ import { DocumentationFiles } from '/documentation/collection/collection';
 Template.documentation.onCreated(function(){
   const instance = this;
 
-  // console.log(instance);
+  // Subscribe to apibackend
+  Meteor.subscribe('apiBackend');
+
   // Subscribe to documentation
   Meteor.subscribe('allDocumentationFiles');
 });
 
 Template.documentation.helpers({
-  link: function() {
+  uploadedDocumentationLink: function() {
     const currentDocumentationFileId = this.apiBackend.documentationFileId;
 
     // Convert to Mongo ObjectID
@@ -22,6 +24,14 @@ Template.documentation.helpers({
     if (currentDocumentationFile) {
       // Get documentation file URL
       return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + currentDocumentationFile.md5;
+    }
+  },
+  documentationLink: function() {
+    // get documentation link
+    const documentationLink = this.apiBackend.documentation_link;
+    // check if exists
+    if (documentationLink) {
+      return documentationLink
     }
   },
   documentationExists: function () {
