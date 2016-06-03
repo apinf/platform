@@ -9,13 +9,13 @@
           {{> showHelp 'importApiDocumentation'}}
           <legend>{{_ "import_ApiDocumentation_Title"}}</legend>
           <div class="documentation-file">
-            {{#unless documentationExists }}
-            <button class="btn btn-primary fileBrowse">{{_ "manageApiDocumentationModal_FileUpload_Button" }}</button>
+            {{#unless documentationFile }}
+            {{> manageApiDocumentationModalUploadButton }}
             {{else}}
             <ul class="list-group">
               <li class="list-group-item">
                 <span class="glyphicon glyphicon-file"></span>
-                {{ fileName }}
+                {{ documentationFile.filename }}
                 <span class="pull-right">
                   <button class="btn btn-xs btn-danger delete-documentation">
                     <span class="glyphicon glyphicon-trash"></span>
