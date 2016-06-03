@@ -65,7 +65,7 @@ Template.manageApiDocumentationModal.onRendered(function() {
 });
 
 Template.manageApiDocumentationModal.events({
-  'click .del-file': function(event, instance) {
+  'click .delete-documentation': function(event, instance) {
 
     // Get currentApiBackend documentationFileId
     const documentationFileId = this.apiBackend.documentationFileId;
