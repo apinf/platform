@@ -301,7 +301,7 @@ Template.chartsLayout.created = function () {
 
         // Error handling for empty fields
         try{
-          timeStamp = e.fields.request_at[0];
+          timeStamp = moment(e.fields.request_at[0]);
         }catch(e){
           timeStamp = "";
         }
@@ -331,7 +331,7 @@ Template.chartsLayout.created = function () {
         }
 
         dataSet.push({
-          "time"          : moment.unix(timeStamp).format("D/MM/YYYY HH:mm:ss"),
+          "time"          : timeStamp.format("D/MM/YYYY HH:mm:ss"),
           "country"       : country,
           "path"          : path,
           "ip"            : requestIp,
