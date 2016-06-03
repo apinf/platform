@@ -3,13 +3,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title">API Documentation</h1>
+          <h1 class="modal-title">{{_ "manageApiDocumentationModal_Title" }}</h1>
         </div>
         <div class="modal-body">
           <div class="documentation-file">
-            <h4>Documentation File</h4>
+            <h4>{{_ "manageApiDocumentationModal_FileUpload_Title" }}</h4>
             {{#unless documentationExists }}
-            <button class="btn btn-primary fileBrowse">Browse</button>
+            <button class="btn btn-primary fileBrowse">{{_ "manageApiDocumentationModal_FileUpload_Button" }}</button>
             {{else}}
             <ul class="list-group">
               <li class="list-group-item">

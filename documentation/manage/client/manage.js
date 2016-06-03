@@ -37,7 +37,6 @@ Template.manageApiDocumentationModal.onCreated(function () {
         contentType: file.file.type
       }, function(err, documentationFile) {
         if (err) {
-          sAlert.error("File creation failed!", err);
           console.warn("File creation failed!", err);
           return;
         }
@@ -54,7 +53,7 @@ Template.manageApiDocumentationModal.onCreated(function () {
       });
     } else {
       // Inform user about file size Limit
-      sAlert.warning("File size limit 10MB");
+      sAlert.warning(TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message'));
     }
   });
 });
@@ -82,7 +81,7 @@ Template.manageApiDocumentationModal.events({
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
 
-    sAlert.success("File successfully deleted!");
+    sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
   }
 });
 

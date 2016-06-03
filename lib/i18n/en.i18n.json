@@ -226,6 +226,12 @@
   "documentation_Title": "Documentation",
   "documentation_Link_Title": "Link",
   "documentation_Viewer_Title": "Viewer",
+  "manageApiDocumentationModal_Title": "API Documentation",
+  "manageApiDocumentationModal_FileUpload_Title": "Documentation File",
+  "manageApiDocumentationModal_FileUpload_Button": "Browse",
+  "manageApiDocumentationModal_DeletedFile_Message": "File successfully deleted!",
+  "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
+
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
