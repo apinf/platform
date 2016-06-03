@@ -16,13 +16,12 @@ Meteor.startup( function() {
         const documentationFileId = file.uniqueIdentifier;
 
         // Get apibackend id
-        const apiBackendId = Session.get('currentApiBackendId');
+        const apiBackend = Session.get('currentApiBackend');
 
         // Update documenation file id field
-        ApiBackends.update(apiBackendId, {$set: { documentationFileId }});
+        ApiBackends.update(apiBackend._id, {$set: { documentationFileId }});
 
-        // Hide modal
-        Modal.hide('manageApiDocumentationModal');
+        sAlert.success("Documentation uploaded!");
 
         return DocumentationFiles.resumable.upload();
       });
