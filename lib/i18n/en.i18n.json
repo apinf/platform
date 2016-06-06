@@ -224,6 +224,7 @@
   "documentation_Title": "Documentation",
   "documentation_Link_Title": "Link",
   "documentation_Viewer_Title": "Viewer",
+  "documentation_No_link": "No documentation link provided.",
   "manageApiDocumentationModal_Title": "API Documentation",
   "manageApiDocumentationModal_FileUpload_Title": "Documentation File",
   "manageApiDocumentationModalUploadButton": "Choose file",
