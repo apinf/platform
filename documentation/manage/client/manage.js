@@ -19,6 +19,12 @@ Template.manageApiDocumentationModal.onCreated(function () {
       options: {
         placement: 'left'
       }
+    },
+    'documentation_editor_create_file': {
+      message: TAPi18n.__('manageApiDocumentationModal_hints_uploadApiDocumentation'),
+      options: {
+        placement: 'left'
+      }
     }
   };
   InlineHelp.initHelp(helpTexts);

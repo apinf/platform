@@ -27,9 +27,18 @@
             </ul>
             {{/unless}}
           </div>
+          {{# if apiDocumentationEditorIsEnabled}}
+          <legend>
+            {{>showHelp 'documentation_editor_create_file'}}
+            {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}Create documentation file
+          </legend>
+          <a href="/documentation/editor">
+            <i class="fa fa-circle-o"></i>
+          </a>
+          {{/ if }}
           <legend>
             {{>showHelp 'documentation_link'}}
-            Link to external documentation resource
+            {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}Link to external documentation resource
           </legend>
           {{#autoForm collection="ApiBackends" doc=apiBackend id="apiBackendDocumentationLinkForm" type="update" }}
           {{> afQuickField name='documentation_link'}}

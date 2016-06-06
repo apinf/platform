@@ -9,18 +9,6 @@ Meteor.publish('allApiBackends', function () {
   }
 });
 
-Meteor.publish('apiBackendsWithDocs', function () {
-  let apiBackendIds = [];
-  let apiDocs = ApiDocs.find().fetch();
-
-  // Get Api Backend IDs
-  for(doc in apiDocs) {
-    apiBackendIds.push(apiDocs[doc].apiBackendId);
-  }
-  // Return Api Backends with Docs
-  return ApiBackends.find({_id: {$in: apiBackendIds}});
-});
-
 Meteor.publish('myBookmarkedApis', function () {
   // get current user id
   var userId = this.userId;
