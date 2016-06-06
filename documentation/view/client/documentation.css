@@ -8,3 +8,7 @@ iframe {
   width: 100%;
   height: 100vh;
 }
+
+.s-alert-box {
+  z-index: 10000
+}
