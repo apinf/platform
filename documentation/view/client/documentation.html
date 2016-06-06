@@ -51,16 +51,18 @@
           <h2 class="panel-title">{{_ "documentation_Viewer_Title" }}</h2>
         </div>
         <div class="panel-body">
-          {{#if documentationExists }}
-            <iframe src="/swagger/index.html?url={{uploadedDocumentationLink}}" width="100%" id="documentation"></iframe>
-          {{else}}
-          <i>
-            {{_ "documentation_No_Swagger_Message" }}
-            {{#if apiBackend.currentUserCanEdit }}
-            {{_ "documentation_No_Swagger_Manager_Message" }}
-            {{/if}}
-          </i>
-          {{/if}}
+          {{ # if Template.subscriptionsReady }}
+            {{ # if documentationExists }}
+              <iframe src="/swagger/index.html?url={{uploadedDocumentationLink}}" width="100%" id="documentation"></iframe>
+            {{ else }}
+            <i>
+              {{_ "documentation_No_Swagger_Message" }}
+              {{ # if apiBackend.currentUserCanEdit }}
+              {{_ "documentation_No_Swagger_Manager_Message" }}
+              {{ / if}}
+            </i>
+            {{ / if}}
+          {{ / if }}
         </div>
       </div>
     </div>
