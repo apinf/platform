@@ -3,11 +3,17 @@ import { DocumentationFiles } from '/documentation/collection/collection';
 Template.documentation.onCreated(function(){
   const instance = this;
 
-  // Subscribe to apibackend
-  Meteor.subscribe('apiBackend');
+  // Run subscription in autorun
+  instance.autorun(() => {
 
-  // Subscribe to documentation
-  Meteor.subscribe('allDocumentationFiles');
+    // Get current documentation file Id
+    const documentationFileId = Template.currentData().apiBackend.documentationFileId;
+
+    if (documentationFileId) {
+      // Subscribe to documentation
+      instance.subscribe('singleDocumentationFile', documentationFileId);
+    }
+  });
 });
 
 Template.documentation.onRendered(function () {
@@ -16,6 +22,7 @@ Template.documentation.onRendered(function () {
 
 Template.documentation.helpers({
   uploadedDocumentationLink: function() {
+
     const currentDocumentationFileId = this.apiBackend.documentationFileId;
 
     // Convert to Mongo ObjectID
