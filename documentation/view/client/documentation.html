@@ -26,7 +26,12 @@
               <a href="#">{{ documentationLink }}</a>
             </div>
           {{else}}
-          <i>{{_ "documentation_No_Link_Message" }}</i>
+          <i>
+            {{_ "documentation_No_Link_Message" }}
+            {{#if apiBackend.currentUserCanEdit }}
+            {{_ "documentation_No_Link_Manager_Message" }}
+            {{/if}}
+          </i>
           {{/if}}
         </div>
       </div>

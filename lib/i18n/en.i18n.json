@@ -225,6 +225,7 @@
   "documentation_Link_Title": "Link",
   "documentation_Viewer_Title": "Viewer",
   "documentation_No_Link_Message": "No documentation link is available.",
+  "documentation_No_Link_Manager_Message": "You can add one using Manage API feature.",
   "documentation_No_Swagger_Message": "No swagger document is available.",
   "documentation_No_Swagger_Manager_Message": "You can add one using Manage API feature.",
   "documentation_APICall_Warning_Title": "Warning!",
