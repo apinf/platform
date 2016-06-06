@@ -233,14 +233,15 @@
   "manageApiDocumentationModal_Title": "API Documentation",
   "manageApiDocumentationModal_FileUpload_Title": "Documentation File",
   "manageApiDocumentationModalUploadButton": "Choose file",
-  "manageApiDocumentationModal_AddedFile_Message": "File successfully uploaded!",
+  "manageApiDocumentationModal_AddedFile_Message": "Documentation file successfully uploaded!",
   "manageApiDocumentationModal_FileUpload_Button": "Choose file",
   "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Are you sure you want to remove documentation file?",
-  "manageApiDocumentationModal_DeletedFile_Message": "File successfully deleted!",
+  "manageApiDocumentationModal_DeletedFile_Message": "Documentation file successfully deleted!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
   "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file types are accepted.",
   "manageApiDocumentationModal_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation for your APIs using swagger at our own server",
+  "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully uploaded!",
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
