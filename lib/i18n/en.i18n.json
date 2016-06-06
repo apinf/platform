@@ -238,6 +238,7 @@
   "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Are you sure you want to remove documentation file?",
   "manageApiDocumentationModal_DeletedFile_Message": "File successfully deleted!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
+  "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file types are accepted.",
   "manageApiDocumentationModal_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation for your APIs using swagger at our own server",
   "schemas": {

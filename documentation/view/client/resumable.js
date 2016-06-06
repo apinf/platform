@@ -33,7 +33,7 @@ Meteor.startup( function() {
 
         } else {
 
-          sAlert.error('Only YAML (YML) and JSON file types are accepted.');
+          sAlert.error(TAPi18n.__('manageApiDocumentationModal_FileType_Message'));
         }
       });
     } else {
