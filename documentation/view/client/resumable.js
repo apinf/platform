@@ -1,4 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
+import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
   DocumentationFiles.resumable.on('fileAdded', function(file) {
@@ -12,18 +13,28 @@ Meteor.startup( function() {
           console.warn("File creation failed!", err);
           return;
         }
-        // Get the id from documentation file object
-        const documentationFileId = file.uniqueIdentifier;
 
-        // Get apibackend id
-        const apiBackend = Session.get('currentApiBackend');
+        const acceptedExtensions = ["yaml", "yml", "txt", "json"];
 
-        // Update documenation file id field
-        ApiBackends.update(apiBackend._id, {$set: { documentationFileId }});
+        if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
 
-        sAlert.success(TAPi18n.__('manageApiDocumentationModal_AddedFile_Message'));
+          // Get the id from documentation file object
+          const documentationFileId = file.uniqueIdentifier;
 
-        return DocumentationFiles.resumable.upload();
+          // Get apibackend id
+          const apiBackend = Session.get('currentApiBackend');
+
+          // Update documenation file id field
+          ApiBackends.update(apiBackend._id, {$set: { documentationFileId }});
+
+          sAlert.success(TAPi18n.__('manageApiDocumentationModal_AddedFile_Message'));
+
+          return DocumentationFiles.resumable.upload();
+
+        } else {
+
+          sAlert.error('Only YAML (YML) and JSON file types are accepted.');
+        }
       });
     } else {
       // Inform user about file size Limit
