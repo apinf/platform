@@ -1,10 +1,8 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
 
 Template.manageApiDocumentationModal.onCreated(function () {
-  const instance = this;
 
-  // Subscribe to documentation
-  Meteor.subscribe('allDocumentationFiles');
+  const instance = this;
 
   // Initialize help texts
   const helpTexts = {
