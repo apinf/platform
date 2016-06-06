@@ -1,33 +1,37 @@
 <template name="viewApiBackend">
   {{#if Template.subscriptionsReady }}
-    {{> viewApiBackendPageHeading apiBackend=apiBackend }}
-    <div class="row">
-      {{> viewApiBackendNavigationMenu apiBackend=apiBackend }}
-    </div>
+  {{> viewApiBackendPageHeading apiBackend=apiBackend }}
+  <div class="row">
+    {{> viewApiBackendNavigationMenu apiBackend=apiBackend }}
+  </div>
 
-    <div class="tab-content">
-      <div id="api-backend-details" class="tab-pane fade in active">
-        {{> viewApiBackendDetails apiBackend=apiBackend }}
-      </div> <!-- /api-backend-details -->
+  <div class="tab-content">
+    <div id="api-backend-details" class="tab-pane fade in active">
+      {{> viewApiBackendDetails apiBackend=apiBackend }}
+    </div> <!-- /api-backend-details -->
 
-      <div id="api-backend-metadata" class="tab-pane fade in">
-        {{> viewApiBackendMetadata apiBackend=apiBackend metadata=metadata }}
-      </div> <!-- /api-backend-metadata -->
+    <div id="api-backend-documentation" class="tab-pane fade in">
+      {{> documentation apiBackend=apiBackend }}
+    </div> <!-- /api-backend-Documentation -->
 
-      <div id="api-backend-feedback" class="tab-pane fade in">
-        {{> feedbackList apiBackend=apiBackend }}
-      </div> <!-- /api-backend-metadata -->
+    <div id="api-backend-metadata" class="tab-pane fade in">
+      {{> viewApiBackendMetadata apiBackend=apiBackend metadata=metadata }}
+    </div> <!-- /api-backend-metadata -->
 
-      <div id="api-backend-export" class="tab-pane fade in">
-        {{> viewApiBackendExport apiBackend=apiBackend }}
-      </div> <!-- /api-backend-export -->
+    <div id="api-backend-feedback" class="tab-pane fade in">
+      {{> feedbackList apiBackend=apiBackend }}
+    </div> <!-- /api-backend-metadata -->
 
-      <div id="api-backend-backlog" class="tab-pane fade in">
-        {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
-      </div> <!-- /api-backend-export -->
+    <div id="api-backend-export" class="tab-pane fade in">
+      {{> viewApiBackendExport apiBackend=apiBackend }}
+    </div> <!-- /api-backend-export -->
 
-    </div> <!-- /tab-content -->
+    <div id="api-backend-backlog" class="tab-pane fade in">
+      {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
+    </div> <!-- /api-backend-export -->
+
+  </div> <!-- /tab-content -->
   {{ else }}
-    {{> spinner }}
+  {{> spinner }}
   {{/ if }}
 </template>

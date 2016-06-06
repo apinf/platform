@@ -41,24 +41,6 @@ var helpData = {
       placement: 'left'
     }
   },
-  'documentation_link': {
-    message: TAPi18n.__('editApi_hints_documentation_link'),
-    options: {
-      placement: 'left'
-    }
-  },
-  'apiDocumentationEditor': {
-    message: TAPi18n.__('editApi_hints_apiDocumentationEditor'),
-    options: {
-      placement: 'left'
-    }
-  },
-  'importApiDocumentation': {
-    message: TAPi18n.__('editApi_hints_importApiDocumentation'),
-    options: {
-      placement: 'left'
-    }
-  },
   'append_query_string': {
     message: TAPi18n.__('editApi_hints_append_query_string'),
     options: {
