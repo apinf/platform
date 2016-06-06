@@ -18,15 +18,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: true, // Optional must be true for custom validation
-    custom: function () { // Custom validator logic
-      // get the value of apiDocumentationEditor.enabled field
-      let enabledFieldValue = this.field("apiDocumentationEditor.enabled").value;
-      // if enabled is true, host field is required
-      if (enabledFieldValue === true) {
-        return "required"; // host field is required
-      }
-    }
+    optional: false
   },
   apiUmbrella: {
     type: Object,
