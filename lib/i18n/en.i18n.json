@@ -241,7 +241,10 @@
   "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file types are accepted.",
   "manageApiDocumentationModal_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation for your APIs using swagger at our own server",
+  "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
   "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully updated!",
+  "manageApiDocumentationModal_CreateDocumentation_Title": "Create documentation file",
+  "manageApiDocumentationModal_DocumentationLink_Title": "Link to external documentation resource",
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
