@@ -11,6 +11,6 @@ DocumentationFiles.allow({
     return true;
   },
   write: function(userId, file, fields) {
-    return true
+    return true;
   }
 });
