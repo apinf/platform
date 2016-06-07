@@ -3,7 +3,7 @@ import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings'
 Meteor.methods({
   "syncApiUmbrellaUsers": function () {
 
-    if (apiUmbrellaWeb) {
+    if ( typeof apiUmbrellaWeb !== 'undefined' ) {
       // Get users from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiUsers.getUsers();
 
@@ -49,7 +49,7 @@ Meteor.methods({
   },
   "syncApiUmbrellaAdmins": function () {
 
-    if (apiUmbrellaWeb) {
+    if ( typeof apiUmbrellaWeb !== 'undefined' ) {
 
       // Get admin users from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.adminUsers.getAdmins();
