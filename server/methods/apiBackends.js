@@ -1,25 +1,22 @@
 Meteor.methods({
   "syncApiBackends":function () {
-    // Check if API Umbrella settings are available
-    if (Meteor.settings.apiUmbrella) {
-      // Get API Backends from API Umbrella instance
-      var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
-      var apiBackends = response.data.data;
+    // Get API Backends from API Umbrella instance
+    var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
+    var apiBackends = response.data.data;
 
-      _.each(apiBackends, function (apiBackend) {
-        // Get existing API Backend
-        var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
+    _.each(apiBackends, function (apiBackend) {
+      // Get existing API Backend
+      var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
 
-        // If API Backend doesn't exist in collection, insert into collection
-        if (existingApiBackend === undefined) {
-          try {
-            ApiBackends.insert(apiBackend);
-          } catch (error) {
-            console.error("Error inserting apiBackend(" + apiBackend.id + ") : " + error);
-          }
-        };
-      });
-    };
+      // If API Backend doesn't exist in collection, insert into collection
+      if (existingApiBackend === undefined) {
+        try {
+          ApiBackends.insert(apiBackend);
+        } catch (error) {
+          console.error("Error inserting apiBackend(" + apiBackend.id + ") : " + error);
+        }
+      };
+    });
   },
   createApiBackendOnApiUmbrella: function (apiBackendForm) {
     // Construct an API Backend object for API Umbrella with one 'api' key
@@ -105,5 +102,5 @@ Meteor.methods({
       apiUmbrellaWebResponse.http_status = 422;
     }
     return apiUmbrellaWebResponse;
-  }  
+  }
 });
