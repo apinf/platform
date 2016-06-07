@@ -3,6 +3,7 @@ import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings'
 Meteor.methods({
   "syncApiUmbrellaUsers": function () {
 
+    // Check if apiUmbrellaWeb object exists
     if ( typeof apiUmbrellaWeb !== 'undefined' ) {
       // Get users from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiUsers.getUsers();

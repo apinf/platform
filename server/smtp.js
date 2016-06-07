@@ -12,6 +12,7 @@ Meteor.startup(function() {
 
     const settings = Settings.findOne();
 
+    // Check if mail settings are provided
     if (mailSettingsValid(settings)) {
 
       const username = settings.mail.username;
