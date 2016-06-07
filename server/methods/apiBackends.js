@@ -1,7 +1,7 @@
 Meteor.methods({
   "syncApiBackends":function () {
 
-    if (apiUmbrellaWeb) {
+    if ( typeof apiUmbrellaWeb !== 'undefined' ) {
       // Get API Backends from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
       var apiBackends = response.data.data;
