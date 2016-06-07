@@ -1,3 +1,5 @@
+import { Settings } from '/both/collections/settings';
+
 Meteor.methods({
   'updateMeteorSettings': function() {
     // Updating Meteor.settings from Settings collection
@@ -6,12 +8,19 @@ Meteor.methods({
   },
   'getApiUmbrellaHost': function () {
     // Get API Umbrella base url from settings object
-    var apiUmbrellaBaseUrl = new URI(Meteor.settings.apiUmbrella.baseUrl);
+    const settings = Settings.findOne();
 
-    // Get host part of API Umbrella base URL
-    var apiUmbrellaHost = apiUmbrellaBaseUrl.host();
+    if( settings && settings.apiUmbrella.baseUrl ) {
+      var apiUmbrellaBaseUrl = new URI(settings.apiUmbrella.baseUrl);
 
-    return apiUmbrellaHost;
+      // Get host part of API Umbrella base URL
+      var apiUmbrellaHost = apiUmbrellaBaseUrl.host();
+
+      return apiUmbrellaHost;
+    } else {
+      throw new Meteor.Error('umbrella-baseurl', 'Umbrella baseUrl not found');
+    }
+
   },
   'settingsObjectIsValidAndEmpty': function() {
     // check structure of Meteor.settings object - initially, it should be { public: {} }
@@ -21,7 +30,7 @@ Meteor.methods({
     const settingKeys = Object.keys(Meteor.settings);
     if (settingKeys.length === 1 && settingKeys[0] === 'public') {
       return JSON.stringify(Meteor.settings['public']) === JSON.stringify({});
-    } 
+    }
 
     return false;
   }
