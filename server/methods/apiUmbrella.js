@@ -26,17 +26,22 @@ Meteor.methods({
 
     const settings = Settings.findOne();
 
-    // Check if something is on Settings collection
-    if (apiUmbrellaSettingsValid(settings)) {
+    if ( typeof apiUmbrellaWeb === 'undefined' ) {
 
-      // Create config object for API Umbrella Web interface from Settings collection
-      var config = {
-        baseUrl: settings.apiUmbrella.baseUrl,
-        apiKey: settings.apiUmbrella.apiKey,
-        authToken: settings.apiUmbrella.authToken
-      };
+      // Check if something is on Settings collection
+      if (apiUmbrellaSettingsValid(settings)) {
+
+        // Create config object for API Umbrella Web interface from Settings collection
+        var config = {
+          baseUrl: settings.apiUmbrella.baseUrl,
+          apiKey: settings.apiUmbrella.apiKey,
+          authToken: settings.apiUmbrella.authToken
+        };
+
+      }
 
     }
+
 
     try {
 
