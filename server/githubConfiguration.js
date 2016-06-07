@@ -1,11 +1,11 @@
-import { githubConfigurationValid } from '/lib/helperFunctions/githubConfigurationValid';
+import { githubSettingsValid } from '/lib/helperFunctions/validateSettings';
 
 // If settings are already in Meteor.settings
 try {
 
   const settings = Settings.findOne();
 
-  if (githubConfigurationValid(setting)) {
+  if (githubSettingsValid(setting)) {
 
     ServiceConfiguration.configurations.remove({
       // removing existing configurations
