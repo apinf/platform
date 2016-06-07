@@ -18,7 +18,7 @@ Meteor.startup(function () {
         name: 'Sync API Umbrella Users and API Backends',
         schedule: function(parser) {
           // parser is a later.parse object
-          return parser.text('every 1 hour');
+          return parser.text('every 5 minutes');
         },
         job: function() {
           const settings = Settings.findOne();
