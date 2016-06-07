@@ -1,0 +1,51 @@
+/* Bootstrap */
+@import "/client/style/bootstrap-variables.less";
+
+.card-api {
+  position: relative;
+  padding: 1em;
+  border-radius: 3px;
+  background: #ffffff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+
+  .card-api-logo {
+    .thumbnail {
+      border: none;
+      margin-bottom: 0;
+
+      .thumbnail:hover {
+        border: none;
+      }
+    }
+
+    .card-api-logo-image {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 50%;
+
+      > img {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 2em;
+        max-height: 200px;
+        border: none;
+        &:hover {
+          border: none;
+        }
+      }
+    }
+  }
+
+  .card-api-name h3 {
+    margin-top: 0.3em;
+  }
+}
+
+.bookmark {
+  cursor: pointer;
+  color: @brand-primary;
+}
