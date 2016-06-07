@@ -1,22 +1,28 @@
+import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
+
 Meteor.methods({
   "syncApiUmbrellaAdmins": function () {
 
-    // Get admin users from API Umbrella instance
-    var response = apiUmbrellaWeb.adminApi.v1.adminUsers.getAdmins();
+    const settings = Settings.findOne();
 
-    // Add each admin user to collection if not already there
-    var apiAdmins = response.data.data;
+    if (apiUmbrellaSettingsValid(settings)) {
 
-    _.each(apiAdmins, function (apiAdmin) {
+      // Get admin users from API Umbrella instance
+      var response = apiUmbrellaWeb.adminApi.v1.adminUsers.getAdmins();
 
-      // Get existing admin user
-      var existingAdminUser = ApiUmbrellaAdmins.findOne({'id': apiAdmin.id});
+      // Add each admin user to collection if not already there
+      var apiAdmins = response.data.data;
 
-      // If admin user doesn't exist in collection, insert into collection
-      if (existingAdminUser === undefined) {
-        ApiUmbrellaAdmins.insert(apiAdmin);
-      }
-    });
-    
+      _.each(apiAdmins, function (apiAdmin) {
+
+        // Get existing admin user
+        var existingAdminUser = ApiUmbrellaAdmins.findOne({'id': apiAdmin.id});
+
+        // If admin user doesn't exist in collection, insert into collection
+        if (existingAdminUser === undefined) {
+          ApiUmbrellaAdmins.insert(apiAdmin);
+        }
+      });
+    }
   }
 });
