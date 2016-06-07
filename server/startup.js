@@ -1,13 +1,8 @@
-import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
-
 Meteor.startup(function () {
   // Run migrations first
   Migrations.migrateTo('latest');
 
   try {
-
-    // Creating ApiUmbrellaWeb object
-    Meteor.call("createApiUmbrellaWeb");
 
     // Check if API Umbrella settings are available
     SyncedCron.add({
