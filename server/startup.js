@@ -1,3 +1,5 @@
+import { apiUmbrellaSettigsValid } from '/lib/helperFunctions/verifyApiUmbrellaSettings';
+
 Meteor.startup(function () {
   // Run migrations first
   Migrations.migrateTo('latest');
@@ -6,7 +8,7 @@ Meteor.startup(function () {
 
     const settings = Settings.findOne();
 
-    if (settings) {
+    if (apiUmbrellaSettigsValid(settings)) {
 
       // Creating ApiUmbrellaWeb object
       Meteor.call("createApiUmbrellaWeb");
@@ -16,14 +18,18 @@ Meteor.startup(function () {
         name: 'Sync API Umbrella Users and API Backends',
         schedule: function(parser) {
           // parser is a later.parse object
-          return parser.text('every 1 day');
+          return parser.text('every 1 hour');
         },
         job: function() {
-          Meteor.call("syncApiUmbrellaUsers");
-          Meteor.call("syncApiUmbrellaAdmins");
-          Meteor.call("syncApiBackends");
+          const settings = Settings.findOne();
+          if (apiUmbrellaSettigsValid(settings)) {
+            Meteor.call("syncApiUmbrellaUsers");
+            Meteor.call("syncApiUmbrellaAdmins");
+            Meteor.call("syncApiBackends");
+          }
         }
       });
+
       Meteor.call("syncApiUmbrellaUsers");
       Meteor.call("syncApiBackends");
 
@@ -43,4 +49,3 @@ Meteor.startup(function () {
   }
 
 });
-
