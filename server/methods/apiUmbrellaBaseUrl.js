@@ -1,8 +1,16 @@
+import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
+
 Meteor.methods({
   'getApiUmbrellaBaseUrl': function () {
-    // Get base url from settings file
-    var apiUmbrellaBaseUrl = Meteor.settings.apiUmbrella.host;
 
-    return apiUmbrellaBaseUrl;
+    const settings = Settings.findOne();
+
+    if (apiUmbrellaSettingsValid(settings)) {
+
+      // Get base url from settings file
+      var apiUmbrellaBaseUrl = settings.apiUmbrella.host;
+
+      return apiUmbrellaBaseUrl;
+    }
   }
 });
