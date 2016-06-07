@@ -12,13 +12,13 @@ Schemas.SettingsSchema = new SimpleSchema({
   "apiDocumentationEditor.enabled": {
     type: Boolean,
     label: "Enable apiDocumentation Editor",
-    optional:true
+    optional: true
   },
   "apiDocumentationEditor.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: false
+    optional: true
   },
   apiUmbrella: {
     type: Object,
