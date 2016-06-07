@@ -5,7 +5,7 @@ try {
 
   const settings = Settings.findOne();
 
-  if (githubSettingsValid(setting)) {
+  if (githubSettingsValid(settings)) {
 
     ServiceConfiguration.configurations.remove({
       // removing existing configurations
