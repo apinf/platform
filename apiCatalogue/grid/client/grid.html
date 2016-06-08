@@ -1,27 +1,7 @@
 <template name="apiCatalogue">
-  <!--
-<div class="col-lg-2 card-api">
-<div class="card-api-bookmark pull-right">
-{{> favourite }}
-</div>
-<div class="card-api-logo">
-<a href="#" class="thumbnail">
-<div class="card-api-logo-image">
-example image
-<img src="favicon.png" class="img img-responsive" />
-</div>
-</a>
-</div>
-<div class="card-api-name">
-<h3 class="text-center">
-example name
-<a href="#">APINF Open Api</a>
-</h3>
-</div>
-</div>
--->
-
-  <div class="container">
+  {{#if latestBackends }}
+  <div class="row">
+    {{#each latestBackends }}
     <div class="col-lg-2 card-api">
       <ul class="list-inline">
         <li class="pull-right">
@@ -33,9 +13,15 @@ example name
       </ul>
       <div class="card-api-about text-center">
         <img class="card-api-logo img-responsive center-block" src="favicon.png" />
-        <h3 class="card-api-name">Google Maps</h3>
+        <a href="/api/{{_id}}">
+          <h3 class="card-api-name">
+            {{ name }}
+          </h3>
+        </a>
         <span class="card-api-author">added by Google Inc.</span>
       </div>
     </div>
+    {{/each}}
   </div>
+  {{/if}}
 </template>
