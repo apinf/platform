@@ -12,9 +12,11 @@ Meteor.methods({
       // Get user object
       loggedInUser = Meteor.user();
 
+      const settings = Settings.findOne();
+
       try {
         var config = {
-          host: Meteor.settings.elasticsearch.host
+          host: settings.elasticsearch.host
         };
       } catch (error) {
         // Throw an error to inform the user
