@@ -31,6 +31,10 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: false
   },
+  documentationFileId: {
+    type: String,
+    optional: true
+  },
   documentation_link: {
     type: String,
     optional: true,

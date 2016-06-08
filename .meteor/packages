@@ -72,7 +72,6 @@ dandv:jquery-rateit
 zenorocha:clipboard
 yogiben:autoform-file
 harrison:papa-parse
-simple:json-routes
 olragon:uri-js
 forwarder:autoform-wizard
 universe:reactive-queries
@@ -88,3 +87,4 @@ peppelg:bootstrap-3-modal
 apinf:api-umbrella
 standard-minifier-css
 standard-minifier-js
+vsivsi:file-collection

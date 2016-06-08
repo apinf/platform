@@ -1,0 +1,51 @@
+<template name="manageApiDocumentationModal">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">{{_ "manageApiDocumentationModal_Title" }}</h1>
+        </div>
+        <div class="modal-body">
+          <legend>
+            {{> showHelp 'uploadApiDocumentation'}}
+            {{_ "import_ApiDocumentation_Title"}}
+          </legend>
+          <div class="documentation-file">
+            {{#unless documentationFile }}
+            {{> manageApiDocumentationModalUploadButton }}
+            {{else}}
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="glyphicon glyphicon-file"></span>
+                {{ documentationFile.filename }}
+                <span class="pull-right">
+                  <button class="btn btn-xs btn-danger delete-documentation">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </span>
+              </li>
+            </ul>
+            {{/unless}}
+          </div>
+          {{# if apiDocumentationEditorIsEnabled}}
+          <legend>
+            {{>showHelp 'documentation_editor_create_file'}}
+            {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
+          </legend>
+          <a href="/documentation/editor">
+            <i class="fa fa-circle-o"></i>
+          </a>
+          {{/ if }}
+          <legend>
+            {{>showHelp 'documentation_link'}}
+            {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}
+          </legend>
+          {{#autoForm collection="ApiBackends" doc=apiBackend id="apiBackendDocumentationLinkForm" type="update" }}
+          {{> afQuickField name='documentation_link'}}
+          <button type="submit" class="btn btn-success" id="save-documentation-link">Save</button>
+          {{/ autoForm }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

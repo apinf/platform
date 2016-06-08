@@ -34,22 +34,6 @@
           <a href="/catalogue"><i class="fa fa-list-alt"></i><span>{{_ "masterLayout_sidebar_Catalogue"}}</span></a>
         </li>
         {{# if currentUser }}
-          <li class="{{isActiveRoute 'documentation'}} {{isActiveRoute 'apiDocumentationEditor'}} treeview">
-            <a href="#">
-              <i class="fa fa-book"></i>
-              <span>{{_ "masterLayout_sidebar_Documentation"}}</span>
-            </a>
-            <ul class="treeview-menu">
-              {{# if apiDocumentationEditorIsEnabled}}
-              <li class="{{isActiveRoute 'apiDocumentationEditor'}}">
-                <a href="/documentation/editor"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout_sidebar_DocumentationEditor"}}</span></a>
-              </li>
-              {{/ if }}
-              <li class="{{isActiveRoute 'documentation'}}">
-                <a href="/documentation"><i class="fa fa-circle-o"></i><span>{{_ "masterLayout_sidebar_DocumentationViewer"}}</span></a>
-              </li>
-            </ul>
-          </li>
           {{# if isInRole 'admin' }}
             <li class="{{isActiveRoute 'accountsAdmin'}}">
               <a href="{{pathFor route='accountsAdmin'}}"><i class="fa fa-users"></i><span>{{_ "masterLayout_sidebar_Users"}}</span></a>
