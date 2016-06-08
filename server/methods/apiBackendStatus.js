@@ -16,7 +16,7 @@ Meteor.methods({
       var result = Meteor.http.call("GET", apiUrl);
 
       // checks is the status code matches 200 and returns boolean
-      status.isUp = result.statusCode == 200;
+      status.isUp = result.statusCode == 200 || 401;
 
       // keeps status code value
       status.statusCode = result.satusCode;
