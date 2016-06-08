@@ -5,7 +5,7 @@
         {{ # autoForm collection="ApiFlags" id="insertApiFlag" type="insert" }}
         <div class="modal-header">
           <h4 class="modal-title">
-            Flag Api Backend
+            {{ _ "flagApiModal_titleText" }}
           </h4>
         </div>
         <div class="modal-body">
@@ -14,10 +14,10 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-info">
-            Submit
+            {{ _ "flagApiModal_submitButton" }}
           </button>
           <button type="button" class="btn btn-default" data-dismiss="modal">
-            Cancel
+            {{ _ "flagApiModal_cancelButton" }}
           </button>
         </div>
         {{ / autoForm }}
