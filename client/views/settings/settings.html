@@ -45,11 +45,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Mail</h3>
-            {{> afQuickField name='mail.enabled'}}
           </div>
           <div class="panel-body">
-            {{> afQuickField name='mail.username'}}
-            {{> afQuickField name='mail.password'}}
+            {{> afQuickField name='mail.enabled'}}
+            {{#if afFieldValueIs name='mail.enabled' value=true}}
+              {{> afQuickField name='mail.username'}}
+              {{> afQuickField name='mail.password'}}
+            {{/if}}
           </div>
         </div>
         <div class="panel panel-default">
