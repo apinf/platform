@@ -101,9 +101,7 @@ Template.addApiBackendWizard.helpers({
         delete apiBackend.updateDoc;
         delete apiBackend.backend_port;
 
-        Meteor.call("getApiUmbrellaHost", function (error, apiUmbrellaHost) {
-
-
+        Meteor.call("getApiUmbrellaHostName", function (error, apiUmbrellaHost) {
           // Set frontend host to API Umbrella host value
           apiBackend.frontend_host = apiUmbrellaHost;
 
