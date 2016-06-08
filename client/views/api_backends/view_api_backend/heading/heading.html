@@ -1,6 +1,9 @@
 <template name="viewApiBackendPageHeading">
   <div class="page-heading">
-    {{> apiBackendsUsageInstructionsButton }}
+    <div class="btn-group pull-right" role="group" aria-label="...">
+      {{> flagApiButton }}
+      {{> apiBackendsUsageInstructionsButton }}
+    </div>
     <h1 class="page-title">{{ apiBackend.name }}</h1>
     {{> apiBackendUsageInstructions apiBackend=apiBackend}}
   </div>
