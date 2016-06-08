@@ -134,18 +134,20 @@
       </div>
     </div>
   </div>
-  <div id="contact-us" class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">{{_ "section_ContactUs"}}</h2>
-        <hr class="primary">
-        <h4 class="text-muted">{{_ "section_ContactUs_Text"}}</h4>
+  {{ # if contactDetailsValid }}
+    <div id="contact-us" class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="feature-section-heading">{{_ "section_ContactUs"}}</h2>
+          <hr class="primary">
+          <h4 class="text-muted">{{_ "section_ContactUs_Text"}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-push-3">
+          {{> contactForm}}
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-6 col-lg-push-3">
-        {{> contactForm}}
-      </div>
-    </div>
-  </div>
+  {{ / if }}
 </template>
