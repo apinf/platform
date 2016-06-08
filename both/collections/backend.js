@@ -780,5 +780,17 @@ ApiBackends.helpers({
     var isManager = _.contains(managerIds, userId);
 
     return isManager;
+  },
+  getApiManagersByName: function() {
+    // Get Manager IDs array from API Backend document
+    const managerIds = this.managerIds;
+
+    // Create API managers array with usernames
+    const apiManagers = _.map(managerIds, function(id) {
+      // Return username of manager
+      return Meteor.users.findOne(id).username;
+    });
+
+    return apiManagers;
   }
 });

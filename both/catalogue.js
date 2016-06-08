@@ -19,7 +19,8 @@ TabularTables.ApiTable = new Tabular.Table({
     {
      tmpl: Meteor.isClient && Template.apiBackendRating,
      title: "Rating"
-    }
+   },
+   {data: "getApiManagersByName", title: "API Owners"}
   ],
   responsive: true,
   autoWidth: false
