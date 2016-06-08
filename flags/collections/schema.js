@@ -6,7 +6,7 @@ ApiFlags.schema = new SimpleSchema({
       'Defunct'
     ]
   },
-  name: {
+  title: {
     type: String
   },
   desciption: {
