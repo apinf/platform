@@ -6,10 +6,7 @@ ApiFlags.schema = new SimpleSchema({
       'Defunct'
     ]
   },
-  title: {
-    type: String
-  },
-  desciption: {
+  comments: {
     type: String,
     autoform: {
       rows: 5
@@ -33,7 +30,7 @@ ApiFlags.schema = new SimpleSchema({
 
       // Check if the field is not already set
       if (!this.isSet) {
-        
+
         // Autofill current api backend id
         return Router.current().params._id;
       }
