@@ -1,0 +1,28 @@
+<template name="flagApiModal">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {{ # autoForm collection="ApiFlags" id="insertApiFlag" type="insert" }}
+        <div class="modal-header">
+          <h4 class="modal-title">
+            Flag Api Backend
+          </h4>
+        </div>
+        <div class="modal-body">
+          {{> afQuickField name='title'}}
+          {{> afQuickField name='desciption'}}
+          {{> afQuickField name='reason' options='allowed'}}
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-delete-service" type="submit" class="btn btn-danger">
+            Submit
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+        {{ / autoForm }}
+      </div>
+    </div>
+  </div>
+</template>
