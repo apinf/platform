@@ -1,0 +1,9 @@
+<template name="steps_bootstrap3">
+  <ul class="nav nav-wizard">
+    {{#each wizard.steps}}
+    <li class="{{stepClass id}}">
+      <a href="{{pathForStep id}}">{{title}}</a>
+    </li>
+    {{/each}}
+  </ul>
+</template>

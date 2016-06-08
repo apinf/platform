@@ -1,0 +1,132 @@
+//===============================================
+// Variables
+//===============================================
+@wizard-background: #f9f9f9;
+@border-color: #d4d4d4;
+
+@complete-color : #468847;
+@complete-background : #dff0d8;
+
+@active-color : #3a87ad;
+@active-background : #d9edf7;
+
+@incomplete-color : lighten(#000, 60%);
+@incomplete-background : #ededed;
+@row-height: 46px;
+
+//===============================================
+// Mixins
+//===============================================
+
+.li-color(@color, @background) {
+  color: @color;
+  background: @background;
+  &:after {
+    border-left: 16px solid @background;
+  }
+  a, a:active, a:visited, a:focus {
+    color: @color;
+    background: @background;
+  }
+}
+
+.chevron-comp(@color) {
+  position: absolute;
+  display: block;
+  border: 24px solid transparent;
+  border-left: 16px solid @color;
+  border-right: 0;
+  top: -1px;
+  z-index: 10;
+  content: '';
+}
+
+.loop-width(@i) when (@i > 0) {
+  .loop-width((@i - 1));
+  &:first-child:nth-last-child(@{i}),
+  &:first-child:nth-last-child(@{i}) ~ li{
+    width: (100% / @i);
+  }
+}
+
+//===============================================
+// Class Def
+//===============================================
+
+ul.nav-wizard {
+  background-color: @wizard-background;
+  border: 1px solid @border-color;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  &:before {
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: @row-height;
+    height: @row-height + 1px;
+    border-top: 1px solid @border-color;
+    border-bottom: 1px solid @border-color;
+    z-index: 11;
+    content: " ";
+  }
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 3 * (@row-height);
+    height: @row-height + 1px;
+    border-top: 1px solid @border-color;
+    border-bottom: 1px solid @border-color;
+    z-index: 11;
+    content: " ";
+  }
+  li {
+    position: relative;
+    float: left;
+    height: @row-height;
+    display: inline-block;
+    text-align: left;
+    padding: 0 20px 0 30px;
+    margin: 0;
+    font-size: 16px;
+    line-height: @row-height;
+    .loop-width(8); // up to 8 <li>
+    a {
+      color: @complete-color;
+      padding: 0;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    &:not(:last-child) {
+      &:before {
+        .chevron-comp(@border-color);
+        right: -16px;
+      }
+      &:after {
+        .chevron-comp(@wizard-background);
+        right: -15px;
+      }
+    }
+    &.active {
+      .li-color(@active-color, @active-background);
+    }
+  }
+  .active ~ li {
+    .li-color(@incomplete-color, @incomplete-background);
+  }
+  &.nav-wizard-backnav {
+    li:hover {
+      .li-color(@complete-color, lighten(@active-background, 7%));
+    }
+    .active ~ li {
+      .li-color(@incomplete-color, @incomplete-background);
+    }
+  }
+}

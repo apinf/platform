@@ -1,0 +1,32 @@
+<template name="apiBacklogForm">
+
+    <div class="modal fade" id="apiBacklogFormModal" tabindex="-1" role="dialog" aria-labelledby="apiBacklogFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="apiBacklogFormModalLabel">{{_ "apiBacklogForm_addBacklogItem_button"}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{#autoForm collection="ApiBacklogItems" id="apiBacklogForm" type="insert"}}
+                        <div class="row">
+                            <div class="col-md-9">
+                                {{> afQuickField name="title" }}
+                                {{> afQuickField name="details" }}
+                            </div>
+                            <div class="col-md-3">
+                                {{> afQuickField name="priority" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary" id="apiBacklogFormSubmit">{{_ "apiBacklogForm_addBacklogItem_button"}}</button>
+                            </div>
+                        </div>
+                    {{/autoForm}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> flashMessages}}
+</template>
