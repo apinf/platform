@@ -29,11 +29,11 @@ Template.viewApiBackendStatus.created = function() {
             .html("API requires authentication.");
         }
       } else {
-        // initial error message
-        var errorMessage = "API backend is down for some reason. Please contact support.";
 
         // updates layout with success status
-        $('#apiState').addClass('alert-danger').html(errorMessage);
+        $('#apiState').addClass('alert-danger').html(`
+          API backend is down for some reason.
+          Please contact support.`);
       }
 
       // show when check happened
