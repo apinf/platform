@@ -15,14 +15,25 @@ Meteor.methods({
       // response object from GET request to api host
       var result = Meteor.http.call("GET", apiUrl);
 
-      // checks is the status code matches 200 and returns boolean
-      status.isUp = result.statusCode == 200 || 401;
+      // Check that we get result and get statusCode
+      if( result ) {
+        // Get statusCode
+        status.statusCode = result.statusCode;
 
-      // keeps status code value
-      status.statusCode = result.satusCode;
+        // Keep the entire response object
+        status.responseContext = result;
 
-      // keeps the entire response object
-      status.responseContext = result;
+        // Status code checks
+        if(result.statusCode === 200) {
+          status.isUp = true;
+        }
+        else if(result.statusCode === 401) {
+          status.isUp = true;
+        }
+        else {
+          status.isUp = false;
+        }
+      }
 
       return status;
 

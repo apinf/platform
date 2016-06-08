@@ -16,10 +16,18 @@ Template.viewApiBackendStatus.created = function() {
       // };
 
       if (status.isUp) {
-        // updates layout with success status
-        $('#apiState')
-          .addClass('alert-success')
-          .html("API is operating normally.");
+        if(status.statusCode === 200) {
+          // updates layout with success status
+          $('#apiState')
+            .addClass('alert-success')
+            .html("API is operating normally.");
+        }
+        else if(status.statusCode === 401) {
+          // updates layout with success status
+          $('#apiState')
+            .addClass('alert-success')
+            .html("API requires authentication.");
+        }
       } else {
         // initial error message
         var errorMessage = "API backend is down for some reason. Please contact support.";
