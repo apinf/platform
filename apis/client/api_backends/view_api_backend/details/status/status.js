@@ -1,26 +1,31 @@
 Template.viewApiBackendStatus.created = function() {
+
   // Create reference to instance
-  var instance = this;
+  const instance = this;
 
   // attaches function to template instance to be able to call it in outside
   instance.getApiStatus = function (url) {
 
     Meteor.call("getApiStatus", url, function (err, status) {
 
-      // status object contents:
+      // Status object contents:
       // status = {
       //   statusCode      : <integer>,
       //   responseContext : <object>,
       //   errorMessage    : <String>
       // };
 
+      // Init indicator element
       const apiStatusIndicator = $('#api-status-indicator');
 
+      // Init regEx for status codes
       const success = /^2[0-9][0-9]$/;
       const redirect = /^3[0-9][0-9]$/;
       const clientErr = /^4[0-9][0-9]$/;
       const serverErr = /^5[0-9][0-9]$/;
 
+      // Check which status code is received
+      // and display text depending on it
       if (success.test(status.code)) {
 
         apiStatusIndicator
@@ -63,5 +68,6 @@ Template.viewApiBackendStatus.rendered = function () {
   // call the function that updates status
   instance.getApiStatus(url);
 
+  // Init tooltip
   $('#api-status-indicator').tooltip();
 };
