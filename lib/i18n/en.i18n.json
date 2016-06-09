@@ -327,5 +327,10 @@
         }
       }
     }
-  }
+  },
+  "viewApiBackendStatus_statusMessage_ErrorCodeText": "Status code:",
+  "viewApiBackendStatus_statusMessage_Success": "API is operating normally.",
+  "viewApiBackendStatus_statusMessage_RedirectError": "Redirection.",
+  "viewApiBackendStatus_statusMessage_ClientError": "Client error.",
+  "viewApiBackendStatus_statusMessage_ServerError": "Server error."
 }

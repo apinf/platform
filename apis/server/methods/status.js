@@ -1,35 +1,42 @@
 Meteor.methods({
-  'getApiStatus' : function (apiUrl) {
+  'getApiStatus' : function (uri) {
 
     this.unblock();
 
-    var status = {
-      isUp            : false,
-      statusCode      : 0,
-      responseContext : {},
-      errorMessage    : ""
+    // Init empty status object
+    let status = {
+      code: 0,
+      errorMessage: "",
+      responseContext: {}
     };
 
+    // Try-catch wrapper
+    // Because if requested host is not available, error is thrown
     try {
 
       // response object from GET request to api host
-      var result = Meteor.http.call("GET", apiUrl);
+      const result = Meteor.http.call("GET", uri);
 
-      // checks is the status code matches 200 and returns boolean
-      status.isUp = result.statusCode == 200;
+      // Check result is received
+      if(result) {
 
-      // keeps status code value
-      status.statusCode = result.satusCode;
+        // Get reposnce status code
+        status.code = result.statusCode;
 
-      // keeps the entire response object
-      status.responseContext = result;
+        // Keep response object
+        status.responseContext = result;
+      }
 
       return status;
 
     } catch (error) {
 
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
-      // keeps error message
+
+      // Keep response error code
+      status.code = error.response.statusCode;
+
+      // Keep reponse error message
       status.errorMessage = error;
 
       return status;
