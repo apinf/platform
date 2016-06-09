@@ -87,8 +87,11 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'Mailgun Username'
     },
     custom: function () {
-      var mailEnabled = this.field("mail.enabled").value;
-      if (mailEnabled === true) {
+      let mailEnabled = this.field("mail.enabled").value;
+      let mailUsername = this.value;
+
+      // Require mail username if mailEnabled is checked
+      if (mailEnabled === true && !mailUsername) {
         return "required";
       }
     }
@@ -101,23 +104,31 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'xxx'
     },
     custom: function () {
-      var mailEnabled = this.field("mail.enabled").value;
-      if (mailEnabled === true) {
+      let mailEnabled = this.field("mail.enabled").value;
+      let mailPassword = this.value;
+
+      // Require mail password if mail enabled is checked
+      if (mailEnabled === true && !mailPassword) {
         return "required";
       }
     }
   },
-  contactForm: {
-    type: Object,
-    optional: true
-  },
-  "contactForm.toEmail": {
+  "mail.toEmail": {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: "Contact Form E-mail Address",
     optional: true,
     autoform: {
       placeholder: 'mail@example.com'
+    },
+    custom: function () {
+      let mailEnabled = this.field("mail.enabled").value;
+      let contactFormEmail = this.value;
+
+      // Require mail password if mail enabled is checked
+      if (mailEnabled === true && !contactFormEmail) {
+        return "required";
+      }
     }
   },
   githubConfiguration: {
