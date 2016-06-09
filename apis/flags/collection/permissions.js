@@ -8,4 +8,4 @@ ApiFlags.allow({
   remove: function (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   }
-})
+});

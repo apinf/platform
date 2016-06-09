@@ -1,15 +1,16 @@
 Template.flagApiModal.onCreated(function () {
 
+  // Create reference to instance
   const instance = this;
 
   // Get apiFlag doc passed to a template
   instance.apiFlag = instance.data.apiFlag;
-
 });
 
 Template.flagApiModal.helpers({
   formType () {
 
+    // Create reference to instance
     const instance = Template.instance();
 
     // Check if apiFlag exists are return related form action
@@ -17,12 +18,14 @@ Template.flagApiModal.helpers({
   },
   apiFlag () {
 
+    // Create reference to instance
     const instance = Template.instance();
 
     return instance.apiFlag;
   },
   apiIsFlagged () {
 
+    // Create reference to instance
     const instance = Template.instance();
 
     // Check if api exists and return boolean
@@ -33,6 +36,7 @@ Template.flagApiModal.helpers({
 Template.flagApiModal.events({
   'click #remove-apiFlag': function () {
 
+    // Create reference to instance
     const instance = Template.instance();
 
     // Remove ApiFlag and keep response
@@ -48,4 +52,4 @@ Template.flagApiModal.events({
       Modal.hide('flagApiModal');
     }
   }
-})
+});
