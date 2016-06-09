@@ -3,36 +3,25 @@ Meteor.methods({
 
     this.unblock();
 
-    var status = {
-      isUp            : false,
-      statusCode      : 0,
-      responseContext : {},
-      errorMessage    : ""
+    let status = {
+      code: 0,
+      errorMessage: "",
+      responseContext: {}
     };
 
     try {
 
       // response object from GET request to api host
-      var result = Meteor.http.call("GET", apiUrl);
+      const result = Meteor.http.call("GET", apiUrl);
 
       // Check that we get result and get statusCode
-      if( result ) {
+      if(result) {
+
         // Get statusCode
-        status.statusCode = result.statusCode;
+        status.code = result.statusCode;
 
         // Keep the entire response object
         status.responseContext = result;
-
-        // Status code checks
-        if(result.statusCode === 200) {
-          status.isUp = true;
-        }
-        else if(result.statusCode === 401) {
-          status.isUp = true;
-        }
-        else {
-          status.isUp = false;
-        }
       }
 
       return status;
@@ -41,6 +30,8 @@ Meteor.methods({
 
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
       // keeps error message
+
+      status.code = error.response.statusCode;
       status.errorMessage = error;
 
       return status;
