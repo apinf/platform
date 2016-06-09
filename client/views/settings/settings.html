@@ -51,6 +51,7 @@
             {{#if afFieldValueIs name='mail.enabled' value=true}}
               {{> afQuickField name='mail.username'}}
               {{> afQuickField name='mail.password'}}
+              {{> afQuickField name='mail.toEmail'}}
             {{/if}}
           </div>
         </div>
@@ -61,14 +62,6 @@
           <div class="panel-body">
             {{> afQuickField name='githubConfiguration.clientId'}}
             {{> afQuickField name='githubConfiguration.secret'}}
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Additional</h3>
-          </div>
-          <div class="panel-body">
-            {{> afQuickField name='contactForm.toEmail'}}
           </div>
         </div>
         <div id="form-buttons">

@@ -88,7 +88,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     },
     custom: function () {
       let mailEnabled = this.field("mail.enabled").value;
-      let mailUsername = this.field("mail.username").value;
+      let mailUsername = this.value;
 
       // Require mail username if mailEnabled is checked
       if (mailEnabled === true && !mailUsername) {
@@ -105,7 +105,7 @@ Schemas.SettingsSchema = new SimpleSchema({
     },
     custom: function () {
       let mailEnabled = this.field("mail.enabled").value;
-      let mailPassword = this.field("mail.password").value;
+      let mailPassword = this.value;
 
       // Require mail password if mail enabled is checked
       if (mailEnabled === true && !mailPassword) {
@@ -113,17 +113,22 @@ Schemas.SettingsSchema = new SimpleSchema({
       }
     }
   },
-  contactForm: {
-    type: Object,
-    optional: true
-  },
-  "contactForm.toEmail": {
+  "mail.toEmail": {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: "Contact Form E-mail Address",
     optional: true,
     autoform: {
       placeholder: 'mail@example.com'
+    },
+    custom: function () {
+      let mailEnabled = this.field("mail.enabled").value;
+      let contactFormEmail = this.value;
+
+      // Require mail password if mail enabled is checked
+      if (mailEnabled === true && !contactFormEmail) {
+        return "required";
+      }
     }
   },
   githubConfiguration: {
