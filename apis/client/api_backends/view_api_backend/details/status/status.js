@@ -3,6 +3,9 @@ Template.viewApiBackendStatus.created = function() {
   // Create reference to instance
   const instance = this;
 
+  // Get API Backend from instance data context
+  const apiBackend = instance.data.apiBackend;
+
   // attaches function to template instance to be able to call it in outside
   instance.getApiStatus = function (url) {
 
@@ -16,7 +19,7 @@ Template.viewApiBackendStatus.created = function() {
       // };
 
       // Init indicator element
-      const apiStatusIndicator = $('#api-status-indicator');
+      const apiStatusIndicator = $('.api-status-indicator-' + apiBackend._id);
 
       // Init regEx for status codes
       const success = /^2[0-9][0-9]$/;
@@ -87,5 +90,5 @@ Template.viewApiBackendStatus.rendered = function () {
   instance.getApiStatus(url);
 
   // Init tooltip
-  $('#api-status-indicator').tooltip();
+  $('[data-toggle="tooltip"]').tooltip()
 };
