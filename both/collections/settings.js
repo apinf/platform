@@ -85,6 +85,15 @@ Schemas.SettingsSchema = new SimpleSchema({
     optional: true,
     autoform: {
       placeholder: 'Mailgun Username'
+    },
+    custom: function () {
+      let mailEnabled = this.field("mail.enabled").value;
+      let mailUsername = this.field("mail.username").value;
+
+      // Require mail username if mailEnabled is checked
+      if (mailEnabled === true && !mailUsername) {
+        return "required";
+      }
     }
   },
   "mail.password": {
@@ -93,6 +102,15 @@ Schemas.SettingsSchema = new SimpleSchema({
     optional: true,
     autoform: {
       placeholder: 'xxx'
+    },
+    custom: function () {
+      let mailEnabled = this.field("mail.enabled").value;
+      let mailPassword = this.field("mail.password").value;
+
+      // Require mail password if mail enabled is checked
+      if (mailEnabled === true && !mailPassword) {
+        return "required";
+      }
     }
   },
   contactForm: {
