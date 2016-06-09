@@ -31,6 +31,14 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: false
   },
+  description: {
+    type: String,
+    max: 1000,
+    autoform: {
+      rows: 3
+    },
+    optional: false
+  },
   documentationFileId: {
     type: String,
     optional: true
