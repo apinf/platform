@@ -1,6 +1,16 @@
 import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
 
 Meteor.methods({
+  'getApiUmbrellaHostName': function () {
+    // Get API Umbrella base url from settings object
+    const settings = Settings.findOne();
+    var apiUmbrellaHostUrl = new URI(settings.apiUmbrella.host);
+
+    // Get host part of API Umbrella host URL
+    var apiUmbrellaHost = apiUmbrellaHostUrl.host();
+
+    return apiUmbrellaHost;
+  },
   'updateMeteorSettings': function() {
     // Updating Meteor.settings from Settings collection
     const settings = Settings.findOne();
