@@ -1,60 +1,57 @@
 /* Bootstrap */
 @import "/client/style/bootstrap-variables.less";
 
-.card-api {
+.card-api-status {
+  color: @brand-success;
+  font-size: 10px;
   position: relative;
-  padding-top: 1em;
-  padding-bottom: 2em;
-  padding-left: 1.3em;
-  padding-right: 1.3em;
-  margin: 1.3em;
+  right: 0.3em;
+  top: 0.2em;
+}
+
+.api-card {
   border-radius: 3px;
   background: #ffffff;
   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  padding: 0.5em;
+  margin-bottom: 1.3em;
+}
 
-  .card-api-status {
-    color: @brand-success;
+.api-card-about {
+  padding: 0.3em 0.8em;
+  margin-left: 6em;
+}
+
+.api-card-name {
+  display: block;
+  font-size: 1.2em;
+  overflow: hidden;
+  word-wrap: normal;
+  font-weight: bold;
+}
+
+.api-card-author {
+  display: block;
+  font-size: 1em;
+  color: darkgrey;
+}
+
+.api-card-logo {
+  padding: 0.5em;
+  padding-left: 0.5em;
+  float: left;
+
+  img {
+    max-height: 50px;
+    max-width: 50px;
+    background: transparent;
   }
+}
 
-  .card-api-logo {
-    .thumbnail {
-      border: none;
-      margin-bottom: 0;
-
-      .thumbnail:hover {
-        border: none;
-      }
-    }
-
-    .card-api-logo-image {
-      position: relative;
-      overflow: hidden;
-      padding-bottom: 50%;
-
-      > img {
-        position: absolute;
-        margin: auto;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 2em;
-        max-height: 200px;
-        border: none;
-        &:hover {
-          border: none;
-        }
-      }
-    }
-  }
-
-  .card-api-name h3 {
-    margin-top: 0.3em;
-  }
-
-  .card-api-author {
-    color: @brand-primary;
-  }
+.api-card-info {
+  margin-left: 4.8em;
+  margin-top: 0.3em;
+  margin-right: 0.6em;
 }
 
 .bookmark {
