@@ -1,14 +1,6 @@
 /* Bootstrap */
 @import "/client/style/bootstrap-variables.less";
 
-.card-api-status {
-  color: @brand-success;
-  font-size: 10px;
-  position: relative;
-  right: 0.3em;
-  top: 0.2em;
-}
-
 .api-card {
   border-radius: 3px;
   background: #ffffff;
@@ -18,6 +10,14 @@
   margin-right: 25px;
   margin-bottom: 25px;
   display: inline-block;
+
+  .api-status-color {
+    background-color: #a0a0a0;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: right;
+  }
 }
 
 .api-card-name {
