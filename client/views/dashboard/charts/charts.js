@@ -83,7 +83,6 @@ Template.chartsLayout.created = function () {
   // function that sets chart data to be available in template
   instance.getDashboardData = function (input) {
 
-    console.log("Getting chart data.", new Date());
     // calling method that returns data from elastic search
     Meteor.call("getChartData", input, function (err, response) {
       // error checking
@@ -96,8 +95,7 @@ Template.chartsLayout.created = function () {
         $('#loadingState').html(errorMessage);
 
       } else {
-        console.log("All is well.", new Date());
-        console.log(response);
+
         // gets to level in object with needed data
         var dashboardData = response.hits.hits;
 
@@ -393,7 +391,7 @@ Template.chartsLayout.created = function () {
 
       }catch(e){
 
-        console.log("not found");
+        console.log(e);
 
       }
 
