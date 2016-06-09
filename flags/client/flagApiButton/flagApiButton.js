@@ -4,8 +4,6 @@ Template.flagApiButton.onCreated(function () {
 
   const apiBackendId = instance.data.apiBackend._id;
 
-  console.log(apiBackendId)
-
   instance.apiFlag = new ReactiveVar();
 
   instance.subscribe('singleApiFlag', apiBackendId);
