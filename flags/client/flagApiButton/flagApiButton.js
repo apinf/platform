@@ -29,7 +29,7 @@ Template.flagApiButton.events({
 })
 
 Template.flagApiButton.helpers({
-  apiFlag () {
+  apiIsFlagged () {
     const instance = Template.instance();
 
     const apiFlag = instance.apiFlag.get();
