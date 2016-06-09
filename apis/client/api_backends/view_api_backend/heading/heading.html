@@ -3,7 +3,7 @@
     <div class="btn-group pull-right" role="group" aria-label="...">
       {{ # if currentUser }}
         {{ # if isInRole 'admin' }}
-          {{> flagApiButton }}
+          {{> flagApiButton apiBackendId=apiBackend._id }}
         {{ / if }}
       {{ / if }}
       {{> apiBackendsUsageInstructionsButton }}
