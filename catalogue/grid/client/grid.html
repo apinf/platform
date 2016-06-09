@@ -1,36 +1,48 @@
 <template name="apiCatalogue">
   {{#if apiBackends }}
-  <div class="container api-catalogue">
-    {{#each apiBackend in apiBackends }}
-    <div class="api-card">
-      <div class="api-card-logo">
-        <img class="img-circle"
-             src="img/placeholder-logo.jpg"/>
-        <div
-             class="api-card-bookmark"
-             title="Bookmark API">
-          <span class="api-card-bookmark-number">267</span>
-          {{> favourite apiBackend }}
-        </div>
-      </div>
-      {{> viewApiBackendStatus apiBackend=apiBackend width="0.6"  }}
-      <div class="api-card-info">
-        <a href="/api/{{apiBackend._id}}"
-           class="api-card-name">
-          {{ apiBackend.name }}
-        </a>
-        <span class="api-card-author">
-          added by {{ apiBackend.getApiManagersByName }}
-        </span>
-        <p class="api-card-description">
-          {{ apiBackend.description }}
-        </p>
-      </div>
-      <span class="api-card-created pull-right">
-        {{_ "latestApiBackends_DateAdded" apiBackend.relative_created_at }}
-      </span>
+  <div class="container">
+    <div class="view-type">
+      <ul class="choose-view list-inline">
+        <li>
+          <i class="fa fa-th-large fa-lg" aria-hidden="true"></i>
+        </li>
+        <li>
+          <i class="fa fa-th-list fa-lg" aria-hidden="true"></i>
+        </li>
+      </ul>
     </div>
-    {{/each}}
+    <div class="api-catalogue">
+      {{#each apiBackend in apiBackends }}
+      <div class="api-card">
+        <div class="api-card-logo">
+          <img class="img-circle"
+               src="img/placeholder-logo.jpg"/>
+          <div
+               class="api-card-bookmark"
+               title="Bookmark API">
+            <span class="api-card-bookmark-number">267</span>
+            {{> favourite apiBackend }}
+          </div>
+        </div>
+        {{> viewApiBackendStatus apiBackend=apiBackend width="0.6"  }}
+        <div class="api-card-info">
+          <a href="/api/{{apiBackend._id}}"
+             class="api-card-name">
+            {{ apiBackend.name }}
+          </a>
+          <span class="api-card-author">
+            added by {{ apiBackend.getApiManagersByName }}
+          </span>
+          <p class="api-card-description">
+            {{ apiBackend.description }}
+          </p>
+        </div>
+        <span class="api-card-created pull-right">
+          {{_ "latestApiBackends_DateAdded" apiBackend.relative_created_at }}
+        </span>
+      </div>
+      {{/each}}
+    </div>
   </div>
   {{/if}}
 </template>
