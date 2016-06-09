@@ -2,42 +2,34 @@ Template.apiCatalogue.created = function () {
 
   // Reference to Template instance
   var instance = this;
-  var limit;
-  // Limit for latest Api Backends passed to the template
-  if ( instance.data && instance.data.limit ) {
-    limit = instance.data.limit;
-  } else {
-    // Set default limit 8
-    limit = 8;
-  }
 
   // Subscribe to latestApiBackends publication & pass limit parameter
-  instance.subscribe("latestApiBackends", limit);
+  instance.subscribe("latestApiBackends");
 
   // Attach cursor function to a template instance
-  instance.latestApiBackendsCursor = function () {
-    // Get a cursor for API Backends documents limited by provided value and sorted by created date
-    return ApiBackends.find({}, { sort: { created_at: -1}, limit: limit });
+  instance.apiBackendsCursor = function () {
+    // Get a cursor for API Backends documents
+    return ApiBackends.find({});
   }
 
 };
 
 Template.apiCatalogue.helpers({
-  'latestBackends': function (limit) {
+  'apiBackends': function () {
 
     // Reference to Template instance
     var instance = Template.instance();
 
-    // Retrieve last API Backends
-    var latestApiBackendsList = instance.latestApiBackendsCursor().fetch();
+    // Retrieve API Backends
+    var apiBackendsList = instance.apiBackendsCursor().fetch();
 
     // Iterate through all documents
-    _.each(latestApiBackendsList, function (apiBackend) {
+    _.each(apiBackendsList, function (apiBackend) {
 
       // Return to user human-readable timestamp
       apiBackend.relative_created_at = moment(apiBackend.created_at).fromNow();
     });
 
-    return latestApiBackendsList;
+    return apiBackendsList;
   }
 });
