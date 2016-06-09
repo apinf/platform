@@ -24,32 +24,36 @@ Template.viewApiBackendStatus.created = function() {
       const clientErr = /^4[0-9][0-9]$/;
       const serverErr = /^5[0-9][0-9]$/;
 
+      let className = '';
+      let statusText = '';
+
       // Check which status code is received
       // and display text depending on it
       if (success.test(status.code)) {
 
-        apiStatusIndicator
-          .addClass('alert-success')
-          .attr('data-original-title', 'API is operating normally.');
+        className = 'alert-success';
+        statusText = 'API is operating normally.';
 
       } else if (redirect.test(status.code)) {
 
-        apiStatusIndicator
-          .addClass('alert-warning')
-          .attr('data-original-title', `${status.code} code. Redirection.`);
+        className = 'alert-success';
+        statusText = `${status.code} code. Redirection.`;
 
       } else if (clientErr.test(status.code)) {
 
-        apiStatusIndicator
-          .addClass('alert-warning')
-          .attr('data-original-title', `${status.code} code. Client error.`);
+        className = 'alert-warning';
+        statusText = status.code + ' code. Client error.';
 
       } else if (serverErr.test(status.code)) {
 
-        apiStatusIndicator
-          .addClass('alert-danger')
-          .attr('data-original-title', `${status.code} code. Server error. Please contact support.`);
+        className = 'alert-danger';
+        statusText = status.code + 'code. Server error. Please contact support.';
       }
+
+      apiStatusIndicator
+        .addClass(className)
+        .attr('data-original-title', statusText);
+
     });
   };
 };
