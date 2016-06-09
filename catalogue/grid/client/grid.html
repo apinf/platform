@@ -1,32 +1,36 @@
 <template name="apiCatalogue">
   {{#if latestBackends }}
-  {{#each latestBackends }}
-  <div class="col-md-3 col-sm-6">
-    <div class="thumbnail api-card">
-      <div class="api-card-logo">
-        <img class="img-circle"
-             src="favicon.png"
-             style="background: transparent" />
-        <div style="margin-top: 0.5em; text-align: center;">
-          <span style="display: block; color:#2FA4E7;">267</span>
-          {{> favourite }}
+  <div class="api-catalogue">
+    <div class="api-cards">
+      {{#each latestBackends }}
+      <div class="api-card">
+        <div class="api-card-logo">
+          <img class="img-circle"
+               src="favicon.png"/>
+          <div class="api-card-bookmark">
+            <span class="api-card-bookmark-number">267</span>
+            {{> favourite }}
+          </div>
         </div>
-      </div>
-      <i class="fa fa-circle card-api-status pull-right"></i>
-      <div class="api-card-info">
-        <a href="/api/{{_id}}"
-           class="api-card-name">
-          {{ name }}
-        </a>
-        <span class="api-card-author">
-          by Google.inc
+        <i class="fa fa-circle card-api-status pull-right"></i>
+        <div class="api-card-info">
+          <a href="/api/{{_id}}"
+             class="api-card-name">
+            {{ name }}
+          </a>
+          <span class="api-card-author">
+            by Google.inc
+          </span>
+          <p class="api-card-description">
+            Lorem ipsum, lorem ipsum you knwerr, ipsum, lorem ipsum you knwerr
+          </p>
+        </div>
+        <span class="api-card-created pull-right">
+          {{_ "latestApiBackends_DateAdded" relative_created_at }}
         </span>
-        <p style="margin-top: 1.3em;font-size: 13px; color: #444;">
-          Lorem ipsum, lorem ipsum you knwerr, ipsum, lorem ipsum you knwerr
-        </p>
       </div>
+      {{/each}}
     </div>
   </div>
-  {{/each}}
   {{/if}}
 </template>
