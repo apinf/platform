@@ -19,6 +19,6 @@ AutoForm.addHooks('insertApiFlag', {
   onError (formType, error) {
 
     // Throw an error if one has been chatched
-    throw new Meteor.Error(error);
+    return new Meteor.Error(error);
   }
 })
