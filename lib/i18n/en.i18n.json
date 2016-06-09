@@ -234,6 +234,7 @@
   "flagApiModal_submitButton": "Submit",
   "flagApiModal_cancelButton": "Cancel",
   "flagApiButton_buttonText": "Flag",
+  "flagApiButton_buttonText_active": "Flagged",
   "documentation_Title": "Documentation",
   "documentation_Link_Title": "Link",
   "documentation_Viewer_Title": "Viewer",
