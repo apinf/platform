@@ -1,8 +1,6 @@
 #api-status-indicator {
   display:inline-block;
-  height: 0.4em;
-  width: 0.4em;
-  background-color: red;
+  background-color: #a0a0a0;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
