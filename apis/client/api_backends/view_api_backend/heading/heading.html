@@ -8,7 +8,9 @@
       {{ / if }}
       {{> apiBackendsUsageInstructionsButton }}
     </div>
-    <h1 class="page-title">{{ apiBackend.name }}</h1>
-    {{> apiBackendUsageInstructions apiBackend=apiBackend}}
+    <h1 class="page-title">
+      {{> viewApiBackendStatus apiBackend=apiBackend width="0.4"  }}
+      {{ apiBackend.name }}
+    </h1>
   </div>
 </template>

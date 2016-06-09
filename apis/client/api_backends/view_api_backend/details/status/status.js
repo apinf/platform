@@ -1,40 +1,79 @@
 Template.viewApiBackendStatus.created = function() {
+
   // Create reference to instance
-  var instance = this;
+  const instance = this;
 
   // attaches function to template instance to be able to call it in outside
-  instance.updateApiStatus = function (url) {
+  instance.getApiStatus = function (url) {
 
     Meteor.call("getApiStatus", url, function (err, status) {
 
-      // status object contents:
+      // Status object contents:
       // status = {
-      //   isUp            : <boolean>,
       //   statusCode      : <integer>,
       //   responseContext : <object>,
       //   errorMessage    : <String>
       // };
 
-      if (status.isUp) {
-        // updates layout with success status
-        $('#apiState')
-          .addClass('alert-success')
-          .html("API is operating normally.");
-      } else {
-        // initial error message
-        var errorMessage = "API backend is down for some reason. Please contact support.";
+      // Init indicator element
+      const apiStatusIndicator = $('#api-status-indicator');
 
-        // updates layout with success status
-        $('#apiState').addClass('alert-danger').html(errorMessage);
+      // Init regEx for status codes
+      const success = /^2[0-9][0-9]$/;
+      const redirect = /^3[0-9][0-9]$/;
+      const clientErr = /^4[0-9][0-9]$/;
+      const serverErr = /^5[0-9][0-9]$/;
+
+      let className = '';
+      let statusText = '';
+
+      // Check which status code is received
+      // and display text depending on it
+      if (success.test(status.code)) {
+
+        className = 'alert-success';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_Success')}
+          `;
+
+      } else if (redirect.test(status.code)) {
+
+        className = 'alert-success';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${status.code}.
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_RedirectError')}
+        `;
+
+      } else if (clientErr.test(status.code)) {
+
+        className = 'alert-warning';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${status.code}.
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ClientError')}
+        `;
+
+      } else if (serverErr.test(status.code)) {
+
+        className = 'alert-danger';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${status.code}.
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ServerError')}
+        `;
       }
 
-      // show when check happened
-      $('#whenUpdated').html("Just now");
+      apiStatusIndicator
+        .addClass(className)
+        .attr('data-original-title', statusText);
+
     });
   };
 };
 
 Template.viewApiBackendStatus.rendered = function () {
+
   // Get reference to template instance
   var instance = this;
 
@@ -45,5 +84,8 @@ Template.viewApiBackendStatus.rendered = function () {
   var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
 
   // call the function that updates status
-  instance.updateApiStatus(url);
+  instance.getApiStatus(url);
+
+  // Init tooltip
+  $('#api-status-indicator').tooltip();
 };
