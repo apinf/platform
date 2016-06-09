@@ -233,7 +233,7 @@
   "flagApiSchema_inappropriateText": "Inappropriate",
   "flagApiSchema_DefunctText": "Defunct",
   "flagApiModal_titleText": "Flag API Backend",
-  "flagApiModal_submitButton": "Save",
+  "flagApiModal_saveButton": "Save",
   "flagApiModal_cancelButton": "Cancel",
   "flagApiModal_removeButton": "Remove flag",
   "flagApiModal_removeApiFlag_insertMessage": "API has been successfully flagged.",
