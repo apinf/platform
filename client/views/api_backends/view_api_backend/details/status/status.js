@@ -3,46 +3,54 @@ Template.viewApiBackendStatus.created = function() {
   var instance = this;
 
   // attaches function to template instance to be able to call it in outside
-  instance.updateApiStatus = function (url) {
+  instance.getApiStatus = function (url) {
 
     Meteor.call("getApiStatus", url, function (err, status) {
 
       // status object contents:
       // status = {
-      //   isUp            : <boolean>,
       //   statusCode      : <integer>,
       //   responseContext : <object>,
       //   errorMessage    : <String>
       // };
 
-      if (status.isUp) {
-        if(status.statusCode === 200) {
-          // updates layout with success status
-          $('#apiState')
-            .addClass('alert-success')
-            .html("API is operating normally.");
-        }
-        else if(status.statusCode === 401) {
-          // updates layout with success status
-          $('#apiState')
-            .addClass('alert-success')
-            .html("API requires authentication.");
-        }
-      } else {
+      const apiStatusIndicator = $('#api-status-indicator');
 
-        // updates layout with success status
-        $('#apiState').addClass('alert-danger').html(`
-          API backend is down for some reason.
-          Please contact support.`);
+      const success = /^2[0-9][0-9]$/;
+      const redirect = /^3[0-9][0-9]$/;
+      const clientErr = /^4[0-9][0-9]$/;
+      const serverErr = /^5[0-9][0-9]$/;
+
+      if (success.test(status.code)) {
+
+        apiStatusIndicator
+          .addClass('alert-success')
+          .attr('data-original-title', 'API is operating normally.');
+
+      } else if (redirect.test(status.code)) {
+
+        apiStatusIndicator
+          .addClass('alert-warning')
+          .attr('data-original-title', `${status.code} code. Redirection.`);
+
+      } else if (clientErr.test(status.code)) {
+
+        apiStatusIndicator
+          .addClass('alert-warning')
+          .attr('data-original-title', `${status.code} code. Client error.`);
+
+      } else if (serverErr.test(status.code)) {
+
+        apiStatusIndicator
+          .addClass('alert-danger')
+          .attr('data-original-title', `${status.code} code. Server error. Please contact support.`);
       }
-
-      // show when check happened
-      $('#whenUpdated').html("Just now");
     });
   };
 };
 
 Template.viewApiBackendStatus.rendered = function () {
+
   // Get reference to template instance
   var instance = this;
 
@@ -53,5 +61,7 @@ Template.viewApiBackendStatus.rendered = function () {
   var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
 
   // call the function that updates status
-  instance.updateApiStatus(url);
+  instance.getApiStatus(url);
+
+  $('#api-status-indicator').tooltip();
 };
