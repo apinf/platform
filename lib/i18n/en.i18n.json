@@ -233,6 +233,8 @@
   "flagApiModal_titleText": "Flag Api Backend",
   "flagApiModal_submitButton": "Submit",
   "flagApiModal_cancelButton": "Cancel",
+  "flagApiModal_removeButton": "Remove flag",
+  "flagApiModal_removeApiFlag_successMessage": "Flag has been successfully removed from API.",
   "flagApiButton_buttonText": "Flag",
   "flagApiButton_buttonText_active": "Flagged",
   "documentation_Title": "Documentation",
