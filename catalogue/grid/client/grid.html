@@ -1,31 +1,33 @@
 <template name="apiCatalogue">
   {{#if apiBackends }}
   <div class="container api-catalogue">
-    {{#each apiBackends }}
+    {{#each apiBackend in apiBackends }}
     <div class="api-card">
       <div class="api-card-logo">
         <img class="img-circle"
              src="img/placeholder-logo.jpg"/>
-        <div class="api-card-bookmark">
+        <div
+             class="api-card-bookmark"
+             title="Bookmark API">
           <span class="api-card-bookmark-number">267</span>
-          {{> favourite }}
+          {{> favourite apiBackend }}
         </div>
       </div>
-      <i class="fa fa-circle card-api-status pull-right"></i>
+      {{> viewApiBackendStatus apiBackend=apiBackend width="0.6"  }}
       <div class="api-card-info">
-        <a href="/api/{{_id}}"
+        <a href="/api/{{apiBackend._id}}"
            class="api-card-name">
-          {{ name }}
+          {{ apiBackend.name }}
         </a>
         <span class="api-card-author">
-          added by {{ getApiManagersByName }}
+          added by {{ apiBackend.getApiManagersByName }}
         </span>
         <p class="api-card-description">
-          {{ description }}
+          {{ apiBackend.description }}
         </p>
       </div>
       <span class="api-card-created pull-right">
-        {{_ "latestApiBackends_DateAdded" relative_created_at }}
+        {{_ "latestApiBackends_DateAdded" apiBackend.relative_created_at }}
       </span>
     </div>
     {{/each}}
