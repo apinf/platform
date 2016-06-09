@@ -7,12 +7,12 @@ AutoForm.addHooks('insertApiFlag', {
     if (formType === 'insert') {
 
       // Show message to a user
-      sAlert.success('API has been successfully flagged!');
-      
+      sAlert.success(TAPi18n.__('flagApiModal_removeApiFlag_insertMessage'));
+
     } else if (formType === 'update') {
 
       // Show message to a user
-      sAlert.success('API flag info has been successfully updated!');
+      sAlert.success(TAPi18n.__('flagApiModal_removeApiFlag_updateMessage'));
     }
 
   },

@@ -234,6 +234,8 @@
   "flagApiModal_submitButton": "Submit",
   "flagApiModal_cancelButton": "Cancel",
   "flagApiModal_removeButton": "Remove flag",
+  "flagApiModal_removeApiFlag_insertMessage": "API has been successfully flagged.",
+  "flagApiModal_removeApiFlag_updateMessage": "API flag info has been successfully updated.",
   "flagApiModal_removeApiFlag_successMessage": "Flag has been successfully removed from API.",
   "flagApiButton_buttonText": "Flag",
   "flagApiButton_buttonText_active": "Flagged",
