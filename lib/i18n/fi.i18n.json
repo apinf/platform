@@ -132,7 +132,7 @@
   "bookmarks_Backend": "Taustajärjestelmän (API) isäntä:",
   "favourite_Remove": "Poista kirjanmerkki",
   "favourite_Add": "Lisää kirjanmerkki",
-  "catalogue_Title": "Valittavissa olevat API:t",
+  "catalogue_Title": "Rajapintahakemisto",
   "api_backend_rating_anonymous": "Kirjaudu sisään äänestääksesi.",
   "feedback_submitted_by": "lähettänyt",
   "feedback_main_title": "Palautteet ja raportit",
