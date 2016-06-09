@@ -3,7 +3,10 @@ AutoForm.addHooks('insertApiFlag', {
 
     // Hide modal
     Modal.hide('flagApiModal');
-    
+
+    // Show message to a user
+    sAlert.success('API has been successfully flagged!');
+
   },
   onError (formType, error) {
 
