@@ -2,8 +2,8 @@ ApiFlags.schema = new SimpleSchema({
   reason: {
     type: String,
     allowedValues: [
-      'Inappropriate',
-      'Defunct'
+      TAPi18n.__('flagApiSchema_inappropriateText'),
+      TAPi18n.__('flagApiSchema_DefunctText')
     ]
   },
   comments: {
