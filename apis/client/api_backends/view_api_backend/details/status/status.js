@@ -32,22 +32,36 @@ Template.viewApiBackendStatus.created = function() {
       if (success.test(status.code)) {
 
         className = 'alert-success';
-        statusText = 'API is operating normally.';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_Success')}
+          `;
 
       } else if (redirect.test(status.code)) {
 
         className = 'alert-success';
-        statusText = `${status.code} code. Redirection.`;
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${status.code}.
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_RedirectError')}
+        `;
 
       } else if (clientErr.test(status.code)) {
 
         className = 'alert-warning';
-        statusText = status.code + ' code. Client error.';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${status.code}.
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ClientError')}
+        `;
 
       } else if (serverErr.test(status.code)) {
 
         className = 'alert-danger';
-        statusText = status.code + 'code. Server error. Please contact support.';
+        statusText = `
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${status.code}.
+          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ServerError')}
+        `;
       }
 
       apiStatusIndicator
