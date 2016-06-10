@@ -1,5 +1,13 @@
 import { Template } from 'meteor/templating';
 
 Template.catalogue.onCreated(function () {
-  console.log("Catalogue container created.");
+  const instance = this;
+
+  instance.subscribe("catalogue");
+});
+
+Template.catalogue.helpers({
+  apiBackends () {
+    return ApiBackends.find().count();
+  }
 });
