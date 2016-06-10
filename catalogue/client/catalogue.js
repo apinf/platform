@@ -4,6 +4,8 @@ Template.catalogue.onCreated(function () {
   const instance = this;
 
   instance.subscribe("catalogue");
+  instance.subscribe("catalogueRatings");
+  instance.subscribe("catalogueBookmarks");  
 });
 
 Template.catalogue.helpers({
