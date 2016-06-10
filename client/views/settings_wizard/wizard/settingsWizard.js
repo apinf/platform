@@ -63,7 +63,7 @@ Template.settingsWizard.events({
 });
 
 AutoForm.hooks({
-  settings: {
+  wizardSettings: {
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key],button').attr("disabled", "disabled");
@@ -75,7 +75,7 @@ AutoForm.hooks({
   }
 });
 
-AutoForm.addHooks(['settings'], {
+AutoForm.addHooks(['wizardSettings'], {
   onSuccess: function () {
     // Call method to update Meteor.settings
     Meteor.call('updateMeteorSettings');
