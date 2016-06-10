@@ -9,7 +9,7 @@
           <tbody>
             {{#each api in apiBackends }}
             <tr>
-              <td>
+              <td class="col-sm-3" style="vertical-align:middle">
                 <p>
                   <a href="/api/{{api._id}}">
                     {{ api.name }}
@@ -18,12 +18,12 @@
                   {{ api.updated_at }}
                 </p>
               </td>
-              <td>
+              <td class="col-sm-3 text-center" style="vertical-align:middle">
                 <i class="fa fa-lg fa-bookmark"></i>&nbsp;&nbsp;
                 <i class="fa fa-lg fa-star-half-o"></i>&nbsp;&nbsp;
                 <i class="fa fa-lg fa-long-arrow-up"></i>&nbsp;&nbsp;
               </td>
-              <td>
+              <td class="col-sm-3" style="vertical-align:middle">
                 {{> favourite api }}&nbsp;&nbsp;
                 {{> apiBackendRating api }}
               </td>
