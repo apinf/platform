@@ -745,6 +745,29 @@ ApiBackends.helpers({
       return apiBackendRatingsAverage;
     }
   },
+  getAverageRating: function() {
+    // Get API Backend ID
+    apiBackendId = this._id;
+
+    // Fetch all ratings
+    var apiBackendRatings = ApiBackendRatings.find({
+      apiBackendId: apiBackendId
+    }).fetch();
+
+    // If ratings exist
+    if (apiBackendRatings) {
+      // Create array containing only rating values
+      var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
+        // get only the rating value; omit User ID and API Backend ID fields
+        return rating.rating;
+      });
+
+      // Get the average (mean) value for API Backend ratings
+      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+
+      return apiBackendRatingsAverage;
+    }
+  },
   currentUserCanEdit: function() {
     // Get current userId
     var userId = Meteor.userId();
