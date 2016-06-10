@@ -11,8 +11,8 @@
           <div
                class="api-card-bookmark"
                title="Bookmark API">
-            <span class="api-card-bookmark-number">267</span>
-            {{> favourite apiBackend }}
+            <span class="api-card-bookmark-number">{{ bookmarksCount apiBackendId=apiBackend._id }}</span>
+            {{> favourite apiBackend=apiBackend }}
           </div>
         </div>
         {{> viewApiBackendStatus apiBackend=apiBackend width="0.6"  }}
