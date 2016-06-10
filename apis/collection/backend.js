@@ -727,6 +727,12 @@ ApiBackends.helpers({
       return apiBackendRatingsAverage;
     }
   },
+  'getBookmarksCount' () {
+    // Get API Backend ID
+    const apiBackendId = this._id;
+    
+    return ApiBookmarks.find({apiBackendId}).count();
+  },
   'getRating': function () {
     // Get API Backend ID
     apiBackendId = this._id;
