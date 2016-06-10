@@ -9,8 +9,8 @@ Template.favourite.created = function () {
 Template.favourite.events({
   'click .bookmark': function () {
 
-    //Store api id being clicked
-    var backendId = this._id;
+    // Get api backend Id from the context
+    var backendId = (this.apiBackend) ? this.apiBackend._id : this._id;
 
     //Store the user ID of the current user clicking the button
     var currentUserId = Meteor.user()._id;
@@ -22,30 +22,26 @@ Template.favourite.events({
 
 Template.favourite.helpers({
   isBookmarked: function () {
+
+    // Get api backend Id from the context
+    const apiBackendId = (this.apiBackend) ? this.apiBackend._id : this._id;
+
     // Get reference to template instance
     var instance = Template.instance();
 
     // Make sure bookmark subscription is ready
     if (instance.bookmarksSubscription.ready()) {
+
       // Get current user bookmark (should be only one API Bookmarks result available)
-      var userBookmarks = ApiBookmarks.findOne();
+      var userBookmarks = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiBackendId });
 
       // Make sure user has bookmarks
       if (userBookmarks) {
-        // get array of API IDs
-        var apiIds = userBookmarks.apiIds;
 
-        //Store api id being clicked
-        var backendId = this._id;
-
-        // Get index of current API in user bookmarks, if it exists
-        var bookmarkIndex = apiIds.indexOf(backendId);
-
-        // Check if API has been bookmarked (converting the index to true or false)
-        var isBookmarked = (bookmarkIndex >= 0) ? true : false;
-
-        return isBookmarked;
+        return true;
       }
+
+      return false;
     }
   }
 });
