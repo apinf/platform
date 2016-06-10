@@ -11,11 +11,17 @@
             <tr>
               <td>
                 <p>
-                  {{ api.name }}<br>
+                  <a href="/api/{{api._id}}">
+                    {{ api.name }}
+                  </a>
+                  <br>
                   {{ api.updated_at }}
                 </p>
               </td>
               <td>
+                <i class="fa fa-bookmark"></i>&nbsp;&nbsp;
+                <i class="fa fa-star-half-o"></i>&nbsp;&nbsp;
+                <i class="fa fa-long-arrow-up"></i>&nbsp;&nbsp;
                 Stats (no. bookmarks, no. stars, quality, tags)
               </td>
               <td>
