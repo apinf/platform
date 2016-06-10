@@ -20,7 +20,7 @@ Meteor.methods({
       // Check result is received
       if(result) {
 
-        // Get reposnce status code
+        // Get response status code
         status.code = result.statusCode;
 
         // Keep response object
@@ -36,7 +36,7 @@ Meteor.methods({
       // Check if "ECONNREFUSED" is reveived
       if (!error.response && error.code === 'ECONNREFUSED') {
 
-        // Provide server error
+        // Provide 404 error
         status.code = 404;
 
       } else {
