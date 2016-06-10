@@ -32,9 +32,19 @@ Meteor.methods({
     } catch (error) {
 
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
+      
+      // Check if "ECONNREFUSED" is reveived
+      if (!error.response && error.code === 'ECONNREFUSED') {
 
-      // Keep response error code
-      status.code = error.response.statusCode;
+        // Provide server error
+        status.code = 404;
+
+      } else {
+
+        // Keep response error code
+        status.code = error.response.statusCode;
+
+      }
 
       // Keep reponse error message
       status.errorMessage = error;
