@@ -747,26 +747,44 @@ ApiBackends.helpers({
   },
   getAverageRating: function() {
     // Get API Backend ID
-    apiBackendId = this._id;
+    const apiBackendId = this._id;
 
     // Fetch all ratings
-    var apiBackendRatings = ApiBackendRatings.find({
+    const apiBackendRatings = ApiBackendRatings.find({
       apiBackendId: apiBackendId
     }).fetch();
 
     // If ratings exist
     if (apiBackendRatings) {
       // Create array containing only rating values
-      var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
+      const apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
         // get only the rating value; omit User ID and API Backend ID fields
         return rating.rating;
       });
 
       // Get the average (mean) value for API Backend ratings
-      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+      const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
 
-      return apiBackendRatingsAverage;
+      // Return with precision of 2 significant digits
+      return apiBackendRatingsAverage.toPrecision(2);
     }
+  },
+  getNumberOfBookmarks: function () {
+    // Get API Backend ID
+    const apiBackendId = this._id;
+
+    // Get all apiBookMarksByUser
+    const allBookmarksByUser = ApiBookmarks.find().fetch();
+
+    // Count number of bookmarks for this API
+    let bookmarksCount = 0;
+    _.each(allBookmarksByUser, function (userBookmarks) {
+
+      if( _.contains(userBookmarks.apiIds, apiBackendId) ) {
+        bookmarksCount = bookmarksCount + 1;
+      }
+    });
+    return bookmarksCount;
   },
   currentUserCanEdit: function() {
     // Get current userId
