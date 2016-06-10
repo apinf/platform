@@ -107,13 +107,16 @@
                 </div>
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h3 class="panel-title">{{_ "settingsWizard_Mail"}}</h3>
-                    {{> afQuickField name='mail.enabled'}}
+                    <span class="panel-title">{{_ "settingsWizard_Mail"}}</span>
+                    <span class="pull-right">{{> afQuickField name='mail.enabled'}}</span>
                   </div>
-                  <div class="panel-body">
-                    {{> afQuickField name='mail.username'}}
-                    {{> afQuickField name='mail.password'}}
-                  </div>
+                  {{#if afFieldValueIs name='mail.enabled' value=true}}
+                    <div class="panel-body">
+                      {{> afQuickField name='mail.username'}}
+                      {{> afQuickField name='mail.password'}}
+                      {{> afQuickField name='mail.toEmail'}}
+                    </div>
+                  {{/if}}
                 </div>
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -122,14 +125,6 @@
                   <div class="panel-body">
                     {{> afQuickField name='githubConfiguration.clientId'}}
                     {{> afQuickField name='githubConfiguration.secret'}}
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Additional</h3>
-                  </div>
-                  <div class="panel-body">
-                    {{> afQuickField name='mail.toEmail'}}
                   </div>
                 </div>
                 <div id="form-buttons">
