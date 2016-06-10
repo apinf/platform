@@ -5,6 +5,7 @@ Template.apiCatalogue.created = function () {
 
   // Subscribe to latestApiBackends publication & pass limit parameter
   instance.subscribe("latestApiBackends");
+  instance.subscribe("allBookmarks");
 
   // Attach cursor function to a template instance
   instance.apiBackendsCursor = function () {
@@ -31,5 +32,11 @@ Template.apiCatalogue.helpers({
     });
 
     return apiBackendsList;
+  },
+  bookmarksCount (apiBackendId) {
+
+    const bookmarkedApis = ApiBookmarks.find({ apiIds: apiBackendId.hash.apiBackendId}).fetch();
+
+    return bookmarkedApis.length;
   }
 });
