@@ -38,9 +38,15 @@ ApiBackends.allow({
 
 ApiBackends.deny({
   insert () {
-    return false;
+    // Don't allow user to set average rating or bookmark count fields
+    if (_.contains(fields, "averageRating") || _.contains(fields, "bookmarkCount")) {
+      return true;
+    }
   },
   update () {
-    return false;
+    // Don't allow user to set average rating or bookmark count fields
+    if (_.contains(fields, "averageRating") || _.contains(fields, "bookmarkCount")) {
+      return true;
+    }
   }
 });
