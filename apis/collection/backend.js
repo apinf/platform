@@ -653,6 +653,14 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
       type: "hidden",
       label: false
     }
+  },
+  averageRating: {
+    type: Number,
+    decimal: true,
+    autoform: {
+      type: "hidden",
+      label: false
+    }
   }
 });
 
