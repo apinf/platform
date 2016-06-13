@@ -36,7 +36,10 @@ ApiBackends.helpers({
     // Get API Backend ID
     const apiBackendId = this._id;
 
-    return ApiBookmarks.find({apiBackendId}).count();
+    // Get count of API Bookmarks where API Backend ID is in API Backend IDs array
+    const apiBookmarkCount = ApiBookmarks.find({apiIds: apiBackendId}).count();
+
+    return apiBookmarkCount;
   },
   setBookmarkCount () {
     // get average rating value
