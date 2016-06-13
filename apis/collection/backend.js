@@ -684,6 +684,32 @@ SimpleSchema.messages({
 });
 
 ApiBackends.helpers({
+  'getAverageRating' () {
+    // Fetch all ratings
+    var apiBackendRatings = ApiBackendRatings.find({
+      apiBackendId: this._id
+    }).fetch();
+
+    // If ratings exist
+    if (apiBackendRatings) {
+      // Create array containing only rating values
+      var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
+        // get only the rating value; omit User ID and API Backend ID fields
+        return rating.rating;
+      });
+
+      // Get the average (mean) value for API Backend ratings
+      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+
+      return apiBackendRatingsAverage;
+    }
+  },
+  'getBookmarksCount' () {
+    // Get API Backend ID
+    const apiBackendId = this._id;
+
+    return ApiBookmarks.find({apiBackendId}).count();
+  },
   'getRating': function () {
     // Get API Backend ID
     apiBackendId = this._id;
@@ -703,24 +729,7 @@ ApiBackends.helpers({
 
     // Otherwise, get average rating
 
-    // Fetch all ratings
-    var apiBackendRatings = ApiBackendRatings.find({
-      apiBackendId: apiBackendId
-    }).fetch();
-
-    // If ratings exist
-    if (apiBackendRatings) {
-      // Create array containing only rating values
-      var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
-        // get only the rating value; omit User ID and API Backend ID fields
-        return rating.rating;
-      });
-
-      // Get the average (mean) value for API Backend ratings
-      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
-
-      return apiBackendRatingsAverage;
-    }
+    return this.getAverageRating();
   },
   currentUserCanEdit: function() {
     // Get current userId
