@@ -49,6 +49,8 @@ ApiBackends.helpers({
     if (bookmarkCount) {
       // Update the API Backend with average rating value
       ApiBackends.update(this._id, {$set: {bookmarkCount}});
+    } else {
+      ApiBackends.update(this._id, {$unset: {bookmarkCount: ""}})
     }
   },
   getRating () {
