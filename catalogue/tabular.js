@@ -20,7 +20,8 @@ TabularTables.ApiTable = new Tabular.Table({
       data: "averageRating",
       tmpl: Meteor.isClient && Template.apiBackendRating,
       title: "Rating"
-    }
+    },
+    {data: "bookmarkCount", title: "Popularity"},
   ],
   responsive: true,
   autoWidth: false
