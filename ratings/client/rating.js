@@ -94,6 +94,9 @@ Template.apiBackendRating.events({
       // Otherwise, create a new rating
       ApiBackendRatings.insert(apiBackendRating);
     }
+
+    // Update the API Backend average rating
+    Meteor.call("setApiBackendAverageRating", apiBackendId);
   }
 });
 
