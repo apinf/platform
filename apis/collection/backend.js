@@ -661,6 +661,13 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
       type: "hidden",
       label: false
     }
+  },
+  bookmarkCount: {
+    type: Number,
+    autoform: {
+      type: "hidden",
+      label: false
+    }
   }
 });
 
