@@ -31,7 +31,7 @@ Meteor.methods({
       }
 
       // Updating current user apiBookmarks
-      ApiBookmarks.update({userId: currentUserId},{$set: {apiIds: apiIds} });
+      ApiBookmarks.update({userId: currentUserId},{$set: { apiIds } });
 
     } else {
       // Insert bookmark to database
