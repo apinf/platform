@@ -32,11 +32,21 @@ ApiBackends.helpers({
       ApiBackends.update(this._id, {$set: {averageRating}});
     }
   },
-  getBookmarksCount () {
+  getBookmarkCount () {
     // Get API Backend ID
     const apiBackendId = this._id;
 
     return ApiBookmarks.find({apiBackendId}).count();
+  },
+  setBookmarkCount () {
+    // get average rating value
+    const bookmarkCount = this.getBookmarkCount();
+
+    // Check if average rating calculation succeeds
+    if (bookmarkCount) {
+      // Update the API Backend with average rating value
+      ApiBackends.update(this._id, {$set: {bookmarkCount}});
+    }
   },
   getRating () {
     // Get API Backend ID
