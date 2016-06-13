@@ -735,9 +735,9 @@ ApiBackends.helpers({
     if (apiBackendRatings) {
       // Create array containing only rating values
       var apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
-      // get only the rating value; omit User ID and API Backend ID fields
-      return rating.rating;
-    });
+        // get only the rating value; omit User ID and API Backend ID fields
+        return rating.rating;
+      });
 
     // Get the average (mean) value for API Backend ratings
     var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
