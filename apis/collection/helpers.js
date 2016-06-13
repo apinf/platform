@@ -26,8 +26,11 @@ ApiBackends.helpers({
     // get average rating value
     const averageRating = this.getAverageRating();
 
-    // Update the API Backend with average rating value
-    ApiBackends.update(this._id, {$set: {averageRating}});
+    // Check if average rating calculation succeeds
+    if (averageRating) {
+      // Update the API Backend with average rating value
+      ApiBackends.update(this._id, {$set: {averageRating}});
+    }
   },
   getBookmarksCount () {
     // Get API Backend ID
