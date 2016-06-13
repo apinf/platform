@@ -739,10 +739,11 @@ ApiBackends.helpers({
         return rating.rating;
       });
 
-    // Get the average (mean) value for API Backend ratings
-    var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+      // Get the average (mean) value for API Backend ratings
+      var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
 
-    return apiBackendRatingsAverage;
+      return apiBackendRatingsAverage;
+    }
   },
   currentUserCanEdit: function() {
     // Get current userId
