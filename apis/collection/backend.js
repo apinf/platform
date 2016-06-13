@@ -655,6 +655,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   averageRating: {
     type: Number,
     decimal: true,
+    optional: true,
     autoform: {
       type: "hidden",
       label: false
@@ -662,6 +663,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   },
   bookmarkCount: {
     type: Number,
+    optional: true,
     autoform: {
       type: "hidden",
       label: false
