@@ -5,11 +5,11 @@ Template.catalogue.onCreated(function () {
 
   instance.subscribe("catalogue");
   instance.subscribe("catalogueRatings");
-  instance.subscribe("catalogueBookmarks");  
+  instance.subscribe("catalogueBookmarks");
 });
 
 Template.catalogue.helpers({
-  apiBackends () {
+  apiBackendsCount () {
     return ApiBackends.find().count();
   }
 });
