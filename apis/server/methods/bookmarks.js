@@ -8,5 +8,13 @@ Meteor.methods({
       // Set average rating value for current API Backend
       apiBackend.setBookmarkCount();
     });
+  },
+  setApiBackendBookmarkCount (apiBackendId) {
+    console.log("Setting api bookmark count")
+    // Get API Backend
+    const apiBackend = ApiBackends.findOne(apiBackendId);
+    
+    // Update the API Backend bookmark count
+    apiBackend.setBookmarkCount();
   }
 });
