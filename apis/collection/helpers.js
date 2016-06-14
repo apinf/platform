@@ -2,7 +2,6 @@ import ss from 'simple-statistics';
 
 ApiBackends.helpers({
   getAverageRating () {
-    console.log("getting average rating");
     // Fetch all ratings
     var apiBackendRatings = ApiBackendRatings.find({
       apiBackendId: this._id
