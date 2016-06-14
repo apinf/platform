@@ -19,3 +19,12 @@ Migrations.add({
     });
   }
 });
+
+Migrations.add({
+  version: 2,
+  name: 'Set API backend bookmarkCount & averageRating fields',
+  up: function() {
+    Meteor.call('setAllApiBackendBookmarkCounts');
+    Meteor.call('setAllApiBackendAverageRatings');
+  }
+});
