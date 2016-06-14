@@ -15,13 +15,12 @@
                     {{ api.name }}
                   </a>
                   <br>
-                  {{ api.updated_at }}
+                  <i>Updated {{ api.relativeUpdatedAt }}</i>
                 </p>
               </td>
               <td class="col-sm-3 text-center" style="vertical-align:middle">
                 <i class="fa fa-lg fa-bookmark"></i>&nbsp;{{ api.getNumberOfBookmarks }}&nbsp;
                 <i class="fa fa-lg fa-star-half-o">&nbsp;{{ api.getAverageRating }}</i>&nbsp;
-                <i class="fa fa-lg fa-long-arrow-up"></i>&nbsp;&nbsp;
               </td>
               <td class="col-sm-3" style="vertical-align:middle">
                 {{> favourite api }}&nbsp;&nbsp;

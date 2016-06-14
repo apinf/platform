@@ -707,7 +707,7 @@ SimpleSchema.messages({
 });
 
 ApiBackends.helpers({
-  'getRating': function () {
+  getRating: function () {
     // Get API Backend ID
     apiBackendId = this._id;
 
@@ -768,6 +768,10 @@ ApiBackends.helpers({
       // Return with precision of 2 significant digits
       return apiBackendRatingsAverage.toPrecision(2);
     }
+  },
+  relativeUpdatedAt: function () {
+    // Return relative updated_at
+    return moment(this.updated_at).fromNow();
   },
   getNumberOfBookmarks: function () {
     // Get API Backend ID
