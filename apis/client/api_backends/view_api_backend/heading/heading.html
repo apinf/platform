@@ -1,10 +1,16 @@
 <template name="viewApiBackendPageHeading">
   <div class="page-heading">
-    {{> apiBackendsUsageInstructionsButton }}
+    <div class="btn-group pull-right" role="group" aria-label="...">
+      {{ # if currentUser }}
+        {{ # if isInRole 'admin' }}
+          {{> flagApiButton apiBackend=apiBackend }}
+        {{ / if }}
+      {{ / if }}
+      {{> apiBackendsUsageInstructionsButton }}
+    </div>
     <h1 class="page-title">
-      {{> viewApiBackendStatus apiBackend=apiBackend width="0.4"  }}
       {{ apiBackend.name }}
+      {{> viewApiBackendStatus apiBackend=apiBackend width="0.4"  }}
     </h1>
-    {{> apiBackendUsageInstructions apiBackend=apiBackend}}
   </div>
 </template>

@@ -12,8 +12,8 @@
                 </div>
                 <hr><br>
                 <div class="panel-body">
-                {{#if branding}}
-                  {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
+                  {{#if branding}}
+                  {{#autoForm collection="Branding" id="wizardBranding" doc=branding type="update"}}
                   {{> afQuickField name='projectLogo'}}
                   {{#if projectLogo}}
                   <p>
@@ -43,8 +43,8 @@
                     </div>
                   </div>
                   {{/autoForm}}
-                {{else}}
-                  {{#autoForm collection="Branding" id="branding" type="insert"}}
+                  {{else}}
+                  {{#autoForm collection="Branding" id="wizardBranding" type="insert"}}
                   {{> afQuickField name='projectLogo'}}
                   {{> afQuickField name='coverPhoto'}}
                   {{> afQuickField name='siteTitle'}}
@@ -64,7 +64,7 @@
                     </div>
                   </div>
                   {{/autoForm}}
-                {{/if}}
+                  {{/if}}
                 </div>
               </div>
             </div>
@@ -72,79 +72,78 @@
         </div>
         <div class="item">
           <div class="row" id="champion-messages">
-          {{#autoForm collection="Settings" doc=editDoc id="settings" type=formType}}
+            {{#autoForm collection="Settings" doc=editDoc id="wizardSettings" type=formType}}
             <div class="col-xs-12">
               <div class="well">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">{{_ "settingsWizard_APIUmbrella_settings"}}</h3>
-                </div>
-                <div class="panel-body">
-                {{> afQuickField name='apiUmbrella.host'}}
-                {{> afQuickField name='apiUmbrella.apiKey'}}
-                {{> afQuickField name='apiUmbrella.authToken'}}
-                {{> afQuickField name='apiUmbrella.baseUrl'}}
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">{{_ "settingsWizard_APIDocumentation_Editor"}}</h3>
-                </div>
-                <div class="panel-body">
-                {{> afQuickField name='apiDocumentationEditor.enabled'}}
-                {{#if afFieldValueIs name="apiDocumentationEditor.enabled" value=true}}
-                  {{> afQuickField name='apiDocumentationEditor.host'}}
-                {{/if}}
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Elasticsearch</h3>
-                </div>
-                <div class="panel-body">
-                {{> afQuickField name='elasticsearch.host'}}
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">{{_ "settingsWizard_Mail"}}</h3>
-                  {{> afQuickField name='mail.enabled'}}
-                </div>
-                <div class="panel-body">
-                {{> afQuickField name='mail.username'}}
-                {{> afQuickField name='mail.password'}}
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Github</h3>
-                </div>
-                <div class="panel-body">
-                {{> afQuickField name='githubConfiguration.clientId'}}
-                {{> afQuickField name='githubConfiguration.secret'}}
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Additional</h3>
-                </div>
-                <div class="panel-body">
-                {{> afQuickField name='contactForm.toEmail'}}
-                </div>
-              </div>
-              <div id="form-buttons">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-6 form-group">
-                    <button type="button" class="btn btn-default btn-block" id="prev-second-slide">{{_ "settingsWizard_previousSecondSlide"}}</button>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{_ "settingsWizard_APIUmbrella_settings"}}</h3>
                   </div>
-                  <div class="col-xs-12 col-sm-6 form-group">
-                    <button type="submit" class="btn btn-success btn-block" id="save-settings">{{_ "settingsWizard_Finish"}}</button>
+                  <div class="panel-body">
+                    {{> afQuickField name='apiUmbrella.host'}}
+                    {{> afQuickField name='apiUmbrella.apiKey'}}
+                    {{> afQuickField name='apiUmbrella.authToken'}}
+                    {{> afQuickField name='apiUmbrella.baseUrl'}}
                   </div>
                 </div>
-              </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{_ "settingsWizard_APIDocumentation_Editor"}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    {{> afQuickField name='apiDocumentationEditor.enabled'}}
+                    {{#if afFieldValueIs name="apiDocumentationEditor.enabled" value=true}}
+                    {{> afQuickField name='apiDocumentationEditor.host'}}
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Elasticsearch</h3>
+                  </div>
+                  <div class="panel-body">
+                    {{> afQuickField name='elasticsearch.host'}}
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <span class="panel-title">{{_ "settingsWizard_Mail"}}</span>
+                    <span class="pull-right">{{> afQuickField name='mail.enabled'}}</span>
+                  </div>
+                  {{#if afFieldValueIs name='mail.enabled' value=true}}
+                    <div class="panel-body">
+                      {{> afQuickField name='mail.username'}}
+                      {{> afQuickField name='mail.password'}}
+                      {{> afQuickField name='mail.toEmail'}}
+                    </div>
+                  {{/if}}
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Github</h3>
+                  </div>
+                  <div class="panel-body">
+                    {{> afQuickField name='githubConfiguration.clientId'}}
+                    {{> afQuickField name='githubConfiguration.secret'}}
+                  </div>
+                </div>
+                <div id="form-buttons">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6 form-group">
+                      <button type="button" class="btn btn-default btn-block" id="prev-second-slide">
+                        {{_ "settingsWizard_previousSecondSlide"}}
+                      </button>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                      <button type="submit" class="btn btn-success btn-block" id="save-settings">
+                        {{_ "settingsWizard_Finish"}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          {{/autoForm}}
+            {{/autoForm}}
           </div>
         </div>
       </div>

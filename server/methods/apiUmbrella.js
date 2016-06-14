@@ -26,31 +26,37 @@ Meteor.methods({
 
     const settings = Settings.findOne();
 
-    if ( typeof apiUmbrellaWeb === 'undefined' ) {
+    // Check if API Umbrella Web settings are valid
+    if (apiUmbrellaSettingsValid(settings)) {
 
-      // Check if something is on Settings collection
-      if (apiUmbrellaSettingsValid(settings)) {
+      // Create config object for API Umbrella Web REST API
+      var config = {
+        baseUrl: settings.apiUmbrella.baseUrl,
+        apiKey: settings.apiUmbrella.apiKey,
+        authToken: settings.apiUmbrella.authToken
+      };
 
-        // Create config object for API Umbrella Web interface from Settings collection
-        var config = {
-          baseUrl: settings.apiUmbrella.baseUrl,
-          apiKey: settings.apiUmbrella.apiKey,
-          authToken: settings.apiUmbrella.authToken
-        };
+      // Check whether API Umbrella Web instance exists
+      if ( typeof apiUmbrellaWeb === 'undefined' ) {
+        try {
 
+          // Create new API Umbrella Web object for REST calls
+          apiUmbrellaWeb = new ApiUmbrellaWeb(config);
+
+        } catch (error) {
+
+          console.log(error);
+        }
+      } else {
+        try {
+          // Update existing API Umbrella Web object with new settings
+          apiUmbrellaWeb.baseUrl = config.baseUrl;
+          apiUmbrellaWeb.apiKey = config.apiKey;
+          apiUmbrellaWeb.authToken = config.authToken;
+        } catch (error) {
+          console.log(error);
+        }
       }
-
-    }
-
-
-    try {
-
-      // Create API Umbrella Web object for REST calls
-      apiUmbrellaWeb = new ApiUmbrellaWeb(config);
-
-    } catch (error) {
-
-      console.log(error);
     }
   },
   "syncApiUmbrellaAdmins": function () {
