@@ -22,13 +22,13 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   apiUmbrella: {
     type: Object,
-    optional: true
+    optional: false
   },
   "apiUmbrella.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'https://example.com/'
     }
@@ -36,7 +36,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   "apiUmbrella.apiKey": {
     type: String,
     label: "API Key",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx'
     }
@@ -44,7 +44,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   "apiUmbrella.authToken": {
     type: String,
     label: "Auth Token",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx'
     }
@@ -53,20 +53,20 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Base URL",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'https://example.com/api-umbrella/'
     }
   },
   elasticsearch: {
     type: Object,
-    optional: true
+    optional: false
   },
   "elasticsearch.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'http://example.com:14002/'
     }

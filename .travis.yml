@@ -7,6 +7,6 @@ before_install:
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 - curl https://install.meteor.com/ | sh
-- npm install -g mup
+- npm install -g mupd
 script:
-- mup deploy --settings=settings.json
+- mupd deploy
