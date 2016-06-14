@@ -1,0 +1,11 @@
+<template name="catalogueTable">
+  <div class="dataTables_wrapper form-inline dt-bootstrap">
+    {{> tabular
+      table=TabularTables.ApiTable
+      class="table table-striped table-bordered table-hover"
+    }}
+  </div>
+  {{#if userHasBookmarks}}
+    {{> bookmarks }}
+  {{/if}}
+</template>
