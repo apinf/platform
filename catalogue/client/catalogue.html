@@ -1,7 +1,8 @@
 <template name="catalogue">
   <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">{{_ "catalogue_Title"}} {{ apiBackendsCount }}</h3>
+      <h3 class="box-title">{{_ "catalogue_Title"}}</h3>
+      <i class="pull-right">Total count: {{ apiBackendsCount }}</i>
     </div>
     <div class="box-body">
       <div class="table-responsive">
@@ -30,6 +31,15 @@
             {{/each}}
           </tbody>
         </table>
+        <ul class="pagination pull-right">
+         <li><a href="#">&laquo;</a></li>
+         <li><a href="#">1</a></li>
+         <li><a href="#">2</a></li>
+         <li><a href="#">3</a></li>
+         <li><a href="#">4</a></li>
+         <li><a href="#">5</a></li>
+         <li><a href="#">&raquo;</a></li>
+        </ul>
       </div>
     </div>
   </div>
