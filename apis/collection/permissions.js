@@ -37,13 +37,13 @@ ApiBackends.allow({
 });
 
 ApiBackends.deny({
-  insert () {
+  insert (fields) {
     // Don't allow user to set average rating or bookmark count fields
     if (_.contains(fields, "averageRating") || _.contains(fields, "bookmarkCount")) {
       return true;
     }
   },
-  update () {
+  update (fields) {
     // Don't allow user to set average rating or bookmark count fields
     if (_.contains(fields, "averageRating") || _.contains(fields, "bookmarkCount")) {
       return true;
