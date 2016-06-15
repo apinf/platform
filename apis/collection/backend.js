@@ -35,7 +35,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  logoFileId: {
+  apiLogosFileId: {
     type: String,
     optional: true
   },
