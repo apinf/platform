@@ -12,6 +12,7 @@
     "datatables": "^1.10.12",
     "dc": "^2.0.0-beta.30",
     "elasticsearch": "^11.0.1",
+    "jquery": "<3.0.0",
     "jquery.rateit": "^1.0.23",
     "js-yaml": "^3.6.1",
     "simple-statistics": "^2.0.0-beta1",

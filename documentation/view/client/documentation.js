@@ -33,8 +33,11 @@ Template.documentation.helpers({
 
     // Check if documentation file is available
     if (currentDocumentationFile) {
+      // Hash currentDocumentationFile
+      const currentDocumentationFileHash = currentDocumentationFile.md5;
+
       // Get documentation file URL
-      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + currentDocumentationFile.md5;
+      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + currentDocumentationFileHash;
     }
   },
   documentationLink: function() {
