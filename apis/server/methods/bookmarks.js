@@ -10,10 +10,9 @@ Meteor.methods({
     });
   },
   setApiBackendBookmarkCount (apiBackendId) {
-    console.log("Setting api bookmark count")
     // Get API Backend
     const apiBackend = ApiBackends.findOne(apiBackendId);
-    
+
     // Update the API Backend bookmark count
     apiBackend.setBookmarkCount();
   }
