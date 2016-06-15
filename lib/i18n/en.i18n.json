@@ -145,6 +145,7 @@
   "favourite_Remove": "Remove bookmark",
   "favourite_Add": "Add bookmark",
   "catalogue_Title": "API Catalog",
+  "catalogue_notRated": "Not rated",
   "api_backend_rating_anonymous": "Please log in to vote.",
   "feedback_submitted_by": "submitted by",
   "feedback_main_title": "Feedback and report messages",

@@ -18,7 +18,12 @@ ApiBackends.helpers({
       // Get the average (mean) value for API Backend ratings
       var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
       // Return average with precision of 2 significant numbers
-      return Number(apiBackendRatingsAverage.toPrecision(2));
+      const result = Number(apiBackendRatingsAverage.toPrecision(2));
+      if( !isNaN(result) ) {
+        return Number(apiBackendRatingsAverage.toPrecision(2));
+      } else {
+        return false;
+      }
     }
   },
   setAverageRating () {

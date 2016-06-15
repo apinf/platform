@@ -133,6 +133,7 @@
   "favourite_Remove": "Poista kirjanmerkki",
   "favourite_Add": "Lisää kirjanmerkki",
   "catalogue_Title": "Rajapintahakemisto",
+  "catalogue_notRated": "Ei arvosteluja",
   "api_backend_rating_anonymous": "Kirjaudu sisään äänestääksesi.",
   "feedback_submitted_by": "lähettänyt",
   "feedback_main_title": "Palautteet ja raportit",
