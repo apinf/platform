@@ -24,7 +24,9 @@
                 <i class="fa fa-lg fa-star-half-o">&nbsp;{{ api.getAverageRating }}</i>&nbsp;
               </td>
               <td class="col-sm-3" style="vertical-align:middle">
-                {{> favourite api }}&nbsp;&nbsp;
+                <span class="api-card-bookmark" title="Bookmark API">
+                    {{> favourite apiBackend=api }}
+                </span>&nbsp;&nbsp;
                 {{> apiBackendRating api }}
               </td>
             </tr>
