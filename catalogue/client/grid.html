@@ -30,11 +30,10 @@
         <span class="api-card-created pull-right">
           {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}
         </span>
-        <div class="pull-lefts">
+        <div class="api-card-star-average pull-left">
           {{#if api.getAverageRating }}
-          <i class="fa fa-lg fa-star-half-o">&nbsp;{{ api.getAverageRating }}</i>&nbsp;
-          {{ else }}
-          <i class="fa fa-lg fa-star-half-o">&nbsp;{{_ "catalogue_notRated" }}</i>&nbsp;
+          {{ api.getAverageRating }}
+          <i class="fa fa-star"></i>
           {{/if}}
         </div>
       </div>
