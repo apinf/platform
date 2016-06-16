@@ -8,10 +8,10 @@ Template.catalogue.onCreated(function () {
   // instance.subscribe("catalogueBookmarks");
 
   // Set up toolbar reactive variables
-  instance.sortBy = new ReactiveVar();
-  instance.sortDirection = new ReactiveVar();
-  instance.filterBy = new ReactiveVar();
-  instance.viewMode = new ReactiveVar();
+  instance.sortBy = new ReactiveVar("name");
+  instance.sortDirection = new ReactiveVar("ascending");
+  instance.filterBy = new ReactiveVar("show-all");
+  instance.viewMode = new ReactiveVar("card");
 
   instance.autorun(function () {
     const sortBy = instance.sortBy.get();
@@ -26,9 +26,6 @@ Template.catalogue.onCreated(function () {
 Template.catalogue.onRendered(function () {
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
-
-  // Trigger sort select change event to populate reactive variable with default
-  $("#sort-select").change();
 });
 
 Template.catalogue.helpers({
