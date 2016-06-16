@@ -31,7 +31,7 @@
                 <i class="glyphicon glyphicon-sort" aria-hidden="true"></i>&nbsp;
                 Sort
               </p>
-              <form class="form navbar-form navbar-nav">
+              <form class="form navbar-form navbar-nav" id="sort-options-select">
                 <select name="sort-menu" class="form-control">
                   <option value="name">
                     Name
@@ -66,8 +66,15 @@
                 <i class="fa fa-filter" aria-hidden="true"></i>&nbsp;
                 Filter
               </p>
-              <div class="btn-group navbar-btn" role="group" aria-label="...">
-                <button type="button" class="btn btn-default">My APIs</button>
+              <div class="btn-group navbar-btn" role="group" aria-label="Filter options"  data-toggle="buttons">
+                <label class="btn btn-default active">
+                  <input type="radio" name="filter-options" id="show-all" value="all">
+                    Show All
+                </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="filter-options" id="my-apis" value="my-apis">
+                    My APIs
+                </label>
               </div>
             </div>
             <div class="nav navbar-nav navbar-right">
