@@ -36,6 +36,9 @@ Template.catalogue.helpers({
   apiBackendsCount () {
     return ApiBackends.find().count();
   },
+  apiBackends () {
+    return ApiBackends.find().fetch();
+  },
   gridViewMode () {
     // Get reference to template instance
     const instance = Template.instance();
