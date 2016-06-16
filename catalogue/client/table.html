@@ -1,4 +1,5 @@
 <template name="catalogue">
+  {{#if Template.subscriptionsReady }}
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">{{_ "catalogue_Title"}}</h3>
@@ -41,4 +42,7 @@
       </div>
     </div>
   </div>
+  {{else}}
+  {{> spinner }}
+  {{/if}}
 </template>
