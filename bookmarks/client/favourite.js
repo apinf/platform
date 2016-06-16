@@ -10,10 +10,10 @@ Template.favourite.events({
   'click .bookmark': function () {
 
     //Store api id being clicked
-    var backendId = this._id;
+    var backendId = this.apiBackend._id;
 
     //Store the user ID of the current user clicking the button
-    var currentUserId = Meteor.user()._id;
+    var currentUserId = Meteor.userId();
 
     // Toggle (add/remove) the bookmark with method toogleBookmarkApi
     Meteor.call("toggleBookmarkApi", backendId, currentUserId);
@@ -27,8 +27,9 @@ Template.favourite.helpers({
 
     // Make sure bookmark subscription is ready
     if (instance.bookmarksSubscription.ready()) {
-      // Get current user bookmark (should be only one API Bookmarks result available)
-      var userBookmarks = ApiBookmarks.findOne();
+      // Get current user bookmark
+
+      var userBookmarks = ApiBookmarks.findOne({ userId: Meteor.userId() });
 
       // Make sure user has bookmarks
       if (userBookmarks) {
@@ -36,7 +37,7 @@ Template.favourite.helpers({
         var apiIds = userBookmarks.apiIds;
 
         //Store api id being clicked
-        var backendId = this._id;
+        var backendId = this.apiBackend._id;
 
         // Get index of current API in user bookmarks, if it exists
         var bookmarkIndex = apiIds.indexOf(backendId);
