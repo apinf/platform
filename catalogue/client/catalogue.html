@@ -75,6 +75,10 @@
                   <input type="radio" name="filter-options" id="my-apis" value="my-apis">
                     My APIs
                 </label>
+                <label class="btn btn-default">
+                  <input type="radio" name="filter-options" id="my-bookmarks" value="my-apis">
+                    My Bookmarks
+                </label>
               </div>
             </div>
             <div class="nav navbar-nav navbar-right">
@@ -97,7 +101,7 @@
         </div><!-- /.container-fluid -->
       </nav>
       <p>Catalogue placeholder ({{ apiBackendsCount }})</p>
-      <!--{{> catalogueTable }}-->
+      {{> catalogueTable }}
     </div>
   </div>
 </template>
