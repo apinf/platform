@@ -49,9 +49,16 @@ Template.catalogue.events({
   },
   'change [name=sort-direction]' (event, instance) {
     // Get selected sort value
-    const sortBy = event.target.value;
+    const sortDirection = event.target.value;
 
     // Update the instance sort value reactive variable
-    instance.sortBy.set(sortBy);
+    instance.sortDirection.set(sortDirection);
+  },
+  'change [name=filter-options]' (event, instance) {
+    // Get selected sort value
+    const filterBy = event.target.value;
+
+    // Update the instance sort value reactive variable
+    instance.filterBy.set(filterBy);
   }
 });
