@@ -60,5 +60,12 @@ Template.catalogue.events({
 
     // Update the instance sort value reactive variable
     instance.filterBy.set(filterBy);
+  },
+  'change [name=view-mode]' (event, instance) {
+    // Get selected sort value
+    const viewMode = event.target.value;
+
+    // Update the instance sort value reactive variable
+    instance.viewMode.set(viewMode);
   }
 });
