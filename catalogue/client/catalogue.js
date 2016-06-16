@@ -25,8 +25,10 @@ Template.catalogue.onCreated(function () {
 
 Template.catalogue.onRendered(function () {
   // Activate tooltips on all relevant items
-  // TODO: figure out why this causes labels to not render
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
+
+  // Trigger sort select change event to populate reactive variable with default
+  $("#sort-select").change();
 });
 
 Template.catalogue.helpers({
