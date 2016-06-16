@@ -8,6 +8,10 @@ Template.catalogue.onCreated(function () {
   instance.subscribe("catalogueBookmarks");
 });
 
+Template.catalogue.onRendered(function () {
+  $(".sort-button").tooltip({ placement: 'bottom'});
+});
+
 Template.catalogue.helpers({
   apiBackendsCount () {
     return ApiBackends.find().count();
