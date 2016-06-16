@@ -49,12 +49,9 @@
 }
 
 .api-card-bookmark {
-  margin-top: 0.5em;
-  text-align: center;
-
   .api-card-bookmark-number {
-    display: block;
-    color:#2FA4E7;
+    color: #555;
+    display: inline;
   }
 }
 
@@ -62,24 +59,26 @@
   margin-top: 1.3em;
   font-size: 0.9em;
   color: #444;
-  height: 5.5em;
+  height: 3em;
   overflow: hidden;
 }
 
 .api-card-created {
   color: #777;
   font-size: 11px;
-  margin-right: 0.3em;
 }
 
 .api-card-info {
   margin-left: 4.8em;
   margin-top: 0.3em;
-  margin-right: 0.6em;
   margin-right: 0.3em;
 }
 
 .bookmark {
+  cursor: pointer;
+}
+
+.bookmarked {
   cursor: pointer;
   color: @brand-primary;
 }
@@ -97,7 +96,10 @@
 }
 
 .api-card-star-average {
-  margin-left: 1em;
-  line-height: 1em;
   color: #555;
+}
+
+.api-card-stats {
+  margin-bottom: 0;
+  margin-left: 0.5em;
 }
