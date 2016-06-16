@@ -7,9 +7,6 @@ Meteor.publish('catalogue', function (options) {
 
   // Set up query object, if changes are needed
   if (options.filterBy === "my-apis") {
-    // Get current User ID
-    const userId = Meteor.user();
-
     // Set up query where user ID is in manager IDs array
     query = { managerIds: userId }
   } else if (options.filterBy === "my-bookmarks") {
