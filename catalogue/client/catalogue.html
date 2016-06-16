@@ -4,7 +4,7 @@
       <h3 class="box-title">{{_ "catalogue_Title"}}</h3>
     </div>
     <div class="box-body">
-      <nav class="navbar navbar-default">
+      <nav id="catalogue-toolbar" class="navbar navbar-default">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -51,11 +51,11 @@
                 </select>
               </form>
               <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
-                <label class="btn btn-default sort-button active" title="Ascending">
+                <label class="btn btn-default toolbar-tooltip active"  title="Ascending">
                   <input type="radio" name="sort-direction" id="sort-ascending">
                     <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
                 </label>
-                <label class="btn btn-default sort-button" title="Descending">
+                <label class="btn btn-default toolbar-tooltip" title="Descending">
                   <input type="radio" name="sort-direction" id="sort-descending">
                     <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
                 </label>
@@ -83,15 +83,13 @@
                 View
               </p>
               <div class="btn-group navbar-btn" role="group" aria-label="View mode" data-toggle="buttons">
-                <label class="btn btn-default active">
+                <label class="btn btn-default toolbar-tooltip active" title="Grid">
                   <input type="radio" name="view-mode" id="grid-mode" value="grid">
-                  <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;
-                  Grid
+                    <i class="fa fa-th-large" aria-hidden="true"></i>
                 </label>
-                <label class="btn btn-default">
+                <label class="btn btn-default toolbar-tooltip" title="Table">
                   <input type="radio" name="view-mode" id="table-mode" value="table">
-                  <i class="fa fa-table" aria-hidden="true"></i>&nbsp;
-                  Table
+                    <i class="fa fa-table" aria-hidden="true"></i>
                 </label>
               </div>
             </div>
@@ -99,7 +97,7 @@
         </div><!-- /.container-fluid -->
       </nav>
       <p>Catalogue placeholder ({{ apiBackendsCount }})</p>
-      {{> catalogueTable }}
+      <!--{{> catalogueTable }}-->
     </div>
   </div>
 </template>

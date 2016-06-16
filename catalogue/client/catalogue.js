@@ -3,9 +3,9 @@ import { Template } from 'meteor/templating';
 Template.catalogue.onCreated(function () {
   const instance = this;
 
-  instance.subscribe("catalogue");
-  instance.subscribe("catalogueRatings");
-  instance.subscribe("catalogueBookmarks");
+  // instance.subscribe("catalogue");
+  // instance.subscribe("catalogueRatings");
+  // instance.subscribe("catalogueBookmarks");
 
   // Set up toolbar reactive variables
   instance.sortBy = new ReactiveVar();
@@ -15,7 +15,9 @@ Template.catalogue.onCreated(function () {
 });
 
 Template.catalogue.onRendered(function () {
-  $(".sort-button").tooltip({ placement: 'bottom'});
+  // Activate tooltips on all relevant items
+  // TODO: figure out why this causes labels to not render
+  $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
 });
 
 Template.catalogue.helpers({
