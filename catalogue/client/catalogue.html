@@ -31,11 +31,19 @@
                 <i class="glyphicon glyphicon-sort" aria-hidden="true"></i>&nbsp;
                 Sort
               </p>
-              <div class="btn-group navbar-btn" role="group" aria-label="...">
-                <button type="button" class="btn btn-default">Popular</button>
-                <button type="button" class="btn btn-default">Rating</button>
-                <button type="button" class="btn btn-default">Recent</button>
-              </div>
+              <form class="form navbar-form navbar-nav">
+                <select name="sort-menu" class="form-control">
+                  <option value="popularity">
+                    Popularity
+                  </option>
+                  <option value="rating">
+                    Rating
+                  </option>
+                  <option value="recency">
+                    Recency
+                  </option>
+                </select>
+              </form>
             </div>
             <div class="nav navbar-nav">
               <p class="navbar-text">
