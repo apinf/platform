@@ -50,13 +50,15 @@
                   </option>
                 </select>
               </form>
-              <div class="btn-group navbar-btn" role="group" aria-label="...">
-                <button type="button" class="btn btn-default sort-button" title="Ascending">
-                  <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="btn btn-default sort-button" title="Descending">
-                  <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
-                </button>
+              <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
+                <label class="btn btn-default sort-button active" title="Ascending">
+                  <input type="radio" name="sort-direction" id="sort-ascending">
+                    <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                </label>
+                <label class="btn btn-default sort-button" title="Descending">
+                  <input type="radio" name="sort-direction" id="sort-descending">
+                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                </label>
               </div>
             </div>
             <div class="nav navbar-nav">
