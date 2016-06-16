@@ -101,7 +101,10 @@
         </div><!-- /.container-fluid -->
       </nav>
       <p>Catalogue placeholder ({{ apiBackendsCount }})</p>
-      {{> catalogueTable }}
+      <!-- if viewMode is table, show table -->
+      {{# if tableViewMode }}
+        {{> catalogueTable }}
+      {{/ if }}
     </div>
   </div>
 </template>
