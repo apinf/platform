@@ -36,15 +36,15 @@ Template.catalogue.onRendered(function () {
 Template.catalogue.helpers({
   apiBackendsCount () {
     return ApiBackends.find().count();
-  },
-  tableViewMode () {
-    // Get reference to template instance
-    const instance = this;
-
-    // Get view mode from template
-    const viewMode = instance.viewMode.get();
-
-    return (viewMode === "table");
+  // },
+  // tableViewMode () {
+  //   // Get reference to template instance
+  //   const instance = this;
+  //
+  //   // Get view mode from template
+  //   const viewMode = instance.viewMode.get();
+  //
+  //   return (viewMode === "table");
   }
 });
 
