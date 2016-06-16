@@ -25,3 +25,13 @@ Template.catalogue.helpers({
     return ApiBackends.find().count();
   }
 });
+
+Template.catalogue.events({
+  'change #sort-select' (event, instance) {
+    // Get selected sort value
+    const sortBy = event.target.value;
+
+    // Update the instance sort value reactive variable
+    instance.sortBy.set(sortBy);
+  }
+});
