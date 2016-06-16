@@ -3,10 +3,6 @@ import { Template } from 'meteor/templating';
 Template.catalogue.onCreated(function () {
   const instance = this;
 
-  // instance.subscribe("catalogue");
-  // instance.subscribe("catalogueRatings");
-  // instance.subscribe("catalogueBookmarks");
-
   // Set up toolbar reactive variables
   instance.sortBy = new ReactiveVar("name");
   instance.sortDirection = new ReactiveVar("ascending");
@@ -18,6 +14,15 @@ Template.catalogue.onCreated(function () {
     const sortDirection = instance.sortDirection.get();
     const filterBy = instance.filterBy.get();
     const viewMode = instance.viewMode.get();
+
+    const subscriptionOptions = {
+      sortBy,
+      sortDirection,
+      filterBy
+    };
+
+    // Subscribe to API Backends with catalogue settings
+    //instance.subscribe("catalogue", subscriptionOptions);
 
     console.log(sortBy, sortDirection, filterBy, viewMode);
   });
