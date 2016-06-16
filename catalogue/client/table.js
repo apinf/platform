@@ -1,5 +1,3 @@
-import { Template } from 'meteor/templating';
-
 Template.catalogue.onCreated(function (){
   const instance = this;
 
