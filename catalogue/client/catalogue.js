@@ -6,6 +6,12 @@ Template.catalogue.onCreated(function () {
   instance.subscribe("catalogue");
   instance.subscribe("catalogueRatings");
   instance.subscribe("catalogueBookmarks");
+
+  // Set up toolbar reactive variables
+  instance.sortBy = new ReactiveVar();
+  instance.sortDirection = new ReactiveVar();
+  instance.filterBy = new ReactiveVar();
+  instance.viewMode = new ReactiveVar();
 });
 
 Template.catalogue.onRendered(function () {
