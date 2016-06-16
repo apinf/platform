@@ -1,42 +1,28 @@
-Template.apiCatalogue.created = function () {
+Template.apiCatalogue.onCreated(function (){
+  const instance = this;
 
-  // Reference to Template instance
-  var instance = this;
-
-  // Subscribe to latestApiBackends publication & pass limit parameter
-  instance.subscribe("latestApiBackends");
-  instance.subscribe("allBookmarks");
-
-  // Attach cursor function to a template instance
-  instance.apiBackendsCursor = function () {
-    // Get a cursor for API Backends documents
-    return ApiBackends.find({});
-  }
-
-};
+  //instance.subscribe('allApiBackends');
+  instance.subscribe("catalogue");
+  instance.subscribe("catalogueRatings");
+  instance.subscribe("catalogueBookmarks");
+});
 
 Template.apiCatalogue.helpers({
-  'apiBackends': function () {
-
-    // Reference to Template instance
-    var instance = Template.instance();
-
-    // Retrieve API Backends
-    var apiBackendsList = instance.apiBackendsCursor().fetch();
-
-    // Iterate through all documents
-    _.each(apiBackendsList, function (apiBackend) {
-
-      // Return to user human-readable timestamp
-      apiBackend.relative_created_at = moment(apiBackend.created_at).fromNow();
-    });
-
-    return apiBackendsList;
+  apiBackends () {
+    // Return cursor to all apiBackends
+    return ApiBackends.find();
   },
-  bookmarksCount (apiBackendId) {
+  apiBackendsCount () {
+    return ApiBackends.find().count();
+  }
+});
 
-    const bookmarkedApis = ApiBookmarks.find({ apiIds: apiBackendId.hash.apiBackendId}).fetch();
-
-    return bookmarkedApis.length;
+Template.apiCatalogue.helpers({
+  apiBackends () {
+    // Return cursor to all apiBackends
+    return ApiBackends.find();
+  },
+  apiBackendsCount () {
+    return ApiBackends.find().count();
   }
 });

@@ -1,9 +1,8 @@
 <template name="apiCatalogue">
-  {{#if apiBackends }}
   <div class="container">
     {{> apiCatalogueViewType }}
     <div class="api-catalogue">
-      {{#each apiBackend in apiBackends }}
+      {{#each api in apiBackends }}
       <div class="api-card">
         <div class="api-card-logo">
           <img class="img-circle"
@@ -11,29 +10,35 @@
           <div
                class="api-card-bookmark"
                title="Bookmark API">
-            <span class="api-card-bookmark-number">{{ bookmarksCount apiBackendId=apiBackend._id }}</span>
-            {{> favourite apiBackend=apiBackend }}
+            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
+            {{> favourite apiBackend=api }}
           </div>
         </div>
-        {{> viewApiBackendStatus apiBackend=apiBackend width="0.6"  }}
+        {{> viewApiBackendStatus apiBackend=api width="0.6" }}
         <div class="api-card-info">
-          <a href="/api/{{apiBackend._id}}"
+          <a href="/api/{{api._id}}"
              class="api-card-name">
-            {{ apiBackend.name }}
+            {{ api.name }}
           </a>
           <span class="api-card-author">
-            added by {{ apiBackend.getApiManagersByName }}
+            added by {{ api.getApiManagersByName }}
           </span>
           <p class="api-card-description">
-            {{ apiBackend.description }}
+            {{ api.description }}
           </p>
         </div>
         <span class="api-card-created pull-right">
-          {{_ "latestApiBackends_DateAdded" apiBackend.relative_created_at }}
+          {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}
         </span>
+        <div class="pull-lefts">
+          {{#if api.getAverageRating }}
+          <i class="fa fa-lg fa-star-half-o">&nbsp;{{ api.getAverageRating }}</i>&nbsp;
+          {{ else }}
+          <i class="fa fa-lg fa-star-half-o">&nbsp;{{_ "catalogue_notRated" }}</i>&nbsp;
+          {{/if}}
+        </div>
       </div>
       {{/each}}
     </div>
   </div>
-  {{/if}}
 </template>
