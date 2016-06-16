@@ -102,9 +102,15 @@
       </nav>
       <p>Catalogue placeholder ({{ apiBackendsCount }})</p>
       <!-- if viewMode is table, show table -->
-      <!-- {{# if tableViewMode }}
-        {{> catalogueTable }}
-      {{/ if }} -->
+      {{# if cardViewMode }}
+        <!--{{> catalogueCards apiBAckends=apiBackends }}-->
+        <p>Card view.</p>
+      {{/ if }}
+      <!-- if viewMode is table, show table -->
+      {{# if tableViewMode }}
+        <p>Table view</p>
+        {{> catalogueTable apiBAckends=apiBackends }}
+      {{/ if }}
     </div>
   </div>
 </template>
