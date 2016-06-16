@@ -22,7 +22,7 @@ Template.catalogue.onCreated(function () {
     };
 
     // Subscribe to API Backends with catalogue settings
-    //instance.subscribe("catalogue", subscriptionOptions);
+    instance.subscribe("catalogue", subscriptionOptions);
 
     console.log(sortBy, sortDirection, filterBy, viewMode);
   });
