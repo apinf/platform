@@ -1,18 +1,12 @@
 <template name="apiCatalogue">
   <div class="container">
-    {{> apiCatalogueViewType }}
+    {{#if Template.subscriptionsReady }}
     <div class="api-catalogue">
       {{#each api in apiBackends }}
       <div class="api-card">
         <div class="api-card-logo">
           <img class="img-circle"
                src="img/placeholder-logo.jpg"/>
-          <div
-               class="api-card-bookmark"
-               title="Bookmark API">
-            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
-            {{> favourite apiBackend=api }}
-          </div>
         </div>
         {{> viewApiBackendStatus apiBackend=api width="0.6" }}
         <div class="api-card-info">
@@ -27,17 +21,37 @@
             {{ api.description }}
           </p>
         </div>
-        <span class="api-card-created pull-right">
-          {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}
-        </span>
-        <div class="api-card-star-average pull-left">
-          {{#if api.getAverageRating }}
-          {{ api.getAverageRating }}
-          <i class="fa fa-star"></i>
-          {{/if}}
-        </div>
+        <ul class="api-card-stats list-inline">
+          <li class="pull-left">
+            <div class="api-card-star-average"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="Average Rating">
+              {{#if api.getAverageRating }}
+              {{ api.getAverageRating }}
+              <i class="fa fa-star-half-o"></i>
+              {{/if}}
+            </div>
+          </li>
+          <li class="pull-left">
+            <div
+                 class="api-card-bookmark"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="Bookmark API">
+              <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
+              {{> favourite apiBackend=api }}
+            </div>
+          </li>
+          <li class="pull-right">
+            <span class="api-card-created">
+              {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}
+            </span>
+          </li>
+        </ul>
       </div>
       {{/each}}
     </div>
+    {{/if}}
   </div>
 </template>
