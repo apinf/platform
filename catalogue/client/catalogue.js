@@ -12,6 +12,15 @@ Template.catalogue.onCreated(function () {
   instance.sortDirection = new ReactiveVar();
   instance.filterBy = new ReactiveVar();
   instance.viewMode = new ReactiveVar();
+
+  instance.autorun(function () {
+    const sortBy = instance.sortBy.get();
+    const sortDirection = instance.sortDirection.get();
+    const filterBy = instance.filterBy.get();
+    const viewMode = instance.viewMode.get();
+
+    console.log(sortBy, sortDirection, filterBy, viewMode);
+  });
 });
 
 Template.catalogue.onRendered(function () {
