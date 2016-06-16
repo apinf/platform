@@ -10,30 +10,24 @@
           <tbody>
             {{#each api in apiBackends }}
             <tr>
-              <td class="col-sm-3" style="vertical-align:middle">
-                <p>
+              <td class="col-sm-10" style="vertical-align:middle">
+                <h4>
                   <a href="/api/{{api._id}}">
                     {{ api.name }}
                   </a>
-                  <br>
-                  <i>Added by {{ api.getApiManagersByName }}</i>
-                  <br>
-                  <i>Updated {{ api.relativeUpdatedAt }}</i>
-                </p>
+                </h4>
+                <i>Added by {{ api.getApiManagersByName }}</i>
+                <br>
+                <i>Updated {{ api.relativeUpdatedAt }}</i>
               </td>
-              <td class="col-sm-3 text-center" style="vertical-align:middle">
-                <i class="fa fa-lg fa-bookmark api-card-bookmark"></i>&nbsp;{{ api.getBookmarkCount }}&nbsp;
-                {{#if api.getAverageRating }}
-                  <i class="fa fa-lg fa-star-half-o">&nbsp;{{ api.getAverageRating }}</i>&nbsp;
-                {{ else }}
-                  <i class="fa fa-lg fa-star-half-o">&nbsp;{{_ "catalogue_notRated" }}</i>&nbsp;
-                {{/if}}
-              </td>
-              <td class="col-sm-3" style="vertical-align:middle">
-                <span class="api-card-bookmark" title="Bookmark API">
-                    {{> favourite apiBackend=api }}
-                </span>&nbsp;&nbsp;
+              <td class="col-sm-1" style="vertical-align:middle">
                 {{> apiBackendRating api }}
+              </td>
+              <td class="col-sm-1 text-center" style="vertical-align:middle">
+                <span class="api-card-bookmark" title="Bookmark API">
+                  {{> favourite apiBackend=api }}
+                  {{ api.getBookmarkCount }}
+                </span>&nbsp;&nbsp;
               </td>
             </tr>
             {{/each}}
