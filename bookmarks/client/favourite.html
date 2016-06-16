@@ -1,10 +1,7 @@
 <template name="favourite">
-  {{#if isBookmarked }}
-  <!--  <button type="button" class="btn btn-xs bookmark bookmarked">{{_ "favourite_Remove"}}</button>-->
-  <i class="fa fa-bookmark fa-lg bookmark bookmarked"></i>
+  {{#if isBookmarked}}
+    <i class="fa fa-lg fa-bookmark bookmark bookmarked"></i>
   {{else}}
-  <!--  <button type="button" class="btn btn-xs bookmark">{{_ "favourite_Add"}}</button>-->
-  <i class="fa fa-bookmark-o fa-lg bookmark"></i>
+    <i class="fa fa-lg fa-bookmark-o bookmark"></i>
   {{/if}}
-  <!-- {{ favourite }} -->
 </template>

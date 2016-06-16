@@ -6,10 +6,10 @@ Meteor.methods({
 
     // object to store currentUserId and the Api ID
     var userBookmarks = {userId: currentUserId, apiIds: apiBackendIds};
-    
+
     // If possible, get the bookmarks for current user.
     var existingUserBookmarks = ApiBookmarks.findOne({userId: currentUserId});
-    
+
     // Check if user has existing bookmarks
     if (existingUserBookmarks) {
       // Get an array of bookmark IDs
@@ -31,14 +31,16 @@ Meteor.methods({
       }
 
       // Updating current user apiBookmarks
-      ApiBookmarks.update({userId: currentUserId},{$set: {apiIds: apiIds} });
+      ApiBookmarks.update({userId: currentUserId},{$set: { apiIds } });
 
     } else {
       // Insert bookmark to database
       ApiBookmarks.insert(userBookmarks);
     }
 
+    // Update the API Backend bookmark count
+    Meteor.call("setApiBackendBookmarkCount", backendId);
+
     return apiIds;
   }
 });
-
