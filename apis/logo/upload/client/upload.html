@@ -1,4 +1,19 @@
-<template name="uploadLogo">
-  <button class="btn btn-primary fileBrowse">Upload Logo</button>
-  <img src="{{ uploadedLogoLink }}" />
+<template name="uploadApiLogo">
+  <div class="api-logo-file">
+    {{#unless uploadedApiLogoFile }}
+    <a class="btn btn-primary fileBrowse">Upload Logo</a>
+    {{else}}
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="glyphicon glyphicon-file"></span>
+        {{ uploadedApiLogoFile.filename }}
+        <span class="pull-right">
+          <a class="btn btn-xs btn-danger delete-apiLogo">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </span>
+      </li>
+    </ul>
+    {{/unless}}
+  </div>
 </template>

@@ -1,6 +1,6 @@
-import { ApiLogos } from '/apis/logo/collection/collection';
+import { ApiLogo } from '/apis/logo/collection/collection';
 
-ApiLogos.allow({
+ApiLogo.allow({
   insert: function(userId, file) {
     return true;
   },

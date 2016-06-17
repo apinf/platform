@@ -1,4 +1,4 @@
-const ApiLogos = new FileCollection('ApiLogos', {
+const ApiLogo = new FileCollection('ApiLogo', {
   resumable: true,   // Enable built-in resumable.js upload support
   http: [
     { method: 'get',
@@ -10,4 +10,4 @@ const ApiLogos = new FileCollection('ApiLogos', {
   ]
 });
 
-export { ApiLogos };
+export { ApiLogo };

@@ -33,7 +33,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  apiLogosFileId: {
+  apiLogoFileId: {
     type: String,
     optional: true
   },

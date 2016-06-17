@@ -1,45 +1,10 @@
-import { ApiLogos } from '/apis/logo/collection/collection';
+import { ApiLogo } from '/apis/logo/collection/collection';
 
-Meteor.startup( function() {
-  ApiLogos.resumable.on('fileAdded', function(file) {
-    if(file && file.size <= 10485760) { // Limit file size to 10 MB
-      return ApiLogos.insert({
-        _id: file.uniqueIdentifier,
-        filename: file.fileName,
-        contentType: file.file.type
-      }, function(err, apiLogosFile) {
-        if (err) {
-          console.warn("File creation failed!", err);
-          return;
-        }
-
-        // Get the id from logo file object
-        const apiLogosFileId = file.uniqueIdentifier;
-
-        // Get apibackend id
-        const apiBackend = Session.get('currentApiBackend');
-
-        // Update logo id field
-        ApiBackends.update(apiBackend._id, {$set: { apiLogosFileId }});
-
-        sAlert.success('success! logo is uploaded');
-
-        return ApiLogos.resumable.upload();
-
-      });
-    } else {
-      // Inform user about file size Limit
-      sAlert.warning('logo is too big');
-    }
-  });
-
-});
-
-
-Template.uploadLogo.onCreated(function() {
+Template.uploadApiLogo.onCreated(function() {
   const instance = this;
-  // Subscribe to documentation
-  instance.subscribe('allApiLogos');
+
+  // Subscribe to API logo
+  instance.subscribe('allApiLogo');
 
   instance.autorun(function () {
     const apiBackend = ApiBackends.findOne(instance.data.apiBackend._id);
@@ -48,27 +13,69 @@ Template.uploadLogo.onCreated(function() {
   });
 });
 
-Template.uploadLogo.onRendered(function() {
-  // Assign resumable browse to element
-  ApiLogos.resumable.assignBrowse($('.fileBrowse'));
-});
+Template.uploadApiLogo.events({
+  'click .delete-apiLogo': function(event, instance) {
 
-Template.uploadLogo.helpers({
-  uploadedLogoLink: function() {
+    // Show confirmation dialog to user
+    const confirmation = confirm('Are you sure you want to delete this logo?');
 
-    const currentLogoFileId = this.apiBackend.apiLogosFileId;
+    // Check if user clicked "OK"
+    if (confirmation === true) {
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentLogoFileId);
+      // Get currentApiBackend documentationFileId
+      const apiLogoFileId = this.apiBackend.apiLogoFileId;
 
-    // Get documentation file Object
-    const currentLogoFile = ApiLogos.findOne(objectId);
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(apiLogoFileId);
 
-    // Check if documentation file is available
-    if (currentLogoFile) {
-      // Get documentation file URL
-      return Meteor.absoluteUrl().slice(0, -1) + ApiLogos.baseURL + "/md5/" + currentLogoFile.md5;
+      // Remove API logo object
+      ApiLogo.remove(objectId);
+
+      // Remove API logo file id field
+      ApiBackends.update(instance.data.apiBackend._id, {$unset: { apiLogoFileId: "" }});
+
+      sAlert.success('Logo successfully deleted!');
+
     }
   }
 });
 
+Template.uploadApiLogo.helpers({
+  uploadedLogoLink: function() {
+
+    const currentApiLogoFileId = this.apiBackend.apiLogoFileId;
+
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
+
+    // Get API logo file Object
+    const currentApiLogoFile = ApiLogo.findOne(objectId);
+
+    // Check if API logo file is available
+    if (currentApiLogoFile) {
+      // Get API logo file URL
+      return Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL + "/md5/" + currentApiLogoFile.md5;
+    }
+  },
+  uploadedApiLogoFile: function() {
+    const currentApiBackend = Session.get('currentApiBackend');
+
+    const currentApiLogoFileId = currentApiBackend.apiLogoFileId;
+
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
+
+    // Get API logo file Object
+    const currentApiLogoFile = ApiLogo.findOne(objectId);
+
+    // Check if API logo file is available
+    if (currentApiLogoFile) {
+      return currentApiLogoFile;
+    }
+  }
+});
+
+Template.uploadApiLogo.onRendered(function() {
+  // Assign resumable browse to element
+  ApiLogo.resumable.assignBrowse($('.fileBrowse'));
+});

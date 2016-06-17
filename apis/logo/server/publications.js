@@ -1,7 +1,7 @@
-import { ApiLogos } from '/apis/logo/collection/collection';
+import { ApiLogo } from '/apis/logo/collection/collection';
 
-Meteor.publish('allApiLogos', function() {
-  return ApiLogos.find({
+Meteor.publish('allApiLogo', function() {
+  return ApiLogo.find({
     'metadata._Resumable': {
       $exists: false
     }
