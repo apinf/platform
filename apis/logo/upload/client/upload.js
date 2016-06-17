@@ -74,8 +74,3 @@ Template.uploadApiLogo.helpers({
     }
   }
 });
-
-Template.uploadApiLogo.onRendered(function() {
-  // Assign resumable browse to element
-  ApiLogo.resumable.assignBrowse($('.fileBrowse'));
-});
