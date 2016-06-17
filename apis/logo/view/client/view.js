@@ -31,7 +31,7 @@ Template.viewApiLogo.helpers({
   },
   apiLogoExists: function () {
     const currentApiBackend = this.apiBackend;
-    if (currentApiBackend.apiLogosFileId) {
+    if (currentApiBackend.apiLogoFileId) {
       return true;
     }
   }
