@@ -1,4 +1,5 @@
 import { ApiLogo } from '/apis/logo/collection/collection';
+import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
   ApiLogo.resumable.on('fileAdded', function(file) {
@@ -12,18 +13,26 @@ Meteor.startup( function() {
         return;
       }
 
-      // Get the id from API logo file object
-      const apiLogoFileId = file.uniqueIdentifier;
+      const acceptedExtensions = ["jpg", "jpeg", "png", "gif"];
 
-      // Get apibackend id
-      const apiBackend = Session.get('currentApiBackend');
+      if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
 
-      // Update logo id field
-      ApiBackends.update(apiBackend._id, {$set: { apiLogoFileId }});
+        // Get the id from API logo file object
+        const apiLogoFileId = file.uniqueIdentifier;
 
-      sAlert.success('Logo successfully uploaded!');
+        // Get apibackend id
+        const apiBackend = Session.get('currentApiBackend');
 
-      return ApiLogo.resumable.upload();
+        // Update logo id field
+        ApiBackends.update(apiBackend._id, {$set: { apiLogoFileId }});
+
+        sAlert.success('Logo successfully uploaded!');
+
+        return ApiLogo.resumable.upload();
+      } else {
+
+        sAlert.error('Only .jpg, .jpeg, .png, .gif are accepted.');
+      }
 
     });
   });
