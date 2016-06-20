@@ -343,5 +343,7 @@
   "viewApiBackendStatus_statusMessage_Success": "API is operating normally.",
   "viewApiBackendStatus_statusMessage_RedirectError": "Redirection.",
   "viewApiBackendStatus_statusMessage_ClientError": "Client error.",
-  "viewApiBackendStatus_statusMessage_ServerError": "Server error."
+  "viewApiBackendStatus_statusMessage_ServerError": "Server error.",
+  "apiDocumentationEditor_notAvailable": "API documentation editor is not available.",
+  "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor"
 }
