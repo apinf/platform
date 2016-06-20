@@ -694,7 +694,7 @@ SimpleSchema.messages({
 ApiBackends.helpers({
   'getRating': function () {
     // Get API Backend ID
-    const apiBackendId = this._id;
+    apiBackendId = this._id;
 
     // Check if user is logged in
     if (Meteor.userId()) {
