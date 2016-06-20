@@ -1,11 +1,7 @@
 <template name="catalogue">
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">{{_ "catalogue_Title"}}</h3>
-    </div>
-    <div class="box-body">
-      <p>Catalogue placeholder ({{ apiBackendsCount }})</p>
-      {{> catalogueTable }}
-    </div>
-  </div>
+  {{#if Template.subscriptionsReady }}
+    {{> catalogueTable apiBackends=apiBackends }}
+  {{else}}
+    {{> spinner }}
+  {{/if}}
 </template>

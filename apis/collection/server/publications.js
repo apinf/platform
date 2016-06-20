@@ -20,6 +20,14 @@ Meteor.publish('myBookmarkedApis', function () {
   return ApiBackends.find({_id: {$in: bookmarkedApiIds}});
 });
 
+Meteor.publish('allBookmarks', () => {
+
+  // Fetch all bookmarks
+  const bookmarks = ApiBookmarks.find();
+
+  return bookmarks;
+});
+
 Meteor.publish('myManagedApis', function () {
   // get current user id
   var userId = this.userId;

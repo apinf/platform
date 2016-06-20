@@ -5,7 +5,8 @@
     {{>showHelp 'api_name'}}
     {{> afQuickField name='name'}}
     <span class="help-block">{{_ "apiBackends_Title_Help"}}</span>
-    <legend>Upload logo</legend>
+    {{> afQuickField name='description'}}
+    <legend>{{_ "editApiBackendForm-uploadLogo"}}</legend>
     {{> uploadApiLogo apiBackend=apiBackend }}
     <legend>{{_ "apiBackends_Backend_Title"}}</legend>
     <span class="help-block">{{_ "apiBackends_Backend_Help"}}</span>

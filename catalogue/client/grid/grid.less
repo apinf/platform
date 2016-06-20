@@ -1,0 +1,93 @@
+/* Bootstrap */
+@import "/client/style/bootstrap-variables.less";
+
+.api-card {
+  border-radius: 3px;
+  background: #ffffff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  padding: 0.5em;
+  width: 18em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  display: inline-block;
+
+  .api-status-color {
+    background-color: #a0a0a0;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: right;
+  }
+}
+
+.api-card-name {
+  display: block;
+  font-size: 1.2em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  font-weight: bold;
+}
+
+.api-card-author {
+  display: block;
+  font-size: 0.9em;
+  color: #777;
+}
+
+.api-card-logo {
+  padding: 0.5em;
+  padding-left: 0.5em;
+  float: left;
+
+  img {
+    max-height: 50px;
+    max-width: 50px;
+    background: transparent;
+  }
+}
+
+.api-card-bookmark {
+  .api-card-bookmark-number {
+    color: #555;
+    display: inline;
+  }
+}
+
+.api-card-description {
+  margin-top: 1.3em;
+  font-size: 0.8em;
+  color: #444;
+  height: 4em;
+  overflow: hidden;
+}
+
+.api-card-created {
+  color: #777;
+  font-size: 0.85em;
+}
+
+.api-card-info {
+  margin-left: 4.8em;
+  margin-top: 0.3em;
+  margin-right: 0.3em;
+}
+
+.bookmark {
+  cursor: pointer;
+}
+
+.bookmarked {
+  cursor: pointer;
+  color: @brand-primary;
+}
+
+.api-card-star-average {
+  color: #555;
+}
+
+.api-card-stats {
+  margin-bottom: 0;
+  margin-left: 0.5em;
+}

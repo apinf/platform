@@ -17,7 +17,8 @@ Template.uploadApiLogo.events({
   'click .delete-apiLogo': function(event, instance) {
 
     // Show confirmation dialog to user
-    const confirmation = confirm('Are you sure you want to delete this logo?');
+    const confirmation = confirm(TAPi18n.__('uploadApiLogo_confirm_delete'));
+
 
     // Check if user clicked "OK"
     if (confirmation === true) {
@@ -34,8 +35,7 @@ Template.uploadApiLogo.events({
       // Remove API logo file id field
       ApiBackends.update(instance.data.apiBackend._id, {$unset: { apiLogoFileId: "" }});
 
-      sAlert.success('Logo successfully deleted!');
-
+      sAlert.success(TAPi18n.__('uploadApiLogo_successfully_deleted'));
     }
   }
 });
