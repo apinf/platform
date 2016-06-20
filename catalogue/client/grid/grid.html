@@ -14,7 +14,9 @@
             {{ api.name }}
           </a>
           <span class="api-card-author">
-            added by {{ api.getApiManagersByName }}
+            added by
+            {{_ "catalogueGrid-addedBy"}}
+            {{ api.getApiManagersByName }}
           </span>
           <p class="api-card-description">
             {{ api.description }}

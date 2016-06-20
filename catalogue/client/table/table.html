@@ -15,9 +15,15 @@
                 {{ api.name }}
               </a>
             </h4>
-            <i>Added by {{ api.getApiManagersByName }}</i>
+            <i>
+              {{_ "catalogueTable-addedBy"}}
+              {{ api.getApiManagersByName }}
+            </i>
             <br>
-            <i>Updated {{ api.relativeUpdatedAt }}</i>
+            <i>
+              {{_ "catalogueTable-updated"}}
+              {{ api.relativeUpdatedAt }}
+            </i>
           </td>
           <td class="col-sm-1">
             {{> apiBackendRating api }}
