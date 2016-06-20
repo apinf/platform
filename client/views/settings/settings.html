@@ -25,10 +25,10 @@
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Api Documentation Editor</h3>
+            <span class="panel-title">Api Documentation Editor</span>
+            <span class="pull-right">{{> afQuickField name='apiDocumentationEditor.enabled'}}</span>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='apiDocumentationEditor.enabled'}}
             {{#if afFieldValueIs name="apiDocumentationEditor.enabled" value=true}}
               {{> afQuickField name='apiDocumentationEditor.host'}}
             {{/if}}
