@@ -1,5 +1,11 @@
 Settings = new Mongo.Collection('Settings');
 
+SimpleSchema.messages({
+  regEx: [
+    {exp: SimpleSchema.RegEx.Url, msg: "[label] must be a valid URL"},
+  ]
+});
+
 Schemas.SettingsSchema = new SimpleSchema({
   apinf: {
     type: Object,
@@ -11,14 +17,25 @@ Schemas.SettingsSchema = new SimpleSchema({
   },
   "apiDocumentationEditor.enabled": {
     type: Boolean,
-    label: "Enable apiDocumentation Editor",
     optional: true
   },
   "apiDocumentationEditor.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: true
+    optional: true,
+    autoform: {
+      placeholder: 'http://editor.example.com/'
+    },
+    custom: function () {
+      let apiDocumentationEditorEnabled = this.field("apiDocumentationEditor.enabled").value;
+      let apiDocumentationEditorHost = this.value;
+
+      // Require editor host if apiDocumentationEditor.enabled is checked
+      if (apiDocumentationEditorEnabled === true && !apiDocumentationEditorHost) {
+        return "required";
+      }
+    }
   },
   apiUmbrella: {
     type: Object,
