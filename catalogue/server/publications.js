@@ -14,7 +14,7 @@ Meteor.publish('catalogue', function (options) {
     query = { managerIds: userId }
   } else if (options.filterBy === "my-bookmarks") {
     // Get user bookmarks
-    const userBookmarks = Bookmarks.findOne({userId: userId});
+    const userBookmarks = ApiBookmarks.findOne({userId});
 
     // Get bookmarked API IDs
     const bookmarkedApiIds = userBookmarks.apiIds;
@@ -33,7 +33,7 @@ Meteor.publish('catalogue', function (options) {
   };
 
   // Set up query options with sort settings
-  queryOptions.sort[sortBy] = sortDirection;
+  queryOptions.sort.sortBy = sortDirection;
 
   // Find all API Backends
   return ApiBackends.find(query, queryOptions);
