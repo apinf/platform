@@ -16,13 +16,3 @@ Template.apiCatalogue.helpers({
     return ApiBackends.find().count();
   }
 });
-
-Template.apiCatalogue.helpers({
-  apiBackends () {
-    // Return cursor to all apiBackends
-    return ApiBackends.find();
-  },
-  apiBackendsCount () {
-    return ApiBackends.find().count();
-  }
-});
