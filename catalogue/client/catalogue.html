@@ -1,0 +1,7 @@
+<template name="catalogue">
+  {{#if Template.subscriptionsReady }}
+    {{> catalogueGrid apiBackends=apiBackends }}
+  {{else}}
+    {{> spinner }}
+  {{/if}}
+</template>
