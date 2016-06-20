@@ -6,8 +6,9 @@
         <tr>
           <td class="col-sm-1">
             {{> viewApiBackendStatus apiBackend=api width="0.6" }}
-            <img class="img-circle center-block api-catalogue-table-logo"
-                 src="img/placeholder-logo.jpg"/>
+            <div class="api-catalogue-table-logo center-block">
+              {{> viewApiLogo apiBackend=api }}
+            </div>
           </td>
           <td class="col-sm-9">
             <h4 class="api-catalogue-table-title">
