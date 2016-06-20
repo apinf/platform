@@ -1,5 +1,5 @@
 <template name="catalogue">
-  <h3 class="box-title">{{_ "catalogue_Title"}}</h3>
+  <h3>{{_ "catalogue_Title"}}</h3>
   <nav id="catalogue-toolbar" class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -84,15 +84,20 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <p>Catalogue placeholder ({{ apiBackendsCount }})</p>
   <!-- if viewMode is table, show table -->
   {{# if cardViewMode }}
-    <!--{{> catalogueCards apiBAckends=apiBackends }}-->
-    <p>Card view.</p>
+    {{#if Template.subscriptionsReady }}
+      {{> catalogueGrid apiBackends=apiBackends }}
+    {{else}}
+      {{> spinner }}
+    {{/if}}
   {{/ if }}
   <!-- if viewMode is table, show table -->
   {{# if tableViewMode }}
-    <p>Table view</p>
-    {{> catalogueTable apiBackends=apiBackends }}
+    {{#if Template.subscriptionsReady }}
+      {{> catalogueTable apiBackends=apiBackends }}
+    {{else}}
+      {{> spinner }}
+    {{/if}}
   {{/ if }}
 </template>

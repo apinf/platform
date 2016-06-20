@@ -1,6 +1,4 @@
-import { Template } from 'meteor/templating';
-
-Template.catalogue.onCreated(function () {
+Template.catalogue.onCreated(function (){
   const instance = this;
 
   // Set up toolbar reactive variables
@@ -30,9 +28,19 @@ Template.catalogue.onCreated(function () {
 Template.catalogue.onRendered(function () {
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
+//=======
+//  //instance.subscribe('allApiBackends');
+//  instance.subscribe("catalogue");
+//  instance.subscribe("catalogueRatings");
+//  instance.subscribe("catalogueBookmarks");
+//>>>>>>> origin/develop
 });
 
 Template.catalogue.helpers({
+  apiBackends () {
+    // Return cursor to all apiBackends
+    return ApiBackends.find();
+  },
   apiBackendsCount () {
     return ApiBackends.find().count();
   },
