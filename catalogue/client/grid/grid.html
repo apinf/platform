@@ -3,8 +3,7 @@
     {{#each api in apiBackends }}
     <div class="api-card">
       <div class="api-card-logo">
-        <img class="img-circle"
-             src="img/placeholder-logo.jpg"/>
+        {{> viewApiLogo apiBackend=api }}
       </div>
       {{> viewApiBackendStatus apiBackend=api width="0.6" }}
       <div class="api-card-info">

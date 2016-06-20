@@ -21,6 +21,7 @@ Template.catalogue.onCreated(function (){
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
     instance.subscribe("catalogueRatings");
+    instance.subscribe("allApiLogo");
   });
 });
 
