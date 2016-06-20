@@ -26,12 +26,12 @@ Meteor.startup( function() {
         // Update logo id field
         ApiBackends.update(apiBackend._id, {$set: { apiLogoFileId }});
 
-        sAlert.success('Logo successfully uploaded!');
+        sAlert.success(TAPi18n.__('apiLogo_resumable_successfully_uploaded'));
 
         return ApiLogo.resumable.upload();
       } else {
 
-        sAlert.error('Only .jpg, .jpeg, .png, .gif are accepted.');
+        sAlert.error(TAPi18n.__('apiLogo_resumable_acceptedExtensions'));
       }
 
     });
