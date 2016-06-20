@@ -1,6 +1,5 @@
-<template name="apiCatalogue">
+<template name="catalogueGrid">
   <div class="container">
-    {{#if Template.subscriptionsReady }}
     <div class="api-catalogue">
       {{#each api in apiBackends }}
       <div class="api-card">
@@ -52,8 +51,5 @@
       </div>
       {{/each}}
     </div>
-    {{else}}
-    {{> spinner }}
-    {{/if}}
   </div>
 </template>
