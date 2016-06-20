@@ -698,14 +698,14 @@ SimpleSchema.messages({
 ApiBackends.helpers({
   'getRating': function () {
     // Get API Backend ID
-    apiBackendId = this._id;
+    const apiBackendId = this._id;
 
     // Check if user is logged in
     if (Meteor.userId()) {
       // Check if user has rated API Backend
       var userRating = ApiBackendRatings.findOne({
         userId: Meteor.userId(),
-        apiBackendId: apiBackendId
+        apiBackendId
       });
 
       if (userRating) {
