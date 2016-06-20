@@ -1,3 +1,7 @@
 <template name="apiDocumentationEditor">
-  <iframe src="{{ editorUrl }}" width="100%" id="api-documentation-editor"></iframe>
+  {{#if editorUrl }}
+    <iframe src="{{ editorUrl }}" width="100%" id="api-documentation-editor"></iframe>
+  {{ else }}
+    <p>{{_ "apiDocumentationEditor_notAvailable" }}</p>
+  {{/if }}
 </template>
