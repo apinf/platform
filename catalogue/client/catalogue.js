@@ -5,7 +5,7 @@ Template.catalogue.onCreated(function (){
   instance.sortBy = new ReactiveVar("name");
   instance.sortDirection = new ReactiveVar("ascending");
   instance.filterBy = new ReactiveVar("show-all");
-  instance.viewMode = new ReactiveVar("card");
+  instance.viewMode = new ReactiveVar("grid");
 
   instance.autorun(function () {
     const sortBy = instance.sortBy.get();
@@ -18,27 +18,18 @@ Template.catalogue.onCreated(function (){
       filterBy
     };
 
-    console.log("subscription options:", sortBy, sortDirection, filterBy);
-
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
+    instance.subscribe("catalogueRatings");
   });
 });
 
 Template.catalogue.onRendered(function () {
-  const instance = this;
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
-
-  // Default view is grid
-  instance.viewMode.set("grid");
 });
 
 Template.catalogue.helpers({
-  apiBackends () {
-    // Return cursor to all apiBackends
-    return ApiBackends.find();
-  },
   apiBackendsCount () {
     return ApiBackends.find().count();
   },
