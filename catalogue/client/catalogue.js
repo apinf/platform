@@ -17,7 +17,7 @@ Template.catalogue.onCreated(function (){
       sortDirection,
       filterBy
     };
-    
+
     console.log("subscription options:", sortBy, sortDirection, filterBy);
 
     // Subscribe to API Backends with catalogue settings
@@ -26,14 +26,12 @@ Template.catalogue.onCreated(function (){
 });
 
 Template.catalogue.onRendered(function () {
+  const instance = this;
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
-//=======
-//  //instance.subscribe('allApiBackends');
-//  instance.subscribe("catalogue");
-//  instance.subscribe("catalogueRatings");
-//  instance.subscribe("catalogueBookmarks");
-//>>>>>>> origin/develop
+
+  // Default view is grid
+  instance.viewMode.set("grid");
 });
 
 Template.catalogue.helpers({
@@ -50,19 +48,19 @@ Template.catalogue.helpers({
   gridViewMode () {
     // Get reference to template instance
     const instance = Template.instance();
-  
+
     // Get view mode from template
     const viewMode = instance.viewMode.get();
-  
+
     return (viewMode === "grid");
   },
   tableViewMode () {
     // Get reference to template instance
     const instance = Template.instance();
-  
+
     // Get view mode from template
     const viewMode = instance.viewMode.get();
-  
+
     return (viewMode === "table");
   }
 });
