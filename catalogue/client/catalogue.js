@@ -1,7 +1,7 @@
 Template.catalogue.onCreated(function (){
   const instance = this;
 
-  //instance.subscribe('allApiBackends');
+  instance.subscribe("allUsers");
   instance.subscribe("catalogue");
   instance.subscribe("catalogueRatings");
   instance.subscribe("catalogueBookmarks");
