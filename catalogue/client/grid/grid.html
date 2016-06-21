@@ -32,6 +32,7 @@
             {{/if}}
           </div>
         </li>
+        {{# if currentUser }}
         <li class="pull-left">
           <div
                class="api-card-bookmark"
@@ -42,6 +43,18 @@
             {{> favourite apiBackend=api }}
           </div>
         </li>
+        {{else}}
+        <li class="pull-left">
+          <div
+               class="api-card-bookmark"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="Number of bookmarks">
+            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
+            <i class="fa fa-bookmark bookmark bookmarked"></i>
+          </div>
+        </li>
+        {{/if}}
         <li class="pull-right">
           <span class="api-card-created">
             {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}

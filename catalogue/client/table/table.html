@@ -30,10 +30,17 @@
             {{> apiBackendRating api }}
           </td>
           <td class="col-sm-1 text-center">
+            {{# if currentUser }}
             <span class="api-card-bookmark">
               {{> favourite apiBackend=api }}
               {{ api.getBookmarkCount }}
             </span>
+            {{else}}
+            <span class="api-card-bookmark">
+              <i class="fa fa-bookmark bookmark bookmarked"></i>
+              {{ api.getBookmarkCount }}
+            </span>
+            {{/if}}
           </td>
         </tr>
         {{/each}}
