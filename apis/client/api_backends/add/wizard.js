@@ -15,7 +15,7 @@ Template.addApiBackendWizard.helpers({
         autoform: {
           rows: 3
         },
-        optional: false
+        optional: true
       }
     });
 
