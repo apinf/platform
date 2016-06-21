@@ -8,14 +8,6 @@ Template.addApiBackendWizard.helpers({
       name: {
         type: String,
         optional: false
-      },
-      description: {
-        type: String,
-        max: 1000,
-        autoform: {
-          rows: 3
-        },
-        optional: false
       }
     });
 

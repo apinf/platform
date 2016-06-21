@@ -280,6 +280,10 @@
       "name": {
         "label": "Name",
         "placeholder": "Enter a name for this API Backend"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Describe this API Backend"
       }
     },
     "apiWizard_backendInformation": {
