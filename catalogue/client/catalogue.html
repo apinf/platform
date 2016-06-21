@@ -88,18 +88,10 @@
   </nav>
   <!-- if viewMode is table, show table -->
   {{# if gridViewMode }}
-    {{#if Template.subscriptionsReady }}
-      {{> catalogueGrid apiBackends=apiBackends }}
-    {{else}}
-      {{> spinner }}
-    {{/if}}
+    {{> catalogueGrid apiBackends=apiBackends }}
   {{/ if }}
   <!-- if viewMode is table, show table -->
   {{# if tableViewMode }}
-    {{#if Template.subscriptionsReady }}
-      {{> catalogueTable apiBackends=apiBackends }}
-    {{else}}
-      {{> spinner }}
-    {{/if}}
+    {{> catalogueTable apiBackends=apiBackends }}
   {{/ if }}
 </template>
