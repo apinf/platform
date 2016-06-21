@@ -1,4 +1,6 @@
-Template.catalogue.onCreated(function (){
+import { Template } from 'meteor/templating';
+
+Template.catalogue.onCreated(function () {
   const instance = this;
 
   // Set up toolbar reactive variables
@@ -18,9 +20,13 @@ Template.catalogue.onCreated(function (){
       filterBy
     };
 
+    console.log("subscription options:", sortBy, sortDirection, filterBy);
+
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
+
     instance.subscribe("catalogueRatings");
+
     instance.subscribe("allApiLogo");
   });
 });

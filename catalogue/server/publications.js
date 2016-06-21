@@ -1,9 +1,9 @@
 Meteor.publish('catalogue', function (options) {
   // Set up query object placeholder
   let query = {};
-  
+
   // Set up query options placeholder, with empty sort object
-  let queryOptions = { sort: {} };
+  let queryOptions = { sort: {} };
 
   // Get user ID
   const userId = this.userId;
@@ -33,7 +33,7 @@ Meteor.publish('catalogue', function (options) {
   };
 
   // Set up query options with sort settings
-  queryOptions.sort.sortBy = sortDirection;
+  queryOptions.sort[sortBy] = sortDirection;
 
   // Find all API Backends
   return ApiBackends.find(query, queryOptions);
