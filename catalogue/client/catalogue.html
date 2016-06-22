@@ -19,25 +19,20 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse sort-filter-toolbar" id="bs-example-navbar-collapse-1">
-        <div class="nav navbar-nav">
-          <p class="navbar-text sort-filter-toolbar-title">
-            Sort by
-          </p>
-        </div>
         {{# if currentUser }}
         <div class="nav navbar-nav">
           <div class="btn-group navbar-btn" role="group" aria-label="Filter options" data-toggle="buttons">
             <label class="btn btn-default active">
               <input type="radio" name="filter-options" id="show-all" value="all">
-              Show All
+              {{_ "catalogue_FilterButtons_Show_All"}}
             </label>
             <label class="btn btn-default">
               <input type="radio" name="filter-options" id="my-apis" value="my-apis">
-              My APIs
+              {{_ "catalogue_FilterButtons_My APIs"}}
             </label>
             <label class="btn btn-default">
               <input type="radio" name="filter-options" id="my-bookmarks" value="my-bookmarks">
-              My Bookmarks
+              {{_ "catalogue_FilterButtons_My Bookmarks"}}
             </label>
           </div>
         </div>
@@ -59,10 +54,10 @@
   </nav>
   <!-- if viewMode is table, show table -->
   {{# if gridViewMode }}
-    {{> catalogueGrid apiBackends=apiBackends }}
+  {{> catalogueGrid apiBackends=apiBackends }}
   {{/ if }}
   <!-- if viewMode is table, show table -->
   {{# if tableViewMode }}
-    {{> catalogueTable apiBackends=apiBackends }}
+  {{> catalogueTable apiBackends=apiBackends }}
   {{/ if }}
 </template>
