@@ -4,40 +4,34 @@ Template.catalogue.onCreated(function () {
   const instance = this;
 
   // Set up toolbar reactive variables
-  instance.sortBy = new ReactiveVar("name");
-  instance.sortDirection = new ReactiveVar("ascending");
   instance.filterBy = new ReactiveVar("show-all");
   instance.viewMode = new ReactiveVar("grid");
 
   instance.autorun(function () {
-    const sortBy = instance.sortBy.get();
-    const sortDirection = instance.sortDirection.get();
     const filterBy = instance.filterBy.get();
 
     const subscriptionOptions = {
-      sortBy,
-      sortDirection,
       filterBy
     };
-
-    console.log("subscription options:", sortBy, sortDirection, filterBy);
 
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
 
     instance.subscribe("catalogueRatings");
 
+    instance.subscribe("catalogueBookmarks");
+
     // Subscribe API logo colection
     instance.subscribe("allApiLogo");
+
+    // Subscribe to Meteor.users to show authors. Show only visible authors.
+    instance.subscribe("allUsers");
   });
 });
 
 Template.catalogue.onRendered(function () {
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
-
-  // Subscribe to Meteor.users to show authors. Show only visible authors.
-  instance.subscribe("allUsers");
 });
 
 Template.catalogue.helpers({
@@ -68,20 +62,6 @@ Template.catalogue.helpers({
 });
 
 Template.catalogue.events({
-  'change #sort-select' (event, instance) {
-    // Get selected sort value
-    const sortBy = event.target.value;
-
-    // Update the instance sort value reactive variable
-    instance.sortBy.set(sortBy);
-  },
-  'change [name=sort-direction]' (event, instance) {
-    // Get selected sort value
-    const sortDirection = event.target.value;
-
-    // Update the instance sort value reactive variable
-    instance.sortDirection.set(sortDirection);
-  },
   'change [name=filter-options]' (event, instance) {
     // Get selected sort value
     const filterBy = event.target.value;
