@@ -267,6 +267,8 @@
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
   "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully updated!",
   "manageApiDocumentationModal_CreateDocumentation_Title": "Create documentation file",
+  "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Save",
+  "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Cancel",
   "manageApiDocumentationModal_DocumentationLink_Title": "Link to external documentation resource",
   "catalogueTable-addedBy": "Added by",
   "catalogueTable-updated": "Updated",
