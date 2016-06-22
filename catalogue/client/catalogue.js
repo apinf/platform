@@ -17,8 +17,10 @@ Template.catalogue.onCreated(function () {
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
 
+    // Subscribe ratings collection
     instance.subscribe("catalogueRatings");
 
+    // Subscribe bookmarks collection
     instance.subscribe("catalogueBookmarks");
 
     // Subscribe API logo colection
