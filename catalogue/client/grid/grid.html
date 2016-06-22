@@ -24,7 +24,7 @@
           <div class="api-card-star-average"
                data-toggle="tooltip"
                data-placement="bottom"
-               title="Average Rating">
+               title="{{_ 'catalogue-AverageRating-Tooltip'}}">
             {{#if api.getAverageRating }}
             {{ api.getAverageRating }}
             <i class="fa fa-star-half-o"></i>
@@ -37,7 +37,7 @@
                class="api-card-bookmark"
                data-toggle="tooltip"
                data-placement="bottom"
-               title="Bookmark API">
+               title="{{_ 'catalogue-Bookmark-Tooltip_User'}}">
             <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
             {{> favourite apiBackend=api }}
           </div>
@@ -48,7 +48,7 @@
                class="api-card-bookmark"
                data-toggle="tooltip"
                data-placement="bottom"
-               title="Number of bookmarks. Sign in to bookmark.">
+               title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
             <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
             <i class="fa fa-bookmark bookmark-default"></i>
           </div>

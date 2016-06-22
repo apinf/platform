@@ -280,6 +280,9 @@
   "catalogue_FilterButtons_Show_All": "Show All",
   "catalogue_FilterButtons_My_APIs": "My APIs",
   "catalogue_FilterButtons_My_Bookmarks": "My Bookmarks",
+  "catalogue-AverageRating-Tooltip": "Average Rating",
+  "catalogue-Bookmark-Tooltip_User": "Bookmark API",
+  "catalogue-Bookmark-Tooltip_NonUser": "Number of bookmarks. Sign in to bookmark.",
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
