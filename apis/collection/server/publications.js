@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.publish('allApiBackends', function () {
   // Check if the user is signed in
   if (this.userId) {

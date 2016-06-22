@@ -1,4 +1,5 @@
 import ss from 'simple-statistics';
+import { ApiBackends } from '/apis/collection/backend';
 
 ApiBackends.helpers({
   getAverageRating () {
