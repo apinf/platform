@@ -54,10 +54,18 @@
   </nav>
   <!-- if viewMode is table, show table -->
   {{# if gridViewMode }}
-  {{> catalogueGrid apiBackends=apiBackends }}
+    {{# if Template.subscriptionsReady }}
+      {{> catalogueGrid apiBackends=apiBackends }}
+    {{else}}
+      {{> spinner }}
+    {{/if}}
   {{/ if }}
   <!-- if viewMode is table, show table -->
   {{# if tableViewMode }}
-  {{> catalogueTable apiBackends=apiBackends }}
+    {{# if Template.subscriptionsReady }}
+      {{> catalogueTable apiBackends=apiBackends }}
+    {{else}}
+      {{> spinner }}
+    {{/if}}
   {{/ if }}
 </template>
