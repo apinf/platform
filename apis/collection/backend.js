@@ -650,15 +650,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
-    autoValue: function () {
-      // If the field is already set, leave it as-is
-      if (this.isSet) {
-        return undefined;
-      } else {
-        // Otherwise, return an array containing only the current User ID
-        return [Meteor.userId()];
-      }
-    },
+    defaultValue: [],
     autoform: {
       type: "hidden",
       label: false
@@ -694,3 +686,5 @@ SimpleSchema.messages({
   // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match"
 });
+
+export { ApiBackends };
