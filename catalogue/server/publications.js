@@ -2,9 +2,6 @@ Meteor.publish('catalogue', function (options) {
   // Set up query object placeholder
   let query = {};
 
-  // Set up query options placeholder, with empty sort object
-  let queryOptions = { sort: {} };
-
   // Get user ID
   const userId = this.userId;
 
@@ -23,20 +20,8 @@ Meteor.publish('catalogue', function (options) {
     query = {_id: {$in: bookmarkedApiIds}};
   };
 
-  // Set up sort direction, for mongo query
-  if (options.sortDirection === "ascending") {
-    // Sort in ascending order
-    sortDirection = 1;
-  } else {
-    // Sort in descending order
-    sortDirection = -1;
-  };
-
-  // Set up query options with sort settings
-  queryOptions.sort.sortBy = sortDirection;
-
   // Find all API Backends
-  return ApiBackends.find(query, queryOptions);
+  return ApiBackends.find(query);
 });
 
 Meteor.publish('catalogueRatings', function () {
