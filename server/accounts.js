@@ -1,3 +1,5 @@
+import Github from 'github';
+
 Accounts.onCreateUser(function(options, user) {
   // Initialize API Umbrella related variables
   var apiUmbrellaUserObj, response;
@@ -64,7 +66,7 @@ Accounts.onLogin(function(info) {
 
   if ((ref = user.services) != null ? ref.github : void 0) {
     if (user) {
-      github = new GitHub({
+      github = new Github({
         version: '3.0.0',
         timeout: 5000
       });
@@ -84,7 +86,4 @@ Accounts.onLogin(function(info) {
       }
     }
   }
-
-  // Add initial user to admin role
-  Meteor.call('addFirstUserToAdminRole', userId);
 });

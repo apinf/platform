@@ -27,6 +27,7 @@ Template.catalogue.onCreated(function () {
 
     instance.subscribe("catalogueRatings");
 
+    // Subscribe API logo colection
     instance.subscribe("allApiLogo");
   });
 });
@@ -34,6 +35,9 @@ Template.catalogue.onCreated(function () {
 Template.catalogue.onRendered(function () {
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
+
+  // Subscribe to Meteor.users to show authors. SHow only visible authors.
+  instance.subscribe("allUsers");
 });
 
 Template.catalogue.helpers({
