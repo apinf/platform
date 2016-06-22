@@ -650,7 +650,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
-    defaultValue: [],
+    defaultValue: [null],
     autoform: {
       type: "hidden",
       label: false
