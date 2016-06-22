@@ -36,7 +36,7 @@ Template.catalogue.onRendered(function () {
   // Activate tooltips on all relevant items
   $(".toolbar-tooltip").tooltip({ placement: 'bottom'});
 
-  // Subscribe to Meteor.users to show authors. SHow only visible authors.
+  // Subscribe to Meteor.users to show authors. Show only visible authors.
   instance.subscribe("allUsers");
 });
 
