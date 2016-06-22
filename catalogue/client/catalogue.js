@@ -17,13 +17,13 @@ Template.catalogue.onCreated(function () {
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
 
-    // Subscribe ratings collection
+    // Subscribe to ratings collection
     instance.subscribe("catalogueRatings");
 
-    // Subscribe bookmarks collection
+    // Subscribe to bookmarks collection
     instance.subscribe("catalogueBookmarks");
 
-    // Subscribe API logo colection
+    // Subscribe to API logo colection
     instance.subscribe("allApiLogo");
 
     // Subscribe to Meteor.users to show authors. Show only visible authors.
