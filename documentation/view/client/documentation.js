@@ -49,9 +49,23 @@ Template.documentation.helpers({
     }
   },
   documentationExists: function () {
-    const currentApiBackend = this.apiBackend;
-    if (currentApiBackend.documentationFileId) {
-      return true;
+    const currentDocumentationFileId = this.apiBackend.documentationFileId;
+
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
+
+    // Get documentation file Object
+    const currentDocumentationFile = DocumentationFiles.findOne(objectId);
+
+    // Check if documentation file is available
+    if (currentDocumentationFile) {
+      // Hash currentDocumentationFile
+      const currentDocumentationFileHash = currentDocumentationFile.md5;
+
+      // Get documentation file URL
+      const docUrl = Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + "/md5/" + currentDocumentationFileHash;
+      // Check doc is served on docUrl, return true on success
+      return doPoll(docUrl);
     }
   }
 });
@@ -64,3 +78,18 @@ Template.documentation.events({
     Modal.show('manageApiDocumentationModal', { apiBackend })
   }
 });
+
+function doPoll(docUrl) {
+  // Check doc is served on docUrl, return true on success
+  let poll = $.get(docUrl, function() {
+    return true;
+  });
+  // Callback on error
+  poll.error(function(){
+    console.log('Error, trying again in 5 seconds.');
+    setTimeout(doPoll, 5000, docUrl);
+  });
+  if(poll) {
+    return true;
+  }
+}
