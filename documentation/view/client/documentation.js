@@ -89,7 +89,4 @@ function doPoll(docUrl) {
     console.log('Error, trying again in 5 seconds.');
     setTimeout(doPoll, 5000, docUrl);
   });
-  if(poll) {
-    return true;
-  }
 }
