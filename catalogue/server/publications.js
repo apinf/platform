@@ -10,11 +10,16 @@ Meteor.publish('catalogue', function (options) {
     // Set up query where user ID is in manager IDs array
     query = { managerIds: userId }
   } else if (options.filterBy === "my-bookmarks") {
+    // Init variable
+    let bookmarkedApiIds = [];
     // Get user bookmarks
     const userBookmarks = ApiBookmarks.findOne({userId});
-
-    // Get bookmarked API IDs
-    const bookmarkedApiIds = userBookmarks.apiIds;
+    
+    // Check that result is not undefined
+    if( userBookmarks ) {
+      // Get bookmarked API IDs
+      bookmarkedApiIds = userBookmarks.apiIds;
+    }
 
     // Set up query object to contain bookmarked API IDs
     query = {_id: {$in: bookmarkedApiIds}};
