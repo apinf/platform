@@ -144,7 +144,8 @@
   "bookmarks_Backend": "Backend host:",
   "favourite_Remove": "Remove bookmark",
   "favourite_Add": "Add bookmark",
-  "catalogue_Title": "Available APIs",
+  "catalogue_Title": "API Catalog",
+  "catalogue_notRated": "Not rated",
   "api_backend_rating_anonymous": "Please log in to vote.",
   "feedback_submitted_by": "submitted by",
   "feedback_main_title": "Feedback and report messages",
@@ -229,6 +230,8 @@
   "editApi_hints_api_key_verification_level": "Choose 'required' if API key is required to access your API",
   "editApi_hints_api_balance_algorithm": "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
   "editApi_hints_settings": "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'",
+  "editApiBackendForm-uploadLogo": "Upload logo",
+  "uploadApiLogoButton": "Upload logo",
   "apiDocumentationSelect_noApiDocumentation": "No API documentations found.",
   "flagApiSchema_inappropriateText": "Inappropriate",
   "flagApiSchema_DefunctText": "Defunct",
@@ -264,12 +267,31 @@
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
   "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully updated!",
   "manageApiDocumentationModal_CreateDocumentation_Title": "Create documentation file",
+  "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Save",
+  "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Cancel",
   "manageApiDocumentationModal_DocumentationLink_Title": "Link to external documentation resource",
+  "catalogueTable-addedBy": "Added by",
+  "catalogueTable-updated": "Updated",
+  "catalogueGrid-addedBy": "added by",
+  "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png, .gif are accepted.",
+  "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
+  "uploadApiLogo_successfully_deleted": "Logo successfully deleted!",
+  "uploadApiLogo_confirm_delete": "Are you sure you want to delete this logo?",
+  "catalogue_FilterButtons_Show_All": "Show All",
+  "catalogue_FilterButtons_My_APIs": "My APIs",
+  "catalogue_FilterButtons_My_Bookmarks": "My Bookmarks",
+  "catalogue-AverageRating-Tooltip": "Average Rating",
+  "catalogue-Bookmark-Tooltip_User": "Bookmark API",
+  "catalogue-Bookmark-Tooltip_NonUser": "Number of bookmarks. Sign in to bookmark.",
   "schemas": {
     "apiWizard_baseInformation": {
       "name": {
         "label": "Name",
         "placeholder": "Enter a name for this API Backend"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Describe this API Backend"
       }
     },
     "apiWizard_backendInformation": {
@@ -343,5 +365,7 @@
   "viewApiBackendStatus_statusMessage_Success": "API is operating normally.",
   "viewApiBackendStatus_statusMessage_RedirectError": "Redirection.",
   "viewApiBackendStatus_statusMessage_ClientError": "Client error.",
-  "viewApiBackendStatus_statusMessage_ServerError": "Server error."
+  "viewApiBackendStatus_statusMessage_ServerError": "Server error.",
+  "apiDocumentationEditor_notAvailable": "API documentation editor is not available.",
+  "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor"
 }

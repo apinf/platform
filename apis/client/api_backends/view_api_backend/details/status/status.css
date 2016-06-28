@@ -1,5 +1,5 @@
-#api-status-indicator {
-  display:inline-block;
+.api-status-color {
+  display: inline-block;
   background-color: #a0a0a0;
   border-radius: 50%;
   -moz-border-radius: 50%;

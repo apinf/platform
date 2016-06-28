@@ -1,0 +1,66 @@
+<template name="catalogueGrid">
+  <div class="api-catalogue">
+    {{#each api in apiBackends }}
+    <div class="api-card">
+      <div class="api-card-logo">
+        {{> viewApiLogo apiBackend=api }}
+      </div>
+      {{> viewApiBackendStatus apiBackend=api width="0.6" }}
+      <div class="api-card-info">
+        <a href="/api/{{api._id}}"
+           class="api-card-name">
+          {{ api.name }}
+        </a>
+        <span class="api-card-author">
+          {{_ "catalogueGrid-addedBy"}}
+          {{ api.getApiManagersByName }}
+        </span>
+        <p class="api-card-description">
+          {{ api.description }}
+        </p>
+      </div>
+      <ul class="api-card-stats list-inline">
+        <li class="pull-left">
+          <div class="api-card-star-average"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="{{_ 'catalogue-AverageRating-Tooltip'}}">
+            {{#if api.getAverageRating }}
+            {{ api.getAverageRating }}
+            <i class="fa fa-star-half-o"></i>
+            {{/if}}
+          </div>
+        </li>
+        {{# if currentUser }}
+        <li class="pull-left">
+          <div
+               class="api-card-bookmark"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="{{_ 'catalogue-Bookmark-Tooltip_User'}}">
+            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
+            {{> favourite apiBackend=api }}
+          </div>
+        </li>
+        {{else}}
+        <li class="pull-left">
+          <div
+               class="api-card-bookmark"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
+            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
+            <i class="fa fa-bookmark bookmark-default"></i>
+          </div>
+        </li>
+        {{/if}}
+        <li class="pull-right">
+          <span class="api-card-created">
+            {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}
+          </span>
+        </li>
+      </ul>
+    </div>
+    {{/each}}
+  </div>
+</template>

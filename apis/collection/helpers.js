@@ -1,4 +1,5 @@
 import ss from 'simple-statistics';
+import { ApiBackends } from '/apis/collection/backend';
 
 ApiBackends.helpers({
   getAverageRating () {
@@ -17,8 +18,13 @@ ApiBackends.helpers({
 
       // Get the average (mean) value for API Backend ratings
       var apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
-
-      return apiBackendRatingsAverage;
+      // Return average with precision of 2 significant numbers
+      const result = Number(apiBackendRatingsAverage.toPrecision(2));
+      if( !isNaN(result) ) {
+        return Number(apiBackendRatingsAverage.toPrecision(2));
+      } else {
+        return false;
+      }
     }
   },
   setAverageRating () {
@@ -110,5 +116,26 @@ ApiBackends.helpers({
     var isManager = _.contains(managerIds, userId);
 
     return isManager;
+  },
+  getApiManagersByName () {
+    // Get Manager IDs array from API Backend document
+    const managerIds = this.managerIds;
+
+    // Create API managers array with usernames
+    const apiManagers = _.map(managerIds, function(id) {
+      if(id) {
+        // Return username of manager
+        return Meteor.users.findOne(id).username;
+      } else {
+        // If array has null return admin
+        return 'admin';
+      }
+    });
+
+    return apiManagers;
+  },
+  relativeUpdatedAt () {
+    // Return relative updated_at
+    return moment(this.updated_at).fromNow();
   }
 });

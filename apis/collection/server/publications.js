@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.publish('allApiBackends', function () {
   // Check if the user is signed in
   if (this.userId) {
@@ -18,6 +20,14 @@ Meteor.publish('myBookmarkedApis', function () {
   var bookmarkedApiIds = userBookmarksObject.apiIds;
   // get apibackends by id
   return ApiBackends.find({_id: {$in: bookmarkedApiIds}});
+});
+
+Meteor.publish('allBookmarks', () => {
+
+  // Fetch all bookmarks
+  const bookmarks = ApiBookmarks.find();
+
+  return bookmarks;
 });
 
 Meteor.publish('myManagedApis', function () {

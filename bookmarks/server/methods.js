@@ -38,9 +38,6 @@ Meteor.methods({
       ApiBookmarks.insert(userBookmarks);
     }
 
-    // Update the API Backend bookmark count
-    Meteor.call("setApiBackendBookmarkCount", backendId);
-
     return apiIds;
   }
 });
