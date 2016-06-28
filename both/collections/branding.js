@@ -82,8 +82,17 @@ Schemas.BrandingSchema = new SimpleSchema({
 Branding.attachSchema(Schemas.BrandingSchema);
 
 Branding.allow({
-  insert: function (userId) {
-    return Roles.userIsInRole(userId, ['admin']) && Branding.find().count() === 0;
+  insert: function () {
+    // get branding
+    var brandingCount = Branding.find().count();
+    // if no branding exist
+    if ( brandingCount > 0 ) {
+      // don't allow insert
+      return false;
+    } else {
+      // insert
+      return true;
+    }
   },
   update: function (userId) {
     return Roles.userIsInRole(userId, ['admin']);
