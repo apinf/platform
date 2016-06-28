@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.latestApiBackends.created = function () {
 
   // Reference to Template instance
