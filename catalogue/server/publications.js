@@ -16,10 +16,12 @@ Meteor.publish('catalogue', function (options) {
     const userBookmarks = ApiBookmarks.findOne({userId});
 
     // Get bookmarked API IDs
-    const bookmarkedApiIds = userBookmarks.apiIds;
+    if (userBookmarks) {
+      const bookmarkedApiIds = userBookmarks.apiIds;
 
-    // Set up query object to contain bookmarked API IDs
-    query = {_id: {$in: bookmarkedApiIds}};
+      // Set up query object to contain bookmarked API IDs
+      query = {_id: {$in: bookmarkedApiIds}};
+    }
   };
 
   // Find all API Backends
