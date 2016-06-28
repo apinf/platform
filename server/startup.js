@@ -11,7 +11,7 @@ Meteor.startup(function () {
       name: 'Sync API Umbrella Users and API Backends',
       schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('every 1 minutes');
+        return parser.text('every 1 hour');
       },
       job: function() {
         Meteor.call("syncApiUmbrellaUsers");
@@ -19,9 +19,6 @@ Meteor.startup(function () {
         Meteor.call("syncApiBackends");
       }
     });
-
-    Meteor.call("syncApiUmbrellaUsers");
-    Meteor.call("syncApiBackends");
 
     // Create indexes for fields in MongoDB collection (API backends search functionality)
     ApiBackends._ensureIndex({
