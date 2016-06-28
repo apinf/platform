@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Migrations.add({
   version: 1,
   name: 'Add manager role to all users that have APIs.',
