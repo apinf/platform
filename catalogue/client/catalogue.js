@@ -24,12 +24,6 @@ Template.catalogue.onCreated(function () {
     instance.subscribe("catalogue", subscriptionOptions);
   });
 
-  // Subscribe to ratings collection
-  instance.subscribe("catalogueRatings");
-
-  // Subscribe to bookmarks collection
-  instance.subscribe("catalogueBookmarks");
-
   // Subscribe to API logo colection
   instance.subscribe("allApiLogo");
 
