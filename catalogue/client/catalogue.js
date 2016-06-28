@@ -10,10 +10,12 @@ Template.catalogue.onCreated(function () {
   instance.viewMode = new ReactiveVar("grid");
 
   instance.autorun(function () {
+    // Watch for changes in the sort and filter settings
     const sortBy = instance.sortBy.get();
     const sortDirection = instance.sortDirection.get();
     const filterBy = instance.filterBy.get();
 
+    // Set up object for mongodb subscription options
     const subscriptionOptions = {
       sortBy,
       sortDirection,
@@ -38,24 +40,31 @@ Template.catalogue.onRendered(function () {
 
 Template.catalogue.helpers({
   apiBackendsCount () {
+    // Count the number of API Backends in current subscription
     return ApiBackends.find().count();
   },
   apiBackends () {
+    // Get reference to template instance
     const instance = Template.instance();
 
+    // Get sort settings
     let sortBy = instance.sortBy.get();
     let sortDirection = instance.sortDirection.get();
 
+    // Override sortDirection to match MongoDB syntax
     if (sortDirection === "ascending") {
       sortDirection = 1;
     } else {
       sortDirection = -1;
     }
 
-
+    // Set up sort options placeholder object
     const sortOptions = { sort: { } };
+
+    // Set the sort by field and direction within sortOptions
     sortOptions.sort[sortBy] = sortDirection;
 
+    // Get sorted list of API Backends
     return ApiBackends.find({}, sortOptions).fetch();
   },
   gridViewMode () {
