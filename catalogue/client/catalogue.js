@@ -47,7 +47,22 @@ Template.catalogue.helpers({
     return ApiBackends.find().count();
   },
   apiBackends () {
-    return ApiBackends.find().fetch();
+    const instance = Template.instance();
+
+    let sortBy = instance.sortBy.get();
+    let sortDirection = instance.sortDirection.get();
+
+    if (sortDirection === "ascending") {
+      sortDirection = 1;
+    } else {
+      sortDirection = -1;
+    }
+
+
+    const sortOptions = { sort: { } };
+    sortOptions.sort[sortBy] = sortDirection;
+
+    return ApiBackends.find({}, sortOptions).fetch();
   },
   gridViewMode () {
     // Get reference to template instance
