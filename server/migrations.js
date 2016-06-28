@@ -1,3 +1,5 @@
+const ApiBackends = new Mongo.Collection('apiBackends');
+
 Migrations.add({
   version: 1,
   name: 'Add manager role to all users that have APIs.',
