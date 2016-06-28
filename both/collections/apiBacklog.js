@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 ApiBacklogItems = new Mongo.Collection("apiBacklogItems");
 
 ApiBacklogItems.attachSchema(new SimpleSchema({
