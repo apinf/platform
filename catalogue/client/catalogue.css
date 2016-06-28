@@ -17,3 +17,12 @@
 .sort-options-form {
   display: inline;
 }
+
+#catalogue-toolbar {
+  margin-left: 0.93em;
+  margin-right: 0.93em;
+}
+
+.catalogue-main-title {
+  margin-left: 0.63em;
+}
