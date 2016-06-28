@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.startup(function () {
   try {
 
