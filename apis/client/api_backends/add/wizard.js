@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.addApiBackendWizard.onCreated(function(){
   Wizard.useRouter('iron:router');
 });
@@ -96,11 +98,6 @@ Template.addApiBackendWizard.helpers({
         // Add the least connections balance algorithm setting
         apiBackend.balance_algorithm = "least_conn";
 
-        // Delete unneeded properties: database insert/update related
-        delete apiBackend.insertDoc;
-        delete apiBackend.updateDoc;
-        delete apiBackend.backend_port;
-
         Meteor.call("getApiUmbrellaHostName", function (error, apiUmbrellaHost) {
           // Set frontend host to API Umbrella host value
           apiBackend.frontend_host = apiUmbrellaHost;
@@ -109,13 +106,17 @@ Template.addApiBackendWizard.helpers({
           Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
             if (apiUmbrellaWebResponse.http_status === 200) {
               // Get API Backend from API Umbrella response
-              var apiBackend = apiUmbrellaWebResponse.result.data.api;
+              var apiBackendCreated = apiUmbrellaWebResponse.result.data.api;
 
+              // Create object for insert to Apinf
+              let newApiBackend = apiBackendCreated;
+              // Add current user as API manager
+              newApiBackend.managerIds = [Meteor.userId()];
               // Insert the API Backend
-              var apiBackendId = ApiBackends.insert(apiBackend);
+              var apiBackendId = ApiBackends.insert(newApiBackend);
 
               // Get the ID of the newly created API Backend
-              var apiUmbrellaApiId = apiBackend.id;
+              var apiUmbrellaApiId = apiBackendCreated.id;
 
               // Tell Wizard the submission is complete
               context.done();

@@ -7,7 +7,7 @@ Template.catalogue.onCreated(function () {
   instance.sortBy = new ReactiveVar("name");
   instance.sortDirection = new ReactiveVar("ascending");
   instance.filterBy = new ReactiveVar("show-all");
-  instance.viewMode = new ReactiveVar("card");
+  instance.viewMode = new ReactiveVar("grid");
 
   instance.autorun(function () {
     const sortBy = instance.sortBy.get();
@@ -23,6 +23,18 @@ Template.catalogue.onCreated(function () {
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
   });
+
+  // Subscribe to ratings collection
+  instance.subscribe("catalogueRatings");
+
+  // Subscribe to bookmarks collection
+  instance.subscribe("catalogueBookmarks");
+
+  // Subscribe to API logo colection
+  instance.subscribe("allApiLogo");
+
+  // Subscribe to Meteor.users to show authors. Show only visible authors.
+  instance.subscribe("allUsers");
 });
 
 Template.catalogue.onRendered(function () {
@@ -33,15 +45,27 @@ Template.catalogue.onRendered(function () {
 Template.catalogue.helpers({
   apiBackendsCount () {
     return ApiBackends.find().count();
-  // },
-  // tableViewMode () {
-  //   // Get reference to template instance
-  //   const instance = this;
-  //
-  //   // Get view mode from template
-  //   const viewMode = instance.viewMode.get();
-  //
-  //   return (viewMode === "table");
+  },
+  apiBackends () {
+    return ApiBackends.find().fetch();
+  },
+  gridViewMode () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get view mode from template
+    const viewMode = instance.viewMode.get();
+
+    return (viewMode === "grid");
+  },
+  tableViewMode () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get view mode from template
+    const viewMode = instance.viewMode.get();
+
+    return (viewMode === "table");
   }
 });
 

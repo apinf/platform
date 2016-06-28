@@ -32,6 +32,9 @@ Template.manageApiDocumentationModal.onCreated(function () {
     // Save apibackend id
     Session.set('currentApiBackend', apiBackend);
   });
+
+  // Subscribe to documentation editor settings
+  instance.subscribe('singleSetting', 'apiDocumentationEditor');
 });
 
 Template.manageApiDocumentationModal.onDestroyed(function() {
@@ -68,6 +71,10 @@ Template.manageApiDocumentationModal.events({
   'click #save-documentation-link': function(event, instance) {
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
+  },
+  'click #open-api-editor': function(event, instance) {
+    // Hide modal
+    Modal.hide('manageApiDocumentationModal');
   }
 });
 
@@ -87,6 +94,19 @@ Template.manageApiDocumentationModal.helpers({
     // Check if documentation file is available
     if (currentDocumentationFile) {
       return currentDocumentationFile;
+    }
+  },
+  apiDocumentationEditorIsEnabled: function() {
+    // Get settings
+    const settings = Settings.findOne();
+
+    // Check settings exists, editor is enabled and host setting exists
+    if(settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
+      // Editor is enabled and has host setting, return true
+      return true;
+    } else {
+      // Otherwise return false
+      return false;
     }
   }
 });

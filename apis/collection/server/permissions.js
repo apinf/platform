@@ -1,5 +1,7 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 ApiBackends.allow({
-  insert: function () {
+  insert: function (userId, apiBackendDoc) {
     return true;
   },
   update: function (userId, apiBackendDoc) {
