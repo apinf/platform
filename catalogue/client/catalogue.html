@@ -23,25 +23,29 @@
           <p class="navbar-text sort-filter-toolbar-title">
             Sort by
           </p>
-          <form class="form navbar-form navbar-nav" id="sort-options-select">
-            <select name="sort-menu" class="form-control" id="sort-select">
-              <option value="name">
-                Name
-              </option>
-              <option value="backend_host">
-                Backend
-              </option>
-              <option value="bookmarkCount">
-                Popularity
-              </option>
-              <option value="averageRating">
-                Rating
-              </option>
-              <option value="created_at">
-                Recency
-              </option>
-            </select>
-          </form>
+          <div class="form-group sort-options-form">
+            <form class="form navbar-form navbar-nav" id="sort-options-select">
+              <select name="sort-menu" class="form-control sort-options-select" id="sort-select">
+                <option value="name">
+                  Name
+                </option>
+                <option value="backend_host">
+                  Backend
+                </option>
+                <option value="bookmarkCount">
+                  Popularity
+                </option>
+                <option value="averageRating">
+                  Rating
+                </option>
+                <option value="created_at">
+                  Recency
+                </option>
+              </select>
+            </form>
+          </div>
+        </div>
+        <div class="nav navbar-nav">
           <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
             <label class="btn btn-default toolbar-tooltip active" title="Ascending">
               <input type="radio" name="sort-direction" id="sort-ascending" value="ascending">
