@@ -39,6 +39,8 @@ AutoForm.addHooks(['settings'], {
     // Check if we can create ApiUmbrellaWeb object
     try {
       Meteor.call("createApiUmbrellaWeb");
+      Meteor.call("syncApiUmbrellaUsers");
+      Meteor.call("syncApiBackends");
     }
     // otherwise show an error
     catch (error) {
@@ -53,4 +55,3 @@ FlashMessages.configure({
   hideDelay: 5000,
   autoScroll: false
 });
-
