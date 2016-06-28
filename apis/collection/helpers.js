@@ -126,7 +126,7 @@ ApiBackends.helpers({
       let userById;
       if(id) {
         userById = Meteor.users.findOne(id);
-        if(userById) {
+        if(userById && userById.username) {
           // Return username of manager
           return userById.username;
         }
