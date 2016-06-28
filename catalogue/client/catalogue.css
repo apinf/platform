@@ -1,5 +1,5 @@
-#sort-options-select {
-  padding-left: 0;
+.sort-options-select {
+  padding-left: 0.5em;
 }
 
 .filter-options-menu {
@@ -12,4 +12,8 @@
 
 .sort-filter-toolbar-title {
   margin-left: 0;
+}
+
+.sort-options-form {
+  display: inline;
 }
