@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.publish('catalogue', function (options) {
   // Set up query object placeholder
   let query = {};

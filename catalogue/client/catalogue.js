@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ApiBackends } from '/apis/collection/backend';
 
 Template.catalogue.onCreated(function () {
   const instance = this;

@@ -1,4 +1,5 @@
 import { ApiLogo } from '/apis/logo/collection/collection';
+import { ApiBackends } from '/apis/collection/backend';
 
 Template.viewApiLogo.onCreated(function() {
   const instance = this;
