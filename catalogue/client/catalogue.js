@@ -13,7 +13,6 @@ Template.catalogue.onCreated(function () {
     const sortBy = instance.sortBy.get();
     const sortDirection = instance.sortDirection.get();
     const filterBy = instance.filterBy.get();
-    const viewMode = instance.viewMode.get();
 
     const subscriptionOptions = {
       sortBy,
@@ -23,8 +22,6 @@ Template.catalogue.onCreated(function () {
 
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
-
-    console.log(sortBy, sortDirection, filterBy, viewMode);
   });
 });
 
