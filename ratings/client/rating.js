@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.apiBackendRating.created = function () {
   // Get reference to template instance
   var instance = this;
