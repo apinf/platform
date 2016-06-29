@@ -36,7 +36,16 @@ Meteor.methods({
     } else {
       // Insert bookmark to database
       ApiBookmarks.insert(userBookmarks);
-    }
+    };
+
+    // Get reference to API Backend
+    const apiBackend = ApiBackends.findOne(backendId);
+
+    // Get the API Backend bookmark count
+    const bookmarkCount = apiBackend.getBookmarkCount();
+
+    // Update the API Backend bookmark count
+    ApiBackends.update(apiBackend, {$set: { bookmarkCount }});
 
     return apiIds;
   }
