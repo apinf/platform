@@ -83,6 +83,8 @@ AutoForm.addHooks(['wizardSettings'], {
     // Check if we can create ApiUmbrellaWeb object
     try {
       Meteor.call("createApiUmbrellaWeb");
+      Meteor.call("syncApiUmbrellaUsers");
+      Meteor.call("syncApiBackends");
       Meteor.call("initialSetupCompleteTrue", function() {
         Router.go("dashboard");
       });
