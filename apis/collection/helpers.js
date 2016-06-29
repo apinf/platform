@@ -123,9 +123,13 @@ ApiBackends.helpers({
 
     // Create API managers array with usernames
     const apiManagers = _.map(managerIds, function(id) {
+      let userById;
       if(id) {
-        // Return username of manager
-        return Meteor.users.findOne(id).username;
+        userById = Meteor.users.findOne(id);
+        if(userById && userById.username) {
+          // Return username of manager
+          return userById.username;
+        }
       } else {
         // If array has null return admin
         return 'admin';

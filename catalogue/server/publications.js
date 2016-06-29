@@ -15,6 +15,7 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
     // Set up query where user ID is in manager IDs array
     selector = { managerIds: userId }
   } else if (userId && filterBy === "my-bookmarks") {
+
     // Get user bookmarks
     const userBookmarks = ApiBookmarks.findOne({userId: userId});
 
