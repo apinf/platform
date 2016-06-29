@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.methods({
   "toggleBookmarkApi": function (backendId, currentUserId) {
     // Create an array containing the backend ID for use in the collection query, etc.
