@@ -1,8 +1,8 @@
-#sort-options-select {
-  padding-left: 0;
+.sort-options-select {
+  padding-left: 0.5em;
 }
 
-.nav-center {
+.filter-options-menu {
   padding-left: 1em;
 }
 
@@ -12,4 +12,17 @@
 
 .sort-filter-toolbar-title {
   margin-left: 0;
+}
+
+.sort-options-form {
+  display: inline;
+}
+
+#catalogue-toolbar {
+  margin-left: 0.93em;
+  margin-right: 0.93em;
+}
+
+.catalogue-main-title {
+  margin-left: 0.63em;
 }

@@ -22,8 +22,8 @@
             </i>
             <br>
             <i>
-              {{_ "catalogueTable-updated"}}
-              {{ api.relativeUpdatedAt }}
+              {{_ "catalogueTable-added"}}
+              {{ api.relativeCreatedAt }}
             </i>
           </td>
           <td class="col-sm-1">
@@ -33,12 +33,12 @@
             {{# if currentUser }}
             <span class="api-card-bookmark">
               {{> favourite apiBackend=api }}
-              {{ api.getBookmarkCount }}
+              {{ api.bookmarkCount }}
             </span>
             {{else}}
             <span class="api-card-bookmark">
               <i class="fa fa-bookmark bookmark-default"></i>
-              {{ api.getBookmarkCount }}
+              {{ api.bookmarkCount }}
             </span>
             {{/if}}
           </td>

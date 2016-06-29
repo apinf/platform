@@ -1,66 +1,70 @@
 <template name="catalogueGrid">
-  <div class="api-catalogue">
-    {{#each api in apiBackends }}
-    <div class="api-card">
-      <div class="api-card-logo">
-        {{> viewApiLogo apiBackend=api }}
-      </div>
-      {{> viewApiBackendStatus apiBackend=api width="0.6" }}
-      <div class="api-card-info">
-        <a href="/api/{{api._id}}"
-           class="api-card-name">
-          {{ api.name }}
-        </a>
-        <span class="api-card-author">
-          {{_ "catalogueGrid-addedBy"}}
-          {{ api.getApiManagersByName }}
-        </span>
-        <p class="api-card-description">
-          {{ api.description }}
-        </p>
-      </div>
-      <ul class="api-card-stats list-inline">
-        <li class="pull-left">
-          <div class="api-card-star-average"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue-AverageRating-Tooltip'}}">
-            {{#if api.getAverageRating }}
-            {{ api.getAverageRating }}
-            <i class="fa fa-star-half-o"></i>
+  <div class="api-catalogue container-fluid">
+    <div class="row">
+      {{#each api in apiBackends }}
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="api-card ">
+          <div class="api-card-logo">
+            {{> viewApiLogo apiBackend=api }}
+          </div>
+          {{> viewApiBackendStatus apiBackend=api width="0.6" }}
+          <div class="api-card-info">
+            <a href="/api/{{api._id}}"
+               class="api-card-name">
+              {{ api.name }}
+            </a>
+            <span class="api-card-author">
+              {{_ "catalogueGrid-addedBy"}}
+              {{ api.getApiManagersByName }}
+            </span>
+            <p class="api-card-description">
+              {{ api.description }}
+            </p>
+          </div>
+          <ul class="api-card-stats list-inline">
+            <li class="pull-left">
+              <div class="api-card-star-average"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="{{_ 'catalogue-AverageRating-Tooltip'}}">
+                {{#if api.averageRating }}
+                {{ api.averageRating }}
+                <i class="fa fa-star-half-o"></i>
+                {{/if}}
+              </div>
+            </li>
+            {{# if currentUser }}
+            <li class="pull-left">
+              <div
+                   class="api-card-bookmark"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="{{_ 'catalogue-Bookmark-Tooltip_User'}}">
+                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+                {{> favourite apiBackend=api }}
+              </div>
+            </li>
+            {{else}}
+            <li class="pull-left">
+              <div
+                   class="api-card-bookmark"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
+                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+                <i class="fa fa-bookmark bookmark-default"></i>
+              </div>
+            </li>
             {{/if}}
-          </div>
-        </li>
-        {{# if currentUser }}
-        <li class="pull-left">
-          <div
-               class="api-card-bookmark"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue-Bookmark-Tooltip_User'}}">
-            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
-            {{> favourite apiBackend=api }}
-          </div>
-        </li>
-        {{else}}
-        <li class="pull-left">
-          <div
-               class="api-card-bookmark"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
-            <span class="api-card-bookmark-number">{{ api.getBookmarkCount }}</span>
-            <i class="fa fa-bookmark bookmark-default"></i>
-          </div>
-        </li>
-        {{/if}}
-        <li class="pull-right">
-          <span class="api-card-created">
-            {{_ "latestApiBackends_DateAdded" api.relativeUpdatedAt }}
-          </span>
-        </li>
-      </ul>
+            <li class="pull-right">
+              <span class="api-card-created">
+                {{_ "latestApiBackends_DateAdded" api.relativeCreatedAt }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {{/each}}
     </div>
-    {{/each}}
   </div>
 </template>
