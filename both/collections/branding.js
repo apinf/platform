@@ -28,11 +28,6 @@ Schemas.BrandingSchema = new SimpleSchema({
     optional: true,
     label: 'Site title'
   },
-  siteAbbreviation: {
-    type: String,
-    optional: true,
-    label: 'Site abbreviation'
-  },
   siteSlogan: {
     type: String,
     optional: true,
