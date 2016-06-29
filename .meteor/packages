@@ -81,7 +81,6 @@ tap:i18n-ui
 kadira:dochead
 gwendall:autoform-i18n
 forwarder:autoform-wizard-iron-router
-percolate:migrations
 peppelg:bootstrap-3-modal
 apinf:api-umbrella
 standard-minifier-css
