@@ -1,7 +1,4 @@
 Meteor.startup(function () {
-  // Run migrations first
-  Migrations.migrateTo('latest');
-
   try {
 
     Meteor.call("createApiUmbrellaWeb");
@@ -18,12 +15,6 @@ Meteor.startup(function () {
         Meteor.call("syncApiUmbrellaAdmins");
         Meteor.call("syncApiBackends");
       }
-    });
-
-    // Create indexes for fields in MongoDB collection (API backends search functionality)
-    ApiBackends._ensureIndex({
-      "name": 1,
-      "backend_host": 1
     });
 
     // Initialize cron jobs

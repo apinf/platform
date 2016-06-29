@@ -1,4 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
+import { ApiBackends } from '/apis/collection/backend';
 
 Template.manageApiDocumentationModal.onCreated(function () {
 
@@ -108,5 +109,8 @@ Template.manageApiDocumentationModal.helpers({
       // Otherwise return false
       return false;
     }
+  },
+  formCollection() {
+    return ApiBackends;
   }
 });

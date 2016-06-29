@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 AutoForm.hooks({
   apiBackendForm: {
     beginSubmit: function () {

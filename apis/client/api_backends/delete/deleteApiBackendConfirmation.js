@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.deleteApiBackendConfirmation.onCreated(function() {
   // reference to this template
   const instance = this;

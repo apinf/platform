@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.manageApiBackends.created = function () {
   this.subscribe('myManagedApis');
 };

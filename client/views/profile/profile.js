@@ -1,3 +1,5 @@
+import Clipboard from "clipboard";
+
 AutoForm.hooks({
   updateProfile: {
     onSuccess: function(operation, result, template) {

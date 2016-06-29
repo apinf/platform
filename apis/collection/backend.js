@@ -1,4 +1,4 @@
-ApiBackends = new Mongo.Collection('apiBackends');
+const ApiBackends = new Mongo.Collection('apiBackends');
 
 // RegEx constants
 SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{1,5}$/);
