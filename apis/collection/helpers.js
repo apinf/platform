@@ -141,5 +141,9 @@ ApiBackends.helpers({
   relativeUpdatedAt () {
     // Return relative updated_at
     return moment(this.updated_at).fromNow();
+  },
+  relativeCreatedAt () {
+    // Return relative updated_at
+    return moment(this.created_at).fromNow();
   }
 });

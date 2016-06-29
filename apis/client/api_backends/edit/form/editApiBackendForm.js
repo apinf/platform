@@ -1,3 +1,11 @@
+import { ApiBackends } from '/apis/collection/backend';
+
+Template.editApiBackendForm.helpers({
+  formCollection() {
+    return ApiBackends;
+  }
+});
+
 Template.editApiBackendForm.rendered = function () {
   // Hides blocks on template load
   $('#global-request-block, #sub-url-block, #advanced-block, #advanced-rewriting-block, #documentation-block').collapse({

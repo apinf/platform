@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.viewApiBackendDetails.events({
   // event handler to execute when delete API button is clicked
   "click #deleteModal": function() {
