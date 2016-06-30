@@ -1,5 +1,19 @@
+/* Bootstrap */
+@import "/client/style/bootstrap-variables.less";
+
 .logo-lg {
   margin: auto;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand > img {
+  //  height: 100%;
+  padding: 0.93em;
+  //  width: auto;
+  height: 2.10em;
+  margin-top: 0.2em
 }
 
 .master-layout {
@@ -17,4 +31,78 @@
     margin-bottom: 0.25em;
     margin-left: 0.1em;
   }
+
+
+  /* Navbar */
+  .main-navigation {
+    background-color: @home-navigation;
+    -webkit-box-shadow: 0 0.25em 0 0 rgba(0,0,0,.15);
+    box-shadow: 0 0.25em 0 0 rgba(0,0,0,.15);
+    position: relative;
+    z-index: 9;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 2em;
+  }
+
+  .main-navigation .navbar-header {
+    padding-left: 0.9em;
+  }
+
+  .navbar-brand {
+    padding: 0;
+  }
+
+  .navbar-brand > img {
+    height: 100%;
+    padding: 0.9em;
+    width: auto;
+  }
+
+  .main-navigation .navbar-brand {
+    background: center / contain no-repeat;
+    width: 140px;
+  }
+
+  .main-navigation .navbar-toggle {
+    margin-top: 0.18em;
+    margin-bottom: 0.06em;
+    margin-left: 0;
+    margin-right: 0.18em;
+  }
+
+  .main-navigation .navbar-toggle > .icon-bar {
+    background-color: #fff;
+  }
+
+  .main-navigation .navbar-toggle:hover, .navbar-toggle:focus {
+    background-color: darken(@brand-primary, 5%);
+  }
+
+  .navbar-default .navbar-brand {
+    padding-top: 0.5em;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: @home-navigation-link-hover;
+  }
+
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:active {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: darken(@brand-primary, 5%);
+    text-decoration: @link-hover-decoration;
+  }
+
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: darken(@brand-primary, 5%);
+  }
+
+  .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: darken(@brand-primary, 5%);
+  }
+
 }
