@@ -42,10 +42,7 @@ Template.chartsLayout.onCreated(function () {
         'response_time',
         'request_ip_country',
         'request_ip',
-        'request_path',
-        'request_ip_location.lon',
-        'request_ip_location.lat',
-        'api_key'
+        'request_path'
       ]
     }
   }
