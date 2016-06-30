@@ -51,9 +51,6 @@ Template.chartsLayout.onCreated(function () {
 
     if (err) throw new Meteor.error(err);
 
-    console.log('Got result!');
-    console.log('Took ' + (new Date().getTime() - instance.timeStart) / 1000 + ' seconds.');
-
     const hits = res.hits.hits; // Get list of items for analytics
 
     instance.esData.set(hits); // Update reactive variable
