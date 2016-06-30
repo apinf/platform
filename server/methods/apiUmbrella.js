@@ -80,5 +80,62 @@ Meteor.methods({
         }
       });
     }
+  },
+  // Create API key & attach it for given user,
+  // Might throw errors, catch on client callback
+  createAPIkeyForCurrentUser () {
+    // Get logged in user
+    const currentUser = Meteor.user();
+    // Check currentUser exists
+    if(currentUser) {
+      // Check apiUmbrellaWeb global object exists
+      if (apiUmbrellaWeb) {
+        // Create API Umbrella user object with required fields
+        apiUmbrellaUserObj = {
+          "user": {
+            "email": currentUser.emails[0].address,
+            "first_name": "-",
+            "last_name": "-",
+            "terms_and_conditions": true
+          }
+        };
+
+        // Try to create user on API Umbrella
+        try {
+          // Add user on API Umbrella
+          response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
+
+          // Set fieldsToBeUpdated
+          const fieldsToBeUpdated = {
+            'apiUmbrellaUserId': response.data.user.id,
+            'profile.apiKey': response.data.user.api_key
+          };
+
+          // Update currentUser
+          Meteor.users.update({_id: currentUser._id}, {$set: fieldsToBeUpdated});
+
+          // Insert full API Umbrella user object into API Umbrella Users collection
+          ApiUmbrellaUsers.insert(response.data.user);
+        } catch (error) {
+          // Meteor Error (User create failed on Umbrella)
+          throw new Meteor.Error(
+            "umbrella-createuser-error",
+            "Failed to create user on API Umbrella."
+          );
+        }
+      } else {
+        // Meteor Error (apiUmbrellaWeb not defined)
+        throw new Meteor.Error(
+          "umbrella-notdefined-error",
+          "API Umbrella not defined."
+        );
+      }
+    } else {
+      // Meteor Error (User not logged in)
+      throw new Meteor.Error(
+        "apinf-usernotloggedin-error",
+        "Could not find logged in user."
+      );
+    }
   }
 });
