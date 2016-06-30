@@ -8,6 +8,16 @@ html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: @font-family-default;
 }
 
+a:hover, a:focus {
+  color: darken(@brand-primary, 5%);
+  text-decoration: underline;
+}
+
+a {
+  color: @brand-primary;
+  text-decoration: none;
+}
+
 .layout {
   min-height: 80%;
 }
@@ -23,11 +33,11 @@ html, body, h1, h2, h3, h4, h5, h6, p {
 
 /*Styles for Dynatable*/
 th a {
-  color: #1c4862;
+  color: @brand-primary;
 }
 
 .dynatable-active-page {
-  background-color: #1c4862;
+  background-color: @brand-primary;
 }
 
 .help-block {
