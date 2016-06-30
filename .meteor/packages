@@ -28,7 +28,6 @@ useraccounts:bootstrap
 service-configuration
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
-momentjs:moment
 zimme:iron-router-active
 matb33:collection-hooks
 dburles:collection-helpers
