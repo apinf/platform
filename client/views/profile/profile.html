@@ -7,13 +7,27 @@
         <div class="panel-body">
           {{> afQuickField name="username"}}
           {{> afQuickField name="profile.company"}}
-          {{> afQuickField name="profile.apiKey"}}
           <button type="submit" class="btn btn-success profile-update">
             {{_ "profile_UpdateButton"}}
           </button>
         </div>
       </div>
       {{/autoForm}}
+      <div class="panel panel-default">
+        <div class="panel-heading profile-header">{{_ "profile_UmbrellaHeader"}}</div>
+        <div class="panel-body">
+          {{#if currentUser.profile.apiKey }}
+            <b>API Key:&nbsp;</b>{{ currentUser.profile.apiKey }}
+          {{ else }}
+            <!-- Get API key button -->
+            <p>
+              <button class="btn btn-primary get-umbrellaApiKey">
+                {{_ "profile_getUmbrellaApiKey"}}
+              </button>
+            </p>
+          {{/if }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
