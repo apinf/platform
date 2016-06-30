@@ -11,14 +11,10 @@ Template.chartsLayout.onCreated(function () {
 
   const instance = this;
 
-  instance.esData = new ReactiveVar();
-  instance.parsedData = new ReactiveVar();
+  instance.esData = new ReactiveVar(); // Handles ES data for charts
+  instance.tableDataSet = new ReactiveVar([]); // Handles parsed data for charts
 
-  instance.dataTableElement = {};
-
-  instance.tableDataSet = new ReactiveVar([]);
-
-  instance.timeStart = new Date().getTime();
+  instance.timeStart = new Date().getTime(); // Timer
 
   const params = {
     size: 50000,
@@ -56,36 +52,37 @@ Template.chartsLayout.onCreated(function () {
 
   Meteor.call('getElasticSearchData', params, (err, res) => {
 
-    if (err) console.log('err: ', err);
+    if (err) throw new Meteor.error(err);
 
     console.log('Got result!');
     console.log('Took ' + (new Date().getTime() - instance.timeStart) / 1000 + ' seconds.');
 
-    const hits = res.hits.hits;
+    const hits = res.hits.hits; // Get list of items for analytics
 
-    instance.esData.set(hits);
+    instance.esData.set(hits); // Update reactive variable
   });
 
-  instance.parseChartData = function (chartData) {
+  instance.parseChartData = function (items) {
 
-    const items = chartData;
+    const index = new crossfilter(items); // Create crossfilter
 
-    const index = new crossfilter(items);
+    const dateFormat = d3.time.format("%Y-%m-%d-%H"); // Init dateformat for charts
 
-    const dateFormat = d3.time.format("%Y-%m-%d-%H");
-
+    // Create dimension based on a timestamp
     const timeStampDimension = index.dimension((d) => {
 
       let timeStamp = moment(d.fields.request_at[0]);
 
-      timeStamp = timeStamp.format('YYYY-MM-DD-HH');
+      timeStamp = timeStamp.format('YYYY-MM-DD-HH'); // Format timestamp
 
-      d.fields.ymd = dateFormat.parse(timeStamp);
+      d.fields.ymd = dateFormat.parse(timeStamp); // Check if timestamp formats match
 
       return d.fields.ymd;
     });
-    const timeStampGroup = timeStampDimension.group();
 
+    const timeStampGroup = timeStampDimension.group(); // Create timestamp group
+
+    // Create dimension based on status code
     const statusCodeDimension = index.dimension((d) => {
 
       const statusCode = d.fields.response_status[0];
@@ -98,6 +95,7 @@ Template.chartsLayout.onCreated(function () {
       const clientErr = /^4[0-9][0-9]$/;
       const serverErr = /^5[0-9][0-9]$/;
 
+      // Find out in which scope status code is
       if (success.test(statusCode)) {
         statusCodeScope = '2XX';
       } else if (redirect.test(statusCode)) {
@@ -110,26 +108,37 @@ Template.chartsLayout.onCreated(function () {
 
       return statusCodeScope;
     });
-    const statusCodeGroup = statusCodeDimension.group();
 
-    const binwidth = 100;
+    const statusCodeGroup = statusCodeDimension.group(); // Create status code group
+
+    const binwidth = 100; // Init binwidth for a bar chart
+
+    // Get MIN and MAX response time values
     const minResponseTime = d3.min(items, function(d) { return d.fields.response_time[0]; });
     const maxResponseTime = d3.max(items, function(d) { return d.fields.response_time[0]; });
-    const responseTimeDimension = index.dimension((d) => { return d.fields.response_time[0]; });
 
+    // Create dimension based on response time
+    const responseTimeDimension = index.dimension((d) => {
+      return d.fields.response_time[0];
+    });
+
+    // Create response time group
     const responseTimeGroup = responseTimeDimension.group((d) => {
       return binwidth * Math.floor(d / binwidth);
     });
 
-    const all = index.groupAll();
+    const all = index.groupAll(); // Group add dimensions
 
+    // Keep data counters on a dashboard updated
     dc.dataCount("#row-selection")
       .dimension(index)
       .group(all);
 
+    // Get MIN and MAX timestamp values
     const minDate = d3.min(items, function(d) { return d.fields.ymd; });
     const maxDate = d3.max(items, function(d) { return d.fields.ymd; });
 
+    // Init scales for axis
     const timeScaleForLine = d3.time.scale().domain([minDate, maxDate]);
     const timeScaleForFocus = d3.time.scale().domain([minDate, maxDate]);
     const xScaleForBar = d3.scale.pow().domain([minResponseTime, 1000]);
@@ -163,6 +172,7 @@ Template.chartsLayout.onCreated(function () {
       binwidth
     } = parsedData;
 
+    // Init charts
     const line = dc.lineChart('#line-chart');
     const focus = dc.barChart('#focus-chart');
     const row = dc.rowChart('#row-chart');
@@ -216,28 +226,20 @@ Template.chartsLayout.onCreated(function () {
       .renderHorizontalGridLines(true)
       .xAxis().ticks(10);
 
-    dc.renderAll();
+    dc.renderAll(); // Render all charts
 
-    for (let i = 0; i < dc.chartRegistry.list().length; i++) {
-
-      const chartI = dc.chartRegistry.list()[i];
-
-      chartI.on("filtered", () => {
-
+    // Iterate throuh each chart in a registry & set listeners for filtering
+    _.forEach(dc.chartRegistry.list(), (chart) => {
+      chart.on("filtered", () => {
         instance.updateDataTable(timeStampDimension);
         instance.updateLineChart(line, focus, timeScaleForLine);
-
       });
-    }
+    });
 
     instance.updateDataTable(timeStampDimension);
   }
 
-  instance.updateDataTable = function (timeStampDimension) {
-    const tableData = instance.getTableData(timeStampDimension);
-    instance.tableDataSet.set(tableData);
-  }
-
+  // Function that gets and parsed data for table
   instance.getTableData = function (timeStampDimension) {
 
     let tableDataSet = [];
@@ -273,10 +275,19 @@ Template.chartsLayout.onCreated(function () {
     return tableDataSet;
   }
 
+  // Function that updates table data
+  instance.updateDataTable = function (timeStampDimension) {
+    const tableData = instance.getTableData(timeStampDimension);
+    instance.tableDataSet.set(tableData);
+  }
+
+  // Function that updates time scale for line chart
   instance.updateLineChart = function (line, focus, timeScaleForLine) {
 
+    // Get current time range
     const selectedTimeRange = focus.filter();
 
+    // Check if filter was set
     if (selectedTimeRange) {
       line.x(d3.time.scale().domain(selectedTimeRange));
     } else {
@@ -290,21 +301,22 @@ Template.chartsLayout.onRendered(function () {
 
   const instance = this;
 
+  // Get reference to chart html elemets
   const chartElemets = $('#line-chart, #focus-chart, #row-chart, #bar-chart');
 
-  chartElemets.addClass('loader');
+  chartElemets.addClass('loader'); // Set loader
 
   instance.autorun(() => {
 
-    const chartData = instance.esData.get();
+    const chartData = instance.esData.get(); // Get elasticsearch data
 
     if (chartData) {
 
-      const parsedData = instance.parseChartData(chartData);
+      const parsedData = instance.parseChartData(chartData); // Parse ES data
 
-      instance.renderCharts(parsedData);
+      instance.renderCharts(parsedData); // Render chart with data
 
-      chartElemets.removeClass('loader');
+      chartElemets.removeClass('loader'); // Unset loader
     }
   });
 });
