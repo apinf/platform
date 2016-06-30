@@ -1,423 +1,326 @@
+import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+
+import './main.html';
+
+import _ from 'lodash';
+import moment from 'moment';
 import dc from 'dc';
-import dataTeble from 'datatables';
+import d3 from 'd3';
+import crossfilter from 'crossfilter';
 
-Template.chartsLayout.rendered = function () {
+Template.chartsLayout.onCreated(function () {
 
-  // assigning current template instance to a variable
-  var instance = this;
+  const instance = this;
 
-  // appending loading state
-  $('#loadingState').html("Loading...");
+  instance.esData = new ReactiveVar();
+  instance.parsedData = new ReactiveVar();
 
-  // gets current month and year -> providing them for initial query
-  var currentYearAndMonth = moment().format("YYYY-MM");
+  instance.dataTableElement = {};
 
-  // sets default items amount to be returned
-  var initialLimit = 10000;
+  instance.tableDataSet = new ReactiveVar([]);
 
-  // sets query for elastic search
-  var input = {
-    index : "api-umbrella-logs-v1-"+currentYearAndMonth,
-    type  : "log",
-    limit : initialLimit,
-    fields: [
-      'request_at',
-      'request_ip_country',
-      'request_ip',
-      'response_time',
-      'request_path',
-      'request_ip_location.lon',
-      'request_ip_location.lat'
-    ]
-  };
+  instance.timeStart = new Date().getTime();
 
-  // get data
-  instance.getDashboardData(input);
-
-  // render map
-  instance.renderMap();
-
-  // set an autorun function
-  instance.autorun(function () {
-
-    // dashboard data from reactive variable
-    var mapData = instance.mapData.get();
-
-    // checks if data has type of object, by default it is string
-    if (typeof mapData === 'object') {
-
-      // checks if map already has layer with heat points
-      if (instance.map.hasLayer(instance.heatLayer)) {
-
-        // removes heat layer in one is set
-        instance.map.removeLayer(instance.heatLayer);
-
-      }
-
-      // creates new heat layer
-      instance.heatLayer = L.heatLayer(mapData);
-
-      // adds heat to a map
-      instance.heatLayer.addTo(instance.map);
-
+  const params = {
+    size: 50000,
+    body: {
+      query: {
+        filtered: {
+          query: {
+            match_all: {}
+          },
+          filter: {
+            range: {
+              request_at: {
+                gte: moment().subtract(30, 'day').valueOf()
+              }
+            }
+          }
+        }
+      },
+      sort : [
+          { request_at : { order : 'desc' }},
+      ],
+      fields: [
+        'request_at',
+        'response_status',
+        'response_time',
+        'request_ip_country',
+        'request_ip',
+        'request_path',
+        'request_ip_location.lon',
+        'request_ip_location.lat',
+        'api_key'
+      ]
     }
+  }
 
+  Meteor.call('getElasticSearchData', params, (err, res) => {
+
+    if (err) console.log('err: ', err);
+
+    console.log('Got result!');
+    console.log('Took ' + (new Date().getTime() - instance.timeStart) / 1000 + ' seconds.');
+
+    const hits = res.hits.hits;
+
+    instance.esData.set(hits);
   });
 
+  instance.parseChartData = function (chartData) {
 
-};
+    const items = chartData;
 
-Template.chartsLayout.created = function () {
+    const index = new crossfilter(items);
 
-  // assigning current template instance to a variable
-  var instance = this;
+    const dateFormat = d3.time.format("%Y-%m-%d-%H");
 
-  instance.dataToExport = new ReactiveVar("No data");
+    const timeStampDimension = index.dimension((d) => {
 
-  // default value for reactive variable with "String" type
-  instance.mapData = new ReactiveVar("No data");
+      let timeStamp = moment(d.fields.request_at[0]);
 
-  // defines the intensity for the heatmap with default value of 100
-  instance.heatIntensity= new ReactiveVar(100);
+      timeStamp = timeStamp.format('YYYY-MM-DD-HH');
 
-  // function that sets chart data to be available in template
-  instance.getDashboardData = function (input) {
-
-    // calling method that returns data from elastic search
-    Meteor.call("getChartData", input, function (err, response) {
-      // error checking
-      if (err) {
-
-        // Gets custom error message from i18n
-        var errorMessage = TAPi18n.__("esData-notFound");
-
-        // removing loading state once loaded
-        $('#loadingState').html(errorMessage);
-
-      } else {
-
-        // gets to level in object with needed data
-        var dashboardData = response.hits.hits;
-
-        // parse the returned data for DC
-        var parsedChartData = instance.parseChartData(dashboardData);
-
-        // parse data for map
-        var parsedMapData   = instance.parseMapData(dashboardData);
-
-        // set reactive variable with parsed map data
-        instance.mapData.set(parsedMapData);
-
-        // Render the charts using parsed data
-        instance.renderCharts(parsedChartData);
-
-      }
-    });
-  };
-
-  // function that parses chart data
-  instance.parseChartData = function (data) {
-
-    // Get chart data from within data object
-    var items = data;
-
-    // Create CrossFilter index using chart data
-    var index = new crossfilter(items);
-
-    // Create ISO date format
-    var dateFormat = d3.time.format.iso;
-
-    // Parse each item adding timestamp as YMD and count the items
-    items.forEach(function (d) {
-      // Parse timestamp to Moment .jsobject
-      var timeStamp = moment(d.fields.request_at[0]);
-
-      // Format the timestamp using Moment.js format method
-      timeStamp = timeStamp.format();
-
-      // Add YMD field to item
       d.fields.ymd = dateFormat.parse(timeStamp);
 
+      return d.fields.ymd;
+    });
+    const timeStampGroup = timeStampDimension.group();
+
+    const statusCodeDimension = index.dimension((d) => {
+
+      const statusCode = d.fields.response_status[0];
+
+      let statusCodeScope = '';
+
+      // Init regEx for status codes
+      const success = /^2[0-9][0-9]$/;
+      const redirect = /^3[0-9][0-9]$/;
+      const clientErr = /^4[0-9][0-9]$/;
+      const serverErr = /^5[0-9][0-9]$/;
+
+      if (success.test(statusCode)) {
+        statusCodeScope = '2XX';
+      } else if (redirect.test(statusCode)) {
+        statusCodeScope = '3XX';
+      } else if (clientErr.test(statusCode)) {
+        statusCodeScope = '4XX';
+      } else if (serverErr.test(statusCode)) {
+        statusCodeScope = '5XX';
+      }
+
+      return statusCodeScope;
+    });
+    const statusCodeGroup = statusCodeDimension.group();
+
+    const binwidth = 100;
+    const minResponseTime = d3.min(items, function(d) { return d.fields.response_time[0]; });
+    const maxResponseTime = d3.max(items, function(d) { return d.fields.response_time[0]; });
+    const responseTimeDimension = index.dimension((d) => { return d.fields.response_time[0]; });
+
+    const responseTimeGroup = responseTimeDimension.group((d) => {
+      return binwidth * Math.floor(d / binwidth);
     });
 
-    // Create timestamp dimension from YMD field
-    var timeStampDimension = index.dimension(function(d){ return d.fields.ymd; });
+    const all = index.groupAll();
 
-    // Group entries by timestamp dimension
-    var timeStampGroup = timeStampDimension.group();
-
-    // Create index by all dimensions
-    var all = index.groupAll();
-
-    // Providing information about current data selection
     dc.dataCount("#row-selection")
       .dimension(index)
       .group(all);
 
-    // set up a range of dates for charts
-    var minDate = d3.min(items, function(d) { return d.fields.ymd; });
-    var maxDate = d3.max(items, function(d) { return d.fields.ymd; });
+    const minDate = d3.min(items, function(d) { return d.fields.ymd; });
+    const maxDate = d3.max(items, function(d) { return d.fields.ymd; });
 
-    // Create time scale from min and max dates
-    var timeScale = d3.time.scale().domain([minDate, maxDate]);
+    const timeScaleForLine = d3.time.scale().domain([minDate, maxDate]);
+    const timeScaleForFocus = d3.time.scale().domain([minDate, maxDate]);
+    const xScaleForBar = d3.scale.pow().domain([minResponseTime, 1000]);
 
-    // Return object with all key values created above
     return {
-      timeStampDimension  : timeStampDimension,
-      timeStampGroup      : timeStampGroup,
-      timeScale           : timeScale
+      timeStampDimension,
+      timeStampGroup,
+      statusCodeDimension,
+      statusCodeGroup,
+      responseTimeDimension,
+      responseTimeGroup,
+      timeScaleForLine,
+      timeScaleForFocus,
+      xScaleForBar,
+      binwidth
     };
-  };
+  }
 
-  // function that renders charts
   instance.renderCharts = function (parsedData) {
 
-    var timeStampDimension  = parsedData.timeStampDimension;
-    var timeStampGroup      = parsedData.timeStampGroup;
-    var timeScale           = parsedData.timeScale;
-    var overviewChart = dc.barChart("#overview-chart");
-    var moveChart = dc.barChart("#move-chart");
+    const {
+      timeStampDimension,
+      timeStampGroup,
+      statusCodeDimension,
+      statusCodeGroup,
+      responseTimeDimension,
+      responseTimeGroup,
+      timeScaleForLine,
+      timeScaleForFocus,
+      xScaleForBar,
+      binwidth
+    } = parsedData;
 
-    overviewChart
-      .height(80)
+    const line = dc.lineChart('#line-chart');
+    const focus = dc.barChart('#focus-chart');
+    const row = dc.rowChart('#row-chart');
+    const bar = dc.barChart('#bar-chart');
+
+    line
+      .height(350)
+      .renderArea(true)
+      .transitionDuration(300)
+      .margins({top: 5, right: 20, bottom: 25, left: 40})
+      .x(timeScaleForLine)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
-      .centerBar(true)
-      .gap(1)
-      .x(timeScale)
-      .alwaysUseRounding(true)
-      .yAxis().ticks(0);
-
-    moveChart
-      .height(250)
-      .transitionDuration(500)
-      .x(timeScale)
-      .dimension(timeStampDimension)
-      .group(timeStampGroup)
-      .rangeChart(overviewChart)
+      .rangeChart(focus)
       .brushOn(false)
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true)
       .elasticY(true);
 
-    // Init datatable
-    initDatatable();
+    focus
+      .height(100)
+      .dimension(timeStampDimension)
+      .group(timeStampGroup)
+      .xUnits(dc.units.fp.precision(binwidth))
+      .centerBar(true)
+      .gap(1)
+      .margins({top: 5, right: 20, bottom: 25, left: 40})
+      .x(timeScaleForFocus)
+      .alwaysUseRounding(true)
+      .elasticY(true)
+      .yAxis().ticks(0);
 
-    // Init datatable function
-    function initDatatable () {
+    row
+      .height(215)
+      .transitionDuration(300)
+      .dimension(statusCodeDimension)
+      .group(statusCodeGroup)
+      .elasticX(true)
+      .xAxis().ticks(5);
 
-      // Get initial or updated table data
-      const tableData = setUpDataTable();
+    bar
+      .height(215)
+      .transitionDuration(300)
+      .dimension(responseTimeDimension)
+      .group(responseTimeGroup)
+      .centerBar(true)
+      .xUnits(dc.units.fp.precision(binwidth))
+      .margins({top: 5, right: 20, bottom: 25, left: 45})
+      .brushOn(true)
+      .x(xScaleForBar)
+      .renderHorizontalGridLines(true)
+      .xAxis().ticks(10);
 
-      // Save reference to datatable body element
-      const datatableBody = $('.datatable tbody');
-
-      // Cleanup datatable if it already has any rows
-      datatableBody.empty()
-
-      // Iterate through each data item and append a row with data to datatable
-      _.each(tableData, (tableItem) => {
-        datatableBody.append(`
-          <tr>
-            <td scope="row">${tableItem.time}</td>
-            <td>${tableItem.country}</td>
-            <td>${tableItem.path}</td>
-            <td>${tableItem.ip}</td>
-            <td>${tableItem.response}</td>
-          </tr>
-          `);
-      });
-
-      // Initialize data table
-      $('.datatable').dataTable({
-        pagingType: 'simple'
-      });
-    }
-
-    // Listens to filtering event and refreshes the table on a change
-    function refreshTable() {
-      dc.events.trigger(function () {
-
-        // Destory datatable to drop pagination
-        $('.datatable').dataTable().fnDestroy();
-
-        // Fill datatable with updated data
-        initDatatable();
-
-      });
-    }
-
-    // Add each chart to the DC Chart Registry
-    for (var i = 0; i < dc.chartRegistry.list().length; i++) {
-      var chartI = dc.chartRegistry.list()[i];
-      chartI.on("filtered", refreshMapAndTable);
-    }
-
-    // function that refreshes both map and data table
-    function refreshMapAndTable () {
-      refreshTable();
-      refreshMap();
-      refreshMoveChart();
-    }
-
-    function refreshMoveChart () {
-
-      // gets selected time range
-      var timeRange = overviewChart.filter();
-
-      // generating time scale for dc
-      var timeScale = d3.time.scale().domain(timeRange);
-
-      // attaching current time range to chart
-      moveChart.x(timeScale);
-    }
-
-    // parse data into array for map
-    function refreshMap () {
-
-      // current data set which is being passed through crossfilter
-      var currentDataSet = timeStampDimension.top(Infinity);
-
-      // runs current data set through parser, selecting just needed fields for heat points
-      var parsedDataSet = instance.parseMapData(currentDataSet);
-
-      // sets new parsed data to a reactive variable
-      instance.mapData.set(parsedDataSet);
-
-    }
-
-    // Parse data into array for data table
-    function setUpDataTable() {
-      var dataSet = [];
-      timeStampDimension.top(Infinity).forEach(function (e) {
-
-        var timeStamp;
-        var country;
-        var path;
-        var requestIp;
-        var responseTime;
-
-        // Error handling for empty fields
-        try{
-          timeStamp = moment(e.fields.request_at[0]);
-        }catch(e){
-          timeStamp = "";
-        }
-
-        try{
-          country = e.fields.request_ip_country[0]
-        }catch(e){
-          country = "";
-        }
-
-        try{
-          path = e.fields.request_path[0];
-        }catch(e){
-          path = "";
-        }
-
-        try{
-          requestIp = e.fields.request_ip[0];
-        }catch(e){
-          requestIp = "";
-        }
-
-        try{
-          responseTime = e.fields.response_time[0];
-        }catch(e){
-          responseTime = "";
-        }
-
-        dataSet.push({
-          "time"          : timeStamp.format("D/MM/YYYY HH:mm:ss"),
-          "country"       : country,
-          "path"          : path,
-          "ip"            : requestIp,
-          "response"      : responseTime
-        });
-      });
-
-      return dataSet;
-    }
-
-    instance.dataToExport.set(setUpDataTable());
-
-    // initial function call that refreshes table
-    refreshTable();
-
-    // removing loading state once loaded
-    $('#loadingState').html("Loaded!");
     dc.renderAll();
-  };
 
-  // function that renders map
-  instance.renderMap = function (mapData) {
+    for (let i = 0; i < dc.chartRegistry.list().length; i++) {
 
-    // Creates the map with the view coordinates of 61.5, 23.7667 and the zoom of 6
-    instance.map = L.map('map').setView([61.5000, 23.7667], 4);
+      const chartI = dc.chartRegistry.list()[i];
 
-    // adds tilelayer
-    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      minZoom: 2,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(instance.map);
+      chartI.on("filtered", () => {
 
-    // checks if map data is passed to a renderMap function
-    if (mapData) {
-      // adds the heatpoints to the map
-      instance.heat = L.heatLayer(mapData).addTo(instance.map);
+        instance.updateDataTable(timeStampDimension);
+        instance.updateLineChart(line, focus, timeScaleForLine);
+
+      });
     }
 
-  };
+    instance.updateDataTable(timeStampDimension);
+  }
 
-  // function that parses map
-  instance.parseMapData = function (mapData) {
+  instance.updateDataTable = function (timeStampDimension) {
+    const tableData = instance.getTableData(timeStampDimension);
+    instance.tableDataSet.set(tableData);
+  }
 
-    // defines the intensity for the heatmap
-    var intensity = instance.heatIntensity.get();
+  instance.getTableData = function (timeStampDimension) {
 
-    // empty array with address points
-    var addressPoints = [];
+    let tableDataSet = [];
 
-    // iterates through all heat points
-    mapData.forEach(function (item) {
+    _.forEach(timeStampDimension.top(Infinity), (e) => {
 
-      // parses location data
-      try{
+      let time,
+          country,
+          requestPath,
+          requestIp,
+          responseTime;
 
-        // pushes location data to an array
-        addressPoints.push([item.fields["request_ip_location.lat"][0], item.fields["request_ip_location.lon"][0], intensity])
+      // Error handling for empty fields
+      try { time = moment(e.fields.request_at[0]).format("D/MM/YYYY HH:mm:ss"); }
+      catch (e) { time = ''; }
 
-      }catch(e){
+      try { country = e.fields.request_ip_country[0]; }
+      catch (e) { country = ''; }
 
-        console.log(e);
+      try { requestPath = e.fields.request_path[0]; }
+      catch (e) { requestPath = ''; }
 
-      }
+      try { requestIp = e.fields.request_ip[0]; }
+      catch (e) { requestIp = ''; }
+
+      try { responseTime = e.fields.response_time[0]; }
+      catch (e) { responseTime = ''; }
+
+      tableDataSet.push({ time, country, requestPath, requestIp, responseTime });
 
     });
 
-    // returns heat data
-    return addressPoints;
-  };
-
-};
-
-
-Template.chartsLayout.events({
-  'click #download-usage-logs': function (event, template) {
-
-    // Stores reactive variable value (e.g logs) that is attached to a current template
-    var dataToExport = template.dataToExport.get();
-
-    // Uses Papa Parse package to parse JSON to CSV
-    var csv = Papa.unparse(dataToExport);
-
-    // Creates file object with content type of JSON
-    var file = new Blob([csv], {type: "text/plain;charset=utf-8"});
-
-    // Forces "save As" function allow user download file
-    saveAs(file, moment().format("MMM-YYYY") + "-logs.csv");
-
+    return tableDataSet;
   }
+
+  instance.updateLineChart = function (line, focus, timeScaleForLine) {
+
+    const selectedTimeRange = focus.filter();
+
+    if (selectedTimeRange) {
+      line.x(d3.time.scale().domain(selectedTimeRange));
+    } else {
+      line.x(timeScaleForLine);
+    }
+  }
+
 });
+
+Template.chartsLayout.onRendered(function () {
+
+  const instance = this;
+
+  const chartElemets = $('#line-chart, #focus-chart, #row-chart, #bar-chart');
+
+  chartElemets.addClass('loader');
+
+  instance.autorun(() => {
+
+    const chartData = instance.esData.get();
+
+    if (chartData) {
+
+      const parsedData = instance.parseChartData(chartData);
+
+      instance.renderCharts(parsedData);
+
+      chartElemets.removeClass('loader');
+    }
+  });
+});
+
+Template.chartsLayout.helpers({
+  tableDataSet () {
+    const instance = Template.instance();
+    return instance.tableDataSet.get();
+  },
+  itemsCount () {
+    const instance = Template.instance();
+    return {
+      filterItemsCount: instance.filterItemsCount.get(),
+      totalItemsCount: instance.totalItemsCount.get()
+    }
+  }
+})
