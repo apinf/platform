@@ -1,38 +1,13 @@
 /* Bootstrap */
 @import "/client/style/bootstrap-variables.less";
 
-.logo-lg {
-  margin: auto;
-}
-
-.navbar-brand {
-  padding: 0px;
-}
 .navbar-brand > img {
-  //  height: 100%;
   padding: 0.93em;
-  //  width: auto;
   height: 2.10em;
   margin-top: 0.2em
 }
 
 .master-layout {
-  #search-form {
-    display: inline-block;
-  }
-  .search-field-input {
-    display: inline-block;
-    margin-top: 0.5em;
-    margin-left: 1.25em;
-    padding: 0.44em;
-    width: 25em;
-  }
-  .search-form-button {
-    margin-bottom: 0.25em;
-    margin-left: 0.1em;
-  }
-
-
   /* Navbar */
   .main-navigation {
     background-color: @home-navigation;
@@ -49,16 +24,6 @@
   .main-navigation .navbar-header {
     padding-left: 0.9em;
     margin-right: 1em;
-  }
-
-  .navbar-brand {
-    padding: 0;
-  }
-
-  .navbar-brand > img {
-    height: 100%;
-    padding: 0.9em;
-    width: auto;
   }
 
   .main-navigation .navbar-brand {
@@ -81,8 +46,19 @@
     background-color: darken(@brand-primary, 5%);
   }
 
-  .navbar-default .navbar-brand {
-    padding-top: 0.5em;
+  .project-name {
+    padding-top: 1em;
+    .project-name-link {
+      font-size: 1.3em;
+      color: #FFF;
+      cursor: pointer;
+    }
+    .project-name-link:hover,
+    .project-name-link:focus,
+    .project-name-link:active {
+      color: #FFF;
+      text-decoration: none;
+    }
   }
 
   .navbar-default .navbar-nav > li > a {

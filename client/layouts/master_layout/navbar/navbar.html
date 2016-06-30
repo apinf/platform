@@ -13,17 +13,21 @@
           APInf
         </a>
         {{else}}
-        <span class="logo-lg">{{ branding.siteTitle }}</span>
+        <div class="project-name" href="/">
+          <a class="project-name-link">
+            {{ branding.siteTitle }}
+          </a>
+        </div>
         {{/if}}
       </div>
       <div id="main-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
+          {{# if currentUser }}
           <li class="{{isActiveRoute 'dashboard'}}">
             <a href="/dashboard">
               <span>{{_ "Dashboard"}}</span>
             </a>
           </li>
-          {{# if currentUser }}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               {{_ "masterLayout_sidebar_APIBackends"}}
@@ -64,11 +68,6 @@
           {{#if User}}
           {{> userMenu }}
           {{else}}
-          <li>
-            <a href="/catalogue">
-              {{_ "masterLayout_sidebar_Catalogue"}}
-            </a>
-          </li>
           <li>
             <a class="close-navbar" href="/sign-up">{{_ "signup"}}</a>
           </li>
