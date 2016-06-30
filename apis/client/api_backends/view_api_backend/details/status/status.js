@@ -34,14 +34,14 @@ Template.viewApiBackendStatus.created = function() {
       // and display text depending on it
       if (success.test(status.code)) {
 
-        className = 'alert-success';
+        className = 'status-success';
         statusText = `
           ${TAPi18n.__('viewApiBackendStatus_statusMessage_Success')}
           `;
 
       } else if (redirect.test(status.code)) {
 
-        className = 'alert-success';
+        className = 'status-success';
         statusText = `
           ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
           ${status.code}.
@@ -50,7 +50,7 @@ Template.viewApiBackendStatus.created = function() {
 
       } else if (clientErr.test(status.code)) {
 
-        className = 'alert-warning';
+        className = 'status-warning';
         statusText = `
           ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
           ${status.code}.
