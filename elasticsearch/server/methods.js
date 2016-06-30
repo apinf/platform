@@ -7,28 +7,30 @@ Meteor.methods({
 
     if (Meteor.user()) {
 
-    const settings = Settings.findOne();
+      const settings = Settings.findOne();
 
-    try {
+      let host;
 
-      const host = settings.elasticsearch.host;
+      try {
 
-    } catch (e) {
+        host = settings.elasticsearch.host;
 
-      throw new Meteor.error(500, 'Elasticsearch host is not defined. Please check your settings.');
+      } catch (e) {
 
-      return false;
+        throw new Meteor.error(500, 'Elasticsearch host is not defined. Please check your settings.');
+
+        return false;
+      }
+
+      const esClient = new ElasticSearch.Client({ host });
+
+      return esClient.search(opts).then((res) => {
+        return res;
+      }, (err) => {
+        throw new Meteor.error(500, 'Analytics data is not found.');
+      });
+    } else {
+      throw new Meteor.error(500, 'User is not authorised.');
     }
-
-
-    const esClient = new ElasticSearch.Client({ host });
-
-    return esClient.search(opts).then((res) => {
-      return res;
-    }, (err) => {
-      throw new Meteor.error(500, 'Analytics data is not found.');
-    });
-  } else {
-    throw new Meteor.error(500, 'User is not authorised.');
   }
 });
