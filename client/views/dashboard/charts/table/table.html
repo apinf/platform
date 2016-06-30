@@ -1,31 +1,72 @@
 <template name="dataTable">
-  <div class="box box-primary" id="data-table-box">
-    <div class="box-header with-border">
-      <h3 class="box-title">{{_ "dataTable_Title"}}</h3>
-    </div>
-    <table class="datatable table table-bordered">
-      <thead>
+  <h4>Analytics data</h4>
+  <table class="dataTable table table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th>
+          Country
+        </th>
+        <th>
+          Path
+        </th>
+        <th>
+          IP
+        </th>
+        <th>
+          Response time (ms)
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ # each row in tableDataSet }}
         <tr>
-          <th>
-            {{_ "dataTable_TimeStamp"}}
-          </th>
-          <th>
-            {{_ "dataTable_RequestCountry"}}
-          </th>
-          <th>
-            {{_ "dataTable_RequestPath"}}
-          </th>
-          <th>
-            {{_ "dataTable_RequestIP"}}
-          </th>
-          <th>
-            {{_ "dataTable_ResponseTime"}}
-          </th>
+          <td class="row">
+            {{ row.time }}
+          </td>
+          <td>
+            {{ row.country }}
+          </td>
+          <td>
+            {{ row.requestPath }}
+          </td>
+          <td>
+            {{ row.requestIp }}
+          </td>
+          <td>
+            {{ row.responseTime }}
+          </td>
         </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
+      {{ / each}}
+    </tbody>
+  </table>
+  <div class="page-numbers pull-left">
+    <strong>{{ currentPageNumber }}</strong> of <strong>{{ totalPageNumber }}</strong>
+  </div>
+  <div class="btn-group pull-right">
+    {{ # if showPrevButton }}
+      <button class="btn btn-sm btn-default" id="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        Prev
+      </button>
+    {{ else }}
+      <button class="btn btn-sm btn-default disabled">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        Prev
+      </button>
+    {{ / if }}
+    {{ # if showNextButton }}
+      <button class="btn btn-sm btn-default" id="next">
+        Next
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    {{ else }}
+      <button class="btn btn-sm btn-default disabled">
+        Next
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    {{ / if }}
   </div>
 </template>
