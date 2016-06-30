@@ -17,13 +17,13 @@ ProjectLogo.filters({
 
 if (Meteor.isServer) {
   ProjectLogo.allow({
-    insert: function(userId, doc) {
-      return Roles.userIsInRole(userId, ['admin']);
+    insert: function() {
+      return true;
     },
-    update: function(userId, doc, fieldNames, modifier) {
-      return Roles.userIsInRole(userId, ['admin']);
+    update: function() {
+      return true;
     },
-    download: function(userId) {
+    download: function() {
       return true;
     },
     remove: function() {

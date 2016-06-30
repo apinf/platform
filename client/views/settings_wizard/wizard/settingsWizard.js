@@ -86,7 +86,7 @@ AutoForm.addHooks(['wizardSettings'], {
       Meteor.call("syncApiUmbrellaUsers");
       Meteor.call("syncApiBackends");
       Meteor.call("initialSetupCompleteTrue", function() {
-        Router.go("dashboard");
+        Router.go("atSignUp");
       });
     }
     // otherwise show an error
