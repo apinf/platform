@@ -37,6 +37,23 @@
   color: #FFF;
 }
 
+/* Info button */
+.btn-info {
+  background-color: @brand-info;
+  border-color: @brand-info;
+}
+
+.btn-info:hover {
+  background-color: darken(@brand-info, 5%);
+  border-color: darken(@brand-info, 5%);
+}
+
+.btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus, .open>.dropdown-toggle.btn-info:hover {
+  background-color: darken(@brand-info, 5%);
+  border-color: darken(@brand-info, 5%);
+  color: #FFF;
+}
+
 /* Danger button */
 .btn-danger {
   background-color: @brand-danger;
