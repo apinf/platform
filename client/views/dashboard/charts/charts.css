@@ -1,12 +1,26 @@
-#move-chart, #overview-chart{
-    width:100%
-}
-#overview-chart-box, #move-chart-box, #data-table-box, #filter-box, #map-box{
-    padding:5px;
+#line-chart, #focus-chart, #row-chart, #bar-chart {
+  width:100%;
+  border: 1px solid #eee;
+  margin: 5px 0;
 }
 
-@media only screen and (max-width: 1551px) {
-    .data-table-container, .map-container {
-        width:100%;
-    }
+#line-chart {
+  height: 350px;
+}
+
+#focus-chart {
+  height: 100px;
+}
+
+#row-chart, #bar-chart {
+  height: 215px;
+}
+
+.loader {
+  background: url('img/loader.gif') center center no-repeat;
+  background-size: 50px;
+}
+
+.dc-chart g.row text{
+  fill: #333;
 }
