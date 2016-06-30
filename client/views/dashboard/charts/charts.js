@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import './main.html';
-
 import _ from 'lodash';
 import moment from 'moment';
 import dc from 'dc';
