@@ -168,9 +168,9 @@ Template.chartsLayout.onCreated(function () {
 
     // Init charts
     const requestsOverTime = dc.lineChart('#requestsOverTime-chart');
-    const requestsOverTimeRange = dc.barChart('#requestsOverTimeRange-chart');
-    const row = dc.rowChart('#row-chart');
-    const bar = dc.barChart('#bar-chart');
+    const overviewChart = dc.barChart('#overviewChart-chart');
+    const statusCodeCounts = dc.rowChart('#statusCodeCounts-chart');
+    const responseTimeDistribution = dc.barChart('#responseTimeDistribution-chart');
 
     requestsOverTime
       .height(350)
@@ -180,13 +180,13 @@ Template.chartsLayout.onCreated(function () {
       .x(timeScaleForLineChart)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
-      .rangeChart(requestsOverTimeRange)
+      .rangeChart(overviewChart)
       .brushOn(false)
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true)
       .elasticY(true);
 
-    requestsOverTimeRange
+    overviewChart
       .height(100)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
@@ -207,7 +207,7 @@ Template.chartsLayout.onCreated(function () {
       .elasticX(true)
       .xAxis().ticks(5);
 
-    bar
+    responseTimeDistribution
       .height(215)
       .transitionDuration(300)
       .dimension(responseTimeDimension)
@@ -226,7 +226,7 @@ Template.chartsLayout.onCreated(function () {
     _.forEach(dc.chartRegistry.list(), (chart) => {
       chart.on("filtered", () => {
         instance.updateDataTable(timeStampDimension);
-        instance.updateLineChart(requestsOverTime, requestsOverTimeRange, timeScaleForLineChart);
+        instance.updateLineChart(requestsOverTime, overviewChart, timeScaleForLineChart);
       });
     });
 
@@ -276,10 +276,10 @@ Template.chartsLayout.onCreated(function () {
   }
 
   // Function that updates time scale for line chart
-  instance.updateLineChart = function (requestsOverTime, requestsOverTimeRange, timeScaleForLineChart) {
+  instance.updateLineChart = function (requestsOverTime, overviewChart, timeScaleForLineChart) {
 
     // Get current time range
-    const selectedTimeRange = requestsOverTimeRange.filter();
+    const selectedTimeRange = overviewChart.filter();
 
     // Check if filter was set
     if (selectedTimeRange) {
@@ -296,7 +296,7 @@ Template.chartsLayout.onRendered(function () {
   const instance = this;
 
   // Get reference to chart html elemets
-  const chartElemets = $('#requestsOverTime-chart, #requestsOverTimeRange-chart, #row-chart, #bar-chart');
+  const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
 
   chartElemets.addClass('loader'); // Set loader
 
