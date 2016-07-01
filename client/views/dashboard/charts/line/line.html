@@ -1,9 +1,12 @@
 <template name="requestsOverTimeChart">
   <h4 >
-    API Request Timeline
+    {{ _ "requestsOverTimeChart_Title" }}
     <small class="pull-right" style="line-height: 25px;">
       <span id="row-selection" style="margin:0">
-        Showing <strong class="filter-count">_</strong> of <strong class="total-count">_</strong> records
+        {{ _ "requestsOverTimeChart_ShowingRecordsCount" }}
+        <strong class="filter-count">_</strong>
+        {{ _ "requestsOverTimeChart_ShowingRecordsCount_Of" }}
+        <strong class="total-count">_</strong>
       </span>
     </small>
   </h4>

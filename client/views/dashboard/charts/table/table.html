@@ -1,22 +1,22 @@
 <template name="dataTable">
-  <h4>Analytics data</h4>
+  <h4>{{ _ "dataTable_Title" }}</h4>
   <table class="dataTable table table-bordered">
     <thead>
       <tr>
         <th>
-          Date
+          {{ _ "dataTable_TimeStamp" }}
         </th>
         <th>
-          Country
+          {{ _ "dataTable_RequestCountry" }}
         </th>
         <th>
-          Path
+          {{ _ "dataTable_RequestPath" }}
         </th>
         <th>
-          IP
+          {{ _ "dataTable_RequestIP" }}
         </th>
         <th>
-          Response time (ms)
+          {{ _ "dataTable_ResponseTime" }}
         </th>
       </tr>
     </thead>
@@ -43,7 +43,7 @@
     </tbody>
   </table>
   <div class="page-numbers pull-left">
-    <strong>{{ currentPageNumber }}</strong> of <strong>{{ totalPageNumber }}</strong>
+    <strong>{{ currentPageNumber }}</strong> - <strong>{{ totalPageNumber }}</strong>
   </div>
   <div class="btn-group pull-right">
     {{ # if showPrevButton }}
