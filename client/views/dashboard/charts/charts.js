@@ -133,8 +133,8 @@ Template.chartsLayout.onCreated(function () {
     const maxDate = d3.max(items, function(d) { return d.fields.ymd; });
 
     // Init scales for axis
-    const timeScaleForLine = d3.time.scale().domain([minDate, maxDate]);
-    const timeScaleForFocus = d3.time.scale().domain([minDate, maxDate]);
+    const timeScaleForLineChart = d3.time.scale().domain([minDate, maxDate]);
+    const timeScaleForRangeChart = d3.time.scale().domain([minDate, maxDate]);
     const xScaleForBar = d3.scale.pow().domain([minResponseTime, 1000]);
 
     return {
@@ -144,8 +144,8 @@ Template.chartsLayout.onCreated(function () {
       statusCodeGroup,
       responseTimeDimension,
       responseTimeGroup,
-      timeScaleForLine,
-      timeScaleForFocus,
+      timeScaleForLineChart,
+      timeScaleForRangeChart,
       xScaleForBar,
       binwidth
     };
@@ -160,8 +160,8 @@ Template.chartsLayout.onCreated(function () {
       statusCodeGroup,
       responseTimeDimension,
       responseTimeGroup,
-      timeScaleForLine,
-      timeScaleForFocus,
+      timeScaleForLineChart,
+      timeScaleForRangeChart,
       xScaleForBar,
       binwidth
     } = parsedData;
@@ -177,7 +177,7 @@ Template.chartsLayout.onCreated(function () {
       .renderArea(true)
       .transitionDuration(300)
       .margins({top: 5, right: 20, bottom: 25, left: 40})
-      .x(timeScaleForLine)
+      .x(timeScaleForLineChart)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
       .rangeChart(requestsOverTimeRange)
@@ -194,7 +194,7 @@ Template.chartsLayout.onCreated(function () {
       .centerBar(true)
       .gap(1)
       .margins({top: 5, right: 20, bottom: 25, left: 40})
-      .x(timeScaleForFocus)
+      .x(timeScaleForRangeChart)
       .alwaysUseRounding(true)
       .elasticY(true)
       .yAxis().ticks(0);
@@ -226,7 +226,7 @@ Template.chartsLayout.onCreated(function () {
     _.forEach(dc.chartRegistry.list(), (chart) => {
       chart.on("filtered", () => {
         instance.updateDataTable(timeStampDimension);
-        instance.updateLineChart(requestsOverTime, requestsOverTimeRange, timeScaleForLine);
+        instance.updateLineChart(requestsOverTime, requestsOverTimeRange, timeScaleForLineChart);
       });
     });
 
@@ -276,7 +276,7 @@ Template.chartsLayout.onCreated(function () {
   }
 
   // Function that updates time scale for line chart
-  instance.updateLineChart = function (requestsOverTime, requestsOverTimeRange, timeScaleForLine) {
+  instance.updateLineChart = function (requestsOverTime, requestsOverTimeRange, timeScaleForLineChart) {
 
     // Get current time range
     const selectedTimeRange = requestsOverTimeRange.filter();
@@ -285,7 +285,7 @@ Template.chartsLayout.onCreated(function () {
     if (selectedTimeRange) {
       requestsOverTime.x(d3.time.scale().domain(selectedTimeRange));
     } else {
-      requestsOverTime.x(timeScaleForLine);
+      requestsOverTime.x(timeScaleForLineChart);
     }
   }
 
