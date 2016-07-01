@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.methods({
   'importApiConfigs': function(jsonObj){
 

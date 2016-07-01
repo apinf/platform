@@ -1,4 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
+import { ApiBackends } from '/apis/collection/backend';
 
 Meteor.methods({
   // Remove API backend and related items
