@@ -204,6 +204,7 @@ Template.chartsLayout.onCreated(function () {
       .transitionDuration(300)
       .dimension(statusCodeDimension)
       .group(statusCodeGroup)
+      .ordinalColors(['#31bd47', '#e4dd38', '#f2ac11', '#ed1f1f',])
       .elasticX(true)
       .xAxis().ticks(5);
 
