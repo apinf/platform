@@ -168,7 +168,7 @@ Template.chartsLayout.onCreated(function () {
 
     // Init charts
     const requestsOverTime = dc.lineChart('#requestsOverTime-chart');
-    const focus = dc.barChart('#focus-chart');
+    const requestsOverTimeRange = dc.barChart('#requestsOverTimeRange-chart');
     const row = dc.rowChart('#row-chart');
     const bar = dc.barChart('#bar-chart');
 
@@ -180,13 +180,13 @@ Template.chartsLayout.onCreated(function () {
       .x(timeScaleForLine)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
-      .rangeChart(focus)
+      .rangeChart(requestsOverTimeRange)
       .brushOn(false)
       .renderHorizontalGridLines(true)
       .renderVerticalGridLines(true)
       .elasticY(true);
 
-    focus
+    requestsOverTimeRange
       .height(100)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
@@ -226,7 +226,7 @@ Template.chartsLayout.onCreated(function () {
     _.forEach(dc.chartRegistry.list(), (chart) => {
       chart.on("filtered", () => {
         instance.updateDataTable(timeStampDimension);
-        instance.updateLineChart(requestsOverTime, focus, timeScaleForLine);
+        instance.updateLineChart(requestsOverTime, requestsOverTimeRange, timeScaleForLine);
       });
     });
 
@@ -276,10 +276,10 @@ Template.chartsLayout.onCreated(function () {
   }
 
   // Function that updates time scale for line chart
-  instance.updateLineChart = function (requestsOverTime, focus, timeScaleForLine) {
+  instance.updateLineChart = function (requestsOverTime, requestsOverTimeRange, timeScaleForLine) {
 
     // Get current time range
-    const selectedTimeRange = focus.filter();
+    const selectedTimeRange = requestsOverTimeRange.filter();
 
     // Check if filter was set
     if (selectedTimeRange) {
@@ -296,7 +296,7 @@ Template.chartsLayout.onRendered(function () {
   const instance = this;
 
   // Get reference to chart html elemets
-  const chartElemets = $('#requestsOverTime-chart, #focus-chart, #row-chart, #bar-chart');
+  const chartElemets = $('#requestsOverTime-chart, #requestsOverTimeRange-chart, #row-chart, #bar-chart');
 
   chartElemets.addClass('loader'); // Set loader
 
