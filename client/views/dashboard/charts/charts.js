@@ -167,12 +167,12 @@ Template.chartsLayout.onCreated(function () {
     } = parsedData;
 
     // Init charts
-    const line = dc.lineChart('#line-chart');
+    const requestsOverTime = dc.lineChart('#requestsOverTime-chart');
     const focus = dc.barChart('#focus-chart');
     const row = dc.rowChart('#row-chart');
     const bar = dc.barChart('#bar-chart');
 
-    line
+    requestsOverTime
       .height(350)
       .renderArea(true)
       .transitionDuration(300)
@@ -226,7 +226,7 @@ Template.chartsLayout.onCreated(function () {
     _.forEach(dc.chartRegistry.list(), (chart) => {
       chart.on("filtered", () => {
         instance.updateDataTable(timeStampDimension);
-        instance.updateLineChart(line, focus, timeScaleForLine);
+        instance.updateLineChart(requestsOverTime, focus, timeScaleForLine);
       });
     });
 
@@ -276,16 +276,16 @@ Template.chartsLayout.onCreated(function () {
   }
 
   // Function that updates time scale for line chart
-  instance.updateLineChart = function (line, focus, timeScaleForLine) {
+  instance.updateLineChart = function (requestsOverTime, focus, timeScaleForLine) {
 
     // Get current time range
     const selectedTimeRange = focus.filter();
 
     // Check if filter was set
     if (selectedTimeRange) {
-      line.x(d3.time.scale().domain(selectedTimeRange));
+      requestsOverTime.x(d3.time.scale().domain(selectedTimeRange));
     } else {
-      line.x(timeScaleForLine);
+      requestsOverTime.x(timeScaleForLine);
     }
   }
 
@@ -296,7 +296,7 @@ Template.chartsLayout.onRendered(function () {
   const instance = this;
 
   // Get reference to chart html elemets
-  const chartElemets = $('#line-chart, #focus-chart, #row-chart, #bar-chart');
+  const chartElemets = $('#requestsOverTime-chart, #focus-chart, #row-chart, #bar-chart');
 
   chartElemets.addClass('loader'); // Set loader
 
