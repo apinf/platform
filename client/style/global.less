@@ -18,8 +18,9 @@ a {
   text-decoration: none;
 }
 
-.layout {
-  min-height: 80%;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #iron-router-progress {
@@ -31,15 +32,6 @@ a {
   border-color: darken(@brand-primary, 20%);
 }
 
-/*Styles for Dynatable*/
-th a {
-  color: @brand-primary;
-}
-
-.dynatable-active-page {
-  background-color: @brand-primary;
-}
-
 .help-block {
   margin-bottom: 1.4em;
 }
@@ -49,58 +41,7 @@ hr {
   margin-top: 0;
 }
 
-/* Global overriding */
-input[name='profile.apiKey']{
-  width: 100%;
-  border: 0px solid #fff;
-  outline: none;
-}
-
-.row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.wrapper {
-  position: inherit !important;
-}
-
-.project-logo {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 2.10em;
-  height: 2.10em;
-  margin-top: 0.2em
-}
-
-.header-search-form{
-  display: inline-block;
-  margin-top: 8px;
-  margin-left: 20px;
-  width: 400px;
-}
-
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   color: #fff;
   background-color: @brand-primary;
-}
-
-.label-primary {
-  background-color: @brand-primary;
-}
-
-.label-success {
-  background-color: @brand-success;
-}
-
-.label-info {
-  background-color: @brand-info;
-}
-
-.label-warning {
-  background-color: @brand-warning;
-}
-
-.label-danger {
-  background-color: @brand-danger;
 }
