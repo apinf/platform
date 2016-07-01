@@ -1,12 +1,14 @@
-.search-input-group .input-group-addon{
+.search-input-group .input-group-addon {
   background: #fff !important;
 }
-.search-input-group .form-control{
+
+.search-input-group .form-control {
   border-right: 0;
   box-shadow: 0 0 0;
   border-color: #ccc;
 }
-.search-input-group button{
+
+.search-input-group button {
   border: 0;
   background: transparent;
 }
