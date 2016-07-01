@@ -24,14 +24,15 @@ Template.profile.rendered = function () {
       const setUsernameMsg = TAPi18n.__("profile-setUsername");
       sAlert.info(setUsernameMsg);
     }
+    // FIXME: Clipboard not working
     instance.autorun(function(){
       // Show clipboard button only if API key exists
       if(currentUser.profile.apiKey) {
         // initializes button
         var copyButton = $("<a class=\"btn btn-default btn-xs\" id=\"copyApi\"> Copy API key to clipboard</a>");
 
-        // get input field that holds api key
-        var apiKeyField = $("input[name='profile.apiKey']");
+        // get element fthat holds api key
+        var apiKeyField = $("#umbrella-apikey");
 
         // gets id attribute value from input field
         var apiKeyFieldId = apiKeyField.attr('id');
@@ -56,8 +57,8 @@ Template.profile.rendered = function () {
 };
 
 Template.profile.events({
-  'click .get-umbrellaApiKey'(event) {
-    Meteor.call('createAPIkeyForCurrentUser', function(error, result) {
+  'click #umbrella-apikey-button' (event) {
+    Meteor.call('createApiKeyForCurrentUser', function(error, result) {
       if(error) {
         sAlert.error(error);
       }

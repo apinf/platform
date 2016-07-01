@@ -83,7 +83,7 @@ Meteor.methods({
   },
   // Create API key & attach it for given user,
   // Might throw errors, catch on client callback
-  createAPIkeyForCurrentUser () {
+  createApiKeyForCurrentUser () {
     // Get logged in user
     const currentUser = Meteor.user();
     // Check currentUser exists
@@ -91,7 +91,7 @@ Meteor.methods({
       // Check apiUmbrellaWeb global object exists
       if (apiUmbrellaWeb) {
         // Create API Umbrella user object with required fields
-        apiUmbrellaUserObj = {
+        const apiUmbrellaUserObj = {
           "user": {
             "email": currentUser.emails[0].address,
             "first_name": "-",
@@ -103,7 +103,7 @@ Meteor.methods({
         // Try to create user on API Umbrella
         try {
           // Add user on API Umbrella
-          response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
+          const response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
 
           // Set fieldsToBeUpdated
           const fieldsToBeUpdated = {
@@ -120,21 +120,22 @@ Meteor.methods({
           // Meteor Error (User create failed on Umbrella)
           throw new Meteor.Error(
             "umbrella-createuser-error",
-            "Failed to create user on API Umbrella."
+            TAPi18n.__("umbrella_createuser_error")
           );
         }
       } else {
         // Meteor Error (apiUmbrellaWeb not defined)
         throw new Meteor.Error(
           "umbrella-notdefined-error",
-          "API Umbrella not defined."
+          TAPi18n.__("umbrella_notdefined_error")
+
         );
       }
     } else {
       // Meteor Error (User not logged in)
       throw new Meteor.Error(
         "apinf-usernotloggedin-error",
-        "Could not find logged in user."
+        TAPi18n.__("apinf_usernotloggedin_error")
       );
     }
   }

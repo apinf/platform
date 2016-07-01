@@ -14,14 +14,17 @@
       </div>
       {{/autoForm}}
       <div class="panel panel-default">
-        <div class="panel-heading profile-header">{{_ "profile_UmbrellaHeader"}}</div>
+        <div class="panel-heading profile-header">{{_ "profile_umbrellaHeader"}}</div>
         <div class="panel-body">
           {{#if currentUser.profile.apiKey }}
-            <b>API Key:&nbsp;</b>{{ currentUser.profile.apiKey }}
+              <b>{{_ "profile_apiKey"}}:&nbsp;</b>
+              <span id="umbrella-apikey">
+                {{ currentUser.profile.apiKey }}
+              </span>
           {{ else }}
             <!-- Get API key button -->
             <p>
-              <button class="btn btn-primary get-umbrellaApiKey">
+              <button id="umbrella-apikey-button" class="btn btn-primary">
                 {{_ "profile_getUmbrellaApiKey"}}
               </button>
             </p>
