@@ -176,7 +176,7 @@
   "dataTable_RequestIP": "IP",
   "dataTable_ResponseTime": "Response time (ms)",
   "dataTable_NextPage": "Next",
-  "dataTable_PrevPage": "Prev",
+  "dataTable_PrevPage": "Previous",
   "view_ApiBackend_Details_Title": "Details",
   "view_ApiBackend_Details_editButtonText": "Edit API Settings",
   "viewApiBackendDetails_deleteButton": "Delete",
