@@ -1,35 +1,28 @@
 <template name="chartsLayout">
   <div class="row">
-      <div class="col-md-12">
-        <div>
-          <h4 >
-            API Request Timeline
-            <small class="pull-right" style="line-height: 25px;">
-              <span id="row-selection" style="margin:0">
-                Showing <strong class="filter-count">_</strong> of <strong class="total-count">_</strong> records
-              </span>
-            </small>
-          </h4>
-          <div id="requestsOverTime-chart"></div>
-        </div>
-        <div>
-          <div id="overviewChart-chart"></div>
-        </div>
+    <div class="col-md-12">
+      <div>
+        {{ > requestsOverTimeChart }}
+      </div>
+      <div>
+        {{ > overviewChartChart }}
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <h4>HTTP Status Codes</h4>
-        <div id="statusCodeCounts-chart"></div>
-      </div>
-      <div class="col-md-6">
-        <h4 >
-          API Response Time
-        </h4>
-        <div id="responseTimeDistribution-chart"></div>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      {{ > statusCodeCountsChart }}
     </div>
+    <div class="col-md-6">
+      <h4 >
+        API Response Time
+      </h4>
+      {{ > responseTimeDistributionChart }}
+    </div>
+  </div>
+  <div class="row">
     <div class="row padding-sides">
       {{ > dataTable tableDataSet=tableDataSet }}
     </div>
+  </div>
 </template>
