@@ -1,0 +1,37 @@
+<template name="profile">
+  <div class="container">
+    <div class="row userProfile" id="champion-messages">
+      {{#autoForm id="updateProfile" collection=Users doc=User type="update"}}
+      <div class="panel panel-default">
+        <div class="panel-heading profile-header">{{_ "profile_Header"}}</div>
+        <div class="panel-body">
+          {{> afQuickField name="username"}}
+          {{> afQuickField name="profile.company"}}
+          <button type="submit" class="btn btn-success profile-update">
+            {{_ "profile_UpdateButton"}}
+          </button>
+        </div>
+      </div>
+      {{/autoForm}}
+      <div class="panel panel-default">
+        <div class="panel-heading profile-header">{{_ "profile_apiKeysHeader"}}</div>
+        <div class="panel-body">
+          {{#if apiKey }}
+              <b>{{_ "profile_apiKey"}}:&nbsp;</b>
+              <span id="apikey">
+                {{ apiKey }}
+              </span>
+              {{> profileApiKeyCopyButton apiKey=apiKey }}
+          {{ else }}
+            <!-- Get API key button -->
+            <p>
+              <button id="umbrella-apikey-button" class="btn btn-primary">
+                {{_ "profile_getUmbrellaApiKey" }}
+              </button>
+            </p>
+          {{/if }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

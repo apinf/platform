@@ -16,6 +16,13 @@
   "signUp": "Sign Up",
   "apiCatalogue": "API Catalogue",
   "profile": "Profile",
+  "profile_apiKey_copyButtonText": "Copy API key",
+  "profile_apiKey_copySuccessful": "API key copied to clipboard.",
+  "profile_usernameIsTaken": "Username is already taken",
+  "profile_apiKeysHeader": "API Key(s)",
+  "profile_getUmbrellaApiKey": "Get API key for Umbrella",
+  "profile_apiKey": "API Key",
+  "profile_updatedSuccess": "Profile updated",
   "account": "Account",
   "signout": "Sign out",
   "home_MainTitle": "APINF - API Management Platform",
@@ -367,5 +374,8 @@
   "viewApiBackendStatus_statusMessage_ClientError": "Client error.",
   "viewApiBackendStatus_statusMessage_ServerError": "Server error.",
   "apiDocumentationEditor_notAvailable": "API documentation editor is not available.",
-  "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor"
+  "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
+  "umbrella_createuser_error": "Failed to create user on API Umbrella.",
+  "umbrella_notdefined_error": "API Umbrella not defined.",
+  "apinf_usernotloggedin_error": "Could not find logged in user."
 }
