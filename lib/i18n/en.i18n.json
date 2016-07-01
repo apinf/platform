@@ -16,6 +16,8 @@
   "signUp": "Sign Up",
   "apiCatalogue": "API Catalogue",
   "profile": "Profile",
+  "profile_apiKey_copyButtonText": "Copy API key",
+  "profile_apiKey_copySuccessful": "API key copied to clipboard.",
   "profile_usernameIsTaken": "Username is already taken",
   "profile_umbrellaHeader": "API Umbrella",
   "profile_getUmbrellaApiKey": "Get API key for Umbrella",
