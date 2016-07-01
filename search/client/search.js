@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Template.search.created = function () {
   // Get reference to Template instance
   var instance = this;
@@ -88,7 +90,7 @@ Template.search.helpers({
     // Get reference to Template instance
     var instance = Template.instance();
 
-        // Get the amount of api backends found from reactive var
+    // Get the amount of api backends found from reactive var
     var searchResultsCount = instance.getSearchResults().length;
 
     return searchResultsCount;
