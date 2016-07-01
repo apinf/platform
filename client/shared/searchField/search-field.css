@@ -2,6 +2,11 @@
   background: #fff !important;
 }
 
+/* Safari fix */
+.main-navbar-search .input-group-addon {
+  padding: 5px 12px;
+}
+
 .search-input-group .form-control {
   border-right: 0;
   box-shadow: 0 0 0;
