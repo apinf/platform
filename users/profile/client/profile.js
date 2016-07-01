@@ -1,5 +1,3 @@
-import Clipboard from "clipboard";
-
 AutoForm.hooks({
   updateProfile: {
     onSuccess: function(operation, result, template) {
@@ -24,35 +22,6 @@ Template.profile.rendered = function () {
       const setUsernameMsg = TAPi18n.__("profile-setUsername");
       sAlert.info(setUsernameMsg);
     }
-    // FIXME: Clipboard not working
-    instance.autorun(function(){
-      // Show clipboard button only if API key exists
-      if(currentUser.profile.apiKey) {
-        // initializes button
-        var copyButton = $("<a class=\"btn btn-default btn-xs\" id=\"copyApi\"> Copy API key to clipboard</a>");
-
-        // get element fthat holds api key
-        var apiKeyField = $("#umbrella-apikey");
-
-        // gets id attribute value from input field
-        var apiKeyFieldId = apiKeyField.attr('id');
-
-        // attaches new attribute with input field id to a button,
-        // data-clipboard-target attr is required for clipboard.js to work
-        copyButton.attr("data-clipboard-target", "#" + apiKeyFieldId);
-
-        // appends the actual button object next to input field
-        apiKeyField.next().append(copyButton);
-
-        // initializes copy-to-clipboard functionality
-        new Clipboard("#copyApi");
-
-        // adds listener to button and notifies user if text is copied
-        copyButton.on("click", function () {
-          copyButton.text("Copied!");
-        });
-      }
-    });
   }
 };
 
@@ -69,5 +38,17 @@ Template.profile.events({
 Template.profile.helpers({
   currentUser () {
     return Meteor.user();
+  },
+  apiKey () {
+    // Get current user
+    const currentUser = Meteor.user();
+
+    // Make sure user exitsts and has API key
+    if (currentUser && currentUser.profile && currentUser.profile.apiKey) {
+      // Get API Key
+      const apiKey = currentUser.profile.apiKey;
+
+      return apiKey;
+    }
   }
 });
