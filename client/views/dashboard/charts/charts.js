@@ -105,7 +105,7 @@ Template.chartsLayout.onCreated(function () {
 
     const statusCodeGroup = statusCodeDimension.group(); // Create status code group
 
-    const binwidth = 100; // Init binwidth for a bar chart
+    const binwidth = 50; // Init binwidth for a bar chart
 
     // Get MIN and MAX response time values
     const minResponseTime = d3.min(items, function(d) { return d.fields.response_time[0]; });
