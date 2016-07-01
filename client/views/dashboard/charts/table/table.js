@@ -26,7 +26,7 @@ Template.dataTable.events({
     const dataSetLength = Template.currentData().tableDataSet.length; // Get table dataset length
 
     // Check if current page is the last one in the table
-    if ((dataSetLength / rowCount) < currentPageNumber) {
+    if (currentPageNumber < (dataSetLength / rowCount) - 1) {
 
       instance.pageNumber.set(currentPageNumber + 1); // Increment page number
     }
