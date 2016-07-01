@@ -42,31 +42,33 @@
       {{ / each}}
     </tbody>
   </table>
-  <div class="page-numbers pull-left">
-    <strong>{{ currentPageNumber }}</strong> - <strong>{{ totalPageNumber }}</strong>
-  </div>
-  <div class="btn-group pull-right">
-    {{ # if showPrevButton }}
-      <button class="btn btn-sm btn-default" id="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        {{ _ "dataTable_PrevPage" }}
-      </button>
-    {{ else }}
-      <button class="btn btn-sm btn-default disabled">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        {{ _ "dataTable_PrevPage" }}
-      </button>
-    {{ / if }}
-    {{ # if showNextButton }}
-      <button class="btn btn-sm btn-default" id="next">
-        {{ _ "dataTable_NextPage" }}
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </button>
-    {{ else }}
-      <button class="btn btn-sm btn-default disabled">
-        {{ _ "dataTable_NextPage" }}
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </button>
-    {{ / if }}
+  <div>
+    <div class="page-numbers pull-left">
+      <strong>{{ currentPageNumber }}</strong> - <strong>{{ totalPageNumber }}</strong>
+    </div>
+    <div class="btn-group pull-right">
+      {{ # if showPrevButton }}
+        <button class="btn btn-sm btn-default" id="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          {{ _ "dataTable_PrevPage" }}
+        </button>
+      {{ else }}
+        <button class="btn btn-sm btn-default disabled">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          {{ _ "dataTable_PrevPage" }}
+        </button>
+      {{ / if }}
+      {{ # if showNextButton }}
+        <button class="btn btn-sm btn-default" id="next">
+          {{ _ "dataTable_NextPage" }}
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      {{ else }}
+        <button class="btn btn-sm btn-default disabled">
+          {{ _ "dataTable_NextPage" }}
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      {{ / if }}
+    </div>
   </div>
 </template>
