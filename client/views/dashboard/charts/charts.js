@@ -199,7 +199,7 @@ Template.chartsLayout.onCreated(function () {
       .elasticY(true)
       .yAxis().ticks(0);
 
-    row
+    statusCodeCounts
       .height(215)
       .transitionDuration(300)
       .dimension(statusCodeDimension)
