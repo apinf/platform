@@ -1,0 +1,18 @@
+<template name="searchField">
+  <form class="navbar-form" id="search-form" action="{{ pathFor 'search' }}">
+    <div class="input-group search-input-group">
+      <input
+             name="q"
+             type="text"
+             class="form-control"
+             id="search-text"
+             placeholder="{{_ 'searchField_placeholder' }}"
+             />
+      <span class="input-group-addon">
+        <button type="submit">
+          <span class="glyphicon glyphicon-search search-icon"></span>
+        </button>
+      </span>
+    </div>
+  </form>
+</template>

@@ -8,26 +8,23 @@ html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: @font-family-default;
 }
 
-.layout {
-  min-height: 80%;
+a:hover, a:focus {
+  color: @link-hover-color;
+  text-decoration: underline;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
 }
 
 #iron-router-progress {
-  background-color: darken(@brand-primary,20%);
-  box-shadow: 0 0 5px darken(@brand-primary,20%);
+  background-color: darken(@brand-primary, 20%);
+  box-shadow: 0 0 5px darken(@brand-primary, 20%);
 }
 
 #iron-router-progress.spinner:before {
-  border-color: darken(@brand-primary,20%);
-}
-
-/*Styles for Dynatable*/
-th a {
-  color: #1c4862;
-}
-
-.dynatable-active-page {
-  background-color: #1c4862;
+  border-color: darken(@brand-primary, 20%);
 }
 
 .help-block {
@@ -39,33 +36,7 @@ hr {
   margin-top: 0;
 }
 
-/* Global overriding */
-input[name='profile.apiKey']{
-  width: 100%;
-  border: 0px solid #fff;
-  outline: none;
-}
-
-.row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.wrapper {
-  position: inherit !important;
-}
-
-.project-logo {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 2.10em;
-  height: 2.10em;
-  margin-top: 0.2em
-}
-
-.header-search-form{
-  display: inline-block;
-  margin-top: 8px;
-  margin-left: 20px;
-  width: 400px;
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: @nav-pills-active-link-hover-bg;
 }
