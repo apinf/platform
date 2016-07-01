@@ -1,7 +1,8 @@
 AutoForm.hooks({
   updateProfile: {
     onSuccess: function(operation, result, template) {
-      return sAlert.success('Profile updated');
+      const profileUpdatedMsg = TAPi18n.__("profile_updatedSuccess");
+      return sAlert.success(profileUpdatedMsg);
     },
     onError: function() {
       this.addStickyValidationError('username', 'usernameTaken');
