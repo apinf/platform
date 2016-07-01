@@ -1,12 +1,6 @@
 /* Bootstrap */
 @import "/client/style/bootstrap-variables.less";
 
-.navbar-brand > img {
-  padding: 0.93em;
-  height: 2.10em;
-  margin-top: 0.2em
-}
-
 .master-layout {
   /* Navbar */
   .main-navigation {
@@ -19,48 +13,49 @@
     border: none;
     border-radius: 0;
     margin-bottom: 2em;
-  }
 
-  .main-navigation .navbar-header {
-    padding-left: 0.9em;
-    margin-right: 1em;
-  }
-
-  .main-navigation .navbar-brand {
-    background: center / contain no-repeat;
-    width: 140px;
-  }
-
-  .main-navigation .navbar-toggle {
-    margin-top: 0.18em;
-    margin-bottom: 0.06em;
-    margin-left: 0;
-    margin-right: 0.18em;
-  }
-
-  .main-navigation .navbar-toggle > .icon-bar {
-    background-color: #fff;
-  }
-
-  .main-navigation .navbar-toggle:hover, .navbar-toggle:focus {
-    background-color: darken(@brand-primary, 5%);
-  }
-
-  .project-name {
-    padding-top: 1em;
-    .project-name-link {
-      font-size: 1.3em;
-      color: #FFF;
-      cursor: pointer;
+    .navbar-header {
+      padding-left: 0.9em;
+      margin-right: 1em;
     }
-    .project-name-link:hover,
-    .project-name-link:focus,
-    .project-name-link:active {
-      color: #FFF;
-      text-decoration: none;
+
+    .navbar-brand {
+      background: center / contain no-repeat;
+      width: 140px;
+    }
+
+    .navbar-toggle {
+      margin-top: 0.18em;
+      margin-bottom: 0.06em;
+      margin-left: 0;
+      margin-right: 0.18em;
+    }
+
+    .navbar-toggle > .icon-bar {
+      background-color: #fff;
+    }
+
+    .main-navigation .navbar-toggle:hover, .navbar-toggle:focus {
+      background-color: darken(@brand-primary, 5%);
+    }
+
+    .project-name {
+      padding-top: 1em;
+      .project-name-link {
+        font-size: 1.3em;
+        color: #FFF;
+        cursor: pointer;
+      }
+      .project-name-link:hover,
+      .project-name-link:focus,
+      .project-name-link:active {
+        color: #FFF;
+        text-decoration: none;
+      }
     }
   }
 
+  /* Bootstrap navbar overriding */
   .navbar-default .navbar-nav > li > a {
     color: @home-navigation-link-hover;
   }
@@ -81,5 +76,4 @@
     color: rgba(255, 255, 255, 0.9);
     background-color: darken(@brand-primary, 5%);
   }
-
 }
