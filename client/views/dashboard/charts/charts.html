@@ -1,21 +1,25 @@
 <template name="chartsLayout">
   <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      {{> filterData}}
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      {{> overviewChart}}
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      {{> moveChart}}
+    <div class="col-md-12">
+      <div>
+        {{ > requestsOverTimeChart }}
+      </div>
+      <div>
+        {{ > overviewChartChart }}
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-6 data-table-container">
-      {{> dataTable}}
+    <div class="col-md-6">
+      {{ > statusCodeCountsChart }}
     </div>
-    <div class="col-lg-6 map-container">
-      {{> map}}
+    <div class="col-md-6">
+      {{ > responseTimeDistributionChart }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="row padding-sides">
+      {{ > dataTable tableDataSet=tableDataSet }}
     </div>
   </div>
 </template>
