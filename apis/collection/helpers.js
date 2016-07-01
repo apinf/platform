@@ -1,6 +1,7 @@
 import ss from 'simple-statistics';
 import moment from 'moment';
 import { ApiBackends } from '/apis/collection/backend';
+import lodash from 'lodash';
 
 ApiBackends.helpers({
   getAverageRating () {
@@ -89,7 +90,7 @@ ApiBackends.helpers({
     // Check that user is logged in
     if( userId ) {
       // Check if user is API manager
-      var isManager = _.contains(this.managerIds, userId);
+      var isManager = _.has(this.managerIds, userId);
 
       if (isManager) {
         return true;
