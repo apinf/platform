@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 ApiBookmarks = new Mongo.Collection('apiBookmarks');
 
 ApiBookmarks.helpers({
