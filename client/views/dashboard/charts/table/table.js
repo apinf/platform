@@ -5,10 +5,6 @@ Template.dataTable.onCreated(function () {
   instance.rowCount = new ReactiveVar(10);
   instance.pageNumber = new ReactiveVar(1);
 
-  // instance.autorun(() => {
-  //
-  // })
-
 });
 
 Template.dataTable.events({
@@ -17,14 +13,14 @@ Template.dataTable.events({
     let oldPageNumber = instance.pageNumber.get();
 
     if (oldPageNumber > 1) {
-      instance.pageNumber.set(oldPageNumber-1);
+      instance.pageNumber.set(oldPageNumber - 1);
     }
   },
   'click #next': function (event, instance) {
 
     let oldPageNumber = instance.pageNumber.get()
 
-    instance.pageNumber.set(oldPageNumber+1);
+    instance.pageNumber.set(oldPageNumber + 1);
   }
 })
 
@@ -61,13 +57,19 @@ Template.dataTable.helpers({
     return pageNumber < (dataSetLength / rowCount - 1);
   },
   currentPageNumber () {
+
     const instance = Template.instance();
 
     return instance.pageNumber.get();
   },
   totalPageNumber () {
+
     const instance = Template.instance();
 
-    return (Template.currentData().tableDataSet.length / instance.rowCount.get()) | 0;
+    const rowCount = instance.rowCount.get();
+
+    const dataSetLength = Template.currentData().tableDataSet.length;
+
+    return (dataSetLength / rowCount) | 0; // Calculate total page number and make it integer
   }
 })
