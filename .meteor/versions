@@ -112,7 +112,6 @@ meteor-base@1.0.4
 meteor-platform@1.2.6
 meteorhacks:subs-manager@1.6.4
 meteorspark:util@0.2.0
-mfactory:admin-lte@0.0.2
 minifier-css@1.1.12_1
 minifier-js@1.1.12_1
 minimongo@1.0.17
