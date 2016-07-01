@@ -16,16 +16,17 @@
       <div class="panel panel-default">
         <div class="panel-heading profile-header">{{_ "profile_umbrellaHeader"}}</div>
         <div class="panel-body">
-          {{#if currentUser.profile.apiKey }}
+          {{#if apiKey }}
               <b>{{_ "profile_apiKey"}}:&nbsp;</b>
-              <span id="umbrella-apikey">
-                {{ currentUser.profile.apiKey }}
+              <span id="apikey">
+                {{ apiKey }}
               </span>
+              {{> profileApiKeyCopyButton apiKey=apiKey }}
           {{ else }}
             <!-- Get API key button -->
             <p>
               <button id="umbrella-apikey-button" class="btn btn-primary">
-                {{_ "profile_getUmbrellaApiKey"}}
+                {{_ "profile_getUmbrellaApiKey" }}
               </button>
             </p>
           {{/if }}
