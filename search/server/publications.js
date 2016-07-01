@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 Meteor.publish("searchApiBackends", function(searchValue) {
 
   if (!searchValue || searchValue == "")
