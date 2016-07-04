@@ -290,6 +290,22 @@ Template.chartsLayout.onCreated(function () {
     }
   }
 
+  instance.filterData = function (items, apiBackendId) {
+
+    let newDataSet = [];
+
+    _.forEach(items, (item) => {
+
+      const str = item.fields.request_path[0];
+
+      if (str.indexOf(apiBackendId) > -1) {
+
+        newDataSet.push(item);
+      }
+    });
+
+    return newDataSet;
+  }
 });
 
 Template.chartsLayout.onRendered(function () {
@@ -304,10 +320,22 @@ Template.chartsLayout.onRendered(function () {
   instance.autorun(() => {
 
     const chartData = instance.esData.get(); // Get elasticsearch data
+    const apiBackendId = Session.get('apiBackendId');
 
     if (chartData) {
 
-      const parsedData = instance.parseChartData(chartData); // Parse ES data
+      let parsedData = [];
+
+      if (apiBackendId) {
+
+        const filteredData = instance.filterData(chartData, apiBackendId);
+
+        parsedData = instance.parseChartData(filteredData); // Parse ES data
+
+      } else {
+
+        parsedData = instance.parseChartData(chartData); // Parse ES data
+      }
 
       instance.renderCharts(parsedData); // Render chart with data
 
