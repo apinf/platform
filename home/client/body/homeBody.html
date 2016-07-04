@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="feature-section-heading">
-          {{_ "feature_Section_Heading1"}}
+          {{_ "homeBody_feature_Section_Heading1"}}
         </h2>
         <hr class="primary">
       </div>
@@ -16,10 +16,10 @@
         <div class="feature-box">
           <i class="fa fa-search"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title1"}}
+            {{_ "homeBody_feature_Title1"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title1_Text"}}
+            {{_ "homeBody_feature_Title1_Text"}}
           </p>
         </div>
       </div>
@@ -27,10 +27,10 @@
         <div class="feature-box">
           <i class="fa fa-magic"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title2"}}
+            {{_ "homeBody_feature_Title2"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title2_Text"}}
+            {{_ "homeBody_feature_Title2_Text"}}
           </p>
         </div>
       </div>
@@ -38,10 +38,10 @@
         <div class="feature-box">
           <i class="fa fa-book"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title3"}}
+            {{_ "homeBody_feature_Title3"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title3_Text"}}
+            {{_ "homeBody_feature_Title3_Text"}}
           </p>
         </div>
       </div>
@@ -49,10 +49,10 @@
         <div class="feature-box">
           <i class="fa fa-bar-chart"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title4"}}
+            {{_ "homeBody_feature_Title4"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title4_Text"}}
+            {{_ "homeBody_feature_Title4_Text"}}
           </p>
         </div>
       </div>
@@ -60,7 +60,7 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="feature-section-heading">
-          {{_ "feature_Section_Heading2"}}
+          {{_ "homeBody_feature_Section_Heading2"}}
         </h2>
         <hr class="primary">
       </div>
@@ -70,10 +70,10 @@
         <div class="feature-box">
           <i class="fa fa-arrow-up"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title5"}}
+            {{_ "homeBody_feature_Title5"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title5_Text"}}
+            {{_ "homeBody_feature_Title5_Text"}}
           </p>
         </div>
       </div>
@@ -81,10 +81,10 @@
         <div class="feature-box">
           <i class="fa fa-cog"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title6"}}
+            {{_ "homeBody_feature_Title6"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title6_Text"}}
+            {{_ "homeBody_feature_Title6_Text"}}
           </p>
         </div>
       </div>
@@ -92,10 +92,10 @@
         <div class="feature-box">
           <i class="fa fa-line-chart"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title7"}}
+            {{_ "homeBody_feature_Title7"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title7_Text"}}
+            {{_ "homeBody_feature_Title7_Text"}}
           </p>
         </div>
       </div>
@@ -103,10 +103,10 @@
         <div class="feature-box">
           <i class="fa fa-cloud"></i>
           <h3 class="feature-title">
-            {{_ "feature_Title8"}}
+            {{_ "homeBody_feature_Title8"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "feature_Title8_Text"}}
+            {{_ "homeBody_feature_Title8_Text"}}
           </p>
         </div>
       </div>
@@ -119,15 +119,15 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">
-            {{_ "section1_Heading"}}
+            {{_ "homeBody_section1_Heading"}}
           </h2>
           <p class="lead">
-            {{_ "section1_Text"}}
+            {{_ "homeBody_section1_Text"}}
           </p>
           {{# unless User }}
           <p class="lead">
             <a href='/sign-up'>
-              {{_ "section1_Text_Extra"}}
+              {{_ "homeBody_section1_Text_Extra"}}
             </a>
           </p>
           {{/ unless }}
@@ -148,12 +148,16 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">
-            {{_ "section2_Heading"}}
+            {{_ "homeBody_section2_Heading"}}
           </h2>
           <p class="lead">
-            {{_ "section2_Text"}}
+            {{_ "homeBody_section2_Text"}}
           </p>
-          <p class="lead"><a href='#' class='contact-us-link'>{{_ "section2_Text_Extra"}}</a></p>
+          <p class="lead">
+            <a href='#' class='contact-us-link'>
+              {{_ "homeBody_section2_Text_Extra"}}
+            </a>
+          </p>
         </div>
       </div>
     </div>
@@ -165,13 +169,13 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">
-            {{_ "section3_Heading"}}
+            {{_ "homeBody_section3_Heading"}}
           </h2>
           <p class="lead">
-            {{_ "section3_Text"}}
+            {{_ "homeBody_section3_Text"}}
           </p>
           <p class="lead">
-            {{_ "section3_Text_Extra"}}
+            {{_ "homeBody_section3_Text_Extra"}}
             {{# each network in branding.socialMedia }}
             <a href="{{ network.url }}" target="_blank">
               {{ network.name }}
@@ -191,11 +195,11 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="feature-section-heading">
-            {{_ "section_ContactUs"}}
+            {{_ "homeBody_contactUs_heading"}}
           </h2>
           <hr class="primary">
           <h4 class="text-muted">
-            {{_ "section_ContactUs_Text"}}
+            {{_ "homeBody_contactUs_text"}}
           </h4>
         </div>
       </div>
