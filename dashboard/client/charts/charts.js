@@ -317,6 +317,8 @@ Template.chartsLayout.onRendered(function () {
       chartElemets.removeClass('loader'); // Unset loader
     }
   });
+
+  $('[data-toggle="popover"]').popover();
 });
 
 Template.chartsLayout.helpers({
@@ -331,4 +333,4 @@ Template.chartsLayout.helpers({
       totalItemsCount: instance.totalItemsCount.get()
     }
   }
-})
+});
