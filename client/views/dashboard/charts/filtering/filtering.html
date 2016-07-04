@@ -1,7 +1,7 @@
 <template name="filtering">
-  <form class="form-inline">
+  <form class="form-inline" id="filtering-form">
     Select API:
-    <select class="" id="select-api-backend">
+    <select class="" id="api-backend-id">
       <option value="">-</option>
       {{ # each api in apis }}
         <option value="{{ api._id }}">{{ api.name }}</option>
