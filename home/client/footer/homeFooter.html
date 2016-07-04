@@ -21,7 +21,11 @@
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
             {{#if User}}
-            <li><a href="/dashboard">{{_ "Dashboard"}}</a></li>
+            <li>
+              <a href="/dashboard">
+                {{_ "Dashboard"}}
+              </a>
+            </li>
             {{else}}
             <li>
               <a href="/sign-in">
