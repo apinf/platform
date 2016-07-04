@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="feature-section-heading">
-          {{_ "homeBody_feature_Section_Heading1"}}
+          {{_ "homeBody_feature_section_heading1"}}
         </h2>
         <hr class="primary">
       </div>
@@ -16,10 +16,10 @@
         <div class="feature-box">
           <i class="fa fa-search"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title1"}}
+            {{_ "homeBody_feature_title1"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title1_Text"}}
+            {{_ "homeBody_feature_title1_text"}}
           </p>
         </div>
       </div>
@@ -27,10 +27,10 @@
         <div class="feature-box">
           <i class="fa fa-magic"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title2"}}
+            {{_ "homeBody_feature_title2"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title2_Text"}}
+            {{_ "homeBody_feature_title2_text"}}
           </p>
         </div>
       </div>
@@ -38,10 +38,10 @@
         <div class="feature-box">
           <i class="fa fa-book"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title3"}}
+            {{_ "homeBody_feature_title3"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title3_Text"}}
+            {{_ "homeBody_feature_title3_text"}}
           </p>
         </div>
       </div>
@@ -49,10 +49,10 @@
         <div class="feature-box">
           <i class="fa fa-bar-chart"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title4"}}
+            {{_ "homeBody_feature_title4"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title4_Text"}}
+            {{_ "homeBody_feature_title4_text"}}
           </p>
         </div>
       </div>
@@ -60,7 +60,7 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="feature-section-heading">
-          {{_ "homeBody_feature_Section_Heading2"}}
+          {{_ "homeBody_feature_section_heading2"}}
         </h2>
         <hr class="primary">
       </div>
@@ -70,10 +70,10 @@
         <div class="feature-box">
           <i class="fa fa-arrow-up"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title5"}}
+            {{_ "homeBody_feature_title5"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title5_Text"}}
+            {{_ "homeBody_feature_title5_text"}}
           </p>
         </div>
       </div>
@@ -81,10 +81,10 @@
         <div class="feature-box">
           <i class="fa fa-cog"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title6"}}
+            {{_ "homeBody_feature_title6"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title6_Text"}}
+            {{_ "homeBody_feature_title6_text"}}
           </p>
         </div>
       </div>
@@ -92,10 +92,10 @@
         <div class="feature-box">
           <i class="fa fa-line-chart"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title7"}}
+            {{_ "homeBody_feature_title7"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title7_Text"}}
+            {{_ "homeBody_feature_title7_text"}}
           </p>
         </div>
       </div>
@@ -103,10 +103,10 @@
         <div class="feature-box">
           <i class="fa fa-cloud"></i>
           <h3 class="feature-title">
-            {{_ "homeBody_feature_Title8"}}
+            {{_ "homeBody_feature_title8"}}
           </h3>
           <p class="feature-title-text">
-            {{_ "homeBody_feature_Title8_Text"}}
+            {{_ "homeBody_feature_title8_text"}}
           </p>
         </div>
       </div>
@@ -119,15 +119,15 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">
-            {{_ "homeBody_section1_Heading"}}
+            {{_ "homeBody_section1_heading"}}
           </h2>
           <p class="lead">
-            {{_ "homeBody_section1_Text"}}
+            {{_ "homeBody_section1_text"}}
           </p>
           {{# unless User }}
           <p class="lead">
             <a href='/sign-up'>
-              {{_ "homeBody_section1_Text_Extra"}}
+              {{_ "homeBody_section1_text_extra"}}
             </a>
           </p>
           {{/ unless }}
@@ -148,14 +148,14 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">
-            {{_ "homeBody_section2_Heading"}}
+            {{_ "homeBody_section2_heading"}}
           </h2>
           <p class="lead">
-            {{_ "homeBody_section2_Text"}}
+            {{_ "homeBody_section2_text"}}
           </p>
           <p class="lead">
             <a href='#' class='contact-us-link'>
-              {{_ "homeBody_section2_Text_Extra"}}
+              {{_ "homeBody_section2_text_extra"}}
             </a>
           </p>
         </div>
@@ -169,23 +169,28 @@
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
           <h2 class="section-heading">
-            {{_ "homeBody_section3_Heading"}}
+            {{_ "homeBody_section3_heading"}}
           </h2>
           <p class="lead">
-            {{_ "homeBody_section3_Text"}}
+            {{_ "homeBody_section3_text"}}
           </p>
           <p class="lead">
-            {{_ "homeBody_section3_Text_Extra"}}
+            {{_ "homeBody_section3_text_extra"}}
             {{# each network in branding.socialMedia }}
             <a href="{{ network.url }}" target="_blank">
               {{ network.name }}
             </a>
             {{/each}}
-            <a href='http://community.apinf.io'>Apinf Community</a>
+            <a href='http://community.apinf.io'>
+              {{_ "homeBody_section3_communityLinkText" }}
+            </a>
           </p>
         </div>
         <div class="col-lg-4 col-lg-push-1 col-sm-6">
-          <img class="img-responsive" src="img/opensource.png" alt="We are Open Source">
+          <img
+            class="img-responsive"
+            src="img/opensource.png"
+            alt="{{_ 'homeBody_openSource_imageAltText' }}">
         </div>
       </div>
     </div>
