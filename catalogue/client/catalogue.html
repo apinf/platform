@@ -10,7 +10,7 @@
                 data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1"
                 aria-expanded="false">
-          <span class="sr-only">Toggle toolbar</span>
+          <span class="sr-only">{{_ "catalogue_toolbar_toggleCollapse" }}</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -21,22 +21,22 @@
       <div class="collapse navbar-collapse sort-filter-toolbar" id="bs-example-navbar-collapse-1">
         <div class="nav navbar-nav">
           <p class="navbar-text sort-filter-toolbar-title">
-            Sort by
+            {{_ "catalogue_toolbar_sortBy_title" }}
           </p>
           <div class="form-group sort-options-form">
             <form class="form navbar-form navbar-nav" id="sort-options-select">
               <select name="sort-menu" class="form-control sort-options-select" id="sort-select">
                 <option value="name">
-                  Name
+                  {{_ "catalogue_toolbar_sortMenuOptions_name" }}
                 </option>
                 <option value="bookmarkCount">
-                  Popularity
+                  {{_ "catalogue_toolbar_sortMenuOptions_bookmarkCount" }}
                 </option>
                 <option value="averageRating">
-                  Rating
+                  {{_ "catalogue_toolbar_sortMenuOptions_averageRating" }}
                 </option>
                 <option value="created_at">
-                  Recency
+                  {{_ "catalogue_toolbar_sortMenuOptions_dateCreated" }}
                 </option>
               </select>
             </form>
@@ -44,11 +44,15 @@
         </div>
         <div class="nav navbar-nav">
           <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
-            <label class="btn btn-default toolbar-tooltip active" title="Ascending">
+            <label
+              class="btn btn-default toolbar-tooltip active"
+              title="{{_ 'catalogue_toolbar_sortMenuOptions_sortAscending' }}">
               <input type="radio" name="sort-direction" id="sort-ascending" value="ascending">
               <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
             </label>
-            <label class="btn btn-default toolbar-tooltip" title="Descending">
+            <label
+              class="btn btn-default toolbar-tooltip"
+              title="{{_ 'catalogue_toolbar_sortMenuOptions_sortDescending' }}">
               <input type="radio" name="sort-direction" id="sort-descending" value="descending">
               <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
             </label>
@@ -59,15 +63,15 @@
           <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
             <label class="btn btn-default active">
               <input type="radio" name="filter-options" id="show-all" value="all">
-              Show All
+              {{_ "catalogue_toolbar_filterOptions_showAll" }}
             </label>
             <label class="btn btn-default">
               <input type="radio" name="filter-options" id="my-apis" value="my-apis">
-              My APIs
+              {{_ "catalogue_toolbar_filterOptions_myApis" }}
             </label>
             <label class="btn btn-default">
               <input type="radio" name="filter-options" id="my-bookmarks" value="my-bookmarks">
-              My Bookmarks
+              {{_ "catalogue_toolbar_filterOptions_myBookmarks" }}
             </label>
           </div>
         </div>
