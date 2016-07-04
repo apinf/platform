@@ -292,19 +292,9 @@ Template.chartsLayout.onCreated(function () {
 
   instance.filterData = function (items, apiBackendId) {
 
-    let newDataSet = [];
-
-    _.forEach(items, (item) => {
-
-      const str = item.fields.request_path[0];
-
-      if (str.indexOf(apiBackendId) > -1) {
-
-        newDataSet.push(item);
-      }
+    return _.filter(items, (item) => {
+      return item.fields.request_path[0].indexOf(apiBackendId) > -1;
     });
-
-    return newDataSet;
   }
 });
 

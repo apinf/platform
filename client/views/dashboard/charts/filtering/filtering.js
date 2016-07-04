@@ -19,7 +19,13 @@ Template.filtering.helpers({
   apis () {
     const instance = Template.instance();
 
-    return instance.apis.get()
+    return instance.apis.get();
+  },
+  selectedApi (apiId) {
+
+    const apiBackendId = Session.get('apiBackendId');
+
+    return (apiId === apiBackendId) ? 'selected' : '';
   }
 });
 
