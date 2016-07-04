@@ -72,6 +72,8 @@
   "configName": "Apinf",
   "configSubtitle": "Create custom API mashups, really quick.",
   "configTitle": "Build custom APIs. Fast.",
+  "contactForm_reset": "Reset",
+  "contactForm_submit": "Submit",
   "dataTable_NextPage": "Next",
   "dataTable_PrevPage": "Previous",
   "dataTable_RequestCountry": "Country",
@@ -303,6 +305,20 @@
           "label": "Backend prefix",
           "placeholder": "Enter a string to be added to each backend request"
         }
+      }
+    },
+    "contact": {
+      "name": {
+        "label": "Your name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "E-mail address",
+        "placeholder": "Your email"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Your message"
       }
     }
   },
