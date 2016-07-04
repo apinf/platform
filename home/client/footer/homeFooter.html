@@ -22,18 +22,18 @@
           <ul class="list-inline quicklinks">
             {{#if User}}
             <li>
-              <a href="/dashboard">
-                {{_ "Dashboard"}}
+              <a href="{{ pathFor 'dashboard' }}">
+                {{_ "homeFooter_dashboardLink_text" }}
               </a>
             </li>
             {{else}}
             <li>
-              <a href="/sign-in">
+              <a href="{{ pathFor 'atSignIn' }}">
                 {{_ "signIn"}}
               </a>
             </li>
             <li>
-              <a href="/sign-up">
+              <a href="{{ pathFor 'atSignUp' }}">
                 {{_ "signUp"}}
               </a>
             </li>
