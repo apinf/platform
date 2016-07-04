@@ -57,6 +57,8 @@
   "catalogue_toolbar_sortMenuOptions_sortAscending": "Ascending",
   "catalogue_toolbar_sortMenuOptions_sortDescending": "Descending",
   "catalogue_toolbar_toggleCollapse": "Toggle toolbar",
+  "catalogue_toolbar_viewMode_grid": "Grid",
+  "catalogue_toolbar_viewMode_table": "Table",
   "catalogueGrid-addedBy": "Added by",
   "catalogueTable-added": "Added",
   "catalogueTable-addedBy": "Added by",
