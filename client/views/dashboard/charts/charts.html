@@ -1,6 +1,11 @@
 <template name="chartsLayout">
   <div class="row">
     <div class="col-md-12">
+      {{ > filtering }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <div>
         {{ > requestsOverTimeChart }}
       </div>
