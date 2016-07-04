@@ -21,4 +21,19 @@ Template.filtering.helpers({
 
     return instance.apis.get()
   }
+});
+
+Template.filtering.events({
+  'change #filtering-form': function (event) {
+
+    event.preventDefault();
+
+    const instance = Template.instance();
+
+    const api = $('#api-backend-id').val();
+
+    Session.set('apiBackendId', api);
+
+    console.log('filtered')
+  }
 })
