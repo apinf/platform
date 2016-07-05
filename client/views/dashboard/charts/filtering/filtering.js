@@ -19,6 +19,8 @@ Template.filtering.helpers({
   apis () {
     const instance = Template.instance();
 
+    console.log(instance.apis.get())
+
     return instance.apis.get();
   },
   selectedApi (apiId) {
@@ -36,10 +38,8 @@ Template.filtering.events({
 
     const instance = Template.instance();
 
-    const api = $('#api-backend-id').val();
+    const apiRequestPath = $('#api-request-path').val();
 
-    Session.set('apiBackendId', api);
-
-    console.log('filtered')
+    Session.set('apiRequestPath', apiRequestPath);
   }
 })
