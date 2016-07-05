@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { ApiBackends } from '/apis/collection/backend';
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -14,46 +15,71 @@ Template.chartsLayout.onCreated(function () {
   instance.esData = new ReactiveVar(); // Handles ES data for charts
   instance.tableDataSet = new ReactiveVar([]); // Handles parsed data for charts
 
-  instance.timeStart = new Date().getTime(); // Timer
+  instance.subscribe('myManagedApis');
 
-  const params = {
-    size: 50000,
-    body: {
-      query: {
-        filtered: {
-          query: {
-            match_all: {}
-          },
-          filter: {
-            range: {
-              request_at: {
-                gte: moment().subtract(30, 'day').valueOf()
-              }
+  instance.autorun(() => {
+    if (instance.subscriptionsReady()) {
+
+      const myManagedApis = ApiBackends.find().fetch();
+
+      let prefixesList = [];
+
+      _.forEach(myManagedApis, (api) => {
+        prefixesList.push({
+          wildcard: {
+            request_path: {
+              value: `*${api.url_matches[0].frontend_prefix}*`
             }
           }
+        });
+      });
+
+      console.log(prefixesList);
+
+      const params = {
+        size: 10000,
+        body: {
+          query: {
+            filtered: {
+              query: {
+                bool: {
+                  should: [
+                    prefixesList
+                  ]
+                }
+              },
+              filter: {
+                range: {
+                  request_at: {
+                    gte: moment().subtract(30, 'day').valueOf()
+                  }
+                }
+              }
+            }
+          },
+          sort : [
+              { request_at : { order : 'desc' }},
+          ],
+          fields: [
+            'request_at',
+            'response_status',
+            'response_time',
+            'request_ip_country',
+            'request_ip',
+            'request_path'
+          ]
         }
-      },
-      sort : [
-          { request_at : { order : 'desc' }},
-      ],
-      fields: [
-        'request_at',
-        'response_status',
-        'response_time',
-        'request_ip_country',
-        'request_ip',
-        'request_path'
-      ]
+      }
+
+      Meteor.call('getElasticSearchData', params, (err, res) => {
+
+        if (err) throw new Meteor.error(err);
+
+        const hits = res.hits.hits; // Get list of items for analytics
+
+        instance.esData.set(hits); // Update reactive variable
+      });
     }
-  }
-
-  Meteor.call('getElasticSearchData', params, (err, res) => {
-
-    if (err) throw new Meteor.error(err);
-
-    const hits = res.hits.hits; // Get list of items for analytics
-
-    instance.esData.set(hits); // Update reactive variable
   });
 
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
