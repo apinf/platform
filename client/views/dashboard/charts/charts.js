@@ -56,6 +56,7 @@ Template.chartsLayout.onCreated(function () {
     instance.esData.set(hits); // Update reactive variable
   });
 
+  // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
 
     const index = new crossfilter(items); // Create crossfilter
@@ -151,6 +152,7 @@ Template.chartsLayout.onCreated(function () {
     };
   }
 
+  // Render charts on the page
   instance.renderCharts = function (parsedData) {
 
     const {
@@ -290,6 +292,7 @@ Template.chartsLayout.onCreated(function () {
     }
   }
 
+  // Fiter data based on frontend prefix
   instance.filterData = function (items, apiRequestPath) {
 
     return _.filter(items, (item) => {
