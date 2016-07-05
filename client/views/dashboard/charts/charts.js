@@ -293,10 +293,10 @@ Template.chartsLayout.onCreated(function () {
   }
 
   // Fiter data based on frontend prefix
-  instance.filterData = function (items, apiRequestPath) {
+  instance.filterData = function (items, apiFrontendPrefix) {
 
     return _.filter(items, (item) => {
-      return item.fields.request_path[0].indexOf(apiRequestPath) > -1;
+      return item.fields.request_path[0].indexOf(apiFrontendPrefix) > -1;
     });
   }
 });
@@ -313,15 +313,15 @@ Template.chartsLayout.onRendered(function () {
   instance.autorun(() => {
 
     const chartData = instance.esData.get(); // Get elasticsearch data
-    const apiRequestPath = Session.get('apiRequestPath');
+    const apiFrontendPrefix = Session.get('apiFrontendPrefix');
 
     if (chartData) {
 
       let parsedData = [];
 
-      if (apiRequestPath) {
+      if (apiFrontendPrefix) {
 
-        const filteredData = instance.filterData(chartData, apiRequestPath);
+        const filteredData = instance.filterData(chartData, apiFrontendPrefix);
 
         parsedData = instance.parseChartData(filteredData); // Parse ES data
 

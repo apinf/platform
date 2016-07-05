@@ -38,8 +38,8 @@ Template.filtering.events({
 
     const instance = Template.instance();
 
-    const apiRequestPath = $('#api-request-path').val();
+    const apiFrontendPrefix = $('#api-frontend-prefix').val();
 
-    Session.set('apiRequestPath', apiRequestPath);
+    Session.set('apiFrontendPrefix', apiFrontendPrefix);
   }
 })
