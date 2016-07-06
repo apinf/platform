@@ -10,32 +10,34 @@ import crossfilter from 'crossfilter';
 
 Template.chartsLayout.onCreated(function () {
 
-  const instance = this;
+  const instance = this; // Get reference to template instance
 
   instance.esData = new ReactiveVar(); // Handles ES data for charts
   instance.tableDataSet = new ReactiveVar([]); // Handles parsed data for charts
 
-  instance.subscribe('myManagedApis');
+  instance.subscribe('myManagedApis'); // Subscribe to publication
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
 
-      const myManagedApis = ApiBackends.find().fetch();
+      const myManagedApis = ApiBackends.find().fetch(); // Get APIs managed by user
 
-      let prefixesList = [];
+      let prefixesQuery = []; // Init varuable to keep elasticsearch sub-query
 
+      // Iterate through eacy API managed by user
       _.forEach(myManagedApis, (api) => {
-        prefixesList.push({
+        // Push query object to array
+        prefixesQuery.push({
           wildcard: {
             request_path: {
+              // Add '*' to partially match the url
               value: `*${api.url_matches[0].frontend_prefix}*`
             }
           }
         });
       });
 
-      console.log(prefixesList);
-
+      // Construct parameters for elasticsearch
       const params = {
         size: 10000,
         body: {
@@ -44,7 +46,7 @@ Template.chartsLayout.onCreated(function () {
               query: {
                 bool: {
                   should: [
-                    prefixesList
+                    prefixesQuery
                   ]
                 }
               },
