@@ -221,7 +221,7 @@ In a nutshell, **write code for humans to read and understand**. Our code will b
  * comment can be long, e.g. 80 characters
  * comments at same level of nesting fall in-line with one another vertically
  
-### Example comment
+#### Example comment
 ```js
 // Try and find the missing widget
 let missingWidget = Widgets.findOne({missing: true});
@@ -229,6 +229,41 @@ let missingWidget = Widgets.findOne({missing: true});
 
 ### One task per line
 Each line of code should perform only one action. When chaining is important, each chained aciton should be placed on a new line.
+
+#### Chaining example
+
+Chained methods
+
+```js
+let pizza = new Pizza();
+
+pizza
+  .cook()
+  .slice()
+  .serve()
+  .enjoy();
+```
+
+#### Complex line example
+A complex line can be split into parts.
+
+```js
+// Complex line
+let missingWidgetCount = Widgets.find({missing: true}).fetch().length;
+```
+
+```js
+// Safer in parts
+let missingWidgets = Widgets.find().fetch();
+
+if (missingWidgets) {
+ // Count the missing widgets
+ let missingWidgetsCount = missingWidgets.length
+ 
+ // Alert the boss!
+ console.log(missingWidgetsCount, "widgets are missing!");
+}
+```
 
 ### JavaScript semi-standard
 Please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
