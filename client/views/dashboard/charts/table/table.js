@@ -3,7 +3,7 @@ Template.dataTable.onCreated(function () {
   const instance = this; // Get reference to template instance
 
   instance.rowCount = new ReactiveVar(10); // Add initial row count to a table
-  instance.pageNumber = new ReactiveVar(1); // Add inital page number
+  instance.pageNumber = new ReactiveVar(0); // Add inital page number
 
 });
 
@@ -30,6 +30,20 @@ Template.dataTable.events({
 
       instance.pageNumber.set(currentPageNumber + 1); // Increment page number
     }
+  },
+  'change #change-row-count': function (event, instance) {
+
+    // Prevent default form submit
+    event.preventDefault();
+
+    // Get row count value from form
+    const rowCountValue = $('#row-count').val();
+
+    // Parse value to int
+    const newRowCount = parseInt(rowCountValue);
+
+    // Update reactive variable
+    instance.rowCount.set(newRowCount);
   }
 })
 
@@ -45,6 +59,8 @@ Template.dataTable.helpers({
     const arrStart = rowCount * pageNumber;
     const arrEnd = arrStart + rowCount;
 
+    console.log(arrStart, arrEnd)
+
     // Slice array for current page
     return Template.currentData().tableDataSet.slice(arrStart, arrEnd);
   },
@@ -54,7 +70,7 @@ Template.dataTable.helpers({
 
     const pageNumber = instance.pageNumber.get(); // Ger current page number
 
-    return pageNumber > 1; // Check if current page is the first one in table
+    return pageNumber > 0; // Check if current page is the first one in table
   },
   showNextButton () {
 
@@ -67,23 +83,31 @@ Template.dataTable.helpers({
     const dataSetLength = Template.currentData().tableDataSet.length;
 
     // Check if current page is the last one in the table
-    return pageNumber < (dataSetLength / rowCount - 1);
+    return pageNumber < (dataSetLength / rowCount);
   },
   currentPageNumber () {
 
     const instance = Template.instance(); // Get reference to a template instance
 
-    return instance.pageNumber.get(); // Get current page number
+    return instance.pageNumber.get() + 1; // Get current page number
   },
   totalPageNumber () {
 
-    const instance = Template.instance(); // Get reference to template instance
+    // Get reference to template instance
+    const instance = Template.instance();
 
-    const rowCount = instance.rowCount.get(); // Get row count
+    // Get row count
+    const rowCount = instance.rowCount.get();
 
     // Get table dataset length
     const dataSetLength = Template.currentData().tableDataSet.length;
 
-    return (dataSetLength / rowCount) | 0; // Calculate total page number and make it integer
+    // Calculate total page number and make it integer
+    return (dataSetLength / rowCount) + 1 | 0;
+  },
+  totalEntitiesCount () {
+
+    // Get table dataset length
+    return Template.currentData().tableDataSet.length;
   }
 })
