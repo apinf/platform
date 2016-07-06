@@ -280,8 +280,8 @@ Use semantic variable names. Semantic variable names have the following traits:
 Here are some not so meaningful variable names:
 
 ```js
-// Stuff to eat
-let array1 = ["pizza slice", "yohgurt", "strawberries"];
+// Stuff to eat (somewhat healthy)
+let array1 = ["pizza slice", "yogurt", "strawberries"];
 
 // Stuff to disgard
 let array2 = ["tattered shoe", "broken pencil", "crumpled paper"];
