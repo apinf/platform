@@ -1,9 +1,3 @@
-Template.contactForm.helpers({
-  contactFormSchema: function() {
-    return Schemas.contact;
-  }
-});
-
 AutoForm.hooks({
   contactForm: {
     beginSubmit: function () {
@@ -21,11 +15,4 @@ AutoForm.addHooks(['contactForm'], {
   onSuccess: function () {
     FlashMessages.sendSuccess('Thank you! Your message has been successfully sent.');
   }
-});
-
-FlashMessages.configure({
-  // Configuration for FlashMessages.
-  autoHide: true,
-  hideDelay: 5000,
-  autoScroll: false
 });

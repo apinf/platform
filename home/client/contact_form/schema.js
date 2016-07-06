@@ -1,30 +1,30 @@
 Schemas.contact = new SimpleSchema({
   name: {
     type: String,
-    label: "Your name",
+    label: TAPi18n.__("contactForm_name_label"),
     max: 50,
     optional: false,
     autoform: {
-      placeholder: 'Your name'
+      placeholder: TAPi18n.__("contactForm_name_placeholder")
     }
   },
   email: {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: "E-mail address",
+    label: TAPi18n.__("contactForm_email_label"),
     optional: false,
     autoform: {
-      placeholder: 'Your email'
+      placeholder: TAPi18n.__("contactForm_email_placeholder")
     }
   },
   message: {
     type: String,
-    label: "Message",
+    label: TAPi18n.__("contactForm_message_label"),
     max: 1000,
     optional: false,
     autoform: {
       rows: 5,
-      placeholder: 'Your message'
+      placeholder: TAPi18n.__("contactForm_message_placeholder")
     }
   }
 });
