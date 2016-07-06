@@ -162,5 +162,17 @@ Template.addApiBackendWizard.helpers({
     }];
 
     return steps;
+  },
+  backButtonText () {
+    // Get translation string for next button
+    return TAPi18n.__("addApiBackendWizard_backButton_text");
+  },
+  nextButtonText () {
+    // Get translation string for next button
+    return TAPi18n.__("addApiBackendWizard_nextButton_text");
+  },
+  confirmButtonText () {
+    // Get translation string for next button
+    return TAPi18n.__("addApiBackendWizard_confirmButton_text");
   }
 });
