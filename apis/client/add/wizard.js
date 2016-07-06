@@ -128,7 +128,7 @@ Template.addApiBackendWizard.helpers({
               Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
 
                 if (apiUmbrellaWebResponse.http_status === 201) {
-                  sAlert.success("API Backend successfully published.");
+                  sAlert.success(TAPi18n.__("addApiBackendWizard_success_apiUmbrellaPublished"));
                   // Add user to manager Role
                   Roles.addUsersToRoles(Meteor.userId(), ['manager']);
                 } else {
