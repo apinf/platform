@@ -1,5 +1,5 @@
-<template name="dataTable">
-  <h4 class="dashboard-block-title">{{ _ "dataTable_Title" }}</h4>
+<template name="dashboardDataTable">
+  <h4 class="dashboard-block-title">{{ _ "dashboardDataTable_title" }}</h4>
   <a
      tabindex="0"
      class="dashboard-block-help"
@@ -7,26 +7,26 @@
      data-toggle="popover"
      data-placement="right"
      data-trigger="focus"
-     data-content="{{ _ 'dataTable_Help_Text' }}">
+     data-content="{{ _ 'dashboardDataTable_help_text' }}">
     <i class="fa fa-question-circle" aria-hidden="true"></i>
   </a>
   <table class="dataTable table table-bordered table-hover">
     <thead>
       <tr>
         <th>
-          {{ _ "dataTable_TimeStamp" }}
+          {{ _ "dashboardDataTable_timeStamp" }}
         </th>
         <th>
-          {{ _ "dataTable_RequestCountry" }}
+          {{ _ "dashboardDataTable_requestCountry" }}
         </th>
         <th>
-          {{ _ "dataTable_RequestPath" }}
+          {{ _ "dashboardDataTable_requestPath" }}
         </th>
         <th>
-          {{ _ "dataTable_RequestIP" }}
+          {{ _ "dashboardDataTable_requestIP" }}
         </th>
         <th>
-          {{ _ "dataTable_ResponseTime" }}
+          {{ _ "dashboardDataTable_responseTime" }}
         </th>
       </tr>
     </thead>
@@ -60,22 +60,22 @@
       {{ # if showPrevButton }}
         <button class="btn btn-sm btn-default" id="prev">
           <span class="glyphicon glyphicon-chevron-left"></span>
-          {{ _ "dataTable_PrevPage" }}
+          {{ _ "dashboardDataTable_prevPage" }}
         </button>
       {{ else }}
         <button class="btn btn-sm btn-default disabled">
           <span class="glyphicon glyphicon-chevron-left"></span>
-          {{ _ "dataTable_PrevPage" }}
+          {{ _ "dashboardDataTable_prevPage" }}
         </button>
       {{ / if }}
       {{ # if showNextButton }}
         <button class="btn btn-sm btn-default" id="next">
-          {{ _ "dataTable_NextPage" }}
+          {{ _ "dashboardDataTable_nextPage" }}
           <span class="glyphicon glyphicon-chevron-right"></span>
         </button>
       {{ else }}
         <button class="btn btn-sm btn-default disabled">
-          {{ _ "dataTable_NextPage" }}
+          {{ _ "dashboardDataTable_nextPage" }}
           <span class="glyphicon glyphicon-chevron-right"></span>
         </button>
       {{ / if }}
