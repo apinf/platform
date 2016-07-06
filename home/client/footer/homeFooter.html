@@ -14,15 +14,29 @@
           </ul>
         </div>
         <div class="col-lg-8 col-lg-push-1">
-          <p class="footer-text">{{ branding.siteFooter }}</p>
+          <p class="footer-text">
+            {{ branding.siteFooter }}
+          </p>
         </div>
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
             {{#if User}}
-            <li><a href="/dashboard">{{_ "Dashboard"}}</a></li>
+            <li>
+              <a href="{{ pathFor 'dashboard' }}">
+                {{_ "homeFooter_dashboardLink_text" }}
+              </a>
+            </li>
             {{else}}
-            <li><a href="/sign-in">{{_ "signIn"}}</a></li>
-            <li><a href="/sign-up">{{_ "signUp"}}</a></li>
+            <li>
+              <a href="{{ pathFor 'atSignIn' }}">
+                {{_ "signIn"}}
+              </a>
+            </li>
+            <li>
+              <a href="{{ pathFor 'atSignUp' }}">
+                {{_ "signUp"}}
+              </a>
+            </li>
             {{/if}}
           </ul>
         </div>
