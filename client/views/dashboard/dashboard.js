@@ -8,7 +8,7 @@ import dc from 'dc';
 import d3 from 'd3';
 import crossfilter from 'crossfilter';
 
-Template.chartsLayout.onCreated(function () {
+Template.dashboard.onCreated(function () {
 
   // Get reference to template instance
   const instance = this;
@@ -343,7 +343,7 @@ Template.chartsLayout.onCreated(function () {
   }
 });
 
-Template.chartsLayout.onRendered(function () {
+Template.dashboard.onRendered(function () {
 
   const instance = this;
 
@@ -379,7 +379,7 @@ Template.chartsLayout.onRendered(function () {
   });
 });
 
-Template.chartsLayout.helpers({
+Template.dashboard.helpers({
   tableDataSet () {
     const instance = Template.instance();
     return instance.tableDataSet.get();
