@@ -1,5 +1,7 @@
 <template name="addApiBackendWizard">
-  <h1>Add API Backend Wizard</h1>
+  <h1>
+    {{_ "addApiBackendWizard_heading" }}
+  </h1>
   {{> wizard
     id="add-api-backend-wizard"
     route="addApiBackend-wizard"
@@ -7,6 +9,6 @@
     buttonClasses="btn btn-default"
     stepsTemplate="steps_bootstrap3"
     clearOnDestroy=true
-    confirmButton="Publish API Backend"
+    confirmButton="{{_ 'addApiBackendWizard_publishButton_text' }}"
   }}
 </template>
