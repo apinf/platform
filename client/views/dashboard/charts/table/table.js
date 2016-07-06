@@ -10,23 +10,23 @@ Template.dataTable.onCreated(function () {
 Template.dataTable.events({
   'click #prev': function (event, instance) {
 
-    let currentPageNumber = instance.pageNumber.get(); // Get current page number
+    const currentPageNumber = instance.pageNumber.get(); // Get current page number
 
     // Check if page number the first page in the table
-    if (currentPageNumber > 1) {
+    if (currentPageNumber > 0) {
 
       instance.pageNumber.set(currentPageNumber - 1); // Decrement page number value
     }
   },
   'click #next': function (event, instance) {
 
-    let currentPageNumber = instance.pageNumber.get(); // Get current page number
+    const currentPageNumber = instance.pageNumber.get(); // Get current page number
 
     const rowCount = instance.rowCount.get(); // Get table row count
     const dataSetLength = Template.currentData().tableDataSet.length; // Get table dataset length
 
     // Check if current page is the last one in the table
-    if (currentPageNumber < (dataSetLength / rowCount) - 1) {
+    if (currentPageNumber < (dataSetLength / rowCount - 1)) {
 
       instance.pageNumber.set(currentPageNumber + 1); // Increment page number
     }
@@ -83,7 +83,7 @@ Template.dataTable.helpers({
     const dataSetLength = Template.currentData().tableDataSet.length;
 
     // Check if current page is the last one in the table
-    return pageNumber < (dataSetLength / rowCount);
+    return pageNumber < (dataSetLength / rowCount - 1);
   },
   currentPageNumber () {
 
@@ -103,7 +103,7 @@ Template.dataTable.helpers({
     const dataSetLength = Template.currentData().tableDataSet.length;
 
     // Calculate total page number and make it integer
-    return (dataSetLength / rowCount) + 1 | 0;
+    return (dataSetLength / rowCount + 1) | 0;
   },
   totalEntitiesCount () {
 
