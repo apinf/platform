@@ -276,6 +276,35 @@ Use semantic variable names. Semantic variable names have the following traits:
 * Variables with multiple words use camel case notation
 * When used in subsequent lines of code, the variable name reads as close to a plain language sentence as possible
 
+#### Variable examples
+Here are some not so meaningful variable names:
+
+```js
+// Stuff to eat
+let array1 = ["pizza slice", "yohgurt", "strawberries"];
+
+// Stuff to disgard
+let array2 = ["tattered shoe", "broken pencil", "crumpled paper"];
+
+// Things might get confusing later on
+eat(array2);
+disgard(array1);
+```
+
+Meaningful variable names carry their meaning through the code.
+
+```js
+// Stuff to eat
+let food = ["pizza slice", "yohgurt", "strawberries"];
+
+// Stuff to disgard
+let trash = ["tattered shoe", "broken pencil", "crumpled paper"];
+
+// Now it all makes sense!
+eat(food);
+disgard(trash);
+```
+
 # File structure
 This project is organized around a general Meteor architecture. In effect, folders are organized to indicate how Meteor.js treats them (e.g. whether they should be client-only).
 
