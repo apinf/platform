@@ -1,0 +1,32 @@
+/* Bootstrap */
+@import "/core/client/style/bootstrap-variables.less";
+
+.home-layout {
+
+  .btn-default {
+    color: @btn-default-color;
+    background-color: @btn-default-bg;
+    border: @btn-default-border;
+  }
+
+  .btn-default:hover,
+  .btn-default:active,
+  .btn-default:focus,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:focus {
+    background-color: darken(@btn-default-bg, 10%);
+  }
+
+  .btn-primary {
+    color: @btn-primary-color;
+    background-color: @btn-primary-bg;
+    border: @btn-primary-border;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: @link-hover-decoration;
+  }
+}
