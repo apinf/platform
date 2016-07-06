@@ -1,6 +1,6 @@
 import { ApiBackends } from '/apis/collection/backend';
 
-Template.filtering.onCreated(function () {
+Template.dashboardChartsFiltering.onCreated(function () {
 
   const instance = this; // Get reference to template instance
 
@@ -15,7 +15,7 @@ Template.filtering.onCreated(function () {
   });
 });
 
-Template.filtering.helpers({
+Template.dashboardChartsFiltering.helpers({
   apis () {
 
     const instance = Template.instance(); // Get reference to template instance
@@ -31,7 +31,7 @@ Template.filtering.helpers({
   }
 });
 
-Template.filtering.events({
+Template.dashboardChartsFiltering.events({
   'change #filtering-form': function (event) {
 
     event.preventDefault(); // Prevent default form submit
