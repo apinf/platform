@@ -365,16 +365,20 @@ Template.dashboard.onRendered(function () {
 
         const filteredData = instance.filterData(chartData, apiFrontendPrefix);
 
-        parsedData = instance.parseChartData(filteredData); // Parse ES data
+        // Parse data for use in charts
+        parsedData = instance.parseChartData(filteredData);
 
       } else {
 
-        parsedData = instance.parseChartData(chartData); // Parse ES data
+        // Parse ES data
+        parsedData = instance.parseChartData(chartData);
       }
 
-      instance.renderCharts(parsedData); // Render chart with data
+      // Render chart with data
+      instance.renderCharts(parsedData);
 
-      chartElemets.removeClass('loader'); // Unset loader
+      // Unset loader
+      chartElemets.removeClass('loader');
     }
   });
 });
