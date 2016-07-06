@@ -210,12 +210,22 @@ Additionally, the following steps help our team stay coordinated:
 In a nutshell, **write code for humans to read and understand**. Our code will be minified for machines during the build process. For further reference, please [read Human JavaScript](http://read.humanjavascript.com/) by Henrik Joreteg.
 
 ### Comments
-*Every* significant line of code should have an accompanying human language (English) comment. This is for several reasons:
+*Every* significant line of code should have an accompanying human language (English) comment. Generally, comments should be placed on the line preceeding the code. This is for several reasons:
 
 * Comments act like a pair-programmer, explaining the code to other developers or your future self
 * Comments may illuminate errors
   * logical errors where code is not doing what is expected
   * semantic errors where the code is not [literate](https://en.wikipedia.org/wiki/Literate_programming)
+* Natural language is easier for the human mind to parse than computer code
+* Placing comments on the preceeding line, as opposed to the end of the line, improves readability
+ * comment can be long, e.g. 80 characters
+ * comments at same level of nesting fall in-line with one another vertically
+ 
+### Example comment
+```js
+// Try and find the missing widget
+let missingWidget = Widgets.findOne({missing: true});
+```
 
 ### One task per line
 Each line of code should perform only one action. When chaining is important, each chained aciton should be placed on a new line.
