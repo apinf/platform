@@ -354,7 +354,8 @@ Template.dashboard.onRendered(function () {
 
   instance.autorun(() => {
 
-    const chartData = instance.esData.get(); // Get elasticsearch data
+    // Get elasticsearch data
+    const chartData = instance.esData.get();
     const apiFrontendPrefix = Session.get('apiFrontendPrefix');
 
     if (chartData) {
