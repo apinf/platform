@@ -162,6 +162,7 @@
   "feedback_feedbackForm_button": "Send feedback",
   "feedback_feedbackForm_title": "Send feedback or report a problem",
   "feedback_feedbackForm_description": "We welcome problem reports, feature ideas and general comments.",
+  "filtering-selectAPI": "Select API",
   "searchField_button": "Search",
   "searchField_placeholder": "Search...",
   "searchPage_pageHeader": "Search APIs",
