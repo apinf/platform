@@ -10,19 +10,25 @@ import crossfilter from 'crossfilter';
 
 Template.chartsLayout.onCreated(function () {
 
-  const instance = this; // Get reference to template instance
+  // Get reference to template instance
+  const instance = this;
 
-  instance.esData = new ReactiveVar(); // Handles ES data for charts
-  instance.tableDataSet = new ReactiveVar([]); // Handles parsed data for charts
+  // Handles ES data for charts
+  instance.esData = new ReactiveVar();
+  // Handles parsed data for charts
+  instance.tableDataSet = new ReactiveVar([]);
 
-  instance.subscribe('myManagedApis'); // Subscribe to publication
+  // Subscribe to publication
+  instance.subscribe('myManagedApis');
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
 
-      const myManagedApis = ApiBackends.find().fetch(); // Get APIs managed by user
+      // Get APIs managed by user
+      const myManagedApis = ApiBackends.find().fetch();
 
-      let prefixesQuery = []; // Init varuable to keep elasticsearch sub-query
+      // Init varuable to keep elasticsearch sub-query
+      let prefixesQuery = [];
 
       // Iterate through eacy API managed by user
       _.forEach(myManagedApis, (api) => {
@@ -77,9 +83,11 @@ Template.chartsLayout.onCreated(function () {
 
         if (err) throw new Meteor.error(err);
 
-        const hits = res.hits.hits; // Get list of items for analytics
+        // Get list of items for analytics
+        const hits = res.hits.hits;
 
-        instance.esData.set(hits); // Update reactive variable
+        // Update reactive variable
+        instance.esData.set(hits);
       });
     }
   });
@@ -87,23 +95,28 @@ Template.chartsLayout.onCreated(function () {
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
 
-    const index = new crossfilter(items); // Create crossfilter
+    // Create crossfilter
+    const index = new crossfilter(items);
 
-    const dateFormat = d3.time.format("%Y-%m-%d-%H"); // Init dateformat for charts
+    // Init dateformat for charts
+    const dateFormat = d3.time.format("%Y-%m-%d-%H");
 
     // Create dimension based on a timestamp
     const timeStampDimension = index.dimension((d) => {
 
       let timeStamp = moment(d.fields.request_at[0]);
 
-      timeStamp = timeStamp.format('YYYY-MM-DD-HH'); // Format timestamp
+      // Format timestamp
+      timeStamp = timeStamp.format('YYYY-MM-DD-HH');
 
-      d.fields.ymd = dateFormat.parse(timeStamp); // Check if timestamp formats match
+      // Check if timestamp formats match
+      d.fields.ymd = dateFormat.parse(timeStamp);
 
       return d.fields.ymd;
     });
 
-    const timeStampGroup = timeStampDimension.group(); // Create timestamp group
+    // Create timestamp group
+    const timeStampGroup = timeStampDimension.group();
 
     // Create dimension based on status code
     const statusCodeDimension = index.dimension((d) => {
@@ -150,7 +163,8 @@ Template.chartsLayout.onCreated(function () {
       return binwidth * Math.floor(d / binwidth);
     });
 
-    const all = index.groupAll(); // Group add dimensions
+    // Group add dimensions
+    const all = index.groupAll();
 
     // Keep data counters on a dashboard updated
     dc.dataCount("#row-selection")

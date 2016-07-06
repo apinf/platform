@@ -4,15 +4,19 @@ import { ApiBackends } from '/apis/collection/backend';
 
 Template.dashboardChartsFiltering.onCreated(function () {
 
-  const instance = this; // Get reference to template instance
+  // Get reference to template instance
+  const instance = this;
 
-  instance.apis = new ReactiveVar(); // Create reactive variable to keep API array
+  // Create reactive variable to keep API array
+  instance.apis = new ReactiveVar();
 
-  instance.subscribe('myManagedApis'); // Subscribe to publication
+  // Subscribe to publication
+  instance.subscribe('myManagedApis');
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
-      instance.apis.set(ApiBackends.find().fetch()); // Update variable with data
+      // Update variable with data
+      instance.apis.set(ApiBackends.find().fetch());
     }
   });
 });
@@ -20,13 +24,15 @@ Template.dashboardChartsFiltering.onCreated(function () {
 Template.dashboardChartsFiltering.helpers({
   apis () {
 
-    const instance = Template.instance(); // Get reference to template instance
+    // Get reference to template instance
+    const instance = Template.instance();
 
     return instance.apis.get();
   },
   selectedApi (apiId) {
 
-    const apiBackendId = Session.get('apiBackendId'); // Get session variable
+    // Get session variable
+    const apiBackendId = Session.get('apiBackendId');
 
     // Check if session is set & set selected state depending on it
     return (apiId === apiBackendId) ? 'selected' : '';
@@ -36,12 +42,16 @@ Template.dashboardChartsFiltering.helpers({
 Template.dashboardChartsFiltering.events({
   'change #filtering-form': function (event) {
 
-    event.preventDefault(); // Prevent default form submit
+    // Prevent default form submit
+    event.preventDefault();
 
-    const instance = Template.instance(); // Get reference to template instance
+    // Get reference to template instance
+    const instance = Template.instance();
 
-    const apiFrontendPrefix = $('#api-frontend-prefix').val(); // Get selected value
+    // Get selected value
+    const apiFrontendPrefix = $('#api-frontend-prefix').val();
 
-    Session.set('apiFrontendPrefix', apiFrontendPrefix); // Set session variable
+    // Set session variable
+    Session.set('apiFrontendPrefix', apiFrontendPrefix);
   }
 })
