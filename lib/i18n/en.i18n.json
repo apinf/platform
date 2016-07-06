@@ -79,6 +79,7 @@
   "contactForm_reset": "Reset",
   "contactForm_submit": "Submit",
   "dashboard_MainTitle": "Dashboard",
+  "dataTable_Help_Text": "Available data depends on how API Response Timeline, HTTP Status Code or API Response Time charts are rendered for viewing.",
   "dataTable_NextPage": "Next",
   "dataTable_PrevPage": "Previous",
   "dataTable_RequestCountry": "Country",
@@ -251,7 +252,9 @@
   "requestsOverTimeChart_ShowingRecordsCount": "Showing records",
   "requestsOverTimeChart_ShowingRecordsCount_Of": "of",
   "requestsOverTimeChart_Title": "API Request Timeline",
+  "requestsOverTimeChart_Help_Text": "Click on the overview below to activate the View Finder. You can use it to select specific timeframe for which you wish to see API request patterns. HTTP Status Code and API Response Time charts will get rendered based on the selected timeframe.",
   "responseTimeDistributionChart_Title": "API Response Time",
+  "responseTimeDistributionChart_Help_Text": "Click on any bar to filter API Request Timeline and HTTP Status Code chart by requests that have the selected response time range.",
   "schemas": {
     "apiMetadata": {
       "organization": {
@@ -352,6 +355,7 @@
   "statusCheckTitle": "Status",
   "statusCheckUpdated": "Updated:",
   "statusCodeCountsChart_Title": "HTTP Status Codes",
+  "statusCodeCountsChart_Help_Text": "Click on any HTTP status bar to filter API Request Timeline and API Response Time chart for that specific response type.",
   "umbrella_createuser_error": "Failed to create user on API Umbrella.",
   "umbrella_notdefined_error": "API Umbrella not defined.",
   "uploadApiLogoButton": "Upload logo",
