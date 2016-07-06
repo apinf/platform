@@ -1,8 +1,10 @@
 {
   "account": "Account",
   "account_details": "Account Details",
+  "addApiBackendWizard_backButton_text": "Back",
+  "addApiBackendWizard_confirmButton_text": "Publish API Backend",
   "addApiBackendWizard_heading": "Add API Backend",
-  "addApiBackendWizard_publishButton_text": "Publish API Backend",
+  "addApiBackendWizard_nextButton_text": "Next",
   "addApiBackendWizard_steps_backendInformation_title": "Backend",
   "addApiBackendWizard_steps_baseInformation_title": "Base Information",
   "addApiBackendWizard_steps_prefixesInformation_title": "Matching URL Prefixes",
