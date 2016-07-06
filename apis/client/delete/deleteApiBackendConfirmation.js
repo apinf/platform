@@ -22,7 +22,7 @@ Template.deleteApiBackendConfirmation.helpers({
     return instance.backendName;
   },
 
-  /* this helper is needed to display a spinner on the template 
+  /* this helper is needed to display a spinner on the template
      after the user has pressed Delete. The instance.restCallStarted
      instance variable is set to True when the button
      is pressed. The spinner starts and continues until the call returns.*/
