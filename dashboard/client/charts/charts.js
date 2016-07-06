@@ -206,7 +206,7 @@ Template.chartsLayout.onCreated(function () {
       .transitionDuration(300)
       .dimension(statusCodeDimension)
       .group(statusCodeGroup)
-      .ordinalColors(['#28ae4f', '#ffc107', '#e15400', '#cc1410'])
+      .ordinalColors(['#28ae4f', '#ffc107', '#e15400', '#cc1410']) // Correspond to bootstrap color classes
       .elasticX(true)
       .xAxis().ticks(5);
 
