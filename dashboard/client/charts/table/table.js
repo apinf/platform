@@ -1,4 +1,4 @@
-Template.dataTable.onCreated(function () {
+Template.dashboardDataTable.onCreated(function () {
 
   const instance = this; // Get reference to template instance
 
@@ -7,7 +7,7 @@ Template.dataTable.onCreated(function () {
 
 });
 
-Template.dataTable.events({
+Template.dashboardDataTable.events({
   'click #prev': function (event, instance) {
 
     const currentPageNumber = instance.pageNumber.get(); // Get current page number
@@ -47,7 +47,7 @@ Template.dataTable.events({
   }
 })
 
-Template.dataTable.helpers({
+Template.dashboardDataTable.helpers({
   tableDataSet () {
 
     const instance = Template.instance(); // Get reference to template instance
