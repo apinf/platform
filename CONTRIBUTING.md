@@ -265,9 +265,6 @@ if (missingWidgets) {
 }
 ```
 
-### JavaScript semi-standard
-Please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
-
 ### Variables
 Use semantic variable names. Semantic variable names have the following traits:
 
@@ -304,6 +301,8 @@ let trash = ["tattered shoe", "broken pencil", "crumpled paper"];
 eat(food);
 disgard(trash);
 ```
+### JavaScript semi-standard
+In general, please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
 
 # File structure
 This project is organized around a general Meteor architecture. In effect, folders are organized to indicate how Meteor.js treats them (e.g. whether they should be client-only).
