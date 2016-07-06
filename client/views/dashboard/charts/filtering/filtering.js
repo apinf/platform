@@ -2,31 +2,31 @@ import { ApiBackends } from '/apis/collection/backend';
 
 Template.filtering.onCreated(function () {
 
-  const instance = this;
+  const instance = this; // Get reference to template instance
 
-  instance.apis = new ReactiveVar();
+  instance.apis = new ReactiveVar(); // Create reactive variable to keep API array
 
-  instance.subscribe('myManagedApis');
+  instance.subscribe('myManagedApis'); // Subscribe to publication
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
-      instance.apis.set(ApiBackends.find().fetch())
+      instance.apis.set(ApiBackends.find().fetch()); // Update variable with data
     }
   });
 });
 
 Template.filtering.helpers({
   apis () {
-    const instance = Template.instance();
 
-    console.log(instance.apis.get())
+    const instance = Template.instance(); // Get reference to template instance
 
     return instance.apis.get();
   },
   selectedApi (apiId) {
 
-    const apiBackendId = Session.get('apiBackendId');
+    const apiBackendId = Session.get('apiBackendId'); // Get session variable
 
+    // Check if session is set & set selected state depending on it
     return (apiId === apiBackendId) ? 'selected' : '';
   }
 });
@@ -34,12 +34,12 @@ Template.filtering.helpers({
 Template.filtering.events({
   'change #filtering-form': function (event) {
 
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submit
 
-    const instance = Template.instance();
+    const instance = Template.instance(); // Get reference to template instance
 
-    const apiFrontendPrefix = $('#api-frontend-prefix').val();
+    const apiFrontendPrefix = $('#api-frontend-prefix').val(); // Get selected value
 
-    Session.set('apiFrontendPrefix', apiFrontendPrefix);
+    Session.set('apiFrontendPrefix', apiFrontendPrefix); // Set session variable
   }
 })
