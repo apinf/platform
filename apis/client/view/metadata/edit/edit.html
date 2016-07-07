@@ -31,6 +31,7 @@
             type="update"
             doc=metadata
             omitFields="apiBackendId"
+            buttonContent=submitButtonText
           }}
           {{ else }}
           {{> quickForm
@@ -38,6 +39,7 @@
             id="editApiMetadataForm"
             type="insert"
             omitFields="apiBackendId"
+            buttonContent=submitButtonText
           }}
           {{/ if }}
         </div>
