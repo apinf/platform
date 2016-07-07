@@ -68,7 +68,7 @@ Template.dashboard.onCreated(function () {
             }
           },
           sort : [
-              { request_at : { order : 'desc' }},
+            { request_at : { order : 'desc' }},
           ],
           fields: [
             'request_at',
@@ -223,6 +223,7 @@ Template.dashboard.onCreated(function () {
       .renderArea(true)
       .transitionDuration(300)
       .margins({top: 5, right: 20, bottom: 25, left: 40})
+      .ordinalColors(['#2fa4e7'])
       .x(timeScaleForLineChart)
       .dimension(timeStampDimension)
       .group(timeStampGroup)
@@ -240,6 +241,7 @@ Template.dashboard.onCreated(function () {
       .centerBar(true)
       .gap(1)
       .margins({top: 5, right: 20, bottom: 25, left: 40})
+      .ordinalColors(['#2fa4e7'])
       .x(timeScaleForRangeChart)
       .alwaysUseRounding(true)
       .elasticY(true)
@@ -250,7 +252,7 @@ Template.dashboard.onCreated(function () {
       .transitionDuration(300)
       .dimension(statusCodeDimension)
       .group(statusCodeGroup)
-      .ordinalColors(['#31bd47', '#e4dd38', '#f2ac11', '#ed1f1f',])
+      .ordinalColors(['#28ae4f', '#ffc107', '#e15400', '#cc1410']) // Correspond to bootstrap color classes
       .elasticX(true)
       .xAxis().ticks(5);
 
@@ -262,6 +264,7 @@ Template.dashboard.onCreated(function () {
       .centerBar(true)
       .xUnits(dc.units.fp.precision(binwidth))
       .margins({top: 5, right: 20, bottom: 25, left: 45})
+      .ordinalColors(['#2fa4e7'])
       .brushOn(true)
       .x(xScaleForBar)
       .renderHorizontalGridLines(true)
@@ -402,6 +405,9 @@ Template.dashboard.onRendered(function () {
       chartElemets.removeClass('loader');
     }
   });
+
+  // Activate help icons
+  $('[data-toggle="popover"]').popover();
 });
 
 Template.dashboard.events({
