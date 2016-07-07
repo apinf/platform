@@ -109,6 +109,7 @@
   "editApiBackendForm-uploadLogo": "Upload logo",
   "editApiMetadata_editApiMetadataForm_button": "Edit API Metadata",
   "editApiMetadata_editApiMetadataForm_title": "Edit API Metadata",
+  "editApiMetadata_submitButtonText": "Submit",
   "editApi_hints_api_balance_algorithm": "In case you have provided multiple Front-end : Back-end host pairs, choose the balancing algorithm using which umbrella should forward the requests to your api backend.",
   "editApi_hints_api_key_verification_level": "Choose 'required' if API key is required to access your API",
   "editApi_hints_api_name": "A name that describes your API",
