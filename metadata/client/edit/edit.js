@@ -4,7 +4,7 @@ Template.editApiMetadata.helpers({
   apiMetadataCollection () {
     // Return a reference to the API Metadata collection
     return ApiMetadata;
-  }
+  },
   metadata () {
     // Get the API Backend ID from the route
     let apiBackendId = Router.current().params._id;
