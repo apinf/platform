@@ -1,3 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
 
-ApiMetadata = new Mongo.Collection("apiMetadata");
+const ApiMetadata = new Mongo.Collection("apiMetadata");
+
+export { ApiMetadata };
