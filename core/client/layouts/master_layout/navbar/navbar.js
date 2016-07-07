@@ -22,3 +22,10 @@ Template.navbar.helpers({
     }
   }
 });
+
+Template.navbar.onRendered(function() {
+  $('#buttonsearch').click(function() {
+    $('.searchblock-toggle').slideToggle("fast");
+    $('.openclosesearch').toggle();
+  });
+});
