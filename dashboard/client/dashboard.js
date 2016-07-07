@@ -341,9 +341,15 @@ Template.dashboard.onCreated(function () {
 
     let filteredData = [];
 
-    _.filter(items, (item) => {
+    // Iterate through each item
+    _.forEach(items, (item) => {
+      // Iterate through each API frontend prefix value
       _.forEach(apiFrontendPrefixList, (apiFrontendPrefix) => {
-        if (item.fields.request_path[0].indexOf(apiFrontendPrefix) > -1) {
+        // Get request path value
+        const request_path = item.fields.request_path[0];
+        // Check if request path contains API frontend prefix
+        if (request_path.indexOf(apiFrontendPrefix) > -1) {
+          // Push obect to "filtered" array
           filteredData.push(item)
         }
       });
@@ -366,14 +372,18 @@ Template.dashboard.onRendered(function () {
 
     // Get elasticsearch data
     const chartData = instance.esData.get();
+
+    // Get API frontend prefix list
     const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
     if (chartData) {
 
       let parsedData = [];
 
+      // Check if filtering by API is applied
       if (apiFrontendPrefixList) {
 
+        // Filter data by selected API(s)
         const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
 
         // Parse data for use in charts
