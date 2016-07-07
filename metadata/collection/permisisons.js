@@ -4,6 +4,7 @@ import { ApiBackends } from '/apis/collection/backend';
 ApiMetadata.allow({
   "insert": function (userId, doc) {
     var apiBackendId = doc.apiBackendId;
+
     // Make sure there is only one document per API Backend ID
     if(ApiMetadata.find({apiBackendId}).count() !== 0) {
       return false;
