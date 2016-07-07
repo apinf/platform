@@ -1,3 +1,5 @@
+import { ApiBackends } from '/apis/collection/backend';
+
 ApiMetadata.allow({
   "insert": function (userId, doc) {
     var apiBackendId = doc.apiBackendId;
