@@ -10,9 +10,6 @@ Template.viewApiBackend.created = function () {
   // Subscribe to a single API Backend, by ID
   instance.subscribe("apiBackend", apiBackendId);
 
-  // Subscribe to metadata for this API Backend
-  instance.subscribe("apiMetadata", apiBackendId);
-
   // Subscribe to API Backlog items for this API Backend
   instance.subscribe("apiBacklogItems", apiBackendId);
 };

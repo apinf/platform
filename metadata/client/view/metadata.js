@@ -1,5 +1,13 @@
 import { ApiMetadata } from '/metadata/collection/collection';
 
+Template.viewApiBackendMetadata.onCreated(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Subscribe to metadata for this API Backend
+  instance.subscribe("apiMetadata", instance.apiBackendId);
+});
+
 Template.viewApiBackendMetadata.helpers({
   currentUserCanEditMetadata: function() {
     /*
