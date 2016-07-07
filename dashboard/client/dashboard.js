@@ -18,7 +18,7 @@ Template.dashboard.onCreated(function () {
   // Handles parsed data for charts
   instance.tableDataSet = new ReactiveVar([]);
 
-  instance.apiFrontendPrefix = new ReactiveVar();
+  instance.apiFrontendPrefixList = new ReactiveVar();
 
   // Subscribe to publication
   instance.subscribe('myManagedApis');
@@ -337,11 +337,19 @@ Template.dashboard.onCreated(function () {
   }
 
   // Fiter data based on frontend prefix
-  instance.filterData = function (items, apiFrontendPrefix) {
+  instance.filterData = function (items, apiFrontendPrefixList) {
 
-    return _.filter(items, (item) => {
-      return item.fields.request_path[0].indexOf(apiFrontendPrefix) > -1;
+    let filteredData = [];
+
+    _.filter(items, (item) => {
+      _.forEach(apiFrontendPrefixList, (apiFrontendPrefix) => {
+        if (item.fields.request_path[0].indexOf(apiFrontendPrefix) > -1) {
+          filteredData.push(item)
+        }
+      });
     });
+
+    return filteredData;
   }
 });
 
@@ -358,15 +366,15 @@ Template.dashboard.onRendered(function () {
 
     // Get elasticsearch data
     const chartData = instance.esData.get();
-    const apiFrontendPrefix = instance.apiFrontendPrefix.get();
+    const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
     if (chartData) {
 
       let parsedData = [];
 
-      if (apiFrontendPrefix) {
+      if (apiFrontendPrefixList) {
 
-        const filteredData = instance.filterData(chartData, apiFrontendPrefix);
+        const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
 
         // Parse data for use in charts
         parsedData = instance.parseChartData(filteredData);
@@ -396,10 +404,10 @@ Template.dashboard.events({
     const instance = Template.instance();
 
     // Get selected value
-    const apiFrontendPrefix = $('#api-frontend-prefix').val();
+    const apiFrontendPrefixList = $('#api-frontend-prefix').val();
 
-    // Set session variable
-    instance.apiFrontendPrefix.set(apiFrontendPrefix);
+    // Set reactive variable
+    instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
   }
 })
 
