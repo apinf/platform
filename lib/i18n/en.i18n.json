@@ -78,7 +78,6 @@
   "contactForm_name_placeholder": "Your name",
   "contactForm_reset": "Reset",
   "contactForm_submit": "Submit",
-  "dashboardChartsFiltering-filteringForm-selectApi": "Select API",
   "dashboard_mainTitle": "Dashboard",
   "dashboardDataTable_help_text": "Available data depends on how API Response Timeline, HTTP Status Code or API Response Time charts are rendered for viewing.",
   "dashboardDataTable_nextPage": "Next",
