@@ -1,3 +1,5 @@
+import { ApiMetadata } from '/metadata/collection/collection';
+
 Template.viewApiBackendMetadata.helpers({
   currentUserCanEditMetadata: function() {
     /*
@@ -10,5 +12,14 @@ Template.viewApiBackendMetadata.helpers({
 
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();
+  },
+  metadata () {
+    // Get the API Backend ID from the route
+    let apiBackendId = Router.current().params._id;
+
+    // Get API Backend metadata
+    let apiMetadata = ApiMetadata.findOne({apiBackendId});
+
+    return apiMetadata;
   }
 });
