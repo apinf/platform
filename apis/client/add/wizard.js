@@ -63,19 +63,19 @@ Template.addApiBackendWizard.helpers({
 
     var steps = [{
       id: 'base-information',
-      title: 'Base Information',
+      title: TAPi18n.__("addApiBackendWizard_steps_baseInformation_title"),
       template: 'baseInformation',
       formId: 'base-information-form',
       schema: baseInformation
     }, {
       id: 'backend-information',
-      title: 'Backend',
+      title: TAPi18n.__("addApiBackendWizard_steps_backendInformation_title"),
       template: 'backendInformation',
       formId: 'backend-information-form',
       schema: backendInformation
     }, {
       id: 'prefixes-information',
-      title: 'Matching URL Prefixes',
+      title: TAPi18n.__("addApiBackendWizard_steps_prefixesInformation_title"),
       template: 'prefixesInformation',
       formId: 'prefixes-information-form',
       schema: prefixesInformation,
@@ -128,7 +128,7 @@ Template.addApiBackendWizard.helpers({
               Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
 
                 if (apiUmbrellaWebResponse.http_status === 201) {
-                  sAlert.success("API Backend successfully published.");
+                  sAlert.success(TAPi18n.__("addApiBackendWizard_success_apiUmbrellaPublished"));
                   // Add user to manager Role
                   Roles.addUsersToRoles(Meteor.userId(), ['manager']);
                 } else {
@@ -162,5 +162,17 @@ Template.addApiBackendWizard.helpers({
     }];
 
     return steps;
+  },
+  backButtonText () {
+    // Get translation string for next button
+    return TAPi18n.__("addApiBackendWizard_backButton_text");
+  },
+  nextButtonText () {
+    // Get translation string for next button
+    return TAPi18n.__("addApiBackendWizard_nextButton_text");
+  },
+  confirmButtonText () {
+    // Get translation string for next button
+    return TAPi18n.__("addApiBackendWizard_confirmButton_text");
   }
 });
