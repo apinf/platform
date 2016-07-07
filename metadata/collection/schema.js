@@ -1,4 +1,4 @@
-import { ApiMetadata } from './collection';
+import { ApiMetadata } from '/metadata/collection/collection';
 
 ApiMetadata.schema = new SimpleSchema({
   "apiBackendId": {
