@@ -18,6 +18,8 @@ Template.dashboard.onCreated(function () {
   // Handles parsed data for charts
   instance.tableDataSet = new ReactiveVar([]);
 
+  instance.apiFrontendPrefix = new ReactiveVar();
+
   // Subscribe to publication
   instance.subscribe('myManagedApis');
 
@@ -37,7 +39,7 @@ Template.dashboard.onCreated(function () {
           wildcard: {
             request_path: {
               // Add '*' to partially match the url
-              value: `*${api.url_matches[0].frontend_prefix}*`
+              value: `${api.url_matches[0].frontend_prefix}*`
             }
           }
         });
@@ -356,7 +358,7 @@ Template.dashboard.onRendered(function () {
 
     // Get elasticsearch data
     const chartData = instance.esData.get();
-    const apiFrontendPrefix = Session.get('apiFrontendPrefix');
+    const apiFrontendPrefix = instance.apiFrontendPrefix.get();
 
     if (chartData) {
 
@@ -383,6 +385,24 @@ Template.dashboard.onRendered(function () {
     }
   });
 });
+
+Template.dashboard.events({
+  'change #api-frontend-prefix-form': function (event) {
+
+    // Prevent default form submit
+    event.preventDefault();
+
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get selected value
+    const apiFrontendPrefix = $('#api-frontend-prefix').val();
+
+    // Set session variable
+    instance.apiFrontendPrefix.set(apiFrontendPrefix);
+  }
+})
+
 
 Template.dashboard.helpers({
   tableDataSet () {
