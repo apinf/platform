@@ -1,16 +1,7 @@
 <template name="dashboardChartsFiltering">
-  <form class="form-inline" id="filtering-form">
-    {{ _ "dashboardChartsFiltering-filteringForm-selectApi" }}:
-    <select class="" id="api-frontend-prefix">
-      <option value="">-</option>
-      {{ # each api in apis }}
-        <option
-          value="{{ api.url_matches.[0].frontend_prefix }}"
-          {{ selectedApi api._id }}
-          >
-            {{ api.name }}
-        </option>
-      {{ / each }}
-    </select>
+  <form class="form-inline" id="api-frontend-prefix-form">
+    {{ # if Template.subscriptionsReady }}
+      {{ > apiBackendSelectPicker apis=apis }}
+    {{ / if }}
   </form>
 </template>
