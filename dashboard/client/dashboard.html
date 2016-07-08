@@ -4,34 +4,7 @@
       <h1 class="dashboard-title">
         {{_ "dashboard_mainTitle" }}
       </h1>
-      <div class="row">
-        <div class="col-md-12">
-          {{ > dashboardChartsFiltering }}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div>
-            {{ > requestsOverTimeChart }}
-          </div>
-          <div>
-            {{ > overviewChartChart }}
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          {{ > statusCodeCountsChart }}
-        </div>
-        <div class="col-md-6">
-          {{ > responseTimeDistributionChart }}
-        </div>
-      </div>
-      <div class="row">
-        <div class="padding-sides">
-          {{ > dashboardDataTable tableDataSet=tableDataSet }}
-        </div>
-      </div>
+      {{ > dashboardCharts chartData=chartData }}
     </div>
   </div>
 </template>
