@@ -32,4 +32,4 @@ Template.apiBackendSelectPicker.helpers({
       return !api.currentUserIsManager();
     });
   }
-})
+});

@@ -346,7 +346,7 @@ Template.dashboardCharts.events({
     // Set reactive variable
     instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
   }
-})
+});
 
 Template.dashboardCharts.helpers({
   tableDataSet () {
@@ -359,5 +359,5 @@ Template.dashboardCharts.helpers({
       filterItemsCount: instance.filterItemsCount.get(),
       totalItemsCount: instance.totalItemsCount.get()
     }
-  },
-})
+  }
+});
