@@ -1,7 +1,7 @@
 import ss from 'simple-statistics';
 import moment from 'moment';
 import { ApiBackends } from '/apis/collection/backend';
-import lodash from 'lodash';
+import _ from 'lodash';
 
 ApiBackends.helpers({
   getAverageRating () {
@@ -108,6 +108,7 @@ ApiBackends.helpers({
     }
   },
   currentUserIsManager () {
+
     // Get current User ID
     var userId = Meteor.userId();
 
@@ -115,7 +116,7 @@ ApiBackends.helpers({
     var managerIds = this.managerIds;
 
     // Check if User ID is in Manager IDs array
-    var isManager = _.contains(managerIds, userId);
+    var isManager = _.includes(managerIds, userId);
 
     return isManager;
   },
