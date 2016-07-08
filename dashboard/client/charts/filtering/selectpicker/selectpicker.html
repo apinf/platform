@@ -7,8 +7,8 @@
     {{ # each api in apis }}
       <option value="{{ api.url_matches.[0].frontend_prefix }}" >
         {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
-        {{ api.name }}
-      </option>
+        &nbsp;
+        {{ api.name }}</option>
     {{ / each }}
   </select>
 </template>
