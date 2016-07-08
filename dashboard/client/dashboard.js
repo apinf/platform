@@ -20,8 +20,17 @@ Template.dashboard.onCreated(function () {
 
   instance.apiFrontendPrefixList = new ReactiveVar();
 
-  // Subscribe to publication
-  instance.subscribe('myManagedApis');
+  const userId = Meteor.userId();
+
+  if (Roles.userIsInRole(userId, ['admin'])) {
+
+    // Subscribe to publication
+    instance.subscribe('allApiBackends');
+  } else {
+
+    // Subscribe to publication
+    instance.subscribe('myManagedApis');
+  }
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
