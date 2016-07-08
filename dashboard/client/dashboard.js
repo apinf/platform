@@ -342,23 +342,22 @@ Template.dashboard.onCreated(function () {
   // Function that fiters data based on frontend prefixes
   instance.filterData = function (items, apiFrontendPrefixList) {
 
-    let filteredData = [];
+    // Filter data based on matches with API frontend prefix
+    return _.filter(items, (item) => {
 
-    // Iterate through each item
-    _.forEach(items, (item) => {
-      // Iterate through each API frontend prefix value
-      _.forEach(apiFrontendPrefixList, (apiFrontendPrefix) => {
-        // Get request path value
-        const request_path = item.fields.request_path[0];
-        // Check if request path contains API frontend prefix
-        if (request_path.indexOf(apiFrontendPrefix) > -1) {
-          // Push obect to "filtered" array
-          filteredData.push(item)
-        }
+      // Variable to hold request path
+      const requestPath = item.fields.request_path[0];
+
+      // Array to hold matched API frontend prefix
+      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) => {
+
+        // Check if request path starts with API frontend prefix
+        return requestPath.startsWith(apiFrontendPrefix);
       });
-    });
 
-    return filteredData;
+      // Check if API frontend prefix mathed the request path
+      return itemMatchingApiFrontendPrefix.length;
+    });
   }
 });
 
