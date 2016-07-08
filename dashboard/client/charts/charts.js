@@ -1,80 +1,46 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import _ from 'lodash';
 import moment from 'moment';
 import dc from 'dc';
 import d3 from 'd3';
 import crossfilter from 'crossfilter';
 
-Template.chartsLayout.onCreated(function () {
+Template.dashboardCharts.onCreated(function () {
 
   const instance = this;
 
-  instance.esData = new ReactiveVar(); // Handles ES data for charts
-  instance.tableDataSet = new ReactiveVar([]); // Handles parsed data for charts
+  // Variable that keeps table data
+  instance.tableDataSet = new ReactiveVar([]);
 
-  instance.timeStart = new Date().getTime(); // Timer
+  // Variable that keeps api frontend prefix list
+  instance.apiFrontendPrefixList = new ReactiveVar();
 
-  const params = {
-    size: 50000,
-    body: {
-      query: {
-        filtered: {
-          query: {
-            match_all: {}
-          },
-          filter: {
-            range: {
-              request_at: {
-                gte: moment().subtract(30, 'day').valueOf()
-              }
-            }
-          }
-        }
-      },
-      sort : [
-        { request_at : { order : 'desc' }},
-      ],
-      fields: [
-        'request_at',
-        'response_status',
-        'response_time',
-        'request_ip_country',
-        'request_ip',
-        'request_path'
-      ]
-    }
-  }
-
-  Meteor.call('getElasticSearchData', params, (err, res) => {
-
-    if (err) throw new Meteor.error(err);
-
-    const hits = res.hits.hits; // Get list of items for analytics
-
-    instance.esData.set(hits); // Update reactive variable
-  });
-
+  // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
 
-    const index = new crossfilter(items); // Create crossfilter
+    // Create crossfilter
+    const index = new crossfilter(items);
 
-    const dateFormat = d3.time.format("%Y-%m-%d-%H"); // Init dateformat for charts
+    // Init dateformat for charts
+    const dateFormat = d3.time.format("%Y-%m-%d-%H");
 
     // Create dimension based on a timestamp
     const timeStampDimension = index.dimension((d) => {
 
       let timeStamp = moment(d.fields.request_at[0]);
 
-      timeStamp = timeStamp.format('YYYY-MM-DD-HH'); // Format timestamp
+      // Format timestamp
+      timeStamp = timeStamp.format('YYYY-MM-DD-HH');
 
-      d.fields.ymd = dateFormat.parse(timeStamp); // Check if timestamp formats match
+      // Check if timestamp formats match
+      d.fields.ymd = dateFormat.parse(timeStamp);
 
       return d.fields.ymd;
     });
 
-    const timeStampGroup = timeStampDimension.group(); // Create timestamp group
+    // Create timestamp group
+    const timeStampGroup = timeStampDimension.group();
 
     // Create dimension based on status code
     const statusCodeDimension = index.dimension((d) => {
@@ -121,7 +87,8 @@ Template.chartsLayout.onCreated(function () {
       return binwidth * Math.floor(d / binwidth);
     });
 
-    const all = index.groupAll(); // Group add dimensions
+    // Group add dimensions
+    const all = index.groupAll();
 
     // Keep data counters on a dashboard updated
     dc.dataCount("#row-selection")
@@ -151,6 +118,7 @@ Template.chartsLayout.onCreated(function () {
     };
   }
 
+  // Render charts on the page
   instance.renderCharts = function (parsedData) {
 
     const {
@@ -293,35 +261,94 @@ Template.chartsLayout.onCreated(function () {
     }
   }
 
+  // Function that fiters data based on frontend prefixes
+  instance.filterData = function (items, apiFrontendPrefixList) {
+
+    // Filter data based on matches with API frontend prefix
+    return _.filter(items, (item) => {
+
+      // Variable to hold request path
+      const requestPath = item.fields.request_path[0];
+
+      // Array to hold matched API frontend prefix
+      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) => {
+
+        // Check if request path starts with API frontend prefix
+        return requestPath.startsWith(apiFrontendPrefix);
+      });
+
+      // Check if API frontend prefix mathed the request path
+      return itemMatchingApiFrontendPrefix.length;
+    });
+  }
+
 });
 
-Template.chartsLayout.onRendered(function () {
+Template.dashboardCharts.onRendered(function () {
 
   const instance = this;
 
   // Get reference to chart html elemets
   const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
 
-  chartElemets.addClass('loader'); // Set loader
+  // Set loader
+  chartElemets.addClass('loader');
 
   instance.autorun(() => {
 
-    const chartData = instance.esData.get(); // Get elasticsearch data
+    const chartData = Template.currentData().chartData;
+    const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
     if (chartData) {
 
-      const parsedData = instance.parseChartData(chartData); // Parse ES data
+      let parsedData = [];
 
-      instance.renderCharts(parsedData); // Render chart with data
+      if (apiFrontendPrefixList) {
 
-      chartElemets.removeClass('loader'); // Unset loader
+        // Filter data by api frontend prefix
+        const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
+
+        // Parse data for charts
+        parsedData = instance.parseChartData(filteredData);
+
+      } else {
+
+        // Parse data for charts
+        parsedData = instance.parseChartData(chartData);
+      }
+
+      // Render charts
+      instance.renderCharts(parsedData);
+
+      // Unset loader
+      chartElemets.removeClass('loader');
+
     }
   });
 
+  // Activate help icons
   $('[data-toggle="popover"]').popover();
+
 });
 
-Template.chartsLayout.helpers({
+Template.dashboardCharts.events({
+  'change #api-frontend-prefix-form': function (event) {
+
+    // Prevent default form submit
+    event.preventDefault();
+
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get selected value
+    const apiFrontendPrefixList = $('#api-frontend-prefix').val();
+
+    // Set reactive variable
+    instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
+  }
+});
+
+Template.dashboardCharts.helpers({
   tableDataSet () {
     const instance = Template.instance();
     return instance.tableDataSet.get();
