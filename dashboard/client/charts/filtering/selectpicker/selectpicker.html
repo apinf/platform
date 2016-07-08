@@ -3,11 +3,11 @@
     id="api-frontend-prefix"
     title="{{ _ 'apiBackendSelectPicker_selectAPI' }}"
     data-width="fit"
-    multiple >
+    multiple
+    data-selected-text-format="count > 4" >
     {{ # each api in apis }}
       <option value="{{ api.url_matches.[0].frontend_prefix }}" >
         {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
-        &nbsp;
         {{ api.name }}</option>
     {{ / each }}
   </select>
