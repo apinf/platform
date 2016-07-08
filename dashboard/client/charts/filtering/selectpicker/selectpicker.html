@@ -2,6 +2,7 @@
   <select
     id="api-frontend-prefix"
     title="{{ _ 'apiBackendSelectPicker_selectAPI' }}"
+    data-width="fit"
     multiple >
     {{ # each api in apis }}
       <option value="{{ api.url_matches.[0].frontend_prefix }}" >
