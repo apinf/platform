@@ -14,11 +14,13 @@ Template.apiBackendSelectPicker.helpers({
 
     const apis = instance.data.apis;
 
-    return _.filter(apis, (api) => {
-
-      console.log(api.name, api.currentUserIsManager())
+    const myApis = _.filter(apis, (api) => {
       return api.currentUserIsManager();
     });
+
+    if (myApis.length > 0) {
+      return myApis;
+    }
   },
   otherApis () {
 
