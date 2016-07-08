@@ -4,11 +4,22 @@
     title="{{ _ 'apiBackendSelectPicker_selectAPI' }}"
     data-width="fit"
     multiple
-    data-selected-text-format="count > 4" >
-    {{ # each api in apis }}
-      <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-        {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
-        {{ api.name }}</option>
-    {{ / each }}
+    data-selected-text-format="count > 4"
+    data-live-search="true"
+    data-size="10" >
+      <optgroup label="My APIs" >
+        {{ # each api in myApis }}
+          <option value="{{ api.url_matches.[0].frontend_prefix }}" >
+            {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
+            {{ api.name }}</option>
+        {{ / each }}
+      </optgroup>
+      <optgroup label="Other APIs" >
+        {{ # each api in otherApis }}
+          <option value="{{ api.url_matches.[0].frontend_prefix }}" >
+            {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
+            {{ api.name }}</option>
+        {{ / each }}
+      </optgroup>
   </select>
 </template>
