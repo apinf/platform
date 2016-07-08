@@ -1,5 +1,8 @@
 <template name="apiBackendSelectPicker">
-  <select id="api-frontend-prefix" title="Select API" multiple>
+  <select
+    id="api-frontend-prefix"
+    title="{{ _ 'apiBackendSelectPicker_selectAPI' }}"
+    multiple >
     {{ # each api in apis }}
       <option value="{{ api.url_matches.[0].frontend_prefix }}" >
           {{ api.name }}

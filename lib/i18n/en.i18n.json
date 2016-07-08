@@ -32,6 +32,7 @@
   "apiBacklogItem_removeBacklogItem-button": "Remove",
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
   "apiBacklog_mainTitle": "Backlog",
+  "apiBackendSelectPicker_selectAPI": "Select API",
   "apiDocumentationEditor_notAvailable": "API documentation editor is not available.",
   "apiDocumentationSelect_noApiDocumentation": "No API documentations found.",
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png, .gif are accepted.",
