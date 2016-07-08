@@ -6,7 +6,8 @@
     multiple >
     {{ # each api in apis }}
       <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-          {{ api.name }}
+        {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
+        {{ api.name }}
       </option>
     {{ / each }}
   </select>
