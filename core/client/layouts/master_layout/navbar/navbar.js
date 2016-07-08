@@ -24,8 +24,8 @@ Template.navbar.helpers({
 });
 
 Template.navbar.onRendered(function() {
-  $('#buttonsearch').click(function() {
+  $('.icon-search').click(function() {
     $('.searchblock-toggle').slideToggle("fast");
-    $('.openclosesearch').toggle();
+    $('.toggle-search-icon').toggle();
   });
 });
