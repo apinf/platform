@@ -339,7 +339,7 @@ Template.dashboard.onCreated(function () {
     }
   }
 
-  // Fiter data based on frontend prefix
+  // Function that fiters data based on frontend prefixes
   instance.filterData = function (items, apiFrontendPrefixList) {
 
     let filteredData = [];
@@ -426,7 +426,6 @@ Template.dashboard.events({
     instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
   }
 })
-
 
 Template.dashboard.helpers({
   tableDataSet () {
