@@ -1,6 +1,12 @@
 <template name="dashboardCharts">
   <div class="row">
     <div class="col-md-12">
+      {{ > dashboardChartsFiltering }}
+    </div>
+  </div>
+  {{> statisticsSummary }}
+  <div class="row">
+    <div class="col-md-12">
       <div>
         {{ > requestsOverTimeChart }}
       </div>
