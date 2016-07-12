@@ -16,9 +16,10 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps api frontend prefix list
   instance.apiFrontendPrefixList = new ReactiveVar();
 
-  instance.totalItemsCount = new ReactiveVar(0);
+  instance.requestsCount = new ReactiveVar(0);
   instance.avgResponseTime = new ReactiveVar(0);
   instance.avgResponseRate = new ReactiveVar(0);
+  instance.uniqueUsersCount = new ReactiveVar(0);
 
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
@@ -292,19 +293,28 @@ Template.dashboardCharts.onCreated(function () {
 
     const chartData = timeStampDimension.top(Infinity);
 
-    const totalItemsCount = chartData.length;
+    const requestsCount = chartData.length;
 
     const successRegEx = /^2[0-9][0-9]$/;
 
     // TODO: maybe group by regex?
     const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
 
-    instance.totalItemsCount.set(totalItemsCount);
+    const uniqueUsersGroup = _.groupBy(chartData, (item) => {
+      try {
+        return item.fields.user_id[0]
+      } catch (e) { }
+    });
+
+    delete uniqueUsersGroup['undefined'];
+
+    instance.requestsCount.set(requestsCount);
 
     instance.avgResponseTime.set(_.round(_.meanBy(chartData, (item) => { return item.fields.response_time[0]; })));
 
-    instance.avgResponseRate.set(_.round(responseStatusCodeGroup['200'].length/totalItemsCount * 100));
+    instance.avgResponseRate.set(_.round(responseStatusCodeGroup['200'].length/requestsCount * 100));
 
+    instance.uniqueUsersCount.set(Object.keys(uniqueUsersGroup).length);
   }
 
 });
@@ -382,9 +392,10 @@ Template.dashboardCharts.helpers({
     const instance = Template.instance();
 
     return {
-      totalItemsCount: instance.totalItemsCount.get(),
+      requestsCount: instance.requestsCount.get(),
       avgResponseTime: instance.avgResponseTime.get(),
-      avgResponseRate: instance.avgResponseRate.get()
+      avgResponseRate: instance.avgResponseRate.get(),
+      uniqueUsersCount: instance.uniqueUsersCount.get()
     }
   }
 });

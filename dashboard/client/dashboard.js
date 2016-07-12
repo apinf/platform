@@ -78,7 +78,8 @@ Template.dashboard.onCreated(function () {
             'response_time',
             'request_ip_country',
             'request_ip',
-            'request_path'
+            'request_path',
+            'user_id'
           ]
         }
       }
