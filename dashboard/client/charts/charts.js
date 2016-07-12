@@ -16,6 +16,8 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps api frontend prefix list
   instance.apiFrontendPrefixList = new ReactiveVar();
 
+  instance.totalItemsCount = new ReactiveVar();
+
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
 
@@ -199,10 +201,12 @@ Template.dashboardCharts.onCreated(function () {
       chart.on("filtered", () => {
         instance.updateDataTable(timeStampDimension);
         instance.updateLineChart(requestsOverTime, overviewChart, timeScaleForLineChart);
+        instance.updateStatisticsData(timeStampDimension)
       });
     });
 
     instance.updateDataTable(timeStampDimension);
+    instance.updateStatisticsData(timeStampDimension);
   }
 
   // Function that gets and parsed data for table
@@ -282,6 +286,14 @@ Template.dashboardCharts.onCreated(function () {
     });
   }
 
+  instance.updateStatisticsData = function (timeStampDimension) {
+
+    const chartData = timeStampDimension.top(Infinity);
+
+    instance.totalItemsCount.set(chartData.length);
+
+  }
+
 });
 
 Template.dashboardCharts.onRendered(function () {
@@ -353,10 +365,10 @@ Template.dashboardCharts.helpers({
     const instance = Template.instance();
     return instance.tableDataSet.get();
   },
-  itemsCount () {
+  statisticsData () {
     const instance = Template.instance();
+
     return {
-      filterItemsCount: instance.filterItemsCount.get(),
       totalItemsCount: instance.totalItemsCount.get()
     }
   }
