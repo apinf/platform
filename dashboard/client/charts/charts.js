@@ -291,30 +291,60 @@ Template.dashboardCharts.onCreated(function () {
 
   instance.updateStatisticsData = function (timeStampDimension) {
 
+    // Get current data set from the dc registry
     const chartData = timeStampDimension.top(Infinity);
 
-    const requestsCount = chartData.length;
+    const getRequestsCount = instance.getRequestsCount(chartData);
+    const getAverageResponseTime = instance.getAverageResponseTime(chartData);
+    const getAverageResponseRate = instance.getAverageResponseRate(chartData);
+    const getUniqueUsersCount = instance.getUniqueUsersCount(chartData);
+
+    instance.requestsCount.set(getRequestsCount);
+    instance.avgResponseTime.set(getAverageResponseTime);
+    instance.avgResponseRate.set(getAverageResponseRate);
+    instance.uniqueUsersCount.set(getUniqueUsersCount);
+  }
+
+  instance.getRequestsCount = function (chartData) {
+
+    return chartData.length;
+  }
+
+  instance.getAverageResponseTime = function (chartData) {
+
+    const averageResponseTime = _.meanBy(chartData, (item) => { return item.fields.response_time[0]; });
+
+    return _.round(averageResponseTime);
+  }
+
+  instance.getAverageResponseRate = function (chartData) {
 
     const successRegEx = /^2[0-9][0-9]$/;
 
-    // TODO: maybe group by regex?
     const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
 
+    const averageResponseRate = responseStatusCodeGroup['200'].length / chartData.length * 100;
+
+    return _.round(averageResponseRate);
+  }
+
+  instance.getUniqueUsersCount = function (chartData) {
+
     const uniqueUsersGroup = _.groupBy(chartData, (item) => {
+
       try {
-        return item.fields.user_id[0]
-      } catch (e) { }
+
+        return item.fields.user_id[0];
+
+      } catch (e) {
+
+        return false;
+      }
     });
 
-    delete uniqueUsersGroup['undefined'];
+    delete uniqueUsersGroup['false'];
 
-    instance.requestsCount.set(requestsCount);
-
-    instance.avgResponseTime.set(_.round(_.meanBy(chartData, (item) => { return item.fields.response_time[0]; })));
-
-    instance.avgResponseRate.set(_.round(responseStatusCodeGroup['200'].length/requestsCount * 100));
-
-    instance.uniqueUsersCount.set(Object.keys(uniqueUsersGroup).length);
+    return Object.keys(uniqueUsersGroup).length;
   }
 
 });
@@ -389,6 +419,7 @@ Template.dashboardCharts.helpers({
     return instance.tableDataSet.get();
   },
   statisticsData () {
+
     const instance = Template.instance();
 
     return {
