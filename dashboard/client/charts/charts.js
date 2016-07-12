@@ -294,11 +294,13 @@ Template.dashboardCharts.onCreated(function () {
     // Get current data set from the dc registry
     const chartData = timeStampDimension.top(Infinity);
 
+    // Get statistics sata
     const getRequestsCount = instance.getRequestsCount(chartData);
     const getAverageResponseTime = instance.getAverageResponseTime(chartData);
     const getAverageResponseRate = instance.getAverageResponseRate(chartData);
     const getUniqueUsersCount = instance.getUniqueUsersCount(chartData);
 
+    // Set statistics data
     instance.requestsCount.set(getRequestsCount);
     instance.avgResponseTime.set(getAverageResponseTime);
     instance.avgResponseRate.set(getAverageResponseRate);
@@ -312,24 +314,28 @@ Template.dashboardCharts.onCreated(function () {
 
   instance.getAverageResponseTime = function (chartData) {
 
+    // Get average response time value
     const averageResponseTime = _.meanBy(chartData, (item) => { return item.fields.response_time[0]; });
 
+    // Round it before return
     return _.round(averageResponseTime);
   }
 
   instance.getAverageResponseRate = function (chartData) {
 
-    const successRegEx = /^2[0-9][0-9]$/;
-
+    // Group chart data by response status code
     const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
 
+    // Calculate average response rate based on success (200) status code (persentage)
     const averageResponseRate = responseStatusCodeGroup['200'].length / chartData.length * 100;
 
+    // Roound it before return
     return _.round(averageResponseRate);
   }
 
   instance.getUniqueUsersCount = function (chartData) {
 
+    // Group unique users by user ID
     const uniqueUsersGroup = _.groupBy(chartData, (item) => {
 
       try {
@@ -342,8 +348,10 @@ Template.dashboardCharts.onCreated(function () {
       }
     });
 
+    // Remove object key with no-user data
     delete uniqueUsersGroup['false'];
 
+    // Return the amount of users in object
     return Object.keys(uniqueUsersGroup).length;
   }
 
