@@ -293,7 +293,7 @@ Template.dashboardCharts.onCreated(function () {
 
     instance.totalItemsCount.set(chartData.length);
 
-    instance.avgResponseTime.set(Math.floor(_.meanBy(chartData, (item) => { return item.fields.response_time[0]; })));
+    instance.avgResponseTime.set(_.round(_.meanBy(chartData, (item) => { return item.fields.response_time[0]; })));
 
   }
 
