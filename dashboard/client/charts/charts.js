@@ -16,8 +16,8 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps api frontend prefix list
   instance.apiFrontendPrefixList = new ReactiveVar();
 
-  instance.totalItemsCount = new ReactiveVar();
-  instance.avgResponseTime = new ReactiveVar();
+  instance.totalItemsCount = new ReactiveVar(0);
+  instance.avgResponseTime = new ReactiveVar(0);
 
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
