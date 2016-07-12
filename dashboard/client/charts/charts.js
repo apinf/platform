@@ -17,6 +17,7 @@ Template.dashboardCharts.onCreated(function () {
   instance.apiFrontendPrefixList = new ReactiveVar();
 
   instance.totalItemsCount = new ReactiveVar();
+  instance.avgResponseTime = new ReactiveVar();
 
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
@@ -292,6 +293,8 @@ Template.dashboardCharts.onCreated(function () {
 
     instance.totalItemsCount.set(chartData.length);
 
+    instance.avgResponseTime.set(Math.floor(_.meanBy(chartData, (item) => { return item.fields.response_time[0]; })));
+
   }
 
 });
@@ -369,7 +372,8 @@ Template.dashboardCharts.helpers({
     const instance = Template.instance();
 
     return {
-      totalItemsCount: instance.totalItemsCount.get()
+      totalItemsCount: instance.totalItemsCount.get(),
+      avgResponseTime: instance.avgResponseTime.get()
     }
   }
 });
