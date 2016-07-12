@@ -5,6 +5,7 @@ import moment from 'moment';
 import dc from 'dc';
 import d3 from 'd3';
 import crossfilter from 'crossfilter';
+import _ from 'lodash';
 
 Template.dashboardCharts.onCreated(function () {
 
