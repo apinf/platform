@@ -88,6 +88,7 @@
   "contactForm_reset": "Reset",
   "contactForm_submit": "Submit",
   "dashboard_mainTitle": "Dashboard",
+  "dashboard_noApisTitle": "You don't have any API Backend you manage.",
   "dashboardDataTable_help_text": "Available data depends on how API Response Timeline, HTTP Status Code or API Response Time charts are rendered for viewing.",
   "dashboardDataTable_nextPage": "Next",
   "dashboardDataTable_prevPage": "Previous",
