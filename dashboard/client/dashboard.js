@@ -15,6 +15,7 @@ Template.dashboard.onCreated(function () {
 
   instance.dateFormatMoment = 'DD.MM.YYYY';
 
+  // TODO: rename variables & add comments
   instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(14, 'day'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
