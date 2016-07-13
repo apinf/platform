@@ -13,6 +13,11 @@ Template.dashboard.onCreated(function () {
   // Handles ES data for charts
   instance.chartData = new ReactiveVar();
 
+  instance.dateFormatMoment = 'DD.MM.YYYY';
+
+  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(14, 'day'));
+  instance.analyticsTimeframeEnd = new ReactiveVar(moment());
+
   const userId = Meteor.userId();
 
   if (Roles.userIsInRole(userId, ['admin'])) {
@@ -48,7 +53,7 @@ Template.dashboard.onCreated(function () {
       });
 
       // Construct parameters for elasticsearch
-      const params = {
+      let params = {
         size: 50000,
         body: {
           query: {
@@ -62,9 +67,7 @@ Template.dashboard.onCreated(function () {
               },
               filter: {
                 range: {
-                  request_at: {
-                    gte: moment().subtract(30, 'day').valueOf()
-                  }
+                  request_at: { }
                 }
               }
             }
@@ -83,6 +86,18 @@ Template.dashboard.onCreated(function () {
         }
       }
 
+      // ******* Filtering by date *******
+      const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
+      const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
+
+      if (analyticsTimeframeStart && analyticsTimeframeEnd) {
+
+        params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
+        params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+
+      }
+      // ******* End filtering by date *******
+
       // Fetch elasticsearch data
       Meteor.call('getElasticSearchData', params, (err, res) => {
 
@@ -99,10 +114,68 @@ Template.dashboard.onCreated(function () {
 
 });
 
+Template.dashboard.onRendered(function () {
+
+  const instance = this;
+
+  const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
+  const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
+
+  console.log(analyticsTimeframeStart, analyticsTimeframeEnd)
+
+  const analyticsTimeframeStartFormatted = analyticsTimeframeStart.format(instance.dateFormatMoment);
+  const analyticsTimeframeEndFormatted = analyticsTimeframeEnd.format(instance.dateFormatMoment);
+
+  $('#analytics-timeframe-start').val(analyticsTimeframeStartFormatted);
+  $('#analytics-timeframe-end').val(analyticsTimeframeEndFormatted);
+
+
+});
+
+Template.dashboard.events({
+  'change #select-timeframe-form': function (event) {
+
+    event.preventDefault();
+
+    const instance = Template.instance();
+
+    const analyticsTimeframeStartElementValue = $('#analytics-timeframe-start').val();
+    const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
+
+    if (analyticsTimeframeStartElementValue && analyticsTimeframeEndElementValue) {
+
+      const analyticsTimeframeStartMoment = moment(analyticsTimeframeStartElementValue, instance.dateFormatMoment);
+      const analyticsTimeframeEndMoment = moment(analyticsTimeframeEndElementValue, instance.dateFormatMoment);
+
+      console.log('***');
+      console.log(JSON.stringify(analyticsTimeframeStartMoment) !== JSON.stringify(instance.analyticsTimeframeStart.get()));
+      console.log(JSON.stringify(analyticsTimeframeEndMoment) !== JSON.stringify(instance.analyticsTimeframeEnd.get()));
+      // console.log(JSON.stringify(analyticsTimeframeEndMoment), JSON.stringify(instance.analyticsTimeframeEnd.get()));
+      console.log('diff', analyticsTimeframeEndMoment.diff(moment(), 'days') <= 0);
+
+      if ((JSON.stringify(analyticsTimeframeStartMoment) !== JSON.stringify(instance.analyticsTimeframeStart.get())) ||
+      ((JSON.stringify(analyticsTimeframeEndMoment) !== JSON.stringify(instance.analyticsTimeframeEnd.get())) &&
+      (analyticsTimeframeEndMoment.diff(moment(), 'days') <= 0))) {
+
+        console.log('changed');
+
+        // Get reference to chart html elemets
+        const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
+
+        // Set loader
+        chartElemets.addClass('loader');
+
+        instance.analyticsTimeframeStart.set(analyticsTimeframeStartMoment);
+        instance.analyticsTimeframeEnd.set(analyticsTimeframeEndMoment);
+      }
+    }
+  }
+});
+
 Template.dashboard.helpers({
   chartData () {
     const instance = Template.instance();
 
     return instance.chartData.get();
   }
-})
+});
