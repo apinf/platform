@@ -200,25 +200,29 @@ Template.dashboardCharts.onCreated(function () {
 
     dc.renderAll(); // Render all charts
 
+    // Get chart data from dc registry
+    const chartData = timeStampDimension.top(Infinity);
+
     // Iterate throuh each chart in a registry & set listeners for filtering
     _.forEach(dc.chartRegistry.list(), (chart) => {
       chart.on("filtered", () => {
-        instance.updateDataTable(timeStampDimension);
+        const filteredChartData = timeStampDimension.top(Infinity);
+        instance.updateDataTable(filteredChartData);
         instance.updateLineChart(requestsOverTime, overviewChart, timeScaleForLineChart);
-        instance.updateStatisticsData(timeStampDimension)
+        instance.updateStatisticsData(filteredChartData);
       });
     });
 
-    instance.updateDataTable(timeStampDimension);
-    instance.updateStatisticsData(timeStampDimension);
+    instance.updateDataTable(chartData);
+    instance.updateStatisticsData(chartData);
   }
 
   // Function that gets and parsed data for table
-  instance.getTableData = function (timeStampDimension) {
+  instance.getTableData = function (chartData) {
 
     let tableDataSet = [];
 
-    _.forEach(timeStampDimension.top(Infinity), (e) => {
+    _.forEach(chartData, (e) => {
 
       let time,
           country,
@@ -250,8 +254,8 @@ Template.dashboardCharts.onCreated(function () {
   }
 
   // Function that updates table data
-  instance.updateDataTable = function (timeStampDimension) {
-    const tableData = instance.getTableData(timeStampDimension);
+  instance.updateDataTable = function (chartData) {
+    const tableData = instance.getTableData(chartData);
     instance.tableDataSet.set(tableData);
   }
 
@@ -272,6 +276,8 @@ Template.dashboardCharts.onCreated(function () {
   // Function that fiters data based on frontend prefixes
   instance.filterData = function (items, apiFrontendPrefixList) {
 
+    instance.updateStatisticsData(items);
+
     // Filter data based on matches with API frontend prefix
     return _.filter(items, (item) => {
 
@@ -290,10 +296,7 @@ Template.dashboardCharts.onCreated(function () {
     });
   }
 
-  instance.updateStatisticsData = function (timeStampDimension) {
-
-    // Get current data set from the dc registry
-    const chartData = timeStampDimension.top(Infinity);
+  instance.updateStatisticsData = function (chartData) {
 
     // Get statistics sata
     const getRequestsCount = instance.getRequestsCount(chartData);
@@ -318,8 +321,18 @@ Template.dashboardCharts.onCreated(function () {
     // Get average response time value
     const averageResponseTime = _.meanBy(chartData, (item) => { return item.fields.response_time[0]; });
 
-    // Round it before return
-    return _.round(averageResponseTime);
+    // Round average response time value
+    const roundedAverageResponseTime = _.round(averageResponseTime);
+
+    // Check if value is not a number
+    if (!isNaN(roundedAverageResponseTime)) {
+
+      // Round it before return
+      return roundedAverageResponseTime;
+    }
+
+    // Return 0 if the final value is NaN
+    return 0;
   }
 
   instance.getAverageResponseRate = function (chartData) {
@@ -327,11 +340,25 @@ Template.dashboardCharts.onCreated(function () {
     // Group chart data by response status code
     const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
 
-    // Calculate average response rate based on success (200) status code (persentage)
-    const averageResponseRate = responseStatusCodeGroup['200'].length / chartData.length * 100;
+    try {
 
-    // Roound it before return
-    return _.round(averageResponseRate);
+      // Get the amount of success status codes
+      const successStatusCodeCount = responseStatusCodeGroup['200'].length;
+
+      // Get total amout of records in the chart
+      const chartItemsCount = chartData.length;
+
+      // Calculate average response rate based on success (200) status code in persentage
+      const averageResponseRate = successStatusCodeCount / chartItemsCount * 100;
+
+      // Roound it before return
+      return _.round(averageResponseRate);
+
+    } catch (e) {
+
+      // Return 0 if there are no 200 codes
+      return 0;
+    }
   }
 
   instance.getUniqueUsersCount = function (chartData) {
