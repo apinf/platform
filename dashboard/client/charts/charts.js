@@ -18,8 +18,8 @@ Template.dashboardCharts.onCreated(function () {
   instance.apiFrontendPrefixList = new ReactiveVar();
 
   instance.requestsCount = new ReactiveVar(0);
-  instance.avgResponseTime = new ReactiveVar(0);
-  instance.avgResponseRate = new ReactiveVar(0);
+  instance.averageResponseTime = new ReactiveVar(0);
+  instance.responseRate = new ReactiveVar(0);
   instance.uniqueUsersCount = new ReactiveVar(0);
 
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
@@ -305,13 +305,13 @@ Template.dashboardCharts.onCreated(function () {
     // Get statistics sata
     const getRequestsCount = instance.getRequestsCount(chartData);
     const getAverageResponseTime = instance.getAverageResponseTime(chartData);
-    const getAverageResponseRate = instance.getAverageResponseRate(chartData);
+    const getResponseRate = instance.getResponseRate(chartData);
     const getUniqueUsersCount = instance.getUniqueUsersCount(chartData);
 
     // Set statistics data
     instance.requestsCount.set(getRequestsCount);
-    instance.avgResponseTime.set(getAverageResponseTime);
-    instance.avgResponseRate.set(getAverageResponseRate);
+    instance.averageResponseTime.set(getAverageResponseTime);
+    instance.responseRate.set(getResponseRate);
     instance.uniqueUsersCount.set(getUniqueUsersCount);
   }
 
@@ -339,7 +339,7 @@ Template.dashboardCharts.onCreated(function () {
     return 0;
   }
 
-  instance.getAverageResponseRate = function (chartData) {
+  instance.getResponseRate = function (chartData) {
 
     // Group chart data by response status code
     const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
@@ -353,10 +353,10 @@ Template.dashboardCharts.onCreated(function () {
       const chartItemsCount = chartData.length;
 
       // Calculate average response rate based on success (200) status code in persentage
-      const averageResponseRate = successStatusCodeCount / chartItemsCount * 100;
+      const responseRate = successStatusCodeCount / chartItemsCount * 100;
 
       // Roound it before return
-      return _.round(averageResponseRate);
+      return _.round(responseRate);
 
     } catch (e) {
 
@@ -464,8 +464,8 @@ Template.dashboardCharts.helpers({
 
     return {
       requestsCount: instance.requestsCount.get(),
-      avgResponseTime: instance.avgResponseTime.get(),
-      avgResponseRate: instance.avgResponseRate.get(),
+      averageResponseTime: instance.averageResponseTime.get(),
+      responseRate: instance.responseRate.get(),
       uniqueUsersCount: instance.uniqueUsersCount.get()
     }
   }
