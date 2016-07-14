@@ -6,8 +6,8 @@ Template.timeFrameSelectPicker.onRendered(function () {
 
   this.$('.input-daterange').datepicker({
     format: "dd.mm.yyyy",
-    autoclose: true,
-    todayHighlight: true
+    todayHighlight: true,
+    endDate: "0d"
   });
 
 })
