@@ -228,7 +228,8 @@ Template.dashboardCharts.onCreated(function () {
           country,
           requestPath,
           requestIp,
-          responseTime;
+          responseTime,
+          responseStatus;
 
       // Error handling for empty fields
       try { time = moment(e.fields.request_at[0]).format("D/MM/YYYY HH:mm:ss"); }
@@ -246,7 +247,10 @@ Template.dashboardCharts.onCreated(function () {
       try { responseTime = e.fields.response_time[0]; }
       catch (e) { responseTime = ''; }
 
-      tableDataSet.push({ time, country, requestPath, requestIp, responseTime });
+      try { responseStatus = e.fields.response_status[0]; }
+      catch (e) { responseStatus = ''; }
+
+      tableDataSet.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
 
     });
 
