@@ -16,6 +16,36 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps api frontend prefix list
   instance.apiFrontendPrefixList = new ReactiveVar();
 
+
+    // D3
+    // %H - hour
+    // %d - day
+    // %W - week
+    // %m - month
+
+    // Moment
+    // HH - hour
+    // DD - day
+    // ww - week
+    // MM - month
+    instance.analyticsTickDateFormat = {
+      d3: {
+        hour: '%Y-%m-%d-%H',
+        day: '%Y-%m-%d',
+        week: '%Y-%m-%W',
+        month: '%Y-%m'
+      },
+      moment: {
+        hour: 'YYYY-MM-DD-HH',
+        day: 'YYYY-MM-DD',
+        week: 'YYYY-MM-ww',
+        month: 'YYYY-MM'
+      }
+    };
+
+  instance.timeStampFormatD3 = new ReactiveVar(instance.analyticsTickDateFormat.d3.hour);
+  instance.timeStampFormatMoment = new ReactiveVar(instance.analyticsTickDateFormat.moment.hour);
+
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
 
@@ -23,7 +53,7 @@ Template.dashboardCharts.onCreated(function () {
     const index = new crossfilter(items);
 
     // Init dateformat for charts
-    const dateFormat = d3.time.format("%Y-%m-%d-%H");
+    const dateFormat = d3.time.format(instance.timeStampFormatD3.get());
 
     // Create dimension based on a timestamp
     const timeStampDimension = index.dimension((d) => {
@@ -31,7 +61,7 @@ Template.dashboardCharts.onCreated(function () {
       let timeStamp = moment(d.fields.request_at[0]);
 
       // Format timestamp
-      timeStamp = timeStamp.format('YYYY-MM-DD-HH');
+      timeStamp = timeStamp.format(instance.timeStampFormatMoment.get());
 
       // Check if timestamp formats match
       d.fields.ymd = dateFormat.parse(timeStamp);
@@ -289,10 +319,13 @@ Template.dashboardCharts.onRendered(function () {
   const instance = this;
 
   // Get reference to chart html elemets
-  const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
+  const chartElements = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
+
+  // Set active class to a button
+  $('#tick-hour').addClass('active');
 
   // Set loader
-  chartElemets.addClass('loader');
+  chartElements.addClass('loader');
 
   instance.autorun(() => {
 
@@ -321,7 +354,7 @@ Template.dashboardCharts.onRendered(function () {
       instance.renderCharts(parsedData);
 
       // Unset loader
-      chartElemets.removeClass('loader');
+      chartElements.removeClass('loader');
 
     }
   });
@@ -345,6 +378,67 @@ Template.dashboardCharts.events({
 
     // Set reactive variable
     instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
+  },
+  'click #tick-hour': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-hour').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.hour);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.hour);
+
+
+  },
+  'click #tick-day': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-day').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.day);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.day);
+
+  },
+  'click #tick-week': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-week').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.week);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.week);
+
+  },
+  'click #tick-month': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-month').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.month);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.month);
+
   }
 });
 
