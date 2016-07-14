@@ -95,6 +95,7 @@
   "dashboardDataTable_requestCountry": "Country",
   "dashboardDataTable_requestIP": "IP",
   "dashboardDataTable_requestPath": "Path",
+  "dashboardDataTable_responseRate": "Response rate",
   "dashboardDataTable_responseTime": "Response time (ms)",
   "dashboardDataTable_timeStamp": "Date",
   "dashboardDataTable_title": "Analytics data",
