@@ -410,5 +410,9 @@
   "view_ApiBackend_Metadata_Service_validUntil": "Valid until",
   "view_ApiBackend_Metadata_Title": "Metadata",
   "view_ApiBackend_Servers": "Servers",
-  "view_ApiBackend_Title": "View API backend"
+  "view_ApiBackend_Title": "View API backend",
+  "tickButtons_hour": "Hour",
+  "tickButtons_day": "Day",
+  "tickButtons_week": "Week",
+  "tickButtons_month": "Month"
 }
