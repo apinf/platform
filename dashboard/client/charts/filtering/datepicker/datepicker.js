@@ -5,9 +5,9 @@ Template.timeFrameSelectPicker.onRendered(function () {
   const instance = this;
 
   this.$('.input-daterange').datepicker({
-    format: "dd.mm.yyyy",
+    format: "dd M yyyy",
     todayHighlight: true,
-    endDate: "0d"
+    endDate: "+1d"
   });
 
 })
