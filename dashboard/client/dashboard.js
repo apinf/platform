@@ -14,7 +14,7 @@ Template.dashboard.onCreated(function () {
   instance.chartData = new ReactiveVar();
 
   // Keeps date format for moment.js
-  instance.dateFormatMoment = 'DD.MM.YYYY';
+  instance.dateFormatMoment = 'DD MMM YYYY';
 
   // Init default time frame (from: 2weeks ago, to: now)
   instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(14, 'day'));
@@ -149,7 +149,7 @@ Template.dashboard.events({
     const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
 
     // Check if timeframe values are set
-    if (analyticsTimeframeStartElementValue && analyticsTimeframeEndElementValue) {
+    if (analyticsTimeframeStartElementValue !== '' && analyticsTimeframeEndElementValue !== '') {
 
       // Format datepicker dates (DD.MM.YYYY) to moment.js object
       const analyticsTimeframeStartMoment = moment(analyticsTimeframeStartElementValue, instance.dateFormatMoment);
@@ -163,10 +163,8 @@ Template.dashboard.events({
        *    - If the end-date is less than the current date
        *    - If the start-date is less than the current date
        */
-      if ((JSON.stringify(analyticsTimeframeStartMoment) !== JSON.stringify(instance.analyticsTimeframeStart.get())) ||
-      ((JSON.stringify(analyticsTimeframeEndMoment) !== JSON.stringify(instance.analyticsTimeframeEnd.get())) &&
-      (analyticsTimeframeEndMoment.diff(moment(), 'days') <= 0) &&
-      (analyticsTimeframeStartMoment.diff(moment(), 'days') <= 0))) {
+      if ((analyticsTimeframeStartElementValue !== instance.analyticsTimeframeStart.get().format(instance.dateFormatMoment)) ||
+      (analyticsTimeframeEndElementValue !== instance.analyticsTimeframeEnd.get().format(instance.dateFormatMoment))) {
 
         // Get reference to chart html elemets
         const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
