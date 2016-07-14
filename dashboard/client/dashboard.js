@@ -160,8 +160,6 @@ Template.dashboard.events({
        *  allowing to select dates bigger than current date, check:
        *    - If the new selected start-date is the same as previously selected start-date
        *    - If the new selected end-date is the same as previously selected end-date
-       *    - If the end-date is less than the current date
-       *    - If the start-date is less than the current date
        */
       if ((analyticsTimeframeStartElementValue !== instance.analyticsTimeframeStart.get().format(instance.dateFormatMoment)) ||
       (analyticsTimeframeEndElementValue !== instance.analyticsTimeframeEnd.get().format(instance.dateFormatMoment))) {
