@@ -10,12 +10,13 @@ Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Handles ES data for charts
+  // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
 
+  // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD.MM.YYYY';
 
-  // TODO: rename variables & add comments
+  // Init default time frame (from: 2weeks ago, to: now)
   instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(14, 'day'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
@@ -91,8 +92,10 @@ Template.dashboard.onCreated(function () {
       const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
       const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
 
+      // Check if timeframe values are set
       if (analyticsTimeframeStart && analyticsTimeframeEnd) {
 
+        // Update elasticsearch query with filter data (in Unix format)
         params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
         params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
 
@@ -119,14 +122,15 @@ Template.dashboard.onRendered(function () {
 
   const instance = this;
 
+  // Get timeframe values
   const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
   const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
 
-  console.log(analyticsTimeframeStart, analyticsTimeframeEnd)
-
+  // Format timeframe values
   const analyticsTimeframeStartFormatted = analyticsTimeframeStart.format(instance.dateFormatMoment);
   const analyticsTimeframeEndFormatted = analyticsTimeframeEnd.format(instance.dateFormatMoment);
 
+  // Update date range fields with default dates
   $('#analytics-timeframe-start').val(analyticsTimeframeStartFormatted);
   $('#analytics-timeframe-end').val(analyticsTimeframeEndFormatted);
 
@@ -140,25 +144,29 @@ Template.dashboard.events({
 
     const instance = Template.instance();
 
+    // Get timeframe dates from input fields
     const analyticsTimeframeStartElementValue = $('#analytics-timeframe-start').val();
     const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
 
+    // Check if timeframe values are set
     if (analyticsTimeframeStartElementValue && analyticsTimeframeEndElementValue) {
 
+      // Format datepicker dates (DD.MM.YYYY) to moment.js object
       const analyticsTimeframeStartMoment = moment(analyticsTimeframeStartElementValue, instance.dateFormatMoment);
       const analyticsTimeframeEndMoment = moment(analyticsTimeframeEndElementValue, instance.dateFormatMoment);
 
-      console.log('***');
-      console.log(JSON.stringify(analyticsTimeframeStartMoment) !== JSON.stringify(instance.analyticsTimeframeStart.get()));
-      console.log(JSON.stringify(analyticsTimeframeEndMoment) !== JSON.stringify(instance.analyticsTimeframeEnd.get()));
-      // console.log(JSON.stringify(analyticsTimeframeEndMoment), JSON.stringify(instance.analyticsTimeframeEnd.get()));
-      console.log('diff', analyticsTimeframeEndMoment.diff(moment(), 'days') <= 0);
-
+      /*
+       *  To avoid resending request with the same time frame and
+       *  allowing to select dates bigger than current date, check:
+       *    - If the new selected start-date is the same as previously selected start-date
+       *    - If the new selected end-date is the same as previously selected end-date
+       *    - If the end-date is less than the current date
+       *    - If the start-date is less than the current date
+       */
       if ((JSON.stringify(analyticsTimeframeStartMoment) !== JSON.stringify(instance.analyticsTimeframeStart.get())) ||
       ((JSON.stringify(analyticsTimeframeEndMoment) !== JSON.stringify(instance.analyticsTimeframeEnd.get())) &&
-      (analyticsTimeframeEndMoment.diff(moment(), 'days') <= 0))) {
-
-        console.log('changed');
+      (analyticsTimeframeEndMoment.diff(moment(), 'days') <= 0) &&
+      (analyticsTimeframeStartMoment.diff(moment(), 'days') <= 0))) {
 
         // Get reference to chart html elemets
         const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
@@ -166,6 +174,7 @@ Template.dashboard.events({
         // Set loader
         chartElemets.addClass('loader');
 
+        // If pass all checks, update reactive variables
         instance.analyticsTimeframeStart.set(analyticsTimeframeStartMoment);
         instance.analyticsTimeframeEnd.set(analyticsTimeframeEndMoment);
       }
