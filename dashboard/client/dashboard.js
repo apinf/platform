@@ -11,7 +11,7 @@ Template.dashboard.onCreated(function () {
   const instance = this;
 
   // Keeps ES data for charts
-  instance.chartData = new ReactiveVar();
+  instance.chartData = new ReactiveVar([]);
 
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';

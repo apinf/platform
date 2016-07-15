@@ -433,7 +433,7 @@ Template.dashboardCharts.onRendered(function () {
     const chartData = Template.currentData().chartData;
     const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
-    if (chartData) {
+    if (chartData.length > 0) {
 
       let parsedData = [];
 
@@ -457,6 +457,10 @@ Template.dashboardCharts.onRendered(function () {
       // Unset loader
       chartElements.removeClass('loader');
 
+    } else {
+
+      console.log('No data found.');
+      chartElements.removeClass('loader');
     }
   });
 
