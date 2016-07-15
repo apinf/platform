@@ -23,32 +23,23 @@ Template.dashboardCharts.onCreated(function () {
   instance.responseRate = new ReactiveVar(0);
   instance.uniqueUsersCount = new ReactiveVar(0);
 
-    // D3
-    // %H - hour
-    // %d - day
-    // %W - week
-    // %m - month
+  // Init date formats for each user-case
+  instance.analyticsTickDateFormat = {
+    d3: {
+      hour: '%Y-%m-%d-%H',
+      day: '%Y-%m-%d',
+      week: '%Y-%m-%W',
+      month: '%Y-%m'
+    },
+    moment: {
+      hour: 'YYYY-MM-DD-HH',
+      day: 'YYYY-MM-DD',
+      week: 'YYYY-MM-ww',
+      month: 'YYYY-MM'
+    }
+  };
 
-    // Moment
-    // HH - hour
-    // DD - day
-    // ww - week
-    // MM - month
-    instance.analyticsTickDateFormat = {
-      d3: {
-        hour: '%Y-%m-%d-%H',
-        day: '%Y-%m-%d',
-        week: '%Y-%m-%W',
-        month: '%Y-%m'
-      },
-      moment: {
-        hour: 'YYYY-MM-DD-HH',
-        day: 'YYYY-MM-DD',
-        week: 'YYYY-MM-ww',
-        month: 'YYYY-MM'
-      }
-    };
-
+  // Init reactive vars that keep timestamp in default format (hour tick)
   instance.timeStampFormatD3 = new ReactiveVar(instance.analyticsTickDateFormat.d3.hour);
   instance.timeStampFormatMoment = new ReactiveVar(instance.analyticsTickDateFormat.moment.hour);
 
