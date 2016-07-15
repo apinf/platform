@@ -17,6 +17,7 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps api frontend prefix list
   instance.apiFrontendPrefixList = new ReactiveVar();
 
+  // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
   instance.averageResponseTime = new ReactiveVar(0);
   instance.responseRate = new ReactiveVar(0);
