@@ -11,7 +11,9 @@ Template.dashboard.onCreated(function () {
   const instance = this;
 
   // Keeps ES data for charts
-  instance.chartData = new ReactiveVar([]);
+  instance.chartData = new ReactiveVar();
+  // Keeps chart data loading state
+  instance.chartDataLoadingState = new ReactiveVar(false);
 
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
@@ -103,6 +105,7 @@ Template.dashboard.onCreated(function () {
       }
       // ******* End filtering by date *******
 
+      instance.chartDataLoadingState.set(true);
       // Fetch elasticsearch data
       Meteor.call('getElasticSearchData', params, (err, res) => {
 
@@ -110,6 +113,8 @@ Template.dashboard.onCreated(function () {
 
         // Get list of items for analytics
         const hits = res.hits.hits;
+
+        instance.chartDataLoadingState.set(false);
 
         // Update reactive variable
         instance.chartData.set(hits);
@@ -184,5 +189,9 @@ Template.dashboard.helpers({
     const instance = Template.instance();
 
     return instance.chartData.get();
+  },
+  loadingState () {
+    const instance = Template.instance();
+    return instance.chartDataLoadingState.get();
   }
 });

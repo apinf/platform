@@ -425,42 +425,49 @@ Template.dashboardCharts.onRendered(function () {
   // Set active class to a button
   $('#tick-hour').addClass('active');
 
-  // Set loader
-  chartElements.addClass('loader');
-
   instance.autorun(() => {
 
     const chartData = Template.currentData().chartData;
+    const chartDataIsLoading = Template.currentData().loadingState;
+    console.log(Template.currentData());
+    console.log(chartData, chartDataIsLoading);
     const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
-    if (chartData.length > 0) {
+    if (chartDataIsLoading) {
 
-      let parsedData = [];
-
-      if (apiFrontendPrefixList) {
-
-        // Filter data by api frontend prefix
-        const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
-
-        // Parse data for charts
-        parsedData = instance.parseChartData(filteredData);
-
-      } else {
-
-        // Parse data for charts
-        parsedData = instance.parseChartData(chartData);
-      }
-
-      // Render charts
-      instance.renderCharts(parsedData);
-
-      // Unset loader
-      chartElements.removeClass('loader');
+      // Set loader
+      chartElements.addClass('loader');
 
     } else {
+      if (chartData && chartData.length > 0) {
 
-      console.log('No data found.');
-      chartElements.removeClass('loader');
+        let parsedData = [];
+
+        if (apiFrontendPrefixList) {
+
+          // Filter data by api frontend prefix
+          const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
+
+          // Parse data for charts
+          parsedData = instance.parseChartData(filteredData);
+
+        } else {
+
+          // Parse data for charts
+          parsedData = instance.parseChartData(chartData);
+        }
+
+        // Render charts
+        instance.renderCharts(parsedData);
+
+        // Unset loader
+        chartElements.removeClass('loader');
+
+      } else if (chartData && chartData.length === 0) {
+
+        console.log('No data found.');
+        chartElements.removeClass('loader');
+      }
     }
   });
 
