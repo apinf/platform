@@ -17,37 +17,29 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps api frontend prefix list
   instance.apiFrontendPrefixList = new ReactiveVar();
 
+  // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
   instance.averageResponseTime = new ReactiveVar(0);
   instance.responseRate = new ReactiveVar(0);
   instance.uniqueUsersCount = new ReactiveVar(0);
 
-    // D3
-    // %H - hour
-    // %d - day
-    // %W - week
-    // %m - month
+  // Init date formats for each user-case
+  instance.analyticsTickDateFormat = {
+    d3: {
+      hour: '%Y-%m-%d-%H',
+      day: '%Y-%m-%d',
+      week: '%Y-%m-%W',
+      month: '%Y-%m'
+    },
+    moment: {
+      hour: 'YYYY-MM-DD-HH',
+      day: 'YYYY-MM-DD',
+      week: 'YYYY-MM-ww',
+      month: 'YYYY-MM'
+    }
+  };
 
-    // Moment
-    // HH - hour
-    // DD - day
-    // ww - week
-    // MM - month
-    instance.analyticsTickDateFormat = {
-      d3: {
-        hour: '%Y-%m-%d-%H',
-        day: '%Y-%m-%d',
-        week: '%Y-%m-%W',
-        month: '%Y-%m'
-      },
-      moment: {
-        hour: 'YYYY-MM-DD-HH',
-        day: 'YYYY-MM-DD',
-        week: 'YYYY-MM-ww',
-        month: 'YYYY-MM'
-      }
-    };
-
+  // Init reactive vars that keep timestamp in default format (hour tick)
   instance.timeStampFormatD3 = new ReactiveVar(instance.analyticsTickDateFormat.d3.hour);
   instance.timeStampFormatMoment = new ReactiveVar(instance.analyticsTickDateFormat.moment.hour);
 
@@ -329,6 +321,7 @@ Template.dashboardCharts.onCreated(function () {
     });
   }
 
+  // Functions that updates statistics data
   instance.updateStatisticsData = function (chartData) {
 
     // Get statistics sata
@@ -344,11 +337,13 @@ Template.dashboardCharts.onCreated(function () {
     instance.uniqueUsersCount.set(getUniqueUsersCount);
   }
 
+  // Function that returns chart items count
   instance.getRequestsCount = function (chartData) {
 
     return chartData.length;
   }
 
+  // Function that returns average response time
   instance.getAverageResponseTime = function (chartData) {
 
     // Get average response time value
@@ -368,6 +363,7 @@ Template.dashboardCharts.onCreated(function () {
     return 0;
   }
 
+  // Function that returns response rate
   instance.getResponseRate = function (chartData) {
 
     // Group chart data by response status code
@@ -394,6 +390,7 @@ Template.dashboardCharts.onCreated(function () {
     }
   }
 
+  // Function that returns amount of unique users
   instance.getUniqueUsersCount = function (chartData) {
 
     // Group unique users by user ID
