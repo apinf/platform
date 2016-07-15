@@ -126,10 +126,5 @@ Template.dashboardDataTable.helpers({
 
     // Calculate total page number and make it integer
     return (dataSetLength / rowCount + 1) | 0;
-  },
-  totalEntitiesCount () {
-
-    // Get table dataset length
-    return Template.currentData().tableDataSet.length;
   }
 });
