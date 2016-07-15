@@ -92,6 +92,7 @@
   "dashboardDataTable_help_text": "Available data depends on how API Response Timeline, HTTP Status Code or API Response Time charts are rendered for viewing.",
   "dashboardDataTable_nextPage": "Next",
   "dashboardDataTable_prevPage": "Previous",
+  "dashboardDataTable_recordsPerPage": "records per page",
   "dashboardDataTable_requestCountry": "Country",
   "dashboardDataTable_requestIP": "IP",
   "dashboardDataTable_requestPath": "Path",
