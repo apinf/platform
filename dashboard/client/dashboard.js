@@ -105,7 +105,9 @@ Template.dashboard.onCreated(function () {
       }
       // ******* End filtering by date *******
 
+      // Set loader
       instance.chartDataLoadingState.set(true);
+
       // Fetch elasticsearch data
       Meteor.call('getElasticSearchData', params, (err, res) => {
 
@@ -114,6 +116,7 @@ Template.dashboard.onCreated(function () {
         // Get list of items for analytics
         const hits = res.hits.hits;
 
+        // Unset loader
         instance.chartDataLoadingState.set(false);
 
         // Update reactive variable
@@ -192,7 +195,7 @@ Template.dashboard.helpers({
   },
   loadingState () {
     const instance = Template.instance();
-    
+
     return instance.chartDataLoadingState.get();
   }
 });
