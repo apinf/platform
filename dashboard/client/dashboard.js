@@ -192,6 +192,7 @@ Template.dashboard.helpers({
   },
   loadingState () {
     const instance = Template.instance();
+    
     return instance.chartDataLoadingState.get();
   }
 });

@@ -429,8 +429,6 @@ Template.dashboardCharts.onRendered(function () {
 
     const chartData = Template.currentData().chartData;
     const chartDataIsLoading = Template.currentData().loadingState;
-    console.log(Template.currentData());
-    console.log(chartData, chartDataIsLoading);
     const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
     if (chartDataIsLoading) {
