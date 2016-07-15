@@ -106,7 +106,7 @@ Template.dashboard.onCreated(function () {
       // Fetch elasticsearch data
       Meteor.call('getElasticSearchData', params, (err, res) => {
 
-        if (err) throw new Meteor.error(err);
+        if (err) throw new Meteor.Error(err);
 
         // Get list of items for analytics
         const hits = res.hits.hits;
