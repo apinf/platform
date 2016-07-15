@@ -321,6 +321,7 @@ Template.dashboardCharts.onCreated(function () {
     });
   }
 
+  // Functions that updates statistics data
   instance.updateStatisticsData = function (chartData) {
 
     // Get statistics sata
@@ -336,11 +337,13 @@ Template.dashboardCharts.onCreated(function () {
     instance.uniqueUsersCount.set(getUniqueUsersCount);
   }
 
+  // Function that returns chart items count
   instance.getRequestsCount = function (chartData) {
 
     return chartData.length;
   }
 
+  // Function that returns average response time
   instance.getAverageResponseTime = function (chartData) {
 
     // Get average response time value
@@ -360,6 +363,7 @@ Template.dashboardCharts.onCreated(function () {
     return 0;
   }
 
+  // Function that returns response rate
   instance.getResponseRate = function (chartData) {
 
     // Group chart data by response status code
@@ -386,6 +390,7 @@ Template.dashboardCharts.onCreated(function () {
     }
   }
 
+  // Function that returns amount of unique users
   instance.getUniqueUsersCount = function (chartData) {
 
     // Group unique users by user ID
