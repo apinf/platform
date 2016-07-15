@@ -26,18 +26,20 @@
         <div class="modal-body">
           {{# if metadata }}
           {{> quickForm
-            collection="ApiMetadata"
+            collection=apiMetadataCollection
             id="updateApiMetadataForm"
             type="update"
             doc=metadata
             omitFields="apiBackendId"
+            buttonContent=submitButtonText
           }}
           {{ else }}
           {{> quickForm
-            collection="ApiMetadata"
+            collection=apiMetadataCollection
             id="editApiMetadataForm"
             type="insert"
             omitFields="apiBackendId"
+            buttonContent=submitButtonText
           }}
           {{/ if }}
         </div>

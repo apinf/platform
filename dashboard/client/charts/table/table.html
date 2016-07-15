@@ -38,6 +38,9 @@
         <th>
           {{ _ "dashboardDataTable_responseTime" }}
         </th>
+        <th>
+          {{ _ "dashboardDataTable_responseStatus" }}
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -58,13 +61,16 @@
           <td>
             {{ row.responseTime }}
           </td>
+          <td>
+            {{ row.responseStatus }}
+          </td>
         </tr>
       {{ / each}}
     </tbody>
   </table>
   <div>
     <div class="page-numbers pull-left">
-      <strong>{{ currentPageNumber }}</strong> - <strong>{{ totalPageNumber }}</strong>
+      {{ _ "dashboardDataTable_pageCount" }} <strong>{{ currentPageNumber }}</strong> / <strong>{{ totalPageNumber }}</strong>
     </div>
     <div class="btn-group pull-right">
       {{ # if showPrevButton }}

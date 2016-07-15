@@ -1,80 +1,73 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import _ from 'lodash';
 import moment from 'moment';
 import dc from 'dc';
 import d3 from 'd3';
 import crossfilter from 'crossfilter';
+import _ from 'lodash';
 
-Template.chartsLayout.onCreated(function () {
+Template.dashboardCharts.onCreated(function () {
 
   const instance = this;
 
-  instance.esData = new ReactiveVar(); // Handles ES data for charts
-  instance.tableDataSet = new ReactiveVar([]); // Handles parsed data for charts
+  // Variable that keeps table data
+  instance.tableDataSet = new ReactiveVar([]);
 
-  instance.timeStart = new Date().getTime(); // Timer
+  // Variable that keeps api frontend prefix list
+  instance.apiFrontendPrefixList = new ReactiveVar();
 
-  const params = {
-    size: 50000,
-    body: {
-      query: {
-        filtered: {
-          query: {
-            match_all: {}
-          },
-          filter: {
-            range: {
-              request_at: {
-                gte: moment().subtract(30, 'day').valueOf()
-              }
-            }
-          }
-        }
-      },
-      sort : [
-        { request_at : { order : 'desc' }},
-      ],
-      fields: [
-        'request_at',
-        'response_status',
-        'response_time',
-        'request_ip_country',
-        'request_ip',
-        'request_path'
-      ]
+  // Init default values for statistic data
+  instance.requestsCount = new ReactiveVar(0);
+  instance.averageResponseTime = new ReactiveVar(0);
+  instance.responseRate = new ReactiveVar(0);
+  instance.uniqueUsersCount = new ReactiveVar(0);
+
+  // Init date formats for each user-case
+  instance.analyticsTickDateFormat = {
+    d3: {
+      hour: '%Y-%m-%d-%H',
+      day: '%Y-%m-%d',
+      week: '%Y-%m-%W',
+      month: '%Y-%m'
+    },
+    moment: {
+      hour: 'YYYY-MM-DD-HH',
+      day: 'YYYY-MM-DD',
+      week: 'YYYY-MM-ww',
+      month: 'YYYY-MM'
     }
-  }
+  };
 
-  Meteor.call('getElasticSearchData', params, (err, res) => {
+  // Init reactive vars that keep timestamp in default format (hour tick)
+  instance.timeStampFormatD3 = new ReactiveVar(instance.analyticsTickDateFormat.d3.hour);
+  instance.timeStampFormatMoment = new ReactiveVar(instance.analyticsTickDateFormat.moment.hour);
 
-    if (err) throw new Meteor.error(err);
-
-    const hits = res.hits.hits; // Get list of items for analytics
-
-    instance.esData.set(hits); // Update reactive variable
-  });
-
+  // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = function (items) {
 
-    const index = new crossfilter(items); // Create crossfilter
+    // Create crossfilter
+    const index = new crossfilter(items);
 
-    const dateFormat = d3.time.format("%Y-%m-%d-%H"); // Init dateformat for charts
+    // Init dateformat for charts
+    const dateFormat = d3.time.format(instance.timeStampFormatD3.get());
 
     // Create dimension based on a timestamp
     const timeStampDimension = index.dimension((d) => {
 
       let timeStamp = moment(d.fields.request_at[0]);
 
-      timeStamp = timeStamp.format('YYYY-MM-DD-HH'); // Format timestamp
+      // Format timestamp
+      timeStamp = timeStamp.format(instance.timeStampFormatMoment.get());
 
-      d.fields.ymd = dateFormat.parse(timeStamp); // Check if timestamp formats match
+      // Check if timestamp formats match
+      d.fields.ymd = dateFormat.parse(timeStamp);
 
       return d.fields.ymd;
     });
 
-    const timeStampGroup = timeStampDimension.group(); // Create timestamp group
+    // Create timestamp group
+    const timeStampGroup = timeStampDimension.group();
 
     // Create dimension based on status code
     const statusCodeDimension = index.dimension((d) => {
@@ -121,7 +114,8 @@ Template.chartsLayout.onCreated(function () {
       return binwidth * Math.floor(d / binwidth);
     });
 
-    const all = index.groupAll(); // Group add dimensions
+    // Group add dimensions
+    const all = index.groupAll();
 
     // Keep data counters on a dashboard updated
     dc.dataCount("#row-selection")
@@ -151,6 +145,7 @@ Template.chartsLayout.onCreated(function () {
     };
   }
 
+  // Render charts on the page
   instance.renderCharts = function (parsedData) {
 
     const {
@@ -226,29 +221,36 @@ Template.chartsLayout.onCreated(function () {
 
     dc.renderAll(); // Render all charts
 
+    // Get chart data from dc registry
+    const chartData = timeStampDimension.top(Infinity);
+
     // Iterate throuh each chart in a registry & set listeners for filtering
     _.forEach(dc.chartRegistry.list(), (chart) => {
       chart.on("filtered", () => {
-        instance.updateDataTable(timeStampDimension);
+        const filteredChartData = timeStampDimension.top(Infinity);
+        instance.updateDataTable(filteredChartData);
         instance.updateLineChart(requestsOverTime, overviewChart, timeScaleForLineChart);
+        instance.updateStatisticsData(filteredChartData);
       });
     });
 
-    instance.updateDataTable(timeStampDimension);
+    instance.updateDataTable(chartData);
+    instance.updateStatisticsData(chartData);
   }
 
   // Function that gets and parsed data for table
-  instance.getTableData = function (timeStampDimension) {
+  instance.getTableData = function (chartData) {
 
     let tableDataSet = [];
 
-    _.forEach(timeStampDimension.top(Infinity), (e) => {
+    _.forEach(chartData, (e) => {
 
       let time,
           country,
           requestPath,
           requestIp,
-          responseTime;
+          responseTime,
+          responseStatus;
 
       // Error handling for empty fields
       try { time = moment(e.fields.request_at[0]).format("D/MM/YYYY HH:mm:ss"); }
@@ -266,7 +268,10 @@ Template.chartsLayout.onCreated(function () {
       try { responseTime = e.fields.response_time[0]; }
       catch (e) { responseTime = ''; }
 
-      tableDataSet.push({ time, country, requestPath, requestIp, responseTime });
+      try { responseStatus = e.fields.response_status[0]; }
+      catch (e) { responseStatus = ''; }
+
+      tableDataSet.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
 
     });
 
@@ -274,8 +279,8 @@ Template.chartsLayout.onCreated(function () {
   }
 
   // Function that updates table data
-  instance.updateDataTable = function (timeStampDimension) {
-    const tableData = instance.getTableData(timeStampDimension);
+  instance.updateDataTable = function (chartData) {
+    const tableData = instance.getTableData(chartData);
     instance.tableDataSet.set(tableData);
   }
 
@@ -293,44 +298,274 @@ Template.chartsLayout.onCreated(function () {
     }
   }
 
+  // Function that fiters data based on frontend prefixes
+  instance.filterData = function (items, apiFrontendPrefixList) {
+
+    instance.updateStatisticsData(items);
+
+    // Filter data based on matches with API frontend prefix
+    return _.filter(items, (item) => {
+
+      // Variable to hold request path
+      const requestPath = item.fields.request_path[0];
+
+      // Array to hold matched API frontend prefix
+      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) => {
+
+        // Check if request path starts with API frontend prefix
+        return requestPath.startsWith(apiFrontendPrefix);
+      });
+
+      // Check if API frontend prefix mathed the request path
+      return itemMatchingApiFrontendPrefix.length;
+    });
+  }
+
+  // Functions that updates statistics data
+  instance.updateStatisticsData = function (chartData) {
+
+    // Get statistics sata
+    const getRequestsCount = instance.getRequestsCount(chartData);
+    const getAverageResponseTime = instance.getAverageResponseTime(chartData);
+    const getResponseRate = instance.getResponseRate(chartData);
+    const getUniqueUsersCount = instance.getUniqueUsersCount(chartData);
+
+    // Set statistics data
+    instance.requestsCount.set(getRequestsCount);
+    instance.averageResponseTime.set(getAverageResponseTime);
+    instance.responseRate.set(getResponseRate);
+    instance.uniqueUsersCount.set(getUniqueUsersCount);
+  }
+
+  // Function that returns chart items count
+  instance.getRequestsCount = function (chartData) {
+
+    return chartData.length;
+  }
+
+  // Function that returns average response time
+  instance.getAverageResponseTime = function (chartData) {
+
+    // Get average response time value
+    const averageResponseTime = _.meanBy(chartData, (item) => { return item.fields.response_time[0]; });
+
+    // Round average response time value
+    const roundedAverageResponseTime = _.round(averageResponseTime);
+
+    // Check if value is not a number
+    if (!isNaN(roundedAverageResponseTime)) {
+
+      // Round it before return
+      return roundedAverageResponseTime;
+    }
+
+    // Return 0 if the final value is NaN
+    return 0;
+  }
+
+  // Function that returns response rate
+  instance.getResponseRate = function (chartData) {
+
+    // Group chart data by response status code
+    const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
+
+    try {
+
+      // Get the amount of success status codes
+      const successStatusCodeCount = responseStatusCodeGroup['200'].length;
+
+      // Get total amout of records in the chart
+      const chartItemsCount = chartData.length;
+
+      // Calculate average response rate based on success (200) status code in persentage
+      const responseRate = successStatusCodeCount / chartItemsCount * 100;
+
+      // Roound it before return
+      return _.round(responseRate);
+
+    } catch (e) {
+
+      // Return 0 if there are no 200 codes
+      return 0;
+    }
+  }
+
+  // Function that returns amount of unique users
+  instance.getUniqueUsersCount = function (chartData) {
+
+    // Group unique users by user ID
+    const uniqueUsersGroup = _.groupBy(chartData, (item) => {
+
+      try {
+
+        return item.fields.user_id[0];
+
+      } catch (e) {
+
+        return false;
+      }
+    });
+
+    // Remove object key with no-user data
+    delete uniqueUsersGroup['false'];
+
+    // Return the amount of users in object
+    return Object.keys(uniqueUsersGroup).length;
+  }
+
 });
 
-Template.chartsLayout.onRendered(function () {
+Template.dashboardCharts.onRendered(function () {
 
   const instance = this;
 
   // Get reference to chart html elemets
-  const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
+  const chartElements = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
 
-  chartElemets.addClass('loader'); // Set loader
+  // Set active class to a button
+  $('#tick-hour').addClass('active');
 
   instance.autorun(() => {
 
-    const chartData = instance.esData.get(); // Get elasticsearch data
+    const chartData = Template.currentData().chartData;
+    const chartDataIsLoading = Template.currentData().loadingState;
+    const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
-    if (chartData) {
+    if (chartDataIsLoading) {
 
-      const parsedData = instance.parseChartData(chartData); // Parse ES data
+      // Set loader
+      chartElements.addClass('loader');
 
-      instance.renderCharts(parsedData); // Render chart with data
+    } else {
+      if (chartData && chartData.length > 0) {
 
-      chartElemets.removeClass('loader'); // Unset loader
+        let parsedData = [];
+
+        if (apiFrontendPrefixList) {
+
+          // Filter data by api frontend prefix
+          const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
+
+          // Parse data for charts
+          parsedData = instance.parseChartData(filteredData);
+
+        } else {
+
+          // Parse data for charts
+          parsedData = instance.parseChartData(chartData);
+        }
+
+        // Render charts
+        instance.renderCharts(parsedData);
+
+        // Unset loader
+        chartElements.removeClass('loader');
+
+      } else if (chartData && chartData.length === 0) {
+
+        console.log('No data found.');
+        chartElements.removeClass('loader');
+      }
     }
   });
 
+  // Activate help icons
   $('[data-toggle="popover"]').popover();
+
 });
 
-Template.chartsLayout.helpers({
+Template.dashboardCharts.events({
+  'change #api-frontend-prefix-form': function (event) {
+
+    // Prevent default form submit
+    event.preventDefault();
+
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get selected value
+    const apiFrontendPrefixList = $('#api-frontend-prefix').val();
+
+    // Set reactive variable
+    instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
+  },
+  'click #tick-hour': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-hour').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.hour);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.hour);
+
+
+  },
+  'click #tick-day': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-day').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.day);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.day);
+
+  },
+  'click #tick-week': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-week').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.week);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.week);
+
+  },
+  'click #tick-month': function () {
+
+    // Remove class from previous selection
+    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
+
+    // Add active class to current button
+    $('#tick-month').addClass('active');
+
+    const instance = Template.instance();
+
+    // Update charts tick based on new date format
+    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.month);
+    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.month);
+
+  }
+});
+
+Template.dashboardCharts.helpers({
   tableDataSet () {
     const instance = Template.instance();
     return instance.tableDataSet.get();
   },
-  itemsCount () {
+  statisticsData () {
+
     const instance = Template.instance();
+
     return {
-      filterItemsCount: instance.filterItemsCount.get(),
-      totalItemsCount: instance.totalItemsCount.get()
+      requestsCount: instance.requestsCount.get(),
+      averageResponseTime: instance.averageResponseTime.get(),
+      responseRate: instance.responseRate.get(),
+      uniqueUsersCount: instance.uniqueUsersCount.get()
     }
   }
 });

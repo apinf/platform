@@ -1,0 +1,13 @@
+<template name="dashboardChartsFiltering">
+  <form class="form-inline pull-left" id="api-frontend-prefix-form">
+    {{ # if Template.subscriptionsReady }}
+    {{ > apiBackendSelectPicker apis=apis }}
+    {{ / if }}
+  </form>
+  <form class="form-inline pull-right" id="tick-buttons" >
+    {{ > tickButtons}}
+  </form>
+  <form class="form-inline pull-right" id="select-timeframe-form" style="margin-right: 10px;">
+    {{ > timeFrameSelectPicker }}
+  </form>
+</template>

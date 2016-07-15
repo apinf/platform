@@ -75,11 +75,15 @@
             <a class="close-navbar" href="/sign-in">{{_ "login"}}</a>
           </li>
           {{/if}}
-        </ul>
-        <ul class="nav navbar-nav navbar-right main-navbar-search">
-          {{> searchField}}
+          <li>
+            <a type="button" class="icon-search">
+              <i class="fa fa-search toggle-search-icon"></i>
+              <i class="fa fa-times toggle-search-icon"></i>
+            </a>
+          </li>
         </ul>
       </div>
+      {{> searchField }}
     </div>
   </nav>
 </template>

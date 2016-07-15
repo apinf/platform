@@ -1,4 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
+import moment from 'moment';
 
 Template.search.created = function () {
   // Get reference to Template instance

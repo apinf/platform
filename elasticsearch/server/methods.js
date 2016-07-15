@@ -18,7 +18,7 @@ Meteor.methods({
 
       } catch (e) {
 
-        throw new Meteor.error(500, 'Elasticsearch host is not defined. Please check your settings.');
+        throw new Meteor.Error(500, 'Elasticsearch host is not defined. Please check your settings.');
 
         return false;
       }
@@ -31,13 +31,13 @@ Meteor.methods({
         return res;
       }, (err) => {
 
-        throw new Meteor.error(500, 'Analytics data is not found.');
+        throw new Meteor.Error(500, 'Analytics data is not found.');
 
         return false;
       });
     } else {
       
-      throw new Meteor.error(500, 'User is not authorised.');
+      throw new Meteor.Error(500, 'User is not authorised.');
 
       return false;
     }
