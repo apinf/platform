@@ -28,6 +28,9 @@
         <th>
           {{ _ "dashboardDataTable_responseTime" }}
         </th>
+        <th>
+          {{ _ "dashboardDataTable_responseStatus" }}
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -47,6 +50,9 @@
           </td>
           <td>
             {{ row.responseTime }}
+          </td>
+          <td>
+            {{ row.responseStatus }}
           </td>
         </tr>
       {{ / each}}
