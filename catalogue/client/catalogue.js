@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ApiBackends } from '/apis/collection/backend';
 
+import _ from 'lodash';
+
 Template.catalogue.onCreated(function () {
 
   const instance = this;
@@ -16,6 +18,47 @@ Template.catalogue.onCreated(function () {
   // Pagination
   instance.apisPerPage = new ReactiveVar(24);
   instance.currentPageNumber = new ReactiveVar(0);
+  instance.pages = new ReactiveVar([]);
+
+  // Subscribe to API logo colection
+  instance.subscribe("allApiLogo");
+
+  // Subscribe to Meteor.users to show authors. Show only visible authors.
+  instance.subscribe("allUsers");
+
+  instance.generatePageNumbers = function () {
+
+    let pages = [];
+
+    const currentPageNumber = instance.currentPageNumber.get() + 1;
+    const apisCount = ApiBackends.find().count();
+    const apisPerPage = instance.apisPerPage.get();
+    const totalPagesCount = (apisCount / apisPerPage + 1) | 0;
+
+    for (let i = 1; i < totalPagesCount+1; i++) {
+      pages.push(i);
+    }
+
+    console.log(currentPageNumber, pages[pages.length-4]);
+
+    if (totalPagesCount >= 9) {
+
+      if (currentPageNumber <= 4) {
+
+        pages = _.concat(_.take(pages, 5), '..', _.takeRight(pages, 1));
+
+      } else if (currentPageNumber > 4 && currentPageNumber < pages[pages.length-4]) {
+
+        pages = _.concat(_.take(pages, 1), '..', currentPageNumber-1, currentPageNumber, currentPageNumber+1, '..', _.takeRight(pages, 1));
+
+      } else if (currentPageNumber >= pages[pages.length-4]) {
+
+        pages = _.concat(_.take(pages, 1), '..', _.takeRight(pages, 5));
+      }
+    }
+
+    instance.pages.set(pages);
+  }
 
   instance.autorun(function () {
     // Watch for changes in the sort and filter settings
@@ -32,13 +75,9 @@ Template.catalogue.onCreated(function () {
 
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
+
+    instance.generatePageNumbers();
   });
-
-  // Subscribe to API logo colection
-  instance.subscribe("allApiLogo");
-
-  // Subscribe to Meteor.users to show authors. Show only visible authors.
-  instance.subscribe("allUsers");
 });
 
 Template.catalogue.onRendered(function () {
@@ -105,7 +144,7 @@ Template.catalogue.helpers({
     const instance = Template.instance();
     return instance.currentPageNumber.get() + 1;
   },
-  totalPageNumber () {
+  totalPagesCount () {
     const instance = Template.instance();
     const apisCount = ApiBackends.find().count();
     const apisPerPage = instance.apisPerPage.get();
@@ -151,18 +190,7 @@ Template.catalogue.helpers({
 
     const instance = Template.instance();
 
-    let pages = [];
-
-    const currentPageNumber = instance.currentPageNumber.get();
-    const apisCount = ApiBackends.find().count();
-    const apisPerPage = instance.apisPerPage.get();
-    const totalPageNumber = (apisCount / apisPerPage + 1) | 0;
-
-    for (let i = 0; i < totalPageNumber; i++) {
-      pages.push(i + 1);
-    }
-
-    return pages;
+    return instance.pages.get();
   }
 });
 
@@ -223,8 +251,9 @@ Template.catalogue.events({
 
     const newPageNumber = $(event.currentTarget).text();
 
-    const newPageNumberParsed = parseInt(newPageNumber) - 1;
-
-    instance.currentPageNumber.set(newPageNumberParsed);
+    if (newPageNumber !== '..') {
+      const newPageNumberParsed = parseInt(newPageNumber) - 1;
+      instance.currentPageNumber.set(newPageNumberParsed);
+    }
   }
 });
