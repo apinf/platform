@@ -113,4 +113,35 @@
       {{> spinner }}
     {{/if}}
   {{/ if }}
+
+  <div>
+    <div class="page-numbers pull-left">
+      Page <strong>{{ currentPageNumber }}</strong> / <strong>{{ totalPageNumber }}</strong>
+    </div>
+    <div class="btn-group pull-right">
+      {{ # if showPrevButton }}
+        <button class="btn btn-sm btn-default" id="prev-page">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Prev
+        </button>
+      {{ else }}
+        <button class="btn btn-sm btn-default disabled">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Prev
+        </button>
+      {{ / if }}
+      {{ # if showNextButton }}
+        <button class="btn btn-sm btn-default" id="next-page">
+          Next
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      {{ else }}
+        <button class="btn btn-sm btn-default disabled">
+          Next
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      {{ / if }}
+    </div>
+  </div>
+
 </template>

@@ -47,6 +47,7 @@ Template.catalogue.onRendered(function () {
 });
 
 Template.catalogue.helpers({
+  // Catalogue
   apiBackendsCount () {
     // Count the number of API Backends in current subscription
     return ApiBackends.find().count();
@@ -98,10 +99,51 @@ Template.catalogue.helpers({
     const viewMode = instance.viewMode.get();
 
     return (viewMode === "table");
-  }
+  },
+  // Pagination
+  currentPageNumber () {
+    const instance = Template.instance();
+    return instance.currentPageNumber.get() + 1;
+  },
+  totalPageNumber () {
+    const instance = Template.instance();
+    const apisCount = ApiBackends.find().count();
+    const apisPerPage = instance.apisPerPage.get();
+
+    return (apisCount / apisPerPage + 1) | 0;
+  },
+  showPrevButton () {
+
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Ger current page number
+    const currentPageNumber = instance.currentPageNumber.get();
+
+    // Check if current page is the first one in table
+    return currentPageNumber > 0;
+  },
+  showNextButton () {
+
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get table row count
+    const apisPerPage = instance.apisPerPage.get();
+
+    // Get current page number
+    const currentPageNumber = instance.currentPageNumber.get();
+
+    // Get table dataset length
+    const apisCount = ApiBackends.find().count();
+
+    // Check if current page is the last one in the table
+    return currentPageNumber < (apisCount / apisPerPage - 1);
+  },
 });
 
 Template.catalogue.events({
+  // Catalogue
   'change #sort-select' (event, instance) {
     // Get selected sort value
     const sortBy = event.target.value;
@@ -129,5 +171,28 @@ Template.catalogue.events({
 
     // Update the instance sort value reactive variable
     instance.viewMode.set(viewMode);
+  },
+  // Pagination
+  'click #prev-page': function (event, instance) {
+
+    const currentPageNumber = instance.currentPageNumber.get();
+
+    if (currentPageNumber > 0) {
+
+      instance.currentPageNumber.set(currentPageNumber - 1);
+    }
+  },
+  'click #next-page': function (event, instance) {
+
+    const currentPageNumber = instance.currentPageNumber.get();
+
+    const apisPerPage = instance.apisPerPage.get();
+
+    const apisCount = ApiBackends.find().count();
+
+    if (currentPageNumber < (apisCount / apisPerPage - 1)) {
+
+      instance.currentPageNumber.set(currentPageNumber + 1);
+    }
   }
 });
