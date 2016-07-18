@@ -114,27 +114,25 @@
     {{/if}}
   {{/ if }}
 
-  <div>
-    <div class="btn-group pull-right">
-      <nav>
-        <ul class="pagination">
-          <li class="{{ prevButtonDisabledClass }}" >
-            <a href="#" aria-label="Previous" id="prev-page">
-              <span aria-hidden="true">«</span>
-            </a>
+  <div class="btn-group pull-right">
+    <nav>
+      <ul class="pagination">
+        <li class="{{ prevButtonDisabledClass }}" >
+          <a href="#" aria-label="Previous" id="prev-page">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        {{ # each page in pageNumbers }}
+          <li>
+            <a href="#" class="change-page">{{ page }}</a>
           </li>
-          {{ # each page in pageNumbers }}
-            <li>
-              <a href="#" class="change-page">{{ page }}</a>
-            </li>
-          {{ / each }}
-          <li class="{{ nextButtonDisabledClass }}">
-            <a href="#" aria-label="Next" id="next-page">
-              <span aria-hidden="true">»</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+        {{ / each }}
+        <li class="{{ nextButtonDisabledClass }}">
+          <a href="#" aria-label="Next" id="next-page">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
