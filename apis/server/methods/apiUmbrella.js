@@ -1,4 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
+import _ from 'lodash';
 
 Meteor.methods({
   "syncApiBackends":function () {
@@ -9,7 +10,8 @@ Meteor.methods({
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
       var apiBackends = response.data.data;
 
-      _.each(apiBackends, function (apiBackend) {
+      _.forEach(apiBackends, function (apiBackend) {
+
         // Get existing API Backend
         var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
 
