@@ -147,6 +147,23 @@ Template.catalogue.helpers({
     }
     return 'disabled';
   },
+  pageNumbers () {
+
+    const instance = Template.instance();
+
+    let pages = [];
+
+    const currentPageNumber = instance.currentPageNumber.get();
+    const apisCount = ApiBackends.find().count();
+    const apisPerPage = instance.apisPerPage.get();
+    const totalPageNumber = (apisCount / apisPerPage + 1) | 0;
+
+    for (let i = 0; i < totalPageNumber; i++) {
+      pages.push(i + 1);
+    }
+
+    return pages;
+  }
 });
 
 Template.catalogue.events({
@@ -201,5 +218,13 @@ Template.catalogue.events({
 
       instance.currentPageNumber.set(currentPageNumber + 1);
     }
+  },
+  'click .change-page': function (event, instance) {
+
+    const newPageNumber = $(event.currentTarget).text();
+
+    const newPageNumberParsed = parseInt(newPageNumber) - 1;
+
+    instance.currentPageNumber.set(newPageNumberParsed);
   }
 });
