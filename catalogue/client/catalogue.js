@@ -39,8 +39,6 @@ Template.catalogue.onCreated(function () {
       pages.push(i);
     }
 
-    console.log(currentPageNumber, pages[pages.length-4]);
-
     if (totalPagesCount >= 9) {
 
       if (currentPageNumber <= 4) {
