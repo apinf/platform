@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { ApiBackends } from '/apis/collection/backend';
 
 Template.catalogue.onCreated(function () {
+
   const instance = this;
 
   // Set up toolbar reactive variables
@@ -10,6 +11,11 @@ Template.catalogue.onCreated(function () {
   instance.sortDirection = new ReactiveVar("ascending");
   instance.filterBy = new ReactiveVar("show-all");
   instance.viewMode = new ReactiveVar("grid");
+
+
+  // Pagination
+  instance.apisPerPage = new ReactiveVar(24);
+  instance.currentPageNumber = new ReactiveVar(0);
 
   instance.autorun(function () {
     // Watch for changes in the sort and filter settings
@@ -67,7 +73,13 @@ Template.catalogue.helpers({
     sortOptions.sort[sortBy] = sortDirection;
 
     // Get sorted list of API Backends
-    return ApiBackends.find({}, sortOptions).fetch();
+    const apis = ApiBackends.find({}, sortOptions).fetch();
+
+    // Pagination
+    const arrStart = instance.apisPerPage.get() * instance.currentPageNumber.get();
+    const arrEnd = arrStart + instance.apisPerPage.get();
+
+    return apis.slice(arrStart, arrEnd);
   },
   gridViewMode () {
     // Get reference to template instance
