@@ -185,10 +185,16 @@ Template.catalogue.helpers({
     return 'disabled';
   },
   pageNumbers () {
-
     const instance = Template.instance();
-
     return instance.pages.get();
+  },
+  pageIsActive (pageNum) {
+    const instance = Template.instance();
+    if ((instance.currentPageNumber.get() + 1) === pageNum) {
+      return 'active';
+    }
+
+    return '';
   }
 });
 
