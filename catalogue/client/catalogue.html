@@ -119,29 +119,36 @@
       Page <strong>{{ currentPageNumber }}</strong> / <strong>{{ totalPageNumber }}</strong>
     </div>
     <div class="btn-group pull-right">
-      {{ # if showPrevButton }}
-        <button class="btn btn-sm btn-default" id="prev-page">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          Prev
-        </button>
-      {{ else }}
-        <button class="btn btn-sm btn-default disabled">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          Prev
-        </button>
-      {{ / if }}
-      {{ # if showNextButton }}
-        <button class="btn btn-sm btn-default" id="next-page">
-          Next
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </button>
-      {{ else }}
-        <button class="btn btn-sm btn-default disabled">
-          Next
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </button>
-      {{ / if }}
+      <nav>
+        <ul class="pagination">
+          <li class="{{ prevButtonDisabledClass }}" >
+            <a href="#" aria-label="Previous" id="prev-page">
+              <span aria-hidden="true">«</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="#">1
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">2</a>
+          </li>
+          <li><a href="#">3</a>
+          </li>
+          <li>
+            <a href="#">4</a>
+          </li>
+          <li>
+            <a href="#">5</a>
+          </li>
+          <li class="{{ nextButtonDisabledClass }}">
+            <a href="#" aria-label="Next" id="next-page">
+              <span aria-hidden="true">»</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
-
 </template>

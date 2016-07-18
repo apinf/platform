@@ -112,7 +112,7 @@ Template.catalogue.helpers({
 
     return (apisCount / apisPerPage + 1) | 0;
   },
-  showPrevButton () {
+  prevButtonDisabledClass () {
 
     // Get reference to template instance
     const instance = Template.instance();
@@ -120,10 +120,14 @@ Template.catalogue.helpers({
     // Ger current page number
     const currentPageNumber = instance.currentPageNumber.get();
 
-    // Check if current page is the first one in table
-    return currentPageNumber > 0;
+    // Check if current page is not the first one in table
+    if (currentPageNumber > 0) {
+      return '';
+    }
+
+    return 'disabled';
   },
-  showNextButton () {
+  nextButtonDisabledClass () {
 
     // Get reference to template instance
     const instance = Template.instance();
@@ -137,8 +141,11 @@ Template.catalogue.helpers({
     // Get table dataset length
     const apisCount = ApiBackends.find().count();
 
-    // Check if current page is the last one in the table
-    return currentPageNumber < (apisCount / apisPerPage - 1);
+    // Check if current page is not the last one in the table
+    if (currentPageNumber < (apisCount / apisPerPage - 1)) {
+      return '';
+    }
+    return 'disabled';
   },
 });
 
