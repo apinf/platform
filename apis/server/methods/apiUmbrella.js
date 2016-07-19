@@ -7,11 +7,11 @@ Meteor.methods({
     // Check if apiUmbrellaWeb object exists
     if ( typeof apiUmbrellaWeb !== 'undefined' ) {
       // Get API Backends from API Umbrella instance
-      var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
-      var apisRemote = response.data.data;
+      const response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
+      const apisRemote = response.data.data;
       const apisLocal = ApiBackends.find().fetch();
 
-      _.forEach(apisRemote, function (apiRemote) {
+      _.forEach(apisRemote, (apiRemote) => {
 
         // Get existing API Backend
         var existingApiBackend = ApiBackends.findOne({'id': apiRemote.id});
@@ -34,9 +34,6 @@ Meteor.methods({
 
         if (!existingApiBackend) {
           ApiBackends.remove({'id': apiLocal.id});
-          console.log('removed');
-        } else {
-          console.log('fine');
         }
       });
     }
