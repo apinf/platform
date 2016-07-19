@@ -8,9 +8,9 @@ Meteor.methods({
     if ( typeof apiUmbrellaWeb !== 'undefined' ) {
       // Get API Backends from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
-      var apiBackends = response.data.data;
+      var apisRemote = response.data.data;
 
-      _.forEach(apiBackends, function (apiBackend) {
+      _.forEach(apisRemote, function (apiBackend) {
 
         // Get existing API Backend
         var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
@@ -24,6 +24,7 @@ Meteor.methods({
           }
         };
       });
+
     }
   },
   createApiBackendOnApiUmbrella: function (apiBackendForm) {
