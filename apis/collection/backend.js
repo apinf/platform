@@ -686,7 +686,7 @@ SimpleSchema.messages({
   ],
   // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match",
-  notUnique: "This value is already in use"
+  notUnique: "This value is already in use, please make it unique"
 });
 
 export { ApiBackends };
