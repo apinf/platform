@@ -32,6 +32,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   description: {
     type: String,
     max: 1000,
+    unique: true,
     autoform: {
       rows: 3
     },
@@ -684,7 +685,8 @@ SimpleSchema.messages({
     {exp: SimpleSchema.RegEx.Prefix, msg: "Invalid format. Prefix should start with / character."}
   ],
   // update password form
-  "updatePassword_passwordsMismatch": "Passwords do not match"
+  "updatePassword_passwordsMismatch": "Passwords do not match",
+  notUnique: "This value is already in use"
 });
 
 export { ApiBackends };
