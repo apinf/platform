@@ -100,6 +100,7 @@
   {{# if gridViewMode }}
     {{# if Template.subscriptionsReady }}
       {{> catalogueGrid apiBackends=apiBackends }}
+      {{> cataloguePagination }}
     {{else}}
       {{> spinner }}
     {{/if}}
@@ -109,6 +110,7 @@
   {{# if tableViewMode }}
     {{# if Template.subscriptionsReady }}
       {{> catalogueTable apiBackends=apiBackends }}
+      {{> cataloguePagination }}
     {{else}}
       {{> spinner }}
     {{/if}}
