@@ -26,6 +26,7 @@ Template.catalogue.onCreated(function () {
   // Subscribe to Meteor.users to show authors. Show only visible authors.
   instance.subscribe("allUsers");
 
+  // Gerenates new page numbers array every time current page changes
   instance.generatePageNumbers = function () {
 
     let pages = [];
@@ -35,12 +36,21 @@ Template.catalogue.onCreated(function () {
     const apisPerPage = instance.apisPerPage.get();
     const totalPagesCount = (apisCount / apisPerPage + 1) | 0;
 
+    // Create list with all the page numbers
     for (let i = 1; i < totalPagesCount+1; i++) {
       pages.push(i);
     }
 
+    // Check if total page count is bigger than 9
+    // To be able to generate sliced pagination
+    // Otherwise gerenate complete pages list
     if (totalPagesCount >= 9) {
 
+      // For current page number range shorten pages array, replace nums with '..':
+      // 1. n <= 4
+      // 2. n > 4 && n < total-4
+      // 3. n >= total-4
+      // n - current page number; total - total pages amount
       if (currentPageNumber <= 4) {
 
         pages = _.concat(_.take(pages, 5), '..', _.takeRight(pages, 1));
@@ -74,6 +84,7 @@ Template.catalogue.onCreated(function () {
     // Subscribe to API Backends with catalogue settings
     instance.subscribe("catalogue", subscriptionOptions);
 
+    // Update pagination
     instance.generatePageNumbers();
   });
 });
@@ -147,6 +158,7 @@ Template.catalogue.helpers({
     const apisCount = ApiBackends.find().count();
     const apisPerPage = instance.apisPerPage.get();
 
+    // Calculate total pages cound and round
     return (apisCount / apisPerPage + 1) | 0;
   },
   prevButtonDisabledClass () {
@@ -190,6 +202,8 @@ Template.catalogue.helpers({
   },
   pageIsActive (pageNum) {
     const instance = Template.instance();
+
+    // Check if current page is active
     if ((instance.currentPageNumber.get() + 1) === pageNum) {
       return 'active';
     }
