@@ -10,6 +10,8 @@ Meteor.methods({
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
       var apisRemote = response.data.data;
 
+      const apisLocal = ApiBackends.find();
+
       _.forEach(apisRemote, function (apiBackend) {
 
         // Get existing API Backend
