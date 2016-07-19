@@ -9,24 +9,36 @@ Meteor.methods({
       // Get API Backends from API Umbrella instance
       var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
       var apisRemote = response.data.data;
+      const apisLocal = ApiBackends.find().fetch();
 
-      const apisLocal = ApiBackends.find();
-
-      _.forEach(apisRemote, function (apiBackend) {
+      _.forEach(apisRemote, function (apiRemote) {
 
         // Get existing API Backend
-        var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
+        var existingApiBackend = ApiBackends.findOne({'id': apiRemote.id});
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingApiBackend === undefined) {
           try {
-            ApiBackends.insert(apiBackend);
+            ApiBackends.insert(apiRemote);
           } catch (error) {
-            console.error("Error inserting apiBackend(" + apiBackend.id + ") : " + error);
+            console.error("Error inserting apiBackend(" + apiRemote.id + ") : " + error);
           }
         };
       });
 
+      _.forEach(apisLocal, (apiLocal) => {
+
+        const existingApiBackend = _.find(apisRemote, (apiRemote) => {
+          return apiRemote.id === apiLocal.id;
+        });
+
+        if (!existingApiBackend) {
+          ApiBackends.remove({'id': apiLocal.id});
+          console.log('removed');
+        } else {
+          console.log('fine');
+        }
+      });
     }
   },
   createApiBackendOnApiUmbrella: function (apiBackendForm) {
