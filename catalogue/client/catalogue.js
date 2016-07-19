@@ -249,6 +249,7 @@ Template.catalogue.events({
 
     if (currentPageNumber > 0) {
 
+      // Turn the page forward if check above passed
       instance.currentPageNumber.set(currentPageNumber - 1);
     }
   },
@@ -260,16 +261,21 @@ Template.catalogue.events({
 
     const apisCount = ApiBackends.find().count();
 
+    // Check if page is not last one
     if (currentPageNumber < (apisCount / apisPerPage - 1)) {
 
+      // Turn the page backwards if check above passed
       instance.currentPageNumber.set(currentPageNumber + 1);
     }
   },
   'click .change-page': function (event, instance) {
 
+    // get clicked page number
     const newPageNumber = $(event.currentTarget).text();
 
+    // Make sure that that value is a number
     if (newPageNumber !== '..') {
+      // Parse string to int and normalize
       const newPageNumberParsed = parseInt(newPageNumber) - 1;
       instance.currentPageNumber.set(newPageNumberParsed);
     }
