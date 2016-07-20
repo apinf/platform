@@ -114,25 +114,23 @@
     {{/if}}
   {{/ if }}
 
-  <div class="btn-group pull-right">
-    <nav>
-      <ul class="pagination">
-        <li class="{{ prevButtonDisabledClass }}" >
-          <a href="#" aria-label="Previous" id="prev-page">
-            <span aria-hidden="true">«</span>
-          </a>
+  <div class="text-center">
+    <ul class="pagination">
+      <li class="{{ prevButtonDisabledClass }}" >
+        <a href="#" aria-label="Previous" id="prev-page">
+          <span aria-hidden="true">{{_ "catalogue_paginationButtons_previous" }}</span>
+        </a>
+      </li>
+      {{ # each page in pageNumbers }}
+        <li class="{{ pageIsActive page }}">
+          <a href="#" class="change-page">{{ page }}</a>
         </li>
-        {{ # each page in pageNumbers }}
-          <li class="{{ pageIsActive page}}">
-            <a href="#" class="change-page">{{ page }}</a>
-          </li>
-        {{ / each }}
-        <li class="{{ nextButtonDisabledClass }}">
-          <a href="#" aria-label="Next" id="next-page">
-            <span aria-hidden="true">»</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      {{ / each }}
+      <li class="{{ nextButtonDisabledClass }}">
+        <a href="#" aria-label="Next" id="next-page">
+          <span aria-hidden="true">{{_ "catalogue_paginationButtons_next" }}</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
