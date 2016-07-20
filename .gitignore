@@ -12,3 +12,4 @@ docker/ssl/env
 node_modules/
 packages
 node_modules
+.meteor/dev_bundle
