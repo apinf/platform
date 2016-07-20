@@ -53,6 +53,8 @@
   "catalogue-AverageRating-Tooltip": "Average Rating",
   "catalogue-Bookmark-Tooltip_NonUser": "Number of bookmarks. Sign in to bookmark.",
   "catalogue-Bookmark-Tooltip_User": "Bookmark API",
+  "catalogue_paginationButtons_next": "Next",
+  "catalogue_paginationButtons_previous": "Previous",
   "catalogue_toolbar_filterOptions_myApis": "My APIs",
   "catalogue_toolbar_filterOptions_myBookmarks": "My bookmarks",
   "catalogue_toolbar_filterOptions_showAll": "Show all",
