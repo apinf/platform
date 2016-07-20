@@ -17,10 +17,10 @@ Meteor.methods({
       _.forEach(remoteApis, (remoteApi) => {
 
         // Get existing API Backend
-        const existingApiBackend = ApiBackends.findOne({'id': remoteApi.id});
+        const existingLocalApiBackend = ApiBackends.findOne({'id': remoteApi.id});
 
         // If API Backend doesn't exist in collection, insert into collection
-        if (existingApiBackend === undefined) {
+        if (existingLocalApiBackend === undefined) {
           try {
             ApiBackends.insert(remoteApi);
           } catch (error) {
