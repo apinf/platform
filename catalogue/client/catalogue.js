@@ -46,22 +46,22 @@ Template.catalogue.onCreated(function () {
     // Otherwise gerenate complete pages list
     if (totalPagesCount >= 9) {
 
-      // For current page number range shorten pages array, replace nums with '..':
+      // For current page number range shorten pages array, replace nums with '...':
       // 1. n <= 4
       // 2. n > 4 && n < total-4
       // 3. n >= total-4
       // n - current page number; total - total pages amount
       if (currentPageNumber <= 4) {
 
-        pages = _.concat(_.take(pages, 5), '..', _.takeRight(pages, 1));
+        pages = _.concat(_.take(pages, 5), '...', _.takeRight(pages, 1));
 
       } else if (currentPageNumber > 4 && currentPageNumber < pages[pages.length-4]) {
 
-        pages = _.concat(_.take(pages, 1), '..', currentPageNumber-1, currentPageNumber, currentPageNumber+1, '..', _.takeRight(pages, 1));
+        pages = _.concat(_.take(pages, 1), '...', currentPageNumber-1, currentPageNumber, currentPageNumber+1, '...', _.takeRight(pages, 1));
 
       } else if (currentPageNumber >= pages[pages.length-4]) {
 
-        pages = _.concat(_.take(pages, 1), '..', _.takeRight(pages, 5));
+        pages = _.concat(_.take(pages, 1), '...', _.takeRight(pages, 5));
       }
     }
 
@@ -174,7 +174,7 @@ Template.catalogue.helpers({
       return '';
     }
 
-    return 'disabled';
+    return 'inactive';
   },
   nextButtonDisabledClass () {
 
@@ -194,18 +194,20 @@ Template.catalogue.helpers({
     if (currentPageNumber < (apisCount / apisPerPage - 1)) {
       return '';
     }
-    return 'disabled';
+    return 'inactive';
   },
   pageNumbers () {
     const instance = Template.instance();
     return instance.pages.get();
   },
-  pageIsActive (pageNum) {
+  pageIsActive (pageNumber) {
     const instance = Template.instance();
 
     // Check if current page is active
-    if ((instance.currentPageNumber.get() + 1) === pageNum) {
+    if ((instance.currentPageNumber.get() + 1) === pageNumber) {
       return 'active';
+    } else if (pageNumber === '...') {
+      return 'inactive'
     }
 
     return '';
@@ -274,7 +276,7 @@ Template.catalogue.events({
     const newPageNumber = $(event.currentTarget).text();
 
     // Make sure that that value is a number
-    if (newPageNumber !== '..') {
+    if (newPageNumber !== '...') {
       // Parse string to int and normalize
       const newPageNumberParsed = parseInt(newPageNumber) - 1;
       instance.currentPageNumber.set(newPageNumberParsed);
