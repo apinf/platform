@@ -17,7 +17,7 @@ Meteor.methods({
       _.forEach(remoteApis, (remoteApi) => {
 
         // Get existing API Backend
-        var existingApiBackend = ApiBackends.findOne({'id': remoteApi.id});
+        const existingApiBackend = ApiBackends.findOne({'id': remoteApi.id});
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingApiBackend === undefined) {
@@ -31,12 +31,12 @@ Meteor.methods({
 
       _.forEach(localApis, (localApi) => {
 
-        const existingApiBackend = _.find(remoteApis, (remoteApi) => {
+        const existingRemoteApiBackend = _.find(remoteApis, (remoteApi) => {
           return remoteApi.id === localApi.id;
         });
 
         // If API Backend doesn't exist on API Umbrella, but locally, delete this API
-        if (!existingApiBackend) {
+        if (!existingRemoteApiBackend) {
           try {
             ApiBackends.remove({'id': localApi.id});
           } catch (error) {
