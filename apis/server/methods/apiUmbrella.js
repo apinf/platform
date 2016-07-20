@@ -6,34 +6,42 @@ Meteor.methods({
 
     // Check if apiUmbrellaWeb object exists
     if ( typeof apiUmbrellaWeb !== 'undefined' ) {
+
       // Get API Backends from API Umbrella instance
       const response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
-      const apisRemote = response.data.data;
-      const apisLocal = ApiBackends.find().fetch();
+      const remoteApis = response.data.data;
 
-      _.forEach(apisRemote, (apiRemote) => {
+      // Get all local API Backends
+      const localApis = ApiBackends.find().fetch();
+
+      _.forEach(remoteApis, (remoteApi) => {
 
         // Get existing API Backend
-        var existingApiBackend = ApiBackends.findOne({'id': apiRemote.id});
+        var existingApiBackend = ApiBackends.findOne({'id': remoteApi.id});
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingApiBackend === undefined) {
           try {
-            ApiBackends.insert(apiRemote);
+            ApiBackends.insert(remoteApi);
           } catch (error) {
-            console.error("Error inserting apiBackend(" + apiRemote.id + ") : " + error);
+            console.error("Error inserting apiBackend(" + remoteApi.id + ") : " + error);
           }
         };
       });
 
-      _.forEach(apisLocal, (apiLocal) => {
+      _.forEach(localApis, (localApi) => {
 
-        const existingApiBackend = _.find(apisRemote, (apiRemote) => {
-          return apiRemote.id === apiLocal.id;
+        const existingApiBackend = _.find(remoteApis, (remoteApi) => {
+          return remoteApi.id === localApi.id;
         });
 
+        // If API Backend doesn't exist on API Umbrella, but locally, delete this API
         if (!existingApiBackend) {
-          ApiBackends.remove({'id': apiLocal.id});
+          try {
+            ApiBackends.remove({'id': localApi.id});
+          } catch (error) {
+            console.error("Error deleteing apiBackend(" + localApi.id + ") : " + error);
+          }
         }
       });
     }
