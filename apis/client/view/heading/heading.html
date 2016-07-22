@@ -13,6 +13,7 @@
       {{ apiBackend.name }}
       {{> viewApiBackendStatus apiBackend=apiBackend width="0.4"  }}
     </h1>
+    {{> visibilitySwitch apiBackend=apiBackend }}
     {{> apiBackendUsageInstructions }}
   </div>
 </template>
