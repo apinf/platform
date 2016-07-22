@@ -417,5 +417,8 @@
   "tickButtons_hour": "Hour",
   "tickButtons_day": "Day",
   "tickButtons_week": "Week",
-  "tickButtons_month": "Month"
+  "tickButtons_month": "Month",
+  "visibilitySwitch_labelText": "Visibility",
+  "visibilitySwitch_offText": "Private",
+  "visibilitySwitch_onText": "Public"
 }
