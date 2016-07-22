@@ -67,8 +67,8 @@ Register a new admin account. The first user will become Admin.
 9. Fill data in "Project Branding: APINF Configuration Wizard".
 10. Fill data in "Settings for API Umbrella: APINF Configuration Wizard".
 * Host: "https://YOUR_SITE_DOMAIN:3002"
-* API Key: from step #5
-* Auth Token: from step #6
+* API Key: from step #6
+* Auth Token: from step #7
 * Base URL: "https://YOUR_SITE_DOMAIN:3002/api-umbrella/"
 * Elasticsearch: "http://YOUR_SITE_DOMAIN:14002"
 11. Add API backend https://YOUR_SITE_DOMAIN/api/new
