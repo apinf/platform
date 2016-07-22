@@ -3,46 +3,48 @@
     <table class="table table-striped table-bordered api-catalogue-table">
       <tbody>
         {{#each api in apiBackends }}
-        <tr>
-          <td class="col-sm-1">
-            {{> viewApiBackendStatus apiBackend=api width="0.6" }}
-            <div class="api-catalogue-table-logo center-block">
-              {{> viewApiLogo apiBackend=api }}
-            </div>
-          </td>
-          <td class="col-sm-9">
-            <h4 class="api-catalogue-table-title">
-              <a href="/api/{{api._id}}">
-                {{ api.name }}
-              </a>
-            </h4>
-            <i>
-              {{_ "catalogueTable-addedBy"}}
-              {{ api.getApiManagersByName }}
-            </i>
-            <br>
-            <i>
-              {{_ "catalogueTable-added"}}
-              {{ api.relativeCreatedAt }}
-            </i>
-          </td>
-          <td class="col-sm-1">
-            {{> apiBackendRating api }}
-          </td>
-          <td class="col-sm-1 text-center">
-            {{# if currentUser }}
-            <span class="api-card-bookmark">
-              {{> favourite apiBackend=api }}
-              {{ api.bookmarkCount }}
-            </span>
-            {{else}}
-            <span class="api-card-bookmark">
-              <i class="fa fa-bookmark bookmark-default"></i>
-              {{ api.bookmarkCount }}
-            </span>
-            {{/if}}
-          </td>
-        </tr>
+        {{#if api.currentUserCanView }}
+          <tr>
+            <td class="col-sm-1">
+              {{> viewApiBackendStatus apiBackend=api width="0.6" }}
+              <div class="api-catalogue-table-logo center-block">
+                {{> viewApiLogo apiBackend=api }}
+              </div>
+            </td>
+            <td class="col-sm-9">
+              <h4 class="api-catalogue-table-title">
+                <a href="/api/{{api._id}}">
+                  {{ api.name }}
+                </a>
+              </h4>
+              <i>
+                {{_ "catalogueTable-addedBy"}}
+                {{ api.getApiManagersByName }}
+              </i>
+              <br>
+              <i>
+                {{_ "catalogueTable-added"}}
+                {{ api.relativeCreatedAt }}
+              </i>
+            </td>
+            <td class="col-sm-1">
+              {{> apiBackendRating api }}
+            </td>
+            <td class="col-sm-1 text-center">
+              {{# if currentUser }}
+              <span class="api-card-bookmark">
+                {{> favourite apiBackend=api }}
+                {{ api.bookmarkCount }}
+              </span>
+              {{else}}
+              <span class="api-card-bookmark">
+                <i class="fa fa-bookmark bookmark-default"></i>
+                {{ api.bookmarkCount }}
+              </span>
+              {{/if}}
+            </td>
+          </tr>
+        {{/ if }}
         {{/each}}
       </tbody>
     </table>
