@@ -6,15 +6,10 @@ SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
 Schemas.Settings = new SimpleSchema({
   disable_api_key: {
-    type: String,
+    type: Boolean,
     optional: true,
-    label: 'API key options',
-    defaultValue: 'inherit',
-    allowedValues: [
-      'inherit',
-      'required',
-      'disabled'
-    ],
+    label: 'Require API Key',
+    defaultValue: false
   },
   default_response_headers_string: {
     type: String,
