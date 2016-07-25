@@ -192,7 +192,7 @@
   "statusCheckUpdated": "Päivitetty:",
   "statusCheckJustNow": "Juuri äsken.",
   "notAuthorized_Title": "Ei lupaa",
-  "notAuthorized_Message": "Sinulla ei ole oikeutta tarkastella tätä sivua. Varmista, että olet kirjautunut sisään.",
+  "notAuthorized_Message": "Sinulla ei ole oikeutta tarkastella tätä sivua.",
   "notAuthorized_Return_Message_Part1": "Voit",
   "notAuthorized_Return_Message_Part2": "palata edelliselle sivulle",
   "notFound_Title": "Sivua ei löytynyt.",
