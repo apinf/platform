@@ -8,7 +8,7 @@ Schemas.Settings = new SimpleSchema({
   disable_api_key: {
     type: Boolean,
     optional: true,
-    label: 'Require API Key',
+    label: 'Disable API Key',
     defaultValue: false
   },
   default_response_headers_string: {
