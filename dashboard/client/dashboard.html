@@ -1,5 +1,6 @@
 <template name="dashboard">
-  {{# if isInRole 'admin, manager' }}
+  <div class="container">
+    {{# if isInRole 'admin, manager' }}
     <div class="row">
       <div class="col-lg-12">
         <h1 class="dashboard-title">
@@ -8,8 +9,8 @@
       </div>
     </div>
     {{ > dashboardCharts chartData=chartData loadingState=loadingState }}
-  {{ else }}
-   <div class="row">
+    {{ else }}
+    <div class="row">
       <div class="col-lg-12">
         <h1 class="dashboard-no-apis">
           {{_ "dashboard_noApisTitle" }}
@@ -18,5 +19,6 @@
         </h1>
       </div>
     </div>
-  {{ / if }}
+    {{ / if }}
+  </div>
 </template>
