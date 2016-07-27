@@ -1,0 +1,50 @@
+/* Bootstrap */
+@import "/core/client/style/bootstrap-variables.less";
+
+.page-top {
+  padding-top: 20px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  color: #666;
+  background-color: #fafafa;
+  border-bottom: 1px solid #eee;
+}
+
+.view-api-navigation {
+  position: relative;
+  top: 1px;
+  margin-top: 10px;
+
+  .nav-tabs {
+    border-bottom: none;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    font-weight: bold;
+    color: #333;
+    background-color: #fff;
+    border-top-color: @brand-primary;
+    border-top-width: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-right-color: #EEE;
+    border-left-color: #EEE;
+  }
+
+  .nav-tabs > li {
+    border: 0px solid transparent;
+    border-width: 3px 1px 1px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .nav-tabs > li > a {
+    color: #555;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    color: #333;
+    border-color: transparent;
+  }
+}
