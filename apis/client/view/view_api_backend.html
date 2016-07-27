@@ -1,11 +1,7 @@
 <template name="viewApiBackend">
   {{#if Template.subscriptionsReady }}
-  {{> viewApiBackendPageHeading apiBackend=apiBackend }}
-  <div class="row">
-    {{> viewApiBackendNavigationMenu apiBackend=apiBackend }}
-  </div>
-
-  <div class="panel-body">
+  {{> viewApiBackendPageHeader apiBackend=apiBackend }}
+  <div class="container">
     <div class="tab-content">
       <div id="api-backend-details" class="tab-pane fade in active">
         {{> viewApiBackendDetails apiBackend=apiBackend }}
