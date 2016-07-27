@@ -1,19 +1,30 @@
 /* Bootstrap */
 @import "/core/client/style/bootstrap-variables.less";
 
-.page-top {
+.page-head-block {
   padding-top: 20px;
   padding-bottom: 0;
   margin-bottom: 20px;
   color: #666;
   background-color: #fafafa;
   border-bottom: 1px solid #eee;
+
+  .api-name {
+    font-size: 2em;
+    line-height: 0.4;
+    margin-left: 2em;
+  }
+
+  .api-author {
+    clear: both;
+  }
 }
 
 .view-api-navigation {
   position: relative;
   top: 1px;
-  margin-top: 10px;
+  margin-top: 2em;
+  clear: both;
 
   .nav-tabs {
     border-bottom: none;

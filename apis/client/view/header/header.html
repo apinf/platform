@@ -1,10 +1,10 @@
 <template name="viewApiBackendPageHeader">
-  <div class="page-top">
+  <div class="page-head-block">
     <div class="container">
-      <h1 class="page-title">
-        {{> viewApiLogo }}
+      {{> viewApiLogo }}
+      <h1 class="api-name">
         {{ apiBackend.name }}
-        {{> viewApiBackendStatus apiBackend=apiBackend width="0.4"  }}
+        {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
       </h1>
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
