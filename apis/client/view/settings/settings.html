@@ -23,7 +23,13 @@
           </h2>
         </div>
         <div class="panel-body">
-          Modify Schema
+          <h3>Modify the API settings</h3>
+          <p>Change settings by editing fields.</p>
+          <a
+             href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
+             class="btn btn-primary">
+            {{_ "view_ApiBackend_Details_editButtonText" }}
+          </a>
         </div>
       </div>
       <div class="panel panel-danger">
@@ -33,7 +39,14 @@
           </h2>
         </div>
         <div class="panel-body">
-          Delete or Make Private
+          <h3>Delete the API</h3>
+          <p>This can't be undo.</p>
+          <a
+             href="#"
+             class="btn btn-danger"
+             id="deleteModal">
+            {{_ "viewApiBackendDetails_deleteButton"}}
+          </a>
         </div>
       </div>
     </div>
