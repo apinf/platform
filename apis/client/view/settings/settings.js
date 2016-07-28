@@ -12,3 +12,9 @@ Template.viewApiBackendSettings.events({
     });
   }
 });
+
+Template.viewApiBackendSettings.helpers({
+  formCollection() {
+    return ApiBackends;
+  }
+});

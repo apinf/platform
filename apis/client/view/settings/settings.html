@@ -1,54 +1,56 @@
 <template name="viewApiBackendSettings">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2 class="panel-title clearfix">
-        Settings
+      <h2 class="panel-title">
+        About
       </h2>
     </div>
     <div class="panel-body">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2 class="panel-title">
-            About
-          </h2>
+      <div class="panel-section">
+        {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='description'}}
+        <div id="form-buttons">
+          <button type="submit" class="btn btn-success" id="save-settings">Save</button>
         </div>
-        <div class="panel-body">
-          Name and Description
-        </div>
+        {{/autoForm}}
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2 class="panel-title">
-            Edit
-          </h2>
-        </div>
-        <div class="panel-body">
-          <h3>Modify the API settings</h3>
-          <p>Change settings by editing fields.</p>
-          <a
-             href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-             class="btn btn-primary">
-            {{_ "view_ApiBackend_Details_editButtonText" }}
-          </a>
-        </div>
-      </div>
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h2 class="panel-title">
-            Manage
-          </h2>
-        </div>
-        <div class="panel-body">
-          <h3>Delete the API</h3>
-          <p>This can't be undo.</p>
-          <a
-             href="#"
-             class="btn btn-danger"
-             id="deleteModal">
-            {{_ "viewApiBackendDetails_deleteButton"}}
-          </a>
-        </div>
-      </div>
+      <h3>{{_ "editApiBackendForm-uploadLogo" }}</h3>
+      <p>You can upload logo. It will appear in the catalogue and view an API page.</p>
+      {{> uploadApiLogo apiBackend=apiBackend }}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        Edit
+      </h2>
+    </div>
+    <div class="panel-body">
+      <h3>Modify the API settings</h3>
+      <p>Change settings by editing fields.</p>
+      <a
+         href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
+         class="btn btn-primary">
+        {{_ "view_ApiBackend_Details_editButtonText" }}
+      </a>
+    </div>
+  </div>
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        Manage
+      </h2>
+    </div>
+    <div class="panel-body">
+      <h3>Delete the API</h3>
+      <p>This can't be undo.</p>
+      <a
+         href="#"
+         class="btn btn-danger"
+         id="deleteModal">
+        {{_ "viewApiBackendDetails_deleteButton"}}
+      </a>
     </div>
   </div>
 </template>
