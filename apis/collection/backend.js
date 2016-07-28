@@ -675,8 +675,8 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   },
   visibility: {
     type: Boolean,
-    defaultValue: false,
-    optional: true
+    optional: true,
+    defaultValue: true,
   }
 });
 
