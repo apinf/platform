@@ -4,7 +4,60 @@ const ApiBackends = new Mongo.Collection('apiBackends');
 SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{1,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
-Schemas.Settings = new SimpleSchema({
+Schemas.ApiSettings = new SimpleSchema({
+  disable_api_key: {
+    type: Boolean,
+    optional: true,
+    label: 'Require API Key',
+    defaultValue: false
+  },
+  rate_limit_mode: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'custom',
+      'unlimited'
+    ],
+    autoform: {
+      options: {
+        custom: "Custom rate limits",
+        unlimited: "Unlimited requests"
+      }
+    }
+  },
+  rate_limits: {
+    type: [Object],
+    optional: true
+  },
+  "rate_limits.$.duration": {
+    type: Number,
+    optional: true,
+    label: 'Duration (ms)'
+  },
+  "rate_limits.$.limit_by": {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'apiKey',
+      'ip'
+    ],
+    autoform: {
+      options: {
+        apiKey: "API Key",
+        ip: "IP Address"
+      }
+    }
+  },
+  "rate_limits.$.limit": {
+    type: Number,
+    optional: true,
+    label: 'Number of requests'
+  },
+  "rate_limits.$.response_headers": {
+    type: Boolean,
+    optional: true,
+    label: "Show rate limit in response headers"
+  },
   default_response_headers_string: {
     type: String,
     optional: true,
@@ -16,8 +69,7 @@ Schemas.Settings = new SimpleSchema({
     optional: true,
     label: 'Override Response Headers',
     defaultValue: 'Access-Control-Allow-Origin: *',
-  },
-
+  }
 });
 
 Schemas.ApiBackendsSchema = new SimpleSchema({
@@ -236,54 +288,11 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  rate_limit_mode: {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'Default rate limits',
-      'Custom rate limits',
-      'Unlimited requests'
-    ],
-  },
-  custom_rate_limits: {
-    type: [Object],
-    optional: true
-  },
-  "custom_rate_limits.$.duration": {
-    type: String,
-    optional: true
-  },
-  "custom_rate_limits.$.accuracy": {
-    type: Number,
-    optional: true,
-    allowedValues: [
-      'Seconds',
-      'Minutes',
-      'Hours'
-    ]
-  },
-  "custom_rate_limits.$.limit_by": {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'API key',
-      'IP Address'
-    ]
-  },
-  "custom_rate_limits.$.limit": {
-    type: Number,
-    optional: true,
-    label: 'Number of requests',
-  },
-
-  "custom_rate_limits.$.response_headers": {
-    type: Boolean,
-    optional: true
-  },
   // Settings, check Schema definition top of file!
   settings: {
-    type: Schemas.Settings,
+    type: Schemas.ApiSettings,
     optional: true,
+    label: 'API Settings'
   },
   anonymous_rate_limit_behavior: {
     type: String,
