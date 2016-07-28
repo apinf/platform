@@ -1,9 +1,6 @@
 /* Bootstrap */
 @import "/core/client/style/bootstrap-variables.less";
 
-/* Global variables */
-@font-family-default: 'Roboto', sans-serif;
-
 html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: @font-family-default;
 }
@@ -43,4 +40,16 @@ hr {
 
 .panel:last-child {
   margin-bottom: 0;
+}
+
+.panel-body h3 {
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: @gray;
+}
+
+.panel-body p {
+  color: @gray;
 }
