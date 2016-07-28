@@ -4,27 +4,24 @@
       {{#if currentUser}}
         {{> feedbackForm }}
       {{/ if }}
-      <h1 class="panel-title clearfix">
-        <i class="fa fa-comments-o"></i>
+      <h2 class="panel-title clearfix">
         {{_ "feedback_main_title"}}
-      </h1>
+      </h2>
     </div>
     <div class="panel-body">
-      <div class="row">
-        {{#if haveFeedback}}
+      {{#if haveFeedback}}
         <div class="tab-content">
           <div class="tab-pane fade in active" id="home">
             <div class="list-group">
               {{#each userFeedback}}
-              {{> singleFeedback }}
+                {{> singleFeedback }}
               {{/each}}
             </div>
           </div>
         </div>
-        {{else}}
-        <p>{{_ "feedback_no_feedback"}}</p>
-        {{/if}}
-      </div>
+      {{else}}
+        <i>{{_ "feedback_no_feedback"}}</i>
+      {{/if}}
     </div>
   </div>
 </template>
