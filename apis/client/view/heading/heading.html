@@ -13,6 +13,9 @@
       {{ apiBackend.name }}
       {{> viewApiBackendStatus apiBackend=apiBackend width="0.4"  }}
     </h1>
+    {{#if apiBackend.currentUserCanEdit }}
+      {{> visibilitySwitch apiBackend=apiBackend }}
+    {{/ if }}
     {{> apiBackendUsageInstructions }}
   </div>
 </template>

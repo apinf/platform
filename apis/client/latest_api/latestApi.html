@@ -6,18 +6,20 @@
       <hr class="primary">
     </div>
   </div>
-  {{#each latestBackends }}
+  {{#each api in latestBackends }}
+  {{#if api.currentUserCanView }}
   <div class="col-md-3 col-sm-6 hero-feature">
     <div class="thumbnail api-box">
-      <h3><a href="/api/{{_id}}">{{ name }}</a></h3>
+      <h3><a href="/api/{{_id}}">{{ api.name }}</a></h3>
       <div>
-        <i>{{_ "latestApiBackends_DateAdded" relative_created_at }}</i>
+        <i>{{_ "latestApiBackends_DateAdded" api.relative_created_at }}</i>
       </div>
       <div class="api-buttons">
         <a href="/api/{{_id}}" class="btn btn-default">{{_ "latestApiBackends_MoreInfo" }}</a>
       </div>
     </div>
   </div>
+  {{/ if }}
   {{/each}}
   {{else}}
   <i>{{_ "latestApiBackends_NotFound" }}</i>
