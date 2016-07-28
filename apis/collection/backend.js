@@ -9,7 +9,7 @@ Schemas.ApiSettings = new SimpleSchema({
     type: Boolean,
     optional: true,
     label: 'Require API Key',
-    defaultValue: false
+    defaultValue: true
   },
   rate_limit_mode: {
     type: String,
@@ -56,7 +56,8 @@ Schemas.ApiSettings = new SimpleSchema({
   "rate_limits.$.response_headers": {
     type: Boolean,
     optional: true,
-    label: "Show rate limit in response headers"
+    label: "Show rate limit in response headers",
+    defaultValue: false
   },
   default_response_headers_string: {
     type: String,
@@ -243,10 +244,6 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
-  disable_api_key: {
-    type: Boolean,
-    optional: true
-  },
   api_key_verification_level: {
     type: String,
     optional: true,
@@ -255,7 +252,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
       'Required - API keys are mandatory',
       'Disabled - API keys are optional'
     ],
-    label: 'API Key Checks'
+    label: 'API Key Verification Level'
   },
   api_key_verification_transition_start_at: {
     type: Date,
