@@ -6,6 +6,16 @@
         {{ apiBackend.name }}
         {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
       </h1>
+      <ul class="list-inline view-api-meta-details">
+        <li>
+          <i class="fa fa-user"></i>
+          {{ apiBackend.getApiManagersByName }}
+        </li>
+        <li>
+          <i class="fa fa-calendar"></i>
+          {{ apiBackend.relativeCreatedAt }}
+        </li>
+      </ul>
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
           <li class="active">
