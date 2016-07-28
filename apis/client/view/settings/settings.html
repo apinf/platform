@@ -6,18 +6,16 @@
       </h2>
     </div>
     <div class="panel-body">
-      <div class="panel-section">
-        {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
-        {{> afQuickField name='name'}}
-        {{> afQuickField name='description'}}
-        <div id="form-buttons">
-          <button type="submit" class="btn btn-success" id="save-settings">Save</button>
-        </div>
-        {{/autoForm}}
-      </div>
       <h3>{{_ "editApiBackendForm-uploadLogo" }}</h3>
       <p>You can upload logo. It will appear in the catalogue and view an API page.</p>
       {{> uploadApiLogo apiBackend=apiBackend }}
+      {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='description'}}
+      <div id="form-buttons">
+        <button type="submit" class="btn btn-success" id="save-settings">Save</button>
+      </div>
+      {{/autoForm}}
     </div>
   </div>
   <div class="panel panel-default">
