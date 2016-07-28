@@ -1,22 +1,6 @@
 <template name="viewApiBackendDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if apiBackend.currentUserCanEdit }}
-      <div class="btn-group pull-right">
-        <a
-           href="#"
-           class="btn btn-danger"
-           id="deleteModal">
-          {{_ "viewApiBackendDetails_deleteButton"}}
-        </a>
-        <a
-           href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-           class="btn btn-info">
-          <i class="fa fa-cog"></i>
-          {{_ "view_ApiBackend_Details_editButtonText" }}
-        </a>
-      </div>
-      {{/ if }}
       <h2 class="panel-title clearfix">
         {{_ "view_ApiBackend_Details_Title"}}
       </h2>
