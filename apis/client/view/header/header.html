@@ -18,6 +18,20 @@
           </li>
         </ul>
       </div>
+      <div class="page-head-stats pull-right">
+        {{# if currentUser }}
+        <span class="api-card-bookmark">
+          {{> favourite apiBackend=apiBackend }}
+          {{ apiBackend.bookmarkCount }}
+        </span>
+        {{else}}
+        <span class="api-card-bookmark">
+          <i class="fa fa-bookmark bookmark-default"></i>
+          {{ apiBackend.bookmarkCount }}
+        </span>
+        {{/if}}
+        {{> apiBackendRating apiBackend }}
+      </div>
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
           <li class="active">
