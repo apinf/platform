@@ -7,11 +7,21 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-6">
-          {{> viewApiBackendServers apiBackend=apiBackend }}
-        </div>
-        <div class="col-md-6">
-          {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+        <div class="col-md-12 api-details-block">
+          <h3>Description</h3>
+          <p>
+            {{ apiBackend.description }}
+          </p>
+          <hr class="panel-hr" />
+          <h3>Base URL</h3>
+          <span class="text-primary">
+            {{> apiBackendUsageInstructions }}
+          </span>
+          <hr class="panel-hr" />
+          <h3>Example</h3>
+          <span class="text-primary">
+            {{> apiBackendUsageInstructions }}
+          </span>
         </div>
       </div>
     </div>
