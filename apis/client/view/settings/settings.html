@@ -7,7 +7,9 @@
     </div>
     <div class="panel-body">
       <h3>{{_ "editApiBackendForm-uploadLogo" }}</h3>
-      <p>You can upload logo. It will appear in the catalogue and view an API page.</p>
+      <p>
+        You can upload logo. It will appear in the catalogue and view an API page.
+      </p>
       {{> uploadApiLogo apiBackend=apiBackend }}
       {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
       {{> afQuickField name='name'}}
@@ -26,7 +28,9 @@
     </div>
     <div class="panel-body">
       <h3>Modify the API settings</h3>
-      <p>Change settings by editing fields.</p>
+      <p>
+        Change settings by editing fields.
+      </p>
       <a
          href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
          class="btn btn-primary">
@@ -42,7 +46,9 @@
     </div>
     <div class="panel-body">
       <h3>Delete the API</h3>
-      <p>This can't be undo.</p>
+      <p>
+        This action cannot be undone. The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.
+      </p>
       <a
          href="#"
          class="btn btn-danger"
