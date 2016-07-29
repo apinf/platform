@@ -12,10 +12,6 @@
             <i class="fa fa-user"></i>
             {{ apiBackend.getApiManagersByName }}
           </li>
-          <li>
-            <i class="fa fa-calendar"></i>
-            {{ apiBackend.relativeCreatedAt }}
-          </li>
         </ul>
       </div>
       <div class="page-head-stats pull-right">
@@ -30,7 +26,6 @@
           {{ apiBackend.bookmarkCount }}
         </span>
         {{/if}}
-        {{> apiBackendRating apiBackend }}
       </div>
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
