@@ -1,21 +1,23 @@
 <template name="viewApiBackendPageHeader">
-  <div class="page-head-block">
+  <div class="page-head-topblock">
     <div class="container">
-      {{> viewApiLogo }}
-      <h1 class="api-name">
-        {{ apiBackend.name }}
-        {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
-      </h1>
-      <ul class="list-inline view-api-meta-details">
-        <li>
-          <i class="fa fa-user"></i>
-          {{ apiBackend.getApiManagersByName }}
-        </li>
-        <li>
-          <i class="fa fa-calendar"></i>
-          {{ apiBackend.relativeCreatedAt }}
-        </li>
-      </ul>
+      <div class="page-head-infoblock">
+        {{> viewApiLogo }}
+        <h1 class="api-name">
+          {{ apiBackend.name }}
+          {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
+        </h1>
+        <ul class="list-inline view-api-meta-details">
+          <li>
+            <i class="fa fa-user"></i>
+            {{ apiBackend.getApiManagersByName }}
+          </li>
+          <li>
+            <i class="fa fa-calendar"></i>
+            {{ apiBackend.relativeCreatedAt }}
+          </li>
+        </ul>
+      </div>
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
           <li class="active">
