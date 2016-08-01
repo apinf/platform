@@ -1,7 +1,16 @@
 <template name="favourite">
   {{ # if isBookmarked }}
-    <i class="fa fa-bookmark bookmark bookmarked"></i>
+  <a href="#" class="star-button bookmark bookmarked">
+    <i class="fa fa-star"></i>
+    &nbsp;Unstar
+  </a>
   {{ else }}
-    <i class="fa fa-bookmark-o bookmark"></i>
+  <a href="#" class="star-button bookmark">
+    <i class="fa fa-star-o"></i>
+    &nbsp;Star
+  </a>
   {{ / if }}
+  <span class="star-counter">
+    {{ apiBackend.bookmarkCount }}
+  </span>
 </template>
