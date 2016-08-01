@@ -22,17 +22,6 @@
             </p>
           </div>
           <ul class="api-card-stats list-inline">
-            <li class="pull-left">
-              <div class="api-card-star-average"
-                   data-toggle="tooltip"
-                   data-placement="bottom"
-                   title="{{_ 'catalogue-AverageRating-Tooltip'}}">
-                {{#if api.averageRating }}
-                {{ api.averageRating }}
-                <i class="fa fa-star-half-o"></i>
-                {{/if}}
-              </div>
-            </li>
             {{# if currentUser }}
             <li class="pull-left">
               <div
@@ -40,7 +29,6 @@
                    data-toggle="tooltip"
                    data-placement="bottom"
                    title="{{_ 'catalogue-Bookmark-Tooltip_User'}}">
-                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
                 {{> favourite apiBackend=api }}
               </div>
             </li>
