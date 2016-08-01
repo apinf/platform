@@ -14,14 +14,22 @@
           </p>
           <hr class="panel-hr" />
           <h3>Base URL</h3>
-          <span class="text-primary">
-            {{> apiBackendUsageInstructions }}
-          </span>
-          <hr class="panel-hr" />
-          <h3>Example</h3>
-          <span class="text-primary">
-            {{> apiBackendUsageInstructions }}
-          </span>
+          <div class="input-group">
+            <input
+                   type="text"
+                   class="form-control"
+                   id="base-url"
+                   value="{{ apiUmbrellaBaseUrl }}">
+            <span class="input-group-btn">
+              <button
+                      class="btn btn-default"
+                      id="copyBaseUrl"
+                      type="button"
+                      data-clipboard-target="#base-url">
+                <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
+              </button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
