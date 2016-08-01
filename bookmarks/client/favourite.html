@@ -2,12 +2,16 @@
   {{ # if isBookmarked }}
   <a href="#" class="star-button bookmark bookmarked">
     <i class="fa fa-star"></i>
+    {{ # unless catalogueView }}
     &nbsp;Unstar
+    {{ / unless }}
   </a>
   {{ else }}
   <a href="#" class="star-button bookmark">
     <i class="fa fa-star-o"></i>
+    {{ # unless catalogueView }}
     &nbsp;Star
+    {{ / unless }}
   </a>
   {{ / if }}
   <span class="star-counter">

@@ -29,11 +29,11 @@
           <td class="col-sm-1 text-center">
             {{# if currentUser }}
             <span class="api-card-bookmark">
-              {{> favourite apiBackend=api }}
+              {{> favourite apiBackend=api catalogueView=true }}
             </span>
             {{else}}
             <span class="api-card-bookmark">
-              <i class="fa fa-bookmark bookmark-default"></i>
+              <i class="fa fa-star bookmark-default"></i>
               {{ api.bookmarkCount }}
             </span>
             {{/if}}
