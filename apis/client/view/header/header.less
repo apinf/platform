@@ -30,6 +30,45 @@
   display: inline-block;
 }
 
+.page-head-starsblock {
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.page-head-starsblock {
+  a {
+    color: @gray;
+    text-decoration: none;
+    &:hover { text-decoration: none; color: @gray; }
+    &:focus { text-decoration: none; color: @gray; }
+    &:active { text-decoration: none; color: @gray; }
+    &:visited { text-decoration: none; color: @gray; }
+  }
+
+  .star-button {
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 6px 12px 6px 12px;
+    text-decoration: none;
+    &:hover { text-decoration: none; color: darken(@gray, 10%); }
+    &:focus { text-decoration: none; color: darken(@gray, 10%); }
+    &:active { text-decoration: none; color: darken(@gray, 10%); }
+    &:visited { text-decoration: none; color: darken(@gray, 10%); }
+  }
+
+  .star-counter {
+    padding: 3px 7px;
+    color: #333;
+    vertical-align: middle;
+    background-color: #fff;
+  }
+}
+
 .view-api-navigation {
   position: relative;
   top: 2px;

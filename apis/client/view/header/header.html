@@ -14,17 +14,14 @@
           </li>
         </ul>
       </div>
-      <div class="page-head-stats pull-right">
+      <div class="page-head-starsblock pull-right">
         {{# if currentUser }}
-        <span class="api-card-bookmark">
           {{> favourite apiBackend=apiBackend }}
-          {{ apiBackend.bookmarkCount }}
-        </span>
         {{else}}
-        <span class="api-card-bookmark">
+        <a href="#" class="star-button">
           <i class="fa fa-bookmark bookmark-default"></i>
           {{ apiBackend.bookmarkCount }}
-        </span>
+        </a>
         {{/if}}
       </div>
       <div class="view-api-navigation">
