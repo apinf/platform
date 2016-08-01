@@ -148,5 +148,8 @@ ApiBackends.helpers({
   relativeCreatedAt () {
     // Return relative updated_at
     return moment(this.created_at).fromNow();
+  },
+  description () {
+    const apiBackendIdDescription = this.description;
   }
 });
