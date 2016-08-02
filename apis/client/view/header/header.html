@@ -19,8 +19,14 @@
         {{> favourite apiBackend=apiBackend }}
         {{else}}
         <a href="#" class="star-button">
-          <i class="fa fa-bookmark bookmark-default"></i>
-          {{ apiBackend.bookmarkCount }}
+          <div
+               class="api-card-bookmark"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
+            <span class="api-card-bookmark-number">{{ apiBackend.bookmarkCount }}</span>
+            <i class="fa fa-star bookmark-default"></i>
+          </div>
         </a>
         {{/if}}
       </div>
