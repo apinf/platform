@@ -4,10 +4,10 @@ Template.home.created = function () {
 
   // Subscription to branding collection
   instance.subscribe('branding');
-  // Subscription to projectLogo collection
-  instance.subscribe('projectLogo');
-  // Subscription to coverPhoto collection
-  instance.subscribe('coverPhoto');
+  // // Subscription to projectLogo collection
+  // instance.subscribe('projectLogo');
+  // // Subscription to coverPhoto collection
+  // instance.subscribe('coverPhoto');
 
   // Run this each time something changes
   instance.autorun(function () {
@@ -37,13 +37,13 @@ Template.home.helpers({
     if (lastUploadedLogo) {
       return lastUploadedLogo;
     }
-  },
-  coverPhoto: function () {
-    // Get last uploaded image from collection
-    var lastUploadedCover = CoverPhoto.findOne({}, {sort: {uploadedAt: -1}});
-    // Check if new cover was uploaded, if so change it with previous
-    if (lastUploadedCover) {
-      return lastUploadedCover;
-    }
+  // },
+  // coverPhoto: function () {
+  //   // Get last uploaded image from collection
+  //   var lastUploadedCover = CoverPhoto.findOne({}, {sort: {uploadedAt: -1}});
+  //   // Check if new cover was uploaded, if so change it with previous
+  //   if (lastUploadedCover) {
+  //     return lastUploadedCover;
+  //   }
   }
 });

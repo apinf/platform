@@ -1,28 +1,28 @@
 Branding = new Mongo.Collection('branding');
 
 Schemas.BrandingSchema = new SimpleSchema({
-  projectLogo: {
-    type: String,
-    label: 'Project logo',
-    optional: true,
-    autoform: {
-      afFieldInput: {
-        type: 'fileUpload',
-        collection: 'ProjectLogo'
-      }
-    }
-  },
-  coverPhoto: {
-    type: String,
-    label: 'Cover photo',
-    optional: true,
-    autoform: {
-      afFieldInput: {
-        type: 'fileUpload',
-        collection: 'CoverPhoto'
-      }
-    }
-  },
+  // projectLogo: {
+  //   type: String,
+  //   label: 'Project logo',
+  //   optional: true,
+  //   autoform: {
+  //     afFieldInput: {
+  //       type: 'fileUpload',
+  //       collection: 'ProjectLogo'
+  //     }
+  //   }
+  // },
+  // coverPhoto: {
+  //   type: String,
+  //   label: 'Cover photo',
+  //   optional: true,
+  //   autoform: {
+  //     afFieldInput: {
+  //       type: 'fileUpload',
+  //       collection: 'CoverPhoto'
+  //     }
+  //   }
+  // },
   siteTitle: {
     type: String,
     optional: true,

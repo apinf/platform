@@ -18,18 +18,18 @@
           <div class="panel-body">
             {{#if branding}}
             {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
-            {{> afQuickField name='projectLogo'}}
+            <!-- {{> afQuickField name='projectLogo'}}
             {{#if projectLogo}}
             <p>
               <img alt="{{projectLogo.name}}" src="{{projectLogo.url}}" width="150px">
             </p>
-            {{/if}}
-            {{> afQuickField name='coverPhoto'}}
+            {{/if}} -->
+            <!-- {{> afQuickField name='coverPhoto'}}
             {{#if coverPhoto}}
             <p>
               <img alt="{{coverPhoto.name}}" src="{{coverPhoto.url}}" width="100%">
             </p>
-            {{/if}}
+            {{/if}} -->
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteSlogan'}}
             {{> afQuickField name='siteFooter'}}
@@ -40,8 +40,8 @@
             {{/autoForm}}
             {{else}}
             {{#autoForm collection="Branding" id="branding" type="insert"}}
-            {{> afQuickField name='projectLogo'}}
-            {{> afQuickField name='coverPhoto'}}
+            <!-- {{> afQuickField name='projectLogo'}} -->
+            <!-- {{> afQuickField name='coverPhoto'}} -->
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteSlogan'}}
             {{> afQuickField name='siteFooter'}}

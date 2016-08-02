@@ -12,8 +12,8 @@ aldeed:collection2
 aldeed:simple-schema
 fortawesome:fontawesome
 raix:handlebar-helpers
-cfs:standard-packages
-cfs:gridfs
+# cfs:standard-packages
+# cfs:gridfs
 aldeed:template-extension
 yogiben:helpers
 iron:router
@@ -64,7 +64,7 @@ check@1.2.3
 useraccounts:iron-routing
 pahans:inline-help
 dandv:jquery-rateit
-yogiben:autoform-file
+# yogiben:autoform-file
 harrison:papa-parse
 olragon:uri-js
 forwarder:autoform-wizard
