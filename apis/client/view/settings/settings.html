@@ -2,13 +2,13 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
-        About
+        {{_ "viewApiBackendSettings_panelTitleAbout" }}
       </h2>
     </div>
     <div class="panel-body">
       <h3>{{_ "editApiBackendForm-uploadLogo" }}</h3>
       <p>
-        You can upload logo. It will appear in the catalogue and view an API page.
+        {{_ "viewApiBackendSettings_uploadLogoText" }}
       </p>
       {{> uploadApiLogo apiBackend=apiBackend }}
       <hr class="panel-hr" />
@@ -24,13 +24,13 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
-        Edit
+        {{_ "viewApiBackendSettings_panelTitleEdit" }}
       </h2>
     </div>
     <div class="panel-body">
-      <h3>Modify the API settings</h3>
+      <h3>{{_ "viewApiBackendSettings_editApiSettingsTitle" }}</h3>
       <p>
-        Change settings by editing fields.
+        {{_ "viewApiBackendSettings_editApiSettingsText" }}
       </p>
       <a
          href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
@@ -42,13 +42,13 @@
   <div class="panel panel-danger">
     <div class="panel-heading">
       <h2 class="panel-title">
-        Manage
+        {{_ "viewApiBackendSettings_panelTitleManage" }}
       </h2>
     </div>
     <div class="panel-body">
-      <h3>Delete the API</h3>
+      <h3>{{_ "viewApiBackendSettings_deleteApiTitle" }}</h3>
       <p>
-        This action cannot be undone. The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.
+        {{_ "viewApiBackendSettings_deleteApiText" }}
       </p>
       <a
          href="#"
