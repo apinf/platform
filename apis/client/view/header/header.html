@@ -16,7 +16,7 @@
       </div>
       <div class="page-head-starsblock pull-right">
         {{# if currentUser }}
-          {{> favourite apiBackend=apiBackend }}
+        {{> favourite apiBackend=apiBackend }}
         {{else}}
         <a href="#" class="star-button">
           <i class="fa fa-bookmark bookmark-default"></i>
@@ -62,12 +62,16 @@
               {{_ "viewApiBackendNavigationMenu_export" }}
             </a>
           </li>
+          {{ # if currentUser }}
+          {{# if apiBackend.currentUserCanEdit }}
           <li>
             <a href="#api-backend-settings" data-toggle="tab">
               <i class="fa fa-cog"></i>
               {{_ "viewApiBackendNavigationMenu_settings" }}
             </a>
           </li>
+          {{ / if }}
+          {{ / if }}
         </ul>
       </div>
     </div>
