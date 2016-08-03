@@ -1,0 +1,118 @@
+/* Bootstrap */
+@import "/core/client/style/bootstrap-variables.less";
+
+.page-head-topblock {
+  position: relative;
+  bottom: 1.7em;
+  padding-top: 1.7em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  color: #666;
+  background-color: #fafafa;
+  border-bottom: 1px solid #eee;
+
+  .api-name {
+    font-size: 1.7em;
+    font-weight: 600;
+    padding-left: 0.5em;
+    margin-left: 2em;
+    margin-bottom: 0;
+    margin-top: 0.1em;
+  }
+
+  .view-api-meta-details {
+    padding-left: 0.5em;
+    margin-left: 3.4em;
+    margin-top: 0.2em;
+  }
+}
+
+.page-head-infoblock {
+  clear: both;
+  display: inline-block;
+}
+
+.nav-tabs > li {
+  margin-bottom: -2px;
+}
+
+.page-head-starsblock {
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  a {
+    color: @gray;
+    text-decoration: none;
+    &:hover { text-decoration: none; color: @gray; }
+    &:focus { text-decoration: none; color: @gray; }
+    &:active { text-decoration: none; color: @gray; }
+    &:visited { text-decoration: none; color: @gray; }
+  }
+
+  .star-button {
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 0.9em;
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    text-decoration: none;
+    &:hover { text-decoration: none; color: darken(@gray, 10%); }
+    &:focus { text-decoration: none; color: darken(@gray, 10%); }
+    &:active { text-decoration: none; color: darken(@gray, 10%); }
+    &:visited { text-decoration: none; color: darken(@gray, 10%); }
+  }
+
+  .star-counter {
+    padding-left: 0.4em;
+    padding-right: 0.6em;
+    padding-bottom: 0.2em;
+    padding-top: 0.2em;
+    color: #333;
+    background-color: #fff;
+  }
+}
+
+.view-api-navigation {
+  position: relative;
+  top: 2px;
+  margin-top: 0.6em;
+  clear: both;
+
+  .nav-tabs {
+    border-bottom: none;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    font-weight: bold;
+    line-height: initial;
+    color: #333;
+    background-color: #fff;
+    border-top-color: @brand-primary;
+    border-top-width: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-right-color: #EEE;
+    border-left-color: #EEE;
+  }
+
+  .nav-tabs > li {
+    border: 0px solid transparent;
+    border-width: 3px 1px 1px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .nav-tabs > li > a {
+    color: #555;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    color: #333;
+    border-color: transparent;
+  }
+}

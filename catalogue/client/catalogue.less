@@ -1,3 +1,5 @@
+@import "/core/client/style/bootstrap-variables.less";
+
 .sort-options-select {
   padding-left: 0.5em;
 }
@@ -18,10 +20,6 @@
   display: inline;
 }
 
-.catalogue-main-title {
-  margin-left: 0.63em;
-}
-
 /* Class to make pagination buttons inactive */
 .inactive a {
   color: #d3d3d3 !important;
@@ -33,4 +31,13 @@
   color: #d3d3d3 !important;
   cursor: default;
   background-color: #fafafa !important;
+}
+
+.api-card-bookmark a {
+  color: @gray;
+  text-decoration: none;
+  &:hover { text-decoration: none; color: @gray; }
+  &:focus { text-decoration: none; color: @gray; }
+  &:active { text-decoration: none; color: @gray; }
+  &:visited { text-decoration: none; color: @gray; }
 }

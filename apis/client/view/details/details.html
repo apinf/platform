@@ -1,34 +1,38 @@
 <template name="viewApiBackendDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if apiBackend.currentUserCanEdit }}
-      <div class="btn-group pull-right">
-        <a
-           href="#"
-           class="btn btn-danger"
-           id="deleteModal">
-          {{_ "viewApiBackendDetails_deleteButton"}}
-        </a>
-        <a
-           href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-           class="btn btn-info">
-          <i class="fa fa-cog"></i>
-          {{_ "view_ApiBackend_Details_editButtonText" }}
-        </a>
-      </div>
-      {{/ if }}
       <h2 class="panel-title clearfix">
-        <i class="fa fa-info-circle"></i>
         {{_ "view_ApiBackend_Details_Title"}}
       </h2>
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-6">
-          {{> viewApiBackendServers apiBackend=apiBackend }}
-        </div>
-        <div class="col-md-6">
-          {{> viewApiBackendUrlMatchers apiBackend=apiBackend }}
+        <div class="col-lg-12 api-details-block">
+          {{ # if apiBackend.description }}
+          <h3>Description</h3>
+          <p>
+            {{ apiBackend.description }}
+          </p>
+          <hr class="panel-hr" />
+          {{ / if }}
+          <h3>Base URL</h3>
+          <div class="input-group">
+            <input
+                   type="text"
+                   class="form-control"
+                   id="base-url"
+                   value="{{ apiUmbrellaBaseUrl }}">
+            <span class="input-group-btn">
+              <button
+                      class="btn btn-default"
+                      id="copyBaseUrl"
+                      type="button"
+                      data-original-title="Copied!"
+                      data-clipboard-target="#base-url">
+                <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
+              </button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
