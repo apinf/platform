@@ -2,8 +2,10 @@
   {{> languageBar }}
   <div class="master-layout">
     {{> navbar branding=branding }}
-    {{> yield }}
-    {{> sAlert}}
-    {{> autoformModals}}
+    <div class="content-wrapper">
+      {{> yield }}
+      {{> sAlert}}
+      {{> autoformModals}}
+    </div>
   </div>
 </template>
