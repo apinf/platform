@@ -1,73 +1,75 @@
 <template name="editApiBackendForm">
-  <div class="api-backends-content">
-    <h1>{{_ "apiBackends_Edit_API_Title"}}</h1>
-    {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
-    {{>showHelp 'api_name'}}
-    {{> afQuickField name='name'}}
-    <span class="help-block">{{_ "apiBackends_Title_Help"}}</span>
-    {{> afQuickField name='description'}}
-    <legend>{{_ "editApiBackendForm-uploadLogo"}}</legend>
-    {{> uploadApiLogo apiBackend=apiBackend }}
-    <legend>{{_ "apiBackends_Backend_Title"}}</legend>
-    <span class="help-block">{{_ "apiBackends_Backend_Help"}}</span>
-    {{> afQuickField name='backend_protocol' options="allowed"}}
-    {{>showHelp 'servers'}}
-    {{> afQuickField name='servers'}}
-    <legend>{{_ "apiBackends_Host_Title"}}</legend>
-    <div class="row">
-      <div class="col-lg-4">
-        {{>showHelp 'frontend_host'}}
-        {{> afQuickField name='frontend_host'}}
+  <div class="container">
+    <div class="api-backends-content">
+      <h1>{{_ "apiBackends_Edit_API_Title"}}</h1>
+      {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
+      {{>showHelp 'api_name'}}
+      {{> afQuickField name='name'}}
+      <span class="help-block">{{_ "apiBackends_Title_Help"}}</span>
+      {{> afQuickField name='description'}}
+      <legend>{{_ "editApiBackendForm-uploadLogo"}}</legend>
+      {{> uploadApiLogo apiBackend=apiBackend }}
+      <legend>{{_ "apiBackends_Backend_Title"}}</legend>
+      <span class="help-block">{{_ "apiBackends_Backend_Help"}}</span>
+      {{> afQuickField name='backend_protocol' options="allowed"}}
+      {{>showHelp 'servers'}}
+      {{> afQuickField name='servers'}}
+      <legend>{{_ "apiBackends_Host_Title"}}</legend>
+      <div class="row">
+        <div class="col-lg-4">
+          {{>showHelp 'frontend_host'}}
+          {{> afQuickField name='frontend_host'}}
+        </div>
+        <div class="col-lg-4 arrow">
+          <i class="fa fa-arrow-right fa-2x"></i>
+          <div>{{_ "apiBackends_HostRewrite"}}</div>
+        </div>
+        <div class="col-lg-4">
+          {{>showHelp 'backend_host'}}
+          {{> afQuickField name='backend_host'}}
+        </div>
       </div>
-      <div class="col-lg-4 arrow">
-        <i class="fa fa-arrow-right fa-2x"></i>
-        <div>{{_ "apiBackends_HostRewrite"}}</div>
+      <legend>{{_ "apiBackends_Matching_Title"}}</legend>
+      <span class="help-block">{{_ "apiBackends_Matching_Title_Help"}}</span>
+      {{>showHelp 'url_matches'}}
+      {{> afQuickField name='url_matches'}}
+      <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_GlobalRequestSettings_Title"}}</legend>
+      <div id="global-request-block" class="collapse in">
+        {{>showHelp 'append_query_string'}}
+        {{> afQuickField name='append_query_string'}}
+        {{>showHelp 'set_headers'}}
+        {{> afQuickField name='set_headers'}}
+        {{>showHelp 'http_basic_auth'}}
+        {{> afQuickField name='http_basic_auth'}}
+        {{>showHelp 'require_https'}}
+        {{> afQuickField name='require_https' options="allowed"}}
+        {{>showHelp 'api_key_verification_level'}}
+        {{> afQuickField name='api_key_verification_level' options="allowed"}}
+        {{> afQuickField name='required_roles'}}
+        {{> afQuickField name='pass_api_key_header'}}
+        {{> afQuickField name='pass_api_key_query_param'}}
+        {{> afQuickField name='rate_limit_mode' options="allowed"}}
+        {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
+        {{> afQuickField name='custom_rate_limits'}}
+        {{/if}}
+        {{>showHelp 'settings'}}
+        {{> afQuickField name='settings'}}
       </div>
-      <div class="col-lg-4">
-        {{>showHelp 'backend_host'}}
-        {{> afQuickField name='backend_host'}}
+      <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_AdvancedRequestsRewriting"}}</legend>
+      <div id="advanced-rewriting-block" class="collapse in">
+        <span class="help-block">{{_ "apiBackends_AdvancedRequestsRewriting_Help"}}</span>
+        {{> afQuickField name='rewrite'}}
       </div>
+      <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_AdvancedSettings"}}</legend>
+      <div id="advanced-block" class="collapse in">
+        {{>showHelp 'balance_algorithm'}}
+        {{> afQuickField name='balance_algorithm' options="allowed"}}
+        {{> afQuickField name='error_templates'}}
+      </div>
+      <div id="form-buttons">
+        <button type="submit" class="btn btn-lg btn-success" id="add-apibackends">{{_ "apiBackends_Submit"}}</button>
+      </div>
+      {{/autoForm}}
     </div>
-    <legend>{{_ "apiBackends_Matching_Title"}}</legend>
-    <span class="help-block">{{_ "apiBackends_Matching_Title_Help"}}</span>
-    {{>showHelp 'url_matches'}}
-    {{> afQuickField name='url_matches'}}
-    <legend data-toggle="collapse" data-target="#global-request-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_GlobalRequestSettings_Title"}}</legend>
-    <div id="global-request-block" class="collapse in">
-      {{>showHelp 'append_query_string'}}
-      {{> afQuickField name='append_query_string'}}
-      {{>showHelp 'set_headers'}}
-      {{> afQuickField name='set_headers'}}
-      {{>showHelp 'http_basic_auth'}}
-      {{> afQuickField name='http_basic_auth'}}
-      {{>showHelp 'require_https'}}
-      {{> afQuickField name='require_https' options="allowed"}}
-      {{>showHelp 'api_key_verification_level'}}
-      {{> afQuickField name='api_key_verification_level' options="allowed"}}
-      {{> afQuickField name='required_roles'}}
-      {{> afQuickField name='pass_api_key_header'}}
-      {{> afQuickField name='pass_api_key_query_param'}}
-      {{> afQuickField name='rate_limit_mode' options="allowed"}}
-      {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
-      {{> afQuickField name='custom_rate_limits'}}
-      {{/if}}
-      {{>showHelp 'settings'}}
-      {{> afQuickField name='settings'}}
-    </div>
-    <legend data-toggle="collapse" data-target="#advanced-rewriting-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_AdvancedRequestsRewriting"}}</legend>
-    <div id="advanced-rewriting-block" class="collapse in">
-      <span class="help-block">{{_ "apiBackends_AdvancedRequestsRewriting_Help"}}</span>
-      {{> afQuickField name='rewrite'}}
-    </div>
-    <legend data-toggle="collapse" data-target="#advanced-block" aria-expanded="false"><i class="fa fa-chevron-right"></i> {{_ "apiBackends_AdvancedSettings"}}</legend>
-    <div id="advanced-block" class="collapse in">
-      {{>showHelp 'balance_algorithm'}}
-      {{> afQuickField name='balance_algorithm' options="allowed"}}
-      {{> afQuickField name='error_templates'}}
-    </div>
-    <div id="form-buttons">
-      <button type="submit" class="btn btn-lg btn-success" id="add-apibackends">{{_ "apiBackends_Submit"}}</button>
-    </div>
-    {{/autoForm}}
   </div>
 </template>
