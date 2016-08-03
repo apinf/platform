@@ -1,6 +1,10 @@
 Branding = new Mongo.Collection('branding');
 
 Schemas.BrandingSchema = new SimpleSchema({
+  projectLogoFileId: {
+    type: String,
+    optional: true
+  },
   siteTitle: {
     type: String,
     optional: true,
