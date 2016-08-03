@@ -2,6 +2,8 @@ Template.branding.created = function () {
   var instance = this;
   // Subscription to branding collection
   instance.subscribe('branding');
+
+  instance.subscribe('projectLogo');
 };
 
 Template.branding.helpers({
