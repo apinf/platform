@@ -3,11 +3,11 @@ Template.settingsWizard.created = function() {
   // Subscription to branding collection
   instance.subscribe('branding');
   instance.subscribe('settings');
+  instance.subscribe('projectLogo');
 
 };
 
 Template.settingsWizard.helpers({
-
   branding: function() {
     return Branding.findOne();
   },

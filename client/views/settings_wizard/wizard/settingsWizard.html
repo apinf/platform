@@ -13,6 +13,8 @@
                 <hr><br>
                 <div class="panel-body">
                   {{#if branding}}
+                  {{> viewProjectLogo branding=branding }}
+                  {{> uploadProjectLogo branding=branding }}
                   {{#autoForm collection="Branding" id="wizardBranding" doc=branding type="update"}}
                   {{> afQuickField name='siteTitle'}}
                   {{> afQuickField name='siteSlogan'}}
@@ -93,11 +95,11 @@
                     <span class="pull-right">{{> afQuickField name='mail.enabled'}}</span>
                   </div>
                   {{#if afFieldValueIs name='mail.enabled' value=true}}
-                    <div class="panel-body">
-                      {{> afQuickField name='mail.username'}}
-                      {{> afQuickField name='mail.password'}}
-                      {{> afQuickField name='mail.toEmail'}}
-                    </div>
+                  <div class="panel-body">
+                    {{> afQuickField name='mail.username'}}
+                    {{> afQuickField name='mail.password'}}
+                    {{> afQuickField name='mail.toEmail'}}
+                  </div>
                   {{/if}}
                 </div>
                 <div class="panel panel-default">

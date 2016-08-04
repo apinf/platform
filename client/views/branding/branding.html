@@ -16,9 +16,9 @@
             <h3 class="panel-title">Project Branding</h3>
           </div>
           <div class="panel-body">
+            {{#if branding}}
             {{> viewProjectLogo branding=branding }}
             {{> uploadProjectLogo branding=branding }}
-            {{#if branding}}
             {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteSlogan'}}
