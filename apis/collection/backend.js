@@ -32,7 +32,6 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   description: {
     type: String,
     max: 1000,
-    unique: true,
     autoform: {
       rows: 3
     },
@@ -108,6 +107,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   "url_matches.$.frontend_prefix": {
     label: 'Frontend prefix',
     optional: true,
+    unique: true,
     type: String,
     regEx: SimpleSchema.RegEx.Prefix
   },
@@ -686,7 +686,8 @@ SimpleSchema.messages({
   ],
   // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match",
-  notUnique: "This value is already in use, please make it unique"
+  // unique field error message
+  notUnique: TAPi18n.__("apiBackend_uniqueField_message");
 });
 
 export { ApiBackends };
