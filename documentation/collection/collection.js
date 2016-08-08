@@ -4,10 +4,10 @@ const DocumentationFiles = FileCollection({
   http: [
     {
       method: 'get',
-      path: '/md5/:md5',
+      path: '/id/:_id',
       lookup: function(params, query) {
         return {
-          md5: params.md5
+          _id: params._id
         };
       }
     }

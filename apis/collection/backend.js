@@ -5,6 +5,12 @@ SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{1,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
 Schemas.Settings = new SimpleSchema({
+  disable_api_key: {
+    type: Boolean,
+    optional: true,
+    label: 'Require API Key',
+    defaultValue: true
+  },
   default_response_headers_string: {
     type: String,
     optional: true,
@@ -16,8 +22,7 @@ Schemas.Settings = new SimpleSchema({
     optional: true,
     label: 'Override Response Headers',
     defaultValue: 'Access-Control-Allow-Origin: *',
-  },
-
+  }
 });
 
 Schemas.ApiBackendsSchema = new SimpleSchema({
@@ -192,10 +197,6 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
-  disable_api_key: {
-    type: Boolean,
-    optional: true
-  },
   api_key_verification_level: {
     type: String,
     optional: true,
@@ -204,7 +205,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
       'Required - API keys are mandatory',
       'Disabled - API keys are optional'
     ],
-    label: 'API Key Checks'
+    label: 'API Key Verification Level'
   },
   api_key_verification_transition_start_at: {
     type: Date,

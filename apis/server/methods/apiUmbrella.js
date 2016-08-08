@@ -1,26 +1,48 @@
 import { ApiBackends } from '/apis/collection/backend';
+import _ from 'lodash';
 
 Meteor.methods({
   "syncApiBackends":function () {
 
     // Check if apiUmbrellaWeb object exists
     if ( typeof apiUmbrellaWeb !== 'undefined' ) {
-      // Get API Backends from API Umbrella instance
-      var response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
-      var apiBackends = response.data.data;
 
-      _.each(apiBackends, function (apiBackend) {
+      // Get API Backends from API Umbrella instance
+      const response = apiUmbrellaWeb.adminApi.v1.apiBackends.getApiBackends();
+      const remoteApis = response.data.data;
+
+      // Get all local API Backends
+      const localApis = ApiBackends.find().fetch();
+
+      _.forEach(remoteApis, (remoteApi) => {
+
         // Get existing API Backend
-        var existingApiBackend = ApiBackends.findOne({'id': apiBackend.id});
+        const existingLocalApiBackend = ApiBackends.findOne({'id': remoteApi.id});
 
         // If API Backend doesn't exist in collection, insert into collection
-        if (existingApiBackend === undefined) {
+        if (existingLocalApiBackend === undefined) {
           try {
-            ApiBackends.insert(apiBackend);
+            ApiBackends.insert(remoteApi);
           } catch (error) {
-            console.error("Error inserting apiBackend(" + apiBackend.id + ") : " + error);
+            console.error("Error inserting apiBackend(" + remoteApi.id + ") : " + error);
           }
         };
+      });
+
+      _.forEach(localApis, (localApi) => {
+
+        const existingRemoteApiBackend = _.find(remoteApis, (remoteApi) => {
+          return remoteApi.id === localApi.id;
+        });
+
+        // If API Backend doesn't exist on API Umbrella, but locally, delete this API
+        if (!existingRemoteApiBackend) {
+          try {
+            ApiBackends.remove({'id': localApi.id});
+          } catch (error) {
+            console.error("Error deleteing apiBackend(" + localApi.id + ") : " + error);
+          }
+        }
       });
     }
   },
