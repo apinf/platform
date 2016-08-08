@@ -687,7 +687,7 @@ SimpleSchema.messages({
   // update password form
   "updatePassword_passwordsMismatch": "Passwords do not match",
   // unique field error message
-  notUnique: TAPi18n.__("apiBackend_uniqueField_message");
+  notUnique: TAPi18n.__("apiBackend_uniqueField_message")
 });
 
 export { ApiBackends };
