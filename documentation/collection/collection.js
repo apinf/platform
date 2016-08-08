@@ -1,6 +1,6 @@
-const DocumentationFiles = FileCollection({
+const DocumentationFiles = new FileCollection('DocumentationFiles', {
   resumable: true,
-  resumableIndexName: 'test',
+  resumableIndexName: 'documentaion',
   http: [
     {
       method: 'get',
