@@ -65,8 +65,6 @@ Template.uploadApiLogo.helpers({
       // Get API logo file Object
       const currentApiLogoFile = ApiLogo.findOne(objectId);
 
-      console.log(currentApiLogoFile);
-
       return currentApiLogoFile;
     }
   }
