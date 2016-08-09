@@ -1,11 +1,10 @@
-Template.settingsWizard.created = function() {
-  const instance = this;
+Template.settingsWizard.onCreated(function () {
+  var instance = this;
   // Subscription to branding collection
   instance.subscribe('branding');
   instance.subscribe('settings');
   instance.subscribe('projectLogo');
-
-};
+});
 
 Template.settingsWizard.helpers({
   branding: function() {
