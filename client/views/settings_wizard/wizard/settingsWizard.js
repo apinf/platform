@@ -8,7 +8,14 @@ Template.settingsWizard.onCreated(function () {
 
 Template.settingsWizard.helpers({
   branding: function() {
-    return Branding.findOne();
+    const branding = Branding.findOne();
+    // Check if branding collection has do documents
+    if (branding === undefined ) {
+      // if no documents, insert empty
+      return Branding.insert({});
+    } else {
+      return branding;
+    }
   },
   formType: function () {
     if ( Settings.findOne() ) {
