@@ -246,7 +246,7 @@
   "masterLayout_sidebar_ManageAPIBackends": "Manage API Backends",
   "masterLayout_sidebar_Menu": "Menu",
   "masterLayout_sidebar_Users": "Users",
-  "notAuthorized_Message": "You are not authorized to access this page. Please ensure you are logged in.",
+  "notAuthorized_Message": "You are not authorized to access this page.",
   "notAuthorized_Return_Message_Part1": "You may",
   "notAuthorized_Return_Message_Part2": "return to a previous page",
   "notAuthorized_Title": "Not Authorized",
