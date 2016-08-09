@@ -3,6 +3,7 @@
     <table class="table table-striped table-bordered api-catalogue-table">
       <tbody>
         {{#each api in apiBackends }}
+        {{#if api.currentUserCanView }}
         <tr>
           <td class="col-sm-1">
             {{> viewApiBackendStatus apiBackend=api width="0.6" }}
@@ -39,6 +40,7 @@
             {{/if}}
           </td>
         </tr>
+        {{/ if }}
         {{/each}}
       </tbody>
     </table>
