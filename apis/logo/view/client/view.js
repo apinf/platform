@@ -10,8 +10,10 @@ Template.viewApiLogo.onCreated(function() {
 
 Template.viewApiLogo.helpers({
   uploadedApiLogoLink: function() {
+    // Get API current API Backend from template data
+    const currentApiBackend = Template.currentData().apiBackend;
 
-    const currentApiLogoFileId = ApiBackends.findOne().apiLogoFileId;
+    const currentApiLogoFileId = ApiBackends.findOne(currentApiBackend._id).apiLogoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
@@ -34,4 +36,3 @@ Template.viewApiLogo.helpers({
     }
   }
 });
-
