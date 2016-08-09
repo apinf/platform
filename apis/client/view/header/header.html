@@ -16,9 +16,11 @@
           </ul>
         </div>
         <div class="col-md-4">
+          {{# if apiBackend.currentUserCanEdit }}
           <div class="row">
             {{> visibilitySwitch apiBackend=apiBackend }}
           </div>
+          {{/ if }}
           <div class="row">
             <div class="page-head-starsblock pull-right">
               {{# if currentUser }}
