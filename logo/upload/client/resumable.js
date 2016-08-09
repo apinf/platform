@@ -26,12 +26,12 @@ Meteor.startup( function() {
         // Update logo id field
         Branding.update(branding._id, {$set: { projectLogoFileId }});
 
-        sAlert.success('Logo success upload!');
+        sAlert.success(TAPi18n.__('uploadProjectLogo_resumable_successfully_uploaded'));
 
         return ProjectLogo.resumable.upload();
       } else {
 
-        sAlert.error('Logo unsuccess upload!');
+        sAlert.error(TAPi18n.__('uploadProjectLogo_resumable_acceptedExtensions'));
       }
 
     });

@@ -12,7 +12,7 @@ Template.uploadProjectLogo.events({
   'click .delete-projectLogo': function(event, instance) {
 
     // Show confirmation dialog to user
-    const confirmation = confirm('Are you sure you want to delete this logo?');
+    const confirmation = confirm(TAPi18n.__('uploadProjectLogo_confirm_delete'));
 
     // Check if user clicked "OK"
     if (confirmation === true) {
@@ -32,7 +32,7 @@ Template.uploadProjectLogo.events({
       // Remove prokect logo file id field
       Branding.update(branding._id, {$unset: { projectLogoFileId: "" }});
 
-      sAlert.success('Remove success logo!');
+      sAlert.success(TAPi18n.__('uploadProjectLogo__successfully_deleted'));
     }
   }
 });
