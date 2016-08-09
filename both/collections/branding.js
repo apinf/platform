@@ -7,7 +7,7 @@ Schemas.BrandingSchema = new SimpleSchema({
   },
   siteTitle: {
     type: String,
-    optional: false,
+    optional: true,
     label: 'Site title'
   },
   siteSlogan: {
