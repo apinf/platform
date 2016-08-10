@@ -113,13 +113,6 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     label: 'Frontend prefix',
     optional: true,
     unique: true,
-    custom: function () {
-      var frontendPrefix  = this.value;
-      if(ApiBackends.find({frontendPrefix:frontend_prefix})) {
-        return "notUnique";
-      }
-      return
-    },
     type: String,
     regEx: SimpleSchema.RegEx.Prefix
   },
