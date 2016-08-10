@@ -675,7 +675,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     },
     defaultValue: 0
   },
-  visibility: {
+  isPublic: {
     type: Boolean,
     optional: true,
     defaultValue: true

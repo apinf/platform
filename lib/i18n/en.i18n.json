@@ -393,8 +393,6 @@
   "viewApiBackendSettings_panelTitleManage": "Manage",
   "viewApiBackendSettings_editApiSettingsText": "You can modify the proxy settings for your API. Clicking the button will open a settings form.",
   "viewApiBackendSettings_editApiSettingsTitle": "Modify the API settings",
-  "viewApiBackendSettings_visibilityTitle": "Toggle API visibility",
-  "viewApiBackendSettings_visibilityInfoText": "Only System administrator and you would be able to see and access this API from API catalog. Use switch to make API public/private.",
   "viewApiBackendSettings_deleteApiText": "This action cannot be undone. The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "viewApiBackendSettings_deleteApiTitle": "Delete the API",
   "viewApiBackendSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
