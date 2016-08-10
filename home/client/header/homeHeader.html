@@ -10,11 +10,17 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a
-          class="navbar-brand text-hide" href="/"
-          style="background-image:url({{ projectLogo.url }})">
-          &nbsp;
+        {{ # if projectLogoExists }}
+        <a class="navbar-brand text-hide" href="/" style="background-image:url({{ uploadedProjectLogoLink }})">
+          APInf
         </a>
+        {{ else }}
+        <div class="project-name">
+          <a class="project-name-link" href="/">
+            {{ branding.siteTitle }}
+          </a>
+        </div>
+        {{ / if }}
       </div>
       <div id="home-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -46,7 +52,7 @@
       </div>
     </div>
   </nav>
-  <div class="coverphoto" style="background-image: url({{ coverPhoto.url }})">
+  <div class="coverphoto">
     <div class="container" id="headerwrap">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
