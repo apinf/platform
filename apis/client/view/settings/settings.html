@@ -46,6 +46,12 @@
       </h2>
     </div>
     <div class="panel-body">
+      <h3>{{_ "viewApiBackendSettings_visibilityTitle" }}</h3>
+      <p>
+        {{_ "viewApiBackendSettings_visibilityInfoText" }}
+      </p>
+      {{> visibilitySwitch apiBackend=apiBackend }}
+      <hr class="panel-hr" />
       <h3>{{_ "viewApiBackendSettings_deleteApiTitle" }}</h3>
       <p>
         {{_ "viewApiBackendSettings_deleteApiText" }}
