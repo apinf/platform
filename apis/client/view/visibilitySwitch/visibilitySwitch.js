@@ -16,12 +16,17 @@ Template.visibilitySwitch.onRendered(function () {
   const labelText = TAPi18n.__("visibilitySwitch_labelText");
   const offText = TAPi18n.__("visibilitySwitch_offText");
   const onText = TAPi18n.__("visibilitySwitch_onText");
+  // Custom colors
+  const onColor = 'danger';
+  const offColor = 'danger';
 
   // Create service visibility toggle switch
   $("[name='visibility']").bootstrapSwitch({
     labelText,
     offText,
     onText,
+    onColor,
+    offColor,
     state,
     onSwitchChange (event, visibility) {
       // Set visibility of current API
