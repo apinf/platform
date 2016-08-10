@@ -1,5 +1,7 @@
 <template name="home">
+  {{# if Template.subscriptionsReady }}
   {{> homeHeader branding=branding }}
   {{> homeBody branding=branding }}
   {{> homeFooter branding=branding }}
+  {{/ if }}
 </template>
