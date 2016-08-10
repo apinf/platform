@@ -7,11 +7,6 @@ Template.uploadApiLogo.onCreated(function() {
   // Subscribe to API logo
   instance.subscribe('allApiLogo');
 
-  instance.autorun(function () {
-    const apiBackend = ApiBackends.findOne(instance.data.apiBackend._id);
-    // Save apibackend id
-    Session.set('currentApiBackend', apiBackend);
-  });
 });
 
 Template.uploadApiLogo.events({
@@ -25,7 +20,7 @@ Template.uploadApiLogo.events({
     if (confirmation === true) {
 
       // Get currentApiBackend documentationFileId
-      const apiLogoFileId = this.apiBackend.apiLogoFileId;
+      const apiLogoFileId = instance.data.apiBackend.apiLogoFileId;
 
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(apiLogoFileId);
@@ -44,7 +39,7 @@ Template.uploadApiLogo.events({
 Template.uploadApiLogo.helpers({
   uploadedLogoLink: function() {
 
-    const currentApiLogoFileId = this.apiBackend.apiLogoFileId;
+    const currentApiLogoFileId = ApiBackends.findOne().apiLogoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
@@ -54,23 +49,22 @@ Template.uploadApiLogo.helpers({
 
     // Check if API logo file is available
     if (currentApiLogoFile) {
+
       // Get API logo file URL
       return Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL + "/md5/" + currentApiLogoFile.md5;
     }
   },
   uploadedApiLogoFile: function() {
-    const currentApiBackend = Session.get('currentApiBackend');
 
-    const currentApiLogoFileId = currentApiBackend.apiLogoFileId;
+    const currentApiLogoFileId = ApiBackends.findOne().apiLogoFileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
+    if (currentApiLogoFileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
 
-    // Get API logo file Object
-    const currentApiLogoFile = ApiLogo.findOne(objectId);
+      // Get API logo file Object
+      const currentApiLogoFile = ApiLogo.findOne(objectId);
 
-    // Check if API logo file is available
-    if (currentApiLogoFile) {
       return currentApiLogoFile;
     }
   }

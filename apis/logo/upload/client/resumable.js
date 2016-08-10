@@ -22,7 +22,7 @@ Meteor.startup( function() {
         const apiLogoFileId = file.uniqueIdentifier;
 
         // Get apibackend id
-        const apiBackend = Session.get('currentApiBackend');
+        const apiBackend = ApiBackends.findOne();
 
         // Update logo id field
         ApiBackends.update(apiBackend._id, {$set: { apiLogoFileId }});
