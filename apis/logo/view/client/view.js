@@ -6,17 +6,14 @@ Template.viewApiLogo.onCreated(function() {
   // Subscribe to API logo
   instance.subscribe('allApiLogo');
 
-  instance.autorun(function () {
-    const apiBackend = ApiBackends.findOne(instance.data.apiBackend._id);
-    // Save apibackend id
-    Session.set('currentApiBackend', apiBackend);
-  });
 });
 
 Template.viewApiLogo.helpers({
   uploadedApiLogoLink: function() {
+    // Get API current API Backend from template data
+    const currentApiBackend = Template.currentData().apiBackend;
 
-    const currentApiLogoFileId = this.apiBackend.apiLogoFileId;
+    const currentApiLogoFileId = ApiBackends.findOne(currentApiBackend._id).apiLogoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
@@ -26,12 +23,14 @@ Template.viewApiLogo.helpers({
 
     // Check if API logo file is available
     if (currentApiLogoFile) {
+
       // Get API logo file URL
       return Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL + "/md5/" + currentApiLogoFile.md5;
     }
   },
   apiLogoExists: function () {
-    const currentApiBackend = this.apiBackend;
+    const currentApiBackend = Template.currentData().apiBackend;
+
     if (currentApiBackend.apiLogoFileId) {
       return true;
     }

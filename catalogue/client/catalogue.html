@@ -1,136 +1,138 @@
 <template name="catalogue">
-  <h3 class="catalogue-main-title">{{_ "catalogue_Title"}}</h3>
-  <nav id="catalogue-toolbar" class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button
-                type="button"
-                class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-          <span class="sr-only">{{_ "catalogue_toolbar_toggleCollapse" }}</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+  <div class="container">
+    <h1 class="page-main-title">{{_ "catalogue_Title"}}</h1>
+    <nav id="catalogue-toolbar" class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button
+                  type="button"
+                  class="navbar-toggle collapsed"
+                  data-toggle="collapse"
+                  data-target="#bs-example-navbar-collapse-1"
+                  aria-expanded="false">
+            <span class="sr-only">{{_ "catalogue_toolbar_toggleCollapse" }}</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse sort-filter-toolbar" id="bs-example-navbar-collapse-1">
-        <div class="nav navbar-nav">
-          <p class="navbar-text sort-filter-toolbar-title">
-            {{_ "catalogue_toolbar_sortBy_title" }}
-          </p>
-          <div class="form-group sort-options-form">
-            <form class="form navbar-form navbar-nav" id="sort-options-select">
-              <select name="sort-menu" class="form-control sort-options-select" id="sort-select">
-                <option value="name">
-                  {{_ "catalogue_toolbar_sortMenuOptions_name" }}
-                </option>
-                <option value="bookmarkCount">
-                  {{_ "catalogue_toolbar_sortMenuOptions_bookmarkCount" }}
-                </option>
-                <option value="averageRating">
-                  {{_ "catalogue_toolbar_sortMenuOptions_averageRating" }}
-                </option>
-                <option value="created_at">
-                  {{_ "catalogue_toolbar_sortMenuOptions_dateCreated" }}
-                </option>
-              </select>
-            </form>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse sort-filter-toolbar" id="bs-example-navbar-collapse-1">
+          <div class="nav navbar-nav">
+            <p class="navbar-text sort-filter-toolbar-title">
+              {{_ "catalogue_toolbar_sortBy_title" }}
+            </p>
+            <div class="form-group sort-options-form">
+              <form class="form navbar-form navbar-nav" id="sort-options-select">
+                <select name="sort-menu" class="form-control sort-options-select" id="sort-select">
+                  <option value="name">
+                    {{_ "catalogue_toolbar_sortMenuOptions_name" }}
+                  </option>
+                  <option value="bookmarkCount">
+                    {{_ "catalogue_toolbar_sortMenuOptions_bookmarkCount" }}
+                  </option>
+                  <option value="averageRating">
+                    {{_ "catalogue_toolbar_sortMenuOptions_averageRating" }}
+                  </option>
+                  <option value="created_at">
+                    {{_ "catalogue_toolbar_sortMenuOptions_dateCreated" }}
+                  </option>
+                </select>
+              </form>
+            </div>
           </div>
-        </div>
-        <div class="nav navbar-nav">
-          <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
-            <label
-              class="btn btn-default toolbar-tooltip active"
-              title="{{_ 'catalogue_toolbar_sortMenuOptions_sortAscending' }}">
-              <input type="radio" name="sort-direction" id="sort-ascending" value="ascending">
-              <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
-            </label>
-            <label
-              class="btn btn-default toolbar-tooltip"
-              title="{{_ 'catalogue_toolbar_sortMenuOptions_sortDescending' }}">
-              <input type="radio" name="sort-direction" id="sort-descending" value="descending">
-              <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
-            </label>
+          <div class="nav navbar-nav">
+            <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
+              <label
+                     class="btn btn-default toolbar-tooltip active"
+                     title="{{_ 'catalogue_toolbar_sortMenuOptions_sortAscending' }}">
+                <input type="radio" name="sort-direction" id="sort-ascending" value="ascending">
+                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+              </label>
+              <label
+                     class="btn btn-default toolbar-tooltip"
+                     title="{{_ 'catalogue_toolbar_sortMenuOptions_sortDescending' }}">
+                <input type="radio" name="sort-direction" id="sort-descending" value="descending">
+                <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+              </label>
+            </div>
           </div>
-        </div>
-        {{# if currentUser }}
-        <div class="nav navbar-nav">
-          <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
-            <label class="btn btn-default active">
-              <input type="radio" name="filter-options" id="show-all" value="all">
-              {{_ "catalogue_toolbar_filterOptions_showAll" }}
-            </label>
-            <label class="btn btn-default">
-              <input type="radio" name="filter-options" id="my-apis" value="my-apis">
-              {{_ "catalogue_toolbar_filterOptions_myApis" }}
-            </label>
-            <label class="btn btn-default">
-              <input type="radio" name="filter-options" id="my-bookmarks" value="my-bookmarks">
-              {{_ "catalogue_toolbar_filterOptions_myBookmarks" }}
-            </label>
+          {{# if currentUser }}
+          <div class="nav navbar-nav">
+            <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
+              <label class="btn btn-default active">
+                <input type="radio" name="filter-options" id="show-all" value="all">
+                {{_ "catalogue_toolbar_filterOptions_showAll" }}
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="filter-options" id="my-apis" value="my-apis">
+                {{_ "catalogue_toolbar_filterOptions_myApis" }}
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="filter-options" id="my-bookmarks" value="my-bookmarks">
+                {{_ "catalogue_toolbar_filterOptions_myBookmarks" }}
+              </label>
+            </div>
           </div>
-        </div>
-        {{/if}}
-        <div class="nav navbar-nav navbar-right">
-          <div class="btn-group navbar-btn" role="group" aria-label="View mode" data-toggle="buttons">
-            <label
-              class="btn btn-default toolbar-tooltip active"
-              title="{{_ 'catalogue_toolbar_viewMode_grid' }}">
-              <input type="radio" name="view-mode" id="grid-mode" value="grid">
-              <i class="fa fa-th-large" aria-hidden="true"></i>
-            </label>
-            <label
-              class="btn btn-default toolbar-tooltip"
-              title="{{_ 'catalogue_toolbar_viewMode_table' }}">
-              <input type="radio" name="view-mode" id="table-mode" value="table">
-              <i class="fa fa-table" aria-hidden="true"></i>
-            </label>
+          {{/if}}
+          <div class="nav navbar-nav navbar-right">
+            <div class="btn-group navbar-btn" role="group" aria-label="View mode" data-toggle="buttons">
+              <label
+                     class="btn btn-default toolbar-tooltip active"
+                     title="{{_ 'catalogue_toolbar_viewMode_grid' }}">
+                <input type="radio" name="view-mode" id="grid-mode" value="grid">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+              </label>
+              <label
+                     class="btn btn-default toolbar-tooltip"
+                     title="{{_ 'catalogue_toolbar_viewMode_table' }}">
+                <input type="radio" name="view-mode" id="table-mode" value="table">
+                <i class="fa fa-table" aria-hidden="true"></i>
+              </label>
+            </div>
           </div>
-        </div>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-  <!-- if viewMode is table, show table -->
-  {{# if gridViewMode }}
+    <!-- if viewMode is table, show table -->
+    {{# if gridViewMode }}
     {{# if Template.subscriptionsReady }}
-      {{> catalogueGrid apiBackends=apiBackends }}
+    {{> catalogueGrid apiBackends=apiBackends }}
     {{else}}
-      {{> spinner }}
+    {{> spinner }}
     {{/if}}
-  {{/ if }}
+    {{/ if }}
 
-  <!-- if viewMode is table, show table -->
-  {{# if tableViewMode }}
+    <!-- if viewMode is table, show table -->
+    {{# if tableViewMode }}
     {{# if Template.subscriptionsReady }}
-      {{> catalogueTable apiBackends=apiBackends }}
+    {{> catalogueTable apiBackends=apiBackends }}
     {{else}}
-      {{> spinner }}
+    {{> spinner }}
     {{/if}}
-  {{/ if }}
+    {{/ if }}
 
-  <div class="text-center">
-    <ul class="pagination">
-      <li class="{{ prevButtonDisabledClass }}" >
-        <a href="#" aria-label="Previous" id="prev-page">
-          <span aria-hidden="true">{{_ "catalogue_paginationButtons_previous" }}</span>
-        </a>
-      </li>
-      {{ # each page in pageNumbers }}
+    <div class="text-center">
+      <ul class="pagination">
+        <li class="{{ prevButtonDisabledClass }}" >
+          <a href="#" aria-label="Previous" id="prev-page">
+            <span aria-hidden="true">{{_ "catalogue_paginationButtons_previous" }}</span>
+          </a>
+        </li>
+        {{ # each page in pageNumbers }}
         <li class="{{ pageIsActive page }}">
           <a href="#" class="change-page">{{ page }}</a>
         </li>
-      {{ / each }}
-      <li class="{{ nextButtonDisabledClass }}">
-        <a href="#" aria-label="Next" id="next-page">
-          <span aria-hidden="true">{{_ "catalogue_paginationButtons_next" }}</span>
-        </a>
-      </li>
-    </ul>
+        {{ / each }}
+        <li class="{{ nextButtonDisabledClass }}">
+          <a href="#" aria-label="Next" id="next-page">
+            <span aria-hidden="true">{{_ "catalogue_paginationButtons_next" }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
