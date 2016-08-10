@@ -4,8 +4,6 @@ Template.navbar.onCreated(function() {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
-  // Subscription to branding collection
-  instance.subscribe('branding');
 });
 
 
