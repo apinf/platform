@@ -24,9 +24,9 @@ Template.homeHeader.helpers({
     }
   },
   projectLogoExists: function () {
-    const currentProjectLogoFileId = this.branding.projectLogoFileId;
-
-    if (currentProjectLogoFileId) {
+    const branding = this.branding;
+    if (branding) {
+      const currentProjectLogoFileId = branding.projectLogoFileId;
       return true;
     }
   }

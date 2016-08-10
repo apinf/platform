@@ -42,8 +42,8 @@ Template.navbar.helpers({
   },
   projectLogoExists: function () {
     const branding = Branding.findOne();
-
-    if (branding.projectLogoFileId) {
+    if (branding) {
+      const currentProjectLogoFileId = branding.projectLogoFileId;
       return true;
     }
   }
