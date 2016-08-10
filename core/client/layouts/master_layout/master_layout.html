@@ -1,5 +1,6 @@
 <template name="masterLayout">
   {{> languageBar }}
+  {{# if Template.subscriptionsReady }}
   <div class="master-layout">
     {{> navbar branding=branding }}
     <div class="content-wrapper">
@@ -8,4 +9,5 @@
       {{> autoformModals}}
     </div>
   </div>
+  {{/ if }}
 </template>

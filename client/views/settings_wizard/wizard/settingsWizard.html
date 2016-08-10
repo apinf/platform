@@ -10,22 +10,11 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">{{_ "settingsWizard_projectBranding"}}</h3>
                 </div>
-                <hr><br>
                 <div class="panel-body">
+                  {{> viewProjectLogo branding=branding }}
+                  {{> uploadProjectLogo branding=branding }}
                   {{#if branding}}
                   {{#autoForm collection="Branding" id="wizardBranding" doc=branding type="update"}}
-                  {{> afQuickField name='projectLogo'}}
-                  {{#if projectLogo}}
-                  <p>
-                    <img alt="{{projectLogo.name}}" src="{{projectLogo.url}}" width="150px">
-                  </p>
-                  {{/if}}
-                  {{> afQuickField name='coverPhoto'}}
-                  {{#if coverPhoto}}
-                  <p>
-                    <img alt="{{coverPhoto.name}}" src="{{coverPhoto.url}}" width="100%">
-                  </p>
-                  {{/if}}
                   {{> afQuickField name='siteTitle'}}
                   {{> afQuickField name='siteSlogan'}}
                   {{> afQuickField name='siteFooter'}}
@@ -43,8 +32,6 @@
                   {{/autoForm}}
                   {{else}}
                   {{#autoForm collection="Branding" id="wizardBranding" type="insert"}}
-                  {{> afQuickField name='projectLogo'}}
-                  {{> afQuickField name='coverPhoto'}}
                   {{> afQuickField name='siteTitle'}}
                   {{> afQuickField name='siteSlogan'}}
                   {{> afQuickField name='siteFooter'}}
@@ -64,7 +51,7 @@
                 </div>
               </div>
             </div>
-          </div>        
+          </div>
         </div>
         <div class="item">
           <div class="row" id="champion-messages">
@@ -107,11 +94,11 @@
                     <span class="pull-right">{{> afQuickField name='mail.enabled'}}</span>
                   </div>
                   {{#if afFieldValueIs name='mail.enabled' value=true}}
-                    <div class="panel-body">
-                      {{> afQuickField name='mail.username'}}
-                      {{> afQuickField name='mail.password'}}
-                      {{> afQuickField name='mail.toEmail'}}
-                    </div>
+                  <div class="panel-body">
+                    {{> afQuickField name='mail.username'}}
+                    {{> afQuickField name='mail.password'}}
+                    {{> afQuickField name='mail.toEmail'}}
+                  </div>
                   {{/if}}
                 </div>
                 <div class="panel panel-default">

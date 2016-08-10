@@ -1,29 +1,12 @@
 import { ProjectLogo } from '/logo/collection/collection';
 
-Template.navbar.onCreated(function() {
+Template.homeHeader.onCreated(function() {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
 });
 
-
-Template.navbar.helpers({
-  profileImageUrl: function() {
-    // get a object with profile image url
-    var profilePicture = ProfilePictures.findOne({});
-    // return that url
-    return profilePicture.url();
-  },
-  "isSearchRoute": function () {
-    // Get name of current route from Router
-    var routeName = Router.current().route.getName();
-
-    if (routeName === "search") {
-      return true;
-    } else {
-      return false;
-    }
-  },
+Template.homeHeader.helpers({
   uploadedProjectLogoLink: function() {
 
     const currentProjectLogoFileId = Branding.findOne().projectLogoFileId;
@@ -41,18 +24,10 @@ Template.navbar.helpers({
     }
   },
   projectLogoExists: function () {
-    const branding = Branding.findOne();
+    const branding = this.branding;
     if (branding) {
       const currentProjectLogoFileId = branding.projectLogoFileId;
       return true;
     }
   }
-});
-
-Template.navbar.onRendered(function() {
-  $('.icon-search').click(function() {
-    $('.searchblock-toggle').slideToggle("fast");
-    $('.toggle-search-icon').toggle();
-    $('#search-text').focus();
-  });
 });
