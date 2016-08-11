@@ -54,7 +54,7 @@ Template.addApiBackendWizard.helpers({
             if (!isUnique) {
               return "notUnique";
             }
-          }),
+          })
         },
         type: String,
         regEx: SimpleSchema.RegEx.Prefix
