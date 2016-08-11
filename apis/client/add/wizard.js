@@ -48,14 +48,7 @@ Template.addApiBackendWizard.helpers({
       },
       "url_matches.frontend_prefix": {
         optional: true,
-        custom: function () {
-          var frontend_prefix = this.value;
-          Meteor.call('checkFrontEndPrefixUnique', frontend_prefix, function (error, isUnique) {
-            if (!isUnique) {
-              return "notUnique";
-            }
-          })
-        },
+        unique: true,
         type: String,
         regEx: SimpleSchema.RegEx.Prefix
       },
