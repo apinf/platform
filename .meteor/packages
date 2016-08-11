@@ -67,7 +67,6 @@ dandv:jquery-rateit
 # yogiben:autoform-file
 harrison:papa-parse
 olragon:uri-js
-forwarder:autoform-wizard
 universe:reactive-queries
 ecmascript@0.5.7
 simple:reactive-method
@@ -83,3 +82,4 @@ standard-minifier-js@1.1.8
 vsivsi:file-collection
 deepwell:bootstrap-datepicker2
 pfafman:filesaver
+kepler:autoform-wizard
