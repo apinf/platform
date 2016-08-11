@@ -1,35 +1,20 @@
-Template.settingsWizard.created = function() {
-  const instance = this;
+Template.settingsWizard.onCreated(function () {
+  var instance = this;
   // Subscription to branding collection
   instance.subscribe('branding');
-  // Subscribe to project logo collection
-  instance.subscribe('projectLogo');
-  // Subscription to coverPhoto collection
-  instance.subscribe('coverPhoto');
-  // Subscription to feedback collection
   instance.subscribe('settings');
-
-};
+  instance.subscribe('projectLogo');
+});
 
 Template.settingsWizard.helpers({
-
   branding: function() {
-    return Branding.findOne();
-  },
-  projectLogo: function () {
-    // Get last uploaded image from collection
-    var lastUploadedLogo = ProjectLogo.findOne({}, {sort: {uploadedAt: -1}});
-    // Check if new logo was uploaded, if so change it with previous
-    if (lastUploadedLogo) {
-      return lastUploadedLogo
-    }
-  },
-  coverPhoto: function () {
-    // Get last uploaded image from collection
-    var lastUploadedCover = CoverPhoto.findOne({}, {sort: {uploadedAt: -1}});
-    // Check if new cover was uploaded, if so change it with previous
-    if (lastUploadedCover) {
-      return lastUploadedCover;
+    const branding = Branding.findOne();
+    // Check if branding collection has do documents
+    if (branding === undefined ) {
+      // if no documents, insert empty
+      return Branding.insert({});
+    } else {
+      return branding;
     }
   },
   formType: function () {

@@ -8,17 +8,17 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        {{#if projectLogo}}
-        <a class="navbar-brand text-hide" href="/" style="background-image:url({{ projectLogo.url }})">
+        {{ # if projectLogoExists }}
+        <a class="navbar-brand text-hide" href="/" style="background-image:url({{ uploadedProjectLogoLink }})">
           APInf
         </a>
-        {{else}}
+        {{ else }}
         <div class="project-name" href="/">
           <a class="project-name-link">
             {{ branding.siteTitle }}
           </a>
         </div>
-        {{/if}}
+        {{ / if }}
       </div>
       <div id="main-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">

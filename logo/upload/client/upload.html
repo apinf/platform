@@ -1,0 +1,19 @@
+<template name="uploadProjectLogo">
+  <div class="project-logo-file">
+    {{#unless uploadedProjectLogoFile }}
+    {{> uploadProjectLogoButton }}
+    {{else}}
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="glyphicon glyphicon-file"></span>
+        {{ uploadedProjectLogoFile.filename }}
+        <span class="pull-right">
+          <a class="btn btn-xs btn-danger delete-projectLogo">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </span>
+      </li>
+    </ul>
+    {{/unless}}
+  </div>
+</template>
