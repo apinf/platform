@@ -85,7 +85,7 @@ ApiBackends.helpers({
   },
   currentUserCanView () {
     // Check visibility
-    if(this.visibility) {
+    if(this.isPublic) {
       return true;
     } else {
       // Only user who can edit, can view private APIs
