@@ -1,18 +1,24 @@
 import { ApiBackends } from '/apis/collection/backend';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
+  // Set up query object placeholder
+  // default to all public documents
+  let selector = { isPublic: true };
+
   // Get user ID
   const userId = this.userId;
 
-  // Set up query object placeholder
-  // default to all public documents and those managed by user (using OR)
-  let selector = {
-    $or:
-    [
-      { isPublic: true },
-      { managerIds: userId }
-    ]
-  };
+  if (userId) {
+    // If user logged in
+    // Select public and managed APIs
+    selector = {
+      $or:
+      [
+        { isPublic: true },
+        { managerIds: userId }
+      ]
+    };
+  }
 
   // Set up query options with empty sort settings
   const queryOptions = { sort: { } };
