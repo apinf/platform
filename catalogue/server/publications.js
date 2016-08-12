@@ -1,14 +1,21 @@
 import { ApiBackends } from '/apis/collection/backend';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
-  // Set up query object placeholder (default to all documents)
-  let selector = {};
+  // Get user ID
+  const userId = this.userId;
+
+  // Set up query object placeholder
+  // default to all public documents and those managed by user (using OR)
+  let selector = {
+    $or:
+    [
+      { isPublic: true },
+      { managerIds: userId }
+    ]
+  };
 
   // Set up query options with empty sort settings
   const queryOptions = { sort: { } };
-
-  // Get user ID
-  const userId = this.userId;
 
   // Set up query object, if changes are needed
   if (userId && filterBy === "my-apis") {
@@ -23,8 +30,14 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
     if (userBookmarks) {
       const bookmarkedApiIds = userBookmarks.apiIds;
 
-      // Set up query object to contain bookmarked API IDs
-      selector = {_id: {$in: bookmarkedApiIds}};
+      // Set up query object to contain bookmarked API IDs which are public
+      selector = {
+        $and:
+        [
+          {_id: {$in: bookmarkedApiIds}},
+          { isPublic: true }
+        ]
+      };
     }
   };
 
