@@ -7,6 +7,7 @@
     </div>
   </div>
   {{#each latestBackends }}
+  {{#if currentUserCanView }}
   <div class="col-md-3 col-sm-6 hero-feature">
     <div class="thumbnail api-box">
       <h3><a href="/api/{{_id}}">{{ name }}</a></h3>
@@ -18,6 +19,7 @@
       </div>
     </div>
   </div>
+  {{/ if }}
   {{/each}}
   {{else}}
   <i>{{_ "latestApiBackends_NotFound" }}</i>

@@ -83,6 +83,15 @@ ApiBackends.helpers({
     // Otherwise, get average rating
     return this.averageRating;
   },
+  currentUserCanView () {
+    // Check visibility
+    if(this.isPublic) {
+      return true;
+    } else {
+      // Only user who can edit, can view private APIs
+      return this.currentUserCanEdit();
+    }
+  },
   currentUserCanEdit () {
     // Get current userId
     var userId = Meteor.userId();

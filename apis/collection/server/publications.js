@@ -46,5 +46,5 @@ Meteor.publish('apiBackend', function (backendId) {
 
 Meteor.publish('latestApiBackends', function (limit) {
   // Return cursor to latest API Backends
-  return ApiBackends.find({}, {sort: {created_at: -1}, limit: limit});
+  return ApiBackends.find({ isPublic: true }, { sort: { created_at: -1 }, limit: limit });
 });

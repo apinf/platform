@@ -672,7 +672,13 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
     autoform: {
       type: "hidden",
       label: false
-    }
+    },
+    defaultValue: 0
+  },
+  isPublic: {
+    type: Boolean,
+    optional: true,
+    defaultValue: true
   }
 });
 

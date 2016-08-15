@@ -1,14 +1,27 @@
 import { ApiBackends } from '/apis/collection/backend';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
-  // Set up query object placeholder (default to all documents)
-  let selector = {};
-
-  // Set up query options with empty sort settings
-  const queryOptions = { sort: { } };
+  // Set up query object placeholder
+  // default to all public documents
+  let selector = { isPublic: true };
 
   // Get user ID
   const userId = this.userId;
+
+  if (userId) {
+    // If user logged in
+    // Select public and managed APIs
+    selector = {
+      $or:
+      [
+        { isPublic: true },
+        { managerIds: userId }
+      ]
+    };
+  }
+
+  // Set up query options with empty sort settings
+  const queryOptions = { sort: { } };
 
   // Set up query object, if changes are needed
   if (userId && filterBy === "my-apis") {
@@ -23,8 +36,28 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
     if (userBookmarks) {
       const bookmarkedApiIds = userBookmarks.apiIds;
 
-      // Set up query object to contain bookmarked API IDs
-      selector = {_id: {$in: bookmarkedApiIds}};
+      // Set up query object to contain bookmarked API IDs which are public
+      selector = {
+        $or: [
+          {
+            $and:
+              [// User has bookmarked and API is public
+                {_id: {$in: bookmarkedApiIds}},
+                { isPublic: true }
+              ]
+          },
+          {
+            $and:
+            [// User has bookmarked and is manager (regardless of public status)
+              {_id: {$in: bookmarkedApiIds}},
+              { managerIds: userId }
+            ]
+          }
+        ]
+      };
+    } else {
+      // If user has no bookmarks, don't return any results
+      return [];
     }
   };
 

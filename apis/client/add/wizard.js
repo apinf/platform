@@ -106,23 +106,28 @@ Template.addApiBackendWizard.helpers({
           Meteor.call('createApiBackendOnApiUmbrella', apiBackend, function(error, apiUmbrellaWebResponse) {
             if (apiUmbrellaWebResponse.http_status === 200) {
               // Get API Backend from API Umbrella response
-              var apiBackendCreated = apiUmbrellaWebResponse.result.data.api;
+              var newApiBackend = apiUmbrellaWebResponse.result.data.api;
 
-              // Create object for insert to Apinf
-              let newApiBackend = apiBackendCreated;
               // Add current user as API manager
               newApiBackend.managerIds = [Meteor.userId()];
+
               // Insert the API Backend
               var apiBackendId = ApiBackends.insert(newApiBackend);
-
-              // Get the ID of the newly created API Backend
-              var apiUmbrellaApiId = apiBackendCreated.id;
 
               // Tell Wizard the submission is complete
               context.done();
 
-              //Redirect to the just created API Backend page
-              Router.go('viewApiBackend', {_id: apiBackendId});
+              // TODO: Redirect to the just created API Backend page
+              // Router.go('viewApiBackend', {_id: apiBackendId});
+              // Note, this will not work since the API Backend subscription will not be available
+              // for the route authorization funciton to work correctly
+
+              // Redirect to the Manage APIs page
+              Router.go('manageApiBackends');
+
+              // Get the ID of the newly created API Backend
+              // for call to publish API Backend on API Umbrella
+              var apiUmbrellaApiId = newApiBackend.id;
 
               // Publish the API Backend on API Umbrella
               Meteor.call('publishApiBackendOnApiUmbrella', apiUmbrellaApiId, function(error, apiUmbrellaWebResponse) {
