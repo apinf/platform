@@ -38,10 +38,21 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
 
       // Set up query object to contain bookmarked API IDs which are public
       selector = {
-        $and:
-        [
-          {_id: {$in: bookmarkedApiIds}},
-          { isPublic: true }
+        $or: [
+          {
+            $and:
+              [// User has bookmarked and API is public
+                {_id: {$in: bookmarkedApiIds}},
+                { isPublic: true }
+              ]
+          },
+          {
+            $and:
+            [// User has bookmarked and is manager (regardless of public status)
+              {_id: {$in: bookmarkedApiIds}},
+              { managerIds: userId }
+            ]
+          }
         ]
       };
     } else {
