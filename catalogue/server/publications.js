@@ -44,6 +44,9 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
           { isPublic: true }
         ]
       };
+    } else {
+      // If user has no bookmarks, don't return any results
+      return [];
     }
   };
 
