@@ -1,7 +1,13 @@
 import { Proxies } from './';
-import proxiesList from '../proxiesList';
+import proxiesList from '../default/list';
 
-Proxies.schema = new SimpleSchema({
+import { apiUmbrellaSchema } from '../default';
+import { kongSchema } from '../default';
+import { tykSchema } from '../default';
+
+import _ from 'lodash';
+
+const schema = {
   name: {
     type: String
   },
@@ -14,49 +20,11 @@ Proxies.schema = new SimpleSchema({
   type: {
     type: String,
     allowedValues: proxiesList
-  },
-  apiUmbrella: {
-    type: Object,
-    optional: true
-  },
-  'apiUmbrella.url': {
-    type: String
-  },
-  'apiUmbrella.apiKey': {
-    type: String
-  },
-  'apiUmbrella.authToken': {
-    type: String
-  },
-  'apiUmbrella.elasticsearch': {
-    type: String
-  },
-  kong: {
-    type: Object,
-    optional: true
-  },
-  'kong.url': {
-    type: String
-  },
-  'kong.apiKey': {
-    type: String
-  },
-  'kong.authToken': {
-    type: String
-  },
-  tyk: {
-    type: Object,
-    optional: true
-  },
-  'tyk.url': {
-    type: String
-  },
-  'tyk.apiKey': {
-    type: String
-  },
-  'tyk.authToken': {
-    type: String
   }
-});
+};
+
+const newSchema = _.assign(schema, apiUmbrellaSchema, kongSchema, tykSchema);
+
+Proxies.schema = new SimpleSchema(newSchema);
 
 Proxies.attachSchema(Proxies.schema);

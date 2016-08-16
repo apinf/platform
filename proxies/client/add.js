@@ -1,5 +1,5 @@
 import { Proxies } from '../collection';
-import proxiesList from '../proxiesList';
+import proxiesList from '../default/list';
 
 window.Proxies = Proxies;
 
