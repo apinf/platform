@@ -1,0 +1,18 @@
+<template name="addApiBackendWizard">
+  <div class="container">
+    <h1 class="page-main-title">
+      {{_ "addApiBackendWizard_heading" }}
+    </h1>
+    {{> wizard
+      id="add-api-backend-wizard"
+      route="addApiBackend-wizard"
+      steps=steps
+      buttonClasses="btn btn-default"
+      stepsTemplate="steps_bootstrap3"
+      clearOnDestroy=true
+      backButton=backButtonText
+      nextButton=nextButtonText
+      confirmButton=confirmButtonText
+    }}
+  </div>
+</template>

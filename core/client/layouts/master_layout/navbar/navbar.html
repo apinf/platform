@@ -1,0 +1,89 @@
+<template name="navbar">
+  <nav class="navbar navbar-default main-navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        {{ # if projectLogoExists }}
+        <a class="navbar-brand text-hide" href="/" style="background-image:url({{ uploadedProjectLogoLink }})">
+          APInf
+        </a>
+        {{ else }}
+        <div class="project-name" href="/">
+          <a class="project-name-link">
+            {{ branding.siteTitle }}
+          </a>
+        </div>
+        {{ / if }}
+      </div>
+      <div id="main-navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          {{# if currentUser }}
+          <li class="{{isActiveRoute 'dashboard'}}">
+            <a href="/dashboard">
+              <span>{{_ "Dashboard"}}</span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              {{_ "masterLayout_sidebar_APIBackends"}}
+              <i class="fa fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{ pathFor route='addApiBackend-wizard' }}">
+                  {{_ "masterLayout_sidebar_AddAPIBackend"}}
+                </a>
+              </li>
+              {{# if isInRole 'manager' }}
+              <li>
+                <a href="{{pathFor route='manageApiBackends'}}">
+                  {{_ "masterLayout_sidebar_ManageAPIBackends"}}
+                </a>
+              </li>
+              {{/ if }}
+            </ul>
+          </li>
+          {{ /if }}
+          <li class="{{isActiveRoute 'catalogue'}}">
+            <a href="/catalogue">
+              {{_ "masterLayout_sidebar_Catalogue"}}
+            </a>
+          </li>
+          {{# if currentUser }}
+          {{# if isInRole 'admin' }}
+          <li class="{{isActiveRoute 'accountsAdmin'}}">
+            <a href="{{pathFor route='accountsAdmin'}}">
+              <span>{{_ "masterLayout_sidebar_Users"}}</span>
+            </a>
+          </li>
+          {{/ if }}
+          {{/ if }}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{#if User}}
+          {{> userMenu }}
+          {{else}}
+          <li>
+            <a class="close-navbar" href="/sign-up">{{_ "signup"}}</a>
+          </li>
+          <li>
+            <a class="close-navbar" href="/sign-in">{{_ "login"}}</a>
+          </li>
+          {{/if}}
+          <li>
+            <a type="button" class="icon-search">
+              <i class="fa fa-search toggle-search-icon"></i>
+              <i class="fa fa-times toggle-search-icon"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      {{> searchField }}
+    </div>
+  </nav>
+</template>

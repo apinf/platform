@@ -1,0 +1,54 @@
+/* Bootstrap */
+@import "/core/client/style/bootstrap-variables.less";
+
+html, body, h1, h2, h3, h4, h5, h6, p {
+  font-family: @font-family-default;
+}
+
+a:hover, a:focus {
+  color: @link-hover-color;
+  text-decoration: underline;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+}
+
+#iron-router-progress {
+  background-color: darken(@brand-primary, 20%);
+  box-shadow: 0 0 5px darken(@brand-primary, 20%);
+}
+
+#iron-router-progress.spinner:before {
+  border-color: darken(@brand-primary, 20%);
+}
+
+.help-block {
+  margin-bottom: 1.4em;
+}
+
+hr {
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+.no-margin-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.panel:last-child {
+  margin-bottom: 0;
+}
+
+.panel-body h3 {
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.panel-body p {
+  color: @gray;
+}

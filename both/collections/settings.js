@@ -1,19 +1,51 @@
 Settings = new Mongo.Collection('Settings');
 
+SimpleSchema.messages({
+  regEx: [
+    {exp: SimpleSchema.RegEx.Url, msg: "[label] must be a valid URL"},
+  ]
+});
+
 Schemas.SettingsSchema = new SimpleSchema({
   apinf: {
     type: Object,
     optional: true
   },
-  apiUmbrella: {
+  apiDocumentationEditor: {
     type: Object,
     optional: true
+  },
+  "apiDocumentationEditor.enabled": {
+    type: Boolean,
+    optional: true
+  },
+  "apiDocumentationEditor.host": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: "Host",
+    optional: true,
+    autoform: {
+      placeholder: 'http://editor.example.com/'
+    },
+    custom: function () {
+      let apiDocumentationEditorEnabled = this.field("apiDocumentationEditor.enabled").value;
+      let apiDocumentationEditorHost = this.value;
+
+      // Require editor host if apiDocumentationEditor.enabled is checked
+      if (apiDocumentationEditorEnabled === true && !apiDocumentationEditorHost) {
+        return "required";
+      }
+    }
+  },
+  apiUmbrella: {
+    type: Object,
+    optional: false
   },
   "apiUmbrella.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'https://example.com/'
     }
@@ -21,7 +53,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   "apiUmbrella.apiKey": {
     type: String,
     label: "API Key",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx'
     }
@@ -29,7 +61,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   "apiUmbrella.authToken": {
     type: String,
     label: "Auth Token",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx'
     }
@@ -38,20 +70,20 @@ Schemas.SettingsSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Base URL",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'https://example.com/api-umbrella/'
     }
   },
   elasticsearch: {
     type: Object,
-    optional: true
+    optional: false
   },
   "elasticsearch.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     label: "Host",
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'http://example.com:14002/'
     }
@@ -72,8 +104,11 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'Mailgun Username'
     },
     custom: function () {
-      var mailEnabled = this.field("mail.enabled").value;
-      if (mailEnabled === true) {
+      let mailEnabled = this.field("mail.enabled").value;
+      let mailUsername = this.value;
+
+      // Require mail username if mailEnabled is checked
+      if (mailEnabled === true && !mailUsername) {
         return "required";
       }
     }
@@ -86,23 +121,31 @@ Schemas.SettingsSchema = new SimpleSchema({
       placeholder: 'xxx'
     },
     custom: function () {
-      var mailEnabled = this.field("mail.enabled").value;
-      if (mailEnabled === true) {
+      let mailEnabled = this.field("mail.enabled").value;
+      let mailPassword = this.value;
+
+      // Require mail password if mail enabled is checked
+      if (mailEnabled === true && !mailPassword) {
         return "required";
       }
     }
   },
-  contactForm: {
-    type: Object,
-    optional: true
-  },
-  "contactForm.toEmail": {
+  "mail.toEmail": {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: "Contact Form E-mail Address",
     optional: true,
     autoform: {
       placeholder: 'mail@example.com'
+    },
+    custom: function () {
+      let mailEnabled = this.field("mail.enabled").value;
+      let contactFormEmail = this.value;
+
+      // Require mail password if mail enabled is checked
+      if (mailEnabled === true && !contactFormEmail) {
+        return "required";
+      }
     }
   },
   githubConfiguration: {
@@ -124,6 +167,10 @@ Schemas.SettingsSchema = new SimpleSchema({
     autoform: {
       placeholder: 'xxx'
     }
+  },
+  initialSetupComplete: {
+    type: Boolean,
+    optional: true
   }
 });
 

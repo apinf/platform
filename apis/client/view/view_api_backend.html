@@ -1,0 +1,42 @@
+<template name="viewApiBackend">
+  {{#if Template.subscriptionsReady }}
+  {{> viewApiBackendPageHeader apiBackend=apiBackend }}
+  <div class="container">
+    <div class="tab-content">
+      <div id="api-backend-details" class="tab-pane fade in active">
+        {{> viewApiBackendDetails apiBackend=apiBackend }}
+      </div> <!-- /api-backend-details -->
+
+      <div id="api-backend-documentation" class="tab-pane fade">
+        {{> documentation apiBackend=apiBackend }}
+      </div> <!-- /api-backend-Documentation -->
+
+      <div id="api-backend-metadata" class="tab-pane fade">
+        {{> viewApiBackendMetadata apiBackend=apiBackend }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-feedback" class="tab-pane fade">
+        {{> feedbackList apiBackend=apiBackend }}
+      </div> <!-- /api-backend-metadata -->
+
+      <div id="api-backend-export" class="tab-pane fade">
+        {{> viewApiBackendExport apiBackend=apiBackend }}
+      </div> <!-- /api-backend-export -->
+
+      <div id="api-backend-backlog" class="tab-pane fade">
+        {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
+      </div> <!-- /api-backend-export -->
+
+      {{ # if currentUser }}
+        {{# if apiBackend.currentUserCanEdit }}
+          <div id="api-backend-settings" class="tab-pane fade">
+            {{> viewApiBackendSettings apiBackend=apiBackend }}
+          </div>
+        {{ / if }}
+      {{ / if }}
+    </div>
+  </div>
+  {{ else }}
+  {{> spinner }}
+  {{/ if }}
+</template>
