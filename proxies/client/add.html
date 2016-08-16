@@ -8,9 +8,9 @@
         {{ > afQuickField name='name' }}
         {{ > afQuickField name='description' }}
         {{ > afQuickField name='type' options="allowed" }}
-        {{ # each initialProxy in initialProxies }}
-          {{ # if afFieldValueIs name='type' value=initialProxy }}
-            {{> afQuickField name=initialProxy}}
+        {{ # each proxie in proxiesList }}
+          {{ # if afFieldValueIs name='type' value=proxie }}
+            {{> afQuickField name=proxie }}
           {{/if}}
         {{ / each }}
         <button type="submit" class="btn btn-primary">

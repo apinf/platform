@@ -1,10 +1,10 @@
-import { Proxies } from '/proxies/collection/';
-import initialProxies from '../initialProxies';
+import { Proxies } from '../collection';
+import proxiesList from '../proxiesList';
 
 window.Proxies = Proxies;
 
 Template.addProxy.helpers({
-  initialProxies () {
-    return initialProxies;
+  proxiesList () {
+    return proxiesList;
   }
 });
