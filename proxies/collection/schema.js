@@ -1,13 +1,11 @@
 import { Proxies } from './';
 import proxiesList from '../default/list';
 
-import { apiUmbrellaSchema } from '../default';
-import { kongSchema } from '../default';
-import { tykSchema } from '../default';
-
 import _ from 'lodash';
 
-const schema = {
+const defaultSchemas = require('../default');
+
+let schema = {
   name: {
     type: String
   },
@@ -23,8 +21,10 @@ const schema = {
   }
 };
 
-const newSchema = _.assign(schema, apiUmbrellaSchema, kongSchema, tykSchema);
+for (key in defaultSchemas) {
+  schema = _.assign(schema, defaultSchemas[key].default);
+}
 
-Proxies.schema = new SimpleSchema(newSchema);
+Proxies.schema = new SimpleSchema(schema);
 
 Proxies.attachSchema(Proxies.schema);
