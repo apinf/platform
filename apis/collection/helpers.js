@@ -36,7 +36,7 @@ Apis.helpers({
     // Check if average rating calculation succeeds
     if (averageRating) {
       // Update the API Backend with average rating value
-      ApiBackends.update(this._id, {$set: {averageRating}});
+      Apis.update(this._id, {$set: {averageRating}});
     }
   },
   getBookmarkCount () {
@@ -55,9 +55,9 @@ Apis.helpers({
     // Check if average rating calculation succeeds
     if (bookmarkCount) {
       // Update the API Backend with average rating value
-      ApiBackends.update(this._id, {$set: {bookmarkCount}});
+      Apis.update(this._id, {$set: {bookmarkCount}});
     } else {
-      ApiBackends.update(this._id, {$unset: {bookmarkCount: ""}})
+      Apis.update(this._id, {$unset: {bookmarkCount: ""}})
     }
   },
   getRating () {
