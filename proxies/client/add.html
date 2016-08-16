@@ -1,0 +1,22 @@
+<template name="addProxy">
+  <div class="container">
+    <div class="page-header">
+      <h1>Add proxy</h1>
+    </div>
+    <div class="">
+      {{ # autoForm collection="Proxies" id="addProxie" type="insert" }}
+        {{ > afQuickField name='name' }}
+        {{ > afQuickField name='description' }}
+        {{ > afQuickField name='type' options="allowed" }}
+        {{ # each initialProxy in initialProxies }}
+          {{ # if afFieldValueIs name='type' value=initialProxy }}
+            {{> afQuickField name=initialProxy}}
+          {{/if}}
+        {{ / each }}
+        <button type="submit" class="btn btn-primary">
+          Add Proxie
+        </button>
+      {{/autoForm}}
+    </div>
+  </div>
+</template>
