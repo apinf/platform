@@ -7,7 +7,10 @@ Proxies.schema = new SimpleSchema({
     type: String
   },
   description: {
-    type: String
+    type: String,
+    autoform: {
+      rows: 5
+    }
   },
   type: {
     type: String,
