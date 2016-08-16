@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 AutoForm.hooks({
   apiBackendForm: {
@@ -131,7 +131,7 @@ AutoForm.hooks({
       Router.go('viewApiBackend', {_id: apiBackendId});
 
       // Get the API Backend object
-      var apiBackend = ApiBackends.findOne(apiBackendId);
+      var apiBackend = Apis.findOne(apiBackendId);
 
       // Get API Umbrella backend ID from API Backend
       var apiUmbrellaApiId = apiBackend.id;

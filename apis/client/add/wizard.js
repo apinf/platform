@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Template.addApiBackendWizard.onCreated(function(){
   Wizard.useRouter('iron:router');
@@ -112,7 +112,7 @@ Template.addApiBackendWizard.helpers({
               newApiBackend.managerIds = [Meteor.userId()];
 
               // Insert the API Backend
-              var apiBackendId = ApiBackends.insert(newApiBackend);
+              var apiBackendId = Apis.insert(newApiBackend);
 
               // Tell Wizard the submission is complete
               context.done();

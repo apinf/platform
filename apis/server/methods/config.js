@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Meteor.methods({
   'importApiConfigs': function(jsonObj){
@@ -21,7 +21,7 @@ Meteor.methods({
         // additional error handling
         try{
 
-          var newApiBackend = ApiBackends.insert(jsonObj);
+          var newApiBackend = Apis.insert(jsonObj);
 
           status.isSuccessful = true;
           status.message      = "API config has been successfully imported.";

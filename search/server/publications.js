@@ -1,9 +1,9 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Meteor.publish("searchApiBackends", function(searchValue) {
 
   if (!searchValue || searchValue == "")
-    return ApiBackends.find({});
+    return Apis.find({});
 
   // Remove leading & trailing spaces from search value
   searchValue = searchValue.trim();
@@ -27,7 +27,7 @@ Meteor.publish("searchApiBackends", function(searchValue) {
   };
 
   // Fetch apiBackends
-  var searchResults = ApiBackends.find(query);
+  var searchResults = Apis.find(query);
 
   return searchResults;
 });

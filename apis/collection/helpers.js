@@ -1,9 +1,9 @@
 import ss from 'simple-statistics';
 import moment from 'moment';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 import _ from 'lodash';
 
-ApiBackends.helpers({
+Apis.helpers({
   getAverageRating () {
     // Fetch all ratings
     var apiBackendRatings = ApiBackendRatings.find({

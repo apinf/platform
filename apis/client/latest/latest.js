@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 import moment from 'moment';
 
 Template.latestApiBackends.created = function () {
@@ -20,7 +20,7 @@ Template.latestApiBackends.created = function () {
   // Attach cursor function to a template instance
   instance.latestApiBackendsCursor = function () {
     // Get a cursor for API Backends documents limited by provided value and sorted by created date
-    return ApiBackends.find({}, { sort: { created_at: -1}, limit: limit });
+    return Apis.find({}, { sort: { created_at: -1}, limit: limit });
   }
 
 };

@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Template.visibilitySwitch.onRendered(function () {
   // Get reference to current template instance
@@ -30,7 +30,7 @@ Template.visibilitySwitch.onRendered(function () {
     state,
     onSwitchChange (event, isPublic) {
       // Set visibility of current API
-      ApiBackends.update(apiBackendId, {$set: {isPublic}});
+      Apis.update(apiBackendId, {$set: {isPublic}});
     }
   });
 });

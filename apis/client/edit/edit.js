@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Template.editApiBackend.created = function () {
   // Get reference to current Router
@@ -28,7 +28,7 @@ Template.editApiBackend.helpers({
       // Make sure template subscriptions are ready
       if (instance.subscriptionsReady()) {
         // Get API Backend
-        var apiBackend = ApiBackends.findOne(backendId);
+        var apiBackend = Apis.findOne(backendId);
 
         if (apiBackend) {
           // Check if current User can edit the API Backend
@@ -52,7 +52,7 @@ Template.editApiBackend.helpers({
       var apiBackendId = router.params._id;
 
       // Get the API Backend
-      var apiBackend = ApiBackends.findOne(apiBackendId);
+      var apiBackend = Apis.findOne(apiBackendId);
 
       return apiBackend;
     }

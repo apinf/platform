@@ -1,8 +1,8 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Template.editApiBackendForm.helpers({
   formCollection() {
-    return ApiBackends;
+    return Apis;
   }
 });
 

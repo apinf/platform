@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/collection';
 
 Template.viewApiBackendSettings.events({
   // event handler to execute when delete API button is clicked
@@ -8,13 +8,13 @@ Template.viewApiBackendSettings.events({
     This is needed so that the API name can be shown in the dialog,
     as well for other information needed for API removal, such as ID*/
     Modal.show('deleteApiBackendConfirmation', function() {
-        return ApiBackends.findOne(apiBackendId);
+        return Apis.findOne(apiBackendId);
     });
   }
 });
 
 Template.viewApiBackendSettings.helpers({
   formCollection() {
-    return ApiBackends;
+    return Apis;
   }
 });
