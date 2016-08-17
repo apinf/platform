@@ -1,23 +1,17 @@
 Meteor.methods({
   "isInitialSetupComplete": function() {
-    // check if settings details are complete
-    let setUpComplete = false;
-    const settings = Settings.findOne();
+    // check if settings and branding have been configured
+    // const settings = Settings.findOne();
+    const branding = Branding.findOne();
 
-    // set setUpComplete to value of 'initialSetupComplete' property if it exists in Settings object, else return false
-    if (settings !== undefined && settings.hasOwnProperty('initialSetupComplete')) {
-      setUpComplete = settings.initialSetupComplete;
+    // Ensure branding has been provided
+    // TODO: Add a check to make sure settings have been provided as well
+    if (branding) {
+      // The platform is ready to use
+      return true;
     } else {
-      setUpComplete = false;
+      // More configuration is necessary for basic usage
+      return false;
     }
-
-    return setUpComplete;
-  },
-  "initialSetupCompleteTrue": function() {
-    // get reference to settings object from collection
-    const settings = Settings.findOne();
-    // set 'initialSetupComplete' field value to true in document
-    Settings.update({ _id: settings._id }, { $set:{ initialSetupComplete : true }});
-    return true;
   }
 });
