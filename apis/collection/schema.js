@@ -2,10 +2,12 @@ import { Apis } from '/apis/collection/collection';
 
 Apis.schema = new SimpleSchema({
   name: {
+    label: "API Name",
     type: String,
     optional: false
   },
   description: {
+    label: "Description",
     type: String,
     max: 1000,
     autoform: {
@@ -14,6 +16,7 @@ Apis.schema = new SimpleSchema({
     optional: true
   },
   url: {
+    label: "URL",
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url
