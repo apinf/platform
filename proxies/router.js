@@ -1,4 +1,4 @@
-Router.route("/add-proxy", {
+Router.route("/settings/proxies", {
   layout: "masterLayout",
-  template: "addProxy",
+  template: "proxies",
 });
