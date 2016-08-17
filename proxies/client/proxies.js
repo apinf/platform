@@ -13,7 +13,6 @@ Template.proxies.onCreated(function(){
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
       instance.proxies.set(Proxies.find());
-      console.log(Proxies.find().fetch());
     }
   });
 });
