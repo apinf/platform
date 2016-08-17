@@ -34,7 +34,6 @@ accounts-github@1.0.10
 percolate:synced-cron
 twbs:bootstrap
 reactive-var@1.0.10
-aldeed:tabular
 benmgreene:moment-range
 email@1.1.16
 zimme:active-route

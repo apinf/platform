@@ -167,8 +167,6 @@
       "SimpleSchema": false,
       "SubsManager": false,
       "SyncedCron": false,
-      "Tabular": false,
-      "TabularTables": false,
       "TAPi18n": false,
       "InlineHelp": false,
 
