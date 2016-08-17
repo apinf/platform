@@ -27,7 +27,6 @@ zimme:iron-router-active
 matb33:collection-hooks
 dburles:collection-helpers
 reywood:publish-composite
-natestrauser:animate-css
 meteorhacks:subs-manager
 fastclick@1.0.12
 accounts-github@1.0.10
