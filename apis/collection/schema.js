@@ -13,6 +13,11 @@ Apis.schema = new SimpleSchema({
     },
     optional: true
   },
+  url: {
+    type: String,
+    optional: true,
+    regEx: SimpleSchema.RegEx.Url
+  },
   documentationFileId: {
     type: String,
     optional: true
