@@ -1,0 +1,19 @@
+<template name="removeProxy">
+  <div class="modal fade" id="removeProxyModal" tabindex="-1" role="dialog" aria-labelledby="removeProxyModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="removeProxyModalLabel">Are you sure that you want to remove proxy?</h4>
+        </div>
+        <div class="modal-body">
+          {{ proxy.name }}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" id="confirm-remove-proxy">Yes, remove</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

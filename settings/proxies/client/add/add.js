@@ -12,7 +12,7 @@ Template.addProxy.helpers({
   },
   proxy () {
     const instance = Template.instance();
-    return (instance.data.proxy) ? instance.data.proxy : {};
+    return instance.data.proxy;
   },
   formType () {
     const instance = Template.instance();

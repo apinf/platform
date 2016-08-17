@@ -2,12 +2,13 @@ import { Proxies } from './';
 
 Proxies.allow({
   insert: function () {
-    return true;
+
+    return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
   update: function () {
-    return false;
+    return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
   remove: function () {
-    return false;
+    return Roles.userIsInRole(Meteor.userId(), ['admin']);
   }
 });
