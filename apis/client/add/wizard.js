@@ -48,6 +48,7 @@ Template.addApiBackendWizard.helpers({
       },
       "url_matches.frontend_prefix": {
         optional: true,
+        unique: true,
         type: String,
         regEx: SimpleSchema.RegEx.Prefix
       },

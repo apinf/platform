@@ -19,6 +19,7 @@
   "apiBackend_Usage_Instructions_Note": "Note:",
   "apiBackend_Usage_Instructions_Note_Text": "You can find your API Key on your profile page.",
   "apiBackend_Usage_Instructions_Profile_Page_Link": "View profile.",
+  "apiBackend_uniqueField_message":"This value is already in use, please make it unique.",
   "apiBackends_Add_API_Title": "Add API",
   "apiBackends_AdvancedRequestsRewriting": "Advanced Requests Rewriting",
   "apiBackends_AdvancedRequestsRewriting_Help": "Modify the incoming requests made to the Umbrella front_end before they are passed on to your API backend",

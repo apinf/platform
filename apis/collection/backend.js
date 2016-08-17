@@ -112,6 +112,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   "url_matches.$.frontend_prefix": {
     label: 'Frontend prefix',
     optional: true,
+    unique: true,
     type: String,
     regEx: SimpleSchema.RegEx.Prefix
   },
@@ -691,7 +692,9 @@ SimpleSchema.messages({
     {exp: SimpleSchema.RegEx.Prefix, msg: "Invalid format. Prefix should start with / character."}
   ],
   // update password form
-  "updatePassword_passwordsMismatch": "Passwords do not match"
+  "updatePassword_passwordsMismatch": "Passwords do not match",
+  // unique field error message
+  notUnique: TAPi18n.__("apiBackend_uniqueField_message")
 });
 
 export { ApiBackends };
