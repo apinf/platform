@@ -4,7 +4,9 @@
       <ul class="nav nav-pills nav-stacked">
         <li><a href="/profile">Profile<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
         <li><a href="/account">Account<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-        <li><a href="/branding">Branding<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+        {{ # if isInRole 'admin' }}
+          <li><a href="/branding">Branding<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+        {{ / if}}
         <li><a href="/settings">Settings<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
         <li><a href="/setting/proxies">Proxies<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
       </ul>
