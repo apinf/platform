@@ -4,7 +4,7 @@ Meteor.methods({
     const settings = Settings.findOne();
     const branding = Branding.findOne();
 
-    // check if settings and branding have been configured
+    // check if settings or branding have been configured
     if (branding || settings) {
       // The platform is ready to use
       return true;
