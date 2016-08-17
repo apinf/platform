@@ -37,7 +37,6 @@ cfs:filesystem@0.1.2
 cfs:http-methods@0.0.32
 cfs:storage-adapter@0.2.3
 check@1.2.3
-cmather:handlebars-server@2.0.0
 coffeescript@1.2.3
 dandv:jquery-rateit@1.0.22_2
 dburles:collection-helpers@1.0.4
@@ -161,6 +160,5 @@ webapp@1.3.10
 webapp-hashing@1.0.9
 yogiben:autoform-modals@0.3.8
 yogiben:helpers@0.0.6
-yogiben:pretty-email@0.0.7
 zimme:active-route@2.3.2
 zimme:iron-router-active@2.0.1
