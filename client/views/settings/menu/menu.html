@@ -1,15 +1,11 @@
 <template name="settingsMenu">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="/profile">Profile<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-        <li><a href="/account">Account<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-        {{ # if isInRole 'admin' }}
-          <li><a href="/branding">Branding<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-        {{ / if}}
-        <li><a href="/settings">Settings<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-        <li><a href="/setting/proxies">Proxies<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-      </ul>
-    </div>
-  </div>
+  <ul class="list-group">
+    <a href="/profile" class="list-group-item">Profile<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+    <a href="/account" class="list-group-item">Account<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+    {{ # if isInRole 'admin' }}
+      <a href="/branding" class="list-group-item">Branding<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+    {{ / if }}
+    <a href="/settings" class="list-group-item">Settings<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+    <a href="/setting/proxies" class="list-group-item">Proxies<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+  </ul>
 </template>
