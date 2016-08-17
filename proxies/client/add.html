@@ -4,7 +4,7 @@
       <h1>Add proxy</h1>
     </div>
     <div class="">
-      {{ # autoForm collection="Proxies" id="addProxie" type="insert" }}
+      {{ # autoForm collection=proxiesCollection id="addProxie" type="insert" }}
         {{ > afQuickField name='name' }}
         {{ > afQuickField name='description' }}
         {{ > afQuickField name='type' options="allowed" }}
