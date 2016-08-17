@@ -1,8 +1,8 @@
-Router.route("/api/new/:step?", function () {
-  this.render("addApiBackendWizard");
+Router.route("/api/new", function () {
+  this.render("addApi");
   this.layout("masterLayout");
 }, {
-  name: "addApiBackend-wizard"
+  name: "addApi"
 });
 
 Router.route("/api/:_id/", function () {
