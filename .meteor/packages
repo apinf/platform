@@ -13,7 +13,6 @@ aldeed:simple-schema
 fortawesome:fontawesome
 raix:handlebar-helpers
 aldeed:template-extension
-yogiben:helpers
 iron:router
 yogiben:autoform-modals
 spiderable@1.0.13
