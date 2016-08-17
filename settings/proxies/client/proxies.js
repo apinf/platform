@@ -20,6 +20,10 @@ Template.proxies.onCreated(function(){
 Template.proxies.events({
   'click #add-proxy': function (event, instance) {
     Modal.show('addProxy');
+  },
+  'click #edit-proxy': function (event, instance) {
+    const proxy = this;
+    Modal.show('addProxy', { proxy, isEdit: true });
   }
 });
 

@@ -11,24 +11,24 @@
         </h2>
         <hr>
         <div class="">
-          {{ # each proxy in proxies }}
+          {{ # each proxies }}
             <div class="panel panel-default">
               <div class="panel-heading">
                 <div class="panel-title">
-                  {{ proxy.name }}
+                  {{ name }}
                 </div>
               </div>
               <div class="panel-body">
                 <p>
-                  {{ proxy.description }}
+                  {{ description }}
                 </p>
                 <br>
-                {{ # if proxy.type = 'apiUmbrella' }}
+                {{ # if type = 'apiUmbrella' }}
                   <table class="table table-condensed">
                     <tbody>
                       <tr>
                         <th scope="row">URL</th>
-                        <td>{{ proxy.apiUmbrella.url }}</td>
+                        <td>{{ apiUmbrella.url }}</td>
                       </tr>
                       <tr>
                         <th scope="row">API Key</th>
@@ -40,11 +40,17 @@
                       </tr>
                       <tr>
                         <th scope="row">Elasticsearch</th>
-                        <td>{{ proxy.apiUmbrella.elasticsearch }}</td>
+                        <td>{{ apiUmbrella.elasticsearch }}</td>
                       </tr>
                     </tbody>
                   </table>
                 {{ / if }}
+              </div>
+              <div class="panel-footer">
+                <div class="text-right">
+                  <button class="btn btn-success btn-xs" id="edit-proxy">Edit</button>
+                  <button class="btn btn-danger btn-xs">Remove</button>
+                </div>
               </div>
             </div>
           {{ / each }}
