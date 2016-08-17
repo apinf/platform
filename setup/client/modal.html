@@ -1,0 +1,28 @@
+<template name="setupNeededModal">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Setup needed</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                      Please provide Branding and/or Settings for this deployment.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <a href={{ pathFor 'branding'}} class="btn btn-default">
+                      View Branding
+                    </a>
+                    <a href={{ pathFor 'settings'}} class="btn btn-default">
+                      View Settings
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
