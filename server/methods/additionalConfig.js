@@ -1,12 +1,11 @@
 Meteor.methods({
   "isInitialSetupComplete": function() {
-    // check if settings and branding have been configured
-    // const settings = Settings.findOne();
+    // Get branding and settings documents if available
+    const settings = Settings.findOne();
     const branding = Branding.findOne();
 
-    // Ensure branding has been provided
-    // TODO: Add a check to make sure settings have been provided as well
-    if (branding) {
+    // check if settings and branding have been configured
+    if (branding || settings) {
       // The platform is ready to use
       return true;
     } else {
