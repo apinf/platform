@@ -4,12 +4,15 @@ export default {
     optional: true
   },
   'kong.url': {
-    type: String
+    type: String,
+    optional: false
   },
   'kong.apiKey': {
-    type: String
+    type: String,
+    optional: false
   },
   'kong.authToken': {
-    type: String
+    type: String,
+    optional: false
   },
 }

@@ -4,15 +4,19 @@ export default {
     optional: true
   },
   'apiUmbrella.url': {
-    type: String
+    type: String,
+    optional: false
   },
   'apiUmbrella.apiKey': {
-    type: String
+    type: String,
+    optional: false
   },
   'apiUmbrella.authToken': {
-    type: String
+    type: String,
+    optional: false
   },
   'apiUmbrella.elasticsearch': {
-    type: String
+    type: String,
+    optional: false
   }
 }

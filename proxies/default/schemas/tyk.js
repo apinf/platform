@@ -4,12 +4,15 @@ export default {
     optional: true
   },
   'tyk.url': {
-    type: String
+    type: String,
+    optional: false
   },
   'tyk.apiKey': {
-    type: String
+    type: String,
+    optional: false
   },
   'tyk.authToken': {
-    type: String
+    type: String,
+    optional: false
   }
 }
