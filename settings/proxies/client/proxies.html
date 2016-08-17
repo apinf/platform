@@ -23,9 +23,13 @@
                   {{ description }}
                 </p>
                 <br>
-                {{ # if type = 'apiUmbrella' }}
+                {{ # if equals type 'apiUmbrella' }}
                   <table class="table table-condensed">
                     <tbody>
+                      <tr>
+                        <th scope="row">Proxy type</th>
+                        <td>{{ type }}</td>
+                      </tr>
                       <tr>
                         <th scope="row">URL</th>
                         <td>{{ apiUmbrella.url }}</td>
@@ -41,6 +45,50 @@
                       <tr>
                         <th scope="row">Elasticsearch</th>
                         <td>{{ apiUmbrella.elasticsearch }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                {{ / if }}
+                {{ # if equals type 'kong' }}
+                  <table class="table table-condensed">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Proxy type</th>
+                        <td>{{ type }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">URL</th>
+                        <td>{{ kong.url }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">API Key</th>
+                        <td>*****</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">API Token</th>
+                        <td>*****</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                {{ / if }}
+                {{ # if equals type 'tyk' }}
+                  <table class="table table-condensed">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Proxy type</th>
+                        <td>{{ type }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">URL</th>
+                        <td>{{ tyk.url }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">API Key</th>
+                        <td>*****</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">API Token</th>
+                        <td>*****</td>
                       </tr>
                     </tbody>
                   </table>

@@ -39,5 +39,8 @@ Template.proxies.helpers({
   },
   roxiesList () {
     return proxiesList;
+  },
+  equals (a, b) {
+    return a === b;
   }
 });
