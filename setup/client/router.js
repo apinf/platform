@@ -1,17 +1,44 @@
+var requireAdminRole = function () {
+  if (Meteor.user()) {
+    // Get user ID
+    var userId = Meteor.user()._id;
+
+    var userIsAdmin = Roles.userIsInRole(userId, "admin");
+
+    if (userIsAdmin) {
+      // User is authorized to access route
+      this.next();
+    } else {
+      // User is not authorized to access route
+      this.redirect('notAuthorized');
+    }
+  } else {
+    this.redirect('/sign-in');
+    this.next();
+  }
+};
+
 const additionalSetupRequired = function () {
-    const userId = Meteor.userId();
-    const userIsAdmin = Roles.userIsInRole(userId, "admin");
-    // check if user is Admin - if yes, check if settings have been configured
+  if (Meteor.user()) {
+    // Get user ID
+    var userId = Meteor.user()._id;
+
+    var userIsAdmin = Roles.userIsInRole(userId, "admin");
+
     if (userIsAdmin) {
       Meteor.call('isInitialSetupComplete', function(error, setupComplete) {
+
         if (!setupComplete) {
-          Router.go("setup");
+          Modal.show('setupNeededModal');
         }
       });
-
     }
-    this.next();
+  }
+
+  this.next();
 };
 
 // check if setup is required before opening any page
-Router.onBeforeAction(additionalSetupRequired, {except: []});
+Router.onBeforeAction(additionalSetupRequired, {except: ['settings', 'branding']});
+
+Router.onBeforeAction(requireAdminRole, {only: ['settings', 'branding']});
