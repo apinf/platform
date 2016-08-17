@@ -1,4 +1,4 @@
-import { ProjectLogo } from '/logo/collection/collection';
+import { ProjectLogo } from '/settings/logo/collection';
 
 Template.uploadProjectLogoButton.onRendered(function() {
   // Assign resumable browse to element

@@ -1,4 +1,4 @@
-import { ProjectLogo } from '/logo/collection/collection';
+import { ProjectLogo } from '/settings/logo/collection';
 
 Meteor.publish('projectLogo', function() {
   return ProjectLogo.find({
