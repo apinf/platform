@@ -29,6 +29,7 @@ const additionalSetupRequired = function () {
       Meteor.call('isInitialSetupComplete', function(error, setupComplete) {
 
         if (!setupComplete) {
+          // Show the setup needed modal
           Modal.show('setupNeededModal');
         }
       });
