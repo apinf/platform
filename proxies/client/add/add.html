@@ -1,22 +1,30 @@
 <template name="addProxy">
-  <div class="container">
-    <div class="page-header">
-      <h1>Add proxy</h1>
-    </div>
-    <div class="">
-      {{ # autoForm collection=proxiesCollection id="addProxie" type="insert" }}
-        {{ > afQuickField name='name' }}
-        {{ > afQuickField name='description' }}
-        {{ > afQuickField name='type' options="allowed" }}
-        {{ # each proxy in proxiesList }}
-          {{ # if afFieldValueIs name='type' value=proxy }}
-            {{> afQuickField name=proxy }}
-          {{/if}}
-        {{ / each }}
-        <button type="submit" class="btn btn-primary">
-          Add Proxie
-        </button>
-      {{/autoForm}}
+  <div class="modal fade" id="addProxyModal" tabindex="-1" role="dialog" aria-labelledby="addProxyModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addProxyModalLabel">Add Proxy</h4>
+        </div>
+        {{ # autoForm collection=proxiesCollection id="addProxie" type="insert" }}
+          <div class="modal-body">
+            {{ > afQuickField name='name' }}
+            {{ > afQuickField name='description' }}
+            {{ > afQuickField name='type' options="allowed" }}
+            {{ # each proxy in proxiesList }}
+              {{ # if afFieldValueIs name='type' value=proxy }}
+                {{> afQuickField name=proxy }}
+              {{/if}}
+            {{ / each }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              Add Proxy
+            </button>
+          </div>
+        {{/autoForm}}
+      </div>
     </div>
   </div>
+  {{> flashMessages}}
 </template>

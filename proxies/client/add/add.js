@@ -1,5 +1,5 @@
-import { Proxies } from '../collection';
-import proxiesList from '../default/list';
+import { Proxies } from '../../collection';
+import proxiesList from '../../default/list';
 
 Template.addProxy.helpers({
   proxiesList () {
