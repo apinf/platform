@@ -17,7 +17,6 @@ yogiben:helpers
 iron:router
 yogiben:autoform-modals
 yogiben:pretty-email
-multiply:iron-router-progress
 spiderable@1.0.13
 accounts-ui@1.1.9
 tap:i18n

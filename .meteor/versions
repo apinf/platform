@@ -104,7 +104,6 @@ mongo-id@1.0.5
 mongo-livedata@1.0.12
 mpowaga:string-template@0.1.0
 mrt:flash-messages@1.0.1
-multiply:iron-router-progress@1.0.2
 natestrauser:animate-css@3.5.1
 npm-bcrypt@0.8.7_1
 npm-mongo@1.5.45
