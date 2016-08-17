@@ -1,7 +1,7 @@
 import { Apis } from '/apis/collection/collection';
 
 AutoForm.hooks({
-  apiBackendForm: {
+  editApiForm: {
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key], button').attr("disabled", "disabled");
