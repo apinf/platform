@@ -48,10 +48,6 @@
         {{> afQuickField name='required_roles'}}
         {{> afQuickField name='pass_api_key_header'}}
         {{> afQuickField name='pass_api_key_query_param'}}
-        {{> afQuickField name='rate_limit_mode' options="allowed"}}
-        {{#if afFieldValueIs name='rate_limit_mode' value="Custom rate limits"}}
-        {{> afQuickField name='custom_rate_limits'}}
-        {{/if}}
         {{>showHelp 'settings'}}
         {{> afQuickField name='settings'}}
       </div>
