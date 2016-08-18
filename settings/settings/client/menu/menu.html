@@ -3,7 +3,7 @@
     <a href="{{ pathFor route='settings.profile' }}" class="list-group-item {{ isActiveRoute 'settings.profile' }}">{{ _ "settingsMenu_profile" }}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
     <a href="{{ pathFor route='settings.account' }}" class="list-group-item {{ isActiveRoute 'settings.account' }}">{{ _ "settingsMenu_account" }}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
     {{ # if isInRole 'admin' }}
-      <a href="{{ pathFor route='settings.branding' }}" class="list-group-item {{ isActiveRoute 'settings.branding' }}">{{ _ "settingsMenu_banding" }}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+      <a href="{{ pathFor route='settings.branding' }}" class="list-group-item {{ isActiveRoute 'settings.branding' }}">{{ _ "settingsMenu_branding" }}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
       <a href="{{ pathFor route='settings' }}" class="list-group-item {{ isActiveRoute 'settings' }}">{{ _ "settingsMenu_settings" }}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
       <a href="{{ pathFor route='settings.proxies' }}" class="list-group-item {{ isActiveRoute 'settings.proxies' }}">{{ _ "settingsMenu_proxies" }}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
     {{ / if }}
