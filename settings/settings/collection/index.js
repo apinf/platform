@@ -37,57 +37,6 @@ Schemas.SettingsSchema = new SimpleSchema({
       }
     }
   },
-  apiUmbrella: {
-    type: Object,
-    optional: false
-  },
-  "apiUmbrella.host": {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
-    optional: false,
-    autoform: {
-      placeholder: 'https://example.com/'
-    }
-  },
-  "apiUmbrella.apiKey": {
-    type: String,
-    label: "API Key",
-    optional: false,
-    autoform: {
-      placeholder: 'xxx'
-    }
-  },
-  "apiUmbrella.authToken": {
-    type: String,
-    label: "Auth Token",
-    optional: false,
-    autoform: {
-      placeholder: 'xxx'
-    }
-  },
-  "apiUmbrella.baseUrl": {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    label: "Base URL",
-    optional: false,
-    autoform: {
-      placeholder: 'https://example.com/api-umbrella/'
-    }
-  },
-  elasticsearch: {
-    type: Object,
-    optional: false
-  },
-  "elasticsearch.host": {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
-    optional: false,
-    autoform: {
-      placeholder: 'http://example.com:14002/'
-    }
-  },
   mail: {
     type: Object,
     optional: true
@@ -175,26 +124,3 @@ Schemas.SettingsSchema = new SimpleSchema({
 });
 
 Settings.attachSchema(Schemas.SettingsSchema);
-
-Meteor.startup(function () {
-
-  Settings.allow({
-    insert: function() {
-      // get settings
-      var dbSettingsCount = Settings.find().count();
-      // if no settings exist
-      if ( dbSettingsCount > 0 ) {
-        // don't allow insert
-        return false;
-      } else {
-        // insert
-        return true;
-      }
-    },
-    update: function() {
-      return true;
-    }
-
-  });
-
-});
