@@ -16,6 +16,8 @@ Template.addProxy.helpers({
   },
   formType () {
     const instance = Template.instance();
+
+    // Return formType depending on the action e.g. editing or adding
     return (instance.data.isEdit) ? 'update' : 'insert';
   }
 });
