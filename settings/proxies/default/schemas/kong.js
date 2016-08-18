@@ -5,7 +5,8 @@ export default {
   },
   'kong.url': {
     type: String,
-    optional: false
+    optional: false,
+    regEx: SimpleSchema.RegEx.Url
   },
   'kong.apiKey': {
     type: String,
@@ -14,5 +15,5 @@ export default {
   'kong.authToken': {
     type: String,
     optional: false
-  },
+  }
 }

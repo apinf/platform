@@ -5,7 +5,8 @@ export default {
   },
   'apiUmbrella.url': {
     type: String,
-    optional: false
+    optional: false,
+    regEx: SimpleSchema.RegEx.Url
   },
   'apiUmbrella.apiKey': {
     type: String,
@@ -17,6 +18,7 @@ export default {
   },
   'apiUmbrella.elasticsearch': {
     type: String,
-    optional: false
+    optional: false,
+    regEx: SimpleSchema.RegEx.Url
   }
 }

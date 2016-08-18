@@ -5,7 +5,8 @@ export default {
   },
   'tyk.url': {
     type: String,
-    optional: false
+    optional: false,
+    regEx: SimpleSchema.RegEx.Url
   },
   'tyk.apiKey': {
     type: String,
