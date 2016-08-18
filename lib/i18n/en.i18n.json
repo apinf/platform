@@ -121,6 +121,8 @@
   "documentation_No_Swagger_Message": "No swagger document is available.",
   "documentation_Title": "Documentation",
   "documentation_Viewer_Title": "Viewer",
+  "documentation_sdkGenerateButton": "SDK Generate",
+  "documentation_tooltipSDKGeneratorButton": "With a valid swagger file, you can download an SDK of your preferred language using this wizard",
   "editApiBackendForm-uploadLogo": "Upload logo",
   "editApiMetadata_editApiMetadataForm_button": "Edit API Metadata",
   "editApiMetadata_editApiMetadataForm_title": "Edit API Metadata",
@@ -348,6 +350,7 @@
       }
     }
   },
+  "sdkCodeGeneratorModal_Title": "Generate SDK file",
   "searchField_button": "Search",
   "searchField_placeholder": "Search...",
   "searchPage_addedPrefix": "Added",

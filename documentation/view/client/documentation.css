@@ -12,3 +12,7 @@ iframe {
 .s-alert-box {
   z-index: 10000
 }
+
+button#sdk-code-generator {
+  margin-right: 10px
+}
