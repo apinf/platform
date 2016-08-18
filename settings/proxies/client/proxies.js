@@ -11,6 +11,7 @@ Template.proxies.onCreated(function(){
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
+      // Update reactive vatiable with proxies cursor when subscription is ready
       instance.proxies.set(Proxies.find());
     }
   });
