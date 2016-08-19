@@ -1,6 +1,8 @@
 Meteor.startup(function () {
   try {
-
+    // Run migrations
+    Migrations.migrateTo('latest');
+    
     Meteor.call("createApiUmbrellaWeb");
 
     // Check if API Umbrella settings are available
