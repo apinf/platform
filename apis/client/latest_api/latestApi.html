@@ -1,10 +1,8 @@
 <template name="latestApiBackends">
   {{#if latestBackends }}
   <div class="row">
-    <div class="col-lg-12 text-center">
-      <h2 class="feature-section-heading">{{_ "latestApiBackends_Heading" }}</h2>
-      <hr class="primary">
-    </div>
+    <hr>
+    <h2 class="text-center">{{_ "latestApiBackends_Heading" }}</h2>
   </div>
   {{#each latestBackends }}
   {{#if currentUserCanView }}
