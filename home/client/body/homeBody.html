@@ -6,20 +6,24 @@
         {{ branding.siteSlogan }}
       </small>
     </h1>
+
+    <!-- Latest APIs -->
     <div class="row">
       {{> latestApiBackends limit = 8 }}
     </div>
+
+    <!-- API User -->
     <div class="row">
       <hr>
-      <div class="col-lg-12 text-center">
-        <h2>
-          {{_ "homeBody_feature_section_heading1"}}
-        </h2>
-      </div>
+      <h2 class="text-center">
+        {{_ "homeBody_feature_section_heading1"}}
+      </h2>
     </div>
+
+    <!-- User features -->
     <div class="row">
-      <div class="col-lg-3 col-md-6 text-center">
-        <h3>
+      <div class="col-lg-3 col-md-6 ">
+        <h3 class="text-center">
           <i class="fa fa-search"></i>
           {{_ "homeBody_feature_title1"}}
         </h3>
@@ -55,21 +59,25 @@
         </p>
       </div>
     </div>
+
+    <!-- API Owner -->
     <div class="row">
       <hr>
       <h2 class="text-center">
         {{_ "homeBody_feature_section_heading2"}}
       </h2>
     </div>
+
+    <!-- Owner features -->
     <div class="row">
       <div class="col-lg-3 col-md-6 text-center">
-          <h3>
-            <i class="fa fa-arrow-up"></i>
-            {{_ "homeBody_feature_title5"}}
-          </h3>
-          <p>
-            {{_ "homeBody_feature_title5_text"}}
-          </p>
+        <h3>
+          <i class="fa fa-arrow-up"></i>
+          {{_ "homeBody_feature_title5"}}
+        </h3>
+        <p>
+          {{_ "homeBody_feature_title5_text"}}
+        </p>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
         <h3>
@@ -81,22 +89,22 @@
         </p>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
-          <h3>
-            <i class="fa fa-line-chart"></i>
-            {{_ "homeBody_feature_title7"}}
-          </h3>
-          <p>
-            {{_ "homeBody_feature_title7_text"}}
-          </p>
+        <h3>
+          <i class="fa fa-line-chart"></i>
+          {{_ "homeBody_feature_title7"}}
+        </h3>
+        <p>
+          {{_ "homeBody_feature_title7_text"}}
+        </p>
       </div>
       <div class="col-lg-3 col-md-6 text-center">
-          <h3>
-            <i class="fa fa-cloud"></i>
-            {{_ "homeBody_feature_title8"}}
-          </h3>
-          <p>
-            {{_ "homeBody_feature_title8_text"}}
-          </p>
+        <h3>
+          <i class="fa fa-cloud"></i>
+          {{_ "homeBody_feature_title8"}}
+        </h3>
+        <p>
+          {{_ "homeBody_feature_title8_text"}}
+        </p>
       </div>
     </div>
 
@@ -166,15 +174,13 @@
 
     {{ # if contactDetailsValid }}
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2>
+          <h2 class="text-center">
             {{_ "homeBody_contactUs_heading"}}
           </h2>
           <hr>
-          <h4 class="text-muted">
+          <p class="text-muted">
             {{_ "homeBody_contactUs_text"}}
-          </h4>
-        </div>
+          </p>
       </div>
       <div class="row">
         <div class="col-lg-6 col-lg-push-3">
