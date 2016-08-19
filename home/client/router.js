@@ -1,5 +1,5 @@
 Router.route("/", {
-  layout: "homeLayout",
+  layout: "masterLayout",
   template: "home",
 }, {
   name: "home"
