@@ -6,9 +6,11 @@
   </div>
   {{#each latestBackends }}
   {{#if currentUserCanView }}
-  <div class="col-md-3 col-sm-6 hero-feature">
+  <div class="col-md-3 col-sm-6">
     <div class="thumbnail api-box">
-      <h3><a href="/api/{{_id}}">{{ name }}</a></h3>
+      <h3>
+        <a href="/api/{{_id}}">{{ name }}</a>
+      </h3>
       <p>
         <i>{{_ "latestApiBackends_DateAdded" relative_created_at }}</i>
       </p>
