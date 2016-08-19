@@ -25,7 +25,8 @@ services:
       - ssl
   mongo:
     restart: always
-    image: mongo:latest
+    image: mongo:3.2.6
+    command: --storageEngine wiredTiger
   ssl:
     restart: always
     image: opencapacity/lets-nginx:1.3
