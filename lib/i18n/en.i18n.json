@@ -351,6 +351,63 @@
           "placeholder": "Enter a string to be added to each backend request"
         }
       }
+    },
+    "backlog": {
+      "title": {
+        "label": "Title",
+        "placeholder": "Title"
+      },
+      "details": {
+        "label": "Details",
+        "placeholder": "Description"
+      },
+      "priority": {
+        "label": "Priority"
+      }
+    },
+    "branding": {
+      "siteTitle": {
+        "label": "Site title"
+      },
+      "siteSlogan": {
+        "label": "Site slogan"
+      },
+      "siteFooter": {
+        "label": "Site footer"
+      }
+    },
+    "feedback": {
+      "topic": {
+        "label": "Topic",
+        "placeholder": "Feedback topic"
+      },
+      "message": {
+        "label": "Your Message",
+        "placeholder": "Your message"
+      },
+      "messageType": {
+        "label": "Choose message type"
+      }
+    },
+    "settings": {
+      "apiUmbrella": {
+        "host": {
+          "label": "Host",
+          "placeholder": "https://example.com/"
+        },
+        "apiKey": {
+          "label": "API Key",
+          "placeholder": "xxx"
+        },
+        "authToken": {
+          "label": "Auth Token",
+          "placeholder": "xxx"
+        },
+        "baseUrl": {
+          "label": "Base URL",
+          "placeholder": "https://example.com/api-umbrella/"
+        }
+      }
     }
   },
   "searchField_button": "Search",
@@ -385,6 +442,9 @@
   "statusCheckJustNow": "Just now",
   "statusCheckTitle": "Status",
   "statusCheckUpdated": "Updated:",
+  "statusCheck_ApinfWebApp": "Apinf Web App",
+  "statusCheck_ApiUmbrella": "Api Umbrella",
+  "statusCheck_Elasticsearch": "Elasticsearch",
   "statusCodeCountsChart_title": "HTTP Status Codes",
   "statusCodeCountsChart_help_text": "Click on any HTTP status bar to filter API Request Timeline and API Response Time chart for that specific response type.",
   "umbrella_createuser_error": "Failed to create user on API Umbrella.",
