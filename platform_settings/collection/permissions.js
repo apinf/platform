@@ -1,3 +1,5 @@
+import { Settings } from './';
+
 Settings.allow({
   insert: function() {
     // get settings
