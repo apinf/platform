@@ -1,4 +1,4 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '../../collection';
 
 Template.documentation.onCreated(function(){
   const instance = this;

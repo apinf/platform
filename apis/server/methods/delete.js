@@ -1,4 +1,4 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '/documentation/collection';
 import { ApiBackends } from '/apis/collection/backend';
 import { ApiMetadata } from '/metadata/collection/collection';
 

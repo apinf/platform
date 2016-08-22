@@ -1,4 +1,4 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '../collection';
 import { ApiBackends } from '/apis/collection/backend';
 
 Template.manageApiDocumentationModal.onCreated(function () {

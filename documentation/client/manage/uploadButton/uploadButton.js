@@ -1,4 +1,4 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '../../collection';
 
 Template.manageApiDocumentationModalUploadButton.onRendered(function() {
   // Assign resumable browse to element
