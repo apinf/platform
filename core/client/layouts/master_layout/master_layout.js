@@ -1,3 +1,4 @@
+import { Branding } from '/platform_branding/collection';
 import { ProjectLogo } from '/platform_logo/collection';
 
 Template.masterLayout.created = function () {
@@ -9,7 +10,12 @@ Template.masterLayout.created = function () {
 
 Template.masterLayout.helpers({
   branding: function () {
-    // Get Branding collection content
-    return Branding.findOne();
+    // Check for branding document
+    var branding = Branding.findOne();
+
+    if (branding) {
+      // If branding is available, return it
+      return branding;
+    }
   }
 });

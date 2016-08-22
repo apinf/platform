@@ -1,3 +1,4 @@
+import { Branding } from '/platform_branding/collection';
 import { ProjectLogo } from '/platform_logo/collection';
 
 Template.navbar.onCreated(function() {
@@ -25,25 +26,32 @@ Template.navbar.helpers({
     }
   },
   uploadedProjectLogoLink: function() {
+    // Check for existing branding
+    var branding = Branding.findOne();
 
-    const currentProjectLogoFileId = Branding.findOne().projectLogoFileId;
+    // Make sure branding and project logo exist
+    if (branding && branding.projectLogoFileId) {
+      const currentProjectLogoFileId = Branding.findOne().projectLogoFileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentProjectLogoFileId);
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(currentProjectLogoFileId);
 
-    // Get project logo file Object
-    const currentProjectLogoFile = ProjectLogo.findOne(objectId);
+      // Get project logo file Object
+      const currentProjectLogoFile = ProjectLogo.findOne(objectId);
 
-    // Check if project logo file is available
-    if (currentProjectLogoFile) {
-      // Get API logo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL + "/md5/" + currentProjectLogoFile.md5;
+      // Check if project logo file is available
+      if (currentProjectLogoFile) {
+        // Get API logo file URL
+        return Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL + "/md5/" + currentProjectLogoFile.md5;
+      }
     }
   },
   projectLogoExists: function () {
+    // Get branding if it exists
     const branding = Branding.findOne();
-    if (branding) {
-      const currentProjectLogoFileId = branding.projectLogoFileId;
+
+    // Check if branding and project logo file ID exist
+    if (branding && branding.projectLogoFileId) {
       return true;
     }
   }
