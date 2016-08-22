@@ -14,7 +14,7 @@
                   {{> viewProjectLogo branding=branding }}
                   {{> uploadProjectLogo branding=branding }}
                   {{#if branding}}
-                  {{#autoForm collection="Branding" id="wizardBranding" doc=branding type="update"}}
+                  {{#autoForm collection=brandingCollection id="wizardBranding" doc=branding type="update"}}
                   {{> afQuickField name='siteTitle'}}
                   {{> afQuickField name='siteSlogan'}}
                   {{> afQuickField name='siteFooter'}}

@@ -19,6 +19,10 @@ Template.settingsWizard.helpers({
       return branding;
     }
   },
+  brandingCollection: function () {
+    // Return a reference to Branding collection, for AutoForm
+    return Branding;
+  },
   formType: function () {
     if ( Settings.findOne() ) {
       // Updating existing Settings
