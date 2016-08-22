@@ -1,4 +1,5 @@
 import { Feedback } from './';
+import { ss } from 'ss';
 
 Feedback.helpers({
   'sumOfVotes': function () {
