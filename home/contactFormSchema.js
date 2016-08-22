@@ -1,4 +1,4 @@
-Schemas.contact = new SimpleSchema({
+const ContactFormSchema = new SimpleSchema({
   name: {
     type: String,
     label: TAPi18n.__("contactForm_name_label"),
@@ -28,3 +28,5 @@ Schemas.contact = new SimpleSchema({
     }
   }
 });
+
+export { ContactFormSchema };
