@@ -101,13 +101,6 @@ Router.map(function() {
     render: "branding"
   });
 
-  this.route("profile", {
-    path: "/profile"
-  });
-  this.route("account", {
-    path: "/account"
-  });
-
   this.route('signOut', {
     path: '/sign-out',
     onBeforeAction: function() {
