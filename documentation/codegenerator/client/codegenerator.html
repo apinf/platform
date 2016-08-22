@@ -14,7 +14,11 @@
         {{> quickForm
           id="downloadSDK"
           schema=generateSDK
-          buttonContent="Download" }}
+          buttonContent="Download"
+          doc=getCallRequest }}
+      {{#if statusRequest}}
+        {{> spinner}}
+      {{/if}}
       </div>
       {{> flashMessages}}
     </div>

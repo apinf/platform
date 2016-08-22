@@ -1,15 +1,16 @@
+import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 import { HTTP } from 'meteor/http';
+
 import { LanguageParams, LanguageList, DocumentationFiles } from '/documentation/collection/collection';
-import { ApiBackends } from '/apis/collection/backend';
 
 Template.sdkCodeGeneratorModal.onCreated(function () {
   const instance = this;
 
-  instance.autorun(function () {
-    const apiBackend = ApiBackends.findOne(instance.data.apiBackend._id);
-    // Save apibackend id
-    Session.set('currentApiBackend', apiBackend);
+  instance.callRequest = new ReactiveVar(false);
 
+  instance.autorun(function () {
     // Get documentation file id
     const documentationFileId = instance.data.apiBackend.documentationFileId;
 
@@ -23,13 +24,12 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
 
 Template.sdkCodeGeneratorModal.onDestroyed(function () {
   // Unset session
-  Session.set('currentApiBackend', undefined);
   Session.set('currentDocumentationFileURL', undefined);
 });
 
 Template.sdkCodeGeneratorModal.helpers({
   // Schema for SDK Code Generator form
-  generateSDK: function () {
+  generateSDK () {
     var sdkSchema = new SimpleSchema({
       selectLanguage: {
         type: String,
@@ -42,11 +42,27 @@ Template.sdkCodeGeneratorModal.helpers({
       }
     });
     return sdkSchema;
+  },
+
+  // Give variable callRequest to template
+  statusRequest () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    return instance.callRequest.get();
+  },
+  // Give variable callRequest to autoform as a parameter
+  getCallRequest () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    return instance.callRequest;
   }
+
 });
 
 AutoForm.addHooks('downloadSDK', {
-  onSubmit: function (formValues) {
+  onSubmit: function (formValues, updateDoc, callRequest) {
     // Prevent form from submitting
     this.event.preventDefault();
 
@@ -74,6 +90,9 @@ AutoForm.addHooks('downloadSDK', {
       'swaggerUrl': pathToFile
     };
 
+    // Start spinner when send request
+    callRequest.set(true);
+
     // Send POST request
     HTTP.post(url, { data: options }, function (error, result) {
       // Get information from Swagger API response
@@ -91,6 +110,8 @@ AutoForm.addHooks('downloadSDK', {
         // Otherwise show an error message
         FlashMessages.sendError(response.message);
       }
+      // Finish spinner
+      callRequest.set(false);
     });
   }
 });
