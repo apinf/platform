@@ -1,4 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
+import { ApiBackendRatings } from '/ratings/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder
