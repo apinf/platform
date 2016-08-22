@@ -1,4 +1,6 @@
-Branding = new Mongo.Collection('branding');
+const Branding = new Mongo.Collection('branding');
+
+export { Branding };
 
 Schemas.BrandingSchema = new SimpleSchema({
   projectLogoFileId: {
