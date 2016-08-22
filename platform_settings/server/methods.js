@@ -1,3 +1,4 @@
+import { Settings } from '../collection';
 import { apiUmbrellaSettingsValid } from '/core/lib/helperFunctions/validateSettings';
 
 Meteor.methods({
