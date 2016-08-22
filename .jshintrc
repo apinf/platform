@@ -138,7 +138,6 @@
       // Apinf collections
       "ApiBackends": false,
       "ApiBackendConfigurations": false,
-      "ApiBackendRatings": false,
       "ApiBookmarks": false,
       "ApiDocumentation": false,
       "ApiUmbrellaAdmins": false,
