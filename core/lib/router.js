@@ -1,14 +1,21 @@
-var onAfterAction = function() {
-  var $bd;
-  window.scrollTo(0, 0);
-  $bd = $('.modal-backdrop');
-  $bd.removeClass('in');
-  setTimeout(function() {
-    $bd.remove();
-  }, 300);
-};
+Router.configure({
+  layoutTemplate: "masterLayout",
+  loadingTemplate: "loading",
+  notFoundTemplate: "notFound",
+  routeControllerNameConverter: "camelCase",
+  onBeforeAction: function() {
+    if (Meteor.userId() && !Meteor.user().username) {
+      this.redirect('/profile');
+    }
+    this.next();
+  }
+});
 
-var redirectToSignIn = function () {
+Router.waitOn(function() {
+  return subs.subscribe('user');
+});
+
+const redirectToSignIn = function () {
   if (Meteor.user()) {
     this.next();
   } else {
@@ -17,7 +24,7 @@ var redirectToSignIn = function () {
   }
 };
 
-var redirectToDashboard = function () {
+const redirectToDashboard = function () {
   if (Meteor.user()) {
     this.redirect('/dashboard');
     this.next();
@@ -26,7 +33,7 @@ var redirectToDashboard = function () {
   }
 };
 
-var requireAdminRole = function () {
+const requireAdminRole = function () {
   if (Meteor.user()) {
     // Get user ID
     var userId = Meteor.user()._id;
@@ -63,26 +70,6 @@ const additionalSetupRequired = function () {
     this.next();
 };
 
-this.subs = new SubsManager();
-
-Router.configure({
-  layoutTemplate: "masterLayout",
-  loadingTemplate: "loading",
-  notFoundTemplate: "notFound",
-  routeControllerNameConverter: "camelCase",
-  onBeforeAction: function() {
-    if (Meteor.userId() && !Meteor.user().username) {
-      this.redirect('/profile');
-    }
-    this.next();
-  }
-});
-
-
-Router.waitOn(function() {
-  return subs.subscribe('user');
-});
-
 // check if setup is required before opening any page
 Router.onBeforeAction(additionalSetupRequired, {except: []});
 
@@ -93,8 +80,6 @@ Router.onBeforeAction(requireAdminRole, {only: ['settings', 'branding']});
 // });
 
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
-
-Router.onAfterAction(onAfterAction);
 
 Router.map(function() {
 
