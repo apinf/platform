@@ -1,3 +1,5 @@
+import ApiFlags from '../../collection';
+
 Template.flagApiButton.onCreated(function () {
 
   // Create reference to instance

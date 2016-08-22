@@ -1,3 +1,5 @@
+import ApiFlags from '../collection';
+
 Template.flagApiModal.onCreated(function () {
 
   // Create reference to instance
@@ -8,6 +10,10 @@ Template.flagApiModal.onCreated(function () {
 });
 
 Template.flagApiModal.helpers({
+  apiFlagsCollection () {
+    // Return a reference to the ApiFlags collection
+    return ApiFlags;
+  },
   formType () {
 
     // Create reference to instance
