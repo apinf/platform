@@ -95,3 +95,40 @@ Router.onBeforeAction(requireAdminRole, {only: ['settings', 'branding']});
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
 
 Router.onAfterAction(onAfterAction);
+
+Router.map(function() {
+
+  this.route("settingsWizard", {
+    path: "/settingsWizard",
+    layoutTemplate: "masterLayout",
+    render: "settingsWizard"
+  });
+
+  this.route("accountsAdmin", {
+    path: "/users",
+    layoutTemplate: "masterLayout",
+    render: "accountsAdmin"
+  });
+
+  this.route("branding", {
+    path: "/branding",
+    layoutTemplate: "masterLayout",
+    render: "branding"
+  });
+
+  this.route("profile", {
+    path: "/profile"
+  });
+  this.route("account", {
+    path: "/account"
+  });
+
+  this.route('signOut', {
+    path: '/sign-out',
+    onBeforeAction: function() {
+      Meteor.logout(function() {});
+      this.redirect('/');
+      return this.next();
+    }
+  });
+});
