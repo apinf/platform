@@ -1,6 +1,6 @@
 import { ApiLogos } from '../../collection';
 import { ApiBackends } from '/apis/collection/backend';
-import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
+import { fileNameEndsWith } from '/core/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
   ApiLogos.resumable.on('fileAdded', function(file) {

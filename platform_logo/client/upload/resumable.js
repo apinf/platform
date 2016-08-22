@@ -1,7 +1,7 @@
 import { ProjectLogo } from '../../collection';
 
 import { Branding } from '/platform_branding/collection';
-import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
+import { fileNameEndsWith } from '/core/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
   ProjectLogo.resumable.on('fileAdded', function(file) {

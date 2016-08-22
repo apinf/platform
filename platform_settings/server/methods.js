@@ -1,4 +1,4 @@
-import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
+import { apiUmbrellaSettingsValid } from '/core/lib/helperFunctions/validateSettings';
 
 Meteor.methods({
   'getApiUmbrellaHostName': function () {

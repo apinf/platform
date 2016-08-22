@@ -1,4 +1,4 @@
-import { contactEmailValid } from '/lib/helperFunctions/validateSettings';
+import { contactEmailValid } from '/core/lib/helperFunctions/validateSettings';
 
 Template.homeBody.onCreated(function () {
 

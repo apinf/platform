@@ -1,4 +1,4 @@
-import { Feedback } from '../';
+import { Feedback } from '../collection';
 
 Meteor.methods({
   'deleteFeedback': function(feedbackId) {
