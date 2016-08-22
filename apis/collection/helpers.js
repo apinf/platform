@@ -99,9 +99,7 @@ ApiBackends.helpers({
     // Check that user is logged in
     if( userId ) {
       // Check if user is API manager
-      var isManager = _.includes(this.managerIds, userId);
-
-      if (isManager) {
+      if (this.currentUserIsManager()) {
         return true;
       }
 
