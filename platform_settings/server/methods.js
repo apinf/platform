@@ -12,6 +12,17 @@ Meteor.methods({
 
     return apiUmbrellaHost;
   },
+  'getApiUmbrellaBaseUrl': function () {
+    // Get settnigs
+    const settings = Settings.findOne();
+
+    // Make sure API Umbrella setting exists
+    if (settings && settings.apiUmbrella && settings.apiUmbrella.host) {
+      // Get base url from settings collection
+      var apiUmbrellaBaseUrl = Settings.findOne().apiUmbrella.host;
+      return apiUmbrellaBaseUrl;
+    }
+  },
   'updateMeteorSettings': function() {
     // Updating Meteor.settings from Settings collection
     const settings = Settings.findOne();
