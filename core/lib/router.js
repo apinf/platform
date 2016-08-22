@@ -1,7 +1,12 @@
-import { Schemas } from '/lib/schemas';
-import { ApiBackends } from '/apis/collection/backend';
-
-var onAfterAction;
+var onAfterAction = function() {
+  var $bd;
+  window.scrollTo(0, 0);
+  $bd = $('.modal-backdrop');
+  $bd.removeClass('in');
+  setTimeout(function() {
+    $bd.remove();
+  }, 300);
+};
 
 var redirectToSignIn = function () {
   if (Meteor.user()) {
@@ -77,16 +82,6 @@ Router.configure({
 Router.waitOn(function() {
   return subs.subscribe('user');
 });
-
-onAfterAction = function() {
-  var $bd;
-  window.scrollTo(0, 0);
-  $bd = $('.modal-backdrop');
-  $bd.removeClass('in');
-  setTimeout(function() {
-    $bd.remove();
-  }, 300);
-};
 
 // check if setup is required before opening any page
 Router.onBeforeAction(additionalSetupRequired, {except: []});
