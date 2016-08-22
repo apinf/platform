@@ -1,6 +1,6 @@
 ApiBackendRatings = new Mongo.Collection('apiBackendRatings');
 
-Schemas.ApiBackendRating = new SimpleSchema({
+ApiBackendRatings.schema = new SimpleSchema({
   'apiBackendId': {
     type: String,
     regEx: SimpleSchema.RegEx.Id
@@ -16,7 +16,7 @@ Schemas.ApiBackendRating = new SimpleSchema({
   }
 });
 
-ApiBackendRatings.attachSchema(Schemas.ApiBackendRating);
+ApiBackendRatings.attachSchema(ApiBackendRatings.schema);
 
 ApiBackendRatings.allow({
   insert: function () {
