@@ -12,7 +12,7 @@ Router.configure({
 });
 
 Router.waitOn(function() {
-  return subs.subscribe('user');
+  return this.subscribe('user');
 });
 
 const redirectToSignIn = function () {
