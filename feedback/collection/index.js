@@ -1,6 +1,8 @@
 import ss from 'simple-statistics';
 
-Feedback = new Mongo.Collection('feedback');
+const Feedback = new Mongo.Collection('feedback');
+
+export { Feedback };
 
 Schemas.FeedbackSchema = new SimpleSchema({
   topic: {
