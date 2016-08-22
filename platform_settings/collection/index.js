@@ -1,4 +1,6 @@
-Settings = new Mongo.Collection('Settings');
+const Settings = new Mongo.Collection('Settings');
+
+export { Settings };
 
 SimpleSchema.messages({
   regEx: [
