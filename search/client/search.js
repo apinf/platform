@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 import moment from 'moment';
 
 Template.search.created = function () {
@@ -36,7 +36,7 @@ Template.search.created = function () {
           }
         },
         {
-          backend_host: {
+          url: {
             $regex: searchValue,
             $options: 'i' // case-insensitive option
           }
@@ -47,7 +47,7 @@ Template.search.created = function () {
 
   instance.getSearchResults = function () {
     var query = instance.query.get();
-    return ApiBackends.find(query).fetch();
+    return Apis.find(query).fetch();
   };
 };
 

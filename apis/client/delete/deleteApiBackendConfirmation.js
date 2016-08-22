@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 
 Template.deleteApiBackendConfirmation.onCreated(function() {
   // reference to this template
@@ -35,7 +35,7 @@ Template.deleteApiBackendConfirmation.helpers({
 Template.deleteApiBackendConfirmation.events({
   'click #deleteApi': function() {
     const instance = Template.instance();
-    const apiBackendDoc = ApiBackends.findOne(instance.backendId);
+    const apiBackendDoc = Apis.findOne(instance.backendId);
     const apiUmbrellaApiId = apiBackendDoc.id;
 
     // Disable delete button to prevent multiple clicks
