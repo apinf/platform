@@ -1,4 +1,4 @@
-import { ProjectLogo } from '/logo/collection/collection';
+import { ProjectLogo } from '../';
 
 ProjectLogo.allow({
   insert: function(userId, file) {
