@@ -1,5 +1,5 @@
 import { Feedback } from './';
-import { ss } from 'ss';
+import { ss } from 'simple-statistics';
 
 Feedback.helpers({
   'sumOfVotes': function () {
