@@ -1,4 +1,4 @@
-Schemas.UserProfile = new SimpleSchema({
+Meteor.users.UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
     optional: true
@@ -19,12 +19,12 @@ Schemas.UserProfile = new SimpleSchema({
   }
 });
 // Username must be 3-15 alphanumeric string with hyphens allowed.
-Schemas.RegEx.Username = /^[a-z0-9A-Z_\-]{3,15}$/;
+var usernameRegEx = /^[a-z0-9A-Z_\-]{3,15}$/;
 
-Schemas.User = new SimpleSchema({
+Meteor.users.schema = new SimpleSchema({
   username: {
     type: String,
-    regEx: Schemas.RegEx.Username,
+    regEx: usernameRegEx,
     optional: true
   },
   apiUmbrellaUserId: {
@@ -46,7 +46,7 @@ Schemas.User = new SimpleSchema({
     type: Date
   },
   profile: {
-    type: Schemas.UserProfile
+    type: Meteor.users.UserProfileSchema
   },
   services: {
     type: Object,
@@ -64,13 +64,13 @@ Schemas.User = new SimpleSchema({
 var usernameInvalid = TAPi18n.__("profile-usernameInvalid");
 
 // Define custom validation error messages
-Schemas.User.messages({
+Meteor.users.schema.messages({
   "regEx username": [
-    {exp: Schemas.RegEx.Username, msg: usernameInvalid}
+    {exp: usernameRegEx, msg: usernameInvalid}
   ]
 });
 
-Meteor.users.attachSchema(Schemas.User);
+Meteor.users.attachSchema(Meteor.users.schema);
 
 Meteor.users.allow({
   update: function(userId, user) {
