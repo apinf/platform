@@ -1,3 +1,5 @@
+import { Branding } from '/platform_branding/collection';
+
 Template.settingsWizard.onCreated(function () {
   var instance = this;
   // Subscription to branding collection

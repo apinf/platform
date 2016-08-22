@@ -1,5 +1,7 @@
 import { ProjectLogo } from '../../collection';
 
+import { Branding } from '/platform_branding/collection';
+
 Template.viewProjectLogo.onCreated(function() {
   const instance = this;
   // Subscribe to project logo

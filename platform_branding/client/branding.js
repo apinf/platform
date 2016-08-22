@@ -1,3 +1,5 @@
+import { Branding } from '../collection';
+
 Template.branding.created = function () {
   var instance = this;
   // Subscription to branding collection

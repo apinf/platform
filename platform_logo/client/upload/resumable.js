@@ -1,4 +1,6 @@
 import { ProjectLogo } from '../../collection';
+
+import { Branding } from '/platform_branding/collection';
 import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
