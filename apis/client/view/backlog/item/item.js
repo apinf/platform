@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 import moment from 'moment';
 
 Template.backlogItem.helpers({
@@ -43,7 +43,7 @@ Template.backlogItem.helpers({
     var apiBackendId = this.apiBackend._id;
 
     // Find related API Backend that contains "managerIds" field
-    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+    var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
 
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();

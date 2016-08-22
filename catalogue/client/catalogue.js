@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 
 import _ from 'lodash';
 
@@ -32,7 +32,7 @@ Template.catalogue.onCreated(function () {
     let pages = [];
 
     const currentPageNumber = instance.currentPageNumber.get() + 1;
-    const apisCount = ApiBackends.find().count();
+    const apisCount = Apis.find().count();
     const apisPerPage = instance.apisPerPage.get();
     const totalPagesCount = (apisCount / apisPerPage + 1) | 0;
 
@@ -98,7 +98,7 @@ Template.catalogue.helpers({
   // Catalogue
   apiBackendsCount () {
     // Count the number of API Backends in current subscription
-    return ApiBackends.find().count();
+    return Apis.find().count();
   },
   apiBackends () {
     // Get reference to template instance
@@ -122,7 +122,7 @@ Template.catalogue.helpers({
     sortOptions.sort[sortBy] = sortDirection;
 
     // Get sorted list of API Backends
-    const apis = ApiBackends.find({}, sortOptions).fetch();
+    const apis = Apis.find({}, sortOptions).fetch();
 
     // Pagination
     const arrStart = instance.apisPerPage.get() * instance.currentPageNumber.get();
@@ -155,7 +155,7 @@ Template.catalogue.helpers({
   },
   totalPagesCount () {
     const instance = Template.instance();
-    const apisCount = ApiBackends.find().count();
+    const apisCount = Apis.find().count();
     const apisPerPage = instance.apisPerPage.get();
 
     // Calculate total pages cound and round
@@ -188,7 +188,7 @@ Template.catalogue.helpers({
     const currentPageNumber = instance.currentPageNumber.get();
 
     // Get table dataset length
-    const apisCount = ApiBackends.find().count();
+    const apisCount = Apis.find().count();
 
     // Check if current page is not the last one in the table
     if (currentPageNumber < (apisCount / apisPerPage - 1)) {
@@ -261,7 +261,7 @@ Template.catalogue.events({
 
     const apisPerPage = instance.apisPerPage.get();
 
-    const apisCount = ApiBackends.find().count();
+    const apisCount = Apis.find().count();
 
     // Check if page is not last one
     if (currentPageNumber < (apisCount / apisPerPage - 1)) {

@@ -1,5 +1,5 @@
 import { ApiMetadata } from '/metadata/collection/collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 
 ApiMetadata.allow({
   "insert": function (userId, doc) {
@@ -10,7 +10,7 @@ ApiMetadata.allow({
       return false;
     } else {
       // Find related API Backend, select only "managerIds" field
-      var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+      var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
 
       // Check if current user can edit API Backend
       return apiBackend.currentUserCanEdit();
@@ -21,7 +21,7 @@ ApiMetadata.allow({
     var apiBackendId = doc.apiBackendId;
 
     // Find related API Backend, select only "managerIds" field
-    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+    var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
 
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();
