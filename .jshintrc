@@ -132,7 +132,6 @@
 
       // Apinf internal globals
       "Config": false,
-      "Schemas": false,
       "SEO": false,
       "Utils": false,
 
@@ -146,12 +145,6 @@
       "ApiUmbrellaUsers": false,
       "RateLimit": false,
 
-      // Apinf schemas (TODO: combine these under the Schemas object)
-      "ApiBackendsSchema": false,
-      "ApiUmbrellaAdminsSchema": false,
-      "ApiUmbrellaUsersSchema": false,
-      "RateLimitSchema": false,
-
       // Apinf packages
       "AccountsTemplates": false,
       "apiUmbrellaWeb": false,
@@ -160,7 +153,6 @@
       "FlashMessages": false,
       "FS": false,
       "GitHub": false,
-      "NCSchemas": false,
       "PrettyEmail": false,
       "Roles": false,
       "sAlert": false,

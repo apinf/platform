@@ -1,6 +1,6 @@
 FeedbackVotes = new Mongo.Collection('feedbackVotes');
 
-Schemas.FeedbackVotesSchema = new SimpleSchema({
+FeedbackVotes.schema = new SimpleSchema({
   /*
   feedbackId - string - the ID of the Feedback document
   userId - string - the ID of the user
@@ -18,7 +18,7 @@ Schemas.FeedbackVotesSchema = new SimpleSchema({
   }
 });
 
-FeedbackVotes.attachSchema(Schemas.FeedbackVotesSchema);
+FeedbackVotes.attachSchema(FeedbackVotes.schema);
 
 FeedbackVotes.allow({
   insert: function () {

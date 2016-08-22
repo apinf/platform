@@ -1,7 +1,7 @@
-Schemas.RolesSchema = new SimpleSchema({
+Meteor.roles.schema = new SimpleSchema({
   name: {
     type: String
   }
 });
 
-Meteor.roles.attachSchema(Schemas.RolesSchema);
+Meteor.roles.attachSchema(Meteor.roles.schema);

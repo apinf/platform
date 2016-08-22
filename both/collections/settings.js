@@ -6,7 +6,7 @@ SimpleSchema.messages({
   ]
 });
 
-Schemas.SettingsSchema = new SimpleSchema({
+Settings.schema = new SimpleSchema({
   apinf: {
     type: Object,
     optional: true
@@ -174,7 +174,7 @@ Schemas.SettingsSchema = new SimpleSchema({
   }
 });
 
-Settings.attachSchema(Schemas.SettingsSchema);
+Settings.attachSchema(Settings.schema);
 
 Meteor.startup(function () {
 
