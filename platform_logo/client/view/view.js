@@ -1,4 +1,4 @@
-import { ProjectLogo } from '/platform_logo/collection';
+import { ProjectLogo } from '../../collection';
 
 Template.viewProjectLogo.onCreated(function() {
   const instance = this;
