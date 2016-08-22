@@ -1,3 +1,5 @@
+import { Settings } from '/platform_settings/collection';
+
 Meteor.methods({
   "isInitialSetupComplete": function() {
     // check if settings details are complete

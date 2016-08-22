@@ -1,3 +1,5 @@
+import { Settings } from '/platform_settings/collection';
+
 Template.apiDocumentationEditor.onCreated(function () {
   const instance = this;
   // Subscribe to documentation editor settings

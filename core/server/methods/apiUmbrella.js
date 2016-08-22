@@ -1,4 +1,5 @@
 import { apiUmbrellaSettingsValid } from '/core/lib/helperFunctions/validateSettings';
+import { Settings } from '/platform_settings/collection';
 
 Meteor.methods({
   "syncApiUmbrellaUsers": function () {

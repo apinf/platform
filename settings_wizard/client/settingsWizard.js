@@ -1,4 +1,5 @@
 import { Branding } from '/platform_branding/collection';
+import { Settings } from '/platform_settings/collection';
 
 Template.settingsWizard.onCreated(function () {
   var instance = this;
@@ -34,6 +35,10 @@ Template.settingsWizard.helpers({
   },
   editDoc: function(){
     return Settings.findOne();
+  },
+  settingsCollection () {
+    // Retuurn a reference to Settings collection
+    return Settings;
   }
 });
 

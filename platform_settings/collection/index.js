@@ -1,3 +1,3 @@
-const Settings = new Mongo.Collection('Settings');
+const Settings = new Mongo.Collection('settings');
 
 export { Settings };

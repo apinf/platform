@@ -1,4 +1,5 @@
 import { ContactFormSchema } from '../contactFormSchema';
+import { Settings } from '/platform_settings/collection';
 
 Meteor.methods({
   sendEmail: function(doc) {

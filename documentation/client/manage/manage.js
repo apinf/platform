@@ -1,5 +1,6 @@
 import { DocumentationFiles } from '../../collection';
 import { ApiBackends } from '/apis/collection/backend';
+import { Settings } from '/platform_settings/collection';
 
 Template.manageApiDocumentationModal.onCreated(function () {
 

@@ -1,3 +1,5 @@
+import { Settings } from '../collection';
+
 Meteor.publish('settings', function(){
   return Settings.find();
 });
