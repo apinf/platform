@@ -1,3 +1,5 @@
+import { ApiFlags } from '../';
+
 Meteor.publish('singleApiFlag', (apiBackendId) => {
 
   // Fetch api flag by apibackend id
