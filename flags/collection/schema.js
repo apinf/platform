@@ -1,3 +1,5 @@
+import { ApiFlags } from './';
+
 ApiFlags.schema = new SimpleSchema({
   reason: {
     type: String,

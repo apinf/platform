@@ -1,3 +1,5 @@
+import { ApiFlags } from './';
+
 ApiFlags.allow({
   insert: function (userId) {
     return Roles.userIsInRole(userId, ['admin']);
