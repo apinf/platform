@@ -1,4 +1,4 @@
-import { Feedback } from '/feedback/collection';
+import { Feedback } from '../../collection';
 
 Template.feedbackForm.helpers({
   feedbackCollection () {
