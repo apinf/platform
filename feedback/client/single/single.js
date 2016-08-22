@@ -1,3 +1,5 @@
+import { Feedback } from '../../';
+
 Template.singleFeedback.created = function () {
   // Get reference to current feedback
   var feedback = this.data;
