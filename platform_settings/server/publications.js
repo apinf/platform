@@ -14,4 +14,3 @@ Meteor.publish("singleSetting", function (setting) {
 
   return cursor;
 });
-
