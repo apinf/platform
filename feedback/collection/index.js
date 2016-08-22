@@ -4,12 +4,6 @@ const Feedback = new Mongo.Collection('feedback');
 
 export { Feedback };
 
-Feedback.allow({
-  insert: function () {
-    return true;
-  }
-});
-
 Feedback.helpers({
   'sumOfVotes': function () {
     // Get all votes for current feedback
