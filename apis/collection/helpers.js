@@ -2,6 +2,7 @@ import ss from 'simple-statistics';
 import moment from 'moment';
 import { ApiBackends } from '/apis/collection/backend';
 import { ApiBackendRatings } from '/ratings/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 import _ from 'lodash';
 
 ApiBackends.helpers({

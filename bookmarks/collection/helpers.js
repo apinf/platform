@@ -1,3 +1,4 @@
+import { ApiBookmarks } from './';
 import { ApiBackends } from '/apis/collection/backend';
 
 ApiBookmarks.helpers({
