@@ -1,3 +1,4 @@
+import { ApiBookmarks } from '../collection';
 import { ApiBackends } from '/apis/collection/backend';
 
 Meteor.methods({
