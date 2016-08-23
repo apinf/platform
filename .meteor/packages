@@ -12,17 +12,11 @@ aldeed:collection2
 aldeed:simple-schema
 fortawesome:fontawesome
 raix:handlebar-helpers
-# cfs:standard-packages
-# cfs:gridfs
 aldeed:template-extension
-yogiben:helpers
 iron:router
 yogiben:autoform-modals
-yogiben:pretty-email
-multiply:iron-router-progress
 spiderable@1.0.13
 accounts-ui@1.1.9
-jparker:gravatar
 tap:i18n
 useraccounts:bootstrap
 service-configuration@1.0.10
@@ -32,14 +26,12 @@ zimme:iron-router-active
 matb33:collection-hooks
 dburles:collection-helpers
 reywood:publish-composite
-natestrauser:animate-css
 meteorhacks:subs-manager
 fastclick@1.0.12
 accounts-github@1.0.10
 percolate:synced-cron
 twbs:bootstrap
 reactive-var@1.0.10
-aldeed:tabular
 benmgreene:moment-range
 email@1.1.16
 zimme:active-route
@@ -64,10 +56,8 @@ check@1.2.3
 useraccounts:iron-routing
 pahans:inline-help
 dandv:jquery-rateit
-# yogiben:autoform-file
 harrison:papa-parse
 olragon:uri-js
-forwarder:autoform-wizard
 universe:reactive-queries
 ecmascript@0.5.7
 simple:reactive-method
@@ -75,7 +65,6 @@ sacha:spin
 tap:i18n-ui
 kadira:dochead
 gwendall:autoform-i18n
-forwarder:autoform-wizard-iron-router
 peppelg:bootstrap-3-modal
 apinf:api-umbrella
 standard-minifier-css@1.1.8

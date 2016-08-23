@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -38,7 +38,7 @@ Template.dashboard.onCreated(function () {
     if (instance.subscriptionsReady()) {
 
       // Get APIs managed by user
-      const apis = ApiBackends.find().fetch();
+      const apis = Apis.find().fetch();
 
       // Init varuable to keep elasticsearch sub-query
       let prefixesQuery = [];

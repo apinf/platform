@@ -1,4 +1,3 @@
-import { ApiBackends } from '/apis/collection/backend';
 import moment from 'moment';
 
 Template.backlogItem.helpers({
@@ -39,14 +38,8 @@ Template.backlogItem.helpers({
      Make sure user can edit API Backend before allowing Metadata permissions
     */
 
-    // Get current API backend ID
-    var apiBackendId = this.apiBackend._id;
-
-    // Find related API Backend that contains "managerIds" field
-    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
-
     // Check if current user can edit API Backend
-    return apiBackend.currentUserCanEdit();
+    return this.apiBackend.currentUserCanEdit();
   },
   currentUserIsOwner: function (backlogItem) {
     // Get current User ID

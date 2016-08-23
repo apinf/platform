@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 Meteor.methods({
   "toggleBookmarkApi": function (backendId, currentUserId) {
@@ -41,13 +41,13 @@ Meteor.methods({
     };
 
     // Get reference to API Backend
-    const apiBackend = ApiBackends.findOne(backendId);
+    const apiBackend = Apis.findOne(backendId);
 
     // Get the API Backend bookmark count
     const bookmarkCount = apiBackend.getBookmarkCount();
 
     // Update the API Backend bookmark count
-    ApiBackends.update(apiBackend, {$set: { bookmarkCount }});
+    Apis.update(apiBackend, {$set: { bookmarkCount }});
 
     return apiIds;
   }

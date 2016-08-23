@@ -1,6 +1,15 @@
 <template name="userMenu">
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{niceName User._id}} <i class="fa fa-chevron-down"></i></a>
+    <a
+      href="#"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+      aria-haspopup="true"
+      aria-expanded="false">
+        {{ user.username }}&nbsp;
+        <i class="fa fa-chevron-down"></i>
+    </a>
     <ul class="dropdown-menu">
       <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
       <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
