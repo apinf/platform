@@ -1,4 +1,4 @@
-import { ApiBackends } from './';
+import { ApiBacklogItems } from './';
 
 ApiBacklogItems.attachSchema(new SimpleSchema({
   title: {
