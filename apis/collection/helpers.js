@@ -1,6 +1,8 @@
 import ss from 'simple-statistics';
 import moment from 'moment';
 import { ApiBackends } from '/apis/collection/backend';
+import { ApiBackendRatings } from '/ratings/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 import _ from 'lodash';
 
 ApiBackends.helpers({
@@ -99,9 +101,7 @@ ApiBackends.helpers({
     // Check that user is logged in
     if( userId ) {
       // Check if user is API manager
-      var isManager = _.includes(this.managerIds, userId);
-
-      if (isManager) {
+      if (this.currentUserIsManager()) {
         return true;
       }
 

@@ -1,3 +1,5 @@
+import { ApiBookmarks } from '../collection';
+
 Template.favourite.created = function () {
   // Get reference to template instance
   var instance = this;

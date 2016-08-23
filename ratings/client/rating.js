@@ -1,4 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
+import { ApiBackendRatings } from '/ratings/collection';
 
 Template.apiBackendRating.created = function () {
   // Get reference to template instance

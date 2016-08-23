@@ -130,28 +130,6 @@
       "$": false,               // jQuery
       "Router": false,           // iron-router
 
-      // Apinf internal globals
-      "Config": false,
-      "Schemas": false,
-      "SEO": false,
-      "Utils": false,
-
-      // Apinf collections
-      "ApiBackends": false,
-      "ApiBackendConfigurations": false,
-      "ApiBackendRatings": false,
-      "ApiBookmarks": false,
-      "ApiDocumentation": false,
-      "ApiUmbrellaAdmins": false,
-      "ApiUmbrellaUsers": false,
-      "RateLimit": false,
-
-      // Apinf schemas (TODO: combine these under the Schemas object)
-      "ApiBackendsSchema": false,
-      "ApiUmbrellaAdminsSchema": false,
-      "ApiUmbrellaUsersSchema": false,
-      "RateLimitSchema": false,
-
       // Apinf packages
       "AccountsTemplates": false,
       "apiUmbrellaWeb": false,
@@ -160,7 +138,6 @@
       "FlashMessages": false,
       "FS": false,
       "GitHub": false,
-      "NCSchemas": false,
       "PrettyEmail": false,
       "Roles": false,
       "sAlert": false,

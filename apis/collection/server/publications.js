@@ -1,4 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
+import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.publish('allApiBackends', function () {
   // Check if the user is signed in

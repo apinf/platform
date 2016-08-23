@@ -4,7 +4,7 @@ const ApiBackends = new Mongo.Collection('apiBackends');
 SimpleSchema.RegEx.Port = new RegExp(/^[0-9]{1,5}$/);
 SimpleSchema.RegEx.Prefix = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
 
-Schemas.Settings = new SimpleSchema({
+ApiBackends.SettingsSchema = new SimpleSchema({
   disable_api_key: {
     type: Boolean,
     optional: true,
@@ -25,7 +25,7 @@ Schemas.Settings = new SimpleSchema({
   }
 });
 
-Schemas.ApiBackendsSchema = new SimpleSchema({
+ApiBackends.schema = new SimpleSchema({
   id: {
     type: String,
     optional: true
@@ -283,7 +283,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   },
   // Settings, check Schema definition top of file!
   settings: {
-    type: Schemas.Settings,
+    type: ApiBackends.SettingsSchema,
     optional: true,
   },
   anonymous_rate_limit_behavior: {
@@ -682,7 +682,7 @@ Schemas.ApiBackendsSchema = new SimpleSchema({
   }
 });
 
-ApiBackends.attachSchema(Schemas.ApiBackendsSchema);
+ApiBackends.attachSchema(ApiBackends.schema);
 
 SimpleSchema.messages({
   // RegEx messages

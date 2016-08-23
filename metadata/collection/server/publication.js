@@ -1,4 +1,4 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '../';
 
 Meteor.publish("apiMetadata", function (apiBackendId) {
   // Get metadata document for API Backend
