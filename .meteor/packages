@@ -72,3 +72,4 @@ standard-minifier-js@1.1.8
 vsivsi:file-collection
 deepwell:bootstrap-datepicker2
 pfafman:filesaver
+percolate:migrations
