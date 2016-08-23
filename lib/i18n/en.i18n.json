@@ -351,6 +351,7 @@
       }
     }
   },
+  "sdkCodeGeneratorModal_errorText": "Your file is not supported by the generator. Please upload the correct file",
   "sdkCodeGeneratorModal_Title": "Generate SDK file",
   "searchField_button": "Search",
   "searchField_placeholder": "Search...",

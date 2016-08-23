@@ -1,9 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
-import { HTTP } from 'meteor/http';
 
-import { LanguageParams, LanguageList, DocumentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '/documentation/collection/collection';
 
 Template.sdkCodeGeneratorModal.onCreated(function () {
   const instance = this;
@@ -30,7 +29,7 @@ Template.sdkCodeGeneratorModal.onDestroyed(function () {
 Template.sdkCodeGeneratorModal.helpers({
   // Schema for SDK Code Generator form
   generateSDK () {
-    var sdkSchema = new SimpleSchema({
+    const sdkSchema = new SimpleSchema({
       selectLanguage: {
         type: String,
         allowedValues: LanguageList,
@@ -43,7 +42,6 @@ Template.sdkCodeGeneratorModal.helpers({
     });
     return sdkSchema;
   },
-
   // Give variable callRequest to template
   statusRequest () {
     // Get reference to template instance
@@ -57,61 +55,5 @@ Template.sdkCodeGeneratorModal.helpers({
     const instance = Template.instance();
 
     return instance.callRequest;
-  }
-
-});
-
-AutoForm.addHooks('downloadSDK', {
-  onSubmit: function (formValues, updateDoc, callRequest) {
-    // Prevent form from submitting
-    this.event.preventDefault();
-
-    // Get selected language from dropdown
-    const selectedLanguage = formValues.selectLanguage;
-
-    // Create parameter for URL on depecing selected language
-    // Check on specific language name
-    let languageHashName = LanguageParams[selectedLanguage];
-
-    if (_.isUndefined(languageHashName)) {
-        // Use standart method for creating parameter
-      languageHashName = selectedLanguage.toLowerCase();
-      languageHashName = languageHashName.replace(/\s+/g, '-');
-    }
-
-    // Create URL to send request
-    const url = 'https://generator.swagger.io/api/gen/clients/' + languageHashName;
-
-    // Get path to documentation file
-    const pathToFile = Session.get('currentDocumentationFileURL');
-
-    // Create POST options
-    const options = {
-      'swaggerUrl': pathToFile
-    };
-
-    // Start spinner when send request
-    callRequest.set(true);
-
-    // Send POST request
-    HTTP.post(url, { data: options }, function (error, result) {
-      // Get information from Swagger API response
-      let response = JSON.parse(result.content);
-
-      if (result.statusCode === 200) {
-        // Hide modal
-        Modal.hide('sdkCodeGeneratorModal');
-
-        // Go to link and download file
-        window.location.href = response.link;
-      } else {
-        $('button').removeAttr('disabled');
-
-        // Otherwise show an error message
-        FlashMessages.sendError(response.message);
-      }
-      // Finish spinner
-      callRequest.set(false);
-    });
   }
 });
