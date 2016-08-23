@@ -7,18 +7,15 @@ Schemas.BrandingSchema = new SimpleSchema({
   },
   siteTitle: {
     type: String,
-    optional: true,
-    label: 'Site title'
+    optional: true
   },
   siteSlogan: {
     type: String,
-    optional: true,
-    label: 'Site slogan'
+    optional: true
   },
   siteFooter: {
     type: String,
-    optional: true,
-    label: 'Site footer'
+    optional: true
   },
   socialMedia: {
     type: [Object],
@@ -36,6 +33,9 @@ Schemas.BrandingSchema = new SimpleSchema({
     }
   }
 });
+
+// i18n translation
+Schemas.BrandingSchema.i18n("schemas.branding");
 
 Branding.attachSchema(Schemas.BrandingSchema);
 
