@@ -35,17 +35,10 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="{{ pathFor route='addApiBackend-wizard' }}">
+                <a href="{{ pathFor route='addApi' }}">
                   {{_ "masterLayout_sidebar_AddAPIBackend"}}
                 </a>
               </li>
-              {{# if isInRole 'manager' }}
-              <li>
-                <a href="{{pathFor route='manageApiBackends'}}">
-                  {{_ "masterLayout_sidebar_ManageAPIBackends"}}
-                </a>
-              </li>
-              {{/ if }}
             </ul>
           </li>
           {{ /if }}

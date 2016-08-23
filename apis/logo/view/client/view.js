@@ -1,5 +1,5 @@
 import { ApiLogo } from '/apis/logo/collection/collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 
 Template.viewApiLogo.onCreated(function() {
   const instance = this;
@@ -13,7 +13,7 @@ Template.viewApiLogo.helpers({
     // Get API current API Backend from template data
     const currentApiBackend = Template.currentData().apiBackend;
 
-    const currentApiLogoFileId = ApiBackends.findOne(currentApiBackend._id).apiLogoFileId;
+    const currentApiLogoFileId = Apis.findOne(currentApiBackend._id).apiLogoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);

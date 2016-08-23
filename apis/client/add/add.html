@@ -1,0 +1,13 @@
+<template name="addApi">
+  <div class="container">
+    {{#autoForm collection=ApisCollection id="addApiForm" type="insert"}}
+      <fieldset>
+        <legend>Add an API</legend>
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='description'}}
+        {{> afQuickField name='url'}}
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Add API</button>
+    {{/autoForm}}
+  </div>
+</template>

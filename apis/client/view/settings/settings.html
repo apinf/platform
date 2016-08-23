@@ -12,31 +12,14 @@
       </p>
       {{> uploadApiLogo apiBackend=apiBackend }}
       <hr class="panel-hr" />
-      {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
+      {{#autoForm collection=formCollection doc=apiBackend id="aboutApiForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='description'}}
+      {{> afQuickField name='url'}}
       <div id="form-buttons">
         <button type="submit" class="btn btn-success" id="save-settings">Save</button>
       </div>
       {{/autoForm}}
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        {{_ "viewApiBackendSettings_panelTitleEdit" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      <h3>{{_ "viewApiBackendSettings_editApiSettingsTitle" }}</h3>
-      <p>
-        {{_ "viewApiBackendSettings_editApiSettingsText" }}
-      </p>
-      <a
-         href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-         class="btn btn-primary">
-        {{_ "view_ApiBackend_Details_editButtonText" }}
-      </a>
     </div>
   </div>
   <div class="panel panel-danger">
