@@ -34,8 +34,12 @@ Template.favourite.helpers({
     // Make sure bookmark subscription is ready
     if (instance.bookmarksSubscription.ready()) {
 
-      // Get current user bookmark (should be only one API Bookmarks result available)
-      var userBookmarks = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiBackendId });
+      // Get current user bookmark
+      // (should be only one API Bookmarks result available)
+      var userBookmarks = ApiBookmarks.findOne({
+        userId: Meteor.user()._id,
+        apiIds: apiBackendId
+      });
 
       // Make sure user has bookmarks
       if (userBookmarks) {
