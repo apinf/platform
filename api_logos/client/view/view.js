@@ -26,6 +26,7 @@ Template.viewApiLogo.helpers({
 
         // Get API logo file URL
         // TODO: shorten this line, possibly dividing it in two steps
+        // Also, make sure the /md5/ should still be in the path
         return Meteor.absoluteUrl().slice(0, -1) + ApiLogos.baseURL + "/md5/" + currentApiLogoFile.md5;
       }
     }
