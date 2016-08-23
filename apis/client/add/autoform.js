@@ -3,7 +3,7 @@ AutoForm.hooks({
     before: {
       insert (api) {
         // Get current user ID
-        const userId = Meteor.userId()
+        const userId = Meteor.userId();
 
         // Add current user as API manager
         api.managerIds = [userId];
@@ -14,7 +14,7 @@ AutoForm.hooks({
     },
     onSuccess (formType, apiId) {
       // Redirect to newly added API
-      Router.go("viewApiBackend", { _id: apiId });
+      Router.go("viewApi", { _id: apiId });
     }
   }
 });
