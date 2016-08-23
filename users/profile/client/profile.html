@@ -1,7 +1,7 @@
 <template name="profile">
   <div class="container">
     <div class="row userProfile" id="champion-messages">
-      {{#autoForm id="updateProfile" collection=Users doc=User type="update"}}
+      {{#autoForm id="updateProfile" collection=usersCollection doc=currentUser type="update"}}
       <div class="panel panel-default">
         <div class="panel-heading profile-header">{{_ "profile_Header"}}</div>
         <div class="panel-body">
