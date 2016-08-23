@@ -5,7 +5,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <ul class="nav nav-pills nav-stacked">
-              <li><a href="#" class="active2">Branding<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              <li><a href="#" class="active2">{{_ "branding"}}<span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
             </ul>
           </div>
         </div>
@@ -13,7 +13,7 @@
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Project Branding</h3>
+            <h3 class="panel-title">{{_ "branding_panel_title"}}</h3>
           </div>
           <div class="panel-body">
             {{#if branding}}
@@ -25,7 +25,7 @@
             {{> afQuickField name='siteFooter'}}
             {{> afQuickField name='socialMedia'}}
             <div id="form-buttons">
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-primary">{{_ "branding_update"}}</button>
             </div>
             {{/autoForm}}
             {{else}}
@@ -35,7 +35,7 @@
             {{> afQuickField name='siteFooter'}}
             {{> afQuickField name='socialMedia'}}
             <div id="form-buttons">
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary">{{_ "branding_save"}}</button>
             </div>
             {{/autoForm}}
             {{/if}}

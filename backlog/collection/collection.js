@@ -5,24 +5,17 @@ ApiBacklogItems = new Mongo.Collection("apiBacklogItems");
 ApiBacklogItems.attachSchema(new SimpleSchema({
   title: {
     type: String,
-    label: "Title",
-    max: 100,
-    autoform: {
-      placeholder: "Title"
-    }
+    max: 100
   },
   details: {
     type: String,
-    label: "Details",
     max: 1000,
     autoform: {
-      rows: 5,
-      placeholder: "Description"
+      rows: 5
     }
   },
   priority: {
     type: Number,
-    label: 'Priority',
     min:0,
     max:2,
     autoform: {
@@ -68,7 +61,7 @@ ApiBacklogItems.attachSchema(new SimpleSchema({
       return new Date();
     }
   }
-}));
+}).i18n("schemas.backlog"));
 
 ApiBacklogItems.allow({
   insert: function (userId, backlog) {
