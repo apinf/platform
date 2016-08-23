@@ -1,6 +1,8 @@
 import { ApiBackends } from '/apis/collection/backend';
 
-ApiBookmarks = new Mongo.Collection('apiBookmarks');
+const ApiBookmarks = new Mongo.Collection('apiBookmarks');
+
+export { ApiBookmarks };
 
 ApiBookmarks.helpers({
   apis : function() {
