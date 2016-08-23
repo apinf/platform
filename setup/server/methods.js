@@ -1,5 +1,5 @@
 Meteor.methods({
-  "isInitialSetupComplete": function() {
+  isInitialSetupComplete () {
     // Get branding and settings documents if available
     const settings = Settings.findOne();
     const branding = Branding.findOne();
