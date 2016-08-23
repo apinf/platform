@@ -115,6 +115,7 @@
   "documentation_APICall_Warning_Message": "API calls (PUT, POST, or DELETE) from Swagger are real calls.",
   "documentation_APICall_Warning_Title": "Warning!",
   "documentation_Link_Title": "Link",
+  "documentation_manageDocumentation_buttonText": "Manage",
   "documentation_No_Link_Manager_Message": "You can add one using Manage API feature.",
   "documentation_No_Link_Message": "No documentation link is available.",
   "documentation_No_Swagger_Manager_Message": "You can add one using Manage API feature.",
