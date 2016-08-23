@@ -1,5 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 import { ApiMetadata } from '/metadata/collection/collection';
 
 Meteor.methods({
@@ -14,12 +14,12 @@ Meteor.methods({
     // Remove metadata
     ApiMetadata.remove({"apiBackendId": apiBackendId});
     // Finally remove the API
-    ApiBackends.remove(apiBackendId);
+    Apis.remove(apiBackendId);
   },
   // Remove API documentation file
   removeApiDoc (apiBackendId) {
     // Get API object
-    const api = ApiBackends.findOne(apiBackendId);
+    const api = Apis.findOne(apiBackendId);
     // Get documentationFileId
     const documentationFileId = api.documentationFileId;
     // Convert to Mongo ObjectID

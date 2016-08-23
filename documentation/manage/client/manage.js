@@ -1,5 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection/apis';
 
 Template.manageApiDocumentationModal.onCreated(function () {
 
@@ -29,7 +29,7 @@ Template.manageApiDocumentationModal.onCreated(function () {
   InlineHelp.initHelp(helpTexts);
 
   instance.autorun(function () {
-    const apiBackend = ApiBackends.findOne(instance.data.apiBackend._id);
+    const apiBackend = Apis.findOne(instance.data.apiBackend._id);
     // Save apibackend id
     Session.set('currentApiBackend', apiBackend);
   });
@@ -62,7 +62,7 @@ Template.manageApiDocumentationModal.events({
       DocumentationFiles.remove(objectId);
 
       // Remove documenation file id field
-      ApiBackends.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
+      Apis.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
 
       sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
 
@@ -111,6 +111,6 @@ Template.manageApiDocumentationModal.helpers({
     }
   },
   formCollection() {
-    return ApiBackends;
+    return Apis;
   }
 });

@@ -9,7 +9,7 @@ Template.viewApiBackendStatus.created = function() {
   // attaches function to template instance to be able to call it in outside
   instance.getApiStatus = function (url) {
 
-    Meteor.call("getApiStatus", url, function (err, status) {
+    Meteor.call("getApiStatus", apiBackend.url, function (err, status) {
 
       // Status object contents:
       // status = {
