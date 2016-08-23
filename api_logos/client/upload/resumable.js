@@ -4,11 +4,11 @@ import { fileNameEndsWith } from '/core/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
   ApiLogos.resumable.on('fileAdded', function(file) {
-    return ApiLogo.insert({
+    return ApiLogos.insert({
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type
-    }, function(err, apiLogoFile) {
+    }, function(err) {
       if (err) {
         console.warn("File creation failed!", err);
         return;
@@ -29,7 +29,7 @@ Meteor.startup( function() {
 
         sAlert.success(TAPi18n.__('apiLogo_resumable_successfully_uploaded'));
 
-        return ApiLogo.resumable.upload();
+        return ApiLogos.resumable.upload();
       } else {
 
         sAlert.error(TAPi18n.__('apiLogo_resumable_acceptedExtensions'));
