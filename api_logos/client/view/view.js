@@ -1,5 +1,4 @@
 import { ApiLogos } from '../../collection';
-import { ApiBackends } from '/apis/collection/backend';
 
 Template.viewApiLogo.onCreated(function() {
   const instance = this;
@@ -13,19 +12,22 @@ Template.viewApiLogo.helpers({
     // Get API current API Backend from template data
     const currentApiBackend = Template.currentData().apiBackend;
 
-    const currentApiLogoFileId = ApiBackends.findOne(currentApiBackend._id).apiLogoFileId;
+    if (currentApiBackend && currentApiBackend.apiLogoFileId) {
+      const currentApiLogoFileId = currentApiBackend.apiLogoFileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
 
-    // Get API logo file Object
-    const currentApiLogoFile = ApiLogos.findOne(objectId);
+      // Get API logo file Object
+      const currentApiLogoFile = ApiLogos.findOne(objectId);
 
-    // Check if API logo file is available
-    if (currentApiLogoFile) {
+      // Check if API logo file is available
+      if (currentApiLogoFile) {
 
-      // Get API logo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + ApiLogos.baseURL + "/md5/" + currentApiLogoFile.md5;
+        // Get API logo file URL
+        // TODO: shorten this line, possibly dividing it in two steps
+        return Meteor.absoluteUrl().slice(0, -1) + ApiLogos.baseURL + "/md5/" + currentApiLogoFile.md5;
+      }
     }
   },
   apiLogoExists: function () {
