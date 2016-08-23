@@ -5,7 +5,7 @@ const ApiLogos = new FileCollection('ApiLogos', {
     {
       method: 'get',
       path: '/md5/:md5',
-      lookup: function(params, query) {
+      lookup: function(params) {
         return {
           md5: params.md5
         };
