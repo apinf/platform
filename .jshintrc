@@ -130,19 +130,6 @@
       "$": false,               // jQuery
       "Router": false,           // iron-router
 
-      // Apinf internal globals
-      "Config": false,
-      "SEO": false,
-      "Utils": false,
-
-      // Apinf collections
-      "ApiBackends": false,
-      "ApiBackendConfigurations": false,
-      "ApiDocumentation": false,
-      "ApiUmbrellaAdmins": false,
-      "ApiUmbrellaUsers": false,
-      "RateLimit": false,
-
       // Apinf packages
       "AccountsTemplates": false,
       "apiUmbrellaWeb": false,
