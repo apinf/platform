@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '../';
 
 Meteor.publish('allApiBackends', function () {
   // Check if the user is signed in

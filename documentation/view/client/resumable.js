@@ -1,5 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {

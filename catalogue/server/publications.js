@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder

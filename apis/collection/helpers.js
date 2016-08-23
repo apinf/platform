@@ -1,6 +1,7 @@
+import { Apis } from './';
+
 import ss from 'simple-statistics';
 import moment from 'moment';
-import { Apis } from '/apis/collection/collection';
 import _ from 'lodash';
 
 Apis.helpers({

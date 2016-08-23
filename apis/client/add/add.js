@@ -1,4 +1,4 @@
-import { Apis } from "../../collection/collection";
+import { Apis } from "../../collection";
 
 Template.addApi.helpers({
   ApisCollection () {

@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 
 Template.viewApiBackendSettings.events({
   // event handler to execute when delete API button is clicked

@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 import moment from 'moment';
 
 Template.latestApiBackends.created = function () {

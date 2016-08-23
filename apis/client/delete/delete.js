@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 
 Template.deleteApiBackendConfirmation.onCreated(function() {
   // reference to this template

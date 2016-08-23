@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 
 import _ from 'lodash';
 import moment from 'moment';

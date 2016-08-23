@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 
 Template.visibilitySwitch.onRendered(function () {
   // Get reference to current template instance

@@ -1,5 +1,5 @@
 import { ApiMetadata } from '/metadata/collection/collection';
-import { Apis } from '/apis/collection/collection';
+import { Apis } from '/apis/collection';
 
 ApiMetadata.allow({
   "insert": function (userId, doc) {
