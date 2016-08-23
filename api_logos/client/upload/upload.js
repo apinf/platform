@@ -29,7 +29,10 @@ Template.uploadApiLogo.events({
       ApiLogos.remove(objectId);
 
       // Remove API logo file id field
-      ApiBackends.update(instance.data.apiBackend._id, {$unset: { apiLogoFileId: "" }});
+      ApiBackends.update(
+        instance.data.apiBackend._id,
+        {$unset: { apiLogoFileId: "" }
+      });
 
       sAlert.success(TAPi18n.__('uploadApiLogo_successfully_deleted'));
     }
