@@ -1,5 +1,5 @@
 AutoForm.hooks({
-  apiBacklogForm: {
+  addApiBacklogItemForm: {
     before: {
       insert: function (backlogItem) {
         // Attach API Backend Id to backlog item schema
@@ -18,7 +18,7 @@ AutoForm.hooks({
   }
 });
 
-AutoForm.addHooks(['apiBacklogForm'], {
+AutoForm.addHooks(['addApiBacklogItemForm'], {
   // Success message
   onSuccess: function () {
     // Close modal window "manually" after form submit successfully

@@ -18,7 +18,7 @@
     </div>
     <div class="panel-body">
       {{#if currentUserCanEditBacklog }}
-          {{> apiBacklogForm }}
+          {{> addApiBacklogItem }}
       {{/if}}
       {{> apiBacklogList backlogItems=backlogItems apiBackend=apiBackend }}
     </div>

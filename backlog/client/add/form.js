@@ -1,6 +1,6 @@
 import { ApiBacklogItems } from '../../collection';
 
-Template.apiBacklogForm.helpers({
+Template.addApiBacklogItem.helpers({
   apiBacklogItemsCollection () {
     // Return a reference to ApiBacklogItems collection
     return ApiBacklogItems;
