@@ -2,15 +2,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       {{#if currentUserCanEditBacklog }}
-          <button type="button"
-                  class="btn btn-info btn-xs pull-right"
-                  data-toggle="modal"
-                  data-target="#apiBacklogFormModal"
-                  data-backdrop="static"
-                  data-keyboard="true">
-              <span class="glyphicon glyphicon-plus"></span>
-              {{_ "apiBacklog_addBacklogItem_buttonText"}}
-          </button>
+        <button
+          id="add-backlog-item"
+          class="btn btn-info btn-xs pull-right">
+          <span class="glyphicon glyphicon-plus"></span>
+          {{_ "apiBacklog_addBacklogItem_buttonText"}}
+        </button>
       {{/if}}
       <h2 class="panel-title clearfix">
         {{_ "apiBacklog_mainTitle"}}
