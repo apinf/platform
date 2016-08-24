@@ -19,7 +19,7 @@
             {{#if branding}}
             {{> viewProjectLogo branding=branding }}
             {{> uploadProjectLogo branding=branding }}
-            {{#autoForm collection="Branding" id="branding" doc=branding type="update"}}
+            {{#autoForm collection=brandingCollection id="branding" doc=branding type="update"}}
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteSlogan'}}
             {{> afQuickField name='siteFooter'}}
@@ -29,7 +29,7 @@
             </div>
             {{/autoForm}}
             {{else}}
-            {{#autoForm collection="Branding" id="branding" type="insert"}}
+            {{#autoForm collection=brandingCollection id="branding" type="insert"}}
             {{> afQuickField name='siteTitle'}}
             {{> afQuickField name='siteSlogan'}}
             {{> afQuickField name='siteFooter'}}

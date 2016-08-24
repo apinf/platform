@@ -12,5 +12,9 @@ Template.branding.helpers({
   branding: function () {
     // Get Branding collection content
     return Branding.findOne();
+  },
+  brandingCollection () {
+    // Return reference to branding collection, for AutoForm
+    return Branding;
   }
 });
