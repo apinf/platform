@@ -9,7 +9,7 @@
                   data-backdrop="static"
                   data-keyboard="true">
               <span class="glyphicon glyphicon-plus"></span>
-              {{_ "apiBacklogForm_addBacklogItem_button"}}
+              {{_ "apiBacklog_addBacklogItem_buttonText"}}
           </button>
       {{/if}}
       <h2 class="panel-title clearfix">
@@ -17,9 +17,6 @@
       </h2>
     </div>
     <div class="panel-body">
-      {{#if currentUserCanEditBacklog }}
-          {{> addApiBacklogItem }}
-      {{/if}}
       {{> apiBacklogList backlogItems=backlogItems apiBackend=apiBackend }}
     </div>
   </div>
