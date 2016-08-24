@@ -1,4 +1,6 @@
-FeedbackVotes = new Mongo.Collection('feedbackVotes');
+const FeedbackVotes = new Mongo.Collection('feedbackVotes');
+
+export { FeedbackVotes };
 
 FeedbackVotes.schema = new SimpleSchema({
   /*
