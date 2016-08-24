@@ -40,3 +40,10 @@ Template.backlogItem.helpers({
     return currentUser === backlogItem.userId;
   }
 });
+
+Template.backlogItem.events({
+  'click .edit-backlog-item' () {
+    // Show Edit Backlog Item modal
+    Modal.show("editBacklogItem", { backlogItem: this.item});
+  }
+});
