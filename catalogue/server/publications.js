@@ -1,4 +1,3 @@
-import { ApiBackends } from '/apis/collection/backend';
 import { Apis } from '/apis/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
