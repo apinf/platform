@@ -1,4 +1,5 @@
 import { Feedback } from '../../collection';
+import { FeedbackVotes } from '/feedback_votes/collection';
 
 Template.singleFeedback.created = function () {
   // Get reference to current feedback
