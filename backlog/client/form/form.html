@@ -8,7 +8,7 @@
                     <h4 class="modal-title" id="apiBacklogFormModalLabel">{{_ "apiBacklogForm_addBacklogItem_button"}}</h4>
                 </div>
                 <div class="modal-body">
-                    {{#autoForm collection="ApiBacklogItems" id="apiBacklogForm" type="insert"}}
+                    {{#autoForm collection=apiBacklogItemsCollection id="apiBacklogForm" type="insert"}}
                         <div class="row">
                             <div class="col-md-9">
                                 {{> afQuickField name="title" }}
