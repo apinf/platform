@@ -86,9 +86,12 @@ Template.viewApiBackendStatus.rendered = function () {
   // create request url based on API URL
   var url = apiBackend.url;
 
-  // call the function that updates status
-  instance.getApiStatus(url);
+  // Get API Status only when URL is available
+  if (url) {
+    // call the function that updates status
+    instance.getApiStatus(url);
 
-  // Init tooltip
-  $('[data-toggle="tooltip"]').tooltip()
+    // Init tooltip
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 };
