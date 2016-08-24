@@ -1,5 +1,5 @@
 import { Feedback } from './';
-import { ss } from 'simple-statistics';
+import { FeedbackVotes } from '/feedback_votes/collection';
 
 Feedback.helpers({
   'sumOfVotes': function () {
@@ -11,8 +11,14 @@ Feedback.helpers({
       return feedback.vote;
     });
 
-    // Calculate the sum of all vote values
-    var sum = ss.sum(votes);
-    return sum;
+    // Make sure votes are available to sum
+    if (votes && votes.length > 0) {
+      // Sum the array of votes
+      let sumOfVotes = votes.reduce(function (a, b) {
+        return a + b;
+      });
+
+      return sumOfVotes;
+    }
   }
 });
