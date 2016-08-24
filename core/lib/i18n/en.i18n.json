@@ -137,6 +137,8 @@
   "editApi_hints_set_headers": "If your API requires some specific headers to be set, they should be added here",
   "editApi_hints_settings": "Define header values that will be set in the response regardless of whether the header is already set in the response.<br><br> For example, to force CORS headers on all responses:<br><br> 'Access-Control-Allow-Origin: *'",
   "editApi_hints_url_matches": "We recommend to have a unique URL Front-end prefix for your API so that it does not conflict with other existing APIs.<br> Apart from that, you can also segregate different sections of your API with different prefixes. <br>All the requests made to the 'Front-end host / Front-end prefix' will be re-written to 'Backend host / Backend prefix' <br><br>Frontend prefix: A prefix for your API, recognized by the Umbrella, e.g. /my_dev_api/ <br><br>Backend prefix: Usually a part of your API's url, helpful to shorten the URL used for accessing your API, e.g. /apiv2/staging/experimental OR something as simple as '/'.",
+  "editBacklogItem_modalTitle": "Edit Backlog Item",
+  "editBacklogItem_submit_buttonText": "Save changes",
   "esData_notFound": "There are no API usage statistics available.",
   "favourite_Add": "Add bookmark",
   "favourite_Remove": "Remove bookmark",
