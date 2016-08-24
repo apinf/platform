@@ -50,6 +50,10 @@
   "bookmarks_Backend": "Backend host:",
   "bookmarks_Name": "Name:",
   "bookmarks_Title": "Your bookmarked APIs",
+  "branding": "Branding",
+  "branding_update": "Update",
+  "branding_save": "Save",
+  "branding_panel_title": "Project Branding",
   "catalogue-AverageRating-Tooltip": "Average Rating",
   "catalogue-Bookmark-Tooltip_NonUser": "Number of bookmarks. Sign in to bookmark.",
   "catalogue-Bookmark-Tooltip_User": "Bookmark API",
@@ -345,6 +349,63 @@
           "placeholder": "Enter a string to be added to each backend request"
         }
       }
+    },
+    "backlog": {
+      "title": {
+        "label": "Title",
+        "placeholder": "Title"
+      },
+      "details": {
+        "label": "Details",
+        "placeholder": "Description"
+      },
+      "priority": {
+        "label": "Priority"
+      }
+    },
+    "branding": {
+      "siteTitle": {
+        "label": "Site title"
+      },
+      "siteSlogan": {
+        "label": "Site slogan"
+      },
+      "siteFooter": {
+        "label": "Site footer"
+      }
+    },
+    "feedback": {
+      "topic": {
+        "label": "Topic",
+        "placeholder": "Feedback topic"
+      },
+      "message": {
+        "label": "Your Message",
+        "placeholder": "Your message"
+      },
+      "messageType": {
+        "label": "Choose message type"
+      }
+    },
+    "settings": {
+      "apiUmbrella": {
+        "host": {
+          "label": "Host",
+          "placeholder": "https://example.com/"
+        },
+        "apiKey": {
+          "label": "API Key",
+          "placeholder": "xxx"
+        },
+        "authToken": {
+          "label": "Auth Token",
+          "placeholder": "xxx"
+        },
+        "baseUrl": {
+          "label": "Base URL",
+          "placeholder": "https://example.com/api-umbrella/"
+        }
+      }
     }
   },
   "searchField_button": "Search",
@@ -355,6 +416,13 @@
   "searchPage_searchForm_helpText": "Start typing your query for live search results.",
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchResultsHeader": "Search results",
+  "settings": "Settings",
+  "settings_apiDocumentation_editor": "API Documentation Editor",
+  "settings_mail": "Mail",
+  "settings_github": "Github",
+  "settings_save": "Save",
+  "settings_apiUmbrella": "API Umbrella",
+  "settings_elasticsearch": "Elasticsearch",
   "settingsWizard_APIDocumentation_Editor": "Api Documentation Editor",
   "settingsWizard_APIUmbrella_settings": "Settings for API Umbrella",
   "settingsWizard_Finish": "Finish",
@@ -362,8 +430,10 @@
   "settingsWizard_previousFirstSlide": "Previous",
   "settingsWizard_previousSecondSlide": "Previous",
   "settingsWizard_projectBranding": "Project Branding",
-  "settingsWizard_saveAndNext": "Save and Next",
-  "setupWizard_successMessage": "Settings saved",
+  "setupNeededModal_body": "Please provide Branding and/or Settings for this deployment.",
+  "setupNeededModal_title": "Setup needed",
+  "setupNeededModal_viewBrandingButton": "View Branding",
+  "setupNeededModal_viewSettingsButton": "View Settings",
   "signout": "Sign out",
   "statisticsSummary_captionRequests": "Requests",
   "statisticsSummary_captionResponseTime": "Average response time",
@@ -372,6 +442,9 @@
   "statusCheckJustNow": "Just now",
   "statusCheckTitle": "Status",
   "statusCheckUpdated": "Updated:",
+  "statusCheck_ApinfWebApp": "Apinf Web App",
+  "statusCheck_ApiUmbrella": "Api Umbrella",
+  "statusCheck_Elasticsearch": "Elasticsearch",
   "statusCodeCountsChart_title": "HTTP Status Codes",
   "statusCodeCountsChart_help_text": "Click on any HTTP status bar to filter API Request Timeline and API Response Time chart for that specific response type.",
   "umbrella_createuser_error": "Failed to create user on API Umbrella.",
@@ -394,10 +467,7 @@
   "viewApiBackendNavigationMenu_metadata": "Metadata",
   "viewApiBackendNavigationMenu_settings": "Settings",
   "viewApiBackendSettings_panelTitleAbout": "About",
-  "viewApiBackendSettings_panelTitleEdit": "Edit",
   "viewApiBackendSettings_panelTitleManage": "Manage",
-  "viewApiBackendSettings_editApiSettingsText": "You can modify the proxy settings for your API. Clicking the button will open a settings form.",
-  "viewApiBackendSettings_editApiSettingsTitle": "Modify the API settings",
   "viewApiBackendSettings_deleteApiText": "This action cannot be undone. The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "viewApiBackendSettings_deleteApiTitle": "Delete the API",
   "viewApiBackendSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
@@ -409,7 +479,6 @@
   "view_ApiBackend_Backend": "Backend",
   "view_ApiBackend_Backend_Prefix": "Backend prefix",
   "view_ApiBackend_Details_Title": "Details",
-  "view_ApiBackend_Details_editButtonText": "Edit API Settings",
   "view_ApiBackend_ExportJson": "Export .json",
   "view_ApiBackend_ExportYaml": "Export .yaml",
   "view_ApiBackend_Export_Title": "Export",

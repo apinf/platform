@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 import _ from 'lodash';
 
 Meteor.methods({
@@ -12,17 +12,17 @@ Meteor.methods({
       const remoteApis = response.data.data;
 
       // Get all local API Backends
-      const localApis = ApiBackends.find().fetch();
+      const localApis = Apis.find().fetch();
 
       _.forEach(remoteApis, (remoteApi) => {
 
         // Get existing API Backend
-        const existingLocalApiBackend = ApiBackends.findOne({'id': remoteApi.id});
+        const existingLocalApiBackend = Apis.findOne({'id': remoteApi.id});
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingLocalApiBackend === undefined) {
           try {
-            ApiBackends.insert(remoteApi);
+            Apis.insert(remoteApi);
           } catch (error) {
             console.error("Error inserting apiBackend(" + remoteApi.id + ") : " + error);
           }
@@ -38,7 +38,7 @@ Meteor.methods({
         // If API Backend doesn't exist on API Umbrella, but locally, delete this API
         if (!existingRemoteApiBackend) {
           try {
-            ApiBackends.remove({'id': localApi.id});
+            Apis.remove({'id': localApi.id});
           } catch (error) {
             console.error("Error deleteing apiBackend(" + localApi.id + ") : " + error);
           }

@@ -44,36 +44,20 @@ Settings.schema = new SimpleSchema({
   "apiUmbrella.host": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
     optional: false,
-    autoform: {
-      placeholder: 'https://example.com/'
-    }
   },
   "apiUmbrella.apiKey": {
     type: String,
-    label: "API Key",
     optional: false,
-    autoform: {
-      placeholder: 'xxx'
-    }
   },
   "apiUmbrella.authToken": {
     type: String,
-    label: "Auth Token",
     optional: false,
-    autoform: {
-      placeholder: 'xxx'
-    }
   },
   "apiUmbrella.baseUrl": {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Base URL",
     optional: false,
-    autoform: {
-      placeholder: 'https://example.com/api-umbrella/'
-    }
   },
   elasticsearch: {
     type: Object,
@@ -173,5 +157,7 @@ Settings.schema = new SimpleSchema({
     optional: true
   }
 });
+// Enable translations (i18n)
+Settings.schema.i18n("schemas.settings.apiUmbrella");
 
 Settings.attachSchema(Settings.schema);

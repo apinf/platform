@@ -1,11 +1,13 @@
-import ss from 'simple-statistics';
-import moment from 'moment';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from './';
 import { ApiBackendRatings } from '/ratings/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
+
+import ss from 'simple-statistics';
+import moment from 'moment';
+
 import _ from 'lodash';
 
-ApiBackends.helpers({
+Apis.helpers({
   getAverageRating () {
     // Fetch all ratings
     var apiBackendRatings = ApiBackendRatings.find({
@@ -38,7 +40,7 @@ ApiBackends.helpers({
     // Check if average rating calculation succeeds
     if (averageRating) {
       // Update the API Backend with average rating value
-      ApiBackends.update(this._id, {$set: {averageRating}});
+      Apis.update(this._id, {$set: {averageRating}});
     }
   },
   getBookmarkCount () {
@@ -57,9 +59,9 @@ ApiBackends.helpers({
     // Check if average rating calculation succeeds
     if (bookmarkCount) {
       // Update the API Backend with average rating value
-      ApiBackends.update(this._id, {$set: {bookmarkCount}});
+      Apis.update(this._id, {$set: {bookmarkCount}});
     } else {
-      ApiBackends.update(this._id, {$unset: {bookmarkCount: ""}})
+      Apis.update(this._id, {$unset: {bookmarkCount: ""}})
     }
   },
   getRating () {

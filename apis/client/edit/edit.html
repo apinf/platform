@@ -1,0 +1,14 @@
+<template name="editApi">
+  <div class="container">
+    <h1>{{_ "apiBackends_Edit_API_Title"}}</h1>
+    {{#autoForm collection=formCollection doc=apiBackend id="editApiForm" type="update"}}
+    <fieldset>
+      <legend>Add an API</legend>
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='description' rows=2}}
+      {{> afQuickField name='url'}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Add API</button>
+    {{/autoForm}}
+  </div>
+</template>

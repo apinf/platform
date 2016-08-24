@@ -1,5 +1,5 @@
 import { ApiBackends } from '/apis/collection/backend';
-import { ApiBackendRatings } from '/ratings/collection';
+import { Apis } from '/apis/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder
@@ -75,7 +75,7 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   queryOptions.sort[sortBy] = sortDirection;
 
   // Find all API Backends
-  return ApiBackends.find(selector, queryOptions);
+  return Apis.find(selector, queryOptions);
 });
 
 Meteor.publish('catalogueRatings', function () {

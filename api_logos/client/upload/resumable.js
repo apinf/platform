@@ -1,5 +1,5 @@
 import { ApiLogos } from '../../collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { ApiBackends } from '/apis/collection';
 import { fileNameEndsWith } from '/core/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
@@ -22,10 +22,10 @@ Meteor.startup( function() {
         const apiLogoFileId = file.uniqueIdentifier;
 
         // Get apibackend id
-        const apiBackend = ApiBackends.findOne();
+        const apiBackend = Apis.findOne();
 
         // Update logo id field
-        ApiBackends.update(apiBackend._id, {$set: { apiLogoFileId }});
+        Apis.update(apiBackend._id, {$set: { apiLogoFileId }});
 
         sAlert.success(TAPi18n.__('apiLogo_resumable_successfully_uploaded'));
 

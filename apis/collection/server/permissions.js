@@ -1,6 +1,6 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '../';
 
-ApiBackends.allow({
+Apis.allow({
   insert: function (userId, apiBackendDoc) {
     return true;
   },
@@ -8,7 +8,7 @@ ApiBackends.allow({
     // Save ID of API Backend
     const apiBackendId = apiBackendDoc._id;
     // Get API backend with ID
-    const apiBackend = ApiBackends.findOne(apiBackendId);
+    const apiBackend = Apis.findOne(apiBackendId);
     // Check if current user can edit API Backend
     let currentUserCanEdit = apiBackend.currentUserCanEdit();
 
@@ -24,7 +24,7 @@ ApiBackends.allow({
     // Save ID of API Backend
     const apiBackendId = apiBackendDoc._id;
     // Get API backend with ID
-    const apiBackend = ApiBackends.findOne(apiBackendId);
+    const apiBackend = Apis.findOne(apiBackendId);
     // Check if current user can edit API Backend
     let currentUserCanEdit = apiBackend.currentUserCanEdit();
 
@@ -38,7 +38,7 @@ ApiBackends.allow({
   }
 });
 
-ApiBackends.deny({
+Apis.deny({
   insert (fields) {
     // Don't allow user to set average rating or bookmark count fields
     if (_.contains(fields, "averageRating") || _.contains(fields, "bookmarkCount")) {

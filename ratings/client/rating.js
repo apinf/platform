@@ -1,5 +1,5 @@
-import { ApiBackends } from '/apis/collection/backend';
 import { ApiBackendRatings } from '/ratings/collection';
+import { Apis } from '/apis/collection';
 
 Template.apiBackendRating.created = function () {
   // Get reference to template instance
@@ -29,7 +29,7 @@ Template.apiBackendRating.rendered = function () {
   var apiBackendId = instance.data._id;
 
   // get API Backend document
-  const apiBackend = ApiBackends.findOne(apiBackendId);
+  const apiBackend = Apis.findOne(apiBackendId);
 
   instance.autorun(function () {
     // Make sure API Backend Rating subscription is ready

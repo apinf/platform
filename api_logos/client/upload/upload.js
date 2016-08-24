@@ -1,5 +1,5 @@
 import { ApiLogos } from '../../collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 Template.uploadApiLogo.onCreated(function() {
   const instance = this;
@@ -29,10 +29,7 @@ Template.uploadApiLogo.events({
       ApiLogos.remove(objectId);
 
       // Remove API logo file id field
-      ApiBackends.update(
-        instance.data.apiBackend._id,
-        {$unset: { apiLogoFileId: "" }
-      });
+      Apis.update(instance.data.apiBackend._id, {$unset: { apiLogoFileId: "" }});
 
       sAlert.success(TAPi18n.__('uploadApiLogo_successfully_deleted'));
     }
@@ -42,7 +39,7 @@ Template.uploadApiLogo.events({
 Template.uploadApiLogo.helpers({
   uploadedLogoLink: function() {
 
-    const currentApiLogoFileId = ApiBackends.findOne().apiLogoFileId;
+    const currentApiLogoFileId = Apis.findOne().apiLogoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
@@ -59,7 +56,7 @@ Template.uploadApiLogo.helpers({
   },
   uploadedApiLogoFile: function() {
 
-    const currentApiLogoFileId = ApiBackends.findOne().apiLogoFileId;
+    const currentApiLogoFileId = Apis.findOne().apiLogoFileId;
 
     if (currentApiLogoFileId) {
       // Convert to Mongo ObjectID
