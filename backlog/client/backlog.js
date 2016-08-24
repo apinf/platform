@@ -17,3 +17,10 @@ Template.apiBacklog.helpers({
     return apiBackend.currentUserCanEdit();
   }
 });
+
+Template.apiBacklog.events({
+  'click #add-backlog-item' () {
+    // Show Add API Backlog Item modal
+    Modal.show("addApiBacklogItem");
+  }
+});
