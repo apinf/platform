@@ -1,5 +1,5 @@
 import { ApiBacklogItems } from './';
-import { ApiBackends } from '/apis/collection/backend';
+import { ApiBackends } from '/apis/collection';
 
 ApiBacklogItems.allow({
   insert: function (userId, backlog) {
