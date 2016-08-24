@@ -1,31 +1,39 @@
 <template name="addApiBacklogItem">
-    <div class="modal fade" id="apiBacklogFormModal" tabindex="-1" role="dialog" aria-labelledby="apiBacklogFormModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="apiBacklogFormModalLabel">{{_ "apiBacklogForm_addBacklogItem_button"}}</h4>
-                </div>
-                <div class="modal-body">
-                    {{#autoForm collection=apiBacklogItemsCollection id="addApiBacklogItemForm" type="insert"}}
-                        <div class="row">
-                            <div class="col-md-9">
-                                {{> afQuickField name="title" }}
-                                {{> afQuickField name="details" }}
-                            </div>
-                            <div class="col-md-3">
-                                {{> afQuickField name="priority" }}
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary pull-right">
-                              {{_ "apiBacklogForm_addBacklogItem_button"}}
-                            </button>
-                        </div>
-                    {{/autoForm}}
-                </div>
-            </div>
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="apiBacklogFormModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <h2 class="modal-title" id="apiBacklogFormModalLabel">
+            {{_ "addApiBacklogItem_modalTitle"}}
+          </h2>
         </div>
+        {{#autoForm
+          collection=apiBacklogItemsCollection
+          id="addApiBacklogItemForm"
+          type="insert"}}
+          <div class="modal-body">
+                {{> afQuickField name="title" }}
+                {{> afQuickField name="details" }}
+                {{> afQuickField name="priority" }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary pull-right">
+              {{_ "addApiBacklogItem_addBacklogItem_button"}}
+            </button>
+          </div>
+        {{/autoForm}}
+      </div>
     </div>
-    {{> flashMessages}}
+  </div>
 </template>
