@@ -17,7 +17,7 @@
     "jquery": "^2.2.4",
     "jquery.rateit": "^1.0.23",
     "js-yaml": "^3.6.1",
-    "lodash": "^4.13.1",
+    "lodash": "^4.15.0",
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.14.1",
     "simple-statistics": "^2.1.0",
