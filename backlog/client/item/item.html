@@ -3,8 +3,12 @@
     <div class="panel-heading">
       {{#if apiBackend.currentUserCanEdit }}
       <div class="btn-group pull-right">
-        <button class="edit-backlog-item btn btn-primary btn-xs">Edit</button>
-        <button class="delete-backlog-item btn btn-danger btn-xs">Delete</button>
+        <button class="edit-backlog-item btn btn-primary btn-xs">
+          {{_ "backlogItem_editButton_text" }}
+        </button>
+        <button class="delete-backlog-item btn btn-danger btn-xs">
+          {{_ "backlogItem_deleteButton_text" }}
+        </button>
       </div>
       {{/if}}
       <b>
