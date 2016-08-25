@@ -1,5 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
 
 Meteor.startup( function() {
@@ -26,7 +26,7 @@ Meteor.startup( function() {
           const apiBackend = Session.get('currentApiBackend');
 
           // Update documenation file id field
-          ApiBackends.update(apiBackend._id, {$set: { documentationFileId }});
+          Apis.update(apiBackend._id, {$set: { documentationFileId }});
 
           sAlert.success(TAPi18n.__('manageApiDocumentationModal_AddedFile_Message'));
 

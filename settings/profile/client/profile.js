@@ -51,5 +51,9 @@ Template.profile.helpers({
 
       return apiKey;
     }
+  },
+  usersCollection () {
+    // Return reference to Meteor.users collection
+    return Meteor.users;
   }
 });

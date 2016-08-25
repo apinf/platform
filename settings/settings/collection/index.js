@@ -37,6 +37,41 @@ Schemas.SettingsSchema = new SimpleSchema({
       }
     }
   },
+  apiUmbrella: {
+    type: Object,
+    optional: false
+  },
+  "apiUmbrella.host": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    optional: false,
+  },
+  "apiUmbrella.apiKey": {
+    type: String,
+    optional: false,
+  },
+  "apiUmbrella.authToken": {
+    type: String,
+    optional: false,
+  },
+  "apiUmbrella.baseUrl": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    optional: false,
+  },
+  elasticsearch: {
+    type: Object,
+    optional: false
+  },
+  "elasticsearch.host": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: "Host",
+    optional: false,
+    autoform: {
+      placeholder: 'http://example.com:14002/'
+    }
+  },
   mail: {
     type: Object,
     optional: true
@@ -122,5 +157,8 @@ Schemas.SettingsSchema = new SimpleSchema({
     optional: true
   }
 });
+
+// Enable translations (i18n)
+Schemas.SettingsSchema.i18n("schemas.settings.apiUmbrella");
 
 Settings.attachSchema(Schemas.SettingsSchema);

@@ -1,8 +1,8 @@
-Router.route("/api/new/:step?", function () {
-  this.render("addApiBackendWizard");
+Router.route("/api/new", function () {
+  this.render("addApi");
   this.layout("masterLayout");
 }, {
-  name: "addApiBackend-wizard"
+  name: "addApi"
 });
 
 Router.route("/api/:_id/", function () {
@@ -22,14 +22,27 @@ Router.route("/api/:_id/", function () {
     }
   });
 },{
-  name: "viewApiBackend",
+  name: "viewApi",
 });
 
 Router.route("/api/:_id/edit", function () {
-  this.render("editApiBackend");
-  this.layout("masterLayout");
+  // Save a reference to route, for use inside method callback function
+  const route = this;
+
+  // Get current API Backend ID
+  const apiBackendId = Router.current().params._id;
+
+  // Ensure current user is authorized to view backend
+  Meteor.call("currentUserCanEditApi", apiBackendId, function (error, userIsAuthorized) {
+    if (userIsAuthorized) {
+      route.render("viewApiBackend");
+      route.layout("masterLayout");
+    } else {
+      Router.go("notAuthorized");
+    }
+  });
 }, {
-  name: "editApiBackend"
+  name: "editApi"
 });
 
 Router.map(function() {

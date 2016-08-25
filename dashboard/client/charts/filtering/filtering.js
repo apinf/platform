@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 import _ from 'lodash';
 
@@ -18,7 +18,7 @@ Template.dashboardChartsFiltering.onCreated(function () {
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
       // Update variable with data
-      instance.apis.set(ApiBackends.find().fetch());
+      instance.apis.set(Apis.find().fetch());
     }
   });
 });

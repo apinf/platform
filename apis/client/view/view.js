@@ -1,4 +1,4 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 Template.viewApiBackend.created = function () {
   // Get reference to template instance
@@ -20,7 +20,7 @@ Template.viewApiBackend.helpers({
     let apiBackendId = Router.current().params._id;
 
     // Get single API Backend
-    let apiBackend = ApiBackends.findOne(apiBackendId);
+    let apiBackend = Apis.findOne(apiBackendId);
 
     return apiBackend;
   },

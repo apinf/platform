@@ -83,8 +83,8 @@ Template.viewApiBackendStatus.rendered = function () {
   // Get API Backend from instance data context
   var apiBackend = instance.data.apiBackend;
 
-  // create request url based on API Backend protocol and host
-  var url = apiBackend.backend_protocol + "://" + apiBackend.backend_host;
+  // create request url based on API URL
+  var url = apiBackend.url;
 
   // call the function that updates status
   instance.getApiStatus(url);

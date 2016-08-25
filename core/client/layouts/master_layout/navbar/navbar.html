@@ -35,7 +35,7 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="{{ pathFor route='addApiBackend-wizard' }}">
+                <a href="{{ pathFor route='addApi' }}">
                   {{_ "masterLayout_sidebar_AddAPIBackend"}}
                 </a>
               </li>
@@ -65,8 +65,8 @@
           {{/ if }}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          {{#if User}}
-          {{> userMenu }}
+          {{#if currentUser}}
+          {{> userMenu user=currentUser }}
           {{else}}
           <li>
             <a class="close-navbar" href="/sign-up">{{_ "signup"}}</a>

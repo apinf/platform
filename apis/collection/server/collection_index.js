@@ -1,7 +1,7 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '../';
 
 // Create indexes for fields in MongoDB collection (API backends search functionality)
-ApiBackends._ensureIndex({
+Apis._ensureIndex({
   "name": 1,
   "backend_host": 1
 });

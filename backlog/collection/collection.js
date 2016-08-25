@@ -1,28 +1,21 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 ApiBacklogItems = new Mongo.Collection("apiBacklogItems");
 
 ApiBacklogItems.attachSchema(new SimpleSchema({
   title: {
     type: String,
-    label: "Title",
-    max: 100,
-    autoform: {
-      placeholder: "Title"
-    }
+    max: 100
   },
   details: {
     type: String,
-    label: "Details",
     max: 1000,
     autoform: {
-      rows: 5,
-      placeholder: "Description"
+      rows: 5
     }
   },
   priority: {
     type: Number,
-    label: 'Priority',
     min:0,
     max:2,
     autoform: {
@@ -68,7 +61,7 @@ ApiBacklogItems.attachSchema(new SimpleSchema({
       return new Date();
     }
   }
-}));
+}).i18n("schemas.backlog"));
 
 ApiBacklogItems.allow({
   insert: function (userId, backlog) {
@@ -80,7 +73,7 @@ ApiBacklogItems.allow({
     var apiBackendId = backlog.apiBackendId;
 
     // Find related API Backend, select only "managerIds" field
-    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+    var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
 
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();
@@ -94,7 +87,7 @@ ApiBacklogItems.allow({
     var apiBackendId = backlog.apiBackendId;
 
     // Find related API Backend, select only "managerIds" field
-    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+    var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
 
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();
@@ -108,7 +101,7 @@ ApiBacklogItems.allow({
     var apiBackendId = backlog.apiBackendId;
 
     // Find related API Backend, select only "managerIds" field
-    var apiBackend = ApiBackends.findOne(apiBackendId, {fields: {managerIds: 1}});
+    var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
 
     // Check if current user can edit API Backend
     return apiBackend.currentUserCanEdit();

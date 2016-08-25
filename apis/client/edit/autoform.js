@@ -1,7 +1,7 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 AutoForm.hooks({
-  apiBackendForm: {
+  editApiForm: {
     beginSubmit: function () {
       // Disable form elements while submitting form
       $('[data-schema-key], button').attr("disabled", "disabled");
@@ -131,7 +131,7 @@ AutoForm.hooks({
       Router.go('viewApiBackend', {_id: apiBackendId});
 
       // Get the API Backend object
-      var apiBackend = ApiBackends.findOne(apiBackendId);
+      var apiBackend = Apis.findOne(apiBackendId);
 
       // Get API Umbrella backend ID from API Backend
       var apiUmbrellaApiId = apiBackend.id;
