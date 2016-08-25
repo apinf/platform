@@ -1,0 +1,40 @@
+<template name="editBacklogItem">
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="apiBacklogFormModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          <h2 class="modal-title" id="apiBacklogFormModalLabel">
+            {{_ "editBacklogItem_modalTitle" }}
+          </h2>
+        </div>
+        {{#autoForm
+          collection=apiBacklogItemsCollection
+          doc=backlogItem
+          id="editBacklogItemForm"
+          type="update"}}
+          <div class="modal-body">
+            {{> afQuickField name="title" }}
+            {{> afQuickField name="details" }}
+            {{> afQuickField name="priority" }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary pull-right">
+              {{_ "editBacklogItem_submit_buttonText" }}
+            </button>
+          </div>
+        {{/autoForm}}
+      </div>
+    </div>
+  </div>
+</template>

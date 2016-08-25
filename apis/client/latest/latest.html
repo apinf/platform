@@ -1,22 +1,20 @@
 <template name="latestApiBackends">
   {{#if latestBackends }}
   <div class="row">
-    <div class="col-lg-12 text-center">
-      <h2 class="feature-section-heading">{{_ "latestApiBackends_Heading" }}</h2>
-      <hr class="primary">
-    </div>
+    <hr>
+    <h2 class="text-center">{{_ "latestApiBackends_Heading" }}</h2>
   </div>
   {{#each latestBackends }}
   {{#if currentUserCanView }}
-  <div class="col-md-3 col-sm-6 hero-feature">
+  <div class="col-md-3 col-sm-6">
     <div class="thumbnail api-box">
-      <h3><a href="/api/{{_id}}">{{ name }}</a></h3>
-      <div>
+      <h3>
+        <a href="/api/{{_id}}">{{ name }}</a>
+      </h3>
+      <p>
         <i>{{_ "latestApiBackends_DateAdded" relative_created_at }}</i>
-      </div>
-      <div class="api-buttons">
-        <a href="/api/{{_id}}" class="btn btn-default">{{_ "latestApiBackends_MoreInfo" }}</a>
-      </div>
+      </p>
+      <a href="/api/{{_id}}" class="btn btn-default">{{_ "latestApiBackends_MoreInfo" }}</a>
     </div>
   </div>
   {{/ if }}

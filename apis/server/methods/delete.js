@@ -1,6 +1,8 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
 import { Apis } from '/apis/collection';
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '/metadata/collection';
+import { DocumentationFiles } from '/documentation/collection';
+import { Feedback } from '/feedback/collection';
+import { ApiBacklogItems } from '/backlog/collection';
 
 Meteor.methods({
   // Remove API backend and related items
@@ -16,7 +18,7 @@ Meteor.methods({
 
     // Remove metadata
     ApiMetadata.remove({"apiBackendId": apiBackendId});
-    
+
     // Finally remove the API
     Apis.remove(apiBackendId);
   },

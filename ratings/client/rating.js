@@ -1,3 +1,4 @@
+import { ApiBackendRatings } from '/ratings/collection';
 import { Apis } from '/apis/collection';
 
 Template.apiBackendRating.created = function () {

@@ -1,4 +1,4 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { DocumentationFiles } from '../collection';
 
 Meteor.publish(
   'singleDocumentationFile', function(documentationFileId) {

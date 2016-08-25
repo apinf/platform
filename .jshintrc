@@ -9,7 +9,7 @@
     // See http://jshint.com/docs/ for more details
 
     "maxerr"        : 50,       // {int} Maximum error before stopping
-
+    "esversion"     : 6,
     // Enforcing
     "bitwise"       : true,     // true: Prohibit bitwise operators (&, |, ^, etc.)
     "camelcase"     : true,     // true: Identifiers must be in camelCase
@@ -130,37 +130,15 @@
       "$": false,               // jQuery
       "Router": false,           // iron-router
 
-      // Apinf internal globals
-      "Config": false,
-      "Schemas": false,
-      "SEO": false,
-      "Utils": false,
-
-      // Apinf collections
-      "ApiBackends": false,
-      "ApiBackendConfigurations": false,
-      "ApiBackendRatings": false,
-      "ApiBookmarks": false,
-      "ApiDocumentation": false,
-      "ApiUmbrellaAdmins": false,
-      "ApiUmbrellaUsers": false,
-      "RateLimit": false,
-
-      // Apinf schemas (TODO: combine these under the Schemas object)
-      "ApiBackendsSchema": false,
-      "ApiUmbrellaAdminsSchema": false,
-      "ApiUmbrellaUsersSchema": false,
-      "RateLimitSchema": false,
-
       // Apinf packages
       "AccountsTemplates": false,
       "apiUmbrellaWeb": false,
       "AutoForm": false,
       "ElasticRest": false,
+      "FileCollection": false,
       "FlashMessages": false,
-      "FS": false,
       "GitHub": false,
-      "NCSchemas": false,
+      "PrettyEmail": false,
       "Roles": false,
       "sAlert": false,
       "ServiceConfiguration": false,

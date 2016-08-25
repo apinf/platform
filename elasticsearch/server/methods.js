@@ -1,3 +1,4 @@
+import { Settings } from '/platform_settings/collection';
 import { Meteor } from 'meteor/meteor';
 import ElasticSearch from 'elasticsearch';
 import _ from 'lodash';
@@ -36,7 +37,7 @@ Meteor.methods({
         return false;
       });
     } else {
-      
+
       throw new Meteor.Error(500, 'User is not authorised.');
 
       return false;
