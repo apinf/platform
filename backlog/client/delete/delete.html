@@ -3,7 +3,7 @@
     class="modal fade"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="apiBacklogFormModalLabel">
+    aria-labelledby="deleteBacklogItemModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -14,7 +14,7 @@
             aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          <h2 class="modal-title" id="apiBacklogFormModalLabel">
+          <h2 class="modal-title" id="deleteBacklogItemModalLabel">
             {{_ "deleteBacklogItem_modalTitle" }}
           </h2>
         </div>
@@ -22,9 +22,14 @@
             {{_ "deleteBacklogItem_confirmation_text" }}
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary pull-right">
-              {{_ "deleteBacklogItem_deleteButton_text" }}
-            </button>
+            <div class="btn-group pull-right">
+              <button id="cancel-delete" class="btn btn-primary" data-dismiss="modal">
+                {{_ "deleteBacklogItem_cancelButton_text" }}
+              </button>
+              <button id="confirm-delete" class="btn btn-danger">
+                {{_ "deleteBacklogItem_deleteButton_text" }}
+              </button>
+            </div>
           </div>
       </div>
     </div>
