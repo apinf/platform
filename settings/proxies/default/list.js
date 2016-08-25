@@ -1,5 +1,5 @@
 export default [
   'apiUmbrella',
-  'kong',
-  'tyk'
+  //'kong',
+  //'tyk'
 ];
