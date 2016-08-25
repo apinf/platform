@@ -10,12 +10,17 @@
           <div class="modal-body">
             {{ > afQuickField name='name' }}
             {{ > afQuickField name='description' }}
-            {{ > afQuickField name='type' options="allowed" }}
+            <!--
+            {{ > afQuickField name='type' value='apiUmbrella' options="allowed" }}
+            -->
+            {{> afQuickField name='apiUmbrella' }}
+            <!--
             {{ # each proxyName in proxiesList }}
               {{ # if afFieldValueIs name='type' value=proxyName }}
                 {{> afQuickField name=proxyName }}
               {{/if}}
             {{ / each }}
+            -->
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">

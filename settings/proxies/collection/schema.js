@@ -17,6 +17,7 @@ let schema = {
   },
   type: {
     type: String,
+    defaultValue: 'apiUmbrella',
     allowedValues: proxiesList
   }
 };
