@@ -45,5 +45,9 @@ Template.backlogItem.events({
   'click .edit-backlog-item' () {
     // Show Edit Backlog Item modal
     Modal.show("editBacklogItem", { backlogItem: this.item});
+  },
+  'click .delete-backlog-item' () {
+    // Show the Delete Confirmation dialogue
+    Modal.show("deleteBacklogItem", { backlogItem: this.item});
   }
 });
