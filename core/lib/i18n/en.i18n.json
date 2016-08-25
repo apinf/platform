@@ -107,6 +107,7 @@
   "deleteApiBackendConfirmation_deleteButton": "Delete",
   "deleteApiBackendConfirmation_header": "Delete API",
   "deleteBacklogItem_deleteButton_text": "Delete",
+  "deleteBacklogItem_cancelButton_text": "Cancel",
   "deleteBacklogItem_confirmation_text": "Are you sure you want to delete this backlog item?",
   "deleteBacklogItem_modalTitle": "Delete Backlog Item",
   "delete_account": "Delete Account",
