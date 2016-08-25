@@ -21,8 +21,8 @@ AutoForm.hooks({
 AutoForm.addHooks(['addApiBacklogItemForm'], {
   // Success message
   onSuccess: function () {
-    // Close modal window "manually" after form submit successfully
-    $('#apiBacklogFormModal').modal('hide');
+    // Hide Add Backlog Item modal
+    Modal.hide("addApiBacklogItem");
     // Push flash message to user
     FlashMessages.sendSuccess('Thank you! Your backlog item has been successfully published.');
   }
