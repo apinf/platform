@@ -438,6 +438,7 @@
   "settings_save": "Save",
   "settings_apiUmbrella": "API Umbrella",
   "settings_elasticsearch": "Elasticsearch",
+  "settings_sdkCode_generator": "SDK Code Generator",
   "settingsWizard_APIDocumentation_Editor": "Api Documentation Editor",
   "settingsWizard_APIUmbrella_settings": "Settings for API Umbrella",
   "settingsWizard_Finish": "Finish",
