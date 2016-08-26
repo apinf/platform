@@ -1,7 +1,7 @@
 import { HTTP } from 'meteor/http';
 
 AutoForm.addHooks('downloadSDK', {
-  onSubmit: function (formValues, updateDoc, callRequest) {
+  onSubmit: function (formValues, updateDoc, instance) {
     // Prevent form from submitting
     this.event.preventDefault();
 
@@ -9,16 +9,18 @@ AutoForm.addHooks('downloadSDK', {
     const selectedLanguage = formValues.selectLanguage;
 
     // Get index of selected language in global list of languages
-    const index = _.indexOf(LanguageList, selectedLanguage);
+    const index = _.indexOf(instance.languageList, selectedLanguage);
 
     // Find mask of the language for url
-    const parameter = urlParameters[index];
+    const parameter = instance.urlParameters[index];
+
+    const host = 'https://generator.swagger.io';
 
     // Create URL to send request
-    const url = 'https://generator.swagger.io/api/gen/clients/' + parameter;
+    const url = host + '/api/gen/clients/' + parameter;
 
     // Get path to documentation file
-    const pathToFile = Session.get('currentDocumentationFileURL');
+    const pathToFile = instance.documentationFileURL;
 
     // Create POST options
     const options = {
@@ -26,7 +28,7 @@ AutoForm.addHooks('downloadSDK', {
     };
 
     // Start spinner when send request
-    callRequest.set(true);
+    instance.callRequest.set(true);
 
     // Send POST request
     HTTP.post(url, { data: options }, function (error, result) {
@@ -46,7 +48,7 @@ AutoForm.addHooks('downloadSDK', {
         FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorText'));
       }
       // Finish spinner
-      callRequest.set(false);
+      instance.callRequest.set(false);
     });
   }
 });
