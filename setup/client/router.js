@@ -40,6 +40,6 @@ const additionalSetupRequired = function () {
 };
 
 // check if setup is required before opening any page
-Router.onBeforeAction(additionalSetupRequired, {except: ['settings', 'branding']});
+Router.onBeforeAction(additionalSetupRequired, {except: ['settings', 'settings.branding']});
 
-Router.onBeforeAction(requireAdminRole, {only: ['settings', 'branding']});
+Router.onBeforeAction(requireAdminRole, {only: ['settings', 'settings.branding']});

@@ -28,5 +28,8 @@ Template.editApi.helpers({
 
       return apiBackend;
     }
+  },
+  'apisCollection': function () {
+    return Apis;
   }
 });

@@ -11,10 +11,10 @@
         <i class="fa fa-chevron-down"></i>
     </a>
     <ul class="dropdown-menu">
-      <li><a href="{{pathFor 'profile'}}">{{_ "profile"}}</a></li>
-      <li><a href="{{pathFor 'account'}}">{{_ "account"}}</a></li>
+      <li><a href="{{pathFor 'settings.profile'}}">Profile</a></li>
+      <li><a href="{{pathFor 'settings.account'}}">{{_ "account"}}</a></li>
       {{#if isInRole 'admin'}}
-      <li><a href="{{pathFor 'branding'}}">{{_ "branding"}}</a></li>
+      <li><a href="{{pathFor 'settings.branding'}}">{{_ "branding"}}</a></li>
       <li><a href="{{pathFor 'settings'}}">{{_ "settings"}}</a></li>
       {{/if}}
       <li class="divider"></li>
