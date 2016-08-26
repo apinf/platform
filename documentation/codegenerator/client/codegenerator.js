@@ -4,7 +4,8 @@ import { Session } from 'meteor/session';
 
 import _ from 'lodash';
 
-import { DocumentationFiles, languageHashName } from '/documentation/collection/collection';
+import { DocumentationFiles } from '/documentation/collection/collection';
+import { languageHashName } from './hashName'
 
 Template.sdkCodeGeneratorModal.onCreated(function () {
   const instance = this;
