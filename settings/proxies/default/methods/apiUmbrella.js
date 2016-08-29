@@ -1,8 +1,37 @@
 import { Apis } from '/apis/collection';
+import { Proxies } from '../../collection';
 import _ from 'lodash';
 
 Meteor.methods({
-  "syncApiBackends":function () {
+  apiUmbrellaUrlIsDefined () {
+
+    const proxy = Proxies.findOne(); // For now checking for only one proxy
+
+    if (proxy) {
+
+      const apiUmbrellaUrl = proxy.apiUmbrella.url;
+
+      // tyk/kong or other apiUmbrellas should be checked here
+
+      return (apiUmbrellaUrl) ? true : false;
+    }
+
+    return false;
+  },
+  getApiUmbrellaUrl () {
+
+    if (Meteor.call('apiUmbrellaUrlIsDefined')) {
+
+      const apiUmbrellaUrl = Proxies.findOne().apiUmbrella.url;
+
+      return apiUmbrellaUrl;
+
+    } else {
+
+      throw new Meteor.Error('Api Umbrella Url is not defined');
+    }
+  },
+  syncApiBackends () {
 
     // Check if apiUmbrellaWeb object exists
     if ( typeof apiUmbrellaWeb !== 'undefined' ) {
@@ -46,14 +75,14 @@ Meteor.methods({
       });
     }
   },
-  createApiBackendOnApiUmbrella: function (apiBackendForm) {
+  createApiBackendOnApiUmbrella (apiBackendForm) {
     // Construct an API Backend object for API Umbrella with one 'api' key
-    var constructedBackend = {
-      "api": apiBackendForm
+    const constructedBackend = {
+      'api': apiBackendForm
     };
 
     // Response object to be send back to client layer.
-    var apiUmbrellaWebResponse = {
+    let apiUmbrellaWebResponse = {
       result: {},
       http_status: 200,
       errors: {}
@@ -69,7 +98,7 @@ Meteor.methods({
     }
     return apiUmbrellaWebResponse;
   },
-  publishApiBackendOnApiUmbrella: function (apiBackendId) {
+  publishApiBackendOnApiUmbrella (apiBackendId) {
     // Response object to be send back to client layer.
     var apiUmbrellaWebResponse = {
       result: {},
@@ -87,14 +116,14 @@ Meteor.methods({
     }
     return apiUmbrellaWebResponse;
   },
-  updateApiBackendOnApiUmbrella: function (apiUmbrellaBackendId, apiBackend) {
+  updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
     // Construct an API Backend object for API Umbrella with one 'api' key
-    var constructedBackend = {
-      "api": apiBackend
+    const constructedBackend = {
+      'api': apiBackend
     };
 
     // Response object to be send back to client layer.
-    var apiUmbrellaWebResponse = {
+    let apiUmbrellaWebResponse = {
       result: {},
       http_status: 204,
       errors: {}
@@ -111,8 +140,7 @@ Meteor.methods({
     }
     return apiUmbrellaWebResponse;
   },
-
-  deleteApiBackendOnApiUmbrella: function (apiUmbrellaApiId) {
+  deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
 
     // Response object to be send back to client layer.
     var apiUmbrellaWebResponse = {
