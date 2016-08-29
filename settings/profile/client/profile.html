@@ -21,29 +21,6 @@
             {{/autoForm}}
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title">
-              {{_ "profile_apiKeysHeader"}}
-            </div>
-          </div>
-          <div class="panel-body">
-            {{#if apiKey }}
-            <b>{{_ "profile_apiKey"}}:&nbsp;</b>
-            <span id="apikey">
-              {{ apiKey }}
-            </span>
-            {{> profileApiKeyCopyButton apiKey=apiKey }}
-            {{ else }}
-            <!-- Get API key button -->
-            <p>
-              <button id="umbrella-apikey-button" class="btn btn-primary">
-                {{_ "profile_getUmbrellaApiKey" }}
-              </button>
-            </p>
-            {{/if }}
-          </div>
-        </div>
       </div>
     </div>
   </div>
