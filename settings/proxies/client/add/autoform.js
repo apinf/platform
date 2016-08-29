@@ -4,6 +4,10 @@ AutoForm.addHooks('addProxy', {
     // Hide modal
     Modal.hide('addProxy');
 
+    Meteor.call("createApiUmbrellaWeb");
+    Meteor.call("syncApiUmbrellaUsers");
+    Meteor.call("syncApiBackends");
+
   },
   onError (formType, error) {
 
