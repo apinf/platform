@@ -3,6 +3,32 @@ import { Proxies } from '../../collection';
 import _ from 'lodash';
 
 Meteor.methods({
+  elasticsearchIsDefined () {
+
+    const proxy = Proxies.findOne();
+
+    if (proxy) {
+
+      const elasticsearch = proxy.apiUmbrella.elasticsearch;
+
+      return (elasticsearch) ? true : false;
+    }
+
+    return false;
+  },
+  getElasticsearchUrl () {
+
+    if (Meteor.call('elasticsearchIsDefined')) {
+
+      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
+
+      return elasticsearch;
+
+    } else {
+
+      throw new Meteor.Error('Elasticsearch is not defined');
+    }
+  },
   apiUmbrellaUrlIsDefined () {
 
     const proxy = Proxies.findOne(); // For now checking for only one proxy
