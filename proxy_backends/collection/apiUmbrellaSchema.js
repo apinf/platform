@@ -20,7 +20,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true
   },
   "url_matches": {
-    type: [Object]
+    type: [Object],
     optional: true
   },
   "url_matches.$.frontend_prefix": {
