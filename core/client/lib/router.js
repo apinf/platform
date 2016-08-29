@@ -15,7 +15,6 @@ Router.waitOn(function() {
   return this.subscribe('user');
 });
 
-
 var redirectToSignIn = function () {
   if (Meteor.user()) {
     this.next();
@@ -41,32 +40,9 @@ var redirectToDashboard = function () {
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
 
 Router.map(function() {
-
-  this.route("settingsWizard", {
-    path: "/settingsWizard",
-    layoutTemplate: "homeLayout",
-    render: "settingsWizard"
-  });
-
   this.route("home", {
     path: "/",
     layoutTemplate: "homeLayout"
-  });
-
-  this.route('search', {
-    path: "/search",
-    layout: "masterLayout"
-  });
-
-  this.route("apiDocumentationEditor", {
-    path: "/documentation/editor",
-    layoutTemplate: "masterLayout"
-  });
-
-  this.route("statusCheck", {
-    path: "/status",
-    layoutTemplate: "masterLayout",
-    render: "statusCheck"
   });
 
   this.route("accountsAdmin", {
