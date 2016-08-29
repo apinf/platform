@@ -30,32 +30,6 @@ Accounts.onCreateUser(function(options, user) {
     }
   }
 
-  // It doesn't allow to create a user on APIUmbrella side if apiUmbrellaWeb is not created
-  // TODO: show an error message to inform user about it
-  if ( typeof apiUmbrellaWeb !== 'undefined' ) {
-    // Create API Umbrella user object with required fields
-    apiUmbrellaUserObj = {
-      "user": {
-        "email": user.emails[0].address,
-        "first_name": "-",
-        "last_name": "-",
-        "terms_and_conditions": true
-      }
-    };
-
-    // Add user on API Umbrella
-    response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
-
-    // Add API Umbrella User ID to Apinf user
-    user.apiUmbrellaUserId = response.data.user.id;
-
-    // Add API Umbrella User API Key to Apinf user
-    user.profile.apiKey = response.data.user.api_key;
-
-    // Insert full API Umbrella user object into API Umbrella Users collection
-    ApiUmbrellaUsers.insert(response.data.user);
-  }
-
   return user;
 });
 
