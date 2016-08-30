@@ -44,3 +44,5 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true
   }
 });
+
+export { ApiUmbrellaSchema };
