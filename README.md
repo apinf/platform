@@ -1,6 +1,12 @@
-[![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) [![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/) [![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
 
-[![Build Status](https://travis-ci.org/apinf/api-umbrella-dashboard.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/api-umbrella-dashboard) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) [![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/)
+## Build
+
+[![Build Status](https://travis-ci.org/apinf/api-umbrella-dashboard.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/api-umbrella-dashboard)
+
+## Docker image
+
+[![](https://images.microbadger.com/badges/image/apinf/apinf.svg)](http://microbadger.com/images/apinf/apinf) [![](https://images.microbadger.com/badges/version/apinf/apinf.svg)](http://microbadger.com/images/apinf/apinf)
 
 # Links
 - [Documentation](http://apinf.org/docs) - APInf documentation

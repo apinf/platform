@@ -62,5 +62,11 @@ Template.documentation.events({
     const apiBackend = instance.data.apiBackend
     // Show the manage API documentation form
     Modal.show('manageApiDocumentationModal', { apiBackend })
+  },
+  'click #sdk-code-generator' (event, instance) {
+    // Get reference to API backend
+    const apiBackend = instance.data.apiBackend;
+    // Show the SDK Code generator form
+    Modal.show('sdkCodeGeneratorModal', { apiBackend });
   }
 });
