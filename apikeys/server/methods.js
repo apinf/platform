@@ -6,6 +6,12 @@ Meteor.methods({
     const currentUser = Meteor.user();
     // Check currentUser exists
     if(currentUser) {
+
+      /*
+       1. Get proxy by Id
+       2. Call API key create function select by proxy "type"
+      */
+      
       // Check apiUmbrellaWeb global object exists
       if (apiUmbrellaWeb) {
         // Create API Umbrella user object with required fields
