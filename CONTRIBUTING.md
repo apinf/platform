@@ -330,21 +330,30 @@ This project is organized around a 'component' architecture. By 'component', we 
     * server/
       * methods.js
 
-## Packages
+## File names
+Please use underscores in folder and file names, rather than hyphens or camel case. E.g.
+
+```js
+folder_name/file_name.css
+folder_name/file_name.html
+folder_name/file_name.js
+```
+
+# Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
 
-### Forms
+## Forms
 [AutoForm](https://github.com/aldeed/meteor-autoform) is used to provide easy input forms, based on schema definitions (see below).
 
-### Routing
+## Routing
 * [Iron Router](https://github.com/iron-meteor/iron-router) is used for project routing.
 * [Simple JSON Routes](https://github.com/stubailo/meteor-rest/) is used where only JSON data is needed from a route.
 
-### Schema
+## Schema
 [Simple Schema](https://github.com/aldeed/meteor-simple-schema) is used to create schemas for our database collections.
 
-### Templating
+## Templating
 [Blaze](https://meteor.github.io/blaze/) is the templating language used in our project packages.
 
-### CSS
+## CSS
 [Bootstrap](http://getbootstrap.com/) is the primary CSS framework for the templates.
