@@ -141,17 +141,9 @@ Template.dashboard.onCreated(function () {
 
             instance.getChartData(params)
               .then((chartData) => {
-
-                if (chartData.length > 0) {
-
-                  // Update reactive variable
-                  instance.chartData.set(chartData);
-
-                } else {
-
-                  // TODO: throw user-friendly message instead of alert
-                  console.error('No data found.');
-                }
+                
+                // Update reactive variable
+                instance.chartData.set(chartData);
 
                 instance.chartDataLoadingState.set(false);
               })
