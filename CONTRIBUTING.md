@@ -308,27 +308,27 @@ In general, please follow the [JavaScript semi-standard coding style](https://gi
 This project is organized around a 'component' architecture. By 'component', we mainly mean anything that has it's own database collection and one or more routes. In general, our file structure follows this pattern:
 
 * / (project root)
- * component_name/
-  * collection/
-   * index.js
-   * schema.js
-   * permissions.js
-   * helpers.js
-   * server/
-    * publications.js
-  * client/
-   * lib/
-    * router.js
-   * view_name/
-    * view_name.css
-    * view_name.html
-    * view_name.js
-    * sub_view/
-     * sub_view.css
-     * sub_view.html
-     * sub_view.js
-  * server/
-   * methods.js
+  * component_name/
+    * collection/
+      * index.js
+      * schema.js
+      * permissions.js
+      * helpers.js
+    * server/
+      * publications.js
+    * client/
+      * lib/
+        * router.js
+      * view_name/
+        * view_name.css
+        * view_name.html
+        * view_name.js
+        * sub_view/
+          * sub_view.css
+          * sub_view.html
+          * sub_view.js
+    * server/
+      * methods.js
 
 ## Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
