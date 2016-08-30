@@ -7,28 +7,21 @@ Meteor.methods({
     // Check if user is authorised
     if (Meteor.user()) {
 
-      if (Meteor.call('elasticsearchIsDefined')) {
+      const host = Meteor.call('getElasticsearchUrl');
 
-        const host = Meteor.call('getElasticsearchUrl');
+      const esClient = new ElasticSearch.Client({ host }); // Init ES client
 
-        const esClient = new ElasticSearch.Client({ host }); // Init ES client
+      // Get elasticsearch data and return
+      return esClient.search(opts).then((res) => {
+        
+        return res;
+      }, (err) => {
 
-        // Get elasticsearch data and return
-        return esClient.search(opts).then((res) => {
+        throw new Meteor.Error(err.message);
 
-          return res;
-        }, (err) => {
+        return false;
+      });
 
-          throw new Meteor.Error(err.message);
-
-          return false;
-        });
-
-      } else {
-
-        // throw new Meteor.Error('Elasticsearch URL is not provided.');
-        Router.go('/catalogue');
-      }
     } else {
 
       throw new Meteor.Error('User is not authorised.');
