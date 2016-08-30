@@ -98,7 +98,7 @@ Template.sdkCodeGeneratorModal.helpers({
 
     // Create object with instance varaibles
     return {
-      'apiBackend': instance.data.apiBackend,
+      'codegenServer': instance.data.host,
       'callRequest': instance.callRequest,
       'documentationFileURL': instance.documentationFileURL,
       'languageList': instance.languageList,

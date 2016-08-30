@@ -1,5 +1,7 @@
 import { HTTP } from 'meteor/http';
 
+import _ from 'lodash';
+
 AutoForm.addHooks('downloadSDK', {
   onSubmit: function (formValues, updateDoc, instance) {
     // Prevent form from submitting
@@ -14,7 +16,13 @@ AutoForm.addHooks('downloadSDK', {
     // Find mask of the language for url
     const parameter = instance.urlParameters[index];
 
-    const host = 'https://generator.swagger.io';
+    // Get host of code generator server
+    let host = instance.codegenServer;
+
+    // Delete last forward slash if it exists
+    if (_.endsWith(host, '/')) {
+      host = host.slice(0, -1);
+    }
 
     // Create URL to send request
     const url = host + '/api/gen/clients/' + parameter;
@@ -32,21 +40,25 @@ AutoForm.addHooks('downloadSDK', {
 
     // Send POST request
     HTTP.post(url, { data: options }, function (error, result) {
-      // Get information from Swagger API response
-      let response = JSON.parse(result.content);
-
-      if (result.statusCode === 200) {
-        // Hide modal
-        Modal.hide('sdkCodeGeneratorModal');
-
-        // Go to link and download file
-        window.location.href = response.link;
+      // If url is incorrect
+      if (result === undefined) {
+        FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorTextInvalidHost'));
       } else {
-        $('button').removeAttr('disabled');
+        // Get information from Swagger API response
+        let response = JSON.parse(result.content);
 
-        // Otherwise show an error message
-        FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorText'));
+        if (result.statusCode === 200) {
+          // Hide modal
+          Modal.hide('sdkCodeGeneratorModal');
+
+          // Go to link and download file
+          window.location.href = response.link;
+        } else {
+          // Otherwise show an error message
+          FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorText'));
+        }
       }
+      $('button').removeAttr('disabled');
       // Finish spinner
       instance.callRequest.set(false);
     });
