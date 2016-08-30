@@ -435,6 +435,7 @@ Template.dashboardCharts.onRendered(function () {
 
       // Set loader
       chartElements.addClass('loader');
+      chartElements.html('');
 
     } else {
       if (chartData && chartData.length > 0) {
@@ -464,9 +465,7 @@ Template.dashboardCharts.onRendered(function () {
       } else if (chartData && chartData.length === 0) {
 
         // throw user-friendly message
-        chartElements.addClass('no-chart-data-found');
-
-        chartElements.text('No data found');
+        chartElements.html('<div class="no-chart-data-found">No data found.</div>');
       }
 
       chartElements.removeClass('loader');
