@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Session } from 'meteor/session';
+import { HTTP } from 'meteor/http';
 
 import _ from 'lodash';
 
 import { DocumentationFiles } from '/documentation/collection/collection';
-import { languageHashName } from './hashName'
+import { specificLanguageNames } from './codgeneratorSpecificLanguages';
 
 Template.sdkCodeGeneratorModal.onCreated(function () {
   const instance = this;
@@ -16,11 +16,8 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
   // Get documentation file id
   const documentationFileId = instance.data.apiBackend.documentationFileId;
 
-  // Get documentation file URL
-  const documentationFileURL = Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;
-
   // Save documentation file URL
-  instance.documentationFileURL = documentationFileURL;
+  instance.documentationFileURL = Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;
 
   /* Get list of an available languages from Codegen server */
 
@@ -40,7 +37,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
 
     _.forEach(response, function (language) {
       // Check on specific name
-      let newLanguageName = languageHashName[language];
+      let newLanguageName = specificLanguageNames[language];
 
       // Convert name by standard method if it isn't specific name
       if (_.isUndefined(newLanguageName)) {
@@ -67,7 +64,7 @@ Template.sdkCodeGeneratorModal.helpers({
     const instance = Template.instance();
 
     // Create simple schema for sdk modal
-    const sdkSchema = new SimpleSchema({
+    return new SimpleSchema({
       selectLanguage: {
         type: String,
         allowedValues: instance.languageList,
@@ -78,8 +75,6 @@ Template.sdkCodeGeneratorModal.helpers({
         }
       }
     });
-
-    return sdkSchema;
   },
   // Check on ready of data from call GET request
   dataFetched () {
@@ -102,14 +97,12 @@ Template.sdkCodeGeneratorModal.helpers({
     const instance = Template.instance();
 
     // Create object with instance varaibles
-    const dataToAutoform = {
+    return {
       'apiBackend': instance.data.apiBackend,
       'callRequest': instance.callRequest,
       'documentationFileURL': instance.documentationFileURL,
       'languageList': instance.languageList,
       'urlParameters': instance.urlParameters
     };
-
-    return dataToAutoform;
   }
 });
