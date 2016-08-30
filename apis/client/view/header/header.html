@@ -69,7 +69,7 @@
               {{_ "viewApiBackendNavigationMenu_export" }}
             </a>
           </li>
-          {{ # if currentUser }}
+
           {{# if apiBackend.currentUserCanEdit }}
           <li>
             <a href="#api-backend-settings" data-toggle="tab">
@@ -78,7 +78,7 @@
             </a>
           </li>
           {{ / if }}
-          {{ / if }}
+
         </ul>
       </div>
     </div>
