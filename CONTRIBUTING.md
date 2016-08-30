@@ -338,6 +338,38 @@ folder_name/file_name.css
 folder_name/file_name.html
 folder_name/file_name.js
 ```
+# Collection/Schema structure
+After some trial and error, we have settled on the following pattern for defining collections and schemas:
+
+```js
+// inside 'component/collection/index.js'
+
+// Define collection name variable with corresponding MongoDB collection name in camelCase
+const CollectionName = new Mongo.Collection("collectionName");
+
+// Export the collection
+export { CollectionName};
+```
+
+Next, we need to attach a schema to the collection, for validation, etc.
+
+```js
+// inside 'component/collection/schema.js'
+
+// Import the collection using relative path
+import { CollectionName } from './';
+
+// Define the collection schema, by attaching a 'schema' property
+CollectionName.schema = new SimpleSchema({
+  // Schema field definitions
+});
+
+// Allow collection internationalization
+CollectionName.schema.i18n("schemas.collection_name");
+
+// Attach schema to collection for validation, etc.
+CollectionName.attachSchema(CollectionName.schema);
+```
 
 # Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
