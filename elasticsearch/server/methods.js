@@ -15,7 +15,6 @@ Meteor.methods({
 
         // Get elasticsearch data and return
         return esClient.search(opts).then((res) => {
-          console.log(res);
 
           return res;
         }, (err) => {
@@ -27,7 +26,8 @@ Meteor.methods({
 
       } else {
 
-        throw new Meteor.Error('Elasticsearch URL is not provided.');
+        // throw new Meteor.Error('Elasticsearch URL is not provided.');
+        Router.go('/catalogue');
       }
     } else {
 
