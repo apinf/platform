@@ -10,6 +10,8 @@ Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  instance.apis = new ReactiveVar([]);
+
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
   // Keeps chart data loading state
@@ -34,41 +36,31 @@ Template.dashboard.onCreated(function () {
     instance.subscribe('myManagedApis');
   }
 
+  instance.checkElasticsearch = function () {
+
+    return new Promise((resolve, reject) => {
+      Meteor.call('elasticsearchIsDefined', (err, res) => {
+        if (err) reject(err);
+
+        resolve(res);
+      });
+    });
+  }
+
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
 
       // Get APIs managed by user
-      const apis = Apis.find().fetch();
+      const apis = []; // TODO: update apis variable with backend proxies data here
 
-      // Init varuable to keep elasticsearch sub-query
-      let prefixesQuery = [];
-
-      // Iterate through eacy API managed by user
-      _.forEach(apis, (api) => {
-        // Push query object to array
-        prefixesQuery.push({
-          wildcard: {
-            request_path: {
-              // Add '*' to partially match the url
-              value: `${api.url_matches[0].frontend_prefix}*`
-            }
-          }
-        });
-      });
+      instance.apis.set(apis);
 
       // Construct parameters for elasticsearch
       let params = {
-        size: 50000,
+        size: 10000,
         body: {
           query: {
             filtered: {
-              query: {
-                bool: {
-                  should: [
-                    prefixesQuery
-                  ]
-                }
-              },
               filter: {
                 range: {
                   request_at: { }
@@ -89,7 +81,31 @@ Template.dashboard.onCreated(function () {
             'user_id'
           ]
         }
-      }
+      };
+
+      // if (instance.apis.get().length > 0) {
+      //
+      //   // Init varuable to keep elasticsearch sub-query
+      //   let filteredQuery = {
+      //     bool: {
+      //       should: []
+      //     }
+      //   };
+      //
+      //   // Iterate through eacy API managed by user
+      //   _.forEach(instance.apis.get(), (api) => {
+      //
+      //     // Push query object to array
+      //     filteredQuery.bool.should.push({
+      //       wildcard: {
+      //         request_path: {
+      //           // Add '*' to partially match the url
+      //           value: `${api.url_matches[0].frontend_prefix}*`
+      //         }
+      //       }
+      //     });
+      //   });
+      // }
 
       // ******* Filtering by date *******
       const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
@@ -99,8 +115,8 @@ Template.dashboard.onCreated(function () {
       if (analyticsTimeframeStart && analyticsTimeframeEnd) {
 
         // Update elasticsearch query with filter data (in Unix format)
-        params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
-        params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+        params.body.query.filtered.filter.range.request_at['gte'] = analyticsTimeframeStart.valueOf();
+        params.body.query.filtered.filter.range.request_at['lte'] = analyticsTimeframeEnd.valueOf();
 
       }
       // ******* End filtering by date *******
@@ -108,19 +124,29 @@ Template.dashboard.onCreated(function () {
       // Set loader
       instance.chartDataLoadingState.set(true);
 
-      // Fetch elasticsearch data
-      Meteor.call('getElasticSearchData', params, (err, res) => {
+      instance.checkElasticsearch().then((elasticsearchIsDefined) => {
 
-        if (err) console.error(err);
+        if (elasticsearchIsDefined) {
 
-        // Get list of items for analytics
-        const hits = res.hits.hits;
+          // Fetch elasticsearch data
+          Meteor.call('getElasticSearchData', params, (err, res) => {
 
-        // Unset loader
-        instance.chartDataLoadingState.set(false);
+            if (err) console.error(err);
 
-        // Update reactive variable
-        instance.chartData.set(hits);
+            // Get list of items for analytics
+            const hits = res.hits.hits;
+
+            // Unset loader
+            instance.chartDataLoadingState.set(false);
+
+            // Update reactive variable
+            instance.chartData.set(hits);
+          });
+
+        } else {
+
+          throw new Meteor.Error('Elasticsearch is not defined!');
+        }
       });
     }
   });
