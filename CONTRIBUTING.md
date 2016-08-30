@@ -348,7 +348,7 @@ After some trial and error, we have settled on the following pattern for definin
 const CollectionName = new Mongo.Collection("collectionName");
 
 // Export the collection
-export { CollectionName};
+export { CollectionName };
 ```
 
 Next, we need to attach a schema to the collection, for validation, etc.
