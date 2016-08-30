@@ -301,37 +301,97 @@ let trash = ["tattered shoe", "broken pencil", "crumpled paper"];
 eat(food);
 disgard(trash);
 ```
-### JavaScript semi-standard
-In general, please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
+### Code standard(s) and Lint
+Configure your IDE to use eslint with the Airbnb styleguide.
+
+Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
 # File structure
-This project is organized around a general Meteor architecture. In effect, folders are organized to indicate how Meteor.js treats them (e.g. whether they should be client-only).
+This project is organized around a 'component' architecture. By 'component', we mainly mean anything that has it's own database collection and one or more routes. In general, our file structure follows this pattern:
 
 * / (project root)
- * both/
-   * collections/
- * client/
-  * templates/
-  * compatibility/
- * server/
-  * methods/
-  * publications/
+  * component_name/
+    * collection/
+      * index.js
+      * schema.js
+      * permissions.js
+      * helpers.js
+    * server/
+      * publications.js
+    * client/
+      * lib/
+        * router.js
+      * view_name/
+        * view_name.css
+        * view_name.html
+        * view_name.js
+        * sub_view/
+          * sub_view.css
+          * sub_view.html
+          * sub_view.js
+    * server/
+      * methods.js
 
-## Packages
+## File names
+Please use underscores in folder and file names, rather than hyphens or camel case. E.g.
+
+```js
+folder_name/file_name.css
+folder_name/file_name.html
+folder_name/file_name.js
+```
+# Collection/Schema structure
+After some trial and error, we have settled on the following pattern for defining collections and schemas:
+
+```js
+// inside 'component/collection/index.js'
+
+// Define collection name variable with corresponding MongoDB collection name in camelCase
+const CollectionName = new Mongo.Collection("collectionName");
+
+// Export the collection
+export { CollectionName };
+```
+
+Next, we need to attach a schema to the collection, for validation, etc.
+
+```js
+// inside 'component/collection/schema.js'
+
+// Import the collection using relative path
+import { CollectionName } from './';
+
+// Define the collection schema, by attaching a 'schema' property
+CollectionName.schema = new SimpleSchema({
+  // Schema field definitions
+});
+
+// Allow collection internationalization
+CollectionName.schema.i18n("schemas.collection_name");
+
+// Attach schema to collection for validation, etc.
+CollectionName.attachSchema(CollectionName.schema);
+```
+
+References:
+- Meteor Guide: Code Style - [Collections](https://guide.meteor.com/code-style.html#collections)
+- Meteor Guide: [Collections and Schemas](https://guide.meteor.com/collections.html#schemas)
+
+# Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
 
-### Forms
+## Forms
 [AutoForm](https://github.com/aldeed/meteor-autoform) is used to provide easy input forms, based on schema definitions (see below).
 
-### Routing
+## Routing
 * [Iron Router](https://github.com/iron-meteor/iron-router) is used for project routing.
 * [Simple JSON Routes](https://github.com/stubailo/meteor-rest/) is used where only JSON data is needed from a route.
 
-### Schema
+## Schema
 [Simple Schema](https://github.com/aldeed/meteor-simple-schema) is used to create schemas for our database collections.
 
-### Templating
+## Templating
 [Blaze](https://meteor.github.io/blaze/) is the templating language used in our project packages.
 
-### CSS
+## CSS
 [Bootstrap](http://getbootstrap.com/) is the primary CSS framework for the templates.
