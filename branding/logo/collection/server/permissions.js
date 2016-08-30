@@ -1,4 +1,4 @@
-import { ProjectLogo } from '/settings/logo/collection';
+import { ProjectLogo } from '/branding/logo/collection';
 
 ProjectLogo.allow({
   insert: function(userId, file) {
