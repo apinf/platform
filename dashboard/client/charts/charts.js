@@ -458,14 +458,10 @@ Template.dashboardCharts.onRendered(function () {
         // Render charts
         instance.renderCharts(parsedData);
 
-        // Unset loader
-        chartElements.removeClass('loader');
-
-      } else if (chartData && chartData.length === 0) {
-
-        console.log('No data found.');
-        chartElements.removeClass('loader');
       }
+
+      // Unset loader
+      chartElements.removeClass('loader');
     }
   });
 
