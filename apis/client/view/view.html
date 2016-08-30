@@ -27,6 +27,10 @@
         {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
       </div> <!-- /api-backend-backlog -->
 
+      <div id="api-backend-proxy" class="tab-pane fade">
+        {{> apiProxy apiBackend=apiBackend }}
+      </div> <!-- /api-backend-proxy -->
+
       {{ # if currentUser }}
         {{# if apiBackend.currentUserCanEdit }}
           <div id="api-backend-settings" class="tab-pane fade">
