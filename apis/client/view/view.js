@@ -1,4 +1,5 @@
 import { Apis } from '/apis/collection';
+import { ApiBacklogItems } from '/backlog/collection';
 
 Template.viewApiBackend.created = function () {
   // Get reference to template instance
