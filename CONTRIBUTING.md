@@ -373,7 +373,9 @@ CollectionName.schema.i18n("schemas.collection_name");
 CollectionName.attachSchema(CollectionName.schema);
 ```
 
-Reference: Meteor Guide [Collections and Schemas](https://guide.meteor.com/collections.html#schemas)
+References:
+- Meteor Guide: Code Style - [Collections](https://guide.meteor.com/code-style.html#collections)
+- Meteor Guide: [Collections and Schemas](https://guide.meteor.com/collections.html#schemas)
 
 # Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
