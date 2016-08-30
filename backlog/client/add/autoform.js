@@ -23,7 +23,5 @@ AutoForm.addHooks(['addApiBacklogItemForm'], {
   onSuccess: function () {
     // Hide Add Backlog Item modal
     Modal.hide("addApiBacklogItem");
-    // Push flash message to user
-    FlashMessages.sendSuccess('Thank you! Your backlog item has been successfully published.');
   }
 });
