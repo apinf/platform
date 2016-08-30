@@ -455,12 +455,20 @@ Template.dashboardCharts.onRendered(function () {
           parsedData = instance.parseChartData(chartData);
         }
 
+        // Unset loader
+        chartElements.removeClass('no-chart-data-found');
+
         // Render charts
         instance.renderCharts(parsedData);
 
+      } else if (chartData && chartData.length === 0) {
+
+        // throw user-friendly message
+        chartElements.addClass('no-chart-data-found');
+
+        chartElements.text('No data found');
       }
 
-      // Unset loader
       chartElements.removeClass('loader');
     }
   });
