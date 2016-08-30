@@ -305,17 +305,30 @@ disgard(trash);
 In general, please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
 
 # File structure
-This project is organized around a general Meteor architecture. In effect, folders are organized to indicate how Meteor.js treats them (e.g. whether they should be client-only).
+This project is organized around a 'component' architecture. By 'component', we mainly mean anything that has it's own database collection and one or more routes. In general, our file structure follows this pattern:
 
 * / (project root)
- * both/
-   * collections/
- * client/
-  * templates/
-  * compatibility/
- * server/
-  * methods/
-  * publications/
+ * component_name/
+  * collection/
+   * index.js
+   * schema.js
+   * permissions.js
+   * helpers.js
+   * server/
+    * publications.js
+  * client/
+   * lib/
+    * router.js
+   * view_name/
+    * view_name.css
+    * view_name.html
+    * view_name.js
+    * sub_view/
+     * sub_view.css
+     * sub_view.html
+     * sub_view.js
+  * server/
+   * methods.js
 
 ## Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
