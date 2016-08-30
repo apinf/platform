@@ -40,29 +40,9 @@ var redirectToDashboard = function () {
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
 
 Router.map(function() {
-  this.route("home", {
-    path: "/",
-    layoutTemplate: "homeLayout"
-  });
-
-  this.route("accountsAdmin", {
-    path: "/users",
-    layoutTemplate: "masterLayout",
-    render: "accountsAdmin"
-  });
-
   this.route("notAuthorized", {
     path: "/not-authorized",
     layoutTemplate: "masterLayout",
     render: "notAuthorized"
-  });
-
-  this.route('signOut', {
-    path: '/sign-out',
-    onBeforeAction: function() {
-      Meteor.logout(function() {});
-      this.redirect('/');
-      return this.next();
-    }
   });
 });
