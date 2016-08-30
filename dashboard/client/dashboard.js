@@ -47,6 +47,16 @@ Template.dashboard.onCreated(function () {
     });
   }
 
+  instance.getChartData = function (params) {
+
+    return new Promise((resolve, reject) => {
+      Meteor.call('getElasticSearchData', params, (err, res) => {
+        if (err) reject(err);
+        resolve(res.hits.hits);
+      });
+    });
+  }
+
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
 
@@ -124,30 +134,35 @@ Template.dashboard.onCreated(function () {
       // Set loader
       instance.chartDataLoadingState.set(true);
 
-      instance.checkElasticsearch().then((elasticsearchIsDefined) => {
+      instance.checkElasticsearch()
+        .then((elasticsearchIsDefined) => {
 
-        if (elasticsearchIsDefined) {
+          if (elasticsearchIsDefined) {
 
-          // Fetch elasticsearch data
-          Meteor.call('getElasticSearchData', params, (err, res) => {
+            instance.getChartData(params)
+              .then((chartData) => {
 
-            if (err) console.error(err);
+                if (chartData.length > 0) {
 
-            // Get list of items for analytics
-            const hits = res.hits.hits;
+                  // Update reactive variable
+                  instance.chartData.set(chartData);
 
-            // Unset loader
-            instance.chartDataLoadingState.set(false);
+                } else {
 
-            // Update reactive variable
-            instance.chartData.set(hits);
-          });
+                  // TODO: throw user-friendly message instead of alert
+                  console.error('No data found.');
+                }
 
-        } else {
+                instance.chartDataLoadingState.set(false);
+              })
+              .catch(err => console.error(err));
 
-          throw new Meteor.Error('Elasticsearch is not defined!');
-        }
-      });
+          } else {
+
+            throw new Meteor.Error('Elasticsearch is not defined!');
+          }
+        })
+        .catch(err => console.error(err));
     }
   });
 
