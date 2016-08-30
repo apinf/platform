@@ -301,8 +301,10 @@ let trash = ["tattered shoe", "broken pencil", "crumpled paper"];
 eat(food);
 disgard(trash);
 ```
-### JavaScript semi-standard
-In general, please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
+### Code standard(s) and Lint
+Configure your IDE to use eslint with the Airbnb styleguide.
+
+Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
 # File structure
 This project is organized around a 'component' architecture. By 'component', we mainly mean anything that has it's own database collection and one or more routes. In general, our file structure follows this pattern:
