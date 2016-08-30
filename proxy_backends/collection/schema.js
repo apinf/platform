@@ -5,6 +5,9 @@ ProxyBackends.schema = new SimpleSchema({
   "proxyId": {
     type: String
   },
+  "apiId": {
+    type: String
+  },
   "apiUmbrella": {
     type: ApiUmbrellaSchema,
     optional: true
