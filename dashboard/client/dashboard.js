@@ -159,7 +159,9 @@ Template.dashboard.onCreated(function () {
 
           } else {
 
-            throw new Meteor.Error('Elasticsearch is not defined!');
+            console.error('Elasticsearch is not defined!');
+
+            Router.go('/catalogue')
           }
         })
         .catch(err => console.error(err));
