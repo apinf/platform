@@ -9,7 +9,7 @@
 
       <div id="api-backend-documentation" class="tab-pane fade">
         {{> documentation apiBackend=apiBackend }}
-      </div> <!-- /api-backend-Documentation -->
+      </div> <!-- /api-backend-documentation -->
 
       <div id="api-backend-metadata" class="tab-pane fade">
         {{> viewApiBackendMetadata apiBackend=apiBackend }}
@@ -17,7 +17,7 @@
 
       <div id="api-backend-feedback" class="tab-pane fade">
         {{> feedbackList apiBackend=apiBackend }}
-      </div> <!-- /api-backend-metadata -->
+      </div> <!-- /api-backend-feedback -->
 
       <div id="api-backend-export" class="tab-pane fade">
         {{> viewApiBackendExport apiBackend=apiBackend }}
@@ -25,7 +25,7 @@
 
       <div id="api-backend-backlog" class="tab-pane fade">
         {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
-      </div> <!-- /api-backend-export -->
+      </div> <!-- /api-backend-backlog -->
 
       {{ # if currentUser }}
         {{# if apiBackend.currentUserCanEdit }}
