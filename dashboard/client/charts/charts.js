@@ -421,7 +421,6 @@ Template.dashboardCharts.onRendered(function () {
 
   // Get reference to chart html elemets
   const chartElements = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
-  const chartsHolder = $('.charts-holder');
 
   // Set active class to a button
   $('#tick-hour').addClass('active');
@@ -466,7 +465,7 @@ Template.dashboardCharts.onRendered(function () {
       } else if (chartData && chartData.length === 0) {
 
         // throw user-friendly message
-        chartsHolder.append('<div id="no-chart-data-placeholder" >No data found. <br/> Try chaning filtering options to get some analytics data.</div>');
+        $('.charts-holder').append('<div id="no-chart-data-placeholder" >No data found. <br/> Try chaning filtering options to get some analytics data.</div>');
       }
 
       chartElements.removeClass('loader');
