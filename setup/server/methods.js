@@ -1,3 +1,5 @@
+import { Branding } from '/branding/collection';
+
 Meteor.methods({
   isInitialSetupComplete () {
     // Get branding and settings documents if available

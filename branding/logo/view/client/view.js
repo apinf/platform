@@ -1,15 +1,14 @@
-import { Proxies } from '/proxies/collection'
 import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 
-Template.homeHeader.onCreated(function() {
+Template.viewProjectLogo.onCreated(function() {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
-  instance.subscribe('allProxies');
+  instance.subscribe('branding');
 });
 
-Template.homeHeader.helpers({
+Template.viewProjectLogo.helpers({
   uploadedProjectLogoLink: function() {
 
     const currentProjectLogoFileId = Branding.findOne().projectLogoFileId;
@@ -27,13 +26,10 @@ Template.homeHeader.helpers({
     }
   },
   projectLogoExists: function () {
-    const branding = this.branding;
-    if (branding) {
-      const currentProjectLogoFileId = branding.projectLogoFileId;
+    const branding = Branding.findOne();
+
+    if (branding.projectLogoFileId) {
       return true;
     }
-  },
-  proxyIsDefined () {
-    return (Proxies.findOne()) ? true : false;
   }
 });

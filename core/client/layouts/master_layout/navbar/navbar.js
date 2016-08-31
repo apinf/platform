@@ -1,5 +1,6 @@
-import { ProjectLogo } from '/settings/logo/collection';
-import { Proxies } from '/settings/proxies/collection'
+import { Proxies } from '/proxies/collection';
+import { Branding } from '/branding/collection';
+import { ProjectLogo } from '/branding/logo/collection';
 
 Template.navbar.onCreated(function() {
   const instance = this;
