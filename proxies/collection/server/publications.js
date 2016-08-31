@@ -1,4 +1,4 @@
-import { Proxies } from '../collection';
+import { Proxies } from '../';
 
 Meteor.publish('allProxies', function () {
 
