@@ -1,9 +1,11 @@
 import { ProjectLogo } from '/settings/logo/collection';
+import { Proxies } from '/settings/proxies/collection'
 
 Template.navbar.onCreated(function() {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
+  instance.subscribe('allProxies');
 });
 
 
@@ -46,6 +48,9 @@ Template.navbar.helpers({
       const currentProjectLogoFileId = branding.projectLogoFileId;
       return true;
     }
+  },
+  proxyIsDefined () {
+    return (Proxies.findOne()) ? true : false;
   }
 });
 
