@@ -6,6 +6,10 @@ Template.settings.created = function () {
 };
 
 Template.settings.helpers({
+  settingsCollection () {
+    // Return a reference to the Settings collection, for AutoForm
+    return Settings;
+  },
   formType () {
     if (Settings.findOne()) {
       // Updating existing Settings
