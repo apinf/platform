@@ -1,9 +1,11 @@
 import { ProjectLogo } from '/settings/logo/collection';
+import { Proxies } from '/settings/proxies/collection'
 
 Template.homeHeader.onCreated(function() {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
+  instance.subscribe('allProxies');
 });
 
 Template.homeHeader.helpers({
@@ -29,5 +31,8 @@ Template.homeHeader.helpers({
       const currentProjectLogoFileId = branding.projectLogoFileId;
       return true;
     }
+  },
+  proxyIsDefined () {
+    return (Proxies.findOne()) ? true : false;
   }
 });

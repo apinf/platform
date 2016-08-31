@@ -25,11 +25,13 @@
       <div id="home-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
-          <li>
-            <a href="{{pathFor 'dashboard'}}">
-              {{_ "homeHeader_dashboardLink_text" }}
-            </a>
-          </li>
+            {{ # if proxyIsDefined }}
+              <li>
+                <a href="{{pathFor 'dashboard'}}">
+                  {{_ "homeHeader_dashboardLink_text" }}
+                </a>
+              </li>
+            {{ / if }}
           {{> userMenu }}
           {{else}}
           <li>
