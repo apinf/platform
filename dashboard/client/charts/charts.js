@@ -8,7 +8,6 @@ import crossfilter from 'crossfilter';
 import _ from 'lodash';
 
 Template.dashboardCharts.onCreated(function () {
-
   const instance = this;
 
   // Variable that keeps table data
@@ -29,14 +28,14 @@ Template.dashboardCharts.onCreated(function () {
       hour: '%Y-%m-%d-%H',
       day: '%Y-%m-%d',
       week: '%Y-%m-%W',
-      month: '%Y-%m'
+      month: '%Y-%m',
     },
     moment: {
       hour: 'YYYY-MM-DD-HH',
       day: 'YYYY-MM-DD',
       week: 'YYYY-MM-ww',
-      month: 'YYYY-MM'
-    }
+      month: 'YYYY-MM',
+    },
   };
 
   // Init reactive vars that keep timestamp in default format (hour tick)
@@ -44,8 +43,7 @@ Template.dashboardCharts.onCreated(function () {
   instance.timeStampFormatMoment = new ReactiveVar(instance.analyticsTickDateFormat.moment.hour);
 
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
-  instance.parseChartData = function (items) {
-
+  instance.parseChartData = (items) => {
     // Create crossfilter
     const index = new crossfilter(items);
 
@@ -54,7 +52,6 @@ Template.dashboardCharts.onCreated(function () {
 
     // Create dimension based on a timestamp
     const timeStampDimension = index.dimension((d) => {
-
       let timeStamp = moment(d.fields.request_at[0]);
 
       // Format timestamp
@@ -71,7 +68,6 @@ Template.dashboardCharts.onCreated(function () {
 
     // Create dimension based on status code
     const statusCodeDimension = index.dimension((d) => {
-
       const statusCode = d.fields.response_status[0];
 
       let statusCodeScope = '';
@@ -101,30 +97,27 @@ Template.dashboardCharts.onCreated(function () {
     const binwidth = 50; // Init binwidth for a bar chart
 
     // Get MIN and MAX response time values
-    const minResponseTime = d3.min(items, function(d) { return d.fields.response_time[0]; });
-    const maxResponseTime = d3.max(items, function(d) { return d.fields.response_time[0]; });
+    const minResponseTime = d3.min(items, (d) => d.fields.response_time[0]);
+    const maxResponseTime = d3.max(items, (d) => d.fields.response_time[0]);
 
     // Create dimension based on response time
-    const responseTimeDimension = index.dimension((d) => {
-      return d.fields.response_time[0];
-    });
+    const responseTimeDimension = index.dimension((d) => d.fields.response_time[0]);
 
     // Create response time group
-    const responseTimeGroup = responseTimeDimension.group((d) => {
-      return binwidth * Math.floor(d / binwidth);
-    });
+    const responseTimeGroup = responseTimeDimension.group((d) =>
+      binwidth * Math.floor(d / binwidth));
 
     // Group add dimensions
     const all = index.groupAll();
 
     // Keep data counters on a dashboard updated
-    dc.dataCount("#row-selection")
+    dc.dataCount('#row-selection')
       .dimension(index)
       .group(all);
 
     // Get MIN and MAX timestamp values
-    const minDate = d3.min(items, function(d) { return d.fields.ymd; });
-    const maxDate = d3.max(items, function(d) { return d.fields.ymd; });
+    const minDate = d3.min(items, (d) => d.fields.ymd);
+    const maxDate = d3.max(items, (d) => d.fields.ymd);
 
     // Init scales for axis
     const timeScaleForLineChart = d3.time.scale().domain([minDate, maxDate]);
@@ -141,13 +134,12 @@ Template.dashboardCharts.onCreated(function () {
       timeScaleForLineChart,
       timeScaleForRangeChart,
       xScaleForBar,
-      binwidth
+      binwidth,
     };
-  }
+  };
 
   // Render charts on the page
-  instance.renderCharts = function (parsedData) {
-
+  instance.renderCharts = (parsedData) => {
     const {
       timeStampDimension,
       timeStampGroup,
@@ -158,7 +150,7 @@ Template.dashboardCharts.onCreated(function () {
       timeScaleForLineChart,
       timeScaleForRangeChart,
       xScaleForBar,
-      binwidth
+      binwidth,
     } = parsedData;
 
     // Init charts
@@ -171,7 +163,7 @@ Template.dashboardCharts.onCreated(function () {
       .height(350)
       .renderArea(true)
       .transitionDuration(300)
-      .margins({top: 5, right: 20, bottom: 25, left: 40})
+      .margins({ top: 5, right: 20, bottom: 25, left: 40 })
       .ordinalColors(['#2fa4e7'])
       .x(timeScaleForLineChart)
       .dimension(timeStampDimension)
@@ -189,21 +181,24 @@ Template.dashboardCharts.onCreated(function () {
       .xUnits(dc.units.fp.precision(binwidth))
       .centerBar(true)
       .gap(1)
-      .margins({top: 5, right: 20, bottom: 25, left: 40})
+      .margins({ top: 5, right: 20, bottom: 25, left: 40 })
       .ordinalColors(['#2fa4e7'])
       .x(timeScaleForRangeChart)
       .alwaysUseRounding(true)
       .elasticY(true)
-      .yAxis().ticks(0);
+      .yAxis()
+      .ticks(0);
 
     statusCodeCounts
       .height(215)
       .transitionDuration(300)
       .dimension(statusCodeDimension)
       .group(statusCodeGroup)
-      .ordinalColors(['#28ae4f', '#ffc107', '#e15400', '#cc1410']) // Correspond to bootstrap color classes
+      // Correspond to bootstrap color classes
+      .ordinalColors(['#28ae4f', '#ffc107', '#e15400', '#cc1410'])
       .elasticX(true)
-      .xAxis().ticks(5);
+      .xAxis()
+      .ticks(5);
 
     responseTimeDistribution
       .height(215)
@@ -212,12 +207,13 @@ Template.dashboardCharts.onCreated(function () {
       .group(responseTimeGroup)
       .centerBar(true)
       .xUnits(dc.units.fp.precision(binwidth))
-      .margins({top: 5, right: 20, bottom: 25, left: 45})
+      .margins({ top: 5, right: 20, bottom: 25, left: 45 })
       .ordinalColors(['#2fa4e7'])
       .brushOn(true)
       .x(xScaleForBar)
       .renderHorizontalGridLines(true)
-      .xAxis().ticks(10);
+      .xAxis()
+      .ticks(10);
 
     dc.renderAll(); // Render all charts
 
@@ -226,7 +222,7 @@ Template.dashboardCharts.onCreated(function () {
 
     // Iterate throuh each chart in a registry & set listeners for filtering
     _.forEach(dc.chartRegistry.list(), (chart) => {
-      chart.on("filtered", () => {
+      chart.on('filtered', () => {
         const filteredChartData = timeStampDimension.top(Infinity);
         instance.updateDataTable(filteredChartData);
         instance.updateLineChart(requestsOverTime, overviewChart, timeScaleForLineChart);
@@ -236,25 +232,23 @@ Template.dashboardCharts.onCreated(function () {
 
     instance.updateDataTable(chartData);
     instance.updateStatisticsData(chartData);
-  }
+  };
 
   // Function that gets and parsed data for table
-  instance.getTableData = function (chartData) {
-
-    let tableDataSet = [];
+  instance.getTableData = (chartData) => {
+    const tableDataSet = [];
 
     _.forEach(chartData, (e) => {
-
-      let time,
-          country,
-          requestPath,
-          requestIp,
-          responseTime,
-          responseStatus;
+      let time;
+      let country;
+      let requestPath;
+      let requestIp;
+      let responseTime;
+      let responseStatus;
 
       // Error handling for empty fields
-      try { time = moment(e.fields.request_at[0]).format("D/MM/YYYY HH:mm:ss"); }
-      catch (e) { time = ''; }
+      try { time = moment(e.fields.request_at[0]).format('D/MM/YYYY HH:mm:ss'); }
+      catch (err) { time = ''; }
 
       try { country = e.fields.request_ip_country[0]; }
       catch (e) { country = ''; }
@@ -272,21 +266,19 @@ Template.dashboardCharts.onCreated(function () {
       catch (e) { responseStatus = ''; }
 
       tableDataSet.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
-
     });
 
     return tableDataSet;
-  }
+  };
 
   // Function that updates table data
-  instance.updateDataTable = function (chartData) {
+  instance.updateDataTable = (chartData) => {
     const tableData = instance.getTableData(chartData);
     instance.tableDataSet.set(tableData);
-  }
+  };
 
   // Function that updates time scale for line chart
-  instance.updateLineChart = function (requestsOverTime, overviewChart, timeScaleForLineChart) {
-
+  instance.updateLineChart = (requestsOverTime, overviewChart, timeScaleForLineChart) => {
     // Get current time range
     const selectedTimeRange = overviewChart.filter();
 
@@ -296,34 +288,28 @@ Template.dashboardCharts.onCreated(function () {
     } else {
       requestsOverTime.x(timeScaleForLineChart);
     }
-  }
+  };
 
   // Function that fiters data based on frontend prefixes
-  instance.filterData = function (items, apiFrontendPrefixList) {
-
+  instance.filterData = (items, apiFrontendPrefixList) => {
     instance.updateStatisticsData(items);
 
     // Filter data based on matches with API frontend prefix
     return _.filter(items, (item) => {
-
       // Variable to hold request path
       const requestPath = item.fields.request_path[0];
 
       // Array to hold matched API frontend prefix
-      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) => {
-
-        // Check if request path starts with API frontend prefix
-        return requestPath.startsWith(apiFrontendPrefix);
-      });
+      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) =>
+        requestPath.startsWith(apiFrontendPrefix));
 
       // Check if API frontend prefix mathed the request path
       return itemMatchingApiFrontendPrefix.length;
     });
-  }
+  };
 
   // Functions that updates statistics data
   instance.updateStatisticsData = function (chartData) {
-
     // Get statistics sata
     const getRequestsCount = instance.getRequestsCount(chartData);
     const getAverageResponseTime = instance.getAverageResponseTime(chartData);
@@ -335,42 +321,35 @@ Template.dashboardCharts.onCreated(function () {
     instance.averageResponseTime.set(getAverageResponseTime);
     instance.responseRate.set(getResponseRate);
     instance.uniqueUsersCount.set(getUniqueUsersCount);
-  }
+  };
 
   // Function that returns chart items count
-  instance.getRequestsCount = function (chartData) {
-
-    return chartData.length;
-  }
+  instance.getRequestsCount = (chartData) => chartData.length;
 
   // Function that returns average response time
-  instance.getAverageResponseTime = function (chartData) {
-
+  instance.getAverageResponseTime = (chartData) => {
     // Get average response time value
-    const averageResponseTime = _.meanBy(chartData, (item) => { return item.fields.response_time[0]; });
+    const averageResponseTime = _.meanBy(chartData, (item) => item.fields.response_time[0]);
 
     // Round average response time value
     const roundedAverageResponseTime = _.round(averageResponseTime);
 
     // Check if value is not a number
     if (!isNaN(roundedAverageResponseTime)) {
-
       // Round it before return
       return roundedAverageResponseTime;
     }
 
     // Return 0 if the final value is NaN
     return 0;
-  }
+  };
 
   // Function that returns response rate
-  instance.getResponseRate = function (chartData) {
-
+  instance.getResponseRate = (chartData) => {
     // Group chart data by response status code
-    const responseStatusCodeGroup = _.groupBy(chartData, (item) => { return item.fields.response_status[0]; });
+    const responseStatusCodeGroup = _.groupBy(chartData, (item) => item.fields.response_status[0]);
 
     try {
-
       // Get the amount of success status codes
       const successStatusCodeCount = responseStatusCodeGroup['200'].length;
 
@@ -378,45 +357,36 @@ Template.dashboardCharts.onCreated(function () {
       const chartItemsCount = chartData.length;
 
       // Calculate average response rate based on success (200) status code in persentage
-      const responseRate = successStatusCodeCount / chartItemsCount * 100;
+      const responseRate = (successStatusCodeCount / chartItemsCount) * 100;
 
       // Roound it before return
       return _.round(responseRate);
-
     } catch (e) {
-
       // Return 0 if there are no 200 codes
       return 0;
     }
-  }
+  };
 
   // Function that returns amount of unique users
-  instance.getUniqueUsersCount = function (chartData) {
-
+  instance.getUniqueUsersCount = (chartData) => {
     // Group unique users by user ID
     const uniqueUsersGroup = _.groupBy(chartData, (item) => {
-
       try {
-
         return item.fields.user_id[0];
-
       } catch (e) {
-
         return false;
       }
     });
 
     // Remove object key with no-user data
-    delete uniqueUsersGroup['false'];
+    delete uniqueUsersGroup.false;
 
     // Return the amount of users in object
     return Object.keys(uniqueUsersGroup).length;
-  }
-
+  };
 });
 
 Template.dashboardCharts.onRendered(function () {
-
   const instance = this;
 
   // Get reference to chart html elemets
@@ -426,32 +396,25 @@ Template.dashboardCharts.onRendered(function () {
   $('#tick-hour').addClass('active');
 
   instance.autorun(() => {
-
     const chartData = Template.currentData().chartData;
     const chartDataIsLoading = Template.currentData().loadingState;
     const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
     if (chartDataIsLoading) {
-
       // Set loader
       chartElements.addClass('loader');
       $('.charts-holder>#no-chart-data-placeholder').remove();
-
     } else {
       if (chartData && chartData.length > 0) {
-
         let parsedData = [];
 
         if (apiFrontendPrefixList) {
-
           // Filter data by api frontend prefix
           const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
 
           // Parse data for charts
           parsedData = instance.parseChartData(filteredData);
-
         } else {
-
           // Parse data for charts
           parsedData = instance.parseChartData(chartData);
         }
@@ -461,9 +424,7 @@ Template.dashboardCharts.onRendered(function () {
 
         // Render charts
         instance.renderCharts(parsedData);
-
       } else if (chartData && chartData.length === 0) {
-
         // throw user-friendly message
         $('.charts-holder').append('<div id="no-chart-data-placeholder" >No data found. <br/> Try chaning filtering options to get some analytics data.</div>');
       }
@@ -474,12 +435,10 @@ Template.dashboardCharts.onRendered(function () {
 
   // Activate help icons
   $('[data-toggle="popover"]').popover();
-
 });
 
 Template.dashboardCharts.events({
-  'change #api-frontend-prefix-form': function (event) {
-
+  'change #api-frontend-prefix-form': (event) => {
     // Prevent default form submit
     event.preventDefault();
 
@@ -492,8 +451,7 @@ Template.dashboardCharts.events({
     // Set reactive variable
     instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
   },
-  'click #tick-hour': function () {
-
+  'click #tick-hour': () => {
     // Remove class from previous selection
     $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
 
@@ -505,11 +463,8 @@ Template.dashboardCharts.events({
     // Update charts tick based on new date format
     instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.hour);
     instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.hour);
-
-
   },
-  'click #tick-day': function () {
-
+  'click #tick-day': () => {
     // Remove class from previous selection
     $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
 
@@ -521,10 +476,8 @@ Template.dashboardCharts.events({
     // Update charts tick based on new date format
     instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.day);
     instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.day);
-
   },
-  'click #tick-week': function () {
-
+  'click #tick-week': () => {
     // Remove class from previous selection
     $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
 
@@ -536,10 +489,8 @@ Template.dashboardCharts.events({
     // Update charts tick based on new date format
     instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.week);
     instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.week);
-
   },
-  'click #tick-month': function () {
-
+  'click #tick-month': () => {
     // Remove class from previous selection
     $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
 
@@ -551,8 +502,7 @@ Template.dashboardCharts.events({
     // Update charts tick based on new date format
     instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.month);
     instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.month);
-
-  }
+  },
 });
 
 Template.dashboardCharts.helpers({
@@ -561,14 +511,13 @@ Template.dashboardCharts.helpers({
     return instance.tableDataSet.get();
   },
   statisticsData () {
-
     const instance = Template.instance();
 
     return {
       requestsCount: instance.requestsCount.get(),
       averageResponseTime: instance.averageResponseTime.get(),
       responseRate: instance.responseRate.get(),
-      uniqueUsersCount: instance.uniqueUsersCount.get()
-    }
-  }
+      uniqueUsersCount: instance.uniqueUsersCount.get(),
+    };
+  },
 });
