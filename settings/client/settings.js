@@ -1,9 +1,9 @@
 import { Settings } from '../collection';
 
-Template.settings.created = function () {
+Template.settings.onCreated(function () {
   // Subscription to feedback collection
   this.subscribe('settings');
-};
+});
 
 Template.settings.helpers({
   settingsCollection () {
@@ -11,15 +11,22 @@ Template.settings.helpers({
     return Settings;
   },
   formType () {
+    // Form type placeholder
+    let formType;
+
     if (Settings.findOne()) {
       // Updating existing Settings
-      return 'update';
+      formType = 'update';
     } else {
       // Editing Settings
-      return 'insert';
+      formType = 'insert';
     }
+
+    return formType;
   },
   editDoc () {
-    return Settings.findOne();
+    if (Settings.findOne()) {
+      return Settings.findOne();
+    }
   },
 });
