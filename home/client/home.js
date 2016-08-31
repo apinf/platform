@@ -1,3 +1,5 @@
+import { Branding } from '/branding/collection';
+
 Template.home.created = function () {
   // Get reference to template instance
   const instance = this;

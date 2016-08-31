@@ -1,4 +1,5 @@
-import { ProjectLogo } from '/settings/logo/collection';
+import { Branding } from '/branding/collection';
+import { ProjectLogo } from '/branding/logo/collection';
 
 Template.masterLayout.created = function () {
   // Subscription to branding collection
