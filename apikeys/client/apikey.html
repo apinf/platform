@@ -1,17 +1,16 @@
 <template name="apikey">
-  <h3>API Key</h3>
-  {{#if apiKey }}
-  <b>{{_ "profile_apiKey"}}:&nbsp;</b>
+{{#if apiKey }}
+  <b>{{_ "apiKeys_label"}}:&nbsp;</b>
   <span id="apikey">
     {{ apiKey }}
   </span>
-  {{> profileApiKeyCopyButton apiKey=apiKey }}
-  {{ else }}
+  {{> apiKeyCopyButton apiKey=apiKey }}
+{{ else }}
   <!-- Get API key button -->
   <p>
-    <button id="umbrella-apikey-button" class="btn btn-primary">
-      {{_ "profile_getUmbrellaApiKey" }}
+    <button id="getApiKeyButton" class="btn btn-primary">
+      {{_ "apiKeys_getApiKeyButton" }}
     </button>
   </p>
-  {{/if }}
+{{/if }}
 </template>

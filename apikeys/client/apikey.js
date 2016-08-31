@@ -1,5 +1,5 @@
 Template.apikey.events({
-  'click #umbrella-apikey-button' (event) {
+  'click #getApiKeyButton' (event) {
     Meteor.call('createApiKeyForCurrentUser', function(error, result) {
       if(error) {
         sAlert.error(error);
