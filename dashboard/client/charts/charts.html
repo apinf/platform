@@ -4,28 +4,30 @@
       {{ > dashboardChartsFiltering }}
     </div>
   </div>
-  {{> statisticsSummary statisticsData=statisticsData }}
-  <div class="row">
-    <div class="col-md-12">
-      <div>
-        {{ > requestsOverTimeChart }}
+  <div class="charts-holder">
+    {{> statisticsSummary statisticsData=statisticsData }}
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          {{ > requestsOverTimeChart }}
+        </div>
+        <div>
+          {{ > overviewChartChart }}
+        </div>
       </div>
-      <div>
-        {{ > overviewChartChart }}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {{ > statusCodeCountsChart }}
+      </div>
+      <div class="col-md-6">
+        {{ > responseTimeDistributionChart }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="padding-sides">
+        {{ > dashboardDataTable tableDataSet=tableDataSet }}
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      {{ > statusCodeCountsChart }}
-    </div>
-    <div class="col-md-6">
-      {{ > responseTimeDistributionChart }}
-    </div>
-  </div>
-  <div class="row">
-    <div class="padding-sides">
-      {{ > dashboardDataTable tableDataSet=tableDataSet }}
-    </div>
-  </div>
-</template>
+  </template>

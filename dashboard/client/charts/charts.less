@@ -7,9 +7,19 @@
   -moz-border-radius: 3px;
 }
 
-.no-chart-data-found {
-  margin-top: 1.7em;
+.charts-holder {
+  position: relative
+}
+
+#no-chart-data-placeholder {
+  position: absolute;
+  font-size: 1.4em;
   text-align: center;
-  font-size: 1.5em;
-  color: #777;
+  padding-top: 10em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.8);
+  z-index: 999;
 }
