@@ -1,3 +1,5 @@
+import { Settings } from '../collection';
+
 Template.settings.created = function () {
   // Subscription to feedback collection
   this.subscribe('settings');
