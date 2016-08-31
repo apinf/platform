@@ -98,11 +98,11 @@ Template.sdkCodeGeneratorModal.helpers({
 
     // Create object with instance varaibles
     return {
-      'codegenServer': instance.data.host,
-      'callRequest': instance.callRequest,
-      'documentationFileURL': instance.documentationFileURL,
-      'languageList': instance.languageList,
-      'urlParameters': instance.urlParameters
+      codegenServer: instance.data.host,
+      callRequest: instance.callRequest,
+      documentationFileURL: instance.documentationFileURL,
+      languageList: instance.languageList,
+      urlParameters: instance.urlParameters
     };
   }
 });

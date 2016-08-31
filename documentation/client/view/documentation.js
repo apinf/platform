@@ -23,7 +23,7 @@ Template.documentation.onRendered(function () {
 });
 
 Template.documentation.helpers({
-  uploadedDocumentationLink: function () {
+  uploadedDocumentationLink () {
     const currentDocumentationFileId = this.apiBackend.documentationFileId;
 
     // Convert to Mongo ObjectID
@@ -41,7 +41,7 @@ Template.documentation.helpers({
       return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + currentDocumentationFileId;
     }
   },
-  documentationLink: function () {
+  documentationLink () {
     // get documentation link
     const documentationLink = this.apiBackend.documentation_link;
     // check if exists
@@ -49,13 +49,13 @@ Template.documentation.helpers({
       return documentationLink;
     }
   },
-  documentationExists: function () {
+  documentationExists () {
     const currentApiBackend = this.apiBackend;
     if (currentApiBackend.documentationFileId) {
       return true;
     }
   },
-  codegenServerExists: function () {
+  codegenServerExists () {
     // Get template instance
     const instance = Template.instance();
 

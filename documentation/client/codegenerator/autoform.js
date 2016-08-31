@@ -3,7 +3,7 @@ import { HTTP } from 'meteor/http';
 import _ from 'lodash';
 
 AutoForm.addHooks('downloadSDK', {
-  onSubmit: function (formValues, updateDoc, instance) {
+  onSubmit (formValues, updateDoc, instance) {
     // Prevent form from submitting
     this.event.preventDefault();
 
@@ -32,7 +32,7 @@ AutoForm.addHooks('downloadSDK', {
 
     // Create POST options
     const options = {
-      'swaggerUrl': pathToFile
+      'swaggerUrl': pathToFile,
     };
 
     // Start spinner when send request
@@ -45,7 +45,7 @@ AutoForm.addHooks('downloadSDK', {
         FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorTextInvalidHost'));
       } else {
         // Get information from Swagger API response
-        let response = JSON.parse(result.content);
+        const response = JSON.parse(result.content);
 
         if (result.statusCode === 200) {
           // Hide modal
@@ -62,5 +62,5 @@ AutoForm.addHooks('downloadSDK', {
       // Finish spinner
       instance.callRequest.set(false);
     });
-  }
+  },
 });
