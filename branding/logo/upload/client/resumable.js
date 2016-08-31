@@ -1,3 +1,4 @@
+import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
 
