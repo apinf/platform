@@ -33,7 +33,7 @@ Template.uploadProjectLogo.events({
       // Remove prokect logo file id field
       Branding.update(branding._id, {$unset: { projectLogoFileId: "" }});
 
-      sAlert.success(TAPi18n.__('uploadProjectLogo__successfully_deleted'));
+      sAlert.success(TAPi18n.__('uploadProjectLogo_successfully_deleted'));
     }
   }
 });
