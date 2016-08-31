@@ -1,5 +1,5 @@
 Router.route('/settings/branding', {
-  name: 'settings.branding',
+  name: 'branding',
   layout: 'masterLayout',
   template: 'branding'
 });
