@@ -21,7 +21,7 @@ Template.dashboard.onCreated(function () {
   instance.dateFormatMoment = 'DD MMM YYYY';
 
   // Init default time frame (from: 2weeks ago, to: now)
-  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(14, 'day'));
+  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
   const userId = Meteor.userId();
@@ -67,7 +67,7 @@ Template.dashboard.onCreated(function () {
 
       // Construct parameters for elasticsearch
       let params = {
-        size: 10000,
+        size: 50000,
         body: {
           query: {
             filtered: {
@@ -141,7 +141,7 @@ Template.dashboard.onCreated(function () {
 
             instance.getChartData(params)
               .then((chartData) => {
-                
+
                 // Update reactive variable
                 instance.chartData.set(chartData);
 
