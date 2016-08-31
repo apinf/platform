@@ -51,7 +51,9 @@
     "settings": {
       "import/resolver": "meteor"
     },
-    "rules": {}
+    "rules": {
+      "space-before-function-paren": ["error", { "anonymous": "always", "named": "always" }]
+    }
   },
   "repository": {
     "type": "git",
