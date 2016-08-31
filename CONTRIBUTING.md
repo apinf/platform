@@ -307,30 +307,34 @@ Configure your IDE to use eslint with the Airbnb styleguide.
 Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
 # File structure
-This project is organized around a 'component' architecture. By 'component', we mainly mean anything that has it's own database collection and one or more routes. In general, our file structure follows this pattern:
+This project is organized around a 'module' / 'component' architecture. 
 
-* / (project root)
-  * component_name/
-    * collection/
-      * index.js
-      * schema.js
-      * permissions.js
-      * helpers.js
-    * server/
-      * publications.js
-    * client/
-      * lib/
-        * router.js
-      * view_name/
-        * view_name.css
-        * view_name.html
-        * view_name.js
-        * sub_view/
-          * sub_view.css
-          * sub_view.html
-          * sub_view.js
-    * server/
-      * methods.js
+By 'module', we mean anything that has it's own database collection and one or more routes. Components are more closely related to the idea of [WebComponents](http://webcomponents.org/), which are intended to be reusable, hierarchical user interface elements.
+
+In general, our file structure follows this pattern:
+
+* **/ (project root)**
+  * **module_name/**
+    * **collection/**
+      * *index.js*
+      * *schema.js*
+      * *permissions.js*
+      * *helpers.js*
+    * **server/**
+      * *publications.js*
+    * **client/**
+      * **lib/**
+        * *router.js*
+      * **component_one/**
+        * *component_one.css*
+        * *component_one.html*
+        * *component_one.js*
+        * **sub_component/**
+          * *sub_component.css*
+          * *sub_component.html*
+          * *sub_component.js*
+    * **server/**
+      * *methods.js*
 
 ## File names
 Please use underscores in folder and file names, rather than hyphens or camel case. E.g.
