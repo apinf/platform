@@ -1,3 +1,4 @@
+import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 
 Template.masterLayout.created = function () {
