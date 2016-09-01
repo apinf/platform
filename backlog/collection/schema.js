@@ -1,6 +1,6 @@
 import { ApiBacklogItems } from './';
 
-ApiBacklogItems.attachSchema(new SimpleSchema({
+ApiBacklogItems.schema = new SimpleSchema({
   title: {
     type: String,
     label: "Title",
@@ -66,4 +66,7 @@ ApiBacklogItems.attachSchema(new SimpleSchema({
       return new Date();
     }
   }
-}));
+});
+
+// Attach schema to collection for validation, etc.
+ApiBacklogItems.attachSchema(ApiBacklogItems.schema);
