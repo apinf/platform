@@ -1,27 +1,23 @@
 AutoForm.hooks({
   addApiBacklogItemForm: {
     before: {
-      insert: function (backlogItem) {
+      insert (backlogItem) {
         // Attach API Backend Id to backlog item schema
         backlogItem.apiBackendId = Router.current().params._id;
         return backlogItem;
       }
     },
-    beginSubmit: function () {
+    beginSubmit () {
       // Disable form elements while submitting form
       $('[data-schema-key],button').attr("disabled", "disabled");
     },
-    endSubmit: function () {
+    endSubmit () {
       // Enable form elements after form submission
       $('[data-schema-key],button').removeAttr("disabled");
+    },
+    onSuccess () {
+      // Hide Add Backlog Item modal
+      Modal.hide("addApiBacklogItem");
     }
-  }
-});
-
-AutoForm.addHooks(['addApiBacklogItemForm'], {
-  // Success message
-  onSuccess: function () {
-    // Hide Add Backlog Item modal
-    Modal.hide("addApiBacklogItem");
   }
 });
