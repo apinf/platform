@@ -1,7 +1,7 @@
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 
-Template.viewApiBackend.created = function () {
+Template.viewApiBackend.onCreated(function () {
   // Get reference to template instance
   var instance = this;
 
@@ -13,7 +13,7 @@ Template.viewApiBackend.created = function () {
 
   // Subscribe to API Backlog items for this API Backend
   instance.subscribe("apiBacklogItems", apiBackendId);
-};
+});
 
 Template.viewApiBackend.helpers({
   "apiBackend": function () {
