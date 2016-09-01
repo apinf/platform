@@ -97,6 +97,32 @@ Settings.schema = new SimpleSchema({
       }
     },
   },
+  sdkCodeGenerator: {
+    type: Object,
+    optional: true,
+  },
+  'sdkCodeGenerator.enabled': {
+    type: Boolean,
+    optional: true,
+  },
+  'sdkCodeGenerator.host': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    label: 'Host',
+    optional: true,
+    autoform: {
+      placeholder: 'https://generator.example.com/',
+    },
+    custom () {
+      const sdkCodeGeneratorEnabled = this.field('sdkCodeGenerator.enabled').value;
+      const sdkCodeGeneratorHost = this.value;
+
+      // Require code generator host if sdkCodeGenerator.enabled is checked
+      if (sdkCodeGeneratorEnabled === true && !sdkCodeGeneratorHost) {
+        return 'required';
+      }
+    },
+  },
   githubConfiguration: {
     type: Object,
     optional: true,
