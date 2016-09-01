@@ -10,7 +10,8 @@
           </button>
         {{/if}}
 
-         {{#if documentationExists }}
+      {{#if Template.subscriptionsReady }}
+        {{#if codegenServerExists }}
             <button 
               id="sdk-code-generator" 
               class="btn btn-info btn-xs pull-right"
@@ -19,7 +20,7 @@
                 {{_ "documentation_sdkGenerateButton" }}
             </button>
         {{/if}}
-
+      {{/if}}
       <h2 class="panel-title clearfix">
         {{_ "documentation_Title" }}
       </h2>
@@ -61,18 +62,18 @@
           <h2 class="panel-title">{{_ "documentation_Viewer_Title" }}</h2>
         </div>
         <div class="panel-body">
-          {{ # if Template.subscriptionsReady }}
-            {{ # if documentationExists }}
+          {{#if Template.subscriptionsReady }}
+            {{#if documentationExists }}
               <iframe src="/swagger/index.html?url={{uploadedDocumentationLink}}" width="100%" id="documentation"></iframe>
             {{ else }}
             <i>
               {{_ "documentation_No_Swagger_Message" }}
-              {{ # if apiBackend.currentUserCanEdit }}
+              {{#if apiBackend.currentUserCanEdit }}
               {{_ "documentation_No_Swagger_Manager_Message" }}
-              {{ / if}}
+              {{/if}}
             </i>
-            {{ / if}}
-          {{ / if }}
+            {{/if}}
+          {{/if }}
         </div>
       </div>
     </div>
