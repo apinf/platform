@@ -12,3 +12,5 @@ docker/ssl/env
 node_modules/
 packages
 node_modules
+npm-debug.log
+.eslintrc.json
