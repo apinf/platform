@@ -1,7 +1,9 @@
-AutoForm.addHooks(['editBacklogItemForm'], {
-  // Success message
-  onSuccess: function () {
-    // Hide Edit Backlog Item modal
-    Modal.hide("editBacklogItem");
+AutoForm.hooks({
+  editBacklogItemForm: {
+    // Success message
+    onSuccess () {
+      // Hide Edit Backlog Item modal
+      Modal.hide("editBacklogItem");
+    }
   }
 });
