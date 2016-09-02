@@ -10,10 +10,12 @@ Meteor.publish('allProxies', function () {
 Meteor.publish('publicProxyDetails', function () {
   // Return all proxies
   // with only name and ID fields
-  const publicProxyDetails = Proxies.find({
+  const publicProxyDetails = Proxies.find({}, {
     fields: {
       _id: 1,
       name: 1,
     },
   });
+
+  return publicProxyDetails;
 });
