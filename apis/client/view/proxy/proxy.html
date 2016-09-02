@@ -10,6 +10,7 @@
         {{> afQuickField name="proxyId" value=proxy._id }}
         {{> afQuickField name="apiId" value=api._id }}
         {{> afQuickField name="apiUmbrella.name" value=api.name }}
+        {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url }}
       {{/ autoForm }}
     </div>
   </div>
