@@ -22,6 +22,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'balance_algorithm': {
     type: String,
     optional: true,
+    defaultValue: 'least_conn',
   },
   'url_matches': {
     type: [Object],
