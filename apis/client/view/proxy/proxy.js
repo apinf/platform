@@ -6,7 +6,7 @@ Template.apiProxy.helpers({
     // Return a reference to ProxyBackends collection, for AutoForm
     return ProxyBackends;
   },
-  proxyId () {
+  proxy () {
     // TODO: determine how to provide proxyId for the ProxyBackend form
     // e.g. will we have more than one proxy?
     // if no, we need also to limit the number of proxies that can be added
@@ -14,6 +14,6 @@ Template.apiProxy.helpers({
     // Get a single Proxy
     const proxy = Proxies.findOne();
 
-    return proxy._id;
+    return proxy;
   },
 });

@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body">
       {{# autoForm collection=proxyBackendsCollection id="insertProxyBackend" type="insert"}}
-        {{> afQuickField name="proxyId" value=proxyId }}
+        {{> afQuickField name="proxyId" value=proxy._id }}
         {{> afQuickField name="apiId" value=api._id }}
         {{> afQuickField name="apiUmbrella.name" value=api.name }}
       {{/ autoForm }}
