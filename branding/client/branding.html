@@ -1,0 +1,41 @@
+<template name="branding">
+  <div class="container">
+    <div class="row" id="champion-messages">
+      <div class="col-md-3 settings-menu">
+        {{ > settingsMenu }}
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{_ "branding_panel_title"}}</h3>
+          </div>
+          <div class="panel-body">
+            {{#if branding}}
+            {{> viewProjectLogo branding=branding }}
+            {{> uploadProjectLogo branding=branding }}
+            {{#autoForm id="brandingEdit" type="update" collection=brandingCollection doc=branding }}
+            {{> afQuickField name='siteTitle'}}
+            {{> afQuickField name='siteSlogan'}}
+            {{> afQuickField name='siteFooter'}}
+            {{> afQuickField name='socialMedia'}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-primary">{{_ "branding_update"}}</button>
+            </div>
+            {{/autoForm}}
+            {{else}}
+            {{#autoForm id="brandingAdd" type="insert" collection=brandingCollection }}
+            {{> afQuickField name='siteTitle'}}
+            {{> afQuickField name='siteSlogan'}}
+            {{> afQuickField name='siteFooter'}}
+            {{> afQuickField name='socialMedia'}}
+            <div id="form-buttons">
+              <button type="submit" class="btn btn-primary">{{_ "branding_save"}}</button>
+            </div>
+            {{/autoForm}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
