@@ -1,48 +1,52 @@
 const ApiUmbrellaSchema = new SimpleSchema({
-  "name": {
+  'name': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "frontend_host": {
+  'frontend_host': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "backend_host": {
+  'backend_host': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "backend_protocol": {
+  'backend_protocol': {
     type: String,
-    optional: true
+    optional: true,
+    allowedValues: [
+      'http',
+      'https',
+    ],
   },
-  "balance_algorithm": {
+  'balance_algorithm': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "url_matches": {
+  'url_matches': {
     type: [Object],
-    optional: true
+    optional: true,
   },
-  "url_matches.$.frontend_prefix": {
+  'url_matches.$.frontend_prefix': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "url_matches.$.backend_prefix": {
+  'url_matches.$.backend_prefix': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "servers": {
+  'servers': {
     type: [Object],
-    optional: true
+    optional: true,
   },
-  "servers.$.host": {
+  'servers.$.host': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "servers.$.port": {
+  'servers.$.port': {
     type: Number,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 export { ApiUmbrellaSchema };
