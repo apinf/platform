@@ -1,11 +1,5 @@
 import { Settings } from './';
 
-// SimpleSchema.messages({
-//   regEx: [
-//     { exp: SimpleSchema.RegEx.Url, msg: '[label] must be a valid URL' },
-//   ],
-// });
-
 Settings.schema = new SimpleSchema({
   apinf: {
     type: Object,
