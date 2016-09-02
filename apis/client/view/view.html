@@ -28,7 +28,7 @@
       </div> <!-- /api-backend-backlog -->
 
       {{ # if currentUser }}
-        {{# if apiBackend.currentUserCanEdit }}
+        {{# if api.currentUserCanEdit }}
           <div id="api-proxy" class="tab-pane fade">
             {{> apiProxy api=api }}
           </div> <!-- /api-backend-proxy -->
