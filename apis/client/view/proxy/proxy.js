@@ -1,4 +1,5 @@
 import { ProxyBackends } from '/proxy_backends/collection';
+import { Proxies } from '/proxies/collection';
 
 Template.apiProxy.helpers({
   proxyBackendsCollection () {
