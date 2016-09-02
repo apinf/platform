@@ -1,40 +1,40 @@
 <template name="viewApiBackend">
   {{#if Template.subscriptionsReady }}
-  {{> viewApiBackendPageHeader apiBackend=apiBackend }}
+  {{> viewApiBackendPageHeader api=api }}
   <div class="container">
     <div class="tab-content">
       <div id="api-backend-details" class="tab-pane fade in active">
-        {{> viewApiBackendDetails apiBackend=apiBackend }}
+        {{> viewApiBackendDetails api=api }}
       </div> <!-- /api-backend-details -->
 
       <div id="api-backend-documentation" class="tab-pane fade">
-        {{> documentation apiBackend=apiBackend }}
+        {{> documentation api=api }}
       </div> <!-- /api-backend-documentation -->
 
       <div id="api-backend-metadata" class="tab-pane fade">
-        {{> viewApiBackendMetadata apiBackend=apiBackend }}
+        {{> viewApiBackendMetadata api=api }}
       </div> <!-- /api-backend-metadata -->
 
       <div id="api-backend-feedback" class="tab-pane fade">
-        {{> feedbackList apiBackend=apiBackend }}
+        {{> feedbackList api=api }}
       </div> <!-- /api-backend-feedback -->
 
       <div id="api-backend-export" class="tab-pane fade">
-        {{> viewApiBackendExport apiBackend=apiBackend }}
+        {{> viewApiBackendExport api=api }}
       </div> <!-- /api-backend-export -->
 
       <div id="api-backend-backlog" class="tab-pane fade">
-        {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}
+        {{> apiBacklog api=api backlogItems=backlogItems }}
       </div> <!-- /api-backend-backlog -->
 
       <div id="api-backend-proxy" class="tab-pane fade">
-        {{> apiProxy apiBackend=apiBackend }}
+        {{> apiProxy api=api }}
       </div> <!-- /api-backend-proxy -->
 
       {{ # if currentUser }}
         {{# if apiBackend.currentUserCanEdit }}
           <div id="api-backend-settings" class="tab-pane fade">
-            {{> viewApiBackendSettings apiBackend=apiBackend }}
+            {{> viewApiBackendSettings api=api }}
           </div>
         {{ / if }}
       {{ / if }}

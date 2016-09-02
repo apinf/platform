@@ -1,7 +1,7 @@
 <template name="documentation">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#if apiBackend.currentUserCanEdit }}
+      {{#if api.currentUserCanEdit }}
           <button
             id="manage-api-documentation"
             class="btn btn-xs btn-info pull-right">
@@ -12,10 +12,10 @@
 
       {{#if Template.subscriptionsReady }}
         {{#if codegenServerExists }}
-            <button 
-              id="sdk-code-generator" 
+            <button
+              id="sdk-code-generator"
               class="btn btn-info btn-xs pull-right"
-              data-toggle="tooltip" 
+              data-toggle="tooltip"
               title="{{_ 'documentation_tooltipSDKGeneratorButton'}}">
                 {{_ "documentation_sdkGenerateButton" }}
             </button>

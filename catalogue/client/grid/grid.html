@@ -7,7 +7,7 @@
           <div class="api-card-logo">
             {{> viewApiLogo apiBackend=api }}
           </div>
-          {{> viewApiBackendStatus apiBackend=api width="0.6" }}
+          {{> viewApiBackendStatus api=api width="0.6" }}
           <div class="api-card-info">
             <a href="/api/{{api._id}}"
                class="api-card-name">
@@ -29,7 +29,7 @@
                    data-toggle="tooltip"
                    data-placement="bottom"
                    title="{{_ 'catalogue-Bookmark-Tooltip_User'}}">
-                {{> favourite apiBackend=api catalogueView=true }}
+                {{> favourite api=api catalogueView=true }}
               </div>
             </li>
             {{else}}

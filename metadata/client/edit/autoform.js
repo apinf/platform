@@ -1,27 +1,27 @@
-AutoForm.addHooks("editApiMetadataForm", {
+AutoForm.addHooks('editApiMetadataForm', {
   before: {
-    "insert": function (metadata) {
+    'insert': function (metadata) {
       // Get reference to Router
-      let router = Router.current();
+      const router = Router.current();
 
       // Get API Backend ID, from Router
-      let apiBackendId = router.params._id;
+      const apiId = router.params._id;
 
       // Set the API Backend ID property of the metadata document
-      metadata.apiBackendId = apiBackendId;
+      metadata.apiBackendId = apiId;
 
       return metadata;
-    }
+    },
   },
-  "onSuccess": function () {
+  'onSuccess': function () {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
-  }
+  },
 });
 
-AutoForm.addHooks("updateApiMetadataForm", {
-  "onSuccess": function () {
+AutoForm.addHooks('updateApiMetadataForm', {
+  'onSuccess': function () {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
-  }
+  },
 });

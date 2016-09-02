@@ -3,36 +3,36 @@ import { ApiBacklogItems } from '/backlog/collection';
 
 Template.viewApiBackend.onCreated(function () {
   // Get reference to template instance
-  var instance = this;
+  const instance = this;
 
   // Get the API Backend ID from the route
   apiBackendId = Router.current().params._id;
 
   // Subscribe to a single API Backend, by ID
-  instance.subscribe("apiBackend", apiBackendId);
+  instance.subscribe('apiBackend', apiBackendId);
 
   // Subscribe to API Backlog items for this API Backend
-  instance.subscribe("apiBacklogItems", apiBackendId);
+  instance.subscribe('apiBacklogItems', apiBackendId);
 });
 
 Template.viewApiBackend.helpers({
-  "apiBackend": function () {
+  'api': function () {
     // Get the API Backend ID from the route
-    let apiBackendId = Router.current().params._id;
+    const apiId = Router.current().params._id;
 
     // Get single API Backend
-    let apiBackend = Apis.findOne(apiBackendId);
+    const api = Apis.findOne(apiId);
 
-    return apiBackend;
+    return api;
   },
-  backlogItems: function () {
+  backlogItems () {
     // Get the API Backend ID from the route
-    let apiBackendId = Router.current().params._id;
+    const apiBackendId = Router.current().params._id;
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    var backlogItems = ApiBacklogItems.find({apiBackendId: apiBackendId }, {sort: {priority: -1, createdAt: -1}}).fetch();
+    const backlogItems = ApiBacklogItems.find({ apiBackendId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
 
     return backlogItems;
-  }
+  },
 });
