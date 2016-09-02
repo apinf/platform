@@ -119,8 +119,9 @@ Template.catalogue.helpers({
     // Pagination
     const arrStart = instance.apisPerPage.get() * instance.currentPageNumber.get();
     const arrEnd = arrStart + instance.apisPerPage.get();
+    const paginatedApis = apis.slice(arrStart, arrEnd);
 
-    return apis.slice(arrStart, arrEnd);
+    return paginatedApis;
   },
   gridViewMode () {
     // Get reference to template instance
