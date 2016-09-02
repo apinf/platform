@@ -1,5 +1,6 @@
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
+import { Proxies } from '/proxies/collection';
 
 Template.viewApiBackend.onCreated(function () {
   // Get reference to template instance
@@ -37,5 +38,19 @@ Template.viewApiBackend.helpers({
     const backlogItems = ApiBacklogItems.find({ apiBackendId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
 
     return backlogItems;
+  },
+  proxyIsConfigured () {
+    // Check if one or more proxy has been configured
+    let proxyIsConfigured;
+
+    const proxyCount = Proxies.find().count();
+
+    if (proxyCount > 0) {
+      proxyIsConfigured = true;
+    } else {
+      proxyIsConfigured = false;
+    }
+
+    return proxyIsConfigured;
   },
 });

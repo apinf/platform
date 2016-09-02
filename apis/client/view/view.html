@@ -1,6 +1,6 @@
 <template name="viewApiBackend">
   {{#if Template.subscriptionsReady }}
-  {{> viewApiBackendPageHeader api=api }}
+  {{> viewApiBackendPageHeader api=api proxyIsConfigured=proxyIsConfigured }}
   <div class="container">
     <div class="tab-content">
       <div id="api-details" class="tab-pane fade in active">
@@ -29,9 +29,12 @@
 
       {{ # if currentUser }}
         {{# if api.currentUserCanEdit }}
+
+          {{# if proxyIsConfigured }}
           <div id="api-proxy" class="tab-pane fade">
             {{> apiProxy api=api }}
           </div> <!-- /api-backend-proxy -->
+          {{/ if }}
 
           <div id="api-backend-settings" class="tab-pane fade">
             {{> viewApiBackendSettings api=api }}

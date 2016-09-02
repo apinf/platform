@@ -71,18 +71,22 @@
           </li>
 
           {{# if api.currentUserCanEdit }}
-          <li>
-            <a href="#api-settings" data-toggle="tab">
-              <i class="fa fa-cog"></i>
-              {{_ "viewApiBackendNavigationMenu_settings" }}
-            </a>
-          </li>
-          <li>
-            <a href="#api-proxy" data-toggle="tab">
-              <i class="fa fa-sitemap"></i>
-              {{_ "viewApiBackendNavigationMenu_proxy" }}
-            </a>
-          </li>
+            <li>
+              <a href="#api-settings" data-toggle="tab">
+                <i class="fa fa-cog"></i>
+                {{_ "viewApiBackendNavigationMenu_settings" }}
+              </a>
+            </li>
+
+            {{# if proxyIsConfigured }}
+            <li>
+              <a href="#api-proxy" data-toggle="tab">
+                <i class="fa fa-sitemap"></i>
+                {{_ "viewApiBackendNavigationMenu_proxy" }}
+              </a>
+            </li>
+            {{/ if }}
+
           {{ / if }}
 
         </ul>
