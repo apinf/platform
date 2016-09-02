@@ -11,6 +11,8 @@
         {{> afQuickField name="apiId" value=api._id }}
         {{> afQuickField name="apiUmbrella.name" value=api.name }}
         {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url }}
+        {{> afQuickField name="apiUmbrella.backend_host" value=api.url }}
+        {{> afQuickField name="apiUmbrella.backend_protocol" type="select" options="allowed" }}
       {{/ autoForm }}
     </div>
   </div>
