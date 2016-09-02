@@ -1,190 +1,192 @@
-Settings = new Mongo.Collection('Settings');
+const Settings = new Mongo.Collection('Settings');
+
+export { Settings };
 
 SimpleSchema.messages({
   regEx: [
-    {exp: SimpleSchema.RegEx.Url, msg: "[label] must be a valid URL"},
-  ]
+    { exp: SimpleSchema.RegEx.Url, msg: '[label] must be a valid URL' },
+  ],
 });
 
 Schemas.SettingsSchema = new SimpleSchema({
   apinf: {
     type: Object,
-    optional: true
+    optional: true,
   },
   apiDocumentationEditor: {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "apiDocumentationEditor.enabled": {
+  'apiDocumentationEditor.enabled': {
     type: Boolean,
-    optional: true
+    optional: true,
   },
-  "apiDocumentationEditor.host": {
+  'apiDocumentationEditor.host': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
+    label: 'Host',
     optional: true,
     autoform: {
-      placeholder: 'http://editor.example.com/'
+      placeholder: 'http://editor.example.com/',
     },
-    custom: function () {
-      let apiDocumentationEditorEnabled = this.field("apiDocumentationEditor.enabled").value;
-      let apiDocumentationEditorHost = this.value;
+    custom () {
+      const apiDocumentationEditorEnabled = this.field('apiDocumentationEditor.enabled').value;
+      const apiDocumentationEditorHost = this.value;
 
       // Require editor host if apiDocumentationEditor.enabled is checked
       if (apiDocumentationEditorEnabled === true && !apiDocumentationEditorHost) {
-        return "required";
+        return 'required';
       }
-    }
+    },
   },
   apiUmbrella: {
     type: Object,
-    optional: false
+    optional: false,
   },
-  "apiUmbrella.host": {
+  'apiUmbrella.host': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     optional: false,
   },
-  "apiUmbrella.apiKey": {
+  'apiUmbrella.apiKey': {
     type: String,
     optional: false,
   },
-  "apiUmbrella.authToken": {
+  'apiUmbrella.authToken': {
     type: String,
     optional: false,
   },
-  "apiUmbrella.baseUrl": {
+  'apiUmbrella.baseUrl': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     optional: false,
   },
   elasticsearch: {
     type: Object,
-    optional: false
+    optional: false,
   },
-  "elasticsearch.host": {
+  'elasticsearch.host': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
+    label: 'Host',
     optional: false,
     autoform: {
-      placeholder: 'http://example.com:14002/'
-    }
+      placeholder: 'http://example.com:14002/',
+    },
   },
   mail: {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "mail.enabled": {
+  'mail.enabled': {
     type: Boolean,
-    optional: true
+    optional: true,
   },
-  "mail.username": {
+  'mail.username': {
     type: String,
-    label: "Mailgun Username",
+    label: 'Mailgun Username',
     optional: true,
     autoform: {
-      placeholder: 'Mailgun Username'
+      placeholder: 'Mailgun Username',
     },
-    custom: function () {
-      let mailEnabled = this.field("mail.enabled").value;
-      let mailUsername = this.value;
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const mailUsername = this.value;
 
       // Require mail username if mailEnabled is checked
       if (mailEnabled === true && !mailUsername) {
-        return "required";
+        return 'required';
       }
-    }
+    },
   },
-  "mail.password": {
+  'mail.password': {
     type: String,
-    label: "Mailgun Password",
+    label: 'Mailgun Password',
     optional: true,
     autoform: {
-      placeholder: 'xxx'
+      placeholder: 'xxx',
     },
-    custom: function () {
-      let mailEnabled = this.field("mail.enabled").value;
-      let mailPassword = this.value;
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const mailPassword = this.value;
 
       // Require mail password if mail enabled is checked
       if (mailEnabled === true && !mailPassword) {
-        return "required";
+        return 'required';
       }
-    }
+    },
   },
-  "mail.toEmail": {
+  'mail.toEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: "Contact Form E-mail Address",
+    label: 'Contact Form E-mail Address',
     optional: true,
     autoform: {
-      placeholder: 'mail@example.com'
+      placeholder: 'mail@example.com',
     },
-    custom: function () {
-      let mailEnabled = this.field("mail.enabled").value;
-      let contactFormEmail = this.value;
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const contactFormEmail = this.value;
 
       // Require mail password if mail enabled is checked
       if (mailEnabled === true && !contactFormEmail) {
-        return "required";
+        return 'required';
       }
-    }
+    },
   },
   githubConfiguration: {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "githubConfiguration.clientId": {
+  'githubConfiguration.clientId': {
     type: String,
-    label: "Client ID",
+    label: 'Client ID',
     optional: true,
     autoform: {
-      placeholder: 'xxx'
-    }
+      placeholder: 'xxx',
+    },
   },
-  "githubConfiguration.secret": {
+  'githubConfiguration.secret': {
     type: String,
-    label: "Secret",
+    label: 'Secret',
     optional: true,
     autoform: {
-      placeholder: 'xxx'
-    }
+      placeholder: 'xxx',
+    },
   },
   initialSetupComplete: {
     type: Boolean,
-    optional: true
+    optional: true,
   },
   sdkCodeGenerator: {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "sdkCodeGenerator.enabled": {
+  'sdkCodeGenerator.enabled': {
     type: Boolean,
-    optional: true
+    optional: true,
   },
-  "sdkCodeGenerator.host": {
+  'sdkCodeGenerator.host': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: "Host",
+    label: 'Host',
     optional: true,
     autoform: {
-      placeholder: 'https://generator.example.com/'
+      placeholder: 'https://generator.example.com/',
     },
-    custom: function () {
-      let sdkCodeGeneratorEnabled = this.field("sdkCodeGenerator.enabled").value;
-      let sdkCodeGeneratorHost = this.value;
+    custom () {
+      const sdkCodeGeneratorEnabled = this.field('sdkCodeGenerator.enabled').value;
+      const sdkCodeGeneratorHost = this.value;
 
       // Require code generator host if sdkCodeGenerator.enabled is checked
       if (sdkCodeGeneratorEnabled === true && !sdkCodeGeneratorHost) {
-        return "required";
+        return 'required';
       }
-    }
-  }
+    },
+  },
 });
 
 // Enable translations (i18n)
-Schemas.SettingsSchema.i18n("schemas.settings.apiUmbrella");
+Schemas.SettingsSchema.i18n('schemas.settings.apiUmbrella');
 
 Settings.attachSchema(Schemas.SettingsSchema);
