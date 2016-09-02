@@ -16,13 +16,15 @@
     "elasticsearch": "^11.0.1",
     "github": "^1.4.0",
     "jquery": "^2.2.4",
+    "jquery-bbq": "^1.0.0",
     "jquery.rateit": "^1.0.23",
     "js-yaml": "^3.6.1",
     "lodash": "^4.13.1",
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.14.1",
     "simple-statistics": "^2.1.0",
-    "swagger-parser": "^3.4.1"
+    "swagger-parser": "^3.4.1",
+    "swagger-ui-browserify": "^2.1.4-a"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
@@ -52,8 +54,17 @@
       "import/resolver": "meteor"
     },
     "rules": {
-      "comma-dangle": ["error", "always-multiline"],
-      "space-before-function-paren": ["error", { "anonymous": "always", "named": "always" }]
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "always"
+        }
+      ]
     }
   },
   "repository": {

@@ -64,7 +64,7 @@
         <div class="panel-body">
           {{#if Template.subscriptionsReady }}
             {{#if documentationExists }}
-              <iframe src="/swagger/index.html?url={{uploadedDocumentationLink}}" width="100%" id="documentation"></iframe>
+              {{> swaggerUi apiDocumentation=uploadedDocumentationLink}}
             {{ else }}
             <i>
               {{_ "documentation_No_Swagger_Message" }}
