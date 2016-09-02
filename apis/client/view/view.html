@@ -27,12 +27,12 @@
         {{> apiBacklog api=api backlogItems=backlogItems }}
       </div> <!-- /api-backend-backlog -->
 
-      <div id="api-proxy" class="tab-pane fade">
-        {{> apiProxy api=api }}
-      </div> <!-- /api-backend-proxy -->
-
       {{ # if currentUser }}
         {{# if apiBackend.currentUserCanEdit }}
+          <div id="api-proxy" class="tab-pane fade">
+            {{> apiProxy api=api }}
+          </div> <!-- /api-backend-proxy -->
+
           <div id="api-backend-settings" class="tab-pane fade">
             {{> viewApiBackendSettings api=api }}
           </div>
