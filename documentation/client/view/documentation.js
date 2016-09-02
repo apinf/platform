@@ -1,4 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
+import { Settings } from '/settings/collection';
 
 Template.documentation.onCreated(function () {
   const instance = this;
@@ -73,23 +74,23 @@ Template.documentation.helpers({
       // Generator is enabled and has host setting, return true
       return true;
     }
-  }
+  },
 
 });
 
 Template.documentation.events({
-  'click #manage-api-documentation' (event, instance) {
+  'click #manage-api-documentation': function (event, instance) {
     // Get reference to API backend
     const apiBackend = instance.data.apiBackend;
     // Show the manage API documentation form
     Modal.show('manageApiDocumentationModal', { apiBackend });
   },
-  'click #sdk-code-generator' (event, instance) {
+  'click #sdk-code-generator': function (event, instance) {
     // Get reference to API backend
     const apiBackend = instance.data.apiBackend;
     // Get reference to Code Generator host
     const host = instance.codegenServer;
     // Show the SDK Code generator form
     Modal.show('sdkCodeGeneratorModal', { apiBackend, host });
-  }
+  },
 });
