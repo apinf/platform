@@ -1,4 +1,4 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '../../collection';
 
 Template.editApiMetadata.helpers({
   apiMetadataCollection () {

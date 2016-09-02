@@ -1,4 +1,4 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '/metadata/collection';
 import { Apis } from '/apis/collection';
 
 ApiMetadata.allow({

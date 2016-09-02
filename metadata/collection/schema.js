@@ -1,4 +1,4 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '/metadata/collection';
 
 ApiMetadata.schema = new SimpleSchema({
   // TODO: migrate to use 'apiId' instead of 'apiBackendId'
