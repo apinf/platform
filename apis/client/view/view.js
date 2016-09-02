@@ -13,6 +13,9 @@ Template.viewApiBackend.onCreated(function () {
 
   // Subscribe to API Backlog items for this API Backend
   instance.subscribe('apiBacklogItems', apiBackendId);
+
+  // Subscribe to public proxy details
+  instance.subscribe('publicProxyDetails');
 });
 
 Template.viewApiBackend.helpers({
