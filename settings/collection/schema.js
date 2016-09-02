@@ -31,41 +31,6 @@ Settings.schema = new SimpleSchema({
       }
     },
   },
-  apiUmbrella: {
-    type: Object,
-    optional: false,
-  },
-  'apiUmbrella.host': {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    optional: false,
-  },
-  'apiUmbrella.apiKey': {
-    type: String,
-    optional: false,
-  },
-  'apiUmbrella.authToken': {
-    type: String,
-    optional: false,
-  },
-  'apiUmbrella.baseUrl': {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    optional: false,
-  },
-  elasticsearch: {
-    type: Object,
-    optional: false,
-  },
-  'elasticsearch.host': {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    label: 'Host',
-    optional: false,
-    autoform: {
-      placeholder: 'http://example.com:14002/',
-    },
-  },
   mail: {
     type: Object,
     optional: true,
