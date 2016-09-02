@@ -14,6 +14,7 @@ Meteor.publish('publicProxyDetails', function () {
     fields: {
       _id: 1,
       name: 1,
+      'apiUmbrella.url': 1,
     },
   });
 
