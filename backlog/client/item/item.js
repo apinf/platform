@@ -32,20 +32,22 @@ Template.backlogItem.helpers({
     return priorityClass;
 
   },
-  currentUserCanEditBacklog: function() {
-    /*
-     API Backlog shares permissions with the API Backend
-     Make sure user can edit API Backend before allowing Metadata permissions
-    */
-
-    // Check if current user can edit API Backend
-    return this.apiBackend.currentUserCanEdit();
-  },
   currentUserIsOwner: function (backlogItem) {
     // Get current User ID
     const currentUser = Meteor.userId();
 
     // Check if current User ID matches backlog User ID
     return currentUser === backlogItem.userId;
+  }
+});
+
+Template.backlogItem.events({
+  'click .edit-backlog-item' () {
+    // Show Edit Backlog Item modal
+    Modal.show("editBacklogItem", { backlogItem: this.item});
+  },
+  'click .delete-backlog-item' () {
+    // Show the Delete Confirmation dialogue
+    Modal.show("deleteBacklogItem", { backlogItem: this.item});
   }
 });
