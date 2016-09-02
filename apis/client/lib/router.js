@@ -56,12 +56,4 @@ Router.map(function() {
     layoutTemplate: "masterLayout",
     render: "importApiConfiguration"
   });
-
-  //this.route();
-
-  this.route("apiBacklog", {
-    path: "/api/:_id/backlog",
-    layoutTemplate: "masterLayout",
-    render: "apiBacklog"
-  });
 });
