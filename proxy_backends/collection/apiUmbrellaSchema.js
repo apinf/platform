@@ -14,7 +14,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
     label: 'API host',
   },
   'backend_protocol': {
-    label: 'Proxy host protocol',
+    label: 'API host protocol',
     type: String,
     optional: true,
     allowedValues: [
