@@ -315,9 +315,7 @@ In general, our module structure follows this pattern:
 
 * **/module_name**
   * **client/**
-    * **lib/**
-      * *router.js*
-    * * **component_one/**
+    * **component_one/**
       * *component_one.css*
       * *component_one.html*
       * *component_one.js*
@@ -325,6 +323,8 @@ In general, our module structure follows this pattern:
         * *sub_component.css*
         * *sub_component.html*
         * *sub_component.js*
+    * **lib/**
+      * *router.js*
   * **collection/**
     * *index.js*
     * *schema.js*
