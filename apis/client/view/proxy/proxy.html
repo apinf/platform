@@ -13,7 +13,8 @@
         {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url }}
         {{> afQuickField name="apiUmbrella.backend_host" value=api.url }}
         {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol }}
-        {{> afQuickField name="apiUmbrella.url_matches" }}
+        {{> afQuickField name="apiUmbrella.url_matches.0.frontend_prefix" }}
+        {{> afQuickField name="apiUmbrella.url_matches.0.backend_prefix" }}
         {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url }}
         {{> afQuickField name="apiUmbrella.servers.0.port" }}
       {{/ autoForm }}
