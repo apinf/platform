@@ -1,5 +1,7 @@
-AutoForm.addHooks(['settings'], {
-  onSuccess () {
-    FlashMessages.sendSuccess('Settings saved.');
+AutoForm.hooks({
+  settings: {
+    onSuccess () {
+      FlashMessages.sendSuccess('Settings saved.');
+    },
   },
 });
