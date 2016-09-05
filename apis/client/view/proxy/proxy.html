@@ -12,10 +12,11 @@
         {{> afQuickField name="apiUmbrella.name" value=api.name }}
         {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url }}
         {{> afQuickField name="apiUmbrella.backend_host" value=api.url }}
-        {{> afQuickField name="apiUmbrella.backend_protocol" type="select" options="allowed" }}
+        {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol }}
         {{> afQuickField name="apiUmbrella.url_matches" }}
         {{> afQuickField name="apiUmbrella.servers" }}
       {{/ autoForm }}
+      {{ proxyProtocol }}
     </div>
   </div>
 </template>
