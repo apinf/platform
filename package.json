@@ -22,7 +22,8 @@
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.14.1",
     "simple-statistics": "^2.1.0",
-    "swagger-parser": "^3.4.1"
+    "swagger-parser": "^3.4.1",
+    "urijs": "^1.18.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
@@ -52,8 +53,17 @@
       "import/resolver": "meteor"
     },
     "rules": {
-      "comma-dangle": ["error", "always-multiline"],
-      "space-before-function-paren": ["error", { "anonymous": "always", "named": "always" }]
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "always"
+        }
+      ]
     }
   },
   "repository": {
