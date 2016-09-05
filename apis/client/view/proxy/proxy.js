@@ -1,5 +1,9 @@
+// Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
+
+// NPM import
+import 'urijs';
 
 Template.apiProxy.helpers({
   proxyBackendsCollection () {
@@ -15,5 +19,17 @@ Template.apiProxy.helpers({
     const proxy = Proxies.findOne();
 
     return proxy;
+  },
+  apiUrlProtocol () {
+    // Get one proxy from the Proxies collection
+    // This assumes we have only one proxy
+    // TODO: refactor this method for multi-proxy support
+    const api = this.api;
+
+    // Construct URL object for proxy URL
+    const apiUrl = URI(api.url);
+
+    // Return the Proxy URL protocol
+    return apiUrl.protocol();
   },
 });
