@@ -1,34 +1,38 @@
 import { Template } from 'meteor/templating';
-import SwaggerUi from 'swagger-ui-browserify'
 import 'swagger-ui/dist/css/screen.css'
 
 Template.swaggerUi.onCreated(function () {
-  const documentationURL = this.data.apiDocumentation;
-
-  const swagger = new SwaggerUi({
-    url: documentationURL,
-    dom_id: 'swagger-ui-container',
-    useJQuery: true,
-    supportHeaderParams: true,
-    supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch', 'options'],
-    onComplete: function (swaggerApi, swaggerUi) {
-      console.log('Loaded SwaggerUI')
-    },
-    onFailure: function (error) {
-      console.error('Unable to Load SwaggerUI', error)
-    },
-    apisSorter: 'alpha',
-    operationsSorter: 'alpha',
-    docExpansion: 'none'
+  const instance = Template.instance();
+  // Set flag on Data is not Ready
+  instance.dataFetched = new ReactiveVar(false);
+  
+  // Get url of api documentation
+  const documentationURL = instance.data.apiDocumentation;
+  
+  // Check validation of Swagger file
+  Meteor.call('isValidSwagger', documentationURL, function (error, result) {
+    // result can be 'true' or '{}'
+    if (result === true) {
+      // Ssave result in template instance
+      instance.documentationValid = result;
+    }
+    
+    // Set flag on Data is Ready
+    instance.dataFetched.set(true)
   });
 
-
-  swagger.load()
+  
 });
 
-Template.swaggerUi.onRendered(function () {
-  const documentationURL = this.data.apiDocumentation;
-
-  $('#input_baseUrl').val(documentationURL);
-
+Template.swaggerUi.helpers({
+  dataFetched () {
+    const instance = Template.instance();
+    // Get status of data is ready
+    return instance.dataFetched.get();
+  },
+  documentationValid () {
+    const instance = Template.instance();
+    // Get status of api documentation is valid
+    return instance.documentationValid;
+  },
 });
