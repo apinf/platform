@@ -48,12 +48,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'servers.$.host': {
     type: String,
     optional: true,
-    label: 'Proxy host',
+    label: 'API host',
   },
   'servers.$.port': {
     type: Number,
     optional: true,
-    label: 'Proxy port',
+    label: 'API port',
   },
 });
 
