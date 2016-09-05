@@ -314,14 +314,6 @@ By 'module', we mean anything that has it's own database collection and one or m
 In general, our file structure follows this pattern:
 
 * **/ (project root)**
-  * **module_name/**
-    * **collection/**
-      * *index.js*
-      * *schema.js*
-      * *permissions.js*
-      * *helpers.js*
-      * **server/**
-        * *publications.js*
     * **client/**
       * **lib/**
         * *router.js*
@@ -333,6 +325,13 @@ In general, our file structure follows this pattern:
           * *sub_component.css*
           * *sub_component.html*
           * *sub_component.js*
+    * **collection/**
+      * *index.js*
+      * *schema.js*
+      * *permissions.js*
+      * *helpers.js*
+      * **server/**
+        * *publications.js*
     * **server/**
       * *methods.js*
 
