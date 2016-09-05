@@ -6,10 +6,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'frontend_host': {
     type: String,
     optional: true,
+    label: 'Proxy host',
   },
   'backend_host': {
     type: String,
     optional: true,
+    label: 'API host',
   },
   'backend_protocol': {
     type: String,
@@ -31,10 +33,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'url_matches.$.frontend_prefix': {
     type: String,
     optional: true,
+    label: 'Proxy base path',
   },
   'url_matches.$.backend_prefix': {
     type: String,
     optional: true,
+    label: 'API base path',
   },
   'servers': {
     type: [Object],
@@ -43,10 +47,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'servers.$.host': {
     type: String,
     optional: true,
+    label: 'Proxy host',
   },
   'servers.$.port': {
     type: Number,
     optional: true,
+    label: 'Proxy port',
   },
 });
 
