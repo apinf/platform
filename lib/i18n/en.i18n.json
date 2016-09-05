@@ -440,7 +440,7 @@
   "settings_apiUmbrella": "API Umbrella",
   "settings_elasticsearch": "Elasticsearch",
   "settings_sdkCode_generator": "SDK Code Generator",
-  "settings-successMessage": "Settings saved",
+  "settings_successMessage": "Settings saved",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
   "settingsMenu_branding": "Branding",
