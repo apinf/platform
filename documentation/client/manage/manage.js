@@ -78,11 +78,7 @@ Template.manageApiDocumentationModal.events({
 
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
-<<<<<<< HEAD
     const api = Session.get('api');
-=======
-    const currentApiBackend = Session.get('currentApiBackend');
->>>>>>> a5ddc0bdb9c8f2fc2a44c601ce24f0bb05d7c9cd
 
     const documentationFileId = api.documentationFileId;
 
@@ -110,11 +106,8 @@ Template.manageApiDocumentationModal.helpers({
       return false;
     }
   },
-<<<<<<< HEAD
   apisCollection () {
-=======
-  formCollection () {
->>>>>>> a5ddc0bdb9c8f2fc2a44c601ce24f0bb05d7c9cd
+    // Return a reference to Apis collection, for AutoForm
     return Apis;
   },
 });
