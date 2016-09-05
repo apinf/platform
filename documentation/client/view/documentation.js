@@ -1,4 +1,5 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
+import { Settings } from '/settings/collection';
 
 Template.documentation.onCreated(function () {
   const instance = this;
