@@ -320,8 +320,8 @@ In general, our file structure follows this pattern:
       * *schema.js*
       * *permissions.js*
       * *helpers.js*
-    * **server/**
-      * *publications.js*
+      * **server/**
+        * *publications.js*
     * **client/**
       * **lib/**
         * *router.js*
