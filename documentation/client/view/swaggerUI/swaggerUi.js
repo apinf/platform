@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import SwaggerUi from 'swagger-ui-browserify'
+import 'swagger-ui/dist/css/screen.css'
 
 Template.swaggerUi.onCreated(function () {
   const documentationURL = this.data.apiDocumentation;
@@ -9,7 +10,7 @@ Template.swaggerUi.onCreated(function () {
     dom_id: 'swagger-ui-container',
     useJQuery: true,
     supportHeaderParams: true,
-    supportedSubmitMethods: ['get', 'post'],
+    supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch', 'options'],
     onComplete: function (swaggerApi, swaggerUi) {
       console.log('Loaded SwaggerUI')
     },
