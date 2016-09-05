@@ -1,7 +1,11 @@
 AutoForm.hooks({
   settings: {
     onSuccess () {
-      sAlert.success('Settings saved.');
+      // Get settings form success message translation
+      const successMessage = TAPi18n.__('settings-successMessage');
+
+      // Alert the user of successful save
+      sAlert.success(successMessage);
     },
   },
 });
