@@ -1,5 +1,6 @@
 import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
 import { Settings } from '/settings/collection';
+import { Proxies } from '/proxies/collection';
 
 Meteor.methods({
   'syncApiUmbrellaUsers': function () {
@@ -23,34 +24,25 @@ Meteor.methods({
     }
   },
   'createApiUmbrellaWeb': function () {
-    const settings = Settings.findOne();
+    // TODO: Fix for multi-proxy support
+    const proxy = Proxies.findOne();
 
     // Check if API Umbrella Web settings are valid
-    if (apiUmbrellaSettingsValid(settings)) {
+    if (apiUmbrellaSettingsValid(proxy)) {
       // Create config object for API Umbrella Web REST API
       const config = {
-        baseUrl: settings.apiUmbrella.baseUrl,
-        apiKey: settings.apiUmbrella.apiKey,
-        authToken: settings.apiUmbrella.authToken,
+        baseUrl: proxy.apiUmbrella.url + '/api-umbrella/',
+        apiKey: proxy.apiUmbrella.apiKey,
+        authToken: proxy.apiUmbrella.authToken,
       };
 
-      // Check whether API Umbrella Web instance exists
-      if (typeof apiUmbrellaWeb === 'undefined') {
-        try {
-          // Create new API Umbrella Web object for REST calls
-          apiUmbrellaWeb = new ApiUmbrellaWeb(config);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        try {
-          // Update existing API Umbrella Web object with new settings
-          apiUmbrellaWeb.baseUrl = config.baseUrl;
-          apiUmbrellaWeb.apiKey = config.apiKey;
-          apiUmbrellaWeb.authToken = config.authToken;
-        } catch (error) {
-          console.log(error);
-        }
+      try {
+        // Create new API Umbrella Web object for REST calls
+        const apiUmbrellaWeb = new ApiUmbrellaWeb(config);
+        // Return created object
+        return apiUmbrellaWeb;
+      } catch (error) {
+        console.log(error);
       }
     }
   },
