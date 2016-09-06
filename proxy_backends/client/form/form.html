@@ -1,14 +1,14 @@
 <template name="proxyBackendForm">
   {{# autoForm collection=proxyBackendsCollection id="insertProxyBackend" type="insert"}}
-    {{> afQuickField name="proxyId" value=proxy._id }}
-    {{> afQuickField name="apiId" value=api._id }}
-    {{> afQuickField name="apiUmbrella.name" value=api.name }}
-    {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url }}
-    {{> afQuickField name="apiUmbrella.backend_host" value=api.url }}
-    {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol }}
+    {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
+    {{> afQuickField name="apiId" value=api._id type="hidden" }}
+    {{> afQuickField name="apiUmbrella.name" value=api.name type="hidden" }}
+    {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url type="hidden" }}
+    {{> afQuickField name="apiUmbrella.backend_host" value=api.url type="hidden" }}
+    {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol type="hidden" }}
     {{> afQuickField name="apiUmbrella.url_matches.0.frontend_prefix" }}
     {{> afQuickField name="apiUmbrella.url_matches.0.backend_prefix" }}
-    {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url }}
+    {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url readonly="true" }}
     {{> afQuickField name="apiUmbrella.servers.0.port" }}
   {{/ autoForm }}
 </template>
