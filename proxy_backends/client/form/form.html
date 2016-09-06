@@ -7,6 +7,7 @@
     {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url type="hidden" }}
     {{> afQuickField name="apiUmbrella.backend_host" value=api.url type="hidden" }}
     {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol type="hidden" }}
+    {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url type="hidden" }}
 
     <!-- visible fields -->
 
@@ -55,9 +56,6 @@
         </span>
       {{/if}}
     </div>
-
-    <!-- API host (servers.host) -->
-    {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url readonly="true" }}
 
     <!-- API port (servers.port) -->
     {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper }}
