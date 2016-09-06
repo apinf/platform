@@ -8,7 +8,7 @@ ProxyBackends.allow({
   update () {
     return true;
   },
-  delete () {
+  remove () {
     return true;
   },
 });
