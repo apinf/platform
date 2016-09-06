@@ -1,3 +1,4 @@
+import { ApiKeys } from '/apikeys/collection';
 import { Proxies } from '/proxies/collection';
 
 Meteor.methods({
@@ -9,24 +10,26 @@ Meteor.methods({
       // TODO: Fix for multi-proxy support
       const proxy = Proxies.findOne();
 
-      // Check type
+      // Check type & call appropriate function
       if(proxy && proxy.type === "apiUmbrella") {
         // Call Umbrella method to create user with API key
-        Meteor.call('createApiUmbrellaUser', function(result, error) {
+        Meteor.call('createApiUmbrellaUser', currentUser, function(error, umbrellaUser) {
           if(error) {
             console.log(error);
           } else {
-            /*
-            // Set fieldsToBeUpdated
-            const fieldsToBeUpdated = {
-              'apiUmbrellaUserId': response.data.user.id,
-              'profile.apiKey': response.data.user.api_key,
+            // Construct apiKey object
+            const apiKey = {
+              'apiUmbrella': {
+                'id': umbrellaUser.id,
+                'apiKey': umbrellaUser.api_key
+              },
+              'userId': currentUser._id,
+              'proxyId': proxy._id
             };
 
-            // Update currentUser
-            Meteor.users.update({ _id: currentUser._id }, { $set: fieldsToBeUpdated });
-
-            */
+            // Insert apiKey
+            ApiKeys.insert(apiKey);
+            console.log("ApiKey inserted");
           }
 
         });

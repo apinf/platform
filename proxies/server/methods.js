@@ -67,7 +67,7 @@ Meteor.methods({
   },
   // Create API key & attach it for given user,
   // Might throw errors, catch on client callback
-  createApiUmbrellaUser () {
+  createApiUmbrellaUser (currentUser) {
     // Create apiUmbrellaWeb
     const umbrella = Meteor.call('createApiUmbrellaWeb');
     // Create API Umbrella user object with required fields
@@ -83,11 +83,9 @@ Meteor.methods({
     // Try to create user on API Umbrella
     try {
       // Add user on API Umbrella
-      const response = apiUmbrellaWeb.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
+      const response = umbrella.adminApi.v1.apiUsers.createUser(apiUmbrellaUserObj);
 
       const umbrellaUser = response.data.user;
-      // Insert full API Umbrella user object into API Umbrella Users collection
-      ApiUmbrellaUsers.insert(umbrellaUser);
 
       // Return created umbrellaUser
       return umbrellaUser;
