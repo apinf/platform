@@ -1,5 +1,10 @@
 <template name="proxyBackendForm">
-  {{# autoForm collection=proxyBackendsCollection id="insertProxyBackend" type="insert"}}
+  {{# autoForm
+    collection=proxyBackendsCollection
+    id="insertProxyBackend"
+    type=formType
+  }}
+
     <!-- hidden fields, auto-value -->
     {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
     {{> afQuickField name="apiId" value=api._id type="hidden" }}

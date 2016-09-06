@@ -56,4 +56,22 @@ Template.proxyBackendForm.helpers({
 
     return port;
   },
+  formType () {
+    // Placeholder for form type
+    let formType;
+
+    // Get API ID
+    const apiId = this.api._id;
+
+    // Look for existing proxy backend document for this API
+    const existingSettings = ProxyBackends.findOne({ apiId });
+
+    if (existingSettings) {
+      formType = 'update';
+    } else {
+      formType = 'insert';
+    }
+
+    return formType;
+  },
 });
