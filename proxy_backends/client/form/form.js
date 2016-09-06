@@ -5,7 +5,7 @@ import { Proxies } from '/proxies/collection';
 // NPM import
 import 'urijs';
 
-Template.apiProxy.helpers({
+Template.proxyBackendForm.helpers({
   proxyBackendsCollection () {
     // Return a reference to ProxyBackends collection, for AutoForm
     return ProxyBackends;
