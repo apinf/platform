@@ -1,8 +1,16 @@
+import { ApiKeys } from '/apikeys/collection';
+
+Template.apikey.onCreated(function() {
+  this.subscribe('apiKeysForCurrentUser');
+});
+
 Template.apikey.events({
   'click #getApiKeyButton' (event) {
-    Meteor.call('createApiKeyForCurrentUser', function(error, result) {
+    Meteor.call('createApiKey', function(error, result) {
       if(error) {
         sAlert.error(error);
+      } else {
+        console.log(result);
       }
     });
   }
@@ -14,12 +22,12 @@ Template.apikey.helpers({
   },
   apiKey () {
     // Get current user
-    const currentUser = Meteor.user();
+    const currentUserId = Meteor.userId();
 
-    // Make sure user exitsts and has API key
-    if (currentUser) {
+    // Make sure user exists and has API key
+    if (currentUserId) {
       // Get API Key
-      //const apiKey = currentUser.profile.apiKey;
+      const apiKey = ApiKeys.findOne({'userId': currentUserId});
 
       return apiKey;
     }

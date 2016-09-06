@@ -2,7 +2,7 @@
 {{#if apiKey }}
   <b>{{_ "apiKeys_label"}}:&nbsp;</b>
   <span id="apikey">
-    {{ apiKey }}
+    {{ apiKey.apiUmbrella.apiKey }}
   </span>
   {{> apiKeyCopyButton apiKey=apiKey }}
 {{ else }}
