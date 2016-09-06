@@ -8,13 +8,9 @@
                 </a>
                 <form id="api_selector">
                     <div class="input"><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-                    <!--<div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>-->
-                    <div class="input" id="auth_container">
-                        <div><a class="authorize__btn" href="#">Authorize</a></div>
-                    </div>
-
+                    <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+                    <!--<div id="auth_container"></div>-->
                     <div class="input"><a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a></div>
-
                 </form>
             </div>
         </div>
@@ -23,7 +19,9 @@
             {{#if documentationValid}}
                 {{>swaggerUiBody apiDocumentation=apiDocumentation}}
             {{else}}
-                <strong>Incorrect</strong>
+                <i>
+                    {{_ 'swaggerUi_swaggerDocumentInvalidText'}}
+                </i>
             {{/if}}
         {{else}}
             {{>spinner}}

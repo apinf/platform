@@ -1,4 +1,5 @@
 import SwaggerUi from 'swagger-ui-browserify'
+import SwaggerClient from 'swagger-client'
 
 
 Template.swaggerUiBody.onCreated(function () {
@@ -6,8 +7,9 @@ Template.swaggerUiBody.onCreated(function () {
   const documentationURL = this.data.apiDocumentation;
   
   // Create Swagger UI
-  const swagger = new SwaggerUi({
+  let swagger = new SwaggerUi({
     url: documentationURL,
+    // authorizations: {'apiKey': new SwaggerClient.ApiKeyAuthorization("api_key","special-key","query")},
     dom_id: 'swagger-ui-container',
     useJQuery: true,
     supportHeaderParams: true,
@@ -26,6 +28,10 @@ Template.swaggerUiBody.onCreated(function () {
   
   // Load Swagger UI
   swagger.load()
+  
+  // swagger.api.clientAuthorizations.add('auth_name', new SwaggerClient.ApiKeyAuthorization("api_key","special-key","query"));
+  console.dir(swagger)
+  
 });
 
 Template.swaggerUiBody.onRendered(function () {

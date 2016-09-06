@@ -13,15 +13,12 @@ Template.swaggerUi.onCreated(function () {
   Meteor.call('isValidSwagger', documentationURL, function (error, result) {
     // result can be 'true' or '{}'
     if (result === true) {
-      // Ssave result in template instance
+      // Save result in template instance
       instance.documentationValid = result;
     }
-    
     // Set flag on Data is Ready
     instance.dataFetched.set(true)
   });
-
-  
 });
 
 Template.swaggerUi.helpers({
