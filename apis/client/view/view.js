@@ -7,16 +7,19 @@ Template.viewApiBackend.onCreated(function () {
   const instance = this;
 
   // Get the API Backend ID from the route
-  apiBackendId = Router.current().params._id;
+  apiId = Router.current().params._id;
 
   // Subscribe to a single API Backend, by ID
-  instance.subscribe('apiBackend', apiBackendId);
+  instance.subscribe('apiBackend', apiId);
 
   // Subscribe to API Backlog items for this API Backend
-  instance.subscribe('apiBacklogItems', apiBackendId);
+  instance.subscribe('apiBacklogItems', apiId);
 
   // Subscribe to public proxy details
   instance.subscribe('publicProxyDetails');
+
+  // Subscribe to proxy settings for this API
+  instance.subscribe('apiProxySettings', apiId);
 });
 
 Template.viewApiBackend.helpers({
