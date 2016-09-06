@@ -19,11 +19,13 @@
 
     <!-- Proxy base path (frontend prefix) -->
     <div class="form-group">
+      <!-- label -->
       <label for="proxy-base-path-field">
         {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix'}}
       </label>
+
       <div class="input-group">
-        <!-- proxy url field addon -->
+        <!-- proxy url addon -->
         <span class="input-group-addon" id="proxy-url">
           {{ proxy.apiUmbrella.url }}
         </span>
@@ -55,13 +57,18 @@
     <div class="row">
       <!-- API base path (backend prefix) -->
       <div class="form-group col-md-9">
+        <!-- field label -->
         <label for="api-base-path-field">
           {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix'}}
         </label>
+
         <div class="input-group">
+          <!-- API url addon -->
           <span class="input-group-addon" id="api-url">
             {{ api.url }}
           </span>
+
+          <!-- field input -->
           {{> afFieldInput
             name="apiUmbrella.url_matches.0.backend_prefix"
             class="form-control"
@@ -69,10 +76,12 @@
             id="api-base-path-field"
           }}
         </div>
+
+        <!-- validation messages -->
         {{#if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix'}}
-          <span class="help-block">
+          <p class="text-danger">
             {{{afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix'}}}
-          </span>
+          </p>
         {{/if}}
       </div>
 
