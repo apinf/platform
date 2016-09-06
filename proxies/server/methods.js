@@ -24,7 +24,7 @@ Meteor.methods({
     }
   },
   'createApiUmbrellaWeb': function () {
-    // Assume one proxy only
+    // TODO: Assuming one proxy only
     const proxy = Proxies.findOne();
 
     // Check if API Umbrella Web settings are valid
