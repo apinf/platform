@@ -26,3 +26,5 @@ ApiKeys.schema = new SimpleSchema({
     optional: false
   }
 });
+
+ApiKeys.attachSchema(ApiKeys.schema);
