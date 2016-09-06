@@ -42,8 +42,16 @@
         <p class="text-danger">
           {{{afFieldMessage name='proxy.apiUmbrella.url'}}}
         </p>
-      {{/if}}      
+      {{/if}}
+
+      <!-- help text -->
+      <p class="help-block">
+        Base path will be added to all proxy requests. Example:
+        {{ proxy.apiUmbrella.url }} <b>/proxy_base_path/</b>
+      </p>
     </div>
+
+    <!-- API fields -->
     <div class="row">
       <!-- API base path (backend prefix) -->
       <div class="form-group col-md-9">
