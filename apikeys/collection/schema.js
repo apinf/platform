@@ -1,9 +1,21 @@
 import { ApiKeys } from './';
 
-ApiKeys.schema = new SimpleSchema({
-  key: {
+// Schema for API Umbrella user
+apiUmbrellaUserSchema = new SimpleSchema({
+  id: {
     type: String,
     optional: false
+  },
+  apiKey: {
+    type: String,
+    optional: false
+  }
+});
+
+ApiKeys.schema = new SimpleSchema({
+  apiUmbrella: {
+    type: apiUmbrellaUserSchema,
+    optional: true
   },
   userId: {
     type: String,
