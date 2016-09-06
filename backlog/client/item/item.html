@@ -1,0 +1,33 @@
+<template name="backlogItem">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{#if apiBackend.currentUserCanEdit }}
+      <div class="btn-group pull-right">
+        <button class="edit-backlog-item btn btn-primary btn-xs">
+          {{_ "backlogItem_editButton_text" }}
+        </button>
+        <button class="delete-backlog-item btn btn-danger btn-xs">
+          {{_ "backlogItem_deleteButton_text" }}
+        </button>
+      </div>
+      {{/if}}
+      <b>
+          <div class="{{ itemPriorityClass item.priority }}"></div>
+          {{ item.title}}
+      </b>
+    </div>
+    <div class="panel-body">
+      <p>
+        {{ item.details}}
+      </p>
+    </div>
+    <div class="panel-footer">
+      <i>
+        {{#if item.currentUserIsOwner}}
+            By <b>You</b>
+        {{/if}}
+        {{ relativeTimeStamp item.createdAt }}
+      </i>
+    </div>
+  </div>
+</template>

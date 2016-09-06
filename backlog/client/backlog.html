@@ -1,0 +1,20 @@
+<template name="apiBacklog">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{#if currentUserCanEditBacklog }}
+        <button
+          id="add-backlog-item"
+          class="btn btn-info btn-xs pull-right">
+          <span class="glyphicon glyphicon-plus"></span>
+          {{_ "apiBacklog_addBacklogItem_buttonText" }}
+        </button>
+      {{/if}}
+      <h2 class="panel-title clearfix">
+        {{_ "apiBacklog_mainTitle"}}
+      </h2>
+    </div>
+    <div class="panel-body">
+      {{> apiBacklogList backlogItems=backlogItems apiBackend=apiBackend }}
+    </div>
+  </div>
+</template>

@@ -1,4 +1,5 @@
 import { Branding } from '/branding/collection';
+import { Settings } from '/settings/collection';
 
 Meteor.methods({
   isInitialSetupComplete () {
@@ -14,5 +15,5 @@ Meteor.methods({
       // More configuration is necessary for basic usage
       return false;
     }
-  }
+  },
 });
