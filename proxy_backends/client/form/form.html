@@ -48,7 +48,7 @@
 
       <!-- help text -->
       <p class="help-block">
-        Base path will be added to all proxy requests. Example:
+        Base path added to all Proxy requests. Example:
         {{ proxy.apiUmbrella.url }} <b>/proxy_base_path/</b>
       </p>
     </div>
@@ -83,6 +83,12 @@
             {{{afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix'}}}
           </p>
         {{/if}}
+
+        <!-- help text -->
+        <p class="help-block">
+          Base path added to all API requests. Example:
+          {{ api.url }} <b>/api_base_path/</b>
+        </p>
       </div>
 
       <!-- API port (servers.port) -->
