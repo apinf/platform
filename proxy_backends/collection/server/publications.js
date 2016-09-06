@@ -1,5 +1,6 @@
 // Apinf import
 import { Apis } from '/apis/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 // npm import
 import { _ } from 'lodash';
@@ -27,7 +28,7 @@ Meteor.publish('apiProxySettings', function (apiId) {
 
     // Check if user is authorized to access API proxy settings
     if (userIsManager || userIsAdmin) {
-      return Apis.find(apiId);
+      return ProxyBackends.find({ apiId });
     }
   }
 });
