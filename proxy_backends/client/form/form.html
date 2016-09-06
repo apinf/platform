@@ -10,8 +10,28 @@
 
     <!-- visible fields -->
 
-    <!-- Proxy path (frontend prefix) -->
-    {{> afQuickField name="apiUmbrella.url_matches.0.frontend_prefix" }}
+    <!-- Proxy base path (frontend prefix) -->
+    <div class="form-group">
+      <label for="proxy-base-path-field">
+        {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix'}}
+      </label>
+      <div class="input-group">
+        <span class="input-group-addon" id="proxy-url">
+          {{ proxy.apiUmbrella.url }}
+        </span>
+        {{> afFieldInput
+          name="apiUmbrella.url_matches.0.frontend_prefix"
+          class="form-control"
+          aria-describedby="proxy-url"
+          id="proxy-base-path-field"
+        }}
+      </div>
+      {{#if afFieldIsInvalid name='proxy.apiUmbrella.url'}}
+        <span class="help-block">
+          {{{afFieldMessage name='proxy.apiUmbrella.url'}}}
+        </span>
+      {{/if}}
+    </div>
 
     <!-- API path (backend prefix) -->
     {{> afQuickField name="apiUmbrella.url_matches.0.backend_prefix" }}
