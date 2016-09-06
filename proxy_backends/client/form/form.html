@@ -28,7 +28,7 @@
           {{ proxy.apiUmbrella.url }}
         </span>
 
-        <!-- proxy base path field -->
+        <!-- input field -->
         {{> afFieldInput
           name="apiUmbrella.url_matches.0.frontend_prefix"
           class="form-control"
@@ -37,12 +37,12 @@
         }}
       </div>
 
-      <!-- proxy base path validation messages -->
+      <!-- validation messages -->
       {{#if afFieldIsInvalid name='proxy.apiUmbrella.url'}}
         <p class="text-danger">
           {{{afFieldMessage name='proxy.apiUmbrella.url'}}}
         </p>
-      {{/if}}
+      {{/if}}      
     </div>
     <div class="row">
       <!-- API base path (backend prefix) -->
