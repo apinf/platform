@@ -33,8 +33,28 @@
       {{/if}}
     </div>
 
-    <!-- API path (backend prefix) -->
-    {{> afQuickField name="apiUmbrella.url_matches.0.backend_prefix" }}
+    <!-- API base path (backend prefix) -->
+    <div class="form-group">
+      <label for="api-base-path-field">
+        {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix'}}
+      </label>
+      <div class="input-group">
+        <span class="input-group-addon" id="api-url">
+          {{ api.url }}
+        </span>
+        {{> afFieldInput
+          name="apiUmbrella.url_matches.0.backend_prefix"
+          class="form-control"
+          aria-describedby="api-url"
+          id="api-base-path-field"
+        }}
+      </div>
+      {{#if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix'}}
+        <span class="help-block">
+          {{{afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix'}}}
+        </span>
+      {{/if}}
+    </div>
 
     <!-- API host (servers.host) -->
     {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url readonly="true" }}
