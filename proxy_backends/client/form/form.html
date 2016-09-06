@@ -92,8 +92,32 @@
       </div>
 
       <!-- API port (servers.port) -->
-      <div class="col-md-3">
-        {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper }}
+      <div class="form-group col-md-3">
+        <!-- field label -->
+        <label for="api-port-field" id="api-port-field-label">
+          {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
+        </label>
+
+          <!-- field input -->
+          {{> afFieldInput
+            name="apiUmbrella.servers.0.port"
+            value=apiPortHelper
+            class="form-control"
+            aria-describedby="api-port-field-label"
+            id="api-port-field"
+          }}
+
+        <!-- validation messages -->
+        {{#if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
+          <p class="text-danger">
+            {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
+          </p>
+        {{/if}}
+
+        <!-- help text -->
+        <p class="help-block">
+          Port number on API server
+        </p>
       </div>
     </div>
 
