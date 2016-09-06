@@ -32,4 +32,28 @@ Template.proxyBackendForm.helpers({
     // Return the Proxy URL protocol
     return apiUrl.protocol();
   },
+  apiPortHelper () {
+    // Placeholder for port
+    let port;
+
+    // Get one proxy from the Proxies collection
+    // This assumes we have only one proxy
+    // TODO: refactor this method for multi-proxy support
+    const api = this.api;
+
+    // Construct URL object for proxy URL
+    const apiUrl = URI(api.url);
+
+    // Return the Proxy URL protocol
+    const protocol = apiUrl.protocol();
+
+    // Common default ports for HTTP/HTTPS
+    if (protocol === 'https') {
+      port = 443;
+    } else if (protocol === 'http') {
+      port = 80;
+    }
+
+    return port;
+  },
 });
