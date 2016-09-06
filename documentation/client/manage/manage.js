@@ -1,8 +1,8 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Apis } from '/apis/collection';
+import { Settings } from '/settings/collection';
 
 Template.manageApiDocumentationModal.onCreated(function () {
-
   const instance = this;
 
   // Initialize help texts
@@ -10,21 +10,21 @@ Template.manageApiDocumentationModal.onCreated(function () {
     'documentation_link': {
       message: TAPi18n.__('manageApiDocumentationModal_hints_documentation_link'),
       options: {
-        placement: 'left'
-      }
+        placement: 'left',
+      },
     },
     'uploadApiDocumentation': {
       message: TAPi18n.__('manageApiDocumentationModal_hints_uploadApiDocumentation'),
       options: {
-        placement: 'left'
-      }
+        placement: 'left',
+      },
     },
     'documentation_editor_create_file': {
       message: TAPi18n.__('manageApiDocumentationModal_hints_createApiDocumentation'),
       options: {
-        placement: 'left'
-      }
-    }
+        placement: 'left',
+      },
+    },
   };
   InlineHelp.initHelp(helpTexts);
 
@@ -38,20 +38,18 @@ Template.manageApiDocumentationModal.onCreated(function () {
   instance.subscribe('singleSetting', 'apiDocumentationEditor');
 });
 
-Template.manageApiDocumentationModal.onDestroyed(function() {
+Template.manageApiDocumentationModal.onDestroyed(function () {
   // Unset session
   Session.set('currentApiBackend', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
-  'click .delete-documentation': function(event, instance) {
-
+  'click .delete-documentation': function (event, instance) {
     // Show confirmation dialog to user
     const confirmation = confirm(TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage'));
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-
       // Get currentApiBackend documentationFileId
       const documentationFileId = this.apiBackend.documentationFileId;
 
@@ -62,26 +60,24 @@ Template.manageApiDocumentationModal.events({
       DocumentationFiles.remove(objectId);
 
       // Remove documenation file id field
-      Apis.update(instance.data.apiBackend._id, {$unset: { documentationFileId: "" }});
+      Apis.update(instance.data.apiBackend._id, { $unset: { documentationFileId: '' } });
 
       sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
-
     }
-
   },
-  'click #save-documentation-link': function(event, instance) {
+  'click #save-documentation-link': function (event, instance) {
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
   },
-  'click #open-api-editor': function(event, instance) {
+  'click #open-api-editor': function (event, instance) {
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
-  }
+  },
 });
 
 
 Template.manageApiDocumentationModal.helpers({
-  documentationFile: function() {
+  documentationFile () {
     const currentApiBackend = Session.get('currentApiBackend');
 
     const currentDocumentationFileId = currentApiBackend.documentationFileId;
@@ -97,12 +93,12 @@ Template.manageApiDocumentationModal.helpers({
       return currentDocumentationFile;
     }
   },
-  apiDocumentationEditorIsEnabled: function() {
+  apiDocumentationEditorIsEnabled () {
     // Get settings
     const settings = Settings.findOne();
 
     // Check settings exists, editor is enabled and host setting exists
-    if(settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
+    if (settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
       // Editor is enabled and has host setting, return true
       return true;
     } else {
@@ -110,7 +106,7 @@ Template.manageApiDocumentationModal.helpers({
       return false;
     }
   },
-  formCollection() {
+  formCollection () {
     return Apis;
-  }
+  },
 });
