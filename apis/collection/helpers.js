@@ -27,6 +27,7 @@ Apis.helpers({
     }
   },
   currentUserCanView () {
+    // Check if API is public
     // Only user who can edit, can view private APIs
     return (this.isPublic || this.currentUserCanEdit());
   },
