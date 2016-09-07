@@ -25,17 +25,6 @@ For API consumers APInf provides simple key management, key usage analytics and 
 
 [![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
 
-# Architecture and ecosystem
-Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
-
-![System diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/outreach/system-diagram-simplified.svg)
-
-![Technology stack](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/outreach/technology-stack.svg)
-
-For the ecosystem, we will concentrate on open APIs in the MVP phase. For the API consumer side, there are two API consumer personas: [Jukka and Minh](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/UX/APINF%20consumer%20personas.pdf). API owner personas to be added later.
-
-![Ecosystem diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_ecosystem.svg)
-
 # Nightly build
 You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io).
 
