@@ -2,7 +2,7 @@ import { ApiMetadata } from '/metadata/collection';
 import { Apis } from '/apis/collection';
 
 ApiMetadata.allow({
-  'insert': function (userId, metadata) {
+  insert (userId, metadata) {
     const apiId = metadata.apiBackendId;
 
     // Make sure there is only one document per API Backend ID
@@ -21,7 +21,7 @@ ApiMetadata.allow({
       return userCanEdit;
     }
   },
-  'update': function (userId, metadata) {
+  update (userId, metadata) {
     // Get API Backend ID
     const apiId = metadata.apiBackendId;
 

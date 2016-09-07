@@ -1,6 +1,6 @@
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
-    'insert': function (metadata) {
+    insert (metadata) {
       // Get reference to Router
       const router = Router.current();
 
@@ -13,14 +13,14 @@ AutoForm.addHooks('editApiMetadataForm', {
       return metadata;
     },
   },
-  'onSuccess': function () {
+  onSuccess () {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
   },
 });
 
 AutoForm.addHooks('updateApiMetadataForm', {
-  'onSuccess': function () {
+  onSuccess () {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
   },
