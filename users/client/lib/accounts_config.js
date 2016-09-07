@@ -17,54 +17,54 @@ AccountsTemplates.configure({
   positiveValidation: false,
   positiveFeedback: true,
   showValidating: true,
-  onLogoutHook: function() {
+  onLogoutHook () {
     // return console.log('logout');
   },
-  onSubmitHook: function() {
+  onSubmitHook () {
     // return console.log('submitting form');
-  }
+  },
 });
 
 
 // rearranging the fields on Sign-Up, so that username comes first.
-var passwordField = AccountsTemplates.removeField('password');
+const passwordField = AccountsTemplates.removeField('password');
 
 AccountsTemplates.removeField('email');
 AccountsTemplates.addFields([
   {
-      _id: "username",
-      type: "text",
-      displayName: "username",
-      required: true,
-      minLength: 5,
+    _id: 'username',
+    type: 'text',
+    displayName: 'username',
+    required: true,
+    minLength: 5,
   },
   {
-      _id: 'email',
-      type: 'email',
-      required: true,
-      displayName: "email",
-      re: /.+@(.+){2,}\.(.+){2,}/,
-      errStr: 'Invalid email',
+    _id: 'email',
+    type: 'email',
+    required: true,
+    displayName: 'email',
+    re: /.+@(.+){2,}\.(.+){2,}/,
+    errStr: 'Invalid email',
   },
   {
-      _id: 'username_and_email',
-      type: 'text',
-      required: true,
-      displayName: "Login",
-      placeholder: "Username or Email",
+    _id: 'username_and_email',
+    type: 'text',
+    required: true,
+    displayName: 'Login',
+    placeholder: 'Username or Email',
   },
-  passwordField
+  passwordField,
 ]);
 
 AccountsTemplates.configureRoute('signIn', {
-  layoutTemplate: 'masterLayout'
+  layoutTemplate: 'masterLayout',
 });
 
 AccountsTemplates.configureRoute('signUp', {
-  layoutTemplate: 'masterLayout'
+  layoutTemplate: 'masterLayout',
 });
 
 AccountsTemplates.configureRoute('forgotPwd', {
   layoutTemplate: 'masterLayout',
-  name: 'forgotPwd'
+  name: 'forgotPwd',
 });

@@ -1,18 +1,18 @@
 AutoForm.hooks({
   contactForm: {
-    beginSubmit: function () {
+    beginSubmit () {
       // Disable form elements while submitting form
-      $('[data-schema-key],button').attr("disabled", "disabled");
+      $('[data-schema-key],button').attr('disabled', 'disabled');
     },
-    endSubmit: function () {
+    endSubmit () {
       // Enable form elements after form submission
-      $('[data-schema-key],button').removeAttr("disabled");
-    }
-  }
+      $('[data-schema-key],button').removeAttr('disabled');
+    },
+  },
 });
 
 AutoForm.addHooks(['contactForm'], {
-  onSuccess: function () {
+  onSuccess () {
     FlashMessages.sendSuccess('Thank you! Your message has been successfully sent.');
-  }
+  },
 });

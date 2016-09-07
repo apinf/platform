@@ -1,7 +1,7 @@
 import { ContactFormSchema } from '../../contactFormSchema';
 
 Template.contactForm.helpers({
-  contactFormSchema: function() {
+  contactFormSchema () {
     return ContactFormSchema;
-  }
+  },
 });
