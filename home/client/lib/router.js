@@ -1,4 +1,6 @@
-Router.route("home", {
-  path: "/",
-  layoutTemplate: "homeLayout"
+Router.route("/", {
+  layout: "masterLayout",
+  template: "home",
+}, {
+  name: "home"
 });
