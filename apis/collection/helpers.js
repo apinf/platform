@@ -17,6 +17,7 @@ Apis.helpers({
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
+      // if user is manager or administrator, they can edit
       if (userIsManager || userIsAdmin) {
         return true;
       }
