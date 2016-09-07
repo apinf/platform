@@ -12,16 +12,12 @@ Apis.helpers({
     // Check that user is logged in
     if (userId) {
       // Check if user is manager of this API
-      const isManager = _.includes(this.managerIds, userId);
-
-      if (isManager) {
-        return true;
-      }
+      const userIsManager = _.includes(this.managerIds, userId);
 
       // Check if user is administrator
-      const isAdmin = Roles.userIsInRole(userId, ['admin']);
+      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
-      if (isAdmin) {
+      if (userIsManager || userIsAdmin) {
         return true;
       }
     } else {
