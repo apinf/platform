@@ -9,7 +9,11 @@ AutoForm.hooks({
       $('[data-schema-key],button').removeAttr('disabled');
     },
     onSuccess () {
-      sAlert.success('Thank you! Your message has been successfully sent.');
+      // Get translated success message
+      const successMessage = TAPi18n.__('contactForm_successMessage');
+
+      // Alert user of success
+      sAlert.success(successMessage);
     },
   },
 });

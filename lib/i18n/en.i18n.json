@@ -95,6 +95,7 @@
   "contactForm_name_label": "Your name",
   "contactForm_name_placeholder": "Your name",
   "contactForm_reset": "Reset",
+  "contactForm_successMessage": "Thank you! Your message has been successfully sent.",
   "contactForm_submit": "Submit",
   "dashboard_mainTitle": "Dashboard",
   "dashboard_noApisTitle": "You don't have any API Backend you manage.",
