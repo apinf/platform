@@ -1,5 +1,5 @@
-Template.registerHelper('niceName', function(_id) {
-  var user;
+Template.registerHelper('niceName', function (_id) {
+  let user;
   if (_id) {
     user = Meteor.users.findOne(_id);
   }
@@ -14,8 +14,4 @@ Template.registerHelper('niceName', function(_id) {
       return 'An user';
     }
   }
-});
-
-Template.registerHelper('NCSchemas', function() {
-  return NCSchemas;
 });
