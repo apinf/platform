@@ -15,3 +15,7 @@ Template.registerHelper('niceName', function(_id) {
     }
   }
 });
+
+Template.registerHelper('NCSchemas', function() {
+  return NCSchemas;
+});

@@ -10,7 +10,12 @@ Template.masterLayout.created = function () {
 
 Template.masterLayout.helpers({
   branding: function () {
-    // Get Branding collection content
-    return Branding.findOne();
+    // Check for branding document
+    var branding = Branding.findOne();
+
+    if (branding) {
+      // If branding is available, return it
+      return branding;
+    }
   }
 });
