@@ -27,13 +27,8 @@ Apis.helpers({
     }
   },
   currentUserCanView () {
-    // Check visibility
-    if (this.isPublic) {
-      return true;
-    } else {
-      // Only user who can edit, can view private APIs
-      return this.currentUserCanEdit();
-    }
+    // Only user who can edit, can view private APIs
+    return (this.isPublic || this.currentUserCanEdit());
   },
   currentUserIsManager () {
     // Get current User ID
