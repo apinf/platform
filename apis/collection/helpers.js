@@ -11,11 +11,8 @@ Apis.helpers({
 
     // Check that user is logged in
     if (userId) {
-      // Get Manager IDs array from API Backend document
-      const managerIds = this.managerIds;
-
       // Check if user is API manager
-      const isManager = _.includes(managerIds, userId);
+      const isManager = _.includes(this.managerIds, userId);
 
       if (isManager) {
         return true;
@@ -45,11 +42,8 @@ Apis.helpers({
     // Get current User ID
     const userId = Meteor.userId();
 
-    // Get Manager IDs array from API Backend document
-    const managerIds = this.managerIds;
-
     // Check if User ID is in Manager IDs array
-    const isManager = _.includes(managerIds, userId);
+    const isManager = _.includes(this.managerIds, userId);
 
     return isManager;
   },
