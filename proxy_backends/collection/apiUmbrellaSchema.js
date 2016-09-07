@@ -1,5 +1,5 @@
 // Utility import
-import { proxyBasePathRegExp, apiBasePathRegExp } from './regex';
+import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
 const ApiUmbrellaSchema = new SimpleSchema({
   'name': {
@@ -38,13 +38,13 @@ const ApiUmbrellaSchema = new SimpleSchema({
     type: String,
     optional: true,
     label: 'Proxy base path',
-    regExp: proxyBasePathRegExp,
+    regEx: proxyBasePathRegEx,
   },
   'url_matches.$.backend_prefix': {
     type: String,
     optional: true,
     label: 'API base path',
-    regExp: apiBasePathRegExp,
+    regEx: apiBasePathRegEx,
   },
   'servers': {
     type: [Object],
