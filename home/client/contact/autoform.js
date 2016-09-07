@@ -9,7 +9,7 @@ AutoForm.hooks({
       $('[data-schema-key],button').removeAttr('disabled');
     },
     onSuccess () {
-      FlashMessages.sendSuccess('Thank you! Your message has been successfully sent.');
+      sAlert.success('Thank you! Your message has been successfully sent.');
     },
   },
 });
