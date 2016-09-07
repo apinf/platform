@@ -19,9 +19,13 @@
         {{> feedbackList apiBackend=apiBackend }}
       </div> <!-- /api-backend-metadata -->
 
-      <div id="api-backend-export" class="tab-pane fade">
-        {{> viewApiBackendExport apiBackend=apiBackend }}
-      </div> <!-- /api-backend-export -->
+      {{ # if currentUser }}
+        {{# if apiBackend.currentUserCanEdit }}
+          <div id="api-backend-export" class="tab-pane fade">
+            {{> viewApiBackendExport apiBackend=apiBackend }}
+          </div> <!-- /api-backend-export -->
+        {{ / if }}
+      {{ / if }}
 
       <div id="api-backend-backlog" class="tab-pane fade">
         {{> apiBacklog apiBackend=apiBackend backlogItems=backlogItems }}

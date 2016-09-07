@@ -63,14 +63,18 @@
               {{_ "viewApiBackendNavigationMenu_backlog" }}
             </a>
           </li>
+          {{ # if currentUser }}
+          {{ # if apiBackend.currentUserCanEdit }}
           <li>
             <a href="#api-backend-export" data-toggle="tab">
               <i class="fa fa-cloud-download"></i>
               {{_ "viewApiBackendNavigationMenu_export" }}
             </a>
           </li>
+          {{ / if }}
+          {{ / if }}
           {{ # if currentUser }}
-          {{# if apiBackend.currentUserCanEdit }}
+          {{ # if apiBackend.currentUserCanEdit }}
           <li>
             <a href="#api-backend-settings" data-toggle="tab">
               <i class="fa fa-cog"></i>
