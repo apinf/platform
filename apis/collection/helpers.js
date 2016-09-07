@@ -11,8 +11,11 @@ Apis.helpers({
 
     // Check that user is logged in
     if (userId) {
+      // Get Manager IDs array from API Backend document
+      const managerIds = this.managerIds;
+
       // Check if user is API manager
-      const isManager = _.includes(this.managerIds, userId);
+      const isManager = _.includes(managerIds, userId);
 
       if (isManager) {
         return true;
