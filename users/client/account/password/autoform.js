@@ -1,9 +1,9 @@
 AutoForm.hooks({
   updatePassword: {
-    onSubmit: function(insertDoc, updateDoc, currentDoc) {
+    onSubmit (insertDoc, updateDoc, currentDoc) {
       this.event.preventDefault();
-      var instance = this;
-      Accounts.changePassword(insertDoc.old, insertDoc.new, function(e) {
+      const instance = this;
+      Accounts.changePassword(insertDoc.old, insertDoc.new, function (e) {
         $('.btn-primary').attr('disabled', null);
         if (e) {
           // Alert the user of failure
@@ -18,6 +18,6 @@ AutoForm.hooks({
         }
       });
       return true;
-    }
-  }
+    },
+  },
 });
