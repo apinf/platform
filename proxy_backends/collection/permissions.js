@@ -9,7 +9,6 @@ ProxyBackends.allow({
     const api = Apis.findOne(this.apiId);
 
     // Check if current user can edit API
-
     if (api && api.currentUserCanEdit()) {
       return true;
     }
@@ -21,7 +20,6 @@ ProxyBackends.allow({
     const api = Apis.findOne(this.apiId);
 
     // Check if current user can edit API
-
     if (api && api.currentUserCanEdit()) {
       return true;
     }
@@ -33,7 +31,6 @@ ProxyBackends.allow({
     const api = Apis.findOne(this.apiId);
 
     // Check if current user can edit API
-
     if (api && api.currentUserCanEdit()) {
       return true;
     }
