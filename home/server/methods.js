@@ -1,13 +1,14 @@
+import { ContactFormSchema } from '../contactFormSchema';
 import { Settings } from '/settings/collection';
 
 Meteor.methods({
-  sendEmail (doc) {
+  sendEmail: function(doc) {
     // Important server-side check for security and data integrity
-    check(doc, Schemas.contact);
+    check(doc, ContactFormSchema);
 
     // Build the e-mail text
-    const text = 'Name: ' + doc.name + '\n\n'
-    + 'Email: ' + doc.email + '\n\n\n\n'
+    var text = "Name: " + doc.name + "\n\n"
+    + "Email: " + doc.email + "\n\n\n\n"
     + doc.message;
 
     this.unblock();
@@ -16,8 +17,8 @@ Meteor.methods({
     Email.send({
       to: Settings.findOne().contactForm.toEmail,
       from: doc.email,
-      subject: 'Apinf Contact Form - Message From ' + doc.name,
-      text,
+      subject: "Apinf Contact Form - Message From " + doc.name,
+      text: text
     });
-  },
+  }
 });
