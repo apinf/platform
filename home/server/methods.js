@@ -1,9 +1,10 @@
+import { ContactFormSchema } from '../contactFormSchema';
 import { Settings } from '/settings/collection';
 
 Meteor.methods({
   sendEmail (doc) {
     // Important server-side check for security and data integrity
-    check(doc, Schemas.contact);
+    check(doc, ContactFormSchema);
 
     // Build the e-mail text
     const text = 'Name: ' + doc.name + '\n\n'
