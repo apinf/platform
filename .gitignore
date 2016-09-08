@@ -14,3 +14,4 @@ packages
 node_modules
 npm-debug.log
 .eslintrc.json
+public/swagger.json

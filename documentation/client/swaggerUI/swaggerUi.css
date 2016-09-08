@@ -1,0 +1,30 @@
+/** CSS for manage container width **/
+
+.swagger-ui-wrap .container {
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .swagger-ui-wrap .container {
+    width: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .swagger-ui-wrap .container {
+    width: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .swagger-ui-wrap .container {
+    width: auto;
+  }
+}
+
+.swagger-section #header {
+  box-sizing: content-box;
+}
