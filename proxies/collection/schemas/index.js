@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import { Proxies } from './';
+import { Proxies } from '../';
 
-const apiUmbrellaSchema = require('./api_umbrella');
+const apiUmbrellaSchema = require('./api_umbrella').default;
 
-const schema = {
+let schema = {
   name: {
     type: String,
   },
@@ -16,11 +16,11 @@ const schema = {
   type: {
     type: String,
     defaultValue: 'apiUmbrella',
-    allowedValues: 'apiUmbrella',
+    allowedValues: ['apiUmbrella', 'kong', 'tuk'],
   },
 };
 
-_.assign(schema, apiUmbrellaSchema);
+schema = _.assign(schema, apiUmbrellaSchema);
 
 Proxies.schema = new SimpleSchema(schema);
 
