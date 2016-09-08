@@ -25,7 +25,8 @@
     "simple-statistics": "^2.1.0",
     "swagger-client": "^2.1.0",
     "swagger-parser": "^3.4.1",
-    "swagger-ui-browserify": "^2.1.4-a"
+    "swagger-ui": "^2.2.3",
+    "swagger-ui-browserify": "^2.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
