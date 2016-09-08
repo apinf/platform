@@ -1,4 +1,4 @@
-FeedbackVotes = new Mongo.Collection('feedbackVotes');
+export const FeedbackVotes = new Mongo.Collection('feedbackVotes');
 
 Schemas.FeedbackVotesSchema = new SimpleSchema({
   /*
@@ -7,36 +7,36 @@ Schemas.FeedbackVotesSchema = new SimpleSchema({
   vote - integer - the numeric vote for the user (allowed values: 1 and -1)
   */
   feedbackId: {
-    type: String
+    type: String,
   },
   userId: {
-    type: String
+    type: String,
   },
   vote: {
     type: Number,
-    allowedValues: [1,-1]
-  }
+    allowedValues: [1, -1],
+  },
 });
 
 FeedbackVotes.attachSchema(Schemas.FeedbackVotesSchema);
 
 FeedbackVotes.allow({
-  insert: function () {
+  insert () {
     // Only allow logged in user to vote
     if (Meteor.userId) {
       return true;
     }
   },
-  update: function () {
+  update () {
     // TODO: only allow user to update own vote
     if (Meteor.userId) {
       return true;
     }
   },
-  remove: function () {
+  remove () {
     // TODO: only allow user to remove own vote
     if (Meteor.userId) {
       return true;
     }
-  }
+  },
 });
