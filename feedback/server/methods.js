@@ -1,41 +1,45 @@
+// Collection imports
+import { Feedback } from '../collection';
+import { FeedbackVotes } from '/feedback_votes/collection';
+
 Meteor.methods({
-  'deleteFeedback': function(feedbackId) {
+  'deleteFeedback': function (feedbackId) {
     // Removing feedback from collection
     Feedback.remove(feedbackId);
   },
-  'submitVote': function(feedbackId, vote) {
+  'submitVote': function (feedbackId, vote) {
     // Get current User ID
-    var userId = Meteor.userId();
-    
+    const userId = Meteor.userId();
+
     // Get feedback vote for current User / Feedback ID
-    var userVote = FeedbackVotes.findOne({feedbackId: feedbackId, userId: userId});
-    
+    const userVote = FeedbackVotes.findOne({ feedbackId, userId });
+
     // If user has voted
-    if(userVote) {
+    if (userVote) {
       // Get existing vote value
-      var existingVote = userVote.vote;
-      
+      const existingVote = userVote.vote;
+
       // If the existing vote is not same as submitted vote, update users vote.
-      if(vote !== existingVote) {
+      if (vote !== existingVote) {
         // Update existing vote, replacing the existing value with new value
         FeedbackVotes.update({
-          feedbackId: feedbackId,
-          userId: Meteor.userId()
+          feedbackId,
+          userId: Meteor.userId(),
         }, {
-          $set: {vote: vote}
+          $set: { vote },
         });
-        
+
       // Otherwise cancel/remove the vote.
       } else {
         FeedbackVotes.remove(userVote._id);
       }
     } else {
-      //User has not voted -> add new user vote
+      // User has not voted -> add new user vote
       FeedbackVotes.insert({
-        feedbackId: feedbackId,
+        feedbackId,
         userId: Meteor.userId(),
-        vote: vote
+        vote,
       });
     }
-  }
+  },
 });
