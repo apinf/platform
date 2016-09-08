@@ -1,4 +1,4 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '../../collection';
 
 Template.editApiMetadata.helpers({
   apiMetadataCollection () {
@@ -7,6 +7,6 @@ Template.editApiMetadata.helpers({
   },
   submitButtonText () {
     // Get translation string for submit button text
-    return TAPi18n.__("editApiMetadata_submitButtonText");
-  }
+    return TAPi18n.__('editApiMetadata_submitButtonText');
+  },
 });
