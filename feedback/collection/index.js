@@ -2,12 +2,6 @@ import ss from 'simple-statistics';
 
 export const Feedback = new Mongo.Collection('feedback');
 
-Feedback.allow({
-  insert () {
-    return true;
-  },
-});
-
 Feedback.helpers({
   'sumOfVotes': function () {
     // Get all votes for current feedback
