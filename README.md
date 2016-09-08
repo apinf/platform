@@ -26,10 +26,7 @@ For API consumers APInf provides simple key management, key usage analytics and 
 [![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
 
 # Nightly build
-You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io).
-
-* username: test@test.test
-* password: testuser
+You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.
 
 # Contributing
 Please review our [Contributor Guide](https://github.com/apinf/docs/blob/master/docs/develop/contributing.md) for details on how to get involved with the project.
