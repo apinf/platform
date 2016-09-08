@@ -1,24 +1,24 @@
 export default {
   apiUmbrella: {
     type: Object,
-    optional: true
+    optional: true,
   },
   'apiUmbrella.url': {
     type: String,
     optional: false,
-    regEx: SimpleSchema.RegEx.Url
+    regEx: SimpleSchema.RegEx.Url,
   },
   'apiUmbrella.apiKey': {
     type: String,
-    optional: false
+    optional: false,
   },
   'apiUmbrella.authToken': {
     type: String,
-    optional: false
+    optional: false,
   },
   'apiUmbrella.elasticsearch': {
     type: String,
     optional: false,
-    regEx: SimpleSchema.RegEx.Url
-  }
-}
+    regEx: SimpleSchema.RegEx.Url,
+  },
+};

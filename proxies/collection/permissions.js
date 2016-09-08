@@ -1,19 +1,16 @@
 import { Proxies } from './';
 
 Proxies.allow({
-  insert: function () {
-
+  insert () {
     // Check if user has admin role
     return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
-  update: function () {
-
+  update () {
     // Check if user has admin role
     return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
-  remove: function () {
-
+  remove () {
     // Check if user has admin role
     return Roles.userIsInRole(Meteor.userId(), ['admin']);
-  }
+  },
 });
