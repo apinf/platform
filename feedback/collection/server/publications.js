@@ -1,5 +1,5 @@
 // Collection imports
-import { Feedback } from '../collection';
+import { Feedback } from '../';
 import { FeedbackVotes } from '/feedback_votes/collection';
 
 Meteor.publish('apiBackendFeedback', function (apiBackendId) {
