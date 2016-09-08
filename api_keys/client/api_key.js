@@ -1,4 +1,4 @@
-import { ApiKeys } from '/apikeys/collection';
+import { ApiKeys } from '/api_keys/collection';
 
 Template.apikey.onCreated(function() {
   this.subscribe('apiKeysForCurrentUser');

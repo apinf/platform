@@ -1,4 +1,4 @@
-import { ApiKeys } from '/apikeys/collection';
+import { ApiKeys } from '/api_keys/collection';
 import { Proxies } from '/proxies/collection';
 
 Meteor.methods({
