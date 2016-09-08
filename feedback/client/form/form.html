@@ -14,13 +14,12 @@
           <p>{{_ "feedback_feedbackForm_description"}}</p>
           {{> quickForm
             collection=feedbackCollection
-            id="feedback"
+            id="feedbackForm"
             type="insert"
             omitFields="authorId, createdAt, apiBackendId"
           }}
         </div>
       </div>
-      {{> flashMessages}}
     </div>
   </div>
 </template>
