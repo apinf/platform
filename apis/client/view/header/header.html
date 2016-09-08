@@ -1,36 +1,41 @@
 <template name="viewApiBackendPageHeader">
   <div class="page-head-topblock">
     <div class="container">
-      <div class="page-head-infoblock">
-        {{> viewApiLogo }}
-        <h1 class="api-name">
-          {{ apiBackend.name }}
-          {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
-        </h1>
-        <ul class="list-inline view-api-meta-details">
-          <li>
-            <i class="fa fa-user"></i>
-            {{ apiBackend.getApiManagersByName }}
-          </li>
-        </ul>
+      <div class="row">
+        <div class="page-head-infoblock">
+          {{> viewApiLogo }}
+          <h1 class="api-name">
+            {{ apiBackend.name }}
+            {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
+          </h1>
+          <ul class="list-inline view-api-meta-details">
+            <li>
+              <i class="fa fa-user"></i>
+              {{ apiBackend.getApiManagersByName }}
+            </li>
+          </ul>
+        </div>
+        <div class="page-head-starsblock pull-right">
+          {{# if currentUser }}
+          {{> favourite apiBackend=apiBackend }}
+          {{else}}
+          <a href="#" class="star-button">
+            <div
+                 class="api-card-bookmark"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
+              <span class="api-card-bookmark-number">{{ apiBackend.bookmarkCount }}</span>
+              <i class="fa fa-star bookmark-default"></i>
+            </div>
+          </a>
+          {{/if}}
+        </div>
+        {{> visibilitySwitch apiBackend=apiBackend }}
       </div>
-      <div class="page-head-starsblock pull-right">
-        {{# if currentUser }}
-        {{> favourite apiBackend=apiBackend }}
-        {{else}}
-        <a href="#" class="star-button">
-          <div
-               class="api-card-bookmark"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
-            <span class="api-card-bookmark-number">{{ apiBackend.bookmarkCount }}</span>
-            <i class="fa fa-star bookmark-default"></i>
-          </div>
-        </a>
-        {{/if}}
+      <div class="row">
+        <span class="pull-right">{{> apikey }}</span>
       </div>
-      {{> visibilitySwitch apiBackend=apiBackend }}
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
           <li class="active">
