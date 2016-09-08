@@ -49,7 +49,7 @@ Template.apikey.helpers({
       // Check that Umbrella API key exists
       if(apiKey && apiKey.apiUmbrella) {
         // Shorten key to be shown in UI
-        return apiKey.apiUmbrella.apiKey.substring(0,18) + "...";
+        return apiKey.apiUmbrella.apiKey.substring(0,15) + "...";
       }
 
     }
