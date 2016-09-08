@@ -2,13 +2,13 @@
   <div class="table-responsive">
     <table class="table table-striped table-bordered api-catalogue-table">
       <tbody>
-        {{#each api in apiBackends }}
+        {{#each api in apis }}
         {{#if api.currentUserCanView }}
         <tr>
           <td class="col-sm-1">
-            {{> viewApiBackendStatus apiBackend=api width="0.6" }}
+            {{> viewApiBackendStatus api=api width="0.6" }}
             <div class="api-catalogue-table-logo center-block">
-              {{> viewApiLogo apiBackend=api }}
+              {{> viewApiLogo api=api }}
             </div>
           </td>
           <td class="col-sm-9">
@@ -30,7 +30,7 @@
           <td class="col-sm-1 text-center">
             {{# if currentUser }}
             <span class="api-card-bookmark">
-              {{> favourite apiBackend=api catalogueView=true }}
+              {{> favourite api=api catalogueView=true }}
             </span>
             {{else}}
             <span class="api-card-bookmark">

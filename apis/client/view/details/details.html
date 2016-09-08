@@ -8,10 +8,10 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-lg-12 api-details-block">
-          {{ # if apiBackend.description }}
+          {{ # if api.description }}
           <h3>Description</h3>
           <p>
-            {{ apiBackend.description }}
+            {{ api.description }}
           </p>
           <hr class="panel-hr" />
           {{ / if }}
@@ -21,7 +21,7 @@
                    type="text"
                    class="form-control"
                    id="api-url"
-                   value="{{ apiBackend.url }}">
+                   value="{{ api.url }}">
             <span class="input-group-btn">
               <button
                       class="btn btn-default"
