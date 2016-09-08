@@ -13,7 +13,7 @@ Template.swaggerUiContent.onCreated(function () {
     supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
     apisSorter: 'alpha',
     operationsSorter: 'alpha',
-    docExpansion: 'none',
+    docExpansion: 'none'
   });
 
   // Load Swagger UI
