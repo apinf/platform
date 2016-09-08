@@ -100,7 +100,7 @@
     <!-- if viewMode is table, show table -->
     {{# if gridViewMode }}
     {{# if Template.subscriptionsReady }}
-    {{> catalogueGrid apiBackends=apiBackends }}
+    {{> catalogueGrid apis=apis }}
     {{else}}
     {{> spinner }}
     {{/if}}
@@ -109,7 +109,7 @@
     <!-- if viewMode is table, show table -->
     {{# if tableViewMode }}
     {{# if Template.subscriptionsReady }}
-    {{> catalogueTable apiBackends=apiBackends }}
+    {{> catalogueTable apis=apis }}
     {{else}}
     {{> spinner }}
     {{/if}}

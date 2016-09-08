@@ -4,18 +4,18 @@ Template.visibilitySwitch.onRendered(function () {
   // Get reference to current template instance
   const instance = this;
   // Get API Backend from data context
-  const apiBackend = this.data.apiBackend;
+  const api = this.data.api;
 
   // Get ID of current service
-  const apiBackendId = apiBackend._id;
+  const apiId = api._id;
 
   // Get service visibility for toggle switch state
-  const state = apiBackend.isPublic;
+  const state = api.isPublic;
 
   // Get i18n strings for button labels
-  const labelText = TAPi18n.__("visibilitySwitch_labelText");
-  const offText = TAPi18n.__("visibilitySwitch_offText");
-  const onText = TAPi18n.__("visibilitySwitch_onText");
+  const labelText = TAPi18n.__('visibilitySwitch_labelText');
+  const offText = TAPi18n.__('visibilitySwitch_offText');
+  const onText = TAPi18n.__('visibilitySwitch_onText');
   // Custom colors
   const onColor = 'primary';
   const offColor = 'default';
@@ -30,7 +30,7 @@ Template.visibilitySwitch.onRendered(function () {
     state,
     onSwitchChange (event, isPublic) {
       // Set visibility of current API
-      Apis.update(apiBackendId, {$set: {isPublic}});
-    }
+      Apis.update(apiId, { $set: { isPublic } });
+    },
   });
 });

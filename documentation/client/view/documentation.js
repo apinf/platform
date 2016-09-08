@@ -7,7 +7,7 @@ Template.documentation.onCreated(function () {
   // Run subscription in autorun
   instance.autorun(() => {
     // Get current documentation file Id
-    const documentationFileId = Template.currentData().apiBackend.documentationFileId;
+    const documentationFileId = Template.currentData().api.documentationFileId;
 
     if (documentationFileId) {
       // Subscribe to documentation
@@ -25,34 +25,31 @@ Template.documentation.onRendered(function () {
 
 Template.documentation.helpers({
   uploadedDocumentationLink () {
-    const currentDocumentationFileId = this.apiBackend.documentationFileId;
+    const documentationFileId = this.api.documentationFileId;
 
     // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
+    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
     // Get documentation file Object
-    const currentDocumentationFile = DocumentationFiles.findOne(objectId);
+    const documentationFile = DocumentationFiles.findOne(objectId);
 
     // Check if documentation file is available
-    if (currentDocumentationFile) {
-      // Current documentation file ID
-      const currentDocumentationFileId = currentDocumentationFile._id;
-
+    if (documentationFile) {
       // Get documentation file URL
-      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + currentDocumentationFileId;
+      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;
     }
   },
   documentationLink () {
     // get documentation link
-    const documentationLink = this.apiBackend.documentation_link;
+    const documentationLink = this.api.documentation_link;
     // check if exists
     if (documentationLink) {
       return documentationLink;
     }
   },
   documentationExists () {
-    const currentApiBackend = this.apiBackend;
-    if (currentApiBackend.documentationFileId) {
+    const api = this.api;
+    if (api.documentationFileId) {
       return true;
     }
   },
@@ -61,7 +58,7 @@ Template.documentation.helpers({
     const instance = Template.instance();
 
     // Get documentation file
-    const apiDocumentation = this.apiBackend.documentationFileId;
+    const apiDocumentation = this.api.documentationFileId;
 
     // Get settings
     const settings = Settings.findOne();
@@ -81,16 +78,16 @@ Template.documentation.helpers({
 Template.documentation.events({
   'click #manage-api-documentation': function (event, instance) {
     // Get reference to API backend
-    const apiBackend = instance.data.apiBackend;
+    const api = instance.data.api;
     // Show the manage API documentation form
-    Modal.show('manageApiDocumentationModal', { apiBackend });
+    Modal.show('manageApiDocumentationModal', { api });
   },
   'click #sdk-code-generator': function (event, instance) {
     // Get reference to API backend
-    const apiBackend = instance.data.apiBackend;
+    const api = instance.data.api;
     // Get reference to Code Generator host
     const host = instance.codegenServer;
     // Show the SDK Code generator form
-    Modal.show('sdkCodeGeneratorModal', { apiBackend, host });
+    Modal.show('sdkCodeGeneratorModal', { api, host });
   },
 });
