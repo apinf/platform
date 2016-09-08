@@ -12,10 +12,14 @@
         </div>
         <div class="modal-body">
           <p>{{_ "feedback_feedbackForm_description"}}</p>
-          {{> quickForm collection="Feedback" id="feedback" type="insert" omitFields="authorId, createdAt, apiBackendId"}}
+          {{> quickForm
+            collection=feedbackCollection
+            id="feedbackForm"
+            type="insert"
+            omitFields="authorId, createdAt, apiBackendId"
+          }}
         </div>
       </div>
-      {{> flashMessages}}
     </div>
   </div>
 </template>
