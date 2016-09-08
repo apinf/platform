@@ -1,3 +1,5 @@
+import { Feedback } from '../../collection';
+
 Template.feedbackList.created = function () {
   // Get API Backend ID from URL route
   const apiId = this.data.api._id;
