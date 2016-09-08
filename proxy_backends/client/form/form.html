@@ -1,0 +1,127 @@
+<template name="proxyBackend">
+  {{# autoForm
+    collection=proxyBackendsCollection
+    id="proxyBackendForm"
+    type=formType
+    doc=apiProxySettings
+  }}
+
+    <!-- hidden fields, auto-value -->
+    {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
+    {{> afQuickField name="apiId" value=api._id type="hidden" }}
+    {{> afQuickField name="apiUmbrella.name" value=api.name type="hidden" }}
+    {{> afQuickField name="apiUmbrella.frontend_host" value=proxy.apiUmbrella.url type="hidden" }}
+    {{> afQuickField name="apiUmbrella.backend_host" value=api.url type="hidden" }}
+    {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol type="hidden" }}
+    {{> afQuickField name="apiUmbrella.servers.0.host" value=api.url type="hidden" }}
+
+    <!-- visible fields -->
+
+    <!-- Proxy base path (frontend prefix) -->
+    <div class="form-group">
+      <!-- label -->
+      <label for="proxy-base-path-field">
+        {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix'}}
+      </label>
+
+      <div class="input-group">
+        <!-- proxy url addon -->
+        <span class="input-group-addon" id="proxy-url">
+          {{ proxy.apiUmbrella.url }}
+        </span>
+
+        <!-- input field -->
+        {{> afFieldInput
+          name="apiUmbrella.url_matches.0.frontend_prefix"
+          class="form-control"
+          aria-describedby="proxy-url"
+          id="proxy-base-path-field"
+        }}
+      </div>
+
+      <!-- validation messages -->
+      {{#if afFieldIsInvalid name='proxy.apiUmbrella.url'}}
+        <p class="text-danger">
+          {{{afFieldMessage name='proxy.apiUmbrella.url'}}}
+        </p>
+      {{/if}}
+
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_proxyBasePath_helpText" }}&nbsp;
+        {{ proxy.apiUmbrella.url }} <b>/proxy_base_path/</b>
+      </p>
+    </div>
+
+    <!-- API fields -->
+    <div class="row">
+      <!-- API base path (backend prefix) -->
+      <div class="form-group col-md-9">
+        <!-- field label -->
+        <label for="api-base-path-field">
+          {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix'}}
+        </label>
+
+        <div class="input-group">
+          <!-- API url addon -->
+          <span class="input-group-addon" id="api-url">
+            {{ api.url }}
+          </span>
+
+          <!-- field input -->
+          {{> afFieldInput
+            name="apiUmbrella.url_matches.0.backend_prefix"
+            class="form-control"
+            aria-describedby="api-url"
+            id="api-base-path-field"
+          }}
+        </div>
+
+        <!-- validation messages -->
+        {{#if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix'}}
+          <p class="text-danger">
+            {{{afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix'}}}
+          </p>
+        {{/if}}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_apiBasePath_helpText" }}&nbsp;
+          {{ api.url }} <b>/api_base_path/</b>
+        </p>
+      </div>
+
+      <!-- API port (servers.port) -->
+      <div class="form-group col-md-3">
+        <!-- field label -->
+        <label for="api-port-field" id="api-port-field-label">
+          {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
+        </label>
+
+          <!-- field input -->
+          {{> afFieldInput
+            name="apiUmbrella.servers.0.port"
+            value=apiPortHelper
+            class="form-control"
+            aria-describedby="api-port-field-label"
+            id="api-port-field"
+          }}
+
+        <!-- validation messages -->
+        {{#if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
+          <p class="text-danger">
+            {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
+          </p>
+        {{/if}}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_apiPort_helpText" }}
+        </p>
+      </div>
+    </div>
+
+    <!-- submit button -->
+    <button type="submit" class="btn btn-primary pull-right">Save proxy settings</button>
+  {{/ autoForm }}
+</template>

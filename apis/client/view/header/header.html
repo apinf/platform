@@ -1,23 +1,24 @@
 <template name="viewApiBackendPageHeader">
   <div class="page-head-topblock">
     <div class="container">
+      <!-- Header -->
       <div class="row">
         <div class="page-head-infoblock">
           {{> viewApiLogo }}
           <h1 class="api-name">
-            {{ apiBackend.name }}
-            {{> viewApiBackendStatus apiBackend=apiBackend width="0.4" }}
+            {{ api.name }}
+            {{> viewApiBackendStatus api=api width="0.4" }}
           </h1>
           <ul class="list-inline view-api-meta-details">
             <li>
               <i class="fa fa-user"></i>
-              {{ apiBackend.getApiManagersByName }}
+              {{ api.getApiManagersByName }}
             </li>
           </ul>
         </div>
         <div class="page-head-starsblock pull-right">
           {{# if currentUser }}
-          {{> favourite apiBackend=apiBackend }}
+          {{> favourite api=api }}
           {{else}}
           <a href="#" class="star-button">
             <div
@@ -25,65 +26,76 @@
                  data-toggle="tooltip"
                  data-placement="bottom"
                  title="{{_ 'catalogue-Bookmark-Tooltip_NonUser'}}">
-              <span class="api-card-bookmark-number">{{ apiBackend.bookmarkCount }}</span>
+              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
               <i class="fa fa-star bookmark-default"></i>
             </div>
           </a>
           {{/if}}
         </div>
-        {{> visibilitySwitch apiBackend=apiBackend }}
+        {{> visibilitySwitch api=api }}
       </div>
       <div class="row">
         <span class="pull-right">{{> apikey }}</span>
       </div>
+      <!-- Tabs -->
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
           <li class="active">
-            <a href="#api-backend-details" data-toggle="tab">
+            <a href="#api-details" data-toggle="tab">
               <i class="fa fa-info-circle"></i>
               {{_ "viewApiBackendNavigationMenu_details" }}
             </a>
           </li>
           <li>
-            <a href="#api-backend-documentation" data-toggle="tab">
+            <a href="#api-documentation" data-toggle="tab">
               <i class="fa fa-file-text"></i>
               {{_ "viewApiBackendNavigationMenu_documentation" }}
             </a>
           </li>
           <li>
-            <a href="#api-backend-metadata" data-toggle="tab">
+            <a href="#api-metadata" data-toggle="tab">
               <i class="fa fa-book"></i>
               {{_ "viewApiBackendNavigationMenu_metadata" }}
             </a>
           </li>
           <li>
-            <a href="#api-backend-feedback" data-toggle="tab">
+            <a href="#api-feedback" data-toggle="tab">
               <i class="fa fa-comments-o"></i>
               {{_ "viewApiBackendNavigationMenu_feedback" }}
             </a>
           </li>
           <li>
-            <a href="#api-backend-backlog" data-toggle="tab">
+            <a href="#api-backlog" data-toggle="tab">
               <i class="fa fa-check-square-o"></i>
               {{_ "viewApiBackendNavigationMenu_backlog" }}
             </a>
           </li>
           <li>
-            <a href="#api-backend-export" data-toggle="tab">
+            <a href="#api-export" data-toggle="tab">
               <i class="fa fa-cloud-download"></i>
               {{_ "viewApiBackendNavigationMenu_export" }}
             </a>
           </li>
-          {{ # if currentUser }}
-          {{# if apiBackend.currentUserCanEdit }}
-          <li>
-            <a href="#api-backend-settings" data-toggle="tab">
-              <i class="fa fa-cog"></i>
-              {{_ "viewApiBackendNavigationMenu_settings" }}
-            </a>
-          </li>
+
+          {{# if api.currentUserCanEdit }}
+            <li>
+              <a href="#api-settings" data-toggle="tab">
+                <i class="fa fa-cog"></i>
+                {{_ "viewApiBackendNavigationMenu_settings" }}
+              </a>
+            </li>
+
+            {{# if proxyIsConfigured }}
+            <li>
+              <a href="#api-proxy" data-toggle="tab">
+                <i class="fa fa-sitemap"></i>
+                {{_ "viewApiBackendNavigationMenu_proxy" }}
+              </a>
+            </li>
+            {{/ if }}
+
           {{ / if }}
-          {{ / if }}
+
         </ul>
       </div>
     </div>
