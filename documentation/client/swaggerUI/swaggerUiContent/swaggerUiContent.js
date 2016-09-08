@@ -5,7 +5,7 @@ Template.swaggerUiContent.onCreated(function () {
   const documentationURL = this.data.apiDocumentation;
 
   // Create Swagger UI
-  let swagger = window.swaggerUi = new SwaggerUi({
+  const swagger = window.swaggerUi = new SwaggerUi({
     url: documentationURL,
     dom_id: 'swagger-ui-container',
     useJQuery: true,
@@ -13,7 +13,7 @@ Template.swaggerUiContent.onCreated(function () {
     supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
     apisSorter: 'alpha',
     operationsSorter: 'alpha',
-    docExpansion: 'none'
+    docExpansion: 'none',
   });
 
   // Load Swagger UI

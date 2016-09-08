@@ -31,5 +31,5 @@ Template.swaggerUi.helpers({
     const instance = Template.instance();
     // Get status of api documentation is valid
     return instance.documentationValid;
-  }
+  },
 });
