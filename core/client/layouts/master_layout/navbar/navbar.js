@@ -9,7 +9,7 @@ Template.navbar.onCreated(function () {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
-  instance.subscribe('allProxies');
+  instance.subscribe('publicProxyDetails');
 });
 
 
