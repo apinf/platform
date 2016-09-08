@@ -1,12 +1,14 @@
 sudo: required
 language: node_js
-node_js:
-- '0.12'
-before_install:
-- openssl aes-256-cbc -K $encrypted_663f9d0ad0b4_key -iv $encrypted_663f9d0ad0b4_iv
-  -in secrets.tar.enc -out secrets.tar -d
-- tar xvf secrets.tar
-- curl https://install.meteor.com/ | sh
-- npm install -g mupd
+
+branches:
+  only:
+    - develop
+
+services:
+  - docker
+
 script:
-- mupd deploy
+  - docker build -t apinf/apinf:"$TRAVIS_BRANCH" .
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push apinf/apinf:"$TRAVIS_BRANCH"

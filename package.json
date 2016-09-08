@@ -23,6 +23,7 @@
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.14.1",
     "simple-statistics": "^2.1.0",
+    "urijs": "^1.18.1"
     "swagger-client": "^2.1.0",
     "swagger-parser": "^3.4.1",
     "swagger-ui": "^2.2.3",

@@ -1,25 +1,22 @@
 Meteor.methods({
-  'getApiStatus' : function (uri) {
-
+  'getApiStatus': function (uri) {
     this.unblock();
 
     // Init empty status object
-    let status = {
+    const status = {
       code: 0,
-      errorMessage: "",
-      responseContext: {}
+      errorMessage: '',
+      responseContext: {},
     };
 
     // Try-catch wrapper
     // Because if requested host is not available, error is thrown
     try {
-
       // response object from GET request to api host
-      const result = Meteor.http.call("GET", uri);
+      const result = Meteor.http.call('GET', uri);
 
       // Check result is received
-      if(result) {
-
+      if (result) {
         // Get response status code
         status.code = result.statusCode;
 
@@ -28,22 +25,18 @@ Meteor.methods({
       }
 
       return status;
-
     } catch (error) {
-
       // Got a network error, time-out or HTTP error in the 400 or 500 range.
-      
+
       // Check if "ECONNREFUSED" is reveived
       if (!error.response && error.code === 'ECONNREFUSED') {
-
         // Provide 404 error
         status.code = 404;
-
       } else {
-
         // Keep response error code
+        // TODO: make sure this 'else' statement handles all other cases
+        // e.g. error.response or error.response.statusCode may not exist
         status.code = error.response.statusCode;
-
       }
 
       // Keep reponse error message
@@ -51,4 +44,4 @@ Meteor.methods({
 
       return status;
     }
-}});
+  } });

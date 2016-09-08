@@ -1,9 +1,11 @@
+import { Settings } from './';
+
 Settings.allow({
-  insert: function() {
+  insert () {
     // get settings
-    var dbSettingsCount = Settings.find().count();
+    const dbSettingsCount = Settings.find().count();
     // if no settings exist
-    if ( dbSettingsCount > 0 ) {
+    if (dbSettingsCount > 0) {
       // don't allow insert
       return false;
     } else {
@@ -11,7 +13,7 @@ Settings.allow({
       return true;
     }
   },
-  update: function() {
+  update () {
     return true;
-  }
+  },
 });
