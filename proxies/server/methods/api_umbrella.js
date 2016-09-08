@@ -1,4 +1,4 @@
-import { apiUmbrellaSettingsValid } from '/lib/helperFunctions/validateSettings';
+import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '/apis/collection';
 import { Proxies } from '/proxies/collection';
