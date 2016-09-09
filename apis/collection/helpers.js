@@ -1,5 +1,8 @@
+// Collection imports
 import { Apis } from './';
+import { ApiBackendRatings } from '/ratings/collection';
 
+// Utility imports
 import ss from 'simple-statistics';
 import moment from 'moment';
 import _ from 'lodash';
