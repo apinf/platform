@@ -1,38 +1,59 @@
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
+import { Proxies } from '/proxies/collection';
 
 Template.viewApiBackend.onCreated(function () {
   // Get reference to template instance
-  var instance = this;
+  const instance = this;
 
   // Get the API Backend ID from the route
-  apiBackendId = Router.current().params._id;
+  apiId = Router.current().params._id;
 
   // Subscribe to a single API Backend, by ID
-  instance.subscribe("apiBackend", apiBackendId);
+  instance.subscribe('apiBackend', apiId);
 
   // Subscribe to API Backlog items for this API Backend
-  instance.subscribe("apiBacklogItems", apiBackendId);
+  instance.subscribe('apiBacklogItems', apiId);
+
+  // Subscribe to public proxy details
+  instance.subscribe('publicProxyDetails');
+
+  // Subscribe to proxy settings for this API
+  instance.subscribe('apiProxySettings', apiId);
 });
 
 Template.viewApiBackend.helpers({
-  "apiBackend": function () {
+  'api': function () {
     // Get the API Backend ID from the route
-    let apiBackendId = Router.current().params._id;
+    const apiId = Router.current().params._id;
 
     // Get single API Backend
-    let apiBackend = Apis.findOne(apiBackendId);
+    const api = Apis.findOne(apiId);
 
-    return apiBackend;
+    return api;
   },
-  backlogItems: function () {
+  backlogItems () {
     // Get the API Backend ID from the route
-    let apiBackendId = Router.current().params._id;
+    const apiBackendId = Router.current().params._id;
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    var backlogItems = ApiBacklogItems.find({apiBackendId: apiBackendId }, {sort: {priority: -1, createdAt: -1}}).fetch();
+    const backlogItems = ApiBacklogItems.find({ apiBackendId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
 
     return backlogItems;
-  }
+  },
+  proxyIsConfigured () {
+    // Check if one or more proxy has been configured
+    let proxyIsConfigured;
+
+    const proxyCount = Proxies.find().count();
+
+    if (proxyCount > 0) {
+      proxyIsConfigured = true;
+    } else {
+      proxyIsConfigured = false;
+    }
+
+    return proxyIsConfigured;
+  },
 });

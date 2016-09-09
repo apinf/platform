@@ -1,18 +1,18 @@
 Meteor.methods({
-  deleteAccount: function(userId) {
+  deleteAccount (userId) {
     if (this.userId === userId) {
       return Meteor.users.remove({
-        _id: this.userId
+        _id: this.userId,
       });
     }
   },
-  countUsers: function () {
+  countUsers () {
     // Get all users
-    var users = Meteor.users.find().fetch();
+    const users = Meteor.users.find().fetch();
 
     // Count the number of users
-    var usersCount = users.length;
+    const usersCount = users.length;
 
     return usersCount;
-  }
+  },
 });

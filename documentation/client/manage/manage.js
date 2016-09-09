@@ -29,9 +29,9 @@ Template.manageApiDocumentationModal.onCreated(function () {
   InlineHelp.initHelp(helpTexts);
 
   instance.autorun(function () {
-    const apiBackend = Apis.findOne(instance.data.apiBackend._id);
+    const api = Apis.findOne(instance.data.api._id);
     // Save apibackend id
-    Session.set('currentApiBackend', apiBackend);
+    Session.set('api', api);
   });
 
   // Subscribe to documentation editor settings
@@ -40,7 +40,7 @@ Template.manageApiDocumentationModal.onCreated(function () {
 
 Template.manageApiDocumentationModal.onDestroyed(function () {
   // Unset session
-  Session.set('currentApiBackend', undefined);
+  Session.set('api', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
@@ -51,7 +51,7 @@ Template.manageApiDocumentationModal.events({
     // Check if user clicked "OK"
     if (confirmation === true) {
       // Get currentApiBackend documentationFileId
-      const documentationFileId = this.apiBackend.documentationFileId;
+      const documentationFileId = this.api.documentationFileId;
 
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(documentationFileId);
@@ -60,7 +60,7 @@ Template.manageApiDocumentationModal.events({
       DocumentationFiles.remove(objectId);
 
       // Remove documenation file id field
-      Apis.update(instance.data.apiBackend._id, { $unset: { documentationFileId: '' } });
+      Apis.update(instance.data.api._id, { $unset: { documentationFileId: '' } });
 
       sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
     }
@@ -78,19 +78,19 @@ Template.manageApiDocumentationModal.events({
 
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
-    const currentApiBackend = Session.get('currentApiBackend');
+    const api = Session.get('api');
 
-    const currentDocumentationFileId = currentApiBackend.documentationFileId;
+    const documentationFileId = api.documentationFileId;
 
     // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentDocumentationFileId);
+    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
     // Get documentation file Object
-    const currentDocumentationFile = DocumentationFiles.findOne(objectId);
+    const documentationFile = DocumentationFiles.findOne(objectId);
 
     // Check if documentation file is available
-    if (currentDocumentationFile) {
-      return currentDocumentationFile;
+    if (documentationFile) {
+      return documentationFile;
     }
   },
   apiDocumentationEditorIsEnabled () {
@@ -106,7 +106,8 @@ Template.manageApiDocumentationModal.helpers({
       return false;
     }
   },
-  formCollection () {
+  apisCollection () {
+    // Return a reference to Apis collection, for AutoForm
     return Apis;
   },
 });

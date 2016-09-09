@@ -1,6 +1,9 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+// Collection imports
 import { Apis } from '/apis/collection';
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiBacklogItems } from '/backlog/collection';
+import { ApiMetadata } from '/metadata/collection';
+import { DocumentationFiles } from '/documentation/collection/collection';
+import { Feedback } from '/feedback/collection';
 
 Meteor.methods({
   // Remove API backend and related items
@@ -9,14 +12,14 @@ Meteor.methods({
     Meteor.call('removeApiDoc', apiBackendId);
 
     // Remove backlog items
-    ApiBacklogItems.remove({"apiBackendId": apiBackendId});
+    ApiBacklogItems.remove({ 'apiBackendId': apiBackendId });
 
     // Remove feedbacks
-    Feedback.remove({"apiBackendId": apiBackendId});
+    Feedback.remove({ 'apiBackendId': apiBackendId });
 
     // Remove metadata
-    ApiMetadata.remove({"apiBackendId": apiBackendId});
-    
+    ApiMetadata.remove({ 'apiBackendId': apiBackendId });
+
     // Finally remove the API
     Apis.remove(apiBackendId);
   },
@@ -30,5 +33,5 @@ Meteor.methods({
     const objectId = new Mongo.Collection.ObjectID(documentationFileId);
     // Remove documentation object
     DocumentationFiles.remove(objectId);
-  }
+  },
 });

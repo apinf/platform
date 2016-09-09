@@ -10,13 +10,16 @@
       <p>
         {{_ "viewApiBackendSettings_uploadLogoText" }}
       </p>
-      {{> uploadApiLogo apiBackend=apiBackend }}
+      {{> uploadApiLogo apiBackend=api }}
       <hr class="panel-hr" />
-      {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
+      {{#autoForm collection=formCollection doc=api id="apiBackendForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='description'}}
+      {{> afQuickField name='url'}}
       <div id="form-buttons">
-        <button type="submit" class="btn btn-success" id="save-settings">Save</button>
+        <button type="submit" class="btn btn-success" id="save-settings">
+          {{_ "viewApiBackendSettigs_saveButton_text" }}
+        </button>
       </div>
       {{/autoForm}}
     </div>

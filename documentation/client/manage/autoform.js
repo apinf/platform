@@ -1,5 +1,5 @@
-AutoForm.addHooks(['apiBackendDocumentationLinkForm'], {
-  onSuccess: function () {
+AutoForm.addHooks(['apiDocumentationForm'], {
+  onSuccess () {
     sAlert.success(TAPi18n.__('manageApiDocumentationModal_LinkField_Updated_Message'));
-  }
+  },
 });

@@ -9,8 +9,13 @@ Template.masterLayout.created = function () {
 };
 
 Template.masterLayout.helpers({
-  branding: function () {
-    // Get Branding collection content
-    return Branding.findOne();
-  }
+  branding () {
+    // Check for branding document
+    const branding = Branding.findOne();
+
+    if (branding) {
+      // If branding is available, return it
+      return branding;
+    }
+  },
 });

@@ -1,9 +1,9 @@
-var requireAdminRole = function () {
+const requireAdminRole = function () {
   if (Meteor.user()) {
     // Get user ID
-    var userId = Meteor.user()._id;
+    const userId = Meteor.user()._id;
 
-    var userIsAdmin = Roles.userIsInRole(userId, "admin");
+    const userIsAdmin = Roles.userIsInRole(userId, 'admin');
 
     if (userIsAdmin) {
       // User is authorized to access route
@@ -21,13 +21,12 @@ var requireAdminRole = function () {
 const additionalSetupRequired = function () {
   if (Meteor.user()) {
     // Get user ID
-    var userId = Meteor.user()._id;
+    const userId = Meteor.user()._id;
 
-    var userIsAdmin = Roles.userIsInRole(userId, "admin");
+    const userIsAdmin = Roles.userIsInRole(userId, 'admin');
 
     if (userIsAdmin) {
-      Meteor.call('isInitialSetupComplete', function(error, setupComplete) {
-
+      Meteor.call('isInitialSetupComplete', function (error, setupComplete) {
         if (!setupComplete) {
           // Show the setup needed modal
           Modal.show('setupNeededModal');
@@ -40,6 +39,6 @@ const additionalSetupRequired = function () {
 };
 
 // check if setup is required before opening any page
-Router.onBeforeAction(additionalSetupRequired, {except: ['settings', 'settings.branding']});
+Router.onBeforeAction(additionalSetupRequired, { except: ['settings', 'branding'] });
 
-Router.onBeforeAction(requireAdminRole, {only: ['settings', 'settings.branding']});
+Router.onBeforeAction(requireAdminRole, { only: ['settings', 'branding'] });

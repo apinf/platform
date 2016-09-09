@@ -1,29 +1,34 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '/metadata/collection';
 import { Apis } from '/apis/collection';
 
 ApiMetadata.allow({
-  "insert": function (userId, doc) {
-    var apiBackendId = doc.apiBackendId;
+  insert (userId, metadata) {
+    const apiId = metadata.apiBackendId;
 
     // Make sure there is only one document per API Backend ID
-    if(ApiMetadata.find({apiBackendId}).count() !== 0) {
+    // TODO: refactor ApiMetadata schema to use 'apiId' field
+    if (ApiMetadata.find({ apiBackendId: apiId }).count() !== 0) {
+      console.log('no insert allowed');
       return false;
     } else {
       // Find related API Backend, select only "managerIds" field
-      var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
+      const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
       // Check if current user can edit API Backend
-      return apiBackend.currentUserCanEdit();
+      const userCanEdit = api.currentUserCanEdit();
+      console.log('user can edit', userCanEdit);
+
+      return userCanEdit;
     }
   },
-  "update": function (userId, doc) {
+  update (userId, metadata) {
     // Get API Backend ID
-    var apiBackendId = doc.apiBackendId;
+    const apiId = metadata.apiBackendId;
 
     // Find related API Backend, select only "managerIds" field
-    var apiBackend = Apis.findOne(apiBackendId, {fields: {managerIds: 1}});
+    const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return apiBackend.currentUserCanEdit();
-  }
+    return api.currentUserCanEdit();
+  },
 });

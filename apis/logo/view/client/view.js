@@ -1,39 +1,38 @@
 import { ApiLogo } from '/apis/logo/collection/collection';
 import { Apis } from '/apis/collection';
 
-Template.viewApiLogo.onCreated(function() {
+Template.viewApiLogo.onCreated(function () {
   const instance = this;
   // Subscribe to API logo
   instance.subscribe('allApiLogo');
 });
 
 Template.viewApiLogo.helpers({
-  uploadedApiLogoLink: function() {
+  uploadedApiLogoLink () {
     // Get API current API Backend from template data
-    const currentApiBackend = Template.currentData().apiBackend;
+    const api = Template.currentData().api;
 
-    if (currentApiBackend && currentApiBackend.apiLogoFileId) {
-      const currentApiLogoFileId = currentApiBackend.apiLogoFileId;
+    if (api && api.apiLogoFileId) {
+      const apiLogoFileId = api.apiLogoFileId;
 
       // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(currentApiLogoFileId);
+      const objectId = new Mongo.Collection.ObjectID(apiLogoFileId);
 
       // Get API logo file Object
-      const currentApiLogoFile = ApiLogo.findOne(objectId);
+      const apiLogoFile = ApiLogo.findOne(objectId);
 
       // Check if API logo file is available
-      if (currentApiLogoFile) {
-
+      if (apiLogoFile) {
         // Get API logo file URL
-        return Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL + "/md5/" + currentApiLogoFile.md5;
+        return Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL + '/md5/' + apiLogoFile.md5;
       }
     }
   },
-  apiLogoExists: function () {
-    const currentApiBackend = Template.currentData().apiBackend;
+  apiLogoExists () {
+    const api = Template.currentData().api;
 
-    if (currentApiBackend.apiLogoFileId) {
+    if (api && api.apiLogoFileId) {
       return true;
     }
-  }
+  },
 });

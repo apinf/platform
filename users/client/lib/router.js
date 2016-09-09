@@ -1,19 +1,19 @@
 Router.route('/users', {
   name: 'accountsAdmin',
   layout: 'masterLayout',
-  template: 'accountsAdmin'
+  template: 'accountsAdmin',
 });
 
 Router.route('/settings/account', {
   name: 'account',
   layout: 'masterLayout',
-  template: 'account'
+  template: 'account',
 });
 
 Router.route('/settings/profile', {
   name: 'profile',
   layout: 'masterLayout',
-  template: 'profile'
+  template: 'profile',
 });
 
 Router.route('/sign-out', {
@@ -23,9 +23,9 @@ Router.route('/sign-out', {
 });
 
 const signOut = function () {
-  Meteor.logout(function() {});
+  Meteor.logout(function () {});
   this.redirect('/');
   return this.next();
 };
 
-Router.onBeforeAction(signOut, {only: ['signOut']});
+Router.onBeforeAction(signOut, { only: ['signOut'] });
