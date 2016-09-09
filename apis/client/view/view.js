@@ -1,44 +1,63 @@
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { Proxies } from '/proxies/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 Template.viewApiBackend.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
   // Get the API Backend ID from the route
-  apiId = Router.current().params._id;
+  instance.apiId = Router.current().params._id;
 
   // Subscribe to a single API Backend, by ID
-  instance.subscribe('apiBackend', apiId);
+  instance.subscribe('apiBackend', instance.apiId);
 
   // Subscribe to API Backlog items for this API Backend
-  instance.subscribe('apiBacklogItems', apiId);
+  instance.subscribe('apiBacklogItems', instance.apiId);
 
   // Subscribe to public proxy details
   instance.subscribe('publicProxyDetails');
 
   // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', apiId);
+  instance.subscribe('apiProxySettings', instance.apiId);
 });
 
 Template.viewApiBackend.helpers({
-  'api': function () {
-    // Get the API Backend ID from the route
-    const apiId = Router.current().params._id;
+  api () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get API ID
+    const apiId = instance.apiId;
 
     // Get single API Backend
     const api = Apis.findOne(apiId);
 
     return api;
   },
+  apiProxySettings () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get API ID
+    const apiId = instance.apiId;
+
+    // Look for existing proxy backend document for this API
+    const apiProxySettings = ProxyBackends.findOne({ apiId });
+
+    return apiProxySettings;
+  },
   backlogItems () {
-    // Get the API Backend ID from the route
-    const apiBackendId = Router.current().params._id;
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get API ID
+    const apiId = instance.apiId;
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    const backlogItems = ApiBacklogItems.find({ apiBackendId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
+    const backlogItems = ApiBacklogItems.find({ apiId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
 
     return backlogItems;
   },
