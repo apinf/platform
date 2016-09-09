@@ -6,16 +6,6 @@ Schemas.UserProfile = new SimpleSchema({
   company: {
     type: String,
     optional: true
-  },
-  apiKey: {
-    label: 'API key',
-    type: String,
-    regEx: /^[a-z0-9A-Z]{40}$/,
-    optional: true,
-    autoform: {
-      readonly: true,
-      template: "plain"
-    }
   }
 });
 // Username must be 3-15 alphanumeric string with hyphens allowed.
