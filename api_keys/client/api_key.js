@@ -10,7 +10,7 @@ Template.apikey.events({
       if(error) {
         sAlert.error(error);
       } else {
-        sAlert.success(TAPi18n.__('apikey_button_success'));
+        sAlert.success(TAPi18n.__('apiKeys_getApiKeyButton_success'));
       }
     });
   }
