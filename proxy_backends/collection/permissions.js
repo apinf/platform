@@ -3,7 +3,7 @@ import { ProxyBackends } from './';
 import { Apis } from '/apis/collection';
 
 ProxyBackends.allow({
-  insert (backendId, backend) {
+  insert (userId, backend) {
     // Only allow API Managers or Administrators to insert
 
     // Get API document
@@ -14,7 +14,7 @@ ProxyBackends.allow({
       return true;
     }
   },
-  update (backendId, backend) {
+  update (userId, backend) {
     // Only allow API Managers or Administrators to update
 
     // Get API document
@@ -25,7 +25,7 @@ ProxyBackends.allow({
       return true;
     }
   },
-  remove (backendId, backend) {
+  remove (userId, backend) {
     // Only allow API Managers or Administrators to remove
 
     // Get API document
