@@ -29,7 +29,6 @@ Meteor.methods({
 
             // Insert apiKey
             ApiKeys.insert(apiKey);
-            console.log("ApiKey inserted");
           }
 
         });
