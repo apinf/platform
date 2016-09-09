@@ -6,6 +6,10 @@ Template.apikey.onCreated(function() {
 
 Template.apikey.events({
   'click #getApiKeyButton' (event) {
+    // Set bootstrap loadingText
+    $('#getApiKeyButton').button({loadingText: TAPi18n.__('apiKeys_getApiKeyButton_processing')});
+    // Set button to processing state
+    $('#getApiKeyButton').button('loading');
     Meteor.call('createApiKey', function(error, result) {
       if(error) {
         sAlert.error(error);
