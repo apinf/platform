@@ -273,11 +273,6 @@
   "notFound_Title": "Oops! Page not found.",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
-  "profile_apiKey": "API Key",
-  "profile_apiKey_copyButtonText": "Copy API key",
-  "profile_apiKey_copySuccessful": "API key copied to clipboard.",
-  "profile_apiKeysHeader": "API Key(s)",
-  "profile_getUmbrellaApiKey": "Get API key for Umbrella",
   "profile_setUsername": "Please set your username.",
   "profile_updatedSuccess": "Profile updated",
   "profile_usernameInvalid": "Username must be 3-15 alphanumeric characters. Underscore and hyphens are allowed.",
@@ -474,6 +469,7 @@
   "statusCheck_Elasticsearch": "Elasticsearch",
   "statusCodeCountsChart_title": "HTTP Status Codes",
   "statusCodeCountsChart_help_text": "Click on any HTTP status bar to filter API Request Timeline and API Response Time chart for that specific response type.",
+  "swaggerUi_swaggerDocumentInvalidText": "Swagger document is not valid.",
   "umbrella_createuser_error": "Failed to create user on API Umbrella.",
   "umbrella_notdefined_error": "API Umbrella not defined.",
   "updatePassword_submitButton_text": "Change Password",
@@ -536,5 +532,9 @@
   "tickButtons_month": "Month",
   "visibilitySwitch_labelText": "Visibility",
   "visibilitySwitch_offText": "Private",
-  "visibilitySwitch_onText": "Public"
+  "visibilitySwitch_onText": "Public",
+  "apiKeys_label": "API Key",
+  "apiKeys_getApiKeyButton": "Get API key",
+  "apiKeys_copyButtonText": "Copy API key",
+  "apiKeys_copySuccessful": "API key copied to clipboard."
 }

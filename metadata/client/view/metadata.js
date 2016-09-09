@@ -9,21 +9,6 @@ Template.viewApiBackendMetadata.onCreated(function () {
 });
 
 Template.viewApiBackendMetadata.helpers({
-  currentUserCanEditMetadata () {
-    /*
-     API Metadata shares permissions with the API Backend
-     Make sure user can edit API Backend before allowing Metadata permissions
-    */
-
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get current API backend ID
-    const api = instance.data.api;
-
-    // Check if current user can edit API Backend
-    return api.currentUserCanEdit();
-  },
   metadata () {
     // Get reference to template instance
     const instance = Template.instance();

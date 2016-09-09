@@ -36,50 +36,6 @@
           </tbody>
         </table>
       {{ / if }}
-      {{ # if equals type 'kong' }}
-        <table class="table table-condensed">
-          <tbody>
-            <tr>
-              <th scope="row">Type</th>
-              <td>{{ proxy.type }}</td>
-            </tr>
-            <tr>
-              <th scope="row">URL</th>
-              <td>{{ proxy.kong.url }}</td>
-            </tr>
-            <tr>
-              <th scope="row">API Key</th>
-              <td>*****</td>
-            </tr>
-            <tr>
-              <th scope="row">API Token</th>
-              <td>*****</td>
-            </tr>
-          </tbody>
-        </table>
-      {{ / if }}
-      {{ # if equals proxy.type 'tyk' }}
-        <table class="table table-condensed">
-          <tbody>
-            <tr>
-              <th scope="row">Type</th>
-              <td>{{ proxy.type }}</td>
-            </tr>
-            <tr>
-              <th scope="row">URL</th>
-              <td>{{ proxy.tyk.url }}</td>
-            </tr>
-            <tr>
-              <th scope="row">API Key</th>
-              <td>*****</td>
-            </tr>
-            <tr>
-              <th scope="row">API Token</th>
-              <td>*****</td>
-            </tr>
-          </tbody>
-        </table>
-      {{ / if }}
     </div>
     <div class="panel-footer">
       <div class="text-right">
