@@ -36,7 +36,7 @@ Template.viewApiBackend.helpers({
 
     return api;
   },
-  apiProxySettings () {
+  proxyBackend () {
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -45,7 +45,7 @@ Template.viewApiBackend.helpers({
 
     // Look for existing proxy backend document for this API
     const apiProxySettings = ProxyBackends.findOne({ apiId });
-
+    console.log(apiProxySettings);
     return apiProxySettings;
   },
   backlogItems () {
