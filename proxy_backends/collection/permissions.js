@@ -1,6 +1,6 @@
 // Apinf import
 import { ProxyBackends } from './';
-impprt { Apis } from '/apis/collection';
+import { Apis } from '/apis/collection';
 
 ProxyBackends.allow({
   insert () {
