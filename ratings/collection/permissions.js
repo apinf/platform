@@ -9,6 +9,8 @@ ApiBackendRatings.allow({
     }
   },
   update (userId, rating) {
-    return true;
+    if (userId === rating.userId) {
+      return true;
+    }
   },
 });
