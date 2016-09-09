@@ -1,12 +1,7 @@
-import { Proxies } from '../../collection';
-import proxiesList from '../../default/list';
-
 import { Template } from 'meteor/templating';
+import { Proxies } from '../../collection';
 
 Template.addProxy.helpers({
-  proxiesList () {
-    return proxiesList;
-  },
   proxiesCollection () {
     return Proxies;
   },
@@ -19,5 +14,5 @@ Template.addProxy.helpers({
 
     // Return formType depending on the action e.g. editing or adding
     return (instance.data.isEdit) ? 'update' : 'insert';
-  }
+  },
 });
