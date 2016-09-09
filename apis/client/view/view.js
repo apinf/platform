@@ -45,7 +45,7 @@ Template.viewApiBackend.helpers({
 
     // Look for existing proxy backend document for this API
     const apiProxySettings = ProxyBackends.findOne({ apiId });
-    console.log(apiProxySettings);
+
     return apiProxySettings;
   },
   backlogItems () {
