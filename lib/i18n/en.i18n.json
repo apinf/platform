@@ -486,6 +486,8 @@
   "userMenu_settings": "Settings",
   "userMenu_signout": "Sign out",
   "viewApiBackendDetails_deleteButton": "Delete",
+  "viewApiBackendDetails_baseUrl_headingText": "Base URL",
+  "viewApiBackendDetails_description_headingText": "Description",
   "viewApiBackendNavigationMenu_backlog": "Backlog",
   "viewApiBackendNavigationMenu_details": "Details",
   "viewApiBackendNavigationMenu_documentation": "Documentation",
