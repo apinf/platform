@@ -1,21 +1,21 @@
 import { FeedbackVotes } from './';
 
 FeedbackVotes.allow({
-  insert () {
+  insert (userId) {
     // Only allow logged in user to vote
-    if (Meteor.userId) {
+    if (userId) {
       return true;
     }
   },
-  update () {
+  update (userId) {
     // TODO: only allow user to update own vote
-    if (Meteor.userId) {
+    if (userId) {
       return true;
     }
   },
-  remove () {
+  remove (userId) {
     // TODO: only allow user to remove own vote
-    if (Meteor.userId) {
+    if (userId) {
       return true;
     }
   },
