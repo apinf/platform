@@ -1,4 +1,4 @@
-ApiBackendRatings = new Mongo.Collection('apiBackendRatings');
+export const ApiBackendRatings = new Mongo.Collection('apiBackendRatings');
 
 Schemas.ApiBackendRating = new SimpleSchema({
   'apiBackendId': {
