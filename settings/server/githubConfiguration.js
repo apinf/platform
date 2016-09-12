@@ -1,5 +1,5 @@
 import { githubSettingsValid } from '/core/helper_functions/validate_settings';
-import { Settings } from '/settings/collection';
+import { Settings } from '../collection';
 
 // If settings are already in Meteor.settings
 try {
