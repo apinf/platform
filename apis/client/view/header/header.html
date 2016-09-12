@@ -34,9 +34,11 @@
         </div>
         {{> visibilitySwitch api=api }}
       </div>
+      {{#if proxyBackend }}
       <div class="row">
         <span class="pull-right">{{> apikey }}</span>
       </div>
+      {{/if }}
       <!-- Tabs -->
       <div class="view-api-navigation">
         <ul class="nav nav-tabs">
