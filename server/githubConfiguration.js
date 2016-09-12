@@ -1,4 +1,4 @@
-import { githubSettingsValid } from '/lib/helperFunctions/validateSettings';
+import { githubSettingsValid } from '/core/helper_functions/validate_settings';
 import { Settings } from '/settings/collection';
 
 // If settings are already in Meteor.settings
