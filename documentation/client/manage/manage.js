@@ -110,4 +110,13 @@ Template.manageApiDocumentationModal.helpers({
     // Return a reference to Apis collection, for AutoForm
     return Apis;
   },
+  submitMethods () {
+    return [
+      {label: 'GET', value: 'get'},
+      {label: 'POST', value: 'post'},
+      {label: 'DELETE', value: 'delete'},
+      {label: 'PATCH', value: 'patch'},
+      {label: 'PUT', value: 'put'}
+    ]
+  },
 });

@@ -25,6 +25,7 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  
   apiLogoFileId: {
     type: String,
     optional: true
@@ -33,6 +34,11 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url
+  },
+  submit_methods: {
+    type: [String],
+    label: 'Allow try-out for following methods:',
+    optional: true
   },
   created_at: {
     type: Date,
