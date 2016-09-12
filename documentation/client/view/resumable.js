@@ -1,6 +1,6 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Apis } from '/apis/collection';
-import { fileNameEndsWith } from '/lib/helperFunctions/fileNameEndsWith';
+import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(function () {
   DocumentationFiles.resumable.on('fileAdded', function (file) {
