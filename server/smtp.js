@@ -1,4 +1,4 @@
-import { mailSettingsValid } from '/lib/helperFunctions/validateSettings';
+import { mailSettingsValid } from '/core/helper_functions/validate_settings';
 import { Settings } from '/settings/collection';
 
 Meteor.startup(function () {
