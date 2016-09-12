@@ -98,7 +98,11 @@ Template.manageApiDocumentationModal.helpers({
     const settings = Settings.findOne();
 
     // Check settings exists, editor is enabled and host setting exists
-    if (settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
+    if (
+          settings &&
+          settings.apiDocumentationEditor &&
+          settings.apiDocumentationEditor.enabled &&
+          settings.apiDocumentationEditor.host) {
       // Editor is enabled and has host setting, return true
       return true;
     } else {
