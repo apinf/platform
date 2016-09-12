@@ -36,7 +36,7 @@ Template.apikey.helpers({
     // Make sure user exists and has API key
     if (currentUserId) {
       // Get API Key
-      const apiKey = ApiKeys.findOne({ 'userId': currentUserId });
+      const apiKey = ApiKeys.findOne({ userId: currentUserId });
 
       // Check that Umbrella API key exists
       if (apiKey && apiKey.apiUmbrella) {
@@ -52,7 +52,7 @@ Template.apikey.helpers({
     // Make sure user exists and has API key
     if (currentUserId) {
       // Get API Key
-      const apiKey = ApiKeys.findOne({ 'userId': currentUserId });
+      const apiKey = ApiKeys.findOne({ userId: currentUserId });
 
       // Check that Umbrella API key exists
       if (apiKey && apiKey.apiUmbrella) {
