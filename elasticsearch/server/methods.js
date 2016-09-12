@@ -1,23 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
 import ElasticSearch from 'elasticsearch';
-import _ from 'lodash';
 
 Meteor.methods({
   getElasticSearchData (opts) {
     // Check if user is authorised
     if (Meteor.user()) {
-      const settings = Settings.findOne(); // Get settings object
-
-      let host; // init variable for host
-
-      try {
-        host = settings.elasticsearch.host; // Try-catch if host value exists
-      } catch (e) {
-        throw new Meteor.Error(500, 'Elasticsearch host is not defined. Please check your settings.');
-
-        return false;
-      }
+      const host = Meteor.call('getElasticsearchUrl');
 
       const esClient = new ElasticSearch.Client({ host }); // Init ES client
 
@@ -25,12 +14,10 @@ Meteor.methods({
       return esClient.search(opts).then((res) => {
         return res;
       }, (err) => {
-        throw new Meteor.Error(500, 'Analytics data is not found.');
-
-        return false;
+        throw new Meteor.Error(err.message);
       });
     } else {
-      throw new Meteor.Error(500, 'User is not authorised.');
+      throw new Meteor.Error('User is not authorised.');
 
       return false;
     }

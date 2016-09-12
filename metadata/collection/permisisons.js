@@ -16,7 +16,6 @@ ApiMetadata.allow({
 
       // Check if current user can edit API Backend
       const userCanEdit = api.currentUserCanEdit();
-      console.log('user can edit', userCanEdit);
 
       return userCanEdit;
     }
