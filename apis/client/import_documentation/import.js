@@ -52,13 +52,19 @@ Template.importApiDocumentation.events({
               // used for attaching apiBackendId to apiDocs document on success
               Session.set('apiDocsId', apiDocsId);
             } else {
+              // Get error message text
+              const message = TAPi18n.__('importApiDocumentation_fileReadError_message');
+
               // Notifies user if not able to parse the file either as JSON or YAML objects.
-              sAlert.error('Error when reading the file. Please check file contents for errors.');
+              sAlert.error(message);
             }
           };
         } else {
+          // Get error message text
+          const message = TAPi18n.__('importApiDocumentation_fileExtensionError_message');
+
           // Notifies user if file extension provided is not supported
-          sAlert.error('Only .json and .yaml(.yml) files are supported.');
+          sAlert.error(message);
         }
       }
     });

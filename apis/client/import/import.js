@@ -92,8 +92,11 @@ Template.importApiConfiguration.events({
               jsonObj = importedFile;
             }
           } else {
+            // Get error message translation
+            const message = TAPi18n.__('importApiConfiguration_errorMessage');
+
             // notifies user if file extension is not as expected
-            sAlert.error('Config file should be .YAML, .YML, .JSON or .TXT only.');
+            sAlert.error(message);
           }
 
           // pastes converted file to ace editor
@@ -134,7 +137,11 @@ Template.importApiConfiguration.events({
         }
       });
     } catch (e) {
-      sAlert.error('Configuration does not look like correct JSON object.');
+      // Get translated error message
+      const message = TAPi18n.__('importApiConfiguration_jsonError_message');
+
+      // Alert user of error
+      sAlert.error(message);
     }
 
     return false;
