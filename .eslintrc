@@ -16,11 +16,11 @@
   },
   "rules": {
     "comma-dangle": [
-      "error",
+      2,
       "always-multiline"
     ],
     "space-before-function-paren": [
-      "error",
+      2,
       {
         "anonymous": "always",
         "named": "always"
