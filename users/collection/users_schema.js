@@ -61,12 +61,3 @@ UserProfileSchema.messages({
 });
 
 Meteor.users.attachSchema(UserProfileSchema);
-
-Meteor.users.allow({
-  update (userId, user) {
-    // Only allow user to update own username
-    if (userId === user._id) {
-      return true;
-    }
-  },
-});
