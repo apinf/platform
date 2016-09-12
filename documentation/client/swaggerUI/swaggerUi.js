@@ -21,10 +21,6 @@ Template.swaggerUi.onCreated(function () {
   });
 });
 
-Template.swaggerUi.onRendered(function () {
-  console.log('ui onRendered')
-});
-
 Template.swaggerUi.helpers({
   dataFetched () {
     const instance = Template.instance();
