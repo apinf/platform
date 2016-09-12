@@ -12,6 +12,7 @@
 
       {{#if Template.subscriptionsReady }}
         {{#if codegenServerExists }}
+          {{# if documentationExists }}
             <button
               id="sdk-code-generator"
               class="btn btn-info btn-xs pull-right"
@@ -19,8 +20,9 @@
               title="{{_ 'documentation_tooltipSDKGeneratorButton'}}">
                 {{_ "documentation_sdkGenerateButton" }}
             </button>
-        {{/if}}
-      {{/if}}
+          {{/ if }} <!-- /if documentation exists -->
+        {{/if}}<!-- /if codegen server exists -->
+      {{/if}}<!-- /if template subscriptions ready -->
       <h2 class="panel-title clearfix">
         {{_ "documentation_Title" }}
       </h2>
