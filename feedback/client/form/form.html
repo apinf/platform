@@ -10,15 +10,17 @@
             {{_ "feedback_feedbackForm_title"}}
           </h4>
         </div>
+        {{ # autoForm collection=feedbackCollection type="insert" id="feedbackForm" }}
         <div class="modal-body">
           <p>{{_ "feedback_feedbackForm_description"}}</p>
-          {{> quickForm
-            collection=feedbackCollection
-            id="feedbackForm"
-            type="insert"
-            omitFields="authorId, createdAt, apiBackendId"
-          }}
+          {{> afQuickField name='topic'}}
+          {{> afQuickField name='message' rows=2}}
+          {{> afQuickField name='messageType'}}
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Send feedback</button>
+        </div>
+        {{ / autoForm }}
       </div>
     </div>
   </div>
