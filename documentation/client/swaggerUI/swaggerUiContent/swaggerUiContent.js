@@ -8,7 +8,7 @@ Template.swaggerUiContent.onCreated(function () {
   const documentationURL = this.data.apiDoc;
 
   // Create Swagger UI object
-  const swagger = window.swaggerUi = new SwaggerUi({
+  const swagger = new SwaggerUi({
     url: documentationURL,
     dom_id: 'swagger-ui-container',
     useJQuery: true,
