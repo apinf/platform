@@ -160,7 +160,7 @@ This can be accomplished by grabbing the container ID with a docker ps, then pas
 ```
 $ docker ps
 CONTAINER ID        IMAGE
-ce9de67fdcbe        apinf/apinf:latest
+ce9de67fdcbe        apinf/platform:latest
 $ docker exec -it ce9de67fdcbe /bin/bash
 root@ce9de67fdcbe:/#
 ```
@@ -177,17 +177,17 @@ alias apinf_web='docker exec -it `docker ps | grep web | sed "s/ .*//"` /bin/bas
 To build packages for the current APInf version:
 
 ```
-$ docker build -t apinf/apinf:INSERT_VERSION_HERE .
-$ docker tag apinf/apinf:INSERT_VERSION_HERE apinf/apinf:latest
+$ docker build -t apinf/platform:INSERT_VERSION_HERE .
+$ docker tag apinf/platform:INSERT_VERSION_HERE apinf/platform:latest
 ```
 
 ### Pushing to Docker Hub
 
-To publish the new images to our [Docker Hub repository](https://hub.docker.com/r/apinf/apinf/):
+To publish the new images to our [Docker Hub repository](https://hub.docker.com/r/apinf/platform/):
 
 ```
-$ docker push apinf/apinf:INSERT_VERSION_HERE
-$ docker push apinf/apinf:latest
+$ docker push apinf/platform:INSERT_VERSION_HERE
+$ docker push apinf/platform:latest
 ```
 
 # Contributing code
@@ -220,7 +220,7 @@ In a nutshell, **write code for humans to read and understand**. Our code will b
 * Placing comments on the preceeding line, as opposed to the end of the line, improves readability
  * comment can be long, e.g. 80 characters
  * comments at same level of nesting fall in-line with one another vertically
- 
+
 #### Example comment
 ```js
 // Try and find the missing widget
@@ -259,7 +259,7 @@ let missingWidgets = Widgets.find().fetch();
 if (missingWidgets) {
  // Count the missing widgets
  let missingWidgetsCount = missingWidgets.length
- 
+
  // Alert the boss!
  console.log(missingWidgetsCount, "widgets are missing!");
 }
@@ -307,7 +307,7 @@ Configure your IDE to use eslint with the Airbnb styleguide.
 Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
 # File structure
-This project is organized around a 'module' / 'component' architecture. 
+This project is organized around a 'module' / 'component' architecture.
 
 By 'module', we mean anything that has it's own database collection and one or more routes. Components are more closely related to the idea of [WebComponents](http://webcomponents.org/), which are intended to be reusable, hierarchical user interface elements. Modules are located in the project root, with components in the client sub-directory.
 

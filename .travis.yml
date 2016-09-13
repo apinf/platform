@@ -9,6 +9,6 @@ services:
   - docker
 
 script:
-  - docker build -t apinf/apinf:"$TRAVIS_BRANCH" .
+  - docker build -t apinf/platform:"$TRAVIS_BRANCH" .
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push apinf/apinf:"$TRAVIS_BRANCH"
+  - docker push apinf/platform:"$TRAVIS_BRANCH"
