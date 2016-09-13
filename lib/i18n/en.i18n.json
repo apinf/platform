@@ -169,6 +169,7 @@
   "feedback_remove_button": "Remove",
   "feedback_submitted_by": "submitted by",
   "feedback_view_button": "View",
+  "feedback_sendFeedback": "Send",
   "flagApiButton_buttonText": "Flag",
   "flagApiButton_buttonText_active": "Flagged",
   "flagApiModal_cancelButton": "Cancel",
