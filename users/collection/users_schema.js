@@ -1,3 +1,5 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 const UserProfileSchema = new SimpleSchema({
   name: {
     type: String,
@@ -60,4 +62,4 @@ UserProfileSchema.messages({
   ],
 });
 
-Meteor.users.attachSchema(UserProfileSchema);
+Meteor.users.attachSchema(UserSchema);
