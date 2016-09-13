@@ -9,6 +9,7 @@ AutoForm.hooks({
     },
     onSuccess () {
       sAlert.success('Thank you! Your feedback has been successfully sent.');
+      Modal.hide('feedbackForm');
     },
   },
 });
