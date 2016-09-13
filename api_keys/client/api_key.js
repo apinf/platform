@@ -14,7 +14,7 @@ Template.apiKey.onRendered(function () {
   // Tell the user when copy is successful
   copyButton.on('success', function (event) {
     // Get localized success message
-    const message = TAPi18n.__("apiKeys_copySuccessful");
+    const message = TAPi18n.__('apiKeys_copySuccessful');
 
     // Display success message to user
     sAlert.success(message);
@@ -48,35 +48,24 @@ Template.apiKey.helpers({
     return Meteor.user();
   },
   apiKey () {
+    // Placeholder for API key
+    let apiKey;
+
     // Get current user
     const currentUserId = Meteor.userId();
 
     // Make sure user exists and has API key
     if (currentUserId) {
-      // Get API Key
-      const apiKey = ApiKeys.findOne({ userId: currentUserId });
+      // Get API Key document
+      const userApiKey = ApiKeys.findOne({ userId: currentUserId });
 
       // Check that Umbrella API key exists
-      if (apiKey && apiKey.apiUmbrella) {
-        // Shorten key to be shown in UI
-        return apiKey.apiUmbrella.apiKey;
+      if (userApiKey && userApiKey.apiUmbrella) {
+        // Get the API Key, from API key document
+        apiKey = userApiKey.apiUmbrella.apiKey;
       }
     }
-  },
-  apiKeyShort () {
-    // Get current user
-    const currentUserId = Meteor.userId();
 
-    // Make sure user exists and has API key
-    if (currentUserId) {
-      // Get API Key
-      const apiKey = ApiKeys.findOne({ userId: currentUserId });
-
-      // Check that Umbrella API key exists
-      if (apiKey && apiKey.apiUmbrella) {
-        // Shorten key to be shown in UI
-        return apiKey.apiUmbrella.apiKey.substring(0, 15) + '...';
-      }
-    }
+    return apiKey;
   },
 });
