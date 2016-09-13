@@ -24,4 +24,7 @@ Template.feedbackList.events({
   'click .delete-feedback': function (event) {
     Meteor.call('deleteFeedback', this._id);
   },
+  'click #add-feedback': function () {
+    Modal.show('feedbackForm');
+  }
 });
