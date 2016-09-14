@@ -100,16 +100,7 @@ Settings.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: 'Contact Form E-mail Address',
-    optional: true,
-    custom () {
-      const mailEnabled = this.field('mail.enabled').value;
-      const contactFormEmail = this.value;
-
-      // Require mail password if mail enabled is checked
-      if (mailEnabled === true && !contactFormEmail) {
-        return 'required';
-      }
-    },
+    optional: true
   },
   githubConfiguration: {
     type: Object,
