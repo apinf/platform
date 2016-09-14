@@ -2,7 +2,7 @@
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
 
-Schemas.Settings = new SimpleSchema({
+const Settings = new SimpleSchema({
   'disable_api_key': {
     type: Boolean,
     optional: true,
@@ -71,7 +71,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
     label: 'API port',
   },
   settings: {
-    type: Schemas.Settings,
+    type: Settings,
     optional: true,
   },
 });
