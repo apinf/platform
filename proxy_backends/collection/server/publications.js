@@ -1,9 +1,11 @@
+import { Meteor } from 'meteor/meteor';
+
 // Apinf import
 import { Apis } from '/apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 // npm import
-import { _ } from 'lodash';
+import _ from 'lodash';
 
 Meteor.publish('apiProxySettings', function (apiId) {
   // TODO: determine how to use 'api.userCanEdit()' helper
@@ -31,4 +33,8 @@ Meteor.publish('apiProxySettings', function (apiId) {
       return ProxyBackends.find({ apiId });
     }
   }
+});
+
+Meteor.publish('proxyApis', () => {
+  return ProxyBackends.find({});;
 });
