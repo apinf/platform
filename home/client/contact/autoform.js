@@ -10,10 +10,10 @@ AutoForm.hooks({
     },
     onSuccess () {
       // Get translated success message
-      const successMessage = TAPi18n.__('contactForm_successMessage');
+      const message = TAPi18n.__('contactForm_successMessage');
 
       // Alert user of success
-      sAlert.success(successMessage);
+      sAlert.success(message);
     },
   },
 });

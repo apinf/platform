@@ -12,6 +12,7 @@
 
       {{#if Template.subscriptionsReady }}
         {{#if codegenServerExists }}
+          {{# if documentationExists }}
             <button
               id="sdk-code-generator"
               class="btn btn-info btn-xs pull-right"
@@ -19,8 +20,9 @@
               title="{{_ 'documentation_tooltipSDKGeneratorButton'}}">
                 {{_ "documentation_sdkGenerateButton" }}
             </button>
-        {{/if}}
-      {{/if}}
+          {{/ if }} <!-- /if documentation exists -->
+        {{/if}}<!-- /if codegen server exists -->
+      {{/if}}<!-- /if template subscriptions ready -->
       <h2 class="panel-title clearfix">
         {{_ "documentation_Title" }}
       </h2>
@@ -39,7 +41,7 @@
           {{else}}
           <i>
             {{_ "documentation_No_Link_Message" }}
-            {{#if apiBackend.currentUserCanEdit }}
+            {{#if api.currentUserCanEdit }}
             {{_ "documentation_No_Link_Manager_Message" }}
             {{/if}}
           </i>
@@ -64,11 +66,11 @@
         <div class="panel-body">
           {{#if Template.subscriptionsReady }}
             {{#if documentationExists }}
-              {{> swaggerUi apiDocumentation=uploadedDocumentationLink}}
+              {{> swaggerUi apiDoc=uploadedDocumentationLink api=api}}
             {{ else }}
             <i>
               {{_ "documentation_No_Swagger_Message" }}
-              {{#if apiBackend.currentUserCanEdit }}
+              {{#if api.currentUserCanEdit }}
               {{_ "documentation_No_Swagger_Manager_Message" }}
               {{/if}}
             </i>

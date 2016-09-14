@@ -12,7 +12,7 @@
 
 1. Run API-umbrella container http://api-umbrella.readthedocs.io/en/latest/getting-started.html#running-with-docker
 2. Obtaining API Key and Authentication token. You can obtain the *Authentication Token* and *API Key* from the API Umbrella platform by following instructions in the [Getting Started](http://apiumbrella.io/docs/getting-started/) and [API Umbrella Admin API](http://apiumbrella.io/docs/admin-api/) documentation.
-3. Run APInf container ```docker run -p 8080:80 -e MONGO_URL=mongodb://localhost:27017/your_db -e MAIL_URL=smtp://some.mailserver.com:25 -e ROOT_URL=http://YOUR_SITE_DOMAIN apinf/apinf:latest```
+3. Run APInf container ```docker run -p 8080:80 -e MONGO_URL=mongodb://localhost:27017/your_db -e MAIL_URL=smtp://some.mailserver.com:25 -e ROOT_URL=http://YOUR_SITE_DOMAIN apinf/platform:latest```
 4. Configure APInf
 
 ### Configure APInf
@@ -38,7 +38,7 @@ Register a new admin account. The first user will become Admin.
 * API Key: from step #6
 * Auth Token: from step #7
 * Base URL: "https://YOUR_SITE_DOMAIN:3002/api-umbrella/"
-* Elasticsearch: "http://YOUR_SITE_DOMAIN:14002"
+* Elasticsearch: "http://elasticsearch.docker:9200"
 11. Add API backend https://YOUR_SITE_DOMAIN/api/new
 
 

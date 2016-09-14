@@ -1,5 +1,6 @@
-import { ContactFormSchema } from '../contactFormSchema';
+import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
+import { ContactFormSchema } from '../contactFormSchema';
 
 Meteor.methods({
   sendEmail (doc) {
@@ -13,9 +14,12 @@ Meteor.methods({
 
     this.unblock();
 
+    // Get email settings
+    const mailSettings = Settings.findOne().mail;
+
     // Send the e-mail
     Email.send({
-      to: Settings.findOne().contactForm.toEmail,
+      to: mailSettings.toEmail,
       from: doc.email,
       subject: 'Apinf Contact Form - Message From ' + doc.name,
       text,
