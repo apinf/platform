@@ -4,27 +4,27 @@ import { ApiKeys } from './';
 apiUmbrellaUserSchema = new SimpleSchema({
   id: {
     type: String,
-    optional: false
+    optional: false,
   },
   apiKey: {
     type: String,
-    optional: false
-  }
+    optional: false,
+  },
 });
 
 ApiKeys.schema = new SimpleSchema({
   apiUmbrella: {
     type: apiUmbrellaUserSchema,
-    optional: true
+    optional: true,
   },
   userId: {
     type: String,
-    optional: false
+    optional: false,
   },
   proxyId: {
     type: String,
-    optional: false
-  }
+    optional: false,
+  },
 });
 
 ApiKeys.attachSchema(ApiKeys.schema);

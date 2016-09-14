@@ -273,6 +273,11 @@
   "responseTimeDistributionChart_title": "API Response Time",
   "responseTimeDistributionChart_help_text": "Click on any bar to filter API Request Timeline and HTTP Status Code chart by requests that have the selected response time range.",
   "schemas": {
+    "apis": {
+      "submit_methods": {
+        "label": "Allow try-out for following methods:"
+      }
+    },
     "apiMetadata": {
       "organization": {
         "label": "Organization",
@@ -544,5 +549,6 @@
   "apiKeys_getApiKeyButton": "Get API key",
   "apiKeys_copyButtonText": "Copy API key",
   "apiKeys_copySuccessful": "API key copied to clipboard.",
-  "apiKeys_getApiKeyButton_success": "API key retrieved successfully."
+  "apiKeys_getApiKeyButton_success": "API key retrieved successfully.",
+  "apiKeys_getApiKeyButton_processing": "Processing..."
 }

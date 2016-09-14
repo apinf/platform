@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating';
+import { Router } from 'meteor/iron:router';
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { Proxies } from '/proxies/collection';
@@ -57,7 +59,10 @@ Template.viewApiBackend.helpers({
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    const backlogItems = ApiBacklogItems.find({ apiBackendId: apiId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
+    const backlogItems = ApiBacklogItems.find(
+      { apiBackendId: apiId },
+      { sort: { priority: -1, createdAt: -1 } }
+    ).fetch();
 
     return backlogItems;
   },

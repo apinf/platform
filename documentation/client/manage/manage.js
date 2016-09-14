@@ -65,12 +65,17 @@ Template.manageApiDocumentationModal.events({
 
       // Remove documenation file id field
       Apis.update(instance.data.api._id, { $unset: { documentationFileId: '' } });
+<<<<<<< HEAD
 
       // Get deletion success message translation
       const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
 
       // Alert user of successful deletion
       sAlert.success(message);
+=======
+
+      sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
+>>>>>>> 8a78101cf5b33ffae10ffc91ecb53f09517c5d37
     }
   },
   'click #save-documentation-link': function (event, instance) {
@@ -106,7 +111,11 @@ Template.manageApiDocumentationModal.helpers({
     const settings = Settings.findOne();
 
     // Check settings exists, editor is enabled and host setting exists
-    if (settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
+    if (
+      settings &&
+      settings.apiDocumentationEditor &&
+      settings.apiDocumentationEditor.enabled &&
+      settings.apiDocumentationEditor.host) {
       // Editor is enabled and has host setting, return true
       return true;
     } else {
@@ -117,5 +126,15 @@ Template.manageApiDocumentationModal.helpers({
   apisCollection () {
     // Return a reference to Apis collection, for AutoForm
     return Apis;
+  },
+  // Return list of all try-out methods, which is used in Swagger Options
+  supportedSubmitMethods () {
+    return [
+      {label: 'GET', value: 'get'},
+      {label: 'POST', value: 'post'},
+      {label: 'DELETE', value: 'delete'},
+      {label: 'PATCH', value: 'patch'},
+      {label: 'PUT', value: 'put'}
+    ]
   },
 });
