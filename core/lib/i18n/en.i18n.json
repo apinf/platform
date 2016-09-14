@@ -387,22 +387,47 @@
       }
     },
     "settings": {
-      "apiUmbrella": {
+      "apiDocumentationEditor": {
+        "label": "API Documentation Editor",
+        "enabled": {
+          "label": "Enabled"
+        },
         "host": {
           "label": "Host",
-          "placeholder": "https://example.com/"
+          "placeholder": "https://editor.example.com/"
+        }
+      },
+      "mail": {
+        "label": "Mail (SMTP)",
+        "enabled": {
+          "label": "Enabled"
         },
-        "apiKey": {
-          "label": "API Key",
-          "placeholder": "xxx"
+        "username": {
+          "label": "Username"
         },
-        "authToken": {
-          "label": "Auth Token",
-          "placeholder": "xxx"
+        "password": {
+          "label": "Password"
         },
-        "baseUrl": {
-          "label": "Base URL",
-          "placeholder": "https://example.com/api-umbrella/"
+        "toEmail": {
+          "label": "To email"
+        }
+      },
+      "githubConfiguration": {
+        "label": "Github configuration",
+        "clientId": {
+          "label": "Client ID"
+        },
+        "secret": {
+          "label": "Secret"
+        }
+      },
+      "sdkCodeGenerator": {
+        "label": "SDK Generator",
+        "enabled": {
+          "label": "Enabled"
+        },
+        "host": {
+          "label": "Host"
         }
       }
     }
