@@ -39,6 +39,7 @@ const UserSchema = new SimpleSchema({
   },
   profile: {
     type: UserProfileSchema,
+    optional: true
   },
   services: {
     type: Object,
