@@ -17,10 +17,15 @@ Meteor.startup(function () {
       const username = settings.mail.username;
       const password = settings.mail.password;
 
-      const server = 'smtp.mailgun.org';
-      const port = '587';
+      const smtpHost = settings.mail.smtpHost;
+      const smtpPort = settings.mail.smtpPort;
 
-      process.env.MAIL_URL = 'smtp://' + encodeURIComponent(username) + ':' + encodeURIComponent(password) + '@' + encodeURIComponent(server) + ':' + port;
+      // Set MAIL_URL env variable
+      process.env.MAIL_URL = 'smtp://' +
+        encodeURIComponent(username) + ':' +
+        encodeURIComponent(password) + '@' +
+        encodeURIComponent(smtpHost) + ':' +
+        encodeURIComponent(smtpPort);
     }
   }
   // otherwise show an error
