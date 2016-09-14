@@ -114,7 +114,8 @@ Template.manageApiDocumentationModal.helpers({
     // Return a reference to Apis collection, for AutoForm
     return Apis;
   },
-  submitMethods () {
+  // Return list of all try-out methods, which is used in Swagger Options
+  supportedSubmitMethods () {
     return [
       {label: 'GET', value: 'get'},
       {label: 'POST', value: 'post'},
