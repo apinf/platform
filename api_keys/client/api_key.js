@@ -37,7 +37,11 @@ Template.apiKey.events({
       if (error) {
         sAlert.error(error);
       } else {
-        sAlert.success(TAPi18n.__('apiKeys_getApiKeyButton_success'));
+        // Get success message translation
+        const message = TAPi18n.__('apiKeys_getApiKeyButton_success');
+
+        // Alert the user of success
+        sAlert.success(message);
       }
     });
   },
