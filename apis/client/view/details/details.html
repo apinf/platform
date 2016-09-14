@@ -40,32 +40,12 @@
           </span>
         </div>
         {{ / if }}
-      </div>
-    </div>
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h2 class="panel-title clearfix">
-      Usage Instruction
-    </h2>
-  </div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-lg-12 api-details-block">
-        <p>
-          When available, click on Get API Key button to generante your personal key for the API Use, You can always click on Copy API Key button to retrieve the key for further usage.
-          <br />
-          Copy the Base URL to start using the API.
-        </p>
-        <p>
-          Click on the Test button below to make a test call. A new browser tab will open along with the Base URL and API Key.
-          <br />
-          <br />
-          <a href="#path-with-frontend-prefix-and-api-key" class="btn btn-success">
-            API test call
-          </a>
-        </p>
+
+        {{ # if testCallUrl }}
+        <a href="{{ testCallUrl }}" class="btn btn-success test-call-button">
+          API test call
+        </a>
+        {{ / if }}
       </div>
     </div>
   </div>
