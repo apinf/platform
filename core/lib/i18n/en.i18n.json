@@ -505,6 +505,7 @@
   "viewApiBackendSettigs_saveButton_text": "Save",
   "viewApiBackendSettings_deleteApiText": "This action cannot be undone. The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "viewApiBackendSettings_deleteApiTitle": "Delete the API",
+  "viewApiBackendSettings_uploadLogo_heading": "Upload logo",
   "viewApiBackendSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
   "viewApiBackendStatus_statusMessage_ClientError": "Client error.",
   "viewApiBackendStatus_statusMessage_ErrorCodeText": "Status code:",
