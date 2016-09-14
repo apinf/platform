@@ -121,7 +121,13 @@
       </div>
     </div>
 
-    {{> afQuickField name="apiUmbrella.settings" }}
+    <label>Additional settings</label>
+    {{> afQuickField name="apiUmbrella.settings.disable_api_key" }}
+
+    <!-- help text -->
+    <p class="help-block">
+      Optionally you can allow users to use your API without API key.
+    </p>
 
     <!-- submit button -->
     <button type="submit" class="btn btn-primary pull-right">Save proxy settings</button>
