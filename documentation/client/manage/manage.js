@@ -7,25 +7,26 @@ Template.manageApiDocumentationModal.onCreated(function () {
 
   // Initialize help texts
   const helpTexts = {
-    'documentation_link': {
+    documentation_link: {
       message: TAPi18n.__('manageApiDocumentationModal_hints_documentation_link'),
       options: {
         placement: 'left',
       },
     },
-    'uploadApiDocumentation': {TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage')
+    uploadApiDocumentation: {
       message: TAPi18n.__('manageApiDocumentationModal_hints_uploadApiDocumentation'),
       options: {
         placement: 'left',
       },
     },
-    'documentation_editor_create_file': {
+    documentation_editor_create_file: {
       message: TAPi18n.__('manageApiDocumentationModal_hints_createApiDocumentation'),
       options: {
         placement: 'left',
       },
     },
   };
+
   InlineHelp.initHelp(helpTexts);
 
   instance.autorun(function () {
