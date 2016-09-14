@@ -26,11 +26,6 @@ Router.route('/api/:_id/', function () {
 });
 
 Router.map(function () {
-  this.route('manageApiBackends', {
-    path: '/manage',
-    layoutTemplate: 'masterLayout',
-  });
-
   this.route('importApiConfiguration', {
     path: 'import/api',
     layoutTemplate: 'masterLayout',
