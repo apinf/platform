@@ -41,11 +41,8 @@ Settings.schema = new SimpleSchema({
   },
   'mail.username': {
     type: String,
-    label: 'Mailgun Username',
+    label: 'Username',
     optional: true,
-    autoform: {
-      placeholder: 'Mailgun Username',
-    },
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const mailUsername = this.value;
@@ -58,11 +55,8 @@ Settings.schema = new SimpleSchema({
   },
   'mail.password': {
     type: String,
-    label: 'Mailgun Password',
+    label: 'Password',
     optional: true,
-    autoform: {
-      placeholder: 'xxx',
-    },
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const mailPassword = this.value;
@@ -73,14 +67,40 @@ Settings.schema = new SimpleSchema({
       }
     },
   },
+  'mail.smtpHost': {
+    type: String,
+    label: 'SMTP Host',
+    regEx: SimpleSchema.RegEx.Domain,
+    optional: true,
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const smtpHost = this.value;
+
+      // Require SMTP Host if mail enabled is checked
+      if (mailEnabled === true && !smtpHost) {
+        return 'required';
+      }
+    },
+  },
+  'mail.smtpPort': {
+    type: Number,
+    label: 'SMTP Port',
+    optional: true,
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const smtpPort = this.value;
+
+      // Require SMTP Port if mail enabled is checked
+      if (mailEnabled === true && !smtpPort) {
+        return 'required';
+      }
+    },
+  },
   'mail.toEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: 'Contact Form E-mail Address',
     optional: true,
-    autoform: {
-      placeholder: 'mail@example.com',
-    },
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const contactFormEmail = this.value;
