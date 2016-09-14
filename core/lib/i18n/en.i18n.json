@@ -20,7 +20,7 @@
   "apiBackend_Usage_Instructions_Note": "Note:",
   "apiBackend_Usage_Instructions_Note_Text": "You can find your API Key on your profile page.",
   "apiBackend_Usage_Instructions_Profile_Page_Link": "View profile.",
-  "apiBackendRating-anonymousError": "Please log in to rate this API",
+  "apiBackendRating_anonymousError": "Please log in to rate this API",
   "apiBackends_Add_API_Title": "Add API",
   "apiBackends_AdvancedRequestsRewriting": "Advanced Requests Rewriting",
   "apiBackends_AdvancedRequestsRewriting_Help": "Modify the incoming requests made to the Umbrella front_end before they are passed on to your API backend",
