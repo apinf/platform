@@ -41,35 +41,6 @@
     "lint": "eslint .",
     "pretest": "npm run lint --silent"
   },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "allowImportExportEverywhere": true
-    },
-    "plugins": [
-      "meteor"
-    ],
-    "extends": [
-      "airbnb-base",
-      "plugin:meteor/recommended"
-    ],
-    "settings": {
-      "import/resolver": "meteor"
-    },
-    "rules": {
-      "comma-dangle": [
-        "error",
-        "always-multiline"
-      ],
-      "space-before-function-paren": [
-        "error",
-        {
-          "anonymous": "always",
-          "named": "always"
-        }
-      ]
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/apinf/api-umbrella-dashboard.git"

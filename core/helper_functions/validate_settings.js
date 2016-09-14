@@ -23,8 +23,8 @@ export function mailSettingsValid (settings) {
 // Validate email address setting
 export function contactEmailValid (settings) {
   // Check all properties in nested structure
-  if ((typeof settings !== 'undefined') && settings.contactForm) {
-    if (settings.contactForm.toEmail) {
+  if ((typeof settings !== 'undefined') && settings.mail && settings.mail.enabled) {
+    if (settings.mail.toEmail) {
       // Finally return true
       return true;
     }
