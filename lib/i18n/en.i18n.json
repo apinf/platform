@@ -170,6 +170,7 @@
   "feedback_submitted_by": "submitted by",
   "feedback_view_button": "View",
   "feedback_sendFeedback": "Send",
+  "feedbackForm_successMessage": "Thank you! Your feedback has been successfully sent.",
   "flagApiButton_buttonText": "Flag",
   "flagApiButton_buttonText_active": "Flagged",
   "flagApiModal_cancelButton": "Cancel",

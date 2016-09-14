@@ -8,7 +8,7 @@ AutoForm.hooks({
       },
     },
     onSuccess () {
-      sAlert.success('Thank you! Your feedback has been successfully sent.');
+      sAlert.success(TAPi18n.__('feedbackForm_successMessage'));
       Modal.hide('feedbackForm');
     },
   },
