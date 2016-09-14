@@ -42,7 +42,11 @@ AutoForm.addHooks('downloadSDK', {
     HTTP.post(url, { data: options }, function (error, result) {
       // If url is incorrect
       if (result === undefined) {
-        FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorTextInvalidHost'));
+        // Get error message translation
+        const message = TAPi18n.__('sdkCodeGeneratorModal_errorTextInvalidHost');
+
+        // Alert user of error
+        sAlert.error(message);
       } else {
         // Get information from Swagger API response
         const response = JSON.parse(result.content);
@@ -55,7 +59,12 @@ AutoForm.addHooks('downloadSDK', {
           window.location.href = response.link;
         } else {
           // Otherwise show an error message
-          FlashMessages.sendError(TAPi18n.__('sdkCodeGeneratorModal_errorText'));
+
+          // Get error message translation
+          const message = TAPi18n.__('sdkCodeGeneratorModal_errorText');
+
+          // Alert user of error
+          sAlert.error(message);
         }
       }
       $('button').removeAttr('disabled');

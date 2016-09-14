@@ -57,14 +57,16 @@ Template.documentation.helpers({
     // Get template instance
     const instance = Template.instance();
 
-    // Get documentation file
-    const apiDocumentation = this.api.documentationFileId;
-
     // Get settings
     const settings = Settings.findOne();
 
     // Check documentation exists, generator is enabled and host setting exists
-    if (settings && apiDocumentation && settings.sdkCodeGenerator.host && settings.sdkCodeGenerator.enabled) {
+    if (
+      settings &&
+      settings.sdkCodeGenerator &&
+      settings.sdkCodeGenerator.host &&
+      settings.sdkCodeGenerator.enabled
+    ) {
       // Get code generator host
       instance.codegenServer = settings.sdkCodeGenerator.host;
 
