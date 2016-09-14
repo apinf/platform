@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Apis } from '/apis/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 import _ from 'lodash';
 
@@ -13,12 +13,18 @@ Template.dashboardChartsFiltering.onCreated(function () {
   instance.apis = new ReactiveVar();
 
   // Subscribe to publication
-  instance.subscribe('myManagedApis');
+  instance.subscribe('proxyApis');
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
+      const proxyBackends = ProxyBackends.find().fetch();
       // Update variable with data
-      instance.apis.set(Apis.find().fetch());
+      const apis = _.map(proxyBackends, proxyBackend => {
+        const api = proxyBackend.apiUmbrella;
+        api._id = proxyBackend.apiId;
+        return api;
+      });
+      instance.apis.set(apis);
     }
   });
 });
