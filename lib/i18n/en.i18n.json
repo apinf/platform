@@ -295,6 +295,11 @@
   "responseTimeDistributionChart_title": "API Response Time",
   "responseTimeDistributionChart_help_text": "Click on any bar to filter API Request Timeline and HTTP Status Code chart by requests that have the selected response time range.",
   "schemas": {
+    "apis": {
+      "submit_methods": {
+        "label": "Allow try-out for following methods:"
+      }
+    },
     "apiMetadata": {
       "organization": {
         "label": "Organization",
