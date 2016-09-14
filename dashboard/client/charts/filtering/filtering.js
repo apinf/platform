@@ -5,12 +5,12 @@ import { ProxyBackends } from '/proxy_backends/collection';
 import _ from 'lodash';
 
 Template.dashboardChartsFiltering.onCreated(function () {
-
   // Get reference to template instance
   const instance = this;
 
-  // Create reactive variable to keep API array
-  instance.apis = new ReactiveVar();
+  instance.apisManagedByUser = new ReactiveVar();
+
+  instance.otherApis = new ReactiveVar();
 
   // Subscribe to publication
   instance.subscribe('proxyApis');
@@ -18,23 +18,39 @@ Template.dashboardChartsFiltering.onCreated(function () {
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
       const proxyBackends = ProxyBackends.find().fetch();
+
+      const apisManagedByUser = [];
+      const otherApis = [];
+
       // Update variable with data
-      const apis = _.map(proxyBackends, proxyBackend => {
-        const api = proxyBackend.apiUmbrella;
-        api._id = proxyBackend.apiId;
-        return api;
+      _.forEach(proxyBackends, (proxyBackend) => {
+        const umbrellaApi = proxyBackend.apiUmbrella;
+        umbrellaApi._id = proxyBackend.apiId;
+
+        if (proxyBackend.currentUserIsManager()) {
+          apisManagedByUser.push(umbrellaApi);
+        } else {
+          otherApis.push(umbrellaApi);
+        }
       });
-      instance.apis.set(apis);
+
+      instance.apisManagedByUser.set(apisManagedByUser);
+      instance.otherApis.set(otherApis);
     }
   });
 });
 
 Template.dashboardChartsFiltering.helpers({
-  apis () {
-
+  apisManagedByUser () {
     // Get reference to template instance
     const instance = Template.instance();
 
-    return instance.apis.get();
-  }
+    return instance.apisManagedByUser.get();
+  },
+  otherApis () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    return instance.otherApis.get();
+  },
 });

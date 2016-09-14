@@ -8,9 +8,9 @@
     data-live-search="true"
     data-size="10"
     data-actions-box="true" >
-    {{ # if myApis }}
+    {{ # if apisManagedByUser }}
       <optgroup label="My APIs" >
-        {{ # each api in myApis }}
+        {{ # each api in apisManagedByUser }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{ > viewApiBackendStatus apiBackend=api width="0.5" }}
             &nbsp;
