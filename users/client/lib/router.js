@@ -4,6 +4,16 @@ Router.route('/users', {
   template: 'accountsAdmin',
 });
 
+Router.route('/verify-email/:token',{
+  name: 'verify-email',
+  action: function() {
+    Accounts.verifyEmail( this.params.token, () => {
+      Router.go( '/' );
+      sAlert.success( 'Email verified! Thanks!');
+    });
+  }
+});
+
 Router.route('/settings/account', {
   name: 'account',
   layout: 'masterLayout',
