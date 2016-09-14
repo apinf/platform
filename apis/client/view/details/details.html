@@ -18,17 +18,16 @@
           <hr class="panel-hr" />
           {{ / if }}
 
-          {{# if url }}
+          {{ # if url }}
           <h3>
             {{_ "viewApiBackendDetails_baseUrl_headingText" }}
           </h3>
           <div class="input-group">
             <input
-<<<<<<< HEAD
             type="text"
             class="form-control"
             id="api-url"
-            value="{{ api.url }}">
+            value="{{ url }}">
             <span class="input-group-btn">
               <button
               class="btn btn-default"
@@ -39,25 +38,8 @@
               <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
             </button>
           </span>
-=======
-                   type="text"
-                   class="form-control"
-                   id="api-url"
-                   value="{{ url }}">
-            <span class="input-group-btn">
-              <button
-                      class="btn btn-default"
-                      id="copyApiUrl"
-                      type="button"
-                      data-original-title="Copied!"
-                      data-clipboard-target="#api-url">
-                <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
-              </button>
-            </span>
-          </div>
-          {{/ if }}
->>>>>>> develop
         </div>
+        {{ / if }}
       </div>
     </div>
   </div>
@@ -80,14 +62,12 @@
           Click on the Test button below to make a test call. A new browser tab will open along with the Base URL and API Key.
           <br />
           <br />
-          <a
-          href="#path-with-frontend-prefix-and-api-key"
-          class="btn btn-success">
-          API test call
-        </a>
-      </p>
+          <a href="#path-with-frontend-prefix-and-api-key" class="btn btn-success">
+            API test call
+          </a>
+        </p>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </template>
