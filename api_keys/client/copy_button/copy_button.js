@@ -7,10 +7,11 @@ Template.apiKeyCopyButton.onRendered(function () {
   // Tell the user when copy is successful
   copyButton.on('success', function (event) {
     // Get localized success message
-    const successMessage = TAPi18n.__("apiKeys_copySuccessful");
+    const message = TAPi18n.__('apiKeys_copySuccessful');
 
     // Display success message to user
-    sAlert.success(successMessage);
+    sAlert.success(message);
+
     // Show success message only once
     event.clearSelection();
   });

@@ -1,8 +1,11 @@
 AutoForm.hooks({
   updateProfile: {
     onSuccess (operation, result, template) {
-      const profileUpdatedMsg = TAPi18n.__('profile_updatedSuccess');
-      return sAlert.success(profileUpdatedMsg);
+      // Get update success message translation
+      const message = TAPi18n.__('profile_updatedSuccess');
+
+      // Alert user of success
+      sAlert.success(message);
     },
     onError () {
       this.addStickyValidationError('username', 'usernameTaken');
@@ -20,8 +23,11 @@ Template.profile.rendered = function () {
   if (currentUser) {
     // Ask user to set username if it is not set.
     if (!currentUser.username) {
-      const setUsernameMsg = TAPi18n.__('profile-setUsername');
-      sAlert.info(setUsernameMsg);
+      // Get username 'update needed' message
+      const message = TAPi18n.__('profile-setUsername');
+
+      // Alert user of update needed
+      sAlert.info(message);
     }
   }
 };

@@ -26,11 +26,18 @@ Meteor.startup(function () {
         // Update logo id field
         Apis.update(api._id, { $set: { apiLogoFileId } });
 
-        sAlert.success(TAPi18n.__('apiLogo_resumable_successfully_uploaded'));
+        // Get success message translation
+        const message = TAPi18n.__('apiLogo_resumable_successfully_uploaded');
+
+        sAlert.success(message);
 
         return ApiLogo.resumable.upload();
       } else {
-        sAlert.error(TAPi18n.__('apiLogo_resumable_acceptedExtensions'));
+        // Get error message translation related to accepted extensions
+        const message = TAPi18n.__('apiLogo_resumable_acceptedExtensions');
+
+        // Alert user of error
+        sAlert.error(message);
       }
     });
   });

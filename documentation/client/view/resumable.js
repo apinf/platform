@@ -27,16 +27,29 @@ Meteor.startup(function () {
           // Update documenation file id field
           Apis.update(api._id, { $set: { documentationFileId } });
 
-          sAlert.success(TAPi18n.__('manageApiDocumentationModal_AddedFile_Message'));
+          // Get success message translation
+          const message = TAPi18n.__('manageApiDocumentationModal_AddedFile_Message');
+
+          // Alert user of success
+          sAlert.success(message);
 
           return DocumentationFiles.resumable.upload();
         } else {
-          sAlert.error(TAPi18n.__('manageApiDocumentationModal_FileType_Message'));
+          // Get error message translation
+          const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
+
+          // Alert user of error
+          sAlert.error(message);
         }
       });
     } else {
       // Inform user about file size Limit
-      sAlert.warning(TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message'));
+
+      // Get file size limit message translation
+      const message = TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message');
+
+      // Alert user of file size warning
+      sAlert.warning(message);
     }
   });
 });

@@ -26,11 +26,19 @@ Meteor.startup(function () {
         // Update logo id field
         Branding.update(branding._id, { $set: { projectLogoFileId } });
 
-        sAlert.success(TAPi18n.__('uploadProjectLogo_successfully_uploaded'));
+        // Get upload success message translation
+        const message = TAPi18n.__('uploadProjectLogo_successfully_uploaded');
+
+        // Alert user of successful upload
+        sAlert.success(message);
 
         return ProjectLogo.resumable.upload();
       } else {
-        sAlert.error(TAPi18n.__('uploadProjectLogo_acceptedExtensions'));
+        // Get extension error message
+        const message = TAPi18n.__('uploadProjectLogo_acceptedExtensions');
+
+        // Alert user of extension error
+        sAlert.error(message);
       }
     });
   });
