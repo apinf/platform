@@ -41,4 +41,19 @@ Template.viewApiBackendExport.events({
     // forces "save As" function allow user download file
     saveAs(file, 'apiConfig.yaml');
   },
+  'click #exportJSONProxyConfig': function (event, instance) {
+    // Get the API Backend ID from the route
+    const apiId = instance.apiId;
+
+    const proxy = ProxyBackends.findOne({ apiId });
+
+    // converts JSON object to JSON string and adds indentation
+    const json = JSON.stringify(proxy, null, '\t');
+
+    // creates file object with content type of JSON
+    const file = new Blob([json], { type: 'application/json;charset=utf-8' });
+
+    // forces "save As" function allow user download file
+    saveAs(file, 'apiProxyConfig.json');
+  },
 });
