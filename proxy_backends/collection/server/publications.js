@@ -35,6 +35,35 @@ Meteor.publish('apiProxySettings', function (apiId) {
   }
 });
 
-Meteor.publish('proxyApis', () => {
-  return ProxyBackends.find({});;
+Meteor.publish('proxyApis', function () {
+
+  // TODO: pass proxy Id to this publication ?
+
+  // Placeholder for proxy backends
+  let proxyBackends = [];
+
+  const userId = this.userId;
+
+  if (userId) {
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    // If current user is admin
+    if (userIsAdmin) {
+      // Get list of all the endpoints
+      proxyBackends = ProxyBackends.find();
+    }
+
+    // If current user is manager
+    const managedApis = Apis.find({ managerIds: userId }).fetch();
+
+    // If user is manager
+    if (managedApis.length > 0) {
+      // Get list of proxy backends managed by current user
+      _.forEach(managedApis, (api) => {
+        _.concat(proxyBackends, ProxyBackends.find({ apiId: api._id }).fetch());
+      });
+    }
+  }
+
+  return proxyBackends;
 });
