@@ -37,7 +37,6 @@ Apis.schema = new SimpleSchema({
   },
   submit_methods: {
     type: [String],
-    label: 'Allow try-out for following methods:',
     optional: true
   },
   created_at: {
@@ -93,5 +92,8 @@ Apis.schema = new SimpleSchema({
     defaultValue: true
   }
 });
+
+// Enable translations (i18n)
+Apis.schema.i18n('schemas.apis');
 
 Apis.attachSchema(Apis.schema);
