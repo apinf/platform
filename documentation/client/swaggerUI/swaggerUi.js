@@ -5,10 +5,10 @@ Template.swaggerUi.onCreated(function () {
   const instance = Template.instance();
   // Set flag on Data is not Ready
   instance.dataFetched = new ReactiveVar(false);
-
+  
   // Get url of api documentation
   const documentationURL = instance.data.apiDoc;
-
+  
   // Check validation of Swagger file
   Meteor.call('isValidSwagger', documentationURL, function (error, result) {
     // result can be 'true' or '{}'

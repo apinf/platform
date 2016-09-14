@@ -4,7 +4,7 @@ import { Settings } from '/settings/collection';
 
 Template.manageApiDocumentationModal.onCreated(function () {
   const instance = this;
-
+  
   // Initialize help texts
   const helpTexts = {
     'documentation_link': {
@@ -27,13 +27,13 @@ Template.manageApiDocumentationModal.onCreated(function () {
     },
   };
   InlineHelp.initHelp(helpTexts);
-
+  
   instance.autorun(function () {
     const api = Apis.findOne(instance.data.api._id);
     // Save apibackend id
     Session.set('api', api);
   });
-
+  
   // Subscribe to documentation editor settings
   instance.subscribe('singleSetting', 'apiDocumentationEditor');
 });
@@ -47,21 +47,21 @@ Template.manageApiDocumentationModal.events({
   'click .delete-documentation': function (event, instance) {
     // Show confirmation dialog to user
     const confirmation = confirm(TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage'));
-
+    
     // Check if user clicked "OK"
     if (confirmation === true) {
       // Get currentApiBackend documentationFileId
       const documentationFileId = this.api.documentationFileId;
-
+      
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
+      
       // Remove documentation object
       DocumentationFiles.remove(objectId);
-
+      
       // Remove documenation file id field
       Apis.update(instance.data.api._id, { $unset: { documentationFileId: '' } });
-
+      
       sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
     }
   },
@@ -79,15 +79,15 @@ Template.manageApiDocumentationModal.events({
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
     const api = Session.get('api');
-
+    
     const documentationFileId = api.documentationFileId;
-
+    
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
+    
     // Get documentation file Object
     const documentationFile = DocumentationFiles.findOne(objectId);
-
+    
     // Check if documentation file is available
     if (documentationFile) {
       return documentationFile;
@@ -96,13 +96,13 @@ Template.manageApiDocumentationModal.helpers({
   apiDocumentationEditorIsEnabled () {
     // Get settings
     const settings = Settings.findOne();
-
+    
     // Check settings exists, editor is enabled and host setting exists
     if (
-          settings &&
-          settings.apiDocumentationEditor &&
-          settings.apiDocumentationEditor.enabled &&
-          settings.apiDocumentationEditor.host) {
+      settings &&
+      settings.apiDocumentationEditor &&
+      settings.apiDocumentationEditor.enabled &&
+      settings.apiDocumentationEditor.host) {
       // Editor is enabled and has host setting, return true
       return true;
     } else {

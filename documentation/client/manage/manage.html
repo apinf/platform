@@ -11,25 +11,25 @@
         <div class="modal-body">
           {{#autoForm collection=apisCollection doc=api id="apiDocumentationForm" type="update" }}
 
-              <legend>
+            <legend>
               {{> showHelp 'uploadApiDocumentation'}}
               {{_ "import_ApiDocumentation_Title"}}
-              </legend>
+            </legend>
             <div class="documentation-file">
               {{#unless documentationFile }}
-              {{> manageApiDocumentationModalUploadButton }}
+                {{> manageApiDocumentationModalUploadButton }}
               {{else}}
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                  {{ documentationFile.filename }}
-                  <span class="pull-right">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    {{ documentationFile.filename }}
+                    <span class="pull-right">
                     <button type="button" class="btn btn-xs btn-danger delete-documentation">
                       <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
                     </button>
                   </span>
-                </li>
-              </ul>
+                  </li>
+                </ul>
                 {{> afQuickField
                     name="submit_methods"
                     options=supportedSubmitMethods
@@ -39,13 +39,13 @@
               {{/unless}}
             </div>
             {{# if apiDocumentationEditorIsEnabled}}
-            <legend>
-              {{>showHelp 'documentation_editor_create_file'}}
-              {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
-            </legend>
-            <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
-              {{_ "manageApiDocumentationModal_openDocumentationEditor" }}
-            </a>
+              <legend>
+                {{>showHelp 'documentation_editor_create_file'}}
+                {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
+              </legend>
+              <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
+                {{_ "manageApiDocumentationModal_openDocumentationEditor" }}
+              </a>
             {{/ if }}
             <legend>
               {{>showHelp 'documentation_link'}}
