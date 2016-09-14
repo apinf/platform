@@ -6,7 +6,7 @@
 
 ## Docker image
 
-[![](https://images.microbadger.com/badges/image/apinf/apinf.svg)](http://microbadger.com/images/apinf/apinf) [![](https://images.microbadger.com/badges/version/apinf/apinf.svg)](http://microbadger.com/images/apinf/apinf)
+[![](https://images.microbadger.com/badges/image/apinf/platform.svg)](http://microbadger.com/images/platform/apinf) [![](https://images.microbadger.com/badges/version/apinf/platform.svg)](http://microbadger.com/images/apinf/platform)
 
 # Links
 - [Documentation](http://apinf.org/docs) - APInf documentation

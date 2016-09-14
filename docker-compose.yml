@@ -1,7 +1,7 @@
 version: '2'
 services:
   apinf:
-    image: apinf/apinf
+    image: apinf/platform
     restart: always
     env_file:
       - 'docker/apinf/env'
