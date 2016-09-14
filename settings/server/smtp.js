@@ -1,5 +1,5 @@
-import { mailSettingsValid } from '/lib/helperFunctions/validateSettings';
-import { Settings } from '/settings/collection';
+import { mailSettingsValid } from '/core/helper_functions/validate_settings';
+import { Settings } from '../collection';
 
 Meteor.startup(function () {
   /* extend settings.json with username and password:

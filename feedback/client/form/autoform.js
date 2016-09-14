@@ -8,8 +8,11 @@ AutoForm.hooks({
       },
     },
     onSuccess () {
-      sAlert.success(TAPi18n.__('feedbackForm_successMessage'));
-      Modal.hide('feedbackForm');
+      // Get success message translation
+      const message = TAPi18n.__('feedbackForm_successMessage');
+
+      // Alert user of success
+      sAlert.success(message);
     },
   },
 });
