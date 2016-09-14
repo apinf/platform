@@ -13,9 +13,14 @@ Template.homeBody.rendered = function () {
 };
 
 Template.homeBody.helpers({
-  contactDetailsValid () {
+  contactFormEnabled () {
     const settings = Settings.findOne();
 
-    return contactEmailValid(settings);
+    // Check mail is enabled & contact email has been given
+    if(settings.mail.enabled && contactEmailValid(settings)) {
+      return true;
+    } else {
+      return false;
+    }
   },
 });
