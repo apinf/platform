@@ -15,4 +15,11 @@ Meteor.methods({
 
     return usersCount;
   },
+  sendVerificationLink() {
+    console.log("Here I go");
+    const userId = Meteor.userId();
+    if ( userId ) {
+      return Accounts.sendVerificationEmail( userId );
+    }
+  }
 });
