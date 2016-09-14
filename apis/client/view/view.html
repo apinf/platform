@@ -1,10 +1,10 @@
 <template name="viewApiBackend">
   {{#if Template.subscriptionsReady }}
-  {{> viewApiBackendPageHeader api=api proxyIsConfigured=proxyIsConfigured }}
+  {{> viewApiBackendPageHeader api=api proxyIsConfigured=proxyIsConfigured proxyBackend=proxyBackend }}
   <div class="container">
     <div class="tab-content">
       <div id="api-details" class="tab-pane fade in active">
-        {{> viewApiBackendDetails api=api }}
+        {{> viewApiBackendDetails api=api proxyBackend=proxyBackend }}
       </div> <!-- /api-backend-details -->
 
       <div id="api-documentation" class="tab-pane fade">

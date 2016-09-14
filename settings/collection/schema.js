@@ -1,10 +1,6 @@
 import { Settings } from './';
 
 Settings.schema = new SimpleSchema({
-  apinf: {
-    type: Object,
-    optional: true,
-  },
   apiDocumentationEditor: {
     type: Object,
     optional: true,
@@ -16,7 +12,6 @@ Settings.schema = new SimpleSchema({
   'apiDocumentationEditor.host': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: 'Host',
     optional: true,
     autoform: {
       placeholder: 'http://editor.example.com/',
@@ -111,10 +106,6 @@ Settings.schema = new SimpleSchema({
       placeholder: 'xxx',
     },
   },
-  initialSetupComplete: {
-    type: Boolean,
-    optional: true,
-  },
   sdkCodeGenerator: {
     type: Object,
     optional: true,
@@ -126,7 +117,6 @@ Settings.schema = new SimpleSchema({
   'sdkCodeGenerator.host': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
-    label: 'Host',
     optional: true,
     autoform: {
       placeholder: 'https://generator.example.com/',
@@ -144,6 +134,6 @@ Settings.schema = new SimpleSchema({
 });
 
 // Enable translations (i18n)
-Settings.schema.i18n('schemas.settings.apiUmbrella');
+Settings.schema.i18n('schemas.settings');
 
 Settings.attachSchema(Settings.schema);

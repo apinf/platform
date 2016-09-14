@@ -25,6 +25,7 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  
   apiLogoFileId: {
     type: String,
     optional: true
@@ -33,6 +34,10 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url
+  },
+  submit_methods: {
+    type: [String],
+    optional: true
   },
   created_at: {
     type: Date,
@@ -87,5 +92,8 @@ Apis.schema = new SimpleSchema({
     defaultValue: true
   }
 });
+
+// Enable translations (i18n)
+Apis.schema.i18n('schemas.apis');
 
 Apis.attachSchema(Apis.schema);

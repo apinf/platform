@@ -13,8 +13,11 @@ Template.deleteApiBackendConfirmation.events({
         // Route to catalogue
         Router.go('catalogue');
 
+        // Get success message translation
+        const message = TAPi18n.__('deleteApiBackendConfirmation_successMessage');
+
         // Alert the user of success
-        sAlert.success(instance.data.name + ' was successfully deleted!');
+        sAlert.success(message + instance.data.name);
 
         // Dismiss the confirmation modal
         Modal.hide();

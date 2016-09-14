@@ -1,4 +1,7 @@
-Template.viewApiBackendStatus.created = function () {
+// Meteor imports
+import { Template } from 'meteor/templating';
+
+Template.viewApiBackendStatus.onCreated(function () {
   // Create reference to instance
   const instance = this;
 
@@ -6,8 +9,8 @@ Template.viewApiBackendStatus.created = function () {
   const api = instance.data.api;
 
   // attaches function to template instance to be able to call it in outside
-  instance.getApiStatus = function (url) {
-    Meteor.call('getApiStatus', url, function (err, status) {
+  instance.getApiStatus = (url) => {
+    Meteor.call('getApiStatus', url, (err, status) => {
       // Status object contents:
       // status = {
       //   statusCode      : <integer>,
@@ -62,21 +65,27 @@ Template.viewApiBackendStatus.created = function () {
         .attr('data-original-title', statusText);
     });
   };
-};
+});
 
-Template.viewApiBackendStatus.rendered = function () {
+Template.viewApiBackendStatus.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
   // Get API Backend from instance data context
   const api = instance.data.api;
 
-  // create request url based on API URL
-  const url = api.url;
+  // Make sure URL is available, to prevent console error
+  if (api && api.url) {
+    // create request url based on API URL
+    const url = api.url;
 
-  // call the function that updates status
-  instance.getApiStatus(url);
+    // call the function that updates status
+    instance.getApiStatus(url);
 
-  // Init tooltip
-  $('[data-toggle="tooltip"]').tooltip();
-};
+    // Init tooltip
+    $('[data-toggle="tooltip"]').tooltip();
+  } else {
+    // Hide the status indicator
+    $('.api-status-indicator-' + api._id).hide();
+  }
+});

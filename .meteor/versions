@@ -101,7 +101,6 @@ mongo@1.1.12
 mongo-id@1.0.5
 mongo-livedata@1.0.12
 mpowaga:string-template@0.1.0
-mrt:flash-messages@1.0.1
 npm-bcrypt@0.9.1
 npm-mongo@1.5.48
 oauth@1.1.11

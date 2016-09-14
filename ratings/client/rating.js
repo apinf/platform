@@ -60,10 +60,10 @@ Template.apiBackendRating.events({
     // Make sure there is a Meteor user ID for voting
     if (Meteor.userId() === null) {
       // Get translated user message
-      const userMessage = TAPi18n.__('api-backend-rating-anonymous');
+      const message = TAPi18n.__('apiBackendRating_anonymousError');
 
       // Alert the user that they must log in
-      sAlert.error(userMessage);
+      sAlert.error(message);
 
       return false;
     }
