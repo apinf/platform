@@ -1,4 +1,18 @@
+import { Template } from 'meteor/templating';
+import { ProxyBackends } from '/proxy_backends/collection';
+
 import jsyaml from 'js-yaml';
+
+Template.viewApiBackendExport.onCreated(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Get the API Backend ID from the route
+  instance.apiId = Router.current().params._id;
+
+  // Subscribe to proxy settings for this API
+  instance.subscribe('apiProxySettings', instance.apiId);
+});
 
 Template.viewApiBackendExport.events({
   'click #exportJSONConfig': function (event, instance) {
