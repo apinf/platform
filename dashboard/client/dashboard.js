@@ -65,12 +65,34 @@ Template.dashboard.onCreated(function () {
         return api;
       });
 
+      let prefixesQuery = [];
+
+      if (apis.length > 0) {
+        prefixesQuery = _.map(apis, (api) => {
+          return {
+            wildcard: {
+              request_path: {
+                // Add '*' to partially match the url
+                value: `${api.url_matches[0].frontend_prefix}*`,
+              },
+            },
+          };
+        });
+      }
+
       // Construct parameters for elasticsearch
       const params = {
         size: 50000,
         body: {
           query: {
             filtered: {
+              query: {
+                bool: {
+                  should: [
+                    prefixesQuery,
+                  ],
+                },
+              },
               filter: {
                 range: {
                   request_at: { },
@@ -92,26 +114,6 @@ Template.dashboard.onCreated(function () {
           ],
         },
       };
-
-      if (apis.length > 0) {
-        const q = _.map(apis, (api) => {
-          return {
-            wildcard: {
-              request_path: {
-                // Add '*' to partially match the url
-                value: `${api.url_matches[0].frontend_prefix}*`,
-              },
-            },
-          };
-        });
-
-        // Init varuable to keep elasticsearch sub-query
-        params.body.query.filtered.query = {
-          bool: {
-            should: [q],
-          },
-        };
-      }
 
       // ******* Filtering by date *******
       const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
