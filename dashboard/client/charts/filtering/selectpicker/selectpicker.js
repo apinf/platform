@@ -1,9 +1,13 @@
+import _ from 'lodash'
+
 Template.apiBackendSelectPicker.onRendered(function () {
 
-  const selectPickerElement = $('#api-frontend-prefix');
+  const instance = this;
+
+  instance.selectPickerElement = $('#api-frontend-prefix');
 
   // Initialize select picker widget
-  selectPickerElement.selectpicker({});
+  instance.selectPickerElement.selectpicker({});
 
 });
 
@@ -15,16 +19,18 @@ Template.apiBackendSelectPicker.helpers({
 
     // Get apis from template context
     const apis = instance.data.apis;
+    
+    return apis;
 
-    // Get apis that user manages
-    const myApis = _.filter(apis, (api) => {
-      return api.currentUserIsManager();
-    });
-
-    // Check if there are any apis that user manages
-    if (myApis.length > 0) {
-      return myApis;
-    }
+    // // Get apis that user manages
+    // const myApis = _.filter(apis, (api) => {
+    //   return api.currentUserIsManager();
+    // });
+    //
+    // // Check if there are any apis that user manages
+    // if (myApis.length > 0) {
+    //   return myApis;
+    // }
   },
   otherApis () {
 
@@ -34,9 +40,11 @@ Template.apiBackendSelectPicker.helpers({
     // Get apis from template context
     const apis = instance.data.apis;
 
-    // Get apis that user doesn't manage
-    return _.filter(apis, (api) => {
-      return !api.currentUserIsManager();
-    });
+    // // Get apis that user doesn't manage
+    // return _.filter(apis, (api) => {
+    //   return !api.currentUserIsManager();
+    // });
+
+    return apis;
   }
 });
