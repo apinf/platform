@@ -2,7 +2,6 @@ http_port: 3001
 https_port: 3002
 services:
   - general_db
-  - log_db
   - router
   - web
 web:
@@ -21,8 +20,9 @@ web:
         client_id:
         client_secret:
 elasticsearch:
+  api_version: 2
   hosts:
-    - http://127.0.0.1:14002
+    - http://elasticsearch.docker:9200
 mongodb:
   url: mongodb://127.0.0.1:14001/api_umbrella_db
 nginx:

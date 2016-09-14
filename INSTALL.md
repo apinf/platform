@@ -38,7 +38,7 @@ Register a new admin account. The first user will become Admin.
 * API Key: from step #6
 * Auth Token: from step #7
 * Base URL: "https://YOUR_SITE_DOMAIN:3002/api-umbrella/"
-* Elasticsearch: "http://YOUR_SITE_DOMAIN:14002"
+* Elasticsearch: "http://elasticsearch.docker:9200"
 11. Add API backend https://YOUR_SITE_DOMAIN/api/new
 
 
