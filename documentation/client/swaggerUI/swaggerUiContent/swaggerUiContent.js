@@ -1,29 +1,35 @@
 import SwaggerUi from 'swagger-ui-browserify';
+import { Apis } from '/apis/collection';
 
 Template.swaggerUiContent.onCreated(function () {
+  const instance = this;
+  
   // Get URL of api documentation
-  const documentationURL = this.data.apiDocumentation;
-
-  // Create Swagger UI
-  const swagger = window.swaggerUi = new SwaggerUi({
+  const documentationURL = this.data.apiDoc;
+  
+  // Create Swagger UI object
+  const swagger = new SwaggerUi({
     url: documentationURL,
     dom_id: 'swagger-ui-container',
     useJQuery: true,
     supportHeaderParams: true,
-    supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
     apisSorter: 'alpha',
     operationsSorter: 'alpha',
-    docExpansion: 'none'
+    docExpansion: 'none',
   });
-
-  // Load Swagger UI
-  swagger.load();
-});
-
-Template.swaggerUiContent.onRendered(function () {
-  // Get URL of api documentation
-  const documentationURL = this.data.apiDocumentation;
-
-  // Display URL on Swagger UI input
-  $('#input_baseUrl').val(documentationURL);
+  
+  // Subscribe to api collection
+  instance.autorun(() => {
+    // Get relevant api collection
+    instance.subscribe('apiBackend', instance.data.api._id);
+    
+    // Get api
+    const api = Apis.findOne(instance.data.api._id);
+    
+    // Set selected methods in Swagger
+    swagger.setOption('supportedSubmitMethods', api.submit_methods);
+    
+    // Load Swagger UI
+    swagger.load();
+  });
 });

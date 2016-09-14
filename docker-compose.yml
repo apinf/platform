@@ -1,7 +1,7 @@
 version: '2'
 services:
   apinf:
-    image: apinf/apinf
+    image: apinf/platform
     restart: always
     env_file:
       - 'docker/apinf/env'
@@ -11,8 +11,11 @@ services:
       - "3000:80"
     depends_on:
       - mongo
+      - ssl
+    links:
+      - elasticsearch:elasticsearch.docker
   apiumbrella:
-    image: nrel/api-umbrella:0.12.0
+    image: nrel/api-umbrella:0.13.0
     restart: always
     volumes:
       - ./docker/api-umbrella/config:/etc/api-umbrella
@@ -20,9 +23,10 @@ services:
     ports:
       - "3001:3001"
       - "3002:3002"
-      - "14002:14002"
     depends_on:
       - ssl
+    links:
+      - elasticsearch:elasticsearch.docker
   mongo:
     restart: always
     image: mongo:3.2.6
@@ -41,9 +45,14 @@ services:
       - letsencrypt:/etc/letsencrypt
       - letsencrypt_backups:/var/lib/letsencrypt
       - dhparam_cache:/cache
-    depends_on:
-      - apinf
+  elasticsearch:
+    image: elasticsearch:2.4
+    restart: always
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    command: elasticsearch -Des.index.max_result_window=50000
 volumes:
     letsencrypt: {}
     letsencrypt_backups: {}
     dhparam_cache: {}
+    elasticsearch_data: {}

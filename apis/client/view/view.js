@@ -59,8 +59,10 @@ Template.viewApiBackend.helpers({
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    const backlogItems = ApiBacklogItems.find({ apiId },
-      { sort: { priority: -1, createdAt: -1 } }).fetch();
+    const backlogItems = ApiBacklogItems.find(
+      { apiBackendId: apiId },
+      { sort: { priority: -1, createdAt: -1 } }
+    ).fetch();
 
     return backlogItems;
   },
