@@ -5,6 +5,13 @@ Router.route('/api/new', function () {
   name: 'addApi',
 });
 
+Router.route('/api/import', function () {
+  this.render('importApiConfiguration');
+  this.layout('masterLayout');
+}, {
+  name: 'importApiConfiguration',
+});
+
 Router.route('/api/:_id/', function () {
   // Save a reference to route, for use inside method callback function
   const route = this;
@@ -23,12 +30,4 @@ Router.route('/api/:_id/', function () {
   });
 }, {
   name: 'viewApi',
-});
-
-Router.map(function () {
-  this.route('importApiConfiguration', {
-    path: 'import/api',
-    layoutTemplate: 'masterLayout',
-    render: 'importApiConfiguration',
-  });
 });
