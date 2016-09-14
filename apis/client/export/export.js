@@ -45,6 +45,7 @@ Template.viewApiBackendExport.events({
     // Get the API Backend ID from the route
     const apiId = instance.apiId;
 
+    // Find proxy backends by API id
     const proxy = ProxyBackends.findOne({ apiId });
 
     // converts JSON object to JSON string and adds indentation
@@ -60,6 +61,7 @@ Template.viewApiBackendExport.events({
     // Get the API Backend ID from the route
     const apiId = instance.apiId;
 
+    // Find proxy backends by API id
     const proxy = ProxyBackends.findOne({ apiId });
 
     // converts from json to yaml
