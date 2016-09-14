@@ -186,8 +186,6 @@
   "apiBacklog_mainTitle": "Tehtävälista",
   "apiBacklogForm_addBacklogItem_button": "Lisää uusi tehtävä",
   "apiBacklogList_noApiBacklogItemsFound": "Ei löydetty tehtäviä tälle rajapinnalle.",
-  "apiBacklogItem_removeBacklogItem-button": "Poista",
-  "apiBacklogItem_editBacklogItem-button": "Muokkaa",
   "statusCheckTitle": "Tila",
   "statusCheckUpdated": "Päivitetty:",
   "statusCheckJustNow": "Juuri äsken.",
