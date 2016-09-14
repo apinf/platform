@@ -2,13 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import { ProxyBackends } from '/proxy_backends/collection';
+
 import moment from 'moment';
+import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-
-  instance.apis = new ReactiveVar([]);
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
@@ -23,6 +24,8 @@ Template.dashboard.onCreated(function () {
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
   const userId = Meteor.userId();
+
+  instance.subscribe('proxyApis');
 
   if (Roles.userIsInRole(userId, ['admin'])) {
     // Subscribe to publication
@@ -54,9 +57,13 @@ Template.dashboard.onCreated(function () {
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
       // Get APIs managed by user
-      const apis = []; // TODO: update apis variable with backend proxies data here
+      const proxyBackends = ProxyBackends.find().fetch();
 
-      instance.apis.set(apis);
+      const apis = _.map(proxyBackends, proxyBackend => {
+        const api = proxyBackend.apiUmbrella;
+        api._id = proxyBackend.apiId;
+        return api;
+      });
 
       // Construct parameters for elasticsearch
       const params = {
@@ -86,29 +93,25 @@ Template.dashboard.onCreated(function () {
         },
       };
 
-      // if (instance.apis.get().length > 0) {
-      //
-      //   // Init varuable to keep elasticsearch sub-query
-      //   let filteredQuery = {
-      //     bool: {
-      //       should: []
-      //     }
-      //   };
-      //
-      //   // Iterate through eacy API managed by user
-      //   _.forEach(instance.apis.get(), (api) => {
-      //
-      //     // Push query object to array
-      //     filteredQuery.bool.should.push({
-      //       wildcard: {
-      //         request_path: {
-      //           // Add '*' to partially match the url
-      //           value: `${api.url_matches[0].frontend_prefix}*`
-      //         }
-      //       }
-      //     });
-      //   });
-      // }
+      if (apis.length > 0) {
+        const q = _.map(apis, (api) => {
+          return {
+            wildcard: {
+              request_path: {
+                // Add '*' to partially match the url
+                value: `${api.url_matches[0].frontend_prefix}*`,
+              },
+            },
+          };
+        });
+
+        // Init varuable to keep elasticsearch sub-query
+        params.body.query.filtered.query = {
+          bool: {
+            should: [q],
+          },
+        };
+      }
 
       // ******* Filtering by date *******
       const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
