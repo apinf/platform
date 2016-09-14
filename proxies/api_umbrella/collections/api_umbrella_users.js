@@ -1,72 +1,72 @@
 ApiUmbrellaUsers = new Mongo.Collection('apiUmbrellaUsers');
 
-Schemas.ApiUmbrellaUsersSchema = new SimpleSchema({
+const ApiUmbrellaUsersSchema = new SimpleSchema({
   id: {
     type: String,
-    optional: true
+    optional: true,
   },
   api_key: {
     type: String,
-    optional: true
+    optional: true,
   },
   created_at: {
     type: Date,
-    optional: true
+    optional: true,
   },
   first_name: {
     type: String,
-    optional: true
+    optional: true,
   },
   last_name: {
     type: String,
-    optional: true
+    optional: true,
   },
   email: {
     type: String,
-    optional: true
+    optional: true,
   },
   email_verified: {
     type: Boolean,
-    optional: true
+    optional: true,
   },
   website: {
     type: String,
-    optional: true
+    optional: true,
   },
   registration_source: {
     type: String,
-    optional: true
+    optional: true,
   },
   throttle_by_ip: {
     type: Boolean,
-    optional: true
+    optional: true,
   },
   disabled_at: {
     type: Date,
-    optional: true
+    optional: true,
   },
   roles: {
     type: [String],
-    optional: true
+    optional: true,
   },
   userId: {
     type: String,
     label: 'User',
     optional: true,
     autoform: {
-      options: function() {
+      options () {
         // Get all Meteor users as array
-        var users = Meteor.users.find().fetch();
+        const users = Meteor.users.find().fetch();
         // Create an array of label value pairs for autoform select
-        return _.map(users, function(user) {
+        return _.map(users, function (user) {
           return {
             label: user.emails[0].address,
-            value: user._id
+            value: user._id,
           };
         });
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
-ApiUmbrellaUsers.attachSchema(Schemas.ApiUmbrellaUsersSchema);
+ApiUmbrellaUsers.attachSchema(ApiUmbrellaUsersSchema);

@@ -12,13 +12,13 @@
       </div>
       <div class="modal-body">
         {{#if dataFetched}}
-          
+
           {{> quickForm
             id="downloadSDK"
             schema=generateSDK
             doc=getTemplateInstance
             buttonContent="Download" }}
-       
+
         {{else}}
           {{> spinner}}
          {{/if}}
@@ -27,7 +27,6 @@
         {{> spinner}}
       {{/if}}
       </div>
-      {{> flashMessages}}
     </div>
   </div>
 </div>

@@ -1,58 +1,58 @@
 ApiUmbrellaAdmins = new Mongo.Collection('apiUmbrellaAdmins');
 
-Schemas.ApiUmbrellaAdminsSchema = new SimpleSchema({
+const ApiUmbrellaAdminsSchema = new SimpleSchema({
   id: {
     type: String,
-    optional: true
+    optional: true,
   },
   username: {
     type: String,
-    optional: true
+    optional: true,
   },
   email: {
     type: String,
-    optional: true
+    optional: true,
   },
   name: {
     type: String,
-    optional: true
+    optional: true,
   },
-  notes:{
+  notes: {
     type: String,
-    optional: true
+    optional: true,
   },
-  superuser:{
+  superuser: {
     type: Boolean,
-    optional: true
+    optional: true,
   },
-  authentication_token:{
+  authentication_token: {
     type: String,
-    optional: true
-    },
-  last_sign_in_provider:{
+    optional: true,
+  },
+  last_sign_in_provider: {
     type: String,
-    optional: true
+    optional: true,
   },
   sign_in_count: {
     type: Number,
-    optional: true
+    optional: true,
   },
   current_sign_in_at: {
-  type: Date,
-    optional: true
+    type: Date,
+    optional: true,
   },
   last_sign_in_at: {
     type: Date,
-    optional: true
+    optional: true,
   },
   current_sign_in_ip: {
     type: String,
-    optional: true
+    optional: true,
   },
   last_sign_in_ip: {
     type: String,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
-ApiUmbrellaAdmins.attachSchema(Schemas.ApiUmbrellaAdminsSchema);
+ApiUmbrellaAdmins.attachSchema(ApiUmbrellaAdminsSchema);

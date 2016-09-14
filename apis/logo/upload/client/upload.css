@@ -1,3 +1,7 @@
 .api-logo-file {
   margin-bottom: 1em;
 }
+
+.api-logo-file .fa {
+  vertical-align: 0;
+}
