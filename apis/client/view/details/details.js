@@ -1,4 +1,5 @@
 import Clipboard from 'clipboard';
+import { ApiKeys } from '/api_keys/collection';
 
 Template.viewApiBackendDetails.onRendered(function () {
   // Initialize Clipboard copy button
@@ -45,4 +46,44 @@ Template.viewApiBackendDetails.helpers({
 
     return url;
   },
+  testCallUrl () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // placeholder for output URL
+    let testCallUrl;
+
+    // Placeholder for API key
+    let apiKey;
+
+    // Get current user
+    const currentUserId = Meteor.userId();
+
+    // Make sure user exists and has API key
+    if (currentUserId) {
+      // Get API Key document
+      const userApiKey = ApiKeys.findOne({ userId: currentUserId });
+
+      // Check that Umbrella API key exists
+      if (userApiKey && userApiKey.apiUmbrella) {
+        // Get the API Key, from API key document
+        apiKey = userApiKey.apiUmbrella.apiKey;
+      }
+    }
+
+    if (instance.data.proxyBackend) {
+      const proxyBackend = instance.data.proxyBackend;
+
+      // Get Proxy host
+      const host = proxyBackend.apiUmbrella.frontend_host;
+
+      // Get proxy base path
+      const basePath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+
+      // Construct the URL from host and base path and API key
+      testCallUrl = host + basePath + '?api_key=' + apiKey;
+    }
+
+    return testCallUrl;
+  }
 });
