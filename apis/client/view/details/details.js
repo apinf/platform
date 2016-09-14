@@ -33,8 +33,14 @@ Template.viewApiBackendDetails.helpers({
       // Get Proxy host
       const host = proxyBackend.apiUmbrella.frontend_host;
 
+      
       // Get proxy base path
-      const basePath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+      let basePath = ''
+      
+      // It can be moment when proxyBackend exists but url_matches isn't
+      if (proxyBackend.apiUmbrella.url_matches) {
+        basePath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix
+      }
 
       // Construct the URL from host and base path
       url = host + basePath;
