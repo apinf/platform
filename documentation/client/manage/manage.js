@@ -65,17 +65,12 @@ Template.manageApiDocumentationModal.events({
 
       // Remove documenation file id field
       Apis.update(instance.data.api._id, { $unset: { documentationFileId: '' } });
-<<<<<<< HEAD
 
       // Get deletion success message translation
       const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
 
       // Alert user of successful deletion
       sAlert.success(message);
-=======
-
-      sAlert.success(TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message'));
->>>>>>> 8a78101cf5b33ffae10ffc91ecb53f09517c5d37
     }
   },
   'click #save-documentation-link': function (event, instance) {
