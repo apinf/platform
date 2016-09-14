@@ -24,7 +24,7 @@ Template.profile.rendered = function () {
     // Ask user to set username if it is not set.
     if (!currentUser.username) {
       // Get username 'update needed' message
-      const message = TAPi18n.__('profile-setUsername');
+      const message = TAPi18n.__('profile_setUsername');
 
       // Alert user of update needed
       sAlert.info(message);
