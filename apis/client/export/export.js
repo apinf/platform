@@ -7,11 +7,11 @@ Template.viewApiBackendExport.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Get the API Backend ID from the route
-  instance.apiId = Router.current().params._id;
+  // Get the API Backend ID from data context
+  const apiId = instance.data.api._id;
 
   // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', instance.apiId);
+  instance.subscribe('apiProxySettings', apiId);
 });
 
 Template.viewApiBackendExport.events({
@@ -42,8 +42,8 @@ Template.viewApiBackendExport.events({
     saveAs(file, 'apiConfig.yaml');
   },
   'click #exportJSONProxyConfig': function (event, instance) {
-    // Get the API Backend ID from the route
-    const apiId = instance.apiId;
+    // Get the API Backend ID from data context
+    const apiId = instance.data.api._id;
 
     // Find proxy backends by API id
     const proxy = ProxyBackends.findOne({ apiId });
@@ -58,8 +58,8 @@ Template.viewApiBackendExport.events({
     saveAs(file, 'apiProxyConfig.json');
   },
   'click #exportYAMLProxyConfig': function (event, instance) {
-    // Get the API Backend ID from the route
-    const apiId = instance.apiId;
+    // Get the API Backend ID from data context
+    const apiId = instance.data.api._id;
 
     // Find proxy backends by API id
     const proxy = ProxyBackends.findOne({ apiId });
