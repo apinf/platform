@@ -1,6 +1,6 @@
 import { Apis } from '/apis/collection';
 
-Template.viewApiBackendSettings.events({
+Template.apiSettings.events({
   // event handler to execute when delete API button is clicked
   'click #deleteModal': function () {
     const apiId = this.api._id;
@@ -13,7 +13,7 @@ Template.viewApiBackendSettings.events({
   },
 });
 
-Template.viewApiBackendSettings.helpers({
+Template.apiSettings.helpers({
   formCollection () {
     return Apis;
   },

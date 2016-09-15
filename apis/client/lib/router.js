@@ -22,7 +22,7 @@ Router.route('/api/:_id/', function () {
   // Ensure current user is authorized to view backend
   Meteor.call('currentUserCanViewApi', apiBackendId, function (error, userIsAuthorized) {
     if (userIsAuthorized) {
-      route.render('viewApiBackend');
+      route.render('viewApi');
       route.layout('masterLayout');
     } else {
       Router.go('notAuthorized');
