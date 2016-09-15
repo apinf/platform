@@ -12,8 +12,6 @@ ProxyBackends.helpers({
 
     const api = Apis.findOne(apiId);
 
-    const isManager = _.includes(api.managerIds, userId);
-
-    return isManager;
+    return api.currentUserIsManager();
   },
 });
