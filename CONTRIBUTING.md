@@ -28,7 +28,7 @@ Use the following guidelines when contributing to this project.
   - [Internationalization (i18n)](#internationalization-i18n)
     - [i18n key structure](#i18n-key-structure)
     - [Template text (HTML/Blaze)](#template-text-htmlblaze)
-  - [JavaScript text](#javascript-text)
+    - [JavaScript text](#javascript-text)
 - [Packages](#packages)
   - [Forms](#forms)
   - [Routing](#routing)
@@ -345,7 +345,7 @@ A specific example, found on a page element heading:
 </h1>
 ```
 
-## JavaScript text
+### JavaScript text
 When internationalization strings are used in JavaScript, use the following pattern:
 
 1. fetch the ii18n string and store it in a descriptive variable
