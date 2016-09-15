@@ -239,7 +239,7 @@ Configure your IDE to use eslint with the Airbnb styleguide.
 
 Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
-# File structure
+## File structure
 This project is organized around a 'module' / 'component' architecture.
 
 By 'module', we mean anything that has it's own database collection and one or more routes. Components are more closely related to the idea of [WebComponents](http://webcomponents.org/), which are intended to be reusable, hierarchical user interface elements. Modules are located in the project root, with components in the client sub-directory.
@@ -268,7 +268,7 @@ In general, our module structure follows this pattern:
   * **server/**
     * *methods.js*
 
-## File names
+### File names
 Please use underscores in folder and file names, rather than hyphens or camel case. E.g.
 
 ```js
@@ -276,7 +276,7 @@ folder_name/file_name.css
 folder_name/file_name.html
 folder_name/file_name.js
 ```
-# Collection/Schema structure
+## Collection/Schema structure
 After some trial and error, we have settled on the following pattern for defining collections and schemas:
 
 ```js
@@ -312,6 +312,51 @@ CollectionName.attachSchema(CollectionName.schema);
 References:
 - Meteor Guide: Code Style - [Collections](https://guide.meteor.com/code-style.html#collections)
 - Meteor Guide: [Collections and Schemas](https://guide.meteor.com/collections.html#schemas)
+
+## Internationalization (i18n)
+To the extent possible, all user-facing text should be internationalized. To add internationalization support for texts, we use the following conventions.
+
+### i18n key structure
+Internationalization keys in our project use the following elements, separated by underscores
+- `templateName` - the name of the template as it appears in either:
+  - the `<template name="templateName">`
+  - the `{{# AutoForm id="formName" }}`
+- `pageElement` or `event` - indicate the page element or JS related event
+- `additionalText` - additional text to distinguish this string from others (optional)
+
+
+### Template text (HTML/Blaze)
+Text in HTML/Blaze templates can be internationalized by adding an i18n tag:
+
+```html
+{{_ "templateName_pageElement_additionalText" }}
+```
+
+A specific example, found on a page element heading:
+
+```html
+<!-- note the element nesting, for readability -->
+<h1 class="page-header">
+  {{_ "pageTemplate_header_text"}}
+</h1>
+```
+
+## JavaScript text
+When internationalization strings are used in JavaScript, use the following pattern:
+
+1. fetch the ii18n string and store it in a descriptive variable
+2. use the i18n variable in related code
+
+For example, when showing an `sAlert` to the user:
+
+```js
+// Get a translation string
+const message = TAPi18n._("templateName_event_translationString");
+
+// Use the translation string
+sAlert.warning(message);
+
+```
 
 # Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
