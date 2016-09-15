@@ -1,7 +1,7 @@
 // Meteor imports
 import { Template } from 'meteor/templating';
 
-Template.viewApiBackendStatus.onCreated(function () {
+Template.viewApiStatus.onCreated(function () {
   // Create reference to instance
   const instance = this;
 
@@ -35,28 +35,28 @@ Template.viewApiBackendStatus.onCreated(function () {
       if (success.test(status.code)) {
         className = 'status-success';
         statusText = `
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_Success')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_Success')}
           `;
       } else if (redirect.test(status.code)) {
         className = 'status-success';
         statusText = `
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${status.code}.
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_RedirectError')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_RedirectError')}
         `;
       } else if (clientErr.test(status.code)) {
         className = 'status-warning';
         statusText = `
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${status.code}.
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ClientError')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_ClientError')}
         `;
       } else if (serverErr.test(status.code)) {
         className = 'alert-danger';
         statusText = `
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ErrorCodeText')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${status.code}.
-          ${TAPi18n.__('viewApiBackendStatus_statusMessage_ServerError')}
+          ${TAPi18n.__('viewApiStatus_statusMessage_ServerError')}
         `;
       }
 
@@ -67,7 +67,7 @@ Template.viewApiBackendStatus.onCreated(function () {
   };
 });
 
-Template.viewApiBackendStatus.onRendered(function () {
+Template.viewApiStatus.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 

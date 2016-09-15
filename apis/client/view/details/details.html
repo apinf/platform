@@ -1,4 +1,4 @@
-<template name="viewApiBackendDetails">
+<template name="apiDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title clearfix">
@@ -10,7 +10,7 @@
         <div class="col-lg-12 api-details-block">
           {{ # if api.description }}
           <h3>
-            {{_ "viewApiBackendDetails_description_headingText" }}
+            {{_ "apiDetails_description_headingText" }}
           </h3>
           <p>
             {{ api.description }}
@@ -20,7 +20,7 @@
 
           {{# if url }}
           <h3>
-            {{_ "viewApiBackendDetails_baseUrl_headingText" }}
+            {{_ "apiDetails_baseUrl_headingText" }}
           </h3>
           <div class="input-group">
             <input
