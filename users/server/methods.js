@@ -1,3 +1,5 @@
+import { Settings } from '/settings/collection';
+
 Meteor.methods({
   deleteAccount (userId) {
     if (this.userId === userId) {
@@ -14,6 +16,15 @@ Meteor.methods({
     const usersCount = users.length;
 
     return usersCount;
+  },
+  sendRegistrationEmailVerification( userId ) {
+    // Get settings
+    const settings = Settings.findOne();
+
+    // Check mail settings have been enabled
+    if(settings && settings.mail && settings.mail.enabled) {
+      Accounts.sendVerificationEmail( userId );
+    }
   },
   sendVerificationLink() {
     const userId = Meteor.userId();
