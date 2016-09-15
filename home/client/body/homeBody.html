@@ -1,11 +1,13 @@
 <template name="homeBody">
   <div class="coverphoto">
     <div class="container" id="headerwrap">
-      {{#unless currentUser.emails.[0].verified}}
-      <div class="row">
-        <p class="alert alert-warning">You need to verify your email address before using Apinf. <a href="#" class="resend-verification-link">Resend verification link</a>.</p>
-      </div>
-      {{/unless }}
+      {{#if currentUser }}
+        {{#unless currentUser.emails.[0].verified}}
+        <div class="row">
+          <p class="alert alert-warning">You need to verify your email address before using Apinf. <a href="#" class="resend-verification-link">Resend verification link</a>.</p>
+        </div>
+        {{/unless }}
+      {{/if }}
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
           <h1 class="text-center">
