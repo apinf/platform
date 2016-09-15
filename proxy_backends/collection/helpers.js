@@ -1,17 +1,17 @@
 import { Meteor } from 'meteor/meteor';
-import _ from 'lodash';
 
 import { Apis } from '/apis/collection';
 import { ProxyBackends } from './';
 
 ProxyBackends.helpers({
   currentUserIsManager () {
-    const userId = Meteor.userId();
-
+    // Get apiId
     const apiId = this.apiId;
-
+    // Get API by apiId
     const api = Apis.findOne(apiId);
+    // Check if current user is manager
+    const isManager = api.currentUserIsManager();
 
-    return api.currentUserIsManager();
+    return isManager;
   },
 });
