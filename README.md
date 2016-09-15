@@ -16,7 +16,7 @@
 
 ## Build
 
-[![Build Status](https://travis-ci.org/apinf/api-umbrella-dashboard.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/api-umbrella-dashboard)
+[![Build Status](https://travis-ci.org/apinf/platform.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/platform)
 
 ## Docker image
 
