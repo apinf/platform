@@ -136,6 +136,7 @@
   "apiDocumentation_Viewer_Title": "Viewer",
   "apiDocumentation_sdkGenerateButton": "SDK Generate",
   "apiDocumentation_tooltipSDKGeneratorButton": "With a valid swagger file, you can download an SDK of your preferred language using this wizard",
+  "editApiMetadata_editButton": "Edit metadata",
   "editBacklogItem_modalTitle": "Edit backlog item",
   "editBacklogItem_submit_buttonText": "Save",
   "esData_notFound": "There are no API usage statistics available.",
