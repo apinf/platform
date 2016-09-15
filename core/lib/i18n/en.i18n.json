@@ -144,6 +144,7 @@
   "deleteBacklogItem_cancelButton_text": "Cancel",
   "deleteBacklogItem_deleteButton_text": "Delete backlog item",
   "editApiMetadata_editButton": "Edit metadata",
+  "editApiMetadata_submitButtonText": "Save metadata",
   "editBacklogItem_modalTitle": "Edit backlog item",
   "editBacklogItem_submit_buttonText": "Save",
   "esData_notFound": "There are no API usage statistics available.",
