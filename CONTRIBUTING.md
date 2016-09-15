@@ -22,6 +22,7 @@ Use the following guidelines when contributing to this project.
     - [Variables](#variables)
       - [Variable examples](#variable-examples)
     - [Code standard(s) and Lint](#code-standards-and-lint)
+    - [Indentation](#indentation)
   - [File structure](#file-structure)
     - [File names](#file-names)
   - [Collection/Schema structure](#collectionschema-structure)
