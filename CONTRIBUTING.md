@@ -243,6 +243,20 @@ Configure your IDE to use eslint with the Airbnb styleguide.
 
 Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
+### Indentation
+Indent all HTML(Blaze) and JavaScript code with two spaces for each level of nesting.
+
+Also, nest most/all HTML child elements -- i.e. avoid having multiple inline elements.
+
+```html
+<p>
+  <!-- nesting is important for readability -->
+  <!-- e.g. when adding long internationalization keys -->
+  Paragraph text.
+</p>
+```
+
+
 ## File structure
 This project is organized around a 'module' / 'component' architecture.
 
