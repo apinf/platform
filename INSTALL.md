@@ -55,3 +55,103 @@ Elasticsearch takes a host value that contains the host and port of the API Umbr
 
 ## githubConfiguration
 The Github configuration takes two values, a Client ID and Secret key. You can obtain these values by setting up a Github application from your Github user account.
+
+# Development installation with Docker
+
+## Install Docker
+Review the Docker installation instructions for your Operating System:
+* [Mac](https://docs.docker.com/installation/mac/) ([Activates NFS on docker-machine](https://github.com/adlogix/docker-machine-nfs))
+* [Linux](https://docs.docker.com/installation/ubuntulinux/)
+
+Optionally [add your user to the `docker` group](https://docs.docker.com/engine/installation/linux/ubuntulinux/#create-a-docker-group).
+
+## Install Docker Compose
+You will also need to [install Docker Compose](https://docs.docker.com/compose/install/).
+### Ubuntu
+Install Docker Compose on Ubuntu Linux with the following command:
+
+```
+$ sudo apt install docker-compose
+```
+
+## Edit API Umbrella configuration
+
+API Umbrella configuration should be stored in
+* ```[project-root]/docker/api-umbrella/config/api-umbrella.yml```
+
+You can create `api-umbrella.yml` based on the example:
+* ```[project-root]/docker/api-umbrella/config/api-umbrella.yml.example```
+
+## Prepare APInf image
+
+1. Run application containers (in first time it will build image):
+  ```
+  $ docker-compose up
+  ```
+2. Add `apinf.dev` and `api-umbrella.dev` hosts entry to `/etc/hosts` file so you can visit them from your browser.
+
+
+### See Docker IP address (step only for Mac)
+```
+$ docker-machine ip
+=> 127.0.0.1
+```
+
+### Set hosts
+
+Then add the IP to your `/etc/hosts`:
+```
+127.0.0.1 apinf.dev api-umbrella.dev
+```
+
+Now you can work with your app from browser by visit http://apinf.dev:3000
+
+## Create API Umbrella credentials
+
+1. [Login to the API Umbrella web admin](http://api-umbrella.readthedocs.org/en/latest/getting-started.html#login-to-the-web-admin) https://api-umbrella.dev/admin/login
+2. Signup to the APInf http://apinf.dev:3000/sign-up
+3. Login to the APInf web admin http://apinf.dev:3000/sign-in
+4. Fill API Umbrella settings http://apinf.dev:3000/settings :
+
+* Host: https://api-umbrella.dev
+* API Key: [Get from step](http://api-umbrella.readthedocs.org/en/latest/getting-started.html#signup-for-an-api-key).
+* Auth Token: Get from [My account page](https://api-umbrella.dev/admin)
+* Base URL: https://api-umbrella.dev
+* Elasticsearch Host: http://api-umbrella.dev:14002
+
+## Debugging containers with docker exec
+
+This can be accomplished by grabbing the container ID with a docker ps, then passing that ID into the docker exec command:
+
+```
+$ docker ps
+CONTAINER ID        IMAGE
+ce9de67fdcbe        apinf/platform:latest
+$ docker exec -it ce9de67fdcbe /bin/bash
+root@ce9de67fdcbe:/#
+```
+
+Add alias to bash:
+```
+alias apinf_web='docker exec -it `docker ps | grep web | sed "s/ .*//"` /bin/bash'
+```
+
+## Building Docker Images
+
+### Building Images
+
+To build packages for the current APInf version:
+
+```
+$ docker build -t apinf/platform:INSERT_VERSION_HERE .
+$ docker tag apinf/platform:INSERT_VERSION_HERE apinf/platform:latest
+```
+
+### Pushing to Docker Hub
+
+To publish the new images to our [Docker Hub repository](https://hub.docker.com/r/apinf/platform/):
+
+```
+$ docker push apinf/platform:INSERT_VERSION_HERE
+$ docker push apinf/platform:latest
+```
