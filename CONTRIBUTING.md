@@ -1,3 +1,39 @@
+Use the following guidelines when contributing to this project.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Get involved](#get-involved)
+  - [Join the discussion](#join-the-discussion)
+- [Submitting issues](#submitting-issues)
+  - [General details](#general-details)
+  - [Feature/enhancement requests](#featureenhancement-requests)
+    - [Feature/enhancement request example](#featureenhancement-request-example)
+  - [Bug reports / support requests](#bug-reports--support-requests)
+    - [Bug report/support request example](#bug-reportsupport-request-example)
+- [Contributing code](#contributing-code)
+  - [Code quality](#code-quality)
+    - [Comments](#comments)
+      - [Example comment](#example-comment)
+    - [One task per line](#one-task-per-line)
+      - [Chaining example](#chaining-example)
+      - [Complex line example](#complex-line-example)
+    - [Variables](#variables)
+      - [Variable examples](#variable-examples)
+    - [Code standard(s) and Lint](#code-standards-and-lint)
+- [File structure](#file-structure)
+  - [File names](#file-names)
+- [Collection/Schema structure](#collectionschema-structure)
+- [Packages](#packages)
+  - [Forms](#forms)
+  - [Routing](#routing)
+  - [Schema](#schema)
+  - [Templating](#templating)
+  - [CSS](#css)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Get involved
 
 There are many ways to get involved:
@@ -11,9 +47,6 @@ There are many ways to get involved:
 
 * Join the [Apinf Community portal](https://community.apinf.io) - ask and answer questions, share ideas, etc.
 * Hang out in the [Apinf IRC chatroom](https://webchat.freenode.net/?channels=apinf) ([#Apinf](irc://irc.freenode.net/apinf) on Freenode)
-
-# Contributing
-Use the following guidelines when contributing to this project.
 
 # Submitting issues
 There are a couple of common issue types in our tracker:
