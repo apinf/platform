@@ -1,3 +1,31 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installation](#installation)
+  - [From Source Code](#from-source-code)
+  - [With Docker](#with-docker)
+    - [Configure APInf](#configure-apinf)
+  - [With Docker Compose](#with-docker-compose)
+  - [mail](#mail)
+  - [elasticsearch](#elasticsearch)
+  - [githubConfiguration](#githubconfiguration)
+- [Development installation with Docker](#development-installation-with-docker)
+  - [Install Docker](#install-docker)
+  - [Install Docker Compose](#install-docker-compose)
+    - [Ubuntu](#ubuntu)
+  - [Edit API Umbrella configuration](#edit-api-umbrella-configuration)
+  - [Prepare APInf image](#prepare-apinf-image)
+    - [See Docker IP address (step only for Mac)](#see-docker-ip-address-step-only-for-mac)
+    - [Set hosts](#set-hosts)
+  - [Create API Umbrella credentials](#create-api-umbrella-credentials)
+  - [Debugging containers with docker exec](#debugging-containers-with-docker-exec)
+  - [Building Docker Images](#building-docker-images)
+    - [Building Images](#building-images)
+    - [Pushing to Docker Hub](#pushing-to-docker-hub)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Installation
 
 ## From Source Code
