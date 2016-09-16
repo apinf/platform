@@ -40,9 +40,15 @@ AutoForm.hooks({
           });
       },
       update () {
-        // TODO: update backend on API Umbrella, and publish changes
-        console.log('update');
-        console.log('current document', this.currentDoc);
+        // Keep the context to use inside the callback function
+        const context = this;
+
+        // Get current API document for modification
+        const api = context.currentDoc;
+
+        // Get ID of API Umbrella backend (not the Apinf document ID)
+        const umbrellaBackendId = api.apiUmbrella.id;
+
       },
     },
     onSuccess () {
