@@ -197,12 +197,12 @@ Meteor.methods({
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
     // Construct an API Backend object for API Umbrella with one 'api' key
-    const constructedBackend = {
+    const backend = {
       api: apiBackend,
     };
 
-    // Response object to be send back to client layer.
-    const apiUmbrellaWebResponse = {
+    // Default response object to be send back to client layer
+    const response = {
       result: {},
       http_status: 200,
       errors: {},
@@ -210,13 +210,14 @@ Meteor.methods({
 
     try {
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
-    } catch (apiUmbrellaError) {
+      response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
+    } catch (error) {
       // Set the errors object
-      apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
-      apiUmbrellaWebResponse.http_status = 422;
+      response.errors = { 'default': [error.message] };
+      response.http_status = 422;
     }
-    return apiUmbrellaWebResponse;
+
+    return response;
   },
   publishApiBackendOnApiUmbrella (apiBackendId) {
     // Create ApiUmbrellaWeb instance
