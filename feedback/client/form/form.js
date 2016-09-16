@@ -1,4 +1,4 @@
-// Collection import
+import { Template } from 'meteor/templating';
 import { Feedback } from '../../collection';
 
 Template.feedbackForm.helpers({
