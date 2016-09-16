@@ -36,7 +36,7 @@
           <div class="panel-body">
             {{#if afFieldValueIs name='mail.enabled' value=true}}
               {{> afQuickField name='mail.username'}}
-              {{> afQuickField name='mail.password'}}
+              {{> afQuickField name='mail.password' type="password" }}
               {{> afQuickField name='mail.smtpHost'}}
               {{> afQuickField name='mail.smtpPort'}}
               {{> afQuickField name='mail.toEmail'}}
