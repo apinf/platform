@@ -12,13 +12,15 @@ Template.proxies.onCreated(function () {
 
 Template.proxies.events({
   'click #add-proxy': function (event, instance) {
-    Modal.show('addProxy', { proxy: {}, isEdit: false });
+    Modal.show('addProxy');
   },
 });
 
 Template.proxies.helpers({
   proxies () {
-    // Return all proxies
-    return Proxies.find().fetch();
+    // Get all proxies
+    const proxies = Proxies.find().fetch();
+
+    return proxies;
   },
 });
