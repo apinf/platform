@@ -2,13 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import { ProxyBackends } from '/proxy_backends/collection';
+
 import moment from 'moment';
+import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-
-  instance.apis = new ReactiveVar([]);
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
@@ -23,6 +24,9 @@ Template.dashboard.onCreated(function () {
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
   const userId = Meteor.userId();
+
+  // Subscribe to proxyApis publicaton
+  instance.subscribe('proxyApis');
 
   if (Roles.userIsInRole(userId, ['admin'])) {
     // Subscribe to publication
@@ -51,80 +55,94 @@ Template.dashboard.onCreated(function () {
     });
   };
 
-  instance.autorun(() => {
-    if (instance.subscriptionsReady()) {
-      // Get APIs managed by user
-      const apis = []; // TODO: update apis variable with backend proxies data here
+  instance.getElasticSearchQuery = function () {
+    // Placeholder for prefixes query
+    let prefixesQuery = [];
+    // Get APIs managed by user
+    const proxyBackends = ProxyBackends.find().fetch();
 
-      instance.apis.set(apis);
+    // Get endpoint data from each proxybackend
+    const apis = _.map(proxyBackends, proxyBackend => {
+      // Get apiUmbrella object
+      const api = proxyBackend.apiUmbrella;
+      // Attach _id to API
+      api._id = proxyBackend.apiId;
+      return api;
+    });
 
-      // Construct parameters for elasticsearch
-      const params = {
-        size: 50000,
-        body: {
-          query: {
-            filtered: {
-              filter: {
-                range: {
-                  request_at: { },
-                },
+    // If there are some APIs then setup query
+    if (apis.length > 0) {
+      prefixesQuery = _.map(apis, (api) => {
+        return {
+          wildcard: {
+            request_path: {
+              // Add '*' to partially match the url
+              value: `${api.url_matches[0].frontend_prefix}*`,
+            },
+          },
+        };
+      });
+    }
+
+    // Construct parameters for elasticsearch
+    const params = {
+      size: 50000,
+      body: {
+        query: {
+          filtered: {
+            query: {
+              bool: {
+                should: [
+                  prefixesQuery,
+                ],
+              },
+            },
+            filter: {
+              range: {
+                request_at: { },
               },
             },
           },
-          sort: [
-            { request_at: { order: 'desc' } },
-          ],
-          fields: [
-            'request_at',
-            'response_status',
-            'response_time',
-            'request_ip_country',
-            'request_ip',
-            'request_path',
-            'user_id',
-          ],
         },
-      };
+        sort: [
+          { request_at: { order: 'desc' } },
+        ],
+        fields: [
+          'request_at',
+          'response_status',
+          'response_time',
+          'request_ip_country',
+          'request_ip',
+          'request_path',
+          'user_id',
+        ],
+      },
+    };
 
-      // if (instance.apis.get().length > 0) {
-      //
-      //   // Init varuable to keep elasticsearch sub-query
-      //   let filteredQuery = {
-      //     bool: {
-      //       should: []
-      //     }
-      //   };
-      //
-      //   // Iterate through eacy API managed by user
-      //   _.forEach(instance.apis.get(), (api) => {
-      //
-      //     // Push query object to array
-      //     filteredQuery.bool.should.push({
-      //       wildcard: {
-      //         request_path: {
-      //           // Add '*' to partially match the url
-      //           value: `${api.url_matches[0].frontend_prefix}*`
-      //         }
-      //       }
-      //     });
-      //   });
-      // }
+    // ******* Filtering by date *******
+    const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
+    const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
 
-      // ******* Filtering by date *******
-      const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
-      const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
+    // Check if timeframe values are set
+    if (analyticsTimeframeStart && analyticsTimeframeEnd) {
+      // Update elasticsearch query with filter data (in Unix format)
+      params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
+      params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+    }
+    // ******* End filtering by date *******
 
-      // Check if timeframe values are set
-      if (analyticsTimeframeStart && analyticsTimeframeEnd) {
-        // Update elasticsearch query with filter data (in Unix format)
-        params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
-        params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
-      }
-      // ******* End filtering by date *******
+    return params;
+  };
+
+  instance.autorun(() => {
+    if (instance.subscriptionsReady()) {
+      // Get elasticsearch query
+      const params = instance.getElasticSearchQuery();
 
       // Set loader
       instance.chartDataLoadingState.set(true);
 
+      // Make a call
       instance.checkElasticsearch()
         .then((elasticsearchIsDefined) => {
           if (elasticsearchIsDefined) {
