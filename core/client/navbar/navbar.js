@@ -1,3 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+
+import { Proxies } from '/proxies/collection';
 import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 
@@ -5,6 +9,7 @@ Template.navbar.onCreated(function () {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
+  instance.subscribe('publicProxyDetails');
 });
 
 
@@ -54,6 +59,9 @@ Template.navbar.helpers({
     if (branding && branding.projectLogoFileId) {
       return true;
     }
+  },
+  proxyIsDefined () {
+    return (Proxies.findOne()) ? true : false;
   },
 });
 

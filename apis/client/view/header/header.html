@@ -1,4 +1,4 @@
-<template name="viewApiBackendPageHeader">
+<template name="viewApiPageHeader">
   <div class="page-head-topblock">
     <div class="container">
       <!-- Header -->
@@ -7,7 +7,7 @@
           {{> viewApiLogo }}
           <h1 class="api-name">
             {{ api.name }}
-            {{> viewApiBackendStatus api=api width="0.4" }}
+            {{> viewApiStatus api=api width="0.4" }}
           </h1>
           <ul class="list-inline view-api-meta-details">
             <li>
@@ -45,45 +45,46 @@
           <li class="active">
             <a href="#api-details" data-toggle="tab">
               <i class="fa fa-info-circle"></i>
-              {{_ "viewApiBackendNavigationMenu_details" }}
+              {{_ "viewApiNavigationMenu_details" }}
             </a>
           </li>
           <li>
             <a href="#api-documentation" data-toggle="tab">
               <i class="fa fa-file-text"></i>
-              {{_ "viewApiBackendNavigationMenu_documentation" }}
+              {{_ "viewApiNavigationMenu_documentation" }}
             </a>
           </li>
           <li>
             <a href="#api-metadata" data-toggle="tab">
               <i class="fa fa-book"></i>
-              {{_ "viewApiBackendNavigationMenu_metadata" }}
+              {{_ "viewApiNavigationMenu_metadata" }}
             </a>
           </li>
           <li>
             <a href="#api-feedback" data-toggle="tab">
               <i class="fa fa-comments-o"></i>
-              {{_ "viewApiBackendNavigationMenu_feedback" }}
+              {{_ "viewApiNavigationMenu_feedback" }}
             </a>
           </li>
           <li>
             <a href="#api-backlog" data-toggle="tab">
               <i class="fa fa-check-square-o"></i>
-              {{_ "viewApiBackendNavigationMenu_backlog" }}
+              {{_ "viewApiNavigationMenu_backlog" }}
             </a>
           </li>
+          {{ # if currentUser }}
+          {{ # if api.currentUserCanEdit }}
           <li>
-            <a href="#api-export" data-toggle="tab">
+            <a href="#api-backend-export" data-toggle="tab">
               <i class="fa fa-cloud-download"></i>
-              {{_ "viewApiBackendNavigationMenu_export" }}
+              {{_ "viewApiNavigationMenu_export" }}
             </a>
           </li>
 
-          {{# if api.currentUserCanEdit }}
             <li>
               <a href="#api-settings" data-toggle="tab">
                 <i class="fa fa-cog"></i>
-                {{_ "viewApiBackendNavigationMenu_settings" }}
+                {{_ "viewApiNavigationMenu_settings" }}
               </a>
             </li>
 
@@ -91,13 +92,12 @@
             <li>
               <a href="#api-proxy" data-toggle="tab">
                 <i class="fa fa-sitemap"></i>
-                {{_ "viewApiBackendNavigationMenu_proxy" }}
+                {{_ "viewApiNavigationMenu_proxy" }}
               </a>
             </li>
             {{/ if }}
-
           {{ / if }}
-
+          {{ / if }}
         </ul>
       </div>
     </div>

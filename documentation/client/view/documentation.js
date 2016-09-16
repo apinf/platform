@@ -1,7 +1,7 @@
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Settings } from '/settings/collection';
 
-Template.documentation.onCreated(function () {
+Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
   // Run subscription in autorun
@@ -19,11 +19,11 @@ Template.documentation.onCreated(function () {
   instance.subscribe('singleSetting', 'sdkCodeGenerator');
 });
 
-Template.documentation.onRendered(function () {
+Template.apiDocumentation.onRendered(function () {
   $('[data-toggle="popover"]').popover();
 });
 
-Template.documentation.helpers({
+Template.apiDocumentation.helpers({
   uploadedDocumentationLink () {
     const documentationFileId = this.api.documentationFileId;
 
@@ -77,7 +77,7 @@ Template.documentation.helpers({
 
 });
 
-Template.documentation.events({
+Template.apiDocumentation.events({
   'click #manage-api-documentation': function (event, instance) {
     // Get reference to API backend
     const api = instance.data.api;

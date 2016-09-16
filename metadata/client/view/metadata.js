@@ -1,6 +1,6 @@
 import { ApiMetadata } from '../../collection';
 
-Template.viewApiBackendMetadata.onCreated(function () {
+Template.viewApiMetadata.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -8,7 +8,7 @@ Template.viewApiBackendMetadata.onCreated(function () {
   instance.subscribe('apiMetadata', instance.data.api._id);
 });
 
-Template.viewApiBackendMetadata.helpers({
+Template.viewApiMetadata.helpers({
   metadata () {
     // Get reference to template instance
     const instance = Template.instance();

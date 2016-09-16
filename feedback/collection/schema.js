@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Feedback } from './';
 
 Feedback.schema = new SimpleSchema({
@@ -37,9 +38,9 @@ Feedback.schema = new SimpleSchema({
     autoValue () {
       if (this.isInsert) {
         return Meteor.userId();
-      } else {
-        this.unset();
       }
+
+      this.unset();
     },
     denyUpdate: true,
   },
@@ -53,9 +54,9 @@ Feedback.schema = new SimpleSchema({
         return new Date();
       } else if (this.isUpsert) {
         return { $setOnInsert: new Date() };
-      } else {
-        this.unset();
       }
+
+      this.unset();
     },
   },
 });
