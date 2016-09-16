@@ -192,13 +192,13 @@ Meteor.methods({
       throw new Meteor.Error(error);
     }
   },
-  createApiBackendOnApiUmbrella (apiBackendForm) {
+  createApiBackendOnApiUmbrella (apiBackend) {
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
     // Construct an API Backend object for API Umbrella with one 'api' key
     const constructedBackend = {
-      api: apiBackendForm,
+      api: apiBackend,
     };
 
     // Response object to be send back to client layer.
