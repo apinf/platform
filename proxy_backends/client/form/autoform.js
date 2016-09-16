@@ -22,6 +22,9 @@ AutoForm.hooks({
                 // Attach the API Umbrella backend ID to backend document
                 api.apiUmbrella.id = umbrellaBackendId;
 
+                // Publish the API Backend on API Umbrella
+                Meteor.call('publishApiBackendOnApiUmbrella', umbrellaBackendId);
+
                 // Insert the API document, asynchronous
                 this.result(api);
               }
