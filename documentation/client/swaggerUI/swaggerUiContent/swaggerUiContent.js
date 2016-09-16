@@ -1,29 +1,30 @@
-import SwaggerUi from 'swagger-ui-browserify';
 import { Apis } from '/apis/collection';
-import { ProxyBackends } from '/proxy_backends/collection'
-import { Proxies } from '/proxies/collection'
-
+import { ApiKeys } from '/api_keys/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
+import { Proxies } from '/proxies/collection';
 
 import _ from 'lodash';
+import SwaggerUi from 'swagger-ui-browserify';
+import SwaggerClient from 'swagger-client';
 
 Template.swaggerUiContent.onCreated(function () {
   const instance = this;
-  
+
   // Get URL of api documentation
   const documentationURL = this.data.apiDoc;
-  
+
   // Get proxy
   const proxy = Proxies.findOne();
-  
+
   // Get proxy backend
-  const proxyBackend = ProxyBackends.findOne({"apiId": instance.data.api._id});
-  
+  const proxyBackend = ProxyBackends.findOne({ 'apiId': instance.data.api._id });
+
   // Get proxy host if it exists
   let proxyHost = proxy ? proxy.apiUmbrella.url : '';
-  
+
   // Get values of proxy apiUmbrella
   const apiUmbrellaSettings = proxyBackend ? proxyBackend.apiUmbrella.url_matches : false;
-  
+
   // Get proxy base path if it exists
   let proxyBasePath = apiUmbrellaSettings ? apiUmbrellaSettings[0].frontend_prefix : '';
 
@@ -46,6 +47,15 @@ Template.swaggerUiContent.onCreated(function () {
     proxyBasePath = proxyBasePath.slice(0, -1);
   }
 
+  // Get api key collection
+  const apiKey = ApiKeys.findOne({ proxyId: proxy._id, userId: Meteor.userId() });
+
+  // Check if api-key exists
+  const apiKeyValue = apiKey ? apiKey.apiUmbrella.apiKey : 'instagram';
+
+  // Create object to save information about property of api-key authorization
+  const infoAuth = {};
+
   // Create Swagger UI object
   const swagger = new SwaggerUi({
     url: documentationURL,
@@ -55,7 +65,7 @@ Template.swaggerUiContent.onCreated(function () {
     apisSorter: 'alpha',
     operationsSorter: 'alpha',
     docExpansion: 'none',
-    onComplete: function () {
+    onComplete () {
       if (proxyHost) {
         // Replace Swagger host to proxy host
         swagger.api.setHost(proxyHost);
@@ -65,21 +75,38 @@ Template.swaggerUiContent.onCreated(function () {
         // Replace Swagger base path to proxy base path
         swagger.api.setBasePath(proxyBasePath);
       }
-      console.log('swagger host',swagger.api.host , 'swagger basePath', swagger.api.basePath)
-    }
+
+      // If api-key exists, add it to authorization form
+      if (apiKeyValue) {
+        // Search information information about property of api-key authorization
+        _.forEach(swagger.api.auths, (authorization) => {
+          if (authorization.type === 'apiKey') {
+            infoAuth.title = authorization.name;
+            infoAuth.keyName = authorization.value.name;
+            infoAuth.keyIn = authorization.value.in;
+          }
+        });
+
+        // Create Authorization Object for swagger client
+        const authz = new SwaggerClient.ApiKeyAuthorization(infoAuth.keyName, apiKeyValue, infoAuth.keyIn);
+
+        // Input user api-key in field
+        swagger.api.clientAuthorizations.add(infoAuth.title, authz);
+      }
+    },
   });
-  
+
   // Subscribe to api collection
   instance.autorun(() => {
     // Get relevant api collection
     instance.subscribe('apiBackend', instance.data.api._id);
-    
+
     // Get api
     const api = Apis.findOne(instance.data.api._id);
-    
+
     // Set selected methods in Swagger
     swagger.setOption('supportedSubmitMethods', api.submit_methods);
-    
+
     // Load Swagger UI
     swagger.load();
   });
