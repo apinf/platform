@@ -1,6 +1,5 @@
 import { Settings } from '../collection';
-import { githubSettingsValid } from '/core/helper_functions/validate_settings';
-import { mailSettingsValid } from '/core/helper_functions/validate_settings';
+import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
 
 Meteor.methods({
   'updateGithubConfiguration': function () {
