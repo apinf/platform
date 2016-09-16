@@ -20,6 +20,18 @@ Template.proxyBackend.helpers({
 
     return proxy;
   },
+  apiHost () {
+    // Get one proxy from the Proxies collection
+    // This assumes we have only one proxy
+    // TODO: refactor this method for multi-proxy support
+    const api = this.api;
+
+    // Construct URL object for proxy URL
+    const apiUrl = URI(api.url);
+
+    // Return the Proxy URL protocol
+    return apiUrl.host();
+  },
   apiUrlProtocol () {
     // Get one proxy from the Proxies collection
     // This assumes we have only one proxy
