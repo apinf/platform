@@ -1,5 +1,6 @@
 {
-  "account_deleteWarning": "There's no coming back from this one",
+  "account_delete_button_text": "Delete account",
+  "account_delete_warning": "There's no coming back from this one",
   "account_delete_title": "Delete account",
   "account_details": "Account Details",
   "addApiBacklogItem_addBacklogItem_button": "Add backlog item",
