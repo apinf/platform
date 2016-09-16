@@ -1,16 +1,16 @@
-<template name="apiBackendSelectPicker">
+<template name="apiSelectPicker">
   <select
     id="api-frontend-prefix"
-    title="{{ _ 'apiBackendSelectPicker_selectAPI' }}"
+    title="{{ _ 'apiSelectPicker_selectAPI' }}"
     data-width="fit"
     multiple
     data-selected-text-format="count > 1"
     data-live-search="true"
     data-size="10"
     data-actions-box="true" >
-    {{ # if myApis }}
+    {{ # if apisManagedByUser }}
       <optgroup label="My APIs" >
-        {{ # each api in myApis }}
+        {{ # each api in apisManagedByUser }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{ > viewApiStatus apiBackend=api width="0.5" }}
             &nbsp;

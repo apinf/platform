@@ -12,6 +12,10 @@ const Settings = new SimpleSchema({
 });
 
 const ApiUmbrellaSchema = new SimpleSchema({
+  id: {
+    type: String,
+    optional: true,
+  },
   'name': {
     type: String,
     optional: true,

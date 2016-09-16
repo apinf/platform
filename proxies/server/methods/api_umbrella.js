@@ -192,17 +192,17 @@ Meteor.methods({
       throw new Meteor.Error(error);
     }
   },
-  createApiBackendOnApiUmbrella (apiBackendForm) {
+  createApiBackendOnApiUmbrella (apiBackend) {
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
     // Construct an API Backend object for API Umbrella with one 'api' key
-    const constructedBackend = {
-      api: apiBackendForm,
+    const backend = {
+      api: apiBackend,
     };
 
-    // Response object to be send back to client layer.
-    const apiUmbrellaWebResponse = {
+    // Default response object to be send back to client layer
+    const response = {
       result: {},
       http_status: 200,
       errors: {},
@@ -210,20 +210,21 @@ Meteor.methods({
 
     try {
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.createApiBackend(constructedBackend);
-    } catch (apiUmbrellaError) {
+      response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
+    } catch (error) {
       // Set the errors object
-      apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
-      apiUmbrellaWebResponse.http_status = 422;
+      response.errors = { 'default': [error.message] };
+      response.http_status = 422;
     }
-    return apiUmbrellaWebResponse;
+
+    return response;
   },
-  publishApiBackendOnApiUmbrella (apiBackendId) {
+  publishApiBackendOnApiUmbrella (backendId) {
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
     // Response object to be send back to client layer.
-    const apiUmbrellaWebResponse = {
+    const response = {
       result: {},
       http_status: 201,
       errors: {},
@@ -231,13 +232,13 @@ Meteor.methods({
 
     try {
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.config.publishSingleApiBackend(apiBackendId);
-    } catch (apiUmbrellaError) {
+      response.result = umbrella.adminApi.v1.config.publishSingleApiBackend(backendId);
+    } catch (error) {
       // Set the errors object
-      apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
-      apiUmbrellaWebResponse.http_status = 422;
+      response.errors = { default: [error.message] };
+      response.http_status = 422;
     }
-    return apiUmbrellaWebResponse;
+    return response;
   },
   updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
     // Create ApiUmbrellaWeb instance
