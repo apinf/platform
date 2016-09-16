@@ -1,30 +1,28 @@
+// User accounts guide
+// https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 AccountsTemplates.configure({
+  /* Behavior */
   confirmPassword: false,
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
-  // TODO: Create a helper to toggle this from settings page
-  sendVerificationEmail: false,
   lowercaseUsername: false,
+  // TODO: Create a helper to toggle this from settings page
+  sendVerificationEmail: true,
+  /* Appearance */
   showAddRemoveServices: true,
   showForgotPasswordLink: true,
   showLabels: true,
   showPlaceholders: true,
   showResendVerificationEmailLink: false,
+  /* Client-side validation */
   continuousValidation: false,
   negativeFeedback: false,
   negativeValidation: true,
   positiveValidation: false,
   positiveFeedback: true,
-  showValidating: true,
-  onLogoutHook () {
-    // return console.log('logout');
-  },
-  onSubmitHook () {
-    // return console.log('submitting form');
-  },
+  showValidating: true
 });
-
 
 // rearranging the fields on Sign-Up, so that username comes first.
 const passwordField = AccountsTemplates.removeField('password');
