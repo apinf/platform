@@ -83,4 +83,19 @@ Template.proxyBackend.helpers({
 
     return formType;
   },
+  proxyHost () {
+    // TODO: determine how to provide proxyId for the ProxyBackend form
+    // e.g. will we have more than one proxy?
+    // if no, we need also to limit the number of proxies that can be added
+
+    // Get a single Proxy
+    const proxy = Proxies.findOne();
+
+    if (proxy && proxy.apiUmbrella) {
+      // Get frontend host from template instance
+      const frontend = URI(proxy.apiUmbrella.url);
+
+      return frontend.host();
+    }
+  },
 });
