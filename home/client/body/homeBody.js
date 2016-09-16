@@ -30,10 +30,6 @@ Template.homeBody.helpers({
     const settings = Settings.findOne();
 
     // Check mail is enabled & contact email has been given
-    if(settings.mail.enabled && contactEmailValid(settings)) {
-      return true;
-    } else {
-      return false;
-    }
+    return contactEmailValid(settings);
   },
 });
