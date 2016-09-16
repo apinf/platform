@@ -1,9 +1,11 @@
+import { Template } from 'meteor/templating';
+import { Router } from 'meteor/iron:router';
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
-Template.viewApiBackend.onCreated(function () {
+Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -23,7 +25,7 @@ Template.viewApiBackend.onCreated(function () {
   instance.subscribe('apiProxySettings', instance.apiId);
 });
 
-Template.viewApiBackend.helpers({
+Template.viewApi.helpers({
   api () {
     // Get reference to template instance
     const instance = Template.instance();
@@ -57,7 +59,10 @@ Template.viewApiBackend.helpers({
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
-    const backlogItems = ApiBacklogItems.find({ apiBackendId: apiId }, { sort: { priority: -1, createdAt: -1 } }).fetch();
+    const backlogItems = ApiBacklogItems.find(
+      { apiBackendId: apiId },
+      { sort: { priority: -1, createdAt: -1 } }
+    ).fetch();
 
     return backlogItems;
   },

@@ -14,7 +14,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
   instance.dataReady = new ReactiveVar(false);
 
   // Get documentation file id
-  const documentationFileId = instance.data.apiBackend.documentationFileId;
+  const documentationFileId = instance.data.api.documentationFileId;
 
   // Save documentation file URL
   instance.documentationFileURL = Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;

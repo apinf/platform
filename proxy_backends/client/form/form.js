@@ -6,21 +6,7 @@ import { Proxies } from '/proxies/collection';
 import 'urijs';
 
 Template.proxyBackend.helpers({
-  proxyBackendsCollection () {
-    // Return a reference to ProxyBackends collection, for AutoForm
-    return ProxyBackends;
-  },
-  proxy () {
-    // TODO: determine how to provide proxyId for the ProxyBackend form
-    // e.g. will we have more than one proxy?
-    // if no, we need also to limit the number of proxies that can be added
-
-    // Get a single Proxy
-    const proxy = Proxies.findOne();
-
-    return proxy;
-  },
-  apiUrlProtocol () {
+  apiHost () {
     // Get one proxy from the Proxies collection
     // This assumes we have only one proxy
     // TODO: refactor this method for multi-proxy support
@@ -30,7 +16,7 @@ Template.proxyBackend.helpers({
     const apiUrl = URI(api.url);
 
     // Return the Proxy URL protocol
-    return apiUrl.protocol();
+    return apiUrl.host();
   },
   apiPortHelper () {
     // Placeholder for port
@@ -65,6 +51,18 @@ Template.proxyBackend.helpers({
 
     return apiProxySettings;
   },
+  apiUrlProtocol () {
+    // Get one proxy from the Proxies collection
+    // This assumes we have only one proxy
+    // TODO: refactor this method for multi-proxy support
+    const api = this.api;
+
+    // Construct URL object for proxy URL
+    const apiUrl = URI(api.url);
+
+    // Return the Proxy URL protocol
+    return apiUrl.protocol();
+  },
   formType () {
     // Placeholder for form type
     let formType;
@@ -82,5 +80,34 @@ Template.proxyBackend.helpers({
     }
 
     return formType;
+  },
+  proxy () {
+    // TODO: determine how to provide proxyId for the ProxyBackend form
+    // e.g. will we have more than one proxy?
+    // if no, we need also to limit the number of proxies that can be added
+
+    // Get a single Proxy
+    const proxy = Proxies.findOne();
+
+    return proxy;
+  },
+  proxyBackendsCollection () {
+    // Return a reference to ProxyBackends collection, for AutoForm
+    return ProxyBackends;
+  },
+  proxyHost () {
+    // TODO: determine how to provide proxyId for the ProxyBackend form
+    // e.g. will we have more than one proxy?
+    // if no, we need also to limit the number of proxies that can be added
+
+    // Get a single Proxy
+    const proxy = Proxies.findOne();
+
+    if (proxy && proxy.apiUmbrella) {
+      // Get frontend host from template instance
+      const frontend = URI(proxy.apiUmbrella.url);
+
+      return frontend.host();
+    }
   },
 });

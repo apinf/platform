@@ -6,7 +6,7 @@
         {{#if api.currentUserCanView }}
         <tr>
           <td class="col-sm-1">
-            {{> viewApiBackendStatus api=api width="0.6" }}
+            {{> viewApiStatus api=api width="0.6" }}
             <div class="api-catalogue-table-logo center-block">
               {{> viewApiLogo api=api }}
             </div>
@@ -18,12 +18,12 @@
               </a>
             </h4>
             <i>
-              {{_ "catalogueTable-addedBy"}}
+              {{_ "catalogueTable_addedBy"}}
               {{ api.getApiManagersByName }}
             </i>
             <br>
             <i>
-              {{_ "catalogueTable-added"}}
+              {{_ "catalogueTable_added"}}
               {{ api.relativeCreatedAt }}
             </i>
           </td>

@@ -1,7 +1,7 @@
 import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 
-Template.uploadProjectLogo.onCreated(function() {
+Template.uploadProjectLogo.onCreated(function () {
   const instance = this;
 
   // Subscribe to Project logo
@@ -10,14 +10,12 @@ Template.uploadProjectLogo.onCreated(function() {
 });
 
 Template.uploadProjectLogo.events({
-  'click .delete-projectLogo': function(event, instance) {
-
+  'click .delete-projectLogo': function (event, instance) {
     // Show confirmation dialog to user
     const confirmation = confirm(TAPi18n.__('uploadProjectLogo_confirm_delete'));
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-
       // Get branding
       const branding = Branding.findOne();
 
@@ -31,16 +29,19 @@ Template.uploadProjectLogo.events({
       ProjectLogo.remove(objectId);
 
       // Remove prokect logo file id field
-      Branding.update(branding._id, {$unset: { projectLogoFileId: "" }});
+      Branding.update(branding._id, { $unset: { projectLogoFileId: '' } });
 
-      sAlert.success(TAPi18n.__('uploadProjectLogo_successfully_deleted'));
+      // Get deletion success message translation
+      const message = TAPi18n.__('uploadProjectLogo_successfully_deleted');
+
+      // Alert user of successful delete
+      sAlert.success(message);
     }
-  }
+  },
 });
 
 Template.uploadProjectLogo.helpers({
-  uploadedLogoLink: function() {
-
+  uploadedLogoLink () {
     const currentProjectLogoFileId = this.branding.projectLogoFileId;
 
     // Convert to Mongo ObjectID
@@ -52,11 +53,10 @@ Template.uploadProjectLogo.helpers({
     // Check if project logo file is available
     if (currentProjectLogoFile) {
       // Get project logo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL + "/id/" + currentProjectLogoFileId;
+      return Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL + '/id/' + currentProjectLogoFileId;
     }
   },
-  uploadedProjectLogoFile: function() {
-
+  uploadedProjectLogoFile () {
     const currentProjectLogoFileId = this.branding.projectLogoFileId;
 
     // Convert to Mongo ObjectID
@@ -69,5 +69,5 @@ Template.uploadProjectLogo.helpers({
     if (currentProjectLogoFile) {
       return currentProjectLogoFile;
     }
-  }
+  },
 });

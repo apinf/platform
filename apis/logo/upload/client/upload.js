@@ -28,7 +28,10 @@ Template.uploadApiLogo.events({
       // Remove API logo file id field
       Apis.update(instance.data.api._id, { $unset: { apiLogoFileId: '' } });
 
-      sAlert.success(TAPi18n.__('uploadApiLogo_successfully_deleted'));
+      // Get deletion success message
+      const message = TAPi18n.__('uploadApiLogo_successfully_deleted');
+
+      sAlert.success(message);
     }
   },
 });

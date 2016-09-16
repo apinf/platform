@@ -34,7 +34,7 @@ var redirectToDashboard = function () {
 };
 
 // Router.onBeforeAction(redirectToSignIn, {
-//   except: ['home', 'atSignUp', 'forgotPwd', 'atSignOut', 'catalogue', 'viewApiBackend', 'search']
+//   except: ['home', 'atSignUp', 'forgotPwd', 'atSignOut', 'catalogue', 'viewApi', 'search']
 // });
 
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
