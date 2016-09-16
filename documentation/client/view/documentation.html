@@ -1,4 +1,4 @@
-<template name="documentation">
+<template name="apiDocumentation">
   <div class="panel panel-default">
     <div class="panel-heading">
       {{#if api.currentUserCanEdit }}
@@ -6,7 +6,7 @@
             id="manage-api-documentation"
             class="btn btn-xs btn-info pull-right">
             <i class="fa fa-pencil"></i>&nbsp;
-              {{_ "documentation_manageDocumentation_buttonText" }}
+              {{_ "apiDocumentation_manageDocumentation_buttonText" }}
           </button>
         {{/if}}
 
@@ -18,19 +18,19 @@
               class="btn btn-info btn-xs pull-right"
               data-toggle="tooltip"
               title="{{_ 'documentation_tooltipSDKGeneratorButton'}}">
-                {{_ "documentation_sdkGenerateButton" }}
+                {{_ "apiDocumentation_sdkGenerateButton" }}
             </button>
           {{/ if }} <!-- /if documentation exists -->
         {{/if}}<!-- /if codegen server exists -->
       {{/if}}<!-- /if template subscriptions ready -->
       <h2 class="panel-title clearfix">
-        {{_ "documentation_Title" }}
+        {{_ "apiDocumentation_Title" }}
       </h2>
     </div>
     <div class="panel-body">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h2 class="panel-title">{{_ "documentation_Link_Title" }}</h2>
+          <h2 class="panel-title">{{_ "apiDocumentation_Link_Title" }}</h2>
         </div>
         <div class="panel-body">
           {{#if documentationLink }}
@@ -40,9 +40,9 @@
             </div>
           {{else}}
           <i>
-            {{_ "documentation_No_Link_Message" }}
+            {{_ "apiDocumentation_No_Link_Message" }}
             {{#if api.currentUserCanEdit }}
-            {{_ "documentation_No_Link_Manager_Message" }}
+            {{_ "apiDocumentation_No_Link_Manager_Message" }}
             {{/if}}
           </i>
           {{/if}}
@@ -61,7 +61,7 @@
              data-content="{{_ 'documentation_APICall_Warning_Message' }}">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
           </a>
-          <h2 class="panel-title">{{_ "documentation_Viewer_Title" }}</h2>
+          <h2 class="panel-title">{{_ "apiDocumentation_Viewer_Title" }}</h2>
         </div>
         <div class="panel-body">
           {{#if Template.subscriptionsReady }}
@@ -69,9 +69,9 @@
               {{> swaggerUi apiDoc=uploadedDocumentationLink api=api}}
             {{ else }}
             <i>
-              {{_ "documentation_No_Swagger_Message" }}
+              {{_ "apiDocumentation_No_Swagger_Message" }}
               {{#if api.currentUserCanEdit }}
-              {{_ "documentation_No_Swagger_Manager_Message" }}
+              {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
               {{/if}}
             </i>
             {{/if}}
