@@ -11,8 +11,20 @@ AutoForm.hooks({
             } else {
               console.log('response', response);
 
-              // Insert the API document, asynchronous
-              this.result(api);
+              if (
+                response.result &&
+                response.result.data &&
+                response.result.data.api
+              ) {
+                // Get the API Umbrella ID for newly created backend
+                const umbrellaBackendId = response.result.data.api.id;
+
+                // Attach the API Umbrella backend ID to backend document
+                api.apiUmbrella.id = umbrellaBackendId;
+
+                // Insert the API document, asynchronous
+                this.result(api);
+              }
             }
           });
       },
