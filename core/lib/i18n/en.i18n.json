@@ -129,6 +129,8 @@
   "dashboardDataTable_timeStamp": "Date",
   "dashboardDataTable_title": "Analytics data",
   "dashboardDataTable_pageCount": "Page",
+  "deleteAccount_closeButton": "Close",
+  "deleteAccount_confirmDelete": "Delete",
   "deleteApiBackendConfirmation_CancelButton": "Cancel",
   "deleteApiBackendConfirmation_confirmDeleteInformation": "This action cannot be undone! The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "deleteApiBackendConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
