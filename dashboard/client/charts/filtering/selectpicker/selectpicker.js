@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-Template.apiBackendSelectPicker.onRendered(function () {
+Template.apiSelectPicker.onRendered(function () {
 
   const instance = this;
 

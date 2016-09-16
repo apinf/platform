@@ -1,7 +1,7 @@
 <template name="dashboardChartsFiltering">
   <form class="form-inline pull-left" id="api-frontend-prefix-form">
     {{ # if Template.subscriptionsReady }}
-      {{ > apiBackendSelectPicker apisManagedByUser=apisManagedByUser otherApis=otherApis }}
+      {{ > apiSelectPicker apisManagedByUser=apisManagedByUser otherApis=otherApis }}
     {{ / if }}
   </form>
   <form class="form-inline pull-right" id="tick-buttons" >
