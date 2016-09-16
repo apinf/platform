@@ -42,9 +42,11 @@ Meteor.publish('proxyApis', function () {
   // Placeholder for proxy backends
   let proxyBackends = [];
 
+  // Get current user Id
   const userId = this.userId;
 
   if (userId) {
+    // Check if current user is admin
     const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
     // If current user is admin
