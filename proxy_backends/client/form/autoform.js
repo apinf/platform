@@ -7,10 +7,10 @@ AutoForm.hooks({
           api.apiUmbrella,
           (error, response) => {
             if (error) {
-              console.log('error', error);
+              // Throw a Meteor error
+              Meteor.error(500, error);
             } else {
-              console.log('response', response);
-
+              // If success, attach API Umbrella backend ID to current document
               if (
                 response.result &&
                 response.result.data &&
