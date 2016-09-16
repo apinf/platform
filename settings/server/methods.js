@@ -1,5 +1,5 @@
 import { Settings } from '../collection';
-import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
+import { githubSettingsValid, mailSettingsValid, loginAttemptVerifier } from '/core/helper_functions/validate_settings';
 
 Meteor.methods({
   'updateGithubConfiguration': function () {
@@ -46,6 +46,9 @@ Meteor.methods({
           encodeURIComponent(password) + '@' +
           encodeURIComponent(smtpHost) + ':' +
           encodeURIComponent(smtpPort);
+
+        // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
+        Accounts.validateLoginAttempt(loginAttemptVerifier);
       }
     }
     // otherwise show an error
