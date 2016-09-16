@@ -7,10 +7,19 @@ Router.route('/users', {
 Router.route('/verify-email/:token',{
   name: 'verify-email',
   action: function() {
-    Accounts.verifyEmail( this.params.token, () => {
-      Router.go( '/' );
-      sAlert.success( 'Email verified! Thanks!');
+    // Get token from Router params
+    const token = Router.current().params.token;
+    Accounts.verifyEmail( token, ( error ) => {
+      if( error ) {
+        // Eg. token invalid or already used
+        sAlert.error( error.reason );
+      } else {
+        // Email successfully verified
+        sAlert.success('Email verified! Thanks!');
+      }
     });
+    // Go to front page
+    Router.go( '/' );
   }
 });
 
