@@ -1,3 +1,6 @@
+import { Settings } from '/settings/collection';
+import { mailSettingsValid } from '/core/helper_functions/validate_settings';
+
 Meteor.startup(function() {
   // Login attempt verifier to require verified email before login
   const loginAttemptVerifier = function(parameters) {
@@ -17,5 +20,12 @@ Meteor.startup(function() {
       return false;
     }
   }
-  Accounts.validateLoginAttempt(loginAttemptVerifier);
+  
+  // Get settings
+  const settings = Settings.findOne();
+
+  // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
+  if( mailSettingsValid(settings) ) {
+    Accounts.validateLoginAttempt(loginAttemptVerifier);
+  }
 });
