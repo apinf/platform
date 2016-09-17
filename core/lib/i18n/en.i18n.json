@@ -274,6 +274,7 @@
   "proxyBackendForm_disableApiKey_helpText": "Optionally you can allow users to use your API without API key.",
   "proxyBackendForm_proxyBasePath_helpText": "Base path added to all Proxy requests. Example:",
   "proxyBackendForm_successMessage": "Settings saved.",
+  "proxyBackendForm_saveButton": "Save proxy settings",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
   "publishApiBackendOnApiUmbrella_successMessage": "API Backend successfully published.",
