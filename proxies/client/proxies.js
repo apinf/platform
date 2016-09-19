@@ -27,5 +27,8 @@ Template.proxies.helpers({
   proxies () {
     const instance = Template.instance();
     return instance.proxies.get();
-  }
+  },
+  biggerThan (a, b) {
+    return (a > b);
+  },
 });
