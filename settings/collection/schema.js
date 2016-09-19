@@ -46,7 +46,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !mailUsername) {
         return 'required';
       }
-    },
+    }
   },
   'mail.password': {
     type: String,
@@ -60,7 +60,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !mailPassword) {
         return 'required';
       }
-    },
+    }
   },
   'mail.smtpHost': {
     type: String,
@@ -75,7 +75,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !smtpHost) {
         return 'required';
       }
-    },
+    }
   },
   'mail.smtpPort': {
     type: Number,
@@ -89,12 +89,27 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !smtpPort) {
         return 'required';
       }
-    },
+    }
+  },
+  'mail.fromEmail': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email,
+    label: TAPi18n.__('settings_mail_fromEmail_label'),
+    optional: true,
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const fromEmail = this.value;
+
+      // Require SMTP Port if mail enabled is checked
+      if (mailEnabled === true && !fromEmail) {
+        return 'required';
+      }
+    }
   },
   'mail.toEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: 'Contact Form E-mail Address',
+    label: TAPi18n.__('settings_mail_toEmail_label'),
     optional: true
   },
   githubConfiguration: {
