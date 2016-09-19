@@ -6,7 +6,6 @@ const Settings = new SimpleSchema({
   'disable_api_key': {
     type: Boolean,
     optional: true,
-    label: 'Disable API Key',
     defaultValue: false
   }
 });

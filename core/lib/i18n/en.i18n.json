@@ -449,6 +449,15 @@
           "label": "Host"
         }
       }
+    },
+    "ProxyBackends": {
+      "apiUmbrella": {
+        "settings": {
+          "disable_api_key": {
+            "label": "Disable API key"
+          }
+        }
+      }
     }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the generator. Please upload the correct file",
