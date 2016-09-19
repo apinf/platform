@@ -8,6 +8,7 @@ Accounts.emailTemplates.verifyEmail = {
   },
   text( user, url ) {
     let emailAddress   = user.emails[0].address,
+        // Take out hash from url to use custom route behaviour
         urlWithoutHash = url.replace( '#/', '' ),
         emailBody      = `To verify your email address (${emailAddress}) visit \
         the following link:\n\n${urlWithoutHash}\n\n If you did not request \
