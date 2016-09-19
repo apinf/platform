@@ -7,7 +7,6 @@ AccountsTemplates.configure({
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
   lowercaseUsername: false,
-  // TODO: Create a helper to toggle this from settings page
   sendVerificationEmail: true,
   /* Appearance */
   showAddRemoveServices: true,
