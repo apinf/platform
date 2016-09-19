@@ -147,6 +147,7 @@
   "editApiMetadata_submitButtonText": "Save metadata",
   "editBacklogItem_modalTitle": "Edit backlog item",
   "editBacklogItem_submit_buttonText": "Save",
+  "emailTemplates_verifyEmail": "To verify your email address visit the following link:",
   "esData_notFound": "There are no API usage statistics available.",
   "favourite_Add": "Add bookmark",
   "favourite_Remove": "Remove bookmark",
