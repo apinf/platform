@@ -36,7 +36,7 @@ Settings.schema = new SimpleSchema({
   },
   'mail.username': {
     type: String,
-    label: 'Username',
+    label: TAPi18n.__('settings_mail_username_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
@@ -50,7 +50,7 @@ Settings.schema = new SimpleSchema({
   },
   'mail.password': {
     type: String,
-    label: 'Password',
+    label: TAPi18n.__('settings_mail_password_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
@@ -64,7 +64,7 @@ Settings.schema = new SimpleSchema({
   },
   'mail.smtpHost': {
     type: String,
-    label: 'SMTP Host',
+    label: TAPi18n.__('settings_mail_smtpHost_label'),
     regEx: SimpleSchema.RegEx.Domain,
     optional: true,
     custom () {
@@ -79,7 +79,7 @@ Settings.schema = new SimpleSchema({
   },
   'mail.smtpPort': {
     type: Number,
-    label: 'SMTP Port',
+    label: TAPi18n.__('settings_mail_smtpPort_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;

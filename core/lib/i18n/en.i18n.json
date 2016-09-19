@@ -224,6 +224,7 @@
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_MoreInfo": "More info",
   "latestApiBackends_NotFound": "Nothing found.",
+  "loginVerify_errorMessage": "We sent you an email. Please verify.",
   "manageApiDocumentationModalUploadButton": "Choose file",
   "manageApiDocumentationModal_AddedFile_Message": "Documentation file successfully uploaded!",
   "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Cancel",
@@ -461,6 +462,10 @@
   "searchPage_searchResultsHeader": "Search results",
   "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
+  "settings_mail_username_label": "Username",
+  "settings_mail_password_label": "Password",
+  "settings_mail_smtpHost_label": "SMTP Host",
+  "settings_mail_smtpPort_label": "SMTP Port",
   "settings_github": "Github",
   "settings_save": "Save",
   "settings_apiUmbrella": "API Umbrella",
@@ -559,6 +564,5 @@
   "apiKeys_copySuccessful": "API key copied to clipboard.",
   "apiKeys_getApiKeyButton_success": "API key retrieved successfully.",
   "apiKeys_getApiKeyButton_processing": "Processing...",
-  "loginVerify_errorMessage": "We sent you an email. Please verify.",
   "emailVerification_successMessage": "Email verified! Thanks!"
 }
