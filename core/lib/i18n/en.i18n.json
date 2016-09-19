@@ -558,5 +558,7 @@
   "apiKeys_copyButtonText": "Copy API key",
   "apiKeys_copySuccessful": "API key copied to clipboard.",
   "apiKeys_getApiKeyButton_success": "API key retrieved successfully.",
-  "apiKeys_getApiKeyButton_processing": "Processing..."
+  "apiKeys_getApiKeyButton_processing": "Processing...",
+  "loginVerify_errorMessage": "We sent you an email. Please verify.",
+  "emailVerification_successMessage": "Email verified! Thanks!"
 }

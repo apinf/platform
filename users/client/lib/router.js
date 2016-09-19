@@ -15,7 +15,7 @@ Router.route('/verify-email/:token',{
         sAlert.error( error.reason );
       } else {
         // Email successfully verified
-        sAlert.success('Email verified! Thanks!');
+        sAlert.success(TAPi18n.__('emailVerification_successMessage'));
       }
     });
     // Go to front page
