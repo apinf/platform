@@ -42,31 +42,31 @@
       <!-- Tabs -->
       <div id="api-navigation-tabs">
         <ul class="nav nav-tabs">
-          <li class="active">
+          <li id ="api-details-tab" class="active">
             <a href="#api-details" data-toggle="tab">
               <i class="fa fa-info-circle"></i>
               {{_ "viewApiNavigationMenu_details" }}
             </a>
           </li>
-          <li>
+          <li id="api-documentation-tab">
             <a href="#api-documentation" data-toggle="tab">
               <i class="fa fa-file-text"></i>
               {{_ "viewApiNavigationMenu_documentation" }}
             </a>
           </li>
-          <li>
+          <li id="api-metadata-tab">
             <a href="#api-metadata" data-toggle="tab">
               <i class="fa fa-book"></i>
               {{_ "viewApiNavigationMenu_metadata" }}
             </a>
           </li>
-          <li>
+          <li id="api-feedback-tab">
             <a href="#api-feedback" data-toggle="tab">
               <i class="fa fa-comments-o"></i>
               {{_ "viewApiNavigationMenu_feedback" }}
             </a>
           </li>
-          <li>
+          <li id="api-backlog-tab">
             <a href="#api-backlog" data-toggle="tab">
               <i class="fa fa-check-square-o"></i>
               {{_ "viewApiNavigationMenu_backlog" }}
@@ -74,14 +74,14 @@
           </li>
           {{ # if currentUser }}
           {{ # if api.currentUserCanEdit }}
-          <li>
-            <a href="#api-backend-export" data-toggle="tab">
-              <i class="fa fa-cloud-download"></i>
-              {{_ "viewApiNavigationMenu_export" }}
-            </a>
-          </li>
+            <li id="api-export-tab">
+              <a href="#api-backend-export" data-toggle="tab">
+                <i class="fa fa-cloud-download"></i>
+                {{_ "viewApiNavigationMenu_export" }}
+              </a>
+            </li>
 
-            <li>
+            <li id="api-settings-tab">
               <a href="#api-settings" data-toggle="tab">
                 <i class="fa fa-cog"></i>
                 {{_ "viewApiNavigationMenu_settings" }}
@@ -89,7 +89,7 @@
             </li>
 
             {{# if proxyIsConfigured }}
-            <li>
+            <li id="api-proxy-tab">
               <a href="#api-proxy" data-toggle="tab">
                 <i class="fa fa-sitemap"></i>
                 {{_ "viewApiNavigationMenu_proxy" }}
