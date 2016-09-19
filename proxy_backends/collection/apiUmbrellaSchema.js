@@ -41,6 +41,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'url_matches.$.frontend_prefix': {
     type: String,
     optional: true,
+    unique: true,
     label: 'Proxy base path',
     regEx: proxyBasePathRegEx,
   },
@@ -64,6 +65,11 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true,
     label: 'API port',
   },
+});
+
+ApiUmbrellaSchema.messages({
+  // unique field error message
+  notUnique: "Not unique."
 });
 
 export { ApiUmbrellaSchema };
