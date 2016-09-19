@@ -12,19 +12,6 @@ Template.homeBody.rendered = function () {
   });
 };
 
-Template.homeBody.events({
-  'click .resend-verification-link' ( event, template ) {
-    Meteor.call( 'sendVerificationLink', ( error, response ) => {
-      if ( error ) {
-        sAlert.error(error.reason);
-      } else {
-        let email = Meteor.user().emails[ 0 ].address;
-        sAlert.success('New verification link sent to email');
-      }
-    });
-  }
-});
-
 Template.homeBody.helpers({
   contactFormEnabled () {
     const settings = Settings.findOne();
