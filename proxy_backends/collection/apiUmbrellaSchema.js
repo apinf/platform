@@ -2,6 +2,10 @@
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
 const ApiUmbrellaSchema = new SimpleSchema({
+  id: {
+    type: String,
+    optional: true,
+  },
   'name': {
     type: String,
     optional: true,
