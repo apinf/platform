@@ -1,0 +1,32 @@
+<template name="deleteAccount">
+  <div class="modal fade" id="delete-account">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">
+            {{_ "deleteAccount_title"}}
+          </h4>
+        </div>
+        <div class="modal-body">
+          {{_ "deleteAccount_confirm_text"}}
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal">
+            {{_ "deleteAccount_closeButton" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            id="delete-account-confirm"
+            data-dismiss="modal">
+            {{_ "deleteAccount_confirmDelete" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
