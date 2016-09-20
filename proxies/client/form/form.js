@@ -11,7 +11,7 @@ Template.proxyForm.helpers({
     // placeholder for form type (insert or update)
     let formType;
 
-    if (instance.data.proxy) {
+    if (instance.data && instance.data.proxy) {
       // Form type should be update
       formType = 'update';
     } else {
