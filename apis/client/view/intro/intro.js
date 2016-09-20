@@ -104,9 +104,19 @@ Template.apiIntro.onRendered(() => {
     });
   }
 
-  // Add steps to introduction
+  // Get translation strings for introduction user interface elements
+  const nextLabel = TAPi18n.__('apiIntro_nextLabel');
+  const prevLabel = TAPi18n.__('apiIntro_previousLabel');
+  const skipLabel = TAPi18n.__('apiIntro_skipLabel');
+  const doneLabel = TAPi18n.__('apiIntro_doneLabel');
+
+  // Configure introduction options
   intro.setOptions({
     steps,
+    nextLabel,
+    prevLabel,
+    skipLabel,
+    doneLabel,
     showStepNumbers: false,
   });
 
