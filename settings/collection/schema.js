@@ -1,3 +1,4 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Settings } from './';
 
 Settings.schema = new SimpleSchema({
@@ -19,11 +20,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const apiDocumentationEditorEnabled = this.field('apiDocumentationEditor.enabled').value;
       const apiDocumentationEditorHost = this.value;
-
+      let validation;
       // Require editor host if apiDocumentationEditor.enabled is checked
       if (apiDocumentationEditorEnabled === true && !apiDocumentationEditorHost) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   mail: {
@@ -41,11 +43,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const mailUsername = this.value;
-
+      let validation;
       // Require mail username if mailEnabled is checked
       if (mailEnabled === true && !mailUsername) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   'mail.password': {
@@ -55,11 +58,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const mailPassword = this.value;
-
+      let validation;
       // Require mail password if mail enabled is checked
       if (mailEnabled === true && !mailPassword) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   'mail.smtpHost': {
@@ -70,11 +74,13 @@ Settings.schema = new SimpleSchema({
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const smtpHost = this.value;
+      let validation;
 
       // Require SMTP Host if mail enabled is checked
       if (mailEnabled === true && !smtpHost) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   'mail.smtpPort': {
@@ -84,11 +90,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const smtpPort = this.value;
-
+      let validation;
       // Require SMTP Port if mail enabled is checked
       if (mailEnabled === true && !smtpPort) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   'mail.fromEmail': {
@@ -99,11 +106,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const fromEmail = this.value;
-
+      let validation;
       // Require SMTP Port if mail enabled is checked
       if (mailEnabled === true && !fromEmail) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   'mail.toEmail': {
@@ -150,11 +158,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const sdkCodeGeneratorEnabled = this.field('sdkCodeGenerator.enabled').value;
       const sdkCodeGeneratorHost = this.value;
-
+      let validation;
       // Require code generator host if sdkCodeGenerator.enabled is checked
       if (sdkCodeGeneratorEnabled === true && !sdkCodeGeneratorHost) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
 });
