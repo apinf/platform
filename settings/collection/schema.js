@@ -46,7 +46,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !mailUsername) {
         return 'required';
       }
-    }
+    },
   },
   'mail.password': {
     type: String,
@@ -60,7 +60,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !mailPassword) {
         return 'required';
       }
-    }
+    },
   },
   'mail.smtpHost': {
     type: String,
@@ -75,7 +75,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !smtpHost) {
         return 'required';
       }
-    }
+    },
   },
   'mail.smtpPort': {
     type: Number,
@@ -89,7 +89,7 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !smtpPort) {
         return 'required';
       }
-    }
+    },
   },
   'mail.fromEmail': {
     type: String,
@@ -104,13 +104,13 @@ Settings.schema = new SimpleSchema({
       if (mailEnabled === true && !fromEmail) {
         return 'required';
       }
-    }
+    },
   },
   'mail.toEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     label: TAPi18n.__('settings_mail_toEmail_label'),
-    optional: true
+    optional: true,
   },
   githubConfiguration: {
     type: Object,
