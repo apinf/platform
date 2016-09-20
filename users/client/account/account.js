@@ -1,5 +1,8 @@
+import { Template } from 'meteor/templating';
+
 Template.account.events({
-  'click .js-delete-account': function () {
-    return Meteor.call('deleteAccount', Meteor.userId());
+  'click #delete-account-button': function () {
+    // Show the delete account modal
+    Modal.show('deleteAccount');
   },
 });

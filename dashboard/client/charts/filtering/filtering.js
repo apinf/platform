@@ -1,34 +1,70 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Apis } from '/apis/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 import _ from 'lodash';
 
 Template.dashboardChartsFiltering.onCreated(function () {
-
   // Get reference to template instance
   const instance = this;
 
-  // Create reactive variable to keep API array
-  instance.apis = new ReactiveVar();
-
   // Subscribe to publication
-  instance.subscribe('myManagedApis');
+  instance.subscribe('proxyApis');
+
+  // Keeps APIs managed by user
+  instance.apisManagedByUser = new ReactiveVar();
+  // Keeps other APIs
+  instance.otherApis = new ReactiveVar();
+
+  instance.fetchApis = () => {
+    // Fetch proxy backends
+    const proxyBackends = ProxyBackends.find().fetch();
+
+    // Placeholders for APIs
+    const apisManagedByUser = [];
+    const otherApis = [];
+
+    // Update variable with data
+    _.forEach(proxyBackends, (proxyBackend) => {
+
+      // Get apiUmbrella object
+      const umbrellaApi = proxyBackend.apiUmbrella;
+
+      // Attach _id field to apiUmbrella object
+      umbrellaApi._id = proxyBackend.apiId;
+
+      // Check user permissions for each API
+      // push it to related opt group
+      if (proxyBackend.currentUserIsManager()) {
+        apisManagedByUser.push(umbrellaApi);
+      } else {
+        otherApis.push(umbrellaApi);
+      }
+    });
+
+    // Update reactive variables
+    instance.apisManagedByUser.set(apisManagedByUser);
+    instance.otherApis.set(otherApis);
+  };
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
-      // Update variable with data
-      instance.apis.set(Apis.find().fetch());
+      instance.fetchApis();
     }
   });
 });
 
 Template.dashboardChartsFiltering.helpers({
-  apis () {
-
+  apisManagedByUser () {
     // Get reference to template instance
     const instance = Template.instance();
 
-    return instance.apis.get();
-  }
+    return instance.apisManagedByUser.get();
+  },
+  otherApis () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    return instance.otherApis.get();
+  },
 });
