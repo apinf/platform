@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-6">
         <h2>
-          {{ # if biggerThan proxies.count 1 }}
+          {{ # unless biggerThan proxies.count 1 }}
             <button class="btn btn-default btn-sm pull-right" id="add-proxy">
               {{ _ "proxies_addProxy" }}
             </button>
@@ -14,7 +14,7 @@
             <button class="btn btn-default btn-sm pull-right" disabled="true">
               {{ _ "proxies_addProxy" }}
             </button>
-          {{ / if }}
+          {{ / unless }}
           {{ _ "proxies_pageHeader" }}
         </h2>
         <hr>

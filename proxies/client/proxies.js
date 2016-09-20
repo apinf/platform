@@ -29,6 +29,6 @@ Template.proxies.helpers({
     return instance.proxies.get();
   },
   biggerThan (a, b) {
-    return (a > b);
+    return (a >= b);
   },
 });
