@@ -26,7 +26,7 @@ Template.apiIntro.onRendered(() => {
 
   // Add welcome step
   steps.push({
-    intro: 'Welcome!',
+    intro: TAPi18n.__('apiIntro_steps_welcome_intro'),
   });
 
   // Check for each API tab
@@ -37,7 +37,7 @@ Template.apiIntro.onRendered(() => {
     // Add details step to introduction tour
     steps.push({
       element: '#api-details-tab',
-      intro: 'This is the API Details tab',
+      intro: TAPi18n.__('apiIntro_steps_details_intro'),
     });
   }
 
@@ -46,7 +46,7 @@ Template.apiIntro.onRendered(() => {
     // Add documentation step to introduction tour
     steps.push({
       element: '#api-documentation-tab',
-      intro: 'This is the API Documentation tab',
+      intro: TAPi18n.__('apiIntro_steps_documentation_intro'),
     });
   }
 
@@ -55,7 +55,7 @@ Template.apiIntro.onRendered(() => {
     // Add metadata step to introduction tour
     steps.push({
       element: '#api-metadata-tab',
-      intro: 'This is the API Metadata tab',
+      intro: TAPi18n.__('apiIntro_steps_metadata_intro'),
     });
   }
 
@@ -64,7 +64,7 @@ Template.apiIntro.onRendered(() => {
     // Add feedback step to introduction tour
     steps.push({
       element: '#api-feedback-tab',
-      intro: 'This is the API Feedback tab',
+      intro: TAPi18n.__('apiIntro_steps_feedback_intro'),
     });
   }
 
@@ -73,7 +73,7 @@ Template.apiIntro.onRendered(() => {
     // Add backlog step to introduction tour
     steps.push({
       element: '#api-backlog-tab',
-      intro: 'This is the API Details tab',
+      intro: TAPi18n.__('apiIntro_steps_backlog_intro'),
     });
   }
 
@@ -82,7 +82,7 @@ Template.apiIntro.onRendered(() => {
     // Add export step to introduction tour
     steps.push({
       element: '#api-export-tab',
-      intro: 'This is the API Export tab',
+      intro: TAPi18n.__('apiIntro_steps_export_intro'),
     });
   }
 
@@ -91,7 +91,7 @@ Template.apiIntro.onRendered(() => {
     // Add settings step to introduction tour
     steps.push({
       element: '#api-settings-tab',
-      intro: 'This is the API Settings tab',
+      intro: TAPi18n.__('apiIntro_steps_settings_intro'),
     });
   }
 
@@ -100,7 +100,7 @@ Template.apiIntro.onRendered(() => {
     // Add settings step to introduction tour
     steps.push({
       element: '#api-proxy-tab',
-      intro: 'This is the API Proxy tab',
+      intro: TAPi18n.__('apiIntro_steps_proxy_intro'),
     });
   }
 
