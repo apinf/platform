@@ -17,6 +17,10 @@ Template.proxies.onCreated(function () {
   });
 });
 
+Template.proxies.onRendered(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
 Template.proxies.events({
   'click #add-proxy': function (event, instance) {
     Modal.show('addProxy', { proxy: {}, isEdit: false });
