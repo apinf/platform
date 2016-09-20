@@ -1,3 +1,7 @@
+// Allow use of 'document' as global object
+/* global document */
+
+// Meteor imports
 import { Template } from 'meteor/templating';
 
 // Library imports
