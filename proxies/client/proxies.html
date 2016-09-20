@@ -11,11 +11,12 @@
               {{ _ "proxies_addProxy" }}
             </button>
           {{ else }}
-             <span class="helper pull-right" data-toggle="tooltip" title="{{ _ 'proxies_cannotAddMoreProxies' }}">
-               <button class="btn btn-default btn-sm " disabled>
-                 {{ _ "proxies_addProxy" }}
-               </button>
-             </span>
+            <button
+              class="btn btn-default btn-sm pull-right"
+              title="{{ _ 'proxies_cannotAddMoreProxies' }}"
+              disabled="true">
+              {{ _ "proxies_addProxy" }}
+            </button>
           {{ / unless }}
           {{ _ "proxies_pageHeader" }}
         </h2>
