@@ -17,7 +17,7 @@ Template.swaggerUiContent.onCreated(function () {
   const proxy = Proxies.findOne();
 
   // Get proxy backend
-  const proxyBackend = ProxyBackends.findOne({ 'apiId': instance.data.api._id });
+  const proxyBackend = ProxyBackends.findOne({ apiId: instance.data.api._id });
 
   // Get proxy host if it exists
   let proxyHost = proxy ? proxy.apiUmbrella.url : '';
@@ -28,12 +28,11 @@ Template.swaggerUiContent.onCreated(function () {
   // Get proxy base path if it exists
   let proxyBasePath = apiUmbrellaSettings ? apiUmbrellaSettings[0].frontend_prefix : '';
 
-  // Delete 'http://' prefix
   if (_.startsWith(proxyHost, 'http://')) {
+    // Delete 'http://' prefix
     proxyHost = proxyHost.slice(7, proxyHost.length);
-  }
-  // Delete 'https://' prefix
-  else {
+  } else {
+    // Delete 'https://' prefix
     proxyHost = proxyHost.slice(8, proxyHost.length);
   }
 
@@ -88,7 +87,11 @@ Template.swaggerUiContent.onCreated(function () {
         });
 
         // Create Authorization Object for swagger client
-        const authz = new SwaggerClient.ApiKeyAuthorization(infoAuth.keyName, apiKeyValue, infoAuth.keyIn);
+        const authz = new SwaggerClient.ApiKeyAuthorization(
+          infoAuth.keyName,
+          apiKeyValue,
+          infoAuth.keyIn
+        );
 
         // Input user api-key in field
         swagger.api.clientAuthorizations.add(infoAuth.title, authz);
