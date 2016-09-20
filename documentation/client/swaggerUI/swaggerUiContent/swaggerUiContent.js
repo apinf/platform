@@ -48,10 +48,10 @@ Template.swaggerUiContent.onCreated(function () {
   }
 
   // Get api key collection
-  const apiKey = ApiKeys.findOne({ proxyId: proxy._id, userId: Meteor.userId() });
+  const apiKey = proxy ? ApiKeys.findOne({ proxyId: proxy._id, userId: Meteor.userId() }) : '';
 
   // Check if api-key exists
-  const apiKeyValue = apiKey ? apiKey.apiUmbrella.apiKey : 'instagram';
+  const apiKeyValue = apiKey ? apiKey.apiUmbrella.apiKey : '';
 
   // Create object to save information about property of api-key authorization
   const infoAuth = {};
