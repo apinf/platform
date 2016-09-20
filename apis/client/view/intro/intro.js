@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+
+// Library imports
 import { introJs } from 'intro.js';
 
 Template.apiIntro.onRendered(() => {
@@ -99,7 +101,10 @@ Template.apiIntro.onRendered(() => {
   }
 
   // Add steps to introduction
-  intro.setOptions({ steps });
+  intro.setOptions({
+    steps,
+    showStepNumbers: false,
+  });
 
   // Start the introduction tour
   intro.start();
