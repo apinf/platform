@@ -61,12 +61,14 @@
             {{ proxyUrl }}{{ # if apiKey }}?api_key={{ apiKey }}{{ / if }}
           </a>
         </li>
-        <li>
-          {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
-          <span>
-            X-Api-Key: {{ # if apiKey }}{{ apiKey }}{{ / if }}
-          </span>
-        </li>
+        {{ # if apiKey }}
+          <li>
+            {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
+            <span>
+              X-Api-Key: {{ apiKey }}
+            </span>
+          </li>
+        {{ / if }}
       </ul>
     </div>
   {{ / if }}
