@@ -1,11 +1,14 @@
+// Meteor package imports
 import { Template } from 'meteor/templating';
 import { Router } from 'meteor/iron:router';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+
+// Apinf imports
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
-import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
-Template.viewApi.onCreated(function () {
+Template.viewApi.onCreated(() => {
   // Get reference to template instance
   const instance = this;
 
@@ -24,7 +27,7 @@ Template.viewApi.onCreated(function () {
   // Subscribe to proxy settings for this API
   instance.subscribe('apiProxySettings', instance.apiId);
 
-  // Subscribe to proxy
+  // Subscribe to public proxy details for proxy form
   instance.subscribe('publicProxyDetails');
 });
 
@@ -78,5 +81,6 @@ Template.viewApi.helpers({
       // Proxy is defined
       return true;
     }
+    return false;
   },
 });

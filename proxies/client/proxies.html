@@ -6,11 +6,15 @@
       </div>
       <div class="col-md-6">
         <h2>
-          <button class="btn btn-default btn-sm pull-right" id="add-proxy">{{ _ "proxies_addProxy" }}</button>
+          {{ # unless hideAddProxyButton }}
+            <button class="btn btn-default btn-sm pull-right" id="add-proxy">
+              {{ _ "proxies_addProxy" }}
+            </button>
+          {{ / unless }}
           {{ _ "proxies_pageHeader" }}
         </h2>
         <hr>
-        <div class="">
+        <div>
           {{# if Template.subscriptionsReady }}
             {{ # if proxies }}
               {{ # each proxy in proxies }}
