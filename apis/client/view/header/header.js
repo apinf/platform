@@ -1,12 +1,12 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.viewApiPageHeader.onCreated(() => {
+Template.viewApiPageHeader.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
   // Create variable to track tour status
-  instance.userShouldSeeIntro = new ReactiveVar(false);
+  instance.userShouldSeeIntro = new ReactiveVar();
 });
 
 Template.viewApiPageHeader.helpers({
