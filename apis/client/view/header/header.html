@@ -35,7 +35,8 @@
         {{> visibilitySwitch api=api }}
 
         <!-- quick tour button -->
-        <button type="button" class="btn btn-info">Quick tour</button>
+        <button type="button" id="api-intro" class="btn btn-info">Quick tour</button>
+        
         {{# if userShouldSeeIntro }}
           {{> apiIntro }}
         {{/ if }}
