@@ -11,15 +11,17 @@
         </h2>
         <hr>
         <div class="">
-          {{ # if proxies.count }}
-            {{ # each proxy in proxies }}
-               {{ > proxyItem proxy=proxy }}
-            {{ / each }}
-          {{ else }}
-            <p class="text-center">
-              <i>{{ _ "proxies_noProxiesFound" }}</i>
-            </p>
-          {{ / if }}
+          {{# if Template.subscriptionsReady }}
+            {{ # if proxies }}
+              {{ # each proxy in proxies }}
+                 {{ > proxyItem proxy=proxy }}
+              {{ / each }}
+            {{ else }}
+              <p class="text-center">
+                <i>{{ _ "proxies_noProxiesFound" }}</i>
+              </p>
+            {{ / if }}
+          {{/ if }}
         </div>
       </div>
     </div>

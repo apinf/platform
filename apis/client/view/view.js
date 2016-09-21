@@ -19,7 +19,7 @@ Template.viewApi.onCreated(function () {
   instance.subscribe('apiBacklogItems', instance.apiId);
 
   // Subscribe to public proxy details
-  instance.subscribe('publicProxyDetails');
+  instance.subscribe('proxyCount');
 
   // Subscribe to proxy settings for this API
   instance.subscribe('apiProxySettings', instance.apiId);
@@ -67,17 +67,13 @@ Template.viewApi.helpers({
     return backlogItems;
   },
   proxyIsConfigured () {
-    // Check if one or more proxy has been configured
-    let proxyIsConfigured;
+    // Get count of Proxies
+    const proxyCount = Counts.get('proxyCount');
 
-    const proxyCount = Proxies.find().count();
-
+    // Check that a proxy is defined
     if (proxyCount > 0) {
-      proxyIsConfigured = true;
-    } else {
-      proxyIsConfigured = false;
+      // Proxy is defined
+      return true;
     }
-
-    return proxyIsConfigured;
   },
 });
