@@ -33,6 +33,12 @@
           {{/if}}
         </div>
         {{> visibilitySwitch api=api }}
+
+        <!-- quick tour button -->
+        <button type="button" class="btn btn-info">Quick tour</button>
+        {{# if userShouldSeeTour }}
+        tour
+        {{/ if }}
       </div>
       {{#if proxyBackend }}
       <div class="row">
