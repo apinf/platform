@@ -12,9 +12,6 @@ Template.apiIntro.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Create variable to track tour status
-  instance.userShouldSeeIntro = new ReactiveVar();
-
   // Function to show API introduction
   instance.showApiIntro = function () {
     // Intro.js instance, for introduction walkthrough
