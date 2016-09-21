@@ -34,10 +34,10 @@ Template.apiDetails.helpers({
       // Get Proxy host
       const host = proxyBackend.apiUmbrella.frontend_host;
 
-      
+
       // Get proxy base path
       let basePath = ''
-      
+
       // It can be moment when proxyBackend exists but url_matches isn't
       if (proxyBackend.apiUmbrella.url_matches) {
         basePath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix
@@ -51,5 +51,26 @@ Template.apiDetails.helpers({
     }
 
     return url;
+  },
+  apiKey () {
+    // Placeholder for API key
+    let apiKey;
+
+    // Get current user
+    const currentUserId = Meteor.userId();
+
+    // Make sure user exists and has API key
+    if (currentUserId) {
+      // Get API Key document
+      const userApiKey = ApiKeys.findOne({ userId: currentUserId });
+
+      // Check that Umbrella API key exists
+      if (userApiKey && userApiKey.apiUmbrella) {
+        // Get the API Key, from API key document
+        apiKey = userApiKey.apiUmbrella.apiKey;
+      }
+    }
+
+    return apiKey;
   },
 });
