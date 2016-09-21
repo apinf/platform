@@ -1,31 +1,33 @@
-import { Proxies } from '../collection';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-Template.proxies.onCreated(function(){
+// Apinf imports
+import { Proxies } from '../collection';
+
+Template.proxies.onCreated(function () {
   const instance = this;
 
-  instance.proxies = new ReactiveVar();
-
   instance.subscribe('allProxies');
-
-  instance.autorun(() => {
-    if (instance.subscriptionsReady()) {
-      // Update reactive vatiable with proxies cursor when subscription is ready
-      instance.proxies.set(Proxies.find());
-    }
-  });
 });
 
 Template.proxies.events({
-  'click #add-proxy': function (event, instance) {
-    Modal.show('addProxy', { proxy: {}, isEdit: false });
-  }
+  'click #add-proxy': function () {
+    // Show the add proxy form
+    Modal.show('proxyForm');
+  },
 });
 
 Template.proxies.helpers({
   proxies () {
-    const instance = Template.instance();
-    return instance.proxies.get();
-  }
+    // Get all proxies
+    const proxies = Proxies.find().fetch();
+
+    return proxies;
+  },
+  hideAddProxyButton () {
+    const proxiesCount = Proxies.find().count();
+
+    // Set button disabled if at least one proxy is already added
+    return proxiesCount >= 1;
+  },
 });
