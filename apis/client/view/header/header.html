@@ -32,7 +32,9 @@
           </a>
           {{/if}}
         </div>
-        {{> visibilitySwitch api=api }}
+        {{#if api.currentUserCanEdit }}
+          {{> visibilitySwitch api=api }}
+        {{/if}}
       </div>
       {{#if proxyBackend }}
       <div class="row">
