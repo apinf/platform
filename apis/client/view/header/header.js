@@ -20,3 +20,10 @@ Template.viewApiPageHeader.helpers({
     return userShouldSeeIntro;
   },
 });
+
+Template.viewApiPageHeader.events({
+  'click #api-intro': function (event, templateInstance) {
+    // Update user tour status reactive variable
+    templateInstance.userShouldSeeIntro.set(true);
+  },
+});
