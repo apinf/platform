@@ -14,7 +14,11 @@ Template.proxies.onCreated(function () {
     if (instance.subscriptionsReady()) {
       // Update reactive vatiable with proxies cursor when subscription is ready
       instance.proxies.set(Proxies.find());
+
+      // Get proxies count
       const proxiesCount = Proxies.find().count();
+
+      // Set button disabled if at least one proxy is already added
       instance.isDisabled.set(proxiesCount >= 1);
     }
   });
