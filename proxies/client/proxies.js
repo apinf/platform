@@ -1,6 +1,9 @@
-import { Proxies } from '../collection';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+
+// Apinf imports
+import { Proxies } from '../collection';
 
 Template.proxies.onCreated(function () {
   const instance = this;
