@@ -5,30 +5,6 @@ import { Settings } from '/settings/collection';
 Template.manageApiDocumentationModal.onCreated(function () {
   const instance = this;
 
-  // Initialize help texts
-  const helpTexts = {
-    documentation_link: {
-      message: TAPi18n.__('manageApiDocumentationModal_hints_documentation_link'),
-      options: {
-        placement: 'left',
-      },
-    },
-    uploadApiDocumentation: {
-      message: TAPi18n.__('manageApiDocumentationModal_hints_uploadApiDocumentation'),
-      options: {
-        placement: 'left',
-      },
-    },
-    documentation_editor_create_file: {
-      message: TAPi18n.__('manageApiDocumentationModal_hints_createApiDocumentation'),
-      options: {
-        placement: 'left',
-      },
-    },
-  };
-
-  InlineHelp.initHelp(helpTexts);
-
   instance.autorun(function () {
     const api = Apis.findOne(instance.data.api._id);
     // Save apibackend id

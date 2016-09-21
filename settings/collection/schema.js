@@ -1,3 +1,5 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Settings } from './';
 
 Settings.schema = new SimpleSchema({
@@ -19,11 +21,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const apiDocumentationEditorEnabled = this.field('apiDocumentationEditor.enabled').value;
       const apiDocumentationEditorHost = this.value;
-
+      let validation;
       // Require editor host if apiDocumentationEditor.enabled is checked
       if (apiDocumentationEditorEnabled === true && !apiDocumentationEditorHost) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   mail: {
@@ -36,55 +39,87 @@ Settings.schema = new SimpleSchema({
   },
   'mail.username': {
     type: String,
-    label: 'Mailgun Username',
+    label: TAPi18n.__('settings_mail_username_label'),
     optional: true,
-    autoform: {
-      placeholder: 'Mailgun Username',
-    },
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const mailUsername = this.value;
-
+      let validation;
       // Require mail username if mailEnabled is checked
       if (mailEnabled === true && !mailUsername) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
   'mail.password': {
     type: String,
-    label: 'Mailgun Password',
+    label: TAPi18n.__('settings_mail_password_label'),
     optional: true,
-    autoform: {
-      placeholder: 'xxx',
-    },
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const mailPassword = this.value;
-
+      let validation;
       // Require mail password if mail enabled is checked
       if (mailEnabled === true && !mailPassword) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
+    },
+  },
+  'mail.smtpHost': {
+    type: String,
+    label: TAPi18n.__('settings_mail_smtpHost_label'),
+    regEx: SimpleSchema.RegEx.Domain,
+    optional: true,
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const smtpHost = this.value;
+      let validation;
+
+      // Require SMTP Host if mail enabled is checked
+      if (mailEnabled === true && !smtpHost) {
+        validation = 'required';
+      }
+      return validation;
+    },
+  },
+  'mail.smtpPort': {
+    type: Number,
+    label: TAPi18n.__('settings_mail_smtpPort_label'),
+    optional: true,
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const smtpPort = this.value;
+      let validation;
+      // Require SMTP Port if mail enabled is checked
+      if (mailEnabled === true && !smtpPort) {
+        validation = 'required';
+      }
+      return validation;
+    },
+  },
+  'mail.fromEmail': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email,
+    label: TAPi18n.__('settings_mail_fromEmail_label'),
+    optional: true,
+    custom () {
+      const mailEnabled = this.field('mail.enabled').value;
+      const fromEmail = this.value;
+      let validation;
+      // Require SMTP Port if mail enabled is checked
+      if (mailEnabled === true && !fromEmail) {
+        validation = 'required';
+      }
+      return validation;
     },
   },
   'mail.toEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: 'Contact Form E-mail Address',
+    label: TAPi18n.__('settings_mail_toEmail_label'),
     optional: true,
-    autoform: {
-      placeholder: 'mail@example.com',
-    },
-    custom () {
-      const mailEnabled = this.field('mail.enabled').value;
-      const contactFormEmail = this.value;
-
-      // Require mail password if mail enabled is checked
-      if (mailEnabled === true && !contactFormEmail) {
-        return 'required';
-      }
-    },
   },
   githubConfiguration: {
     type: Object,
@@ -124,11 +159,12 @@ Settings.schema = new SimpleSchema({
     custom () {
       const sdkCodeGeneratorEnabled = this.field('sdkCodeGenerator.enabled').value;
       const sdkCodeGeneratorHost = this.value;
-
+      let validation;
       // Require code generator host if sdkCodeGenerator.enabled is checked
       if (sdkCodeGeneratorEnabled === true && !sdkCodeGeneratorHost) {
-        return 'required';
+        validation = 'required';
       }
+      return validation;
     },
   },
 });
