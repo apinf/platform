@@ -1,27 +1,25 @@
-import { Apis } from '/apis/collection';
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { Router } from 'meteor/iron:router';
 
-
-Template.deleteApiBackendConfirmation.events({
-  'click #deleteApi': function (event, instance) {
+Template.deleteApiConfirmation.events({
+  'click #modal-delete-api': function (event, instance) {
     // Get API ID
-    const apiId = instance.data._id;
+    const apiId = instance.data.api._id;
 
-    Meteor.call('removeApiBackend', apiId, (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        // Route to catalogue
-        Router.go('catalogue');
+    // Route to catalogue
+    Router.go('catalogue');
 
-        // Get success message translation
-        const message = TAPi18n.__('deleteApiBackendConfirmation_successMessage');
+    Meteor.call('removeApiBackend', apiId, () => {
+      // Dismiss the confirmation modal
+      Modal.hide('deleteApiConfirmation');
 
-        // Alert the user of success
-        sAlert.success(message + instance.data.name);
+      // Get success message translation
+      const message = TAPi18n.__('deleteApiConfirmation_successMessage');
 
-        // Dismiss the confirmation modal
-        Modal.hide();
-      }
+      // Alert the user of success
+      sAlert.success(message + instance.data.api.name);
     });
   },
 });
