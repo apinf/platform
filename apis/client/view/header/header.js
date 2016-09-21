@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.viewApiPageHeader.onCreated(() => {
   // Get reference to template instance
