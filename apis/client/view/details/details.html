@@ -18,16 +18,24 @@
             <hr class="panel-hr" />
           {{ / if }}
 
-          {{ # if url }}
-            <h3>
-              {{_ "apiDetails_baseUrl_headingText" }}
-            </h3>
+          <h3>
+            {{_ "apiDetails_baseUrl_headingText" }}
+          </h3>
+
             <div class="input-group">
+              {{ # if proxyUrl }}
               <input
                 type="text"
                 class="form-control"
                 id="api-url"
-                value="{{ url }}">
+                value="{{ proxyUrl }}">
+                {{ else }}
+                <input
+                  type="text"
+                  class="form-control"
+                  id="api-url"
+                  value="{{ api.url }}">
+                {{/ if }}
               <span class="input-group-btn">
                 <button
                   class="btn btn-default"
@@ -39,12 +47,11 @@
                 </button>
               </span>
             </div>
-          {{ / if }}
         </div>
       </div>
     </div>
   </div>
-  {{ # if url }}
+  {{ # if proxyUrl }}
     <div id="usage-instructions" class="bs-callout bs-callout-primary">
       <h4>
         {{_ "apiDetails_usageInstructions_headingText" }}
