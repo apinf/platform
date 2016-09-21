@@ -36,8 +36,8 @@
 
         <!-- quick tour button -->
         <button type="button" class="btn btn-info">Quick tour</button>
-        {{# if userShouldSeeTour }}
-        tour
+        {{# if userShouldSeeIntro }}
+          {{> apiIntro }}
         {{/ if }}
       </div>
       {{#if proxyBackend }}

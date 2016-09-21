@@ -1,5 +1,5 @@
 Template.viewApiPageHeader.helpers({
-  userShouldSeeTour () {
+  userShouldSeeIntro () {
     return true;
   },
 });
