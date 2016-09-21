@@ -537,7 +537,7 @@
   "userMenu_settings": "Settings",
   "userMenu_signout": "Sign out",
   "apiDetails_deleteButton": "Delete",
-  "apiDetails_baseUrl_headingText": "Base URL",
+  "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
   "viewApiNavigationMenu_backlog": "Backlog",
   "viewApiNavigationMenu_details": "Details",
