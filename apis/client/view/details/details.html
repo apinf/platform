@@ -46,16 +46,18 @@
 </div>
 {{ # if url }}
 <div id="usage-instructions" class="bs-callout bs-callout-primary">
-  <h4>To make calls to this API, you can either:</h4>
+  <h4>
+    {{_ "apiDetails_usageInstructions_headingText" }}
+  </h4>
   <ul>
     <li>
-      call the API with your key in the URL parameters:
+      {{_ "apiDetails_usageInstructions_urlParameters_text" }}
       <span>
         https://&#x0003C;host&#x0003E;/&#x0003C;base_path&#x0003E;?api_key=&#x0003C;user_api_key&#x0003E;
       </span>
     </li>
     <li>
-      call the API with your key in the request headers:
+      {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
       <span>
         X-Api-Key: &#x0003C;user_api_key&#x0003E;
       </span>
