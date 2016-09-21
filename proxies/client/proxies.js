@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Apinf imports
@@ -12,7 +11,7 @@ Template.proxies.onCreated(function () {
 });
 
 Template.proxies.events({
-  'click #add-proxy': function (event, instance) {
+  'click #add-proxy': function () {
     // Show the add proxy form
     Modal.show('proxyForm');
   },
