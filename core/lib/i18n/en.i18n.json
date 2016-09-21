@@ -274,10 +274,13 @@
   "proxies_addProxy": "Add proxy",
   "proxies_noProxiesFound": "No proxies found.",
   "proxies_cannotAddMoreProxies": "You already have a Proxy available to attach your API. Please select the Proxy. You can add a new Proxy only after your have deleted the existing one.",
+  "proxyBackendForm_advancedSettings_title": "Advanced settings",
   "proxyBackendForm_apiBasePath_helpText": "Base path added to all API requests. Example:",
   "proxyBackendForm_apiPort_helpText": "Port number on API server",
+  "proxyBackendForm_disableApiKey_helpText": "Optionally you can allow users to use your API without API key.",
   "proxyBackendForm_proxyBasePath_helpText": "Base path added to all Proxy requests. Example:",
   "proxyBackendForm_successMessage": "Settings saved.",
+  "proxyBackendForm_saveButton": "Save proxy settings",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
   "publishApiBackendOnApiUmbrella_successMessage": "API Backend successfully published.",
@@ -450,6 +453,15 @@
         },
         "host": {
           "label": "Host"
+        }
+      }
+    },
+    "ProxyBackends": {
+      "apiUmbrella": {
+        "settings": {
+          "disable_api_key": {
+            "label": "Disable API key"
+          }
         }
       }
     }
