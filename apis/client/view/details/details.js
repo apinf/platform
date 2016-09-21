@@ -1,7 +1,7 @@
 import Clipboard from 'clipboard';
 import { ApiKeys } from '/api_keys/collection';
 
-Template.viewApiBackendDetails.onRendered(function () {
+Template.apiDetails.onRendered(function () {
   // Initialize Clipboard copy button
   const copyButton = new Clipboard('#copyApiUrl');
 
@@ -19,7 +19,7 @@ Template.viewApiBackendDetails.onRendered(function () {
   });
 });
 
-Template.viewApiBackendDetails.helpers({
+Template.apiDetails.helpers({
   url () {
     // Get reference to template instance
     const instance = Template.instance();

@@ -5,7 +5,7 @@ import { ApiBacklogItems } from '/backlog/collection';
 import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
-Template.viewApiBackend.onCreated(function () {
+Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -25,7 +25,7 @@ Template.viewApiBackend.onCreated(function () {
   instance.subscribe('apiProxySettings', instance.apiId);
 });
 
-Template.viewApiBackend.helpers({
+Template.viewApi.helpers({
   api () {
     // Get reference to template instance
     const instance = Template.instance();

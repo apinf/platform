@@ -1,33 +1,35 @@
 import { githubSettingsValid } from '/core/helper_functions/validate_settings';
 import { Settings } from '../collection';
 
-export const enableGithubAuthentication = () => {
-  // If settings are already in Meteor.settings
-  try {
-    const settings = Settings.findOne();
+Meteor.methods({
+  'enableGithubAuthentication': function () {
+    // If settings are already in Meteor.settings
+    try {
+      const settings = Settings.findOne();
 
-    // Check if github settings are valid
-    if (githubSettingsValid(settings)) {
-      ServiceConfiguration.configurations.remove({
-        // removing existing configurations
-        service: 'github',
-      });
+      // Check if github settings are valid
+      if (githubSettingsValid(settings)) {
+        ServiceConfiguration.configurations.remove({
+          // removing existing configurations
+          service: 'github',
+        });
 
-      ServiceConfiguration.configurations.insert({
-        /* extend settings.json with Client ID and Client Secret:
-      "githubConfiguration": {
-        "clientId" : "xxxx",
-        "secret" : "xxxx"
-      }*/
-        service: 'github',
-        clientId: settings.githubConfiguration.clientId,
-        secret: settings.githubConfiguration.secret,
+        ServiceConfiguration.configurations.insert({
+          /* extend settings.json with Client ID and Client Secret:
+        "githubConfiguration": {
+          "clientId" : "xxxx",
+          "secret" : "xxxx"
+        }*/
+          service: 'github',
+          clientId: settings.githubConfiguration.clientId,
+          secret: settings.githubConfiguration.secret,
 
-      });
+        });
+      }
+    }
+    // otherwise show an error
+    catch (error) {
+      console.log(error);
     }
   }
-  // otherwise show an error
-  catch (error) {
-    console.log(error);
-  }
-};
+});

@@ -13,6 +13,8 @@ AutoForm.hooks({
 
       // Alert user of success
       sAlert.success(message);
+
+      Modal.hide('feedbackForm');
     },
   },
 });
