@@ -8,7 +8,7 @@ import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
-Template.viewApi.onCreated(() => {
+Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
