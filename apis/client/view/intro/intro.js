@@ -2,6 +2,7 @@
 /* global document */
 
 // Meteor imports
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Library imports
