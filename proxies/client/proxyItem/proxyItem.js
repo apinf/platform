@@ -2,11 +2,17 @@ import { Template } from 'meteor/templating';
 
 Template.proxyItem.events({
   'click #edit-proxy': function (event, instance) {
+    // Get proxy document
     const proxy = this.proxy;
-    Modal.show('addProxy', { proxy, isEdit: true });
+
+    // Show proxy form modal
+    Modal.show('proxyForm', { proxy });
   },
   'click #remove-proxy': function (event, instance) {
+    // Get proxy document
     const proxy = this.proxy;
+
+    // Show remove proxy modal
     Modal.show('removeProxy', { proxy });
   },
 });

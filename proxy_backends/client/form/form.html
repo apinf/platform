@@ -120,9 +120,34 @@
           {{_ "proxyBackendForm_apiPort_helpText" }}
         </p>
       </div>
+
+      <!-- Advanced settings -->
+      <div class="form-group col-md-12" id="advanced-settings">
+
+        <!-- Advanced settings block title -->
+        <h3>
+          {{_ "proxyBackendForm_advancedSettings_title" }}
+        </h3>
+
+        <!-- field input -->
+        {{> afQuickField
+          name="apiUmbrella.settings.disable_api_key"
+          type="boolean-checkbox"
+        }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_disableApiKey_helpText" }}
+        </p>
+      </div>
     </div>
 
     <!-- submit button -->
-    <button type="submit" class="btn btn-primary pull-right">Save & Publish</button>
+    <button
+      type="submit"
+      class="btn btn-success pull-left"
+      id="save-proxy-button">
+      {{_ "proxyBackendForm_saveButton" }}
+    </button>
   {{/ autoForm }}
 </template>
