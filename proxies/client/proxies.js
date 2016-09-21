@@ -6,6 +6,7 @@ Template.proxies.onCreated(function () {
   const instance = this;
 
   instance.proxies = new ReactiveVar();
+  instance.isDisabled = new ReactiveVar();
 
   instance.subscribe('allProxies');
 
@@ -13,6 +14,8 @@ Template.proxies.onCreated(function () {
     if (instance.subscriptionsReady()) {
       // Update reactive vatiable with proxies cursor when subscription is ready
       instance.proxies.set(Proxies.find());
+      const proxiesCount = Proxies.find().count();
+      instance.isDisabled.set(proxiesCount >= 1);
     }
   });
 });
@@ -28,7 +31,8 @@ Template.proxies.helpers({
     const instance = Template.instance();
     return instance.proxies.get();
   },
-  biggerThan (a, b) {
-    return (a >= b);
+  isDisabled () {
+    const instance = Template.instance();
+    return instance.isDisabled.get();
   },
 });
