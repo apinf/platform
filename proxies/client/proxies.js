@@ -1,42 +1,33 @@
-import { Proxies } from '../collection';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+
+// Apinf imports
+import { Proxies } from '../collection';
 
 Template.proxies.onCreated(function () {
   const instance = this;
 
-  instance.proxies = new ReactiveVar();
-  instance.isDisabled = new ReactiveVar();
-
   instance.subscribe('allProxies');
-
-  instance.autorun(() => {
-    if (instance.subscriptionsReady()) {
-      // Update reactive vatiable with proxies cursor when subscription is ready
-      instance.proxies.set(Proxies.find());
-
-      // Get proxies count
-      const proxiesCount = Proxies.find().count();
-
-      // Set button disabled if at least one proxy is already added
-      instance.isDisabled.set(proxiesCount >= 1);
-    }
-  });
 });
 
 Template.proxies.events({
-  'click #add-proxy': function (event, instance) {
-    Modal.show('addProxy', { proxy: {}, isEdit: false });
+  'click #add-proxy': function () {
+    // Show the add proxy form
+    Modal.show('proxyForm');
   },
 });
 
 Template.proxies.helpers({
   proxies () {
-    const instance = Template.instance();
-    return instance.proxies.get();
+    // Get all proxies
+    const proxies = Proxies.find().fetch();
+
+    return proxies;
   },
-  isDisabled () {
-    const instance = Template.instance();
-    return instance.isDisabled.get();
+  hideAddProxyButton () {
+    const proxiesCount = Proxies.find().count();
+
+    // Set button disabled if at least one proxy is already added
+    return proxiesCount >= 1;
   },
 });

@@ -1,9 +1,6 @@
 import Github from 'github';
 
 Accounts.onCreateUser(function(options, user) {
-  // Initialize API Umbrella related variables
-  var apiUmbrellaUserObj, response;
-
   // Create empty user profile if none exists
   user.profile = user.profile || {};
 
@@ -29,6 +26,11 @@ Accounts.onCreateUser(function(options, user) {
       user.username = '';
     }
   }
+
+  // we wait for Meteor to create the user before sending an email
+  Meteor.setTimeout(function() {
+    Meteor.call('sendRegistrationEmailVerification', user._id);
+  }, 2 * 1000);
 
   return user;
 });

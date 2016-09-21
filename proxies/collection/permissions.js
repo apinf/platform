@@ -1,4 +1,5 @@
 import { Proxies } from './';
+import { Roles } from 'meteor/alanning:roles';
 
 Proxies.allow({
   insert (userId, proxy) {
