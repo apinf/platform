@@ -135,7 +135,7 @@
   "deleteAccount_closeButton": "Close",
   "deleteAccount_confirmDelete": "Delete",
   "deleteAccount_success_message": "Account deleted",
-  "deleteApiConfirmation_CancelButton": "Cancel",
+  "deleteApiConfirmation_cancelButton": "Cancel",
   "deleteApiConfirmation_confirmDeleteInformation": "This action cannot be undone! The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "deleteApiConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
   "deleteApiConfirmation_confirmDeleteNote": "NOTE:",
