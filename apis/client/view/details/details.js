@@ -1,7 +1,8 @@
 import Clipboard from 'clipboard';
 import { ApiKeys } from '/api_keys/collection';
+import { Proxies } from '/proxies/collection';
 
-Template.apiDetails.onRendered(function () {
+Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
   const copyButton = new Clipboard('#copyApiUrl');
 
@@ -12,7 +13,7 @@ Template.apiDetails.onRendered(function () {
   });
 
   // Tell the user when copy is successful
-  copyButton.on('success', function () {
+  copyButton.on('success', () => {
     $('#copyApiUrl').tooltip('hide')
       .attr('data-original-title', 'Copied!')
       .tooltip('show');
@@ -20,37 +21,38 @@ Template.apiDetails.onRendered(function () {
 });
 
 Template.apiDetails.helpers({
-  url () {
+  proxyUrl () {
     // Get reference to template instance
     const instance = Template.instance();
 
+    // Get the proxy settings
+    // TODO: refactor this to support multi-proxy
+    const proxy = Proxies.findOne();
+
     // placeholder for output URL
-    let url;
+    let proxyUrl;
 
     // TODO: refactor for multi-proxy
     if (instance.data.proxyBackend) {
       const proxyBackend = instance.data.proxyBackend;
 
       // Get Proxy host
-      const host = proxyBackend.apiUmbrella.frontend_host;
+      const host = proxy.apiUmbrella.url;
 
 
-      // Get proxy base path
-      let basePath = ''
+      // Get proxy frontend prefix
+      let frontendPrefix = '';
 
       // It can be moment when proxyBackend exists but url_matches isn't
       if (proxyBackend.apiUmbrella.url_matches) {
-        basePath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix
+        frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
       }
 
       // Construct the URL from host and base path
-      url = host + basePath;
-    } else if (instance.data.api) {
-      // Get URL from API
-      url = instance.data.api.url;
+      proxyUrl = host + frontendPrefix;
     }
 
-    return url;
+    return proxyUrl;
   },
   apiKey () {
     // Placeholder for API key
