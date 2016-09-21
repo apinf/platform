@@ -2,6 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
@@ -143,7 +144,8 @@ Template.apiProxy.events({
           umbrellaBackendId,
           (deleteError) => {
             if (deleteError) {
-              sAlert.error(`Delete failed on Umbrella:\n ${deleteError}`);
+              const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
+              sAlert.error(`${deleteErrorMessage}:\n ${deleteError}`);
             } else {
               // Publish changes for deleted API Backend on API Umbrella
               Meteor.call(
@@ -151,11 +153,13 @@ Template.apiProxy.events({
                 umbrellaBackendId,
                 (publishError) => {
                   if (publishError) {
-                    sAlert.error(`Publish failed on Umbrella:\n ${publishError}`);
+                    const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
+                    sAlert.error(`${publishErrorMessage}:\n ${publishError}`);
                   } else if (proxyBackend._id) { // Check proxyBackend has _id
                     // Delete proxyBackend from Apinf
                     ProxyBackends.remove(proxyBackend._id);
-                    sAlert.success('Successfully deleted proxy settings');
+                    const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
+                    sAlert.success(successMessage);
                   }
                 }
               );
