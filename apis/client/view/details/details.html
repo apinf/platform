@@ -52,14 +52,14 @@
       <ul>
         <li>
           {{_ "apiDetails_usageInstructions_urlParameters_text" }}
-          <span>
-            https://&#x0003C;host&#x0003E;/&#x0003C;base_path&#x0003E;?api_key=&#x0003C;user_api_key&#x0003E;
-          </span>
+          <a href="https://{{ url }}{{ # if apiKey }}?api_key={{ apiKey }}{{ / if }}">
+            https://{{ url }}{{ # if apiKey }}?api_key={{ apiKey }}{{ / if }}
+          </a>
         </li>
         <li>
           {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
           <span>
-            X-Api-Key: &#x0003C;user_api_key&#x0003E;
+            X-Api-Key: {{ # if apiKey }}{{ apiKey }}{{ / if }}
           </span>
         </li>
       </ul>
