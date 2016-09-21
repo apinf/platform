@@ -23,6 +23,9 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to proxy settings for this API
   instance.subscribe('apiProxySettings', instance.apiId);
+
+  // Subscribe to public proxy details for relevant Proxy
+  instance.subscribe('publicProxyDetails');
 });
 
 Template.viewApi.helpers({
