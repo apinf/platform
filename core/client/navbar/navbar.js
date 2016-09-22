@@ -74,7 +74,7 @@ Template.navbar.onRendered(() => {
 });
 
 Template.navbar.events({
-  'click #help-button': function () {
+  'click #about-button': function () {
     // Show the 'about Apinf' modal
     Modal.show('aboutApinf');
   },

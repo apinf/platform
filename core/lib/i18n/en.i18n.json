@@ -273,7 +273,7 @@
   "masterLayout_sidebar_ManageAPIBackends": "Manage API Backends",
   "masterLayout_sidebar_Menu": "Menu",
   "masterLayout_sidebar_Users": "Users",
-  "navbar_helpButton_text": "Help",
+  "navbar_aboutButton_text": "About",
   "notAuthorized_Message": "You are not authorized to access this page.",
   "notAuthorized_Return_Message_Part1": "You may",
   "notAuthorized_Return_Message_Part2": "return to a previous page",
