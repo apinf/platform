@@ -1,8 +1,11 @@
+// Meteor package imports
 import { Template } from 'meteor/templating';
 import { Router } from 'meteor/iron:router';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+
+// Apinf imports
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
-import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 Template.viewApi.onCreated(function () {
@@ -78,5 +81,6 @@ Template.viewApi.helpers({
       // Proxy is defined
       return true;
     }
+    return false;
   },
 });
