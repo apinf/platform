@@ -65,10 +65,17 @@ Template.navbar.helpers({
   },
 });
 
-Template.navbar.onRendered(function () {
-  $('.icon-search').click(function () {
+Template.navbar.onRendered(() => {
+  $('.icon-search').click(() => {
     $('.searchblock-toggle').slideToggle('fast');
     $('.toggle-search-icon').toggle();
     $('#search-text').focus();
   });
+});
+
+Template.navbar.events({
+  'click #help-button': function () {
+    // Show the 'about Apinf' modal
+    Modal.show('aboutApinf');
+  },
 });
