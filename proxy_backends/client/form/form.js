@@ -132,41 +132,40 @@ Template.apiProxy.events({
     // Get proxyBackend from template data
     const proxyBackend = instance.data.proxyBackend;
 
-    // Check proxyBackend exists
-    if (proxyBackend) {
-      // Check if proxyBackend type is apiUmbrella & it has id
-      if (proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.id) {
-        const umbrellaBackendId = instance.data.proxyBackend.apiUmbrella.id;
+    // Check proxyBackend exists, type is apiUmbrella, and it has id
+    if (proxyBackend &&
+      proxyBackend.apiUmbrella &&
+      proxyBackend.apiUmbrella.id) {
+      const umbrellaBackendId = instance.data.proxyBackend.apiUmbrella.id;
 
-        // Delete API Backend on API Umbrella
-        Meteor.call(
-          'deleteApiBackendOnApiUmbrella',
-          umbrellaBackendId,
-          (deleteError) => {
-            if (deleteError) {
-              const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
-              sAlert.error(`${deleteErrorMessage}:\n ${deleteError}`);
-            } else {
-              // Publish changes for deleted API Backend on API Umbrella
-              Meteor.call(
-                'publishApiBackendOnApiUmbrella',
-                umbrellaBackendId,
-                (publishError) => {
-                  if (publishError) {
-                    const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
-                    sAlert.error(`${publishErrorMessage}:\n ${publishError}`);
-                  } else if (proxyBackend._id) { // Check proxyBackend has _id
-                    // Delete proxyBackend from Apinf
-                    ProxyBackends.remove(proxyBackend._id);
-                    const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
-                    sAlert.success(successMessage);
-                  }
+      // Delete API Backend on API Umbrella
+      Meteor.call(
+        'deleteApiBackendOnApiUmbrella',
+        umbrellaBackendId,
+        (deleteError) => {
+          if (deleteError) {
+            const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
+            sAlert.error(`${deleteErrorMessage}:\n ${deleteError}`);
+          } else {
+            // Publish changes for deleted API Backend on API Umbrella
+            Meteor.call(
+              'publishApiBackendOnApiUmbrella',
+              umbrellaBackendId,
+              (publishError) => {
+                if (publishError) {
+                  const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
+                  sAlert.error(`${publishErrorMessage}:\n ${publishError}`);
+                } else if (proxyBackend._id) { // Check proxyBackend has _id
+                  // Delete proxyBackend from Apinf
+                  ProxyBackends.remove(proxyBackend._id);
+                  const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
+                  sAlert.success(successMessage);
                 }
-              );
-            }
+              }
+            );
           }
-        );
-      }
+        }
+      );
     }
   },
 });
