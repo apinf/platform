@@ -7,6 +7,11 @@ Meteor.publish('allProxies', function () {
   }
 });
 
+Meteor.publish('proxyCount', function () {
+  // Publish count of proxies
+  Counts.publish(this, 'proxyCount', Proxies.find());
+});
+
 Meteor.publish('publicProxyDetails', function () {
   // Return all proxies
   // with only name and ID fields
