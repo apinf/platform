@@ -18,26 +18,28 @@
         </div>
         <div class="page-head-starsblock pull-right">
           {{# if currentUser }}
-          {{> favourite api=api }}
+            {{> favourite api=api }}
           {{else}}
-          <a href="#" class="star-button">
-            <div
-                 class="api-card-bookmark"
-                 data-toggle="tooltip"
-                 data-placement="bottom"
-                 title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
-              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
-              <i class="fa fa-star bookmark-default"></i>
-            </div>
-          </a>
+            <a href="#" class="star-button">
+              <div
+                  class="api-card-bookmark"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
+                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+                <i class="fa fa-star bookmark-default"></i>
+              </div>
+            </a>
           {{/if}}
         </div>
-        {{> visibilitySwitch api=api }}
+        {{#if api.currentUserCanEdit }}
+          {{> visibilitySwitch api=api }}
+        {{/if}}
       </div>
       {{#if proxyBackend }}
-      <div class="row">
-        <span class="pull-right">{{> apiKey }}</span>
-      </div>
+        <div class="row">
+          <span class="pull-right">{{> apiKey }}</span>
+        </div>
       {{/if }}
       <!-- Tabs -->
       <div class="view-api-navigation">
@@ -72,32 +74,32 @@
               {{_ "viewApiNavigationMenu_backlog" }}
             </a>
           </li>
-          {{ # if currentUser }}
-          {{ # if api.currentUserCanEdit }}
-          <li>
-            <a href="#api-backend-export" data-toggle="tab">
-              <i class="fa fa-cloud-download"></i>
-              {{_ "viewApiNavigationMenu_export" }}
-            </a>
-          </li>
+          {{#if currentUser }}
+            {{#if api.currentUserCanEdit }}
+              <li>
+                <a href="#api-backend-export" data-toggle="tab">
+                  <i class="fa fa-cloud-download"></i>
+                  {{_ "viewApiNavigationMenu_export" }}
+                </a>
+              </li>
 
-            <li>
-              <a href="#api-settings" data-toggle="tab">
-                <i class="fa fa-cog"></i>
-                {{_ "viewApiNavigationMenu_settings" }}
-              </a>
-            </li>
+              <li>
+                <a href="#api-settings" data-toggle="tab">
+                  <i class="fa fa-cog"></i>
+                  {{_ "viewApiNavigationMenu_settings" }}
+                </a>
+              </li>
 
-            {{# if proxyIsConfigured }}
-            <li>
-              <a href="#api-proxy" data-toggle="tab">
-                <i class="fa fa-sitemap"></i>
-                {{_ "viewApiNavigationMenu_proxy" }}
-              </a>
-            </li>
+              {{# if proxyIsConfigured }}
+                <li>
+                  <a href="#api-proxy" data-toggle="tab">
+                    <i class="fa fa-sitemap"></i>
+                    {{_ "viewApiNavigationMenu_proxy" }}
+                  </a>
+                </li>
+              {{/ if }}
             {{/ if }}
-          {{ / if }}
-          {{ / if }}
+          {{/ if }}
         </ul>
       </div>
     </div>
