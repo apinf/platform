@@ -1,4 +1,6 @@
 {
+  "aboutApinf_intro": "Apinf is an open-source API management platform",
+  "aboutApinf_title": "About Apinf",
   "account_delete_button_text": "Delete account",
   "account_delete_warning": "There's no coming back from this one",
   "account_delete_title": "Delete account",
@@ -271,6 +273,7 @@
   "masterLayout_sidebar_ManageAPIBackends": "Manage API Backends",
   "masterLayout_sidebar_Menu": "Menu",
   "masterLayout_sidebar_Users": "Users",
+  "navbar_helpButton_text": "Help",
   "notAuthorized_Message": "You are not authorized to access this page.",
   "notAuthorized_Return_Message_Part1": "You may",
   "notAuthorized_Return_Message_Part2": "return to a previous page",
