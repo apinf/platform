@@ -78,6 +78,7 @@
   "apiIntro_steps_settings_intro": "Edit API settings from this tab. You can also delete also API here.",
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
+  "apiIntro_quickTour_button_text": "Quick tour",
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png, .gif are accepted.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "api_backend_rating_anonymous": "Please log in to vote.",
