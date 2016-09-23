@@ -1,3 +1,8 @@
+import { TAPi18n } from 'meteor/tap:i18n';
+import { Meteor } from 'meteor/meteor';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { AutoForm } from 'meteor/aldeed:autoform';
+
 AutoForm.hooks({
   proxyBackendForm: {
     before: {
