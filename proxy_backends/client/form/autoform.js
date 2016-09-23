@@ -52,5 +52,9 @@ AutoForm.hooks({
       // Alert the user of success
       sAlert.success(message);
     },
+    onError (formType, error) {
+      // Throw an error if one has been chatched
+      return new Meteor.Error(error);
+    },
   },
 });
