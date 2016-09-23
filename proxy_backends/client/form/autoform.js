@@ -48,7 +48,6 @@ AutoForm.hooks({
 
         // Get ID of API Umbrella backend (not the Apinf document ID)
         const umbrellaBackendId = api.apiUmbrella.id;
-
       },
     },
     onSuccess () {
