@@ -7,6 +7,7 @@ import { Template } from 'meteor/templating';
 
 // Library imports
 import { introJs } from 'intro.js';
+import 'intro.js/introjs.css';
 
 Template.apiIntro.onCreated(function () {
   // Get reference to template instance
