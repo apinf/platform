@@ -6,8 +6,8 @@ const Settings = new SimpleSchema({
   'disable_api_key': {
     type: Boolean,
     optional: true,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
 });
 
 const ApiUmbrellaSchema = new SimpleSchema({
@@ -82,7 +82,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
 
 ApiUmbrellaSchema.messages({
   // unique field error message
-  notUnique: "Not unique."
+  notUnique: 'Not unique.',
 });
 
 export { ApiUmbrellaSchema };
