@@ -142,12 +142,21 @@
       </div>
     </div>
 
-    <!-- submit button -->
-    <button
-      type="submit"
-      class="btn btn-success pull-left"
-      id="save-proxy-button">
-      {{_ "proxyBackendForm_saveButton" }}
-    </button>
+    <div id="proxy-form-buttons" class="btn-group pull-left">
+      <!-- submit button -->
+      <button
+        type="submit"
+        class="btn btn-success"
+        id="save-proxy-button">
+        {{_ "proxyBackendForm_saveButton" }}
+      </button>
+      <!-- delete button -->
+      <button
+        type="button"
+        class="btn btn-danger"
+        id="delete-proxy-button">
+        {{_ "proxyBackendForm_deleteButton" }}
+      </button>
+    </div>
   {{/ autoForm }}
 </template>

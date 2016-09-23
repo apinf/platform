@@ -9,7 +9,7 @@ Template.navbar.onCreated(function () {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
-  instance.subscribe('publicProxyDetails');
+  instance.subscribe('proxyCount');
 });
 
 
@@ -61,7 +61,14 @@ Template.navbar.helpers({
     }
   },
   proxyIsDefined () {
-    return (Proxies.findOne()) ? true : false;
+    // Get count of Proxies
+    const proxyCount = Counts.get('proxyCount');
+
+    // Check that a proxy is defined
+    if (proxyCount > 0) {
+      // Proxy is defined
+      return true;
+    }
   },
 });
 

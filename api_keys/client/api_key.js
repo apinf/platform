@@ -8,11 +8,14 @@ Template.apiKey.onCreated(function () {
 });
 
 Template.apiKey.onRendered(function () {
+  // Get reference of template instance
+  instance = this;
+  
   // Initialize Clipboard copy button
-  const copyButton = new Clipboard('#copy-api-key');
+  instance.copyButton = new Clipboard('#copy-api-key');
 
   // Tell the user when copy is successful
-  copyButton.on('success', function (event) {
+  instance.copyButton.on('success', function (event) {
     // Get localized success message
     const message = TAPi18n.__('apiKeys_copySuccessful');
 
@@ -23,11 +26,19 @@ Template.apiKey.onRendered(function () {
   });
 });
 
+Template.apiKey.onDestroyed(function () {
+  // Get object of Clipboard
+  const copyButton = this.copyButton;
+  // Free up memory
+  copyButton.destroy();
+});
 
 Template.apiKey.events({
   'click #get-api-key': function (event) {
+    // Get processing message translation
+    const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
     // Set bootstrap loadingText
-    $('#get-api-key').button({ loadingText: TAPi18n.__('apiKeys_getApiKeyButton_processing') });
+    $('#get-api-key').button({ loadingText: message });
 
     // Set button to processing state
     $('#get-api-key').button('loading');

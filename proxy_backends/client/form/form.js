@@ -1,3 +1,9 @@
+// Meteor package imports
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
@@ -108,6 +114,58 @@ Template.proxyBackend.helpers({
       const frontend = URI(proxy.apiUmbrella.url);
 
       return frontend.host();
+    }
+  },
+});
+
+Template.apiProxy.events({
+  'click #delete-proxy-button': () => {
+    /* Function procedure in generic form
+    1. Delete API Backend on proxy (eg. API Umbrella)
+      - call necessary functions by proxy type
+    2. Delete Proxy Backend on Apinf
+    */
+
+    // Get template instance
+    const instance = Template.instance();
+
+    // Get proxyBackend from template data
+    const proxyBackend = instance.data.proxyBackend;
+
+    // Check proxyBackend exists, type is apiUmbrella, and it has id
+    if (proxyBackend &&
+      proxyBackend.apiUmbrella &&
+      proxyBackend.apiUmbrella.id) {
+      const umbrellaBackendId = instance.data.proxyBackend.apiUmbrella.id;
+
+      // Delete API Backend on API Umbrella
+      Meteor.call(
+        'deleteApiBackendOnApiUmbrella',
+        umbrellaBackendId,
+        (deleteError) => {
+          if (deleteError) {
+            const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
+            sAlert.error(`${deleteErrorMessage}:\n ${deleteError}`);
+          } else {
+            // Publish changes for deleted API Backend on API Umbrella
+            Meteor.call(
+              'publishApiBackendOnApiUmbrella',
+              umbrellaBackendId,
+              (publishError) => {
+                if (publishError) {
+                  const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
+                  sAlert.error(`${publishErrorMessage}:\n ${publishError}`);
+                } else if (proxyBackend._id) { // Check proxyBackend has _id
+                  // Delete proxyBackend from Apinf
+                  ProxyBackends.remove(proxyBackend._id);
+                  const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
+                  sAlert.success(successMessage);
+                }
+              }
+            );
+          }
+        }
+      );
     }
   },
 });

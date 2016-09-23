@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-AutoForm.addHooks('addProxy', {
+AutoForm.addHooks('proxyForm', {
   onSuccess (formType, result) {
     // Hide modal
     Modal.hide('addProxy');
