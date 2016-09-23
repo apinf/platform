@@ -1,4 +1,4 @@
-import { contactEmailValid } from '/core/helper_functions/validate_settings';
+import { mailSettingsValid, contactEmailValid } from '/core/helper_functions/validate_settings';
 import { Settings } from '/settings/collection';
 
 Template.homeBody.onCreated(function () {
@@ -13,9 +13,10 @@ Template.homeBody.rendered = function () {
 };
 
 Template.homeBody.helpers({
-  contactDetailsValid () {
+  contactFormEnabled () {
     const settings = Settings.findOne();
 
-    return contactEmailValid(settings);
+    // Check mail settings are valid & contact email has been given
+    return mailSettingsValid(settings) && contactEmailValid(settings);
   },
 });

@@ -143,6 +143,7 @@ tap:i18n@1.8.2
 tap:i18n-ui@0.8.0
 templating@1.2.14
 templating-tools@1.0.4
+tmeasday:publish-counts@0.7.3
 tracker@1.1.0
 twbs:bootstrap@3.3.6
 ui@1.0.11

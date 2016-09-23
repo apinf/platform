@@ -1,8 +1,11 @@
+// Meteor package imports
 import { Template } from 'meteor/templating';
 import { Router } from 'meteor/iron:router';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+
+// Apinf imports
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
-import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 Template.viewApi.onCreated(function () {
@@ -19,10 +22,13 @@ Template.viewApi.onCreated(function () {
   instance.subscribe('apiBacklogItems', instance.apiId);
 
   // Subscribe to public proxy details
-  instance.subscribe('publicProxyDetails');
+  instance.subscribe('proxyCount');
 
   // Subscribe to proxy settings for this API
   instance.subscribe('apiProxySettings', instance.apiId);
+
+  // Subscribe to public proxy details for proxy form
+  instance.subscribe('publicProxyDetails');
 });
 
 Template.viewApi.helpers({
@@ -67,17 +73,14 @@ Template.viewApi.helpers({
     return backlogItems;
   },
   proxyIsConfigured () {
-    // Check if one or more proxy has been configured
-    let proxyIsConfigured;
+    // Get count of Proxies
+    const proxyCount = Counts.get('proxyCount');
 
-    const proxyCount = Proxies.find().count();
-
+    // Check that a proxy is defined
     if (proxyCount > 0) {
-      proxyIsConfigured = true;
-    } else {
-      proxyIsConfigured = false;
+      // Proxy is defined
+      return true;
     }
-
-    return proxyIsConfigured;
+    return false;
   },
 });

@@ -13,8 +13,8 @@
           APInf
         </a>
         {{ else }}
-        <div class="project-name" href="/">
-          <a class="project-name-link">
+        <div class="project-name">
+          <a href="/" class="project-name-link">
             {{ branding.siteTitle }}
           </a>
         </div>
@@ -82,6 +82,12 @@
               <i class="fa fa-search toggle-search-icon"></i>
               <i class="fa fa-times toggle-search-icon"></i>
             </a>
+          </li>
+          <li>
+            <button type="button" class="btn navbar-btn btn-primary" id="about-button">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+              {{_ "navbar_aboutButton_text" }}
+            </button>
           </li>
         </ul>
       </div>

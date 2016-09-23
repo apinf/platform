@@ -21,7 +21,7 @@
 
       {{ # if currentUser }}
         {{# if api.currentUserCanEdit }}
-          <div id="api-backend-export" class="tab-pane fade">
+          <div id="api-export" class="tab-pane fade">
             {{> apiExport api=api }}
           </div> <!-- /api-export -->
         {{ / if }}
@@ -36,7 +36,7 @@
 
           {{# if proxyIsConfigured }}
           <div id="api-proxy" class="tab-pane fade">
-            {{> apiProxy api=api }}
+            {{> apiProxy api=api proxyBackend=proxyBackend }}
           </div> <!-- /api-proxy -->
           {{/ if }}
 

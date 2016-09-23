@@ -19,6 +19,7 @@
       2,
       "always-multiline"
     ],
+    "import/no-extraneous-dependencies": 0,
     "space-before-function-paren": [
       2,
       {
@@ -29,7 +30,7 @@
     "no-underscore-dangle": [
       2,
       {
-        "allow": ["_id"]
+        "allow": ["_id", "__"]
       }
     ]
   }
