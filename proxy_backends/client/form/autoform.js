@@ -51,45 +51,45 @@ AutoForm.hooks({
         // Get reference to form instance to use inside the callback function
         const form = this;
 
-        // Get current API document for modification
-        const api = form.currentDoc;
-
         // Get ID of API Umbrella backend (not the Apinf document ID)
-        const umbrellaBackendId = api.apiUmbrella.id;
+        const apiUmbrellaBackendId = form.currentDoc.apiUmbrella.id;
 
-        // // Update API on API Umbrella
-        // Meteor.call(
-        //   'updateApiBackendOnApiUmbrella',
-        //   umbrellaBackendId,
-        //   api,
-        //   (error) => {
-        //     // Check for error
-        //     if (error) {
-        //       // Throw error for debugging
-        //       Meteor.throw(500, error);
-        //     } else {
-        //       // Publish the API on API Umbrella
-        //       Meteor.call(
-        //         'publishApiBackendOnApiUmbrella',
-        //         umbrellaBackendId,
-        //         (error) => {
-        //           // Check for error
-        //           if (error) {
-        //             // Throw error for debugging
-        //             Meteor.throw(500, error);
-        //           } else {
-        //             // Get success message translation
-        //             const message = TAPi18n.__('proxyBackendForm_update_successMessage');
-        //             // Alert user of success
-        //             sAlert.success(message);
-        //
-        //             // Continue with form submission
-        //             form.result(apiModifier);
-        //           }
-        //         }
-        //       );
-        //     }
-        //   });
+        // Get update API document
+        const apiUmbrellaBackendUpdate = form.updateDoc.$set.apiUmbrella;
+
+        // Update API on API Umbrella
+        Meteor.call(
+          'updateApiBackendOnApiUmbrella',
+          apiUmbrellaBackendId,
+          apiUmbrellaBackendUpdate,
+          (error) => {
+            // Check for error
+            if (error) {
+              // Throw error for debugging
+              Meteor.throw(500, error);
+            } else {
+              // Publish the API on API Umbrella
+              Meteor.call(
+                'publishApiBackendOnApiUmbrella',
+                apiUmbrellaBackendId,
+                (error) => {
+                  // Check for error
+                  if (error) {
+                    // Throw error for debugging
+                    Meteor.throw(500, error);
+                  } else {
+                    // Get success message translation
+                    const message = TAPi18n.__('proxyBackendForm_update_successMessage');
+                    // Alert user of success
+                    sAlert.success(message);
+
+                    // Continue with form submission
+                    form.result(apiModifier);
+                  }
+                }
+              );
+            }
+          });
       },
     },
     onSuccess () {
