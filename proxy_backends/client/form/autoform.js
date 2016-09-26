@@ -52,13 +52,14 @@ AutoForm.hooks({
     },
     onSuccess (formType, result) {
       if (formType === 'update') {
+        // Get the Proxy Backend ID
         const proxyBackendId = this.docId;
 
+        // Get Proxy Backend document
         const proxyBackend = ProxyBackends.findOne(proxyBackendId);
 
+        // Get API Umbrella configuration object from Proxy Backend
         const apiUmbrellaBackend = proxyBackend.apiUmbrella;
-
-        console.log(apiUmbrellaBackend);
 
         // Update API on API Umbrella
         Meteor.call(
@@ -71,18 +72,32 @@ AutoForm.hooks({
               // Throw error for debugging
               Meteor.throw(500, error);
             } else {
-              console.log('Updated!');
+              // Publish the API Backend on API Umbrella
+              Meteor.call(
+                'publishApiBackendOnApiUmbrella',
+                apiUmbrellaBackend.id,
+                (error, result) => {
+                  if (error) {
+                    Meteor.throw(500, error);
+                  } else {
+                    // Get update success message translation
+                    const message = TAPi18n.__('proxyBackendForm_update_successMessage');
+
+                    // Alert the user of success
+                    sAlert.success(message);
+                  }
+                }
+              );
             }
           }
         );
+      } else {
+        // Get success message translation
+        const message = TAPi18n.__('proxyBackendForm_successMessage');
+
+        // Alert the user of success
+        sAlert.success(message);
       }
-
-
-      // Get success message translation
-      const message = TAPi18n.__('proxyBackendForm_successMessage');
-
-      // Alert the user of success
-      sAlert.success(message);
     },
     onError (formType, error) {
       console.log(formType);
