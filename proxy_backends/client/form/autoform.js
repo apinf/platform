@@ -40,7 +40,7 @@ AutoForm.hooks({
                     if (error) {
                       Meteor.throw(500, error);
                     } else {
-                      // Insert the API document, asynchronous
+                      // Insert the Proxy Backend document, asynchronous
                       form.result(proxyBackend);
                     }
                   }
