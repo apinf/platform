@@ -7,6 +7,9 @@ AutoForm.hooks({
   proxyBackendForm: {
     before: {
       insert (api) {
+        // Get reference to autoform instance, for form submission callback
+        const form = this;
+
         // Get API Umbrella configuration
         Meteor.call('createApiBackendOnApiUmbrella',
           api.apiUmbrella,
@@ -36,7 +39,7 @@ AutoForm.hooks({
                       Meteor.throw(500, error);
                     } else {
                       // Insert the API document, asynchronous
-                      this.result(api);
+                      form.result(api);
                     }
                   }
                 );
