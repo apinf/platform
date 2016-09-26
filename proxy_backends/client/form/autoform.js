@@ -70,6 +70,7 @@ AutoForm.hooks({
             // Check for error
             if (error) {
               // Throw error for debugging
+              // TODO: indicate that API Umbrella may be out of sync with local collection
               Meteor.throw(500, error);
             } else {
               // Publish the API Backend on API Umbrella
