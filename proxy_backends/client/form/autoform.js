@@ -100,9 +100,5 @@ AutoForm.hooks({
         sAlert.success(message);
       }
     },
-    onError (formType, error) {
-      console.log(formType);
-      console.log(error);
-    },
   },
 });
