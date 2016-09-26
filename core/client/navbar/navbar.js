@@ -1,15 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Router } from 'meteor/iron:router';
 
-import { Proxies } from '/proxies/collection';
 import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
+import { Settings } from '/settings/collection';
+
+import $ from 'jquery';
 
 Template.navbar.onCreated(function () {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
   instance.subscribe('proxyCount');
+  instance.subscribe('settings');
 });
 
 
@@ -20,15 +25,15 @@ Template.navbar.helpers({
     // return that url
     return profilePicture.url();
   },
-  'isSearchRoute': function () {
+  isSearchRoute () {
     // Get name of current route from Router
     const routeName = Router.current().route.getName();
 
     if (routeName === 'search') {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   },
   uploadedProjectLogoLink () {
     // Check for existing branding
@@ -47,9 +52,12 @@ Template.navbar.helpers({
       // Check if project logo file is available
       if (projectLogoFile) {
         // Get API logo file URL
-        return Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL + '/md5/' + projectLogoFile.md5;
+        return Meteor.absoluteUrl().slice(0, -1) +
+        ProjectLogo.baseURL + '/md5/' + projectLogoFile.md5;
       }
     }
+
+    return '';
   },
   projectLogoExists () {
     // Get branding if it exists
@@ -59,6 +67,8 @@ Template.navbar.helpers({
     if (branding && branding.projectLogoFileId) {
       return true;
     }
+
+    return false;
   },
   proxyIsDefined () {
     // Get count of Proxies
@@ -68,6 +78,19 @@ Template.navbar.helpers({
     if (proxyCount > 0) {
       // Proxy is defined
       return true;
+    }
+
+    return false;
+  },
+  onlyAdminsCanAdd () {
+    const settings = Settings.findOne();
+
+    try {
+      const onlyAdminsCanAddApi = settings.access.onlyAdminsCanAddApi;
+
+      return onlyAdminsCanAddApi;
+    } catch (e) {
+      return false;
     }
   },
 });
