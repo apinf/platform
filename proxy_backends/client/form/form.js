@@ -84,7 +84,7 @@ Template.proxyBackend.helpers({
     } else {
       formType = 'insert';
     }
-
+    console.log(formType);
     return formType;
   },
   proxy () {
