@@ -1,3 +1,5 @@
+import { ProxyBackends } from '../../collection';
+
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Meteor } from 'meteor/meteor';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
@@ -47,52 +49,35 @@ AutoForm.hooks({
             }
           });
       },
-      update (apiModifier) {
-        // Get reference to form instance to use inside the callback function
-        const form = this;
+    },
+    onSuccess (formType, result) {
+      if (formType === 'update') {
+        const proxyBackendId = this.docId;
 
-        // Get ID of API Umbrella backend (not the Apinf document ID)
-        const apiUmbrellaBackendId = form.currentDoc.apiUmbrella.id;
+        const proxyBackend = ProxyBackends.findOne(proxyBackendId);
 
-        // Get update API document
-        const apiUmbrellaBackendUpdate = form.updateDoc.$set.apiUmbrella;
+        const apiUmbrellaBackend = proxyBackend.apiUmbrella;
+
+        console.log(apiUmbrellaBackend);
 
         // Update API on API Umbrella
         Meteor.call(
           'updateApiBackendOnApiUmbrella',
-          apiUmbrellaBackendId,
-          apiUmbrellaBackendUpdate,
+          apiUmbrellaBackend.id,
+          apiUmbrellaBackend,
           (error) => {
             // Check for error
             if (error) {
               // Throw error for debugging
               Meteor.throw(500, error);
             } else {
-              // Publish the API on API Umbrella
-              Meteor.call(
-                'publishApiBackendOnApiUmbrella',
-                apiUmbrellaBackendId,
-                (error) => {
-                  // Check for error
-                  if (error) {
-                    // Throw error for debugging
-                    Meteor.throw(500, error);
-                  } else {
-                    // Get success message translation
-                    const message = TAPi18n.__('proxyBackendForm_update_successMessage');
-                    // Alert user of success
-                    sAlert.success(message);
-
-                    // Continue with form submission
-                    form.result(apiModifier);
-                  }
-                }
-              );
+              console.log('Updated!');
             }
-          });
-      },
-    },
-    onSuccess () {
+          }
+        );
+      }
+
+
       // Get success message translation
       const message = TAPi18n.__('proxyBackendForm_successMessage');
 
