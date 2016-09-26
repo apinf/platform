@@ -6,13 +6,13 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 AutoForm.hooks({
   proxyBackendForm: {
     before: {
-      insert (api) {
+      insert (proxyBackend) {
         // Get reference to autoform instance, for form submission callback
         const form = this;
 
         // Get API Umbrella configuration
         Meteor.call('createApiBackendOnApiUmbrella',
-          api.apiUmbrella,
+          proxyBackend.apiUmbrella,
           (error, response) => {
             if (error) {
               // Throw a Meteor error
@@ -28,7 +28,7 @@ AutoForm.hooks({
                 const umbrellaBackendId = response.result.data.api.id;
 
                 // Attach the API Umbrella backend ID to backend document
-                api.apiUmbrella.id = umbrellaBackendId;
+                proxyBackend.apiUmbrella.id = umbrellaBackendId;
 
                 // Publish the API Backend on API Umbrella
                 Meteor.call(
@@ -39,7 +39,7 @@ AutoForm.hooks({
                       Meteor.throw(500, error);
                     } else {
                       // Insert the API document, asynchronous
-                      form.result(api);
+                      form.result(proxyBackend);
                     }
                   }
                 );
@@ -47,46 +47,49 @@ AutoForm.hooks({
             }
           });
       },
-      update () {
-        // Keep the context to use inside the callback function
-        const context = this;
+      update (apiModifier) {
+        // Get reference to form instance to use inside the callback function
+        const form = this;
 
         // Get current API document for modification
-        const api = context.currentDoc;
+        const api = form.currentDoc;
 
         // Get ID of API Umbrella backend (not the Apinf document ID)
         const umbrellaBackendId = api.apiUmbrella.id;
 
-        // Update API on API Umbrella
-        Meteor.call(
-          'updateApiBackendOnApiUmbrella',
-          umbrellaBackendId,
-          api,
-          (error) => {
-            // Check for error
-            if (error) {
-              // Throw error for debugging
-              Meteor.throw(500, error);
-            } else {
-              // Publish the API on API Umbrella
-              Meteor.call(
-                'publishApiBackendOnApiUmbrella',
-                umbrellaBackendId,
-                (error) => {
-                  // Check for error
-                  if (error) {
-                    // Throw error for debugging
-                    Meteor.throw(500, error);
-                  } else {
-                    // Get success message translation
-                    const message = TAPi18n.__('proxyBackendForm_update_successMessage');
-                    // Alert user of success
-                    sAlert.success(message);
-                  }
-                }
-              );
-            }
-          });
+        // // Update API on API Umbrella
+        // Meteor.call(
+        //   'updateApiBackendOnApiUmbrella',
+        //   umbrellaBackendId,
+        //   api,
+        //   (error) => {
+        //     // Check for error
+        //     if (error) {
+        //       // Throw error for debugging
+        //       Meteor.throw(500, error);
+        //     } else {
+        //       // Publish the API on API Umbrella
+        //       Meteor.call(
+        //         'publishApiBackendOnApiUmbrella',
+        //         umbrellaBackendId,
+        //         (error) => {
+        //           // Check for error
+        //           if (error) {
+        //             // Throw error for debugging
+        //             Meteor.throw(500, error);
+        //           } else {
+        //             // Get success message translation
+        //             const message = TAPi18n.__('proxyBackendForm_update_successMessage');
+        //             // Alert user of success
+        //             sAlert.success(message);
+        //
+        //             // Continue with form submission
+        //             form.result(apiModifier);
+        //           }
+        //         }
+        //       );
+        //     }
+        //   });
       },
     },
     onSuccess () {
@@ -95,6 +98,10 @@ AutoForm.hooks({
 
       // Alert the user of success
       sAlert.success(message);
+    },
+    onError (formType, error) {
+      console.log(formType);
+      console.log(error);
     },
   },
 });
