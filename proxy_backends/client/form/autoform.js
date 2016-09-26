@@ -53,6 +53,37 @@ AutoForm.hooks({
 
         // Get ID of API Umbrella backend (not the Apinf document ID)
         const umbrellaBackendId = api.apiUmbrella.id;
+
+        // Update API on API Umbrella
+        Meteor.call(
+          'updateApiBackendOnApiUmbrella',
+          umbrellaBackendId,
+          api,
+          (error) => {
+            // Check for error
+            if (error) {
+              // Throw error for debugging
+              Meteor.throw(500, error);
+            } else {
+              // Publish the API on API Umbrella
+              Meteor.call(
+                'publishApiBackendOnApiUmbrella',
+                umbrellaBackendId,
+                (error) => {
+                  // Check for error
+                  if (error) {
+                    // Throw error for debugging
+                    Meteor.throw(500, error);
+                  } else {
+                    // Get success message translation
+                    const message = TAPi18n.__('proxyBackendForm_update_successMessage');
+                    // Alert user of success
+                    sAlert.success(message);
+                  }
+                }
+              );
+            }
+          });
       },
     },
     onSuccess () {
