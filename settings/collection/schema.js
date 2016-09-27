@@ -10,6 +10,7 @@ Settings.schema = new SimpleSchema({
   'access.onlyAdminsCanAddApi': {
     type: Boolean,
     optional: true,
+    label: 'Only platform administrators are allowed to add new APIs',
   },
   apiDocumentationEditor: {
     type: Object,
