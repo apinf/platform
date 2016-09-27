@@ -2,41 +2,39 @@
   <div class="page-head-topblock">
     <div class="container">
       <!-- Header -->
-      <div class="row">
-        <div class="page-head-infoblock">
-          {{> viewApiLogo }}
-          <h1 id="api-header">
-            {{ api.name }}
-            {{> viewApiStatus api=api width="0.4" }}
-          </h1>
-          <ul class="list-inline view-api-meta-details">
-            <li>
-              <i class="fa fa-user"></i>
-              {{ api.getApiManagersByName }}
-            </li>
-          </ul>
-        </div>
-        <div class="page-head-starsblock pull-right">
-          {{# if currentUser }}
-            {{> favourite api=api }}
-          {{else}}
-            <a href="#" class="star-button">
-              <div
-                  class="api-card-bookmark"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
-                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
-                <i class="fa fa-star bookmark-default"></i>
-              </div>
-            </a>
-          {{/if}}
-        </div>
-        {{#if api.currentUserCanEdit }}
-          {{> visibilitySwitch api=api }}
-          {{> apiIntro }}
+      <div class="page-head-infoblock">
+        {{> viewApiLogo }}
+        <h1 id="api-header">
+          {{ api.name }}
+          {{> viewApiStatus api=api width="0.4" }}
+        </h1>
+        <ul class="list-inline view-api-meta-details">
+          <li>
+            <i class="fa fa-user"></i>
+            {{ api.getApiManagersByName }}
+          </li>
+        </ul>
+      </div>
+      <div class="page-head-starsblock pull-right">
+        {{# if currentUser }}
+          {{> favourite api=api }}
+        {{else}}
+          <a href="#" class="star-button">
+            <div
+                class="api-card-bookmark"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
+              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+              <i class="fa fa-star bookmark-default"></i>
+            </div>
+          </a>
         {{/if}}
       </div>
+      {{#if api.currentUserCanEdit }}
+        {{> visibilitySwitch api=api }}
+        {{> apiIntro }}
+      {{/if}}
       {{#if proxyBackend }}
         <div class="row">
           <span class="pull-right">{{> apiKey }}</span>
