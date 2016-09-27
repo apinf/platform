@@ -319,6 +319,7 @@
   "proxyBackendForm_deleteErrorMessage": "Delete failed on Umbrella",
   "proxyBackendForm_publishErrorMessage": "Publish failed on Umbrella",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
+  "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
   "publishApiBackendOnApiUmbrella_successMessage": "API Backend successfully published.",
