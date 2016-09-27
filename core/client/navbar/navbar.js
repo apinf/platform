@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Router } from 'meteor/iron:router';
+import { Roles } from 'meteor/alanning:roles';
 
 import { Branding } from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
@@ -82,15 +83,29 @@ Template.navbar.helpers({
 
     return false;
   },
-  onlyAdminsCanAdd () {
-    const settings = Settings.findOne();
-
+  userCanAddApi () {
     try {
+      // Get settigns document
+      const settings = Settings.findOne();
+
+      // Get access setting value
       const onlyAdminsCanAddApi = settings.access.onlyAdminsCanAddApi;
 
-      return onlyAdminsCanAddApi;
+      if (!onlyAdminsCanAddApi) {
+        return true;
+      }
+
+      // Get current user Id
+      const userId = Meteor.userId();
+
+      // Check if current user is admin
+      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+      return onlyAdminsCanAddApi && userIsAdmin;
     } catch (e) {
-      return false;
+      // If caught an error, then returning true because no access settings is set
+      // By default allowing all user to add an API
+      return true;
     }
   },
 });
