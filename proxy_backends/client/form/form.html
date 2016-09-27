@@ -4,6 +4,7 @@
     id="proxyBackendForm"
     type=formType
     doc=apiProxySettings
+    validation="keyup"
   }}
 
     <!-- hidden fields, auto-value -->
@@ -120,26 +121,25 @@
           {{_ "proxyBackendForm_apiPort_helpText" }}
         </p>
       </div>
+    </div>
 
-      <!-- Advanced settings -->
-      <div class="form-group col-md-12" id="advanced-settings">
+    <!-- Advanced settings -->
+    <div class="form-group col-md-12" id="advanced-settings">
+      <!-- Advanced settings block title -->
+      <h3>
+        {{_ "proxyBackendForm_advancedSettings_title" }}
+      </h3>
 
-        <!-- Advanced settings block title -->
-        <h3>
-          {{_ "proxyBackendForm_advancedSettings_title" }}
-        </h3>
+      <!-- field input -->
+      {{> afQuickField
+        name="apiUmbrella.settings.disable_api_key"
+        type="boolean-checkbox"
+      }}
 
-        <!-- field input -->
-        {{> afQuickField
-          name="apiUmbrella.settings.disable_api_key"
-          type="boolean-checkbox"
-        }}
-
-        <!-- help text -->
-        <p class="help-block">
-          {{_ "proxyBackendForm_disableApiKey_helpText" }}
-        </p>
-      </div>
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_disableApiKey_helpText" }}
+      </p>
     </div>
 
     <div id="proxy-form-buttons" class="btn-group pull-left">

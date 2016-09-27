@@ -5,7 +5,7 @@
       <div class="row">
         <div class="page-head-infoblock">
           {{> viewApiLogo }}
-          <h1 class="api-name">
+          <h1 id="api-header">
             {{ api.name }}
             {{> viewApiStatus api=api width="0.4" }}
           </h1>
@@ -34,6 +34,7 @@
         </div>
         {{#if api.currentUserCanEdit }}
           {{> visibilitySwitch api=api }}
+          {{> apiIntro }}
         {{/if}}
       </div>
       {{#if proxyBackend }}
@@ -42,62 +43,72 @@
         </div>
       {{/if }}
       <!-- Tabs -->
-      <div class="view-api-navigation">
+      <div id="api-navigation-tabs">
         <ul class="nav nav-tabs">
-          <li class="active">
+          <li id ="api-details-tab" class="active">
             <a href="#api-details" data-toggle="tab">
               <i class="fa fa-info-circle"></i>
               {{_ "viewApiNavigationMenu_details" }}
             </a>
           </li>
-          <li>
+
+          <!-- Documentatoin -->
+          <li id="api-documentation-tab">
             <a href="#api-documentation" data-toggle="tab">
               <i class="fa fa-file-text"></i>
               {{_ "viewApiNavigationMenu_documentation" }}
             </a>
           </li>
-          <li>
+
+          <!-- Metadata -->
+          <li id="api-metadata-tab">
             <a href="#api-metadata" data-toggle="tab">
               <i class="fa fa-book"></i>
               {{_ "viewApiNavigationMenu_metadata" }}
             </a>
           </li>
-          <li>
+
+          <!-- Feedback -->
+          <li id="api-feedback-tab">
             <a href="#api-feedback" data-toggle="tab">
               <i class="fa fa-comments-o"></i>
               {{_ "viewApiNavigationMenu_feedback" }}
             </a>
           </li>
-          <li>
+
+          <!-- Backlog -->
+          <li id="api-backlog-tab">
             <a href="#api-backlog" data-toggle="tab">
               <i class="fa fa-check-square-o"></i>
               {{_ "viewApiNavigationMenu_backlog" }}
             </a>
           </li>
-          {{#if currentUser }}
-            {{#if api.currentUserCanEdit }}
-              <li>
-                <a href="#api-backend-export" data-toggle="tab">
-                  <i class="fa fa-cloud-download"></i>
-                  {{_ "viewApiNavigationMenu_export" }}
-                </a>
-              </li>
 
-              <li>
-                <a href="#api-settings" data-toggle="tab">
-                  <i class="fa fa-cog"></i>
-                  {{_ "viewApiNavigationMenu_settings" }}
-                </a>
-              </li>
+          {{ # if api.currentUserCanEdit }}
+            <!-- Export -->
+            <li id="api-export-tab">
+              <a href="#api-export" data-toggle="tab">
+                <i class="fa fa-cloud-download"></i>
+                {{_ "viewApiNavigationMenu_export" }}
+              </a>
+            </li>
 
-              {{# if proxyIsConfigured }}
-                <li>
-                  <a href="#api-proxy" data-toggle="tab">
-                    <i class="fa fa-sitemap"></i>
-                    {{_ "viewApiNavigationMenu_proxy" }}
-                  </a>
-                </li>
-              {{/ if }}
+            <!-- Settings -->
+            <li id="api-settings-tab">
+              <a href="#api-settings" data-toggle="tab">
+                <i class="fa fa-cog"></i>
+                {{_ "viewApiNavigationMenu_settings" }}
+              </a>
+            </li>
+
+            {{# if proxyIsConfigured }}
+            <!-- Proxy -->
+            <li id="api-proxy-tab">
+              <a href="#api-proxy" data-toggle="tab">
+                <i class="fa fa-sitemap"></i>
+                {{_ "viewApiNavigationMenu_proxy" }}
+              </a>
+            </li>
             {{/ if }}
           {{/ if }}
         </ul>
