@@ -1,57 +1,81 @@
-import Clipboard from "clipboard";
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import $ from 'jquery';
+import Clipboard from 'clipboard';
+import { ApiKeys } from '/api_keys/collection';
+import { Proxies } from '/proxies/collection';
 
-Template.viewApiBackendDetails.onCreated(function () {
-
-  // Get reference to template instance
-  var instance = this;
-
-  // Create variable to hold API Umbrella base URL
-  instance.apiUmbrellaBaseUrl = new ReactiveVar();
-
-  // Get API Umbrella base URL from server
-  Meteor.call("getApiUmbrellaBaseUrl", function (error, apiUmbrellaBaseUrl) {
-    // Set reactive variable to contain API Umbrella base URL
-    instance.apiUmbrellaBaseUrl.set(apiUmbrellaBaseUrl);
-  });
-});
-
-Template.viewApiBackendDetails.helpers({
-  apiUmbrellaBaseUrl: function () {
-
-    // Get reference to template instance
-    var instance = Template.instance();
-
-    // Fetch API Backend's frontend prefix value
-    var apiBackendFrontendPrefix = instance.data.apiBackend.url_matches[0].frontend_prefix;
-
-    // Get reference to API Umbrella base URL & construct a URI object
-    var apiUmbrellaBaseUrl = new URI(instance.apiUmbrellaBaseUrl.get());
-
-    // Append a frontend prefix to a API Umbrella base URL
-    apiUmbrellaBaseUrl.segment(0, apiBackendFrontendPrefix);
-
-    // Clean up URL & remove extra slashes
-    apiUmbrellaBaseUrl.normalize();
-
-    return apiUmbrellaBaseUrl;
-  }
-});
-
-Template.viewApiBackendDetails.onRendered(function () {
-
+Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
-  let copyButton = new Clipboard("#copyBaseUrl");
+  const copyButton = new Clipboard('#copyApiUrl');
 
   // Tooltip position
-  $('#copyBaseUrl').tooltip({
+  $('#copyApiUrl').tooltip({
     trigger: 'click',
-    placement: 'bottom'
+    placement: 'bottom',
   });
 
   // Tell the user when copy is successful
-  copyButton.on("success", function () {
-    $('#copyBaseUrl').tooltip('hide')
+  copyButton.on('success', () => {
+    $('#copyApiUrl').tooltip('hide')
       .attr('data-original-title', 'Copied!')
       .tooltip('show');
   });
+});
+
+Template.apiDetails.helpers({
+  proxyUrl () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get the proxy settings
+    // TODO: refactor this to support multi-proxy
+    const proxy = Proxies.findOne();
+
+    // placeholder for output URL
+    let proxyUrl;
+
+    // TODO: refactor for multi-proxy
+    if (instance.data.proxyBackend) {
+      const proxyBackend = instance.data.proxyBackend;
+
+      // Get Proxy host
+      const host = proxy.apiUmbrella.url;
+
+
+      // Get proxy frontend prefix
+      let frontendPrefix = '';
+
+      // It can be moment when proxyBackend exists but url_matches isn't
+      if (proxyBackend.apiUmbrella.url_matches) {
+        frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+      }
+
+      // Construct the URL from host and base path
+      proxyUrl = host + frontendPrefix;
+    }
+
+    return proxyUrl;
+  },
+  apiKey () {
+    // Placeholder for API key
+    let apiKey;
+
+    // Get current user
+    const currentUserId = Meteor.userId();
+
+    // Make sure user exists and has API key
+    if (currentUserId) {
+      // Get API Key document
+      const userApiKey = ApiKeys.findOne({ userId: currentUserId });
+
+      // Check that Umbrella API key exists
+      if (userApiKey && userApiKey.apiUmbrella) {
+        // Get the API Key, from API key document
+        apiKey = userApiKey.apiUmbrella.apiKey;
+      }
+    }
+
+    return apiKey;
+  },
 });

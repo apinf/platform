@@ -1,60 +1,47 @@
-<template name="viewApiBackendSettings">
+<template name="apiSettings">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
-        {{_ "viewApiBackendSettings_panelTitleAbout" }}
+        {{_ "apiSettings_panelTitleAbout" }}
       </h2>
     </div>
     <div class="panel-body">
-      <h3>{{_ "editApiBackendForm-uploadLogo" }}</h3>
+      <h3>
+        {{_ "apiSettings_uploadLogo_heading" }}
+      </h3>
       <p>
-        {{_ "viewApiBackendSettings_uploadLogoText" }}
+        {{_ "apiSettings_uploadLogoText" }}
       </p>
-      {{> uploadApiLogo apiBackend=apiBackend }}
+      {{> uploadApiLogo api=api }}
       <hr class="panel-hr" />
-      {{#autoForm collection=formCollection doc=apiBackend id="apiBackendForm" type="update"}}
+      {{#autoForm collection=formCollection doc=api id="apiBackendForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='description'}}
+      {{> afQuickField name='url'}}
       <div id="form-buttons">
-        <button type="submit" class="btn btn-success" id="save-settings">Save</button>
+        <button type="submit" class="btn btn-success" id="save-settings">
+          {{_ "viewApiSettigs_saveButton_text" }}
+        </button>
       </div>
       {{/autoForm}}
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        {{_ "viewApiBackendSettings_panelTitleEdit" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      <h3>{{_ "viewApiBackendSettings_editApiSettingsTitle" }}</h3>
-      <p>
-        {{_ "viewApiBackendSettings_editApiSettingsText" }}
-      </p>
-      <a
-         href="{{ pathFor 'editApiBackend' _id=apiBackend._id }}"
-         class="btn btn-primary">
-        {{_ "view_ApiBackend_Details_editButtonText" }}
-      </a>
     </div>
   </div>
   <div class="panel panel-danger">
     <div class="panel-heading">
       <h2 class="panel-title">
-        {{_ "viewApiBackendSettings_panelTitleManage" }}
+        {{_ "apiSettings_panelTitleManage" }}
       </h2>
     </div>
     <div class="panel-body">
-      <h3>{{_ "viewApiBackendSettings_deleteApiTitle" }}</h3>
+      <h3>{{_ "apiSettings_deleteApiTitle" }}</h3>
       <p>
-        {{_ "viewApiBackendSettings_deleteApiText" }}
+        {{_ "apiSettings_deleteApiText" }}
       </p>
       <a
          href="#"
          class="btn btn-danger"
-         id="deleteModal">
-        {{_ "viewApiBackendDetails_deleteButton"}}
+         id="delete-api">
+        {{_ "apiDetails_deleteButton"}}
       </a>
     </div>
   </div>

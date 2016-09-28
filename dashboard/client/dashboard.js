@@ -1,12 +1,13 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { ApiBackends } from '/apis/collection/backend';
 
-import _ from 'lodash';
+import { ProxyBackends } from '/proxy_backends/collection';
+
 import moment from 'moment';
+import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
-
   // Get reference to template instance
   const instance = this;
 
@@ -19,116 +20,152 @@ Template.dashboard.onCreated(function () {
   instance.dateFormatMoment = 'DD MMM YYYY';
 
   // Init default time frame (from: 2weeks ago, to: now)
-  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(14, 'day'));
+  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
   const userId = Meteor.userId();
 
-  if (Roles.userIsInRole(userId, ['admin'])) {
+  // Subscribe to proxyApis publicaton
+  instance.subscribe('proxyApis');
 
+  if (Roles.userIsInRole(userId, ['admin'])) {
     // Subscribe to publication
     instance.subscribe('allApiBackends');
   } else {
-
     // Subscribe to publication
     instance.subscribe('myManagedApis');
   }
 
-  instance.autorun(() => {
-    if (instance.subscriptionsReady()) {
+  instance.checkElasticsearch = function () {
+    return new Promise((resolve, reject) => {
+      Meteor.call('elasticsearchIsDefined', (err, res) => {
+        if (err) reject(err);
 
-      // Get APIs managed by user
-      const apis = ApiBackends.find().fetch();
+        resolve(res);
+      });
+    });
+  };
 
-      // Init varuable to keep elasticsearch sub-query
-      let prefixesQuery = [];
+  instance.getChartData = function (params) {
+    return new Promise((resolve, reject) => {
+      Meteor.call('getElasticSearchData', params, (err, res) => {
+        if (err) reject(err);
+        resolve(res.hits.hits);
+      });
+    });
+  };
 
-      // Iterate through eacy API managed by user
-      _.forEach(apis, (api) => {
-        // Push query object to array
-        prefixesQuery.push({
+  instance.getElasticSearchQuery = function () {
+    // Placeholder for prefixes query
+    let prefixesQuery = [];
+    // Get APIs managed by user
+    const proxyBackends = ProxyBackends.find().fetch();
+
+    // Get endpoint data from each proxybackend
+    const apis = _.map(proxyBackends, proxyBackend => {
+      // Get apiUmbrella object
+      const api = proxyBackend.apiUmbrella;
+      // Attach _id to API
+      api._id = proxyBackend.apiId;
+      return api;
+    });
+
+    // If there are some APIs then setup query
+    if (apis.length > 0) {
+      prefixesQuery = _.map(apis, (api) => {
+        return {
           wildcard: {
             request_path: {
               // Add '*' to partially match the url
-              value: `${api.url_matches[0].frontend_prefix}*`
-            }
-          }
-        });
-      });
-
-      // Construct parameters for elasticsearch
-      let params = {
-        size: 50000,
-        body: {
-          query: {
-            filtered: {
-              query: {
-                bool: {
-                  should: [
-                    prefixesQuery
-                  ]
-                }
-              },
-              filter: {
-                range: {
-                  request_at: { }
-                }
-              }
-            }
+              value: `${api.url_matches[0].frontend_prefix}*`,
+            },
           },
-          sort : [
-            { request_at : { order : 'desc' }},
-          ],
-          fields: [
-            'request_at',
-            'response_status',
-            'response_time',
-            'request_ip_country',
-            'request_ip',
-            'request_path',
-            'user_id'
-          ]
-        }
-      }
+        };
+      });
+    }
 
-      // ******* Filtering by date *******
-      const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
-      const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
+    // Construct parameters for elasticsearch
+    const params = {
+      size: 50000,
+      body: {
+        query: {
+          filtered: {
+            query: {
+              bool: {
+                should: [
+                  prefixesQuery,
+                ],
+              },
+            },
+            filter: {
+              range: {
+                request_at: { },
+              },
+            },
+          },
+        },
+        sort: [
+          { request_at: { order: 'desc' } },
+        ],
+        fields: [
+          'request_at',
+          'response_status',
+          'response_time',
+          'request_ip_country',
+          'request_ip',
+          'request_path',
+          'user_id',
+        ],
+      },
+    };
 
-      // Check if timeframe values are set
-      if (analyticsTimeframeStart && analyticsTimeframeEnd) {
+    // ******* Filtering by date *******
+    const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
+    const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
 
-        // Update elasticsearch query with filter data (in Unix format)
-        params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
-        params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+    // Check if timeframe values are set
+    if (analyticsTimeframeStart && analyticsTimeframeEnd) {
+      // Update elasticsearch query with filter data (in Unix format)
+      params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
+      params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+    }
+    // ******* End filtering by date *******
 
-      }
-      // ******* End filtering by date *******
+    return params;
+  };
+
+  instance.autorun(() => {
+    if (instance.subscriptionsReady()) {
+      // Get elasticsearch query
+      const params = instance.getElasticSearchQuery();
 
       // Set loader
       instance.chartDataLoadingState.set(true);
 
-      // Fetch elasticsearch data
-      Meteor.call('getElasticSearchData', params, (err, res) => {
+      // Make a call
+      instance.checkElasticsearch()
+        .then((elasticsearchIsDefined) => {
+          if (elasticsearchIsDefined) {
+            instance.getChartData(params)
+              .then((chartData) => {
+                // Update reactive variable
+                instance.chartData.set(chartData);
 
-        if (err) throw new Meteor.Error(err);
+                instance.chartDataLoadingState.set(false);
+              })
+              .catch(err => console.error(err));
+          } else {
+            console.error('Elasticsearch is not defined!');
 
-        // Get list of items for analytics
-        const hits = res.hits.hits;
-
-        // Unset loader
-        instance.chartDataLoadingState.set(false);
-
-        // Update reactive variable
-        instance.chartData.set(hits);
-      });
+            Router.go('/catalogue');
+          }
+        })
+        .catch(err => console.error(err));
     }
   });
-
 });
 
 Template.dashboard.onRendered(function () {
-
   const instance = this;
 
   // Get timeframe values
@@ -142,13 +179,10 @@ Template.dashboard.onRendered(function () {
   // Update date range fields with default dates
   $('#analytics-timeframe-start').val(analyticsTimeframeStartFormatted);
   $('#analytics-timeframe-end').val(analyticsTimeframeEndFormatted);
-
-
 });
 
 Template.dashboard.events({
   'change #select-timeframe-form': function (event) {
-
     event.preventDefault();
 
     const instance = Template.instance();
@@ -159,7 +193,6 @@ Template.dashboard.events({
 
     // Check if timeframe values are set
     if (analyticsTimeframeStartElementValue !== '' && analyticsTimeframeEndElementValue !== '') {
-
       // Format datepicker dates (DD.MM.YYYY) to moment.js object
       const analyticsTimeframeStartMoment = moment(analyticsTimeframeStartElementValue, instance.dateFormatMoment);
       const analyticsTimeframeEndMoment = moment(analyticsTimeframeEndElementValue, instance.dateFormatMoment);
@@ -172,7 +205,6 @@ Template.dashboard.events({
        */
       if ((analyticsTimeframeStartElementValue !== instance.analyticsTimeframeStart.get().format(instance.dateFormatMoment)) ||
       (analyticsTimeframeEndElementValue !== instance.analyticsTimeframeEnd.get().format(instance.dateFormatMoment))) {
-
         // Get reference to chart html elemets
         const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
 
@@ -184,7 +216,7 @@ Template.dashboard.events({
         instance.analyticsTimeframeEnd.set(analyticsTimeframeEndMoment);
       }
     }
-  }
+  },
 });
 
 Template.dashboard.helpers({
@@ -197,5 +229,5 @@ Template.dashboard.helpers({
     const instance = Template.instance();
 
     return instance.chartDataLoadingState.get();
-  }
+  },
 });

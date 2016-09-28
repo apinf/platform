@@ -1,9 +1,9 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Apis } from '/apis/collection';
 
 Meteor.methods({
   setAllApiBackendAverageRatings () {
     // Get all API Backends
-    const apiBackends = ApiBackends.find().fetch();
+    const apiBackends = Apis.find().fetch();
 
     // Update the average rating value for each API Backend
     apiBackends.forEach(function (apiBackend) {
@@ -13,7 +13,7 @@ Meteor.methods({
   },
   setApiBackendAverageRating (apiBackendId) {
     // Get API Backend
-    const apiBackend = ApiBackends.findOne(apiBackendId);
+    const apiBackend = Apis.findOne(apiBackendId);
 
     // Update the API Backend bookmark count
     apiBackend.setAverageRating();

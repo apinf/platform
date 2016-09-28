@@ -1,4 +1,6 @@
-import { ApiBackends } from '/apis/collection/backend';
+// Collection imports
+import { Apis } from '/apis/collection';
+import { ApiBackendRatings } from '/ratings/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder
@@ -15,8 +17,8 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
       $or:
       [
         { isPublic: true },
-        { managerIds: userId }
-      ]
+        { managerIds: userId },
+      ],
     };
   }
 
@@ -24,13 +26,12 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   const queryOptions = { sort: { } };
 
   // Set up query object, if changes are needed
-  if (userId && filterBy === "my-apis") {
+  if (userId && filterBy === 'my-apis') {
     // Set up query where user ID is in manager IDs array
-    selector = { managerIds: userId }
-  } else if (userId && filterBy === "my-bookmarks") {
-
+    selector = { managerIds: userId };
+  } else if (userId && filterBy === 'my-bookmarks') {
     // Get user bookmarks
-    const userBookmarks = ApiBookmarks.findOne({userId: userId});
+    const userBookmarks = ApiBookmarks.findOne({ userId });
 
     // Get bookmarked API IDs
     if (userBookmarks) {
@@ -41,40 +42,40 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
         $or: [
           {
             $and:
-              [// User has bookmarked and API is public
-                {_id: {$in: bookmarkedApiIds}},
-                { isPublic: true }
-              ]
+            [// User has bookmarked and API is public
+                { _id: { $in: bookmarkedApiIds } },
+                { isPublic: true },
+            ],
           },
           {
             $and:
             [// User has bookmarked and is manager (regardless of public status)
-              {_id: {$in: bookmarkedApiIds}},
-              { managerIds: userId }
-            ]
-          }
-        ]
+              { _id: { $in: bookmarkedApiIds } },
+              { managerIds: userId },
+            ],
+          },
+        ],
       };
     } else {
       // If user has no bookmarks, don't return any results
       return [];
     }
-  };
+  }
 
   // Set up sort direction, for mongo query (ascending = 1; descending = -1)
-  if (sortDirection === "ascending") {
+  if (sortDirection === 'ascending') {
     // Sort in ascending order
     sortDirection = 1;
   } else {
     // Sort in descending order
     sortDirection = -1;
-  };
+  }
 
   // Set up sort field with sort direction
   queryOptions.sort[sortBy] = sortDirection;
 
   // Find all API Backends
-  return ApiBackends.find(selector, queryOptions);
+  return Apis.find(selector, queryOptions);
 });
 
 Meteor.publish('catalogueRatings', function () {

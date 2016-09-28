@@ -1,20 +1,19 @@
-import { ApiBackends } from '/apis/collection/backend';
+import { Template } from 'meteor/templating';
+import { Apis } from '/apis/collection';
 
-Template.viewApiBackendSettings.events({
+Template.apiSettings.events({
   // event handler to execute when delete API button is clicked
-  "click #deleteModal": function() {
-    var apiBackendId = this.apiBackend;
+  'click #delete-api': function () {
+    const api = this.api;
     /* As information to the delete modal, pass in the API backend document.
     This is needed so that the API name can be shown in the dialog,
     as well for other information needed for API removal, such as ID*/
-    Modal.show('deleteApiBackendConfirmation', function() {
-        return ApiBackends.findOne(apiBackendId);
-    });
-  }
+    Modal.show('deleteApiConfirmation', { api });
+  },
 });
 
-Template.viewApiBackendSettings.helpers({
-  formCollection() {
-    return ApiBackends;
-  }
+Template.apiSettings.helpers({
+  formCollection () {
+    return Apis;
+  },
 });

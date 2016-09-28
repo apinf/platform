@@ -1,3 +1,44 @@
+Use the following guidelines when contributing to this project.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Get involved](#get-involved)
+  - [Join the discussion](#join-the-discussion)
+- [Submitting issues](#submitting-issues)
+  - [General details](#general-details)
+  - [Feature/enhancement requests](#featureenhancement-requests)
+    - [Feature/enhancement request example](#featureenhancement-request-example)
+  - [Bug reports / support requests](#bug-reports--support-requests)
+    - [Bug report/support request example](#bug-reportsupport-request-example)
+- [Contributing code](#contributing-code)
+  - [Code quality](#code-quality)
+    - [Comments](#comments)
+      - [Example comment](#example-comment)
+    - [One task per line](#one-task-per-line)
+      - [Chaining example](#chaining-example)
+      - [Complex line example](#complex-line-example)
+    - [Variables](#variables)
+      - [Variable examples](#variable-examples)
+    - [Code standard(s) and Lint](#code-standards-and-lint)
+    - [Indentation](#indentation)
+  - [File structure](#file-structure)
+    - [File names](#file-names)
+  - [Collection/Schema structure](#collectionschema-structure)
+  - [Internationalization (i18n)](#internationalization-i18n)
+    - [i18n key structure](#i18n-key-structure)
+    - [Template text (HTML/Blaze)](#template-text-htmlblaze)
+    - [JavaScript text](#javascript-text)
+- [Packages](#packages)
+  - [Forms](#forms)
+  - [Routing](#routing)
+  - [Schema](#schema)
+  - [Templating](#templating)
+  - [CSS](#css)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Get involved
 
 There are many ways to get involved:
@@ -11,9 +52,6 @@ There are many ways to get involved:
 
 * Join the [Apinf Community portal](https://community.apinf.io) - ask and answer questions, share ideas, etc.
 * Hang out in the [Apinf IRC chatroom](https://webchat.freenode.net/?channels=apinf) ([#Apinf](irc://irc.freenode.net/apinf) on Freenode)
-
-# Contributing
-Use the following guidelines when contributing to this project.
 
 # Submitting issues
 There are a couple of common issue types in our tracker:
@@ -90,106 +128,6 @@ When submitting a bug report or support request, include the following details, 
 
 **Note:** Some of the above details will be added during the discussion and testing process.
 
-# Development installation with Docker
-
-## Install Docker
-Review the Docker installation instructions for your Operating System:
-* [Mac](https://docs.docker.com/installation/mac/) ([Activates NFS on docker-machine](https://github.com/adlogix/docker-machine-nfs))
-* [Linux](https://docs.docker.com/installation/ubuntulinux/)
-
-Optionally [add your user to the `docker` group](https://docs.docker.com/engine/installation/linux/ubuntulinux/#create-a-docker-group).
-
-## Install Docker Compose
-You will also need to [install Docker Compose](https://docs.docker.com/compose/install/).
-### Ubuntu
-Install Docker Compose on Ubuntu Linux with the following command:
-
-```
-$ sudo apt install docker-compose
-```
-
-## Edit API Umbrella configuration
-
-API Umbrella configuration should be stored in
-* ```[project-root]/docker/api-umbrella/config/api-umbrella.yml```
-
-You can create `api-umbrella.yml` based on the example:
-* ```[project-root]/docker/api-umbrella/config/api-umbrella.yml.example```
-
-## Prepare APInf image
-
-1. Run application containers (in first time it will build image):
-  ```
-  $ docker-compose up
-  ```
-2. Add `apinf.dev` and `api-umbrella.dev` hosts entry to `/etc/hosts` file so you can visit them from your browser.
-
-
-### See Docker IP address (step only for Mac)
-```
-$ docker-machine ip
-=> 127.0.0.1
-```
-
-### Set hosts
-
-Then add the IP to your `/etc/hosts`:
-```
-127.0.0.1 apinf.dev api-umbrella.dev
-```
-
-Now you can work with your app from browser by visit http://apinf.dev:3000
-
-## Create API Umbrella credentials
-
-1. [Login to the API Umbrella web admin](http://api-umbrella.readthedocs.org/en/latest/getting-started.html#login-to-the-web-admin) https://api-umbrella.dev/admin/login
-2. Signup to the APInf http://apinf.dev:3000/sign-up
-3. Login to the APInf web admin http://apinf.dev:3000/sign-in
-4. Fill API Umbrella settings http://apinf.dev:3000/settings :
-
-* Host: https://api-umbrella.dev
-* API Key: [Get from step](http://api-umbrella.readthedocs.org/en/latest/getting-started.html#signup-for-an-api-key).
-* Auth Token: Get from [My account page](https://api-umbrella.dev/admin)
-* Base URL: https://api-umbrella.dev
-* Elasticsearch Host: http://api-umbrella.dev:14002
-
-## Debugging containers with docker exec
-
-This can be accomplished by grabbing the container ID with a docker ps, then passing that ID into the docker exec command:
-
-```
-$ docker ps
-CONTAINER ID        IMAGE
-ce9de67fdcbe        apinf/apinf:latest
-$ docker exec -it ce9de67fdcbe /bin/bash
-root@ce9de67fdcbe:/#
-```
-
-Add alias to bash:
-```
-alias apinf_web='docker exec -it `docker ps | grep web | sed "s/ .*//"` /bin/bash'
-```
-
-## Building Docker Images
-
-### Building Images
-
-To build packages for the current APInf version:
-
-```
-$ docker build -t apinf/apinf:INSERT_VERSION_HERE .
-$ docker tag apinf/apinf:INSERT_VERSION_HERE apinf/apinf:latest
-```
-
-### Pushing to Docker Hub
-
-To publish the new images to our [Docker Hub repository](https://hub.docker.com/r/apinf/apinf/):
-
-```
-$ docker push apinf/apinf:INSERT_VERSION_HERE
-$ docker push apinf/apinf:latest
-```
-
 # Contributing code
 When contributing code, please follow the [Gitflow guidelines](http://danielkummer.github.io/git-flow-cheatsheet/). Specifically:
 
@@ -220,7 +158,7 @@ In a nutshell, **write code for humans to read and understand**. Our code will b
 * Placing comments on the preceeding line, as opposed to the end of the line, improves readability
  * comment can be long, e.g. 80 characters
  * comments at same level of nesting fall in-line with one another vertically
- 
+
 #### Example comment
 ```js
 // Try and find the missing widget
@@ -259,7 +197,7 @@ let missingWidgets = Widgets.find().fetch();
 if (missingWidgets) {
  // Count the missing widgets
  let missingWidgetsCount = missingWidgets.length
- 
+
  // Alert the boss!
  console.log(missingWidgetsCount, "widgets are missing!");
 }
@@ -301,37 +239,159 @@ let trash = ["tattered shoe", "broken pencil", "crumpled paper"];
 eat(food);
 disgard(trash);
 ```
-### JavaScript semi-standard
-In general, please follow the [JavaScript semi-standard coding style](https://github.com/Flet/semistandard).
+### Code standard(s) and Lint
+Configure your IDE to use eslint with the Airbnb styleguide.
 
-# File structure
-This project is organized around a general Meteor architecture. In effect, folders are organized to indicate how Meteor.js treats them (e.g. whether they should be client-only).
+Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
 
-* / (project root)
- * both/
-   * collections/
- * client/
-  * templates/
-  * compatibility/
- * server/
-  * methods/
-  * publications/
+### Indentation
+Indent all HTML(Blaze) and JavaScript code with two spaces for each level of nesting.
 
-## Packages
+Also, nest most/all HTML child elements -- i.e. avoid having multiple inline elements.
+
+```html
+<p>
+  <!-- nesting is important for readability -->
+  <!-- e.g. when adding long internationalization keys -->
+  Paragraph text.
+</p>
+```
+
+
+## File structure
+This project is organized around a 'module' / 'component' architecture.
+
+By 'module', we mean anything that has it's own database collection and one or more routes. Components are more closely related to the idea of [WebComponents](http://webcomponents.org/), which are intended to be reusable, hierarchical user interface elements. Modules are located in the project root, with components in the client sub-directory.
+
+In general, our module structure follows this pattern:
+
+* **/module_name**
+  * **client/**
+    * **component_one/**
+      * *component_one.css*
+      * *component_one.html*
+      * *component_one.js*
+      * **sub_component/**
+        * *sub_component.css*
+        * *sub_component.html*
+        * *sub_component.js*
+    * **lib/**
+      * *router.js*
+  * **collection/**
+    * *index.js*
+    * *schema.js*
+    * *permissions.js*
+    * *helpers.js*
+    * **server/**
+      * *publications.js*
+  * **server/**
+    * *methods.js*
+
+### File names
+Please use underscores in folder and file names, rather than hyphens or camel case. E.g.
+
+```js
+folder_name/file_name.css
+folder_name/file_name.html
+folder_name/file_name.js
+```
+## Collection/Schema structure
+After some trial and error, we have settled on the following pattern for defining collections and schemas:
+
+```js
+// inside 'component/collection/index.js'
+
+// Define collection name variable with corresponding MongoDB collection name in camelCase
+const CollectionName = new Mongo.Collection("collectionName");
+
+// Export the collection
+export { CollectionName };
+```
+
+Next, we need to attach a schema to the collection, for validation, etc.
+
+```js
+// inside 'component/collection/schema.js'
+
+// Import the collection using relative path
+import { CollectionName } from './';
+
+// Define the collection schema, by attaching a 'schema' property
+CollectionName.schema = new SimpleSchema({
+  // Schema field definitions
+});
+
+// Allow collection internationalization
+CollectionName.schema.i18n("schemas.collection_name");
+
+// Attach schema to collection for validation, etc.
+CollectionName.attachSchema(CollectionName.schema);
+```
+
+References:
+- Meteor Guide: Code Style - [Collections](https://guide.meteor.com/code-style.html#collections)
+- Meteor Guide: [Collections and Schemas](https://guide.meteor.com/collections.html#schemas)
+
+## Internationalization (i18n)
+To the extent possible, all user-facing text should be internationalized. To add internationalization support for texts, we use the following conventions.
+
+### i18n key structure
+Internationalization keys in our project use the following elements, separated by underscores
+- `templateName` - the name of the template as it appears in either:
+  - the `<template name="templateName">`
+  - the `{{# AutoForm id="formName" }}`
+- `pageElement` or `event` - indicate the page element or JS related event
+- `additionalText` - additional text to distinguish this string from others (optional)
+
+
+### Template text (HTML/Blaze)
+Text in HTML/Blaze templates can be internationalized by adding an i18n tag:
+
+```html
+{{_ "templateName_pageElement_additionalText" }}
+```
+
+A specific example, found on a page element heading:
+
+```html
+<!-- note the element nesting, for readability -->
+<h1 class="page-header">
+  {{_ "pageTemplate_header_text"}}
+</h1>
+```
+
+### JavaScript text
+When internationalization strings are used in JavaScript, use the following pattern:
+
+1. fetch the ii18n string and store it in a descriptive variable
+2. use the i18n variable in related code
+
+For example, when showing an `sAlert` to the user:
+
+```js
+// Get a translation string
+const message = TAPi18n._("templateName_event_translationString");
+
+// Use the translation string
+sAlert.warning(message);
+
+```
+
+# Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
 
-### Forms
+## Forms
 [AutoForm](https://github.com/aldeed/meteor-autoform) is used to provide easy input forms, based on schema definitions (see below).
 
-### Routing
+## Routing
 * [Iron Router](https://github.com/iron-meteor/iron-router) is used for project routing.
 * [Simple JSON Routes](https://github.com/stubailo/meteor-rest/) is used where only JSON data is needed from a route.
 
-### Schema
+## Schema
 [Simple Schema](https://github.com/aldeed/meteor-simple-schema) is used to create schemas for our database collections.
 
-### Templating
+## Templating
 [Blaze](https://meteor.github.io/blaze/) is the templating language used in our project packages.
 
-### CSS
+## CSS
 [Bootstrap](http://getbootstrap.com/) is the primary CSS framework for the templates.

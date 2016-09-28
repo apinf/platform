@@ -1,65 +1,66 @@
-import { ApiMetadata } from '/metadata/collection/collection';
+import { ApiMetadata } from '/metadata/collection';
 
 ApiMetadata.schema = new SimpleSchema({
-  "apiBackendId": {
+  // TODO: migrate to use 'apiId' instead of 'apiBackendId'
+  'apiBackendId': {
     type: String,
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
   },
-  "organization": {
+  'organization': {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "organization.name": {
+  'organization.name': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "organization.description": {
+  'organization.description': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "contact": {
+  'contact': {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "contact.name": {
+  'contact.name': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "contact.phone": {
+  'contact.phone': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "contact.email": {
+  'contact.email': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "service": {
+  'service': {
     type: Object,
-    optional: true
+    optional: true,
   },
-  "service.name": {
+  'service.name': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "service.description": {
+  'service.description': {
     type: String,
-    optional: true
+    optional: true,
   },
-  "service.validSince": {
+  'service.validSince': {
     type: Date,
-    optional: true
+    optional: true,
   },
-  "service.validUntil": {
+  'service.validUntil': {
     type: Date,
-    optional: true
+    optional: true,
   },
-  "service.serviceLevelAgreement": {
+  'service.serviceLevelAgreement': {
     type: String,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)
-ApiMetadata.schema.i18n("schemas.apiMetadata");
+ApiMetadata.schema.i18n('schemas.apiMetadata');
 
 ApiMetadata.attachSchema(ApiMetadata.schema);

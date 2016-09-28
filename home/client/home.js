@@ -1,3 +1,5 @@
+import { Branding } from '/branding/collection';
+
 Template.home.created = function () {
   // Get reference to template instance
   const instance = this;
@@ -10,11 +12,11 @@ Template.home.created = function () {
     // Check for template subscriptions
     if (instance.subscriptionsReady) {
       // Get Branding collection content
-      var branding = Branding.findOne();
+      const branding = Branding.findOne();
       // Check if Branding collection and siteTitle are available
       if (branding && branding.siteTitle) {
         // Set the page title
-        var title = branding.siteTitle;
+        const title = branding.siteTitle;
         DocHead.setTitle(title);
       }
     }
@@ -22,8 +24,8 @@ Template.home.created = function () {
 };
 
 Template.home.helpers({
-  branding: function () {
+  branding () {
     // Get Branding collection content
     return Branding.findOne();
-  }
+  },
 });
