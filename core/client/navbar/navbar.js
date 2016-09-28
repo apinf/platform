@@ -89,9 +89,9 @@ Template.navbar.helpers({
       const settings = Settings.findOne();
 
       // Get access setting value
-      const onlyAdminsCanAddApi = settings.access.onlyAdminsCanAddApi;
+      const onlyAdminsCanAddApis = settings.access.onlyAdminsCanAddApis;
 
-      if (!onlyAdminsCanAddApi) {
+      if (!onlyAdminsCanAddApis) {
         return true;
       }
 
@@ -101,7 +101,7 @@ Template.navbar.helpers({
       // Check if current user is admin
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
-      return onlyAdminsCanAddApi && userIsAdmin;
+      return onlyAdminsCanAddApis && userIsAdmin;
     } catch (e) {
       // If caught an error, then returning true because no access settings is set
       // By default allowing all user to add an API

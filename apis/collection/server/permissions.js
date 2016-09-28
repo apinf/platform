@@ -12,9 +12,9 @@ Apis.allow({
 
     try {
       // Get access setting value
-      const onlyAdminsCanAddApi = settings.access.onlyAdminsCanAddApi;
+      const onlyAdminsCanAddApis = settings.access.onlyAdminsCanAddApis;
 
-      if (!onlyAdminsCanAddApi) {
+      if (!onlyAdminsCanAddApis) {
         return true;
       }
 
@@ -22,7 +22,7 @@ Apis.allow({
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
       // Check if current user is admin and access settings is set
-      return onlyAdminsCanAddApi && userIsAdmin;
+      return onlyAdminsCanAddApis && userIsAdmin;
     } catch (e) {
       // If caught an error, then returning true because no access settings is set
       // By default allowing all user to add an API

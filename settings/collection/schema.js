@@ -7,7 +7,7 @@ Settings.schema = new SimpleSchema({
     type: Object,
     optional: true,
   },
-  'access.onlyAdminsCanAddApi': {
+  'access.onlyAdminsCanAddApis': {
     type: Boolean,
     optional: true,
     label: TAPi18n.__('settings_schema_onlyAdminsCanAddApis'),
