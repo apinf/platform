@@ -2,95 +2,109 @@ import { Apis } from './';
 
 Apis.schema = new SimpleSchema({
   name: {
-    label: "API Name",
+    label: 'API Name',
     type: String,
-    optional: false
+    optional: false,
   },
   description: {
-    label: "Description",
+    label: 'Description',
     type: String,
     max: 1000,
     autoform: {
-      rows: 3
+      rows: 3,
     },
-    optional: true
+    optional: true,
   },
   url: {
-    label: "URL",
+    label: 'URL',
     type: String,
     optional: true,
-    regEx: SimpleSchema.RegEx.Url
+    regEx: SimpleSchema.RegEx.Url,
   },
   documentationFileId: {
     type: String,
-    optional: true
+    optional: true,
   },
-  
+
   apiLogoFileId: {
     type: String,
-    optional: true
+    optional: true,
   },
   documentation_link: {
     type: String,
     optional: true,
-    regEx: SimpleSchema.RegEx.Url
+    regEx: SimpleSchema.RegEx.Url,
   },
   submit_methods: {
     type: [String],
-    optional: true
+    optional: true,
   },
   created_at: {
     type: Date,
-    optional: true
+    optional: true,
+    autoValue () {
+      if (this.isInsert) {
+        return new Date();
+      } else if (this.isUpsert) {
+        return { $setOnInsert: new Date() };
+      } else {
+        this.unset();  // Prevent user from supplying their own value
+      }
+    },
   },
   created_by: {
     type: String,
-    optional: true
+    optional: true,
   },
   updated_at: {
     type: Date,
-    optional: true
+    optional: true,
+    autoValue () {
+      if (this.isUpdate) {
+        return new Date();
+      }
+    },
   },
   updated_by: {
     type: String,
-    optional: true
+    optional: true,
   },
   version: {
     type: Number,
-    optional: true
+    optional: true,
   },
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
     defaultValue: [null],
     autoform: {
-      type: "hidden",
-      label: false
-    }
+      type: 'hidden',
+      label: false,
+    },
   },
   averageRating: {
     type: Number,
     decimal: true,
     optional: true,
     autoform: {
-      type: "hidden",
-      label: false
-    }
+      type: 'hidden',
+      label: false,
+    },
   },
   bookmarkCount: {
     type: Number,
     optional: true,
     autoform: {
-      type: "hidden",
-      label: false
+      type: 'hidden',
+      label: false,
     },
-    defaultValue: 0
+    defaultValue: 0,
   },
   isPublic: {
     type: Boolean,
     optional: true,
-    defaultValue: true
-  }
+    defaultValue: true,
+  },
 });
 
 // Enable translations (i18n)
