@@ -464,7 +464,7 @@
       "apiUmbrella": {
         "settings": {
           "disable_api_key": {
-            "label": "Disable API key"
+            "label": "API key check"
           }
         }
       }
