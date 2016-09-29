@@ -16,6 +16,7 @@ Template.proxyBackend.onRendered(() => {
     // Fixes browser rendering issue
   $("[name='apiUmbrella.settings.disable_api_key']").bootstrapSwitch({
     size: 'mini',
+    inverse: true,
   });
 });
 
