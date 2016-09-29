@@ -1,3 +1,7 @@
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
 // Collection imports
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
@@ -12,13 +16,13 @@ Meteor.methods({
     Meteor.call('removeApiDoc', apiBackendId);
 
     // Remove backlog items
-    ApiBacklogItems.remove({ 'apiBackendId': apiBackendId });
+    ApiBacklogItems.remove({ apiBackendId });
 
     // Remove feedbacks
-    Feedback.remove({ 'apiBackendId': apiBackendId });
+    Feedback.remove({ apiBackendId });
 
     // Remove metadata
-    ApiMetadata.remove({ 'apiBackendId': apiBackendId });
+    ApiMetadata.remove({ apiBackendId });
 
     // Finally remove the API
     Apis.remove(apiBackendId);
