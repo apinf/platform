@@ -14,4 +14,8 @@ ProxyBackends.schema = new SimpleSchema({
   },
 });
 
+// Internationalize schema texts
+ProxyBackends.schema.i18n('schemas.ProxyBackends');
+
+// Attach schema to collection
 ProxyBackends.attachSchema(ProxyBackends.schema);
