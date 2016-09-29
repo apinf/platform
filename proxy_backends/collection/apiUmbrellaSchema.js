@@ -1,3 +1,4 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Utility import
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
@@ -6,8 +7,8 @@ const Settings = new SimpleSchema({
   'disable_api_key': {
     type: Boolean,
     optional: true,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
 });
 
 const ApiUmbrellaSchema = new SimpleSchema({
@@ -15,21 +16,21 @@ const ApiUmbrellaSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  'name': {
+  name: {
     type: String,
     optional: true,
   },
-  'frontend_host': {
+  frontend_host: {
     type: String,
     optional: true,
     label: 'Proxy host',
   },
-  'backend_host': {
+  backend_host: {
     type: String,
     optional: true,
     label: 'API host',
   },
-  'backend_protocol': {
+  backend_protocol: {
     label: 'API host protocol',
     type: String,
     optional: true,
@@ -38,12 +39,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
       'https',
     ],
   },
-  'balance_algorithm': {
+  balance_algorithm: {
     type: String,
     optional: true,
     defaultValue: 'least_conn',
   },
-  'url_matches': {
+  url_matches: {
     type: [Object],
     optional: true,
   },
@@ -59,7 +60,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
     label: 'API base path',
     regEx: apiBasePathRegEx,
   },
-  'servers': {
+  servers: {
     type: [Object],
     optional: true,
   },
