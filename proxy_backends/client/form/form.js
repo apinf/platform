@@ -136,36 +136,24 @@ Template.apiProxy.events({
     if (proxyBackend &&
       proxyBackend.apiUmbrella &&
       proxyBackend.apiUmbrella.id) {
-      const umbrellaBackendId = instance.data.proxyBackend.apiUmbrella.id;
-
-      // Delete API Backend on API Umbrella
-      Meteor.call(
-        'deleteApiBackendOnApiUmbrella',
-        umbrellaBackendId,
-        (deleteError) => {
-          if (deleteError) {
-            const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
-            sAlert.error(`${deleteErrorMessage}:\n ${deleteError}`);
-          } else {
-            // Publish changes for deleted API Backend on API Umbrella
-            Meteor.call(
-              'publishApiBackendOnApiUmbrella',
-              umbrellaBackendId,
-              (publishError) => {
-                if (publishError) {
-                  const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
-                  sAlert.error(`${publishErrorMessage}:\n ${publishError}`);
-                } else if (proxyBackend._id) { // Check proxyBackend has _id
-                  // Delete proxyBackend from Apinf
-                  ProxyBackends.remove(proxyBackend._id);
-                  const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
-                  sAlert.success(successMessage);
-                }
-              }
-            );
-          }
+      try {
+        // Call deleteProxyBackend
+        Meteor.call('deleteProxyBackend', proxyBackend, () => {
+          // Show successMessage
+          const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
+          sAlert.success(successMessage);
+        });
+      } catch (error) {
+        if (error.error === 'delete-error') {
+          // Show delete-error
+          const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
+          sAlert.error(`${deleteErrorMessage}:\n ${error.error}`);
+        } else if (error.error === 'publish-error') {
+          // Show publish-error
+          const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
+          sAlert.error(`${publishErrorMessage}:\n ${error.error}`);
         }
-      );
+      }
     }
   },
 });
