@@ -42,6 +42,15 @@ Apis.schema = new SimpleSchema({
   created_at: {
     type: Date,
     optional: true,
+    autoValue () {
+      if (this.isInsert) {
+        return new Date();
+      } else if (this.isUpsert) {
+        return { $setOnInsert: new Date() };
+      } else {
+        this.unset();  // Prevent user from supplying their own value
+      }
+    },
   },
   created_by: {
     type: String,
@@ -50,6 +59,11 @@ Apis.schema = new SimpleSchema({
   updated_at: {
     type: Date,
     optional: true,
+    autoValue () {
+      if (this.isUpdate) {
+        return new Date();
+      }
+    },
   },
   updated_by: {
     type: String,
