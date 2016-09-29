@@ -28,12 +28,10 @@ Meteor.methods({
         apiUmbrella: umbrellaObject,
       };
       // Insert proxy
-      const proxyId = Proxies.insert(newProxy);
-      console.log(`Proxy ${proxyId} inserted`);
+      Proxies.insert(newProxy);
 
       // Update settings doc (remove apiUmbrella & elasticsearch)
       Settings.update({}, { $unset: { apiUmbrella: '', elasticsearch: '' } }, { validate: false });
-      console.log('Settings updated');
     }
   },
   migrateApiBackends () {
@@ -68,7 +66,6 @@ Meteor.methods({
 
       // Insert migrated api, get Id
       const apiId = Apis.insert(api);
-      console.log(`Api ${apiId} inserted`);
 
       // Get proxyId
       const proxyId = Proxies.findOne()._id;
@@ -94,8 +91,7 @@ Meteor.methods({
       };
 
       // Insert migrated proxyBackend
-      const proxyBackendId = ProxyBackends.insert(proxyBackend, { validate: false });
-      console.log(`ProxyBackend ${proxyBackendId} inserted`);
+      ProxyBackends.insert(proxyBackend, { validate: false });
     });
   },
 });
