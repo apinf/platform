@@ -16,12 +16,6 @@ const SettingsSchema = new SimpleSchema({
       'custom',
       'unlimited',
     ],
-    autoform: {
-      options: {
-        custom: 'Custom rate limits',
-        unlimited: 'Unlimited requests',
-      },
-    },
   },
   rate_limits: {
     type: [Object],
@@ -30,7 +24,6 @@ const SettingsSchema = new SimpleSchema({
   'rate_limits.$.duration': {
     type: Number,
     optional: true,
-    label: 'Duration (ms)',
   },
   'rate_limits.$.limit_by': {
     type: String,
@@ -39,22 +32,14 @@ const SettingsSchema = new SimpleSchema({
       'apiKey',
       'ip',
     ],
-    autoform: {
-      options: {
-        apiKey: 'API Key',
-        ip: 'IP Address',
-      },
-    },
   },
   'rate_limits.$.limit': {
     type: Number,
     optional: true,
-    label: 'Number of requests',
   },
   'rate_limits.$.response_headers': {
     type: Boolean,
     optional: true,
-    label: 'Show rate limit in response headers',
     defaultValue: false,
   },
 });
