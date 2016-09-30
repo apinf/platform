@@ -4,9 +4,57 @@ import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
 
 const SettingsSchema = new SimpleSchema({
-  'disable_api_key': {
+  disable_api_key: {
     type: Boolean,
     optional: true,
+    defaultValue: false,
+  },
+  rate_limit_mode: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'custom',
+      'unlimited',
+    ],
+    autoform: {
+      options: {
+        custom: 'Custom rate limits',
+        unlimited: 'Unlimited requests',
+      },
+    },
+  },
+  rate_limits: {
+    type: [Object],
+    optional: true,
+  },
+  'rate_limits.$.duration': {
+    type: Number,
+    optional: true,
+    label: 'Duration (ms)',
+  },
+  'rate_limits.$.limit_by': {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'apiKey',
+      'ip',
+    ],
+    autoform: {
+      options: {
+        apiKey: 'API Key',
+        ip: 'IP Address',
+      },
+    },
+  },
+  'rate_limits.$.limit': {
+    type: Number,
+    optional: true,
+    label: 'Number of requests',
+  },
+  'rate_limits.$.response_headers': {
+    type: Boolean,
+    optional: true,
+    label: 'Show rate limit in response headers',
     defaultValue: false,
   },
 });
