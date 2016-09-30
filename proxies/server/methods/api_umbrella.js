@@ -161,7 +161,7 @@ Meteor.methods({
     /*
     This function does the following
       1. get a list of all backends on API Umbrella
-      2. create a local API for each remote backend
+      2. create a local API for each remote backend (if not existing)
       3. create a local Proxy Backend for each remote backend/local API pair
     */
 
