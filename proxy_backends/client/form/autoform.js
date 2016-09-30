@@ -58,6 +58,14 @@ AutoForm.hooks({
         // Get API Umbrella configuration object from Proxy Backend
         const apiUmbrellaBackend = proxyBackend.apiUmbrella;
 
+        // Check rate limit mode
+        if (apiUmbrellaBackend.settings.rate_limit_mode) {
+          console.log(apiUmbrellaBackend.settings.rate_limit_mode);
+        } else {
+          // Does not exist set to default rate limits
+          apiUmbrellaBackend.settings.rate_limit_mode = null;
+        }
+
         // Update API on API Umbrella
         Meteor.call(
           'updateApiBackendOnApiUmbrella',
