@@ -184,12 +184,20 @@ Meteor.methods({
 
     try {
       _.forEach(remoteApis, (remoteApi) => {
-        console.log(remoteApi);
-        // Get existing API Backend
-        const existingLocalApiBackend = Apis.findOne({ name: remoteApi.name });
+        // Placeholder for API ID
+        let apiId;
 
-        // If API Backend doesn't exist in collection, insert into collection
-        if (existingLocalApiBackend === undefined) {
+        // Get existing API Backend
+        const existingLocalApi = Apis.findOne({ name: remoteApi.name });
+
+        if (existingLocalApi) {
+          // Get local API ID
+          apiId = existingLocalApi._id;
+        } else {
+          /*
+          Create API if it doesn't exist
+          */
+
           // Construct an API document for the APIs collection
           const api = {
             name: remoteApi.name,
@@ -197,7 +205,7 @@ Meteor.methods({
           };
 
           try {
-            Apis.insert(api);
+            apiId = Apis.insert(api);
           } catch (error) {
             throw new Meteor.Error('insert-backend-error',
             `Error inserting apiBackend( ${remoteApi.id} ).`,
