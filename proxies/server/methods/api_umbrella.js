@@ -157,7 +157,11 @@ Meteor.methods({
       // Get API Backends from API Umbrella instance
       const response = umbrella.adminApi.v1.apiBackends.getApiBackends();
       const remoteApis = response.data.data;
+    } catch (error) {
+      throw new Meteor.Error(500, 'Could not fetch API backends: ' + error);
+    }
 
+    try {
       _.forEach(remoteApis, (remoteApi) => {
         // Get existing API Backend
         const existingLocalApiBackend = Apis.findOne({ id: remoteApi.id });
