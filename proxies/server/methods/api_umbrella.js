@@ -2,6 +2,7 @@ import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '/apis/collection';
 import { Proxies } from '/proxies/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 import _ from 'lodash';
@@ -190,6 +191,7 @@ Meteor.methods({
         // Get existing API Backend
         const existingLocalApi = Apis.findOne({ name: remoteApi.name });
 
+        // Make sure API exists locally
         if (existingLocalApi) {
           // Get local API ID
           apiId = existingLocalApi._id;
@@ -213,11 +215,27 @@ Meteor.methods({
           );
           }
         }
+
+        /*
+        Add Proxy Backend to match existing API
+        */
+
+        // Get ID of Proxy
+        // TODO: refactor this for multi-proxy
+        const proxyId = Proxies.findOne()._id;
+
+        // Construct Proxy Backend document
+        const proxyBackend = {
+          apiId,
+          proxyId,
+          apiUmbrella: remoteApi,
+        };
+        console.log(proxyBackend);
+        ProxyBackends.insert(proxyBackend, { validate: false });
       });
     } catch (error) {
-      throw new Meteor.Error('create-proxy-backends-error',
-       'Could not create proxy backends.',
-        error
+      throw new Meteor.Error('create-proxy-backend-error',
+       error.message
       );
     }
 
