@@ -32,6 +32,9 @@ Meteor.publish('apiProxySettings', function (apiId) {
     if (userIsManager || userIsAdmin) {
       return ProxyBackends.find({ apiId });
     }
+  } else {
+    // Complete publication execution
+    this.ready();
   }
 });
 
