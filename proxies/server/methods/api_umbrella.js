@@ -158,9 +158,6 @@ Meteor.methods({
       const response = umbrella.adminApi.v1.apiBackends.getApiBackends();
       const remoteApis = response.data.data;
 
-      // Get all local API Backends
-      const localApis = Apis.find().fetch();
-
       _.forEach(remoteApis, (remoteApi) => {
         // Get existing API Backend
         const existingLocalApiBackend = Apis.findOne({ id: remoteApi.id });
@@ -174,6 +171,9 @@ Meteor.methods({
           }
         }
       });
+
+      // Get all local API Backends
+      const localApis = Apis.find().fetch();
 
       _.forEach(localApis, (localApi) => {
         const existingRemoteApiBackend = _.find(remoteApis, (remoteApi) =>
