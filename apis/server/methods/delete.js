@@ -9,12 +9,16 @@ import { ApiMetadata } from '/metadata/collection';
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Feedback } from '/feedback/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
+import { Monitoring } from '/monitoring/collection';
 
 Meteor.methods({
   // Remove API backend and related items
   removeApi (apiId) {
     // Remove API doc
     Meteor.call('removeApiDoc', apiId);
+
+    // Stop the api monitoring if it's enabled
+    Meteor.call('stopCron', apiBackendId);
 
     // Remove backlog items
     ApiBacklogItems.remove({ apiId });
@@ -33,6 +37,9 @@ Meteor.methods({
       // Delete proxyBackend
       Meteor.call('deleteProxyBackend', proxyBackend);
     }
+
+    // Remove monitoring settings
+    Monitoring.remove({ 'apiId': apiBackendId });
 
     // Finally remove the API
     Apis.remove(apiId);
