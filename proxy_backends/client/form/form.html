@@ -129,17 +129,34 @@
       <h3>
         {{_ "proxyBackendForm_advancedSettings_title" }}
       </h3>
-
       <!-- field input -->
       {{> afQuickField
         name="apiUmbrella.settings.disable_api_key"
         type="boolean-checkbox"
       }}
-
       <!-- help text -->
       <p class="help-block">
         {{_ "proxyBackendForm_disableApiKey_helpText" }}
       </p>
+
+      <!-- Rate limiting -->
+      <div class="form-group" id="rate-limiting">
+        <div class="col-md-3" id="rate-limit-mode">
+          {{> afQuickField
+            name="apiUmbrella.settings.rate_limit_mode"
+          }}
+        </div>
+        {{#if afFieldValueIs
+          name="apiUmbrella.settings.rate_limit_mode"
+          value="custom"
+        }}
+          <div class="col-md-12" id="rate-limits">
+          {{> afQuickField
+            name="apiUmbrella.settings.rate_limits"
+          }}
+          </div>
+        {{/if }}
+      </div>
     </div>
 
     <div id="proxy-form-buttons" class="btn-group pull-left">
