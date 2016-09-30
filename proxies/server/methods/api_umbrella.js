@@ -6,98 +6,39 @@ import { Proxies } from '/proxies/collection';
 import _ from 'lodash';
 
 Meteor.methods({
-  elasticsearchIsDefined () {
-    const proxy = Proxies.findOne();
-
-    if (proxy) {
-      const elasticsearch = proxy.apiUmbrella.elasticsearch;
-
-      return (elasticsearch) ? true : false;
-    }
-
-    return false;
-  },
-  getElasticsearchUrl () {
-    if (Meteor.call('elasticsearchIsDefined')) {
-      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
-
-      return elasticsearch;
-    }
-
-    throw new Meteor.Error('Elasticsearch is not defined');
-  },
-  createApiUmbrellaWeb () {
-    // TODO: Fix for multi-proxy support
-    const proxy = Proxies.findOne();
-
-    // Check if API Umbrella Web settings are valid
-    if (apiUmbrellaSettingsValid(proxy)) {
-      // Create config object for API Umbrella Web REST API
-      const config = {
-        baseUrl: proxy.apiUmbrella.url + '/api-umbrella/',
-        apiKey: proxy.apiUmbrella.apiKey,
-        authToken: proxy.apiUmbrella.authToken,
-      };
-
-      try {
-        // Create new API Umbrella Web object for REST calls
-        const apiUmbrellaWeb = new ApiUmbrellaWeb(config);
-        // Return created object
-        return apiUmbrellaWeb;
-      } catch (error) {
-        throw new Meteor.Error(error);
-      }
-    } else {
-      throw new Meteor.Error('ApiUmbrella settings are not valid.');
-    }
-  },
-  syncApiUmbrellaUsers () {
-    // Create apiUmbrellaWeb instance
+  createApiBackendOnApiUmbrella (apiBackend) {
+    // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
-    // Get users from API Umbrella instance
-    const response = umbrella.adminApi.v1.apiUsers.getUsers();
+    // Construct an API Backend object for API Umbrella with one 'api' key
+    const backend = {
+      api: apiBackend,
+    };
 
-    // Add each user to collection if not already there
-    const apiUsers = response.data.data;
-
-    _.forEach(apiUsers, (apiUser) => {
-      // Get existing user
-      const existingUser = ApiUmbrellaUsers.findOne({ 'id': apiUser.id });
-
-      // If user doesn't exist in collection, insert into collection
-      if (existingUser === undefined) {
-        ApiUmbrellaUsers.insert(apiUser);
-      }
-    });
-  },
-  syncApiUmbrellaAdmins () {
-    // Create apiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+    // Default response object to be send back to client layer
+    const response = {
+      result: {},
+      http_status: 200,
+      errors: {},
+    };
 
     try {
-      // Get admin users from API Umbrella instance
-      const response = umbrella.adminApi.v1.adminUsers.getAdmins();
-
-      // Add each admin user to collection if not already there
-      const apiAdmins = response.data.data;
-
-      _.forEach(apiAdmins, (apiAdmin) => {
-        // Get existing admin user
-        const existingAdminUser = ApiUmbrellaAdmins.findOne({ 'id': apiAdmin.id });
-
-        // If admin user doesn't exist in collection, insert into collection
-        if (existingAdminUser === undefined) {
-          ApiUmbrellaAdmins.insert(apiAdmin);
-        }
-      });
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
     } catch (error) {
-      throw new Metoer.Error(error);
+      // Set the errors object
+      response.errors = { 'default': [error.message] };
+      response.http_status = 422;
     }
+
+    return response;
   },
-  // Create API key & attach it for given user,
-  // Might throw errors, catch on client callback
   createApiUmbrellaUser (currentUser) {
+    /*
+    Create API key & attach it for given user,
+    Might throw errors, catch on client callback
+    */
+
     // Create apiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
     // Create API Umbrella user object with required fields
@@ -126,6 +67,93 @@ Meteor.methods({
         TAPi18n.__('umbrella_createuser_error')
       );
     }
+  },
+  createApiUmbrellaWeb () {
+    // TODO: Fix for multi-proxy support
+    const proxy = Proxies.findOne();
+
+    // Check if API Umbrella Web settings are valid
+    if (apiUmbrellaSettingsValid(proxy)) {
+      // Create config object for API Umbrella Web REST API
+      const config = {
+        baseUrl: proxy.apiUmbrella.url + '/api-umbrella/',
+        apiKey: proxy.apiUmbrella.apiKey,
+        authToken: proxy.apiUmbrella.authToken,
+      };
+
+      try {
+        // Create new API Umbrella Web object for REST calls
+        const apiUmbrellaWeb = new ApiUmbrellaWeb(config);
+        // Return created object
+        return apiUmbrellaWeb;
+      } catch (error) {
+        throw new Meteor.Error(error);
+      }
+    } else {
+      throw new Meteor.Error('ApiUmbrella settings are not valid.');
+    }
+  },
+  deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
+    // Create ApiUmbrellaWeb instance
+    const umbrella = Meteor.call('createApiUmbrellaWeb');
+
+    // Response object to be send back to client layer.
+    const apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 204,
+      errors: {},
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for deletion in the backend
+      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.deleteApiBackend(apiUmbrellaApiId);
+    } catch (apiUmbrellaError) {
+      // Set the errors object
+      apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
+  },
+  elasticsearchIsDefined () {
+    const proxy = Proxies.findOne();
+
+    if (proxy) {
+      const elasticsearch = proxy.apiUmbrella.elasticsearch;
+
+      return (elasticsearch) ? true : false;
+    }
+
+    return false;
+  },
+  getElasticsearchUrl () {
+    if (Meteor.call('elasticsearchIsDefined')) {
+      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
+
+      return elasticsearch;
+    }
+
+    throw new Meteor.Error('Elasticsearch is not defined');
+  },
+  publishApiBackendOnApiUmbrella (backendId) {
+    // Create ApiUmbrellaWeb instance
+    const umbrella = Meteor.call('createApiUmbrellaWeb');
+
+    // Response object to be send back to client layer.
+    const response = {
+      result: {},
+      http_status: 201,
+      errors: {},
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      response.result = umbrella.adminApi.v1.config.publishSingleApiBackend(backendId);
+    } catch (error) {
+      // Set the errors object
+      response.errors = { default: [error.message] };
+      response.http_status = 422;
+    }
+    return response;
   },
   syncApiBackends () {
     /*
@@ -191,53 +219,49 @@ Meteor.methods({
       throw new Meteor.Error(error);
     }
   },
-  createApiBackendOnApiUmbrella (apiBackend) {
-    // Create ApiUmbrellaWeb instance
+  syncApiUmbrellaAdmins () {
+    // Create apiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
-    // Construct an API Backend object for API Umbrella with one 'api' key
-    const backend = {
-      api: apiBackend,
-    };
-
-    // Default response object to be send back to client layer
-    const response = {
-      result: {},
-      http_status: 200,
-      errors: {},
-    };
-
     try {
-      // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
-    } catch (error) {
-      // Set the errors object
-      response.errors = { 'default': [error.message] };
-      response.http_status = 422;
-    }
+      // Get admin users from API Umbrella instance
+      const response = umbrella.adminApi.v1.adminUsers.getAdmins();
 
-    return response;
+      // Add each admin user to collection if not already there
+      const apiAdmins = response.data.data;
+
+      _.forEach(apiAdmins, (apiAdmin) => {
+        // Get existing admin user
+        const existingAdminUser = ApiUmbrellaAdmins.findOne({ 'id': apiAdmin.id });
+
+        // If admin user doesn't exist in collection, insert into collection
+        if (existingAdminUser === undefined) {
+          ApiUmbrellaAdmins.insert(apiAdmin);
+        }
+      });
+    } catch (error) {
+      throw new Metoer.Error(error);
+    }
   },
-  publishApiBackendOnApiUmbrella (backendId) {
-    // Create ApiUmbrellaWeb instance
+  syncApiUmbrellaUsers () {
+    // Create apiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
-    // Response object to be send back to client layer.
-    const response = {
-      result: {},
-      http_status: 201,
-      errors: {},
-    };
+    // Get users from API Umbrella instance
+    const response = umbrella.adminApi.v1.apiUsers.getUsers();
 
-    try {
-      // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      response.result = umbrella.adminApi.v1.config.publishSingleApiBackend(backendId);
-    } catch (error) {
-      // Set the errors object
-      response.errors = { default: [error.message] };
-      response.http_status = 422;
-    }
-    return response;
+    // Add each user to collection if not already there
+    const apiUsers = response.data.data;
+
+    _.forEach(apiUsers, (apiUser) => {
+      // Get existing user
+      const existingUser = ApiUmbrellaUsers.findOne({ 'id': apiUser.id });
+
+      // If user doesn't exist in collection, insert into collection
+      if (existingUser === undefined) {
+        ApiUmbrellaUsers.insert(apiUser);
+      }
+    });
   },
   updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
     // Create ApiUmbrellaWeb instance
@@ -260,27 +284,6 @@ Meteor.methods({
       apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
     } catch (apiUmbrellaError) {
       // set the errors object
-      apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
-      apiUmbrellaWebResponse.http_status = 422;
-    }
-    return apiUmbrellaWebResponse;
-  },
-  deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
-    // Create ApiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
-
-    // Response object to be send back to client layer.
-    const apiUmbrellaWebResponse = {
-      result: {},
-      http_status: 204,
-      errors: {},
-    };
-
-    try {
-      // Send the API Backend to API Umbrella's endpoint for deletion in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.deleteApiBackend(apiUmbrellaApiId);
-    } catch (apiUmbrellaError) {
-      // Set the errors object
       apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
       apiUmbrellaWebResponse.http_status = 422;
     }
