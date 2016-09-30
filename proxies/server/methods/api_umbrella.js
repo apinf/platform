@@ -150,6 +150,13 @@ Meteor.methods({
     }
   },
   syncApiBackends () {
+    /*
+    This function does the following
+      1. get a list of all backends on API Umbrella
+      2. create a local API for each remote backend
+      3. create a local Proxy Backend for each remote backend/local API pair
+    */
+
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
@@ -178,7 +185,14 @@ Meteor.methods({
           }
         }
       });
+    } catch (error) {
+      throw new Meteor.Error('create-proxy-backends-error',
+       'Could not create proxy backends.',
+        error
+      );
+    }
 
+    try {
       // Get all local API Backends
       const localApis = Apis.find().fetch();
 
