@@ -26,19 +26,6 @@ Meteor.methods({
 
     throw new Meteor.Error('Elasticsearch is not defined');
   },
-  apiUmbrellaUrlIsDefined () {
-    const proxy = Proxies.findOne(); // For now checking for only one proxy
-
-    if (proxy) {
-      const apiUmbrellaUrl = proxy.apiUmbrella.url;
-
-      // tyk/kong or other apiUmbrellas should be checked here
-
-      return (apiUmbrellaUrl) ? true : false;
-    }
-
-    return false;
-  },
   getApiUmbrellaUrl () {
     if (Meteor.call('apiUmbrellaUrlIsDefined')) {
       const apiUmbrellaUrl = Proxies.findOne().apiUmbrella.url;
