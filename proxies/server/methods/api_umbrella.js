@@ -168,10 +168,13 @@ Meteor.methods({
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
+    // Placeholder variables
+    let response, remoteApis;
+
     try {
       // Get API Backends from API Umbrella instance
-      const response = umbrella.adminApi.v1.apiBackends.getApiBackends();
-      const remoteApis = response.data.data;
+      response = umbrella.adminApi.v1.apiBackends.getApiBackends();
+      remoteApis = response.data.data;
     } catch (error) {
       throw new Meteor.Error('api-umbrella-fetch',
        'Could not fetch API backends.',
