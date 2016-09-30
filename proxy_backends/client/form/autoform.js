@@ -58,11 +58,9 @@ AutoForm.hooks({
         // Get API Umbrella configuration object from Proxy Backend
         const apiUmbrellaBackend = proxyBackend.apiUmbrella;
 
-        // Check rate limit mode
-        if (apiUmbrellaBackend.settings.rate_limit_mode) {
-          console.log(apiUmbrellaBackend.settings.rate_limit_mode);
-        } else {
-          // Does not exist set to default rate limits
+        if (!apiUmbrellaBackend.settings.rate_limit_mode) {
+          // if no rate_limit_mode set to default rate limits
+          // null == "default rate limits" in Umbrella (undocumented feature)
           apiUmbrellaBackend.settings.rate_limit_mode = null;
         }
 
