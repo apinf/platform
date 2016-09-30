@@ -2,6 +2,7 @@ import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '/apis/collection';
 import { Proxies } from '/proxies/collection';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import _ from 'lodash';
 
@@ -27,7 +28,7 @@ Meteor.methods({
       response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
     } catch (error) {
       // Set the errors object
-      response.errors = { 'default': [error.message] };
+      response.errors = { default: [error.message] };
       response.http_status = 422;
     }
 
@@ -76,7 +77,7 @@ Meteor.methods({
     if (apiUmbrellaSettingsValid(proxy)) {
       // Create config object for API Umbrella Web REST API
       const config = {
-        baseUrl: proxy.apiUmbrella.url + '/api-umbrella/',
+        baseUrl: `${proxy.apiUmbrella.url}/api-umbrella/`,
         apiKey: proxy.apiUmbrella.apiKey,
         authToken: proxy.apiUmbrella.authToken,
       };
@@ -109,7 +110,7 @@ Meteor.methods({
       apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.deleteApiBackend(apiUmbrellaApiId);
     } catch (apiUmbrellaError) {
       // Set the errors object
-      apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
+      apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
       apiUmbrellaWebResponse.http_status = 422;
     }
     return apiUmbrellaWebResponse;
@@ -120,7 +121,8 @@ Meteor.methods({
     if (proxy) {
       const elasticsearch = proxy.apiUmbrella.elasticsearch;
 
-      return (elasticsearch) ? true : false;
+      // Return true or false, depending on whether elasticsearch is defined
+      return (elasticsearch);
     }
 
     return false;
@@ -187,7 +189,10 @@ Meteor.methods({
           try {
             Apis.insert(remoteApi);
           } catch (error) {
-            throw new Meteor.Error('Error inserting apiBackend(' + remoteApi.id + ') : ' + error);
+            throw new Meteor.Error('insert-backend-error',
+            `Error inserting apiBackend( ${remoteApi.id} ).`,
+            error
+          );
           }
         }
       });
@@ -211,7 +216,11 @@ Meteor.methods({
           try {
             Apis.remove({ id: localApi.id });
           } catch (error) {
-            throw new Meteor.Error('Error deleteing apiBackend(' + localApi.id + ') : ' + error);
+            throw new Meteor.Error(
+              'delete-backend-error',
+              `Error deleteing apiBackend( ${localApi.id} ).`,
+              error
+            );
           }
         }
       });
@@ -240,7 +249,7 @@ Meteor.methods({
         }
       });
     } catch (error) {
-      throw new Metoer.Error(error);
+      throw new Meteor.Error(error);
     }
   },
   syncApiUmbrellaUsers () {
@@ -284,7 +293,7 @@ Meteor.methods({
       apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
     } catch (apiUmbrellaError) {
       // set the errors object
-      apiUmbrellaWebResponse.errors = { 'default': [apiUmbrellaError.message] };
+      apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
       apiUmbrellaWebResponse.http_status = 422;
     }
     return apiUmbrellaWebResponse;
