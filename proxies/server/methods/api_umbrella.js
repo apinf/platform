@@ -184,13 +184,20 @@ Meteor.methods({
 
     try {
       _.forEach(remoteApis, (remoteApi) => {
+        console.log(remoteApi);
         // Get existing API Backend
-        const existingLocalApiBackend = Apis.findOne({ id: remoteApi.id });
+        const existingLocalApiBackend = Apis.findOne({ name: remoteApi.name });
 
         // If API Backend doesn't exist in collection, insert into collection
         if (existingLocalApiBackend === undefined) {
+          // Construct an API document for the APIs collection
+          const api = {
+            name: remoteApi.name,
+            url: `${remoteApi.backend_protocol}://${remoteApi.backend_host}`,
+          };
+
           try {
-            Apis.insert(remoteApi);
+            Apis.insert(api);
           } catch (error) {
             throw new Meteor.Error('insert-backend-error',
             `Error inserting apiBackend( ${remoteApi.id} ).`,
@@ -207,26 +214,26 @@ Meteor.methods({
     }
 
     try {
-      // Get all local API Backends
-      const localApis = Apis.find().fetch();
-
-      _.forEach(localApis, (localApi) => {
-        const existingRemoteApiBackend = _.find(remoteApis, (remoteApi) =>
-          remoteApi.id === localApi.id);
-
-        // If API Backend doesn't exist on API Umbrella, but locally, delete this API
-        if (!existingRemoteApiBackend) {
-          try {
-            Apis.remove({ id: localApi.id });
-          } catch (error) {
-            throw new Meteor.Error(
-              'delete-backend-error',
-              `Error deleteing apiBackend( ${localApi.id} ).`,
-              error
-            );
-          }
-        }
-      });
+      // // Get all local API Backends
+      // const localApis = Apis.find().fetch();
+      //
+      // _.forEach(localApis, (localApi) => {
+      //   const existingRemoteApiBackend = _.find(remoteApis, (remoteApi) =>
+      //     remoteApi.id === localApi.id);
+      //
+      //   // If API Backend doesn't exist on API Umbrella, but locally, delete this API
+      //   if (!existingRemoteApiBackend) {
+      //     try {
+      //       Apis.remove({ id: localApi.id });
+      //     } catch (error) {
+      //       throw new Meteor.Error(
+      //         'delete-backend-error',
+      //         `Error deleteing apiBackend( ${localApi.id} ).`,
+      //         error
+      //       );
+      //     }
+      //   }
+      // });
     } catch (error) {
       throw new Meteor.Error(error);
     }
