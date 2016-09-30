@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 AutoForm.addHooks('proxyForm', {
-  onSuccess (formType, result) {
+  onSuccess () {
     // Hide modal
     Modal.hide('addProxy');
 
