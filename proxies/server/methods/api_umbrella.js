@@ -158,7 +158,10 @@ Meteor.methods({
       const response = umbrella.adminApi.v1.apiBackends.getApiBackends();
       const remoteApis = response.data.data;
     } catch (error) {
-      throw new Meteor.Error(500, 'Could not fetch API backends: ' + error);
+      throw new Meteor.Error('api-umbrella-fetch',
+       'Could not fetch API backends.',
+        error
+      );
     }
 
     try {
