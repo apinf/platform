@@ -1,3 +1,4 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Apis } from './';
 
 Apis.schema = new SimpleSchema({
@@ -25,7 +26,6 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-
   apiLogoFileId: {
     type: String,
     optional: true,

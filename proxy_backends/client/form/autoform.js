@@ -1,9 +1,9 @@
-import { ProxyBackends } from '../../collection';
-
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Meteor } from 'meteor/meteor';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { AutoForm } from 'meteor/aldeed:autoform';
+
+import { ProxyBackends } from '../../collection';
 
 AutoForm.hooks({
   proxyBackendForm: {
@@ -19,21 +19,19 @@ AutoForm.hooks({
             if (error) {
               // Throw a Meteor error
               Meteor.error(500, error);
-            } else {
-              // If success, attach API Umbrella backend ID to current document
-              if (
-                response.result &&
-                response.result.data &&
-                response.result.data.api
-              ) {
+            } else if ( // If success, attach API Umbrella backend ID to API
+              response.result &&
+              response.result.data &&
+              response.result.data.api
+            ) {
                 // Get the API Umbrella ID for newly created backend
-                const umbrellaBackendId = response.result.data.api.id;
+              const umbrellaBackendId = response.result.data.api.id;
 
                 // Attach the API Umbrella backend ID to backend document
-                proxyBackend.apiUmbrella.id = umbrellaBackendId;
+              proxyBackend.apiUmbrella.id = umbrellaBackendId;
 
                 // Publish the API Backend on API Umbrella
-                Meteor.call(
+              Meteor.call(
                   'publishApiBackendOnApiUmbrella',
                   umbrellaBackendId,
                   (error, result) => {
@@ -45,7 +43,6 @@ AutoForm.hooks({
                     }
                   }
                 );
-              }
             }
           });
       },
