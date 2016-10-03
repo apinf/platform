@@ -29,7 +29,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
-        Visibility
+        {{_ "apiSettings_panelTitleVisibility" }}
       </h2>
     </div>
     <div class="panel-body">
@@ -38,31 +38,28 @@
           <li>
             <input type="radio" name="visibility-option" value="public" checked>
             <span>
-              Make API Public
+              {{_ "apiSettings_visibilityOptions_public_title" }}
             </span>
             <p class="help-block">
-              The API will be accessible to general audience
-              from API catalog and respective API profile.
+              {{_ "apiSettings_visibilityOptions_public_helpText" }}
             </p>
           </li>
           <li>
             <input type="radio" name="visibility-option" value="limited-public">
             <span>
-              Make API visible to specific people
+              {{_ "apiSettings_visibilityOptions_limitedPublic_title" }}
             </span>
             <p class="help-block">
-              Add email address for each user you wish to make
-              your API available to access.
+              {{_ "apiSettings_visibilityOptions_limitedPublic_helpText" }}
             </p>
           </li>
           <li>
             <input type="radio" name="visibility-option" value="private">
             <span>
-              Make API Private
+              {{_ "apiSettings_visibilityOptions_private_title" }}
             </span>
             <p class="help-block">
-              Only API owner can access your API from API catalog
-              and respective API profile.
+              {{_ "apiSettings_visibilityOptions_private_helpText" }}
             </p>
           </li>
         </ul>
