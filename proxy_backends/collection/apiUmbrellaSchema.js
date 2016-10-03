@@ -3,13 +3,16 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
 
-const Settings = new SimpleSchema({
+const SettingsSchema = new SimpleSchema({
   'disable_api_key': {
     type: Boolean,
     optional: true,
     defaultValue: false,
   },
 });
+
+// Internationalize settings schema texts
+SettingsSchema.i18n('schemas.ProxyBackends.apiUmbrella.settings');
 
 const ApiUmbrellaSchema = new SimpleSchema({
   id: {
@@ -76,14 +79,19 @@ const ApiUmbrellaSchema = new SimpleSchema({
     label: 'API port',
   },
   settings: {
-    type: Settings,
+    type: SettingsSchema,
     optional: true,
   },
 });
 
+<<<<<<< HEAD
 ApiUmbrellaSchema.messages({
   // unique field error message
   notUnique: 'Not unique.',
 });
+=======
+// Internationalize API Umbrella schema texts
+ApiUmbrellaSchema.i18n('schemas.ProxyBackends.apiUmbrella');
+>>>>>>> develop
 
 export { ApiUmbrellaSchema };

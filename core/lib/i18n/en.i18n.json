@@ -378,41 +378,6 @@
         }
       }
     },
-    "apiWizard_backendInformation": {
-      "backend_protocol": {
-        "label": "Protocol"
-      },
-      "backend_host": {
-        "label": "Host",
-        "placeholder": "Enter the remote host name for this API backend"
-      },
-      "backend_port": {
-        "label": "Port"
-      }
-    },
-    "apiWizard_baseInformation": {
-      "name": {
-        "label": "Name",
-        "placeholder": "Enter a name for this API Backend"
-      },
-      "description": {
-        "label": "Description",
-        "placeholder": "Describe this API Backend"
-      }
-    },
-    "apiWizard_prefixesInformation": {
-      "url_matches": {
-        "label": "URL Matching strings",
-        "frontend_prefix": {
-          "label": "Frontend prefix",
-          "placeholder": "Enter a string to use as the path to access this API Backend"
-        },
-        "backend_prefix": {
-          "label": "Backend prefix",
-          "placeholder": "Enter a string to be added to each backend request"
-        }
-      }
-    },
     "backlog": {
       "title": {
         "label": "Title",
@@ -499,7 +464,7 @@
       "apiUmbrella": {
         "settings": {
           "disable_api_key": {
-            "label": "Disable API key"
+            "label": "API key check"
           }
         }
       }
@@ -517,6 +482,7 @@
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchResultsHeader": "Search results",
   "settings_apiDocumentation_editor": "API Documentation Editor",
+  "settings_addingApis": "Adding APIs",
   "settings_mail": "Mail",
   "settings_mail_username_label": "Username",
   "settings_mail_password_label": "Password",
@@ -532,6 +498,7 @@
   "settings_elasticsearch": "Elasticsearch",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
+  "settings_schema_onlyAdminsCanAddApis": "Only platform administrators are allowed to add new APIs",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
   "settingsMenu_branding": "Branding",
