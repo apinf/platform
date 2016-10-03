@@ -311,7 +311,7 @@
   "proxyBackendForm_advancedSettings_title": "Advanced settings",
   "proxyBackendForm_apiBasePath_helpText": "Base path added to all API requests. Example:",
   "proxyBackendForm_apiPort_helpText": "Port number on API server",
-  "proxyBackendForm_disableApiKey_helpText": "Optionally you can allow users to use your API without API key.",
+  "proxyBackendForm_disableApiKey_helpText": "Allow users to use this API without an API key.",
   "proxyBackendForm_proxyBasePath_helpText": "Base path added to all Proxy requests. Example:",
   "proxyBackendForm_successMessage": "Settings saved.",
   "proxyBackendForm_saveButton": "Save & Publish",
