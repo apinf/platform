@@ -33,9 +33,11 @@
       </h2>
     </div>
     <div class="panel-body">
-      <h3>Change API visibility</h3>
+      <h3>
+        {{_ "apiSettings_visibility_heading" }}
+      </h3>
       <p>
-        Make this API private or public
+        {{_ "apiSettings_visibility_text" }}
       </p>
       {{#if api.currentUserCanEdit }}
         {{> visibilityToggle api=api }}

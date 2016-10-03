@@ -1,9 +1,9 @@
 <template name="visibilityToggle">
-  <button class="btn btn-danger changeVisibility">
+  <button class="btn btn-default changeVisibility">
     {{# if isPublic }}
-    Make Private
+      {{_ "visibilityToggle_buttonPrivate" }}
     {{ else }}
-    Make Public
+      {{_ "visibilityToggle_buttonPublic" }}
     {{/ if}}
   </button>
 </template>
