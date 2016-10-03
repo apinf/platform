@@ -2,9 +2,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Utility import
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
-
 const SettingsSchema = new SimpleSchema({
-  'disable_api_key': {
+  disable_api_key: {
     type: Boolean,
     optional: true,
     defaultValue: false,
@@ -54,6 +53,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'url_matches.$.frontend_prefix': {
     type: String,
     optional: true,
+    unique: true,
     label: 'Proxy base path',
     regEx: proxyBasePathRegEx,
   },
@@ -81,6 +81,11 @@ const ApiUmbrellaSchema = new SimpleSchema({
     type: SettingsSchema,
     optional: true,
   },
+});
+
+ApiUmbrellaSchema.messages({
+  // unique field error message
+  notUnique: 'Not unique.',
 });
 
 // Internationalize API Umbrella schema texts
