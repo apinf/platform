@@ -22,6 +22,17 @@
             </p>
           </div>
           <ul class="api-card-stats list-inline">
+            <li class="pull-left">
+              <div class="api-card-star-average"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Average Rating">
+                {{#if api.getAverageRating }}
+                  {{ api.getAverageRating }}
+                  <i class="fa fa-star-half-o"></i>
+                {{/if}}
+              </div>
+            </li>
             {{# if currentUser }}
             <li class="pull-left">
               <div
