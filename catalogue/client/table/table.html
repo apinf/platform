@@ -27,6 +27,9 @@
               {{ api.relativeCreatedAt }}
             </i>
           </td>
+          <td class="col-sm-1" style="vertical-align:middle">
+            {{> apiBackendRating api }}
+          </td>
           <td class="col-sm-1 text-center">
             {{# if currentUser }}
             <span class="api-card-bookmark">
