@@ -1,16 +1,16 @@
-<template name="favourite">
+<template name="bookmark">
   {{ # if isBookmarked }}
   <a href="#" class="star-button bookmark bookmarked">
-    <i class="fa fa-star"></i>
+    <i class="fa fa-bookmark"></i>
     {{ # unless catalogueView }}
-    &nbsp;Unstar
+    &nbsp;Unbookmark
     {{ / unless }}
   </a>
   {{ else }}
   <a href="#" class="star-button bookmark">
-    <i class="fa fa-star-o"></i>
+    <i class="fa fa-bookmark-o"></i>
     {{ # unless catalogueView }}
-    &nbsp;Star
+    &nbsp;Bookmark
     {{ / unless }}
   </a>
   {{ / if }}

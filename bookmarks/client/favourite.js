@@ -1,4 +1,7 @@
-Template.favourite.created = function () {
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+
+Template.bookmark.created = function () {
   // Get reference to template instance
   const instance = this;
 
@@ -6,7 +9,7 @@ Template.favourite.created = function () {
   instance.bookmarksSubscription = instance.subscribe('myApiBookmarks');
 };
 
-Template.favourite.events({
+Template.bookmark.events({
   'click .bookmark': function () {
     // Get api backend Id from the context
     const apiId = (this.api) ? this.api._id : this._id;
@@ -19,7 +22,7 @@ Template.favourite.events({
   },
 });
 
-Template.favourite.helpers({
+Template.bookmark.helpers({
   isBookmarked () {
     // Get api backend Id from the context
     const apiId = (this.api) ? this.api._id : this._id;
