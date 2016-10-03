@@ -37,11 +37,12 @@ const SettingsSchema = new SimpleSchema({
   },
   rate_limit_mode: {
     type: String,
-    optional: true,
+    optional: false,
     allowedValues: [
       'custom',
       'unlimited',
     ],
+    defaultValue: 'unlimited',
   },
   rate_limits: {
     type: [RateLimitSchema],
