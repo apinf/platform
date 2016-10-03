@@ -33,38 +33,40 @@
       </h2>
     </div>
     <div class="panel-body">
-      <ul id="visibility-options" class="list-unstyled">
-        <li>
-          <input type="radio" name="public" value="public" checked>
-          <span>
-            Make API Public
-          </span>
-          <p class="help-block">
-            The API will be accessible to general audience
-            from API catalog and respective API profile.
-          </p>
-        </li>
-        <li>
-          <input type="radio" name="limited-public" value="limited-public">
-          <span>
-            Make API visible to specific people
-          </span>
-          <p class="help-block">
-            Add email address for each user you wish to make
-            your API available to access.
-          </p>
-        </li>
-        <li>
-          <input type="radio" name="private" value="private">
-          <span>
-            Make API Private
-          </span>
-          <p class="help-block">
-            Only API owner can access your API from API catalog
-            and respective API profile.
-          </p>
-        </li>
-      </ul>
+      <form>
+        <ul id="visibility-options" class="list-unstyled">
+          <li>
+            <input type="radio" name="visibility-option" value="public" checked>
+            <span>
+              Make API Public
+            </span>
+            <p class="help-block">
+              The API will be accessible to general audience
+              from API catalog and respective API profile.
+            </p>
+          </li>
+          <li>
+            <input type="radio" name="visibility-option" value="limited-public">
+            <span>
+              Make API visible to specific people
+            </span>
+            <p class="help-block">
+              Add email address for each user you wish to make
+              your API available to access.
+            </p>
+          </li>
+          <li>
+            <input type="radio" name="visibility-option" value="private">
+            <span>
+              Make API Private
+            </span>
+            <p class="help-block">
+              Only API owner can access your API from API catalog
+              and respective API profile.
+            </p>
+          </li>
+        </ul>
+      </form>
       <a
          href="#"
          class="btn btn-success">
