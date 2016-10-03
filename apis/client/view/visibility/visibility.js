@@ -5,7 +5,7 @@ import { Apis } from '/apis/collection';
 
 Template.visibilityToggle.events({
   'click .changeVisibility': function (event) {
-    // Get API current API Backend from template data
+    // Get API from template data
     const api = Template.currentData().api;
 
     // Get ID of current service
@@ -18,7 +18,7 @@ Template.visibilityToggle.events({
 
 Template.visibilityToggle.helpers({
   isPublic () {
-    // Get API current API Backend from template data
+    // Get API from template data
     const api = Template.currentData().api;
 
     // Get ID of current service
