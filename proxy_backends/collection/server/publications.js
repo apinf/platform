@@ -13,9 +13,6 @@ Meteor.publish('apiProxySettings', function (apiId) {
   // TODO: determine how to use 'api.userCanEdit()' helper
   // which uses 'Meteor.userId()' instead of 'this.userId'
 
-  // Placeholders for manager and admin checks
-  let userIsManager, userIsAdmin;
-
   // Get current userId
   const userId = this.userId;
 
@@ -25,19 +22,19 @@ Meteor.publish('apiProxySettings', function (apiId) {
     const api = Apis.findOne(apiId);
 
     // Check if user is API manager
-    userIsManager = _.includes(api.managerIds, userId);
+    const userIsManager = _.includes(api.managerIds, userId);
 
     // Check if user is administrator
-    userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
     // Check if user is authorized to access API proxy settings
     if (userIsManager || userIsAdmin) {
       return ProxyBackends.find({ apiId });
     }
-  } else {
-    // Complete publication execution
-    this.ready();
   }
+
+  // Complete publication execution
+  return this.ready();
 });
 
 Meteor.publish('proxyApis', function () {
