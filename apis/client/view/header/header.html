@@ -31,9 +31,6 @@
           </a>
         {{/if}}
       </div>
-      {{#if api.currentUserCanEdit }}
-        {{> apiIntro }}
-      {{/if}}
       {{#if proxyBackend }}
         <div>
           <span class="pull-right">{{> apiKey }}</span>
@@ -109,6 +106,9 @@
             {{/ if }}
           {{/ if }}
         </ul>
+        {{#if api.currentUserCanEdit }}
+          {{> apiIntro }}
+        {{/if}}
       </div>
     </div>
   </div>
