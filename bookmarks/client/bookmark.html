@@ -3,14 +3,14 @@
   <a href="#" class="star-button bookmark bookmarked">
     <i class="fa fa-bookmark"></i>
     {{ # unless catalogueView }}
-    &nbsp;Unbookmark
+    &nbsp;{{_ "bookmark_buttonText_unbookmark" }}
     {{ / unless }}
   </a>
   {{ else }}
   <a href="#" class="star-button bookmark">
     <i class="fa fa-bookmark-o"></i>
     {{ # unless catalogueView }}
-    &nbsp;Bookmark
+    &nbsp;{{_ "bookmark_buttonText_bookmark" }}
     {{ / unless }}
   </a>
   {{ / if }}
