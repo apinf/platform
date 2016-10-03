@@ -73,3 +73,4 @@ deepwell:bootstrap-datepicker2
 pfafman:filesaver
 shell-server
 tmeasday:publish-counts
+percolate:migrations
