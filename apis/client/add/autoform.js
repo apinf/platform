@@ -1,5 +1,5 @@
 AutoForm.hooks({
-  "addApiForm": {
+  'addApiForm': {
     before: {
       insert (api) {
         // Get current user ID
@@ -10,11 +10,17 @@ AutoForm.hooks({
 
         // Submit the form
         return api;
-      }
+      },
     },
     onSuccess (formType, apiId) {
       // Redirect to newly added API
-      Router.go("viewApi", { _id: apiId });
-    }
-  }
+      Router.go('viewApi', { _id: apiId });
+
+      // Get current user ID
+      const userId = Meteor.userId();
+
+      // Give user manager role
+      Roles.addUsersToRoles(userId, 'manager');
+    },
+  },
 });
