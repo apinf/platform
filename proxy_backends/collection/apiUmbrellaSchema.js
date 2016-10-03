@@ -2,6 +2,32 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Utility import
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
+const RateLimitSchema = new SimpleSchema({
+  duration: {
+    type: Number,
+    optional: true,
+  },
+  limit_by: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'apiKey',
+      'ip',
+    ],
+  },
+  limit: {
+    type: Number,
+    optional: true,
+  },
+  response_headers: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
+});
+
+// Internationalize Rate limit schema texts
+RateLimitSchema.i18n('schemas.ProxyBackends.apiUmbrella.settings.rate_limit');
 
 const SettingsSchema = new SimpleSchema({
   disable_api_key: {
@@ -18,29 +44,8 @@ const SettingsSchema = new SimpleSchema({
     ],
   },
   rate_limits: {
-    type: [Object],
+    type: [RateLimitSchema],
     optional: true,
-  },
-  'rate_limits.$.duration': {
-    type: Number,
-    optional: true,
-  },
-  'rate_limits.$.limit_by': {
-    type: String,
-    optional: true,
-    allowedValues: [
-      'apiKey',
-      'ip',
-    ],
-  },
-  'rate_limits.$.limit': {
-    type: Number,
-    optional: true,
-  },
-  'rate_limits.$.response_headers': {
-    type: Boolean,
-    optional: true,
-    defaultValue: false,
   },
 });
 
