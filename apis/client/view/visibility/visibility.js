@@ -1,12 +1,12 @@
+import { Template } from 'meteor/templating';
+
 import { Apis } from '/apis/collection';
+
 
 Template.visibilityToggle.events({
   'click .changeVisibility': function (event) {
-    // Get reference to current template instance
-    const instance = this;
-
-    // Get API Backend from data context
-    const api = this.api;
+    // Get API current API Backend from template data
+    const api = Template.currentData().api;
 
     // Get ID of current service
     const apiId = api._id;
@@ -18,11 +18,8 @@ Template.visibilityToggle.events({
 
 Template.visibilityToggle.helpers({
   isPublic () {
-    // Get reference to current template instance
-    const instance = this;
-
-    // Get API Backend from data context
-    const api = this.api;
+    // Get API current API Backend from template data
+    const api = Template.currentData().api;
 
     // Get ID of current service
     const apiId = api._id;
