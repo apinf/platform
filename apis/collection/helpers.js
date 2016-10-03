@@ -128,9 +128,6 @@ Apis.helpers({
     // Return relative updated_at
     return moment(this.created_at).fromNow();
   },
-  description () {
-    return this.description;
-  },
   setAverageRating () {
     // get average rating value
     const averageRating = this.getAverageRating();
