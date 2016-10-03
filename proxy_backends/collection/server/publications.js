@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
+import { Roles } from 'meteor/alanning:roles';
+
 // Apinf import
 import { Apis } from '/apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
