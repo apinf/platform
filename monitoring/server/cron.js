@@ -12,14 +12,13 @@ import _ from 'lodash';
 Meteor.methods({
   startCron (apiId, url) {
     // Create unique name for Cron job
-    const uniqueName = 'Monitoring: ' + apiId;
+    const uniqueName = `Monitoring: ${apiId}`;
 
     // Set time of the monitoring call
     const cronTime = 'every 1 hour';
 
     // Update api status to 'Loading...'
     Apis.update(apiId, { $set: { status_code: 0 } });
-
 
     // Create cron working
     SyncedCron.add({
@@ -51,7 +50,7 @@ Meteor.methods({
   },
   stopCron (apiId) {
     // Create unique name for Cron job
-    const uniqueName = 'Monitoring: ' + apiId;
+    const uniqueName = `Monitoring: ${apiId}`;
 
     // Stop Cron job
     SyncedCron.remove(uniqueName);
