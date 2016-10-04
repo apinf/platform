@@ -230,38 +230,13 @@ Meteor.methods({
           proxyId,
           apiUmbrella: remoteApi,
         };
-        console.log(proxyBackend);
+
         ProxyBackends.insert(proxyBackend, { validate: false });
       });
     } catch (error) {
       throw new Meteor.Error('create-proxy-backend-error',
        error.message
       );
-    }
-
-    try {
-      // // Get all local API Backends
-      // const localApis = Apis.find().fetch();
-      //
-      // _.forEach(localApis, (localApi) => {
-      //   const existingRemoteApiBackend = _.find(remoteApis, (remoteApi) =>
-      //     remoteApi.id === localApi.id);
-      //
-      //   // If API Backend doesn't exist on API Umbrella, but locally, delete this API
-      //   if (!existingRemoteApiBackend) {
-      //     try {
-      //       Apis.remove({ id: localApi.id });
-      //     } catch (error) {
-      //       throw new Meteor.Error(
-      //         'delete-backend-error',
-      //         `Error deleteing apiBackend( ${localApi.id} ).`,
-      //         error
-      //       );
-      //     }
-      //   }
-      // });
-    } catch (error) {
-      throw new Meteor.Error(error);
     }
   },
   syncApiUmbrellaAdmins () {
@@ -277,7 +252,7 @@ Meteor.methods({
 
       _.forEach(apiAdmins, (apiAdmin) => {
         // Get existing admin user
-        const existingAdminUser = ApiUmbrellaAdmins.findOne({ 'id': apiAdmin.id });
+        const existingAdminUser = ApiUmbrellaAdmins.findOne({ id: apiAdmin.id });
 
         // If admin user doesn't exist in collection, insert into collection
         if (existingAdminUser === undefined) {
@@ -300,7 +275,7 @@ Meteor.methods({
 
     _.forEach(apiUsers, (apiUser) => {
       // Get existing user
-      const existingUser = ApiUmbrellaUsers.findOne({ 'id': apiUser.id });
+      const existingUser = ApiUmbrellaUsers.findOne({ id: apiUser.id });
 
       // If user doesn't exist in collection, insert into collection
       if (existingUser === undefined) {
