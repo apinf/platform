@@ -401,6 +401,31 @@
         "settings": {
           "disable_api_key": {
             "label": "Disable API key requirement"
+          },
+          "rate_limit_mode": {
+            "label": "Rate limit mode",
+            "options": {
+              "custom": "Custom rate limits",
+              "unlimited": "Unlimited requests"
+            }
+          },
+          "rate_limit": {
+            "duration": {
+              "label": "Duration (ms)"
+            },
+            "limit_by": {
+              "label": "Limit by",
+              "options": {
+                "apiKey": "API Key",
+                "ip": "IP Address"
+              }
+            },
+            "limit": {
+              "label": "Number of requests"
+            },
+            "response_headers": {
+              "label": "Show rate limit in response headers"
+            }
           }
         }
       }
