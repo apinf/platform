@@ -31,7 +31,7 @@ Meteor.methods({
         // Call HTTP request
         Meteor.http.get(url, {}, (error, result) => {
           // Set status code
-          const serverStatusCode = result ? result.statusCode : 500;
+          const serverStatusCode = result ? result.statusCode : 404;
 
           // Create a monitoring data
           const monitoringData = {
