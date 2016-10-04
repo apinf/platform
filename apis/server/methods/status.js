@@ -1,5 +1,5 @@
 // APINF import
-import { Monitoring } from '/monitoring/collection';
+import { MonitoringData } from '/monitoring/collection';
 import { Apis } from '/apis/collection';
 
 Meteor.methods({
@@ -12,14 +12,14 @@ Meteor.methods({
       // Create a monitoring data
       const monitoringData = {
         date: new Date(),
-        status_code: serverStatusCode,
+        server_status_code: serverStatusCode,
       };
 
       // Update an api status
-      Apis.update({ _id: apiId }, { $set: { latestMonitoringStatusCode: serverStatusCode } });
+      Apis.update(apiId, { $set: { latestMonitoringStatusCode: serverStatusCode } });
 
       // Add the monitoring data in Collection
-      Monitoring.update({ apiId }, { $push: { requests: monitoringData } });
+      MonitoringData.update({ apiId }, { $push: { responses: monitoringData } });
     });
   }
 });

@@ -8,7 +8,7 @@ import { ApiBacklogItems } from '/backlog/collection';
 import { ApiMetadata } from '/metadata/collection';
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Feedback } from '/feedback/collection';
-import { Monitoring } from '/monitoring/collection';
+import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 Meteor.methods({
@@ -18,7 +18,16 @@ Meteor.methods({
     Meteor.call('removeApiDoc', apiId);
 
     // Stop the api monitoring if it's enabled
-    Meteor.call('stopCron', apiBackendId);
+    Meteor.call('stopCron', apiId);
+
+    // Get monitoring Settings
+    const monitoring =  MonitoringSettings.findOne({ apiId });
+
+    // Check if API has monitoring
+    if (monitoring) {
+      // Remove Monitoring Settings and Monitoring Data
+      Meteor.call('removeMonitoring', apiId)
+    }
 
     // Remove backlog items
     ApiBacklogItems.remove({ apiId });
@@ -38,9 +47,6 @@ Meteor.methods({
       Meteor.call('deleteProxyBackend', proxyBackend);
     }
 
-    // Remove monitoring settings
-    Monitoring.remove({ 'apiId': apiBackendId });
-
     // Finally remove the API
     Apis.remove(apiId);
   },
@@ -55,4 +61,11 @@ Meteor.methods({
     // Remove documentation object
     DocumentationFiles.remove(objectId);
   },
+  removeMonitoring (apiId) {
+    // Remove monitoring data collection
+    MonitoringData.remove({ apiId });
+
+    // Remove monitoring settings collection
+    MonitoringSettings.remove({ apiId});
+  }
 });

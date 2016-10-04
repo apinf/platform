@@ -2,14 +2,18 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // APINF import
-import { Monitoring } from './';
+import { MonitoringSettings, MonitoringData } from './';
 
-Monitoring.schema = new SimpleSchema({
+MonitoringSettings.schema = new SimpleSchema({
   apiId: {
     type: String,
   },
   enabled: {
     type: Boolean,
+    optional: true,
+  },
+  data: {
+    type: String,
     optional: true,
   },
   url: {
@@ -26,25 +30,29 @@ Monitoring.schema = new SimpleSchema({
       }
       return validation;
     },
+  }
+});
+
+MonitoringData.schema = new SimpleSchema({
+  apiId: {
+    type: String,
   },
-  requests: {
+  responses: {
     type: [Object],
     optional: true,
   },
-  'requests.$.date': {
+  'responses.$.date': {
     type: String,
     optional: true,
   },
-  'requests.$.status_code': {
+  'responses.$.server_status_code': {
     type: String,
     optional: true,
-  },
-  'requests.$.apiStatus': {
-    type: String,
-    optional: true,
-  },
+  }
 });
 // Enable translations (i18n)
-Monitoring.schema.i18n('schemas.monitoring');
+MonitoringSettings.schema.i18n('schemas.monitoring');
 
-Monitoring.attachSchema(Monitoring.schema);
+MonitoringSettings.attachSchema(MonitoringSettings.schema);
+MonitoringData.attachSchema(MonitoringData.schema);
+

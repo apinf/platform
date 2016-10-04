@@ -1,8 +1,8 @@
 // APINF import
-import { Monitoring } from './';
 import { Apis } from '/apis/collection';
+import { MonitoringSettings, MonitoringData } from './';
 
-Monitoring.allow({
+MonitoringSettings.allow({
   insert (userId, data) {
     // Only allow API Managers or Administrators to insert
 

@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
 // APINF import
-import { Monitoring } from '/monitoring/collection';
+import { MonitoringSettings } from '/monitoring/collection';
 import { Apis } from '/apis/collection';
 
 // NPM packages import
@@ -41,15 +41,16 @@ Meteor.methods({
     SyncedCron.remove(uniqueName);
 
     // Update an api status
-    Apis.update({ _id: apiId }, { $set: { latestMonitoringStatusCode: -1 } });
+    Apis.update(apiId, { $set: { latestMonitoringStatusCode: -1 } });
   },
   restartCron () {
     // Get all apis which are added in monitoring
-    const monitoring = Monitoring.find().fetch();
+    const monitoringEnabled = MonitoringSettings.find().fetch();
 
-    _.forEach(monitoring, (data) => {
+    _.forEach(monitoringEnabled, (data) => {
       // If enabled is true then switch the monitoring
       if (data.enabled) {
+        Meteor.call('getApiStatus', data.apiId, data.url);
         Meteor.call('startCron', data.apiId, data.url);
       }
     });

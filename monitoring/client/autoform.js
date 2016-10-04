@@ -5,8 +5,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { AutoForm } from 'meteor/aldeed:autoform';
 
 // Apinf import
-import { Monitoring } from '/monitoring/collection';
 import { Apis } from '/apis/collection';
+import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 
 AutoForm.hooks({
   apiMonitoringForm: {
@@ -25,7 +25,7 @@ AutoForm.hooks({
           if (monitoringData.enabled) {
             Meteor.call('startCron', monitoringData.apiId, monitoringData.url);
           }
-          // Success resut
+          // Success result
           return doc;
         } else {
           // Get success message translation
@@ -41,10 +41,15 @@ AutoForm.hooks({
       insert: (error, result) => {
         if (result) {
           // Get monitoring document
-          const monitoring = Monitoring.findOne({ _id: result });
+          const monitoring = MonitoringSettings.findOne(result);
 
           // Get api id
           const apiId = monitoring.apiId;
+
+          MonitoringData.insert({ apiId }, (error, id) => {
+            // Linked both collections
+            MonitoringSettings.update(result, { $set: { data: id } })
+          });
 
           // Link Monitoring collection with Apis collection
           Apis.update(apiId, { $set: { monitoringId: result } });
@@ -56,11 +61,11 @@ AutoForm.hooks({
     },
     onSuccess () {
       // Get update values
-      const updateFromValue = this.updateDoc.$set;
+      const updateFormValues = this.updateDoc ? this.updateDoc.$set : this.insertDoc ;
 
       // If monitoring is enabled then get the API status immediately
-      if (updateFromValue.enabled) {
-        Meteor.call('getApiStatus', updateFromValue.apiId, updateFromValue.url);
+      if (updateFormValues.enabled) {
+        Meteor.call('getApiStatus', updateFormValues.apiId, updateFormValues.url);
       }
 
       // Get success message translation

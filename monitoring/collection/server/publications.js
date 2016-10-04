@@ -2,8 +2,9 @@
 import { Meteor } from 'meteor/meteor';
 
 // APINF import
-import { Monitoring } from '/monitoring/collection';
+import { MonitoringSettings } from '/monitoring/collection';
 
-Meteor.publish('monitoring', function (apiId) {
-  return Monitoring.find({ apiId });
+Meteor.publish('monitoringSettings', function (apiId) {
+  return MonitoringSettings.find({ apiId });
 });
+
