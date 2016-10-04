@@ -18,7 +18,7 @@ AutoForm.hooks({
           const monitoringData = doc.$set;
           // If data was updated than enabled is false or url is updated
           // For apply new url, cron must be restarted
-          // If enabled is false,cron must be stop too
+          // If enabled is false, cron must be stop too
           Meteor.call('stopCron', monitoringData.apiId);
 
           // Restart cron with new url
@@ -55,6 +55,14 @@ AutoForm.hooks({
       },
     },
     onSuccess () {
+      // Get update values
+      const updateFromValue = this.updateDoc.$set;
+
+      // If monitoring is enabled then get the API status immediately
+      if (updateFromValue.enabled) {
+        Meteor.call('getApiStatus', updateFromValue.apiId, updateFromValue.url);
+      }
+
       // Get success message translation
       const message = TAPi18n.__('apiMonitoringForm_successMessage');
 

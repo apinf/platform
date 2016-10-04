@@ -28,23 +28,8 @@ Meteor.methods({
         return parser.text(cronTime);
       },
       job () {
-        // Call HTTP request
-        Meteor.http.get(url, {}, (error, result) => {
-          // Set status code
-          const serverStatusCode = result ? result.statusCode : 404;
-
-          // Create a monitoring data
-          const monitoringData = {
-            date: new Date(),
-            status_code: serverStatusCode,
-          };
-
-          // Update an api status
-          Apis.update({ _id: apiId }, { $set: { status_code: serverStatusCode } });
-
-          // Add the monitoring data in Collection
-          Monitoring.update({ apiId }, { $push: { requests: monitoringData } });
-        });
+        // Get API status using http request
+        Meteor.call('getApiStatus', apiId, url);
       },
     });
   },
