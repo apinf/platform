@@ -14,7 +14,7 @@ Template.viewApiStatus.onCreated(function () {
   // attaches function to template instance to be able to call it in outside
   instance.apiStatus = () => {
     // Recognize status code
-    const status = convertStatusCode(api.status_code);
+    const status = convertStatusCode(api.latestMonitoringStatusCode);
 
     // Get class name and status text for indicator
     const className = status.className;

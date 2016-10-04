@@ -16,7 +16,7 @@ Meteor.methods({
       };
 
       // Update an api status
-      Apis.update({ _id: apiId }, { $set: { status_code: serverStatusCode } });
+      Apis.update({ _id: apiId }, { $set: { latestMonitoringStatusCode: serverStatusCode } });
 
       // Add the monitoring data in Collection
       Monitoring.update({ apiId }, { $push: { requests: monitoringData } });

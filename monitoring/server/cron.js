@@ -18,7 +18,7 @@ Meteor.methods({
     const cronTime = 'every 1 hour';
 
     // Update api status to 'Loading...'
-    Apis.update(apiId, { $set: { status_code: 0 } });
+    Apis.update(apiId, { $set: { latestMonitoringStatusCode: 0 } });
 
     // Create cron working
     SyncedCron.add({
@@ -41,7 +41,7 @@ Meteor.methods({
     SyncedCron.remove(uniqueName);
 
     // Update an api status
-    Apis.update({ _id: apiId }, { $set: { status_code: -1 } });
+    Apis.update({ _id: apiId }, { $set: { latestMonitoringStatusCode: -1 } });
   },
   restartCron () {
     // Get all apis which are added in monitoring
