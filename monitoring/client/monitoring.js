@@ -16,6 +16,7 @@ Template.apiMonitoring.onCreated(function () {
 });
 
 Template.apiMonitoring.onRendered(function () {
+  // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
 });
 
