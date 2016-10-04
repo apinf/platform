@@ -8,11 +8,8 @@ Template.viewApiStatus.onCreated(function () {
   // Create reference to instance
   const instance = this;
 
-  // Get API Backend from instance data context
-  const api = instance.data.api;
-
   // attaches function to template instance to be able to call it in outside
-  instance.apiStatus = () => {
+  instance.apiStatus = (api) => {
     // Recognize status code
     const status = convertStatusCode(api.latestMonitoringStatusCode);
 
@@ -34,8 +31,10 @@ Template.viewApiStatus.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
+  const api = Template.currentData().api;
+
   // call the function that updates status
-  instance.apiStatus();
+  instance.apiStatus(api);
 
   // Init tooltip
   $('[data-toggle="tooltip"]').tooltip();
