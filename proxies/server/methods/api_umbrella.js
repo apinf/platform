@@ -170,7 +170,8 @@ Meteor.methods({
     const umbrella = Meteor.call('createApiUmbrellaWeb');
 
     // Placeholder variables
-    let response, remoteApis;
+    let response;
+    let remoteApis;
 
     try {
       // Get API Backends from API Umbrella instance
