@@ -1,3 +1,6 @@
+import { ApiBookmarks } from '/bookmarks/collection';
+import { Meteor } from 'meteor/meteor';
+
 Meteor.publish('myApiBookmarks', function () {
   if (this.userId) {
     // get current user id
