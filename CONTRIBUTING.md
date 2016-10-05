@@ -277,8 +277,8 @@ Please use consistent whitespace in project files. In general, whitespace is use
 ##### Handlebars helpers
 Please observe the following structure when working with handlebars syntax:
 
-- Handlebars (`{{`) and prefixes (`>`, `#`, and `_`) should be placed next to each other.
-  - Examples: `{{> ... }}`, `{{# ... }}`, `{{_ ... }}`
+- Handlebars (`{{`) and prefixes (`>`, `#`, `/`, and `_`) should be placed next to each other.
+  - Examples: `{{> ... }}`, `{{# ... }}`, `{{/ ... }}`, `{{_ ... }}`
 - include a space before the closing handlebars `}}`
   - Example: `{{ ... }}`
 - use spaces on both sides of handlebars words
