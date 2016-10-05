@@ -16,19 +16,21 @@
               <a href="/api/{{api._id}}">
                 {{ api.name }}
               </a>
-              {{#if api.isPrivate }}
-                <span class="label label-default">private</span>
-              {{/ if }}
             </h4>
-            <i>
-              {{_ "catalogueTable_addedBy"}}
-              {{ api.getApiManagersByName }}
-            </i>
-            <br>
-            <i>
-              {{_ "catalogueTable_added"}}
-              {{ api.relativeCreatedAt }}
-            </i>
+            {{#if api.isPrivate }}
+              <span class="label label-default label-align">private</span>
+            {{/ if }}
+            <div>
+              <i>
+                {{_ "catalogueTable_addedBy"}}
+                {{ api.getApiManagersByName }}
+              </i>
+              <br>
+              <i>
+                {{_ "catalogueTable_added"}}
+                {{ api.relativeCreatedAt }}
+              </i>
+            </div>
           </td>
           <td class="col-sm-1 text-center">
             {{# if currentUser }}
