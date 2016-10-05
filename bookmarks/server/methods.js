@@ -1,16 +1,16 @@
 import { Apis } from '/apis/collection';
 
 Meteor.methods({
-  "toggleBookmarkApi": function (backendId, currentUserId) {
+  'toggleBookmarkApi': function (backendId, currentUserId) {
     // Create an array containing the backend ID for use in the collection query, etc.
-    var apiBackendIds = [];
+    const apiBackendIds = [];
     apiBackendIds.push(backendId);
 
     // object to store currentUserId and the Api ID
-    var userBookmarks = {userId: currentUserId, apiIds: apiBackendIds};
+    const userBookmarks = { userId: currentUserId, apiIds: apiBackendIds };
 
     // If possible, get the bookmarks for current user.
-    var existingUserBookmarks = ApiBookmarks.findOne({userId: currentUserId});
+    const existingUserBookmarks = ApiBookmarks.findOne({ userId: currentUserId });
 
     // Check if user has existing bookmarks
     if (existingUserBookmarks) {
@@ -18,10 +18,10 @@ Meteor.methods({
       var apiIds = existingUserBookmarks.apiIds;
 
       // Check if bookmark exists (returns -1 if not)
-      var bookmarkIndex = apiIds.indexOf(backendId);
+      const bookmarkIndex = apiIds.indexOf(backendId);
 
       // Converts bookmarkIndex to boolean for easier comparison
-      var bookmarkExists = (bookmarkIndex >= 0) ? true : false;
+      const bookmarkExists = (bookmarkIndex >= 0) ? true : false;
 
       // Checks if bookmark doesnt exist.
       if (!bookmarkExists) {
@@ -33,12 +33,11 @@ Meteor.methods({
       }
 
       // Updating current user apiBookmarks
-      ApiBookmarks.update({userId: currentUserId},{$set: { apiIds } });
-
+      ApiBookmarks.update({ userId: currentUserId }, { $set: { apiIds } });
     } else {
       // Insert bookmark to database
       ApiBookmarks.insert(userBookmarks);
-    };
+    }
 
     // Get reference to API Backend
     const apiBackend = Apis.findOne(backendId);
@@ -47,8 +46,8 @@ Meteor.methods({
     const bookmarkCount = apiBackend.getBookmarkCount();
 
     // Update the API Backend bookmark count
-    Apis.update(apiBackend, {$set: { bookmarkCount }});
+    Apis.update(apiBackend, { $set: { bookmarkCount } });
 
     return apiIds;
-  }
+  },
 });
