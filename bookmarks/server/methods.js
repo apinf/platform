@@ -2,7 +2,7 @@ import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.methods({
-  'toggleBookmarkApi': function (backendId, currentUserId) {
+  toggleBookmarkApi (backendId, currentUserId) {
     // Create an array containing the backend ID for use in the collection query, etc.
     const apiBackendIds = [];
     apiBackendIds.push(backendId);
