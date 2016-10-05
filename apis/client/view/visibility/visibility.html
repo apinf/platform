@@ -1,10 +1,18 @@
 <template name="visibilityToggle">
-  {{#autoForm collection=ApisCollection doc=api id="apiVisibility" type="update" }}
+  {{#autoForm
+    collection=ApisCollection
+    firstOption=false
+    doc=api id="apiVisibility"
+    type="update"
+  }}
+
+    <!-- dropdown with visibility options -->
     {{> afQuickField name='visibility' options="allowed" }}
+
     <div id="form-buttons">
       <button type="submit" class="btn btn-success" id="save-visibility">
         {{_ "viewApiSettigs_saveButton_text" }}
       </button>
-    </div>
+    </div>  
   {{/autoForm}}
 </template>
