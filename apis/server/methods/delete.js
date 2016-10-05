@@ -1,32 +1,46 @@
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
 // Collection imports
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { ApiMetadata } from '/metadata/collection';
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Feedback } from '/feedback/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 Meteor.methods({
   // Remove API backend and related items
-  removeApiBackend (apiBackendId) {
+  removeApi (apiId) {
     // Remove API doc
-    Meteor.call('removeApiDoc', apiBackendId);
+    Meteor.call('removeApiDoc', apiId);
 
     // Remove backlog items
-    ApiBacklogItems.remove({ 'apiBackendId': apiBackendId });
+    ApiBacklogItems.remove({ apiId });
 
     // Remove feedbacks
-    Feedback.remove({ 'apiBackendId': apiBackendId });
+    Feedback.remove({ apiId });
 
     // Remove metadata
-    ApiMetadata.remove({ 'apiBackendId': apiBackendId });
+    ApiMetadata.remove({ apiId });
+
+    // Get proxyBackend
+    const proxyBackend = ProxyBackends.findOne({ apiId });
+
+    // Check if API has proxyBackend
+    if (proxyBackend) {
+      // Delete proxyBackend
+      Meteor.call('deleteProxyBackend', proxyBackend);
+    }
 
     // Finally remove the API
-    Apis.remove(apiBackendId);
+    Apis.remove(apiId);
   },
   // Remove API documentation file
-  removeApiDoc (apiBackendId) {
+  removeApiDoc (apiId) {
     // Get API object
-    const api = Apis.findOne(apiBackendId);
+    const api = Apis.findOne(apiId);
     // Get documentationFileId
     const documentationFileId = api.documentationFileId;
     // Convert to Mongo ObjectID
