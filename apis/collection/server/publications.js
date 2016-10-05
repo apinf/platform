@@ -15,11 +15,11 @@ Meteor.publish('myBookmarkedApis', function () {
   // get current user id
   var userId = this.userId;
   // get user bookmarks object
-  var userBookmarksObject = ApiBookmarks.findOne({userId: userId});
+  var userBookmarksObject = ApiBookmarks.findOne({ userId });
   // get user bookmarks list
   var bookmarkedApiIds = userBookmarksObject.apiIds;
   // get apibackends by id
-  return Apis.find({_id: {$in: bookmarkedApiIds}});
+  return Apis.find({_id: { $in: bookmarkedApiIds }});
 });
 
 Meteor.publish('allBookmarks', () => {

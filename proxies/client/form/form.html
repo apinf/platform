@@ -11,7 +11,8 @@
         {{# autoForm
           collection=proxiesCollection
           id="proxyForm"
-          type=formType doc=proxy}}
+          type=formType
+          doc=proxy }}
           <div class="modal-body">
             {{> afQuickField name='name' }}
             {{> afQuickField name='description' }}
@@ -23,7 +24,7 @@
             {{# each proxyName in proxiesList }}
               {{# if afFieldValueIs name='type' value=proxyName }}
                 {{> afQuickField name=proxyName }}
-              {{/if}}
+              {{/ if }}
             {{/ each }}
             -->
           </div>
