@@ -5,19 +5,20 @@ import { ApiBackendRatings } from '/ratings/collection';
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder
   // default to all public documents
-  let selector = { isPublic: true };
+  let selector = { visibility: 'public' };
 
   // Get user ID
   const userId = this.userId;
 
   if (userId) {
     // If user logged in
-    // Select public and managed APIs
+    // Select public, managed APIs & APIs user is authorized to see
     selector = {
       $or:
       [
-        { isPublic: true },
+        { visibility: 'public' },
         { managerIds: userId },
+        { authorizedUserIds: userId },
       ],
     };
   }
@@ -44,7 +45,7 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
             $and:
             [// User has bookmarked and API is public
                 { _id: { $in: bookmarkedApiIds } },
-                { isPublic: true },
+                { visibility: 'public' },
             ],
           },
           {
@@ -78,12 +79,12 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   return Apis.find(selector, queryOptions);
 });
 
-Meteor.publish('catalogueRatings', function () {
+Meteor.publish('catalogueRatings', () => {
   // Find all API Backends
   return ApiBackendRatings.find();
 });
 
-Meteor.publish('catalogueBookmarks', function () {
+Meteor.publish('catalogueBookmarks', () => {
   // Find all API Backends
   return ApiBookmarks.find();
 });
