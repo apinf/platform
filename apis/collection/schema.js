@@ -104,8 +104,9 @@ Apis.schema = new SimpleSchema({
     },
     defaultValue: 0,
   },
-  isPublic: {
+  visibility: {
     type: String,
+    label: 'Change API visibility',
     optional: true,
     defaultValue: 'Public',
     allowedValues: ['Public', 'Semipublic', 'Private'],
