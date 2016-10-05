@@ -2,20 +2,6 @@ import { Template } from 'meteor/templating';
 
 import { Apis } from '/apis/collection';
 
-
-Template.visibilityToggle.events({
-  'click .changeVisibility': function (event) {
-    // Get API from template data
-    const api = Template.currentData().api;
-
-    // Get ID of current service
-    const apiId = api._id;
-
-    // Set the isPublic property to the opposite of its current value
-    Apis.update(apiId, { $set: { isPublic: !api.isPublic } });
-  },
-});
-
 Template.visibilityToggle.helpers({
   visible () {
     // Get API from template data
@@ -29,7 +15,8 @@ Template.visibilityToggle.helpers({
 
     return status;
   },
-  formCollection () {
+  ApisCollection () {
+    // Make APIs collection available to template (i.e. autoform)
     return Apis;
   },
 });
