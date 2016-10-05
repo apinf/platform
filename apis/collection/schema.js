@@ -34,6 +34,10 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  authorizedUserIds: {
+    type: [String],
+    optional: true,
+  },
   documentation_link: {
     type: String,
     optional: true,
