@@ -8,10 +8,10 @@
         </div>
         {{# autoForm collection=proxiesCollection id="proxyForm" type=formType doc=proxy}}
           <div class="modal-body">
-            {{ > afQuickField name='name' }}
-            {{ > afQuickField name='description' }}
+            {{> afQuickField name='name' }}
+            {{> afQuickField name='description' }}
             <!--
-            {{ > afQuickField name='type' value='apiUmbrella' options="allowed" }}
+            {{> afQuickField name='type' value='apiUmbrella' options="allowed" }}
             -->
             {{> afQuickField name='apiUmbrella' }}
             <!--

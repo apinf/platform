@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 settings-menu">
-        {{ > settingsMenu }}
+        {{> settingsMenu }}
       </div>
       <div class="col-md-6">
         <h2>
@@ -18,7 +18,7 @@
           {{# if Template.subscriptionsReady }}
             {{# if proxies }}
               {{# each proxy in proxies }}
-                 {{ > proxyItem proxy=proxy }}
+                 {{> proxyItem proxy=proxy }}
               {{ / each }}
             {{ else }}
               <p class="text-center">
