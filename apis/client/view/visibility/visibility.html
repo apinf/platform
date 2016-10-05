@@ -8,10 +8,10 @@
   </button> -->
 {{#autoForm collection=formCollection doc=api id="apiVisibility" type="insert" }}
   {{> afQuickField name='visibility' options="allowed" }}
-  <a
-     href="#"
-     class="btn btn-success">
-     {{_ "viewApiSettigs_saveButton_text" }}
-  </a>
+  <div id="form-buttons">
+    <button type="submit" class="btn btn-success" id="save-visibility">
+      {{_ "viewApiSettigs_saveButton_text" }}
+    </button>
+  </div>
 {{/autoForm}}
 </template>
