@@ -40,7 +40,7 @@
             </div>
             {{# if apiDocumentationEditorIsEnabled}}
               <legend>
-                {{>showHelp 'documentation_editor_create_file'}}
+                {{> showHelp 'documentation_editor_create_file'}}
                 {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
               </legend>
               <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
@@ -48,7 +48,7 @@
               </a>
             {{/ if }}
             <legend>
-              {{>showHelp 'documentation_link'}}
+              {{> showHelp 'documentation_link'}}
               {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}
             </legend>
             {{> afQuickField name='documentation_link'}}
