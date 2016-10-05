@@ -36,8 +36,10 @@
   margin-bottom: -2px;
 }
 
-.page-head-starsblock {
-  margin: 0.5em;
+.page-head-bookmarks {
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   font-size: 1em;
   border: 1px solid #ddd;
   border-radius: 3px;
@@ -79,12 +81,13 @@
 
 #api-navigation-tabs {
   position: relative;
-  top: 2px;
+  top: 5px; // needs to be in px
   margin-top: 0.6em;
   clear: both;
 
   .nav-tabs {
     border-bottom: none;
+    display: inline-block;
   }
 
   .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -115,5 +118,10 @@
     background-color: transparent;
     color: #333;
     border-color: transparent;
+  }
+
+  #api-intro {
+    float: right;
+    margin-top: 0.3em;
   }
 }

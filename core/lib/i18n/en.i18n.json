@@ -12,7 +12,6 @@
   "aboutApinf_sponsors": "Sponsors",
   "aboutApinf_support": "Support",
   "aboutApinf_title": "About Apinf",
-  "aboutApinf_version": "Version",
   "account_delete_button_text": "Delete account",
   "account_delete_warning": "There's no coming back from this one",
   "account_delete_title": "Delete account",
@@ -20,6 +19,7 @@
   "addApi_button_text": "Add API",
   "addApiBacklogItem_addBacklogItem_button": "Add backlog item",
   "addApiBacklogItem_modalTitle": "Add backlog item",
+<<<<<<< HEAD
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '/'",
@@ -53,11 +53,13 @@
   "apiDetails_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
+  "apiBacklog_addBacklogItem_buttonText": "Add backlog item",
+  "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
+  "apiBacklog_mainTitle": "Backlog",
   "apiDetails_usageInstructions_headingText": "To make calls to this API, you can either:",
   "apiDetails_usageInstructions_urlParameters_text": "call the API with your key in the URL parameters:",
   "apiDetails_usageInstructions_requestHeaders_text": "call the API with your key in the request headers:",
   "apiDocumentationEditor_notAvailable": "API documentation editor is not available.",
-  "apiDocumentationSelect_noApiDocumentation": "No API documentations found.",
   "apiDocumentation_APICall_Warning_Message": "API calls (PUT, POST, or DELETE) from Swagger are real calls.",
   "apiDocumentation_APICall_Warning_Title": "Warning!",
   "apiDocumentation_Link_Title": "Link",
@@ -112,9 +114,6 @@
   "backlogItem_addedByYou": "Added by you",
   "backlogItem_editButton_text": "Edit",
   "backlogItem_deleteButton_text": "Delete",
-  "bookmarks_Backend": "Backend host:",
-  "bookmarks_Name": "Name:",
-  "bookmarks_Title": "Your bookmarked APIs",
   "branding_update": "Update",
   "branding_save": "Save",
   "branding_panel_title": "Project Branding",
@@ -138,17 +137,7 @@
   "catalogueGrid_addedBy": "Added by",
   "catalogueTable_added": "Added",
   "catalogueTable_addedBy": "Added by",
-  "catalogue_FilterButtons_My_APIs": "My APIs",
-  "catalogue_FilterButtons_My_Bookmarks": "My Bookmarks",
-  "catalogue_FilterButtons_Show_All": "Show All",
   "catalogue_Title": "API Catalog",
-  "catalogue_notRated": "Not rated",
-  "change_pswd": "Change Password",
-  "change_pswd_btn": "Change Password",
-  "close": "Close",
-  "configName": "Apinf",
-  "configSubtitle": "Create custom API mashups, really quick.",
-  "configTitle": "Build custom APIs. Fast.",
   "contactForm_email_label": "E-mail address",
   "contactForm_email_placeholder": "Your email",
   "contactForm_message_label": "Message",
@@ -173,6 +162,8 @@
   "dashboardDataTable_timeStamp": "Date",
   "dashboardDataTable_title": "Analytics data",
   "dashboardDataTable_pageCount": "Page",
+  "dashboard_mainTitle": "Dashboard",
+  "dashboard_noApisTitle": "You don't have any API Backend you manage.",
   "deleteAccount_closeButton": "Close",
   "deleteAccount_confirmDelete": "Delete",
   "deleteAccount_success_message": "Account deleted",
@@ -206,9 +197,8 @@
   "feedback_main_title": "Feedback and report messages",
   "feedback_no_feedback": "No feedback, yet.",
   "feedback_remove_button": "Remove",
-  "feedback_submitted_by": "submitted by",
-  "feedback_view_button": "View",
   "feedback_sendFeedback": "Send",
+  "feedback_view_button": "View",
   "feedbackForm_successMessage": "Thank you! Your feedback has been successfully sent.",
   "flagApiButton_buttonText": "Flag",
   "flagApiButton_buttonText_active": "Flagged",
@@ -262,7 +252,7 @@
   "import_ApiConfiguration_Drop": "Drop file to here",
   "import_ApiConfiguration_File": "File:",
   "import_ApiConfiguration_Preview": "Preview:",
-  "mportApiConfiguration_jsonError_message": "Configuration does not look like correct JSON object.",
+  "importApiConfiguration_jsonError_message": "Configuration does not look like correct JSON object.",
   "import_ApiConfiguration_Title": "Import API Configuration",
   "import_ApiConfiguration_Upload": "Upload",
   "import_ApiDocumentation_File": "Documentation Configuration File",
@@ -283,8 +273,6 @@
   "manageApiDocumentationModal_DeletedFile_Message": "Documentation file successfully deleted!",
   "manageApiDocumentationModal_DocumentationLink_Title": "Link to external documentation resource",
   "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file types are accepted.",
-  "manageApiDocumentationModal_FileUpload_Button": "Choose file",
-  "manageApiDocumentationModal_FileUpload_Title": "Documentation File",
   "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully updated!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
   "manageApiDocumentationModal_Title": "API Documentation",
@@ -294,18 +282,11 @@
   "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
   "masterLayout_sidebar_APIBackends": "API Backends",
   "masterLayout_sidebar_AddAPIBackend": "Add API Backend",
-  "masterLayout_sidebar_Analytics": "Analytics",
   "masterLayout_sidebar_Catalogue": "Catalogue",
-  "masterLayout_sidebar_Documentation": "Documentation",
-  "masterLayout_sidebar_DocumentationEditor": "Editor",
-  "masterLayout_sidebar_DocumentationViewer": "Viewer",
   "masterLayout_sidebar_ManageAPIBackends": "Manage API Backends",
-  "masterLayout_sidebar_Menu": "Menu",
   "masterLayout_sidebar_Users": "Users",
   "navbar_aboutButton_text": "About",
   "notAuthorized_Message": "You are not authorized to access this page.",
-  "notAuthorized_Return_Message_Part1": "You may",
-  "notAuthorized_Return_Message_Part2": "return to a previous page",
   "notAuthorized_Title": "Not Authorized",
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Message_Part2": "Return to a previous page.",
@@ -335,7 +316,6 @@
   "proxyForm_saveButton_text": "Save",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
-  "publishApiBackendOnApiUmbrella_successMessage": "API Backend successfully published.",
   "removeProxy_modalLabel": "Are you sure that you want to remove proxy?",
   "removeProxy_confirmRemoveProxy": "Yes, remove",
   "removeProxy_cancelRemove": "Cancel",
@@ -478,6 +458,31 @@
         "settings": {
           "disable_api_key": {
             "label": "Disable API key requirement"
+          },
+          "rate_limit_mode": {
+            "label": "Rate limit mode",
+            "options": {
+              "custom": "Custom rate limits",
+              "unlimited": "Unlimited requests"
+            }
+          },
+          "rate_limit": {
+            "duration": {
+              "label": "Duration (ms)"
+            },
+            "limit_by": {
+              "label": "Limit by",
+              "options": {
+                "apiKey": "API Key",
+                "ip": "IP Address"
+              }
+            },
+            "limit": {
+              "label": "Number of requests"
+            },
+            "response_headers": {
+              "label": "Show rate limit in response headers"
+            }
           }
         }
       }
@@ -495,7 +500,6 @@
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchResultsHeader": "Search results",
   "settings_apiDocumentation_editor": "API Documentation Editor",
-  "settings_addingApis": "Adding APIs",
   "settings_mail": "Mail",
   "settings_mail_username_label": "Username",
   "settings_mail_password_label": "Password",
@@ -507,8 +511,6 @@
   "settings_mail_toEmail_hint": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
   "settings_github": "Github",
   "settings_save": "Save",
-  "settings_apiUmbrella": "API Umbrella",
-  "settings_elasticsearch": "Elasticsearch",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
   "settings_schema_onlyAdminsCanAddApis": "Only platform administrators are allowed to add new APIs",
@@ -527,7 +529,6 @@
   "statisticsSummary_captionResponseTime": "Average response time",
   "statisticsSummary_captionResponseRate": "Response rate",
   "statisticsSummary_captionUniqueUsers": "Unique users",
-  "statusCheckJustNow": "Just now",
   "statusCheckTitle": "Status",
   "statusCheckUpdated": "Updated:",
   "statusCheck_ApinfWebApp": "Apinf Web App",
@@ -542,7 +543,6 @@
   "tickButtons_month": "Month",
   "updatePassword_legend_text": "Update password",
   "umbrella_createuser_error": "Failed to create user on API Umbrella.",
-  "umbrella_notdefined_error": "API Umbrella not defined.",
   "updatePassword_submitButton_text": "Change Password",
   "updatePasswordForm_successMessage": "Password updated.",
   "uploadApiLogoButton": "Upload logo",
@@ -571,12 +571,7 @@
   "viewApiStatus_statusMessage_RedirectError": "Redirection.",
   "viewApiStatus_statusMessage_ServerError": "Server error.",
   "viewApiStatus_statusMessage_Success": "API is operating normally.",
-  "viewApi_Backend": "Backend",
-  "viewApi_Backend_Prefix": "Backend prefix",
   "viewApi_Details_Title": "Details",
-  "viewApi_Frontend": "Frontend",
-  "viewApi_Frontend_Prefix": "Frontend prefix",
-  "viewApi_Matchers": "URL Matchers",
   "viewApi_Metadata_Contact_email": "email",
   "viewApi_Metadata_Contact_phone": "Phone",
   "viewApi_Metadata_Contact_title": "Contact",
