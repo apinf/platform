@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
+import { ApiBookmarks } from '/bookmarks/collection';
+
 Template.bookmark.created = function () {
   // Get reference to template instance
   const instance = this;

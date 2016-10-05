@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import { ApiBackendRatings } from '/ratings/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 import { Apis } from './';
 
 Apis.helpers({
