@@ -3,7 +3,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // Check which status code is received
 // and set class name and status text depending on it
-export function convertStatusCode (serverStatusCode) {
+export default function convertStatusCode (serverStatusCode) {
   // Init variables
   let className = '';
   let statusText = '';
@@ -14,7 +14,7 @@ export function convertStatusCode (serverStatusCode) {
   switch (apiStatus) {
     // Temporary status: monitoring is enabled but real status code is unknown
     case 0:
-      className = 'api-status-color';
+      className = 'status-wait';
       statusText = TAPi18n.__('viewApiStatus_statusMessage_Loading');
       break;
     // Informational status code

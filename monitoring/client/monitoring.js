@@ -41,8 +41,8 @@ Template.apiMonitoring.helpers({
 
     if (existingSettings) {
       return 'update';
-    } else {
-      return 'insert';
     }
+
+    return 'insert';
   },
 });
