@@ -107,6 +107,8 @@
   "apiSettings_panelTitleManage": "Manage",
   "apiSettings_uploadLogo_heading": "Upload logo",
   "apiSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
+  "apiSettings_visibility_heading": "Change API visibility",
+  "apiSettings_visibility_text": "Make this API private or public",
   "api_backend_rating_anonymous": "Please log in to vote.",
   "apinf_usernotloggedin_error": "Could not find logged in user.",
   "apiProxy_headerText": "Proxy backend configuration",
@@ -584,7 +586,6 @@
   "viewApi_Metadata_Title": "Metadata",
   "viewApi_Servers": "Servers",
   "viewApi_Title": "View API backend",
-  "visibilitySwitch_labelText": "Visibility",
-  "visibilitySwitch_offText": "Private",
-  "visibilitySwitch_onText": "Public"
+  "visibilityToggle_buttonPrivate": "Make Private",
+  "visibilityToggle_buttonPublic": "Make Public",
 }
