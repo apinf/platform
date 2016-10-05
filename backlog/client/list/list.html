@@ -1,6 +1,5 @@
 <template name="apiBacklogList">
-  {{> autoformModals }}
-  {{# if backlogItems}}
+  {{# if backlogItems }}
     {{# each item in backlogItems }}
       {{> backlogItem item=item api=api }}
     {{/ each }}
