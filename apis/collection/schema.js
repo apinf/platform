@@ -108,8 +108,8 @@ Apis.schema = new SimpleSchema({
     type: String,
     label: 'Change API visibility',
     optional: true,
-    defaultValue: 'Public',
-    allowedValues: ['Public', 'Semipublic', 'Private'],
+    defaultValue: 'public',
+    allowedValues: ['public', 'semiPublic', 'private'],
   },
 });
 
