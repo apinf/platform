@@ -16,6 +16,9 @@
               <a href="/api/{{api._id}}">
                 {{ api.name }}
               </a>
+              {{#if api.isPrivate }}
+                <span class="label label-default">private</span>
+              {{/ if }}
             </h4>
             <i>
               {{_ "catalogueTable_addedBy"}}
