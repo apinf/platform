@@ -19,10 +19,6 @@
   "addApi_button_text": "Add API",
   "addApiBacklogItem_addBacklogItem_button": "Add backlog item",
   "addApiBacklogItem_modalTitle": "Add backlog item",
-<<<<<<< HEAD
-  "addApiBackendWizard_backButton_text": "Back",
-  "apiBackendRating_anonymousError": "Please, login to rate this API.",
-=======
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '/'",
@@ -56,7 +52,6 @@
   "apiDetails_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
->>>>>>> develop
   "apiBacklog_addBacklogItem_buttonText": "Add backlog item",
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
   "apiBacklog_mainTitle": "Backlog",
