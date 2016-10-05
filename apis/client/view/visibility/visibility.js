@@ -29,4 +29,7 @@ Template.visibilityToggle.helpers({
 
     return status;
   },
+  formCollection () {
+    return Apis;
+  },
 });
