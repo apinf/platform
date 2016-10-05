@@ -1,9 +1,9 @@
-Meteor.publish('myApiBookmarks', function() {
-  if(this.userId) {
+Meteor.publish('myApiBookmarks', function () {
+  if (this.userId) {
     // get current user id
-    var userId = this.userId;
+    const userId = this.userId;
 
     // returning user bookmarks object
-    return ApiBookmarks.find({userId: userId});
+    return ApiBookmarks.find({ userId });
   }
-})
+});
