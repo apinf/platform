@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 // Collection imports
 import { ApiBackendRatings } from '../collection';
 
