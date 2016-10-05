@@ -29,7 +29,8 @@ Template.visibilityToggle.helpers({
 
     return status;
   },
-  formCollection () {
+  ApisCollection () {
+    // Make APIs collection available to template (i.e. autoform)
     return Apis;
   },
 });
