@@ -1,9 +1,18 @@
 <template name="visibilityToggle">
-  <button class="btn btn-default changeVisibility">
-    {{# if isPublic }}
-      {{_ "visibilityToggle_buttonPrivate" }}
-    {{ else }}
-      {{_ "visibilityToggle_buttonPublic" }}
-    {{/ if}}
-  </button>
+  {{#autoForm
+    collection=ApisCollection
+    firstOption=false
+    doc=api id="apiVisibility"
+    type="update"
+  }}
+
+    <!-- dropdown with visibility options -->
+    {{> afQuickField name='visibility' options="allowed" }}
+
+    <div id="form-buttons">
+      <button type="submit" class="btn btn-success" id="save-visibility">
+        {{_ "viewApiSettigs_saveButton_text" }}
+      </button>
+    </div>  
+  {{/autoForm}}
 </template>

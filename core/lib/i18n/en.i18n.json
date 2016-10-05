@@ -269,6 +269,14 @@
   "responseTimeDistributionChart_help_text": "Click on any bar to filter API Request Timeline and HTTP Status Code chart by requests that have the selected response time range.",
   "schemas": {
     "apis": {
+      "visibility": {
+        "label": "Change API visibility",
+        "options": {
+          "public": "Public",
+          "semiPublic": "Public for selected users",
+          "private": "Private"
+        }
+      },
       "submit_methods": {
         "label": "Allow try-out for following methods:"
       }
@@ -513,6 +521,13 @@
   "apiSettings_visibility_text": "Make this API private or public",
   "apiSettings_uploadLogo_heading": "Upload logo",
   "apiSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
+  "apiSettings_panelTitleVisibility": "Visibility",
+  "apiSettings_visibilityOptions_public_title": "Make API Public",
+  "apiSettings_visibilityOptions_public_helpText": "The API will be accessible to general audience from API catalog and respective API profile.",
+  "apiSettings_visibilityOptions_limitedPublic_title": "Make API visible to specific people",
+  "apiSettings_visibilityOptions_limitedPublic_helpText": "Add email address for each user you wish to make your API available to access.",
+  "apiSettings_visibilityOptions_private_title": "Make API Private",
+  "apiSettings_visibilityOptions_private_helpText": "Only API owner can access your API from API catalog and respective API profile.",
   "viewApiStatus_statusMessage_ClientError": "Client error.",
   "viewApiStatus_statusMessage_ErrorCodeText": "Status code:",
   "viewApiStatus_statusMessage_RedirectError": "Redirection.",
