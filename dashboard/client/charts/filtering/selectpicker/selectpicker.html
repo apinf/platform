@@ -14,7 +14,8 @@
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{> viewApiStatus apiBackend=api width="0.5" }}
             &nbsp;
-            {{ api.name }}</option>
+            {{ api.name }}
+          </option>
         {{/ each }}
       </optgroup>
       <optgroup label="Other APIs" >
@@ -22,7 +23,8 @@
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{> viewApiStatus apiBackend=api width="0.5" }}
             &nbsp;
-            {{ api.name }}</option>
+            {{ api.name }}
+          </option>
         {{/ each }}
       </optgroup>
     {{ else }}
@@ -30,7 +32,8 @@
         <option value="{{ api.url_matches.[0].frontend_prefix }}" >
           {{> viewApiStatus apiBackend=api width="0.5" }}
           &nbsp;
-          {{ api.name }}</option>
+          {{ api.name }}
+        </option>
       {{/ each }}
     {{/ if }}
   </select>
