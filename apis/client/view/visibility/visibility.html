@@ -1,5 +1,5 @@
 <template name="visibilityToggle">
-  {{#autoForm collection=formCollection doc=api id="apiVisibility" type=formType }}
+  {{#autoForm collection=ApisCollection doc=api id="apiVisibility" type="update" }}
     {{> afQuickField name='visibility' options="allowed" }}
     <div id="form-buttons">
       <button type="submit" class="btn btn-success" id="save-visibility">
