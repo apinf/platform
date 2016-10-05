@@ -12,22 +12,27 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 class="modal-title" id="feedbackFormModalLabel">
-            {{_ "feedback_feedbackForm_title"}}
+            {{_ "feedback_feedbackForm_title" }}
           </h4>
         </div>
-        {{ # autoForm id="feedbackForm" collection=feedbackCollection type="insert" }}
+        {{# autoForm
+          id="feedbackForm"
+          collection=feedbackCollection
+          type="insert" }}
           <div class="modal-body">
-            <p>{{_ "feedback_feedbackForm_description"}}</p>
-            {{> afQuickField name='topic'}}
-            {{> afQuickField name='message' rows=4}}
-            {{> afQuickField name='messageType'}}
+            <p>
+              {{_ "feedback_feedbackForm_description" }}
+            </p>
+            {{> afQuickField name='topic' }}
+            {{> afQuickField name='message' rows=4 }}
+            {{> afQuickField name='messageType' }}
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">
               {{_ "feedback_sendFeedback" }}
             </button>
           </div>
-        {{/autoForm}}
+        {{/ autoForm }}
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template name="catalogueGrid">
   <div class="api-catalogue container-fluid">
     <div class="row">
-      {{#each api in apis }}
+      {{# each api in apis }}
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="api-card ">
           <div class="api-card-logo">
@@ -9,12 +9,12 @@
           </div>
           {{> viewApiStatus api=api width="0.6" }}
           <div class="api-card-info">
-            <a href="/api/{{api._id}}"
+            <a href="/api/{{ api._id }}"
                class="api-card-name">
               {{ api.name }}
             </a>
             <span class="api-card-author">
-              {{_ "catalogueGrid_addedBy"}}
+              {{_ "catalogueGrid_addedBy" }}
               {{ api.getApiManagersByName }}
             </span>
             {{#if api.isPrivate }}
@@ -33,22 +33,24 @@
                    class="api-card-bookmark"
                    data-toggle="tooltip"
                    data-placement="bottom"
-                   title="{{_ 'catalogue_BookmarkTooltip_user'}}">
+                   title="{{_ 'catalogue_BookmarkTooltip_user' }}">
                 {{> favourite api=api catalogueView=true }}
               </div>
             </li>
-            {{else}}
+            {{ else }}
             <li class="pull-left">
               <div
                    class="api-card-bookmark"
                    data-toggle="tooltip"
                    data-placement="bottom"
-                   title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
-                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+                   title="{{_ 'catalogue_bookmarkTooltip_nonUser' }}">
+                <span class="api-card-bookmark-number">
+                  {{ api.bookmarkCount }}
+                </span>
                 <i class="fa fa-star bookmark-default"></i>
               </div>
             </li>
-            {{/if}}
+            {{/ if }}
             <li class="pull-right">
               <span class="api-card-created">
                 {{_ "latestApiBackends_DateAdded" api.relativeCreatedAt }}
@@ -57,7 +59,7 @@
           </ul>
         </div>
       </div>
-      {{/each}}
+      {{/ each }}
     </div>
   </div>
 </template>

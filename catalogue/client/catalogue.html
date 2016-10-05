@@ -1,6 +1,8 @@
 <template name="catalogue">
   <div class="container">
-    <h1 class="page-main-title">{{_ "catalogue_Title"}}</h1>
+    <h1 class="page-main-title">
+      {{_ "catalogue_Title" }}
+    </h1>
     <nav id="catalogue-toolbar" class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -11,7 +13,9 @@
                   data-toggle="collapse"
                   data-target="#bs-example-navbar-collapse-1"
                   aria-expanded="false">
-            <span class="sr-only">{{_ "catalogue_toolbar_toggleCollapse" }}</span>
+            <span class="sr-only">
+              {{_ "catalogue_toolbar_toggleCollapse" }}
+            </span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -76,7 +80,7 @@
               </label>
             </div>
           </div>
-          {{/if}}
+          {{/ if }}
           <div class="nav navbar-nav navbar-right">
             <div class="btn-group navbar-btn" role="group" aria-label="View mode" data-toggle="buttons">
               <label
@@ -99,37 +103,43 @@
 
     <!-- if viewMode is table, show table -->
     {{# if gridViewMode }}
-    {{# if Template.subscriptionsReady }}
-    {{> catalogueGrid apis=apis }}
-    {{else}}
-    {{> spinner }}
-    {{/if}}
+      {{# if Template.subscriptionsReady }}
+        {{> catalogueGrid apis=apis }}
+      {{ else }}
+        {{> spinner }}
+      {{/ if }}
     {{/ if }}
 
     <!-- if viewMode is table, show table -->
     {{# if tableViewMode }}
-    {{# if Template.subscriptionsReady }}
-    {{> catalogueTable apis=apis }}
-    {{else}}
-    {{> spinner }}
-    {{/if}}
+      {{# if Template.subscriptionsReady }}
+        {{> catalogueTable apis=apis }}
+      {{ else }}
+        {{> spinner }}
+      {{/ if }}
     {{/ if }}
 
     <div class="text-center">
       <ul class="pagination">
         <li class="{{ prevButtonDisabledClass }}" >
           <a href="#" aria-label="Previous" id="prev-page">
-            <span aria-hidden="true">{{_ "catalogue_paginationButtons_previous" }}</span>
+            <span aria-hidden="true">
+              {{_ "catalogue_paginationButtons_previous" }}
+            </span>
           </a>
         </li>
-        {{ # each page in pageNumbers }}
+        {{# each page in pageNumbers }}
         <li class="{{ pageIsActive page }}">
-          <a href="#" class="change-page">{{ page }}</a>
+          <a href="#" class="change-page">
+            {{ page }}
+          </a>
         </li>
-        {{ / each }}
+        {{/ each }}
         <li class="{{ nextButtonDisabledClass }}">
           <a href="#" aria-label="Next" id="next-page">
-            <span aria-hidden="true">{{_ "catalogue_paginationButtons_next" }}</span>
+            <span aria-hidden="true">
+              {{_ "catalogue_paginationButtons_next" }}
+            </span>
           </a>
         </li>
       </ul>

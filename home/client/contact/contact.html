@@ -1,9 +1,13 @@
 <template name="contactForm">
-  {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+  {{# autoForm
+    schema=contactFormSchema
+    id="contactForm"
+    type="method"
+    meteormethod="sendEmail" }}
   <fieldset>
-    {{> afQuickField name="name"}}
-    {{> afQuickField name="email"}}
-    {{> afQuickField name="message"}}
+    {{> afQuickField name="name" }}
+    {{> afQuickField name="email" }}
+    {{> afQuickField name="message" }}
     <div id="form-buttons">
       <button type="submit" class="btn btn-primary">
         {{_ "contactForm_submit" }}
@@ -13,5 +17,5 @@
       </button>
     </div>
   </fieldset>
-  {{/autoForm}}
+  {{/ autoForm }}
 </template>
