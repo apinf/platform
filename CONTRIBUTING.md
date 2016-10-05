@@ -382,7 +382,7 @@ A specific example, found on a page element heading:
 ```html
 <!-- note the element nesting, for readability -->
 <h1 class="page-header">
-  {{_ "pageTemplate_header_text"}}
+  {{_ "pageTemplate_header_text" }}
 </h1>
 ```
 
