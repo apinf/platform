@@ -1,5 +1,9 @@
-<template name="visibilitySwitch">
-  <small class="visibilitySwitch pull-right">
-    <input type="checkbox" name="visibility">
-  </small>
+<template name="visibilityToggle">
+  <button class="btn btn-default changeVisibility">
+    {{# if isPublic }}
+      {{_ "visibilityToggle_buttonPrivate" }}
+    {{ else }}
+      {{_ "visibilityToggle_buttonPublic" }}
+    {{/ if}}
+  </button>
 </template>
