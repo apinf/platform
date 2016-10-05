@@ -19,7 +19,7 @@ Apis.schema = new SimpleSchema({
   url: {
     label: 'URL',
     type: String,
-    optional: true,
+    optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
   documentationFileId: {

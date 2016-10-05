@@ -11,15 +11,6 @@ import { Proxies } from '/proxies/collection';
 // NPM import
 import 'urijs';
 
-Template.proxyBackend.onRendered(() => {
-  // Make Disable API Key field easier to use
-    // Fixes browser rendering issue
-  $("[name='apiUmbrella.settings.disable_api_key']").bootstrapSwitch({
-    size: 'mini',
-    inverse: true,
-  });
-});
-
 Template.proxyBackend.helpers({
   apiHost () {
     // Get one proxy from the Proxies collection
