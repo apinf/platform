@@ -1,4 +1,5 @@
 import { Apis } from '/apis/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.methods({
   'toggleBookmarkApi': function (backendId, currentUserId) {
