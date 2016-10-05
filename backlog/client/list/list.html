@@ -1,10 +1,11 @@
 <template name="apiBacklogList">
-    {{> autoformModals}}
-    {{#if backlogItems}}
-        {{#each item in backlogItems }}
-          {{> backlogItem item=item api=api }}
-        {{/each}}
-    {{else}}
-        <i>{{_ "apiBacklogList_noApiBacklogItemsFound"}}</i>
-    {{/if}}
+  {{# if backlogItems }}
+    {{# each item in backlogItems }}
+      {{> backlogItem item=item api=api }}
+    {{/ each }}
+  {{ else }}
+    <i>
+      {{_ "apiBacklogList_noApiBacklogItemsFound" }}
+    </i>
+  {{/ if }}
 </template>

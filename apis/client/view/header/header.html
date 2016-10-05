@@ -25,16 +25,18 @@
                 class="api-card-bookmark"
                 data-toggle="tooltip"
                 data-placement="bottom"
-                title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
+                title="{{_ 'catalogue_bookmarkTooltip_nonUser' }}">
               <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
               <i class="fa fa-bookmark bookmark-default"></i>
             </div>
           </a>
-        {{/if}}
+        {{/ if }}
       </div>
       {{#if proxyBackend }}
         <div>
-          <span class="pull-right">{{> apiKey }}</span>
+          <span class="pull-right">
+            {{> apiKey }}
+          </span>
         </div>
       {{/if }}
       <!-- Tabs -->
@@ -107,9 +109,9 @@
             {{/ if }}
           {{/ if }}
         </ul>
-        {{#if api.currentUserCanEdit }}
+        {{# if api.currentUserCanEdit }}
           {{> apiIntro }}
-        {{/if}}
+        {{/ if }}
       </div>
     </div>
   </div>

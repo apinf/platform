@@ -136,24 +136,24 @@ Template.apiProxy.events({
     if (proxyBackend &&
       proxyBackend.apiUmbrella &&
       proxyBackend.apiUmbrella.id) {
-      try {
         // Call deleteProxyBackend
-        Meteor.call('deleteProxyBackend', proxyBackend, () => {
-          // Show successMessage
+      Meteor.call('deleteProxyBackend', proxyBackend, (error, result) => {
+        if (error) {
+          if (error.error === 'delete-error') {
+              // Show delete-error
+            const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
+            sAlert.error(`${deleteErrorMessage}:\n ${error.error}`);
+          } else if (error.error === 'publish-error') {
+              // Show publish-error
+            const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
+            sAlert.error(`${publishErrorMessage}:\n ${error.error}`);
+          }
+        } else {
+            // Show successMessage
           const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
           sAlert.success(successMessage);
-        });
-      } catch (error) {
-        if (error.error === 'delete-error') {
-          // Show delete-error
-          const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
-          sAlert.error(`${deleteErrorMessage}:\n ${error.error}`);
-        } else if (error.error === 'publish-error') {
-          // Show publish-error
-          const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
-          sAlert.error(`${publishErrorMessage}:\n ${error.error}`);
         }
-      }
+      });
     }
   },
 });

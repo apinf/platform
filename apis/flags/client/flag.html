@@ -2,30 +2,34 @@
   <div class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        {{ # autoForm collection="ApiFlags" id="insertApiFlag" type=formType doc=apiFlag }}
+        {{# autoForm
+          collection="ApiFlags"
+          id="insertApiFlag"
+          type=formType
+          doc=apiFlag }}
         <div class="modal-header">
           <h4 class="modal-title">
-            {{ _ "flagApiModal_titleText" }}
+            {{_ "flagApiModal_titleText" }}
           </h4>
         </div>
         <div class="modal-body">
-          {{> afQuickField name='comments'}}
-          {{> afQuickField name='reason' options='allowed'}}
+          {{> afQuickField name='comments' }}
+          {{> afQuickField name='reason' options='allowed' }}
         </div>
         <div class="modal-footer">
-          {{ # if apiIsFlagged }}
+          {{# if apiIsFlagged }}
             <button type="button" class="btn btn-warning pull-left" id="remove-apiFlag">
-                {{ _ "flagApiModal_removeButton" }}
+                {{_ "flagApiModal_removeButton" }}
             </button>
-          {{ / if }}
+          {{/ if }}
           <button type="submit" class="btn btn-success">
-            {{ _ "flagApiModal_saveButton" }}
+            {{_ "flagApiModal_saveButton" }}
           </button>
           <button type="button" class="btn btn-default" data-dismiss="modal">
-            {{ _ "flagApiModal_cancelButton" }}
+            {{_ "flagApiModal_cancelButton" }}
           </button>
         </div>
-        {{ / autoForm }}
+        {{/ autoForm }}
       </div>
     </div>
   </div>
