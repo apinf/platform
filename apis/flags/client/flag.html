@@ -5,7 +5,7 @@
         {{ # autoForm collection="ApiFlags" id="insertApiFlag" type=formType doc=apiFlag }}
         <div class="modal-header">
           <h4 class="modal-title">
-            {{ _ "flagApiModal_titleText" }}
+            {{_ "flagApiModal_titleText" }}
           </h4>
         </div>
         <div class="modal-body">
@@ -15,14 +15,14 @@
         <div class="modal-footer">
           {{ # if apiIsFlagged }}
             <button type="button" class="btn btn-warning pull-left" id="remove-apiFlag">
-                {{ _ "flagApiModal_removeButton" }}
+                {{_ "flagApiModal_removeButton" }}
             </button>
           {{ / if }}
           <button type="submit" class="btn btn-success">
-            {{ _ "flagApiModal_saveButton" }}
+            {{_ "flagApiModal_saveButton" }}
           </button>
           <button type="button" class="btn btn-default" data-dismiss="modal">
-            {{ _ "flagApiModal_cancelButton" }}
+            {{_ "flagApiModal_cancelButton" }}
           </button>
         </div>
         {{ / autoForm }}

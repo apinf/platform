@@ -6,6 +6,10 @@ Apis.schema = new SimpleSchema({
     label: 'API Name',
     type: String,
     optional: false,
+    // API Name should be unique for
+      // synchronization with proxy
+      // distinct catalog entries
+    unique: true,
   },
   description: {
     label: 'Description',
@@ -19,7 +23,7 @@ Apis.schema = new SimpleSchema({
   url: {
     label: 'URL',
     type: String,
-    optional: true,
+    optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
   documentationFileId: {
