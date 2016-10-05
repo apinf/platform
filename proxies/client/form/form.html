@@ -6,7 +6,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="proxyFormModalLabel">Add Proxy</h4>
         </div>
-        {{ # autoForm collection=proxiesCollection id="proxyForm" type=formType doc=proxy}}
+        {{# autoForm collection=proxiesCollection id="proxyForm" type=formType doc=proxy}}
           <div class="modal-body">
             {{ > afQuickField name='name' }}
             {{ > afQuickField name='description' }}
@@ -15,8 +15,8 @@
             -->
             {{> afQuickField name='apiUmbrella' }}
             <!--
-            {{ # each proxyName in proxiesList }}
-              {{ # if afFieldValueIs name='type' value=proxyName }}
+            {{# each proxyName in proxiesList }}
+              {{# if afFieldValueIs name='type' value=proxyName }}
                 {{> afQuickField name=proxyName }}
               {{/if}}
             {{ / each }}

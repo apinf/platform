@@ -19,7 +19,7 @@
         {{> feedbackList api=api }}
       </div> <!-- /api-feedback -->
 
-      {{ # if currentUser }}
+      {{# if currentUser }}
         {{# if api.currentUserCanEdit }}
           <div id="api-export" class="tab-pane fade">
             {{> apiExport api=api }}
@@ -31,7 +31,7 @@
         {{> apiBacklog api=api backlogItems=backlogItems }}
       </div> <!-- /api-backlog -->
 
-      {{ # if currentUser }}
+      {{# if currentUser }}
         {{# if api.currentUserCanEdit }}
 
           {{# if proxyIsConfigured }}
