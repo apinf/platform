@@ -180,6 +180,7 @@
   "deleteBacklogItem_cancelButton_text": "Cancel",
   "deleteBacklogItem_deleteButton_text": "Delete backlog item",
   "editApiMetadata_editButton": "Edit metadata",
+  "editApiMetadata_editApiMetadataForm_title": "Edit metadata",
   "editApiMetadata_submitButtonText": "Save metadata",
   "editBacklogItem_modalTitle": "Edit backlog item",
   "editBacklogItem_submit_buttonText": "Save",
