@@ -33,37 +33,9 @@
       </h2>
     </div>
     <div class="panel-body">
-      <form>
-        <ul id="visibility-options" class="list-unstyled">
-          <li>
-            <input type="radio" name="visibility-option" value="public" checked>
-            <span>
-              {{_ "apiSettings_visibilityOptions_public_title" }}
-            </span>
-            <p class="help-block">
-              {{_ "apiSettings_visibilityOptions_public_helpText" }}
-            </p>
-          </li>
-          <li>
-            <input type="radio" name="visibility-option" value="limited-public">
-            <span>
-              {{_ "apiSettings_visibilityOptions_limitedPublic_title" }}
-            </span>
-            <p class="help-block">
-              {{_ "apiSettings_visibilityOptions_limitedPublic_helpText" }}
-            </p>
-          </li>
-          <li>
-            <input type="radio" name="visibility-option" value="private">
-            <span>
-              {{_ "apiSettings_visibilityOptions_private_title" }}
-            </span>
-            <p class="help-block">
-              {{_ "apiSettings_visibilityOptions_private_helpText" }}
-            </p>
-          </li>
-        </ul>
-      </form>
+      {{#if api.currentUserCanEdit }}
+        {{> visibilityToggle api=api }}
+      {{/if }}
       <a
          href="#"
          class="btn btn-success">
@@ -84,9 +56,6 @@
       <p>
         {{_ "apiSettings_visibility_text" }}
       </p>
-      {{#if api.currentUserCanEdit }}
-        {{> visibilityToggle api=api }}
-      {{/if }}
       <hr class="panel-hr" />
       <h3>{{_ "apiSettings_deleteApiTitle" }}</h3>
       <p>
