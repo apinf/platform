@@ -37,17 +37,19 @@
       </h2>
     </div>
     <div class="panel-body">
-      <h3>
-        {{_ "apiSettings_visibility_heading" }}
-      </h3>
-      <p>
-        {{_ "apiSettings_visibility_text" }}
-      </p>
-      {{> visibilityToggle api=api }}
-      <hr class="panel-hr" />
-      <h3>
-        {{_ "apiSettings_deleteApiTitle" }}
-      </h3>
+      {{#if api.currentUserCanEdit }}
+        {{> visibilityToggle api=api }}
+      {{/if }}
+    </div>
+  </div>
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        {{_ "apiSettings_panelTitleManage" }}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <h3>{{_ "apiSettings_deleteApiTitle" }}</h3>
       <p>
         {{_ "apiSettings_deleteApiText" }}
       </p>
@@ -55,7 +57,7 @@
          href="#"
          class="btn btn-danger"
          id="delete-api">
-        {{_ "apiDetails_deleteButton" }}
+        {{_ "apiDetails_deleteButton"}}
       </a>
     </div>
   </div>
