@@ -17,7 +17,7 @@ Template.visibilityToggle.events({
 });
 
 Template.visibilityToggle.helpers({
-  isPublic () {
+  visible () {
     // Get API from template data
     const api = Template.currentData().api;
 
@@ -25,7 +25,7 @@ Template.visibilityToggle.helpers({
     const apiId = api._id;
 
     // Check visibility status
-    const status = Apis.findOne(apiId).isPublic;
+    const status = Apis.findOne(apiId).visibility;
 
     return status;
   },

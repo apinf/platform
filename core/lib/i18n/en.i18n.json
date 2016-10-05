@@ -269,6 +269,14 @@
   "responseTimeDistributionChart_help_text": "Click on any bar to filter API Request Timeline and HTTP Status Code chart by requests that have the selected response time range.",
   "schemas": {
     "apis": {
+      "visibility": {
+        "label": "Change API visibility",
+        "options": {
+          "public": "Public",
+          "semiPublic": "Public for selected users",
+          "private": "Private"
+        }
+      },
       "submit_methods": {
         "label": "Allow try-out for following methods:"
       }
