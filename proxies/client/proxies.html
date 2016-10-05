@@ -10,7 +10,7 @@
             <button class="btn btn-default btn-sm pull-right" id="add-proxy">
               {{_ "proxies_addProxy" }}
             </button>
-          {{ / unless }}
+          {{/ unless }}
           {{_ "proxies_pageHeader" }}
         </h2>
         <hr>
@@ -19,12 +19,14 @@
             {{# if proxies }}
               {{# each proxy in proxies }}
                  {{> proxyItem proxy=proxy }}
-              {{ / each }}
+              {{/ each }}
             {{ else }}
               <p class="text-center">
-                <i>{{_ "proxies_noProxiesFound" }}</i>
+                <i>
+                  {{_ "proxies_noProxiesFound" }}
+                </i>
               </p>
-            {{ / if }}
+            {{/ if }}
           {{/ if }}
         </div>
       </div>

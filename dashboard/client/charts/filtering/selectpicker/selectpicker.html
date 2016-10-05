@@ -15,7 +15,7 @@
             {{> viewApiStatus apiBackend=api width="0.5" }}
             &nbsp;
             {{ api.name }}</option>
-        {{ / each }}
+        {{/ each }}
       </optgroup>
       <optgroup label="Other APIs" >
         {{# each api in otherApis }}
@@ -23,7 +23,7 @@
             {{> viewApiStatus apiBackend=api width="0.5" }}
             &nbsp;
             {{ api.name }}</option>
-        {{ / each }}
+        {{/ each }}
       </optgroup>
     {{ else }}
       {{# each api in otherApis }}
@@ -31,7 +31,7 @@
           {{> viewApiStatus apiBackend=api width="0.5" }}
           &nbsp;
           {{ api.name }}</option>
-      {{ / each }}
-    {{ / if }}
+      {{/ each }}
+    {{/ if }}
   </select>
 </template>

@@ -18,7 +18,7 @@
             {{ branding.siteTitle }}
           </a>
         </div>
-        {{ / if }}
+        {{/ if }}
       </div>
       <div id="main-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
@@ -61,15 +61,15 @@
             </a>
           </li>
           {{# if currentUser }}
-          {{# if isInRole 'admin' }}
-          <li class="{{isActiveRoute 'accountsAdmin'}}">
-            <a href="{{pathFor route='accountsAdmin'}}">
-              <span>
-                {{_ "masterLayout_sidebar_Users" }}
-              </span>
-            </a>
-          </li>
-          {{/ if }}
+            {{# if isInRole 'admin' }}
+              <li class="{{isActiveRoute 'accountsAdmin'}}">
+                <a href="{{pathFor route='accountsAdmin'}}">
+                  <span>
+                    {{_ "masterLayout_sidebar_Users" }}
+                  </span>
+                </a>
+              </li>
+            {{/ if }}
           {{/ if }}
         </ul>
         <ul class="nav navbar-nav navbar-right">

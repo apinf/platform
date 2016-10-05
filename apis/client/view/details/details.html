@@ -16,7 +16,7 @@
               {{ api.description }}
             </p>
             <hr class="panel-hr" />
-          {{ / if }}
+          {{/ if }}
             <h3>
               {{_ "apiDetails_baseUrl_headingText" }}
             </h3>
@@ -57,8 +57,8 @@
       <ul>
         <li>
           {{_ "apiDetails_usageInstructions_urlParameters_text" }}
-          <a href="{{ proxyUrl }}{{# if apiKey }}?api_key={{ apiKey }}{{ / if }}">
-            {{ proxyUrl }}{{# if apiKey }}?api_key={{ apiKey }}{{ / if }}
+          <a href="{{ proxyUrl }}{{# if apiKey }}?api_key={{ apiKey }}{{/ if }}">
+            {{ proxyUrl }}{{# if apiKey }}?api_key={{ apiKey }}{{/ if }}
           </a>
         </li>
         {{# if apiKey }}
@@ -68,8 +68,8 @@
               X-Api-Key: {{ apiKey }}
             </span>
           </li>
-        {{ / if }}
+        {{/ if }}
       </ul>
     </div>
-  {{ / if }}
+  {{/ if }}
 </template>

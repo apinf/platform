@@ -1,5 +1,7 @@
 <template name="dashboardDataTable">
-  <h4 class="dashboard-block-title">{{_ "dashboardDataTable_title" }}</h4>
+  <h4 class="dashboard-block-title">
+    {{_ "dashboardDataTable_title" }}
+  </h4>
   <a
      tabindex="0"
      class="dashboard-block-help"
@@ -12,12 +14,20 @@
   </a>
   <form class="form-inline" id="change-row-count">
     <select class="form-control" id="row-count">
-      <option value="10" selected>10</option>
-      <option value="25">25</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
+      <option value="10" selected>
+        10
+      </option>
+      <option value="25">
+        25
+      </option>
+      <option value="50">
+        50
+      </option>
+      <option value="100">
+        100
+      </option>
     </select>
-    records per page
+    {{_ 'dashboardDataTable_recordsPerPage' }}
   </form>
   <table class="dataTable table table-bordered table-hover">
     <thead>
@@ -64,12 +74,20 @@
             {{ row.responseStatus }}
           </td>
         </tr>
-      {{ / each}}
+      {{/ each}}
     </tbody>
   </table>
   <div>
     <div class="page-numbers pull-left">
-      {{_ "dashboardDataTable_pageCount" }} <strong>{{ currentPageNumber }}</strong> / <strong>{{ totalPageNumber }}</strong>
+      {{_ "dashboardDataTable_pageCount" }}
+      &nbsp;
+      <strong>
+        {{ currentPageNumber }}
+      </strong>
+      &nbsp;/&nbsp;
+      <strong>
+        {{ totalPageNumber }}
+      </strong>
     </div>
     <div class="btn-group pull-right">
       {{# if showPrevButton }}
@@ -82,7 +100,7 @@
           <span class="glyphicon glyphicon-chevron-left"></span>
           {{_ "dashboardDataTable_prevPage" }}
         </button>
-      {{ / if }}
+      {{/ if }}
       {{# if showNextButton }}
         <button class="btn btn-sm btn-default" id="next">
           {{_ "dashboardDataTable_nextPage" }}
@@ -93,7 +111,7 @@
           {{_ "dashboardDataTable_nextPage" }}
           <span class="glyphicon glyphicon-chevron-right"></span>
         </button>
-      {{ / if }}
+      {{/ if }}
     </div>
   </div>
 </template>
