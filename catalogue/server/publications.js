@@ -1,3 +1,5 @@
+import { Roles } from 'meteor/alanning:roles';
+
 // Collection imports
 import { Apis } from '/apis/collection';
 import { ApiBackendRatings } from '/ratings/collection';
@@ -10,17 +12,24 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Get user ID
   const userId = this.userId;
 
+  const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
   if (userId) {
-    // If user logged in
-    // Select public, managed APIs & APIs user is authorized to see
-    selector = {
-      $or:
-      [
-        { visibility: 'public' },
-        { managerIds: userId },
-        { authorizedUserIds: userId },
-      ],
-    };
+    if (userIsAdmin) {
+      // Select all APIs
+      selector = {};
+    } else {
+      // If user logged in
+      // Select public, managed APIs & APIs user is authorized to see
+      selector = {
+        $or:
+        [
+          { visibility: 'public' },
+          { managerIds: userId },
+          { authorizedUserIds: userId },
+        ],
+      };
+    }
   }
 
   // Set up query options with empty sort settings
