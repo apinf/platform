@@ -19,6 +19,7 @@
   "addApiBacklogItem_addBacklogItem_button": "Add backlog item",
   "addApiBacklogItem_modalTitle": "Add backlog item",
   "addApiBackendWizard_backButton_text": "Back",
+  "apiBackendRating_anonymousError": "Please, login to rate this API.",
   "apiBacklog_addBacklogItem_buttonText": "Add backlog item",
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
   "apiBacklog_mainTitle": "Backlog",
