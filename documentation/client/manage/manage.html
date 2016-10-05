@@ -9,16 +9,16 @@
           <h1 class="modal-title">{{_ "manageApiDocumentationModal_Title" }}</h1>
         </div>
         <div class="modal-body">
-          {{#autoForm collection=apisCollection doc=api id="apiDocumentationForm" type="update" }}
+          {{# autoForm collection=apisCollection doc=api id="apiDocumentationForm" type="update" }}
 
             <legend>
-              {{> showHelp 'uploadApiDocumentation'}}
+              {{> showHelp 'uploadApiDocumentation' }}
               {{_ "import_ApiDocumentation_Title"}}
             </legend>
             <div class="documentation-file">
-              {{#unless documentationFile }}
+              {{# unless documentationFile }}
                 {{> manageApiDocumentationModalUploadButton }}
-              {{else}}
+              {{ else }}
                 <ul class="list-group">
                   <li class="list-group-item">
                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -36,11 +36,11 @@
                     type="select-checkbox-inline"
                     noselect=false
                 }}
-              {{/unless}}
+              {{/ unless }}
             </div>
-            {{# if apiDocumentationEditorIsEnabled}}
+            {{# if apiDocumentationEditorIsEnabled }}
               <legend>
-                {{> showHelp 'documentation_editor_create_file'}}
+                {{> showHelp 'documentation_editor_create_file' }}
                 {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
               </legend>
               <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
@@ -48,10 +48,10 @@
               </a>
             {{/ if }}
             <legend>
-              {{> showHelp 'documentation_link'}}
+              {{> showHelp 'documentation_link' }}
               {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}
             </legend>
-            {{> afQuickField name='documentation_link'}}
+            {{> afQuickField name='documentation_link' }}
             <button type="submit" class="btn btn-success" id="save-documentation-link">
               {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
             </button>

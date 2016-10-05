@@ -1,8 +1,8 @@
 <template name="uploadProjectLogo">
   <div class="project-logo-file">
-    {{#unless uploadedProjectLogoFile }}
+    {{# unless uploadedProjectLogoFile }}
     {{> uploadProjectLogoButton }}
-    {{else}}
+    {{ else }}
     <ul class="list-group">
       <li class="list-group-item">
         <span class="glyphicon glyphicon-file"></span>
@@ -14,6 +14,6 @@
         </span>
       </li>
     </ul>
-    {{/unless}}
+    {{/ unless }}
   </div>
 </template>

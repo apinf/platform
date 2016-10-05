@@ -12,13 +12,17 @@
             </div>
           </div>
           <div class="panel-body">
-            {{#autoForm id="updateProfile" collection=usersCollection doc=currentUser type="update"}}
-              {{> afQuickField name="username"}}
-              {{> afQuickField name="profile.company"}}
+            {{# autoForm
+              id="updateProfile"
+              collection=usersCollection
+              doc=currentUser
+              type="update"}}
+              {{> afQuickField name="username" }}
+              {{> afQuickField name="profile.company" }}
               <button type="submit" class="btn btn-success profile-update">
-                {{_ "profile_UpdateButton"}}
+                {{_ "profile_UpdateButton" }}
               </button>
-            {{/autoForm}}
+            {{/ autoForm }}
           </div>
         </div>
       </div>

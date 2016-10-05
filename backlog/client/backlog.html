@@ -1,14 +1,14 @@
 <template name="apiBacklog">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#if api.currentUserCanEdit }}
+      {{# if api.currentUserCanEdit }}
         <button
           id="add-backlog-item"
           class="btn btn-info btn-xs pull-right">
           <span class="glyphicon glyphicon-plus"></span>
           {{_ "apiBacklog_addBacklogItem_buttonText" }}
         </button>
-      {{/if}}
+      {{/ if }}
       <h2 class="panel-title clearfix">
         {{_ "apiBacklog_mainTitle"}}
       </h2>

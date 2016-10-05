@@ -19,29 +19,33 @@
         <div class="page-head-starsblock pull-right">
           {{# if currentUser }}
             {{> favourite api=api }}
-          {{else}}
+          {{ else }}
             <a href="#" class="star-button">
               <div
                   class="api-card-bookmark"
                   data-toggle="tooltip"
                   data-placement="bottom"
                   title="{{_ 'catalogue_bookmarkTooltip_nonUser'}}">
-                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+                <span class="api-card-bookmark-number">
+                  {{ api.bookmarkCount }}
+                </span>
                 <i class="fa fa-star bookmark-default"></i>
               </div>
             </a>
-          {{/if}}
+          {{/ if }}
         </div>
-        {{#if api.currentUserCanEdit }}
+        {{# if api.currentUserCanEdit }}
           {{> visibilitySwitch api=api }}
           {{> apiIntro }}
-        {{/if}}
+        {{/ if }}
       </div>
-      {{#if proxyBackend }}
+      {{# if proxyBackend }}
         <div class="row">
-          <span class="pull-right">{{> apiKey }}</span>
+          <span class="pull-right">
+            {{> apiKey }}
+          </span>
         </div>
-      {{/if }}
+      {{/ if }}
       <!-- Tabs -->
       <div id="api-navigation-tabs">
         <ul class="nav nav-tabs">
