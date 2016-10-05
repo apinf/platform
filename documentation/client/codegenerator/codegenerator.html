@@ -11,21 +11,20 @@
         </h1>
       </div>
       <div class="modal-body">
-        {{#if dataFetched}}
+        {{# if dataFetched }}
 
           {{> quickForm
             id="downloadSDK"
             schema=generateSDK
             doc=getTemplateInstance
             buttonContent="Download" }}
+        {{ else }}
+          {{> spinner }}
+         {{/ if }}
 
-        {{else}}
-          {{> spinner}}
-         {{/if}}
-
-      {{#if statusRequest}}
-        {{> spinner}}
-      {{/if}}
+      {{# if statusRequest }}
+        {{> spinner }}
+      {{/ if }}
       </div>
     </div>
   </div>

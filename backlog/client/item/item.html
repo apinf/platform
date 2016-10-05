@@ -1,7 +1,7 @@
 <template name="backlogItem">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#if api.currentUserCanEdit }}
+      {{# if api.currentUserCanEdit }}
       <div class="btn-group pull-right">
         <button class="edit-backlog-item btn btn-primary btn-xs">
           {{_ "backlogItem_editButton_text" }}
@@ -10,22 +10,22 @@
           {{_ "backlogItem_deleteButton_text" }}
         </button>
       </div>
-      {{/if}}
+      {{/ if }}
       <b>
           <div class="{{ itemPriorityClass item.priority }}"></div>
-          {{ item.title}}
+          {{ item.title }}
       </b>
     </div>
     <div class="panel-body">
       <p>
-        {{ item.details}}
+        {{ item.details }}
       </p>
     </div>
     <div class="panel-footer">
       <i>
-        {{#if item.currentUserIsOwner}}
-            By <b>You</b>
-        {{/if}}
+        {{# if item.currentUserIsOwner }}
+          {{_ 'backlogItem_addedByYou' }}
+        {{/ if }}
         {{ relativeTimeStamp item.createdAt }}
       </i>
     </div>

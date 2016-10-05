@@ -14,16 +14,16 @@
       </div>
     </div>
     <div id="message-bar" class="swagger-ui-wrap message-success" data-sw-translate=""></div>
-    {{#if dataFetched}}
-      {{#if documentationValid}}
-        {{>swaggerUiContent apiDoc=apiDoc api=api}}
-      {{else}}
+    {{# if dataFetched }}
+      {{# if documentationValid }}
+        {{> swaggerUiContent apiDoc=apiDoc api=api }}
+      {{ else }}
         <i>
-          {{_ 'swaggerUi_swaggerDocumentInvalidText'}}
+          {{_ 'swaggerUi_swaggerDocumentInvalidText' }}
         </i>
-      {{/if}}
-    {{else}}
-      {{>spinner}}
-    {{/if}}
+      {{/ if }}
+    {{ else }}
+      {{> spinner }}
+    {{/ if }}
   </div>
 </template>

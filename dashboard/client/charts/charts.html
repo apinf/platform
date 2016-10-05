@@ -1,7 +1,7 @@
 <template name="dashboardCharts">
   <div class="row no-margin-row">
     <div class="col-md-12 dashboard-charts-filtering">
-      {{ > dashboardChartsFiltering }}
+      {{> dashboardChartsFiltering }}
     </div>
   </div>
   <div class="charts-holder">
@@ -9,24 +9,24 @@
     <div class="row">
       <div class="col-md-12">
         <div>
-          {{ > requestsOverTimeChart }}
+          {{> requestsOverTimeChart }}
         </div>
         <div>
-          {{ > overviewChartChart }}
+          {{> overviewChartChart }}
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        {{ > statusCodeCountsChart }}
+        {{> statusCodeCountsChart }}
       </div>
       <div class="col-md-6">
-        {{ > responseTimeDistributionChart }}
+        {{> responseTimeDistributionChart }}
       </div>
     </div>
     <div class="row">
       <div class="padding-sides">
-        {{ > dashboardDataTable tableDataSet=tableDataSet }}
+        {{> dashboardDataTable tableDataSet=tableDataSet }}
       </div>
     </div>
   </div>

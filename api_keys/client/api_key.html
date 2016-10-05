@@ -1,5 +1,5 @@
 <template name="apiKey">
-{{#if apiKey }}
+{{# if apiKey }}
 <div id="api-key-copy" class="input-group">
   <input
          type="text"
@@ -14,7 +14,7 @@
             data-original-title="Copied!"
             data-clipboard-target="#api-key">
       <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
-      {{_ "apiKeys_copyButtonText"}}
+      {{_ "apiKeys_copyButtonText" }}
     </button>
   </span>
 </div>
@@ -23,5 +23,5 @@
   <button id="get-api-key" class="btn btn-success apiKeyButton">
     {{_ "apiKeys_getApiKeyButton" }}
   </button>
-{{/if }}
+{{/ if }}
 </template>

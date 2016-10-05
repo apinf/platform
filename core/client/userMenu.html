@@ -12,31 +12,31 @@
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="{{pathFor 'profile'}}">
-          {{_ "userMenu_profile"}}
+        <a href="{{pathFor 'profile' }}">
+          {{_ "userMenu_profile" }}
         </a>
       </li>
       <li>
-        <a href="{{pathFor 'account'}}">
-          {{_ "userMenu_account"}}
+        <a href="{{pathFor 'account' }}">
+          {{_ "userMenu_account" }}
         </a>
       </li>
-      {{#if isInRole 'admin'}}
+      {{# if isInRole 'admin' }}
       <li>
-        <a href="{{pathFor 'branding'}}">
-          {{_ "userMenu_branding"}}
+        <a href="{{pathFor 'branding' }}">
+          {{_ "userMenu_branding" }}
         </a>
       </li>
       <li>
-        <a href="{{pathFor 'settings'}}">
-          {{_ "userMenu_settings"}}
+        <a href="{{pathFor 'settings' }}">
+          {{_ "userMenu_settings" }}
         </a>
       </li>
-      {{/if}}
+      {{/ if }}
       <li class="divider"></li>
       <li>
         <a href="/sign-out">
-          {{_ "userMenu_signout"}}
+          {{_ "userMenu_signout" }}
         </a>
       </li>
     </ul>

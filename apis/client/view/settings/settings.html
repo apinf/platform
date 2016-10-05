@@ -14,16 +14,20 @@
       </p>
       {{> uploadApiLogo api=api }}
       <hr class="panel-hr" />
-      {{#autoForm collection=formCollection doc=api id="apiBackendForm" type="update"}}
-      {{> afQuickField name='name'}}
-      {{> afQuickField name='description'}}
-      {{> afQuickField name='url'}}
+      {{# autoForm
+        collection=formCollection
+        doc=api
+        id="apiBackendForm"
+        type="update" }}
+      {{> afQuickField name='name' }}
+      {{> afQuickField name='description' }}
+      {{> afQuickField name='url' }}
       <div id="form-buttons">
         <button type="submit" class="btn btn-success" id="save-settings">
           {{_ "viewApiSettigs_saveButton_text" }}
         </button>
       </div>
-      {{/autoForm}}
+      {{/ autoForm }}
     </div>
   </div>
   <div class="panel panel-danger">
@@ -39,11 +43,11 @@
       <p>
         {{_ "apiSettings_visibility_text" }}
       </p>
-      {{#if api.currentUserCanEdit }}
-        {{> visibilityToggle api=api }}
-      {{/if }}
+      {{> visibilityToggle api=api }}
       <hr class="panel-hr" />
-      <h3>{{_ "apiSettings_deleteApiTitle" }}</h3>
+      <h3>
+        {{_ "apiSettings_deleteApiTitle" }}
+      </h3>
       <p>
         {{_ "apiSettings_deleteApiText" }}
       </p>
@@ -51,7 +55,7 @@
          href="#"
          class="btn btn-danger"
          id="delete-api">
-        {{_ "apiDetails_deleteButton"}}
+        {{_ "apiDetails_deleteButton" }}
       </a>
     </div>
   </div>

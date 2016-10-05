@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        {{ # if projectLogoExists }}
+        {{# if projectLogoExists }}
         <a class="navbar-brand text-hide" href="/" style="background-image:url({{ uploadedProjectLogoLink }})">
           APInf
         </a>
@@ -20,36 +20,36 @@
             {{ branding.siteTitle }}
           </a>
         </div>
-        {{ / if }}
+        {{/ if }}
       </div>
       <div id="home-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          {{#if currentUser}}
-            {{ # if proxyIsDefined }}
+          {{# if currentUser }}
+            {{# if proxyIsDefined }}
               <li>
-                <a href="{{pathFor 'dashboard'}}">
+                <a href="{{pathFor 'dashboard' }}">
                   {{_ "homeHeader_dashboardLink_text" }}
                 </a>
               </li>
-            {{ / if }}
+            {{/ if }}
           {{> userMenu }}
-          {{else}}
+          {{ else }}
           <li>
             <a href="{{ pathFor 'atSignIn' }}">
-              {{_ "homeHeader_signIn"}}
+              {{_ "homeHeader_signIn" }}
             </a>
           </li>
           <li>
             <a href="{{ pathFor 'atSignUp' }}">
-              {{_ "homeHeader_signUp"}}
+              {{_ "homeHeader_signUp" }}
             </a>
           </li>
           <li>
             <a href="{{ pathFor 'catalogue' }}">
-              {{_ "homeHeader_apiCatalogue"}}
+              {{_ "homeHeader_apiCatalogue" }}
             </a>
           </li>
-          {{/if}}
+          {{/ if }}
         </ul>
       </div>
     </div>

@@ -8,17 +8,21 @@
         </h1>
       </div>
     </div>
-    {{ > dashboardCharts chartData=chartData loadingState=loadingState }}
+    {{> dashboardCharts chartData=chartData loadingState=loadingState }}
     {{ else }}
     <div class="row">
       <div class="col-lg-12">
         <h1 class="dashboard-no-apis">
           {{_ "dashboard_noApisTitle" }}
           <br>
-          <small>To add an API Backend, <a href="{{ pathFor route='addApiBackend-wizard' }}">click here.</a></small>
+          <a
+            href="{{ pathFor route='addApi' }}"
+            class="btn btn-success">
+            {{_ 'dashboard_addApiButton_text' }}
+          </a>
         </h1>
       </div>
     </div>
-    {{ / if }}
+    {{/ if }}
   </div>
 </template>
