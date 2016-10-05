@@ -23,6 +23,9 @@ Use the following guidelines when contributing to this project.
       - [Variable examples](#variable-examples)
     - [Code standard(s) and Lint](#code-standards-and-lint)
     - [Indentation](#indentation)
+    - [Quotes](#quotes)
+    - [Whitespace](#whitespace)
+        - [Handlebars helpers](#handlebars-helpers)
   - [File structure](#file-structure)
     - [File names](#file-names)
   - [Collection/Schema structure](#collectionschema-structure)
@@ -256,7 +259,7 @@ Also, nest most/all HTML child elements -- i.e. avoid having multiple inline ele
   Paragraph text.
 </p>
 ```
-# Quotes
+### Quotes
 Please use quotation marks (`""` and `''`) consistently. In general,
 
 - use single quotes in JavaScript
@@ -266,12 +269,12 @@ Please use quotation marks (`""` and `''`) consistently. In general,
 - use double quotes in HTML
   - e.g. `<a href="...">Link</a>`
 
-# Whitespace
+### Whitespace
 Please use consistent whitespace in project files. In general, whitespace is used to help people read our code.
 
 - use two spaces for indentation in HTML and JavaScript files
 
-## Handlebars helpers
+##### Handlebars helpers
 Please observe the following structure when working with handlebars syntax:
 
 - Handlebars (`{{`) and prefixes (`>`, `#`, and `_`) should be placed next to each other.
