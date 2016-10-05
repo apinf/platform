@@ -63,6 +63,11 @@
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "apiSelectPicker_selectAPI": "Select API",
   "apinf_usernotloggedin_error": "Could not find logged in user.",
+  "apiMonitoring_panelTitle_Monitoring": "API Monitoring",
+  "apiMonitoring_helpIcon_text": "Please provide a valid path to an endpoint to make actual API calls. API monitoring is done using HTTP requests. You can use GET method only so that accidental data insertion in your API is prevented.",
+  "apiMonitoring_saveButton_text": "Save",
+  "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
+  "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
   "apiProxy_headerText": "Proxy backend configuration",
   "backlogItem_editButton_text": "Edit",
   "backlogItem_deleteButton_text": "Delete",
@@ -351,6 +356,14 @@
         "label": "Choose message type"
       }
     },
+    "monitoring": {
+      "url": {
+        "label": "Endpoint to Monitor"
+      },
+      "enabled": {
+        "label": "Enabled API Monitoring"
+      }
+    },
     "settings": {
       "apiDocumentationEditor": {
         "label": "API Documentation Editor",
@@ -513,6 +526,8 @@
   "apiSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
   "viewApiStatus_statusMessage_ClientError": "Client error.",
   "viewApiStatus_statusMessage_ErrorCodeText": "Status code:",
+  "viewApiStatus_statusMessage_Informational": "Informational.",
+  "viewApiStatus_statusMessage_Loading": "Loading...",
   "viewApiStatus_statusMessage_RedirectError": "Redirection.",
   "viewApiStatus_statusMessage_ServerError": "Server error.",
   "viewApiStatus_statusMessage_Success": "API is operating normally.",
