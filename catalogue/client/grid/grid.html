@@ -17,9 +17,11 @@
               {{_ "catalogueGrid_addedBy"}}
               {{ api.getApiManagersByName }}
             </span>
+            {{# if api.description }}
             <p class="api-card-description">
               {{ api.description }}
             </p>
+            {{/ if }}
           </div>
           <ul class="api-card-stats list-inline">
             {{# if currentUser }}
