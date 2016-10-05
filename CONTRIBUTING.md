@@ -256,7 +256,30 @@ Also, nest most/all HTML child elements -- i.e. avoid having multiple inline ele
   Paragraph text.
 </p>
 ```
+# Quotes
+Please use quotation marks (`""` and `''`) consistently. In general,
 
+- use single quotes in JavaScript
+  - e.g. 'here is a string'
+- use single quotes in handlebars
+  - e.g. `{{_ 'i18n_token' }}`
+- use double quotes in HTML
+  - e.g. `<a href="...">Link</a>`
+
+# Whitespace
+Please use consistent whitespace in project files. In general, whitespace is used to help people read our code.
+
+- use two spaces for indentation in HTML and JavaScript files
+
+## Handlebars helpers
+Please observe the following structure when working with handlebars syntax:
+
+- Handlebars (`{{`) and prefixes (`>`, `#`, and `_`) should be placed next to each other.
+  - Examples: `{{> ... }}`, `{{# ... }}`, `{{_ ... }}`
+- include a space before the closing handlebars `}}`
+  - Example: `{{ ... }}`
+- use spaces on both sides of handlebars words
+  - Examples: `{{# if }}`, `{{ else }}`, `{{_ 'i18n_token' }}`
 
 ## File structure
 This project is organized around a 'module' / 'component' architecture.
