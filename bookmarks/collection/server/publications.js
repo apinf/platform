@@ -1,5 +1,5 @@
-import { ApiBookmarks } from '/bookmarks/collection';
 import { Meteor } from 'meteor/meteor';
+import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.publish('myApiBookmarks', function () {
   if (this.userId) {
