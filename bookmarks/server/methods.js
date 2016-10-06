@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
@@ -16,7 +17,7 @@ Meteor.methods({
     // Check if user has existing bookmarks
     if (existingUserBookmarks) {
       // Get an array of bookmark IDs
-      var apiIds = existingUserBookmarks.apiIds;
+      const apiIds = existingUserBookmarks.apiIds;
 
       // Check if bookmark exists (returns -1 if not)
       const bookmarkIndex = apiIds.indexOf(backendId);
