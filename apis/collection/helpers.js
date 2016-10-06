@@ -20,11 +20,14 @@ Apis.helpers({
       // Check if user is manager of this API
       const userIsManager = _.includes(this.managerIds, userId);
 
+      // Check if user has external access
+      const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
+
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
       // if user is manager or administrator, they can edit
-      if (userIsManager || userIsAdmin) {
+      if (userIsManager || userIsAuthorized || userIsAdmin) {
         return true;
       }
     }
@@ -34,7 +37,7 @@ Apis.helpers({
   currentUserCanView () {
     // Check if API is public
     // Only user who can edit, can view private APIs
-    return (this.isPublic || this.currentUserCanEdit());
+    return (this.visibility === 'public' || this.currentUserCanEdit());
   },
   currentUserIsManager () {
     // Get current User ID
@@ -150,5 +153,9 @@ Apis.helpers({
     } else {
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
+  },
+  isPrivate () {
+    // Return true if API is not public
+    return this.visibility !== 'public';
   },
 });

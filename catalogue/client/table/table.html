@@ -2,8 +2,8 @@
   <div class="table-responsive">
     <table class="table table-striped table-bordered api-catalogue-table">
       <tbody>
-        {{# each api in apis }}
-        {{# if api.currentUserCanView }}
+        {{#each api in apis }}
+        {{#if api.currentUserCanView }}
         <tr>
           <td class="col-sm-1">
             {{> viewApiStatus api=api width="0.6" }}
@@ -17,15 +17,20 @@
                 {{ api.name }}
               </a>
             </h4>
-            <i>
-              {{_ "catalogueTable_addedBy" }}
-              {{ api.getApiManagersByName }}
-            </i>
-            <br>
-            <i>
-              {{_ "catalogueTable_added" }}
-              {{ api.relativeCreatedAt }}
-            </i>
+            {{#if api.isPrivate }}
+              <span class="label label-default label-align">private</span>
+            {{/ if }}
+            <div>
+              <i>
+                {{_ "catalogueTable_addedBy" }}
+                {{ api.getApiManagersByName }}
+              </i>
+              <br>
+              <i>
+                {{_ "catalogueTable_added" }}
+                {{ api.relativeCreatedAt }}
+              </i>
+            </div>
           </td>
           <td class="col-sm-1" style="vertical-align:middle">
             {{> apiBackendRating api }}

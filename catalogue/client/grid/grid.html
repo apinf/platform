@@ -17,6 +17,9 @@
               {{_ "catalogueGrid_addedBy" }}
               {{ api.getApiManagersByName }}
             </span>
+            {{#if api.isPrivate }}
+              <span class="label label-default">private</span>
+            {{/ if }}
             {{# if api.description }}
             <p class="api-card-description">
               {{ api.description }}
