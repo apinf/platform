@@ -24,6 +24,17 @@
             {{/ if }}
           </div>
           <ul class="api-card-stats list-inline">
+            <li class="pull-left">
+              <div class="api-card-star-average"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Average Rating">
+                {{#if api.averageRating }}
+                  {{ api.averageRating }}
+                  <i class="fa fa-star-half-o"></i>
+                {{/if}}
+              </div>
+            </li>
             {{# if currentUser }}
             <li class="pull-left">
               <div
@@ -31,7 +42,7 @@
                    data-toggle="tooltip"
                    data-placement="bottom"
                    title="{{_ 'catalogue_BookmarkTooltip_user' }}">
-                {{> favourite api=api catalogueView=true }}
+                {{> bookmark api=api catalogueView=true }}
               </div>
             </li>
             {{ else }}
@@ -44,7 +55,7 @@
                 <span class="api-card-bookmark-number">
                   {{ api.bookmarkCount }}
                 </span>
-                <i class="fa fa-star bookmark-default"></i>
+                <i class="fa fa-bookmark bookmark-default"></i>
               </div>
             </li>
             {{/ if }}
