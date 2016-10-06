@@ -31,7 +31,7 @@ AutoForm.hooks({
       });
     },
     onSuccess () {
-      console.log('success');
+      sAlert.success('Added user to Authorized Users list');
     },
     onError (error) {
       // do something with the error
