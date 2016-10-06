@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { Router } from 'meteor/iron:router';
+
 Router.route('/api/new', function () {
   this.render('addApi');
   this.layout('masterLayout');
@@ -20,7 +23,7 @@ Router.route('/api/:_id/', function () {
   const apiBackendId = Router.current().params._id;
 
   // Ensure current user is authorized to view backend
-  Meteor.call('currentUserCanViewApi', apiBackendId, function (error, userIsAuthorized) {
+  Meteor.call('currentUserCanViewApi', apiBackendId, (error, userIsAuthorized) => {
     if (userIsAuthorized) {
       route.render('viewApi');
       route.layout('masterLayout');
