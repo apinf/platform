@@ -65,6 +65,13 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
               { managerIds: userId },
             ],
           },
+          {
+            $and:
+            [// User has bookmarked and has view rights to API
+              { _id: { $in: bookmarkedApiIds } },
+              { authorizedUserIds: userId },
+            ],
+          },
         ],
       };
     } else {
