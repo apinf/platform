@@ -1,3 +1,4 @@
-const Monitoring = new Mongo.Collection('Monitoring');
+const MonitoringSettings = new Mongo.Collection('MonitoringSettings');
+const MonitoringData = new Mongo.Collection('MonitoringData');
 
-export { Monitoring };
+export { MonitoringSettings, MonitoringData };
