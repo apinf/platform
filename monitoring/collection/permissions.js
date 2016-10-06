@@ -1,6 +1,6 @@
 // APINF import
 import { Apis } from '/apis/collection';
-import { MonitoringSettings, MonitoringData } from './';
+import { MonitoringSettings } from './';
 
 MonitoringSettings.allow({
   insert (userId, data) {
@@ -9,10 +9,8 @@ MonitoringSettings.allow({
     // Get API document
     const api = Apis.findOne(data.apiId);
 
-    // Check if current user can edit API
-    if (api && api.currentUserCanEdit()) {
-      return true;
-    }
+    // Check if current user can insert the monitoring settings and return this value
+    return api && api.currentUserCanEdit();
   },
   update (userId, data) {
     // Only allow API Managers or Administrators to update
@@ -20,10 +18,8 @@ MonitoringSettings.allow({
     // Get API document
     const api = Apis.findOne(data.apiId);
 
-    // Check if current user can edit API
-    if (api && api.currentUserCanEdit()) {
-      return true;
-    }
+    // Check if current user can edit the monitoring settings and return this value
+    return api && api.currentUserCanEdit();
   },
   remove (userId, data) {
     // Only allow API Managers or Administrators to remove
@@ -31,9 +27,7 @@ MonitoringSettings.allow({
     // Get API document
     const api = Apis.findOne(data.apiId);
 
-    // Check if current user can edit API
-    if (api && api.currentUserCanEdit()) {
-      return true;
-    }
+    // Check if current user can delete the monitoring settings and return this value
+    return api && api.currentUserCanEdit();
   },
 });

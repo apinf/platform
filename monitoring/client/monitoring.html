@@ -16,18 +16,19 @@
       </h2>
     </div>
     <div class="panel-body">
-      {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings}}
+      {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
         <!-- hidden field, auto-value -->
         {{> afQuickField name='apiId' value=api._id type="hidden" }}
 
-        {{> afQuickField name='enabled'}}
+        {{> afQuickField name='enabled' }}
 
-        {{#if afFieldValueIs name='enabled' value=true}}
+        {{#if afFieldValueIs name='enabled' value=true }}
           <label for="endpoint-monitor-field">
-            {{ afFieldLabelText name='url'}} &nbsp;
+            {{ afFieldLabelText name='url' }}
+            &nbsp;
           </label>
           <div class="form-group">
-                {{> afFieldInput name='url'}}
+                {{> afFieldInput name='url' }}
           </div>
         {{/if}}
         <div class="form-group">

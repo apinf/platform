@@ -4,6 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // APINF import
 import { MonitoringSettings, MonitoringData } from './';
 
+// Describe collection for store data associate with monitoring settings
 MonitoringSettings.schema = new SimpleSchema({
   apiId: {
     type: String,
@@ -30,9 +31,10 @@ MonitoringSettings.schema = new SimpleSchema({
       }
       return validation;
     },
-  }
+  },
 });
 
+// Describe collection for store data form server
 MonitoringData.schema = new SimpleSchema({
   apiId: {
     type: String,

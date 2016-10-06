@@ -27,14 +27,13 @@ AutoForm.hooks({
           }
           // Success result
           return doc;
-        } else {
-          // Get success message translation
-          const message = TAPi18n.__('apiMonitoringForm_errorMessage');
-
-          // Alert the user of error
-          sAlert.error(message);
-          return false;
         }
+        // Get success message translation
+        const message = TAPi18n.__('apiMonitoringForm_errorMessage');
+
+        // Alert the user of error
+        sAlert.error(message);
+        return false;
       },
     },
     after: {
@@ -48,7 +47,7 @@ AutoForm.hooks({
 
           MonitoringData.insert({ apiId }, (error, id) => {
             // Linked both collections
-            MonitoringSettings.update(result, { $set: { data: id } })
+            MonitoringSettings.update(result, { $set: { data: id } });
           });
 
           // Link Monitoring collection with Apis collection
@@ -61,12 +60,11 @@ AutoForm.hooks({
     },
     onSuccess () {
       // Get update values
-      const updateFormValues = this.updateDoc ? this.updateDoc.$set : this.insertDoc ;
+      const updateFormValues = this.updateDoc ? this.updateDoc.$set : this.insertDoc;
 
       // If monitoring is enabled then get the API status immediately
       if (updateFormValues.enabled) {
         Meteor.call('getApiStatus', updateFormValues.apiId, updateFormValues.url);
-
       }
 
       // Get success message translation

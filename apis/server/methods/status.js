@@ -20,5 +20,5 @@ Meteor.methods({
       // Add the monitoring data in Collection
       MonitoringData.update({ apiId }, { $push: { responses: monitoringData } });
     });
-  }
+  },
 });
