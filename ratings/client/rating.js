@@ -1,6 +1,11 @@
+import { Meteor } from 'meteor/meteor';
+import $ from 'jquery';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { Template } from 'meteor/templating';
+
 // Collection imports
-import { ApiBackendRatings } from '../collection';
 import { Apis } from '/apis/collection';
+import { ApiBackendRatings } from '../collection';
 
 Template.apiBackendRating.created = function () {
   // Get reference to template instance
@@ -105,7 +110,7 @@ Template.apiBackendRating.events({
 });
 
 Template.apiBackendRating.helpers({
-  'userRatingClass': function () {
+  userRatingClass () {
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -130,7 +135,7 @@ Template.apiBackendRating.helpers({
       }
     }
   },
-  'ratingCount': function () {
+  ratingCount () {
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -148,7 +153,7 @@ Template.apiBackendRating.helpers({
       return apiBackendRatingsCount;
     }
   },
-  'userHasRating': function () {
+  userHasRating () {
     // Get reference to template instance
     const instance = Template.instance();
 

@@ -22,31 +22,34 @@
             {{/ if }}
             <div>
               <i>
-                {{_ "catalogueTable_addedBy"}}
+                {{_ "catalogueTable_addedBy" }}
                 {{ api.getApiManagersByName }}
               </i>
               <br>
               <i>
-                {{_ "catalogueTable_added"}}
+                {{_ "catalogueTable_added" }}
                 {{ api.relativeCreatedAt }}
               </i>
             </div>
           </td>
+          <td class="col-sm-1" style="vertical-align:middle">
+            {{> apiBackendRating api }}
+          </td>
           <td class="col-sm-1 text-center">
             {{# if currentUser }}
             <span class="api-card-bookmark">
-              {{> favourite api=api catalogueView=true }}
+              {{> bookmark api=api catalogueView=true }}
             </span>
-            {{else}}
+            {{ else }}
             <span class="api-card-bookmark">
-              <i class="fa fa-star bookmark-default"></i>
+              <i class="fa fa-bookmark bookmark-default"></i>
               {{ api.bookmarkCount }}
             </span>
-            {{/if}}
+            {{ /if }}
           </td>
         </tr>
         {{/ if }}
-        {{/each}}
+        {{/ each }}
       </tbody>
     </table>
   </div>

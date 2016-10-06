@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import { Apis } from '/apis/collection';
 import { ApiBackendRatings } from '/ratings/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder

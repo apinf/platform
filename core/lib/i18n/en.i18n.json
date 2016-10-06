@@ -131,6 +131,8 @@
   "branding_update": "Update",
   "branding_save": "Save",
   "branding_panel_title": "Project Branding",
+  "bookmark_buttonText_bookmark": "Bookmark",
+  "bookmark_buttonText_unbookmark": "Unbookmark",
   "catalogue_bookmarkTooltip_nonUser": "Number of bookmarks. Sign in to bookmark.",
   "catalogue_BookmarkTooltip_user": "Bookmark API",
   "catalogue_paginationButtons_next": "Next",
