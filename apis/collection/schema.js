@@ -30,7 +30,7 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  status_code: {
+  latestMonitoringStatusCode: {
     type: String
   },
   apiLogoFileId: {

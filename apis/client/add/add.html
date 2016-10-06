@@ -2,7 +2,7 @@
   <div class="container">
     {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
       <!--invisible auto-value field-->
-      {{> afQuickField name='status_code' value="-1" type="hidden"}}
+      {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
       <fieldset>
         <legend>Add an API</legend>
         {{> afQuickField name='name' }}
