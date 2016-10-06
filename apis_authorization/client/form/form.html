@@ -1,4 +1,7 @@
 <template name="apiUserAuthorizationForm">
   <p>Enter authorized users...</p>
-  {{> quickForm schema=emailSchema id="authorizedUserForm" }}
+  {{# autoForm schema=emailSchema id="authorizedUserForm" }}
+    {{> afQuickField name='email'}}
+    {{> afQuickField name='apiId'}}
+  {{/ autoForm }}
 </template>
