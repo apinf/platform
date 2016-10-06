@@ -45,4 +45,9 @@ Router.map(function() {
     layoutTemplate: "masterLayout",
     render: "notAuthorized"
   });
+  this.route("forbidden", {
+    path: "/forbidden",
+    layoutTemplate: "masterLayout",
+    render: "forbidden"
+  });
 });
