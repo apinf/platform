@@ -49,7 +49,5 @@ Meteor.methods({
 
     // Update the API Backend bookmark count
     Apis.update(apiBackend, { $set: { bookmarkCount } });
-
-    return apiIds;
   },
 });
