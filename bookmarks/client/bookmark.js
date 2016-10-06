@@ -12,7 +12,7 @@ Template.bookmark.created = function () {
 };
 
 Template.bookmark.events({
-  'click .bookmark': () => {
+  'click .bookmark': function () {
     // Get api backend Id from the context
     const apiId = (this.api) ? this.api._id : this._id;
 
