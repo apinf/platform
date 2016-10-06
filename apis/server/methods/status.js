@@ -1,47 +1,24 @@
+// APINF import
+import { MonitoringData } from '/monitoring/collection';
+import { Apis } from '/apis/collection';
+
 Meteor.methods({
-  'getApiStatus': function (uri) {
-    this.unblock();
+  getApiStatus (apiId, url) {
+    // Call HTTP request
+    Meteor.http.get(url, {}, (error, result) => {
+      // Set status code
+      const serverStatusCode = result ? result.statusCode : 404;
 
-    // Init empty status object
-    const status = {
-      code: 0,
-      errorMessage: '',
-      responseContext: {},
-    };
+      // Create a monitoring data
+      const monitoringData = {
+        date: new Date(),
+      };
 
-    // Try-catch wrapper
-    // Because if requested host is not available, error is thrown
-    try {
-      // response object from GET request to api host
-      const result = Meteor.http.call('GET', uri);
+      // Update an api status
+      Apis.update(apiId, { $set: { latestMonitoringStatusCode: serverStatusCode } });
 
-      // Check result is received
-      if (result) {
-        // Get response status code
-        status.code = result.statusCode;
-
-        // Keep response object
-        status.responseContext = result;
-      }
-
-      return status;
-    } catch (error) {
-      // Got a network error, time-out or HTTP error in the 400 or 500 range.
-
-      // Check if "ECONNREFUSED" is reveived
-      if (!error.response && error.code === 'ECONNREFUSED') {
-        // Provide 404 error
-        status.code = 404;
-      } else {
-        // Keep response error code
-        // TODO: make sure this 'else' statement handles all other cases
-        // e.g. error.response or error.response.statusCode may not exist
-        status.code = error.response.statusCode;
-      }
-
-      // Keep reponse error message
-      status.errorMessage = error;
-
-      return status;
-    }
-  } });
+      // Add the monitoring data in Collection
+      MonitoringData.update({ apiId }, { $push: { responses: monitoringData } });
+    });
+  }
+});
