@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
 // APINF import
-import { Monitoring } from '/monitoring/collection';
+import { MonitoringSettings } from '/monitoring/collection';
 import { Apis } from '/apis/collection';
 
 // NPM packages import
@@ -12,14 +12,13 @@ import _ from 'lodash';
 Meteor.methods({
   startCron (apiId, url) {
     // Create unique name for Cron job
-    const uniqueName = 'Monitoring: ' + apiId;
+    const uniqueName = `Monitoring: ${apiId}`;
 
     // Set time of the monitoring call
     const cronTime = 'every 1 hour';
 
     // Update api status to 'Loading...'
-    Apis.update(apiId, { $set: { status_code: 0 } });
-
+    Apis.update(apiId, { $set: { latestMonitoringStatusCode: 0 } });
 
     // Create cron working
     SyncedCron.add({
@@ -29,43 +28,29 @@ Meteor.methods({
         return parser.text(cronTime);
       },
       job () {
-        // Call HTTP request
-        Meteor.http.get(url, {}, (error, result) => {
-          // Set status code
-          const serverStatusCode = result ? result.statusCode : 500;
-
-          // Create a monitoring data
-          const monitoringData = {
-            date: new Date(),
-            status_code: serverStatusCode,
-          };
-
-          // Update an api status
-          Apis.update({ _id: apiId }, { $set: { status_code: serverStatusCode } });
-
-          // Add the monitoring data in Collection
-          Monitoring.update({ apiId }, { $push: { requests: monitoringData } });
-        });
+        // Get API status using http request
+        Meteor.call('getApiStatus', apiId, url);
       },
     });
   },
   stopCron (apiId) {
     // Create unique name for Cron job
-    const uniqueName = 'Monitoring: ' + apiId;
+    const uniqueName = `Monitoring: ${apiId}`;
 
     // Stop Cron job
     SyncedCron.remove(uniqueName);
 
     // Update an api status
-    Apis.update({ _id: apiId }, { $set: { status_code: -1 } });
+    Apis.update(apiId, { $set: { latestMonitoringStatusCode: -1 } });
   },
   restartCron () {
     // Get all apis which are added in monitoring
-    const monitoring = Monitoring.find().fetch();
+    const monitoringEnabled = MonitoringSettings.find().fetch();
 
-    _.forEach(monitoring, (data) => {
+    _.forEach(monitoringEnabled, (data) => {
       // If enabled is true then switch the monitoring
       if (data.enabled) {
+        Meteor.call('getApiStatus', data.apiId, data.url);
         Meteor.call('startCron', data.apiId, data.url);
       }
     });
