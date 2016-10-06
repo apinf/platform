@@ -4,7 +4,7 @@ AutoForm.hooks({
   authorizedUserForm: {
     onSubmit (submission) {
       // Get email address from form submission
-      const email = submission.emailAddress;
+      const email = submission.email;
 
       // Get reference to API ID
       const apiId = submission.apiId;
