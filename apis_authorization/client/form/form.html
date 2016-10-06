@@ -3,5 +3,9 @@
   {{# autoForm schema=emailSchema id="authorizedUserForm" }}
     {{> afQuickField name='email' }}
     {{> afQuickField name='apiId' value=apiId type="hidden" }}
+
+    <button type="submit" class="btn btn-primary">
+      Add
+    </button>
   {{/ autoForm }}
 </template>
