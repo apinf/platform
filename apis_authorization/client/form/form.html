@@ -1,8 +1,12 @@
 <template name="apiUserAuthorizationForm">
-  <p>Enter authorized users...</p>
   {{# autoForm schema=emailSchema id="authorizedUserForm" }}
-    {{> afQuickField name='email' }}
-    {{> afQuickField name='apiId' value=apiId type="hidden" }}
+  <fieldset>
+      <legend>
+        Manage authorized users
+      </legend>
+      {{> afQuickField name='email' }}
+      {{> afQuickField name='apiId' value=apiId type="hidden" }}
+    </fieldset>
 
     <button type="submit" class="btn btn-primary">
       Add
