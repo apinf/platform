@@ -44,36 +44,42 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
     // Get user bookmarks
     const userBookmarks = ApiBookmarks.findOne({ userId });
 
-    // Get bookmarked API IDs
+    // Check userBookmarks exist
     if (userBookmarks) {
+      // Get bookmarkedApiIds
       const bookmarkedApiIds = userBookmarks.apiIds;
-
-      // Set up query object to contain bookmarked API IDs which are public
-      selector = {
-        $or: [
-          {
-            $and:
-            [// User has bookmarked and API is public
+      // Check if userIsAdmin
+      if (userIsAdmin) {
+        // Show bookmarked APIs (regardless of visibility status)
+        selector = { _id: { $in: bookmarkedApiIds } };
+      } else {
+        // Set up query object to contain bookmarked API IDs which are public
+        selector = {
+          $or: [
+            {
+              $and:
+              [// User has bookmarked and API is public
+                  { _id: { $in: bookmarkedApiIds } },
+                  { visibility: 'public' },
+              ],
+            },
+            {
+              $and:
+              [// User has bookmarked and is manager (regardless of public status)
                 { _id: { $in: bookmarkedApiIds } },
-                { visibility: 'public' },
-            ],
-          },
-          {
-            $and:
-            [// User has bookmarked and is manager (regardless of public status)
-              { _id: { $in: bookmarkedApiIds } },
-              { managerIds: userId },
-            ],
-          },
-          {
-            $and:
-            [// User has bookmarked and has view rights to API
-              { _id: { $in: bookmarkedApiIds } },
-              { authorizedUserIds: userId },
-            ],
-          },
-        ],
-      };
+                { managerIds: userId },
+              ],
+            },
+            {
+              $and:
+              [// User has bookmarked and has view rights to API
+                { _id: { $in: bookmarkedApiIds } },
+                { authorizedUserIds: userId },
+              ],
+            },
+          ],
+        };
+      }
     } else {
       // If user has no bookmarks, don't return any results
       return [];
