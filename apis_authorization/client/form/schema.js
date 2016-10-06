@@ -1,7 +1,11 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const emailSchema = new SimpleSchema({
-  emailAddress: {
+  apiId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+  },
+  email: {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
   },
