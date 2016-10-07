@@ -1,4 +1,5 @@
-
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Template } from 'meteor/templating';
 import { ApiBacklogItems } from '../../collection';
 
 Template.deleteBacklogItem.events({
@@ -10,6 +11,6 @@ Template.deleteBacklogItem.events({
     ApiBacklogItems.remove(backlogItemId);
 
     // Close the modal
-    Modal.hide("deleteBacklogItem");
-  }
+    Modal.hide('deleteBacklogItem');
+  },
 });
