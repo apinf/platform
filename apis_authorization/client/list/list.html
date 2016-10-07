@@ -2,7 +2,9 @@
   <p>Authorized users list</p>
   <ul>
     {{# each user in authorizedUsers }}
-      <li>{{ user.username }}</li>
+      <li>
+        {{ user.username }} ({{ user.email }})
+      </li>
     {{/ each }}
   </ul>
 </template>
