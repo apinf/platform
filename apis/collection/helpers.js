@@ -154,8 +154,4 @@ Apis.helpers({
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
   },
-  isPrivate () {
-    // Return true if API is not public
-    return this.visibility !== 'public';
-  },
 });

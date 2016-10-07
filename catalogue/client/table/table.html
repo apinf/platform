@@ -17,9 +17,9 @@
                 {{ api.name }}
               </a>
             </h4>
-            {{#if api.isPrivate }}
+            {{#unless api.isPublic }}
               <span class="label label-default label-align">private</span>
-            {{/ if }}
+            {{/ unless }}
             <div>
               <i>
                 {{_ "catalogueTable_addedBy" }}
