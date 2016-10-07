@@ -16,6 +16,7 @@ Meteor.methods({
     // placeholder for return value
     let emailIsRegistered;
 
+    // If user is found, then email is registered
     if (user) {
       emailIsRegistered = true;
     } else {
