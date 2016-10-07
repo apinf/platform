@@ -123,6 +123,7 @@
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
   "apiProxy_headerText": "Proxy backend configuration",
   "apiUserAuthorizationForm_addButton_text": "Add authorized user",
+  "apiUserAuthorizationForm_header_text": "Add authorized users",
   "backlogItem_addedByYou": "Added by you",
   "backlogItem_editButton_text": "Edit",
   "backlogItem_deleteButton_text": "Delete",

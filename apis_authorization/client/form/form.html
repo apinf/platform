@@ -1,18 +1,18 @@
 <template name="apiUserAuthorizationForm">
+  <h4>
+    {{_ 'apiUserAuthorizationForm_header_text' }}
+  </h4>
   {{# autoForm
     schema=emailSchema
     id="authorizedUserForm"
     class="form-inline" }}
-  <fieldset>
-      <legend>
-        Add authorized users
-      </legend>
+    <fieldset>
       {{> afQuickField name='email' }}
       {{> afQuickField name='apiId' value=apiId type="hidden" }}
     </fieldset>
 
     <button type="submit" class="btn btn-primary">
-      Add
+      {{_ 'apiUserAuthorizationForm_addButton_text' }}
       <i class="fa fa-user" aria-hidden="true"></i>
     </button>
   {{/ autoForm }}
