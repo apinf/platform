@@ -1,63 +1,9 @@
 <template name="apiSettings">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        {{_ "apiSettings_panelTitleAbout" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      <h3>
-        {{_ "apiSettings_uploadLogo_heading" }}
-      </h3>
-      <p>
-        {{_ "apiSettings_uploadLogoText" }}
-      </p>
-      {{> uploadApiLogo api=api }}
-      <hr class="panel-hr" />
-      {{# autoForm
-        collection=formCollection
-        doc=api
-        id="apiBackendForm"
-        type="update" }}
-      {{> afQuickField name='name' }}
-      {{> afQuickField name='description' }}
-      {{> afQuickField name='url' }}
-      <div id="form-buttons">
-        <button type="submit" class="btn btn-success" id="save-settings">
-          {{_ "viewApiSettigs_saveButton_text" }}
-        </button>
-      </div>
-      {{/ autoForm }}
-    </div>
-  </div>
-  {{> apiMonitoring api=api}}
-  <div class="panel panel-danger">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        {{_ "apiSettings_panelTitleManage" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      <h3>
-        {{_ "apiSettings_visibility_heading" }}
-      </h3>
-      <p>
-        {{_ "apiSettings_visibility_text" }}
-      </p>
-      {{> visibilityToggle api=api }}
-      <hr class="panel-hr" />
-      <h3>
-        {{_ "apiSettings_deleteApiTitle" }}
-      </h3>
-      <p>
-        {{_ "apiSettings_deleteApiText" }}
-      </p>
-      <a
-         href="#"
-         class="btn btn-danger"
-         id="delete-api">
-        {{_ "apiDetails_deleteButton" }}
-      </a>
-    </div>
-  </div>
+  {{> apiSettings_details api=api }}
+
+  {{> apiSettings_visibility api=api }}
+
+  {{> apiMonitoring api=api }}
+  
+  {{> apiSettings_delete api=api }}
 </template>

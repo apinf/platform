@@ -1,0 +1,35 @@
+<template name="apiSettings_details">
+  <!-- Details panel -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <i class="fa fa-info-circle" aria-hidden="true"></i>
+        {{_ "apiSettings_detailsPanel_title" }}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <h3>
+        {{_ "apiSettings_uploadLogo_heading" }}
+      </h3>
+      <p>
+        {{_ "apiSettings_uploadLogoText" }}
+      </p>
+      {{> uploadApiLogo api=api }}
+      <hr class="panel-hr" />
+      {{# autoForm
+        collection=apisCollection
+        doc=api
+        id="apiBackendForm"
+        type="update" }}
+      {{> afQuickField name='name' }}
+      {{> afQuickField name='description' }}
+      {{> afQuickField name='url' }}
+      <div id="form-buttons">
+        <button type="submit" class="btn btn-success" id="save-settings">
+          {{_ "viewApiSettigs_saveButton_text" }}
+        </button>
+      </div>
+      {{/ autoForm }}
+    </div>
+  </div>
+</template>

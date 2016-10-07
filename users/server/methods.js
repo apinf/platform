@@ -1,3 +1,4 @@
+import { Accounts } from 'meteor/accounts-base';
 import { Settings } from '/settings/collection';
 
 Meteor.methods({
@@ -7,6 +8,22 @@ Meteor.methods({
         _id: this.userId,
       });
     }
+  },
+  checkIfEmailIsRegistered (email) {
+    // Get any user with matching email
+    const user = Accounts.findUserByEmail(email);
+
+    // placeholder for return value
+    let emailIsRegistered;
+
+    // If user is found, then email is registered
+    if (user) {
+      emailIsRegistered = true;
+    } else {
+      emailIsRegistered = false;
+    }
+
+    return emailIsRegistered;
   },
   countUsers () {
     // Get all users
