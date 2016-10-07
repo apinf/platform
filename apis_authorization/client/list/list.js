@@ -17,6 +17,7 @@ Template.apiAuthorizedUsersList.helpers({
       return {
         username: user.username,
         email: user.emails[0].address,
+        _id: user._id,
       };
     });
 
@@ -25,11 +26,14 @@ Template.apiAuthorizedUsersList.helpers({
 });
 
 Template.apiAuthorizedUsersList.events({
-  'click .remove-authorized-user': function () {
+  'click .remove-authorized-user': function (event, templateInstance) {
+    // Get API object from parent templateInstance
+    const api = templateInstance.data.api;
+
     // Get user document from instance data context
     const user = this;
 
     // Show the confirmation dialogue, passing in user document
-    Modal.show('apiRemoveAuthorizedUser', { user });
+    Modal.show('apiRemoveAuthorizedUser', { user, api });
   }
 });
