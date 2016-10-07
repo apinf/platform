@@ -7,11 +7,11 @@
           <div class="api-card-logo">
             {{> viewApiLogo api=api }}
           </div>
-          {{> viewApiStatus api=api width="0.6" }}
           <div class="api-card-info">
             <a href="/api/{{ api._id }}"
                class="api-card-name">
               {{ api.name }}
+              {{> viewApiStatus api=api width="0.6" }}
             </a>
             <span class="api-card-author">
               {{_ "catalogueGrid_addedBy" }}
