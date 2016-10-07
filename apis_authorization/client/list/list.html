@@ -4,10 +4,10 @@
   </h3>
 
   <ul class="list-group">
-    {{# each user in authorizedUsers }}
+    {{# each authorizedUsers }}
       <li class="list-group-item">
         <i class="fa fa-user" aria-hidden="true"></i>
-        {{ user.username }} ({{ user.email }})
+        {{ username }} ({{ email }})
         <button class="remove-authorized-user btn btn-danger btn-xs pull-right">
           <i class="fa fa-times" aria-hidden="true"></i>
         </button>
