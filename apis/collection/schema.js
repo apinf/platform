@@ -30,6 +30,9 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  latestMonitoringStatusCode: {
+    type: String
+  },
   apiLogoFileId: {
     type: String,
     optional: true,
@@ -38,6 +41,10 @@ Apis.schema = new SimpleSchema({
     type: [String],
     optional: true,
     defaultValue: [], // Default to empty array, for addAuthorizedUser method
+  },
+  monitoringId: {
+    type: String,
+    optional: true
   },
   documentation_link: {
     type: String,

@@ -1,9 +1,9 @@
 <template name="viewApiStatus" >
   <div
-    class="api-status-indicator-{{ api._id }} api-status-color"
+    class="{{ classList }}"
     data-toggle="tooltip"
     data-placement="top"
-    title="Loading.."
-    style="height:{{ width }}em; width:{{ width }}em;"
-    ></div>
+    data-original-title="{{ originalTitle }}"
+    style="height:{{width}}em; width:{{width}}em;">
+  </div>
 </template>

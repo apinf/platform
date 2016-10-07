@@ -64,6 +64,9 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">
               {{_ "manageApiDocumentationModal_CreateDocumentation_CancelButton" }}
             </button>
+            {{# if spinnerEnabled }}
+              {{> spinner }}
+            {{/ if }}
           {{/ autoForm }}
         </div>
       </div>

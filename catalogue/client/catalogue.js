@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Apis } from '/apis/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 
 import _ from 'lodash';
 
