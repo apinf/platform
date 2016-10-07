@@ -21,6 +21,6 @@ Meteor.publish('apiAuthorizedUsersPublicDetails', function (apiId) {
 
   // Return all authorized user documents
   return Meteor.users.find({_id: {$in: api.authorizedUserIds } },
-    { fields: { username: 1, emails: 1 } }
+    { fields: { username: 1, emails: 1, _id: 1 } }
   );
 });
