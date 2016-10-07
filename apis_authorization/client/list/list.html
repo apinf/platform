@@ -1,0 +1,8 @@
+<template name="apiAuthorizedUsersList">
+  <p>Authorized users list</p>
+  <ul>
+    {{# each user in authorizedUsers }}
+      <li>{{ user.username }}</li>
+    {{/ each }}
+  </ul>
+</template>
