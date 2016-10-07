@@ -1,3 +1,5 @@
-Template.apiRemoveAuthorizedUser.onRendered(function () {
-  console.log(this.data);
+Template.apiRemoveAuthorizedUser.events({
+  'click #confirm-remove' () {
+    
+  }
 });
