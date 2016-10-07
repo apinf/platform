@@ -25,9 +25,9 @@ Template.apiAuthorizedUsersList.helpers({
 });
 
 Template.apiAuthorizedUsersList.events({
-  'click .remove-authorized-user': function (event, templateInstance) {
+  'click .remove-authorized-user': function () {
     // Get user document from instance data context
-    const user = templateInstance.data;
+    const user = this;
 
     // Show the confirmation dialogue, passing in user document
     Modal.show('apiRemoveAuthorizedUser', { user });
