@@ -1,4 +1,5 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   authorizedUserForm: {
@@ -16,13 +17,16 @@ AutoForm.hooks({
       Meteor.call('checkIfEmailIsRegistered', email, function (error, emailIsRegistered) {
         if (emailIsRegistered) {
           // Add user to API authorized users list
-          Meteor.call('addAuthorizedUserByEmail', apiId, email, function (error, response) {
+          Meteor.call('addAuthorizedUserByEmail', apiId, email, function (error, result) {
             if (!error) {
               // Continue with form submission
               form.done();
             }
           });
         } else {
+          // Warn manager that user email is not registered
+          sAlert.warning('Email address not currently registered.');
+
           // throw an error
           form.done(new Error('email-not-registered'));
         }
