@@ -1,4 +1,5 @@
 <template name="apiSettings">
+  <!-- About panel -->
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
@@ -30,10 +31,12 @@
       {{/ autoForm }}
     </div>
   </div>
-  <div class="panel panel-danger">
+
+  <!-- Visibility panel -->
+  <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
-        {{_ "apiSettings_deletePanel_title" }}
+        {{_ "apiSettings_visibilityPanel_title" }}
       </h2>
     </div>
     <div class="panel-body">
@@ -51,7 +54,17 @@
       {{> apiAuthorizedUsersList api=api }}
 
       {{> apiUserAuthorizationForm api=api }}
-      <hr class="panel-hr" />
+    </div>
+  </div>
+
+  <!-- Delete panel -->
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        {{_ "apiSettings_deletePanel_title" }}
+      </h2>
+    </div>
+    <div class="panel-body">
       <h3>
         {{_ "apiSettings_deleteApiTitle" }}
       </h3>
