@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
-import { Apis } from '/apis/collection';
 
-Template.apiSettings.events({
+Template.apiSettings_delete.events({
   // event handler to execute when delete API button is clicked
   'click #delete-api': function () {
     const api = this.api;
@@ -9,11 +8,5 @@ Template.apiSettings.events({
     This is needed so that the API name can be shown in the dialog,
     as well for other information needed for API removal, such as ID*/
     Modal.show('deleteApiConfirmation', { api });
-  },
-});
-
-Template.apiSettings.helpers({
-  formCollection () {
-    return Apis;
   },
 });
