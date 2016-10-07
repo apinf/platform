@@ -15,8 +15,6 @@ AutoForm.hooks({
       // Check if the email address is linked to a registered user
       Meteor.call('checkIfEmailIsRegistered', email, function (error, emailIsRegistered) {
         if (emailIsRegistered) {
-          console.log('email is registered')
-
           // Add user to API authorized users list
           Meteor.call('addAuthorizedUserByEmail', apiId, email, function (error, response) {
             if (!error) {
