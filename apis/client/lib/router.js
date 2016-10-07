@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { Router } from 'meteor/iron:router';
+
 Router.route('/api/new', function () {
   this.render('addApi');
   this.layout('masterLayout');
@@ -19,13 +22,13 @@ Router.route('/api/:_id/', function () {
   // Get current API Backend ID
   const apiBackendId = Router.current().params._id;
 
-  // Ensure current user is authorized to view backend
-  Meteor.call('currentUserCanViewApi', apiBackendId, function (error, userIsAuthorized) {
-    if (userIsAuthorized) {
+  // Ensure current user has permissions to view backend
+  Meteor.call('currentUserCanViewApi', apiBackendId, (error, userIsAllowedToViewApi) => {
+    if (userIsAllowedToViewApi) {
       route.render('viewApi');
       route.layout('masterLayout');
     } else {
-      Router.go('notAuthorized');
+      Router.go('forbidden');
     }
   });
 }, {
