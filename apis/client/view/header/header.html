@@ -8,6 +8,9 @@
           {{ api.name }}
           {{> viewApiStatus api=api width="0.4" }}
         </h1>
+        {{#unless api.isPublic }}
+          <span class="label label-default label-align">private</span>
+        {{/ unless }}
         <ul class="list-inline view-api-meta-details">
           <li>
             <i class="fa fa-user"></i>
@@ -109,7 +112,7 @@
             {{/ if }}
           {{/ if }}
         </ul>
-        {{# if api.currentUserCanEdit }}
+        {{# if api.currentUserCanView }}
           {{> apiIntro }}
         {{/ if }}
       </div>
