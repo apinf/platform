@@ -24,8 +24,11 @@ AutoForm.hooks({
             }
           });
         } else {
+          // Get 'email not registered' error message translation
+          const message = TAPi18n.__('authorizedUserForm_emailNotRegistered_errorText');
+
           // Warn manager that user email is not registered
-          sAlert.warning('Email address not currently registered.');
+          sAlert.warning(message);
 
           // throw an error
           form.done(new Error('email-not-registered'));
@@ -33,10 +36,15 @@ AutoForm.hooks({
       });
     },
     onSuccess () {
-      sAlert.success('Added user to Authorized Users list');
+      // Get success message translation
+      const message = TAPi18n.__('authorizedUserForm_success_message');
+
+      // Alert user of success
+      sAlert.success(message);
     },
     onError (error) {
       // do something with the error
+      console.log(error);
     }
   },
 });
