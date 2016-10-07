@@ -19,7 +19,17 @@ Template.apiAuthorizedUsersList.helpers({
         email: user.emails[0].address,
       };
     });
-    
+
     return authorizedUsers;
   },
+});
+
+Template.apiAuthorizedUsersList.events({
+  'click .remove-authorized-user': function (event, templateInstance) {
+    // Get user document from instance data context
+    const user = templateInstance.data;
+
+    // Show the confirmation dialogue, passing in user document
+    Modal.show('apiRemoveAuthorizedUser', { user });
+  }
 });
