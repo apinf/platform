@@ -37,6 +37,7 @@ Apis.schema = new SimpleSchema({
   authorizedUserIds: {
     type: [String],
     optional: true,
+    defaultValue: [], // Default to empty array, for addAuthorizedUser method
   },
   documentation_link: {
     type: String,
