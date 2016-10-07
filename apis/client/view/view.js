@@ -29,6 +29,9 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to public proxy details for proxy form
   instance.subscribe('publicProxyDetails');
+
+  // Subscribe to authorized user public details
+  instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
 });
 
 Template.viewApi.helpers({
