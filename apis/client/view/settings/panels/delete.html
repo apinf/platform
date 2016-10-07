@@ -1,0 +1,25 @@
+<template name="apiSettings_deletePanel">
+  <!-- Delete panel -->
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        {{_ "apiSettings_deletePanel_title" }}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <h3>
+        {{_ "apiSettings_deleteApiTitle" }}
+      </h3>
+      <p>
+        {{_ "apiSettings_deleteApiText" }}
+      </p>
+      <a
+         href="#"
+         class="btn btn-danger"
+         id="delete-api">
+        {{_ "apiDetails_deleteButton" }}
+      </a>
+    </div>
+  </div>
+</template>
