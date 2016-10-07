@@ -1,8 +1,12 @@
 <template name="apiAuthorizedUsersList">
-  <p>Authorized users list</p>
-  <ul>
+  <h3>
+    Authorized users
+  </h3>
+
+  <ul class="list-group">
     {{# each user in authorizedUsers }}
-      <li>
+      <li class="list-group-item">
+        <i class="fa fa-user" aria-hidden="true"></i>
         {{ user.username }} ({{ user.email }})
       </li>
     {{/ each }}
