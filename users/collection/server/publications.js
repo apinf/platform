@@ -1,13 +1,26 @@
-Meteor.publish('allUsers', function() {
-  return Meteor.users.find({}, {fields: {"username": 1} });
+import { Meteor } from 'meteor/meteor';
+import { Apis } from '/apis/collection';
+
+Meteor.publish('allUsers', function () {
+  return Meteor.users.find({}, { fields: { username: 1 } });
 });
 
-Meteor.publishComposite('user', function() {
+Meteor.publishComposite('user', function () {
   return {
-    find: function() {
+    find () {
       return Meteor.users.find({
-        _id: this.userId
+        _id: this.userId,
       });
-    }
+    },
   };
+});
+
+Meteor.publish('apiAuthorizedUsersPublicDetails', function (apiId) {
+  // Get API document
+  const api = Apis.findOne(apiId);
+
+  // Return all authorized user documents
+  return Meteor.users.find({_id: {$in: api.authorizedUserIds } },
+    { fields: { username: 1, emails: 1 } }
+  );
 });
