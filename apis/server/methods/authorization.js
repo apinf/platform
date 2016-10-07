@@ -7,9 +7,16 @@ Meteor.methods({
     // Get user with matching email
     const user = Accounts.findUserByEmail(email);
 
-    // TODO: check whether user is already in list before adding
+    // Get API document
+    const api = Apis.findOne(apiId);
 
-    // Add user ID to API authorized user IDs field
-    Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
+    // Check if user is already authorized
+    const userAlreadyAuthorized = api.authorizedUserIds.includes(user._id);
+
+    // Check if the user is already authorized
+    if (!userAlreadyAuthorized) {
+      // Add user ID to API authorized user IDs field
+      Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
+    }
   },
 });
