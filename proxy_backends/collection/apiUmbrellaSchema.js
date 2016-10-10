@@ -93,6 +93,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'url_matches.$.frontend_prefix': {
     type: String,
     optional: true,
+    unique: true,
     label: 'Proxy base path',
     regEx: proxyBasePathRegEx,
   },
