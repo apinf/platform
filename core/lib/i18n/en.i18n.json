@@ -434,7 +434,7 @@
           "label": "Enabled API Monitoring"
         },
         "url": {
-          "label": "Endpoint to Monitor",
+          "label": "Endpoint to Monitor"
         }
       },
       "settings": {
