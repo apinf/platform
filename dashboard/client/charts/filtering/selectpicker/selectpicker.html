@@ -8,33 +8,30 @@
     data-live-search="true"
     data-size="10"
     data-actions-box="true" >
+    <!-- User APIs -->
     {{# if apisManagedByUser }}
       <optgroup label="My APIs" >
         {{# each api in apisManagedByUser }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{> viewApiStatus apiBackend=api width="0.5" }}
+            {{> viewApiStatus api=api width="0.5" }}
             &nbsp;
             {{ api.name }}
           </option>
         {{/ each }}
       </optgroup>
+    {{/ if }}
+
+    <!-- other APIs -->
+    {{# if otherApis }}
       <optgroup label="Other APIs" >
         {{# each api in otherApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{> viewApiStatus apiBackend=api width="0.5" }}
+            {{> viewApiStatus api=api width="0.5" }}
             &nbsp;
             {{ api.name }}
           </option>
         {{/ each }}
       </optgroup>
-    {{ else }}
-      {{# each api in otherApis }}
-        <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-          {{> viewApiStatus apiBackend=api width="0.5" }}
-          &nbsp;
-          {{ api.name }}
-        </option>
-      {{/ each }}
     {{/ if }}
   </select>
 </template>
