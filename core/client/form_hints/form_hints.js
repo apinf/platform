@@ -34,12 +34,6 @@ const formHints = {
       placement: 'left',
     },
   },
-  apiSettings_visibility_authorizedUsers: {
-    message: TAPi18n.__('apiSettings_visibility_authorizedUsers'),
-    options: {
-      placement: 'left',
-    },
-  },
 };
 
 InlineHelp.initHelp(formHints);
