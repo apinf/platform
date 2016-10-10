@@ -10,27 +10,13 @@ import { ProxyBackends } from '/proxy_backends/collection';
 import _ from 'lodash';
 
 Meteor.publish('apiProxySettings', function (apiId) {
-  // TODO: determine how to use 'api.userCanEdit()' helper
-  // which uses 'Meteor.userId()' instead of 'this.userId'
-
   // Get current userId
   const userId = this.userId;
 
   // Check that user is logged in
   if (userId) {
-    // Get API document
-    const api = Apis.findOne(apiId);
-
-    // Check if user is API manager
-    const userIsManager = _.includes(api.managerIds, userId);
-
-    // Check if user is administrator
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-    // Check if user is authorized to access API proxy settings
-    if (userIsManager || userIsAdmin) {
-      return ProxyBackends.find({ apiId });
-    }
+    // Return APIs proxy settings
+    return ProxyBackends.find({ apiId });
   }
 
   // Complete publication execution
@@ -38,7 +24,6 @@ Meteor.publish('apiProxySettings', function (apiId) {
 });
 
 Meteor.publish('proxyApis', function () {
-
   // TODO: pass proxy Id to this publication ?
 
   // Placeholder for proxy backends

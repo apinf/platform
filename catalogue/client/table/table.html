@@ -17,15 +17,20 @@
                 {{ api.name }}
               </a>
             </h4>
-            <i>
-              {{_ "catalogueTable_addedBy" }}
-              {{ api.getApiManagersByName }}
-            </i>
-            <br>
-            <i>
-              {{_ "catalogueTable_added" }}
-              {{ api.relativeCreatedAt }}
-            </i>
+            {{# unless api.isPublic }}
+              <span class="label label-default label-align">private</span>
+            {{/ unless }}
+            <div>
+              <i>
+                {{_ "catalogueTable_addedBy" }}
+                {{ api.getApiManagersByName }}
+              </i>
+              <br>
+              <i>
+                {{_ "catalogueTable_added" }}
+                {{ api.relativeCreatedAt }}
+              </i>
+            </div>
           </td>
           <td class="col-sm-1" style="vertical-align:middle">
             {{> apiBackendRating api }}

@@ -20,11 +20,14 @@ Apis.helpers({
       // Check if user is manager of this API
       const userIsManager = _.includes(this.managerIds, userId);
 
+      // Check if user has external access
+      const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
+
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
       // if user is manager or administrator, they can edit
-      if (userIsManager || userIsAdmin) {
+      if (userIsManager || userIsAuthorized || userIsAdmin) {
         return true;
       }
     }
