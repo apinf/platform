@@ -62,6 +62,7 @@ Meteor.methods({
         isPublic: apiBackend.isPublic,
         submit_methods: [],
         averageRating: 0,
+        latestMonitoringStatusCode: '-1',
       };
 
       // Insert migrated api, get Id
