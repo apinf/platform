@@ -8,33 +8,30 @@
     data-live-search="true"
     data-size="10"
     data-actions-box="true" >
-    {{# if apisManagedByUser }}
-      <optgroup label="My APIs" >
-        {{# each api in apisManagedByUser }}
+    <!-- User APIs -->
+    {{# if userApis }}
+      <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
+        {{# each api in userApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{> viewApiStatus apiBackend=api width="0.5" }}
+            {{> viewApiStatus api=api width="0.5" }}
             &nbsp;
             {{ api.name }}
           </option>
         {{/ each }}
       </optgroup>
-      <optgroup label="Other APIs" >
+    {{/ if }}
+
+    <!-- other APIs -->
+    {{# if otherApis }}
+      <optgroup label="{{_ 'apiSelectPicker_otherApis' }}" >
         {{# each api in otherApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{> viewApiStatus apiBackend=api width="0.5" }}
+            {{> viewApiStatus api=api width="0.5" }}
             &nbsp;
             {{ api.name }}
           </option>
         {{/ each }}
       </optgroup>
-    {{ else }}
-      {{# each api in otherApis }}
-        <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-          {{> viewApiStatus apiBackend=api width="0.5" }}
-          &nbsp;
-          {{ api.name }}
-        </option>
-      {{/ each }}
     {{/ if }}
   </select>
 </template>
