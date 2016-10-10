@@ -8,7 +8,7 @@
   "aboutApinf_openSource": "Open Source",
   "aboutApinf_projectLinks": "Project links",
   "aboutApinf_projectVersions": "Versions",
-  "aboutApinf_sourcecode": "Sourcecode",
+  "aboutApinf_sourcecode": "Source code",
   "aboutApinf_sponsors": "Sponsors",
   "aboutApinf_support": "Support",
   "aboutApinf_title": "About Apinf",
@@ -19,16 +19,16 @@
   "addApi_button_text": "Add API",
   "addApiBacklogItem_addBacklogItem_button": "Add backlog item",
   "addApiBacklogItem_modalTitle": "Add backlog item",
-  "apiAuthorizedUsersList_ header_text": "Authorized users",
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
-  "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '/'",
+  "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '\/'",
+  "apiAuthorizedUsersList_ header_text": "Authorized users",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",
   "apiBackend_Status_Title": "Status",
   "apiBackend_Status_Updated": "Updated:",
   "apiBackend_Usage_Instructions_Headline": "Make API calls to:",
   "apiBackend_Usage_Instructions_Note": "Note:",
-  "apiBackend_Usage_Instructions_Note_Text": "You can find your API Key on your profile page.",
+  "apiBackend_Usage_Instructions_Note_Text": "You can get your API Key from API profile page.",
   "apiBackend_Usage_Instructions_Profile_Page_Link": "View profile.",
   "apiBackendRating_anonymousError": "Please log in to rate this API",
   "apiBackends_Add_API_Title": "Add API",
@@ -53,9 +53,6 @@
   "apiDetails_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
-  "apiBacklog_addBacklogItem_buttonText": "Add backlog item",
-  "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
-  "apiBacklog_mainTitle": "Backlog",
   "apiDetails_usageInstructions_headingText": "To make calls to this API, you can either:",
   "apiDetails_usageInstructions_urlParameters_text": "call the API with your key in the URL parameters:",
   "apiDetails_usageInstructions_requestHeaders_text": "call the API with your key in the request headers:",
@@ -67,11 +64,11 @@
   "apiDocumentation_No_Link_Manager_Message": "You can add one using Manage API feature.",
   "apiDocumentation_No_Link_Message": "No documentation link is available.",
   "apiDocumentation_No_Swagger_Manager_Message": "You can add one using Manage API feature.",
-  "apiDocumentation_No_Swagger_Message": "No swagger document is available.",
+  "apiDocumentation_No_Swagger_Message": "No Swagger document available.",
   "apiDocumentation_Title": "Documentation",
   "apiDocumentation_Viewer_Title": "Viewer",
   "apiDocumentation_sdkGenerateButton": "SDK Generate",
-  "apiDocumentation_tooltipSDKGeneratorButton": "With a valid swagger file, you can download an SDK of your preferred language using this wizard",
+  "apiDocumentation_tooltipSDKGeneratorButton": "With a valid Swagger file, you can download an SDK of your preferred language using this wizard",
   "apiExport_json_button": "Export .json",
   "apiExport_yaml_button": "Export .yaml",
   "apiExport_api_title": "Export API configuration",
@@ -84,27 +81,33 @@
   "apiIntro_previousLabel": "Previous",
   "apiIntro_steps_backlog_intro": "Add upcoming API features and priorities for the community to see.",
   "apiIntro_steps_details_intro": "Provides basic information for the API and instructions about how to make API calls.",
-  "apiIntro_steps_documentation_intro": "Upload and share documentation describing the API. People can then download example code in their preferred language/platform.",
-  "apiIntro_steps_export_intro": "Download .json or .yaml file for your API, for backup and/or migration.",
+  "apiIntro_steps_documentation_intro": "Upload and share documentation describing the API. People can then download example code in their preferred language\/platform.",
+  "apiIntro_steps_export_intro": "Download .json or .yaml file for your API, for backup and\/or migration.",
   "apiIntro_steps_feedback_intro": "Users of your API can give feedback, including reporting errors or requesting new features.",
   "apiIntro_steps_metadata_intro": "Provide organizational, contact and service related information about your API.",
   "apiIntro_steps_proxy_intro": "Use this tab to attach your API to a proxy, allowing you to use various API management related features (e.g. analytics, API keys, etc.).",
-  "apiIntro_steps_settings_intro": "Edit API settings from this tab. You can also delete also API here.",
+  "apiIntro_steps_settings_intro": "Edit API settings from this tab. You can also delete API here.",
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
   "apiIntro_quickTour_button_text": "Quick tour",
+  "apiRemoveAuthorizedUser_cancelButton_text": "No, cancel",
+  "apiRemoveAuthorizedUser_confirmation_text": "Are you sure you want to remove this authorized user?",
+  "apiRemoveAuthorizedUser_modalTitle": "Remove authorized user",
+  "apiRemoveAuthorizedUser_removeButton_text": "Yes, remove",
   "apiKeys_label": "API Key",
   "apiKeys_getApiKeyButton": "Get API key",
   "apiKeys_copyButtonText": "Copy API key",
   "apiKeys_copySuccessful": "API key copied to clipboard.",
   "apiKeys_getApiKeyButton_success": "API key retrieved successfully.",
   "apiKeys_getApiKeyButton_processing": "Processing...",
-  "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png, .gif are accepted.",
+  "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "apiRemoveAuthorizedUser_cancelButton_text": "No, cancel",
   "apiRemoveAuthorizedUser_confirmation_text": "Are you sure you want to remove this authorized user?",
   "apiRemoveAuthorizedUser_modalTitle": "Remove authorized user",
   "apiRemoveAuthorizedUser_removeButton_text": "Yes, remove",
+  "apiSelectPicker_selectAPI": "Select API",
+  "apiSettings_deleteApiText": "This action cannot be undone. The API and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "apiSelectPicker_myApis": "My APIs",
   "apiSelectPicker_otherApis": "Other APIs",
   "apiSelectPicker_selectAPI": "Select API(s)",
@@ -118,7 +121,7 @@
   "apiSettings_visibility_heading": "Change API visibility",
   "apiSettings_visibility_text": "Make this API private or public",
   "api_backend_rating_anonymous": "Please log in to vote.",
-  "apinf_usernotloggedin_error": "Could not find logged in user.",
+  "apinf_usernotloggedin_error": "Could not find signed-in user.",
   "apiMonitoring_panelTitle_Monitoring": "API Monitoring",
   "apiMonitoring_helpIcon_text": "Please provide a valid path to an endpoint to make actual API calls. API monitoring is done using HTTP requests. You can use GET method only so that accidental data insertion in your API is prevented.",
   "apiMonitoring_saveButton_text": "Save",
@@ -132,11 +135,11 @@
   "backlogItem_addedByYou": "Added by you",
   "backlogItem_editButton_text": "Edit",
   "backlogItem_deleteButton_text": "Delete",
+  "bookmark_buttonText_bookmark": "Bookmark",
+  "bookmark_buttonText_unbookmark": "Unbookmark",
   "branding_update": "Update",
   "branding_save": "Save",
   "branding_panel_title": "Project Branding",
-  "bookmark_buttonText_bookmark": "Bookmark",
-  "bookmark_buttonText_unbookmark": "Unbookmark",
   "catalogue_bookmarkTooltip_nonUser": "Number of bookmarks. Sign in to bookmark.",
   "catalogue_BookmarkTooltip_user": "Bookmark API",
   "catalogue_paginationButtons_next": "Next",
@@ -169,7 +172,7 @@
   "contactForm_submit": "Submit",
   "dashboard_addApiButton_text": "Add an API",
   "dashboard_mainTitle": "Dashboard",
-  "dashboard_noApisTitle": "You don't have any API Backend you manage.",
+  "dashboard_noApisTitle": "You don't have any API you manage.",
   "dashboardDataTable_help_text": "Available data depends on how API Response Timeline, HTTP Status Code or API Response Time charts are rendered for viewing.",
   "dashboardDataTable_nextPage": "Next",
   "dashboardDataTable_prevPage": "Previous",
@@ -182,13 +185,11 @@
   "dashboardDataTable_timeStamp": "Date",
   "dashboardDataTable_title": "Analytics data",
   "dashboardDataTable_pageCount": "Page",
-  "dashboard_mainTitle": "Dashboard",
-  "dashboard_noApisTitle": "You don't have any API Backend you manage.",
   "deleteAccount_closeButton": "Close",
   "deleteAccount_confirmDelete": "Delete",
   "deleteAccount_success_message": "Account deleted",
   "deleteApiConfirmation_cancelButton": "Cancel",
-  "deleteApiConfirmation_confirmDeleteInformation": "This action cannot be undone! The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
+  "deleteApiConfirmation_confirmDeleteInformation": "This action cannot be undone! The API and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "deleteApiConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
   "deleteApiConfirmation_confirmDeleteNote": "NOTE:",
   "deleteApiConfirmation_deleteButton": "Delete",
@@ -220,7 +221,6 @@
   "feedback_remove_button": "Remove",
   "feedback_sendFeedback": "Send",
   "feedback_view_button": "View",
-  "feedbackForm_successMessage": "Thank you! Your feedback has been successfully sent.",
   "flagApiButton_buttonText": "Flag",
   "flagApiButton_buttonText_active": "Flagged",
   "flagApiModal_cancelButton": "Cancel",
@@ -233,7 +233,7 @@
   "flagApiSchema_DefunctText": "Defunct",
   "flagApiSchema_inappropriateText": "Inappropriate",
   "homeBody_contactUs_heading": "Contact Us",
-  "homeBody_contactUs_text": "Contact us to ask anything.",
+  "homeBody_contactUs_text": "Contact us for more information.",
   "homeBody_feature_section_heading1": "Are you an API user?",
   "homeBody_feature_section_heading2": "Are you an API owner?",
   "homeBody_feature_title1": "Discover APIs",
@@ -241,7 +241,7 @@
   "homeBody_feature_title2": "Mix APIs",
   "homeBody_feature_title2_text": "Mix APIs from several sources (future)",
   "homeBody_feature_title3": "Check API documentation",
-  "homeBody_feature_title3_text": "Documentation viewer available, RAML planned",
+  "homeBody_feature_title3_text": "Documentation viewer available",
   "homeBody_feature_title4": "Track application usage",
   "homeBody_feature_title4_text": "View analytics for API calls from your application",
   "homeBody_feature_title5": "Publish your APIs",
@@ -252,28 +252,28 @@
   "homeBody_feature_title7_text": "View detailed analytics data for your APIs",
   "homeBody_feature_title8": "Web-based",
   "homeBody_feature_title8_text": "Centralized management for hundreds of users",
-  "homeBody_openSource_imageAltText": "We are open source",
+  "homeBody_openSource_imageAltText": "100% open source",
   "homeBody_section1_heading": "Getting started",
   "homeBody_section1_text": "Just create an account and be on your way! The developer dashboard offers you a one stop location to discover APIs, track your application API usage, and more.",
   "homeBody_section1_text_extra": "Sign Up",
   "homeBody_section2_heading": "Reach out to developers",
-  "homeBody_section2_text": "APInf provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API trafﬁc.",
+  "homeBody_section2_text": "APInf provides you with a unified, simple interface for publishing your APIs to the developer community and performing complex API management tasks. It allows you to gain a better understanding of your API traf\ufb01c.",
   "homeBody_section2_text_extra": "Contact Us",
   "homeBody_section3_communityLinkText": "Apinf community",
   "homeBody_section3_heading": "Completely open source",
   "homeBody_section3_text": "APinf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with MIT. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
   "homeBody_section3_text_extra": "Find us in ",
-  "homeHeader_apiCatalogue": "API Catalogue",
+  "homeHeader_apiCatalogue": "API Catalog",
   "homeHeader_dashboardLink_text": "Dashboard",
   "homeHeader_signIn": "Sign In",
   "homeHeader_signUp": "Sign Up",
   "homeHeader_toggleNavigation": "Toggle navigation",
   "homeFooter_dashboardLink_text": "Dashboard",
-  "importApiConfiguration_errorMessage": "Config file should be .YAML, .YML, .JSON or .TXT only.",
-  "import_ApiConfiguration_Drop": "Drop file to here",
+  "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML, .JSON or .TXT format.",
+  "import_ApiConfiguration_Drop": "Drop your file here",
   "import_ApiConfiguration_File": "File:",
   "import_ApiConfiguration_Preview": "Preview:",
-  "importApiConfiguration_jsonError_message": "Configuration does not look like correct JSON object.",
+  "importApiConfiguration_jsonError_message": "Configuration file is not a valid JSON object.",
   "import_ApiConfiguration_Title": "Import API Configuration",
   "import_ApiConfiguration_Upload": "Upload",
   "import_ApiDocumentation_File": "Documentation Configuration File",
@@ -284,27 +284,27 @@
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_MoreInfo": "More info",
   "latestApiBackends_NotFound": "Nothing found.",
-  "loginVerify_errorMessage": "We sent you an email. Please verify.",
+  "loginVerify_errorMessage": "We have sent you an email. Please verify your email address.",
   "manageApiDocumentationModalUploadButton": "Choose file",
   "manageApiDocumentationModal_AddedFile_Message": "Documentation file successfully uploaded!",
   "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Cancel",
   "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Save",
   "manageApiDocumentationModal_CreateDocumentation_Title": "Create documentation file",
-  "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Are you sure you want to remove documentation file?",
+  "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Are you sure you want to remove the documentation file?",
   "manageApiDocumentationModal_DeletedFile_Message": "Documentation file successfully deleted!",
   "manageApiDocumentationModal_DocumentationLink_Title": "Link to external documentation resource",
-  "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file types are accepted.",
+  "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file formats are supported.",
   "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully updated!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
   "manageApiDocumentationModal_Title": "API Documentation",
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
-  "manageApiDocumentationModal_hints_documentation_link": "Link of the wiki / github page / web resource where the documentation of your API is located",
-  "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation for your APIs using swagger at our own server",
+  "manageApiDocumentationModal_hints_documentation_link": "Link to the Wiki, Github page or other web resource where the documentation of your API is located",
+  "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation file for your API using Swagger editor",
   "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
   "masterLayout_sidebar_APIBackends": "API Backends",
-  "masterLayout_sidebar_AddAPIBackend": "Add API Backend",
-  "masterLayout_sidebar_Catalogue": "Catalogue",
-  "masterLayout_sidebar_ManageAPIBackends": "Manage API Backends",
+  "masterLayout_sidebar_AddAPIBackend": "Add API",
+  "masterLayout_sidebar_Catalogue": "Catalog",
+  "masterLayout_sidebar_ManageAPIBackends": "Manage APIs",
   "masterLayout_sidebar_Users": "Users",
   "navbar_aboutButton_text": "About",
   "notAuthorized_Message": "You are not authorized to access this page.",
@@ -324,13 +324,13 @@
   "proxyBackendForm_advancedSettings_title": "Advanced settings",
   "proxyBackendForm_apiBasePath_helpText": "Base path added to all API requests. Example:",
   "proxyBackendForm_apiPort_helpText": "Port number on API server",
-  "proxyBackendForm_disableApiKey_helpText": "Allow users to use this API without an API key.",
+  "proxyBackendForm_disableApiKey_helpText": "Allow users to call this API without an API key.",
   "proxyBackendForm_proxyBasePath_helpText": "Base path added to all Proxy requests. Example:",
   "proxyBackendForm_successMessage": "Settings saved.",
   "proxyBackendForm_saveButton": "Save & Publish",
   "proxyBackendForm_deleteButton": "Delete",
-  "proxyBackendForm_deleteErrorMessage": "Delete failed on Umbrella",
-  "proxyBackendForm_publishErrorMessage": "Publish failed on Umbrella",
+  "proxyBackendForm_deleteErrorMessage": "Delete failed on API Umbrella proxy",
+  "proxyBackendForm_publishErrorMessage": "Publish failed on API Umbrella proxy",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
   "proxyForm_header_text": "Add Proxy",
@@ -346,178 +346,178 @@
   "responseTimeDistributionChart_title": "API Response Time",
   "responseTimeDistributionChart_help_text": "Click on any bar to filter API Request Timeline and HTTP Status Code chart by requests that have the selected response time range.",
   "schemas": {
-    "apis": {
-      "submit_methods": {
-        "label": "Allow try-out for following methods:"
-      }
-    },
-    "apiMetadata": {
-      "organization": {
-        "label": "Organization",
-        "name": {
-          "label": "Name"
-        },
-        "description": {
-          "label": "Description"
-        }
-      },
-      "contact": {
-        "label": "Contact",
-        "name": {
-          "label": "Name"
-        },
-        "phone": {
-          "label": "Phone"
-        },
-        "email": {
-          "label": "Email"
-        }
-      },
-      "service": {
-        "label": "Service",
-        "name": {
-          "label": "Name"
-        },
-        "description": {
-          "label": "Description"
-        },
-        "validSince": {
-          "label": "Valid since"
-        },
-        "validUntil": {
-          "label": "Valid until"
-        },
-        "serviceLevelAgreement": {
-          "label": "Service Level Agreement"
-        }
-      }
-    },
-    "backlog": {
-      "title": {
-        "label": "Title",
-        "placeholder": "Title"
-      },
-      "details": {
-        "label": "Details",
-        "placeholder": "Description"
-      },
-      "priority": {
-        "label": "Priority"
-      }
-    },
-    "branding": {
-      "siteTitle": {
-        "label": "Site title"
-      },
-      "siteSlogan": {
-        "label": "Site slogan"
-      },
-      "siteFooter": {
-        "label": "Site footer"
-      }
-    },
-    "feedback": {
-      "topic": {
-        "label": "Topic",
-        "placeholder": "Feedback topic"
-      },
-      "message": {
-        "label": "Your Message",
-        "placeholder": "Your message"
-      },
-      "messageType": {
-        "label": "Choose message type"
-      }
-    },
-    "monitoring": {
-      "url": {
-        "label": "Endpoint to Monitor"
-      },
-      "enabled": {
-        "label": "Enabled API Monitoring"
-      }
-    },
-    "settings": {
-      "apiDocumentationEditor": {
-        "label": "API Documentation Editor",
-        "enabled": {
-          "label": "Enabled"
-        },
-        "host": {
-          "label": "Host",
-          "placeholder": "https://editor.example.com/"
-        }
-      },
-      "mail": {
-        "label": "Mail (SMTP)",
-        "enabled": {
-          "label": "Enabled"
-        },
-        "username": {
-          "label": "Username"
-        },
-        "password": {
-          "label": "Password"
-        },
-        "toEmail": {
-          "label": "To email"
-        }
-      },
-      "githubConfiguration": {
-        "label": "Github configuration",
-        "clientId": {
-          "label": "Client ID"
-        },
-        "secret": {
-          "label": "Secret"
-        }
-      },
-      "sdkCodeGenerator": {
-        "label": "SDK Generator",
-        "enabled": {
-          "label": "Enabled"
-        },
-        "host": {
-          "label": "Host"
-        }
-      }
-    },
-    "ProxyBackends": {
-      "apiUmbrella": {
-        "settings": {
-          "disable_api_key": {
-            "label": "Disable API key requirement"
-          },
-          "rate_limit_mode": {
-            "label": "Rate limit mode",
-            "options": {
-              "custom": "Custom rate limits",
-              "unlimited": "Unlimited requests"
-            }
-          },
-          "rate_limit": {
-            "duration": {
-              "label": "Duration (ms)"
-            },
-            "limit_by": {
-              "label": "Limit by",
-              "options": {
-                "apiKey": "API Key",
-                "ip": "IP Address"
-              }
-            },
-            "limit": {
-              "label": "Number of requests"
-            },
-            "response_headers": {
-              "label": "Show rate limit in response headers"
-            }
+      "apis": {
+          "submit_methods": {
+              "label": "Allow try-out for following methods:"
           }
+      },
+      "apiMetadata": {
+          "organization": {
+              "label": "Organization",
+              "name": {
+                  "label": "Name"
+              },
+              "description": {
+                  "label": "Description"
+              }
+          },
+          "contact": {
+              "label": "Contact",
+              "name": {
+                  "label": "Name"
+              },
+              "phone": {
+                  "label": "Phone"
+              },
+              "email": {
+                  "label": "Email"
+              }
+          },
+          "service": {
+              "label": "Service",
+              "name": {
+                  "label": "Name"
+              },
+              "description": {
+                  "label": "Description"
+              },
+              "validSince": {
+                  "label": "Valid since"
+              },
+              "validUntil": {
+                  "label": "Valid until"
+              },
+              "serviceLevelAgreement": {
+                  "label": "Service Level Agreement"
+              }
+          }
+      },
+      "backlog": {
+          "title": {
+              "label": "Title",
+              "placeholder": "Title"
+          },
+          "details": {
+              "label": "Details",
+              "placeholder": "Description"
+          },
+          "priority": {
+              "label": "Priority"
+          }
+      },
+      "branding": {
+          "siteTitle": {
+              "label": "Site title"
+          },
+          "siteSlogan": {
+              "label": "Site slogan"
+          },
+          "siteFooter": {
+              "label": "Site footer"
+          }
+      },
+      "feedback": {
+          "topic": {
+              "label": "Topic",
+              "placeholder": "Feedback topic"
+          },
+          "message": {
+              "label": "Your Message",
+              "placeholder": "Your message"
+          },
+          "messageType": {
+              "label": "Choose message type"
+          }
+      },
+      "monitoring": {
+        "enabled": {
+          "label": "Enabled API Monitoring"
+        },
+        "url": {
+          "label": "Endpoint to Monitor"
         }
+      },
+      "settings": {
+          "apiDocumentationEditor": {
+              "label": "API Documentation Editor",
+              "enabled": {
+                  "label": "Enabled"
+              },
+              "host": {
+                  "label": "Host",
+                  "placeholder": "https:\/\/editor.example.com\/"
+              }
+          },
+          "mail": {
+              "label": "Mail (SMTP)",
+              "enabled": {
+                  "label": "Enabled"
+              },
+              "username": {
+                  "label": "Username"
+              },
+              "password": {
+                  "label": "Password"
+              },
+              "toEmail": {
+                  "label": "To email"
+              }
+          },
+          "githubConfiguration": {
+              "label": "Github configuration",
+              "clientId": {
+                  "label": "Client ID"
+              },
+              "secret": {
+                  "label": "Secret"
+              }
+          },
+          "sdkCodeGenerator": {
+              "label": "SDK Generator",
+              "enabled": {
+                  "label": "Enabled"
+              },
+              "host": {
+                  "label": "Host"
+              }
+          }
+      },
+      "ProxyBackends": {
+          "apiUmbrella": {
+              "settings": {
+                  "disable_api_key": {
+                      "label": "Disable API key requirement"
+                  },
+                  "rate_limit_mode": {
+                      "label": "Rate limit mode",
+                      "options": {
+                          "custom": "Custom rate limits",
+                          "unlimited": "Unlimited requests"
+                      }
+                  },
+                  "rate_limit": {
+                      "duration": {
+                          "label": "Duration (ms)"
+                      },
+                      "limit_by": {
+                          "label": "Limit by",
+                          "options": {
+                              "apiKey": "API Key",
+                              "ip": "IP Address"
+                          }
+                      },
+                      "limit": {
+                          "label": "Number of requests"
+                      },
+                      "response_headers": {
+                          "label": "Show rate limit in response headers"
+                      }
+                  }
+              }
+          }
       }
-    }
   },
-  "sdkCodeGeneratorModal_errorText": "Your file is not supported by the generator. Please upload the correct file",
+  "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
   "sdkCodeGeneratorModal_errorTextInvalidHost": "Code Generator server is incorrect. Please report to administrator about this problem.",
   "sdkCodeGeneratorModal_Title": "Generate SDK file",
   "searchField_button": "Search",
@@ -528,6 +528,7 @@
   "searchPage_searchForm_helpText": "Start typing your query for live search results.",
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchResultsHeader": "Search results",
+  "settings_addingApis": "Adding APIs",
   "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
   "settings_mail_username_label": "Username",
@@ -548,7 +549,7 @@
   "settingsMenu_branding": "Branding",
   "settingsMenu_settings": "Settings",
   "settingsMenu_proxies": "Proxies",
-  "setupNeededModal_body": "Please provide Branding and/or Settings for this deployment.",
+  "setupNeededModal_body": "Please provide branding and\/or platform settings for this deployment.",
   "setupNeededModal_title": "Setup needed",
   "setupNeededModal_viewBrandingButton": "View Branding",
   "setupNeededModal_viewSettingsButton": "View Settings",
@@ -578,7 +579,7 @@
   "uploadApiLogo_confirm_delete": "Are you sure you want to delete this logo?",
   "uploadApiLogo_successfully_deleted": "Logo successfully deleted!",
   "uploadProjectLogo_confirm_delete": "Are you sure you want to delete your project logo?",
-  "uploadProjectLogo_acceptedExtensions": "Only .jpg, .jpeg, .png, .gif are accepted.",
+  "uploadProjectLogo_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "uploadProjectLogo_successfully_uploaded": "Your project logo successfully uploaded!",
   "uploadProjectLogo_successfully_deleted": "Your project logo successfully deleted!",
   "userMenu_account": "Account",
