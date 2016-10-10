@@ -21,6 +21,7 @@ Template.viewApiStatus.helpers({
       `api-status-indicator-${api._id}`,
       'icon-indicator',
       className,
+      'pull-right',
     ].join(' ');
   },
 
