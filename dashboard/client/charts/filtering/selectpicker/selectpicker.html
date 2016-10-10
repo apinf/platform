@@ -10,7 +10,7 @@
     data-actions-box="true" >
     <!-- User APIs -->
     {{# if userApis }}
-      <optgroup label="My APIs" >
+      <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
         {{# each api in userApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{> viewApiStatus api=api width="0.5" }}
@@ -23,7 +23,7 @@
 
     <!-- other APIs -->
     {{# if otherApis }}
-      <optgroup label="Other APIs" >
+      <optgroup label="{{_ 'apiSelectPicker_otherApis' }}" >
         {{# each api in otherApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{> viewApiStatus api=api width="0.5" }}
