@@ -8,7 +8,7 @@
           {{ api.name }}
           {{> viewApiStatus api=api width="0.4" }}
         </h1>
-        {{#unless api.isPublic }}
+        {{# unless api.isPublic }}
           <span class="label label-default label-align">private</span>
         {{/ unless }}
         <ul class="list-inline view-api-meta-details">

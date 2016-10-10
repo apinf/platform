@@ -17,7 +17,7 @@
               {{_ "catalogueGrid_addedBy" }}
               {{ api.getApiManagersByName }}
             </span>
-            {{#unless api.isPublic }}
+            {{# unless api.isPublic }}
               <span class="label label-default">private</span>
             {{/ unless }}
             {{# if api.description }}
