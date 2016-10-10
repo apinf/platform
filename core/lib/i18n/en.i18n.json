@@ -429,6 +429,14 @@
               "label": "Choose message type"
           }
       },
+      "monitoring": {
+        "enabled": {
+          "label": "Enabled API Monitoring"
+        },
+        "url": {
+          "label": "Endpoint to Monitor",
+        }
+      },
       "settings": {
           "apiDocumentationEditor": {
               "label": "API Documentation Editor",
@@ -590,6 +598,8 @@
   "viewApiSettigs_saveButton_text": "Save",
   "viewApiStatus_statusMessage_ClientError": "Client error.",
   "viewApiStatus_statusMessage_ErrorCodeText": "Status code:",
+  "viewApiStatus_statusMessage_Informational": "Informational.",
+  "viewApiStatus_statusMessage_Loading": "Loading...",
   "viewApiStatus_statusMessage_RedirectError": "Redirection.",
   "viewApiStatus_statusMessage_ServerError": "Server error.",
   "viewApiStatus_statusMessage_Success": "API is operating normally.",
