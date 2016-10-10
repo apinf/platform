@@ -230,6 +230,8 @@
   "flagApiModal_titleText": "Flag API Backend",
   "flagApiSchema_DefunctText": "Defunct",
   "flagApiSchema_inappropriateText": "Inappropriate",
+  "forbidden_Title": "403 Forbidden",
+  "forbidden_Message": "You don't have permissions to view this page.",
   "homeBody_contactUs_heading": "Contact Us",
   "homeBody_contactUs_text": "Contact us to ask anything.",
   "homeBody_feature_section_heading1": "Are you an API user?",
