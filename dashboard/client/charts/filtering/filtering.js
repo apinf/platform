@@ -55,16 +55,16 @@ Template.dashboardChartsFiltering.onCreated(function () {
 });
 
 Template.dashboardChartsFiltering.helpers({
-  apisManagedByUser () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    return instance.apisManagedByUser.get();
-  },
   otherApis () {
     // Get reference to template instance
     const instance = Template.instance();
 
     return instance.otherApis.get();
+  },
+  userApis () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    return instance.apisManagedByUser.get();
   },
 });

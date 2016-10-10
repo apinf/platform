@@ -9,9 +9,9 @@
     data-size="10"
     data-actions-box="true" >
     <!-- User APIs -->
-    {{# if apisManagedByUser }}
+    {{# if userApis }}
       <optgroup label="My APIs" >
-        {{# each api in apisManagedByUser }}
+        {{# each api in userApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{> viewApiStatus api=api width="0.5" }}
             &nbsp;
