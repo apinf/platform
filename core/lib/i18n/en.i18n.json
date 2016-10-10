@@ -103,7 +103,7 @@
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "apiSelectPicker_selectAPI": "Select API",
-  "apiSettings_deleteApiText": "This action cannot be undone. The API Backend and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
+  "apiSettings_deleteApiText": "This action cannot be undone. The API and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
   "apiSettings_deleteApiTitle": "Delete the API",
   "apiSettings_deletePanel_title": "Delete",
   "apiSettings_detailsPanel_title": "Details",
