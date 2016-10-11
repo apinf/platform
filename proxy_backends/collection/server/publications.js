@@ -44,12 +44,11 @@ Meteor.publish('proxyApis', function () {
 
     // If current user is manager
     const managedApis = Apis.find({ managerIds: userId }).fetch();
-
     // If user is manager
     if (managedApis.length > 0) {
       // Get list of proxy backends managed by current user
       _.forEach(managedApis, (api) => {
-        _.concat(proxyBackends, ProxyBackends.find({ apiId: api._id }).fetch());
+        proxyBackends = ProxyBackends.find({ apiId: api._id });
       });
     }
   }
