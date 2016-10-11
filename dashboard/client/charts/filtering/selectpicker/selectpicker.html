@@ -8,6 +8,14 @@
     data-live-search="true"
     data-size="10"
     data-actions-box="true" >
+    <!-- Admininstrator -->
+    {{# if isInRole 'admin' }}
+      <optgroup label="{{_ 'apiSelectPicker_administratorApis' }}" >
+        <option value="{{ apiUmbrellaOption.prefix }}" >
+          {{ apiUmbrellaOption.name }}
+        </option>
+      </optgroup>
+    {{/ if }}
     <!-- User APIs -->
     {{# if userApis }}
       <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >

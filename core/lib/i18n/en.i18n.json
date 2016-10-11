@@ -108,6 +108,7 @@
   "apiRemoveAuthorizedUser_removeButton_text": "Yes, remove",
   "apiSelectPicker_selectAPI": "Select API",
   "apiSettings_deleteApiText": "This action cannot be undone. The API and all its related information, i.e. metadata, documentation, API backlog items and feedback will be removed.",
+  "apiSelectPicker_administratorApis": "Administrator",
   "apiSelectPicker_myApis": "My APIs",
   "apiSelectPicker_otherApis": "Other APIs",
   "apiSelectPicker_selectAPI": "Select API(s)",
