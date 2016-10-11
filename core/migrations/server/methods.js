@@ -40,13 +40,17 @@ Meteor.methods({
     // Init connection to old apiBackends
     const ApiBackends = new Mongo.Collection('apiBackends');
 
+    // Running number for duplicates
+    let duplicateCounter = 1;
+
     // Iterate through apiBackends collection
     ApiBackends.find().forEach((apiBackend) => {
       // Construct apiUrl
       const apiUrl = `${apiBackend.backend_protocol}://${apiBackend.backend_host}`;
+
       // New api object
       const api = {
-        name: apiBackend.name,
+        name: apiBackend.name, // check unique
         description: apiBackend.description,
         url: apiUrl,
         documentationFileId: apiBackend.documentationFileId,
@@ -62,11 +66,31 @@ Meteor.methods({
         isPublic: apiBackend.isPublic,
         submit_methods: [],
         averageRating: 0,
-        latestMonitoringStatusCode: '-1',
       };
 
-      // Insert migrated api, get Id
-      const apiId = Apis.insert(api);
+      /** Solve api.name unique **/
+
+      // Init apiId
+      let apiId = null;
+
+      do {
+        try {
+          apiId = Apis.insert(api);
+        } catch (error) {
+          // Catch duplicate error with unique index
+          if (error &&
+            error.name === 'MongoError' &&
+            error.code === 11000) {
+            // Add duplicateCounter value after api.name
+            api.name = `${api.name}${duplicateCounter}`;
+          } else {
+            // Something else weird, give up
+            break;
+          }
+        }
+      } while (!apiId);
+
+      /** ProxyBackend migrating **/
 
       // Get proxyId
       const proxyId = Proxies.findOne()._id;
@@ -79,7 +103,7 @@ Meteor.methods({
         backend_host: apiBackend.backend_host,
         backend_protocol: apiBackend.backend_protocol,
         balance_algorithm: apiBackend.balance_algorithm,
-        url_matches: apiBackend.url_matches,
+        url_matches: apiBackend.url_matches, // 'url_matches.$.frontend_prefix' check unique
         servers: apiBackend.servers,
         settings: apiBackend.settings,
       };
@@ -91,8 +115,47 @@ Meteor.methods({
         apiUmbrella: umbrellaObject,
       };
 
-      // Insert migrated proxyBackend
-      ProxyBackends.insert(proxyBackend, { validate: false });
+      /** Solve unique & proxyBackend regex validation errors **/
+
+      // Init proxyBackendId
+      let proxyBackendId = null;
+      // Try until insert succeeds
+      do {
+        try {
+          proxyBackendId = ProxyBackends.insert(proxyBackend);
+        } catch (error) {
+          // Catch regex validation error code
+          if (error &&
+            error.sanitizedError &&
+            error.sanitizedError.error === 400) {
+            // Get umbrella object
+            const umbrella = proxyBackend.apiUmbrella;
+            // Add slash after frontend_prefix
+            const newPrefix = `${umbrella.url_matches[0].frontend_prefix}/`;
+            console.log(newPrefix);
+            umbrella.url_matches[0].frontend_prefix = newPrefix;
+          // Catch duplicate error with unique index
+          } else if (error &&
+              error.name === 'MongoError' &&
+              error.code === 11000) {
+            // Get umbrella object
+            const umbrella = proxyBackend.apiUmbrella;
+            // Add duplicateCounter value after frontend_prefix
+            const newPrefix = `${umbrella.url_matches[0].frontend_prefix}${duplicateCounter}`;
+            console.log(newPrefix);
+            umbrella.url_matches[0].frontend_prefix = newPrefix;
+          } else {
+            // Something else weird, give up
+            break;
+          }
+        }
+        // Leave loop when insert is successful
+      } while (!proxyBackendId);
+      // Increment duplicateCounter
+      duplicateCounter += 1;
     });
+
+    // Finally drop old apiBackends
+    ApiBackends.rawCollection().drop();
   },
 });
