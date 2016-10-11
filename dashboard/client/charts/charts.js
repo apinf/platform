@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import moment from 'moment';
 import dc from 'dc';
@@ -428,15 +429,17 @@ Template.dashboardCharts.onRendered(function () {
         } else if (chartData && chartData.length === 0 && instance.data.proxyBackendsAddedState) {
           // Cleanup previous message if one exists
           $('.charts-holder>#no-chart-data-placeholder').remove();
+          const i18nMessage = TAPi18n.__('dashboardCharts_placeholder_noDataFound');
           // throw user-friendly message
-          $('.charts-holder').append('<div id="no-chart-data-placeholder" >No data found. <br/> Try changing filtering options to get some analytics data.</div>');
+          $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
         }
       }
     } else {
       // Cleanup previous message if one exists
       $('.charts-holder>#no-chart-data-placeholder').remove();
+      const i18nMessage = TAPi18n.__('dashboardCharts_placeholder_proxyBackendsNotFound');
       // throw user-friendly message
-      $('.charts-holder').append('<div id="no-chart-data-placeholder" >APIs and/or proxy backends are not found. <br/> Add some to use dashboard.</div>');
+      $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
     }
 
     // Unset loader
