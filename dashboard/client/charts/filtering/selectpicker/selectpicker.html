@@ -11,6 +11,11 @@
     <!-- User APIs -->
     {{# if userApis }}
       <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
+        {{# if isInRole 'admin' }}
+          <option value="{{ apiUmbrellaOption.prefix }}" >
+            {{ apiUmbrellaOption.name }}
+          </option>
+        {{/ if }}
         {{# each api in userApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
             {{> viewApiStatus api=api width="0.5" }}
