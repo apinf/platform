@@ -26,32 +26,33 @@
             {{# if proxyIsDefined }}
               <li class="{{ isActiveRoute 'dashboard' }}">
                 <a href="/dashboard">
-                  <span>
-                    {{_ "Dashboard" }}
-                  </span>
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                  {{_ "Dashboard" }}
                 </a>
               </li>
             {{/ if }}
-            {{# if userCanAddApi }}
-            <li class="{{ isActiveRoute 'addApi' }}">
-              <a href="{{ pathFor route='addApi' }}">
-                {{_ "masterLayout_sidebar_AddAPIBackend" }}
-              </a>
-            </li>
-            {{/ if }}
           {{/ if }}
           <li class="{{ isActiveRoute 'catalogue' }}">
-            <a href="/catalogue">
+            <a href="{{ pathFor route='catalogue' }}">
+              <i class="fa fa-book" aria-hidden="true"></i>
               {{_ "masterLayout_sidebar_Catalogue" }}
             </a>
           </li>
           {{# if currentUser }}
+            {{# if userCanAddApi }}
+            <li class="{{ isActiveRoute 'addApi' }}">
+              <a href="{{ pathFor route='addApi' }}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+
+                {{_ "masterLayout_sidebar_AddAPIBackend" }}
+              </a>
+            </li>
+            {{/ if }}
             {{# if isInRole 'admin' }}
               <li class="{{ isActiveRoute 'accountsAdmin' }}">
                 <a href="{{ pathFor route='accountsAdmin' }}">
-                  <span>
-                    {{_ "masterLayout_sidebar_Users" }}
-                  </span>
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                  {{_ "masterLayout_sidebar_Users" }}
                 </a>
               </li>
             {{/ if }}
@@ -63,11 +64,13 @@
           {{ else }}
           <li>
             <a class="close-navbar" href="/sign-up">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
               {{_ "signup" }}
             </a>
           </li>
           <li>
             <a class="close-navbar" href="/sign-in">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
               {{_ "login" }}
             </a>
           </li>
