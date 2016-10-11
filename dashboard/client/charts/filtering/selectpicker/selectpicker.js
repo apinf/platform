@@ -21,7 +21,7 @@ Template.apiSelectPicker.helpers({
     // Check if current user has admin privileges
     if (Roles.userIsInRole(userId, ['admin'])) {
       return {
-        name: 'API Umbrella Logs',
+        name: 'Proxy Admin API',
         prefix: '/api-umbrella/'
       }
     }
