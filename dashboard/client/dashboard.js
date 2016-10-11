@@ -27,6 +27,7 @@ Template.dashboard.onCreated(function () {
   instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
+  // Get current user Id
   const userId = Meteor.userId();
 
   // Subscribe to proxyApis publicaton
