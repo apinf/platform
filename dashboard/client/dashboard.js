@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router';
+import { Roles } from 'meteor/alanning:roles';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
@@ -92,6 +93,19 @@ Template.dashboard.onCreated(function () {
             },
           },
         };
+      });
+    }
+
+    // Check if user has an admin role
+    if (Roles.userIsInRole(userId, ['admin'])) {
+      // Add query for API Umbrella analytics data
+      prefixesQuery.push({
+        wildcard: {
+          request_path: {
+            // Add '*' to partially match the url
+            value: '*/api-umbrella/*',
+          },
+        },
       });
     }
 
