@@ -24,7 +24,7 @@
         <ul class="nav navbar-nav navbar-left">
           {{# if currentUser }}
             {{# if proxyIsDefined }}
-              <li class="{{isActiveRoute 'dashboard' }}">
+              <li class="{{ isActiveRoute 'dashboard' }}">
                 <a href="/dashboard">
                   <span>
                     {{_ "Dashboard" }}
@@ -33,22 +33,22 @@
               </li>
             {{/ if }}
             {{# if userCanAddApi }}
-            <li>
+            <li class="{{ isActiveRoute 'addApi' }}">
               <a href="{{ pathFor route='addApi' }}">
                 {{_ "masterLayout_sidebar_AddAPIBackend" }}
               </a>
             </li>
             {{/ if }}
           {{/ if }}
-          <li class="{{isActiveRoute 'catalogue' }}">
+          <li class="{{ isActiveRoute 'catalogue' }}">
             <a href="/catalogue">
               {{_ "masterLayout_sidebar_Catalogue" }}
             </a>
           </li>
           {{# if currentUser }}
             {{# if isInRole 'admin' }}
-              <li class="{{isActiveRoute 'accountsAdmin' }}">
-                <a href="{{pathFor route='accountsAdmin' }}">
+              <li class="{{ isActiveRoute 'accountsAdmin' }}">
+                <a href="{{ pathFor route='accountsAdmin' }}">
                   <span>
                     {{_ "masterLayout_sidebar_Users" }}
                   </span>
