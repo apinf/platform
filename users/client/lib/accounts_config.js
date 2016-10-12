@@ -10,7 +10,7 @@ AccountsTemplates.configure({
   sendVerificationEmail: true,
   /* Appearance */
   showAddRemoveServices: true,
-  showForgotPasswordLink: true,
+  showForgotPasswordLink: false,
   showLabels: true,
   showPlaceholders: true,
   showResendVerificationEmailLink: true,
@@ -61,7 +61,7 @@ AccountsTemplates.configureRoute('signUp', {
   layoutTemplate: 'masterLayout',
 });
 
-AccountsTemplates.configureRoute('forgotPwd', {
-  layoutTemplate: 'masterLayout',
-  name: 'forgotPwd',
-});
+// AccountsTemplates.configureRoute('forgotPwd', {
+//   layoutTemplate: 'masterLayout',
+//   name: 'forgotPwd',
+// });
