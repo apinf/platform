@@ -60,7 +60,8 @@ Meteor.methods({
         // Update admin account. Set 'verified: true' for all admin user
         Meteor.users.update(
           { roles: { $in: ['admin'] }, 'emails.0.verified': false },
-          { $set: { 'emails.0.verified': true } }
+          { $set: { 'emails.0.verified': true } },
+          { multi: true },
         );
 
         // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
