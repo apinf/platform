@@ -15,15 +15,6 @@ Router.waitOn(function() {
   return this.subscribe('user');
 });
 
-var redirectToSignIn = function () {
-  if (Meteor.user()) {
-    this.next();
-  } else {
-    this.redirect('/sign-in');
-    this.next();
-  }
-};
-
 var redirectToDashboard = function () {
   if (Meteor.user()) {
     this.redirect('/dashboard');
@@ -33,9 +24,10 @@ var redirectToDashboard = function () {
   }
 };
 
-// Router.onBeforeAction(redirectToSignIn, {
-//   except: ['home', 'atSignUp', 'forgotPwd', 'atSignOut', 'catalogue', 'viewApi', 'search']
-// });
+// Routes for logged in user
+Router.plugin('ensureSignedIn', {
+  only: ['dashboard']
+});
 
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
 
