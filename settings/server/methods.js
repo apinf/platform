@@ -9,6 +9,24 @@ import { loginAttemptVerifier } from '/core/helper_functions/login_verify';
 import { Settings } from '../collection';
 
 Meteor.methods({
+  configureSmtpSettings (settings) {
+    // Check if mail settings are provided
+    if (mailSettingsValid(settings)) {
+      const username = settings.mail.username;
+      const password = settings.mail.password;
+
+      const smtpHost = settings.mail.smtpHost;
+      const smtpPort = settings.mail.smtpPort;
+
+      // Set MAIL_URL env variable
+      process.env.MAIL_URL = `
+        smtp://${encodeURIComponent(username)}:
+        ${encodeURIComponent(password)}@
+        ${encodeURIComponent(smtpHost)}:
+        ${encodeURIComponent(smtpPort)}
+      `;
+    }
+  },
   updateGithubConfiguration () {
     // Try if settings exist
     try {
@@ -41,31 +59,13 @@ Meteor.methods({
       // Get Settings collection
       const settings = Settings.findOne();
 
-      // Check if mail settings are provided
-      if (mailSettingsValid(settings)) {
-        const username = settings.mail.username;
-        const password = settings.mail.password;
-
-        const smtpHost = settings.mail.smtpHost;
-        const smtpPort = settings.mail.smtpPort;
-
-        // Set MAIL_URL env variable
-        process.env.MAIL_URL = `
-          smtp://${encodeURIComponent(username)}:
-          ${encodeURIComponent(password)}@
-          ${encodeURIComponent(smtpHost)}:
-          ${encodeURIComponent(smtpPort)}
-        `;
-
-        // Update admin account. Set 'verified: true' for all admin user
-        Meteor.users.update(
-          { roles: { $in: ['admin'] }, 'emails.0.verified': false },
-          { $set: { 'emails.0.verified': true } },
-          { multi: true },
-        );
-
-        // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
-        Accounts.validateLoginAttempt(loginAttemptVerifier);
+      // Enable/disable accounts email features based on email configuration
+      if (settings.mail.enabled) {
+        console.log('email enabled');
+        Meteor.call('configureSmtpSettings', settings);
+        Meteor.call('validateAdminUserEmails');
+      } else {
+        console.log('email disabled');
       }
     } catch (error) {
       // otherwise preapare message about error
@@ -75,4 +75,15 @@ Meteor.methods({
       console.log(message);
     }
   },
+  validateAdminUserEmails () {
+    // Update admin account. Set 'verified: true' for all admin user
+    Meteor.users.update(
+      { roles: { $in: ['admin'] }, 'emails.0.verified': false },
+      { $set: { 'emails.0.verified': true } },
+      { multi: true },
+    );
+
+    // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
+    Accounts.validateLoginAttempt(loginAttemptVerifier);
+  }
 });
