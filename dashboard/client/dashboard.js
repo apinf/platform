@@ -18,7 +18,7 @@ Template.dashboard.onCreated(function () {
   // Keeps chart data loading state
   instance.chartDataLoadingState = new ReactiveVar(false);
   // Keeps status of proxy backends
-  instance.proxyBackendsAddedState = new ReactiveVar(true);
+  instance.proxyBackendsAddedState = new ReactiveVar(false);
 
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
@@ -50,14 +50,6 @@ Template.dashboard.onCreated(function () {
       });
     });
   };
-
-  instance.proxyBackendsAdded = () => new Promise((resolve, reject) => {
-    Meteor.call('proxyBackendsAdded', (err, res) => {
-      if (err) reject(err);
-
-      resolve(res);
-    });
-  });
 
   instance.getChartData = function (params) {
     return new Promise((resolve, reject) => {
@@ -168,35 +160,33 @@ Template.dashboard.onCreated(function () {
       // Set loader
       instance.chartDataLoadingState.set(true);
 
-      instance.proxyBackendsAdded()
-        .then(proxyBackendsAdded => {
+      // Check if proxyBackendsAdded
+      const proxyBackendsAdded = Meteor.call('proxyBackendsAdded');
 
-          if (proxyBackendsAdded) {
-            // Make a call
-            instance.checkElasticsearch()
-              .then((elasticsearchIsDefined) => {
-                if (elasticsearchIsDefined) {
-                  instance.getChartData(params)
-                    .then((chartData) => {
-                      // Update reactive variable
-                      instance.chartData.set(chartData);
-                      instance.chartDataLoadingState.set(false);
-                      instance.proxyBackendsAddedState.set(true);
-                    })
-                    .catch(err => console.error(err));
-                } else {
-                  console.error('Elasticsearch is not defined!');
+      if (proxyBackendsAdded) {
+        // Make a call
+        instance.checkElasticsearch()
+          .then((elasticsearchIsDefined) => {
+            if (elasticsearchIsDefined) {
+              instance.getChartData(params)
+                .then((chartData) => {
+                  // Update reactive variable
+                  instance.chartData.set(chartData);
+                  instance.chartDataLoadingState.set(false);
+                  instance.proxyBackendsAddedState.set(true);
+                })
+                .catch(err => console.error(err));
+            } else {
+              console.error('Elasticsearch is not defined!');
 
-                  Router.go('/catalogue');
-                }
-              })
-              .catch(err => console.error(err));
-          } else {
-            instance.proxyBackendsAddedState.set(false);
-            console.error('Proxy backends and/or APIs are not added.');
-          }
-        })
-        .catch(err => console.error(err));
+              Router.go('/catalogue');
+            }
+          })
+          .catch(err => console.error(err));
+      } else {
+        instance.proxyBackendsAddedState.set(false);
+        console.error('Proxy backends and/or APIs are not added.');
+      }
     }
   });
 });
