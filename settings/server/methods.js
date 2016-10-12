@@ -61,8 +61,10 @@ Meteor.methods({
 
       // Enable/disable accounts email features based on email configuration
       if (settings.mail.enabled) {
-        console.log('email enabled');
+        // Configure system SMTP variable for sending mail
         Meteor.call('configureSmtpSettings', settings);
+
+        // Make sure all admin users' primary email address is marked as valid
         Meteor.call('validateAdminUserEmails');
       } else {
         console.log('email disabled');
