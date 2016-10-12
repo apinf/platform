@@ -38,6 +38,7 @@ Meteor.methods({
   updateMailConfiguration () {
     // Try if settings exist
     try {
+      // Get Settings collection
       const settings = Settings.findOne();
 
       // Check if mail settings are provided
@@ -55,6 +56,12 @@ Meteor.methods({
           ${encodeURIComponent(smtpHost)}:
           ${encodeURIComponent(smtpPort)}
         `;
+
+        // Update admin account. Set 'verified: true' for all admin user
+        Meteor.users.update(
+          { roles: { $in: ['admin'] }, 'emails.0.verified': false },
+          { $set: { 'emails.0.verified': true } }
+        );
 
         // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
         Accounts.validateLoginAttempt(loginAttemptVerifier);
