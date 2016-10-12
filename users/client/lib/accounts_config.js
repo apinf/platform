@@ -60,8 +60,3 @@ AccountsTemplates.configureRoute('signIn', {
 AccountsTemplates.configureRoute('signUp', {
   layoutTemplate: 'masterLayout',
 });
-
-// AccountsTemplates.configureRoute('forgotPwd', {
-//   layoutTemplate: 'masterLayout',
-//   name: 'forgotPwd',
-// });
