@@ -20,7 +20,7 @@ AccountsTemplates.configure({
   negativeValidation: true,
   positiveValidation: false,
   positiveFeedback: true,
-  showValidating: true
+  showValidating: true,
 });
 
 // rearranging the fields on Sign-Up, so that username comes first.
