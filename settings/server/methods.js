@@ -20,6 +20,9 @@ Meteor.methods({
       // Set MAIL_URL env variable
       // Note, this must be on one, long line for the URL to be valid
       process.env.MAIL_URL = `smtp://${username}:${password}@${smtpHost}:${smtpPort}`;
+
+      // Set the 'from email' address, so that mail can send properly
+      Accounts.emailTemplates.from = settings.mail.fromEmail;
     }
   },
   updateGithubConfiguration () {
