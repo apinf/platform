@@ -26,8 +26,8 @@ Template.search.onCreated(function () {
     // Assign current search value to the reactive variable
     instance.searchValue.set(searchValue);
   }
-//autorun
-  instance.autorun(function () {
+
+  instance.autorun(() => {
     const searchValue = instance.searchValue.get();
 
     // Update API Backends subscription with search value
@@ -39,13 +39,13 @@ Template.search.onCreated(function () {
         {
           name: {
             $regex: searchValue,
-            $options: 'i' // case-insensitive option
+            $options: 'i', // case-insensitive option
           },
         },
         {
           backend_host: {
             $regex: searchValue,
-            $options: 'i' // case-insensitive option
+            $options: 'i', // case-insensitive option
           },
         },
       ],
@@ -125,7 +125,7 @@ Template.search.events({
     instance.searchValue.set(searchValue);
 
     // Set query parameter to value of search text
-    UniUtils.url.setQuery("q", searchValue);
+    UniUtils.url.setQuery('q', searchValue);
 
     return false;
   },
