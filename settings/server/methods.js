@@ -11,19 +11,15 @@ Meteor.methods({
   configureSmtpSettings (settings) {
     // Check if mail settings are provided
     if (mailSettingsValid(settings)) {
-      const username = settings.mail.username;
-      const password = settings.mail.password;
+      const username = encodeURIComponent(settings.mail.username);
+      const password = encodeURIComponent(settings.mail.password);
 
-      const smtpHost = settings.mail.smtpHost;
-      const smtpPort = settings.mail.smtpPort;
+      const smtpHost = encodeURIComponent(settings.mail.smtpHost);
+      const smtpPort = encodeURIComponent(settings.mail.smtpPort);
 
       // Set MAIL_URL env variable
-      process.env.MAIL_URL = `
-        smtp://${encodeURIComponent(username)}:
-        ${encodeURIComponent(password)}@
-        ${encodeURIComponent(smtpHost)}:
-        ${encodeURIComponent(smtpPort)}
-      `;
+      // Note, this must be on one, long line for the URL to be valid
+      process.env.MAIL_URL = `smtp://${username}:${password}@${smtpHost}:${smtpPort}`;
     }
   },
   updateGithubConfiguration () {
