@@ -84,8 +84,5 @@ Meteor.methods({
       { $set: { 'emails.0.verified': true } },
       { multi: true },
     );
-
-    // Toggle loginAttemptVerifier ON when Mail settings exist to allow first user
-    Accounts.validateLoginAttempt(loginAttemptVerifier);
   }
 });
