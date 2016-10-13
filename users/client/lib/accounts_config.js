@@ -7,13 +7,13 @@ AccountsTemplates.configure({
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
   lowercaseUsername: false,
-  sendVerificationEmail: false,
+  sendVerificationEmail: true,
   /* Appearance */
   showAddRemoveServices: true,
-  showForgotPasswordLink: false,
+  showForgotPasswordLink: true,
   showLabels: true,
   showPlaceholders: true,
-  showResendVerificationEmailLink: false,
+  showResendVerificationEmailLink: true,
   /* Client-side validation */
   continuousValidation: false,
   negativeFeedback: false,
