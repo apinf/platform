@@ -25,15 +25,6 @@ Meteor.methods({
 
     return emailIsRegistered;
   },
-  countUsers () {
-    // Get all users
-    const users = Meteor.users.find().fetch();
-
-    // Count the number of users
-    const usersCount = users.length;
-
-    return usersCount;
-  },
   sendRegistrationEmailVerification( userId ) {
     // Get settings
     const settings = Settings.findOne();
@@ -43,10 +34,4 @@ Meteor.methods({
       Accounts.sendVerificationEmail( userId );
     }
   },
-  sendVerificationLink() {
-    const userId = Meteor.userId();
-    if ( userId ) {
-      return Accounts.sendVerificationEmail( userId );
-    }
-  }
 });

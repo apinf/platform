@@ -2,7 +2,7 @@
 // https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 AccountsTemplates.configure({
   /* Behavior */
-  confirmPassword: false,
+  confirmPassword: true,
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
@@ -20,7 +20,7 @@ AccountsTemplates.configure({
   negativeValidation: true,
   positiveValidation: false,
   positiveFeedback: true,
-  showValidating: true
+  showValidating: true,
 });
 
 // rearranging the fields on Sign-Up, so that username comes first.
@@ -59,9 +59,4 @@ AccountsTemplates.configureRoute('signIn', {
 
 AccountsTemplates.configureRoute('signUp', {
   layoutTemplate: 'masterLayout',
-});
-
-AccountsTemplates.configureRoute('forgotPwd', {
-  layoutTemplate: 'masterLayout',
-  name: 'forgotPwd',
 });
