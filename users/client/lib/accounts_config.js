@@ -2,7 +2,7 @@
 // https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 AccountsTemplates.configure({
   /* Behavior */
-  confirmPassword: false,
+  confirmPassword: true,
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
