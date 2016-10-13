@@ -164,6 +164,8 @@ Template.dashboard.onCreated(function () {
       const proxyBackendsCount = ProxyBackends.find().count();
 
       if (proxyBackendsCount > 0) {
+        // Update proxyBackendsAddedState
+        instance.proxyBackendsAddedState.set(true);
         // Make a call
         instance.checkElasticsearch()
           .then((elasticsearchIsDefined) => {
@@ -173,7 +175,6 @@ Template.dashboard.onCreated(function () {
                   // Update reactive variable
                   instance.chartData.set(chartData);
                   instance.chartDataLoadingState.set(false);
-                  instance.proxyBackendsAddedState.set(true);
                 })
                 .catch(err => console.error(err));
             } else {
