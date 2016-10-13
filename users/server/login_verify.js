@@ -8,16 +8,16 @@ export function loginAttemptVerifier (parameters) {
   // Placeholder for user login allowed
   let userLoginAllowed;
 
-  // Get current user
-  const userId = Meteor.userId;
+  // Get reference to user object, to improve readability of later code
+  const user = parameters.user;
 
   // Admin users are always allowed to log in
-  if (Roles.userIsInRole(userId, ['admin'])) {
+  if (Roles.userIsInRole(user._id, ['admin'])) {
     userLoginAllowed = true;
   } else if (
-    parameters.user &&
-    parameters.user.emails &&
-    (parameters.user.emails.length > 0)) {
+    user &&
+    user.emails &&
+    (user.emails.length > 0)) {
     // Get user emails
     const emails = parameters.user.emails;
 
