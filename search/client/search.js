@@ -1,14 +1,14 @@
 // Meteor packages import
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Router } from 'meteor/useraccounts:iron-routing';
+import { Router } from 'meteor/iron:router';
 
 // APINF import
 import { Apis } from '/apis/collection';
 // npm import
 import moment from 'moment';
 
-Template.search.onCreated(() => {
+Template.search.onCreated(function () {
   // Get reference to Template instance
   const instance = this;
 
@@ -26,8 +26,8 @@ Template.search.onCreated(() => {
     // Assign current search value to the reactive variable
     instance.searchValue.set(searchValue);
   }
-
-  instance.autorun(() => {
+//autorun
+  instance.autorun(function () {
     const searchValue = instance.searchValue.get();
 
     // Update API Backends subscription with search value
@@ -66,7 +66,7 @@ Template.search.onCreated(() => {
   };
 });
 
-Template.search.onRendered(() => {
+Template.search.onRendered(function () {
   // Get reference to Template
   const instance = this;
 
