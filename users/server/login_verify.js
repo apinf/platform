@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'lodash';
 
 // Login attempt verifier to require verified email before login
@@ -7,7 +8,16 @@ export function loginAttemptVerifier (parameters) {
   // Placeholder for user login allowed
   let userLoginAllowed;
 
-  if (parameters.user && parameters.user.emails && (parameters.user.emails.length > 0)) {
+  // Get current user
+  const userId = Meteor.userId;
+
+  // Admin users are always allowed to log in
+  if (Roles.userIsInRole(userId, ['admin'])) {
+    userLoginAllowed = true;
+  } else if (
+    parameters.user &&
+    parameters.user.emails &&
+    (parameters.user.emails.length > 0)) {
     // Get user emails
     const emails = parameters.user.emails;
 
