@@ -26,6 +26,11 @@ Meteor.methods({
     }
   },
   disableAccountEmailSettings () {
+    console.log('disable account email settings');
+    // NOTE: This does not work
+    // TODO: figure out if/how we can dynamically toggle AccountsTemplates settings
+    // specifically, those related to verification email and password reset
+
     // Disable email related features / links for accounts templates
     AccountsTemplates.configure({
       /* Verification */
@@ -36,6 +41,11 @@ Meteor.methods({
     });
   },
   enableAccountEmailSettings () {
+    console.log('enable account email settings');
+    // NOTE: This does not work
+    // TODO: figure out if/how we can dynamically toggle AccountsTemplates settings
+    // specifically, those related to verification email and password reset
+
     // Enable email related features / links for accounts templates
     AccountsTemplates.configure({
       /* Verification */
