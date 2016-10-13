@@ -26,11 +26,8 @@ Meteor.methods({
     return emailIsRegistered;
   },
   countUsers () {
-    // Get all users
-    const users = Meteor.users.find().fetch();
-
     // Count the number of users
-    const usersCount = users.length;
+    const usersCount = Meteor.users.find().count();
 
     return usersCount;
   },
