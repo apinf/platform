@@ -1,6 +1,6 @@
 import { Settings } from '/settings/collection';
 import { mailSettingsValid } from '/core/helper_functions/validate_settings';
-import { loginAttemptVerifier } from '/core/helper_functions/login_verify';
+import { loginAttemptVerifier } from './login_verify';
 
 Meteor.startup(function() {
   // Get settings
