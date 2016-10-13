@@ -1,6 +1,9 @@
 <template name="viewApi">
-  {{#if Template.subscriptionsReady }}
-  {{> viewApiPageHeader api=api proxyIsConfigured=proxyIsConfigured proxyBackend=proxyBackend }}
+  {{# if Template.subscriptionsReady }}
+  {{> viewApiPageHeader
+    api=api
+    proxyIsConfigured=proxyIsConfigured
+    proxyBackend=proxyBackend }}
   <div class="container">
     <div class="tab-content">
       <div id="api-details" class="tab-pane fade in active">
@@ -19,19 +22,19 @@
         {{> feedbackList api=api }}
       </div> <!-- /api-feedback -->
 
-      {{ # if currentUser }}
+      {{# if currentUser }}
         {{# if api.currentUserCanEdit }}
           <div id="api-export" class="tab-pane fade">
             {{> apiExport api=api }}
           </div> <!-- /api-export -->
-        {{ / if }}
-      {{ / if }}
+        {{/ if }}
+      {{/ if }}
 
       <div id="api-backlog" class="tab-pane fade">
         {{> apiBacklog api=api backlogItems=backlogItems }}
       </div> <!-- /api-backlog -->
 
-      {{ # if currentUser }}
+      {{# if currentUser }}
         {{# if api.currentUserCanEdit }}
 
           {{# if proxyIsConfigured }}
@@ -43,8 +46,8 @@
           <div id="api-settings" class="tab-pane fade">
             {{> apiSettings api=api }}
           </div>
-        {{ / if }}
-      {{ / if }}
+        {{/ if }}
+      {{/ if }}
     </div>
   </div>
   {{ else }}

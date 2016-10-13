@@ -18,11 +18,11 @@
             {{_ "editBacklogItem_modalTitle" }}
           </h2>
         </div>
-        {{#autoForm
+        {{# autoForm
           collection=apiBacklogItemsCollection
           doc=backlogItem
           id="editBacklogItemForm"
-          type="update"}}
+          type="update" }}
           <div class="modal-body">
             {{> afQuickField name="title" }}
             {{> afQuickField name="details" }}
@@ -33,7 +33,7 @@
               {{_ "editBacklogItem_submit_buttonText" }}
             </button>
           </div>
-        {{/autoForm}}
+        {{/ autoForm }}
       </div>
     </div>
   </div>

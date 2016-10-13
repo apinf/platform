@@ -1,37 +1,45 @@
 <template name="apiSelectPicker">
   <select
     id="api-frontend-prefix"
-    title="{{ _ 'apiSelectPicker_selectAPI' }}"
+    title="{{_ 'apiSelectPicker_selectAPI' }}"
     data-width="fit"
     multiple
     data-selected-text-format="count > 1"
     data-live-search="true"
     data-size="10"
     data-actions-box="true" >
-    {{ # if apisManagedByUser }}
-      <optgroup label="My APIs" >
-        {{ # each api in apisManagedByUser }}
-          <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{ > viewApiStatus apiBackend=api width="0.5" }}
-            &nbsp;
-            {{ api.name }}</option>
-        {{ / each }}
+    <!-- Admininstrator -->
+    {{# if isInRole 'admin' }}
+      <optgroup label="{{_ 'apiSelectPicker_administratorApis' }}" >
+        <option value="{{ apiUmbrellaOption.prefix }}" >
+          {{ apiUmbrellaOption.name }}
+        </option>
       </optgroup>
-      <optgroup label="Other APIs" >
-        {{ # each api in otherApis }}
+    {{/ if }}
+    <!-- User APIs -->
+    {{# if userApis }}
+      <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
+        {{# each api in userApis }}
           <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{ > viewApiStatus apiBackend=api width="0.5" }}
+            {{> viewApiStatus api=api width="0.5" }}
             &nbsp;
-            {{ api.name }}</option>
-        {{ / each }}
+            {{ api.name }}
+          </option>
+        {{/ each }}
       </optgroup>
-    {{ else }}
-      {{ # each api in otherApis }}
-        <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-          {{ > viewApiStatus apiBackend=api width="0.5" }}
-          &nbsp;
-          {{ api.name }}</option>
-      {{ / each }}
-    {{ / if }}
+    {{/ if }}
+
+    <!-- other APIs -->
+    {{# if otherApis }}
+      <optgroup label="{{_ 'apiSelectPicker_otherApis' }}" >
+        {{# each api in otherApis }}
+          <option value="{{ api.url_matches.[0].frontend_prefix }}" >
+            {{> viewApiStatus api=api width="0.5" }}
+            &nbsp;
+            {{ api.name }}
+          </option>
+        {{/ each }}
+      </optgroup>
+    {{/ if }}
   </select>
 </template>

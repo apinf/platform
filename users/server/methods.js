@@ -1,3 +1,4 @@
+import { Accounts } from 'meteor/accounts-base';
 import { Settings } from '/settings/collection';
 
 Meteor.methods({
@@ -8,14 +9,21 @@ Meteor.methods({
       });
     }
   },
-  countUsers () {
-    // Get all users
-    const users = Meteor.users.find().fetch();
+  checkIfEmailIsRegistered (email) {
+    // Get any user with matching email
+    const user = Accounts.findUserByEmail(email);
 
-    // Count the number of users
-    const usersCount = users.length;
+    // placeholder for return value
+    let emailIsRegistered;
 
-    return usersCount;
+    // If user is found, then email is registered
+    if (user) {
+      emailIsRegistered = true;
+    } else {
+      emailIsRegistered = false;
+    }
+
+    return emailIsRegistered;
   },
   sendRegistrationEmailVerification( userId ) {
     // Get settings
@@ -26,10 +34,4 @@ Meteor.methods({
       Accounts.sendVerificationEmail( userId );
     }
   },
-  sendVerificationLink() {
-    const userId = Meteor.userId();
-    if ( userId ) {
-      return Accounts.sendVerificationEmail( userId );
-    }
-  }
 });

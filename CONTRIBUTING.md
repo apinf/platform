@@ -23,6 +23,9 @@ Use the following guidelines when contributing to this project.
       - [Variable examples](#variable-examples)
     - [Code standard(s) and Lint](#code-standards-and-lint)
     - [Indentation](#indentation)
+    - [Quotes](#quotes)
+    - [Whitespace](#whitespace)
+        - [Handlebars helpers](#handlebars-helpers)
   - [File structure](#file-structure)
     - [File names](#file-names)
   - [Collection/Schema structure](#collectionschema-structure)
@@ -256,7 +259,30 @@ Also, nest most/all HTML child elements -- i.e. avoid having multiple inline ele
   Paragraph text.
 </p>
 ```
+### Quotes
+Please use quotation marks (`""` and `''`) consistently. In general,
 
+- use single quotes in JavaScript
+  - e.g. 'here is a string'
+- use single quotes in handlebars
+  - e.g. `{{_ 'i18n_token' }}`
+- use double quotes in HTML
+  - e.g. `<a href="...">Link</a>`
+
+### Whitespace
+Please use consistent whitespace in project files. In general, whitespace is used to help people read our code.
+
+- use two spaces for indentation in HTML and JavaScript files
+
+##### Handlebars helpers
+Please observe the following structure when working with handlebars syntax:
+
+- Handlebars (`{{`) and prefixes (`>`, `#`, `/`, and `_`) should be placed next to each other.
+  - Examples: `{{> ... }}`, `{{# ... }}`, `{{/ ... }}`, `{{_ ... }}`
+- include a space before the closing handlebars `}}`
+  - Example: `{{ ... }}`
+- use spaces on both sides of handlebars words
+  - Examples: `{{# if }}`, `{{ else }}`, `{{_ 'i18n_token' }}`
 
 ## File structure
 This project is organized around a 'module' / 'component' architecture.
@@ -356,7 +382,7 @@ A specific example, found on a page element heading:
 ```html
 <!-- note the element nesting, for readability -->
 <h1 class="page-header">
-  {{_ "pageTemplate_header_text"}}
+  {{_ "pageTemplate_header_text" }}
 </h1>
 ```
 

@@ -1,3 +1,7 @@
+import { TAPi18n } from 'meteor/tap:i18n';
+import { InlineHelp } from 'meteor/pahans:inline-help';
+
+
 // Initialize help texts
 const formHints = {
   documentation_link: {
@@ -29,7 +33,7 @@ const formHints = {
     options: {
       placement: 'left',
     },
-  }
+  },
 };
 
 InlineHelp.initHelp(formHints);

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Router } from 'meteor/iron:router';
+import { Roles } from 'meteor/alanning:roles';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
@@ -15,6 +17,8 @@ Template.dashboard.onCreated(function () {
   instance.chartData = new ReactiveVar();
   // Keeps chart data loading state
   instance.chartDataLoadingState = new ReactiveVar(false);
+  // Keeps status of proxy backends
+  instance.proxyBackendsAddedState = new ReactiveVar(false);
 
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
@@ -23,6 +27,7 @@ Template.dashboard.onCreated(function () {
   instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
+  // Get current user Id
   const userId = Meteor.userId();
 
   // Subscribe to proxyApis publicaton
@@ -84,6 +89,19 @@ Template.dashboard.onCreated(function () {
       });
     }
 
+    // Check if user has an admin role
+    if (Roles.userIsInRole(userId, ['admin'])) {
+      // Add query for API Umbrella analytics data
+      prefixesQuery.push({
+        wildcard: {
+          request_path: {
+            // Add '*' to partially match the url
+            value: '*/api-umbrella/*',
+          },
+        },
+      });
+    }
+
     // Construct parameters for elasticsearch
     const params = {
       size: 50000,
@@ -142,25 +160,34 @@ Template.dashboard.onCreated(function () {
       // Set loader
       instance.chartDataLoadingState.set(true);
 
-      // Make a call
-      instance.checkElasticsearch()
-        .then((elasticsearchIsDefined) => {
-          if (elasticsearchIsDefined) {
-            instance.getChartData(params)
-              .then((chartData) => {
-                // Update reactive variable
-                instance.chartData.set(chartData);
+      // Check if proxyBackendsCount
+      const proxyBackendsCount = ProxyBackends.find().count();
 
-                instance.chartDataLoadingState.set(false);
-              })
-              .catch(err => console.error(err));
-          } else {
-            console.error('Elasticsearch is not defined!');
+      if (proxyBackendsCount > 0) {
+        // Update proxyBackendsAddedState
+        instance.proxyBackendsAddedState.set(true);
+        // Make a call
+        instance.checkElasticsearch()
+          .then((elasticsearchIsDefined) => {
+            if (elasticsearchIsDefined) {
+              instance.getChartData(params)
+                .then((chartData) => {
+                  // Update reactive variable
+                  instance.chartData.set(chartData);
+                  instance.chartDataLoadingState.set(false);
+                })
+                .catch(err => console.error(err));
+            } else {
+              console.error('Elasticsearch is not defined!');
 
-            Router.go('/catalogue');
-          }
-        })
-        .catch(err => console.error(err));
+              Router.go('/catalogue');
+            }
+          })
+          .catch(err => console.error(err));
+      } else {
+        instance.proxyBackendsAddedState.set(false);
+        console.error('Proxy backends and/or APIs are not added.');
+      }
     }
   });
 });
@@ -229,5 +256,10 @@ Template.dashboard.helpers({
     const instance = Template.instance();
 
     return instance.chartDataLoadingState.get();
+  },
+  proxyBackendsAddedState () {
+    const instance = Template.instance();
+
+    return instance.proxyBackendsAddedState.get();
   },
 });

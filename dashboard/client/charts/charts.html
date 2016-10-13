@@ -1,7 +1,15 @@
 <template name="dashboardCharts">
+  {{# if proxyBackendsAddedState }}
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-main-title">
+        {{_ "dashboard_mainTitle" }}
+      </h1>
+    </div>
+  </div>
   <div class="row no-margin-row">
     <div class="col-md-12 dashboard-charts-filtering">
-      {{ > dashboardChartsFiltering }}
+      {{> dashboardChartsFiltering }}
     </div>
   </div>
   <div class="charts-holder">
@@ -9,25 +17,31 @@
     <div class="row">
       <div class="col-md-12">
         <div>
-          {{ > requestsOverTimeChart }}
+          {{> requestsOverTimeChart }}
         </div>
         <div>
-          {{ > overviewChartChart }}
+          {{> overviewChartChart }}
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        {{ > statusCodeCountsChart }}
+        {{> statusCodeCountsChart }}
       </div>
       <div class="col-md-6">
-        {{ > responseTimeDistributionChart }}
+        {{> responseTimeDistributionChart }}
       </div>
     </div>
     <div class="row">
       <div class="padding-sides">
-        {{ > dashboardDataTable tableDataSet=tableDataSet }}
+        {{> dashboardDataTable tableDataSet=tableDataSet }}
       </div>
     </div>
   </div>
+  {{ else }}
+  <div class="alert alert-warning alert-text" role="alert">
+    {{_ 'dashboardCharts_placeholder_proxyBackendsNotFound'}}
+  </div>
+
+  {{/ if }}
   </template>

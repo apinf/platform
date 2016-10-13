@@ -1,6 +1,11 @@
+import  { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
+
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Apis } from '/apis/collection';
 import { Settings } from '/settings/collection';
+
+const uploadingSpinner = new ReactiveVar(false);
 
 Template.manageApiDocumentationModal.onCreated(function () {
   const instance = this;
@@ -10,6 +15,9 @@ Template.manageApiDocumentationModal.onCreated(function () {
     // Save apibackend id
     Session.set('api', api);
   });
+
+  // Turn off spinner if it was on
+  uploadingSpinner.set(false);
 
   // Subscribe to documentation editor settings
   instance.subscribe('singleSetting', 'apiDocumentationEditor');
@@ -108,4 +116,10 @@ Template.manageApiDocumentationModal.helpers({
       {label: 'PUT', value: 'put'}
     ]
   },
+  spinnerEnabled () {
+    // Return spinner status
+    return uploadingSpinner.get();
+  },
 });
+
+export default uploadingSpinner;

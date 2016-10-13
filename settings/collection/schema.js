@@ -3,6 +3,15 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { Settings } from './';
 
 Settings.schema = new SimpleSchema({
+  access: {
+    type: Object,
+    optional: true,
+  },
+  'access.onlyAdminsCanAddApis': {
+    type: Boolean,
+    optional: true,
+    label: TAPi18n.__('settings_schema_onlyAdminsCanAddApis'),
+  },
   apiDocumentationEditor: {
     type: Object,
     optional: true,

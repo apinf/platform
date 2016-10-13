@@ -1,11 +1,14 @@
-// Collection imports
-import { Apis } from './';
-import { ApiBackendRatings } from '/ratings/collection';
-
 // Utility imports
 import ss from 'simple-statistics';
 import moment from 'moment';
 import _ from 'lodash';
+
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+// Collection imports
+import { ApiBackendRatings } from '/ratings/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
+import { Apis } from './';
 
 Apis.helpers({
   currentUserCanEdit () {
@@ -17,17 +20,19 @@ Apis.helpers({
       // Check if user is manager of this API
       const userIsManager = _.includes(this.managerIds, userId);
 
+      // Check if user has external access
+      const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
+
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
       // if user is manager or administrator, they can edit
-      if (userIsManager || userIsAdmin) {
+      if (userIsManager || userIsAuthorized || userIsAdmin) {
         return true;
       }
-    } else {
-      // User is not logged in
-      return false;
     }
+    // User is not logged in
+    return false;
   },
   currentUserCanView () {
     // Check if API is public
@@ -48,7 +53,7 @@ Apis.helpers({
     const managerIds = this.managerIds;
 
     // Create API managers array with usernames
-    const apiManagers = _.map(managerIds, function (id) {
+    const apiManagers = _.map(managerIds, (id) => {
       let userById;
       if (id) {
         userById = Meteor.users.findOne(id);
@@ -56,10 +61,9 @@ Apis.helpers({
           // Return username of manager
           return userById.username;
         }
-      } else {
-        // If array has null return admin
-        return 'admin';
       }
+      // If array has null return admin
+      return 'admin';
     });
 
     return apiManagers;
@@ -73,21 +77,20 @@ Apis.helpers({
     // If ratings exist
     if (apiBackendRatings) {
       // Create array containing only rating values
-      const apiBackendRatingsArray = _.map(apiBackendRatings, function (rating) {
-        // get only the rating value; omit User ID and API Backend ID fields
-        return rating.rating;
-      });
+      // get only the rating value; omit User ID and API Backend ID fields
+      const apiBackendRatingsArray = _.map(apiBackendRatings, rating => rating.rating);
 
       // Get the average (mean) value for API Backend ratings
       const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
       // Return average with precision of 2 significant numbers
       const result = Number(apiBackendRatingsAverage.toPrecision(2));
+
       if (!isNaN(result)) {
         return Number(apiBackendRatingsAverage.toPrecision(2));
-      } else {
-        return false;
       }
     }
+
+    return false;
   },
   getBookmarkCount () {
     // Get API Backend ID
@@ -128,9 +131,6 @@ Apis.helpers({
   relativeCreatedAt () {
     // Return relative updated_at
     return moment(this.created_at).fromNow();
-  },
-  description () {
-    const apiBackendIdDescription = this.description;
   },
   setAverageRating () {
     // get average rating value

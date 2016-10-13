@@ -2,14 +2,56 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Utility import
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
-
-const Settings = new SimpleSchema({
-  'disable_api_key': {
+const RateLimitSchema = new SimpleSchema({
+  duration: {
+    type: Number,
+    optional: true,
+  },
+  limit_by: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'apiKey',
+      'ip',
+    ],
+  },
+  limit: {
+    type: Number,
+    optional: true,
+  },
+  response_headers: {
     type: Boolean,
     optional: true,
     defaultValue: false,
   },
 });
+
+// Internationalize Rate limit schema texts
+RateLimitSchema.i18n('schemas.ProxyBackends.apiUmbrella.settings.rate_limit');
+
+const SettingsSchema = new SimpleSchema({
+  disable_api_key: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
+  rate_limit_mode: {
+    type: String,
+    optional: false,
+    allowedValues: [
+      'custom',
+      'unlimited',
+    ],
+    defaultValue: 'unlimited',
+  },
+  rate_limits: {
+    type: [RateLimitSchema],
+    optional: true,
+  },
+});
+
+// Internationalize settings schema texts
+SettingsSchema.i18n('schemas.ProxyBackends.apiUmbrella.settings');
 
 const ApiUmbrellaSchema = new SimpleSchema({
   id: {
@@ -51,6 +93,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'url_matches.$.frontend_prefix': {
     type: String,
     optional: true,
+    unique: true,
     label: 'Proxy base path',
     regEx: proxyBasePathRegEx,
   },
@@ -75,9 +118,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
     label: 'API port',
   },
   settings: {
-    type: Settings,
+    type: SettingsSchema,
     optional: true,
   },
 });
+
+// Internationalize API Umbrella schema texts
+ApiUmbrellaSchema.i18n('schemas.ProxyBackends.apiUmbrella');
 
 export { ApiUmbrellaSchema };

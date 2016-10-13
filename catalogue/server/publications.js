@@ -1,6 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+
 // Collection imports
 import { Apis } from '/apis/collection';
 import { ApiBackendRatings } from '/ratings/collection';
+import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Set up query object placeholder
@@ -10,16 +14,24 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   // Get user ID
   const userId = this.userId;
 
+  const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
   if (userId) {
-    // If user logged in
-    // Select public and managed APIs
-    selector = {
-      $or:
-      [
-        { isPublic: true },
-        { managerIds: userId },
-      ],
-    };
+    if (userIsAdmin) {
+      // Select all APIs
+      selector = {};
+    } else {
+      // If user logged in
+      // Select public, managed APIs & APIs user is authorized to see
+      selector = {
+        $or:
+        [
+          { isPublic: true },
+          { managerIds: userId },
+          { authorizedUserIds: userId },
+        ],
+      };
+    }
   }
 
   // Set up query options with empty sort settings
@@ -33,29 +45,42 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
     // Get user bookmarks
     const userBookmarks = ApiBookmarks.findOne({ userId });
 
-    // Get bookmarked API IDs
+    // Check userBookmarks exist
     if (userBookmarks) {
+      // Get bookmarkedApiIds
       const bookmarkedApiIds = userBookmarks.apiIds;
-
-      // Set up query object to contain bookmarked API IDs which are public
-      selector = {
-        $or: [
-          {
-            $and:
-            [// User has bookmarked and API is public
+      // Check if userIsAdmin
+      if (userIsAdmin) {
+        // Show bookmarked APIs (regardless of visibility status)
+        selector = { _id: { $in: bookmarkedApiIds } };
+      } else {
+        // Set up query object to contain bookmarked API IDs which are public
+        selector = {
+          $or: [
+            {
+              $and:
+              [// User has bookmarked and API is public
+                  { _id: { $in: bookmarkedApiIds } },
+                  { isPublic: true },
+              ],
+            },
+            {
+              $and:
+              [// User has bookmarked and is manager (regardless of public status)
                 { _id: { $in: bookmarkedApiIds } },
-                { isPublic: true },
-            ],
-          },
-          {
-            $and:
-            [// User has bookmarked and is manager (regardless of public status)
-              { _id: { $in: bookmarkedApiIds } },
-              { managerIds: userId },
-            ],
-          },
-        ],
-      };
+                { managerIds: userId },
+              ],
+            },
+            {
+              $and:
+              [// User has bookmarked and has view rights to API
+                { _id: { $in: bookmarkedApiIds } },
+                { authorizedUserIds: userId },
+              ],
+            },
+          ],
+        };
+      }
     } else {
       // If user has no bookmarks, don't return any results
       return [];
@@ -78,12 +103,12 @@ Meteor.publish('catalogue', function ({ filterBy, sortBy, sortDirection }) {
   return Apis.find(selector, queryOptions);
 });
 
-Meteor.publish('catalogueRatings', function () {
+Meteor.publish('catalogueRatings', () => {
   // Find all API Backends
   return ApiBackendRatings.find();
 });
 
-Meteor.publish('catalogueBookmarks', function () {
+Meteor.publish('catalogueBookmarks', () => {
   // Find all API Backends
   return ApiBookmarks.find();
 });

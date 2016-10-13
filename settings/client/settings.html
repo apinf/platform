@@ -4,62 +4,95 @@
       <div class="col-md-3 settings-menu">
         {{> settingsMenu }}
       </div>
-      {{#autoForm collection=settingsCollection doc=editDoc id="settings" type=formType}}
+      {{# autoForm
+        collection=settingsCollection
+        doc=editDoc
+        id="settings"
+        type=formType }}
       <div class="col-md-6 settings-fields">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <span class="panel-title">{{_ "settings_apiDocumentation_editor"}}</span>
-            <span class="pull-right">{{> afQuickField name='apiDocumentationEditor.enabled'}}</span>
+            <span class="panel-title">
+              {{_ "settings_addingApis" }}
+            </span>
           </div>
           <div class="panel-body">
-            {{#if afFieldValueIs name="apiDocumentationEditor.enabled" value=true}}
-              {{> afQuickField name='apiDocumentationEditor.host'}}
-            {{/if}}
+            {{> afQuickField name='access.onlyAdminsCanAddApis' }}
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-              <span class="panel-title">{{_ "settings_sdkCode_generator"}}</span>
-              <span class="pull-right">{{> afQuickField name='sdkCodeGenerator.enabled'}}</span>
+            <span class="panel-title">
+              {{_ "settings_apiDocumentation_editor" }}
+            </span>
+            <span class="pull-right">
+              {{> afQuickField name='apiDocumentationEditor.enabled' }}
+            </span>
           </div>
           <div class="panel-body">
-              {{#if afFieldValueIs name="sdkCodeGenerator.enabled" value=true}}
-                  {{> afQuickField name='sdkCodeGenerator.host'}}
-              {{/if}}
+            {{# if afFieldValueIs name="apiDocumentationEditor.enabled" value=true }}
+              {{> afQuickField name='apiDocumentationEditor.host' }}
+            {{/ if }}
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <span class="panel-title">{{_ "settings_mail"}}</span>
-            <span class="pull-right">{{> afQuickField name='mail.enabled'}}</span>
+              <span class="panel-title">
+                {{_ "settings_sdkCode_generator" }}
+              </span>
+              <span class="pull-right">
+                {{> afQuickField name='sdkCodeGenerator.enabled' }}
+              </span>
           </div>
           <div class="panel-body">
-            {{#if afFieldValueIs name='mail.enabled' value=true}}
-              {{> afQuickField name='mail.username'}}
+            {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
+              {{> afQuickField name='sdkCodeGenerator.host' }}
+            {{/ if }}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span class="panel-title">
+              {{_ "settings_mail" }}
+            </span>
+            <span class="pull-right">
+              {{> afQuickField name='mail.enabled' }}
+            </span>
+          </div>
+          <div class="panel-body">
+            {{# if afFieldValueIs name='mail.enabled' value=true }}
+              {{> afQuickField name='mail.username' }}
               {{> afQuickField name='mail.password' type="password" }}
-              {{> afQuickField name='mail.smtpHost'}}
-              {{> afQuickField name='mail.smtpPort'}}
-              {{>showHelp 'settings_mail_fromEmail'}}
-              {{> afQuickField name='mail.fromEmail'}}
-              {{>showHelp 'settings_mail_toEmail'}}
-              {{> afQuickField name='mail.toEmail'}}
-            {{/if}}
+              {{> afQuickField name='mail.smtpHost' }}
+              {{> afQuickField name='mail.smtpPort' }}
+              {{> showHelp 'settings_mail_fromEmail' }}
+              {{> afQuickField name='mail.fromEmail' }}
+              {{> showHelp 'settings_mail_toEmail' }}
+              {{> afQuickField name='mail.toEmail' }}
+            {{/ if }}
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">{{_ "settings_github"}}</h3>
+            <h3 class="panel-title">
+              {{_ "settings_github" }}
+            </h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='githubConfiguration.clientId'}}
-            {{> afQuickField name='githubConfiguration.secret'}}
+            {{> afQuickField name='githubConfiguration.clientId' }}
+            {{> afQuickField name='githubConfiguration.secret' }}
           </div>
         </div>
         <div id="form-buttons">
-          <button type="submit" class="btn btn-lg btn-success" id="save-settings">{{_ "settings_save"}}</button>
+          <button
+            type="submit"
+            class="btn btn-lg btn-success"
+            id="save-settings">
+            {{_ "settings_save" }}
+          </button>
         </div>
       </div>
-      {{/autoForm}}
+      {{/ autoForm }}
     </div>
   </div>
 </template>

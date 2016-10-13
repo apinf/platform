@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        {{ # if projectLogoExists }}
+        {{# if projectLogoExists }}
         <a class="navbar-brand text-hide" href="/" style="background-image:url({{ uploadedProjectLogoLink }})">
           APInf
         </a>
@@ -18,65 +18,63 @@
             {{ branding.siteTitle }}
           </a>
         </div>
-        {{ / if }}
+        {{/ if }}
       </div>
       <div id="main-navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
           {{# if currentUser }}
-            {{ # if proxyIsDefined }}
-              <li class="{{isActiveRoute 'dashboard'}}">
+            {{# if proxyIsDefined }}
+              <li class="{{ isActiveRoute 'dashboard' }}">
                 <a href="/dashboard">
-                  <span>{{_ "Dashboard"}}</span>
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                  {{_ "Dashboard" }}
                 </a>
               </li>
-            {{ / if }}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              {{_ "masterLayout_sidebar_APIBackends"}}
-              <i class="fa fa-chevron-down"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="{{ pathFor route='addApi' }}">
-                  {{_ "masterLayout_sidebar_AddAPIBackend"}}
-                </a>
-              </li>
-              {{# if isInRole 'manager' }}
-              <li>
-                <a href="{{pathFor route='manageApiBackends'}}">
-                  {{_ "masterLayout_sidebar_ManageAPIBackends"}}
-                </a>
-              </li>
-              {{/ if }}
-            </ul>
-          </li>
-          {{ /if }}
-          <li class="{{isActiveRoute 'catalogue'}}">
-            <a href="/catalogue">
-              {{_ "masterLayout_sidebar_Catalogue"}}
+            {{/ if }}
+          {{/ if }}
+          <li class="{{ isActiveRoute 'catalogue' }}">
+            <a href="{{ pathFor route='catalogue' }}">
+              <i class="fa fa-book" aria-hidden="true"></i>
+              {{_ "masterLayout_sidebar_Catalogue" }}
             </a>
           </li>
           {{# if currentUser }}
-          {{# if isInRole 'admin' }}
-          <li class="{{isActiveRoute 'accountsAdmin'}}">
-            <a href="{{pathFor route='accountsAdmin'}}">
-              <span>{{_ "masterLayout_sidebar_Users"}}</span>
-            </a>
-          </li>
-          {{/ if }}
+            {{# if userCanAddApi }}
+            <li class="{{ isActiveRoute 'addApi' }}">
+              <a href="{{ pathFor route='addApi' }}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+
+                {{_ "masterLayout_sidebar_AddAPIBackend" }}
+              </a>
+            </li>
+            {{/ if }}
+            {{# if isInRole 'admin' }}
+              <li class="{{ isActiveRoute 'accountsAdmin' }}">
+                <a href="{{ pathFor route='accountsAdmin' }}">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                  {{_ "masterLayout_sidebar_Users" }}
+                </a>
+              </li>
+            {{/ if }}
           {{/ if }}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          {{#if currentUser}}
+          {{# if currentUser }}
           {{> userMenu user=currentUser }}
-          {{else}}
+          {{ else }}
           <li>
-            <a class="close-navbar" href="/sign-up">{{_ "signup"}}</a>
+            <a class="close-navbar" href="/sign-up">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              {{_ "signup" }}
+            </a>
           </li>
           <li>
-            <a class="close-navbar" href="/sign-in">{{_ "login"}}</a>
+            <a class="close-navbar" href="/sign-in">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              {{_ "login" }}
+            </a>
           </li>
-          {{/if}}
+          {{/ if }}
           <li>
             <a type="button" class="icon-search">
               <i class="fa fa-search toggle-search-icon"></i>

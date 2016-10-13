@@ -110,10 +110,16 @@ Template.swaggerUiContent.onCreated(function () {
     // Get api
     const api = Apis.findOne(instance.data.api._id);
 
-    // Set selected methods in Swagger
-    swagger.setOption('supportedSubmitMethods', api.submit_methods);
+    // Check on documentation exists
+    if (api.documentationFileId) {
+      // Set selected methods in Swagger
+      swagger.setOption('supportedSubmitMethods', api.submit_methods);
 
-    // Load Swagger UI
-    swagger.load();
+      // Load Swagger UI
+      swagger.load();
+    } else if (swagger.mainView) {
+      // Clear swagger container
+      swagger.mainView.clear();
+    }
   });
 });
