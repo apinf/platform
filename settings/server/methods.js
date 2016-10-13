@@ -25,6 +25,26 @@ Meteor.methods({
       Accounts.emailTemplates.from = settings.mail.fromEmail;
     }
   },
+  disableAccountEmailSettings () {
+    // Disable email related features / links for accounts templates
+    AccountsTemplates.configure({
+      /* Verification */
+      sendVerificationEmail: false,
+      showResendVerificationEmailLink: false,
+      /* Password */
+      showForgotPasswordLink: false,
+    });
+  },
+  enableAccountEmailSettings () {
+    // Enable email related features / links for accounts templates
+    AccountsTemplates.configure({
+      /* Verification */
+      sendVerificationEmail: true,
+      showResendVerificationEmailLink: true,
+      /* Password */
+      showForgotPasswordLink: true,
+    });
+  },
   updateGithubConfiguration () {
     // Try if settings exist
     try {
@@ -61,8 +81,12 @@ Meteor.methods({
       if (settings.mail.enabled) {
         // Configure system SMTP variable for sending mail
         Meteor.call('configureSmtpSettings', settings);
+
+        // Enable accounts email related features (validation, reset password)
+        Meteor.call('enableAccountEmailSettings');
       } else {
-        console.log('email disabled');
+        // No email verification or reset password functionality
+        Meteor.call('disableAccountEmailSettings');
       }
     } catch (error) {
       // otherwise preapare message about error
