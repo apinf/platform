@@ -25,12 +25,6 @@ Meteor.methods({
 
     return emailIsRegistered;
   },
-  countUsers () {
-    // Count the number of users
-    const usersCount = Meteor.users.find().count();
-
-    return usersCount;
-  },
   sendRegistrationEmailVerification( userId ) {
     // Get settings
     const settings = Settings.findOne();
