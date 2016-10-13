@@ -5,7 +5,6 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // Apinf import
 import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
-import { loginAttemptVerifier } from '/core/helper_functions/login_verify';
 import { Settings } from '../collection';
 
 Meteor.methods({
