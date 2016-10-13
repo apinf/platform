@@ -34,10 +34,4 @@ Meteor.methods({
       Accounts.sendVerificationEmail( userId );
     }
   },
-  sendVerificationLink() {
-    const userId = Meteor.userId();
-    if ( userId ) {
-      return Accounts.sendVerificationEmail( userId );
-    }
-  }
 });
