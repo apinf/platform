@@ -1,28 +1,16 @@
 <template name="dashboard">
   <div class="container">
     {{# if isInRole 'admin, manager' }}
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-main-title">
-          {{_ "dashboard_mainTitle" }}
-        </h1>
-      </div>
-    </div>
-    {{> dashboardCharts chartData=chartData loadingState=loadingState proxyBackendsAddedState=proxyBackendsAddedState }}
+      {{> dashboardCharts chartData=chartData loadingState=loadingState proxyBackendsAddedState=proxyBackendsAddedState }}
     {{ else }}
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="dashboard-no-apis">
-          {{_ "dashboard_noApisTitle" }}
-          <br>
-          <a
-            href="{{ pathFor route='addApi' }}"
-            class="btn btn-success">
-            {{_ 'dashboard_addApiButton_text' }}
-          </a>
-        </h1>
+      <div class="alert alert-warning alert-text" role="alert">
+        {{_ "dashboard_noApisTitle" }}&nbsp;&nbsp;
+        <a
+          href="{{ pathFor route='addApi' }}"
+          class="btn btn-sm btn-success">
+          {{_ 'dashboard_addApiButton_text' }}
+        </a>
       </div>
-    </div>
     {{/ if }}
   </div>
 </template>
