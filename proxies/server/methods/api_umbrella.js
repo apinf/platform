@@ -8,15 +8,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import _ from 'lodash';
 
 Meteor.methods({
-  proxyBackendsAdded () {
-    const proxyBackend = ProxyBackends.findOne();
-
-    if (proxyBackend) {
-      return true;
-    }
-
-    return false;
-  },
   createApiBackendOnApiUmbrella (apiBackend) {
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
