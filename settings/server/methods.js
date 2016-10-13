@@ -63,9 +63,6 @@ Meteor.methods({
       if (settings.mail.enabled) {
         // Configure system SMTP variable for sending mail
         Meteor.call('configureSmtpSettings', settings);
-
-        // Make sure all admin users' primary email address is marked as valid
-        Meteor.call('validateAdminUserEmails');
       } else {
         console.log('email disabled');
       }
@@ -77,12 +74,4 @@ Meteor.methods({
       console.log(message);
     }
   },
-  validateAdminUserEmails () {
-    // Update admin account. Set 'verified: true' for all admin user
-    Meteor.users.update(
-      { roles: { $in: ['admin'] }, 'emails.0.verified': false },
-      { $set: { 'emails.0.verified': true } },
-      { multi: true },
-    );
-  }
 });
