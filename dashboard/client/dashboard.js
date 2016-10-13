@@ -160,10 +160,10 @@ Template.dashboard.onCreated(function () {
       // Set loader
       instance.chartDataLoadingState.set(true);
 
-      // Check if proxyBackendsAdded
-      const proxyBackendsAdded = Meteor.call('proxyBackendsAdded');
+      // Check if proxyBackendsCount
+      const proxyBackendsCount = ProxyBackends.find().count();
 
-      if (proxyBackendsAdded) {
+      if (proxyBackendsCount > 0) {
         // Make a call
         instance.checkElasticsearch()
           .then((elasticsearchIsDefined) => {
