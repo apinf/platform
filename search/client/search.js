@@ -46,8 +46,16 @@ Template.search.created = function () {
   });
 
   instance.getSearchResults = function () {
-    var query = instance.query.get();
-    return Apis.find(query).fetch();
+    // Get query result
+    const query = instance.query.get();
+    // Find api in collection
+    const searchResult = Apis.find(query).fetch();
+    // Filter that: can current user view it or not
+    const filteredResult = searchResult.filter((api) => {
+      return api.currentUserCanView();
+    });
+
+    return filteredResult;
   };
 };
 
