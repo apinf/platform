@@ -402,42 +402,32 @@ Template.dashboardCharts.onRendered(function () {
     const chartDataIsLoading = Template.currentData().loadingState;
     const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
-    if (instance.data.proxyBackendsAddedState) {
-      if (chartDataIsLoading) {
-        // Set loader
-        chartElements.addClass('loader');
+    if (chartDataIsLoading) {
+      // Set loader
+      chartElements.addClass('loader');
+    } else if (chartData && chartData.length > 0) {
+      let parsedData = [];
+
+      if (apiFrontendPrefixList) {
+        // Filter data by api frontend prefix
+        const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
+
+        // Parse data for charts
+        parsedData = instance.parseChartData(filteredData);
       } else {
-        if (chartData && chartData.length > 0) {
-          let parsedData = [];
-
-          if (apiFrontendPrefixList) {
-            // Filter data by api frontend prefix
-            const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
-
-            // Parse data for charts
-            parsedData = instance.parseChartData(filteredData);
-          } else {
-            // Parse data for charts
-            parsedData = instance.parseChartData(chartData);
-          }
-
-          // Unset loader
-          $('.charts-holder>#no-chart-data-placeholder').remove();
-
-          // Render charts
-          instance.renderCharts(parsedData);
-        } else if (chartData && chartData.length === 0 && instance.data.proxyBackendsAddedState) {
-          // Cleanup previous message if one exists
-          $('.charts-holder>#no-chart-data-placeholder').remove();
-          const i18nMessage = TAPi18n.__('dashboardCharts_placeholder_noDataFound');
-          // throw user-friendly message
-          $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
-        }
+        // Parse data for charts
+        parsedData = instance.parseChartData(chartData);
       }
-    } else {
+
+      // Unset loader
+      $('.charts-holder>#no-chart-data-placeholder').remove();
+
+      // Render charts
+      instance.renderCharts(parsedData);
+    } else if (chartData && chartData.length === 0) {
       // Cleanup previous message if one exists
       $('.charts-holder>#no-chart-data-placeholder').remove();
-      const i18nMessage = TAPi18n.__('dashboardCharts_placeholder_proxyBackendsNotFound');
+      const i18nMessage = TAPi18n.__('dashboardCharts_placeholder_noDataFound');
       // throw user-friendly message
       $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
     }
