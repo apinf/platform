@@ -1,6 +1,7 @@
 {
   "aboutApinf_documentation": "Documentation",
   "aboutApinf_contributors": "Contributors",
+  "aboutApinf_createdBy": "Created by",
   "aboutApinf_credits": "Credits",
   "aboutApinf_doneButton_text": "Done",
   "aboutApinf_intro": "Apinf is an open-source API management platform.",
@@ -9,7 +10,6 @@
   "aboutApinf_projectLinks": "Project links",
   "aboutApinf_projectVersions": "Versions",
   "aboutApinf_sourcecode": "Source code",
-  "aboutApinf_sponsors": "Sponsors",
   "aboutApinf_support": "Support",
   "aboutApinf_title": "About Apinf",
   "account_delete_button_text": "Delete account",
