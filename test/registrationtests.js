@@ -44,14 +44,14 @@ test.describe('Registration', function() {
        driver.getAllWindowHandles().then(function(handles) {
            driver.switchTo().window(handles[1]);
        });
-       driver.findElement(By.id('login_field')).sendKeys('kumargs');
-       driver.findElement(By.id('password')).sendKeys('Delta@123');
-       driver.findElement(By.xpath('//*[@id="login"]/form/div[4]/input[3]')).click();
+       driver.findElement(By.id('login_field')).sendKeys('testapinf123');
+       driver.findElement(By.id('password')).sendKeys('q1w2e3r4');
+       driver.findElement(By.xpath('//*[@id="login"]/form/div[3]/input[3]')).click();
        driver.getAllWindowHandles().then(function(handles) {
            driver.switchTo().window(handles[0]);
            var userNameElement = CommonUtils.signOut(driver)
            userNameElement.getText().then(function(text) {
-               assert.equal(text, 'kumargs');
+               assert.equal(text, 'testapinf123');
            });
            driver.get('https://github.com');
            driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/a')).click();
@@ -67,7 +67,7 @@ test.describe('Registration', function() {
         });
         driver.findElement(By.id('login_field')).sendKeys('invalidEmail');
         driver.findElement(By.id('password')).sendKeys('asdfalkjl');
-        driver.findElement(By.xpath('//*[@id="login"]/form/div[4]/input[3]')).click();
+        driver.findElement(By.xpath('///*[@id="login"]/form/div[3]/input[3]')).click();
         var errorElement = driver.findElement(By.xpath('//*[@id="js-flash-container"]/div/div'));
         errorElement.getText().then(function(text) {
             assert.equal(text, "Incorrect username or password.");
