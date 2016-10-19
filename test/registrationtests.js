@@ -26,7 +26,7 @@ test.describe('Registration', function() {
         CommonUtils.fillSignUpForm(driver, userName, email, faker.internet.password());
         var userNameElement = CommonUtils.signOut(driver);
         userNameElement.getText().then(function(text) {
-           assert.equal(text, userName); 
+            assert.equal(text, userName);
         });
         CommonUtils.deleteNewUser(driver, email);
     });
@@ -35,7 +35,7 @@ test.describe('Registration', function() {
         CommonUtils.fillSignUpForm(driver, 'testName', '@testName', 'password');
         var helpTextElement = driver.findElement(By.xpath('//*[@id="at-pwd-form"]/fieldset/div[2]/span'));
         helpTextElement.getText().then(function(text) {
-           assert.equal(text, 'Invalid email', 'Invalid email message doesn\'t match'); 
+           assert.equal(text, 'Invalid email', 'Invalid email message doesn\'t match');
         });
     });
     test.it('1.3 should login to GIT with valid credentials', function() {
@@ -48,15 +48,15 @@ test.describe('Registration', function() {
        driver.findElement(By.id('password')).sendKeys('Delta@123');
        driver.findElement(By.xpath('//*[@id="login"]/form/div[4]/input[3]')).click();
        driver.getAllWindowHandles().then(function(handles) {
-           driver.switchTo().window(handles[0]);        
+           driver.switchTo().window(handles[0]);
            var userNameElement = CommonUtils.signOut(driver)
            userNameElement.getText().then(function(text) {
-               assert.equal(text, 'kumargs'); 
+               assert.equal(text, 'kumargs');
            });
            driver.get('https://github.com');
            driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/a')).click();
            driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/div/div/form/button')).click();
-           
+
        });
     });
     test.it('1.4 should not create github account with invalid email', function() {
@@ -84,23 +84,23 @@ test.describe('Registration', function() {
         driver.findElement(By.id('at-btn')).click();
         var helpTextElement = driver.findElement(By.xpath('//*[@id="at-pwd-form"]/fieldset/div[2]/span'));
         helpTextElement.getText().then(function(text) {
-           assert.equal(text, 'Required Field'); 
+           assert.equal(text, 'Required Field');
         });
     });
     test.it('1.6 should show unknown validation error with special character email field', function() {
         CommonUtils.signUp(driver);
         CommonUtils.fillSignUpForm(driver, 'testName', 'abc@testName.com"###"', 'password');
-        var errorElement = driver.findElement(By.xpath('/html/body/div/div/div/div/div/div[4]/p'));
+        var errorElement = driver.findElement(By.xpath('/html/body/div[2]/div/div[1]/div/div/div/div[4]/p'));
         errorElement.getText().then(function(text) {
-           assert.equal(text, 'Unknown validation error'); 
+           assert.equal(text, 'Address must be a valid e-mail address');
         });
     });
     test.it('1.7 should show profile user name invalid with special character username field', function() {
         CommonUtils.signUp(driver);
         CommonUtils.fillSignUpForm(driver, 'testName&&&', 'abc@testName.com', 'password');
-        var errorElement = driver.findElement(By.xpath('/html/body/div/div/div/div/div/div[4]/p'));
+        var errorElement = driver.findElement(By.xpath('/html/body/div[2]/div/div[1]/div/div/div/div[4]/p'));
         errorElement.getText().then(function(text) {
-           assert.equal(text, 'profile-usernameInvalid');
+           assert.equal(text, 'Username failed regular expression validation');
         });
     });
 });
