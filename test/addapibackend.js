@@ -129,7 +129,6 @@ test.describe('Add API Backend', function() {
             apiURL: 'http://google.com'
         };
         AddAPIBackendUtil.addNewBackend(driver, values);
-        AddAPIBackendUtil.addNewBackend(driver, values);
         var errorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[1]/span'));
         errorElement.getText().then(function(text){
             assert.include(text, 'API Name must be unique');
