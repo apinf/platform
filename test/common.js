@@ -11,7 +11,7 @@ var CommonUtils = {
     },
     signIn: function(driver) {
         driver.get(this.url);
-        driver.findElement(By.linkText('Sign In')).click();
+        driver.findElement(By.linkText('login')).click();
     },
     signOut: function(driver) {
         var userNameElement = driver.findElement(By.xpath('//*[@class="dropdown-toggle"][@role="button"]'));
@@ -20,7 +20,7 @@ var CommonUtils = {
         return userNameElement;
     },
     goToDashboard: function(driver) {
-        driver.findElement(By.linkText('Go to dashboard')).click();
+        driver.findElement(By.linkText('Dashboard')).click();
     },
     dashBoardSignOut: function(driver) {
         driver.sleep(1000);
@@ -42,27 +42,25 @@ var CommonUtils = {
         driver.findElement(By.id('at-field-username')).sendKeys(userName);
         driver.findElement(By.id('at-field-email')).sendKeys(email);
         driver.findElement(By.id('at-field-password')).sendKeys(password);
+        driver.findElement(By.id('at-field-password_again')).sendKeys(password);
         driver.findElement(By.id('at-btn')).click();
     },
-    deleteNewUser: function(driver, email) {
+    deleteNewUser: function(driver, email, password) {
         this.signIn(driver);
-        this.fillSignInForm(driver, 'apinfdelta', 'apinfdelta');
-        this.goToDashboard(driver);
-        driver.findElement(By.xpath('/html/body/div/div[1]/div/aside/section/ul/li[5]/a')).click();
-        var searchField = driver.findElement(By.xpath('/html/body/div/div[1]/div/div/section/div[1]/div/div/input'));
-        email.split('').forEach(function(c) {
-            searchField.sendKeys(c);
-        });
-        driver.findElement(By.xpath('/html/body/div/div[1]/div/div/section/table/tbody/tr/td[1]/span[1]')).click().then(function(){
+        this.fillSignInForm(driver, email, password);
+        // Navigate to Account
+        var userNameElement = driver.findElement(By.xpath('//*[@class="dropdown-toggle"][@role="button"]'));
+        userNameElement.click();
+        driver.findElement(By.xpath('//*[text()="Account"]')).click();
+        driver.findElement(By.id('delete-account-button')).click().then(function() {
             driver.sleep(1000);
         });
-        driver.findElement(By.xpath('//*[@id="deleteaccount"]/div/div/div[2]/button[2]')).click().then(function() {
-            driver.sleep(15000);
-        });
-        driver.findElement(By.xpath('/html/body/div/div[1]/div/header/nav/div/ul/li[2]/a')).click();
-        driver.findElement(By.xpath('/html/body/div/div[1]/div/header/nav/div/ul/li[2]/ul/li[6]/a')).click().then(function() {
+        driver.findElement(By.id('delete-account-confirm')).click().then(function() {
             driver.sleep(1000);
         });
+        // Navigated to main page
+        var mainPage = driver.findElement(By.className('feature-section-heading'));
+        return mainPage;
     }
 };
 
