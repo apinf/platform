@@ -6,7 +6,7 @@ var AddAPIBackend = {
         this.fillApiName(driver, values);
         this.fillApiDescription(driver, values);
         this.fillApiURL(driver, values);
-        this.savingInformational(driver);
+        this.savingInformation(driver);
     },
 
     clickAddNewBackend: function(driver) {
@@ -25,7 +25,7 @@ var AddAPIBackend = {
         driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[3]/input')).sendKeys(values.apiURL);
     },
 
-    savingInformational: function(driver) {
+    savingInformation: function(driver) {
         driver.findElement(By.xpath('//*[@id="addApiForm"]/button')).click();
     }
 }

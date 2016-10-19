@@ -47,6 +47,7 @@ test.describe('Add API Backend', function() {
             apiDescription: 'Test Description',
             apiURL: 'http://google.com'
         });
+        // Get API name in an api page
         var publishedAPIHostElement = driver.findElement(By.id('api-header'));
         publishedAPIHostElement.getText().then(function(text){
             assert.equal(text, 'NewBackend v2');
@@ -79,7 +80,8 @@ test.describe('Add API Backend', function() {
         AddAPIBackendUtil.clickAddNewBackend(driver);
         AddAPIBackendUtil.fillApiDescription(driver, values);
         AddAPIBackendUtil.fillApiURL(driver, values);
-        AddAPIBackendUtil.savingInformational(driver);
+        AddAPIBackendUtil.savingInformation(driver);
+        // Get the API Name field in form
         var hostRequiredErrorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[1]/span'));
         hostRequiredErrorElement.getText().then(function(text) {
             assert.equal(text, 'API Name is required');
@@ -97,7 +99,8 @@ test.describe('Add API Backend', function() {
         AddAPIBackendUtil.clickAddNewBackend(driver);
         AddAPIBackendUtil.fillApiName(driver, values);
         AddAPIBackendUtil.fillApiDescription(driver, values);
-        AddAPIBackendUtil.savingInformational(driver);
+        AddAPIBackendUtil.savingInformation(driver);
+        // Get the URL field in form
         var hostRequiredErrorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[3]/span'));
         hostRequiredErrorElement.getText().then(function(text) {
             assert.equal(text, 'URL is required');
@@ -113,6 +116,7 @@ test.describe('Add API Backend', function() {
             apiDescription: 'Test Description',
             apiURL: 'google.com'
         });
+        // Get the URL field in form
         var errorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[3]/span'));
         errorElement.getText().then(function(text){
             assert.include(text, 'URL must be a valid URL');
@@ -129,6 +133,7 @@ test.describe('Add API Backend', function() {
             apiURL: 'http://google.com'
         };
         AddAPIBackendUtil.addNewBackend(driver, values);
+        // Get the API Name field in form
         var errorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[1]/span'));
         errorElement.getText().then(function(text){
             assert.include(text, 'API Name must be unique');
