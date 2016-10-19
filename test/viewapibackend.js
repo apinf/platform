@@ -37,16 +37,19 @@ test.describe('View API Backend', function() {
         });
     });
     test.it('9.2 should send feedback', function() {
-        driver.findElement(By.xpath('//*[@href="#api-backend-feedback"]')).click();
-        var sendFeedBackElement = driver.findElement(By.xpath('//*[@id="api-backend-feedback"]//button[text()="Send feedback"]'));
+        // Get feedbackTab element & click it
+        var feedbackTab = driver.findElement(By.xpath('//*[@href="#api-feedback"]'));
+        feedbackTab.click();
+        // Get feedback panel, find send feedback button
+        var sendFeedBackButton = driver.findElement(By.xpath('//button[@id="add-feedback"]'));
         driver.wait(function() {
-            return sendFeedBackElement.isDisplayed();
-        }, 5000);
-        sendFeedBackElement.click();
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[1]/input')).sendKeys('Test Feedback');
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[2]/textarea')).sendKeys('Test Message');
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[3]/select/option[2]')).click();
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[4]/button')).click();
+            return sendFeedBackButton.isDisplayed();
+        }, 3000);
+        sendFeedBackButton.click();
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[1]/input')).sendKeys('Test Feedback');
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[2]/textarea')).sendKeys('Test Message');
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[3]/select/option[2]')).click();
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]/div[2]/button')).click();
 
         var feedbackSuccessElement = driver.findElement(By.xpath('//*[@id="feedbackForm"]/div/div[2]'));
         driver.wait(function() {
@@ -55,7 +58,6 @@ test.describe('View API Backend', function() {
         feedbackSuccessElement.getText().then(function(text) {
             assert.include(text, 'Thank you! Your feedback has been successfully sent.');
         });
-        driver.findElement(By.xpath('//*[@class="close"]')).click();
     });
     test.it('9.3 should not send feedback with missing fields', function() {
         driver.findElement(By.xpath('//*[@href="#api-backend-feedback"]')).click();
@@ -64,15 +66,14 @@ test.describe('View API Backend', function() {
             return sendFeedBackElement.isDisplayed();
         }, 5000);
         sendFeedBackElement.click();
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[1]/input')).sendKeys('Test Feedback');
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[2]/textarea')).sendKeys('Test Message');
-        driver.findElement(By.xpath('//*[@id="feedback"]/div[4]/button')).click();
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[1]/input')).sendKeys('Test Feedback');
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[2]/textarea')).sendKeys('Test Message');
+        driver.findElement(By.xpath('//*[@id="feedbackForm"]/div[2]/button')).click();
 
-        var changeTypeRequiredElement = driver.findElement(By.xpath('//*[@id="feedback"]/div[3]/span'));
+        var changeTypeRequiredElement = driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[3]/span'));
         changeTypeRequiredElement.getText().then(function(text) {
             assert.include(text, 'Choose message type is required');
         });
-        driver.findElement(By.xpath('//*[@class="close"]')).click();
     });
 });
 
