@@ -21,6 +21,7 @@ test.describe('Add API Backend', function() {
         driver.quit();
     });
     test.afterEach(function() {
+        //TODO: after adding a new api, must delete it too as a new user
         CommonUtils.dashBoardSignOut(driver);
         if (newUser.added) {
             var mainPage = CommonUtils.deleteNewUser(driver, newUser.email, newUser.password);
