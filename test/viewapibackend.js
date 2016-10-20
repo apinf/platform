@@ -76,6 +76,8 @@ test.describe('View API Backend', function() {
         changeTypeRequiredElement.getText().then(function(text) {
             assert.include(text, 'Choose message type is required');
         });
+        // CLose modal
+        driver.findElement(By.xpath('(//*[@id="feedbackFormModal"]/div/div/div/button)[2]')).click();
     });
 });
 
