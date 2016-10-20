@@ -120,7 +120,7 @@ test.describe('Add API Backend', function() {
         // Get the URL field in form
         var errorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[3]/span'));
         errorElement.getText().then(function(text){
-            assert.include(text, 'URL must be a valid URL');
+            assert.equal(text, 'URL must be a valid URL');
         });
     });
     test.it('8.5 should not add/publish api with no unique name', function() {
@@ -134,10 +134,12 @@ test.describe('Add API Backend', function() {
             apiURL: 'http://google.com'
         };
         AddAPIBackendUtil.addNewBackend(driver, values);
+        // Wait a moment for span is available
+        driver.sleep(1000);
         // Get the API Name field in form
         var errorElement = driver.findElement(By.xpath('//*[@id="addApiForm"]/fieldset/div[1]/span'));
         errorElement.getText().then(function(text){
-            assert.include(text, 'API Name must be unique');
+            assert.equal(text, 'API Name must be unique');
         });
     });
 });
