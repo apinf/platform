@@ -19,7 +19,6 @@ test.describe('View API Backend', function() {
     test.beforeEach(function() {
         CommonUtils.signIn(driver);
         CommonUtils.fillSignInForm(driver, 'robot@test.com', 'robottest');
-        CommonUtils.goToDashboard(driver);
         viewAPIDetails(driver);
     });
     test.it('9.1 should view documentation', function() {
