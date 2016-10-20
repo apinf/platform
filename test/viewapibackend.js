@@ -30,7 +30,7 @@ test.describe('View API Backend', function() {
         var documentationHeader = driver.findElement(By.xpath('//*[@id="api-documentation"]//*[contains(@class, "panel-title")]'));
         driver.wait(function() {
             return documentationHeader.isDisplayed();
-        }, 10000);
+        }, 2000);
         // Verify panel header has text "Documentation"
         documentationHeader.getText().then(function(text) {
             assert.equal(text, 'Documentation');
@@ -44,33 +44,35 @@ test.describe('View API Backend', function() {
         var sendFeedBackButton = driver.findElement(By.xpath('//button[@id="add-feedback"]'));
         driver.wait(function() {
             return sendFeedBackButton.isDisplayed();
-        }, 3000);
+        }, 2000);
         sendFeedBackButton.click();
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[1]/input')).sendKeys('Test Feedback');
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[2]/textarea')).sendKeys('Test Message');
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[3]/select/option[2]')).click();
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]/div[2]/button')).click();
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div/div/input)[2]')).sendKeys('Test Feedback');
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div/div[2]/textarea)[2]')).sendKeys('Test Message');
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div/div[3]/select/option[@value="Feedback"])[2]')).click();
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div[2]/button)[2]')).click();
 
-        var feedbackSuccessElement = driver.findElement(By.xpath('//*[@id="feedbackForm"]/div/div[2]'));
-        driver.wait(function() {
-            return feedbackSuccessElement.isDisplayed();
-        }, 10000);
+        var feedbackSuccessElement = driver.findElement(By.xpath('//*[@id="home"]/div/div[1]/div[3]/span'));
         feedbackSuccessElement.getText().then(function(text) {
-            assert.include(text, 'Thank you! Your feedback has been successfully sent.');
+            assert.include(text, 'Test Feedback');
         });
     });
     test.it('9.3 should not send feedback with missing fields', function() {
-        driver.findElement(By.xpath('//*[@href="#api-backend-feedback"]')).click();
-        var sendFeedBackElement = driver.findElement(By.xpath('//*[@id="api-backend-feedback"]//button[text()="Send feedback"]'));
+        // Get feedbackTab element & click it
+        var feedbackTab = driver.findElement(By.xpath('//*[@href="#api-feedback"]'));
+        feedbackTab.click();
+        // Get feedback panel, find send feedback button
+        var sendFeedBackButton = driver.findElement(By.xpath('//button[@id="add-feedback"]'));
         driver.wait(function() {
-            return sendFeedBackElement.isDisplayed();
-        }, 5000);
-        sendFeedBackElement.click();
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[1]/input')).sendKeys('Test Feedback');
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[2]/textarea')).sendKeys('Test Message');
-        driver.findElement(By.xpath('//*[@id="feedbackForm"]/div[2]/button')).click();
+            return sendFeedBackButton.isDisplayed();
+        }, 2000);
+        sendFeedBackButton.click();
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div/div/input)[2]')).sendKeys('Test Feedback');
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div/div[2]/textarea)[2]')).sendKeys('Test Message');
+        driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div[2]/button)[2]')).click();
 
-        var changeTypeRequiredElement = driver.findElement(By.xpath('//*[@id="feedbackForm"]//div[3]/span'));
+        // Wait for validation error
+        driver.sleep(1000);
+        var changeTypeRequiredElement = driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div[1]/div[3]/span)[2]'));
         changeTypeRequiredElement.getText().then(function(text) {
             assert.include(text, 'Choose message type is required');
         });
@@ -80,6 +82,6 @@ test.describe('View API Backend', function() {
 function viewAPIDetails(driver) {
     driver.findElement(By.xpath('//*[text()="Catalog"]')).click();
     driver.findElement(By.xpath('//*[@class="api-card-name"]')).click().then(function() {
-        driver.sleep(10000);
+        driver.sleep(2000);
     });
 }
