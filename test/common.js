@@ -2,7 +2,7 @@ var webdriver = require('selenium-webdriver');
 var By = require('selenium-webdriver').By;
 
 var CommonUtils = {
-    url: 'http://localhost:3030/',
+    url: 'https://nightly.apinf.io',
     buildDriver: function() {
         var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
         driver.manage().timeouts().setScriptTimeout(5000);
