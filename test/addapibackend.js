@@ -57,7 +57,7 @@ test.describe('Add API Backend', function() {
     test.it('8.2 should add/publish api backend as a registered user who doesn\'t own any api', function(){
         newUser.added = false;
         CommonUtils.signIn(driver);
-        CommonUtils.fillSignInForm(driver, 'test@test.test', 'testuser');
+        CommonUtils.fillSignInForm(driver, 'robot@test.com', 'robottest');
         CommonUtils.goToDashboard(driver);
         AddAPIBackendUtil.addNewBackend(driver, {
             apiName: 'NewBackend',
@@ -72,7 +72,7 @@ test.describe('Add API Backend', function() {
     test.it('8.3.1 should not add/publish api backend with missing API name field', function() {
         newUser.added = false;
         CommonUtils.signIn(driver);
-        CommonUtils.fillSignInForm(driver, 'test@test.test', 'testuser');
+        CommonUtils.fillSignInForm(driver, 'robot@test.com', 'robottest');
         CommonUtils.goToDashboard(driver);
         var values = {
             apiDescription: 'Test Description',
@@ -91,7 +91,7 @@ test.describe('Add API Backend', function() {
     test.it('8.3.2 should not add/publish api backend with missing URL field', function() {
         newUser.added = false;
         CommonUtils.signIn(driver);
-        CommonUtils.fillSignInForm(driver, 'test@test.test', 'testuser');
+        CommonUtils.fillSignInForm(driver, 'robot@test.com', 'robottest');
         CommonUtils.goToDashboard(driver);
         var values = {
             apiName: 'NewBackend',
@@ -110,7 +110,7 @@ test.describe('Add API Backend', function() {
     test.it('8.4 should not add/publish api backend with invalid host name', function() {
         newUser.added = false;
         CommonUtils.signIn(driver);
-        CommonUtils.fillSignInForm(driver, 'test@test.test', 'testuser');
+        CommonUtils.fillSignInForm(driver, 'robot@test.com', 'robottest');
         CommonUtils.goToDashboard(driver);
         AddAPIBackendUtil.addNewBackend(driver, {
             apiName: 'NewBackend',
@@ -126,7 +126,7 @@ test.describe('Add API Backend', function() {
     test.it('8.5 should not add/publish api with no unique name', function() {
         newUser.added = false;
         CommonUtils.signIn(driver);
-        CommonUtils.fillSignInForm(driver, 'test@test.test', 'testuser');
+        CommonUtils.fillSignInForm(driver, 'robot@test.com', 'robottest');
         CommonUtils.goToDashboard(driver);
         var values = {
             apiName: 'NewBackend',
