@@ -354,7 +354,27 @@ CollectionName.schema.i18n("schemas.collection_name");
 CollectionName.attachSchema(CollectionName.schema);
 ```
 
-References:
+### Schema changes
+
+To make upgrading convenient & keep application database consistent we want to have
+a proper data migration path for the application.
+
+As a developer, provide a proper migration step in your PR if you make changes to any
+collection schema structure.
+
+We are using percolate:migrations package for migrations. Check README how to write migrations
+and check existing migrations.
+
+Location for migrations is under /core/migrations/server/
+
+**Steps:**
+
+* Add a new file for migration, format (migration-number)-(migration-name).js
+* Write migration function for 'up' step
+
+TODO: add example
+
+**References:**
 - Meteor Guide: Code Style - [Collections](https://guide.meteor.com/code-style.html#collections)
 - Meteor Guide: [Collections and Schemas](https://guide.meteor.com/collections.html#schemas)
 
