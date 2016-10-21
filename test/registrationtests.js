@@ -41,38 +41,42 @@ test.describe('Registration', function() {
     test.it('1.3 should login to GIT with valid credentials', function() {
        CommonUtils.signUp(driver);
        driver.findElement(By.id('at-github')).click();
+       // Switch to Github window
        driver.getAllWindowHandles().then(function(handles) {
            driver.switchTo().window(handles[1]);
        });
        driver.findElement(By.id('login_field')).sendKeys('testapinf123');
        driver.findElement(By.id('password')).sendKeys('q1w2e3r4');
-       driver.findElement(By.xpath('//*[@id="login"]/form/div[4]/input[3]')).click();
+       // Sign in button
+       driver.findElement(By.xpath('//*[@id="login"]/form/div[3]/input[3]')).click();
+       // Switch to main window
        driver.getAllWindowHandles().then(function(handles) {
            driver.switchTo().window(handles[0]);
            var userNameElement = CommonUtils.signOut(driver)
-           userNameElement.getText().then(function(text) {
-               assert.equal(text, 'testapinf123');
-           });
-           driver.get('https://github.com');
-           driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/a')).click();
-           driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/div/div/form/button')).click();
-
        });
+       // Go to github
+       driver.get('https://github.com');
+       // Sign out
+       driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/a')).click();
+       driver.findElement(By.xpath('//*[@id="user-links"]/li[3]/div/div/form/button')).click();
     });
     test.it('1.4 should not create github account with invalid email', function() {
         CommonUtils.signUp(driver);
         driver.findElement(By.id('at-github')).click();
+        // Switch to Github window
         driver.getAllWindowHandles().then(function(handles) {
             driver.switchTo().window(handles[1]);
         });
         driver.findElement(By.id('login_field')).sendKeys('invalidEmail');
         driver.findElement(By.id('password')).sendKeys('asdfalkjl');
+        // Sign in button
         driver.findElement(By.xpath('//*[@id="login"]/form/div[3]/input[3]')).click();
         var errorElement = driver.findElement(By.xpath('//*[@id="js-flash-container"]/div/div'));
         errorElement.getText().then(function(text) {
             assert.equal(text, "Incorrect username or password.");
         });
         driver.close();
+        // Switch to main window
         driver.getAllWindowHandles().then(function(handles) {
             driver.switchTo().window(handles[0]);
         });
