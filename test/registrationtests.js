@@ -49,6 +49,12 @@ test.describe('Registration', function() {
        driver.findElement(By.id('password')).sendKeys('q1w2e3r4');
        // Sign in button
        driver.findElement(By.xpath('//*[@id="login"]/form/div[3]/input[3]')).click();
+       // Authorise application button
+       var authButton = driver.findElement(By.xpath('//*[@id="js-pjax-container"]/div[1]/div/div[2]/div/div[1]/form/p/button'));
+       // Check if needed
+       if (authButton) {
+           authButton.click();
+       }
        // Switch to main window
        driver.getAllWindowHandles().then(function(handles) {
            driver.switchTo().window(handles[0]);
