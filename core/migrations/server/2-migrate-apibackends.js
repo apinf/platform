@@ -1,41 +1,15 @@
-import { Meteor } from 'meteor/meteor';
+import { Migrations } from 'meteor/percolate:migrations';
 import { Mongo } from 'meteor/mongo';
 
-import { Settings } from '/settings/collection';
-import { Proxies } from '/proxies/collection';
 import { Apis } from '/apis/collection';
+import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
-Meteor.methods({
-  migrateProxySettings () {
-    const settings = Settings.findOne();
-
-    // Check settings exist
-    if (settings && settings.apiUmbrella) {
-      // apiUmbrella/elasticsearch settings to Proxies (addProxy)
-      const umbrellaObject = {
-        url: settings.apiUmbrella.host,
-        apiKey: settings.apiUmbrella.apiKey,
-        authToken: settings.apiUmbrella.authToken,
-        elasticsearch: settings.elasticsearch.host,
-      };
-
-      // New proxy
-      const newProxy = {
-        name: 'API Umbrella',
-        description: 'Umbrella settings, migrated.',
-        type: 'apiUmbrella',
-        apiUmbrella: umbrellaObject,
-      };
-      // Insert proxy
-      Proxies.insert(newProxy);
-
-      // Update settings doc (remove apiUmbrella & elasticsearch)
-      Settings.update({}, { $unset: { apiUmbrella: '', elasticsearch: '' } }, { validate: false });
-    }
-  },
-  migrateApiBackends () {
-    // Step 2: Update all apiBackends
+Migrations.add({
+  version: 2,
+  name: 'Migrate all apiBackends to new structure',
+  up () {
+    // Update all apiBackends
 
     // Init connection to old apiBackends
     const ApiBackends = new Mongo.Collection('apiBackends');
