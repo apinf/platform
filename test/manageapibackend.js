@@ -58,7 +58,10 @@ test.describe('Manage API Backend', function() {
         uploadDocumentation(driver);
         addDocumentationLink(driver);
         // Click on Save button
-        driver.findElement(By.id('save-documentation-link')).click();
+        driver.findElement(By.id('save-documentation-link')).click()
+            .then(function() {
+                driver.sleep(1000);
+            });
         // Verify sAlert has text "successful"
         var updateAlertElement = driver.findElement(By.css('.s-alert-box-inner p'));
         updateAlertElement.getText().then(function(text) {
@@ -258,7 +261,7 @@ function uploadDocumentation(driver) {
     driver.findElement(By.css('#file-browse input'))
         .sendKeys(path.join(__dirname, 'testfiles/testdocument.json'))
         .then(function() {
-            driver.sleep(1000);
+            driver.sleep(3000);
         });
 }
 
