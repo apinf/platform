@@ -9,6 +9,12 @@ Template.branding.onCreated(function () {
   instance.subscribe('projectLogo');
 });
 
+Template.branding.onRendered(function () {
+  // Attach color pickers to color fields
+  $('[name="colors.primary"]').colorpicker();
+  $('[name="colors.primaryText"]').colorpicker();
+});
+
 Template.branding.helpers({
   branding () {
     // Get Branding collection content
@@ -16,5 +22,5 @@ Template.branding.helpers({
   },
   brandingCollection () {
     return Branding;
-  }
+  },
 });
