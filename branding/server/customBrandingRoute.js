@@ -20,9 +20,17 @@ Router.route('customStyle', {
     }
 
     styleString = `
+.coverphoto {
+  background-color: ${primaryColor} !important;
+}
+
 .main-navigation {
   background-color: ${primaryColor} !important;
   color: ${primaryColorText} !important;
+}
+
+.search-box {
+  background-color: ${primaryColor} !important;
 }
 `
 
