@@ -18,4 +18,4 @@ FeedbackVotes.schema = new SimpleSchema({
   },
 });
 
-FeedbackVotes.attachSchema(FeedbackVotes.Schema);
+FeedbackVotes.attachSchema(FeedbackVotes.schema);
