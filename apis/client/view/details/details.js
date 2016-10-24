@@ -4,7 +4,6 @@ import $ from 'jquery';
 import Clipboard from 'clipboard';
 import { ApiKeys } from '/api_keys/collection';
 import { Proxies } from '/proxies/collection';
-import { ProxyBackends } from '/proxy_backends/collection';
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
