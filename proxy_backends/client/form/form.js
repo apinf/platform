@@ -163,7 +163,7 @@ Template.apiProxy.events({
     const changedCheckbox = $(event.target);
 
     const checkboxesArray = $("input:checkbox[name*='response_headers']");
-    // If Primary limit checked, uncheck other
+    // If changedCheckbox is checked, uncheck other
     if (changedCheckbox[0].checked) {
       $.each(checkboxesArray, (index, checkbox) => {
         // Don't change checkbox that was just checked
