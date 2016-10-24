@@ -11,6 +11,9 @@ import { Proxies } from '/proxies/collection';
 // NPM import
 import 'urijs';
 
+// jQuery import
+import $ from 'jquery';
+
 Template.proxyBackend.helpers({
   apiHost () {
     // Get one proxy from the Proxies collection
@@ -152,6 +155,21 @@ Template.apiProxy.events({
             // Show successMessage
           const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
           sAlert.success(successMessage);
+        }
+      });
+    }
+  },
+  'change input:checkbox[name*="response_headers"]': (event) => {
+    const changedCheckbox = $(event.target);
+
+    const checkboxesArray = $("input:checkbox[name*='response_headers']");
+    // If Primary limit checked, uncheck other
+    if (changedCheckbox[0].checked) {
+      $.each(checkboxesArray, (index, checkbox) => {
+        // Don't change checkbox that was just checked
+        if (checkbox.id !== changedCheckbox.attr('id')) {
+          // Uncheck checkbox
+          checkbox.checked = false;
         }
       });
     }
