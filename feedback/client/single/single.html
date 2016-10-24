@@ -17,6 +17,7 @@
         {{ topic }}
       </span>
     </div>
+    {{# if api.currentUserCanEdit }}
     <div class="pull-right">
       <button
         type="button"
@@ -31,6 +32,7 @@
           {{_ "feedback_remove_button" }}
       </button>
     </div>
+    {{/ if }}
   </div>
   <div id="feedback-{{ _id }}" class="collapse">
     {{> feedbackDetails }}
