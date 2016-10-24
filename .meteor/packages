@@ -74,3 +74,4 @@ pfafman:filesaver
 shell-server
 tmeasday:publish-counts
 percolate:migrations
+risul:bootstrap-colorpicker

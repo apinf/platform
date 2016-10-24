@@ -124,6 +124,7 @@ reactive-var@1.0.10
 reload@1.1.10
 retry@1.0.8
 reywood:publish-composite@1.4.2
+risul:bootstrap-colorpicker@2.3.0
 routepolicy@1.0.11
 sacha:spin@2.3.1
 service-configuration@1.0.10
