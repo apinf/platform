@@ -55,20 +55,32 @@
         {{_ "apiDetails_usageInstructions_headingText" }}
       </h4>
       <ul>
-        <li>
-          {{_ "apiDetails_usageInstructions_urlParameters_text" }}
-          <a href="{{ proxyUrl }}{{# if apiKey }}?api_key={{ apiKey }}{{/ if }}">
-            {{ proxyUrl }}{{# if apiKey }}?api_key={{ apiKey }}{{/ if }}
-          </a>
-        </li>
-        {{# if apiKey }}
+        {{# unless disableApiKey }}
+          {{# if hasApiKey }}
+            <!-- Proxy Backend is completed, "Disable api key" is false, user has got an api key -->
+            <li>
+              {{_ "apiDetails_usageInstructions_urlParameters_text" }}
+              <i>{{ proxyUrl }}&lt;optional_path&gt;api_key={{ apiKey }}</i>
+            </li>
+            <li>
+              {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
+              <span>
+            <i>X-Api-Key:</i> {{ apiKey }}
+        </span>
+            </li>
+          {{ else }}
+            <!-- Proxy Backend is completed, "Disable api key" is false, user hasn't got an api key -->
+            <li>
+              {{_ "apiDetails_usageInstructions_noApiKeyText" }}
+            </li>
+          {{/ if }}
+        {{ else }}
+          <!-- Proxy Backend is completed, "Disable api key" is true -->
           <li>
-            {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
-            <span>
-              X-Api-Key: {{ apiKey }}
-            </span>
+            {{_ "apiDetails_usageInstructions_disableApiKeyText" }}
+            <i>{{ proxyUrl }}&lt;optional_path&gt;</i>
           </li>
-        {{/ if }}
+        {{/ unless }}
       </ul>
     </div>
   {{/ if }}

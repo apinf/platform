@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Clipboard from 'clipboard';
 import { ApiKeys } from '/api_keys/collection';
 import { Proxies } from '/proxies/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
@@ -78,4 +79,21 @@ Template.apiDetails.helpers({
 
     return apiKey;
   },
+  // api key can be omitted or not?
+  disableApiKey () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get values of disable api key
+    const disableApiKey = instance.data.proxyBackend.apiUmbrella.settings.disable_api_key;
+
+    return disableApiKey;
+  },
+  // User has got an api key
+  hasApiKey () {
+    // Get current user
+    const currentUserId = Meteor.userId();
+
+    return ApiKeys.findOne({ userId: currentUserId });
+  }
 });
