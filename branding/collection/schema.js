@@ -1,40 +1,53 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Branding } from './';
 
 Branding.schema = new SimpleSchema({
   projectLogoFileId: {
     type: String,
-    optional: true
+    optional: true,
+  },
+  colors: {
+    type: Object,
+    optional: true,
+  },
+  'colors.primary': {
+    type: String,
+    optional: true,
+  },
+  'colors.primaryText': {
+    type: String,
+    optional: true,
   },
   siteTitle: {
     type: String,
-    optional: true
+    optional: true,
   },
   siteSlogan: {
     type: String,
-    optional: true
+    optional: true,
   },
   siteFooter: {
     type: String,
-    optional: true
+    optional: true,
   },
   socialMedia: {
     type: [Object],
-    optional: true
+    optional: true,
   },
-  "socialMedia.$.name": {
+  'socialMedia.$.name': {
     type: String,
-    allowedValues: ["Facebook", "Twitter", "Github"]
+    allowedValues: ['Facebook', 'Twitter', 'Github'],
   },
-  "socialMedia.$.url": {
+  'socialMedia.$.url': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     autoform: {
-      placeholder: 'http://example.com/accountname'
-    }
-  }
+      placeholder: 'http://example.com/accountname',
+    },
+  },
 });
 
 // i18n translation
-Branding.schema.i18n("schemas.branding");
+Branding.schema.i18n('schemas.branding');
 
 Branding.attachSchema(Branding.schema);
