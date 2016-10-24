@@ -39,6 +39,13 @@ For API consumers APInf provides simple key management, key usage analytics and 
 
 [![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
 
+## Source code visualization
+Our project source code has changed throughout the project lifespan.
+
+[![source code structure](https://ia601503.us.archive.org/33/items/ApinfDevelopmentActivityUpTo0.33.1/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1)
+
+See the [high definition video (with music) of Apinf Development Activity up to version 0.33.1](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1) on the Internet Archive.
+
 # Nightly build
 You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.
 
