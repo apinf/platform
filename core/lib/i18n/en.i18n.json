@@ -201,6 +201,7 @@
   "deleteApiConfirmation_successMessage": "Successfully deleted API: ",
   "deleteAccount_title": "Delete Account",
   "deleteAccount_confirm_text": "Are you sure you want to delete your account?",
+  "deleteAccount_success_message": "User account deleted successfully.",
   "deleteBacklogItem_modalTitle": "Delete backlog item",
   "deleteBacklogItem_confirmation_text": "Are you sure you want to delete this backlog item?",
   "deleteBacklogItem_cancelButton_text": "Cancel",

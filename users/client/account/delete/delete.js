@@ -12,14 +12,14 @@ Template.deleteAccount.events({
       // Dismiss the delete account modal
       Modal.hide('deleteAccount');
 
-      // Route to home page
-      Router.go('home');
-
       // Get deletion message success translation
       const message = TAPi18n.__('deleteAccount_success_message');
 
-      // Alert user of successful deletion
-      sAlert.success(message);
+      // Alert user of successful deletion, dont clear on route change
+      sAlert.success(message, { onRouteClose: false });
+
+      // Route to home page
+      Router.go('home');
     });
   },
 });
