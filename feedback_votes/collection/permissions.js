@@ -6,17 +6,22 @@ FeedbackVotes.allow({
     if (userId) {
       return true;
     }
+    return false;
   },
-  update (userId) {
-    // TODO: only allow user to update own vote
-    if (userId) {
+  update (userId, feedbackVote) {
+    // only allow user to update own vote
+    if (userId && feedbackVote && feedbackVote.userId &&
+      userId === feedbackVote.userId) {
       return true;
     }
+    return false;
   },
-  remove (userId) {
-    // TODO: only allow user to remove own vote
-    if (userId) {
+  remove (userId, feedbackVote) {
+    // only allow user to remove own vote
+    if (userId && feedbackVote && feedbackVote.userId &&
+      userId === feedbackVote.userId) {
       return true;
     }
+    return false;
   },
 });
