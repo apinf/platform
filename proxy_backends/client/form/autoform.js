@@ -69,7 +69,7 @@ AutoForm.hooks({
       update (proxyBackend) {
         // Get updateDoc $set values
         const updateDoc = proxyBackend.$set;
-        console.log(updateDoc);
+
         if (updateDoc) {
           // Check all required fields have values
           if (!(updateDoc['apiUmbrella.url_matches'] &&
