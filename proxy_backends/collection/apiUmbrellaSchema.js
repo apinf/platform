@@ -92,14 +92,14 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
   'url_matches.$.frontend_prefix': {
     type: String,
-    optional: false,
+    optional: true,
     unique: true,
     label: 'Proxy base path',
     regEx: proxyBasePathRegEx,
   },
   'url_matches.$.backend_prefix': {
     type: String,
-    optional: false,
+    optional: true,
     label: 'API base path',
     regEx: apiBasePathRegEx,
   },
@@ -114,7 +114,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
   'servers.$.port': {
     type: Number,
-    optional: false,
+    optional: true,
     label: 'API port',
   },
   settings: {
