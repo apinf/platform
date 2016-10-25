@@ -6,11 +6,23 @@
 
   .main-navigation {
     background-color: {{ primaryColor }} !important;
-    color: {{primaryColorText}} !important;
   }
 
   .search-box {
     background-color: {{ primaryColor }} !important;
+  }
+
+  /* Only select top-level navigation menu items */
+  #main-navbar > ul > li > a {
+    color: {{ primaryColorText }} !important;
+  }
+  
+  #site-title {
+    color: {{ primaryColorText }} !important;
+  }
+
+  #site-slogan {
+    color: {{ primaryColorText }} !important;
   }
   </style>
   {{> languageBar }}
