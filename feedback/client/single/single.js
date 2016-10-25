@@ -75,7 +75,7 @@ Template.singleFeedback.helpers({
 });
 
 Template.singleFeedback.events({
-  'click .up-vote': () => {
+  'click .up-vote': function (event, template) {
     // Get reference to current feedback
     const feedback = this;
 
@@ -85,7 +85,7 @@ Template.singleFeedback.events({
     // Submit upvote (+1) for current feedback
     Meteor.call('submitVote', feedbackId, 1);
   },
-  'click .down-vote': () => {
+  'click .down-vote': function (event, template) {
     // Get reference to current feedback
     const feedback = this;
 
