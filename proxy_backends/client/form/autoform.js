@@ -68,17 +68,16 @@ AutoForm.hooks({
       update (proxyBackend) {
         // Get updateDoc $set values
         const updateDoc = proxyBackend.$set;
-        if (updateDoc && updateDoc.apiUmbrella) {
-          const apiUmbrella = updateDoc.apiUmbrella;
-
+        console.log(updateDoc);
+        if (updateDoc) {
           // Check all required fields have values
-          if (!(apiUmbrella.url_matches &&
-          apiUmbrella.url_matches[0] &&
-          apiUmbrella.url_matches[0].frontend_prefix &&
-          apiUmbrella.url_matches[0].backend_prefix) ||
-          !(apiUmbrella.servers && apiUmbrella.servers[0] &&
-          apiUmbrella.servers[0].host &&
-          apiUmbrella.servers[0].port)) {
+          if (!(updateDoc['apiUmbrella.url_matches'] &&
+          updateDoc['apiUmbrella.url_matches'][0] &&
+          updateDoc['apiUmbrella.url_matches'][0].frontend_prefix &&
+          updateDoc['apiUmbrella.url_matches'][0].backend_prefix) ||
+          !(updateDoc['apiUmbrella.servers'] && updateDoc['apiUmbrella.servers'][0] &&
+          updateDoc['apiUmbrella.servers'][0].host &&
+          updateDoc['apiUmbrella.servers'][0].port)) {
             // Alert the user of missing values
             sAlert.error('Please fill in the required fields');
             // Cancel form
