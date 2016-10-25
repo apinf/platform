@@ -159,6 +159,7 @@ Template.apiProxy.events({
       });
     }
   },
+  // onChange event for checkbox inputs that contain "response_headers" in name
   'change input:checkbox[name*="response_headers"]': (event) => {
     const changedCheckbox = $(event.target);
 
