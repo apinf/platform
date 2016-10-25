@@ -16,12 +16,16 @@ AutoForm.hooks({
         if (proxyBackend && proxyBackend.apiUmbrella) {
           const apiUmbrella = proxyBackend.apiUmbrella;
 
-          // Check url_matches (proxy base Path & API base path)
-          // and port value has been given for server
-          if (!apiUmbrella.url_matches || (apiUmbrella.servers[0] &&
-            !apiUmbrella.servers[0].port)) {
+          // Check all required fields have values
+          if (!(apiUmbrella.url_matches &&
+          apiUmbrella.url_matches[0] &&
+          apiUmbrella.url_matches[0].frontend_prefix &&
+          apiUmbrella.url_matches[0].backend_prefix) ||
+          !(apiUmbrella.servers && apiUmbrella.servers[0] &&
+          apiUmbrella.servers[0].host &&
+          apiUmbrella.servers[0].port)) {
               // Alert the user of missing values
-            sAlert.error('Please fill in the fields');
+            sAlert.error('Please fill in the required fields');
             // Cancel form
             return false;
           }
@@ -60,6 +64,28 @@ AutoForm.hooks({
               }
             });
         }
+      },
+      update (proxyBackend) {
+        // Get updateDoc $set values
+        const updateDoc = proxyBackend.$set;
+        if (updateDoc && updateDoc.apiUmbrella) {
+          const apiUmbrella = updateDoc.apiUmbrella;
+
+          // Check all required fields have values
+          if (!(apiUmbrella.url_matches &&
+          apiUmbrella.url_matches[0] &&
+          apiUmbrella.url_matches[0].frontend_prefix &&
+          apiUmbrella.url_matches[0].backend_prefix) ||
+          !(apiUmbrella.servers && apiUmbrella.servers[0] &&
+          apiUmbrella.servers[0].host &&
+          apiUmbrella.servers[0].port)) {
+            // Alert the user of missing values
+            sAlert.error('Please fill in the required fields');
+            // Cancel form
+            return false;
+          }
+        }
+        return proxyBackend;
       },
     },
     onSuccess (formType, result) {
