@@ -336,6 +336,7 @@
   "proxyBackendForm_deleteButton": "Delete",
   "proxyBackendForm_deleteErrorMessage": "Delete failed on API Umbrella proxy",
   "proxyBackendForm_publishErrorMessage": "Publish failed on API Umbrella proxy",
+  "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
   "proxyForm_header_text": "Add Proxy",

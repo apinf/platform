@@ -24,8 +24,9 @@ AutoForm.hooks({
           !(apiUmbrella.servers && apiUmbrella.servers[0] &&
           apiUmbrella.servers[0].host &&
           apiUmbrella.servers[0].port)) {
-              // Alert the user of missing values
-            sAlert.error('Please fill in the required fields');
+            // Alert the user of missing values
+            const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
+            sAlert.error(errorMessage);
             // Cancel form
             return false;
           }
@@ -79,7 +80,8 @@ AutoForm.hooks({
           updateDoc['apiUmbrella.servers'][0].host &&
           updateDoc['apiUmbrella.servers'][0].port)) {
             // Alert the user of missing values
-            sAlert.error('Please fill in the required fields');
+            const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
+            sAlert.error(errorMessage);
             // Cancel form
             return false;
           }
