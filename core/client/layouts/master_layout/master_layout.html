@@ -1,4 +1,18 @@
 <template name="masterLayout">
+  <style>
+  .coverphoto {
+    background-color: {{ primaryColor }} !important;
+  }
+
+  .main-navigation {
+    background-color: {{ primaryColor }} !important;
+    color: {{primaryColorText}} !important;
+  }
+
+  .search-box {
+    background-color: {{ primaryColor }} !important;
+  }
+  </style>
   {{> languageBar }}
   {{# if Template.subscriptionsReady }}
   <div class="master-layout">
