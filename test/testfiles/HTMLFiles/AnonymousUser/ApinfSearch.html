@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="https://nightly.apinf.io/" />
-<title>LandingPage</title>
+<title>ApinfSearch</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">LandingPage</td></tr>
+<tr><td rowspan="1" colspan="3">ApinfSearch</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,39 +17,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>class=text-center</td>
-	<td>APINF</td>
+	<td>click</td>
+	<td>class=fa fa-search toggle-search-icon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>class=btn btn-default</td>
+	<td>Search</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>class=feature-section-heading</td>
-	<td>Latest APIs</td>
+	<td>class=page-header</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>class=feature-section-heading</td>
-	<td>Are you an API user?</td>
+	<td>id=search-form</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>class=feature-section-heading</td>
-	<td>Are you an API owner?</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>class=section-heading</td>
-	<td>Getting started</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>class=section-heading</td>
-	<td>Reach out to developers</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>class=section-heading</td>
-	<td>Completely open source</td>
+	<td>//h3</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
