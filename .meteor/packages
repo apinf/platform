@@ -75,3 +75,4 @@ shell-server
 tmeasday:publish-counts
 percolate:migrations
 risul:bootstrap-colorpicker
+michalvalasek:autoform-bootstrap-colorpicker
