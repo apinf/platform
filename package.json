@@ -28,6 +28,7 @@
     "swagger-parser": "^3.4.1",
     "swagger-ui": "^2.2.3",
     "swagger-ui-browserify": "^2.2.3-a",
+    "tinycolor2": "^1.4.1",
     "urijs": "^1.18.1"
   },
   "devDependencies": {
