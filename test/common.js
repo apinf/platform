@@ -22,6 +22,9 @@ var CommonUtils = {
     goToDashboard: function(driver) {
         driver.findElement(By.linkText('Dashboard')).click();
     },
+    goToCatalog: function(driver) {
+        driver.findElement(By.xpath('//*[@id="main-navbar"]/ul[1]/li[2]/a')).click();
+    },
     dashBoardSignOut: function(driver) {
         driver.sleep(1000);
         driver.findElement(By.xpath('//*[@class="dropdown-toggle"][@role="button"]')).click();
@@ -59,7 +62,7 @@ var CommonUtils = {
             driver.sleep(1000);
         });
         // Navigated to main page
-        var mainPage = driver.findElement(By.className('feature-section-heading'));
+        var mainPage = driver.findElement(By.xpath('//*[@id="features"]/div[1]/div[1]/div/h2'));
         return mainPage;
     }
 };
