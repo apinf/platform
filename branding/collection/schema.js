@@ -13,10 +13,16 @@ Branding.schema = new SimpleSchema({
   'colors.primary': {
     type: String,
     optional: true,
+    autoform: {
+      type: 'bootstrap-colorpicker',
+    },
   },
   'colors.primaryText': {
     type: String,
     optional: true,
+    autoform: {
+      type: 'bootstrap-colorpicker',
+    },
   },
   siteTitle: {
     type: String,
