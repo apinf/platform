@@ -1,18 +1,18 @@
 <template name="bookmark">
   {{# if isBookmarked }}
-  <a href="#" class="bookmark-button bookmark bookmarked">
+  <button class="bookmark-button bookmark bookmarked">
     <i class="fa fa-bookmark"></i>
     {{# unless catalogueView }}
     &nbsp;{{_ "bookmark_buttonText_unbookmark" }}
     {{/ unless }}
-  </a>
+  </button>
   {{ else }}
-  <a href="#" class="bookmark-button bookmark">
+  <button class="bookmark-button bookmark">
     <i class="fa fa-bookmark-o"></i>
     {{# unless catalogueView }}
     &nbsp;{{_ "bookmark_buttonText_bookmark" }}
     {{/ unless }}
-  </a>
+  </button>
   {{/ if }}
   <span class="bookmark-counter">
     {{ api.bookmarkCount }}
