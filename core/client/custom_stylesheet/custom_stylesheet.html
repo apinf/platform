@@ -1,0 +1,36 @@
+<template name="customStylesheet">
+  <style>
+    .coverphoto {
+      background-color: {{ primaryColor }} !important;
+    }
+
+    .project-name-link {
+      color: {{ primaryColorText }} !important;
+    }
+
+    .introjs-bullets ul li a.active {
+      background: {{ primaryColor }} !important;
+    }
+
+    .main-navigation {
+      background-color: {{ primaryColor }} !important;
+    }
+
+    .search-box {
+      background-color: {{ primaryColor }} !important;
+    }
+
+    /* Only select top-level navigation menu items */
+    #main-navbar > ul > li > a {
+      color: {{ primaryColorText }} !important;
+    }
+
+    #site-title {
+      color: {{ primaryColorText }} !important;
+    }
+
+    #site-slogan {
+      color: {{ primaryColorText }} !important;
+    }
+  </style>
+</template>
