@@ -3,7 +3,7 @@ import { Settings } from '/settings/collection';
 
 Template.homeBody.onCreated(function () {
   // Subscribe to settings publication
-  this.subscribe('settings');
+  instance.subscribe('singleSetting', 'mail.enabled');
 });
 
 Template.homeBody.rendered = function () {
@@ -16,7 +16,14 @@ Template.homeBody.helpers({
   contactFormEnabled () {
     const settings = Settings.findOne();
 
-    // Check mail settings are valid & contact email has been given
-    return mailSettingsValid(settings) && contactEmailValid(settings);
+    // Placeholder for mail enabled Check
+    let mailIsEnabled;
+
+    // Check if mail is enabled
+    if (settings && settings.mail && settings.mail.enabled) {
+      mailIsEnabled = true;
+    }
+
+    return mailIsEnabled;
   },
 });
