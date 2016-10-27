@@ -15,7 +15,7 @@ Template.navbar.onCreated(function () {
   // Subscribe to project logo
   instance.subscribe('projectLogo');
   instance.subscribe('proxyCount');
-  instance.subscribe('settings');
+  instance.subscribe('singleSetting', 'onlyAdminsCanAddApis');
 });
 
 
