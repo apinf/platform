@@ -20,7 +20,7 @@ Meteor.publish('settings', function () {
 
 Meteor.publish('singleSetting', function (setting) {
   // Set up a query settings object containing fields and a result limit
-  const querySettings = { 'fields': {}, 'limit': 1 };
+  const querySettings = { fields: {}, limit: 1 };
 
   // Specify the setting field we want to retrieve (passed in as argument)
   querySettings.fields[setting] = 1;
