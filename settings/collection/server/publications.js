@@ -19,6 +19,8 @@ Meteor.publish('settings', function () {
 });
 
 Meteor.publish('singleSetting', function (setting) {
+  // TODO: Determine if/how to check whether user is authorized to view setting
+  
   // Set up a query settings object containing fields and a result limit
   const querySettings = { fields: {}, limit: 1 };
 
