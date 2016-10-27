@@ -15,7 +15,14 @@ Template.navbar.onCreated(function () {
   // Subscribe to project logo
   instance.subscribe('projectLogo');
   instance.subscribe('proxyCount');
-  instance.subscribe('singleSetting', 'access.onlyAdminsCanAddApis');
+
+  instance.autorun(function () {
+    // Check if user is logged in
+    if (Meteor.userId()) {
+      // If user logged in, subscribe to 'onlyAdminCanAddApis' setting
+      instance.subscribe('singleSetting', 'access.onlyAdminsCanAddApis');
+    }
+  });
 });
 
 
