@@ -2,11 +2,13 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 // APINF import
 import { Apis } from '/apis/collection';
 // npm import
 import moment from 'moment';
+import _ from 'lodash';
 
 Template.search.onCreated(function () {
   // Get reference to Template instance
@@ -112,7 +114,7 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  'keyup #search-text': function (event, template) {
+  'keyup #search-text': function (event) {
     event.preventDefault();
 
     // Get reference to Template instance
