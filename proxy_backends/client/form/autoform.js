@@ -38,11 +38,21 @@ AutoForm.hooks({
                 // Throw a Meteor error
                 Meteor.error(500, error);
                 return false;
-              } else if ( // If success, attach API Umbrella backend ID to API
+              }
+
+              // If response has errors object, notify about it
+              if (response.errors && response.errors.default) {
+                // Notify about error
+                sAlert.error(response.errors.default[0]);
+                // return false;
+                form.result(false);
+              }
+
+              // If success, attach API Umbrella backend ID to API
+              if (
                 response.result &&
                 response.result.data &&
-                response.result.data.api
-              ) {
+                response.result.data.api) {
                   // Get the API Umbrella ID for newly created backend
                 const umbrellaBackendId = response.result.data.api.id;
 
