@@ -1,7 +1,21 @@
 import { Settings } from '../';
+import { Roles } from 'meteor/alanning:roles';
 
 Meteor.publish('settings', function () {
-  return Settings.find();
+  // Only Administrator can access all settings
+  const userIsAdministrator = Roles.userIsInRole(this.userId, 'admin');
+
+  // Placeholder for settings, if user is authorized
+  let settingsCursor;
+
+  if (userIsAdministrator) {
+    // User is authorized
+    settingsCursor = Settings.find();
+  } else {
+    // User is not authorized
+    settingsCursor = [];
+  }
+  return settingsCursor;
 });
 
 Meteor.publish('singleSetting', function (setting) {
