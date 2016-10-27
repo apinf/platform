@@ -2,6 +2,9 @@ import { mailSettingsValid, contactEmailValid } from '/core/helper_functions/val
 import { Settings } from '/settings/collection';
 
 Template.homeBody.onCreated(function () {
+  // Get reference to template instance
+  const instance = this;
+
   // Subscribe to settings publication
   instance.subscribe('singleSetting', 'mail.enabled');
 });
@@ -17,13 +20,13 @@ Template.homeBody.helpers({
     const settings = Settings.findOne();
 
     // Placeholder for mail enabled Check
-    let mailIsEnabled;
+    let mailEnabled;
 
     // Check if mail is enabled
     if (settings && settings.mail && settings.mail.enabled) {
-      mailIsEnabled = true;
+      mailEnabled = true;
     }
 
-    return mailIsEnabled;
+    return mailEnabled;
   },
 });
