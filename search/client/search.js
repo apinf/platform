@@ -71,16 +71,16 @@ Template.search.onRendered(function () {
   const instance = this;
 
   // Update search field with current search value
-  $('#search-text').val(instance.searchValue.get());
+  instance.$('#search-text').val(instance.searchValue.get());
 
   // Check if search parameter is set
   if (instance.searchValue.get()) {
     // Update search field with search value provided in the URL
-    $('#search-text').val(instance.searchValue.get());
+    instance.$('#search-text').val(instance.searchValue.get());
   }
 
   // Put focus of search field on a page
-  $('#search-text').focus();
+  instance.$('#search-text').focus();
 });
 
 Template.search.helpers({
@@ -119,7 +119,7 @@ Template.search.events({
     const instance = Template.instance();
 
     // Get search text from a text field.
-    const searchValue = $('#search-text').val();
+    const searchValue = instance.$('#search-text').val();
 
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
