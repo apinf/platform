@@ -37,6 +37,13 @@ Router.map(function() {
     layoutTemplate: "masterLayout",
     render: "notAuthorized"
   });
+
+  this.route('notFound', {
+    path: '/not-found',
+    layoutTemplate: 'masterLayout',
+    render: 'notFound',
+  });
+
   this.route("forbidden", {
     path: "/forbidden",
     layoutTemplate: "masterLayout",
