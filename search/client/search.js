@@ -73,16 +73,16 @@ Template.search.onRendered(function () {
   const instance = this;
 
   // Update search field with current search value
-  instance.$('#search-text').val(instance.searchValue.get());
+  instance.$('#search-page-text').val(instance.searchValue.get());
 
   // Check if search parameter is set
   if (instance.searchValue.get()) {
     // Update search field with search value provided in the URL
-    instance.$('#search-text').val(instance.searchValue.get());
+    instance.$('#search-page-text').val(instance.searchValue.get());
   }
 
   // Put focus of search field on a page
-  instance.$('#search-text').focus();
+  instance.$('#search-page-text').focus();
 });
 
 Template.search.helpers({
@@ -114,14 +114,14 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  'keyup #search-text': function (event) {
+  'keyup #search-page-text': function (event) {
     event.preventDefault();
 
     // Get reference to Template instance
     const instance = Template.instance();
 
     // Get search text from a text field.
-    const searchValue = instance.$('#search-text').val();
+    const searchValue = instance.$('#search-page-text').val();
 
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
@@ -130,5 +130,9 @@ Template.search.events({
     UniUtils.url.setQuery('q', searchValue);
 
     return false;
+  },
+  'submit #search-form': function (event) {
+    // Prevent the 'submit' event
+    event.preventDefault();
   },
 });
