@@ -1,8 +1,8 @@
 Router.configure({
-  layoutTemplate: "masterLayout",
-  loadingTemplate: "loading",
-  notFoundTemplate: "notFound",
-  routeControllerNameConverter: "camelCase",
+  layoutTemplate: 'masterLayout',
+  loadingTemplate: 'loading',
+  notFoundTemplate: 'notFound',
+  routeControllerNameConverter: 'camelCase',
   onBeforeAction: function() {
     if (Meteor.userId() && !Meteor.user().username) {
       this.redirect('/profile');
@@ -32,10 +32,10 @@ Router.plugin('ensureSignedIn', {
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
 
 Router.map(function() {
-  this.route("notAuthorized", {
-    path: "/not-authorized",
-    layoutTemplate: "masterLayout",
-    render: "notAuthorized"
+  this.route('notAuthorized', {
+    path: '/not-authorized',
+    layoutTemplate: 'masterLayout',
+    render: 'notAuthorized',
   });
 
   this.route('notFound', {
@@ -44,9 +44,9 @@ Router.map(function() {
     render: 'notFound',
   });
 
-  this.route("forbidden", {
-    path: "/forbidden",
-    layoutTemplate: "masterLayout",
-    render: "forbidden"
+  this.route('forbidden', {
+    path: '/forbidden',
+    layoutTemplate: 'masterLayout',
+    render: 'forbidden',
   });
 });
