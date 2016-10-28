@@ -24,7 +24,6 @@ Router.route('/api/:_id/', function () {
 
   // Check if API exists
   Meteor.call('checkIfApiExists', apiId, function (error, apiExists) {
-    console.log(apiExists);
     // Check if API exists
     if (apiExists === false) {
       // If API doesn't exist, show 'Not Found'
