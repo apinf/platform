@@ -259,7 +259,7 @@ function deleteDocument(driver) {
 
 function uploadDocumentation(driver) {
     driver.findElement(By.css('#file-browse input'))
-        .sendKeys(path.join(__dirname, 'testfiles/testdocument.json'))
+        .sendKeys(path.join(__dirname, 'files/documentation.json'))
         .then(function() {
             driver.sleep(3000);
         });
