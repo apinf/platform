@@ -27,7 +27,7 @@
               <li class="{{ isActiveRoute 'dashboard' }}">
                 <a href="/dashboard">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                  {{_ "navbar_Dashboard" }}
+                  {{_ "navbar_dashboard" }}
                 </a>
               </li>
             {{/ if }}
@@ -35,7 +35,7 @@
           <li class="{{ isActiveRoute 'catalogue' }}">
             <a href="{{ pathFor route='catalogue' }}">
               <i class="fa fa-book" aria-hidden="true"></i>
-              {{_ "navbar_Catalogue" }}
+              {{_ "navbar_catalogue" }}
             </a>
           </li>
           {{# if currentUser }}
@@ -44,7 +44,7 @@
               <a href="{{ pathFor route='addApi' }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
 
-                {{_ "navbar_AddAPIBackend" }}
+                {{_ "navbar_addAPIBackend" }}
               </a>
             </li>
             {{/ if }}
@@ -52,7 +52,7 @@
               <li class="{{ isActiveRoute 'accountsAdmin' }}">
                 <a href="{{ pathFor route='accountsAdmin' }}">
                   <i class="fa fa-users" aria-hidden="true"></i>
-                  {{_ "navbar_Users" }}
+                  {{_ "navbar_users" }}
                 </a>
               </li>
             {{/ if }}
@@ -84,7 +84,7 @@
           <li>
             <a id="about-button">
               <i class="fa fa-question-circle" aria-hidden="true"></i>
-              {{_ "navbar_About" }}
+              {{_ "navbar_about" }}
             </a>
           </li>
         </ul>
