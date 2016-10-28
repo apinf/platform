@@ -38,6 +38,7 @@ Router.map(function() {
     render: 'notAuthorized',
   });
 
+  // 'Not found' route, for special cases, such as viewApi page
   this.route('notFound', {
     path: '/not-found',
     layoutTemplate: 'masterLayout',
