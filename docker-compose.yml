@@ -8,8 +8,6 @@ services:
       - 'docker/apinf/env'
     environment:
       - MONGO_URL=mongodb://mongo/apinf_db
-    ports:
-      - "3000:80"
     depends_on:
       - mongo
       - ssl
@@ -43,7 +41,7 @@ services:
     env_file:
       - 'docker/ssl/env'
     environment:
-      - UPSTREAM=apinf:80
+      - UPSTREAM=apinf:3000
     ports:
       - "443:443"
       - "80:80"
