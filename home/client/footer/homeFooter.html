@@ -20,7 +20,7 @@
         </div>
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">
-            {{# if User }}
+            {{# if currentUser }}
             <li>
               <a href="{{ pathFor 'dashboard' }}">
                 {{_ "homeFooter_dashboardLink_text" }}
@@ -29,12 +29,12 @@
             {{ else }}
             <li>
               <a href="{{ pathFor 'atSignIn' }}">
-                {{_ "signIn" }}
+                {{_ "homeFooter_signIn" }}
               </a>
             </li>
             <li>
               <a href="{{ pathFor 'atSignUp' }}">
-                {{_ "signUp" }}
+                {{_ "homeFooter_signUp" }}
               </a>
             </li>
             {{/ if }}
