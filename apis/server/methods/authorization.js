@@ -19,15 +19,15 @@ Meteor.methods({
       Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
     }
   },
-  currentUserCanViewApi (apiBackendId) {
+  currentUserCanViewApi (apiId) {
     // Placeholder for 'user is authorized'
     let userAuthorized;
 
     // Get API
-    const api = Apis.findOne(apiBackendId);
+    const api = Apis.findOne(apiId);
 
     // Check if user can view
-    if (apiBackend && api.currentUserCanView()) {
+    if (api && api.currentUserCanView()) {
       // User is authorized to view this API
       userAuthorized = true;
     } else {
@@ -37,15 +37,15 @@ Meteor.methods({
 
     return userAuthorized;
   },
-  currentUserCanEditApi (apiBackendId) {
+  currentUserCanEditApi (apiId) {
     // Placeholder for 'user can edit'
     let userCanEdit;
 
     // Get API
-    const api = Apis.findOne(apiBackendId);
+    const api = Apis.findOne(apiId);
 
     // Check if user can edit
-    if (apiBackend && api.currentUserCanEdit()) {
+    if (api && api.currentUserCanEdit()) {
       // User is authorized to view this API
       userCanEdit = true;
     } else {
