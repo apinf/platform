@@ -20,39 +20,17 @@ Meteor.methods({
     }
   },
   currentUserCanViewApi (apiId) {
-    // Placeholder for 'user is authorized'
-    let userAuthorized;
-
     // Get API
     const api = Apis.findOne(apiId);
 
     // Check if user can view
-    if (api && api.currentUserCanView()) {
-      // User is authorized to view this API
-      userAuthorized = true;
-    } else {
-      // User is NOT authorized to view this API
-      userAuthorized = false;
-    }
-
-    return userAuthorized;
+    return api && api.currentUserCanView();
   },
   currentUserCanEditApi (apiId) {
-    // Placeholder for 'user can edit'
-    let userCanEdit;
-
     // Get API
     const api = Apis.findOne(apiId);
 
     // Check if user can edit
-    if (api && api.currentUserCanEdit()) {
-      // User is authorized to view this API
-      userCanEdit = true;
-    } else {
-      // User is NOT authorized to view this API
-      userCanEdit = false;
-    }
-
-    return userCanEdit;
+    return api && api.currentUserCanEdit();
   },
 });
