@@ -33,7 +33,9 @@ var CommonUtils = {
         });
     },
     signUp: function(driver) {
-        driver.get(this.url);
+        driver.get(this.url).then(function () {
+            driver.sleep(1000);
+        });
         driver.findElement(By.linkText('Sign Up')).click();
     },
     fillSignInForm: function(driver, userName, password) {
