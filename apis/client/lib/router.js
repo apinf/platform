@@ -28,7 +28,7 @@ Router.route('/api/:_id/', function () {
     // Check if API exists
     if (apiExists === false) {
       // If API doesn't exist, show 'Not Found'
-      Router.go('notFound');
+      route.render('notFound');
     } else {
       // Ensure current user has permissions to view backend
       Meteor.call('currentUserCanViewApi', apiBackendId, (error, userIsAllowedToViewApi) => {
