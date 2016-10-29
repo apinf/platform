@@ -25,22 +25,22 @@ Router.route('/api/:_id/', function () {
   // Check if API exists
   Meteor.call('checkIfApiExists', apiId, function (error, apiExists) {
     // Check if API exists
-    if (apiExists === false) {
-      // If API doesn't exist, show 'Not Found'
-      route.render('notFound');
-    } else {
+    if (apiExists) {
       // Ensure current user has permissions to view backend
       Meteor.call('currentUserCanViewApi', apiId, (error, userIsAllowedToViewApi) => {
         if (userIsAllowedToViewApi) {
           route.render('viewApi');
           route.layout('masterLayout');
         } else {
+          // User is not allowed to view API
           Router.go('forbidden');
         }
       });
+    } else {
+      // If API doesn't exist, show 'Not Found'
+      route.render('notFound');
     }
   });
-
 }, {
   name: 'viewApi',
 });
