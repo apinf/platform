@@ -1,3 +1,5 @@
+import { check } from 'meteor/check';
+import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
@@ -8,21 +10,26 @@ Meteor.methods({
     check(doc, ContactFormSchema);
 
     // Build the e-mail text
-    const text = 'Name: ' + doc.name + '\n\n'
-    + 'Email: ' + doc.email + '\n\n\n\n'
-    + doc.message;
+    const text = `Name: ${doc.name}
+
+Email: ${doc.email}
+
+${doc.message}`;
 
     this.unblock();
 
-    // Get email settings
-    const mailSettings = Settings.findOne().mail;
+    // Get settings
+    const settings = Settings.findOne();
 
-    // Send the e-mail
-    Email.send({
-      to: mailSettings.toEmail,
-      from: mailSettings.fromEmail,
-      subject: 'Apinf Contact Form - Message From ' + doc.name,
-      text,
-    });
+    // Check if email settings are configured
+    if (settings.mail && settings.mail.enabled) {
+      // Send the e-mail
+      Email.send({
+        to: settings.mail.toEmail,
+        from: settings.mail.fromEmail,
+        subject: `Contact Form - message from ${doc.name}`,
+        text,
+      });
+    }
   },
 });
