@@ -41,7 +41,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run lint --silent"
+    "test": "mocha ./.test/"
   },
   "repository": {
     "type": "git",
