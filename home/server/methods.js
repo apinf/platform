@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
-import { ContactFormSchema } from '../contactFormSchema';
+import ContactFormSchema from '../contactFormSchema';
 
 Meteor.methods({
   sendEmail (doc) {

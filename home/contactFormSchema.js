@@ -1,4 +1,4 @@
-const ContactFormSchema = new SimpleSchema({
+export default new SimpleSchema({
   name: {
     type: String,
     label: TAPi18n.__('contactForm_name_label'),
@@ -28,5 +28,3 @@ const ContactFormSchema = new SimpleSchema({
     },
   },
 });
-
-export { ContactFormSchema };
