@@ -20,7 +20,7 @@ Meteor.methods({
     // Send the e-mail
     Email.send({
       to: mailSettings.toEmail,
-      from: doc.email,
+      from: mailSettings.fromEmail,
       subject: 'Apinf Contact Form - Message From ' + doc.name,
       text,
     });
