@@ -2,7 +2,7 @@ var webdriver = require('selenium-webdriver');
 var By = require('selenium-webdriver').By;
 
 var CommonUtils = {
-    url: 'https://nightly.apinf.io',
+    url: 'http://localhost:3000',
     buildDriver: function() {
         var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
         driver.manage().timeouts().setScriptTimeout(5000);
@@ -11,7 +11,7 @@ var CommonUtils = {
     },
     signIn: function(driver) {
         driver.get(this.url);
-        driver.findElement(By.linkText('login')).click();
+        driver.findElement(By.linkText('Sign In')).click();
     },
     signOut: function(driver) {
         var userNameElement = driver.findElement(By.xpath('//*[@class="dropdown-toggle"][@role="button"]'));
