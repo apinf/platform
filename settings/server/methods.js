@@ -8,7 +8,10 @@ import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/v
 import { Settings } from '../collection';
 
 Meteor.methods({
-  configureSmtpSettings (settings) {
+  configureSmtpSettings () {
+    // Get current settings
+    const settings = Settings.findOne();
+  
     // Check if mail settings are provided
     if (mailSettingsValid(settings)) {
       const username = encodeURIComponent(settings.mail.username);
@@ -32,13 +35,13 @@ Meteor.methods({
     // specifically, those related to verification email and password reset
 
     // Disable email related features / links for accounts templates
-    AccountsTemplates.configure({
-      /* Verification */
-      sendVerificationEmail: false,
-      showResendVerificationEmailLink: false,
-      /* Password */
-      showForgotPasswordLink: false,
-    });
+    // AccountsTemplates.configure({
+    //   /* Verification */
+    //   sendVerificationEmail: false,
+    //   showResendVerificationEmailLink: false,
+    //   /* Password */
+    //   showForgotPasswordLink: false,
+    // });
   },
   enableAccountEmailSettings () {
     console.log('enable account email settings');
@@ -47,13 +50,13 @@ Meteor.methods({
     // specifically, those related to verification email and password reset
 
     // Enable email related features / links for accounts templates
-    AccountsTemplates.configure({
-      /* Verification */
-      sendVerificationEmail: true,
-      showResendVerificationEmailLink: true,
-      /* Password */
-      showForgotPasswordLink: true,
-    });
+    // AccountsTemplates.configure({
+    //   /* Verification */
+    //   sendVerificationEmail: true,
+    //   showResendVerificationEmailLink: true,
+    //   /* Password */
+    //   showForgotPasswordLink: true,
+    // });
   },
   updateGithubConfiguration () {
     // Try if settings exist
