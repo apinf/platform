@@ -121,7 +121,7 @@ Template.search.events({
     const instance = Template.instance();
 
     // Get search text from a text field.
-    const searchValue = instance.$('#search-page-text').val();
+    const searchValue = instance.$('#search-field').val();
 
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
