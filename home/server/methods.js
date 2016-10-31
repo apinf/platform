@@ -5,7 +5,7 @@ import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 
 Meteor.methods({
-  sendEmail (doc) {
+  sendContactFormEmail (doc) {
     // Important server-side check for security and data integrity
     check(doc, ContactFormSchema);
 
