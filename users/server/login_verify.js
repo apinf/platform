@@ -5,8 +5,8 @@ import { _ } from 'lodash';
 
 // Login attempt verifier to require verified email before login
 export function loginAttemptVerifier (parameters) {
-  // Placeholder for user login allowed
-  let userLoginAllowed;
+  // Init user login allowed
+  let userLoginAllowed = false;
 
   // Get reference to user object, to improve readability of later code
   const user = parameters.user;
@@ -24,7 +24,7 @@ export function loginAttemptVerifier (parameters) {
       const emails = parameters.user.emails;
 
       // Check if any of user's emails are verified
-      const verified = _.find(emails, function (email) { return email.verified; });
+      const verified = _.find(emails, (email) => { return email.verified; });
 
       // If no email is verified, throw an error
       if (!verified) {
