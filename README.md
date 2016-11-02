@@ -51,3 +51,5 @@ You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io
 
 # Contributing
 Please review our [Contributor Guide](https://github.com/apinf/docs/blob/master/docs/develop/contributing.md) for details on how to get involved with the project.
+
+Please follow guidelines for community involvement in our [Code of Conduct](https://github.com/apinf/docs/blob/master/docs/develop/CODE-OF-CONDUCT.md)
