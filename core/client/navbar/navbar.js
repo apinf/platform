@@ -117,7 +117,7 @@ Template.navbar.helpers({
     // By default allowing all user to add an API
     return true;
   },
-  userCanViewPage () {
+  userCanViewDashboard () {
     // Allow or not regular user to view Dashboard page
     // It depends on onlyAdminsCanAddApis settings
 
