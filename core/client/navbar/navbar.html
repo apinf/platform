@@ -24,12 +24,14 @@
         <ul class="nav navbar-nav navbar-left">
           {{# if currentUser }}
             {{# if proxyIsDefined }}
-              <li class="{{ isActiveRoute 'dashboard' }}">
-                <a href="/dashboard">
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                  {{_ "navbar_dashboard" }}
-                </a>
-              </li>
+              {{# if userCanViewDashboard }}
+                <li class="{{ isActiveRoute 'dashboard' }}">
+                  <a href="/dashboard">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    {{_ "navbar_dashboard" }}
+                  </a>
+                </li>
+              {{/ if }}
             {{/ if }}
           {{/ if }}
           <li class="{{ isActiveRoute 'catalogue' }}">
