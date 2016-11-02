@@ -1,6 +1,7 @@
-import Github from 'github';
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
-Accounts.onCreateUser(function(options, user) {
+Accounts.onCreateUser((options, user) => {
   // Create empty user profile if none exists
   user.profile = user.profile || {};
 
@@ -10,14 +11,14 @@ Accounts.onCreateUser(function(options, user) {
     user.emails = [
       {
         address: user.services.github.email,
-        verified: true
-      }
+        verified: true,
+      },
     ];
 
     // Search 'githubUsername' from database.
-    var githubUsername = user.services.github.username;
-    var existingUser = Meteor.users.findOne({'username': githubUsername});
-    if(existingUser === undefined) {
+    const githubUsername = user.services.github.username;
+    const existingUser = Meteor.users.findOne({ 'username': githubUsername });
+    if (existingUser === undefined) {
       // Username available, set username to Github username.
       user.username = githubUsername;
     } else {
@@ -28,38 +29,9 @@ Accounts.onCreateUser(function(options, user) {
   }
 
   // we wait for Meteor to create the user before sending an email
-  Meteor.setTimeout(function() {
+  Meteor.setTimeout(() => {
     Meteor.call('sendRegistrationEmailVerification', user._id);
   }, 2 * 1000);
 
   return user;
-});
-
-Accounts.onLogin(function(info) {
-  var e, email, github, ref, result, user;
-  user = info.user;
-  var userId = user._id;
-
-  if ((ref = user.services) != null ? ref.github : void 0) {
-    if (user) {
-      github = new Github({
-        version: '3.0.0',
-        timeout: 5000
-      });
-      github.authenticate({
-        type: 'oauth',
-        token: user.services.github.accessToken
-      });
-      try {
-        result = github.user.getEmails({
-          user: user.services.github.username
-        });
-        return email = _(result).findWhere({
-          primary: true
-        });
-      } catch (_error) {
-        e = _error;
-      }
-    }
-  }
 });
