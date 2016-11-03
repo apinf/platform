@@ -39,7 +39,7 @@ const UserSchema = new SimpleSchema({
   },
   profile: {
     type: UserProfileSchema,
-    optional: true
+    optional: true,
   },
   services: {
     type: Object,
@@ -54,10 +54,10 @@ const UserSchema = new SimpleSchema({
 });
 
 // Fetch username invalid message
-const usernameInvalid = TAPi18n.__('profile-usernameInvalid');
+const usernameInvalid = TAPi18n.__('profile_usernameInvalid');
 
 // Define custom validation error messages
-UserProfileSchema.messages({
+UserSchema.messages({
   'regEx username': [
     { exp: UsernameRegEx, msg: usernameInvalid },
   ],
