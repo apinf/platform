@@ -9,13 +9,6 @@ Router.waitOn(function() {
   return this.subscribe('user');
 });
 
-let redirectToProfile = function () {
-  if (Meteor.userId() && !Meteor.user().username) {
-    this.redirect('/settings/profile');
-  }
-  this.next();
-};
-
 var redirectToDashboard = function () {
   if (Meteor.user()) {
     this.redirect('/dashboard');
@@ -25,13 +18,12 @@ var redirectToDashboard = function () {
   }
 };
 
+Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
+
 // Routes for logged in user
 Router.plugin('ensureSignedIn', {
   only: ['dashboard']
 });
-
-Router.onBeforeAction(redirectToProfile, {except: ['profile']});
-Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
 
 Router.map(function() {
   this.route('notAuthorized', {
