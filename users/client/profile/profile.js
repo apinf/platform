@@ -1,5 +1,21 @@
 AutoForm.hooks({
   updateProfile: {
+    before: {
+      update (user) {
+        const userUnset = user.$unset;
+        // Check if username is empty
+        if (userUnset.username === '') {
+          // Inform user about error
+          const errorMessage = TAPi18n.__('profile_usernameInvalid');
+          sAlert.error(errorMessage);
+          // Cancel form
+          return false;
+        } else {
+          // Otherwise return changes
+          return user;
+        }
+      },
+    },
     onSuccess (operation, result, template) {
       // Get update success message translation
       const message = TAPi18n.__('profile_updatedSuccess');
@@ -12,25 +28,6 @@ AutoForm.hooks({
     },
   },
 });
-
-Template.profile.rendered = function () {
-  const instance = this;
-
-  // Get logged in user
-  const currentUser = Meteor.user();
-
-  // Check logged in user exists
-  if (currentUser) {
-    // Ask user to set username if it is not set.
-    if (!currentUser.username) {
-      // Get username 'update needed' message
-      const message = TAPi18n.__('profile_setUsername');
-
-      // Alert user of update needed
-      sAlert.info(message);
-    }
-  }
-};
 
 Template.profile.helpers({
   currentUser () {
