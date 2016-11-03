@@ -44,7 +44,10 @@ Router.route('/settings/profile', {
 // Redirect to profile page if user doesn't have username
 // Eg. logged in with Github & username already taken
 const redirectToProfile = function () {
-  if (Meteor.userId() && !Meteor.user().username) {
+  // Get logged in user
+  const loggedInUser = Meteor.user();
+  // If user exists but does not have username defined, redirect to profile
+  if (loggedInUser && !loggedInUser.username) {
     this.redirect('/settings/profile');
   }
   this.next();
