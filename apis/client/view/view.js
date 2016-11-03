@@ -32,6 +32,9 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to authorized user public details
   instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
+
+  // Subscribe to all users, returns only usernames
+  instance.subscribe('allUsers');
 });
 
 Template.viewApi.helpers({
