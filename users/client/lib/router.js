@@ -53,7 +53,7 @@ const redirectToProfile = function () {
     // Inform user to define username
     sAlert.info(message, { onRouteClose: false });
     // redirect to profile
-    Router.go('profile');
+    this.redirect('profile');
   }
   this.next();
 };
@@ -69,7 +69,7 @@ Router.route('/sign-out', {
 const signOut = function () {
   Meteor.logout();
   this.redirect('/');
-  return this.next();
+  this.next();
 };
 
 Router.onBeforeAction(signOut, { only: ['signOut'] });
