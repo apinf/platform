@@ -46,9 +46,14 @@ Router.route('/settings/profile', {
 const redirectToProfile = function () {
   // Get logged in user
   const loggedInUser = Meteor.user();
-  // If user exists but does not have username defined, redirect to profile
+  // If user exists but does not have username defined
   if (loggedInUser && !loggedInUser.username) {
-    this.redirect('/settings/profile');
+    // Get username 'update needed' message
+    const message = TAPi18n.__('profile_setUsername');
+    // Inform user to define username
+    sAlert.info(message, { onRouteClose: false });
+    // redirect to profile
+    Router.go('profile');
   }
   this.next();
 };
