@@ -58,8 +58,8 @@ const checkUsername = function () {
       // Inform user to define username
       sAlert.info(message, { onRouteClose: false });
     }
-    this.next();
   }
+  this.next();
 };
 // Don't redirect on profile page
 Router.onBeforeAction(checkUsername, { except: ['profile'] });
