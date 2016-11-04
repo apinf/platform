@@ -50,4 +50,6 @@ See the [high definition video (with music) of Apinf Development Activity up to 
 You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.
 
 # Contributing
-Please review our [Contributor Guide](https://github.com/apinf/docs/blob/master/docs/develop/contributing.md) for details on how to get involved with the project.
+Please review our [Contributor Guide](https://github.com/apinf/platform/blob/develop/CONTRIBUTING.md) for details on how to get involved with the project.
+
+Please follow guidelines for community involvement in our [Code of Conduct](https://github.com/apinf/platform/blob/develop/CODE_OF_CONDUCT.md)
