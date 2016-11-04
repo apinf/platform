@@ -22,9 +22,8 @@ Accounts.onCreateUser((options, user) => {
       // Username available, set username to Github username.
       user.username = githubUsername;
     } else {
-      // Username clashes with existing username, set empty.
-      // Asking user to fill out username in profile page.
-      user.username = '';
+      // Username clashes with existing username, add prefix
+      user.username = `gh-${githubUsername}`;
     }
   }
 
