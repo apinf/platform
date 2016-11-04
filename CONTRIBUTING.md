@@ -14,6 +14,7 @@ Use the following guidelines when contributing to this project.
     - [Bug report/support request example](#bug-reportsupport-request-example)
 - [Contributing code](#contributing-code)
   - [Code quality](#code-quality)
+    - [Simplicity and safety](#simplicity-and-safety)
     - [Comments](#comments)
       - [Example comment](#example-comment)
     - [One task per line](#one-task-per-line)
@@ -149,6 +150,14 @@ Additionally, the following steps help our team stay coordinated:
 
 ## Code quality
 In a nutshell, **write code for humans to read and understand**. Our code will be minified for machines during the build process. For further reference, please [read Human JavaScript](http://read.humanjavascript.com/) by Henrik Joreteg.
+
+### Simplicity and safety
+When writing code, tend towards simple and explicit solutions. Avoid cleverness when possible, as it may come back to bite us.
+
+Please read and follow the following guidelines:
+
+- [10 Rules for Writing Safety Critical Code](http://spinroot.com/p10/)
+- [The Zen of Python](https://www.python.org/dev/peps/pep-0020/)
 
 ### Comments
 *Every* significant line of code should have an accompanying human language (English) comment. Generally, comments should be placed on the line preceeding the code. This is for several reasons:
