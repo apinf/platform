@@ -12,10 +12,8 @@ Router.waitOn(function() {
 var redirectToDashboard = function () {
   if (Meteor.user()) {
     this.redirect('/dashboard');
-    this.next();
-  } else {
-    this.next();
   }
+  this.next();
 };
 
 Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
