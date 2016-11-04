@@ -1,4 +1,6 @@
+import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 const UserProfileSchema = new SimpleSchema({
   name: {
@@ -17,7 +19,7 @@ const UserSchema = new SimpleSchema({
   username: {
     type: String,
     regEx: UsernameRegEx,
-    optional: true,
+    optional: false,
   },
   apiUmbrellaUserId: {
     type: String,
