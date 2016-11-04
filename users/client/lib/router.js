@@ -3,7 +3,6 @@ import { Router } from 'meteor/iron:router';
 import { Accounts } from 'meteor/accounts-base';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { Tracker } from 'meteor/tracker';
 
 Router.route('/users', {
   name: 'accountsAdmin',
@@ -41,28 +40,6 @@ Router.route('/settings/profile', {
   layout: 'masterLayout',
   template: 'profile',
 });
-
-// Redirect to profile page if user doesn't have username
-// Eg. logged in with Github & username already taken
-const ensureUsernameExists = function () {
-  // Workaround for https://github.com/iron-meteor/iron-router/issues/1031
-  if (Tracker.currentComputation.firstRun) {
-    // Get logged in user
-    const loggedInUser = Meteor.user();
-    // If user exists but does not have username defined
-    if (loggedInUser && !loggedInUser.username) {
-      // redirect to profile
-      this.redirect('profile');
-      // Get username 'update needed' message
-      const message = TAPi18n.__('profile_setUsername');
-      // Inform user to define username
-      sAlert.info(message, { onRouteClose: false });
-    }
-  }
-  this.next();
-};
-// Don't redirect on profile page
-Router.onBeforeAction(ensureUsernameExists, { except: ['profile'] });
 
 Router.route('/sign-out', {
   name: 'signOut',
