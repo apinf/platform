@@ -44,7 +44,7 @@ Router.route('/settings/profile', {
 
 // Redirect to profile page if user doesn't have username
 // Eg. logged in with Github & username already taken
-const checkUsername = function () {
+const ensureUsernameExists = function () {
   // Workaround for https://github.com/iron-meteor/iron-router/issues/1031
   if (Tracker.currentComputation.firstRun) {
     // Get logged in user
@@ -62,7 +62,7 @@ const checkUsername = function () {
   this.next();
 };
 // Don't redirect on profile page
-Router.onBeforeAction(checkUsername, { except: ['profile'] });
+Router.onBeforeAction(ensureUsernameExists, { except: ['profile'] });
 
 Router.route('/sign-out', {
   name: 'signOut',
