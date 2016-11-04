@@ -16,7 +16,6 @@ Accounts.onCreateUser((options, user) => {
           verified: true,
         },
       ];
-
       // Search 'githubUsername' from database.
       const githubUsername = user.services.github.username;
       const existingUser = Meteor.users.findOne({ 'username': githubUsername });
@@ -24,9 +23,8 @@ Accounts.onCreateUser((options, user) => {
         // Username available, set username to Github username.
         user.username = githubUsername;
       } else {
-        // Username clashes with existing username, set empty.
-        // Asking user to fill out username in profile page.
-        user.username = '';
+        // Username clashes with existing username, add prefix
+        user.username = `gh-${githubUsername}`;
       }
     // Case 2: Register with local account, email verification required
     } else if (user.services.password) {
