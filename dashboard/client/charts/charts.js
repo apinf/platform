@@ -435,9 +435,6 @@ Template.dashboardCharts.onRendered(function () {
     // Unset loader
     chartElements.removeClass('loader');
   });
-
-  // Activate help icons
-  $('[data-toggle="popover"]').popover();
 });
 
 Template.dashboardCharts.events({
