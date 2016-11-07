@@ -1,3 +1,5 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 import { FeedbackVotes } from './';
 
 FeedbackVotes.schema = new SimpleSchema({
@@ -18,4 +20,4 @@ FeedbackVotes.schema = new SimpleSchema({
   },
 });
 
-FeedbackVotes.attachSchema(FeedbackVotes.Schema);
+FeedbackVotes.attachSchema(FeedbackVotes.schema);

@@ -20,15 +20,25 @@ Router.route('/api/:_id/', function () {
   const route = this;
 
   // Get current API Backend ID
-  const apiBackendId = Router.current().params._id;
+  const apiId = Router.current().params._id;
 
-  // Ensure current user has permissions to view backend
-  Meteor.call('currentUserCanViewApi', apiBackendId, (error, userIsAllowedToViewApi) => {
-    if (userIsAllowedToViewApi) {
-      route.render('viewApi');
-      route.layout('masterLayout');
+  // Check if API exists
+  Meteor.call('checkIfApiExists', apiId, function (error, apiExists) {
+    // Check if API exists
+    if (apiExists) {
+      // Ensure current user has permissions to view backend
+      Meteor.call('currentUserCanViewApi', apiId, (error, userIsAllowedToViewApi) => {
+        if (userIsAllowedToViewApi) {
+          route.render('viewApi');
+          route.layout('masterLayout');
+        } else {
+          // User is not allowed to view API
+          Router.go('forbidden');
+        }
+      });
     } else {
-      Router.go('forbidden');
+      // If API doesn't exist, show 'Not Found'
+      route.render('notFound');
     }
   });
 }, {

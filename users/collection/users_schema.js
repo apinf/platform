@@ -1,4 +1,6 @@
+import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 const UserProfileSchema = new SimpleSchema({
   name: {
@@ -17,7 +19,7 @@ const UserSchema = new SimpleSchema({
   username: {
     type: String,
     regEx: UsernameRegEx,
-    optional: true,
+    optional: false,
   },
   apiUmbrellaUserId: {
     type: String,
@@ -39,7 +41,7 @@ const UserSchema = new SimpleSchema({
   },
   profile: {
     type: UserProfileSchema,
-    optional: true
+    optional: true,
   },
   services: {
     type: Object,
@@ -54,10 +56,10 @@ const UserSchema = new SimpleSchema({
 });
 
 // Fetch username invalid message
-const usernameInvalid = TAPi18n.__('profile-usernameInvalid');
+const usernameInvalid = TAPi18n.__('profile_usernameInvalid');
 
 // Define custom validation error messages
-UserProfileSchema.messages({
+UserSchema.messages({
   'regEx username': [
     { exp: UsernameRegEx, msg: usernameInvalid },
   ],

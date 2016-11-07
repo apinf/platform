@@ -17,6 +17,7 @@
         {{ topic }}
       </span>
     </div>
+
     <div class="pull-right">
       <button
         type="button"
@@ -25,11 +26,13 @@
         data-target="#feedback-{{ _id }}">
         {{_ "feedback_view_button" }}
       </button>
-      <button
-        type="button"
-        class="btn btn-danger btn-xs delete-feedback">
-          {{_ "feedback_remove_button" }}
-      </button>
+      {{# if api.currentUserCanEdit }}
+        <button
+          type="button"
+          class="btn btn-danger btn-xs delete-feedback">
+            {{_ "feedback_remove_button" }}
+        </button>
+      {{/ if }}
     </div>
   </div>
   <div id="feedback-{{ _id }}" class="collapse">

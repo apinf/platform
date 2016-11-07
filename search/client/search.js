@@ -2,11 +2,13 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 // APINF import
 import { Apis } from '/apis/collection';
 // npm import
 import moment from 'moment';
+import _ from 'lodash';
 
 Template.search.onCreated(function () {
   // Get reference to Template instance
@@ -71,16 +73,16 @@ Template.search.onRendered(function () {
   const instance = this;
 
   // Update search field with current search value
-  $('#search-text').val(instance.searchValue.get());
+  instance.$('#search-field').val(instance.searchValue.get());
 
   // Check if search parameter is set
   if (instance.searchValue.get()) {
     // Update search field with search value provided in the URL
-    $('#search-text').val(instance.searchValue.get());
+    instance.$('#search-field').val(instance.searchValue.get());
   }
 
   // Put focus of search field on a page
-  $('#search-text').focus();
+  instance.$('#search-field').focus();
 });
 
 Template.search.helpers({
@@ -112,14 +114,14 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  'keyup #search-text': function (event, template) {
+  'keyup #search-field': function (event) {
     event.preventDefault();
 
     // Get reference to Template instance
     const instance = Template.instance();
 
     // Get search text from a text field.
-    const searchValue = $('#search-text').val();
+    const searchValue = instance.$('#search-field').val();
 
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
@@ -128,5 +130,9 @@ Template.search.events({
     UniUtils.url.setQuery('q', searchValue);
 
     return false;
+  },
+  'submit #search-form': function (event) {
+    // Prevent the 'submit' event
+    event.preventDefault();
   },
 });

@@ -1,26 +1,11 @@
 import { Apis } from '/apis/collection';
 
 Meteor.methods({
-  currentUserCanViewApi (apiBackendId) {
-    const apiBackend = Apis.findOne(apiBackendId);
+  checkIfApiExists (apiId) {
+    // Check for API
+    const api = Apis.findOne(apiId);
 
-    if (apiBackend && apiBackend.currentUserCanView() ) {
-      // User is authorized to view this API
-      return  true;
-    } else {
-      // User is NOT authorized to view this API
-      return false;
-    }
+    // Return true if API exists, false if undefined
+    return (api);
   },
-  currentUserCanEditApi (apiBackendId) {
-    const apiBackend = Apis.findOne(apiBackendId);
-
-    if (apiBackend && apiBackend.currentUserCanEdit() ) {
-      // User is authorized to view this API
-      return  true;
-    } else {
-      // User is NOT authorized to view this API
-      return false;
-    }
-  }
 });

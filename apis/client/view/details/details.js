@@ -78,4 +78,21 @@ Template.apiDetails.helpers({
 
     return apiKey;
   },
+  // api key can be omitted or not?
+  disableApiKey () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get values of disable api key
+    const disableApiKey = instance.data.proxyBackend.apiUmbrella.settings.disable_api_key;
+
+    return disableApiKey;
+  },
+  // User has got an api key
+  hasApiKey () {
+    // Get current user
+    const currentUserId = Meteor.userId();
+
+    return ApiKeys.findOne({ userId: currentUserId });
+  }
 });

@@ -12,7 +12,10 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) [![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/) [![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) 
+[![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/) 
+[![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+[![Open Development Method badge](https://camo.githubusercontent.com/9065d5a7f38cb53b9934c0f1b15087e177360af6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446576656c6f706d656e742532304d6574686f642d4f70656e2d626c75652e737667)](https://opendevelopmentmethod.org/)
 
 ## Build
 
@@ -39,8 +42,17 @@ For API consumers APInf provides simple key management, key usage analytics and 
 
 [![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
 
+## Source code visualization
+Our project source code has changed throughout the project lifespan.
+
+[![source code structure](https://ia601503.us.archive.org/33/items/ApinfDevelopmentActivityUpTo0.33.1/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1)
+
+See the [high definition video (with music) of Apinf Development Activity up to version 0.33.1](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1) on the Internet Archive.
+
 # Nightly build
 You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.
 
 # Contributing
-Please review our [Contributor Guide](https://github.com/apinf/docs/blob/master/docs/develop/contributing.md) for details on how to get involved with the project.
+Please review our [Contributor Guide](https://github.com/apinf/platform/blob/develop/CONTRIBUTING.md) for details on how to get involved with the project.
+
+Please follow guidelines for community involvement in our [Code of Conduct](https://github.com/apinf/platform/blob/develop/CODE_OF_CONDUCT.md)

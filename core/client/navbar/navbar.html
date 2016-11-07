@@ -24,18 +24,20 @@
         <ul class="nav navbar-nav navbar-left">
           {{# if currentUser }}
             {{# if proxyIsDefined }}
-              <li class="{{ isActiveRoute 'dashboard' }}">
-                <a href="/dashboard">
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                  {{_ "Dashboard" }}
-                </a>
-              </li>
+              {{# if userCanViewDashboard }}
+                <li class="{{ isActiveRoute 'dashboard' }}">
+                  <a href="/dashboard">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    {{_ "navbar_dashboard" }}
+                  </a>
+                </li>
+              {{/ if }}
             {{/ if }}
           {{/ if }}
           <li class="{{ isActiveRoute 'catalogue' }}">
             <a href="{{ pathFor route='catalogue' }}">
               <i class="fa fa-book" aria-hidden="true"></i>
-              {{_ "masterLayout_sidebar_Catalogue" }}
+              {{_ "navbar_catalogue" }}
             </a>
           </li>
           {{# if currentUser }}
@@ -44,7 +46,7 @@
               <a href="{{ pathFor route='addApi' }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
 
-                {{_ "masterLayout_sidebar_AddAPIBackend" }}
+                {{_ "navbar_addAPIBackend" }}
               </a>
             </li>
             {{/ if }}
@@ -52,7 +54,7 @@
               <li class="{{ isActiveRoute 'accountsAdmin' }}">
                 <a href="{{ pathFor route='accountsAdmin' }}">
                   <i class="fa fa-users" aria-hidden="true"></i>
-                  {{_ "masterLayout_sidebar_Users" }}
+                  {{_ "navbar_users" }}
                 </a>
               </li>
             {{/ if }}
@@ -65,13 +67,13 @@
           <li>
             <a class="close-navbar" href="/sign-up">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
-              {{_ "signup" }}
+              {{_ "navbar_signUp" }}
             </a>
           </li>
           <li>
             <a class="close-navbar" href="/sign-in">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
-              {{_ "login" }}
+              {{_ "navbar_signIn" }}
             </a>
           </li>
           {{/ if }}
@@ -82,10 +84,10 @@
             </a>
           </li>
           <li>
-            <button type="button" class="btn navbar-btn btn-primary" id="about-button">
+            <a id="about-button">
               <i class="fa fa-question-circle" aria-hidden="true"></i>
-              {{_ "navbar_aboutButton_text" }}
-            </button>
+              {{_ "navbar_about" }}
+            </a>
           </li>
         </ul>
       </div>

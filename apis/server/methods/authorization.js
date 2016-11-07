@@ -19,4 +19,18 @@ Meteor.methods({
       Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
     }
   },
+  currentUserCanViewApi (apiId) {
+    // Get API
+    const api = Apis.findOne(apiId);
+
+    // Check if user can view
+    return api && api.currentUserCanView();
+  },
+  currentUserCanEditApi (apiId) {
+    // Get API
+    const api = Apis.findOne(apiId);
+
+    // Check if user can edit
+    return api && api.currentUserCanEdit();
+  },
 });
