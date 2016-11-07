@@ -28,7 +28,7 @@
       </h2>
     </div>
     <div class="panel-body">
-      <div class="panel panel-default">
+      <div id="documentation-link-panel" class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">
             {{_ "apiDocumentation_Link_Title" }}
@@ -36,7 +36,7 @@
         </div>
         <div class="panel-body">
           {{# if documentationLink }}
-            <div class="documentation-link">
+            <div id="documentation-link" class="documentation-link">
               <i class="fa fa-external-link"></i>&nbsp;
               <a href="{{ documentationLink }}">
                 {{ documentationLink }}
@@ -52,7 +52,7 @@
           {{/ if }}
         </div>
       </div>
-      <div class="panel panel-default">
+      <div id="documentation-viewer-panel" class="panel panel-default">
         <div class="panel-heading">
           <a
              tabindex="0"
