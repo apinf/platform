@@ -1,5 +1,9 @@
-Template.dashboardDataTable.onCreated(function () {
+import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
+import $ from 'jquery';
+
+Template.dashboardDataTable.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -8,24 +12,25 @@ Template.dashboardDataTable.onCreated(function () {
 
   // Add inital page number
   instance.pageNumber = new ReactiveVar(0);
+});
 
+Template.dashboardDataTable.onRendered(function () {
+  // Activate help icons
+  $('[data-toggle="popover"]').popover();
 });
 
 Template.dashboardDataTable.events({
   'click #prev': function (event, instance) {
-
     // Get current page number
     const currentPageNumber = instance.pageNumber.get();
 
     // Check if page number the first page in the table
     if (currentPageNumber > 0) {
-
       // Decrement page number value
       instance.pageNumber.set(currentPageNumber - 1);
     }
   },
   'click #next': function (event, instance) {
-
     // Get current page number
     const currentPageNumber = instance.pageNumber.get();
 
@@ -37,13 +42,11 @@ Template.dashboardDataTable.events({
 
     // Check if current page is the last one in the table
     if (currentPageNumber < (dataSetLength / rowCount - 1)) {
-
       // Increment page number
       instance.pageNumber.set(currentPageNumber + 1);
     }
   },
   'change #change-row-count': function (event, instance) {
-
     // Prevent default form submit
     event.preventDefault();
 
@@ -55,12 +58,11 @@ Template.dashboardDataTable.events({
 
     // Update reactive variable
     instance.rowCount.set(newRowCount);
-  }
+  },
 });
 
 Template.dashboardDataTable.helpers({
   tableDataSet () {
-
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -78,7 +80,6 @@ Template.dashboardDataTable.helpers({
     return Template.currentData().tableDataSet.slice(arrStart, arrEnd);
   },
   showPrevButton () {
-
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -89,7 +90,6 @@ Template.dashboardDataTable.helpers({
     return pageNumber > 0;
   },
   showNextButton () {
-
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -106,7 +106,6 @@ Template.dashboardDataTable.helpers({
     return pageNumber < (dataSetLength / rowCount - 1);
   },
   currentPageNumber () {
-
     // Get reference to a template instance
     const instance = Template.instance();
 
@@ -114,7 +113,6 @@ Template.dashboardDataTable.helpers({
     return instance.pageNumber.get() + 1;
   },
   totalPageNumber () {
-
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -126,5 +124,5 @@ Template.dashboardDataTable.helpers({
 
     // Calculate total page number and make it integer
     return (dataSetLength / rowCount + 1) | 0;
-  }
+  },
 });
