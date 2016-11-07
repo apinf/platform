@@ -12,7 +12,10 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) [![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/) [![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) 
+[![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/) 
+[![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+[![Open Development Method badge](https://camo.githubusercontent.com/9065d5a7f38cb53b9934c0f1b15087e177360af6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446576656c6f706d656e742532304d6574686f642d4f70656e2d626c75652e737667)](https://opendevelopmentmethod.org/)
 
 ## Build
 
