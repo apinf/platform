@@ -4,18 +4,19 @@ import { ApiKeys } from '/api_keys/collection';
 import Clipboard from 'clipboard';
 
 Template.apiKey.onCreated(function () {
+  // Subscribe to apiKeys for current user
   this.subscribe('apiKeysForCurrentUser');
 });
 
 Template.apiKey.onRendered(function () {
   // Get reference of template instance
   instance = this;
-  
+
   // Initialize Clipboard copy button
   instance.copyButton = new Clipboard('#copy-api-key');
 
   // Tell the user when copy is successful
-  instance.copyButton.on('success', function (event) {
+  instance.copyButton.on('success', (event) => {
     // Get localized success message
     const message = TAPi18n.__('apiKeys_copySuccessful');
 
@@ -43,18 +44,26 @@ Template.apiKey.events({
     // Set button to processing state
     $('#get-api-key').button('loading');
 
-    // Call createApiKey function
-    Meteor.call('createApiKey', (error, result) => {
-      if (error) {
-        sAlert.error(error);
-      } else {
-        // Get success message translation
-        const message = TAPi18n.__('apiKeys_getApiKeyButton_success');
+    // Get api from template data
+    const api = Template.currentData().api;
 
-        // Alert the user of success
-        sAlert.success(message);
-      }
-    });
+    // Check api is defined
+    if (api) {
+      // Call createApiKey function
+      Meteor.call('createApiKey', api._id, (error, result) => {
+        if (error) {
+          sAlert.error(error);
+        } else {
+          // Get success message translation
+          const message = TAPi18n.__('apiKeys_getApiKeyButton_success');
+
+          // Alert the user of success
+          sAlert.success(message);
+        }
+      });
+    } else {
+      console.log('API undefined');
+    }
   },
 });
 
@@ -71,6 +80,8 @@ Template.apiKey.helpers({
 
     // Make sure user exists and has API key
     if (currentUserId) {
+      // TODO: Get API key by proxyId for multi-proxy support
+
       // Get API Key document
       const userApiKey = ApiKeys.findOne({ userId: currentUserId });
 
