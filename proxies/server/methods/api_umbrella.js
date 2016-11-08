@@ -96,6 +96,32 @@ Meteor.methods({
 
     return response;
   },
+  updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
+    // Create ApiUmbrellaWeb instance
+    const umbrella = Meteor.call('createApiUmbrellaWeb');
+
+    // Construct an API Backend object for API Umbrella with one 'api' key
+    const constructedBackend = {
+      api: apiBackend,
+    };
+
+    // Response object to be send back to client layer.
+    const apiUmbrellaWebResponse = {
+      result: {},
+      http_status: 204,
+      errors: {},
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
+    } catch (apiUmbrellaError) {
+      // set the errors object
+      apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
+      apiUmbrellaWebResponse.http_status = 422;
+    }
+    return apiUmbrellaWebResponse;
+  },
   deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
@@ -130,19 +156,9 @@ Meteor.methods({
 
     return false;
   },
-  getElasticsearchUrl () {
-    if (Meteor.call('elasticsearchIsDefined')) {
-      // TODO: multi-proxy support
-      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
-
-      return elasticsearch;
-    }
-
-    throw new Meteor.Error('Elasticsearch is not defined');
-  },
-  publishApiBackendOnApiUmbrella (backendId) {
+  publishApiBackendOnApiUmbrella (backendId, proxyId) {
     // Create ApiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
     // Response object to be send back to client layer.
     const response = {
@@ -160,6 +176,16 @@ Meteor.methods({
       response.http_status = 422;
     }
     return response;
+  },
+  getElasticsearchUrl () {
+    if (Meteor.call('elasticsearchIsDefined')) {
+      // TODO: multi-proxy support
+      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
+
+      return elasticsearch;
+    }
+
+    throw new Meteor.Error('Elasticsearch is not defined');
   },
   syncApiBackends () {
     // TODO: multi-proxy support
@@ -243,31 +269,5 @@ Meteor.methods({
        error.message
       );
     }
-  },
-  updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
-    // Create ApiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
-
-    // Construct an API Backend object for API Umbrella with one 'api' key
-    const constructedBackend = {
-      api: apiBackend,
-    };
-
-    // Response object to be send back to client layer.
-    const apiUmbrellaWebResponse = {
-      result: {},
-      http_status: 204,
-      errors: {},
-    };
-
-    try {
-      // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
-    } catch (apiUmbrellaError) {
-      // set the errors object
-      apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
-      apiUmbrellaWebResponse.http_status = 422;
-    }
-    return apiUmbrellaWebResponse;
   },
 });
