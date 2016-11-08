@@ -7,7 +7,8 @@ AutoForm.addHooks('proxyForm', {
     // Hide modal
     Modal.hide('addProxy');
 
-    Meteor.call('syncApiBackends');
+    // TODO: multi-proxy support
+    // Meteor.call('syncApiBackends');
   },
   onError (formType, error) {
     // Throw an error if one has been chatched
