@@ -1,48 +1,47 @@
-import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
 import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
+import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
 import { Apis } from '/apis/collection';
 import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
-import { TAPi18n } from 'meteor/tap:i18n';
 
 import _ from 'lodash';
 
 Meteor.methods({
-  createApiBackendOnApiUmbrella (apiBackend) {
-    // Create ApiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+  createApiUmbrellaWeb (proxyId) {
+    // Get proxy by proxyId
+    const proxy = Proxies.findOne({ _id: proxyId });
 
-    // Construct an API Backend object for API Umbrella with one 'api' key
-    const backend = {
-      api: apiBackend,
-    };
+    // Check if API Umbrella Web settings are valid
+    if (proxy && apiUmbrellaSettingsValid(proxy)) {
+      // Create config object for API Umbrella Web REST API
+      const config = {
+        baseUrl: `${proxy.apiUmbrella.url}/api-umbrella/`,
+        apiKey: proxy.apiUmbrella.apiKey,
+        authToken: proxy.apiUmbrella.authToken,
+      };
 
-    // Default response object to be send back to client layer
-    const response = {
-      result: {},
-      http_status: 200,
-      errors: {},
-    };
-
-    try {
-      // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
-    } catch (error) {
-      // Set the errors object
-      response.errors = { default: [error.message] };
-      response.http_status = 422;
+      try {
+        // Create new API Umbrella Web object for REST calls
+        const apiUmbrellaWeb = new ApiUmbrellaWeb(config);
+        // Return created object
+        return apiUmbrellaWeb;
+      } catch (error) {
+        throw new Meteor.Error(error);
+      }
+    } else {
+      throw new Meteor.Error('Proxy not defined or apiUmbrella settings are not valid.');
     }
-
-    return response;
   },
-  createApiUmbrellaUser (currentUser) {
+  createApiUmbrellaUser (currentUser, proxyId) {
     /*
     Create API key & attach it for given user,
     Might throw errors, catch on client callback
     */
 
     // Create apiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
     // Create API Umbrella user object with required fields
     const apiUmbrellaUserObj = {
       user: {
@@ -70,30 +69,32 @@ Meteor.methods({
       );
     }
   },
-  createApiUmbrellaWeb () {
-    // TODO: Fix for multi-proxy support
-    const proxy = Proxies.findOne();
+  createApiBackendOnApiUmbrella (apiBackend, proxyId) {
+    // Create ApiUmbrellaWeb instance
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
-    // Check if API Umbrella Web settings are valid
-    if (apiUmbrellaSettingsValid(proxy)) {
-      // Create config object for API Umbrella Web REST API
-      const config = {
-        baseUrl: `${proxy.apiUmbrella.url}/api-umbrella/`,
-        apiKey: proxy.apiUmbrella.apiKey,
-        authToken: proxy.apiUmbrella.authToken,
-      };
+    // Construct an API Backend object
+    const backend = {
+      api: apiBackend,
+    };
 
-      try {
-        // Create new API Umbrella Web object for REST calls
-        const apiUmbrellaWeb = new ApiUmbrellaWeb(config);
-        // Return created object
-        return apiUmbrellaWeb;
-      } catch (error) {
-        throw new Meteor.Error(error);
-      }
-    } else {
-      throw new Meteor.Error('ApiUmbrella settings are not valid.');
+    // Default response object to be send back to client layer
+    const response = {
+      result: {},
+      http_status: 200,
+      errors: {},
+    };
+
+    try {
+      // Send the API Backend to API Umbrella's endpoint for creation in the backend
+      response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
+    } catch (error) {
+      // Set the errors object
+      response.errors = { default: [error.message] };
+      response.http_status = 422;
     }
+
+    return response;
   },
   deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
     // Create ApiUmbrellaWeb instance
@@ -117,6 +118,7 @@ Meteor.methods({
     return apiUmbrellaWebResponse;
   },
   elasticsearchIsDefined () {
+    // TODO: multi-proxy support
     const proxy = Proxies.findOne();
 
     if (proxy) {
@@ -130,6 +132,7 @@ Meteor.methods({
   },
   getElasticsearchUrl () {
     if (Meteor.call('elasticsearchIsDefined')) {
+      // TODO: multi-proxy support
       const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
 
       return elasticsearch;
@@ -159,6 +162,7 @@ Meteor.methods({
     return response;
   },
   syncApiBackends () {
+    // TODO: multi-proxy support
     /*
     This function does the following
       1. get a list of all backends on API Umbrella
