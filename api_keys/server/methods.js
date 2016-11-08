@@ -1,26 +1,27 @@
 import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { ApiKeys } from '/api_keys/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
 
 Meteor.methods({
-  createApiKey (apiId) {
+  createApiKey (idApi) {
     // Get logged in user
     const currentUser = Meteor.user();
     // Check currentUser exists
     if (currentUser) {
-      const proxyBackend = ProxyBackends.findOne({ apiId });
+      const proxyBackend = ProxyBackends.findOne({ apiId: idApi });
 
       // Check proxyBackend is defined, and it has proxyId
       if (proxyBackend && proxyBackend.proxyId) {
         // Get Proxy by proxyId of proxyBackend
         const proxyId = proxyBackend.proxyId;
-        const proxy = Proxies.findOne({ proxyId });
+        const proxy = Proxies.findOne({ _id: proxyId });
 
         // Check type & call appropriate function
         if (proxy && proxy.type === 'apiUmbrella') {
           // Call Umbrella method to create user with API key
-          Meteor.call('createApiUmbrellaUser', currentUser, (error, umbrellaUser) => {
+          Meteor.call('createApiUmbrellaUser', currentUser, proxyId, (error, umbrellaUser) => {
             if (error) {
               console.log(error);
             } else {
