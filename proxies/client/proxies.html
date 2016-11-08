@@ -2,14 +2,11 @@
   <div class="container">
     <div class="row">
       {{> settingsMenu }}
-
       <div class="col-md-6">
         <h2>
-          {{# unless hideAddProxyButton }}
-            <button class="btn btn-default btn-sm pull-right" id="add-proxy">
-              {{_ "proxies_addProxy" }}
-            </button>
-          {{/ unless }}
+          <button class="btn btn-default btn-sm pull-right" id="add-proxy">
+            {{_ "proxies_addProxy" }}
+          </button>
           {{_ "proxies_pageHeader" }}
         </h2>
         <hr>

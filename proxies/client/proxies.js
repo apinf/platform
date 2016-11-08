@@ -24,10 +24,4 @@ Template.proxies.helpers({
 
     return proxies;
   },
-  hideAddProxyButton () {
-    const proxiesCount = Proxies.find().count();
-
-    // Set button disabled if at least one proxy is already added
-    return proxiesCount >= 1;
-  },
 });

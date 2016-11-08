@@ -1,6 +1,6 @@
 {
   "name": "apinf",
-  "version": "0.33.2",
+  "version": "0.34.0",
   "description": "API management portal and proxy.",
   "main": "index.js",
   "directories": {
