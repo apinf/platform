@@ -122,9 +122,9 @@ Meteor.methods({
     }
     return apiUmbrellaWebResponse;
   },
-  deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
+  deleteApiBackendOnApiUmbrella (apiUmbrellaApiId, proxyId) {
     // Create ApiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
     // Response object to be send back to client layer.
     const apiUmbrellaWebResponse = {
@@ -142,19 +142,6 @@ Meteor.methods({
       apiUmbrellaWebResponse.http_status = 422;
     }
     return apiUmbrellaWebResponse;
-  },
-  elasticsearchIsDefined () {
-    // TODO: multi-proxy support
-    const proxy = Proxies.findOne();
-
-    if (proxy) {
-      const elasticsearch = proxy.apiUmbrella.elasticsearch;
-
-      // Return true or false, depending on whether elasticsearch is defined
-      return (elasticsearch);
-    }
-
-    return false;
   },
   publishApiBackendOnApiUmbrella (backendId, proxyId) {
     // Create ApiUmbrellaWeb instance
@@ -176,16 +163,6 @@ Meteor.methods({
       response.http_status = 422;
     }
     return response;
-  },
-  getElasticsearchUrl () {
-    if (Meteor.call('elasticsearchIsDefined')) {
-      // TODO: multi-proxy support
-      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
-
-      return elasticsearch;
-    }
-
-    throw new Meteor.Error('Elasticsearch is not defined');
   },
   syncApiBackends () {
     // TODO: multi-proxy support
@@ -269,5 +246,28 @@ Meteor.methods({
        error.message
       );
     }
+  },
+  elasticsearchIsDefined () {
+    // TODO: multi-proxy support
+    const proxy = Proxies.findOne();
+
+    if (proxy) {
+      const elasticsearch = proxy.apiUmbrella.elasticsearch;
+
+      // Return true or false, depending on whether elasticsearch is defined
+      return (elasticsearch);
+    }
+
+    return false;
+  },
+  getElasticsearchUrl () {
+    if (Meteor.call('elasticsearchIsDefined')) {
+      // TODO: multi-proxy support
+      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
+
+      return elasticsearch;
+    }
+
+    throw new Meteor.Error('Elasticsearch is not defined');
   },
 });
