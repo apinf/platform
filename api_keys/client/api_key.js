@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ApiKeys } from '/api_keys/collection';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Clipboard from 'clipboard';
 
 Template.apiKey.onCreated(function () {
@@ -10,7 +12,7 @@ Template.apiKey.onCreated(function () {
 
 Template.apiKey.onRendered(function () {
   // Get reference of template instance
-  instance = this;
+  const instance = this;
 
   // Initialize Clipboard copy button
   instance.copyButton = new Clipboard('#copy-api-key');
@@ -35,14 +37,17 @@ Template.apiKey.onDestroyed(function () {
 });
 
 Template.apiKey.events({
-  'click #get-api-key': function (event) {
+  'click #get-api-key': function () {
+    // Get current template instance
+    const instance = Template.instance();
+
     // Get processing message translation
     const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
     // Set bootstrap loadingText
-    $('#get-api-key').button({ loadingText: message });
+    instance.$('#get-api-key').button({ loadingText: message });
 
     // Set button to processing state
-    $('#get-api-key').button('loading');
+    instance.$('#get-api-key').button('loading');
 
     // Get api from template data
     const api = Template.currentData().api;
@@ -55,10 +60,10 @@ Template.apiKey.events({
           sAlert.error(error);
         } else {
           // Get success message translation
-          const message = TAPi18n.__('apiKeys_getApiKeyButton_success');
+          const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');
 
           // Alert the user of success
-          sAlert.success(message);
+          sAlert.success(successMessage);
         }
       });
     } else {
@@ -78,12 +83,13 @@ Template.apiKey.helpers({
     // Get current user
     const currentUserId = Meteor.userId();
 
-    // Make sure user exists and has API key
-    if (currentUserId) {
-      // TODO: Get API key by proxyId for multi-proxy support
+    // Get proxyBackend from template data
+    const proxyBackend = Template.currentData().proxyBackend;
 
+    // Make sure user exists and has API key
+    if (proxyBackend && currentUserId) {
       // Get API Key document
-      const userApiKey = ApiKeys.findOne({ userId: currentUserId });
+      const userApiKey = ApiKeys.findOne({ userId: currentUserId, proxyId: proxyBackend.proxyId });
 
       // Check that Umbrella API key exists
       if (userApiKey && userApiKey.apiUmbrella) {
