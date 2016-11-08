@@ -1,9 +1,11 @@
-import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
 import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
+import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
 import { Apis } from '/apis/collection';
 import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
-import { TAPi18n } from 'meteor/tap:i18n';
+
 
 import _ from 'lodash';
 
@@ -35,14 +37,14 @@ Meteor.methods({
 
     return response;
   },
-  createApiUmbrellaUser (currentUser) {
+  createApiUmbrellaUser (currentUser, proxyId) {
     /*
     Create API key & attach it for given user,
     Might throw errors, catch on client callback
     */
 
     // Create apiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
     // Create API Umbrella user object with required fields
     const apiUmbrellaUserObj = {
       user: {
@@ -70,12 +72,12 @@ Meteor.methods({
       );
     }
   },
-  createApiUmbrellaWeb () {
-    // TODO: Fix for multi-proxy support
-    const proxy = Proxies.findOne();
+  createApiUmbrellaWeb (proxyId) {
+    // Get proxy by proxyId
+    const proxy = Proxies.findOne({ _id: proxyId });
 
     // Check if API Umbrella Web settings are valid
-    if (apiUmbrellaSettingsValid(proxy)) {
+    if (proxy && apiUmbrellaSettingsValid(proxy)) {
       // Create config object for API Umbrella Web REST API
       const config = {
         baseUrl: `${proxy.apiUmbrella.url}/api-umbrella/`,
@@ -92,7 +94,7 @@ Meteor.methods({
         throw new Meteor.Error(error);
       }
     } else {
-      throw new Meteor.Error('ApiUmbrella settings are not valid.');
+      throw new Meteor.Error('Proxy not defined or apiUmbrella settings are not valid.');
     }
   },
   deleteApiBackendOnApiUmbrella (apiUmbrellaApiId) {
@@ -117,6 +119,7 @@ Meteor.methods({
     return apiUmbrellaWebResponse;
   },
   elasticsearchIsDefined () {
+    // TODO: multi-proxy support
     const proxy = Proxies.findOne();
 
     if (proxy) {
@@ -130,6 +133,7 @@ Meteor.methods({
   },
   getElasticsearchUrl () {
     if (Meteor.call('elasticsearchIsDefined')) {
+      // TODO: multi-proxy support
       const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
 
       return elasticsearch;
