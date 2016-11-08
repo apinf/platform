@@ -96,12 +96,12 @@ Meteor.methods({
 
     return response;
   },
-  updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
+  updateApiBackendOnApiUmbrella (apiBackend, proxyId) {
     // Create ApiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
-    // Construct an API Backend object for API Umbrella with one 'api' key
-    const constructedBackend = {
+    // Construct an API Backend object
+    const backend = {
       api: apiBackend,
     };
 
@@ -114,7 +114,7 @@ Meteor.methods({
 
     try {
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiUmbrellaBackendId, constructedBackend);
+      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiBackend.id, backend);
     } catch (apiUmbrellaError) {
       // set the errors object
       apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };

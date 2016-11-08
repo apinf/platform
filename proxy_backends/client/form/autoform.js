@@ -113,8 +113,7 @@ AutoForm.hooks({
         // Update API on API Umbrella
         Meteor.call(
           'updateApiBackendOnApiUmbrella',
-          apiUmbrellaBackend.id,
-          apiUmbrellaBackend,
+          apiUmbrellaBackend, proxyBackend.proxyId,
           (error) => {
             // Check for error
             if (error) {
