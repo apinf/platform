@@ -57,7 +57,8 @@ Template.apiKey.events({
       // Call createApiKey function
       Meteor.call('createApiKey', api._id, (error, result) => {
         if (error) {
-          sAlert.error(error);
+          // Show human-readable reason for error
+          sAlert.error(error.reason);
         } else {
           // Get success message translation
           const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');
