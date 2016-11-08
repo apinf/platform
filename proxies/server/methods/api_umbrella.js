@@ -240,50 +240,6 @@ Meteor.methods({
       );
     }
   },
-  syncApiUmbrellaAdmins () {
-    // Create apiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
-
-    try {
-      // Get admin users from API Umbrella instance
-      const response = umbrella.adminApi.v1.adminUsers.getAdmins();
-
-      // Add each admin user to collection if not already there
-      const apiAdmins = response.data.data;
-
-      _.forEach(apiAdmins, (apiAdmin) => {
-        // Get existing admin user
-        const existingAdminUser = ApiUmbrellaAdmins.findOne({ id: apiAdmin.id });
-
-        // If admin user doesn't exist in collection, insert into collection
-        if (existingAdminUser === undefined) {
-          ApiUmbrellaAdmins.insert(apiAdmin);
-        }
-      });
-    } catch (error) {
-      throw new Meteor.Error(error);
-    }
-  },
-  syncApiUmbrellaUsers () {
-    // Create apiUmbrellaWeb instance
-    const umbrella = Meteor.call('createApiUmbrellaWeb');
-
-    // Get users from API Umbrella instance
-    const response = umbrella.adminApi.v1.apiUsers.getUsers();
-
-    // Add each user to collection if not already there
-    const apiUsers = response.data.data;
-
-    _.forEach(apiUsers, (apiUser) => {
-      // Get existing user
-      const existingUser = ApiUmbrellaUsers.findOne({ id: apiUser.id });
-
-      // If user doesn't exist in collection, insert into collection
-      if (existingUser === undefined) {
-        ApiUmbrellaUsers.insert(apiUser);
-      }
-    });
-  },
   updateApiBackendOnApiUmbrella (apiUmbrellaBackendId, apiBackend) {
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb');
