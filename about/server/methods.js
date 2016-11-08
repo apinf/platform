@@ -11,7 +11,7 @@ Meteor.methods({
     const filePath = `${process.env.PWD}/package.json`;
 
     // Read the contents of the package.json
-    const fileContents = fs.readFileSynnc(filePath);
+    const fileContents = fs.readFileSync(filePath);
 
     // Parse package.json into an object
     const packageDetails = JSON.parse(fileContents);
