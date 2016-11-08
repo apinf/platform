@@ -163,6 +163,7 @@ Meteor.methods({
     return response;
   },
   syncApiBackends () {
+    // TODO: multi-proxy support
     /*
     This function does the following
       1. get a list of all backends on API Umbrella
