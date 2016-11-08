@@ -30,9 +30,9 @@ AutoForm.hooks({
             // Cancel form
             return false;
           }
-          // Get API Umbrella configuration
+          // Create API backend on API Umbrella
           Meteor.call('createApiBackendOnApiUmbrella',
-            proxyBackend.apiUmbrella,
+            proxyBackend.apiUmbrella, proxyBackend.proxyId,
             (error, response) => {
               if (error) {
                 // Throw a Meteor error
