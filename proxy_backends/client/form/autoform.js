@@ -62,7 +62,7 @@ AutoForm.hooks({
                   // Publish the API Backend on API Umbrella
                 Meteor.call(
                     'publishApiBackendOnApiUmbrella',
-                    umbrellaBackendId,
+                    umbrellaBackendId, proxyBackend.proxyId,
                     (error, result) => {
                       if (error) {
                         Meteor.throw(500, error);
@@ -125,7 +125,7 @@ AutoForm.hooks({
               // Publish the API Backend on API Umbrella
               Meteor.call(
                 'publishApiBackendOnApiUmbrella',
-                apiUmbrellaBackend.id,
+                apiUmbrellaBackend.id, proxyBackend.proxyId,
                 (error, result) => {
                   if (error) {
                     Meteor.throw(500, error);
