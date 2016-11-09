@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { ApiMetadata } from '/metadata/collection';
 
 ApiMetadata.schema = new SimpleSchema({
@@ -62,11 +63,30 @@ ApiMetadata.schema = new SimpleSchema({
       type: 'bootstrap-datepicker',
       placeholder: 'Click to select date',
     },
+    custom () {
+      let validation;
+      const validSince = this.field('service.validSince').value;
+      const validUntil = this.value;
+
+      // validUntil must be after validSince
+      if (validUntil < validSince) {
+        validation = 'dateError';
+      }
+      return validation;
+    },
   },
   'service.serviceLevelAgreement': {
     type: String,
     optional: true,
   },
+});
+
+// Fetch dateInvalid message
+const dateInvalid = TAPi18n.__('apiMetadata_dateInvalid');
+
+// Define custom validation error messages
+ApiMetadata.schema.messages({
+  dateError: dateInvalid,
 });
 
 // Enable translations (i18n)
