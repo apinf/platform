@@ -11,7 +11,7 @@ Meteor.methods({
     // Delete API Backend on API Umbrella
     Meteor.call(
       'deleteApiBackendOnApiUmbrella',
-      umbrellaBackendId,
+      umbrellaBackendId, proxyBackend.proxyId,
       (deleteError) => {
         if (deleteError) {
           throw new Meteor.Error('delete-error');
@@ -19,7 +19,7 @@ Meteor.methods({
           // Publish changes for deleted API Backend on API Umbrella
           Meteor.call(
             'publishApiBackendOnApiUmbrella',
-            umbrellaBackendId,
+            umbrellaBackendId, proxyBackend.proxyId,
             (publishError) => {
               if (publishError) {
                 throw new Meteor.Error('publish-error');
