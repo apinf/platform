@@ -53,7 +53,6 @@ ApiMetadata.schema = new SimpleSchema({
     optional: true,
     autoform: {
       type: 'bootstrap-datepicker',
-      placeholder: 'Click to select date',
     },
   },
   'service.validUntil': {
@@ -61,7 +60,6 @@ ApiMetadata.schema = new SimpleSchema({
     optional: true,
     autoform: {
       type: 'bootstrap-datepicker',
-      placeholder: 'Click to select date',
     },
     custom () {
       let validation;

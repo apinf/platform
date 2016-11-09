@@ -390,10 +390,12 @@
                   "label": "Description"
               },
               "validSince": {
-                  "label": "Valid since"
+                  "label": "Valid since",
+                  "placeholder": "Click to select date"
               },
               "validUntil": {
-                  "label": "Valid until"
+                  "label": "Valid until",
+                  "placeholder": "Click to select date"
               },
               "serviceLevelAgreement": {
                   "label": "Service Level Agreement"
