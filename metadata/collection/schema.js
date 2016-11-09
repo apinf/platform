@@ -49,10 +49,16 @@ ApiMetadata.schema = new SimpleSchema({
   'service.validSince': {
     type: Date,
     optional: true,
+    autoform: {
+      type: 'bootstrap-datepicker',
+    },
   },
   'service.validUntil': {
     type: Date,
     optional: true,
+    autoform: {
+      type: 'bootstrap-datepicker',
+    },
   },
   'service.serviceLevelAgreement': {
     type: String,
