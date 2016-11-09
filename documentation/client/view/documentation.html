@@ -23,20 +23,20 @@
           {{/ if }} <!-- /if documentation exists -->
         {{/ if }}<!-- /if codegen server exists -->
       {{/ if }}<!-- /if template subscriptions ready -->
-      <h2 class="panel-title clearfix">
+      <h2 id="documentation-title" class="panel-title clearfix">
         {{_ "apiDocumentation_Title" }}
       </h2>
     </div>
     <div class="panel-body">
-      <div class="panel panel-default">
+      <div id="documentation-link-panel" class="panel panel-default">
         <div class="panel-heading">
-          <h2 class="panel-title">
+          <h2 id="documentation-link-title" class="panel-title">
             {{_ "apiDocumentation_Link_Title" }}
           </h2>
         </div>
         <div class="panel-body">
           {{# if documentationLink }}
-            <div class="documentation-link">
+            <div id="documentation-link" class="documentation-link">
               <i class="fa fa-external-link"></i>&nbsp;
               <a href="{{ documentationLink }}">
                 {{ documentationLink }}
@@ -52,7 +52,7 @@
           {{/ if }}
         </div>
       </div>
-      <div class="panel panel-default">
+      <div id="documentation-viewer-panel" class="panel panel-default">
         <div class="panel-heading">
           <a
              tabindex="0"
@@ -65,7 +65,7 @@
              data-content="{{_ 'apiDocumentation_APICall_Warning_Message' }}">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
           </a>
-          <h2 class="panel-title">
+          <h2 id="documentation-viewer-title" class="panel-title">
             {{_ "apiDocumentation_Viewer_Title" }}
           </h2>
         </div>

@@ -12,14 +12,14 @@
         </button>
         {{> feedbackForm }}
       {{/ if }}
-      <h2 class="panel-title clearfix">
+      <h2 id="feedback-title" class="panel-title clearfix">
         {{_ "feedback_main_title" }}
       </h2>
     </div>
     <div class="panel-body">
       {{# if haveFeedback }}
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="home">
+          <div class="tab-pane fade in active" id="feedback-tab-pane">
             <div class="list-group">
               {{# each userFeedback }}
                 {{> singleFeedback }}
