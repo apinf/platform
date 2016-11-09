@@ -1,12 +1,13 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ApiMetadata } from '/metadata/collection';
 
 ApiMetadata.schema = new SimpleSchema({
   // TODO: migrate to use 'apiId' instead of 'apiBackendId'
-  'apiBackendId': {
+  apiBackendId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-  'organization': {
+  organization: {
     type: Object,
     optional: true,
   },
@@ -18,7 +19,7 @@ ApiMetadata.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  'contact': {
+  contact: {
     type: Object,
     optional: true,
   },
@@ -34,7 +35,7 @@ ApiMetadata.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  'service': {
+  service: {
     type: Object,
     optional: true,
   },
