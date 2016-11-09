@@ -67,8 +67,6 @@ Template.apiKey.events({
           sAlert.success(successMessage);
         }
       });
-    } else {
-      console.log('API undefined');
     }
   },
 });
