@@ -1,8 +1,9 @@
 <template name="proxyBackend">
-  {{# if manyProxies }}
+  {{# unless oneProxy }}
     {{> selectProxy apiProxySettings=apiProxySettings formType=formType }}
-  {{/ if }}
+  {{/ unless }}
 
+  {{# if showForm }}
   {{# autoForm
     collection=proxyBackendsCollection
     id="proxyBackendForm"
@@ -151,7 +152,7 @@
             firstOption=false
           }}
         </div>
-        {{#if afFieldValueIs
+        {{#unless afFieldValueIs
           name="apiUmbrella.settings.rate_limit_mode"
           value="custom"
         }}
@@ -160,7 +161,7 @@
             name="apiUmbrella.settings.rate_limits"
           }}
           </div>
-        {{/if }}
+        {{/unless }}
       </div>
     </div>
 
@@ -181,4 +182,11 @@
       </button>
     </div>
   {{/ autoForm }}
-</template>
+  {{/ if}}
+
+  {{# if showSaveButton }}
+    <button type="button" class="btn btn-success" id="save-no-one-proxy">
+      Save
+    </button>
+  {{/ if }}
+    </template>

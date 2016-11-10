@@ -28,20 +28,18 @@ Template.apiDetails.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Get the proxy settings
-    // TODO: refactor this to support multi-proxy
-    const proxy = Proxies.findOne();
-
     // placeholder for output URL
     let proxyUrl;
 
-    // TODO: refactor for multi-proxy
     if (instance.data.proxyBackend) {
-      const proxyBackend = instance.data.proxyBackend;
 
+      const proxyBackend = instance.data.proxyBackend;
+      // Get the proxy id
+      const proxyId = proxyBackend.proxyId;
+      // Get the proxy settings
+      const proxy = Proxies.findOne(proxyId);
       // Get Proxy host
       const host = proxy.apiUmbrella.url;
-
 
       // Get proxy frontend prefix
       let frontendPrefix = '';
@@ -54,7 +52,6 @@ Template.apiDetails.helpers({
       // Construct the URL from host and base path
       proxyUrl = host + frontendPrefix;
     }
-
     return proxyUrl;
   },
   apiKey () {

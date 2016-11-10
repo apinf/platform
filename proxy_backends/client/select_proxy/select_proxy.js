@@ -20,7 +20,10 @@ Template.selectProxy.helpers({
     // Get a single Proxy
     const proxies = Proxies.find().fetch();
     // List for storage the proxies name
-    const proxyList = [];
+    const proxyList = [{
+      name: 'No one proxy',
+      selected: '',
+    }];
 
     if (proxies) {
       // Set placeholder for selected option
@@ -46,8 +49,15 @@ Template.selectProxy.events({
   'change #select-proxy': function (event, templateInstance) {
     // Get selected option
     const selectedItem = event.target.value;
-    // Find the proxy with the selected name
-    const proxy = Proxies.findOne({ name: selectedItem })
+    let currentProxyId = '';
+
+    console.dir(event.target)
+
+    if (selectedItem !== event.target[0].value) {
+      // Find the proxy with the selected name
+      const proxy = Proxies.findOne({ name: selectedItem });
+      currentProxyId = proxy._id;
+    }
 
     // Check: if user changes current proxy to another
     if (templateInstance.data.formType === 'update') {
@@ -56,13 +66,13 @@ Template.selectProxy.events({
       // Check if user clicked "OK"
       if (confirmation === true) {
         // Update proxy id
-        proxyId.set(proxy._id);
+        proxyId.set(currentProxyId);
       } else {
         // TODO: don't let to change item in dropdown list
       }
     } else {
       // Update proxy id
-      proxyId.set(proxy._id);
+      proxyId.set(currentProxyId);
     }
     return true;
   },
