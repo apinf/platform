@@ -7,6 +7,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
+import proxiId from '../select_proxy/select_proxy';
 
 // NPM import
 import 'urijs';
@@ -90,13 +91,18 @@ Template.proxyBackend.helpers({
 
     return formType;
   },
+  manyProxies () {
+    const proxyCount = Proxies.find().count();
+
+    return proxyCount > 1;
+  },
   proxy () {
     // TODO: determine how to provide proxyId for the ProxyBackend form
     // e.g. will we have more than one proxy?
     // if no, we need also to limit the number of proxies that can be added
 
     // Get a single Proxy
-    const proxy = Proxies.findOne();
+    const proxy = Proxies.findOne({ _id: proxiId.get() });
 
     return proxy;
   },

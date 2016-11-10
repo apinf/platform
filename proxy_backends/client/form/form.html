@@ -1,4 +1,8 @@
 <template name="proxyBackend">
+  {{# if manyProxies }}
+    {{> selectProxy apiProxySettings=apiProxySettings formType=formType }}
+  {{/ if }}
+
   {{# autoForm
     collection=proxyBackendsCollection
     id="proxyBackendForm"
