@@ -152,7 +152,7 @@
             firstOption=false
           }}
         </div>
-        {{#unless afFieldValueIs
+        {{# if afFieldValueIs
           name="apiUmbrella.settings.rate_limit_mode"
           value="custom"
         }}
@@ -161,7 +161,7 @@
             name="apiUmbrella.settings.rate_limits"
           }}
           </div>
-        {{/unless }}
+        {{/ if }}
       </div>
     </div>
 
