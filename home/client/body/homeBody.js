@@ -1,9 +1,4 @@
-// Import Meteor packages
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-import { Template } from 'meteor/templating';
-// Import apinf collections
-import CoverPhoto from '/branding/cover_photo/collection';
+import { mailSettingsValid, contactEmailValid } from '/core/helper_functions/validate_settings';
 import { Settings } from '/settings/collection';
 
 Template.homeBody.onCreated(function () {
@@ -12,8 +7,6 @@ Template.homeBody.onCreated(function () {
 
   // Subscribe to settings publication
   instance.subscribe('singleSetting', 'mail.enabled');
-  // Subscribe to CoverPhoto collection
-  instance.subscribe('coverPhoto');
 });
 
 Template.homeBody.rendered = function () {
@@ -35,22 +28,5 @@ Template.homeBody.helpers({
     }
 
     return mailEnabled;
-  },
-  coverPhotoUrl () {
-    // Get ID
-    const currentCoverPhotoFileId = this.branding.coverPhotoFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentCoverPhotoFileId);
-
-    // Check if cover photo file is available
-    const currentCoverPhotoFile = CoverPhoto.findOne(objectId);
-
-    // Check if cover photo file is available
-    if (currentCoverPhotoFile) {
-      // Get cover photo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
-    }
-    return '';
   },
 });
