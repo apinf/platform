@@ -44,8 +44,10 @@ Meteor.startup(function () {
         return;
       }
 
+      // Available extensions for pictures
       const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
+      // Check extensions for uploading file: is it a picture or not?
       if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
         // Turn on spinner
         uploadingSpinner.set(true);
