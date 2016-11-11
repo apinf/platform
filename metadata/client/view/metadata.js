@@ -22,19 +22,22 @@ Template.viewApiMetadata.helpers({
     // TODO: migrate ApiMetadata schema to use 'apiId' instead of 'apiBackendId'
     const apiMetadata = ApiMetadata.findOne({ apiBackendId: apiId });
 
-    // Check service is defined
-    if (apiMetadata.service) {
-      const service = apiMetadata.service;
-      // Format validSince if defined
-      if (service.validSince) {
-        service.validSince = formatDate(service.validSince);
+    // Check apiMetadata is defined
+    if (apiMetadata) {
+      // Check service is defined
+      if (apiMetadata.service) {
+        const service = apiMetadata.service;
+        // Format validSince if defined
+        if (service.validSince) {
+          service.validSince = formatDate(service.validSince);
+        }
+        // Format validUntil if defined
+        if (service.validUntil) {
+          service.validUntil = formatDate(service.validUntil);
+        }
+        // Attach formatted dates to metadata service object
+        apiMetadata.service = service;
       }
-      // Format validUntil if defined
-      if (service.validUntil) {
-        service.validUntil = formatDate(service.validUntil);
-      }
-      // Attach formatted dates to metadata service object
-      apiMetadata.service = service;
     }
 
     return apiMetadata;
