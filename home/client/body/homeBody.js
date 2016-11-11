@@ -37,19 +37,25 @@ Template.homeBody.helpers({
     return mailEnabled;
   },
   coverPhotoUrl () {
-    // Get ID
-    const currentCoverPhotoFileId = this.branding.coverPhotoFileId;
+    // Get Branding collection
+    const branding = this.branding;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentCoverPhotoFileId);
+    // Check Branding collection and cover photo exist
+    if (branding && branding.coverPhotoFileId) {
+      // Get ID
+      const currentCoverPhotoFileId = branding.coverPhotoFileId;
 
-    // Check if cover photo file is available
-    const currentCoverPhotoFile = CoverPhoto.findOne(objectId);
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(currentCoverPhotoFileId);
 
-    // Check if cover photo file is available
-    if (currentCoverPhotoFile) {
-      // Get cover photo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
+      // Check if cover photo file is available
+      const currentCoverPhotoFile = CoverPhoto.findOne(objectId);
+
+      // Check if cover photo file is available
+      if (currentCoverPhotoFile) {
+        // Get cover photo file URL
+        return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
+      }
     }
     return '';
   },
