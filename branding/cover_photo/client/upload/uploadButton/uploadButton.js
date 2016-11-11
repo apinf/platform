@@ -9,11 +9,16 @@ import { Branding } from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
+Template.uploadCoverPhotoButton.onCreated(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Create reactive variable to track upload spinner state
+  instance.uploadingSpinner = new ReactiveVar(false);
+})
 
 Template.uploadCoverPhotoButton.onRendered(function() {
   const instance = this;
-
-  instance.uploadingSpinner = new ReactiveVar(false);
 
   // Assign resumable browse to element
   const test = CoverPhoto.resumable.assignBrowse($('#cover-photo-browse'));
