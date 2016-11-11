@@ -38,7 +38,9 @@ Meteor.startup(function () {
       contentType: file.file.type,
     }, function (err) {
       if (err) {
-        console.warn('File creation failed!', err);
+        // Create & show a message about failed
+        const message = `${TAPi18n.__('uploadCoverPhoto_acceptedExtensions_errorText')} ${err}`;
+        sAlert.warning(message)
         return;
       }
 
