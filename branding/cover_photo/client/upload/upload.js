@@ -8,8 +8,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Branding } from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
-const uploadingSpinner = new ReactiveVar(false);
-
 Template.uploadCoverPhoto.onCreated(function () {
   const instance = this;
 
@@ -18,7 +16,6 @@ Template.uploadCoverPhoto.onCreated(function () {
   // Subscribe to Cover Photo collection
   instance.subscribe('coverPhoto');
   // Turn off spinner if it was on
-  uploadingSpinner.set(false);
 });
 
 Template.uploadCoverPhoto.helpers({
@@ -31,10 +28,6 @@ Template.uploadCoverPhoto.helpers({
 
     // Check if cover photo file is available
     return CoverPhoto.findOne(objectId);
-  },
-  spinnerEnabled () {
-    // Get value of spinner
-    return uploadingSpinner.get();
   },
 });
 

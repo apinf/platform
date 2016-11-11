@@ -67,3 +67,13 @@ Template.uploadCoverPhotoButton.onRendered(function() {
     });
   });
 });
+
+Template.uploadCoverPhotoButton.helpers({
+  spinnerEnabled () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get value of spinner
+    return instance.uploadingSpinner.get();
+  },
+});
