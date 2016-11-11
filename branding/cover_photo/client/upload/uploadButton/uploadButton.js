@@ -18,10 +18,6 @@ Template.uploadCoverPhotoButton.onRendered(function() {
   // Assign resumable browse to element
   const test = CoverPhoto.resumable.assignBrowse($('#cover-photo-browse'));
 
-  console.log(test);
-
-  console.log(CoverPhoto.resumable);
-
   // Set cover photo id to branding collection on Success
   CoverPhoto.resumable.on('fileSuccess', function (file) {
     // Turn off spinner
