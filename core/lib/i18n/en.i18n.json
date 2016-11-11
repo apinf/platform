@@ -587,6 +587,7 @@
   "uploadApiLogo_successfully_deleted": "Logo successfully deleted!",
   "uploadCoverPhoto_confirm_delete": "Cover photo area will show primary branding color after photo has been deleted. The image will be removed from the collection.",
   "uploadCoverPhoto_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
+  "uploadCoverPhoto_acceptedExtensions_errorText": "File creation failed!",
   "uploadCoverPhoto_successfully_uploaded": "Your cover photo was successfully uploaded!",
   "uploadCoverPhoto_successfully_deleted": "Your cover photo was successfully deleted!",
   "uploadCoverPhotoButton_textButton": "Upload cover photo",
