@@ -58,5 +58,3 @@ Template.uploadCoverPhoto.events({
     }
   },
 });
-
-export default uploadingSpinner;
