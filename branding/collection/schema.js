@@ -42,10 +42,12 @@ Branding.schema = new SimpleSchema({
   },
   'socialMedia.$.name': {
     type: String,
+    optional: true,
     allowedValues: ['Facebook', 'Twitter', 'Github'],
   },
   'socialMedia.$.url': {
     type: String,
+    optional: true,
     regEx: SimpleSchema.RegEx.Url,
     autoform: {
       placeholder: 'http://example.com/accountname',
