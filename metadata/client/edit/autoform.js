@@ -1,3 +1,8 @@
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { Router } from 'meteor/iron:router';
+
+import $ from 'jquery';
+
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
     insert (metadata) {
@@ -13,13 +18,6 @@ AutoForm.addHooks('editApiMetadataForm', {
       return metadata;
     },
   },
-  onSuccess () {
-    // Close modal dialogue
-    $('#apiMetadataModal').modal('hide');
-  },
-});
-
-AutoForm.addHooks('updateApiMetadataForm', {
   onSuccess () {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
