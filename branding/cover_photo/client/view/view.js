@@ -19,8 +19,8 @@ Template.viewCoverPhoto.helpers({
     // Get Branding collection
     const branding = Branding.findOne();
 
-    // Check existing cover photo
-    return branding.coverPhotoFileId;
+    // Check Branding collection and cover photo exist
+    return branding && branding.coverPhotoFileId;
   },
   uploadedCoverPhotoLink () {
     const currentCoverPhotoFileId = Branding.findOne().coverPhotoFileId;
