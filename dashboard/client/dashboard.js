@@ -143,7 +143,7 @@ Template.dashboard.onCreated(function () {
     if (analyticsTimeframeStart && analyticsTimeframeEnd) {
       // Update elasticsearch query with filter data (in Unix format)
       params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
-      console.log(analyticsTimeframeEnd.valueOf());
+
       params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
     }
     // ******* End filtering by date *******
@@ -210,9 +210,8 @@ Template.dashboard.events({
 
     // Get timeframe dates from input fields
     const analyticsTimeframeStartElementValue = $('#analytics-timeframe-start').val();
-    console.log(analyticsTimeframeStartElementValue);
+
     const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
-    console.log(analyticsTimeframeEndElementValue);
 
     // Check if timeframe values are set
     if (analyticsTimeframeStartElementValue !== '' && analyticsTimeframeEndElementValue !== '') {
