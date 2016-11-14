@@ -17,8 +17,6 @@ Template.dashboard.onCreated(function () {
   instance.chartData = new ReactiveVar();
   // Keeps chart data loading state
   instance.chartDataLoadingState = new ReactiveVar(false);
-  // Keeps status of proxy backends
-  instance.proxyBackendsAddedState = new ReactiveVar(false);
 
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
@@ -145,6 +143,7 @@ Template.dashboard.onCreated(function () {
     if (analyticsTimeframeStart && analyticsTimeframeEnd) {
       // Update elasticsearch query with filter data (in Unix format)
       params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
+      console.log(analyticsTimeframeEnd.valueOf());
       params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
     }
     // ******* End filtering by date *******
@@ -164,8 +163,6 @@ Template.dashboard.onCreated(function () {
       const proxyBackendsCount = ProxyBackends.find().count();
 
       if (proxyBackendsCount > 0) {
-        // Update proxyBackendsAddedState
-        instance.proxyBackendsAddedState.set(true);
         // Make a call
         instance.checkElasticsearch()
           .then((elasticsearchIsDefined) => {
@@ -184,9 +181,6 @@ Template.dashboard.onCreated(function () {
             }
           })
           .catch(err => console.error(err));
-      } else {
-        instance.proxyBackendsAddedState.set(false);
-        console.error('Proxy backends and/or APIs are not added.');
       }
     }
   });
@@ -216,7 +210,9 @@ Template.dashboard.events({
 
     // Get timeframe dates from input fields
     const analyticsTimeframeStartElementValue = $('#analytics-timeframe-start').val();
+    console.log(analyticsTimeframeStartElementValue);
     const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
+    console.log(analyticsTimeframeEndElementValue);
 
     // Check if timeframe values are set
     if (analyticsTimeframeStartElementValue !== '' && analyticsTimeframeEndElementValue !== '') {
@@ -257,9 +253,13 @@ Template.dashboard.helpers({
 
     return instance.chartDataLoadingState.get();
   },
-  proxyBackendsAddedState () {
+  proxyBackendsAdded () {
     const instance = Template.instance();
 
-    return instance.proxyBackendsAddedState.get();
+    // Count the number of proxy backends
+    const proxyBackendsCount = ProxyBackends.find().count();
+
+    // return true if one or more proxy backends have been added
+    return (proxyBackendsCount > 0);
   },
 });
