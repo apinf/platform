@@ -1,0 +1,45 @@
+<template name="feedbackItem">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row list-group-item feedback-list-item">
+        <div class="col-lg-2 col-md-2">
+          <span id="up-vote-{{ _id }}" class="fa fa-lg fa-arrow-up up-vote {{ userUpvote }}"></span>
+          <span class="badge sum-of-votes">
+            {{ item.sumOfVotes }}
+          </span>
+          <span id="down-vote-{{ _id }}" class="fa fa-lg fa-arrow-down down-vote {{ userDownvote }}"></span>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <span class="badge">
+            {{ item.messageType }}
+          </span>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <span>
+            {{ item.topic }}
+          </span>
+        </div>
+        {{#if api.currentUserCanEdit }}
+        <div class="btn-group pull-right">
+          <button class="edit-feedback-item btn btn-primary btn-xs">
+            {{_ "backlogItem_editButton_text" }}
+          </button>
+          <button class="delete-feedback-item btn btn-danger btn-xs">
+            {{_ "backlogItem_deleteButton_text" }}
+          </button>
+        </div>
+        {{/ if }}
+      </div>
+    </div>
+    <div class="panel-body">
+      <p>
+        {{ item.message }}
+      </p>
+    </div>
+    <div class="panel-footer">
+      <i>
+        {{ relativeTimeStamp item.createdAt }}
+      </i>
+    </div>
+  </div>
+</template>

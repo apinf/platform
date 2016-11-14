@@ -1,28 +1,23 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Router } from 'meteor/iron:router';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 import { FeedbackVotes } from '/feedback_votes/collection';
-import { Apis } from '/apis/collection';
 
-Template.singleFeedback.onCreated(function () {
+import moment from 'moment';
+
+Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object
-  const feedbackId = this.data._id;
-
-  // Get the API Backend ID from the route
-  this.apiId = Router.current().params._id;
-
-  // Subscribe to a single API Backend, by ID
-  this.subscribe('apiBackend', this.apiId);
+  const feedbackId = Template.currentData().item._id;
 
   // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
 });
 
-Template.singleFeedback.helpers({
+Template.feedbackItem.helpers({
   userUpvote () {
     // Get current Feedback ID
-    const feedbackId = this._id;
+    const feedbackId = Template.currentData().item._id;
 
     // Get current User ID
     const userId = Meteor.userId();
@@ -42,7 +37,7 @@ Template.singleFeedback.helpers({
   },
   userDownvote () {
     // Get current Feedback ID
-    const feedbackId = this._id;
+    const feedbackId = Template.currentData().item._id;
 
     // Get current User ID
     const userId = Meteor.userId();
@@ -60,39 +55,36 @@ Template.singleFeedback.helpers({
     }
     return voteClass;
   },
-  api () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get API ID
-    const apiId = instance.apiId;
-
-    // Get single API Backend
-    const api = Apis.findOne(apiId);
-
-    return api;
+  relativeTimeStamp (givenTimeStamp) {
+    return moment(givenTimeStamp).fromNow();
   },
 });
 
-Template.singleFeedback.events({
-  'click .up-vote': function (event, template) {
-    // Get reference to current feedback
-    const feedback = this;
-
+Template.feedbackItem.events({
+  'click .up-vote': function () {
     // Get ID of current feedback object
-    const feedbackId = feedback._id;
+    const feedbackId = Template.currentData().item._id;
 
     // Submit upvote (+1) for current feedback
     Meteor.call('submitVote', feedbackId, 1);
   },
-  'click .down-vote': function (event, template) {
-    // Get reference to current feedback
-    const feedback = this;
-
+  'click .down-vote': function () {
     // Get ID of current feedback object
-    const feedbackId = feedback._id;
+    const feedbackId = Template.currentData().item._id;
 
     // Submit downvote (-1) for current feedback
     Meteor.call('submitVote', feedbackId, -1);
+  },
+  'click .edit-feedback-item': function () {
+    // Get feedback item
+    const item = Template.currentData().item;
+    // Show Edit Backlog Item modal
+    Modal.show('editFeedbackItem', { feedbackItem: item });
+  },
+  'click .delete-feedback-item': function () {
+    // Get feedback item
+    const item = Template.currentData().item;
+    // Show the Delete Confirmation dialogue
+    Modal.show('deleteFeedbackItem', { feedbackItem: item });
   },
 });
