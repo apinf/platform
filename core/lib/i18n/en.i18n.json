@@ -92,6 +92,7 @@
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
   "apiIntro_quickTour_button_text": "Quick tour",
+  "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiRemoveAuthorizedUser_cancelButton_text": "No, cancel",
   "apiRemoveAuthorizedUser_confirmation_text": "Are you sure you want to remove this authorized user?",
   "apiRemoveAuthorizedUser_modalTitle": "Remove authorized user",
@@ -392,10 +393,12 @@
                   "label": "Description"
               },
               "validSince": {
-                  "label": "Valid since"
+                  "label": "Valid since",
+                  "placeholder": "Click to select date"
               },
               "validUntil": {
-                  "label": "Valid until"
+                  "label": "Valid until",
+                  "placeholder": "Click to select date"
               },
               "serviceLevelAgreement": {
                   "label": "Service Level Agreement"
