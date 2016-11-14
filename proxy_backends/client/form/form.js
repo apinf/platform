@@ -7,6 +7,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
+import proxiId from '../select_proxy/select_proxy';
 
 // NPM import
 import 'urijs';
@@ -96,7 +97,7 @@ Template.proxyBackend.helpers({
     // if no, we need also to limit the number of proxies that can be added
 
     // Get a single Proxy
-    const proxy = Proxies.findOne();
+    const proxy = Proxies.findOne({ _id: proxiId.get() });
 
     return proxy;
   },
@@ -118,6 +119,31 @@ Template.proxyBackend.helpers({
 
       return frontend.host();
     }
+  },
+  oneProxy () {
+    const proxyCount = Proxies.find().count();
+
+    return proxyCount === 1;
+  },
+  showForm () {
+    // Show form when proxy is one OR proxy was selected in dropdown list
+
+    // Get proxy count
+    const proxyCount = Proxies.find().count();
+    // Check selected proxy
+    const proxyId = proxiId.get();
+
+    return proxyCount === 1 || proxyId;
+  },
+  showSaveButton () {
+    // Show save button when proxy wasn't selected in dropdown list AND proxy is more then one
+
+    // Get proxy count
+    const proxyCount = Proxies.find().count();
+    // Check selected proxy: if variable 'proxyId' is empty then no proxy is selected
+    const proxyId = proxiId.get();
+
+    return proxyCount > 1 && proxyId === '';
   },
 });
 
@@ -175,4 +201,19 @@ Template.apiProxy.events({
       });
     }
   },
+  'click #save-no-one-proxy': (event, template) => {
+    // Save 'No oneproxy is selected'
+    sAlert.success('Your settings were successfully saved');
+    // Get API ID
+    const apiId = template.data.api._id;
+
+    // Look for existing proxy backend document for this API
+    const apiProxySettings = ProxyBackends.findOne({ apiId });
+
+    if (apiProxySettings) {
+      const proxyBackendId = apiProxySettings._id;
+      // Unset proxyID
+      ProxyBackends.remove(proxyBackendId);
+    }
+  }
 });
