@@ -14,7 +14,7 @@ Template.timeFrameSelectPicker.onRendered(function () {
   .on('changeDate', function (event) {
     // Set fromDate URL parameter to ISO YYYY-mm-dd
     // in order to share dashboard state
-    UniUtils.url.setQuery('fromDate', event.date.toISOString().substring(0, 10));
+    UniUtils.url.setQuery('fromDate', event.format('yyyy-mm-dd'));
   });
 
   // Enable date picker on timeframe end
@@ -26,7 +26,7 @@ Template.timeFrameSelectPicker.onRendered(function () {
   .on('changeDate', function (event) {
     // Set fromDate URL parameter to ISO YYYY-mm-dd
     // in order to share dashboard state
-    UniUtils.url.setQuery('toDate', event.date.toISOString().substring(0, 10));
+    UniUtils.url.setQuery('toDate', event.format('yyyy-mm-dd'));
   });
 
 });
