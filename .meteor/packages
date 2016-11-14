@@ -75,4 +75,4 @@ tmeasday:publish-counts
 percolate:migrations
 michalvalasek:autoform-bootstrap-colorpicker
 rajit:bootstrap3-datepicker
-aldeed:autoform-bs-datepicker
+apinf:autoform-bs-datepicker
