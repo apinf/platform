@@ -67,7 +67,11 @@ ApiMetadata.schema = new SimpleSchema({
       const validUntil = this.value;
 
       // validUntil must be after validSince
-      if (validUntil < validSince) {
+      if (
+        (validSince instanceof Date) &&
+        (validUntil instanceof Date) &&
+        validUntil < validSince
+      ) {
         validation = 'dateError';
       }
       return validation;
