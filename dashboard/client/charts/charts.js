@@ -13,7 +13,7 @@ Template.dashboardCharts.onCreated(function () {
   const instance = this;
 
   // Variable that keeps table data
-  instance.tableDataSet = new ReactiveVar([]);
+  instance.tableData = new ReactiveVar([]);
 
   // Variable that keeps api frontend prefix
   instance.apiFrontendPrefix = new ReactiveVar();
@@ -272,7 +272,7 @@ Template.dashboardCharts.onCreated(function () {
       tableData.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
     });
 
-    instance.tableDataSet.set(tableData);
+    instance.tableData.set(tableData);
   };
 
   // Function that updates time scale for line chart
@@ -491,9 +491,10 @@ Template.dashboardCharts.events({
 });
 
 Template.dashboardCharts.helpers({
-  tableDataSet () {
+  tableData () {
     const instance = Template.instance();
-    return instance.tableDataSet.get();
+
+    return instance.tableData.get();
   },
   statisticsData () {
     const instance = Template.instance();
