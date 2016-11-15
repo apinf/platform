@@ -327,6 +327,9 @@
   "proxies_pageHeader": "Proxies",
   "proxies_addProxy": "Add proxy",
   "proxies_noProxiesFound": "No proxies found.",
+  "proxyBackend_confirmText_deleteProxyBackendInformation": "Caution! Deleting the proxy backend configuration will potentially break API calls from applications. Please inform your API consumers about this change.",
+  "proxyBackend_confirmText_deleteSelectedProxy": "Caution! Changing the proxy will delete all information about proxy backend configuration and will potentially break API calls from applications. Please inform your API consumers about this change.",
+  "proxyBackend_confirmText_changeSelectedProxy": "Caution! Changing the proxy will change the call URL and will potentially break API calls from applications. Please inform your API consumers about this change and suggest them to check whether or not they need to obtain new API key from the newly selected proxy",
   "proxyBackendForm_advancedSettings_title": "Advanced settings",
   "proxyBackendForm_apiBasePath_helpText": "Base path added to all API requests. Example:",
   "proxyBackendForm_apiPort_helpText": "Port number on API server",
@@ -340,6 +343,7 @@
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
+  "proxyBackendForm_informText_noOneSelectedProxy": "No one proxy was selected.",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
   "proxyItem_editProxy": "Edit",
@@ -490,7 +494,10 @@
           }
       },
       "ProxyBackends": {
-          "apiUmbrella": {
+        "proxyId": {
+          "label": "Select one proxy"
+        },
+        "apiUmbrella": {
               "settings": {
                   "disable_api_key": {
                       "label": "Disable API key requirement"

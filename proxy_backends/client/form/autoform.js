@@ -14,7 +14,8 @@ AutoForm.hooks({
         // No selected any proxy
         if (proxyBackend && proxyBackend.proxyId === undefined) {
           // Notify users about no selected proxy
-          sAlert.info('no selected any proxy')
+          const message = TAPi18n.__('proxyBackendForm_informText_noOneSelectedProxy');
+          sAlert.info(message)
           return false;
         }
 

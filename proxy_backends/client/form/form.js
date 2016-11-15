@@ -1,6 +1,7 @@
 // Meteor package imports
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
@@ -188,7 +189,8 @@ Template.proxyBackend.events({
     */
 
     // Notify users about deleting proxy
-    const confirmation = confirm('All information will be deleted and API link will be broken!');
+    const message = TAPi18n.__('proxyBackend_confirmText_deleteProxyBackendInformation');
+    const confirmation = confirm(message);
     // Check if user clicked "OK"
     if (confirmation === false) {
       return;

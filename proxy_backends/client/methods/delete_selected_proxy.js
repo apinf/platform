@@ -1,9 +1,11 @@
-// In multi-proxy case: change early selected and saved proxy to first position in dropdown list 'Select proxy'
+// In multi-proxy case:
+// Change early selected and saved proxy to first position in dropdown list 'Select proxy'
+import { TAPi18n } from 'meteor/tap:i18n';
 
 export default function deleteSelectedProxy (event, templateInstance) {
   // Notify users about deleting proxy
-  const confirmation = confirm('Do you want to switch off proxy? ' +
-    'All information will be deleted and API link will be broken!');
+  const message = TAPi18n.__('proxyBackend_confirmText_deleteSelectedProxy');
+  const confirmation = confirm(message);
   // Check if user clicked "OK"
   if (confirmation === true) {
     // Update proxy id
