@@ -10,13 +10,13 @@
           <span id="down-vote-{{ _id }}" class="fa fa-lg fa-arrow-down down-vote {{ userDownvote }}"></span>
         </div>
         <div class="col-md-2 feedback-type">
-          <span><b>Type:&nbsp;</b></span>
+          <span><b>{{_ "feedbackItem_type" }}:&nbsp;</b></span>
           <span class="badge">
             {{ item.messageType }}
           </span>
         </div>
         <div class="col-md-8 feedback-topic">
-          <span><b>Topic:&nbsp;</b></span>
+          <span><b>{{_ "feedbackItem_topic" }}:&nbsp;</b></span>
           <span>
             {{ item.topic }}
           </span>
@@ -24,10 +24,10 @@
         {{#if api.currentUserCanEdit }}
         <div class="btn-group pull-right">
           <button class="edit-feedback-item btn btn-primary btn-xs">
-            {{_ "backlogItem_editButton_text" }}
+            {{_ "feedbackItem_editButton_text" }}
           </button>
           <button class="delete-feedback-item btn btn-danger btn-xs">
-            {{_ "backlogItem_deleteButton_text" }}
+            {{_ "feedbackItem_deleteButton_text" }}
           </button>
         </div>
         {{/ if }}
