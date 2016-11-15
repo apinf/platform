@@ -15,7 +15,7 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps table data
   instance.tableDataSet = new ReactiveVar([]);
 
-  // Variable that keeps api frontend prefix list
+  // Variable that keeps api frontend prefix
   instance.apiFrontendPrefix = new ReactiveVar();
 
   // Init default values for statistic data
