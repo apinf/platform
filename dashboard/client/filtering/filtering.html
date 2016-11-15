@@ -1,9 +1,7 @@
 <template name="dashboardChartsFiltering">
-  <form class="form-inline pull-left" id="api-frontend-prefix-form">
-    {{# if Template.subscriptionsReady }}
-      {{> apiSelectPicker userApis=userApis otherApis=otherApis }}
-    {{/ if }}
-  </form>
+  {{# if Template.subscriptionsReady }}
+    {{> apiSelectPicker userApis=userApis otherApis=otherApis }}
+  {{/ if }}
 
   <div class="pull-right">
     {{> granularity }}
