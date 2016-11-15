@@ -18,6 +18,7 @@ Template.dashboard.onCreated(function () {
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
+
   // Keeps chart data loading state
   instance.chartDataLoadingState = new ReactiveVar(false);
 
