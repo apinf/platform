@@ -31,6 +31,7 @@ Template.timeFrameSelectPicker.onRendered(function () {
   $('#analytics-timeframe-end').datepicker({
     todayHighlight: true,
     endDate: 'today',
+    autoclose: true,
   })
   // Save chosen date to URL parameter
   .on('changeDate', function (event) {
