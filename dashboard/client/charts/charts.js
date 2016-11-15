@@ -251,7 +251,7 @@ Template.dashboardCharts.onCreated(function () {
       let responseStatus;
 
       // Error handling for empty fields
-      try { time = moment(e.fields.request_at[0]).format('D/MM/YYYY HH:mm:ss'); }
+      try { time = moment(e.fields.request_at[0]).toISOString(); }
       catch (err) { time = ''; }
 
       try { country = e.fields.request_ip_country[0]; }
