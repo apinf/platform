@@ -13,6 +13,9 @@ Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  // Subscribe to proxyApis publicaton
+  instance.subscribe('proxyApis');
+
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
   // Keeps chart data loading state
@@ -27,9 +30,6 @@ Template.dashboard.onCreated(function () {
 
   // Get current user Id
   const userId = Meteor.userId();
-
-  // Subscribe to proxyApis publicaton
-  instance.subscribe('proxyApis');
 
   if (Roles.userIsInRole(userId, ['admin'])) {
     // Subscribe to publication
