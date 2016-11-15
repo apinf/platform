@@ -187,45 +187,6 @@ Template.dashboard.onCreated(function () {
   });
 });
 
-Template.dashboard.events({
-  'change #select-timeframe-form': function (event) {
-    event.preventDefault();
-
-    const instance = Template.instance();
-
-    // Get timeframe dates from input fields
-    const analyticsTimeframeStartElementValue = $('#analytics-timeframe-start').val();
-
-    const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
-
-    // Check if timeframe values are set
-    if (analyticsTimeframeStartElementValue !== '' && analyticsTimeframeEndElementValue !== '') {
-      // Format datepicker dates (DD.MM.YYYY) to moment.js object
-      const analyticsTimeframeStartMoment = moment(analyticsTimeframeStartElementValue, instance.dateFormatMoment);
-      const analyticsTimeframeEndMoment = moment(analyticsTimeframeEndElementValue, instance.dateFormatMoment);
-
-      /*
-       *  To avoid resending request with the same time frame and
-       *  allowing to select dates bigger than current date, check:
-       *    - If the new selected start-date is the same as previously selected start-date
-       *    - If the new selected end-date is the same as previously selected end-date
-       */
-      if ((analyticsTimeframeStartElementValue !== instance.analyticsTimeframeStart.get().format(instance.dateFormatMoment)) ||
-      (analyticsTimeframeEndElementValue !== instance.analyticsTimeframeEnd.get().format(instance.dateFormatMoment))) {
-        // Get reference to chart html elemets
-        const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
-
-        // Set loader
-        chartElemets.addClass('loader');
-
-        // If pass all checks, update reactive variables
-        instance.analyticsTimeframeStart.set(analyticsTimeframeStartMoment);
-        instance.analyticsTimeframeEnd.set(analyticsTimeframeEndMoment);
-      }
-    }
-  },
-});
-
 Template.dashboard.helpers({
   chartData () {
     const instance = Template.instance();
