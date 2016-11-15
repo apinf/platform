@@ -1,13 +1,16 @@
+import { Meteor } from 'meteor/meteor';
 // Collection imports
-import { Feedback } from '../collection';
 import { FeedbackVotes } from '/feedback_votes/collection';
+import { Feedback } from '../collection';
 
 Meteor.methods({
-  'deleteFeedback': function (feedbackId) {
-    // Removing feedback from collection
-    Feedback.remove(feedbackId);
+  deleteFeedback (feedbackItemId) {
+    // 1. Remove feedback votes
+    FeedbackVotes.remove({ feedbackId: feedbackItemId });
+    // 2. Remove feedback item
+    Feedback.remove(feedbackItemId);
   },
-  'submitVote': function (feedbackId, vote) {
+  submitVote (feedbackId, vote) {
     // Get current User ID
     const userId = Meteor.userId();
 
