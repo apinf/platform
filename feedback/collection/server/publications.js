@@ -1,13 +1,15 @@
+import { Meteor } from 'meteor/meteor';
 // Collection imports
-import { Feedback } from '../';
 import { FeedbackVotes } from '/feedback_votes/collection';
+import { Feedback } from '../';
 
-Meteor.publish('apiBackendFeedback', function (apiBackendId) {
+
+Meteor.publish('apiBackendFeedback', (apiBackendId) => {
   // show feedback to specific API
   return Feedback.find({ apiBackendId });
 });
 
-Meteor.publish('getAllVotesForSingleFeedback', function (feedbackId) {
+Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
   // show feedbackvotes for single feedback
   return FeedbackVotes.find({ feedbackId });
 });
