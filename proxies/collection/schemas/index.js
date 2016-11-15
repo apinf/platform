@@ -6,6 +6,7 @@ const apiUmbrellaSchema = require('./api_umbrella').default;
 let schema = {
   name: {
     type: String,
+    unique: true,
   },
   description: {
     type: String,
