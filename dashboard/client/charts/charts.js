@@ -16,7 +16,7 @@ Template.dashboardCharts.onCreated(function () {
   instance.tableDataSet = new ReactiveVar([]);
 
   // Variable that keeps api frontend prefix list
-  instance.apiFrontendPrefixList = new ReactiveVar();
+  instance.apiFrontendPrefix = new ReactiveVar();
 
   // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
@@ -292,22 +292,20 @@ Template.dashboardCharts.onCreated(function () {
     }
   };
 
-  // Function that fiters data based on frontend prefixes
-  instance.filterData = (items, apiFrontendPrefixList) => {
-    instance.updateStatisticsData(items);
+  // Function that fiters analytics data based on frontend prefix
+  instance.filterData = (requests, apiFrontendPrefix) => {
+    instance.updateStatisticsData(requests);
 
     // Filter data based on matches with API frontend prefix
-    return _.filter(items, (item) => {
-      // Variable to hold request path
-      const requestPath = item.fields.request_path[0];
+    const matchingProxyRequests = _.filter(requests, (request) => {
+      // Get request path for comparison
+      const requestPath = request.fields.request_path[0];
 
-      // Array to hold matched API frontend prefix
-      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) =>
-        requestPath.startsWith(apiFrontendPrefix));
-
-      // Check if API frontend prefix mathed the request path
-      return itemMatchingApiFrontendPrefix.length;
+      // Check if request path matches api frontent prefix
+      return (requestPath === apiFrontendPrefix);
     });
+
+    return matchingProxyRequests;
   };
 
   // Functions that updates statistics data
@@ -400,7 +398,7 @@ Template.dashboardCharts.onRendered(function () {
   instance.autorun(() => {
     const chartData = Template.currentData().chartData;
     const chartDataIsLoading = Template.currentData().loadingState;
-    const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
+    const apiFrontendPrefix = instance.apiFrontendPrefix.get();
 
     if (chartDataIsLoading) {
       // Set loader
@@ -408,9 +406,9 @@ Template.dashboardCharts.onRendered(function () {
     } else if (chartData && chartData.length > 0) {
       let parsedData = [];
 
-      if (apiFrontendPrefixList) {
+      if (apiFrontendPrefix) {
         // Filter data by api frontend prefix
-        const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
+        const filteredData = instance.filterData(chartData, apiFrontendPrefix);
 
         // Parse data for charts
         parsedData = instance.parseChartData(filteredData);
@@ -438,7 +436,7 @@ Template.dashboardCharts.onRendered(function () {
 });
 
 Template.dashboardCharts.events({
-  'change #api-frontend-prefix-form': (event) => {
+  'change #api-frontend-prefix-form': (event, templateInstance) => {
     // Prevent default form submit
     event.preventDefault();
 
@@ -446,10 +444,10 @@ Template.dashboardCharts.events({
     const instance = Template.instance();
 
     // Get selected value
-    const apiFrontendPrefixList = $('#api-frontend-prefix').val();
+    const apiFrontendPrefix = event.target.value;
 
     // Set reactive variable
-    instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
+    templateInstance.apiFrontendPrefix.set(apiFrontendPrefix);
   },
   'click #tick-hour': () => {
     // Remove class from previous selection
