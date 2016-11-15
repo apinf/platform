@@ -78,8 +78,8 @@ Template.feedbackItem.events({
   'click .edit-feedback-item': function () {
     // Get feedback item
     const item = Template.currentData().item;
-    // Show Edit Backlog Item modal
-    Modal.show('editFeedbackItem', { feedbackItem: item });
+    // Show edit feedback form modal
+    Modal.show('feedbackForm', { formType: 'update', feedbackItem: item });
   },
   'click .delete-feedback-item': function () {
     // Get feedback item
