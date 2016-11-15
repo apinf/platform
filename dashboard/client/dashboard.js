@@ -187,22 +187,6 @@ Template.dashboard.onCreated(function () {
   });
 });
 
-Template.dashboard.onRendered(function () {
-  const instance = this;
-
-  // Get timeframe values
-  const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
-  const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
-
-  // Format timeframe values
-  const analyticsTimeframeStartFormatted = analyticsTimeframeStart.format(instance.dateFormatMoment);
-  const analyticsTimeframeEndFormatted = analyticsTimeframeEnd.format(instance.dateFormatMoment);
-
-  // Update date range fields with default dates
-  $('#analytics-timeframe-start').val(analyticsTimeframeStartFormatted);
-  $('#analytics-timeframe-end').val(analyticsTimeframeEndFormatted);
-});
-
 Template.dashboard.events({
   'change #select-timeframe-form': function (event) {
     event.preventDefault();
