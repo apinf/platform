@@ -397,13 +397,10 @@ Template.dashboardCharts.onRendered(function () {
 
   instance.autorun(() => {
     const chartData = Template.currentData().chartData;
-    const chartDataIsLoading = Template.currentData().loadingState;
+
     const apiFrontendPrefix = instance.apiFrontendPrefix.get();
 
-    if (chartDataIsLoading) {
-      // Set loader
-      chartElements.addClass('loader');
-    } else if (chartData && chartData.length > 0) {
+  if (chartData && chartData.length > 0) {
       let parsedData = [];
 
       if (apiFrontendPrefix) {
@@ -417,9 +414,6 @@ Template.dashboardCharts.onRendered(function () {
         parsedData = instance.parseChartData(chartData);
       }
 
-      // Unset loader
-      $('.charts-holder>#no-chart-data-placeholder').remove();
-
       // Render charts
       instance.renderCharts(parsedData);
     } else if (chartData && chartData.length === 0) {
@@ -429,9 +423,6 @@ Template.dashboardCharts.onRendered(function () {
       // throw user-friendly message
       $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
     }
-
-    // Unset loader
-    chartElements.removeClass('loader');
   });
 });
 
