@@ -24,8 +24,7 @@
         {{> afQuickField name="proxyId" firstOption='(Select one proxy)' }}
     {{/ if }}
 
-    {{# unless afFieldValueIs name="proxyId" }}
-
+    {{# if showForm }}
       <div class="form-group">
         <!-- Proxy base path (frontend prefix) -->
       <label for="proxy-base-path-field">
@@ -156,7 +155,7 @@
         {{/if }}
       </div>
     </div>
-{{/ unless }}
+    {{/ if }}
     <div id="proxy-form-buttons" class="btn-group pull-left">
       <!-- submit button -->
       <button

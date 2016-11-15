@@ -177,6 +177,10 @@ Template.proxyBackend.helpers({
 
     // Get proxyBackend from template data
     return instance.data.proxyBackend;
+  },
+  showForm () {
+    // If proxyId is empty then form will be hidden
+    return this.proxyId.get();
   }
 });
 
