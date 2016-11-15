@@ -4,7 +4,7 @@ import { ProxyBackends } from '/proxy_backends/collection';
 
 
 Meteor.methods({
-  deleteProxyBackend (proxyBackend) {
+  deleteProxyBackend (proxyBackend, deleteFromMongoDB = true) {
     // Get umbrellaBackendId
     const umbrellaBackendId = proxyBackend.apiUmbrella.id;
 
@@ -23,7 +23,8 @@ Meteor.methods({
             (publishError) => {
               if (publishError) {
                 throw new Meteor.Error('publish-error');
-              } else if (proxyBackend._id) { // Check proxyBackend has _id
+              } else if (deleteFromMongoDB && proxyBackend._id) {
+                // Check: delete from MongoDB and proxyBackend has _id
                 // Delete proxyBackend from Apinf
                 ProxyBackends.remove(proxyBackend._id);
               }
