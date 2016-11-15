@@ -16,7 +16,7 @@ Template.dashboardCharts.onCreated(function () {
   instance.tableData = new ReactiveVar([]);
 
   // Variable that keeps api frontend prefix
-  instance.apiFrontendPrefix = new ReactiveVar();
+  instance.frontendPrefix = new ReactiveVar();
 
   // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
@@ -289,7 +289,7 @@ Template.dashboardCharts.onCreated(function () {
   };
 
   // Function that fiters analytics data based on frontend prefix
-  instance.filterData = (requests, apiFrontendPrefix) => {
+  instance.filterData = (requests, frontendPrefix) => {
     instance.updateStatisticsData(requests);
 
     // Filter data based on matches with API frontend prefix
@@ -298,7 +298,7 @@ Template.dashboardCharts.onCreated(function () {
       const requestPath = request.fields.request_path[0];
 
       // Check if request path matches api frontent prefix
-      return (requestPath === apiFrontendPrefix);
+      return (requestPath === frontendPrefix);
     });
 
     return matchingProxyRequests;
@@ -394,14 +394,14 @@ Template.dashboardCharts.onRendered(function () {
   instance.autorun(() => {
     const chartData = Template.currentData().chartData;
 
-    const apiFrontendPrefix = instance.apiFrontendPrefix.get();
+    const frontendPrefix = instance.frontendPrefix.get();
 
   if (chartData && chartData.length > 0) {
       let parsedData = [];
 
-      if (apiFrontendPrefix) {
+      if (frontendPrefix) {
         // Filter data by api frontend prefix
-        const filteredData = instance.filterData(chartData, apiFrontendPrefix);
+        const filteredData = instance.filterData(chartData, frontendPrefix);
 
         // Parse data for charts
         parsedData = instance.parseChartData(filteredData);
@@ -431,10 +431,10 @@ Template.dashboardCharts.events({
     const instance = Template.instance();
 
     // Get selected value
-    const apiFrontendPrefix = event.target.value;
+    const frontendPrefix = event.target.value;
 
     // Set reactive variable
-    templateInstance.apiFrontendPrefix.set(apiFrontendPrefix);
+    templateInstance.frontendPrefix.set(frontendPrefix);
   },
   'click #tick-hour': () => {
     // Remove class from previous selection
