@@ -1,4 +1,8 @@
 import { Template } from 'meteor/templating';
+import { UniUtils } from 'meteor/universe:reactive-queries';
+
+import $ from 'jquery';
+
 
 Template.timeFrameSelectPicker.onRendered(function () {
 
@@ -20,7 +24,7 @@ Template.timeFrameSelectPicker.onRendered(function () {
 
   // Set the start date based on URL parameters, if available
   if (fromDate) {
-    $('#analytics-timeframe-start').datepicker('setDate', new Date (fromDate));
+    $('#analytics-timeframe-start').datepicker('setDate', new Date(fromDate));
   }
 
   // Enable date picker on timeframe end
@@ -36,11 +40,10 @@ Template.timeFrameSelectPicker.onRendered(function () {
   });
 
   // Check URL parameters for 'from date' for analytics timeframe
-  const toDate = UniUtils.url.getQuery('toDate')
+  const toDate = UniUtils.url.getQuery('toDate');
 
   // Set the start date based on URL parameters, if available
   if (toDate) {
-    $('#analytics-timeframe-end').datepicker('setDate', new Date (toDate));
+    $('#analytics-timeframe-end').datepicker('setDate', new Date(toDate));
   }
-
 });
