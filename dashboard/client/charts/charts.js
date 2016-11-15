@@ -94,9 +94,11 @@ Template.dashboardCharts.onCreated(function () {
       return statusCodeScope;
     });
 
-    const statusCodeGroup = statusCodeDimension.group(); // Create status code group
+    // Create status code group
+    const statusCodeGroup = statusCodeDimension.group();
 
-    const binwidth = 50; // Init binwidth for a bar chart
+    // Init binwidth for a bar chart
+    const binwidth = 50;
 
     // Get MIN and MAX response time values
     const minResponseTime = d3.min(items, (d) => d.fields.response_time[0]);
