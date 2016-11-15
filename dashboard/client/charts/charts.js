@@ -15,7 +15,7 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps table data
   instance.tableData = new ReactiveVar([]);
 
-  // Variable that keeps api frontend prefix
+  // Variable that keeps frontend prefix
   instance.frontendPrefix = new ReactiveVar();
 
   // Init default values for statistic data
@@ -297,7 +297,7 @@ Template.dashboardCharts.onCreated(function () {
       // Get request path for comparison
       const requestPath = request.fields.request_path[0];
 
-      // Check if request path matches api frontent prefix
+      // Check if request path matches frontent prefix
       return (requestPath === frontendPrefix);
     });
 
@@ -400,7 +400,7 @@ Template.dashboardCharts.onRendered(function () {
       let parsedData = [];
 
       if (frontendPrefix) {
-        // Filter data by api frontend prefix
+        // Filter data by frontend prefix
         const filteredData = instance.filterData(chartData, frontendPrefix);
 
         // Parse data for charts
