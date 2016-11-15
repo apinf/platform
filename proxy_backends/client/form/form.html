@@ -8,7 +8,6 @@
   }}
 
     <!-- hidden fields, auto-value -->
-    {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
     {{> afQuickField name="apiId" value=api._id type="hidden" }}
     {{> afQuickField name="apiUmbrella.name" value=api.name type="hidden" }}
     {{> afQuickField name="apiUmbrella.frontend_host" value=proxyHost type="hidden" }}
@@ -18,21 +17,26 @@
     {{> afQuickField name="apiUmbrella.balance_algorithm" value="least_conn" type="hidden" }}
 
     <!-- visible fields -->
+    <!-- Selector for proxy list if proxyies are more one otherwise hidden field-->
+    {{# if oneProxy }}
+      {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
+    {{ else }}
+        {{> afQuickField name="proxyId" firstOption='(Select one proxy)' }}
+    {{/ if }}
 
-    <!-- Proxy base path (frontend prefix) -->
-    <div class="form-group">
-      <!-- label -->
+    {{# unless afFieldValueIs name="proxyId" }}
+
+      <div class="form-group">
+        <!-- Proxy base path (frontend prefix) -->
       <label for="proxy-base-path-field">
         {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
       </label>
 
       <div class="input-group">
-        <!-- proxy url addon -->
         <span class="input-group-addon" id="proxy-url">
           {{ proxy.apiUmbrella.url }}
         </span>
 
-        <!-- input field -->
         {{> afFieldInput
           name="apiUmbrella.url_matches.0.frontend_prefix"
           class="form-control"
@@ -55,11 +59,9 @@
       </p>
     </div>
 
-    <!-- API fields -->
+    <!-- API base path (backend prefix) -->
     <div class="row">
-      <!-- API base path (backend prefix) -->
       <div class="form-group col-md-9">
-        <!-- field label -->
         <label for="api-base-path-field">
           {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
         </label>
@@ -70,7 +72,6 @@
             {{ api.url }}
           </span>
 
-          <!-- field input -->
           {{> afFieldInput
             name="apiUmbrella.url_matches.0.backend_prefix"
             class="form-control"
@@ -95,12 +96,10 @@
 
       <!-- API port (servers.port) -->
       <div class="form-group col-md-3">
-        <!-- field label -->
         <label for="api-port-field" id="api-port-field-label">
           {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
         </label>
 
-          <!-- field input -->
           {{> afFieldInput
             name="apiUmbrella.servers.0.port"
             value=apiPortHelper
@@ -125,11 +124,9 @@
 
     <!-- Advanced settings -->
     <div class="form-group col-md-12" id="advanced-settings">
-      <!-- Advanced settings block title -->
       <h3>
         {{_ "proxyBackendForm_advancedSettings_title" }}
       </h3>
-      <!-- field input -->
       {{> afQuickField
         name="apiUmbrella.settings.disable_api_key"
         type="boolean-checkbox"
@@ -159,7 +156,7 @@
         {{/if }}
       </div>
     </div>
-
+{{/ unless }}
     <div id="proxy-form-buttons" class="btn-group pull-left">
       <!-- submit button -->
       <button
@@ -169,12 +166,14 @@
         {{_ "proxyBackendForm_saveButton" }}
       </button>
       <!-- delete button -->
-      <button
-        type="button"
-        class="btn btn-danger"
-        id="delete-proxy-button">
-        {{_ "proxyBackendForm_deleteButton" }}
-      </button>
+      {{# if showDeleteButton }}
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="delete-proxy-button">
+          {{_ "proxyBackendForm_deleteButton" }}
+        </button>
+      {{/ if }}
     </div>
   {{/ autoForm }}
 </template>
