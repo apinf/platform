@@ -21,7 +21,7 @@ Template.dashboard.onCreated(function () {
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
 
-  // Init default time frame (from: 2weeks ago, to: now)
+  // Init default time frame
   instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
   instance.analyticsTimeframeEnd = new ReactiveVar(moment());
 
