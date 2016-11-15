@@ -2,19 +2,21 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="row list-group-item feedback-list-item">
-        <div class="col-lg-2 col-md-2">
+        <div class="col-md-2 feedback-voting">
           <span id="up-vote-{{ _id }}" class="fa fa-lg fa-arrow-up up-vote {{ userUpvote }}"></span>
           <span class="badge sum-of-votes">
             {{ item.sumOfVotes }}
           </span>
           <span id="down-vote-{{ _id }}" class="fa fa-lg fa-arrow-down down-vote {{ userDownvote }}"></span>
         </div>
-        <div class="col-lg-2 col-md-2">
+        <div class="col-md-2 feedback-type">
+          <span><b>Type:&nbsp;</b></span>
           <span class="badge">
             {{ item.messageType }}
           </span>
         </div>
-        <div class="col-lg-2 col-md-3">
+        <div class="col-md-8 feedback-topic">
+          <span><b>Topic:&nbsp;</b></span>
           <span>
             {{ item.topic }}
           </span>
