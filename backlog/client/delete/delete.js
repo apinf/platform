@@ -3,9 +3,9 @@ import { Template } from 'meteor/templating';
 import { ApiBacklogItems } from '../../collection';
 
 Template.deleteBacklogItem.events({
-  'click #confirm-delete': function (event, instance) {
+  'click #confirm-delete': function () {
     // Get Backlog Item ID
-    const backlogItemId = instance.data.backlogItem._id;
+    const backlogItemId = Template.currentData().backlogItem._id;
 
     // Remove the Backlog Item
     ApiBacklogItems.remove(backlogItemId);
