@@ -1,12 +1,13 @@
 // Meteor package imports
-import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { TAPi18n } from 'meteor/tap:i18n';
 
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
+import deleteProxyBackend from '../methods/delete_proxy_backend';
+import changeSelectedProxy from '../methods/change_selected_proxy';
+import deleteSelectedProxy from '../methods/delete_selected_proxy';
 
 // NPM import
 import 'urijs';
@@ -14,103 +15,145 @@ import 'urijs';
 // jQuery import
 import $ from 'jquery';
 
+Template.proxyBackend.onCreated(function () {
+  const instance = Template.instance();
+  // Set the proxy id empty on default
+  instance.data.proxyId = new ReactiveVar('');
+
+  // Placeholder for current proxy id
+  let currentProxyId = '';
+
+  const proxyCount = Proxies.find().count();
+
+  // If proxy is only one then set these id on default
+  if (proxyCount === 1) {
+    currentProxyId = Proxies.findOne()._id;
+  }
+
+  // If proxy id already exists then set these id
+  const proxyBackanedExists = instance.data.proxyBackend;
+  if (proxyBackanedExists) {
+    // Update & save the current proxy id
+    currentProxyId = proxyBackanedExists.proxyId;
+  }
+
+  // Otherwise proxy id is still empty
+  instance.data.proxyId.set(currentProxyId);
+});
+
 Template.proxyBackend.helpers({
   apiHost () {
-    // Get one proxy from the Proxies collection
-    // This assumes we have only one proxy
-    // TODO: refactor this method for multi-proxy support
+    // Get API information
     const api = this.api;
 
-    // Construct URL object for proxy URL
+    // Construct URL object for API URL
     const apiUrl = URI(api.url);
 
-    // Return the Proxy URL protocol
+    // Return the API URL protocol
     return apiUrl.host();
   },
   apiPortHelper () {
-    // Placeholder for port
-    let port;
-
-    // Get one proxy from the Proxies collection
-    // This assumes we have only one proxy
-    // TODO: refactor this method for multi-proxy support
+    // Get API information
     const api = this.api;
 
-    // Construct URL object for proxy URL
+    // Construct URL object for API URL
     const apiUrl = URI(api.url);
 
-    // Return the Proxy URL protocol
+    // Return the API URL protocol
     const protocol = apiUrl.protocol();
 
     // Common default ports for HTTP/HTTPS
     if (protocol === 'https') {
-      port = 443;
-    } else if (protocol === 'http') {
-      port = 80;
+      return 443;
     }
 
-    return port;
+    if (protocol === 'http') {
+      return 80;
+    }
+
+    return '';
   },
   apiProxySettings () {
     // Get API ID
     const apiId = this.api._id;
 
     // Look for existing proxy backend document for this API
-    const apiProxySettings = ProxyBackends.findOne({ apiId });
-
-    return apiProxySettings;
+    return ProxyBackends.findOne({ apiId });
   },
   apiUrlProtocol () {
-    // Get one proxy from the Proxies collection
-    // This assumes we have only one proxy
-    // TODO: refactor this method for multi-proxy support
+   // Get the API information
     const api = this.api;
 
-    // Construct URL object for proxy URL
+    // Construct URL object for API URL
     const apiUrl = URI(api.url);
 
-    // Return the Proxy URL protocol
+    // Return the API URL protocol
     return apiUrl.protocol();
   },
   formType () {
-    // Placeholder for form type
-    let formType;
-
+    const instance = Template.instance();
     // Get API ID
-    const apiId = this.api._id;
+    const apiId = instance.data.api._id;
 
     // Look for existing proxy backend document for this API
     const existingSettings = ProxyBackends.findOne({ apiId });
 
+    // If settings exist then type will be update otherwise type will be insert
     if (existingSettings) {
-      formType = 'update';
+      instance.formType = 'update';
     } else {
-      formType = 'insert';
+      instance.formType = 'insert';
     }
 
-    return formType;
+    return instance.formType;
   },
   proxy () {
-    // TODO: determine how to provide proxyId for the ProxyBackend form
-    // e.g. will we have more than one proxy?
-    // if no, we need also to limit the number of proxies that can be added
+    // Get a reference of Template instance
+    const instance = Template.instance();
+    // Get a reference of proxy backend
+    const proxyBackanedExists = instance.data.proxyBackend;
 
-    // Get a single Proxy
-    const proxy = Proxies.findOne();
+    if (instance.data.proxyId === undefined) {
+      // After inserting template variable has become empty but PB configuration exists
+      if (proxyBackanedExists) {
+        // Set again template variable
+        instance.data.proxyId = new ReactiveVar(proxyBackanedExists.proxyId);
+      } else {
+        // After deleting PB configuration, the form is hidden and both variables are undefined
+        instance.data.proxyId = new ReactiveVar('');
+      }
+    }
+    // Get current proxy id
+    const currentProxyId = instance.data.proxyId.get();
 
-    return proxy;
+    // Get settings of current Proxy
+    return Proxies.findOne(currentProxyId);
   },
   proxyBackendsCollection () {
-    // Return a reference to ProxyBackends collection, for AutoForm
+    // Return a Return a reference to ProxyBackends collection, for AutoForm
     return ProxyBackends;
   },
   proxyHost () {
-    // TODO: determine how to provide proxyId for the ProxyBackend form
-    // e.g. will we have more than one proxy?
-    // if no, we need also to limit the number of proxies that can be added
+    // Get a reference of Template instance
+    const instance = Template.instance();
+    // Get a reference of proxy backend
+    const proxyBackanedExists = instance.data.proxyBackend;
 
-    // Get a single Proxy
-    const proxy = Proxies.findOne();
+    if (instance.data.proxyId === undefined) {
+      // After inserting template variable has become empty but PB configuration exists
+      if (proxyBackanedExists) {
+        // Set again template variable
+        instance.data.proxyId = new ReactiveVar(proxyBackanedExists.proxyId);
+      } else {
+        // After deleting PB configuration, the form is hidden and both variables are undefined
+        instance.data.proxyId = new ReactiveVar('');
+      }
+    }
+    // Get current proxy id
+    const currentProxyId = instance.data.proxyId.get();
+
+    // Find the proxy settings
+    const proxy = Proxies.findOne(currentProxyId);
 
     if (proxy && proxy.apiUmbrella) {
       // Get frontend host from template instance
@@ -118,16 +161,38 @@ Template.proxyBackend.helpers({
 
       return frontend.host();
     }
+    return '';
   },
+  oneProxy () {
+    // Ger proxy count
+    const proxyCount = Proxies.find().count();
+
+    // Check on existing only one proxy
+    return proxyCount === 1;
+  },
+  showDeleteButton () {
+    // Get template instance
+    const instance = Template.instance();
+
+    // Get proxyBackend from template data
+    return instance.data.proxyBackend;
+  }
 });
 
-Template.apiProxy.events({
+Template.proxyBackend.events({
   'click #delete-proxy-button': () => {
     /* Function procedure in generic form
     1. Delete API Backend on proxy (eg. API Umbrella)
       - call necessary functions by proxy type
     2. Delete Proxy Backend on Apinf
     */
+
+    // Notify users about deleting proxy
+    const confirmation = confirm('All information will be deleted and API link will be broken!');
+    // Check if user clicked "OK"
+    if (confirmation === false) {
+      return;
+    }
 
     // Get template instance
     const instance = Template.instance();
@@ -136,27 +201,9 @@ Template.apiProxy.events({
     const proxyBackend = instance.data.proxyBackend;
 
     // Check proxyBackend exists, type is apiUmbrella, and it has id
-    if (proxyBackend &&
-      proxyBackend.apiUmbrella &&
-      proxyBackend.apiUmbrella.id) {
-        // Call deleteProxyBackend
-      Meteor.call('deleteProxyBackend', proxyBackend, (error, result) => {
-        if (error) {
-          if (error.error === 'delete-error') {
-              // Show delete-error
-            const deleteErrorMessage = TAPi18n.__('proxyBackendForm_deleteErrorMessage');
-            sAlert.error(`${deleteErrorMessage}:\n ${error.error}`);
-          } else if (error.error === 'publish-error') {
-              // Show publish-error
-            const publishErrorMessage = TAPi18n.__('proxyBackendForm_publishErrorMessage');
-            sAlert.error(`${publishErrorMessage}:\n ${error.error}`);
-          }
-        } else {
-            // Show successMessage
-          const successMessage = TAPi18n.__('proxyBackendForm_deleteSuccessMessage');
-          sAlert.success(successMessage);
-        }
-      });
+    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.id) {
+      // Call deleteProxyBackend
+      deleteProxyBackend(proxyBackend);
     }
   },
   // onChange event for checkbox inputs that contain "response_headers" in name
@@ -173,6 +220,28 @@ Template.apiProxy.events({
           checkbox.checked = false;
         }
       });
+    }
+  },
+  'focus select[name="proxyId"]': function (event, templateInstance) {
+    // Get and save the current selected item
+    templateInstance.previousItemNumber = event.currentTarget.options.selectedIndex;
+  },
+  'change select[name="proxyId"]': function (event, templateInstance) {
+    // Get selected option
+    const selectedItem = event.currentTarget.value || '';
+
+    // User changed current proxy to another
+    if (templateInstance.formType === 'update') {
+      // If user changed to first position then proxy backend will be deleted
+      // Otherwise change option
+      if (selectedItem === event.currentTarget[0].value) {
+        deleteSelectedProxy(event, templateInstance);
+      } else {
+        changeSelectedProxy(event, templateInstance, selectedItem);
+      }
+    } else {
+      // Set id of proxy selected
+      templateInstance.data.proxyId.set(selectedItem);
     }
   },
 });
