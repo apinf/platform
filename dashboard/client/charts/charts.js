@@ -238,9 +238,9 @@ Template.dashboardCharts.onCreated(function () {
     instance.updateStatisticsData(chartData);
   };
 
-  // Function that gets and parsed data for table
-  instance.getTableData = (chartData) => {
-    const tableDataSet = [];
+  // Function that updates table data
+  instance.updateDataTable = (chartData) => {
+    const tableData = [];
 
     _.forEach(chartData, (e) => {
       let time;
@@ -269,15 +269,9 @@ Template.dashboardCharts.onCreated(function () {
       try { responseStatus = e.fields.response_status[0]; }
       catch (e) { responseStatus = ''; }
 
-      tableDataSet.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
+      tableData.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
     });
 
-    return tableDataSet;
-  };
-
-  // Function that updates table data
-  instance.updateDataTable = (chartData) => {
-    const tableData = instance.getTableData(chartData);
     instance.tableDataSet.set(tableData);
   };
 
