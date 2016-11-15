@@ -7,13 +7,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { Branding } from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
-import uploadingSpinner from './upload';
 
 Meteor.startup(function () {
   // Set cover photo id to branding collection on Success
   CoverPhoto.resumable.on('fileSuccess', function (file) {
-    // Turn off spinner
-    uploadingSpinner.set(false);
 
     // Get the id from project logo file object
     const coverPhotoFileId = file.uniqueIdentifier;
@@ -49,8 +46,6 @@ Meteor.startup(function () {
 
       // Check extensions for uploading file: is it a picture or not?
       if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
-        // Turn on spinner
-        uploadingSpinner.set(true);
         // Upload the cover photo
         return CoverPhoto.resumable.upload();
       }
