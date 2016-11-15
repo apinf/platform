@@ -1,16 +1,24 @@
 <template name="tickButtons">
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default" id="tick-hour" >
-      {{_ "tickButtons_hour" }}
-    </button>
-    <button type="button" class="btn btn-default" id="tick-day" >
-      {{_ "tickButtons_day" }}
-    </button>
-    <button type="button" class="btn btn-default" id="tick-week" >
-      {{_ "tickButtons_week" }}
-    </button>
-    <button type="button" class="btn btn-default" id="tick-month" >
+  <div id="date-granularity-selector" class="btn-group" data-toggle="buttons">
+    <label class="btn btn-default active">
+      <input type="radio" name="granularity" value="month" checked>
+      &nbsp;
       {{_ "tickButtons_month" }}
-    </button>
-  </div>
+    </label>
+    <label class="btn btn-default">
+      <input type="radio" name="granularity" value="week">
+      &nbsp;
+      {{_ "tickButtons_week" }}
+    </label>
+    <label class="btn btn-default">
+      <input type="radio" name="granularity" value="day">
+      &nbsp;
+      {{_ "tickButtons_day" }}
+    </label>
+    <label class="btn btn-default">
+      <input type="radio" name="granularity" value="hour">
+      &nbsp;
+      {{_ "tickButtons_hour" }}
+    </label>
+</div>
 </template>
