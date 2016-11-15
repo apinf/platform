@@ -308,7 +308,7 @@
     "apiSettings_visibility_heading": "Muuta rajapinnan n\u00e4kyvyytt\u00e4",
     "apiSettings_visibility_text": "Muuta rajapinta julkiseksi tai yksityiseksi",
     "api_backend_rating_anonymous": "Kirjaudu sis\u00e4\u00e4n pisteytt\u00e4\u00e4ksesi rajapinta.",
-    "apinf_usernotloggedin_error": "Kirjautunutta k\u00e4ytt\u00e4j\u00e4\u00e4 ei l\u00f6ytynyt.",
+    "apinf_usernotloggedin_error": "Virhe: Kirjautunutta k\u00e4ytt\u00e4j\u00e4\u00e4 ei l\u00f6ytynyt.",
     "apiProxy_headerText": "Rajapinnan v\u00e4lityspalvelinasetukset",
     "backlogItem_addedByYou": "Lis\u00e4nnyt: nykyinen k\u00e4ytt\u00e4j\u00e4",
     "backlogItem_editButton_text": "Muokkaa",

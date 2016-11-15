@@ -1,12 +1,14 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { ApiMetadata } from '/metadata/collection';
 
 ApiMetadata.schema = new SimpleSchema({
   // TODO: migrate to use 'apiId' instead of 'apiBackendId'
-  'apiBackendId': {
+  apiBackendId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-  'organization': {
+  organization: {
     type: Object,
     optional: true,
   },
@@ -18,7 +20,7 @@ ApiMetadata.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  'contact': {
+  contact: {
     type: Object,
     optional: true,
   },
@@ -34,7 +36,7 @@ ApiMetadata.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  'service': {
+  service: {
     type: Object,
     optional: true,
   },
@@ -49,15 +51,44 @@ ApiMetadata.schema = new SimpleSchema({
   'service.validSince': {
     type: Date,
     optional: true,
+    autoform: {
+      type: 'bootstrap-datepicker',
+    },
   },
   'service.validUntil': {
     type: Date,
     optional: true,
+    autoform: {
+      type: 'bootstrap-datepicker',
+    },
+    custom () {
+      let validation;
+      const validSince = this.field('service.validSince').value;
+      const validUntil = this.value;
+
+      // validUntil must be after validSince
+      if (
+        (validSince instanceof Date) &&
+        (validUntil instanceof Date) &&
+        validUntil < validSince
+      ) {
+        validation = 'dateError';
+      }
+      return validation;
+    },
   },
   'service.serviceLevelAgreement': {
     type: String,
     optional: true,
   },
+});
+
+// Fetch dateInvalid message
+const dateInvalid = TAPi18n.__('apiMetadata_dateInvalid');
+
+// Define custom validation error messages
+ApiMetadata.schema.messages({
+  dateError: dateInvalid,
 });
 
 // Enable translations (i18n)
