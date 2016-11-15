@@ -15,7 +15,11 @@
               <span aria-hidden="true">&times;</span>
             </button>
           <h2 class="modal-title" id="apiBacklogFormModalLabel">
-            {{_ "addApiBacklogItem_modalTitle" }}
+            {{#if insertType }}
+              {{_ "addApiBacklogItem_modalTitle" }}
+            {{ else }}
+              {{_ "editBacklogItem_modalTitle" }}
+            {{/ if }}
           </h2>
         </div>
         {{# autoForm
@@ -31,7 +35,11 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary pull-right">
-              {{_ "addApiBacklogItem_addBacklogItem_button" }}
+              {{#if insertType }}
+                {{_ "addApiBacklogItem_addBacklogItem_button" }}
+              {{ else }}
+                {{_ "editBacklogItem_submit_buttonText" }}
+              {{/ if }}
             </button>
           </div>
         {{/ autoForm }}
