@@ -25,10 +25,6 @@ Template.dashboard.onCreated(function () {
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
 
-  // Init default time frame
-  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
-  instance.analyticsTimeframeEnd = new ReactiveVar(moment());
-
   // Get current user Id
   const userId = Meteor.userId();
 
@@ -136,18 +132,21 @@ Template.dashboard.onCreated(function () {
       },
     };
 
-    // ******* Filtering by date *******
-    const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
-    const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
+    // Listen for analytics date range changes through URL parameters
+    const analyticsFrom = UniUtils.url.getQuery('fromDate');
+    const analyticsTo = UniUtils.url.getQuery('toDate');
 
-    // Check if timeframe values are set
-    if (analyticsTimeframeStart && analyticsTimeframeEnd) {
-      // Update elasticsearch query with filter data (in Unix format)
-      params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
-
-      params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+    // Update query parameters for date range, when provided
+    if (analyticsFrom) {
+      // Set start date (greater than or equal to) for analytics timeframe
+      params.body.query.filtered.filter.range.request_at.gte = analyticsFrom;
     }
-    // ******* End filtering by date *******
+
+    // Update query parameters for date range, when provided
+    if (analyticsTo) {
+      // Set end date (less than or equal to) for analytics timeframe
+      params.body.query.filtered.filter.range.request_at.lte = analyticsTo;
+    }
 
     return params;
   };
