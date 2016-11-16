@@ -16,6 +16,7 @@ export default function convertToApiUmbrellaObject (noStandardObject) {
   apiUmbrellaObject.apiUmbrella.settings = {};
   apiUmbrellaObject.apiUmbrella.settings.disable_api_key = noStandardObject['apiUmbrella.settings.disable_api_key'];
   apiUmbrellaObject.apiUmbrella.settings.rate_limit_mode = noStandardObject['apiUmbrella.settings.rate_limit_mode'];
+  apiUmbrellaObject.apiUmbrella.settings.rate_limits = noStandardObject['apiUmbrella.settings.rate_limits'];
   apiUmbrellaObject.apiUmbrella.url_matches = noStandardObject['apiUmbrella.url_matches'];
 
   return apiUmbrellaObject;
