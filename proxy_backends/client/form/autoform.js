@@ -5,7 +5,7 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 
 import { ProxyBackends } from '../../collection';
 import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
-import convertToApiUmbrellaObject from '../methods/convert_to_apiU_object';
+import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
 AutoForm.hooks({
   proxyBackendForm: {
