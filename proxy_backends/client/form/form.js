@@ -2,6 +2,7 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
@@ -19,27 +20,54 @@ import $ from 'jquery';
 Template.proxyBackend.onCreated(function () {
   const instance = Template.instance();
   // Set the proxy id empty on default
-  instance.data.proxyId = new ReactiveVar('');
+  // instance.data.proxyId = new ReactiveVar('');
 
-  // Placeholder for current proxy id
-  let currentProxyId = '';
+  instance.getProxyId = () => {
+    // Placeholder for current proxy id
+    let currentProxyId = '';
+    // Get & compare count of Proxies
+    const proxyCount = Counts.get('proxyCount');
+    // Get Proxy Backend config
+    const proxyBackendExists = instance.data.proxyBackend;
 
-  const proxyCount = Proxies.find().count();
+    // Check if proxy id exists and multi proxy is available
+    // It can be a case when proxy id is empty string and proxy is only one then proxy id must be update
+    if (instance.data.proxyId !== undefined && proxyCount > 1) {
+      // Save the early value
+      return instance.data.proxyId.get();
+    }
 
-  // If proxy is only one then set these id on default
-  if (proxyCount === 1) {
-    currentProxyId = Proxies.findOne()._id;
-  }
+    // If proxy id doesn't exist yet or any more
+    if (instance.data.proxyId === undefined) {
+      // Create
+      instance.data.proxyId = new ReactiveVar('');
 
-  // If proxy id already exists then set these id
-  const proxyBackanedExists = instance.data.proxyBackend;
-  if (proxyBackanedExists) {
-    // Update & save the current proxy id
-    currentProxyId = proxyBackanedExists.proxyId;
-  }
+      if (proxyBackendExists) {
+        // Set the last know proxy id
+        currentProxyId = proxyBackendExists.proxyId;
+      }
+    }
 
-  // Otherwise proxy id is still empty
-  instance.data.proxyId.set(currentProxyId);
+    // Separate two case: proxy is only one or multi proxy
+
+    // First case: Proxy is only one
+    if (proxyCount === 1) {
+      // Set these id as current
+      currentProxyId = Proxies.findOne()._id;
+    } else {
+      // Second case: multi proxy
+
+      // If PB configuration exists then it has a proxy id
+      if (proxyBackendExists) {
+        // Update & save the current proxy id
+        currentProxyId = proxyBackendExists.proxyId;
+      }
+      // Otherwise empty string is current id (after deleting configuration)
+    }
+
+    // Get the current proxy id
+    instance.data.proxyId.set(currentProxyId);
+  };
 });
 
 Template.proxyBackend.helpers({
@@ -111,19 +139,7 @@ Template.proxyBackend.helpers({
   proxy () {
     // Get a reference of Template instance
     const instance = Template.instance();
-    // Get a reference of proxy backend
-    const proxyBackanedExists = instance.data.proxyBackend;
 
-    if (instance.data.proxyId === undefined) {
-      // After inserting template variable has become empty but PB configuration exists
-      if (proxyBackanedExists) {
-        // Set again template variable
-        instance.data.proxyId = new ReactiveVar(proxyBackanedExists.proxyId);
-      } else {
-        // After deleting PB configuration, the form is hidden and both variables are undefined
-        instance.data.proxyId = new ReactiveVar('');
-      }
-    }
     // Get current proxy id
     const currentProxyId = instance.data.proxyId.get();
 
@@ -137,20 +153,8 @@ Template.proxyBackend.helpers({
   proxyHost () {
     // Get a reference of Template instance
     const instance = Template.instance();
-    // Get a reference of proxy backend
-    const proxyBackanedExists = instance.data.proxyBackend;
-
-    if (instance.data.proxyId === undefined) {
-      // After inserting template variable has become empty but PB configuration exists
-      if (proxyBackanedExists) {
-        // Set again template variable
-        instance.data.proxyId = new ReactiveVar(proxyBackanedExists.proxyId);
-      } else {
-        // After deleting PB configuration, the form is hidden and both variables are undefined
-        instance.data.proxyId = new ReactiveVar('');
-      }
-    }
-    // Get current proxy id
+    // Get & save current proxy id
+    instance.getProxyId();
     const currentProxyId = instance.data.proxyId.get();
 
     // Find the proxy settings
@@ -179,8 +183,13 @@ Template.proxyBackend.helpers({
     return instance.data.proxyBackend;
   },
   showForm () {
+    // Get a reference of Template instance
+    const instance = Template.instance();
+    // Get proxy id
+    instance.getProxyId();
+
     // If proxyId is empty then form will be hidden
-    return this.proxyId.get();
+    return instance.data.proxyId.get();
   }
 });
 
