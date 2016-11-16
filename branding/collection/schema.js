@@ -6,6 +6,10 @@ Branding.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  coverPhotoFileId: {
+    type: String,
+    optional: true,
+  },
   colors: {
     type: Object,
     optional: true,
