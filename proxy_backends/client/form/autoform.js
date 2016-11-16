@@ -93,9 +93,6 @@ AutoForm.hooks({
         // Get proxyBackend $set values
         const currentProxyBackend = updateDoc.$set;
 
-        // TODO: Check the case when proxy is only one, proxy id will be undefined or not
-
-
         if (currentProxyBackend) {
           // Get API id
           const apiId = currentProxyBackend.apiId;
@@ -133,6 +130,7 @@ AutoForm.hooks({
           const previousProxyId = proxyBackendFromMongo.proxyId;
           const currentProxyId = currentProxyBackend.proxyId;
 
+          // TODO: In multi-proxy case. After changing proxy, onSuccess hook happens faster then umbrella id is got.
           // Check: if user changed proxy
           if (previousProxyId !== currentProxyId) {
             // Delete information about proxy backend from the first proxy and insert in the
@@ -178,13 +176,13 @@ AutoForm.hooks({
                     umbrellaBackendId, convertedProxyBackend.proxyId,
                     function (error) {
                       if (error) {
-                        sAlert(error);
+                        sAlert.error(error);
                         // sync return false;
                         return false;
                       }
-
                       // sync return the Proxy Backend document
-                      return convertedProxyBackend;
+                      updateDoc.$set = convertedProxyBackend;
+                      return updateDoc;
                     }
                   );
                 }
