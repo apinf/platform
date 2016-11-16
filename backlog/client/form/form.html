@@ -1,4 +1,4 @@
-<template name="addApiBacklogItem">
+<template name="apiBacklogItemForm">
   <div
     class="modal fade"
     tabindex="-1"
@@ -15,13 +15,19 @@
               <span aria-hidden="true">&times;</span>
             </button>
           <h2 class="modal-title" id="apiBacklogFormModalLabel">
-            {{_ "addApiBacklogItem_modalTitle" }}
+            {{#if insertType }}
+              {{_ "addApiBacklogItem_modalTitle" }}
+            {{ else }}
+              {{_ "editBacklogItem_modalTitle" }}
+            {{/ if }}
           </h2>
         </div>
         {{# autoForm
           collection=apiBacklogItemsCollection
-          id="addApiBacklogItemForm"
-          type="insert" }}
+          id="apiBacklogItemForm"
+          type=formType
+          doc=backlogItem
+        }}
           <div class="modal-body">
             {{> afQuickField name="title" }}
             {{> afQuickField name="details" }}
@@ -29,7 +35,11 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary pull-right">
-              {{_ "addApiBacklogItem_addBacklogItem_button" }}
+              {{#if insertType }}
+                {{_ "addApiBacklogItem_addBacklogItem_button" }}
+              {{ else }}
+                {{_ "editBacklogItem_submit_buttonText" }}
+              {{/ if }}
             </button>
           </div>
         {{/ autoForm }}

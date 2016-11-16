@@ -14,7 +14,6 @@ fortawesome:fontawesome
 raix:handlebar-helpers
 aldeed:template-extension
 iron:router
-yogiben:autoform-modals
 spiderable@1.0.14-release-testing.0
 accounts-ui@1.1.9
 tap:i18n
