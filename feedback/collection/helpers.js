@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Apis } from '/apis/collection';
 import { FeedbackVotes } from '/feedback_votes/collection';
 import ss from 'simple-statistics';
-import _ from 'underscore';
 import { Feedback } from './';
 
 Feedback.helpers({
@@ -11,7 +10,7 @@ Feedback.helpers({
     const allFeedback = FeedbackVotes.find({ feedbackId: this._id }).fetch();
 
     // Create a list of all feedback vote values
-    const votes = _(allFeedback).map((feedback) => {
+    const votes = allFeedback.map((feedback) => {
       return feedback.vote;
     });
 
