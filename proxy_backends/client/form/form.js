@@ -9,7 +9,7 @@ import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
 import deleteProxyBackend from '../methods/delete_proxy_backend';
 import changeSelectedProxy from '../methods/change_selected_proxy';
-import deleteSelectedProxy from '../methods/delete_selected_proxy';
+import deleteSelectedProxy from '../delete_selected_proxy/delete_selected_proxy';
 
 // NPM import
 import 'urijs';
@@ -250,7 +250,12 @@ Template.proxyBackend.events({
       // If user changed to first position then proxy backend will be deleted
       // Otherwise change option
       if (selectedItem === event.currentTarget[0].value) {
-        deleteSelectedProxy(event, templateInstance);
+        // deleteSelectedProxy(event, templateInstance);
+        Modal.show('removeSelectedProxy', {
+          proxyBackendEvent: event,
+          proxyBackend: templateInstance,
+
+        });
       } else {
         changeSelectedProxy(event, templateInstance, selectedItem);
       }
