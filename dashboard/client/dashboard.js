@@ -22,17 +22,6 @@ Template.dashboard.onCreated(function () {
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
 
-  // Get current user Id
-  const userId = Meteor.userId();
-
-  if (Roles.userIsInRole(userId, ['admin'])) {
-    // Subscribe to publication
-    instance.subscribe('allApiBackends');
-  } else {
-    // Subscribe to publication
-    instance.subscribe('myManagedApis');
-  }
-
   instance.checkElasticsearch = function () {
     return new Promise((resolve, reject) => {
       Meteor.call('elasticsearchIsDefined', (err, res) => {
