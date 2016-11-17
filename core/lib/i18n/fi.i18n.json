@@ -484,7 +484,7 @@
     "notAuthorized_Message": "Sinulla ei ole oikeutta tarkastella t\u00e4t\u00e4 sivua.",
     "notAuthorized_Title": "Ei oikeuksia.",
     "notFound_Message_Part1": "Hakemaasi sivua ei l\u00f6ytynyt.",
-    "notFound_Message_Part2": "Palaa edelliselle sivulle.",
+    "notFound_GoBack_Link": "Palaa edelliselle sivulle.",
     "notFound_Title": "Sivua ei l\u00f6ytynyt.",
     "profile_Header": "Profiili",
     "profile_UpdateButton": "P\u00e4ivit\u00e4",
