@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 Template.granularity.onRendered(function () {
   // Get reference to template instance
@@ -9,7 +10,7 @@ Template.granularity.onRendered(function () {
 
   if (granularityParameter) {
     // Set the granularity UI state from URL parameter
-    instance.$('[name="granularity"]').val([granularityParameter]);
+    instance.$(`#${granularityParameter}-granularity`).button('toggle');
   } else {
     // Get granularity from template
     const granularity = instance.$('[name=granularity]:checked').val();
