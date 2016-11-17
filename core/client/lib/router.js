@@ -1,5 +1,5 @@
 Router.configure({
-  layoutTemplate: 'masterLayout',
+  layoutTemplate: 'errorsLayout',
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound',
   routeControllerNameConverter: 'camelCase',
@@ -26,13 +26,13 @@ Router.plugin('ensureSignedIn', {
 Router.map(function() {
   this.route('notAuthorized', {
     path: '/not-authorized',
-    layoutTemplate: 'masterLayout',
+    layoutTemplate: 'errorsLayout',
     render: 'notAuthorized',
   });
 
   this.route('forbidden', {
     path: '/forbidden',
-    layoutTemplate: 'masterLayout',
+    layoutTemplate: 'errorsLayout',
     render: 'forbidden',
   });
 });
