@@ -19,9 +19,6 @@ Template.dashboard.onCreated(function () {
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
 
-  // Keeps chart data loading state
-  instance.chartDataLoadingState = new ReactiveVar(false);
-
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
 
@@ -156,9 +153,6 @@ Template.dashboard.onCreated(function () {
       // Get elasticsearch query
       const params = instance.getElasticSearchQuery();
 
-      // Set loader
-      instance.chartDataLoadingState.set(true);
-
       // Check if proxyBackendsCount
       const proxyBackendsCount = ProxyBackends.find().count();
 
@@ -171,7 +165,6 @@ Template.dashboard.onCreated(function () {
                 .then((chartData) => {
                   // Update reactive variable
                   instance.chartData.set(chartData);
-                  instance.chartDataLoadingState.set(false);
                 })
                 .catch(err => console.error(err));
             } else {
@@ -191,11 +184,6 @@ Template.dashboard.helpers({
     const instance = Template.instance();
 
     return instance.chartData.get();
-  },
-  loadingState () {
-    const instance = Template.instance();
-
-    return instance.chartDataLoadingState.get();
   },
   proxyBackendsAdded () {
     const instance = Template.instance();
