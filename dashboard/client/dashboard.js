@@ -174,11 +174,4 @@ Template.dashboard.helpers({
 
     return instance.chartData.get();
   },
-  proxyBackendsAdded () {
-    // Count the number of proxy backends
-    const proxyBackendsCount = ProxyBackends.find().count();
-
-    // return true if one or more proxy backends have been added
-    return (proxyBackendsCount > 0);
-  },
 });

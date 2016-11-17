@@ -1,7 +1,7 @@
 <template name="dashboard">
   <div class="container">
     {{# if isInRole 'admin, manager' }}
-      {{> dashboardCharts chartData=chartData proxyBackendsAddedState=proxyBackendsAdded }}
+      {{> dashboardCharts chartData=chartData }}
     {{ else }}
       {{> dashboardNoApis }}
     {{/ if }}
