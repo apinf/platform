@@ -1,15 +1,13 @@
 // Meteor package imports
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
 import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
-import deleteProxyBackend from '../methods/delete_proxy_backend';
-import changeSelectedProxy from '../methods/change_selected_proxy';
-import deleteSelectedProxy from '../delete_selected_proxy/delete_selected_proxy';
+import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
 
 // NPM import
 import 'urijs';
@@ -201,14 +199,6 @@ Template.proxyBackend.events({
     2. Delete Proxy Backend on Apinf
     */
 
-    // Notify users about deleting proxy
-    const message = TAPi18n.__('proxyBackend_confirmText_deleteProxyBackendInformation');
-    const confirmation = confirm(message);
-    // Check if user clicked "OK"
-    if (confirmation === false) {
-      return;
-    }
-
     // Get template instance
     const instance = Template.instance();
 
@@ -250,14 +240,16 @@ Template.proxyBackend.events({
       // If user changed to first position then proxy backend will be deleted
       // Otherwise change option
       if (selectedItem === event.currentTarget[0].value) {
-        // deleteSelectedProxy(event, templateInstance);
         Modal.show('removeSelectedProxy', {
           proxyBackendEvent: event,
           proxyBackend: templateInstance,
-
         });
       } else {
-        changeSelectedProxy(event, templateInstance, selectedItem);
+        Modal.show('changeSelectedProxy', {
+          proxyBackendEvent: event,
+          proxyBackend: templateInstance,
+          selectedItem: selectedItem,
+        });
       }
     } else {
       // Set id of proxy selected
