@@ -186,8 +186,6 @@ Template.dashboard.helpers({
     return instance.chartData.get();
   },
   proxyBackendsAdded () {
-    const instance = Template.instance();
-
     // Count the number of proxy backends
     const proxyBackendsCount = ProxyBackends.find().count();
 
