@@ -9,6 +9,18 @@ import { ProxyBackends } from '/proxy_backends/collection';
 // npm import
 import _ from 'lodash';
 
+Meteor.publish('proxyBackends', function (proxyId) {
+  // Get current userId
+  const userId = this.userId;
+  // Check loggedin user exists
+  if (userId) {
+    // Return list of all proxyBackends for given proxy
+    return ProxyBackends.find({ proxyId });
+  }
+  // Otherwise return empty list
+  return [];
+});
+
 Meteor.publish('apiProxySettings', function (apiId) {
   // Get current userId
   const userId = this.userId;

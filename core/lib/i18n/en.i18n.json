@@ -361,6 +361,7 @@
   "removeProxy_modalBody": "proxy backends are connected to this proxy. Removing the proxy will mean that API calls made to any of the connected API backends will break.",
   "removeProxy_confirmRemoveProxy": "Yes, remove",
   "removeProxy_cancelRemove": "Cancel",
+  "removeProxy_errorMessage": "Error: Proxy removal failed",
   "requestsOverTimeChart_showingRecordsCount": "Showing records",
   "requestsOverTimeChart_title": "API Request Timeline",
   "requestsOverTimeChart_help_text": "You can use this chart to view number of requests your API has received for a specific time period. You can see API requests for a single API or a combination of them. The overview information and other charts will be updated when you interact with API request Timeline.",
