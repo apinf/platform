@@ -3,14 +3,7 @@
     {{# if isInRole 'admin, manager' }}
       {{> dashboardCharts chartData=chartData proxyBackendsAddedState=proxyBackendsAdded }}
     {{ else }}
-      <div class="alert alert-warning alert-text" role="alert">
-        {{_ "dashboard_noApisTitle" }}&nbsp;&nbsp;
-        <a
-          href="{{ pathFor route='addApi' }}"
-          class="btn btn-sm btn-success">
-          {{_ 'dashboard_addApiButton_text' }}
-        </a>
-      </div>
+      {{> dashboardNoApis }}
     {{/ if }}
   </div>
 </template>

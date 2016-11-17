@@ -1,0 +1,10 @@
+<template name="dashboardNoApis">
+  <div class="alert alert-warning alert-text" role="alert">
+    {{_ "dashboard_noApisTitle" }}&nbsp;&nbsp;
+    <a
+      href="{{ pathFor route='addApi' }}"
+      class="btn btn-sm btn-success">
+      {{_ 'dashboard_addApiButton_text' }}
+    </a>
+  </div>
+</template>
