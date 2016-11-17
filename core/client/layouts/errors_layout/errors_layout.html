@@ -1,0 +1,13 @@
+<template name="errorsLayout">
+  {{> customStylesheet }}
+  {{> languageBar }}
+  {{# if Template.subscriptionsReady }}
+  <div class="master-layout">
+    {{> navbar branding=branding }}
+    <div class="content-wrapper">
+      {{> yield }}
+      {{> sAlert }}
+    </div>
+  </div>
+  {{/ if }}
+</template>
