@@ -169,6 +169,11 @@
   "catalogueTable_added": "Added",
   "catalogueTable_addedBy": "Added by",
   "catalogue_Title": "API Catalog",
+  "changeSelectedProxy_buttonCancel": "Cancel",
+  "changeSelectedProxy_buttonConfirm": "Change API Proxy",
+  "changeSelectedProxy_title": "Change API Proxy",
+  "changeSelectedProxy_textCaution": "Caution!",
+  "changeSelectedProxy_textConfirm": "Changing the proxy will change the call URL and will potentially break API calls from applications. Please inform your API consumers about this change and suggest them to check whether or not they need to obtain new API key from the newly selected proxy",
   "contactForm_email_label": "E-mail address",
   "contactForm_email_placeholder": "Your email",
   "contactForm_message_label": "Message",
@@ -353,6 +358,7 @@
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
+  "proxyBackendForm_informText_noOneSelectedProxy": "No one proxy was selected.",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
   "proxyItem_editProxy": "Edit",
@@ -360,6 +366,11 @@
   "removeProxy_modalLabel": "Are you sure that you want to remove proxy?",
   "removeProxy_confirmRemoveProxy": "Yes, remove",
   "removeProxy_cancelRemove": "Cancel",
+  "removeSelectedProxy_buttonCancel": "Cancel",
+  "removeSelectedProxy_buttonConfirm": "Yes, remove",
+  "removeSelectedProxy_title": "Remove Proxy",
+  "removeSelectedProxy_textCaution": "Caution!",
+  "removeSelectedProxy_textConfirm": "Deleting the proxy backend configuration will potentially break API calls from applications. Please inform your API consumers about this change.",
   "requestsOverTimeChart_showingRecordsCount": "Showing records",
   "requestsOverTimeChart_title": "API Request Timeline",
   "requestsOverTimeChart_help_text": "You can use this chart to view number of requests your API has received for a specific time period. You can see API requests for a single API or a combination of them. The overview information and other charts will be updated when you interact with API request Timeline.",
@@ -505,7 +516,10 @@
           }
       },
       "ProxyBackends": {
-          "apiUmbrella": {
+        "proxyId": {
+          "label": "Select one proxy"
+        },
+        "apiUmbrella": {
               "settings": {
                   "disable_api_key": {
                       "label": "Disable API key requirement"
@@ -614,6 +628,7 @@
   "userMenu_account": "Account",
   "userMenu_branding": "Branding",
   "userMenu_profile": "Profile",
+  "userMenu_proxies": "Proxies",
   "userMenu_settings": "Settings",
   "userMenu_signout": "Sign out",
   "viewApiNavigationMenu_backlog": "Backlog",
