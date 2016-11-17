@@ -358,6 +358,7 @@
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
   "removeProxy_modalLabel": "Are you sure that you want to remove proxy?",
+  "removeProxy_modalBody": "proxy backends are connected to this proxy. Removing the proxy will mean that API calls made to any of the connected API backends will break.",
   "removeProxy_confirmRemoveProxy": "Yes, remove",
   "removeProxy_cancelRemove": "Cancel",
   "requestsOverTimeChart_showingRecordsCount": "Showing records",
