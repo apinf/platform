@@ -1,20 +1,23 @@
 <template name="granularity">
-  <div id="date-granularity-selector" class="btn-group" data-toggle="buttons-radio">
-    <input type="radio" name="granularity" value="month" id="month-input" data-toggle="button" checked>
-    <label class="btn btn-default active" for="month-input">
+  <div class="btn-group" data-toggle="buttons" id="date-granularity-selector">
+    <label class="btn btn-default" for="month-input" id="month-granularity">
+      <input type="radio" name="granularity" value="month" checked>
       {{_ "tickButtons_month" }}
     </label>
-    <input type="radio" name="granularity" value="week" id="week-input" data-toggle="button">
-    <label class="btn btn-default" for="week-input">
+
+    <label class="btn btn-default" for="week-input" id="week-granularity">
+      <input type="radio" name="granularity" value="week">
       {{_ "tickButtons_week" }}
     </label>
-    <input type="radio" name="granularity" value="day" id="day-input" data-toggle="button">
-    <label class="btn btn-default" for="day-input">
+
+    <label class="btn btn-default" for="day-input" id="day-granularity">
+      <input type="radio" name="granularity" value="day">
       {{_ "tickButtons_day" }}
     </label>
-    <input type="radio" name="granularity" value="hour" id="hour-input" data-toggle="button">
-    <label class="btn btn-default" for="hour-input">
+
+    <label class="btn btn-default" for="hour-input" id="hour-granularity">
+      <input type="radio" name="granularity" value="hour">
       {{_ "tickButtons_hour" }}
     </label>
-</div>
+  </div>
 </template>
