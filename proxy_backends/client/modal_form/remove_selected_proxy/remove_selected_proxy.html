@@ -1,0 +1,48 @@
+<template name="removeSelectedProxy">
+  <div
+    class="modal fade"
+    id="removeSelectedProxyModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="removeSelectedProxyModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">
+              &times;
+            </span>
+          </button>
+          <h4>
+            {{_ 'removeSelectedProxy_title' }}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <strong>
+            {{_ "removeSelectedProxy_textCaution" }}
+          </strong>
+          {{_ 'removeSelectedProxy_textConfirm' }}
+        </div>
+        <div class="modal-footer">
+          <button
+            type="submit"
+            class="btn btn-danger"
+            id="confirm-remove-selected-proxy">
+            {{_ "removeSelectedProxy_buttonConfirm" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            id="cancel-remove-selected-proxy">
+            {{_ "removeSelectedProxy_buttonCancel" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
