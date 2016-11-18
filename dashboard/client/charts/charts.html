@@ -1,5 +1,4 @@
 <template name="dashboardCharts">
-  {{# if proxyBackendsAddedState }}
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-main-title">
@@ -38,10 +37,4 @@
       </div>
     </div>
   </div>
-  {{ else }}
-  <div class="alert alert-warning alert-text" role="alert">
-    {{_ 'dashboardCharts_placeholder_proxyBackendsNotFound'}}
-  </div>
-
-  {{/ if }}
-  </template>
+</template>
