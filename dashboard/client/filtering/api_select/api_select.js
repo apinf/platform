@@ -7,7 +7,7 @@ import $ from 'jquery';
 Template.apiSelectPicker.onRendered(function () {
   const instance = this;
 
-  instance.selectPickerElement = $('#api-frontend-prefix');
+  instance.selectPickerElement = $('#frontend-prefix');
 
   // Initialize select picker widget
   instance.selectPickerElement.selectpicker({});
