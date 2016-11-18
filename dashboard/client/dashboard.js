@@ -22,16 +22,6 @@ Template.dashboard.onCreated(function () {
   // Keeps date format for moment.js
   instance.dateFormatMoment = 'DD MMM YYYY';
 
-  instance.checkElasticsearch = function () {
-    return new Promise((resolve, reject) => {
-      Meteor.call('elasticsearchIsDefined', (err, res) => {
-        if (err) reject(err);
-
-        resolve(res);
-      });
-    });
-  };
-
   instance.getChartData = function (params) {
     return new Promise((resolve, reject) => {
       Meteor.call('getElasticSearchData', params, (err, res) => {
@@ -146,21 +136,10 @@ Template.dashboard.onCreated(function () {
       const proxyBackendsCount = ProxyBackends.find().count();
 
       if (proxyBackendsCount > 0) {
-        // Make a call
-        instance.checkElasticsearch()
-          .then((elasticsearchIsDefined) => {
-            if (elasticsearchIsDefined) {
-              instance.getChartData(params)
-                .then((chartData) => {
-                  // Update reactive variable
-                  instance.chartData.set(chartData);
-                })
-                .catch(err => console.error(err));
-            } else {
-              console.error('Elasticsearch is not defined!');
-
-              Router.go('/catalogue');
-            }
+        instance.getChartData(params)
+          .then((chartData) => {
+            // Update reactive variable
+            instance.chartData.set(chartData);
           })
           .catch(err => console.error(err));
       }
