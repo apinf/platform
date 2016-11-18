@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 import moment from 'moment';
 import dc from 'dc';
@@ -392,7 +393,19 @@ Template.dashboardCharts.onRendered(function () {
   $('#tick-hour').addClass('active');
 
   instance.autorun(() => {
+    // Get chart data, reactively
     const chartData = Template.currentData().chartData;
+
+    // Get granularity from URL parameter
+    const granularity = UniUtils.url.getQuery('granularity');
+
+    // Get date formats for D3 and moment
+    const timeStampFormatD3 = instance.analyticsTickDateFormat.d3[granularity];
+    const timeStampFormatMoment = instance.analyticsTickDateFormat.moment[granularity];
+
+    // Update charts tick based on URL parameters
+    instance.timeStampFormatD3.set(timeStampFormatD3);
+    instance.timeStampFormatMoment.set(timeStampFormatMoment);
 
     const frontendPrefix = instance.frontendPrefix.get();
 
@@ -423,7 +436,7 @@ Template.dashboardCharts.onRendered(function () {
 });
 
 Template.dashboardCharts.events({
-  'change #api-frontend-prefix-form': (event, templateInstance) => {
+  'change #frontend-prefix': (event, templateInstance) => {
     // Prevent default form submit
     event.preventDefault();
 
@@ -435,58 +448,6 @@ Template.dashboardCharts.events({
 
     // Set reactive variable
     templateInstance.frontendPrefix.set(frontendPrefix);
-  },
-  'click #tick-hour': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-hour').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.hour);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.hour);
-  },
-  'click #tick-day': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-day').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.day);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.day);
-  },
-  'click #tick-week': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-week').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.week);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.week);
-  },
-  'click #tick-month': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-month').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.month);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.month);
   },
 });
 
