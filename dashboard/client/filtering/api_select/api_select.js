@@ -1,17 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Roles } from 'meteor/alanning:roles';
 
-import _ from 'lodash'
+import $ from 'jquery';
 
 Template.apiSelectPicker.onRendered(function () {
-
   const instance = this;
 
   instance.selectPickerElement = $('#api-frontend-prefix');
 
   // Initialize select picker widget
   instance.selectPickerElement.selectpicker({});
-
 });
 
 Template.apiSelectPicker.helpers({
@@ -22,10 +21,10 @@ Template.apiSelectPicker.helpers({
     if (Roles.userIsInRole(userId, ['admin'])) {
       return {
         name: 'Proxy Admin API',
-        prefix: '/api-umbrella/'
-      }
+        prefix: '/api-umbrella/',
+      };
     }
 
     return {};
-  }
+  },
 });
