@@ -254,7 +254,6 @@
     "apiDetails_baseUrl_headingText": "Rajapinnan osoite",
     "apiDetails_description_headingText": "Kuvaus",
     "apiDetails_usageInstructions_headingText": "Tehd\u00e4ksesi kutsuja t\u00e4h\u00e4n rajapintaan voit:",
-    "apiDetails_usageInstructions_urlParameters_text": "kutsua rajapintaa antamalla avaimesi URL-parametrin\u00e4:",
     "apiDetails_usageInstructions_requestHeaders_text": "kutsua rajapintaa antamalla avaimesi pyynn\u00f6n otsikkotiedoissa:",
     "apiDocumentationEditor_notAvailable": "Dokumentaation muokkausohjelma ei ole saatavilla.",
     "apiDocumentation_APICall_Warning_Message": "Swaggerista tehdyt rajapintakutsut (PUT, POST ja DELETE) ovat todellisia kutsuja.",

@@ -59,14 +59,10 @@
           {{# if hasApiKey }}
             <!-- Proxy Backend is completed, "Disable api key" is false, user has got an api key -->
             <li>
-              {{_ "apiDetails_usageInstructions_urlParameters_text" }}
-              <i>{{ proxyUrl }}&lt;optional_path&gt;?api_key={{ apiKey }}</i>
-            </li>
-            <li>
               {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
               <span>
-            <i>X-Api-Key:</i> {{ apiKey }}
-        </span>
+                <i>X-Api-Key:</i> {{ apiKey }}
+              </span>
             </li>
           {{ else }}
             <!-- Proxy Backend is completed, "Disable api key" is false, user hasn't got an api key -->
