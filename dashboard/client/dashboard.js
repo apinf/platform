@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router';
 import { Roles } from 'meteor/alanning:roles';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
