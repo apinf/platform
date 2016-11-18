@@ -6,7 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
-import moment from 'moment';
 import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
