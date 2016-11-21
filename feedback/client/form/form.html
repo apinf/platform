@@ -18,7 +18,9 @@
         {{# autoForm
           id="feedbackForm"
           collection=feedbackCollection
-          type="insert" }}
+          type=formType
+          doc=feedbackItem
+        }}
           <div class="modal-body">
             <p>
               {{_ "feedback_feedbackForm_description" }}

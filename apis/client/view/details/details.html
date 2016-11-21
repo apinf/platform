@@ -1,7 +1,7 @@
 <template name="apiDetails">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2 class="panel-title clearfix">
+      <h2 id="details-title" class="panel-title clearfix">
         {{_ "viewApi_Details_Title" }}
       </h2>
     </div>
@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-lg-12 api-details-block">
           {{# if api.description }}
-            <h3>
+            <h3 id="description-title">
               {{_ "apiDetails_description_headingText" }}
             </h3>
             <p>
@@ -17,7 +17,7 @@
             </p>
             <hr class="panel-hr" />
           {{/ if }}
-            <h3>
+            <h3 id="api-url-title">
               {{_ "apiDetails_baseUrl_headingText" }}
             </h3>
             <div class="input-group">
@@ -59,14 +59,10 @@
           {{# if hasApiKey }}
             <!-- Proxy Backend is completed, "Disable api key" is false, user has got an api key -->
             <li>
-              {{_ "apiDetails_usageInstructions_urlParameters_text" }}
-              <i>{{ proxyUrl }}&lt;optional_path&gt;?api_key={{ apiKey }}</i>
-            </li>
-            <li>
               {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
               <span>
-            <i>X-Api-Key:</i> {{ apiKey }}
-        </span>
+                <i>X-Api-Key:</i> {{ apiKey }}
+              </span>
             </li>
           {{ else }}
             <!-- Proxy Backend is completed, "Disable api key" is false, user hasn't got an api key -->

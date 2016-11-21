@@ -4,11 +4,21 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { AutoForm } from 'meteor/aldeed:autoform';
 
 import { ProxyBackends } from '../../collection';
+import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
+import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
 AutoForm.hooks({
   proxyBackendForm: {
     before: {
       insert (proxyBackend) {
+        // No selected any proxy
+        if (proxyBackend && proxyBackend.proxyId === undefined) {
+          // Notify users about no selected proxy
+          const message = TAPi18n.__('proxyBackendForm_informText_noOneSelectedProxy');
+          sAlert.info(message)
+          return false;
+        }
+
         // Get reference to autoform instance, for form submission callback
         const form = this;
 
@@ -16,23 +26,26 @@ AutoForm.hooks({
         if (proxyBackend && proxyBackend.apiUmbrella) {
           const apiUmbrella = proxyBackend.apiUmbrella;
 
+          const requiredUrlMatches = apiUmbrella.url_matches &&
+            apiUmbrella.url_matches[0] &&
+            apiUmbrella.url_matches[0].frontend_prefix &&
+            apiUmbrella.url_matches[0].backend_prefix;
+
+          const requiredServers = apiUmbrella.servers && apiUmbrella.servers[0] &&
+            apiUmbrella.servers[0].host &&
+            apiUmbrella.servers[0].port;
+
           // Check all required fields have values
-          if (!(apiUmbrella.url_matches &&
-          apiUmbrella.url_matches[0] &&
-          apiUmbrella.url_matches[0].frontend_prefix &&
-          apiUmbrella.url_matches[0].backend_prefix) ||
-          !(apiUmbrella.servers && apiUmbrella.servers[0] &&
-          apiUmbrella.servers[0].host &&
-          apiUmbrella.servers[0].port)) {
+          if (!(requiredUrlMatches) || !(requiredServers)) {
             // Alert the user of missing values
             const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
             sAlert.error(errorMessage);
             // Cancel form
             return false;
           }
-          // Get API Umbrella configuration
+          // Create API backend on API Umbrella
           Meteor.call('createApiBackendOnApiUmbrella',
-            proxyBackend.apiUmbrella,
+            proxyBackend.apiUmbrella, proxyBackend.proxyId,
             (error, response) => {
               if (error) {
                 // Throw a Meteor error
@@ -62,7 +75,7 @@ AutoForm.hooks({
                   // Publish the API Backend on API Umbrella
                 Meteor.call(
                     'publishApiBackendOnApiUmbrella',
-                    umbrellaBackendId,
+                    umbrellaBackendId, proxyBackend.proxyId,
                     (error, result) => {
                       if (error) {
                         Meteor.throw(500, error);
@@ -76,27 +89,107 @@ AutoForm.hooks({
             });
         }
       },
-      update (proxyBackend) {
-        // Get updateDoc $set values
-        const updateDoc = proxyBackend.$set;
+      update (updateDoc) {
+        // Get proxyBackend $set values
+        const currentProxyBackend = updateDoc.$set;
 
-        if (updateDoc) {
+        if (currentProxyBackend) {
+          // Get API id
+          const apiId = currentProxyBackend.apiId;
+          // Get proxy backend id
+          const proxyBackendFromMongo = ProxyBackends.findOne({ apiId });
+
+          // User selected the first item
+          // Then delete proxy backend information from api umbrella
+          if (currentProxyBackend.proxyId === undefined) {
+            // Delete proxy backend information from api umbrella
+            deleteProxyBackendConfig(proxyBackendFromMongo)
+
+            return false;
+          }
+
           // Check all required fields have values
-          if (!(updateDoc['apiUmbrella.url_matches'] &&
-          updateDoc['apiUmbrella.url_matches'][0] &&
-          updateDoc['apiUmbrella.url_matches'][0].frontend_prefix &&
-          updateDoc['apiUmbrella.url_matches'][0].backend_prefix) ||
-          !(updateDoc['apiUmbrella.servers'] && updateDoc['apiUmbrella.servers'][0] &&
-          updateDoc['apiUmbrella.servers'][0].host &&
-          updateDoc['apiUmbrella.servers'][0].port)) {
+          const requiredUrlMatches = currentProxyBackend['apiUmbrella.url_matches'] &&
+            currentProxyBackend['apiUmbrella.url_matches'][0] &&
+            currentProxyBackend['apiUmbrella.url_matches'][0].frontend_prefix &&
+            currentProxyBackend['apiUmbrella.url_matches'][0].backend_prefix;
+
+          const requiredServers = currentProxyBackend['apiUmbrella.servers'] &&
+            currentProxyBackend['apiUmbrella.servers'][0] &&
+            currentProxyBackend['apiUmbrella.servers'][0].host &&
+            currentProxyBackend['apiUmbrella.servers'][0].port;
+
+          if (!(requiredUrlMatches) || !(requiredServers)) {
             // Alert the user of missing values
             const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
             sAlert.error(errorMessage);
             // Cancel form
             return false;
           }
+
+          const previousProxyId = proxyBackendFromMongo.proxyId;
+          const currentProxyId = currentProxyBackend.proxyId;
+
+          // TODO: In multi-proxy case. After changing proxy, onSuccess hook happens faster then umbrella id is got.
+          // Check: if user changed proxy
+          if (previousProxyId !== currentProxyId) {
+            // Delete information about proxy backend from the first proxy and insert in the
+            Meteor.call('deleteProxyBackend',
+              proxyBackendFromMongo, false,
+              function (error) {
+                if (error) {
+                  this.result(false);
+                }
+            });
+
+            const convertedProxyBackend = convertToApiUmbrellaObject(currentProxyBackend);
+
+            // Create API backend on API Umbrella
+            Meteor.call('createApiBackendOnApiUmbrella',
+              convertedProxyBackend.apiUmbrella, convertedProxyBackend.proxyId,
+              function (error, response) {
+                if (error) {
+                  // Throw a Meteor error
+                  sAlert.error(error)
+                  // sync return false;
+                  return false;
+                }
+
+                // If response has errors object, notify about it
+                if (response.errors && response.errors.default) {
+                  // Notify about error
+                  sAlert.error(response.errors.default[0]);
+                  // sync return false;
+                  return false;
+                }
+
+                // If success, attach API Umbrella backend ID to API
+                if (response.result && response.result.data && response.result.data.api) {
+                  // Get the API Umbrella ID for newly created backend
+                  const umbrellaBackendId = response.result.data.api.id;
+
+                  // Attach the API Umbrella backend ID to backend document
+                  convertedProxyBackend.apiUmbrella.id = umbrellaBackendId;
+
+                  // Publish the API Backend on API Umbrella
+                  Meteor.call('publishApiBackendOnApiUmbrella',
+                    umbrellaBackendId, convertedProxyBackend.proxyId,
+                    function (error) {
+                      if (error) {
+                        sAlert.error(error);
+                        // sync return false;
+                        return false;
+                      }
+                      // sync return the Proxy Backend document
+                      updateDoc.$set = convertedProxyBackend;
+                      return updateDoc;
+                    }
+                  );
+                }
+              });
+          }
         }
-        return proxyBackend;
+        return updateDoc;
       },
     },
     onSuccess (formType, result) {
@@ -113,8 +206,7 @@ AutoForm.hooks({
         // Update API on API Umbrella
         Meteor.call(
           'updateApiBackendOnApiUmbrella',
-          apiUmbrellaBackend.id,
-          apiUmbrellaBackend,
+          apiUmbrellaBackend, proxyBackend.proxyId,
           (error) => {
             // Check for error
             if (error) {
@@ -125,7 +217,7 @@ AutoForm.hooks({
               // Publish the API Backend on API Umbrella
               Meteor.call(
                 'publishApiBackendOnApiUmbrella',
-                apiUmbrellaBackend.id,
+                apiUmbrellaBackend.id, proxyBackend.proxyId,
                 (error, result) => {
                   if (error) {
                     Meteor.throw(500, error);

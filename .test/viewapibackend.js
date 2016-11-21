@@ -51,7 +51,7 @@ test.describe('View API Backend', function() {
         driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div/div[3]/select/option[@value="Feedback"])[2]')).click();
         driver.findElement(By.xpath('(//form[@id="feedbackForm"]/div[2]/button)[2]')).click();
 
-        var feedbackSuccessElement = driver.findElement(By.xpath('//*[@id="home"]/div/div[1]/div[3]/span'));
+        var feedbackSuccessElement = driver.findElement(By.xpath('//*[@id="feedback-tab-pane"]/div/div[1]/div[3]/span'));
         feedbackSuccessElement.getText().then(function(text) {
             assert.include(text, 'Test Feedback');
         });

@@ -1,5 +1,5 @@
 <template name="editApiMetadata">
-  <button type="button"
+  <button id="edit-metadata" type="button"
     class="btn btn-info btn-xs pull-right"
     data-toggle="modal"
     data-target="#apiMetadataModal"
@@ -27,7 +27,7 @@
           {{# if metadata }}
           {{> quickForm
             collection=apiMetadataCollection
-            id="updateApiMetadataForm"
+            id="editApiMetadataForm"
             type="update"
             doc=metadata
             omitFields="apiBackendId"

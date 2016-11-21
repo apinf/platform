@@ -12,8 +12,10 @@
           </div>
           <div class="panel-body">
             {{# if branding }}
-            {{> viewProjectLogo branding=branding }}
-            {{> uploadProjectLogo branding=branding }}
+              {{> viewProjectLogo branding=branding }}
+              {{> uploadProjectLogo branding=branding }}
+              {{> viewCoverPhoto branding=branding }}
+              {{> uploadCoverPhoto branding=branding }}
             {{# autoForm
               id="brandingEdit"
               type="update"

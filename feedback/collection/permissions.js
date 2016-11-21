@@ -1,4 +1,3 @@
-import { Apis } from '/apis/collection';
 import { Feedback } from './';
 
 Feedback.allow({
@@ -12,24 +11,10 @@ Feedback.allow({
   },
   update (userId, feedback) {
     // Check if user is allowed to edit feedback
-    if (feedback && feedback.apiBackendId) {
-      const api = Apis.findOne(feedback.apiBackendId);
-      // Check api exists
-      if (api) {
-        return api.currentUserCanEdit();
-      }
-    }
-    return false;
+    return (feedback && feedback.currentUserCanEdit());
   },
   remove (userId, feedback) {
     // Check if user is allowed to edit feedback
-    if (feedback && feedback.apiBackendId) {
-      const api = Apis.findOne(feedback.apiBackendId);
-      // Check api exists
-      if (api) {
-        return api.currentUserCanEdit();
-      }
-    }
-    return false;
+    return (feedback && feedback.currentUserCanEdit());
   },
 });

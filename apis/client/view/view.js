@@ -5,6 +5,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 // Apinf imports
 import { Apis } from '/apis/collection';
+import { Feedback } from '/feedback/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
@@ -17,6 +18,9 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to a single API Backend, by ID
   instance.subscribe('apiBackend', instance.apiId);
+
+  // Subscribe to API feedback items for this API Backend
+  instance.subscribe('apiBackendFeedback', instance.apiId);
 
   // Subscribe to API Backlog items for this API Backend
   instance.subscribe('apiBacklogItems', instance.apiId);
@@ -77,6 +81,22 @@ Template.viewApi.helpers({
     ).fetch();
 
     return backlogItems;
+  },
+  feedbackItems () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get API ID
+    const apiId = instance.apiId;
+
+    // Fetch all feedback items for a specific API Backend
+    // Sort by created date
+    const feedbackItems = Feedback.find(
+      { apiBackendId: apiId },
+      { sort: { createdAt: -1 } }
+    ).fetch();
+
+    return feedbackItems;
   },
   proxyIsConfigured () {
     // Get count of Proxies
