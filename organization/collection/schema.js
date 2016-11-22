@@ -66,6 +66,8 @@ Organizations.schema = new SimpleSchema({
       if (this.isUpdate) {
         return new Date();
       }
+
+      this.unset();
     },
   },
 });
