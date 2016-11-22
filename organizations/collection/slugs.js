@@ -1,3 +1,8 @@
 import { Organizations } from './';
 
-Organizations.friendlySlugs('name');
+Organizations.friendlySlugs({
+  slugFrom: 'name',
+  slugField: 'slug',
+  createOnUpdate: true,
+  distinct: true,
+});
