@@ -14,9 +14,6 @@ Organizations.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url,
   },
-  username: {
-    type: String,
-  },
   description: {
     type: String,
     max: 1000,
