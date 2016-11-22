@@ -1,86 +1,58 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+  - [Build](#build)
+  - [Docker image](#docker-image)
+- [Links](#links)
+- [API Umbrella Dashboard](#api-umbrella-dashboard)
+- [Development status](#development-status)
+- [Nightly build](#nightly-build)
+- [Contributing](#contributing)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/api-umbrella-dashboard/develop/LICENSE) 
+[![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/) 
 [![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
+[![Open Development Method badge](https://camo.githubusercontent.com/9065d5a7f38cb53b9934c0f1b15087e177360af6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446576656c6f706d656e742532304d6574686f642d4f70656e2d626c75652e737667)](https://opendevelopmentmethod.org/)
+
+## Build
+
+[![Build Status](https://travis-ci.org/apinf/platform.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/platform)
+
+## Docker image
+
+[![](https://images.microbadger.com/badges/image/apinf/platform.svg)](http://microbadger.com/images/platform/apinf) [![](https://images.microbadger.com/badges/version/apinf/platform.svg)](http://microbadger.com/images/apinf/platform)
+
+# Links
+- [Documentation](http://apinf.org/docs) - APInf documentation
+- [Discussion](http://community.apinf.io) - APInf discussion
+- [Apinf Hackpad](http://apinf.hackpad.com) - Planning documents, meeting minutes
+- [Sprint planning](https://waffle.io/apinf/api-umbrella-dashboard) - waffle.io sprint plans
 
 # API Umbrella Dashboard
 The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
 
 For API consumers APInf provides simple key management, key usage analytics and API discovery along with API documentation. Managers have simplified workflow for common tasks, such as key management, rate limiting and viewing API usage analytics.
 
-# Documentation
-
-All planning documents, meeting minutes, etc. can be found on the [Apinf Hackpad](http://apinf.hackpad.com).
 
 # Development status
 [![Stories in Ready](https://badge.waffle.io/apinf/api-umbrella-dashboard.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
 
 [![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
 
-# Architecture and ecosystem
-Diagrams of the Apinf minimum viable product (MVP) architecture and ecosystem.
+## Source code visualization
+Our project source code has changed throughout the project lifespan.
 
-![System diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/outreach/system-diagram-simplified.svg)
+[![source code structure](https://ia601503.us.archive.org/33/items/ApinfDevelopmentActivityUpTo0.33.1/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1)
 
-![Technology stack](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/outreach/technology-stack.svg)
-
-For the ecosystem, we will concentrate on open APIs in the MVP phase. For the API consumer side, there are two API consumer personas: [Jukka and Minh](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/UX/APINF%20consumer%20personas.pdf). API owner personas to be added later.
-
-![Ecosystem diagram](https://cdn.rawgit.com/apinf/api-umbrella-dashboard/master/docs/APINF_MVP_ecosystem.svg)
-
-# Installation
-
-1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
-2. Install [Meteor.js](https://www.meteor.com/install)
-3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
-4. Create [`settings.json`](#Settings.json)
-5. Type `meteor --settings /path/to/settings.json` in the project directory
-
-# Settings.json
-
-Your `settings.json` file should have the following structure:
-
-```
-{
-  "apiUmbrella": {
-    "apiKey": "xxx",
-    "authToken": "xxx",
-    "baseUrl": "https://example.com/api-umbrella/",
-    "host": "https://example.com"
-  },
-  "mail": {
-    "username": "xxx",
-    "password": "xxx"
-  },
-  "elasticsearch": {
-    "host": "http://example.com:14002/"
-  },
-  "githubConfiguration": {
-    "clientId" : "xxx",
-    "secret" : "xxx"
-  }
-}
-```
-
-## api_umbrella
-The `api_umbrella` settings include an API Key, Admin Auth Token, and API Umbrella base URL. You can get the API Key and Admin Auth Token from API Umbrella, by following the instructions in the [Meteor - API Umbrella integration package](https://github.com/brylie/meteor-api-umbrella#installation).
-
-## mail
-The mail object contains a username and password for the Mailgun service. You will need to register with Mailgun. Once registered, you can use your 'sandbox' domain credentials in a development environment or a custom domain in production:
-
-* Default SMTP Login
-* Default Password
-
-For up-to-date instructions, refer to the [Mailgun Help Center](https://help.mailgun.com/hc/en-us)
-
-## elasticsearch
-Elasticsearch takes a host value that contains the host and port of the API Umbrella ElasticSearch instance. In a standard API Umbrella deployment, this will be the same as the API Umbrella base URL, with port number 14002. **Note:** Elastic REST API may be exposed via HTTP instead of HTTPS, so double check the protocol.
-
-## githubConfiguration
-The Github configuration takes two values, a Client ID and Secret key. You can obtain these values by setting up a Github application from your Github user account.
+See the [high definition video (with music) of Apinf Development Activity up to version 0.33.1](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1) on the Internet Archive.
 
 # Nightly build
-You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io).
-
-* username: test@test.test
-* password: testuser
+You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.
 
 # Contributing
-Please review our [Contributor Guid](https://github.com/apinf/docs/blob/master/docs/develop/contributing.md) for details on how to get involved with the project.
+Please review our [Contributor Guide](https://github.com/apinf/platform/blob/develop/CONTRIBUTING.md) for details on how to get involved with the project.
+
+Please follow guidelines for community involvement in our [Code of Conduct](https://github.com/apinf/platform/blob/develop/CODE_OF_CONDUCT.md)

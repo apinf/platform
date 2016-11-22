@@ -1,0 +1,11 @@
+<template name="feedbackList">
+  {{# if feedbackItems }}
+    {{# each item in feedbackItems }}
+      {{> feedbackItem item=item api=api }}
+    {{/ each }}
+  {{ else }}
+    <i>
+      {{_ "feedback_no_feedback" }}
+    </i>
+  {{/ if }}
+</template>

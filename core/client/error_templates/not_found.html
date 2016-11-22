@@ -1,0 +1,18 @@
+<template name="notFound">
+  <div class="container">
+    <div class="error-page">
+      <h2 class="text-warning"> 404</h2>
+      <div class="error-content">
+        <h3>
+          <i class="fa fa-warning text-warning"></i>
+          {{_ "notFound_Title" }}
+        </h3>
+        <p>
+          {{_ "notFound_Message_Part1" }}
+          <br>
+          {{> goBackButton }}
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
