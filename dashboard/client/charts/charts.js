@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 import moment from 'moment';
 import dc from 'dc';
@@ -13,10 +14,10 @@ Template.dashboardCharts.onCreated(function () {
   const instance = this;
 
   // Variable that keeps table data
-  instance.tableDataSet = new ReactiveVar([]);
+  instance.tableData = new ReactiveVar([]);
 
-  // Variable that keeps api frontend prefix list
-  instance.apiFrontendPrefixList = new ReactiveVar();
+  // Variable that keeps frontend prefix
+  instance.frontendPrefix = new ReactiveVar();
 
   // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
@@ -94,9 +95,11 @@ Template.dashboardCharts.onCreated(function () {
       return statusCodeScope;
     });
 
-    const statusCodeGroup = statusCodeDimension.group(); // Create status code group
+    // Create status code group
+    const statusCodeGroup = statusCodeDimension.group();
 
-    const binwidth = 50; // Init binwidth for a bar chart
+    // Init binwidth for a bar chart
+    const binwidth = 50;
 
     // Get MIN and MAX response time values
     const minResponseTime = d3.min(items, (d) => d.fields.response_time[0]);
@@ -236,9 +239,9 @@ Template.dashboardCharts.onCreated(function () {
     instance.updateStatisticsData(chartData);
   };
 
-  // Function that gets and parsed data for table
-  instance.getTableData = (chartData) => {
-    const tableDataSet = [];
+  // Function that updates table data
+  instance.updateDataTable = (chartData) => {
+    const tableData = [];
 
     _.forEach(chartData, (e) => {
       let time;
@@ -249,7 +252,7 @@ Template.dashboardCharts.onCreated(function () {
       let responseStatus;
 
       // Error handling for empty fields
-      try { time = moment(e.fields.request_at[0]).format('D/MM/YYYY HH:mm:ss'); }
+      try { time = moment(e.fields.request_at[0]).toISOString(); }
       catch (err) { time = ''; }
 
       try { country = e.fields.request_ip_country[0]; }
@@ -267,16 +270,10 @@ Template.dashboardCharts.onCreated(function () {
       try { responseStatus = e.fields.response_status[0]; }
       catch (e) { responseStatus = ''; }
 
-      tableDataSet.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
+      tableData.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
     });
 
-    return tableDataSet;
-  };
-
-  // Function that updates table data
-  instance.updateDataTable = (chartData) => {
-    const tableData = instance.getTableData(chartData);
-    instance.tableDataSet.set(tableData);
+    instance.tableData.set(tableData);
   };
 
   // Function that updates time scale for line chart
@@ -292,22 +289,20 @@ Template.dashboardCharts.onCreated(function () {
     }
   };
 
-  // Function that fiters data based on frontend prefixes
-  instance.filterData = (items, apiFrontendPrefixList) => {
-    instance.updateStatisticsData(items);
+  // Function that fiters analytics data based on frontend prefix
+  instance.filterData = (requests, frontendPrefix) => {
+    instance.updateStatisticsData(requests);
 
     // Filter data based on matches with API frontend prefix
-    return _.filter(items, (item) => {
-      // Variable to hold request path
-      const requestPath = item.fields.request_path[0];
+    const matchingProxyRequests = _.filter(requests, (request) => {
+      // Get request path for comparison
+      const requestPath = request.fields.request_path[0];
 
-      // Array to hold matched API frontend prefix
-      const itemMatchingApiFrontendPrefix = _.filter(apiFrontendPrefixList, (apiFrontendPrefix) =>
-        requestPath.startsWith(apiFrontendPrefix));
-
-      // Check if API frontend prefix mathed the request path
-      return itemMatchingApiFrontendPrefix.length;
+      // Check if request path matches frontent prefix
+      return (requestPath === frontendPrefix);
     });
+
+    return matchingProxyRequests;
   };
 
   // Functions that updates statistics data
@@ -398,19 +393,28 @@ Template.dashboardCharts.onRendered(function () {
   $('#tick-hour').addClass('active');
 
   instance.autorun(() => {
+    // Get chart data, reactively
     const chartData = Template.currentData().chartData;
-    const chartDataIsLoading = Template.currentData().loadingState;
-    const apiFrontendPrefixList = instance.apiFrontendPrefixList.get();
 
-    if (chartDataIsLoading) {
-      // Set loader
-      chartElements.addClass('loader');
-    } else if (chartData && chartData.length > 0) {
+    // Get granularity from URL parameter
+    const granularity = UniUtils.url.getQuery('granularity');
+
+    // Get date formats for D3 and moment
+    const timeStampFormatD3 = instance.analyticsTickDateFormat.d3[granularity];
+    const timeStampFormatMoment = instance.analyticsTickDateFormat.moment[granularity];
+
+    // Update charts tick based on URL parameters
+    instance.timeStampFormatD3.set(timeStampFormatD3);
+    instance.timeStampFormatMoment.set(timeStampFormatMoment);
+
+    const frontendPrefix = instance.frontendPrefix.get();
+
+  if (chartData && chartData.length > 0) {
       let parsedData = [];
 
-      if (apiFrontendPrefixList) {
-        // Filter data by api frontend prefix
-        const filteredData = instance.filterData(chartData, apiFrontendPrefixList);
+      if (frontendPrefix) {
+        // Filter data by frontend prefix
+        const filteredData = instance.filterData(chartData, frontendPrefix);
 
         // Parse data for charts
         parsedData = instance.parseChartData(filteredData);
@@ -418,9 +422,6 @@ Template.dashboardCharts.onRendered(function () {
         // Parse data for charts
         parsedData = instance.parseChartData(chartData);
       }
-
-      // Unset loader
-      $('.charts-holder>#no-chart-data-placeholder').remove();
 
       // Render charts
       instance.renderCharts(parsedData);
@@ -431,14 +432,11 @@ Template.dashboardCharts.onRendered(function () {
       // throw user-friendly message
       $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
     }
-
-    // Unset loader
-    chartElements.removeClass('loader');
   });
 });
 
 Template.dashboardCharts.events({
-  'change #api-frontend-prefix-form': (event) => {
+  'change #frontend-prefix': (event, templateInstance) => {
     // Prevent default form submit
     event.preventDefault();
 
@@ -446,69 +444,18 @@ Template.dashboardCharts.events({
     const instance = Template.instance();
 
     // Get selected value
-    const apiFrontendPrefixList = $('#api-frontend-prefix').val();
+    const frontendPrefix = event.target.value;
 
     // Set reactive variable
-    instance.apiFrontendPrefixList.set(apiFrontendPrefixList);
-  },
-  'click #tick-hour': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-hour').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.hour);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.hour);
-  },
-  'click #tick-day': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-day').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.day);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.day);
-  },
-  'click #tick-week': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-week').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.week);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.week);
-  },
-  'click #tick-month': () => {
-    // Remove class from previous selection
-    $('#tick-hour, #tick-day, #tick-week, #tick-month').removeClass('active');
-
-    // Add active class to current button
-    $('#tick-month').addClass('active');
-
-    const instance = Template.instance();
-
-    // Update charts tick based on new date format
-    instance.timeStampFormatD3.set(instance.analyticsTickDateFormat.d3.month);
-    instance.timeStampFormatMoment.set(instance.analyticsTickDateFormat.moment.month);
+    templateInstance.frontendPrefix.set(frontendPrefix);
   },
 });
 
 Template.dashboardCharts.helpers({
-  tableDataSet () {
+  tableData () {
     const instance = Template.instance();
-    return instance.tableDataSet.get();
+
+    return instance.tableData.get();
   },
   statisticsData () {
     const instance = Template.instance();
