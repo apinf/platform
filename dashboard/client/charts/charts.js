@@ -447,12 +447,16 @@ Template.dashboardCharts.events({
     // Get selected value
     const frontendPrefix = event.target.value;
 
+    // TODO: Case is when Proxy Admin API is selected, which proxy is?
     // Find proxy id of selected api
     const proxyBackend = ProxyBackends.findOne({ 'apiUmbrella.url_matches.0.frontend_prefix': frontendPrefix });
 
     if (proxyBackend && proxyBackend.proxyId) {
       // Save the proxy id in query parameters
       UniUtils.url.setQuery('proxyId', proxyBackend.proxyId);
+    } else {
+      // Unset the proxy id in query parameters
+      UniUtils.url.setQuery('proxyId', '');
     }
 
     // Set reactive variable
