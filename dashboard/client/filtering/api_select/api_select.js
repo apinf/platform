@@ -28,3 +28,9 @@ Template.apiSelectPicker.helpers({
     return {};
   },
 });
+
+Template.apiSelectPicker.events({
+  'change #api-frontend-prefix': function (event, templateInstance) {
+    console.log(event.target.value);
+  }
+});
