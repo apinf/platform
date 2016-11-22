@@ -1,0 +1,25 @@
+<template name="addOrganization">
+  <div class="container">
+    {{# autoForm collection=OrganizationsCollection id="addOrganizationForm" type="insert" }}
+      <fieldset>
+        <legend>Add an Organization</legend>
+        {{> afQuickField name='name' }}
+        {{> afQuickField name='url' }}
+        {{> afQuickField name='description' }}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Contact
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='contact.person' }}
+            {{> afQuickField name='contact.phone' }}
+            {{> afQuickField name='contact.email' }}
+          </div>
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">
+        Create organization
+      </button>
+    {{/ autoForm }}
+  </div>
+</template>
