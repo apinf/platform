@@ -149,6 +149,7 @@ templating-compiler@1.2.15
 templating-runtime@1.2.15
 templating-tools@1.0.5
 tmeasday:publish-counts@0.8.0
+todda00:friendly-slugs@0.6.0
 tracker@1.1.1
 twbs:bootstrap@3.3.6
 ui@1.0.12
