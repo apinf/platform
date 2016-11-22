@@ -1,13 +1,14 @@
 <template name="dashboardChartsFiltering">
-  {{# if Template.subscriptionsReady }}
-    {{> apiSelectPicker userApis=userApis otherApis=otherApis }}
-  {{/ if }}
+  <div class="row no-margin-row">
+    {{> apiSelectPicker proxyBackends=proxyBackends }}
 
-  <div class="pull-right">
-    {{> granularity }}
-  </div>
 
-  <div class="pull-right">
-    {{> timeFrameSelectPicker }}
+    <div class="pull-right">
+      {{> granularity }}
+    </div>
+
+    <div class="pull-right">
+      {{> timeFrameSelectPicker }}
+    </div>
   </div>
 </template>

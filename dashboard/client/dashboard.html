@@ -4,6 +4,8 @@
       {{_ "dashboard_mainTitle" }}
     </h1>
     {{# if isInRole 'admin, manager' }}
+      {{> dashboardChartsFiltering }}
+
       {{> dashboardCharts chartData=chartData }}
     {{ else }}
       {{> dashboardNoApis }}
