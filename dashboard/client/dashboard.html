@@ -1,5 +1,8 @@
 <template name="dashboard">
   <div class="container">
+    <h1 class="page-main-title">
+      {{_ "dashboard_mainTitle" }}
+    </h1>
     {{# if isInRole 'admin, manager' }}
       {{> dashboardCharts chartData=chartData }}
     {{ else }}
