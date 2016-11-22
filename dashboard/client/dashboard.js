@@ -150,4 +150,10 @@ Template.dashboard.helpers({
 
     return instance.chartData.get();
   },
+  proxyBackends () {
+    // Fetch proxy backends
+    const proxyBackends = ProxyBackends.find().fetch();
+
+    return proxyBackends;
+  }
 });
