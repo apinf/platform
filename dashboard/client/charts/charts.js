@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { UniUtils } from 'meteor/universe:reactive-queries';
+import { ProxyBackends } from '/proxy_backends/collection';
 
 import moment from 'moment';
 import dc from 'dc';
@@ -445,6 +446,14 @@ Template.dashboardCharts.events({
 
     // Get selected value
     const frontendPrefix = event.target.value;
+
+    // Find proxy id of selected api
+    const proxyBackend = ProxyBackends.findOne({ 'apiUmbrella.url_matches.0.frontend_prefix': frontendPrefix });
+
+    if (proxyBackend && proxyBackend.proxyId) {
+      // Save the proxy id in query parameters
+      UniUtils.url.setQuery('proxyId', proxyBackend.proxyId);
+    }
 
     // Set reactive variable
     templateInstance.frontendPrefix.set(frontendPrefix);
