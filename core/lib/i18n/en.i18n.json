@@ -17,6 +17,7 @@
   "account_delete_title": "Delete account",
   "account_details": "Account Details",
   "addApi_button_text": "Add API",
+  "addApi_header": "Add an API",
   "addApiBacklogItem_addBacklogItem_button": "Add backlog item",
   "addApiBacklogItem_modalTitle": "Add backlog item",
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
