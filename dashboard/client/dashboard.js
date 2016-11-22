@@ -58,7 +58,7 @@ Template.dashboard.onCreated(function () {
     }
 
     // Check if user has an admin role
-    if (Roles.userIsInRole(userId, ['admin'])) {
+    if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       // Add query for API Umbrella analytics data
       prefixesQuery.push({
         wildcard: {
