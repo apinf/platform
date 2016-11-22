@@ -54,9 +54,9 @@ Organizations.schema = new SimpleSchema({
         return new Date();
       } else if (this.isUpsert) {
         return { $setOnInsert: new Date() };
-      } else {
-        this.unset();  // Prevent user from supplying their own value
       }
+      // Prevent user from supplying their own value
+      this.unset();
     },
   },
   updated_at: {
