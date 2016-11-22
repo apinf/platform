@@ -6,11 +6,7 @@ Organizations.helpers({
     // Get current userId
     const userId = Meteor.userId();
 
-    // Check if oranization
-    if (this.createdBy === userId) {
-      return true;
-    }
-
-    return false;
+    // Check if oranization was added by current user
+    return this.createdBy === userId;
   },
 });
