@@ -19,9 +19,9 @@ Template.dashboard.onCreated(function () {
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
 
-  instance.getChartData = function (params) {
+  instance.getChartData = function (params, proxyId) {
     return new Promise((resolve, reject) => {
-      Meteor.call('getElasticSearchData', params, (err, res) => {
+      Meteor.call('getElasticSearchData', params, proxyId, (err, res) => {
         if (err) reject(err);
         resolve(res.hits.hits);
       });
@@ -56,6 +56,8 @@ Template.dashboard.onCreated(function () {
         };
       });
     }
+
+    const userId = Meteor.userId;
 
     // Check if user has an admin role
     if (Roles.userIsInRole(userId, ['admin'])) {
@@ -131,9 +133,11 @@ Template.dashboard.onCreated(function () {
 
       // Check if proxyBackendsCount
       const proxyBackendsCount = ProxyBackends.find().count();
+      // GEt proxy id
+      const proxyId = UniUtils.url.getQuery('proxyId');
 
-      if (proxyBackendsCount > 0) {
-        instance.getChartData(params)
+      if (proxyBackendsCount > 0 && proxyId) {
+        instance.getChartData(params, proxyId)
           .then((chartData) => {
             // Update reactive variable
             instance.chartData.set(chartData);

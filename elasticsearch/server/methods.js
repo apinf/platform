@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
-import { Settings } from '/settings/collection';
 import ElasticSearch from 'elasticsearch';
 
 Meteor.methods({
-  getElasticSearchData (opts) {
+  getElasticSearchData (opts, proxyId) {
     // Check if user is authorised
     if (Meteor.user()) {
-      const host = Meteor.call('getElasticsearchUrl');
+      const host = Meteor.call('getElasticsearchUrl', proxyId);
+      console.log('getElasticsearchUrl: ', host)
 
       const esClient = new ElasticSearch.Client({ host }); // Init ES client
 
@@ -18,8 +18,6 @@ Meteor.methods({
       });
     } else {
       throw new Meteor.Error('User is not authorised.');
-
-      return false;
     }
   },
 });
