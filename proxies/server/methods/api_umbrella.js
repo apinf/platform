@@ -247,9 +247,9 @@ Meteor.methods({
       );
     }
   },
-  elasticsearchIsDefined () {
+  elasticsearchIsDefined (proxyId) {
     // TODO: multi-proxy support
-    const proxy = Proxies.findOne();
+    const proxy = Proxies.findOne(proxyId);
 
     if (proxy) {
       const elasticsearch = proxy.apiUmbrella.elasticsearch;
@@ -260,10 +260,10 @@ Meteor.methods({
 
     return false;
   },
-  getElasticsearchUrl () {
-    if (Meteor.call('elasticsearchIsDefined')) {
+  getElasticsearchUrl (proxyId) {
+    if (Meteor.call('elasticsearchIsDefined', proxyId)) {
       // TODO: multi-proxy support
-      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
+      const elasticsearch = Proxies.findOne(proxyId).apiUmbrella.elasticsearch;
 
       return elasticsearch;
     }
