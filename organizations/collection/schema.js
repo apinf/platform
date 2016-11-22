@@ -6,6 +6,11 @@ Organizations.schema = new SimpleSchema({
   name: {
     type: String,
   },
+  slug: {
+    type: String,
+    label: 'slug',
+    optional: true,
+  },
   url: {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
