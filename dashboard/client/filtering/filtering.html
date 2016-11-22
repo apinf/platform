@@ -1,14 +1,16 @@
 <template name="dashboardChartsFiltering">
   <div class="row no-margin-row">
-    {{> apiSelectPicker proxyBackends=proxyBackends }}
+    <form class="form-inline">
+      {{> apiSelectPicker proxyBackends=proxyBackends }}
 
 
-    <div class="pull-right">
-      {{> granularity }}
-    </div>
+      <div class="pull-right">
+        {{> granularity }}
+      </div>
 
-    <div class="pull-right">
-      {{> timeFrameSelectPicker }}
-    </div>
+      <div class="pull-right">
+        {{> timeFrameSelectPicker }}
+      </div>
+    </form>
   </div>
 </template>
