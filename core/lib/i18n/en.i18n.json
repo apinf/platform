@@ -552,6 +552,29 @@
                   }
               }
           }
+      },
+      "organizations": {
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "URL super"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "contact": {
+              "label": "Contact",
+              "person": {
+                "label": "Name"
+              },
+              "phone": {
+                "label": "Phone number"
+              },
+              "email": {
+                "label": "Email"
+              }
+          }
       }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
