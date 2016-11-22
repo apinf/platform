@@ -2,17 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 
-import $ from 'jquery';
-
-Template.apiSelectPicker.onRendered(function () {
-  const instance = this;
-
-  instance.selectPickerElement = $('#frontend-prefix');
-
-  // Initialize select picker widget
-  instance.selectPickerElement.selectpicker({});
-});
-
 Template.apiSelectPicker.helpers({
   apiUmbrellaOption () {
     // Get current user Id
