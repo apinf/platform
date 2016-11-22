@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 Template.apiSelectPicker.helpers({
   apiUmbrellaOption () {
@@ -19,7 +20,11 @@ Template.apiSelectPicker.helpers({
 });
 
 Template.apiSelectPicker.events({
-  'change #api-frontend-prefix': function (event, templateInstance) {
-    console.log(event.target.value);
-  }
+  'change #proxy-backend-select': function (event) {
+    // Get value of
+    const backend = event.target.value;
+
+    // Update selected backend URL parameter
+    UniUtils.url.setQuery('backend', backend);
+  },
 });
