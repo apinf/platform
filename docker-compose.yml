@@ -1,0 +1,65 @@
+version: '2'
+services:
+  apinf:
+    image: apinf/platform
+    restart: always
+    mem_limit: 300m
+    env_file:
+      - 'docker/apinf/env'
+    environment:
+      - MONGO_URL=mongodb://mongo/apinf_db
+    depends_on:
+      - mongo
+      - ssl
+    links:
+      - elasticsearch:elasticsearch.docker
+  apiumbrella:
+    image: nrel/api-umbrella:0.13.0
+    restart: always
+    mem_limit: 800m
+    command: bash -c "apt-get update && apt-get install -qq -y --no-install-recommends curl && api-umbrella run"
+    volumes:
+      - ./docker/api-umbrella/config:/etc/api-umbrella
+      - letsencrypt:/etc/letsencrypt
+      - apiumbrella_db:/opt/api-umbrella/var/db
+      - apiumbrella_log:/opt/api-umbrella/var/log
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+    depends_on:
+      - ssl
+    links:
+      - elasticsearch:elasticsearch.docker
+  mongo:
+    restart: always
+    mem_limit: 200m
+    image: mongo:3.2.6
+    command: --storageEngine wiredTiger
+  ssl:
+    restart: always
+    image: opencapacity/lets-nginx:1.3
+    env_file:
+      - 'docker/ssl/env'
+    environment:
+      - UPSTREAM=apinf:3000
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - letsencrypt_backups:/var/lib/letsencrypt
+      - dhparam_cache:/cache
+  elasticsearch:
+    image: elasticsearch:2.4
+    restart: always
+    mem_limit: 300m
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    command: elasticsearch -Des.index.max_result_window=50000
+volumes:
+    letsencrypt: {}
+    letsencrypt_backups: {}
+    dhparam_cache: {}
+    elasticsearch_data: {}
+    apiumbrella_db: {}
+    apiumbrella_log: {}

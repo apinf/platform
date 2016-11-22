@@ -1,0 +1,41 @@
+<template name="feedbackForm">
+  <div
+    class="modal fade"
+    id="feedbackFormModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="feedbackFormModalLabel" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="feedbackFormModalLabel">
+            {{_ "feedback_feedbackForm_title" }}
+          </h4>
+        </div>
+        {{# autoForm
+          id="feedbackForm"
+          collection=feedbackCollection
+          type=formType
+          doc=feedbackItem
+        }}
+          <div class="modal-body">
+            <p>
+              {{_ "feedback_feedbackForm_description" }}
+            </p>
+            {{> afQuickField name='topic' }}
+            {{> afQuickField name='message' rows=4 }}
+            {{> afQuickField name='messageType' }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              {{_ "feedback_sendFeedback" }}
+            </button>
+          </div>
+        {{/ autoForm }}
+      </div>
+    </div>
+  </div>
+</template>

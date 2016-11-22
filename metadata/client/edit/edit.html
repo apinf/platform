@@ -1,0 +1,49 @@
+<template name="editApiMetadata">
+  <button id="edit-metadata" type="button"
+    class="btn btn-info btn-xs pull-right"
+    data-toggle="modal"
+    data-target="#apiMetadataModal"
+    data-backdrop="static"
+    data-keyboard="false">
+      <i class="fa fa-book"></i>&nbsp;
+      {{_ "editApiMetadata_editButton" }}
+  </button>
+  <div class="modal fade"
+    id="apiMetadataModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="editMetadataFormLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editMetadataFormLabel">
+            <i class="fa fa-book"></i>&nbsp;
+            {{_ "editApiMetadata_editApiMetadataForm_title" }}
+          </h4>
+        </div>
+        <div class="modal-body">
+          {{# if metadata }}
+          {{> quickForm
+            collection=apiMetadataCollection
+            id="editApiMetadataForm"
+            type="update"
+            doc=metadata
+            omitFields="apiBackendId"
+            buttonContent=submitButtonText
+          }}
+          {{ else }}
+          {{> quickForm
+            collection=apiMetadataCollection
+            id="editApiMetadataForm"
+            type="insert"
+            omitFields="apiBackendId"
+            buttonContent=submitButtonText
+          }}
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

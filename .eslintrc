@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 7
+  },
+  "plugins": [
+    "meteor"
+  ],
+  "extends": [
+    "airbnb-base",
+    "plugin:meteor/recommended"
+  ],
+  "settings": {
+    "import/resolver": "meteor"
+  },
+  "rules": {
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
+    "import/no-extraneous-dependencies": 0,
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "always"
+      }
+    ],
+    "no-underscore-dangle": [
+      2,
+      {
+        "allow": ["_id", "__"]
+      }
+    ]
+  }
+}
