@@ -17,7 +17,7 @@ Organizations.schema = new SimpleSchema({
   username: {
     type: String,
   },
-  desctipion: {
+  description: {
     type: String,
     max: 1000,
     autoform: {
