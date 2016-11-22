@@ -57,6 +57,8 @@ Template.dashboard.onCreated(function () {
       });
     }
 
+    const userId = Meteor.userId;
+
     // Check if user has an admin role
     if (Roles.userIsInRole(userId, ['admin'])) {
       // Add query for API Umbrella analytics data
