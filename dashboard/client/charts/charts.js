@@ -429,19 +429,6 @@ Template.dashboardCharts.onRendered(function () {
   });
 });
 
-Template.dashboardCharts.events({
-  'change #frontend-prefix': (event, templateInstance) => {
-    // Prevent default form submit
-    event.preventDefault();
-
-    // Get selected value
-    const frontendPrefix = event.target.value;
-
-    // Set reactive variable
-    templateInstance.frontendPrefix.set(frontendPrefix);
-  },
-});
-
 Template.dashboardCharts.helpers({
   tableData () {
     const instance = Template.instance();
