@@ -434,9 +434,6 @@ Template.dashboardCharts.events({
     // Prevent default form submit
     event.preventDefault();
 
-    // Get reference to template instance
-    const instance = Template.instance();
-
     // Get selected value
     const frontendPrefix = event.target.value;
 
