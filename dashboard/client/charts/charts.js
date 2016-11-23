@@ -386,12 +386,6 @@ Template.dashboardCharts.onCreated(function () {
 Template.dashboardCharts.onRendered(function () {
   const instance = this;
 
-  // Get reference to chart html elemets
-  const chartElements = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
-
-  // Set active class to a button
-  $('#tick-hour').addClass('active');
-
   instance.autorun(() => {
     // Get chart data, reactively
     const chartData = Template.currentData().chartData;
