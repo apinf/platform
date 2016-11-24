@@ -35,7 +35,7 @@
             {{/ if }}
           {{/ if }}
           <li class="{{ isActiveRoute 'catalogue' }}">
-            <a href="{{ pathFor route='catalogue' }}">
+            <a href="{{ pathFor 'catalogue' }}">
               <i class="fa fa-book" aria-hidden="true"></i>
               {{_ "navbar_catalogue" }}
             </a>
@@ -65,13 +65,13 @@
           {{> userMenu user=currentUser }}
           {{ else }}
           <li>
-            <a class="close-navbar" href="/sign-up">
+            <a class="close-navbar" href="{{ pathFor 'signUp' }}">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
               {{_ "navbar_signUp" }}
             </a>
           </li>
           <li>
-            <a class="close-navbar" href="/sign-in">
+            <a class="close-navbar" href="{{ pathFor 'signIn' }}">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               {{_ "navbar_signIn" }}
             </a>
