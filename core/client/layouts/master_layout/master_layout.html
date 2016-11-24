@@ -5,7 +5,7 @@
   <div class="master-layout">
     {{> navbar branding=branding }}
     <div class="content-wrapper">
-      {{> yield }}
+      {{> Template.dynamic template=main }}
       {{> sAlert }}
     </div>
   </div>
