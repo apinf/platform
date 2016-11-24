@@ -38,7 +38,7 @@ Template.dashboardDataTable.events({
     const rowCount = instance.rowCount.get();
 
     // Get table dataset length
-    const dataSetLength = Template.currentData().tableDataSet.length;
+    const dataSetLength = Template.currentData().tableData.length;
 
     // Check if current page is the last one in the table
     if (currentPageNumber < (dataSetLength / rowCount - 1)) {
@@ -62,7 +62,7 @@ Template.dashboardDataTable.events({
 });
 
 Template.dashboardDataTable.helpers({
-  tableDataSet () {
+  tableData () {
     // Get reference to template instance
     const instance = Template.instance();
 
@@ -77,7 +77,7 @@ Template.dashboardDataTable.helpers({
     const arrEnd = arrStart + rowCount;
 
     // Slice array for current page
-    return Template.currentData().tableDataSet.slice(arrStart, arrEnd);
+    return Template.currentData().tableData.slice(arrStart, arrEnd);
   },
   showPrevButton () {
     // Get reference to template instance
@@ -100,7 +100,7 @@ Template.dashboardDataTable.helpers({
     const pageNumber = instance.pageNumber.get();
 
     // Get table dataset length
-    const dataSetLength = Template.currentData().tableDataSet.length;
+    const dataSetLength = Template.currentData().tableData.length;
 
     // Check if current page is the last one in the table
     return pageNumber < (dataSetLength / rowCount - 1);
@@ -120,7 +120,7 @@ Template.dashboardDataTable.helpers({
     const rowCount = instance.rowCount.get();
 
     // Get table dataset length
-    const dataSetLength = Template.currentData().tableDataSet.length;
+    const dataSetLength = Template.currentData().tableData.length;
 
     // Calculate total page number and make it integer
     return (dataSetLength / rowCount + 1) | 0;
