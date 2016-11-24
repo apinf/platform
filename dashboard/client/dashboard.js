@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 import { ProxyBackends } from '/proxy_backends/collection';
@@ -180,7 +180,7 @@ Template.dashboard.onCreated(function () {
             } else {
               console.error('Elasticsearch is not defined!');
 
-              Router.go('/catalogue');
+              FlowRouter.go('/catalogue');
             }
           })
           .catch(err => console.error(err));

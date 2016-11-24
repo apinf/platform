@@ -1,8 +1,7 @@
 // Meteor packages import
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Router } from 'meteor/iron:router';
-import { UniUtils } from 'meteor/universe:reactive-queries';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APINF import
 import { Apis } from '/apis/collection';
@@ -21,9 +20,9 @@ Template.search.onCreated(function () {
   instance.query = new ReactiveVar();
 
   // Check if search parameter is set
-  if (Router.current().params.query.q) {
+  if (FlowRouter.getQueryParam('q')) {
     // Get the query string parameter
-    const searchValue = Router.current().params.query.q;
+    const searchValue = FlowRouter.getQueryParam('q');
 
     // Assign current search value to the reactive variable
     instance.searchValue.set(searchValue);
@@ -127,7 +126,7 @@ Template.search.events({
     instance.searchValue.set(searchValue);
 
     // Set query parameter to value of search text
-    UniUtils.url.setQuery('q', searchValue);
+    FlowRouter.setQueryParams({ q: searchValue });
 
     return false;
   },
