@@ -1,40 +1,31 @@
-/*
-Router.configure({
-  layoutTemplate: 'masterLayout',
-  loadingTemplate: 'loading',
-  notFoundTemplate: 'notFound',
-  routeControllerNameConverter: 'camelCase',
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+
+FlowRouter.route('/not-authorized', {
+  name: 'notAuthorized',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'notAuthorized' });
+  },
 });
 
-Router.waitOn(function() {
-  return this.subscribe('user');
+FlowRouter.route('/forbidden', {
+  name: 'forbidden',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'forbidden' });
+  },
 });
 
-var redirectToDashboard = function () {
+const redirectToDashboard = function () {
   if (Meteor.user()) {
-    this.redirect('/dashboard');
+    FlowRouter.go('/dashboard');
   }
-  this.next();
 };
 
-Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
+FlowRouter.triggers.enter([redirectToDashboard], {only: ['forgotPwd', 'signOut']});
 
+/*
 // Routes for logged in user
 Router.plugin('ensureSignedIn', {
   only: ['dashboard']
-});
-
-Router.map(function() {
-  this.route('notAuthorized', {
-    path: '/not-authorized',
-    layoutTemplate: 'masterLayout',
-    render: 'notAuthorized',
-  });
-
-  this.route('forbidden', {
-    path: '/forbidden',
-    layoutTemplate: 'masterLayout',
-    render: 'forbidden',
-  });
 });
 */
