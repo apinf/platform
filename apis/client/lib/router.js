@@ -19,9 +19,6 @@ FlowRouter.route('/api/import', {
 FlowRouter.route('/api/:_id/', {
   name: 'viewApi',
   action: function (params) {
-    // Save a reference to route, for use inside method callback function
-    const route = this;
-
     // Get current API Backend ID
     const apiId = params._id;
 
@@ -32,8 +29,8 @@ FlowRouter.route('/api/:_id/', {
         // Ensure current user has permissions to view backend
         Meteor.call('currentUserCanViewApi', apiId, (error, userIsAllowedToViewApi) => {
           if (userIsAllowedToViewApi) {
-            route.render('viewApi');
-            route.layout('masterLayout');
+            FlowRouter.go('viewApi', { _id: apiId });
+            BlazeLayout.render('masterLayout', { main: 'viewApi' });
           } else {
             // User is not allowed to view API
             FlowRouter.go('forbidden');
@@ -41,7 +38,7 @@ FlowRouter.route('/api/:_id/', {
         });
       } else {
         // If API doesn't exist, show 'Not Found'
-        route.render('notFound');
+        FlowRouter.go('notFound');
       }
     });
   },
