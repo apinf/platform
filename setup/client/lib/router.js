@@ -7,16 +7,12 @@ const requireAdminRole = function () {
 
     const userIsAdmin = Roles.userIsInRole(userId, 'admin');
 
-    if (userIsAdmin) {
-      // User is authorized to access route
-      this.next();
-    } else {
+    if (!userIsAdmin) {
       // User is not authorized to access route
-      this.redirect('notAuthorized');
+      FlowRouter.go('notAuthorized');
     }
   } else {
-    this.redirect('/sign-in');
-    this.next();
+    FlowRouter.go('signIn');
   }
 };
 
