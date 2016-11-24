@@ -1,3 +1,4 @@
+/*
 Router.configure({
   layoutTemplate: 'masterLayout',
   loadingTemplate: 'loading',
@@ -36,3 +37,4 @@ Router.map(function() {
     render: 'forbidden',
   });
 });
+*/

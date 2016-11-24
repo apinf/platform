@@ -1,7 +1,9 @@
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-Router.route('/dashboard', {
+FlowRouter.route('/dashboard', {
   name: 'dashboard',
-  layout: 'masterLayout',
-  template: 'dashboard',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'dashboard' });
+  },
 });

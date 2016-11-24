@@ -1,5 +1,9 @@
-Router.route('/settings/proxies', {
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+
+FlowRouter.route('/settings/proxies', {
   name: 'proxies',
-  layout: 'masterLayout',
-  template: 'proxies'
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'proxies' });
+  },
 });
