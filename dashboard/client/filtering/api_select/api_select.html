@@ -1,13 +1,10 @@
 <template name="apiSelectPicker">
   <select
-    id="api-frontend-prefix"
-    title="{{_ 'apiSelectPicker_selectAPI' }}"
-    data-width="fit"
-    data-selected-text-format="count > 1"
-    data-live-search="true"
-    data-size="10"
-    data-actions-box="true" >
-    <!-- Admininstrator -->
+    id="proxy-backend-select"
+    class="form-control"
+    title="{{_ 'apiSelectPicker_selectAPI' }}">
+
+    <!-- Admininstrator API-->
     {{# if isInRole 'admin' }}
       <optgroup label="{{_ 'apiSelectPicker_administratorApis' }}" >
         <option value="{{ apiUmbrellaOption.prefix }}" >
@@ -15,30 +12,14 @@
         </option>
       </optgroup>
     {{/ if }}
-    <!-- User APIs -->
-    {{# if userApis }}
-      <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
-        {{# each api in userApis }}
-          <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{> viewApiStatus api=api width="0.5" }}
-            &nbsp;
-            {{ api.name }}
-          </option>
-        {{/ each }}
-      </optgroup>
-    {{/ if }}
 
-    <!-- other APIs -->
-    {{# if otherApis }}
-      <optgroup label="{{_ 'apiSelectPicker_otherApis' }}" >
-        {{# each api in otherApis }}
-          <option value="{{ api.url_matches.[0].frontend_prefix }}" >
-            {{> viewApiStatus api=api width="0.5" }}
-            &nbsp;
-            {{ api.name }}
-          </option>
-        {{/ each }}
-      </optgroup>
-    {{/ if }}
+
+    <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
+      {{# each backend in proxyBackends }}
+        <option value="{{ backend._id }}" >
+          {{ backend.apiUmbrella.name }}
+        </option>
+      {{/ each }}
+    </optgroup>
   </select>
 </template>
