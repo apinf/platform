@@ -15,13 +15,11 @@ FlowRouter.route('/forbidden', {
   },
 });
 
-const redirectToDashboard = function () {
-  if (Meteor.user()) {
-    FlowRouter.go('/dashboard');
-  }
+const redirectToCatalogue = function () {
+  FlowRouter.go('catalogue');
 };
 
-FlowRouter.triggers.enter([redirectToDashboard], {only: ['forgotPwd', 'signOut']});
+FlowRouter.triggers.enter([redirectToCatalogue], {only: ['forgotPwd', 'signOut']});
 
 /*
 // Routes for logged in user
