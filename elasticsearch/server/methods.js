@@ -5,12 +5,13 @@ import { Proxies } from '/proxies/collection';
 
 
 Meteor.methods({
-  getElasticSearchData (opts) {
+  getElasticSearchData (opts, proxyId) {
     // Check if user is authorised
     if (Meteor.user()) {
-      const host = Meteor.call('getElasticsearchUrl');
+      const host = Meteor.call('getElasticsearchUrl', proxyId);
 
-      const esClient = new ElasticSearch.Client({ host }); // Init ES client
+      // Init ES client
+      const esClient = new ElasticSearch.Client({ host });
 
       // Get elasticsearch data and return
       return esClient.search(opts).then((res) => {
@@ -24,9 +25,8 @@ Meteor.methods({
       return false;
     }
   },
-  elasticsearchIsDefined () {
-    // TODO: multi-proxy support
-    const proxy = Proxies.findOne();
+  elasticsearchIsDefined (proxyId) {
+    const proxy = Proxies.findOne(proxyId);
 
     if (proxy) {
       const elasticsearch = proxy.apiUmbrella.elasticsearch;
@@ -37,10 +37,9 @@ Meteor.methods({
 
     return false;
   },
-  getElasticsearchUrl () {
-    if (Meteor.call('elasticsearchIsDefined')) {
-      // TODO: multi-proxy support
-      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
+  getElasticsearchUrl (proxyId) {
+    if (Meteor.call('elasticsearchIsDefined', proxyId)) {
+      const elasticsearch = Proxies.findOne(proxyId).apiUmbrella.elasticsearch;
 
       return elasticsearch;
     }
