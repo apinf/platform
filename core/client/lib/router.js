@@ -1,6 +1,16 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
+// Define group for routes that require sign in
+const signedIn = FlowRouter.group({
+  triggersEnter: [function () {
+    if (!(Meteor.loggingIn() || Meteor.userId())) {
+      // Redirect to sign in
+      FlowRouter.go('signIn');
+    }
+  }]
+});
+
 FlowRouter.route('/not-authorized', {
   name: 'notAuthorized',
   action: function () {
@@ -19,11 +29,6 @@ const redirectToCatalogue = function () {
   FlowRouter.go('catalogue');
 };
 
-FlowRouter.triggers.enter([redirectToCatalogue], {only: ['forgotPwd', 'signOut']});
+FlowRouter.triggers.enter([redirectToCatalogue], {only: ['forgotPwd']});
 
-/*
-// Routes for logged in user
-Router.plugin('ensureSignedIn', {
-  only: ['dashboard']
-});
-*/
+export { signedIn };
