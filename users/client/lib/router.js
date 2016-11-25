@@ -54,6 +54,7 @@ FlowRouter.route('/sign-out', {
 
 const signOut = function () {
   Meteor.logout();
+  FlowRouter.go('catalogue');
 };
 
 FlowRouter.triggers.enter([signOut], { only: ['signOut'] });
