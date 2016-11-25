@@ -3,53 +3,21 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Router } from 'meteor/iron:router';
 import { Roles } from 'meteor/alanning:roles';
+import { UniUtils } from 'meteor/universe:reactive-queries';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
-import moment from 'moment';
 import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Keeps ES data for charts
-  instance.chartData = new ReactiveVar();
-  // Keeps chart data loading state
-  instance.chartDataLoadingState = new ReactiveVar(false);
-  // Keeps status of proxy backends
-  instance.proxyBackendsAddedState = new ReactiveVar(false);
-
-  // Keeps date format for moment.js
-  instance.dateFormatMoment = 'DD MMM YYYY';
-
-  // Init default time frame (from: 2weeks ago, to: now)
-  instance.analyticsTimeframeStart = new ReactiveVar(moment().subtract(1, 'month'));
-  instance.analyticsTimeframeEnd = new ReactiveVar(moment());
-
-  // Get current user Id
-  const userId = Meteor.userId();
-
   // Subscribe to proxyApis publicaton
   instance.subscribe('proxyApis');
 
-  if (Roles.userIsInRole(userId, ['admin'])) {
-    // Subscribe to publication
-    instance.subscribe('allApiBackends');
-  } else {
-    // Subscribe to publication
-    instance.subscribe('myManagedApis');
-  }
-
-  instance.checkElasticsearch = function () {
-    return new Promise((resolve, reject) => {
-      Meteor.call('elasticsearchIsDefined', (err, res) => {
-        if (err) reject(err);
-
-        resolve(res);
-      });
-    });
-  };
+  // Keeps ES data for charts
+  instance.chartData = new ReactiveVar();
 
   instance.getChartData = function (params) {
     return new Promise((resolve, reject) => {
@@ -137,17 +105,21 @@ Template.dashboard.onCreated(function () {
       },
     };
 
-    // ******* Filtering by date *******
-    const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
-    const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
+    // Listen for analytics date range changes through URL parameters
+    const analyticsFrom = UniUtils.url.getQuery('fromDate');
+    const analyticsTo = UniUtils.url.getQuery('toDate');
 
-    // Check if timeframe values are set
-    if (analyticsTimeframeStart && analyticsTimeframeEnd) {
-      // Update elasticsearch query with filter data (in Unix format)
-      params.body.query.filtered.filter.range.request_at.gte = analyticsTimeframeStart.valueOf();
-      params.body.query.filtered.filter.range.request_at.lte = analyticsTimeframeEnd.valueOf();
+    // Update query parameters for date range, when provided
+    if (analyticsFrom) {
+      // Set start date (greater than or equal to) for analytics timeframe
+      params.body.query.filtered.filter.range.request_at.gte = analyticsFrom;
     }
-    // ******* End filtering by date *******
+
+    // Update query parameters for date range, when provided
+    if (analyticsTo) {
+      // Set end date (less than or equal to) for analytics timeframe
+      params.body.query.filtered.filter.range.request_at.lte = analyticsTo;
+    }
 
     return params;
   };
@@ -157,93 +129,19 @@ Template.dashboard.onCreated(function () {
       // Get elasticsearch query
       const params = instance.getElasticSearchQuery();
 
-      // Set loader
-      instance.chartDataLoadingState.set(true);
-
       // Check if proxyBackendsCount
       const proxyBackendsCount = ProxyBackends.find().count();
 
       if (proxyBackendsCount > 0) {
-        // Update proxyBackendsAddedState
-        instance.proxyBackendsAddedState.set(true);
-        // Make a call
-        instance.checkElasticsearch()
-          .then((elasticsearchIsDefined) => {
-            if (elasticsearchIsDefined) {
-              instance.getChartData(params)
-                .then((chartData) => {
-                  // Update reactive variable
-                  instance.chartData.set(chartData);
-                  instance.chartDataLoadingState.set(false);
-                })
-                .catch(err => console.error(err));
-            } else {
-              console.error('Elasticsearch is not defined!');
-
-              Router.go('/catalogue');
-            }
+        instance.getChartData(params)
+          .then((chartData) => {
+            // Update reactive variable
+            instance.chartData.set(chartData);
           })
           .catch(err => console.error(err));
-      } else {
-        instance.proxyBackendsAddedState.set(false);
-        console.error('Proxy backends and/or APIs are not added.');
       }
     }
   });
-});
-
-Template.dashboard.onRendered(function () {
-  const instance = this;
-
-  // Get timeframe values
-  const analyticsTimeframeStart = instance.analyticsTimeframeStart.get();
-  const analyticsTimeframeEnd = instance.analyticsTimeframeEnd.get();
-
-  // Format timeframe values
-  const analyticsTimeframeStartFormatted = analyticsTimeframeStart.format(instance.dateFormatMoment);
-  const analyticsTimeframeEndFormatted = analyticsTimeframeEnd.format(instance.dateFormatMoment);
-
-  // Update date range fields with default dates
-  $('#analytics-timeframe-start').val(analyticsTimeframeStartFormatted);
-  $('#analytics-timeframe-end').val(analyticsTimeframeEndFormatted);
-});
-
-Template.dashboard.events({
-  'change #select-timeframe-form': function (event) {
-    event.preventDefault();
-
-    const instance = Template.instance();
-
-    // Get timeframe dates from input fields
-    const analyticsTimeframeStartElementValue = $('#analytics-timeframe-start').val();
-    const analyticsTimeframeEndElementValue = $('#analytics-timeframe-end').val();
-
-    // Check if timeframe values are set
-    if (analyticsTimeframeStartElementValue !== '' && analyticsTimeframeEndElementValue !== '') {
-      // Format datepicker dates (DD.MM.YYYY) to moment.js object
-      const analyticsTimeframeStartMoment = moment(analyticsTimeframeStartElementValue, instance.dateFormatMoment);
-      const analyticsTimeframeEndMoment = moment(analyticsTimeframeEndElementValue, instance.dateFormatMoment);
-
-      /*
-       *  To avoid resending request with the same time frame and
-       *  allowing to select dates bigger than current date, check:
-       *    - If the new selected start-date is the same as previously selected start-date
-       *    - If the new selected end-date is the same as previously selected end-date
-       */
-      if ((analyticsTimeframeStartElementValue !== instance.analyticsTimeframeStart.get().format(instance.dateFormatMoment)) ||
-      (analyticsTimeframeEndElementValue !== instance.analyticsTimeframeEnd.get().format(instance.dateFormatMoment))) {
-        // Get reference to chart html elemets
-        const chartElemets = $('#requestsOverTime-chart, #overviewChart-chart, #statusCodeCounts-chart, #responseTimeDistribution-chart');
-
-        // Set loader
-        chartElemets.addClass('loader');
-
-        // If pass all checks, update reactive variables
-        instance.analyticsTimeframeStart.set(analyticsTimeframeStartMoment);
-        instance.analyticsTimeframeEnd.set(analyticsTimeframeEndMoment);
-      }
-    }
-  },
 });
 
 Template.dashboard.helpers({
@@ -251,15 +149,5 @@ Template.dashboard.helpers({
     const instance = Template.instance();
 
     return instance.chartData.get();
-  },
-  loadingState () {
-    const instance = Template.instance();
-
-    return instance.chartDataLoadingState.get();
-  },
-  proxyBackendsAddedState () {
-    const instance = Template.instance();
-
-    return instance.proxyBackendsAddedState.get();
   },
 });

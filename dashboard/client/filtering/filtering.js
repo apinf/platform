@@ -8,9 +8,6 @@ Template.dashboardChartsFiltering.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Subscribe to publication
-  instance.subscribe('proxyApis');
-
   // Keeps APIs managed by user
   instance.apisManagedByUser = new ReactiveVar();
   // Keeps other APIs
