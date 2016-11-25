@@ -1,13 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Router } from 'meteor/iron:router';
-import { Roles } from 'meteor/alanning:roles';
 import { UniUtils } from 'meteor/universe:reactive-queries';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
-import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
@@ -19,9 +16,9 @@ Template.dashboard.onCreated(function () {
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
 
-  instance.getChartData = function (params) {
+  instance.getChartData = function (params, proxyId) {
     return new Promise((resolve, reject) => {
-      Meteor.call('getElasticSearchData', params, (err, res) => {
+      Meteor.call('getElasticSearchData', params, proxyId, (err, res) => {
         if (err) reject(err);
         resolve(res.hits.hits);
       });
@@ -30,41 +27,23 @@ Template.dashboard.onCreated(function () {
 
   instance.getElasticSearchQuery = function () {
     // Placeholder for prefixes query
-    let prefixesQuery = [];
-    // Get APIs managed by user
-    const proxyBackends = ProxyBackends.find().fetch();
+    const prefixesQuery = [];
 
-    // Get endpoint data from each proxybackend
-    const apis = _.map(proxyBackends, proxyBackend => {
-      // Get apiUmbrella object
-      const api = proxyBackend.apiUmbrella;
-      // Attach _id to API
-      api._id = proxyBackend.apiId;
-      return api;
-    });
+    // Get selected backend from query parameter
+    const backendParameter = UniUtils.url.getQuery('backend');
 
-    // If there are some APIs then setup query
-    if (apis.length > 0) {
-      prefixesQuery = _.map(apis, (api) => {
-        return {
-          wildcard: {
-            request_path: {
-              // Add '*' to partially match the url
-              value: `${api.url_matches[0].frontend_prefix}*`,
-            },
-          },
-        };
-      });
-    }
+    // Find proxy backend configuration in DB
+    const proxyBackend = ProxyBackends.findOne(backendParameter);
 
-    // Check if user has an admin role
-    if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
-      // Add query for API Umbrella analytics data
+    // Check existing of fronted prefix
+    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.url_matches) {
+      // Save frontend prefix
+      const frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
       prefixesQuery.push({
         wildcard: {
           request_path: {
             // Add '*' to partially match the url
-            value: '*/api-umbrella/*',
+            value: `${frontendPrefix}*`,
           },
         },
       });
@@ -129,11 +108,15 @@ Template.dashboard.onCreated(function () {
       // Get elasticsearch query
       const params = instance.getElasticSearchQuery();
 
-      // Check if proxyBackendsCount
-      const proxyBackendsCount = ProxyBackends.find().count();
+      const backendParameter = UniUtils.url.getQuery('backend');
+      // Find the proxy backend configuration
+      const proxyBackend = ProxyBackends.findOne(backendParameter);
 
-      if (proxyBackendsCount > 0) {
-        instance.getChartData(params)
+      // If proxy backend exists and has proxy ID
+      // TODO: Add condition for case "Proxy Admin API" with prefix /api-embrella/
+      if (proxyBackend && proxyBackend.proxyId) {
+        // Provide proxy ID to Elastic Search
+        instance.getChartData(params, proxyBackend.proxyId)
           .then((chartData) => {
             // Update reactive variable
             instance.chartData.set(chartData);
@@ -154,6 +137,14 @@ Template.dashboard.helpers({
     // Fetch proxy backends
     const proxyBackends = ProxyBackends.find().fetch();
 
+    // Get the current selected backend
+    const backendParameter = UniUtils.url.getQuery('backend');
+    // If query param doesn't exist and proxy backend list is ready
+    if (!backendParameter && proxyBackends[0]) {
+      // Set the default value as firt item of backen list
+      UniUtils.url.setQuery('backend', proxyBackends[0]._id);
+    }
+
     return proxyBackends;
-  }
+  },
 });
