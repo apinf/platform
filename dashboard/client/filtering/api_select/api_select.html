@@ -4,16 +4,6 @@
     class="form-control"
     title="{{_ 'apiSelectPicker_selectAPI' }}">
 
-    <!-- Admininstrator API-->
-    {{# if isInRole 'admin' }}
-      <optgroup label="{{_ 'apiSelectPicker_administratorApis' }}" >
-        <option value="{{ apiUmbrellaOption.prefix }}" >
-          {{ apiUmbrellaOption.name }}
-        </option>
-      </optgroup>
-    {{/ if }}
-
-
     <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
       {{# each backend in proxyBackends }}
         <option value="{{ backend._id }}" >
