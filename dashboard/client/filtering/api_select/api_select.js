@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
-import { UniUtils } from 'meteor/universe:reactive-queries';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.apiSelectPicker.helpers({
   // TODO: Update api Umbrella Admin case for multiple instance
@@ -22,10 +22,7 @@ Template.apiSelectPicker.helpers({
 
 Template.apiSelectPicker.events({
   'change #proxy-backend-select': function (event) {
-    // Get value of
-    const backend = event.target.value;
-
     // Update selected backend URL parameter
-    UniUtils.url.setQuery('backend', backend);
+    FlowRouter.setQueryParams({ backend: event.target.value });
   },
 });
