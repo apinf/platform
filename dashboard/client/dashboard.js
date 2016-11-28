@@ -113,7 +113,7 @@ Template.dashboard.onCreated(function () {
       const proxyBackend = ProxyBackends.findOne(backendParameter);
 
       // If proxy backend exists and has proxy ID
-      // TODO: Add condition for case "Proxy Admin API" with prefix /api-embrella/
+      // TODO: Add condition for case "Proxy Admin API" with prefix /api-umbrella/
       if (proxyBackend && proxyBackend.proxyId) {
         // Provide proxy ID to Elastic Search
         instance.getChartData(params, proxyBackend.proxyId)
