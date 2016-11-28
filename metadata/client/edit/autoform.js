@@ -1,16 +1,13 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import $ from 'jquery';
 
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
     insert (metadata) {
-      // Get reference to Router
-      const router = Router.current();
-
       // Get API Backend ID, from Router
-      const apiId = router.params._id;
+      const apiId = FlowRouter.getParam('_id');
 
       // Set the API Backend ID property of the metadata document
       metadata.apiBackendId = apiId;

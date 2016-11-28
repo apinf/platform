@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { UniUtils } from 'meteor/universe:reactive-queries';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import moment from 'moment';
 import dc from 'dc';
@@ -391,7 +391,7 @@ Template.dashboardCharts.onRendered(function () {
     const chartData = Template.currentData().chartData;
 
     // Get granularity from URL parameter
-    const granularity = UniUtils.url.getQuery('granularity');
+    const granularity = FlowRouter.getQueryParam('granularity');
 
     // Get date formats for D3 and moment
     const timeStampFormatD3 = instance.analyticsTickDateFormat.d3[granularity];
