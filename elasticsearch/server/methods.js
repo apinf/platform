@@ -19,16 +19,16 @@ Meteor.methods({
       }, (err) => {
         throw new Meteor.Error(err.message);
       });
-    } else {
-      throw new Meteor.Error('User is not authorised.');
-
-      return false;
     }
+
+    throw new Meteor.Error('User is not authorised.');
   },
   elasticsearchIsDefined (proxyId) {
+    // Get Proxy instance of ID
     const proxy = Proxies.findOne(proxyId);
-
+    // Check of existing this proxy instance
     if (proxy) {
+      // Get Elastic Search URL
       const elasticsearch = proxy.apiUmbrella.elasticsearch;
 
       // Return true or false, depending on whether elasticsearch is defined
@@ -38,10 +38,10 @@ Meteor.methods({
     return false;
   },
   getElasticsearchUrl (proxyId) {
+    // Check existing of Elastci Search URL
     if (Meteor.call('elasticsearchIsDefined', proxyId)) {
-      const elasticsearch = Proxies.findOne(proxyId).apiUmbrella.elasticsearch;
-
-      return elasticsearch;
+      // Return URL
+      return Proxies.findOne(proxyId).apiUmbrella.elasticsearch;
     }
 
     throw new Meteor.Error('Elasticsearch is not defined');
