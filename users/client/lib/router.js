@@ -52,9 +52,10 @@ FlowRouter.route('/sign-out', {
   },
 });
 
-const signOut = function () {
+// Sign out & redirect to catalogue
+const signOut = function (context, redirect) {
   Meteor.logout();
-  FlowRouter.go('catalogue');
+  redirect('catalogue');
 };
 
 FlowRouter.triggers.enter([signOut], { only: ['signOut'] });
