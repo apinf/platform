@@ -141,7 +141,7 @@ Template.dashboard.helpers({
     const backendParameter = UniUtils.url.getQuery('backend');
     // If query param doesn't exist and proxy backend list is ready
     if (!backendParameter && proxyBackends[0]) {
-      // Set the default value as firt item of backen list
+      // Set the default value as first item of backend list
       UniUtils.url.setQuery('backend', proxyBackends[0]._id);
     }
 
