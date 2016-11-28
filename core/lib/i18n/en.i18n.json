@@ -328,6 +328,7 @@
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation file for your API using Swagger editor",
   "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
   "navbar_addAPIBackend": "Add API",
+  "navbar_addOrganization": "Add Organization",
   "navbar_about": "About",
   "navbar_catalogue": "Catalog",
   "navbar_dashboard": "Dashboard",
