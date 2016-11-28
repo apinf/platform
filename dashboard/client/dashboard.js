@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { ProxyBackends } from '/proxy_backends/collection';
@@ -31,7 +30,7 @@ Template.dashboard.onCreated(function () {
     const prefixesQuery = [];
 
     // Get selected backend from query parameter
-    const backendParameter = UniUtils.url.getQuery('backend');
+    const backendParameter = FlowRouter.getQueryParam('backend');
 
     // Find proxy backend configuration in DB
     const proxyBackend = ProxyBackends.findOne(backendParameter);
@@ -109,7 +108,7 @@ Template.dashboard.onCreated(function () {
       // Get elasticsearch query
       const params = instance.getElasticSearchQuery();
 
-      const backendParameter = UniUtils.url.getQuery('backend');
+      const backendParameter = FlowRouter.getQueryParam('backend');
       // Find the proxy backend configuration
       const proxyBackend = ProxyBackends.findOne(backendParameter);
 
@@ -139,11 +138,11 @@ Template.dashboard.helpers({
     const proxyBackends = ProxyBackends.find().fetch();
 
     // Get the current selected backend
-    const backendParameter = UniUtils.url.getQuery('backend');
+    const backendParameter = FlowRouter.getQueryParam('backend');
     // If query param doesn't exist and proxy backend list is ready
     if (!backendParameter && proxyBackends[0]) {
       // Set the default value as first item of backend list
-      UniUtils.url.setQuery('backend', proxyBackends[0]._id);
+      FlowRouter.setQueryParams({ backend: proxyBackends[0]._id });
     }
 
     return proxyBackends;
