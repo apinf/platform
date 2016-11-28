@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { UniUtils } from 'meteor/universe:reactive-queries';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import $ from 'jquery';
 
@@ -16,11 +16,11 @@ Template.timeFrameSelectPicker.onRendered(function () {
   // in order to share dashboard state
   .on('changeDate', function (event) {
     // Set fromDate URL parameter to ISO YYYY-mm-dd
-    UniUtils.url.setQuery('fromDate', event.format('yyyy-mm-dd'));
+    FlowRouter.setQueryParams({ fromDate: event.format('yyyy-mm-dd') });
   });
 
   // Check URL parameters for 'from date' for analytics timeframe
-  const fromDate = UniUtils.url.getQuery('fromDate')
+  const fromDate = FlowRouter.getQueryParam('fromDate');
 
   // Set the start date based on URL parameters, if available
   if (fromDate) {
@@ -37,11 +37,11 @@ Template.timeFrameSelectPicker.onRendered(function () {
   .on('changeDate', function (event) {
     // Set fromDate URL parameter to ISO YYYY-mm-dd
     // in order to share dashboard state
-    UniUtils.url.setQuery('toDate', event.format('yyyy-mm-dd'));
+    FlowRouter.setQueryParams({ toDate: event.format('yyyy-mm-dd') });
   });
 
   // Check URL parameters for 'from date' for analytics timeframe
-  const toDate = UniUtils.url.getQuery('toDate');
+  const toDate = FlowRouter.getQueryParam('toDate');
 
   // Set the start date based on URL parameters, if available
   if (toDate) {

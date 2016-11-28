@@ -9,12 +9,12 @@
           <span class="icon-bar"></span>
         </button>
         {{# if projectLogoExists }}
-        <a class="navbar-brand text-hide" href="/" style="background-image:url({{ uploadedProjectLogoLink }})">
+        <a class="navbar-brand text-hide" href="{{ pathFor 'home' }}" style="background-image:url({{ uploadedProjectLogoLink }})">
           APInf
         </a>
         {{ else }}
         <div class="project-name">
-          <a href="/" class="project-name-link">
+          <a href="{{ pathFor 'home' }}" class="project-name-link">
             {{ branding.siteTitle }}
           </a>
         </div>
@@ -26,7 +26,7 @@
             {{# if proxyIsDefined }}
               {{# if userCanViewDashboard }}
                 <li class="{{ isActiveRoute 'dashboard' }}">
-                  <a href="/dashboard">
+                  <a href="{{ pathFor 'dashboard' }}">
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     {{_ "navbar_dashboard" }}
                   </a>
@@ -35,7 +35,7 @@
             {{/ if }}
           {{/ if }}
           <li class="{{ isActiveRoute 'catalogue' }}">
-            <a href="{{ pathFor route='catalogue' }}">
+            <a href="{{ pathFor 'catalogue' }}">
               <i class="fa fa-book" aria-hidden="true"></i>
               {{_ "navbar_catalogue" }}
             </a>
@@ -43,7 +43,7 @@
           {{# if currentUser }}
             {{# if userCanAddApi }}
             <li class="{{ isActiveRoute 'addApi' }}">
-              <a href="{{ pathFor route='addApi' }}">
+              <a href="{{ pathFor 'addApi' }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
 
                 {{_ "navbar_addAPIBackend" }}
@@ -52,7 +52,7 @@
             {{/ if }}
             {{# if isInRole 'admin' }}
               <li class="{{ isActiveRoute 'accountsAdmin' }}">
-                <a href="{{ pathFor route='accountsAdmin' }}">
+                <a href="{{ pathFor 'accountsAdmin' }}">
                   <i class="fa fa-users" aria-hidden="true"></i>
                   {{_ "navbar_users" }}
                 </a>
@@ -65,13 +65,13 @@
           {{> userMenu user=currentUser }}
           {{ else }}
           <li>
-            <a class="close-navbar" href="/sign-up">
+            <a class="close-navbar" href="{{ pathFor 'signUp' }}">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
               {{_ "navbar_signUp" }}
             </a>
           </li>
           <li>
-            <a class="close-navbar" href="/sign-in">
+            <a class="close-navbar" href="{{ pathFor 'signIn' }}">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               {{_ "navbar_signIn" }}
             </a>

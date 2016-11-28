@@ -1,9 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Router } from 'meteor/iron:router';
 import { Roles } from 'meteor/alanning:roles';
-import { UniUtils } from 'meteor/universe:reactive-queries';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
@@ -106,8 +105,8 @@ Template.dashboard.onCreated(function () {
     };
 
     // Listen for analytics date range changes through URL parameters
-    const analyticsFrom = UniUtils.url.getQuery('fromDate');
-    const analyticsTo = UniUtils.url.getQuery('toDate');
+    const analyticsFrom = FlowRouter.getQueryParam('fromDate');
+    const analyticsTo = FlowRouter.getQueryParam('toDate');
 
     // Update query parameters for date range, when provided
     if (analyticsFrom) {
