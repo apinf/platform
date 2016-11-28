@@ -47,7 +47,7 @@ Organizations.schema = new SimpleSchema({
     },
     denyUpdate: true,
   },
-  created_at: {
+  createdAt: {
     type: Date,
     optional: true,
     autoValue () {
@@ -60,7 +60,7 @@ Organizations.schema = new SimpleSchema({
       this.unset();
     },
   },
-  updated_at: {
+  updatedAt: {
     type: Date,
     optional: true,
     autoValue () {
