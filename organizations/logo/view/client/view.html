@@ -1,0 +1,7 @@
+<template name="viewOrganizationLogo">
+  {{# if organizationLogoExists }}
+  <img class="view-organization-logo" src="{{ uploadedOrganizationLogoLink }}"/>
+  {{ else }}
+  <img class="view-organization-logo" src="/img/placeholder-logo.jpg"/>
+  {{/ if }}
+</template>
