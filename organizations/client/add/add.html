@@ -2,13 +2,13 @@
   <div class="container">
     {{# autoForm collection=OrganizationsCollection id="addOrganizationForm" type="insert" }}
       <fieldset>
-        <legend>Add an Organization</legend>
+        <legend>{{_ "addOrganization_title" }}</legend>
         {{> afQuickField name='name' }}
         {{> afQuickField name='url' }}
         {{> afQuickField name='description' }}
         <div class="panel panel-default">
           <div class="panel-heading">
-            Contact
+            {{_ "addOrganization_contact_panelTitle" }}
           </div>
           <div class="panel-body">
             {{> afQuickField name='contact.person' }}
@@ -19,7 +19,7 @@
       </fieldset>
       <br>
       <button type="submit" class="btn btn-primary">
-        Create organization
+        {{_ "addOrganization_create_button" }}
       </button>
     {{/ autoForm }}
   </div>
