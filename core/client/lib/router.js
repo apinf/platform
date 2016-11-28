@@ -11,6 +11,14 @@ const signedIn = FlowRouter.group({
   }]
 });
 
+// Define 404 route
+FlowRouter.notFound = {
+  action: function() {
+    BlazeLayout.render('masterLayout', { main: 'notFound' });
+  }
+};
+
+// Define 401 route
 FlowRouter.route('/not-authorized', {
   name: 'notAuthorized',
   action: function () {
@@ -18,6 +26,7 @@ FlowRouter.route('/not-authorized', {
   },
 });
 
+// Define 403 route
 FlowRouter.route('/forbidden', {
   name: 'forbidden',
   action: function () {
