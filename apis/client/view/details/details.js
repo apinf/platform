@@ -32,12 +32,10 @@ Template.apiDetails.helpers({
     let proxyUrl;
 
     if (instance.data.proxyBackend) {
-
+      // Get proxyBackend from template data
       const proxyBackend = instance.data.proxyBackend;
-      // Get the proxy id
-      const proxyId = proxyBackend.proxyId;
       // Get the proxy settings
-      const proxy = Proxies.findOne(proxyId);
+      const proxy = Proxies.findOne(proxyBackend.proxyId);
       // Get Proxy host
       const host = proxy.apiUmbrella.url;
 
@@ -61,10 +59,13 @@ Template.apiDetails.helpers({
     // Get current user
     const currentUserId = Meteor.userId();
 
+    // Get proxyId to template data
+    const proxyId = Template.currentData().proxyBackend.proxyId;
+
     // Make sure user exists and has API key
-    if (currentUserId) {
+    if (currentUserId && proxyId) {
       // Get API Key document
-      const userApiKey = ApiKeys.findOne({ userId: currentUserId });
+      const userApiKey = ApiKeys.findOne({ userId: currentUserId, proxyId });
 
       // Check that Umbrella API key exists
       if (userApiKey && userApiKey.apiUmbrella) {
@@ -75,21 +76,30 @@ Template.apiDetails.helpers({
 
     return apiKey;
   },
-  // api key can be omitted or not?
+  // Check disable API key setting
   disableApiKey () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get values of disable api key
-    const disableApiKey = instance.data.proxyBackend.apiUmbrella.settings.disable_api_key;
+    // Get reference to disable API key setting
+    const disableApiKey = Template.currentData().proxyBackend.apiUmbrella.settings.disable_api_key;
 
     return disableApiKey;
   },
   // User has got an api key
   hasApiKey () {
+    // Placeholder for API key
+    let apiKey;
+
     // Get current user
     const currentUserId = Meteor.userId();
 
-    return ApiKeys.findOne({ userId: currentUserId });
-  }
+    // Get proxyId to template data
+    const proxyId = Template.currentData().proxyBackend.proxyId;
+
+    // Make sure user exists and has API key
+    if (currentUserId && proxyId) {
+      // Get API key by userId & proxyId
+      apiKey = ApiKeys.findOne({ userId: currentUserId, proxyId });
+    }
+    // Return apiKey
+    return apiKey;
+  },
 });
