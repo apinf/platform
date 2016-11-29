@@ -1,6 +1,9 @@
 // User accounts guide
 // https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 AccountsTemplates.configure({
+  /* Route configuration */
+  defaultLayout: 'masterLayout',
+  defaultContentRegion: 'main',
   /* Behavior */
   confirmPassword: true,
   enablePasswordChange: true,
@@ -53,10 +56,20 @@ AccountsTemplates.addFields([
   passwordField,
 ]);
 
+// Sign in
 AccountsTemplates.configureRoute('signIn', {
+  layoutType: 'blaze',
+  name: 'signIn',
+  path: '/sign-in',
   layoutTemplate: 'masterLayout',
+  contentRegion: 'main',
 });
 
+// Sign up
 AccountsTemplates.configureRoute('signUp', {
+  layoutType: 'blaze',
+  name: 'signUp',
+  path: '/sign-up',
   layoutTemplate: 'masterLayout',
+  contentRegion: 'main',
 });

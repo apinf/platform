@@ -1,3 +1,5 @@
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 const requireAdminRole = function () {
   if (Meteor.user()) {
     // Get user ID
@@ -5,16 +7,12 @@ const requireAdminRole = function () {
 
     const userIsAdmin = Roles.userIsInRole(userId, 'admin');
 
-    if (userIsAdmin) {
-      // User is authorized to access route
-      this.next();
-    } else {
+    if (!userIsAdmin) {
       // User is not authorized to access route
-      this.redirect('notAuthorized');
+      FlowRouter.go('notAuthorized');
     }
   } else {
-    this.redirect('/sign-in');
-    this.next();
+    FlowRouter.go('signIn');
   }
 };
 
@@ -34,11 +32,9 @@ const additionalSetupRequired = function () {
       });
     }
   }
-
-  this.next();
 };
 
 // check if setup is required before opening any page
-Router.onBeforeAction(additionalSetupRequired, { except: ['settings', 'branding'] });
+FlowRouter.triggers.enter([additionalSetupRequired], { except: ['settings', 'branding'] });
 
-Router.onBeforeAction(requireAdminRole, { only: ['settings', 'branding'] });
+FlowRouter.triggers.enter([requireAdminRole], { only: ['settings', 'branding'] });
