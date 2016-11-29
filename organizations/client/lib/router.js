@@ -7,3 +7,10 @@ FlowRouter.route('/organization/new', {
     BlazeLayout.render('masterLayout', { main: 'addOrganization' });
   },
 });
+
+FlowRouter.route('/organizations/:slug', {
+  name: 'singleOrganization',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'singleOrganization' });
+  },
+});
