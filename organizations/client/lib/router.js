@@ -1,8 +1,9 @@
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-Router.route('/organization/new', function () {
-  this.render('addOrganization');
-  this.layout('masterLayout');
-}, {
+FlowRouter.route('/organization/new', {
   name: 'addOrganization',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'addOrganization' });
+  },
 });
