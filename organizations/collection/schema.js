@@ -8,7 +8,7 @@ Organizations.schema = new SimpleSchema({
   },
   slug: {
     type: String,
-    optional: true,
+    optional: false,
   },
   url: {
     type: String,
