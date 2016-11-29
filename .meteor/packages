@@ -71,6 +71,7 @@ percolate:migrations
 michalvalasek:autoform-bootstrap-colorpicker
 rajit:bootstrap3-datepicker
 apinf:autoform-bs-datepicker
+todda00:friendly-slugs
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
