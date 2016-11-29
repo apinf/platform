@@ -3,7 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 FlowRouter.route('/organization/new', {
   name: 'addOrganization',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'addOrganization' });
   },
 });
