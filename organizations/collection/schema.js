@@ -22,13 +22,17 @@ Organizations.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  contactPerson: {
+  contact: {
+    type: Object,
+    optional: true,
+  },
+  'contact.person': {
     type: String,
   },
-  phoneNumber: {
+  'contact.phone': {
     type: String,
   },
-  email: {
+  'contact.email': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
   },
@@ -43,7 +47,7 @@ Organizations.schema = new SimpleSchema({
     },
     denyUpdate: true,
   },
-  created_at: {
+  createdAt: {
     type: Date,
     optional: true,
     autoValue () {
@@ -56,7 +60,7 @@ Organizations.schema = new SimpleSchema({
       this.unset();
     },
   },
-  updated_at: {
+  updatedAt: {
     type: Date,
     optional: true,
     autoValue () {
@@ -68,5 +72,8 @@ Organizations.schema = new SimpleSchema({
     },
   },
 });
+
+// Enable translations (i18n)
+Organizations.schema.i18n('schemas.organizations');
 
 Organizations.attachSchema(Organizations.schema);
