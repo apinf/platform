@@ -10,8 +10,8 @@ import { Organizations } from '/organizations/collection';
 Template.uploadOrganizationLogo.onCreated(function () {
   const instance = this;
 
-  // Subscribe to API logo
-  instance.subscribe('allApiLogo');
+  // Subscribe to Organization logo
+  instance.subscribe('allOrganizationLogo');
 });
 
 Template.uploadOrganizationLogo.events({
@@ -22,7 +22,7 @@ Template.uploadOrganizationLogo.events({
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-      // Get currentApiBackend documentationFileId
+      // Get organization documentationFileId
       const organizationLogoFileId = templateInstance.data.organization.organizationLogoFileId;
 
       // Convert to Mongo ObjectID
@@ -59,16 +59,21 @@ Template.uploadOrganizationLogo.helpers({
     }
   },
   uploadedOrganizationLogoFile () {
-    const organizationLogoFileId = Organizations.findOne().organizationLogoFileId;
+    let organizationLogoFileId;
+    const organization = Organizations.findOne();
+    // Check if organization found
+    if (organization) {
+      organizationLogoFileId = organization.organizationLogoFileId;
+      // Check if organizationLogoFileId
+      if (organizationLogoFileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
 
-    if (organizationLogoFileId) {
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
+        // Get Organization logo file Object
+        const organizationLogoFile = OrganizationLogo.findOne(objectId);
 
-      // Get Organization logo file Object
-      const organizationLogoFile = OrganizationLogo.findOne(objectId);
-
-      return organizationLogoFile;
+        return organizationLogoFile;
+      }
     }
   },
 });
