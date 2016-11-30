@@ -17,7 +17,7 @@
             {{> afQuickField name='name' }}
             {{> afQuickField name='description' }}
 
-            {{> afQuickField name='type' value='apiUmbrella' options="allowed" }}
+            {{> afQuickField name='type' options="allowed" }}
 
             {{# each proxyName in registeredProxies }}
               {{# if afFieldValueIs name='type' value=proxyName }}
