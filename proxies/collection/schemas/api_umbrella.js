@@ -1,3 +1,5 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 export default {
   apiUmbrella: {
     type: Object,
