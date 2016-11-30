@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Organizations } from '../../collection/';
 
-Template.singleOrganization.onCreated(function () {
+Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -13,7 +13,7 @@ Template.singleOrganization.onCreated(function () {
   instance.subscribe('singleOrganization', instance.organizationSlug);
 });
 
-Template.singleOrganization.helpers({
+Template.organizationProfile.helpers({
   organization () {
     // Get single Organization
     const organization = Organizations.findOne();

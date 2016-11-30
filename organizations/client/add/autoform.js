@@ -10,8 +10,8 @@ AutoForm.hooks({
       // Get slug
       const slug = instance.insertDoc.slug;
 
-      // Redirect to newly added API
-      FlowRouter.go('singleOrganization', { slug });
+      // Redirect to newly added organization
+      FlowRouter.go('organizationProfile', { slug });
     },
   },
 });
