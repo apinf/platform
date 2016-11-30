@@ -16,113 +16,47 @@ Template.dashboard.onCreated(function () {
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
 
-  instance.getChartData = function (params, proxyId) {
+  instance.getChartData = function (proxyData, analyticsData) {
     return new Promise((resolve, reject) => {
-      Meteor.call('getElasticSearchData', params, proxyId, (err, res) => {
+      Meteor.call('getElasticSearchData', proxyData, analyticsData, (err, res) => {
         if (err) reject(err);
         resolve(res.hits.hits);
       });
     });
   };
 
-  instance.getElasticSearchQuery = function () {
-    // Placeholder for prefixes query
-    const prefixesQuery = [];
-
-    // Get selected backend from query parameter
-    const backendParameter = FlowRouter.getQueryParam('backend');
-
-    // Find proxy backend configuration in DB
-    const proxyBackend = ProxyBackends.findOne(backendParameter);
-
-    // Check existing of fronted prefix
-    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.url_matches) {
-      // Save frontend prefix
-      const frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
-      prefixesQuery.push({
-        wildcard: {
-          request_path: {
-            // Add '*' to partially match the url
-            value: `${frontendPrefix}*`,
-          },
-        },
-      });
-    }
-
-    // Construct parameters for elasticsearch
-    const params = {
-      size: 50000,
-      body: {
-        query: {
-          filtered: {
-            query: {
-              bool: {
-                should: [
-                  prefixesQuery,
-                ],
-              },
-            },
-            filter: {
-              range: {
-                request_at: { },
-              },
-            },
-          },
-        },
-        sort: [
-          { request_at: { order: 'desc' } },
-        ],
-        fields: [
-          'request_at',
-          'response_status',
-          'response_time',
-          'request_ip_country',
-          'request_ip',
-          'request_path',
-          'user_id',
-        ],
-      },
-    };
-
-    // Listen for analytics date range changes through URL parameters
-    const analyticsFrom = FlowRouter.getQueryParam('fromDate');
-    const analyticsTo = FlowRouter.getQueryParam('toDate');
-
-    // Update query parameters for date range, when provided
-    if (analyticsFrom) {
-      // Set start date (greater than or equal to) for analytics timeframe
-      params.body.query.filtered.filter.range.request_at.gte = analyticsFrom;
-    }
-
-    // Update query parameters for date range, when provided
-    if (analyticsTo) {
-      // Set end date (less than or equal to) for analytics timeframe
-      params.body.query.filtered.filter.range.request_at.lte = analyticsTo;
-    }
-
-    return params;
-  };
-
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
-      // Get elasticsearch query
-      const params = instance.getElasticSearchQuery();
+      // The main Elastic Search Logic
 
+      // Get backend id from query param
       const backendParameter = FlowRouter.getQueryParam('backend');
-      // Find the proxy backend configuration
-      const proxyBackend = ProxyBackends.findOne(backendParameter);
+      // Get dateTo & dateFrom from query param
+      const analyticsFrom = FlowRouter.getQueryParam('fromDate');
+      const analyticsTo = FlowRouter.getQueryParam('toDate');
+      // Get granularity from query param
+      const granularity = FlowRouter.getQueryParam('granularity');
 
-      // If proxy backend exists and has proxy ID
-      // TODO: Add condition for case "Proxy Admin API" with prefix /api-umbrella/
-      if (proxyBackend && proxyBackend.proxyId) {
-        // Provide proxy ID to Elastic Search
-        instance.getChartData(params, proxyBackend.proxyId)
-          .then((chartData) => {
-            // Update reactive variable
-            instance.chartData.set(chartData);
-          })
-          .catch(err => console.error(err));
-      }
+      // Constructs object of analytics data
+      const analyticsData = {
+        analyticsFrom,
+        analyticsTo,
+        granularity,
+      };
+
+      // Check of existing needed proxy data
+      Meteor.call('getProxyData', backendParameter, (error, result) => {
+        // if it was not error
+        if (!error) {
+          // Provide proxy data to elastic search
+          instance.getChartData(result, analyticsData)
+            .then((chartData) => {
+              // Update reactive variable
+              instance.chartData.set(chartData);
+            })
+            .catch(err => console.error(err));
+        }
+      });
     }
   });
 });
