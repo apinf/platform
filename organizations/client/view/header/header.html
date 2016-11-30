@@ -1,33 +1,39 @@
 <template name="singleOrganizationHeader">
   <div class="page-head-topblock">
     <div class="container">
-      <div class="page-head-infoblock">
-        <h1 id="organization-header">
-          {{ organization.name }}
-        </h1>
-        <p>
-          {{ organization.description }}
-        </p>
-        <ul class="list-inline view-organization-meta-details">
-          <li>
-            <a href="{{ organization.url }}">
-              {{ organization.url }}
-            </a>
-          </li>
-        </ul>
-        <ul class="list-inline">
-          <li>
-            {{ organization.contact.person }}
-          </li>
-          <li>
-            {{ organization.contact.phone }}
-          </li>
-          <li>
-            <a href="mailto:{{ organization.contact.email }}">
-              {{ organization.contact.email }}
-            </a>
-          </li>
-        </ul>
+      <div class="row">
+        <div id="page-head-about" class="col-md-12">
+          <h1 id="organization-name">
+            {{ organization.name }}
+          </h1>
+          <p>
+            {{ organization.description }}
+          </p>
+          <ul class="list-inline">
+            <li>
+              <i class="fa fa-link" aria-hidden="true"></i>
+              <a href="{{ organization.url }}">
+                {{ organization.url }}
+              </a>
+            </li>
+          </ul>
+          <ul class="list-inline">
+            <li>
+              <i class="fa fa-user" aria-hidden="true"></i>
+              {{ organization.contact.person }}
+            </li>
+            <li>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              {{ organization.contact.phone }}
+            </li>
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:{{ organization.contact.email }}">
+                {{ organization.contact.email }}
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
