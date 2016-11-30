@@ -15,17 +15,12 @@ a {
   text-decoration: none;
 }
 
-[data-required] label:after {
-  content: '*';
-  font-size: 0.8em;
-  color: @brand-danger;
-  padding-left: 0.2em;
-}
-
+[data-required] label:after,
 .at-pwd-form label:after {
   content: '*';
   font-size: 0.8em;
   color: @brand-danger;
+  padding-left: 0.2em;
 }
 
 #iron-router-progress {
