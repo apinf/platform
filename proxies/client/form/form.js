@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Proxies } from '../../collection';
 
+import { registeredProxies } from '../../collection/schemas/registered_proxies.js';
+
 Template.proxyForm.helpers({
   proxiesCollection () {
     return Proxies;
@@ -20,5 +22,8 @@ Template.proxyForm.helpers({
     }
 
     return formType;
+  },
+  registeredProxies () {
+    return registeredProxies;
   },
 });
