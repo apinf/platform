@@ -28,6 +28,8 @@ Template.dashboard.onCreated(function () {
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
       // The main Elastic Search Logic
+      // Cleanup previous message if one exists
+      $('.charts-holder>#no-chart-data-placeholder').remove();
 
       // Get backend id from query param
       const backendParameter = FlowRouter.getQueryParam('backend');
