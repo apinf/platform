@@ -105,6 +105,9 @@ Template.dashboard.onCreated(function () {
 
   instance.autorun(() => {
     if (instance.subscriptionsReady()) {
+      // Cleanup previous message if one exists
+      $('.charts-holder>#no-chart-data-placeholder').remove();
+
       // Get elasticsearch query
       const params = instance.getElasticSearchQuery();
 
