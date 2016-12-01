@@ -10,15 +10,6 @@ export default {
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  // TODO: decide if these fields are needed for emqtt..
-  // 'emqtt.apiKey': {
-  //   type: String,
-  //   optional: false,
-  // },
-  // 'emqtt.authToken': {
-  //   type: String,
-  //   optional: false,
-  // },
   'emqtt.elasticsearch': {
     type: String,
     optional: false,
