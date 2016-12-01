@@ -403,7 +403,7 @@ Template.dashboardCharts.onRendered(function () {
 
     const frontendPrefix = instance.frontendPrefix.get();
 
-  if (chartData && chartData.length > 0) {
+    if (chartData && chartData.length > 0) {
       let parsedData = [];
 
       if (frontendPrefix) {
