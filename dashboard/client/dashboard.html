@@ -3,12 +3,24 @@
     <h1 class="page-header">
       {{_ "dashboard_mainTitle" }}
     </h1>
-    {{# if isInRole 'admin, manager' }}
-      {{> dashboardChartsFiltering proxyBackends=proxyBackends }}
+    {{# if Template.subscriptionsReady }}
+      {{# if isInRole 'admin, manager' }}
+        {{# if proxyBackendsExists }}
+          {{> dashboardChartsFiltering proxyBackends=proxyBackends }}
 
-      {{> dashboardCharts chartData=chartData }}
+          {{> dashboardCharts chartData=chartData }}
+        {{ else }}
+          <div class="alert alert-warning alert-text" role="alert">
+            <p>
+              {{_ 'dashboard_noProxyBackendsText' }}
+            </p>
+          </div>
+        {{/ if }}
+      {{ else }}
+        {{> dashboardNoApis }}
+      {{/ if }}
     {{ else }}
-      {{> dashboardNoApis }}
+      {{> spinner }}
     {{/ if }}
   </div>
 </template>
