@@ -1,24 +1,16 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export default {
-  apiUmbrella: {
+  emqtt: {
     type: Object,
     optional: true,
   },
-  'apiUmbrella.url': {
+  'emqtt.url': {
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  'apiUmbrella.apiKey': {
-    type: String,
-    optional: false,
-  },
-  'apiUmbrella.authToken': {
-    type: String,
-    optional: false,
-  },
-  'apiUmbrella.elasticsearch': {
+  'emqtt.elasticsearch': {
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,

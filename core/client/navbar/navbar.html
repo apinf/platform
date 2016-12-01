@@ -51,6 +51,13 @@
             </li>
             {{/ if }}
             {{# if isInRole 'admin' }}
+              <li class="{{ isActiveRoute 'addOrganization' }}">
+                <a href="{{ pathFor route='addOrganization' }}">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+
+                  {{_ "navbar_addOrganization" }}
+                </a>
+              </li>
               <li class="{{ isActiveRoute 'accountsAdmin' }}">
                 <a href="{{ pathFor 'accountsAdmin' }}">
                   <i class="fa fa-users" aria-hidden="true"></i>

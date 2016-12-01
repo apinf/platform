@@ -6,12 +6,14 @@ import $ from 'jquery';
 
 Template.timeFrameSelectPicker.onRendered(function () {
 
-  // Enable date picker on timeframe start
-  $('#analytics-timeframe-start').datepicker({
+  $('#timeframe-datepickers').datepicker({
     todayHighlight: true,
     endDate: 'today',
     autoclose: true,
-  })
+  });
+
+  // Event handler for timeframe start
+  $('#analytics-timeframe-start').datepicker()
   // Save chosen date to URL parameter
   // in order to share dashboard state
   .on('changeDate', function (event) {
@@ -27,12 +29,8 @@ Template.timeFrameSelectPicker.onRendered(function () {
     $('#analytics-timeframe-start').datepicker('setDate', new Date(fromDate));
   }
 
-  // Enable date picker on timeframe end
-  $('#analytics-timeframe-end').datepicker({
-    todayHighlight: true,
-    endDate: 'today',
-    autoclose: true,
-  })
+  // Event handler for timeframe end
+  $('#analytics-timeframe-end').datepicker()
   // Save chosen date to URL parameter
   .on('changeDate', function (event) {
     // Set fromDate URL parameter to ISO YYYY-mm-dd

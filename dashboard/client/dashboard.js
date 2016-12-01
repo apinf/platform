@@ -81,4 +81,8 @@ Template.dashboard.helpers({
 
     return proxyBackends;
   },
+  proxyBackendsExists () {
+    // Fetch proxy backends
+    return ProxyBackends.find().fetch();
+  },
 });
