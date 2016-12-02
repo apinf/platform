@@ -15,8 +15,7 @@ Meteor.methods({
         params = Meteor.call('getElasticQueryEmqtt');
         break;
       default:
-        const message = TAPi18n.__('dashboard_errorMessage_unknownProxyType');
-        throw new Meteor.Error(message);
+        throw new Meteor.Error('Unknown proxy type');
     }
 
     // Save the Elastic Search url

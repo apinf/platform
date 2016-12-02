@@ -33,22 +33,15 @@ Meteor.methods({
             response.elasticSearchUrl = proxy.emqtt.elasticsearch;
             break;
           default:
-            // Create & throw message about error
-            const message = TAPi18n.__('dashboard_errorMessage_unknownProxyType');
-            throw new Meteor.Error(message);
+            throw new Meteor.Error('Unknown proxy type');
         }
 
         // Return proxy data
         return response;
       }
-
-      // Create & throw message about error
-      const message = TAPi18n.__('dashboard_errorMessage_noProxyFound');
-      throw new Meteor.Error(message);
+      throw new Meteor.Error('No one proxy was found');
     }
-    // Create & throw message about error
-    const message = TAPi18n.__('dashboard_errorMessage_noProxybackendFound');
-    throw new Meteor.Error(message);
+    throw new Meteor.Error('No one proxy backend configuration was selected');
   },
 });
 
