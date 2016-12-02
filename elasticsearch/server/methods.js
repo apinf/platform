@@ -94,8 +94,9 @@ Meteor.methods({
 
     return params;
   },
-  // TODO: Add right constructor
+  // TODO: Add the correct query object for eMQTT protocol
   getElasticQueryEmqtt () {
+    // Now it returns some placeholder
     return { size: 1000 };
   },
 });
