@@ -1,15 +1,14 @@
 import { Meteor } from 'meteor/meteor';
-import { TAPi18n } from 'meteor/tap:i18n';
 import ElasticSearch from 'elasticsearch';
 
 Meteor.methods({
-  getElasticSearchData (proxyData, analyticsData) {
+  getElasticSearchData (proxyData, filterParameters) {
     let params;
 
     // Constructs the Elastic Search query object
     switch (proxyData.proxyType) {
       case 'apiUmbrella':
-        params = Meteor.call('getElasticQueryUmbrella', proxyData.frontendPrefix, analyticsData);
+        params = Meteor.call('getElasticQueryUmbrella', proxyData.frontendPrefix, filterParameters);
         break;
       case 'emqtt':
         // TODO: Add fronted prefix parameter if eMQTT protocol has it
@@ -33,7 +32,7 @@ Meteor.methods({
     });
   },
   // Constructs the Elastic Search query object for apiUmbrella
-  getElasticQueryUmbrella (frontendPrefix, analyticsData) {
+  getElasticQueryUmbrella (frontendPrefix, filterParameters) {
     // Construct parameters for Elastic Search
     // TODO: For case "Proxy Admin API" with prefix /api-umbrella/
     // TODO: Values aggregation associated with granularity
@@ -83,15 +82,15 @@ Meteor.methods({
     };
 
     // Update query parameters for date range, when provided
-    if (analyticsData.analyticsFrom) {
+    if (filterParameters.analyticsFrom) {
       // Set start date (greater than or equal to) for analytics timeframe
-      params.body.query.filtered.filter.range.request_at.gte = analyticsData.analyticsFrom;
+      params.body.query.filtered.filter.range.request_at.gte = filterParameters.analyticsFrom;
     }
 
     // Update query parameters for date range, when provided
-    if (analyticsData.analyticsTo) {
+    if (filterParameters.analyticsTo) {
       // Set end date (less than or equal to) for analytics timeframe
-      params.body.query.filtered.filter.range.request_at.lte = analyticsData.analyticsTo;
+      params.body.query.filtered.filter.range.request_at.lte = filterParameters.analyticsTo;
     }
 
     return params;

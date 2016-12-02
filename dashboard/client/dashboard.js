@@ -16,9 +16,9 @@ Template.dashboard.onCreated(function () {
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
 
-  instance.getChartData = function (proxyData, analyticsData) {
+  instance.getChartData = function (proxyData, filterParameters) {
     return new Promise((resolve, reject) => {
-      Meteor.call('getElasticSearchData', proxyData, analyticsData, (err, res) => {
+      Meteor.call('getElasticSearchData', proxyData, filterParameters, (err, res) => {
         if (err) reject(err);
         resolve(res.hits.hits);
       });
@@ -40,7 +40,7 @@ Template.dashboard.onCreated(function () {
       const granularity = FlowRouter.getQueryParam('granularity');
 
       // Constructs object of analytics data
-      const analyticsData = {
+      const filterParameters = {
         analyticsFrom,
         analyticsTo,
         granularity,
@@ -51,7 +51,7 @@ Template.dashboard.onCreated(function () {
         // if it was not error
         if (!error) {
           // Provide proxy data to elastic search
-          instance.getChartData(result, analyticsData)
+          instance.getChartData(result, filterParameters)
             .then((chartData) => {
               // Update reactive variable
               instance.chartData.set(chartData);
