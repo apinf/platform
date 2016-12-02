@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { TAPi18n } from 'meteor/tap:i18n';
 // Collection import
 import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
