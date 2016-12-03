@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Utility import
-import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
+import { proxyBasePathRegEx, apiBasePathRegEx, apiBasePathLooseRegEx } from './regex';
 
 const RateLimitSchema = new SimpleSchema({
   duration: {
@@ -102,6 +102,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true,
     label: 'API base path',
     regEx: apiBasePathRegEx,
+  },
+  'url_matches.$.backend_loose_prefix': {
+    type: String,
+    optional: true,
+    label: 'API base path',
+    regEx: apiBasePathLooseRegEx,
   },
   servers: {
     type: [Object],
