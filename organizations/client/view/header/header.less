@@ -10,3 +10,54 @@
     padding-right: 1em;
   }
 }
+
+.organization-header img {
+  float: left;
+}
+
+.organization-header h1 {
+  display: inline;
+  position: relative;
+  top: -0.7em;
+  left: 0.2em;
+}
+
+.profile-img-container {
+    width: 10%;
+    position: relative;
+    display: inline-block; /* added */
+    overflow: hidden; /* added */
+}
+
+.profile-img-container img {
+  width:100%;
+} /* remove if using in grid system */
+
+.profile-img-container img:hover {
+    opacity: 0.5
+}
+.profile-img-container:hover a {
+    opacity: 1; /* added */
+    top: 0; /* added */
+    z-index: 500;
+}
+
+.profile-img-container:hover a span {
+    top: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.profile-img-container a {
+    display: block;
+    position: absolute;
+    top: -100%;
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    color: inherit;
+}

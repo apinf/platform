@@ -3,9 +3,18 @@
     <div class="container">
       <div class="row">
         <div id="organization-head-about" class="col-md-12">
-          <h1 id="organization-name">
-            {{ organization.name }}
-          </h1>
+          <div class="organization-header">
+            <div class="profile-img-container">
+              <img
+                src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                class="img-thumbnail img-circle img-responsive"
+              />
+              <a href="#"><span class="fa fa-upload"></span></a>
+            </div>
+            <h1 id="organization-name">
+              {{ organization.name }}
+            </h1>
+          </div>
           <p>
             {{ organization.description }}
           </p>
