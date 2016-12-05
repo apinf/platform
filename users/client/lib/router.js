@@ -1,20 +1,22 @@
 import { Meteor } from 'meteor/meteor';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Accounts } from 'meteor/accounts-base';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-Router.route('/users', {
+FlowRouter.route('/users', {
   name: 'accountsAdmin',
-  layout: 'masterLayout',
-  template: 'accountsAdmin',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'accountsAdmin' });
+  },
 });
 
-Router.route('/verify-email/:token', {
+FlowRouter.route('/verify-email/:token', {
   name: 'verify-email',
-  action () {
+  action (params) {
     // Get token from Router params
-    const token = Router.current().params.token;
+    const token = params.token;
     Accounts.verifyEmail(token, (error) => {
       if (error) {
         // Eg. token invalid or already used
@@ -25,32 +27,35 @@ Router.route('/verify-email/:token', {
       }
     });
     // Go to front page
-    Router.go('/');
+    FlowRouter.go('/');
   },
 });
 
-Router.route('/settings/account', {
+FlowRouter.route('/settings/account', {
   name: 'account',
-  layout: 'masterLayout',
-  template: 'account',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'account' });
+  },
 });
 
-Router.route('/settings/profile', {
+FlowRouter.route('/settings/profile', {
   name: 'profile',
-  layout: 'masterLayout',
-  template: 'profile',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'profile' });
+  },
 });
 
-Router.route('/sign-out', {
+FlowRouter.route('/sign-out', {
   name: 'signOut',
-  layout: 'masterLayout',
-  template: 'signOut',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'signOut' });
+  },
 });
 
-const signOut = function () {
+// Sign out & redirect to catalogue
+const signOut = function (context, redirect) {
   Meteor.logout();
-  this.redirect('/');
-  this.next();
+  redirect('catalogue');
 };
 
-Router.onBeforeAction(signOut, { only: ['signOut'] });
+FlowRouter.triggers.enter([signOut], { only: ['signOut'] });

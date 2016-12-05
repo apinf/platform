@@ -1,6 +1,6 @@
 // Meteor package imports
 import { Template } from 'meteor/templating';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 // Apinf imports
@@ -14,7 +14,7 @@ Template.viewApi.onCreated(function () {
   const instance = this;
 
   // Get the API Backend ID from the route
-  instance.apiId = Router.current().params._id;
+  instance.apiId = FlowRouter.getParam('_id');
 
   // Subscribe to a single API Backend, by ID
   instance.subscribe('apiBackend', instance.apiId);

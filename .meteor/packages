@@ -13,7 +13,6 @@ aldeed:simple-schema
 fortawesome:fontawesome
 raix:handlebar-helpers
 aldeed:template-extension
-iron:router
 spiderable@1.0.14-release-testing.0
 accounts-ui@1.1.9
 tap:i18n
@@ -21,7 +20,6 @@ useraccounts:bootstrap
 service-configuration@1.0.11
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
-zimme:iron-router-active
 matb33:collection-hooks
 dburles:collection-helpers
 reywood:publish-composite
@@ -50,12 +48,10 @@ random@1.0.10
 ejson@1.0.13
 spacebars@1.0.12
 check@1.2.4
-useraccounts:iron-routing
 pahans:inline-help
 dandv:jquery-rateit
 harrison:papa-parse
 olragon:uri-js
-universe:reactive-queries
 ecmascript@0.5.9
 simple:reactive-method
 sacha:spin
@@ -75,3 +71,8 @@ percolate:migrations
 michalvalasek:autoform-bootstrap-colorpicker
 rajit:bootstrap3-datepicker
 apinf:autoform-bs-datepicker
+todda00:friendly-slugs
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+useraccounts:flow-routing

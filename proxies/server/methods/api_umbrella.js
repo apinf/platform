@@ -247,27 +247,4 @@ Meteor.methods({
       );
     }
   },
-  elasticsearchIsDefined () {
-    // TODO: multi-proxy support
-    const proxy = Proxies.findOne();
-
-    if (proxy) {
-      const elasticsearch = proxy.apiUmbrella.elasticsearch;
-
-      // Return true or false, depending on whether elasticsearch is defined
-      return (elasticsearch);
-    }
-
-    return false;
-  },
-  getElasticsearchUrl () {
-    if (Meteor.call('elasticsearchIsDefined')) {
-      // TODO: multi-proxy support
-      const elasticsearch = Proxies.findOne().apiUmbrella.elasticsearch;
-
-      return elasticsearch;
-    }
-
-    throw new Meteor.Error('Elasticsearch is not defined');
-  },
 });

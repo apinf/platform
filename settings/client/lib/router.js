@@ -1,5 +1,9 @@
-Router.route('/settings', {
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+
+FlowRouter.route('/settings', {
   name: 'settings',
-  layout: 'masterLayout',
-  template: 'settings'
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'settings' });
+  },
 });

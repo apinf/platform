@@ -15,7 +15,7 @@
           <tbody>
             <tr>
               <th scope="row">
-                Type
+                {{_ "proxyItem_type" }}
               </th>
               <td>
                 {{ proxy.type }}
@@ -23,7 +23,7 @@
             </tr>
             <tr>
               <th scope="row">
-                URL
+                {{_ "proxyItem_url" }}
               </th>
               <td>
                 {{ proxy.apiUmbrella.url }}
@@ -31,7 +31,7 @@
             </tr>
             <tr>
               <th scope="row">
-                API Key
+                {{_ "proxyItem_apiKey" }}
               </th>
               <td>
                 *****
@@ -39,7 +39,7 @@
             </tr>
             <tr>
               <th scope="row">
-                API Token
+                {{_ "proxyItem_apiToken" }}
               </th>
               <td>
                 *****
@@ -47,10 +47,40 @@
             </tr>
             <tr>
               <th scope="row">
-                Elasticsearch
+                {{_ "proxyItem_elasticsearch" }}
               </th>
               <td>
                 {{ proxy.apiUmbrella.elasticsearch }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      {{/ if }}
+      {{# if equals proxy.type 'emqtt' }}
+        <table class="table table-condensed">
+          <tbody>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_type" }}
+              </th>
+              <td>
+                {{ proxy.type }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_url" }}
+              </th>
+              <td>
+                {{ proxy.emqtt.url }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_elasticsearch" }}
+              </th>
+              <td>
+                {{ proxy.emqtt.elasticsearch }}
               </td>
             </tr>
           </tbody>

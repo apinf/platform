@@ -1,38 +1,43 @@
-Router.configure({
-  layoutTemplate: 'masterLayout',
-  loadingTemplate: 'loading',
-  notFoundTemplate: 'notFound',
-  routeControllerNameConverter: 'camelCase',
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+
+// Define group for routes that require sign in
+const signedIn = FlowRouter.group({
+  triggersEnter: [function () {
+    if (!(Meteor.loggingIn() || Meteor.userId())) {
+      // Redirect to sign in
+      FlowRouter.go('signIn');
+    }
+  }]
 });
 
-Router.waitOn(function() {
-  return this.subscribe('user');
-});
-
-var redirectToDashboard = function () {
-  if (Meteor.user()) {
-    this.redirect('/dashboard');
+// Define 404 route
+FlowRouter.notFound = {
+  action: function() {
+    BlazeLayout.render('masterLayout', { main: 'notFound' });
   }
-  this.next();
 };
 
-Router.onBeforeAction(redirectToDashboard, {only: ['forgotPwd', 'signOut']});
-
-// Routes for logged in user
-Router.plugin('ensureSignedIn', {
-  only: ['dashboard']
+// Define 401 route
+FlowRouter.route('/not-authorized', {
+  name: 'notAuthorized',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'notAuthorized' });
+  },
 });
 
-Router.map(function() {
-  this.route('notAuthorized', {
-    path: '/not-authorized',
-    layoutTemplate: 'masterLayout',
-    render: 'notAuthorized',
-  });
-
-  this.route('forbidden', {
-    path: '/forbidden',
-    layoutTemplate: 'masterLayout',
-    render: 'forbidden',
-  });
+// Define 403 route
+FlowRouter.route('/forbidden', {
+  name: 'forbidden',
+  action: function () {
+    BlazeLayout.render('masterLayout', { main: 'forbidden' });
+  },
 });
+
+const redirectToCatalogue = function () {
+  FlowRouter.go('catalogue');
+};
+
+FlowRouter.triggers.enter([redirectToCatalogue], {only: ['forgotPwd']});
+
+export { signedIn };
