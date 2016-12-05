@@ -30,6 +30,11 @@
                 {{_ "catalogueTable_added" }}
                 {{ api.relativeCreatedAt }}
               </i>
+              {{# if api.description }}
+                <p class="api-catalogue-table-description">
+                  {{ api.description }}
+                </p>
+              {{/ if }}
             </div>
           </td>
           <td class="col-sm-1" style="vertical-align:middle">

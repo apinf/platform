@@ -1,20 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-
-import _ from 'lodash'
-
-Template.apiSelectPicker.onRendered(function () {
-
-  const instance = this;
-
-  instance.selectPickerElement = $('#api-frontend-prefix');
-
-  // Initialize select picker widget
-  instance.selectPickerElement.selectpicker({});
-
-});
+import { Roles } from 'meteor/alanning:roles';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.apiSelectPicker.helpers({
+  // TODO: Update api Umbrella Admin case for multiple instance
   apiUmbrellaOption () {
     // Get current user Id
     const userId = Meteor.userId();
@@ -22,10 +12,17 @@ Template.apiSelectPicker.helpers({
     if (Roles.userIsInRole(userId, ['admin'])) {
       return {
         name: 'Proxy Admin API',
-        prefix: '/api-umbrella/'
-      }
+        prefix: '/api-umbrella/',
+      };
     }
 
     return {};
-  }
+  },
+});
+
+Template.apiSelectPicker.events({
+  'change #proxy-backend-select': function (event) {
+    // Update selected backend URL parameter
+    FlowRouter.setQueryParams({ backend: event.target.value });
+  },
 });

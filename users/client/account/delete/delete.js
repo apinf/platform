@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.deleteAccount.events({
@@ -22,7 +22,7 @@ Template.deleteAccount.events({
       sAlert.success(message, { onRouteClose: false });
 
       // Route to home page
-      Router.go('home');
+      FlowRouter.go('home');
     });
   },
 });
