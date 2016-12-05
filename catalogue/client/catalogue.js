@@ -214,6 +214,9 @@ Template.catalogue.events({
 
     // Update the instance sort value reactive variable
     instance.sortBy.set(sortBy);
+
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortBy: event.target.value });
   },
   'change [name=sort-direction]': function (event, instance) {
     // Get selected sort value
@@ -221,6 +224,9 @@ Template.catalogue.events({
 
     // Update the instance sort value reactive variable
     instance.sortDirection.set(sortDirection);
+
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortDirection: event.target.value });
   },
   'change [name=filter-options]': function (event, instance) {
     // Get selected sort value
@@ -228,6 +234,9 @@ Template.catalogue.events({
 
     // Update the instance sort value reactive variable
     instance.filterBy.set(filterBy);
+
+    // Set URL parameter
+    FlowRouter.setQueryParams({ filterBy: event.target.value });
   },
   'change [name=view-mode]': function (event, instance) {
     // Get selected sort value
@@ -235,6 +244,9 @@ Template.catalogue.events({
 
     // Update the instance sort value reactive variable
     instance.viewMode.set(viewMode);
+
+    // Set URL parameter
+    FlowRouter.setQueryParams({ viewMode: event.target.value });
   },
   // Pagination
   'click #prev-page': function (event, instance) {
