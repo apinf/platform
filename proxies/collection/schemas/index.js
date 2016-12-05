@@ -1,7 +1,11 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
 import { Proxies } from '../';
 
-const apiUmbrellaSchema = require('./api_umbrella').default;
+import registeredProxies from '../registered_proxies';
+
+import apiUmbrellaSchema from './api_umbrella';
+import emqttSchema from './emqtt';
 
 let schema = {
   name: {
@@ -16,12 +20,11 @@ let schema = {
   },
   type: {
     type: String,
-    defaultValue: 'apiUmbrella',
-    allowedValues: ['apiUmbrella', 'kong', 'tuk'],
+    allowedValues: registeredProxies,
   },
 };
 
-schema = _.assign(schema, apiUmbrellaSchema);
+schema = _.assign(schema, apiUmbrellaSchema, emqttSchema);
 
 Proxies.schema = new SimpleSchema(schema);
 

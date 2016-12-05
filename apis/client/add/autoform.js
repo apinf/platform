@@ -1,5 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 AutoForm.hooks({
-  'addApiForm': {
+  addApiForm: {
     before: {
       insert (api) {
         // Get current user ID
@@ -14,7 +19,7 @@ AutoForm.hooks({
     },
     onSuccess (formType, apiId) {
       // Redirect to newly added API
-      Router.go('viewApi', { _id: apiId });
+      FlowRouter.go('viewApi', { _id: apiId });
 
       // Get current user ID
       const userId = Meteor.userId();
