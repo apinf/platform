@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 import { Branding } from '/branding/collection';
@@ -35,7 +35,7 @@ Template.navbar.helpers({
   },
   isSearchRoute () {
     // Get name of current route from Router
-    const routeName = Router.current().route.getName();
+    const routeName = FlowRouter.getRouteName();
 
     if (routeName === 'search') {
       return true;

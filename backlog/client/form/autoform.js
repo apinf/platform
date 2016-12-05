@@ -1,5 +1,5 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { Router } from 'meteor/iron:router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 import $ from 'jquery';
@@ -9,7 +9,7 @@ AutoForm.hooks({
     before: {
       insert (backlogItem) {
         // Attach API Backend Id to backlog item
-        backlogItem.apiBackendId = Router.current().params._id;
+        backlogItem.apiBackendId = FlowRouter.getParam('_id');
         return backlogItem;
       },
     },
