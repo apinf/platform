@@ -12,7 +12,7 @@ Template.catalogue.onCreated(function () {
   // Set up toolbar reactive variables
   instance.sortBy = new ReactiveVar('name');
   instance.sortDirection = new ReactiveVar('ascending');
-  instance.filterBy = new ReactiveVar('show-all');
+  instance.filterBy = new ReactiveVar('filterBy-all');
   instance.viewMode = new ReactiveVar('grid');
 
 
@@ -84,6 +84,23 @@ Template.catalogue.onCreated(function () {
 });
 
 Template.catalogue.onRendered(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Check URL parameter for filtering
+  const filterByParameter = FlowRouter.getQueryParam('filterBy');
+
+  if (filterByParameter) {
+    // Set the filter by UI state from URL parameter
+    instance.$(`#filterBy-${filterByParameter}`).button('toggle');
+  } else {
+    // Get filtering from template
+    const filterBy = instance.$('[name=filter-options]:checked').val();
+
+    // Set filtering URL parameter from template value
+    FlowRouter.setQueryParams({ filterBy });
+  }
+
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
 });
