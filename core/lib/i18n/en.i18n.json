@@ -344,6 +344,7 @@
   "notAuthorized_Title": "Not Authorized",
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Title": "Oops! Page not found.",
+  "organizationLogo_resumable_errorText": "File creation failed!",
   "organizationLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "organizationLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "profile_Header": "Profile",
