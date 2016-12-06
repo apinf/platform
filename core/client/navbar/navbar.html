@@ -34,11 +34,23 @@
               {{/ if }}
             {{/ if }}
           {{/ if }}
-          <li class="{{ isActiveRoute 'catalogue' }}">
-            <a href="{{ pathFor 'catalogue' }}">
+          <li class="dropdown {{ isActiveRoute 'catalogue' }} {{ isActiveRoute 'organizationCatalog' }}" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-book" aria-hidden="true"></i>
               {{_ "navbar_catalogue" }}
             </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{ pathFor 'catalogue' }}">
+                  {{_ "navbar_apis" }}
+                </a>
+              </li>
+              <li>
+                <a href="{{ pathFor 'organizationCatalog' }}">
+                  {{_ "navbar_organizations" }}
+                </a>
+              </li>
+            </ul>
           </li>
           {{# if currentUser }}
             {{# if userCanAddApi }}
@@ -50,14 +62,8 @@
               </a>
             </li>
             {{/ if }}
-            {{# if isInRole 'admin' }}
-              <li class="{{ isActiveRoute 'addOrganization' }}">
-                <a href="{{ pathFor route='addOrganization' }}">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
 
-                  {{_ "navbar_addOrganization" }}
-                </a>
-              </li>
+            {{# if isInRole 'admin' }}
               <li class="{{ isActiveRoute 'accountsAdmin' }}">
                 <a href="{{ pathFor 'accountsAdmin' }}">
                   <i class="fa fa-users" aria-hidden="true"></i>
