@@ -19,12 +19,11 @@ Template.organizationCatalog.onCreated(function () {
   instance.sortDirection = new ReactiveVar('1');
   instance.viewMode = new ReactiveVar('grid');
 
-
   // Subscribe to Organization logo collection
   instance.subscribe('allOrganizationLogo');
 
   instance.autorun(() => {
-    // Watch for changes in the sort and filter settings
+    // Watch for changes in the sort settings
     const sortBy = instance.sortBy.get();
     const sortDirection = instance.sortDirection.get();
 
@@ -84,24 +83,24 @@ Template.organizationCatalog.helpers({
 
 Template.organizationCatalog.events({
   'change [name=view-mode]': function (event, templateInstance) {
-    // Get selected sort value
+    // Get selected view mode
     const viewMode = event.target.value;
 
-    // Update the instance sort value reactive variable
+    // Update the instance view mode reactive variable
     templateInstance.viewMode.set(viewMode);
   },
-  'change [name=sort-menu]': function (event, instance) {
+  'change [name=sort-menu]': function (event, templateInstance) {
     // Get selected sort value
     const sortBy = event.target.value;
 
     // Update the instance sort value reactive variable
-    instance.sortBy.set(sortBy);
+    templateInstance.sortBy.set(sortBy);
   },
-  'change [name=sort-direction]': function (event, instance) {
-    // Get selected sort value
+  'change [name=sort-direction]': function (event, templateInstance) {
+    // Get selected sort direction
     const sortDirection = event.target.value;
 
-    // Update the instance sort value reactive variable
-    instance.sortDirection.set(sortDirection);
+    // Update the instance sort direction reactive variable
+    templateInstance.sortDirection.set(sortDirection);
   },
 });
