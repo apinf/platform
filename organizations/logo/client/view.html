@@ -1,16 +1,3 @@
 <template name="viewOrganizationLogo">
-  <div id='organization-file-browse' class="profile-img-container">
-  {{# if organizationLogoExists }}
-    <img
-      src="{{ uploadedOrganizationLogoLink }}"
-      class="img-thumbnail img-responsive"
-    />
-  {{ else }}
-    <img
-      src="/img/placeholder-logo.jpg"
-      class="img-thumbnail img-responsive"
-    />
-  {{/ if }}
-    <span class="fa fa-camera"></span>
-  </div>
+    <img src="{{ uploadedOrganizationLogoLink }}" class="{{ logoStyles }}" />
 </template>
