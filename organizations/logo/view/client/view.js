@@ -32,9 +32,7 @@ Template.viewOrganizationLogo.helpers({
   },
   organizationLogoExists () {
     const organization = Template.currentData().organization;
-
-    if (organization && organization.organizationLogoFileId) {
-      return true;
-    }
+    // Return true if organizationLogoFileId exists
+    return organization && organization.organizationLogoFileId;
   },
 });
