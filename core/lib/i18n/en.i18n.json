@@ -122,6 +122,7 @@
   "apiSettings_deleteApiTitle": "Delete the API",
   "apiSettings_deletePanel_title": "Delete",
   "apiSettings_detailsPanel_title": "Details",
+  "apiSettings_details_helpText": "You can disconnect your API from an organization with the option \"Select one\" from the Organization list. This action will no longer show your API in organization catalog or organization profile.",
   "apiSettings_uploadLogo_heading": "Upload logo",
   "apiSettings_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
   "apiSettings_visibilityPanel_title": "Visibility",

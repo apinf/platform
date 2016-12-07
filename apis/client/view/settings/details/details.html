@@ -24,7 +24,17 @@
       {{> afQuickField name='name' }}
       {{> afQuickField name='description' }}
       {{> afQuickField name='url' }}
-      {{> afQuickField name='organizationId' }}
+
+      <div class="form-group">
+        <label for="api-base-path-field">
+          {{ afFieldLabelText name='organizationId' }}
+        </label>
+        <p class="help-block">
+          {{_ "apiSettings_details_helpText" }}&nbsp;
+        </p>
+        {{> afFieldInput name='organizationId' }}
+      </div>
+
       <div id="form-buttons">
         <button type="submit" class="btn btn-success" id="save-settings">
           {{_ "viewApiSettigs_saveButton_text" }}
