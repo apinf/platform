@@ -395,6 +395,9 @@
       "apis": {
           "submit_methods": {
               "label": "Allow try-out for following methods:"
+          },
+          "organizationId": {
+            "label": "Connect API to organization"
           }
       },
       "apiMetadata": {
