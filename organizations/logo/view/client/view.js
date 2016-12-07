@@ -9,7 +9,7 @@ Template.viewOrganizationLogo.onCreated(function () {
 
 Template.viewOrganizationLogo.onRendered(function () {
   // Assign resumable browse to element
-  OrganizationLogo.resumable.assignBrowse(this.$('.organization-file-browse'));
+  OrganizationLogo.resumable.assignBrowse(this.$('#organization-file-browse'));
 });
 
 Template.viewOrganizationLogo.helpers({
