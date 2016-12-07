@@ -40,6 +40,15 @@ Organizations.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Email,
   },
+  managerIds: {
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id,
+    defaultValue: [null],
+    autoform: {
+      type: 'hidden',
+      label: false,
+    },
+  },
   createdBy: {
     type: String,
     autoValue () {
