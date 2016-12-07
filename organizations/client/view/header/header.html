@@ -3,9 +3,12 @@
     <div class="container">
       <div class="row">
         <div id="organization-head-about" class="col-md-12">
-          <h1 id="organization-name">
-            {{ organization.name }}
-          </h1>
+          <div class="organization-header">
+            {{> viewOrganizationLogo organization=organization }}
+            <h1 id="organization-name">
+              {{ organization.name }}
+            </h1>
+          </div>
           <p>
             {{ organization.description }}
           </p>
