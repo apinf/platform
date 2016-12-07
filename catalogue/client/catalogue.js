@@ -90,15 +90,24 @@ Template.catalogue.onRendered(function () {
   // Check URL parameter for filtering
   const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
-  if (filterByParameter) {
+  // Check URL parameter for sorting
+  const sortByParameter = FlowRouter.getQueryParam('sortBy');
+
+  if (filterByParameter && sortByParameter) {
     // Set the filter by UI state from URL parameter
     instance.$(`#filterBy-${filterByParameter}`).button('toggle');
+
+    // Set the sorting by UI state from URL parameter
+    instance.$('#sort-select').val(`${sortByParameter}`).change();
   } else {
     // Get filtering from template
     const filterBy = instance.$('[name=filter-options]:checked').val();
 
-    // Set filtering URL parameter from template value
-    FlowRouter.setQueryParams({ filterBy });
+    // Get sorting from template
+    const sortBy = instance.$('[name=sort-menu]').val();
+
+    // Set filtering and sorting URL parameters from template value
+    FlowRouter.setQueryParams({ filterBy, sortBy });
   }
 
   // Activate tooltips on all relevant items
