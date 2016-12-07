@@ -52,6 +52,16 @@ Meteor.startup(() => {
       sAlert.error(message);
       return;
     }
+
+    // Get organization
+    const organization = Organizations.findOne();
+    if (organization && !organization.currentUserCanEdit()) {
+      // Create & show error message about permissions
+      const message = TAPi18n.__('organizationLogo_noPermissions');
+      sAlert.error(message);
+      return;
+    }
+
     // Accepted extensions for images
     const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 

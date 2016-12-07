@@ -1,16 +1,16 @@
 import { OrganizationLogo } from '/organizations/logo/collection/collection';
 
 OrganizationLogo.allow({
-  insert: function(userId, file) {
+  insert (userId, file) {
     return true;
   },
-  remove: function(userId, file) {
+  remove (userId, file) {
     return true;
   },
-  read: function(userId, file) {
+  read (userId, file) {
     return true;
   },
-  write: function(userId, file, fields) {
+  write (userId, file, fields) {
     return true;
-  }
+  },
 });
