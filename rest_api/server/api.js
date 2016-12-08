@@ -1,7 +1,7 @@
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
-  apiPath: 'rest-api/v1',
+  apiPath: 'rest-api',
   version: 'v1',
   defaultHeaders: {
     'Content-Type': 'application/json',
@@ -30,6 +30,10 @@ ApiV1.swagger = {
     },
   },
 };
+
+ApiV1.addRoute('hello', { authRequired: false }, {
+  get: () => ({ result: 'it works' }),
+});
 
 // Generate Swagger to route /rest-api/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
