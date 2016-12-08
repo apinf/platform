@@ -1,7 +1,8 @@
 import { Apis } from '/apis/collection';
 import { ApiV1 } from './config';
 
-// Simple collection route for Apis
+// Generates: "GET all" /rest-api/v1/apis and "GET one"
+// /rest-api/v1/apis/:id for Apis collection
 ApiV1.addCollection(Apis, {
   excludedEndpoints: ['post', 'put', 'delete'],
   routeOptions: { authRequired: false },
@@ -11,7 +12,7 @@ ApiV1.addCollection(Apis, {
         description: 'Returns all APIs.',
         responses: {
           200: {
-            description: 'List of organizations.',
+            description: 'List of APIs.',
           },
         },
       },
