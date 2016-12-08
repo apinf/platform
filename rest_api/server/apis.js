@@ -9,6 +9,9 @@ ApiV1.addCollection(Apis, {
   endpoints: {
     getAll: {
       swagger: {
+        tags: [
+          ApiV1.swagger.tags.apis,
+        ],
         description: 'Returns all APIs.',
         responses: {
           200: {
@@ -19,7 +22,13 @@ ApiV1.addCollection(Apis, {
     },
     get: {
       swagger: {
+        tags: [
+          ApiV1.swagger.tags.apis,
+        ],
         description: 'Returns one API with given ID.',
+        parameters: [
+          ApiV1.swagger.params.apiId,
+        ],
         responses: {
           200: {
             description: 'One API.',

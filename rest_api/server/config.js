@@ -12,7 +12,7 @@ const ApiV1 = new Restivus({
 });
 
 // Add Restivus Swagger configuration
-// - meta, definitions, params, tags
+// - meta, tags, params, definitions
 ApiV1.swagger = {
   meta: {
     swagger: '2.0',
@@ -27,6 +27,19 @@ ApiV1.swagger = {
       license: {
         name: 'MIT',
       },
+    },
+  },
+  tags: {
+    apis: 'Apis',
+    organization: 'Organizations',
+  },
+  params: {
+    apiId: {
+      name: 'id',
+      in: 'path',
+      description: 'Api ID',
+      required: true,
+      type: 'string',
     },
   },
 };
