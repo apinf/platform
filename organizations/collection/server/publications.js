@@ -8,6 +8,8 @@ Meteor.publish('allOrganizationBasicDetails', () => {
     { fields: {
       _id: 1,
       name: 1,
+      description: 1,
+      contact: 1,
     },
     });
 });
