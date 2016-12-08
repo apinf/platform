@@ -47,13 +47,15 @@
           <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
             <label
                    class="btn btn-default toolbar-tooltip active"
-                   title="{{_ 'catalogue_toolbar_sortMenuOptions_sortAscending' }}">
-              <input type="radio" name="sort-direction" id="sort-ascending" value="ascending">
+                   title="{{_ 'catalogue_toolbar_sortMenuOptions_sortAscending' }}"
+                   id="sortDirection-ascending">
+              <input type="radio" name="sort-direction" id="sort-ascending" value="ascending" checked>
               <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
             </label>
             <label
                    class="btn btn-default toolbar-tooltip"
-                   title="{{_ 'catalogue_toolbar_sortMenuOptions_sortDescending' }}">
+                   title="{{_ 'catalogue_toolbar_sortMenuOptions_sortDescending' }}"
+                   id="sortDirection-descending">
               <input type="radio" name="sort-direction" id="sort-descending" value="descending">
               <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
             </label>
