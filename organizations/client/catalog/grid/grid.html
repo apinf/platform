@@ -8,7 +8,7 @@
             {{> viewOrganizationLogo organization=organization }}
           </div>
           <div class="organization-card-info">
-            <a href="/organization/{{ organization.slug }}"
+            <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}"
                class="organization-card-name">
               {{ organization.name }}
             </a>
