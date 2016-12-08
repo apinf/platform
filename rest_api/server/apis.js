@@ -19,6 +19,14 @@ ApiV1.addCollection(Apis, {
           },
         },
       },
+      action () {
+        // Check queryParams
+        if (this.queryParams) {
+          console.log(this.queryParams);
+          return Apis.find({ organizationId: this.queryParams.organizationId }).fetch();
+        }
+        return {};
+      },
     },
     get: {
       swagger: {
