@@ -31,11 +31,7 @@ ApiV1.swagger = {
   },
 };
 
-ApiV1.addRoute('hello', { authRequired: false }, {
-  get: () => ({ result: 'it works' }),
-});
-
 // Generate Swagger to route /rest-api/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
 
-export default { ApiV1 };
+export { ApiV1 };
