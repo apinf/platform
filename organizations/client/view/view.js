@@ -16,8 +16,6 @@ Template.organizationProfile.onCreated(function () {
 Template.organizationProfile.helpers({
   organization () {
     // Get single Organization
-    const organization = Organizations.findOne();
-
-    return organization;
+    return Organizations.findOne();
   },
 });

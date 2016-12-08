@@ -1,0 +1,34 @@
+<template name="organizationCatalogGrid">
+  <div class="organization-catalogue container-fluid">
+    <div class="row">
+      {{# each organization in organizations }}
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="organization-card ">
+          <div class="organization-card-logo">
+            {{> viewOrganizationLogo organization=organization }}
+          </div>
+          <div class="organization-card-info">
+            <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}"
+               class="organization-card-name">
+              {{ organization.name }}
+            </a>
+
+            {{# if organization.description }}
+            <p class="organization-card-description">
+              {{ organization.description }}
+            </p>
+            {{/ if }}
+          </div>
+          <ul class="organization-card-stats list-inline">
+            <li class="pull-right">
+              <span class="organization-card-created">
+                {{_ "organizationCatalogGrid_added" organization.relativeCreatedAt }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {{/ each }}
+    </div>
+  </div>
+</template>

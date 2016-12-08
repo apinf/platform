@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+
+import moment from 'moment';
 import _ from 'lodash';
+
 import { Organizations } from './';
 
 Organizations.helpers({
@@ -21,5 +24,9 @@ Organizations.helpers({
     }
     // User is not logged in
     return false;
+  },
+  relativeCreatedAt () {
+    // Convert createdAt time to format "time ago"
+    return moment(this.createdAt).fromNow();
   },
 });

@@ -13,3 +13,8 @@ Meteor.publish('allOrganizationBasicDetails', () => {
     },
     });
 });
+
+
+// Publish collection for pagination
+new Meteor.Pagination(Organizations);
+
