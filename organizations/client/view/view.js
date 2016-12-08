@@ -18,7 +18,4 @@ Template.organizationProfile.helpers({
     // Get single Organization
     return Organizations.findOne();
   },
-  logoStyles () {
-    return 'img-responsive';
-  },
 });
