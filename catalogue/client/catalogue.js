@@ -62,7 +62,7 @@ Template.catalogue.onCreated(function () {
     instance.pages.set(pages);
   };
 
-  instance.autorun(function () {
+  instance.autorun(() => {
     // Watch for changes in the sort and filter settings
     const sortBy = instance.sortBy.get();
     const sortDirection = instance.sortDirection.get();
@@ -124,24 +124,6 @@ Template.catalogue.helpers({
     const paginatedApis = apis.slice(arrStart, arrEnd);
 
     return paginatedApis;
-  },
-  gridViewMode () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get view mode from template
-    const viewMode = instance.viewMode.get();
-
-    return (viewMode === 'grid');
-  },
-  tableViewMode () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get view mode from template
-    const viewMode = instance.viewMode.get();
-
-    return (viewMode === 'table');
   },
   // Pagination
   currentPageNumber () {
@@ -208,41 +190,6 @@ Template.catalogue.helpers({
 });
 
 Template.catalogue.events({
-  // Catalogue
-  'change #sort-select': function (event, instance) {
-    // Get selected sort value
-    const sortBy = event.target.value;
-
-    // Update the instance sort value reactive variable
-    instance.sortBy.set(sortBy);
-
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
-  },
-  'change [name=sort-direction]': function (event, instance) {
-    // Get selected sort value
-    const sortDirection = event.target.value;
-
-    // Update the instance sort value reactive variable
-    instance.sortDirection.set(sortDirection);
-  },
-  'change [name=filter-options]': function (event, instance) {
-    // Get selected sort value
-    const filterBy = event.target.value;
-
-    // Update the instance sort value reactive variable
-    instance.filterBy.set(filterBy);
-
-    // Set URL parameter
-    FlowRouter.setQueryParams({ filterBy: event.target.value });
-  },
-  'change [name=view-mode]': function (event, instance) {
-    // Get selected sort value
-    const viewMode = event.target.value;
-
-    // Update the instance sort value reactive variable
-    instance.viewMode.set(viewMode);
-  },
   // Pagination
   'click #prev-page': function (event, instance) {
     const currentPageNumber = instance.currentPageNumber.get();
