@@ -5,12 +5,6 @@ import { Apis } from '/apis/collection';
 import { Organizations } from '/organizations/collection';
 import { ApiMetadata } from '/metadata/collection';
 
-Template.apiSettings_details.onCreated(function () {
-  const instance = this;
-  // subscribe to data
-  instance.subscribe('allOrganizations');
-});
-
 Template.apiSettings_details.helpers({
   apisCollection () {
     return Apis;
@@ -34,7 +28,7 @@ Template.apiSettings_details.events({
 
     // If organization document was found
     if (organization) {
-      // Fill a object withorganization information for metadata
+      // Fill a object with organization information for metadata
       const values = {
         organization: {
           name: organization.name,
