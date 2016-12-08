@@ -34,7 +34,7 @@ Template.apiSettings_details.events({
     // If organization document was found
     if (organization) {
       // Fill a object with organization information for metadata
-      const values = {
+      const metadataInformation = {
         organization: {
           name: organization.name,
           description: organization.description,
@@ -49,12 +49,12 @@ Template.apiSettings_details.events({
       // If metadata document already exists
       if (metadata) {
         // Update information
-        ApiMetadata.update(metadataId, { $set: values });
+        ApiMetadata.update(metadataId, { $set: metadataInformation });
       } else {
         // Add information about API
-        values.apiBackendId = apiId;
+        metadataInformation.apiBackendId = apiId;
         // Create a new one metadata
-        ApiMetadata.insert(values);
+        ApiMetadata.insert(metadataInformation);
       }
     } else {
       // Was selected the first item in list then delete metadata information
