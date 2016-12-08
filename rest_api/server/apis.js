@@ -20,11 +20,15 @@ ApiV1.addCollection(Apis, {
         },
       },
       action () {
+        // Get queryParams
+        const queryParams = this.queryParams;
         // Check queryParams
-        if (this.queryParams) {
-          console.log(this.queryParams);
-          return Apis.find({ organizationId: this.queryParams.organizationId }).fetch();
+        if (queryParams && queryParams.organizationId) {
+          // Return Apis by organizationId
+          // TODO: same response structure with generated endpoints
+          return Apis.find({ organizationId: queryParams.organizationId }).fetch();
         }
+        // TODO: otherwise return all apis
         return {};
       },
     },
