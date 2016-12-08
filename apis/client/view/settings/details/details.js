@@ -9,6 +9,11 @@ Template.apiSettings_details.helpers({
   apisCollection () {
     return Apis;
   },
+  organizationsExist () {
+    const organizationsCount = Organizations.find().count();
+
+    return organizationsCount > 0;
+  },
 });
 
 Template.apiSettings_details.events({

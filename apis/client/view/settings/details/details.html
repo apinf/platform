@@ -25,7 +25,8 @@
       {{> afQuickField name='description' }}
       {{> afQuickField name='url' }}
 
-      <div class="form-group">
+      {{# if organizationsExist }}
+        <div class="form-group">
         <label>
           {{ afFieldLabelText name='organizationId' }}
         </label>
@@ -34,6 +35,7 @@
         </p>
         {{> afFieldInput name='organizationId' }}
       </div>
+      {{/ if }}
 
       <div id="form-buttons">
         <button type="submit" class="btn btn-success" id="save-settings">
