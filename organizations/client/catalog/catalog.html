@@ -50,7 +50,10 @@
             </div>
           </div>
           <div class="nav navbar-nav">
-            <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
+            <div class="btn-group navbar-btn"
+                 role="group"
+                 aria-label="{{_ 'organizationCatalog_buttonText_sortDirect' }}"
+                 data-toggle="buttons">
               <label
                   class="btn btn-default toolbar-tooltip active"
                   title="{{_ 'organizationCatalog_toolbar_sortMenuOptions_sortAscending' }}">
@@ -67,7 +70,10 @@
           </div>
           {{# if currentUser }}
             <div class="nav navbar-nav">
-              <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
+              <div class="btn-group navbar-btn filter-options-menu"
+                   role="group"
+                   aria-label="{{_ 'organizationCatalog_buttonText_filterOptions' }}"
+                   data-toggle="buttons" >
                 <label class="btn btn-default active">
                   <input type="radio" name="filter-options" value="all">
                   {{_ "organizationCatalog_toolbar_filterOptions_showAll" }}
@@ -84,7 +90,10 @@
             </div>
           {{/ if }}
           <div class="nav navbar-nav navbar-right">
-            <div class="btn-group navbar-btn" role="group" aria-label="View mode" data-toggle="buttons">
+            <div class="btn-group navbar-btn"
+                 role="group"
+                 aria-label="{{_ 'organizationCatalog_buttonText_viewMode' }}"
+                 data-toggle="buttons">
               <label
                   class="btn btn-default toolbar-tooltip active"
                   title="{{_ 'organizationCatalog_toolbar_viewMode_grid' }}">
