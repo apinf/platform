@@ -1,5 +1,13 @@
 <template name="organizationProfile">
+  <div class="container">
     {{# if Template.subscriptionsReady }}
-    {{> organizationProfileHeader organization=organization }}
+      {{> organizationProfileHeader organization=organization }}
+      <div class="row">
+        <label class="h3">
+          {{_ 'organizationProfile_text_apisCount' managedApisCount }}
+        </label>
+      </div>
+      {{> catalogueGrid apis=managedApis }}
     {{/if}}
+  </div>
 </template>
