@@ -31,7 +31,6 @@ ApiV1.swagger = {
   },
   tags: {
     apis: 'Apis',
-    organization: 'Organizations',
   },
   params: {
     apiId: {
