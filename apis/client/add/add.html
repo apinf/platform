@@ -1,19 +1,26 @@
 <template name="addApi">
-  <div class="container">
-    <h1 class="page-header">
-      {{_ "addApi_header" }}
-    </h1>
-    {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
-      <!--invisible auto-value field-->
-      {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
-      <fieldset>
-        {{> afQuickField name='name' }}
-        {{> afQuickField name='description' rows=2 }}
-        {{> afQuickField name='url' }}
-      </fieldset>
-      <button type="submit" class="btn btn-primary">
-        {{_ 'addApi_button_text' }}
-      </button>
-    {{/ autoForm }}
-  </div>
+  {{# if Template.subscriptionsReady }}
+    <div class="container">
+      <h1 class="page-header">
+        {{_ "addApi_header" }}
+      </h1>
+      {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
+        <!--invisible auto-value field-->
+        {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
+        <fieldset>
+          {{> afQuickField name='name' }}
+          {{> afQuickField name='description' rows=2 }}
+          {{> afQuickField name='url' }}
+          {{# if organizationsExist }}
+            {{> afQuickField name='organizationId' }}
+          {{/ if }}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">
+          {{_ 'addApi_button_text' }}
+        </button>
+      {{/ autoForm }}
+    </div>
+  {{ else }}
+    {{> spinner }}
+  {{/ if }}
 </template>
