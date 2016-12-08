@@ -53,8 +53,8 @@ Template.organizationCatalog.onRendered(function () {
 });
 
 Template.organizationCatalog.helpers({
-  // Return items of organization collection via Pagination
   organizations () {
+    // Return items of organization collection via Pagination
     return Template.instance().pagination.getPage();
   },
   gridViewMode () {

@@ -15,7 +15,7 @@ Template.viewOrganizationLogo.helpers({
     const organization = Template.currentData().organization;
 
     if (organization && organization.organizationLogoFileId) {
-      // Get if
+      // Get organization logo id
       const organizationLogoFileId = organization.organizationLogoFileId;
 
       // Convert to Mongo ObjectID

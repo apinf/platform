@@ -26,7 +26,7 @@ Organizations.helpers({
     return false;
   },
   relativeCreatedAt () {
-    // Return relative updated_at
+    // Convert createdAt time to format "time ago"
     return moment(this.createdAt).fromNow();
   },
 });
