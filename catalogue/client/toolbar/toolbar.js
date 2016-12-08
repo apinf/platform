@@ -28,16 +28,16 @@ Template.catalogueToolbar.onRendered(function () {
     FlowRouter.setQueryParams({ sortBy });
   }
 
-  // if (sortDirectionParameter) {
-  //   // Set the sorting direction by UI state from URL parameter
-  //   instance.$('#sort-select').val(`${sortDirectionParameter}`).change();
-  // } else {
-  //   // Get sorting direction from template
-  //   const sortDirection = instance.$('[name=sort-menu]').val();
-  //
-  //   // Set sorting direction URL parameter from template value
-  //   FlowRouter.setQueryParams({ sortDirection });
-  // }
+  if (sortDirectionParameter) {
+    // Set the sorting direction by UI state from URL parameter
+    instance.$(`#sortDirection-${sortDirectionParameter}`).button('toggle');
+  } else {
+    // Get sorting direction from template
+    const sortDirection = instance.$('[name=sort-direction]:checked').val();
+
+    // Set sorting direction URL parameter from template value
+    FlowRouter.setQueryParams({ sortDirection });
+  }
 
   if (filterByParameter) {
     // Set the filter by UI state from URL parameter
@@ -55,13 +55,33 @@ Template.catalogueToolbar.onRendered(function () {
     instance.$(`#viewMode-${viewModeParameter}`).button('toggle');
   } else {
     // Get view mode direction from template
-    const viewMode = instance.$('[name=view-mode]').val();
+    const viewMode = instance.$('[name=view-mode]:checked').val();
 
     // Set view mode direction URL parameter from template value
     FlowRouter.setQueryParams({ viewMode });
   }
 });
 
+Template.catalogue.helpers({
+  gridViewMode () {
+  // Get reference to template instance
+    const instance = Template.instance();
+
+  // Get view mode from template
+    const viewMode = instance.viewMode.get();
+
+    return (viewMode === 'grid');
+  },
+  tableViewMode () {
+  // Get reference to template instance
+    const instance = Template.instance();
+
+  // Get view mode from template
+    const viewMode = instance.viewMode.get();
+
+    return (viewMode === 'table');
+  },
+});
 Template.catalogue.events({
   // Catalogue
   'change #sort-select': function (event, templateInstance) {
