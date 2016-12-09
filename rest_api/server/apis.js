@@ -20,16 +20,28 @@ ApiV1.addCollection(Apis, {
         },
       },
       action () {
+        // Init response object
+        const response = {
+          status: 'success',
+          data: [],
+        };
         // Get queryParams
         const queryParams = this.queryParams;
-        // Check queryParams
+        // Check queryParams for organizationId
         if (queryParams && queryParams.organizationId) {
-          // Return Apis by organizationId
-          // TODO: same response structure with generated endpoints
-          return Apis.find({ organizationId: queryParams.organizationId }).fetch();
+          // Fetch only APIs with given organizationId
+          const organizationApis = Apis.find(
+            { organizationId: queryParams.organizationId }
+          ).fetch();
+          // add data to response
+          response.data = organizationApis;
+        } else {
+          // Otherwise get all apis
+          const allApis = Apis.find().fetch();
+          response.data = allApis;
         }
-        // TODO: otherwise return all apis
-        return {};
+        // Return constructed response
+        return response;
       },
     },
     get: {
