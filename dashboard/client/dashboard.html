@@ -4,7 +4,7 @@
       {{_ "dashboard_mainTitle" }}
     </h1>
     {{# if Template.subscriptionsReady }}
-      {{# if isInRole 'admin, manager' }}
+      {{# if managedApis }}
         {{# if proxyBackendsExists }}
           {{> dashboardChartsFiltering proxyBackends=proxyBackends }}
 

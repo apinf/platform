@@ -2,7 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
 
+import { Apis } from '/apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 
@@ -12,6 +14,8 @@ Template.dashboard.onCreated(function () {
 
   // Subscribe to proxyApis publicaton
   instance.subscribe('proxyApis');
+  // Subscribe to managed apis
+  instance.subscribe('myManagedApis');
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
@@ -86,5 +90,15 @@ Template.dashboard.helpers({
   proxyBackendsExists () {
     // Fetch proxy backends
     return ProxyBackends.find().fetch();
+  },
+  managedApis () {
+    // Check if user is administrator
+    const userIsAdmin = Roles.userIsInRole(Meteor.userId(), ['admin']);
+
+    // Get count of managed apis
+    const apisCount = Apis.find().count();
+
+    // Page can be seen by administrator or user with apis
+    return userIsAdmin || apisCount > 0;
   },
 });
