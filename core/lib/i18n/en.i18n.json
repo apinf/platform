@@ -183,7 +183,7 @@
   "contactForm_submit": "Submit",
   "dashboard_addApiButton_text": "Add an API",
   "dashboard_mainTitle": "Dashboard",
-  "dashboard_noApisTitle": "You don't have any API you manage.",
+  "dashboard_noApisTitle": "There are no APIs that you manage.",
   "dashboard_noProxyBackendsText": "You have not yet connected your API to a proxy. To see analytics of your API usage, browse your API from Catalog and configure a proxy from the API profile.",
   "dashboardDataTable_help_text": "The table provides detailed information about each request your API receives for a specific time period. You can know the country and the IP address from where the request was generated. You can also identify the method to which an API request was made. Information in the table is rendered based on the filtering of the charts and combination of APIs.",
   "dashboardDataTable_nextPage": "Next",
