@@ -76,5 +76,7 @@ kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
 useraccounts:flow-routing
+nimble:restivus
+apinf:restivus-swagger
 kurounin:pagination-blaze
 kurounin:pagination
