@@ -24,16 +24,7 @@ ApiV1.addCollection(Apis, {
         },
       },
       action () {
-        /*
-          Expected response object structure:
-          {
-            statusCode: 200,
-            body: {
-              status: 'success',
-              data: [],
-            },
-          }
-        */
+        // Init response object
         let response = {};
         // Get queryParams
         const queryParams = this.queryParams;
