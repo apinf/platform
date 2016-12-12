@@ -198,6 +198,7 @@
   "dashboardDataTable_title": "Analytics data",
   "dashboardDataTable_pageCount": "Page",
   "dashboardCharts_placeholder_noDataFound": "No data found. <br/> Try changing filtering options to get some analytics data.",
+  "dashboardCharts_placeholder_loadingData": "Fetching latest data..",
   "deleteAccount_closeButton": "Close",
   "deleteAccount_confirmDelete": "Delete",
   "deleteAccount_success_message": "Account deleted",
