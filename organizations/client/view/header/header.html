@@ -2,43 +2,47 @@
   <div class="page-head-topblock">
     <div class="container">
       <div class="row">
-        <div id="organization-head-about" class="col-md-12">
-          <div class="organization-header">
-            <div id="organization-file-browse" class="profile-img-container">
-              {{> viewOrganizationLogo organization=organization }}
-              <span class="fa fa-camera"></span>
-            </div>
+          <div id="organization-file-browse" class="col-md-2 profile-img-container">
+            {{> viewOrganizationLogo organization=organization }}
+            <span class="fa fa-camera"></span>
+          </div>
+        <div class="col-md-8">
+          <div class="row">
             <h1 id="organization-name">
               {{ organization.name }}
             </h1>
           </div>
-          <p>
-            {{ organization.description }}
-          </p>
-          <ul class="list-inline">
-            <li>
+          <div class="row">
+            <p>
+              {{ organization.description }}
+            </p>
+          </div>
+          <div class="row">
+            <p>
               <i class="fa fa-link" aria-hidden="true"></i>
               <a href="{{ organization.url }}">
                 {{ organization.url }}
               </a>
-            </li>
-          </ul>
-          <ul class="list-inline">
-            <li>
-              <i class="fa fa-user" aria-hidden="true"></i>
-              {{ organization.contact.person }}
-            </li>
-            <li>
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              {{ organization.contact.phone }}
-            </li>
-            <li>
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <a href="mailto:{{ organization.contact.email }}">
-                {{ organization.contact.email }}
-              </a>
-            </li>
-          </ul>
+            </p>
+          </div>
+          <div class="row">
+            <ul class="list-inline">
+              <li>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                {{ organization.contact.person }}
+              </li>
+              <li>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                {{ organization.contact.phone }}
+              </li>
+              <li>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:{{ organization.contact.email }}">
+                  {{ organization.contact.email }}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
