@@ -362,6 +362,8 @@
   "organizationLogo_resumable_errorText": "File creation failed!",
   "organizationLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "organizationLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
+  "organizationProfile_bigText_apisCount": "APIs",
+  "organizationProfile_smallText_apisCount": "(%s apis)",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
   "profile_setUsername": "Please set your username.",
