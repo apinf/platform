@@ -31,3 +31,6 @@ Meteor.publish('latestApiBackends', function (limit) {
     { sort: { created_at: -1 }, limit }
     );
 });
+
+// Publish collection for pagination
+new Meteor.Pagination(Apis);
