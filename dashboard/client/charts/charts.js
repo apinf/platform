@@ -19,6 +19,14 @@ Template.dashboardCharts.onCreated(function () {
   // Variable that keeps frontend prefix
   instance.frontendPrefix = new ReactiveVar();
 
+  // Variable that keeps loading state value
+  // States:
+  // 0 - not loading (by default)
+  // 1 - loading in progress
+  // 2 - loaded && data NOT found
+  // 3 - loaded && data found
+  instance.loadingState = new ReactiveVar(0);
+
   // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
   instance.averageResponseTime = new ReactiveVar(0);
@@ -252,23 +260,17 @@ Template.dashboardCharts.onCreated(function () {
       let responseStatus;
 
       // Error handling for empty fields
-      try { time = moment(e.fields.request_at[0]).toISOString(); }
-      catch (err) { time = ''; }
+      try { time = moment(e.fields.request_at[0]).toISOString(); } catch (err) { time = ''; }
 
-      try { country = e.fields.request_ip_country[0]; }
-      catch (e) { country = ''; }
+      try { country = e.fields.request_ip_country[0]; } catch (e) { country = ''; }
 
-      try { requestPath = e.fields.request_path[0]; }
-      catch (e) { requestPath = ''; }
+      try { requestPath = e.fields.request_path[0]; } catch (e) { requestPath = ''; }
 
-      try { requestIp = e.fields.request_ip[0]; }
-      catch (e) { requestIp = ''; }
+      try { requestIp = e.fields.request_ip[0]; } catch (e) { requestIp = ''; }
 
-      try { responseTime = e.fields.response_time[0]; }
-      catch (e) { responseTime = ''; }
+      try { responseTime = e.fields.response_time[0]; } catch (e) { responseTime = ''; }
 
-      try { responseStatus = e.fields.response_status[0]; }
-      catch (e) { responseStatus = ''; }
+      try { responseStatus = e.fields.response_status[0]; } catch (e) { responseStatus = ''; }
 
       tableData.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
     });
@@ -381,10 +383,32 @@ Template.dashboardCharts.onCreated(function () {
     // Return the amount of users in object
     return Object.keys(uniqueUsersGroup).length;
   };
+
+  // Loading state controller
+  instance.updateLoadingState = (chartData) => {
+
+    // Check if data is loaded
+    if (!chartData) {
+      // If still loading, show loading state to user
+      instance.loadingState.set(1);
+    } else {
+      // Check if chart data was found
+      if (chartData.length > 0) {
+        // If found, Hide all messages
+        instance.loadingState.set(3);
+      } else {
+        // If not, display "not found" message to user
+        instance.loadingState.set(2);
+      }
+    }
+  };
 });
 
 Template.dashboardCharts.onRendered(function () {
   const instance = this;
+
+  // Update loader to state 1
+  instance.loadingState.set(1);
 
   instance.autorun(() => {
     // Get chart data, reactively
@@ -403,31 +427,8 @@ Template.dashboardCharts.onRendered(function () {
 
     const frontendPrefix = instance.frontendPrefix.get();
 
-    // Init elements on dashboard
-    const chartsHolder = $('.charts-holder');
-    const noChartDataPlaceholder = $('.charts-holder>#no-chart-data-placeholder');
-    const loadingDataMessage = TAPi18n.__('dashboardCharts_placeholder_loadingData');
-    const noDataFoundMessage = TAPi18n.__('dashboardCharts_placeholder_noDataFound');
-
-    // Remove message element in case of one exists
-    noChartDataPlaceholder.remove();
-
-    // Check if data is loaded
-    if (!chartData) {
-      // If still loading, show loading state to user
-      chartsHolder.append(`<div id="no-chart-data-placeholder">${loadingDataMessage}</div>`);
-    } else {
-      // Check if chart data was found
-      if (chartData.length > 0) {
-        // If found, Hide all messages
-        noChartDataPlaceholder.remove();
-      } else {
-        // If not, display "not found" message to user
-        chartsHolder.append(
-          `<div id="no-chart-data-placeholder">${noDataFoundMessage}</div>`
-        );
-      }
-    }
+    // Update loading state
+    instance.updateLoadingState(chartData);
 
     if (chartData && chartData.length > 0) {
       let parsedData = [];
@@ -464,5 +465,11 @@ Template.dashboardCharts.helpers({
       responseRate: instance.responseRate.get(),
       uniqueUsersCount: instance.uniqueUsersCount.get(),
     };
+  },
+  loadingState () {
+    return Template.instance().loadingState.get();
+  },
+  isEqual (currentState, state) {
+    return currentState === state;
   },
 });
