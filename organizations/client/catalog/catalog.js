@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import { Organizations } from '/organizations/collection';
 
 Template.organizationCatalog.onCreated(function () {
@@ -14,33 +15,22 @@ Template.organizationCatalog.onCreated(function () {
     sort: { name: 1 },
   });
 
-  // Set up toolbar reactive variables
-  instance.sortBy = new ReactiveVar('name');
-  instance.sortDirection = new ReactiveVar('1');
-  instance.viewMode = new ReactiveVar('grid');
-
   // Subscribe to Organization logo collection
   instance.subscribe('allOrganizationLogo');
 
+  // Watch for changes in the sort settings
   instance.autorun(() => {
-    // Watch for changes in the sort settings
-    const sortBy = instance.sortBy.get();
-    const sortDirection = instance.sortDirection.get();
+    // Check URL parameter for sorting
+    const sortByParameter = FlowRouter.getQueryParam('sortBy');
+
+    // Check URL parameter for sort direction
+    const sortDirectionParameter =
+      FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
 
     // Create a object for storage sorting parameters
     const sort = {};
-
     // Get field and direction of sorting
-    switch (sortBy) {
-      case 'name':
-        sort.name = parseInt(sortDirection);
-        break;
-      case 'createdAt':
-        sort.createdAt = parseInt(sortDirection);
-        break;
-      default:
-        break;
-    }
+    sort[sortByParameter] = sortDirectionParameter;
 
     // Change sorting
     instance.pagination.sort(sort);
@@ -57,50 +47,39 @@ Template.organizationCatalog.helpers({
     // Return items of organization collection via Pagination
     return Template.instance().pagination.getPage();
   },
-  gridViewMode () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get view mode from template
-    const viewMode = instance.viewMode.get();
-
-    return (viewMode === 'grid');
-  },
-  tableViewMode () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get view mode from template
-    const viewMode = instance.viewMode.get();
-
-    return (viewMode === 'table');
-  },
   templatePagination () {
     // Get reference of pagination
     return Template.instance().pagination;
   },
+  gridViewMode () {
+    // Get view mode from template
+    const viewMode = FlowRouter.getQueryParam('viewMode');
+
+    return (viewMode === 'grid');
+  },
+  tableViewMode () {
+    // Get view mode from template
+    const viewMode = FlowRouter.getQueryParam('viewMode');
+
+    return (viewMode === 'table');
+  },
 });
 
 Template.organizationCatalog.events({
-  'change [name=view-mode]': function (event, templateInstance) {
-    // Get selected view mode
-    const viewMode = event.target.value;
-
-    // Update the instance view mode reactive variable
-    templateInstance.viewMode.set(viewMode);
+  'change #organization-sort-select': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortBy: event.target.value });
   },
-  'change [name=sort-menu]': function (event, templateInstance) {
-    // Get selected sort value
-    const sortBy = event.target.value;
-
-    // Update the instance sort value reactive variable
-    templateInstance.sortBy.set(sortBy);
+  'change [name=sort-direction]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortDirection: event.target.value });
   },
-  'change [name=sort-direction]': function (event, templateInstance) {
-    // Get selected sort direction
-    const sortDirection = event.target.value;
-
-    // Update the instance sort direction reactive variable
-    templateInstance.sortDirection.set(sortDirection);
+  'change [name=filter-options]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ filterBy: event.target.value });
+  },
+  'change [name=view-mode]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ viewMode: event.target.value });
   },
 });
