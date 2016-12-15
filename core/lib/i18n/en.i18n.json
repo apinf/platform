@@ -26,6 +26,7 @@
   "addOrganization_title": "Add an Organization",
   "addOrganization_contact_panelTitle": "Contact",
   "addOrganization_create_button": "Create organization",
+  "addOrganizationForm_successText": "Organization was successfully saved",
   "apiAuthorizedUsersList_ header_text": "Authorized users",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",
   "apiBackend_Status_Title": "Status",
