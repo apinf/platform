@@ -43,6 +43,8 @@ Template.catalogue.onCreated(function () {
 
   // Subscribe to API logo collection
   instance.subscribe('allApiLogo');
+  // Subscribe to all users, returns only usernames
+  instance.subscribe('allUsers');
 
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {
@@ -99,6 +101,9 @@ Template.catalogue.onCreated(function () {
           currentFilters = { isPublic: true };
           break;
       }
+    } else {
+      // Otherwise get it like default value
+      currentFilters = { isPublic: true };
     }
 
     instance.pagination.filters(currentFilters);
