@@ -132,12 +132,13 @@ AutoForm.hooks({
           const previousProxyId = proxyBackendFromMongo.proxyId;
           const currentProxyId = currentProxyBackend.proxyId;
 
-          // TODO: In multi-proxy case. After changing proxy, onSuccess hook happens faster then umbrella id is got.
           // Check: if user changed proxy
           if (previousProxyId === currentProxyId) {
+            // Case 1: Proxy not changed, return modifier
             updateDoc.$set = currentProxyBackend;
             form.result(updateDoc);
           } else {
+            // Case 2: Proxy changed
             // Delete information about proxy backend from the first proxy and insert in the
             Meteor.call('deleteProxyBackend',
               proxyBackendFromMongo, false,
@@ -185,7 +186,7 @@ AutoForm.hooks({
                         // async return false;
                         form.result(false);
                       }
-                      // sync return the Proxy Backend document
+                      // async return the Proxy Backend document
                       updateDoc.$set = convertedProxyBackend;
                       form.result(updateDoc);
                     }
