@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Apis } from '/apis/collection/'
 
 Template.apiLifecycleStatus.onCreated(function () {
   // Get reference to template instance
@@ -9,6 +10,10 @@ Template.apiLifecycleStatus.onCreated(function () {
 });
 
 Template.apiLifecycleStatus.helpers({
+  apisCollection () {
+    // Return a reference to Apis collection
+    return Apis;
+  },
   editMode () {
     // Get reference to template instahce
     const templateInstance = Template.instance();
