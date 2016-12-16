@@ -6,7 +6,7 @@ import _ from 'lodash';
 // /rest-api/v1/apis/:id for Apis collection
 ApiV1.addCollection(Apis, {
   excludedEndpoints: ['post', 'put', 'delete'],
-  routeOptions: { authRequired: false },
+  routeOptions: { authRequired: true },
   endpoints: {
     getAll: {
       swagger: {
