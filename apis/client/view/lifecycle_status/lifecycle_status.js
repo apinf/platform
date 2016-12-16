@@ -35,6 +35,9 @@ Template.apiLifecycleStatus.helpers({
 
     return statusText;
   },
+  lifecycleStatusField () {
+    return ['lifecycleStatus'];
+  },
 });
 
 Template.apiLifecycleStatus.events({
@@ -42,7 +45,7 @@ Template.apiLifecycleStatus.events({
     // Enable edit mode
     templateInstance.editMode.set(true);
   },
-  'click #save-api-lifecycle-status': function (event, templateInstance) {
+  'click button[type="submit"]': function (event, templateInstance) {
     // Disable edit mode
     templateInstance.editMode.set(false);
   },
