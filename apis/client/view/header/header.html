@@ -8,7 +8,7 @@
           {{ api.name }}
           {{> viewApiStatus api=api width="0.4" }}
         </h1>
-        {{> apiLifecycleStatus lifecycleStatus="development" }}
+        {{> apiLifecycleStatus api=api }}
         {{# unless api.isPublic }}
           <span class="label label-default label-align">private</span>
         {{/ unless }}
