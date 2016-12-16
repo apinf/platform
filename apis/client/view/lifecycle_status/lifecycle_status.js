@@ -8,7 +8,6 @@ Template.apiLifecycleStatus.helpers({
     let statusText;
 
     if (instance.api && instance.api.lifecycleStatus) {
-      console.log(lifecycleStatus);
       statusText = instance.api.lifecycleStatus;
     } else {
       statusText = 'Unknown';
