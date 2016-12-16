@@ -6,7 +6,7 @@
         Lifecycle status: {{ lifecycleStatus }}
       </strong>
       {{# if api.currentUserCanEdit }}
-      
+
       <button type="button" id="edit-api-lifecycle-status" class="btn btn-default btn-xs">
         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
       </button>
@@ -16,18 +16,14 @@
 
   <!-- toggle form when edit mode is enabled -->
   {{# if editMode }}
-  {{# autoForm
-    id="apiLifecycleStatusForm"
+
+  {{> quickForm
+    id="lifecycleStatus"
     type="update"
+    template="bootstrap3-inline"
     collection=apisCollection
     doc=api
-    template="bootstrap3-horizontal" }}
-
-    {{> afQuickField name="lifecycleStatus"}}
-
-    <div>
-      <button id="save-api-lifecycle-status" type="submit">Save</button>
-    </div>
-  {{/ autoForm }}
+    fields=lifecycleStatusField
+  }}
   {{/ if }}
 </template>
