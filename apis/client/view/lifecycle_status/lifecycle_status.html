@@ -1,11 +1,7 @@
 <template name="apiLifecycleStatus">
   <!-- show lifecycle status by default -->
   {{# unless editMode }}
-    <p>
-      <strong>
-        Lifecycle status:
-      </strong>
-      &nbsp;
+    <div class="pull-right">
       <span class="label label-{{ labelType }}">
         {{ lifecycleStatus }}
       </span>
@@ -15,7 +11,7 @@
         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
       </button>
       {{/ if }}
-    </p>
+    </div>
   {{/ unless }}
 
   <!-- toggle form when edit mode is enabled -->
