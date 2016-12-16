@@ -1,7 +1,11 @@
 <template name="apiLifecycleStatus">
   <!-- show lifecycle status by default -->
   {{# unless editMode }}
-    <span>Lifecycle status: {{ lifecycleStatus }}</span>
+    <span>
+      <strong>
+        Lifecycle status: {{ lifecycleStatus }}
+      </strong>
+    </span>
     {{# if api.currentUserCanEdit }}
     <button type="button" id="edit-api-lifecycle-status" class="btn btn-default btn-xs">
       <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
@@ -11,6 +15,14 @@
 
   <!-- toggle form when edit mode is enabled -->
   {{# if editMode }}
-  <span>Edit mode enabled!</span>
+  {{# autoForm
+    id="apiLifecycleStatusForm"
+    type="update"
+    collection=apisCollection
+    doc=api
+    template="bootstrap3-horizontal" }}
+
+    {{> afQuickField name="lifecycleStatus"}}
+  {{/ autoForm }}
   {{/ if }}
 </template>
