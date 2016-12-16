@@ -52,7 +52,7 @@ FlowRouter.route('/sign-out', {
       Meteor.logout(() => {
         FlowRouter.go('catalogue');
       });
-      // Page render
+      // Use undefined to force page render when route is not changed
       BlazeLayout.render('masterLayout', { main: undefined });
     }]
 });
