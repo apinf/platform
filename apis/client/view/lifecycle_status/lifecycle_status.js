@@ -3,16 +3,22 @@ import { Template } from 'meteor/templating';
 Template.apiLifecycleStatus.helpers({
   lifecycleStatus () {
     // Get reference to template instahce
-    const instance = Template.instance();
+    const templateInstance = Template.instance();
 
     let statusText;
 
-    if (instance.api && instance.api.lifecycleStatus) {
-      statusText = instance.api.lifecycleStatus;
+    if (templateInstance.api && templateInstance.api.lifecycleStatus) {
+      statusText = templateInstance.api.lifecycleStatus;
     } else {
       statusText = 'Unknown';
     }
 
     return statusText;
   },
+});
+
+Template.apiLifecycleStatus.events({
+  'click #edit-api-lifecycle-status' (event, templateInstance) {
+    console.log(templateInstance);
+  }
 });
