@@ -47,15 +47,12 @@ FlowRouter.route('/settings/profile', {
 
 FlowRouter.route('/sign-out', {
   name: 'signOut',
-  action: function () {
-    BlazeLayout.render('masterLayout', { main: 'signOut' });
-  },
+  triggersEnter: [
+    function () {
+      Meteor.logout(() => {
+        FlowRouter.go('catalogue');
+      });
+      // Page render
+      BlazeLayout.render('masterLayout', { main: undefined });
+    }]
 });
-
-// Sign out & redirect to catalogue
-const signOut = function (context, redirect) {
-  Meteor.logout();
-  redirect('/');
-};
-
-FlowRouter.triggers.enter([signOut], { only: ['signOut'] });
