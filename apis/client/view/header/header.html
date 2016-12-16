@@ -17,8 +17,8 @@
             {{ api.getApiManagersByName }}
           </li>
         </ul>
-        {{> apiLifecycleStatus api=api }}
         {{> apiBackendRating api }}
+        {{> apiLifecycleStatus api=api }}
       </div>
       <div class="page-head-bookmarks pull-right">
         {{# if currentUser }}
