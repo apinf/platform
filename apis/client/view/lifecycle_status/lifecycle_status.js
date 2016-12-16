@@ -27,8 +27,8 @@ Template.apiLifecycleStatus.helpers({
 
     let statusText;
 
-    if (templateInstance.api && templateInstance.api.lifecycleStatus) {
-      statusText = templateInstance.api.lifecycleStatus;
+    if (templateInstance.data.api && templateInstance.data.api.lifecycleStatus) {
+      statusText = templateInstance.data.api.lifecycleStatus;
     } else {
       statusText = 'Unknown';
     }
@@ -38,8 +38,12 @@ Template.apiLifecycleStatus.helpers({
 });
 
 Template.apiLifecycleStatus.events({
-  'click #edit-api-lifecycle-status' (event, templateInstance) {
+  'click #edit-api-lifecycle-status': function (event, templateInstance) {
     // Enable edit mode
     templateInstance.editMode.set(true);
-  }
+  },
+  'click #save-api-lifecycle-status': function (event, templateInstance) {
+    // Disable edit mode
+    templateInstance.editMode.set(false);
+  },
 });
