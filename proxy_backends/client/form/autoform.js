@@ -180,9 +180,9 @@ AutoForm.hooks({
                   // Publish the API Backend on API Umbrella
                   Meteor.call('publishApiBackendOnApiUmbrella',
                     umbrellaBackendId, convertedProxyBackend.proxyId,
-                    (error2) => {
-                      if (error2) {
-                        sAlert.error(error2);
+                    (publishError) => {
+                      if (publishError) {
+                        sAlert.error(publishError);
                         // async return false;
                         form.result(false);
                       }
