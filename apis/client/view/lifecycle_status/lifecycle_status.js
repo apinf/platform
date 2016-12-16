@@ -9,6 +9,13 @@ Template.apiLifecycleStatus.onCreated(function () {
 });
 
 Template.apiLifecycleStatus.helpers({
+  editMode () {
+    // Get reference to template instahce
+    const templateInstance = Template.instance();
+
+    // Return value of edit mode reactive variable
+    return templateInstance.editMode.get();
+  },
   lifecycleStatus () {
     // Get reference to template instahce
     const templateInstance = Template.instance();
@@ -27,6 +34,7 @@ Template.apiLifecycleStatus.helpers({
 
 Template.apiLifecycleStatus.events({
   'click #edit-api-lifecycle-status' (event, templateInstance) {
-    console.log(templateInstance);
+    // Enable edit mode
+    templateInstance.editMode.set(true);
   }
 });
