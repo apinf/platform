@@ -24,17 +24,17 @@
         {{> dashboardDataTable tableData=tableData }}
       </div>
     </div>
-    {{ # unless isEqual loadingState 'done' }}
-      {{ # if isEqual loadingState 'loading' }}
+    {{# unless isEqual loadingState 'done' }}
+      {{# if isEqual loadingState 'loading' }}
         <div id="no-chart-data-placeholder">
-          {{ _ "dashboardCharts_placeholder_loadingData" }}
+          {{_ "dashboardCharts_placeholder_loadingData" }}
         </div>
-      {{ / if }}
-      {{ # if isEqual loadingState 'data-not-found' }}
+      {{/ if }}
+      {{# if isEqual loadingState 'data-not-found' }}
         <div id="no-chart-data-placeholder">
           {{ _ "dashboardCharts_placeholder_noDataFound" }}
         </div>
-      {{ / if }}
-    {{ / unless }}
+      {{/ if }}
+    {{/ unless }}
   </div>
 </template>
