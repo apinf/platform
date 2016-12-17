@@ -7,12 +7,10 @@ export default {
   },
   'emqtt.url': {
     type: String,
-    optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
   'emqtt.elasticsearch': {
     type: String,
-    optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
 };
