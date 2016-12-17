@@ -34,30 +34,23 @@
               {{/ if }}
             {{/ if }}
           {{/ if }}
-          <li class="dropdown {{ isActiveRoute 'catalogue' }} {{ isActiveRoute 'organizationCatalog' }}" >
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <li class="{{ isActiveRoute 'catalogue' }}">
+            <a href="{{ pathFor 'catalogue' }}">
               <i class="fa fa-book" aria-hidden="true"></i>
-              {{_ "navbar_catalogue" }}
+              {{_ "navbar_apis" }}
             </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="{{ pathFor 'catalogue' }}">
-                  {{_ "navbar_apis" }}
-                </a>
-              </li>
-              <li>
-                <a href="{{ pathFor 'organizationCatalog' }}">
-                  {{_ "navbar_organizations" }}
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="{{ isActiveRoute 'organizationCatalog' }}">
+            <a href="{{ pathFor 'organizationCatalog' }}">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              {{_ "navbar_organizations" }}
+            </a>
           </li>
           {{# if currentUser }}
             {{# if userCanAddApi }}
             <li class="{{ isActiveRoute 'addApi' }}">
               <a href="{{ pathFor 'addApi' }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-
                 {{_ "navbar_addAPIBackend" }}
               </a>
             </li>

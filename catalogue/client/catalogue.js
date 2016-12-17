@@ -1,85 +1,112 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
-import _ from 'lodash';
-
 Template.catalogue.onCreated(function () {
+  // Get reference to template instance
   const instance = this;
+  // Get user id
+  const userId = Meteor.userId();
 
-  // Set up toolbar reactive variables
-  instance.sortBy = new ReactiveVar('name');
-  instance.sortDirection = new ReactiveVar('ascending');
-  instance.filterBy = new ReactiveVar('filterBy-all');
-  instance.viewMode = new ReactiveVar('grid');
+  // Set filters
+  // On default: Show all public apis for anonymous users
+  let filters = { isPublic: true };
 
+  if (userId) {
+    // Show all available apis for registered users
+    filters = {
+      $or: [
+        { isPublic: true },
+        { managerIds: userId },
+        { authorizedUserIds: userId },
+      ],
+    };
+  }
 
-  // Pagination
-  instance.apisPerPage = new ReactiveVar(24);
-  instance.currentPageNumber = new ReactiveVar(0);
-  instance.pages = new ReactiveVar([]);
+  if (Roles.userIsInRole(userId, ['admin'])) {
+    // Show all apis for administrators
+    filters = {};
+  }
 
-  // Subscribe to API logo colection
+  // Set initial settings of pagination
+  instance.pagination = new Meteor.Pagination(Apis, {
+    // Count of cards in catalog
+    perPage: 24,
+    // Set sort by name on default
+    sort: { name: 1 },
+    filters,
+  });
+
+  // Subscribe to API logo collection
   instance.subscribe('allApiLogo');
-
-  // Subscribe to Meteor.users to show authors. Show only visible authors.
+  // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
 
-  // Gerenates new page numbers array every time current page changes
-  instance.generatePageNumbers = function () {
-    let pages = [];
-
-    const currentPageNumber = instance.currentPageNumber.get() + 1;
-    const apisCount = Apis.find().count();
-    const apisPerPage = instance.apisPerPage.get();
-    const totalPagesCount = (apisCount / apisPerPage + 1) | 0;
-
-    // Create list with all the page numbers
-    for (let i = 1; i < totalPagesCount + 1; i++) {
-      pages.push(i);
-    }
-
-    // Check if total page count is bigger than 9
-    // To be able to generate sliced pagination
-    // Otherwise gerenate complete pages list
-    if (totalPagesCount >= 9) {
-      // For current page number range shorten pages array, replace nums with '...':
-      // 1. n <= 4
-      // 2. n > 4 && n < total-4
-      // 3. n >= total-4
-      // n - current page number; total - total pages amount
-      if (currentPageNumber <= 4) {
-        pages = _.concat(_.take(pages, 5), '...', _.takeRight(pages, 1));
-      } else if (currentPageNumber > 4 && currentPageNumber < pages[pages.length - 4]) {
-        pages = _.concat(_.take(pages, 1), '...', currentPageNumber - 1, currentPageNumber, currentPageNumber + 1, '...', _.takeRight(pages, 1));
-      } else if (currentPageNumber >= pages[pages.length - 4]) {
-        pages = _.concat(_.take(pages, 1), '...', _.takeRight(pages, 5));
-      }
-    }
-
-    instance.pages.set(pages);
-  };
-
+  // Watch for changes in the sort and filter settings
   instance.autorun(() => {
-    // Watch for changes in the sort and filter settings
-    const sortBy = instance.sortBy.get();
-    const sortDirection = instance.sortDirection.get();
-    const filterBy = instance.filterBy.get();
+    // Check URL parameter for sorting
+    const sortByParameter = FlowRouter.getQueryParam('sortBy');
 
-    // Set up object for mongodb subscription options
-    const subscriptionOptions = {
-      sortBy,
-      sortDirection,
-      filterBy,
-    };
+    // Check URL parameter for sort direction and convert to integer
+    const sortDirectionParameter =
+      FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
 
-    // Subscribe to API Backends with catalogue settings
-    instance.subscribe('catalogue', subscriptionOptions);
+    // Check URL parameter for filtering
+    const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
-    // Update pagination
-    instance.generatePageNumbers();
+    // Create a object for storage sorting parameters
+    const sort = {};
+    // GCheck of existing parameters
+    if (sortByParameter && sortDirectionParameter) {
+      // Get field and direction of sorting
+      sort[sortByParameter] = sortDirectionParameter;
+    } else {
+      // Otherwise get it like default value
+      sort.name = 1;
+    }
+
+    // Change sorting
+    instance.pagination.sort(sort);
+
+    let currentFilters = filters;
+
+    // Filtering available for registered users
+    if (userId) {
+      switch (filterByParameter) {
+        case 'all':
+          // Delete filter for managed apis & bookmarks
+          delete currentFilters.managerIds;
+          delete currentFilters._id;
+          break;
+        case 'my-apis':
+          // Delete filter for bookmarks
+          delete currentFilters._id;
+          // Set filter for managed apis
+          currentFilters.managerIds = userId;
+          break;
+        case 'my-bookmarks':
+          // Delete filter for managed apis
+          delete currentFilters.managerIds;
+          // Get user bookmarks
+          const userBookmarks = ApiBookmarks.findOne({ userId }) || '';
+          // Set filter for bookmarks
+          currentFilters._id = { $in: userBookmarks.apiIds };
+          break;
+        default:
+          // Otherwise get it like default value
+          currentFilters = { isPublic: true };
+          break;
+      }
+    } else {
+      // Otherwise get it like default value
+      currentFilters = { isPublic: true };
+    }
+
+    instance.pagination.filters(currentFilters);
   });
 });
 
@@ -89,138 +116,43 @@ Template.catalogue.onRendered(function () {
 });
 
 Template.catalogue.helpers({
-  // Catalogue
-  apisCount () {
-    // Count the number of API Backends in current subscription
-    return Apis.find().count();
-  },
   apis () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get sort settings
-    const sortBy = instance.sortBy.get();
-    let sortDirection = instance.sortDirection.get();
-
-    // Override sortDirection to match MongoDB syntax
-    if (sortDirection === 'ascending') {
-      sortDirection = 1;
-    } else {
-      sortDirection = -1;
-    }
-
-    // Set up sort options placeholder object
-    const sortOptions = { sort: { } };
-
-    // Set the sort by field and direction within sortOptions
-    sortOptions.sort[sortBy] = sortDirection;
-
-    // Get sorted list of API Backends
-    const apis = Apis.find({}, sortOptions).fetch();
-
-    // Pagination
-    const arrStart = instance.apisPerPage.get() * instance.currentPageNumber.get();
-    const arrEnd = arrStart + instance.apisPerPage.get();
-    const paginatedApis = apis.slice(arrStart, arrEnd);
-
-    return paginatedApis;
+    // Return items of apis collection via Pagination
+    return Template.instance().pagination.getPage();
   },
-  // Pagination
-  currentPageNumber () {
-    const instance = Template.instance();
-    return instance.currentPageNumber.get() + 1;
+  templatePagination () {
+    // Get reference of pagination
+    return Template.instance().pagination;
   },
-  totalPagesCount () {
-    const instance = Template.instance();
-    const apisCount = Apis.find().count();
-    const apisPerPage = instance.apisPerPage.get();
+  gridViewMode () {
+    // Get view mode from template
+    const viewMode = FlowRouter.getQueryParam('viewMode');
 
-    // Calculate total pages cound and round
-    return (apisCount / apisPerPage + 1) | 0;
+    return (viewMode === 'grid');
   },
-  prevButtonDisabledClass () {
-    // Get reference to template instance
-    const instance = Template.instance();
+  tableViewMode () {
+    // Get view mode from template
+    const viewMode = FlowRouter.getQueryParam('viewMode');
 
-    // Ger current page number
-    const currentPageNumber = instance.currentPageNumber.get();
-
-    // Check if current page is not the first one in table
-    if (currentPageNumber > 0) {
-      return '';
-    }
-
-    return 'inactive';
-  },
-  nextButtonDisabledClass () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get table row count
-    const apisPerPage = instance.apisPerPage.get();
-
-    // Get current page number
-    const currentPageNumber = instance.currentPageNumber.get();
-
-    // Get table dataset length
-    const apisCount = Apis.find().count();
-
-    // Check if current page is not the last one in the table
-    if (currentPageNumber < (apisCount / apisPerPage - 1)) {
-      return '';
-    }
-    return 'inactive';
-  },
-  pageNumbers () {
-    const instance = Template.instance();
-    return instance.pages.get();
-  },
-  pageIsActive (pageNumber) {
-    const instance = Template.instance();
-
-    // Check if current page is active
-    if ((instance.currentPageNumber.get() + 1) === pageNumber) {
-      return 'active';
-    } else if (pageNumber === '...') {
-      return 'inactive';
-    }
-
-    return '';
+    return (viewMode === 'table');
   },
 });
 
 Template.catalogue.events({
-  // Pagination
-  'click #prev-page': function (event, instance) {
-    const currentPageNumber = instance.currentPageNumber.get();
-
-    if (currentPageNumber > 0) {
-      // Turn the page forward if check above passed
-      instance.currentPageNumber.set(currentPageNumber - 1);
-    }
+  'change #sort-select': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortBy: event.target.value });
   },
-  'click #next-page': function (event, instance) {
-    const currentPageNumber = instance.currentPageNumber.get();
-
-    const apisPerPage = instance.apisPerPage.get();
-
-    const apisCount = Apis.find().count();
-
-    // Check if page is not last one
-    if (currentPageNumber < (apisCount / apisPerPage - 1)) {
-      // Turn the page backwards if check above passed
-      instance.currentPageNumber.set(currentPageNumber + 1);
-    }
+  'change [name=sort-direction]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortDirection: event.target.value });
   },
-  'click .change-page': function (event, instance) {
-    // get clicked page number
-    const newPageNumber = $(event.currentTarget).text();
-
-    // Make sure that that value is a number
-    if (newPageNumber !== '...') {
-      // Parse string to int and normalize
-      const newPageNumberParsed = parseInt(newPageNumber) - 1;
-      instance.currentPageNumber.set(newPageNumberParsed);
-    }
+  'change [name=filter-options]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ filterBy: event.target.value });
+  },
+  'change [name=view-mode]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ viewMode: event.target.value });
   },
 });

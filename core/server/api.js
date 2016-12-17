@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
@@ -6,7 +7,7 @@ const ApiV1 = new Restivus({
   defaultHeaders: {
     'Content-Type': 'application/json',
   },
-  useDefaultAuth: false,
+  useDefaultAuth: true,
   prettyJson: true,
   enableCors: true,
 });
@@ -42,6 +43,52 @@ ApiV1.swagger = {
     },
   },
 };
+
+// Enable user endpoints if authentication is enabled
+if (ApiV1._config.useDefaultAuth) {
+  // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
+  // Meteor.users collection
+  ApiV1.addCollection(Meteor.users, {
+    excludedEndpoints: ['getAll', 'put'],
+    routeOptions: {
+      authRequired: true,
+    },
+    endpoints: {
+      get: {
+        swagger: {
+          description: 'Returns user with given ID.',
+          responses: {
+            200: {
+              description: 'One user.',
+            },
+          },
+        },
+      },
+      post: {
+        authRequired: false,
+        swagger: {
+          description: 'Add user.',
+          responses: {
+            200: {
+              description: 'Return user that was added.',
+            },
+          },
+        },
+      },
+      delete: {
+        roleRequired: 'admin',
+        swagger: {
+          description: 'Delete user.',
+          responses: {
+            200: {
+              description: 'Successful delete.',
+            },
+          },
+        },
+      },
+    },
+  });
+}
 
 // Generate Swagger to route /rest-api/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
