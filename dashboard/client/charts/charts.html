@@ -24,13 +24,13 @@
         {{> dashboardDataTable tableData=tableData }}
       </div>
     </div>
-    {{ # unless isEqual loadingState 3 }}
-      {{ # if isEqual loadingState 1 }}
+    {{ # unless isEqual loadingState 'done' }}
+      {{ # if isEqual loadingState 'loading' }}
         <div id="no-chart-data-placeholder">
           {{ _ "dashboardCharts_placeholder_loadingData" }}
         </div>
       {{ / if }}
-      {{ # if isEqual loadingState 2 }}
+      {{ # if isEqual loadingState 'data-not-found' }}
         <div id="no-chart-data-placeholder">
           {{ _ "dashboardCharts_placeholder_noDataFound" }}
         </div>
