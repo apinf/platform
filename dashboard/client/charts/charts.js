@@ -20,12 +20,12 @@ Template.dashboardCharts.onCreated(function () {
   instance.frontendPrefix = new ReactiveVar();
 
   // Variable that keeps loading state value
-  // States:
-  // 0 - not loading (by default)
-  // 1 - loading in progress
-  // 2 - loaded && data NOT found
-  // 3 - loaded && data found
-  instance.loadingState = new ReactiveVar(0);
+  // Possible loading state values:
+  // 'not-loading'
+  // 'loading'
+  // 'data-not-found'
+  // 'done'
+  instance.loadingState = new ReactiveVar('not-loading');
 
   // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
@@ -390,15 +390,15 @@ Template.dashboardCharts.onCreated(function () {
     // Check if data is loaded
     if (!chartData) {
       // If still loading, show loading state to user
-      instance.loadingState.set(1);
+      instance.loadingState.set('loading');
     } else {
       // Check if chart data was found
       if (chartData.length > 0) {
         // If found, Hide all messages
-        instance.loadingState.set(3);
+        instance.loadingState.set('done');
       } else {
         // If not, display "not found" message to user
-        instance.loadingState.set(2);
+        instance.loadingState.set('data-not-found');
       }
     }
   };
@@ -408,7 +408,7 @@ Template.dashboardCharts.onRendered(function () {
   const instance = this;
 
   // Update loader to state 1
-  instance.loadingState.set(1);
+  instance.loadingState.set('loading');
 
   instance.autorun(() => {
     // Get chart data, reactively
