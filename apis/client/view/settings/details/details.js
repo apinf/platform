@@ -9,7 +9,7 @@ Template.apiSettings_details.helpers({
   apisCollection () {
     return Apis;
   },
-  organizationsExist () {
+  userIsOrganizationManager () {
     const organizationsCount = Organizations.find().count();
 
     return organizationsCount > 0;

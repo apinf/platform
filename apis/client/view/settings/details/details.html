@@ -25,7 +25,7 @@
       {{> afQuickField name='description' }}
       {{> afQuickField name='url' }}
 
-      {{# if organizationsExist }}
+      {{# if userIsOrganizationManager }}
         <div class="form-group">
         <label>
           {{ afFieldLabelText name='organizationId' }}
