@@ -1,4 +1,5 @@
 // Meteor package imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Counts } from 'meteor/tmeasday:publish-counts';
@@ -40,8 +41,8 @@ Template.viewApi.onCreated(function () {
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
 
-  // Subscribe to all organizations, returns only id and name
-  instance.subscribe('allOrganizationBasicDetails');
+  // Subscribe to managed organizations, returns basic details
+  instance.subscribe('managedOrganizationsBasicDetails', Meteor.userId());
 });
 
 Template.viewApi.helpers({
