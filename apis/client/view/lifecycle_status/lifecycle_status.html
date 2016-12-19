@@ -1,29 +1,31 @@
 <template name="apiLifecycleStatus">
-  <!-- show lifecycle status by default -->
-  {{# unless editMode }}
     <div class="pull-right">
+      {{# unless editMode }}
       <span class="label label-{{ labelType }}">
         {{ lifecycleStatus }}
       </span>
-      {{# if api.currentUserCanEdit }}
-      &nbsp;
-      <button type="button" id="edit-api-lifecycle-status" class="btn btn-default btn-xs">
-        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
-      </button>
+        {{# if api.currentUserCanEdit }}
+        &nbsp;
+        <button
+          type="button"
+          id="edit-api-lifecycle-status"
+          class="btn btn-default btn-xs">
+          <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+        </button>
+        {{/ if }}
+      {{/ unless }}
+
+      <!-- edit mode form -->
+      {{# if editMode }}
+        {{> quickForm
+          id="lifecycleStatus"
+          type="update"
+          template="bootstrap3-inline"
+          collection=apisCollection
+          doc=api
+          fields=lifecycleStatusField
+          label-class="sr-only"
+        }}
       {{/ if }}
     </div>
-  {{/ unless }}
-
-  <!-- toggle form when edit mode is enabled -->
-  {{# if editMode }}
-
-  {{> quickForm
-    id="lifecycleStatus"
-    type="update"
-    template="bootstrap3-inline"
-    collection=apisCollection
-    doc=api
-    fields=lifecycleStatusField
-  }}
-  {{/ if }}
 </template>
