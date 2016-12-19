@@ -59,15 +59,6 @@ Apis.schema = new SimpleSchema({
       'production',
       'testing',
     ],
-    autoform: {
-      options: [
-        { label: 'Design', value: 'design' },
-        { label: 'Development', value: 'development' },
-        { label: 'Testing', value: 'testing' },
-        { label: 'Production', value: 'production' },
-        { label: 'Deprecated', value: 'deprecated' },
-      ],
-    },
   },
   apiLogoFileId: {
     type: String,

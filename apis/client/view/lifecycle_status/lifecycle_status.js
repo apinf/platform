@@ -63,7 +63,10 @@ Template.apiLifecycleStatus.helpers({
     if (templateInstance.data.api && templateInstance.data.api.lifecycleStatus) {
       statusText = templateInstance.data.api.lifecycleStatus;
     } else {
-      statusText = 'Unknown';
+      // Get translation text for Unknown lifecycle status
+      const unknown = TAPi18n.__('apiLifecycleStatus-labelText-unknown');
+
+      statusText = unknown;
     }
 
     return statusText;
