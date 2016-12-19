@@ -8,7 +8,6 @@ import dc from 'dc';
 import d3 from 'd3';
 import crossfilter from 'crossfilter';
 import _ from 'lodash';
-import $ from 'jquery';
 
 Template.dashboardCharts.onCreated(function () {
   const instance = this;
@@ -18,6 +17,14 @@ Template.dashboardCharts.onCreated(function () {
 
   // Variable that keeps frontend prefix
   instance.frontendPrefix = new ReactiveVar();
+
+  // Variable that keeps loading state value
+  // Possible loading state values:
+  // 'not-loading'
+  // 'loading'
+  // 'data-not-found'
+  // 'done'
+  instance.loadingState = new ReactiveVar('not-loading');
 
   // Init default values for statistic data
   instance.requestsCount = new ReactiveVar(0);
@@ -252,23 +259,17 @@ Template.dashboardCharts.onCreated(function () {
       let responseStatus;
 
       // Error handling for empty fields
-      try { time = moment(e.fields.request_at[0]).toISOString(); }
-      catch (err) { time = ''; }
+      try { time = moment(e.fields.request_at[0]).toISOString(); } catch (err) { time = ''; }
 
-      try { country = e.fields.request_ip_country[0]; }
-      catch (e) { country = ''; }
+      try { country = e.fields.request_ip_country[0]; } catch (e) { country = ''; }
 
-      try { requestPath = e.fields.request_path[0]; }
-      catch (e) { requestPath = ''; }
+      try { requestPath = e.fields.request_path[0]; } catch (e) { requestPath = ''; }
 
-      try { requestIp = e.fields.request_ip[0]; }
-      catch (e) { requestIp = ''; }
+      try { requestIp = e.fields.request_ip[0]; } catch (e) { requestIp = ''; }
 
-      try { responseTime = e.fields.response_time[0]; }
-      catch (e) { responseTime = ''; }
+      try { responseTime = e.fields.response_time[0]; } catch (e) { responseTime = ''; }
 
-      try { responseStatus = e.fields.response_status[0]; }
-      catch (e) { responseStatus = ''; }
+      try { responseStatus = e.fields.response_status[0]; } catch (e) { responseStatus = ''; }
 
       tableData.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
     });
@@ -381,10 +382,32 @@ Template.dashboardCharts.onCreated(function () {
     // Return the amount of users in object
     return Object.keys(uniqueUsersGroup).length;
   };
+
+  // Loading state controller
+  instance.updateLoadingState = (chartData) => {
+
+    // Check if data is loaded
+    if (!chartData) {
+      // If still loading, show loading state to user
+      instance.loadingState.set('loading');
+    } else {
+      // Check if chart data was found
+      if (chartData.length > 0) {
+        // If found, Hide all messages
+        instance.loadingState.set('done');
+      } else {
+        // If not, display "not found" message to user
+        instance.loadingState.set('data-not-found');
+      }
+    }
+  };
 });
 
 Template.dashboardCharts.onRendered(function () {
   const instance = this;
+
+  // Update loader to state 1
+  instance.loadingState.set('loading');
 
   instance.autorun(() => {
     // Get chart data, reactively
@@ -403,6 +426,9 @@ Template.dashboardCharts.onRendered(function () {
 
     const frontendPrefix = instance.frontendPrefix.get();
 
+    // Update loading state
+    instance.updateLoadingState(chartData);
+
     if (chartData && chartData.length > 0) {
       let parsedData = [];
 
@@ -419,12 +445,6 @@ Template.dashboardCharts.onRendered(function () {
 
       // Render charts
       instance.renderCharts(parsedData);
-    } else if (chartData && chartData.length === 0) {
-      // Cleanup previous message if one exists
-      $('.charts-holder>#no-chart-data-placeholder').remove();
-      const i18nMessage = TAPi18n.__('dashboardCharts_placeholder_noDataFound');
-      // throw user-friendly message
-      $('.charts-holder').append('<div id="no-chart-data-placeholder">' + i18nMessage + '</div>');
     }
   });
 });
@@ -444,5 +464,11 @@ Template.dashboardCharts.helpers({
       responseRate: instance.responseRate.get(),
       uniqueUsersCount: instance.uniqueUsersCount.get(),
     };
+  },
+  loadingState () {
+    return Template.instance().loadingState.get();
+  },
+  isEqual (currentState, state) {
+    return currentState === state;
   },
 });
