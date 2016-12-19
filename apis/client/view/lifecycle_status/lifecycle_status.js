@@ -1,5 +1,6 @@
-import { Template } from 'meteor/templating';
 import { Apis } from '/apis/collection/';
+import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import $ from 'jquery';
 
 Template.apiLifecycleStatus.onCreated(function () {
@@ -61,10 +62,14 @@ Template.apiLifecycleStatus.helpers({
     let statusText;
 
     if (templateInstance.data.api && templateInstance.data.api.lifecycleStatus) {
-      statusText = templateInstance.data.api.lifecycleStatus;
+      // Get lifecycle status from API document
+      status = templateInstance.data.api.lifecycleStatus;
+
+      // Get status text translation
+      statusText = TAPi18n.__(`apiLifecycleStatus_labelText_${status}`);
     } else {
       // Get translation text for Unknown lifecycle status
-      const unknown = TAPi18n.__('apiLifecycleStatus-labelText-unknown');
+      const unknown = TAPi18n.__('apiLifecycleStatus_labelText_unknown');
 
       statusText = unknown;
     }
