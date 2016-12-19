@@ -17,3 +17,10 @@ Meteor.publish('allOrganizationBasicDetails', () => {
 // Publish collection for pagination
 new Meteor.Pagination(Organizations);
 
+Meteor.publish('managedOrganizationsBasicDetails', (userId) => {
+  return Organizations.find(
+    { managerIds: userId },
+    { fields:
+      { _id: 1, name: 1, description: 1, contact: 1 },
+    });
+});
