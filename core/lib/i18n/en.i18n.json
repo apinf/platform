@@ -96,6 +96,7 @@
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
   "apiIntro_quickTour_button_text": "Quick tour",
+  "apiLifecycleStatus-labelText-unknown": "Unknown",
   "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiKeys_label": "API Key",
   "apiKeys_getApiKeyButton": "Get API key",
@@ -414,6 +415,17 @@
           },
           "organizationId": {
             "label": "Connect API to organization"
+          },
+          "lifecycleStatus": {
+            "label": "Lifecycle status",
+            "placeholder": "Select lifecycle status",
+            "options": {
+              "design": "Design",
+              "development": "Development",
+              "testing": "Testing",
+              "production": "Production",
+              "deprecated": "Deprecated"
+            }
           }
       },
       "apiMetadata": {
