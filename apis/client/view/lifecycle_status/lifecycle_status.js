@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { Apis } from '/apis/collection/'
+import { Apis } from '/apis/collection/';
+import $ from 'jquery';
 
 Template.apiLifecycleStatus.onCreated(function () {
   // Get reference to template instance
@@ -30,7 +31,7 @@ Template.apiLifecycleStatus.helpers({
 
     // Get API lifecycle status from template instance
     const lifecycleStatus = templateInstance.data.api.lifecycleStatus;
-    console.log(lifecycleStatus);
+
     // Get label type based on lifecycle status
     switch (lifecycleStatus) {
       case 'development':
