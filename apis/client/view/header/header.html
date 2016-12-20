@@ -9,10 +9,13 @@
           {{> viewApiStatus api=api width="0.4" }}
 
         </h1>
-        {{> apiLifecycleStatus api=api }}
+
         {{# unless api.isPublic }}
-          <span class="label label-default label-align">private</span>
+          <span class="label label-default">private</span>
         {{/ unless }}
+
+        {{> apiLifecycleStatus api=api }}
+
         <ul class="list-inline view-api-meta-details">
           <li>
             <i class="fa fa-user"></i>
