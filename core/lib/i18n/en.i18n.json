@@ -711,6 +711,7 @@
   "viewApiNavigationMenu_metadata": "Metadata",
   "viewApiNavigationMenu_proxy": "Proxy",
   "viewApiNavigationMenu_settings": "Settings",
+  "viewApiPageHeader_privateLabel_text": "Private",
   "viewApiSettigs_saveButton_text": "Save",
   "viewApiStatus_statusMessage_ClientError": "Client error.",
   "viewApiStatus_statusMessage_ErrorCodeText": "Status code:",
