@@ -39,6 +39,9 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
+
+  // Subscribe to all organizations, returns only id and name
+  instance.subscribe('allOrganizationBasicDetails');
 });
 
 Template.viewApi.helpers({

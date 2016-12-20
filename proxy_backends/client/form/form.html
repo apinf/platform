@@ -21,7 +21,7 @@
     {{# if oneProxy }}
       {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
     {{ else }}
-        {{> afQuickField name="proxyId" firstOption='(Select one proxy)' }}
+        {{> afQuickField name="proxyId" firstOption='(Select one proxy)' id="proxy-selector" }}
     {{/ if }}
 
     {{# if showForm }}

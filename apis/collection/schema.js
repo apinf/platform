@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Organizations } from '/organizations/collection';
 import { Apis } from './';
 
 Apis.schema = new SimpleSchema({
@@ -26,6 +27,20 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
+  organizationId: {
+    type: String,
+    optional: true,
+    autoform: {
+      options: function () {
+        return _.map(Organizations.find().fetch(), function (organization) {
+          return {
+            label: organization.name,
+            value: organization._id,
+          };
+        });
+      },
+    },
+  },
   documentationFileId: {
     type: String,
     optional: true,
@@ -33,6 +48,17 @@ Apis.schema = new SimpleSchema({
   latestMonitoringStatusCode: {
     type: String,
     optional: true,
+  },
+  lifecycleStatus: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'development',
+      'deprecated',
+      'design',
+      'production',
+      'testing',
+    ],
   },
   apiLogoFileId: {
     type: String,

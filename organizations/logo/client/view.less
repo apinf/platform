@@ -1,0 +1,27 @@
+.profile-img-container {
+    width: 10%;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.profile-img-container img {
+  width:100%;
+}
+
+.profile-img-container span {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    text-align: center;
+}
+
+.profile-img-container:hover span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    opacity: 1;
+}

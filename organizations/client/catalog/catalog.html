@@ -1,0 +1,38 @@
+<template name="organizationCatalog">
+  <div class="container">
+    <h1 class="page-header">
+      {{_ "organizationCatalog_Title" }}
+
+      {{# if isInRole 'admin' }}
+        <a type="button"
+           class="btn btn-default pull-right"
+           href={{ pathFor 'addOrganization' }} >
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          {{_ "organizationCatalog_buttonText_addOrganization" }}
+        </a>
+      {{/ if }}
+    </h1>
+    {{> organizationCatalogueToolbar }}
+
+    <!-- if viewMode is grid, show grid -->
+    {{# if gridViewMode }}
+      {{# if Template.subscriptionsReady }}
+        {{> organizationCatalogGrid organizations=organizations }}
+      {{ else }}
+        {{> spinner }}
+      {{/ if }}
+    {{/ if }}
+
+    <!-- if viewMode is table, show table -->
+    {{# if tableViewMode }}
+      {{# if Template.subscriptionsReady }}
+        {{> organizationCatalogTable organizations=organizations }}
+      {{ else }}
+        {{> spinner }}
+      {{/ if }}
+    {{/ if }}
+
+    {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+
+  </div>
+</template>

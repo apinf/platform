@@ -15,7 +15,7 @@ AutoForm.hooks({
         if (proxyBackend && proxyBackend.proxyId === undefined) {
           // Notify users about no selected proxy
           const message = TAPi18n.__('proxyBackendForm_informText_noOneSelectedProxy');
-          sAlert.info(message)
+          sAlert.info(message);
           return false;
         }
 
@@ -90,6 +90,8 @@ AutoForm.hooks({
         }
       },
       update (updateDoc) {
+        // Get reference to autoform instance, for form submission callback
+        const form = this;
         // Get proxyBackend $set values
         const currentProxyBackend = updateDoc.$set;
 
@@ -103,7 +105,7 @@ AutoForm.hooks({
           // Then delete proxy backend information from api umbrella
           if (currentProxyBackend.proxyId === undefined) {
             // Delete proxy backend information from api umbrella
-            deleteProxyBackendConfig(proxyBackendFromMongo)
+            deleteProxyBackendConfig(proxyBackendFromMongo);
 
             return false;
           }
@@ -130,37 +132,41 @@ AutoForm.hooks({
           const previousProxyId = proxyBackendFromMongo.proxyId;
           const currentProxyId = currentProxyBackend.proxyId;
 
-          // TODO: In multi-proxy case. After changing proxy, onSuccess hook happens faster then umbrella id is got.
           // Check: if user changed proxy
-          if (previousProxyId !== currentProxyId) {
+          if (previousProxyId === currentProxyId) {
+            // Case 1: Proxy not changed, return modifier
+            updateDoc.$set = currentProxyBackend;
+            form.result(updateDoc);
+          } else {
+            // Case 2: Proxy changed
             // Delete information about proxy backend from the first proxy and insert in the
             Meteor.call('deleteProxyBackend',
               proxyBackendFromMongo, false,
-              function (error) {
+              (error) => {
                 if (error) {
-                  this.result(false);
+                  form.result(false);
                 }
-            });
+              });
 
             const convertedProxyBackend = convertToApiUmbrellaObject(currentProxyBackend);
 
             // Create API backend on API Umbrella
             Meteor.call('createApiBackendOnApiUmbrella',
               convertedProxyBackend.apiUmbrella, convertedProxyBackend.proxyId,
-              function (error, response) {
+              (error, response) => {
                 if (error) {
                   // Throw a Meteor error
-                  sAlert.error(error)
-                  // sync return false;
-                  return false;
+                  sAlert.error(error);
+                  // async return false;
+                  form.result(false);
                 }
 
                 // If response has errors object, notify about it
                 if (response.errors && response.errors.default) {
                   // Notify about error
                   sAlert.error(response.errors.default[0]);
-                  // sync return false;
-                  return false;
+                  // async return false;
+                  form.result(false);
                 }
 
                 // If success, attach API Umbrella backend ID to API
@@ -174,22 +180,21 @@ AutoForm.hooks({
                   // Publish the API Backend on API Umbrella
                   Meteor.call('publishApiBackendOnApiUmbrella',
                     umbrellaBackendId, convertedProxyBackend.proxyId,
-                    function (error) {
-                      if (error) {
-                        sAlert.error(error);
-                        // sync return false;
-                        return false;
+                    (publishError) => {
+                      if (publishError) {
+                        sAlert.error(publishError);
+                        // async return false;
+                        form.result(false);
                       }
-                      // sync return the Proxy Backend document
+                      // async return the Proxy Backend document
                       updateDoc.$set = convertedProxyBackend;
-                      return updateDoc;
+                      form.result(updateDoc);
                     }
                   );
                 }
               });
           }
         }
-        return updateDoc;
       },
     },
     onSuccess (formType, result) {
