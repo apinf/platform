@@ -7,9 +7,9 @@
         <h1 id="api-header">
           {{ api.name }}
           {{> viewApiStatus api=api width="0.4" }}
-          {{> apiLifecycleStatus api=api }}
-        </h1>
 
+        </h1>
+        {{> apiLifecycleStatus api=api }}
         {{# unless api.isPublic }}
           <span class="label label-default label-align">private</span>
         {{/ unless }}
