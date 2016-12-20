@@ -11,7 +11,9 @@
         </h1>
 
         {{# unless api.isPublic }}
-          <span class="label label-default">private</span>
+          <span class="label label-default">
+            {{_ "viewApiPageHeader_privateLabel_text" }}
+          </span>
         {{/ unless }}
 
         {{> apiLifecycleStatus api=api }}
