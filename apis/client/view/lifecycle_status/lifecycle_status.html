@@ -1,29 +1,6 @@
 <template name="apiLifecycleStatus">
-      {{# if editMode }}
-        <!-- show lifecycle status edit form -->
-        {{> quickForm
-          id="lifecycleStatus"
-          type="update"
-          template="bootstrap3-inline"
-          collection=apisCollection
-          doc=api
-          fields=lifecycleStatusField
-          label-class="sr-only"
-        }}
-      {{ else }}
-        <!-- show lifecycle status label -->
-        <span class="label label-{{ labelType }}">
-          {{ lifecycleStatus }}
-        </span>
-        {{# if api.currentUserCanEdit }}
-        <!-- show edit button -->
-        &nbsp;
-        <button
-          type="button"
-          id="edit-api-lifecycle-status"
-          class="btn btn-default btn-xs">
-          <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
-        </button>
-        {{/ if }}
-      {{/ if }}
+    <!-- show lifecycle status label -->
+    <span class="label label-{{ labelType }}">
+      {{ lifecycleStatus }}
+    </span>
 </template>
