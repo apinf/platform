@@ -49,6 +49,17 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  lifecycleStatus: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'development',
+      'deprecated',
+      'design',
+      'production',
+      'testing',
+    ],
+  },
   apiLogoFileId: {
     type: String,
     optional: true,
