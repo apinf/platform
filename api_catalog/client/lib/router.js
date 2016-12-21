@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-FlowRouter.route('/catalogue', {
+FlowRouter.route('/apis', {
   // Get query parameters for Catalog page on Enter
   triggersEnter: [function (context) {
     if (!context.queryParams.sortBy) {
@@ -18,8 +18,8 @@ FlowRouter.route('/catalogue', {
       context.queryParams.filterBy = 'all';
     }
   }],
-  name: 'catalogue',
+  name: 'apiCatalog',
   action: function () {
-    BlazeLayout.render('masterLayout', { main: 'catalog' });
+    BlazeLayout.render('masterLayout', { main: 'apiCatalog' });
   },
 });
