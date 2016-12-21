@@ -2,15 +2,14 @@
     {{# if Template.subscriptionsReady }}
       {{> organizationProfileHeader organization=organization }}
     <div class="container">
-      <!--container-fluid addes padding-left -->
-      <div class="container-fluid row">
-        <label class="h3">
-          {{_ 'organizationProfile_bigText_apisCount'  }}
-        </label>
-        <label>
-          {{_ 'organizationProfile_smallText_apisCount' managedApisCount}}
-        </label>
-      </div>
+      <h3>
+        {{_ 'organizationProfile_bigText_apisCount'  }}
+        <small>
+          {{_ 'organizationProfile_smallText_apisCount' managedApisCount }}
+        </small>
+      </h3>
+
+
       {{> apiCatalogGrid apis=managedApis }}
     </div>
     {{/if}}
