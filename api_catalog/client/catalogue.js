@@ -137,22 +137,3 @@ Template.catalogue.helpers({
     return (viewMode === 'table');
   },
 });
-
-Template.catalogue.events({
-  'change #sort-select': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
-  },
-  'change [name=sort-direction]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortDirection: event.target.value });
-  },
-  'change [name=filter-options]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ filterBy: event.target.value });
-  },
-  'change [name=view-mode]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ viewMode: event.target.value });
-  },
-});

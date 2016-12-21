@@ -26,3 +26,22 @@ Template.catalogToolbar.onRendered(function () {
   // Set the view mode direction by UI state from URL parameter
   instance.$(`#viewMode-${viewModeParameter}`).button('toggle');
 });
+
+Template.catalogToolbar.events({
+  'change #sort-select': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortBy: event.target.value });
+  },
+  'change [name=sort-direction]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortDirection: event.target.value });
+  },
+  'change [name=filter-options]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ filterBy: event.target.value });
+  },
+  'change [name=view-mode]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ viewMode: event.target.value });
+  },
+});
