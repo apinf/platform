@@ -18,7 +18,7 @@
     <!-- if viewMode is table, show table -->
     {{# if tableViewMode }}
       {{# if Template.subscriptionsReady }}
-        {{> apiCatalogueTable apis=apis }}
+        {{> apiCatalogTable apis=apis }}
       {{ else }}
         {{> spinner }}
       {{/ if }}
