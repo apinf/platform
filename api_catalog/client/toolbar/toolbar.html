@@ -7,7 +7,7 @@
                 type="button"
                 class="navbar-toggle collapsed"
                 data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
+                data-target="#catalog-toolbar-navbar"
                 aria-expanded="false">
           <span class="sr-only">
             {{_ "catalogue_toolbar_toggleCollapse" }}
@@ -19,27 +19,29 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" id="catalog-toolbar-navbar">
         <div class="nav navbar-nav">
-          <p class="navbar-text">
-            {{_ "catalogue_toolbar_sortBy_title" }}
-          </p>
           <div class="form-group sort-options-form">
             <form class="form navbar-form navbar-nav">
-              <select name="sort-menu" class="form-control">
-                <option value="name">
-                  {{_ "catalogue_toolbar_sortMenuOptions_name" }}
-                </option>
-                <option value="bookmarkCount">
-                  {{_ "catalogue_toolbar_sortMenuOptions_bookmarkCount" }}
-                </option>
-                <option value="averageRating">
-                  {{_ "catalogue_toolbar_sortMenuOptions_averageRating" }}
-                </option>
-                <option value="created_at">
-                  {{_ "catalogue_toolbar_sortMenuOptions_dateCreated" }}
-                </option>
-              </select>
+              <div class="form-group">
+                <label for="sort-menu">
+                  {{_ "catalogue_toolbar_sortBy_title" }}
+                </label>
+                <select id="sort-menu" class="form-control">
+                  <option value="name">
+                    {{_ "catalogue_toolbar_sortMenuOptions_name" }}
+                  </option>
+                  <option value="bookmarkCount">
+                    {{_ "catalogue_toolbar_sortMenuOptions_bookmarkCount" }}
+                  </option>
+                  <option value="averageRating">
+                    {{_ "catalogue_toolbar_sortMenuOptions_averageRating" }}
+                  </option>
+                  <option value="created_at">
+                    {{_ "catalogue_toolbar_sortMenuOptions_dateCreated" }}
+                  </option>
+                </select>
+              </div>
             </form>
           </div>
         </div>
