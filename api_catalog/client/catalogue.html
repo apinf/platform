@@ -1,10 +1,10 @@
-<template name="catalog">
+<template name="apiCatalog">
   <div class="container">
     <h1 class="page-header">
       {{_ "catalogue_Title" }}
     </h1>
 
-    {{> catalogToolbar apis=apis }}
+    {{> apiCatalogToolbar apis=apis }}
 
     <!-- if viewMode is table, show table -->
     {{# if gridViewMode }}
@@ -18,7 +18,7 @@
     <!-- if viewMode is table, show table -->
     {{# if tableViewMode }}
       {{# if Template.subscriptionsReady }}
-        {{> catalogueTable apis=apis }}
+        {{> apiCatalogueTable apis=apis }}
       {{ else }}
         {{> spinner }}
       {{/ if }}
