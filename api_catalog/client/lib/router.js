@@ -20,6 +20,6 @@ FlowRouter.route('/catalogue', {
   }],
   name: 'catalogue',
   action: function () {
-    BlazeLayout.render('masterLayout', { main: 'catalogue' });
+    BlazeLayout.render('masterLayout', { main: 'catalog' });
   },
 });
