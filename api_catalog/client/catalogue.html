@@ -9,7 +9,7 @@
     <!-- if viewMode is table, show table -->
     {{# if gridViewMode }}
       {{# if Template.subscriptionsReady }}
-        {{> catalogueGrid apis=apis }}
+        {{> apiCatalogGrid apis=apis }}
       {{ else }}
         {{> spinner }}
       {{/ if }}
