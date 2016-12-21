@@ -7,7 +7,7 @@
           {{> viewApiLogo api=api }}
         </div>
         <div class="api-card-info">
-          <a href="/api/{{ api._id }}"
+          <a href="{{ pathFor 'viewApi' _id=api._id }}"
              class="api-card-name">
             {{ api.name }}
             {{> viewApiStatus api=api width="0.6" }}
