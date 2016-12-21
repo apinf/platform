@@ -1,5 +1,5 @@
-<template name="catalogueToolbar">
-  <nav id="catalogue-toolbar" class="navbar navbar-default">
+<template name="catalogToolbar">
+  <nav id="catalog-toolbar" class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -19,14 +19,14 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse sort-filter-toolbar" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse">
         <div class="nav navbar-nav">
-          <p class="navbar-text sort-filter-toolbar-title">
+          <p class="navbar-text">
             {{_ "catalogue_toolbar_sortBy_title" }}
           </p>
           <div class="form-group sort-options-form">
-            <form class="form navbar-form navbar-nav" id="sort-options-select">
-              <select name="sort-menu" class="form-control sort-options-select" id="sort-select">
+            <form class="form navbar-form navbar-nav">
+              <select name="sort-menu" class="form-control">
                 <option value="name">
                   {{_ "catalogue_toolbar_sortMenuOptions_name" }}
                 </option>
