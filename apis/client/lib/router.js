@@ -2,21 +2,21 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-FlowRouter.route('/api/new', {
+FlowRouter.route('/apis/new', {
   name: 'addApi',
   action: function () {
     BlazeLayout.render('masterLayout', { main: 'addApi' });
   },
 });
 
-FlowRouter.route('/api/import', {
+FlowRouter.route('/apis/import', {
   name: 'importApiConfiguration',
   action: function () {
     BlazeLayout.render('masterLayout', { main: 'importApiConfiguration' });
   },
 });
 
-FlowRouter.route('/api/:_id/', {
+FlowRouter.route('/apis/:_id/', {
   name: 'viewApi',
   action: function (params) {
     // Get current API Backend ID
