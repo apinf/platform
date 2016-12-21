@@ -6,7 +6,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
-Template.catalogue.onCreated(function () {
+Template.catalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
   // Get user id
@@ -110,12 +110,12 @@ Template.catalogue.onCreated(function () {
   });
 });
 
-Template.catalogue.onRendered(function () {
+Template.catalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
 });
 
-Template.catalogue.helpers({
+Template.catalog.helpers({
   apis () {
     // Return items of apis collection via Pagination
     return Template.instance().pagination.getPage();
