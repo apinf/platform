@@ -15,7 +15,7 @@ Template.latestApis.created = function () {
   }
 
   // Subscribe to latestApiBackends publication & pass limit parameter
-  instance.subscribe("latestApiBackends", limit);
+  instance.subscribe("latestPublicApis", limit);
 
   // Attach cursor function to a template instance
   instance.latestApiBackendsCursor = function () {
