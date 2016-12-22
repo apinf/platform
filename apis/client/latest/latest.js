@@ -1,13 +1,15 @@
 import { Apis } from '/apis/collection';
-import moment from 'moment';
+import { Template } from 'meteor/templating';
 
-Template.latestApis.created = function () {
-
+Template.latestApis.onCreated(function () {
   // Reference to Template instance
-  var instance = this;
-  var limit;
+  const instance = this;
+
+  // Placeholder to keep track of query limit
+  let limit;
+
   // Limit for latest Api Backends passed to the template
-  if ( instance.data && instance.data.limit ) {
+  if (instance.data && instance.data.limit) {
     limit = instance.data.limit;
   } else {
     // Set default limit 8
@@ -15,19 +17,18 @@ Template.latestApis.created = function () {
   }
 
   // Subscribe to latestApiBackends publication & pass limit parameter
-  instance.subscribe("latestPublicApis", limit);
+  instance.subscribe('latestPublicApis', limit);
 
   // Attach cursor function to a template instance
   instance.latestApiBackendsCursor = function () {
     // Get a cursor for API Backends documents limited by provided value and sorted by created date
-    return ;
-  }
-
-};
+    return;
+  };
+});
 
 Template.latestApis.helpers({
-  'latestApis': function (limit) {
+  latestApis () {
     // Retrieve last API Backends
-    return Apis.find({}, { sort: { created_at: -1}}).fetch();
-  }
+    return Apis.find({}, { sort: { created_at: -1 } }).fetch();
+  },
 });
