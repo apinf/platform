@@ -18,12 +18,6 @@ Template.latestApis.onCreated(function () {
 
   // Subscribe to latestApiBackends publication & pass limit parameter
   instance.subscribe('latestPublicApis', limit);
-
-  // Attach cursor function to a template instance
-  instance.latestApiBackendsCursor = function () {
-    // Get a cursor for API Backends documents limited by provided value and sorted by created date
-    return;
-  };
 });
 
 Template.latestApis.helpers({
