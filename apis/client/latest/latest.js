@@ -5,15 +5,12 @@ Template.latestApis.onCreated(function () {
   // Reference to Template instance
   const instance = this;
 
-  // Placeholder to keep track of query limit
-  let limit;
+  // Apis query limit (default: 8)
+  let limit = 8;
 
-  // Limit for latest Api Backends passed to the template
+  // Override default limit if passed in as template argument
   if (instance.data && instance.data.limit) {
     limit = instance.data.limit;
-  } else {
-    // Set default limit 8
-    limit = 8;
   }
 
   // Subscribe to latestApiBackends publication & pass limit parameter
