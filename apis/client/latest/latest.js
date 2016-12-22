@@ -1,7 +1,7 @@
 import { Apis } from '/apis/collection';
 import { Template } from 'meteor/templating';
 
-Template.latestApis.onCreated(function () {
+Template.latestPublicApis.onCreated(function () {
   // Reference to Template instance
   const instance = this;
 
@@ -17,8 +17,8 @@ Template.latestApis.onCreated(function () {
   instance.subscribe('latestPublicApis', limit);
 });
 
-Template.latestApis.helpers({
-  latestApis () {
+Template.latestPublicApis.helpers({
+  latestPublicApis () {
     // Retrieve last API Backends
     return Apis.find({}, { sort: { created_at: -1 } }).fetch();
   },

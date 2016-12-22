@@ -1,5 +1,5 @@
-<template name="latestApis">
-  {{# if latestApis }}
+<template name="latestPublicApis">
+  {{# if latestPublicApis }}
   <div class="row">
     <div class="col-lg-12 text-center">
       <h2 class="feature-section-heading">
@@ -8,7 +8,7 @@
       <hr class="primary">
     </div>
   </div>
-  {{# each latestApis }}
+  {{# each latestPublicApis }}
     {{# if currentUserCanView }}
     <div class="col-md-3 col-sm-6 hero-feature">
       <div class="thumbnail api-box">
