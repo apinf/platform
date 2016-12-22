@@ -1,7 +1,7 @@
 import { Apis } from '/apis/collection';
 import moment from 'moment';
 
-Template.latestApiBackends.created = function () {
+Template.latestApis.created = function () {
 
   // Reference to Template instance
   var instance = this;
@@ -25,7 +25,7 @@ Template.latestApiBackends.created = function () {
 
 };
 
-Template.latestApiBackends.helpers({
+Template.latestApis.helpers({
   'latestBackends': function (limit) {
 
     // Reference to Template instance
