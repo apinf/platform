@@ -26,7 +26,7 @@ Template.latestApis.created = function () {
 };
 
 Template.latestApis.helpers({
-  'latestBackends': function (limit) {
+  'latestApis': function (limit) {
 
     // Reference to Template instance
     var instance = Template.instance();
