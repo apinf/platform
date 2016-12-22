@@ -1,5 +1,4 @@
-# Based on "MeteorD - Docker Runtime for Meteor Apps for Production Deployments"
-# https://github.com/meteorhacks/meteord
-FROM athyuttamre/meteord:volbuild
+# A base Docker image for Meteor applications. https://hub.docker.com/r/jshimko/meteor-launchpad/
+FROM jshimko/meteor-launchpad:v1.1.1
 
 MAINTAINER apinf <info@apinf.io>
