@@ -98,15 +98,21 @@
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
   "apiIntro_quickTour_button_text": "Quick tour",
-  "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiKeys_label": "API Key",
   "apiKeys_getApiKeyButton": "Get API key",
   "apiKeys_copyButtonText": "Copy API key",
   "apiKeys_copySuccessful": "API key copied to clipboard.",
   "apiKeys_getApiKeyButton_success": "API key retrieved successfully.",
   "apiKeys_getApiKeyButton_processing": "Processing...",
+  "apiLifecycleStatus_labelText_development": "Development",
+  "apiLifecycleStatus_labelText_deprecated": "Deprecated",
+  "apiLifecycleStatus_labelText_design": "Design",
+  "apiLifecycleStatus_labelText_production": "Production",
+  "apiLifecycleStatus_labelText_testing": "Testing",
+  "apiLifecycleStatus_labelText_unknown": "Unknown",
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
+  "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiRemoveAuthorizedUser_cancelButton_text": "No, cancel",
   "apiRemoveAuthorizedUser_confirmation_text": "Are you sure you want to remove this authorized user?",
   "apiRemoveAuthorizedUser_modalTitle": "Remove authorized user",
@@ -388,6 +394,8 @@
   "proxyBackendForm_informText_noOneSelectedProxy": "No one proxy was selected.",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
+  "proxyForm_successText": "Proxy settings were saved",
+  "proxyForm_errorText": "All fields with asterisk symbol are required",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
   "proxyItem_type": "Type",
@@ -417,6 +425,17 @@
           },
           "organizationId": {
             "label": "Connect API to organization"
+          },
+          "lifecycleStatus": {
+            "label": "Lifecycle status",
+            "placeholder": "Select lifecycle status",
+            "options": {
+              "design": "Design",
+              "development": "Development",
+              "testing": "Testing",
+              "production": "Production",
+              "deprecated": "Deprecated"
+            }
           }
       },
       "apiMetadata": {
@@ -697,6 +716,7 @@
   "viewApiNavigationMenu_metadata": "Metadata",
   "viewApiNavigationMenu_proxy": "Proxy",
   "viewApiNavigationMenu_settings": "Settings",
+  "viewApiPageHeader_privateLabel_text": "Private",
   "viewApiSettigs_saveButton_text": "Save",
   "viewApiStatus_statusMessage_ClientError": "Client error.",
   "viewApiStatus_statusMessage_ErrorCodeText": "Status code:",

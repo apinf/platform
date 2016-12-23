@@ -1,13 +1,12 @@
-<template name="catalogueToolbar">
-  <nav id="catalogue-toolbar" class="navbar navbar-default">
+<template name="apiCatalogToolbar">
+  <nav id="catalog-toolbar" class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button
                 type="button"
                 class="navbar-toggle collapsed"
                 data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
+                data-target="#catalog-toolbar-navbar"
                 aria-expanded="false">
           <span class="sr-only">
             {{_ "catalogue_toolbar_toggleCollapse" }}
@@ -19,14 +18,14 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse sort-filter-toolbar" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="catalog-toolbar-navbar">
         <div class="nav navbar-nav">
-          <p class="navbar-text sort-filter-toolbar-title">
-            {{_ "catalogue_toolbar_sortBy_title" }}
-          </p>
-          <div class="form-group sort-options-form">
-            <form class="form navbar-form navbar-nav" id="sort-options-select">
-              <select name="sort-menu" class="form-control sort-options-select" id="sort-select">
+          <form class="navbar-form">
+            <div class="form-group">
+              <label for="sort-select">
+                {{_ "catalogue_toolbar_sortBy_title" }}
+              </label>
+              <select id="sort-select" class="form-control">
                 <option value="name">
                   {{_ "catalogue_toolbar_sortMenuOptions_name" }}
                 </option>
@@ -40,8 +39,8 @@
                   {{_ "catalogue_toolbar_sortMenuOptions_dateCreated" }}
                 </option>
               </select>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
         <div class="nav navbar-nav">
           <div class="btn-group navbar-btn" role="group" aria-label="Sort direction" data-toggle="buttons">
