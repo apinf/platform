@@ -17,32 +17,32 @@
       {{> uploadApiLogo api=api }}
       <hr class="panel-hr" />
       {{# autoForm
-        collection=apisCollection
-        doc=api
-        id="apiBackendForm"
-        type="update" }}
-      {{> afQuickField name='name' }}
-      {{> afQuickField name='description' }}
-      {{> afQuickField name='url' }}
+          collection=apisCollection
+          doc=api
+          id="apiBackendForm"
+          type="update" }}
+        {{> afQuickField name='name' }}
+        {{> afQuickField name='description' }}
+        {{> afQuickField name='url' }}
+        {{> afQuickField name='lifecycleStatus' }}
 
-      {{> afQuickField name='lifecycleStatus' }}
         {{# if userIsOrganizationManager }}
-        <div class="form-group">
-        <label>
-          {{ afFieldLabelText name='organizationId' }}
-        </label>
-        <p class="help-block">
-          {{_ "apiSettings_details_helpText" }}&nbsp;
-        </p>
-        {{> afFieldInput name='organizationId' }}
-      </div>
-      {{/ if }}
+          <div class="form-group">
+            <label>
+              {{ afFieldLabelText name='organizationId' }}
+            </label>
+            <p class="help-block">
+              {{_ "apiSettings_details_helpText" }}&nbsp;
+            </p>
+            {{> afFieldInput name='organizationId' }}
+          </div>
+        {{/ if }}
 
-      <div id="form-buttons">
-        <button type="submit" class="btn btn-success" id="save-settings">
-          {{_ "viewApiSettigs_saveButton_text" }}
-        </button>
-      </div>
+        <div id="form-buttons">
+          <button type="submit" class="btn btn-success" id="save-settings">
+            {{_ "viewApiSettigs_saveButton_text" }}
+          </button>
+        </div>
       {{/ autoForm }}
     </div>
   </div>
