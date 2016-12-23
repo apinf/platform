@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Organizations } from '../';
+import { Organizations, OrganizationApis } from '../';
 
 Meteor.publish('singleOrganization', (slug) => Organizations.find({ slug }));
 
@@ -24,3 +24,6 @@ Meteor.publish('managedOrganizationsBasicDetails', (userId) => {
       { _id: 1, name: 1, description: 1, contact: 1 },
     });
 });
+
+// TODO: Remove it
+Meteor.publish('orgApis', () => OrganizationApis.find());

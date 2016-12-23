@@ -1,5 +1,5 @@
 import { Roles } from 'meteor/alanning:roles';
-import { Organizations } from './';
+import { Organizations, OrganizationApis } from './';
 
 Organizations.allow({
   insert (userId) {
@@ -36,3 +36,9 @@ Organizations.allow({
     return false;
   },
 });
+// TODO: Remove it
+OrganizationApis.allow({
+  insert () {return true},
+  update () {return true},
+  remove () {return true},
+})
