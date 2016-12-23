@@ -6,12 +6,15 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.deleteApiConfirmation.events({
-  'click #modal-delete-api': function (event, instance) {
+  'click #modal-delete-api': function () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
     // Get API ID
     const apiId = instance.data.api._id;
 
-    // Route to catalogue
-    FlowRouter.go('catalogue');
+    // Route to API Catalog
+    FlowRouter.go('apiCatalog');
 
     Meteor.call('removeApi', apiId, () => {
       // Dismiss the confirmation modal
