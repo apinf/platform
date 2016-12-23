@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-Template.catalogueToolbar.onRendered(function () {
+Template.apiCatalogToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -25,4 +25,23 @@ Template.catalogueToolbar.onRendered(function () {
   instance.$(`#filterBy-${filterByParameter}`).button('toggle');
   // Set the view mode direction by UI state from URL parameter
   instance.$(`#viewMode-${viewModeParameter}`).button('toggle');
+});
+
+Template.apiCatalogToolbar.events({
+  'change #sort-select': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortBy: event.target.value });
+  },
+  'change [name=sort-direction]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortDirection: event.target.value });
+  },
+  'change [name=filter-options]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ filterBy: event.target.value });
+  },
+  'change [name=view-mode]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ viewMode: event.target.value });
+  },
 });

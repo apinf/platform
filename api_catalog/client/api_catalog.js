@@ -6,7 +6,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
-Template.catalogue.onCreated(function () {
+Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
   // Get user id
@@ -110,12 +110,12 @@ Template.catalogue.onCreated(function () {
   });
 });
 
-Template.catalogue.onRendered(function () {
+Template.apiCatalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
 });
 
-Template.catalogue.helpers({
+Template.apiCatalog.helpers({
   apis () {
     // Return items of apis collection via Pagination
     return Template.instance().pagination.getPage();
@@ -135,24 +135,5 @@ Template.catalogue.helpers({
     const viewMode = FlowRouter.getQueryParam('viewMode');
 
     return (viewMode === 'table');
-  },
-});
-
-Template.catalogue.events({
-  'change #sort-select': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
-  },
-  'change [name=sort-direction]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortDirection: event.target.value });
-  },
-  'change [name=filter-options]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ filterBy: event.target.value });
-  },
-  'change [name=view-mode]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ viewMode: event.target.value });
   },
 });

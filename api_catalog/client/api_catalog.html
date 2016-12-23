@@ -1,15 +1,15 @@
-<template name="catalogue">
+<template name="apiCatalog">
   <div class="container">
     <h1 class="page-header">
       {{_ "catalogue_Title" }}
     </h1>
 
-{{> catalogueToolbar apis=apis }}
+    {{> apiCatalogToolbar apis=apis }}
 
     <!-- if viewMode is table, show table -->
     {{# if gridViewMode }}
       {{# if Template.subscriptionsReady }}
-        {{> catalogueGrid apis=apis }}
+        {{> apiCatalogGrid apis=apis }}
       {{ else }}
         {{> spinner }}
       {{/ if }}
@@ -18,7 +18,7 @@
     <!-- if viewMode is table, show table -->
     {{# if tableViewMode }}
       {{# if Template.subscriptionsReady }}
-        {{> catalogueTable apis=apis }}
+        {{> apiCatalogTable apis=apis }}
       {{ else }}
         {{> spinner }}
       {{/ if }}

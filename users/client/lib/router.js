@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Accounts } from 'meteor/accounts-base';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 FlowRouter.route('/users', {
   name: 'accountsAdmin',
@@ -49,10 +50,8 @@ FlowRouter.route('/sign-out', {
   name: 'signOut',
   triggersEnter: [
     function () {
-      Meteor.logout(() => {
-        FlowRouter.go('catalogue');
-      });
-      // Use undefined to force page render when route is not changed
-      BlazeLayout.render('masterLayout', { main: undefined });
-    }]
+      // Sign-out user; returns to front page by default
+      AccountsTemplates.logout();
+    },
+  ],
 });

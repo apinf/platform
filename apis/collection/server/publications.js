@@ -24,7 +24,7 @@ Meteor.publish('apiBackend', function (backendId) {
   return Apis.find({ _id: backendId });
 });
 
-Meteor.publish('latestApiBackends', function (limit) {
+Meteor.publish('latestPublicApis', function (limit) {
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },
