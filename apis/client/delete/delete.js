@@ -7,7 +7,6 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.deleteApiConfirmation.events({
   'click #modal-delete-api': function (event, templateInstance) {
-
     // Get API ID
     const apiId = templateInstance.data.api._id;
 
