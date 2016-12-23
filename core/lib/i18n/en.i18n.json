@@ -392,6 +392,8 @@
   "proxyBackendForm_informText_noOneSelectedProxy": "No one proxy was selected.",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
+  "proxyForm_successText": "Proxy settings were saved",
+  "proxyForm_errorText": "All fields with asterisk symbol are required",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
   "proxyItem_type": "Type",
