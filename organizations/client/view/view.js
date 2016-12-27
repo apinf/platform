@@ -41,7 +41,7 @@ Template.organizationProfile.helpers({
       // Check organizationApis exist
       if (organizationApis) {
         // Get cursor to apis
-        managedApis = organizationApis.cursor();
+        managedApis = organizationApis.cursorApis();
       }
     }
     // Return managedApis

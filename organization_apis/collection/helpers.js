@@ -2,7 +2,7 @@ import { Apis } from '/apis/collection';
 import { OrganizationApis } from './';
 
 OrganizationApis.helpers({
-  cursor () {
+  cursorApis () {
     // Return cursor to Apis
     return Apis.find({ _id: { $in: this.apiIds } });
   },
