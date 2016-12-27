@@ -1,13 +1,29 @@
 import { Apis } from '/apis/collection';
+import { Organizations } from '/organizations/collection';
 import { OrganizationApis } from './';
 
-OrganizationApis.helpers({
-  cursorApis () {
-    // Return cursor to Apis
-    return Apis.find({ _id: { $in: this.apiIds } });
+Organizations.helpers({
+  apis () {
+    // Get organizationApis document
+    const organizationApis = OrganizationApis.findOne({ organizationId: this._id });
+
+    // Return array of organization apis
+    return Apis.find({ _id: { $in: organizationApis.apiIds } }).fetch();
   },
-  count () {
+  apisCount () {
+    // Get organizationApis document
+    const organizationApis = OrganizationApis.findOne({ organizationId: this._id });
     // Return number of organization apis
-    return this.apiIds.length;
+    return organizationApis.apiIds.length;
+  },
+});
+
+Apis.helpers({
+  organization () {
+    // Get organizationApis document
+    const organizationApis = OrganizationApis.findOne({ apiIds: { $in: [this._id] } });
+
+    // Return organization
+    return Organizations.findOne({ _id: organizationApis.organizationId });
   },
 });
