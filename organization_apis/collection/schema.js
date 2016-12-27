@@ -1,18 +1,10 @@
-import { Organizations } from '/organizations/collection';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { OrganizationApis } from './';
 
 OrganizationApis.schema = new SimpleSchema({
   organizationId: {
     type: String,
     optional: true,
-    autoform: {
-      options () {
-        return _.map(Organizations.find().fetch(), (organization) => ({
-          label: organization.name,
-          value: organization._id,
-        }));
-      },
-    },
   },
   apiIds: {
     type: [String],
