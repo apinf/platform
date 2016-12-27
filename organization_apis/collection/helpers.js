@@ -1,13 +1,10 @@
-import _ from 'lodash';
 import { Apis } from '/apis/collection';
 import { OrganizationApis } from './';
 
 OrganizationApis.helpers({
-  listApis () {
-    // Map array of apis
-    const apis = _.map(this.apiIds, (apiId) => Apis.find({ _id: apiId }).fetch());
-    // Return array of apis
-    return apis;
+  cursor () {
+    // Return cursor to Apis
+    return Apis.find({ _id: { $in: this.apiIds } });
   },
   count () {
     // Return number of organization apis
