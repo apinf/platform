@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { OrganizationApis } from '/apis/collection';
 import { Organizations } from '/organizations/collection/';
 
 
@@ -32,17 +31,8 @@ Template.organizationProfile.helpers({
 
     // Check organization exist
     if (organization) {
-      // Get organization id
-      const organizationId = organization._id;
-
-      // Get organizationApis
-      const organizationApis = OrganizationApis.findOne({ organizationId });
-
-      // Check organizationApis exist
-      if (organizationApis) {
-        // Get cursor to apis
-        managedApis = organizationApis.cursorApis();
-      }
+      // Get organization apis
+      managedApis = organization.apis();
     }
     // Return managedApis
     return managedApis;
@@ -55,17 +45,8 @@ Template.organizationProfile.helpers({
 
     // Check organization exist
     if (organization) {
-      // Get organization id
-      const organizationId = organization._id;
-
-      // Get organizationApis
-      const organizationApis = OrganizationApis.findOne({ organizationId });
-
-      // Check organizationApis exist
-      if (organizationApis) {
-        // Get count of apis
-        managedApisCount = organizationApis.count();
-      }
+      // Get organization apis count
+      managedApisCount = organization.apisCount();
     }
     // Return managedApisCount
     return managedApisCount;
