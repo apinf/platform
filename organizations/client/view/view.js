@@ -25,29 +25,49 @@ Template.organizationProfile.helpers({
     return Organizations.findOne();
   },
   managedApis () {
+    // Init managedApis
+    let managedApis = [];
     // Find relate organization document
     const organization = Organizations.findOne();
 
-    // Get organization id
-    const organizationId = organization._id;
+    // Check organization exist
+    if (organization) {
+      // Get organization id
+      const organizationId = organization._id;
 
-    // Get organizationApis
-    const organizationApis = OrganizationApis.findOne({ organizationId });
+      // Get organizationApis
+      const organizationApis = OrganizationApis.findOne({ organizationId });
 
-    // Return array of apis
-    return organizationApis.listApis();
+      // Check organizationApis exist
+      if (organizationApis) {
+        // Get cursor to apis
+        managedApis = organizationApis.cursor();
+      }
+    }
+    // Return managedApis
+    return managedApis;
   },
   managedApisCount () {
+    // Init managedApisCount
+    let managedApisCount = 0;
     // Find relate organization document
     const organization = Organizations.findOne();
 
-    // Get organization id
-    const organizationId = organization._id;
+    // Check organization exist
+    if (organization) {
+      // Get organization id
+      const organizationId = organization._id;
 
-    // Get organizationApis
-    const organizationApis = OrganizationApis.findOne({ organizationId });
+      // Get organizationApis
+      const organizationApis = OrganizationApis.findOne({ organizationId });
 
-    // Return count of apis
-    return organizationApis.count();
+      // Check organizationApis exist
+      if (organizationApis) {
+        // Get count of apis
+        managedApisCount = organizationApis.count();
+      }
+    }
+    // Return managedApisCount
+    return managedApisCount;
   },
 });
