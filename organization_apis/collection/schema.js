@@ -4,11 +4,11 @@ import { OrganizationApis } from './';
 OrganizationApis.schema = new SimpleSchema({
   organizationId: {
     type: String,
-    optional: true,
+    optional: false,
   },
   apiIds: {
     type: [String],
-    optional: true,
+    optional: false,
   },
 });
 
