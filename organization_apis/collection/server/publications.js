@@ -2,14 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import { Organizations } from '/organizations/collection';
 import { OrganizationApis } from '../';
 
-Meteor.publish('singleOrganizationApis', (slug) => {
-  let organizationApis = {};
+Meteor.publish('organizationApis', (slug) => {
+  // Init organizationApis
+  let organizationApis = [];
   // Get organization
   const organization = Organizations.findOne({ slug });
   // Check organization exist
   if (organization) {
+    // Get cursor to organizationApis
     organizationApis = OrganizationApis.find({ organizationId: organization._id });
   }
-  // Return cursor to organizationApis
+  // Return organizationApis (empty array or cursor)
   return organizationApis;
 });
