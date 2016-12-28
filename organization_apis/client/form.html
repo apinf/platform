@@ -1,0 +1,21 @@
+<template name="organizationApis">
+  {{# autoForm
+    collection=organizationApisCollection
+    id="organizationApisForm"
+    type=formType
+    doc=organizationApisDoc
+  }}
+  <!-- organizationId is given, set value & hide -->
+  {{# if organizationId }}
+    {{> afQuickField name="organizationId" value=organizationId type="hidden" }}
+  {{ else }}
+    {{> afQuickField name="organizationId" options=organizationOptions }}
+  {{/ if }}
+  <!-- apiId is given hide, $push to apiIds field -->
+  {{# if apiId }}
+    {{> afQuickField name="apiIds" type="hidden" }}
+  {{ else }}
+    {{> afQuickField name="apiIds" options=apiOptions }}
+  {{/ if }}
+  {{/ autoForm }}
+</template>
