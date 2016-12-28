@@ -16,6 +16,8 @@ Template.organizationProfile.onCreated(function () {
   instance.subscribe('allApiBackends', Meteor.userId());
   // Subscribe to a single Organization
   instance.subscribe('singleOrganization', instance.organizationSlug);
+  // Subscribe to a single OrganizationApis
+  instance.subscribe('singleOrganizationApis', instance.organizationSlug);
 });
 
 Template.organizationProfile.helpers({
