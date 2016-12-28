@@ -1,9 +1,11 @@
 <template name="apiSettings">
   {{> apiSettings_details api=api }}
 
+  {{> organizationApis apiId=api._id }}
+
   {{> apiSettings_visibility api=api }}
 
   {{> apiMonitoring api=api }}
-  
+
   {{> apiSettings_delete api=api }}
 </template>
