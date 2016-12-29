@@ -9,12 +9,22 @@ import { ApiBookmarks } from '/bookmarks/collection';
 Template.catalogue.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-  // Get user id
-  const userId = Meteor.userId();
 
-  // Set filters
+  // Subscribe to all API logos
+  instance.subscribe('allApiLogo');
+
+  // Subscribe to all users, returns only usernames
+  instance.subscribe('allUsers');
+
+  // subscribe to user API bookmarks
+  instance.subscribe('myApiBookmarks');
+
+    // Set filters
   // On default: Show all public apis for anonymous users
   let filters = { isPublic: true };
+
+  // Get user id
+  const userId = Meteor.userId();
 
   if (userId) {
     // Show all available apis for registered users
@@ -40,13 +50,6 @@ Template.catalogue.onCreated(function () {
     sort: { name: 1 },
     filters,
   });
-
-  // Subscribe to API logo collection
-  instance.subscribe('allApiLogo');
-  // Subscribe to all users, returns only usernames
-  instance.subscribe('allUsers');
-  // subscribe to user bookmarks, creating reference to subscription
-  instance.subscribe('myApiBookmarks');
 
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {
