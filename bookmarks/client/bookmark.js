@@ -24,22 +24,28 @@ Template.apiBookmark.events({
 
 Template.apiBookmark.helpers({
   isBookmarked () {
+    // Placeholder to see if API is bookmarked
+    let isBookmarked;
+
     // Get reference to template instance
     const instance = Template.instance();
 
     // Get API ID from instance data context
     const apiId = instance.api._id;
 
-    // Get current user bookmark (should be only one API Bookmarks result available)
+    // Get current user bookmarks, only if this API is bookmarked
     const userBookmarks = ApiBookmarks.findOne({
       userId: Meteor.user()._id,
       apiIds: apiId,
     });
 
-    // Make sure user has bookmarks
+    // Check if user has bookmarked current API
     if (userBookmarks) {
-      return true;
+      isBookmarked = true;
+    } else {
+      isBookmarked = false;
     }
-    return false;
+
+    return isBookmarked;
   },
 });
