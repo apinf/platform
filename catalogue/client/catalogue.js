@@ -64,18 +64,19 @@ Template.catalogue.onCreated(function () {
     // Create a object for storage sorting parameters
     const sort = {};
 
-    // GCheck of existing parameters
+    // Check for sort parameters
     if (sortBy && sortDirection) {
-      // Get field and direction of sorting
+      // Set field and direction of sorting
       sort[sortBy] = sortDirection;
     } else {
-      // Otherwise get it like default value
+      // Otherwise sort by name in ascending order
       sort.name = 1;
     }
 
     // Change sorting
     instance.pagination.sort(sort);
 
+    // Placeholder for filter values
     let currentFilters = filters;
 
     // Check URL parameter for filtering
