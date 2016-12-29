@@ -18,9 +18,6 @@ Template.catalogue.onCreated(function () {
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
 
-  // subscribe to user API bookmarks
-  instance.subscribe('myApiBookmarks');
-
     // Set filters
   // On default: Show all public apis for anonymous users
   let filters = { isPublic: true };
