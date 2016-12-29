@@ -11,6 +11,7 @@ AutoForm.hooks({
       },
       update (organizationApisUpdateDoc) {
         // TODO: $push apiId to apiIds
+        return organizationApisUpdateDoc;
       },
     },
     onSuccess () {
