@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Organizations } from '/organizations/collection';
 import { ApiMetadata } from '/metadata/collection';
 import _ from 'lodash';
@@ -8,8 +9,12 @@ import { OrganizationApis } from '../collection';
 Template.organizationApis.onCreated(function () {
   const instance = this;
 
+  // Get API ID from the route
+  instance.apiId = FlowRouter.getParam('_id');
+
   instance.subscribe('myManagedApis');
   instance.subscribe('managedOrganizationsBasicDetails');
+  instance.subscribe('organizationApisByApiId', instance.apiId);
 });
 
 Template.organizationApis.helpers({
@@ -22,8 +27,7 @@ Template.organizationApis.helpers({
     const apiId = instance.data.apiId;
 
     // Look for existing organizationApis document
-    const existingOrganizationApis = OrganizationApis.findOne({ apiId });
-
+    const existingOrganizationApis = OrganizationApis.findOne({ apiIds: { $in: [apiId] } });
     // If organizationApis exist then type will be update otherwise type will be insert
     if (existingOrganizationApis) {
       instance.formType = 'update';
