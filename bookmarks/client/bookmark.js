@@ -8,7 +8,7 @@ Template.apiBookmark.created = function () {
   const instance = this;
 
   // subscribe to user API bookmarks
-  instance.subscribe('myApiBookmarks');
+  instance.subscribe('userApiBookmarks');
 };
 
 Template.apiBookmark.events({
