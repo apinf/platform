@@ -6,6 +6,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
+import { $ } from 'jquery';
+
 Template.catalogue.onCreated(function () {
   // Get reference to template instance
   const instance = this;
@@ -54,21 +56,18 @@ Template.catalogue.onCreated(function () {
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {
     // Check URL parameter for sorting
-    const sortByParameter = FlowRouter.getQueryParam('sortBy');
+    const sortBy = FlowRouter.getQueryParam('sortBy');
 
     // Check URL parameter for sort direction and convert to integer
-    const sortDirectionParameter =
-      FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
-
-    // Check URL parameter for filtering
-    const filterByParameter = FlowRouter.getQueryParam('filterBy');
+    const sortDirection = FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
 
     // Create a object for storage sorting parameters
     const sort = {};
+
     // GCheck of existing parameters
-    if (sortByParameter && sortDirectionParameter) {
+    if (sortBy && sortDirection) {
       // Get field and direction of sorting
-      sort[sortByParameter] = sortDirectionParameter;
+      sort[sortBy] = sortDirection;
     } else {
       // Otherwise get it like default value
       sort.name = 1;
@@ -79,9 +78,12 @@ Template.catalogue.onCreated(function () {
 
     let currentFilters = filters;
 
+    // Check URL parameter for filtering
+    const filterBy = FlowRouter.getQueryParam('filterBy');
+
     // Filtering available for registered users
     if (userId) {
-      switch (filterByParameter) {
+      switch (filterBy) {
         case 'all':
           // Delete filter for managed apis & bookmarks
           delete currentFilters.managerIds;
