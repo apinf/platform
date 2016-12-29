@@ -45,6 +45,8 @@ Template.catalogue.onCreated(function () {
   instance.subscribe('allApiLogo');
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
+  // subscribe to user bookmarks, creating reference to subscription
+  instance.subscribe('myApiBookmarks');
 
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {

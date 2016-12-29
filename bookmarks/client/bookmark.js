@@ -7,8 +7,6 @@ Template.bookmark.created = function () {
   // Get reference to template instance
   const instance = this;
 
-  // subscribe to user bookmarks, creating reference to subscription
-  instance.bookmarksSubscription = instance.subscribe('myApiBookmarks');
 };
 
 Template.bookmark.events({
@@ -32,8 +30,6 @@ Template.bookmark.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Make sure bookmark subscription is ready
-    if (instance.bookmarksSubscription.ready()) {
       // Get current user bookmark (should be only one API Bookmarks result available)
       const userBookmarks = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiId });
 
@@ -41,8 +37,6 @@ Template.bookmark.helpers({
       if (userBookmarks) {
         return true;
       }
-
       return false;
-    }
   },
 });
