@@ -24,19 +24,22 @@ Template.apiBookmark.events({
 
 Template.apiBookmark.helpers({
   isBookmarked () {
-    // Get api backend Id from the context
-    const apiId = (this.api) ? this.api._id : this._id;
-
     // Get reference to template instance
     const instance = Template.instance();
 
-      // Get current user bookmark (should be only one API Bookmarks result available)
-      const userBookmarks = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiId });
+    // Get API ID from instance data context
+    const apiId = instance.api._id;
 
-      // Make sure user has bookmarks
-      if (userBookmarks) {
-        return true;
-      }
-      return false;
+    // Get current user bookmark (should be only one API Bookmarks result available)
+    const userBookmarks = ApiBookmarks.findOne({
+      userId: Meteor.user()._id,
+      apiIds: apiId,
+    });
+
+    // Make sure user has bookmarks
+    if (userBookmarks) {
+      return true;
+    }
+    return false;
   },
 });
