@@ -3,13 +3,13 @@ import { Template } from 'meteor/templating';
 
 import { ApiBookmarks } from '/bookmarks/collection';
 
-Template.bookmark.created = function () {
+Template.apiBookmark.created = function () {
   // Get reference to template instance
   const instance = this;
 
 };
 
-Template.bookmark.events({
+Template.apiBookmark.events({
   'click .bookmark': function () {
     // Get api backend Id from the context
     const apiId = (this.api) ? this.api._id : this._id;
@@ -22,7 +22,7 @@ Template.bookmark.events({
   },
 });
 
-Template.bookmark.helpers({
+Template.apiBookmark.helpers({
   isBookmarked () {
     // Get api backend Id from the context
     const apiId = (this.api) ? this.api._id : this._id;
