@@ -84,18 +84,20 @@ Template.catalogue.onCreated(function () {
     // Filtering available for registered users
     if (userId) {
       switch (filterBy) {
-        case 'all':
+        case 'all': {
           // Delete filter for managed apis & bookmarks
           delete currentFilters.managerIds;
           delete currentFilters._id;
           break;
-        case 'my-apis':
+        }
+        case 'my-apis': {
           // Delete filter for bookmarks
           delete currentFilters._id;
           // Set filter for managed apis
           currentFilters.managerIds = userId;
           break;
-        case 'my-bookmarks':
+        }
+        case 'my-bookmarks': {
           // Delete filter for managed apis
           delete currentFilters.managerIds;
           // Get user bookmarks
@@ -103,10 +105,12 @@ Template.catalogue.onCreated(function () {
           // Set filter for bookmarks
           currentFilters._id = { $in: userBookmarks.apiIds };
           break;
-        default:
+        }
+        default: {
           // Otherwise get it like default value
           currentFilters = { isPublic: true };
           break;
+        }
       }
     } else {
       // Otherwise get it like default value
