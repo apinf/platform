@@ -15,3 +15,7 @@ Meteor.publish('organizationApis', (slug) => {
   // Return organizationApis (empty array or cursor)
   return organizationApis;
 });
+
+Meteor.publish('organizationApisByApiId', (apiId) =>
+  // Return cursor to organizationApis
+  OrganizationApis.find({ apiIds: { $in: [apiId] } }));
