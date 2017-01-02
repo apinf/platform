@@ -1,26 +1,51 @@
 <template name="organizationForm">
-  <div class="container">
-    {{# autoForm collection=OrganizationsCollection id="organizationForm" type="insert" }}
-      <fieldset>
-        <legend>{{_ "addOrganization_title" }}</legend>
-        {{> afQuickField name='name' }}
-        {{> afQuickField name='url' }}
-        {{> afQuickField name='description' }}
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            {{_ "addOrganization_contact_panelTitle" }}
-          </div>
-          <div class="panel-body">
-            {{> afQuickField name='contact.person' }}
-            {{> afQuickField name='contact.phone' }}
-            {{> afQuickField name='contact.email' }}
-          </div>
+  <div
+    class="modal fade"
+    id="organizationFormModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="organizationFormModalLabel" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title" id="organizationFormModalLabel">
+            {{_ "addOrganization_title" }}
+          </h2>
         </div>
-      </fieldset>
-      <br>
-      <button type="submit" class="btn btn-primary">
-        {{_ "addOrganization_create_button" }}
-      </button>
-    {{/ autoForm }}
+        {{# autoForm
+          collection=OrganizationsCollection
+          id="organizationForm"
+          collection=feedbackCollection
+          type=formType
+          doc=organization
+        }}
+          <div class="modal-body">
+            <fieldset>
+              {{> afQuickField name='name' }}
+              {{> afQuickField name='url' }}
+              {{> afQuickField name='description' }}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  {{_ "addOrganization_contact_panelTitle" }}
+                </div>
+                <div class="panel-body">
+                  {{> afQuickField name='contact.person' }}
+                  {{> afQuickField name='contact.phone' }}
+                  {{> afQuickField name='contact.email' }}
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+              {{_ "addOrganization_create_button" }}
+            </button>
+          </div>
+        {{/ autoForm }}
+      </div>
+    </div>
   </div>
 </template>
