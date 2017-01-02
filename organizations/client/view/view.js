@@ -26,6 +26,7 @@ Template.organizationProfile.helpers({
   managedApis () {
     // Init managedApis
     let managedApis = [];
+
     // Find relate organization document
     const organization = Organizations.findOne();
 
@@ -34,12 +35,14 @@ Template.organizationProfile.helpers({
       // Get organization apis
       managedApis = organization.apis();
     }
+
     // Return managedApis
     return managedApis;
   },
   managedApisCount () {
     // Init managedApisCount
     let managedApisCount = 0;
+
     // Find relate organization document
     const organization = Organizations.findOne();
 
@@ -48,6 +51,7 @@ Template.organizationProfile.helpers({
       // Get organization apis count
       managedApisCount = organization.apisCount();
     }
+    
     // Return managedApisCount
     return managedApisCount;
   },
