@@ -11,12 +11,9 @@ import { OrganizationApis } from '../collection';
 Template.organizationApis.onCreated(function () {
   const instance = this;
 
-  // Get API ID from the route
-  instance.apiId = FlowRouter.getParam('_id');
-
   instance.subscribe('myManagedApis');
   instance.subscribe('managedOrganizationsBasicDetails');
-  instance.subscribe('organizationApisByApiId', instance.apiId);
+  instance.subscribe('organizationApisByApiId', instance.data.api._id);
 });
 
 Template.organizationApis.helpers({
