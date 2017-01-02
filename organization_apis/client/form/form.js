@@ -7,14 +7,14 @@ import _ from 'lodash';
 
 import { OrganizationApis } from '../../collection';
 
-Template.organizationApis.onCreated(function () {
+Template.organizationApisForm.onCreated(function () {
   const instance = this;
 
   instance.subscribe('userManagedApis');
   instance.subscribe('managedOrganizationsBasicDetails');
 });
 
-Template.organizationApis.helpers({
+Template.organizationApisForm.helpers({
   organizationApisCollection () {
     return OrganizationApis;
   },
@@ -42,7 +42,7 @@ Template.organizationApis.helpers({
   },
 });
 
-Template.organizationApis.events({
+Template.organizationApisForm.events({
   'click #organization-apis-disconnect': (event, templateInstance) => {
     const organizationId = templateInstance.data.api.organization()._id;
     const apiId = templateInstance.data.api._id;
