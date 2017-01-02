@@ -20,14 +20,6 @@ ApiV1.swagger = {
     info: {
       version: '1.0.0',
       title: 'Apika API',
-      description: 'Apika REST API',
-      termsOfService: 'https://apika.digipalvelutehdas.fi/terms/',
-      contact: {
-        name: 'Apika team',
-      },
-      license: {
-        name: 'MIT',
-      },
     },
   },
   tags: {
