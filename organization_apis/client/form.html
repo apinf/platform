@@ -4,7 +4,7 @@
     <div class="panel-heading">
       <h2 class="panel-title">
         <i class="fa fa-exchange" aria-hidden="true"></i>
-        Connect API to Organization
+        {{_ "organizationApis_panelTitle" }}
       </h2>
     </div>
     <div class="panel-body">
@@ -29,7 +29,7 @@
       {{/ if }}
       <div id="organization-apis-buttons">
         <button type="submit" class="btn btn-success" id="organization-apis-connect">
-          Connect
+          {{_ "organizationApis_connectButton" }}
         </button>
       </div>
       {{/ autoForm }}
@@ -37,7 +37,7 @@
       <div id="organization-apis-buttons">
         {{ api.organization.name }}
         <button class="btn btn-danger" id="organization-apis-disconnect">
-          Disconnect
+          {{_ "organizationApis_disconnectButton" }}
         </button>
       </div>
     {{/ unless }}
