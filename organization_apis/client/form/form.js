@@ -5,7 +5,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import _ from 'lodash';
 
-import { OrganizationApis } from '../collection';
+import { OrganizationApis } from '../../collection';
 
 Template.organizationApis.onCreated(function () {
   const instance = this;
