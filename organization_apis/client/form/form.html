@@ -1,43 +1,24 @@
-<template name="organizationApis">
-  {{# if userIsOrganizationManager }}
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        <i class="fa fa-exchange" aria-hidden="true"></i>
-        {{_ "organizationApis_panelTitle" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-    {{# unless api.organization }}
-      {{# autoForm
-        collection=organizationApisCollection
-        id="organizationApisForm"
-        type='method'
-        meteormethod='connectOrganizationApi'
-      }}
-      <!-- organizationId is given, set value & hide -->
-      {{# if organizationId }}
-        {{> afQuickField name="organizationId" value=organizationId type="hidden" }}
-      {{ else }}
-        {{> afQuickField name="organizationId" label="Organizations" options=organizationOptions }}
-      {{/ if }}
-      <!-- apiId is given hide, $push to apiIds field -->
-      {{# if api }}
-        {{> afQuickField name="apiIds" value=api._id type="hidden" }}
-      {{ else }}
-        {{> afQuickField name="apiIds" options=apiOptions }}
-      {{/ if }}
-      <button type="submit" class="btn btn-success" id="organization-apis-connect">
-        {{_ "organizationApis_connectButton" }}
-      </button>
-      {{/ autoForm }}
-    {{ else }}
-      {{ api.organization.name }}
-      <button class="btn btn-danger btn-sm" id="organization-apis-disconnect">
-        {{_ "organizationApis_disconnectButton" }}
-      </button>
-    {{/ unless }}
-    </div>
-  </div>
+<template name="organizationApisForm">
+  {{# autoForm
+    collection=organizationApisCollection
+    id="organizationApisForm"
+    type='method'
+    meteormethod='connectOrganizationApi'
+  }}
+  <!-- organizationId is given, set value & hide -->
+  {{# if organization }}
+    {{> afQuickField name="organizationId" value=organization._id type="hidden" }}
+  {{ else }}
+    {{> afQuickField name="organizationId" label="Organizations" options=organizationOptions }}
   {{/ if }}
+  <!-- apiId is given hide, $push to apiIds field -->
+  {{# if api }}
+    {{> afQuickField name="apiIds" value=api._id type="hidden" }}
+  {{ else }}
+    {{> afQuickField name="apiIds" options=apiOptions }}
+  {{/ if }}
+  <button type="submit" class="btn btn-success" id="organization-apis-connect">
+    {{_ "organizationApis_connectButton" }}
+  </button>
+  {{/ autoForm }}
 </template>
