@@ -3,29 +3,6 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Organizations } from './';
 
 Organizations.schema = new SimpleSchema({
-  name: {
-    type: String,
-  },
-  slug: {
-    type: String,
-    optional: false,
-  },
-  url: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-  },
-  description: {
-    type: String,
-    max: 1000,
-    autoform: {
-      rows: 3,
-    },
-    optional: true,
-  },
-  organizationLogoFileId: {
-    type: String,
-    optional: true,
-  },
   contact: {
     type: Object,
     optional: true,
@@ -40,6 +17,14 @@ Organizations.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Email,
   },
+  description: {
+    type: String,
+    max: 1000,
+    autoform: {
+      rows: 3,
+    },
+    optional: true,
+  },
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
@@ -49,6 +34,22 @@ Organizations.schema = new SimpleSchema({
       label: false,
     },
   },
+  name: {
+    type: String,
+  },
+  organizationLogoFileId: {
+    type: String,
+    optional: true,
+  },
+  slug: {
+    type: String,
+    optional: false,
+  },
+  url: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+  },
+  /* Internal fields, create, update tracking */
   createdBy: {
     type: String,
     autoValue () {
