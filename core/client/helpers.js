@@ -1,4 +1,8 @@
-Template.registerHelper('niceName', function (_id) {
+import { Meteor } from 'meteor/meteor';
+import { Blaze } from 'meteor/blaze';
+import { Template } from 'meteor/templating';
+
+Template.registerHelper('niceName', (_id) => {
   let user;
   if (_id) {
     user = Meteor.users.findOne(_id);
@@ -15,3 +19,5 @@ Template.registerHelper('niceName', function (_id) {
     }
   }
 });
+
+Template.registerHelper('isTemplate', (templateName) => Blaze.isTemplate(Template[templateName]));
