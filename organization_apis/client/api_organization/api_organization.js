@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Organizations } from '/organizations/collection';
 
 Template.apiOrganization.onCreated(function () {
   // Get reference to template instance
