@@ -1,6 +1,8 @@
-Template.apiOrganizations.onCreated({
+import { Template } from 'meteor/templating';
+
+Template.apiOrganization.onCreated(function () {
   // Get reference to template instance
-  const instance = Template.instance();
+  const instance = this;
 
   instance.subscribe('organizationApisByApiId', instance.data.api._id);
 });
