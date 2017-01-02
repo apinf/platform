@@ -5,8 +5,24 @@ import { TAPi18n } from 'meteor/tap:i18n';
 AutoForm.hooks({
   organizationApisForm: {
     onError (formType, error) {
-      // Catch method errors, show reason
-      sAlert.error(`Error occurred: ${error.reason}`);
+      // Catch method errors by error id
+      switch (error.error) {
+        case 'organizationApis-insert-error': {
+          const insertError = TAPi18n.__('organizationApis_insertError');
+          sAlert.error(insertError);
+          break;
+        }
+        case 'organizationApis-update-error': {
+          const updateError = TAPi18n.__('organizationApis_updateError');
+          sAlert.error(updateError);
+          break;
+        }
+        default: {
+          // Otherwise show unknown error
+          const unknownError = TAPi18n.__('organizationApis_unknownError');
+          sAlert.error(unknownError);
+        }
+      }
     },
     onSuccess () {
       // Create & show message on success

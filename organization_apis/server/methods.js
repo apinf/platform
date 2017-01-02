@@ -12,18 +12,14 @@ Meteor.methods({
     if (organizationApisDoc) {
       OrganizationApis.update({ organizationId }, { $push: { apiIds: apiId } }, {}, (error, numberOfDocs) => {
         if (error) {
-          throw new Meteor.Error('organizationApis-update-error',
-          'Error updating organizationApis document.',
-          error);
+          throw new Meteor.Error('organizationApis-update-error');
         }
         updateOrganizationMetadata(organizationId, apiId);
       });
     } else {
       OrganizationApis.insert(doc, (error, id) => {
         if (error) {
-          throw new Meteor.Error('organizationApis-insert-error',
-          'Error inserting organizationApis document.',
-          error);
+          throw new Meteor.Error('organizationApis-insert-error');
         }
         updateOrganizationMetadata(organizationId, apiId);
       });
@@ -32,9 +28,7 @@ Meteor.methods({
   disconnectOrganizationApi (organizationId, apiId) {
     OrganizationApis.update({ organizationId }, { $pull: { apiIds: apiId } }, {}, (error, numberOfDocs) => {
       if (error) {
-        throw new Meteor.Error('organizationApis-update-error',
-        'Error updating organizationApis document.',
-        error);
+        throw new Meteor.Error('organizationApis-update-error');
       }
       // Try to find metadata document of current API
       const metadata = ApiMetadata.findOne({ apiBackendId: apiId });
