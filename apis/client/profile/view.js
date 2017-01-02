@@ -42,7 +42,7 @@ Template.viewApi.onCreated(function () {
   instance.subscribe('allUsers');
 
   // Subscribe to managed organizations, returns basic details
-  instance.subscribe('managedOrganizationsBasicDetails', Meteor.userId());
+  instance.subscribe('managedOrganizationsBasicDetails');
 });
 
 Template.viewApi.helpers({
