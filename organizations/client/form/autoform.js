@@ -36,7 +36,7 @@ AutoForm.hooks({
       // Show success message once - reactive computation runs multiple times
       if (Tracker.firstRun) {
         // Create & show message about successfull inserting
-        const message = TAPi18n.__('addOrganizationForm_successText');
+        const message = TAPi18n.__('organizationForm_successText');
 
         sAlert.success(message);
       }

@@ -12,7 +12,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <h2 class="modal-title" id="organizationFormModalLabel">
-            {{_ "addOrganization_title" }}
+            {{_ "organizationForm_title" }}
           </h2>
         </div>
         {{# autoForm
@@ -29,7 +29,7 @@
               {{> afQuickField name='description' }}
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  {{_ "addOrganization_contact_panelTitle" }}
+                  {{_ "organizationForm_contact_panelTitle" }}
                 </div>
                 <div class="panel-body">
                   {{> afQuickField name='contact.person' }}
@@ -41,7 +41,7 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">
-              {{_ "addOrganization_create_button" }}
+              {{_ "organizationForm_save_button" }}
             </button>
           </div>
         {{/ autoForm }}
