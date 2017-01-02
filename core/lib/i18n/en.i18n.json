@@ -638,6 +638,14 @@
                 "label": "Email"
               }
           }
+      },
+      "organizationApis": {
+        "apiIds": {
+          "label": "API(s)"
+        },
+        "organizationId": {
+          "label": "Organization"
+        }
       }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",

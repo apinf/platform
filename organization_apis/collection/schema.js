@@ -29,7 +29,7 @@ OrganizationApis.schema = new SimpleSchema({
 });
 
 // Internationalize schema texts
-OrganizationApis.schema.i18n('schemas.OrganizationApis');
+OrganizationApis.schema.i18n('schemas.organizationApis');
 
 // Attach schema to collection
 OrganizationApis.attachSchema(OrganizationApis.schema);
