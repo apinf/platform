@@ -66,12 +66,7 @@ Template.organizationApis.helpers({
     return organizations;
   },
   apiOptions () {
-    // TODO: list myManagedApis
-    return [
-        { label: '2013', value: 2013 },
-        { label: '2014', value: 2014 },
-        { label: '2015', value: 2015 },
-    ];
+    // TODO: return list myManagedApis
   },
 });
 
@@ -83,7 +78,7 @@ Template.organizationApis.events({
     // Get current template instance
     const instance = Template.instance();
     // Get processing message translation
-    const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
+    const message = TAPi18n.__('organizationApis_disconnectButton_processing');
     // Set bootstrap loadingText
     instance.$('#organization-apis-disconnect').button({ loadingText: message });
     // Set button to processing state
