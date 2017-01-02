@@ -1,7 +1,9 @@
 <template name="apiSettings">
   {{> apiSettingsDetails api=api }}
 
-  {{> organizationApis apiId=api._id }}
+  {{#if isTemplate "organizationApis" }}
+    {{> organizationApis api=api }}
+  {{/ if }}
 
   {{> apiSettings_visibility api=api }}
 
