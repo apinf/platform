@@ -10,7 +10,7 @@ import { OrganizationApis } from '../collection';
 Template.organizationApis.onCreated(function () {
   const instance = this;
 
-  instance.subscribe('myManagedApis');
+  instance.subscribe('userManagedApis');
   instance.subscribe('managedOrganizationsBasicDetails');
   instance.subscribe('organizationApisByApiId', instance.data.api._id);
 });

@@ -12,7 +12,7 @@ Meteor.publish('allApiBackends', function () {
   return null;
 });
 
-Meteor.publish('myManagedApis', function () {
+Meteor.publish('userManagedApis', function () {
   // get current user id
   const userId = this.userId;
 
