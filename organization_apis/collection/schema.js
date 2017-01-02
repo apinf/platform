@@ -5,6 +5,7 @@ OrganizationApis.schema = new SimpleSchema({
   organizationId: {
     type: String,
     optional: false,
+    unique: true,
   },
   apiIds: {
     type: [String],
