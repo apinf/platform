@@ -33,6 +33,16 @@ Organizations.schema = new SimpleSchema({
       type: 'hidden',
       label: false,
     },
+    autoValue () {
+      // Automatically add the current user to manager IDs array, on insert
+      if (this.isInsert) {
+        return [Meteor.userId()];
+      }
+
+      // Don't allow users to provide a value
+      // Note, this may need to change when we allow adding other managers
+      this.unset();
+    },
   },
   name: {
     type: String,
