@@ -41,9 +41,6 @@ Template.organizationApis.helpers({
     }));
     return organizations;
   },
-  apiOptions () {
-    // TODO: return list myManagedApis
-  },
 });
 
 Template.organizationApis.events({
