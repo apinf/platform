@@ -22,7 +22,7 @@ Template.organizationApis.helpers({
   organizationApisDoc () {
     let organizationApisDoc;
     // Get data context
-    const organizationId = Template.currentData().organizationId;
+    const organizationId = Template.currentData().organization._id;
     const apiId = Template.currentData().api._id;
 
     // Check if organizationId is passed
