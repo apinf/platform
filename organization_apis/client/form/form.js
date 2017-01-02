@@ -18,13 +18,6 @@ Template.organizationApisForm.helpers({
   organizationApisCollection () {
     return OrganizationApis;
   },
-  organizationOptions () {
-    const organizations = _.map(Organizations.find().fetch(), (organization) => ({
-      label: organization.name,
-      value: organization._id,
-    }));
-    return organizations;
-  },
 });
 
 Template.organizationApisForm.events({
