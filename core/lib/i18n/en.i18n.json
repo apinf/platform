@@ -359,7 +359,7 @@
   "organizationCatalogGrid_added": "Added %s",
   "organizationForm_title": "Add an Organization",
   "organizationForm_contact_panelTitle": "Contact",
-  "organizationForm_savveButton_text": "Save",
+  "organizationForm_saveButton_text": "Save",
   "organizationForm_successText": "Organization was successfully saved",
   "organizationLogo_noPermissions": "Insufficient permissions to upload logo.",
   "organizationLogo_resumable_errorText": "File creation failed!",
