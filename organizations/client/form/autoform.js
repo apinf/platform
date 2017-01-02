@@ -11,6 +11,7 @@ AutoForm.hooks({
       // Hide organization form modal
       Modal.hide('organizationForm');
 
+      // Check if form is in insert mode
       if (formType === 'insert') {
         // Get reference to template instance
         const instance = this;
