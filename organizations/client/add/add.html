@@ -1,6 +1,6 @@
-<template name="addOrganization">
+<template name="organizationForm">
   <div class="container">
-    {{# autoForm collection=OrganizationsCollection id="addOrganizationForm" type="insert" }}
+    {{# autoForm collection=OrganizationsCollection id="organizationForm" type="insert" }}
       <fieldset>
         <legend>{{_ "addOrganization_title" }}</legend>
         {{> afQuickField name='name' }}

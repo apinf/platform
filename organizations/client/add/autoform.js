@@ -5,7 +5,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 AutoForm.hooks({
-  addOrganizationForm: {
+  organizationForm: {
     before: {
       insert (organization) {
         // Get current user ID
