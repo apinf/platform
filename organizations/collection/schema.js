@@ -28,7 +28,6 @@ Organizations.schema = new SimpleSchema({
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
-    defaultValue: [null],
     autoform: {
       type: 'hidden',
       label: false,
