@@ -6,6 +6,7 @@ AutoForm.hooks({
   organizationApisForm: {
     onError (formType, error) {
       // Catch method errors by error id
+      // Show translated error message
       switch (error.error) {
         case 'organizationApis-insert-error': {
           const insertError = TAPi18n.__('organizationApis_insertError');
