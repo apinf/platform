@@ -9,13 +9,16 @@ Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Get the Organization slug from the route
-  instance.organizationSlug = FlowRouter.getParam('slug');
+  instance.autorun(function () {
+    // Get the Organization slug from the route
+    const organizationSlug = FlowRouter.getParam('slug');
 
-  // Subscribe to a single Organization
-  instance.subscribe('singleOrganization', instance.organizationSlug);
-  // Subscribe to organizationApis
-  instance.subscribe('organizationApis', instance.organizationSlug);
+    // Subscribe to a single Organization
+    instance.subscribe('singleOrganization', organizationSlug);
+
+    // Subscribe to organizationApis
+    instance.subscribe('organizationApis', organizationSlug);
+  });
 });
 
 Template.organizationProfile.helpers({
