@@ -9,7 +9,7 @@
     </div>
     <div class="panel-body">
     {{# unless api.organization }}
-      {{> organizationApisForm api=api }}
+      {{> organizationApisForm api=api organizationApis=organizationApis }}
     {{ else }}
       {{ api.organization.name }}
       <button class="btn btn-danger btn-sm" id="organization-apis-disconnect">

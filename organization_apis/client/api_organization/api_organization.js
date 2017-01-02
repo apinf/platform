@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Organizations } from '/organizations/collection';
+import { OrganizationApis } from '../../collection';
 
 Template.apiOrganization.onCreated(function () {
   // Get reference to template instance
@@ -13,5 +14,9 @@ Template.apiOrganization.helpers({
     const organizationsCount = Organizations.find().count();
 
     return organizationsCount > 0;
+  },
+  organizationApis () {
+    // Return Organization APIs document, if available
+    return OrganizationApis.findOne();
   },
 });
