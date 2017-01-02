@@ -5,7 +5,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 AutoForm.hooks({
   organizationApisForm: {
     onError (formType, error) {
-      console.log(`error occurred: ${error}`);
+      // Catch method errors, show reason
+      sAlert.error(`Error occurred: ${error.reason}`);
     },
     onSuccess () {
       // Create & show message on success
