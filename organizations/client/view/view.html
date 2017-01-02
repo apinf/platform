@@ -1,15 +1,18 @@
 <template name="organizationProfile">
     {{# if Template.subscriptionsReady }}
       {{> organizationProfileHeader organization=organization }}
-    <div class="container">
-      <h3>
-        {{_ 'organizationProfile_bigText_apisCount'  }}
-        <small>
-          {{_ 'organizationProfile_smallText_apisCount' managedApisCount }}
-        </small>
-      </h3>
 
-      {{> apiCatalogGrid apis=managedApis }}
-    </div>
+      {{# if managedApis }}
+        <div class="container">
+          <h3>
+            {{_ 'organizationProfile_bigText_apisCount'  }}
+            <small>
+              {{_ 'organizationProfile_smallText_apisCount' managedApisCount }}
+            </small>
+          </h3>
+
+          {{> apiCatalogGrid apis=managedApis }}
+        </div>
+      {{/ if }}
     {{/if}}
 </template>
