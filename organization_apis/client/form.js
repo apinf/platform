@@ -23,22 +23,6 @@ Template.organizationApis.helpers({
   organizationApisCollection () {
     return OrganizationApis;
   },
-  formType () {
-    const instance = Template.instance();
-    // Get API ID
-    const apiId = instance.data.apiId;
-
-    // Look for existing organizationApis document
-    const existingOrganizationApis = OrganizationApis.findOne({ apiIds: { $in: [apiId] } });
-    // If organizationApis exist then type will be update otherwise type will be insert
-    if (existingOrganizationApis) {
-      instance.formType = 'update';
-    } else {
-      instance.formType = 'insert';
-    }
-
-    return instance.formType;
-  },
   userIsOrganizationManager () {
     const organizationsCount = Organizations.find().count();
 
