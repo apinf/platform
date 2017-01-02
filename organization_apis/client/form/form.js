@@ -12,7 +12,6 @@ Template.organizationApis.onCreated(function () {
 
   instance.subscribe('userManagedApis');
   instance.subscribe('managedOrganizationsBasicDetails');
-  instance.subscribe('organizationApisByApiId', instance.data.api._id);
 });
 
 Template.organizationApis.helpers({
