@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
-  apiPath: 'rest-api',
+  apiPath: 'api',
   version: 'v1',
   defaultHeaders: {
     'Content-Type': 'application/json',
