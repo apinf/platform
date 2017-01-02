@@ -18,21 +18,6 @@ Template.organizationApisForm.helpers({
   organizationApisCollection () {
     return OrganizationApis;
   },
-  organizationApisDoc () {
-    let organizationApisDoc;
-    // Get data context
-    const organizationId = Template.currentData().organization._id;
-    const apiId = Template.currentData().api._id;
-
-    // Check if organizationId is passed
-    if (organizationId) {
-      organizationApisDoc = OrganizationApis.findOne({ organizationId });
-    // Check if apiId is passed
-    } else if (apiId) {
-      organizationApisDoc = OrganizationApis.findOne({ apiIds: { $in: [apiId] } });
-    }
-    return organizationApisDoc;
-  },
   organizationOptions () {
     const organizations = _.map(Organizations.find().fetch(), (organization) => ({
       label: organization.name,
