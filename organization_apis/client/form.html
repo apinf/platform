@@ -27,19 +27,15 @@
       {{ else }}
         {{> afQuickField name="apiIds" options=apiOptions }}
       {{/ if }}
-      <div id="organization-apis-buttons">
-        <button type="submit" class="btn btn-success" id="organization-apis-connect">
-          {{_ "organizationApis_connectButton" }}
-        </button>
-      </div>
+      <button type="submit" class="btn btn-success" id="organization-apis-connect">
+        {{_ "organizationApis_connectButton" }}
+      </button>
       {{/ autoForm }}
     {{ else }}
-      <div id="organization-apis-buttons">
-        {{ api.organization.name }}
-        <button class="btn btn-danger btn-sm" id="organization-apis-disconnect">
-          {{_ "organizationApis_disconnectButton" }}
-        </button>
-      </div>
+      {{ api.organization.name }}
+      <button class="btn btn-danger btn-sm" id="organization-apis-disconnect">
+        {{_ "organizationApis_disconnectButton" }}
+      </button>
     {{/ unless }}
     </div>
   </div>
