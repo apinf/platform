@@ -19,11 +19,6 @@ Template.organizationApis.helpers({
   organizationApisCollection () {
     return OrganizationApis;
   },
-  userIsOrganizationManager () {
-    const organizationsCount = Organizations.find().count();
-
-    return organizationsCount > 0;
-  },
   organizationApisDoc () {
     let organizationApisDoc;
     // Get data context
