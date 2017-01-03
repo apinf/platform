@@ -31,11 +31,15 @@ Template.apiOrganization.helpers({
 });
 
 Template.apiOrganization.events({
-  'click #disconnect-from-organization': function () {
+  'click #disconnect-from-organization': function (event, templateInstance) {
     // Get Organization API document from local context
     const organizationApi = OrganizationApis.findOne();
 
-    // Remove the Organization API link, by ID since code is untrusted
-    OrganizationApis.remove(organizationApi._id);
+    // Get Organization from instance API
+    const organization = templateInstance.data.api.organization;
+
+    /* As information to the delete modal, pass in the Organization document.
+    This is needed so that the Organization name can be shown in the dialog */
+    Modal.show('deleteOrganizationApiConfirmation', { organizationApi, organization });
   },
 });
