@@ -6,15 +6,27 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
+import $  from 'jquery';
+
 Template.catalogue.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-  // Get user id
-  const userId = Meteor.userId();
 
-  // Set filters
+  // Subscribe to all API logos
+  instance.subscribe('allApiLogo');
+
+  // Subscribe to all users, returns only usernames
+  instance.subscribe('allUsers');
+
+  // subscribe to user API bookmarks
+  instance.subscribe('userApiBookmarks');
+
+    // Set filters
   // On default: Show all public apis for anonymous users
   let filters = { isPublic: true };
+
+  // Get user id
+  const userId = Meteor.userId();
 
   if (userId) {
     // Show all available apis for registered users
@@ -41,54 +53,52 @@ Template.catalogue.onCreated(function () {
     filters,
   });
 
-  // Subscribe to API logo collection
-  instance.subscribe('allApiLogo');
-  // Subscribe to all users, returns only usernames
-  instance.subscribe('allUsers');
-
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {
     // Check URL parameter for sorting
-    const sortByParameter = FlowRouter.getQueryParam('sortBy');
+    const sortBy = FlowRouter.getQueryParam('sortBy');
 
     // Check URL parameter for sort direction and convert to integer
-    const sortDirectionParameter =
-      FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
-
-    // Check URL parameter for filtering
-    const filterByParameter = FlowRouter.getQueryParam('filterBy');
+    const sortDirection = FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
 
     // Create a object for storage sorting parameters
     const sort = {};
-    // GCheck of existing parameters
-    if (sortByParameter && sortDirectionParameter) {
-      // Get field and direction of sorting
-      sort[sortByParameter] = sortDirectionParameter;
+
+    // Check for sort parameters
+    if (sortBy && sortDirection) {
+      // Set field and direction of sorting
+      sort[sortBy] = sortDirection;
     } else {
-      // Otherwise get it like default value
+      // Otherwise sort by name in ascending order
       sort.name = 1;
     }
 
     // Change sorting
     instance.pagination.sort(sort);
 
+    // Placeholder for filter values
     let currentFilters = filters;
+
+    // Check URL parameter for filtering
+    const filterBy = FlowRouter.getQueryParam('filterBy');
 
     // Filtering available for registered users
     if (userId) {
-      switch (filterByParameter) {
-        case 'all':
+      switch (filterBy) {
+        case 'all': {
           // Delete filter for managed apis & bookmarks
           delete currentFilters.managerIds;
           delete currentFilters._id;
           break;
-        case 'my-apis':
+        }
+        case 'my-apis': {
           // Delete filter for bookmarks
           delete currentFilters._id;
           // Set filter for managed apis
           currentFilters.managerIds = userId;
           break;
-        case 'my-bookmarks':
+        }
+        case 'my-bookmarks': {
           // Delete filter for managed apis
           delete currentFilters.managerIds;
           // Get user bookmarks
@@ -96,10 +106,12 @@ Template.catalogue.onCreated(function () {
           // Set filter for bookmarks
           currentFilters._id = { $in: userBookmarks.apiIds };
           break;
-        default:
+        }
+        default: {
           // Otherwise get it like default value
           currentFilters = { isPublic: true };
           break;
+        }
       }
     } else {
       // Otherwise get it like default value

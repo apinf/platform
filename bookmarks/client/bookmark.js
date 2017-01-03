@@ -3,15 +3,15 @@ import { Template } from 'meteor/templating';
 
 import { ApiBookmarks } from '/bookmarks/collection';
 
-Template.bookmark.created = function () {
+Template.apiBookmark.created = function () {
   // Get reference to template instance
   const instance = this;
 
-  // subscribe to user bookmarks, creating reference to subscription
-  instance.bookmarksSubscription = instance.subscribe('myApiBookmarks');
+  // subscribe to user API bookmarks
+  instance.subscribe('userApiBookmarks');
 };
 
-Template.bookmark.events({
+Template.apiBookmark.events({
   'click .bookmark': function () {
     // Get api backend Id from the context
     const apiId = (this.api) ? this.api._id : this._id;
@@ -24,25 +24,29 @@ Template.bookmark.events({
   },
 });
 
-Template.bookmark.helpers({
+Template.apiBookmark.helpers({
   isBookmarked () {
-    // Get api backend Id from the context
-    const apiId = (this.api) ? this.api._id : this._id;
+    // Placeholder to see if API is bookmarked
+    let isBookmarked;
 
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Make sure bookmark subscription is ready
-    if (instance.bookmarksSubscription.ready()) {
-      // Get current user bookmark (should be only one API Bookmarks result available)
-      const userBookmarks = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiId });
+    // Get API ID from instance data context
+    const apiId = instance.data.api._id;
 
-      // Make sure user has bookmarks
-      if (userBookmarks) {
-        return true;
-      }
-
-      return false;
+    // Get current user bookmarks, only if this API is bookmarked
+    const userBookmarks = ApiBookmarks.findOne({
+      userId: Meteor.user()._id,
+      apiIds: apiId,
+    });
+    // Check if user has bookmarked current API
+    if (userBookmarks) {
+      isBookmarked = true;
+    } else {
+      isBookmarked = false;
     }
+
+    return isBookmarked;
   },
 });
