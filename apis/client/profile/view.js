@@ -41,8 +41,8 @@ Template.viewApi.onCreated(function () {
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
 
-  // Subscribe to managed organizations, returns basic details
-  instance.subscribe('managedOrganizationsBasicDetails');
+  // Subscribe to organization for this API
+  instance.subscribe('apiOrganizationBasicDetails', instance.apiId);
 });
 
 Template.viewApi.helpers({
