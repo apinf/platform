@@ -5,7 +5,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { OrganizationApis } from '../../collection';
 
 Template.organizationApisForm.helpers({
-  formtype () {
+  formType () {
     // Placeholder for form type
     let formType;
 
