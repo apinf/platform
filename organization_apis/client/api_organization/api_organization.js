@@ -14,9 +14,14 @@ Template.apiOrganization.onCreated(function () {
 
 Template.apiOrganization.helpers({
   userIsOrganizationManager () {
-    const organizationsCount = Organizations.find().count();
+    // Get current User ID
+    const userId = Meteor.userId;
 
-    return organizationsCount > 0;
+    // Get organizations where User is manager
+    const organizations = Organizations.find({ managerIds: userId });
+
+    // Make sure user is manager of at least one organization
+    return (organizations.count() > 0);
   },
   organizationApis () {
     // Return Organization APIs document, if available
