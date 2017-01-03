@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { ApiMetadata } from '/metadata/collection';
 import { OrganizationApis } from '../collection';
-import { updateOrganizationMetadata } from './update_metadata';
 
 Meteor.methods({
   connectOrganizationApi (doc) {
@@ -14,14 +13,12 @@ Meteor.methods({
         if (error) {
           throw new Meteor.Error('organizationApis-update-error');
         }
-        updateOrganizationMetadata(organizationId, apiId);
       });
     } else {
       OrganizationApis.insert(doc, (error, id) => {
         if (error) {
           throw new Meteor.Error('organizationApis-insert-error');
         }
-        updateOrganizationMetadata(organizationId, apiId);
       });
     }
   },
