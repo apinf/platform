@@ -2,8 +2,8 @@
   {{# autoForm
     collection=organizationApisCollection
     id="organizationApisForm"
-    type='method'
-    meteormethod='connectOrganizationApi'
+    type=formType
+    doc=organizationApi
   }}
   <!-- organizationId is given, set value & hide -->
   {{# if organization }}
@@ -13,9 +13,9 @@
   {{/ if }}
   <!-- apiId is given hide, $push to apiIds field -->
   {{# if api }}
-    {{> afQuickField name="apiIds" value=api._id type="hidden" }}
+    {{> afQuickField name="apiId" value=api._id type="hidden" }}
   {{ else }}
-    {{> afQuickField name="apiIds" }}
+    {{> afQuickField name="apiId" }}
   {{/ if }}
   <button type="submit" class="btn btn-success" id="organization-apis-connect">
     {{_ "organizationApis_connectButton" }}
