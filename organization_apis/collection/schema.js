@@ -1,6 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { OrganizationApis } from './';
+import { _ } from 'lodash';
 import { Organizations } from '/organizations/collection';
+import { OrganizationApis } from './';
+
 
 OrganizationApis.schema = new SimpleSchema({
   organizationId: {
@@ -8,7 +10,7 @@ OrganizationApis.schema = new SimpleSchema({
     optional: false,
     unique: true,
     autoform: {
-      options: function () {
+      options () {
         // Get all organizations, available in data context
         const organizations = Organizations.find().fetch();
 
@@ -20,7 +22,7 @@ OrganizationApis.schema = new SimpleSchema({
 
         return organizationOptionss;
       },
-    }
+    },
   },
   apiId: {
     type: String,
