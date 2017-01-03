@@ -22,8 +22,8 @@ OrganizationApis.schema = new SimpleSchema({
       },
     }
   },
-  apiIds: {
-    type: [String],
+  apiId: {
+    type: String,
     optional: false,
   },
 });
