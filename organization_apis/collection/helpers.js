@@ -17,13 +17,3 @@ Organizations.helpers({
     return organizationApis ? organizationApis.apiIds.length : 0;
   },
 });
-
-Apis.helpers({
-  organization () {
-    // Get organizationApis document
-    const organizationApis = OrganizationApis.findOne({ apiIds: { $in: [this._id] } });
-
-    // Return organization
-    return organizationApis ? Organizations.findOne({ _id: organizationApis.organizationId }) : false;
-  },
-});
