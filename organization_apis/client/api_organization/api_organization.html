@@ -1,22 +1,25 @@
 <template name="apiOrganization">
   {{# if userIsOrganizationManager }}
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        <i class="fa fa-exchange" aria-hidden="true"></i>
-        {{_ "organizationApis_panelTitle" }}
-      </h2>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <i class="fa fa-exchange" aria-hidden="true"></i>
+          {{_ "organizationApis_panelTitle" }}
+        </h2>
+      </div>
+
+      <div class="panel-body">
+        {{# if api.organization }}
+          <!-- Show API Organization details -->
+          {{ api.organization.name }}
+          <button class="btn btn-danger btn-sm" id="disconnect-from-organization">
+            {{_ "organizationApis_disconnectButton" }}
+          </button>
+        {{ else }}
+          <!-- Show API Organization form -->
+          {{> organizationApisForm api=api organizationApi=organizationApi }}
+        {{/ if }}
+      </div>
     </div>
-    <div class="panel-body">
-    {{# unless api.organization }}
-      {{> organizationApisForm api=api organizationApi=organizationApi }}
-    {{ else }}
-      {{ api.organization.name }}
-      <button class="btn btn-danger btn-sm" id="disconnect-from-organization">
-        {{_ "organizationApis_disconnectButton" }}
-      </button>
-    {{/ unless }}
-    </div>
-  </div>
   {{/ if }}
 </template>
