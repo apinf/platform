@@ -25,7 +25,8 @@ AutoForm.hooks({
         // Get reference to template instance
         const instance = this;
 
-        if (instance.currentDoc.slug !== instance.updateDoc.$set.slug) {
+        // Redirect to new organization page, if slug changes
+        if (instance.updateDoc.$set.slug) {
           // Get organization URL slug
           const slug = instance.updateDoc.$set.slug;
 
