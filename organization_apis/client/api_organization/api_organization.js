@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Organizations } from '/organizations/collection';
 import { OrganizationApis } from '../../collection';
@@ -30,11 +31,11 @@ Template.apiOrganization.helpers({
 });
 
 Template.apiOrganization.events({
-  'click #disconnect-from-organization': function (event, templateInstance) {
+  'click #disconnect-from-organization': function () {
     // Get Organization API document from local context
     const organizationApi = OrganizationApis.findOne();
 
     // Remove the Organization API link, by ID since code is untrusted
     OrganizationApis.remove(organizationApi._id);
-  }
+  },
 });
