@@ -39,4 +39,4 @@ Meteor.publish('organizationApis', (slug) => {
 
 Meteor.publish('organizationApisByApiId', (apiId) =>
   // Return cursor to organizationApis
-  OrganizationApis.find({ apiIds: { $in: [apiId] } }));
+  OrganizationApis.find({ apiId }));
