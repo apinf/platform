@@ -5,20 +5,23 @@
     type=formType
     doc=organizationApi
   }}
-  <!-- organizationId is given, set value & hide -->
-  {{# if organization }}
-    {{> afQuickField name="organizationId" value=organization._id type="hidden" }}
-  {{ else }}
-    {{> afQuickField name="organizationId" }}
-  {{/ if }}
-  <!-- apiId is given hide, $push to apiIds field -->
-  {{# if api }}
-    {{> afQuickField name="apiId" value=api._id type="hidden" }}
-  {{ else }}
-    {{> afQuickField name="apiId" }}
-  {{/ if }}
-  <button type="submit" class="btn btn-success" id="organization-apis-connect">
-    {{_ "organizationApis_connectButton" }}
-  </button>
+
+    <!-- Hide Organization ID field and autovalue, if Organization is provided -->
+    {{# if organization }}
+      {{> afQuickField name="organizationId" value=organization._id type="hidden" }}
+    {{ else }}
+      {{> afQuickField name="organizationId" }}
+    {{/ if }}
+
+    <!-- Hide API ID field and autovalue, if API is provided -->
+    {{# if api }}
+      {{> afQuickField name="apiId" value=api._id type="hidden" }}
+    {{ else }}
+      {{> afQuickField name="apiId" }}
+    {{/ if }}
+
+    <button type="submit" class="btn btn-success" id="organization-apis-connect">
+      {{_ "organizationApis_connectButton" }}
+    </button>
   {{/ autoForm }}
 </template>
