@@ -15,7 +15,7 @@ Template.apiOrganization.onCreated(function () {
 Template.apiOrganization.helpers({
   userIsOrganizationManager () {
     // Get current User ID
-    const userId = Meteor.userId;
+    const userId = Meteor.userId();
 
     // Get organizations where User is manager
     const organizations = Organizations.find({ managerIds: userId });
