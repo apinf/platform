@@ -1,3 +1,4 @@
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { OrganizationApis } from '../../../collection';
 
 Template.deleteOrganizationApiConfirmation.events({
@@ -7,5 +8,8 @@ Template.deleteOrganizationApiConfirmation.events({
 
     // Remove the Organization API link, by ID since code is untrusted
     OrganizationApis.remove(organizationApiId);
+
+    // Dismiss the confirmation dialogue
+    Modal.hide('deleteOrganizationApiConfirmation');
   },
 });
