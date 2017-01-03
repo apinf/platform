@@ -6,6 +6,9 @@ Template.apiOrganization.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  // Subscribe to user managed organizations, controls template visibility
+  instance.subscribe('userManagedOrganizations');
+
   instance.subscribe('organizationApisByApiId', instance.data.api._id);
 });
 
