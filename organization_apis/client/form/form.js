@@ -7,13 +7,6 @@ import _ from 'lodash';
 
 import { OrganizationApis } from '../../collection';
 
-Template.organizationApisForm.onCreated(function () {
-  const instance = this;
-
-  instance.subscribe('userManagedApis');
-  instance.subscribe('userManagedOrganizations');
-});
-
 Template.organizationApisForm.helpers({
   organizationApisCollection () {
     return OrganizationApis;
