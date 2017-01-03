@@ -11,7 +11,7 @@ Template.organizationApisForm.onCreated(function () {
   const instance = this;
 
   instance.subscribe('userManagedApis');
-  instance.subscribe('managedOrganizationsBasicDetails');
+  instance.subscribe('userManagedOrganizations');
 });
 
 Template.organizationApisForm.helpers({
