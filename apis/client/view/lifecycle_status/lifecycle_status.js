@@ -12,7 +12,6 @@ Template.apiLifecycleStatus.helpers({
     // Get API lifecycle status from template instance
     const lifecycleStatus = templateInstance.data.api.lifecycleStatus;
 
-    console.log(templateInstance.data.api.lifecycleStatus);
     // Get label type based on lifecycle status
     switch (lifecycleStatus) {
       case 'development':
