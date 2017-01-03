@@ -6,7 +6,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
-import { $ } from 'jquery';
+import $  from 'jquery';
 
 Template.catalogue.onCreated(function () {
   // Get reference to template instance

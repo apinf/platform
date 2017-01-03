@@ -33,14 +33,14 @@ Template.apiBookmark.helpers({
     const instance = Template.instance();
 
     // Get API ID from instance data context
-    const apiId = instance.api._id;
+    const apiId = instance.data.api._id;
 
     // Get current user bookmarks, only if this API is bookmarked
     const userBookmarks = ApiBookmarks.findOne({
       userId: Meteor.user()._id,
       apiIds: apiId,
     });
-
+console.log("User Bookmarks",userBookmarks);
     // Check if user has bookmarked current API
     if (userBookmarks) {
       isBookmarked = true;
