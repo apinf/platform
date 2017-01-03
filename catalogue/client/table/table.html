@@ -20,6 +20,9 @@
             {{# unless api.isPublic }}
               <span class="label label-default label-align">private</span>
             {{/ unless }}
+            <!-- Life cycle Status display in table view -->
+            {{> apiLifecycleStatus api=api }}
+
             <div>
               <i>
                 {{_ "catalogueTable_addedBy" }}
