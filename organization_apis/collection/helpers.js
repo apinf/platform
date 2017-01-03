@@ -11,7 +11,7 @@ Organizations.helpers({
     const organizationApis = OrganizationApis.findOne({ organizationId: this._id });
 
     // Make sure organization has APIs
-    if (organizationApis && organizationApis.apiIds.length() > 0) {
+    if (organizationApis && organizationApis.apiIds.length > 0) {
       // Return array of organization apis
       apis = Apis.find({ _id: { $in: organizationApis.apiIds } }).fetch();
     }
