@@ -20,6 +20,11 @@
             {{# unless api.isPublic }}
               <span class="label label-default">private</span>
             {{/ unless }}
+            <!-- Life cycle Status display in grid view -->
+            {{> apiLifecycleStatus api=api }}
+
+
+
             {{# if api.description }}
             <p class="api-card-description">
               {{ api.description }}
