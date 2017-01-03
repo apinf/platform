@@ -23,7 +23,7 @@ Template.apiOrganization.helpers({
     // Make sure user is manager of at least one organization
     return (organizations.count() > 0);
   },
-  organizationApis () {
+  organizationApi () {
     // Return Organization APIs document, if available
     return OrganizationApis.findOne();
   },
