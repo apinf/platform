@@ -11,6 +11,13 @@ AutoForm.hooks({
       // Hide organization form modal
       Modal.hide('organizationForm');
 
+      // Get success message translation
+      const message = TAPi18n.__('organizationForm_successText');
+
+      // Show success message to user,
+      // make sure message shows if route changes
+      sAlert.success(message, { onRouteClose: false });
+
       // Check if form is in insert mode
       if (formType === 'insert') {
         // Get reference to template instance
@@ -33,14 +40,6 @@ AutoForm.hooks({
           // Redirect to newly added organization
           FlowRouter.go('organizationProfile', { slug });
         }
-      }
-
-      // Show success message once - reactive computation runs multiple times
-      if (Tracker.firstRun) {
-        // Create & show message about successfull inserting
-        const message = TAPi18n.__('organizationForm_successText');
-
-        sAlert.success(message);
       }
     },
   },
