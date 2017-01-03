@@ -1,4 +1,5 @@
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Template } from 'meteor/templating';
 import { OrganizationApis } from '../../../collection';
 
 Template.deleteOrganizationApiConfirmation.events({
