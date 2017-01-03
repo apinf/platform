@@ -28,3 +28,13 @@ Template.apiOrganization.helpers({
     return OrganizationApis.findOne();
   },
 });
+
+Template.apiOrganization.events({
+  'click #disconnect-from-organization': function (event, templateInstance) {
+    // Get Organization API document from local context
+    const organizationApi = OrganizationApis.findOne();
+
+    // Remove the Organization API link, by ID since code is untrusted
+    OrganizationApis.remove(organizationApi._id);
+  }
+});
