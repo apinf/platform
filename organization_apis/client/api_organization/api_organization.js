@@ -36,7 +36,7 @@ Template.apiOrganization.events({
     const organizationApi = OrganizationApis.findOne();
 
     // Get Organization from instance API
-    const organization = templateInstance.data.api.organization;
+    const organization = templateInstance.data.api.organization();
 
     /* As information to the delete modal, pass in the Organization document.
     This is needed so that the Organization name can be shown in the dialog */
