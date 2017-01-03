@@ -5,6 +5,27 @@ import { _ } from 'lodash';
 import { Apis } from '/apis/collection';
 import { OrganizationApis } from '../';
 
+Meteor.publish('apiOrganizationBasicDetails', (apiId) => {
+  // Make sure API ID is a String
+  check(apiId, String);
+
+  // Placeholder for organization cursor, empty array in case of no results
+  let organization = [];
+
+  // Get link between organization and API
+  const apiOrganizationLink = OrganizationApis.findOne({ apiId });
+
+  if (apiOrganizationLink) {
+    // Get organization ID from API / Organization link
+    const organizationId = apiOrganizationLink.organizationId;
+
+    // Get cursor to Organization document
+    organization = Organizations.find({ _id: organizationId });
+  }
+
+  return organization;
+});
+
 Meteor.publish('organizationApis', (slug) => {
   // Make sure slug argument is a String
   check(slug, String);
