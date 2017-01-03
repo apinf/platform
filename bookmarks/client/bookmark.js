@@ -40,7 +40,6 @@ Template.apiBookmark.helpers({
       userId: Meteor.user()._id,
       apiIds: apiId,
     });
-console.log("User Bookmarks",userBookmarks);
     // Check if user has bookmarked current API
     if (userBookmarks) {
       isBookmarked = true;
