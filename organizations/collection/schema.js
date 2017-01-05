@@ -9,13 +9,16 @@ Organizations.schema = new SimpleSchema({
   },
   'contact.person': {
     type: String,
+    optional: true,
   },
   'contact.phone': {
     type: String,
+    optional: true,
   },
   'contact.email': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
+    optional: true,
   },
   description: {
     type: String,
