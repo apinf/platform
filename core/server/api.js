@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
-  apiPath: 'rest-api',
+  apiPath: 'api',
   version: 'v1',
   defaultHeaders: {
     'Content-Type': 'application/json',
@@ -19,15 +19,7 @@ ApiV1.swagger = {
     swagger: '2.0',
     info: {
       version: '1.0.0',
-      title: 'Apika API',
-      description: 'Apika REST API',
-      termsOfService: 'https://apika.digipalvelutehdas.fi/terms/',
-      contact: {
-        name: 'Apika team',
-      },
-      license: {
-        name: 'MIT',
-      },
+      title: 'Admin API',
     },
   },
   tags: {
