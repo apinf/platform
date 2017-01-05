@@ -356,7 +356,7 @@
   "organizationApis_panelTitle": "Connect API to Organization",
   "organizationApis_connectButton": "Connect",
   "organizationApis_disconnectButton": "Disconnect",
-  "organizationApisForm_successText": "Your API has been connected to the organization. Now you can see your API in the organization profile.",
+  "organizationApisForm_successText": "Your API has been connected to the organization.",
   "organizationCatalog_Title": "Organization catalog",
   "organizationCatalog_buttonText_addOrganization": "Add Organization",
   "organizationCatalog_toolbar_filterOptions_myOrganizations": "My organizations",
