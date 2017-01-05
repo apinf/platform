@@ -357,7 +357,7 @@
   "organizationCatalog_toolbar_viewMode_table": "Table",
   "organizationCatalogTable_added": "Added",
   "organizationCatalogGrid_added": "Added %s",
-  "organizationForm_title": "Add an Organization",
+  "organizationForm_title": "Organization details",
   "organizationForm_contact_panelTitle": "Contact",
   "organizationForm_saveButton_text": "Save",
   "organizationForm_successText": "Organization was successfully saved",
