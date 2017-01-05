@@ -499,6 +499,15 @@
           "siteSlogan": {
               "label": "Site slogan"
           },
+          "colors": {
+              "label": "Colors",
+              "primary": {
+                "label": "Primary"
+              },
+              "primaryText": {
+                "label": "Primary text"
+              }
+          },
           "siteFooter": {
               "label": "Site footer"
           }
