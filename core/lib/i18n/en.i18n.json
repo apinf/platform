@@ -232,6 +232,7 @@
   "deleteOrganizationApiConfirmation_confirm_text": "Are you sure you want to disconnect this API from",
   "deleteOrganizationApiConfirmation_disconnectButton_text": "Disconnect",
   "deleteOrganizationApiConfirmation_header_text": "Disconnect API from",
+  "deleteOrganizationApiConfirmation_success_message": "API disconnected from organization",
   "editApiMetadata_editButton": "Edit metadata",
   "editApiMetadata_editApiMetadataForm_title": "Edit metadata",
   "editApiMetadata_submitButtonText": "Save metadata",

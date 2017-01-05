@@ -12,5 +12,10 @@ Template.deleteOrganizationApiConfirmation.events({
 
     // Dismiss the confirmation dialogue
     Modal.hide('deleteOrganizationApiConfirmation');
+
+    // Get success message translation
+    const message = TAPi18n.__('deleteOrganizationApiConfirmation_success_message')
+
+    sAlert.success(message);
   },
 });
