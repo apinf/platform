@@ -5,30 +5,24 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title">
-            {{_ "deleteApiConfirmation_header" }}
+            {{_ "deleteOrganizationApiConfirmation_header_text" }}
+            &nbsp;
+            {{ organization.name }}
           </h3>
         </div>
         <div class="modal-body">
-          <div id="confirmDelete">
-            <p>
-              {{_ "deleteApiConfirmation_confirmDeleteMessage" }}
-              &nbsp;
-              {{ Organization.name }}?
-            </p>
-            <p>
-              <span class="text-danger">
-                {{_ "deleteApiConfirmation_confirmDeleteNote" }}
-              </span>
-            {{_ "deleteApiConfirmation_confirmDeleteInformation" }}
-            </p>
-          </div>
+          <p>
+            {{_ "deleteOrganizationApiConfirmation_confirm_text" }}
+            &nbsp;
+            {{ organization.name }}?
+          </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">
-            {{_ "deleteApiConfirmation_cancelButton" }}
+            {{_ "deleteOrganizationApiConfirmation_cancelButton_text" }}
           </button>
           <button type="button" class="btn btn-danger" id="delete-api-organization">
-            {{_ "deleteApiConfirmation_deleteButton" }}
+            {{_ "deleteOrganizationApiConfirmation_disconnectButton_text" }}
           </button>
         </div>
       </div>
