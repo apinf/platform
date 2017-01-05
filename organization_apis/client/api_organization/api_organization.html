@@ -12,12 +12,12 @@
         {{# if api.organization }}
           <!-- Show API Organization details -->
           {{ api.organization.name }}
-          <button class="btn btn-danger btn-sm" id="disconnect-from-organization">
+          <button class="btn btn-danger btn-xs" id="disconnect-from-organization">
             {{_ "organizationApis_disconnectButton" }}
           </button>
         {{ else }}
           <!-- Show API Organization form -->
-          {{> organizationApisForm api=api organizationApi=organizationApi }}
+          {{> organizationApisForm organizationApi=organizationApi }}
         {{/ if }}
       </div>
     </div>
