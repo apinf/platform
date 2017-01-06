@@ -17,6 +17,9 @@
                 {{ api.name }}
               </a>
             </h4>
+            <!-- Api LifeCycleStatus Label -->
+            {{> apiLifecycleStatus api=api }}
+            
             {{# unless api.isPublic }}
               <span class="label label-default label-align">private</span>
             {{/ unless }}

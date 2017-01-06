@@ -13,6 +13,9 @@
         {{_ "catalogueGrid_addedBy" }}
         {{ api.getApiManagersByName }}
       </span>
+      <!-- Api LifeCycleStatus Label -->
+      {{> apiLifecycleStatus api=api }}
+
       {{# unless api.isPublic }}
         <span class="label label-default">private</span>
       {{/ unless }}
