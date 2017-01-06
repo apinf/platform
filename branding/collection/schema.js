@@ -48,14 +48,14 @@ Branding.schema = new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: ['Facebook', 'Twitter', 'Github'],
+    autoform: {
+      firstOption: TAPi18n.__('schemas.branding.socialMedia.$.name.firstOption'),
+    },
   },
   'socialMedia.$.url': {
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
-    autoform: {
-      placeholder: 'http://example.com/accountname',
-    },
   },
 });
 

@@ -508,6 +508,19 @@
                 "label": "Primary text"
               }
           },
+          "socialMedia": {
+              "label": "Social media",
+              "$": {
+                "name": {
+                    "label": "Name",
+                    "firstOption": "(Select One)"
+                },
+                "url": {
+                    "label": "Url",
+                    "placeholder": "http://example.com/accountname"
+                }
+              }
+          },
           "siteFooter": {
               "label": "Site footer"
           }
