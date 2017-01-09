@@ -4,15 +4,15 @@
     <div class="panel-heading">
       <h2 class="panel-title">
         <i class="fa fa-info-circle" aria-hidden="true"></i>
-        {{_ "apiSettings_detailsPanel_title" }}
+        {{_ "apiSettingsDetails_title" }}
       </h2>
     </div>
     <div class="panel-body">
       <h3>
-        {{_ "apiSettings_uploadLogo_heading" }}
+        {{_ "apiSettingsDetails_uploadLogo_heading" }}
       </h3>
       <p>
-        {{_ "apiSettings_uploadLogoText" }}
+        {{_ "apiSettingsDetails_uploadLogoText" }}
       </p>
       {{> uploadApiLogo api=api }}
       <hr class="panel-hr" />
@@ -26,7 +26,7 @@
         {{> afQuickField name='url' }}
         {{> afQuickField name='lifecycleStatus' }}
         <button type="submit" class="btn btn-success" id="save-settings">
-          {{_ "apiSettings_saveButton" }}
+          {{_ "apiSettingsDetails_saveButton" }}
         </button>
       {{/ autoForm }}
     </div>
