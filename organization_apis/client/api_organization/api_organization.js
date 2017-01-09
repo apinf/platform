@@ -11,6 +11,7 @@ Template.apiOrganization.onCreated(function () {
   // Subscribe to user managed organizations, controls template visibility
   instance.subscribe('userManagedOrganizations');
 
+  // Subscribe to Organization APIs Link, using context API ID
   instance.subscribe('organizationApisByApiId', instance.data.api._id);
 });
 
