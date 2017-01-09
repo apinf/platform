@@ -30,9 +30,6 @@ Meteor.publish('organizationApis', (slug) => {
   // Make sure slug argument is a String
   check(slug, String);
 
-  // Initialize apis as empty array, to complete the publication if no results
-  let apis = [];
-
   // Get organization
   const organization = Organizations.findOne({ slug });
 
@@ -47,12 +44,12 @@ Meteor.publish('organizationApis', (slug) => {
       return organizationApiLink.apiId;
     });
 
-    // Get a database cursor of APIs using the API IDs array
-    apis = Apis.find({ _id: { $in: apiIds } });
+    // Return a database cursor of APIs using the API IDs array
+    return Apis.find({ _id: { $in: apiIds } });
   }
 
-  // Return organizationApis (empty array or cursor)
-  return apis;
+  // Otherwise, return an empty array so the publication can be marked as 'ready'
+  return [];
 });
 
 Meteor.publish('organizationApisByApiId', (apiId) => {
