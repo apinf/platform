@@ -45,7 +45,7 @@ Meteor.publish('organizationApis', (slug) => {
     organizationApis = OrganizationApis.find({ organizationId: organization._id }).fetch();
 
     // Create an array of API IDs
-    const apiIds = _.map(organizationApis, function (organizationApiLink) {
+    const apiIds = _.map(organizationApis, organizationApiLink => {
       // Get API ID from link document
       return organizationApiLink.apiId;
     });
@@ -58,11 +58,12 @@ Meteor.publish('organizationApis', (slug) => {
   return apis;
 });
 
-Meteor.publish('organizationApisByApiId', (apiId) =>
+Meteor.publish('organizationApisByApiId', (apiId) => {
   // Return cursor to organizationApis
-  OrganizationApis.find({ apiId }));
+  OrganizationApis.find({ apiId });
+});
 
-Meteor.publish('organizationApiLinksByOrganizationSlug', function (slug) {
+Meteor.publish('organizationApiLinksByOrganizationSlug', (slug) => {
   // Make sure 'slug' is a string
   check(slug, String);
 
