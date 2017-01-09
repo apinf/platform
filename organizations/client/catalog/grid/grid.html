@@ -21,12 +21,12 @@
           </div>
           <ul class="organization-card-stats list-inline">
             <li class="pull-left">
-              <span class="organization-card-footer">
-                {{ organization.apisCount }} APIs
+              <span class="organization-card-apis-count">
+                {{ organization.apisCount }} {{_ "organizationCatalogGrid_apisText" }}
               </span>
             </li>
             <li class="pull-right">
-              <span class="organization-card-footer">
+              <span class="organization-card-created">
                 {{_ "organizationCatalogGrid_added" organization.relativeCreatedAt }}
               </span>
             </li>
