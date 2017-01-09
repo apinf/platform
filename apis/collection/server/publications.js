@@ -1,17 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '../';
 
-Meteor.publish('allApiBackends', function () {
-  // Check if the user is signed in
-  if (this.userId) {
-    // Return all API Backends
-    return Apis.find();
-  }
-
-  // Return nothing
-  return null;
-});
-
 Meteor.publish('userManagedApis', function () {
   // get current user id
   const userId = this.userId;

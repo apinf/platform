@@ -1,8 +1,13 @@
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import $ from 'jquery';
+
 AutoForm.hooks({
   feedbackForm: {
     before: {
       insert (feedback) {
-        feedback.apiBackendId = Router.current().params._id;
+        feedback.apiBackendId = FlowRouter.current().params._id;
 
         return feedback;
       },

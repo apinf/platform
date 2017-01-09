@@ -4,11 +4,19 @@ import { OrganizationApis } from '../';
 
 Organizations.helpers({
   apis () {
-    // Get organizationApis document
+    // Placeholder for API documents
+    let apis;
+
+    // Get organizationApis document, which joins organizations with APIs
     const organizationApis = OrganizationApis.findOne({ organizationId: this._id });
 
-    // Return array of organization apis
-    return organizationApis ? Apis.find({ _id: { $in: organizationApis.apiIds } }).fetch() : [];
+    // Make sure organization has APIs
+    if (organizationApis && organizationApis.apiIds.length > 0) {
+      // Get an array of organization APIs
+      apis = Apis.find({ _id: { $in: organizationApis.apiIds } }).fetch();
+    }
+
+    return apis;
   },
   apisCount () {
     // Get organizationApis document

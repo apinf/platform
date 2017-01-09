@@ -9,15 +9,16 @@ Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Get the Organization slug from the route
-  instance.organizationSlug = FlowRouter.getParam('slug');
+  instance.autorun(function () {
+    // Get the Organization slug from the route
+    const organizationSlug = FlowRouter.getParam('slug');
 
-  // Subscribe to APIs
-  instance.subscribe('allApiBackends', Meteor.userId());
-  // Subscribe to a single Organization
-  instance.subscribe('singleOrganization', instance.organizationSlug);
-  // Subscribe to organizationApis
-  instance.subscribe('organizationApis', instance.organizationSlug);
+    // Subscribe to a single Organization
+    instance.subscribe('singleOrganization', organizationSlug);
+
+    // Subscribe to organizationApis
+    instance.subscribe('organizationApis', organizationSlug);
+  });
 });
 
 Template.organizationProfile.helpers({
@@ -27,7 +28,8 @@ Template.organizationProfile.helpers({
   },
   managedApis () {
     // Init managedApis
-    let managedApis = [];
+    let managedApis;
+
     // Find relate organization document
     const organization = Organizations.findOne();
 
@@ -36,12 +38,14 @@ Template.organizationProfile.helpers({
       // Get organization apis
       managedApis = organization.apis();
     }
+
     // Return managedApis
     return managedApis;
   },
   managedApisCount () {
     // Init managedApisCount
     let managedApisCount = 0;
+
     // Find relate organization document
     const organization = Organizations.findOne();
 
@@ -50,6 +54,7 @@ Template.organizationProfile.helpers({
       // Get organization apis count
       managedApisCount = organization.apisCount();
     }
+
     // Return managedApisCount
     return managedApisCount;
   },
