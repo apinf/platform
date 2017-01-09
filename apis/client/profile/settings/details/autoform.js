@@ -7,8 +7,8 @@ AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
       // Get success message translation
-      const message = TAPi18n.__('apiBackendForm_text_updateInformation');
-      
+      const message = TAPi18n.__('apiDetailsForm_text_updateInformation');
+
       // Show message
       sAlert.success(message);
     },
