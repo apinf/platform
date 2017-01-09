@@ -16,7 +16,7 @@ Template.organizationProfile.onCreated(function () {
     // Subscribe to a single Organization
     instance.subscribe('singleOrganization', organizationSlug);
 
-    // Subscribe to organizationApis
+    // Subscribe to Organization APIs documents
     instance.subscribe('organizationApis', organizationSlug);
   });
 });
