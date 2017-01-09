@@ -59,6 +59,9 @@ Meteor.publish('organizationApis', (slug) => {
 });
 
 Meteor.publish('organizationApisByApiId', (apiId) => {
+  // Make sure API ID is String
+  check(apiId, String);
+  
   // Return cursor to organizationApis
   OrganizationApis.find({ apiId });
 });
