@@ -10,14 +10,15 @@
 
         </h1>
 
+        &nbsp; <!--TODO: determine why these labels don't have margin -->
+        {{> apiLifecycleStatus api=api }}
+
         {{# unless api.isPublic }}
           <span class="label label-default">
             {{_ "viewApiPageHeader_privateLabel_text" }}
           </span>
         {{/ unless }}
-        &nbsp; <!--TODO: determine why these labels don't have margin -->
-        {{> apiLifecycleStatus api=api }}
-
+        
         <ul class="list-inline view-api-meta-details">
           <li>
             <i class="fa fa-user"></i>
