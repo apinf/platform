@@ -11,8 +11,10 @@
       <div class="panel-body">
         {{# if api.organization }}
           <!-- Show API Organization details -->
-          {{ api.organization.name }}
-          <button class="btn btn-danger btn-xs" id="disconnect-from-organization">
+          <p>
+            {{ api.organization.name }}
+          </p>
+          <button class="btn btn-danger" id="disconnect-from-organization">
             {{_ "organizationApis_disconnectButton" }}
           </button>
         {{ else }}
