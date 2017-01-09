@@ -82,4 +82,8 @@ Template.organizationCatalog.events({
     // Set URL parameter
     FlowRouter.setQueryParams({ viewMode: event.target.value });
   },
+  'click #add-organization': function () {
+    // Show organization form modal
+    Modal.show('organizationForm', { formType: 'insert' });
+  },
 });
