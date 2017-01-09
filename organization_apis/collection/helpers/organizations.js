@@ -1,5 +1,6 @@
 import { Apis } from '/apis/collection';
 import { Organizations } from '/organizations/collection';
+import { _ } from 'lodash';
 import { OrganizationApis } from '../';
 
 Organizations.helpers({
@@ -8,20 +9,24 @@ Organizations.helpers({
     let apis;
 
     // Get organizationApis document, which joins organizations with APIs
-    const organizationApis = OrganizationApis.findOne({ organizationId: this._id });
+    const organizationApiLinks = OrganizationApis.find({ organizationId: this._id }).fetch();
 
     // Make sure organization has APIs
-    if (organizationApis && organizationApis.apiIds.length > 0) {
-      // Get an array of organization APIs
-      apis = Apis.find({ _id: { $in: organizationApis.apiIds } }).fetch();
+    if (organizationApiLinks) {
+      //   Get an array of API IDs
+      const apiIds = _.map(organizationApiLinks, function (organizationApiLink) {
+        // Return API ID for current organizaiton-api link
+        return organizationApiLink.apiId;
+      });
+
+      // Get an array of APIs, based on API IDs array
+      apis = Apis.find({ _id: { $in: apiIds } }).fetch();
     }
 
     return apis;
   },
   apisCount () {
-    // Get organizationApis document
-    const organizationApis = OrganizationApis.findOne({ organizationId: this._id });
-    // Return number of organization apis
-    return organizationApis ? organizationApis.apiIds.length : 0;
+    // Return a count of Organiztion-API Links
+    return OrganizationApis.find({ organizationId: this._id }).count();
   },
 });
