@@ -15,6 +15,10 @@
     "import/resolver": "meteor"
   },
   "rules": {
+    "arrow-body-style": [
+      2, 
+      "always"
+    ],
     "comma-dangle": [
       2,
       "always-multiline"
