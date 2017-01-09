@@ -30,9 +30,6 @@ Meteor.publish('organizationApis', (slug) => {
   // Make sure slug argument is a String
   check(slug, String);
 
-  // Init organizationApis
-  let organizationApis;
-
   // Initialize apis as empty array, to complete the publication if no results
   let apis = [];
 
@@ -42,7 +39,7 @@ Meteor.publish('organizationApis', (slug) => {
   // Check organization exist
   if (organization) {
     // Get all links between this organization and APIs
-    organizationApis = OrganizationApis.find({ organizationId: organization._id }).fetch();
+    const organizationApis = OrganizationApis.find({ organizationId: organization._id }).fetch();
 
     // Create an array of API IDs
     const apiIds = _.map(organizationApis, organizationApiLink => {
@@ -61,7 +58,7 @@ Meteor.publish('organizationApis', (slug) => {
 Meteor.publish('organizationApisByApiId', (apiId) => {
   // Make sure API ID is String
   check(apiId, String);
-  
+
   // Return cursor to organizationApis
   OrganizationApis.find({ apiId });
 });
