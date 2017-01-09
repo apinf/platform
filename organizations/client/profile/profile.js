@@ -18,6 +18,9 @@ Template.organizationProfile.onCreated(function () {
 
     // Subscribe to Organization APIs documents
     instance.subscribe('organizationApis', organizationSlug);
+
+    // Subscribe to Organization APIs documents
+    instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
   });
 });
 
