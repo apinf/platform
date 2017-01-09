@@ -61,3 +61,17 @@ Meteor.publish('organizationApis', (slug) => {
 Meteor.publish('organizationApisByApiId', (apiId) =>
   // Return cursor to organizationApis
   OrganizationApis.find({ apiId }));
+
+Meteor.publish('organizationApiLinksByOrganizationSlug', function (slug) {
+  // Make sure 'slug' is a string
+  check(slug, String);
+
+  // Get Organization document
+  const organization = Organizations.findOne({ slug });
+
+  // Get Organization ID
+  const organizationId = organization._id;
+
+  // Return cursor to organizationApis
+  return OrganizationApis.find({ organizationId });
+});
