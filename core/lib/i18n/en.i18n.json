@@ -123,7 +123,7 @@
   "apiSettingsDetails_saveButton": "Save",
   "apiSettingsDetails_uploadLogo_heading": "Upload logo",
   "apiSettingsDetails_uploadLogoText": "You can upload a logo for your API. The logo will appear in the catalogue and on the single API page.",
-  "apiSettingsVisibilityPanel_title": "Visibility",
+  "apiSettingsVisibility_title": "Visibility",
   "apiSettingsVisibility_heading": "Change API visibility",
   "apiSettingsVisibility_text": "Make this API private or public",
   "apiAuthorizedUsersList_authorizedUsers": "Give single users permissions to view API even when API is globally marked Private.",
