@@ -15,12 +15,12 @@ OrganizationApis.schema = new SimpleSchema({
         const organizations = Organizations.find().fetch();
 
         // Create array of options with label/value attributes
-        const organizationOptionss = _.map(organizations, (organization) => ({
+        const organizationOptions = _.map(organizations, (organization) => ({
           label: organization.name,
           value: organization._id,
         }));
 
-        return organizationOptionss;
+        return organizationOptions;
       },
     },
   },
