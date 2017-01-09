@@ -9,7 +9,6 @@ OrganizationApis.schema = new SimpleSchema({
   organizationId: {
     type: String,
     optional: false,
-    unique: true,
     autoform: {
       options () {
         // Get all organizations, available in data context
