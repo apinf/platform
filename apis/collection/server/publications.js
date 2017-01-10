@@ -1,18 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '../';
 
-Meteor.publish('allApiBackends', function () {
-  // Check if the user is signed in
-  if (this.userId) {
-    // Return all API Backends
-    return Apis.find();
-  }
-
-  // Return nothing
-  return null;
-});
-
-Meteor.publish('myManagedApis', function () {
+Meteor.publish('userManagedApis', function () {
   // get current user id
   const userId = this.userId;
 
@@ -24,7 +13,7 @@ Meteor.publish('apiBackend', function (backendId) {
   return Apis.find({ _id: backendId });
 });
 
-Meteor.publish('latestApiBackends', function (limit) {
+Meteor.publish('latestPublicApis', function (limit) {
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },

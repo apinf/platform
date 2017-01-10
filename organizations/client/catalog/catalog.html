@@ -4,12 +4,10 @@
       {{_ "organizationCatalog_Title" }}
 
       {{# if isInRole 'admin' }}
-        <a type="button"
-           class="btn btn-default pull-right"
-           href={{ pathFor 'addOrganization' }} >
+        <button id="add-organization" type="button" class="btn btn-default pull-right">
           <i class="fa fa-plus" aria-hidden="true"></i>
           {{_ "organizationCatalog_buttonText_addOrganization" }}
-        </a>
+        </button>
       {{/ if }}
     </h1>
     {{> organizationCatalogueToolbar }}

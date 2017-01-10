@@ -16,37 +16,37 @@
               {{> uploadProjectLogo branding=branding }}
               {{> viewCoverPhoto branding=branding }}
               {{> uploadCoverPhoto branding=branding }}
-            {{# autoForm
-              id="brandingEdit"
-              type="update"
-              collection=brandingCollection
-              doc=branding }}
-            {{> afQuickField name='siteTitle' }}
-            {{> afQuickField name='siteSlogan' }}
-            {{> afQuickField name='colors' }}
-            {{> afQuickField name='siteFooter' }}
-            {{> afQuickField name='socialMedia' }}
-            <div id="form-buttons">
-              <button type="submit" class="btn btn-primary">
-                {{_ "branding_update" }}
-              </button>
-            </div>
-            {{/ autoForm }}
+              {{# autoForm
+                id="brandingEdit"
+                type="update"
+                collection=brandingCollection
+                doc=branding }}
+              {{> afQuickField name='siteTitle' }}
+              {{> afQuickField name='siteSlogan' }}
+              {{> afQuickField name='colors' }}
+              {{> afQuickField name='siteFooter' }}
+              {{> afQuickField name='socialMedia' }}
+              <div id="form-buttons">
+                <button type="submit" class="btn btn-primary">
+                  {{_ "branding_update" }}
+                </button>
+              </div>
+              {{/ autoForm }}
             {{ else }}
-            {{# autoForm
-              id="brandingAdd"
-              type="insert"
-              collection=brandingCollection }}
-            {{> afQuickField name='siteTitle' }}
-            {{> afQuickField name='siteSlogan' }}
-            {{> afQuickField name='siteFooter' }}
-            {{> afQuickField name='socialMedia' }}
-            <div id="form-buttons">
-              <button type="submit" class="btn btn-primary">
-                {{_ "branding_save" }}
-              </button>
-            </div>
-            {{/ autoForm }}
+              {{# autoForm
+                id="brandingAdd"
+                type="insert"
+                collection=brandingCollection }}
+              {{> afQuickField name='siteTitle' }}
+              {{> afQuickField name='siteSlogan' }}
+              {{> afQuickField name='siteFooter' }}
+              {{> afQuickField name='socialMedia' }}
+              <div id="form-buttons">
+                <button type="submit" class="btn btn-primary">
+                  {{_ "branding_save" }}
+                </button>
+              </div>
+              {{/ autoForm }}
             {{/ if }}
           </div>
         </div>

@@ -6,12 +6,12 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.deleteApiConfirmation.events({
-  'click #modal-delete-api': function (event, instance) {
+  'click #modal-delete-api': function (event, templateInstance) {
     // Get API ID
-    const apiId = instance.data.api._id;
+    const apiId = templateInstance.data.api._id;
 
-    // Route to catalogue
-    FlowRouter.go('catalogue');
+    // Route to API Catalog
+    FlowRouter.go('apiCatalog');
 
     Meteor.call('removeApi', apiId, () => {
       // Dismiss the confirmation modal
@@ -21,7 +21,7 @@ Template.deleteApiConfirmation.events({
       const message = TAPi18n.__('deleteApiConfirmation_successMessage');
 
       // Alert the user of success
-      sAlert.success(message + instance.data.api.name);
+      sAlert.success(message + templateInstance.data.api.name);
     });
   },
 });

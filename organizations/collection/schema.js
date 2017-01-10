@@ -3,16 +3,22 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Organizations } from './';
 
 Organizations.schema = new SimpleSchema({
-  name: {
-    type: String,
+  contact: {
+    type: Object,
+    optional: true,
   },
-  slug: {
+  'contact.person': {
     type: String,
-    optional: false,
+    optional: true,
   },
-  url: {
+  'contact.phone': {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
+    optional: true,
+  },
+  'contact.email': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email,
+    optional: true,
   },
   description: {
     type: String,
@@ -22,33 +28,40 @@ Organizations.schema = new SimpleSchema({
     },
     optional: true,
   },
-  organizationLogoFileId: {
-    type: String,
-    optional: true,
-  },
-  contact: {
-    type: Object,
-    optional: true,
-  },
-  'contact.person': {
-    type: String,
-  },
-  'contact.phone': {
-    type: String,
-  },
-  'contact.email': {
-    type: String,
-    regEx: SimpleSchema.RegEx.Email,
-  },
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
-    defaultValue: [null],
     autoform: {
       type: 'hidden',
       label: false,
     },
+    autoValue () {
+      // Automatically add the current user to manager IDs array, on insert
+      if (this.isInsert) {
+        return [Meteor.userId()];
+      }
+
+      // Don't allow users to provide a value
+      // Note, this may need to change when we allow adding other managers
+      this.unset();
+    },
   },
+  name: {
+    type: String,
+  },
+  organizationLogoFileId: {
+    type: String,
+    optional: true,
+  },
+  slug: {
+    type: String,
+    optional: false,
+  },
+  url: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+  },
+  /* Internal fields, create, update tracking */
   createdBy: {
     type: String,
     autoValue () {

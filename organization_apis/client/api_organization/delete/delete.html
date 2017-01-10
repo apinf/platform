@@ -1,0 +1,31 @@
+<template name="deleteOrganizationApiConfirmation">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">
+            {{_ "deleteOrganizationApiConfirmation_header_text" }}
+            &nbsp;
+            {{ organization.name }}
+          </h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            {{_ "deleteOrganizationApiConfirmation_confirm_text" }}
+            &nbsp;
+            {{ organization.name }}?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{_ "deleteOrganizationApiConfirmation_cancelButton_text" }}
+          </button>
+          <button type="button" class="btn btn-danger" id="delete-api-organization">
+            {{_ "deleteOrganizationApiConfirmation_disconnectButton_text" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
