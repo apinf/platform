@@ -15,7 +15,7 @@ Template.dashboard.onCreated(function () {
   // Subscribe to proxyApis publicaton
   instance.subscribe('proxyApis');
   // Subscribe to managed apis
-  instance.subscribe('myManagedApis');
+  instance.subscribe('userManagedApis');
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();

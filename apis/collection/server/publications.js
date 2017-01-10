@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '../';
 
-Meteor.publish('myManagedApis', function () {
+Meteor.publish('userManagedApis', function () {
   // get current user id
   const userId = this.userId;
 

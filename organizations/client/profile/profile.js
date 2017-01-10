@@ -13,11 +13,19 @@ Template.organizationProfile.onCreated(function () {
     // Get the Organization slug from the route
     const organizationSlug = FlowRouter.getParam('slug');
 
-    // Subscribe to a single Organization
-    instance.subscribe('singleOrganization', organizationSlug);
+    // Make sure organizationSlug exists,
+    // fixes bug when changing route to navigate to different page
+    if (organizationSlug) {
+      // Reactively subscribe to a single Organization
+      // Makes sure proper data is available when editing organization name
+      instance.subscribe('singleOrganization', organizationSlug);
 
-    // Subscribe to organizationApis
-    instance.subscribe('organizationApis', organizationSlug);
+      // Subscribe to Organization APIs documents
+      instance.subscribe('organizationApis', organizationSlug);
+
+      // Subscribe to Organization APIs documents
+      instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
+    }
   });
 });
 

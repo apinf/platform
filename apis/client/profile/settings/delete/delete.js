@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-Template.apiSettings_delete.events({
+Template.apiSettingsDelete.events({
   // event handler to execute when delete API button is clicked
   'click #delete-api': function () {
     const api = this.api;
