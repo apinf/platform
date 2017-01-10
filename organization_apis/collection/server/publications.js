@@ -57,7 +57,7 @@ Meteor.publish('organizationApisByApiId', (apiId) => {
   check(apiId, String);
 
   // Return cursor to organizationApis
-  OrganizationApis.find({ apiId });
+  return OrganizationApis.find({ apiId });
 });
 
 Meteor.publish('organizationApiLinksByOrganizationSlug', (slug) => {
