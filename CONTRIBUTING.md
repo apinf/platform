@@ -367,7 +367,19 @@ CollectionName.attachSchema(CollectionName.schema);
 ### Explicit required fields
 When defining schemas, we need to designate some fields as *required* or *optional*. By default if we do not designate a field as *required* or *optional*, it will be implicitly *required*.
 
-Following the guideline of **explicit is better than implicit**, all fields should be explicitly defined as *required* or *optional*.
+Following the guideline of **explicit is better than implicit**, all fields should be explicitly defined as *required* or *optional*:
+
+```js
+// Schema object
+requiredField : {
+  ...
+  optional: false
+},
+optionalField: {
+  ...
+  optional: true
+}
+```
 
 ### Schema changes
 
