@@ -30,6 +30,8 @@ Use the following guidelines when contributing to this project.
   - [File structure](#file-structure)
     - [File names](#file-names)
   - [Collection/Schema structure](#collectionschema-structure)
+    - [Explicit required fields](#explicit-required-fields)
+    - [Schema changes](#schema-changes)
   - [Internationalization (i18n)](#internationalization-i18n)
     - [i18n key structure](#i18n-key-structure)
     - [Template text (HTML/Blaze)](#template-text-htmlblaze)
@@ -362,6 +364,10 @@ CollectionName.schema.i18n("schemas.collection_name");
 // Attach schema to collection for validation, etc.
 CollectionName.attachSchema(CollectionName.schema);
 ```
+### Explicit required fields
+When defining schemas, we need to designate some fields as *required* or *optional*. By default if we do not designate a field as *required* or *optional*, it will be implicitly *required*.
+
+Following the guideline of **explicit is better than implicit**, all fields should be explicitly defined as *required* or *optional*.
 
 ### Schema changes
 
