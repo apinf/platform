@@ -38,9 +38,9 @@ For API consumers APInf provides simple key management, key usage analytics and 
 
 
 # Development status
-[![Stories in Ready](https://badge.waffle.io/apinf/api-umbrella-dashboard.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
+[![Stories in Ready](https://badge.waffle.io/apinf/platform.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
 
-[![Throughput Graph](https://graphs.waffle.io/apinf/api-umbrella-dashboard/throughput.svg)](https://waffle.io/apinf/api-umbrella-dashboard/metrics)
+[![Throughput Graph](https://graphs.waffle.io/apinf/platform/throughput.svg)](https://waffle.io/apinf/platform/metrics)
 
 ## Source code visualization
 Our project source code has changed throughout the project lifespan.
