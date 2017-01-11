@@ -34,4 +34,12 @@ Meteor.methods({
       }
     );
   },
+  uniqueFrontendPrefix (proxyBackend) {
+    const p = ProxyBackends.findOne({ 'apiUmbrella.url_matches.frontend_prefix': proxyBackend.apiUmbrella.url_matches[0].frontend_prefix });
+    // Return boolean based on uniqueness
+    if (p) {
+      return false;
+    }
+    return true;
+  },
 });
