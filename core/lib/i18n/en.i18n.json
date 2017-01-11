@@ -396,6 +396,7 @@
   "proxyBackendForm_saveButton": "Save & Publish",
   "proxyBackendForm_deleteButton": "Delete",
   "proxyBackendForm_deleteErrorMessage": "Delete failed on API Umbrella proxy",
+  "proxyBackendForm_frontendPrefixNotUnique": "Frontend prefix already exists. Select another one.",
   "proxyBackendForm_publishErrorMessage": "Publish failed on API Umbrella proxy",
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
