@@ -45,6 +45,8 @@ Template.apiCatalog.onCreated(function () {
   instance.subscribe('allApiLogo');
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsers');
+  // Subscribe to bookmarks of current user
+  instance.subscribe('userApiBookmarks');
 
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {
@@ -92,7 +94,7 @@ Template.apiCatalog.onCreated(function () {
           // Delete filter for managed apis
           delete currentFilters.managerIds;
           // Get user bookmarks
-          const userBookmarks = ApiBookmarks.findOne({ userId }) || '';
+          const userBookmarks = ApiBookmarks.findOne() || '';
           // Set filter for bookmarks
           currentFilters._id = { $in: userBookmarks.apiIds };
           break;
