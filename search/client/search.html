@@ -39,7 +39,7 @@
       {{# each searchResults }}
       <div class="panel panel-default">
         <div class="panel-heading">
-          <a href="/api/{{ _id }}">
+          <a href="{{ pathFor 'viewApi' _id=_id }}">
             {{ name }}
           </a>
           <i class="pull-right">
