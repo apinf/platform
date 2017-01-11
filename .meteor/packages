@@ -3,9 +3,9 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-less@2.7.7
+less@2.7.8
 accounts-base@1.2.14
-accounts-password@1.3.2
+accounts-password@1.3.3
 aldeed:autoform
 alanning:roles
 aldeed:collection2
@@ -52,7 +52,7 @@ pahans:inline-help
 dandv:jquery-rateit
 harrison:papa-parse
 olragon:uri-js
-ecmascript@0.5.9
+ecmascript@0.6.1
 simple:reactive-method
 sacha:spin
 tap:i18n-ui
