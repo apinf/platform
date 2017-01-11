@@ -5,17 +5,21 @@ fileEnI18n="core/lib/i18n/en.i18n.json"
 echo "Tokens that should be added on en.i18n.json file:"
 echo ""
 
-# FIND TOKENS FROM HTML FILES
+# Find i18n tokens in html files and create a list of tokens names
 tokensHtmlFiles=$(grep -iRoh '{{ *_ .*}}' * --exclude="*.md" | grep -o "['\"].*['\"]" | sed -e "s@['\"]@@g")
+# Iterate the tokens name list
 for token in $tokensHtmlFiles; do
+  # Check if the token is not present in en.i18n.json file
   if ! grep -q "$token" "$fileEnI18n"; then
     echo "$token"
   fi
 done
 
-# FIND TOKENS FROM JS FILES
+# Find i18n tokens in js files and create a list of tokens names
 tokensJsFiles=$(grep -iRoh 'TAPi18n\.__(.*)' * --exclude="*.md" | grep -o "['\"].*['\"]" | sed -e "s@['\"]@@g")
+# Iterate the tokens name list
 for token in $tokensJsFiles; do
+  # Check if the token is not present in en.i18n.json file
   if ! grep -q "$token" "$fileEnI18n"; then
     echo "$token"
   fi
@@ -25,21 +29,22 @@ echo ""
 echo "Tokens that should be removed from en.i18n.json file:"
 echo ""
 
-# FIND TOKENS FROM en.i18n.json FILE
 
 json=$(<$fileEnI18n)
 
+# Iterate all i18n tokens got from en.i18n.json file
 echo $json | jq 'keys | .[]' | sed -e "s@['\"]@@g" | while read -r jsonToken ; do
     if [ "$jsonToken" != "schemas" ]; then
 
-        # FIND TOKEN IN HTML FILES
         tokenFound=false
-        for token in $tokensJsFiles; do
+        # Find the token in tokensHtmlFiles list
+        for token in $tokensHtmlFiles; do
           if [ "$jsonToken" = "$token" ]; then
             tokenFound=true
           fi
         done
-        for token in $tokensHtmlFiles; do
+        # Find the token in tokensJsFiles list
+        for token in $tokensJsFiles; do
           if [ "$jsonToken" = "$token" ]; then
             tokenFound=true
           fi
