@@ -26,35 +26,16 @@
 
     <div id="search-results" class="row">
       {{# if searchResults }}
-      <h3 id="search-results-title">
-        {{_ "searchPage_searchResultsHeader" }}
-        &nbsp;
-        <small>
-          <em>
-            ({{ searchResultsCount }})
-          </em>
-        </small>
-      </h3>
-
-      {{# each searchResults }}
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <a href="{{ pathFor 'viewApi' _id=_id }}">
-            {{ name }}
-          </a>
-          <i class="pull-right">
-            {{_ "searchPage_addedPrefix" }}
-            &nbsp;
-            <b>
-              {{ relative_created_at }}
-            </b>
-          </i>
-        </div>
-        <div class="panel-body">
-          {{ backend_host }}
-        </div>
-      </div>
-      {{/ each }}
+        <h3 id="search-results-title">
+          {{_ "searchPage_searchResultsHeader" }}
+          &nbsp;
+          <small>
+            <em>
+              ({{ searchResultsCount }})
+            </em>
+          </small>
+        </h3>
+        {{> apiCatalogGrid apis=searchResults }}
       {{ else }}
       <i>
         {{_ "searchPage_noResults" }}
