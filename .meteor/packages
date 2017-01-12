@@ -79,4 +79,4 @@ useraccounts:flow-routing
 nimble:restivus
 apinf:restivus-swagger
 kurounin:pagination-blaze
-kurounin:pagination
+kurounin:pagination@=1.0.15
