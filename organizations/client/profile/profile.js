@@ -34,7 +34,7 @@ Template.organizationProfile.helpers({
     // Get the Organization slug from the route
     const slug = FlowRouter.getParam('slug');
 
-    // Get single Organization, based on slug
+    // Get Organization, based on slug
     return Organizations.findOne({ slug });
   },
   managedApis () {
@@ -44,7 +44,7 @@ Template.organizationProfile.helpers({
     // Init managedApis
     let managedApis;
 
-    // Find related organization document, based on slug
+    // Get Organization, based on slug
     const organization = Organizations.findOne({ slug });
 
     // Check organization exist
@@ -63,7 +63,7 @@ Template.organizationProfile.helpers({
     // Init managedApisCount
     let managedApisCount = 0;
 
-    // Find related organization document, based on slug
+    // Get Organization, based on slug
     const organization = Organizations.findOne({ slug });
 
     // Check organization exist
