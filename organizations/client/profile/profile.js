@@ -18,7 +18,7 @@ Template.organizationProfile.onCreated(function () {
     if (organizationSlug) {
       // Reactively subscribe to a single Organization
       // Makes sure proper data is available when editing organization name
-      instance.subscribe('singleOrganization', organizationSlug);
+      instance.organizationSubscription = instance.subscribe('singleOrganization', organizationSlug);
 
       // Subscribe to Organization APIs documents
       instance.subscribe('organizationApis', organizationSlug);
@@ -31,15 +31,21 @@ Template.organizationProfile.onCreated(function () {
 
 Template.organizationProfile.helpers({
   organization () {
-    // Get single Organization
-    return Organizations.findOne();
+    // Get the Organization slug from the route
+    const slug = FlowRouter.getParam('slug');
+
+    // Get Organization, based on slug
+    return Organizations.findOne({ slug });
   },
   managedApis () {
+    // Get the Organization slug from the route
+    const slug = FlowRouter.getParam('slug');
+
     // Init managedApis
     let managedApis;
 
-    // Find relate organization document
-    const organization = Organizations.findOne();
+    // Get Organization, based on slug
+    const organization = Organizations.findOne({ slug });
 
     // Check organization exist
     if (organization) {
@@ -51,11 +57,14 @@ Template.organizationProfile.helpers({
     return managedApis;
   },
   managedApisCount () {
+    // Get the Organization slug from the route
+    const slug = FlowRouter.getParam('slug');
+
     // Init managedApisCount
     let managedApisCount = 0;
 
-    // Find relate organization document
-    const organization = Organizations.findOne();
+    // Get Organization, based on slug
+    const organization = Organizations.findOne({ slug });
 
     // Check organization exist
     if (organization) {
