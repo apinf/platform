@@ -13,13 +13,13 @@
           </td>
           <td class="col-sm-9">
             <h4 class="api-catalogue-table-title">
-              <a href="/api/{{api._id}}">
+              <a href="{{ pathFor 'viewApi' _id=api._id }}">
                 {{ api.name }}
               </a>
             </h4>
             <!-- Api LifeCycleStatus Label -->
             {{> apiLifecycleStatus api=api }}
-            
+
             {{# unless api.isPublic }}
               <span class="label label-default label-align">private</span>
             {{/ unless }}
