@@ -5,6 +5,8 @@ Meteor.publish('allUsersUsernamesOnly', function () {
   return Meteor.users.find({}, { fields: { username: 1 } });
 });
 
+// TODO: determine whether this publication is used
+// If it is used, refactor it to be a regular publication
 Meteor.publishComposite('user', function () {
   return {
     find () {
