@@ -9,6 +9,7 @@ import { ApiBookmarks } from '/bookmarks/collection';
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
+  
   // Get user id
   const userId = Meteor.userId();
 
@@ -43,8 +44,9 @@ Template.apiCatalog.onCreated(function () {
 
   // Subscribe to API logo collection
   instance.subscribe('allApiLogo');
+
   // Subscribe to all users, returns only usernames
-  instance.subscribe('allUsers');
+  instance.subscribe('allUsersUsernamesOnly');
 
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {

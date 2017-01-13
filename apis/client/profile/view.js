@@ -39,7 +39,7 @@ Template.viewApi.onCreated(function () {
   instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
 
   // Subscribe to all users, returns only usernames
-  instance.subscribe('allUsers');
+  instance.subscribe('allUsersUsernamesOnly');
 
   // Subscribe to organization for this API
   instance.subscribe('apiOrganizationBasicDetails', instance.apiId);

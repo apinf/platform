@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Apis } from '/apis/collection';
 
-Meteor.publish('allUsers', function () {
+Meteor.publish('allUsersUsernamesOnly', function () {
   return Meteor.users.find({}, { fields: { username: 1 } });
 });
 
