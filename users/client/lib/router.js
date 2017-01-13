@@ -2,12 +2,32 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 FlowRouter.route('/users', {
   name: 'accountsAdmin',
+  triggersEnter: [
+    function (context, redirect) {
+      /*
+      Make sure user is authorized to access route (admin users only)
+      */
+
+      // Get current User ID
+      const userId = Meteor.userId();
+
+      // Check if User is admin
+      const userIsAdmin = Roles.userIsInRole(userId, 'admin');
+
+      // If user is not an admin
+      if (!userIsAdmin) {
+        // Redirect to 'not authorized' route
+        redirect('/not-authorized');
+      }
+    },
+  ],
   action: function () {
     BlazeLayout.render('masterLayout', { main: 'accountsAdmin' });
   },
