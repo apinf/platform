@@ -1,5 +1,7 @@
 sudo: false
 language: node_js
+node_js:
+  - "node"
 
 branches:
   only:
@@ -7,6 +9,9 @@ branches:
 
 services:
   - docker
+
+before_script:
+  - npm run-script lint
 
 script:
   - ./scripts/docker_build.sh
