@@ -7,5 +7,5 @@ import { ApiKeys } from '/api_keys/collection';
 Meteor.publish('apiKeysForCurrentUser', function () {
   const currentUserId = this.userId;
 
-  return ApiKeys.find({ 'userId': currentUserId });
+  return ApiKeys.find({ userId: currentUserId });
 });
