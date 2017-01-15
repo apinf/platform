@@ -3,7 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ApiKeys } from './';
 
 // Schema for API Umbrella user
-let apiUmbrellaUserSchema = new SimpleSchema({
+const apiUmbrellaUserSchema = new SimpleSchema({
   id: {
     type: String,
     optional: false,
