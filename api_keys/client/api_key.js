@@ -55,6 +55,7 @@ Template.apiKey.events({
     // Check api is defined
     if (api) {
       // Call createApiKey function
+      // eslint-disable-next-line no-unused-vars
       Meteor.call('createApiKey', api._id, (error, result) => {
         if (error) {
           // Show human-readable reason for error
