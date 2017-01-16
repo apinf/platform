@@ -2,14 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
 import { Apis } from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
+import $ from 'jquery';
 
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-  
+
   // Get user id
   const userId = Meteor.userId();
 
@@ -79,18 +79,20 @@ Template.apiCatalog.onCreated(function () {
     // Filtering available for registered users
     if (userId) {
       switch (filterByParameter) {
-        case 'all':
+        case 'all': {
           // Delete filter for managed apis & bookmarks
           delete currentFilters.managerIds;
           delete currentFilters._id;
           break;
-        case 'my-apis':
+        }
+        case 'my-apis': {
           // Delete filter for bookmarks
           delete currentFilters._id;
           // Set filter for managed apis
           currentFilters.managerIds = userId;
           break;
-        case 'my-bookmarks':
+        }
+        case 'my-bookmarks': {
           // Delete filter for managed apis
           delete currentFilters.managerIds;
           // Get user bookmarks
@@ -98,10 +100,12 @@ Template.apiCatalog.onCreated(function () {
           // Set filter for bookmarks
           currentFilters._id = { $in: userBookmarks.apiIds };
           break;
-        default:
+        }
+        default: {
           // Otherwise get it like default value
           currentFilters = { isPublic: true };
           break;
+        }
       }
     } else {
       // Otherwise get it like default value
