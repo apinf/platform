@@ -92,13 +92,6 @@ Template.search.helpers({
     // Init search results variable
     const searchResults = instance.getSearchResults();
 
-    if (searchResults !== undefined) {
-      // Iterate through all documents
-      _.each(searchResults, (result) => {
-        // Return to user human-readable timestamp
-        result.relative_created_at = moment(result.created_at).fromNow();
-      });
-    }
     return searchResults;
   },
   searchResultsCount () {

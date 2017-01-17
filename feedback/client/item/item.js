@@ -58,7 +58,7 @@ Template.feedbackItem.helpers({
     return voteClass;
   },
   relativeTimeStamp (givenTimeStamp) {
-    return moment(givenTimeStamp).fromNow();
+    return moment(givenTimeStamp).locale(TAPi18n.getLanguage()).fromNow();
   },
 });
 

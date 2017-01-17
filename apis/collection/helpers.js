@@ -126,11 +126,11 @@ Apis.helpers({
   },
   relativeUpdatedAt () {
     // Return relative updated_at
-    return moment(this.updated_at).fromNow();
+    return moment(this.updated_at).locale(TAPi18n.getLanguage()).fromNow();
   },
   relativeCreatedAt () {
     // Return relative updated_at
-    return moment(this.created_at).fromNow();
+    return moment(this.created_at).locale(TAPi18n.getLanguage()).fromNow();
   },
   setAverageRating () {
     // get average rating value

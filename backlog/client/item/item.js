@@ -6,7 +6,7 @@ import moment from 'moment';
 Template.backlogItem.helpers({
   relativeTimeStamp (givenTimeStamp) {
     // Return relative time from now
-    return moment(givenTimeStamp).fromNow();
+    return moment(givenTimeStamp).locale(TAPi18n.getLanguage()).fromNow();
   },
   itemPriorityClass (priority) {
     // Init priorityClass
