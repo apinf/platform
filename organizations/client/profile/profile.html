@@ -2,27 +2,23 @@
   {{# if Template.subscriptionsReady }}
     {{> organizationProfileHeader organization=organization }}
     <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          {{# if managedApis }}
-            <h3>
-              {{_ 'organizationProfile_bigText_apisCount'  }}
-              <small>
-                {{_ 'organizationProfile_smallText_apisCount' managedApisCount}}
-              </small>
-            </h3>
-          {{/ if }}
-        </div>
+      <div class="pull-right">
         {{# if organization.currentUserCanEdit }}
-          <div class="col-md-9">
-            <button type="button" class="btn btn-default pull-right" id="connect-api"
-                    data-toogle="tooltip" >
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              {{_ 'organizationProfile_buttonText_connectApi' }}
-            </button>
-          </div>
+          <button type="button" class="btn btn-default pull-right" id="connect-api"
+                  data-toogle="tooltip" >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            {{_ 'organizationProfile_buttonText_connectApi' }}
+          </button>
         {{/ if }}
       </div>
+      {{# if managedApis }}
+        <h3>
+          {{_ 'organizationProfile_bigText_apisCount'  }}
+          <small>
+            {{_ 'organizationProfile_smallText_apisCount' managedApisCount}}
+          </small>
+        </h3>
+      {{/ if }}
       {{> apiCatalogGrid apis=managedApis }}
     </div>
   {{/if}}
