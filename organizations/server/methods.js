@@ -8,7 +8,7 @@ import { Apis } from '/apis/collection';
 import { OrganizationApis } from '/organization_apis/collection';
 
 Meteor.methods({
-  getNoBookedApis (organizationId) {
+  getUnlinkedApis (organizationId) {
     // Check arguments
     check(organizationId, String);
 
@@ -17,15 +17,15 @@ Meteor.methods({
     // Find result for user with role
     if (userId) {
       // Find & group all booked apis
-      const OrganizationApisLink = OrganizationApis.find().fetch();
+      const organizationApisLink = OrganizationApis.find().fetch();
 
-      const bookedApis = _.map(OrganizationApisLink, (module) => {
+      const linkedApis = _.map(organizationApisLink, (module) => {
         return module.apiId;
       });
 
       // Find apis that no equal booked
       const queryParams = {
-        _id: { $nin: bookedApis },
+        _id: { $nin: linkedApis },
       };
 
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
