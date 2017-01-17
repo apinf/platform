@@ -20,12 +20,13 @@ Template.organizationProfile.onCreated(function () {
       // Reactively subscribe to a single Organization
       // Makes sure proper data is available when editing organization name
       instance.subscribe('singleOrganization', organizationSlug);
-    }
-    // Subscribe to Organization APIs documents
-    instance.subscribe('organizationApis', organizationSlug);
 
-    // Subscribe to Organization APIs documents
-    instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
+      // Subscribe to Organization APIs documents
+      instance.subscribe('organizationApis', organizationSlug);
+
+      // Subscribe to Organization APIs documents
+      instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
+    }
   });
 });
 
