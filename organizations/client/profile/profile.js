@@ -1,4 +1,5 @@
 // Meteor packages import
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
@@ -80,9 +81,18 @@ Template.organizationProfile.helpers({
 
 Template.organizationProfile.events({
   'click #connect-api': () => {
-    const organizationId = Organizations.findOne()._id;
+    // Get the Organization slug from the route
+    const slug = FlowRouter.getParam('slug');
+    // Get Organization, based on slug
+    const organization = Organizations.findOne({ slug });
 
-    // Show modal with list of suggested apis and id of current organization
-    Modal.show('connectApiToOrganizationModal', { organizationId });
+    // Check organization exist
+    if (organization) {
+      // Show modal with list of suggested apis and id of current organization
+      Modal.show('connectApiToOrganizationModal', { organizationId: organization._id });
+    } else {
+      // Otherwise throw error
+      throw new Meteor.Error('Organization document is undefined');
+    }
   },
 });
