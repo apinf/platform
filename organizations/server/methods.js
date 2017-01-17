@@ -39,7 +39,7 @@ Meteor.methods({
       return Apis.find(queryParams).fetch();
     }
 
-    // Return empty result
+    // Return empty result for anonymous user
     return [];
   },
 });
