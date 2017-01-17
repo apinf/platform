@@ -119,7 +119,7 @@ Template.apiCatalog.onCreated(function () {
   });
 });
 
-Template.apiCatalog.onRendered(function () {
+Template.apiCatalog.onRendered(() => {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
 });
