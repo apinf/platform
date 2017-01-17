@@ -10,6 +10,7 @@ Template.connectApiToOrganizationModal.onCreated(function () {
   const instance = this;
   // Set status data is not ready
   instance.dataIsReady = new ReactiveVar(false);
+  instance.unlinkedApis = new ReactiveVar();
   // Get organization id
   const organizationId = Template.currentData().organizationId;
 
@@ -18,12 +19,13 @@ Template.connectApiToOrganizationModal.onCreated(function () {
     // Set status data is ready
     instance.dataIsReady.set(true);
     // Create & return list of objects for dropdown list
-    instance.noBookedApis =  _.map(apis, (api) => {
+    instance.unlinkedApis.set(_.map(apis, (api) => {
       return {
         label: api.name,
         value: api._id,
       };
-    });
+    })
+    );
   });
 });
 
@@ -32,15 +34,10 @@ Template.connectApiToOrganizationModal.helpers({
     // Return collection for autoform
     return OrganizationApis;
   },
-  noBookedApis () {
+  unlinkedApis () {
     const instance = Template.instance();
     // Return list of apis without organization
-    return instance.noBookedApis;
-  },
-  userCanConnectApi () {
-    const instance = Template.instance();
-    // Get count of free apis
-    return instance.noBookedApis.length > 0;
+    return instance.unlinkedApis.get();
   },
   dataIsReady () {
     const instance = Template.instance();
