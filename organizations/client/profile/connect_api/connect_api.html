@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
           {{# if dataIsReady }}
-            {{# if userCanConnectApi }}
+            {{# if unlinkedApis }}
               {{# autoForm id="connectionApiForm" type="insert" collection=organizationApisCollection }}
                 <div class="form-group">
                   <label>
@@ -23,7 +23,7 @@
                   </p>
                   <!-- Hide Organization ID field and autovalue -->
                   {{> afFieldInput name="organizationId" value=organizationId type="hidden" }}
-                  {{> afFieldInput name="apiId" class="form-control" options=noBookedApis }}
+                  {{> afFieldInput name="apiId" class="form-control" options=unlinkedApis }}
                 </div>
                 <button type="submit" class="btn btn-primary" id="connect-api-to-organization">
                   {{_ 'connectApiToOrganizationModal_buttonText_addApi' }}
