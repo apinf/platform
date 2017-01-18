@@ -38,12 +38,12 @@ Template.organizationProfile.onCreated(function () {
         // Make sure there is at least one Organization API
         if (apiLinks.length > 0) {
           // Get all Organization API IDs
-          const apiIds = _.map(apiLinks, function (apiLink) {
+          const apiIds = _.map(apiLinks, (apiLink) => {
             return apiLink.apiId;
           });
 
           // Subscribe to Organization APIs documents
-          instance.subscribe('apisById', apiIds);
+          instance.subscribe('apisByIds', apiIds);
         }
       }
     }
