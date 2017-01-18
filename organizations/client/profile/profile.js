@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import _ from 'lodash';
 
 // APINF collections import
 import { Organizations } from '/organizations/collection/';
@@ -31,15 +32,18 @@ Template.organizationProfile.onCreated(function () {
       const organization = Organizations.findOne({ slug: organizationSlug });
 
       // Get all Organization API links
-      const apiLinks = OrganizationApis.find({ organizationId: organization._id });
+      const apiLinks = OrganizationApis.find({ organizationId: organization._id }).fetch();
 
-      // Create an array of Organization API IDs
-      const apiIds = _.map(apiLinks, function (apiLink) {
-        return apiLink.apiId;
-      });
+      // Make sure there is at least one Organization API
+      if (apiLinks.length > 0) {
+        // Get all Organization API IDs
+        const apiIds = _.map(apiLinks, function (apiLink) {
+          return apiLink.apiId;
+        });
 
-      // Subscribe to Organization APIs documents
-      instance.subscribe('apisById', apiIds);
+        // Subscribe to Organization APIs documents
+        instance.subscribe('apisById', apiIds);
+      }
     }
   });
 });
