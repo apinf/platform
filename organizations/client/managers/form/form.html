@@ -1,10 +1,9 @@
 <template name="addOrganizationManagerForm">
   <h3>
-    Add Manager
+    {{_ "addOrganizationManagerFormTitle" }}
   </h3>
   <p>
-    An organization manager has the same rights as the original API manager to edit,
-    delete the API after an API has been connected to an organization.
+    {{_ "addOrganizationManagerFormDescription" }}
   </p>
   {{# autoForm
     schema=managerSchema
@@ -15,7 +14,7 @@
     {{> afQuickField name='organizationId' value=organizationId type="hidden" }}
 
     <button type="submit" class="btn btn-primary">
-      Add
+      {{_ "addOrganizationManagerFormButton" }}
     </button>
   {{/ autoForm }}
 </template>

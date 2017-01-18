@@ -1,7 +1,9 @@
 <template name="organizationManagersList">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Managers</h3>
+      <h3 class="panel-title">
+        {{_ "organizationManagersListTitle" }}
+      </h3>
     </div>
     <div class="panel-body">
       {{> addOrganizationManagerForm organization = organization }}

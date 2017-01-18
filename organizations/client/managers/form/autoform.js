@@ -37,7 +37,7 @@ AutoForm.hooks({
     },
     onSuccess () {
       // Get success message translation
-      const message = "New manager added";
+      const message = TAPi18n.__('addOrganizationManagerFormMessage');
 
       // Alert user of success
       sAlert.success(message);
