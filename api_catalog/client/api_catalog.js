@@ -119,7 +119,8 @@ Template.apiCatalog.onCreated(function () {
   });
 });
 
-Template.apiCatalog.onRendered(() => {
+// eslint-disable-next-line prefer-arrow-callback
+Template.apiCatalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
 });
