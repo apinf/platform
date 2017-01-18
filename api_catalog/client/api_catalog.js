@@ -119,6 +119,7 @@ Template.apiCatalog.onCreated(function () {
   });
 });
 
+// eslint-disable-next-line prefer-arrow-callback
 Template.apiCatalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });

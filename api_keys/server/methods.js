@@ -1,16 +1,22 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
+
 import { ApiKeys } from '/api_keys/collection';
-import { ProxyBackends } from '/proxy_backends/collection';
 import { Proxies } from '/proxies/collection';
+import { ProxyBackends } from '/proxy_backends/collection';
+
 
 Meteor.methods({
-  createApiKey (idApi) {
+  createApiKey (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
     // Get logged in user
     const currentUser = Meteor.user();
     // Check currentUser exists
     if (currentUser) {
-      const proxyBackend = ProxyBackends.findOne({ apiId: idApi });
+      const proxyBackend = ProxyBackends.findOne({ apiId });
 
       // Check proxyBackend is defined, and it has proxyId
       if (proxyBackend && proxyBackend.proxyId) {
@@ -24,6 +30,7 @@ Meteor.methods({
           Meteor.call('createApiUmbrellaUser', currentUser, proxyId, (error, umbrellaUser) => {
             if (error) {
               // Log error for server
+              // eslint-disable-next-line no-console
               console.log(error);
               // Throw apiumbrellauser error for client
               throw new Meteor.Error(
