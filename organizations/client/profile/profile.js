@@ -7,6 +7,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // APINF collections import
 import { Organizations } from '/organizations/collection/';
+import { OrganizationApis } from '/organization_apis/collection/';
 
 Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
