@@ -10,7 +10,7 @@ Meteor.methods({
 
     // Update the average rating value for each API Backend
     apiBackends.forEach((apiBackend) => {
-      // Make sure apiBackend is an ApiSchema
+      // Make sure apiBackend is an Api schema
       check(apiBackend, Apis.schema);
 
       // Set average rating value for current API Backend
@@ -18,7 +18,7 @@ Meteor.methods({
     });
   },
   setApiBackendAverageRating (apiBackendId) {
-    // Make sure apiBackend is an ApiSchema
+    // Make sure apiBackendId is a String
     check(apiBackendId, String);
 
     // Get API Backend
