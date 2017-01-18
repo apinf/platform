@@ -4,10 +4,10 @@ import { _ } from 'lodash';
 
 Template.organizationManagersList.helpers({
   organizationManagers () {
-    // Get API document, reactively
+    // Get organization document, reactively
     const organization = Template.currentData().organization;
 
-    // Get all authorized users for current API
+    // Get all authorized users for current organization
     let organizationManagers = Meteor.users.find({
       _id: { $in: organization.managerIds },
     }).fetch();

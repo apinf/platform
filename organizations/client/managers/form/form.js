@@ -2,6 +2,7 @@ import { managerSchema } from './schema';
 
 Template.addOrganizationManagerForm.helpers({
   organizationId () {
+    // Get organization id from Template instance
     const organizationId = Template.instance().data.organization._id;
     return organizationId;
   },
