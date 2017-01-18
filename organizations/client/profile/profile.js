@@ -1,8 +1,9 @@
 // Meteor packages import
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // APINF collections import
 import { Organizations } from '/organizations/collection/';
@@ -91,8 +92,9 @@ Template.organizationProfile.events({
       // Show modal with list of suggested apis and id of current organization
       Modal.show('connectApiToOrganizationModal', { organizationId: organization._id });
     } else {
-      // Otherwise throw error
-      throw new Meteor.Error('Organization document is undefined');
+      // Otherwise show error
+      const message = TAPi18n.__('organizationProfile_text_error');
+      sAlert.error(message);
     }
   },
 });

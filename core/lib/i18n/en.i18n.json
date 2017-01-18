@@ -389,6 +389,7 @@
   "organizationProfileHeader_editButton_text": "Edit",
   "organizationProfile_smallText_apisCount": "(%s apis)",
   "organizationProfile_buttonText_connectApi": "Connect API to organization",
+  "organizationProfile_text_error": "Connection button doesn't work. Please inform administrator about the problem",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
   "profile_setUsername": "Please set your username.",

@@ -16,14 +16,14 @@ Meteor.methods({
 
     // Find result for user with role
     if (userId) {
-      // Find & group all booked apis
-      const organizationApisLink = OrganizationApis.find().fetch();
+      // Find & group all connected apis
+      const organizationApis = OrganizationApis.find().fetch();
 
-      const linkedApis = _.map(organizationApisLink, (module) => {
-        return module.apiId;
+      const linkedApis = _.map(organizationApis, (document) => {
+        return document.apiId;
       });
 
-      // Find apis that no equal booked
+      // Find apis that no equal connected
       const queryParams = {
         _id: { $nin: linkedApis },
       };
@@ -31,11 +31,11 @@ Meteor.methods({
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
       // Is user no admin then
       if (!userIsAdmin) {
-        // limit selection by belong to current user
+        // Limit selection for current user
         queryParams.managerIds = userId;
       }
 
-      // Return cursor on no booked apis
+      // Return cursor on unlinked apis
       return Apis.find(queryParams).fetch();
     }
 
