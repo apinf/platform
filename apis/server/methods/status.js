@@ -1,9 +1,18 @@
-// APINF import
-import { MonitoringData } from '/monitoring/collection';
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
+
 import { Apis } from '/apis/collection';
+import { MonitoringData } from '/monitoring/collection';
+
 
 Meteor.methods({
   getApiStatus (apiId, url) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
+    // Make sure url is a string
+    check(url, String);
+
     // Call HTTP request
     Meteor.http.get(url, {}, (error, result) => {
       // Set status code
