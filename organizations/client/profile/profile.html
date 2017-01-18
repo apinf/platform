@@ -11,7 +11,7 @@
           </button>
         {{/ if }}
       </div>
-      {{# if managedApis }}
+      {{# if organization.apis }}
         <h3>
           {{_ 'organizationProfile_bigText_apisCount'  }}
           <small>
@@ -19,7 +19,7 @@
           </small>
         </h3>
       {{/ if }}
-      {{> apiCatalogGrid apis=managedApis }}
+      {{> apiCatalogGrid apis=organization.apis }}
     </div>
   {{/if}}
 </template>

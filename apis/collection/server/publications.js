@@ -13,6 +13,11 @@ Meteor.publish('apiBackend', function (backendId) {
   return Apis.find({ _id: backendId });
 });
 
+Meteor.publish('apisById', function (apiIds) {
+  // Find one or more APIs using an array of API IDs
+  return Apis.find({_id: {$in: apiIds } });
+});
+
 Meteor.publish('latestPublicApis', function (limit) {
   // Return cursor to latest API Backends
   return Apis.find(
