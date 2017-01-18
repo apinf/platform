@@ -8,15 +8,15 @@ import { ProxyBackends } from '/proxy_backends/collection';
 
 
 Meteor.methods({
-  createApiKey (idApi) {
-    // Make sure idApi is a string
-    check(idApi, String);
+  createApiKey (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
 
     // Get logged in user
     const currentUser = Meteor.user();
     // Check currentUser exists
     if (currentUser) {
-      const proxyBackend = ProxyBackends.findOne({ apiId: idApi });
+      const proxyBackend = ProxyBackends.findOne({ apiId });
 
       // Check proxyBackend is defined, and it has proxyId
       if (proxyBackend && proxyBackend.proxyId) {
