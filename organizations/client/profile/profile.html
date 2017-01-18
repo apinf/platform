@@ -3,8 +3,8 @@
   {{> organizationProfileHeader organization=organization }}
   <div class="container">
     <div class="tab-content">
-      {{# if managedApis }}
       <div id="organization-apis" class="tab-pane fade in active">
+        {{# if managedApis }}
         <h3>
           {{_ 'organizationProfile_bigText_apisCount'  }}
           <small>
@@ -13,8 +13,8 @@
         </h3>
 
         {{> apiCatalogGrid apis=managedApis }}
+        {{/ if }}
       </div>
-      {{/ if }}
 
       <div id="organization-settings" class="tab-pane fade">
         {{> organizationSettings organization=organization }}
