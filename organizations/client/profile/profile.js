@@ -11,7 +11,7 @@ Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  instance.autorun(function () {
+  instance.autorun(() => {
     // Get the Organization slug from the route
     const organizationSlug = FlowRouter.getParam('slug');
 
@@ -25,7 +25,7 @@ Template.organizationProfile.onCreated(function () {
       // Subscribe to Organization APIs documents
       instance.subscribe('organizationApis', organizationSlug);
 
-      // Subscribe to Organization APIs documents
+      // Subscribe to OrganizationAPIs link documents
       instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
     }
   });
