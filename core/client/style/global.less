@@ -56,3 +56,45 @@ hr {
   margin-bottom: 5px;
   font-weight: 700;
 }
+
+.navigation-tabs {
+  position: relative;
+  top: 5px; // needs to be in px
+  margin-top: 0.6em;
+  clear: both;
+
+  .nav-tabs {
+    border-bottom: none;
+    display: inline-block;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    font-weight: bold;
+    line-height: initial;
+    color: #333;
+    background-color: #fff;
+    border-top-color: @brand-primary;
+    border-top-width: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-right-color: #EEE;
+    border-left-color: #EEE;
+  }
+
+  .nav-tabs > li {
+    border: 0px solid transparent;
+    border-width: 3px 1px 1px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .nav-tabs > li > a {
+    color: #555;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    color: #333;
+    border-color: transparent;
+  }
+}
