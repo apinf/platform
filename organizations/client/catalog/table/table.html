@@ -11,7 +11,7 @@
             </td>
             <td class="col-sm-9">
               <h4 class="organization-catalogue-table-title">
-                <a href="/organization/{{ organization.slug }}">
+                <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}">
                   {{ organization.name }}
                 </a>
               </h4>
