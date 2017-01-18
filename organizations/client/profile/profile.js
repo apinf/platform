@@ -31,18 +31,20 @@ Template.organizationProfile.onCreated(function () {
       // Get Organization document
       const organization = Organizations.findOne({ slug: organizationSlug });
 
-      // Get all Organization API links
-      const apiLinks = OrganizationApis.find({ organizationId: organization._id }).fetch();
+      if (organization) {
+        // Get all Organization API links
+        const apiLinks = OrganizationApis.find({ organizationId: organization._id }).fetch();
 
-      // Make sure there is at least one Organization API
-      if (apiLinks.length > 0) {
-        // Get all Organization API IDs
-        const apiIds = _.map(apiLinks, function (apiLink) {
-          return apiLink.apiId;
-        });
+        // Make sure there is at least one Organization API
+        if (apiLinks.length > 0) {
+          // Get all Organization API IDs
+          const apiIds = _.map(apiLinks, function (apiLink) {
+            return apiLink.apiId;
+          });
 
-        // Subscribe to Organization APIs documents
-        instance.subscribe('apisById', apiIds);
+          // Subscribe to Organization APIs documents
+          instance.subscribe('apisById', apiIds);
+        }
       }
     }
   });
