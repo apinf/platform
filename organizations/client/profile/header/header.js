@@ -10,7 +10,7 @@ Template.organizationProfileHeader.events({
   'click #edit-organization': function (event, templateInstance) {
     // Get organization from template instance
     const organization = templateInstance.data.organization;
-    
+
     // Show organization form modal
     Modal.show('organizationForm', { organization, formType: 'update' });
   },
