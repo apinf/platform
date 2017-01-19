@@ -178,6 +178,10 @@
   "changeSelectedProxy_title": "Change API Proxy",
   "changeSelectedProxy_textCaution": "Caution!",
   "changeSelectedProxy_textConfirm": "Changing the proxy will change the call URL and will potentially break API calls from applications. Please inform your API consumers about this change and suggest them to check whether or not they need to obtain new API key from the newly selected proxy",
+  "connectApiToOrganizationModal_helpText": "You can add from APIs that you manage to be connected to the organization. Afterwards, the connected API will appear in the organization profile.",
+  "connectApiToOrganizationModal_buttonText_close": "Close",
+  "connectApiToOrganizationModal_text_noOneApis": "There are no free APIs that you manage can be connected to current Organization.",
+  "connectApiToOrganizationModal_modalTitle": "Connect API",
   "contactForm_email_label": "E-mail address",
   "contactForm_email_placeholder": "Your email",
   "contactForm_message_label": "Message",
@@ -352,7 +356,7 @@
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Title": "Oops! Page not found.",
   "organizationApis_connectButton": "Connect",
-  "organizationApisForm_successText": "Your API has been connected to the organization.",
+  "organizationApisForm_successText": "The API and Organization are now connected.",
   "organizationCatalog_Title": "Organization catalog",
   "organizationCatalog_buttonText_addOrganization": "Add Organization",
   "organizationCatalog_toolbar_filterOptions_myOrganizations": "My organizations",
@@ -379,6 +383,8 @@
   "organizationProfile_bigText_apisCount": "APIs",
   "organizationProfileHeader_editButton_text": "Edit",
   "organizationProfile_smallText_apisCount": "(%s apis)",
+  "organizationProfile_buttonText_connectApi": "Connect API to organization",
+  "organizationProfile_text_error": "Connection button doesn't work. Please inform administrator about the problem",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
   "profile_setUsername": "Please set your username.",
@@ -664,11 +670,11 @@
           }
       },
       "organizationApis": {
-        "apiIds": {
-          "label": "API(s)"
+        "apiId": {
+          "label": "Select API"
         },
         "organizationId": {
-          "label": "Organization"
+          "label": "Select Organization"
         }
       }
   },
