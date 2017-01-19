@@ -1,8 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 import { Organizations } from '/organizations/collection';
+
+import $ from 'jquery';
 
 Template.organizationCatalog.onCreated(function () {
   const instance = this;
@@ -37,6 +40,7 @@ Template.organizationCatalog.onCreated(function () {
   });
 });
 
+// eslint-disable-next-line prefer-arrow-callback
 Template.organizationCatalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
