@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/fi';
 /*
   Check file name for provided extensions
   @param {Date} date - Date object to be formatted

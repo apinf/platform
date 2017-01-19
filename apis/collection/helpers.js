@@ -1,6 +1,7 @@
 // Utility imports
 import ss from 'simple-statistics';
 import moment from 'moment';
+import 'moment/locale/fi';
 import _ from 'lodash';
 
 import { Meteor } from 'meteor/meteor';
