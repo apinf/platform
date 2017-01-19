@@ -125,12 +125,16 @@ Apis.helpers({
     return this.averageRating;
   },
   relativeUpdatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Return relative updated_at
-    return moment(this.updated_at).locale(TAPi18n.getLanguage()).fromNow();
+    return moment(this.updated_at).locale(language).fromNow();
   },
   relativeCreatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Return relative updated_at
-    return moment(this.created_at).locale(TAPi18n.getLanguage()).fromNow();
+    return moment(this.created_at).locale(language).fromNow();
   },
   setAverageRating () {
     // get average rating value

@@ -26,7 +26,9 @@ Organizations.helpers({
     return false;
   },
   relativeCreatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Convert createdAt time to format "time ago"
-    return moment(this.createdAt).locale(TAPi18n.getLanguage()).fromNow();
+    return moment(this.createdAt).locale(language).fromNow();
   },
 });
