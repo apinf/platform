@@ -1,4 +1,3 @@
-import { Tracker } from 'meteor/tracker';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { sAlert } from 'meteor/juliancwirko:s-alert';

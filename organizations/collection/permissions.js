@@ -1,5 +1,5 @@
 import { Roles } from 'meteor/alanning:roles';
-import { Organizations } from './';
+import Organizations from './';
 
 Organizations.allow({
   insert (userId) {

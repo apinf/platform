@@ -1,7 +1,7 @@
 import { Apis } from '/apis/collection';
-import { Organizations } from '/organizations/collection';
+import Organizations from '/organizations/collection';
 import { _ } from 'lodash';
-import { OrganizationApis } from '../';
+import OrganizationApis from '../';
 
 Organizations.helpers({
   apis () {
@@ -14,7 +14,7 @@ Organizations.helpers({
     // Make sure organization has APIs
     if (organizationApiLinks) {
       //   Get an array of API IDs
-      const apiIds = _.map(organizationApiLinks, function (organizationApiLink) {
+      const apiIds = _.map(organizationApiLinks, (organizationApiLink) => {
         // Return API ID for current organizaiton-api link
         return organizationApiLink.apiId;
       });

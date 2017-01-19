@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.organizationProfileHeader.onRendered(function () {
   // Assign resumable browse to element

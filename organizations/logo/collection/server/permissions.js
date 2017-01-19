@@ -1,16 +1,16 @@
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
 
 OrganizationLogo.allow({
-  insert (userId, file) {
+  insert () {
     return true;
   },
-  remove (userId, file) {
+  remove () {
     return true;
   },
-  read (userId, file) {
+  read () {
     return true;
   },
-  write (userId, file, fields) {
+  write () {
     return true;
   },
 });

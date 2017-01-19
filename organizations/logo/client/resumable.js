@@ -3,8 +3,8 @@ import { Mongo } from 'meteor/mongo';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
-import { Organizations } from '/organizations/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
+import Organizations from '/organizations/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
@@ -41,6 +41,8 @@ Meteor.startup(() => {
     sAlert.success(message);
   });
 
+  // TODO: refactor this code, so we can use the arrow-body-style rule
+  // eslint-disable-next-line arrow-body-style
   OrganizationLogo.resumable.on('fileAdded', (file) => OrganizationLogo.insert({
     _id: file.uniqueIdentifier,
     filename: file.fileName,
@@ -67,6 +69,8 @@ Meteor.startup(() => {
 
     if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
       // Upload organization logo
+      // TODO: refactor this code, so we can use the consistent-return rule
+      // eslint-disable-next-line consistent-return
       return OrganizationLogo.resumable.upload();
     }
 

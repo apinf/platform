@@ -1,4 +1,4 @@
-import { Organizations } from './';
+import Organizations from './';
 
 Organizations.friendlySlugs({
   slugFrom: 'name',
