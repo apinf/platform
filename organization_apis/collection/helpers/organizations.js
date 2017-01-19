@@ -14,7 +14,7 @@ Organizations.helpers({
     // Make sure organization has APIs
     if (organizationApiLinks) {
       //   Get an array of API IDs
-      const apiIds = _.map(organizationApiLinks, function (organizationApiLink) {
+      const apiIds = _.map(organizationApiLinks, (organizationApiLink) => {
         // Return API ID for current organizaiton-api link
         return organizationApiLink.apiId;
       });
