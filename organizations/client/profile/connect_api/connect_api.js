@@ -15,7 +15,7 @@ Template.connectApiToOrganizationModal.onCreated(function () {
   const organizationId = Template.currentData().organization._id;
 
   // Get data about apis without organization
-  Meteor.call('getUnlinkedApis', organizationId, (error, apis) => {
+  Meteor.call('getUnlinkedApis', (error, apis) => {
     // Set status data is ready
     instance.dataIsReady.set(true);
     // Create & return list of objects for dropdown list
