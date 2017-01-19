@@ -1,11 +1,12 @@
 // Meteor packages import
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 // APINF collections import
 import { Apis } from '/apis/collection';
-import { OrganizationApis } from '/organization_apis/collection';
+import OrganizationApis from '/organization_apis/collection';
+
+import _ from 'lodash';
 
 Meteor.methods({
   getUnlinkedApis () {
