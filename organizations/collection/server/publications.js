@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Organizations } from '../';
+import Organizations from '../';
 
 Meteor.publish('singleOrganization', (slug) => {
   // Make sure 'slug' is a String

@@ -7,7 +7,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import _ from 'lodash';
 
 // APINF collections import
-import { Organizations } from '/organizations/collection/';
+import Organizations from '/organizations/collection/';
 import OrganizationApis from '/organization_apis/collection/';
 
 Template.organizationProfile.onCreated(function () {

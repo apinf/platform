@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Organizations } from '/organizations/collection';
+import Organizations from '/organizations/collection';
 import OrganizationApis from '../../collection';
 
 Template.apiOrganization.onCreated(function () {

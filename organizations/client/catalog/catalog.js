@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { Organizations } from '/organizations/collection';
+import Organizations from '/organizations/collection';
 
 import $ from 'jquery';
 

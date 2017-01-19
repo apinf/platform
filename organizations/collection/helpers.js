@@ -4,7 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 import moment from 'moment';
 import _ from 'lodash';
 
-import { Organizations } from './';
+import Organizations from './';
 
 Organizations.helpers({
   currentUserCanEdit () {
