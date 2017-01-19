@@ -40,7 +40,7 @@ Meteor.methods({
       return Apis.find(queryParams).fetch();
     }
 
-    // Return empty result for anonymous user
-    return [];
+    // Return undefined result for anonymous user
+    return undefined;
   },
 });
