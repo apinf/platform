@@ -1,4 +1,4 @@
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
 
 OrganizationLogo.allow({
   insert () {

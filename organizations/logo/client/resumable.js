@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
 import Organizations from '/organizations/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
