@@ -9,7 +9,7 @@ import OrganizationApis from '/organization_apis/collection';
 import _ from 'lodash';
 
 Meteor.methods({
-  getUserUnlinkedApis () {
+  getCurrentUserUnlinkedApis () {
     // Get current User ID
     const userId = this.userId;
 
@@ -27,8 +27,10 @@ Meteor.methods({
         _id: { $nin: linkedApis },
       };
 
+      // Check if user has admin role
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-      // Is user no admin then
+
+      // Is user not admin then
       if (!userIsAdmin) {
         // Limit selection for current user
         queryParams.managerIds = userId;
