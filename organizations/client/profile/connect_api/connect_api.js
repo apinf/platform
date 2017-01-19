@@ -12,7 +12,7 @@ Template.connectApiToOrganizationModal.onCreated(function () {
   instance.dataIsReady = new ReactiveVar(false);
   instance.unlinkedApis = new ReactiveVar();
   // Get organization id
-  const organizationId = Template.currentData().organizationId;
+  const organizationId = Template.currentData().organization._id;
 
   // Get data about apis without organization
   Meteor.call('getUnlinkedApis', organizationId, (error, apis) => {
