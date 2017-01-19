@@ -13,7 +13,7 @@
         <div class="modal-body">
           {{# if dataIsReady }}
             {{# if unlinkedApis }}
-              {{> organizationApisForm organization=organization }}
+              {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
             {{ else }}
               <p>
                 {{_ 'connectApiToOrganizationModal_text_noOneApis' }}
