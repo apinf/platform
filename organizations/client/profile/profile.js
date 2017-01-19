@@ -89,7 +89,7 @@ Template.organizationProfile.events({
     // Check organization exist
     if (organization) {
       // Show modal with list of suggested apis and id of current organization
-      Modal.show('connectApiToOrganizationModal', { organization: organization });
+      Modal.show('connectApiToOrganizationModal', { organization });
     } else {
       // Otherwise show error
       const message = TAPi18n.__('organizationProfile_text_error');
