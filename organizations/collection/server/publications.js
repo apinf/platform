@@ -29,6 +29,8 @@ Meteor.publish('allOrganizationBasicDetails', () => {
 });
 
 // Publish collection for pagination
+// TODO: Determine if there is a better way to handle pagination
+// eslint-disable-next-line no-new
 new Meteor.Pagination(Organizations);
 
 Meteor.publish('userManagedOrganizations', function () {
