@@ -1,7 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'lodash';
 import { Organizations } from '/organizations/collection';
-import { OrganizationApis } from './';
+import OrganizationApis from './';
 
 
 OrganizationApis.schema = new SimpleSchema({

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Organizations } from '/organizations/collection';
-import { OrganizationApis } from '../';
+import OrganizationApis from '../';
 
 Meteor.publish('apiOrganizationBasicDetails', (apiId) => {
   // Make sure API ID is a String

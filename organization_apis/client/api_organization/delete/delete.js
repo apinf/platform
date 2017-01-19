@@ -2,7 +2,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { OrganizationApis } from '../../../collection';
+import OrganizationApis from '../../../collection';
 
 Template.deleteOrganizationApiConfirmation.events({
   'click #delete-api-organization': function (event, templateInstance) {

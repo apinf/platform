@@ -5,7 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import _ from 'lodash';
 
 // APINF collections import
-import { OrganizationApis } from '/organization_apis/collection';
+import OrganizationApis from '/organization_apis/collection';
 
 Template.connectApiToOrganizationModal.onCreated(function () {
   const instance = this;

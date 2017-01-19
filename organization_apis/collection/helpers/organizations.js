@@ -1,7 +1,7 @@
 import { Apis } from '/apis/collection';
 import { Organizations } from '/organizations/collection';
 import { _ } from 'lodash';
-import { OrganizationApis } from '../';
+import OrganizationApis from '../';
 
 Organizations.helpers({
   apis () {

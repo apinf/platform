@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { OrganizationApis } from '../../collection';
+import OrganizationApis from '../../collection';
 
 Template.organizationApisForm.helpers({
   formType () {
