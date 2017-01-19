@@ -383,7 +383,7 @@
   "organizationLogo_resumable_errorText": "File creation failed!",
   "organizationLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "organizationLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
-  "organizationManagers_list_title": "Managers",
+  "organizationManagersList_title": "Managers",
   "organizationManagerForm_successMessage": "New manager added.",
   "organizationManagerForm_emailNotRegistered_errorText": "Email address not currently registered.",
   "organizationProfile_bigText_apisCount": "APIs",
