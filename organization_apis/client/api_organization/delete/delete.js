@@ -1,5 +1,7 @@
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { OrganizationApis } from '../../../collection';
 
 Template.deleteOrganizationApiConfirmation.events({
@@ -14,7 +16,7 @@ Template.deleteOrganizationApiConfirmation.events({
     Modal.hide('deleteOrganizationApiConfirmation');
 
     // Get success message translation
-    const message = TAPi18n.__('deleteOrganizationApiConfirmation_success_message')
+    const message = TAPi18n.__('deleteOrganizationApiConfirmation_success_message');
 
     sAlert.success(message);
   },
