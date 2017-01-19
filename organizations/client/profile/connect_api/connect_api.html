@@ -12,6 +12,7 @@
         </div>
         <div class="modal-body">
           {{# if unlinkedApis }}
+            {{_ 'connectApiToOrganizationModal_helpText' }}
             {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
           {{ else }}
             <p>
