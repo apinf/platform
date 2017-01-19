@@ -51,7 +51,6 @@ apis/server/methods/apiBackends.js
 apis/server/methods/authorization.js
 apis/server/methods/bookmarks.js
 apis/server/methods/config.js
-apis/server/methods/delete.js
 backlog/client/form/autoform.js
 backlog/collection/index.js
 backlog/collection/permissions.js
