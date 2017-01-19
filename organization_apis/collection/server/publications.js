@@ -1,8 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Organizations } from '/organizations/collection';
-import { _ } from 'lodash';
-import { Apis } from '/apis/collection';
 import { OrganizationApis } from '../';
 
 Meteor.publish('apiOrganizationBasicDetails', (apiId) => {
