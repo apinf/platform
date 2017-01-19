@@ -1,9 +1,9 @@
 <template name="addOrganizationManagerForm">
   <h3>
-    {{_ "addOrganizationManagerFormTitle" }}
+    {{_ "addOrganizationManagerForm_title" }}
   </h3>
   <p>
-    {{_ "addOrganizationManagerFormDescription" }}
+    {{_ "addOrganizationManagerForm_description" }}
   </p>
   {{# autoForm
     schema=managerSchema
@@ -14,7 +14,7 @@
     {{> afQuickField name='organizationId' value=organizationId type="hidden" }}
 
     <button type="submit" class="btn btn-primary">
-      {{_ "addOrganizationManagerFormButton" }}
+      {{_ "addOrganizationManagerForm_button" }}
     </button>
   {{/ autoForm }}
 </template>
