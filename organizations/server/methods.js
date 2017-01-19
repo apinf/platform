@@ -9,7 +9,7 @@ import OrganizationApis from '/organization_apis/collection';
 import _ from 'lodash';
 
 Meteor.methods({
-  getUnlinkedApis () {
+  getUserUnlinkedApis () {
     // Get current User ID
     const userId = this.userId;
 

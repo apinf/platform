@@ -14,7 +14,7 @@ Template.connectApiToOrganizationModal.onCreated(function () {
   instance.unlinkedApis = new ReactiveVar();
 
   // Get data about apis without organization
-  Meteor.call('getUnlinkedApis', (error, apis) => {
+  Meteor.call('getUserUnlinkedApis', (error, apis) => {
     // Set status data is ready
     instance.dataIsReady.set(true);
 
