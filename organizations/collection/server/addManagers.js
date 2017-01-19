@@ -1,6 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
-import { Organizations } from '/organizations/collection';
+import Organizations from '../';
 
 Meteor.methods({
   addOrganizationManagerByEmail (organizationId, email) {
