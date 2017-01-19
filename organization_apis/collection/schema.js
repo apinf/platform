@@ -1,7 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'lodash';
 import { Organizations } from '/organizations/collection';
-import { Apis } from '/apis/collection';
 import { OrganizationApis } from './';
 
 
@@ -15,10 +14,12 @@ OrganizationApis.schema = new SimpleSchema({
         const organizations = Organizations.find().fetch();
 
         // Create array of options with label/value attributes
-        const organizationOptions = _.map(organizations, (organization) => ({
-          label: organization.name,
-          value: organization._id,
-        }));
+        const organizationOptions = _.map(organizations, (organization) => {
+          return {
+            label: organization.name,
+            value: organization._id,
+          };
+        });
 
         return organizationOptions;
       },
