@@ -669,11 +669,11 @@
           }
       },
       "organizationApis": {
-        "apiIds": {
-          "label": "API(s)"
+        "apiId": {
+          "label": "Select API"
         },
         "organizationId": {
-          "label": "Organization"
+          "label": "Select Organization"
         }
       }
   },
