@@ -2,20 +2,17 @@
   {{# if Template.subscriptionsReady }}
     {{> organizationProfileHeader organization=organization }}
     <div class="container">
-      <heading>
-        {{# if organization.currentUserCanEdit }}
-          <button type="button"
-            class="btn btn-default pull-right"
-            id="connect-api"
-            data-toogle="tooltip">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            {{_ 'organizationProfile_buttonText_connectApi' }}
-          </button>
-        {{/ if }}
-      </heading>
-
       <div class="tab-content">
         <div id="organization-apis" class="tab-pane fade in active">
+          {{# if organization.currentUserCanEdit }}
+            <button type="button"
+              class="btn btn-default pull-right"
+              id="connect-api"
+              data-toogle="tooltip">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              {{_ 'organizationProfile_buttonText_connectApi' }}
+            </button>
+          {{/ if }}
           {{# if organization.apis }}
             <h3>
               {{_ 'organizationProfile_bigText_apisCount'  }}
