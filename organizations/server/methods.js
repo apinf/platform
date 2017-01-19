@@ -8,10 +8,8 @@ import { Apis } from '/apis/collection';
 import { OrganizationApis } from '/organization_apis/collection';
 
 Meteor.methods({
-  getUnlinkedApis (organizationId) {
-    // Check arguments
-    check(organizationId, String);
-
+  getUnlinkedApis () {
+    // Get current User ID
     const userId = this.userId;
 
     // Find result for user with role
