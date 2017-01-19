@@ -41,9 +41,4 @@ Template.connectApiToOrganizationModal.helpers({
     // Return list of apis without organization
     return instance.unlinkedApis.get();
   },
-  dataIsReady () {
-    const instance = Template.instance();
-    // Get status of data fetch
-    return instance.dataIsReady.get();
-  },
 });

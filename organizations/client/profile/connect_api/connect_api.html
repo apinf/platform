@@ -11,19 +11,15 @@
           </h1>
         </div>
         <div class="modal-body">
-          {{# if dataIsReady }}
-            {{# if unlinkedApis }}
-              {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
-            {{ else }}
-              <p>
-                {{_ 'connectApiToOrganizationModal_text_noOneApis' }}
-              </p>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
-                {{_ 'connectApiToOrganizationModal_buttonText_close' }}
-              </button>
-            {{/ if }}
+          {{# if unlinkedApis }}
+            {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
           {{ else }}
-            {{> spinner }}
+            <p>
+              {{_ 'connectApiToOrganizationModal_text_noOneApis' }}
+            </p>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              {{_ 'connectApiToOrganizationModal_buttonText_close' }}
+            </button>
           {{/ if }}
         </div>
       </div>
