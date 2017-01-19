@@ -1,17 +1,16 @@
 // Meteor packages import
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 // APINF collections import
 import { Apis } from '/apis/collection';
-import { OrganizationApis } from '/organization_apis/collection';
+import OrganizationApis from '/organization_apis/collection';
+
+import _ from 'lodash';
 
 Meteor.methods({
-  getUnlinkedApis (organizationId) {
-    // Check arguments
-    check(organizationId, String);
-
+  getUnlinkedApis () {
+    // Get current User ID
     const userId = this.userId;
 
     // Find result for user with role

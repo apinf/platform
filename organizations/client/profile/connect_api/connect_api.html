@@ -13,25 +13,7 @@
         <div class="modal-body">
           {{# if dataIsReady }}
             {{# if unlinkedApis }}
-              {{# autoForm id="connectionApiForm" type="insert" collection=organizationApisCollection }}
-                <div class="form-group">
-                  <label>
-                    {{_ 'connectApiToOrganizationModal_labelText_selectApi' }}
-                  </label>
-                  <p class="help-text">
-                    {{_ 'connectApiToOrganizationModal_helpText' }}
-                  </p>
-                  <!-- Hide Organization ID field and autovalue -->
-                  {{> afFieldInput name="organizationId" value=organizationId type="hidden" }}
-                  {{> afFieldInput name="apiId" class="form-control" options=unlinkedApis }}
-                </div>
-                <button type="submit" class="btn btn-primary" id="connect-api-to-organization">
-                  {{_ 'connectApiToOrganizationModal_buttonText_addApi' }}
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                  {{_ 'connectApiToOrganizationModal_buttonText_cancel' }}
-                </button>
-              {{/ autoForm }}
+              {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
             {{ else }}
               <p>
                 {{_ 'connectApiToOrganizationModal_text_noOneApis' }}

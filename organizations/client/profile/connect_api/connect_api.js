@@ -2,30 +2,32 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import _ from 'lodash';
 
 // APINF collections import
-import { OrganizationApis } from '/organization_apis/collection';
+import OrganizationApis from '/organization_apis/collection';
 
 Template.connectApiToOrganizationModal.onCreated(function () {
   const instance = this;
   // Set status data is not ready
   instance.dataIsReady = new ReactiveVar(false);
   instance.unlinkedApis = new ReactiveVar();
-  // Get organization id
-  const organizationId = Template.currentData().organizationId;
 
   // Get data about apis without organization
-  Meteor.call('getUnlinkedApis', organizationId, (error, apis) => {
+  Meteor.call('getUnlinkedApis', (error, apis) => {
     // Set status data is ready
     instance.dataIsReady.set(true);
-    // Create & return list of objects for dropdown list
-    instance.unlinkedApis.set(_.map(apis, (api) => {
+
+    // Create array of unlinked API options for API select
+    const unlinkedApiOptions = _.map(apis, (api) => {
       return {
         label: api.name,
         value: api._id,
       };
-    })
-    );
+    });
+
+    // Set reactive variable to contain unlinked API options
+    instance.unlinkedApis.set(unlinkedApiOptions);
   });
 });
 

@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.organizationProfileHeader.onRendered(function () {
   // Assign resumable browse to element
@@ -10,7 +11,7 @@ Template.organizationProfileHeader.events({
   'click #edit-organization': function (event, templateInstance) {
     // Get organization from template instance
     const organization = templateInstance.data.organization;
-    
+
     // Show organization form modal
     Modal.show('organizationForm', { organization, formType: 'update' });
   },

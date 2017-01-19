@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
-import { OrganizationLogo } from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/organizations/logo/collection/collection';
 
 Template.viewOrganizationLogo.onCreated(function () {
   const instance = this;
@@ -26,8 +26,17 @@ Template.viewOrganizationLogo.helpers({
 
       // Check if organization logo file is available
       if (organizationLogoFile) {
+        // Get absolute URL
+        const absoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+        // Get logo base URL
+        const logoBaseUrl = OrganizationLogo.baseURL;
+
+        // Get logo MD5
+        const logoMd5 = organizationLogoFile.md5;
+
         // Get organization logo file URL
-        return `${Meteor.absoluteUrl().slice(0, -1)}${OrganizationLogo.baseURL}/md5/${organizationLogoFile.md5}`;
+        return `${absoluteUrl}${logoBaseUrl}/md5/${logoMd5}`;
       }
     }
     // Return placeholder image

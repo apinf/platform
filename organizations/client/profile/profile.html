@@ -2,7 +2,7 @@
   {{# if Template.subscriptionsReady }}
     {{> organizationProfileHeader organization=organization }}
     <div class="container">
-      <div class="pull-right">
+      <heading>
         {{# if organization.currentUserCanEdit }}
           <button type="button" class="btn btn-default pull-right" id="connect-api"
                   data-toogle="tooltip" >
@@ -10,7 +10,7 @@
             {{_ 'organizationProfile_buttonText_connectApi' }}
           </button>
         {{/ if }}
-      </div>
+
       {{# if organization.apis }}
         <h3>
           {{_ 'organizationProfile_bigText_apisCount'  }}
@@ -19,6 +19,8 @@
           </small>
         </h3>
       {{/ if }}
+      </heading>
+
       {{> apiCatalogGrid apis=organization.apis }}
     </div>
   {{/if}}

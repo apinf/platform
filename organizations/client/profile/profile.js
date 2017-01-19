@@ -7,8 +7,8 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import _ from 'lodash';
 
 // APINF collections import
-import { Organizations } from '/organizations/collection/';
-import { OrganizationApis } from '/organization_apis/collection/';
+import Organizations from '/organizations/collection/';
+import OrganizationApis from '/organization_apis/collection/';
 
 Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
@@ -89,7 +89,7 @@ Template.organizationProfile.events({
     // Check organization exist
     if (organization) {
       // Show modal with list of suggested apis and id of current organization
-      Modal.show('connectApiToOrganizationModal', { organizationId: organization._id });
+      Modal.show('connectApiToOrganizationModal', { organization });
     } else {
       // Otherwise show error
       const message = TAPi18n.__('organizationProfile_text_error');

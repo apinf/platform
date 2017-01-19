@@ -1,6 +1,7 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 AutoForm.hooks({
   organizationApisForm: {
@@ -14,6 +15,9 @@ AutoForm.hooks({
 
       // Show success message to user
       sAlert.success(message);
+
+      // Dismiss connect API modal, if connecting API to Organization via modal
+      Modal.hide('connectApiToOrganizationModal');
     },
   },
 });

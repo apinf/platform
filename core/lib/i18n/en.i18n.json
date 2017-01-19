@@ -178,13 +178,7 @@
   "changeSelectedProxy_title": "Change API Proxy",
   "changeSelectedProxy_textCaution": "Caution!",
   "changeSelectedProxy_textConfirm": "Changing the proxy will change the call URL and will potentially break API calls from applications. Please inform your API consumers about this change and suggest them to check whether or not they need to obtain new API key from the newly selected proxy",
-  "connectionApiForm_successText": "Your API has been connected to the Organization. Now you can view your API in the Organization profile.",
-  "connectionApiForm_errorText": "You don't select any API for connection.",
-  "connectApiToOrganizationModal_helpText": "You can add from APIs that you manage to be connected to the organization. Afterwards, the connected API will appear in the organization profile.",
-  "connectApiToOrganizationModal_buttonText_addApi": "Add API",
-  "connectApiToOrganizationModal_buttonText_cancel": "Cancel",
   "connectApiToOrganizationModal_buttonText_close": "Close",
-  "connectApiToOrganizationModal_labelText_selectApi": "Select an API",
   "connectApiToOrganizationModal_text_noOneApis": "There are no free APIs that you manage can be connected to current Organization.",
   "connectApiToOrganizationModal_modalTitle": "Connect API",
   "contactForm_email_label": "E-mail address",
@@ -361,7 +355,7 @@
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Title": "Oops! Page not found.",
   "organizationApis_connectButton": "Connect",
-  "organizationApisForm_successText": "Your API has been connected to the organization.",
+  "organizationApisForm_successText": "The API and Organization are now connected.",
   "organizationCatalog_Title": "Organization catalog",
   "organizationCatalog_buttonText_addOrganization": "Add Organization",
   "organizationCatalog_toolbar_filterOptions_myOrganizations": "My organizations",
@@ -675,11 +669,11 @@
           }
       },
       "organizationApis": {
-        "apiIds": {
-          "label": "API(s)"
+        "apiId": {
+          "label": "Select API"
         },
         "organizationId": {
-          "label": "Organization"
+          "label": "Select Organization"
         }
       }
   },

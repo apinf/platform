@@ -1,6 +1,6 @@
 import { Apis } from '/apis/collection';
-import { Organizations } from '/organizations/collection';
-import { OrganizationApis } from '../';
+import Organizations from '/organizations/collection';
+import OrganizationApis from '../';
 
 Apis.helpers({
   organization () {
