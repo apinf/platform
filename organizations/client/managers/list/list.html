@@ -2,14 +2,16 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
-        {{_ "organizationManagersListTitle" }}
+        {{_ "organizationManagersList_title" }}
       </h3>
     </div>
     <div class="panel-body">
-      {{> addOrganizationManagerForm organization = organization }}
+      {{> addOrganizationManagerForm organization=organization }}
       <ul class="list-group">
         {{# each organizationManagers }}
-        <li class="list-group-item">{{ username }} ({{ email }})
+        <li class="list-group-item">
+          {{ username }}
+          ({{ email }})
         </li>
         {{/ each }}
       </ul>
