@@ -355,7 +355,7 @@
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Title": "Oops! Page not found.",
   "organizationApis_connectButton": "Connect",
-  "organizationApisForm_successText": "Your API has been connected to the organization.",
+  "organizationApisForm_successText": "The API and Organization are now connected.",
   "organizationCatalog_Title": "Organization catalog",
   "organizationCatalog_buttonText_addOrganization": "Add Organization",
   "organizationCatalog_toolbar_filterOptions_myOrganizations": "My organizations",
