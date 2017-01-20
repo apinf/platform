@@ -5,7 +5,6 @@ import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 import { Apis } from '/apis/collection';
 import { Organizations } from '/organizations/collection';
-//import  users  from '/users/collection';
 
 Meteor.methods({
   sendContactFormEmail (doc) {
