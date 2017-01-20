@@ -1,8 +1,14 @@
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
+
 import { Apis } from '/apis/collection';
 
 Meteor.methods({
   checkIfApiExists (apiId) {
-    // Check for API
+    // Make sure apiId is a string
+    check(apiId, String);
+
+    // Look for API
     const api = Apis.findOne(apiId);
 
     // Return true if API exists, false if undefined

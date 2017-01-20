@@ -1,8 +1,7 @@
-// Meteor imports
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-// Collection imports
 import { Apis } from '/apis/collection';
 import { ApiBacklogItems } from '/backlog/collection';
 import { ApiMetadata } from '/metadata/collection';
@@ -14,6 +13,9 @@ import { ProxyBackends } from '/proxy_backends/collection';
 Meteor.methods({
   // Remove API backend and related items
   removeApi (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
     // Remove API doc
     Meteor.call('removeApiDoc', apiId);
 
@@ -21,12 +23,12 @@ Meteor.methods({
     Meteor.call('stopCron', apiId);
 
     // Get monitoring Settings
-    const monitoring =  MonitoringSettings.findOne({ apiId });
+    const monitoring = MonitoringSettings.findOne({ apiId });
 
     // Check if API has monitoring
     if (monitoring) {
       // Remove Monitoring Settings and Monitoring Data
-      Meteor.call('removeMonitoring', apiId)
+      Meteor.call('removeMonitoring', apiId);
     }
 
     // Remove backlog items
@@ -52,20 +54,29 @@ Meteor.methods({
   },
   // Remove API documentation file
   removeApiDoc (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
     // Get API object
     const api = Apis.findOne(apiId);
+
     // Get documentationFileId
     const documentationFileId = api.documentationFileId;
+
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+
     // Remove documentation object
     DocumentationFiles.remove(objectId);
   },
   removeMonitoring (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
     // Remove monitoring data collection
     MonitoringData.remove({ apiId });
 
     // Remove monitoring settings collection
-    MonitoringSettings.remove({ apiId});
-  }
+    MonitoringSettings.remove({ apiId });
+  },
 });

@@ -1,4 +1,7 @@
-Meteor.startup(function () {
+import { Meteor } from 'meteor/meteor';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
+
+Meteor.startup(() => {
   // Make sure all API backends have bookmark counts
   Meteor.call('setAllApiBackendBookmarkCounts');
 
@@ -7,5 +10,5 @@ Meteor.startup(function () {
 
   // Restart all cron worker
   Meteor.call('restartCron');
-  SyncedCron.start()
+  SyncedCron.start();
 });

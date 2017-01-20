@@ -41,7 +41,7 @@
     "eslint-plugin-meteor": "^4.0.0"
   },
   "scripts": {
-    "lint": "eslint about api_catalog api_keys",
+    "lint": "eslint .",
     "test": "mocha ./.test/"
   },
   "repository": {
