@@ -44,15 +44,9 @@ AutoForm.hooks({
             return false;
           }
 
-          Meteor.call('uniqueFrontendPrefix', proxyBackend, (e, unique) => {
+          Meteor.call('uniqueFrontendPrefix', proxyBackend, (error, unique) => {
             // Check if frontend prefix is unique
-            if (!unique) {
-              // Alert the user of frontend prefix unique issue
-              const errorMessage = TAPi18n.__('proxyBackendForm_frontendPrefixNotUnique');
-              sAlert.error(errorMessage);
-              // Cancel form
-              form.result(false);
-            } else {
+            if (unique) {
               // Create API backend on API Umbrella
               Meteor.call('createApiBackendOnApiUmbrella',
                 proxyBackend.apiUmbrella, proxyBackend.proxyId,
@@ -72,31 +66,34 @@ AutoForm.hooks({
                   }
 
                   // If success, attach API Umbrella backend ID to API
-                  if (
-                    response.result &&
-                    response.result.data &&
+                  if (response.result && response.result.data &&
                     response.result.data.api) {
-                      // Get the API Umbrella ID for newly created backend
+                    // Get the API Umbrella ID for newly created backend
                     const umbrellaBackendId = response.result.data.api.id;
 
-                      // Attach the API Umbrella backend ID to backend document
+                    // Attach the API Umbrella backend ID to backend document
                     proxyBackend.apiUmbrella.id = umbrellaBackendId;
 
-                      // Publish the API Backend on API Umbrella
-                    Meteor.call(
-                        'publishApiBackendOnApiUmbrella',
-                        umbrellaBackendId, proxyBackend.proxyId,
-                        (error, result) => {
-                          if (error) {
-                            Meteor.throw(500, error);
-                          } else {
-                            // Insert the Proxy Backend document, asynchronous
-                            form.result(proxyBackend);
-                          }
+                    // Publish the API Backend on API Umbrella
+                    Meteor.call('publishApiBackendOnApiUmbrella',
+                      umbrellaBackendId, proxyBackend.proxyId,
+                      (error) => {
+                        if (error) {
+                          Meteor.throw(500, error);
+                        } else {
+                          // Insert the Proxy Backend document, asynchronous
+                          form.result(proxyBackend);
                         }
-                      );
+                      }
+                    );
                   }
                 });
+            } else {
+              // Alert the user of frontend prefix unique issue
+              const errorMessage = TAPi18n.__('proxyBackendForm_frontendPrefixNotUnique');
+              sAlert.error(errorMessage);
+              // Cancel form
+              form.result(false);
             }
           });
         }
@@ -209,7 +206,7 @@ AutoForm.hooks({
         }
       },
     },
-    onSuccess (formType, result) {
+    onSuccess (formType) {
       if (formType === 'update') {
         // Get the Proxy Backend ID
         const proxyBackendId = this.docId;
@@ -235,9 +232,9 @@ AutoForm.hooks({
               Meteor.call(
                 'publishApiBackendOnApiUmbrella',
                 apiUmbrellaBackend.id, proxyBackend.proxyId,
-                (error, result) => {
-                  if (error) {
-                    Meteor.throw(500, error);
+                (publishError) => {
+                  if (publishError) {
+                    Meteor.throw(500, publishError);
                   } else {
                     // Get update success message translation
                     const message = TAPi18n.__('proxyBackendForm_update_successMessage');
