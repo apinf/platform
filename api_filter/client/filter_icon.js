@@ -11,4 +11,4 @@ Template.apisFilterIcon.events({
     // Delete query parameter
     FlowRouter.setQueryParams({ lifecycle: null });
   },
-})
+});

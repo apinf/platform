@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+import $ from 'jquery';
+
 Template.apisFilterForm.helpers({
   lifeCycleFilter () {
     return [
@@ -16,6 +18,7 @@ Template.apisFilterForm.helpers({
 Template.apisFilterForm.events({
   'change [name=lifecycle]': (event, templateInstance) => {
     // Get & save value of selected item
+    /* eslint-disable no-param-reassign*/
     templateInstance.lifecycle = event.currentTarget.value;
   },
   'click #filter-apis': (event, templateInstance) => {
