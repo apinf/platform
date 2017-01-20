@@ -1,4 +1,4 @@
-
+import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.apisFilterForm.helpers({
@@ -9,16 +9,14 @@ Template.apisFilterForm.helpers({
       'design',
       'production',
       'testing',
-    ]
+    ];
   },
-})
+});
+
 Template.apisFilterForm.events({
   'change [name=lifecycle]': (event, templateInstance) => {
     // Get & save value of selected item
     templateInstance.lifecycle = event.currentTarget.value;
-    if (event.currentTarget.value) {
-
-    }
   },
   'click #filter-apis': (event, templateInstance) => {
     if (templateInstance.lifecycle) {
@@ -26,15 +24,7 @@ Template.apisFilterForm.events({
       // Save selected filter on query params
       FlowRouter.setQueryParams({ lifecycle: tag });
     }
-
+    // Hide filter form
     $('.filter-popup').toggleClass('filter-popup-visible');
-
   },
-  'click [type=reset]': (event, templateInstance) => {
-    // Delete tag from
-    // templateInstance.lifecycle = undefined;
-
-    FlowRouter.setQueryParams({ lifecycle: null });
-  },
-
 });
