@@ -11,7 +11,7 @@
     transition: all .3s;
 }
 
-.filter-popup-showed {
+.filter-popup-visible {
     visibility: visible;
     opacity: 1;
 }

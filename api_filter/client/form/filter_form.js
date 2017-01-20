@@ -27,7 +27,7 @@ Template.apisFilterForm.events({
       FlowRouter.setQueryParams({ lifecycle: tag });
     }
 
-    $('.filter-popup').toggleClass('filter-popup-showed');
+    $('.filter-popup').toggleClass('filter-popup-visible');
 
   },
   'click [type=reset]': (event, templateInstance) => {
