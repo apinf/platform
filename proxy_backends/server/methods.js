@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 
 import { ProxyBackends } from '/proxy_backends/collection';
 
-
 Meteor.methods({
   deleteProxyBackend (proxyBackend, deleteFromMongoDB = true) {
     // Get umbrellaBackendId
@@ -35,9 +34,15 @@ Meteor.methods({
     );
   },
   uniqueFrontendPrefix (proxyBackend) {
-    const p = ProxyBackends.findOne({ 'apiUmbrella.url_matches.frontend_prefix': proxyBackend.apiUmbrella.url_matches[0].frontend_prefix });
+    // Get frontend prefix
+    const frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+    // Get document with specified forntend_prefix
+    const documentExist = ProxyBackends.findOne({
+      'apiUmbrella.url_matches.frontend_prefix': frontendPrefix,
+    });
+
     // Return boolean based on uniqueness
-    if (p) {
+    if (documentExist) {
       return false;
     }
     return true;
