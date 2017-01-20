@@ -1,112 +1,87 @@
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
+
 import { Apis } from '/apis/collection';
-
-Meteor.methods({
-  'importApiConfigs': function(jsonObj){
-
-    // initial status obj
-    var status = {
-      isSuccessful: false,
-      message: ""
-    };
-
-    // checks if file was passed
-    if (jsonObj) {
-
-      // parses json object
-      var parsedJson = apiIsValid(jsonObj);
-
-      // checks if valid
-      if (parsedJson.isValid) {
-
-        // additional error handling
-        try{
-
-          var newApiBackend = Apis.insert(jsonObj);
-
-          status.isSuccessful = true;
-          status.message      = "API config has been successfully imported.";
-
-          // gets new backend's id and passes it to client to be able to redirect then
-          status.newBackendId  = newApiBackend;
-
-        }catch(e){
-
-          status.message = JSON.stringify(e);
-
-        }
-
-      }else{
-        // if validation check failed - passing message returned by validation function
-        status.message = parsedJson.message;
-      }
-
-      return status;
-
-    }else{
-
-      status.message = "Config is not found.";
-
-      return status;
-    }
-  }
-});
 
 // validation function
 function apiIsValid (jsonObj) {
-
   // initial status obj
-  var status = {
-    isValid : false,
-    message : ""
+  const status = {
+    isValid: false,
+    message: '',
   };
 
   // iterates through object keys and checks if required fields are provided
   // otherwise returns a message with missing field
 
-  if (jsonObj.hasOwnProperty("_id")){
-
-    status.message += "'_id' field is not allowed to import."
-
-  }else{
-
-    if (jsonObj.hasOwnProperty("name")){
-
-      if (jsonObj.hasOwnProperty("backend_host")){
-
-        if (jsonObj.hasOwnProperty("backend_protocol")){
-
-          if (jsonObj.hasOwnProperty("frontend_host")){
-
-            if (jsonObj.hasOwnProperty("balance_algorithm")){
-
+  if (Object.prototype.hasOwnProperty.call(jsonObj, '_id')) {
+    status.message += "'_id' field is not allowed to import.";
+  } else {
+    if (Object.prototype.hasOwnProperty.call(jsonObj, 'name')) {
+      if (Object.prototype.hasOwnProperty.call(jsonObj, 'backend_host')) {
+        if (Object.prototype.hasOwnProperty.call(jsonObj, 'backend_protocol')) {
+          if (Object.prototype.hasOwnProperty.call(jsonObj, 'frontend_host')) {
+            if (Object.prototype.hasOwnProperty.call(jsonObj, 'balance_algorithm')) {
               status.isValid = true;
-
-              return status;
-
-            }else{
+            } else {
               status.message += "'balance_algorithm'";
             }
-
-          }else{
+          } else {
             status.message += "'frontend_host'";
           }
-
-        }else{
+        } else {
           status.message += "'backend_protocol'";
         }
-
-      }else{
+      } else {
         status.message += "'backend_host'";
       }
-
-    }else{
+    } else {
       status.message += "'name'";
     }
-
-    status.message += " field is required.";
-
+    status.message += ' field is required.';
   }
-
 
   return status;
 }
+
+Meteor.methods({
+  importApiConfigs (jsonObj) {
+    // Check if jsonObj is an Object
+    check(jsonObj, Object);
+
+    // initial status obj
+    const status = {
+      isSuccessful: false,
+      message: '',
+    };
+
+    // checks if file was passed
+    if (jsonObj) {
+      // parses json object
+      const parsedJson = apiIsValid(jsonObj);
+
+      // checks if valid
+      if (parsedJson.isValid) {
+        // additional error handling
+        try {
+          const newApiBackend = Apis.insert(jsonObj);
+
+          status.isSuccessful = true;
+          status.message = 'API config has been successfully imported.';
+
+          // gets new backend's id and passes it to client to be able to redirect then
+          status.newBackendId = newApiBackend;
+        } catch (e) {
+          status.message = JSON.stringify(e);
+        }
+      } else {
+        // if validation check failed - passing message returned by validation function
+        status.message = parsedJson.message;
+      }
+    } else {
+      status.message = 'Config is not found.';
+    }
+    return status;
+  },
+});
+
