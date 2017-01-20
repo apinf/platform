@@ -80,3 +80,4 @@ nimble:restivus
 apinf:restivus-swagger
 kurounin:pagination-blaze
 kurounin:pagination@=1.0.15
+froatsnook:valid-email
