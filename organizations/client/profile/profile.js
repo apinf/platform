@@ -71,7 +71,6 @@ Template.organizationProfile.helpers({
     // Save selected option in reactive var
     instance.selectedFilterOption.set(lifecycleParameter);
 
-
     if (lifecycleParameter) {
       // Save parameter in database query options
       instance.dbQuery.lifecycleStatus = lifecycleParameter;
