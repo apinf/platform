@@ -1,0 +1,27 @@
+<template name="apisFilterForm">
+  <div class="panel panel-default filter-popup">
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="lifecycle">
+          {{_ 'apisFilterForm_labelText_lifecycle' }}
+        </label>
+        <select class="form-control text-capitalize" name="lifecycle">
+          <option value="" class="text-capitalize">
+            {{_ 'apisFilterForm_optionText_selectOne' }}
+          </option>
+          {{# each status in lifeCycleFilter }}
+            <option class="text-capitalize" value="{{ status }}">
+              {{ status }}
+            </option>
+          {{/ each }}
+        </select>
+      </div>
+      <button type="button" class="btn btn-primary" id="filter-apis">
+        {{_ 'apisFilterForm_buttonText_filter' }}
+      </button>
+      <button type="reset" class="btn btn-default">
+        {{_ 'apisFilterForm_buttonText_clear' }}
+      </button>
+    </div>
+  </div>
+</template>
