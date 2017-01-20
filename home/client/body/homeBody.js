@@ -5,6 +5,9 @@ import { Template } from 'meteor/templating';
 // Import apinf collections
 import CoverPhoto from '/branding/cover_photo/collection';
 import { Settings } from '/settings/collection';
+import { Apis } from '/apis/collection';
+import { Organizations } from '/organizations/collection';
+
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance
@@ -14,15 +17,24 @@ Template.homeBody.onCreated(function () {
   instance.subscribe('singleSetting', 'mail.enabled');
   // Subscribe to CoverPhoto collection
   instance.subscribe('coverPhoto');
+
+  instance.subscribe('apis_Count');
+  //instance.subscribe('organizations_Count');
+
 });
 
 Template.homeBody.rendered = function () {
   $('.contact-us-link').click(function () {
     document.getElementById('contact-us').scrollIntoView();
   });
-};
 
 Template.homeBody.helpers({
+  getapiscount(){
+    return Counts.get('apiscounts');
+  },
+//  getorganizationscount(){
+  //  return Counts.get('organizationscounts');
+  //},
   contactFormEnabled () {
     const settings = Settings.findOne();
 

@@ -3,6 +3,8 @@ import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
+import { Apis } from '/apis/collection';
+import { Organizations } from '/organizations/collection';
 
 Meteor.methods({
   sendContactFormEmail (doc) {
@@ -33,3 +35,11 @@ ${doc.message}`;
     }
   },
 });
+
+Meteor.publish('apis_Count', function() {
+ Counts.publish(this, 'apiscounts', Apis.find());
+ });
+
+/* Meteor.publish('organizations_Count', function() {
+  Counts.publish(this, 'organizationscounts', Organizations.find());
+});*/
