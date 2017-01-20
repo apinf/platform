@@ -17,24 +17,27 @@ Template.homeBody.onCreated(function () {
   instance.subscribe('singleSetting', 'mail.enabled');
   // Subscribe to CoverPhoto collection
   instance.subscribe('coverPhoto');
-
-  instance.subscribe('apis_Count');
-  //instance.subscribe('organizations_Count');
-
+    instance.subscribe('apis_Count');
+    instance.subscribe('organizations_Count');
+    instance.subscribe('users_Count');
 });
 
 Template.homeBody.rendered = function () {
   $('.contact-us-link').click(function () {
     document.getElementById('contact-us').scrollIntoView();
   });
+};
 
 Template.homeBody.helpers({
   getapiscount(){
-    return Counts.get('apiscounts');
-  },
-//  getorganizationscount(){
-  //  return Counts.get('organizationscounts');
-  //},
+   return Counts.get('apiscounts');
+ },
+ getorganizationscount(){
+  return Counts.get('organizationscounts');
+},
+getuserscount(){
+ return Counts.get('userscounts');
+},
   contactFormEnabled () {
     const settings = Settings.findOne();
 

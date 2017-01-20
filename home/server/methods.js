@@ -5,6 +5,7 @@ import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 import { Apis } from '/apis/collection';
 import { Organizations } from '/organizations/collection';
+//import  users  from '/users/collection';
 
 Meteor.methods({
   sendContactFormEmail (doc) {
@@ -40,6 +41,10 @@ Meteor.publish('apis_Count', function() {
  Counts.publish(this, 'apiscounts', Apis.find());
  });
 
-/* Meteor.publish('organizations_Count', function() {
+ Meteor.publish('organizations_Count', function() {
   Counts.publish(this, 'organizationscounts', Organizations.find());
-});*/
+});
+
+Meteor.publish('users_Count', function() {
+ Counts.publish(this, 'userscounts', Meteor.users.find() );
+ });
