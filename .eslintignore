@@ -47,7 +47,6 @@ apis/logo/upload/client/resumable.js
 apis/logo/upload/client/upload.js
 apis/logo/upload/client/uploadButton/uploadButton.js
 apis/logo/view/client/view.js
-apis/server/methods/apiBackends.js
 backlog/client/form/autoform.js
 backlog/collection/index.js
 backlog/collection/permissions.js
