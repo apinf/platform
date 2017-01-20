@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import moment from 'moment';
-import 'moment/locale/fi';
+import 'moment/min/locales.min';
 
 Template.backlogItem.helpers({
   relativeTimeStamp (givenTimeStamp) {

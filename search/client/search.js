@@ -7,7 +7,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 // npm import
 import moment from 'moment';
-import 'moment/locale/fi';
+import 'moment/min/locales.min';
 import _ from 'lodash';
 
 Template.search.onCreated(function () {
