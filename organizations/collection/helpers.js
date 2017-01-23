@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 
 import moment from 'moment';
+import 'moment/min/locales.min';
 import _ from 'lodash';
 
 import Organizations from './';
@@ -26,7 +27,9 @@ Organizations.helpers({
     return false;
   },
   relativeCreatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Convert createdAt time to format "time ago"
-    return moment(this.createdAt).fromNow();
+    return moment(this.createdAt).locale(language).fromNow();
   },
 });

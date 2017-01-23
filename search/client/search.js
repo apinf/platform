@@ -7,6 +7,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Apis } from '/apis/collection';
 // npm import
 import moment from 'moment';
+import 'moment/min/locales.min';
 import _ from 'lodash';
 
 Template.search.onCreated(function () {
@@ -92,13 +93,6 @@ Template.search.helpers({
     // Init search results variable
     const searchResults = instance.getSearchResults();
 
-    if (searchResults !== undefined) {
-      // Iterate through all documents
-      _.each(searchResults, (result) => {
-        // Return to user human-readable timestamp
-        result.relative_created_at = moment(result.created_at).fromNow();
-      });
-    }
     return searchResults;
   },
   searchResultsCount () {
