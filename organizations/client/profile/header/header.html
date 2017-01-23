@@ -59,14 +59,15 @@
               {{_ "organizationProfileHeader_tabs_apis" }}
             </a>
           </li>
-
-          <!-- Settings -->
-          <li id="organization-settings-tab">
-            <a href="#organization-settings" data-toggle="tab">
-              <i class="fa fa-file-text"></i>
-              {{_ "organizationProfileHeader_tabs_settings" }}
-            </a>
-          </li>
+          {{# if organization.currentUserCanEdit }}
+            <!-- Settings -->
+            <li id="organization-settings-tab">
+              <a href="#organization-settings" data-toggle="tab">
+                <i class="fa fa-file-text"></i>
+                {{_ "organizationProfileHeader_tabs_settings" }}
+              </a>
+            </li>
+          {{/ if }}
         </ul>
       </div>
     </div>
