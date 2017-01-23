@@ -26,6 +26,9 @@ Template.apisFilterForm.events({
       const tag = templateInstance.lifecycle;
       // Save selected filter on query params
       FlowRouter.setQueryParams({ lifecycle: tag });
+    } else {
+      // Delete query params
+      FlowRouter.setQueryParams({ lifecycle: null });
     }
     // Hide filter form
     $('.filter-popup').toggleClass('filter-popup-visible');
