@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Organizations } from './';
+import Organizations from './';
 
 Organizations.schema = new SimpleSchema({
   contact: {
@@ -43,7 +43,7 @@ Organizations.schema = new SimpleSchema({
 
       // Don't allow users to provide a value
       // Note, this may need to change when we allow adding other managers
-      this.unset();
+      return this.unset();
     },
   },
   name: {
@@ -69,7 +69,7 @@ Organizations.schema = new SimpleSchema({
         return Meteor.userId();
       }
 
-      this.unset();
+      return this.unset();
     },
     denyUpdate: true,
   },
@@ -83,7 +83,7 @@ Organizations.schema = new SimpleSchema({
         return { $setOnInsert: new Date() };
       }
       // Prevent user from supplying their own value
-      this.unset();
+      return this.unset();
     },
   },
   updatedAt: {
@@ -94,7 +94,7 @@ Organizations.schema = new SimpleSchema({
         return new Date();
       }
 
-      this.unset();
+      return this.unset();
     },
   },
 });

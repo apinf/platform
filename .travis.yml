@@ -1,5 +1,7 @@
 sudo: false
 language: node_js
+node_js:
+  - "node"
 
 branches:
   only:
@@ -8,7 +10,8 @@ branches:
 services:
   - docker
 
+before_script:
+  - npm run-script lint
+
 script:
-  - docker build -t apinf/platform:apika_develop .
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push apinf/platform:apika_develop
+  - ./scripts/docker_build.sh

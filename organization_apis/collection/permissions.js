@@ -1,4 +1,4 @@
-import { OrganizationApis } from './';
+import OrganizationApis from './';
 
 OrganizationApis.allow({
   insert () {

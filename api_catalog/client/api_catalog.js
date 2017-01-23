@@ -48,6 +48,9 @@ Template.apiCatalog.onCreated(function () {
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
 
+  // Subscribe to bookmarks of current user
+  instance.subscribe('userApiBookmarks');
+
   // Watch for changes in the sort and filter settings
   instance.autorun(() => {
     // Check URL parameter for sorting
@@ -59,6 +62,9 @@ Template.apiCatalog.onCreated(function () {
 
     // Check URL parameter for filtering
     const filterByParameter = FlowRouter.getQueryParam('filterBy');
+
+    // Check URL parameter for filtering by lifecycle status
+    const lifecycleStatusParameter = FlowRouter.getQueryParam('lifecycle');
 
     // Create a object for storage sorting parameters
     const sort = {};
@@ -96,7 +102,7 @@ Template.apiCatalog.onCreated(function () {
           // Delete filter for managed apis
           delete currentFilters.managerIds;
           // Get user bookmarks
-          const userBookmarks = ApiBookmarks.findOne({ userId }) || '';
+          const userBookmarks = ApiBookmarks.findOne() || '';
           // Set filter for bookmarks
           currentFilters._id = { $in: userBookmarks.apiIds };
           break;
@@ -112,10 +118,23 @@ Template.apiCatalog.onCreated(function () {
       currentFilters = { isPublic: true };
     }
 
+    // Checking of filter bu lifecycle status was set
+    if (lifecycleStatusParameter) {
+      // Set filter
+      currentFilters.lifecycleStatus = lifecycleStatusParameter;
+    } else {
+      // Can be case when filter was set and user clicks on Clear button.
+      // Query parameter doesn't exists but database query has field.
+
+      // Delete field from object.
+      delete currentFilters.lifecycleStatus;
+    }
+
     instance.pagination.filters(currentFilters);
   });
 });
 
+// eslint-disable-next-line prefer-arrow-callback
 Template.apiCatalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });

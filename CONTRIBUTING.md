@@ -151,7 +151,9 @@ Additionally, the following steps help our team stay coordinated:
  ![git flow diagram with peer review step](https://openclipart.org/image/600px/svg_to_png/236560/Gitflow-featureBranch-peerReview.png)
 
 ## Code quality
-In a nutshell, **write code for humans to read and understand**. Our code will be minified for machines during the build process. For further reference, please [read Human JavaScript](http://read.humanjavascript.com/) by Henrik Joreteg.
+In a nutshell, **write code for humans to read and understand**. Our code will be minified for machines during the build process. For further reference, please read the following:
+- [Human JavaScript](http://read.humanjavascript.com/) by Henrik Joreteg
+- [Clean Code rules for JavaScript](https://github.com/ryanmcdermott/clean-code-javascript)
 
 ### Simplicity and safety
 When writing code, tend towards simple and explicit solutions. Avoid cleverness when possible, as it may come back to bite us.

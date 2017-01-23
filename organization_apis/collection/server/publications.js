@@ -1,9 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Organizations } from '/organizations/collection';
-import { _ } from 'lodash';
-import { Apis } from '/apis/collection';
-import { OrganizationApis } from '../';
+import Organizations from '/organizations/collection';
+import OrganizationApis from '../';
 
 Meteor.publish('apiOrganizationBasicDetails', (apiId) => {
   // Make sure API ID is a String
@@ -24,32 +22,6 @@ Meteor.publish('apiOrganizationBasicDetails', (apiId) => {
   }
 
   return organization;
-});
-
-Meteor.publish('organizationApis', (slug) => {
-  // Make sure slug argument is a String
-  check(slug, String);
-
-  // Get organization
-  const organization = Organizations.findOne({ slug });
-
-  // Check organization exist
-  if (organization) {
-    // Get all links between this organization and APIs
-    const organizationApis = OrganizationApis.find({ organizationId: organization._id }).fetch();
-
-    // Create an array of API IDs
-    const apiIds = _.map(organizationApis, organizationApiLink => {
-      // Get API ID from link document
-      return organizationApiLink.apiId;
-    });
-
-    // Return a database cursor of APIs using the API IDs array
-    return Apis.find({ _id: { $in: apiIds } });
-  }
-
-  // Otherwise, return an empty array so the publication can be marked as 'ready'
-  return [];
 });
 
 Meteor.publish('organizationApisByApiId', (apiId) => {

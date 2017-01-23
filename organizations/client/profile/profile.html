@@ -1,18 +1,42 @@
 <template name="organizationProfile">
-    {{# if Template.subscriptionsReady }}
-      {{> organizationProfileHeader organization=organization }}
-
-      {{# if managedApis }}
-        <div class="container">
-          <h3>
+  {{# if Template.subscriptionsReady }}
+    {{> organizationProfileHeader organization=organization }}
+    <!-- dropdown class set relative position -->
+    <div class="container dropdown">
+      <div class="block-header">
+        <div class="pull-right">
+          <!-- Filter button -->
+          {{# if organization.apisCount }}
+            {{> apisFilterIcon }}
+          {{/ if }}
+          <!-- Connection API button -->
+          {{# if organization.currentUserCanEdit }}
+            <button type="button" class="btn btn-default" id="connect-api">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              {{_ 'organizationProfile_buttonText_connectApi' }}
+            </button>
+          {{/ if }}
+        </div>
+        {{# if organization.apisCount }}
+          <!-- Title -->
+          <h3 class="apis-block-title">
             {{_ 'organizationProfile_bigText_apisCount'  }}
             <small>
-              {{_ 'organizationProfile_smallText_apisCount' managedApisCount }}
+              {{_ 'organizationProfile_smallText_apisCount' filteredApisCount}}
             </small>
           </h3>
-
-          {{> apiCatalogGrid apis=managedApis }}
-        </div>
-      {{/ if }}
-    {{/if}}
+          {{# if selectedFilter }}
+            <span>
+              {{_ 'organizationProfile_text_filteredBy' }}
+              <i>{{ selectedFilter }}</i>
+              <button id="reset-filter-options" class="btn btn-default btn-xs">
+                {{_ 'organizationProfile_buttonText_clear' }}
+              </button>
+            </span>
+          {{/ if }}
+        {{/ if }}
+      </div>
+      {{> apiCatalogGrid apis=filteredApis }}
+    </div>
+  {{/if}}
 </template>

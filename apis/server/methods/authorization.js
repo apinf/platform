@@ -1,9 +1,18 @@
 import { Accounts } from 'meteor/accounts-base';
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { ValidEmail } from 'meteor/froatsnook:valid-email';
+
 import { Apis } from '/apis/collection';
 
 Meteor.methods({
   addAuthorizedUserByEmail (apiId, email) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
+    // Make sure email is a valid email
+    check(email, ValidEmail);
+
     // Get user with matching email
     const user = Accounts.findUserByEmail(email);
 
@@ -20,6 +29,9 @@ Meteor.methods({
     }
   },
   currentUserCanViewApi (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
     // Get API
     const api = Apis.findOne(apiId);
 
@@ -27,6 +39,9 @@ Meteor.methods({
     return api && api.currentUserCanView();
   },
   currentUserCanEditApi (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
     // Get API
     const api = Apis.findOne(apiId);
 

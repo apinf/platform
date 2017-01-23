@@ -7,7 +7,7 @@ const OrganizationLogo = new FileCollection('OrganizationLogo', {
     {
       method: 'get',
       path: '/md5/:md5',
-      lookup: function (params) {
+      lookup (params) {
         return {
           md5: params.md5,
         };
@@ -16,4 +16,4 @@ const OrganizationLogo = new FileCollection('OrganizationLogo', {
   ],
 });
 
-export { OrganizationLogo };
+export default OrganizationLogo;

@@ -1,0 +1,29 @@
+<template name="connectApiToOrganizationModal">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+          <h1 class="modal-title">
+            {{_ 'connectApiToOrganizationModal_modalTitle' }}
+          </h1>
+        </div>
+        <div class="modal-body">
+          {{# if unlinkedApis }}
+            {{_ 'connectApiToOrganizationModal_helpText' }}
+            {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
+          {{ else }}
+            <p>
+              {{_ 'connectApiToOrganizationModal_text_noOneApis' }}
+            </p>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              {{_ 'connectApiToOrganizationModal_buttonText_close' }}
+            </button>
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

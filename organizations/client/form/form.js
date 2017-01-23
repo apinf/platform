@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Organizations } from '../../collection/';
+import Organizations from '../../collection/';
 
 Template.organizationForm.helpers({
   organizationsCollection () {
