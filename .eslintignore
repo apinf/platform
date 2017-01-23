@@ -12,11 +12,6 @@ core/client/lib
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-#apis_authorization/client/form/autoform.js
-#apis_authorization/client/form/form.js
-#apis_authorization/client/form/schema.js
-#apis_authorization/client/list/list.js
-apis_authorization/client/remove/remove.js
 apis/client/add/autoform.js
 apis/client/export/export.js
 apis/client/import_documentation/import.js
