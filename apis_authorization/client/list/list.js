@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+
 import { _ } from 'lodash';
 
 Template.apiAuthorizedUsersList.helpers({
@@ -13,7 +15,7 @@ Template.apiAuthorizedUsersList.helpers({
     }).fetch();
 
     // flatten structure of users within authorized users array
-    authorizedUsers = _.map(authorizedUsers, function (user) {
+    authorizedUsers = _.map(authorizedUsers, (user) => {
       return {
         username: user.username,
         email: user.emails[0].address,
@@ -35,5 +37,5 @@ Template.apiAuthorizedUsersList.events({
 
     // Show the confirmation dialogue, passing in user document
     Modal.show('apiRemoveAuthorizedUser', { user, api });
-  }
+  },
 });
