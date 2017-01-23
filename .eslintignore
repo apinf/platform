@@ -12,7 +12,7 @@ core/client/lib
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-apis/client/add/autoform.js
+#apis/client/add/autoform.js
 apis/client/export/export.js
 apis/client/import_documentation/import.js
 apis/client/import/import.js
