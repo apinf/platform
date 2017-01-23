@@ -13,7 +13,7 @@ Template.organizationManagersList.helpers({
     }).fetch();
 
     // flatten structure of users within authorized users array
-    organizationManagers = _.map(organizationManagers, function (user) {
+    organizationManagers = _.map(organizationManagers, (user) => {
       return {
         username: user.username,
         email: user.emails[0].address,

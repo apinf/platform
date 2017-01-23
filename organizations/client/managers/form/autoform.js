@@ -1,5 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 AutoForm.hooks({
   organizationManagerForm: {
@@ -14,10 +16,10 @@ AutoForm.hooks({
       const form = this;
 
       // Check if the email address is linked to a registered user
-      Meteor.call('checkIfEmailIsRegistered', email, function (error, emailIsRegistered) {
+      Meteor.call('checkIfEmailIsRegistered', email, (error, emailIsRegistered) => {
         if (emailIsRegistered) {
           // Add user to managers list
-          Meteor.call('addOrganizationManagerByEmail', organizationId, email, function (error, result) {
+          Meteor.call('addOrganizationManagerByEmail', organizationId, email, (error, result) => {
             if (!error) {
               // Continue with form submission
               form.done();
@@ -45,6 +47,6 @@ AutoForm.hooks({
     onError (error) {
       // Throw an error if one has been chatched
       return new Meteor.Error(error);
-    }
+    },
   },
 });
