@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import { emailSchema } from './schema';
+import emailSchema from './schema';
 
 Template.apiUserAuthorizationForm.helpers({
   apiId () {

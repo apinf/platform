@@ -14,7 +14,7 @@ core/client/lib
 ######################################################################
 #apis_authorization/client/form/autoform.js
 #apis_authorization/client/form/form.js
-apis_authorization/client/form/schema.js
+#apis_authorization/client/form/schema.js
 apis_authorization/client/list/list.js
 apis_authorization/client/remove/remove.js
 apis/client/add/autoform.js
