@@ -119,7 +119,7 @@ Template.organizationProfile.events({
       sAlert.error(message);
     }
   },
-  'click [type=reset]': () => {
+  'click #reset-filter-options': () => {
     // Delete query parameter
     FlowRouter.setQueryParams({ lifecycle: null });
   },
