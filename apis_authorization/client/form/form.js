@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating';
+
 import { emailSchema } from './schema';
 
 Template.apiUserAuthorizationForm.helpers({
@@ -13,8 +15,8 @@ Template.apiUserAuthorizationForm.helpers({
 });
 
 Template.apiUserAuthorizationForm.events({
-  'submit #authorizedUserForm' (event) {
+  'submit #authorizedUserForm': function (event) {
     // Prevent form from reloading page
     event.preventDefault();
-  }
+  },
 });
