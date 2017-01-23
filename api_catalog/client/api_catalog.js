@@ -63,6 +63,9 @@ Template.apiCatalog.onCreated(function () {
     // Check URL parameter for filtering
     const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
+    // Check URL parameter for filtering by lifecycle status
+    const lifecycleStatusParameter = FlowRouter.getQueryParam('lifecycle');
+
     // Create a object for storage sorting parameters
     const sort = {};
     // GCheck of existing parameters
@@ -113,6 +116,18 @@ Template.apiCatalog.onCreated(function () {
     } else {
       // Otherwise get it like default value
       currentFilters = { isPublic: true };
+    }
+
+    // Checking of filter bu lifecycle status was set
+    if (lifecycleStatusParameter) {
+      // Set filter
+      currentFilters.lifecycleStatus = lifecycleStatusParameter;
+    } else {
+      // Can be case when filter was set and user clicks on Clear button.
+      // Query parameter doesn't exists but database query has field.
+
+      // Delete field from object.
+      delete currentFilters.lifecycleStatus;
     }
 
     instance.pagination.filters(currentFilters);
