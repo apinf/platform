@@ -14,11 +14,8 @@ Organizations.allow({
     return false;
   },
   update (userId, organization) {
-    // Check if current user is admin
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-    // Only admin/owner can update
-    if (userIsAdmin && organization.currentUserCanEdit()) {
+    // Check if current user can update
+    if (organization.currentUserCanEdit()) {
       return true;
     }
 
