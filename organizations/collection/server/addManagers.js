@@ -1,9 +1,18 @@
 import { Accounts } from 'meteor/accounts-base';
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { ValidEmail } from 'meteor/froatsnook:valid-email';
+
 import Organizations from '../';
 
 Meteor.methods({
   addOrganizationManagerByEmail (organizationId, email) {
+    // Make sure organizationId is a string
+    check(organizationId, String);
+
+    // Make sure email is a valid email
+    check(email, ValidEmail);
+
     // Get user with matching email
     const user = Accounts.findUserByEmail(email);
 
