@@ -1,10 +1,11 @@
+import { Apis } from '/apis/collection';
+import { Organizations } from '/organizations/collection';
 import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
-import { Apis } from '/apis/collection';
-import { Organizations } from '/organizations/collection';
+
 
 Meteor.methods({
   sendContactFormEmail (doc) {
@@ -36,14 +37,14 @@ ${doc.message}`;
   },
 });
 
-Meteor.publish('apis_Count', function() {
- Counts.publish(this, 'apiscounts', Apis.find());
- });
-
- Meteor.publish('organizations_Count', function() {
-  Counts.publish(this, 'organizationscounts', Organizations.find());
+Meteor.publish('apisCount', function () {
+  Counts.publish(this, 'apisCount', Apis.find());
 });
 
-Meteor.publish('users_Count', function() {
- Counts.publish(this, 'userscounts', Meteor.users.find() );
- });
+Meteor.publish('organizationsCount', function () {
+  Counts.publish(this, 'organizationsCount', Organizations.find());
+});
+
+Meteor.publish('usersCount', function () {
+  Counts.publish(this, 'usersCount', Meteor.users.find());
+});

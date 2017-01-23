@@ -5,9 +5,7 @@ import { Template } from 'meteor/templating';
 // Import apinf collections
 import CoverPhoto from '/branding/cover_photo/collection';
 import { Settings } from '/settings/collection';
-import { Apis } from '/apis/collection';
-import { Organizations } from '/organizations/collection';
-
+import $ from 'jquery';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance
@@ -17,27 +15,31 @@ Template.homeBody.onCreated(function () {
   instance.subscribe('singleSetting', 'mail.enabled');
   // Subscribe to CoverPhoto collection
   instance.subscribe('coverPhoto');
-    instance.subscribe('apis_Count');
-    instance.subscribe('organizations_Count');
-    instance.subscribe('users_Count');
+// Subscribe to Apis , Organizations and Users collection for statistic block
+  instance.subscribe('apisCount');
+  instance.subscribe('organizationsCount');
+  instance.subscribe('usersCount');
 });
 
-Template.homeBody.rendered = function () {
+Template.homeBody.onRendered = function () {
   $('.contact-us-link').click(function () {
     document.getElementById('contact-us').scrollIntoView();
   });
 };
 
 Template.homeBody.helpers({
-  getapiscount(){
-   return Counts.get('apiscounts');
- },
- getorganizationscount(){
-  return Counts.get('organizationscounts');
-},
-getuserscount(){
- return Counts.get('userscounts');
-},
+
+  getApisCount () {
+    return Counts.get('apisCount');
+  },
+
+  getOrganizationsCount () {
+    return Counts.get('organizationsCount');
+  },
+  getUsersCount () {
+    return Counts.get('usersCount');
+  },
+
   contactFormEnabled () {
     const settings = Settings.findOne();
 
