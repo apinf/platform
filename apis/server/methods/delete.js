@@ -8,6 +8,7 @@ import { ApiMetadata } from '/metadata/collection';
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { Feedback } from '/feedback/collection';
 import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
+import OrganizationApis from '/organization_apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 Meteor.methods({
@@ -49,6 +50,9 @@ Meteor.methods({
       Meteor.call('deleteProxyBackend', proxyBackend);
     }
 
+    // Remove linked document between APIs and connected organization
+    Meteor.call('removeOrganization', apiId);
+
     // Finally remove the API
     Apis.remove(apiId);
   },
@@ -78,5 +82,18 @@ Meteor.methods({
 
     // Remove monitoring settings collection
     MonitoringSettings.remove({ apiId });
+  },
+  removeOrganization (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
+    // Get related organizationApis document
+    const organizationApiLink = OrganizationApis.findOne({ apiId });
+
+    // Make sure document exists
+    if (organizationApiLink) {
+      // Delete document
+      OrganizationApis.remove({ _id: organizationApiLink._id });
+    }
   },
 });
