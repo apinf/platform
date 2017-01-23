@@ -119,4 +119,8 @@ Template.organizationProfile.events({
       sAlert.error(message);
     }
   },
+  'click [type=reset]': () => {
+    // Delete query parameter
+    FlowRouter.setQueryParams({ lifecycle: null });
+  },
 });
