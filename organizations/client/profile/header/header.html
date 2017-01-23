@@ -10,9 +10,11 @@
           <div class="row">
             <h1 id="organization-name">
               {{ organization.name }}
-              <button id="edit-organization" class="btn btn-default btn-xs">
-                {{_ "organizationProfileHeader_editButton_text" }}
-              </button>
+              {{# if organization.currentUserCanEdit }}
+                <button id="edit-organization" class="btn btn-default btn-xs">
+                  {{_ "organizationProfileHeader_editButton_text" }}
+                </button>
+              {{/ if }}
             </h1>
           </div>
           <div class="row">
