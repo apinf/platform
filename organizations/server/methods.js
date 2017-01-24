@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
+import { Accounts } from 'meteor/accounts-base';
 
 // APINF collections import
 import { Apis } from '/apis/collection';
