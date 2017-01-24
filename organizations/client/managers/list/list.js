@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { _ } from 'lodash';
 
 Template.organizationManagersList.helpers({
@@ -22,5 +23,18 @@ Template.organizationManagersList.helpers({
     });
 
     return organizationManagers;
+  },
+});
+
+Template.organizationManagersList.events({
+  'click #remove-organization-manager': function (event, templateInstance) {
+    // Get organization object from parent templateInstance
+    const organization = templateInstance.data.organization;
+
+    // Get user document from instance data context
+    const user = this;
+
+    // Show the confirmation dialogue, passing in user document
+    Modal.show('organizationRemoveManagers', { user, organization });
   },
 });
