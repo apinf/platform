@@ -3,6 +3,14 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { _ } from 'lodash';
 
+Template.organizationManagersList.onCreated(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Subscribe to managers public details
+  instance.subscribe('organizationManagersPublicDetails');
+});
+
 Template.organizationManagersList.helpers({
   organizationManagers () {
     // Get organization document, reactively
@@ -13,7 +21,7 @@ Template.organizationManagersList.helpers({
       _id: { $in: organization.managerIds },
     }).fetch();
 
-    // flatten structure of users within authorized users array
+    // flatten structure of users within organization managers array
     organizationManagers = _.map(organizationManagers, (user) => {
       return {
         username: user.username,
