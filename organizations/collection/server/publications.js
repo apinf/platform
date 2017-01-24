@@ -36,3 +36,13 @@ new Meteor.Pagination(Organizations);
 Meteor.publish('userManagedOrganizations', function () {
   return Organizations.find({ managerIds: this.userId });
 });
+
+Meteor.publish('organizationManagersPublicDetails', () => {
+  // Get organization document
+  const organization = Organizations.findOne();
+
+  // Return all managers documents
+  return Meteor.users.find({ _id: { $in: organization.managerIds } },
+    { fields: { username: 1, emails: 1, _id: 1 } }
+  );
+});
