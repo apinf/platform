@@ -51,7 +51,7 @@ Meteor.methods({
     }
 
     // Remove linked document between APIs and connected organization
-    Meteor.call('removeOrganization', apiId);
+    Meteor.call('removeOrganizationApiLink', apiId);
 
     // Finally remove the API
     Apis.remove(apiId);
@@ -83,7 +83,7 @@ Meteor.methods({
     // Remove monitoring settings collection
     MonitoringSettings.remove({ apiId });
   },
-  removeOrganization (apiId) {
+  removeOrganizationApiLink (apiId) {
     // Make sure apiId is a string
     check(apiId, String);
 
