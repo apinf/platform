@@ -19,7 +19,7 @@ AutoForm.hooks({
       Meteor.call('checkIfEmailIsRegistered', email, (error, emailIsRegistered) => {
         if (emailIsRegistered) {
           // Add user to managers list
-          Meteor.call('addOrganizationManagerByEmail', organizationId, email, (error, result) => {
+          Meteor.call('addOrganizationManagerByEmail', organizationId, email, () => {
             if (!error) {
               // Continue with form submission
               form.done();
