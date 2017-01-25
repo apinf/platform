@@ -25,9 +25,9 @@ Template.organizationProfile.onCreated(function () {
     // Make sure organizationSlug exists,
     // fixes bug when changing route to navigate to different page
     if (organizationSlug) {
-      // Reactively subscribe to a single Organization
+      // Reactively subscribe to a single Organization composite
       // Makes sure proper data is available when editing organization name
-      instance.subscribe('singleOrganization', organizationSlug);
+      instance.subscribe('organizationComposite', organizationSlug);
 
       // Subscribe to OrganizationAPIs link documents
       instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
