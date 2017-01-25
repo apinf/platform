@@ -41,8 +41,11 @@ Meteor.publish('organizationManagersPublicDetails', (organizationId) => {
   // Get organization document
   const organization = Organizations.findOne(organizationId);
 
-  // Return all managers documents
-  return Meteor.users.find({ _id: { $in: organization.managerIds } },
-    { fields: { username: 1, emails: 1, _id: 1 } }
-  );
+  // Check if any managers exist
+  if (organization.managerIds) {
+    // Return all managers documents
+    return Meteor.users.find({ _id: { $in: organization.managerIds } },
+      { fields: { username: 1, emails: 1, _id: 1 } }
+    );
+  }
 });
