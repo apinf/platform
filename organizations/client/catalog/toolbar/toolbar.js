@@ -45,20 +45,17 @@ Template.organizationCatalogueToolbar.onRendered(function () {
 });
 
 Template.organizationCatalogueToolbar.events({
-  'change #organization-sort-select': function (event) {
+  'change .filter-sort-control': (event) => {
+    // Initialize placeholder for query parameters
+    const queryParameters = {};
+
+    // Get "name" attribute of selected element
+    const parameterName = event.target.name;
+
+    // Create the query parameters object, using the key and value
+    queryParameters[parameterName] = event.target.value;
+
     // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
-  },
-  'change [name=sort-direction]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortDirection: event.target.value });
-  },
-  'change [name=filter-options]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ filterBy: event.target.value });
-  },
-  'change [name=view-mode]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ viewMode: event.target.value });
+    FlowRouter.setQueryParams(queryParameters);
   },
 });
