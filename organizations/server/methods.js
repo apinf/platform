@@ -1,5 +1,6 @@
 // Meteor packages import
 import { Meteor } from 'meteor/meteor';
+import { ValidEmail } from 'meteor/froatsnook:valid-email';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
@@ -46,15 +47,18 @@ Meteor.methods({
     // Return undefined result for anonymous user
     return undefined;
   },
-  addOrganizationManagerByEmail (manager) {
-    // Make sure manager is an object
-    check(manager, Object);
+  addOrganizationManagerByEmail (organizationId, email) {
+    // Make sure organizationId is a string
+    check(organizationId, String);
+
+    // Make sure email is a valid email
+    check(email, ValidEmail);
 
     // Get user with matching email
-    const user = Accounts.findUserByEmail(manager.email);
+    const user = Accounts.findUserByEmail(email);
 
     // Get organization document
-    const organization = Organizations.findOne(manager.organizationId);
+    const organization = Organizations.findOne(organizationId);
 
     // Check if user is already a manager
     const alreadyManager = organization.managerIds.includes(user._id);
@@ -62,7 +66,7 @@ Meteor.methods({
     // Check if the user is already a manager
     if (!alreadyManager) {
       // Add user ID to manager IDs field
-      Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
+      Organizations.update(organizationId, { $push: { managerIds: user._id } });
     }
   },
 });
