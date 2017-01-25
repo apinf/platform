@@ -8,7 +8,9 @@
   {{# autoForm
     schema=managerSchema
     id="organizationManagerForm"
-    class="form-inline" }}
+    class="form-inline"
+    type="method"
+    meteormethod="addOrganizationManagerByEmail"}}
 
     {{> afQuickField name='email' }}
     {{> afQuickField name='organizationId' value=organization._id type="hidden" }}
