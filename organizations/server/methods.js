@@ -47,7 +47,7 @@ Meteor.methods({
     return undefined;
   },
   addOrganizationManagerByEmail (manager) {
-    // Make sure organizationId is a string
+    // Make sure manager (with organizationId and email) is an Object
     check(manager, Object);
 
     // Check if email is registered
@@ -63,7 +63,6 @@ Meteor.methods({
       // Check if user is already a manager
       const alreadyManager = organization.managerIds.includes(user._id);
 
-      // Check if the user is already a manager
       if (!alreadyManager) {
         // Add user ID to manager IDs field
         Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
