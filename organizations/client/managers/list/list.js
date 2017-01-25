@@ -3,17 +3,6 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { _ } from 'lodash';
 
-Template.organizationManagersList.onCreated(function () {
-  // Get reference to template instance
-  const instance = this;
-
-  // Get organization ID
-  const organizationId = instance.data.organization._id;
-
-  // Subscribe to managers public details
-  instance.subscribe('organizationManagersPublicDetails', organizationId);
-});
-
 Template.organizationManagersList.helpers({
   organizationManagers () {
     // Get organization document, reactively
