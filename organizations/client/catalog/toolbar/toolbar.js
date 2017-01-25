@@ -5,59 +5,60 @@ Template.organizationCatalogueToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Check URL parameter for sorting
-  const sortByParameter = FlowRouter.getQueryParam('sortBy');
+  // Separate autoruns to runs own function for each parameter
 
-  // Check URL parameter for sort direction
-  const sortDirectionParameter = FlowRouter.getQueryParam('sortDirection');
+  // Runs a function that depends only on SortBy parameter
+  instance.autorun(() => {
+    // Check URL parameter for sorting
+    const sortByParameter = FlowRouter.getQueryParam('sortBy');
 
-  // Check URL parameter for filtering
-  const filterByParameter = FlowRouter.getQueryParam('filterBy');
-
-  // Check URL parameter for view mode
-  const viewModeParameter = FlowRouter.getQueryParam('viewMode');
-
-  if (sortByParameter) {
     // Set the sorting by UI state from URL parameter
     instance.$('#organization-sort-select').val(`${sortByParameter}`).change();
-  } else {
-    // Get sorting from template
-    const sortBy = instance.$('[name=sort-menu]').val();
+  });
 
-    // Set sorting URL parameter from template value
-    FlowRouter.setQueryParams({ sortBy });
-  }
+  // Runs a function that depends only on sortDirection parameter
+  instance.autorun(() => {
+    // Check URL parameter for sort direction
+    const sortDirectionParameter = FlowRouter.getQueryParam('sortDirection');
 
-  if (sortDirectionParameter) {
     // Set the sorting direction by UI state from URL parameter
     instance.$(`#organization-sort-${sortDirectionParameter}`).button('toggle');
-  } else {
-    // Get sorting direction from template
-    const sortDirection = instance.$('[name=sort-direction]:checked').val();
+  });
 
-    // Set sorting direction URL parameter from template value
-    FlowRouter.setQueryParams({ sortDirection });
-  }
+  // Runs a function that depends only on filterBy parameter
+  instance.autorun(() => {
+    // Check URL parameter for filtering
+    const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
-  if (filterByParameter) {
     // Set the filter by UI state from URL parameter
     instance.$(`#filter-${filterByParameter}`).button('toggle');
-  } else {
-    // Get filtering from template
-    const filterBy = instance.$('[name=filter-options]:checked').val();
+  });
 
-    // Set filtering URL parameter from template value
-    FlowRouter.setQueryParams({ filterBy });
-  }
+  // Runs a function that depends only on viewMode parameter
+  instance.autorun(() => {
+    // Check URL parameter for view mode
+    const viewModeParameter = FlowRouter.getQueryParam('viewMode');
 
-  if (viewModeParameter) {
     // Set the view mode direction by UI state from URL parameter
     instance.$(`[for=${viewModeParameter}-view]`).button('toggle');
-  } else {
-    // Get view mode direction from template
-    const viewMode = instance.$('[name=view-mode]:checked').val();
+  });
+});
 
-    // Set view mode direction URL parameter from template value
-    FlowRouter.setQueryParams({ viewMode });
-  }
+Template.organizationCatalogueToolbar.events({
+  'change #organization-sort-select': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortBy: event.target.value });
+  },
+  'change [name=sort-direction]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ sortDirection: event.target.value });
+  },
+  'change [name=filter-options]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ filterBy: event.target.value });
+  },
+  'change [name=view-mode]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ viewMode: event.target.value });
+  },
 });
