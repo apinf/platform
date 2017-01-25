@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const managerSchema = new SimpleSchema({
+const managerSchema = new SimpleSchema({
   organizationId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
@@ -10,3 +10,5 @@ export const managerSchema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email,
   },
 });
+
+export default managerSchema;
