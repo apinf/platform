@@ -23,6 +23,14 @@ AutoForm.hooks({
         // Warn manager that user email is not registered
         sAlert.warning(message);
       }
+
+      if (errorType === 'manager-already-exist') {
+        // Get 'manager already exist' error message translation
+        const message = TAPi18n.__('organizationManagerForm_managerAlreadyExist_errorText');
+
+        // Warn manager that manager is already exist
+        sAlert.warning(message);
+      }
     },
   },
 });

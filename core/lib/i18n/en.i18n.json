@@ -26,6 +26,7 @@
   "addOrganizationManagerForm_title": "Add Manager",
   "addOrganizationManagerForm_description": "An organization manager has the same rights as the original API manager to edit, delete the API after an API has been connected to an organization.",
   "addOrganizationManagerForm_button": "Add",
+  "organizationManagerForm_managerAlreadyExist_errorText": "User is already a manager of this organization.",
   "apiAuthorizedUsersList_ header_text": "Authorized users",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",
   "apiBackend_Status_Title": "Status",

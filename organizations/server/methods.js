@@ -68,6 +68,8 @@ Meteor.methods({
       if (!alreadyManager) {
         // Add user ID to manager IDs field
         Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
+      } else {
+        throw new Meteor.Error('manager-already-exist');
       }
     } else {
       throw new Meteor.Error('email-not-registered');
