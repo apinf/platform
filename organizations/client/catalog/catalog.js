@@ -70,22 +70,6 @@ Template.organizationCatalog.helpers({
 });
 
 Template.organizationCatalog.events({
-  'change #organization-sort-select': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
-  },
-  'change [name=sort-direction]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortDirection: event.target.value });
-  },
-  'change [name=filter-options]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ filterBy: event.target.value });
-  },
-  'change [name=view-mode]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ viewMode: event.target.value });
-  },
   'click #add-organization': function () {
     // Show organization form modal
     Modal.show('organizationForm', { formType: 'insert' });
