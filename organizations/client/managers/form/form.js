@@ -6,10 +6,3 @@ Template.addOrganizationManagerForm.helpers({
     return managerSchema;
   },
 });
-
-Template.addOrganizationManagerForm.events({
-  'submit #organizationManagerForm': function (event) {
-    // Prevent form from reloading page
-    event.preventDefault();
-  },
-});
