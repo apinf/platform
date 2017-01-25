@@ -1,13 +1,19 @@
 // Import Meteor packages
+ /* jshint esversion: 6 */
+ // Allow use of 'document' as global object
+/* global document */
+
+import $ from 'jquery';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 // Import apinf collections
 import CoverPhoto from '/branding/cover_photo/collection';
 import { Settings } from '/settings/collection';
-import $ from 'jquery';
 
-Template.homeBody.onCreated(function () {
+// eslint-disable-next-line prefer-arrow-callback
+Template.homeBody.onCreated( function() {
   // Get reference to template instance
   const instance = this;
 
@@ -21,11 +27,12 @@ Template.homeBody.onCreated(function () {
   instance.subscribe('usersCount');
 });
 
-Template.homeBody.onRendered = function () {
-  $('.contact-us-link').click(function () {
-    document.getElementById('contact-us').scrollIntoView();
+Template.homeBody.onRendered(() => {
+  $('.contact-us-link').click(() => {
+    const contactUs = document.getElementById('contact-us');
+    contactUs.scrollIntoView();
   });
-};
+});
 
 Template.homeBody.helpers({
 
@@ -70,7 +77,7 @@ Template.homeBody.helpers({
 
       // Check if cover photo file is available
       if (currentCoverPhotoFile) {
-        // Get cover photo file URL
+       // Get cover photo file URL
         return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
       }
     }

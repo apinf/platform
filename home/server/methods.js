@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Apis } from '/apis/collection';
 import { Organizations } from '/organizations/collection';
 import { check } from 'meteor/check';
@@ -5,7 +7,6 @@ import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
-
 
 Meteor.methods({
   sendContactFormEmail (doc) {
@@ -36,7 +37,7 @@ ${doc.message}`;
     }
   },
 });
-
+// eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('apisCount', function () {
   Counts.publish(this, 'apisCount', Apis.find());
 });
