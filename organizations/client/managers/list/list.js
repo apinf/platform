@@ -35,6 +35,18 @@ Template.organizationManagersList.helpers({
 
     return organizationManagers;
   },
+  managerIsCurrentUser () {
+    // Used to hide the delete button, so user cannot remove themselves
+
+    // Get ID of current Manager
+    const currentManagerId = this._id;
+
+    // Get ID of logged in user
+    const currentUserId = Meteor.userId();
+
+    // Check if the Manager ID and User ID match
+    return (currentUserId === currentManagerId);
+  },
 });
 
 Template.organizationManagersList.events({
