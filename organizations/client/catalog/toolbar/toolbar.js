@@ -5,7 +5,7 @@ Template.organizationCatalogueToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Separate autoruns to runs own function for each parameter
+  // Separate autoruns to run own function for each parameter
 
   // Runs a function that depends only on SortBy parameter
   instance.autorun(() => {
