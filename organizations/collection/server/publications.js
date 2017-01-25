@@ -37,9 +37,9 @@ Meteor.publish('userManagedOrganizations', function () {
   return Organizations.find({ managerIds: this.userId });
 });
 
-Meteor.publish('organizationManagersPublicDetails', () => {
+Meteor.publish('organizationManagersPublicDetails', (organizationId) => {
   // Get organization document
-  const organization = Organizations.findOne();
+  const organization = Organizations.findOne(organizationId);
 
   // Return all managers documents
   return Meteor.users.find({ _id: { $in: organization.managerIds } },

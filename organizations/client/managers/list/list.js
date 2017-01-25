@@ -8,7 +8,7 @@ Template.organizationManagersList.onCreated(function () {
   const instance = this;
 
   // Subscribe to managers public details
-  instance.subscribe('organizationManagersPublicDetails');
+  instance.subscribe('organizationManagersPublicDetails', instance.data.organization);
 });
 
 Template.organizationManagersList.helpers({
