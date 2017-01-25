@@ -47,26 +47,30 @@ Meteor.methods({
     // Return undefined result for anonymous user
     return undefined;
   },
-  addOrganizationManagerByEmail (organizationId, email) {
+  addOrganizationManagerByEmail (manager) {
     // Make sure organizationId is a string
-    check(organizationId, String);
+    check(manager, Object);
 
-    // Make sure email is a valid email
-    check(email, ValidEmail);
+    // Check if email is registered
+    const emailIsRegistered = Meteor.call('checkIfEmailIsRegistered', manager.email);
 
-    // Get user with matching email
-    const user = Accounts.findUserByEmail(email);
+    if (emailIsRegistered) {
+      // Get user with matching email
+      const user = Accounts.findUserByEmail(manager.email);
 
-    // Get organization document
-    const organization = Organizations.findOne(organizationId);
+      // Get organization document
+      const organization = Organizations.findOne(manager.organizationId);
 
-    // Check if user is already a manager
-    const alreadyManager = organization.managerIds.includes(user._id);
+      // Check if user is already a manager
+      const alreadyManager = organization.managerIds.includes(user._id);
 
-    // Check if the user is already a manager
-    if (!alreadyManager) {
-      // Add user ID to manager IDs field
-      Organizations.update(organizationId, { $push: { managerIds: user._id } });
+      // Check if the user is already a manager
+      if (!alreadyManager) {
+        // Add user ID to manager IDs field
+        Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
+      }
+    } else {
+      throw new Meteor.Error('email-not-registered');
     }
   },
 });
