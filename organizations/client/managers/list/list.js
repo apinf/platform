@@ -7,8 +7,11 @@ Template.organizationManagersList.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  // Get organization ID
+  const organizationId = instance.data.organization._id;
+
   // Subscribe to managers public details
-  instance.subscribe('organizationManagersPublicDetails', instance.data.organization);
+  instance.subscribe('organizationManagersPublicDetails', organizationId);
 });
 
 Template.organizationManagersList.helpers({
