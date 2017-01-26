@@ -1,7 +1,6 @@
 <template name="organizationSettings">
   <div class="container">
     <div class="row">
-      {{# if currentUser }}
         {{# if organization.currentUserCanEdit }}
           <div class="col-md-12">
             <div class="panel panel-default">
@@ -15,9 +14,9 @@
                 {{> organizationManagersList organization=organization }}
               </div>
             </div>
+            {{> organizationSettingsDelete organization=organization }}
           </div>
         {{/ if }}
-      {{/ if }}
     </div>
   </div>
 </template>
