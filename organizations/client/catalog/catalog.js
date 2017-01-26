@@ -8,7 +8,11 @@ import Organizations from '/organizations/collection';
 import $ from 'jquery';
 
 Template.organizationCatalog.onCreated(function () {
+  // Get reference to template instance
   const instance = this;
+
+  // Get user id
+  const userId = Meteor.userId();
 
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Organizations, {
@@ -37,6 +41,39 @@ Template.organizationCatalog.onCreated(function () {
 
     // Change sorting
     instance.pagination.sort(sort);
+  });
+
+  // Watch for changes in the filter settings
+  instance.autorun(() => {
+    // Check URL parameter for filtering
+    const filterByParameter = FlowRouter.getQueryParam('filterBy');
+
+    // Set filter as empty
+    let currentFilters = {};
+
+    // Filtering available for registered users
+    if (userId) {
+      switch (filterByParameter) {
+        case 'all': {
+          // Delete filter for managed organizations
+          delete currentFilters.managerIds;
+          break;
+        }
+        case 'my-organizations': {
+          // Set filter for managed apis
+          currentFilters.managerIds = userId;
+          break;
+        }
+        default: {
+          // Otherwise get it like default value
+          currentFilters = {};
+          break;
+        }
+      }
+    }
+
+    // Filter data
+    instance.pagination.filters(currentFilters);
   });
 });
 
@@ -70,22 +107,6 @@ Template.organizationCatalog.helpers({
 });
 
 Template.organizationCatalog.events({
-  'change #organization-sort-select': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
-  },
-  'change [name=sort-direction]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ sortDirection: event.target.value });
-  },
-  'change [name=filter-options]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ filterBy: event.target.value });
-  },
-  'change [name=view-mode]': function (event) {
-    // Set URL parameter
-    FlowRouter.setQueryParams({ viewMode: event.target.value });
-  },
   'click #add-organization': function () {
     // Show organization form modal
     Modal.show('organizationForm', { formType: 'insert' });

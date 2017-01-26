@@ -22,7 +22,7 @@
     "authorizedUserForm_success_message": "K\u00e4ytt\u00e4j\u00e4 lis\u00e4tty sallittuihin k\u00e4ytt\u00e4jiin",
     "bookmark_buttonText_bookmark": "Kirjanmerkki",
     "bookmark_buttonText_unbookmark": "Poista kirjanmerkki",
-    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. <br\/> Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
+    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
     "dashboardCharts_placeholder_proxyBackendsNotFound": "Rajapintoja tai v\u00e4lityspalvelimeen liitettyj\u00e4 rajapintoja ei l\u00f6ytynyt. <br\/> Lis\u00e4\u00e4 rajapintoja j\u00e4rjestelm\u00e4\u00e4n.",
     "forbidden_Title": "403 P\u00e4\u00e4sy estetty",
     "forbidden_Message": "Oikeutesi eiv\u00e4t riit\u00e4 sis\u00e4ll\u00f6n katseluun.",
