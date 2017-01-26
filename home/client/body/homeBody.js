@@ -13,7 +13,7 @@ import CoverPhoto from '/branding/cover_photo/collection';
 import { Settings } from '/settings/collection';
 
 // eslint-disable-next-line prefer-arrow-callback
-Template.homeBody.onCreated( function() {
+Template.homeBody.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -26,24 +26,22 @@ Template.homeBody.onCreated( function() {
   instance.subscribe('organizationsCount');
   instance.subscribe('usersCount');
 });
-
-Template.homeBody.onRendered(() => {
-  $('.contact-us-link').click(() => {
-    const contactUs = document.getElementById('contact-us');
-    contactUs.scrollIntoView();
-  });
+// eslint-disable-next-line prefer-arrow-callback
+Template.homeBody.onRendered( function () {
+  $('.contact-us-link').click( function (){
+    document.getElementById('contact-us').scrollIntoView;
+    });
 });
 
 Template.homeBody.helpers({
-
-  getApisCount () {
+  ApisCount () {
     return Counts.get('apisCount');
   },
 
-  getOrganizationsCount () {
+  OrganizationsCount () {
     return Counts.get('organizationsCount');
   },
-  getUsersCount () {
+  UsersCount () {
     return Counts.get('usersCount');
   },
 
@@ -78,7 +76,10 @@ Template.homeBody.helpers({
       // Check if cover photo file is available
       if (currentCoverPhotoFile) {
        // Get cover photo file URL
-        return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
+        console.log(Meteor.absoluteUrl().slice(0, -1));
+        console.log('CoverPhoto.baseURL:', CoverPhoto.baseURL);
+        console.log('currentCoverPhotoFile.md5:', currentCoverPhotoFile.md5);
+               return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
       }
     }
     return '';

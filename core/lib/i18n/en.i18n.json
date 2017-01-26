@@ -1,5 +1,4 @@
 {
-  "homeBody_feature_section_Statistic": "At a Glance", 
   "aboutApinf_documentation": "Documentation",
   "aboutApinf_contributors": "Contributors",
   "aboutApinf_createdBy": "Created by",
@@ -274,6 +273,10 @@
   "granularity_day": "Day",
   "granularity_week": "Week",
   "granularity_month": "Month",
+  "homeBody_feature_section_Statistic": "At a Glance",
+  "homeBody_feature_section_Statistic_heading1": "APIS:",
+  "homeBody_feature_section_Statistic_heading2": "Organizations:",
+  "homeBody_feature_section_Statistic_heading3": "Users:", 
   "homeBody_contactUs_heading": "Contact Us",
   "homeBody_contactUs_text": "Contact us for more information.",
   "homeBody_feature_section_heading1": "Are you an API user?",
