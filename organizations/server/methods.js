@@ -67,6 +67,9 @@ Meteor.methods({
       if (!alreadyManager) {
         // Add user ID to manager IDs field
         Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
+
+        // Make organization manager a manager of APIs
+        Meteor.call('addOrganizationManagerToApiManager', manager.organizationId, manager.email);
       } else {
         throw new Meteor.Error('manager-already-exist');
       }
