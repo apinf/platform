@@ -1,5 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import Organizations from '/organizations/collection';
 
 Template.organizationCatalogueToolbar.onRendered(function () {
   // Get reference to template instance
@@ -42,6 +44,17 @@ Template.organizationCatalogueToolbar.onRendered(function () {
     // Set the view mode direction by UI state from URL parameter
     instance.$(`[for=${viewModeParameter}-view]`).button('toggle');
   });
+});
+
+Template.organizationCatalogueToolbar.helpers({
+  userCanViewFilter () {
+    // Get ID of current user
+    const userId = Meteor.userId();
+    // Get all managed organizations
+    const organizations = Organizations.find({ managerIds: userId }).fetch();
+    // Show filter if user has at least one managed organization
+    return organizations.length > 0;
+  },
 });
 
 Template.organizationCatalogueToolbar.events({
