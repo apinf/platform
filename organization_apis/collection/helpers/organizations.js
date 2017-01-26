@@ -61,6 +61,13 @@ Organizations.helpers({
     // Return a count of Organiztion-API Links
     return OrganizationApis.find({ organizationId: this._id }).count();
   },
+  publicApisCount () {
+    // Get array of managed apis which available for current user
+    const apis = this.apis();
+
+    // Return length of array
+    return apis.length;
+  },
   managedApiIds () {
     // Get organizationApis document, which joins organizations with APIs
     const organizationApiLinks = OrganizationApis.find({ organizationId: this._id }).fetch();
