@@ -482,22 +482,22 @@
           "label": "URL"
         },
         "submit_methods": {
-            "label": "Allow try-out for following methods:"
-          },
-          "organizationId": {
-            "label": "Connect API to organization"
-          },
-          "lifecycleStatus": {
-            "label": "Lifecycle status",
-            "placeholder": "Select lifecycle status",
-            "options": {
-              "design": "Design",
-              "development": "Development",
-              "testing": "Testing",
-              "production": "Production",
-              "deprecated": "Deprecated"
-            }
+          "label": "Allow try-out for following methods:"
+        },
+        "organizationId": {
+          "label": "Connect API to organization"
+        },
+        "lifecycleStatus": {
+          "label": "Lifecycle status",
+          "placeholder": "Select lifecycle status",
+          "options": {
+            "design": "Design",
+            "development": "Development",
+            "testing": "Testing",
+            "production": "Production",
+            "deprecated": "Deprecated"
           }
+        }
       },
       "apiMetadata": {
           "organization": {
