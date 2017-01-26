@@ -53,12 +53,15 @@
       <!-- Tabs -->
       <div id="organization-navigation-tabs" class="navigation-tabs">
         <ul class="nav nav-tabs">
+        {{# if currentUserCanView }}
+          <!-- APIs -->
           <li id ="organization-apis-tab" class="active">
             <a href="#organization-apis" data-toggle="tab">
               <i class="fa fa-info-circle"></i>
               {{_ "organizationProfileHeader_tabs_apis" }}
             </a>
           </li>
+        {{/ if }}
           {{# if organization.currentUserCanEdit }}
             <!-- Settings -->
             <li id="organization-settings-tab">
