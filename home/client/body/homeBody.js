@@ -27,11 +27,11 @@ Template.homeBody.onCreated(function () {
   instance.subscribe('usersCount');
 });
 // eslint-disable-next-line prefer-arrow-callback
-Template.homeBody.onRendered( function () {
-  $('.contact-us-link').click( function (){
-    document.getElementById('contact-us').scrollIntoView;
-    });
-});
+Template.homeBody.onRendered = function () {
+  $('.contact-us-link').click(function () {
+    document.getElementById('contact-us').scrollIntoView();
+  });
+};
 
 Template.homeBody.helpers({
   ApisCount () {
@@ -76,10 +76,7 @@ Template.homeBody.helpers({
       // Check if cover photo file is available
       if (currentCoverPhotoFile) {
        // Get cover photo file URL
-        console.log(Meteor.absoluteUrl().slice(0, -1));
-        console.log('CoverPhoto.baseURL:', CoverPhoto.baseURL);
-        console.log('currentCoverPhotoFile.md5:', currentCoverPhotoFile.md5);
-               return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
+        return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
       }
     }
     return '';
