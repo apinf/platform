@@ -115,7 +115,6 @@ Meteor.methods({
     // Get APIs managed by organization
     const organizationApis = Organizations.findOne(organizationId).managedApiIds();
 
-
     // Remove User ID from managers array
     Organizations.update({ _id: organizationId },
       { $pull:
