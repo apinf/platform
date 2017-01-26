@@ -1,6 +1,7 @@
 // Meteor packages import
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { ValidEmail } from 'meteor/froatsnook:valid-email';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -72,5 +73,15 @@ Meteor.methods({
     } else {
       throw new Meteor.Error('email-not-registered');
     }
+  },
+  addOrganizationManagerToApiManager (organizationId, email) {
+    // Make sure organizationId is an String
+    check(organizationId, String);
+
+    // Make sure email is a valid email
+    check(email, ValidEmail);
+
+    // Get user with matching email
+    const user = Accounts.findUserByEmail(email);
   },
 });
