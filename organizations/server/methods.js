@@ -77,6 +77,7 @@ Meteor.methods({
       throw new Meteor.Error('email-not-registered');
     }
   },
+<<<<<<< HEAD
   makeOrganizationManagerApiManager (organizationId, email) {
     // Make sure organizationId is an String
     check(organizationId, String);
@@ -103,6 +104,21 @@ Meteor.methods({
           Apis.update(apiId, { $push: { managerIds: user._id } });
         }
       });
-    }
+    },
+  removeOrganization (organizationId) {
+    check(organizationId, String);
+    // Remove organization document
+    Organizations.remove(organizationId);
+
+    // Get all organizationApis links with current organization ID
+    const organizationApis = OrganizationApis.find({ organizationId }).fetch();
+
+    // Get array with all IDs of found document
+    const organizationApisIDs = _.map(organizationApis, (link) => {
+      return link._id;
+    });
+
+    // Remove organizationApi links
+    OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
   },
 });
