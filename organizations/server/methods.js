@@ -112,12 +112,31 @@ Meteor.methods({
     // Make sure userId is an String
     check(userId, String);
 
+    // Get APIs managed by organization
+    const organizationApis = Organizations.findOne(organizationId).managedApiIds();
+
+
     // Remove User ID from managers array
     Organizations.update({ _id: organizationId },
       { $pull:
          { managerIds: userId },
       }
      );
+
+    if (organizationApis) {
+      organizationApis.forEach((apiId) => {
+         // Get API document
+        const api = Apis.findOne(apiId);
+
+         // Check if user is manager
+        const isManager = api.managerIds.includes(userId);
+
+        if (isManager) {
+           // Remove user ID from API manager IDs field
+          Apis.update(apiId, { $pull: { managerIds: userId } });
+        }
+      });
+    }
   },
   removeOrganization (organizationId) {
     check(organizationId, String);
