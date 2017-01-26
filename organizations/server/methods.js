@@ -83,5 +83,23 @@ Meteor.methods({
 
     // Get user with matching email
     const user = Accounts.findUserByEmail(email);
+
+    // Get APIs managed by organization
+    const organizationApis = Organizations.findOne(organizationId).managedApiIds();
+
+    if (organizationApis) {
+      organizationApis.forEach((apiId) => {
+        // Get API document
+        const api = Apis.findOne(apiId);
+
+        // Check if user is already manager
+        const alreadyManager = api.managerIds.includes(user._id);
+
+        if (!alreadyManager) {
+          // Add user ID to API manager IDs field
+          Apis.update(apiId, { $push: { managerIds: user._id } });
+        }
+      });
+    }
   },
 });
