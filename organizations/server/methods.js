@@ -69,7 +69,7 @@ Meteor.methods({
         Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
 
         // Make organization manager a manager of APIs
-        Meteor.call('addOrganizationManagerToApiManager', manager.organizationId, manager.email);
+        Meteor.call('makeOrganizationManagerApiManager', manager.organizationId, manager.email);
       } else {
         throw new Meteor.Error('manager-already-exist');
       }
@@ -77,7 +77,7 @@ Meteor.methods({
       throw new Meteor.Error('email-not-registered');
     }
   },
-  addOrganizationManagerToApiManager (organizationId, email) {
+  makeOrganizationManagerApiManager (organizationId, email) {
     // Make sure organizationId is an String
     check(organizationId, String);
 
