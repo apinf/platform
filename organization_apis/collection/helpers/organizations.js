@@ -84,19 +84,54 @@ Organizations.helpers({
     return [];
   },
   filteredApis (filterQuery) {
+    // Get user id
+    const userId = Meteor.userId();
+
     // Get IDs of managed APIs
     const apiIds = this.managedApiIds();
 
-    // Find in managed APIs
-    const dbQuery = { _id: { $in: apiIds } };
+    // Placeholder for filtering
+    let filtering;
+
+    // Set filters
+    // Case: Registered users
+    if (userId) {
+      // Case: user is admin or manager of organization
+
+      // Get all managed organizations fo current user
+      const userIsOrganizationManager = Organizations.find({ managerIds: userId }).count();
+      // Check if user is admin
+      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+      if (userIsAdmin || userIsOrganizationManager > 0) {
+        // Show all managed apis of current organization
+        filtering = { _id: { $in: apiIds } };
+      } else {
+        // Case: user is manager of APIs or without APIs
+
+        // Select available managed apis of current organization
+        filtering = { _id: { $in: apiIds },
+          $or: [
+            { isPublic: true },
+            { managerIds: userId },
+            { authorizedUserIds: userId },
+          ],
+        };
+      }
+    } else {
+      // Case: Anonymous users
+
+      // Show all public managed apis of current organization
+      filtering = { _id: { $in: apiIds }, isPublic: true };
+    }
 
     // Add filter options to database query
     _.forEach(filterQuery, (value, field) => {
       // Add fields from filter to database query
-      dbQuery[field] = value;
+      filtering[field] = value;
     });
 
     // Get an array of APIs, based on API IDs array and filter
-    return Apis.find(dbQuery).fetch();
+    return Apis.find(filtering).fetch();
   },
 });
