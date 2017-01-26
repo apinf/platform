@@ -77,7 +77,6 @@ Meteor.methods({
       throw new Meteor.Error('email-not-registered');
     }
   },
-<<<<<<< HEAD
   makeOrganizationManagerApiManager (organizationId, email) {
     // Make sure organizationId is an String
     check(organizationId, String);
@@ -104,7 +103,8 @@ Meteor.methods({
           Apis.update(apiId, { $push: { managerIds: user._id } });
         }
       });
-    },
+    }
+  },
   removeOrganization (organizationId) {
     check(organizationId, String);
     // Remove organization document
