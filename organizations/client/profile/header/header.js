@@ -1,6 +1,9 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import OrganizationLogo from '/organizations/logo/collection/collection';
+import { Roles } from 'meteor/alanning:roles';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+
+import OrganizationLogo from '/organizations/logo/collection/collection';
 
 Template.organizationProfileHeader.onRendered(function () {
   // Assign resumable browse to element
