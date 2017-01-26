@@ -34,14 +34,14 @@ Template.homeBody.onRendered = function () {
 };
 
 Template.homeBody.helpers({
-  ApisCount () {
+  apisCount () {
     return Counts.get('apisCount');
   },
 
-  OrganizationsCount () {
+  organizationsCount () {
     return Counts.get('organizationsCount');
   },
-  UsersCount () {
+  usersCount () {
     return Counts.get('usersCount');
   },
 
