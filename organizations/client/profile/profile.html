@@ -8,10 +8,14 @@
           {{> organizationApis organization=organization }}
         </div>
         <!-- Settings tab -->
-        <div id="organization-settings" class="tab-pane fade">
-          {{> organizationSettings organization=organization }}
-        </div>
+        {{# if organization.currentUserCanManage }}
+          <div id="organization-settings" class="tab-pane fade">
+            {{> organizationSettings organization=organization }}
+          </div>
+        {{/ if }}
       </div>
     </div>
-  {{/if}}
+  {{ else }}
+    {{> spinner }}
+  {{/ if }}
 </template>
