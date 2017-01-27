@@ -47,7 +47,7 @@ Template.organizationCatalogueToolbar.onRendered(function () {
 });
 
 Template.organizationCatalogueToolbar.helpers({
-  userCanViewFilter () {
+  userIsOrganizationManager () {
     // Get ID of current user
     const userId = Meteor.userId();
     // Get all managed organizations
