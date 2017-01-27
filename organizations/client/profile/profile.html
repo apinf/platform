@@ -3,42 +3,9 @@
     {{> organizationProfileHeader organization=organization }}
     <div class="container dropdown">
       <div class="tab-content">
+        <!-- APIs tab -->
         <div id="organization-apis" class="tab-pane fade in active">
-          <!-- dropdown class set relative position -->
-          <div class="block-header">
-            <div class="pull-right">
-              <!-- Filter button -->
-              {{# if organization.hasPublicApis }}
-                {{> apisFilterIcon }}
-              {{/ if }}
-              <!-- Connection API button -->
-              {{# if organization.currentUserCanEdit }}
-                <button type="button" class="btn btn-default" id="connect-api">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                  {{_ 'organizationProfile_buttonText_connectApi' }}
-                </button>
-              {{/ if }}
-            </div>
-            {{# if organization.hasPublicApis }}
-              <!-- Title -->
-              <h3 class="apis-block-title">
-                {{_ 'organizationProfile_bigText_apisCount'  }}
-                <small>
-                  {{_ 'organizationProfile_smallText_apisCount' filteredApisCount}}
-                </small>
-              </h3>
-              {{# if selectedFilter }}
-                <span>
-                  {{_ 'organizationProfile_text_filteredBy' }}
-                  <i>{{ selectedFilter }}</i>
-                  <button id="reset-filter-options" class="btn btn-default btn-xs">
-                    {{_ 'organizationProfile_buttonText_clear' }}
-                  </button>
-                </span>
-              {{/ if }}
-            {{/ if }}
-          </div>
-          {{> apiCatalogGrid apis=filteredApis }}
+          {{> organizationApis organization=organization }}
         </div>
         <!-- Settings tab -->
         <div id="organization-settings" class="tab-pane fade">
