@@ -28,8 +28,9 @@ Template.homeBody.onCreated(function () {
 });
 // eslint-disable-next-line prefer-arrow-callback
 Template.homeBody.onRendered = function () {
-  $('.contact-us-link').click(function () {
-    document.getElementById('contact-us').scrollIntoView();
+  $('#contact-us-link').click(function () {
+    const contactUs = document.getElementById('contact-us');
+    contactUs.scrollIntoView();
   });
 };
 
