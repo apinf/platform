@@ -3,7 +3,6 @@ import { Apis } from './';
 
 Apis.schema = new SimpleSchema({
   name: {
-    label: 'API Name',
     type: String,
     optional: false,
     // API Name should be unique for
@@ -12,7 +11,6 @@ Apis.schema = new SimpleSchema({
     unique: true,
   },
   description: {
-    label: 'Description',
     type: String,
     max: 1000,
     autoform: {
@@ -21,7 +19,6 @@ Apis.schema = new SimpleSchema({
     optional: true,
   },
   url: {
-    label: 'URL',
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
