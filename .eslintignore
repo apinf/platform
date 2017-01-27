@@ -15,7 +15,7 @@ core/client/lib
 #apis/client/add/autoform.js
 #apis/client/export/export.js
 #apis/client/import_documentation/import.js
-apis/client/import/import.js
+#apis/client/import/import.js
 apis/client/lib/router.js
 apis/client/profile/intro/intro.js
 apis/client/profile/settings/delete/delete.js
