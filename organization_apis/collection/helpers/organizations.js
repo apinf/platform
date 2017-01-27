@@ -61,11 +61,11 @@ Organizations.helpers({
     // Return a count of Organiztion-API Links
     return OrganizationApis.find({ organizationId: this._id }).count();
   },
-  availablePublicApis () {
+  hasPublicApis () {
     // Get array of managed apis which available for current user
     const apis = this.apis();
 
-    // Return length of array
+    // Return true if organization has at least one public api
     return apis.length > 0;
   },
   managedApiIds () {

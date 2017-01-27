@@ -8,7 +8,7 @@
           <div class="block-header">
             <div class="pull-right">
               <!-- Filter button -->
-              {{# if organization.availablePublicApis }}
+              {{# if organization.hasPublicApis }}
                 {{> apisFilterIcon }}
               {{/ if }}
               <!-- Connection API button -->
@@ -19,7 +19,7 @@
                 </button>
               {{/ if }}
             </div>
-            {{# if organization.availablePublicApis }}
+            {{# if organization.hasPublicApis }}
               <!-- Title -->
               <h3 class="apis-block-title">
                 {{_ 'organizationProfile_bigText_apisCount'  }}

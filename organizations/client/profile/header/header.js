@@ -25,7 +25,7 @@ Template.organizationProfileHeader.helpers({
       return true;
     }
     // Show APIs tab if public apis are available otherwise don't show
-    return organization.availablePublicApis();
+    return organization.hasPublicApis();
   },
 });
 
