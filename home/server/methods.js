@@ -1,10 +1,11 @@
 /* jshint esversion: 6 */
 import { Counts } from 'meteor/tmeasday:publish-counts';
-import { Apis } from '/apis/collection';
-import { Organizations } from '/organizations/collection';
 import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
+
+import { Apis } from '/apis/collection';
+import Organizations from '/organizations/collection';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 
