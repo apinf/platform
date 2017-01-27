@@ -57,7 +57,7 @@ Meteor.startup(() => {
 
     // Get organization
     const organization = Organizations.findOne();
-    if (organization && !organization.currentUserCanEdit()) {
+    if (organization && !organization.currentUserCanManage()) {
       // Create & show error message about permissions
       const message = TAPi18n.__('organizationLogo_noPermissions');
       sAlert.error(message);
