@@ -1,6 +1,6 @@
 // Meteor package import
 import { Template } from 'meteor/templating';
-import { Apis } from '../../collection';
+import Apis from '../../collection';
 
 Template.addApi.onCreated(function () {
   const instance = this;

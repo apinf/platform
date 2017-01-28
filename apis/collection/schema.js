@@ -1,5 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Apis } from './';
+import Apis from './';
 
 Apis.schema = new SimpleSchema({
   name: {

@@ -1,4 +1,4 @@
-import { Apis } from '../';
+import Apis from '../';
 
 // Create indexes for fields in MongoDB collection (API backends search functionality)
 Apis._ensureIndex({

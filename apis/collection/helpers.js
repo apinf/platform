@@ -12,7 +12,7 @@ import _ from 'lodash';
 // Collection imports
 import { ApiBackendRatings } from '/ratings/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
-import { Apis } from './';
+import Apis from './';
 
 
 Apis.helpers({

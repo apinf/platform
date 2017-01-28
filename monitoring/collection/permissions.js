@@ -1,5 +1,5 @@
 // APINF import
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { MonitoringSettings } from './';
 
 MonitoringSettings.allow({

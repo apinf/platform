@@ -4,7 +4,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { ApiBackendRatings } from '../collection';
 
 Template.apiBackendRating.created = function () {
