@@ -2,7 +2,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
-import { ApiFlags } from '../../../collection';
+import ApiFlags from '../../../collection';
 
 
 Template.flagApiButton.onCreated(function () {

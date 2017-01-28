@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { ApiFlags } from '../../collection';
+import ApiFlags from '../../collection';
 
 
 Template.flagApiModal.onCreated(function () {
