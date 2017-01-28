@@ -25,7 +25,7 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 apis/client/profile/visibility/visibility.js
 #apis/collection/helpers.js
 #apis/collection/index.js
-apis/collection/schema.js
+#apis/collection/schema.js
 apis/collection/server/collection_index.js
 apis/collection/server/publications.js
 apis/flags/client/autoform.js
