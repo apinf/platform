@@ -1,4 +1,12 @@
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { Meteor } from 'meteor/meteor';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+
 AutoForm.addHooks('insertApiFlag', {
+  // eslint-disable-next-line no-unused-vars
   onSuccess (formType, result) {
     // Hide modal
     Modal.hide('flagApiModal');
