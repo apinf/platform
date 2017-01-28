@@ -1,4 +1,4 @@
-import { ApiLogo } from '/apis/logo/collection/collection';
+import ApiLogo from '../collection';
 
 Meteor.publish('allApiLogo', function() {
   return ApiLogo.find({

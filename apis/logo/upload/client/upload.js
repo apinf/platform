@@ -1,4 +1,4 @@
-import { ApiLogo } from '/apis/logo/collection/collection';
+import ApiLogo from '../../collection';
 import Apis from '/apis/collection';
 
 Template.uploadApiLogo.onCreated(function () {

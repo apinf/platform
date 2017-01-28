@@ -1,4 +1,4 @@
-import { ApiLogo } from '/apis/logo/collection/collection';
+import ApiLogo from '../../../collection';
 
 Template.uploadApiLogoButton.onRendered(function() {
   // Assign resumable browse to element

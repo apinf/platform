@@ -1,4 +1,4 @@
-import { ApiLogo } from '/apis/logo/collection/collection';
+import ApiLogo from '../';
 
 ApiLogo.allow({
   insert: function(userId, file) {
