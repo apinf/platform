@@ -1,6 +1,14 @@
-Meteor.publish('singleApiFlag', (apiBackendId) => {
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
 
-  // Fetch api flag by apibackend id
+import ApiFlags from '../';
+
+
+Meteor.publish('singleApiFlag', (apiBackendId) => {
+  // Make sure apiBackendId is a String
+  check(apiBackendId, String);
+
+  // Fetch api flag by api backend id
   const flag = ApiFlags.find({ apiBackendId });
 
   return flag;
