@@ -57,6 +57,7 @@ Meteor.startup(() => {
 
     // Get organization
     const organization = Organizations.findOne();
+    // If user doesn't have permission to insert logo
     if (organization && !organization.currentUserCanManage()) {
       // Create & show error message about permissions
       const message = TAPi18n.__('organizationLogo_noPermissions');
