@@ -7,7 +7,7 @@
         {{> apisFilterIcon }}
       {{/ if }}
       <!-- Connection API button -->
-      {{# if organization.currentUserCanEdit }}
+      {{# if organization.currentUserCanManage }}
         <button type="button" class="btn btn-default" id="connect-api">
           <i class="fa fa-plus" aria-hidden="true"></i>
           {{_ 'organizationProfile_buttonText_connectApi' }}
@@ -19,7 +19,7 @@
       <h3 class="apis-block-title">
         {{_ 'organizationProfile_bigText_apisCount'  }}
         <small>
-          {{_ 'organizationProfile_smallText_apisCount' organization.apisCount}}
+          {{_ 'organizationProfile_smallText_apisCount' apisCount}}
         </small>
       </h3>
       {{# if selectedFilter }}
@@ -33,5 +33,5 @@
       {{/ if }}
     {{/ if }}
   </div>
-  {{> apiCatalogGrid apis=filteredApis }}
+  {{> apiCatalogGrid apis=apis }}
 </template>
