@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Meteor } from 'meteor/meteor';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
@@ -7,7 +9,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { FS } from 'meteor/cfs:filesystem';
 import jsyaml from 'js-yaml';
 
-/* eslint-env browser */
 
 Template.importApiConfiguration.onRendered(function () {
   // keep current template instance
