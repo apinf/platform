@@ -52,12 +52,12 @@ Template.organizationApis.onCreated(function () {
     if (lifecycleParameter) {
       // Filter data by selected parameter
       managedApis = Apis.find({
-        _id: managedApiIds,
+        _id: { $in: managedApiIds },
         lifecycleStatus: lifecycleParameter,
       }).fetch();
     } else {
       // Otherwise show all managed apis
-      managedApis = Apis.find({ _id: managedApiIds }).fetch();
+      managedApis = Apis.find({ _id: { $in: managedApiIds } }).fetch();
     }
 
     // Save list of managed APIs in instance reactive variable

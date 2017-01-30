@@ -26,7 +26,7 @@ Organizations.helpers({
     const managedApiIds = this.managedApiIds();
 
     // Get array of managed apis which available for current user
-    const apis = Apis.find({ _id: managedApiIds }).fetch();
+    const apis = Apis.find({ _id: { $in: managedApiIds } }).fetch();
 
     // Return true if organization has at least one public api
     return apis.length > 0;
