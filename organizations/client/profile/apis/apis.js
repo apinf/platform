@@ -28,10 +28,10 @@ Template.organizationApis.onCreated(function () {
     // Checking of organization manager role
     if (organization.currentUserCanManage()) {
       // If user is admin or organization manager then publish all managed APIs
-      instance.subscribe('allApisByIds', managedApiIds);
+      instance.subscribe('allOrganizationApisByIds', managedApiIds);
     } else {
-      // Otherwise publish all public managed APIs
-      instance.subscribe('publicApisByIds', managedApiIds);
+      // Otherwise publish all available managed APIs for current user
+      instance.subscribe('organizationPublicApisByIds', managedApiIds);
     }
   });
 

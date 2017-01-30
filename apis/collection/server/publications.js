@@ -19,7 +19,7 @@ Meteor.publish('apiBackend', (apiBackendId) => {
   return Apis.find({ _id: apiBackendId });
 });
 
-Meteor.publish('allApisByIds', (apiIds) => {
+Meteor.publish('allOrganizationApisByIds', (apiIds) => {
   // Make sure apiIds is an Array
   check(apiIds, Array);
 
@@ -28,7 +28,7 @@ Meteor.publish('allApisByIds', (apiIds) => {
 });
 
 // eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('publicApisByIds', function (apiIds) {
+Meteor.publish('organizationPublicApisByIds', function (apiIds) {
   // Make sure apiIds is an Array
   check(apiIds, Array);
 
