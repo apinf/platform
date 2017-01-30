@@ -35,14 +35,13 @@ Meteor.publish('organizationPublicApisByIds', function (apiIds) {
   // Get user id
   const userId = this.userId;
 
-  // Placeholder for filtering
+  // Placeholder for storage
   let filteredApis;
 
   // Case: Registered users
   if (userId) {
     // Case: user is manager of APIs or without APIs
-
-    // Select available managed apis of current organization
+    // Select available organization apis for current user
     filteredApis = {
       _id: { $in: apiIds },
       $or: [
@@ -54,11 +53,11 @@ Meteor.publish('organizationPublicApisByIds', function (apiIds) {
   } else {
     // Case: Anonymous users
 
-    // Show all public managed apis of current organization
+    // Show all public apis of organization
     filteredApis = { _id: { $in: apiIds }, isPublic: true };
   }
 
-  // Find one or more APIs using an array of API IDs
+  // Return cursor on organization apis which can be shown for current user
   return Apis.find(filteredApis);
 });
 
