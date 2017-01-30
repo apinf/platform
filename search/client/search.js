@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APINF import
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 // npm import
 import moment from 'moment';
 import 'moment/min/locales.min';

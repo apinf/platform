@@ -1,5 +1,8 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
-import { Apis } from '../';
+
+import Apis from '../';
+
 
 Meteor.publish('userManagedApis', function () {
   // get current user id
@@ -9,16 +12,25 @@ Meteor.publish('userManagedApis', function () {
   return Apis.find({ managerIds: userId });
 });
 
-Meteor.publish('apiBackend', function (backendId) {
-  return Apis.find({ _id: backendId });
+Meteor.publish('apiBackend', (apiBackendId) => {
+  // Make sure apiBackendId is a String
+  check(apiBackendId, String);
+
+  return Apis.find({ _id: apiBackendId });
 });
 
-Meteor.publish('apisByIds', function (apiIds) {
+Meteor.publish('apisByIds', (apiIds) => {
+  // Make sure apiIds is an Array
+  check(apiIds, Array);
+
   // Find one or more APIs using an array of API IDs
   return Apis.find({ _id: { $in: apiIds } });
 });
 
-Meteor.publish('latestPublicApis', function (limit) {
+Meteor.publish('latestPublicApis', (limit) => {
+  // Make sure apiIds is an Array
+  check(limit, Number);
+
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },
@@ -27,4 +39,5 @@ Meteor.publish('latestPublicApis', function (limit) {
 });
 
 // Publish collection for pagination
+// eslint-disable-next-line no-new
 new Meteor.Pagination(Apis);

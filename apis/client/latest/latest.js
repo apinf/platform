@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { Template } from 'meteor/templating';
 
 Template.latestPublicApis.onCreated(function () {

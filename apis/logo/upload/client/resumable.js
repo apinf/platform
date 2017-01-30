@@ -1,5 +1,5 @@
 import { ApiLogo } from '/apis/logo/collection/collection';
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(function () {

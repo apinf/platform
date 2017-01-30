@@ -2,7 +2,7 @@ import  { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
 import { DocumentationFiles } from '/documentation/collection/collection';
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { Settings } from '/settings/collection';
 
 const uploadingSpinner = new ReactiveVar(false);
