@@ -65,16 +65,12 @@ Template.importApiConfiguration.onCreated(function () {
 
 
 Template.importApiConfiguration.events({
-  // eslint-disable-next-line no-unused-vars
   'dropped #dropzone': function (event, templateInstance) {
-    // current template instance
-    const instance = Template.instance();
-
     // grabs "dropped" files and iterates through them
     FS.Utility.eachFile(event, (file) => {
       // checks if file is found
       if (file) {
-        // initialises new reader instance
+        // initialises new reader templateInstance
         const reader = new FileReader();
 
         // reads file - expecting YAML, JSON or TXT
@@ -85,25 +81,25 @@ Template.importApiConfiguration.events({
           // gets file contents
           const importedFile = onLoadEvent.target.result;
 
-          let jsonObj = {};
+          let apiConfiguration = {};
 
           const acceptedExtensions = ['yaml', 'yml', 'txt', 'json'];
 
           // checks if file name contains one of accepted extensions
-          if (instance.endsWith(file.name, acceptedExtensions)) {
+          if (templateInstance.endsWith(file.name, acceptedExtensions)) {
             // checks if file extension is .YAML or .TXT
-            if (instance.endsWith(file.name, ['yaml', 'yml', 'txt'])) {
+            if (templateInstance.endsWith(file.name, ['yaml', 'yml', 'txt'])) {
               // converts YAML to JSON
               const yamlToJson = jsyaml.load(importedFile);
 
               // parses JSON obj to JSON String with indentation
-              jsonObj = JSON.stringify(yamlToJson, null, '\t');
+              apiConfiguration = JSON.stringify(yamlToJson, null, '\t');
             }
 
             // checks if file extension is .JSON
-            if (instance.endsWith(file.name, ['json'])) {
+            if (templateInstance.endsWith(file.name, ['json'])) {
               // if JSON - no need to convert anything
-              jsonObj = importedFile;
+              apiConfiguration = importedFile;
             }
           } else {
             // Get error message translation
@@ -114,28 +110,24 @@ Template.importApiConfiguration.events({
           }
 
           // pastes converted file to ace editor
-          instance.editor.setValue(jsonObj);
+          templateInstance.editor.setValue(apiConfiguration);
         };
       }
     });
 
     return false;
   },
-  // eslint-disable-next-line no-unused-vars
   'submit #apiConfigurationUploadForm': function (event, templateInstance) {
-    // current template instance
-    const instance = Template.instance();
-
     // gets current data from ace editor
-    const jsonString = instance.editor.getValue();
+    const jsonString = templateInstance.editor.getValue();
 
     // try catch here, so that page does not reload if JSON is incorrect
     try {
-      // parses JSON String to JSON Object
-      const jsonObj = JSON.parse(jsonString);
+      // parses JSON String to apiConfiguration
+      const apiConfiguration = JSON.parse(jsonString);
 
-      // calls method and passing jsonObj there - expects status object as callback
-      Meteor.call('importApiConfigs', jsonObj, (err, status) => {
+      // import apiConfiguration: expects status from callback
+      Meteor.call('importApiConfigs', apiConfiguration, (err, status) => {
         // error handing
         if (err) sAlert.error(err);
 
@@ -161,5 +153,4 @@ Template.importApiConfiguration.events({
 
     return false;
   },
-
 });
