@@ -19,22 +19,6 @@ Template.organizationApis.onCreated(function () {
   // Get Organization document from template data
   const organization = instance.data.organization;
 
-  instance.autorun(() => {
-    // Subscribe to OrganizationAPIs link documents
-    instance.subscribe('organizationApiLinksByOrganizationSlug', organization.slug);
-
-    const managedApiIds = organization.managedApiIds();
-
-    // Checking of organization manager role
-    if (organization.currentUserCanManage()) {
-      // If user is admin or organization manager then publish all managed APIs
-      instance.subscribe('allOrganizationApisByIds', managedApiIds);
-    } else {
-      // Otherwise publish all available managed APIs for current user
-      instance.subscribe('organizationPublicApisByIds', managedApiIds);
-    }
-  });
-
   // Watching for changes of query parameters
   instance.autorun(() => {
     const managedApiIds = organization.managedApiIds();

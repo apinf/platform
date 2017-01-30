@@ -19,6 +19,25 @@ Template.organizationProfile.onCreated(function () {
       // Reactively subscribe to a single Organization composite
       // Makes sure proper data is available when editing organization name
       instance.subscribe('organizationComposite', organizationSlug);
+      // Subscribe to OrganizationAPIs link documents
+      instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
+
+      // Get Organization document
+      const organization = Organizations.findOne({ slug: organizationSlug });
+
+      if (organization) {
+        // Get IDs of managed APIs via collection helper
+        const managedApiIds = organization.managedApiIds();
+
+        // Checking of organization manager role
+        if (organization.currentUserCanManage()) {
+          // If user is admin or organization manager then publish all managed APIs
+          instance.subscribe('allOrganizationApisByIds', managedApiIds);
+        } else {
+          // Otherwise publish all available managed APIs for current user
+          instance.subscribe('organizationPublicApisByIds', managedApiIds);
+        }
+      }
     }
   });
 });
