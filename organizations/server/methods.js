@@ -50,6 +50,7 @@ Meteor.methods({
   addOrganizationManagerByEmail (manager) {
     // Make sure manager (with organizationId and email) is an Object
     check(manager, Object);
+
     // Subsequent checks for the expected object properties
     check(manager.organizationId, String);
     check(manager.email, String);
