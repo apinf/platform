@@ -15,21 +15,10 @@ Organizations.allow({
   },
   update (userId, organization) {
     // Check if current user can update
-    if (organization.currentUserCanManage()) {
-      return true;
-    }
-
-    return false;
+    return organization.currentUserCanManage();
   },
   remove (userId, organization) {
-    // Check if current user is admin
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-    // Only admin/owner can update
-    if (userIsAdmin && organization.currentUserCanManage()) {
-      return true;
-    }
-
-    return false;
+    // Check if current user can remove
+    return organization.currentUserCanManage();
   },
 });
