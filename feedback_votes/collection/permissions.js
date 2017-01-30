@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { Feedback } from '/feedback/collection';
 import { FeedbackVotes } from './';
 

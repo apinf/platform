@@ -1,5 +1,5 @@
 import { ApiBacklogItems } from './';
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 
 ApiBacklogItems.allow({
   insert: function (userId, backlog) {

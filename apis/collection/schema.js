@@ -1,9 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Apis } from './';
+import Apis from './';
 
 Apis.schema = new SimpleSchema({
   name: {
-    label: 'API Name',
     type: String,
     optional: false,
     // API Name should be unique for
@@ -12,7 +11,6 @@ Apis.schema = new SimpleSchema({
     unique: true,
   },
   description: {
-    label: 'Description',
     type: String,
     max: 1000,
     autoform: {
@@ -21,7 +19,6 @@ Apis.schema = new SimpleSchema({
     optional: true,
   },
   url: {
-    label: 'URL',
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
@@ -71,13 +68,15 @@ Apis.schema = new SimpleSchema({
     type: Date,
     optional: true,
     autoValue () {
+      let value;
       if (this.isInsert) {
-        return new Date();
+        value = new Date();
       } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
+        value = { $setOnInsert: new Date() };
       } else {
         this.unset();  // Prevent user from supplying their own value
       }
+      return value;
     },
   },
   created_by: {
@@ -88,9 +87,11 @@ Apis.schema = new SimpleSchema({
     type: Date,
     optional: true,
     autoValue () {
+      let value;
       if (this.isUpdate) {
-        return new Date();
+        value = new Date();
       }
+      return value;
     },
   },
   updated_by: {

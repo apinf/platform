@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 
 Meteor.methods({
   setAllApiBackendBookmarkCounts () {
