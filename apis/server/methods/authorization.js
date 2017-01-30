@@ -3,7 +3,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 
 Meteor.methods({
   addAuthorizedUserByEmail (apiId, email) {

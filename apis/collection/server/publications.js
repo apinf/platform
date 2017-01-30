@@ -1,25 +1,26 @@
-import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Apis } from '../';
+import { Meteor } from 'meteor/meteor';
+
+import Apis from '../';
 
 // eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('userManagedApis', function () {
-  // get current user id
+  // Get current user id
   const userId = this.userId;
 
   // Get API Backends that user manages
   return Apis.find({ managerIds: userId });
 });
 
-// eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('apiBackend', function (backendId) {
-  check(backendId, String);
+Meteor.publish('apiBackend', (apiBackendId) => {
+  // Make sure apiBackendId is a String
+  check(apiBackendId, String);
 
-  return Apis.find({ _id: backendId });
+  return Apis.find({ _id: apiBackendId });
 });
 
-// eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('allApisByIds', function (apiIds) {
+Meteor.publish('allApisByIds', (apiIds) => {
+  // Make sure apiIds is an Array
   check(apiIds, Array);
 
   // Find one or more APIs using an array of API IDs
@@ -28,6 +29,7 @@ Meteor.publish('allApisByIds', function (apiIds) {
 
 // eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('publicApisByIds', function (apiIds) {
+  // Make sure apiIds is an Array
   check(apiIds, Array);
 
   // Get user id
@@ -60,8 +62,8 @@ Meteor.publish('publicApisByIds', function (apiIds) {
   return Apis.find(filteredApis);
 });
 
-// eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('latestPublicApis', function (limit) {
+Meteor.publish('latestPublicApis', (limit) => {
+  // Make sure limit is a Number
   check(limit, Number);
 
   // Return cursor to latest API Backends

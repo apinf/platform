@@ -4,7 +4,7 @@ import { SyncedCron } from 'meteor/percolate:synced-cron';
 
 // APINF import
 import { MonitoringSettings } from '/monitoring/collection';
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 
 // NPM packages import
 import _ from 'lodash';

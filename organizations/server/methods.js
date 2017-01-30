@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
 
 // APINF collections import
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import OrganizationApis from '/organization_apis/collection';
 import Organizations from '/organizations/collection';
 

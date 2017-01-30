@@ -1,5 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Apis } from './';
+import Apis from './';
 
 Apis.schema = new SimpleSchema({
   name: {
@@ -68,13 +68,15 @@ Apis.schema = new SimpleSchema({
     type: Date,
     optional: true,
     autoValue () {
+      let value;
       if (this.isInsert) {
-        return new Date();
+        value = new Date();
       } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
+        value = { $setOnInsert: new Date() };
       } else {
         this.unset();  // Prevent user from supplying their own value
       }
+      return value;
     },
   },
   created_by: {
@@ -85,9 +87,11 @@ Apis.schema = new SimpleSchema({
     type: Date,
     optional: true,
     autoValue () {
+      let value;
       if (this.isUpdate) {
-        return new Date();
+        value = new Date();
       }
+      return value;
     },
   },
   updated_by: {

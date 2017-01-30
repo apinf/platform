@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
 
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';

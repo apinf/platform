@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { ApiV1 } from '/core/server/api';
 import _ from 'lodash';
 

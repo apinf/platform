@@ -1,7 +1,7 @@
 import { _ } from 'lodash';
 
 // APINF collection imports
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 

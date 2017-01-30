@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { Roles } from 'meteor/alanning:roles';
 
 import { Settings } from '/settings/collection';
-import { Apis } from '../';
+import Apis from '../';
 
 Apis.allow({
   insert (userId) {

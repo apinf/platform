@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 

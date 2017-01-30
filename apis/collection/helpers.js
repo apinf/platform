@@ -1,15 +1,19 @@
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Utility imports
 import ss from 'simple-statistics';
 import moment from 'moment';
 import 'moment/min/locales.min';
 import _ from 'lodash';
 
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import { ApiBackendRatings } from '/ratings/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
-import { Apis } from './';
+import Apis from './';
+
 
 Apis.helpers({
   currentUserCanEdit () {
@@ -79,7 +83,7 @@ Apis.helpers({
     if (apiBackendRatings) {
       // Create array containing only rating values
       // get only the rating value; omit User ID and API Backend ID fields
-      const apiBackendRatingsArray = _.map(apiBackendRatings, rating => rating.rating);
+      const apiBackendRatingsArray = _.map(apiBackendRatings, rating => { return rating.rating; });
 
       // Get the average (mean) value for API Backend ratings
       const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
