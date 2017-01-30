@@ -6,7 +6,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 // APINF collection imports
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 
 Template.organizationApis.onCreated(function () {
   // Get reference to template instance
@@ -34,12 +34,9 @@ Template.organizationApis.onCreated(function () {
       instance.subscribe('publicApisByIds', managedApiIds);
     }
   });
-});
 
-Template.organizationApis.helpers({
-  apisCount () {
-    const instance = Template.instance();
-
+  // Watching for changes of query parameters
+  instance.autorun(() => {
     // Placeholder
     let managedApis;
 
@@ -60,6 +57,14 @@ Template.organizationApis.helpers({
 
     // Save list of managed APIs in instance reactive variable
     instance.managedApis.set(managedApis);
+  });
+});
+
+Template.organizationApis.helpers({
+  apisCount () {
+    const instance = Template.instance();
+    // Get managed/filtered APIs
+    const managedApis = instance.managedApis.get();
 
     // Return count of managed/filtered apis
     return managedApis.length;
