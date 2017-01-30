@@ -37,6 +37,8 @@ Template.organizationApis.onCreated(function () {
 
   // Watching for changes of query parameters
   instance.autorun(() => {
+    const managedApiIds = organization.managedApiIds();
+
     // Placeholder
     let managedApis;
 
@@ -49,10 +51,13 @@ Template.organizationApis.onCreated(function () {
     // Checking of filter was set
     if (lifecycleParameter) {
       // Filter data by selected parameter
-      managedApis = Apis.find({ lifecycleStatus: lifecycleParameter }).fetch();
+      managedApis = Apis.find({
+        _id: managedApiIds,
+        lifecycleStatus: lifecycleParameter,
+      }).fetch();
     } else {
       // Otherwise show all managed apis
-      managedApis = Apis.find().fetch();
+      managedApis = Apis.find({ _id: managedApiIds }).fetch();
     }
 
     // Save list of managed APIs in instance reactive variable

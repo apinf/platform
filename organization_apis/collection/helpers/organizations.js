@@ -23,8 +23,10 @@ Organizations.helpers({
     return OrganizationApis.find({ organizationId: this._id }).count();
   },
   hasPublicApis () {
+    const managedApiIds = this.managedApiIds();
+
     // Get array of managed apis which available for current user
-    const apis = Apis.find().fetch();
+    const apis = Apis.find({ _id: managedApiIds }).fetch();
 
     // Return true if organization has at least one public api
     return apis.length > 0;
