@@ -1,6 +1,4 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 import OrganizationLogo from '/organizations/logo/collection/collection';
@@ -12,16 +10,10 @@ Template.organizationProfileHeader.onRendered(function () {
 
 Template.organizationProfileHeader.helpers({
   currentUserCanView () {
-    const userId = Meteor.userId();
-    // Get related organization
     const organization = Template.currentData().organization;
 
-    // Check user's role on admin
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-    const userIsOrganizationManager = organization.managerIds.indexOf(userId) > -1;
-
-    // Show APIs tab if user is admin or manager of current organization
-    if (userIsAdmin || userIsOrganizationManager) {
+    // Show APIs tab anyway if user is admin or manager of current organization
+    if (organization.currentUserCanManage()) {
       return true;
     }
     // Show APIs tab if public apis are available otherwise don't show
