@@ -4,8 +4,7 @@ import Apis from '/apis/collection';
 
 
 Template.visibilityToggle.events({
-  // eslint-disable-next-line no-unused-vars
-  'click .changeVisibility': function (event) {
+  'click .changeVisibility': function () {
     // Get API from template data
     const api = Template.currentData().api;
 
