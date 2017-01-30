@@ -1,6 +1,11 @@
+/* jshint esversion: 6 */
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
+
+import { Apis } from '/apis/collection';
+import Organizations from '/organizations/collection';
 import { Settings } from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 
@@ -32,4 +37,16 @@ ${doc.message}`;
       });
     }
   },
+});
+// eslint-disable-next-line prefer-arrow-callback
+Meteor.publish('apisCount', function () {
+  Counts.publish(this, 'apisCount', Apis.find());
+});
+
+Meteor.publish('organizationsCount', function () {
+  Counts.publish(this, 'organizationsCount', Organizations.find());
+});
+
+Meteor.publish('usersCount', function () {
+  Counts.publish(this, 'usersCount', Meteor.users.find());
 });
