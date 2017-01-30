@@ -1,13 +1,13 @@
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
-
 import { FS } from 'meteor/cfs:filesystem';
 import { URI } from 'meteor/olragon:uri-js';
 
 import _ from 'lodash';
 import jsyaml from 'js-yaml';
+
+import { DocumentationFiles } from '/documentation/collection/collection';
 
 /* eslint-env browser */
 
@@ -53,15 +53,11 @@ Template.importApiDocumentation.events({
                 doc = jsyaml.load(importedFile);
               }
 
-              // Insert fine contents to a colletion
-              // TODO: Where does ApiDocs come from?
-              // eslint-disable-next-line no-undef
-              const apiDocsId = ApiDocs.insert(doc);
+              // Insert file contents to a colletion
+              DocumentationFiles.insert(doc);
 
-              // Set session variable containing API Docs ID,
+              // TODO (restore this logic): Set session variable containing API Docs ID,
               // used for attaching apiBackendId to apiDocs document on success
-              // eslint-disable-next-line meteor/no-session
-              Session.set('apiDocsId', apiDocsId);
             } else {
               // Get error message text
               const message = TAPi18n.__('importApiDocumentation_fileReadError_message');
