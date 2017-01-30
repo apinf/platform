@@ -12,10 +12,7 @@ import jsyaml from 'js-yaml';
 /* eslint-env browser */
 
 Template.importApiDocumentation.events({
-  // eslint-disable-next-line no-unused-vars
-  'change #apiDocumentationFile': function (event, templateInstance) {
-    // console.log(AutoForm.reactiveFormData());
-
+  'change #apiDocumentationFile': function (event) {
     // Allowed file extensions for API documentation file
     const acceptedExtensions = ['yaml', 'yml', 'json'];
 
