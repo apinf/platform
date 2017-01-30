@@ -47,22 +47,19 @@ Template.importApiConfiguration.onCreated(function () {
   const instance = this;
 
   // function attached to template instance checks file extension
-  instance.endsWith = function (filename, suffixList) {
-    // variable that keeps state of is this filename contains provided extensions - false by default
-    let state = false;
-
-    // iterating through extensions passed into suffixList array
+  instance.checkFileExtension = function (filename, suffixList) {
+    // iterate through extensions passed into suffixList array
     for (let i = 0; i < suffixList.length; i++) {
       // parses line to check if filename contains current suffix
-      const endsWith = filename.indexOf(
+      const containsCurrentSuffix = filename.indexOf(
         suffixList[i], filename.length - suffixList[i].length
       ) !== -1;
 
       // if current extension found in filename then change the state variable
-      if (endsWith) state = true;
+      if (containsCurrentSuffix) return true;
     }
 
-    return state;
+    return false;
   };
 });
 
