@@ -32,7 +32,7 @@ apis/flags/collection/schema.js
 apis/flags/collection/server/publications.js
 #apis/logo/collection/collection.js
 #apis/logo/collection/server/permissions.js
-apis/logo/server/publications.js
+#apis/logo/server/publications.js
 apis/logo/upload/client/resumable.js
 apis/logo/upload/client/upload.js
 apis/logo/upload/client/uploadButton/uploadButton.js
