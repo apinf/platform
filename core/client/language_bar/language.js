@@ -1,9 +1,24 @@
+import { Session } from 'meteor/session';
+import _ from 'lodash';
+
+Template.languageBar.onCreated(function () {
+  // Get saved language
+  const selectedLanguage = Session.get('lang');
+
+  // If language was selected before
+  if (selectedLanguage) {
+    // Update site language with selected language
+    TAPi18n.setLanguage(selectedLanguage);
+  } else {
+    // Set English by default value
+    Session.setDefaultPersistent('lang', 'en');
+  }
+});
+
 Template.languageBar.helpers({
-  languages () {
-    /*
-    This helper converts the languages object into an array of objects
-    TODO: determine if there is a simpler way to perform these steps
-    */
+  languagesList () {
+    // This helper converts the languages object into an array of objects
+    // TODO: determine if there is a simpler way to perform these steps
 
     // Placeholder for language options
     const languageOptions = [];
@@ -12,22 +27,22 @@ Template.languageBar.helpers({
     const languages = TAPi18n.getLanguages();
 
     // Create Array of Objects with language tag and name
-    for (language in languages) {
+    _.forEach(languages, (language, tag) => {
       // Get language object
-      const languageOption = languages[language];
+      const languageOption = language;
 
       // Get language tag (short language name)
-      languageOption.tag = language;
+      languageOption.tag = tag;
 
       // Add language option to array
       languageOptions.push(languageOption);
-    }
+    });
 
     return languageOptions;
   },
   activeLanguage () {
     // Get current language
-    const activeLanguage = TAPi18n.getLanguage();
+    const activeLanguage = Session.get('lang');
 
     // Get language from the current data context
     const languageTag = this.tag;
@@ -40,9 +55,12 @@ Template.languageBar.helpers({
 });
 
 Template.languageBar.events({
-  'click .language-option': function (event, template) {
+  'click .language-option': () => {
     // Get language from the current data context
     const language = this.tag;
+
+    // Update selected language in Session
+    Session.update('lang', language);
 
     // Update site language with selected language
     TAPi18n.setLanguage(language);
