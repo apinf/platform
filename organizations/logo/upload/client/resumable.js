@@ -7,7 +7,7 @@ import OrganizationLogo from '/organizations/logo/collection/collection';
 import Organizations from '/organizations/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
-Meteor.startup(() => {
+Meteor.startup(function () {
   // Set organization logo id to organization collection on success
   OrganizationLogo.resumable.on('fileSuccess', (file) => {
     // Get organization id
@@ -94,4 +94,5 @@ Meteor.startup(() => {
     // Remove Organization logo object
     OrganizationLogo.remove(objectId);
   }));
+
 });
