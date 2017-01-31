@@ -1,10 +1,14 @@
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+
 import ApiLogo from '../../collection';
-import Apis from '/apis/collection';
+
 
 Template.viewApiLogo.onCreated(function () {
   const instance = this;
   // Subscribe to API logo
-  instance.subscribe('allApiLogo');
+  return instance.subscribe('allApiLogo');
 });
 
 Template.viewApiLogo.helpers({
@@ -12,6 +16,7 @@ Template.viewApiLogo.helpers({
     // Get API current API Backend from template data
     const api = Template.currentData().api;
 
+    let apiLogoFileUrl;
     if (api && api.apiLogoFileId) {
       const apiLogoFileId = api.apiLogoFileId;
 
@@ -23,16 +28,21 @@ Template.viewApiLogo.helpers({
 
       // Check if API logo file is available
       if (apiLogoFile) {
+        // Get Meteor absolute URL
+        const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+        const baseApiLogoURL = meteorAbsoluteUrl + ApiLogo.baseURL;
+
         // Get API logo file URL
-        return Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL + '/md5/' + apiLogoFile.md5;
+        apiLogoFileUrl = `${baseApiLogoURL}/md5/${apiLogoFile.md5}`;
       }
     }
+    // Return undefined or API logo file URL
+    return apiLogoFileUrl;
   },
   apiLogoExists () {
     const api = Template.currentData().api;
 
-    if (api && api.apiLogoFileId) {
-      return true;
-    }
+    return (api && api.apiLogoFileId);
   },
 });
