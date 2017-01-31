@@ -1,6 +1,9 @@
+import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+import { TAPi18n } from 'meteor/tap:i18n';
 import _ from 'lodash';
 
+// eslint-disable-next-line prefer-arrow-callback
 Template.languageBar.onCreated(function () {
   // Get saved language
   const selectedLanguage = Session.get('lang');
@@ -51,6 +54,7 @@ Template.languageBar.helpers({
     if (activeLanguage === languageTag) {
       return 'active';
     }
+    return '';
   },
 });
 

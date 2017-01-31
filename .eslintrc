@@ -40,6 +40,9 @@
       {
         "allow": ["_id", "__"]
       }
-    ]
+    ],
+    "meteor/no-session": [
+      0
+    ],
   }
 }
