@@ -6,8 +6,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 
 AutoForm.addHooks('insertApiFlag', {
-  // eslint-disable-next-line no-unused-vars
-  onSuccess (formType, result) {
+  onSuccess (formType) {
     // Hide modal
     Modal.hide('flagApiModal');
 
