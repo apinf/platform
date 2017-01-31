@@ -35,7 +35,7 @@ apis/flags/collection/server/publications.js
 #apis/logo/server/publications.js
 #apis/logo/upload/client/resumable.js
 #apis/logo/upload/client/upload.js
-apis/logo/upload/client/uploadButton/uploadButton.js
+#apis/logo/upload/client/uploadButton/uploadButton.js
 apis/logo/view/client/view.js
 backlog/client/form/autoform.js
 backlog/collection/index.js
