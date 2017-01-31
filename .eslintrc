@@ -28,6 +28,12 @@
       "never"
     ],
     "import/no-extraneous-dependencies": 0,
+    "no-underscore-dangle": [
+      2,
+      {
+        "allow": ["_id", "__"]
+      }
+    ],
     "space-before-function-paren": [
       2,
       {
@@ -35,11 +41,5 @@
         "named": "always"
       }
     ],
-    "no-underscore-dangle": [
-      2,
-      {
-        "allow": ["_id", "__"]
-      }
-    ]
   }
 }
