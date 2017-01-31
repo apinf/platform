@@ -34,6 +34,9 @@
         "allow": ["_id", "__"]
       }
     ],
+    "no-negated-condition": [
+      "error",
+    ],
     "space-before-function-paren": [
       2,
       {
