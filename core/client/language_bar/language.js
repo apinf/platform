@@ -59,7 +59,8 @@ Template.languageBar.helpers({
 });
 
 Template.languageBar.events({
-  'click .language-option': () => {
+  // eslint-disable-next-line prefer-arrow-callback
+  'click .language-option': function () {
     // Get language from the current data context
     const language = this.tag;
 
