@@ -17,8 +17,8 @@ Template.viewApi.onCreated(function () {
   // Get the API Backend ID from the route
   instance.apiId = FlowRouter.getParam('_id');
 
-  // Subscribe to a single API Backend, by ID
-  instance.subscribe('apiBackend', instance.apiId);
+  // Subscribe to API and related organization
+  instance.subscribe('apiComposite', instance.apiId);
 
   // Subscribe to API feedback items for this API Backend
   instance.subscribe('apiBackendFeedback', instance.apiId);
@@ -40,9 +40,6 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
-
-  // Subscribe to organization for this API
-  instance.subscribe('apiOrganizationBasicDetails', instance.apiId);
 });
 
 Template.viewApi.helpers({
