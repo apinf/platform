@@ -25,14 +25,11 @@ Apis.helpers({
       // Check if user is manager of this API
       const userIsManager = this.currentUserIsManager();
 
-      // Check if user has external access
-      const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
-
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
       // if user is manager or administrator, they can edit
-      if (userIsManager || userIsAuthorized || userIsAdmin) {
+      if (userIsManager || userIsAdmin) {
         return true;
       }
     }
@@ -40,9 +37,15 @@ Apis.helpers({
     return false;
   },
   currentUserCanView () {
+    // Get current userId
+    const userId = Meteor.userId();
+
+    // Check if user has external access
+    const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
+
     // Check if API is public
     // Only user who can edit, can view private APIs
-    return (this.isPublic || this.currentUserCanEdit());
+    return (this.isPublic || userIsAuthorized || this.currentUserCanEdit());
   },
   currentUserIsManager () {
     // Get current User ID
