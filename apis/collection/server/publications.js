@@ -2,6 +2,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
 import Organizations from '/organizations/collection';
+import OrganizationApis from '/organization_apis/collection';
 import Apis from '../';
 
 
@@ -64,7 +65,12 @@ Meteor.publishComposite('apiComposite', (apiId) => {
             return Organizations.find({ _id: organizationId });
           }
 
-          return [];
+          return undefined;
+        },
+      },
+      {
+        find () {
+          return OrganizationApis.find({ apiId });
         },
       },
     ],
