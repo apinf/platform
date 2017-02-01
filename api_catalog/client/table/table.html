@@ -21,7 +21,9 @@
             {{> apiLifecycleStatus api=api }}
 
             {{# unless api.isPublic }}
-              <span class="label label-default label-align">private</span>
+              <span class="label label-default label-align">
+                  {{_ "catalogueTable_labelText_private" }}
+              </span>
             {{/ unless }}
             <div>
               <i>
