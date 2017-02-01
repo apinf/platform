@@ -612,7 +612,12 @@
         }
       },
       "settings": {
-          "apiDocumentationEditor": {
+        "access": {
+          "onlyAdminsCanAddApis": {
+            "label": "Only platform administrators are allowed to add new APIs"
+          }
+        },
+        "apiDocumentationEditor": {
               "label": "API Documentation Editor",
               "enabled": {
                   "label": "Enabled"
@@ -751,7 +756,6 @@
   "settings_save": "Save",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
-  "settings_schema_onlyAdminsCanAddApis": "Only platform administrators are allowed to add new APIs",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
   "settingsMenu_branding": "Branding",

@@ -629,6 +629,11 @@
             }
         },
         "settings": {
+            "access": {
+                "onlyAdminsCanAddApis": {
+                    "label": "Vain yll\u00e4pit\u00e4j\u00e4 voi lis\u00e4t\u00e4 rajapintoja"
+                }
+            },
             "apiDocumentationEditor": {
                 "label": "Rajapintadokumentaation muokkausohjelma",
                 "enabled": {
@@ -768,7 +773,6 @@
     "settings_save": "Tallenna",
     "settings_sdkCode_generator": "SDK-koodigeneraattori",
     "settings_successMessage": "Asetukset tallennettu",
-    "settings_schema_onlyAdminsCanAddApis": "Vain yll\u00e4pit\u00e4j\u00e4 voi lis\u00e4t\u00e4 rajapintoja",
     "settingsMenu_profile": "Profiili",
     "settingsMenu_account": "K\u00e4ytt\u00e4j\u00e4tili",
     "settingsMenu_branding": "Br\u00e4nd\u00e4ys",
