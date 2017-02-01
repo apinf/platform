@@ -23,7 +23,7 @@ Apis.helpers({
     // Check that user is logged in
     if (userId) {
       // Check if user is manager of this API
-      const userIsManager = _.includes(this.managerIds, userId);
+      const userIsManager = this.currentUserIsManager();
 
       // Check if user has external access
       const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
