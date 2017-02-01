@@ -13,8 +13,7 @@ Meteor.startup(() => {
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type,
-    // eslint-disable-next-line no-unused-vars
-    }, (err, apiLogoFile) => {
+    }, (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.warn('File creation failed!', err);
