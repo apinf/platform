@@ -7,7 +7,7 @@ import ApiLogo from '../../collection';
 Template.viewApiLogo.onCreated(function () {
   const instance = this;
   // Subscribe to API logo
-  return instance.subscribe('allApiLogo');
+  instance.subscribe('allApiLogo');
 });
 
 Template.viewApiLogo.helpers({
