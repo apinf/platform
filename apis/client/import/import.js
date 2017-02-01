@@ -7,6 +7,7 @@ import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 import { FS } from 'meteor/cfs:filesystem';
+import ace from 'ace-code-editor';
 import jsyaml from 'js-yaml';
 
 
@@ -15,8 +16,6 @@ Template.importApiConfiguration.onRendered(function () {
   const instance = this;
 
   // initialises ace editor
-  // TODO: Find where ace editor comes from, and import it.
-  // eslint-disable-next-line no-undef
   instance.editor = ace.edit('editor');
 
   // theme for editor
