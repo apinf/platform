@@ -1,7 +1,6 @@
 // Meteor packages import
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { ValidEmail } from 'meteor/froatsnook:valid-email';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -71,42 +70,11 @@ Meteor.methods({
       if (!alreadyManager) {
         // Add user ID to manager IDs field
         Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
-
-        // Make organization manager a manager of APIs
-        Meteor.call('makeOrganizationManagerApiManager', manager.organizationId, manager.email);
       } else {
         throw new Meteor.Error('manager-already-exist');
       }
     } else {
       throw new Meteor.Error('email-not-registered');
-    }
-  },
-  makeOrganizationManagerApiManager (organizationId, email) {
-    // Make sure organizationId is an String
-    check(organizationId, String);
-
-    // Make sure email is a valid email
-    check(email, ValidEmail);
-
-    // Get user with matching email
-    const user = Accounts.findUserByEmail(email);
-
-    // Get APIs managed by organization
-    const organizationApis = Organizations.findOne(organizationId).managedApiIds();
-
-    if (organizationApis) {
-      organizationApis.forEach((apiId) => {
-        // Get API document
-        const api = Apis.findOne(apiId);
-
-        // Check if user is already manager
-        const alreadyManager = api.managerIds.includes(user._id);
-
-        if (!alreadyManager) {
-          // Add user ID to API manager IDs field
-          Apis.update(apiId, { $push: { managerIds: user._id } });
-        }
-      });
     }
   },
   removeOrganizationManager (organizationId, userId) {
@@ -116,30 +84,12 @@ Meteor.methods({
     // Make sure userId is an String
     check(userId, String);
 
-    // Get APIs managed by organization
-    const organizationApis = Organizations.findOne(organizationId).managedApiIds();
-
     // Remove User ID from managers array
     Organizations.update({ _id: organizationId },
       { $pull:
          { managerIds: userId },
       }
      );
-
-    if (organizationApis) {
-      organizationApis.forEach((apiId) => {
-         // Get API document
-        const api = Apis.findOne(apiId);
-
-         // Check if user is manager
-        const isManager = api.managerIds.includes(userId);
-
-        if (isManager) {
-           // Remove user ID from API manager IDs field
-          Apis.update(apiId, { $pull: { managerIds: userId } });
-        }
-      });
-    }
   },
   removeOrganization (organizationId) {
     check(organizationId, String);
