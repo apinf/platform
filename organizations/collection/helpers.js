@@ -10,7 +10,6 @@ import Organizations from './';
 
 Organizations.helpers({
   currentUserCanManage () {
-    console.log('running');
     // Get current userId
     const userId = Meteor.userId();
 
