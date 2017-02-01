@@ -28,6 +28,9 @@
       "never"
     ],
     "import/no-extraneous-dependencies": 0,
+    "meteor/no-session": [
+      0
+    ],
     "no-underscore-dangle": [
       2,
       {
