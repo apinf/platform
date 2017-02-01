@@ -4,7 +4,6 @@ import { Template } from 'meteor/templating';
 
 import ApiLogo from '../../collection';
 
-
 Template.viewApiLogo.onCreated(function () {
   const instance = this;
   // Subscribe to API logo

@@ -6,7 +6,6 @@ import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 import Apis from '/apis/collection';
 import ApiLogo from '../../collection';
 
-
 Meteor.startup(() => {
   ApiLogo.resumable.on('fileAdded', (file) => {
     return ApiLogo.insert({
