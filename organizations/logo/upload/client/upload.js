@@ -12,7 +12,7 @@ Template.uploadOrganizationLogo.onCreated(function () {
   const instance = this;
 
   // Subscribe to Organization logo
-  return instance.subscribe('allOrganizationLogo');
+  instance.subscribe('allOrganizationLogo');
 });
 
 Template.uploadOrganizationLogo.events({
