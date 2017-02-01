@@ -628,7 +628,6 @@
               }
           },
           "mail": {
-              "label": "Mail (SMTP)",
               "enabled": {
                   "label": "Enabled"
               },
@@ -638,8 +637,17 @@
               "password": {
                   "label": "Password"
               },
+              "smtpHost": {
+                  "label": "SMTP Host"
+              },
+              "smtpPort": {
+                  "label": "SMTP Port"
+              },
+              "fromEmail": {
+                  "label": "Email address for sending emails"
+              },
               "toEmail": {
-                  "label": "To email"
+                  "label": "Email address for receiving emails"
               }
           },
           "githubConfiguration": {
@@ -744,13 +752,7 @@
   "settings_addingApis": "Adding APIs",
   "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
-  "settings_mail_username_label": "Username",
-  "settings_mail_password_label": "Password",
-  "settings_mail_smtpHost_label": "SMTP Host",
-  "settings_mail_smtpPort_label": "SMTP Port",
-  "settings_mail_fromEmail_label": "Email address for sending emails",
   "settings_mail_fromEmail_hint": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
-  "settings_mail_toEmail_label": "Email address for receiving emails",
   "settings_mail_toEmail_hint": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
   "settings_github": "Github",
   "settings_save": "Save",

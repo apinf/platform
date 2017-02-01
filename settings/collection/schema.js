@@ -1,5 +1,4 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { TAPi18n } from 'meteor/tap:i18n';
 import { Settings } from './';
 
 Settings.schema = new SimpleSchema({
@@ -47,7 +46,6 @@ Settings.schema = new SimpleSchema({
   },
   'mail.username': {
     type: String,
-    label: TAPi18n.__('settings_mail_username_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
@@ -62,7 +60,6 @@ Settings.schema = new SimpleSchema({
   },
   'mail.password': {
     type: String,
-    label: TAPi18n.__('settings_mail_password_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
@@ -77,7 +74,6 @@ Settings.schema = new SimpleSchema({
   },
   'mail.smtpHost': {
     type: String,
-    label: TAPi18n.__('settings_mail_smtpHost_label'),
     regEx: SimpleSchema.RegEx.Domain,
     optional: true,
     custom () {
@@ -94,7 +90,6 @@ Settings.schema = new SimpleSchema({
   },
   'mail.smtpPort': {
     type: Number,
-    label: TAPi18n.__('settings_mail_smtpPort_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
@@ -110,7 +105,6 @@ Settings.schema = new SimpleSchema({
   'mail.fromEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: TAPi18n.__('settings_mail_fromEmail_label'),
     optional: true,
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
@@ -126,7 +120,6 @@ Settings.schema = new SimpleSchema({
   'mail.toEmail': {
     type: String,
     regEx: SimpleSchema.RegEx.Email,
-    label: TAPi18n.__('settings_mail_toEmail_label'),
     optional: true,
   },
   githubConfiguration: {

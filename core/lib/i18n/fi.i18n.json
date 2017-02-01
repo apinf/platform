@@ -645,7 +645,6 @@
                 }
             },
             "mail": {
-                "label": "S\u00e4hk\u00f6posti (SMTP)",
                 "enabled": {
                     "label": "K\u00e4yt\u00f6ss\u00e4"
                 },
@@ -655,8 +654,17 @@
                 "password": {
                     "label": "Salasana"
                 },
+                "smtpHost": {
+                    "label": "SMTP-palvelin"
+                },
+                "smtpPort": {
+                    "label": "SMTP-portti"
+                },
+                "fromEmail": {
+                    "label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten"
+                },
                 "toEmail": {
-                    "label": "Osoitteeseen"
+                    "label": "Osoite s\u00e4hk\u00f6postien vastaanottamista varten"
                 }
             },
             "githubConfiguration": {
@@ -761,13 +769,7 @@
     "settings_addingApis": "Rajapintojen lis\u00e4\u00e4minen",
     "settings_apiDocumentation_editor": "Rajapintadokumentaation editori",
     "settings_mail": "S\u00e4hk\u00f6posti",
-    "settings_mail_username_label": "K\u00e4ytt\u00e4j\u00e4tunnus",
-    "settings_mail_password_label": "Salasana",
-    "settings_mail_smtpHost_label": "SMTP-palvelin",
-    "settings_mail_smtpPort_label": "SMTP-portti",
-    "settings_mail_fromEmail_label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten",
     "settings_mail_fromEmail_hint": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
-    "settings_mail_toEmail_label": "Osoite s\u00e4hk\u00f6postien vastaanottamista varten",
     "settings_mail_toEmail_hint": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen vastaanottamiseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
     "settings_github": "Github",
     "settings_save": "Tallenna",
