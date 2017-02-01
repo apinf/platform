@@ -23,11 +23,6 @@ apis/client/profile/status/status.js
 apis/client/profile/view.js
 apis/client/profile/visibility/lib/bootstrap-switch.js
 apis/client/profile/visibility/visibility.js
-apis/collection/helpers.js
-apis/collection/index.js
-apis/collection/schema.js
-apis/collection/server/collection_index.js
-apis/collection/server/publications.js
 apis/flags/client/autoform.js
 apis/flags/client/flag.js
 apis/flags/client/flagApiButton/flagApiButton.js
@@ -70,7 +65,6 @@ branding/logo/collection/server/permissions.js
 branding/logo/server/publications.js
 core/client/custom_stylesheet/custom_stylesheet.js
 core/client/error_templates/go_back_button/goBackButton.js
-core/client/language_bar/language.js
 core/client/navbar/navbar.js
 core/helper_functions/file_name_ends_with.js
 core/helper_functions/format_date.js

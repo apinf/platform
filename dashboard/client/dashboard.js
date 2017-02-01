@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 

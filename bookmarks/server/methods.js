@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { ApiBookmarks } from '/bookmarks/collection';
 
 Meteor.methods({

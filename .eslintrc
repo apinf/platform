@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "parserOptions": {
+    "parserOptions": {
     "allowImportExportEverywhere": true,
     "ecmaVersion": 7
   },
@@ -16,7 +16,7 @@
   },
   "rules": {
     "arrow-body-style": [
-      2, 
+      2,
       "always"
     ],
     "comma-dangle": [
@@ -40,6 +40,9 @@
       {
         "allow": ["_id", "__"]
       }
-    ]
+    ],
+    "meteor/no-session": [
+      0
+    ],
   }
 }
