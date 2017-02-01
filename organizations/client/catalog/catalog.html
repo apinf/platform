@@ -12,6 +12,15 @@
     </h1>
     {{> organizationCatalogueToolbar }}
 
+    {{# unless organizations }}
+      <p>
+        {{_ "organizationCatalog_message_noOrganizationIsAvailable" }}
+        {{# if isInRole 'admin' }}
+          {{_ "organizationCatalog_message_clickAddOrganizationButtonToAddANewOne" }}
+        {{/ if }}
+      </p>
+    {{/ unless }}
+
     <!-- if viewMode is grid, show grid -->
     {{# if gridViewMode }}
       {{# if Template.subscriptionsReady }}
