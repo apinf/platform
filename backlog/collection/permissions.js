@@ -1,4 +1,4 @@
-import { ApiBacklogItems } from './';
+import ApiBacklogItems from './';
 import Apis from '/apis/collection';
 
 ApiBacklogItems.allow({

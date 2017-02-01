@@ -6,7 +6,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 // Apinf imports
 import Apis from '/apis/collection';
 import { Feedback } from '/feedback/collection';
-import { ApiBacklogItems } from '/backlog/collection';
+import ApiBacklogItems from '/backlog/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 Template.viewApi.onCreated(function () {

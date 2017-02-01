@@ -1,4 +1,4 @@
-import { ApiBacklogItems } from '/backlog/collection';
+import ApiBacklogItems from '/backlog/collection';
 
 Meteor.publish('apiBacklogItems', function(apiBackendId){
 
