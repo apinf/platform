@@ -4,20 +4,16 @@ import ApiLogo from '../';
 
 
 ApiLogo.allow({
-  // eslint-disable-next-line no-unused-vars
-  insert (userId, file) {
+  insert (userId) {
     return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
-  // eslint-disable-next-line no-unused-vars
-  remove (userId, file) {
+  remove (userId) {
     return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
-  // eslint-disable-next-line no-unused-vars
-  read (userId, file) {
+  read () {
     return true;
   },
-  // eslint-disable-next-line no-unused-vars
-  write (userId, file, fields) {
+  write () {
     return true;
   },
 });
