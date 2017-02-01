@@ -736,6 +736,17 @@
         "organizationId": {
           "label": "Select Organization"
         }
+      },
+      "updatePassword": {
+        "old": {
+          "label": "Current Password"
+        },
+        "new": {
+          "label": "New Password"
+        },
+        "confirm": {
+          "label": "Confirm new Password"
+        }
       }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
