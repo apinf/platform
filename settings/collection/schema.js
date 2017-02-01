@@ -128,7 +128,6 @@ Settings.schema = new SimpleSchema({
   },
   'githubConfiguration.clientId': {
     type: String,
-    label: 'Client ID',
     optional: true,
     autoform: {
       placeholder: 'xxx',
@@ -136,7 +135,6 @@ Settings.schema = new SimpleSchema({
   },
   'githubConfiguration.secret': {
     type: String,
-    label: 'Secret',
     optional: true,
     autoform: {
       placeholder: 'xxx',
