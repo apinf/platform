@@ -1,6 +1,7 @@
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
+import Organizations from '/organizations/collection';
 import Apis from '../';
 
 
@@ -41,3 +42,31 @@ Meteor.publish('latestPublicApis', (limit) => {
 // Publish collection for pagination
 // eslint-disable-next-line no-new
 new Meteor.Pagination(Apis);
+
+Meteor.publishComposite('apiComposite', (apiId) => {
+  check(apiId, String);
+  return {
+    find () {
+      return Apis.find({ _id: apiId });
+    },
+    children: [
+      {
+        find (api) {
+          // Get API organization
+          const organization = api.organization();
+
+          // Check if it has one
+          if (organization) {
+            // Get organization ID
+            const organizationId = organization._id;
+
+            // Return that organization
+            return Organizations.find({ _id: organizationId });
+          }
+
+          return [];
+        },
+      },
+    ],
+  };
+});
