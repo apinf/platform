@@ -23,13 +23,6 @@ apis/client/profile/status/status.js
 apis/client/profile/view.js
 apis/client/profile/visibility/lib/bootstrap-switch.js
 apis/client/profile/visibility/visibility.js
-apis/flags/client/autoform.js
-apis/flags/client/flag.js
-apis/flags/client/flagApiButton/flagApiButton.js
-apis/flags/collection/collections.js
-apis/flags/collection/permissions.js
-apis/flags/collection/schema.js
-apis/flags/collection/server/publications.js
 backlog/client/form/autoform.js
 backlog/collection/index.js
 backlog/collection/permissions.js

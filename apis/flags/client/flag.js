@@ -1,3 +1,11 @@
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+import ApiFlags from '../../collection';
+
+
 Template.flagApiModal.onCreated(function () {
   // Create reference to instance
   const instance = this;
@@ -25,7 +33,7 @@ Template.flagApiModal.helpers({
     const instance = Template.instance();
 
     // Check if api exists and return boolean
-    return (instance.apiFlag) ? true : false;
+    return !!(instance.apiFlag);
   },
 });
 
