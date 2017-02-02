@@ -29,13 +29,13 @@ Template.organizationProfile.onCreated(function () {
         // Get IDs of managed APIs via collection helper
         const managedApiIds = organization.managedApiIds();
 
-        // Checking of organization manager role
+        // If user is admin or organization manager
         if (organization.currentUserCanManage()) {
-          // If user is admin or organization manager then publish all managed APIs
+           // Then publish all managed APIs of organization
           instance.subscribe('allOrganizationApisByIds', managedApiIds);
         } else {
-          // Otherwise publish all available managed APIs for current user
-          instance.subscribe('organizationPublicApisByIds', managedApiIds);
+          // Otherwise publish user's visible APIs
+          instance.subscribe('userVisibleApis', managedApiIds, organizationSlug);
         }
       }
     }
