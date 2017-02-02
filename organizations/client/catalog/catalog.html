@@ -13,12 +13,12 @@
     {{> organizationCatalogueToolbar }}
 
     {{# unless organizations }}
-      <p>
-        {{_ "organizationCatalog_message_noOrganizationIsAvailable" }}
+      <div class="alert alert-warning" role="alert">
+        {{_ "organizationCatalog_text_noOrganizationIsAvailable" }}
         {{# if isInRole 'admin' }}
-          {{_ "organizationCatalog_message_clickAddOrganizationButtonToAddANewOne" }}
+          {{_ "organizationCatalog_text_addOrganization" }}
         {{/ if }}
-      </p>
+      </div>
     {{/ unless }}
 
     <!-- if viewMode is grid, show grid -->
