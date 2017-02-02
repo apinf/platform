@@ -83,3 +83,5 @@ useraccounts:bootstrap
 useraccounts:flow-routing
 vsivsi:file-collection
 zimme:active-route
+u2622:persistent-session
+useraccounts:core

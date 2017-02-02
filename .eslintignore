@@ -132,7 +132,6 @@ settings/collection/index.js
 settings/collection/permissions.js
 settings/collection/server/publications.js
 settings/server/methods.js
-setup/client/lib/router.js
 setup/client/modal.js
 setup/server/methods.js
 status/client/lib/router.js
@@ -141,7 +140,6 @@ status/server/status.js
 users/client/account/account.js
 users/client/account/password/autoform.js
 users/client/lib/accounts_config.js
-users/client/lib/router.js
 users/collection/roles_schema.js
 users/collection/server/publications.js
 users/collection/users_permissions.js
