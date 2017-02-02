@@ -209,12 +209,6 @@
     "connectApiToOrganizationModal_buttonText_close": "Sulje",
     "connectApiToOrganizationModal_text_noOneApis": "Kaikki hallinnoimasi rajapinnat on jo yhdistetty.",
     "connectApiToOrganizationModal_modalTitle": "Yhdist\u00e4 rajapinta",
-    "contactForm_email_label": "S\u00e4hk\u00f6postiosoite",
-    "contactForm_email_placeholder": "S\u00e4hk\u00f6postisi",
-    "contactForm_message_label": "Viesti",
-    "contactForm_message_placeholder": "Viestisi",
-    "contactForm_name_label": "Nimesi",
-    "contactForm_name_placeholder": "Nimesi",
     "contactForm_reset": "Nollaa",
     "contactForm_successMessage": "Kiitos! Viestisi on l\u00e4hetetty.",
     "contactForm_submit": "L\u00e4het\u00e4",
@@ -605,6 +599,20 @@
             },
             "siteFooter": {
                 "label": "Sivun alatunniste"
+            }
+        },
+        "contactForm": {
+            "name": {
+                "label": "Nimesi",
+                "placeholder": "Nimesi"
+            },
+            "email": {
+                "label": "S\u00e4hk\u00f6postiosoite",
+                "placeholder": "S\u00e4hk\u00f6postisi"
+            },
+            "message": {
+                "label": "Viesti",
+                "placeholder": "Viestisi"
             }
         },
         "feedback": {

@@ -193,12 +193,6 @@
   "connectApiToOrganizationModal_buttonText_close": "Close",
   "connectApiToOrganizationModal_text_noOneApis": "All the APIs you manage have already been connected.",
   "connectApiToOrganizationModal_modalTitle": "Connect API",
-  "contactForm_email_label": "E-mail address",
-  "contactForm_email_placeholder": "Your email",
-  "contactForm_message_label": "Message",
-  "contactForm_message_placeholder": "Your message",
-  "contactForm_name_label": "Your name",
-  "contactForm_name_placeholder": "Your name",
   "contactForm_reset": "Reset",
   "contactForm_successMessage": "Thank you! Your message has been successfully sent.",
   "contactForm_submit": "Submit",
@@ -589,6 +583,20 @@
           "siteFooter": {
               "label": "Site footer"
           }
+      },
+      "contactForm": {
+        "name": {
+          "label": "Your name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "E-mail address",
+          "placeholder": "Your email"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Your message"
+        }
       },
       "feedback": {
           "topic": {
