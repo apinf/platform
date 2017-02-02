@@ -1,12 +1,13 @@
 /* eslint-env browser */
 
+import { FS } from 'meteor/cfs:filesystem';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Meteor } from 'meteor/meteor';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Template } from 'meteor/templating';
+import { ace } from 'meteor/mizzao:sharejs-ace';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { FS } from 'meteor/cfs:filesystem';
 import jsyaml from 'js-yaml';
 
 
