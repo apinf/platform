@@ -53,14 +53,16 @@ FlowRouter.route('/verify-email/:token', {
   },
 });
 
-FlowRouter.route('/settings/account', {
+// Add route to signedIn group, requires user to sign in
+signedIn.route('/settings/account', {
   name: 'account',
   action: function () {
     BlazeLayout.render('masterLayout', { main: 'account' });
   },
 });
 
-FlowRouter.route('/settings/profile', {
+// Add route to signedIn group, requires user to sign in
+signedIn.route('/settings/profile', {
   name: 'profile',
   action: function () {
     BlazeLayout.render('masterLayout', { main: 'profile' });
