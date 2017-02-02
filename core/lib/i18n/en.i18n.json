@@ -193,12 +193,6 @@
   "connectApiToOrganizationModal_buttonText_close": "Close",
   "connectApiToOrganizationModal_text_noOneApis": "All the APIs you manage have already been connected.",
   "connectApiToOrganizationModal_modalTitle": "Connect API",
-  "contactForm_email_label": "E-mail address",
-  "contactForm_email_placeholder": "Your email",
-  "contactForm_message_label": "Message",
-  "contactForm_message_placeholder": "Your message",
-  "contactForm_name_label": "Your name",
-  "contactForm_name_placeholder": "Your name",
   "contactForm_reset": "Reset",
   "contactForm_successMessage": "Thank you! Your message has been successfully sent.",
   "contactForm_submit": "Submit",
@@ -501,6 +495,9 @@
             "production": "Production",
             "deprecated": "Deprecated"
           }
+        },
+        "documentation_link": {
+          "label": "Documentation link"
         }
       },
       "apiMetadata": {
@@ -592,6 +589,20 @@
               "label": "Site footer"
           }
       },
+      "contactForm": {
+        "name": {
+          "label": "Your name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "E-mail address",
+          "placeholder": "Your email"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Your message"
+        }
+      },
       "feedback": {
           "topic": {
               "label": "Topic",
@@ -614,7 +625,12 @@
         }
       },
       "settings": {
-          "apiDocumentationEditor": {
+        "access": {
+          "onlyAdminsCanAddApis": {
+            "label": "Only platform administrators are allowed to add new APIs"
+          }
+        },
+        "apiDocumentationEditor": {
               "label": "API Documentation Editor",
               "enabled": {
                   "label": "Enabled"
@@ -625,7 +641,6 @@
               }
           },
           "mail": {
-              "label": "Mail (SMTP)",
               "enabled": {
                   "label": "Enabled"
               },
@@ -635,8 +650,17 @@
               "password": {
                   "label": "Password"
               },
+              "smtpHost": {
+                  "label": "SMTP Host"
+              },
+              "smtpPort": {
+                  "label": "SMTP Port"
+              },
+              "fromEmail": {
+                  "label": "Email address for sending emails"
+              },
               "toEmail": {
-                  "label": "To email"
+                  "label": "Email address for receiving emails"
               }
           },
           "githubConfiguration": {
@@ -725,6 +749,27 @@
         "organizationId": {
           "label": "Select Organization"
         }
+      },
+      "updatePassword": {
+        "old": {
+          "label": "Current Password"
+        },
+        "new": {
+          "label": "New Password"
+        },
+        "confirm": {
+          "label": "Confirm new Password"
+        }
+      },
+      "users": {
+        "username": {
+          "label": "Username"
+        },
+        "profile": {
+          "company": {
+            "label": "Company"
+          }
+        }
       }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
@@ -741,19 +786,12 @@
   "settings_addingApis": "Adding APIs",
   "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
-  "settings_mail_username_label": "Username",
-  "settings_mail_password_label": "Password",
-  "settings_mail_smtpHost_label": "SMTP Host",
-  "settings_mail_smtpPort_label": "SMTP Port",
-  "settings_mail_fromEmail_label": "Email address for sending emails",
-  "settings_mail_fromEmail_hint": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
-  "settings_mail_toEmail_label": "Email address for receiving emails",
-  "settings_mail_toEmail_hint": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
+  "settings_mail_fromEmail": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
+  "settings_mail_toEmail": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
   "settings_github": "Github",
   "settings_save": "Save",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
-  "settings_schema_onlyAdminsCanAddApis": "Only platform administrators are allowed to add new APIs",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
   "settingsMenu_branding": "Branding",

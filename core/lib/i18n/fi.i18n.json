@@ -209,12 +209,6 @@
     "connectApiToOrganizationModal_buttonText_close": "Sulje",
     "connectApiToOrganizationModal_text_noOneApis": "Kaikki hallinnoimasi rajapinnat on jo yhdistetty.",
     "connectApiToOrganizationModal_modalTitle": "Yhdist\u00e4 rajapinta",
-    "contactForm_email_label": "S\u00e4hk\u00f6postiosoite",
-    "contactForm_email_placeholder": "S\u00e4hk\u00f6postisi",
-    "contactForm_message_label": "Viesti",
-    "contactForm_message_placeholder": "Viestisi",
-    "contactForm_name_label": "Nimesi",
-    "contactForm_name_placeholder": "Nimesi",
     "contactForm_reset": "Nollaa",
     "contactForm_successMessage": "Kiitos! Viestisi on l\u00e4hetetty.",
     "contactForm_submit": "L\u00e4het\u00e4",
@@ -607,6 +601,20 @@
                 "label": "Sivun alatunniste"
             }
         },
+        "contactForm": {
+            "name": {
+                "label": "Nimesi",
+                "placeholder": "Nimesi"
+            },
+            "email": {
+                "label": "S\u00e4hk\u00f6postiosoite",
+                "placeholder": "S\u00e4hk\u00f6postisi"
+            },
+            "message": {
+                "label": "Viesti",
+                "placeholder": "Viestisi"
+            }
+        },
         "feedback": {
             "topic": {
                 "label": "Aihe",
@@ -629,6 +637,11 @@
             }
         },
         "settings": {
+            "access": {
+                "onlyAdminsCanAddApis": {
+                    "label": "Vain yll\u00e4pit\u00e4j\u00e4 voi lis\u00e4t\u00e4 rajapintoja"
+                }
+            },
             "apiDocumentationEditor": {
                 "label": "Rajapintadokumentaation muokkausohjelma",
                 "enabled": {
@@ -640,7 +653,6 @@
                 }
             },
             "mail": {
-                "label": "S\u00e4hk\u00f6posti (SMTP)",
                 "enabled": {
                     "label": "K\u00e4yt\u00f6ss\u00e4"
                 },
@@ -650,8 +662,17 @@
                 "password": {
                     "label": "Salasana"
                 },
+                "smtpHost": {
+                    "label": "SMTP-palvelin"
+                },
+                "smtpPort": {
+                    "label": "SMTP-portti"
+                },
+                "fromEmail": {
+                    "label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten"
+                },
                 "toEmail": {
-                    "label": "Osoitteeseen"
+                    "label": "Osoite s\u00e4hk\u00f6postien vastaanottamista varten"
                 }
             },
             "githubConfiguration": {
@@ -756,19 +777,12 @@
     "settings_addingApis": "Rajapintojen lis\u00e4\u00e4minen",
     "settings_apiDocumentation_editor": "Rajapintadokumentaation editori",
     "settings_mail": "S\u00e4hk\u00f6posti",
-    "settings_mail_username_label": "K\u00e4ytt\u00e4j\u00e4tunnus",
-    "settings_mail_password_label": "Salasana",
-    "settings_mail_smtpHost_label": "SMTP-palvelin",
-    "settings_mail_smtpPort_label": "SMTP-portti",
-    "settings_mail_fromEmail_label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten",
-    "settings_mail_fromEmail_hint": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
-    "settings_mail_toEmail_label": "Osoite s\u00e4hk\u00f6postien vastaanottamista varten",
-    "settings_mail_toEmail_hint": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen vastaanottamiseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
+    "settings_mail_fromEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
+    "settings_mail_toEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen vastaanottamiseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
     "settings_github": "Github",
     "settings_save": "Tallenna",
     "settings_sdkCode_generator": "SDK-koodigeneraattori",
     "settings_successMessage": "Asetukset tallennettu",
-    "settings_schema_onlyAdminsCanAddApis": "Vain yll\u00e4pit\u00e4j\u00e4 voi lis\u00e4t\u00e4 rajapintoja",
     "settingsMenu_profile": "Profiili",
     "settingsMenu_account": "K\u00e4ytt\u00e4j\u00e4tili",
     "settingsMenu_branding": "Br\u00e4nd\u00e4ys",

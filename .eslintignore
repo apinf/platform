@@ -128,7 +128,6 @@ search/client/search.js
 search/server/publications.js
 settings/client/autoform.js
 settings/client/lib/router.js
-settings/client/settings.js
 settings/collection/index.js
 settings/collection/permissions.js
 settings/collection/server/publications.js
@@ -141,8 +140,6 @@ status/client/status.js
 status/server/status.js
 users/client/account/account.js
 users/client/account/password/autoform.js
-users/client/account/password/password.js
-users/client/account/password/schema.js
 users/client/lib/accounts_config.js
 users/client/lib/router.js
 users/collection/roles_schema.js
