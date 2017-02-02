@@ -7,7 +7,6 @@ import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 import { FS } from 'meteor/cfs:filesystem';
-import ace from 'ace-code-editor';
 import jsyaml from 'js-yaml';
 
 
