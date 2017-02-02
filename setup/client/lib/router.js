@@ -1,4 +1,7 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Meteor } from 'meteor/meteor';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Roles } from 'meteor/alanning:roles';
 
 const additionalSetupRequired = function () {
   if (Meteor.user()) {
@@ -8,7 +11,7 @@ const additionalSetupRequired = function () {
     const userIsAdmin = Roles.userIsInRole(userId, 'admin');
 
     if (userIsAdmin) {
-      Meteor.call('isInitialSetupComplete', function (error, setupComplete) {
+      Meteor.call('isInitialSetupComplete', (error, setupComplete) => {
         if (!setupComplete) {
           // Show the setup needed modal
           Modal.show('setupNeededModal');
