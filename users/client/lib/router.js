@@ -29,7 +29,7 @@ FlowRouter.route('/users', {
       }
     },
   ],
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'accountsAdmin' });
   },
 });
@@ -56,7 +56,7 @@ FlowRouter.route('/verify-email/:token', {
 // Add route to signedIn group, requires user to sign in
 signedIn.route('/settings/account', {
   name: 'account',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'account' });
   },
 });
@@ -64,7 +64,7 @@ signedIn.route('/settings/account', {
 // Add route to signedIn group, requires user to sign in
 signedIn.route('/settings/profile', {
   name: 'profile',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'profile' });
   },
 });
