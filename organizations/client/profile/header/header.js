@@ -8,19 +8,6 @@ Template.organizationProfileHeader.onRendered(function () {
   OrganizationLogo.resumable.assignBrowse(this.$('#organization-file-browse'));
 });
 
-Template.organizationProfileHeader.helpers({
-  currentUserCanView () {
-    const organization = Template.currentData().organization;
-
-    // Show APIs tab anyway if user is admin or manager of current organization
-    if (organization.currentUserCanManage()) {
-      return true;
-    }
-    // Show APIs tab if public apis are available otherwise don't show
-    return organization.hasPublicApis();
-  },
-});
-
 Template.organizationProfileHeader.events({
   'click #edit-organization': function (event, templateInstance) {
     // Get organization from template instance
