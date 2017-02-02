@@ -9,7 +9,7 @@ import _ from 'lodash';
 import Organizations from './';
 
 Organizations.helpers({
-  currentUserCanEdit () {
+  currentUserCanManage () {
     // Get current userId
     const userId = Meteor.userId();
 

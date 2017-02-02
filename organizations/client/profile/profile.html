@@ -12,7 +12,7 @@
                 {{> apisFilterIcon }}
               {{/ if }}
               <!-- Connection API button -->
-              {{# if organization.currentUserCanEdit }}
+              {{# if organization.currentUserCanManage }}
                 <button type="button" class="btn btn-default" id="connect-api">
                   <i class="fa fa-plus" aria-hidden="true"></i>
                   {{_ 'organizationProfile_buttonText_connectApi' }}

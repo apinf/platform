@@ -47,8 +47,12 @@ Meteor.methods({
     return undefined;
   },
   addOrganizationManagerByEmail (manager) {
-    // Make sure organizationId is a string
+    // Make sure manager (with organizationId and email) is an Object
     check(manager, Object);
+
+    // Subsequent checks for the expected object properties
+    check(manager.organizationId, String);
+    check(manager.email, String);
 
     // Check if email is registered
     const emailIsRegistered = Meteor.call('checkIfEmailIsRegistered', manager.email);
@@ -73,6 +77,20 @@ Meteor.methods({
     } else {
       throw new Meteor.Error('email-not-registered');
     }
+  },
+  removeOrganizationManager (organizationId, userId) {
+    // Make sure organizationId is an String
+    check(organizationId, String);
+
+    // Make sure userId is an String
+    check(userId, String);
+
+    // Remove User ID from managers array
+    Organizations.update({ _id: organizationId },
+      { $pull:
+         { managerIds: userId },
+      }
+     );
   },
   removeOrganization (organizationId) {
     check(organizationId, String);

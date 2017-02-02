@@ -10,7 +10,7 @@
           <div class="row">
             <h1 id="organization-name">
               {{ organization.name }}
-              {{# if organization.currentUserCanEdit }}
+              {{# if organization.currentUserCanManage }}
                 <button id="edit-organization" class="btn btn-default btn-xs">
                   {{_ "organizationProfileHeader_editButton_text" }}
                 </button>
@@ -59,7 +59,7 @@
               {{_ "organizationProfileHeader_tabs_apis" }}
             </a>
           </li>
-          {{# if organization.currentUserCanEdit }}
+          {{# if organization.currentUserCanManage }}
             <!-- Settings -->
             <li id="organization-settings-tab">
               <a href="#organization-settings" data-toggle="tab">
