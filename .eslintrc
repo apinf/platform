@@ -28,12 +28,8 @@
       "never"
     ],
     "import/no-extraneous-dependencies": 0,
-    "space-before-function-paren": [
-      2,
-      {
-        "anonymous": "always",
-        "named": "always"
-      }
+    "meteor/no-session": [
+      0
     ],
     "no-underscore-dangle": [
       2,
@@ -41,8 +37,15 @@
         "allow": ["_id", "__"]
       }
     ],
-    "meteor/no-session": [
-      0
+    "no-negated-condition": [
+      "error",
+    ],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "always"
+      }
     ],
   }
 }
