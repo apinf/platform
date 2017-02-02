@@ -22,15 +22,6 @@ Organizations.helpers({
     // Return a count of Organiztion-API Links
     return OrganizationApis.find({ organizationId: this._id }).count();
   },
-  hasPublicApis () {
-    const managedApiIds = this.managedApiIds();
-
-    // Get array of managed apis which available for current user
-    const apis = Apis.find({ _id: { $in: managedApiIds } }).fetch();
-
-    // Return true if organization has at least one public api
-    return apis.length > 0;
-  },
   managedApiIds () {
     // Get organizationApis document, which joins organizations with APIs
     const organizationApiLinks = OrganizationApis.find({ organizationId: this._id }).fetch();
