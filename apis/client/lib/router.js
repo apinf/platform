@@ -4,30 +4,30 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 FlowRouter.route('/apis/new', {
   name: 'addApi',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'addApi' });
   },
 });
 
 FlowRouter.route('/apis/import', {
   name: 'importApiConfiguration',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'importApiConfiguration' });
   },
 });
 
 FlowRouter.route('/apis/:_id/', {
   name: 'viewApi',
-  action: function (params) {
+  action (params) {
     // Get current API Backend ID
     const apiId = params._id;
 
     // Check if API exists
-    Meteor.call('checkIfApiExists', apiId, function (error, apiExists) {
+    Meteor.call('checkIfApiExists', apiId, (error, apiExists) => {
       // Check if API exists
       if (apiExists) {
         // Ensure current user has permissions to view backend
-        Meteor.call('currentUserCanViewApi', apiId, (error, userIsAllowedToViewApi) => {
+        Meteor.call('currentUserCanViewApi', apiId, (canViewError, userIsAllowedToViewApi) => {
           if (userIsAllowedToViewApi) {
             FlowRouter.go('viewApi', { _id: apiId });
             BlazeLayout.render('masterLayout', { main: 'viewApi' });

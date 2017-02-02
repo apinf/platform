@@ -22,18 +22,6 @@ const formHints = {
       placement: 'left',
     },
   },
-  settings_mail_fromEmail: {
-    message: TAPi18n.__('settings_mail_fromEmail_hint'),
-    options: {
-      placement: 'left',
-    },
-  },
-  settings_mail_toEmail: {
-    message: TAPi18n.__('settings_mail_toEmail_hint'),
-    options: {
-      placement: 'left',
-    },
-  },
 };
 
 InlineHelp.initHelp(formHints);

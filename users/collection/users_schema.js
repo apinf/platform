@@ -65,4 +65,7 @@ UserSchema.messages({
   ],
 });
 
+// Enable translations (i18n)
+UserSchema.i18n('schemas.users');
+
 Meteor.users.attachSchema(UserSchema);

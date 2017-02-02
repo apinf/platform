@@ -1,7 +1,7 @@
 node_modules
 public
 core/client/lib
-/apis/client/view/visibility/lib/
+apis/client/profile/visibility/lib/bootstrap-switch.js
 /dashboard/client/charts/filtering/datepicker/
 /dashboard/client/charts/filtering/selectpicker/
 
@@ -12,17 +12,6 @@ core/client/lib
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-apis/client/add/autoform.js
-apis/client/export/export.js
-apis/client/import_documentation/import.js
-apis/client/import/import.js
-apis/client/lib/router.js
-apis/client/profile/intro/intro.js
-apis/client/profile/settings/delete/delete.js
-apis/client/profile/status/status.js
-apis/client/profile/view.js
-apis/client/profile/visibility/lib/bootstrap-switch.js
-apis/client/profile/visibility/visibility.js
 backlog/client/form/autoform.js
 backlog/collection/index.js
 backlog/collection/permissions.js
@@ -139,7 +128,6 @@ search/client/search.js
 search/server/publications.js
 settings/client/autoform.js
 settings/client/lib/router.js
-settings/client/settings.js
 settings/collection/index.js
 settings/collection/permissions.js
 settings/collection/server/publications.js
@@ -151,8 +139,6 @@ status/client/status.js
 status/server/status.js
 users/client/account/account.js
 users/client/account/password/autoform.js
-users/client/account/password/password.js
-users/client/account/password/schema.js
 users/client/lib/accounts_config.js
 users/collection/roles_schema.js
 users/collection/server/publications.js
