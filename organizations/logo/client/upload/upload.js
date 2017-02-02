@@ -1,5 +1,4 @@
 /* eslint-env browser */
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Mongo } from 'meteor/mongo';
@@ -21,10 +20,12 @@ Template.uploadOrganizationLogo.events({
     // eslint-disable-next-line no-alert
     const confirmation = confirm(TAPi18n.__('uploadOrganizationLogo_confirm_delete'));
 
+    const organization = templateInstance.data.organization;
+
     // Check if user clicked "OK"
     if (confirmation === true) {
       // Get organizationLogoFileId from organization
-      const organizationLogoFileId = templateInstance.data.organization.organizationLogoFileId;
+      const organizationLogoFileId = organization.organizationLogoFileId;
 
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
@@ -33,7 +34,7 @@ Template.uploadOrganizationLogo.events({
       OrganizationLogo.remove(objectId);
 
       // Remove Organization logo file id field
-      Organizations.update(templateInstance.data.organization._id, {
+      Organizations.update(organization._id, {
         $unset: { organizationLogoFileId: '' },
       });
 
@@ -46,32 +47,11 @@ Template.uploadOrganizationLogo.events({
 });
 
 Template.uploadOrganizationLogo.helpers({
-  uploadedLogoLink () {
-    const organizationLogoFileId = Organizations.findOne().organizationLogoFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
-
-    // Get Organization logo file Object
-    const organizationLogoFile = OrganizationLogo.findOne(objectId);
-
-    let url;
-    // Check if Organization logo file is available
-    if (organizationLogoFile) {
-      // Get Organization logo file URL
-      url = [
-        Meteor.absoluteUrl().slice(0, -1),
-        OrganizationLogo.baseURL,
-        '/md5/',
-        organizationLogoFile.md5,
-      ].join('');
-    }
-    return url;
-  },
   uploadedOrganizationLogoFile () {
     const organizationLogoFileId = Organizations.findOne().organizationLogoFileId;
 
     let organizationLogoFile;
+
     if (organizationLogoFileId) {
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
