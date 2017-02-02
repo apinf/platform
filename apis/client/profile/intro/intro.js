@@ -2,7 +2,7 @@
 /* global document */
 
 // Meteor imports
-import { ReactiveVar } from 'meteor/reactive-var';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
 // Library imports
