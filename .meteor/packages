@@ -80,8 +80,7 @@ tracker@1.1.1
 twbs:bootstrap
 u2622:persistent-session
 useraccounts:bootstrap
+useraccounts:core
 useraccounts:flow-routing
 vsivsi:file-collection
 zimme:active-route
-u2622:persistent-session
-useraccounts:core
