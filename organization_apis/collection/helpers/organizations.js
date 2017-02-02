@@ -1,6 +1,6 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'lodash';
 
-// APINF collection imports
 import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
@@ -45,5 +45,45 @@ Organizations.helpers({
     }
     // Return empty array because organization doesn't have APIs
     return [];
+  },
+  userVisibleApisCursor (managedApiIds) {
+    let apiIds;
+
+    // Get list of managed apis for current organization
+    // Check if function parameter exists
+    if (managedApiIds) {
+      // Get list from function parameter
+      apiIds = managedApiIds;
+    } else {
+      // Get list from collection helper
+      apiIds = this.managedApiIds();
+    }
+
+    // Placeholder for storage database query
+    let filteredApis;
+
+    const userId = Meteor.userId();
+
+    // Case: Registered users
+    if (userId) {
+      // Case: user is manager of APIs or without APIs
+      // Select available organization apis for current user
+      filteredApis = {
+        _id: { $in: apiIds },
+        $or: [
+          { isPublic: true },
+          { managerIds: userId },
+          { authorizedUserIds: userId },
+        ],
+      };
+    } else {
+      // Case: Anonymous users
+
+      // Show all public apis of organization
+      filteredApis = { _id: { $in: apiIds }, isPublic: true };
+    }
+
+    // Return cursor on organization apis which can be shown for current user
+    return Apis.find(filteredApis);
   },
 });
