@@ -1,6 +1,7 @@
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
+import Organizations from '/organizations/collection';
 import Apis from '../';
 
 // eslint-disable-next-line prefer-arrow-callback
@@ -28,37 +29,22 @@ Meteor.publish('allOrganizationApisByIds', (apiIds) => {
 });
 
 // eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('organizationPublicApisByIds', function (apiIds) {
-  // Make sure apiIds is an Array
+Meteor.publish('userVisibleApis', function (apiIds, slug) {
+  // Make sure apiIds is an Array type
   check(apiIds, Array);
+  // Make sure organization slug is a String type
+  check(slug, String);
 
-  // Get user id
-  const userId = this.userId;
+  // Get related organization document
+  const organization = Organizations.findOne({ slug });
 
-  // Placeholder for storage
-  let filteredApis;
-
-  // Case: Registered users
-  if (userId) {
-    // Case: user is manager of APIs or without APIs
-    // Select available organization apis for current user
-    filteredApis = {
-      _id: { $in: apiIds },
-      $or: [
-        { isPublic: true },
-        { managerIds: userId },
-        { authorizedUserIds: userId },
-      ],
-    };
-  } else {
-    // Case: Anonymous users
-
-    // Show all public apis of organization
-    filteredApis = { _id: { $in: apiIds }, isPublic: true };
+  // If organization exists
+  if (organization) {
+    // Return cursor on APIs collection which visible for current user in organization profile
+    return organization.userVisibleApisCursor(apiIds);
   }
-
-  // Return cursor on organization apis which can be shown for current user
-  return Apis.find(filteredApis);
+  // Return empty array to flag publication as ready
+  return [];
 });
 
 Meteor.publish('latestPublicApis', (limit) => {
