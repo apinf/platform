@@ -83,12 +83,14 @@
             </a>
           </li>
           {{/ if }}
-          <li>
-            <a type="button" class="icon-search">
-              <i class="fa fa-search toggle-search-icon"></i>
-              <i class="fa fa-times toggle-search-icon"></i>
-            </a>
-          </li>
+          {{# unless isActiveRoute 'search'}}
+            <li>
+              <a type="button" class="icon-search">
+                <i class="fa fa-search toggle-search-icon"></i>
+                <i class="fa fa-times toggle-search-icon"></i>
+              </a>
+            </li>
+          {{/ unless}}
           <li>
             <a id="about-button">
               <i class="fa fa-question-circle" aria-hidden="true"></i>
