@@ -747,6 +747,16 @@
         "confirm": {
           "label": "Confirm new Password"
         }
+      },
+      "users": {
+        "username": {
+          "label": "Username"
+        },
+        "profile": {
+          "company": {
+            "label": "Company"
+          }
+        }
       }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
