@@ -493,6 +493,9 @@
             "production": "Production",
             "deprecated": "Deprecated"
           }
+        },
+        "documentation_link": {
+          "label": "Documentation link"
         }
       },
       "apiMetadata": {
