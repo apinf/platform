@@ -1,5 +1,4 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { TAPi18n } from 'meteor/tap:i18n';
 
 const ContactFormSchema = new SimpleSchema({
   name: {
