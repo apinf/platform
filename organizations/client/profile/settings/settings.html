@@ -1,30 +1,28 @@
 <template name="organizationSettings">
   <div class="container">
     <div class="row">
-        {{# if organization.currentUserCanManage }}
-          <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">
-                  {{_ "organizationManagersList_title" }}
-                </h3>
-              </div>
-              <div class="panel-body">
-                <h3>
-                  {{_ "organizationSettings_uploadLogo_heading" }}
-                </h3>
-                <p>
-                  {{_ "organizationSettings_uploadLogoText" }}
-                </p>
-                {{> uploadOrganizationLogo organization=organization }}
-                <hr class="panel-hr" />
-                {{> addOrganizationManagerForm organization=organization }}
-                {{> organizationManagersList organization=organization }}
-              </div>
-            </div>
-            {{> organizationSettingsDelete organization=organization }}
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "organizationManagersList_title" }}
+            </h3>
           </div>
-        {{/ if }}
+          <div class="panel-body">
+            <h3>
+              {{_ "organizationSettings_uploadLogo_heading" }}
+            </h3>
+            <p>
+              {{_ "organizationSettings_uploadLogoText" }}
+            </p>
+            {{> uploadOrganizationLogo organization=organization }}
+            <hr class="panel-hr" />
+            {{> addOrganizationManagerForm organization=organization }}
+            {{> organizationManagersList organization=organization }}
+          </div>
+        </div>
+        {{> organizationSettingsDelete organization=organization }}
+      </div>
     </div>
   </div>
 </template>
