@@ -41,10 +41,10 @@ Meteor.publish('userVisibleApis', function (slug) {
 
   // If organization exists
   if (organization) {
-    // Return cursor on APIs collection which are visible for current user in organization profile
+    // Get cursor on APIs collection which are visible for current user in organization profile
     apis = organization.userVisibleApisCursor(this.userId);
   }
-  // Return empty array to flag publication as ready
+  // Return cursor or empty array to flag publication as ready
   return apis;
 });
 
