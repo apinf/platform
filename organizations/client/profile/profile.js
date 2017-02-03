@@ -32,7 +32,7 @@ Template.organizationProfile.onCreated(function () {
           const managedApiIds = organization.managedApiIds();
 
           // Then publish all managed APIs of organization
-          instance.subscribe('allOrganizationApisByIds', managedApiIds);
+          instance.subscribe('apisByIds', managedApiIds);
         } else {
           // Otherwise publish user's visible APIs
           instance.subscribe('userVisibleApis', organizationSlug);
