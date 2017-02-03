@@ -21,7 +21,7 @@ Meteor.publish('apiBackend', (apiBackendId) => {
   return Apis.find({ _id: apiBackendId });
 });
 
-Meteor.publish('allOrganizationApisByIds', (apiIds) => {
+Meteor.publish('apisByIds', (apiIds) => {
   // Make sure apiIds is an Array
   check(apiIds, Array);
 
