@@ -37,92 +37,52 @@ Organizations.helpers({
     // Return empty array because organization doesn't have APIs
     return [];
   },
-  userVisibleApisQuery (managedApiIds) {
-    let apiIds;
+  userVisibleApisCursor (currentUser) {
+    // Get ids of managed APIs of organization
+    const apiIds = this.managedApiIds();
 
-    // Get list of managed apis for current organization
-    // Check if function parameter exists
-    if (managedApiIds) {
-      // Get list from function parameter
-      apiIds = managedApiIds;
-    } else {
-      // Get list from collection helper
-      apiIds = this.managedApiIds();
+    // Make sure organization has APIs
+    if (apiIds.length > 0) {
+      // Placeholder for storage
+      let userId;
+
+      // Check if function parameter exists
+      if (currentUser) {
+        // Get user id from function parameter
+        // Need to provide user id when helper is called from the publish function
+        // Otherwise it throws error
+        userId = currentUser;
+      } else {
+        // Get user id from Meteor
+        userId = Meteor.userId();
+      }
+
+      // Placeholder for storage database query
+      let filteredApis;
+
+      // Case: Registered users
+      if (userId) {
+        // Case: user is manager of APIs or without APIs
+        // Select available organization apis for current user
+        filteredApis = {
+          _id: { $in: apiIds },
+          $or: [
+            { isPublic: true },
+            { managerIds: userId },
+            { authorizedUserIds: userId },
+          ],
+        };
+      } else {
+        // Case: Anonymous users
+
+        // Show all public apis of organization
+        filteredApis = { _id: { $in: apiIds }, isPublic: true };
+      }
+
+      // Return cursor on organization apis which can be shown for current user
+      return Apis.find(filteredApis);
     }
-
-    // Placeholder for storage database query
-    let filteredApis;
-
-    const userId = Meteor.userId();
-
-    // Case: Registered users
-    if (userId) {
-      // Case: user is manager of APIs or without APIs
-      // Select available organization apis for current user
-      filteredApis = {
-        _id: { $in: apiIds },
-        $or: [
-          { isPublic: true },
-          { managerIds: userId },
-          { authorizedUserIds: userId },
-        ],
-      };
-    } else {
-      // Case: Anonymous users
-
-      // Show all public apis of organization
-      filteredApis = { _id: { $in: apiIds }, isPublic: true };
-    }
-
-    return filteredApis;
-  },
-  userVisibleApisCursor (managedApiIds, currentUser) {
-    let apiIds;
-    let userId;
-
-    // Get list of managed apis for current organization
-    // Check if function parameter exists
-    if (managedApiIds) {
-      // Get list from function parameter
-      apiIds = managedApiIds;
-    } else {
-      // Get list from collection helper
-      apiIds = this.managedApiIds();
-    }
-
-    // Get list of managed apis for current organization
-    // Check if function parameter exists
-    if (currentUser) {
-      // Get list from function parameter
-      userId = currentUser;
-    } else {
-      // Get list from collection helper
-      userId = Meteor.userId();
-    }
-
-    // Placeholder for storage database query
-    let filteredApis;
-
-    // Case: Registered users
-    if (userId) {
-      // Case: user is manager of APIs or without APIs
-      // Select available organization apis for current user
-      filteredApis = {
-        _id: { $in: apiIds },
-        $or: [
-          { isPublic: true },
-          { managerIds: userId },
-          { authorizedUserIds: userId },
-        ],
-      };
-    } else {
-      // Case: Anonymous users
-
-      // Show all public apis of organization
-      filteredApis = { _id: { $in: apiIds }, isPublic: true };
-    }
-
-    // Return cursor on organization apis which can be shown for current user
-    return Apis.find(filteredApis);
+    // Return empty array
+    return [];
   },
 });
