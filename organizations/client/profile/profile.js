@@ -26,16 +26,16 @@ Template.organizationProfile.onCreated(function () {
       const organization = Organizations.findOne({ slug: organizationSlug });
 
       if (organization) {
-        // Get IDs of managed APIs via collection helper
-        const managedApiIds = organization.managedApiIds();
-
         // If user is admin or organization manager
         if (organization.currentUserCanManage()) {
-           // Then publish all managed APIs of organization
+          // Get IDs of managed APIs via collection helper
+          const managedApiIds = organization.managedApiIds();
+
+          // Then publish all managed APIs of organization
           instance.subscribe('allOrganizationApisByIds', managedApiIds);
         } else {
           // Otherwise publish user's visible APIs
-          instance.subscribe('userVisibleApis', managedApiIds, organizationSlug);
+          instance.subscribe('userVisibleApis', organizationSlug);
         }
       }
     }
