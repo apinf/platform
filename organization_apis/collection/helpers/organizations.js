@@ -47,7 +47,8 @@ Organizations.helpers({
       let userId;
 
       // Check if function parameter exists
-      if (currentUser) {
+      // If parameter is null then user is anonym and the publish function returns null
+      if (currentUser || currentUser === null) {
         // Get user id from function parameter
         // Need to provide user id when helper is called from the publish function
         // Otherwise it throws error
