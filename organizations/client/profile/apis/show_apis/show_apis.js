@@ -45,14 +45,6 @@ Template.organizationShowApis.onCreated(function () {
 });
 
 Template.organizationShowApis.helpers({
-  apisCount () {
-    const instance = Template.instance();
-    // Get managed/filtered APIs
-    const managedApis = instance.managedApis.get();
-
-    // Return count of managed/filtered apis
-    return managedApis.length;
-  },
   apis () {
     const instance = Template.instance();
 
