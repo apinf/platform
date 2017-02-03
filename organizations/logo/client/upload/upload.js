@@ -14,6 +14,23 @@ Template.uploadOrganizationLogo.onCreated(function () {
   instance.subscribe('allOrganizationLogo');
 });
 
+Template.uploadOrganizationLogo.helpers({
+  uploadedOrganizationLogoFile () {
+    const organizationLogoFileId = Organizations.findOne().organizationLogoFileId;
+
+    let organizationLogoFile;
+
+    if (organizationLogoFileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
+
+      // Get Organization logo file Object
+      organizationLogoFile = OrganizationLogo.findOne(objectId);
+    }
+    return organizationLogoFile;
+  },
+});
+
 Template.uploadOrganizationLogo.events({
   'click .delete-organizationLogo': function (event, templateInstance) {
     // Show confirmation dialog to user
@@ -46,19 +63,3 @@ Template.uploadOrganizationLogo.events({
   },
 });
 
-Template.uploadOrganizationLogo.helpers({
-  uploadedOrganizationLogoFile () {
-    const organizationLogoFileId = Organizations.findOne().organizationLogoFileId;
-
-    let organizationLogoFile;
-
-    if (organizationLogoFileId) {
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(organizationLogoFileId);
-
-      // Get Organization logo file Object
-      organizationLogoFile = OrganizationLogo.findOne(objectId);
-    }
-    return organizationLogoFile;
-  },
-});
