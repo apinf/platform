@@ -38,13 +38,17 @@ Meteor.publish('userVisibleApis', function (apiIds, slug) {
   // Get related organization document
   const organization = Organizations.findOne({ slug });
 
+  let cursor = [];
+
   // If organization exists
   if (organization) {
-    // Return cursor on APIs collection which visible for current user in organization profile
-    return organization.userVisibleApisCursor(apiIds);
+    const userId = this.userId;
+
+    // Return cursor on APIs collection which are visible for current user in organization profile
+    cursor = organization.userVisibleApisCursor(apiIds, userId);
   }
   // Return empty array to flag publication as ready
-  return [];
+  return cursor;
 });
 
 Meteor.publish('latestPublicApis', (limit) => {
