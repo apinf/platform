@@ -29,26 +29,22 @@ Meteor.publish('allOrganizationApisByIds', (apiIds) => {
 });
 
 // eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('userVisibleApis', function (apiIds, slug) {
-  // Make sure apiIds is an Array type
-  check(apiIds, Array);
+Meteor.publish('userVisibleApis', function (slug) {
   // Make sure organization slug is a String type
   check(slug, String);
 
   // Get related organization document
   const organization = Organizations.findOne({ slug });
 
-  let cursor = [];
+  let apis = [];
 
   // If organization exists
   if (organization) {
-    const userId = this.userId;
-
     // Return cursor on APIs collection which are visible for current user in organization profile
-    cursor = organization.userVisibleApisCursor(apiIds, userId);
+    apis = organization.userVisibleApisCursor(this.userId);
   }
   // Return empty array to flag publication as ready
-  return cursor;
+  return apis;
 });
 
 Meteor.publish('latestPublicApis', (limit) => {
