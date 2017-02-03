@@ -18,7 +18,9 @@
           {{> apiLifecycleStatus api=api }}
 
           {{# unless api.isPublic }}
-            <span class="label label-default">private</span>
+            <span class="label label-default">
+                {{_ "apiCard_labelText_private"}}
+            </span>
           {{/ unless }}
           <p class="generic-card-description">
             {{ api.description }}

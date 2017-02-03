@@ -1,7 +1,11 @@
+/* eslint-env browser */
+
 import { Template } from 'meteor/templating';
 import { ProxyBackends } from '/proxy_backends/collection';
 
+import saveAs from 'meteor/pfafman:filesaver';
 import jsyaml from 'js-yaml';
+
 
 Template.apiExport.onCreated(function () {
   // Get reference to template instance
@@ -15,9 +19,9 @@ Template.apiExport.onCreated(function () {
 });
 
 Template.apiExport.events({
-  'click #exportJSONConfig': function (event, instance) {
+  'click #exportJSONConfig': function (event, templateInstance) {
     // Get API Backend from database collection
-    const api = instance.data.api;
+    const api = templateInstance.data.api;
 
     // converts JSON object to JSON string and adds indentation
     const json = JSON.stringify(api, null, '\t');
@@ -28,9 +32,9 @@ Template.apiExport.events({
     // forces "save As" function allow user download file
     saveAs(file, 'apiConfig.json');
   },
-  'click #exportYAMLConfig': function (event, instance) {
+  'click #exportYAMLConfig': function (event, templateInstance) {
     // Get API Backend from database collection
-    const api = instance.data.api;
+    const api = templateInstance.data.api;
 
     // converts from json to yaml
     const yaml = jsyaml.safeDump(api);
@@ -41,9 +45,9 @@ Template.apiExport.events({
     // forces "save As" function allow user download file
     saveAs(file, 'apiConfig.yaml');
   },
-  'click #exportJSONProxyConfig': function (event, instance) {
+  'click #exportJSONProxyConfig': function (event, templateInstance) {
     // Get the API Backend ID from data context
-    const apiId = instance.data.api._id;
+    const apiId = templateInstance.data.api._id;
 
     // Find proxy backends by API id
     const proxy = ProxyBackends.findOne({ apiId });
@@ -57,9 +61,9 @@ Template.apiExport.events({
     // forces "save As" function allow user download file
     saveAs(file, 'apiProxyConfig.json');
   },
-  'click #exportYAMLProxyConfig': function (event, instance) {
+  'click #exportYAMLProxyConfig': function (event, templateInstance) {
     // Get the API Backend ID from data context
-    const apiId = instance.data.api._id;
+    const apiId = templateInstance.data.api._id;
 
     // Find proxy backends by API id
     const proxy = ProxyBackends.findOne({ apiId });

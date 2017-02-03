@@ -10,6 +10,7 @@ AutoForm.hooks({
         // Get current user ID
         const userId = Meteor.userId();
 
+        /* eslint no-param-reassign: ["error", { "props": false }] */
         // Add current user as API manager
         api.managerIds = [userId];
 

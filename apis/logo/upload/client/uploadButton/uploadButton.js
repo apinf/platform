@@ -1,6 +1,9 @@
-import { ApiLogo } from '/apis/logo/collection/collection';
+import { Template } from 'meteor/templating';
+import $ from 'jquery';
 
-Template.uploadApiLogoButton.onRendered(function() {
+import ApiLogo from '../../../collection';
+
+Template.uploadApiLogoButton.onRendered(() => {
   // Assign resumable browse to element
   ApiLogo.resumable.assignBrowse($('.fileBrowse'));
 });

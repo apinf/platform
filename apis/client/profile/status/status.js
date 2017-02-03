@@ -1,8 +1,11 @@
 // Meteor packages import
 import { Template } from 'meteor/templating';
 
+import $ from 'jquery';
+
 // APINF import
 import convertStatusCode from './convert_status_code';
+
 
 Template.viewApiStatus.onRendered(() => {
   // Init tooltip

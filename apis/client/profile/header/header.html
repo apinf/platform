@@ -7,10 +7,7 @@
         <h1 id="api-header">
           {{ api.name }}
           {{> viewApiStatus api=api width="0.4" }}
-
         </h1>
-
-        &nbsp; <!--TODO: determine why these labels don't have margin -->
         {{> apiLifecycleStatus api=api }}
 
         {{# unless api.isPublic }}

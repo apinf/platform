@@ -11,6 +11,22 @@ const signedIn = FlowRouter.group({
   }]
 });
 
+const requireAdminRole = function () {
+  if (Meteor.user()) {
+    // Get user ID
+    const userId = Meteor.user()._id;
+
+    const userIsAdmin = Roles.userIsInRole(userId, 'admin');
+
+    if (!userIsAdmin) {
+      // User is not authorized to access route
+      FlowRouter.go('notAuthorized');
+    }
+  } else {
+    FlowRouter.go('signIn');
+  }
+};
+
 // Define 404 route
 FlowRouter.notFound = {
   action: function() {
@@ -39,5 +55,8 @@ const redirectToCatalogue = function () {
 };
 
 FlowRouter.triggers.enter([redirectToCatalogue], {only: ['forgotPwd']});
+
+// Routes that require admin role
+FlowRouter.triggers.enter([requireAdminRole], { only: ['settings', 'branding', 'proxies'] });
 
 export { signedIn };

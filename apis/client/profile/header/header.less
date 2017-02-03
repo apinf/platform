@@ -16,7 +16,7 @@
     font-size: 1.7em;
     font-weight: 600;
     padding-left: 0.5em;
-    margin-left: 0em;
+    margin-left: 0;
     margin-bottom: 0;
     margin-top: 0.1em;
   }
@@ -35,6 +35,14 @@
 .page-head-infoblock {
   clear: both;
   display: inline-block;
+
+  span.label {
+    vertical-align: text-top;
+  }
+
+  .label + .label {
+    margin-left: .2em;
+  }
 }
 
 .nav-tabs > li {

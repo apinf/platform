@@ -1,7 +1,7 @@
 node_modules
 public
 core/client/lib
-/apis/client/view/visibility/lib/
+apis/client/profile/visibility/lib/bootstrap-switch.js
 /dashboard/client/charts/filtering/datepicker/
 /dashboard/client/charts/filtering/selectpicker/
 
@@ -12,31 +12,6 @@ core/client/lib
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-apis/client/add/autoform.js
-apis/client/export/export.js
-apis/client/import_documentation/import.js
-apis/client/import/import.js
-apis/client/lib/router.js
-apis/client/profile/intro/intro.js
-apis/client/profile/settings/delete/delete.js
-apis/client/profile/status/status.js
-apis/client/profile/view.js
-apis/client/profile/visibility/lib/bootstrap-switch.js
-apis/client/profile/visibility/visibility.js
-apis/flags/client/autoform.js
-apis/flags/client/flag.js
-apis/flags/client/flagApiButton/flagApiButton.js
-apis/flags/collection/collections.js
-apis/flags/collection/permissions.js
-apis/flags/collection/schema.js
-apis/flags/collection/server/publications.js
-apis/logo/collection/collection.js
-apis/logo/collection/server/permissions.js
-apis/logo/server/publications.js
-apis/logo/upload/client/resumable.js
-apis/logo/upload/client/upload.js
-apis/logo/upload/client/uploadButton/uploadButton.js
-apis/logo/view/client/view.js
 backlog/client/form/autoform.js
 backlog/collection/index.js
 backlog/collection/permissions.js
@@ -65,7 +40,6 @@ branding/logo/collection/server/permissions.js
 branding/logo/server/publications.js
 core/client/custom_stylesheet/custom_stylesheet.js
 core/client/error_templates/go_back_button/goBackButton.js
-core/client/language_bar/language.js
 core/client/navbar/navbar.js
 core/helper_functions/file_name_ends_with.js
 core/helper_functions/format_date.js
@@ -154,12 +128,10 @@ search/client/search.js
 search/server/publications.js
 settings/client/autoform.js
 settings/client/lib/router.js
-settings/client/settings.js
 settings/collection/index.js
 settings/collection/permissions.js
 settings/collection/server/publications.js
 settings/server/methods.js
-setup/client/lib/router.js
 setup/client/modal.js
 setup/server/methods.js
 status/client/lib/router.js
@@ -167,10 +139,7 @@ status/client/status.js
 status/server/status.js
 users/client/account/account.js
 users/client/account/password/autoform.js
-users/client/account/password/password.js
-users/client/account/password/schema.js
 users/client/lib/accounts_config.js
-users/client/lib/router.js
 users/collection/roles_schema.js
 users/collection/server/publications.js
 users/collection/users_permissions.js

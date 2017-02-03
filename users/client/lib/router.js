@@ -6,6 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { signedIn } from '/core/client/lib/router';
 
 FlowRouter.route('/users', {
   name: 'accountsAdmin',
@@ -28,7 +29,7 @@ FlowRouter.route('/users', {
       }
     },
   ],
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'accountsAdmin' });
   },
 });
@@ -52,16 +53,18 @@ FlowRouter.route('/verify-email/:token', {
   },
 });
 
-FlowRouter.route('/settings/account', {
+// Add route to signedIn group, requires user to sign in
+signedIn.route('/settings/account', {
   name: 'account',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'account' });
   },
 });
 
-FlowRouter.route('/settings/profile', {
+// Add route to signedIn group, requires user to sign in
+signedIn.route('/settings/profile', {
   name: 'profile',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'profile' });
   },
 });
