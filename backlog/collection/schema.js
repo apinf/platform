@@ -1,71 +1,71 @@
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 import ApiBacklogItems from './';
 
 ApiBacklogItems.schema = new SimpleSchema({
   title: {
     type: String,
-    label: "Title",
+    label: 'Title',
     max: 100,
     autoform: {
-      placeholder: "Title"
-    }
+      placeholder: 'Title',
+    },
   },
   details: {
     type: String,
-    label: "Details",
+    label: 'Details',
     max: 1000,
     autoform: {
       rows: 5,
-      placeholder: "Description"
-    }
+      placeholder: 'Description',
+    },
   },
   priority: {
     type: Number,
     label: 'Priority',
-    min:0,
-    max:2,
+    min: 0,
+    max: 2,
     autoform: {
       options: [
-        { label: "High", value: 2 },
-        { label: "Middle", value: 1 },
-        { label: "None", value: 0 }
-      ]
-    }
+        { label: 'High', value: 2 },
+        { label: 'Middle', value: 1 },
+        { label: 'None', value: 0 },
+      ],
+    },
   },
   userId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-    autoValue: function () {
+    autoValue () {
       return Meteor.userId();
-    }
+    },
   },
   apiBackendId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-    optional: true
+    optional: true,
   },
   createdAt: {
     type: Date,
-    autoValue: function () {
-
-      // Check if mongoDB insert operation is initial
-      if (this.isInsert)
-        return new Date();
-
-      // Check if mongoDB insert operation is initial
-      else if (this.isUpsert)
-        return { $setOnInsert: new Date() };
-
-      // If not - field is not updated
-      else
-        this.unset();
-    }
+    autoValue () {
+      let value;
+      if (this.isInsert) {
+        value = new Date();
+      } else if (this.isUpsert) {
+        value = { $setOnInsert: new Date() };
+      } else {
+        this.unset();  // Prevent user from supplying their own value
+      }
+      return value;
+    },
   },
   updatedAt: {
     type: Date,
-    autoValue: function () {
+    autoValue () {
       return new Date();
-    }
-  }
+    },
+  },
 });
 
 // Attach schema to collection for validation, etc.
