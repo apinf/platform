@@ -1,4 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 import Branding from './';
 
 Branding.schema = new SimpleSchema({

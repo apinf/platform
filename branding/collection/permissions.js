@@ -1,13 +1,15 @@
+import { Roles } from 'meteor/alanning:roles';
+
 import Branding from './';
 
 Branding.allow({
-  insert: function (userId) {
+  insert (userId) {
     return Roles.userIsInRole(userId, ['admin']) && Branding.find().count() === 0;
   },
-  update: function (userId) {
+  update (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  remove: function (userId) {
+  remove (userId) {
     return Roles.userIsInRole(userId, ['admin']);
-  }
+  },
 });
