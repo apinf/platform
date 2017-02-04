@@ -20,12 +20,6 @@ backlog/collection/server/publications.js
 bookmarks/client/bookmark.js
 bookmarks/collection/index.js
 bookmarks/server/methods.js
-branding/logo/client/upload/resumable.js
-branding/logo/client/upload/upload.js
-branding/logo/client/upload/uploadButton/uploadButton.js
-branding/logo/client/view/view.js
-branding/logo/collection/server/permissions.js
-branding/logo/server/publications.js
 core/client/custom_stylesheet/custom_stylesheet.js
 core/client/error_templates/go_back_button/goBackButton.js
 core/client/navbar/navbar.js

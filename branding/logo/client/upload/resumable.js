@@ -1,15 +1,20 @@
+import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
-Meteor.startup(function () {
-  ProjectLogo.resumable.on('fileAdded', function (file) {
+Meteor.startup(() => {
+  ProjectLogo.resumable.on('fileAdded', (file) => {
     return ProjectLogo.insert({
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type,
-    }, function (err, projectLogoFile) {
+    }, (err) => {
       if (err) {
+        // eslint-disable-next-line no-console
         console.warn('File creation failed!', err);
         return;
       }
@@ -32,7 +37,7 @@ Meteor.startup(function () {
         // Alert user of successful upload
         sAlert.success(message);
 
-        return ProjectLogo.resumable.upload();
+        ProjectLogo.resumable.upload();
       } else {
         // Get extension error message
         const message = TAPi18n.__('uploadProjectLogo_acceptedExtensions');

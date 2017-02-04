@@ -1,3 +1,11 @@
+/* eslint-env browser */
+
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { Template } from 'meteor/templating';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 
@@ -10,8 +18,9 @@ Template.uploadProjectLogo.onCreated(function () {
 });
 
 Template.uploadProjectLogo.events({
-  'click .delete-projectLogo': function (event, instance) {
+  'click .delete-projectLogo': function () {
     // Show confirmation dialog to user
+    // eslint-disable-next-line no-alert
     const confirmation = confirm(TAPi18n.__('uploadProjectLogo_confirm_delete'));
 
     // Check if user clicked "OK"
@@ -50,11 +59,17 @@ Template.uploadProjectLogo.helpers({
     // Get project logo file Object
     const currentProjectLogoFile = ProjectLogo.findOne(objectId);
 
+    let projectLogoFileUrl;
     // Check if project logo file is available
     if (currentProjectLogoFile) {
+      // Get Meteor absolute URL
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+      const baseProjectLogoFotoUrl = meteorAbsoluteUrl + ProjectLogo.baseURL;
       // Get project logo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL + '/id/' + currentProjectLogoFileId;
+      projectLogoFileUrl = `${baseProjectLogoFotoUrl}/id/${currentProjectLogoFileId}`;
     }
+    return projectLogoFileUrl;
   },
   uploadedProjectLogoFile () {
     const currentProjectLogoFileId = this.branding.projectLogoFileId;
@@ -66,8 +81,6 @@ Template.uploadProjectLogo.helpers({
     const currentProjectLogoFile = ProjectLogo.findOne(objectId);
 
     // Check if project logo file is available
-    if (currentProjectLogoFile) {
-      return currentProjectLogoFile;
-    }
+    return currentProjectLogoFile;
   },
 });
