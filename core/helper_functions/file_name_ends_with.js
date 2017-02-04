@@ -3,7 +3,7 @@
     @param {string} filename - File name with extension
     @param {array} suffixList - Array of file extension names e.g ['json', 'txt', 'yaml']
     */
-export function fileNameEndsWith (filename, suffixList) {
+export default function fileNameEndsWith (filename, suffixList) {
   // variable that keeps state of is this filename contains provided extensions - false by default
   let state = false;
 

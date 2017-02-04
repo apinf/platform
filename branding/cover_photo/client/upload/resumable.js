@@ -6,7 +6,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // Import apinf collections
 import { Branding } from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
-import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(function () {
   // Set cover photo id to branding collection on Success
