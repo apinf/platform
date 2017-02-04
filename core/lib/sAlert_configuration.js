@@ -1,10 +1,15 @@
-Meteor.startup(function() {
+import { Meteor } from 'meteor/meteor';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+Meteor.startup(() => {
+  let config;
   if (Meteor.isClient) {
-    return sAlert.config({
-      effect: "stackslide",
-      position: "bottom-right",
+    config = sAlert.config({
+      effect: 'stackslide',
+      position: 'bottom-right',
       timeout: 3000,
-      html: false
+      html: false,
     });
   }
+  return config;
 });
