@@ -38,9 +38,6 @@ branding/logo/client/view/view.js
 branding/logo/collection/index.js
 branding/logo/collection/server/permissions.js
 branding/logo/server/publications.js
-core/client/custom_stylesheet/custom_stylesheet.js
-core/client/error_templates/go_back_button/goBackButton.js
-core/client/navbar/navbar.js
 core/helper_functions/file_name_ends_with.js
 core/helper_functions/format_date.js
 core/helper_functions/validate_settings.js
