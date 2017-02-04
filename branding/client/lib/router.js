@@ -3,7 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 FlowRouter.route('/settings/branding', {
   name: 'branding',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'branding' });
   },
 });
