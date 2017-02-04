@@ -5,7 +5,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 import Branding from '/branding/collection';
-import { ProjectLogo } from '/branding/logo/collection';
+import ProjectLogo from '/branding/logo/collection';
 import { Settings } from '/settings/collection';
 
 import $ from 'jquery';

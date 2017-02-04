@@ -24,7 +24,6 @@ branding/logo/client/upload/resumable.js
 branding/logo/client/upload/upload.js
 branding/logo/client/upload/uploadButton/uploadButton.js
 branding/logo/client/view/view.js
-branding/logo/collection/index.js
 branding/logo/collection/server/permissions.js
 branding/logo/server/publications.js
 core/client/custom_stylesheet/custom_stylesheet.js
