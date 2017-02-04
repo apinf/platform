@@ -6,7 +6,6 @@ import { ProxyBackends } from '/proxy_backends/collection';
 import saveAs from 'meteor/pfafman:filesaver';
 import jsyaml from 'js-yaml';
 
-
 Template.apiExport.onCreated(function () {
   // Get reference to template instance
   const instance = this;

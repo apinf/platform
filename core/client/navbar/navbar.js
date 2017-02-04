@@ -25,7 +25,6 @@ Template.navbar.onCreated(function () {
   });
 });
 
-
 Template.navbar.helpers({
   profileImageUrl () {
     // get a object with profile image url

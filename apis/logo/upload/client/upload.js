@@ -22,7 +22,6 @@ Template.uploadApiLogo.events({
     // eslint-disable-next-line no-alert
     const confirmation = confirm(TAPi18n.__('uploadApiLogo_confirm_delete'));
 
-
     // Check if user clicked "OK"
     if (confirmation === true) {
       // Get currentApiBackend documentationFileId

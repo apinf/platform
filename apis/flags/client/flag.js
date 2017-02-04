@@ -5,7 +5,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import ApiFlags from '../../collection';
 
-
 Template.flagApiModal.onCreated(function () {
   // Create reference to instance
   const instance = this;

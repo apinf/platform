@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import Apis from '/apis/collection';
 import { MonitoringData } from '/monitoring/collection';
 
-
 Meteor.methods({
   getApiStatus (apiId, url) {
     // Make sure apiId is a string

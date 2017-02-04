@@ -132,7 +132,6 @@ Template.apiIntro.onCreated(function () {
   };
 });
 
-
 Template.apiIntro.events({
   'click #api-intro': function (event, templateInstance) {
     // Update user tour status reactive variable

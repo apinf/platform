@@ -10,7 +10,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import jsyaml from 'js-yaml';
 
-
 Template.importApiConfiguration.onRendered(function () {
   // keep current template instance
   const instance = this;
@@ -40,7 +39,6 @@ Template.importApiConfiguration.onRendered(function () {
   instance.editor.setValue(jsonString);
 });
 
-
 // Get reference to template instance
 Template.importApiConfiguration.onCreated(function () {
   const instance = this;
@@ -61,7 +59,6 @@ Template.importApiConfiguration.onCreated(function () {
     return false;
   };
 });
-
 
 Template.importApiConfiguration.events({
   'dropped #dropzone': function (event, templateInstance) {
