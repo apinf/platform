@@ -31,11 +31,17 @@ Template.viewCoverPhoto.helpers({
     // Get cover photo file Object
     const currentCoverPhotoFile = CoverPhoto.findOne(objectId);
 
+    let coverPhotoFileUrl;
     // Check if cover photo file is available
     if (currentCoverPhotoFile) {
+      // Get Meteor absolute URL
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+      const baseCoverFotoURL = meteorAbsoluteUrl + CoverPhoto.baseURL;
+
       // Get cover photo file URL
-      return Meteor.absoluteUrl().slice(0, -1) + CoverPhoto.baseURL + '/md5/' + currentCoverPhotoFile.md5;
+      coverPhotoFileUrl = `${baseCoverFotoURL}/md5/${currentCoverPhotoFile.md5}`;
     }
-    return '';
+    return coverPhotoFileUrl;
   },
 });

@@ -1,9 +1,10 @@
-// Import meteor packages
 import { Template } from 'meteor/templating';
-// Import apinf collections
+
+import $ from 'jquery';
+
 import CoverPhoto from '/branding/cover_photo/collection';
 
-Template.uploadCoverPhotoButton.onRendered(function() {
+Template.uploadCoverPhotoButton.onRendered(() => {
   // Assign resumable browse to element
   CoverPhoto.resumable.assignBrowse($('#cover-photo-browse'));
 });
