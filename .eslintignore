@@ -17,9 +17,6 @@ backlog/collection/index.js
 backlog/collection/permissions.js
 backlog/collection/schema.js
 backlog/collection/server/publications.js
-bookmarks/client/bookmark.js
-bookmarks/collection/index.js
-bookmarks/server/methods.js
 branding/client/lib/router.js
 branding/collection/index.js
 branding/collection/permissions.js
