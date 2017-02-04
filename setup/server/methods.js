@@ -1,4 +1,4 @@
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import { Settings } from '/settings/collection';
 
 Meteor.methods({

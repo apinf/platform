@@ -1,4 +1,4 @@
-import { Branding } from './';
+import Branding from './';
 
 Branding.allow({
   insert: function (userId) {

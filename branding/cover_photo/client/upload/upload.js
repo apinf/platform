@@ -5,7 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 // Import apinf collections
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.uploadCoverPhoto.onCreated(function () {

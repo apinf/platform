@@ -1,5 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Branding } from './';
+import Branding from './';
 
 Branding.schema = new SimpleSchema({
   projectLogoFileId: {

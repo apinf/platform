@@ -4,7 +4,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 import { Settings } from '/settings/collection';
 

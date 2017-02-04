@@ -1,4 +1,4 @@
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import { Template } from 'meteor/templating';
 
 Template.masterLayout.onCreated(function () {

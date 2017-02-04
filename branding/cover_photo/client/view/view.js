@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 // Import apinf collections
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.viewCoverPhoto.onCreated(function () {

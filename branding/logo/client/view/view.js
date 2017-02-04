@@ -1,4 +1,4 @@
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import { ProjectLogo } from '/branding/logo/collection';
 
 Template.viewProjectLogo.onCreated(function() {
