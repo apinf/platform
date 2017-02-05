@@ -55,17 +55,10 @@ Template.apiDocumentation.helpers({
   },
   documentationLink () {
     // get documentation link
-    const documentationLink = this.api.documentation_link;
-    // check if exists
-    if (documentationLink) {
-      return documentationLink;
-    }
+    return this.api.documentation_link;
   },
   documentationExists () {
-    const api = this.api;
-    if (api.documentationFileId) {
-      return true;
-    }
+    return !!(this.api.documentationFileId);
   },
   codegenServerExists () {
     // Get template instance
@@ -74,6 +67,7 @@ Template.apiDocumentation.helpers({
     // Get settings
     const settings = Settings.findOne();
 
+    let exists;
     // Check documentation exists, generator is enabled and host setting exists
     if (
       settings &&
@@ -84,9 +78,10 @@ Template.apiDocumentation.helpers({
       // Get code generator host
       instance.codegenServer = settings.sdkCodeGenerator.host;
 
-      // Generator is enabled and has host setting, return true
-      return true;
+      // Generator is enabled and has host setting, codegen server exists
+      exists = true;
     }
+    return exists;
   },
 
 });

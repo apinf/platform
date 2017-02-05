@@ -32,7 +32,7 @@ Meteor.startup(() => {
 
   DocumentationFiles.resumable.on('fileAdded', (file) => {
     if (file && file.size <= 10485760) { // Limit file size to 10 MB
-      return DocumentationFiles.insert({
+      DocumentationFiles.insert({
         _id: file.uniqueIdentifier,
         filename: file.fileName,
         contentType: file.file.type,
@@ -47,22 +47,23 @@ Meteor.startup(() => {
         if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
           // Turn on spinner
           uploadingSpinner.set(true);
+
           // Upload documentation
-          return DocumentationFiles.resumable.upload();
-        }
+          DocumentationFiles.resumable.upload();
+        } else {
           // Get error message translation
-        const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
+          const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
 
           // Alert user of error
-        sAlert.error(message);
+          sAlert.error(message);
+        }
       });
-    }
-      // Inform user about file size Limit
-
+    } else {
       // Get file size limit message translation
-    const message = TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message');
+      const message = TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message');
 
       // Alert user of file size warning
-    sAlert.warning(message);
+      sAlert.warning(message);
+    }
   });
 });

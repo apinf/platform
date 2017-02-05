@@ -88,9 +88,7 @@ Template.manageApiDocumentationModal.helpers({
     const documentationFile = DocumentationFiles.findOne(objectId);
 
     // Check if documentation file is available
-    if (documentationFile) {
-      return documentationFile;
-    }
+    return documentationFile;
   },
   apiDocumentationEditorIsEnabled () {
     // Get settings
