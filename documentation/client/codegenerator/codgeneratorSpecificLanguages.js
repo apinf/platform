@@ -14,4 +14,4 @@ const specificLanguageNames = {
   'swagger-yaml': 'Swagger YAML',
 };
 
-export { specificLanguageNames };
+export default specificLanguageNames;
