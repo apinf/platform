@@ -16,5 +16,5 @@ const DocumentationFiles = new FileCollection('DocumentationFiles', {
   ],
 });
 
-export { DocumentationFiles };
+export default DocumentationFiles;
 

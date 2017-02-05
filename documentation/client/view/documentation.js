@@ -5,7 +5,7 @@ import { Template } from 'meteor/templating';
 
 import $ from 'jquery';
 
-import { DocumentationFiles } from '/documentation/collection/collection';
+import DocumentationFiles from '/documentation/collection';
 import { Settings } from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {

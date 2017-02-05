@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-import { DocumentationFiles } from '/documentation/collection/collection';
+import DocumentationFiles from '/documentation/collection';
 
 Meteor.publish(
   'singleDocumentationFile', (documentationFileId) => {

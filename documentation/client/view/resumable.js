@@ -4,7 +4,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
-import { DocumentationFiles } from '/documentation/collection/collection';
+import DocumentationFiles from '/documentation/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 
