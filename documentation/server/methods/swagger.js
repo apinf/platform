@@ -1,3 +1,4 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
 import SwaggerParser from 'swagger-parser';
@@ -7,6 +8,9 @@ Meteor.methods({
   // Params: URL or file path to Swagger file
   // Returns: true if valid else return error object
   isValidSwagger (swaggerFileUrl) {
+    // Make sure swaggerFileUrl is a String
+    check(swaggerFileUrl, String);
+
     return SwaggerParser.validate(swaggerFileUrl)
       .then(() => {
         // Parsed and validated successfully
