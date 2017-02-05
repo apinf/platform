@@ -1,3 +1,5 @@
+import { FileCollection } from 'meteor/vsivsi:file-collection';
+
 const DocumentationFiles = new FileCollection('DocumentationFiles', {
   resumable: true,
   resumableIndexName: 'documentation',

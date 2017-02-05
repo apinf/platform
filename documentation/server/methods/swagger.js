@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 import SwaggerParser from 'swagger-parser';
 
 Meteor.methods({

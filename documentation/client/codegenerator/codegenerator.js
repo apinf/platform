@@ -1,6 +1,8 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { HTTP } from 'meteor/http';
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Template } from 'meteor/templating';
 
 import _ from 'lodash';
 

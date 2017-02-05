@@ -1,7 +1,12 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 import Apis from '/apis/collection';
-import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
+import { DocumentationFiles } from '/documentation/collection/collection';
+import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
   // Set documentation id to api collection on Success

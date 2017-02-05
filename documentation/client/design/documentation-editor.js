@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating';
+
 import { Settings } from '/settings/collection';
 
 Template.apiDocumentationEditor.onCreated(function () {

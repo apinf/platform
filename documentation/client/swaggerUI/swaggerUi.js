@@ -1,4 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
+
 import 'swagger-ui/dist/css/screen.css';
 
 Template.swaggerUi.onCreated(() => {

@@ -1,3 +1,7 @@
+import { Template } from 'meteor/templating';
+
+import $ from 'jquery';
+
 import { DocumentationFiles } from '/documentation/collection/collection';
 
 Template.manageApiDocumentationModalUploadButton.onRendered(() => {
