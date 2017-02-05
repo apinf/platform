@@ -1,4 +1,4 @@
-import  { Template } from 'meteor/templating';
+import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
 import { DocumentationFiles } from '/documentation/collection/collection';
@@ -10,7 +10,7 @@ const uploadingSpinner = new ReactiveVar(false);
 Template.manageApiDocumentationModal.onCreated(function () {
   const instance = this;
 
-  instance.autorun(function () {
+  instance.autorun(() => {
     const api = Apis.findOne(instance.data.api._id);
     // Save apibackend id
     Session.set('api', api);
@@ -23,7 +23,7 @@ Template.manageApiDocumentationModal.onCreated(function () {
   instance.subscribe('singleSetting', 'apiDocumentationEditor');
 });
 
-Template.manageApiDocumentationModal.onDestroyed(function () {
+Template.manageApiDocumentationModal.onDestroyed(() => {
   // Unset session
   Session.set('api', undefined);
 });
@@ -97,10 +97,9 @@ Template.manageApiDocumentationModal.helpers({
       settings.apiDocumentationEditor.host) {
       // Editor is enabled and has host setting, return true
       return true;
-    } else {
-      // Otherwise return false
-      return false;
     }
+      // Otherwise return false
+    return false;
   },
   apisCollection () {
     // Return a reference to Apis collection, for AutoForm
@@ -109,12 +108,12 @@ Template.manageApiDocumentationModal.helpers({
   // Return list of all try-out methods, which is used in Swagger Options
   supportedSubmitMethods () {
     return [
-      {label: 'GET', value: 'get'},
-      {label: 'POST', value: 'post'},
-      {label: 'DELETE', value: 'delete'},
-      {label: 'PATCH', value: 'patch'},
-      {label: 'PUT', value: 'put'}
-    ]
+      { label: 'GET', value: 'get' },
+      { label: 'POST', value: 'post' },
+      { label: 'DELETE', value: 'delete' },
+      { label: 'PATCH', value: 'patch' },
+      { label: 'PUT', value: 'put' },
+    ];
   },
   spinnerEnabled () {
     // Return spinner status

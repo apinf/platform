@@ -19,7 +19,7 @@ Template.apiDocumentation.onCreated(function () {
   instance.subscribe('singleSetting', 'sdkCodeGenerator');
 });
 
-Template.apiDocumentation.onRendered(function () {
+Template.apiDocumentation.onRendered(() => {
   $('[data-toggle="popover"]').popover();
 });
 
@@ -36,7 +36,7 @@ Template.apiDocumentation.helpers({
     // Check if documentation file is available
     if (documentationFile) {
       // Get documentation file URL
-      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;
+      return `${Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL}/id/${documentationFileId}`;
     }
   },
   documentationLink () {

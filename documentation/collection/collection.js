@@ -5,13 +5,13 @@ const DocumentationFiles = new FileCollection('DocumentationFiles', {
     {
       method: 'get',
       path: '/id/:_id',
-      lookup: function (params, query) {
+      lookup (params, query) {
         return {
-          _id: params._id
+          _id: params._id,
         };
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
 
 export { DocumentationFiles };

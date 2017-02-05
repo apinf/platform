@@ -17,7 +17,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
   const documentationFileId = instance.data.api.documentationFileId;
 
   // Save documentation file URL
-  instance.documentationFileURL = Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;
+  instance.documentationFileURL = `${Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL}/id/${documentationFileId}`;
 
   /* Get list of an available languages from Codegen server */
 
@@ -25,7 +25,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
   const url = 'https://generator.swagger.io/api/gen/clients';
 
   // Call GET request
-  HTTP.get(url, {}, function (error, result) {
+  HTTP.get(url, {}, (error, result) => {
     // Get information from Swagger API response
     const response = JSON.parse(result.content);
 
@@ -35,7 +35,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
     // Create list of friendly language names
     instance.languageList = [];
 
-    _.forEach(response, function (language) {
+    _.forEach(response, (language) => {
       // Check on specific name
       let newLanguageName = specificLanguageNames[language];
 
@@ -44,7 +44,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
         // Split the name into words, ex. 'akka-scala' -> 'akka','scala'
         let newLanguageList = language.split('-');
         // Do the capital letter for each word
-        newLanguageList = _.map(newLanguageList, function (word) { return _.capitalize(word); });
+        newLanguageList = _.map(newLanguageList, (word) => { return _.capitalize(word); });
         // Join this list to string using space
         newLanguageName = newLanguageList.join(' ');
       }
@@ -70,10 +70,10 @@ Template.sdkCodeGeneratorModal.helpers({
         allowedValues: instance.languageList,
         autoform: {
           afFieldInput: {
-            firstOption: '(Language)'
-          }
-        }
-      }
+            firstOption: '(Language)',
+          },
+        },
+      },
     });
   },
   // Check on ready of data from call GET request
@@ -102,7 +102,7 @@ Template.sdkCodeGeneratorModal.helpers({
       callRequest: instance.callRequest,
       documentationFileURL: instance.documentationFileURL,
       languageList: instance.languageList,
-      urlParameters: instance.urlParameters
+      urlParameters: instance.urlParameters,
     };
-  }
+  },
 });

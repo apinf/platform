@@ -25,21 +25,21 @@ AutoForm.addHooks('downloadSDK', {
     }
 
     // Create URL to send request
-    const url = host + '/api/gen/clients/' + parameter;
+    const url = `${host}/api/gen/clients/${parameter}`;
 
     // Get path to documentation file
     const pathToFile = instance.documentationFileURL;
 
     // Create POST options
     const options = {
-      'swaggerUrl': pathToFile,
+      swaggerUrl: pathToFile,
     };
 
     // Start spinner when send request
     instance.callRequest.set(true);
 
     // Send POST request
-    HTTP.post(url, { data: options }, function (error, result) {
+    HTTP.post(url, { data: options }, (error, result) => {
       // If url is incorrect
       if (result === undefined) {
         // Get error message translation

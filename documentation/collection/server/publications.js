@@ -3,8 +3,7 @@ Meteor.publish('allApiDocumentation', function () {
   if (this.userId) {
     // Return all API Documentation
     return ApiDocumentation.find();
-  } else {
-    // Return nothing
-    return null;
   }
+    // Return nothing
+  return null;
 });

@@ -1,16 +1,16 @@
 import { Template } from 'meteor/templating';
 import 'swagger-ui/dist/css/screen.css';
 
-Template.swaggerUi.onCreated(function () {
+Template.swaggerUi.onCreated(() => {
   const instance = Template.instance();
   // Set flag on Data is not Ready
   instance.dataFetched = new ReactiveVar(false);
-  
+
   // Get url of api documentation
   const documentationURL = instance.data.apiDoc;
-  
+
   // Check validation of Swagger file
-  Meteor.call('isValidSwagger', documentationURL, function (error, result) {
+  Meteor.call('isValidSwagger', documentationURL, (error, result) => {
     // result can be 'true' or '{}'
     if (result === true) {
       // Save result in template instance

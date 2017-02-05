@@ -16,9 +16,8 @@ Template.apiDocumentationEditor.helpers({
     if (settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
       // Return the URL of the API Documentation Editor from Settings collection
       return settings.apiDocumentationEditor.host;
-    } else {
-      // Otherwise return false
-      return false;
     }
+      // Otherwise return false
+    return false;
   },
 });
