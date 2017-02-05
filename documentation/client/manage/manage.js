@@ -41,6 +41,7 @@ Template.manageApiDocumentationModal.events({
     const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
 
     // Show confirmation dialog to user
+    // eslint-disable-next-line no-alert
     const confirmation = confirm(message);
 
     // Check if user clicked "OK"

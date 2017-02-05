@@ -38,6 +38,7 @@ Meteor.startup(() => {
         contentType: file.file.type,
       }, (err) => {
         if (err) {
+          // eslint-disable-next-line no-console
           console.warn('File creation failed!', err);
           return;
         }
