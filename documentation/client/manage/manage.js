@@ -36,7 +36,7 @@ Template.manageApiDocumentationModal.onDestroyed(() => {
 });
 
 Template.manageApiDocumentationModal.events({
-  'click .delete-documentation': function (event, instance) {
+  'click .delete-documentation': function (event, templateInstance) {
     // Get confirmation message translation
     const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
 
@@ -55,20 +55,20 @@ Template.manageApiDocumentationModal.events({
       DocumentationFiles.remove(objectId);
 
       // Remove documenation file id field
-      Apis.update(instance.data.api._id, { $unset: { documentationFileId: '' } });
+      Apis.update(templateInstance.data.api._id, { $unset: { documentationFileId: '' } });
 
       // Get deletion success message translation
-      const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
+      const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
 
       // Alert user of successful deletion
-      sAlert.success(message);
+      sAlert.success(successfulMessage);
     }
   },
-  'click #save-documentation-link': function (event, instance) {
+  'click #save-documentation-link': function () {
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
   },
-  'click #open-api-editor': function (event, instance) {
+  'click #open-api-editor': function () {
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
   },

@@ -8,7 +8,7 @@ Meteor.methods({
   // Returns: true if valid else return error object
   isValidSwagger (swaggerFileUrl) {
     return SwaggerParser.validate(swaggerFileUrl)
-      .then((swaggerApi) => {
+      .then(() => {
         // Parsed and validated successfully
         return true;
       })

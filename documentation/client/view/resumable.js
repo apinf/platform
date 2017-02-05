@@ -4,9 +4,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
-import uploadingSpinner from '../manage/manage';
 import { DocumentationFiles } from '/documentation/collection/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
+import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {
   // Set documentation id to api collection on Success
@@ -36,7 +36,7 @@ Meteor.startup(() => {
         _id: file.uniqueIdentifier,
         filename: file.fileName,
         contentType: file.file.type,
-      }, (err, documentationFile) => {
+      }, (err) => {
         if (err) {
           console.warn('File creation failed!', err);
           return;

@@ -3,16 +3,16 @@ import { Roles } from 'meteor/alanning:roles';
 import { DocumentationFiles } from '/documentation/collection/collection';
 
 DocumentationFiles.allow({
-  insert (userId, file) {
+  insert (userId) {
     return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
-  remove (userId, file) {
+  remove (userId) {
     return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
-  read (userId, file) {
+  read () {
     return true;
   },
-  write (userId, file, fields) {
+  write () {
     return true;
   },
 });

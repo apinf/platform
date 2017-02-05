@@ -7,7 +7,7 @@ const DocumentationFiles = new FileCollection('DocumentationFiles', {
     {
       method: 'get',
       path: '/id/:_id',
-      lookup (params, query) {
+      lookup (params) {
         return {
           _id: params._id,
         };
