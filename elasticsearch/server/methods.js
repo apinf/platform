@@ -25,7 +25,7 @@ Meteor.methods({
 
     // Makes the HTTP request
     // Get Elastic Search data and return
-    return esClient.search(params).then((res) => res, (err) => {
+    return esClient.search(params).then((res) => { return res; }, (err) => {
       // Throw an error
       throw new Meteor.Error(err.message);
     });

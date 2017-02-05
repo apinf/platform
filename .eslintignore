@@ -69,7 +69,6 @@ documentation/collection/server/publications.js
 documentation/server/methods/files.js
 documentation/server/methods/swagger.js
 documentation/server/publications.js
-elasticsearch/server/methods.js
 feedback_votes/collection/index.js
 feedback/client/form/autoform.js
 feedback/client/item/item.js
