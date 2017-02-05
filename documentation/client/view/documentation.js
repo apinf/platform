@@ -87,17 +87,17 @@ Template.apiDocumentation.helpers({
 });
 
 Template.apiDocumentation.events({
-  'click #manage-api-documentation': function (event, instance) {
+  'click #manage-api-documentation': function (event, templateInstance) {
     // Get reference to API backend
-    const api = instance.data.api;
+    const api = templateInstance.data.api;
     // Show the manage API documentation form
     Modal.show('manageApiDocumentationModal', { api });
   },
-  'click #sdk-code-generator': function (event, instance) {
+  'click #sdk-code-generator': function (event, templateInstance) {
     // Get reference to API backend
-    const api = instance.data.api;
+    const api = templateInstance.data.api;
     // Get reference to Code Generator host
-    const host = instance.codegenServer;
+    const host = templateInstance.codegenServer;
     // Show the SDK Code generator form
     Modal.show('sdkCodeGeneratorModal', { api, host });
   },
