@@ -18,8 +18,12 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
   // Get documentation file id
   const documentationFileId = instance.data.api.documentationFileId;
 
+  // Build documentation files base url
+  const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+  const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+
   // Save documentation file URL
-  instance.documentationFileURL = `${Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL}/id/${documentationFileId}`;
+  instance.documentationFileURL = `${documentationFilesBaseURL}/id/${documentationFileId}`;
 
   /* Get list of an available languages from Codegen server */
 

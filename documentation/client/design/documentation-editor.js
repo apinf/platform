@@ -15,11 +15,14 @@ Template.apiDocumentationEditor.helpers({
     const settings = Settings.findOne();
 
     // Check settings exists, editor is enabled and host setting exists
-    if (settings && settings.apiDocumentationEditor.enabled && settings.apiDocumentationEditor.host) {
+    if (settings &&
+        settings.apiDocumentationEditor.enabled &&
+        settings.apiDocumentationEditor.host) {
       // Return the URL of the API Documentation Editor from Settings collection
       return settings.apiDocumentationEditor.host;
     }
-      // Otherwise return false
+
+    // Otherwise return false
     return false;
   },
 });

@@ -40,11 +40,18 @@ Template.apiDocumentation.helpers({
     // Get documentation file Object
     const documentationFile = DocumentationFiles.findOne(objectId);
 
+    let documentationFileUrl;
+
     // Check if documentation file is available
     if (documentationFile) {
+      // Build documentation files base url
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+
       // Get documentation file URL
-      return `${Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL}/id/${documentationFileId}`;
+      documentationFileUrl = `${documentationFilesBaseURL}/id/${documentationFileId}`;
     }
+    return documentationFileUrl;
   },
   documentationLink () {
     // get documentation link
