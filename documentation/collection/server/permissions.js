@@ -1,16 +1,18 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { Roles } from 'meteor/alanning:roles';
+
+import DocumentationFiles from '/documentation/collection';
 
 DocumentationFiles.allow({
-  insert: function(userId, file) {
-    return Roles.userIsInRole(userId, ['admin','manager']);
+  insert (userId) {
+    return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
-  remove: function(userId, file) {
-    return Roles.userIsInRole(userId, ['admin','manager']);
+  remove (userId) {
+    return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
-  read: function(userId, file) {
+  read () {
     return true;
   },
-  write: function(userId, file, fields) {
+  write () {
     return true;
-  }
+  },
 });
