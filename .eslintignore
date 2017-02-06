@@ -12,9 +12,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-bookmarks/client/bookmark.js
-bookmarks/collection/index.js
-bookmarks/server/methods.js
 branding/client/lib/router.js
 branding/collection/index.js
 branding/collection/permissions.js
@@ -41,12 +38,6 @@ core/helper_functions/format_date.js
 core/helper_functions/validate_settings.js
 core/lib/sAlert_configuration.js
 core/server/api.js
-dashboard/client/charts/charts.js
-dashboard/client/charts/table/table.js
-dashboard/client/dashboard.js
-dashboard/client/filtering/datepicker/datepicker.js
-dashboard/client/lib/routes.js
-dashboard/server/methods.js
 documentation/client/codegenerator/autoform.js
 documentation/client/codegenerator/codegenerator.js
 documentation/client/codegenerator/codgeneratorSpecificLanguages.js

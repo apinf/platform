@@ -5,9 +5,9 @@ import Organizations from '/organizations/collection';
 import OrganizationApis from '/organization_apis/collection';
 import Apis from '../';
 
-
+// eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('userManagedApis', function () {
-  // get current user id
+  // Get current user id
   const userId = this.userId;
 
   // Get API Backends that user manages
@@ -29,15 +29,34 @@ Meteor.publish('apisByIds', (apiIds) => {
   return Apis.find({ _id: { $in: apiIds } });
 });
 
+// eslint-disable-next-line prefer-arrow-callback
+Meteor.publish('userVisibleApis', function (slug) {
+  // Make sure organization slug is a String type
+  check(slug, String);
+
+  // Get related organization document
+  const organization = Organizations.findOne({ slug });
+
+  let apis = [];
+
+  // If organization exists
+  if (organization) {
+    // Get cursor on APIs collection which are visible for current user in organization profile
+    apis = organization.userVisibleApisCursor(this.userId);
+  }
+  // Return cursor or empty array to flag publication as ready
+  return apis;
+});
+
 Meteor.publish('latestPublicApis', (limit) => {
-  // Make sure apiIds is an Array
+  // Make sure limit is a Number
   check(limit, Number);
 
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },
     { sort: { created_at: -1 }, limit }
-    );
+  );
 });
 
 // Publish collection for pagination

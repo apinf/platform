@@ -1,6 +1,13 @@
+/* eslint-env browser */
+
+import { AutoForm } from 'meteor/aldeed:autoform';
 import { HTTP } from 'meteor/http';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import _ from 'lodash';
+import $ from 'jquery';
 
 AutoForm.addHooks('downloadSDK', {
   onSubmit (formValues, updateDoc, instance) {
@@ -25,21 +32,21 @@ AutoForm.addHooks('downloadSDK', {
     }
 
     // Create URL to send request
-    const url = host + '/api/gen/clients/' + parameter;
+    const url = `${host}/api/gen/clients/${parameter}`;
 
     // Get path to documentation file
     const pathToFile = instance.documentationFileURL;
 
     // Create POST options
     const options = {
-      'swaggerUrl': pathToFile,
+      swaggerUrl: pathToFile,
     };
 
     // Start spinner when send request
     instance.callRequest.set(true);
 
     // Send POST request
-    HTTP.post(url, { data: options }, function (error, result) {
+    HTTP.post(url, { data: options }, (error, result) => {
       // If url is incorrect
       if (result === undefined) {
         // Get error message translation

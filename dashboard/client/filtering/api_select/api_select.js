@@ -20,6 +20,21 @@ Template.apiSelectPicker.helpers({
   },
 });
 
+// eslint-disable-next-line prefer-arrow-callback
+Template.apiSelectPicker.onRendered(function () {
+  // Get reference to template instance
+  const instance = this;
+
+  // Get Proxy Backend ID parameter from URL,
+  const proxyBackendId = FlowRouter.getQueryParam('backend');
+
+  // Change value of proxy backend select, if URL parameter is present
+  if (proxyBackendId) {
+    // Update the select menu to match the Proxy Backend ID
+    instance.$('#proxy-backend-select').val(proxyBackendId);
+  }
+});
+
 Template.apiSelectPicker.events({
   'change #proxy-backend-select': function (event) {
     // Update selected backend URL parameter

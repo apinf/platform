@@ -1,8 +1,15 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import ElasticSearch from 'elasticsearch';
 
 Meteor.methods({
   getElasticSearchData (proxyData, filterParameters) {
+    // Make sure proxyData is an Object TODO: is there a schema for it?
+    check(proxyData, Object);
+
+    // Make sure filterParameters is an Object TODO: is there a schema for it?
+    check(filterParameters, Object);
+
     let params;
 
     // Constructs the Elastic Search query object
@@ -25,13 +32,19 @@ Meteor.methods({
 
     // Makes the HTTP request
     // Get Elastic Search data and return
-    return esClient.search(params).then((res) => res, (err) => {
+    return esClient.search(params).then((res) => { return res; }, (err) => {
       // Throw an error
       throw new Meteor.Error(err.message);
     });
   },
   // Constructs the Elastic Search query object for apiUmbrella
   getElasticQueryUmbrella (frontendPrefix, filterParameters) {
+    // Make sure frontendPrefix is a String
+    check(frontendPrefix, String);
+
+    // Make sure filterParameters is an Object TODO: is there a schema for it?
+    check(filterParameters, Object);
+
     // Construct parameters for Elastic Search
     // TODO: For case "Proxy Admin API" with prefix /api-umbrella/
     // TODO: Values aggregation associated with granularity

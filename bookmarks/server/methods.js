@@ -1,9 +1,17 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+
 import Apis from '/apis/collection';
-import { ApiBookmarks } from '/bookmarks/collection';
+import ApiBookmarks from '/bookmarks/collection';
 
 Meteor.methods({
   toggleBookmarkApi (backendId, currentUserId) {
+    // Make sure backendId is a String
+    check(backendId, String);
+
+    // Make sure currentUserId is a String
+    check(currentUserId, String);
+
     // Create an array containing the backend ID for use in the collection query, etc.
     const apiBackendIds = [];
     apiBackendIds.push(backendId);
@@ -23,15 +31,15 @@ Meteor.methods({
       const bookmarkIndex = apiIds.indexOf(backendId);
 
       // Converts bookmarkIndex to boolean for easier comparison
-      const bookmarkExists = (bookmarkIndex >= 0) ? true : false;
+      const bookmarkExists = (bookmarkIndex >= 0);
 
-      // Checks if bookmark doesnt exist.
-      if (!bookmarkExists) {
-        // appending backendId to apiIds
-        apiIds.push(backendId);
-      } else {
-        // removing backendId from apiIds
+      // Checks if bookmark exists.
+      if (bookmarkExists) {
+        // remove backendId from apiIds
         apiIds.splice(bookmarkIndex, 1);
+      } else {
+        // append backendId to apiIds
+        apiIds.push(backendId);
       }
 
       // Updating current user apiBookmarks

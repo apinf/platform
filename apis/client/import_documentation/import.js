@@ -7,7 +7,7 @@ import { URI } from 'meteor/olragon:uri-js';
 import _ from 'lodash';
 import jsyaml from 'js-yaml';
 
-import { DocumentationFiles } from '/documentation/collection/collection';
+import DocumentationFiles from '/documentation/collection';
 
 /* eslint-env browser */
 

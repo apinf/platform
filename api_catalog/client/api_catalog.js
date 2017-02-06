@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import Apis from '/apis/collection';
-import { ApiBookmarks } from '/bookmarks/collection';
+import ApiBookmarks from '/bookmarks/collection';
 import $ from 'jquery';
 
 Template.apiCatalog.onCreated(function () {
