@@ -12,11 +12,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-backlog/client/form/autoform.js
-backlog/collection/index.js
-backlog/collection/permissions.js
-backlog/collection/schema.js
-backlog/collection/server/publications.js
 branding/client/lib/router.js
 branding/collection/index.js
 branding/collection/permissions.js

@@ -1,4 +1,5 @@
+import { Mongo } from 'meteor/mongo';
 
-const ApiBacklogItems = new Mongo.Collection("apiBacklogItems");
+const ApiBacklogItems = new Mongo.Collection('apiBacklogItems');
 
-export { ApiBacklogItems };
+export default ApiBacklogItems;

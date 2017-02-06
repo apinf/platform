@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-/* eslint no-param-reassign: ["error", { "props": false }] */
-
 FlowRouter.route('/organizations', {
   // Get query parameters for Catalog page on Enter
   triggersEnter: [function (context) {

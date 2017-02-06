@@ -1,6 +1,6 @@
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
-import { ApiBacklogItems } from '../../collection';
+import ApiBacklogItems from '../../collection';
 
 Template.deleteBacklogItem.events({
   'click #confirm-delete': function () {
