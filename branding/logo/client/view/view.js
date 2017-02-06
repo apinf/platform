@@ -31,10 +31,9 @@ Template.viewProjectLogo.helpers({
 
       const baseProjectLogoFotoUrl = meteorAbsoluteUrl + ProjectLogo.baseURL;
       // Get project logo file URL
-      projectLogoFileUrl = `${baseProjectLogoFotoUrl}/id/${currentProjectLogoFileId}`;
+      projectLogoFileUrl = `${baseProjectLogoFotoUrl}/md5/${currentProjectLogoFile.md5}`;
     }
-    // return projectLogoFileUrl;
-    return `${Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL}/md5/${currentProjectLogoFile.md5}`;
+    return projectLogoFileUrl;
   },
   projectLogoExists () {
     const branding = Branding.findOne();
