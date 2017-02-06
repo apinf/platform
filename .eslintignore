@@ -18,9 +18,6 @@ backlog/collection/index.js
 backlog/collection/permissions.js
 backlog/collection/schema.js
 backlog/collection/server/publications.js
-bookmarks/client/bookmark.js
-bookmarks/collection/index.js
-bookmarks/server/methods.js
 branding/client/lib/router.js
 branding/collection/index.js
 branding/collection/permissions.js
@@ -39,12 +36,6 @@ branding/logo/client/view/view.js
 branding/logo/collection/index.js
 branding/logo/collection/server/permissions.js
 branding/logo/server/publications.js
-dashboard/client/charts/charts.js
-dashboard/client/charts/table/table.js
-dashboard/client/dashboard.js
-dashboard/client/filtering/datepicker/datepicker.js
-dashboard/client/lib/routes.js
-dashboard/server/methods.js
 documentation/client/codegenerator/autoform.js
 documentation/client/codegenerator/codegenerator.js
 documentation/client/codegenerator/codgeneratorSpecificLanguages.js

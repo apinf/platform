@@ -4,8 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import $ from 'jquery';
 
 
-Template.timeFrameSelectPicker.onRendered(function () {
-
+Template.timeFrameSelectPicker.onRendered(() => {
   $('#timeframe-datepickers').datepicker({
     todayHighlight: true,
     endDate: 'today',
@@ -16,7 +15,7 @@ Template.timeFrameSelectPicker.onRendered(function () {
   $('#analytics-timeframe-start').datepicker()
   // Save chosen date to URL parameter
   // in order to share dashboard state
-  .on('changeDate', function (event) {
+  .on('changeDate', (event) => {
     // Set fromDate URL parameter to ISO YYYY-mm-dd
     FlowRouter.setQueryParams({ fromDate: event.format('yyyy-mm-dd') });
   });
@@ -32,7 +31,7 @@ Template.timeFrameSelectPicker.onRendered(function () {
   // Event handler for timeframe end
   $('#analytics-timeframe-end').datepicker()
   // Save chosen date to URL parameter
-  .on('changeDate', function (event) {
+  .on('changeDate', (event) => {
     // Set fromDate URL parameter to ISO YYYY-mm-dd
     // in order to share dashboard state
     FlowRouter.setQueryParams({ toDate: event.format('yyyy-mm-dd') });

@@ -58,7 +58,8 @@ Template.dashboard.onCreated(function () {
               // Update reactive variable
               instance.chartData.set(chartData);
             })
-            .catch(err => console.error(err));
+            // eslint-disable-next-line no-console
+            .catch(err => { return console.error(err); });
         }
       });
     }
