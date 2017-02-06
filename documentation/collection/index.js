@@ -1,3 +1,5 @@
+import { FileCollection } from 'meteor/vsivsi:file-collection';
+
 const DocumentationFiles = new FileCollection('DocumentationFiles', {
   resumable: true,
   resumableIndexName: 'documentation',
@@ -5,14 +7,14 @@ const DocumentationFiles = new FileCollection('DocumentationFiles', {
     {
       method: 'get',
       path: '/id/:_id',
-      lookup: function (params, query) {
+      lookup (params) {
         return {
-          _id: params._id
+          _id: params._id,
         };
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
 
-export { DocumentationFiles };
+export default DocumentationFiles;
 

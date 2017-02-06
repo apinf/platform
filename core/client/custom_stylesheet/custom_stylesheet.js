@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import Branding from '/branding/collection';
+
 const tinycolor = require('tinycolor2');
 
 Template.customStylesheet.helpers({
@@ -41,9 +42,8 @@ Template.customStylesheet.helpers({
         // darker background is most readable
         mostReadableBackground = darkerBackground;
       }
-
-      return mostReadableBackground;
     }
+    return mostReadableBackground;
   },
   primaryColor () {
     // Get branding

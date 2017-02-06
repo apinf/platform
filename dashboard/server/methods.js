@@ -1,10 +1,14 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
-// Collection import
+
 import { Proxies } from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 Meteor.methods({
   getProxyData (proxyBackendId) {
+    // Make sure proxyBackendId is a String
+    check(proxyBackendId, String);
+
     // Get proxy backend configuration
     const proxyBackend = ProxyBackends.findOne(proxyBackendId);
 

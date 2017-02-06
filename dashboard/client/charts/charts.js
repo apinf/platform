@@ -1,6 +1,7 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
+
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { TAPi18n } from 'meteor/tap:i18n';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import moment from 'moment';
@@ -55,6 +56,7 @@ Template.dashboardCharts.onCreated(function () {
   // Parse elasticsearch data into timescales, dimensions & groups for DC.js
   instance.parseChartData = (items) => {
     // Create crossfilter
+    // eslint-disable-next-line new-cap
     const index = new crossfilter(items);
 
     // Init dateformat for charts
@@ -109,15 +111,15 @@ Template.dashboardCharts.onCreated(function () {
     const binwidth = 50;
 
     // Get MIN and MAX response time values
-    const minResponseTime = d3.min(items, (d) => d.fields.response_time[0]);
-    const maxResponseTime = d3.max(items, (d) => d.fields.response_time[0]);
+    const minResponseTime = d3.min(items, (d) => { return d.fields.response_time[0]; });
 
     // Create dimension based on response time
-    const responseTimeDimension = index.dimension((d) => d.fields.response_time[0]);
+    const responseTimeDimension = index.dimension((d) => { return d.fields.response_time[0]; });
 
     // Create response time group
-    const responseTimeGroup = responseTimeDimension.group((d) =>
-      binwidth * Math.floor(d / binwidth));
+    const responseTimeGroup = responseTimeDimension.group((d) => {
+      return binwidth * Math.floor(d / binwidth);
+    });
 
     // Group add dimensions
     const all = index.groupAll();
@@ -128,8 +130,8 @@ Template.dashboardCharts.onCreated(function () {
       .group(all);
 
     // Get MIN and MAX timestamp values
-    const minDate = d3.min(items, (d) => d.fields.ymd);
-    const maxDate = d3.max(items, (d) => d.fields.ymd);
+    const minDate = d3.min(items, (d) => { return d.fields.ymd; });
+    const maxDate = d3.max(items, (d) => { return d.fields.ymd; });
 
     // Init scales for axis
     const timeScaleForLineChart = d3.time.scale().domain([minDate, maxDate]);
@@ -261,15 +263,15 @@ Template.dashboardCharts.onCreated(function () {
       // Error handling for empty fields
       try { time = moment(e.fields.request_at[0]).toISOString(); } catch (err) { time = ''; }
 
-      try { country = e.fields.request_ip_country[0]; } catch (e) { country = ''; }
+      try { country = e.fields.request_ip_country[0]; } catch (err) { country = ''; }
 
-      try { requestPath = e.fields.request_path[0]; } catch (e) { requestPath = ''; }
+      try { requestPath = e.fields.request_path[0]; } catch (err) { requestPath = ''; }
 
-      try { requestIp = e.fields.request_ip[0]; } catch (e) { requestIp = ''; }
+      try { requestIp = e.fields.request_ip[0]; } catch (err) { requestIp = ''; }
 
-      try { responseTime = e.fields.response_time[0]; } catch (e) { responseTime = ''; }
+      try { responseTime = e.fields.response_time[0]; } catch (err) { responseTime = ''; }
 
-      try { responseStatus = e.fields.response_status[0]; } catch (e) { responseStatus = ''; }
+      try { responseStatus = e.fields.response_status[0]; } catch (err) { responseStatus = ''; }
 
       tableData.push({ time, country, requestPath, requestIp, responseTime, responseStatus });
     });
@@ -322,12 +324,14 @@ Template.dashboardCharts.onCreated(function () {
   };
 
   // Function that returns chart items count
-  instance.getRequestsCount = (chartData) => chartData.length;
+  instance.getRequestsCount = (chartData) => { return chartData.length; };
 
   // Function that returns average response time
   instance.getAverageResponseTime = (chartData) => {
     // Get average response time value
-    const averageResponseTime = _.meanBy(chartData, (item) => item.fields.response_time[0]);
+    const averageResponseTime = _.meanBy(chartData, (item) => {
+      return item.fields.response_time[0];
+    });
 
     // Round average response time value
     const roundedAverageResponseTime = _.round(averageResponseTime);
@@ -345,7 +349,9 @@ Template.dashboardCharts.onCreated(function () {
   // Function that returns response rate
   instance.getResponseRate = (chartData) => {
     // Group chart data by response status code
-    const responseStatusCodeGroup = _.groupBy(chartData, (item) => item.fields.response_status[0]);
+    const responseStatusCodeGroup = _.groupBy(chartData, (item) => {
+      return item.fields.response_status[0];
+    });
 
     try {
       // Get the amount of success status codes
@@ -385,12 +391,8 @@ Template.dashboardCharts.onCreated(function () {
 
   // Loading state controller
   instance.updateLoadingState = (chartData) => {
-
     // Check if data is loaded
-    if (!chartData) {
-      // If still loading, show loading state to user
-      instance.loadingState.set('loading');
-    } else {
+    if (chartData) {
       // Check if chart data was found
       if (chartData.length > 0) {
         // If found, Hide all messages
@@ -399,6 +401,9 @@ Template.dashboardCharts.onCreated(function () {
         // If not, display "not found" message to user
         instance.loadingState.set('data-not-found');
       }
+    } else {
+      // If still loading, show loading state to user
+      instance.loadingState.set('loading');
     }
   };
 });

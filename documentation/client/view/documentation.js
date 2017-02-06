@@ -1,4 +1,11 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { Meteor } from 'meteor/meteor';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+
+import $ from 'jquery';
+
+import DocumentationFiles from '/documentation/collection';
 import { Settings } from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
@@ -19,7 +26,7 @@ Template.apiDocumentation.onCreated(function () {
   instance.subscribe('singleSetting', 'sdkCodeGenerator');
 });
 
-Template.apiDocumentation.onRendered(function () {
+Template.apiDocumentation.onRendered(() => {
   $('[data-toggle="popover"]').popover();
 });
 
@@ -33,25 +40,25 @@ Template.apiDocumentation.helpers({
     // Get documentation file Object
     const documentationFile = DocumentationFiles.findOne(objectId);
 
+    let documentationFileUrl;
+
     // Check if documentation file is available
     if (documentationFile) {
+      // Build documentation files base url
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+
       // Get documentation file URL
-      return Meteor.absoluteUrl().slice(0, -1) + DocumentationFiles.baseURL + '/id/' + documentationFileId;
+      documentationFileUrl = `${documentationFilesBaseURL}/id/${documentationFileId}`;
     }
+    return documentationFileUrl;
   },
   documentationLink () {
     // get documentation link
-    const documentationLink = this.api.documentation_link;
-    // check if exists
-    if (documentationLink) {
-      return documentationLink;
-    }
+    return this.api.documentation_link;
   },
   documentationExists () {
-    const api = this.api;
-    if (api.documentationFileId) {
-      return true;
-    }
+    return !!(this.api.documentationFileId);
   },
   codegenServerExists () {
     // Get template instance
@@ -60,6 +67,7 @@ Template.apiDocumentation.helpers({
     // Get settings
     const settings = Settings.findOne();
 
+    let exists;
     // Check documentation exists, generator is enabled and host setting exists
     if (
       settings &&
@@ -70,25 +78,26 @@ Template.apiDocumentation.helpers({
       // Get code generator host
       instance.codegenServer = settings.sdkCodeGenerator.host;
 
-      // Generator is enabled and has host setting, return true
-      return true;
+      // Generator is enabled and has host setting, codegen server exists
+      exists = true;
     }
+    return exists;
   },
 
 });
 
 Template.apiDocumentation.events({
-  'click #manage-api-documentation': function (event, instance) {
+  'click #manage-api-documentation': function (event, templateInstance) {
     // Get reference to API backend
-    const api = instance.data.api;
+    const api = templateInstance.data.api;
     // Show the manage API documentation form
     Modal.show('manageApiDocumentationModal', { api });
   },
-  'click #sdk-code-generator': function (event, instance) {
+  'click #sdk-code-generator': function (event, templateInstance) {
     // Get reference to API backend
-    const api = instance.data.api;
+    const api = templateInstance.data.api;
     // Get reference to Code Generator host
-    const host = instance.codegenServer;
+    const host = templateInstance.codegenServer;
     // Show the SDK Code generator form
     Modal.show('sdkCodeGeneratorModal', { api, host });
   },

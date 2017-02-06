@@ -1,3 +1,5 @@
+import { Mongo } from 'meteor/mongo';
+
 const ApiBookmarks = new Mongo.Collection('apiBookmarks');
 
-export { ApiBookmarks };
+export default ApiBookmarks;

@@ -1,12 +1,13 @@
-import { Meteor } from 'meteor/meteor';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Accounts } from 'meteor/accounts-base';
-import { Roles } from 'meteor/alanning:roles';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { TAPi18n } from 'meteor/tap:i18n';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
-import { signedIn } from '/core/client/lib/router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+import signedIn from '/core/client/lib/router';
 
 FlowRouter.route('/users', {
   name: 'accountsAdmin',

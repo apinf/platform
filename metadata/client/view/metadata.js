@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { formatDate } from '/core/helper_functions/format_date';
+
+import formatDate from '/core/helper_functions/format_date';
 import { ApiMetadata } from '../../collection';
 
 Template.viewApiMetadata.onCreated(function () {

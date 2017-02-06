@@ -4,14 +4,14 @@
 // Variable 'specificLanguageNames' keeps specific names
 const specificLanguageNames = {
   'dynamic-html': 'Dynamic HTML',
-  'csharp': 'C#',
-  'CsharpDotNet2': 'C# .NET 2.0',
-  'html': 'HTML',
-  'objc': 'Objective-C',
-  'php': 'PHP',
-  'qt5cpp': 'Qt 5 C++',
-  'swagger': 'Swagger JSON',
-  'swagger-yaml': 'Swagger YAML'
+  csharp: 'C#',
+  CsharpDotNet2: 'C# .NET 2.0',
+  html: 'HTML',
+  objc: 'Objective-C',
+  php: 'PHP',
+  qt5cpp: 'Qt 5 C++',
+  swagger: 'Swagger JSON',
+  'swagger-yaml': 'Swagger YAML',
 };
 
-export { specificLanguageNames };
+export default specificLanguageNames;

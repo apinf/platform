@@ -1,11 +1,21 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
+import DocumentationFiles from '/documentation/collection';
 
 Meteor.methods({
-  findFileById:function(id){
+  findFileById (id) {
+    // Make sure id is a String
+    check(id, String);
+
     const objectId = new Mongo.Collection.ObjectID(id);
     return DocumentationFiles.findOne(objectId);
   },
-  findByMimeType: function(mimeType){
-    return DocumentationFiles.find({'contentType': mimeType}).fetch();
-  }
+  findByMimeType (mimeType) {
+    // Make sure mimeType is a String
+    check(mimeType, String);
+
+    return DocumentationFiles.find({ contentType: mimeType }).fetch();
+  },
 });
