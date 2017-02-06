@@ -29,15 +29,6 @@ Template.navbar.onCreated(function () {
 
 
 Template.navbar.helpers({
-  profileImageUrl () {
-    // get a object with profile image url
-    // TODO: Did not find ProfilePictures - should that be ProjectLogo?
-    // TODO: I don't understand the meaning of method below. Any picture suffices?
-    // const profilePicture = ProfilePictures.findOne({});
-    // return that url
-    // return profilePicture.url();
-    return undefined;
-  },
   isSearchRoute () {
     // Get name of current route from Router
     const routeName = FlowRouter.getRouteName();
