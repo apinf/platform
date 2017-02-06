@@ -1,5 +1,5 @@
 import Apis from '/apis/collection';
-import { ApiV1 } from '/core/server/api';
+import ApiV1 from '/core/server/api';
 import _ from 'lodash';
 
 // Generates: "GET all" /rest-api/v1/apis and "GET one"

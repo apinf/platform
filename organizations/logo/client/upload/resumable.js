@@ -5,7 +5,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import OrganizationLogo from '/organizations/logo/collection/collection';
 import Organizations from '/organizations/collection';
-import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
   // Set organization logo id to organization collection on success

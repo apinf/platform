@@ -4,8 +4,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import DocumentationFiles from '/documentation/collection';
-import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {

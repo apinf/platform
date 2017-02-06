@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import Apis from '/apis/collection';
 import ApiLogo from '../../collection';
 
