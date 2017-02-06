@@ -1,12 +1,16 @@
-import { DocumentationFiles } from '/documentation/collection/collection';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 import Apis from '/apis/collection';
+import DocumentationFiles from '/documentation/collection';
 import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 
-Meteor.startup(function () {
-
+Meteor.startup(() => {
   // Set documentation id to api collection on Success
-  DocumentationFiles.resumable.on('fileSuccess', function (file) {
+  DocumentationFiles.resumable.on('fileSuccess', (file) => {
     // Turn off spinner
     uploadingSpinner.set(false);
 
@@ -26,14 +30,15 @@ Meteor.startup(function () {
     sAlert.success(message);
   });
 
-  DocumentationFiles.resumable.on('fileAdded', function (file) {
+  DocumentationFiles.resumable.on('fileAdded', (file) => {
     if (file && file.size <= 10485760) { // Limit file size to 10 MB
-      return DocumentationFiles.insert({
+      DocumentationFiles.insert({
         _id: file.uniqueIdentifier,
         filename: file.fileName,
         contentType: file.file.type,
-      }, function (err, documentationFile) {
+      }, (err) => {
         if (err) {
+          // eslint-disable-next-line no-console
           console.warn('File creation failed!', err);
           return;
         }
@@ -43,8 +48,9 @@ Meteor.startup(function () {
         if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
           // Turn on spinner
           uploadingSpinner.set(true);
+
           // Upload documentation
-          return DocumentationFiles.resumable.upload();
+          DocumentationFiles.resumable.upload();
         } else {
           // Get error message translation
           const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
@@ -54,8 +60,6 @@ Meteor.startup(function () {
         }
       });
     } else {
-      // Inform user about file size Limit
-
       // Get file size limit message translation
       const message = TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message');
 
