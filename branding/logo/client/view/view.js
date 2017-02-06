@@ -33,7 +33,8 @@ Template.viewProjectLogo.helpers({
       // Get project logo file URL
       projectLogoFileUrl = `${baseProjectLogoFotoUrl}/id/${currentProjectLogoFileId}`;
     }
-    return projectLogoFileUrl;
+    // return projectLogoFileUrl;
+    return `${Meteor.absoluteUrl().slice(0, -1) + ProjectLogo.baseURL}/md5/${currentProjectLogoFile.md5}`;
   },
   projectLogoExists () {
     const branding = Branding.findOne();
