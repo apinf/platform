@@ -50,12 +50,14 @@ ApiBacklogItems.schema = new SimpleSchema({
     type: Date,
     autoValue () {
       let value;
+      // Check if mongoDB insert operation is initial
       if (this.isInsert) {
         value = new Date();
       } else if (this.isUpsert) {
         value = { $setOnInsert: new Date() };
       } else {
-        this.unset();  // Prevent user from supplying their own value
+        // Prevent user from supplying their own value
+        this.unset();
       }
       return value;
     },
