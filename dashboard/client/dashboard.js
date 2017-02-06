@@ -72,8 +72,8 @@ Template.dashboard.helpers({
     return instance.chartData.get();
   },
   proxyBackends () {
-    // Fetch proxy backends
-    const proxyBackends = ProxyBackends.find().fetch();
+    // Fetch proxy backends and sort them by name
+    const proxyBackends = ProxyBackends.find({}, { sort: { 'apiUmbrella.name': 1 } }).fetch();
 
     // Get the current selected backend
     const backendParameter = FlowRouter.getQueryParam('backend');
