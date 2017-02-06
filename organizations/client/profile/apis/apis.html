@@ -1,0 +1,21 @@
+<template name="organizationApis">
+  <div class="pull-right">
+    <!-- Filter button -->
+    {{# if organization.userVisibleApisCursor.count }}
+      {{> apisFilterIcon }}
+    {{/ if }}
+    <!-- Connection API button -->
+    {{# if organization.currentUserCanManage }}
+      <button type="button" class="btn btn-default" id="connect-api">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {{_ 'organizationProfile_buttonText_connectApi' }}
+      </button>
+    {{/ if }}
+  </div>
+  <!-- Show or not content-->
+  {{# if organization.userVisibleApisCursor.count }}
+    {{> organizationShowApis organization=organization }}
+  {{ else }}
+    {{> organizationNoApis organization=organization }}
+  {{/ if }}
+</template>

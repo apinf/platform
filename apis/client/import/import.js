@@ -1,4 +1,16 @@
-Template.importApiConfiguration.rendered = function () {
+/* eslint-env browser */
+
+import { FS } from 'meteor/cfs:filesystem';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { Template } from 'meteor/templating';
+import { ace } from 'meteor/mizzao:sharejs-ace';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+import jsyaml from 'js-yaml';
+
+Template.importApiConfiguration.onRendered(function () {
   // keep current template instance
   const instance = this;
 
@@ -13,9 +25,9 @@ Template.importApiConfiguration.rendered = function () {
 
   // custom message (tutorial) in json format
   const tips = {
-    'How_to_import_configurations': {
-      'option_1': 'Upload existing config file.',
-      'option_2': 'Paste configurations here.',
+    HowToImportConfigurations: {
+      option_1: 'Upload existing config file.',
+      option_2: 'Paste configurations here.',
       'available_file_extensions:': 'JSON, YAML or TXT.',
     },
   };
@@ -25,71 +37,65 @@ Template.importApiConfiguration.rendered = function () {
 
   // pastes initial value to editor
   instance.editor.setValue(jsonString);
-};
-
+});
 
 // Get reference to template instance
-Template.importApiConfiguration.created = function () {
+Template.importApiConfiguration.onCreated(function () {
   const instance = this;
 
   // function attached to template instance checks file extension
-  instance.endsWith = function (filename, suffixList) {
-    // variable that keeps state of is this filename contains provided extensions - false by default
-    let state = false;
-
-    // iterating through extensions passed into suffixList array
+  instance.checkFileExtension = function (filename, suffixList) {
+    // iterate through extensions passed into suffixList array
     for (let i = 0; i < suffixList.length; i++) {
       // parses line to check if filename contains current suffix
-      const endsWith = filename.indexOf(suffixList[i], filename.length - suffixList[i].length) !== -1;
+      const containsCurrentSuffix = filename.indexOf(
+        suffixList[i], filename.length - suffixList[i].length
+      ) !== -1;
 
       // if current extension found in filename then change the state variable
-      if (endsWith) state = true;
+      if (containsCurrentSuffix) return true;
     }
 
-    return state;
+    return false;
   };
-};
-
+});
 
 Template.importApiConfiguration.events({
-  'dropped #dropzone': function (event, template) {
-    // current template instance
-    const instance = Template.instance();
-
+  'dropped #dropzone': function (event, templateInstance) {
     // grabs "dropped" files and iterates through them
-    FS.Utility.eachFile(event, function (file) {
+    FS.Utility.eachFile(event, (file) => {
       // checks if file is found
       if (file) {
-        // initialises new reader instance
+        // initialises new reader templateInstance
         const reader = new FileReader();
 
         // reads file - expecting YAML, JSON or TXT
         reader.readAsText(file, 'UTF-8');
 
         // once file is loaded, doing smth with it
-        reader.onload = function (event) {
+        reader.onload = function (onLoadEvent) {
           // gets file contents
-          const importedFile = event.target.result;
+          const importedFile = onLoadEvent.target.result;
 
-          let jsonObj = {};
+          let apiConfiguration = {};
 
           const acceptedExtensions = ['yaml', 'yml', 'txt', 'json'];
 
           // checks if file name contains one of accepted extensions
-          if (instance.endsWith(file.name, acceptedExtensions)) {
+          if (templateInstance.endsWith(file.name, acceptedExtensions)) {
             // checks if file extension is .YAML or .TXT
-            if (instance.endsWith(file.name, ['yaml', 'yml', 'txt'])) {
+            if (templateInstance.endsWith(file.name, ['yaml', 'yml', 'txt'])) {
               // converts YAML to JSON
               const yamlToJson = jsyaml.load(importedFile);
 
               // parses JSON obj to JSON String with indentation
-              jsonObj = JSON.stringify(yamlToJson, null, '\t');
+              apiConfiguration = JSON.stringify(yamlToJson, null, '\t');
             }
 
             // checks if file extension is .JSON
-            if (instance.endsWith(file.name, ['json'])) {
+            if (templateInstance.endsWith(file.name, ['json'])) {
               // if JSON - no need to convert anything
-              jsonObj = importedFile;
+              apiConfiguration = importedFile;
             }
           } else {
             // Get error message translation
@@ -100,27 +106,24 @@ Template.importApiConfiguration.events({
           }
 
           // pastes converted file to ace editor
-          instance.editor.setValue(jsonObj);
+          templateInstance.editor.setValue(apiConfiguration);
         };
       }
     });
 
     return false;
   },
-  'submit #apiConfigurationUploadForm': function (event, template) {
-    // current template instance
-    const instance = Template.instance();
-
+  'submit #apiConfigurationUploadForm': function (event, templateInstance) {
     // gets current data from ace editor
-    const jsonString = instance.editor.getValue();
+    const jsonString = templateInstance.editor.getValue();
 
     // try catch here, so that page does not reload if JSON is incorrect
     try {
-      // parses JSON String to JSON Object
-      const jsonObj = JSON.parse(jsonString);
+      // parses JSON String to apiConfiguration
+      const apiConfiguration = JSON.parse(jsonString);
 
-      // calls method and passing jsonObj there - expects status object as callback
-      Meteor.call('importApiConfigs', jsonObj, function (err, status) {
+      // import apiConfiguration: expects status from callback
+      Meteor.call('importApiConfigs', apiConfiguration, (err, status) => {
         // error handing
         if (err) sAlert.error(err);
 
@@ -130,7 +133,7 @@ Template.importApiConfiguration.events({
           sAlert.success(status.message);
 
           // redirects to apiBackend view page
-          Router.go('/api/' + status.newBackendId);
+          FlowRouter.go(`/api/${status.newBackendId}`);
         } else {
           // error message
           sAlert.error(status.message);
@@ -146,5 +149,4 @@ Template.importApiConfiguration.events({
 
     return false;
   },
-
 });

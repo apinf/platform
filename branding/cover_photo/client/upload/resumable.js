@@ -1,17 +1,14 @@
-// Import meteor packages
 import { Meteor } from 'meteor/meteor';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// Import apinf collections
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
-import { fileNameEndsWith } from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
-Meteor.startup(function () {
+Meteor.startup(() => {
   // Set cover photo id to branding collection on Success
-  CoverPhoto.resumable.on('fileSuccess', function (file) {
-
+  CoverPhoto.resumable.on('fileSuccess', (file) => {
     // Get the id from project logo file object
     const coverPhotoFileId = file.uniqueIdentifier;
 
@@ -28,16 +25,16 @@ Meteor.startup(function () {
     sAlert.success(message);
   });
 
-  CoverPhoto.resumable.on('fileAdded', function (file) {
+  CoverPhoto.resumable.on('fileAdded', (file) => {
     return CoverPhoto.insert({
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type,
-    }, function (err) {
+    }, (err) => {
       if (err) {
         // Create & show a message about failed
         const message = `${TAPi18n.__('uploadCoverPhoto_acceptedExtensions_errorText')} ${err}`;
-        sAlert.warning(message)
+        sAlert.warning(message);
         return;
       }
 
@@ -47,14 +44,14 @@ Meteor.startup(function () {
       // Check extensions for uploading file: is it a picture or not?
       if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
         // Upload the cover photo
-        return CoverPhoto.resumable.upload();
+        CoverPhoto.resumable.upload();
+      } else {
+        // Get extension error message
+        const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
+
+        // Alert user of extension error
+        sAlert.error(message);
       }
-
-      // Get extension error message
-      const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
-
-      // Alert user of extension error
-      sAlert.error(message);
     });
   });
 });

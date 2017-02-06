@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "parserOptions": {
+    "parserOptions": {
     "allowImportExportEverywhere": true,
     "ecmaVersion": 7
   },
@@ -16,7 +16,7 @@
   },
   "rules": {
     "arrow-body-style": [
-      2, 
+      2,
       "always"
     ],
     "comma-dangle": [
@@ -28,11 +28,13 @@
       "never"
     ],
     "import/no-extraneous-dependencies": 0,
-    "space-before-function-paren": [
-      2,
+    "meteor/no-session": [
+      0
+    ],
+    "no-param-reassign": [
+      "error",
       {
-        "anonymous": "always",
-        "named": "always"
+        "props": false
       }
     ],
     "no-underscore-dangle": [
@@ -40,6 +42,16 @@
       {
         "allow": ["_id", "__"]
       }
-    ]
+    ],
+    "no-negated-condition": [
+      "error",
+    ],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "always"
+      }
+    ],
   }
 }

@@ -4,7 +4,7 @@
   "aboutApinf_createdBy": "Created by",
   "aboutApinf_credits": "Credits",
   "aboutApinf_doneButton_text": "Done",
-  "aboutApinf_intro": "Apinf is an open-source API management platform.",
+  "aboutApinf_intro": "This website is powered by the open source Apinf platform.",
   "aboutApinf_homepage": "Homepage",
   "aboutApinf_openSource": "Open Source",
   "aboutApinf_projectLinks": "Project links",
@@ -23,6 +23,10 @@
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '\/'",
+  "addOrganizationManagerForm_title": "Add Manager",
+  "addOrganizationManagerForm_description": "An organization manager has the same rights as the original API manager to edit, delete the API after an API has been connected to an organization.",
+  "addOrganizationManagerForm_button": "Add",
+  "organizationManagerForm_managerAlreadyExist_errorText": "User is already a manager of this organization.",
   "apiAuthorizedUsersList_ header_text": "Authorized users",
   "apiBackend_Status_Checking": "Checking API status. Hold on...",
   "apiBackend_Status_Title": "Status",
@@ -51,6 +55,7 @@
   "apiBacklog_addBacklogItem_buttonText": "Add backlog item",
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
   "apiBacklog_mainTitle": "Backlog",
+  "apiCard_labelText_private": "private",
   "apiSettingsDelete_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
@@ -177,22 +182,17 @@
   "catalogueGrid_addedBy": "Added by",
   "catalogueTable_added": "Added",
   "catalogueTable_addedBy": "Added by",
+  "catalogueTable_labelText_private": "private",
   "catalogue_Title": "API Catalog",
   "changeSelectedProxy_buttonCancel": "Cancel",
   "changeSelectedProxy_buttonConfirm": "Change API Proxy",
   "changeSelectedProxy_title": "Change API Proxy",
   "changeSelectedProxy_textCaution": "Caution!",
   "changeSelectedProxy_textConfirm": "Changing the proxy will change the call URL and will potentially break API calls from applications. Please inform your API consumers about this change and suggest them to check whether or not they need to obtain new API key from the newly selected proxy",
-  "connectApiToOrganizationModal_helpText": "You can add from APIs that you manage to be connected to the organization. Afterwards, the connected API will appear in the organization profile.",
+  "connectApiToOrganizationModal_helpText": "You can connect an API that you manage to the organization. Afterwards, the connected API will appear in the organization profile.",
   "connectApiToOrganizationModal_buttonText_close": "Close",
-  "connectApiToOrganizationModal_text_noOneApis": "There are no free APIs that you manage can be connected to current Organization.",
+  "connectApiToOrganizationModal_text_noOneApis": "All the APIs you manage have already been connected.",
   "connectApiToOrganizationModal_modalTitle": "Connect API",
-  "contactForm_email_label": "E-mail address",
-  "contactForm_email_placeholder": "Your email",
-  "contactForm_message_label": "Message",
-  "contactForm_message_placeholder": "Your message",
-  "contactForm_name_label": "Your name",
-  "contactForm_name_placeholder": "Your name",
   "contactForm_reset": "Reset",
   "contactForm_successMessage": "Thank you! Your message has been successfully sent.",
   "contactForm_submit": "Submit",
@@ -224,6 +224,13 @@
   "deleteApiConfirmation_deleteButton": "Delete",
   "deleteApiConfirmation_header": "Delete API",
   "deleteApiConfirmation_successMessage": "Successfully deleted API: ",
+  "deleteOrganizationConfirmation_cancelButton": "Cancel",
+  "deleteOrganizationConfirmation_confirmDeleteInformation": "The organization information will be removed. This action cannot be undone!",
+  "deleteOrganizationConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
+  "deleteOrganizationConfirmation_confirmDeleteNote": "NOTE:",
+  "deleteOrganizationConfirmation_deleteButton": "Delete",
+  "deleteOrganizationConfirmation_header": "Delete Organization",
+  "deleteOrganizationConfirmation_successMessage": "Successfully deleted Organization: ",
   "deleteAccount_title": "Delete Account",
   "deleteAccount_confirm_text": "Are you sure you want to delete your account?",
   "deleteBacklogItem_modalTitle": "Delete backlog item",
@@ -282,6 +289,10 @@
   "granularity_day": "Day",
   "granularity_week": "Week",
   "granularity_month": "Month",
+  "homeBody_feature_section_Statistic": "At a Glance",
+  "homeBody_featureSection_statistics_apisCount_heading": "APIs:",
+  "homeBody_featureSection_statistics_organizationsCount_heading": "Organizations:",
+  "homeBody_featureSection_statistics_usersCount_heading": "Users:",
   "homeBody_contactUs_heading": "Contact Us",
   "homeBody_contactUs_text": "Contact us for more information.",
   "homeBody_feature_section_heading1": "Are you an API user?",
@@ -374,6 +385,8 @@
   "organizationCatalog_toolbar_toggleCollapse": "Toggle toolbar",
   "organizationCatalog_toolbar_viewMode_grid": "Grid",
   "organizationCatalog_toolbar_viewMode_table": "Table",
+  "organizationCatalog_text_noOrganizationIsAvailable": "No organization is available.",
+  "organizationCatalog_text_addOrganization": "Click \"Add Organization\" button to add a new one.",
   "organizationCatalogTable_added": "Added",
   "organizationCatalogGrid_organizationCardCreated_addedText": "Added %s",
   "organizationCatalogGrid_organizationCardApisCount_apisText": "APIs",
@@ -385,13 +398,30 @@
   "organizationLogo_resumable_errorText": "File creation failed!",
   "organizationLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
   "organizationLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
+  "organizationManagersList_title": "Managers",
+  "organizationManagerForm_successMessage": "New manager added.",
+  "organizationManagerForm_emailNotRegistered_errorText": "Email address not currently registered.",
+  "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
+  "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
   "organizationProfile_bigText_apisCount": "APIs",
   "organizationProfileHeader_editButton_text": "Edit",
+  "organizationProfileHeader_tabs_apis": "APIs",
+  "organizationProfileHeader_tabs_settings": "Settings",
   "organizationProfile_smallText_apisCount": "(%s apis)",
   "organizationProfile_buttonText_connectApi": "Connect API to organization",
   "organizationProfile_buttonText_clear": "Clear all",
   "organizationProfile_text_error": "Connection button doesn't work. Please inform administrator about the problem",
   "organizationProfile_text_filteredBy": "Filtered by",
+  "organizationRemoveManagers_cancelButton": "Cancel",
+  "organizationRemoveManagers_description": "Are you sure you want to remove this user as a manager?",
+  "organizationRemoveManagers_removeButton": "Remove",
+  "organizationRemoveManagers_title": "Remove user as a manager",
+  "organizationSettings_uploadLogo_heading": "Upload logo",
+  "organizationSettings_uploadLogoText": "You can upload a logo for your organization. The logo will appear in the catalogue and on the single organization profile.",
+  "organizationSettingsDelete_buttonText_delete": "Delete",
+  "organizationSettingsDelete_text_information": "The organization information will be removed and this action cannot be undone.",
+  "organizationSettingsDelete_title": "Delete the Organization profile",
+  "organizationSettingsDelete_panelTitle": "Delete",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
   "profile_setUsername": "Please set your username.",
@@ -444,23 +474,35 @@
   "responseTimeDistributionChart_help_text": "You can use this chart to see the number of responses generated by your API and its response time for the requests it receives for a specific time period. You can see the response time (on X-axis in milliseconds) and number of responses generated (Y-axis) for a single API or a combination of them. The overview information and other charts will be updated when you interact with API Response Time.",
   "schemas": {
       "apis": {
-          "submit_methods": {
-              "label": "Allow try-out for following methods:"
-          },
-          "organizationId": {
-            "label": "Connect API to organization"
-          },
-          "lifecycleStatus": {
-            "label": "Lifecycle status",
-            "placeholder": "Select lifecycle status",
-            "options": {
-              "design": "Design",
-              "development": "Development",
-              "testing": "Testing",
-              "production": "Production",
-              "deprecated": "Deprecated"
-            }
+        "name": {
+          "label": "API Name"
+        },
+        "description": {
+          "label": "Description"
+        },
+        "url": {
+          "label": "URL"
+        },
+        "submit_methods": {
+          "label": "Allow try-out for following methods:"
+        },
+        "organizationId": {
+          "label": "Connect API to organization"
+        },
+        "lifecycleStatus": {
+          "label": "Lifecycle status",
+          "placeholder": "Select lifecycle status",
+          "options": {
+            "design": "Design",
+            "development": "Development",
+            "testing": "Testing",
+            "production": "Production",
+            "deprecated": "Deprecated"
           }
+        },
+        "documentation_link": {
+          "label": "Documentation link"
+        }
       },
       "apiMetadata": {
           "organization": {
@@ -551,6 +593,20 @@
               "label": "Site footer"
           }
       },
+      "contactForm": {
+        "name": {
+          "label": "Your name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "E-mail address",
+          "placeholder": "Your email"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Your message"
+        }
+      },
       "feedback": {
           "topic": {
               "label": "Topic",
@@ -573,7 +629,12 @@
         }
       },
       "settings": {
-          "apiDocumentationEditor": {
+        "access": {
+          "onlyAdminsCanAddApis": {
+            "label": "Only platform administrators are allowed to add new APIs"
+          }
+        },
+        "apiDocumentationEditor": {
               "label": "API Documentation Editor",
               "enabled": {
                   "label": "Enabled"
@@ -584,7 +645,6 @@
               }
           },
           "mail": {
-              "label": "Mail (SMTP)",
               "enabled": {
                   "label": "Enabled"
               },
@@ -594,8 +654,17 @@
               "password": {
                   "label": "Password"
               },
+              "smtpHost": {
+                  "label": "SMTP Host"
+              },
+              "smtpPort": {
+                  "label": "SMTP Port"
+              },
+              "fromEmail": {
+                  "label": "Email address for sending emails"
+              },
               "toEmail": {
-                  "label": "To email"
+                  "label": "Email address for receiving emails"
               }
           },
           "githubConfiguration": {
@@ -684,6 +753,27 @@
         "organizationId": {
           "label": "Select Organization"
         }
+      },
+      "updatePassword": {
+        "old": {
+          "label": "Current Password"
+        },
+        "new": {
+          "label": "New Password"
+        },
+        "confirm": {
+          "label": "Confirm new Password"
+        }
+      },
+      "users": {
+        "username": {
+          "label": "Username"
+        },
+        "profile": {
+          "company": {
+            "label": "Company"
+          }
+        }
       }
   },
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
@@ -700,19 +790,12 @@
   "settings_addingApis": "Adding APIs",
   "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
-  "settings_mail_username_label": "Username",
-  "settings_mail_password_label": "Password",
-  "settings_mail_smtpHost_label": "SMTP Host",
-  "settings_mail_smtpPort_label": "SMTP Port",
-  "settings_mail_fromEmail_label": "Email address for sending emails",
-  "settings_mail_fromEmail_hint": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
-  "settings_mail_toEmail_label": "Email address for receiving emails",
-  "settings_mail_toEmail_hint": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
+  "settings_mail_fromEmail": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
+  "settings_mail_toEmail": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
   "settings_github": "Github",
   "settings_save": "Save",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
-  "settings_schema_onlyAdminsCanAddApis": "Only platform administrators are allowed to add new APIs",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
   "settingsMenu_branding": "Branding",
@@ -745,6 +828,9 @@
   "uploadApiLogoButton": "Upload logo",
   "uploadApiLogo_confirm_delete": "Are you sure you want to delete this logo?",
   "uploadApiLogo_successfully_deleted": "Logo successfully deleted!",
+  "uploadOrganizationLogoButton": "Upload logo",
+  "uploadOrganizationLogo_confirm_delete": "Are you sure you want to delete this logo?",
+  "uploadOrganizationLogo_successfully_deleted": "Logo successfully deleted!",
   "uploadProjectLogoButton_uploadButton_uploadLogo": "Upload Logo",
   "uploadCoverPhoto_confirm_delete": "Cover photo area will show primary branding color after photo has been deleted. The image will be removed from the collection.",
   "uploadCoverPhoto_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",

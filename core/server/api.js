@@ -37,6 +37,7 @@ ApiV1.swagger = {
 };
 
 // Enable user endpoints if authentication is enabled
+// eslint-disable-next-line no-underscore-dangle
 if (ApiV1._config.useDefaultAuth) {
   // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
   // Meteor.users collection
@@ -85,4 +86,4 @@ if (ApiV1._config.useDefaultAuth) {
 // Generate Swagger to route /rest-api/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
 
-export { ApiV1 };
+export default ApiV1;

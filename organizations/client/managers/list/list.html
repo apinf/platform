@@ -1,0 +1,18 @@
+<template name="organizationManagersList">
+  <ul class="list-group">
+    {{# each organizationManagers }}
+      <li class="list-group-item">
+        {{ username }}
+        ({{ email }})
+
+        {{# unless managerIsCurrentUser }}
+          <button
+            id="remove-organization-manager"
+            class="btn btn-danger btn-xs pull-right">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        {{/ unless }}
+      </li>
+    {{/ each }}
+  </ul>
+</template>

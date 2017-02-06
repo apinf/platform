@@ -46,6 +46,7 @@ matb33:collection-hooks
 meteor-base@1.0.4
 meteorhacks:subs-manager
 michalvalasek:autoform-bootstrap-colorpicker
+mizzao:sharejs-ace
 mobile-experience@1.0.4
 mongo@1.1.14
 nimble:restivus
@@ -77,7 +78,9 @@ tmeasday:publish-counts
 todda00:friendly-slugs
 tracker@1.1.1
 twbs:bootstrap
+u2622:persistent-session
 useraccounts:bootstrap
+useraccounts:core
 useraccounts:flow-routing
 vsivsi:file-collection
 zimme:active-route

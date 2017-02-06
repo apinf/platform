@@ -1,7 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'lodash';
 
-// APINF collection imports
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 
@@ -9,6 +9,7 @@ Organizations.helpers({
   apis () {
     // Get list of api ids
     const apiIds = this.managedApiIds();
+
     // Make sure organization has APIs
     if (apiIds.length > 0) {
       // Return list of APIs
@@ -36,20 +37,53 @@ Organizations.helpers({
     // Return empty array because organization doesn't have APIs
     return [];
   },
-  filteredApis (filterQuery) {
-    // Get IDs of managed APIs
+  userVisibleApisCursor (currentUser) {
+    // Get ids of managed APIs of organization
     const apiIds = this.managedApiIds();
 
-    // Find in managed APIs
-    const dbQuery = { _id: { $in: apiIds } };
+    // Make sure organization has APIs
+    if (apiIds.length > 0) {
+      // Placeholder for storage
+      let userId;
 
-    // Add filter options to database query
-    _.forEach(filterQuery, (value, field) => {
-      // Add fields from filter to database query
-      dbQuery[field] = value;
-    });
+      // Check if function parameter exists
+      // If parameter is null then user is anonym and the publish function returns null
+      if (currentUser || currentUser === null) {
+        // Get user id from function parameter
+        // Need to provide user id when helper is called from the publish function
+        // Otherwise it throws error
+        userId = currentUser;
+      } else {
+        // Get user id from Meteor
+        userId = Meteor.userId();
+      }
 
-    // Get an array of APIs, based on API IDs array and filter
-    return Apis.find(dbQuery).fetch();
+      // Placeholder for storage database query
+      let filteredApis;
+
+      // Case: Registered users
+      if (userId) {
+        // Case: user is manager of APIs or without APIs
+        // Select available organization apis for current user
+        filteredApis = {
+          _id: { $in: apiIds },
+          $or: [
+            { isPublic: true },
+            { managerIds: userId },
+            { authorizedUserIds: userId },
+          ],
+        };
+      } else {
+        // Case: Anonymous users
+
+        // Show all public apis of organization
+        filteredApis = { _id: { $in: apiIds }, isPublic: true };
+      }
+
+      // Return cursor on organization apis which can be shown for current user
+      return Apis.find(filteredApis);
+    }
+    // Return empty array
+    return [];
   },
 });

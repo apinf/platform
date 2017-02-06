@@ -1,63 +1,74 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import Organizations from '/organizations/collection';
 
 Template.organizationCatalogueToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Check URL parameter for sorting
-  const sortByParameter = FlowRouter.getQueryParam('sortBy');
+  // Separate autoruns to run own function for each parameter
 
-  // Check URL parameter for sort direction
-  const sortDirectionParameter = FlowRouter.getQueryParam('sortDirection');
+  // Runs a function that depends only on SortBy parameter
+  instance.autorun(() => {
+    // Check URL parameter for sorting
+    const sortByParameter = FlowRouter.getQueryParam('sortBy');
 
-  // Check URL parameter for filtering
-  const filterByParameter = FlowRouter.getQueryParam('filterBy');
-
-  // Check URL parameter for view mode
-  const viewModeParameter = FlowRouter.getQueryParam('viewMode');
-
-  if (sortByParameter) {
     // Set the sorting by UI state from URL parameter
     instance.$('#organization-sort-select').val(`${sortByParameter}`).change();
-  } else {
-    // Get sorting from template
-    const sortBy = instance.$('[name=sort-menu]').val();
+  });
 
-    // Set sorting URL parameter from template value
-    FlowRouter.setQueryParams({ sortBy });
-  }
+  // Runs a function that depends only on sortDirection parameter
+  instance.autorun(() => {
+    // Check URL parameter for sort direction
+    const sortDirectionParameter = FlowRouter.getQueryParam('sortDirection');
 
-  if (sortDirectionParameter) {
     // Set the sorting direction by UI state from URL parameter
     instance.$(`#organization-sort-${sortDirectionParameter}`).button('toggle');
-  } else {
-    // Get sorting direction from template
-    const sortDirection = instance.$('[name=sort-direction]:checked').val();
+  });
 
-    // Set sorting direction URL parameter from template value
-    FlowRouter.setQueryParams({ sortDirection });
-  }
+  // Runs a function that depends only on filterBy parameter
+  instance.autorun(() => {
+    // Check URL parameter for filtering
+    const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
-  if (filterByParameter) {
     // Set the filter by UI state from URL parameter
     instance.$(`#filter-${filterByParameter}`).button('toggle');
-  } else {
-    // Get filtering from template
-    const filterBy = instance.$('[name=filter-options]:checked').val();
+  });
 
-    // Set filtering URL parameter from template value
-    FlowRouter.setQueryParams({ filterBy });
-  }
+  // Runs a function that depends only on viewMode parameter
+  instance.autorun(() => {
+    // Check URL parameter for view mode
+    const viewModeParameter = FlowRouter.getQueryParam('viewMode');
 
-  if (viewModeParameter) {
     // Set the view mode direction by UI state from URL parameter
     instance.$(`[for=${viewModeParameter}-view]`).button('toggle');
-  } else {
-    // Get view mode direction from template
-    const viewMode = instance.$('[name=view-mode]:checked').val();
+  });
+});
 
-    // Set view mode direction URL parameter from template value
-    FlowRouter.setQueryParams({ viewMode });
-  }
+Template.organizationCatalogueToolbar.helpers({
+  userIsOrganizationManager () {
+    // Get ID of current user
+    const userId = Meteor.userId();
+    // Get all managed organizations
+    const organizations = Organizations.find({ managerIds: userId }).fetch();
+    // Show filter if user has at least one managed organization
+    return organizations.length > 0;
+  },
+});
+
+Template.organizationCatalogueToolbar.events({
+  'change .filter-sort-control': (event) => {
+    // Initialize placeholder for query parameters
+    const queryParameters = {};
+
+    // Get "name" attribute of selected element
+    const parameterName = event.target.name;
+
+    // Create the query parameters object, using the key and value
+    queryParameters[parameterName] = event.target.value;
+
+    // Set URL parameter
+    FlowRouter.setQueryParams(queryParameters);
+  },
 });

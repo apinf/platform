@@ -7,10 +7,7 @@
         <h1 id="api-header">
           {{ api.name }}
           {{> viewApiStatus api=api width="0.4" }}
-
         </h1>
-
-        &nbsp; <!--TODO: determine why these labels don't have margin -->
         {{> apiLifecycleStatus api=api }}
 
         {{# unless api.isPublic }}
@@ -18,7 +15,7 @@
             {{_ "viewApiPageHeader_privateLabel_text" }}
           </span>
         {{/ unless }}
-        
+
         <ul class="list-inline view-api-meta-details">
           <li>
             <i class="fa fa-user"></i>
@@ -51,7 +48,7 @@
         </div>
       {{/if }}
       <!-- Tabs -->
-      <div id="api-navigation-tabs">
+      <div id="api-navigation-tabs" class="navigation-tabs">
         <ul class="nav nav-tabs">
           <li id ="api-details-tab" class="active">
             <a href="#api-details" data-toggle="tab">

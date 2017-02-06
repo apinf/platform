@@ -1,14 +1,18 @@
+// Meteor imports
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Utility imports
 import ss from 'simple-statistics';
 import moment from 'moment';
+import 'moment/min/locales.min';
 import _ from 'lodash';
 
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import { ApiBackendRatings } from '/ratings/collection';
-import { ApiBookmarks } from '/bookmarks/collection';
-import { Apis } from './';
+import ApiBookmarks from '/bookmarks/collection';
+import Apis from './';
 
 Apis.helpers({
   currentUserCanEdit () {
@@ -18,16 +22,23 @@ Apis.helpers({
     // Check that user is logged in
     if (userId) {
       // Check if user is manager of this API
-      const userIsManager = _.includes(this.managerIds, userId);
-
-      // Check if user has external access
-      const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
+      const userIsManager = this.currentUserCanManage();
 
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
+      // Get api organization
+      const parentOrganization = this.organization();
+
+      // Define api organization manager
+      let userIsOrganizationManager;
+
+      if (parentOrganization) {
+        userIsOrganizationManager = parentOrganization.currentUserCanManage();
+      }
+
       // if user is manager or administrator, they can edit
-      if (userIsManager || userIsAuthorized || userIsAdmin) {
+      if (userIsManager || userIsOrganizationManager || userIsAdmin) {
         return true;
       }
     }
@@ -35,11 +46,17 @@ Apis.helpers({
     return false;
   },
   currentUserCanView () {
+    // Get current userId
+    const userId = Meteor.userId();
+
+    // Check if user has external access
+    const userIsAuthorized = _.includes(this.authorizedUserIds, userId);
+
     // Check if API is public
     // Only user who can edit, can view private APIs
-    return (this.isPublic || this.currentUserCanEdit());
+    return (this.isPublic || userIsAuthorized || this.currentUserCanEdit());
   },
-  currentUserIsManager () {
+  currentUserCanManage () {
     // Get current User ID
     const userId = Meteor.userId();
 
@@ -78,7 +95,7 @@ Apis.helpers({
     if (apiBackendRatings) {
       // Create array containing only rating values
       // get only the rating value; omit User ID and API Backend ID fields
-      const apiBackendRatingsArray = _.map(apiBackendRatings, rating => rating.rating);
+      const apiBackendRatingsArray = _.map(apiBackendRatings, rating => { return rating.rating; });
 
       // Get the average (mean) value for API Backend ratings
       const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
@@ -125,12 +142,16 @@ Apis.helpers({
     return this.averageRating;
   },
   relativeUpdatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Return relative updated_at
-    return moment(this.updated_at).fromNow();
+    return moment(this.updated_at).locale(language).fromNow();
   },
   relativeCreatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Return relative updated_at
-    return moment(this.created_at).fromNow();
+    return moment(this.created_at).locale(language).fromNow();
   },
   setAverageRating () {
     // get average rating value

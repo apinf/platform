@@ -1,6 +1,6 @@
 {
   "name": "apinf",
-  "version": "0.39.0",
+  "version": "0.40.0",
   "description": "API management portal and proxy.",
   "main": "index.js",
   "directories": {
@@ -53,7 +53,7 @@
     "API",
     "Proxy"
   ],
-  "author": "Sampo Software Oy",
+  "author": "APInf Oy",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/apinf/api-umbrella-dashboard/issues"

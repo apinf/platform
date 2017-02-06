@@ -1,9 +1,9 @@
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.apiRemoveAuthorizedUser.events({
-  'click #confirm-remove' (event, templateInstance) {
+  'click #confirm-remove': function (event, templateInstance) {
     // Get API ID
     const apiId = templateInstance.data.api._id;
 
@@ -12,9 +12,9 @@ Template.apiRemoveAuthorizedUser.events({
 
     // Remove User ID from authorized users array
     Apis.update({ _id: apiId },
-       { $pull:
+      { $pull:
          { authorizedUserIds: userId },
-       }
+      }
      );
 
     // Dismiss the modal dialogue

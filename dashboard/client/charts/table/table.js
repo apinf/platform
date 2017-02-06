@@ -14,39 +14,39 @@ Template.dashboardDataTable.onCreated(function () {
   instance.pageNumber = new ReactiveVar(0);
 });
 
-Template.dashboardDataTable.onRendered(function () {
+Template.dashboardDataTable.onRendered(() => {
   // Activate help icons
   $('[data-toggle="popover"]').popover();
 });
 
 Template.dashboardDataTable.events({
-  'click #prev': function (event, instance) {
+  'click #prev': function (event, templateInstance) {
     // Get current page number
-    const currentPageNumber = instance.pageNumber.get();
+    const currentPageNumber = templateInstance.pageNumber.get();
 
     // Check if page number the first page in the table
     if (currentPageNumber > 0) {
       // Decrement page number value
-      instance.pageNumber.set(currentPageNumber - 1);
+      templateInstance.pageNumber.set(currentPageNumber - 1);
     }
   },
-  'click #next': function (event, instance) {
+  'click #next': function (event, templateInstance) {
     // Get current page number
-    const currentPageNumber = instance.pageNumber.get();
+    const currentPageNumber = templateInstance.pageNumber.get();
 
     // Get table row count
-    const rowCount = instance.rowCount.get();
+    const rowCount = templateInstance.rowCount.get();
 
     // Get table dataset length
     const dataSetLength = Template.currentData().tableData.length;
 
     // Check if current page is the last one in the table
-    if (currentPageNumber < (dataSetLength / rowCount - 1)) {
+    if (currentPageNumber < ((dataSetLength / rowCount) - 1)) {
       // Increment page number
-      instance.pageNumber.set(currentPageNumber + 1);
+      templateInstance.pageNumber.set(currentPageNumber + 1);
     }
   },
-  'change #change-row-count': function (event, instance) {
+  'change #change-row-count': function (event, templateInstance) {
     // Prevent default form submit
     event.preventDefault();
 
@@ -54,10 +54,10 @@ Template.dashboardDataTable.events({
     const rowCountValue = $('#row-count').val();
 
     // Parse value to int
-    const newRowCount = parseInt(rowCountValue);
+    const newRowCount = parseInt(rowCountValue, 10);
 
     // Update reactive variable
-    instance.rowCount.set(newRowCount);
+    templateInstance.rowCount.set(newRowCount);
   },
 });
 
@@ -103,7 +103,7 @@ Template.dashboardDataTable.helpers({
     const dataSetLength = Template.currentData().tableData.length;
 
     // Check if current page is the last one in the table
-    return pageNumber < (dataSetLength / rowCount - 1);
+    return pageNumber < ((dataSetLength / rowCount) - 1);
   },
   currentPageNumber () {
     // Get reference to a template instance
@@ -123,6 +123,6 @@ Template.dashboardDataTable.helpers({
     const dataSetLength = Template.currentData().tableData.length;
 
     // Calculate total page number and make it integer
-    return (dataSetLength / rowCount + 1) | 0;
+    return ((dataSetLength / rowCount) + 1) | 0;
   },
 });

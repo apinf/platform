@@ -1,19 +1,18 @@
-// Import meteor package
 import { Roles } from 'meteor/alanning:roles';
-// Import apinf collection
+
 import CoverPhoto from '/branding/cover_photo/collection';
 
 CoverPhoto.allow({
-  insert: function (userId) {
+  insert (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  remove: function (userId) {
+  remove (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  read: function () {
+  read () {
     return true;
   },
-  write: function () {
+  write () {
     return true;
   },
 });

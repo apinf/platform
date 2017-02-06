@@ -1,13 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import moment from 'moment';
+import 'moment/min/locales.min';
 import _ from 'lodash';
 
 import Organizations from './';
 
 Organizations.helpers({
-  currentUserCanEdit () {
+  currentUserCanManage () {
     // Get current userId
     const userId = Meteor.userId();
 
@@ -26,7 +28,9 @@ Organizations.helpers({
     return false;
   },
   relativeCreatedAt () {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Convert createdAt time to format "time ago"
-    return moment(this.createdAt).fromNow();
+    return moment(this.createdAt).locale(language).fromNow();
   },
 });

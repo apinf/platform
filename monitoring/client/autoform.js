@@ -5,7 +5,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { AutoForm } from 'meteor/aldeed:autoform';
 
 // Apinf import
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 
 AutoForm.hooks({

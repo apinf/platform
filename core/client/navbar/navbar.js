@@ -1,11 +1,13 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Meteor } from 'meteor/meteor';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Mongo } from 'meteor/mongo';
 import { Roles } from 'meteor/alanning:roles';
+import { Template } from 'meteor/templating';
 
-import { Branding } from '/branding/collection';
-import { ProjectLogo } from '/branding/logo/collection';
+import Branding from '/branding/collection';
+import ProjectLogo from '/branding/logo/collection';
 import { Settings } from '/settings/collection';
 
 import $ from 'jquery';
@@ -16,7 +18,7 @@ Template.navbar.onCreated(function () {
   instance.subscribe('projectLogo');
   instance.subscribe('proxyCount');
 
-  instance.autorun(function () {
+  instance.autorun(() => {
     // Check if user is logged in
     if (Meteor.userId()) {
       // If user logged in, subscribe to 'onlyAdminCanAddApis' setting
@@ -25,14 +27,7 @@ Template.navbar.onCreated(function () {
   });
 });
 
-
 Template.navbar.helpers({
-  profileImageUrl () {
-    // get a object with profile image url
-    const profilePicture = ProfilePictures.findOne({});
-    // return that url
-    return profilePicture.url();
-  },
   isSearchRoute () {
     // Get name of current route from Router
     const routeName = FlowRouter.getRouteName();
@@ -60,8 +55,8 @@ Template.navbar.helpers({
       // Check if project logo file is available
       if (projectLogoFile) {
         // Get API logo file URL
-        return Meteor.absoluteUrl().slice(0, -1) +
-        ProjectLogo.baseURL + '/md5/' + projectLogoFile.md5;
+        return `${Meteor.absoluteUrl().slice(0, -1) +
+        ProjectLogo.baseURL}/md5/${projectLogoFile.md5}`;
       }
     }
 

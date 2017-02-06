@@ -1,4 +1,4 @@
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 
 Meteor.publish("searchApiBackends", function(searchValue) {
 

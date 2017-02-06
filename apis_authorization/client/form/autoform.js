@@ -1,5 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 AutoForm.hooks({
   authorizedUserForm: {
@@ -14,11 +16,12 @@ AutoForm.hooks({
       const form = this;
 
       // Check if the email address is linked to a registered user
-      Meteor.call('checkIfEmailIsRegistered', email, function (error, emailIsRegistered) {
+      Meteor.call('checkIfEmailIsRegistered', email, (error, emailIsRegistered) => {
         if (emailIsRegistered) {
           // Add user to API authorized users list
-          Meteor.call('addAuthorizedUserByEmail', apiId, email, function (error, result) {
-            if (!error) {
+          // eslint-disable-next-line no-unused-vars
+          Meteor.call('addAuthorizedUserByEmail', apiId, email, (authError, result) => {
+            if (!authError) {
               // Continue with form submission
               form.done();
             }
@@ -44,7 +47,8 @@ AutoForm.hooks({
     },
     onError (error) {
       // do something with the error
+      // eslint-disable-next-line no-console
       console.log(error);
-    }
+    },
   },
 });

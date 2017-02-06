@@ -1,15 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-import { ApiBookmarks } from '/bookmarks/collection';
+import ApiBookmarks from '/bookmarks/collection';
 
-Template.bookmark.created = function () {
+Template.bookmark.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
   // subscribe to user bookmarks, creating reference to subscription
   instance.bookmarksSubscription = instance.subscribe('userApiBookmarks');
-};
+});
 
 Template.bookmark.events({
   'click .bookmark': function () {
@@ -32,17 +32,13 @@ Template.bookmark.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
+    let userBookmark;
     // Make sure bookmark subscription is ready
     if (instance.bookmarksSubscription.ready()) {
       // Get current user bookmark (should be only one API Bookmarks result available)
-      const userBookmarks = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiId });
-
-      // Make sure user has bookmarks
-      if (userBookmarks) {
-        return true;
-      }
-
-      return false;
+      userBookmark = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiId });
     }
+    // Return true if user has an API bookmark
+    return !!(userBookmark);
   },
 });

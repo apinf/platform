@@ -1,15 +1,23 @@
-Template.importApiDocumentation.events({
-  'change #apiDocumentationFile': function (event, template) {
-    // console.log(AutoForm.reactiveFormData());
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { FS } from 'meteor/cfs:filesystem';
+import { URI } from 'meteor/olragon:uri-js';
 
+import _ from 'lodash';
+import jsyaml from 'js-yaml';
+
+import DocumentationFiles from '/documentation/collection';
+
+/* eslint-env browser */
+
+Template.importApiDocumentation.events({
+  'change #apiDocumentationFile': function (event) {
     // Allowed file extensions for API documentation file
     const acceptedExtensions = ['yaml', 'yml', 'json'];
 
-    // Current template instance
-    const instance = Template.instance();
-
     // Iterates through each file uploaded
-    FS.Utility.eachFile(event, function (file) {
+    FS.Utility.eachFile(event, (file) => {
       if (file) {
         // Get file's name & parse the file string to URI object
         const fileName = new URI(file.name);
@@ -28,9 +36,9 @@ Template.importApiDocumentation.events({
           // Reads file
           reader.readAsText(file, 'UTF-8');
 
-          reader.onload = function (event) {
+          reader.onload = function (renderEvent) {
             // Gets file contents
-            const importedFile = event.target.result;
+            const importedFile = renderEvent.target.result;
 
             // Checks for correct JSON or YAML syntax in file contents
             if (JSON.parse(importedFile) || jsyaml.safeLoad(importedFile)) {
@@ -45,12 +53,11 @@ Template.importApiDocumentation.events({
                 doc = jsyaml.load(importedFile);
               }
 
-              // Insert fine contents to a colletion
-              const apiDocsId = ApiDocs.insert(doc);
+              // Insert file contents to a colletion
+              DocumentationFiles.insert(doc);
 
-              // Set session variable containing API Docs ID,
+              // TODO (restore this logic): Set session variable containing API Docs ID,
               // used for attaching apiBackendId to apiDocs document on success
-              Session.set('apiDocsId', apiDocsId);
             } else {
               // Get error message text
               const message = TAPi18n.__('importApiDocumentation_fileReadError_message');

@@ -1,12 +1,17 @@
 import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 import moment from 'moment';
+import 'moment/min/locales.min';
 
 Template.backlogItem.helpers({
   relativeTimeStamp (givenTimeStamp) {
+    // Get current language
+    const language = TAPi18n.getLanguage();
     // Return relative time from now
-    return moment(givenTimeStamp).fromNow();
+    return moment(givenTimeStamp).locale(language).fromNow();
   },
   itemPriorityClass (priority) {
     // Init priorityClass

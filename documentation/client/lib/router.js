@@ -3,7 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 FlowRouter.route('/documentation/editor', {
   name: 'apiDocumentationEditor',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'apiDocumentationEditor' });
   },
 });

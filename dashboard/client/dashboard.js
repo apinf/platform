@@ -4,9 +4,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
-import { Apis } from '/apis/collection';
+import Apis from '/apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
-
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
@@ -58,7 +57,8 @@ Template.dashboard.onCreated(function () {
               // Update reactive variable
               instance.chartData.set(chartData);
             })
-            .catch(err => console.error(err));
+            // eslint-disable-next-line no-console
+            .catch(err => { return console.error(err); });
         }
       });
     }

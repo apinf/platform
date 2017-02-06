@@ -1,11 +1,15 @@
+import { Roles } from 'meteor/alanning:roles';
+
+import ApiFlags from './';
+
 ApiFlags.allow({
-  insert: function (userId) {
+  insert (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  update: function (userId) {
+  update (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  remove: function (userId) {
+  remove (userId) {
     return Roles.userIsInRole(userId, ['admin']);
-  }
+  },
 });

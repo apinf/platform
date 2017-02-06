@@ -16,7 +16,7 @@ indent_style = space
 indent_size = 2
 
 # Handlebars and jade templates
-[*.{html,jade} ]
+[*.{html,jade}]
 charset = utf-8
 indent_style = space
 indent_size = 2

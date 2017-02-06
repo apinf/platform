@@ -14,7 +14,7 @@ export function mailSettingsValid (settings) {
   if ((typeof settings !== 'undefined') && settings.mail && settings.mail.enabled) {
     // Check if all required email settings exist
     if (settings.mail.username && settings.mail.password &&
-      settings.mail.smtpHost && settings.mail.smtpPort ) {
+      settings.mail.smtpHost && settings.mail.smtpPort) {
       return true;
     }
   }

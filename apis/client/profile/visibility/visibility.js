@@ -1,10 +1,9 @@
 import { Template } from 'meteor/templating';
 
-import { Apis } from '/apis/collection';
-
+import Apis from '/apis/collection';
 
 Template.visibilityToggle.events({
-  'click .changeVisibility': function (event) {
+  'click .changeVisibility': function () {
     // Get API from template data
     const api = Template.currentData().api;
 

@@ -1,11 +1,11 @@
-// Import meteor packages
-import { Template } from 'meteor/templating';
+/* eslint-env browser */
+
 import { Mongo } from 'meteor/mongo';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-// Import apinf collections
-import { Branding } from '/branding/collection';
+
+import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.uploadCoverPhoto.onCreated(function () {
@@ -32,7 +32,8 @@ Template.uploadCoverPhoto.helpers({
 
 Template.uploadCoverPhoto.events({
   'click .delete-cover-photo': function () {
-    // Show confirmation dialog to user
+    // Show confirmation dialog to use
+    // eslint-disable-next-line no-alert
     const confirmation = confirm(TAPi18n.__('uploadCoverPhoto_confirm_delete'));
 
     // Check if user clicked "OK"

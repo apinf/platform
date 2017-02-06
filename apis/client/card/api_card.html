@@ -1,5 +1,5 @@
 <template name="apiCard">
-  <div class="api-card panel panel-default">
+  <div class="generic-card panel panel-default">
     <div class="panel-body">
       <div class="media">
         <div class="media-left">
@@ -7,7 +7,7 @@
         </div>
         <div class="media-body">
           <a href="{{ pathFor 'viewApi' _id=api._id }}"
-             class="api-card-name">
+             class="generic-card-name">
             {{ api.name }}
             {{> viewApiStatus api=api width="0.6" }}
           </a>
@@ -18,9 +18,11 @@
           {{> apiLifecycleStatus api=api }}
 
           {{# unless api.isPublic }}
-            <span class="label label-default">private</span>
+            <span class="label label-default">
+                {{_ "apiCard_labelText_private"}}
+            </span>
           {{/ unless }}
-          <p class="api-card-description">
+          <p class="generic-card-description">
             {{ api.description }}
           </p>
         </div>
@@ -64,7 +66,7 @@
         </li>
         {{/ if }}
         <li class="pull-right">
-          <span class="api-card-created">
+          <span class="generic-card-created">
             {{_ "latestApiBackends_DateAdded" api.relativeCreatedAt }}
           </span>
         </li>
