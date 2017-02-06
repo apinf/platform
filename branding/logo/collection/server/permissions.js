@@ -1,16 +1,18 @@
-import { ProjectLogo } from '/branding/logo/collection';
+import { Roles } from 'meteor/alanning:roles';
+
+import ProjectLogo from '/branding/logo/collection';
 
 ProjectLogo.allow({
-  insert: function(userId, file) {
+  insert (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  remove: function(userId, file) {
+  remove (userId) {
     return Roles.userIsInRole(userId, ['admin']);
   },
-  read: function(userId, file) {
+  read () {
     return true;
   },
-  write: function(userId, file, fields) {
+  write () {
     return true;
-  }
+  },
 });

@@ -14,7 +14,6 @@ import { ApiBackendRatings } from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
 import Apis from './';
 
-
 Apis.helpers({
   currentUserCanEdit () {
     // Get current userId

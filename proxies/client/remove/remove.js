@@ -11,7 +11,6 @@ Template.removeProxy.onCreated(function () {
   this.subscribe('proxyBackends', proxyId);
 });
 
-
 Template.removeProxy.helpers({
   connectedProxyBackends () {
     let connectedProxyBackends = 0;

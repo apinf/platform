@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { FeedbackVotes } from '/feedback_votes/collection';
 import { Feedback } from '../';
 
-
 Meteor.publish('apiBackendFeedback', (apiBackendId) => {
   // show feedback to specific API
   return Feedback.find({ apiBackendId });

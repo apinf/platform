@@ -3,7 +3,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import $ from 'jquery';
 
-
 Template.timeFrameSelectPicker.onRendered(() => {
   $('#timeframe-datepickers').datepicker({
     todayHighlight: true,

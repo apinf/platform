@@ -1,3 +1,5 @@
+import { Mongo } from 'meteor/mongo';
+
 const Branding = new Mongo.Collection('branding');
 
-export { Branding };
+export default Branding;

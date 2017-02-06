@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 
 import ApiFlags from '../';
 
-
 Meteor.publish('singleApiFlag', (apiBackendId) => {
   // Make sure apiBackendId is a String
   check(apiBackendId, String);

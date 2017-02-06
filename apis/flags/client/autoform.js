@@ -4,7 +4,6 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-
 AutoForm.addHooks('insertApiFlag', {
   onSuccess (formType) {
     // Hide modal

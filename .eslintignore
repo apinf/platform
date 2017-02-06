@@ -13,24 +13,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-branding/client/lib/router.js
-branding/collection/index.js
-branding/collection/permissions.js
-branding/collection/schema.js
-branding/collection/server/publications.js
-branding/cover_photo/client/upload/resumable.js
-branding/cover_photo/client/upload/upload.js
-branding/cover_photo/client/upload/uploadButton/uploadButton.js
-branding/cover_photo/client/view/view.js
-branding/cover_photo/collection/index.js
-branding/cover_photo/collection/server/permissions.js
-branding/logo/client/upload/resumable.js
-branding/logo/client/upload/upload.js
-branding/logo/client/upload/uploadButton/uploadButton.js
-branding/logo/client/view/view.js
-branding/logo/collection/index.js
-branding/logo/collection/server/permissions.js
-branding/logo/server/publications.js
 documentation/client/codegenerator/autoform.js
 documentation/client/codegenerator/codegenerator.js
 documentation/client/codegenerator/codgeneratorSpecificLanguages.js

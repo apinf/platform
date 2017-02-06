@@ -75,7 +75,6 @@ Template.manageApiDocumentationModal.events({
   },
 });
 
-
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
     const api = Session.get('api');

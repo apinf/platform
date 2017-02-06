@@ -9,7 +9,7 @@ const CoverPhoto = new FileCollection('CoverPhoto', {
       path: '/md5/:md5',
       // uses express style url params
       // a query mapping url to CoverPhoto
-      lookup: function (params) {
+      lookup (params) {
         return { md5: params.md5 };
       },
     },

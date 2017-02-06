@@ -3,7 +3,6 @@ import { _ } from 'lodash';
 import Organizations from '/organizations/collection';
 import OrganizationApis from './';
 
-
 OrganizationApis.schema = new SimpleSchema({
   organizationId: {
     type: String,

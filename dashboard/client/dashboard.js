@@ -7,7 +7,6 @@ import { Roles } from 'meteor/alanning:roles';
 import Apis from '/apis/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
-
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;

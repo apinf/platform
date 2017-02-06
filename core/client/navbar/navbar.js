@@ -6,8 +6,8 @@ import { Mongo } from 'meteor/mongo';
 import { Roles } from 'meteor/alanning:roles';
 import { Template } from 'meteor/templating';
 
-import { Branding } from '/branding/collection';
-import { ProjectLogo } from '/branding/logo/collection';
+import Branding from '/branding/collection';
+import ProjectLogo from '/branding/logo/collection';
 import { Settings } from '/settings/collection';
 
 import $ from 'jquery';
@@ -26,7 +26,6 @@ Template.navbar.onCreated(function () {
     }
   });
 });
-
 
 Template.navbar.helpers({
   isSearchRoute () {

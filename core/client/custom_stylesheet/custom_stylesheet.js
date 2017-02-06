@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Branding } from '/branding/collection';
+import Branding from '/branding/collection';
 
 const tinycolor = require('tinycolor2');
 

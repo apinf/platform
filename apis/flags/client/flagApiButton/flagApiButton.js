@@ -4,7 +4,6 @@ import { Template } from 'meteor/templating';
 
 import ApiFlags from '../../../collection';
 
-
 Template.flagApiButton.onCreated(function () {
   // Create reference to instance
   const instance = this;
