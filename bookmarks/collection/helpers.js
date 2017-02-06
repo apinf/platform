@@ -1,5 +1,5 @@
 import Apis from '/apis/collection';
-import { ApiBookmarks } from './';
+import ApiBookmarks from './';
 
 ApiBookmarks.helpers({
   apis () {
