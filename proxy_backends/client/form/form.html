@@ -155,6 +155,18 @@
           </div>
         {{/if }}
       </div>
+
+      <!-- Global Request Settings -->
+      <div class="form-group col-md-12">
+        {{> afQuickField
+          name="apiUmbrella.settings.append_query_string"
+        }}
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_disableApiKey_helpText" }}
+        </p>
+      </div>
+
     </div>
     {{/ if }}
     <div id="proxy-form-buttons" class="btn-group pull-left">

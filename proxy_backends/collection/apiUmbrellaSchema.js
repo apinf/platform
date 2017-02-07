@@ -48,6 +48,11 @@ const SettingsSchema = new SimpleSchema({
     type: [RateLimitSchema],
     optional: true,
   },
+  append_query_string: {
+    type: String,
+    optional: true,
+    label: "Append Query String Parameters",
+  },
 });
 
 // Internationalize settings schema texts
