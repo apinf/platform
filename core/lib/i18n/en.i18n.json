@@ -692,8 +692,14 @@
         },
         "apiUmbrella": {
               "settings": {
+                  "append_query_string": {
+                    "label": "Append Query String Parameters"
+                  },
                   "disable_api_key": {
                       "label": "Disable API key requirement"
+                  },
+                  "headers_string": {
+                    "label": "Set Request Headers"
                   },
                   "rate_limit_mode": {
                       "label": "Rate limit mode",

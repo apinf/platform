@@ -51,7 +51,6 @@ const SettingsSchema = new SimpleSchema({
   append_query_string: {
     type: String,
     optional: true,
-    label: "Append Query String Parameters",
   },
   headers_string: {
     type: String,
@@ -59,7 +58,6 @@ const SettingsSchema = new SimpleSchema({
       rows: 3,
     },
     optional: true,
-    label: "Set Request Headers",
   },
 });
 
