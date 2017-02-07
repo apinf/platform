@@ -3,6 +3,20 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import $ from 'jquery';
 
+Template.apisFilterForm.onRendered(function () {
+  // Get the query parameter
+  const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');
+
+  // If parameter exists
+  if (lifecycleParameter) {
+    // Update the select menu to match lifecycle phase
+    this.$('[name=lifecycle]').val(lifecycleParameter);
+
+    // Add box-shadow for filter icon to show that filter is active
+    $('#filter-icon').addClass('filter-selected');
+  }
+});
+
 Template.apisFilterForm.helpers({
   lifeCycleFilter () {
     return [
