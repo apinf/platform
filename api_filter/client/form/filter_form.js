@@ -13,7 +13,7 @@ Template.apisFilterForm.onRendered(function () {
     this.$('[name=lifecycle]').val(lifecycleParameter);
 
     // Add box-shadow for filter icon to show that filter is active
-    $('#filter-icon').addClass('filter-selected');
+    $('#filter-icon').addClass('active');
   }
 });
 
@@ -41,13 +41,13 @@ Template.apisFilterForm.events({
       FlowRouter.setQueryParams({ lifecycle: tag });
 
       // Add box-shadow for filter icon to show that filter is active
-      $('#filter-icon').addClass('filter-selected');
+      $('#filter-icon').addClass('active');
     } else {
       // Delete query params
       FlowRouter.setQueryParams({ lifecycle: null });
 
       // Delete box-shadow from filter icon to show that filter isn't active
-      $('#filter-icon').removeClass('filter-selected');
+      $('#filter-icon').removeClass('active');
     }
     // Hide filter form
     $('.filter-popup').toggleClass('filter-popup-visible');
@@ -57,6 +57,6 @@ Template.apisFilterForm.events({
     FlowRouter.setQueryParams({ lifecycle: null });
 
     // Delete box-shadow from filter icon to show that filter isn't active
-    $('#filter-icon').removeClass('filter-selected');
+    $('#filter-icon').removeClass('active');
   },
 });
