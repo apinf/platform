@@ -1,1 +1,5 @@
-export const FeedbackVotes = new Mongo.Collection('feedbackVotes');
+import { Mongo } from 'meteor/mongo';
+
+const FeedbackVotes = new Mongo.Collection('feedbackVotes');
+
+export default FeedbackVotes;

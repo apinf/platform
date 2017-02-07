@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Feedback } from './';
+import Feedback from './';
 
 Feedback.schema = new SimpleSchema({
   topic: {
@@ -37,11 +37,13 @@ Feedback.schema = new SimpleSchema({
   authorId: {
     type: String,
     autoValue () {
+      let userId;
       if (this.isInsert) {
-        return Meteor.userId();
+        userId = Meteor.userId();
+      } else {
+        this.unset();
       }
-
-      this.unset();
+      return userId;
     },
     denyUpdate: true,
   },
@@ -51,13 +53,15 @@ Feedback.schema = new SimpleSchema({
   createdAt: {
     type: Date,
     autoValue () {
+      let now;
       if (this.isInsert) {
-        return new Date();
+        now = new Date();
       } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
+        now = { $setOnInsert: new Date() };
+      } else {
+        this.unset();
       }
-
-      this.unset();
+      return now;
     },
   },
 });

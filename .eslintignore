@@ -13,14 +13,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-feedback_votes/collection/index.js
-feedback/client/form/autoform.js
-feedback/client/item/item.js
-feedback/client/list/list.js
-feedback/collection/index.js
-feedback/collection/schema.js
-feedback/collection/server/publications.js
-feedback/server/methods.js
 home/client/body/homeBody.js
 home/client/contact/autoform.js
 home/client/footer/homeFooter.js
