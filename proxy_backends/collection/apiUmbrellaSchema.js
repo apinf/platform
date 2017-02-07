@@ -55,7 +55,6 @@ const SettingsSchema = new SimpleSchema({
   },
   headers_string: {
     type: String,
-    max: 1000,
     autoform: {
       rows: 3,
     },
