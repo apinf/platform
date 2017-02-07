@@ -71,7 +71,7 @@ Template.feedbackItem.events({
     const feedbackId = Template.currentData().item._id;
 
     // Submit upvote (+1) for current feedback
-    Meteor.call('submitVote', feedbackId, 1, (error, result) => {
+    Meteor.call('submitVote', feedbackId, 1, (error) => {
       // Catch error on anonymous voting
       if (error && error.error === 'apinf-usernotloggedin-error') {
         // Get error message
@@ -86,7 +86,7 @@ Template.feedbackItem.events({
     const feedbackId = Template.currentData().item._id;
 
     // Submit downvote (-1) for current feedback
-    Meteor.call('submitVote', feedbackId, -1, (error, result) => {
+    Meteor.call('submitVote', feedbackId, -1, (error) => {
       // Catch error on anonymous voting
       if (error && error.error === 'apinf-usernotloggedin-error') {
         // Get error message

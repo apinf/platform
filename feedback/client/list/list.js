@@ -25,7 +25,7 @@ Template.feedbackList.helpers({
 
 Template.feedbackList.events({
   // Delete feedback
-  'click .delete-feedback': function (event) {
+  'click .delete-feedback': function () {
     Meteor.call('deleteFeedback', this._id);
   },
   'click #add-feedback': function () {
