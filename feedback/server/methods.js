@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
 // Collection imports
-import { FeedbackVotes } from '/feedback_votes/collection';
-import { Feedback } from '../collection';
+import FeedbackVotes from '/feedback_votes/collection';
+import Feedback from '../collection';
 
 Meteor.methods({
   deleteFeedback (feedbackItemId) {

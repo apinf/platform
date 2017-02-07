@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 // Collection imports
-import { FeedbackVotes } from '/feedback_votes/collection';
-import { Feedback } from '../';
+import FeedbackVotes from '/feedback_votes/collection';
+import Feedback from '../';
 
 Meteor.publish('apiBackendFeedback', (apiBackendId) => {
   // show feedback to specific API

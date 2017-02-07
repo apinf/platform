@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
 
-import { Feedback } from '../../collection';
+import Feedback from '../../collection';
 
 Template.feedbackList.onCreated(function () {
   // Get API Backend ID from URL route

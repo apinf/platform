@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-import { FeedbackVotes } from './';
+import FeedbackVotes from './';
 
 FeedbackVotes.schema = new SimpleSchema({
   /*

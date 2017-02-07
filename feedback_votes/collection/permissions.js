@@ -1,6 +1,6 @@
 import Apis from '/apis/collection';
-import { Feedback } from '/feedback/collection';
-import { FeedbackVotes } from './';
+import Feedback from '/feedback/collection';
+import FeedbackVotes from './';
 
 FeedbackVotes.allow({
   insert (userId) {

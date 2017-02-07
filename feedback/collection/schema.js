@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Feedback } from './';
+import Feedback from './';
 
 Feedback.schema = new SimpleSchema({
   topic: {
