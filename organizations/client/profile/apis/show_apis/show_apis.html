@@ -7,15 +7,6 @@
       {{_ 'organizationProfile_smallText_apisCount' apis.length }}
     </small>
   </h3>
-  {{# if selectedFilter }}
-    <span>
-      {{_ 'organizationProfile_text_filteredBy' }}
-      <i>{{ selectedFilter }}</i>
-      <button id="reset-filter-options" class="btn btn-default btn-xs">
-        {{_ 'organizationProfile_buttonText_clear' }}
-      </button>
-    </span>
-  {{/ if }}
   </div>
   {{> apiCatalogGrid apis=apis }}
 </template>
