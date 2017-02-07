@@ -17,11 +17,13 @@
               {{/ if }}
             </h1>
           </div>
-          <div class="row">
-            <p>
-              {{ organization.description }}
-            </p>
-          </div>
+          {{# if organization.contact.person }}
+            <div class="row">
+              <p>
+                {{ organization.description }}
+              </p>
+            </div>
+          {{/ if }}
           <div class="row">
             <p>
               <i class="fa fa-link" aria-hidden="true"></i>
