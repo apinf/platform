@@ -25,11 +25,24 @@ Template.apisFilterForm.events({
       const tag = templateInstance.lifecycle;
       // Save selected filter on query params
       FlowRouter.setQueryParams({ lifecycle: tag });
+
+      // Add box-shadow for filter icon to show that filter is active
+      $('#filter-icon').addClass('filter-selected');
     } else {
       // Delete query params
       FlowRouter.setQueryParams({ lifecycle: null });
+
+      // Delete box-shadow from filter icon to show that filter isn't active
+      $('#filter-icon').removeClass('filter-selected');
     }
     // Hide filter form
     $('.filter-popup').toggleClass('filter-popup-visible');
+  },
+  'click [type=reset]': () => {
+    // Delete query parameter
+    FlowRouter.setQueryParams({ lifecycle: null });
+
+    // Delete box-shadow from filter icon to show that filter isn't active
+    $('#filter-icon').removeClass('filter-selected');
   },
 });
