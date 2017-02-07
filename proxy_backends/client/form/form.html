@@ -160,6 +160,18 @@
       <div class="form-group col-md-12">
         {{> afQuickField
           name="apiUmbrella.settings.append_query_string"
+          placeholder="param1=value&param2=value"
+        }}
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_disableApiKey_helpText" }}
+        </p>
+      </div>
+
+      <div class="form-group col-md-12">
+        {{> afQuickField
+          name="apiUmbrella.settings.headers_string"
+          placeholder="X-Example-Header: value"
         }}
         <!-- help text -->
         <p class="help-block">

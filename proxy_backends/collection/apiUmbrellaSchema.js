@@ -53,6 +53,15 @@ const SettingsSchema = new SimpleSchema({
     optional: true,
     label: "Append Query String Parameters",
   },
+  headers_string: {
+    type: String,
+    max: 1000,
+    autoform: {
+      rows: 3,
+    },
+    optional: true,
+    label: "Set Request Headers",
+  },
 });
 
 // Internationalize settings schema texts
