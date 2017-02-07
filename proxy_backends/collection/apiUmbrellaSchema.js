@@ -48,6 +48,17 @@ const SettingsSchema = new SimpleSchema({
     type: [RateLimitSchema],
     optional: true,
   },
+  append_query_string: {
+    type: String,
+    optional: true,
+  },
+  headers_string: {
+    type: String,
+    autoform: {
+      rows: 3,
+    },
+    optional: true,
+  },
 });
 
 // Internationalize settings schema texts
