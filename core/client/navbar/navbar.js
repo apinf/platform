@@ -144,17 +144,19 @@ Template.navbar.helpers({
   },
 });
 
-Template.navbar.onRendered(() => {
-  $('.icon-search').click(() => {
-    $('.searchblock-toggle').slideToggle('fast');
-    $('.toggle-search-icon').toggle();
-    $('#search-text').focus();
-  });
-});
-
 Template.navbar.events({
   'click #about-button': function () {
     // Show the 'about Apinf' modal
     Modal.show('aboutApinf');
+  },
+  'click .icon-search': function () {
+    // Show/hide search field
+    $('.searchblock-toggle').slideToggle('fast');
+
+    // Toggle search icon
+    $('.toggle-search-icon').toggle();
+
+    // Set cursor to search field
+    $('#search-text').focus();
   },
 });
