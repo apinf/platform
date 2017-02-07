@@ -13,24 +13,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-documentation/client/codegenerator/autoform.js
-documentation/client/codegenerator/codegenerator.js
-documentation/client/codegenerator/codgeneratorSpecificLanguages.js
-documentation/client/design/documentation-editor.js
-documentation/client/lib/router.js
-documentation/client/manage/autoform.js
-documentation/client/manage/manage.js
-documentation/client/manage/uploadButton/uploadButton.js
-documentation/client/swaggerUI/swaggerUi.js
-documentation/client/view/documentation.js
-documentation/client/view/resumable.js
-documentation/collection/collection.js
-documentation/collection/server/permissions.js
-documentation/collection/server/publications.js
-documentation/server/methods/files.js
-documentation/server/methods/swagger.js
-documentation/server/publications.js
-elasticsearch/server/methods.js
 feedback_votes/collection/index.js
 feedback/client/form/autoform.js
 feedback/client/item/item.js
