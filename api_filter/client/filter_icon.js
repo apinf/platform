@@ -7,8 +7,4 @@ Template.apisFilterIcon.events({
     // Show/hide filter options
     templateInstance.$('.filter-popup').toggleClass('filter-popup-visible');
   },
-  'click [type=reset]': () => {
-    // Delete query parameter
-    FlowRouter.setQueryParams({ lifecycle: null });
-  },
 });
