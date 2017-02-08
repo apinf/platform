@@ -10,6 +10,21 @@ signedIn.route('/dashboard', {
       // Set query parameter if it doesn't exist
       context.queryParams.granularity = 'month';
     }
+
+    // Initialize the query parameters which can be conculated in code
+    // Do it to saving url consistent for the browser history
+    if (!context.queryParams.backend) {
+      // Initialize backend parameter if it doesn't specify
+      context.queryParams.backend = null;
+    }
+    if (!context.queryParams.fromDate) {
+      // Initialize fromDate parameter if it doesn't specify
+      context.queryParams.fromDate = null;
+    }
+    if (!context.queryParams.toDate) {
+      // Initialize toDate parameter if it doesn't specify
+      context.queryParams.toDate = null;
+    }
   }],
   name: 'dashboard',
   action () {
