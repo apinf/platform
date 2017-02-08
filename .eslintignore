@@ -19,10 +19,6 @@ monitoring/collection/index.js
 monitoring/collection/schema.js
 monitoring/collection/server/publications.js
 monitoring/server/cron.js
-proxies/api_umbrella/collections/api_umbrella_admins.js
-proxies/api_umbrella/collections/api_umbrella_users.js
-proxies/api_umbrella/collections/server/api_umbrella_admins_publications.js
-proxies/api_umbrella/collections/server/api_umbrella_users_publications.js
 proxies/client/form/autoform.js
 proxies/client/form/validation.js
 proxies/client/lib/router.js
