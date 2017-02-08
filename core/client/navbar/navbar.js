@@ -10,8 +10,6 @@ import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 import { Settings } from '/settings/collection';
 
-import $ from 'jquery';
-
 Template.navbar.onCreated(function () {
   const instance = this;
   // Subscribe to project logo

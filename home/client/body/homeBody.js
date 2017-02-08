@@ -3,7 +3,6 @@
  // Allow use of 'document' as global object
 /* global document */
 
-import $ from 'jquery';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';

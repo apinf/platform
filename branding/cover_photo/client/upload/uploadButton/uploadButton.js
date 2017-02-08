@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
 
-import $ from 'jquery';
-
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.uploadCoverPhotoButton.onRendered(() => {

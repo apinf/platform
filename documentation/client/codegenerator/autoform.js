@@ -7,7 +7,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import _ from 'lodash';
-import $ from 'jquery';
 
 AutoForm.addHooks('downloadSDK', {
   onSubmit (formValues, updateDoc, instance) {
