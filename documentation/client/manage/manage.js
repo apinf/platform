@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Mongo } from 'meteor/mongo';
 import { ReactiveVar } from 'meteor/reactive-var';

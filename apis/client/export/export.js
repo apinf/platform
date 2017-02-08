@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 import { Template } from 'meteor/templating';
 import { ProxyBackends } from '/proxy_backends/collection';
 

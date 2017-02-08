@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 import { FS } from 'meteor/cfs:filesystem';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Meteor } from 'meteor/meteor';

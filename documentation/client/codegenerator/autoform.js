@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { HTTP } from 'meteor/http';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
