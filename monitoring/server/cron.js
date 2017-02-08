@@ -1,16 +1,20 @@
-// Meteor package imports
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
-// APINF import
 import { MonitoringSettings } from '/monitoring/collection';
 import Apis from '/apis/collection';
 
-// NPM packages import
 import _ from 'lodash';
 
 Meteor.methods({
   startCron (apiId, url) {
+    // Make sure apiId is a String
+    check(apiId, String);
+
+    // Make sure url is a String
+    check(url, String);
+
     // Create unique name for Cron job
     const uniqueName = `Monitoring: ${apiId}`;
 
@@ -34,6 +38,9 @@ Meteor.methods({
     });
   },
   stopCron (apiId) {
+    // Make sure apiId is a String
+    check(apiId, String);
+
     // Create unique name for Cron job
     const uniqueName = `Monitoring: ${apiId}`;
 
