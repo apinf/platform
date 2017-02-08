@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 
 import formatDate from '/core/helper_functions/format_date';
-import { ApiMetadata } from '../../collection';
+import ApiMetadata from '../../collection';
 
 Template.viewApiMetadata.onCreated(function () {
   // Get reference to template instance
