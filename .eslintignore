@@ -13,10 +13,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-home/client/contact/autoform.js
-home/client/footer/homeFooter.js
-home/client/home.js
-home/client/lib/router.js
 metadata/client/edit/autoform.js
 metadata/collection/index.js
 metadata/collection/permissions.js
