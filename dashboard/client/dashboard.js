@@ -82,8 +82,11 @@ Template.dashboard.helpers({
     const backendParameter = FlowRouter.getQueryParam('backend');
     // If query param doesn't exist and proxy backend list is ready
     if (!backendParameter && proxyBackends[0]) {
-      // Set the default value as first item of backend list
-      FlowRouter.setQueryParams({ backend: proxyBackends[0]._id });
+      // Modifies the current history entry instead of creating a new one
+      FlowRouter.withReplaceState(() => {
+        // Set the default value as first item of backend list
+        FlowRouter.setQueryParams({ backend: proxyBackends[0]._id });
+      });
     }
 
     return proxyBackends;

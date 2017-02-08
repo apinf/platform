@@ -39,7 +39,10 @@ Template.apiSelectPicker.onRendered(function () {
 
 Template.apiSelectPicker.events({
   'change #proxy-backend-select': function (event) {
-    // Update selected backend URL parameter
-    FlowRouter.setQueryParams({ backend: event.target.value });
+    // Modifies the current history entry instead of creating a new one
+    FlowRouter.withReplaceState(() => {
+      // Update selected backend URL parameter
+      FlowRouter.setQueryParams({ backend: event.target.value });
+    });
   },
 });

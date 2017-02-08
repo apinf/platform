@@ -16,7 +16,10 @@ Template.granularity.onRendered(function () {
 
 Template.granularity.events({
   'change #date-granularity-selector': function (event) {
-    // Set granularity value to URL parameter
-    FlowRouter.setQueryParams({ granularity: event.target.value });
+    // Modifies the current history entry instead of creating a new one
+    FlowRouter.withReplaceState(() => {
+      // Set granularity value to URL parameter
+      FlowRouter.setQueryParams({ granularity: event.target.value });
+    });
   },
 });
