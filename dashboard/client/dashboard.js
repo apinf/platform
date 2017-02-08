@@ -47,20 +47,23 @@ Template.dashboard.onCreated(function () {
         granularity,
       };
 
-      // Check of existing needed proxy data
-      Meteor.call('getProxyData', backendParameter, (error, result) => {
-        // if it was not error
-        if (!error) {
-          // Provide proxy data to elastic search
-          instance.getChartData(result, filterParameters)
-            .then((chartData) => {
-              // Update reactive variable
-              instance.chartData.set(chartData);
-            })
-            // eslint-disable-next-line no-console
-            .catch(err => { return console.error(err); });
-        }
-      });
+      // Make sure backend id exists
+      if (backendParameter) {
+        // Check of existing needed proxy data
+        Meteor.call('getProxyData', backendParameter, (error, result) => {
+          // if it was not error
+          if (!error) {
+            // Provide proxy data to elastic search
+            instance.getChartData(result, filterParameters)
+              .then((chartData) => {
+                // Update reactive variable
+                instance.chartData.set(chartData);
+              })
+              // eslint-disable-next-line no-console
+              .catch(err => { return console.error(err); });
+          }
+        });
+      }
     }
   });
 });
@@ -79,8 +82,11 @@ Template.dashboard.helpers({
     const backendParameter = FlowRouter.getQueryParam('backend');
     // If query param doesn't exist and proxy backend list is ready
     if (!backendParameter && proxyBackends[0]) {
-      // Set the default value as first item of backend list
-      FlowRouter.setQueryParams({ backend: proxyBackends[0]._id });
+      // Modifies the current history entry instead of creating a new one
+      FlowRouter.withReplaceState(() => {
+        // Set the default value as first item of backend list
+        FlowRouter.setQueryParams({ backend: proxyBackends[0]._id });
+      });
     }
 
     return proxyBackends;
