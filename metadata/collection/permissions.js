@@ -8,6 +8,7 @@ ApiMetadata.allow({
     // Make sure there is only one document per API Backend ID
     // TODO: refactor ApiMetadata schema to use 'apiId' field
     if (ApiMetadata.find({ apiBackendId: apiId }).count() !== 0) {
+      // eslint-disable-next-line no-console
       console.log('no insert allowed');
       return false;
     }
