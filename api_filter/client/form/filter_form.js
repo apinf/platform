@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import $ from 'jquery';
-
 Template.apisFilterForm.onRendered(function () {
   // Get the query parameter
   const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');

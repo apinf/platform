@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { HTTP } from 'meteor/http';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
@@ -7,7 +5,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import _ from 'lodash';
-import $ from 'jquery';
 
 AutoForm.addHooks('downloadSDK', {
   onSubmit (formValues, updateDoc, instance) {

@@ -2,8 +2,6 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import $ from 'jquery';
-
 AutoForm.hooks({
   apiBacklogItemForm: {
     before: {

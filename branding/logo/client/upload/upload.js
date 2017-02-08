@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { TAPi18n } from 'meteor/tap:i18n';
