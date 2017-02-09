@@ -1,4 +1,7 @@
 import { Posts } from '/oembed_content/collection';
+import { TAPi18n } from 'meteor/tap:i18n';
+import moment from 'moment';
+import 'moment/min/locales.min';
 
 Template.postItem.onRendered(function () {
   // Get reference to template instance
