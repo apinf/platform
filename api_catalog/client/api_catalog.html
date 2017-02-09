@@ -3,27 +3,20 @@
     <h1 class="page-header">
       {{_ "catalogue_Title" }}
     </h1>
-
     {{> apiCatalogToolbar apis=apis }}
 
-    <!-- if viewMode is table, show table -->
-    {{# if gridViewMode }}
-      {{# if Template.subscriptionsReady }}
+    {{# if Template.subscriptionsReady }}
+      <!-- if viewMode is table, show table -->
+      {{# if gridViewMode }}
         {{> apiCatalogGrid apis=apis }}
-      {{ else }}
-        {{> spinner }}
       {{/ if }}
-    {{/ if }}
-
-    <!-- if viewMode is table, show table -->
-    {{# if tableViewMode }}
-      {{# if Template.subscriptionsReady }}
+      <!-- if viewMode is table, show table -->
+      {{# if tableViewMode }}
         {{> apiCatalogTable apis=apis }}
-      {{ else }}
-        {{> spinner }}
       {{/ if }}
+      {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+    {{ else }}
+      {{> spinner }}
     {{/ if }}
-
-    {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
   </div>
 </template>
