@@ -6,15 +6,17 @@
     {{> apiCatalogToolbar apis=apis }}
 
     {{# if Template.subscriptionsReady }}
-      <!-- if viewMode is table, show table -->
+      <!-- if viewMode is grid, show grid -->
       {{# if gridViewMode }}
         {{> apiCatalogGrid apis=apis }}
       {{/ if }}
+    
       <!-- if viewMode is table, show table -->
       {{# if tableViewMode }}
         {{> apiCatalogTable apis=apis }}
       {{/ if }}
-    <!-- if apis don't ready, not show pagination button -->
+    
+      <!-- show pagination button only if APIs are available -->
       {{# if apis }}
         {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
       {{/ if }}
