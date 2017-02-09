@@ -13,10 +13,10 @@
             <!-- <a href="{{ post.url }}">{{ post.title }}</a> -->
           </h3>
           <p>
-            Description: 
+            Description:
             {{ post.description }}
           </p>
-          Added <span title='{{formatDate post.createdAt }}'>{{calculateFromDate post.createdAt }}</span>
+          Added <span title='{{calculateFromDate post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
           <br> by {{ post.username }}
           </a>
         </div>
