@@ -1,4 +1,5 @@
 import { Posts } from '../../collection';
+import moment from 'moment';
 
 Template.postsForm.helpers({
   postsCollection () {
@@ -13,11 +14,6 @@ Template.postsForm.helpers({
       return "insert";
     }
   }
-});
-
-// Display creation datestamp as a tooltip
-Template.registerHelper('formatDate', function(date) {
-  return moment(date).format('YYYY-MM-DD HH:mm');
 });
 
 // Calculate time passed from create
