@@ -81,20 +81,22 @@
     </div>
   {{/ if }}
   <!-- Embedded contents -->
+
   <div class="panel panel-default">
     <div class="panel-heading">
+      {{#if currentUser}}
+        <button type="button" class="btn btn-xs btn-success pull-right" id="add_oembed" title='Add embedded content'>Add embedded content</button>
+      {{/if}}
       <h2 id="oembedded-title" class="panel-title clearfix">
-        Embedded Contents (will be into i18n file)
+        "Embedded Contents (will be into i18n file)"
         <!-- {{_ "viewApi_Details_Title" }} -->
       </h2>
-      {{#if currentUser}}
-        <button type="button" class="btn btn-success" id="add_oembed" title='Add embedded content'>Add embedded content</button>
-      {{/if}}
 
     </div>
     <div class="panel-body">
       <div class="row">
-        Content here
+        Postilista tänne alle
+        {{ postsList }}
       </div>
     </div>
   </div>
