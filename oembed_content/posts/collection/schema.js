@@ -1,4 +1,5 @@
 import { Posts } from './';
+import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 const postsSchema = new SimpleSchema({
   title: {
