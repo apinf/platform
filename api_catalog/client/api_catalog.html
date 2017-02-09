@@ -14,7 +14,10 @@
       {{# if tableViewMode }}
         {{> apiCatalogTable apis=apis }}
       {{/ if }}
-      {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+    <!-- if apis don't ready, not show pagination button -->
+      {{# if apis }}
+        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+      {{/ if }}
     {{ else }}
       {{> spinner }}
     {{/ if }}
