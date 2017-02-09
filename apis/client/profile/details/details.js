@@ -104,9 +104,9 @@ Template.apiDetails.helpers({
     return apiKey;
   },
 });
+
 Template.apiDetails.events({
   'click #add_oembed': function(e) {
-    console.log("click post form");
-    Modal.show("postsForm")
+    Modal.show("postsForm", {pageHeader: "Add Embedded Content"})
   }
 });
