@@ -62,7 +62,7 @@
     <div class="row">
       <div class="form-group col-md-9">
         <label for="api-base-path-field">
-          {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
+          {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_loose_prefix' }}
         </label>
 
         <div class="input-group">
@@ -72,7 +72,7 @@
           </span>
 
           {{> afFieldInput
-            name="apiUmbrella.url_matches.0.backend_prefix"
+            name="apiUmbrella.url_matches.0.backend_loose_prefix"
             class="form-control"
             aria-describedby="api-url"
             id="api-base-path-field"
@@ -80,9 +80,9 @@
         </div>
 
         <!-- validation messages -->
-        {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix' }}
+        {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_loose_prefix' }}
           <p class="text-danger">
-            {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix' }}}
+            {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_loose_prefix' }}}
           </p>
         {{/ if }}
 

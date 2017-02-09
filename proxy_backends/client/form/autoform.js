@@ -29,7 +29,7 @@ AutoForm.hooks({
           const requiredUrlMatches = apiUmbrella.url_matches &&
             apiUmbrella.url_matches[0] &&
             apiUmbrella.url_matches[0].frontend_prefix &&
-            apiUmbrella.url_matches[0].backend_prefix;
+            apiUmbrella.url_matches[0].backend_loose_prefix;
 
           const requiredServers = apiUmbrella.servers && apiUmbrella.servers[0] &&
             apiUmbrella.servers[0].host &&
@@ -123,7 +123,7 @@ AutoForm.hooks({
           const requiredUrlMatches = currentProxyBackend['apiUmbrella.url_matches'] &&
             currentProxyBackend['apiUmbrella.url_matches'][0] &&
             currentProxyBackend['apiUmbrella.url_matches'][0].frontend_prefix &&
-            currentProxyBackend['apiUmbrella.url_matches'][0].backend_prefix;
+            currentProxyBackend['apiUmbrella.url_matches'][0].backend_loose_prefix;
 
           const requiredServers = currentProxyBackend['apiUmbrella.servers'] &&
             currentProxyBackend['apiUmbrella.servers'][0] &&
