@@ -4,11 +4,11 @@
     {{> defaultBootstrapPaginator pagination=templatePagination limit=4 containerClass="text-center" onClick=clickEvent}}
   </div>
 
-  <div class="row">
+  <div class="massn">
     {{# each post in posts }}
-      <div class="col-md-12 ">
+
         {{> postItem post=post }}
-      </div>
+
     {{/ each }}
   </div>
 
