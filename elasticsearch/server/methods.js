@@ -112,4 +112,80 @@ Meteor.methods({
     // Now it returns some placeholder
     return { size: 1000 };
   },
+  deleteAnalyticsInformation (proxyBackendId) {
+    // Make sure proxyBackendId is s String
+    check(proxyBackendId, String);
+
+    // Get the frontend prefix of Proxy backend and ES URL
+    const proxyData = Meteor.call('getProxyData', proxyBackendId);
+
+    // Create parameters object to find API via frontend prefix
+    // TODO: Redo it using api_backend_id and do query for eMQTT protocol
+    const params = {
+      size: 50000,
+      body: {
+        query: {
+          filtered: {
+            query: {
+              bool: {
+                should: [
+                  {
+                    wildcard: {
+                      request_path: {
+                        // Add '*' to partially match the url
+                        value: `${proxyData.frontendPrefix}`,
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      },
+    };
+
+    // Init ES client
+    const esClient = new ElasticSearch.Client({ host: proxyData.elasticSearchUrl });
+
+    // Search related documents in ElasticSearch storage
+    const searchResult = esClient.search(params);
+
+    // Return the Promise result
+    searchResult
+      .then(response => {
+        // Get the hits data if searching was success
+        const hits = response.hits.hits;
+
+        // If ES doesn't have data for this frontend prefix then nothing to delete
+        if (hits.length < 1) {
+          // Exit from function
+          return hits;
+        }
+
+        // Create parameters object to perform many delete operations
+        const bulkBody = _.map(hits, (hitDocument) => {
+          return {
+            delete: {
+              _id: hitDocument._id,
+              _index: hitDocument._index,
+              _type: hitDocument._type,
+            },
+          };
+        });
+
+        // Perform deleting of ES data
+        return esClient.bulk({
+          body: bulkBody,
+        });
+      })
+      .then(result => {
+        // Return result if deleting was success
+        return result;
+      })
+      .catch((err) => {
+        // Throw an error if any step has error
+        throw new Meteor.Error(err.message);
+      });
+  },
 });
