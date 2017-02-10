@@ -46,6 +46,8 @@ Meteor.methods({
 
     // Check if API has proxyBackend
     if (proxyBackend) {
+      // Delete analytics information about calls
+      Meteor.call('deleteAnalyticsInformation', proxyBackend._id);
       // Delete proxyBackend
       Meteor.call('deleteProxyBackend', proxyBackend);
     }
