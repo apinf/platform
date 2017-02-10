@@ -1,6 +1,7 @@
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import ElasticSearch from 'elasticsearch';
+import _ from 'lodash';
 
 Meteor.methods({
   getElasticSearchData (proxyData, filterParameters) {
