@@ -731,7 +731,7 @@
     "organizationCatalog_toolbar_viewMode_table": "Taulukko",
     "organizationCatalogTable_added": "Lis\u00e4tty",
     "organizationCatalogGrid_organizationCardCreated_addedText": "Lis\u00e4tty %s",
-    "organizationCatalogGrid_organizationCardApisCount_apisText": "Rajapinnat",
+    "organizationCatalogGrid_organizationCardApisCount_apisText": "rajapintaa",
     "organizationForm_title": "Organisaation tiedot",
     "organizationForm_contact_panelTitle": "Yhteyshenkil\u00f6",
     "organizationForm_saveButton_text": "Tallenna",
