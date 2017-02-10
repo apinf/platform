@@ -133,7 +133,6 @@ Meteor.methods({
                   {
                     wildcard: {
                       request_path: {
-                        // Add '*' to partially match the url
                         value: `${proxyData.frontendPrefix}`,
                       },
                     },
