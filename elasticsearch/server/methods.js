@@ -151,7 +151,7 @@ Meteor.methods({
     // Search related documents in ElasticSearch storage
     const searchResult = esClient.search(params);
 
-    // Return the Promise result
+    // Work with the Promise result
     searchResult
       .then(response => {
         // Get the hits data if searching was success
