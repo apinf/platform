@@ -1,15 +1,16 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
-
 import { Roles } from 'meteor/alanning:roles';
 
-// Apinf import
 import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
-// npm import
 import _ from 'lodash';
 
 Meteor.publish('proxyBackends', function (proxyId) {
+  // Make sure proxyId is a String
+  check(proxyId, String);
+
   // Get current userId
   const userId = this.userId;
   // Check loggedin user exists
@@ -22,6 +23,9 @@ Meteor.publish('proxyBackends', function (proxyId) {
 });
 
 Meteor.publish('apiProxySettings', function (apiId) {
+  // Make sure apiId is a String
+  check(apiId, String);
+
   // Get current userId
   const userId = this.userId;
 
