@@ -50,7 +50,7 @@ MonitoringData.schema = new SimpleSchema({
   'responses.$.server_status_code': {
     type: String,
     optional: true,
-  }
+  },
 });
 // Enable translations (i18n)
 MonitoringSettings.schema.i18n('schemas.monitoring');
