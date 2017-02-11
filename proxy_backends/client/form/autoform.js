@@ -1,7 +1,7 @@
-import { TAPi18n } from 'meteor/tap:i18n';
-import { Meteor } from 'meteor/meteor';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { AutoForm } from 'meteor/aldeed:autoform';
+import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import ProxyBackends from '../../collection';
 import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
@@ -11,6 +11,7 @@ AutoForm.hooks({
   proxyBackendForm: {
     before: {
       insert (proxyBackend) {
+        // TODO: Refactor this method. It is too long and complex
         // No selected any proxy
         if (proxyBackend && proxyBackend.proxyId === undefined) {
           // Notify users about no selected proxy
@@ -50,8 +51,8 @@ AutoForm.hooks({
               // Create API backend on API Umbrella
               Meteor.call('createApiBackendOnApiUmbrella',
                 proxyBackend.apiUmbrella, proxyBackend.proxyId,
-                (error, response) => {
-                  if (error) {
+                (createApiBackendOnApiUmbrellaError, response) => {
+                  if (createApiBackendOnApiUmbrellaError) {
                     // Throw a Meteor error
                     Meteor.error(500, error);
                     return false;
@@ -77,16 +78,18 @@ AutoForm.hooks({
                     // Publish the API Backend on API Umbrella
                     Meteor.call('publishApiBackendOnApiUmbrella',
                       umbrellaBackendId, proxyBackend.proxyId,
-                      (error) => {
-                        if (error) {
+                      (publishApiBackendOnApiUmbrellaError) => {
+                        if (publishApiBackendOnApiUmbrellaError) {
                           Meteor.throw(500, error);
                         } else {
                           // Insert the Proxy Backend document, asynchronous
                           form.result(proxyBackend);
                         }
+                        return true;
                       }
                     );
                   }
+                  return true;
                 });
             } else {
               // Alert the user of frontend prefix unique issue
@@ -97,6 +100,7 @@ AutoForm.hooks({
             }
           });
         }
+        return true;
       },
       update (updateDoc) {
         // Get reference to autoform instance, for form submission callback
@@ -204,6 +208,7 @@ AutoForm.hooks({
               });
           }
         }
+        return true;
       },
     },
     onSuccess (formType) {
