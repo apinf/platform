@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
-import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
+
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
+import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
+import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 import _ from 'lodash';
@@ -14,7 +15,7 @@ Meteor.methods({
     const proxy = Proxies.findOne({ _id: proxyId });
 
     // Check if API Umbrella Web settings are valid
-    if (proxy && apiUmbrellaSettingsValid(proxy)) {
+    if (hasValidApiUmbrellaSettings(proxy)) {
       // Create config object for API Umbrella Web REST API
       const config = {
         baseUrl: `${proxy.apiUmbrella.url}/api-umbrella/`,
