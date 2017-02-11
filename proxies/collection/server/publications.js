@@ -1,10 +1,18 @@
+import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+
 import Proxies from '../';
 
 Meteor.publish('allProxies', function () {
+  let proxies;
+
   // Check user permissions
   if (Roles.userIsInRole(this.userId, ['admin'])) {
-    return Proxies.find();
+    proxies = Proxies.find();
   }
+
+  return proxies;
 });
 
 Meteor.publish('proxyCount', function () {
@@ -12,7 +20,7 @@ Meteor.publish('proxyCount', function () {
   Counts.publish(this, 'proxyCount', Proxies.find());
 });
 
-Meteor.publish('publicProxyDetails', function () {
+Meteor.publish('publicProxyDetails', () => {
   // Return all proxies
   // with only name and ID fields
   const publicProxyDetails = Proxies.find({}, {
