@@ -1,3 +1,4 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
 
@@ -11,6 +12,9 @@ import _ from 'lodash';
 
 Meteor.methods({
   createApiUmbrellaWeb (proxyId) {
+    // Make sure proxyId is a String
+    check(proxyId, String);
+
     // Get proxy by proxyId
     const proxy = Proxies.findOne({ _id: proxyId });
 
@@ -40,6 +44,12 @@ Meteor.methods({
     Create API key & attach it for given user,
     Might throw errors, catch on client callback
     */
+
+    // Make sure currentUser is a String
+    check(currentUser, String);
+
+    // Make sure proxyId is a String
+    check(proxyId, String);
 
     // Create apiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
@@ -71,6 +81,12 @@ Meteor.methods({
     }
   },
   createApiBackendOnApiUmbrella (apiBackend, proxyId) {
+    // Make sure apiBackend is a String
+    check(apiBackend, String);
+
+    // Make sure proxyId is a String
+    check(proxyId, String);
+
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
@@ -98,6 +114,12 @@ Meteor.methods({
     return response;
   },
   updateApiBackendOnApiUmbrella (apiBackend, proxyId) {
+    // Make sure apiBackend is a String
+    check(apiBackend, String);
+
+    // Make sure proxyId is a String
+    check(proxyId, String);
+
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
@@ -114,8 +136,11 @@ Meteor.methods({
     };
 
     try {
+      // Get API Umbrella's endpoint
+      const apiUmbrellaEndpoint = umbrella.adminApi.v1.apiBackends.updateApiBackend;
+
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.updateApiBackend(apiBackend.id, backend);
+      apiUmbrellaWebResponse.result = apiUmbrellaEndpoint(apiBackend.id, backend);
     } catch (apiUmbrellaError) {
       // set the errors object
       apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
@@ -124,6 +149,12 @@ Meteor.methods({
     return apiUmbrellaWebResponse;
   },
   deleteApiBackendOnApiUmbrella (apiUmbrellaApiId, proxyId) {
+    // Make sure apiUmbrellaApiId is a String
+    check(apiUmbrellaApiId, String);
+
+    // Make sure proxyId is a String
+    check(proxyId, String);
+
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
@@ -135,8 +166,11 @@ Meteor.methods({
     };
 
     try {
+      // Get API Umbrella's endpoint
+      const apiUmbrellaEndpoint = umbrella.adminApi.v1.apiBackends.deleteApiBackend;
+
       // Send the API Backend to API Umbrella's endpoint for deletion in the backend
-      apiUmbrellaWebResponse.result = umbrella.adminApi.v1.apiBackends.deleteApiBackend(apiUmbrellaApiId);
+      apiUmbrellaWebResponse.result = apiUmbrellaEndpoint(apiUmbrellaApiId);
     } catch (apiUmbrellaError) {
       // Set the errors object
       apiUmbrellaWebResponse.errors = { default: [apiUmbrellaError.message] };
@@ -145,6 +179,12 @@ Meteor.methods({
     return apiUmbrellaWebResponse;
   },
   publishApiBackendOnApiUmbrella (backendId, proxyId) {
+    // Make sure backendId is a String
+    check(backendId, String);
+
+    // Make sure proxyId is a String
+    check(proxyId, String);
+
     // Create ApiUmbrellaWeb instance
     const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
 
