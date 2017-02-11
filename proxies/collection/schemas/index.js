@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
-import { Proxies } from '../';
+import Proxies from '../';
 
 import registeredProxies from '../registered_proxies';
 

@@ -3,7 +3,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 import { apiUmbrellaSettingsValid } from '/proxies/helper_functions/api_umbrella';
 import Apis from '/apis/collection';
-import { Proxies } from '/proxies/collection';
+import Proxies from '/proxies/collection';
 import { ProxyBackends } from '/proxy_backends/collection';
 
 import _ from 'lodash';

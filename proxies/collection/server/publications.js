@@ -1,4 +1,4 @@
-import { Proxies } from '../';
+import Proxies from '../';
 
 Meteor.publish('allProxies', function () {
   // Check user permissions

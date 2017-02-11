@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Proxies } from '../../collection';
+import Proxies from '../../collection';
 
 import registeredProxies from '../../collection/registered_proxies.js';
 

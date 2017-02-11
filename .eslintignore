@@ -23,7 +23,6 @@ proxies/client/form/autoform.js
 proxies/client/form/validation.js
 proxies/client/lib/router.js
 proxies/client/proxyItem/proxyItem.js
-proxies/collection/index.js
 proxies/collection/server/publications.js
 proxies/helper_functions/api_umbrella.js
 proxies/server/methods/api_umbrella.js
