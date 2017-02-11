@@ -1,5 +1,5 @@
 import { Proxies } from '/proxies/collection';
-import { ProxyBackends } from './';
+import ProxyBackends from './';
 import { ApiUmbrellaSchema } from './apiUmbrellaSchema';
 
 ProxyBackends.schema = new SimpleSchema({

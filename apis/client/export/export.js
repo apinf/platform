@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { ProxyBackends } from '/proxy_backends/collection';
+import ProxyBackends from '/proxy_backends/collection';
 
 import saveAs from 'meteor/pfafman:filesaver';
 import jsyaml from 'js-yaml';

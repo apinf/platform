@@ -4,7 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Apinf import
 import Apis from '/apis/collection';
-import { ProxyBackends } from '/proxy_backends/collection';
+import ProxyBackends from '/proxy_backends/collection';
 
 // npm import
 import _ from 'lodash';

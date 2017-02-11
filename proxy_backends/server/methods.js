@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { ProxyBackends } from '/proxy_backends/collection';
+import ProxyBackends from '/proxy_backends/collection';
 
 Meteor.methods({
   deleteProxyBackend (proxyBackend, deleteFromMongoDB = true) {

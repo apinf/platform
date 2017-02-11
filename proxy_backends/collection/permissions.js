@@ -1,5 +1,5 @@
 // Apinf import
-import { ProxyBackends } from './';
+import ProxyBackends from './';
 import Apis from '/apis/collection';
 
 ProxyBackends.allow({

@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { AutoForm } from 'meteor/aldeed:autoform';
 
-import { ProxyBackends } from '../../collection';
+import ProxyBackends from '../../collection';
 import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
