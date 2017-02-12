@@ -52,8 +52,6 @@ settings/collection/index.js
 settings/collection/permissions.js
 settings/collection/server/publications.js
 settings/server/methods.js
-setup/client/modal.js
-setup/server/methods.js
 status/client/lib/router.js
 status/client/status.js
 status/server/status.js
