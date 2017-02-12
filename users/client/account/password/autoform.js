@@ -5,7 +5,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   updatePassword: {
-    onSubmit (insertDoc, updateDoc) {
+    onSubmit (insertDoc) {
       this.event.preventDefault();
       const instance = this;
       Accounts.changePassword(insertDoc.old, insertDoc.new, (error) => {

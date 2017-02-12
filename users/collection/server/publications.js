@@ -1,4 +1,6 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+
 import Apis from '/apis/collection';
 
 Meteor.publish('allUsersUsernamesOnly', () => {
@@ -18,6 +20,9 @@ Meteor.publishComposite('user', () => {
 });
 
 Meteor.publish('apiAuthorizedUsersPublicDetails', (apiId) => {
+  // Make sure apiId is a String
+  check(apiId, String);
+
   // Get API document
   const api = Apis.findOne(apiId);
 
