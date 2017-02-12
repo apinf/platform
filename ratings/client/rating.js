@@ -6,7 +6,7 @@ import { Template } from 'meteor/templating';
 import $ from 'jquery';
 
 import Apis from '/apis/collection';
-import { ApiBackendRatings } from '../collection';
+import ApiBackendRatings from '../collection';
 
 Template.apiBackendRating.onCreated(function () {
   // Get reference to template instance

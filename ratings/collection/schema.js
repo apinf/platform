@@ -1,5 +1,5 @@
 // Collection import
-import { ApiBackendRatings } from './';
+import ApiBackendRatings from './';
 
 ApiBackendRatings.schema = new SimpleSchema({
   'apiBackendId': {
