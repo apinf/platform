@@ -46,8 +46,6 @@ ratings/collection/server/publications.js
 search/client/lib/router.js
 search/client/search.js
 search/server/publications.js
-settings/client/autoform.js
-settings/client/lib/router.js
 settings/collection/index.js
 settings/collection/permissions.js
 settings/collection/server/publications.js

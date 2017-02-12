@@ -11,7 +11,7 @@ Meteor.methods({
   configureSmtpSettings () {
     // Get current settings
     const settings = Settings.findOne();
-  
+
     // Check if mail settings are provided
     if (mailSettingsValid(settings)) {
       const username = encodeURIComponent(settings.mail.username);
