@@ -1,123 +1,109 @@
+import { Meteor } from 'meteor/meteor';
+
 Meteor.methods({
-  'statusCheck' : function () {
-
+  statusCheck () {
     function checkApinf () {
-
       // initial status object
-      var status = {
-        operational : false,
-        message     : ""
+      const status = {
+        operational: false,
+        message: '',
       };
 
-      try{
-
+      try {
         // initial host for apinf
-        var apinfHost     = Meteor.absoluteUrl();
+        const apinfHost = Meteor.absoluteUrl();
 
         // response object from apinf GET request
-        var apinfResponse = Meteor.http.call("GET", apinfHost);
+        const apinfResponse = Meteor.http.call('GET', apinfHost);
 
         // checks is the status code matches 200
-        if (apinfResponse.statusCode == 200) {
-
+        if (apinfResponse.statusCode === 200) {
           // if status code is 200 changes operational state to TRUE and provides success message
-          status.operational  = true;
-          status.message      = "Apinf is operating normally.";
-        }else{
-
+          status.operational = true;
+          status.message = 'Apinf is operating normally.';
+        } else {
           // if not, operational state remains false and provides different message
-          status.message      = "Apinf is down for some reason. Please contact support.";
+          status.message = 'Apinf is down for some reason. Please contact support.';
         }
-
-      }catch(e){
-
+      } catch (e) {
         // if http call crashes, sending different message
-        status.message = "Not able to access Apinf.";
+        status.message = 'Not able to access Apinf.';
       }
 
       return status;
     }
 
     function checkApiUmbrella () {
-
       // initial status object
-      var status = {
-        operational : false,
-        message     : ""
+      const status = {
+        operational: false,
+        message: '',
       };
 
-      try{
-
+      try {
         // initial host for API umbrella
-        var apiUmbrellaHost     = Meteor.settings.apiUmbrella.host;
+        const apiUmbrellaHost = Meteor.settings.apiUmbrella.host;
 
         // response object from API Umbrella GET request
-        var apiUmbrellaResponse =  Meteor.http.call("GET", apiUmbrellaHost);
+        const apiUmbrellaResponse = Meteor.http.call('GET', apiUmbrellaHost);
 
         // checks is the status code matches 200
-        if (apiUmbrellaResponse.statusCode == 200) {
-
+        if (apiUmbrellaResponse.statusCode === 200) {
           // if status code is 200 changes operational state to TRUE and provides success message
-          status.operational  = true;
-          status.message      = "API Umbrella is operating normally.";
-        }else{
-
+          status.operational = true;
+          status.message = 'API Umbrella is operating normally.';
+        } else {
           // if not, operational state remains false and provides different message
-          status.message      = "API Umbrella is down for some reason. Please contact support.";
+          status.message = 'API Umbrella is down for some reason. Please contact support.';
         }
-
-      }catch(e){
-
+      } catch (e) {
         // if http call crashes, sending different message
-        status.message = "Not able to reach API Umbrella.";
-
+        status.message = 'Not able to reach API Umbrella.';
       }
 
       // if not, operational state remains false and provides different message
       return status;
     }
 
-    function checkES () {
-
+    function checkElasticSearch () {
       // initial status object
-      var status = {
-        operational : false,
-        message     : ""
+      const status = {
+        operational: false,
+        message: '',
       };
 
-      try{
+      try {
         // initial host for elasticsearch instance
-        var elasticsearchInstance = Meteor.settings.elasticsearch.host;
+        const elasticsearchInstance = Meteor.settings.elasticsearch.host;
 
         // response object from elasticsearch GET request
-        var elasticsearchResponse =  Meteor.http.call("GET", elasticsearchInstance);
+        const elasticsearchResponse = Meteor.http.call('GET', elasticsearchInstance);
 
         // checks is the status code matches 200
-        if (elasticsearchResponse.statusCode == 200) {
-
-          // if status code is 200 changes operational state to TRUE and provides success message
-          status.operational  = true;
-          status.message      = "Elasticsearch is operating normally.";
-        }else{
-
+        if (elasticsearchResponse.statusCode === 200) {
+          // if status code is 200 changes operational state to TRUE
+          // and provides success message
+          status.operational = true;
+          status.message = 'Elasticsearch is operating normally.';
+        } else {
           // if not, operational state remains false and provides different message
-          status.message      = "Elasticsearch is down for some reason. Please contact support.";
+          status.message = 'Elasticsearch is down for some reason. Please contact support.';
         }
-      }catch(e){
-
+      } catch (e) {
         // if http call crashes, sending different message
-        status.message = "Not able to reach Elasticsearch.";
+        status.message = 'Not able to reach Elasticsearch.';
       }
 
       // if not, operational state remains false and provides different message
       return status;
     }
 
-    // statusCheck method returns object with statuses of all of the status checking functions written above
+    // statusCheck method returns object with statuses
+    // of all of the status checking functions written above
     return {
-      apinf         : checkApinf(),
-      elasticsearch : checkES(),
-      apiUmbrella   : checkApiUmbrella()
-    }
-  }
+      apinf: checkApinf(),
+      elasticsearch: checkElasticSearch(),
+      apiUmbrella: checkApiUmbrella(),
+    };
+  },
 });

@@ -54,9 +54,6 @@ settings/collection/server/publications.js
 settings/server/methods.js
 setup/client/modal.js
 setup/server/methods.js
-status/client/lib/router.js
-status/client/status.js
-status/server/status.js
 users/client/account/account.js
 users/client/account/password/autoform.js
 users/client/lib/accounts_config.js
