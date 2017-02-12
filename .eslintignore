@@ -43,9 +43,6 @@ ratings/collection/index.js
 ratings/collection/permissions.js
 ratings/collection/schema.js
 ratings/collection/server/publications.js
-search/client/lib/router.js
-search/client/search.js
-search/server/publications.js
 settings/client/autoform.js
 settings/client/lib/router.js
 settings/collection/index.js
