@@ -18,7 +18,7 @@ Accounts.onCreateUser((options, user) => {
       ];
       // Search 'githubUsername' from database.
       const githubUsername = user.services.github.username;
-      const existingUser = Meteor.users.findOne({ 'username': githubUsername });
+      const existingUser = Meteor.users.findOne({ username: githubUsername });
       if (existingUser === undefined) {
         // Username available, set username to Github username.
         user.username = githubUsername;

@@ -1,4 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
+
 import { Settings } from '/settings/collection';
 
 Meteor.methods({
@@ -25,13 +27,13 @@ Meteor.methods({
 
     return emailIsRegistered;
   },
-  sendRegistrationEmailVerification( userId ) {
+  sendRegistrationEmailVerification (userId) {
     // Get settings
     const settings = Settings.findOne();
 
     // Check mail settings have been enabled
-    if(settings && settings.mail && settings.mail.enabled) {
-      Accounts.sendVerificationEmail( userId );
+    if (settings && settings.mail && settings.mail.enabled) {
+      Accounts.sendVerificationEmail(userId);
     }
   },
 });

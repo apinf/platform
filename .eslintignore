@@ -57,13 +57,3 @@ setup/server/methods.js
 status/client/lib/router.js
 status/client/status.js
 status/server/status.js
-users/client/account/account.js
-users/client/account/password/autoform.js
-users/client/lib/accounts_config.js
-users/collection/roles_schema.js
-users/collection/server/publications.js
-users/collection/users_permissions.js
-users/server/accounts_hooks.js
-users/server/login_verify.js
-users/server/methods.js
-users/server/startup_roles.js

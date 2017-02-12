@@ -1,9 +1,14 @@
+import { Accounts } from 'meteor/accounts-base';
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 AutoForm.hooks({
   updatePassword: {
-    onSubmit (insertDoc, updateDoc, currentDoc) {
+    onSubmit (insertDoc, updateDoc) {
       this.event.preventDefault();
       const instance = this;
-      Accounts.changePassword(insertDoc.old, insertDoc.new, function (error) {
+      Accounts.changePassword(insertDoc.old, insertDoc.new, (error) => {
         $('.btn-primary').attr('disabled', null);
         if (error) {
           // Alert the user of failure
