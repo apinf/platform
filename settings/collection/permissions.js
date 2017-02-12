@@ -1,4 +1,4 @@
-import { Settings } from './';
+import Settings from './';
 
 Settings.allow({
   insert (userId, settings) {

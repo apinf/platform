@@ -1,4 +1,4 @@
-import { Settings } from '../';
+import Settings from '../';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.publish('settings', function () {
