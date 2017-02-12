@@ -1,9 +1,13 @@
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
-// Collection imports
+
 import ApiBackendRatings from '/ratings/collection';
 
 // User rating for a single API Backend
 Meteor.publish('myApiBackendRating', function (apiBackendId) {
+  // Make sure apiBackendId is a String
+  check(apiBackendId, String);
+
   // get current user ID
   const userId = this.userId;
 
@@ -28,7 +32,10 @@ Meteor.publish('myApiBackendRatings', function () {
 });
 
 // All ratings for a given API Backend, anonymized
-Meteor.publish('apiBackendRatings', function (apiBackendId) {
+Meteor.publish('apiBackendRatings', (apiBackendId) => {
+  // Make sure apiBackendId is a String
+  check(apiBackendId, String);
+
   // get API Backend Ratings, excluding the User ID field
   const apiBackendRatings = ApiBackendRatings.find(
     { apiBackendId }
