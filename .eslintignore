@@ -46,8 +46,6 @@ ratings/collection/server/publications.js
 search/client/lib/router.js
 search/client/search.js
 search/server/publications.js
-settings/collection/permissions.js
-settings/collection/server/publications.js
 settings/server/methods.js
 setup/client/modal.js
 setup/server/methods.js

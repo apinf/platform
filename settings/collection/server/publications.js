@@ -1,5 +1,8 @@
-import Settings from '../';
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+
+import Settings from '../';
 
 Meteor.publish('settings', function () {
   // Only Administrator can access all settings
@@ -19,6 +22,9 @@ Meteor.publish('settings', function () {
 });
 
 Meteor.publish('singleSetting', (setting) => {
+  // Make sure setting is a String
+  check(setting, String);
+
   // TODO: Determine if/how to check whether user is authorized to view setting
 
   // Set up a query settings object containing fields and a result limit
