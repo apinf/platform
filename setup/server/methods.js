@@ -1,5 +1,5 @@
 import Branding from '/branding/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Meteor.methods({
   isInitialSetupComplete () {

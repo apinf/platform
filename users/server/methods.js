@@ -1,5 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Meteor.methods({
   deleteAccount (userId) {

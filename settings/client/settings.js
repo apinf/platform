@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 import $ from 'jquery';
 
 Template.settings.onCreated(function () {
