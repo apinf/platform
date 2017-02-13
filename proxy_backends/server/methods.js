@@ -5,8 +5,8 @@ import ProxyBackends from '/proxy_backends/collection';
 
 Meteor.methods({
   deleteProxyBackend (proxyBackend, deleteFromMongoDB = true) {
-    // Make sure proxyBackend is a String
-    check(proxyBackend, String);
+    // Make sure proxyBackend is an Object
+    check(proxyBackend, Object);
 
     // Get umbrellaBackendId
     const umbrellaBackendId = proxyBackend.apiUmbrella.id;
@@ -38,8 +38,8 @@ Meteor.methods({
     );
   },
   uniqueFrontendPrefix (proxyBackend) {
-    // Make sure proxyBackend is a String
-    check(proxyBackend, String);
+    // Make sure proxyBackend is an Object
+    check(proxyBackend, Object);
 
     // Get frontend prefix
     const frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
