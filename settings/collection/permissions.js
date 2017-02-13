@@ -1,26 +1,23 @@
-import { Settings } from './';
+import { Roles } from 'meteor/alanning:roles';
+
+import Settings from './';
 
 Settings.allow({
-  insert (userId, settings) {
+  insert (userId) {
     // Check if current user is admin
     const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
     // Check if settings exist (settings count is zero)
     const noSettingsExist = Settings.find().count() === 0;
 
-    // if no settings exist
-    if (userIsAdmin && noSettingsExist) {
-      // insert
-      return true;
-    }
+    // Insert if no settings exist
+    return (userIsAdmin && noSettingsExist);
   },
-  update (userId, settings) {
+  update (userId) {
     // Check if current user is admin
     const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
 
     // Only admin can update
-    if (userIsAdmin) {
-      return true;
-    }
+    return !!(userIsAdmin);
   },
 });

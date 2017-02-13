@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 import { check } from 'meteor/check';
 
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Meteor.methods({
   deleteAccount (userId) {

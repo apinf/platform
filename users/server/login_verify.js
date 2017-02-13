@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Roles } from 'meteor/alanning:roles';
 
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 import { mailSettingsValid } from '/core/helper_functions/validate_settings';
 
 import { _ } from 'lodash';
