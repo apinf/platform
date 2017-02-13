@@ -14,6 +14,9 @@ const postsSchema = new SimpleSchema({
       placeholder: 'Give post URL',
     }
   },
+  apiId: {
+  type: String,
+},
   createdAt: {
     type: Date,
     autoValue: function() {
