@@ -84,7 +84,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{#if currentUser}}
+      {{#if api.currentUserCanManage }}
         <button type="button" class="btn btn-xs btn-success pull-right" id="add_oembed" title='Add embedded content'>Add embedded content</button>
       {{/if}}
       <h2 id="oembedded-title" class="panel-title clearfix">
