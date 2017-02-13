@@ -1,14 +1,13 @@
-// Meteor packages import
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
 
-// APINF import
 import Apis from '/apis/collection';
-// npm import
+
+// TODO reference moment library in the code.
+// eslint-disable-next-line no-unused-vars
 import moment from 'moment';
 import 'moment/min/locales.min';
-import _ from 'lodash';
 
 Template.search.onCreated(function () {
   // Get reference to Template instance

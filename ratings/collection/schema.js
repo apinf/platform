@@ -1,16 +1,17 @@
-// Collection import
-import { ApiBackendRatings } from './';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+import ApiBackendRatings from './';
 
 ApiBackendRatings.schema = new SimpleSchema({
-  'apiBackendId': {
+  apiBackendId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-  'userId': {
+  userId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-  'rating': {
+  rating: {
     type: Number,
     min: 0,
     max: 4,
