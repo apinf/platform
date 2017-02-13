@@ -38,11 +38,6 @@ proxy_backends/collection/regex.js
 proxy_backends/collection/schema.js
 proxy_backends/collection/server/publications.js
 proxy_backends/server/methods.js
-ratings/client/rating.js
-ratings/collection/index.js
-ratings/collection/permissions.js
-ratings/collection/schema.js
-ratings/collection/server/publications.js
 settings/client/autoform.js
 settings/client/lib/router.js
 settings/collection/index.js

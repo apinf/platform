@@ -1,1 +1,5 @@
-export const ApiBackendRatings = new Mongo.Collection('apiBackendRatings');
+import { Mongo } from 'meteor/mongo';
+
+const ApiBackendRatings = new Mongo.Collection('apiBackendRatings');
+
+export default ApiBackendRatings;
