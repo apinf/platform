@@ -4,7 +4,7 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 import DocumentationFiles from '/documentation/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
