@@ -3,9 +3,9 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
+import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
-import { Proxies } from '/proxies/collection';
 
 import URI from 'urijs';
 

@@ -1,9 +1,10 @@
-import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Template } from 'meteor/templating';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+import Proxies from '../../collection';
 import ProxyBackends from '/proxy_backends/collection';
-import { Proxies } from '../../collection';
 
 Template.removeProxy.onCreated(function () {
   const proxyId = Template.currentData().proxy._id;

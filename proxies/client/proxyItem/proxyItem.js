@@ -1,14 +1,15 @@
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
 
 Template.proxyItem.events({
-  'click #edit-proxy': function (event, instance) {
+  'click #edit-proxy': function () {
     // Get proxy document
     const proxy = this.proxy;
 
     // Show proxy form modal
     Modal.show('proxyForm', { proxy });
   },
-  'click #remove-proxy': function (event, instance) {
+  'click #remove-proxy': function () {
     // Get proxy document
     const proxy = this.proxy;
 
