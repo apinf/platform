@@ -2,8 +2,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 import _ from 'lodash';
 
-import ApiUmbrellaSchema from './apiUmbrellaSchema';
 import Proxies from '/proxies/collection';
+import ApiUmbrellaSchema from './apiUmbrellaSchema';
 import ProxyBackends from './';
 
 ProxyBackends.schema = new SimpleSchema({
