@@ -85,11 +85,11 @@ AutoForm.hooks({
                           // Insert the Proxy Backend document, asynchronous
                           form.result(proxyBackend);
                         }
-                        return true;
+                        return proxyBackend;
                       }
                     );
                   }
-                  return true;
+                  return proxyBackend;
                 });
             } else {
               // Alert the user of frontend prefix unique issue
