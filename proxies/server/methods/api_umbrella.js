@@ -81,8 +81,8 @@ Meteor.methods({
     }
   },
   createApiBackendOnApiUmbrella (apiBackend, proxyId) {
-    // Make sure apiBackend is a String
-    check(apiBackend, String);
+    // Make sure apiBackend is an Object
+    check(apiBackend, Object);
 
     // Make sure proxyId is a String
     check(proxyId, String);
@@ -114,8 +114,8 @@ Meteor.methods({
     return response;
   },
   updateApiBackendOnApiUmbrella (apiBackend, proxyId) {
-    // Make sure apiBackend is a String
-    check(apiBackend, String);
+    // Make sure apiBackend is an Object
+    check(apiBackend, Object);
 
     // Make sure proxyId is a String
     check(proxyId, String);
