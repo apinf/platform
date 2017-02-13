@@ -1,16 +1,12 @@
 // Collection import
-import { ApiBackendRatings } from './';
+import ApiBackendRatings from './';
 
 ApiBackendRatings.allow({
-  insert (userId, rating) {
+  insert (userId) {
     // User must be logged in to vote
-    if (userId) {
-      return true;
-    }
+    return !!(userId);
   },
   update (userId, rating) {
-    if (userId === rating.userId) {
-      return true;
-    }
+    return (userId === rating.userId);
   },
 });
