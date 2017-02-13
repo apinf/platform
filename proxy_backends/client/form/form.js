@@ -2,13 +2,12 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
-import { URI } from 'meteor/olragon:uri-js';
 
 import ProxyBackends from '/proxy_backends/collection';
 import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
 import { Proxies } from '/proxies/collection';
 
-import 'urijs';
+import URI from 'urijs';
 
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();
