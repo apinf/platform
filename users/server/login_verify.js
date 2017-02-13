@@ -1,13 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Roles } from 'meteor/alanning:roles';
-import { _ } from 'lodash';
 
 import Settings from '/settings/collection';
 import { mailSettingsValid } from '/core/helper_functions/validate_settings';
 
+import { _ } from 'lodash';
+
 // Login attempt verifier to require verified email before login
-export function loginAttemptVerifier (parameters) {
+export default function loginAttemptVerifier (parameters) {
   // Init user login allowed
   let userLoginAllowed = false;
 
