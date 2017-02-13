@@ -6,7 +6,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Apinf import
 import { ProxyBackends } from '/proxy_backends/collection';
-import { Proxies } from '/proxies/collection';
+import Proxies from '/proxies/collection';
 import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
 
 // NPM import

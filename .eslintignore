@@ -13,18 +13,6 @@ apis/client/profile/visibility/lib/bootstrap-switch.js
 ## We want to lint all those files                                  ##
 ## Please remove the line on this file if you are changing the file ##
 ######################################################################
-proxies/api_umbrella/collections/api_umbrella_admins.js
-proxies/api_umbrella/collections/api_umbrella_users.js
-proxies/api_umbrella/collections/server/api_umbrella_admins_publications.js
-proxies/api_umbrella/collections/server/api_umbrella_users_publications.js
-proxies/client/form/autoform.js
-proxies/client/form/validation.js
-proxies/client/lib/router.js
-proxies/client/proxyItem/proxyItem.js
-proxies/collection/index.js
-proxies/collection/server/publications.js
-proxies/helper_functions/api_umbrella.js
-proxies/server/methods/api_umbrella.js
 proxy_backends/client/form/autoform.js
 proxy_backends/client/form/form.js
 proxy_backends/client/methods/convert_to_apiUmbrella_object.js

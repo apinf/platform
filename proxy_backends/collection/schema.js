@@ -1,4 +1,4 @@
-import { Proxies } from '/proxies/collection';
+import Proxies from '/proxies/collection';
 import { ProxyBackends } from './';
 import { ApiUmbrellaSchema } from './apiUmbrellaSchema';
 
