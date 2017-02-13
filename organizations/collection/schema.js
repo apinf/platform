@@ -13,6 +13,9 @@ Organizations.schema = new SimpleSchema({
   },
   'contact.phone': {
     type: String,
+    // can start with +/# ( 2 digits with or without ()) , can have -/./slash/or space between nos
+    //eg. +(XX)-XXXX-XXXX , +XX XXXX XXXXX , #X/XXXX/XXXX/XXXX  , XX.XXXX.XXXX , XXXXXXXXXXXXX
+    regEx: /^\+|#?(|[(][0-9]{2})|[)]\)?[-|.|/|\s ]?([0-9]{4})[-|.|/|\s ]?([0-9]{4})$/,
     optional: true,
   },
   'contact.email': {
