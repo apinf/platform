@@ -9,7 +9,7 @@ Meteor.startup(() => {
   const roles = Roles.getAllRoles().fetch();
 
   // Create an array of role names
-  const roleNames = _.map(roles, (role) => role.name);
+  const roleNames = _.map(roles, (role) => { return role.name; });
 
   // Check if 'manager' role is defined
   const managerRoleIsDefined = _.includes(roleNames, 'manager');

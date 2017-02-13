@@ -1,6 +1,6 @@
 import { Migrations } from 'meteor/percolate:migrations';
 
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 import Proxies from '/proxies/collection';
 
 Migrations.add({
