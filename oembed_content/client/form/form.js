@@ -15,9 +15,3 @@ Template.postsForm.helpers({
     }
   }
 });
-
-// Calculate time passed from create
-Template.registerHelper('calculateFromDate', function(date) {
-  // return moment(date).format('YYYY-MM-DD HH:mm');
-  return moment(date).from(moment());
-});
