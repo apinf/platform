@@ -12,6 +12,10 @@ AutoForm.hooks({
     before: {
       insert (proxyBackend) {
         // TODO: Refactor this method. It is too long and complex
+
+        // Let's declare nothing to be returned.
+        const nothing = undefined;
+
         // No selected any proxy
         if (proxyBackend && proxyBackend.proxyId === undefined) {
           // Notify users about no selected proxy
@@ -85,11 +89,11 @@ AutoForm.hooks({
                           // Insert the Proxy Backend document, asynchronous
                           form.result(proxyBackend);
                         }
-                        return proxyBackend;
+                        return nothing;
                       }
                     );
                   }
-                  return proxyBackend;
+                  return nothing;
                 });
             } else {
               // Alert the user of frontend prefix unique issue
@@ -100,13 +104,16 @@ AutoForm.hooks({
             }
           });
         }
-        return true;
+        return nothing;
       },
       update (updateDoc) {
         // Get reference to autoform instance, for form submission callback
         const form = this;
         // Get proxyBackend $set values
         const currentProxyBackend = updateDoc.$set;
+
+        // Let's declare nothing to be returned.
+        const nothing = undefined;
 
         if (currentProxyBackend) {
           // Get API id
@@ -208,7 +215,7 @@ AutoForm.hooks({
               });
           }
         }
-        return true;
+        return nothing;
       },
     },
     onSuccess (formType) {
