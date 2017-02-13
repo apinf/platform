@@ -106,6 +106,7 @@ Template.apiDetails.helpers({
 
 Template.apiDetails.events({
   'click #add_oembed': function(e) {
-    Modal.show("postsForm", {pageHeader: "Add Embedded Content"})
+    const api = this.api;
+    Modal.show("postsForm", {pageHeader: "Add Embedded Content", api:api})
   }
 });
