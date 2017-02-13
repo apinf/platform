@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import Proxies from '../';
 
 Meteor.publish('allProxies', function () {
-  let proxies;
+  let proxies = [];
 
   // Check user permissions
   if (Roles.userIsInRole(this.userId, ['admin'])) {
