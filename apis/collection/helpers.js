@@ -10,7 +10,7 @@ import 'moment/min/locales.min';
 import _ from 'lodash';
 
 // Collection imports
-import { ApiBackendRatings } from '/ratings/collection';
+import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
 import Apis from './';
 
