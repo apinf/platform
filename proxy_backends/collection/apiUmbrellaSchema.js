@@ -137,4 +137,4 @@ const ApiUmbrellaSchema = new SimpleSchema({
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.ProxyBackends.apiUmbrella');
 
-export { ApiUmbrellaSchema };
+export default ApiUmbrellaSchema;

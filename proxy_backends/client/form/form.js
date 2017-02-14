@@ -1,21 +1,15 @@
-// Meteor package imports
-import { ReactiveVar } from 'meteor/reactive-var';
-import { Template } from 'meteor/templating';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
 
-// Apinf import
-import { ProxyBackends } from '/proxy_backends/collection';
 import Proxies from '/proxies/collection';
+import ProxyBackends from '/proxy_backends/collection';
 import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
 
-// NPM import
-import 'urijs';
+import URI from 'urijs';
 
-// jQuery import
-import $ from 'jquery';
-
-Template.proxyBackend.onCreated(function () {
+Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();
   // Set the proxy id empty on default
   // instance.data.proxyId = new ReactiveVar('');
@@ -29,7 +23,8 @@ Template.proxyBackend.onCreated(function () {
     const proxyBackendExists = instance.data.proxyBackend;
 
     // Check if proxy id exists and multi proxy is available
-    // It can be a case when proxy id is empty string and proxy is only one then proxy id must be update
+    // It can be a case when proxy id is empty string and
+    // proxy is only one then proxy id must be update
     if (instance.data.proxyId !== undefined && proxyCount > 1) {
       // Save the early value
       return instance.data.proxyId.get();
@@ -52,19 +47,19 @@ Template.proxyBackend.onCreated(function () {
     if (proxyCount === 1) {
       // Set these id as current
       currentProxyId = Proxies.findOne()._id;
-    } else {
+    } else if (proxyBackendExists) {
       // Second case: multi proxy
 
-      // If PB configuration exists then it has a proxy id
-      if (proxyBackendExists) {
-        // Update & save the current proxy id
-        currentProxyId = proxyBackendExists.proxyId;
-      }
+      // If ProxyBackend configuration exists then it has a proxy id
+
+      // Update & save the current proxy id
+      currentProxyId = proxyBackendExists.proxyId;
+
       // Otherwise empty string is current id (after deleting configuration)
     }
 
-    // Get the current proxy id
-    instance.data.proxyId.set(currentProxyId);
+    // Set the current proxy id
+    return instance.data.proxyId.set(currentProxyId);
   };
 });
 
@@ -74,7 +69,7 @@ Template.proxyBackend.helpers({
     const api = this.api;
 
     // Construct URL object for API URL
-    const apiUrl = URI(api.url);
+    const apiUrl = new URI(api.url);
 
     // Return the API URL protocol
     return apiUrl.host();
@@ -84,7 +79,7 @@ Template.proxyBackend.helpers({
     const api = this.api;
 
     // Construct URL object for API URL
-    const apiUrl = URI(api.url);
+    const apiUrl = new URI(api.url);
 
     // Return the API URL protocol
     const protocol = apiUrl.protocol();
@@ -112,7 +107,7 @@ Template.proxyBackend.helpers({
     const api = this.api;
 
     // Construct URL object for API URL
-    const apiUrl = URI(api.url);
+    const apiUrl = new URI(api.url);
 
     // Return the API URL protocol
     return apiUrl.protocol();
@@ -160,7 +155,7 @@ Template.proxyBackend.helpers({
 
     if (proxy && proxy.apiUmbrella) {
       // Get frontend host from template instance
-      const frontend = URI(proxy.apiUmbrella.url);
+      const frontend = new URI(proxy.apiUmbrella.url);
 
       return frontend.host();
     }
@@ -188,7 +183,7 @@ Template.proxyBackend.helpers({
 
     // If proxyId is empty then form will be hidden
     return instance.data.proxyId.get();
-  }
+  },
 });
 
 Template.proxyBackend.events({
@@ -248,7 +243,7 @@ Template.proxyBackend.events({
         Modal.show('changeSelectedProxy', {
           proxyBackendEvent: event,
           proxyBackend: templateInstance,
-          selectedItem: selectedItem,
+          selectedItem,
         });
       }
     } else {

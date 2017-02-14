@@ -5,24 +5,3 @@ core/client/lib/chartsjs/*
 apis/client/profile/visibility/lib/bootstrap-switch.js
 /dashboard/client/charts/filtering/datepicker/
 /dashboard/client/charts/filtering/selectpicker/
-
-
-######################################################################
-##                       Temporarily ignored                        ##
-######################################################################
-## We want to lint all those files                                  ##
-## Please remove the line on this file if you are changing the file ##
-######################################################################
-proxy_backends/client/form/autoform.js
-proxy_backends/client/form/form.js
-proxy_backends/client/methods/convert_to_apiUmbrella_object.js
-proxy_backends/client/methods/delete_proxy_backend.js
-proxy_backends/client/modal_form/remove_selected_proxy/remove_selected_proxy.js
-proxy_backends/collection/apiUmbrellaSchema.js
-proxy_backends/collection/helpers.js
-proxy_backends/collection/index.js
-proxy_backends/collection/permissions.js
-proxy_backends/collection/regex.js
-proxy_backends/collection/schema.js
-proxy_backends/collection/server/publications.js
-proxy_backends/server/methods.js
