@@ -2,43 +2,33 @@
 
   <div class="panel panel-default">
 
-    <!-- <div class="responsive-video panel-body"> -->
-      <!-- Whole panel heading works as a link -->
-
-        <div class="panel-heading">
-            <a class="btn-block" href="{{ post.url }}" title="Open content in new window" target="_blank">
-          <h3 class="panel-title">
-
-            {{ post.title }}
-            <!-- <a href="{{ post.url }}">{{ post.title }}</a> -->
-          </h3>
-          <p>
-            {{ post.description }}
-          </p>
-          Added <span title='{{calculateFromDate post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
-          <br> by {{ post.username }}
-          </a>
-        </div>
-
-
-      <div class="responsive-video panel-body">
-        <a href="{{ post.url }}" id="{{ post._id }}">
-          {{ post.url }}
-        </a>
-      </div>
-
-      <div class="panel-footer  clearfix">
-        <p class="pull-right">
-          {{#if userIsPostOwner}}
-          {{#if api.currentUserCanManage }}
-            <button class="edit btn btn-default">Edit</button>
-            <button class="delete btn btn-danger">Delete</button>
-          {{/if}}
-          {{/if}}
+    <div class="panel-heading">
+      <a class="btn-block" href="{{ post.url }}" title="Open content in new window" target="_blank">
+        <h3 class="panel-title">
+          {{ post.title }}
+        </h3>
+        <p>
+          {{ post.description }}
         </p>
-      </div>
+        Added <span title='{{calculateFromDate post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
+        <br> by {{ post.username }}
+      </a>
     </div>
 
-    <!-- </div> -->
-  <!--</div>-->
+    <div class="responsive-video panel-body">
+      <a href="{{ post.url }}" id="{{ post._id }}">
+        {{ post.url }}
+      </a>
+    </div>
+
+    <div class="panel-footer  clearfix">
+      <p class="pull-right">
+        {{#if api.currentUserCanManage }}
+          <button class="edit btn btn-default">Edit</button>
+          <button class="delete btn btn-danger">Delete</button>
+        {{/if}}
+      </p>
+    </div>
+  </div>
+
 </template>
