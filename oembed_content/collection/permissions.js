@@ -1,8 +1,10 @@
+import { Roles } from 'meteor/alanning:roles';
 import { Posts } from './';
 
 Posts.allow({
-  insert () {
-    if (Meteor.user()){
+  insert (userId) {
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+    if (userIsAdmin){
       return true;
     }
   },
