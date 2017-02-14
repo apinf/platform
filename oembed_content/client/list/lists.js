@@ -1,9 +1,10 @@
-import { Posts } from '/oembed_content/collection';
+import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
-Template.postsList.onCreated(function() {
+import Posts from '/oembed_content/collection';
 
+
+Template.postsList.onCreated(function () {
   const instance = this;
-  const userId = Meteor.userId();
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
     // Count of posts on page
@@ -13,10 +14,9 @@ Template.postsList.onCreated(function() {
   });
 
   // Get posts owned by API
-  let currentFilters = {};
+  const currentFilters = {};
   currentFilters.apiId = instance.data.api._id;
   instance.pagination.filters(currentFilters);
-
 });
 
 Template.postsList.helpers({

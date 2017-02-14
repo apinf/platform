@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
+
 const Posts = new Mongo.Collection('posts');
-export { Posts };
+export default Posts;
 
 // This code only runs on the server
 if (Meteor.isServer) {

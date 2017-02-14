@@ -1,21 +1,22 @@
 import { Roles } from 'meteor/alanning:roles';
-import { Posts } from './';
+import Posts from './';
 
 Posts.allow({
   insert (userId) {
     const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-    if (userIsAdmin){
+    if (userIsAdmin) {
       return true;
     }
+    return false;
   },
-  remove: function (userId, doc) {
+  remove (userId, doc) {
     // User can only delete own documents
-    userCanDelete = doc.userId === userId;
+    const userCanDelete = doc.userId === userId;
     return userCanDelete;
   },
-  update: function (userId, doc, fields, modifier) {
+  update (userId, doc) {
     // User can only change own documents
-    userCanModify = doc.userId === userId;
+    const userCanModify = doc.userId === userId;
     return userCanModify;
   },
 });

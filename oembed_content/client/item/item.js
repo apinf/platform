@@ -1,6 +1,6 @@
-import { Posts } from '/oembed_content/collection';
-import { TAPi18n } from 'meteor/tap:i18n';
-import moment from 'moment';
+import { Template } from 'meteor/templating';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import Posts from '/oembed_content/collection';
 import 'moment/min/locales.min';
 
 
@@ -19,21 +19,21 @@ Template.postItem.onRendered(function () {
 
 Template.postItem.helpers({
   // helpers here in future
-})
+});
 
 Template.postItem.events({
-  'click .delete'() {
-    if (confirm("Do you really want delete this post?")) {
+  'click .delete': function () {
+    if (confirm('Do you really want delete this post?')) {
       const instance = Template.instance();
       const postId = instance.data.post._id;
       Posts.remove(postId);
     }
   },
-  'click .edit'(event, template) {
-    const post = template.data.post;
-    Modal.show("postsForm", {
+  'click .edit': function (event, templateInstance) {
+    const post = templateInstance.data.post;
+    Modal.show('postsForm', {
       postItem: post,
-      pageHeader: "Edit post item"
+      pageHeader: 'Edit post item',
     });
-  }
+  },
 });

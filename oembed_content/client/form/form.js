@@ -1,5 +1,5 @@
-import { Posts } from '../../collection';
-import moment from 'moment';
+import { Template } from 'meteor/templating';
+import Posts from '../../collection';
 
 Template.postsForm.helpers({
   postsCollection () {
@@ -8,10 +8,8 @@ Template.postsForm.helpers({
   updateInsert () {
     const instance = Template.instance();
     if (instance.data.postItem) {
-      return "update";
+      return 'update';
     }
-    else {
-      return "insert";
-    }
-  }
+    return 'insert';
+  },
 });
