@@ -13,7 +13,7 @@
 
         <div class="modal-body">
           <!-- {{> quickForm collection=postsCollection doc=postItem id="postsForm" type=updateInsert omitFields='createdAt, userId, username ' }} -->
-          {{#autoForm id="postsForm" type=updateInsert collection=postsCollection}}
+          {{#autoForm id="postsForm" type=updateInsert doc=postItem collection=postsCollection}}
           {{> afQuickField name='title' }}
           {{> afQuickField name='url' }}
           {{> afQuickField name='description' }}
