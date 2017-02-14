@@ -10,6 +10,15 @@ const DocumentationSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  documentationMethod: { // any better name?
+    type: String,
+    optional: false,
+    allowedValues: [
+      'File',
+      'URL',
+    ],
+    defaultValue: 'URL',
+  },
 });
 
 Apis.schema = new SimpleSchema({
