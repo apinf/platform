@@ -11,23 +11,12 @@ Template.postsList.onCreated(function() {
     // Set sort by creation datestamp on default
     sort: { createdAt: -1 },
   });
-  // Watch for changes in the filter settings
-  instance.autorun(() => {
-    // Check URL parameter for filtering
-    const filterByParameter = FlowRouter.getQueryParam('filterBy');
-    // Set filter as empty
-    let currentFilters = {};
 
-    // Filtering available for registered users
-    if (userId) {
-      if (filterByParameter) {
-        // set cursor pointer to posts' userID
-      currentFilters.userId = userId;
-      }
-    }
-    // Filter data
-    instance.pagination.filters(currentFilters);
-  });
+  // Get posts owned by API
+  let currentFilters = {};
+  currentFilters.apiId = instance.data.api._id;
+  instance.pagination.filters(currentFilters);
+
 });
 
 Template.postsList.helpers({
