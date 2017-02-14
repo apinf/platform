@@ -10,7 +10,6 @@ Template.postItem.onRendered(function () {
 
   // Get Post ID from template instance
   const postId = instance.data.post._id;
-
   // Get reference to post DOM element
   const postElement = instance.$(`#${postId}`);
 
@@ -19,14 +18,7 @@ Template.postItem.onRendered(function () {
 });
 
 Template.postItem.helpers({
-  userIsPostOwner: function () {
-    const instance = Template.instance();
-
-    // Get Post ID from template instance
-    const postOwnerId = instance.data.post.userId;
-    const loggedUser = Meteor.userId();
-    return postOwnerId === loggedUser;
-  },
+  // helpers here in future
 })
 
 Template.postItem.events({
