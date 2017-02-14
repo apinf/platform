@@ -1,6 +1,13 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import Apis from './';
 
+const DocumentationSchema = new SimpleSchema({
+  documentationFileId: {
+    type: String,
+    optional: true,
+  },
+});
+
 Apis.schema = new SimpleSchema({
   name: {
     type: String,
@@ -23,8 +30,8 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationFileId: {
-    type: String,
+  documentation: {
+    type: DocumentationSchema,
     optional: true,
   },
   latestMonitoringStatusCode: {
@@ -54,11 +61,6 @@ Apis.schema = new SimpleSchema({
   monitoringId: {
     type: String,
     optional: true,
-  },
-  documentation_link: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
   },
   submit_methods: {
     type: [String],
