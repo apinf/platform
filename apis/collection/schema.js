@@ -19,6 +19,10 @@ const DocumentationSchema = new SimpleSchema({
     ],
     defaultValue: 'URL',
   },
+  otherDocumentationUrl: {
+    type: String,
+    optional: true,
+  },
 });
 
 Apis.schema = new SimpleSchema({
