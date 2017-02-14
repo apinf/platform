@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import { Roles } from 'meteor/alanning:roles';
 
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 import Apis from '../';
 
 Apis.allow({

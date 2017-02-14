@@ -8,7 +8,7 @@ import { Template } from 'meteor/templating';
 
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Template.navbar.onCreated(function () {
   const instance = this;

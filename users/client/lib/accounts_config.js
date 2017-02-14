@@ -1,3 +1,5 @@
+import { AccountsTemplates } from 'meteor/useraccounts:core';
+
 // User accounts guide
 // https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 AccountsTemplates.configure({

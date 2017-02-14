@@ -1,5 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+
 import Branding from '/branding/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Meteor.methods({
   isInitialSetupComplete () {
@@ -7,13 +9,8 @@ Meteor.methods({
     const settings = Settings.findOne();
     const branding = Branding.findOne();
 
-    // check if settings or branding have been configured
-    if (branding || settings) {
-      // The platform is ready to use
-      return true;
-    } else {
-      // More configuration is necessary for basic usage
-      return false;
-    }
+    // The platform is ready to use if
+    // settings or branding have been configured
+    return !!(branding || settings);
   },
 });

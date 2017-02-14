@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 
 import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 
 Meteor.methods({
