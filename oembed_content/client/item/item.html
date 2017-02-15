@@ -10,7 +10,7 @@
         <p>
           {{ post.description }}
         </p>
-        Added <span title='{{calculateFromDate post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
+        Added <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
         <br> by {{ post.username }}
       </a>
     </div>
@@ -21,14 +21,17 @@
       </a>
     </div>
 
-    <div class="panel-footer  clearfix">
-      <p class="pull-right">
-        {{#if api.currentUserCanManage }}
-          <button class="edit btn btn-default">Edit</button>
-          <button class="delete btn btn-danger">Delete</button>
-        {{/if}}
-      </p>
-    </div>
+    {{#if api.currentUserCanManage }}
+      <div class="panel-footer  clearfix">
+        <p class="pull-right">
+          {{#if api.currentUserCanManage }}
+            <button class="edit btn btn-default">Edit</button>
+            <button class="delete btn btn-danger">Delete</button>
+          {{/if}}
+        </p>
+      </div>
+    {{/if}}
+
   </div>
 
 </template>
