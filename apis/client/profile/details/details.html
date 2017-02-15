@@ -81,7 +81,7 @@
     </div>
   {{/ if }}
   <!-- Embedded contents -->
-
+  <!-- {{#if showIfPostsOrUserHasRights }} -->
   <div class="panel panel-default">
     <div class="panel-heading">
       {{#if api.currentUserCanManage }}
@@ -91,7 +91,7 @@
         "Embedded Contents (will be into i18n file)"
         <!-- {{_ "viewApi_Details_Title" }} -->
       </h2>
-
+      {{ showIfPostsOrUserHasRights }}
     </div>
     <div class="panel-body">
       <div class="row">
@@ -99,4 +99,5 @@
       </div>
     </div>
   </div>
+  <!-- {{/ if }} -->
 </template>
