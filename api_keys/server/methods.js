@@ -30,8 +30,7 @@ Meteor.methods({
             if (error) {
               // Log error for server
               // eslint-disable-next-line no-console
-              console.log(error);
-              // Throw apiumbrellauser error for client
+             // Throw apiumbrellauser error for client
               throw new Meteor.Error(
                 'apinf-apiumbrellauser-error',
                 TAPi18n.__('apinf_apiumbrellauser_error')
