@@ -53,8 +53,10 @@ Template.manageApiDocumentationModal.events({
       // Remove documentation object
       DocumentationFiles.remove(objectId);
 
-      // Remove documenation file id field
-      Apis.update(templateInstance.data.api._id, { $unset: { documentationFileId: '' } });
+      // Remove documentation file id field
+      Apis.update(templateInstance.data.api._id, {
+        $unset: { documentationFileId: '' },
+      });
 
       // Get deletion success message translation
       const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
