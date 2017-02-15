@@ -2,35 +2,25 @@
 
   <div class="panel panel-default">
 
-    <div class="panel-heading">
-      <a class="btn-block" href="{{ post.url }}" title="Open content in new window" target="_blank">
-        <h3 class="panel-title">
-          {{ post.title }}
-        </h3>
-        <p>
-          {{ post.description }}
-        </p>
-        Added <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
-        <br> by {{ post.username }}
-      </a>
-    </div>
-
     <div class="responsive-video panel-body">
+      <h3>
+        {{ post.title }}
+      </h3>
+      <br>
       <a href="{{ post.url }}" id="{{ post._id }}">
         {{ post.url }}
       </a>
-    </div>
+      <br>
+      Added <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
 
-    {{#if api.currentUserCanManage }}
-      <div class="panel-footer  clearfix">
-        <p class="pull-right">
-          {{#if api.currentUserCanManage }}
-            <button class="edit btn btn-default">Edit</button>
-            <button class="delete btn btn-danger">Delete</button>
-          {{/if}}
-        </p>
-      </div>
-    {{/if}}
+      <p class="pull-right">
+        {{#if api.currentUserCanManage }}
+          <button class="edit btn btn-default">Edit</button>
+          <button class="delete btn btn-danger">Delete</button>
+        {{/if}}
+      </p>
+
+    </div>
 
   </div>
 
