@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Collection imports
 import Settings from './';
 
 Settings.allow({

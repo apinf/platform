@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Meteor.startup(() => {

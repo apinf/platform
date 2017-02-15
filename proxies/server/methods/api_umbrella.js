@@ -1,14 +1,17 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
+import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
-import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
-import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 
-import _ from 'lodash';
+// APINF imports
+import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
 
 Meteor.methods({
   createApiUmbrellaWeb (proxyId) {

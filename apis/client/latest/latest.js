@@ -1,5 +1,5 @@
+// Collection imports
 import Apis from '/apis/collection';
-import { Template } from 'meteor/templating';
 
 Template.latestPublicApis.onCreated(function () {
   // Reference to Template instance

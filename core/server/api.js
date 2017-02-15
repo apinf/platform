@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({

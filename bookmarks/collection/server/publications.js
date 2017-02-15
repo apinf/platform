@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Collection imports
 import ApiBookmarks from '/bookmarks/collection';
 
 Meteor.publish('userApiBookmarks', function () {

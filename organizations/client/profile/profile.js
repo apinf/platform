@@ -1,8 +1,7 @@
-// Meteor packages import
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// APINF collections import
+// Collection imports
 import Organizations from '/organizations/collection/';
 
 Template.organizationProfile.onCreated(function () {

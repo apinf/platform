@@ -1,7 +1,9 @@
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Collection imports
 import OrganizationApis from '../../../collection';
 
 Template.deleteOrganizationApiConfirmation.events({

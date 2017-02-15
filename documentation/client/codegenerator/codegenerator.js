@@ -1,12 +1,14 @@
+// Meteor packages imports
 import { HTTP } from 'meteor/http';
-import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Template } from 'meteor/templating';
 
+// Npm packages imports
 import _ from 'lodash';
 
+// Collection imports
 import DocumentationFiles from '/documentation/collection';
+
+// APINF imports
 import specificLanguageNames from './codgeneratorSpecificLanguages';
 
 Template.sdkCodeGeneratorModal.onCreated(function () {

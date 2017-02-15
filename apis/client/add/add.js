@@ -1,5 +1,4 @@
-// Meteor package import
-import { Template } from 'meteor/templating';
+// Collection imports
 import Apis from '../../collection';
 
 Template.addApi.onCreated(function () {

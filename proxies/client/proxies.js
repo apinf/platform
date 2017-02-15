@@ -1,7 +1,7 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-// Apinf imports
+// Collection imports
 import Proxies from '../collection';
 
 Template.proxies.onCreated(function () {

@@ -1,9 +1,8 @@
-// Meteor imports
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// Utility imports
+// Npm packages imports
 import ss from 'simple-statistics';
 import moment from 'moment';
 import 'moment/min/locales.min';

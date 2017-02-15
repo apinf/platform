@@ -1,6 +1,7 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 
+// Collection imports
 import Branding from '/branding/collection';
 
 Template.home.onCreated(function () {

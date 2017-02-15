@@ -1,9 +1,12 @@
+// Meteor packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { Meteor } from 'meteor/meteor';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import ProxyBackends from '../../collection';
+
+// APINF imports
 import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 

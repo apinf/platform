@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Migrations } from 'meteor/percolate:migrations';
 
 Meteor.startup(() => {

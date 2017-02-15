@@ -1,6 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-import { Template } from 'meteor/templating';
+// Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
 
 Template.viewOrganizationLogo.onCreated(function () {

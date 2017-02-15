@@ -1,8 +1,8 @@
-// In multi-proxy case:
-// Change early selected and saved proxy to first position in dropdown list 'Select proxy'
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// In multi-proxy case:
+// Change early selected and saved proxy to first position in dropdown list 'Select proxy'
 Template.removeSelectedProxy.events({
   'click #confirm-remove-selected-proxy': function (event, templateInstance) {
     // Get template reference of proxyBackend

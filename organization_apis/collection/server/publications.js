@@ -1,6 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-
+// Collection imports
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 

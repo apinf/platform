@@ -1,13 +1,14 @@
+// Meteor packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { Template } from 'meteor/templating';
 
+// Npm packages imports
+import URI from 'urijs';
+
+// Collection imports
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
-
-import URI from 'urijs';
 
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();

@@ -1,5 +1,4 @@
-import { Template } from 'meteor/templating';
-
+// Collection imports
 import Apis from '/apis/collection';
 
 Template.visibilityToggle.events({

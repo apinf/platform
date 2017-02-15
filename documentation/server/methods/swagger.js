@@ -1,6 +1,4 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
-
+// Npm packages imports
 import SwaggerParser from 'swagger-parser';
 
 Meteor.methods({

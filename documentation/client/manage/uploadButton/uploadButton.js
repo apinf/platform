@@ -1,5 +1,4 @@
-import { Template } from 'meteor/templating';
-
+// Collection imports
 import DocumentationFiles from '/documentation/collection';
 
 Template.manageApiDocumentationModalUploadButton.onRendered(() => {

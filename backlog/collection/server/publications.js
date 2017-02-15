@@ -1,5 +1,4 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
+// Collection imports
 import ApiBacklogItems from '/backlog/collection';
 
 Meteor.publish('apiBacklogItems', (apiBackendId) => {

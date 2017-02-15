@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Accounts } from 'meteor/accounts-base';
 
 Accounts.onCreateUser((options, user) => {

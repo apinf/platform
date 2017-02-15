@@ -1,7 +1,4 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-
+// Collection imports
 import DocumentationFiles from '/documentation/collection';
 
 Meteor.publish(

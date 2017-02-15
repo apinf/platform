@@ -1,8 +1,9 @@
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import ProxyBackends from '/proxy_backends/collection';
 import Proxies from '../../collection';
 

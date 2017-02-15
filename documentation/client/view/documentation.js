@@ -1,8 +1,7 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Mongo } from 'meteor/mongo';
-import { Template } from 'meteor/templating';
 
+// Collection imports
 import DocumentationFiles from '/documentation/collection';
 import Settings from '/settings/collection';
 

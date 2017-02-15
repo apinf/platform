@@ -1,4 +1,7 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Collection imports
 import Apis from './';
 
 Apis.schema = new SimpleSchema({

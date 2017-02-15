@@ -2,6 +2,7 @@
   "env": {
     "browser": true,
     "jquery": true,
+    "meteor": true,
   },
   "parser": "babel-eslint",
     "parserOptions": {

@@ -1,6 +1,5 @@
-import { Template } from 'meteor/templating';
+// Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
-import $ from 'jquery';
 
 Template.uploadOrganizationLogoButton.onRendered(() => {
   // Assign resumable browse to element

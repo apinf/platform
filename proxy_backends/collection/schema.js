@@ -1,7 +1,10 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// Npm packages imports
 import _ from 'lodash';
 
+// Collection imports
 import Proxies from '/proxies/collection';
 import ApiUmbrellaSchema from './apiUmbrellaSchema';
 import ProxyBackends from './';

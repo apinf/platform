@@ -1,5 +1,5 @@
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Template } from 'meteor/templating';
 
 Template.proxyItem.events({
   'click #edit-proxy': function () {

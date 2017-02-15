@@ -1,6 +1,8 @@
-import Apis from '/apis/collection';
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+
+// Collection imports
+import Apis from '/apis/collection';
 
 Template.apiRemoveAuthorizedUser.events({
   'click #confirm-remove': function (event, templateInstance) {

@@ -1,4 +1,3 @@
-import { Mongo } from 'meteor/mongo';
 
 const FeedbackVotes = new Mongo.Collection('feedbackVotes');
 

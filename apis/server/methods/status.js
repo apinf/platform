@@ -1,5 +1,3 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
 
 import Apis from '/apis/collection';
 import { MonitoringData } from '/monitoring/collection';

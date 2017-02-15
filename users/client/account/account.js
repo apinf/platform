@@ -1,5 +1,5 @@
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Template } from 'meteor/templating';
 
 Template.account.events({
   'click #delete-account-button': function () {

@@ -1,11 +1,9 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// Collection imports
 import Organizations from '/organizations/collection';
-
-import $ from 'jquery';
 
 Template.organizationCatalog.onCreated(function () {
   // Get reference to template instance

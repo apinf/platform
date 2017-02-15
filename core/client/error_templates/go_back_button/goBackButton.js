@@ -1,4 +1,3 @@
-import { Template } from 'meteor/templating';
 
 Template.goBackButton.events({
   'click #go-back': function () {

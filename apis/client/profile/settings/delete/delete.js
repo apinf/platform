@@ -1,5 +1,5 @@
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Template } from 'meteor/templating';
 
 Template.apiSettingsDelete.events({
   // event handler to execute when delete API button is clicked

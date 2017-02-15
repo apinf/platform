@@ -1,6 +1,3 @@
-// Meteor packages import
-import { Template } from 'meteor/templating';
-
 // APINF import
 import convertStatusCode from './convert_status_code';
 

@@ -1,9 +1,8 @@
-/* jshint esversion: 6 */
+// Meteor packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
-import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
-import { Meteor } from 'meteor/meteor';
 
+// Collection imports
 import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import Settings from '/settings/collection';

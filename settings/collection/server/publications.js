@@ -1,7 +1,7 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Collection imports
 import Settings from '../';
 
 Meteor.publish('settings', function () {

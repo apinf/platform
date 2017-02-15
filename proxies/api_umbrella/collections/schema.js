@@ -1,8 +1,10 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// Npm packages imports
 import _ from 'lodash';
 
+// Collection imports
 import { ApiUmbrellaAdmins, ApiUmbrellaUsers } from './';
 
 // Describe collection for store Api Umbrella Admins

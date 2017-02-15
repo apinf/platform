@@ -1,6 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Collection imports
 import Organizations from '/organizations/collection';
 
 Template.organizationCatalogueToolbar.onRendered(function () {

@@ -1,6 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+
+// Collection imports
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../../collection';
 

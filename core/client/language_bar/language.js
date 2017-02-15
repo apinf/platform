@@ -1,6 +1,8 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
+
+// Npm packages imports
 import _ from 'lodash';
 
 // eslint-disable-next-line prefer-arrow-callback

@@ -1,11 +1,12 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
-import { MonitoringSettings } from '/monitoring/collection';
-import Apis from '/apis/collection';
-
+// Npm packages imports
 import _ from 'lodash';
+
+// Collection imports
+import Apis from '/apis/collection';
+import { MonitoringSettings } from '/monitoring/collection';
 
 Meteor.methods({
   startCron (apiId, url) {

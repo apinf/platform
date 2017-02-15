@@ -1,5 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-
+// Collection imports
 import { ApiUmbrellaAdmins, ApiUmbrellaUsers } from '../';
 
 Meteor.publish('apiUmbrellaAdmins', () => {

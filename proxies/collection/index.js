@@ -1,4 +1,3 @@
-import { Mongo } from 'meteor/mongo';
 
 const Proxies = new Mongo.Collection('proxies');
 

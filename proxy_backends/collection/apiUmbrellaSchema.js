@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-// Utility import
+
+// APINF imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from './regex';
 
 const RateLimitSchema = new SimpleSchema({

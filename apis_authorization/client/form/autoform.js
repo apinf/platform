@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   authorizedUserForm: {
@@ -47,7 +47,6 @@ AutoForm.hooks({
     },
     onError (error) {
       // do something with the error
-      // eslint-disable-next-line no-console
       console.log(error);
     },
   },

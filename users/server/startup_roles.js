@@ -1,6 +1,8 @@
-import _ from 'lodash';
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
+
+// Npm packages imports
+import _ from 'lodash';
 
 Meteor.startup(() => {
   // Make sure 'manager' role is defined

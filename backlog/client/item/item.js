@@ -1,8 +1,8 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Npm packages imports
 import moment from 'moment';
 import 'moment/min/locales.min';
 

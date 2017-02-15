@@ -1,9 +1,10 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
+// Collection imports
 import Apis from '/apis/collection';
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import ApiLogo from '../../collection';
 
 Meteor.startup(() => {
@@ -14,7 +15,6 @@ Meteor.startup(() => {
       contentType: file.file.type,
     }, (err) => {
       if (err) {
-        // eslint-disable-next-line no-console
         console.warn('File creation failed!', err);
         return;
       }

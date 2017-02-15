@@ -1,14 +1,13 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-
-import Apis from '/apis/collection';
+// Meteor packages imports
 import ApiKeys from '/api_keys/collection';
+import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
-import _ from 'lodash';
-import SwaggerUi from 'swagger-ui-browserify';
+// Npm packages imports
 import SwaggerClient from 'swagger-client';
+import SwaggerUi from 'swagger-ui-browserify';
+import _ from 'lodash';
 
 Template.swaggerUiContent.onCreated(function () {
   const instance = this;

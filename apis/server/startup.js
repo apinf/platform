@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
 Meteor.startup(() => {

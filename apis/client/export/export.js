@@ -1,8 +1,11 @@
-import { Template } from 'meteor/templating';
-import ProxyBackends from '/proxy_backends/collection';
-
+// Meteor packages imports
 import saveAs from 'meteor/pfafman:filesaver';
+
+// Npm packages imports
 import jsyaml from 'js-yaml';
+
+// Collection imports
+import ProxyBackends from '/proxy_backends/collection';
 
 Template.apiExport.onCreated(function () {
   // Get reference to template instance

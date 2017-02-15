@@ -1,12 +1,14 @@
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
+// Meteor packages imports
 import { FS } from 'meteor/cfs:filesystem';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { URI } from 'meteor/olragon:uri-js';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Npm packages imports
 import _ from 'lodash';
 import jsyaml from 'js-yaml';
 
+// Collection imports
 import DocumentationFiles from '/documentation/collection';
 
 Template.importApiDocumentation.events({

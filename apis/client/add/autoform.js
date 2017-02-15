@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
+// Meteor packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
 
 AutoForm.hooks({
   addApiForm: {
@@ -10,7 +10,6 @@ AutoForm.hooks({
         // Get current user ID
         const userId = Meteor.userId();
 
-        /* eslint no-param-reassign: ["error", { "props": false }] */
         // Add current user as API manager
         api.managerIds = [userId];
 

@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Collection imports
 import ProjectLogo from '/branding/logo/collection';
 
 Meteor.publish('projectLogo', () => {

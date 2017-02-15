@@ -1,4 +1,4 @@
-import { Template } from 'meteor/templating';
+// Collection imports
 import ApiBacklogItems from '../../collection';
 
 Template.apiBacklogItemForm.helpers({

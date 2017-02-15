@@ -1,7 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
+// Meteor packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
 
 Template.apiSelectPicker.helpers({
   // TODO: Update api Umbrella Admin case for multiple instance

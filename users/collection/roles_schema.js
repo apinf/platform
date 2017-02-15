@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 const RolesSchema = new SimpleSchema({

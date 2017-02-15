@@ -1,11 +1,9 @@
+// Meteor packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 // Function deletes proxy backend configuration from api Umbrella and Mongo DB
 // Also shows sAlert
-
-// Meteor packages import
-import { Meteor } from 'meteor/meteor';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { TAPi18n } from 'meteor/tap:i18n';
-
 export default function deleteProxyBackendConfig (proxyBackend) {
   Meteor.call('deleteProxyBackend', proxyBackend, (error) => {
     if (error) {

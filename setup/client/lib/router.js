@@ -1,5 +1,5 @@
+// Meteor packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Roles } from 'meteor/alanning:roles';
 

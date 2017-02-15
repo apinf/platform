@@ -1,7 +1,4 @@
-// Meteor package imports
-import { Template } from 'meteor/templating';
-
-// Apinf import
+// Collection imports
 import { MonitoringSettings } from '/monitoring/collection';
 
 Template.apiMonitoring.onCreated(function () {

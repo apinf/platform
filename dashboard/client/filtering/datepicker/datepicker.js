@@ -1,4 +1,4 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.timeFrameSelectPicker.onRendered(() => {

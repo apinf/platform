@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
+// Collection imports
 import OrganizationApis from '/organization_apis/collection';
 import Organizations from '../';
 

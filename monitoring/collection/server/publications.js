@@ -1,6 +1,4 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
-
+// Collection imports
 import { MonitoringSettings } from '/monitoring/collection';
 
 Meteor.publish('monitoringSettings', (apiId) => {

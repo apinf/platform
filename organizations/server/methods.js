@@ -1,15 +1,14 @@
-// Meteor packages import
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
+// Meteor packages imports
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
 
-// APINF collections import
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import OrganizationApis from '/organization_apis/collection';
 import Organizations from '/organizations/collection';
-
-import _ from 'lodash';
 
 Meteor.methods({
   getCurrentUserUnlinkedApis () {

@@ -1,4 +1,3 @@
-import { Template } from 'meteor/templating';
 
 Template.homeFooter.helpers({
   socialMediaIcon (networkName) {

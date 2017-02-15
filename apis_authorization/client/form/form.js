@@ -1,5 +1,4 @@
-import { Template } from 'meteor/templating';
-
+// APINF imports
 import emailSchema from './schema';
 
 Template.apiUserAuthorizationForm.helpers({

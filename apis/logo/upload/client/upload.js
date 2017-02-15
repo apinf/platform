@@ -1,9 +1,8 @@
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
+// Meteor packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
-import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import Apis from '/apis/collection';
 import ApiLogo from '../../collection';
 

@@ -1,6 +1,4 @@
-// Meteor package import
-import { Meteor } from 'meteor/meteor';
-// Apinf collections import
+// Collection imports
 import Branding from '/branding/collection';
 
 Meteor.publish('branding', () => {

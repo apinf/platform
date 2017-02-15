@@ -1,8 +1,4 @@
-// Import meteor packages
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-import { Template } from 'meteor/templating';
-// Import apinf collections
+// Collection imports
 import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 

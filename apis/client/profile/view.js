@@ -1,12 +1,11 @@
-// Meteor package imports
-import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+// Meteor packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// Apinf imports
+// Collection imports
+import ApiBacklogItems from '/backlog/collection';
 import Apis from '/apis/collection';
 import Feedback from '/feedback/collection';
-import ApiBacklogItems from '/backlog/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
 Template.viewApi.onCreated(function () {

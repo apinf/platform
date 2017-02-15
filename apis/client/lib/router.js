@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+// Meteor packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 FlowRouter.route('/apis/new', {
   name: 'addApi',

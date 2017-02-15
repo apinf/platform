@@ -1,5 +1,8 @@
+// Meteor packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { TAPi18n } from 'meteor/tap:i18n';
+
+// APINF imports
 import { getSiteTitle, getFromEmail } from '/core/helper_functions/mail_helpers';
 
 Accounts.emailTemplates.siteName = getSiteTitle();

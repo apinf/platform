@@ -1,3 +1,4 @@
+// Meteor packages imports
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 // User accounts guide

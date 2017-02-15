@@ -1,11 +1,14 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import Apis from '/apis/collection';
-import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import DocumentationFiles from '/documentation/collection';
+
+// APINF imports
+import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {
@@ -38,7 +41,6 @@ Meteor.startup(() => {
         contentType: file.file.type,
       }, (err) => {
         if (err) {
-          // eslint-disable-next-line no-console
           console.warn('File creation failed!', err);
           return;
         }

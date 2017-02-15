@@ -1,15 +1,12 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-
-import Apis from '/apis/collection';
+// Collection imports
 import ApiBacklogItems from '/backlog/collection';
 import ApiMetadata from '/metadata/collection';
+import Apis from '/apis/collection';
 import DocumentationFiles from '/documentation/collection';
 import Feedback from '/feedback/collection';
-import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 import OrganizationApis from '/organization_apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
+import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 
 Meteor.methods({
   // Remove API backend and related items

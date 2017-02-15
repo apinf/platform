@@ -1,6 +1,4 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
-
+// Collection imports
 import ProxyBackends from '/proxy_backends/collection';
 
 Meteor.methods({

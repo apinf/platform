@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
+// Npm packages imports
 import Clipboard from 'clipboard';
 
+// Collection imports
 import ApiKeys from '/api_keys/collection';
 import Proxies from '/proxies/collection';
 

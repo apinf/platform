@@ -1,6 +1,4 @@
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
-
+// Collection imports
 import FeedbackVotes from '/feedback_votes/collection';
 import Feedback from '../';
 

@@ -1,6 +1,4 @@
-// Meteor package import
-import { Template } from 'meteor/templating';
-// Import collections
+// Collection imports
 import Apis from '/apis/collection';
 
 Template.apiSettingsDetails.helpers({

@@ -1,10 +1,7 @@
-// Meteor packages import
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+// Npm packages imports
 import _ from 'lodash';
 
-// APINF collections import
+// Collection imports
 import OrganizationApis from '/organization_apis/collection';
 
 Template.connectApiToOrganizationModal.onCreated(function () {

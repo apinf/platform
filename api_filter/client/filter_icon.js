@@ -1,6 +1,3 @@
-// Meteor packages import
-import { Template } from 'meteor/templating';
-
 Template.apisFilterIcon.events({
   'click #filter-icon': (event, templateInstance) => {
     // Show/hide filter options

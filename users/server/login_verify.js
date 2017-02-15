@@ -1,11 +1,15 @@
-import { Meteor } from 'meteor/meteor';
+// Meteor packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Roles } from 'meteor/alanning:roles';
 
-import Settings from '/settings/collection';
-import { mailSettingsValid } from '/core/helper_functions/validate_settings';
+// Npm packages imports
+import _ from 'lodash';
 
-import { _ } from 'lodash';
+// Collection imports
+import Settings from '/settings/collection';
+
+// APINF imports
+import { mailSettingsValid } from '/core/helper_functions/validate_settings';
 
 // Login attempt verifier to require verified email before login
 export default function loginAttemptVerifier (parameters) {

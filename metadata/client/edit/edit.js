@@ -1,5 +1,7 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
+
+// Collection imports
 import ApiMetadata from '../../collection';
 
 Template.editApiMetadata.helpers({

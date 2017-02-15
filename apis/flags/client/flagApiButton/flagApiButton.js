@@ -1,7 +1,7 @@
+// Meteor packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { Template } from 'meteor/templating';
 
+// Collection imports
 import ApiFlags from '../../../collection';
 
 Template.flagApiButton.onCreated(function () {

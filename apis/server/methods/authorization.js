@@ -1,8 +1,8 @@
+// Meteor packages imports
 import { Accounts } from 'meteor/accounts-base';
-import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
+// Collection imports
 import Apis from '/apis/collection';
 
 Meteor.methods({

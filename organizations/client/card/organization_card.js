@@ -1,4 +1,4 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 Template.organizationCard.onCreated(function () {
