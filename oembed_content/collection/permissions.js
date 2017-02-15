@@ -3,11 +3,7 @@ import Posts from './';
 
 Posts.allow({
   insert (userId) {
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-    if (userIsAdmin) {
-      return true;
-    }
-    return false;
+    return Roles.userIsInRole(userId, ['admin', 'manager']);
   },
   remove (userId, doc) {
     // User can only delete own documents
