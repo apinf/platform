@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Clipboard from 'clipboard';
 import ApiKeys from '/api_keys/collection';
 import { Proxies } from '/proxies/collection';
+import Posts from '/oembed_content/collection';
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
@@ -102,11 +103,32 @@ Template.apiDetails.helpers({
     // Return apiKey
     return apiKey;
   },
+  showIfPostsOrUserHasRights () {
+    return Posts.find().count();
+
+    // if (Posts.find().count() > 0) {
+    //   console.log('po=', Posts.find().count());
+    //
+    //   return true;
+    // }
+
+    // const userId = Meteor.userId();
+
+    // Check that user is logged in
+    // if (userId) {
+    //   // Check if user is manager of this API
+    //   const userIsManager = this.api.currentUserCanManage();
+    //
+    //   console.log('man=', userIsManager);
+    //   // if user is manager or administrator, they can edit
+    //   return userIsManager;
+    // }
+  },
 });
 
 Template.apiDetails.events({
-  'click #add_oembed': function(e) {
+  'click #add_oembed': function (e) {
     const api = this.api;
-    Modal.show("postsForm", {pageHeader: "Add Embedded Content", api:api})
-  }
+    Modal.show('postsForm', { pageHeader: 'Add Embedded Content', api });
+  },
 });
