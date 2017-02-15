@@ -20,11 +20,15 @@ Template.postItem.helpers({
 
 Template.postItem.events({
   'click .delete': function (event, templateInstance) {
+    // Get post from template instance
     const post = templateInstance.data.post;
+    // Call modal confirmation dialogue and action
     Modal.show('deletePostConfirmation', { post });
   },
   'click .edit': function (event, templateInstance) {
+    // Get post from template instance
     const post = templateInstance.data.post;
+    // Call modal for editing, passing post and modal header as parameters
     Modal.show('postsForm', {
       postItem: post,
       pageHeader: 'Edit post item',

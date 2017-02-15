@@ -4,9 +4,9 @@ import Posts from '/oembed_content/collection';
 
 Template.deletePostConfirmation.events({
   'click #modal-delete-post': function (event, templateInstance) {
-    // Get API ID
+    // Get Post ID
     const postId = templateInstance.data.post._id;
-    console.log(postId);
+    // Remove post according to post Id
     Posts.remove(postId);
     Modal.hide('deletePostConfirmation');
   },
