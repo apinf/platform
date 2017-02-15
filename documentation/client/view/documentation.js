@@ -29,7 +29,11 @@ Template.apiDocumentation.onRendered(() => {
 });
 
 Template.apiDocumentation.helpers({
-  uploadedDocumentationLink () {
+  documentation () {
+    // Get documentation method (URL of File)
+    const documentationMethod = this.api.documentationMethod;
+
+    // Get uploaded documentation file ID
     const documentationFileId = this.api.documentationFileId;
 
     // Convert to Mongo ObjectID
@@ -38,25 +42,36 @@ Template.apiDocumentation.helpers({
     // Get documentation file Object
     const documentationFile = DocumentationFiles.findOne(objectId);
 
-    let documentationFileUrl;
+    // Get remote swagger file URL
+    const documentationUrl = this.api.documentationUrl;
 
-    // Check if documentation file is available
-    if (documentationFile) {
+    let documentation;
+
+    // Check if documentation file is available and method is File
+    if (documentationFile && documentationMethod === 'File') {
       // Build documentation files base url
       const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
       const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
 
       // Get documentation file URL
-      documentationFileUrl = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+      documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+    } else if (documentationUrl && documentationMethod === 'URL') {
+      // Get documentation URL
+      documentation = documentationUrl;
     }
-    return documentationFileUrl;
+
+    return documentation;
   },
-  documentationLink () {
-    // get documentation link
-    return this.api.documentation_link;
+  documentationUrl () {
+    // Get documentation URL
+    return this.api.documentationUrl;
+  },
+  otherDocumentationUrl () {
+    // Get other documentation link
+    return this.api.otherDocumentationUrl;
   },
   documentationExists () {
-    return !!(this.api.documentationFileId);
+    return !!(this.api.documentationFileId || this.api.documentationUrl);
   },
   codegenServerExists () {
     // Get template instance
