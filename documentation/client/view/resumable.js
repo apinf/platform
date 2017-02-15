@@ -20,7 +20,7 @@ Meteor.startup(() => {
     // Get api id
     const api = Session.get('api');
 
-    // Update documenation file id field
+    // Update documentation file id field
     Apis.update(api._id, { $set: { documentationFileId } });
 
     // Get success message translation
