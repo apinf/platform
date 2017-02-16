@@ -1,9 +1,6 @@
-import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
-import DocumentationFiles from '/documentation/collection';
 import Settings from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
@@ -29,42 +26,8 @@ Template.apiDocumentation.onRendered(() => {
 });
 
 Template.apiDocumentation.helpers({
-  documentation () {
-    // Get documentation method (URL of File)
-    const documentationType = this.api.documentationType;
-
-    // Get uploaded documentation file ID
-    const documentationFileId = this.api.documentationFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
-    // Get documentation file Object
-    const documentationFile = DocumentationFiles.findOne(objectId);
-
-    // Get remote swagger file URL
-    const documentationUrl = this.api.documentationUrl;
-
-    let documentation;
-
-    // Check if documentation file is available and method is File
-    if (documentationFile && documentationType === 'file') {
-      // Build documentation files base url
-      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
-
-      // Get documentation file URL
-      documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
-    } else if (documentationUrl && documentationType === 'url') {
-      // Get documentation URL
-      documentation = documentationUrl;
-    }
-
-    return documentation;
-  },
-  documentationUrl () {
-    // Get documentation URL
-    return this.api.documentationUrl;
+  apiDoc () {
+    return this.api.documentation();
   },
   otherDocumentationUrl () {
     // Get other documentation link

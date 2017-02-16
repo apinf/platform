@@ -23,6 +23,9 @@ Meteor.startup(() => {
     // Update documentation file id field
     Apis.update(api._id, { $set: { documentationFileId } });
 
+    // Set documentationType to file
+    Apis.update(api._id, { $set: { documentationType: 'file' } });
+
     // Get success message translation
     const message = TAPi18n.__('manageApiDocumentationModal_AddedFile_Message');
 
