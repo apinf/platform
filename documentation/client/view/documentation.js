@@ -29,38 +29,8 @@ Template.apiDocumentation.onRendered(() => {
 });
 
 Template.apiDocumentation.helpers({
-  documentation () {
-    // Get documentation method (URL of File)
-    const documentationMethod = this.api.documentationMethod;
-
-    // Get uploaded documentation file ID
-    const documentationFileId = this.api.documentationFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
-    // Get documentation file Object
-    const documentationFile = DocumentationFiles.findOne(objectId);
-
-    // Get remote swagger file URL
-    const documentationUrl = this.api.documentationUrl;
-
-    let documentation;
-
-    // Check if documentation file is available and method is File
-    if (documentationFile && documentationMethod === 'File') {
-      // Build documentation files base url
-      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
-
-      // Get documentation file URL
-      documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
-    } else if (documentationUrl && documentationMethod === 'URL') {
-      // Get documentation URL
-      documentation = documentationUrl;
-    }
-
-    return documentation;
+  apiDoc () {
+    return this.api.swaggerDocumentationUrl();
   },
   documentationUrl () {
     // Get documentation URL

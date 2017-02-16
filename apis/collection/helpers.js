@@ -1,5 +1,6 @@
 // Meteor imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
 
@@ -12,6 +13,7 @@ import _ from 'lodash';
 // Collection imports
 import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
+import DocumentationFiles from '/documentation/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -175,4 +177,37 @@ Apis.helpers({
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
   },
+  swaggerDocumentationUrl () {
+    // Get documentation method (URL of File)
+    const documentationMethod = this.documentationMethod;
+
+    // Get uploaded documentation file ID
+    const documentationFileId = this.documentationFileId;
+
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+
+    // Get documentation file Object
+    const documentationFile = DocumentationFiles.findOne(objectId);
+
+    // Get remote swagger file URL
+    const documentationUrl = this.documentationUrl;
+
+    let documentation;
+
+    // Check if documentation file is available and method is File
+    if (documentationFile && documentationMethod === 'File') {
+      // Build documentation files base url
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+
+      // Get documentation file URL
+      documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+    } else if (documentationUrl && documentationMethod === 'URL') {
+      // Get documentation URL
+      documentation = documentationUrl;
+    }
+
+    return documentation;
+  }
 });
