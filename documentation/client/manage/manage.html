@@ -22,13 +22,13 @@
               {{_ "import_ApiDocumentation_Title" }}
             </legend>
             {{> afQuickField
-              name="documentationMethod"
+              name="documentationType"
               options="allowed"
               firstOption=false
             }}
             {{#if afFieldValueIs
-              name="documentationMethod"
-              value="File"
+              name="documentationType"
+              value="file"
             }}
             <div class="documentation-file">
               {{# unless documentationFile }}

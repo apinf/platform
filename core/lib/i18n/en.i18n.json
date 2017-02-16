@@ -483,6 +483,19 @@
         "url": {
           "label": "URL"
         },
+        "documentationType": {
+          "label": "Provide API Documentation via",
+          "options": {
+            "url": "URL",
+            "file": "File"
+          }
+        },
+        "documentationUrl": {
+          "label": "Link to API Documentation"
+        },
+        "otherDocumentationUrl": {
+          "label": "Link to other API Documentation"
+        },
         "submit_methods": {
           "label": "Allow try-out for following methods:"
         },
@@ -499,9 +512,6 @@
             "production": "Production",
             "deprecated": "Deprecated"
           }
-        },
-        "documentation_link": {
-          "label": "Documentation link"
         }
       },
       "apiMetadata": {
