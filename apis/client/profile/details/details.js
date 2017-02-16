@@ -130,6 +130,6 @@ Template.apiDetails.helpers({
 Template.apiDetails.events({
   'click #add_oembed': function (e) {
     const api = this.api;
-    Modal.show('postsForm', { pageHeader: 'Add Embedded Content', api });
+    Modal.show('postsForm', { pageHeader: 'Add related media', api });
   },
 });
