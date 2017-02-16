@@ -1,9 +1,6 @@
-import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
-import DocumentationFiles from '/documentation/collection';
 import Settings from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
