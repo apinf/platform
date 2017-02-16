@@ -105,25 +105,23 @@ Template.apiDetails.helpers({
     return apiKey;
   },
   showIfPostsOrUserHasRights () {
-    return Posts.find().count();
-
-    // if (Posts.find().count() > 0) {
-    //   console.log('po=', Posts.find().count());
-    //
-    //   return true;
-    // }
-
-    // const userId = Meteor.userId();
+    const instance = Template.instance();
+    console.log('inst=', instance);
+    const userId = Meteor.userId();
 
     // Check that user is logged in
-    // if (userId) {
-    //   // Check if user is manager of this API
-    //   const userIsManager = this.api.currentUserCanManage();
-    //
-    //   console.log('man=', userIsManager);
-    //   // if user is manager or administrator, they can edit
-    //   return userIsManager;
-    // }
+    if (userId) {
+      // Check if user is manager of this API
+      const userIsManager = this.api.currentUserCanManage();
+      // if user is manager or administrator, they can edit
+      if (userIsManager) {
+        console.log('man=', userIsManager);
+        return true;
+      }
+    }
+    const nbrOfPosts = Posts.find().count();
+    console.log('posteja=', nbrOfPosts);
+    return nbrOfPosts > 0;
   },
 });
 
