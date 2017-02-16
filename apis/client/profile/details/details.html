@@ -82,22 +82,22 @@
   {{/ if }}
   <!-- Embedded contents -->
   <!-- {{#if showIfPostsOrUserHasRights }} -->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 id="oembedded-title" class="panel-title clearfix">
-        {{#if api.currentUserCanManage }}
-          <button type="button" class="btn btn-xs btn-success pull-right" id="add_oembed" title='Add embedded content'>Add related media!</button>
-        {{/if}}
-        Related Media
-        <!-- {{_ "viewApi_Details_Title" }} -->
-      </h2>
-      <!-- {{ showIfPostsOrUserHasRights }} -->
-    </div>
-    <div class="panel-body">
-      <div class="row">
-          {{> postsList posts=posts api=api }}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 id="oembedded-title" class="panel-title clearfix">
+          {{#if api.currentUserCanManage }}
+            <button type="button" class="btn btn-xs btn-success pull-right" id="add_oembed" title='Add embedded content'>Add related media!</button>
+          {{/if}}
+          Related Media
+          <!-- {{_ "viewApi_Details_Title" }} -->
+        </h2>
+        {{ showIfPostsOrUserHasRights }}
+      </div>
+      <div class="panel-body">
+        <div class="row">
+            {{> postsList posts=posts api=api }}
+        </div>
       </div>
     </div>
-  </div>
   <!-- {{/ if }} -->
 </template>
