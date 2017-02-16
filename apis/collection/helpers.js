@@ -179,7 +179,7 @@ Apis.helpers({
   },
   documentationUrl () {
     // Get documentation method (URL of File)
-    const documentationMethod = this.documentationMethod;
+    const documentationType = this.documentationType;
 
     // Get uploaded documentation file ID
     const documentationFileId = this.documentationFileId;
@@ -196,18 +196,18 @@ Apis.helpers({
     let documentation;
 
     // Check if documentation file is available and method is File
-    if (documentationFile && documentationMethod === 'File') {
+    if (documentationFile && documentationType === 'file') {
       // Build documentation files base url
       const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
       const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
 
       // Get documentation file URL
       documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
-    } else if (documentationUrl && documentationMethod === 'URL') {
+    } else if (documentationUrl && documentationType === 'url') {
       // Get documentation URL
       documentation = documentationUrl;
     }
 
     return documentation;
-  }
+  },
 });
