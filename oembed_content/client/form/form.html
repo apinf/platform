@@ -16,7 +16,6 @@
           {{#autoForm id="postsForm" type=updateInsert doc=postItem collection=postsCollection}}
           {{> afQuickField name='title' }}
           {{> afQuickField name='url' }}
-          {{> afQuickField name='description' }}
           {{> afQuickField name='apiId' type="hidden" value=api._id }}
           <button type="submit" class="btn btn-primary">Submit</button>
           {{/autoForm}}
