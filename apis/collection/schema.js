@@ -32,14 +32,14 @@ Apis.schema = new SimpleSchema({
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationMethod: { // any better name?
+  documentationType: {
     type: String,
     optional: false,
     allowedValues: [
-      'File',
-      'URL',
+      'url',
+      'file',
     ],
-    defaultValue: 'URL',
+    defaultValue: 'url',
   },
   otherDocumentationUrl: {
     type: String,
