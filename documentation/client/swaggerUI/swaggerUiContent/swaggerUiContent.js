@@ -110,7 +110,7 @@ Template.swaggerUiContent.onCreated(function () {
 
     // Get api
     const api = Apis.findOne(apiId);
-    const documentationUrl = api.swaggerDocumentationUrl();
+    const documentationUrl = api.documentationUrl();
 
     // Check if URL of documentation is changed
     if (swagger.getOption('url') !== documentationUrl) {

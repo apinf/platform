@@ -177,7 +177,7 @@ Apis.helpers({
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
   },
-  swaggerDocumentationUrl () {
+  documentationUrl () {
     // Get documentation method (URL of File)
     const documentationMethod = this.documentationMethod;
 
