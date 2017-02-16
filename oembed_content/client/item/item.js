@@ -31,7 +31,7 @@ Template.postItem.events({
     // Call modal for editing, passing post and modal header as parameters
     Modal.show('postsForm', {
       postItem: post,
-      pageHeader: 'Edit post item',
+      pageHeader: 'Edit related media',
     });
   },
 });
