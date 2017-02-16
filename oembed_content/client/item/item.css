@@ -25,23 +25,10 @@ position: relative;
   box-sizing:
   border-box !important;
 }
-
-.raw-massonry {
-  -moz-column-width: 20em;
- -webkit-column-width: 20em;
- column-width: 20em;
- -moz-column-gap: .25em;
- -webkit-column-gap: .25em;
- column-gap: .25em;
+.col-grid{
+      margin-left: -1em;
 }
 
-.panel {
- display: inline-block;
- margin: .5em;
- padding: 0;
- width: 98%;
-}
-/* Masonry ends */
 .oembedall-container a{
   display: none;
 }
