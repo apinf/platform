@@ -39,7 +39,7 @@ Apis.schema = new SimpleSchema({
       'url',
       'file',
     ],
-    defaultValue: 'url',
+    defaultValue: 'file',
   },
   otherDocumentationUrl: {
     type: String,
