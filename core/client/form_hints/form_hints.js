@@ -9,7 +9,7 @@ const formHints = {
       placement: 'left',
     },
   },
-  uploadApiDocumentation: {
+  addApiDocumentation: {
     message: TAPi18n.__('manageApiDocumentationModal_hints_uploadApiDocumentation'),
     options: {
       placement: 'left',
