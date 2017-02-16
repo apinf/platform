@@ -177,7 +177,7 @@ Apis.helpers({
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
   },
-  documentationUrl () {
+  documentation () {
     // Get documentation method (URL of File)
     const documentationType = this.documentationType;
 

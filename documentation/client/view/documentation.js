@@ -30,7 +30,7 @@ Template.apiDocumentation.onRendered(() => {
 
 Template.apiDocumentation.helpers({
   apiDoc () {
-    return this.api.documentationUrl();
+    return this.api.documentation();
   },
   documentationUrl () {
     // Get documentation URL
