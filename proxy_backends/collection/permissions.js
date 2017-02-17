@@ -1,6 +1,5 @@
-// Apinf import
-import { ProxyBackends } from './';
 import Apis from '/apis/collection';
+import ProxyBackends from './';
 
 ProxyBackends.allow({
   insert (userId, backend) {
@@ -10,9 +9,7 @@ ProxyBackends.allow({
     const api = Apis.findOne(backend.apiId);
 
     // Check if current user can edit API
-    if (api && api.currentUserCanEdit()) {
-      return true;
-    }
+    return (api && api.currentUserCanEdit());
   },
   update (userId, backend) {
     // Only allow API Managers or Administrators to update
@@ -21,9 +18,7 @@ ProxyBackends.allow({
     const api = Apis.findOne(backend.apiId);
 
     // Check if current user can edit API
-    if (api && api.currentUserCanEdit()) {
-      return true;
-    }
+    return (api && api.currentUserCanEdit());
   },
   remove (userId, backend) {
     // Only allow API Managers or Administrators to remove
@@ -32,8 +27,6 @@ ProxyBackends.allow({
     const api = Apis.findOne(backend.apiId);
 
     // Check if current user can edit API
-    if (api && api.currentUserCanEdit()) {
-      return true;
-    }
+    return (api && api.currentUserCanEdit());
   },
 });

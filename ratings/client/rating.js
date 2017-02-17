@@ -1,13 +1,14 @@
 import { Meteor } from 'meteor/meteor';
-import $ from 'jquery';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
-// Collection imports
-import Apis from '/apis/collection';
-import { ApiBackendRatings } from '../collection';
+import $ from 'jquery';
 
-Template.apiBackendRating.created = function () {
+import Apis from '/apis/collection';
+import ApiBackendRatings from '../collection';
+
+Template.apiBackendRating.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -25,9 +26,9 @@ Template.apiBackendRating.created = function () {
     'apiBackendRatings',
     apiBackendId
   );
-};
+});
 
-Template.apiBackendRating.rendered = function () {
+Template.apiBackendRating.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -37,7 +38,7 @@ Template.apiBackendRating.rendered = function () {
   // get API Backend document
   const apiBackend = Apis.findOne(apiBackendId);
 
-  instance.autorun(function () {
+  instance.autorun(() => {
     // Make sure API Backend Rating subscription is ready
     if (instance.apiRatingSubscription.ready()) {
       // Check if user has previously rated API Backend
@@ -47,21 +48,21 @@ Template.apiBackendRating.rendered = function () {
       });
 
       // Add the jQuery RateIt widget
-      $('#rating-' + apiBackendId).rateit({
+      $(`#rating-${apiBackendId}`).rateit({
         max: 4,
         step: 1,
         resetable: false,
         // Only logged in user can rate
-        readonly: Meteor.userId() ? false : true,
+        readonly: !Meteor.userId(),
         // use previous rating, if exists
         value: userRating ? userRating.rating : apiBackend.averageRating,
       });
     }
   });
-};
+});
 
 Template.apiBackendRating.events({
-  'click .rateit': function (event, instance) {
+  'click .rateit': function (event, templateInstance) {
     // Make sure there is a Meteor user ID for voting
     if (Meteor.userId() === null) {
       // Get translated user message
@@ -74,10 +75,10 @@ Template.apiBackendRating.events({
     }
 
     // Get API Backend ID from template data context
-    const apiBackendId = instance.data._id;
+    const apiBackendId = templateInstance.data._id;
 
     // Get rating from template based on API Backend ID
-    const rating = $('#rating-' + apiBackendId).rateit('value');
+    const rating = $(`#rating-${apiBackendId}`).rateit('value');
 
     // Get current user ID
     const userId = Meteor.userId();
@@ -105,7 +106,7 @@ Template.apiBackendRating.events({
     }
 
     // Update the API Backend average rating
-    Meteor.call('setApiBackendAverageRating', apiBackendId);
+    return Meteor.call('setApiBackendAverageRating', apiBackendId);
   },
 });
 
@@ -114,6 +115,7 @@ Template.apiBackendRating.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
+    let userOwnRating;
     if (instance.apiRatingSubscription.ready()) {
       // Determine if user has rated API Backend
       // Get API Backend ID from template data context
@@ -131,13 +133,16 @@ Template.apiBackendRating.helpers({
       // If previous rating exists
       if (previousRating) {
         // Return user rating class
-        return 'user-own-rating';
+        userOwnRating = 'user-own-rating';
       }
     }
+    return userOwnRating;
   },
   ratingCount () {
     // Get reference to template instance
     const instance = Template.instance();
+
+    let apiBackendRatingsCount;
 
     // Make sure API Ratings subscription is ready
     if (instance.apiRatingSubscription.ready()) {
@@ -148,15 +153,15 @@ Template.apiBackendRating.helpers({
       const apiBackendRatings = ApiBackendRatings.find({ apiBackendId });
 
       // Get the count of API Backend ratings
-      const apiBackendRatingsCount = apiBackendRatings.count();
-
-      return apiBackendRatingsCount;
+      apiBackendRatingsCount = apiBackendRatings.count();
     }
+    return apiBackendRatingsCount;
   },
   userHasRating () {
     // Get reference to template instance
     const instance = Template.instance();
 
+    let previousRating;
     if (instance.apiRatingSubscription.ready()) {
       // Determine if user has rated API Backend
       // Get API Backend ID from template data context
@@ -166,18 +171,12 @@ Template.apiBackendRating.helpers({
       const userId = Meteor.userId();
 
       // Check if user has previously rated API Backend
-      const previousRating = ApiBackendRatings.findOne({
+      previousRating = ApiBackendRatings.findOne({
         apiBackendId,
         userId,
       });
-
-      // If previous rating exists
-      if (previousRating) {
-        // Return user rating class
-        return true;
-      } else {
-        return false;
-      }
     }
+    // If previous rating exists return user rating class
+    return !!(previousRating);
   },
 });

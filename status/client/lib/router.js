@@ -3,7 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 FlowRouter.route('/status', {
   name: 'statusCheck',
-  action: function () {
+  action () {
     BlazeLayout.render('masterLayout', { main: 'statusCheck' });
   },
 });

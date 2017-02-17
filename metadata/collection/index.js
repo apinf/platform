@@ -1,3 +1,5 @@
-const ApiMetadata = new Mongo.Collection("apiMetadata");
+import { Mongo } from 'meteor/mongo';
 
-export { ApiMetadata };
+const ApiMetadata = new Mongo.Collection('apiMetadata');
+
+export default ApiMetadata;

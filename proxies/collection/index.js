@@ -1,3 +1,5 @@
+import { Mongo } from 'meteor/mongo';
+
 const Proxies = new Mongo.Collection('proxies');
 
-export { Proxies };
+export default Proxies;

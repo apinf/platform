@@ -4,7 +4,7 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 import CoverPhoto from '/branding/cover_photo/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance

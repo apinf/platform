@@ -1,4 +1,4 @@
-import { ApiMetadata } from '/metadata/collection';
+import ApiMetadata from '/metadata/collection';
 import Apis from '/apis/collection';
 
 ApiMetadata.allow({
@@ -11,13 +11,12 @@ ApiMetadata.allow({
         return false;
     } else {
       // Find related API Backend, select only "managerIds" field
-      const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
+    const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
       // Check if current user can edit API Backend
-      const userCanEdit = api.currentUserCanEdit();
+    const userCanEdit = api.currentUserCanEdit();
 
-      return userCanEdit;
-    }
+    return userCanEdit;
   },
   update (userId, metadata) {
     // Get API Backend ID

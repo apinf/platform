@@ -1,9 +1,9 @@
-import { TAPi18n } from 'meteor/tap:i18n';
-import { Meteor } from 'meteor/meteor';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { AutoForm } from 'meteor/aldeed:autoform';
+import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { ProxyBackends } from '../../collection';
+import ProxyBackends from '../../collection';
 import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
@@ -11,6 +11,8 @@ AutoForm.hooks({
   proxyBackendForm: {
     before: {
       insert (proxyBackend) {
+        // TODO: Refactor this method. It is too long and complex
+
         // No selected any proxy
         if (proxyBackend && proxyBackend.proxyId === undefined) {
           // Notify users about no selected proxy
@@ -50,8 +52,8 @@ AutoForm.hooks({
               // Create API backend on API Umbrella
               Meteor.call('createApiBackendOnApiUmbrella',
                 proxyBackend.apiUmbrella, proxyBackend.proxyId,
-                (error, response) => {
-                  if (error) {
+                (createApiBackendOnApiUmbrellaError, response) => {
+                  if (createApiBackendOnApiUmbrellaError) {
                     // Throw a Meteor error
                     Meteor.error(500, error);
                     return false;
@@ -77,16 +79,20 @@ AutoForm.hooks({
                     // Publish the API Backend on API Umbrella
                     Meteor.call('publishApiBackendOnApiUmbrella',
                       umbrellaBackendId, proxyBackend.proxyId,
-                      (error) => {
-                        if (error) {
+                      (publishApiBackendOnApiUmbrellaError) => {
+                        if (publishApiBackendOnApiUmbrellaError) {
                           Meteor.throw(500, error);
                         } else {
                           // Insert the Proxy Backend document, asynchronous
                           form.result(proxyBackend);
                         }
+                        // Autoform does not expect anything to be returned
+                        return undefined;
                       }
                     );
                   }
+                  // Autoform does not expect anything to be returned
+                  return undefined;
                 });
             } else {
               // Alert the user of frontend prefix unique issue
@@ -97,8 +103,12 @@ AutoForm.hooks({
             }
           });
         }
+        // Autoform does not expect anything to be returned
+        return undefined;
       },
       update (updateDoc) {
+        // TODO: Refactor this method. It is too long and complex
+
         // Get reference to autoform instance, for form submission callback
         const form = this;
         // Get proxyBackend $set values
@@ -204,6 +214,8 @@ AutoForm.hooks({
               });
           }
         }
+        // Autoform does not expect anything to be returned
+        return undefined;
       },
     },
     onSuccess (formType) {

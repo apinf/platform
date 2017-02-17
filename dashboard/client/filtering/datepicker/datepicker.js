@@ -13,8 +13,11 @@ Template.timeFrameSelectPicker.onRendered(() => {
   // Save chosen date to URL parameter
   // in order to share dashboard state
   .on('changeDate', (event) => {
-    // Set fromDate URL parameter to ISO YYYY-mm-dd
-    FlowRouter.setQueryParams({ fromDate: event.format('yyyy-mm-dd') });
+    // Modifies the current history entry instead of creating a new one
+    FlowRouter.withReplaceState(() => {
+      // Set fromDate URL parameter to ISO YYYY-mm-dd
+      FlowRouter.setQueryParams({ fromDate: event.format('yyyy-mm-dd') });
+    });
   });
 
   // Check URL parameters for 'from date' for analytics timeframe
@@ -29,9 +32,12 @@ Template.timeFrameSelectPicker.onRendered(() => {
   $('#analytics-timeframe-end').datepicker()
   // Save chosen date to URL parameter
   .on('changeDate', (event) => {
-    // Set fromDate URL parameter to ISO YYYY-mm-dd
-    // in order to share dashboard state
-    FlowRouter.setQueryParams({ toDate: event.format('yyyy-mm-dd') });
+    // Modifies the current history entry instead of creating a new one
+    FlowRouter.withReplaceState(() => {
+      // Set fromDate URL parameter to ISO YYYY-mm-dd
+      // in order to share dashboard state
+      FlowRouter.setQueryParams({ toDate: event.format('yyyy-mm-dd') });
+    });
   });
 
   // Check URL parameters for 'from date' for analytics timeframe

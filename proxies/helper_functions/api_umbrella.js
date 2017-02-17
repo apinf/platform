@@ -1,14 +1,15 @@
 // Validates Api umbrella configuration settings
-export function apiUmbrellaSettingsValid (proxy) {
+function hasValidApiUmbrellaSettings (proxy) {
+  let isValid;
+
   if ((typeof proxy !== 'undefined') && proxy.type === 'apiUmbrella') {
-    if (
+    isValid = (
       proxy.apiUmbrella.url &&
       proxy.apiUmbrella.apiKey &&
       proxy.apiUmbrella.authToken
-    ) {
-      return true;
-    }
+    );
   }
-
-  return false;
+  return isValid;
 }
+
+export default hasValidApiUmbrellaSettings;

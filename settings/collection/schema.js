@@ -1,5 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Settings } from './';
+import Settings from './';
 
 Settings.schema = new SimpleSchema({
   access: {

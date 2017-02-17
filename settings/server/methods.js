@@ -5,7 +5,7 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // Apinf import
 import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
-import { Settings } from '../collection';
+import Settings from '../collection';
 
 Meteor.methods({
   configureSmtpSettings () {
