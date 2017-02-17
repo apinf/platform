@@ -56,6 +56,7 @@
   "apiBacklogList_noApiBacklogItemsFound": "No backlog items found for this API.",
   "apiBacklog_mainTitle": "Backlog",
   "apiCard_labelText_private": "private",
+  "apiCard_tooltipTitle_averageRating": "Average Rating",
   "apiSettingsDelete_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
@@ -782,6 +783,9 @@
         }
       }
   },
+  "sdkCodeGeneratorModal_buttonText_download": "Download",
+  "sdkCodeGeneratorModal_labelText_selectLanguage": "Select language",
+  "sdkCodeGeneratorModal_firstOption_language": "(Language)",
   "sdkCodeGeneratorModal_errorText": "Your file is not supported by the Code Generator. Please upload the correct file",
   "sdkCodeGeneratorModal_errorTextInvalidHost": "Code Generator server is incorrect. Please report to administrator about this problem.",
   "sdkCodeGeneratorModal_Title": "Generate SDK file",
