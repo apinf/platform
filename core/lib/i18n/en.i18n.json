@@ -618,7 +618,12 @@
               "placeholder": "Your message"
           },
           "messageType": {
-              "label": "Choose message type"
+              "label": "Choose message type",
+              "options": {
+                "Feedback": "Feedback",
+                "Error report": "Error report",
+                "Feature request": "Feature request"
+              }
           }
       },
       "monitoring": {
