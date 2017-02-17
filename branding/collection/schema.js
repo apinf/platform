@@ -51,7 +51,9 @@ Branding.schema = new SimpleSchema({
     optional: true,
     allowedValues: ['Facebook', 'Twitter', 'Github'],
     autoform: {
-      firstOption: TAPi18n.__('schemas.branding.socialMedia.$.name.firstOption'),
+      firstOption () {
+        return TAPi18n.__('schemas.branding.socialMedia.$.name.firstOption');
+      },
     },
   },
   'socialMedia.$.url': {
