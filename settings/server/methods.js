@@ -79,7 +79,7 @@ Meteor.methods({
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
       throw Meteor.Error(message);
-      }
+    }
   },
   updateMailConfiguration () {
     // Try if settings exist
