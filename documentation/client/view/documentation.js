@@ -26,10 +26,6 @@ Template.apiDocumentation.onRendered(() => {
 });
 
 Template.apiDocumentation.helpers({
-  otherDocumentationUrl () {
-    // Get other documentation link
-    return this.api.otherDocumentationUrl;
-  },
   documentationExists () {
     return !!(this.api.documentationFileId || this.api.documentationUrl);
   },
