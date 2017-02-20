@@ -1,42 +1,44 @@
-import { Roles } from 'meteor/alanning:roles';
-import _ from 'lodash';
+import Apis from '/apis/collection';
 import Posts from './';
 
-
 Posts.allow({
-  insert (userId) {
-    return Roles.userIsInRole(userId, ['admin', 'manager']);
-  },
-  remove (userId) {
-    // User can only delete own documents
-    // console.log(doc);
-    // const userCanDelete = doc.userId === userId;
-    // return userCanDelete;
-    if (userId) {
-      // Check if user is manager of this API
-      const isManager = _.includes(this.managerIds, userId);
-      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-      if (isManager || userIsAdmin) {
-        return true;
-      }
+  insert (userId, post) {
+    const postApiId = post.apiId;
+    // Get API owning current post
+    const postApi = Apis.findOne(postApiId);
+    // Check if current user can edit API
+    const currentUserCanEdit = postApi.currentUserCanEdit();
+    if (currentUserCanEdit) {
+      // User is allowed to perform action
+      return true;
     }
+    // User is not allowded to perform action
     return false;
   },
-  update (userId) {
-    if (userId) {
-      // Check if user is manager of this API
-      const isManager = _.includes(this.managerIds, userId);
-      console.log('manager', userId);
-      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-      if (isManager || userIsAdmin) {
-        return true;
-      }
+  remove (userId, post) {
+    const postApiId = post.apiId;
+    // Get API owning current post
+    const postApi = Apis.findOne(postApiId);
+    // Check if current user can edit API
+    const currentUserCanEdit = postApi.currentUserCanEdit();
+    if (currentUserCanEdit) {
+      // User is allowed to perform action
+      return true;
     }
-    // return api.currentUserCanManage;
-    // User can only change own documents
-    // console.log(doc);
-    // const userCanModify = doc.userId === userId;
-    // return userCanModify;
+    // User is not allowded to perform action
+    return false;
+  },
+  update (userId, post) {
+    const postApiId = post.apiId;
+    // Get API owning current post
+    const postApi = Apis.findOne(postApiId);
+    // Check if current user can edit API
+    const currentUserCanEdit = postApi.currentUserCanEdit();
+    if (currentUserCanEdit) {
+      // User is allowed to perform action
+      return true;
+    }
+    // User is not allowded to perform action
     return false;
   },
 });
