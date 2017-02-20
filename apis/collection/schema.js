@@ -23,15 +23,6 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationFileId: {
-    type: String,
-    optional: true,
-  },
-  documentationUrl: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
-  },
   documentationType: {
     type: String,
     optional: false,
@@ -40,6 +31,15 @@ Apis.schema = new SimpleSchema({
       'file',
     ],
     defaultValue: 'file',
+  },
+  documentationFileId: {
+    type: String,
+    optional: true,
+  },
+  documentationUrl: {
+    type: String,
+    optional: true,
+    regEx: SimpleSchema.RegEx.Url,
   },
   otherDocumentationUrl: {
     type: String,
