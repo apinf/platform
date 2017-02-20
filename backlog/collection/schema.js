@@ -6,24 +6,17 @@ import ApiBacklogItems from './';
 ApiBacklogItems.schema = new SimpleSchema({
   title: {
     type: String,
-    label: 'Title',
     max: 100,
-    autoform: {
-      placeholder: 'Title',
-    },
   },
   details: {
     type: String,
-    label: 'Details',
     max: 1000,
     autoform: {
       rows: 5,
-      placeholder: 'Description',
     },
   },
   priority: {
     type: Number,
-    label: 'Priority',
     min: 0,
     max: 2,
     autoform: {
