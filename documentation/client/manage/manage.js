@@ -67,7 +67,6 @@ Template.manageApiDocumentationModal.events({
   },
   'click #save-documentation-link': function () {
     // Hide modal
-    Modal.hide('manageApiDocumentationModal');
   },
   'click #open-api-editor': function () {
     // Hide modal

@@ -9,11 +9,13 @@ AutoForm.hooks({
       const api = Apis.findOne();
 
       // Checks if user selected option but submitted without content
-      if (api.documentationType === 'url' && !api.documentationUrl) {
-        Apis.update(api._id, { $set: { documentationType: 'file' } });
-      } else if (api.documentationType === 'file' && !api.documentationFileId) {
-        Apis.update(api._id, { $set: { documentationType: 'url' } });
-      }
+      // if (api.documentationType === 'url' && !api.documentationUrl) {
+      //   Apis.update(api._id, { $set: { documentationType: 'file' } });
+      // } else if (api.documentationType === 'file' && !api.documentationFileId) {
+      //   Apis.update(api._id, { $set: { documentationType: 'url' } });
+      // }
+      Modal.hide('manageApiDocumentationModal');
+
       // Get success message translation
       const message = TAPi18n.__('manageApiDocumentationModal_LinkField_Updated_Message');
 

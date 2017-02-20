@@ -40,6 +40,23 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
+    custom () {
+      let validation;
+
+      // Make sure type is URL and value is empty
+      if (this.field('documentationType').value === 'url' && !this.value) {
+        // Set this field as required
+        validation = 'required';
+      }
+
+      // Make sure type is URL and value is empty
+      if (this.field('documentationType').value === 'file' && !this.value) {
+        // Set this field as required
+        validation = '';
+      }
+
+      return validation;
+    },
   },
   otherDocumentationUrl: {
     type: String,
