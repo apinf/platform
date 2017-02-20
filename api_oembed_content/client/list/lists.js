@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
-import Posts from '/oembed_content/collection';
+import Posts from '/api_oembed_content/collection';
 
 Template.postsList.onCreated(function () {
   const instance = this;
