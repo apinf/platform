@@ -78,7 +78,7 @@ Meteor.methods({
     } catch (error) {
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
-
+      throw Meteor.Error(message);
       }
   },
   updateMailConfiguration () {
@@ -103,7 +103,7 @@ Meteor.methods({
       const message = `Update mail configuration: ${error}`;
 
       // Show an error message
-      
+      throw Meteor.Error(message);
     }
   },
 });
