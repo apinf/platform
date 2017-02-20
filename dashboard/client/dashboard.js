@@ -5,7 +5,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 import Apis from '/apis/collection';
-import { ProxyBackends } from '/proxy_backends/collection';
+import ProxyBackends from '/proxy_backends/collection';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance

@@ -4,9 +4,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
+import ProxyBackends from '/proxy_backends/collection';
 import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
 import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
-import { ProxyBackends } from '/proxy_backends/collection';
 
 import _ from 'lodash';
 

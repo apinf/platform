@@ -215,7 +215,7 @@ if (missingWidgets) {
  let missingWidgetsCount = missingWidgets.length
 
  // Alert the boss!
- console.log(missingWidgetsCount, "widgets are missing!");
+ 
 }
 ```
 
@@ -411,7 +411,7 @@ Migrations.add({
 });
 ```
 
-We are using *percolate:migrations* package for migrations. For additional info check 
+We are using *percolate:migrations* package for migrations. For additional info check
 [README](https://github.com/percolatestudio/meteor-migrations/edit/master/README.md).
 
 **References:**
