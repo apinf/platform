@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import ApiBacklogItems from './';
 
@@ -21,9 +22,21 @@ ApiBacklogItems.schema = new SimpleSchema({
     max: 2,
     autoform: {
       options: [
-        { label: 'High', value: 2 },
-        { label: 'Middle', value: 1 },
-        { label: 'None', value: 0 },
+        {
+          // Return the translated label
+          label () { return TAPi18n.__('apiBacklogItems_priorityText_High'); },
+          value: 2,
+        },
+        {
+          // Return the translated label
+          label () { return TAPi18n.__('apiBacklogItems_priorityText_Middle'); },
+          value: 1,
+        },
+        {
+          // Return the translated label
+          label () { return TAPi18n.__('apiBacklogItems_priorityText_None'); },
+          value: 0,
+        },
       ],
     },
   },
@@ -62,6 +75,9 @@ ApiBacklogItems.schema = new SimpleSchema({
     },
   },
 });
+
+// Attach translation
+ApiBacklogItems.schema.i18n('schemas.backlog');
 
 // Attach schema to collection for validation, etc.
 ApiBacklogItems.attachSchema(ApiBacklogItems.schema);
