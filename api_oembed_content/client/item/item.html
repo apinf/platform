@@ -16,7 +16,7 @@
       Added <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
 
       <p class="pull-right">
-        {{#if api.currentUserCanManage }}
+        {{#if api.currentUserCanEdit }}
           <button class="edit btn btn-default">Edit</button>
           <button class="delete btn btn-danger">Delete</button>
         {{/if}}
