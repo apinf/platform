@@ -184,14 +184,16 @@ Apis.helpers({
     // Get uploaded documentation file ID
     const documentationFileId = this.documentationFileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+    // Placeholder documentation file Object
+    let documentationFile;
 
-    // Get documentation file Object
-    const documentationFile = DocumentationFiles.findOne(objectId);
+    if (documentationFileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-    // Get remote swagger file URL
-    const documentationUrl = this.documentationUrl;
+      // Get documentation file Object
+      documentationFile = DocumentationFiles.findOne(objectId);
+    }
 
     let documentation;
 
@@ -203,9 +205,14 @@ Apis.helpers({
 
       // Get documentation file URL
       documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
-    } else if (documentationUrl && documentationType === 'url') {
-      // Get documentation URL
-      documentation = documentationUrl;
+    } else {
+      // Get remote swagger file URL
+      const documentationUrl = this.documentationUrl;
+
+      if (documentationUrl && documentationType === 'url') {
+        // Get documentation URL
+        documentation = documentationUrl;
+      }
     }
 
     return documentation;
