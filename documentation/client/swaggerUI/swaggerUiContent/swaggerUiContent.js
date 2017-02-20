@@ -104,22 +104,22 @@ Template.swaggerUiContent.onCreated(function () {
 
   // Subscribe to api collection
   instance.autorun(() => {
+    // Get API id
     const apiId = instance.data.api._id;
-    // Get relevant api collection
-    // instance.subscribe('apiBackend', apiId);
 
-    // Get api
+    // Get updated api
     const api = Apis.findOne(apiId);
+    // Get documentation URL
     const documentationUrl = api.documentation();
-
-    // Check if URL of documentation is changed
-    if (swagger.getOption('url') !== documentationUrl) {
-      // Change the documentation in Swagger UI
-      swagger.setOption('url', documentationUrl);
-    }
 
     // Make sure documentation exists as File or URL
     if (documentationUrl) {
+      // Check if URL of documentation is changed
+      if (swagger.getOption('url') !== documentationUrl) {
+        // Change URL in Swagger UI
+        swagger.setOption('url', documentationUrl);
+      }
+
       // Set selected methods in Swagger
       swagger.setOption('supportedSubmitMethods', api.submit_methods);
 
