@@ -1,11 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Roles } from 'meteor/alanning:roles';
 import $ from 'jquery';
 import Clipboard from 'clipboard';
 import ApiKeys from '/api_keys/collection';
 import { Proxies } from '/proxies/collection';
 import Posts from '/api_oembed_content/collection';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import Apis from '/apis/collection';
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
@@ -104,25 +106,7 @@ Template.apiDetails.helpers({
     // Return apiKey
     return apiKey;
   },
-  showIfPostsOrUserHasRights () {
-    const instance = Template.instance();
-    console.log('inst=', instance);
-    const userId = Meteor.userId();
 
-    // Check that user is logged in
-    if (userId) {
-      // Check if user is manager of this API
-      const userIsManager = this.api.currentUserCanManage();
-      // if user is manager or administrator, they can edit
-      if (userIsManager) {
-        console.log('man=', userIsManager);
-        return true;
-      }
-    }
-    const nbrOfPosts = Posts.find().count();
-    console.log('posteja=', nbrOfPosts);
-    return nbrOfPosts > 0;
-  },
 });
 
 Template.apiDetails.events({
