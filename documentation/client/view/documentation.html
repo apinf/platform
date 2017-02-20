@@ -72,7 +72,7 @@
         <div class="panel-body">
           {{# if Template.subscriptionsReady }}
             {{# if documentationExists }}
-              {{> swaggerUi apiDoc=apiDoc api=api }}
+              {{> swaggerUi api=api }}
             {{ else }}
             <i>
               {{_ "apiDocumentation_No_Swagger_Message" }}

@@ -16,7 +16,7 @@
     <div id="message-bar" class="swagger-ui-wrap message-success" data-sw-translate=""></div>
     {{# if dataFetched }}
       {{# if documentationValid }}
-        {{> swaggerUiContent apiDoc=apiDoc api=api }}
+        {{> swaggerUiContent api=api }}
       {{ else }}
         <i>
           {{_ 'swaggerUi_swaggerDocumentInvalidText' }}
