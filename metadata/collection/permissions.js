@@ -9,7 +9,7 @@ ApiMetadata.allow({
     // TODO: refactor ApiMetadata schema to use 'apiId' field
     if (ApiMetadata.find({ apiBackendId: apiId }).count() !== 0) {
         return false;
-    } else {
+    }
       // Find related API Backend, select only "managerIds" field
     const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 

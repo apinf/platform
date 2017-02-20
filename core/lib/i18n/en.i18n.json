@@ -686,6 +686,39 @@
               }
           }
       },
+      "proxies": {
+        "name" : {
+          "label": "Name"
+        },
+        "description" : {
+          "label": "Description"
+        },
+        "type" : {
+          "label": "Type"
+        },
+        "apiUmbrella" : {
+          "url": {
+            "label": "URL"
+          },
+          "apiKey": {
+            "label": "API Key"
+          },
+          "authToken": {
+            "label": "Auth Token"
+          },
+          "elasticsearch": {
+            "label": "ElasticSearch"
+          }
+        },
+        "emqtt": {
+          "url": {
+            "label": "URL"
+          },
+          "elasticsearch": {
+            "label": "ElasticSearch"
+          }
+        }
+      },
       "ProxyBackends": {
         "proxyId": {
           "label": "Select one proxy"
