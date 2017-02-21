@@ -106,12 +106,4 @@ Template.apiDetails.helpers({
     // Return apiKey
     return apiKey;
   },
-
-});
-
-Template.apiDetails.events({
-  'click #add_oembed': function (e) {
-    const api = this.api;
-    Modal.show('postsForm', { pageHeader: 'Add related media', api });
-  },
 });
