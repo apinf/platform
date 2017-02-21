@@ -13,12 +13,12 @@
         {{ post.url }}
       </a>
       <br>
-      Added <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
+      {{_ "apiMedia_PostItem_Added_Text"}} <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
 
       <p class="pull-right">
         {{#if api.currentUserCanEdit }}
-          <button class="edit btn btn-default">Edit</button>
-          <button class="delete btn btn-danger">Delete</button>
+          <button class="edit btn btn-default">{{_ "apiMedia_PostItem_Edit_Button"}}</button>
+          <button class="delete btn btn-danger">{{_ "apiMedia_PostItem_Delete_Button"}}</button>
         {{/if}}
       </p>
 
