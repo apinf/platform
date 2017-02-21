@@ -5,9 +5,6 @@ import $ from 'jquery';
 import Clipboard from 'clipboard';
 import ApiKeys from '/api_keys/collection';
 import { Proxies } from '/proxies/collection';
-import Posts from '/api_oembed_content/collection';
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import Apis from '/apis/collection';
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
