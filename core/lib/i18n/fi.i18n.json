@@ -112,7 +112,7 @@
                 }
             }
         },
-        "ProxyBackends": {
+        "proxyBackends": {
             "apiUmbrella": {
                 "settings": {
                     "append_query_string": {
