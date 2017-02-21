@@ -8,7 +8,7 @@ ApiMetadata.allow({
     // Make sure there is only one document per API Backend ID
     // TODO: refactor ApiMetadata schema to use 'apiId' field
     if (ApiMetadata.find({ apiBackendId: apiId }).count() !== 0) {
-        return false
+      return false
     }
     // Find related API Backend, select only "managerIds" field
     const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
