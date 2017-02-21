@@ -80,9 +80,10 @@
       </ul>
     </div>
   {{/ if }}
-  <!-- Embedded contents -->
-  <!-- {{#if showIfPostsOrUserHasRights }} -->
-  {{> postsList posts=posts api=api }}
 
-  <!-- {{/ if }} -->
+  <!-- Embedded Related Media contents -->
+  <!-- {{> postsList posts=posts api=api }} -->
+  {{> relatedMedia posts=posts api=api }}
+
+
 </template>
