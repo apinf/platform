@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import Posts from '../../collection';
 
-Template.postsForm.helpers({
+Template.apiMediaPostsForm.helpers({
   postsCollection () {
     // passes posts to form.html
     return Posts;
