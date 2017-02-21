@@ -13,11 +13,6 @@ Template.postItem.onRendered(function () {
   // Render OEmbed content
   postElement.oembed();
 });
-
-Template.postItem.helpers({
-  // helpers here in future
-});
-
 Template.postItem.events({
   'click .delete': function (event, templateInstance) {
     // Get post from template instance
