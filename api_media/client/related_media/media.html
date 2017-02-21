@@ -10,7 +10,7 @@
               type="button"
               class="btn btn-xs btn-success pull-right"
               id="add-oembed"
-              title='Add embedded content'>
+              title='{{_ "apiMedia_apiRelatedMedia_Add_Button_Help" }}'>
                 {{_ "apiMedia_apiRelatedMedia_Add_Button" }}
             </button>
         {{/if}}
@@ -41,14 +41,14 @@
     <!-- or user has rights -->
     {{# if api.currentUserCanEdit }}
       <div class="well">
-        <p>{{_ "apiMedia_apiRelatedMedia_Well_Message" }}</p>
         <button
           type="button"
-          class="btn btn-sm btn-success"
+          class="btn btn-sm btn-success pull-right"
           id="add-oembed"
-          title='Add embedded content'>
+          title='{{_ "apiMedia_apiRelatedMedia_Add_Button_Help" }}'>
             {{_ "apiMedia_apiRelatedMedia_Add_Button" }}
         </button>
+        <p>{{_ "apiMedia_apiRelatedMedia_Well_Message" }}</p>
       </div>
     {{ /if }}
   {{ /if }}
