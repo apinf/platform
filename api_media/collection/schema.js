@@ -52,13 +52,5 @@ const postsSchema = new SimpleSchema({
       return this.unset();  // Prevent user from supplying their own value
     },
   },
-  // description: {
-  //   type: String,
-  //   autoform: {
-  //     rows: 5,
-  //     placeholder: 'Description of post',
-  //   },
-  // },
-
 });
 Posts.attachSchema(postsSchema);
