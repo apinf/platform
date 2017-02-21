@@ -160,15 +160,6 @@ Template.proxyBackend.helpers({
     // Get proxyBackend from template data
     return instance.data.proxyBackend;
   },
-  showForm () {
-    // Get a reference of Template instance
-    const instance = Template.instance();
-    // Get proxy id
-    instance.getProxyId();
-
-    // If proxyId is empty then form will be hidden
-    return instance.data.proxyId.get();
-  },
 });
 
 Template.proxyBackend.events({
