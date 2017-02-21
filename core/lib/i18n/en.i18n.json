@@ -694,48 +694,65 @@
               }
           }
       },
-      "ProxyBackends": {
-        "proxyId": {
-          "label": "Select one proxy"
+      "proxyBackends": {
+          "proxyId": {
+              "label": "Select one proxy"
         },
         "apiUmbrella": {
-              "settings": {
-                  "append_query_string": {
-                    "label": "Append Query String Parameters"
+            "servers": {
+                "$": {
+                  "port": {
+                    "label": "API port"
+                  }
+                }
+          },
+          "settings": {
+              "append_query_string": {
+                  "label": "Append Query String Parameters"
+                },
+                "disable_api_key": {
+                    "label": "Disable API key requirement"
+                },
+                "headers_string": {
+                  "label": "Set Request Headers"
+                },
+                "rate_limit_mode": {
+                    "label": "Rate limit mode",
+                    "options": {
+                        "custom": "Custom rate limits",
+                        "unlimited": "Unlimited requests"
+                    }
+                },
+                "rate_limit": {
+                    "duration": {
+                        "label": "Duration (ms)"
+                    },
+                    "limit_by": {
+                        "label": "Limit by",
+                        "options": {
+                            "apiKey": "API Key",
+                            "ip": "IP Address"
+                        }
+                    },
+                    "limit": {
+                        "label": "Number of requests"
+                    },
+                    "response_headers": {
+                        "label": "Show rate limit in response headers"
+                    }
+                }
+              },
+          "url_matches": {
+              "$": {
+                  "frontend_prefix": {
+                      "label": "Proxy base path"
                   },
-                  "disable_api_key": {
-                      "label": "Disable API key requirement"
-                  },
-                  "headers_string": {
-                    "label": "Set Request Headers"
-                  },
-                  "rate_limit_mode": {
-                      "label": "Rate limit mode",
-                      "options": {
-                          "custom": "Custom rate limits",
-                          "unlimited": "Unlimited requests"
-                      }
-                  },
-                  "rate_limit": {
-                      "duration": {
-                          "label": "Duration (ms)"
-                      },
-                      "limit_by": {
-                          "label": "Limit by",
-                          "options": {
-                              "apiKey": "API Key",
-                              "ip": "IP Address"
-                          }
-                      },
-                      "limit": {
-                          "label": "Number of requests"
-                      },
-                      "response_headers": {
-                          "label": "Show rate limit in response headers"
-                      }
+                  "backend_prefix": {
+                      "label": "API base path"
                   }
               }
           }
+        }
       },
       "organizations": {
           "name": {
