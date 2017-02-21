@@ -8,19 +8,20 @@
         {{/if}}
         <!-- Related Media -->
         {{_ "apiOembed_Title" }}
+        {{ posts }}
       </h2>
     </div>
     <div class="panel-body">
       <div class="container">
         <div class="row">
-          {{# if posts }}
+          <!-- {{# if posts }} -->
           <!-- <p> Posts exists </p> -->
             {{# each post in posts }}
               <div class="col-grid-post col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 {{> postItem post=post api=api}}
               </div>
             {{/ each }}
-          {{ else  }}
+          <!-- {{ else  }}
             {{# if api.currentUserCanEdit}}
               {{# each post in posts }}
                 <div class="col-grid-post col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -32,7 +33,7 @@
                 {{_ "apiOembed_No_Link_message" }}
               </i>
             {{ /if }}
-          {{ /if }}
+          {{ /if }} -->
         </div>
 
 
