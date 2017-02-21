@@ -35,6 +35,6 @@ Template.apiRelatedMedia.helpers({
 Template.apiRelatedMedia.events({
   'click #add-oembed': function () {
     const api = this.api;
-    Modal.show('apiMediaPostsForm', { pageHeader: 'Add related media', api });
+    Modal.show('apiMediaPostsForm', { api });
   },
 });
