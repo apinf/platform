@@ -12,7 +12,8 @@ ProxyBackends.schema = new SimpleSchema({
     optional: true,
     autoform: {
       options () {
-        return _.map(Proxies.find().fetch(), (proxy) => {
+        // Sort proxies by name
+        return _.map(Proxies.find({}, { sort: { name: 1 } }).fetch(), (proxy) => {
           return {
             label: proxy.name,
             value: proxy._id,
