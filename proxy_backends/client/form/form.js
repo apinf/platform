@@ -131,12 +131,15 @@ Template.proxyBackend.helpers({
   proxyHost () {
     // Get a reference of Template instance
     const instance = Template.instance();
-    // Get & save current proxy id
-    instance.getProxyId();
-    const currentProxyId = instance.data.proxyId.get();
+
+    // Get proxy ID from template instance
+    const savedProxyId = Template.instance().data.proxyId;
+
+    // Make sure proxy ID exists or calculate it
+    const proxyId = savedProxyId ? savedProxyId.get() : instance.getProxyId();
 
     // Find the proxy settings
-    const proxy = Proxies.findOne(currentProxyId);
+    const proxy = Proxies.findOne(proxyId);
 
     if (proxy && proxy.apiUmbrella) {
       // Get frontend host from template instance
@@ -148,7 +151,7 @@ Template.proxyBackend.helpers({
   },
   oneProxy () {
     // Ger proxy count
-    const proxyCount = Proxies.find().count();
+    const proxyCount = Counts.get('proxyCount');
 
     // Check on existing only one proxy
     return proxyCount === 1;
