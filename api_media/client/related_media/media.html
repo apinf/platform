@@ -11,11 +11,11 @@
               class="btn btn-xs btn-success pull-right"
               id="add-oembed"
               title='Add embedded content'>
-                Add related media!
+                {{_ "apiMedia_apiRelatedMedia_Add_Button" }}
             </button>
         {{/if}}
         <!-- Related Media -->
-        {{_ "apiRelatedMedia_Title" }}
+        {{_ "apiMedia_apiRelatedMedia_Title" }}
       </h2>
     </div>
     <div class="panel-body">
@@ -41,13 +41,13 @@
     <!-- or user has rights -->
     {{# if api.currentUserCanEdit }}
       <div class="well">
-        <p>You don't have any media related to this API</p>
+        <p>{{_ "apiMedia_apiRelatedMedia_Well_Message" }}</p>
         <button
           type="button"
           class="btn btn-sm btn-success"
           id="add-oembed"
           title='Add embedded content'>
-            Add related media!
+            {{_ "apiMedia_apiRelatedMedia_Add_Button" }}
         </button>
       </div>
     {{ /if }}
