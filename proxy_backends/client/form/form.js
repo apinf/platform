@@ -11,55 +11,40 @@ import URI from 'urijs';
 
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();
-  // Set the proxy id empty on default
-  // instance.data.proxyId = new ReactiveVar('');
 
   instance.getProxyId = () => {
+    // Set the proxy id empty on default
+    instance.data.proxyId = new ReactiveVar('');
     // Placeholder for current proxy id
     let currentProxyId = '';
+
     // Get & compare count of Proxies
     const proxyCount = Counts.get('proxyCount');
-    // Get Proxy Backend config
-    const proxyBackendExists = instance.data.proxyBackend;
-
-    // Check if proxy id exists and multi proxy is available
-    // It can be a case when proxy id is empty string and
-    // proxy is only one then proxy id must be update
-    if (instance.data.proxyId !== undefined && proxyCount > 1) {
-      // Save the early value
-      return instance.data.proxyId.get();
-    }
-
-    // If proxy id doesn't exist yet or any more
-    if (instance.data.proxyId === undefined) {
-      // Create
-      instance.data.proxyId = new ReactiveVar('');
-
-      if (proxyBackendExists) {
-        // Set the last know proxy id
-        currentProxyId = proxyBackendExists.proxyId;
-      }
-    }
-
-    // Separate two case: proxy is only one or multi proxy
 
     // First case: Proxy is only one
     if (proxyCount === 1) {
       // Set these id as current
       currentProxyId = Proxies.findOne()._id;
-    } else if (proxyBackendExists) {
+    } else {
       // Second case: multi proxy
 
+      // Get Proxy Backend config
+      const proxyBackendExists = instance.data.proxyBackend;
+
       // If ProxyBackend configuration exists then it has a proxy id
+      if (proxyBackendExists) {
+        // save the current proxy id
+        currentProxyId = proxyBackendExists.proxyId;
+      } else {
+        const proxies = Proxies.find({}, { sort: { name: 1 } }).fetch();
 
-      // Update & save the current proxy id
-      currentProxyId = proxyBackendExists.proxyId;
-
-      // Otherwise empty string is current id (after deleting configuration)
+        currentProxyId = proxies[0]._id;
+      }
     }
 
-    // Set the current proxy id
-    return instance.data.proxyId.set(currentProxyId);
+    instance.data.proxyId.set(currentProxyId);
+
+    return currentProxyId;
   };
 });
 
@@ -103,7 +88,7 @@ Template.proxyBackend.helpers({
     return ProxyBackends.findOne({ apiId });
   },
   apiUrlProtocol () {
-   // Get the API information
+    // Get the API information
     const api = this.api;
 
     // Construct URL object for API URL
