@@ -32,7 +32,7 @@ ProxyBackends.schema = new SimpleSchema({
 });
 
 // Internationalize schema texts
-ProxyBackends.schema.i18n('schemas.ProxyBackends');
+ProxyBackends.schema.i18n('schemas.proxyBackends');
 
 // Attach schema to collection
 ProxyBackends.attachSchema(ProxyBackends.schema);
