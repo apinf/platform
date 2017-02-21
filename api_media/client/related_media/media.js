@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import Posts from '/api_oembed_content/collection';
+import Posts from '/api_media/collection';
 
 Template.relatedMedia.onCreated(function () {
   const instance = this;
