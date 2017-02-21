@@ -26,7 +26,6 @@ Template.postItem.events({
     // Call modal for editing, passing post and modal header as parameters
     Modal.show('apiMediaPostsForm', {
       postItem: post,
-      pageHeader: 'Edit related media',
     });
   },
 });
