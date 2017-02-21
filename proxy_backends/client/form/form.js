@@ -5,7 +5,7 @@ import { Template } from 'meteor/templating';
 
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
-import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
+import deleteProxyBackendConfig from '/proxy_backends/client/methods/delete_proxy_backend';
 
 import URI from 'urijs';
 
@@ -188,7 +188,7 @@ Template.proxyBackend.events({
     // Check proxyBackend exists, type is apiUmbrella, and it has id
     if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.id) {
       // Call deleteProxyBackend
-      deleteProxyBackend(proxyBackend);
+      deleteProxyBackendConfig(proxyBackend);
     }
   },
   // onChange event for checkbox inputs that contain "response_headers" in name
