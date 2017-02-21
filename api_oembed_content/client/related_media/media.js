@@ -1,8 +1,9 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import Posts from '/api_oembed_content/collection';
 
-Template.postsList.onCreated(function () {
+Template.relatedMedia.onCreated(function () {
   const instance = this;
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
@@ -18,13 +19,22 @@ Template.postsList.onCreated(function () {
   instance.pagination.filters(currentFilters);
 });
 
-Template.postsList.helpers({
+Template.relatedMedia.helpers({
   posts () {
+    const posts = Template.instance().pagination.getPage();
+
     // Return items of organization collection via Pagination
-    return Template.instance().pagination.getPage();
+    return posts;
   },
   templatePagination () {
     // Get reference of pagination
     return Template.instance().pagination;
+  },
+});
+
+Template.relatedMedia.events({
+  'click #add-oembed': function () {
+    const api = this.api;
+    Modal.show('postsForm', { pageHeader: 'Add related media', api });
   },
 });
