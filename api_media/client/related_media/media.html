@@ -1,4 +1,4 @@
-<template name="relatedMedia">
+<template name="apiRelatedMedia">
   <!-- Show media area in case either -->
   <!-- there are posts -->
   {{# if posts }}
@@ -9,13 +9,13 @@
             <button
               type="button"
               class="btn btn-xs btn-success pull-right"
-              id="add-oembed" 
+              id="add-oembed"
               title='Add embedded content'>
                 Add related media!
             </button>
         {{/if}}
         <!-- Related Media -->
-        {{_ "apiOembed_Title" }}
+        {{_ "apiRelatedMedia_Title" }}
       </h2>
     </div>
     <div class="panel-body">
