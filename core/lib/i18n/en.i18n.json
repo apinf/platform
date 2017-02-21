@@ -117,6 +117,7 @@
   "apiLifecycleStatus_labelText_unknown": "Unknown",
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
+  "apiMedia_apiRelatedMedia_Add_Button_Help": "Add embedded related media content",
   "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiOrganization_disconnectButton": "Disconnect",
   "apiOrganization_panelTitle": "Connect API to Organization",
