@@ -1,4 +1,4 @@
-<template name="postsForm">
+<template name="apiMediaPostsForm">
   <div class="modal fade" id="postInsertModal">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -6,13 +6,13 @@
         <div class="modal-header">
           <button data-dismiss="modal" class="close" type="button">×</button>
           <h3 class="modal-title">
-            {{ pageHeader }}
+            {{_ apiMediaPostsForm_Add_Edit_Title }}
           </h3>
         </div>
 
         <div class="modal-body">
           <!--Autoform for collection/schema-->
-          {{#autoForm id="postsForm" type=updateInsert doc=postItem collection=postsCollection}}
+          {{#autoForm id="apiMediaPostsForm" type=updateInsert doc=postItem collection=postsCollection}}
             {{> afQuickField name='title' }}
             {{> afQuickField name='url' }}
             {{> afQuickField name='apiId' type="hidden" value=api._id }}
