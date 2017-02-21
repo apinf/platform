@@ -13,7 +13,10 @@
         {{ post.url }}
       </a>
       <br>
-      {{_ "apiMedia_PostItem_Added_Text"}} <span title='{{ post.createdAt }}'>{{ calculateFromDate post.createdAt }}</span>
+      {{_ "apiMedia_PostItem_Added_Text"}}
+      <span id="apiMediaCreationTime" title='{{ post.createdAt }}'>
+        {{ calculateFromDate post.createdAt }}
+      </span>
 
       <p class="pull-right">
         {{#if api.currentUserCanEdit }}
