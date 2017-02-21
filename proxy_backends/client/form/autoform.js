@@ -176,11 +176,11 @@ AutoForm.hooks({
                   const umbrellaBackendId = response.result.data.api.id;
 
                   // Attach the API Umbrella backend ID to backend document
-                  convertedProxyBackend.apiUmbrella.id = umbrellaBackendId;
+                  currentProxyBackend['apiUmbrella.id'] = umbrellaBackendId;
 
                   // Publish the API Backend on API Umbrella
                   Meteor.call('publishApiBackendOnApiUmbrella',
-                    umbrellaBackendId, convertedProxyBackend.proxyId,
+                    umbrellaBackendId, currentProxyBackend.proxyId,
                     (publishError) => {
                       if (publishError) {
                         sAlert.error(publishError);
@@ -188,7 +188,7 @@ AutoForm.hooks({
                         form.result(false);
                       }
                       // async return the Proxy Backend document
-                      updateDoc.$set = convertedProxyBackend;
+                      updateDoc.$set = currentProxyBackend;
                       form.result(updateDoc);
                     }
                   );
