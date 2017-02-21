@@ -106,11 +106,6 @@ AutoForm.hooks({
         const currentProxyBackend = updateDoc.$set;
 
         if (currentProxyBackend) {
-          // Get API id
-          const apiId = currentProxyBackend.apiId;
-          // Get proxy backend id
-          const proxyBackendFromMongo = ProxyBackends.findOne({ apiId });
-
           // Check all required fields have values
           const requiredUrlMatches = currentProxyBackend['apiUmbrella.url_matches'] &&
             currentProxyBackend['apiUmbrella.url_matches'][0] &&
@@ -129,6 +124,11 @@ AutoForm.hooks({
             // Cancel form
             return false;
           }
+
+          // Get API id
+          const apiId = currentProxyBackend.apiId;
+          // Get proxy backend id
+          const proxyBackendFromMongo = ProxyBackends.findOne({ apiId });
 
           const previousProxyId = proxyBackendFromMongo.proxyId;
           const currentProxyId = currentProxyBackend.proxyId;
