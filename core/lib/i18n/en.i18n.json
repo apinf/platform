@@ -150,7 +150,7 @@
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
   "apiMediaPostsForm_Add_Edit_Title": "Related Media",
-  "apiOembed_Title": "Related Media",
+  "apiRelatedMedia_Title": "Related Media",
   "apiOembed_No_Link_message" : "No related media link is available.",
   "apiProxy_headerText": "Proxy backend configuration",
   "apiUserAuthorizationForm_addButton_text": "Add authorized user",

@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import Posts from '/api_media/collection';
 
-Template.relatedMedia.onCreated(function () {
+Template.apiRelatedMedia.onCreated(function () {
   const instance = this;
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
@@ -19,7 +19,7 @@ Template.relatedMedia.onCreated(function () {
   instance.pagination.filters(currentFilters);
 });
 
-Template.relatedMedia.helpers({
+Template.apiRelatedMedia.helpers({
   posts () {
     const posts = Template.instance().pagination.getPage();
 
@@ -32,7 +32,7 @@ Template.relatedMedia.helpers({
   },
 });
 
-Template.relatedMedia.events({
+Template.apiRelatedMedia.events({
   'click #add-oembed': function () {
     const api = this.api;
     Modal.show('apiMediaPostsForm', { pageHeader: 'Add related media', api });
