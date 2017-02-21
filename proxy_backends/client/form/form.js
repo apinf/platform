@@ -204,24 +204,15 @@ Template.proxyBackend.events({
   },
   'change select[name="proxyId"]': function (event, templateInstance) {
     // Get selected option
-    const selectedItem = event.currentTarget.value || '';
+    const selectedItem = event.currentTarget.value;
 
-    // User changed current proxy to another
+    // Checking of user changed current proxy to another
     if (templateInstance.formType === 'update') {
-      // If user changed to first position then proxy backend will be deleted
-      // Otherwise change option
-      if (selectedItem === event.currentTarget[0].value) {
-        Modal.show('removeSelectedProxy', {
-          proxyBackendEvent: event,
-          proxyBackend: templateInstance,
-        });
-      } else {
-        Modal.show('changeSelectedProxy', {
-          proxyBackendEvent: event,
-          proxyBackend: templateInstance,
-          selectedItem,
-        });
-      }
+      Modal.show('changeSelectedProxy', {
+        proxyBackendEvent: event,
+        proxyBackend: templateInstance,
+        selectedItem,
+      });
     } else {
       // Set id of proxy selected
       templateInstance.data.proxyId.set(selectedItem);
