@@ -1,0 +1,18 @@
+<template name="relatedMedia">
+  <!-- Show media area in case either -->
+  <!-- there are posts -->
+  Posts (rel med): {{ posts }}
+  {{> postsList posts=posts api=api }}
+
+  <!-- {{ api.currentUserCanEdit }}
+  {{ posts }}
+  {{# if posts }}
+    {{> postsList posts=posts api=api }}
+  {{ else }}
+    <!- - or user has rights - ->
+    {{# if api.currentUserCanEdit }}
+      {{> postsList posts=posts api=api }}
+    {{ /if }}
+  {{ /if }} -->
+
+</template>
