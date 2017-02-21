@@ -4,7 +4,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import ProxyBackends from '../../collection';
-import deleteProxyBackendConfig from '../methods/delete_proxy_backend';
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
 AutoForm.hooks({
@@ -12,14 +11,6 @@ AutoForm.hooks({
     before: {
       insert (proxyBackend) {
         // TODO: Refactor this method. It is too long and complex
-
-        // No selected any proxy
-        if (proxyBackend && proxyBackend.proxyId === undefined) {
-          // Notify users about no selected proxy
-          const message = TAPi18n.__('proxyBackendForm_informText_noOneSelectedProxy');
-          sAlert.info(message);
-          return false;
-        }
 
         // Get reference to autoform instance, for form submission callback
         const form = this;
@@ -119,15 +110,6 @@ AutoForm.hooks({
           const apiId = currentProxyBackend.apiId;
           // Get proxy backend id
           const proxyBackendFromMongo = ProxyBackends.findOne({ apiId });
-
-          // User selected the first item
-          // Then delete proxy backend information from api umbrella
-          if (currentProxyBackend.proxyId === undefined) {
-            // Delete proxy backend information from api umbrella
-            deleteProxyBackendConfig(proxyBackendFromMongo);
-
-            return false;
-          }
 
           // Check all required fields have values
           const requiredUrlMatches = currentProxyBackend['apiUmbrella.url_matches'] &&
