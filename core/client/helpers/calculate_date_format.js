@@ -7,7 +7,7 @@ import 'moment/min/locales.min';
 Template.registerHelper('calculateFromDate', (date) => {
   // Get current language
   const language = TAPi18n.getLanguage();
-  // return moment(date).format('YYYY-MM-DD HH:mm');
+  // return calculated difference from creation date
   return moment(date).locale(language).from(moment());
 });
 
