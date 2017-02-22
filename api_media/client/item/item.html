@@ -15,7 +15,7 @@
       <br>
       {{_ "apiMedia_PostItem_Added_Text"}}
       <span id="apiMediaCreationTime" title='{{ localeFormatDate post.createdAt }}'>
-        {{  calculateFromDate post.createdAt }}
+        {{  dateInTimeAgoFormat post.createdAt }}
       </span>
 
       <p class="pull-right">

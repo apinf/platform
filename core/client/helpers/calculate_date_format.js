@@ -4,7 +4,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import 'moment/min/locales.min';
 
 // Calculate time passed from create
-Template.registerHelper('calculateFromDate', (date) => {
+Template.registerHelper('dateInTimeAgoFormat', (date) => {
   // Get current language
   const language = TAPi18n.getLanguage();
   // return calculated difference from creation date
