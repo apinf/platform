@@ -14,7 +14,7 @@
       </a>
       <br>
       {{_ "apiMedia_PostItem_Added_Text"}}
-      <span id="apiMediaCreationTime" title='{{_ "apiMedia_RelatedMedia_CreationTime" post.createdAt }}'>
+      <span id="apiMediaCreationTime" title='{{ localFormatDate post.createdAt }}'>
         {{  calculateFromDate post.createdAt }}
       </span>
 

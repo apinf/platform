@@ -10,3 +10,10 @@ Template.registerHelper('calculateFromDate', (date) => {
   // return moment(date).format('YYYY-MM-DD HH:mm');
   return moment(date).locale(language).from(moment());
 });
+
+Template.registerHelper('localFormatDate', (date) => {
+  // Get current language
+  const language = TAPi18n.getLanguage();
+  // return moment(date).format('YYYY-MM-DD HH:mm');
+  return moment(date).locale(language).format('LLL');
+});
