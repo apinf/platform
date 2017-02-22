@@ -3,28 +3,26 @@
   <div class="panel panel-default">
 
     <div class="responsive-video panel-body">
-      <h3>
-        <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-      </h3>
-      <br>
-      <a href="{{ post.url }}" id="{{ post._id }}">
-        {{ post.url }}
-      </a>
-      <br>
-      {{_ "apiMedia_PostItem_Added_Text"}}
-      <span id="apiMediaCreationTime" title='{{ localeFormatDate post.createdAt }}'>
-        {{  calculateFromDate post.createdAt }}
-      </span>
-
-      <p class="pull-right">
-        {{#if api.currentUserCanEdit }}
+        <h3>
+          <a href="{{ post.url }}">
+           {{ post.title }}
+          </a>
+        </h3>
+        <br>
+        <a href="{{ post.url }}" id="{{ post._id }}">
+          {{ post.url }}
+        </a>
+        <br>
+          {{_ "apiMedia_PostItem_Added_Text"}}
+        <span id="apiMediaCreationTime" title='{{ localeFormatDate post.createdAt }}'>
+          {{  calculateFromDate post.createdAt }}
+        </span>
+          {{#if api.currentUserCanEdit }}
+        <p class="pull-right">
           <button class="edit btn btn-default">{{_ "apiMedia_PostItem_Edit_Button"}}</button>
           <button class="delete btn btn-danger">{{_ "apiMedia_PostItem_Delete_Button"}}</button>
-        {{/if}}
-      </p>
-
+        </p>
+          {{/if}}
     </div>
 
   </div>
