@@ -14,6 +14,7 @@ const RateLimitSchema = new SimpleSchema({
       'apiKey',
       'ip',
     ],
+    defaultValue: 'apiKey',
   },
   limit: {
     type: Number,
