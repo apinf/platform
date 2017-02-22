@@ -6,12 +6,12 @@
           {{_ 'apisFilterForm_labelText_lifecycle' }}
         </label>
         <select class="form-control text-capitalize" name="lifecycle">
-          <option value="" class="text-capitalize">
+          <option value="">
             {{_ 'apisFilterForm_optionText_selectOne' }}
           </option>
           {{# each status in lifeCycleFilter }}
-            <option class="text-capitalize" value="{{ status }}">
-              {{ status }}
+            <option value="{{ status.value }}">
+              {{ status.label }}
             </option>
           {{/ each }}
         </select>
