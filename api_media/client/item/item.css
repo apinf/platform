@@ -6,7 +6,7 @@
 }
 
 .responsive-video {
-position: relative;
+  position: relative;
 }
 
 .responsive-video iframe {
@@ -26,7 +26,7 @@ position: relative;
   border-box !important;
 }
 .col-grid-post{
-      margin-left: -1em;
+  margin-left: -1em;
 }
 
 .oembedall-container a{
