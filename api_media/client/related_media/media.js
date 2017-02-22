@@ -33,7 +33,7 @@ Template.apiRelatedMedia.helpers({
 });
 
 Template.apiRelatedMedia.events({
-  'click #add-oembed': function () {
+  'click #add-media': function () {
     const api = this.api;
     Modal.show('apiMediaPostsForm', { api });
   },
