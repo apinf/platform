@@ -723,6 +723,9 @@
                           "unlimited": "Unlimited requests"
                       }
                   },
+                  "rate_limits": {
+                      "label": "Rate limits"
+                  },
                   "rate_limit": {
                       "duration": {
                           "label": "Duration (ms)"
