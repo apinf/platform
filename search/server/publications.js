@@ -1,33 +1,38 @@
+import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
+
 import Apis from '/apis/collection';
 
-Meteor.publish("searchApiBackends", function(searchValue) {
+Meteor.publish('searchApiBackends', (searchValue) => {
+  // Make sure searchValue is a String
+  check(searchValue, String);
 
-  if (!searchValue || searchValue == "")
-    return Apis.find({});
+  // Return all api's if searchValue is empty
+  if (!searchValue || searchValue === '') { return Apis.find({}); }
 
   // Remove leading & trailing spaces from search value
-  searchValue = searchValue.trim();
+  const searchRegex = searchValue.trim();
 
   // Construct query using regex
-  var query = {
+  const query = {
     $or: [
       {
         name: {
-          $regex: searchValue,
-          $options: 'i' // case-insensitive option
-        }
+          $regex: searchRegex,
+          $options: 'i', // case-insensitive option
+        },
       },
       {
         backend_host: {
-          $regex: searchValue,
-          $options: 'i' // case-insensitive option
-        }
-      }
-    ]
+          $regex: searchRegex,
+          $options: 'i', // case-insensitive option
+        },
+      },
+    ],
   };
 
   // Fetch apiBackends
-  var searchResults = Apis.find(query);
+  const searchResults = Apis.find(query);
 
   return searchResults;
 });

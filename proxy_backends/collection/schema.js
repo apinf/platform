@@ -1,14 +1,18 @@
-import { Proxies } from '/proxies/collection';
-import { ProxyBackends } from './';
-import { ApiUmbrellaSchema } from './apiUmbrellaSchema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+import _ from 'lodash';
+
+import Proxies from '/proxies/collection';
+import ApiUmbrellaSchema from './apiUmbrellaSchema';
+import ProxyBackends from './';
 
 ProxyBackends.schema = new SimpleSchema({
   proxyId: {
     type: String,
     optional: true,
     autoform: {
-      options: function () {
-        return _.map(Proxies.find().fetch(), function (proxy) {
+      options () {
+        return _.map(Proxies.find().fetch(), (proxy) => {
           return {
             label: proxy.name,
             value: proxy._id,
@@ -17,10 +21,10 @@ ProxyBackends.schema = new SimpleSchema({
       },
     },
   },
-  'apiId': {
+  apiId: {
     type: String,
   },
-  'apiUmbrella': {
+  apiUmbrella: {
     type: ApiUmbrellaSchema,
     optional: true,
   },

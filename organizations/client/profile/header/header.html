@@ -17,11 +17,13 @@
               {{/ if }}
             </h1>
           </div>
-          <div class="row">
-            <p>
-              {{ organization.description }}
-            </p>
-          </div>
+          {{# if organization.description }}
+            <div class="row">
+              <p>
+                {{ organization.description }}
+              </p>
+            </div>
+          {{/ if }}
           <div class="row">
             <p>
               <i class="fa fa-link" aria-hidden="true"></i>
@@ -32,20 +34,26 @@
           </div>
           <div class="row">
             <ul class="list-inline">
-              <li>
-                <i class="fa fa-user" aria-hidden="true"></i>
-                {{ organization.contact.person }}
-              </li>
-              <li>
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                {{ organization.contact.phone }}
-              </li>
-              <li>
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <a href="mailto:{{ organization.contact.email }}">
-                  {{ organization.contact.email }}
-                </a>
-              </li>
+              {{# if organization.contact.person }}
+                <li>
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  {{ organization.contact.person }}
+                </li>
+              {{/ if }}
+              {{# if organization.contact.phone }}
+                <li>
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  {{ organization.contact.phone }}
+                </li>
+              {{/ if }}
+              {{# if organization.contact.email }}
+                <li>
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <a href="mailto:{{ organization.contact.email }}">
+                    {{ organization.contact.email }}
+                  </a>
+                </li>
+              {{/ if }}
             </ul>
           </div>
         </div>

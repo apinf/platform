@@ -2,6 +2,7 @@
 // object doesn't have standard fields to creating & publishing in api Umbrella
 // This function is conversion
 
+/* eslint max-len: ["error", 120] */
 export default function convertToApiUmbrellaObject (noStandardObject) {
   const apiUmbrellaObject = {};
   apiUmbrellaObject.apiId = noStandardObject.apiId;

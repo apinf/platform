@@ -9,8 +9,6 @@ import jsyaml from 'js-yaml';
 
 import DocumentationFiles from '/documentation/collection';
 
-/* eslint-env browser */
-
 Template.importApiDocumentation.events({
   'change #apiDocumentationFile': function (event) {
     // Allowed file extensions for API documentation file

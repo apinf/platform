@@ -22,23 +22,37 @@
           type=formType
           doc=organization
         }}
+        <div itemscope itemtype="http://schema.org/Organization">
           <div class="modal-body">
             <fieldset>
-              {{> afQuickField name='name' }}
-              {{> afQuickField name='url' }}
-              {{> afQuickField name='description' }}
+              <span itemprop="name">
+                  {{> afQuickField name='name' }}
+              </span>
+              <span itemprop="url">
+                  {{> afQuickField name='url' }}
+              </span>
+              <span itemprop="description">
+                  {{> afQuickField name='description' }}
+              </span>
               <div class="panel panel-default">
                 <div class="panel-heading">
                   {{_ "organizationForm_contact_panelTitle" }}
                 </div>
                 <div class="panel-body">
-                  {{> afQuickField name='contact.person' }}
-                  {{> afQuickField name='contact.phone' }}
-                  {{> afQuickField name='contact.email' }}
+                   <span itemprop="name">
+                       {{> afQuickField name='contact.person' }}
+                    </span>
+                   <span itemprop="telephone">
+                       {{> afQuickField name='contact.phone' }}
+                    </span>
+                   <span itemprop="email">
+                       {{> afQuickField name='contact.email' }}
+                    </span>
                 </div>
               </div>
             </fieldset>
           </div>
+        </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">
               {{_ "organizationForm_saveButton_text" }}

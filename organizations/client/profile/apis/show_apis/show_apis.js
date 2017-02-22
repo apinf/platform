@@ -9,7 +9,6 @@ Template.organizationShowApis.onCreated(function () {
 
   // Create placeholder for storage
   instance.managedApis = new ReactiveVar();
-  instance.selectedFilterOption = new ReactiveVar();
 
   // Get Organization document from template data
   const organization = instance.data.organization;
@@ -23,9 +22,6 @@ Template.organizationShowApis.onCreated(function () {
 
     // Get query parameter LifeCycle
     const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');
-
-    // Save selected option in reactive var
-    instance.selectedFilterOption.set(lifecycleParameter);
 
     // Checking of filter was set
     if (lifecycleParameter) {
@@ -50,18 +46,5 @@ Template.organizationShowApis.helpers({
 
     // Return list of managed/filtered Apis
     return instance.managedApis.get();
-  },
-  selectedFilter () {
-    const instance = Template.instance();
-
-    // Return selected filter option
-    return instance.selectedFilterOption.get();
-  },
-});
-
-Template.organizationShowApis.events({
-  'click #reset-filter-options': () => {
-    // Delete query parameter
-    FlowRouter.setQueryParams({ lifecycle: null });
   },
 });
