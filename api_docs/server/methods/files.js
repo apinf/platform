@@ -2,7 +2,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/doc_files/collection';
 
 Meteor.methods({
   findFileById (id) {

@@ -7,7 +7,7 @@ import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/doc_files/collection';
 import Settings from '/settings/collection';
 
 const uploadingSpinner = new ReactiveVar(false);

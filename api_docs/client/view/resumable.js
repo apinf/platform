@@ -5,7 +5,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/doc_files/collection';
 import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {

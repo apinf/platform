@@ -1,6 +1,6 @@
 import { Roles } from 'meteor/alanning:roles';
 
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/doc_files/collection';
 
 DocumentationFiles.allow({
   insert (userId) {

@@ -2,15 +2,15 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/doc_files/collection';
 
 Meteor.publish(
-  'singleDocumentationFile', (documentationFileId) => {
+  'singleDocumentationFile', (fileId) => {
     // Make sure documentationFileId
-    check(documentationFileId, String);
+    check(fileId, String);
 
     // Convert _id value to Object Id instance
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+    const objectId = new Mongo.Collection.ObjectID(fileId);
 
     return DocumentationFiles.find({
       _id: objectId,
