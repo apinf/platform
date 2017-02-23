@@ -23,11 +23,6 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationUrl: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
-  },
   latestMonitoringStatusCode: {
     type: String,
     optional: true,
