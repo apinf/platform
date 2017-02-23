@@ -2,15 +2,12 @@ import Posts from './';
 
 Posts.allow({
   insert (userId, post) {
-    const postApiId = post.apiId;
-    return post.postsAllow(postApiId);
+    return post.isPostActionAllow();
   },
   remove (userId, post) {
-    const postApiId = post.apiId;
-    return post.postsAllow(postApiId);
+    return post.isPostActionAllow();
   },
   update (userId, post) {
-    const postApiId = post.apiId;
-    return post.postsAllow(postApiId);
+    return post.isPostActionAllow();
   },
 });
