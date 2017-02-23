@@ -39,6 +39,9 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
+
+  // Subscribe to ApiDocs
+  instance.subscribe('apiDocs', instance.apiId);
 });
 
 Template.viewApi.helpers({
