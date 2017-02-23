@@ -1,19 +1,11 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-import Apis from '/apis/collection';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 AutoForm.hooks({
   apiDocumentationForm: {
     onSuccess () {
-      const api = Apis.findOne();
-
-      // Checks if user selected option but submitted without content
-      // if (api.documentationType === 'url' && !api.documentationUrl) {
-      //   Apis.update(api._id, { $set: { documentationType: 'file' } });
-      // } else if (api.documentationType === 'file' && !api.documentationFileId) {
-      //   Apis.update(api._id, { $set: { documentationType: 'url' } });
-      // }
       Modal.hide('manageApiDocumentationModal');
 
       // Get success message translation
