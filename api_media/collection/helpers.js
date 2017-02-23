@@ -2,7 +2,8 @@ import Apis from '/apis/collection';
 import Posts from './';
 
 Posts.helpers({
-  postsAllow (postApiId) {
+  isPostActionAllow () {
+    const postApiId = this.apiId;
     const postApi = Apis.findOne(postApiId);
   // Check if current user can edit API
     const currentUserCanEdit = postApi.currentUserCanEdit();
