@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
           {{# autoForm
-            collection=apisCollection
+            collection=apiDocsCollection
             doc=api
             id="apiDocumentationForm"
             type="update" }}
@@ -22,11 +22,11 @@
               {{_ "manageApiDocumentationModal_addDocumentation_title" }}
             </legend>
             {{> afQuickField
-              name="documentationType"
+              name="type"
               firstOption=false
             }}
             {{#if afFieldValueIs
-              name="documentationType"
+              name="type"
               value="file"
             }}
             <div class="documentation-file">
@@ -53,7 +53,7 @@
               {{/ unless }}
             </div>
             {{ else }}
-            {{> afQuickField name='documentationUrl' }}
+            {{> afQuickField name='remoteFileUrl' }}
             {{/ if }}
             {{# if apiDocumentationEditorIsEnabled }}
               <legend>
@@ -68,7 +68,7 @@
               {{> showHelp 'documentation_link' }}
               {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}
             </legend>
-            {{> afQuickField name='otherDocumentationUrl' }}
+            {{> afQuickField name='otherUrl' }}
             <button type="submit" class="btn btn-success" id="save-documentation-link">
               {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
             </button>
