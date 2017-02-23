@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.apisFilterForm.onRendered(function () {
   // Get the query parameter
@@ -17,13 +18,22 @@ Template.apisFilterForm.onRendered(function () {
 
 Template.apisFilterForm.helpers({
   lifeCycleFilter () {
-    return [
+    // The available lifecycle status
+    const lifecycleStatus = [
       'development',
       'deprecated',
       'design',
       'production',
       'testing',
     ];
+
+    // Return lifecycle status with translation
+    return lifecycleStatus.map((value) => {
+      return {
+        value,
+        label: TAPi18n.__(`schemas.apis.lifecycleStatus.options.${value}`),
+      };
+    });
   },
 });
 
