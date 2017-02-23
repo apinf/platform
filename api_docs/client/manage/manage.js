@@ -8,6 +8,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
 import DocumentationFiles from '/doc_files/collection';
+import ApiDocs from '/api_docs/collection';
 import Settings from '/settings/collection';
 
 const uploadingSpinner = new ReactiveVar(false);
@@ -105,9 +106,9 @@ Template.manageApiDocumentationModal.helpers({
       // Otherwise return false
     return false;
   },
-  apisCollection () {
-    // Return a reference to Apis collection, for AutoForm
-    return Apis;
+  apiDocsCollection () {
+    // Return a reference to ApiDocs collection, for AutoForm
+    return ApiDocs;
   },
   // Return list of all try-out methods, which is used in Swagger Options
   supportedSubmitMethods () {
