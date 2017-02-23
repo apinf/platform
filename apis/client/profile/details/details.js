@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
 import $ from 'jquery';
 import Clipboard from 'clipboard';
 import ApiKeys from '/api_keys/collection';
