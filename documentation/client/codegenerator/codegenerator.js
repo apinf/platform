@@ -2,6 +2,7 @@ import { HTTP } from 'meteor/http';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
 import _ from 'lodash';
@@ -72,11 +73,12 @@ Template.sdkCodeGeneratorModal.helpers({
     // Create simple schema for sdk modal
     return new SimpleSchema({
       selectLanguage: {
+        label: TAPi18n.__('sdkCodeGeneratorModal_labelText_selectLanguage'),
         type: String,
         allowedValues: instance.languageList,
         autoform: {
           afFieldInput: {
-            firstOption: '(Language)',
+            firstOption: TAPi18n.__('sdkCodeGeneratorModal_firstOption_language'),
           },
         },
       },
@@ -110,5 +112,9 @@ Template.sdkCodeGeneratorModal.helpers({
       languageList: instance.languageList,
       urlParameters: instance.urlParameters,
     };
+  },
+  buttonText () {
+    // Return button text depending on language
+    return TAPi18n.__('sdkCodeGeneratorModal_buttonText_download');
   },
 });
