@@ -13,7 +13,8 @@ import _ from 'lodash';
 // Collection imports
 import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
-import DocumentationFiles from '/api_docs/api_files/collection';
+import DocumentationFiles from '/doc_files/collection';
+import ApiDocs from '/api_docs/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -178,11 +179,16 @@ Apis.helpers({
     }
   },
   documentation () {
+    // Get API ID
+    const apiId = this._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId });
+
     // Get documentation method (URL of File)
-    const documentationType = this.documentationType;
+    const documentationType = apiDocs.type;
 
     // Get uploaded documentation file ID
-    const documentationFileId = this.documentationFileId;
+    const documentationFileId = apiDocs.type;
 
     // Placeholder documentation file Object
     let documentationFile;
@@ -207,7 +213,7 @@ Apis.helpers({
       documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
     } else {
       // Get remote swagger file URL
-      const documentationUrl = this.documentationUrl;
+      const documentationUrl = apiDocs.type;
 
       if (documentationUrl && documentationType === 'url') {
         // Get documentation URL
