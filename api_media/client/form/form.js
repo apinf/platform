@@ -8,7 +8,7 @@ Template.apiMediaPostsForm.helpers({
   },
   formType () {
     const instance = Template.instance();
-    if (instance.data.postItem) {
+    if (instance.data.post) {
       // Pass update if the postItem template is active
       return 'update';
     }
