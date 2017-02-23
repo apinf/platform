@@ -20,6 +20,23 @@ ApiDocs.schema = new SimpleSchema({
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
+    custom () {
+      let validation;
+
+      // Make sure type is URL and value is empty
+      if (this.field('type').value === 'url' && !this.value) {
+        // Set this field as required
+        validation = 'required';
+      }
+
+      // Make sure type is URL and value is empty
+      if (this.field('type').value === 'file' && !this.value) {
+        // Set this field as required
+        validation = '';
+      }
+
+      return validation;
+    },
   },
   otherUrl: {
     type: String,

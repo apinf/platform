@@ -23,42 +23,7 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationType: {
-    type: String,
-    optional: false,
-    allowedValues: [
-      'url',
-      'file',
-    ],
-    defaultValue: 'file',
-  },
-  documentationFileId: {
-    type: String,
-    optional: true,
-  },
   documentationUrl: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
-    custom () {
-      let validation;
-
-      // Make sure type is URL and value is empty
-      if (this.field('documentationType').value === 'url' && !this.value) {
-        // Set this field as required
-        validation = 'required';
-      }
-
-      // Make sure type is URL and value is empty
-      if (this.field('documentationType').value === 'file' && !this.value) {
-        // Set this field as required
-        validation = '';
-      }
-
-      return validation;
-    },
-  },
-  otherDocumentationUrl: {
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
@@ -89,10 +54,6 @@ Apis.schema = new SimpleSchema({
   },
   monitoringId: {
     type: String,
-    optional: true,
-  },
-  submit_methods: {
-    type: [String],
     optional: true,
   },
   created_at: {
