@@ -78,7 +78,7 @@ Meteor.methods({
     } catch (error) {
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
-      
+
       // Show an error message
       throw new Meteor.Error(message);
     }
