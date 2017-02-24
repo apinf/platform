@@ -13,6 +13,9 @@ Organizations.schema = new SimpleSchema({
   },
   'contact.phone': {
     type: String,
+    // all numbers (0-9) , + , - , space ,/ are allowed and can appear anywhere in the phone numbers
+    // e.g. 754-3010,(541) 754-3010,1-541-754-3010,1-541-754-3010,191 541 754 3010,(089) / 636-48018
+    regEx: /^[0-9-+()/\s.]+$/,
     optional: true,
   },
   'contact.email': {

@@ -20,3 +20,9 @@ indent_size = 2
 charset = utf-8
 indent_style = space
 indent_size = 2
+
+# CSS styles
+[*.{css, less}]
+charset = utf-8
+indent_style = space
+indent_size = 2

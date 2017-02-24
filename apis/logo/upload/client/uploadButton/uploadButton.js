@@ -1,6 +1,4 @@
 import { Template } from 'meteor/templating';
-import $ from 'jquery';
-
 import ApiLogo from '../../../collection';
 
 Template.uploadApiLogoButton.onRendered(() => {

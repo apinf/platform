@@ -4,7 +4,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import { FeedbackVotes } from '/feedback_votes/collection';
+import FeedbackVotes from '/feedback_votes/collection';
 
 import moment from 'moment';
 
@@ -17,6 +17,14 @@ Template.feedbackItem.onCreated(function () {
 });
 
 Template.feedbackItem.helpers({
+  feedbackType () {
+    // Return translation for feedback message type
+
+    // Get item
+    const item = Template.instance().data.item;
+    // Return translation for type
+    return TAPi18n.__(`feedbackItem_messageType.${item.messageType}`);
+  },
   userUpvote () {
     // Get current Feedback ID
     const feedbackId = Template.currentData().item._id;
@@ -71,7 +79,7 @@ Template.feedbackItem.events({
     const feedbackId = Template.currentData().item._id;
 
     // Submit upvote (+1) for current feedback
-    Meteor.call('submitVote', feedbackId, 1, (error, result) => {
+    Meteor.call('submitVote', feedbackId, 1, (error) => {
       // Catch error on anonymous voting
       if (error && error.error === 'apinf-usernotloggedin-error') {
         // Get error message
@@ -86,7 +94,7 @@ Template.feedbackItem.events({
     const feedbackId = Template.currentData().item._id;
 
     // Submit downvote (-1) for current feedback
-    Meteor.call('submitVote', feedbackId, -1, (error, result) => {
+    Meteor.call('submitVote', feedbackId, -1, (error) => {
       // Catch error on anonymous voting
       if (error && error.error === 'apinf-usernotloggedin-error') {
         // Get error message

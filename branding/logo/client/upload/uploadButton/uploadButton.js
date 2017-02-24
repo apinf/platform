@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
 
-import $ from 'jquery';
-
 import ProjectLogo from '/branding/logo/collection';
 
 Template.uploadProjectLogoButton.onRendered(() => {

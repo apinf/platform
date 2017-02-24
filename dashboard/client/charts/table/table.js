@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import $ from 'jquery';
-
 Template.dashboardDataTable.onCreated(function () {
   // Get reference to template instance
   const instance = this;

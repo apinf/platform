@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
-import { Proxies } from '../';
+import Proxies from '../';
 
 import registeredProxies from '../registered_proxies';
 
@@ -27,5 +27,7 @@ let schema = {
 schema = _.assign(schema, apiUmbrellaSchema, emqttSchema);
 
 Proxies.schema = new SimpleSchema(schema);
+// Attach translation
+Proxies.schema.i18n('schemas.proxies');
 
 Proxies.attachSchema(Proxies.schema);

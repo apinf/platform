@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Feedback } from '../../collection';
+import Feedback from '../../collection';
 
 Template.feedbackForm.helpers({
   feedbackCollection () {

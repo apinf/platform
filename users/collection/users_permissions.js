@@ -1,8 +1,8 @@
+import { Meteor } from 'meteor/meteor';
+
 Meteor.users.allow({
   update (currentUserId, user) {
     // Only allow user to update own username
-    if (currentUserId === user._id) {
-      return true;
-    }
+    return (currentUserId === user._id);
   },
 });

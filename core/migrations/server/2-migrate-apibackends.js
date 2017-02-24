@@ -2,8 +2,8 @@ import { Migrations } from 'meteor/percolate:migrations';
 import { Mongo } from 'meteor/mongo';
 
 import Apis from '/apis/collection';
-import { Proxies } from '/proxies/collection';
-import { ProxyBackends } from '/proxy_backends/collection';
+import Proxies from '/proxies/collection';
+import ProxyBackends from '/proxy_backends/collection';
 
 Migrations.add({
   version: 2,

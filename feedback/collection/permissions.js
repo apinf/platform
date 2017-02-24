@@ -1,4 +1,4 @@
-import { Feedback } from './';
+import Feedback from './';
 
 Feedback.allow({
   insert (userId) {

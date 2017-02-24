@@ -37,6 +37,7 @@ test.describe('Manage API Backend', function() {
         var newDescription  = ' Date:' + new Date();
         driver.findElement(By.css('#apiBackendForm textarea[name="description"]')).sendKeys(newDescription);
         // Save settings
+
         driver.findElement(By.id('save-settings')).click()
             .then(function() {
                 driver.sleep(1000);

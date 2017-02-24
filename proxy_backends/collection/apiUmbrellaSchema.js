@@ -48,6 +48,17 @@ const SettingsSchema = new SimpleSchema({
     type: [RateLimitSchema],
     optional: true,
   },
+  append_query_string: {
+    type: String,
+    optional: true,
+  },
+  headers_string: {
+    type: String,
+    autoform: {
+      rows: 3,
+    },
+    optional: true,
+  },
 });
 
 // Internationalize settings schema texts
@@ -126,4 +137,4 @@ const ApiUmbrellaSchema = new SimpleSchema({
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.ProxyBackends.apiUmbrella');
 
-export { ApiUmbrellaSchema };
+export default ApiUmbrellaSchema;

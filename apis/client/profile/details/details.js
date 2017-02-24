@@ -2,9 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import $ from 'jquery';
 import Clipboard from 'clipboard';
-
 import ApiKeys from '/api_keys/collection';
-import { Proxies } from '/proxies/collection';
+import Proxies from '/proxies/collection';
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button

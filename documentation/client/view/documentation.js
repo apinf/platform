@@ -3,10 +3,8 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
-import $ from 'jquery';
-
 import DocumentationFiles from '/documentation/collection';
-import { Settings } from '/settings/collection';
+import Settings from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
   const instance = this;

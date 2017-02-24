@@ -1,10 +1,12 @@
-// Meteor packages import
+import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 
-// APINF import
 import { MonitoringSettings } from '/monitoring/collection';
 
-Meteor.publish('monitoringSettings', function (apiId) {
+Meteor.publish('monitoringSettings', (apiId) => {
+  // Make sure apiId is a String
+  check(apiId, String);
+
   return MonitoringSettings.find({ apiId });
 });
 

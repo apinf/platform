@@ -25,19 +25,24 @@ Template.apiSelectPicker.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Get Proxy Backend ID parameter from URL,
-  const proxyBackendId = FlowRouter.getQueryParam('backend');
+  instance.autorun(() => {
+    // Get Proxy Backend ID parameter from URL,
+    const proxyBackendId = FlowRouter.getQueryParam('backend');
 
-  // Change value of proxy backend select, if URL parameter is present
-  if (proxyBackendId) {
-    // Update the select menu to match the Proxy Backend ID
-    instance.$('#proxy-backend-select').val(proxyBackendId);
-  }
+    // Change value of proxy backend select, if URL parameter is present
+    if (proxyBackendId) {
+      // Update the select menu to match the Proxy Backend ID
+      instance.$('#proxy-backend-select').val(proxyBackendId);
+    }
+  });
 });
 
 Template.apiSelectPicker.events({
   'change #proxy-backend-select': function (event) {
-    // Update selected backend URL parameter
-    FlowRouter.setQueryParams({ backend: event.target.value });
+    // Modifies the current history entry instead of creating a new one
+    FlowRouter.withReplaceState(() => {
+      // Update selected backend URL parameter
+      FlowRouter.setQueryParams({ backend: event.target.value });
+    });
   },
 });

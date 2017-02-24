@@ -45,7 +45,7 @@ AutoForm.hooks({
           // Get api id
           const apiId = monitoring.apiId;
 
-          MonitoringData.insert({ apiId }, (error, id) => {
+          MonitoringData.insert({ apiId }, (insertError, id) => {
             // Linked both collections
             MonitoringSettings.update(result, { $set: { data: id } });
           });

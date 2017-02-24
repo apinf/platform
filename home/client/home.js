@@ -1,6 +1,9 @@
+import { Template } from 'meteor/templating';
+import { DocHead } from 'meteor/kadira:dochead';
+
 import Branding from '/branding/collection';
 
-Template.home.created = function () {
+Template.home.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -8,7 +11,7 @@ Template.home.created = function () {
   instance.subscribe('branding');
 
   // Run this each time something changes
-  instance.autorun(function () {
+  instance.autorun(() => {
     // Check for template subscriptions
     if (instance.subscriptionsReady) {
       // Get Branding collection content
@@ -21,7 +24,7 @@ Template.home.created = function () {
       }
     }
   });
-};
+});
 
 Template.home.helpers({
   branding () {

@@ -1,3 +1,5 @@
+import { Mongo } from 'meteor/mongo';
+
 const Settings = new Mongo.Collection('Settings');
 
-export { Settings };
+export default Settings;

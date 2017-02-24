@@ -10,16 +10,16 @@ AutoForm.addHooks('proxyForm', {
   before: {
     insert (formData) {
       if (formData.name && formData.description && formData.type) {
-        // Get type of proxy 
+        // Get type of proxy
         const type = formData.type;
         // Check that proxy object is not empty or undefined
         const proxyData = formData[type];
         // Validate schema for filling all requiired fields
         const validation = proxyData ? validateSchema(type, proxyData) : false;
 
-        // Return form data if validation is okay 
+        // Return form data if validation is okay
         if (validation) {
-          return formData
+          return formData;
         }
       }
 
@@ -36,8 +36,8 @@ AutoForm.addHooks('proxyForm', {
 
     // TODO: multi-proxy support
     // Meteor.call('syncApiBackends');
-    
-    // Create and show message 
+
+    // Create and show message
     const message = TAPi18n.__('proxyForm_successText');
     sAlert.success(message);
   },

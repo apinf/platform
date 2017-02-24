@@ -1,4 +1,8 @@
 {
+  "env": {
+    "browser": true,
+    "jquery": true,
+  },
   "parser": "babel-eslint",
     "parserOptions": {
     "allowImportExportEverywhere": true,

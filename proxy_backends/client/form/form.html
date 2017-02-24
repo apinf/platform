@@ -122,10 +122,11 @@
     </div>
 
     <!-- Advanced settings -->
-    <div class="form-group col-md-12" id="advanced-settings">
+    <div class="col-md-12" id="advanced-settings">
       <h3>
         {{_ "proxyBackendForm_advancedSettings_title" }}
       </h3>
+      <!-- Disable API key checkbox -->
       {{> afQuickField
         name="apiUmbrella.settings.disable_api_key"
         type="boolean-checkbox"
@@ -135,8 +136,20 @@
         {{_ "proxyBackendForm_disableApiKey_helpText" }}
       </p>
 
+      <!-- Query String Parameters -->
+      {{> afQuickField
+        name="apiUmbrella.settings.append_query_string"
+        placeholder="param1=value&param2=value"
+      }}
+
+      <!-- Request Headers -->
+      {{> afQuickField
+        name="apiUmbrella.settings.headers_string"
+        placeholder="X-Example-Header: value"
+      }}
+
       <!-- Rate limiting -->
-      <div class="form-group" id="rate-limiting">
+      <div id="rate-limiting">
         <div class="col-md-3" id="rate-limit-mode">
           {{> afQuickField
             name="apiUmbrella.settings.rate_limit_mode"
@@ -148,12 +161,13 @@
           value="custom"
         }}
           <div class="col-md-12" id="rate-limits">
-          {{> afQuickField
-            name="apiUmbrella.settings.rate_limits"
-          }}
+            {{> afQuickField
+              name="apiUmbrella.settings.rate_limits"
+            }}
           </div>
         {{/if }}
       </div>
+
     </div>
     {{/ if }}
     <div id="proxy-form-buttons" class="btn-group pull-left">

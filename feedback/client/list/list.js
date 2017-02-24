@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
-import { Feedback } from '../../collection';
+
+import Feedback from '../../collection';
 
 Template.feedbackList.onCreated(function () {
   // Get API Backend ID from URL route
@@ -23,7 +25,7 @@ Template.feedbackList.helpers({
 
 Template.feedbackList.events({
   // Delete feedback
-  'click .delete-feedback': function (event) {
+  'click .delete-feedback': function () {
     Meteor.call('deleteFeedback', this._id);
   },
   'click #add-feedback': function () {

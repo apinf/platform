@@ -15,7 +15,7 @@ Template.apiMonitoring.onCreated(function () {
   instance.subscribe('monitoringSettings', apiId);
 });
 
-Template.apiMonitoring.onRendered(function () {
+Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
 });

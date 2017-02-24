@@ -1,3 +1,3 @@
-export const proxyBasePathRegEx = new RegExp(/^\/[a-z0-9A-Z_\-\/]+\/$/);
+export const proxyBasePathRegEx = new RegExp(/^\/[\w\-/]+\/$/);
 
-export const apiBasePathRegEx = new RegExp(/^\/[a-z0-9A-Z_\-\/]*$/);
+export const apiBasePathRegEx = new RegExp(/^\/[\w\-/]*$/);

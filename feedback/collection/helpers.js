@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import Apis from '/apis/collection';
-import { FeedbackVotes } from '/feedback_votes/collection';
+import FeedbackVotes from '/feedback_votes/collection';
 import ss from 'simple-statistics';
-import { Feedback } from './';
+import Feedback from './';
 
 Feedback.helpers({
   sumOfVotes () {

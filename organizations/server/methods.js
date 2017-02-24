@@ -39,8 +39,8 @@ Meteor.methods({
         queryParams.managerIds = userId;
       }
 
-      // Return cursor on unlinked apis
-      return Apis.find(queryParams).fetch();
+      // Return sorted list of unlinked apis by name
+      return Apis.find(queryParams, { sort: { name: 1 } }).fetch();
     }
 
     // Return undefined result for anonymous user
