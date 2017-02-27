@@ -8,15 +8,15 @@ Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
   // Run subscription in autorun
-  // instance.autorun(() => {
-  //   // Get current documentation file Id
-  //   const documentationFileId = Template.currentData().api.documentationFileId;
-  //
-  //   if (documentationFileId) {
-  //     // Subscribe to documentation
-  //     instance.subscribe('singleDocumentationFile', documentationFileId);
-  //   }
-  // });
+  instance.autorun(() => {
+    // Get current documentation file Id
+    const documentationFileId = Template.currentData().apiDoc.fileId;
+
+    if (documentationFileId) {
+      // Subscribe to documentation
+      instance.subscribe('singleDocumentationFile', documentationFileId);
+    }
+  });
 
   // Subscribe to code generator settings
   instance.subscribe('singleSetting', 'sdkCodeGenerator');
@@ -28,7 +28,7 @@ Template.apiDocumentation.onRendered(() => {
 
 Template.apiDocumentation.helpers({
   documentationExists () {
-    return !!(this.api.documentationFileId || this.api.documentationUrl);
+    return !!(this.apiDoc.fileId || this.apiDoc.remoteFileUrl);
   },
   codegenServerExists () {
     // Get template instance
