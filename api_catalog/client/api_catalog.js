@@ -161,3 +161,12 @@ Template.apiCatalog.helpers({
     return (viewMode === 'table');
   },
 });
+
+Template.apiCatalog.events({
+  'click [name=lifecycle-status]': (event) => {
+    // Get the label text
+    const selectedTag = event.currentTarget.innerText;
+    // Set value in query parameter using lower case
+    FlowRouter.setQueryParams({ lifecycle: selectedTag.toLowerCase() });
+  },
+});
