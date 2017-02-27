@@ -121,6 +121,8 @@
   "apiLifecycleStatus_labelText_unknown": "Unknown",
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
+  "apiMedia_apiRelatedMedia_Add_Button_Help": "Add embedded related media content",
+  "apiMedia_RelatedMedia_CreationTime": "Created at %s",
   "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiOrganization_disconnectButton": "Disconnect",
   "apiOrganization_panelTitle": "Connect API to Organization",
@@ -153,6 +155,21 @@
   "apiMonitoring_saveButton_text": "Save",
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
+  "apiMedia_apiRelatedMedia_Add_Button": "Add related media!",
+  "apiMedia_PostItem_Added_Text": "Added",
+  "apiMediaPostsForm_Add_Edit_Title": "Related Media",
+  "apiMedia_deletePostConfirmation_cancelButton": "Cancel",
+  "apiMedia_deletePostConfirmation_deleteButton": "Delete",
+  "apiMedia_deletePostConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
+  "apiMedia_deletePostConfirmation_confirmDeleteNote": "NOTE:",
+  "apiMedia_deletePostConfirmation_confirmDeleteInformation": "This action cannot be undone!",
+  "apiMedia_PostItem_Edit_Button": "Edit",
+  "apiMedia_PostItem_Delete_Button": "Delete",
+  "apiMediaPostsForm_Submit": "Submit",
+  "apiMedia_apiRelatedMedia_Title": "Related Media",
+  "apiMedia_deletePostConfirmation_title_text": "Delete Post",
+  "apiOembed_No_Link_message" : "No related media link is available.",
+  "apiMedia_apiRelatedMedia_Well_Message": "You don't have any media related to this API",
   "apiProxy_headerText": "Proxy backend configuration",
   "apiUserAuthorizationForm_addButton_text": "Add authorized user",
   "apiUserAuthorizationForm_header_text": "Add authorized users",
@@ -187,7 +204,7 @@
   "catalogueTable_added": "Added",
   "catalogueTable_addedBy": "Added by",
   "catalogueTable_labelText_private": "private",
-  "catalogue_Title": "API Catalog",
+  "catalogue_Title": "APIs",
   "changeSelectedProxy_buttonCancel": "Cancel",
   "changeSelectedProxy_buttonConfirm": "Change API Proxy",
   "changeSelectedProxy_title": "Change API Proxy",
@@ -382,7 +399,7 @@
   "notFound_Title": "Oops! Page not found.",
   "organizationApis_connectButton": "Connect",
   "organizationApisForm_successText": "The API and Organization are now connected.",
-  "organizationCatalog_Title": "Organization catalog",
+  "organizationCatalog_Title": "Organizations",
   "organizationCatalog_buttonText_addOrganization": "Add Organization",
   "organizationCatalog_toolbar_filterOptions_myOrganizations": "My organizations",
   "organizationCatalog_toolbar_filterOptions_showAll": "Show all",
@@ -694,6 +711,39 @@
               }
           }
       },
+      "proxies": {
+          "name" : {
+              "label": "Name"
+          },
+          "description" : {
+              "label": "Description"
+          },
+          "type" : {
+              "label": "Type"
+          },
+          "apiUmbrella" : {
+              "url": {
+                  "label": "URL"
+              },
+              "apiKey": {
+                  "label": "API Key"
+              },
+              "authToken": {
+                  "label": "Auth Token"
+              },
+              "elasticsearch": {
+                  "label": "ElasticSearch"
+              }
+          },
+          "emqtt": {
+              "url": {
+                  "label": "URL"
+              },
+              "elasticsearch": {
+                  "label": "ElasticSearch"
+              }
+          }
+      },
       "proxyBackends": {
           "proxyId": {
               "label": "Select one proxy"
@@ -757,6 +807,14 @@
               }
           }
       },
+      "api_media": {
+          "title": {
+            "label": "Title"
+          },
+          "url": {
+            "label": "URL"
+          }
+        },
       "organizations": {
           "name": {
               "label": "Name"

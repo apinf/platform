@@ -1,0 +1,45 @@
+.panel img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0%;
+}
+
+.responsive-video {
+  position: relative;
+}
+
+.responsive-video iframe {
+  width: 100%;
+  height: 50%;
+}
+
+@media screen and (min-width: 992px) {
+  .responsive-video iframe {
+    width: 100%;
+  }
+}
+
+/* Masonry starts */
+*, *:before, *:after {
+  box-sizing:
+  border-box !important;
+}
+.col-grid-post{
+  margin-left: -1em;
+}
+
+.oembedall-container a{
+  display: none;
+}
+.oembedall-container span{
+  display: none;
+}
+
+.oembedall-container{
+  margin-top: -30px;
+}
+
+#apiMediaCreationTime {
+  cursor: help;
+}
