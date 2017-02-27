@@ -110,6 +110,19 @@ Template.manageApiDocumentationModal.helpers({
     // Return a reference to ApiDocs collection, for AutoForm
     return ApiDocs;
   },
+  formType () {
+    const instance = Template.instance();
+    if (instance.data.apiDoc) {
+      return 'update';
+    }
+    return 'insert';
+  },
+  apiId () {
+    // Get API ID
+    const apiId = Template.instance().data.api._id;
+
+    return apiId;
+  },
   // Return list of all try-out methods, which is used in Swagger Options
   supportedSubmitMethods () {
     return [
