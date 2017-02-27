@@ -5,3 +5,4 @@ core/client/lib/chartsjs/*
 apis/client/profile/visibility/lib/bootstrap-switch.js
 /dashboard/client/charts/filtering/datepicker/
 /dashboard/client/charts/filtering/selectpicker/
+/api_media/lib/client/jquery.oembed.all.js
