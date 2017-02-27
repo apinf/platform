@@ -188,7 +188,7 @@ Apis.helpers({
     const documentationType = apiDocs.type;
 
     // Get uploaded documentation file ID
-    const documentationFileId = apiDocs.type;
+    const documentationFileId = apiDocs.fileId;
 
     // Placeholder documentation file Object
     let documentationFile;
@@ -213,7 +213,7 @@ Apis.helpers({
       documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
     } else {
       // Get remote swagger file URL
-      const documentationUrl = apiDocs.type;
+      const documentationUrl = apiDocs.remoteFileUrl;
 
       if (documentationUrl && documentationType === 'url') {
         // Get documentation URL
