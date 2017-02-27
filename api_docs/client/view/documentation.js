@@ -2,20 +2,21 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
 
 import Settings from '/settings/collection';
+import ApiDocs from '/api_docs/collection';
 
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
   // Run subscription in autorun
-  instance.autorun(() => {
-    // Get current documentation file Id
-    const documentationFileId = Template.currentData().api.documentationFileId;
-
-    if (documentationFileId) {
-      // Subscribe to documentation
-      instance.subscribe('singleDocumentationFile', documentationFileId);
-    }
-  });
+  // instance.autorun(() => {
+  //   // Get current documentation file Id
+  //   const documentationFileId = Template.currentData().api.documentationFileId;
+  //
+  //   if (documentationFileId) {
+  //     // Subscribe to documentation
+  //     instance.subscribe('singleDocumentationFile', documentationFileId);
+  //   }
+  // });
 
   // Subscribe to code generator settings
   instance.subscribe('singleSetting', 'sdkCodeGenerator');
@@ -57,10 +58,17 @@ Template.apiDocumentation.helpers({
 
 Template.apiDocumentation.events({
   'click #manage-api-documentation': function (event, templateInstance) {
-    // Get reference to API backend
+    // Get reference to API
     const api = templateInstance.data.api;
+
+    // Get API ID
+    const apiId = api._id;
+
+    // Find related documentation object
+    const apiDoc = ApiDocs.findOne({ apiId });
+
     // Show the manage API documentation form
-    Modal.show('manageApiDocumentationModal', { api });
+    Modal.show('manageApiDocumentationModal', { api, apiDoc });
   },
   'click #sdk-code-generator': function (event, templateInstance) {
     // Get reference to API backend
