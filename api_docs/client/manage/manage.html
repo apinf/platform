@@ -13,9 +13,9 @@
         <div class="modal-body">
           {{# autoForm
             collection=apiDocsCollection
-            doc=api
+            doc=apiDoc
             id="apiDocumentationForm"
-            type="update" }}
+            type=formType }}
 
             <legend>
               {{> showHelp 'addApiDocumentation' }}
@@ -79,6 +79,7 @@
             {{# if spinnerEnabled }}
               {{> spinner }}
             {{/ if }}
+            {{> afQuickField name='apiId' value=apiId type="hidden" }}
           {{/ autoForm }}
         </div>
       </div>
