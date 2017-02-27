@@ -65,11 +65,13 @@
           </div>
         </li>
         {{/ if }}
-        <li class="pull-right">
-          <span class="generic-card-created">
-            {{_ "latestApiBackends_DateAdded" api.relativeCreatedAt }}
-          </span>
-        </li>
+        {{# if api.created_at }}
+          <li class="pull-right">
+            <span class="generic-card-created">
+              {{ dateInTimeAgoFormat api.created_at }}
+            </span>
+          </li>
+        {{/ if }}
       </ul>
     </div>
   </div>
