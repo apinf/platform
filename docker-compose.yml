@@ -37,7 +37,7 @@ services:
     command: --storageEngine wiredTiger
   ssl:
     restart: always
-    image: smashwilson/lets-nginx
+    image: opencapacity/lets-nginx:1.3
     env_file:
       - 'docker/ssl/env'
     environment:
