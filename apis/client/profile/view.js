@@ -8,6 +8,7 @@ import Apis from '/apis/collection';
 import Feedback from '/feedback/collection';
 import ApiBacklogItems from '/backlog/collection';
 import ProxyBackends from '/proxy_backends/collection';
+import ApiDocs from '/api_docs/collection';
 
 Template.viewApi.onCreated(function () {
   // Get reference to template instance
@@ -56,6 +57,18 @@ Template.viewApi.helpers({
     const api = Apis.findOne(apiId);
 
     return api;
+  },
+  apiDoc () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get API ID
+    const apiId = instance.apiId;
+
+    // Get single API Backend
+    const apiDoc = ApiDocs.findOne({ apiId });
+
+    return apiDoc;
   },
   proxyBackend () {
     // Get reference to template instance
