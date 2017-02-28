@@ -1,5 +1,6 @@
-// eslint-fixer.js
+// eslint-parser.js
 var util = require('util'),
+    _ = require('lodash'),
     Transform = require('stream').Transform;
 
 function EslintParser(options) {
@@ -22,10 +23,9 @@ EslintParser.prototype._transform = function(data, encoding, done) {
   // each line is on data[0]
   var line = data[0];
   if (this._isHeader(line)) {
-    this.currentFile = line;
-    this.processingFile[this.currentFile] = {};
+    this.processingFile['filename'] = line;
   } else {
-    if (this._fileFinished(line)) {
+    if (this._fileFinished(line) && !_.isEmpty(this.processingFile)) {
       this.push(this.processingFile);
       this.processingFile = {};
     } else {
@@ -44,22 +44,20 @@ EslintParser.prototype._fileFinished = function(line) {
 }
 
 EslintParser.prototype._parseLine = function(line) {
-  // skip if it's not parsing errors of a file.
-  if (!this.currentFile) {
-    return undefined;
-  }
-
   // checks if it's a no-undef error
   if (line.indexOf('no-undef') !== -1) {
+    if (!this.processingFile.hasOwnProperty('no-undef')) {
+      this.processingFile['no-undef'] = new Set();
+    }
+
+    // Regular expression to match packages on the error line
     const re = /'(\w+)'/;
     // match the no-undef package
     const package = line.match(re)[1];
-    if (!this.processingFile[this.currentFile].hasOwnProperty('no-undef')) {
-      this.processingFile[this.currentFile]['no-undef'] = {}
-    }
-    this.processingFile[this.currentFile]['no-undef'][package] = 1;
+    this.processingFile['no-undef'].add(package);
+  } else {
+    // TODO: parse other eslint errors
   }
-  // this.processingFile[this.currentFile].push(line);
 }
 
 module.exports = function(options) {
