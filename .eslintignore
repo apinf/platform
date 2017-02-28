@@ -1,7 +1,8 @@
-node_modules
-public
+apis/client/profile/visibility/lib/bootstrap-switch.js
 core/client/lib/bootstrap-select/*
 core/client/lib/chartsjs/*
-apis/client/profile/visibility/lib/bootstrap-switch.js
-/dashboard/client/charts/filtering/datepicker/
-/dashboard/client/charts/filtering/selectpicker/
+dashboard/client/charts/filtering/datepicker/
+dashboard/client/charts/filtering/selectpicker/
+node_modules/
+public/
+scripts/
