@@ -10,11 +10,17 @@ Template.apiDocumentation.onCreated(function () {
   // Run subscription in autorun
   instance.autorun(() => {
     // Get current documentation file Id
-    const documentationFileId = Template.currentData().apiDoc.fileId;
+    const apiDoc = Template.currentData().apiDoc;
 
-    if (documentationFileId) {
-      // Subscribe to documentation
-      instance.subscribe('singleDocumentationFile', documentationFileId);
+    // Check if it is available
+    if (apiDoc) {
+      const documentationFileId = apiDoc.fileId;
+
+      // Check if it is available
+      if (documentationFileId) {
+        // Subscribe to documentation
+        instance.subscribe('singleDocumentationFile', documentationFileId);
+      }
     }
   });
 
@@ -28,7 +34,11 @@ Template.apiDocumentation.onRendered(() => {
 
 Template.apiDocumentation.helpers({
   documentationExists () {
-    return !!(this.apiDoc.fileId || this.apiDoc.remoteFileUrl);
+    if (this.apiDoc) {
+      return !!(this.apiDoc.fileId || this.apiDoc.remoteFileUrl);
+    }
+    // Otherwise return false
+    return false;
   },
   codegenServerExists () {
     // Get template instance
