@@ -19,12 +19,16 @@ Template.manageApiDocumentationModal.onCreated(function () {
   instance.autorun(() => {
     const api = Apis.findOne(instance.data.api._id);
 
+    // Get API id
     const apiId = api._id;
 
+    // Get ApiDoc object
     const apiDoc = ApiDocs.findOne({ apiId });
 
-    // Save apibackend id
+    // Save API
     Session.set('api', api);
+
+    // Save ApiDoc
     Session.set('apiDoc', apiDoc);
   });
 
@@ -36,8 +40,9 @@ Template.manageApiDocumentationModal.onCreated(function () {
 });
 
 Template.manageApiDocumentationModal.onDestroyed(() => {
-  // Unset session
+  // Unset sessions
   Session.set('api', undefined);
+  Session.set('apiDoc', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
@@ -86,17 +91,23 @@ Template.manageApiDocumentationModal.helpers({
   documentationFile () {
     const apiDoc = Session.get('apiDoc');
 
-    // const documentationFileId = api.documentationFileId;
-    const documentationFileId = apiDoc.fileId;
+    if (apiDoc) {
+      // const documentationFileId = api.documentationFileId;
+      const documentationFileId = apiDoc.fileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+      if (documentationFileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-    // Get documentation file Object
-    const documentationFile = DocumentationFiles.findOne(objectId);
+        // Get documentation file Object
+        const documentationFile = DocumentationFiles.findOne(objectId);
 
-    // Check if documentation file is available
-    return documentationFile;
+        // Check if documentation file is available
+        return documentationFile;
+      }
+    }
+    // Otherwise return false
+    return false;
   },
   apiDocumentationEditorIsEnabled () {
     // Get settings
@@ -111,7 +122,7 @@ Template.manageApiDocumentationModal.helpers({
       // Editor is enabled and has host setting, return true
       return true;
     }
-      // Otherwise return false
+    // Otherwise return false
     return false;
   },
   apiDocsCollection () {
