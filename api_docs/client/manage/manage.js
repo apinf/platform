@@ -18,8 +18,14 @@ Template.manageApiDocumentationModal.onCreated(function () {
 
   instance.autorun(() => {
     const api = Apis.findOne(instance.data.api._id);
+
+    const apiId = api._id;
+
+    const apiDoc = ApiDocs.findOne({ apiId });
+
     // Save apibackend id
     Session.set('api', api);
+    Session.set('apiDoc', apiDoc);
   });
 
   // Turn off spinner if it was on
@@ -68,6 +74,7 @@ Template.manageApiDocumentationModal.events({
   },
   'click #save-documentation-link': function () {
     // Hide modal
+    Modal.hide('manageApiDocumentationModal');
   },
   'click #open-api-editor': function () {
     // Hide modal
@@ -77,9 +84,10 @@ Template.manageApiDocumentationModal.events({
 
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
-    const api = Session.get('api');
+    const apiDoc = Session.get('apiDoc');
 
-    const documentationFileId = api.documentationFileId;
+    // const documentationFileId = api.documentationFileId;
+    const documentationFileId = apiDoc.fileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(documentationFileId);
