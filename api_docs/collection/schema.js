@@ -10,7 +10,7 @@ ApiDocs.schema = new SimpleSchema({
       'url',
       'file',
     ],
-    defaultValue: 'file',
+    defaultValue: 'url',
   },
   fileId: {
     type: String,
