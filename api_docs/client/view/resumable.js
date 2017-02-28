@@ -20,11 +20,11 @@ Meteor.startup(() => {
     // Get api id
     const api = Session.get('api');
 
-    // Update documentation file id field
-    ApiDocs.update(api._id, { $set: {
-      fileId,
-      type: 'file',
-    } });
+    // Get ApiDoc object by apiId
+    const apiDoc = ApiDocs.findOne({ apiId: api._id });
+
+    // Update documentation file id field and type
+    ApiDocs.update(apiDoc._id, { $set: { fileId, type: 'file' } });
 
     // Get success message translation
     const message = TAPi18n.__('manageApiDocumentationModal_AddedFile_Message');
