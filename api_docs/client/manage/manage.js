@@ -56,8 +56,8 @@ Template.manageApiDocumentationModal.events({
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-      // Get currentApiBackend documentationFileId
-      const documentationFileId = this.api.documentationFileId;
+      // Get ApiDic fileId
+      const documentationFileId = this.apiDoc.fileId;
 
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(documentationFileId);
@@ -65,9 +65,9 @@ Template.manageApiDocumentationModal.events({
       // Remove documentation object
       DocumentationFiles.remove(objectId);
 
-      // Remove documentation file id field
-      Apis.update(templateInstance.data.api._id, {
-        $unset: { documentationFileId: '' },
+      // Remove fileId
+      ApiDocs.update(templateInstance.data.apiDoc._id, {
+        $unset: { fileId: '' },
       });
 
       // Get deletion success message translation
