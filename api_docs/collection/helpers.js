@@ -2,7 +2,7 @@ import Apis from '/apis/collection';
 import ApiDocs from './';
 
 ApiDocs.helpers({
-  isActionAllow () {
+  currentUserCanEdit () {
     // Get related API id
     const docApiId = this.apiId;
 
