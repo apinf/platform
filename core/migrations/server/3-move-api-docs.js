@@ -8,15 +8,15 @@ Migrations.add({
   name: 'Move API documentation from Apis to ApiDocs collection',
   up () {
     // Iterate through Apis collection
-    Apis.find().forEach((apis) => {
+    Apis.find().forEach((api) => {
       // Check if fields exist
-      if (apis.documentationFileId || apis.documentation_link) {
+      if (api.documentationFileId || api.documentation_link) {
         // New apiDoc object
         const apiDoc = {
-          apiId: apis._id,
-          fileId: apis.documentationFileId,
-          otherUrl: apis.documentation_link,
-          submit_methods: apis.submit_methods,
+          apiId: api._id,
+          fileId: api.documentationFileId,
+          otherUrl: api.documentation_link,
+          submit_methods: api.submit_methods,
         };
 
         // Insert migrated API docs
