@@ -7,7 +7,7 @@ import { Template } from 'meteor/templating';
 
 import _ from 'lodash';
 
-import DocumentationFiles from '/doc_files/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import specificLanguageNames from './codgeneratorSpecificLanguages';
 
 Template.sdkCodeGeneratorModal.onCreated(function () {

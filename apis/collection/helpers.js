@@ -13,7 +13,7 @@ import _ from 'lodash';
 // Collection imports
 import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
-import DocumentationFiles from '/doc_files/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
 import Apis from './';
 

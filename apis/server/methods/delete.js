@@ -5,7 +5,7 @@ import { Mongo } from 'meteor/mongo';
 import Apis from '/apis/collection';
 import ApiBacklogItems from '/backlog/collection';
 import ApiMetadata from '/metadata/collection';
-import DocumentationFiles from '/doc_files/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import Feedback from '/feedback/collection';
 import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 import OrganizationApis from '/organization_apis/collection';
