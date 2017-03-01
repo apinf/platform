@@ -5,7 +5,7 @@ import ApiDocs from '/api_docs/collection';
 
 Migrations.add({
   version: 3,
-  name: 'Move API docs to ApiDocs collection',
+  name: 'Move API documentation from Apis to ApiDocs collection',
   up () {
     // Iterate through Apis collection
     Apis.find().forEach((apis) => {
