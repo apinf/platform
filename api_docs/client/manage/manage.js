@@ -7,7 +7,7 @@ import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
-import DocumentationFiles from '/doc_files/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
 import Settings from '/settings/collection';
 
@@ -135,12 +135,6 @@ Template.manageApiDocumentationModal.helpers({
       return 'update';
     }
     return 'insert';
-  },
-  apiId () {
-    // Get API ID
-    const apiId = Template.instance().data.api._id;
-
-    return apiId;
   },
   // Return list of all try-out methods, which is used in Swagger Options
   supportedSubmitMethods () {
