@@ -184,40 +184,44 @@ Apis.helpers({
 
     const apiDocs = ApiDocs.findOne({ apiId });
 
-    // Get documentation method (URL of File)
-    const documentationType = apiDocs.type;
-
-    // Get uploaded documentation file ID
-    const documentationFileId = apiDocs.fileId;
+    // Placeholder documentation Object
+    let documentation;
 
     // Placeholder documentation file Object
     let documentationFile;
 
-    if (documentationFileId) {
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+    // Check if apiDocs return something
+    if (apiDocs) {
+      // Get documentation method (URL of File)
+      const documentationType = apiDocs.type;
 
-      // Get documentation file Object
-      documentationFile = DocumentationFiles.findOne(objectId);
-    }
+      // Get uploaded documentation file ID
+      const documentationFileId = apiDocs.fileId;
 
-    let documentation;
+      if (documentationFileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-    // Check if documentation file is available and method is File
-    if (documentationFile && documentationType === 'file') {
-      // Build documentation files base url
-      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+        // Get documentation file Object
+        documentationFile = DocumentationFiles.findOne(objectId);
+      }
 
-      // Get documentation file URL
-      documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
-    } else {
-      // Get remote swagger file URL
-      const documentationUrl = apiDocs.remoteFileUrl;
+      // Check if documentation file is available and method is File
+      if (documentationFile && documentationType === 'file') {
+        // Build documentation files base url
+        const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+        const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
 
-      if (documentationUrl && documentationType === 'url') {
-        // Get documentation URL
-        documentation = documentationUrl;
+        // Get documentation file URL
+        documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+      } else {
+        // Get remote swagger file URL
+        const documentationUrl = apiDocs.remoteFileUrl;
+
+        if (documentationUrl && documentationType === 'url') {
+          // Get documentation URL
+          documentation = documentationUrl;
+        }
       }
     }
 
