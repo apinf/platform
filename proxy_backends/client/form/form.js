@@ -211,13 +211,16 @@ Template.proxyBackend.events({
   'change select[name="proxyId"]': function (event, templateInstance) {
     // Get selected option
     const selectedItem = event.currentTarget.value;
+    // Get number of the previous selected option
+    const previousItemNumber = templateInstance.previousItemNumber;
 
     // Checking of user changed current proxy to another
     if (templateInstance.formType === 'update') {
       Modal.show('changeSelectedProxy', {
         proxyBackendEvent: event,
-        proxyBackend: templateInstance,
+        proxyBackendForm: templateInstance,
         selectedItem,
+        previousItemNumber,
       });
     } else {
       // Set id of proxy selected
