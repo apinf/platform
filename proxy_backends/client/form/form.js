@@ -29,12 +29,12 @@ Template.proxyBackend.onCreated(() => {
       // Second case: multi proxy
 
       // Get Proxy Backend config
-      const proxyBackendExists = instance.data.proxyBackend;
+      const proxyBackend = instance.data.proxyBackend;
 
       // If ProxyBackend configuration exists then it has a proxy id
-      if (proxyBackendExists) {
+      if (proxyBackend) {
         // save the current proxy id
-        currentProxyId = proxyBackendExists.proxyId;
+        currentProxyId = proxyBackend.proxyId;
       } else {
         const proxies = Proxies.find({}, { sort: { name: 1 } }).fetch();
 
