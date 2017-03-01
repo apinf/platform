@@ -14,7 +14,7 @@ Template.proxyBackend.onCreated(() => {
 
   instance.getProxyId = () => {
     // Set the proxy id empty on default
-    instance.data.proxyId = new ReactiveVar('');
+    instance.proxyId = new ReactiveVar('');
     // Placeholder for current proxy id
     let currentProxyId = '';
 
@@ -42,7 +42,8 @@ Template.proxyBackend.onCreated(() => {
       }
     }
 
-    instance.data.proxyId.set(currentProxyId);
+    // Save proxy ID in template instance
+    instance.proxyId.set(currentProxyId);
 
     return currentProxyId;
   };
@@ -119,7 +120,7 @@ Template.proxyBackend.helpers({
     const instance = Template.instance();
 
     // Get current proxy id
-    const currentProxyId = instance.data.proxyId.get();
+    const currentProxyId = instance.proxyId.get();
 
     // Get settings of current Proxy
     return Proxies.findOne(currentProxyId);
@@ -133,7 +134,7 @@ Template.proxyBackend.helpers({
     const instance = Template.instance();
 
     // Get proxy ID from template instance
-    const savedProxyId = Template.instance().data.proxyId;
+    const savedProxyId = instance.proxyId;
 
     // Make sure proxy ID exists or calculate it
     const proxyId = savedProxyId ? savedProxyId.get() : instance.getProxyId();
@@ -218,7 +219,7 @@ Template.proxyBackend.events({
       });
     } else {
       // Set id of proxy selected
-      templateInstance.data.proxyId.set(selectedItem);
+      templateInstance.proxyId.set(selectedItem);
     }
   },
 });
