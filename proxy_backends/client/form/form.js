@@ -33,11 +33,13 @@ Template.proxyBackend.onCreated(() => {
 
       // If ProxyBackend configuration exists then it has a proxy id
       if (proxyBackend) {
-        // save the current proxy id
+        // Save the current proxy id
         currentProxyId = proxyBackend.proxyId;
       } else {
+        // Get all proxies ordered by name
         const proxies = Proxies.find({}, { sort: { name: 1 } }).fetch();
 
+        // Set current proxy ID as the first item of the proxies list
         currentProxyId = proxies[0]._id;
       }
     }
@@ -151,7 +153,7 @@ Template.proxyBackend.helpers({
     return '';
   },
   oneProxy () {
-    // Ger proxy count
+    // Get proxy count
     const proxyCount = Counts.get('proxyCount');
 
     // Check on existing only one proxy
@@ -161,8 +163,8 @@ Template.proxyBackend.helpers({
     // Get template instance
     const instance = Template.instance();
 
-    // Get proxyBackend from template data
-    return instance.data.proxyBackend;
+    // Return boolean value
+    return !!(instance.data.proxyBackend);
   },
 });
 
