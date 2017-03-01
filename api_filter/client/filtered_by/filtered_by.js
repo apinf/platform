@@ -32,7 +32,7 @@ Template.apiFilteredBy.helpers({
 });
 
 Template.apiFilteredBy.events({
-  'click .clear-all': () => {
+  'click #clear-all': () => {
     // Delete query parameter
     FlowRouter.setQueryParams({ lifecycle: null });
   },
