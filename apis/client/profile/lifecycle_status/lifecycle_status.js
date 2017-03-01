@@ -35,22 +35,13 @@ Template.apiLifecycleStatus.helpers({
     return labelType;
   },
   lifecycleStatus () {
-    // Get reference to template instahce
+    // Get reference to template instance
     const templateInstance = Template.instance();
 
-    let statusText;
+    // Get lifecycle status from API document
+    const status = templateInstance.data.api.lifecycleStatus;
 
-    if (templateInstance.data.api && templateInstance.data.api.lifecycleStatus) {
-      // Get lifecycle status from API document
-      const status = templateInstance.data.api.lifecycleStatus;
-
-      // Get status text translation
-      statusText = TAPi18n.__(`apiLifecycleStatus_labelText_${status}`);
-    } else {
-      // Get translation text for Unknown lifecycle status
-      statusText = TAPi18n.__('apiLifecycleStatus_labelText_unknown');
-    }
-
-    return statusText;
+    // Get status text translation
+    return TAPi18n.__(`apiLifecycleStatus_labelText_${status}`);
   },
 });

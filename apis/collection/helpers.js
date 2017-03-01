@@ -1,5 +1,6 @@
 // Meteor imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
 
@@ -12,6 +13,8 @@ import _ from 'lodash';
 // Collection imports
 import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
+import DocumentationFiles from '/api_docs/files/collection';
+import ApiDocs from '/api_docs/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -174,5 +177,54 @@ Apis.helpers({
     } else {
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
+  },
+  documentation () {
+    // Get API ID
+    const apiId = this._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId });
+
+    // Placeholder documentation Object
+    let documentation;
+
+    // Placeholder documentation file Object
+    let documentationFile;
+
+    // Check if apiDocs return something
+    if (apiDocs) {
+      // Get documentation method (URL of File)
+      const documentationType = apiDocs.type;
+
+      // Get uploaded documentation file ID
+      const documentationFileId = apiDocs.fileId;
+
+      if (documentationFileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+
+        // Get documentation file Object
+        documentationFile = DocumentationFiles.findOne(objectId);
+      }
+
+      // Check if documentation file is available and method is File
+      if (documentationFile && documentationType === 'file') {
+        // Build documentation files base url
+        const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+        const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+
+        // Get documentation file URL
+        documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+      } else {
+        // Get remote swagger file URL
+        const documentationUrl = apiDocs.remoteFileUrl;
+
+        if (documentationUrl && documentationType === 'url') {
+          // Get documentation URL
+          documentation = documentationUrl;
+        }
+      }
+    }
+
+    return documentation;
   },
 });
