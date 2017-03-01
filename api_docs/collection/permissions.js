@@ -1,28 +1,13 @@
 import ApiDocs from './';
 
 ApiDocs.allow({
-  insert (userId) {
-    // Check if user is registered
-    if (userId) {
-      return true;
-    }
-    // Otherwise reject
-    return false;
+  insert (userId, apiDocs) {
+    return apiDocs.isActionAllow();
   },
-  update (userId) {
-    // Check if user is registered
-    if (userId) {
-      return true;
-    }
-    // Otherwise reject
-    return false;
+  remove (userId, apiDocs) {
+    return apiDocs.isActionAllow();
   },
-  remove (userId) {
-    // Check if user is registered
-    if (userId) {
-      return true;
-    }
-    // Otherwise reject
-    return false;
+  update (userId, apiDocs) {
+    return apiDocs.isActionAllow();
   },
 });
