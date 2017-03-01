@@ -509,22 +509,6 @@
         "url": {
           "label": "URL"
         },
-        "documentationType": {
-          "label": "Provide API Documentation via",
-          "options": {
-            "url": "URL",
-            "file": "File"
-          }
-        },
-        "documentationUrl": {
-          "label": "Link to API Documentation"
-        },
-        "otherDocumentationUrl": {
-          "label": "Link to other API Documentation"
-        },
-        "submit_methods": {
-          "label": "Allow try-out for following methods:"
-        },
         "organizationId": {
           "label": "Connect API to organization"
         },
@@ -538,6 +522,24 @@
             "production": "Production",
             "deprecated": "Deprecated"
           }
+        }
+      },
+      "apiDocs": {
+        "type": {
+          "label": "Provide API Documentation via",
+          "options": {
+            "url": "URL",
+            "file": "File"
+          }
+        },
+        "remoteFileUrl": {
+          "label": "Link to API Documentation"
+        },
+        "otherUrl": {
+          "label": "Link to other API Documentation"
+        },
+        "submit_methods": {
+          "label": "Allow try-out for following methods:"
         }
       },
       "apiMetadata": {
