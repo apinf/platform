@@ -9,16 +9,19 @@ Migrations.add({
   up () {
     // Iterate through Apis collection
     Apis.find().forEach((apis) => {
-      // New apiDoc object
-      const apiDoc = {
-        apiId: apis._id,
-        fileId: apis.documentationFileId,
-        otherUrl: apis.documentation_link,
-        submit_methods: apis.submit_methods,
-      };
+      // Check if fields exist
+      if (apis.documentationFileId || apis.documentation_link) {
+        // New apiDoc object
+        const apiDoc = {
+          apiId: apis._id,
+          fileId: apis.documentationFileId,
+          otherUrl: apis.documentation_link,
+          submit_methods: apis.submit_methods,
+        };
 
-      // Insert migrated API docs
-      ApiDocs.insert(apiDoc);
+        // Insert migrated API docs
+        ApiDocs.insert(apiDoc);
+      }
     });
   },
 });
