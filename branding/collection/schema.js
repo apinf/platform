@@ -42,6 +42,20 @@ Branding.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  privacyPolicy: {
+    type: String,
+    optional: true,
+    autoform: {
+      rows: 5,
+    },
+  },
+  termsOfUse: {
+    type: String,
+    optional: true,
+    autoform: {
+      rows: 5,
+    },
+  },
   socialMedia: {
     type: [Object],
     optional: true,
