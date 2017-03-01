@@ -593,6 +593,14 @@
           "siteSlogan": {
               "label": "Site slogan"
           },
+          "privacyPolicy": {
+            "label": "Privacy Policy",
+            "placeholder": "Add your privacy policy here"
+          },
+          "termsOfUse": {
+            "label": "Terms of Use",
+            "placeholder": "Add your terms of use here"
+          },
           "colors": {
               "label": "Colors",
               "primary": {
