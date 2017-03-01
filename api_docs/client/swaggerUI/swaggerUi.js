@@ -10,7 +10,7 @@ Template.swaggerUi.onCreated(() => {
   instance.dataFetched = new ReactiveVar(false);
 
   // Get url of api documentation
-  const documentationURL = instance.data.apiDoc;
+  const documentationURL = instance.data.api.documentation();
 
   // Check validation of Swagger file
   Meteor.call('isValidSwagger', documentationURL, (error, result) => {

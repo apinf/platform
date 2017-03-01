@@ -13,14 +13,17 @@ import SwaggerClient from 'swagger-client';
 Template.swaggerUiContent.onCreated(function () {
   const instance = this;
 
+  // Get API document
+  const api = instance.data.api;
+
   // Get URL of api documentation
-  const documentationURL = this.data.apiDoc;
+  const documentationURL = api.documentation();
 
   // Get proxy
   const proxy = Proxies.findOne();
 
   // Get proxy backend
-  const proxyBackend = ProxyBackends.findOne({ apiId: instance.data.api._id });
+  const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
   // Get proxy host if it exists
   let proxyHost = proxy ? proxy.apiUmbrella.url : '';
@@ -104,16 +107,24 @@ Template.swaggerUiContent.onCreated(function () {
 
   // Subscribe to api collection
   instance.autorun(() => {
-    // Get relevant api collection
-    instance.subscribe('apiBackend', instance.data.api._id);
+    // Get API id
+    const apiId = instance.data.api._id;
 
-    // Get api
-    const api = Apis.findOne(instance.data.api._id);
+    // Get updated api
+    const currentApi = Apis.findOne(apiId);
+    // Get documentation URL
+    const documentationUrl = currentApi.documentation();
 
-    // Check on documentation exists
-    if (api.documentationFileId) {
+    // Make sure documentation exists as File or URL
+    if (documentationUrl) {
+      // Check if URL of documentation is changed
+      if (swagger.getOption('url') !== documentationUrl) {
+        // Change URL in Swagger UI
+        swagger.setOption('url', documentationUrl);
+      }
+
       // Set selected methods in Swagger
-      swagger.setOption('supportedSubmitMethods', api.submit_methods);
+      swagger.setOption('supportedSubmitMethods', currentApi.submit_methods);
 
       // Load Swagger UI
       swagger.load();

@@ -7,7 +7,8 @@ import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Apis from '/apis/collection';
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/api_docs/files/collection';
+import ApiDocs from '/api_docs/collection';
 import Settings from '/settings/collection';
 
 const uploadingSpinner = new ReactiveVar(false);
@@ -17,8 +18,18 @@ Template.manageApiDocumentationModal.onCreated(function () {
 
   instance.autorun(() => {
     const api = Apis.findOne(instance.data.api._id);
-    // Save apibackend id
+
+    // Get API id
+    const apiId = api._id;
+
+    // Get ApiDoc object
+    const apiDoc = ApiDocs.findOne({ apiId });
+
+    // Save API
     Session.set('api', api);
+
+    // Save ApiDoc
+    Session.set('apiDoc', apiDoc);
   });
 
   // Turn off spinner if it was on
@@ -29,8 +40,9 @@ Template.manageApiDocumentationModal.onCreated(function () {
 });
 
 Template.manageApiDocumentationModal.onDestroyed(() => {
-  // Unset session
+  // Unset sessions
   Session.set('api', undefined);
+  Session.set('apiDoc', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
@@ -44,8 +56,8 @@ Template.manageApiDocumentationModal.events({
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-      // Get currentApiBackend documentationFileId
-      const documentationFileId = this.api.documentationFileId;
+      // Get ApiDic fileId
+      const documentationFileId = this.apiDoc.fileId;
 
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(documentationFileId);
@@ -53,8 +65,10 @@ Template.manageApiDocumentationModal.events({
       // Remove documentation object
       DocumentationFiles.remove(objectId);
 
-      // Remove documenation file id field
-      Apis.update(templateInstance.data.api._id, { $unset: { documentationFileId: '' } });
+      // Remove fileId
+      ApiDocs.update(templateInstance.data.apiDoc._id, {
+        $unset: { fileId: '' },
+      });
 
       // Get deletion success message translation
       const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
@@ -75,18 +89,25 @@ Template.manageApiDocumentationModal.events({
 
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
-    const api = Session.get('api');
+    const apiDoc = Session.get('apiDoc');
 
-    const documentationFileId = api.documentationFileId;
+    if (apiDoc) {
+      // const documentationFileId = api.documentationFileId;
+      const documentationFileId = apiDoc.fileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+      if (documentationFileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-    // Get documentation file Object
-    const documentationFile = DocumentationFiles.findOne(objectId);
+        // Get documentation file Object
+        const documentationFile = DocumentationFiles.findOne(objectId);
 
-    // Check if documentation file is available
-    return documentationFile;
+        // Check if documentation file is available
+        return documentationFile;
+      }
+    }
+    // Otherwise return false
+    return false;
   },
   apiDocumentationEditorIsEnabled () {
     // Get settings
@@ -101,12 +122,19 @@ Template.manageApiDocumentationModal.helpers({
       // Editor is enabled and has host setting, return true
       return true;
     }
-      // Otherwise return false
+    // Otherwise return false
     return false;
   },
-  apisCollection () {
-    // Return a reference to Apis collection, for AutoForm
-    return Apis;
+  apiDocsCollection () {
+    // Return a reference to ApiDocs collection, for AutoForm
+    return ApiDocs;
+  },
+  formType () {
+    const instance = Template.instance();
+    if (instance.data.apiDoc) {
+      return 'update';
+    }
+    return 'insert';
   },
   // Return list of all try-out methods, which is used in Swagger Options
   supportedSubmitMethods () {

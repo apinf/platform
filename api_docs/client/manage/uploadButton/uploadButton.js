@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 
 Template.manageApiDocumentationModalUploadButton.onRendered(() => {
   // Assign resumable browse to element

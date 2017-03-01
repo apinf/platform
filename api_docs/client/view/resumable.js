@@ -3,9 +3,9 @@ import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import Apis from '/apis/collection';
+import ApiDocs from '/api_docs/collection';
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {
@@ -15,13 +15,22 @@ Meteor.startup(() => {
     uploadingSpinner.set(false);
 
     // Get the id from documentation file object
-    const documentationFileId = file.uniqueIdentifier;
+    const fileId = file.uniqueIdentifier;
 
     // Get api id
     const api = Session.get('api');
 
-    // Update documenation file id field
-    Apis.update(api._id, { $set: { documentationFileId } });
+    // Get ApiDoc object
+    const apiDoc = ApiDocs.findOne({ apiId: api._id });
+
+    // Check if ApiDoc is available
+    // if so - update it with new values
+    // if not - insert them
+    if (apiDoc) {
+      ApiDocs.update(apiDoc._id, { $set: { fileId, type: 'file' } });
+    } else {
+      ApiDocs.insert({ apiId: api._id, fileId, type: 'file' });
+    }
 
     // Get success message translation
     const message = TAPi18n.__('manageApiDocumentationModal_AddedFile_Message');

@@ -1,10 +1,8 @@
-import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
-import DocumentationFiles from '/documentation/collection';
 import Settings from '/settings/collection';
+import ApiDocs from '/api_docs/collection';
 
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
@@ -12,11 +10,17 @@ Template.apiDocumentation.onCreated(function () {
   // Run subscription in autorun
   instance.autorun(() => {
     // Get current documentation file Id
-    const documentationFileId = Template.currentData().api.documentationFileId;
+    const apiDoc = Template.currentData().apiDoc;
 
-    if (documentationFileId) {
-      // Subscribe to documentation
-      instance.subscribe('singleDocumentationFile', documentationFileId);
+    // Check if it is available
+    if (apiDoc) {
+      const documentationFileId = apiDoc.fileId;
+
+      // Check if it is available
+      if (documentationFileId) {
+        // Subscribe to documentation
+        instance.subscribe('singleDocumentationFile', documentationFileId);
+      }
     }
   });
 
@@ -29,34 +33,12 @@ Template.apiDocumentation.onRendered(() => {
 });
 
 Template.apiDocumentation.helpers({
-  uploadedDocumentationLink () {
-    const documentationFileId = this.api.documentationFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
-    // Get documentation file Object
-    const documentationFile = DocumentationFiles.findOne(objectId);
-
-    let documentationFileUrl;
-
-    // Check if documentation file is available
-    if (documentationFile) {
-      // Build documentation files base url
-      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-      const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
-
-      // Get documentation file URL
-      documentationFileUrl = `${documentationFilesBaseURL}/id/${documentationFileId}`;
-    }
-    return documentationFileUrl;
-  },
-  documentationLink () {
-    // get documentation link
-    return this.api.documentation_link;
-  },
   documentationExists () {
-    return !!(this.api.documentationFileId);
+    if (this.apiDoc) {
+      return !!(this.apiDoc.fileId || this.apiDoc.remoteFileUrl);
+    }
+    // Otherwise return false
+    return false;
   },
   codegenServerExists () {
     // Get template instance
@@ -86,10 +68,17 @@ Template.apiDocumentation.helpers({
 
 Template.apiDocumentation.events({
   'click #manage-api-documentation': function (event, templateInstance) {
-    // Get reference to API backend
+    // Get reference to API
     const api = templateInstance.data.api;
+
+    // Get API ID
+    const apiId = api._id;
+
+    // Find related documentation object
+    const apiDoc = ApiDocs.findOne({ apiId });
+
     // Show the manage API documentation form
-    Modal.show('manageApiDocumentationModal', { api });
+    Modal.show('manageApiDocumentationModal', { api, apiDoc });
   },
   'click #sdk-code-generator': function (event, templateInstance) {
     // Get reference to API backend

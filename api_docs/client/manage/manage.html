@@ -12,15 +12,23 @@
         </div>
         <div class="modal-body">
           {{# autoForm
-            collection=apisCollection
-            doc=api
+            collection=apiDocsCollection
+            doc=apiDoc
             id="apiDocumentationForm"
-            type="update" }}
+            type=formType }}
 
             <legend>
-              {{> showHelp 'uploadApiDocumentation' }}
-              {{_ "import_ApiDocumentation_Title" }}
+              {{> showHelp 'addApiDocumentation' }}
+              {{_ "manageApiDocumentationModal_addDocumentation_title" }}
             </legend>
+            {{> afQuickField
+              name="type"
+              firstOption=false
+            }}
+            {{#if afFieldValueIs
+              name="type"
+              value="file"
+            }}
             <div class="documentation-file">
               {{# unless documentationFile }}
                 {{> manageApiDocumentationModalUploadButton }}
@@ -44,6 +52,9 @@
                 }}
               {{/ unless }}
             </div>
+            {{ else }}
+            {{> afQuickField name='remoteFileUrl' }}
+            {{/ if }}
             {{# if apiDocumentationEditorIsEnabled }}
               <legend>
                 {{> showHelp 'documentation_editor_create_file' }}
@@ -57,7 +68,7 @@
               {{> showHelp 'documentation_link' }}
               {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}
             </legend>
-            {{> afQuickField name='documentation_link' }}
+            {{> afQuickField name='otherUrl' }}
             <button type="submit" class="btn btn-success" id="save-documentation-link">
               {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
             </button>
@@ -67,6 +78,7 @@
             {{# if spinnerEnabled }}
               {{> spinner }}
             {{/ if }}
+            {{> afQuickField name='apiId' value=api._id type="hidden" }}
           {{/ autoForm }}
         </div>
       </div>
