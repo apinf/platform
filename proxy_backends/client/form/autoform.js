@@ -128,9 +128,9 @@ AutoForm.hooks({
           // Get API id
           const apiId = currentProxyBackend.apiId;
           // Get proxy backend id
-          const proxyBackendFromMongo = ProxyBackends.findOne({ apiId });
+          const previousProxyBackend = ProxyBackends.findOne({ apiId });
 
-          const previousProxyId = proxyBackendFromMongo.proxyId;
+          const previousProxyId = previousProxyBackend.proxyId;
           const currentProxyId = currentProxyBackend.proxyId;
 
           // Check: if user changed proxy
