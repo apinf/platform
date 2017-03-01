@@ -37,5 +37,8 @@ ApiDocs.schema = new SimpleSchema({
   },
 });
 
+// Enable translations (i18n)
+ApiDocs.schema.i18n('schemas.apiDocs');
+
 // Attach schema to collection for validation, etc.
 ApiDocs.attachSchema(ApiDocs.schema);
