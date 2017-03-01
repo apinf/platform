@@ -556,7 +556,7 @@
     "dashboardDataTable_timeStamp": "P\u00e4iv\u00e4ys",
     "dashboardDataTable_title": "Analytiikka",
     "dashboardDataTable_pageCount": "Sivu",
-    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. <br\/> Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
+    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
     "dashboardCharts_placeholder_loadingData": "Haetaan uusinta dataa...",
     "deleteAccount_closeButton": "Sulje",
     "deleteAccount_confirmDelete": "Poista",
