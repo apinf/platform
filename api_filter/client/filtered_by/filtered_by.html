@@ -1,0 +1,15 @@
+<template name="apiFilteredBy">
+  {{# if selectedOption }}
+    <p>
+      <strong>
+        {{_ 'apiFilteredBy_text.apiCount' count=apisCount }}&nbsp;
+      </strong>
+      <i>
+        {{_ 'apiFilteredBy_text_filteredBy' tag=selectedOption }}
+      </i>
+      <a id="clear-all">
+        {{_ 'apiFilteredBy_buttonText_clear' }}
+      </a>
+    </p>
+  {{/ if }}
+</template>

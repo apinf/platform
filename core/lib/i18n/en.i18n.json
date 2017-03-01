@@ -88,6 +88,12 @@
   "apiExport_proxy_title": "Export proxy configuration",
   "apiExport_proxy_description": "Export proxy configuration in JSON or YAML format",
   "apiExport_title": "Export",
+  "apiFilteredBy_text": {
+    "apiCount": " __count__ API",
+    "apiCount_plural": "__count__ APIs"
+  },
+  "apiFilteredBy_text_filteredBy": "filtered by \"__tag__\"",
+  "apiFilteredBy_buttonText_clear": "Clear all",
   "apisFilterForm_buttonText_filter": "Filter",
   "apisFilterForm_buttonText_clear": "Clear",
   "apisFilterForm_labelText_lifecycle": "Life Cycle Phases",
@@ -471,7 +477,6 @@
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
-  "proxyBackendForm_informText_noOneSelectedProxy": "No one proxy was selected.",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
   "proxyForm_successText": "Proxy settings were saved",
@@ -488,11 +493,6 @@
   "removeProxy_confirmRemoveProxy": "Yes, remove",
   "removeProxy_cancelRemove": "Cancel",
   "removeProxy_errorMessage": "Error: Proxy removal failed",
-  "removeSelectedProxy_buttonCancel": "Cancel",
-  "removeSelectedProxy_buttonConfirm": "Yes, remove",
-  "removeSelectedProxy_title": "Remove Proxy",
-  "removeSelectedProxy_textCaution": "Caution!",
-  "removeSelectedProxy_textConfirm": "Deleting the proxy backend configuration will potentially break API calls from applications. Please inform your API consumers about this change.",
   "requestsOverTimeChart_showingRecordsCount": "Showing records",
   "requestsOverTimeChart_title": "API Request Timeline",
   "requestsOverTimeChart_help_text": "You can use this chart to view number of requests your API has received for a specific time period. You can see API requests for a single API or a combination of them. The overview information and other charts will be updated when you interact with API request Timeline.",
@@ -501,29 +501,28 @@
   "schemas": {
       "apis": {
         "name": {
-          "label": "API Name"
-        },
-        "description": {
-          "label": "Description"
-        },
-        "url": {
-          "label": "URL"
-        },
-        "organizationId": {
-          "label": "Connect API to organization"
-        },
-        "lifecycleStatus": {
-          "label": "Lifecycle status",
-          "placeholder": "Select lifecycle status",
-          "options": {
-            "design": "Design",
-            "development": "Development",
-            "testing": "Testing",
-            "production": "Production",
-            "deprecated": "Deprecated"
-          }
-        }
-      },
+              "label": "API Name"
+          },
+          "description": {
+              "label": "Description"
+          },
+          "url": {
+              "label": "URL"
+          },
+          "organizationId": {
+              "label": "Connect API to organization"
+          },
+          "lifecycleStatus": {
+              "label": "Lifecycle status",
+              "placeholder": "Select lifecycle status",
+              "options": {
+                  "design": "Design",
+                  "development": "Development",
+                  "testing": "Testing",
+                  "production": "Production",
+                  "deprecated": "Deprecated"
+              }
+          },
       "apiDocs": {
         "type": {
           "label": "Provide API Documentation via",
@@ -608,23 +607,23 @@
           "colors": {
               "label": "Colors",
               "primary": {
-                "label": "Primary"
+                  "label": "Primary"
               },
               "primaryText": {
-                "label": "Primary text"
+                  "label": "Primary text"
               }
           },
           "socialMedia": {
               "label": "Social media",
               "$": {
-                "name": {
-                    "label": "Name",
-                    "firstOption": "(Select One)"
-                },
-                "url": {
-                    "label": "Url",
-                    "placeholder": "http://example.com/accountname"
-                }
+                  "name": {
+                      "label": "Name",
+                      "firstOption": "(Select One)"
+                  },
+                  "url": {
+                      "label": "Url",
+                      "placeholder": "http://example.com/accountname"
+                  }
               }
           },
           "siteFooter": {
@@ -632,18 +631,18 @@
           }
       },
       "contactForm": {
-        "name": {
-          "label": "Your name",
-          "placeholder": "Your name"
-        },
-        "email": {
-          "label": "E-mail address",
-          "placeholder": "Your email"
-        },
-        "message": {
-          "label": "Message",
-          "placeholder": "Your message"
-        }
+          "name": {
+              "label": "Your name",
+              "placeholder": "Your name"
+          },
+          "email": {
+              "label": "E-mail address",
+              "placeholder": "Your email"
+          },
+          "message": {
+              "label": "Message",
+              "placeholder": "Your message"
+          }
       },
       "feedback": {
           "topic": {
@@ -657,27 +656,27 @@
           "messageType": {
               "label": "Choose message type",
               "options": {
-                "Feedback": "Feedback",
-                "Error report": "Error report",
-                "Feature request": "Feature request"
+                  "Feedback": "Feedback",
+                  "Error report": "Error report",
+                  "Feature request": "Feature request"
               }
           }
       },
       "monitoring": {
-        "enabled": {
-          "label": "Enabled API Monitoring"
-        },
-        "url": {
-          "label": "Endpoint to Monitor"
-        }
+          "enabled": {
+              "label": "Enabled API Monitoring"
+          },
+          "url": {
+              "label": "Endpoint to Monitor"
+          }
       },
       "settings": {
-        "access": {
-          "onlyAdminsCanAddApis": {
-            "label": "Only platform administrators are allowed to add new APIs"
-          }
-        },
-        "apiDocumentationEditor": {
+          "access": {
+              "onlyAdminsCanAddApis": {
+                  "label": "Only platform administrators are allowed to add new APIs"
+              }
+          },
+          "apiDocumentationEditor": {
               "label": "API Documentation Editor",
               "enabled": {
                   "label": "Enabled"
@@ -730,52 +729,59 @@
           }
       },
       "proxies": {
-        "name" : {
-          "label": "Name"
-        },
-        "description" : {
-          "label": "Description"
-        },
-        "type" : {
-          "label": "Type"
-        },
-        "apiUmbrella" : {
-          "url": {
-            "label": "URL"
+          "name" : {
+              "label": "Name"
           },
-          "apiKey": {
-            "label": "API Key"
+          "description" : {
+              "label": "Description"
           },
-          "authToken": {
-            "label": "Auth Token"
+          "type" : {
+              "label": "Type"
           },
-          "elasticsearch": {
-            "label": "ElasticSearch"
+          "apiUmbrella" : {
+              "url": {
+                  "label": "URL"
+              },
+              "apiKey": {
+                  "label": "API Key"
+              },
+              "authToken": {
+                  "label": "Auth Token"
+              },
+              "elasticsearch": {
+                  "label": "ElasticSearch"
+              }
+          },
+          "emqtt": {
+              "url": {
+                  "label": "URL"
+              },
+              "elasticsearch": {
+                  "label": "ElasticSearch"
+              }
           }
-        },
-        "emqtt": {
-          "url": {
-            "label": "URL"
-          },
-          "elasticsearch": {
-            "label": "ElasticSearch"
-          }
-        }
       },
-      "ProxyBackends": {
-        "proxyId": {
-          "label": "Select one proxy"
-        },
-        "apiUmbrella": {
+      "proxyBackends": {
+          "proxyId": {
+              "label": "Select one proxy"
+          },
+          "apiUmbrella": {
+              "servers": {
+                  "$": {
+                      "port": {
+                          "label": "API port"
+                      }
+                  }
+              },
               "settings": {
                   "append_query_string": {
-                    "label": "Append Query String Parameters"
+                      "label": "Append Query String Parameters"
                   },
                   "disable_api_key": {
                       "label": "Disable API key requirement"
                   },
                   "headers_string": {
-                    "label": "Set Request Headers"
+                      "label": "Set Request Headers"
                   },
                   "rate_limit_mode": {
                       "label": "Rate limit mode",
@@ -783,6 +789,9 @@
                           "custom": "Custom rate limits",
                           "unlimited": "Unlimited requests"
                       }
+                  },
+                  "rate_limits": {
+                      "label": "Rate limits"
                   },
                   "rate_limit": {
                       "duration": {
@@ -802,6 +811,16 @@
                           "label": "Show rate limit in response headers"
                       }
                   }
+              },
+              "url_matches": {
+                  "$": {
+                      "frontend_prefix": {
+                          "label": "Proxy base path"
+                      },
+                      "backend_prefix": {
+                          "label": "API base path"
+                      }
+                  }
               }
           }
       },
@@ -815,55 +834,55 @@
         },
       "organizations": {
           "name": {
-            "label": "Name"
+              "label": "Name"
           },
           "url": {
-            "label": "URL"
+              "label": "URL"
           },
           "description": {
-            "label": "Description"
+              "label": "Description"
           },
           "contact": {
               "label": "Contact",
               "person": {
-                "label": "Name"
+                  "label": "Name"
               },
               "phone": {
-                "label": "Phone number"
+                  "label": "Phone number"
               },
               "email": {
-                "label": "Email"
+                  "label": "Email"
               }
           }
       },
       "organizationApis": {
-        "apiId": {
-          "label": "Select API"
-        },
-        "organizationId": {
-          "label": "Select Organization"
-        }
+          "apiId": {
+              "label": "Select API"
+          },
+          "organizationId": {
+              "label": "Select Organization"
+          }
       },
       "updatePassword": {
-        "old": {
-          "label": "Current Password"
-        },
-        "new": {
-          "label": "New Password"
-        },
-        "confirm": {
-          "label": "Confirm new Password"
-        }
+          "old": {
+              "label": "Current Password"
+          },
+          "new": {
+              "label": "New Password"
+          },
+          "confirm": {
+              "label": "Confirm new Password"
+          }
       },
       "users": {
-        "username": {
-          "label": "Username"
-        },
-        "profile": {
-          "company": {
-            "label": "Company"
+          "username": {
+              "label": "Username"
+          },
+          "profile": {
+              "company": {
+                  "label": "Company"
+              }
           }
-        }
       }
   },
   "sdkCodeGeneratorModal_buttonText_download": "Download",

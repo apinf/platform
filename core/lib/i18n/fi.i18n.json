@@ -112,7 +112,7 @@
                 }
             }
         },
-        "ProxyBackends": {
+        "proxyBackends": {
             "apiUmbrella": {
                 "settings": {
                     "append_query_string": {
@@ -784,7 +784,6 @@
     "proxyBackendForm_requiredErrorMessage": "T\u00e4yt\u00e4 kaikki vaaditut kent\u00e4t",
     "proxyBackendForm_deleteSuccessMessage": "V\u00e4lityspalvelinasetukset poistettu",
     "proxyBackendForm_update_successMessage": "V\u00e4lityspalvelinasetukset p\u00e4ivitetty",
-    "proxyBackendForm_informText_noOneSelectedProxy": "Yht\u00e4\u00e4n v\u00e4lityspalvelinta ei ole valittu.",
     "proxyForm_header_text": "Lis\u00e4\u00e4 v\u00e4lityspalvelin",
     "proxyForm_saveButton_text": "Tallenna",
     "proxyForm_successText": "V\u00e4lityspalvelimen asetukset tallennettu.",
@@ -801,11 +800,6 @@
     "removeProxy_confirmRemoveProxy": "Kyll\u00e4, poista",
     "removeProxy_cancelRemove": "Peruuta",
     "removeProxy_errorMessage": "Virhe: V\u00e4lityspalvelimen poisto ep\u00e4onnistui",
-    "removeSelectedProxy_buttonCancel": "Peruuta",
-    "removeSelectedProxy_buttonConfirm": "Poista",
-    "removeSelectedProxy_title": "Poista v\u00e4lityspalvelin",
-    "removeSelectedProxy_textCaution": "Huomio!",
-    "removeSelectedProxy_textConfirm": "V\u00e4lityspalvelinkonfiguraation poisto saattaa rikkoa rajapintakutsut sovelluksista. Tiedota rajapintasi k\u00e4ytt\u00e4ji\u00e4 t\u00e4st\u00e4 muutoksesta.",
     "requestsOverTimeChart_showingRecordsCount": "N\u00e4ytet\u00e4\u00e4n tuloksia",
     "requestsOverTimeChart_title": "Rajapintapyynt\u00f6jen aikajana",
     "requestsOverTimeChart_help_text": "Klikkaa alapuolella olevaa yleiskuvaa aktivoidakseksi aikarajauksen. Voit k\u00e4ytt\u00e4\u00e4 sit\u00e4 valitaksesi jakson, jonka ajalta haluat n\u00e4hd\u00e4 rajapintakutsuja. My\u00f6s HTTP-statuskoodit ja rajapinnan vasteaikakuvaaja p\u00e4ivitet\u00e4\u00e4n valitsemasi ajanjakson perusteella.",
