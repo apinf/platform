@@ -72,10 +72,7 @@ Template.apiCatalog.onCreated(function () {
 
     // Change sorting
     instance.pagination.sort(sort);
-  });
 
-  // Watch for changes in the filter settings
-  instance.autorun(() => {
     let currentFilters = filters;
 
     // Check URL parameter for filtering
