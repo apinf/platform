@@ -1,5 +1,8 @@
-import Branding from '/branding/collection';
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Collection imports
+import Branding from '/branding/collection';
 
 Template.masterLayout.onCreated(function () {
   // Subscription to branding collection

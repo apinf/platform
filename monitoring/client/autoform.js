@@ -1,10 +1,12 @@
-// Meteor package imports
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { TAPi18n } from 'meteor/tap:i18n';
-import { AutoForm } from 'meteor/aldeed:autoform';
 
-// Apinf import
+// Meteor contributed packages imports
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Collection imports
 import Apis from '/apis/collection';
 import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 

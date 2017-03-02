@@ -1,7 +1,9 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 

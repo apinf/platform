@@ -1,6 +1,7 @@
-// Import Meteor package
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-// Import apinf collection
+
+// Collection imports
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Meteor.publish('coverPhoto', () => {

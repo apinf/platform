@@ -1,6 +1,7 @@
+// Meteor packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   organizationManagerForm: {

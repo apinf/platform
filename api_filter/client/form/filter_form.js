@@ -1,4 +1,7 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 

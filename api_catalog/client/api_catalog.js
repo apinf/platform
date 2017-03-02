@@ -1,7 +1,12 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ApiBookmarks from '/bookmarks/collection';
 

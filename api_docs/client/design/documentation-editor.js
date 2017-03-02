@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Collection imports
 import Settings from '/settings/collection';
 
 Template.apiDocumentationEditor.onCreated(function () {

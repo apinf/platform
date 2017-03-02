@@ -1,6 +1,9 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 FlowRouter.route('/organizations', {
   // Get query parameters for Catalog page on Enter

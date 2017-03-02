@@ -1,8 +1,10 @@
-// In multi-proxy case: change early selected and saved proxy to current selected
-
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// In multi-proxy case: change early selected and saved proxy to current selected
 Template.changeSelectedProxy.events({
   'click #confirm-change-selected-proxy': function (event, templateInstance) {
     // Get template reference of proxyBackend

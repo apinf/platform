@@ -1,11 +1,15 @@
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+// Meteor packages imports
 import { Mongo } from 'meteor/mongo';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import Apis from '/apis/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';

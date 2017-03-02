@@ -1,8 +1,12 @@
-import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
+// Meteor packages imports
 import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
 import Organizations from '../../../collection';
 

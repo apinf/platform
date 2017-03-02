@@ -1,3 +1,4 @@
+// Collection imports
 import Apis from '../';
 
 // Create indexes for fields in MongoDB collection (API backends search functionality)

@@ -1,3 +1,4 @@
+// Collection imports
 import ApiMetadata from '/metadata/collection';
 import Apis from '/apis/collection';
 

@@ -1,9 +1,13 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
+// Npm packages imports
 import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
@@ -59,7 +63,6 @@ Template.dashboard.onCreated(function () {
                 // Update reactive variable
                 instance.chartData.set(chartData);
               })
-              // eslint-disable-next-line no-console
               .catch(err => { return console.error(err); });
           }
         });

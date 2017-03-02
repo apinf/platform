@@ -1,9 +1,15 @@
-import { AutoForm } from 'meteor/aldeed:autoform';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
+import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import ProxyBackends from '../../collection';
+
+// APINF imports
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
 AutoForm.hooks({
@@ -142,7 +148,7 @@ AutoForm.hooks({
             // Case 2: Proxy changed
             // Delete information about proxy backend from the first proxy and insert in the
             Meteor.call('deleteProxyBackend',
-              proxyBackendFromMongo, false,
+              previousProxyBackend, false,
               (error) => {
                 if (error) {
                   form.result(false);

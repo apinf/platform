@@ -1,3 +1,4 @@
+// Meteor packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';

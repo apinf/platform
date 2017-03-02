@@ -1,0 +1,1141 @@
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_catalog/client/api_catalog.js
+    9:1   error  'Template' is not defined  no-undef
+   14:18  error  'Meteor' is not defined    no-undef
+   37:29  error  'Meteor' is not defined    no-undef
+  138:1   error  'Template' is not defined  no-undef
+  143:1   error  'Template' is not defined  no-undef
+  146:12  error  'Template' is not defined  no-undef
+  150:12  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_catalog/client/lib/router.js
+  17:42  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_catalog/client/toolbar/toolbar.js
+   4:1  error  'Template' is not defined  no-undef
+  30:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_catalog/server/publications.js
+   5:1  error  'Meteor' is not defined  no-undef
+  10:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_filter/client/filter_icon.js
+  1:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_filter/client/form/filter_form.js
+   4:1  error  'Template' is not defined  no-undef
+  18:1  error  'Template' is not defined  no-undef
+  30:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_keys/client/api_key.js
+  11:1   error  'Template' is not defined  no-undef
+  16:1   error  'Template' is not defined  no-undef
+  35:1   error  'Template' is not defined  no-undef
+  42:1   error  'Template' is not defined  no-undef
+  45:22  error  'Template' is not defined  no-undef
+  56:17  error  'Template' is not defined  no-undef
+  62:7   error  'Meteor' is not defined    no-undef
+  78:1   error  'Template' is not defined  no-undef
+  80:12  error  'Meteor' is not defined    no-undef
+  87:27  error  'Meteor' is not defined    no-undef
+  90:26  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_keys/collection/index.js
+  1:21  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_keys/collection/server/publications.js
+  5:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/api_keys/server/methods.js
+   9:1   error    'Meteor' is not defined       no-undef
+  12:5   error    'check' is not defined        no-undef
+  15:25  error    'Meteor' is not defined       no-undef
+  29:11  error    'Meteor' is not defined       no-undef
+  32:15  warning  Unexpected console statement  no-console
+  34:25  error    'Meteor' is not defined       no-undef
+  55:21  error    'Meteor' is not defined       no-undef
+  62:19  error    'Meteor' is not defined       no-undef
+  69:17  error    'Meteor' is not defined       no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis_authorization/client/form/autoform.js
+  19:7   error    'Meteor' is not defined       no-undef
+  23:11  error    'Meteor' is not defined       no-undef
+  50:7   warning  Unexpected console statement  no-console
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis_authorization/client/form/form.js
+   4:1   error  'Template' is not defined  no-undef
+   7:19  error  'Template' is not defined  no-undef
+  16:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis_authorization/client/list/list.js
+   7:1   error  'Template' is not defined  no-undef
+  10:17  error  'Template' is not defined  no-undef
+  13:27  error  'Meteor' is not defined    no-undef
+  30:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis_authorization/client/remove/remove.js
+  7:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/add/add.js
+   4:1  error  'Template' is not defined  no-undef
+  11:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/add/autoform.js
+  11:24  error  'Meteor' is not defined  no-undef
+  25:22  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/delete/delete.js
+   7:1  error  'Template' is not defined  no-undef
+  15:5  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/export/export.js
+  10:1  error  'Template' is not defined  no-undef
+  21:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/import_documentation/import.js
+  14:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/import/import.js
+   11:1  error  'Template' is not defined  no-undef
+   41:1  error  'Template' is not defined  no-undef
+   61:1  error  'Template' is not defined  no-undef
+  124:7  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/latest/latest.js
+   4:1  error  'Template' is not defined  no-undef
+  20:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/lib/router.js
+  26:5  error  'Meteor' is not defined  no-undef
+  30:9  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/details/details.js
+   8:1   error  'Template' is not defined  no-undef
+  26:1   error  'Template' is not defined  no-undef
+  29:22  error  'Template' is not defined  no-undef
+  60:27  error  'Meteor' is not defined    no-undef
+  63:21  error  'Template' is not defined  no-undef
+  82:27  error  'Template' is not defined  no-undef
+  92:27  error  'Meteor' is not defined    no-undef
+  95:21  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/intro/intro.js
+    8:1  error  'Template' is not defined  no-undef
+  131:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/lifecycle_status/lifecycle_status.js
+   4:1   error  'Template' is not defined  no-undef
+   7:30  error  'Template' is not defined  no-undef
+  39:30  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/settings/delete/delete.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/settings/details/details.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/status/status.js
+   4:1   error  'Template' is not defined  no-undef
+   9:1   error  'Template' is not defined  no-undef
+  12:17  error  'Template' is not defined  no-undef
+  26:17  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/view.js
+  11:1   error  'Template' is not defined  no-undef
+  43:1   error  'Template' is not defined  no-undef
+  46:22  error  'Template' is not defined  no-undef
+  58:22  error  'Template' is not defined  no-undef
+  70:22  error  'Template' is not defined  no-undef
+  86:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/client/profile/visibility/visibility.js
+   4:1   error  'Template' is not defined  no-undef
+   7:17  error  'Template' is not defined  no-undef
+  17:1   error  'Template' is not defined  no-undef
+  20:17  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/collection/helpers.js
+   19:20  error  'Meteor' is not defined  no-undef
+   49:20  error  'Meteor' is not defined  no-undef
+   60:20  error  'Meteor' is not defined  no-undef
+   75:20  error  'Meteor' is not defined  no-undef
+  125:20  error  'Meteor' is not defined  no-undef
+  128:9   error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/collection/index.js
+  1:18  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/collection/server/publications.js
+   7:1  error  'Meteor' is not defined  no-undef
+  15:1  error  'Meteor' is not defined  no-undef
+  17:3  error  'check' is not defined   no-undef
+  22:1  error  'Meteor' is not defined  no-undef
+  24:3  error  'check' is not defined   no-undef
+  31:1  error  'Meteor' is not defined  no-undef
+  33:3  error  'check' is not defined   no-undef
+  49:1  error  'Meteor' is not defined  no-undef
+  51:3  error  'check' is not defined   no-undef
+  62:5  error  'Meteor' is not defined  no-undef
+  64:1  error  'Meteor' is not defined  no-undef
+  65:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/flags/client/autoform.js
+  29:16  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/flags/client/flag.js
+   9:1   error  'Template' is not defined  no-undef
+  17:1   error  'Template' is not defined  no-undef
+  20:22  error  'Template' is not defined  no-undef
+  27:22  error  'Template' is not defined  no-undef
+  33:22  error  'Template' is not defined  no-undef
+  40:1   error  'Template' is not defined  no-undef
+  43:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/flags/client/flagApiButton/flagApiButton.js
+   7:1   error  'Template' is not defined     no-undef
+  15:26  error  'ReactiveVar' is not defined  no-undef
+  27:1   error  'Template' is not defined     no-undef
+  30:22  error  'Template' is not defined     no-undef
+  37:1   error  'Template' is not defined     no-undef
+  40:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/flags/collection/index.js
+  1:22  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/flags/collection/schema.js
+  30:17  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/flags/collection/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+  6:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/logo/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/logo/upload/client/resumable.js
+  10:1  error    'Meteor' is not defined       no-undef
+  18:9  warning  Unexpected console statement  no-console
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/logo/upload/client/upload.js
+   9:1   error  'Template' is not defined  no-undef
+  16:1   error  'Template' is not defined  no-undef
+  28:28  error  'Mongo' is not defined     no-undef
+  44:1   error  'Template' is not defined  no-undef
+  49:26  error  'Mongo' is not defined     no-undef
+  58:16  error  'Meteor' is not defined    no-undef
+  68:28  error  'Mongo' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/logo/upload/client/uploadButton/uploadButton.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/logo/view/client/view.js
+   4:1   error  'Template' is not defined  no-undef
+  10:1   error  'Template' is not defined  no-undef
+  13:17  error  'Template' is not defined  no-undef
+  20:28  error  'Mongo' is not defined     no-undef
+  28:35  error  'Meteor' is not defined    no-undef
+  40:17  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/apiBackends.js
+  4:1  error  'Meteor' is not defined  no-undef
+  7:5  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/authorization.js
+   8:1  error  'Meteor' is not defined  no-undef
+  11:5  error  'check' is not defined   no-undef
+  14:5  error  'check' is not defined   no-undef
+  33:5  error  'check' is not defined   no-undef
+  43:5  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/bookmarks.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/config.js
+  45:1  error  'Meteor' is not defined  no-undef
+  48:5  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/delete.js
+  11:1   error  'Meteor' is not defined  no-undef
+  15:5   error  'check' is not defined   no-undef
+  18:5   error  'Meteor' is not defined  no-undef
+  21:5   error  'Meteor' is not defined  no-undef
+  29:7   error  'Meteor' is not defined  no-undef
+  47:7   error  'Meteor' is not defined  no-undef
+  51:5   error  'Meteor' is not defined  no-undef
+  59:5   error  'check' is not defined   no-undef
+  68:26  error  'Mongo' is not defined   no-undef
+  75:5   error  'check' is not defined   no-undef
+  85:5   error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/ratings.js
+   4:1  error  'Meteor' is not defined  no-undef
+  12:7  error  'check' is not defined   no-undef
+  20:5  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/methods/status.js
+   5:1  error  'Meteor' is not defined  no-undef
+   8:5  error  'check' is not defined   no-undef
+  11:5  error  'check' is not defined   no-undef
+  14:5  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/apis/server/startup.js
+   4:1  error  'Meteor' is not defined  no-undef
+   6:3  error  'Meteor' is not defined  no-undef
+   9:3  error  'Meteor' is not defined  no-undef
+  12:3  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/client/backlog.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/client/delete/delete.js
+   7:1   error  'Template' is not defined  no-undef
+  10:27  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/client/form/form.js
+   4:1   error  'Template' is not defined  no-undef
+  10:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/client/item/item.js
+   9:1   error  'Template' is not defined  no-undef
+  37:25  error  'Meteor' is not defined    no-undef
+  44:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/collection/index.js
+  2:29  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/collection/schema.js
+  42:14  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/backlog/collection/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+  6:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/bookmarks/client/bookmark.js
+   4:1   error  'Template' is not defined  no-undef
+  12:1   error  'Template' is not defined  no-undef
+  18:27  error  'Meteor' is not defined    no-undef
+  21:5   error  'Meteor' is not defined    no-undef
+  25:1   error  'Template' is not defined  no-undef
+  31:22  error  'Template' is not defined  no-undef
+  37:53  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/bookmarks/collection/index.js
+  2:26  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/bookmarks/collection/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/bookmarks/server/methods.js
+   5:1  error  'Meteor' is not defined  no-undef
+   8:5  error  'check' is not defined   no-undef
+  11:5  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/client/branding.js
+   4:1  error  'Template' is not defined  no-undef
+  12:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/collection/index.js
+  2:22  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/collection/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/cover_photo/client/upload/resumable.js
+  12:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/cover_photo/client/upload/upload.js
+   9:1   error  'Template' is not defined  no-undef
+  18:1   error  'Template' is not defined  no-undef
+  24:26  error  'Mongo' is not defined     no-undef
+  31:1   error  'Template' is not defined  no-undef
+  43:28  error  'Mongo' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/cover_photo/client/upload/uploadButton/uploadButton.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/cover_photo/client/view/view.js
+   5:1   error  'Template' is not defined  no-undef
+  13:1   error  'Template' is not defined  no-undef
+  25:26  error  'Mongo' is not defined     no-undef
+  34:33  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/cover_photo/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/logo/client/upload/resumable.js
+  12:1  error    'Meteor' is not defined       no-undef
+  20:9  warning  Unexpected console statement  no-console
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/logo/client/upload/upload.js
+   9:1   error  'Template' is not defined  no-undef
+  17:1   error  'Template' is not defined  no-undef
+  32:28  error  'Mongo' is not defined     no-undef
+  49:1   error  'Template' is not defined  no-undef
+  54:26  error  'Mongo' is not defined     no-undef
+  63:33  error  'Meteor' is not defined    no-undef
+  75:26  error  'Mongo' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/logo/client/upload/uploadButton/uploadButton.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/logo/client/view/view.js
+   5:1   error  'Template' is not defined  no-undef
+  12:1   error  'Template' is not defined  no-undef
+  18:26  error  'Mongo' is not defined     no-undef
+  27:33  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/branding/logo/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/client/custom_stylesheet/custom_stylesheet.js
+  6:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/client/error_templates/go_back_button/goBackButton.js
+  2:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/client/language_bar/language.js
+   9:1  error  'Template' is not defined  no-undef
+  23:1  error  'Template' is not defined  no-undef
+  63:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/client/layouts/master_layout/master_layout.js
+   4:1  error  'Template' is not defined  no-undef
+  11:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/client/lib/router.js
+   9:11  error  'Meteor' is not defined  no-undef
+   9:33  error  'Meteor' is not defined  no-undef
+  17:7   error  'Meteor' is not defined  no-undef
+  19:20  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/client/navbar/navbar.js
+   12:1   error  'Template' is not defined  no-undef
+   20:9   error  'Meteor' is not defined    no-undef
+   27:1   error  'Template' is not defined  no-undef
+   47:28  error  'Mongo' is not defined     no-undef
+   55:19  error  'Meteor' is not defined    no-undef
+  101:22  error  'Meteor' is not defined    no-undef
+  131:22  error  'Meteor' is not defined    no-undef
+  144:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/lib/sAlert_configuration.js
+  4:1  error  'Meteor' is not defined  no-undef
+  6:7  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/migrations/server/2-migrate-apibackends.js
+  16:29  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/migrations/server/startup.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/core/server/api.js
+  44:23  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/client/charts/charts.js
+   11:1   error  'Template' is not defined     no-undef
+   15:28  error  'ReactiveVar' is not defined  no-undef
+   18:33  error  'ReactiveVar' is not defined  no-undef
+   26:31  error  'ReactiveVar' is not defined  no-undef
+   29:32  error  'ReactiveVar' is not defined  no-undef
+   30:38  error  'ReactiveVar' is not defined  no-undef
+   31:31  error  'ReactiveVar' is not defined  no-undef
+   32:35  error  'ReactiveVar' is not defined  no-undef
+   51:36  error  'ReactiveVar' is not defined  no-undef
+   52:40  error  'ReactiveVar' is not defined  no-undef
+  409:1   error  'Template' is not defined     no-undef
+  417:23  error  'Template' is not defined     no-undef
+  455:1   error  'Template' is not defined     no-undef
+  457:22  error  'Template' is not defined     no-undef
+  462:22  error  'Template' is not defined     no-undef
+  472:12  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/client/charts/table/table.js
+    2:1   error  'Template' is not defined     no-undef
+    7:27  error  'ReactiveVar' is not defined  no-undef
+   10:29  error  'ReactiveVar' is not defined  no-undef
+   13:1   error  'Template' is not defined     no-undef
+   18:1   error  'Template' is not defined     no-undef
+   37:27  error  'Template' is not defined     no-undef
+   60:1   error  'Template' is not defined     no-undef
+   63:22  error  'Template' is not defined     no-undef
+   76:12  error  'Template' is not defined     no-undef
+   80:22  error  'Template' is not defined     no-undef
+   90:22  error  'Template' is not defined     no-undef
+   99:27  error  'Template' is not defined     no-undef
+  106:22  error  'Template' is not defined     no-undef
+  113:22  error  'Template' is not defined     no-undef
+  119:27  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/client/dashboard.js
+   9:1   error    'Template' is not defined     no-undef
+  19:28  error    'ReactiveVar' is not defined  no-undef
+  23:7   error    'Meteor' is not defined       no-undef
+  52:9   error    'Meteor' is not defined       no-undef
+  61:38  warning  Unexpected console statement  no-console
+  69:1   error    'Template' is not defined     no-undef
+  71:22  error    'Template' is not defined     no-undef
+  98:44  error    'Meteor' is not defined       no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/client/filtering/api_select/api_select.js
+   5:1   error  'Template' is not defined  no-undef
+   9:20  error  'Meteor' is not defined    no-undef
+  23:1   error  'Template' is not defined  no-undef
+  39:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/client/filtering/datepicker/datepicker.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/client/filtering/granularity/granularity.js
+   4:1  error  'Template' is not defined  no-undef
+  17:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/dashboard/server/methods.js
+   5:1   error  'Meteor' is not defined  no-undef
+   8:5   error  'check' is not defined   no-undef
+  37:23  error  'Meteor' is not defined  no-undef
+  43:17  error  'Meteor' is not defined  no-undef
+  45:15  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/codegenerator/codegenerator.js
+   14:1   error  'Template' is not defined     no-undef
+   17:30  error  'ReactiveVar' is not defined  no-undef
+   18:28  error  'ReactiveVar' is not defined  no-undef
+   24:29  error  'Meteor' is not defined       no-undef
+   68:1   error  'Template' is not defined     no-undef
+   72:22  error  'Template' is not defined     no-undef
+   90:22  error  'Template' is not defined     no-undef
+   97:22  error  'Template' is not defined     no-undef
+  105:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/design/documentation-editor.js
+   4:1  error  'Template' is not defined  no-undef
+  10:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/manage/manage.js
+  12:30  error  'ReactiveVar' is not defined  no-undef
+  14:1   error  'Template' is not defined     no-undef
+  30:1   error  'Template' is not defined     no-undef
+  35:1   error  'Template' is not defined     no-undef
+  50:28  error  'Mongo' is not defined        no-undef
+  75:1   error  'Template' is not defined     no-undef
+  82:26  error  'Mongo' is not defined        no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/manage/uploadButton/uploadButton.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/swaggerUI/swaggerUi.js
+   4:1   error  'Template' is not defined     no-undef
+   5:20  error  'Template' is not defined     no-undef
+   7:30  error  'ReactiveVar' is not defined  no-undef
+  13:3   error  'Meteor' is not defined       no-undef
+  24:1   error  'Template' is not defined     no-undef
+  26:22  error  'Template' is not defined     no-undef
+  31:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/swaggerUI/swaggerUiContent/swaggerUiContent.js
+  12:1   error  'Template' is not defined  no-undef
+  52:72  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/view/documentation.js
+   8:1   error  'Template' is not defined  no-undef
+  14:33  error  'Template' is not defined  no-undef
+  26:1   error  'Template' is not defined  no-undef
+  30:1   error  'Template' is not defined  no-undef
+  35:26  error  'Mongo' is not defined     no-undef
+  45:33  error  'Meteor' is not defined    no-undef
+  62:22  error  'Template' is not defined  no-undef
+  86:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/client/view/resumable.js
+  14:1   error    'Meteor' is not defined       no-undef
+  44:11  warning  Unexpected console statement  no-console
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/server/methods/files.js
+   4:1   error  'Meteor' is not defined  no-undef
+   7:5   error  'check' is not defined   no-undef
+   9:26  error  'Mongo' is not defined   no-undef
+  14:5   error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/server/methods/swagger.js
+   4:1  error  'Meteor' is not defined  no-undef
+  10:5  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/documentation/server/publications.js
+   4:1   error  'Meteor' is not defined  no-undef
+   7:5   error  'check' is not defined   no-undef
+  10:26  error  'Mongo' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/elasticsearch/server/methods.js
+   4:1   error  'Meteor' is not defined  no-undef
+   7:5   error  'check' is not defined   no-undef
+  10:5   error  'check' is not defined   no-undef
+  17:18  error  'Meteor' is not defined  no-undef
+  21:18  error  'Meteor' is not defined  no-undef
+  24:19  error  'Meteor' is not defined  no-undef
+  36:17  error  'Meteor' is not defined  no-undef
+  42:5   error  'check' is not defined   no-undef
+  45:5   error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback_votes/collection/index.js
+  2:27  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/client/delete/delete.js
+   4:1   error  'Template' is not defined  no-undef
+   7:28  error  'Template' is not defined  no-undef
+  10:5   error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/client/feedback.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/client/form/form.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/client/item/item.js
+   12:1   error  'Template' is not defined  no-undef
+   14:22  error  'Template' is not defined  no-undef
+   20:1   error  'Template' is not defined  no-undef
+   23:24  error  'Template' is not defined  no-undef
+   26:20  error  'Meteor' is not defined    no-undef
+   43:24  error  'Template' is not defined  no-undef
+   46:20  error  'Meteor' is not defined    no-undef
+   69:1   error  'Template' is not defined  no-undef
+   72:24  error  'Template' is not defined  no-undef
+   75:5   error  'Meteor' is not defined    no-undef
+   87:24  error  'Template' is not defined  no-undef
+   90:5   error  'Meteor' is not defined    no-undef
+  102:18  error  'Template' is not defined  no-undef
+  108:18  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/client/list/list.js
+   5:1  error  'Template' is not defined  no-undef
+  13:1  error  'Template' is not defined  no-undef
+  24:1  error  'Template' is not defined  no-undef
+  27:5  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/collection/helpers.js
+  25:20  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/collection/index.js
+  2:22  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/collection/schema.js
+  41:18  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/collection/server/publications.js
+   5:1  error  'Meteor' is not defined  no-undef
+   7:3  error  'check' is not defined   no-undef
+  13:1  error  'Meteor' is not defined  no-undef
+  15:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/feedback/server/methods.js
+   8:1   error  'Meteor' is not defined  no-undef
+  11:5   error  'check' is not defined   no-undef
+  21:5   error  'check' is not defined   no-undef
+  24:5   error  'check' is not defined   no-undef
+  27:20  error  'Meteor' is not defined  no-undef
+  58:17  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/home/client/body/homeBody.js
+   8:1   error  'Template' is not defined  no-undef
+  22:1   error  'Template' is not defined  no-undef
+  29:1   error  'Template' is not defined  no-undef
+  64:28  error  'Mongo' is not defined     no-undef
+  72:41  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/home/client/contact/contact.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/home/client/footer/homeFooter.js
+  2:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/home/client/home.js
+   7:1  error  'Template' is not defined  no-undef
+  30:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/home/server/methods.js
+  11:1   error  'Meteor' is not defined  no-undef
+  14:5   error  'check' is not defined   no-undef
+  41:1   error  'Meteor' is not defined  no-undef
+  45:1   error  'Meteor' is not defined  no-undef
+  49:1   error  'Meteor' is not defined  no-undef
+  50:38  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/metadata/client/edit/edit.js
+  7:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/metadata/client/view/metadata.js
+   7:1   error  'Template' is not defined  no-undef
+  15:1   error  'Template' is not defined  no-undef
+  18:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/metadata/collection/index.js
+  2:25  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/metadata/collection/permissions.js
+  12:7  warning  Unexpected console statement  no-console
+
+/Users/mauricio/Repositories/github.com/apinf/platform/metadata/collection/server/publication.js
+  4:1  error  'Meteor' is not defined  no-undef
+  6:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/monitoring/client/autoform.js
+  21:11  error  'Meteor' is not defined  no-undef
+  25:13  error  'Meteor' is not defined  no-undef
+  56:11  error  'Meteor' is not defined  no-undef
+  66:9   error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/monitoring/client/monitoring.js
+   4:1  error  'Template' is not defined  no-undef
+  15:1  error  'Template' is not defined  no-undef
+  20:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/monitoring/collection/index.js
+  2:32  error  'Mongo' is not defined  no-undef
+  3:28  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/monitoring/collection/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+  6:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/monitoring/server/cron.js
+  11:1  error  'Meteor' is not defined  no-undef
+  14:5  error  'check' is not defined   no-undef
+  17:5  error  'check' is not defined   no-undef
+  37:9  error  'Meteor' is not defined  no-undef
+  43:5  error  'check' is not defined   no-undef
+  61:9  error  'Meteor' is not defined  no-undef
+  62:9  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organization_apis/client/api_organization/api_organization.js
+   8:1   error  'Template' is not defined  no-undef
+  16:1   error  'Template' is not defined  no-undef
+  19:20  error  'Meteor' is not defined    no-undef
+  33:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organization_apis/client/api_organization/delete/delete.js
+  9:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organization_apis/client/form/form.js
+  4:1   error  'Template' is not defined  no-undef
+  7:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organization_apis/collection/helpers/organizations.js
+  59:18  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organization_apis/collection/index.js
+  2:30  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organization_apis/collection/server/publications.js
+   5:1  error  'Meteor' is not defined  no-undef
+   7:3  error  'check' is not defined   no-undef
+  26:1  error  'Meteor' is not defined  no-undef
+  28:3  error  'check' is not defined   no-undef
+  34:1  error  'Meteor' is not defined  no-undef
+  36:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/card/organization_card.js
+   4:1   error  'Template' is not defined  no-undef
+  13:1   error  'Template' is not defined  no-undef
+  16:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/catalog/catalog.js
+    8:1   error  'Template' is not defined  no-undef
+   13:18  error  'Meteor' is not defined    no-undef
+   16:29  error  'Meteor' is not defined    no-undef
+   79:1   error  'Template' is not defined  no-undef
+   84:1   error  'Template' is not defined  no-undef
+   87:12  error  'Template' is not defined  no-undef
+   91:12  error  'Template' is not defined  no-undef
+  107:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/catalog/toolbar/toolbar.js
+   7:1   error  'Template' is not defined  no-undef
+  50:1   error  'Template' is not defined  no-undef
+  53:20  error  'Meteor' is not defined    no-undef
+  61:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/form/form.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/lib/router.js
+  21:42  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/managers/form/form.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/managers/list/list.js
+   7:1   error  'Template' is not defined  no-undef
+  10:26  error  'Template' is not defined  no-undef
+  13:32  error  'Meteor' is not defined    no-undef
+  35:27  error  'Meteor' is not defined    no-undef
+  42:1   error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/managers/remove/remove.js
+   4:1  error  'Template' is not defined  no-undef
+  13:5  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/apis/apis.js
+  6:1   error  'Template' is not defined  no-undef
+  9:26  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/apis/connect_api/connect_api.js
+   7:1   error  'Template' is not defined     no-undef
+   9:31  error  'ReactiveVar' is not defined  no-undef
+  12:3   error  'Meteor' is not defined       no-undef
+  26:1   error  'Template' is not defined     no-undef
+  32:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/apis/show_apis/show_apis.js
+   7:1   error  'Template' is not defined     no-undef
+  12:30  error  'ReactiveVar' is not defined  no-undef
+  44:1   error  'Template' is not defined     no-undef
+  46:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/header/header.js
+   7:1  error  'Template' is not defined  no-undef
+  12:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/profile.js
+   7:1  error  'Template' is not defined  no-undef
+  44:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/settings/delete/delete.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/client/profile/settings/delete/form/form.js
+   7:1  error  'Template' is not defined  no-undef
+  14:5  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/collection/helpers.js
+  16:20  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/collection/index.js
+  2:27  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/collection/schema.js
+  43:17  error  'Meteor' is not defined  no-undef
+  71:16  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/collection/server/publications.js
+   8:1   error  'Meteor' is not defined  no-undef
+  23:5   error  'Meteor' is not defined  no-undef
+  25:1   error  'Meteor' is not defined  no-undef
+  29:1   error  'Meteor' is not defined  no-undef
+  31:3   error  'check' is not defined   no-undef
+  38:1   error  'Meteor' is not defined  no-undef
+  44:3   error  'check' is not defined   no-undef
+  52:18  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/logo/client/upload/resumable.js
+  12:1   error  'Meteor' is not defined  no-undef
+  24:26  error  'Mongo' is not defined   no-undef
+  95:26  error  'Mongo' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/logo/client/upload/upload.js
+   9:1   error  'Template' is not defined  no-undef
+  16:1   error  'Template' is not defined  no-undef
+  24:28  error  'Mongo' is not defined     no-undef
+  33:1   error  'Template' is not defined  no-undef
+  47:28  error  'Mongo' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/logo/client/upload/uploadButton/uploadButton.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/logo/client/view.js
+   4:1   error  'Template' is not defined  no-undef
+  10:1   error  'Template' is not defined  no-undef
+  13:26  error  'Template' is not defined  no-undef
+  20:28  error  'Mongo' is not defined     no-undef
+  28:29  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/logo/collection/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/organizations/server/methods.js
+  13:1   error  'Meteor' is not defined  no-undef
+  50:5   error  'check' is not defined   no-undef
+  53:5   error  'check' is not defined   no-undef
+  54:5   error  'check' is not defined   no-undef
+  57:31  error  'Meteor' is not defined  no-undef
+  71:19  error  'Meteor' is not defined  no-undef
+  77:17  error  'Meteor' is not defined  no-undef
+  82:5   error  'check' is not defined   no-undef
+  85:5   error  'check' is not defined   no-undef
+  95:5   error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/api_umbrella/collections/index.js
+  2:31  error  'Mongo' is not defined  no-undef
+  3:30  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/api_umbrella/collections/schema.js
+  123:23  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/api_umbrella/collections/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+  9:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/client/form/autoform.js
+  47:16  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/client/form/form.js
+   7:1   error  'Template' is not defined  no-undef
+  12:22  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/client/proxies.js
+   7:1  error  'Template' is not defined  no-undef
+  13:1  error  'Template' is not defined  no-undef
+  20:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/client/proxyItem/proxyItem.js
+   4:1  error  'Template' is not defined  no-undef
+  21:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/client/remove/remove.js
+  10:1   error  'Template' is not defined  no-undef
+  11:19  error  'Template' is not defined  no-undef
+  16:1   error  'Template' is not defined  no-undef
+  20:21  error  'Template' is not defined  no-undef
+  32:1   error  'Template' is not defined  no-undef
+  34:21  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/collection/index.js
+  2:21  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/collection/server/publications.js
+   8:1  error  'Meteor' is not defined  no-undef
+  19:1  error  'Meteor' is not defined  no-undef
+  24:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxies/server/methods/api_umbrella.js
+   16:1   error  'Meteor' is not defined  no-undef
+   19:5   error  'check' is not defined   no-undef
+   39:19  error  'Meteor' is not defined  no-undef
+   42:17  error  'Meteor' is not defined  no-undef
+   52:5   error  'check' is not defined   no-undef
+   55:5   error  'check' is not defined   no-undef
+   58:22  error  'Meteor' is not defined  no-undef
+   80:17  error  'Meteor' is not defined  no-undef
+   88:5   error  'check' is not defined   no-undef
+   91:5   error  'check' is not defined   no-undef
+   94:22  error  'Meteor' is not defined  no-undef
+  121:5   error  'check' is not defined   no-undef
+  124:5   error  'check' is not defined   no-undef
+  127:22  error  'Meteor' is not defined  no-undef
+  156:5   error  'check' is not defined   no-undef
+  159:5   error  'check' is not defined   no-undef
+  162:22  error  'Meteor' is not defined  no-undef
+  186:5   error  'check' is not defined   no-undef
+  189:5   error  'check' is not defined   no-undef
+  192:22  error  'Meteor' is not defined  no-undef
+  221:22  error  'Meteor' is not defined  no-undef
+  232:17  error  'Meteor' is not defined  no-undef
+  264:23  error  'Meteor' is not defined  no-undef
+  289:17  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/client/form/autoform.js
+   52:11  error  'Meteor' is not defined  no-undef
+   56:15  error  'Meteor' is not defined  no-undef
+   61:21  error  'Meteor' is not defined  no-undef
+   83:21  error  'Meteor' is not defined  no-undef
+   87:27  error  'Meteor' is not defined  no-undef
+  165:13  error  'Meteor' is not defined  no-undef
+  176:13  error  'Meteor' is not defined  no-undef
+  203:19  error  'Meteor' is not defined  no-undef
+  236:9   error  'Meteor' is not defined  no-undef
+  244:15  error  'Meteor' is not defined  no-undef
+  247:15  error  'Meteor' is not defined  no-undef
+  252:21  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/client/form/form.js
+   13:1   error  'Template' is not defined     no-undef
+   14:20  error  'Template' is not defined     no-undef
+   37:35  error  'ReactiveVar' is not defined  no-undef
+   67:1   error  'Template' is not defined     no-undef
+  117:22  error  'Template' is not defined     no-undef
+  135:22  error  'Template' is not defined     no-undef
+  149:22  error  'Template' is not defined     no-undef
+  174:22  error  'Template' is not defined     no-undef
+  181:22  error  'Template' is not defined     no-undef
+  190:1   error  'Template' is not defined     no-undef
+  199:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/client/methods/delete_proxy_backend.js
+  8:3  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/client/modal_form/change_selected_proxy/change_selected_proxy.js
+  5:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/client/modal_form/remove_selected_proxy/remove_selected_proxy.js
+  6:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/collection/index.js
+  2:27  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/collection/server/publications.js
+  11:1  error  'Meteor' is not defined  no-undef
+  13:3  error  'check' is not defined   no-undef
+  26:1  error  'Meteor' is not defined  no-undef
+  28:3  error  'check' is not defined   no-undef
+  43:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/proxy_backends/server/methods.js
+   4:1   error  'Meteor' is not defined  no-undef
+   7:5   error  'check' is not defined   no-undef
+  13:5   error  'Meteor' is not defined  no-undef
+  18:21  error  'Meteor' is not defined  no-undef
+  21:11  error  'Meteor' is not defined  no-undef
+  26:27  error  'Meteor' is not defined  no-undef
+  40:5   error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/ratings/client/rating.js
+    9:1   error  'Template' is not defined  no-undef
+   29:1   error  'Template' is not defined  no-undef
+   45:17  error  'Meteor' is not defined    no-undef
+   54:20  error  'Meteor' is not defined    no-undef
+   62:1   error  'Template' is not defined  no-undef
+   65:9   error  'Meteor' is not defined    no-undef
+   82:20  error  'Meteor' is not defined    no-undef
+  107:12  error  'Meteor' is not defined    no-undef
+  111:1   error  'Template' is not defined  no-undef
+  114:22  error  'Template' is not defined  no-undef
+  123:22  error  'Meteor' is not defined    no-undef
+  141:22  error  'Template' is not defined  no-undef
+  160:22  error  'Template' is not defined  no-undef
+  169:22  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/ratings/collection/index.js
+  2:31  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/ratings/collection/server/publications.js
+   5:1  error  'Meteor' is not defined  no-undef
+   7:3  error  'check' is not defined   no-undef
+  22:1  error  'Meteor' is not defined  no-undef
+  33:1  error  'Meteor' is not defined  no-undef
+  35:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/search/client/search.js
+   13:1   error  'Template' is not defined     no-undef
+   18:30  error  'ReactiveVar' is not defined  no-undef
+   21:24  error  'ReactiveVar' is not defined  no-undef
+   71:1   error  'Template' is not defined     no-undef
+   88:1   error  'Template' is not defined     no-undef
+   91:22  error  'Template' is not defined     no-undef
+  100:22  error  'Template' is not defined     no-undef
+  109:1   error  'Template' is not defined     no-undef
+  114:22  error  'Template' is not defined     no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/search/server/publications.js
+  4:1  error  'Meteor' is not defined  no-undef
+  6:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/settings/client/autoform.js
+  10:7  error  'Meteor' is not defined  no-undef
+  11:7  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/settings/client/settings.js
+   4:1  error  'Template' is not defined  no-undef
+   9:1  error  'Template' is not defined  no-undef
+  14:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/settings/collection/index.js
+  2:22  error  'Mongo' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/settings/collection/server/publications.js
+   7:1  error  'Meteor' is not defined  no-undef
+  24:1  error  'Meteor' is not defined  no-undef
+  26:3  error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/settings/server/methods.js
+   11:1  error    'Meteor' is not defined       no-undef
+   33:5  warning  Unexpected console statement  no-console
+   48:5  warning  Unexpected console statement  no-console
+   85:7  warning  Unexpected console statement  no-console
+   97:9  error    'Meteor' is not defined       no-undef
+  100:9  error    'Meteor' is not defined       no-undef
+  103:9  error    'Meteor' is not defined       no-undef
+  110:7  warning  Unexpected console statement  no-console
+
+/Users/mauricio/Repositories/github.com/apinf/platform/setup/client/lib/router.js
+   7:7   error  'Meteor' is not defined  no-undef
+   9:20  error  'Meteor' is not defined  no-undef
+  14:7   error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/setup/client/modal.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/setup/server/methods.js
+  5:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/status/client/status.js
+  2:1  error  'Template' is not defined  no-undef
+  4:3  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/status/server/status.js
+   2:1   error  'Meteor' is not defined  no-undef
+  13:27  error  'Meteor' is not defined  no-undef
+  16:31  error  'Meteor' is not defined  no-undef
+  44:33  error  'Meteor' is not defined  no-undef
+  47:37  error  'Meteor' is not defined  no-undef
+  76:39  error  'Meteor' is not defined  no-undef
+  79:39  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/client/account/account.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/client/account/delete/delete.js
+   7:1   error  'Template' is not defined  no-undef
+  10:20  error  'Meteor' is not defined    no-undef
+  13:5   error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/client/account/password/password.js
+  4:1  error  'Template' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/client/lib/router.js
+  22:22  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/client/profile/profile.js
+  2:1   error  'Template' is not defined  no-undef
+  4:12  error  'Meteor' is not defined    no-undef
+  8:12  error  'Meteor' is not defined    no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/collection/roles_schema.js
+  10:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/collection/server/publications.js
+   4:1   error  'Meteor' is not defined  no-undef
+   5:10  error  'Meteor' is not defined  no-undef
+  10:1   error  'Meteor' is not defined  no-undef
+  13:14  error  'Meteor' is not defined  no-undef
+  20:1   error  'Meteor' is not defined  no-undef
+  22:3   error  'check' is not defined   no-undef
+  28:10  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/collection/users_permissions.js
+  2:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/collection/users_schema.js
+  71:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/server/accounts_hooks.js
+  21:28  error  'Meteor' is not defined  no-undef
+  32:7   error  'Meteor' is not defined  no-undef
+  33:9   error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/server/login_verify.js
+  40:21  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/server/methods.js
+   8:1   error  'Meteor' is not defined  no-undef
+  11:5   error  'check' is not defined   no-undef
+  15:14  error  'Meteor' is not defined  no-undef
+  23:5   error  'check' is not defined   no-undef
+  42:5   error  'check' is not defined   no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/server/startup_roles.js
+  7:1  error  'Meteor' is not defined  no-undef
+
+/Users/mauricio/Repositories/github.com/apinf/platform/users/server/startup.js
+  7:1  error  'Meteor' is not defined  no-undef
+  9:3  error  'Meteor' is not defined  no-undef
+
+✖ 719 problems (708 errors, 11 warnings)

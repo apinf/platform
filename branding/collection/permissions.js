@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Collection imports
 import Branding from './';
 
 Branding.allow({

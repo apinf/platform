@@ -1,10 +1,12 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
-import $ from 'jquery';
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
 import Apis from '/apis/collection';
 import ApiBackendRatings from '../collection';
 

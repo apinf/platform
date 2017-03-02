@@ -1,7 +1,9 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
 
+// Collection imports
 import DocumentationFiles from '/api_docs/files/collection';
 
 Meteor.publish(

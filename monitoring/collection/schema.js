@@ -1,7 +1,7 @@
-// Meteor packages import
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-// APINF import
+// Collection imports
 import { MonitoringSettings, MonitoringData } from './';
 
 // Describe collection for store data associate with monitoring settings

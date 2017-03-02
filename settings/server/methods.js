@@ -1,10 +1,14 @@
-// Meteor packages import
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
-// Apinf import
+// APINF imports
 import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
+
+// Collection imports
 import Settings from '../collection';
 
 Meteor.methods({

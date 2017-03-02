@@ -1,12 +1,17 @@
-import { sAlert } from 'meteor/juliancwirko:s-alert';
+// Meteor packages imports
 import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
-import { FS } from 'meteor/cfs:filesystem';
-import { URI } from 'meteor/olragon:uri-js';
 
+// Meteor contributed packages imports
+import { FS } from 'meteor/cfs:filesystem';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { URI } from 'meteor/olragon:uri-js';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Npm packages imports
 import _ from 'lodash';
 import jsyaml from 'js-yaml';
 
+// Collection imports
 import DocumentationFiles from '/api_docs/files/collection';
 
 Template.importApiDocumentation.events({

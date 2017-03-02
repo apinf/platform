@@ -1,7 +1,9 @@
+// Meteor packages imports
 import { Migrations } from 'meteor/percolate:migrations';
 
-import Settings from '/settings/collection';
+// Collection imports
 import Proxies from '/proxies/collection';
+import Settings from '/settings/collection';
 
 Migrations.add({
   version: 1,
