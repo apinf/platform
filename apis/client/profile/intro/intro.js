@@ -1,7 +1,7 @@
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
-// Meteor imports
+// Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Npm packages imports

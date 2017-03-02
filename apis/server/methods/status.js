@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-
+// Collection imports
 import Apis from '/apis/collection';
 import { MonitoringData } from '/monitoring/collection';
 

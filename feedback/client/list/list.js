@@ -2,8 +2,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// Collection imports
 import Feedback from '../../collection';
 
 Template.feedbackList.onCreated(function () {

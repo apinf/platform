@@ -2,16 +2,16 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-// Meteor contributed packages imports
-import ApiKeys from '/api_keys/collection';
-import Apis from '/apis/collection';
-import Proxies from '/proxies/collection';
-import ProxyBackends from '/proxy_backends/collection';
-
 // Npm packages imports
 import SwaggerClient from 'swagger-client';
 import SwaggerUi from 'swagger-ui-browserify';
 import _ from 'lodash';
+
+// Collection imports
+import ApiKeys from '/api_keys/collection';
+import Apis from '/apis/collection';
+import Proxies from '/proxies/collection';
+import ProxyBackends from '/proxy_backends/collection';
 
 Template.swaggerUiContent.onCreated(function () {
   const instance = this;
