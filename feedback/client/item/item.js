@@ -22,6 +22,14 @@ Template.feedbackItem.onCreated(function () {
 });
 
 Template.feedbackItem.helpers({
+  feedbackType () {
+    // Return translation for feedback message type
+
+    // Get item
+    const item = Template.instance().data.item;
+    // Return translation for type
+    return TAPi18n.__(`feedbackItem_messageType.${item.messageType}`);
+  },
   userUpvote () {
     // Get current Feedback ID
     const feedbackId = Template.currentData().item._id;

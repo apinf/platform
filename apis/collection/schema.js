@@ -26,10 +26,6 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationFileId: {
-    type: String,
-    optional: true,
-  },
   latestMonitoringStatusCode: {
     type: String,
     optional: true,
@@ -56,15 +52,6 @@ Apis.schema = new SimpleSchema({
   },
   monitoringId: {
     type: String,
-    optional: true,
-  },
-  documentation_link: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
-  },
-  submit_methods: {
-    type: [String],
     optional: true,
   },
   created_at: {

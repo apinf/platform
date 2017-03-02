@@ -53,7 +53,7 @@ Meteor.methods({
     */
 
     // Make sure currentUser is a String
-    check(currentUser, String);
+    check(currentUser, Object);
 
     // Make sure proxyId is a String
     check(proxyId, String);

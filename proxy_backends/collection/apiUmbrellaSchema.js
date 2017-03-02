@@ -16,6 +16,7 @@ const RateLimitSchema = new SimpleSchema({
       'apiKey',
       'ip',
     ],
+    defaultValue: 'apiKey',
   },
   limit: {
     type: Number,
@@ -29,7 +30,7 @@ const RateLimitSchema = new SimpleSchema({
 });
 
 // Internationalize Rate limit schema texts
-RateLimitSchema.i18n('schemas.ProxyBackends.apiUmbrella.settings.rate_limit');
+RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
 const SettingsSchema = new SimpleSchema({
   disable_api_key: {
@@ -64,7 +65,7 @@ const SettingsSchema = new SimpleSchema({
 });
 
 // Internationalize settings schema texts
-SettingsSchema.i18n('schemas.ProxyBackends.apiUmbrella.settings');
+SettingsSchema.i18n('schemas.proxyBackends.apiUmbrella.settings');
 
 const ApiUmbrellaSchema = new SimpleSchema({
   id: {
@@ -107,13 +108,11 @@ const ApiUmbrellaSchema = new SimpleSchema({
     type: String,
     optional: true,
     unique: true,
-    label: 'Proxy base path',
     regEx: proxyBasePathRegEx,
   },
   'url_matches.$.backend_prefix': {
     type: String,
     optional: true,
-    label: 'API base path',
     regEx: apiBasePathRegEx,
   },
   servers: {
@@ -128,7 +127,6 @@ const ApiUmbrellaSchema = new SimpleSchema({
   'servers.$.port': {
     type: Number,
     optional: true,
-    label: 'API port',
   },
   settings: {
     type: SettingsSchema,
@@ -137,6 +135,6 @@ const ApiUmbrellaSchema = new SimpleSchema({
 });
 
 // Internationalize API Umbrella schema texts
-ApiUmbrellaSchema.i18n('schemas.ProxyBackends.apiUmbrella');
+ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 
 export default ApiUmbrellaSchema;

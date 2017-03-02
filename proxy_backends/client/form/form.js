@@ -12,59 +12,47 @@ import URI from 'urijs';
 // Collection imports
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
-import deleteProxyBackend from '/proxy_backends/client/methods/delete_proxy_backend';
+import deleteProxyBackendConfig from '/proxy_backends/client/methods/delete_proxy_backend';
 
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();
-  // Set the proxy id empty on default
-  // instance.data.proxyId = new ReactiveVar('');
 
   instance.getProxyId = () => {
+    // Set the proxy id empty on default
+    instance.proxyId = new ReactiveVar('');
     // Placeholder for current proxy id
     let currentProxyId = '';
+
     // Get & compare count of Proxies
     const proxyCount = Counts.get('proxyCount');
-    // Get Proxy Backend config
-    const proxyBackendExists = instance.data.proxyBackend;
-
-    // Check if proxy id exists and multi proxy is available
-    // It can be a case when proxy id is empty string and
-    // proxy is only one then proxy id must be update
-    if (instance.data.proxyId !== undefined && proxyCount > 1) {
-      // Save the early value
-      return instance.data.proxyId.get();
-    }
-
-    // If proxy id doesn't exist yet or any more
-    if (instance.data.proxyId === undefined) {
-      // Create
-      instance.data.proxyId = new ReactiveVar('');
-
-      if (proxyBackendExists) {
-        // Set the last know proxy id
-        currentProxyId = proxyBackendExists.proxyId;
-      }
-    }
-
-    // Separate two case: proxy is only one or multi proxy
 
     // First case: Proxy is only one
     if (proxyCount === 1) {
       // Set these id as current
       currentProxyId = Proxies.findOne()._id;
-    } else if (proxyBackendExists) {
+    } else {
       // Second case: multi proxy
 
+      // Get Proxy Backend config
+      const proxyBackend = instance.data.proxyBackend;
+
       // If ProxyBackend configuration exists then it has a proxy id
+      if (proxyBackend) {
+        // Save the current proxy id
+        currentProxyId = proxyBackend.proxyId;
+      } else {
+        // Get all proxies ordered by name
+        const proxies = Proxies.find({}, { sort: { name: 1 } }).fetch();
 
-      // Update & save the current proxy id
-      currentProxyId = proxyBackendExists.proxyId;
-
-      // Otherwise empty string is current id (after deleting configuration)
+        // Set current proxy ID as the first item of the proxies list
+        currentProxyId = proxies[0]._id;
+      }
     }
 
-    // Set the current proxy id
-    return instance.data.proxyId.set(currentProxyId);
+    // Save proxy ID in template instance
+    instance.proxyId.set(currentProxyId);
+
+    return currentProxyId;
   };
 });
 
@@ -108,7 +96,7 @@ Template.proxyBackend.helpers({
     return ProxyBackends.findOne({ apiId });
   },
   apiUrlProtocol () {
-   // Get the API information
+    // Get the API information
     const api = this.api;
 
     // Construct URL object for API URL
@@ -139,7 +127,7 @@ Template.proxyBackend.helpers({
     const instance = Template.instance();
 
     // Get current proxy id
-    const currentProxyId = instance.data.proxyId.get();
+    const currentProxyId = instance.proxyId.get();
 
     // Get settings of current Proxy
     return Proxies.findOne(currentProxyId);
@@ -151,12 +139,15 @@ Template.proxyBackend.helpers({
   proxyHost () {
     // Get a reference of Template instance
     const instance = Template.instance();
-    // Get & save current proxy id
-    instance.getProxyId();
-    const currentProxyId = instance.data.proxyId.get();
+
+    // Get proxy ID from template instance
+    const savedProxyId = instance.proxyId;
+
+    // Make sure proxy ID exists or calculate it
+    const proxyId = savedProxyId ? savedProxyId.get() : instance.getProxyId();
 
     // Find the proxy settings
-    const proxy = Proxies.findOne(currentProxyId);
+    const proxy = Proxies.findOne(proxyId);
 
     if (proxy && proxy.apiUmbrella) {
       // Get frontend host from template instance
@@ -167,8 +158,8 @@ Template.proxyBackend.helpers({
     return '';
   },
   oneProxy () {
-    // Ger proxy count
-    const proxyCount = Proxies.find().count();
+    // Get proxy count
+    const proxyCount = Counts.get('proxyCount');
 
     // Check on existing only one proxy
     return proxyCount === 1;
@@ -177,17 +168,8 @@ Template.proxyBackend.helpers({
     // Get template instance
     const instance = Template.instance();
 
-    // Get proxyBackend from template data
-    return instance.data.proxyBackend;
-  },
-  showForm () {
-    // Get a reference of Template instance
-    const instance = Template.instance();
-    // Get proxy id
-    instance.getProxyId();
-
-    // If proxyId is empty then form will be hidden
-    return instance.data.proxyId.get();
+    // Return boolean value
+    return !!(instance.data.proxyBackend);
   },
 });
 
@@ -208,7 +190,7 @@ Template.proxyBackend.events({
     // Check proxyBackend exists, type is apiUmbrella, and it has id
     if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.id) {
       // Call deleteProxyBackend
-      deleteProxyBackend(proxyBackend);
+      deleteProxyBackendConfig(proxyBackend);
     }
   },
   // onChange event for checkbox inputs that contain "response_headers" in name
@@ -233,27 +215,21 @@ Template.proxyBackend.events({
   },
   'change select[name="proxyId"]': function (event, templateInstance) {
     // Get selected option
-    const selectedItem = event.currentTarget.value || '';
+    const selectedItem = event.currentTarget.value;
+    // Get number of the previous selected option
+    const previousItemNumber = templateInstance.previousItemNumber;
 
-    // User changed current proxy to another
+    // Checking of user changed current proxy to another
     if (templateInstance.formType === 'update') {
-      // If user changed to first position then proxy backend will be deleted
-      // Otherwise change option
-      if (selectedItem === event.currentTarget[0].value) {
-        Modal.show('removeSelectedProxy', {
-          proxyBackendEvent: event,
-          proxyBackend: templateInstance,
-        });
-      } else {
-        Modal.show('changeSelectedProxy', {
-          proxyBackendEvent: event,
-          proxyBackend: templateInstance,
-          selectedItem,
-        });
-      }
+      Modal.show('changeSelectedProxy', {
+        proxyBackendEvent: event,
+        proxyBackendForm: templateInstance,
+        selectedItem,
+        previousItemNumber,
+      });
     } else {
       // Set id of proxy selected
-      templateInstance.data.proxyId.set(selectedItem);
+      templateInstance.proxyId.set(selectedItem);
     }
   },
 });

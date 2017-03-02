@@ -7,7 +7,7 @@ import { check } from 'meteor/check';
 import ApiBacklogItems from '/backlog/collection';
 import ApiMetadata from '/metadata/collection';
 import Apis from '/apis/collection';
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import Feedback from '/feedback/collection';
 import OrganizationApis from '/organization_apis/collection';
 import ProxyBackends from '/proxy_backends/collection';

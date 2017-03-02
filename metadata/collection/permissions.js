@@ -11,13 +11,11 @@ ApiMetadata.allow({
     if (ApiMetadata.find({ apiBackendId: apiId }).count() !== 0) {
       return false;
     }
-      // Find related API Backend, select only "managerIds" field
+    // Find related API Backend, select only "managerIds" field
     const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
-      // Check if current user can edit API Backend
-    const userCanEdit = api.currentUserCanEdit();
-
-    return userCanEdit;
+    // Check if current user can edit API Backend
+    return api.currentUserCanEdit();
   },
   update (userId, metadata) {
     // Get API Backend ID

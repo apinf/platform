@@ -12,7 +12,7 @@ import _ from 'lodash';
 import jsyaml from 'js-yaml';
 
 // Collection imports
-import DocumentationFiles from '/documentation/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 
 Template.importApiDocumentation.events({
   'change #apiDocumentationFile': function (event) {
