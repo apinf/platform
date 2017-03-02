@@ -26,6 +26,9 @@ AccountsTemplates.configure({
   positiveValidation: false,
   positiveFeedback: true,
   showValidating: true,
+  // Privacy Policy and Terms of Use
+  privacyUrl: 'privacy-policy',
+  termsUrl: 'terms-of-use',
 });
 
 // rearranging the fields on Sign-Up, so that username comes first.
