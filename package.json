@@ -24,6 +24,7 @@
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.5",
     "moment": "^2.17.1",
+    "quill": "^1.2.2",
     "simple-statistics": "^2.2.0",
     "swagger-client": "^2.1.32",
     "swagger-parser": "^3.4.1",
