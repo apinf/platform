@@ -1,3 +1,7 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+
 // Npm packages imports
 import Clipboard from 'clipboard';
 

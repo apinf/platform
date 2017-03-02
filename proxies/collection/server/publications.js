@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Roles } from 'meteor/alanning:roles';
 

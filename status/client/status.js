@@ -1,3 +1,7 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+
 
 Template.statusCheck.onRendered(() => {
   // calls statusCheck method

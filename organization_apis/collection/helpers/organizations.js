@@ -1,3 +1,6 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
 // Npm packages imports
 import _ from 'lodash';
 

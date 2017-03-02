@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 
 // Collection imports

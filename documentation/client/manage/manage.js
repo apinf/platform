@@ -1,4 +1,9 @@
 // Meteor packages imports
+import { Mongo } from 'meteor/mongo';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';

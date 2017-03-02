@@ -1,3 +1,8 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
+
 // Collection imports
 import DocumentationFiles from '/documentation/collection';
 

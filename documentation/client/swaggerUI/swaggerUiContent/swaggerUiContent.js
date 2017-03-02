@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import ApiKeys from '/api_keys/collection';
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';

@@ -1,3 +1,6 @@
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
 // Collection imports
 import Proxies from '../../collection';
 

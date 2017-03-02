@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports

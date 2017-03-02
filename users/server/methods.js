@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 

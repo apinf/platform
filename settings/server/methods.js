@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
@@ -78,9 +81,8 @@ Meteor.methods({
       }
     } catch (error) {
       // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
-
-      }
+      // const message = `Update gitHub configuration: ${error}`;
+    }
   },
   updateMailConfiguration () {
     // Try if settings exist
@@ -101,10 +103,9 @@ Meteor.methods({
       }
     } catch (error) {
       // otherwise preapare message about error
-      const message = `Update mail configuration: ${error}`;
+      // const message = `Update mail configuration: ${error}`;
 
       // Show an error message
-      
     }
   },
 });

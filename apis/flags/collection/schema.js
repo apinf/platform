@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';

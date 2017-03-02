@@ -1,3 +1,8 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+
 // Collection imports
 import ApiLogo from '../../collection';
 

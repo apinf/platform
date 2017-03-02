@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 import { TAPi18n } from 'meteor/tap:i18n';
 

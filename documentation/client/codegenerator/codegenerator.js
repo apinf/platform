@@ -1,4 +1,9 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { HTTP } from 'meteor/http';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 

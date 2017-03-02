@@ -1,3 +1,8 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+
 // Collection imports
 import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';

@@ -1,3 +1,7 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
 // Collection imports
 import ApiBacklogItems from '/backlog/collection';
 

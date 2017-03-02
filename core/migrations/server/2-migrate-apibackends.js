@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Mongo } from 'meteor/mongo';
+
+// Meteor contributed packages imports
 import { Migrations } from 'meteor/percolate:migrations';
 
 // Collection imports

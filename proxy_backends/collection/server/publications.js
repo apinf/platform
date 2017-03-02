@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
 
 // Npm packages imports

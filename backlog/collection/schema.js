@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // Collection imports

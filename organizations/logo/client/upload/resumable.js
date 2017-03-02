@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
+// Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 

@@ -1,3 +1,8 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
 // Npm packages imports
 import _ from 'lodash';
 

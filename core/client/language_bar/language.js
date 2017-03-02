@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
 

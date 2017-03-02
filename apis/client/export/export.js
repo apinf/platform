@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import saveAs from 'meteor/pfafman:filesaver';
 
 // Npm packages imports

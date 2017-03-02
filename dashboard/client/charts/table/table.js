@@ -1,3 +1,7 @@
+// Meteor packages imports
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
 
 Template.dashboardDataTable.onCreated(function () {
   // Get reference to template instance

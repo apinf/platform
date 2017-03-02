@@ -1,4 +1,9 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports

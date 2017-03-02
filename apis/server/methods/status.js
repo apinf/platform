@@ -1,3 +1,7 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
 
 import Apis from '/apis/collection';
 import { MonitoringData } from '/monitoring/collection';

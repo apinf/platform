@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FS } from 'meteor/cfs:filesystem';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { URI } from 'meteor/olragon:uri-js';

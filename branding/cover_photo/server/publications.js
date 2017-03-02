@@ -1,3 +1,6 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
 // Collection imports
 import CoverPhoto from '/branding/cover_photo/collection';
 

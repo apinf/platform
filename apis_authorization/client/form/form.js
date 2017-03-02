@@ -1,3 +1,6 @@
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
 // APINF imports
 import emailSchema from './schema';
 

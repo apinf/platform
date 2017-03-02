@@ -1,4 +1,7 @@
 // Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.apisFilterForm.onRendered(function () {

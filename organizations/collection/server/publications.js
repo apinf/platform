@@ -1,4 +1,8 @@
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 // Collection imports
