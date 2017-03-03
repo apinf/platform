@@ -20,14 +20,14 @@
         </div>
         <div class="col-lg-3">
           <ul class="list-inline">
-            {{# if branding.privacyPolicyExists }}
+            {{# if branding.privacyPolicy }}
               <li>
                 <a href="{{ pathFor 'privacyPolicy' }}">
                   {{_ "homeFooter_privacyPolicy_text" }}
                 </a>
               </li>
             {{/ if }}
-            {{# if branding.termsOfUseExists }}
+            {{# if branding.termsOfUse }}
               <li>
                 <a href="{{ pathFor 'termsOfUse' }}">
                   {{_  "homeFooter_termsOfUse_text" }}
