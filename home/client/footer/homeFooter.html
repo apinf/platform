@@ -20,16 +20,20 @@
         </div>
         <div class="col-lg-3">
           <ul class="list-inline">
-            <li>
-              <a href="{{ pathFor 'privacyPolicy' }}">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="{{ pathFor 'termsOfUse' }}">
-                Terms of use
-              </a>
-            </li>
+            {{# if branding.privacyPolicy }}
+              <li>
+                <a href="{{ pathFor 'privacyPolicy' }}">
+                  Privacy Policy
+                </a>
+              </li>
+            {{/ if }}
+            {{# if branding.termsOfUse }}
+              <li>
+                <a href="{{ pathFor 'termsOfUse' }}">
+                  Terms of use
+                </a>
+              </li>
+            {{/ if }}
           </ul>
         </div>
         <div class="col-lg-2">

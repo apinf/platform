@@ -1,6 +1,10 @@
 <template name="termsOfUse">
-  <div class="container">
-    <h1>{{ branding.siteTitle }} Terms of Use</h1>
-      {{{ branding.termsOfUse }}}
-  </div>
+  {{# if branding.termsOfUse }}
+    <div class="container">
+      <h1>{{ branding.siteTitle }} Terms of Use</h1>
+        {{{ branding.termsOfUse }}}
+    </div>
+  {{ else }}
+    {{> notFound }}
+  {{/ if }}
 </template>
