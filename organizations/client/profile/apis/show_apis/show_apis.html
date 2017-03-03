@@ -1,12 +1,12 @@
 <template name="organizationShowApis">
   <div class="block-header">
-  <!-- Title -->
-  <h3 class="apis-block-title">
-    {{_ 'organizationProfile_bigText_apisCount'  }}
-    <small>
-      {{_ 'organizationProfile_smallText_apisCount' apis.length }}
-    </small>
-  </h3>
+    <!-- Title -->
+    <h3 class="apis-block-title">
+      {{_ 'organizationProfile_bigText_apisCount'  }}
+      <small>
+        {{_ 'organizationProfile_smallText_apisCount' apis.length }}
+      </small>
+    </h3>
     {{> apiFilteredBy }}
   </div>
   {{> apiCatalogGrid apis=apis }}
