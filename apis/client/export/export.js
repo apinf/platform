@@ -2,7 +2,7 @@
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
-import saveAs from 'meteor/pfafman:filesaver';
+import { saveAs } from 'meteor/pfafman:filesaver';
 
 // Npm packages imports
 import jsyaml from 'js-yaml';
