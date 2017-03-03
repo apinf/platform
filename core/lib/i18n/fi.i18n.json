@@ -668,7 +668,6 @@
     "homeBody_section3_heading": "T\u00e4ysin avointa l\u00e4hdekoodia",
     "homeBody_section3_text": "APInfin moottorina toimii API Umbrella. APInf tarjoaa k\u00e4ytt\u00f6liittym\u00e4kerroksen API Umbrellan toiminnoille. Ratkaisu on kehitetty avoimena l\u00e4hdekoodina ja lisensoitu MIT-lisenssill\u00e4. K\u00e4ytt\u00f6liittym\u00e4n rakentamiseeen on k\u00e4ytetty Meteor.js- ja D3-teknologioita. Arvostamme yhteisty\u00f6t\u00e4, pyrimme kuuntelemaan k\u00e4ytt\u00e4ji\u00e4mme ja rohkaisemaan ihmisi\u00e4 liittym\u00e4\u00e4n kehitt\u00e4jiksi.",
     "homeBody_section3_text_extra": "L\u00f6yd\u00e4t meid\u00e4t sosiaalisesta mediasta:",
-    "homeFooter_dashboardLink_text": "Analytiikkan\u00e4kym\u00e4",
     "homeFooter_signIn": "Kirjaudu",
     "homeFooter_signUp": "Rekister\u00f6idy",
     "importApiConfiguration_errorMessage": "Konfiguraatiotiedoston tulee olla .YAML-, .YML-, .JSON- tai .TXT-muodossa.",
