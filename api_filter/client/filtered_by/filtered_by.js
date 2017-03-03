@@ -29,6 +29,11 @@ Template.apiFilteredBy.helpers({
 
     return instance.selectedOption.get();
   },
+  showApisCount () {
+    const apisCount = Template.instance().data.apisCount;
+    // Return true if apisCount was set
+    return apisCount > -1;
+  },
 });
 
 Template.apiFilteredBy.events({
