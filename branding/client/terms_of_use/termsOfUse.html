@@ -1,7 +1,7 @@
 <template name="termsOfUse">
   {{# if branding.termsOfUse }}
     <div class="container">
-      <h1>{{ branding.siteTitle }} Terms of Use</h1>
+      <h1>{{ branding.siteTitle }} {{_ "termsOfUse_title" }}</h1>
         {{{ branding.termsOfUse }}}
     </div>
   {{ else }}

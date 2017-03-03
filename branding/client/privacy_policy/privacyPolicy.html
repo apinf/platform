@@ -1,7 +1,7 @@
 <template name="privacyPolicy">
   {{# if branding.privacyPolicy }}
     <div class="container">
-      <h1>{{ branding.siteTitle }} Privacy Policy</h1>
+      <h1>{{ branding.siteTitle }} {{_ "privacyPolicy_title" }}</h1>
         {{{ branding.privacyPolicy }}}
     </div>
   {{ else }}
