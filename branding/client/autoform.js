@@ -14,7 +14,9 @@ AutoForm.hooks({
       // see https://github.com/quilljs/quill/issues/1235
       if (termsOfUse === '<div><br></div>') {
         Branding.update(this.docId, { $unset: { termsOfUse: '' } });
-      } else if (privacyPolicy === '<div><br></div>') {
+      }
+
+      if (privacyPolicy === '<div><br></div>') {
         Branding.update(this.docId, { $unset: { privacyPolicy: '' } });
       }
       return false;
