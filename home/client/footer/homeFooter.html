@@ -22,18 +22,18 @@
           <ul class="list-inline quicklinks">
             {{# if currentUser }}
             <li>
-              <a href="{{ pathFor 'dashboard' }}">
-                {{_ "homeFooter_dashboardLink_text" }}
+              <a href="{{ pathFor 'signOut' }}">
+                {{_ "homeFooter_signOut" }}
               </a>
             </li>
             {{ else }}
             <li>
-              <a href="{{ pathFor 'atSignIn' }}">
+              <a href="{{ pathFor 'signIn' }}">
                 {{_ "homeFooter_signIn" }}
               </a>
             </li>
             <li>
-              <a href="{{ pathFor 'atSignUp' }}">
+              <a href="{{ pathFor 'signUp' }}">
                 {{_ "homeFooter_signUp" }}
               </a>
             </li>
