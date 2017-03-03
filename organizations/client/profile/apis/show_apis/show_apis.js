@@ -53,3 +53,12 @@ Template.organizationShowApis.helpers({
     return instance.managedApis.get();
   },
 });
+
+Template.organizationShowApis.events({
+  'click [data-lifecycle]': (event) => {
+    // Get value of data-lifecycle
+    const selectedTag = event.currentTarget.dataset.lifecycle;
+    // Set value in query parameter
+    FlowRouter.setQueryParams({ lifecycle: selectedTag });
+  },
+});
