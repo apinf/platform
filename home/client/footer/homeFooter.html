@@ -13,10 +13,28 @@
             {{/ each }}
           </ul>
         </div>
-        <div class="col-lg-8 col-lg-push-1">
+        <div class="col-lg-5">
           <p class="footer-text">
             {{ branding.siteFooter }}
           </p>
+        </div>
+        <div class="col-lg-3">
+          <ul class="list-inline">
+            {{# if branding.privacyPolicy }}
+              <li>
+                <a href="{{ pathFor 'privacyPolicy' }}">
+                  {{_ "homeFooter_privacyPolicy_text" }}
+                </a>
+              </li>
+            {{/ if }}
+            {{# if branding.termsOfUse }}
+              <li>
+                <a href="{{ pathFor 'termsOfUse' }}">
+                  {{_  "homeFooter_termsOfUse_text" }}
+                </a>
+              </li>
+            {{/ if }}
+          </ul>
         </div>
         <div class="col-lg-2">
           <ul class="list-inline quicklinks">

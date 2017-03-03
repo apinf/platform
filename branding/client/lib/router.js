@@ -8,3 +8,17 @@ FlowRouter.route('/settings/branding', {
     BlazeLayout.render('masterLayout', { main: 'branding' });
   },
 });
+
+FlowRouter.route('/privacy-policy', {
+  name: 'privacyPolicy',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'privacyPolicy' });
+  },
+});
+
+FlowRouter.route('/terms-of-use', {
+  name: 'termsOfUse',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'termsOfUse' });
+  },
+});
