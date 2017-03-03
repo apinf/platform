@@ -5,7 +5,9 @@
     </h1>
     {{> apiCatalogToolbar apis=apis }}
 
-    {{> apiFilteredBy apisCount=apisCount }}
+    <p>
+      {{> apiFilteredBy apisCount=apisCount }}
+    </p>
 
     {{# if Template.subscriptionsReady }}
       <!-- if viewMode is grid, show grid -->
