@@ -1,11 +1,6 @@
 <template name="apiFilteredBy">
   {{# if selectedOption }}
     <span>
-      {{# if showApisCount }}
-        <strong>
-          {{_ 'apiFilteredBy_text.apiCount' count=apisCount }}&nbsp;
-        </strong>
-      {{/ if }}
       <i>
         {{_ 'apiFilteredBy_text_filteredBy' tag=selectedOption }}
       </i>
