@@ -94,7 +94,7 @@
     "apiCount": " __count__ API",
     "apiCount_plural": "__count__ APIs"
   },
-  "apiFilteredBy_text_filteredBy": "filtered by \"__tag__\"",
+  "apiFilteredBy_text_filteredBy": "Filtered by \"__tag__\"",
   "apiFilteredBy_buttonText_clear": "Clear all",
   "apisFilterForm_buttonText_filter": "Filter",
   "apisFilterForm_buttonText_clear": "Clear",
