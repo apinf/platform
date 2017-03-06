@@ -1,8 +1,11 @@
 {
   "aboutApinf_documentation": "Documentation",
   "aboutApinf_contributors": "Contributors",
+  "aboutApinf_copyright": "Copyright",
+  "aboutApinf_copyrightLicense": "Copyright and license",
   "aboutApinf_createdBy": "Created by",
   "aboutApinf_credits": "Credits",
+  "aboutApinf_license": "License",
   "aboutApinf_doneButton_text": "Done",
   "aboutApinf_intro": "This website is powered by the open source Apinf platform.",
   "aboutApinf_homepage": "Homepage",
