@@ -1,6 +1,10 @@
-import { Accounts } from 'meteor/accounts-base';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
+// Meteor contributed packages imports
+import { Accounts } from 'meteor/accounts-base';
+
+// APINF imports
 import loginAttemptVerifier from './login_verify';
 
 Meteor.startup(() => {

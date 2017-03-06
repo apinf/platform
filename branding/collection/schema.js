@@ -1,6 +1,8 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Collection imports
 import Branding from './';
 
 Branding.schema = new SimpleSchema({
@@ -42,6 +44,20 @@ Branding.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  privacyPolicy: {
+    type: String,
+    optional: true,
+    autoform: {
+      rows: 5,
+    },
+  },
+  termsOfUse: {
+    type: String,
+    optional: true,
+    autoform: {
+      rows: 5,
+    },
+  },
   socialMedia: {
     type: [Object],
     optional: true,
@@ -51,7 +67,9 @@ Branding.schema = new SimpleSchema({
     optional: true,
     allowedValues: ['Facebook', 'Twitter', 'Github'],
     autoform: {
-      firstOption: TAPi18n.__('schemas.branding.socialMedia.$.name.firstOption'),
+      firstOption () {
+        return TAPi18n.__('schemas.branding.socialMedia.$.name.firstOption');
+      },
     },
   },
   'socialMedia.$.url': {

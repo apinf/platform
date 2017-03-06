@@ -1,4 +1,7 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Collection imports
 import Settings from './';
 
 Settings.schema = new SimpleSchema({

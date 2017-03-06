@@ -1,9 +1,11 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
-
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+// Npm packages imports
 import moment from 'moment';
 import dc from 'dc';
 import d3 from 'd3';

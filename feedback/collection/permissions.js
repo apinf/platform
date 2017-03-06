@@ -1,3 +1,4 @@
+// Collection imports
 import Feedback from './';
 
 Feedback.allow({

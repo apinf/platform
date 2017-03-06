@@ -17,7 +17,7 @@
     {{# if api }}
       {{> afQuickField name="apiId" value=api._id type="hidden" }}
     {{ else }}
-      {{> afQuickField name="apiId" options=unlinkedApis }}
+      {{> afQuickField name="apiId" options=unlinkedApis firstOption=false }}
     {{/ if }}
 
     <button type="submit" class="btn btn-success" id="organization-apis-connect">

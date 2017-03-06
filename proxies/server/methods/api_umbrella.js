@@ -1,14 +1,21 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
+import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
-import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
-import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 
-import _ from 'lodash';
+// APINF imports
+import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
 
 Meteor.methods({
   createApiUmbrellaWeb (proxyId) {
@@ -46,7 +53,7 @@ Meteor.methods({
     */
 
     // Make sure currentUser is a String
-    check(currentUser, String);
+    check(currentUser, Object);
 
     // Make sure proxyId is a String
     check(proxyId, String);

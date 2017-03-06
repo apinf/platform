@@ -1,6 +1,10 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { _ } from 'lodash';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';

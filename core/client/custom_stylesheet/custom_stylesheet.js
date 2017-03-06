@@ -1,4 +1,7 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Collection imports
 import Branding from '/branding/collection';
 
 const tinycolor = require('tinycolor2');

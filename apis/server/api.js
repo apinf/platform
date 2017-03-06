@@ -1,6 +1,9 @@
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ApiV1 from '/core/server/api';
-import _ from 'lodash';
 
 // Generates: "GET all" /rest-api/v1/apis and "GET one"
 // /rest-api/v1/apis/:id for Apis collection

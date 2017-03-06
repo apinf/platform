@@ -1,3 +1,4 @@
+// Collection imports
 import Organizations from './';
 
 Organizations.friendlySlugs({

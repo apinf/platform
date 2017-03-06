@@ -1,6 +1,10 @@
-import { Migrations } from 'meteor/percolate:migrations';
+// Meteor packages imports
 import { Mongo } from 'meteor/mongo';
 
+// Meteor contributed packages imports
+import { Migrations } from 'meteor/percolate:migrations';
+
+// Collection imports
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';

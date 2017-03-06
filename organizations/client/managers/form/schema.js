@@ -1,3 +1,4 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 const managerSchema = new SimpleSchema({

@@ -1,3 +1,4 @@
+// Npm packages imports
 import _ from 'lodash';
 
 // The structure "requiredFields" describes proxy types and list of required fields for this proxy

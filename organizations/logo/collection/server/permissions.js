@@ -1,3 +1,4 @@
+// Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
 
 OrganizationLogo.allow({

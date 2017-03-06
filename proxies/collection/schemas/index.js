@@ -1,11 +1,16 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Npm packages imports
 import _ from 'lodash';
+
+// Collection imports
 import Proxies from '../';
 
-import registeredProxies from '../registered_proxies';
-
+// APINF imports
 import apiUmbrellaSchema from './api_umbrella';
 import emqttSchema from './emqtt';
+import registeredProxies from '../registered_proxies';
 
 let schema = {
   name: {
@@ -27,5 +32,7 @@ let schema = {
 schema = _.assign(schema, apiUmbrellaSchema, emqttSchema);
 
 Proxies.schema = new SimpleSchema(schema);
+// Attach translation
+Proxies.schema.i18n('schemas.proxies');
 
 Proxies.attachSchema(Proxies.schema);

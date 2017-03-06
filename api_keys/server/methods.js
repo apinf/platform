@@ -1,7 +1,11 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Collection imports
 import ApiKeys from '/api_keys/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
@@ -29,8 +33,8 @@ Meteor.methods({
           Meteor.call('createApiUmbrellaUser', currentUser, proxyId, (error, umbrellaUser) => {
             if (error) {
               // Log error for server
-              // eslint-disable-next-line no-console
               console.log(error);
+
               // Throw apiumbrellauser error for client
               throw new Meteor.Error(
                 'apinf-apiumbrellauser-error',

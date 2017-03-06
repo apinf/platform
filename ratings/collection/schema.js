@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// Collection imports
 import ApiBackendRatings from './';
 
 ApiBackendRatings.schema = new SimpleSchema({

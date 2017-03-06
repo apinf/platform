@@ -1,38 +1,29 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Collection imports
 import Feedback from './';
 
 Feedback.schema = new SimpleSchema({
   topic: {
     type: String,
-    label: 'Topic',
     max: 50,
     optional: false,
-    autoform: {
-      placeholder: 'Feedback topic',
-    },
   },
   message: {
     type: String,
-    label: 'Your Message',
     max: 1000,
     optional: false,
     autoform: {
       rows: 5,
-      placeholder: 'Your message',
     },
   },
   messageType: {
     type: String,
-    label: 'Choose message type',
     allowedValues: ['Feedback', 'Error report', 'Feature request'],
-    autoform: {
-      options: [
-        { label: 'Feedback', value: 'Feedback' },
-        { label: 'Error report', value: 'Error report' },
-        { label: 'Feature request', value: 'Feature request' },
-      ],
-    },
   },
   authorId: {
     type: String,
@@ -65,5 +56,8 @@ Feedback.schema = new SimpleSchema({
     },
   },
 });
+
+// Attache translation
+Feedback.schema.i18n('schemas.feedback');
 
 Feedback.attachSchema(Feedback.schema);
