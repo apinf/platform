@@ -49,7 +49,7 @@ michalvalasek:autoform-bootstrap-colorpicker
 mizzao:sharejs-ace
 mobile-experience@1.0.4
 mongo@1.1.15
-nimble:restivus
+nimble:restivus@=0.8.11
 olragon:uri-js
 pahans:inline-help
 peppelg:bootstrap-3-modal
@@ -85,3 +85,4 @@ useraccounts:flow-routing
 vsivsi:file-collection
 zimme:active-route
 github-config-ui
+mizzao:sharejs@=0.9.0

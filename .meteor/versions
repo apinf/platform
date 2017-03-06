@@ -93,7 +93,7 @@ michalvalasek:autoform-bootstrap-colorpicker@0.1.0
 minifier-css@1.2.16
 minifier-js@1.2.17
 minimongo@1.0.20
-mizzao:sharejs@0.10.0
+mizzao:sharejs@0.9.0
 mizzao:sharejs-ace@1.4.1
 mobile-experience@1.0.4
 mobile-status-bar@1.0.14
@@ -103,7 +103,7 @@ momentjs:moment@2.17.1
 mongo@1.1.15
 mongo-id@1.0.6
 mongo-livedata@1.0.12
-nimble:restivus@0.8.12
+nimble:restivus@0.8.11
 npm-bcrypt@0.9.2
 npm-mongo@2.2.16_1
 oauth@1.1.13
