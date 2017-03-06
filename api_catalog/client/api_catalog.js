@@ -150,15 +150,15 @@ Template.apiCatalog.onRendered(function () {
 Template.apiCatalog.helpers({
   apis () {
     // Get apis collection via Pagination
-    let apis = Template.instance().pagination.getPage();
+    const apis = Template.instance().pagination.getPage();
     // Get the language
     const language = TAPi18n.getLanguage();
     // Get the sort via Pagination
-    let sort = Template.instance().pagination.sort();
+    const sort = Template.instance().pagination.sort();
     // When sorted by name
     if (sort.name) {
       // use custom sort function with i18n support
-      apis.sort(function(a, b){
+      apis.sort((a, b) => {
         return a.name.localeCompare(b.name, language) * sort.name;
       });
     }
