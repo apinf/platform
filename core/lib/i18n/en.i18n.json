@@ -88,6 +88,12 @@
   "apiExport_proxy_title": "Export proxy configuration",
   "apiExport_proxy_description": "Export proxy configuration in JSON or YAML format",
   "apiExport_title": "Export",
+  "apiFilteredBy_text": {
+    "apiCount": " __count__ API",
+    "apiCount_plural": "__count__ APIs"
+  },
+  "apiFilteredBy_text_filteredBy": "filtered by \"__tag__\"",
+  "apiFilteredBy_buttonText_clear": "Clear all",
   "apisFilterForm_buttonText_filter": "Filter",
   "apisFilterForm_buttonText_clear": "Clear",
   "apisFilterForm_labelText_lifecycle": "Life Cycle Phases",
@@ -350,8 +356,10 @@
   "homeBody_section3_heading": "Completely open source",
   "homeBody_section3_text": "APinf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with MIT. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
   "homeBody_section3_text_extra": "Find us in ",
-  "homeFooter_dashboardLink_text": "Dashboard",
+  "homeFooter_privacyPolicy_text": "Privacy Policy",
+  "homeFooter_termsOfUse_text": "Terms of Use",
   "homeFooter_signIn": "Sign In",
+  "homeFooter_signOut": "Sign Out",
   "homeFooter_signUp": "Sign Up",
   "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML, .JSON or .TXT format.",
   "import_ApiConfiguration_Drop": "Drop your file here",
@@ -363,7 +371,6 @@
   "import_ApiDocumentation_File": "Documentation Configuration File",
   "importApiDocumentation_fileExtensionError_message": "Only .json and .yaml(.yml) files are supported.",
   "importApiDocumentation_fileReadError_message": "Error when reading the file. Please check file contents for errors.",
-  "import_ApiDocumentation_Title": "Upload documentation",
   "latestApiBackends_DateAdded": "Added %s",
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_MoreInfo": "More info",
@@ -383,8 +390,9 @@
   "manageApiDocumentationModal_Title": "API Documentation",
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
   "manageApiDocumentationModal_hints_documentation_link": "Link to the Wiki, Github page or other web resource where the documentation of your API is located",
-  "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can also choose to create a new documentation file for your API using Swagger editor",
+  "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can add a Swagger document by uploading a file or by giving a link to the remote file. Note: Try out methods can only be controlled, if the file is uploaded.",
   "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
+  "manageApiDocumentationModal_addDocumentation_title": "Add documentation",
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
   "navbar_organizations": "Organizations",
@@ -448,6 +456,7 @@
   "organizationSettingsDelete_text_information": "The organization information will be removed and this action cannot be undone.",
   "organizationSettingsDelete_title": "Delete the Organization profile",
   "organizationSettingsDelete_panelTitle": "Delete",
+  "privacyPolicy_title": "Privacy Policy",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
   "profile_setUsername": "Please set your username.",
@@ -471,7 +480,6 @@
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
-  "proxyBackendForm_informText_noOneSelectedProxy": "No one proxy was selected.",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
   "proxyForm_successText": "Proxy settings were saved",
@@ -488,11 +496,6 @@
   "removeProxy_confirmRemoveProxy": "Yes, remove",
   "removeProxy_cancelRemove": "Cancel",
   "removeProxy_errorMessage": "Error: Proxy removal failed",
-  "removeSelectedProxy_buttonCancel": "Cancel",
-  "removeSelectedProxy_buttonConfirm": "Yes, remove",
-  "removeSelectedProxy_title": "Remove Proxy",
-  "removeSelectedProxy_textCaution": "Caution!",
-  "removeSelectedProxy_textConfirm": "Deleting the proxy backend configuration will potentially break API calls from applications. Please inform your API consumers about this change.",
   "requestsOverTimeChart_showingRecordsCount": "Showing records",
   "requestsOverTimeChart_title": "API Request Timeline",
   "requestsOverTimeChart_help_text": "You can use this chart to view number of requests your API has received for a specific time period. You can see API requests for a single API or a combination of them. The overview information and other charts will be updated when you interact with API request Timeline.",
@@ -501,34 +504,46 @@
   "schemas": {
       "apis": {
         "name": {
-          "label": "API Name"
-        },
-        "description": {
-          "label": "Description"
-        },
-        "url": {
-          "label": "URL"
-        },
-        "submit_methods": {
-          "label": "Allow try-out for following methods:"
-        },
-        "organizationId": {
-          "label": "Connect API to organization"
-        },
-        "lifecycleStatus": {
-          "label": "Lifecycle status",
-          "placeholder": "Select lifecycle status",
-          "options": {
-            "design": "Design",
-            "development": "Development",
-            "testing": "Testing",
-            "production": "Production",
-            "deprecated": "Deprecated"
+              "label": "API Name"
+          },
+          "description": {
+              "label": "Description"
+          },
+          "url": {
+              "label": "URL"
+          },
+          "organizationId": {
+              "label": "Connect API to organization"
+          },
+          "lifecycleStatus": {
+              "label": "Lifecycle status",
+              "placeholder": "Select lifecycle status",
+              "options": {
+                  "design": "Design",
+                  "development": "Development",
+                  "testing": "Testing",
+                  "production": "Production",
+                  "deprecated": "Deprecated"
+              }
           }
         },
-        "documentation_link": {
-          "label": "Documentation link"
-        }
+        "apiDocs": {
+          "type": {
+            "label": "Provide API Documentation via",
+            "options": {
+              "url": "URL",
+              "file": "File"
+            }
+          },
+          "remoteFileUrl": {
+            "label": "Link to API Documentation"
+          },
+          "otherUrl": {
+            "label": "Link to other API Documentation"
+          },
+          "submit_methods": {
+            "label": "Allow try-out for following methods:"
+          }
       },
       "apiMetadata": {
           "organization": {
@@ -593,26 +608,34 @@
           "siteSlogan": {
               "label": "Site slogan"
           },
+          "privacyPolicy": {
+            "label": "Privacy Policy",
+            "placeholder": "Add your privacy policy here"
+          },
+          "termsOfUse": {
+            "label": "Terms of Use",
+            "placeholder": "Add your terms of use here"
+          },
           "colors": {
               "label": "Colors",
               "primary": {
-                "label": "Primary"
+                  "label": "Primary"
               },
               "primaryText": {
-                "label": "Primary text"
+                  "label": "Primary text"
               }
           },
           "socialMedia": {
               "label": "Social media",
               "$": {
-                "name": {
-                    "label": "Name",
-                    "firstOption": "(Select One)"
-                },
-                "url": {
-                    "label": "Url",
-                    "placeholder": "http://example.com/accountname"
-                }
+                  "name": {
+                      "label": "Name",
+                      "firstOption": "(Select One)"
+                  },
+                  "url": {
+                      "label": "Url",
+                      "placeholder": "http://example.com/accountname"
+                  }
               }
           },
           "siteFooter": {
@@ -620,18 +643,18 @@
           }
       },
       "contactForm": {
-        "name": {
-          "label": "Your name",
-          "placeholder": "Your name"
-        },
-        "email": {
-          "label": "E-mail address",
-          "placeholder": "Your email"
-        },
-        "message": {
-          "label": "Message",
-          "placeholder": "Your message"
-        }
+          "name": {
+              "label": "Your name",
+              "placeholder": "Your name"
+          },
+          "email": {
+              "label": "E-mail address",
+              "placeholder": "Your email"
+          },
+          "message": {
+              "label": "Message",
+              "placeholder": "Your message"
+          }
       },
       "feedback": {
           "topic": {
@@ -645,27 +668,27 @@
           "messageType": {
               "label": "Choose message type",
               "options": {
-                "Feedback": "Feedback",
-                "Error report": "Error report",
-                "Feature request": "Feature request"
+                  "Feedback": "Feedback",
+                  "Error report": "Error report",
+                  "Feature request": "Feature request"
               }
           }
       },
       "monitoring": {
-        "enabled": {
-          "label": "Enabled API Monitoring"
-        },
-        "url": {
-          "label": "Endpoint to Monitor"
-        }
+          "enabled": {
+              "label": "Enabled API Monitoring"
+          },
+          "url": {
+              "label": "Endpoint to Monitor"
+          }
       },
       "settings": {
-        "access": {
-          "onlyAdminsCanAddApis": {
-            "label": "Only platform administrators are allowed to add new APIs"
-          }
-        },
-        "apiDocumentationEditor": {
+          "access": {
+              "onlyAdminsCanAddApis": {
+                  "label": "Only platform administrators are allowed to add new APIs"
+              }
+          },
+          "apiDocumentationEditor": {
               "label": "API Documentation Editor",
               "enabled": {
                   "label": "Enabled"
@@ -718,52 +741,59 @@
           }
       },
       "proxies": {
-        "name" : {
-          "label": "Name"
-        },
-        "description" : {
-          "label": "Description"
-        },
-        "type" : {
-          "label": "Type"
-        },
-        "apiUmbrella" : {
-          "url": {
-            "label": "URL"
+          "name" : {
+              "label": "Name"
           },
-          "apiKey": {
-            "label": "API Key"
+          "description" : {
+              "label": "Description"
           },
-          "authToken": {
-            "label": "Auth Token"
+          "type" : {
+              "label": "Type"
           },
-          "elasticsearch": {
-            "label": "ElasticSearch"
+          "apiUmbrella" : {
+              "url": {
+                  "label": "URL"
+              },
+              "apiKey": {
+                  "label": "API Key"
+              },
+              "authToken": {
+                  "label": "Auth Token"
+              },
+              "elasticsearch": {
+                  "label": "ElasticSearch"
+              }
+          },
+          "emqtt": {
+              "url": {
+                  "label": "URL"
+              },
+              "elasticsearch": {
+                  "label": "ElasticSearch"
+              }
           }
-        },
-        "emqtt": {
-          "url": {
-            "label": "URL"
-          },
-          "elasticsearch": {
-            "label": "ElasticSearch"
-          }
-        }
       },
-      "ProxyBackends": {
-        "proxyId": {
-          "label": "Select one proxy"
-        },
-        "apiUmbrella": {
+      "proxyBackends": {
+          "proxyId": {
+              "label": "Select one proxy"
+          },
+          "apiUmbrella": {
+              "servers": {
+                  "$": {
+                      "port": {
+                          "label": "API port"
+                      }
+                  }
+              },
               "settings": {
                   "append_query_string": {
-                    "label": "Append Query String Parameters"
+                      "label": "Append Query String Parameters"
                   },
                   "disable_api_key": {
                       "label": "Disable API key requirement"
                   },
                   "headers_string": {
-                    "label": "Set Request Headers"
+                      "label": "Set Request Headers"
                   },
                   "rate_limit_mode": {
                       "label": "Rate limit mode",
@@ -771,6 +801,9 @@
                           "custom": "Custom rate limits",
                           "unlimited": "Unlimited requests"
                       }
+                  },
+                  "rate_limits": {
+                      "label": "Rate limits"
                   },
                   "rate_limit": {
                       "duration": {
@@ -790,6 +823,16 @@
                           "label": "Show rate limit in response headers"
                       }
                   }
+              },
+              "url_matches": {
+                  "$": {
+                      "frontend_prefix": {
+                          "label": "Proxy base path"
+                      },
+                      "backend_prefix": {
+                          "label": "API base path"
+                      }
+                  }
               }
           }
       },
@@ -803,55 +846,55 @@
         },
       "organizations": {
           "name": {
-            "label": "Name"
+              "label": "Name"
           },
           "url": {
-            "label": "URL"
+              "label": "URL"
           },
           "description": {
-            "label": "Description"
+              "label": "Description"
           },
           "contact": {
               "label": "Contact",
               "person": {
-                "label": "Name"
+                  "label": "Name"
               },
               "phone": {
-                "label": "Phone number"
+                  "label": "Phone number"
               },
               "email": {
-                "label": "Email"
+                  "label": "Email"
               }
           }
       },
       "organizationApis": {
-        "apiId": {
-          "label": "Select API"
-        },
-        "organizationId": {
-          "label": "Select Organization"
-        }
+          "apiId": {
+              "label": "Select API"
+          },
+          "organizationId": {
+              "label": "Select Organization"
+          }
       },
       "updatePassword": {
-        "old": {
-          "label": "Current Password"
-        },
-        "new": {
-          "label": "New Password"
-        },
-        "confirm": {
-          "label": "Confirm new Password"
-        }
+          "old": {
+              "label": "Current Password"
+          },
+          "new": {
+              "label": "New Password"
+          },
+          "confirm": {
+              "label": "Confirm new Password"
+          }
       },
       "users": {
-        "username": {
-          "label": "Username"
-        },
-        "profile": {
-          "company": {
-            "label": "Company"
+          "username": {
+              "label": "Username"
+          },
+          "profile": {
+              "company": {
+                  "label": "Company"
+              }
           }
-        }
       }
   },
   "sdkCodeGeneratorModal_buttonText_download": "Download",
@@ -900,6 +943,7 @@
   "statusCodeCountsChart_title": "HTTP Status Codes",
   "statusCodeCountsChart_help_text": "You can use this chart to see the HTTP responses generated by your API for the requests it receives for a specific time period. You can filter the chart with response type for a single API or a combination of them. The overview information and other charts will be updated when you interact with HTTP Status Codes.",
   "swaggerUi_swaggerDocumentInvalidText": "Swagger document is not valid.",
+  "termsOfUse_title": "Terms of Use",
   "timeFrameSelectPicker_from": "from",
   "timeFrameSelectPicker_to": "to",
   "updatePassword_legend_text": "Update password",

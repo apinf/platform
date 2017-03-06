@@ -1,4 +1,4 @@
-// Import Meteor packages
+// Meteor packages imports
 import { FileCollection } from 'meteor/vsivsi:file-collection';
 
 const CoverPhoto = new FileCollection('CoverPhoto', {

@@ -1,6 +1,10 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
 
 Template.organizationProfileHeader.onRendered(function () {

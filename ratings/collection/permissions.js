@@ -1,4 +1,4 @@
-// Collection import
+// Collection imports
 import ApiBackendRatings from './';
 
 ApiBackendRatings.allow({

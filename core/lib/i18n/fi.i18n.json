@@ -112,7 +112,7 @@
                 }
             }
         },
-        "ProxyBackends": {
+        "proxyBackends": {
             "apiUmbrella": {
                 "settings": {
                     "append_query_string": {
@@ -556,7 +556,7 @@
     "dashboardDataTable_timeStamp": "P\u00e4iv\u00e4ys",
     "dashboardDataTable_title": "Analytiikka",
     "dashboardDataTable_pageCount": "Sivu",
-    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. <br\/> Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
+    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
     "dashboardCharts_placeholder_loadingData": "Haetaan uusinta dataa...",
     "deleteAccount_closeButton": "Sulje",
     "deleteAccount_confirmDelete": "Poista",
@@ -668,7 +668,6 @@
     "homeBody_section3_heading": "T\u00e4ysin avointa l\u00e4hdekoodia",
     "homeBody_section3_text": "APInfin moottorina toimii API Umbrella. APInf tarjoaa k\u00e4ytt\u00f6liittym\u00e4kerroksen API Umbrellan toiminnoille. Ratkaisu on kehitetty avoimena l\u00e4hdekoodina ja lisensoitu MIT-lisenssill\u00e4. K\u00e4ytt\u00f6liittym\u00e4n rakentamiseeen on k\u00e4ytetty Meteor.js- ja D3-teknologioita. Arvostamme yhteisty\u00f6t\u00e4, pyrimme kuuntelemaan k\u00e4ytt\u00e4ji\u00e4mme ja rohkaisemaan ihmisi\u00e4 liittym\u00e4\u00e4n kehitt\u00e4jiksi.",
     "homeBody_section3_text_extra": "L\u00f6yd\u00e4t meid\u00e4t sosiaalisesta mediasta:",
-    "homeFooter_dashboardLink_text": "Analytiikkan\u00e4kym\u00e4",
     "homeFooter_signIn": "Kirjaudu",
     "homeFooter_signUp": "Rekister\u00f6idy",
     "importApiConfiguration_errorMessage": "Konfiguraatiotiedoston tulee olla .YAML-, .YML-, .JSON- tai .TXT-muodossa.",
@@ -784,7 +783,6 @@
     "proxyBackendForm_requiredErrorMessage": "T\u00e4yt\u00e4 kaikki vaaditut kent\u00e4t",
     "proxyBackendForm_deleteSuccessMessage": "V\u00e4lityspalvelinasetukset poistettu",
     "proxyBackendForm_update_successMessage": "V\u00e4lityspalvelinasetukset p\u00e4ivitetty",
-    "proxyBackendForm_informText_noOneSelectedProxy": "Yht\u00e4\u00e4n v\u00e4lityspalvelinta ei ole valittu.",
     "proxyForm_header_text": "Lis\u00e4\u00e4 v\u00e4lityspalvelin",
     "proxyForm_saveButton_text": "Tallenna",
     "proxyForm_successText": "V\u00e4lityspalvelimen asetukset tallennettu.",
@@ -801,11 +799,6 @@
     "removeProxy_confirmRemoveProxy": "Kyll\u00e4, poista",
     "removeProxy_cancelRemove": "Peruuta",
     "removeProxy_errorMessage": "Virhe: V\u00e4lityspalvelimen poisto ep\u00e4onnistui",
-    "removeSelectedProxy_buttonCancel": "Peruuta",
-    "removeSelectedProxy_buttonConfirm": "Poista",
-    "removeSelectedProxy_title": "Poista v\u00e4lityspalvelin",
-    "removeSelectedProxy_textCaution": "Huomio!",
-    "removeSelectedProxy_textConfirm": "V\u00e4lityspalvelinkonfiguraation poisto saattaa rikkoa rajapintakutsut sovelluksista. Tiedota rajapintasi k\u00e4ytt\u00e4ji\u00e4 t\u00e4st\u00e4 muutoksesta.",
     "requestsOverTimeChart_showingRecordsCount": "N\u00e4ytet\u00e4\u00e4n tuloksia",
     "requestsOverTimeChart_title": "Rajapintapyynt\u00f6jen aikajana",
     "requestsOverTimeChart_help_text": "Klikkaa alapuolella olevaa yleiskuvaa aktivoidakseksi aikarajauksen. Voit k\u00e4ytt\u00e4\u00e4 sit\u00e4 valitaksesi jakson, jonka ajalta haluat n\u00e4hd\u00e4 rajapintakutsuja. My\u00f6s HTTP-statuskoodit ja rajapinnan vasteaikakuvaaja p\u00e4ivitet\u00e4\u00e4n valitsemasi ajanjakson perusteella.",

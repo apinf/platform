@@ -1,6 +1,11 @@
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Collection imports
 import Apis from '/apis/collection';
 
 Template.organizationShowApis.onCreated(function () {

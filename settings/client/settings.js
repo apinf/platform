@@ -1,6 +1,8 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Collection imports
 import Settings from '/settings/collection';
-import $ from 'jquery';
 
 Template.settings.onCreated(function () {
   // Subscription to feedback collection

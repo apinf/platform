@@ -1,4 +1,4 @@
-// Meteor packages import
+// Meteor packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Check which status code is received

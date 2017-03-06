@@ -1,7 +1,11 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Collection imports
 import ApiBacklogItems from './';
 
 ApiBacklogItems.schema = new SimpleSchema({

@@ -1,6 +1,8 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
+// Collection imports
 import ApiFlags from '../';
 
 Meteor.publish('singleApiFlag', (apiBackendId) => {

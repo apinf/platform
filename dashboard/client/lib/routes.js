@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
+// APINF imports
 import signedIn from '/core/client/lib/router';
 
 // Add route to signedIn group, requires user to sign in

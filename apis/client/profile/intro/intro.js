@@ -1,11 +1,10 @@
-// Allow use of 'document' as global object
-/* global document */
-
-// Meteor imports
-import { TAPi18n } from 'meteor/tap:i18n';
+// Meteor packages imports
 import { Template } from 'meteor/templating';
 
-// Library imports
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
+
+// Npm packages imports
 import { introJs } from 'intro.js';
 import 'intro.js/introjs.css';
 
