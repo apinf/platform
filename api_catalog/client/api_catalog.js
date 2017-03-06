@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import 'locale-compare-polyfill';
 import Apis from '/apis/collection';
 import ApiBookmarks from '/bookmarks/collection';
 
@@ -141,8 +143,20 @@ Template.apiCatalog.onRendered(function () {
 
 Template.apiCatalog.helpers({
   apis () {
-    // Return items of apis collection via Pagination
-    return Template.instance().pagination.getPage();
+    // Get apis collection via Pagination
+    let apis = Template.instance().pagination.getPage();
+    // Get the language
+    const language = TAPi18n.getLanguage();
+    // Get the sort via Pagination
+    let sort = Template.instance().pagination.sort();
+    // When sorted by name
+    if (sort.name) {
+      // use custom sort function with i18n support
+      apis.sort(function(a, b){
+        return a.name.localeCompare(b.name, language) * sort.name;
+      });
+    }
+    return apis;
   },
   templatePagination () {
     // Get reference of pagination
