@@ -11,6 +11,10 @@ ApiMetadata.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
+  organizationId: {
+    type: String,
+    optional: true,
+  },
   organization: {
     type: Object,
     optional: true,
