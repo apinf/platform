@@ -17,18 +17,21 @@ Migrations.add({
 
 
     // Linking between apiMetadata and Organization collections
-    // TODO: revert. SHould loop by organizationApis
-    // Get all apiMetadata without organization data
-    ApiMetadata.find().forEach((apiMetadata) => {
-      // Get the related organization
-      const organizationApis = OrganizationApis.findOne({ apiId: apiMetadata.apiId });
+    OrganizationApis.find().forEach((organizationApis) => {
+      // Get API ID
+      const apiId = organizationApis.apiId;
+      // Get Organization ID
+      const organizationId = organizationApis.organizationId;
+      // Get API metadata document
+      const apiMetadata = ApiMetadata.findOne({ apiId });
 
-      // Make sure API is connected to organization
-      if (organizationApis) {
-        // Add link to the related organization document
-        ApiMetadata.update(apiMetadata._id, {
-          $set: { organizationId: organizationApis.organizationId },
-        });
+      // Make sure API metadata document exists
+      if (apiMetadata) {
+        // Then update document
+        ApiMetadata.update(apiMetadata._id, { $set: { organizationId } });
+      } else {
+        // Otherwise create a new one
+        ApiMetadata.insert({ apiId, organizationId });
       }
     });
   },
