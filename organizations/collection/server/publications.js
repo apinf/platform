@@ -40,11 +40,8 @@ Meteor.publish('organizationApisCount', function (organizationId) {
 });
 
 Meteor.publishComposite('organizationComposite', (slug) => {
-  /*
-  Returning an organization with managers
-  TODO:
-  Move all organization related publicationd as children
-  */
+  // Returning an organization with managers
+  // TODO: Move all organization related publicationd as children
   check(slug, String);
   return {
     find () {
