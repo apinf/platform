@@ -1,6 +1,11 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Collection imports
 import Organizations from '/organizations/collection';
 
 Template.organizationCatalogueToolbar.onRendered(function () {

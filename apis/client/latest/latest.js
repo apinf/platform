@@ -1,5 +1,8 @@
-import Apis from '/apis/collection';
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Collection imports
+import Apis from '/apis/collection';
 
 Template.latestPublicApis.onCreated(function () {
   // Reference to Template instance

@@ -1,7 +1,10 @@
-import _ from 'lodash';
-
+// Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Settings from '/settings/collection';
 import Apis from '../';
 

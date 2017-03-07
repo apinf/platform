@@ -1,12 +1,17 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import FeedbackVotes from '/feedback_votes/collection';
-
+// Npm packages imports
 import moment from 'moment';
+
+// Collection imports
+import FeedbackVotes from '/feedback_votes/collection';
 
 Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object
@@ -17,6 +22,14 @@ Template.feedbackItem.onCreated(function () {
 });
 
 Template.feedbackItem.helpers({
+  feedbackType () {
+    // Return translation for feedback message type
+
+    // Get item
+    const item = Template.instance().data.item;
+    // Return translation for type
+    return TAPi18n.__(`feedbackItem_messageType.${item.messageType}`);
+  },
   userUpvote () {
     // Get current Feedback ID
     const feedbackId = Template.currentData().item._id;

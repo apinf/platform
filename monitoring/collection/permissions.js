@@ -1,4 +1,4 @@
-// APINF import
+// Collection imports
 import Apis from '/apis/collection';
 import { MonitoringSettings } from './';
 

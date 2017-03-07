@@ -1,8 +1,12 @@
-import { Counts } from 'meteor/tmeasday:publish-counts';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
+import { Counts } from 'meteor/tmeasday:publish-counts';
+
+// Collection imports
 import CoverPhoto from '/branding/cover_photo/collection';
 import Settings from '/settings/collection';
 

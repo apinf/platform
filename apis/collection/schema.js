@@ -1,4 +1,7 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Collection imports
 import Apis from './';
 
 Apis.schema = new SimpleSchema({
@@ -22,10 +25,6 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
-  },
-  documentationFileId: {
-    type: String,
-    optional: true,
   },
   latestMonitoringStatusCode: {
     type: String,
@@ -53,15 +52,6 @@ Apis.schema = new SimpleSchema({
   },
   monitoringId: {
     type: String,
-    optional: true,
-  },
-  documentation_link: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
-  },
-  submit_methods: {
-    type: [String],
     optional: true,
   },
   created_at: {

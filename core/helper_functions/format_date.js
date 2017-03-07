@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Npm packages imports
 import moment from 'moment';
 import 'moment/min/locales.min';
 

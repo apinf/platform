@@ -1,11 +1,16 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
-
-import _ from 'lodash';
 
 Meteor.publish('proxyBackends', function (proxyId) {
   // Make sure proxyId is a String

@@ -1,6 +1,9 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.deleteFeedbackItem.events({
   'click #confirm-delete': function () {

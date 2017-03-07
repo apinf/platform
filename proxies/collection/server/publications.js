@@ -1,7 +1,11 @@
-import { Counts } from 'meteor/tmeasday:publish-counts';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Roles } from 'meteor/alanning:roles';
 
+// Collection imports
 import Proxies from '../';
 
 Meteor.publish('allProxies', function () {

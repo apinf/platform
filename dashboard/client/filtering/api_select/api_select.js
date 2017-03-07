@@ -1,7 +1,12 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
+
+// Apinf collection import(s)
 import Apis from '/apis/collection';
 
 Template.apiSelectPicker.helpers({

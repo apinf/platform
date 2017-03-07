@@ -1,3 +1,4 @@
+// Meteor packages imports
 import { FileCollection } from 'meteor/vsivsi:file-collection';
 
 const ApiLogo = new FileCollection('ApiLogo', {

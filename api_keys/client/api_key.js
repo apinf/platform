@@ -1,9 +1,15 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Npm packages imports
 import Clipboard from 'clipboard';
 
+// Collection imports
 import ApiKeys from '/api_keys/collection';
 
 Template.apiKey.onCreated(function () {

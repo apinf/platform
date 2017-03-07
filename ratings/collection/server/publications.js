@@ -1,6 +1,8 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
+// Collection imports
 import ApiBackendRatings from '/ratings/collection';
 
 // User rating for a single API Backend

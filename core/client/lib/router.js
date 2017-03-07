@@ -1,6 +1,9 @@
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 
 // Define group for routes that require sign in

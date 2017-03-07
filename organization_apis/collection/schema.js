@@ -1,5 +1,10 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Npm packages imports
 import { _ } from 'lodash';
+
+// Collection imports
 import Organizations from '/organizations/collection';
 import OrganizationApis from './';
 
