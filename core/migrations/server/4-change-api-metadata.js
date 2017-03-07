@@ -15,7 +15,9 @@ Migrations.add({
       ApiMetadata.update(apiMetadata._id, { $set: { apiId: apiMetadata.apiBackendId } });
     });
 
+
     // Linking between apiMetadata and Organization collections
+    // TODO: revert. SHould loop by organizationApis
     // Get all apiMetadata without organization data
     ApiMetadata.find().forEach((apiMetadata) => {
       // Get the related organization
