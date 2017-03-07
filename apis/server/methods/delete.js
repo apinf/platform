@@ -35,13 +35,13 @@ Meteor.methods({
     }
 
     // Remove backlog items
-    ApiBacklogItems.remove({ apiId });
+    ApiBacklogItems.remove({ apiBackendId: apiId });
 
     // Remove feedbacks
-    Feedback.remove({ apiId });
+    Feedback.remove({ apiBackendId: apiId });
 
     // Remove metadata
-    ApiMetadata.remove({ apiId });
+    ApiMetadata.remove({ apiBackendId: apiId });
 
     // Get proxyBackend
     const proxyBackend = ProxyBackends.findOne({ apiId });
