@@ -11,12 +11,14 @@ import ApiMetadata from '../../collection';
 Template.viewApiMetadata.onCreated(function () {
   // Get reference to template instance
   const instance = this;
+  // Get id of API
+  const apiId = instance.data.api._id;
 
   // Subscribe to metadata for this API Backend
-  instance.subscribe('apiMetadata', instance.data.api._id);
+  instance.subscribe('apiMetadata', apiId);
 
   // Subscribe to basic details of related api metadata
-  instance.subscribe('apiOrganizationBasicDetails', instance.data.api._id);
+  instance.subscribe('apiOrganizationBasicDetails', apiId);
 });
 
 Template.viewApiMetadata.helpers({
@@ -28,8 +30,7 @@ Template.viewApiMetadata.helpers({
     const apiId = instance.data.api._id;
 
     // Get API Backend metadata
-    // TODO: migrate ApiMetadata schema to use 'apiId' instead of 'apiBackendId'
-    const apiMetadata = ApiMetadata.findOne({ apiBackendId: apiId });
+    const apiMetadata = ApiMetadata.findOne({ apiId });
 
     // Check apiMetadata is defined
     if (apiMetadata) {

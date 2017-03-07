@@ -10,8 +10,8 @@ Meteor.publish('apiMetadata', (apiId) => {
   check(apiId, String);
 
   // Get metadata document for API Backend
-  // TODO: migrate ApiMetadata schema to use 'apiId' instead of 'apiBackendId'
-  const apiMetadata = ApiMetadata.find({ apiBackendId: apiId });
+  const apiMetadata = ApiMetadata.find({ apiId });
 
-  return apiMetadata;
+  // Return database cursor or empty array
+  return apiMetadata || [];
 });

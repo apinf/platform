@@ -34,14 +34,16 @@ Meteor.methods({
       Meteor.call('removeMonitoring', apiId);
     }
 
+    // TODO: migrate to use 'apiId' instead of 'apiBackendId'
     // Remove backlog items
     ApiBacklogItems.remove({ apiBackendId: apiId });
 
+    // TODO: migrate to use 'apiId' instead of 'apiBackendId'
     // Remove feedbacks
     Feedback.remove({ apiBackendId: apiId });
 
     // Remove metadata
-    ApiMetadata.remove({ apiBackendId: apiId });
+    ApiMetadata.remove({ apiId });
 
     // Get proxyBackend
     const proxyBackend = ProxyBackends.findOne({ apiId });

@@ -9,21 +9,25 @@ Migrations.add({
   up () {
     // Code to migrate up to version 4
 
-    // Iterate through apiMetadata collection
-    // Get all exists
+    // Migrate to use 'apiId' instead of 'apiBackendId'
+    ApiMetadata.find().forEach((apiMetadata) => {
+      // Create apiId field and get the value
+      ApiMetadata.update(apiMetadata._id, { $set: { apiId: apiMetadata.apiBackendId } });
+    });
+
+    // Linking between apiMetadata and Organization collections
+    // Get all apiMetadata with organization data
     ApiMetadata.find({ organization: { $exists: true } }).forEach((apiMetadata) => {
       // Get the related organization
-      const organizationApis = OrganizationApis.findOne({ apiId: apiMetadata.apiBackendId });
+      const organizationApis = OrganizationApis.findOne({ apiId: apiMetadata.apiId });
 
       // Make sure API is connected to organization
       if (organizationApis) {
         // Add link to the related organization document
-        ApiMetadata.update(apiMetadata._id, { $set: { organizationId: organizationApis.organizationId }});
+        ApiMetadata.update(apiMetadata._id, {
+          $set: { organizationId: organizationApis.organizationId },
+        });
       }
     });
-  },
-  down () {
-    // Delete organisationId field
-    ApiMetadata.update({}, { $unset: { organizationId: '' } }, { multi: true });
   },
 });
