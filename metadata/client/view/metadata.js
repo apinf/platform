@@ -57,7 +57,6 @@ Template.viewApiMetadata.helpers({
         // Update old data to new one
         apiMetadata.organization = organization;
       }
-
     }
 
     return apiMetadata;
