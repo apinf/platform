@@ -5,6 +5,7 @@ import { Template } from 'meteor/templating';
 import formatDate from '/core/helper_functions/format_date';
 
 // Collection imports
+import Organizations from '/organizations/collection';
 import ApiMetadata from '../../collection';
 
 Template.viewApiMetadata.onCreated(function () {
@@ -13,6 +14,9 @@ Template.viewApiMetadata.onCreated(function () {
 
   // Subscribe to metadata for this API Backend
   instance.subscribe('apiMetadata', instance.data.api._id);
+
+  // Subscribe to basic details of related api metadata
+  instance.subscribe('apiOrganizationBasicDetails', instance.data.api._id);
 });
 
 Template.viewApiMetadata.helpers({
@@ -43,6 +47,16 @@ Template.viewApiMetadata.helpers({
         // Attach formatted dates to metadata service object
         apiMetadata.service = service;
       }
+
+      // Add info about organization
+
+      const organization = Organizations.findOne(apiMetadata.organizationId);
+      // Make sure migration was success and the related organisation document is found
+      if (organization) {
+        // Update old data to new one
+        apiMetadata.organization = organization;
+      }
+
     }
 
     return apiMetadata;
