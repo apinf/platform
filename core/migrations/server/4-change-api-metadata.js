@@ -16,8 +16,8 @@ Migrations.add({
     });
 
     // Linking between apiMetadata and Organization collections
-    // Get all apiMetadata with organization data
-    ApiMetadata.find({ organization: { $exists: true } }).forEach((apiMetadata) => {
+    // Get all apiMetadata without organization data
+    ApiMetadata.find({ organization: { $exists: false } }).forEach((apiMetadata) => {
       // Get the related organization
       const organizationApis = OrganizationApis.findOne({ apiId: apiMetadata.apiId });
 
