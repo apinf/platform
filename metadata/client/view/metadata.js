@@ -50,13 +50,7 @@ Template.viewApiMetadata.helpers({
       }
 
       // Add info about organization
-
-      const organization = Organizations.findOne(apiMetadata.organizationId);
-      // Make sure migration was success and the related organisation document is found
-      if (organization) {
-        // Update old data to new one
-        apiMetadata.organization = organization;
-      }
+      apiMetadata.organization = Organizations.findOne(apiMetadata.organizationId);
     }
 
     return apiMetadata;
