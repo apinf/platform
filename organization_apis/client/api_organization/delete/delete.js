@@ -17,7 +17,7 @@ Template.deleteOrganizationApiConfirmation.events({
 
     // Remove the Organization API link, by ID since code is untrusted
     OrganizationApis.remove(organizationApiId);
-    // TODO: update/remove apiMetadata
+
     // Get ID of current API
     const apiId = templateInstance.data.organizationApi.apiId;
     // Get the API Metadata document
