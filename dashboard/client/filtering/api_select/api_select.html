@@ -7,7 +7,7 @@
     <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
       {{# each backend in proxyBackends }}
         <option value="{{ backend._id }}" >
-              {{ apiName backend.apiId  }}
+              {{ backend.apiName }}
         </option>
       {{/ each }}
     </optgroup>

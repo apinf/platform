@@ -2,14 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import Apis from '/apis/collection';
+
 
 Template.apiSelectPicker.helpers({
   // TODO: Update api Umbrella Admin case for multiple instance
-  apiName (id) {
-    const apisName = Apis.findOne({ _id: id }, { _id: 0, name: 1 });
-    return apisName.name;
-  },
   apiUmbrellaOption () {
     // Get current user Id
     const userId = Meteor.userId();
