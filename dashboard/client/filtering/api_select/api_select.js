@@ -31,8 +31,7 @@ Template.apiSelectPicker.onRendered(function () {
   instance.autorun(() => {
     // Get Proxy Backend ID parameter from URL,
     const proxyBackendId = FlowRouter.getQueryParam('backend');
-
-    // Change value of proxy backend select, if URL parameter is present
+      // Change value of proxy backend select, if URL parameter is present
     if (proxyBackendId) {
       // Update the select menu to match the Proxy Backend ID
       instance.$('#proxy-backend-select').val(proxyBackendId);
