@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Collection imports
 import ProjectLogo from '/branding/logo/collection';
 
 Template.uploadProjectLogoButton.onRendered(() => {

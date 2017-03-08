@@ -1,4 +1,4 @@
-// Meteor packages import
+// Meteor packages imports
 import { Template } from 'meteor/templating';
 
 Template.apisFilterIcon.events({

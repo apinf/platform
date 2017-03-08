@@ -1,6 +1,9 @@
-import { Template } from 'meteor/templating';
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.organizationRemoveManagers.events({
   'click #confirm-remove': function (event, templateInstance) {

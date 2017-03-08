@@ -1,3 +1,4 @@
+// Collection imports
 import Branding from '/branding/collection';
 import Settings from '/settings/collection';
 
@@ -15,6 +16,7 @@ export function getSiteTitle () {
   }
   return siteTitle;
 }
+
 // Get fromEmail from Settings
 // Parameters: smtpFormat Boolean - adds formatting eg. <info@apinf.io>
 export function getFromEmail (smtpFormat = false) {

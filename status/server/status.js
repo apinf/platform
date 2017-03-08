@@ -1,3 +1,4 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({

@@ -1,4 +1,6 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
 // Collection imports
 import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';

@@ -1,5 +1,7 @@
+// Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Collection imports
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.uploadCoverPhotoButton.onRendered(() => {

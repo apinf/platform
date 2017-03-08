@@ -1,7 +1,6 @@
+// Meteor packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
-import $ from 'jquery';
 
 AutoForm.addHooks('editApiMetadataForm', {
   before: {

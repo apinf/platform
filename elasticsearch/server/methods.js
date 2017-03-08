@@ -1,5 +1,8 @@
-import { check } from 'meteor/check';
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Npm packages imports
 import ElasticSearch from 'elasticsearch';
 
 Meteor.methods({
