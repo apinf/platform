@@ -2,8 +2,7 @@ import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
 ProxyBackends.helpers({
-/* eslint object-shorthand: "error"*/
-/* eslint-env es6*/
+// eslint-disable-next-line object-shorthand
   apiName: function () {
     // Get API ID
     const apiId = this.apiId;
