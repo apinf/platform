@@ -1,4 +1,4 @@
-<template name="apiMediaPostsForm">
+<template name="relatedMediaPostsForm">
   <div class="modal fade" id="postInsertModal">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -6,14 +6,14 @@
         <div class="modal-header">
           <button data-dismiss="modal" class="close" type="button">×</button>
           <h3 class="modal-title">
-            {{_ "apiMediaPostsForm_Add_Edit_Title" }}
+            {{_ "relatedMediaPostsForm_Add_Edit_Title" }}
           </h3>
         </div>
 
         <div class="modal-body">
           <!--Autoform for collection/schema-->
           {{#autoForm
-             id="apiMediaPostsForm"
+             id="relatedMediaPostsForm"
              type=formType
              doc=post
              collection=postsCollection
@@ -21,7 +21,7 @@
             {{> afQuickField name='title' }}
             {{> afQuickField name='url' }}
             {{> afQuickField name='apiId' type="hidden" value=api._id }}
-            <button type="submit" class="btn btn-primary">{{_ "apiMediaPostsForm_Submit" }}</button>
+            <button type="submit" class="btn btn-primary">{{_ "relatedMediaPostsForm_Submit" }}</button>
           {{/autoForm}}
         </div>
       </div>
