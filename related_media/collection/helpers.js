@@ -4,19 +4,20 @@ import Posts from './';
 
 Posts.helpers({
   isPostActionAllow () {
+    let currentUserCanEdit = false;
     const postEntityId = this.apiId;
     // TODO checking of entity in question
     // if (api) {
     // Check API
     const postApi = Apis.findOne(postEntityId);
   // Check if current user can edit API
-    const currentUserCanEdit = postApi.currentUserCanEdit();
+    currentUserCanEdit = postApi.currentUserCanEdit();
     // }
     // else {
     // Check Organizations
     const postOrg = Organizatons.findOne(postEntityId);
   // Check if current user can edit API
-    const currentUserCanEdit = postOrg.currentUserCanManage();
+    currentUserCanEdit = postOrg.currentUserCanManage();
     // }
     if (currentUserCanEdit) {
     // User is allowed to perform action
