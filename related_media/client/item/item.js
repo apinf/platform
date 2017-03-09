@@ -24,6 +24,6 @@ Template.postItem.events({
     // Get post from template instance
     const post = templateInstance.data.post;
     // Call modal for editing, passing post and modal header as parameters
-    Modal.show('apiMediaPostsForm', { post });
+    Modal.show('relatedMediaPostsForm', { post });
   },
 });
