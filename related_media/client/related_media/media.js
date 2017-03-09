@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import Posts from '/api_media/collection';
+import Posts from '/related_media/collection';
 
-Template.apiRelatedMedia.onCreated(function () {
+Template.relatedMedia.onCreated(function () {
   const instance = this;
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
@@ -15,11 +15,12 @@ Template.apiRelatedMedia.onCreated(function () {
 
   // Get posts owned by API
   const currentFilters = {};
-  currentFilters.apiId = instance.data.api._id;
+  // TODO instance.data.api._id - api must be replaced
+  currentFilters.entityId = instance.data.api._id;
   instance.pagination.filters(currentFilters);
 });
 
-Template.apiRelatedMedia.helpers({
+Template.relatedMedia.helpers({
   posts () {
     const posts = Template.instance().pagination.getPage();
 
@@ -32,8 +33,9 @@ Template.apiRelatedMedia.helpers({
   },
 });
 
-Template.apiRelatedMedia.events({
+Template.relatedMedia.events({
   'click #add-media': function () {
+    // TODO this.api needs to be replaced
     const api = this.api;
     Modal.show('apiMediaPostsForm', { api });
   },
