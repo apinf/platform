@@ -14,25 +14,7 @@ AutoForm.hooks({
       // Show error message to user
       sAlert.error(error.message);
     },
-    onSuccess (formType, result) {
-      // Get organizationApis document
-      const organizationApis = OrganizationApis.findOne(result);
-      // Get API ID
-      const apiId = organizationApis.apiId;
-      // Get Organization ID
-      const organizationId = organizationApis.organizationId;
-      // Get API metadata document
-      const apiMetadata = ApiMetadata.findOne({ apiId });
-
-      // Make sure API metadata document exists
-      if (apiMetadata) {
-        // Then update document
-        ApiMetadata.update(apiMetadata._id, { $set: { organizationId } });
-      } else {
-        // Otherwise create a new one
-        ApiMetadata.insert({ apiId, organizationId });
-      }
-
+    onSuccess () {
       // Create & show message on success
       const message = TAPi18n.__('organizationApisForm_successText');
 
