@@ -18,6 +18,9 @@ Template.apisFilterForm.onRendered(function () {
       // Add active class for the filter icon to show that filter is active
       $('#filter-icon').addClass('active');
     } else {
+      // Set (Select one) option
+      this.$('[name=lifecycle]').val('');
+
       // Delete active from the filter icon to show that filter isn't active
       $('#filter-icon').removeClass('active');
     }

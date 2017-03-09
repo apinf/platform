@@ -2,10 +2,17 @@
   <div class="container">
     <h1 class="page-header">
       {{_ "catalogue_Title" }}
+      {{# if apisCount }}
+      <small>
+        {{_ 'apiCatalog_apisCount' count=apisCount }}
+      </small>
+      {{/ if }}
     </h1>
     {{> apiCatalogToolbar apis=apis }}
 
-    {{> apiFilteredBy apisCount=apisCount }}
+    <p>
+      {{> apiFilteredBy apisCount=apisCount }}
+    </p>
 
     {{# if Template.subscriptionsReady }}
       <!-- if viewMode is grid, show grid -->
