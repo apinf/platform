@@ -4,10 +4,6 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-// Collection imports
-import ApiMetadata from '/metadata/collection';
-import OrganizationApis from '../../collection';
-
 AutoForm.hooks({
   organizationApisForm: {
     onError (formType, error) {
