@@ -1,5 +1,6 @@
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -9,6 +10,8 @@ import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import Apis from '/apis/collection';
 import ApiBookmarks from '/bookmarks/collection';
+
+import 'locale-compare-polyfill';
 
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
@@ -146,8 +149,20 @@ Template.apiCatalog.onRendered(function () {
 
 Template.apiCatalog.helpers({
   apis () {
-    // Return items of apis collection via Pagination
-    return Template.instance().pagination.getPage();
+    // Get apis collection via Pagination
+    const apis = Template.instance().pagination.getPage();
+    // Get the language
+    const language = TAPi18n.getLanguage();
+    // Get the sort via Pagination
+    const sort = Template.instance().pagination.sort();
+    // When sorted by name
+    if (sort.name) {
+      // use custom sort function with i18n support
+      apis.sort((a, b) => {
+        return a.name.localeCompare(b.name, language) * sort.name;
+      });
+    }
+    return apis;
   },
   templatePagination () {
     // Get reference of pagination
