@@ -37,6 +37,6 @@ Template.relatedMedia.events({
   'click #add-media': function () {
     // TODO this.api needs to be replaced
     const api = this.api;
-    Modal.show('apiMediaPostsForm', { api });
+    Modal.show('relatedMediaPostsForm', { api });
   },
 });
