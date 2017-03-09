@@ -10,7 +10,10 @@ const postsSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Url,
   },
-  apiId: {
+  entityId: {
+    type: String,
+  },
+  entityType: {
     type: String,
   },
   createdAt: {
