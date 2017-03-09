@@ -492,9 +492,18 @@
   "proxyItem_apiKey": "API Key",
   "proxyItem_apiToken": "API Token",
   "proxyItem_elasticsearch": "Elasticsearch",
+<<<<<<< HEAD
+  "relatedMedia_deletePostConfirmation_title_text": "Delete Post",
+  "relatedMedia_deletePostConfirmation_confirmDeleteMessage": "Are you sure you want to delete",
+  "relatedMedia_deletePostConfirmation_confirmDeleteNote": "NOTE:",
+  "relatedMedia_deletePostConfirmation_confirmDeleteInformation": "This action cannot be undone!",
+  "relatedMedia_deletePostConfirmation_cancelButton": "Cancel",
+  "relatedMedia_deletePostConfirmation_deleteButton": "Delete",
+=======
   "relatedMedia_Add_Button_Help": "Add embedded related media content",
   "relatedMedia_Add_Button": "Add related media!",
   "relatedMedia_Title": "Related Media",
+>>>>>>> 081b417a4e04a1c13d4e67d3ff9552e52be9a86c
   "removeProxy_modalLabel": "Are you sure that you want to remove proxy?",
   "removeProxy_modalBody": "proxy backends are connected to this proxy. Removing the proxy will mean that API calls made to any of the connected API backends will break.",
   "removeProxy_confirmRemoveProxy": "Yes, remove",
