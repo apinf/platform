@@ -5,6 +5,8 @@ import Posts from '/related_media/collection';
 
 Template.relatedMedia.onCreated(function () {
   const instance = this;
+
+  // console.log('inst=', instance);
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
     // Count of posts on page
@@ -15,8 +17,8 @@ Template.relatedMedia.onCreated(function () {
 
   // Get posts owned by API
   const currentFilters = {};
-  // TODO instance.data.api._id - api must be replaced
-  currentFilters.entityId = instance.data.api._id;
+  currentFilters.entityId = instance.data.entity._id;
+  currentFilters.entityType = instance.data.etype;
   instance.pagination.filters(currentFilters);
 });
 
@@ -36,7 +38,7 @@ Template.relatedMedia.helpers({
 Template.relatedMedia.events({
   'click #add-media': function () {
     // TODO this.api needs to be replaced
-    const api = this.api;
-    Modal.show('relatedMediaPostsForm', { api });
+    const entity = this.entity;
+    Modal.show('relatedMediaPostsForm', { entity });
   },
 });
