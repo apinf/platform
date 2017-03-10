@@ -13,15 +13,15 @@
         {{ post.url }}
       </a>
       <br>
-      {{_ "apiMedia_PostItem_Added_Text"}}
+      {{_ "relatedMedia_PostItem_Added_Text"}}
       <span id="related-media-creation-time" title='{{ localeFormatDate post.createdAt }}'>
         {{  dateInTimeAgoFormat post.createdAt }}
       </span>
 
       <p class="pull-right">
         {{#if api.currentUserCanEdit }}
-          <button class="edit btn btn-default">{{_ "apiMedia_PostItem_Edit_Button"}}</button>
-          <button class="delete btn btn-danger">{{_ "apiMedia_PostItem_Delete_Button"}}</button>
+          <button class="edit btn btn-default">{{_ "relatedMedia_PostItem_Edit_Button"}}</button>
+          <button class="delete btn btn-danger">{{_ "relatedMedia_PostItem_Delete_Button"}}</button>
         {{/if}}
       </p>
     </div>
