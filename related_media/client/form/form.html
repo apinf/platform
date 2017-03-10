@@ -20,7 +20,8 @@
            }}
             {{> afQuickField name='title' }}
             {{> afQuickField name='url' }}
-            {{> afQuickField name='entityId' type="hidden" value=entityId._id }}
+            {{> afQuickField name='entityId' type="hidden" value=entity._id }}
+            {{> afQuickField name='entityType' type="hidden" value=etype }}
             <button type="submit" class="btn btn-primary">{{_ "relatedMediaPostsForm_Submit" }}</button>
           {{/autoForm}}
         </div>
