@@ -5,11 +5,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
     insert (metadata) {
-      // Get API Backend ID, from Router
+      // Get API ID, from Router
       const apiId = FlowRouter.getParam('_id');
 
-      // Set the API Backend ID property of the metadata document
-      metadata.apiBackendId = apiId;
+      // Set the API ID property of the metadata document
+      metadata.apiId = apiId;
 
       return metadata;
     },

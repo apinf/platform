@@ -6,20 +6,11 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import ApiMetadata from '/metadata/collection';
 
 ApiMetadata.schema = new SimpleSchema({
-  // TODO: migrate to use 'apiId' instead of 'apiBackendId'
-  apiBackendId: {
+  apiId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-  organization: {
-    type: Object,
-    optional: true,
-  },
-  'organization.name': {
-    type: String,
-    optional: true,
-  },
-  'organization.description': {
+  organizationId: {
     type: String,
     optional: true,
   },
