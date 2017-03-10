@@ -261,9 +261,7 @@ Template.dashboardCharts.onCreated(function () {
       let responseTime;
       let responseStatus;
 
-      // Error handling for empty fields
-      // try { time = moment.utc(e.fields.request_at[0]).toISOString(); }
-      // catch (err) { time = ''; } original
+      // The time is saved in UTC ,so converting the time to users local time using .toDate()
       let localTime = moment.utc(e.fields.request_at[0]).toISOString();
       localTime = moment.utc(localTime).toDate();
 
