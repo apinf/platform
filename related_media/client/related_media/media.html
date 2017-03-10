@@ -1,6 +1,7 @@
 <template name="relatedMedia">
   <!-- Show media area in case either -->
   <!-- there are posts -->
+  Kokonaisdokumentin nimi on {{ entity.name }} ja tyyppi on {{ etype }}
   {{# if posts }}
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -40,7 +41,7 @@
   </div>
   {{ else }}
     <!-- or user has rights -->
-    {{# if api.currentUserCanEdit }}
+    {{# if entity.currentUserCanEdit }}
       <div class="well">
         <button
           type="button"
