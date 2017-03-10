@@ -16,8 +16,9 @@ const UserProfileSchema = new SimpleSchema({
   },
 });
 // Username must be 3-15 alphanumeric string combinations with hyphens and underscore allowed
+// Username cannot begin with a hypen , underscore
 // const UsernameRegEx = /^(?!\d)(?!.*-.*-)(?!.*-$)(?!-)[a-zA-Z0-9-_]{3,15}$/; original
-const UsernameRegEx = /^[a-zA-Z0-9-_]{3,15}$/;
+const UsernameRegEx = /^(?!-)(?!_)[a-zA-Z0-9-_]{3,15}$/;
 
 const UserSchema = new SimpleSchema({
   username: {
