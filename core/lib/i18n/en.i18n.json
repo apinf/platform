@@ -848,7 +848,7 @@
               }
           }
       },
-      "api_media": {
+      "related_media": {
           "title": {
             "label": "Title"
           },
