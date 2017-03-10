@@ -2,6 +2,9 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+import OrganizationApis from '/organization_apis/collection';
+import ApiMetadata from '/metadata/collection';
+
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
     insert (metadata) {
@@ -14,8 +17,17 @@ AutoForm.addHooks('editApiMetadataForm', {
       return metadata;
     },
   },
-  onSuccess () {
+  onSuccess (formType, id) {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
+
+    // Get info about connected organization
+    const apiId = FlowRouter.getParam('_id');
+
+    const organizationApis = OrganizationApis.findOne({ apiId });
+
+    if (organizationApis) {
+      ApiMetadata.update(id, { $set: { organizationId: organizationApis.organizationId } });
+    }
   },
 });
