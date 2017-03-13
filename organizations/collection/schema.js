@@ -7,7 +7,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Collection imports
 import Organizations from './';
 
-import { contactPhone } from './regex';
+import contactPhone from './regex';
 
 Organizations.schema = new SimpleSchema({
   contact: {
