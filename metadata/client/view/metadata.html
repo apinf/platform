@@ -28,15 +28,15 @@
                   </a>
                 </h3>
               {{/ if }}
+              {{# if organization.description }}
+                <p>
+                  {{ organization.description }}
+                </p>
+              {{/ if }}
               {{# if organization.url }}
                 <p>
                   <i class="fa fa-link" aria-hidden="true"></i>
                   {{ organization.url }}
-                </p>
-              {{/ if }}
-              {{# if organization.description }}
-                <p>
-                  {{ organization.description }}
                 </p>
               {{/ if }}
             </div>
