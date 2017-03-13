@@ -23,7 +23,6 @@ Template.postItem.events({
   'click .edit': function (event, templateInstance) {
     // Get post from template instance
     const post = templateInstance.data.post;
-    console.log('templateInstance = ', templateInstance);
     // Call modal for editing, passing post and modal header as parameters
     Modal.show('relatedMediaPostsForm', { post });
   },
