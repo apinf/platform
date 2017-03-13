@@ -992,7 +992,7 @@
   "viewApiStatus_statusMessage_ServerError": "Server error.",
   "viewApiStatus_statusMessage_Success": "API is operating normally.",
   "viewApi_Details_Title": "Details",
-  "viewApi_Metadata_Contact_email": "email",
+  "viewApi_Metadata_Contact_email": "Email",
   "viewApi_Metadata_Contact_phone": "Phone",
   "viewApi_Metadata_Contact_title": "Contact",
   "viewApi_Metadata_NotFound": "No metadata found.",
