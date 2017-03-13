@@ -24,10 +24,13 @@ ApiMetadata.schema = new SimpleSchema({
   },
   'contact.phone': {
     type: String,
+    // TODO: used constant contactPhone
+    regEx: /^[0-9-+()/\s.]+$/,
     optional: true,
   },
   'contact.email': {
     type: String,
+    regEx: SimpleSchema.RegEx.Email,
     optional: true,
   },
   service: {
