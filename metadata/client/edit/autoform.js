@@ -20,14 +20,5 @@ AutoForm.addHooks('editApiMetadataForm', {
   onSuccess (formType, id) {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
-
-    // Get info about connected organization
-    const apiId = FlowRouter.getParam('_id');
-
-    const organizationApis = OrganizationApis.findOne({ apiId });
-
-    if (organizationApis) {
-      ApiMetadata.update(id, { $set: { organizationId: organizationApis.organizationId } });
-    }
   },
 });
