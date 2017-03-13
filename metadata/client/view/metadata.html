@@ -23,8 +23,16 @@
             <div class="panel-body">
               {{# if organization.name }}
                 <h3>
-                  {{ organization.name }}
+                  <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}">
+                    {{ organization.name }}
+                  </a>
                 </h3>
+              {{/ if }}
+              {{# if organization.url }}
+                <p>
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                  {{ organization.url }}
+                </p>
               {{/ if }}
               {{# if organization.description }}
                 <p>
