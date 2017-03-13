@@ -6,7 +6,6 @@ import Posts from '/related_media/collection';
 Template.relatedMedia.onCreated(function () {
   const instance = this;
 
-  // console.log('inst=', instance);
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
     // Count of posts on page
