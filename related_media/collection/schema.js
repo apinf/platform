@@ -14,7 +14,7 @@ const postsSchema = new SimpleSchema({
     type: String,
   },
   entityType: {
-    type: String,
+    type: Number,
   },
   createdAt: {
     type: Date,
