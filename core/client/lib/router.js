@@ -1,10 +1,21 @@
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker';
 
 // Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
+
+FlowRouter.wait();
+
+Tracker.autorun(() => {
+  if (Roles.subscription.ready() && !FlowRouter._initialized) {
+    return FlowRouter.initialize();
+  }
+
+  return undefined;
+});
 
 // Define group for routes that require sign in
 const signedIn = FlowRouter.group({
