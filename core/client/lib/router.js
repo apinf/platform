@@ -16,29 +16,6 @@ const signedIn = FlowRouter.group({
   }],
 });
 
-const requireAdminRole = function () {
-  if (Meteor.user()) {
-    // Get user ID
-    const userId = Meteor.user()._id;
-
-    const userIsAdmin = Roles.userIsInRole(userId, 'admin');
-
-    if (!userIsAdmin) {
-      // User is not authorized to access route
-      FlowRouter.go('notAuthorized');
-    }
-  } else {
-    FlowRouter.go('signIn');
-  }
-};
-
-// Define 404 route
-FlowRouter.notFound = {
-  action () {
-    BlazeLayout.render('masterLayout', { main: 'notFound' });
-  },
-};
-
 // Define 401 route
 FlowRouter.route('/not-authorized', {
   name: 'notAuthorized',
@@ -55,8 +32,31 @@ FlowRouter.route('/forbidden', {
   },
 });
 
+// Define 404 route
+FlowRouter.notFound = {
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'notFound' });
+  },
+};
+
 const redirectToCatalogue = function () {
   FlowRouter.go('catalogue');
+};
+
+const requireAdminRole = function () {
+  // Get user ID
+  const userId = Meteor.userId();
+
+  if (userId) {
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    if (!userIsAdmin) {
+      // User is not authorized to access route
+      FlowRouter.go('notAuthorized');
+    }
+  } else {
+    FlowRouter.go('signIn');
+  }
 };
 
 FlowRouter.triggers.enter([redirectToCatalogue], { only: ['forgotPwd'] });
