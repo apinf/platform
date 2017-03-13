@@ -146,6 +146,9 @@ Apis.helpers({
     // Otherwise, get average rating
     return this.averageRating;
   },
+  getRelatedMediaIndex () {
+    return 0;
+  },
   relativeUpdatedAt () {
     // Get current language
     const language = TAPi18n.getLanguage();
