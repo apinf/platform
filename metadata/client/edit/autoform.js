@@ -17,7 +17,7 @@ AutoForm.addHooks('editApiMetadataForm', {
       return metadata;
     },
   },
-  onSuccess (formType, id) {
+  onSuccess () {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
   },
