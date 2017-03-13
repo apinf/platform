@@ -36,7 +36,6 @@ Template.relatedMedia.helpers({
 
 Template.relatedMedia.events({
   'click #add-media': function () {
-    // TODO this.api needs to be replaced
     const entity = this.entity;
     Modal.show('relatedMediaPostsForm', { entity });
   },
