@@ -54,4 +54,13 @@ Template.viewApiMetadata.helpers({
 
     return apiMetadata;
   },
+  organization () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
+    // Get the API Backend ID from template instance
+    const api = instance.data.api;
+
+    return api.organization();
+  },
 });
