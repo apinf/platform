@@ -6,7 +6,7 @@ Posts.helpers({
   isPostActionAllow () {
     let currentUserCanManage = false;
     const postEntityId = this.entityId;
-    // TODO checking of entity in question
+    // checking of entity in question
     if (this.entityType === 0) {
       // Check API
       const postApi = Apis.findOne(postEntityId);
