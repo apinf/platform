@@ -18,7 +18,7 @@ Template.relatedMedia.onCreated(function () {
   // Get posts owned by API
   const currentFilters = {};
   currentFilters.entityId = instance.data.entity._id;
-  currentFilters.entityType = instance.data.entity.getRelatedMediaIndex;
+  currentFilters.entityType = instance.data.entity.getRelatedMediaIndex();
   instance.pagination.filters(currentFilters);
 });
 
