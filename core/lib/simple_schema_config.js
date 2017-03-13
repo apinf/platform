@@ -1,19 +1,28 @@
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // APINF imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '/proxy_backends/collection/regex';
 import contactPhone from '/organizations/collection/regex';
 
+const invalidUrlMessage = TAPi18n.__('invalidUrlMessage');
+const invalidIdMessage = TAPi18n.__('invalidIdMessage');
+const invalidDomainMessage = TAPi18n.__('invalidDomainMessage');
+const invalidEmailMessage = TAPi18n.__('invalidEmailMessage');
+const invalidProxyBasePathMessage = TAPi18n.__('invalidProxyBasePathMessage');
+const invalidApiBasePathMessage = TAPi18n.__('invalidApiBasePathMessage');
+const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
+
 SimpleSchema.messages({
   regEx: [
     // TODO: define custom mesages for every RegEx
-    { exp: SimpleSchema.RegEx.Url, msg: '[value] is not a valid URL' },
-    { exp: SimpleSchema.RegEx.Id, msg: '[label] must be a valid alphanumeric ID' },
-    { exp: SimpleSchema.RegEx.Domain, msg: '[label] must be a valid domain' },
-    { exp: SimpleSchema.RegEx.Email, msg: '[label] must be a valid e-mail address' },
-    { exp: proxyBasePathRegEx, msg: '[label] must begin and end with "/"' },
-    { exp: apiBasePathRegEx, msg: '[label] must begin and end with "/"' },
-    { exp: contactPhone, msg: '[label] must be a valid number. (0-9), +, -, space, / are allowed' },
+    { exp: SimpleSchema.RegEx.Url, msg: invalidUrlMessage },
+    { exp: SimpleSchema.RegEx.Id, msg: invalidIdMessage },
+    { exp: SimpleSchema.RegEx.Domain, msg: invalidDomainMessage },
+    { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
+    { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
+    { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
+    { exp: contactPhone, msg: invalidContactPhoneMessage },
   ],
 });
