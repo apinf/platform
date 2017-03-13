@@ -12,8 +12,8 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Id, msg: '[label] must be a valid alphanumeric ID' },
     { exp: SimpleSchema.RegEx.Domain, msg: '[label] must be a valid domain' },
     { exp: SimpleSchema.RegEx.Email, msg: '[label] must be a valid e-mail address' },
-    { exp: proxyBasePathRegEx, msg: 'Allowed characters for [label]: A-Z' },
-    { exp: apiBasePathRegEx, msg: 'Allowed characters for [label]: A-Z' },
+    { exp: proxyBasePathRegEx, msg: '[label] must begin and end with "/"' },
+    { exp: apiBasePathRegEx, msg: '[label] must begin and end with "/"' },
     { exp: contactPhone, msg: '[label] must be a valid number. (0-9), +, -, space, / are allowed' },
   ],
 });
