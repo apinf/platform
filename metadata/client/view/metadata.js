@@ -50,7 +50,7 @@ Template.viewApiMetadata.helpers({
       }
 
       // Add info about organization
-      apiMetadata.organization = Organizations.findOne(apiMetadata.organizationId);
+      apiMetadata.organization = apiMetadata.organizationData();
     }
 
     return apiMetadata;
