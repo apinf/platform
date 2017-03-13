@@ -1,12 +1,12 @@
 <template name="relatedMedia">
   <!-- Show media area in case either -->
   <!-- there are posts -->
-  Kokonaisdokumentin nimi on {{ entity.name }} ja tyyppi on {{ etype }}
+  Kokonaisdokumentin nimi on {{ entity.name }} ja tyyppi on {{ entity.getRelatedMediaIndex }}
   {{# if posts }}
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 id="oembedded-title" class="panel-title clearfix">
-        {{#if api.currentUserCanEdit }}
+        {{#if entity.currentUserCanManage }}
             <button
               type="button"
               class="btn btn-xs btn-success pull-right"
@@ -24,7 +24,7 @@
         <div class="row">
             {{# each post in posts }}
               <div class="col-grid-post col-xl-2 col-md-3 col-sm-6 col-xs-12">
-                {{> postItem post=post entity=api}}
+                {{> postItem post=post entity=entity}}
               </div>
             {{/ each }}
         </div>
@@ -41,7 +41,7 @@
   </div>
   {{ else }}
     <!-- or user has rights -->
-    {{# if entity.currentUserCanEdit }}
+    {{# if entity.currentUserCanManage }}
       <div class="well">
         <button
           type="button"
