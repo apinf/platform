@@ -1,8 +1,6 @@
 <template name="apiLifecycleStatus">
   <!-- show lifecycle status label if it exists -->
   {{# if api.lifecycleStatus }}
-    <span data-lifecycle="{{ api.lifecycleStatus }}" class="label label-{{ labelType }}">
-      {{ lifecycleStatus }}
-    </span>
+    <span data-lifecycle="{{ api.lifecycleStatus }}" class="label label-{{ labelType }}">{{ lifecycleStatus }}</span>
   {{/ if }}
 </template>
