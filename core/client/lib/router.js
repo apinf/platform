@@ -8,7 +8,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 Tracker.autorun(() => {
-  // There are specific cases that this reruns
+  // The Roles package actually depends on a subscription.
+  // If the subscription is not ready the Roles.userIsInRole method will always return false.
+  // That is used for checking of is user is admin
 
   // Make sure the roles subscription is ready & FlowRouter hasn't initialized already
   if (Roles.subscription.ready() && !FlowRouter._initialized) {
