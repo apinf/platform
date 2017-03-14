@@ -1,332 +1,11 @@
 {
-    "apiCard_labelText_private": "yksityinen",
-    "catalogueTable_labelText_private": "yksityinen",
-    "organizationCatalog_text_noOrganizationIsAvailable": "Organisaatioita ei ole saatavilla.",
-    "organizationCatalog_text_addOrganization": "Paina \"Lis\u00e4\u00e4 organisaatio\" -painiketta lis\u00e4t\u00e4ksesi uuden organisaation.",
-    "organizationNoApis_text_noConnectedApis": "Organisaatioon ei ole liitetty yht\u00e4\u00e4n rajapintaa.",
-    "organizationNoApis_text_useButton": "Voit lis\u00e4t\u00e4 rajapinnan painamalla \"Yhdist\u00e4 rajapinta organisaatioon\" -painiketta.",
-    "organizationSettings_uploadLogo_heading": "Lataa logo",
-    "organizationSettings_uploadLogoText": "Voit lis\u00e4t\u00e4 logon organisaatiollesi. Logo n\u00e4kyy organisaatioluettelossa ja organisaation omalla sivulla.",
-    "schemas": {
-        "apis": {
-            "documentation_link": {
-                "label": "Dokumentaatiolinkki"
-            },
-            "name": {
-                "label": "Rajapinnan nimi"
-            },
-            "description": {
-                "label": "Kuvaus"
-            },
-            "url": {
-                "label": "Web-osoite"
-            },
-            "submit_methods": {
-                "label": "Salli kutsujen kokeilu seuraaville metodeille:"
-            },
-            "organizationId": {
-                "label": "Yhdist\u00e4 rajapinta organisaatioon"
-            },
-            "lifecycleStatus": {
-                "label": "Elinkaaren vaihe",
-                "placeholder": "Valitse elinkaaren vaihe",
-                "options": {
-                    "design": "Suunnittelu",
-                    "development": "Kehitys",
-                    "testing": "Testaus",
-                    "production": "Tuotanto",
-                    "deprecated": "K\u00e4yt\u00f6st\u00e4 poistettu"
-                }
-            }
-        },
-        "contactForm": {
-            "name": {
-                "label": "Nimesi",
-                "placeholder": "Nimesi"
-            },
-            "message": {
-                "label": "Viesti",
-                "placeholder": "Viestisi"
-            },
-            "email": {
-                "label": "S\u00e4hk\u00f6posti",
-                "placeholder": "S\u00e4hk\u00f6postiosoitteesi"
-            }
-        },
-        "settings": {
-            "access": {
-                "onlyAdminsCanAddApis": {
-                    "label": "Vain j\u00e4rjestelm\u00e4n yll\u00e4pit\u00e4j\u00e4t voivat lis\u00e4t\u00e4 uusia rajapintoja"
-                }
-            },
-            "mail": {
-                "smtpHost": {
-                    "label": "SMTP-palvelin"
-                },
-                "smtpPort": {
-                    "label": "SMTP-portti"
-                },
-                "fromEmail": {
-                    "label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten"
-                },
-                "label": "S\u00e4hk\u00f6posti (SMTP)",
-                "enabled": {
-                    "label": "K\u00e4yt\u00f6ss\u00e4"
-                },
-                "username": {
-                    "label": "K\u00e4ytt\u00e4j\u00e4tunnus"
-                },
-                "password": {
-                    "label": "Salasana"
-                },
-                "toEmail": {
-                    "label": "Osoitteeseen"
-                }
-            },
-            "apiDocumentationEditor": {
-                "label": "Rajapintadokumentaation muokkausohjelma",
-                "enabled": {
-                    "label": "K\u00e4yt\u00f6ss\u00e4"
-                },
-                "host": {
-                    "label": "Is\u00e4nt\u00e4kone",
-                    "placeholder": "https:\/\/editor.example.com\/"
-                }
-            },
-            "githubConfiguration": {
-                "label": "Github-asetukset",
-                "clientId": {
-                    "label": "Client ID"
-                },
-                "secret": {
-                    "label": "Secret"
-                }
-            },
-            "sdkCodeGenerator": {
-                "label": "SDK-generaattori",
-                "enabled": {
-                    "label": "K\u00e4yt\u00f6ss\u00e4"
-                },
-                "host": {
-                    "label": "Is\u00e4nt\u00e4kone"
-                }
-            }
-        },
-        "proxyBackends": {
-            "apiUmbrella": {
-                "settings": {
-                    "append_query_string": {
-                        "label": "Lis\u00e4\u00e4 hakulauseen parametrit"
-                    },
-                    "headers_string": {
-                        "label": "Aseta pyynn\u00f6n otsikkotiedot"
-                    },
-                    "disable_api_key": {
-                        "label": "Rajapinta-avaimen k\u00e4ytt\u00f6\u00e4 ei vaadita"
-                    },
-                    "rate_limit_mode": {
-                        "label": "Kuormitusrajoitustila",
-                        "options": {
-                            "custom": "R\u00e4\u00e4t\u00e4l\u00f6ity kuormitusrajoitus",
-                            "unlimited": "Kutsujen m\u00e4\u00e4r\u00e4\u00e4 ei rajoiteta"
-                        }
-                    },
-                    "rate_limit": {
-                        "duration": {
-                            "label": "Kesto (ms)"
-                        },
-                        "limit_by": {
-                            "label": "Rajoitusperuste",
-                            "options": {
-                                "apiKey": "Rajapinta-avain",
-                                "ip": "IP-osoite"
-                            }
-                        },
-                        "limit": {
-                            "label": "Pyynt\u00f6jen m\u00e4\u00e4r\u00e4"
-                        },
-                        "response_headers": {
-                            "label": "N\u00e4yt\u00e4 kuormitusrajoitus vastauksen otsikkotiedoissa"
-                        }
-                    }
-                }
-            },
-            "proxyId": {
-                "label": "Valitse v\u00e4lityspalvelin"
-            }
-        },
-        "updatePassword": {
-            "old": {
-                "label": "Nykyinen salasana"
-            },
-            "new": {
-                "label": "Uusi salasana"
-            },
-            "confirm": {
-                "label": "Vahvista uusi salasana"
-            }
-        },
-        "users": {
-            "username": {
-                "label": "K\u00e4ytt\u00e4j\u00e4nimi"
-            },
-            "profile": {
-                "company": {
-                    "label": "Yritys"
-                }
-            }
-        },
-        "apiMetadata": {
-            "organization": {
-                "label": "Organisaatio",
-                "name": {
-                    "label": "Nimi"
-                },
-                "description": {
-                    "label": "Kuvaus"
-                }
-            },
-            "contact": {
-                "label": "Ota yhteytt\u00e4",
-                "name": {
-                    "label": "Nimi"
-                },
-                "phone": {
-                    "label": "Puhelin"
-                },
-                "email": {
-                    "label": "S\u00e4hk\u00f6posti"
-                }
-            },
-            "service": {
-                "label": "Palvelu",
-                "name": {
-                    "label": "Nimi"
-                },
-                "description": {
-                    "label": "Kuvaus"
-                },
-                "validSince": {
-                    "label": "Voimassa alkaen",
-                    "placeholder": "Klikkaa valitaksesi p\u00e4iv\u00e4ys"
-                },
-                "validUntil": {
-                    "label": "Voimassa saakka",
-                    "placeholder": "Klikkaa valitaksesi p\u00e4iv\u00e4ys"
-                },
-                "serviceLevelAgreement": {
-                    "label": "Palvelutasosopimus"
-                }
-            }
-        },
-        "backlog": {
-            "title": {
-                "label": "Otsikko",
-                "placeholder": "Otsikko"
-            },
-            "details": {
-                "label": "Tiedot",
-                "placeholder": "Kuvaus"
-            },
-            "priority": {
-                "label": "T\u00e4rkeys"
-            }
-        },
-        "branding": {
-            "siteTitle": {
-                "label": "Sivun otsikko"
-            },
-            "siteSlogan": {
-                "label": "Sivun iskulause"
-            },
-            "colors": {
-                "label": "V\u00e4rit",
-                "primary": {
-                    "label": "P\u00e4\u00e4v\u00e4ri"
-                },
-                "primaryText": {
-                    "label": "P\u00e4\u00e4tekstiv\u00e4ri"
-                }
-            },
-            "socialMedia": {
-                "label": "Sosiaalinen media",
-                "$": {
-                    "name": {
-                        "label": "Nimi",
-                        "firstOption": "(Valitse yksi)"
-                    },
-                    "url": {
-                        "label": "Web-osoite",
-                        "placeholder": "http:\/\/esimerkki.com\/k\u00e4ytt\u00e4j\u00e4nimi"
-                    }
-                }
-            },
-            "siteFooter": {
-                "label": "Sivun alatunniste"
-            }
-        },
-        "feedback": {
-            "topic": {
-                "label": "Aihe",
-                "placeholder": "Palautteen aihe"
-            },
-            "message": {
-                "label": "Viestisi",
-                "placeholder": "Viestisi"
-            },
-            "messageType": {
-                "label": "Valitse viestin tyyppi"
-            }
-        },
-        "monitoring": {
-            "enabled": {
-                "label": "Rajapinnan valvonta kytketty"
-            },
-            "url": {
-                "label": "Valvottava p\u00e4\u00e4tepiste"
-            }
-        },
-        "organizations": {
-            "name": {
-                "label": "Nimi"
-            },
-            "url": {
-                "label": "Web-osoite"
-            },
-            "description": {
-                "label": "Kuvaus"
-            },
-            "contact": {
-                "label": "Yhteyshenkil\u00f6",
-                "person": {
-                    "label": "Nimi"
-                },
-                "phone": {
-                    "label": "Puhelinnumero"
-                },
-                "email": {
-                    "label": "S\u00e4hk\u00f6posti"
-                }
-            }
-        },
-        "organizationApis": {
-            "apiId": {
-                "label": "Valitse rajapinta"
-            },
-            "organizationId": {
-                "label": "Valitse organisaatio"
-            }
-        }
-    },
-    "settings_mail_fromEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
-    "settings_mail_toEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen vastaanottamiseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
-    "uploadOrganizationLogoButton": "Lataa logo",
-    "uploadOrganizationLogo_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n logon?",
-    "uploadOrganizationLogo_successfully_deleted": "Logo poistettu!",
     "aboutApinf_documentation": "Dokumentaatio",
     "aboutApinf_contributors": "Tekij\u00e4t",
+    "aboutApinf_copyright": "Tekij\u00e4noikeus",
+    "aboutApinf_copyrightLicense": "Tekij\u00e4noikeus ja lisenssi",
     "aboutApinf_createdBy": "Kehitt\u00e4nyt",
     "aboutApinf_credits": "Kiitokset",
+    "aboutApinf_license": "Lisenssi",
     "aboutApinf_doneButton_text": "Valmis",
     "aboutApinf_intro": "APInf on avoimella l\u00e4hdekoodilla toteutettu rajapintojen hallintaj\u00e4rjestelm\u00e4.",
     "aboutApinf_homepage": "Kotisivu",
@@ -351,10 +30,6 @@
     "addOrganizationManagerForm_description": "Kun rajapinta on yhdistetty organisaatioon, organisaation yll\u00e4pit\u00e4j\u00e4ll\u00e4 on samat oikeudet kuin rajapinnan omistajalla muokata rajapintaa ja poistaa rajapinta.",
     "addOrganizationManagerForm_button": "Lis\u00e4\u00e4",
     "organizationManagerForm_managerAlreadyExist_errorText": "K\u00e4ytt\u00e4j\u00e4 on jo t\u00e4m\u00e4n organisaation yll\u00e4pit\u00e4j\u00e4.",
-    "addOrganization_title": "Lis\u00e4\u00e4 organisaatio",
-    "addOrganization_contact_panelTitle": "Yhteyshenkil\u00f6",
-    "addOrganization_create_button": "Luo organisaatio",
-    "addOrganizationForm_successText": "Organisaatio tallennettu",
     "apiAuthorizedUsersList_ header_text": "Sallitut k\u00e4ytt\u00e4j\u00e4t",
     "apiBackend_Status_Checking": "Rajapinnan tilaa tarkistetaan. Odota hetki...",
     "apiBackend_Status_Title": "Tila",
@@ -383,8 +58,14 @@
     "apiBacklog_addBacklogItem_buttonText": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
     "apiBacklogList_noApiBacklogItemsFound": "Ei l\u00f6ydetty teht\u00e4vi\u00e4 t\u00e4lle rajapinnalle.",
     "apiBacklog_mainTitle": "Kehitysjono",
+    "apiBacklogItems_priorityText_High": "Korkea",
+    "apiBacklogItems_priorityText_Middle": "Normaali",
+    "apiBacklogItems_priorityText_None": "Ei m\u00e4\u00e4ritelty",
+    "apiCard_labelText_private": "yksityinen",
+    "apiCard_tooltipTitle_averageRating": "Arvostelujen keskiarvo",
+    "apiCatalog_apisCount": "(__count__ rajapinta)",
+    "apiCatalog_apisCount_plural": "(__count__ rajapintaa)",
     "apiSettingsDelete_deleteButton": "Poista",
-    "apiDetails_deleteButton": "Poista",
     "apiDetails_baseUrl_headingText": "Rajapinnan osoite",
     "apiDetails_description_headingText": "Kuvaus",
     "apiDetails_usageInstructions_headingText": "Tehd\u00e4ksesi kutsuja t\u00e4h\u00e4n rajapintaan voit:",
@@ -412,6 +93,8 @@
     "apiExport_proxy_title": "Lataa v\u00e4lityspalvelimen konfiguraatio",
     "apiExport_proxy_description": "Lataa rajapintakonfiguraatio JSON- tai YAML-muodossa",
     "apiExport_title": "Lataa",
+    "apiFilteredBy_text_filteredBy": "Suodatin: \"__tag__\"",
+    "apiFilteredBy_buttonText_clear": "Tyhjenn\u00e4 kaikki",
     "apisFilterForm_buttonText_filter": "Suodata",
     "apisFilterForm_buttonText_clear": "Tyhjenn\u00e4",
     "apisFilterForm_labelText_lifecycle": "Elinkaaren vaihe",
@@ -445,6 +128,8 @@
     "apiLifecycleStatus_labelText_unknown": "Tuntematon",
     "apiLogo_resumable_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
     "apiLogo_resumable_successfully_uploaded": "Logon lataus onnistui!",
+    "apiMedia_apiRelatedMedia_Add_Button_Help": "Lis\u00e4\u00e4 t\u00e4ydent\u00e4v\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4",
+    "apiMedia_RelatedMedia_CreationTime": "Luotu %s",
     "apiMetadata_dateInvalid": "Loppup\u00e4iv\u00e4n pit\u00e4\u00e4 olla aloitusp\u00e4iv\u00e4n j\u00e4lkeen",
     "apiOrganization_disconnectButton": "Katkaise yhteys",
     "apiOrganization_panelTitle": "Yhdist\u00e4 rajapinta organisaatioon",
@@ -467,17 +152,6 @@
     "apiSettingsVisibility_heading": "Muuta rajapinnan n\u00e4kyvyytt\u00e4",
     "apiSettingsVisibility_text": "Muuta rajapinta julkiseksi tai yksityiseksi",
     "apiAuthorizedUsersList_authorizedUsers": "Anna yksitt\u00e4isille k\u00e4ytt\u00e4jille oikeus n\u00e4hd\u00e4 yksityiseksi merkitty rajapintasi.",
-    "apiSettings_deleteApiText": "Toimintoa ei voi peruuttaa! Rajapinta ja kaikki siihen liittyv\u00e4 tieto, kuten metadata, dokumentaatio, kehitysjono ja palaute, poistetaan.",
-    "apiSettings_deleteApiTitle": "Poista rajapinta",
-    "apiSettings_deletePanel_title": "Poista",
-    "apiSettings_detailsPanel_title": "Tiedot",
-    "apiSettings_details_helpText": "Voit poistaa yhteyden organisaatioon valitsemalla vaihtoehdon \"Valitse yksi\" organisaatiolistasta. Valittuasi t\u00e4m\u00e4n vaihtoehdon rajapintaasi ei en\u00e4\u00e4 listata organisaatioprofiilissa ja kaikki tieto organisaatiosta poistetaan rajapinnan metadatasta.",
-    "apiSettings_uploadLogo_heading": "Lataa logo",
-    "apiSettings_uploadLogoText": "Voit lis\u00e4t\u00e4 logon rajapinnallesi. Logo n\u00e4kyy rajapintaluettelossa ja rajapinnan profiilisivulla.",
-    "apiSettings_visibilityPanel_title": "N\u00e4kyvyys",
-    "apiSettings_visibility_heading": "Muuta rajapinnan n\u00e4kyvyytt\u00e4",
-    "apiSettings_visibility_text": "Muuta rajapinta julkiseksi tai yksityiseksi",
-    "apiSettings_visibility_authorizedUsers": "Anna yksitt\u00e4isille k\u00e4ytt\u00e4jille oikeus n\u00e4hd\u00e4 yksityiseksi merkitty rajapintasi.",
     "api_backend_rating_anonymous": "Kirjaudu sis\u00e4\u00e4n pisteytt\u00e4\u00e4ksesi rajapinta.",
     "apinf_apiumbrellauser_error": "Virhe: K\u00e4ytt\u00e4j\u00e4n luominen v\u00e4lityspalvelimeen ei onnistunut",
     "apinf_noproxy_error": "Virhe: V\u00e4lityspalvelinta ei l\u00f6ytynyt",
@@ -488,6 +162,21 @@
     "apiMonitoring_saveButton_text": "Tallenna",
     "apiMonitoringForm_successMessage": "Rajapinnan valvonnan asetukset on tallennettu!",
     "apiMonitoringForm_errorMessage": "Valvottava p\u00e4\u00e4tepiste vaaditaan",
+    "apiMedia_apiRelatedMedia_Add_Button": "Lis\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4",
+    "apiMedia_PostItem_Added_Text": "Lis\u00e4tty",
+    "apiMediaPostsForm_Add_Edit_Title": "T\u00e4ydent\u00e4v\u00e4 media",
+    "apiMedia_deletePostConfirmation_cancelButton": "Peruuta",
+    "apiMedia_deletePostConfirmation_deleteButton": "Poista",
+    "apiMedia_deletePostConfirmation_confirmDeleteMessage": "Haluatko varmasti poistaa",
+    "apiMedia_deletePostConfirmation_confirmDeleteNote": "Huomaa:",
+    "apiMedia_deletePostConfirmation_confirmDeleteInformation": "T\u00e4t\u00e4 toimintoa ei voi peruuttaa!",
+    "apiMedia_PostItem_Edit_Button": "Muokkaa",
+    "apiMedia_PostItem_Delete_Button": "Poista",
+    "apiMediaPostsForm_Submit": "L\u00e4het\u00e4",
+    "apiMedia_apiRelatedMedia_Title": "T\u00e4ydent\u00e4v\u00e4 media",
+    "apiMedia_deletePostConfirmation_title_text": "Poista sis\u00e4lt\u00f6",
+    "apiOembed_No_Link_message": "T\u00e4ydent\u00e4v\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4 ei ole saatavilla.",
+    "apiMedia_apiRelatedMedia_Well_Message": "T\u00e4t\u00e4 rajapintaa koskevaa mediasis\u00e4lt\u00f6\u00e4 ei ole lis\u00e4tty .",
     "apiProxy_headerText": "Rajapinnan v\u00e4lityspalvelinasetukset",
     "apiUserAuthorizationForm_addButton_text": "Lis\u00e4\u00e4 sallittu k\u00e4ytt\u00e4j\u00e4",
     "apiUserAuthorizationForm_header_text": "Lis\u00e4\u00e4 sallittuja k\u00e4ytt\u00e4ji\u00e4",
@@ -521,6 +210,7 @@
     "catalogueGrid_addedBy": "Lis\u00e4nnyt",
     "catalogueTable_added": "Lis\u00e4tty",
     "catalogueTable_addedBy": "Lis\u00e4nnyt",
+    "catalogueTable_labelText_private": "yksityinen",
     "catalogue_Title": "Rajapintaluettelo",
     "changeSelectedProxy_buttonCancel": "Peruuta",
     "changeSelectedProxy_buttonConfirm": "Vaihda v\u00e4lityspalvelin",
@@ -531,12 +221,6 @@
     "connectApiToOrganizationModal_buttonText_close": "Sulje",
     "connectApiToOrganizationModal_text_noOneApis": "Kaikki hallinnoimasi rajapinnat on jo yhdistetty.",
     "connectApiToOrganizationModal_modalTitle": "Yhdist\u00e4 rajapinta",
-    "contactForm_email_label": "S\u00e4hk\u00f6postiosoite",
-    "contactForm_email_placeholder": "S\u00e4hk\u00f6postisi",
-    "contactForm_message_label": "Viesti",
-    "contactForm_message_placeholder": "Viestisi",
-    "contactForm_name_label": "Nimesi",
-    "contactForm_name_placeholder": "Nimesi",
     "contactForm_reset": "Nollaa",
     "contactForm_successMessage": "Kiitos! Viestisi on l\u00e4hetetty.",
     "contactForm_submit": "L\u00e4het\u00e4",
@@ -585,6 +269,11 @@
     "deleteFeedbackItem_confirmation_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n palautteen ja kaikki sen saamat \u00e4\u00e4net?",
     "deleteFeedbackItem_cancelButton_text": "Peruuta",
     "deleteFeedbackItem_deleteButton_text": "Poista palaute",
+    "feedbackItem_messageType": {
+        "Feedback": "Palaute",
+        "Error report": "Virheraportti",
+        "Feature request": "Ehdotus toiminnallisuudeksi"
+    },
     "deleteOrganizationApiConfirmation_cancelButton_text": "Peruuta",
     "deleteOrganizationApiConfirmation_confirm_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n rajapinnan seuraavasta organisaatiosta: ",
     "deleteOrganizationApiConfirmation_disconnectButton_text": "Katkaise yhteys",
@@ -668,7 +357,10 @@
     "homeBody_section3_heading": "T\u00e4ysin avointa l\u00e4hdekoodia",
     "homeBody_section3_text": "APInfin moottorina toimii API Umbrella. APInf tarjoaa k\u00e4ytt\u00f6liittym\u00e4kerroksen API Umbrellan toiminnoille. Ratkaisu on kehitetty avoimena l\u00e4hdekoodina ja lisensoitu MIT-lisenssill\u00e4. K\u00e4ytt\u00f6liittym\u00e4n rakentamiseeen on k\u00e4ytetty Meteor.js- ja D3-teknologioita. Arvostamme yhteisty\u00f6t\u00e4, pyrimme kuuntelemaan k\u00e4ytt\u00e4ji\u00e4mme ja rohkaisemaan ihmisi\u00e4 liittym\u00e4\u00e4n kehitt\u00e4jiksi.",
     "homeBody_section3_text_extra": "L\u00f6yd\u00e4t meid\u00e4t sosiaalisesta mediasta:",
+    "homeFooter_privacyPolicy_text": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
+    "homeFooter_termsOfUse_text": "K\u00e4ytt\u00f6ehdot",
     "homeFooter_signIn": "Kirjaudu",
+    "homeFooter_signOut": "Kirjaudu ulos",
     "homeFooter_signUp": "Rekister\u00f6idy",
     "importApiConfiguration_errorMessage": "Konfiguraatiotiedoston tulee olla .YAML-, .YML-, .JSON- tai .TXT-muodossa.",
     "import_ApiConfiguration_Drop": "Raahaa tiedosto t\u00e4h\u00e4n",
@@ -680,7 +372,6 @@
     "import_ApiDocumentation_File": "M\u00e4\u00e4rittelytiedosto dokumentaatiolle",
     "importApiDocumentation_fileExtensionError_message": "Vain .json- and .yaml(.yml)-tiedostot ovat tuettu.",
     "importApiDocumentation_fileReadError_message": "Virhe tiedoston luvussa. Tarkista tiedoston sis\u00e4lt\u00f6.",
-    "import_ApiDocumentation_Title": "Lataa dokumentaatio palvelimelle",
     "latestApiBackends_DateAdded": "Lis\u00e4tty %s",
     "latestApiBackends_Heading": "Uusimmat rajapinnat",
     "latestApiBackends_MoreInfo": "Lis\u00e4\u00e4 tietoa",
@@ -702,6 +393,7 @@
     "manageApiDocumentationModal_hints_documentation_link": "Linkki Wiki- tai Github-sivuun tai muuhun verkkoresurssiin, josta rajapintasi dokumentaatio on luettavissa.",
     "manageApiDocumentationModal_hints_uploadApiDocumentation": "Voit my\u00f6s luoda uuden dokumentaatiotiedoston rajapinnallesi k\u00e4ytt\u00e4en Swagger-muokkausohjelmaa.",
     "manageApiDocumentationModal_openDocumentationEditor": "Avaa dokumentaation muokkausohjelma",
+    "manageApiDocumentationModal_addDocumentation_title": "Lis\u00e4\u00e4 dokumentaatiota",
     "navbar_addAPIBackend": "Lis\u00e4\u00e4 rajapinta",
     "navbar_apis": "Rajapinnat",
     "navbar_organizations": "Organisaatiot",
@@ -728,14 +420,15 @@
     "organizationCatalog_toolbar_toggleCollapse": "Vaihda ty\u00f6kaluvalikon navigaatiota",
     "organizationCatalog_toolbar_viewMode_grid": "Ruudukko",
     "organizationCatalog_toolbar_viewMode_table": "Taulukko",
+    "organizationCatalog_text_noOrganizationIsAvailable": "Organisaatioita ei ole saatavilla.",
+    "organizationCatalog_text_addOrganization": "Paina \"Lis\u00e4\u00e4 organisaatio\" -painiketta lis\u00e4t\u00e4ksesi uuden organisaation.",
     "organizationCatalogTable_added": "Lis\u00e4tty",
     "organizationCatalogGrid_organizationCardCreated_addedText": "Lis\u00e4tty %s",
-    "organizationCatalogGrid_organizationCardApisCount_apisText": "rajapintaa",
+    "organizationCatalogGrid_organizationCardApisCount_apisText": "Rajapinnat",
     "organizationForm_title": "Organisaation tiedot",
     "organizationForm_contact_panelTitle": "Yhteyshenkil\u00f6",
     "organizationForm_saveButton_text": "Tallenna",
     "organizationForm_successText": "Organisaatio tallennettu",
-    "organizationCatalogGrid_added": "Lis\u00e4tty %s",
     "organizationLogo_noPermissions": "Oikeudet eiv\u00e4t riit\u00e4 logon lataamiseen.",
     "organizationLogo_resumable_errorText": "Tiedoston luonti ei onnistunut!",
     "organizationLogo_resumable_successfully_uploaded": "Logon lataus onnistui!",
@@ -743,23 +436,28 @@
     "organizationManagersList_title": "Organisaation yll\u00e4pit\u00e4j\u00e4t",
     "organizationManagerForm_successMessage": "Uusi yll\u00e4pit\u00e4j\u00e4 lis\u00e4tty.",
     "organizationManagerForm_emailNotRegistered_errorText": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta ei ole viel\u00e4 rekister\u00f6ity j\u00e4rjestelm\u00e4\u00e4n.",
+    "organizationNoApis_text_noConnectedApis": "Organisaatioon ei ole liitetty yht\u00e4\u00e4n rajapintaa.",
+    "organizationNoApis_text_useButton": "Voit lis\u00e4t\u00e4 rajapinnan painamalla \"Yhdist\u00e4 rajapinta organisaatioon\" -painiketta.",
     "organizationProfile_bigText_apisCount": "Rajapinnat",
     "organizationProfileHeader_editButton_text": "Muokkaa",
     "organizationProfileHeader_tabs_apis": "Rajapinnat",
     "organizationProfileHeader_tabs_settings": "Asetukset",
-    "organizationProfile_smallText_apisCount": "(Rajapintoja: %s)",
+    "organizationProfile_smallText_apisCount": "(__count__ rajapinta)",
+    "organizationProfile_smallText_apisCount_plural": "(__count__ rajapintaa)",
     "organizationProfile_buttonText_connectApi": "Yhdist\u00e4 rajapinta organisaatioon",
     "organizationProfile_buttonText_clear": "Tyhjenn\u00e4 kaikki",
     "organizationProfile_text_error": "Yhdist\u00e4minen ei onnistunut. Ilmoita ongelmasta yll\u00e4pidolle.",
-    "organizationProfile_text_filteredBy": "Suodatusperuste",
     "organizationRemoveManagers_cancelButton": "Peruuta",
     "organizationRemoveManagers_description": "Haluatko varmasti poistaa t\u00e4m\u00e4n k\u00e4ytt\u00e4j\u00e4n organisaation yll\u00e4pit\u00e4jist\u00e4?",
     "organizationRemoveManagers_removeButton": "Poista",
     "organizationRemoveManagers_title": "Poista k\u00e4ytt\u00e4j\u00e4 yll\u00e4pit\u00e4jist\u00e4",
+    "organizationSettings_uploadLogo_heading": "Lataa logo",
+    "organizationSettings_uploadLogoText": "Voit lis\u00e4t\u00e4 logon organisaatiollesi. Logo n\u00e4kyy organisaatioluettelossa ja organisaation omalla sivulla.",
     "organizationSettingsDelete_buttonText_delete": "Poista",
     "organizationSettingsDelete_text_information": "Organisaatioon liittyv\u00e4 tieto poistetaan. Toimintoa ei voi peruuttaa.",
     "organizationSettingsDelete_title": "Poista organisaatioprofiili",
     "organizationSettingsDelete_panelTitle": "Poista",
+    "privacyPolicy_title": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
     "profile_Header": "Profiili",
     "profile_UpdateButton": "P\u00e4ivit\u00e4",
     "profile_setUsername": "Anna k\u00e4ytt\u00e4j\u00e4nimesi.",
@@ -804,6 +502,405 @@
     "requestsOverTimeChart_help_text": "Klikkaa alapuolella olevaa yleiskuvaa aktivoidakseksi aikarajauksen. Voit k\u00e4ytt\u00e4\u00e4 sit\u00e4 valitaksesi jakson, jonka ajalta haluat n\u00e4hd\u00e4 rajapintakutsuja. My\u00f6s HTTP-statuskoodit ja rajapinnan vasteaikakuvaaja p\u00e4ivitet\u00e4\u00e4n valitsemasi ajanjakson perusteella.",
     "responseTimeDistributionChart_title": "Rajapinnan vasteaika",
     "responseTimeDistributionChart_help_text": "Valitse haluamasi vasteaikaa kuvaava pylv\u00e4s. Muut kuvaajat p\u00e4ivittyv\u00e4t vastaamaan valintaasi.",
+    "schemas": {
+        "apis": {
+            "name": {
+                "label": "Rajapinnan nimi"
+            },
+            "description": {
+                "label": "Kuvaus"
+            },
+            "url": {
+                "label": "Web-osoite"
+            },
+            "organizationId": {
+                "label": "Yhdist\u00e4 rajapinta organisaatioon"
+            },
+            "lifecycleStatus": {
+                "label": "Elinkaaren vaihe",
+                "placeholder": "Valitse elinkaaren vaihe",
+                "options": {
+                    "design": "Suunnittelu",
+                    "development": "Kehitys",
+                    "testing": "Testaus",
+                    "production": "Tuotanto",
+                    "deprecated": "K\u00e4yt\u00f6st\u00e4 poistettu"
+                }
+            }
+        },
+        "apiDocs": {
+            "type": {
+                "label": "Lis\u00e4\u00e4 rajapintadokumentaatio",
+                "options": {
+                    "url": "Web-osoite",
+                    "file": "Tiedosto"
+                }
+            },
+            "remoteFileUrl": {
+                "label": "Linkki rajapintadokumentaatioon"
+            },
+            "otherUrl": {
+                "label": "Linkki muuhun rajapintadokumentaatioon"
+            },
+            "submit_methods": {
+                "label": "Salli kutsujen kokeilu seuraaville metodeille:"
+            }
+        },
+        "apiMetadata": {
+            "organization": {
+                "label": "Organisaatio",
+                "name": {
+                    "label": "Nimi"
+                },
+                "description": {
+                    "label": "Kuvaus"
+                }
+            },
+            "contact": {
+                "label": "Ota yhteytt\u00e4",
+                "name": {
+                    "label": "Nimi"
+                },
+                "phone": {
+                    "label": "Puhelin"
+                },
+                "email": {
+                    "label": "S\u00e4hk\u00f6posti"
+                }
+            },
+            "service": {
+                "label": "Palvelu",
+                "name": {
+                    "label": "Nimi"
+                },
+                "description": {
+                    "label": "Kuvaus"
+                },
+                "validSince": {
+                    "label": "Voimassa alkaen",
+                    "placeholder": "Klikkaa valitaksesi p\u00e4iv\u00e4ys"
+                },
+                "validUntil": {
+                    "label": "Voimassa saakka",
+                    "placeholder": "Klikkaa valitaksesi p\u00e4iv\u00e4ys"
+                },
+                "serviceLevelAgreement": {
+                    "label": "Palvelutasosopimus"
+                }
+            }
+        },
+        "backlog": {
+            "title": {
+                "label": "Otsikko",
+                "placeholder": "Otsikko"
+            },
+            "details": {
+                "label": "Tiedot",
+                "placeholder": "Kuvaus"
+            },
+            "priority": {
+                "label": "T\u00e4rkeys"
+            }
+        },
+        "branding": {
+            "siteTitle": {
+                "label": "Sivun otsikko"
+            },
+            "siteSlogan": {
+                "label": "Sivun iskulause"
+            },
+            "privacyPolicy": {
+                "label": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
+                "placeholder": "Lis\u00e4\u00e4 yksityisyysk\u00e4yt\u00e4nt\u00f6 t\u00e4h\u00e4n"
+            },
+            "termsOfUse": {
+                "label": "K\u00e4ytt\u00f6ehdot",
+                "placeholder": "Lis\u00e4\u00e4 k\u00e4ytt\u00f6ehdot t\u00e4h\u00e4n"
+            },
+            "colors": {
+                "label": "V\u00e4rit",
+                "primary": {
+                    "label": "P\u00e4\u00e4v\u00e4ri"
+                },
+                "primaryText": {
+                    "label": "P\u00e4\u00e4tekstiv\u00e4ri"
+                }
+            },
+            "socialMedia": {
+                "label": "Sosiaalinen media",
+                "$": {
+                    "name": {
+                        "label": "Nimi",
+                        "firstOption": "(Valitse yksi)"
+                    },
+                    "url": {
+                        "label": "Web-osoite",
+                        "placeholder": "http:\/\/esimerkki.com\/k\u00e4ytt\u00e4j\u00e4nimi"
+                    }
+                }
+            },
+            "siteFooter": {
+                "label": "Sivun alatunniste"
+            }
+        },
+        "contactForm": {
+            "name": {
+                "label": "Nimesi",
+                "placeholder": "Nimesi"
+            },
+            "email": {
+                "label": "S\u00e4hk\u00f6posti",
+                "placeholder": "S\u00e4hk\u00f6postiosoitteesi"
+            },
+            "message": {
+                "label": "Viesti",
+                "placeholder": "Viestisi"
+            }
+        },
+        "feedback": {
+            "topic": {
+                "label": "Aihe",
+                "placeholder": "Palautteen aihe"
+            },
+            "message": {
+                "label": "Viestisi",
+                "placeholder": "Viestisi"
+            },
+            "messageType": {
+                "label": "Valitse viestin tyyppi",
+                "options": {
+                    "Feedback": "Palaute",
+                    "Error report": "Virheraportti",
+                    "Feature request": "Ehdotus toiminnallisuudeksi"
+                }
+            }
+        },
+        "monitoring": {
+            "enabled": {
+                "label": "Rajapinnan valvonta kytketty"
+            },
+            "url": {
+                "label": "Valvottava p\u00e4\u00e4tepiste"
+            }
+        },
+        "settings": {
+            "access": {
+                "onlyAdminsCanAddApis": {
+                    "label": "Vain j\u00e4rjestelm\u00e4n yll\u00e4pit\u00e4j\u00e4t voivat lis\u00e4t\u00e4 uusia rajapintoja"
+                }
+            },
+            "apiDocumentationEditor": {
+                "label": "Rajapintadokumentaation muokkausohjelma",
+                "enabled": {
+                    "label": "K\u00e4yt\u00f6ss\u00e4"
+                },
+                "host": {
+                    "label": "Is\u00e4nt\u00e4kone",
+                    "placeholder": "https:\/\/editor.example.com\/"
+                }
+            },
+            "mail": {
+                "enabled": {
+                    "label": "K\u00e4yt\u00f6ss\u00e4"
+                },
+                "username": {
+                    "label": "K\u00e4ytt\u00e4j\u00e4tunnus"
+                },
+                "password": {
+                    "label": "Salasana"
+                },
+                "smtpHost": {
+                    "label": "SMTP-palvelin"
+                },
+                "smtpPort": {
+                    "label": "SMTP-portti"
+                },
+                "fromEmail": {
+                    "label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten"
+                },
+                "toEmail": {
+                    "label": "Osoitteeseen"
+                }
+            },
+            "githubConfiguration": {
+                "label": "Github-asetukset",
+                "clientId": {
+                    "label": "Client ID"
+                },
+                "secret": {
+                    "label": "Secret"
+                }
+            },
+            "sdkCodeGenerator": {
+                "label": "SDK-generaattori",
+                "enabled": {
+                    "label": "K\u00e4yt\u00f6ss\u00e4"
+                },
+                "host": {
+                    "label": "Is\u00e4nt\u00e4kone"
+                }
+            }
+        },
+        "proxies": {
+            "name": {
+                "label": "Nimi"
+            },
+            "description": {
+                "label": "Kuvaus"
+            },
+            "type": {
+                "label": "Tyyppi"
+            },
+            "apiUmbrella": {
+                "url": {
+                    "label": "Web-osoite"
+                },
+                "apiKey": {
+                    "label": "Rajapinta-avain"
+                },
+                "authToken": {
+                    "label": "Autentikointitunnus"
+                },
+                "elasticsearch": {
+                    "label": "ElasticSearch"
+                }
+            },
+            "emqtt": {
+                "url": {
+                    "label": "Web-osoite"
+                },
+                "elasticsearch": {
+                    "label": "ElasticSearch"
+                }
+            }
+        },
+        "proxyBackends": {
+            "proxyId": {
+                "label": "Valitse v\u00e4lityspalvelin"
+            },
+            "apiUmbrella": {
+                "servers": {
+                    "$": {
+                        "port": {
+                            "label": "Rajapinta-portti"
+                        }
+                    }
+                },
+                "settings": {
+                    "append_query_string": {
+                        "label": "Lis\u00e4\u00e4 hakulauseen parametrit"
+                    },
+                    "disable_api_key": {
+                        "label": "Rajapinta-avaimen k\u00e4ytt\u00f6\u00e4 ei vaadita"
+                    },
+                    "headers_string": {
+                        "label": "Aseta pyynn\u00f6n otsikkotiedot"
+                    },
+                    "rate_limit_mode": {
+                        "label": "Kuormituksen rajoitustila",
+                        "options": {
+                            "custom": "R\u00e4\u00e4t\u00e4l\u00f6ity kuormitusrajoitus",
+                            "unlimited": "Kutsujen m\u00e4\u00e4r\u00e4\u00e4 ei rajoiteta"
+                        }
+                    },
+                    "rate_limits": {
+                        "label": "Kuormitusrajoitukset"
+                    },
+                    "rate_limit": {
+                        "duration": {
+                            "label": "Kesto (ms)"
+                        },
+                        "limit_by": {
+                            "label": "Rajoitusperuste",
+                            "options": {
+                                "apiKey": "Rajapinta-avain",
+                                "ip": "IP-osoite"
+                            }
+                        },
+                        "limit": {
+                            "label": "Pyynt\u00f6jen m\u00e4\u00e4r\u00e4"
+                        },
+                        "response_headers": {
+                            "label": "N\u00e4yt\u00e4 kuormitusrajoitus vastauksen otsikkotiedoissa"
+                        }
+                    }
+                },
+                "url_matches": {
+                    "$": {
+                        "frontend_prefix": {
+                            "label": "V\u00e4lityspalvelimen peruspolku"
+                        },
+                        "backend_prefix": {
+                            "label": "Rajapinnan peruspolku"
+                        }
+                    }
+                }
+            }
+        },
+        "api_media": {
+            "title": {
+                "label": "Otsikko"
+            },
+            "url": {
+                "label": "Web-osoite"
+            }
+        },
+        "organizations": {
+            "name": {
+                "label": "Nimi"
+            },
+            "url": {
+                "label": "Web-osoite"
+            },
+            "description": {
+                "label": "Kuvaus"
+            },
+            "contact": {
+                "label": "Yhteyshenkil\u00f6",
+                "person": {
+                    "label": "Nimi"
+                },
+                "phone": {
+                    "label": "Puhelinnumero"
+                },
+                "email": {
+                    "label": "S\u00e4hk\u00f6posti"
+                }
+            }
+        },
+        "organizationApis": {
+            "apiId": {
+                "label": "Valitse rajapinta"
+            },
+            "organizationId": {
+                "label": "Valitse organisaatio"
+            }
+        },
+        "updatePassword": {
+            "old": {
+                "label": "Nykyinen salasana"
+            },
+            "new": {
+                "label": "Uusi salasana"
+            },
+            "confirm": {
+                "label": "Vahvista uusi salasana"
+            }
+        },
+        "users": {
+            "username": {
+                "label": "K\u00e4ytt\u00e4j\u00e4nimi"
+            },
+            "profile": {
+                "company": {
+                    "label": "Yritys"
+                }
+            }
+        }
+    },
+    "sdkCodeGeneratorModal_buttonText_download": "Lataa",
+    "sdkCodeGeneratorModal_labelText_selectLanguage": "Valitse kieli",
+    "sdkCodeGeneratorModal_firstOption_language": "(Kieli)",
     "sdkCodeGeneratorModal_errorText": "Kodigeneraattori ei tue k\u00e4ytt\u00e4m\u00e4\u00e4si tiedostomuotoa. Lataa oikea tiedosto.",
     "sdkCodeGeneratorModal_errorTextInvalidHost": "Koodigeneraattoripalvelin on virheellinen. Ilmoita ongelmasta yll\u00e4pit\u00e4j\u00e4lle.",
     "sdkCodeGeneratorModal_Title": "Luo SDK-tiedosto",
@@ -818,19 +915,12 @@
     "settings_addingApis": "Rajapintojen lis\u00e4\u00e4minen",
     "settings_apiDocumentation_editor": "Rajapintadokumentaation editori",
     "settings_mail": "S\u00e4hk\u00f6posti",
-    "settings_mail_username_label": "K\u00e4ytt\u00e4j\u00e4tunnus",
-    "settings_mail_password_label": "Salasana",
-    "settings_mail_smtpHost_label": "SMTP-palvelin",
-    "settings_mail_smtpPort_label": "SMTP-portti",
-    "settings_mail_fromEmail_label": "Osoite s\u00e4hk\u00f6postien l\u00e4hett\u00e4mist\u00e4 varten",
-    "settings_mail_fromEmail_hint": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
-    "settings_mail_toEmail_label": "Osoite s\u00e4hk\u00f6postien vastaanottamista varten",
-    "settings_mail_toEmail_hint": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen vastaanottamiseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
+    "settings_mail_fromEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
+    "settings_mail_toEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen vastaanottamiseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
     "settings_github": "Github",
     "settings_save": "Tallenna",
     "settings_sdkCode_generator": "SDK-koodigeneraattori",
     "settings_successMessage": "Asetukset tallennettu",
-    "settings_schema_onlyAdminsCanAddApis": "Vain yll\u00e4pit\u00e4j\u00e4 voi lis\u00e4t\u00e4 rajapintoja",
     "settingsMenu_profile": "Profiili",
     "settingsMenu_account": "K\u00e4ytt\u00e4j\u00e4tili",
     "settingsMenu_branding": "Br\u00e4nd\u00e4ys",
@@ -854,6 +944,7 @@
     "statusCodeCountsChart_title": "HTTP-tilakoodit",
     "statusCodeCountsChart_help_text": "Valitse haluamaasi HTTP-tilakoodia kuvaava pylv\u00e4s. Muut kuvaajat p\u00e4ivittyv\u00e4t vastaamaan valintaasi.",
     "swaggerUi_swaggerDocumentInvalidText": "Swagger-tiedosto ei ole kelvollinen.",
+    "termsOfUse_title": "K\u00e4ytt\u00f6ehdot",
     "timeFrameSelectPicker_from": "alkaen",
     "timeFrameSelectPicker_to": "p\u00e4\u00e4ttyen",
     "updatePassword_legend_text": "P\u00e4ivit\u00e4 salasana",
@@ -863,6 +954,9 @@
     "uploadApiLogoButton": "Lataa logo",
     "uploadApiLogo_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n logon?",
     "uploadApiLogo_successfully_deleted": "Logo poistettu!",
+    "uploadOrganizationLogoButton": "Lataa logo",
+    "uploadOrganizationLogo_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n logon?",
+    "uploadOrganizationLogo_successfully_deleted": "Logo poistettu!",
     "uploadProjectLogoButton_uploadButton_uploadLogo": "Lataa logo",
     "uploadCoverPhoto_confirm_delete": "Kansikuva-alue k\u00e4ytt\u00e4\u00e4 ensisijaista br\u00e4ndiv\u00e4ri\u00e4, kun kuva on poistettu. Kuva poistetaan kokoelmasta.",
     "uploadCoverPhoto_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
@@ -870,12 +964,10 @@
     "uploadCoverPhoto_successfully_uploaded": "Taustakuvan lataus onnistui!",
     "uploadCoverPhoto_successfully_deleted": "Taustakuva on poistettu!",
     "uploadCoverPhotoButton_uploadButton_uploadCoverPhoto": "Lataa taustakuva",
-    "uploadCoverPhotoButton_textButton": "Lataa taustakuva",
     "uploadProjectLogo_confirm_delete": "Haluatko varmasti poistaa projektin logon?",
     "uploadProjectLogo_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
     "uploadProjectLogo_successfully_uploaded": "Logon lataus onnistui!",
     "uploadProjectLogo_successfully_deleted": "Projektin logo poistettu!",
-    "uploadProjectLogoButton_textButton": "Lataa logo",
     "userMenu_account": "K\u00e4ytt\u00e4j\u00e4tili",
     "userMenu_branding": "Br\u00e4nd\u00e4ys",
     "userMenu_profile": "Profiili",
