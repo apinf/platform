@@ -10,7 +10,7 @@ import { Roles } from 'meteor/alanning:roles';
 Tracker.autorun(() => {
   // The Roles package actually depends on a subscription.
   // If the subscription is not ready the Roles.userIsInRole method will always return false.
-  // That is used for checking of is user is admin
+  // That is used for checking of does user have the admin role
 
   // Make sure the roles subscription is ready & FlowRouter hasn't initialized already
   if (Roles.subscription.ready() && !FlowRouter._initialized) {
