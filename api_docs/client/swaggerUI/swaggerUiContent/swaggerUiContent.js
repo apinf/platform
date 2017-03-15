@@ -74,12 +74,11 @@ Template.swaggerUiContent.onCreated(function () {
     operationsSorter: 'alpha',
     docExpansion: 'none',
     onComplete () {
-      if (proxyHost) {
+      // Make sure proxy host and proxy base path exist
+      if (proxyBasePath && proxyHost) {
         // Replace Swagger host to proxy host
         swagger.api.setHost(proxyHost);
-      }
 
-      if (proxyBasePath) {
         // Replace Swagger base path to proxy base path
         swagger.api.setBasePath(proxyBasePath);
       }
