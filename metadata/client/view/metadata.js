@@ -5,7 +5,6 @@ import { Template } from 'meteor/templating';
 import formatDate from '/core/helper_functions/format_date';
 
 // Collection imports
-import Organizations from '/organizations/collection';
 import ApiMetadata from '../../collection';
 
 Template.viewApiMetadata.onCreated(function () {
@@ -48,9 +47,6 @@ Template.viewApiMetadata.helpers({
         // Attach formatted dates to metadata service object
         apiMetadata.service = service;
       }
-
-      // Add info about organization
-      apiMetadata.organization = Organizations.findOne(apiMetadata.organizationId);
     }
 
     return apiMetadata;

@@ -4,15 +4,12 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import ApiMetadata from '/metadata/collection';
+import contactPhone from '/organizations/collection/regex';
 
 ApiMetadata.schema = new SimpleSchema({
   apiId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-  },
-  organizationId: {
-    type: String,
-    optional: true,
   },
   contact: {
     type: Object,
@@ -24,10 +21,12 @@ ApiMetadata.schema = new SimpleSchema({
   },
   'contact.phone': {
     type: String,
+    regEx: contactPhone,
     optional: true,
   },
   'contact.email': {
     type: String,
+    regEx: SimpleSchema.RegEx.Email,
     optional: true,
   },
   service: {
