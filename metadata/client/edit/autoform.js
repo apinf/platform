@@ -2,9 +2,6 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import OrganizationApis from '/organization_apis/collection';
-import ApiMetadata from '/metadata/collection';
-
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
     insert (metadata) {
