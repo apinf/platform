@@ -47,20 +47,8 @@ Template.viewApiMetadata.helpers({
         // Attach formatted dates to metadata service object
         apiMetadata.service = service;
       }
-
-      // Add info about organization
-      apiMetadata.organization = apiMetadata.organizationData();
     }
 
     return apiMetadata;
-  },
-  organization () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get the API Backend ID from template instance
-    const api = instance.data.api;
-
-    return api.organization();
   },
 });
