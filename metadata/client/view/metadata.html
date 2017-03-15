@@ -10,39 +10,6 @@
     </div>
     <div class="panel-body">
       <div class="row metadata-blocks">
-        {{# if organization }}
-          {{# with organization }}
-            <div class="col-md-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h2 class="panel-title">
-                    {{_ "viewApi_Metadata_Organization_title" }}
-                  </h2>
-                </div>
-                <div class="panel-body">
-                  {{# if name }}
-                    <h3>
-                      <a href="{{ pathFor 'organizationProfile' slug=slug }}">
-                        {{ name }}
-                      </a>
-                    </h3>
-                  {{/ if }}
-                  {{# if description }}
-                    <p>
-                      {{ description }}
-                    </p>
-                  {{/ if }}
-                  {{# if url }}
-                    <p>
-                      <i class="fa fa-link" aria-hidden="true"></i>
-                      {{ url }}
-                    </p>
-                  {{/ if }}
-                </div>
-              </div>
-            </div>
-          {{/ with }}
-        {{/ if }}
         {{# if metadata }}
           {{# with metadata }}
             {{# if contact }}
