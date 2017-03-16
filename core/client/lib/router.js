@@ -19,7 +19,7 @@ Tracker.autorun(() => {
     // Start routing
     return FlowRouter.initialize();
   }
-  // Otherwise wait
+  // Otherwise nothing
   return undefined;
 });
 
