@@ -7,6 +7,8 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
+FlowRouter.wait();
+
 Tracker.autorun(() => {
   // The Roles package actually depends on a subscription.
   // If the subscription is not ready the Roles.userIsInRole method will always return false.
@@ -18,7 +20,7 @@ Tracker.autorun(() => {
     return FlowRouter.initialize();
   }
   // Otherwise wait
-  return FlowRouter.wait();
+  return undefined;
 });
 
 // Define group for routes that require sign in
