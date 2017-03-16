@@ -8,6 +8,7 @@ import SwaggerUi from 'swagger-ui-browserify';
 import _ from 'lodash';
 
 // Collection imports
+import ApiDocs from '/api_docs/collection';
 import ApiKeys from '/api_keys/collection';
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
@@ -116,6 +117,8 @@ Template.swaggerUiContent.onCreated(function () {
     const currentApi = Apis.findOne(apiId);
     // Get documentation URL
     const documentationUrl = currentApi.documentation();
+    // Get supported submit methods
+    const submitMethods = ApiDocs.findOne({ apiId }).submit_methods;
 
     // Make sure documentation exists as File or URL
     if (documentationUrl) {
@@ -126,7 +129,7 @@ Template.swaggerUiContent.onCreated(function () {
       }
 
       // Set selected methods in Swagger
-      swagger.setOption('supportedSubmitMethods', currentApi.submit_methods);
+      swagger.setOption('supportedSubmitMethods', submitMethods);
 
       // Load Swagger UI
       swagger.load();
