@@ -154,9 +154,11 @@ Additionally, the following steps help our team stay coordinated:
 All files should have a copyright statement at the top.
 In practise it means that if you create a new file, you need to include a copyright statement as a comment at the top of it.
 
-```Copyright 2017 Apinf Oy
+```
+Copyright 2017 Apinf Oy
 This file is covered by the EUPL license.
-You may obtain a copy of the licence at https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
 ```
 
 ## Code quality
