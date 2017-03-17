@@ -12,12 +12,12 @@ Posts.helpers({
     let currentUserCanManage = false;
     const postEntityId = this.entityId;
     // checking of entity in question
-    if (this.entityType === 0) {
+    if (this.entityType === 'api') {
       // Check API
       const postApi = Apis.findOne(postEntityId);
       // Check if current user can edit API
       currentUserCanManage = postApi.currentUserCanManage();
-    } else if (this.entityType === 1) {
+    } else if (this.entityType === 'organization') {
       // Check Organizations
       const postOrg = Organizations.findOne(postEntityId);
       // Check if current user can edit API
