@@ -23,19 +23,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <a class="btn btn-success" id="exportYAMLConfig">
         {{_ "apiExport_yaml_button" }}
       </a>
-      <hr class="panel-hr" />
-      <h3>
-        {{_ "apiExport_proxy_title" }}
-      </h3>
-      <p>
-        {{_ "apiExport_proxy_description" }}
-      </p>
-      <a class="btn btn-success" id="exportJSONProxyConfig">
-        {{_ "apiExport_json_button" }}
-      </a>
-      <a class="btn btn-success" id="exportYAMLProxyConfig">
-        {{_ "apiExport_yaml_button" }}
-      </a>
+      {{# if proxyBackend }}
+        <hr class="panel-hr" />
+        <h3>
+          {{_ "apiExport_proxy_title" }}
+        </h3>
+        <p>
+          {{_ "apiExport_proxy_description" }}
+        </p>
+        <a class="btn btn-success" id="exportJSONProxyConfig">
+          {{_ "apiExport_json_button" }}
+        </a>
+        <a class="btn btn-success" id="exportYAMLProxyConfig">
+          {{_ "apiExport_yaml_button" }}
+        </a>
+      {{/ if }}
     </div>
   </div>
 </template>
