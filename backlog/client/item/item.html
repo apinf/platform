@@ -1,7 +1,7 @@
 <template name="backlogItem">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if api.currentUserCanEdit }}
+      {{# if api.currentUserCanManage }}
       <div class="btn-group pull-right">
         <button class="edit-backlog-item btn btn-primary btn-xs">
           {{_ "backlogItem_editButton_text" }}
