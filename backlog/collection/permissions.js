@@ -15,7 +15,7 @@ ApiBacklogItems.allow({
     const apiBackend = Apis.findOne(apiBackendId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return apiBackend.currentUserCanEdit();
+    return apiBackend.currentUserCanManage();
   },
   update (userId, backlog) {
     /*
@@ -29,7 +29,7 @@ ApiBacklogItems.allow({
     const apiBackend = Apis.findOne(apiBackendId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return apiBackend.currentUserCanEdit();
+    return apiBackend.currentUserCanManage();
   },
   remove (userId, backlog) {
     /*
@@ -43,6 +43,6 @@ ApiBacklogItems.allow({
     const apiBackend = Apis.findOne(apiBackendId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return apiBackend.currentUserCanEdit();
+    return apiBackend.currentUserCanManage();
   },
 });
