@@ -1,3 +1,8 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
 // When there are updating the proxy backend information and changing proxy
 // object doesn't have standard fields to creating & publishing in api Umbrella
 // This function is conversion
