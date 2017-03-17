@@ -50,6 +50,6 @@ Meteor.methods({
     const api = Apis.findOne(apiId);
 
     // Check if user can edit
-    return api && api.currentUserCanEdit();
+    return api && api.currentUserCanManage();
   },
 });
