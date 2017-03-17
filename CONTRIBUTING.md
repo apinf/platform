@@ -150,6 +150,15 @@ Additionally, the following steps help our team stay coordinated:
 
  ![git flow diagram with peer review step](https://openclipart.org/image/600px/svg_to_png/236560/Gitflow-featureBranch-peerReview.png)
 
+### Copyright statement in source code
+All files should have a copyright statement at the top.
+In practise it means that if you create a new file, you need to include a copyright statement as a comment at the top of it.
+
+```Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
+```
+
 ## Code quality
 In a nutshell, **write code for humans to read and understand**. Our code will be minified for machines during the build process. For further reference, please read the following:
 - [Human JavaScript](http://read.humanjavascript.com/) by Henrik Joreteg
