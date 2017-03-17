@@ -12,7 +12,7 @@ ApiDocs.helpers({
 
       if (docApi) {
         // Check if current user can edit API
-        const currentUserCanEdit = docApi.currentUserCanEdit();
+        const currentUserCanEdit = docApi.currentUserCanManage();
 
         if (currentUserCanEdit) {
           // User is allowed to perform action
