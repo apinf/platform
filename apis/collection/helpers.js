@@ -147,7 +147,7 @@ Apis.helpers({
     return this.averageRating;
   },
   getRelatedMediaIndex () {
-    return 0;
+    return 'api';
   },
   relativeUpdatedAt () {
     // Get current language
