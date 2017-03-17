@@ -39,7 +39,7 @@ Organizations.helpers({
     return moment(this.createdAt).locale(language).fromNow();
   },
   getRelatedMediaIndex () {
-    return 1;
+    return 'organization';
   },
 
 });
