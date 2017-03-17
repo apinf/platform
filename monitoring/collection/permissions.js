@@ -10,7 +10,7 @@ MonitoringSettings.allow({
     const api = Apis.findOne(data.apiId);
 
     // Check if current user can insert the monitoring settings and return this value
-    return api && api.currentUserCanEdit();
+    return api && api.currentUserCanManage();
   },
   update (userId, data) {
     // Only allow API Managers or Administrators to update
@@ -19,7 +19,7 @@ MonitoringSettings.allow({
     const api = Apis.findOne(data.apiId);
 
     // Check if current user can edit the monitoring settings and return this value
-    return api && api.currentUserCanEdit();
+    return api && api.currentUserCanManage();
   },
   remove (userId, data) {
     // Only allow API Managers or Administrators to remove
@@ -28,6 +28,6 @@ MonitoringSettings.allow({
     const api = Apis.findOne(data.apiId);
 
     // Check if current user can delete the monitoring settings and return this value
-    return api && api.currentUserCanEdit();
+    return api && api.currentUserCanManage();
   },
 });
