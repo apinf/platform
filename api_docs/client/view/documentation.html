@@ -1,7 +1,7 @@
 <template name="apiDocumentation">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if api.currentUserCanEdit }}
+      {{# if api.currentUserCanManage }}
           <button
             id="manage-api-documentation"
             class="btn btn-xs btn-info pull-right">
@@ -45,7 +45,7 @@
           {{ else }}
           <i>
             {{_ "apiDocumentation_No_Link_Message" }}
-            {{# if api.currentUserCanEdit }}
+            {{# if api.currentUserCanManage }}
             {{_ "apiDocumentation_No_Link_Manager_Message" }}
             {{/ if }}
           </i>
@@ -76,7 +76,7 @@
             {{ else }}
             <i>
               {{_ "apiDocumentation_No_Swagger_Message" }}
-              {{# if api.currentUserCanEdit }}
+              {{# if api.currentUserCanManage}}
               {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
               {{/ if }}
             </i>
