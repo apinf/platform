@@ -29,13 +29,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> afQuickField name='url' }}
             {{> afQuickField name='entityId' type="hidden" value=entity._id }}
             {{> afQuickField name='entityType' type="hidden" value=entity.relatedMediaType }}
-            <button type="submit"
-                    class="btn btn-primary">
-                    {{_ "relatedMediaPostsForm_Submit" }}
+            <button type="submit" class="btn btn-primary">
+              {{_ "relatedMediaPostsForm_Submit" }}
             </button>
-            <button type="button"
-                    class="btn btn-default" data-dismiss="modal">
-                    {{_ "relatedMediaPostsForm_Cancel" }}
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              {{_ "relatedMediaPostsForm_Cancel" }}
             </button>
           {{/autoForm}}
         </div>
