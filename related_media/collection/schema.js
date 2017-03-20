@@ -55,5 +55,8 @@ const postsSchema = new SimpleSchema({
     },
   },
 });
+
+// Enable translations (i18n)
 postsSchema.i18n('schemas.related_media');
+
 Posts.attachSchema(postsSchema);
