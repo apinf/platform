@@ -146,7 +146,7 @@ Apis.helpers({
     // Otherwise, get average rating
     return this.averageRating;
   },
-  relatedMediaType () {
+  entityType () {
     return 'api';
   },
   relativeUpdatedAt () {

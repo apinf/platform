@@ -38,7 +38,7 @@ Organizations.helpers({
     // Convert createdAt time to format "time ago"
     return moment(this.createdAt).locale(language).fromNow();
   },
-  relatedMediaType () {
+  entityType () {
     return 'organization';
   },
 
