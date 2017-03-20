@@ -7,12 +7,12 @@ import Posts from './';
 
 Posts.allow({
   insert (userId, post) {
-    return post.isPostActionAllow();
+    return post.userCanEditPost();
   },
   remove (userId, post) {
-    return post.isPostActionAllow();
+    return post.userCanEditPost();
   },
   update (userId, post) {
-    return post.isPostActionAllow();
+    return post.userCanEditPost();
   },
 });

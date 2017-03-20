@@ -8,7 +8,7 @@ import Organizations from '/organizations/collection';
 import Posts from './';
 
 Posts.helpers({
-  isPostActionAllow () {
+  userCanEditPost () {
     let currentUserCanManage = false;
     const postEntityId = this.entityId;
     // checking of entity in question
