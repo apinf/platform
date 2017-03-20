@@ -10,7 +10,6 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Roles } from 'meteor/alanning:roles';
 
 // Npm packages imports
 import Apis from '/apis/collection';
@@ -20,10 +19,10 @@ Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Subscribe to proxyApis publicaton
+  // Subscribe to proxy backends data
   instance.subscribe('proxyApis');
-  // Subscribe to managed apis
-  instance.subscribe('userManagedApis');
+  // Subscribe to managed apis names
+  instance.subscribe('userManagedApisName');
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
@@ -105,12 +104,11 @@ Template.dashboard.helpers({
   },
   managedApis () {
     // Check if user is administrator
-    const userIsAdmin = Roles.userIsInRole(Meteor.userId(), ['admin']);
 
     // Get count of managed apis
     const apisCount = Apis.find().count();
 
     // Page can be seen by administrator or user with apis
-    return userIsAdmin || apisCount > 0;
+    return Apis.find().fetch();
   },
 });
