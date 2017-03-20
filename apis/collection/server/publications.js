@@ -33,13 +33,6 @@ Meteor.publish('userManagedApisName', function () {
   return Apis.find(filter, { name: 1 });
 });
 
-Meteor.publish('apiBackend', (apiBackendId) => {
-  // Make sure apiBackendId is a String
-  check(apiBackendId, String);
-
-  return Apis.find({ _id: apiBackendId });
-});
-
 Meteor.publish('apisByIds', (apiIds) => {
   // Make sure apiIds is an Array
   check(apiIds, Array);
