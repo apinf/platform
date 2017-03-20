@@ -55,4 +55,5 @@ const postsSchema = new SimpleSchema({
     },
   },
 });
+postsSchema.i18n('schemas.related_media');
 Posts.attachSchema(postsSchema);
