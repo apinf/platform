@@ -67,7 +67,7 @@ const requireAdminRole = function () {
 
     if (!userIsAdmin) {
       // User is not authorized to access route
-      FlowRouter.go('notAuthorized');
+          FlowRouter.go('notAuthorized');
     }
   } else {
     FlowRouter.go('signIn');
@@ -77,5 +77,5 @@ const requireAdminRole = function () {
 FlowRouter.triggers.enter([redirectToCatalogue], { only: ['forgotPwd'] });
 
 // Routes that require admin role
-FlowRouter.triggers.enter([requireAdminRole], { only: ['settings', 'branding', 'proxies','addApi'] });
+FlowRouter.triggers.enter([requireAdminRole], { only: ['settings', 'branding', 'proxies'] });
 export default signedIn;
