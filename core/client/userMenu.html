@@ -1,3 +1,8 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="userMenu">
   <li class="dropdown">
     <a
@@ -14,28 +19,28 @@
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="{{pathFor 'profile' }}">
+        <a href="{{ pathFor 'profile' }}">
           {{_ "userMenu_profile" }}
         </a>
       </li>
       <li>
-        <a href="{{pathFor 'account' }}">
+        <a href="{{ pathFor 'account' }}">
           {{_ "userMenu_account" }}
         </a>
       </li>
       {{# if isInRole 'admin' }}
       <li>
-        <a href="{{pathFor 'branding' }}">
+        <a href="{{ pathFor 'branding' }}">
           {{_ "userMenu_branding" }}
         </a>
       </li>
       <li>
-        <a href="{{pathFor 'settings' }}">
+        <a href="{{ pathFor 'settings' }}">
           {{_ "userMenu_settings" }}
         </a>
       </li>
       <li>
-        <a href="{{pathFor 'proxies' }}">
+        <a href="{{ pathFor 'proxies' }}">
           {{_ "userMenu_proxies" }}
         </a>
       </li>

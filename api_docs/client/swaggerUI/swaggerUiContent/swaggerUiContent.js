@@ -1,3 +1,8 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
@@ -8,6 +13,7 @@ import SwaggerUi from 'swagger-ui-browserify';
 import _ from 'lodash';
 
 // Collection imports
+import ApiDocs from '/api_docs/collection';
 import ApiKeys from '/api_keys/collection';
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
@@ -74,12 +80,11 @@ Template.swaggerUiContent.onCreated(function () {
     operationsSorter: 'alpha',
     docExpansion: 'none',
     onComplete () {
-      if (proxyHost) {
+      // Make sure proxy host and proxy base path exist
+      if (proxyBasePath && proxyHost) {
         // Replace Swagger host to proxy host
         swagger.api.setHost(proxyHost);
-      }
 
-      if (proxyBasePath) {
         // Replace Swagger base path to proxy base path
         swagger.api.setBasePath(proxyBasePath);
       }
@@ -117,6 +122,8 @@ Template.swaggerUiContent.onCreated(function () {
     const currentApi = Apis.findOne(apiId);
     // Get documentation URL
     const documentationUrl = currentApi.documentation();
+    // Get supported submit methods
+    const submitMethods = ApiDocs.findOne({ apiId }).submit_methods;
 
     // Make sure documentation exists as File or URL
     if (documentationUrl) {
@@ -127,7 +134,7 @@ Template.swaggerUiContent.onCreated(function () {
       }
 
       // Set selected methods in Swagger
-      swagger.setOption('supportedSubmitMethods', currentApi.submit_methods);
+      swagger.setOption('supportedSubmitMethods', submitMethods);
 
       // Load Swagger UI
       swagger.load();

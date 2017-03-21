@@ -1,3 +1,8 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
@@ -21,7 +26,7 @@ export default function deleteProxyBackendConfig (proxyBackend) {
       } else if (error.error === 'publish-error') {
         // Create & show message about publish error
         const publishErrorMessage = `
-        ${TAPi18n.__('proxyBackendForm_publishErrorMessage')}:\n 
+        ${TAPi18n.__('proxyBackendForm_publishErrorMessage')}:\n
         ${error.error}
         `;
         sAlert.error(publishErrorMessage);

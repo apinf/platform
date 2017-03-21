@@ -1,3 +1,8 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiExport">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -18,19 +23,21 @@
       <a class="btn btn-success" id="exportYAMLConfig">
         {{_ "apiExport_yaml_button" }}
       </a>
-      <hr class="panel-hr" />
-      <h3>
-        {{_ "apiExport_proxy_title" }}
-      </h3>
-      <p>
-        {{_ "apiExport_proxy_description" }}
-      </p>
-      <a class="btn btn-success" id="exportJSONProxyConfig">
-        {{_ "apiExport_json_button" }}
-      </a>
-      <a class="btn btn-success" id="exportYAMLProxyConfig">
-        {{_ "apiExport_yaml_button" }}
-      </a>
+      {{# if proxyBackend }}
+        <hr class="panel-hr" />
+        <h3>
+          {{_ "apiExport_proxy_title" }}
+        </h3>
+        <p>
+          {{_ "apiExport_proxy_description" }}
+        </p>
+        <a class="btn btn-success" id="exportJSONProxyConfig">
+          {{_ "apiExport_json_button" }}
+        </a>
+        <a class="btn btn-success" id="exportYAMLProxyConfig">
+          {{_ "apiExport_yaml_button" }}
+        </a>
+      {{/ if }}
     </div>
   </div>
 </template>
