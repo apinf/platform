@@ -20,7 +20,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               title='{{_ "relatedMedia_addButton_help" }}'>
                 {{_ "relatedMedia_addButton" }}
             </button>
-        {{/if}}
+        {{/ if }}
       </h2>
     </div>
     <div class="panel-body">
@@ -28,7 +28,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="row">
             {{# each post in posts }}
               <div class="col-grid-post col-xl-2 col-md-3 col-sm-6 col-xs-12">
-                {{> postItem post=post entity=entity}}
+                {{> postItem post=post entity=entity }}
               </div>
             {{/ each }}
         </div>
@@ -38,7 +38,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               pagination=templatePagination
               limit=4
               containerClass="text-center"
-              onClick=clickEvent}}
+              onClick=clickEvent }}
         </div>
       </div>
     </div>
@@ -56,6 +56,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </button>
         <p>{{_ "relatedMedia_Well_Message" }}</p>
       </div>
-    {{ /if }}
-  {{ /if }}
+    {{/ if }}
+  {{/ if }}
 </template>
