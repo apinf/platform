@@ -100,8 +100,7 @@ Template.navbar.helpers({
       // Get access setting value
       // If access field doesn't exist, these is false. Allow users to add an API on default
       const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
-
-      // Allow user to add an API because not only for admin
+     // Allow user to add an API because not only for admin
       if (!onlyAdminsCanAddApis) {
         return true;
       }
@@ -112,7 +111,6 @@ Template.navbar.helpers({
 
       // Check if current user is admin
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
       return userIsAdmin;
     }
     // Return true because no settings are set
