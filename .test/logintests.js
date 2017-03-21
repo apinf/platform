@@ -1,3 +1,8 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
 var assert = require('chai').assert;
 var webdriver = require('selenium-webdriver'),
     By = require('selenium-webdriver').By,
@@ -31,7 +36,7 @@ test.describe('Login', function() {
         CommonUtils.fillSignInForm(driver, 'testName', robotUser.psswd);
         var errorElement = driver.findElement(By.css('.at-error.alert.alert-danger p'));
         errorElement.getText().then(function(text) {
-           assert.equal(text, 'Login forbidden'); 
+           assert.equal(text, 'Login forbidden');
         });
     });
     test.it('2.3 should show login forbidden message with invalid password', function() {
@@ -39,7 +44,7 @@ test.describe('Login', function() {
         CommonUtils.fillSignInForm(driver, robotUser.email, 'password');
         var errorElement = driver.findElement(By.css('.at-error.alert.alert-danger p'));
         errorElement.getText().then(function(text) {
-           assert.equal(text, 'Login forbidden'); 
+           assert.equal(text, 'Login forbidden');
         });
     });
 });

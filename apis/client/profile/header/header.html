@@ -9,26 +9,36 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Header -->
       <div class="page-head-infoblock">
         {{> viewApiLogo }}
-        <h1 id="api-header">
-          {{ api.name }}
-          {{> viewApiStatus api=api width="0.4" }}
-        </h1>
-        {{> apiLifecycleStatus api=api }}
+        <div class="api-info">
+          <h1 id="api-header">
+            {{ api.name }}
+            {{> viewApiStatus api=api width="0.4" }}
+          </h1>
 
-        {{# unless api.isPublic }}
-          <span class="label label-default">
-            {{_ "viewApiPageHeader_privateLabel_text" }}
-          </span>
-        {{/ unless }}
+          {{> apiLifecycleStatus api=api }}
 
-        <ul class="list-inline view-api-meta-details">
-          <li>
+          {{# unless api.isPublic }}
+            <span class="label label-default">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
+          {{/ unless }}
+
+          <p class="view-api-meta-details">
             <i class="fa fa-user"></i>
             {{ api.getApiManagersByName }}
-          </li>
-        </ul>
-        {{> apiBackendRating api }}
+          </p>
+
+          {{# if api.organization }}
+            <p class="view-api-meta-details">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              <a href="{{ pathFor 'organizationProfile' slug=api.organization.slug }}">
+                {{ api.organization.name }}
+              </a>
+            </p>
+          {{/ if }}
+
+          {{> apiBackendRating api }}
+        </div>
       </div>
+
       <div class="page-head-bookmarks pull-right">
         {{# if currentUser }}
           {{> bookmark api=api }}
@@ -72,8 +82,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           <!-- Metadata -->
           <li id="api-metadata-tab">
-            <a href="#api-metadata" data-toggle="tab">
-              <i class="fa fa-book"></i>
+            <a href="#api-metadata" data-toggle="tab">              <i class="fa fa-book"></i>
               {{_ "viewApiNavigationMenu_metadata" }}
             </a>
           </li>

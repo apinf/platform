@@ -17,7 +17,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
+            <span aria-hidden="true">&times;</span>
+          </button>
           <h4 class="modal-title" id="editMetadataFormLabel">
             <i class="fa fa-book"></i>&nbsp;
             {{_ "editApiMetadata_editApiMetadataForm_title" }}
@@ -30,7 +31,7 @@
             id="editApiMetadataForm"
             type="update"
             doc=metadata
-            omitFields="apiBackendId"
+            omitFields="apiId"
             buttonContent=submitButtonText
           }}
           {{ else }}
@@ -38,7 +39,7 @@
             collection=apiMetadataCollection
             id="editApiMetadataForm"
             type="insert"
-            omitFields="apiBackendId"
+            omitFields="apiId"
             buttonContent=submitButtonText
           }}
           {{/ if }}
