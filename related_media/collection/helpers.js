@@ -23,11 +23,7 @@ Posts.helpers({
       // Check if current user can edit API
       currentUserCanManage = postOrg.currentUserCanManage();
     }
-    if (currentUserCanManage) {
-    // User is allowed to perform action
-      return true;
-    }
-  // User is not allowded to perform action
-    return false;
+
+    return currentUserCanManage;
   },
 });
