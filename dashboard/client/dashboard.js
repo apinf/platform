@@ -12,9 +12,12 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// Npm packages imports
+// Collection imports
 import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
+
+// Npm packages imports
+import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
