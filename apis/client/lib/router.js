@@ -49,3 +49,10 @@ FlowRouter.route('/apis/:_id/', {
     });
   },
 });
+
+FlowRouter.route('/api/:slug/', {
+  name: 'viewApiSlug',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'viewApi' });
+  }
+});
