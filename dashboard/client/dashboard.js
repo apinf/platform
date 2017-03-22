@@ -10,6 +10,7 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Npm packages imports
 import Apis from '/apis/collection';
@@ -83,7 +84,22 @@ Template.dashboard.helpers({
   },
   proxyBackends () {
     // Fetch proxy backends and sort them by name
-    const proxyBackends = ProxyBackends.find({}, { sort: { 'apiUmbrella.name': 1 } }).fetch();
+    const proxyBackendsList = ProxyBackends.find().fetch();
+
+    // Create a new one list
+    const proxyBackends = _.map(proxyBackendsList, (backend) => {
+      // Add API name
+      backend.apiName = backend.apiName();
+
+      return backend;
+    });
+
+    // Get the current language
+    const language = TAPi18n.getLanguage();
+    // Sort the proxy backend list by API name
+    proxyBackends.sort((a, b) => {
+      return a.apiName.localeCompare(b.apiName, language);
+    });
 
     // Get the current selected backend
     const backendParameter = FlowRouter.getQueryParam('backend');
