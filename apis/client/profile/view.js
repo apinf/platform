@@ -28,28 +28,28 @@ Template.viewApi.onCreated(function () {
   instance.subscribe('apiComposite', instance.apiId);
 
   // Subscribe to API feedback items for this API Backend
-  instance.subscribe('apiBackendFeedback', instance.apiId);
+  // instance.subscribe('apiBackendFeedback', instance.apiId);
 
   // Subscribe to API Backlog items for this API Backend
-  instance.subscribe('apiBacklogItems', instance.apiId);
+  // instance.subscribe('apiBacklogItems', instance.apiId);
 
   // Subscribe to public proxy details
   instance.subscribe('proxyCount');
 
   // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', instance.apiId);
+  // instance.subscribe('apiProxySettings', instance.apiId);
 
   // Subscribe to public proxy details for proxy form
   instance.subscribe('publicProxyDetails');
 
   // Subscribe to authorized user public details
-  instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
+  // instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
 
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
 
   // Subscribe to ApiDocs
-  instance.subscribe('apiDocs', instance.apiId);
+  // instance.subscribe('apiDocs', instance.apiId);
 });
 
 Template.viewApi.helpers({
