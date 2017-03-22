@@ -9,7 +9,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{_ "dashboard_mainTitle" }}
     </h1>
     {{# if Template.subscriptionsReady }}
-      {{# if managedApis }}
+      {{# if managedApisCount }}
         {{# if proxyBackendsExists }}
           {{> dashboardChartsFiltering proxyBackends=proxyBackends }}
 

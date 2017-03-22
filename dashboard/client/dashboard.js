@@ -118,13 +118,8 @@ Template.dashboard.helpers({
     // Fetch proxy backends
     return ProxyBackends.find().fetch();
   },
-  managedApis () {
-    // Check if user is administrator
-
-    // Get count of managed apis
-    const apisCount = Apis.find().count();
-
-    // Page can be seen by administrator or user with apis
-    return Apis.find().fetch();
+  managedApisCount () {
+    // Return count of managed APIs
+    return Apis.find().count();
   },
 });
