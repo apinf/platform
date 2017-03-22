@@ -8,8 +8,12 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
+import ApiBacklogItems from '/backlog/collection';
+import ApiDocs from '/api_docs/collection';
+import Feedback from '/feedback/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '/organization_apis/collection';
+import ProxyBackends from '/proxy_backends/collection';
 import Apis from '../';
 
 // eslint-disable-next-line prefer-arrow-callback
@@ -77,6 +81,44 @@ Meteor.publishComposite('apiComposite', (apiId) => {
       return Apis.find({ _id: apiId });
     },
     children: [
+      {
+        find (api) {
+          // Get related API feedback items
+          return Feedback.find({ apiBackendId: api._id });
+        },
+      },
+      {
+        find (api) {
+          // Get related API Backlog items
+          return ApiBacklogItems.find({ apiBackendId: api._id });
+        },
+      },
+      {
+        find (api) {
+          // Get related the public details of an authorized user
+          return Meteor.users.find(
+            { _id: { $in: api.authorizedUserIds } },
+            { fields: { username: 1, emails: 1, _id: 1 } }
+          );
+        },
+      },
+      {
+        find (api) {
+          // Make sure a user can edit this API
+          if (Meteor.userId()) {
+            // Get related proxy backend configuration
+            return ProxyBackends.find({ apiId: api._id });
+          }
+          // Return an empty cursor
+          return [];
+        },
+      },
+      {
+        find (api) {
+          // Get related documentation
+          return ApiDocs.find({ apiId: api._id });
+        },
+      },
       {
         find (api) {
           // Get API organization
