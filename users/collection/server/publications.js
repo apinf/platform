@@ -5,7 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 
 Meteor.publish('allUsersUsernamesOnly', () => {
   return Meteor.users.find({}, { fields: { username: 1 } });
