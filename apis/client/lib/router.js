@@ -29,7 +29,6 @@ FlowRouter.route('/apis/:_id/', {
   action (params) {
     // Get current API Backend ID
     const apiId = params._id;
-
     // Check if API exists
     Meteor.call('checkIfApiExists', apiId, (error, apiExists) => {
       // Check if API exists
@@ -37,7 +36,6 @@ FlowRouter.route('/apis/:_id/', {
         // Ensure current user has permissions to view backend
         Meteor.call('currentUserCanViewApi', apiId, (canViewError, userIsAllowedToViewApi) => {
           if (userIsAllowedToViewApi) {
-            FlowRouter.go('viewApi', { _id: apiId });
             BlazeLayout.render('masterLayout', { main: 'viewApi' });
           } else {
             // User is not allowed to view API
