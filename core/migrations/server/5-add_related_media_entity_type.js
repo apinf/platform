@@ -20,7 +20,7 @@ Migrations.add({
       // Create entityType field and set the value
       Posts.update(post._id, {
         $set: { entityType: 'api', entityId: post.apiId },
-        $unset: { apiId: '' },
+        //$unset: { apiId: '' },
       });
     });
   },
