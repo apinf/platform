@@ -32,23 +32,6 @@ Meteor.publish('proxyBackends', function (proxyId) {
   return [];
 });
 
-Meteor.publish('apiProxySettings', function (apiId) {
-  // Make sure apiId is a String
-  check(apiId, String);
-
-  // Get current userId
-  const userId = this.userId;
-
-  // Check that user is logged in
-  if (userId) {
-    // Return APIs proxy settings
-    return ProxyBackends.find({ apiId });
-  }
-
-  // Complete publication execution
-  return this.ready();
-});
-
 Meteor.publish('proxyApis', function () {
   // TODO: pass proxy Id to this publication ?
 
