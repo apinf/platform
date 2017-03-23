@@ -74,11 +74,11 @@ Meteor.publish('latestPublicApis', (limit) => {
 // eslint-disable-next-line no-new
 new Meteor.Pagination(Apis);
 
-Meteor.publishComposite('apiComposite', (apiId) => {
-  check(apiId, String);
+Meteor.publishComposite('apiComposite', function (slug) {
+  check(slug, String);
   return {
     find () {
-      return Apis.find({ _id: apiId });
+      return Apis.find({ slug });
     },
     children: [
       {
@@ -105,7 +105,7 @@ Meteor.publishComposite('apiComposite', (apiId) => {
       {
         find (api) {
           // Make sure a user can edit this API
-          if (Meteor.userId()) {
+          if (this.userId) {
             // Get related proxy backend configuration
             return ProxyBackends.find({ apiId: api._id });
           }
@@ -137,8 +137,8 @@ Meteor.publishComposite('apiComposite', (apiId) => {
         },
       },
       {
-        find () {
-          return OrganizationApis.find({ apiId });
+        find (api) {
+          return OrganizationApis.find({ apiId: api._id });
         },
       },
     ],
