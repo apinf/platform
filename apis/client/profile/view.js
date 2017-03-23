@@ -22,10 +22,11 @@ Template.viewApi.onCreated(function () {
   const instance = this;
 
   // Get the API Backend ID from the route
-  instance.apiId = FlowRouter.getParam('_id');
+  // instance.apiId = FlowRouter.getParam('_id');
+  instance.slug = FlowRouter.getParam('slug');
 
   // Subscribe to API and related organization
-  instance.subscribe('apiComposite', instance.apiId);
+  instance.subscribe('apiComposite', instance.slug);
 
   // Subscribe to API feedback items for this API Backend
   // instance.subscribe('apiBackendFeedback', instance.apiId);
@@ -57,11 +58,13 @@ Template.viewApi.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Get API ID
-    const apiId = instance.apiId;
+    // Get API slug
+    const slug = instance.slug;
 
     // Get single API Backend
-    const api = Apis.findOne(apiId);
+    const api = Apis.findOne({ slug });
+    // Save the API ID
+    instance.apiId = api._id;
 
     return api;
   },
