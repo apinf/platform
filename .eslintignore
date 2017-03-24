@@ -1,4 +1,5 @@
 apis/client/profile/visibility/lib/bootstrap-switch.js
+api_media/lib/client/jquery.oembed.all.js
 related_media/client/lib/jquery.oembed.all.js
 core/client/lib/bootstrap-select/*
 core/client/lib/chartsjs/*
