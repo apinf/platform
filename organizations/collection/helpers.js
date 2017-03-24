@@ -46,5 +46,4 @@ Organizations.helpers({
   entityType () {
     return 'organization';
   },
-
 });
