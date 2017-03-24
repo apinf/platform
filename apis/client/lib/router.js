@@ -24,18 +24,19 @@ FlowRouter.route('/apis/import', {
   },
 });
 
-FlowRouter.route('/apis/:_id/', {
+FlowRouter.route('/apis/:slug/', {
   name: 'viewApi',
   action (params) {
     // Get current API Backend ID
-    const apiId = params._id;
+    const slug = params.slug;
+
     // Check if API exists
-    Meteor.call('checkIfApiExists', apiId, (error, apiExists) => {
+    Meteor.call('apiExists', slug, (error, apiExists) => {
       // Check if API exists
       if (apiExists) {
         // Ensure current user has permissions to view backend
-        Meteor.call('currentUserCanViewApi', apiId, (canViewError, userIsAllowedToViewApi) => {
-          if (userIsAllowedToViewApi) {
+        Meteor.call('currentUserCanViewApi', slug, (canViewError, userCanViewApi) => {
+          if (userCanViewApi) {
             BlazeLayout.render('masterLayout', { main: 'viewApi' });
           } else {
             // User is not allowed to view API
@@ -48,11 +49,4 @@ FlowRouter.route('/apis/:_id/', {
       }
     });
   },
-});
-
-FlowRouter.route('/api/:slug/', {
-  name: 'viewApiSlug',
-  action () {
-    BlazeLayout.render('masterLayout', { main: 'viewApi' });
-  }
 });
