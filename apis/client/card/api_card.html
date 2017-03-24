@@ -11,7 +11,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{> viewApiLogo api=api }}
         </div>
         <div class="media-body">
-          <a href="{{ pathFor 'viewApi' _id=api._id }}"
+          <a href="{{ pathFor 'viewApi' slug=api.slug }}"
              class="generic-card-name">
             {{ api.name }}
             {{> viewApiStatus api=api width="0.6" }}
