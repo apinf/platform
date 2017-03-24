@@ -10,23 +10,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title">
-            {{_ "relatedMedia_deletePostConfirmation_modalTitle_text" }}
+            {{_ "deletePostConfirmation_modalTitle_text" }}
           </h3>
         </div>
         <div class="modal-body">
-          <div id="confirmDelete">
-            <p>
-              {{_ "relatedMedia_modalConfirmDelete_deletePostConfirmation" }}
-              &nbsp;
-              {{ post.title }}?
-            </p>
-            <p>
-              <span class="text-danger">
-                {{_ "relatedMedia_modalConfirmDeleteNote_deletePostConfirmation" }}
-              </span>
-              {{_ "relatedMedia_modalDeletePostConfirmation_confirmDeleteInformation" }}
-            </p>
-          </div>
+          <p>
+            {{_ "deletePostConfirmation_text_confirmDeleteMessage" title=post.title }}
+          </p>
+          <p>
+            <span class="text-danger">
+              {{_ "relatedMedia_modalConfirmDeleteNote_deletePostConfirmation" }}
+            </span>
+            {{_ "relatedMedia_modalDeletePostConfirmation_confirmDeleteInformation" }}
+          </p>
         </div>
         <div class="modal-footer">
           <div id="confirmFooter">
