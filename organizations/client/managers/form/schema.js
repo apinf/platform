@@ -18,14 +18,19 @@ const managerSchema = new SimpleSchema({
   organizationNumOfPagesField: {
     type: String,
     optional: true,
-    allowedValues: [
-      '4',
-      '8',
-      '12',
-      '16',
-      '20',
-      '24',
-    ],
+    autoform: {
+      type: 'select',
+      options () {
+        return [
+          { label: '4', value: 4 },
+          { label: '8', value: 8 },
+          { label: '12', value: 12 },
+          { label: '16', value: 16 },
+          { label: '20', value: 20 },
+          { label: '24', value: 24 },
+        ];
+      },
+    },
   },
 });
 
