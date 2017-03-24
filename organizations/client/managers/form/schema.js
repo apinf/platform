@@ -15,6 +15,18 @@ const managerSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Email,
   },
+  organizationNumOfPagesField: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      '4',
+      '8',
+      '12',
+      '16',
+      '20',
+      '24',
+    ],
+  },
 });
 
 export default managerSchema;
