@@ -16,7 +16,7 @@ AutoForm.hooks({
     before: {
       insert (backlogItem) {
         // Get related API document
-        const api = Apis.findOne({ slug: FlowRouter.getParam('slug')});
+        const api = Apis.findOne({ slug: FlowRouter.getParam('slug') });
 
         // Attach API ID to backlog item
         backlogItem.apiBackendId = api._id;

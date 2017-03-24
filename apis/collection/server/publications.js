@@ -74,6 +74,7 @@ Meteor.publish('latestPublicApis', (limit) => {
 // eslint-disable-next-line no-new
 new Meteor.Pagination(Apis);
 
+// eslint-disable-next-line prefer-arrow-callback
 Meteor.publishComposite('apiComposite', function (slug) {
   check(slug, String);
   return {
