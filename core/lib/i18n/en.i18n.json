@@ -492,7 +492,7 @@
   "relatedMedia_addButton": "Add related media",
   "relatedMedia_Title": "Related Media",
   "relatedMedia_Well_Message": "You don't have any media related to this API",
-  "relatedMediaPostsForm_modalTitle_Add_Edit": "Related Media",
+  "relatedMediaPostsForm_modalTitle_relatedMedia": "Related Media",
   "relatedMediaPostsForm_Cancel": "Cancel",
   "relatedMediaPostsForm_Submit": "Add related content",
   "relatedMediaPostsForm_Text": "You can add any content that user can click and view in the original source. You can add blog posts, videos, presentation, etc as contents.",
