@@ -66,18 +66,6 @@ Organizations.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  organizationNumOfPagesField: {
-    type: String,
-    optional: true,
-    allowedValues: [
-      '4',
-      '8',
-      '12',
-      '16',
-      '20',
-      '24',
-    ],
-  },
   slug: {
     type: String,
     optional: false,
