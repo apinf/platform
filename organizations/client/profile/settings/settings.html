@@ -7,23 +7,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {{_ "organizationManagersList_title" }}
-            </h3>
-          </div>
-          <div class="panel-body">
-            <h3>
-              {{_ "organizationSettings_uploadLogo_heading" }}
-            </h3>
-            <p>
-              {{_ "organizationSettings_uploadLogoText" }}
-            </p>
-            {{> uploadOrganizationLogo organization=organization }}
-            <hr class="panel-hr" />
-          </div>
-        </div>
         {{> orgSettingsGeneral organization=organization }}
         {{> orgSettingsSomePlatforms organization=organization }}
         {{> orgSettingsContactInfo organization=organization }}
