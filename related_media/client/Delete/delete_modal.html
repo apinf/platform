@@ -24,15 +24,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "deletePostConfirmation_text_confirmDeleteInformation" }}
           </p>
         </div>
-        <div class="modal-footer">
-          <div id="confirmFooter">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-              {{_ "relatedMedia_modalCancelButton_deletePostConfirmation" }}
-            </button>
-            <button type="button" class="btn btn-danger" id="modal-delete-post">
-              {{_ "relatedMedia_modalDeleteButton_deletePostConfirmation" }}
-            </button>
-          </div>
+        <div class="modal-footer id="confirmFooter">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{_ "deletePostConfirmation_buttonText_cancel" }}
+          </button>
+          <button type="button" class="btn btn-danger" id="modal-delete-post">
+            {{_ "relatedMedia_modalDeleteButton_deletePostConfirmation" }}
+          </button>
         </div>
       </div>
     </div>
