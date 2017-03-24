@@ -26,7 +26,7 @@
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '\/'",
-  "addOrganizationManagerForm_title": "Add Manager",
+  "addOrganizationManagerForm_title": "Organization Managers",
   "addOrganizationManagerForm_description": "An organization manager has the same rights as the original API manager to edit, delete the API after an API has been connected to an organization.",
   "addOrganizationManagerForm_button": "Add",
   "organizationManagerForm_managerAlreadyExist_errorText": "User is already a manager of this organization.",
