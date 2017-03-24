@@ -485,7 +485,7 @@
   "deletePostConfirmation_modalTitle_text": "Delete Post",
   "deletePostConfirmation_text_confirmDeleteMessage": "Are you sure you want to delete __title__?",
   "deletePostConfirmation_text_confirmDeleteNote": "NOTE:",
-  "relatedMedia_modalDeletePostConfirmation_confirmDeleteInformation": "This action cannot be undone!",
+  "deletePostConfirmation_text_confirmDeleteInformation": "This action cannot be undone!",
   "relatedMedia_modalCancelButton_deletePostConfirmation": "Cancel",
   "relatedMedia_modalDeleteButton_deletePostConfirmation": "Delete",
   "relatedMedia_addButton_help": "Add embedded related media content",
