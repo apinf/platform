@@ -22,10 +22,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </p>
             {{> uploadOrganizationLogo organization=organization }}
             <hr class="panel-hr" />
-            {{> addOrganizationManagerForm organization=organization }}
-            {{> organizationManagersList organization=organization }}
           </div>
         </div>
+        {{> orgSettingsGeneral organization=organization }}
+        {{> orgSettingsSomePlatforms organization=organization }}
+        {{> orgSettingsContactInfo organization=organization }}
+        {{> orgSettingsContentManagement organization=organization }}
+        {{> addOrganizationManagerForm organization=organization }}
+        {{> organizationManagersList organization=organization }}
         {{> organizationSettingsDelete organization=organization }}
       </div>
     </div>
