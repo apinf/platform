@@ -7,21 +7,38 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <h3 class="organizationSettingTitle">
     {{_ "orgSettingsGeneral_title" }}
   </h3>
+
   {{# autoForm
-    schema=managerSchema
-    id="organizationManagerForm"
-    class="form-inline"
-    type="method"
-    meteormethod="addOrganizationManagerByEmail"}}
+    collection=OrganizationsCollection
+    id="organizationForm"
+    collection=organizationsCollection
+    type=formType
+    doc=organization
+  }}
 
-    {{> afQuickField name='email' }}
-    {{> afQuickField name='organizationId' value=organization._id type="hidden" }}
+  <div itemscope itemtype="http://schema.org/Organization">
+    <span itemprop="name">
+        {{> afQuickField name='name' }}
+    </span>
+    <span itemprop="url">
+        {{> afQuickField name='url' }}
+    </span>
+    <span itemprop="description">
+        {{> afQuickField name='description' }}
+    </span>
+  </div>
 
-    <button type="submit" class="btn btn-primary">
-      {{_ "orgSettingsGeneral_saveButton_title" }}
-    </button>
-    <button type="submit" class="btn btn-primary">
-      {{_ "orgSettingsGeneral_cancelButton_title" }}
-    </button>
+  {{_ "organizationSettings_uploadLogo_heading" }}
+  <p>
+    {{_ "organizationSettings_uploadLogoText" }}
+  </p>
+  {{> uploadOrganizationLogo organization=organization }}
+
+  <button type="submit" class="btn btn-success">
+    {{_ "orgSettingsGeneral_saveButton_text" }}
+  </button>
+  <button type="submit" class="btn btn-default">
+    {{_ "orgSettingsGeneral_cancelButton_text" }}
+  </button>
   {{/ autoForm }}
 </template>
