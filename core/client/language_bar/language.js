@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { T9n } from 'meteor/softwarerero:accounts-t9n';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -22,6 +23,7 @@ Template.languageBar.onCreated(function () {
   if (selectedLanguage) {
     // Update site language with selected language
     TAPi18n.setLanguage(selectedLanguage);
+    T9n.setLanguage(selectedLanguage);
   } else {
     // Set English by default value
     Session.setDefaultPersistent('lang', 'en');
@@ -79,5 +81,6 @@ Template.languageBar.events({
 
     // Update site language with selected language
     TAPi18n.setLanguage(language);
+    T9n.setLanguage(language);
   },
 });
