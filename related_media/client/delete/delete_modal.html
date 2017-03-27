@@ -1,0 +1,38 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="deletePostConfirmation">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">
+            {{_ "deletePostConfirmation_modalTitle_text" }}
+          </h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            {{_ "deletePostConfirmation_text_confirmDeleteMessage" title=post.title }}
+          </p>
+          <p>
+            <span class="text-danger">
+              {{_ "deletePostConfirmation_text_confirmDeleteNote" }}
+            </span>
+            {{_ "deletePostConfirmation_text_confirmDeleteInformation" }}
+          </p>
+        </div>
+        <div class="modal-footer" id="confirmFooter">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{_ "deletePostConfirmation_buttonText_cancel" }}
+          </button>
+          <button type="button" class="btn btn-danger" id="modal-delete-post">
+            {{_ "deletePostConfirmation_buttonText_delete" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,3 +1,8 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiCard">
   <div class="generic-card panel panel-default">
     <div class="panel-body">
@@ -6,7 +11,7 @@
           {{> viewApiLogo api=api }}
         </div>
         <div class="media-body">
-          <a href="{{ pathFor 'viewApi' _id=api._id }}"
+          <a href="{{ pathFor 'viewApi' slug=api.slug }}"
              class="generic-card-name">
             {{ api.name }}
             {{> viewApiStatus api=api width="0.6" }}
@@ -65,11 +70,13 @@
           </div>
         </li>
         {{/ if }}
-        <li class="pull-right">
-          <span class="generic-card-created">
-            {{_ "latestApiBackends_DateAdded" api.relativeCreatedAt }}
-          </span>
-        </li>
+        {{# if api.created_at }}
+          <li class="pull-right">
+            <span class="generic-card-created" title='{{ localeFormatDate api.created_at }}'>
+              {{ dateInTimeAgoFormat api.created_at }}
+            </span>
+          </li>
+        {{/ if }}
       </ul>
     </div>
   </div>

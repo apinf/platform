@@ -1,41 +1,37 @@
-// Meteor package imports
-import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Apinf imports
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { Counts } from 'meteor/tmeasday:publish-counts';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Collection imports
+import ApiBacklogItems from '/backlog/collection';
 import Apis from '/apis/collection';
 import Feedback from '/feedback/collection';
-import ApiBacklogItems from '/backlog/collection';
 import ProxyBackends from '/proxy_backends/collection';
+import ApiDocs from '/api_docs/collection';
 
 Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
   // Get the API Backend ID from the route
-  instance.apiId = FlowRouter.getParam('_id');
+  instance.slug = FlowRouter.getParam('slug');
 
   // Subscribe to API and related organization
-  instance.subscribe('apiComposite', instance.apiId);
-
-  // Subscribe to API feedback items for this API Backend
-  instance.subscribe('apiBackendFeedback', instance.apiId);
-
-  // Subscribe to API Backlog items for this API Backend
-  instance.subscribe('apiBacklogItems', instance.apiId);
+  instance.subscribe('apiComposite', instance.slug);
 
   // Subscribe to public proxy details
   instance.subscribe('proxyCount');
 
-  // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', instance.apiId);
-
   // Subscribe to public proxy details for proxy form
   instance.subscribe('publicProxyDetails');
-
-  // Subscribe to authorized user public details
-  instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
 
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
@@ -46,13 +42,27 @@ Template.viewApi.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
+    // Get API slug
+    const slug = instance.slug;
+
+    // Get single API Backend
+    const api = Apis.findOne({ slug });
+    // Save the API ID
+    instance.apiId = api._id;
+
+    return api;
+  },
+  apiDoc () {
+    // Get reference to template instance
+    const instance = Template.instance();
+
     // Get API ID
     const apiId = instance.apiId;
 
     // Get single API Backend
-    const api = Apis.findOne(apiId);
+    const apiDoc = ApiDocs.findOne({ apiId });
 
-    return api;
+    return apiDoc;
   },
   proxyBackend () {
     // Get reference to template instance

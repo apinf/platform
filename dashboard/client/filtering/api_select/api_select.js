@@ -1,7 +1,15 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
 
 Template.apiSelectPicker.helpers({
   // TODO: Update api Umbrella Admin case for multiple instance
@@ -28,8 +36,7 @@ Template.apiSelectPicker.onRendered(function () {
   instance.autorun(() => {
     // Get Proxy Backend ID parameter from URL,
     const proxyBackendId = FlowRouter.getQueryParam('backend');
-
-    // Change value of proxy backend select, if URL parameter is present
+      // Change value of proxy backend select, if URL parameter is present
     if (proxyBackendId) {
       // Update the select menu to match the Proxy Backend ID
       instance.$('#proxy-backend-select').val(proxyBackendId);

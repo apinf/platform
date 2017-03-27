@@ -1,3 +1,8 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiSelectPicker">
   <select
     id="proxy-backend-select"
@@ -7,7 +12,7 @@
     <optgroup label="{{_ 'apiSelectPicker_myApis' }}" >
       {{# each backend in proxyBackends }}
         <option value="{{ backend._id }}" >
-          {{ backend.apiUmbrella.name }}
+              {{ backend.apiName }}
         </option>
       {{/ each }}
     </optgroup>

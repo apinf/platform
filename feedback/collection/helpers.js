@@ -1,7 +1,17 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Npm packages imports
+import ss from 'simple-statistics';
+
+// Collection imports
 import Apis from '/apis/collection';
 import FeedbackVotes from '/feedback_votes/collection';
-import ss from 'simple-statistics';
 import Feedback from './';
 
 Feedback.helpers({
@@ -28,7 +38,7 @@ Feedback.helpers({
     /* 2. Users that can edit API are allowed to edit feedback */
     // Get API by feedback's apiBackendId
     const api = Apis.findOne(this.apiBackendId);
-    if (api && api.currentUserCanEdit()) {
+    if (api && api.currentUserCanManage()) {
       return true;
     }
     // Otherwise not allowed to edit feedback

@@ -1,14 +1,26 @@
-import { check } from 'meteor/check';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
+import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
-import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
-import { ApiUmbrellaWeb } from 'meteor/apinf:api-umbrella';
 
-import _ from 'lodash';
+// APINF imports
+import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
 
 Meteor.methods({
   createApiUmbrellaWeb (proxyId) {

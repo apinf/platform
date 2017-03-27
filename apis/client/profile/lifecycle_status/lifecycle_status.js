@@ -1,4 +1,12 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.apiLifecycleStatus.helpers({
@@ -35,22 +43,13 @@ Template.apiLifecycleStatus.helpers({
     return labelType;
   },
   lifecycleStatus () {
-    // Get reference to template instahce
+    // Get reference to template instance
     const templateInstance = Template.instance();
 
-    let statusText;
+    // Get lifecycle status from API document
+    const status = templateInstance.data.api.lifecycleStatus;
 
-    if (templateInstance.data.api && templateInstance.data.api.lifecycleStatus) {
-      // Get lifecycle status from API document
-      const status = templateInstance.data.api.lifecycleStatus;
-
-      // Get status text translation
-      statusText = TAPi18n.__(`apiLifecycleStatus_labelText_${status}`);
-    } else {
-      // Get translation text for Unknown lifecycle status
-      statusText = TAPi18n.__('apiLifecycleStatus_labelText_unknown');
-    }
-
-    return statusText;
+    // Get status text translation
+    return TAPi18n.__(`apiLifecycleStatus_labelText_${status}`);
   },
 });

@@ -14,4 +14,4 @@ before_script:
   - npm run-script lint
 
 script:
-  - ./scripts/docker_build.sh
+  - ./.scripts/docker_build.sh

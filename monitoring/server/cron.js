@@ -1,11 +1,21 @@
-import { check } from 'meteor/check';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
-import { MonitoringSettings } from '/monitoring/collection';
-import Apis from '/apis/collection';
-
+// Npm packages imports
 import _ from 'lodash';
+
+// Collection imports
+import Apis from '/apis/collection';
+import { MonitoringSettings } from '/monitoring/collection';
 
 Meteor.methods({
   startCron (apiId, url) {
@@ -63,4 +73,3 @@ Meteor.methods({
     });
   },
 });
-

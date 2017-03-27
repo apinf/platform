@@ -1,19 +1,19 @@
-import { Template } from 'meteor/templating';
-import ProxyBackends from '/proxy_backends/collection';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-import saveAs from 'meteor/pfafman:filesaver';
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { saveAs } from 'meteor/pfafman:filesaver';
+
+// Npm packages imports
 import jsyaml from 'js-yaml';
 
-Template.apiExport.onCreated(function () {
-  // Get reference to template instance
-  const instance = this;
-
-  // Get the API Backend ID from data context
-  const apiId = instance.data.api._id;
-
-  // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', apiId);
-});
+// Collection imports
+import ProxyBackends from '/proxy_backends/collection';
 
 Template.apiExport.events({
   'click #exportJSONConfig': function (event, templateInstance) {

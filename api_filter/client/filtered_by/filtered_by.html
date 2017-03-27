@@ -1,0 +1,17 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiFilteredBy">
+  {{# if selectedOption }}
+    <span>
+      <i>
+        {{_ 'apiFilteredBy_text_filteredBy' tag=selectedOption }}
+      </i>
+      <a id="clear-all">
+        {{_ 'apiFilteredBy_buttonText_clear' }}
+      </a>
+    </span>
+  {{/ if }}
+</template>

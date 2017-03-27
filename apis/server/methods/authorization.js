@@ -1,8 +1,17 @@
-import { Accounts } from 'meteor/accounts-base';
-import { check } from 'meteor/check';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
+import { Accounts } from 'meteor/accounts-base';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
+// Collection imports
 import Apis from '/apis/collection';
 
 Meteor.methods({
@@ -28,12 +37,12 @@ Meteor.methods({
       Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
     }
   },
-  currentUserCanViewApi (apiId) {
+  currentUserCanViewApi (slug) {
     // Make sure apiId is a string
-    check(apiId, String);
+    check(slug, String);
 
     // Get API
-    const api = Apis.findOne(apiId);
+    const api = Apis.findOne({ slug });
 
     // Check if user can view
     return api && api.currentUserCanView();
@@ -46,6 +55,6 @@ Meteor.methods({
     const api = Apis.findOne(apiId);
 
     // Check if user can edit
-    return api && api.currentUserCanEdit();
+    return api && api.currentUserCanManage();
   },
 });

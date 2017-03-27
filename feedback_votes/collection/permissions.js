@@ -1,3 +1,9 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Collection imports
 import Apis from '/apis/collection';
 import Feedback from '/feedback/collection';
 import FeedbackVotes from './';
@@ -32,7 +38,7 @@ FeedbackVotes.allow({
         // Get api by feedback apiBackendId
         const api = Apis.findOne(feedback.apiBackendId);
         // Return true/false based on edit permissions of api
-        return (api && api.currentUserCanEdit());
+        return (api && api.currentUserCanManage());
       }
     }
     // Otherwise deny remove vote

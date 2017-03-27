@@ -1,29 +1,44 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="viewApiPageHeader">
   <div class="page-head-topblock">
     <div class="container">
       <!-- Header -->
       <div class="page-head-infoblock">
         {{> viewApiLogo }}
-        <h1 id="api-header">
-          {{ api.name }}
-          {{> viewApiStatus api=api width="0.4" }}
-        </h1>
-        {{> apiLifecycleStatus api=api }}
+        <div class="api-info">
+          <h1 id="api-header">
+            {{ api.name }}
+            {{> viewApiStatus api=api width="0.4" }}
+          </h1>
 
-        {{# unless api.isPublic }}
-          <span class="label label-default">
-            {{_ "viewApiPageHeader_privateLabel_text" }}
-          </span>
-        {{/ unless }}
+          {{> apiLifecycleStatus api=api }}
 
-        <ul class="list-inline view-api-meta-details">
-          <li>
+          {{# unless api.isPublic }}
+            <span class="label label-default">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
+          {{/ unless }}
+
+          <p class="view-api-meta-details">
             <i class="fa fa-user"></i>
             {{ api.getApiManagersByName }}
-          </li>
-        </ul>
-        {{> apiBackendRating api }}
+          </p>
+
+          {{# if api.organization }}
+            <p class="view-api-meta-details">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              <a href="{{ pathFor 'organizationProfile' slug=api.organization.slug }}">
+                {{ api.organization.name }}
+              </a>
+            </p>
+          {{/ if }}
+
+          {{> apiBackendRating api }}
+        </div>
       </div>
+
       <div class="page-head-bookmarks pull-right">
         {{# if currentUser }}
           {{> bookmark api=api }}
@@ -89,7 +104,7 @@
             </a>
           </li>
 
-          {{ # if api.currentUserCanEdit }}
+          {{# if api.currentUserCanManage }}
             <!-- Export -->
             <li id="api-export-tab">
               <a href="#api-export" data-toggle="tab">

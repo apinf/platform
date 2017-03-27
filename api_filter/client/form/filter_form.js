@@ -1,19 +1,35 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.apisFilterForm.onRendered(function () {
-  // Get the query parameter
-  const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');
+  this.autorun(() => {
+    // Get the query parameter
+    const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');
 
-  // If parameter exists
-  if (lifecycleParameter) {
-    // Update the select menu to match lifecycle phase
-    this.$('[name=lifecycle]').val(lifecycleParameter);
+    // If parameter exists
+    if (lifecycleParameter) {
+      // Update the select menu to match lifecycle phase
+      this.$('[name=lifecycle]').val(lifecycleParameter);
 
-    // Add box-shadow for filter icon to show that filter is active
-    $('#filter-icon').addClass('active');
-  }
+      // Add active class for the filter icon to show that filter is active
+      $('#filter-icon').addClass('active');
+    } else {
+      // Set (Select one) option
+      this.$('[name=lifecycle]').val('');
+
+      // Delete active from the filter icon to show that filter isn't active
+      $('#filter-icon').removeClass('active');
+    }
+  });
 });
 
 Template.apisFilterForm.helpers({
@@ -45,26 +61,19 @@ Template.apisFilterForm.events({
   'click #filter-apis': (event, templateInstance) => {
     if (templateInstance.lifecycle) {
       const tag = templateInstance.lifecycle;
+
       // Save selected filter on query params
       FlowRouter.setQueryParams({ lifecycle: tag });
-
-      // Add box-shadow for filter icon to show that filter is active
-      $('#filter-icon').addClass('active');
     } else {
       // Delete query params
       FlowRouter.setQueryParams({ lifecycle: null });
-
-      // Delete box-shadow from filter icon to show that filter isn't active
-      $('#filter-icon').removeClass('active');
     }
+
     // Hide filter form
     $('.filter-popup').toggleClass('filter-popup-visible');
   },
   'click [type=reset]': () => {
     // Delete query parameter
     FlowRouter.setQueryParams({ lifecycle: null });
-
-    // Delete box-shadow from filter icon to show that filter isn't active
-    $('#filter-icon').removeClass('active');
   },
 });

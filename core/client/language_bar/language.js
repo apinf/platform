@@ -1,6 +1,17 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { T9n } from 'meteor/softwarerero:accounts-t9n';
+
+// Npm packages imports
 import _ from 'lodash';
 
 // eslint-disable-next-line prefer-arrow-callback
@@ -12,6 +23,7 @@ Template.languageBar.onCreated(function () {
   if (selectedLanguage) {
     // Update site language with selected language
     TAPi18n.setLanguage(selectedLanguage);
+    T9n.setLanguage(selectedLanguage);
   } else {
     // Set English by default value
     Session.setDefaultPersistent('lang', 'en');
@@ -69,5 +81,6 @@ Template.languageBar.events({
 
     // Update site language with selected language
     TAPi18n.setLanguage(language);
+    T9n.setLanguage(language);
   },
 });

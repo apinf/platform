@@ -1,24 +1,15 @@
+// Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
+
+// Collection imports
 import ApiMetadata from '/metadata/collection';
+import contactPhone from '/organizations/collection/regex';
 
 ApiMetadata.schema = new SimpleSchema({
-  // TODO: migrate to use 'apiId' instead of 'apiBackendId'
-  apiBackendId: {
+  apiId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-  },
-  organization: {
-    type: Object,
-    optional: true,
-  },
-  'organization.name': {
-    type: String,
-    optional: true,
-  },
-  'organization.description': {
-    type: String,
-    optional: true,
   },
   contact: {
     type: Object,
@@ -30,10 +21,12 @@ ApiMetadata.schema = new SimpleSchema({
   },
   'contact.phone': {
     type: String,
+    regEx: contactPhone,
     optional: true,
   },
   'contact.email': {
     type: String,
+    regEx: SimpleSchema.RegEx.Email,
     optional: true,
   },
   service: {

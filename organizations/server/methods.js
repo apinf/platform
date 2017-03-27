@@ -1,15 +1,23 @@
-// Meteor packages import
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
-import { Accounts } from 'meteor/accounts-base';
 
-// APINF collections import
+// Meteor contributed packages imports
+import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
+
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import OrganizationApis from '/organization_apis/collection';
 import Organizations from '/organizations/collection';
-
-import _ from 'lodash';
 
 Meteor.methods({
   getCurrentUserUnlinkedApis () {

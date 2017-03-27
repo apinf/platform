@@ -1,6 +1,14 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ApiV1 from '/core/server/api';
-import _ from 'lodash';
 
 // Generates: "GET all" /rest-api/v1/apis and "GET one"
 // /rest-api/v1/apis/:id for Apis collection

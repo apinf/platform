@@ -1,20 +1,32 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Roles } from 'meteor/alanning:roles';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
+
+// Npm packages imports
+import _ from 'lodash';
 
 Template.dashboard.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Subscribe to proxyApis publicaton
+  // Subscribe to proxy backends data
   instance.subscribe('proxyApis');
-  // Subscribe to managed apis
-  instance.subscribe('userManagedApis');
+  // Subscribe to managed apis names
+  instance.subscribe('userManagedApisName');
 
   // Keeps ES data for charts
   instance.chartData = new ReactiveVar();
@@ -59,7 +71,6 @@ Template.dashboard.onCreated(function () {
                 // Update reactive variable
                 instance.chartData.set(chartData);
               })
-              // eslint-disable-next-line no-console
               .catch(err => { return console.error(err); });
           }
         });
@@ -76,7 +87,22 @@ Template.dashboard.helpers({
   },
   proxyBackends () {
     // Fetch proxy backends and sort them by name
-    const proxyBackends = ProxyBackends.find({}, { sort: { 'apiUmbrella.name': 1 } }).fetch();
+    const proxyBackendsList = ProxyBackends.find().fetch();
+
+    // Create a new one list
+    const proxyBackends = _.map(proxyBackendsList, (backend) => {
+      // Add API name
+      backend.apiName = backend.apiName();
+
+      return backend;
+    });
+
+    // Get the current language
+    const language = TAPi18n.getLanguage();
+    // Sort the proxy backend list by API name
+    proxyBackends.sort((a, b) => {
+      return a.apiName.localeCompare(b.apiName, language);
+    });
 
     // Get the current selected backend
     const backendParameter = FlowRouter.getQueryParam('backend');
@@ -95,14 +121,8 @@ Template.dashboard.helpers({
     // Fetch proxy backends
     return ProxyBackends.find().fetch();
   },
-  managedApis () {
-    // Check if user is administrator
-    const userIsAdmin = Roles.userIsInRole(Meteor.userId(), ['admin']);
-
-    // Get count of managed apis
-    const apisCount = Apis.find().count();
-
-    // Page can be seen by administrator or user with apis
-    return userIsAdmin || apisCount > 0;
+  managedApisCount () {
+    // Return count of managed APIs
+    return Apis.find().count();
   },
 });

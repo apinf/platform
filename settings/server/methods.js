@@ -1,10 +1,19 @@
-// Meteor packages import
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
-// Apinf import
+// APINF imports
 import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
+
+// Collection imports
 import Settings from '../collection';
 
 Meteor.methods({
@@ -79,6 +88,7 @@ Meteor.methods({
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
 
+      // Show an error message
       throw new Meteor.Error(message);
     }
   },

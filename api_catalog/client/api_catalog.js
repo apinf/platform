@@ -1,9 +1,22 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
-import { Roles } from 'meteor/alanning:roles';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ApiBookmarks from '/bookmarks/collection';
+
+import 'locale-compare-polyfill';
 
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
@@ -50,7 +63,7 @@ Template.apiCatalog.onCreated(function () {
   // Subscribe to bookmarks of current user
   instance.subscribe('userApiBookmarks');
 
-  // Watch for changes in the sort and filter settings
+  // Watch for changes in the sort settings
   instance.autorun(() => {
     // Check URL parameter for sorting
     const sortByParameter = FlowRouter.getQueryParam('sortBy');
@@ -58,12 +71,6 @@ Template.apiCatalog.onCreated(function () {
     // Check URL parameter for sort direction and convert to integer
     const sortDirectionParameter =
       FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
-
-    // Check URL parameter for filtering
-    const filterByParameter = FlowRouter.getQueryParam('filterBy');
-
-    // Check URL parameter for filtering by lifecycle status
-    const lifecycleStatusParameter = FlowRouter.getQueryParam('lifecycle');
 
     // Create a object for storage sorting parameters
     const sort = {};
@@ -80,6 +87,9 @@ Template.apiCatalog.onCreated(function () {
     instance.pagination.sort(sort);
 
     let currentFilters = filters;
+
+    // Check URL parameter for filtering
+    const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
     // Filtering available for registered users
     if (userId) {
@@ -117,6 +127,9 @@ Template.apiCatalog.onCreated(function () {
       currentFilters = { isPublic: true };
     }
 
+    // Check URL parameter for filtering by lifecycle status
+    const lifecycleStatusParameter = FlowRouter.getQueryParam('lifecycle');
+
     // Checking of filter bu lifecycle status was set
     if (lifecycleStatusParameter) {
       // Set filter
@@ -141,8 +154,20 @@ Template.apiCatalog.onRendered(function () {
 
 Template.apiCatalog.helpers({
   apis () {
-    // Return items of apis collection via Pagination
-    return Template.instance().pagination.getPage();
+    // Get apis collection via Pagination
+    const apis = Template.instance().pagination.getPage();
+    // Get the language
+    const language = TAPi18n.getLanguage();
+    // Get the sort via Pagination
+    const sort = Template.instance().pagination.sort();
+    // When sorted by name
+    if (sort.name) {
+      // use custom sort function with i18n support
+      apis.sort((a, b) => {
+        return a.name.localeCompare(b.name, language) * sort.name;
+      });
+    }
+    return apis;
   },
   templatePagination () {
     // Get reference of pagination
@@ -159,5 +184,17 @@ Template.apiCatalog.helpers({
     const viewMode = FlowRouter.getQueryParam('viewMode');
 
     return (viewMode === 'table');
+  },
+  apisCount () {
+    return Template.instance().pagination.totalItems();
+  },
+});
+
+Template.apiCatalog.events({
+  'click [data-lifecycle]': (event) => {
+    // Get value of data-lifecycle
+    const selectedTag = event.currentTarget.dataset.lifecycle;
+    // Set value in query parameter
+    FlowRouter.setQueryParams({ lifecycle: selectedTag });
   },
 });

@@ -1,7 +1,12 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="backlogItem">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if api.currentUserCanEdit }}
+      {{# if api.currentUserCanManage }}
       <div class="btn-group pull-right">
         <button class="edit-backlog-item btn btn-primary btn-xs">
           {{_ "backlogItem_editButton_text" }}

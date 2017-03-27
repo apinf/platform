@@ -1,9 +1,17 @@
-// Meteor imports
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
+// Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// Utility imports
+// Npm packages imports
 import ss from 'simple-statistics';
 import moment from 'moment';
 import 'moment/min/locales.min';
@@ -12,17 +20,19 @@ import _ from 'lodash';
 // Collection imports
 import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
+import DocumentationFiles from '/api_docs/files/collection';
+import ApiDocs from '/api_docs/collection';
 import Apis from './';
 
 Apis.helpers({
-  currentUserCanEdit () {
+  currentUserCanManage () {
     // Get current userId
     const userId = Meteor.userId();
 
     // Check that user is logged in
     if (userId) {
       // Check if user is manager of this API
-      const userIsManager = this.currentUserCanManage();
+      const userIsManager = this.currentUserIsManager();
 
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
@@ -54,9 +64,9 @@ Apis.helpers({
 
     // Check if API is public
     // Only user who can edit, can view private APIs
-    return (this.isPublic || userIsAuthorized || this.currentUserCanEdit());
+    return (this.isPublic || userIsAuthorized || this.currentUserCanManage());
   },
-  currentUserCanManage () {
+  currentUserIsManager () {
     // Get current User ID
     const userId = Meteor.userId();
 
@@ -141,6 +151,9 @@ Apis.helpers({
     // Otherwise, get average rating
     return this.averageRating;
   },
+  entityType () {
+    return 'api';
+  },
   relativeUpdatedAt () {
     // Get current language
     const language = TAPi18n.getLanguage();
@@ -174,5 +187,54 @@ Apis.helpers({
     } else {
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
+  },
+  documentation () {
+    // Get API ID
+    const apiId = this._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId });
+
+    // Placeholder documentation Object
+    let documentation;
+
+    // Placeholder documentation file Object
+    let documentationFile;
+
+    // Check if apiDocs return something
+    if (apiDocs) {
+      // Get documentation method (URL of File)
+      const documentationType = apiDocs.type;
+
+      // Get uploaded documentation file ID
+      const documentationFileId = apiDocs.fileId;
+
+      if (documentationFileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+
+        // Get documentation file Object
+        documentationFile = DocumentationFiles.findOne(objectId);
+      }
+
+      // Check if documentation file is available and method is File
+      if (documentationFile && documentationType === 'file') {
+        // Build documentation files base url
+        const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+        const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
+
+        // Get documentation file URL
+        documentation = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+      } else {
+        // Get remote swagger file URL
+        const documentationUrl = apiDocs.remoteFileUrl;
+
+        if (documentationUrl && documentationType === 'url') {
+          // Get documentation URL
+          documentation = documentationUrl;
+        }
+      }
+    }
+
+    return documentation;
   },
 });

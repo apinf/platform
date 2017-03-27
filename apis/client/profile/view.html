@@ -1,3 +1,8 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="viewApi">
   {{# if Template.subscriptionsReady }}
   {{> viewApiPageHeader
@@ -11,7 +16,7 @@
       </div> <!-- /api-backend-details -->
 
       <div id="api-documentation" class="tab-pane fade">
-        {{> apiDocumentation api=api }}
+        {{> apiDocumentation api=api apiDoc=apiDoc }}
       </div> <!-- /api-documentation -->
 
       <div id="api-metadata" class="tab-pane fade">
@@ -23,9 +28,9 @@
       </div> <!-- /api-feedback -->
 
       {{# if currentUser }}
-        {{# if api.currentUserCanEdit }}
+        {{# if api.currentUserCanManage }}
           <div id="api-export" class="tab-pane fade">
-            {{> apiExport api=api }}
+            {{> apiExport api=api proxyBackend=proxyBackend }}
           </div> <!-- /api-export -->
         {{/ if }}
       {{/ if }}
@@ -35,7 +40,7 @@
       </div> <!-- /api-backlog -->
 
       {{# if currentUser }}
-        {{# if api.currentUserCanEdit }}
+        {{# if api.currentUserCanManage }}
 
           {{# if proxyIsConfigured }}
           <div id="api-proxy" class="tab-pane fade">

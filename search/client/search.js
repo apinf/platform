@@ -1,13 +1,23 @@
-import { FlowRouter } from 'meteor/kadira:flow-router';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
-import Apis from '/apis/collection';
+// Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
+// Npm packages imports
 // TODO reference moment library in the code.
 // eslint-disable-next-line no-unused-vars
 import moment from 'moment';
 import 'moment/min/locales.min';
+
+// Collection imports
+import Apis from '/apis/collection';
 
 Template.search.onCreated(function () {
   // Get reference to Template instance

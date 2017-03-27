@@ -1,3 +1,8 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiCatalogTable">
   <div class="table-responsive">
     <table class="table table-striped table-bordered api-catalogue-table">
@@ -13,7 +18,7 @@
             </td>
             <td class="col-sm-9">
               <h4 class="api-catalogue-table-title">
-                <a href="{{ pathFor 'viewApi' _id=api._id }}">
+                <a href="{{ pathFor 'viewApi' slug=api.slug }}">
                   {{ api.name }}
                 </a>
               </h4>

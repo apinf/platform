@@ -1,6 +1,15 @@
-import { Accounts } from 'meteor/accounts-base';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
+// Meteor contributed packages imports
+import { Accounts } from 'meteor/accounts-base';
+
+// APINF imports
 import loginAttemptVerifier from './login_verify';
 
 Meteor.startup(() => {

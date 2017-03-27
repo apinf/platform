@@ -1,9 +1,16 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-import { Template } from 'meteor/templating';
+// Meteor packages imports
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+// Npm packages imports
 import moment from 'moment';
 import dc from 'dc';
 import d3 from 'd3';
@@ -68,7 +75,6 @@ Template.dashboardCharts.onCreated(function () {
 
       // Format timestamp
       timeStamp = timeStamp.format(instance.timeStampFormatMoment.get());
-
       // Check if timestamp formats match
       d.fields.ymd = dateFormat.parse(timeStamp);
 
@@ -260,8 +266,11 @@ Template.dashboardCharts.onCreated(function () {
       let responseTime;
       let responseStatus;
 
-      // Error handling for empty fields
-      try { time = moment(e.fields.request_at[0]).toISOString(); } catch (err) { time = ''; }
+      // The time is saved in UTC ,so converting the time to users local time using .toDate()
+      let localTime = moment.utc(e.fields.request_at[0]).toISOString();
+      localTime = moment.utc(localTime).toDate();
+
+      try { time = localTime; } catch (err) { time = ''; }
 
       try { country = e.fields.request_ip_country[0]; } catch (err) { country = ''; }
 

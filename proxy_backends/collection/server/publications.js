@@ -1,11 +1,21 @@
-import { check } from 'meteor/check';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+
+// Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
-
-import _ from 'lodash';
 
 Meteor.publish('proxyBackends', function (proxyId) {
   // Make sure proxyId is a String
@@ -20,23 +30,6 @@ Meteor.publish('proxyBackends', function (proxyId) {
   }
   // Otherwise return empty list
   return [];
-});
-
-Meteor.publish('apiProxySettings', function (apiId) {
-  // Make sure apiId is a String
-  check(apiId, String);
-
-  // Get current userId
-  const userId = this.userId;
-
-  // Check that user is logged in
-  if (userId) {
-    // Return APIs proxy settings
-    return ProxyBackends.find({ apiId });
-  }
-
-  // Complete publication execution
-  return this.ready();
 });
 
 Meteor.publish('proxyApis', function () {

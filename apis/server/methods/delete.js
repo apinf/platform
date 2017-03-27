@@ -1,15 +1,22 @@
-import { check } from 'meteor/check';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
 
-import Apis from '/apis/collection';
+// Collection imports
 import ApiBacklogItems from '/backlog/collection';
 import ApiMetadata from '/metadata/collection';
-import DocumentationFiles from '/documentation/collection';
+import Apis from '/apis/collection';
+import DocumentationFiles from '/api_docs/files/collection';
 import Feedback from '/feedback/collection';
-import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 import OrganizationApis from '/organization_apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
+import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
 
 Meteor.methods({
   // Remove API backend and related items
@@ -32,11 +39,13 @@ Meteor.methods({
       Meteor.call('removeMonitoring', apiId);
     }
 
+    // TODO: migrate to use 'apiId' instead of 'apiBackendId'
     // Remove backlog items
-    ApiBacklogItems.remove({ apiId });
+    ApiBacklogItems.remove({ apiBackendId: apiId });
 
+    // TODO: migrate to use 'apiId' instead of 'apiBackendId'
     // Remove feedbacks
-    Feedback.remove({ apiId });
+    Feedback.remove({ apiBackendId: apiId });
 
     // Remove metadata
     ApiMetadata.remove({ apiId });

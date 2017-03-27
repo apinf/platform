@@ -1,13 +1,23 @@
-import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { Template } from 'meteor/templating';
-import { TAPi18n } from 'meteor/tap:i18n';
-import { FS } from 'meteor/cfs:filesystem';
-import { URI } from 'meteor/olragon:uri-js';
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { FS } from 'meteor/cfs:filesystem';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { URI } from 'meteor/olragon:uri-js';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Npm packages imports
 import _ from 'lodash';
 import jsyaml from 'js-yaml';
 
-import DocumentationFiles from '/documentation/collection';
+// Collection imports
+import DocumentationFiles from '/api_docs/files/collection';
 
 Template.importApiDocumentation.events({
   'change #apiDocumentationFile': function (event) {

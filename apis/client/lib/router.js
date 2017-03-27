@@ -1,6 +1,14 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 FlowRouter.route('/apis/new', {
   name: 'addApi',
@@ -16,20 +24,19 @@ FlowRouter.route('/apis/import', {
   },
 });
 
-FlowRouter.route('/apis/:_id/', {
+FlowRouter.route('/apis/:slug/', {
   name: 'viewApi',
   action (params) {
     // Get current API Backend ID
-    const apiId = params._id;
+    const slug = params.slug;
 
     // Check if API exists
-    Meteor.call('checkIfApiExists', apiId, (error, apiExists) => {
+    Meteor.call('apiExists', slug, (error, apiExists) => {
       // Check if API exists
       if (apiExists) {
         // Ensure current user has permissions to view backend
-        Meteor.call('currentUserCanViewApi', apiId, (canViewError, userIsAllowedToViewApi) => {
-          if (userIsAllowedToViewApi) {
-            FlowRouter.go('viewApi', { _id: apiId });
+        Meteor.call('currentUserCanViewApi', slug, (canViewError, userCanViewApi) => {
+          if (userCanViewApi) {
             BlazeLayout.render('masterLayout', { main: 'viewApi' });
           } else {
             // User is not allowed to view API
