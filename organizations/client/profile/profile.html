@@ -11,6 +11,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <!-- APIs tab -->
         <div id="organization-apis" class="tab-pane fade in active">
           {{> organizationApis organization=organization }}
+          <!-- Embedded Related Media contents -->
+          {{> relatedMedia entity=organization }}
+
         </div>
         <!-- Settings tab -->
         {{# if organization.currentUserCanManage }}

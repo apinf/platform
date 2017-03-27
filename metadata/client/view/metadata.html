@@ -1,7 +1,7 @@
 <template name="viewApiMetadata">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if api.currentUserCanEdit }}
+      {{# if api.currentUserCanManage }}
         {{> editApiMetadata metadata=metadata }}
       {{/ if }}
       <h2 id="metadata-title" class="panel-title clearfix">

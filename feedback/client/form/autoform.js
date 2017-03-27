@@ -10,11 +10,18 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Collection imports
+import Apis from '/apis/collection';
+
 AutoForm.hooks({
   feedbackForm: {
     before: {
       insert (feedback) {
-        feedback.apiBackendId = FlowRouter.current().params._id;
+        // Get related API document
+        const api = Apis.findOne({ slug: FlowRouter.getParam('slug') });
+
+        // Attach API ID to feedback item
+        feedback.apiBackendId = api._id;
 
         return feedback;
       },

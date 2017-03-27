@@ -8,12 +8,18 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// Collection imports
+import Apis from '/apis/collection';
+
 AutoForm.hooks({
   apiBacklogItemForm: {
     before: {
       insert (backlogItem) {
-        // Attach API Backend Id to backlog item
-        backlogItem.apiBackendId = FlowRouter.getParam('_id');
+        // Get related API document
+        const api = Apis.findOne({ slug: FlowRouter.getParam('slug') });
+
+        // Attach API ID to backlog item
+        backlogItem.apiBackendId = api._id;
         return backlogItem;
       },
     },
