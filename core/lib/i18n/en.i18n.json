@@ -468,6 +468,8 @@
   "orgSettingsContactInfo_saveButton_text": "Save",
   "orgSettingsContactInfo_title": "Contact Information",
   "orgSettingsContentManagement_cancelButton_text": "Cancel",
+  "orgSettingsContentManagement_numberOfApisPerPage_description": "Number of APIs per page",
+  "orgSettingsContentManagement_numberOfMediasPerPage_description": "Number of Medias per page",
   "orgSettingsContentManagement_saveButton_text": "Save",
   "orgSettingsContentManagement_title": "Content Management",
   "orgSettingsGeneral_cancelButton_text": "Cancel",
