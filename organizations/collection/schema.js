@@ -66,6 +66,10 @@ Organizations.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  organizationCoverFileId: {
+    type: String,
+    optional: true,
+  },
   slug: {
     type: String,
     optional: false,
