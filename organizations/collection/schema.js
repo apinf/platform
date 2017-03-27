@@ -165,6 +165,11 @@ Organizations.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Url,
     optional: true,
   },
+  organizationCoverPhotoFileId: {
+    type: String,
+    optional: true,
+  },
+
 });
 
 // Enable translations (i18n)
