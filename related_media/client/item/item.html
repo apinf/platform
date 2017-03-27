@@ -15,15 +15,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{ post.url }}
       </a>
       <br>
-      {{_ "relatedMedia_PostItem_text_added"}}
+      {{_ "PostItem_text_added"}}
       <span id="related-media-creation-time" title='{{ localeFormatDate post.createdAt }}'>
         {{  dateInTimeAgoFormat post.createdAt }}
       </span>
       <p class="pull-right">
         {{# if entity.currentUserCanManage }}
-
-          <button class="edit btn btn-default">{{_ "relatedMedia_PostItem_Edit_Button"}}</button>
-          <button class="delete btn btn-danger">{{_ "relatedMedia_PostItem_Delete_Button"}}</button>
+          <button class="edit btn btn-default">
+            {{_ "postItem_buttonText_edit"}}
+          </button>
+          <button class="delete btn btn-danger">
+            {{_ "postItem_buttonText_delete"}}
+          </button>
         {{/ if}}
       </p>
     </div>
