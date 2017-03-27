@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Tracker } from 'meteor/tracker';
 // Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
@@ -12,6 +13,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // APINF imports
 import signedIn from '/core/client/lib/router';
 import Settings from '/settings/collection';
+
 
 FlowRouter.wait();
 
@@ -21,6 +23,7 @@ Tracker.autorun(() => {
   // That is used for checking of does user have the admin role
 
   // Make sure the roles subscription is ready & FlowRouter hasn't initialized already
+
   if (Roles.subscription.ready() && !FlowRouter._initialized) {
     // Start routing
     return FlowRouter.initialize();
@@ -28,6 +31,17 @@ Tracker.autorun(() => {
   // Otherwise nothing
   return undefined;
 });
+
+function userAddApi () {
+         console.log('in setValue function');
+           let singleSetting = Settings.find();
+
+           if (singleSetting) {
+
+             const onlyAdminsCanAddApis = singleSetting.access ? singleSetting.access.onlyAdminsCanAddApis : false;
+                 return onlyAdminsCanAddApis;
+              };
+         };
 
 signedIn.route('/apis/new', {
   name: 'addApi',
@@ -37,22 +51,20 @@ signedIn.route('/apis/new', {
       if (userId) {
        // Check if user is administrator
         const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-        const settings = Settings.findOne();
-        if (settings) {
-          // Get access setting value
-          // If access field doesn't exist, these is false. Allow users to add an API on default
-          const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
-         // Allow user to add an API because not only for admin
-         console.log('setting value=',onlyAdminsCanAddApis);
-          if (!userIsAdmin && !onlyAdminsCanAddApis) {
+
+        setValue = userAddApi();
+
+        // if user is not admin and settings.access is true then should not allow to add api
+        if (!userIsAdmin && setValue) {
           // User is not authorized to access route
               FlowRouter.go('notAuthorized');
-          }} else {
+            } else {
                BlazeLayout.render('masterLayout', { main: 'addApi' });
             }; //else
-      }; //if userid
+        }; //if userid
   }, //action
 });
+
 
 FlowRouter.route('/apis/import', {
   name: 'importApiConfiguration',
