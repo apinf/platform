@@ -38,7 +38,7 @@ FeedbackVotes.allow({
         // Get api by feedback apiBackendId
         const api = Apis.findOne(feedback.apiBackendId);
         // Return true/false based on edit permissions of api
-        return (api && api.currentUserCanEdit());
+        return (api && api.currentUserCanManage());
       }
     }
     // Otherwise deny remove vote

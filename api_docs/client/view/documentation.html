@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiDocumentation">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{# if api.currentUserCanEdit }}
+      {{# if api.currentUserCanManage }}
           <button
             id="manage-api-documentation"
             class="btn btn-xs btn-info pull-right">
@@ -50,7 +50,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{ else }}
           <i>
             {{_ "apiDocumentation_No_Link_Message" }}
-            {{# if api.currentUserCanEdit }}
+            {{# if api.currentUserCanManage }}
             {{_ "apiDocumentation_No_Link_Manager_Message" }}
             {{/ if }}
           </i>
@@ -81,7 +81,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{ else }}
             <i>
               {{_ "apiDocumentation_No_Swagger_Message" }}
-              {{# if api.currentUserCanEdit }}
+              {{# if api.currentUserCanManage}}
               {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
               {{/ if }}
             </i>

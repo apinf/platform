@@ -72,7 +72,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
         {{# if api.created_at }}
           <li class="pull-right">
-            <span class="generic-card-created">
+            <span class="generic-card-created" title='{{ localeFormatDate api.created_at }}'>
               {{ dateInTimeAgoFormat api.created_at }}
             </span>
           </li>

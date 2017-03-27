@@ -15,7 +15,7 @@ ProxyBackends.allow({
     const api = Apis.findOne(backend.apiId);
 
     // Check if current user can edit API
-    return (api && api.currentUserCanEdit());
+    return (api && api.currentUserCanManage());
   },
   update (userId, backend) {
     // Only allow API Managers or Administrators to update
@@ -24,7 +24,7 @@ ProxyBackends.allow({
     const api = Apis.findOne(backend.apiId);
 
     // Check if current user can edit API
-    return (api && api.currentUserCanEdit());
+    return (api && api.currentUserCanManage());
   },
   remove (userId, backend) {
     // Only allow API Managers or Administrators to remove
@@ -33,6 +33,6 @@ ProxyBackends.allow({
     const api = Apis.findOne(backend.apiId);
 
     // Check if current user can edit API
-    return (api && api.currentUserCanEdit());
+    return (api && api.currentUserCanManage());
   },
 });

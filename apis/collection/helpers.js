@@ -25,14 +25,14 @@ import ApiDocs from '/api_docs/collection';
 import Apis from './';
 
 Apis.helpers({
-  currentUserCanEdit () {
+  currentUserCanManage () {
     // Get current userId
     const userId = Meteor.userId();
 
     // Check that user is logged in
     if (userId) {
       // Check if user is manager of this API
-      const userIsManager = this.currentUserCanManage();
+      const userIsManager = this.currentUserIsManager();
 
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
@@ -64,9 +64,9 @@ Apis.helpers({
 
     // Check if API is public
     // Only user who can edit, can view private APIs
-    return (this.isPublic || userIsAuthorized || this.currentUserCanEdit());
+    return (this.isPublic || userIsAuthorized || this.currentUserCanManage());
   },
-  currentUserCanManage () {
+  currentUserIsManager () {
     // Get current User ID
     const userId = Meteor.userId();
 
@@ -150,6 +150,9 @@ Apis.helpers({
 
     // Otherwise, get average rating
     return this.averageRating;
+  },
+  entityType () {
+    return 'api';
   },
   relativeUpdatedAt () {
     // Get current language
