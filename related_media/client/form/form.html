@@ -1,0 +1,40 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="relatedMediaPostsForm">
+  <div class="modal fade" id="postInsertModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button data-dismiss="modal" class="close" type="button">×</button>
+          <h3 class="modal-title">
+            {{_ "relatedMediaPostsForm_modalTitle_relatedMedia" }}
+          </h3>
+        </div>
+        <div class="modal-body">
+          <p>{{_ "relatedMediaPostsForm_Text" }}</p>
+          <!--Autoform for collection/schema-->
+          {{#autoForm
+             id="relatedMediaPostsForm"
+             type=formType
+             doc=post
+             collection=postsCollection
+           }}
+            {{> afQuickField name='title' }}
+            {{> afQuickField name='url' }}
+            {{> afQuickField name='entityId' type="hidden" value=entity._id }}
+            {{> afQuickField name='entityType' type="hidden" value=entity.entityType }}
+            <button type="submit" class="btn btn-primary">
+              {{_ "relatedMediaPostsForm_Submit" }}
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              {{_ "relatedMediaPostsForm_Cancel" }}
+            </button>
+          {{/autoForm}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
