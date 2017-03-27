@@ -7,6 +7,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 // Collection imports
 import OrganizationCover from '/organizations/cover/collection/collection';
 import Organizations from '../../../collection';
