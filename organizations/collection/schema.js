@@ -112,6 +112,7 @@ Organizations.schema = new SimpleSchema({
   },
   numberOfApisPerPage: {
     type: String,
+    optional: true,
     autoform: {
       type: 'select',
       firstOption: false,
@@ -130,6 +131,7 @@ Organizations.schema = new SimpleSchema({
   },
   numberOfMediasPerPage: {
     type: String,
+    optional: true,
     autoform: {
       type: 'select',
       firstOption: false,
