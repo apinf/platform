@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Organizations from '/organizations/collection';
@@ -13,19 +14,23 @@ import OrganizationApis from '/organization_apis/collection';
 import Apis from '../';
 
 // eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('userManagedApis', function () {
+Meteor.publish('userManagedApisName', function () {
   // Get current user id
   const userId = this.userId;
 
-  // Get API Backends that user manages
-  return Apis.find({ managerIds: userId });
-});
+  const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+  let filter;
 
-Meteor.publish('apiBackend', (apiBackendId) => {
-  // Make sure apiBackendId is a String
-  check(apiBackendId, String);
-
-  return Apis.find({ _id: apiBackendId });
+  // if user is not admin
+  if (userIsAdmin) {
+    // Set empty filter (return all APIs)
+    filter = {};
+  } else {
+    // Otherwise only managed
+    filter = { managerIds: userId };
+  }
+  // Get API names
+  return Apis.find(filter, { name: 1 });
 });
 
 Meteor.publish('apisByIds', (apiIds) => {
