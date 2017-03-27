@@ -9,12 +9,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </h3>
   <p>
     <b>
-    {{_ "addOrganizationManagerForm_organizationNumOfPagesField_description" }}
+    {{_ "addOrganizationManagerForm_numberOfApisPerPage_description" }}
     </b>
   </p>
   {{# autoForm schema=managerSchema id="organizationManagerForm" type="insert" }}
-    {{> afQuickField name='organizationNumOfPagesField' }}
+    {{> afQuickField name='numberOfApisPerPage' }}
   {{/ autoForm }}
+
+  <p>
+    <b>
+    {{_ "addOrganizationManagerForm_numberOfMediasPerPage_description" }}
+    </b>
+  </p>
+  {{# autoForm schema=managerSchema id="organizationManagerForm" type="insert" }}
+    {{> afQuickField name='numberOfMediasPerPage' }}
+  {{/ autoForm }}
+
 
   <p>
     {{_ "addOrganizationManagerForm_description" }}
