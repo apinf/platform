@@ -10,10 +10,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <b>
     {{_ "orgSettingsContentManagement_numberOfApisPerPage_description" }}
   </b>
-  {{# autoForm
-    schema=managerSchema
+  <!-- {{# autoForm
+    collection=OrganizationsCollection
     id="organizationManagerForm"
-    type="insert"}}
+    type="insert"}} -->
 
     {{> afQuickField name='numberOfApisPerPage' }}
 
@@ -23,15 +23,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <button type="submit" class="btn btn-default">
       {{_ "orgSettingsContentManagement_cancelButton_text" }}
     </button> -->
-  {{/ autoForm }}
+  <!-- {{/ autoForm }} -->
 
   <b>
     {{_ "orgSettingsContentManagement_numberOfMediasPerPage_description" }}
   </b>
-  {{# autoForm
-    schema=managerSchema
+  <!-- {{# autoForm
+    collection=OrganizationsCollection
     id="organizationManagerForm"
-    type="insert"}}
+    type="insert"}} -->
 
     {{> afQuickField name='numberOfMediasPerPage' }}
 
@@ -41,6 +41,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <button type="submit" class="btn btn-default">
       {{_ "orgSettingsContentManagement_cancelButton_text" }}
     </button> -->
-  {{/ autoForm }}
+  <!-- {{/ autoForm }} -->
 
 </template>
