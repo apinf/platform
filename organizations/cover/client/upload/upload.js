@@ -23,7 +23,7 @@ Template.uploadOrganizationCover.onCreated(function () {
 });
 
 Template.uploadOrganizationCover.helpers({
-  uploadedOrganizationLogoFile () {
+  uploadedOrganizationCoverFile () {
     const organizationCoverFileId = Organizations.findOne().organizationCoverFileId;
 
     let organizationCoverFile;
@@ -32,7 +32,7 @@ Template.uploadOrganizationCover.helpers({
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(organizationCoverFileId);
 
-      // Get Organization logo file Object
+      // Get Organization cover file Object
       organizationCoverFile = OrganizationCover.findOne(objectId);
     }
     return organizationCoverFile;
@@ -43,7 +43,7 @@ Template.uploadOrganizationCover.events({
   'click .delete-organizationCover': function (event, templateInstance) {
     // Show confirmation dialog to user
     // eslint-disable-next-line no-alert
-    const confirmation = confirm(TAPi18n.__('uploadOrganizationLogo_confirm_delete'));
+    const confirmation = confirm(TAPi18n.__('uploadOrganizationCover_confirm_delete'));
 
     const organization = templateInstance.data.organization;
 
