@@ -34,3 +34,35 @@ Template.uploadOrganizationCover.helpers({
     return organizationCoverFile;
   },
 });
+
+Template.uploadOrganizationCover.events({
+  'click .delete-organizationCover': function (event, templateInstance) {
+    // Show confirmation dialog to user
+    // eslint-disable-next-line no-alert
+    const confirmation = confirm(TAPi18n.__('uploadOrganizationLogo_confirm_delete'));
+
+    const organization = templateInstance.data.organization;
+
+    // Check if user clicked "OK"
+    if (confirmation === true) {
+      // Get organization cover ID from organization
+      const organizationCoverFileId = organization.organizationCoverFileId;
+
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(organizationCoverFileId);
+
+      // Remove Organization cover object
+      OrganizationCover.remove(objectId);
+
+      // Remove Organization cover file id field
+      Organizations.update(organization._id, {
+        $unset: { organizationCoverFileId: '' },
+      });
+
+      // Get deletion success message
+      const message = 'Successfully removed.';
+
+      sAlert.success(message);
+    }
+  },
+});
