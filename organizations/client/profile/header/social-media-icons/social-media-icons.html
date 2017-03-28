@@ -1,0 +1,37 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationSocialMediaIcons">
+    {{# if organization.socialMedia }}
+    <div class="row">
+      {{# with organization.socialMedia }}
+        <!-- Facebook icon -->
+        {{# if facebook }}
+          <a href="{{ facebook }}" target="_blank" class="social-media-link">
+            <img src="/img/social-media-icons/facebook.png" alt="Facebook icon" class="social-media-icon">
+          </a>
+        {{/ if }}
+        <!-- twitter icon -->
+        {{# if twitter }}
+        <a href="{{ twitter }}" target="_blank" class="social-media-link">
+          <img src="/img/social-media-icons/twitter.png" alt="Twitter icon" class="social-media-icon">
+        </a>
+        {{/ if }}
+        <!-- instagram icon -->
+        {{# if instagram }}
+        <a href="{{ instagram }}" target="_blank" class="social-media-link">
+          <img src="/img/social-media-icons/instagram.png" alt="Instagram icon" class="social-media-icon">
+        </a>
+        {{/ if }}
+        <!-- linkedIn icon -->
+        {{# if linkedIn }}
+        <a href="{{ linkedIn }}" target="_blank" class="social-media-link">
+          <img src="/img/social-media-icons/linkedin.png" alt="Linked In icon" class="social-media-icon">
+        </a>
+        {{/ if }}
+      {{/ with }}
+    </div>
+    {{/ if }}
+</template>
