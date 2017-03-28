@@ -967,6 +967,7 @@
   "uploadApiLogoButton": "Upload logo",
   "uploadApiLogo_confirm_delete": "Are you sure you want to delete this logo?",
   "uploadApiLogo_successfully_deleted": "Logo successfully deleted!",
+  "uploadOrganizationCoverButton_text": "Upload cover image",
   "uploadOrganizationLogoButton": "Upload logo",
   "uploadOrganizationCover_confirm_delete": "Are you sure you want to delete this cover image?",
   "uploadOrganizationCover_successfully_deleted": "Cover image successfully deleted!",
