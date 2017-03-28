@@ -7,28 +7,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        {{# autoForm
+        <!-- {{# autoForm
           id="organizationDetailsForm"
           collection=organizationsCollection
           type="update"
           doc=organization
-        }}
-        <div itemscope itemtype="http://schema.org/Organization">
+        }} -->
+        <!-- <div itemscope itemtype="http://schema.org/Organization"> -->
 
           {{> orgSettingsGeneral organization=organization }}
-          {{> orgSettingsSomePlatforms organization=organization }}
-          {{> orgSettingsContactInfo organization=organization }}
-          {{> orgSettingsContentManagement organization=organization }}
-          <button type="submit" class="btn btn-success">
-            {{_ "orgSettingsGeneral_saveButton_text" }}
-          </button>
-        </div>
+          <!-- {{> orgSettingsSomePlatforms organization=organization }} -->
+          <!-- {{> orgSettingsContactInfo organization=organization }} -->
 
-        {{/ autoForm }}
-        <hr>
-        {{> addOrganizationManagerForm organization=organization }}
-        {{> organizationManagersList organization=organization }}
-        {{> organizationSettingsDelete organization=organization }}
+        <!-- </div> -->
+
+        <!-- {{> orgSettingsContentManagement organization=organization }} -->
+        <!-- {{/ autoForm }} -->
+
+        <!-- {{> orgSettingsContactInfo }} -->
+
         {{> quickForm
           collection=organizationCollection
           doc=organization
@@ -37,6 +34,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           fields="socialMedia"
           buttonContent="Save"
         }}
+
+        {{> quickForm
+          collection=organizationCollection
+          doc=organization
+          id="contactForm"
+          type="update"
+          fields="contact"
+          buttonContent="Save"
+        }}
+
+
+        {{> addOrganizationManagerForm organization=organization }}
+        {{> organizationManagersList organization=organization }}
+        {{> organizationSettingsDelete organization=organization }}
       </div>
     </div>
   </div>

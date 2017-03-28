@@ -8,35 +8,30 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{_ "orgSettingsGeneral_title" }}
   </h3>
 
-  <!-- {{# autoForm
-    collection=OrganizationsCollection
-    id="organizationForm"
-    collection=organizationsCollection
-    type=formType
-    doc=organization
-  }} -->
+  {{# autoForm
+      collection=organizationCollection
+      doc=organization
+      id="orgSettingsGeneral"
+      type="update"
+  }}
 
-  <div itemscope itemtype="http://schema.org/Organization">
-    <span itemprop="name">
-        {{> afQuickField name='name' }}
-    </span>
-    <span itemprop="url">
-        {{> afQuickField name='url' }}
-    </span>
-    <span itemprop="description">
-        {{> afQuickField name='description' }}
-    </span>
-  </div>
+  {{> afQuickField name='name' }}
+  {{> afQuickField name='url' }}
+  {{> afQuickField name='description' }}
+  {{> afQuickField name='organizationLogoFileId' }}
 
-  {{_ "organizationSettings_uploadLogo_heading" }}
+  <b>
+    {{_ "organizationSettings_uploadLogo_heading" }}
+  </b>
   <p>
     {{_ "organizationSettings_uploadLogoText" }}
   </p>
+
   {{> uploadOrganizationLogo organization=organization }}
 
-  <!-- <button type="submit" class="btn btn-success">
+  <button type="submit" class="btn btn-success" id="save-org-settings">
     {{_ "orgSettingsGeneral_saveButton_text" }}
-  </button> -->
+  </button>
+  {{/ autoForm }}
 
-  <!-- {{/ autoForm }} -->
 </template>
