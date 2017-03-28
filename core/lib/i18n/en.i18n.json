@@ -435,6 +435,7 @@
   "organizationProfileHeader_editButton_text": "Edit",
   "organizationProfileHeader_tabs_apis": "APIs",
   "organizationProfileHeader_tabs_settings": "Settings",
+  "organizationProfileHeader_uploadCoverButton_text": "Upload cover image",
   "organizationProfile_smallText_apisCount": "(__count__ api)",
   "organizationProfile_smallText_apisCount_plural": "(__count__ apis)",
   "organizationProfile_buttonText_connectApi": "Connect API to organization",

@@ -64,7 +64,7 @@ Template.uploadOrganizationCover.events({
       });
 
       // Get deletion success message
-      const message = 'Successfully removed.';
+      const message = TAPi18n.__('uploadOrganizationCover_successfully_deleted');
 
       sAlert.success(message);
     }
