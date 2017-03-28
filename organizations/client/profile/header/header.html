@@ -5,13 +5,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationProfileHeader">
   <div class="page-head-topblock">
+    <div class="organization-cover-block">
+      {{> viewOrganizationCover organization=organization }}
+    </div>
     <div class="container">
       <div class="row">
         <div id="organization-file-browse" class="col-md-2 profile-img-container">
           {{> viewOrganizationLogo organization=organization }}
           <span class="fa fa-camera"></span>
         </div>
-        <button id="organization-cover-file-browse" class="btn btn-default pull-right">
+        <button id="organization-cover-file-browse" class="col-md-2 btn btn-default pull-right">
           <span class="fa fa-camera"></span>
           {{_ "organizationProfileHeader_uploadCoverButton_text" }}
         </button>
