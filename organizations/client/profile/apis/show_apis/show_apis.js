@@ -23,27 +23,42 @@ Template.organizationShowApis.onCreated(function () {
   // Get Organization document from template data
   const organization = instance.data.organization;
 
+  // Get IDs of relevant APIs
+  const managedApiIds = organization.managedApiIds();
+
   // Watching for changes of query parameters
   instance.autorun(() => {
-    const managedApiIds = organization.managedApiIds();
 
-    // Placeholder
-    let managedApis;
+    // Filter by managed APIs on default
+    const filter = { _id: { $in: managedApiIds } };
+    // Sort by name on default
+    const sort = {};
 
     // Get query parameter LifeCycle
     const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');
 
-    // Checking of filter was set
+    // Make sure filter is set
     if (lifecycleParameter) {
-      // Filter data by selected parameter
-      managedApis = Apis.find({
-        _id: { $in: managedApiIds },
-        lifecycleStatus: lifecycleParameter,
-      }).fetch();
-    } else {
-      // Otherwise show all managed apis
-      managedApis = Apis.find({ _id: { $in: managedApiIds } }).fetch();
+      // Filter data by lifecycle status
+      filter.lifecycleStatus = lifecycleParameter;
     }
+
+    // Get query parameter sortBy
+    const sortByParameter = FlowRouter.getQueryParam('sortBy');
+
+    // Make sure sorting is set
+    if (sortByParameter) {
+      // Sort by name is ascending other cases are descending sort
+      const sortDirection = sortByParameter === 'name' ? 1 : -1;
+      // Set sorting
+      sort[sortByParameter] = sortDirection;
+    } else {
+      // Sort by name is default
+      sort.name = 1;
+    }
+
+    // Get the managed APIs ordered by sort parameter
+    const managedApis = Apis.find(filter, { sort }).fetch();
 
     // Save list of managed APIs in instance reactive variable
     instance.managedApis.set(managedApis);
