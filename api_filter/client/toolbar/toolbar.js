@@ -9,6 +9,19 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+Template.apiSortingToolbar.onRendered(function () {
+  this.autorun(() => {
+    // Get sortBy parameter
+    const sortByParameter = FlowRouter.getQueryParam('sortBy');
+
+    // If parameter exists
+    if (sortByParameter) {
+      // Update the select menu to match sort parameter
+      this.$('#sort-select').val(sortByParameter);
+    }
+  });
+});
+
 Template.apiSortingToolbar.events({
   'change #sort-select': (event) => {
     // Set URL parameter
