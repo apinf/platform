@@ -114,6 +114,26 @@ Organizations.schema = new SimpleSchema({
       return this.unset();
     },
   },
+  socialMedia: {
+    type: Object,
+    optional: true,
+  },
+  'socialMedia.facebook': {
+    type: String,
+    optional: true,
+  },
+  'socialMedia.twitter': {
+    type: String,
+    optional: true,
+  },
+  'socialMedia.instagram': {
+    type: String,
+    optional: true,
+  },
+  'socialMedia.linkedIn': {
+    type: String,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)
