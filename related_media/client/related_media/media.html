@@ -1,21 +1,26 @@
-<template name="apiRelatedMedia">
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="relatedMedia">
   <!-- Show media area in case either -->
   <!-- there are posts -->
   {{# if posts }}
-  <div class="panel panel-default">
+  <div class="panel panel-default related-media-panel">
     <div class="panel-heading">
       <h2 id="oembedded-title" class="panel-title clearfix">
-        {{#if api.currentUserCanEdit }}
+        <!-- Related Media -->
+        {{_ "relatedMedia_Title" }}
+        {{# if entity.currentUserCanManage }}
             <button
               type="button"
-              class="btn btn-xs btn-success pull-right"
+              class="btn btn-success pull-right"
               id="add-media"
-              title='{{_ "apiMedia_apiRelatedMedia_Add_Button_Help" }}'>
-                {{_ "apiMedia_apiRelatedMedia_Add_Button" }}
+              title='{{_ "relatedMedia_addButton_help" }}'>
+                {{_ "relatedMedia_addButton" }}
             </button>
-        {{/if}}
-        <!-- Related Media -->
-        {{_ "apiMedia_apiRelatedMedia_Title" }}
+        {{/ if }}
       </h2>
     </div>
     <div class="panel-body">
@@ -23,7 +28,7 @@
         <div class="row">
             {{# each post in posts }}
               <div class="col-grid-post col-xl-2 col-md-3 col-sm-6 col-xs-12">
-                {{> postItem post=post api=api}}
+                {{> postItem post=post entity=entity }}
               </div>
             {{/ each }}
         </div>
@@ -33,24 +38,26 @@
               pagination=templatePagination
               limit=4
               containerClass="text-center"
-              onClick=clickEvent}}
+             }}
         </div>
       </div>
     </div>
   </div>
   {{ else }}
     <!-- or user has rights -->
-    {{# if api.currentUserCanEdit }}
+    {{# if entity.currentUserCanManage }}
       <div class="well">
         <button
           type="button"
-          class="btn btn-sm btn-success pull-right"
+          class="btn btn-success pull-right"
           id="add-media"
-          title='{{_ "apiMedia_apiRelatedMedia_Add_Button_Help" }}'>
-            {{_ "apiMedia_apiRelatedMedia_Add_Button" }}
+          title='{{_ "relatedMedia_addButton_help" }}'>
+            {{_ "relatedMedia_addButton" }}
         </button>
-        <p>{{_ "apiMedia_apiRelatedMedia_Well_Message" }}</p>
+        <p>
+          {{_ "relatedMedia_Well_Message" }}
+        </p>
       </div>
-    {{ /if }}
-  {{ /if }}
+    {{/ if }}
+  {{/ if }}
 </template>

@@ -43,7 +43,7 @@ Apis.allow({
     // Get API backend with ID
     const apiBackend = Apis.findOne(apiBackendId);
     // Check if current user can edit API Backend
-    const currentUserCanEdit = apiBackend.currentUserCanEdit();
+    const currentUserCanEdit = apiBackend.currentUserCanManage();
 
     if (currentUserCanEdit) {
       // User is allowed to perform action
@@ -58,7 +58,7 @@ Apis.allow({
     // Get API backend with ID
     const apiBackend = Apis.findOne(apiBackendId);
     // Check if current user can edit API Backend
-    const currentUserCanEdit = apiBackend.currentUserCanEdit();
+    const currentUserCanEdit = apiBackend.currentUserCanManage();
 
     if (currentUserCanEdit) {
       // User is allowed to perform action

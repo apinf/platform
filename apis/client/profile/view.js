@@ -22,34 +22,19 @@ Template.viewApi.onCreated(function () {
   const instance = this;
 
   // Get the API Backend ID from the route
-  instance.apiId = FlowRouter.getParam('_id');
+  instance.slug = FlowRouter.getParam('slug');
 
   // Subscribe to API and related organization
-  instance.subscribe('apiComposite', instance.apiId);
-
-  // Subscribe to API feedback items for this API Backend
-  instance.subscribe('apiBackendFeedback', instance.apiId);
-
-  // Subscribe to API Backlog items for this API Backend
-  instance.subscribe('apiBacklogItems', instance.apiId);
+  instance.subscribe('apiComposite', instance.slug);
 
   // Subscribe to public proxy details
   instance.subscribe('proxyCount');
 
-  // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', instance.apiId);
-
   // Subscribe to public proxy details for proxy form
   instance.subscribe('publicProxyDetails');
 
-  // Subscribe to authorized user public details
-  instance.subscribe('apiAuthorizedUsersPublicDetails', instance.apiId);
-
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
-
-  // Subscribe to ApiDocs
-  instance.subscribe('apiDocs', instance.apiId);
 });
 
 Template.viewApi.helpers({
@@ -57,11 +42,13 @@ Template.viewApi.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Get API ID
-    const apiId = instance.apiId;
+    // Get API slug
+    const slug = instance.slug;
 
     // Get single API Backend
-    const api = Apis.findOne(apiId);
+    const api = Apis.findOne({ slug });
+    // Save the API ID
+    instance.apiId = api._id;
 
     return api;
   },

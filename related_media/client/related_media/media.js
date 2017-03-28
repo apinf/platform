@@ -1,10 +1,16 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import Posts from '/api_media/collection';
+import Posts from '/related_media/collection';
 
-Template.apiRelatedMedia.onCreated(function () {
+Template.relatedMedia.onCreated(function () {
   const instance = this;
+
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
     // Count of posts on page
@@ -15,11 +21,12 @@ Template.apiRelatedMedia.onCreated(function () {
 
   // Get posts owned by API
   const currentFilters = {};
-  currentFilters.apiId = instance.data.api._id;
+  currentFilters.entityId = instance.data.entity._id;
+  currentFilters.entityType = instance.data.entity.entityType;
   instance.pagination.filters(currentFilters);
 });
 
-Template.apiRelatedMedia.helpers({
+Template.relatedMedia.helpers({
   posts () {
     const posts = Template.instance().pagination.getPage();
 
@@ -32,9 +39,9 @@ Template.apiRelatedMedia.helpers({
   },
 });
 
-Template.apiRelatedMedia.events({
+Template.relatedMedia.events({
   'click #add-media': function () {
-    const api = this.api;
-    Modal.show('apiMediaPostsForm', { api });
+    const entity = this.entity;
+    Modal.show('relatedMediaPostsForm', { entity });
   },
 });

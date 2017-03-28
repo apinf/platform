@@ -14,7 +14,7 @@ ApiMetadata.allow({
     const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return api.currentUserCanEdit();
+    return api.currentUserCanManage();
   },
   update (userId, metadata) {
     // Get API Backend ID
@@ -24,7 +24,7 @@ ApiMetadata.allow({
     const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return api.currentUserCanEdit();
+    return api.currentUserCanManage();
   },
   remove (userId, metadata) {
     // Get API Backend ID
@@ -34,6 +34,6 @@ ApiMetadata.allow({
     const api = Apis.findOne(apiId, { fields: { managerIds: 1 } });
 
     // Check if current user can edit API Backend
-    return api.currentUserCanEdit();
+    return api.currentUserCanManage();
   },
 });

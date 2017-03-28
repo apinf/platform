@@ -37,12 +37,12 @@ Meteor.methods({
       Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
     }
   },
-  currentUserCanViewApi (apiId) {
+  currentUserCanViewApi (slug) {
     // Make sure apiId is a string
-    check(apiId, String);
+    check(slug, String);
 
     // Get API
-    const api = Apis.findOne(apiId);
+    const api = Apis.findOne({ slug });
 
     // Check if user can view
     return api && api.currentUserCanView();
@@ -55,6 +55,6 @@ Meteor.methods({
     const api = Apis.findOne(apiId);
 
     // Check if user can edit
-    return api && api.currentUserCanEdit();
+    return api && api.currentUserCanManage();
   },
 });

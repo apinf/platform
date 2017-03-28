@@ -11,12 +11,12 @@ import { check } from 'meteor/check';
 import Apis from '/apis/collection';
 
 Meteor.methods({
-  checkIfApiExists (apiId) {
+  apiExists (slug) {
     // Make sure apiId is a string
-    check(apiId, String);
+    check(slug, String);
 
     // Look for API
-    const api = Apis.findOne(apiId);
+    const api = Apis.findOne({ slug });
 
     // Return true if API exists, false if undefined
     return (api);

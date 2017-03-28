@@ -31,6 +31,11 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
+  slug: {
+    type: String,
+    optional: true,
+    unique: true,
+  },
   latestMonitoringStatusCode: {
     type: String,
     optional: true,

@@ -38,7 +38,7 @@ Feedback.helpers({
     /* 2. Users that can edit API are allowed to edit feedback */
     // Get API by feedback's apiBackendId
     const api = Apis.findOne(this.apiBackendId);
-    if (api && api.currentUserCanEdit()) {
+    if (api && api.currentUserCanManage()) {
       return true;
     }
     // Otherwise not allowed to edit feedback

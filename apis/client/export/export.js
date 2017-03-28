@@ -15,17 +15,6 @@ import jsyaml from 'js-yaml';
 // Collection imports
 import ProxyBackends from '/proxy_backends/collection';
 
-Template.apiExport.onCreated(function () {
-  // Get reference to template instance
-  const instance = this;
-
-  // Get the API Backend ID from data context
-  const apiId = instance.data.api._id;
-
-  // Subscribe to proxy settings for this API
-  instance.subscribe('apiProxySettings', apiId);
-});
-
 Template.apiExport.events({
   'click #exportJSONConfig': function (event, templateInstance) {
     // Get API Backend from database collection
