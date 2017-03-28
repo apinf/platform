@@ -148,30 +148,30 @@ Organizations.schema = new SimpleSchema({
       },
     },
   },
-  facebookLink: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    optional: true,
-  },
-  twitterLink: {
-    type: String,
-    optional: true,
-  },
-  instagramLink: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    optional: true,
-  },
-  linkedInLink: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    optional: true,
-  },
   organizationCoverPhotoFileId: {
     type: String,
     optional: true,
   },
-
+  socialMedia: {
+    type: Object,
+    optional: true,
+  },
+  'socialMedia.facebook': {
+    type: String,
+    optional: true,
+  },
+  'socialMedia.twitter': {
+    type: String,
+    optional: true,
+  },
+  'socialMedia.instagram': {
+    type: String,
+    optional: true,
+  },
+  'socialMedia.linkedIn': {
+    type: String,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)
