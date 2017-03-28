@@ -6,25 +6,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiSortingToolbar">
   <div class="form-group">
     <label for="sort-select">
-      <!--{{_ "apiSortingToolbar_labelText_sortBy" }}-->
-      Sort by
+      {{_ "apiSortingToolbar_labelText_sortBy" }}
     </label>
     <select id="sort-select" class="form-control">
       <option value="name">
-        <!--{{_ "apiSortingToolbar_sortMenuOptions_name" }}-->
-        Names (A-Z)
+        {{_ "apiSortingToolbar_sortMenuOptions_names" }}
       </option>
       <option value="created_at">
-        <!--{{_ "apiSortingToolbar_sortMenuOptions_dateCreated" }}-->
-        Newest created
+        {{_ "apiSortingToolbar_sortMenuOptions_newestCreated" }}
       </option>
       <option value="bookmarkCount">
-        <!--{{_ "apiSortingToolbar_sortMenuOptions_bookmarkCount" }}-->
-        Bookmarks
+        {{_ "apiSortingToolbar_sortMenuOptions_bookmarks" }}
       </option>
       <option value="averageRating">
-        <!--{{_ "apiSortingToolbar_sortMenuOptions_averageRating" }}-->
-        Ratings
+        {{_ "apiSortingToolbar_sortMenuOptions_ratings" }}
       </option>
     </select>
   </div>
