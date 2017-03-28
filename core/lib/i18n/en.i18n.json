@@ -874,6 +874,9 @@
               "email": {
                   "label": "Email"
               }
+          },
+          "socialMedia": {
+              "label": "Social Media Links"
           }
       },
       "organizationApis": {
