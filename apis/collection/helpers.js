@@ -251,4 +251,17 @@ Apis.helpers({
     }
     return false;
   },
+  apiDocsIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId });
+
+    // Check if backlog exist or user can manage
+    // to hide/show corresponding tab
+    if (apiDocs || this.currentUserCanManage()) {
+      return true;
+    }
+    return false;
+  },
 });
