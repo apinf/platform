@@ -23,6 +23,7 @@ import ApiBookmarks from '/bookmarks/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
 import ApiBacklogItems from '/backlog/collection';
+import ApiMetadata from '/metadata/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -260,6 +261,19 @@ Apis.helpers({
     // Check if backlog exist or user can manage
     // to hide/show corresponding tab
     if (apiDocs || this.currentUserCanManage()) {
+      return true;
+    }
+    return false;
+  },
+  apiMetadataIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const apiMetadata = ApiMetadata.findOne({ apiId });
+
+    // Check if backlog exist or user can manage
+    // to hide/show corresponding tab
+    if (apiMetadata || this.currentUserCanManage()) {
       return true;
     }
     return false;
