@@ -28,7 +28,6 @@ Template.organizationShowApis.onCreated(function () {
 
   // Watching for changes of query parameters
   instance.autorun(() => {
-
     // Filter by managed APIs on default
     const filter = { _id: { $in: managedApiIds } };
     // Sort by name on default
