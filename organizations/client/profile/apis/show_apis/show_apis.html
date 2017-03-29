@@ -9,10 +9,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <h3 class="apis-block-title">
       {{_ 'organizationProfile_bigText_apisCount'  }}
       <small>
-        {{_ 'organizationProfile_smallText_apisCount' count=apis.length }}
+        {{_ 'organizationProfile_smallText_apisCount' count=totalItems }}
       </small>
     </h3>
     {{> apiFilteredBy }}
   </div>
   {{> apiCatalogGrid apis=apis }}
+
+  {{# if totalItems }}
+    {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+  {{/ if }}
 </template>
