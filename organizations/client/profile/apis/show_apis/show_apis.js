@@ -4,11 +4,13 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Apis from '/apis/collection';
@@ -26,12 +28,19 @@ Template.organizationShowApis.onCreated(function () {
   // Get IDs of relevant APIs
   const managedApiIds = organization.managedApiIds();
 
-  // Watching for changes of query parameters
+  // Set initial settings of pagination
+  instance.pagination = new Meteor.Pagination(Apis, {
+    // Count of cards in catalog
+    perPage: 4,
+    // Set sort by name on default
+    sort: { name: 1 },
+    filters: { _id: { $in: managedApiIds } },
+  });
+
+  // Watching for changes of lifecycle parameter
   instance.autorun(() => {
     // Filter by managed APIs on default
-    const filter = { _id: { $in: managedApiIds } };
-    // Sort by name on default
-    const sort = {};
+    const filters = { _id: { $in: managedApiIds } };
 
     // Get query parameter LifeCycle
     const lifecycleParameter = FlowRouter.getQueryParam('lifecycle');
@@ -39,8 +48,16 @@ Template.organizationShowApis.onCreated(function () {
     // Make sure filter is set
     if (lifecycleParameter) {
       // Filter data by lifecycle status
-      filter.lifecycleStatus = lifecycleParameter;
+      filters.lifecycleStatus = lifecycleParameter;
     }
+
+    instance.pagination.filters(filters);
+  });
+
+  // Watching for changes of sortBy parameter
+  instance.autorun(() => {
+    // Sort by name on default
+    const sort = {};
 
     // Get query parameter sortBy
     const sortByParameter = FlowRouter.getQueryParam('sortBy');
@@ -56,11 +73,8 @@ Template.organizationShowApis.onCreated(function () {
       sort.name = 1;
     }
 
-    // Get the managed APIs ordered by sort parameter
-    const managedApis = Apis.find(filter, { sort }).fetch();
-
-    // Save list of managed APIs in instance reactive variable
-    instance.managedApis.set(managedApis);
+    // Change sorting
+    instance.pagination.sort(sort);
   });
 });
 
@@ -68,8 +82,33 @@ Template.organizationShowApis.helpers({
   apis () {
     const instance = Template.instance();
 
-    // Return list of managed/filtered Apis
-    return instance.managedApis.get();
+    // Get apis collection via Pagination
+    const apis = instance.pagination.getPage();
+    // Get the sort via Pagination
+    const sort = instance.pagination.sort();
+
+    // Make sure sorted by name
+    if (sort.name) {
+      // Get the language
+      const language = TAPi18n.getLanguage();
+
+      // Use custom sort function with i18n support
+      apis.sort((a, b) => {
+        return a.name.localeCompare(b.name, language) * sort.name;
+      });
+    }
+
+    return apis;
+  },
+  totalItems () {
+    const instance = Template.instance();
+    // Get the total number of documents
+    return instance.pagination.totalItems();
+  },
+  templatePagination () {
+    const instance = Template.instance();
+    // Get reference of pagination
+    return instance.pagination;
   },
 });
 
