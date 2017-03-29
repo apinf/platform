@@ -22,6 +22,7 @@ import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
+import ApiBacklogItems from '/backlog/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -236,5 +237,18 @@ Apis.helpers({
     }
 
     return documentation;
+  },
+  backlogIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const backlog = ApiBacklogItems.findOne({ apiBackendId: apiId });
+
+    // Check if backlog exist or user can manage
+    // to hide/show corresponding tab
+    if (backlog || this.currentUserCanManage()) {
+      return true;
+    }
+    return false;
   },
 });
