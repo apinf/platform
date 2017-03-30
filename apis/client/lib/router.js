@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { DocHead } from 'meteor/kadira:dochead';
 
 FlowRouter.route('/apis/new', {
   name: 'addApi',
@@ -32,8 +33,16 @@ FlowRouter.route('/apis/:slug/', {
 
     // Check if API exists
     Meteor.call('apiExists', slug, (error, apiExists) => {
+
       // Check if API exists
       if (apiExists) {
+
+        // Set Social Meta Tags
+        DocHead.addMeta({property: 'og:image', content: apiExists.logoUrl});
+        DocHead.addMeta({property: 'og:title', content: apiExists.name});
+        DocHead.addMeta({property: 'og:description', content: apiExists.description});
+        DocHead.addMeta({property: 'og:url', content: window.location.href});
+
         // Ensure current user has permissions to view backend
         Meteor.call('currentUserCanViewApi', slug, (canViewError, userCanViewApi) => {
           if (userCanViewApi) {

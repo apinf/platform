@@ -18,6 +18,9 @@ Meteor.methods({
     // Look for API
     const api = Apis.findOne({ slug });
 
+    // Attach logo url
+    api.logoUrl = api.logoUrl();
+
     // Return true if API exists, false if undefined
     return (api);
   },
