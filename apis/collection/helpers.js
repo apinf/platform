@@ -24,6 +24,7 @@ import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
 import ApiBacklogItems from '/backlog/collection';
 import ApiMetadata from '/metadata/collection';
+import ApiLogo from '/apis/logo/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -262,5 +263,41 @@ Apis.helpers({
       return true;
     }
     return false;
+  },
+  logo () {
+    // Placeholder logo Object
+    let apiLogo;
+
+    // Get API ID
+    const apiId = this._id;
+
+    if (this.apiLogoFileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(this.apiLogoFileId);
+
+      // Get API logo file Object
+      apiLogo = ApiLogo.findOne(objectId);
+    }
+    return apiLogo;
+  },
+  logoUrl() {
+    // Placeholder logo url
+    let apiLogoUrl;
+
+    // Get logo
+    const apiLogo = this.logo();
+
+    //Check if API logo file is available
+    if (apiLogo) {
+      // Get Meteor absolute URL
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+      // Set base url
+      const baseApiLogoURL = meteorAbsoluteUrl + ApiLogo.baseURL;
+
+      // Get API logo file URL
+      apiLogoUrl = `${baseApiLogoURL}/md5/${apiLogo.md5}`;
+    }
+    return apiLogoUrl;
   },
 });
