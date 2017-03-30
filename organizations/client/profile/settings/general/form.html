@@ -19,16 +19,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{> afQuickField name='url' }}
   {{> afQuickField name='description' }}
 
-  <b>
-    {{_ "organizationSettings_uploadLogo_heading" }}
-  </b>
-  <p>
-    {{_ "organizationSettings_uploadLogoText" }}
-  </p>
-
-  {{> uploadOrganizationLogo organization=organization }}
-
-  <button type="submit" class="btn btn-success" id="save-org-settings">
+  <button type="submit" class="btn btn-success" id="save-org-general-settings">
     {{_ "orgSettingsGeneral_saveButton_text" }}
   </button>
   {{/ autoForm }}
