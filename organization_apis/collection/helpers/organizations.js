@@ -10,7 +10,6 @@ import { Meteor } from 'meteor/meteor';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 
@@ -31,33 +30,27 @@ Organizations.helpers({
     return [];
   },
   userVisibleApiFilter () {
-    // Get ids of managed APIs of organization
-    const apiIds = this.managedApiIds();
     const userId = Meteor.userId();
     // Placeholder for storage database query
     let filteredApis;
 
+    // If user is organization manager
     if (this.currentUserCanManage()) {
-      filteredApis = { _id: { $in: apiIds } };
+      // When all managed APIs are available
+      filteredApis = {};
+    } else if (userId) {
+      // Case: user is manager of APIs or without APIs
+      // Select visible organization apis for current user
+      filteredApis = {
+        $or: [
+          { isPublic: true },
+          { managerIds: userId },
+          { authorizedUserIds: userId },
+        ],
+      };
     } else {
-      // Case: Registered users
-      if (userId) {
-        // Case: user is manager of APIs or without APIs
-        // Select available organization apis for current user
-        filteredApis = {
-          _id: { $in: apiIds },
-          $or: [
-            { isPublic: true },
-            { managerIds: userId },
-            { authorizedUserIds: userId },
-          ],
-        };
-      } else {
-        // Case: Anonymous users
-
-        // Show all public apis of organization
-        filteredApis = { _id: { $in: apiIds }, isPublic: true };
-      }
+      // Show all public apis of organization for anonym user
+      filteredApis = { isPublic: true };
     }
 
     return filteredApis;
