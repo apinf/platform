@@ -239,7 +239,7 @@ Apis.helpers({
 
     return documentation;
   },
-  backlogIsNotEmpty () {
+  userShouldSeeBacklogTab () {
     // Get API id
     const apiId = this._id;
 
@@ -252,7 +252,7 @@ Apis.helpers({
     }
     return false;
   },
-  apiDocsIsNotEmpty () {
+  userShouldSeeApiDocTab () {
     // Get API id
     const apiId = this._id;
 
@@ -265,7 +265,7 @@ Apis.helpers({
     }
     return false;
   },
-  apiMetadataIsNotEmpty () {
+  userShouldSeeApiMetadataTab () {
     // Get API id
     const apiId = this._id;
 
