@@ -22,6 +22,8 @@ import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
+import ApiBacklogItems from '/backlog/collection';
+import ApiMetadata from '/metadata/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -236,5 +238,29 @@ Apis.helpers({
     }
 
     return documentation;
+  },
+  backlogIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const backlog = ApiBacklogItems.findOne({ apiBackendId: apiId });
+
+    // Check if backlog exist
+    if (backlog) {
+      return true;
+    }
+    return false;
+  },
+  apiMetadataIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const apiMetadata = ApiMetadata.findOne({ apiId });
+
+    // Check if Api Metadata exist
+    if (apiMetadata) {
+      return true;
+    }
+    return false;
   },
 });
