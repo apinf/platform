@@ -21,8 +21,13 @@ Template.relatedMedia.onCreated(function () {
 
   // Get posts owned by API
   const currentFilters = {};
-  currentFilters.entityId = instance.data.entity._id;
-  currentFilters.entityType = instance.data.entity.entityType;
+
+  // Make sure entity is available
+  if (instance.data.entity) {
+    currentFilters.entityId = instance.data.entity._id;
+    currentFilters.entityType = instance.data.entity.entityType;
+  }
+
   instance.pagination.filters(currentFilters);
 });
 
