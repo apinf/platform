@@ -3,20 +3,73 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-/* Bootstrap */
-@import "/core/client/style/bootstrap-variables.less";
+.api-card {
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.15);
+  .api-card-action-bar ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  .api-card-action-bar li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    font-size: 1em;
+    color: #555;
+  }
 
-.api-card-author {
-  display: block;
-  font-size: 0.9em;
-  color: #777;
-}
-.api-card-star-average {
-  color: @gray;
-}
-.api-card-bookmark {
-  .api-card-bookmark-number {
-    color: @gray;
-    display: inline;
+  .api-card-action-bar li.time {
+    width: 60%;
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .api-card-action-bar li.rating, .api-card-action-bar li.bookmark {
+    width: 20%;
+  }
+  .api-card-action-bar li.rating {
+    padding-left: 0;
+    padding-right: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.65em;
+  }
+
+  .api-card-action-bar li.bookmark {
+    padding-left: 0;
+    padding-right: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .api-card-heading h3 {
+    margin-top: 0px;
+  }
+
+  .api-card-author {
+    color: #777;
+  }
+
+  .api-card-description p {
+    color: #777;
+    max-height: 6em;
+    overflow: hidden;
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 1.6em;
+    padding-right: 1.6em;
+  }
+
+  .api-card-logo {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
   }
 }

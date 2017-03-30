@@ -4,79 +4,76 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiCard">
-  <div class="generic-card panel panel-default">
-    <div class="panel-body">
-      <div class="media">
-        <div class="media-left">
-          {{> viewApiLogo api=api }}
-        </div>
-        <div class="media-body">
-          <a href="{{ pathFor 'viewApi' slug=api.slug }}"
-             class="generic-card-name">
-            {{ api.name }}
-            {{> viewApiStatus api=api width="0.6" }}
-          </a>
-          <span class="api-card-author">
-            {{_ "catalogueGrid_addedBy" }}
-            {{ api.getApiManagersByName }}
-          </span>
-          {{> apiLifecycleStatus api=api }}
+  <div class="panel api-card">
+    <div class="panel-heading api-card-heading text-center">
+      <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+        <h3>
+          {{ api.name }}
+        </h3>
+      </a>
+      <p class="api-card-author text-center">
+        {{_ "catalogueGrid_addedBy" }}
+        {{ api.getApiManagersByName }}
+      </p>
+      {{> apiLifecycleStatus api=api }}
 
-          {{# unless api.isPublic }}
-            <span class="label label-default">
-                {{_ "apiCard_labelText_private"}}
-            </span>
-          {{/ unless }}
-          <p class="generic-card-description">
-            {{ api.description }}
-          </p>
-        </div>
-      </div>
+      {{# unless api.isPublic }}
+      <span class="label label-default">
+        {{_ "apiCard_labelText_private"}}
+      </span>
+      {{/ unless }}
     </div>
-    <div class="panel-footer">
-      <ul class="list-inline">
-        {{# if api.averageRating }}
-        <li class="pull-left">
-          <div class="api-card-star-average"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ "apiCard_tooltipTitle_averageRating" }}">
-              {{ api.averageRating }}
-              <i class="fa fa-star-half-o"></i>
-          </div>
-        </li>
-        {{/if}}
-        {{# if currentUser }}
-        <li class="pull-left">
-          <div
-               class="api-card-bookmark"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue_BookmarkTooltip_user' }}">
-            {{> bookmark api=api catalogueView=true }}
-          </div>
-        </li>
-        {{ else }}
-        <li class="pull-left">
-          <div
-               class="api-card-bookmark"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue_bookmarkTooltip_nonUser' }}">
-            <span class="api-card-bookmark-number">
-              {{ api.bookmarkCount }}
-            </span>
-            <i class="fa fa-bookmark bookmark-default"></i>
-          </div>
-        </li>
-        {{/ if }}
+    <div class="api-card-logo">
+      <p class="text-center">
+        {{> viewApiLogo api=api }}
+      </p>
+    </div>
+    <div class="api-card-description">
+      <p class="text-center">
+        {{ api.description }}
+      </p>
+    </div>
+    <div class="api-card-action-bar">
+      <ul>
         {{# if api.created_at }}
-          <li class="pull-right">
-            <span class="generic-card-created" title='{{ localeFormatDate api.created_at }}'>
-              {{ dateInTimeAgoFormat api.created_at }}
-            </span>
-          </li>
+        <li class="time">
+          <span title='{{ localeFormatDate api.created_at }}'>
+            <i class="fa fa-clock-o"></i>
+            {{ dateInTimeAgoFormat api.created_at }}
+          </span>
+        </li>
         {{/ if }}
+        <li class="rating pull-right">
+            {{# if api.averageRating }}
+              <div class="api-card-star-average"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="{{_ 'apiCard_tooltipTitle_averageRating' }}">
+                    {{ api.averageRating }}
+                  <i class="fa fa-star-half-o"></i>
+              </div>
+            {{/if}}
+        </li>
+        <li class="bookmark pull-right">
+          {{# if currentUser }}
+            <div
+                 class="api-card-bookmark"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="{{_ 'catalogue_BookmarkTooltip_user' }}">
+              {{> bookmark api=api catalogueView=true }}
+            </div>
+          {{ else }}
+            <div
+                 class="api-card-bookmark"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="{{_ 'catalogue_bookmarkTooltip_nonUser' }}">
+                {{ api.bookmarkCount }}
+              <i class="fa fa-bookmark bookmark-default"></i>
+            </div>
+          {{/ if }}
+        </li>
       </ul>
     </div>
   </div>
