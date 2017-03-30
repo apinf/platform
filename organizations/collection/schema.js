@@ -148,7 +148,7 @@ Organizations.schema = new SimpleSchema({
       },
     },
   },
-  organizationCoverPhotoFileId: {
+  organizationCoverFileId: {
     type: String,
     optional: true,
   },
