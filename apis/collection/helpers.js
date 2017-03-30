@@ -239,28 +239,26 @@ Apis.helpers({
 
     return documentation;
   },
-  userShouldSeeBacklogTab () {
+  backlogIsNotEmpty () {
     // Get API id
     const apiId = this._id;
 
     const backlog = ApiBacklogItems.findOne({ apiBackendId: apiId });
 
-    // Check if backlog exist or user can manage
-    // to hide/show corresponding tab
-    if (backlog || this.currentUserCanManage()) {
+    // Check if backlog exist
+    if (backlog) {
       return true;
     }
     return false;
   },
-  userShouldSeeApiMetadataTab () {
+  apiMetadataIsNotEmpty () {
     // Get API id
     const apiId = this._id;
 
     const apiMetadata = ApiMetadata.findOne({ apiId });
 
-    // Check if backlog exist or user can manage
-    // to hide/show corresponding tab
-    if (apiMetadata || this.currentUserCanManage()) {
+    // Check if Api Metadata exist
+    if (apiMetadata) {
       return true;
     }
     return false;
