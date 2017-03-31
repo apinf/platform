@@ -3,10 +3,16 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
 import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import Posts from '/related_media/collection';
+
+// Collection imports
+import Posts from '../../collection';
 
 Template.relatedMedia.onCreated(function () {
   const instance = this;
@@ -33,10 +39,10 @@ Template.relatedMedia.onCreated(function () {
 
 Template.relatedMedia.helpers({
   posts () {
-    const posts = Template.instance().pagination.getPage();
+    const instance = Template.instance();
 
     // Return items of organization collection via Pagination
-    return posts;
+    return instance.pagination.getPage();
   },
   templatePagination () {
     // Get reference of pagination
@@ -53,8 +59,8 @@ Template.relatedMedia.helpers({
 });
 
 Template.relatedMedia.events({
-  'click #add-media': function () {
-    const entity = this.entity;
+  'click #add-media': function (event, templateInstance) {
+    const entity = templateInstance.data.entity;
     Modal.show('relatedMediaPostsForm', { entity });
   },
 });
