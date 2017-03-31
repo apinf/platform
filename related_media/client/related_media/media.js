@@ -42,6 +42,14 @@ Template.relatedMedia.helpers({
     // Get reference of pagination
     return Template.instance().pagination;
   },
+  wellMessage () {
+    // Get entity
+    const entity = Template.instance().data.entity;
+    // Get entity Type
+    const entityType = entity.entityType();
+    // Text of message depends on entity type
+    return TAPi18n.__(`relatedMedia_Well_Message.${entityType}`);
+  },
 });
 
 Template.relatedMedia.events({
