@@ -461,6 +461,7 @@
   "orgSettingsContentManagement_numberOfMediasPerPage_description": "Number of Medias per page",
   "orgSettingsContentManagement_saveButton_text": "Save",
   "orgSettingsContentManagement_title": "Content Management",
+  "orgSettingsCoverAndLogo_title": "Logo and cover image",
   "orgSettingsGeneral_cancelButton_text": "Cancel",
   "orgSettingsGeneral_saveButton_text": "Save",
   "orgSettingsGeneral_title": "General",
