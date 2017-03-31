@@ -8,13 +8,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{_ "orgSettingsContactInfo_title" }}
   </h3>
 
-  {{> quickForm
-    collection=organizationCollection
-    doc=organization
-    id="contactForm"
-    type="update"
-    fields="contact"
-    buttonContent="Save"
+  {{# autoForm
+      collection=organizationCollection
+      doc=organization
+      id="orgSettingsContact"
+      type="update"
   }}
+
+  {{> afQuickField name='contact.person' }}
+  {{> afQuickField name='contact.phone' }}
+  {{> afQuickField name='contact.email' }}
+
+  <button type="submit" class="btn btn-success" id="save-org-contact-settings">
+    {{_ "orgSettingsContactInfo_saveButton_text" }}
+  </button>
+  {{/ autoForm }}
+
 
 </template>
