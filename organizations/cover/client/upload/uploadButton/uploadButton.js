@@ -11,5 +11,5 @@ import OrganizationCover from '/organizations/cover/collection/collection';
 
 Template.uploadOrganizationCoverButton.onRendered(() => {
   // Assign resumable browse to element
-  OrganizationCover.resumable.assignBrowse($('.fileBrowse'));
+  OrganizationCover.resumable.assignBrowse($('.fileBrowse-cover'));
 });
