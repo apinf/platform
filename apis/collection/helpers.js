@@ -22,9 +22,9 @@ import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
+import ApiLogo from '/apis/logo/collection';
 import ApiBacklogItems from '/backlog/collection';
 import ApiMetadata from '/metadata/collection';
-import ApiLogo from '/apis/logo/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -268,9 +268,6 @@ Apis.helpers({
     // Placeholder logo Object
     let apiLogo;
 
-    // Get API ID
-    const apiId = this._id;
-
     if (this.apiLogoFileId) {
       // Convert to Mongo ObjectID
       const objectId = new Mongo.Collection.ObjectID(this.apiLogoFileId);
@@ -280,14 +277,14 @@ Apis.helpers({
     }
     return apiLogo;
   },
-  logoUrl() {
+  logoUrl () {
     // Placeholder logo url
     let apiLogoUrl;
 
     // Get logo
     const apiLogo = this.logo();
 
-    //Check if API logo file is available
+    // Check if API logo file is available
     if (apiLogo) {
       // Get Meteor absolute URL
       const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
