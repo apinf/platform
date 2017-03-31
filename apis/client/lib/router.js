@@ -36,10 +36,16 @@ FlowRouter.route('/apis/:slug/', {
       // Check if API exists
       if (apiExists) {
         // Set Social Meta Tags
+        // Facebook & LinkedIn
         DocHead.addMeta({ property: 'og:image', content: apiExists.logoUrl });
         DocHead.addMeta({ property: 'og:title', content: apiExists.name });
         DocHead.addMeta({ property: 'og:description', content: apiExists.description });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
+        // Twitter
+        DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
+        DocHead.addMeta({ property: 'twitter:title', content: apiExists.name });
+        DocHead.addMeta({ property: 'twitter:description', content: apiExists.description });
+        DocHead.addMeta({ property: 'twitter:image', content: apiExists.logoUrl });
 
         // Ensure current user has permissions to view backend
         Meteor.call('currentUserCanViewApi', slug, (canViewError, userCanViewApi) => {
