@@ -77,4 +77,16 @@ Template.customStylesheet.helpers({
 
     return primaryColorText;
   },
+  coverImageOpacity () {
+    // Get opacity
+    const branding = Branding.findOne();
+
+    let coverImageOpacity = 0;
+
+    if (branding && branding.colors && branding.colors.coverImageOpacity) {
+      coverImageOpacity = branding.colors.coverImageOpacity;
+    }
+
+    return coverImageOpacity;
+  },
 });
