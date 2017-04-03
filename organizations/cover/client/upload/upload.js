@@ -27,8 +27,11 @@ Template.uploadOrganizationCover.helpers({
     // Get organization ID
     const organizationId = this.organization._id;
 
+    // Get organization by ID
+    const organizationById = Organizations.findOne({ _id: organizationId });
+
     // Get organization cover file ID
-    const organizationCoverFileId = Organizations.findOne({ _id: organizationId }).organizationCoverFileId;
+    const organizationCoverFileId = organizationById.organizationCoverFileId;
 
     let organizationCoverFile;
 
