@@ -9,7 +9,7 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Organizations from '/organizations/collection';
 
-Template.orgSettingsGeneral.helpers({
+Template.organizationSettingsGeneral.helpers({
   organizationCollection () {
     return Organizations;
   },

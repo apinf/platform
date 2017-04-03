@@ -3,15 +3,15 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
-<template name="orgSettingsGeneral">
-  <h3 class="orgSettingSubTitle">
-    {{_ "orgSettingsGeneral_title" }}
+<template name="organizationSettingsGeneral">
+  <h3 class="organizationSettingSubTitle">
+    {{_ "organizationSettingsGeneral_title" }}
   </h3>
 
   {{# autoForm
       collection=organizationCollection
       doc=organization
-      id="orgSettingsGeneral"
+      id="organizationSettingsGeneral"
       type="update"
   }}
 
@@ -20,7 +20,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{> afQuickField name='description' }}
 
   <button type="submit" class="btn btn-success" id="save-org-general-settings">
-    {{_ "orgSettingsGeneral_saveButton_text" }}
+    {{_ "organizationSettingsGeneral_saveButton_text" }}
   </button>
   {{/ autoForm }}
 
