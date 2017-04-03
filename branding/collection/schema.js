@@ -37,6 +37,12 @@ Branding.schema = new SimpleSchema({
       type: 'bootstrap-colorpicker',
     },
   },
+  'colors.coverImageOverlayOpacity': {
+    type: Number,
+    min: 0,
+    max: 100,
+    optional: true,
+  },
   siteTitle: {
     type: String,
     optional: true,
