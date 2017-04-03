@@ -48,7 +48,7 @@ Template.relatedMedia.helpers({
     // Get reference of pagination
     return Template.instance().pagination;
   },
-  wellMessage () {
+  noRelatedMedia () {
     // Get entity
     const entity = Template.instance().data.entity;
     // Get entity Type
