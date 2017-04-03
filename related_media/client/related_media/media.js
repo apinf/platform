@@ -54,7 +54,7 @@ Template.relatedMedia.helpers({
     // Get entity Type
     const entityType = entity.entityType();
     // Text of message depends on entity type
-    return TAPi18n.__(`relatedMedia_Well_Message.${entityType}`);
+    return TAPi18n.__(`relatedMedia_text_noRelatedMedia.${entityType}`);
   },
 });
 
