@@ -12,7 +12,7 @@ import Branding from '/branding/collection';
 const tinycolor = require('tinycolor2');
 
 Template.customStylesheet.helpers({
-  mostReadableBackgound () {
+  mostReadableBackground () {
     // Get branding
     const branding = Branding.findOne();
 
