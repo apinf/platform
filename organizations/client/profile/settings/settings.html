@@ -10,11 +10,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         {{> organizationSettingsGeneral organization=organization }}
 
-        <div class="organizationSettingSection">
-          <h3>
-            {{_ "organizationSettingsCoverAndLogo_title" }}
-          </h3>
+        <h3>
+          {{_ "organizationSettingsCoverAndLogo_title" }}
+        </h3>
 
+        <div class="setting-section">
           <p>
             <b>
               {{_ "organizationSettings_uploadLogo_heading" }}
@@ -40,7 +40,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         <!-- {{> organizationSettingsContentManagement organization=organization }} -->
 
-        <div class="organizationSettingSection">
+        <div class="setting-section">
           {{> addOrganizationManagerForm organization=organization }}
           {{> organizationManagersList organization=organization }}
         </div>
