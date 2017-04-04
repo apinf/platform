@@ -3,15 +3,15 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
-<template name="organizationSettingsSomePlatforms">
+<template name="organizationSettingsSocialMedia">
   <h3 class="organizationSettingSubTitle">
-    {{_ "organizationSettingsSomePlatforms_title" }}
+    {{_ "organizationSettingsSocialMedia_title" }}
   </h3>
 
   {{# autoForm
     collection=organizationCollection
     doc=organization
-    id="organizationSettingsSomePlatforms"
+    id="organizationSettingsSocialMedia"
     type="update"
   }}
 
@@ -21,7 +21,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{> afQuickField name='socialMedia.linkedIn' }}
 
     <button type="submit" class="btn btn-success" id="save-org-some-settings">
-      {{_ "organizationSettingsSomePlatforms_saveButton_text" }}
+      {{_ "organizationSettingsSocialMedia_saveButton_text" }}
     </button>
   {{/ autoForm }}
 </template>
