@@ -446,6 +446,7 @@
   "organizationSettingsContentManagement_panelTitle": "Content Management",
   "organizationSettingsContentManagement_saveButton": "Save",
   "organizationSettingsContentManagement_numberOfMediasPerPage": "Number of Medias per page",
+  "organizationSettingsContentManagement_successMessage": "Number of Medias for displaying is added.",
   "organizationSettingsDelete_buttonText_delete": "Delete",
   "organizationSettingsDelete_text_information": "The organization information will be removed and this action cannot be undone.",
   "organizationSettingsDelete_title": "Delete the Organization profile",
