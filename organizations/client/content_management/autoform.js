@@ -7,7 +7,7 @@ AutoForm.hooks({
   numberOfMediasPerPageForm: {
     onSuccess () {
       // Get success message translation
-      const message = TAPi18n.__('organizationManagerForm_successMessage');
+      const message = TAPi18n.__('organizationSettingsContentManagement_successMessage');
 
       // Alert user of success
       sAlert.success(message);
