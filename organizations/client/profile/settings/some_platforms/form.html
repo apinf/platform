@@ -4,24 +4,26 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationSettingsSocialMedia">
-  <h3 class="organizationSettingSubTitle">
-    {{_ "organizationSettingsSocialMedia_title" }}
-  </h3>
+  <div class="organizationSettingSection">
+    <h3>
+      {{_ "organizationSettingsSocialMedia_title" }}
+    </h3>
 
-  {{# autoForm
-    collection=organizationCollection
-    doc=organization
-    id="organizationSettingsSocialMedia"
-    type="update"
-  }}
+    {{# autoForm
+      collection=organizationCollection
+      doc=organization
+      id="organizationSettingsSocialMedia"
+      type="update"
+    }}
 
-    {{> afQuickField name='socialMedia.facebook' }}
-    {{> afQuickField name='socialMedia.twitter' }}
-    {{> afQuickField name='socialMedia.instagram' }}
-    {{> afQuickField name='socialMedia.linkedIn' }}
+      {{> afQuickField name='socialMedia.facebook' }}
+      {{> afQuickField name='socialMedia.twitter' }}
+      {{> afQuickField name='socialMedia.instagram' }}
+      {{> afQuickField name='socialMedia.linkedIn' }}
 
-    <button type="submit" class="btn btn-success" id="save-org-some-settings">
-      {{_ "organizationSettingsSocialMedia_saveButton_text" }}
-    </button>
-  {{/ autoForm }}
+      <button type="submit" class="btn btn-success" id="save-org-some-settings">
+        {{_ "organizationSettingsSocialMedia_saveButton_text" }}
+      </button>
+    {{/ autoForm }}
+  </div>
 </template>

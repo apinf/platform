@@ -4,23 +4,25 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationSettingsContactInfo">
-  <h3 class="organizationSettingSubTitle">
-    {{_ "organizationSettingsContactInfo_title" }}
-  </h3>
+  <div class="organizationSettingSection">
+    <h3>
+      {{_ "organizationSettingsContactInfo_title" }}
+    </h3>
 
-  {{# autoForm
-    collection=organizationCollection
-    doc=organization
-    id="organizationSettingsContact"
-    type="update"
-  }}
+    {{# autoForm
+      collection=organizationCollection
+      doc=organization
+      id="organizationSettingsContact"
+      type="update"
+    }}
 
-    {{> afQuickField name='contact.person' }}
-    {{> afQuickField name='contact.phone' }}
-    {{> afQuickField name='contact.email' }}
+      {{> afQuickField name='contact.person' }}
+      {{> afQuickField name='contact.phone' }}
+      {{> afQuickField name='contact.email' }}
 
-    <button type="submit" class="btn btn-success" id="save-org-contact-settings">
-      {{_ "organizationSettingsContactInfo_saveButton_text" }}
-    </button>
-  {{/ autoForm }}
+      <button type="submit" class="btn btn-success" id="save-org-contact-settings">
+        {{_ "organizationSettingsContactInfo_saveButton_text" }}
+      </button>
+    {{/ autoForm }}
+  </div>
 </template>
