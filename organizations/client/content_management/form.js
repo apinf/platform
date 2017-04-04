@@ -9,8 +9,15 @@ Template.numberOfMediasPerPageForm.helpers({
     // Make Organizations collection available to template (i.e. autoform)
     return Organizations;
   },
-  select () {
-    const instance = Template.instance();
-    console.log('instance', instance.data);
+});
+Template.numberOfMediasPerPageForm.events({
+  'click #selectedvalue': function (event) {
+    const selectedvalue = $(event.currentTarget).val();
+    const organizationId = Template.instance().data.organization._id;
+    Organizations.update({
+      _id: organizationId },
+      { $set: { numberOfMediasPerPage: selectedvalue },
+      });
+    // return 'update';
   },
 });
