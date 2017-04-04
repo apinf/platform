@@ -116,4 +116,17 @@ Meteor.methods({
     // Remove organizationApi links
     OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
   },
+  organizationProfile (slug) {
+    // Make sure slug is a string
+    check(slug, String);
+
+    // Look for Organization
+    const organization = Organizations.findOne({ slug });
+
+    // Attach logo url
+    organization.logoUrl = organization.logoUrl();
+
+    // Return organization
+    return (organization);
+  },
 });
