@@ -14,14 +14,14 @@ Template.viewApiLogo.onCreated(function () {
 
 Template.viewApiLogo.helpers({
   uploadedApiLogoLink () {
-    // Get API current API Backend from template data
+    // Get API Backend from template data
     const api = Template.currentData().api;
 
-    // Return undefined or API logo file URL
+    // Return API logo file URL
     return api.logoUrl();
   },
   apiLogoExists () {
-    // Get API current API Backend from template data
+    // Get API Backend from template data
     const api = Template.currentData().api;
     // Return boolean logo exist
     return !!api.logo();
