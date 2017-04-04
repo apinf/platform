@@ -77,24 +77,24 @@ Template.customStylesheet.helpers({
 
     return primaryColorText;
   },
-  coverImageOverlayColor () {
+  coverImageOverlay () {
     // Get branding
     const branding = Branding.findOne();
 
-    let coverImageOverlayColor;
+    let coverImageOverlay;
 
-    if (branding && branding.colors && branding.colors.coverImageOverlayColor) {
-      coverImageOverlayColor = branding.colors.coverImageOverlayColor;
+    if (branding && branding.colors && branding.colors.coverImageOverlay) {
+      coverImageOverlay = branding.colors.coverImageOverlay;
     }
 
-    let coverImageOverlayOpacity = 0;
+    let overlayTransparency = 0;
 
-    if (branding && branding.colors && branding.colors.coverImageOverlayOpacity) {
-      coverImageOverlayOpacity = branding.colors.coverImageOverlayOpacity / 100;
+    if (branding && branding.colors && branding.colors.overlayTransparency) {
+      overlayTransparency = branding.colors.overlayTransparency / 100;
     }
 
-    const color = tinycolor(coverImageOverlayColor);
-    color.setAlpha(coverImageOverlayOpacity);
+    const color = tinycolor(coverImageOverlay);
+    color.setAlpha(overlayTransparency);
 
     return color.toRgbString();
   },
