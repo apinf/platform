@@ -77,9 +77,15 @@ Template.customStylesheet.helpers({
 
     return primaryColorText;
   },
-  coverImageOverlayOpacity () {
-    // Get opacity
+  coverImageOverlayColor () {
+    // Get branding
     const branding = Branding.findOne();
+
+    let coverImageOverlayColor;
+
+    if (branding && branding.colors && branding.colors.coverImageOverlayColor) {
+      coverImageOverlayColor = branding.colors.coverImageOverlayColor;
+    }
 
     let coverImageOverlayOpacity = 0;
 
@@ -87,6 +93,9 @@ Template.customStylesheet.helpers({
       coverImageOverlayOpacity = branding.colors.coverImageOverlayOpacity / 100;
     }
 
-    return coverImageOverlayOpacity;
+    const color = tinycolor(coverImageOverlayColor);
+    color.setAlpha(coverImageOverlayOpacity);
+
+    return color.toRgbString();
   },
 });
