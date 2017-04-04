@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apinf/api-umbrella-dashboard.git"
+    "url": "git+https://github.com/apinf/platform.git"
   },
   "keywords": [
     "Analytics",
@@ -61,7 +61,7 @@
   "author": "APInf Oy",
   "license": "EUPL-1.1",
   "bugs": {
-    "url": "https://github.com/apinf/api-umbrella-dashboard/issues"
+    "url": "https://github.com/apinf/platform/issues"
   },
-  "homepage": "https://github.com/apinf/api-umbrella-dashboard#readme"
+  "homepage": "https://github.com/apinf/platform#readme"
 }
