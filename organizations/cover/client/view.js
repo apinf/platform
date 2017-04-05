@@ -13,6 +13,7 @@ import OrganizationCover from '/organizations/cover/collection/collection';
 
 Template.viewOrganizationCover.onCreated(function () {
   const instance = this;
+
   // Subscribe to Organization cover
   instance.subscribe('organizationCover');
 });

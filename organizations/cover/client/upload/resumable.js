@@ -52,7 +52,6 @@ Meteor.startup(() => {
     sAlert.success(message);
   });
 
-  // TODO: refactor this code, so we can use the arrow-body-style rule
   // eslint-disable-next-line arrow-body-style
   OrganizationCover.resumable.on('fileAdded', (file) => OrganizationCover.insert({
     _id: file.uniqueIdentifier,
@@ -68,6 +67,7 @@ Meteor.startup(() => {
 
     // Get organization
     const organization = Organizations.findOne();
+
     // If user doesn't have permission to insert cover
     if (organization && !organization.currentUserCanManage()) {
       // Create & show error message about permissions
