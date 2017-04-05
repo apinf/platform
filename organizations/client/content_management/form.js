@@ -11,7 +11,7 @@ Template.numberOfMediasPerPageForm.helpers({
   },
 });
 Template.numberOfMediasPerPageForm.events({
-  'click #selectedvalue': function (event) {
+  'click .edit-num-page': function (event) {
     const selectedvalue = $(event.currentTarget).val();
     const organizationId = Template.instance().data.organization._id;
     Organizations.update({
