@@ -112,6 +112,9 @@ Organizations.schema = new SimpleSchema({
   numberOfMediasPerPage: {
     type: String,
     optional: true,
+    defaultValue () {
+      return '4';
+    },
   },
   socialMedia: {
     type: Object,
