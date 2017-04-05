@@ -13,7 +13,7 @@ Template.relatedMedia.onCreated(function () {
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
     // Count of posts on page
-    perPage: parseInt(instance.data.entity.numberOfMediasPerPage, 10),
+    perPage: parseInt(instance.data.entity.mediasNumberPrePage, 10),
     // Set sort by creation datestamp on default
     sort: { createdAt: -1 },
   });
