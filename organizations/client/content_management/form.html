@@ -9,25 +9,27 @@
       <p>
        <b>
         {{_ "organizationSettingsContentManagement_numberOfMediasPerPage" }}
-        <select class="form-control" id="selectedvalue">
-         <option value="4">4</option>
-         <option value="8">8</option>
-         <option value="16">16</option>
-         <option value="20">20</option>
-         <option value="24">24</option>
-       </select>
-
+          <select class="form-control" id="selectedvalue">
+             <option value="4">4</option>
+             <option value="8">8</option>
+             <option value="16">16</option>
+             <option value="20">20</option>
+             <option value="24">24</option>
+           </select>
        </b>
       </p>
-    {{# autoForm
-      collection=organizationsCollection
-      doc=organization
-      id="numberOfMediasPerPageForm"
-      type="update"
-     }}
-     {{#afEachArrayItem name=selectedvalue }}
-      {{> afQuickField  name='numberOfMediasPerPage' label=holeLabels }}
-      {{/afEachArrayItem}}
+
+        {{# autoForm
+          collection=organizationsCollection
+          doc=organization
+          id="numberOfMediasPerPageForm"
+          type="update"
+         }}
+
+         {{#afEachArrayItem name=selectedvalue }}
+          {{> afQuickField  name='numberOfMediasPerPage' }}
+         {{/afEachArrayItem}}
+
       <button type="submit" class="edit-num-page btn btn-primary">
         {{_ "organizationSettingsContentManagement_saveButton" }}
       </button>
