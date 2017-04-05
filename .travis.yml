@@ -12,6 +12,8 @@ services:
 
 before_script:
   - npm run-script lint
+  - npm run-script test-phantom
+  - npm run-script test-app-phantom
 
 script:
   - ./.scripts/docker_build.sh
