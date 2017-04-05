@@ -18,6 +18,5 @@ Template.numberOfMediasPerPageForm.events({
       _id: organizationId },
       { $set: { numberOfMediasPerPage: selectedvalue },
       });
-    // return 'update';
   },
 });
