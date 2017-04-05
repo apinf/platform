@@ -4,27 +4,21 @@
       <h2 class="panel-title">
         {{_ 'organizationSettingsContentManagement_panelTitle' }}
       </h2>
-   </div>
-   <div class="panel-body">
-      <p>
-       <b>
-        {{_ "organizationSettingsContentManagement_numberOfMediasPerPage" }}
-       </b>
-      </p>
-
-        {{# autoForm
+    </div>
+    <div class="panel-body">
+      {{# autoForm
           collection=organizationsCollection
           doc=organization
           id="numberOfMediasPerPageForm"
           type="update"
-         }}
+      }}
 
-          {{> afQuickField  name='numberOfMediasPerPage' }}
+        {{> afQuickField  name='mediasNumberPrePage' firstOption=false }}
 
-      <button type="submit" class="edit-num-page btn btn-primary">
-        {{_ "organizationSettingsContentManagement_saveButton" }}
-      </button>
-    {{/ autoForm }}
+        <button type="submit" class="btn btn-primary">
+          {{_ "organizationSettingsContentManagement_saveButton" }}
+        </button>
+      {{/ autoForm }}
+    </div>
   </div>
-</div>
 </template>
