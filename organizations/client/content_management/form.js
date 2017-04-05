@@ -11,12 +11,12 @@ Template.numberOfMediasPerPageForm.helpers({
   },
 });
 Template.numberOfMediasPerPageForm.events({
-  'click .edit-num-page': function () {
-    const selectedvalue = Template.instance().data.organization.numberOfMediasPerPage;
+  'click .edit-num-page': function (event) {
+    const selectedvalue = $(event.currentTarget).val();
     const organizationId = Template.instance().data.organization._id;
     Organizations.update({
       _id: organizationId },
-      { $set: { numberOfMediasPerPage: selectedvalue },
+      { $set: { mediasNumberPrePage: selectedvalue },
       });
   },
 });
