@@ -149,6 +149,11 @@
   "apiSettingsVisibility_title": "Visibility",
   "apiSettingsVisibility_heading": "Change API visibility",
   "apiSettingsVisibility_text": "Make this API private or public",
+  "apiSortingToolbar_labelText_sortBy": "Sort by",
+  "apiSortingToolbar_sortMenuOptions_names": "Names (A-Z)",
+  "apiSortingToolbar_sortMenuOptions_newestCreated": "Newest created",
+  "apiSortingToolbar_sortMenuOptions_bookmarks": "Bookmarks",
+  "apiSortingToolbar_sortMenuOptions_ratings": "Ratings",
   "apiAuthorizedUsersList_authorizedUsers": "Give single users permissions to view API even when API is globally marked Private.",
   "api_backend_rating_anonymous": "Please log in to vote.",
   "apinf_apiumbrellauser_error": "Error: Could not create user on proxy",
@@ -497,7 +502,10 @@
   "relatedMedia_addButton_help": "Add embedded related media content",
   "relatedMedia_addButton": "Add related media",
   "relatedMedia_Title": "Related Media",
-  "relatedMedia_Well_Message": "You don't have any media related to this API",
+  "relatedMedia_text_noRelatedMedia": {
+      "api": "You don't have any media related to this API",
+      "organization": "The organization doesn't have any related media"
+  },
   "relatedMediaPostsForm_modalTitle_relatedMedia": "Related Media",
   "relatedMediaPostsForm_Cancel": "Cancel",
   "relatedMediaPostsForm_Submit": "Add related content",
