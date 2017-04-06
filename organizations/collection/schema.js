@@ -109,10 +109,11 @@ Organizations.schema = new SimpleSchema({
       return this.unset();
     },
   },
-  mediasNumberPrePage: {
+  mediasNumberPerPage: {
     type: Number,
     optional: true,
     autoform: {
+      label: false,
       options () {
         return [
        { label: '4', value: 4 },
