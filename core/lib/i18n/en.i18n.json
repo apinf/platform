@@ -389,6 +389,7 @@
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can add a Swagger document by uploading a file or by giving a link to the remote file. Note: Try out methods can only be controlled, if the file is uploaded.",
   "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
   "manageApiDocumentationModal_addDocumentation_title": "Add documentation",
+  "manageApiDocumentationModal_helpText_useHttpsProtocol": "Application platform supports only HTTPS protocol. Keep in mind that requesting via Swagger might not work correctly if API endpoints use http protocol.",
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
   "navbar_organizations": "Organizations",
