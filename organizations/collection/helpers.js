@@ -62,8 +62,8 @@ Organizations.helpers({
     return organizationLogo;
   },
   logoUrl () {
-    // Placeholder logo url with default image
-    let organizationLogoUrl = '/img/placeholder-logo.jpg';
+    // Placeholder logo url
+    let organizationLogoUrl;
 
     // Get logo
     const organizationLogo = this.logo();

@@ -17,7 +17,7 @@ Template.viewOrganizationLogo.helpers({
     // Get Organization from template data
     const organization = Template.currentData().organization;
 
-    // Return Organization logo file URL
-    return organization.logoUrl();
+    // Return Organization logo or default file URL
+    return organization.logoUrl() || '/img/placeholder-logo.jpg';
   },
 });
