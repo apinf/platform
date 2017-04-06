@@ -25,6 +25,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </p>
 
           {{> uploadOrganizationLogo organization=organization }}
+
+          <h3>
+            {{_ "organizationSettings_uploadCover_heading" }}
+          </h3>
+
+          <p>
+            {{_ "organizationSettings_uploadCoverText" }}
+          </p>
+
+          {{> uploadOrganizationCover organization=organization }}
         </div>
 
         {{> organizationSettingsSocialMedia organization=organization }}
