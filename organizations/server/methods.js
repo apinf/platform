@@ -116,7 +116,7 @@ Meteor.methods({
     // Remove organizationApi links
     OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
   },
-  organizationProfile (slug) {
+  getOrganizationProfile (slug) {
     // Make sure slug is a string
     check(slug, String);
 

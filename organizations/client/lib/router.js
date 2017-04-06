@@ -45,7 +45,7 @@ FlowRouter.route('/organizations/:slug/', {
     const slug = params.slug;
 
     // Get Organization
-    Meteor.call('organizationProfile', slug, (error, organizationProfile) => {
+    Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {
       // Check if Organization exists
       if (organizationProfile) {
         // Set Social Meta Tags

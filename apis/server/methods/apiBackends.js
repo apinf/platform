@@ -11,8 +11,8 @@ import { check } from 'meteor/check';
 import Apis from '/apis/collection';
 
 Meteor.methods({
-  apiExists (slug) {
-    // Make sure apiId is a string
+  getApi (slug) {
+    // Make sure slug is a string
     check(slug, String);
 
     // Look for API
@@ -21,7 +21,7 @@ Meteor.methods({
     // Attach logo url
     api.logoUrl = api.logoUrl();
 
-    // Return true if API exists, false if undefined
-    return (api);
+    // Return the API
+    return api;
   },
 });
