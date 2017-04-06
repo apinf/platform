@@ -28,44 +28,53 @@ Template.swaggerUiContent.onCreated(function () {
   // Get URL of api documentation
   const documentationURL = api.documentation();
 
-  // Get proxy
-  const proxy = Proxies.findOne();
-
   // Get proxy backend
   const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
-  // Get proxy host if it exists
-  let proxyHost = proxy ? proxy.apiUmbrella.url : '';
+  // Placeholders;
+  let proxyBasePath;
+  let proxyHost;
+  let apiKeyValue;
 
-  // Get values of proxy apiUmbrella
-  const apiUmbrellaSettings = proxyBackend ? proxyBackend.apiUmbrella.url_matches : false;
+  if (proxyBackend) {
+    // Get ID of current proxy
+    const proxyId = proxyBackend.proxyId;
 
-  // Get proxy base path if it exists
-  let proxyBasePath = apiUmbrellaSettings ? apiUmbrellaSettings[0].frontend_prefix : '';
+    const proxy = Proxies.findOne(proxyId);
 
-  if (_.startsWith(proxyHost, 'http://')) {
-    // Delete 'http://' prefix
-    proxyHost = proxyHost.slice(7, proxyHost.length);
-  } else {
-    // Delete 'https://' prefix
-    proxyHost = proxyHost.slice(8, proxyHost.length);
+    // Get proxy host if it exists
+    proxyHost = proxy ? proxy.apiUmbrella.url : '';
+
+    // Get values of proxy apiUmbrella
+    const apiUmbrellaSettings = proxyBackend ? proxyBackend.apiUmbrella.url_matches : false;
+
+    // Get proxy base path if it exists
+    proxyBasePath = apiUmbrellaSettings ? apiUmbrellaSettings[0].frontend_prefix : '';
+
+    if (_.startsWith(proxyHost, 'http://')) {
+      // Delete 'http://' prefix
+      proxyHost = proxyHost.slice(7, proxyHost.length);
+    } else {
+      // Delete 'https://' prefix
+      proxyHost = proxyHost.slice(8, proxyHost.length);
+    }
+
+    // Delete last forward slash if it exists
+    if (_.endsWith(proxyHost, '/')) {
+      proxyHost = proxyHost.slice(0, -1);
+    }
+
+    // Delete last forward slash if it exists
+    if (_.endsWith(proxyBasePath, '/')) {
+      proxyBasePath = proxyBasePath.slice(0, -1);
+    }
+
+    // Get api key collection
+    const apiKey = proxy ? ApiKeys.findOne({ proxyId: proxy._id, userId: Meteor.userId() }) : '';
+
+    // Check if api-key exists
+    apiKeyValue = apiKey ? apiKey.apiUmbrella.apiKey : '';
   }
-
-  // Delete last forward slash if it exists
-  if (_.endsWith(proxyHost, '/')) {
-    proxyHost = proxyHost.slice(0, -1);
-  }
-
-  // Delete last forward slash if it exists
-  if (_.endsWith(proxyBasePath, '/')) {
-    proxyBasePath = proxyBasePath.slice(0, -1);
-  }
-
-  // Get api key collection
-  const apiKey = proxy ? ApiKeys.findOne({ proxyId: proxy._id, userId: Meteor.userId() }) : '';
-
-  // Check if api-key exists
-  const apiKeyValue = apiKey ? apiKey.apiUmbrella.apiKey : '';
 
   // Create object to save information about property of api-key authorization
   const infoAuth = {};
