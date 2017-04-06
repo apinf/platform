@@ -43,6 +43,7 @@
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-meteor": "^4.0.0",
+    "nightmare": "^2.10.0",
     "phantomjs-prebuilt": "^2.1.14",
     "selenium-webdriver": "^3.0.0-beta-2"
   },
@@ -51,12 +52,14 @@
     "lintfix": "eslint --fix .",
     "pretest": "npm run lint --silent",
     "start": "meteor run",
-    "test-app-chrome": "TEST_BROWSER_DRIVER=chrome meteor test --full-app --once --driver-package dispatch:mocha",
-    "test-app-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --full-app --once --driver-package dispatch:mocha",
-    "test-app-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha",
     "test-chrome": "TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package dispatch:mocha",
+    "test-app-chrome": "TEST_BROWSER_DRIVER=chrome meteor test --full-app --once --driver-package dispatch:mocha",
     "test-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --once --driver-package dispatch:mocha",
-    "test-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --driver-package dispatch:mocha"
+    "test-app-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --full-app --once --driver-package dispatch:mocha",
+    "test-nightmare": "TEST_BROWSER_DRIVER=nightmarejs meteor test --once --driver-package dispatch:mocha",
+    "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmarejs meteor test --full-app --once --driver-package dispatch:mocha",
+    "test-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --driver-package dispatch:mocha",
+    "test-app-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha"
   },
   "repository": {
     "type": "git",
