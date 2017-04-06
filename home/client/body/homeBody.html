@@ -25,11 +25,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
   </div>
 
-
   <div class="container" id="features">
 
     <div class="row">
       {{> latestPublicApis limit = 8 }}
+    </div>
+
+    <div class="row">
+      <button id="get-more-apis" class="btn btn-lg pull-right">
+        {{_ "homeBody_getMoreApis_text" }}
+      </button>
     </div>
 
     <!-- Statistics Block Message -->
