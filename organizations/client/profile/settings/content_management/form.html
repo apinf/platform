@@ -3,25 +3,28 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
-<template name="numberOfMediasPerPageForm">
+<template name="organizationMediasNumberPerPage">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">
-        {{_ 'organizationSettingsContentManagement_panelTitle' }}
+        {{_ 'organizationMediasNumberPerPage_panelTitle_contentManagement' }}
       </h2>
     </div>
     <div class="panel-body">
-      {{# autoForm
+       <b>
+        {{_ "organizationMediasNumberPerPage_panelBody_numberOfMediasPerPage" }}
+       </b>
+       {{# autoForm
           collection=organizationsCollection
           doc=organization
-          id="numberOfMediasPerPageForm"
+          id="organizationMediasNumberPerPage"
           type="update"
-      }}
+       }}
 
-        {{> afQuickField  name='mediasNumberPrePage' firstOption=false }}
+        {{> afQuickField  name='mediasNumberPerPage' firstOption=false }}
 
         <button type="submit" class="btn btn-primary">
-          {{_ "organizationSettingsContentManagement_saveButton" }}
+          {{_ "organizationMediasNumberPerPage_saveButton" }}
         </button>
       {{/ autoForm }}
     </div>
