@@ -36,11 +36,10 @@ Organizations.helpers({
 
     // If user is organization manager
     if (this.currentUserCanManage()) {
-      // When all managed APIs are available
+      // Then all managed APIs are available
       filteredApis = {};
     } else if (userId) {
-      // Case: user is manager of APIs or without APIs
-      // Select visible organization apis for current user
+      // Case: user manages API, or has authorization, or API is public.
       filteredApis = {
         $or: [
           { isPublic: true },
@@ -49,7 +48,7 @@ Organizations.helpers({
         ],
       };
     } else {
-      // Show all public apis of organization for anonym user
+      // Show all public APIs of organization for anonymous user
       filteredApis = { isPublic: true };
     }
 
