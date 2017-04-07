@@ -13,5 +13,5 @@ services:
 before_install:
   - "curl https://install.meteor.com | /bin/sh"
 
-deploy:
-  - ./.scripts/docker_build.sh
+script:
+  - ./.scripts/test.sh && ./.scripts/docker_build.sh
