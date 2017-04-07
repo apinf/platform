@@ -72,21 +72,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
 
-          <!-- Documentatoin -->
-          <li id="api-documentation-tab">
-            <a href="#api-documentation" data-toggle="tab">
-              <i class="fa fa-file-text"></i>
-              {{_ "viewApiNavigationMenu_documentation" }}
-            </a>
-          </li>
+            <!-- Documentatoin -->
+            <li id="api-documentation-tab">
+              <a href="#api-documentation" data-toggle="tab">
+                <i class="fa fa-file-text"></i>
+                {{_ "viewApiNavigationMenu_documentation" }}
+              </a>
+            </li>
 
-          <!-- Metadata -->
-          <li id="api-metadata-tab">
-            <a href="#api-metadata" data-toggle="tab">
-              <i class="fa fa-book"></i>
-              {{_ "viewApiNavigationMenu_metadata" }}
-            </a>
-          </li>
+          {{# if userShouldSeeApiMetadataTab }}
+            <!-- Metadata -->
+            <li id="api-metadata-tab">
+              <a href="#api-metadata" data-toggle="tab">
+                <i class="fa fa-book"></i>
+                {{_ "viewApiNavigationMenu_metadata" }}
+              </a>
+            </li>
+          {{/ if }}
 
           <!-- Feedback -->
           <li id="api-feedback-tab">
@@ -96,13 +98,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
 
-          <!-- Backlog -->
-          <li id="api-backlog-tab">
-            <a href="#api-backlog" data-toggle="tab">
-              <i class="fa fa-check-square-o"></i>
-              {{_ "viewApiNavigationMenu_backlog" }}
-            </a>
-          </li>
+          {{# if userShouldSeeBacklogTab }}
+            <!-- Backlog -->
+            <li id="api-backlog-tab">
+              <a href="#api-backlog" data-toggle="tab">
+                <i class="fa fa-check-square-o"></i>
+                {{_ "viewApiNavigationMenu_backlog" }}
+              </a>
+            </li>
+          {{/ if }}
 
           {{# if api.currentUserCanManage }}
             <!-- Export -->
