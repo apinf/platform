@@ -11,10 +11,8 @@ Migrations.add({
   version: 4,
   name: 'Uses apiId field instead of apiBackendId',
   up () {
-    // Code to migrate up to version 4
-
     // Migrate to use 'apiId' instead of 'apiBackendId' for documents with apiBackendId
-    ApiMetadata.find({ apiBackendId:{ $exists: true }}).forEach((apiMetadata) => {
+    ApiMetadata.find({ apiBackendId: { $exists: true } }).forEach((apiMetadata) => {
       // Create apiId field and get the value
       ApiMetadata.update(apiMetadata._id, { $set: { apiId: apiMetadata.apiBackendId } });
     });
