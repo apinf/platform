@@ -25,11 +25,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 }
 
 .api-card-pin button {
-  color: @gray;
-  background-color: white;
   border: 0;
+  background-color: white;
+    color: @gray-light;
 }
 
 .col-grid{
   margin-bottom: 1.87em;
+}
+
+.pin-default {
+  color: @gray-light;
+}
+
+.pin {
+  cursor: pointer;
+}
+
+.pinned {
+  cursor: pointer;
+  color: @gray-base !important;
 }
