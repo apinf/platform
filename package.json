@@ -59,7 +59,8 @@
     "test-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
     "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
     "test-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --driver-package dispatch:mocha",
-    "test-app-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha"
+    "test-app-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha",
+    "test": "time npm run-script test-phantom && time npm run-script test-nightmare"
   },
   "repository": {
     "type": "git",
