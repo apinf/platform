@@ -2,13 +2,14 @@ version: '2'
 services:
   web:
     build: .
+    dockerfile: Dockerfile-development
     ports:
       - "3000:3000"
     links:
       - apiumbrella
       - mongo
     environment:
-      - MONGO_URL=mongodb://mongo/apinf_dev
+      - MONGO_URL=mongodb://mongo:27017/apinf_dev
       - ROOT_URL=http://localhost:3000
     volumes:
       - .:/app
@@ -17,10 +18,16 @@ services:
     volumes:
       - ./docker/api-umbrella/config:/etc/api-umbrella
     ports:
-      - "80:80"
-      - "443:443"
       - "3001:3001"
       - "3002:3002"
-      - "14002:14002"
+    links:
+      - elasticsearch:elasticsearch.docker
   mongo:
-    image: mongo:3.2.6
+    image: mongo:3.2.6 --storageEngine=wiredTiger
+  elasticsearch:
+    image: elasticsearch:2.4
+    restart: always
+    mem_limit: 300m
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    command: elasticsearch -Des.index.max_result_window=50000
