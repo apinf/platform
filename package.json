@@ -56,8 +56,8 @@
     "test-app-chrome": "TEST_BROWSER_DRIVER=chrome meteor test --full-app --once --driver-package dispatch:mocha",
     "test-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --once --driver-package dispatch:mocha",
     "test-app-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --full-app --once --driver-package dispatch:mocha",
-    "test-nightmare": "TEST_BROWSER_DRIVER=nightmarejs meteor test --once --driver-package dispatch:mocha",
-    "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmarejs meteor test --full-app --once --driver-package dispatch:mocha",
+    "test-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
+    "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
     "test-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --driver-package dispatch:mocha",
     "test-app-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha"
   },
