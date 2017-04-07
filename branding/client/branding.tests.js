@@ -21,12 +21,15 @@ describe('Branding', function () {
   });
 
   it('makes sure mocha is working', function () {
-    chai.assert.equal(1 + 2, 2);
+    chai.assert.equal(1 + 2, 3);
   });
 
   describe('main template', function () {
     // Instantiate a Branding template
     // checks if all fields are there
+    it('makes sure mocha is working mult', function () {
+      chai.assert.equal(1 * 2, 2);
+    });
   });
 
   describe('autoform', function () {
@@ -35,5 +38,8 @@ describe('Branding', function () {
     // Fill all fields
     // Hit the button
     // Check if sAlert was called
+    it('makes sure mocha is working multiply', function () {
+      chai.assert.equal(10 * 2, 20);
+    });
   });
 });
