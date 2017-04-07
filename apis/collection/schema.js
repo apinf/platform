@@ -134,6 +134,11 @@ Apis.schema = new SimpleSchema({
     optional: true,
     defaultValue: true,
   },
+  isPinned: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
 });
 
 // Enable translations (i18n)
