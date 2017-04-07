@@ -72,6 +72,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
           {{/ if }}
         </li>
+        <!-- Pin API -->
+        <li class="pinApiCard pull-right">
+          {{# if currentUser }}
+            <div
+                 class="api-card-pin"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="{{_ 'catalogue_pinTooltip_user' }}">
+              {{> pinApiCard api=api catalogueView=true }}
+            </div>
+          {{ else }}
+            <div
+                 class="api-card-pin"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="{{_ 'catalogue_pinTooltip_nonUser' }}">
+                {{ api.isPinned }}
+              <i class="fa fa-thumb-tack"></i>
+            </div>
+          {{/ if }}
+        </li>
       </ul>
     </div>
   </div>
