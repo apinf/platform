@@ -15,4 +15,6 @@ before_install:
 
 script:
   - npm run test
+
+deploy:
   - ./.scripts/docker_build.sh
