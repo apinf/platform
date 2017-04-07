@@ -1,25 +1,26 @@
 version: '2'
-web:
-  build: .
-  ports:
-    - "3000:3000"
-  links:
-    - apiumbrella
-    - mongo
-  environment:
-    - MONGO_URL=mongodb://mongo/apinf_dev
-    - ROOT_URL=http://localhost:3000
-  volumes:
-    - .:/app
-apiumbrella:
-  image: nrel/api-umbrella:latest
-  volumes:
-    - ./docker/api-umbrella/config:/etc/api-umbrella
-  ports:
-    - "80:80"
-    - "443:443"
-    - "3001:3001"
-    - "3002:3002"
-    - "14002:14002"
-mongo:
-  image: mongo:3.2.6
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - apiumbrella
+      - mongo
+    environment:
+      - MONGO_URL=mongodb://mongo/apinf_dev
+      - ROOT_URL=http://localhost:3000
+    volumes:
+      - .:/app
+  apiumbrella:
+    image: nrel/api-umbrella:latest
+    volumes:
+      - ./docker/api-umbrella/config:/etc/api-umbrella
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3001:3001"
+      - "3002:3002"
+      - "14002:14002"
+  mongo:
+    image: mongo:3.2.6
