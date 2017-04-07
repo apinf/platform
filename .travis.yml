@@ -15,7 +15,7 @@ before_install:
   - docker ps -a
 
 script:
-  - docker-compose -f docker-compose-development.yml run web npm run test
+  - docker-compose -f docker-compose-development.yml run web meteor npm run test
   - docker-compose -f docker-compose-development.yml stop
   - docker ps -a
 
