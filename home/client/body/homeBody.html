@@ -25,59 +25,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
   </div>
 <div class="container">
- <!-- Statistics Block Message -->
- <div class="row">
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="media">
-          <div class="media-left media-middle">
-              <i class="fa fa-code fa-3x media-object" aria-hidden="true" ></i>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">
-                 {{_ "homeBody_featureSection_statistics_apisCount_heading" }}  {{ apisCount }}
-            </h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="media">
-          <div class="media-left media-middle">
-              <i class="fa fa-address-card fa-3x media-object" aria-hidden="true"></i>
-          </div>
-          <div class="media-body" >
-              <h4 class="media-heading">
-                  {{_ "homeBody_featureSection_statistics_organizationsCount_heading" }}  {{ organizationsCount }}
-            </h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="media">
-          <div class="media-left media-middle">
-              <i class="fa fa-users fa-3x media-object" aria-hidden="true" ></i>
-          </div>
-          <div class="media-body">
-               <h4 class="media-heading">
-                   {{_ "homeBody_featureSection_statistics_usersCount_heading" }}   {{ usersCount }}
-                </h4>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Statistics Block Message -->
-    <div class="row">
+   <div class="row">
       {{> latestPublicApis limit = 8 }}
     </div>
     <div class="row">
@@ -207,6 +155,61 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{> contactForm }}
       </div>
     </div>
+    <!-- Statistics Block Message -->
+    <div class="row" id="statisticswrap">
+     <div class="col-md-4">
+       <div class="panel panel-default">
+         <div class="panel-body">
+           <div class="media">
+             <!-- <div class="media-left media-middle">
+                 <i class="fa fa-code fa-3x media-object" aria-hidden="true" ></i>
+             </div> -->
+             <div class="media-body">
+               <h2 class="media-heading">
+                  <p> {{ apisCount }} </p>
+                  <p> {{_ "homeBody_featureSection_statistics_apisCount_heading" }} </p>
+               </h2>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-md-4">
+       <div class="panel panel-default">
+         <div class="panel-body">
+           <div class="media">
+             <!-- <div class="media-left media-middle">
+                 <i class="fa fa-address-card fa-3x media-object" aria-hidden="true"></i>
+             </div> -->
+             <div class="media-body" >
+                 <h2 class="media-heading">
+                     <p> {{ organizationsCount }} </p>
+                     <p> {{_ "homeBody_featureSection_statistics_organizationsCount_heading" }} </p>
+               </h2>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-md-4">
+       <div class="panel panel-default">
+         <div class="panel-body">
+           <div class="media">
+             <!-- <div class="media-left media-middle">
+                 <i class="fa fa-users fa-3x media-object" aria-hidden="true" ></i>
+             </div> -->
+             <div class="media-body">
+                  <h2 class="media-heading">
+                      <p> {{ usersCount }} </p>
+                      <p> {{_ "homeBody_featureSection_statistics_usersCount_heading" }} </p>
+                   </h2>
+               </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- Statistics Block Message -->
   </div>
   {{/ if }}
 </template>
