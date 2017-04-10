@@ -25,6 +25,9 @@ Template.apiCatalog.onCreated(function () {
   // Get user id
   const userId = Meteor.userId();
 
+  // Default sort
+  const defaultSort = { name: 1 };
+
   // Set filters
   // On default: Show all public apis for anonymous users
   let filters = { isPublic: true };
@@ -50,7 +53,7 @@ Template.apiCatalog.onCreated(function () {
     // Count of cards in catalog
     perPage: 24,
     // Set sort by name on default
-    sort: { name: 1 },
+    sort: defaultSort,
     filters,
   });
 
@@ -73,14 +76,14 @@ Template.apiCatalog.onCreated(function () {
       FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
 
     // Create a object for storage sorting parameters
-    const sort = {};
-    // GCheck of existing parameters
+    let sort = {};
+    // Check of existing parameters
     if (sortByParameter && sortDirectionParameter) {
       // Get field and direction of sorting
       sort[sortByParameter] = sortDirectionParameter;
     } else {
       // Otherwise get it like default value
-      sort.name = 1;
+      sort = defaultSort;
     }
 
     // Change sorting
