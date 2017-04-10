@@ -15,13 +15,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{_ "catalogueGrid_addedBy" }}
         {{ api.getApiManagersByName }}
       </p>
-      {{> apiLifecycleStatus api=api }}
-
-      {{# unless api.isPublic }}
-      <span class="label label-default">
-        {{_ "apiCard_labelText_private"}}
-      </span>
-      {{/ unless }}
+      <ul class="list-inline api-card-labels">
+        <li>
+          {{> apiLifecycleStatus api=api }}
+        </li>
+        <li>
+          {{# unless api.isPublic }}
+            <span class="label label-default">
+              {{_ "apiCard_labelText_private"}}
+            </span>
+          {{/ unless }}
+        </li>
+      </ul>
     </div>
     <div class="api-card-logo clearfix">
         {{> viewApiLogo api=api }}
