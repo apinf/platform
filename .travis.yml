@@ -31,7 +31,7 @@ install:
   - yarn install
 
 script:
-  - yarn test
+  - travis_wait 30 yarn test
 
 after_success:
   - ./.scripts/docker_build.sh
