@@ -452,7 +452,7 @@
   "organizationRemoveManagers_removeButton": "Remove",
   "organizationRemoveManagers_title": "Remove user as a manager",
   "organizationSettings_uploadLogo_heading": "Logo",
-  "organizationSettings_uploadCover_heading": "Upload cover image",
+  "organizationSettings_uploadCover_heading": "Cover photo",
   "organizationSettings_uploadLogoText": "You can upload a logo for your organization. The logo will appear in the catalogue and on the single organization profile.",
   "organizationSettings_uploadCoverText": "You can upload a cover image for your organization.",
   "organizationSettingsDelete_buttonText_delete": "Delete",
