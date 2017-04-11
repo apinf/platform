@@ -24,16 +24,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   </div>
-  
-<div class="container">
-   <div class="row">
-      {{> latestPublicApis limit = 8 }}
-    </div>
-
   <div class="container" id="features">
-
     {{> latestPublicApis limit = 8 }}
-
     <div class="text-center">
       <a href={{ pathFor 'apiCatalog' }}
         class="btn btn-primary btn-lg"
@@ -41,69 +33,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{_ "homeBody_getMoreApis_text" }}
       </a>
     </div>
-
-    <!-- Statistics Block Message -->
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2 class="feature-section-heading">
-          {{_ "homeBody_feature_section_Statistic" }}
-        </h2>
-        <hr class="primary">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left media-middle">
-                  <i class="fa fa-code fa-3x media-object" aria-hidden="true" ></i>
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">
-                     {{_ "homeBody_featureSection_statistics_apisCount_heading" }}  {{ apisCount }}
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left media-middle">
-                  <i class="fa fa-address-card fa-3x media-object" aria-hidden="true"></i>
-              </div>
-              <div class="media-body" >
-                  <h4 class="media-heading">
-                      {{_ "homeBody_featureSection_statistics_organizationsCount_heading" }}  {{ organizationsCount }}
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="media">
-              <div class="media-left media-middle">
-                  <i class="fa fa-users fa-3x media-object" aria-hidden="true" ></i>
-              </div>
-              <div class="media-body">
-                   <h4 class="media-heading">
-                       {{_ "homeBody_featureSection_statistics_usersCount_heading" }}   {{ usersCount }}
-                    </h4>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Statistics Block Message -->
-
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="feature-section-heading">
@@ -213,7 +142,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
  </div>
-  {{# if contactFormEnabled }}
+{{# if contactFormEnabled }}
   <div id="contact-us" class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -232,6 +161,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   </div>
+  {{/ if }}
     <!-- Statistics Block Message -->
     <div class="container" id="statisticswrap">
     <div class="row">
@@ -239,9 +169,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
        <div class="panel panel-default">
          <div class="panel-body">
            <div class="media">
-             <!-- <div class="media-left media-middle">
-                 <i class="fa fa-code fa-3x media-object" aria-hidden="true" ></i>
-             </div> -->
              <div class="media-body">
                <h2 class="media-heading">
                   <p> {{ apisCount }} </p>
@@ -256,9 +183,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
        <div class="panel panel-default">
          <div class="panel-body">
            <div class="media">
-             <!-- <div class="media-left media-middle">
-                 <i class="fa fa-address-card fa-3x media-object" aria-hidden="true"></i>
-             </div> -->
              <div class="media-body" >
                  <h2 class="media-heading">
                      <p> {{ organizationsCount }} </p>
@@ -273,9 +197,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
        <div class="panel panel-default">
          <div class="panel-body">
            <div class="media">
-             <!-- <div class="media-left media-middle">
-                 <i class="fa fa-users fa-3x media-object" aria-hidden="true" ></i>
-             </div> -->
              <div class="media-body">
                   <h2 class="media-heading">
                       <p> {{ usersCount }} </p>
@@ -289,5 +210,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
    </div>
  </div>
 <!-- Statistics Block Message -->
-  {{/ if }}
 </template>
