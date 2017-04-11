@@ -9,16 +9,29 @@ branches:
 
 cache:
   yarn: true
+  directories:
+    - "$HOME/.meteor"
+    - "$HOME/build/apinf/platform/node_modules"
+    - "$HOME/build/apinf/platform/.meteor/local"
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
+  - export PATH="$HOME/.yarn/bin:$HOME/.meteor:$PATH"
+  - if [ ! -e "$HOME/.meteor/meteor" ]; then curl https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
 services:
   - docker
 
-before_script:
-  - yarn run lint
+before_cache:
+  - rm -rf $HOME/build/apinf/platform/.meteor/local/log
+  - rm -rf $HOME/build/apinf/platform/.meteor/local/run
+  - rm -rf $HOME/build/apinf/platform/.meteor/local/db
+
+install:
+  - yarn install
 
 script:
+  - yarn test
+
+after_success:
   - ./.scripts/docker_build.sh
