@@ -77,14 +77,14 @@ Template.customStylesheet.helpers({
 
     return primaryColorText;
   },
-  coverImageOverlay () {
+  coverPhotoOverlay () {
     // Get branding
     const branding = Branding.findOne();
 
-    let coverImageOverlay;
+    let coverPhotoOverlay;
 
-    if (branding && branding.colors && branding.colors.coverImageOverlay) {
-      coverImageOverlay = branding.colors.coverImageOverlay;
+    if (branding && branding.colors && branding.colors.coverPhotoOverlay) {
+      coverPhotoOverlay = branding.colors.coverPhotoOverlay;
     }
 
     let overlayTransparency = 0;
@@ -93,7 +93,7 @@ Template.customStylesheet.helpers({
       overlayTransparency = branding.colors.overlayTransparency / 100;
     }
 
-    const color = tinycolor(coverImageOverlay);
+    const color = tinycolor(coverPhotoOverlay);
     color.setAlpha(overlayTransparency);
 
     return color.toRgbString();

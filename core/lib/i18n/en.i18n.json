@@ -656,6 +656,12 @@
               },
               "primaryText": {
                   "label": "Primary text"
+              },
+              "coverPhotoOverlay": {
+                  "label": "Cover photo overlay"
+              },
+              "overlayTransparency": {
+                  "label": "Overlay transparency"
               }
           },
           "socialMedia": {
