@@ -11,7 +11,6 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
@@ -152,10 +151,6 @@ Template.navbar.helpers({
 });
 
 Template.navbar.events({
-  'click #about-button': function () {
-    // Show the 'about Apinf' modal
-    Modal.show('aboutApinf');
-  },
   'click .icon-search': function () {
     // Show/hide search field
     $('.searchblock-toggle').slideToggle('fast');
