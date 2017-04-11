@@ -66,10 +66,6 @@ Organizations.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  organizationCoverFileId: {
-    type: String,
-    optional: true,
-  },
   slug: {
     type: String,
     optional: false,
@@ -113,21 +109,9 @@ Organizations.schema = new SimpleSchema({
       return this.unset();
     },
   },
-  mediasNumberPrePage: {
-    type: Number,
+  organizationCoverFileId: {
+    type: String,
     optional: true,
-    autoform: {
-      options () {
-        return [
-       { label: '4', value: 4 },
-       { label: '8', value: 8 },
-       { label: '12', value: 12 },
-       { label: '16', value: 16 },
-       { label: '20', value: 20 },
-       { label: '24', value: 24 },
-        ];
-      },
-    },
   },
   socialMedia: {
     type: Object,

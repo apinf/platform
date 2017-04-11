@@ -26,7 +26,7 @@
   "addBackend_simple_backendInformation_helptext": "Enter the URL and port of the remote server. E.g. google.com:80",
   "addBackend_simple_baseInformation_helptext": "Enter a name to identify this API.",
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '\/'",
-  "addOrganizationManagerForm_title": "Add Manager",
+  "addOrganizationManagerForm_title": "Organization Managers",
   "addOrganizationManagerForm_description": "An organization manager has the same rights as the original API manager to edit, delete the API after an API has been connected to an organization.",
   "addOrganizationManagerForm_button": "Add",
   "organizationManagerForm_managerAlreadyExist_errorText": "User is already a manager of this organization.",
@@ -336,6 +336,7 @@
   "homeBody_feature_title7_text": "View detailed analytics data for your APIs",
   "homeBody_feature_title8": "Web-based",
   "homeBody_feature_title8_text": "Centralized management for hundreds of users",
+  "homeBody_getMoreApis_text": "More APIs",
   "homeBody_openSource_imageAltText": "100% open source",
   "homeBody_section1_heading": "Getting started",
   "homeBody_section1_text": "Just create an account and be on your way! The developer dashboard offers you a one stop location to discover APIs, track your application API usage, and more.",
@@ -452,7 +453,9 @@
   "organizationRemoveManagers_description": "Are you sure you want to remove this user as a manager?",
   "organizationRemoveManagers_removeButton": "Remove",
   "organizationRemoveManagers_title": "Remove user as a manager",
-  "organizationSettings_uploadCover_heading": "Upload cover image",
+  "organizationSettings_uploadLogo_heading": "Logo",
+  "organizationSettings_uploadCover_heading": "Cover photo",
+  "organizationSettings_uploadLogoText": "You can upload a logo for your organization. The logo will appear in the catalogue and on the single organization profile.",
   "organizationSettings_uploadCoverText": "You can upload a cover image for your organization.",
   "organizationSettings_uploadLogo_heading": "Upload logo",
   "organizationSettings_uploadLogoText": "You can upload a logo for your organization. The logo will appear in the catalogue and on the single organization profile.",
@@ -461,9 +464,19 @@
   "organizationSettingsContentManagement_numberOfMediasPerPage": "Number of Medias per page",
   "organizationSettingsContentManagement_successMessage": "Number of Medias for displaying is added.",
   "organizationSettingsDelete_buttonText_delete": "Delete",
-  "organizationSettingsDelete_text_information": "The organization information will be removed and this action cannot be undone.",
-  "organizationSettingsDelete_title": "Delete the Organization profile",
+  "organizationSettingsDelete_text_information": "The organization information will be removed and all APIs will be disconnected. This action cannot be undone.",
+  "organizationSettingsDelete_title": "Delete Organization",
   "organizationSettingsDelete_panelTitle": "Delete",
+  "organizationSettingsContactInfo_cancelButton_text": "Cancel",
+  "organizationSettingsContactInfo_saveButton_text": "Save",
+  "organizationSettingsContactInfo_title": "Contact Information",
+  "organizationSettingsCoverAndLogo_title": "Logo and cover image",
+  "organizationSettingsGeneral_cancelButton_text": "Cancel",
+  "organizationSettingsGeneral_saveButton_text": "Save",
+  "organizationSettingsGeneral_title": "General",
+  "organizationSettingsSocialMedia_cancelButton_text": "Cancel",
+  "organizationSettingsSocialMedia_saveButton_text": "Save",
+  "organizationSettingsSocialMedia_title": "Social Media Platforms",
   "pinApiCard_buttonText_pin": "Pin",
   "pinApiCard_buttonText_unpin": "Unpin",
   "privacyPolicy_title": "Privacy Policy",
@@ -653,6 +666,12 @@
               },
               "primaryText": {
                   "label": "Primary text"
+              },
+              "coverPhotoOverlay": {
+                  "label": "Cover photo overlay"
+              },
+              "overlayTransparency": {
+                  "label": "Overlay transparency"
               }
           },
           "socialMedia": {
