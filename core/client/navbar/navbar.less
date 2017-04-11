@@ -30,10 +30,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         width: 100%;
       }
 
+      /* Grey padding indication for menu */
+      #main-navbar::after {
+        content: "";
+        background-color: #F4F4F4;
+        background: linear-gradient(to right, rgba(244, 244, 244, 0), #f4f4f4 65%);
+        height: 3em;
+        width: 5em;
+        position: absolute;
+        top: 3.9em;
+        right: 0;
+      }
+
       #main-navbar > li {
         display: table-cell;
         vertical-align: middle;
       }
+
+      #main-navbar > li:last-child {
+         padding-right: 5em;
+       }
 
       #main-navbar > li > a {
         display: block;
