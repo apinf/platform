@@ -110,6 +110,10 @@ Organizations.schema = new SimpleSchema({
       return this.unset();
     },
   },
+  organizationCoverFileId: {
+    type: String,
+    optional: true,
+  },
   socialMedia: {
     type: Object,
     optional: true,

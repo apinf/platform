@@ -7,9 +7,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import OrganizationLogo from '/organizations/logo/collection/collection';
+import Organizations from '/organizations/collection';
 
-Template.uploadOrganizationLogoButton.onRendered(() => {
-  // Assign resumable browse to element
-  OrganizationLogo.resumable.assignBrowse($('.fileBrowse-logo'));
+Template.organizationSettingsContactInfo.helpers({
+  organizationCollection () {
+    return Organizations;
+  },
 });

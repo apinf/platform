@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     }
 
     .dropdown-toggle {
-      background-color: {{ mostReadableBackgound }} !important;
+      background-color: {{ mostReadableBackground }} !important;
       color: {{ primaryColorText }} !important;
     }
 
@@ -34,7 +34,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     .navbar-nav > .active > a,
     .navbar-nav > .active > a:hover,
     .navbar-nav > .active > a:focus {
-      background-color: {{ mostReadableBackgound }} !important;
+      background-color: {{ mostReadableBackground }} !important;
     }
 
     .search-box {
@@ -57,6 +57,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       background-color: {{ primaryColor }} !important;
     }
 
+    #headerwrap {
+      background: {{ coverImageOverlay }};
+    }
+
     #language-bar .language-selection .active span {
       border-top-color: {{ primaryColor }} !important;
     }
@@ -77,6 +81,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     #site-slogan {
       color: {{ primaryColorText }} !important;
+    }
+
+    #get-more-apis {
+      color: {{ primaryColorText }} !important;
+      background-color: {{ primaryColor }} !important;
     }
   </style>
 </template>

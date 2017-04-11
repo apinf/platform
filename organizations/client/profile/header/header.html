@@ -4,70 +4,57 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationProfileHeader">
-  <div class="page-head-topblock">
-    <div class="container">
-      <div class="row">
-        <div id="organization-file-browse" class="col-md-2 profile-img-container">
-          {{> viewOrganizationLogo organization=organization }}
-          <span class="fa fa-camera"></span>
-        </div>
-        <div class="col-md-8">
-          <div class="row">
-            <h1 id="organization-name">
-              {{ organization.name }}
-              {{# if organization.currentUserCanManage }}
-                <button id="edit-organization" class="btn btn-default btn-xs">
-                  {{_ "organizationProfileHeader_editButton_text" }}
-                </button>
-              {{/ if }}
-            </h1>
-          </div>
-          {{# if organization.description }}
-            <div class="row">
-              <p>
-                {{ organization.description }}
-              </p>
-            </div>
-          {{/ if }}
-          <div class="row">
-            <p>
-              <i class="fa fa-link" aria-hidden="true"></i>
-              <a href="{{ organization.url }}">
-                {{ organization.url }}
-              </a>
-            </p>
-          </div>
-          <div class="row">
-            <ul class="list-inline">
-              {{# if organization.contact.person }}
-                <li>
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  {{ organization.contact.person }}
-                </li>
-              {{/ if }}
-              {{# if organization.contact.phone }}
-                <li>
-                  <i class="fa fa-phone" aria-hidden="true"></i>
-                  {{ organization.contact.phone }}
-                </li>
-              {{/ if }}
-              {{# if organization.contact.email }}
-                <li>
-                  <i class="fa fa-envelope" aria-hidden="true"></i>
-                  <a href="mailto:{{ organization.contact.email }}">
-                    {{ organization.contact.email }}
-                  </a>
-                </li>
-              {{/ if }}
-            </ul>
-          </div>
-          {{> organizationSocialMediaIcons organization=organization }}
-        </div>
-      </div>
-      <!-- Tabs -->
+  <!-- Cover image block -->
+  <div class="organization-cover-block">
+    {{> viewOrganizationCover organization=organization }}
+  </div>
+  <!-- About organization block -->
+  <div class="container organization-about-block">
+    <div id="organization-file-browse" class="org-logo-wrapper col-md-2">
+      {{> viewOrganizationLogo organization=organization }}
+      <span class="fa fa-camera"></span>
+    </div>
+    <div class="about-organization col-md-10">
+      <h1 id="organization-name">
+        {{ organization.name }}
+      </h1>
+      {{> organizationSocialMediaIcons organization=organization }}
+      <p>
+        <i class="fa fa-link" aria-hidden="true"></i>
+        <a href="{{ organization.url }}">
+          {{ organization.url }}
+        </a>
+      </p>
+      <ul class="list-inline">
+        {{# if organization.contact.person }}
+          <li>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            {{ organization.contact.person }}
+          </li>
+        {{/ if }}
+        {{# if organization.contact.phone }}
+          <li>
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            {{ organization.contact.phone }}
+          </li>
+        {{/ if }}
+        {{# if organization.contact.email }}
+          <li>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:{{ organization.contact.email }}">
+              {{ organization.contact.email }}
+            </a>
+          </li>
+        {{/ if }}
+      </ul>
+      {{# if organization.description }}
+        <p>
+          {{ organization.description }}
+        </p>
+      {{/ if }}
+      <!-- Navigation -->
       <div id="organization-navigation-tabs" class="navigation-tabs">
         <ul class="nav nav-tabs">
-          <!-- APIs -->
           <li id ="organization-apis-tab" class="active">
             <a href="#organization-apis" data-toggle="tab">
               <i class="fa fa-info-circle"></i>
@@ -75,7 +62,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
           {{# if organization.currentUserCanManage }}
-            <!-- Settings -->
             <li id="organization-settings-tab">
               <a href="#organization-settings" data-toggle="tab">
                 <i class="fa fa-file-text"></i>
