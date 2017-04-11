@@ -10,8 +10,29 @@ branches:
 services:
   - docker
 
-before_script:
-  - npm run-script lint
+before_cache:
+  - rm -rf $HOME/build/apinf/platform/.meteor/local/log
+  - rm -rf $HOME/build/apinf/platform/.meteor/local/run
+  - rm -rf $HOME/build/apinf/platform/.meteor/local/db
+
+cache:
+  directories:
+    - "$HOME/node_modules"
+    - "$HOME/.meteor"
+    - "$HOME/.npm"
+    - "$HOME/.node-gyp"
+    - "$HOME/build/apinf/platform/node_modules"
+    - "$HOME/build/apinf/platform/.meteor/local"
+
+before_install:
+  - if [ ! -e "$HOME/.meteor/meteor" ]; then curl https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh; fi
+
+install:
+  - export PATH="$HOME/.meteor:$PATH"
+  - npm install
 
 script:
+  - npm test
+
+after_success:
   - ./.scripts/docker_build.sh
