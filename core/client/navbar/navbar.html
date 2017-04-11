@@ -47,7 +47,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </li>
         {{/ unless}}
       </ul>
-      {{> searchField }}
       <ul class="nav navbar-nav nanbar-left" id="main-navbar">
         {{# if currentUser }}
           {{# if proxyIsDefined }}
@@ -93,6 +92,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         {{/ if }}
       </ul>
+    </div>
+    <div class="container">
+      {{> searchField }}
     </div>
   </nav>
 </template>
