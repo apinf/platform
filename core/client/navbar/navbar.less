@@ -7,6 +7,72 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 @import "/core/client/style/bootstrap-variables.less";
 
 .master-layout {
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px) {
+    .main-navigation {
+      overflow: hidden;
+
+      #main-navbar {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        background-color: #fff;
+      }
+
+      /* Grey padding indication for menu */
+      #main-navbar::after {
+        content: "";
+        background-color: #F4F4F4;
+        background: linear-gradient(to right, rgba(244, 244, 244, 0), #f4f4f4 65%);
+        height: 3em;
+        width: 6.25em;
+        position: absolute;
+        top: 3.5em;
+        right: 0;
+      }
+
+      #main-navbar > li {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      #main-navbar > li > a {
+        display: block;
+        text-decoration: none;
+        font-size: 1.2em;
+        color: #333;
+      }
+
+      #main-navbar > li > a:hover,
+      #main-navbar > li > a:active,{
+        text-decoration: none;
+        color: #fff;
+      }
+
+      #main-navbar > li > a:visited {
+        color: #333;
+      }
+
+      #main-navbar > li > a > i {
+        display: none;
+      }
+
+      #main-navbar > li:last-child {
+        padding-right: 6.25em;
+      }
+
+      .container {
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+  }
+
   /* Navbar */
   .main-navigation {
     background-color: @home-navigation;
