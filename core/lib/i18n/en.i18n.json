@@ -648,7 +648,7 @@
                   "label": "Primary text"
               },
               "coverPhotoOverlay": {
-                  "label": "Primary photo overlay"
+                  "label": "Cover photo overlay"
               },
               "overlayTransparency": {
                   "label": "Overlay transparency"
