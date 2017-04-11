@@ -37,7 +37,7 @@ Branding.schema = new SimpleSchema({
       type: 'bootstrap-colorpicker',
     },
   },
-  'colors.coverImageOverlay': {
+  'colors.coverPhotoOverlay': {
     type: String,
     optional: true,
     autoform: {

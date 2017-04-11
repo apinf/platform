@@ -21,12 +21,15 @@ Template.organizationCatalog.onCreated(function () {
   // Get user id
   const userId = Meteor.userId();
 
+  // Default sort
+  const defaultSort = { name: 1 };
+
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Organizations, {
     // Count of cards in catalog
     perPage: 24,
     // Set sort by name on default
-    sort: { name: 1 },
+    sort: defaultSort,
   });
 
   // Subscribe to Organization logo collection
@@ -42,10 +45,16 @@ Template.organizationCatalog.onCreated(function () {
       FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
 
     // Create a object for storage sorting parameters
-    const sort = {};
-    // Get field and direction of sorting
-    sort[sortByParameter] = sortDirectionParameter;
+    let sort = {};
 
+    // Check of existing parameters
+    if (sortByParameter && sortDirectionParameter) {
+      // Get field and direction of sorting
+      sort[sortByParameter] = sortDirectionParameter;
+    } else {
+      // Otherwise get it like default value
+      sort = defaultSort;
+    }
     // Change sorting
     instance.pagination.sort(sort);
   });

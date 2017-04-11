@@ -11,14 +11,17 @@ import { check } from 'meteor/check';
 import Apis from '/apis/collection';
 
 Meteor.methods({
-  apiExists (slug) {
-    // Make sure apiId is a string
+  getApi (slug) {
+    // Make sure slug is a string
     check(slug, String);
 
     // Look for API
     const api = Apis.findOne({ slug });
 
-    // Return true if API exists, false if undefined
-    return (api);
+    // Attach logo url
+    api.logoUrl = api.logoUrl();
+
+    // Return the API
+    return api;
   },
 });
