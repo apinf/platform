@@ -10,7 +10,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
   @media only screen
   and (min-device-width: 320px)
-  and (max-device-width: 480px) {
+  and (max-device-width: 768px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
     .content-wrapper {
       padding-top: 4em;
     }
@@ -26,18 +28,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         overflow-x: scroll;
         overflow-y: hidden;
         background-color: #fff;
-      }
-
-      /* Grey padding indication for menu */
-      #main-navbar::after {
-        content: "";
-        background-color: #F4F4F4;
-        background: linear-gradient(to right, rgba(244, 244, 244, 0), #f4f4f4 65%);
-        height: 3em;
-        width: 6.25em;
-        position: absolute;
-        top: 4.3em;
-        right: 0;
+        width: 100%;
       }
 
       #main-navbar > li {
@@ -67,7 +58,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       }
 
       #main-navbar > li:last-child {
-        padding-right: 6.25em;
+        padding-right: 1em;
       }
 
       .container {
@@ -90,6 +81,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         margin-left: 0;
         display: inline-block;
         float: right;
+
+        .dropdown-menu {
+          position: fixed;
+          top: 3em;
+          width: 100%;
+          background-color: #fff;
+          margin-top: 2em;
+          font-size: 1.2em;
+          text-align: center;
+
+          > li {
+            padding-bottom: 0.5em;
+            padding-top: 0.5em;
+          }
+        }
       }
 
       #user-menu > li {
