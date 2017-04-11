@@ -22,7 +22,6 @@
     "jquery-bbq": "^1.0.0",
     "jquery.rateit": "^1.0.23",
     "js-yaml": "^3.8.1",
-    "JSONStream": "^1.3.1",
     "locale-compare-polyfill": "0.0.2",
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.5",
@@ -36,6 +35,7 @@
     "urijs": "^1.18.5"
   },
   "devDependencies": {
+    "JSONStream": "^1.3.1",
     "babel-eslint": "^6.1.2",
     "csv-streamify": "^3.0.4",
     "eslint": "^3.4.0",
@@ -43,7 +43,7 @@
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-meteor": "^4.0.0",
-    "JSONStream": "^1.3.1"
+    "nightmare": "^2.10.0"
   },
   "scripts": {
     "lint": "eslint .",
@@ -51,11 +51,12 @@
     "pretest": "npm run lint --silent",
     "start": "meteor run",
     "test-app-chrome": "TEST_BROWSER_DRIVER=chrome meteor test --full-app --once --driver-package dispatch:mocha",
-    "test-app-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --full-app --once --driver-package dispatch:mocha",
+    "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
     "test-app-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha",
     "test-chrome": "TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package dispatch:mocha",
-    "test-phantom": "TEST_BROWSER_DRIVER=phantomjs meteor test --once --driver-package dispatch:mocha",
-    "test-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --driver-package dispatch:mocha"
+    "test-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
+    "test-watch": "TEST_BROWSER_DRIVER=chrome TEST_WATCH=1 meteor test --driver-package dispatch:mocha",
+    "test": "npm run test-nightmare && npm run test-app-nightmare"
   },
   "repository": {
     "type": "git",
