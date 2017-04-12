@@ -13,8 +13,6 @@ import _ from 'lodash';
 import Proxies from '../';
 
 // APINF imports
-import apiUmbrellaSchema from './api_umbrella';
-import emqttSchema from './emqtt';
 import registeredProxies from '../registered_proxies';
 
 let schema = {
@@ -34,7 +32,14 @@ let schema = {
   },
 };
 
-schema = _.assign(schema, apiUmbrellaSchema, emqttSchema);
+// Iterate through registered proxies and merge them all into one
+_.forEach(registeredProxies, (proxyName) => {
+  // Import proxy schema
+  const proxySchema = require(`./${_.snakeCase(proxyName)}`).default
+
+  // Merge proxy schema with initial one
+  schema = _.assign(schema, proxySchema);
+});
 
 Proxies.schema = new SimpleSchema(schema);
 // Attach translation

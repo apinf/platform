@@ -10,7 +10,7 @@ import _ from 'lodash';
 // Key is proxy_type
 // Value is list of required fields
 const requiredFieldsForProxy = {
-  emqtt: ['url', 'elasticsearch'],
+  emqtt: ['proxyUrl', 'apiUrl', 'adminUsername', 'adminPassword', 'elasticsearch'],
   apiUmbrella: ['url', 'apiKey', 'authToken', 'elasticsearch'],
 };
 

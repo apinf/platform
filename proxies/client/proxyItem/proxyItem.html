@@ -61,7 +61,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </tbody>
         </table>
       {{/ if }}
-      {{# if equals proxy.type 'emqtt' }}
+      {{# if equals proxy.type 'emq' }}
         <table class="table table-condensed">
           <tbody>
             <tr>
@@ -74,10 +74,37 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </tr>
             <tr>
               <th scope="row">
-                {{_ "proxyItem_url" }}
+                {{_ "proxyItem_brokerEndpoints" }}
               </th>
               <td>
-                {{ proxy.emqtt.url }}
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_protocol" }}</th>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_host"}}</th>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_port" }}</th>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_tls" }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{# each brokerEndpoint in proxy.emq.brokerEndpoints }}
+                      <tr>
+                        <td>{{ brokerEndpoint.protocol }}</td>
+                        <td>{{ brokerEndpoint.host }}</td>
+                        <td>{{ brokerEndpoint.port }}</td>
+                        <td>{{ brokerEndpoint.tls }}</td>
+                      </tr>
+                    {{/ each }}
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_httpApi" }}
+              </th>
+              <td>
+                *****
               </td>
             </tr>
             <tr>
@@ -85,7 +112,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{_ "proxyItem_elasticsearch" }}
               </th>
               <td>
-                {{ proxy.emqtt.elasticsearch }}
+                {{ proxy.emq.elasticsearch }}
               </td>
             </tr>
           </tbody>
