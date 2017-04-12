@@ -19,63 +19,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     .main-navigation {
       overflow: hidden;
 
-      #main-navbar {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        white-space: nowrap;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        background-color: #fff;
-        width: 100%;
-      }
-
-      /* Grey padding indication for menu */
-      #main-navbar::after {
-        content: "";
-        background-color: #F4F4F4;
-        background: linear-gradient(to right, rgba(244, 244, 244, 0), #f4f4f4 65%);
-        height: 3em;
-        width: 5em;
-        position: absolute;
-        top: 3.9em;
-        right: 0;
-      }
-
-      #main-navbar > li {
-        display: table-cell;
-        vertical-align: middle;
-      }
-
-      #main-navbar > li:last-child {
-         padding-right: 5em;
-       }
-
-      #main-navbar > li > a {
-        display: block;
-        text-decoration: none;
-        font-size: 1.2em;
-        color: #333;
-      }
-
-      #main-navbar > li > a:hover,
-      #main-navbar > li > a:active,{
-        text-decoration: none;
-        color: #fff;
-      }
-
-      #main-navbar > li > a:visited {
-        color: #333;
-      }
-
-      #main-navbar > li > a > i {
-        display: none;
-      }
-
-      #main-navbar > li:last-child {
-        padding-right: 1em;
-      }
-
       .container {
         width: 100%;
         padding-right: 0;
@@ -91,36 +34,89 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         width: 100px !important;
       }
 
-      #user-menu {
-        margin-right: 0;
-        margin-left: 0;
-        display: inline-block;
-        float: right;
+      #main-navbar {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        background-color: #fff;
+        width: 100%;
 
-        .dropdown-menu {
-          position: fixed;
-          top: 3em;
-          width: 100%;
-          background-color: #fff;
-          margin-top: 1.9em;
-          font-size: 1.2em;
-          text-align: center;
+        /* Grey padding indication for menu */
+        &:after {
+          content: "";
+          background-color: #F4F4F4;
+          background: linear-gradient(to right, rgba(244, 244, 244, 0), #f4f4f4 65%);
+          height: 3em;
+          width: 5em;
+          position: absolute;
+          top: 3.9em;
+          right: 0;
+        }
 
-          > li {
-            padding-bottom: 0.5em;
-            padding-top: 0.5em;
+        > li {
+          display: table-cell;
+          vertical-align: middle;
+
+          &:last-child {
+            padding-right: 5em;
+          }
+
+          > a {
+            display: block;
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #333;
+
+            &:hover,
+            &:active {
+              text-decoration: none;
+              color: #fff;
+            }
+
+            &:visited {
+              color: #333;
+            }
+
+            > i {
+              display: none;
+            }
           }
         }
       }
+    }
 
-      #user-menu > li {
+    #user-menu {
+      margin-right: 0;
+      margin-left: 0;
+      display: inline-block;
+      float: right;
+
+      > li {
         display: table-cell;
         vertical-align: middle;
+
+        > a {
+          font-size: 1.2em;
+          text-decoration: none;
+        }
       }
 
-      #user-menu > li > a {
+      .dropdown-menu {
+        position: fixed;
+        top: 3em;
+        width: 100%;
+        background-color: #fff;
+        margin-top: 1.9em;
         font-size: 1.2em;
-        text-decoration: none;
+        text-align: center;
+
+        > li {
+          padding-bottom: 0.5em;
+          padding-top: 0.5em;
+        }
       }
     }
   }
@@ -216,8 +212,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: darken(@brand-primary, 5%);
   }
-}
-
-#about-button {
-  cursor: pointer;
 }
