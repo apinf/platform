@@ -34,6 +34,13 @@ Template.relatedMedia.onCreated(function () {
   }
 
   instance.pagination.filters(currentFilters);
+
+  // reactive solution to update pagination with template instant data
+  instance.autorun(() => {
+    const perPage = Template.currentData().entity.mediasNumberPerPage || 10;
+
+    instance.pagination.perPage(perPage);
+  });
 });
 
 Template.relatedMedia.helpers({
