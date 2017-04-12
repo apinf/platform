@@ -9,9 +9,6 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-// importing flow-router
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
 // Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
 
@@ -27,16 +24,5 @@ Template.organizationProfileHeader.events({
 
     // Show organization form modal
     Modal.show('organizationForm', { organization, formType: 'update' });
-  },
-});
-
-Template.organizationProfileHeader.events({
-  'click #organization-apis-tab': function () {
-    // Quick and dirty solution, to be fixed later
-    // Because after updating URL, the oembed does not refresh
-    // Using flow-router, a refresh is called
-    const context = FlowRouter.current();
-    FlowRouter.go('/');
-    FlowRouter.go(context.path);
   },
 });
