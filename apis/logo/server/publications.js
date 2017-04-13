@@ -29,3 +29,17 @@ Meteor.publish('currentApiLogo', (apiLogoFileId) => {
     'metadata._Resumable': { $exists: false },
   });
 });
+
+Meteor.publish('apiLogoByIds', (apiLogoIds) => {
+  check(apiLogoIds, Array);
+
+  const objectIds = apiLogoIds.map((apiLogoId) => {
+    // Convert to Mongo ObjectID
+    return new Mongo.Collection.ObjectID(apiLogoId);
+  });
+
+  return ApiLogo.find({
+    _id: { $in: objectIds },
+    'metadata._Resumable': { $exists: false },
+  });
+});
