@@ -436,7 +436,7 @@
   "organizationSettingsPagination_saveButton": "Save",
   "organizationSettingsPagination_panelBody_mediaPerPage": "Number of Media per page",
   "organizationSettingsPagination_panelBody_apisPerPage": "Number of APIs per page",
-  "organizationSettingsPagination_successMessage": "Number added successfully",
+  "organizationSettingsPagination_successMessage": "Number changed successfully",
   "organizationSettings_uploadLogo_heading": "Logo",
   "organizationSettings_uploadCover_heading": "Cover photo",
   "organizationSettings_uploadLogoText": "You can upload a logo for your organization. The logo will appear in the catalogue and on the single organization profile.",
