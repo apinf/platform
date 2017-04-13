@@ -5,6 +5,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
 
 // Collection imports
 import ApiLogo from '../collection';
@@ -14,5 +16,16 @@ Meteor.publish('allApiLogo', () => {
     'metadata._Resumable': {
       $exists: false,
     },
+  });
+});
+
+Meteor.publish('currentApiLogo', (apiLogoFileId) => {
+  check(apiLogoFileId, String);
+  // Convert to Mongo ObjectID
+  const objectId = new Mongo.Collection.ObjectID(apiLogoFileId);
+
+  return ApiLogo.find({
+    _id: objectId,
+    'metadata._Resumable': { $exists: false },
   });
 });
