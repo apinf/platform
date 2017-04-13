@@ -37,33 +37,6 @@ Meteor.publish('userManagedApisName', function () {
   return Apis.find(filter, { name: 1 });
 });
 
-Meteor.publish('apisByIds', (apiIds) => {
-  // Make sure apiIds is an Array
-  check(apiIds, Array);
-
-  // Find one or more APIs using an array of API IDs
-  return Apis.find({ _id: { $in: apiIds } });
-});
-
-// eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('userVisibleApis', function (slug) {
-  // Make sure organization slug is a String type
-  check(slug, String);
-
-  // Get related organization document
-  const organization = Organizations.findOne({ slug });
-
-  let apis = [];
-
-  // If organization exists
-  if (organization) {
-    // Get cursor on APIs collection which are visible for current user in organization profile
-    apis = organization.userVisibleApisCursor(this.userId);
-  }
-  // Return cursor or empty array to flag publication as ready
-  return apis;
-});
-
 Meteor.publish('latestPublicApis', (limit) => {
   // Make sure limit is a Number
   check(limit, Number);

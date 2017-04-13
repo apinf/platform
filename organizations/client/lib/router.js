@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { DocHead } from 'meteor/kadira:dochead';
 
 FlowRouter.route('/organizations', {
   // Get query parameters for Catalog page on Enter
@@ -37,9 +38,31 @@ FlowRouter.route('/organizations', {
   },
 });
 
-FlowRouter.route('/organizations/:slug', {
+FlowRouter.route('/organizations/:slug/', {
   name: 'organizationProfile',
-  action () {
-    BlazeLayout.render('masterLayout', { main: 'organizationProfile' });
+  action (params) {
+    // Get organization slug
+    const slug = params.slug;
+
+    // Get Organization
+    Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {
+      // Check if Organization exists
+      if (organizationProfile) {
+        // Set Social Meta Tags
+        // Facebook & LinkedIn
+        DocHead.addMeta({ property: 'og:image', content: organizationProfile.logoUrl });
+        DocHead.addMeta({ property: 'og:title', content: organizationProfile.name });
+        DocHead.addMeta({ property: 'og:url', content: window.location.href });
+        // Twitter
+        DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
+        DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
+        DocHead.addMeta({ property: 'twitter:image', content: organizationProfile.logoUrl });
+
+        BlazeLayout.render('masterLayout', { main: 'organizationProfile' });
+      } else {
+        // If Organization doesn't exist, show 'Not Found'
+        FlowRouter.go('notFound');
+      }
+    });
   },
 });

@@ -28,23 +28,6 @@ Template.organizationProfile.onCreated(function () {
       instance.subscribe('organizationComposite', organizationSlug);
       // Subscribe to OrganizationAPIs link documents
       instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
-
-      // Get Organization document
-      const organization = Organizations.findOne({ slug: organizationSlug });
-
-      if (organization) {
-        // If user is admin or organization manager
-        if (organization.currentUserCanManage()) {
-          // Get IDs of managed APIs via collection helper
-          const managedApiIds = organization.managedApiIds();
-
-          // Then publish all managed APIs of organization
-          instance.subscribe('apisByIds', managedApiIds);
-        } else {
-          // Otherwise publish user's visible APIs
-          instance.subscribe('userVisibleApis', organizationSlug);
-        }
-      }
     }
   });
 });

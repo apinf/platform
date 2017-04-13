@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 
 // Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
@@ -16,6 +17,7 @@ import 'moment/min/locales.min';
 import _ from 'lodash';
 
 // Collection imports
+import OrganizationLogo from '/organizations/logo/collection/collection';
 import Organizations from './';
 
 Organizations.helpers({
@@ -45,5 +47,38 @@ Organizations.helpers({
   },
   entityType () {
     return 'organization';
+  },
+  logo () {
+    // Placeholder logo Object
+    let organizationLogo;
+
+    if (this.organizationLogoFileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(this.organizationLogoFileId);
+
+      // Get Organization logo file Object
+      organizationLogo = OrganizationLogo.findOne(objectId);
+    }
+    return organizationLogo;
+  },
+  logoUrl () {
+    // Placeholder logo url
+    let organizationLogoUrl;
+
+    // Get logo
+    const organizationLogo = this.logo();
+
+    // Check if Organization logo file is available
+    if (organizationLogo) {
+      // Get Meteor absolute URL
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+      // Set base url
+      const baseOrganizationLogoURL = meteorAbsoluteUrl + OrganizationLogo.baseURL;
+
+      // Get Organization logo file URL
+      organizationLogoUrl = `${baseOrganizationLogoURL}/md5/${organizationLogo.md5}`;
+    }
+    return organizationLogoUrl;
   },
 });
