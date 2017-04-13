@@ -76,13 +76,17 @@ Template.organizationApis.onCreated(function () {
     if (sortByParameter) {
       // Sort by name is ascending other cases are descending sort
       const sortDirection = sortByParameter === 'name' ? 1 : -1;
+      if (sortByParameter === 'name') {
+        sort.isPinned = 1;
+      }
       // Set sorting
       sort[sortByParameter] = sortDirection;
     } else {
       // Sort by name is default
+      sort.isPinned = 1;
       sort.name = 1;
     }
-
+    console.log('sort=', sort);
     // Change sorting
     instance.pagination.sort(sort);
   });
@@ -94,6 +98,7 @@ Template.organizationApis.helpers({
 
     // Get apis collection via Pagination
     const apis = instance.pagination.getPage();
+    console.log('apis=', apis);
     // Get the sort via Pagination
     const sort = instance.pagination.sort();
 
@@ -114,6 +119,12 @@ Template.organizationApis.helpers({
     const instance = Template.instance();
     // Get the total number of documents
     return instance.pagination.totalItems();
+  },
+  featuredApisCount () {
+    const instance = Template.instance();
+    console.log('inst=', instance);
+    // Get the total number of documents
+    return instance.pagination.items({ isPinned: true }).count();
   },
   templatePagination () {
     const instance = Template.instance();
