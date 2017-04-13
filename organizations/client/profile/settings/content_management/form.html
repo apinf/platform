@@ -8,17 +8,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <h3>
         {{_ 'organizationMediasNumberPerPage_panelTitle_contentManagement' }}
       </h3>
-      <label>
-        {{_ "organizationMediasNumberPerPage_panelBody_numberOfMediasPerPage" }}
-      </label>
+
        {{# autoForm
           collection=organizationsCollection
           doc=organization
           id="organizationMediasNumberPerPage"
           type="update"
         }}
-
+        <label>
+          {{_ "organizationMediasNumberPerPage_panelBody_numberOfMediasPerPage" }}
+        </label>
         {{> afQuickField  name='mediasNumberPerPage' firstOption=false }}
+        <label>
+          {{_ "organizationMediasNumberPerPage_panelBody_numberOfMediasPerPage" }}
+        </label>
+        {{> afQuickField  name='APIsNumberPerPage' firstOption=false }}
 
         <button type="submit" class="btn btn-primary">
           {{_ "organizationMediasNumberPerPage_saveButton" }}
