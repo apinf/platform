@@ -113,6 +113,7 @@ Organizations.schema = new SimpleSchema({
     type: Number,
     optional: true,
     autoform: {
+        // Add own label instead of autoform label
       label: false,
       options () {
         return [
