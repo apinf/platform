@@ -26,13 +26,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{> userMenu user=currentUser }}
         {{ else }}
         <li>
-          <a class="close-navbar" href="{{ pathFor 'signUp' }}">
+          <a class="navbar-login" href="{{ pathFor 'signUp' }}">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             {{_ "navbar_signUp" }}
           </a>
         </li>
         <li>
-          <a class="close-navbar" href="{{ pathFor 'signIn' }}">
+          <a class="navbar-login" href="{{ pathFor 'signIn' }}">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
             {{_ "navbar_signIn" }}
           </a>
