@@ -14,7 +14,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   text-transform: uppercase;
   overflow: hidden;
   border-bottom: 0.063em solid rgba(0,0,0,.3);
-  position: relative;
+  position: fixed;
+  width: 100%;
+  top: 0; // keep it on top of the page before navbar
+  z-index: 999; // make sure it always stays on top of content
 
   .language-selection {
     margin-bottom: 0;
