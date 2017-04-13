@@ -1,0 +1,24 @@
+<template name="numberOfMediasPerPageForm">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        {{_ 'organizationSettingsContentManagement_panelTitle' }}
+      </h2>
+    </div>
+    <div class="panel-body">
+      {{# autoForm
+          collection=organizationsCollection
+          doc=organization
+          id="numberOfMediasPerPageForm"
+          type="update"
+      }}
+
+        {{> afQuickField  name='mediasNumberPrePage' firstOption=false }}
+
+        <button type="submit" class="btn btn-primary">
+          {{_ "organizationSettingsContentManagement_saveButton" }}
+        </button>
+      {{/ autoForm }}
+    </div>
+  </div>
+</template>
