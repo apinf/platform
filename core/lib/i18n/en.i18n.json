@@ -898,7 +898,7 @@
           },
           "mediaPerPage": {
               "label": "Number of media items per page"
-          },
+          }
       },
       "organizationApis": {
           "apiId": {
