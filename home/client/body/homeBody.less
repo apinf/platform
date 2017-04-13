@@ -40,9 +40,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   }
 
   .search-box {
-    margin-bottom: 1.875em;
-    background: @brand-primary;
-    padding: 1.25em 1.875em;
+    min-width: auto;
+    max-width: 50em;
+    margin: auto;
+    margin-bottom: 2em;
     text-align: center;
 
     /* Tweek to use bootstrap styles */
@@ -74,6 +75,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     /* Safari fix */
     .input-group-addon {
       padding: 5px 12px;
+    }
+
+    .input-group
+      input,
+      button {
+      height: 3em;
     }
   }
 
