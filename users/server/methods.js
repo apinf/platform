@@ -9,17 +9,12 @@ import { check } from 'meteor/check';
 
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
-import { Roles } from 'meteor/alanning:roles';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
 // Collection imports
 import Settings from '/settings/collection';
 
 Meteor.methods({
-  userIsAdmin () {
-    // Make sure user is admin
-    return Roles.userIsInRole(this.userId, ['admin']);
-  },
   deleteAccount (userId) {
     // Make sure userId is a String
     check(userId, String);
