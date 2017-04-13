@@ -894,7 +894,13 @@
           },
           "socialMedia": {
               "label": "Social Media Links"
-          }
+          },
+          "apisPerPage": {
+              "label": "Number of APIs per page"
+          },
+          "mediaPerPage": {
+              "label": "Number of media items per page"
+          },
       },
       "organizationApis": {
           "apiId": {
