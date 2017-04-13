@@ -22,11 +22,10 @@ Template.organizationApis.onCreated(function () {
 
   // Get Organization document from template data
   const organization = instance.data.organization;
-
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Apis, {
     // Count of cards in catalog
-    perPage: 4,
+    perPage: parseInt(instance.data.organization.APIsNumberPerPage, 10),
     // Set sort by name on default
     sort: { name: 1 },
     filters: organization.userVisibleApiFilter(),
@@ -34,6 +33,8 @@ Template.organizationApis.onCreated(function () {
 
   // Watching on changes of managed APIs after connection to/disconnection from
   instance.autorun(() => {
+    // reactive solution to update pagination with template instant data
+    const perPage = Template.currentData().organization.APIsNumberPerPage || 10;
     // Get ids of managed APIs of organization
     const apiIds = organization.managedApiIds();
     // Get settings of current filter
@@ -42,6 +43,8 @@ Template.organizationApis.onCreated(function () {
     currentFilters._id = { $in: apiIds };
     // Set updated filter
     instance.pagination.filters(currentFilters);
+    // Set update perpage
+    instance.pagination.perPage(perPage);
   });
 
   // Watching for changes of lifecycle parameter
