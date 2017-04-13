@@ -38,7 +38,7 @@ Template.organizationApis.onCreated(function () {
   // Watching on changes of managed APIs after connection to/disconnection from
   instance.autorun(() => {
     // reactive solution to update pagination with template instant data
-    const perPage = Template.currentData().organization.apisPerPage || 10;
+    const updatedApisPerPage = Template.currentData().organization.apisPerPage || 10;
 
     // Get ids of managed APIs of organization
     const apiIds = organization.managedApiIds();
@@ -53,7 +53,7 @@ Template.organizationApis.onCreated(function () {
     instance.pagination.filters(currentFilters);
 
     // Set update perpage
-    instance.pagination.perPage(perPage);
+    instance.pagination.perPage(updatedApisPerPage);
   });
 
   // Watching for changes of lifecycle parameter
