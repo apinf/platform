@@ -434,8 +434,6 @@
   "organizationRemoveManagers_title": "Remove user as a manager",
   "organizationSettingsPagination_panelTitle_contentManagement": "Content Management",
   "organizationSettingsPagination_saveButton": "Save",
-  "organizationSettingsPagination_panelBody_mediaPerPage": "Number of Media per page",
-  "organizationSettingsPagination_panelBody_apisPerPage": "Number of APIs per page",
   "organizationSettingsPagination_successMessage": "Number changed successfully",
   "organizationSettings_uploadLogo_heading": "Logo",
   "organizationSettings_uploadCover_heading": "Cover photo",
