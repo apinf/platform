@@ -263,4 +263,16 @@ Apis.helpers({
     }
     return false;
   },
+  apiDocsIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId });
+
+    // Check if API documentation exist
+    if (apiDocs) {
+      return true;
+    }
+    return false;
+  },
 });
