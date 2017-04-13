@@ -83,13 +83,8 @@ Meteor.publishComposite('apiComposite', function (slug) {
       },
       {
         find (api) {
-          // Make sure a user can edit this API
-          if (this.userId) {
-            // Get related proxy backend configuration
-            return ProxyBackends.find({ apiId: api._id });
-          }
-          // Return an empty cursor
-          return [];
+          // Get related proxy backend configuration
+          return ProxyBackends.find({ apiId: api._id });
         },
       },
       {
