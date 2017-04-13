@@ -34,8 +34,9 @@ let schema = {
 
 // Iterate through registered proxies and merge them all into one
 _.forEach(registeredProxies, (proxyName) => {
+  /* eslint-disable global-require */
   // Import proxy schema
-  const proxySchema = require(`./${_.snakeCase(proxyName)}`).default
+  const proxySchema = require(`./${_.snakeCase(proxyName)}`).default;
 
   // Merge proxy schema with initial one
   schema = _.assign(schema, proxySchema);
