@@ -39,7 +39,7 @@ kadira:blaze-layout
 kadira:dochead
 kadira:flow-router
 kurounin:pagination-blaze
-kurounin:pagination@=1.0.15
+kurounin:pagination@=1.0.21
 less@2.7.9
 logging@1.1.17
 matb33:collection-hooks
