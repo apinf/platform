@@ -109,7 +109,6 @@ Organizations.schema = new SimpleSchema({
       return this.unset();
     },
   },
-<<<<<<< HEAD
   mediasNumberPerPage: {
     type: Number,
     optional: true,
@@ -126,11 +125,10 @@ Organizations.schema = new SimpleSchema({
         ];
       },
     },
-=======
+  },
   organizationCoverFileId: {
     type: String,
     optional: true,
->>>>>>> refs/remotes/origin/develop
   },
   socialMedia: {
     type: Object,
