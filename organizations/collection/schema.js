@@ -109,7 +109,7 @@ Organizations.schema = new SimpleSchema({
       return this.unset();
     },
   },
-  mediasNumberPerPage: {
+  mediaPerPage: {
     type: Number,
     optional: true,
     autoform: {
@@ -127,7 +127,7 @@ Organizations.schema = new SimpleSchema({
       },
     },
   },
-  APIsNumberPerPage: {
+  apisPerPage: {
     type: Number,
     optional: true,
     autoform: {
