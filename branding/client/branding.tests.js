@@ -11,10 +11,16 @@ import { Template } from 'meteor/templating';
 // import { $ } from 'meteor/jquery';
 
 // Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { chai } from 'meteor/practicalmeteor:chai';
 
 // APINF imports
 // import withRenderedTemplate from '/tests/utils/test-helpers.js';
+
+FlowRouter.route('/', {
+  name: 'hack route for tests',
+  action () {},
+});
 
 describe('Branding', function () {
   // TODO: is there a way to register these two helpers automatically?
