@@ -106,8 +106,39 @@ Organizations.schema = new SimpleSchema({
       if (this.isUpdate) {
         return new Date();
       }
-
       return this.unset();
+    },
+  },
+  mediaPerPage: {
+    type: Number,
+    optional: true,
+    autoform: {
+      options () {
+        return [
+          { label: '4', value: 4 },
+          { label: '8', value: 8 },
+          { label: '12', value: 12 },
+          { label: '16', value: 16 },
+          { label: '20', value: 20 },
+          { label: '24', value: 24 },
+        ];
+      },
+    },
+  },
+  apisPerPage: {
+    type: Number,
+    optional: true,
+    autoform: {
+      options () {
+        return [
+          { label: '4', value: 4 },
+          { label: '8', value: 8 },
+          { label: '12', value: 12 },
+          { label: '16', value: 16 },
+          { label: '20', value: 20 },
+          { label: '24', value: 24 },
+        ];
+      },
     },
   },
   organizationCoverFileId: {
