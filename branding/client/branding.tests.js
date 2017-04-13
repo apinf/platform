@@ -2,7 +2,7 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 
 // Meteor imports
-// import { Template } from 'meteor/templating';
+import { Template } from 'meteor/templating';
 // import { $ } from 'meteor/jquery';
 
 // Meteor contributed packages imports
