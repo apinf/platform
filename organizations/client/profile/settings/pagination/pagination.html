@@ -5,24 +5,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationSettingsPagination">
   <div class="setting-section">
-      <h3>
-        {{_ 'organizationSettingsPagination_panelTitle_contentManagement' }}
-      </h3>
+    <h3>
+      {{_ 'organizationSettingsPagination_panelTitle_contentManagement' }}
+    </h3>
 
-       {{# autoForm
-          collection=organizationsCollection
-          doc=organization
-          id="organizationSettingsPagination"
-          type="update"
-        }}
+     {{# autoForm
+        collection=organizationsCollection
+        doc=organization
+        id="organizationSettingsPagination"
+        type="update"
+      }}
 
-        {{> afQuickField  name='apisPerPage' firstOption=false }}
+      {{> afQuickField  name='apisPerPage' firstOption=false }}
 
-        {{> afQuickField  name='mediaPerPage' firstOption=false }}
+      {{> afQuickField  name='mediaPerPage' firstOption=false }}
 
-        <button type="submit" class="btn btn-primary">
-          {{_ "organizationSettingsPagination_saveButton" }}
-        </button>
-      {{/ autoForm }}
+      <button type="submit" class="btn btn-primary">
+        {{_ "organizationSettingsPagination_saveButton" }}
+      </button>
+    {{/ autoForm }}
   </div>
 </template>
