@@ -2,14 +2,17 @@
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+// Collection imports
+import Apis from '/apis/collection';
+
 AutoForm.addHooks('editApiMetadataForm', {
   before: {
     insert (metadata) {
-      // Get API ID, from Router
-      const apiId = FlowRouter.getParam('_id');
+      // Get related API document
+      const api = Apis.findOne({ slug: FlowRouter.getParam('slug') });
 
       // Set the API ID property of the metadata document
-      metadata.apiId = apiId;
+      metadata.apiId = api._id;
 
       return metadata;
     },
