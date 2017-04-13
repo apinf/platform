@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationApis">
-  <div class="form-inline pull-right">
+  <div class="form-inline block-header">
     {{# if hasApi }}
       {{> apiSortingToolbar }}
       {{> apisFilterIcon }}
@@ -20,7 +20,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <!-- Show or not content-->
   {{# if hasApi }}
   <!-- Featured APIs -->
-  {{> apiFilteredBy }}
   <div class="block-header">
     <!-- Title -->
     <h3 class="apis-block-title">
@@ -30,6 +29,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{_ 'organizationProfile_smallText_apisCount' count=featuredApisCount }}
       </small>
     </h3>
+    {{> apiFilteredBy }}
   </div>
   {{> apiCatalogGrid apis=apis }}
 
