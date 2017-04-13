@@ -9,10 +9,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
-  organizationMediasNumberPerPage: {
+  organizationAPIsMediasNumberPerPage: {
     onSuccess () {
       // Get success message translation
-      const message = TAPi18n.__('organizationMediasNumberPerPage_successMessage');
+      const message = TAPi18n.__('organizationAPIsMediasNumberPerPage_successMessage');
 
       // Alert user of success
       sAlert.success(message);

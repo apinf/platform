@@ -9,7 +9,7 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Organizations from '/organizations/collection/';
 
-Template.organizationMediasNumberPerPage.helpers({
+Template.organizationAPIsMediasNumberPerPage.helpers({
   organizationsCollection () {
     // Make Organizations collection available to template (i.e. autoform)
     return Organizations;
