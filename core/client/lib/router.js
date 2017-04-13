@@ -84,6 +84,9 @@ const requireAdminRole = function () {
 FlowRouter.triggers.enter([redirectToCatalogue], { only: ['forgotPwd'] });
 
 // Routes that require admin role
-FlowRouter.triggers.enter([requireAdminRole], { only: ['settings', 'branding', 'proxies'] });
+FlowRouter.triggers.enter(
+  [requireAdminRole],
+  { only: ['settings', 'branding', 'proxies'] }
+);
 
 export default signedIn;
