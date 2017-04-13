@@ -438,6 +438,7 @@
   "organizationMediasNumberPerPage_panelTitle_contentManagement": "Content Management",
   "organizationMediasNumberPerPage_saveButton": "Save",
   "organizationMediasNumberPerPage_panelBody_numberOfMediasPerPage": "Number of Medias per page",
+  "organizationAPIsNumberPerPage_panelBody_numberOfAPIsPerPage": "Number of APIs per page",
   "organizationMediasNumberPerPage_successMessage": "Number added successfully",
   "organizationSettings_uploadCover_heading": "Upload cover image",
   "organizationSettings_uploadCoverText": "You can upload a cover image for your organization.",
