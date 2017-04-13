@@ -4,22 +4,19 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationMediasNumberPerPage">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
+  <div class="setting-section">
+      <h3>
         {{_ 'organizationMediasNumberPerPage_panelTitle_contentManagement' }}
-      </h2>
-    </div>
-    <div class="panel-body">
-       <b>
+      </h3>
+      <label>
         {{_ "organizationMediasNumberPerPage_panelBody_numberOfMediasPerPage" }}
-       </b>
+      </label>
        {{# autoForm
           collection=organizationsCollection
           doc=organization
           id="organizationMediasNumberPerPage"
           type="update"
-       }}
+        }}
 
         {{> afQuickField  name='mediasNumberPerPage' firstOption=false }}
 
@@ -27,6 +24,5 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ "organizationMediasNumberPerPage_saveButton" }}
         </button>
       {{/ autoForm }}
-    </div>
   </div>
 </template>
