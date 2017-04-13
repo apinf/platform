@@ -57,9 +57,6 @@ Template.apiCatalog.onCreated(function () {
     filters,
   });
 
-  // Subscribe to API logo collection
-  instance.subscribe('allApiLogo');
-
   // Subscribe to all users, returns only usernames
   instance.subscribe('allUsersUsernamesOnly');
 
