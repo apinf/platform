@@ -10,6 +10,7 @@ Organizations.friendlySlugs({
   slugFrom: 'name',
   slugField: 'slug',
   createOnUpdate: true,
+  updateSlug: false,
   distinct: true,
   transliteration: [
     { from: 'àáâäåãа', to: 'a' },
