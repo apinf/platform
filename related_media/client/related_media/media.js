@@ -37,7 +37,7 @@ Template.relatedMedia.onCreated(function () {
 
   // reactive solution to update pagination with template instant data
   instance.autorun(() => {
-    const perPage = Template.currentData().entity.mediasNumberPerPage || 10;
+    const perPage = Template.currentData().entity.mediaPerPage || 10;
 
     instance.pagination.perPage(perPage);
   });
