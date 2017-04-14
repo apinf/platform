@@ -32,9 +32,6 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to public proxy details for proxy form
   instance.subscribe('publicProxyDetails');
-
-  // Subscribe to all users, returns only usernames
-  instance.subscribe('allUsersUsernamesOnly');
 });
 
 Template.viewApi.helpers({
