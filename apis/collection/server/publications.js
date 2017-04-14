@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
-This file is covered by the EUPL license.
-You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+ This file is covered by the EUPL license.
+ You may obtain a copy of the licence at
+ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
@@ -62,6 +62,18 @@ Meteor.publishComposite('apiComposite', function (slug) {
     children: [
       {
         find (api) {
+          // Get all managers username and email for current API and authorized user
+          return Meteor.users.find({
+            $or: [
+              { _id: { $in: api.managerIds } },
+              { _id: { $in: api.authorizedUserIds } },
+            ],
+          },
+            { fields: { username: 1, emails: 1 } });
+        },
+      },
+      {
+        find (api) {
           // Get related API feedback items
           return Feedback.find({ apiBackendId: api._id });
         },
@@ -70,15 +82,6 @@ Meteor.publishComposite('apiComposite', function (slug) {
         find (api) {
           // Get related API Backlog items
           return ApiBacklogItems.find({ apiBackendId: api._id });
-        },
-      },
-      {
-        find (api) {
-          // Get related the public details of an authorized user
-          return Meteor.users.find(
-            { _id: { $in: api.authorizedUserIds } },
-            { fields: { username: 1, emails: 1, _id: 1 } }
-          );
         },
       },
       {
