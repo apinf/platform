@@ -22,4 +22,7 @@ Template.apiCatalogTable.onCreated(function () {
 
   // Subscribe to API logo collection by logo IDs
   this.subscribe('apiLogoByIds', apiLogoIds);
+
+  // Subscribe to usernames of API managers
+  this.subscribe('managersUsername', apis);
 });
