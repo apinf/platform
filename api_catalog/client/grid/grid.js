@@ -19,4 +19,7 @@ Template.apiCatalogGrid.onCreated(function () {
 
   // Subscribe to API logo collection
   this.subscribe('apiLogoByIds', apiLogoIds);
+
+  // Subscribe to usernames of API managers
+  this.subscribe('managersUsername', apis);
 });
