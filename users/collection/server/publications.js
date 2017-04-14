@@ -14,7 +14,7 @@ Meteor.publish('managersUsername', (apis) => {
   check(apis, Array);
 
   // Get all IDS of managers
-  const allManagerIds = _.map(apis, api => {
+  const allManagerIds = _.flatMap(apis, api => {
     return api.managerIds;
   });
 
