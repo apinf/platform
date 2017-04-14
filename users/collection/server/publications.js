@@ -5,7 +5,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
-Meteor.publish('allUsersUsernamesOnly', () => {
-  return Meteor.users.find({}, { fields: { username: 1 } });
+// NPM packages imports
+import _ from 'lodash';
+
+Meteor.publish('managersUsername', (apis) => {
+  check(apis, Array);
+
+  // Get all IDS of managers
+  const allManagerIds = _.map(apis, api => {
+    return api.managerIds;
+  });
+
+  // Leave unique IDs without repeat
+  const uniqueManagerIds = _.uniq(allManagerIds);
+
+  return Meteor.users.find({ _id: { $in: uniqueManagerIds } }, { fields: { username: 1 } });
 });
