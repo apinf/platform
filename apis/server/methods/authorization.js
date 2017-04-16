@@ -9,10 +9,12 @@ import { check } from 'meteor/check';
 
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
 // Collection imports
 import Apis from '/apis/collection';
+import Settings from '/settings/collection';
 
 Meteor.methods({
   addAuthorizedUserByEmail (apiId, email) {
@@ -56,5 +58,30 @@ Meteor.methods({
 
     // Check if user can edit
     return api && api.currentUserCanManage();
+  },
+  currentUserCanAddApi () {
+    // Get Settigns
+    const settings = Settings.findOne();
+
+    // Get current user Id
+    const userId = Meteor.userId();
+
+    if (settings) {
+      // If access field doesn't exist, these is false. Allow users to add an API on default
+      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
+
+      if (!onlyAdminsCanAddApis) {
+        // Allow user to add an API
+        return true;
+      }
+
+      // Otherwise only admin can add an API
+      // Make sure current user is admin
+      return Roles.userIsInRole(userId, ['admin']);
+    }
+
+    // Registered user can add an API then returns true
+    // Anonymous user can not add an API then returns false
+    return !!userId;
   },
 });
