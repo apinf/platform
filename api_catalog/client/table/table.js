@@ -9,7 +9,7 @@ import { Template } from 'meteor/templating';
 
 Template.apiCatalogTable.onCreated(function () {
   // Get APIs document
-  const apis = Template.currentData().apis;
+  const apis = Template.instance().data.apis;
 
   const apiLogoIds = [];
 

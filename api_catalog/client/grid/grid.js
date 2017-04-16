@@ -7,7 +7,7 @@
 import { Template } from 'meteor/templating';
 
 Template.apiCatalogGrid.onCreated(function () {
-  const apis = Template.currentData().apis;
+  const apis = Template.instance().data.apis;
 
   const apiLogoIds = [];
 
