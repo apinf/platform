@@ -10,7 +10,7 @@ import { check } from 'meteor/check';
 // NPM packages imports
 import _ from 'lodash';
 
-Meteor.publish('managersUsername', (apis) => {
+Meteor.publish('managersUsernames', (apis) => {
   check(apis, Array);
 
   // Get all IDS of managers

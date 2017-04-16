@@ -21,5 +21,5 @@ Template.apiCatalogGrid.onCreated(function () {
   this.subscribe('apiLogoByIds', apiLogoIds);
 
   // Subscribe to usernames of API managers
-  this.subscribe('managersUsername', apis);
+  this.subscribe('managersUsernames', apis);
 });
