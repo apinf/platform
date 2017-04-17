@@ -60,29 +60,28 @@ Meteor.methods({
     return api && api.currentUserCanManage();
   },
   currentUserCanAddApi () {
-    // Get Settigns
-    const settings = Settings.findOne();
-
     // Get current user Id
     const userId = Meteor.userId();
 
-    if (settings) {
-      // If the access permission 'only admins can add APIs' is defined, use it
-      // Otherwise, allow registered users to add APIs by default
-      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
+    // Make sure user is logged in
+    if (userId === null) {
+      // Anonymous user not allowed to add API
+      return false;
+    }
+    // Get Settings (used to check for access permission)
+    const settings = Settings.findOne();
 
-      if (!onlyAdminsCanAddApis) {
-        // Allow user to add an API
-        return true;
-      }
+    // If the access permission 'only admins can add APIs' is defined, use it
+    // otherwise, allow users to add APIs by default
+    const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
 
-      // Otherwise only admin can add an API
+    // Check if only admins are allowed to add APIs
+    if (onlyAdminsCanAddApis) {
       // Make sure current user is admin
       return Roles.userIsInRole(userId, ['admin']);
     }
 
-    // Registered user can add an API then returns true
-    // Anonymous user can not add an API then returns false
-    return !!userId;
+    // Allow users to add APIs by default
+    return true;
   },
 });
