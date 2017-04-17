@@ -67,7 +67,8 @@ Meteor.methods({
     const userId = Meteor.userId();
 
     if (settings) {
-      // If access field doesn't exist, these is false. Allow users to add an API on default
+      // If the access permission 'only admins can add APIs' is defined, use it
+      // Otherwise, allow registered users to add APIs by default
       const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
 
       if (!onlyAdminsCanAddApis) {
