@@ -4,7 +4,6 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
@@ -19,8 +18,13 @@ import ApiLogo from '../../collection';
 Template.uploadApiLogo.onCreated(function () {
   const instance = this;
 
-  // Subscribe to API logo
-  instance.subscribe('allApiLogo');
+  instance.autorun(() => {
+    // Get Logo ID of current API using reactive way
+    const apiLogoFileId = Template.currentData().api.apiLogoFileId;
+
+    // Subscribe to current API logo
+    instance.subscribe('currentApiLogo', apiLogoFileId);
+  });
 });
 
 Template.uploadApiLogo.events({
@@ -31,7 +35,7 @@ Template.uploadApiLogo.events({
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-      // Get currentApiBackend documentationFileId
+      // Get Logo ID of current API using reactive way
       const apiLogoFileId = templateInstance.data.api.apiLogoFileId;
 
       // Convert to Mongo ObjectID
@@ -48,38 +52,5 @@ Template.uploadApiLogo.events({
 
       sAlert.success(message);
     }
-  },
-});
-
-Template.uploadApiLogo.helpers({
-  uploadedLogoLink () {
-    const apiLogoFileId = Apis.findOne().apiLogoFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(apiLogoFileId);
-
-    // Get API logo file Object
-    const apiLogoFile = ApiLogo.findOne(objectId);
-
-    let url;
-    // Check if API logo file is available
-    if (apiLogoFile) {
-      // Get API logo file URL
-      url = `${Meteor.absoluteUrl().slice(0, -1) + ApiLogo.baseURL}/md5/${apiLogoFile.md5}`;
-    }
-    return url;
-  },
-  uploadedApiLogoFile () {
-    const apiLogoFileId = Apis.findOne().apiLogoFileId;
-
-    let apiLogoFile;
-    if (apiLogoFileId) {
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(apiLogoFileId);
-
-      // Get API logo file Object
-      apiLogoFile = ApiLogo.findOne(objectId);
-    }
-    return apiLogoFile;
   },
 });
