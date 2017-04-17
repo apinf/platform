@@ -8,21 +8,23 @@
 import { Template } from 'meteor/templating';
 
 Template.apiCatalogTable.onCreated(function () {
-  // Get APIs document
-  const apis = Template.currentData().apis;
+  this.autorun(() => {
+    // Get APIs document
+    const apis = Template.currentData().apis;
 
-  const apiLogoIds = [];
+    const apiLogoIds = [];
 
-  // Get list of logo IDs
-  apis.forEach((api) => {
-    if (api.apiLogoFileId) {
-      apiLogoIds.push(api.apiLogoFileId);
-    }
+    // Get list of logo IDs
+    apis.forEach((api) => {
+      if (api.apiLogoFileId) {
+        apiLogoIds.push(api.apiLogoFileId);
+      }
+    });
+
+    // Subscribe to API logo collection by logo IDs
+    this.subscribe('apiLogoByIds', apiLogoIds);
+
+    // Subscribe to usernames of API managers
+    this.subscribe('managersUsernames', apis);
   });
-
-  // Subscribe to API logo collection by logo IDs
-  this.subscribe('apiLogoByIds', apiLogoIds);
-
-  // Subscribe to usernames of API managers
-  this.subscribe('managersUsernames', apis);
 });
