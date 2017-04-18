@@ -4,34 +4,32 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationCard">
-  <div class="generic-card panel panel-default">
-    <div class="panel-body">
-      <div class="media">
-        <div class="media-left">
-          {{> viewOrganizationLogo organization=organization }}
-        </div>
-        <div class="media-body">
-          <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}"
-             class="generic-card-name">
-            {{ organization.name }}
-          </a>
-          <p class="generic-card-description">
-            {{ organization.description }}
-          </p>
-        </div>
-      </div>
+  <div class="panel organization-card">
+    <div class="panel-heading organization-card-heading text-center">
+      <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}">
+        <h3>
+          {{ organization.name }}
+        </h3>
+      </a>
     </div>
-    <div class="panel-footer">
-      <ul class="list-inline">
-        <li class="pull-left">
-          <span class="organization-card-apis-count">
-            {{ organzationApisCount }} {{_ "organizationCatalogGrid_organizationCardApisCount_apisText" }}
-          </span>
-        </li>
-        <li class="pull-right">
-          <span class="generic-card-created"  title='{{ localeFormatDate organization.createdAt }}'>
+    <div class="organization-card-logo clearfix">
+      {{> viewOrganizationLogo organization=organization }}
+    </div>
+    <div class="organization-card-description">
+      <p class="text-center">
+        {{ organization.description }}
+      </p>
+    </div>
+    <div class="organization-card-action-bar">
+      <ul>
+        <li class="time">
+          <span title='{{ localeFormatDate organization.createdAt }}'>
+            <i class="fa fa-clock-o"></i>
             {{_ "organizationCatalogGrid_organizationCardCreated_addedText" organization.relativeCreatedAt }}
           </span>
+        </li>
+        <li class="apis-count pull-right">
+          {{ organzationApisCount }} {{_ "organizationCatalogGrid_organizationCardApisCount_apisText" }}
         </li>
       </ul>
     </div>
