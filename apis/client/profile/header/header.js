@@ -29,4 +29,16 @@ Template.viewApiPageHeader.helpers({
     }
     return false;
   },
+  userShouldSeeApiDocsTab () {
+    // Get API id
+    const apiId = this.api._id;
+
+    const api = Apis.findOne(apiId);
+
+    // Check if API documentation exist or user allowed to see
+    if (api.apiDocsIsNotEmpty() || api.currentUserCanManage()) {
+      return true;
+    }
+    return false;
+  },
 });
