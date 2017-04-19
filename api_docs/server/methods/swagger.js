@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
-This file is covered by the EUPL license.
-You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+ This file is covered by the EUPL license.
+ You may obtain a copy of the licence at
+ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
@@ -14,14 +14,15 @@ Meteor.methods({
   // Validate Swagger JSON/YAML
   // Params: URL or file path to Swagger file
   // Returns: true if valid else return error object
-  isValidSwagger (swaggerFileUrl) {
+  parsedDocument (swaggerFileUrl) {
     // Make sure swaggerFileUrl is a String
     check(swaggerFileUrl, String);
 
     return SwaggerParser.validate(swaggerFileUrl)
-      .then(() => {
+      .then((result) => {
         // Parsed and validated successfully
-        return true;
+        // Return parsed object
+        return result;
       })
       .catch((err) => {
         // Return error object

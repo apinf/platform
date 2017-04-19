@@ -12,7 +12,7 @@ import Branding from '/branding/collection';
 const tinycolor = require('tinycolor2');
 
 Template.customStylesheet.helpers({
-  mostReadableBackgound () {
+  mostReadableBackground () {
     // Get branding
     const branding = Branding.findOne();
 
@@ -76,5 +76,26 @@ Template.customStylesheet.helpers({
     }
 
     return primaryColorText;
+  },
+  coverPhotoOverlay () {
+    // Get branding
+    const branding = Branding.findOne();
+
+    let coverPhotoOverlay;
+
+    if (branding && branding.colors && branding.colors.coverPhotoOverlay) {
+      coverPhotoOverlay = branding.colors.coverPhotoOverlay;
+    }
+
+    let overlayTransparency = 0;
+
+    if (branding && branding.colors && branding.colors.overlayTransparency) {
+      overlayTransparency = branding.colors.overlayTransparency / 100;
+    }
+
+    const color = tinycolor(coverPhotoOverlay);
+    color.setAlpha(overlayTransparency);
+
+    return color.toRgbString();
   },
 });

@@ -4,10 +4,14 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 .apis-block-title {
-    display: inline;
-    margin-right: 0.4em;
+  display: inline;
+  margin-right: 0.4em;
 }
 
 .block-header {
-    margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.setting-section {
+  margin-bottom: 2em;
 }

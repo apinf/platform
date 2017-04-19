@@ -4,17 +4,13 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="navbar">
-  <nav class="navbar navbar-default main-navigation">
+  <nav class="navbar navbar-default navbar-fixed-top main-navigation">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
         {{# if projectLogoExists }}
-        <a class="navbar-brand text-hide" href="{{ pathFor 'home' }}" style="background-image:url({{ uploadedProjectLogoLink }})">
+        <a class="navbar-brand text-hide"
+          href="{{ pathFor 'home' }}"
+          style="background-image:url({{ uploadedProjectLogoLink }})">
           APInf
         </a>
         {{ else }}
@@ -25,85 +21,79 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         {{/ if }}
       </div>
-      <div id="main-navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-left">
-          {{# if currentUser }}
-            {{# if proxyIsDefined }}
-              {{# if userCanViewDashboard }}
-                <li class="{{ isActiveRoute 'dashboard' }}">
-                  <a href="{{ pathFor 'dashboard' }}">
-                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                    {{_ "navbar_dashboard" }}
-                  </a>
-                </li>
-              {{/ if }}
-            {{/ if }}
-          {{/ if }}
-          <li class="{{ isActiveRoute 'apiCatalog' }}">
-            <a href="{{ pathFor 'apiCatalog' }}">
-              <i class="fa fa-book" aria-hidden="true"></i>
-              {{_ "navbar_apis" }}
+      <ul class="nav navbar-nav navbar-right" id="user-menu">
+        {{# if currentUser }}
+        {{> userMenu user=currentUser }}
+        {{ else }}
+        <li>
+          <a class="navbar-login" href="{{ pathFor 'signUp' }}">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            {{_ "navbar_signUp" }}
+          </a>
+        </li>
+        <li>
+          <a class="navbar-login" href="{{ pathFor 'signIn' }}">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            {{_ "navbar_signIn" }}
+          </a>
+        </li>
+        {{/ if }}
+        {{# unless isActiveRoute 'search'}}
+          <li>
+            <a type="button" class="icon-search">
+              <i class="fa fa-search toggle-search-icon"></i>
+              <i class="fa fa-times toggle-search-icon"></i>
             </a>
           </li>
-          <li class="{{ isActiveRoute 'organizationCatalog' }}">
-            <a href="{{ pathFor 'organizationCatalog' }}">
-              <i class="fa fa-address-card" aria-hidden="true"></i>
-              {{_ "navbar_organizations" }}
-            </a>
-          </li>
-          {{# if currentUser }}
-            {{# if userCanAddApi }}
-            <li class="{{ isActiveRoute 'addApi' }}">
-              <a href="{{ pathFor 'addApi' }}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                {{_ "navbar_addAPIBackend" }}
-              </a>
-            </li>
-            {{/ if }}
-
-            {{# if isInRole 'admin' }}
-              <li class="{{ isActiveRoute 'accountsAdmin' }}">
-                <a href="{{ pathFor 'accountsAdmin' }}">
-                  <i class="fa fa-users" aria-hidden="true"></i>
-                  {{_ "navbar_users" }}
+        {{/ unless}}
+      </ul>
+      <ul class="nav navbar-nav nanbar-left" id="main-navbar">
+        {{# if currentUser }}
+          {{# if proxyIsDefined }}
+            {{# if userCanViewDashboard }}
+              <li class="{{ isActiveRoute 'dashboard' }}">
+                <a href="{{ pathFor 'dashboard' }}">
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                  {{_ "navbar_dashboard" }}
                 </a>
               </li>
             {{/ if }}
           {{/ if }}
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          {{# if currentUser }}
-          {{> userMenu user=currentUser }}
-          {{ else }}
-          <li>
-            <a class="close-navbar" href="{{ pathFor 'signUp' }}">
-              <i class="fa fa-user-plus" aria-hidden="true"></i>
-              {{_ "navbar_signUp" }}
-            </a>
-          </li>
-          <li>
-            <a class="close-navbar" href="{{ pathFor 'signIn' }}">
-              <i class="fa fa-sign-in" aria-hidden="true"></i>
-              {{_ "navbar_signIn" }}
+        {{/ if }}
+        <li class="{{ isActiveRoute 'apiCatalog' }}">
+          <a href="{{ pathFor 'apiCatalog' }}">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            {{_ "navbar_apis" }}
+          </a>
+        </li>
+        <li class="{{ isActiveRoute 'organizationCatalog' }}">
+          <a href="{{ pathFor 'organizationCatalog' }}">
+            <i class="fa fa-address-card" aria-hidden="true"></i>
+            {{_ "navbar_organizations" }}
+          </a>
+        </li>
+        {{# if currentUser }}
+          {{# if userCanAddApi }}
+          <li class="{{ isActiveRoute 'addApi' }}">
+            <a href="{{ pathFor 'addApi' }}">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              {{_ "navbar_addAPIBackend" }}
             </a>
           </li>
           {{/ if }}
-          {{# unless isActiveRoute 'search'}}
-            <li>
-              <a type="button" class="icon-search">
-                <i class="fa fa-search toggle-search-icon"></i>
-                <i class="fa fa-times toggle-search-icon"></i>
+
+          {{# if isInRole 'admin' }}
+            <li class="{{ isActiveRoute 'accountsAdmin' }}">
+              <a href="{{ pathFor 'accountsAdmin' }}">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                {{_ "navbar_users" }}
               </a>
             </li>
-          {{/ unless}}
-          <li>
-            <a id="about-button">
-              <i class="fa fa-question-circle" aria-hidden="true"></i>
-              {{_ "navbar_about" }}
-            </a>
-          </li>
-        </ul>
-      </div>
+          {{/ if }}
+        {{/ if }}
+      </ul>
+    </div>
+    <div class="container">
       {{> searchField }}
     </div>
   </nav>

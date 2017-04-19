@@ -22,6 +22,9 @@ import ApiBackendRatings from '/ratings/collection';
 import ApiBookmarks from '/bookmarks/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 import ApiDocs from '/api_docs/collection';
+import ApiLogo from '/apis/logo/collection';
+import ApiBacklogItems from '/backlog/collection';
+import ApiMetadata from '/metadata/collection';
 import Apis from './';
 
 Apis.helpers({
@@ -236,5 +239,74 @@ Apis.helpers({
     }
 
     return documentation;
+  },
+  backlogIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const backlog = ApiBacklogItems.findOne({ apiBackendId: apiId });
+
+    // Check if backlog exist
+    if (backlog) {
+      return true;
+    }
+    return false;
+  },
+  apiMetadataIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const apiMetadata = ApiMetadata.findOne({ apiId });
+
+    // Check if Api Metadata exist
+    if (apiMetadata) {
+      return true;
+    }
+    return false;
+  },
+  logo () {
+    // Placeholder logo Object
+    let apiLogo;
+
+    if (this.apiLogoFileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(this.apiLogoFileId);
+
+      // Get API logo file Object
+      apiLogo = ApiLogo.findOne(objectId);
+    }
+    return apiLogo;
+  },
+  logoUrl () {
+    // Placeholder logo url
+    let apiLogoUrl;
+
+    // Get logo
+    const apiLogo = this.logo();
+
+    // Check if API logo file is available
+    if (apiLogo) {
+      // Get Meteor absolute URL
+      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+
+      // Set base url
+      const baseApiLogoURL = meteorAbsoluteUrl + ApiLogo.baseURL;
+
+      // Get API logo file URL
+      apiLogoUrl = `${baseApiLogoURL}/md5/${apiLogo.md5}`;
+    }
+    return apiLogoUrl;
+  },
+  apiDocsIsNotEmpty () {
+    // Get API id
+    const apiId = this._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId });
+
+    // Check if API documentation exist
+    if (apiDocs) {
+      return true;
+    }
+    return false;
   },
 });
