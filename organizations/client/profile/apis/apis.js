@@ -77,16 +77,16 @@ Template.organizationApis.onCreated(function () {
       // Sort by name is ascending other cases are descending sort
       const sortDirection = sortByParameter === 'name' ? 1 : -1;
       if (sortByParameter === 'name') {
-        sort.isPinned = 1;
+        sort.isFeatured = 1;
       }
       // Set sorting
       sort[sortByParameter] = sortDirection;
     } else {
       // Sort by name is default
-      sort.isPinned = 1;
+      sort.isFeatured = 1;
       sort.name = 1;
     }
-    console.log('sort=', sort);
+
     // Change sorting
     instance.pagination.sort(sort);
   });
@@ -98,7 +98,6 @@ Template.organizationApis.helpers({
 
     // Get apis collection via Pagination
     const apis = instance.pagination.getPage();
-    console.log('apis=', apis);
     // Get the sort via Pagination
     const sort = instance.pagination.sort();
 
@@ -115,6 +114,27 @@ Template.organizationApis.helpers({
 
     return apis;
   },
+  featuredApis () {
+    const instance = Template.instance();
+    // console.log('inst=', instance);
+    // Get apis collection via Pagination
+    const featuredApis = instance.find({ isFeatured: true });
+    // Get the sort via Pagination
+    const sort = instance.pagination.sort();
+
+    // Make sure sorted by name
+    if (sort.name) {
+      // Get the language
+      const language = TAPi18n.getLanguage();
+
+      // Use custom sort function with i18n support
+      featuredApis.sort((a, b) => {
+        return a.name.localeCompare(b.name, language) * sort.name;
+      });
+    }
+
+    return featuredApis;
+  },
   apisCount () {
     const instance = Template.instance();
     // Get the total number of documents
@@ -124,7 +144,7 @@ Template.organizationApis.helpers({
     const instance = Template.instance();
     console.log('inst=', instance);
     // Get the total number of documents
-    return instance.pagination.items({ isPinned: true }).count();
+    return instance.pagination.collection({ isFeatured: true }).count();
   },
   templatePagination () {
     const instance = Template.instance();
