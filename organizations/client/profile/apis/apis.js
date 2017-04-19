@@ -123,10 +123,11 @@ Template.organizationApis.helpers({
     return apis;
   },
   featuredApis () {
+    // will be replaced with code fetching featured apis
     const instance = Template.instance();
     // console.log('inst=', instance);
     // Get apis collection via Pagination
-    const featuredApis = instance.find({ isFeatured: true });
+    const featuredApis = instance.pagination.getPage();
     // Get the sort via Pagination
     const sort = instance.pagination.sort();
 
