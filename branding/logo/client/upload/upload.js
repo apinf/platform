@@ -16,13 +16,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 
-Template.uploadProjectLogo.onCreated(function () {
-  const instance = this;
-
-  // Subscribe to Project logo
-  instance.subscribe('projectLogo');
-});
-
 Template.uploadProjectLogo.events({
   'click .delete-projectLogo': function () {
     // Show confirmation dialog to user

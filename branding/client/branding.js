@@ -9,12 +9,6 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Branding from '/branding/collection';
 
-Template.branding.onCreated(function () {
-  const instance = this;
-
-  instance.subscribe('projectLogo');
-});
-
 Template.branding.helpers({
   branding () {
     // Get Branding collection content
