@@ -17,7 +17,7 @@ Template.pinApiCard.events({
     // Get ID of current service
     const apiId = api._id;
 
-    // Set the isPublic property to the opposite of its current value
+    // Set the isFeatured property to the opposite of its current value
     Apis.update(apiId, { $set: { isFeatured: !api.isFeatured } });
   },
 });
