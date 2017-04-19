@@ -18,12 +18,12 @@ Template.pinApiCard.events({
     const apiId = api._id;
 
     // Set the isPublic property to the opposite of its current value
-    Apis.update(apiId, { $set: { isPinned: !api.isPinned } });
+    Apis.update(apiId, { $set: { isFeatured: !api.isFeatured } });
   },
 });
 
 Template.pinApiCard.helpers({
-  isPinned () {
+  isFeatured () {
     // Get API from template data
     const api = Template.currentData().api;
 
@@ -31,7 +31,7 @@ Template.pinApiCard.helpers({
     const apiId = api._id;
 
     // Check visibility status
-    const status = Apis.findOne(apiId).isPinned;
+    const status = Apis.findOne(apiId).isFeatured;
 
     return status;
   },

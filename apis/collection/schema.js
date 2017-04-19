@@ -134,7 +134,7 @@ Apis.schema = new SimpleSchema({
     optional: true,
     defaultValue: true,
   },
-  isPinned: {
+  isFeatured: {
     type: Boolean,
     optional: true,
     defaultValue: false,
