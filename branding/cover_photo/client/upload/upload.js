@@ -15,17 +15,10 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
-Template.uploadCoverPhoto.onCreated(function () {
-  const instance = this;
-
-  // Subscribe to Cover Photo collection
-  instance.subscribe('coverPhoto');
-});
-
 Template.uploadCoverPhoto.helpers({
   uploadedCoverPhotoFile () {
     // Get cover photo ID
-    const currentCoverPhotoFileId = this.branding.coverPhotoFileId;
+    const currentCoverPhotoFileId = Template.currentData().branding.coverPhotoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentCoverPhotoFileId);
