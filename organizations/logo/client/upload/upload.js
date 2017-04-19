@@ -19,11 +19,13 @@ Template.uploadOrganizationLogo.onCreated(function () {
   const instance = this;
 
   instance.autorun(() => {
-    // Get Logo ID of current Organization using reactive way
-    const organizationLogoId = Template.currentData().organization.organizationLogoFileId;
+    // Get organization data using reactive way
+    const organization = Template.currentData().organization;
 
-    // Subscribe to current Organization logo
-    instance.subscribe('currentOrganizationLogo', organizationLogoId);
+    if (organization.organizationLogoFileId) {
+      // Subscribe to current Organization logo
+      instance.subscribe('currentOrganizationLogo', organization.organizationLogoFileId);
+    }
   });
 });
 
