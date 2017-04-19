@@ -32,9 +32,6 @@ Template.organizationCatalog.onCreated(function () {
     sort: defaultSort,
   });
 
-  // Subscribe to Organization logo collection
-  instance.subscribe('allOrganizationLogo');
-
   // Watch for changes in the sort settings
   instance.autorun(() => {
     // Check URL parameter for sorting
