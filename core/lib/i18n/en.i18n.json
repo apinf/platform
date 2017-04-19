@@ -420,7 +420,7 @@
   "organizationManagerForm_emailNotRegistered_errorText": "Email address not currently registered.",
   "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
   "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
-  "organizationProfile_bigText_apisCount": "APIs",
+  "organizationProfile_bigText_apisCount": "All APIs",
   "organizationProfileHeader_editButton_text": "Edit",
   "organizationProfileHeader_tabs_apis": "APIs",
   "organizationProfileHeader_tabs_settings": "Settings",
