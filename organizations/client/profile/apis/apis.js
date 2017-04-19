@@ -77,13 +77,13 @@ Template.organizationApis.onCreated(function () {
       // Sort by name is ascending other cases are descending sort
       const sortDirection = sortByParameter === 'name' ? 1 : -1;
       if (sortByParameter === 'name') {
-        sort.isFeatured = 1;
+        sort.isFeatured = -1;
       }
       // Set sorting
       sort[sortByParameter] = sortDirection;
     } else {
       // Sort by name is default
-      sort.isFeatured = 1;
+      sort.isFeatured = -1;
       sort.name = 1;
     }
 
