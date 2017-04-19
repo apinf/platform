@@ -11,7 +11,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     padding: 1em;
     width: 100%;
     vertical-align: middle;
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
     position: relative;
     overflow: hidden;
     border-top: 1px solid #eee;
@@ -19,13 +20,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .organization-card-action-bar li {
     list-style: none;
     color: #555;
+    white-space: nowrap;
   }
 
   .organization-card-action-bar li.time {
-    width: 63%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-right: 1em;
   }
 
   .organization-card-heading h3 {
