@@ -18,8 +18,13 @@ import Organizations from '../../../collection';
 Template.uploadOrganizationLogo.onCreated(function () {
   const instance = this;
 
-  // Subscribe to Organization logo
-  instance.subscribe('allOrganizationLogo');
+  instance.autorun(() => {
+    // Get Logo ID of current Organization using reactive way
+    const organizationLogoId = Template.currentData().organization.organizationLogoFileId;
+
+    // Subscribe to current Organization logo
+    instance.subscribe('currentOrganizationLogo', organizationLogoId);
+  });
 });
 
 Template.uploadOrganizationLogo.helpers({
