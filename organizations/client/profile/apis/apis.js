@@ -88,14 +88,10 @@ Template.organizationApis.onCreated(function () {
     if (sortByParameter) {
       // Sort by name is ascending other cases are descending sort
       const sortDirection = sortByParameter === 'name' ? 1 : -1;
-      if (sortByParameter === 'name') {
-        sort.isFeatured = -1;
-      }
       // Set sorting
       sort[sortByParameter] = sortDirection;
     } else {
       // Sort by name is default
-      sort.isFeatured = -1;
       sort.name = 1;
     }
 
@@ -156,7 +152,7 @@ Template.organizationApis.helpers({
     const instance = Template.instance();
     console.log('inst=', instance);
     // Get the total number of documents
-    return instance.pagination.collection({ isFeatured: true }).count();
+    return 1;
   },
   templatePagination () {
     const instance = Template.instance();
