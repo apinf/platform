@@ -4,51 +4,53 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationApis">
-  <div class="form-inline block-header">
-    {{# if hasApi }}
-      {{> apiSortingToolbar }}
-      {{> apisFilterIcon }}
-    {{/ if }}
-    <!-- Connection API button -->
-    {{# if organization.currentUserCanManage }}
-      <button type="button" class="btn btn-default" id="connect-api">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        {{_ 'organizationProfile_buttonText_connectApi' }}
-      </button>
-    {{/ if }}
+  <div class="row">
+    <div class="form-inline block-header pull-right">
+      {{# if hasApi }}
+        {{> apiSortingToolbar }}
+        {{> apisFilterIcon }}
+      {{/ if }}
+      <!-- Connection API button -->
+      {{# if organization.currentUserCanManage }}
+        <button type="button" class="btn btn-default" id="connect-api">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          {{_ 'organizationProfile_buttonText_connectApi' }}
+        </button>
+      {{/ if }}
+    </div>
   </div>
   <!-- Show or not content-->
   {{# if hasApi }}
-  <!-- Featured APIs -->
-  <div class="block-header">
-    <!-- Title -->
-    <h3 class="apis-block-title">
-      Featured APIs
-      <!-- {{_ 'organizationProfile_bigText_apisCount' }} -->
-      <small>
-        {{_ 'organizationProfile_smallText_apisCount' count=featuredApisCount }}
-      </small>
-    </h3>
-    {{> apiFilteredBy }}
-  </div>
-  {{> apiCatalogGrid apis=apis }}
+    <!-- Featured APIs -->
+    <div class="block-header">
+      <!-- Title -->
+      <h3 class="apis-block-title">
+        Featured APIs
+        <!-- {{_ 'organizationProfile_bigText_apisCount' }} -->
+        <small>
+          {{_ 'organizationProfile_smallText_apisCount' count=featuredApisCount }}
+        </small>
+      </h3>
+      {{> apiFilteredBy }}
+    </div>
+    {{> apiCatalogGrid apis=apis }}
 
-  {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+    <!-- {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }} -->
 
-  <!-- All APIs -->
-  <div class="block-header">
-    <!-- Title -->
-    <h3 class="apis-block-title">
-      {{_ 'organizationProfile_bigText_apisCount' }}
-      <small>
-        {{_ 'organizationProfile_smallText_apisCount' count=apisCount }}
-      </small>
-    </h3>
-    {{> apiFilteredBy }}
-  </div>
-  {{> apiCatalogGrid apis=apis }}
+    <!-- All APIs -->
+    <div class="block-header">
+      <!-- Title -->
+      <h3 class="apis-block-title">
+        {{_ 'organizationProfile_bigText_apisCount' }}
+        <small>
+          {{_ 'organizationProfile_smallText_apisCount' count=apisCount }}
+        </small>
+      </h3>
+      {{> apiFilteredBy }}
+    </div>
+    {{> apiCatalogGrid apis=apis }}
 
-  {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+    {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
 
   {{ else }}
     {{> organizationNoApis organization=organization }}
