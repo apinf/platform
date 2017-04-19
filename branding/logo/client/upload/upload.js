@@ -21,7 +21,6 @@ Template.uploadProjectLogo.onCreated(function () {
 
   // Subscribe to Project logo
   instance.subscribe('projectLogo');
-  instance.subscribe('branding');
 });
 
 Template.uploadProjectLogo.events({

@@ -16,7 +16,6 @@ Template.viewProjectLogo.onCreated(function () {
   const instance = this;
   // Subscribe to project logo
   instance.subscribe('projectLogo');
-  instance.subscribe('branding');
 });
 
 Template.viewProjectLogo.helpers({

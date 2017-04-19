@@ -14,8 +14,7 @@ import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.viewCoverPhoto.onCreated(function () {
   const instance = this;
-  // Subscribe to Branding collection
-  instance.subscribe('branding');
+
   // Subscribe to Cover Photo collection
   instance.subscribe('coverPhoto');
 });
