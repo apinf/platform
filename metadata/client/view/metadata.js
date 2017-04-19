@@ -15,9 +15,6 @@ Template.viewApiMetadata.onCreated(function () {
 
   // Subscribe to metadata for this API Backend
   instance.subscribe('apiMetadata', apiId);
-
-  // Subscribe to basic details of related api metadata
-  instance.subscribe('apiOrganizationBasicDetails', apiId);
 });
 
 Template.viewApiMetadata.helpers({
