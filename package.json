@@ -41,6 +41,7 @@
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-meteor": "^4.0.0",
+    "faker": "^4.1.0",
     "nightmare": "^2.10.0"
   },
   "scripts": {
