@@ -9,4 +9,17 @@ import { Mongo } from 'meteor/mongo';
 
 const Organizations = new Mongo.Collection('Organizations');
 
+// Default public fields
+Organizations.publicFields = {
+  _id: 1,
+  apisPerPage: 1,
+  contact: 1,
+  description: 1,
+  logoUrl: 1,
+  managerIds: 1,
+  name: 1,
+  organizationLogoFileId: 1,
+  slug: 1,
+};
+
 export default Organizations;
