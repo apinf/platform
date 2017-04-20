@@ -489,7 +489,18 @@
   "proxyItem_url": "URL",
   "proxyItem_apiKey": "API Key",
   "proxyItem_apiToken": "API Token",
-  "proxyItem_elasticsearch": "Elasticsearch",
+  "proxyItem_elasticsearch": "Elasticsearch URL",
+  "proxyItem_brokerEndpoints": "Broker Endpoints",
+  "proxyItem_brokerEndpoints_table_protocol": "Protocol",
+  "proxyItem_brokerEndpoints_table_host": "Host",
+  "proxyItem_brokerEndpoints_table_port": "Port",
+  "proxyItem_brokerEndpoints_table_tls": "TLS",
+  "proxyItem_httpApi": "HTTP API",
+  "proxyItem_httpApi_protocol": "Protocol",
+  "proxyItem_httpApi_host": "Host",
+  "proxyItem_httpApi_port": "Port",
+  "proxyItem_adminUsername": "Admin Username",
+  "proxyItem_adminPassword": "Admin Password",
   "deletePostConfirmation_modalTitle_text": "Delete Post",
   "deletePostConfirmation_text_confirmDeleteMessage": "Are you sure you want to delete __title__?",
   "deletePostConfirmation_text_confirmDeleteNote": "NOTE:",
@@ -789,12 +800,29 @@
                   "label": "ElasticSearch"
               }
           },
-          "emqtt": {
-              "url": {
-                  "label": "URL"
+          "emq": {
+              "brokerEndpoints": {
+                  "label": "Broker Endpoints",
+                  "$": {
+                    "protocol": {
+                      "label": "Protocol"
+                    },
+                    "host": {
+                      "label": "Host"
+                    },
+                    "port": {
+                      "label": "Port"
+                    },
+                    "tls": {
+                      "label": "TLS"
+                    }
+                  }
+              },
+              "httpApi": {
+                  "label": "HTTP API URL"
               },
               "elasticsearch": {
-                  "label": "ElasticSearch"
+                  "label": "ElasticSearch URL"
               }
           }
       },
