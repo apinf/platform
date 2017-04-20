@@ -91,3 +91,4 @@ raix:rssfeed
 dispatch:mocha
 practicalmeteor:chai
 dispatch:mocha-browser
+dburles:factory
