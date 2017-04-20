@@ -7,66 +7,65 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <footer>
     <div class="container">
       <div class="row">
-        <div class="pull-left">
-          <ul class="list-inline">
-            {{# each network in branding.socialMedia }}
-              <li>
-                <a href="{{ network.url }}" target="_blank" class="social-media-link">
-                  <img src="/img/social-media-icons/{{ network.name }}.png" alt="{{ network.name }} icon" class="social-media-icon">
-                </a>
-              </li>
-            {{/ each }}
-          </ul>
+        <!-- icons -->
+        <div class="col-xs-12 col-sm-3 social-media-block">
+          {{# each network in branding.socialMedia }}
+            <a href="{{ network.url }}" target="_blank" class="social-media-link">
+              <img src="/img/social-media-icons/{{ network.name }}.png" alt="{{ network.name }} icon" class="social-media-icon">
+            </a>
+          {{/ each }}
         </div>
-        <div class="pull-left">
-          <p class="footer-text">
-            {{ branding.siteFooter }}
-          </p>
+        <!-- about -->
+        <div class="col-xs-12 col-sm-3 footer-text">
+          <a id="about-button">
+            About Us
+            <!--{{_ "Footer_aboutUs" }}-->
+          </a>
         </div>
-        <div class="pull-right">
-          <ul class="list-inline">
+        <!-- sign(s)-->
+        <div class="col-xs-12 col-sm-3 footer-text">
+          <div class="row">
             {{# if currentUser }}
-              <li>
+              <div class="col-xs-6 col-md-12">
                 <a href="{{ pathFor 'signOut' }}">
                   {{_ "homeFooter_signOut" }}
                 </a>
-              </li>
+              </div>
             {{ else }}
-              <li>
-                <a href="{{ pathFor 'signIn' }}">
-                  {{_ "homeFooter_signIn" }}
-                </a>
-              </li>
-              <li>
+
+              <div class="col-xs-6 col-md-12">
                 <a href="{{ pathFor 'signUp' }}">
                   {{_ "homeFooter_signUp" }}
                 </a>
-              </li>
+              </div>
+              <div class="col-xs-6 col-md-12">
+                <a href="{{ pathFor 'signIn' }}">
+                  {{_ "homeFooter_signIn" }}
+                </a>
+              </div>
             {{/ if }}
-          </ul>
+          </div>
         </div>
-        <div class="pull-right">
-          <ul class="list-inline">
-            <li>
-              <a id="about-button">
-                {{_ "navbar_about" }}
+        <!-- PP & ToU -->
+        <div class="col-xs-12 col-sm-3 footer-text">
+          <div class="row">
+            <div class="col-xs-6 col-md-12">
+              <a href="{{ pathFor 'privacyPolicy' }}">
+                {{_ "homeFooter_privacyPolicy_text" }}
               </a>
-            </li>
-            {{# if branding.privacyPolicy }}
-              <li>
-                <a href="{{ pathFor 'privacyPolicy' }}">
-                  {{_ "homeFooter_privacyPolicy_text" }}
-                </a>
-              </li>
-            {{/ if }}
-            {{# if branding.termsOfUse }}
-              <li>
-                <a href="{{ pathFor 'termsOfUse' }}">
-                  {{_  "homeFooter_termsOfUse_text" }}
-                </a>
-              </li>
-            {{/ if }}
-          </ul>
+            </div>
+            <div class="col-xs-6 col-md-12">
+              <a href="{{ pathFor 'termsOfUse' }}">
+                {{_  "homeFooter_termsOfUse_text" }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 footer-text">
+          {{ branding.siteFooter }}
         </div>
       </div>
     </div>
