@@ -1,3 +1,4 @@
+// import { FlowRouter } from 'meteor/kadira:flow-router';
 // importing RssFeed library
 import { RssFeed } from 'meteor/raix:rssfeed';
 // importing organizations schema
@@ -12,6 +13,17 @@ import OrganizationApis from '../';
 RssFeed.publish('apis', function () {
   // initialization of variable feed
   const feed = this;
+  // added RSS header information
+  // lastBuildDate: About RSS feed was last built with new information.
+  // pubDate: About RSS feed publish Date
+  /* ttl: The length of time (in minutes) RSS channel can be cached
+          before refreshing from the source*/
+  feed.setValue('title', feed.cdata('Apinf organization\'s News Feed'));
+  feed.setValue('description', feed.cdata('Apis that are connected to organizations.'));
+  feed.setValue('link', 'https://apinf.io');
+  feed.setValue('lastBuildDate', new Date());
+  feed.setValue('pubDate', new Date());
+  feed.setValue('ttl', 1);
   // Look at each entry of OrganizationApis shcema
   OrganizationApis.find().forEach((organizationApi) => {
     // make a filter key for Apis schema
@@ -26,7 +38,7 @@ RssFeed.publish('apis', function () {
     feed.addItem({
       title: api.name,
       description: `${api.description}is belongs to ${organization.name}`,
-      link: `/apis/${api.slug}`,
+      link: `https://apinf.io/apis/${api.slug}`,
       pubDate: api.created_at,
     });
   });
