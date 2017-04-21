@@ -47,7 +47,7 @@
   "scripts": {
     "lint": "eslint .",
     "lintfix": "eslint --fix .",
-    "pretest": "npm run lint --silent",
+    "pretest": "yarn run lint --silent",
     "start": "meteor run",
     "test-app-chrome": "meteor test --full-app --once --driver-package dispatch:mocha-browser",
     "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
@@ -55,7 +55,7 @@
     "test-chrome": "meteor test --once --driver-package dispatch:mocha-browser",
     "test-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
     "test-watch": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-browser",
-    "test": "npm run test-nightmare"
+    "test": "yarn run test-nightmare"
   },
   "repository": {
     "type": "git",

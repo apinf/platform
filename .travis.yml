@@ -28,7 +28,7 @@ before_install:
   - if [ ! -e "$HOME/.meteor/meteor" ]; then curl https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
 install:
-  - yarn install
+  - yarn
 
 script:
   - travis_wait 30 yarn test
