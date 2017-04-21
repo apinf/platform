@@ -19,6 +19,8 @@ import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 import deleteProxyBackendConfig from '/proxy_backends/client/methods/delete_proxy_backend';
 
+import registeredProxies from '../../../proxies/collection/registered_proxies';
+
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();
 
@@ -59,6 +61,8 @@ Template.proxyBackend.onCreated(() => {
 
     return currentProxyId;
   };
+
+  instance.getProxyId();
 });
 
 Template.proxyBackend.helpers({
@@ -175,6 +179,12 @@ Template.proxyBackend.helpers({
 
     // Return boolean value
     return !!(instance.data.proxyBackend);
+  },
+  registeredProxies () {
+    return registeredProxies;
+  },
+  equals (a, b) {
+    return a === b;
   },
 });
 

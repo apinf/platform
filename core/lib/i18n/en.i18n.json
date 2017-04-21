@@ -901,6 +901,43 @@
                       }
                   }
               }
+          },
+          "emq": {
+            "label": "EMQ Proxy",
+            "settings": {
+              "rate_limits": {
+                "label": "Rate limits",
+                "$": {
+                  "allow": {
+                    "label": "Rule",
+                    "options": {
+                      "0": "Deny",
+                      "1": "Allow"
+                    }
+                  },
+                  "ip_addr": {
+                    "label": "IP Address"
+                  },
+                  "username": {
+                    "label": "Username"
+                  },
+                  "client_id": {
+                    "label": "Client Id"
+                  },
+                  "access": {
+                    "label": "Access",
+                    "options": {
+                      "1": "1",
+                      "2": "2",
+                      "3": "3"
+                    }
+                  },
+                  "topic": {
+                    "label": "Topic"
+                  }
+                }
+              }
+            }
           }
       },
       "related_media": {
