@@ -47,6 +47,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "lintfix": "eslint --fix .",
     "test": "mocha ./.test/"
   },
   "repository": {
