@@ -6,16 +6,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* eslint-env mocha */
 /* eslint-disable func-names, prefer-arrow-callback */
 
-// Meteor imports
+// Meteor packages imports
 import { Template } from 'meteor/templating';
-// import { $ } from 'meteor/jquery';
+import { $ } from 'meteor/jquery';
+
+// Collection imports
+import Branding from '/branding/collection';
 
 // Meteor contributed packages imports
+import { Factory } from 'meteor/dburles:factory';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { chai } from 'meteor/practicalmeteor:chai';
 
 // APINF imports
-// import withRenderedTemplate from '/tests/utils/test-helpers.js';
+import withRenderedTemplate from '/tests/utils/test-helpers.js';
 
 FlowRouter.route('/', {
   name: 'hack route for tests',
@@ -31,15 +35,17 @@ describe('Branding', function () {
     Template.deregisterHelper('_');
   });
 
-  it('makes sure mocha is working', function () {
-    chai.assert.equal(1 + 2, 3);
-  });
-
-  describe('main template', function () {
-    // Instantiate a Branding template
-    // checks if all fields are there
-    it('makes sure mocha is working mult', function () {
-      chai.assert.equal(1 * 2, 2);
+  describe('rendering when creating a new Branding', function () {
+    it('should show expected fields', function () {
+      // Instantiate a Branding model
+      const branding = Factory.build('branding');
+      const data = {
+        // eslint-disable-next-line no-underscore-dangle
+        branding: Branding._transform(branding),
+      };
+      withRenderedTemplate('branding', data, (el) => {
+        chai.assert.equal($(el).find('.siteTitle').val(), branding.siteTitle);
+      });
     });
   });
 
