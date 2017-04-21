@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 language: node_js
 node_js:
   - "node"
@@ -10,8 +10,25 @@ branches:
 services:
   - docker
 
-before_script:
-  - npm run-script lint
+before_install:
+  - cp docker/api-umbrella/config/api-umbrella.yml{.example,}
+  - docker-compose -f docker-compose-development.yml up -d
+  - docker ps -a
+
+install:
+  - docker-compose -f docker-compose-development.yml run web meteor npm install
 
 script:
-  - ./.scripts/docker_build.sh
+  - docker-compose -f docker-compose-development.yml run web meteor npm run test
+  - docker-compose -f docker-compose-development.yml stop
+  - docker ps -a
+
+after_success:
+  - if [ "${TRAVIS_PULL_REQUEST}" = "true" ]; then
+    echo "Inside a pull request. What should we do here?"
+    fi
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+    docker build -t apinf/platform:$DOCKER_TAG .
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    docker push apinf/platform:$DOCKER_TAG
+    fi
