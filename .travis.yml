@@ -11,7 +11,7 @@ services:
   - docker
 
 before_script:
-  - npm run-script lint
+  - yarn run lint
 
 script:
   - ./.scripts/docker_build.sh
