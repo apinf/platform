@@ -14,7 +14,14 @@ import { DocHead } from 'meteor/kadira:dochead';
 FlowRouter.route('/apis/new', {
   name: 'addApi',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'addApi' });
+    // Check if API exists
+    Meteor.call('currentUserCanAddApi', (error, canAdd) => {
+      if (canAdd) {
+        BlazeLayout.render('masterLayout', { main: 'addApi' });
+      } else {
+        FlowRouter.go('forbidden');
+      }
+    });
   },
 });
 

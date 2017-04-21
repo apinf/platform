@@ -16,11 +16,10 @@ import Posts from '../../collection';
 
 Template.relatedMedia.onCreated(function () {
   const instance = this;
-
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Posts, {
     // Count of posts on page
-    perPage: 4,
+    perPage: parseInt(instance.data.entity.mediasNumberPerPage, 10),
     // Set sort by creation datestamp on default
     sort: { createdAt: -1 },
   });
@@ -35,6 +34,13 @@ Template.relatedMedia.onCreated(function () {
   }
 
   instance.pagination.filters(currentFilters);
+
+  // reactive solution to update pagination with template instant data
+  instance.autorun(() => {
+    const perPage = Template.currentData().entity.mediaPerPage || 10;
+
+    instance.pagination.perPage(perPage);
+  });
 });
 
 Template.relatedMedia.helpers({

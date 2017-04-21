@@ -9,8 +9,8 @@
       </h2>
     </div>
     <div class="panel-body">
-      <div class="row metadata-blocks">
-        {{# if metadata }}
+      {{# if metadata }}
+        <div class="row metadata-blocks">
           {{# with metadata }}
             {{# if contact }}
               <div class="col-md-4">
@@ -99,12 +99,12 @@
               </div>
             {{/ if }}
           {{/ with }}
-        {{ else }}
-          <i>
-            {{_ "viewApi_Metadata_NotFound" }}
-          </i>
-        {{/ if }}
-      </div>
+        </div>
+      {{ else }}
+        <i>
+          {{_ "viewApi_Metadata_NotFound" }}
+        </i>
+      {{/ if }}
     </div>
   </div>
 </template>
