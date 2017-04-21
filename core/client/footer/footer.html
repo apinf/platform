@@ -18,8 +18,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <!-- about -->
         <div class="col-xs-12 col-sm-3 footer-text">
           <a id="about-button">
-            About Us
-            <!--{{_ "Footer_aboutUs" }}-->
+            {{_ "footer_about" }}
           </a>
         </div>
         <!-- sign(s)-->
@@ -28,19 +27,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{# if currentUser }}
               <div class="col-xs-6 col-md-12">
                 <a href="{{ pathFor 'signOut' }}">
-                  {{_ "homeFooter_signOut" }}
+                  {{_ "footer_signOut" }}
                 </a>
               </div>
             {{ else }}
 
               <div class="col-xs-6 col-md-12">
                 <a href="{{ pathFor 'signUp' }}">
-                  {{_ "homeFooter_signUp" }}
+                  {{_ "footer_signUp" }}
                 </a>
               </div>
               <div class="col-xs-6 col-md-12">
                 <a href="{{ pathFor 'signIn' }}">
-                  {{_ "homeFooter_signIn" }}
+                  {{_ "footer_signIn" }}
                 </a>
               </div>
             {{/ if }}
@@ -51,12 +50,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             <div class="col-xs-6 col-md-12">
               <a href="{{ pathFor 'privacyPolicy' }}">
-                {{_ "homeFooter_privacyPolicy_text" }}
+                {{_ "footer_privacyPolicy_text" }}
               </a>
             </div>
             <div class="col-xs-6 col-md-12">
               <a href="{{ pathFor 'termsOfUse' }}">
-                {{_  "homeFooter_termsOfUse_text" }}
+                {{_  "footer_termsOfUse_text" }}
               </a>
             </div>
           </div>
