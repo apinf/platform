@@ -22,6 +22,6 @@ Template.organizationCatalogTable.onCreated(function () {
     });
 
     // Subscribe to Organization logo collection by logo IDs
-    this.subscribe('organizationLogosById', organizationLogoIds);
+    this.subscribe('organizationLogosByIds', organizationLogoIds);
   });
 });
