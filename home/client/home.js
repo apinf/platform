@@ -16,9 +16,6 @@ Template.home.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Subscription to branding collection
-  instance.subscribe('branding');
-
   // Run this each time something changes
   instance.autorun(() => {
     // Check for template subscriptions

@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="homeBody">
-  <div class="coverphoto" style="background-image: url({{coverPhotoUrl}})">
+  <div class="coverphoto" style="background-image: url({{ coverPhotoUrl }})">
     <div class="container" id="headerwrap">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
@@ -27,7 +27,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container" id="features">
     {{> latestPublicApis limit = 8 }}
     <div class="text-center">
-      <a href={{ pathFor 'apiCatalog' }}
+      <a href="{{ pathFor 'apiCatalog' }}"
         class="btn btn-primary btn-lg"
         id="get-more-apis">
         {{_ "homeBody_getMoreApis_text" }}
@@ -61,12 +61,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="media">
           <div class="media-body">
             <h2 class="media-heading">
-              <p>
                 {{ apisCount }}
-              </p>
-              <p>
                 {{_ "homeBody_featureSection_statistics_apisCount_heading" }}
-              </p>
             </h2>
           </div>
         </div>
