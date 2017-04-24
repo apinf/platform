@@ -311,6 +311,8 @@ disgard(trash);
 
 [eslint](https://eslint.org) is configured to run on every commit on Continuous Integration server.
 
+The project is configured with the Airbnb styleguide and meteor recommendation for eslint.
+
 To run locally, do:
 
 ```bash
