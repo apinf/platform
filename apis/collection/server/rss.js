@@ -18,14 +18,14 @@ RssFeed.publish('apis', function () {
   // pubDate: About RSS feed publish Date
   /* ttl: The length of time (in minutes) RSS channel can be cached
           before refreshing from the source*/
-  feed.setValue('title', feed.cdata('Apinf APIs News'));
-  feed.setValue('description', feed.cdata('Feed for lates Apis that are added to the APinf.'));
+  feed.setValue('title', feed.cdata('APIs feed'));
+  feed.setValue('description', feed.cdata('Feed for the latest Apis that are added to the APinf.'));
   feed.setValue('link', 'https://apinf.io');
   feed.setValue('lastBuildDate', new Date());
   feed.setValue('pubDate', new Date());
   feed.setValue('ttl', 1);
   // Look at each entry of Apis shcema and find the latest apis
-  Apis.find({}, { sort: { DateTime: -1, limit: 1 } }).forEach((api) => {
+  Apis.find({}, { sort: { created_at: -1 } }).forEach((api) => {
     // append an item to our feed using the .addItem() method
     feed.addItem({
       title: api.name,
