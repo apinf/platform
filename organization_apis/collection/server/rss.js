@@ -14,7 +14,7 @@ import OrganizationApis from '../';
 
 // calling Rss feed publication
 // first argument (apis) will build the url for the feed i.e domain-name/rss/apis
-RssFeed.publish('apis', function () {
+RssFeed.publish('orgapis', function () {
   // initialization of variable feed
   const feed = this;
   // added RSS header information
