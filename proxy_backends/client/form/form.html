@@ -184,8 +184,61 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <!-- EMQ -->
     {{# if equals proxy.type "emq" }}
 
-      <!-- Rate limits -->
-      {{> afQuickField name="emq.settings.rate_limits" }}
+    <!-- Rate limits -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Rate Limits
+        </div>
+        <ul class="list-group">
+          {{# afEachArrayItem name="emq.settings.rate_limits" }}
+            <li class="list-group-item autoform-array-item">
+              <div>
+                <div class="autoform-remove-item-wrap">
+                  <a type="button" class="btn btn-primary autoform-remove-item">
+                    <span class="glyphicon glyphicon-minus"></span>
+                  </a>
+                </div>
+                <div class="autoform-array-item-body">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-4">
+                            Allow {{> afFieldInput name=this.current.allow }}
+                          </div>
+                          <div class="col-md-4">
+                            Access {{> afFieldInput name=this.current.access }}
+                          </div>
+                          <div class="col-md-4">
+                            Topic {{> afFieldInput name=this.current.topic }}
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col-md-4">
+                            IP Addr {{> afFieldInput name=this.current.ip_addr }}
+                          </div>
+                          <div class="col-md-4">
+                            Username {{> afFieldInput name=this.current.username }}
+                          </div>
+                          <div class="col-md-4">
+                            Client Id {{> afFieldInput name=this.current.client_id }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field={{ this.arrayFieldName }}>
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </li>
+          {{/ afEachArrayItem }}
+        </ul>
+      </div>
     {{/ if }}
 
     <div id="proxy-form-buttons" class="btn-group pull-left">
