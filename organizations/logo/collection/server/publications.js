@@ -22,7 +22,7 @@ Meteor.publish('currentOrganizationLogo', (organizationLogoId) => {
   });
 });
 
-Meteor.publish('OrganizationLogoByIds', (organizationLogoIds) => {
+Meteor.publish('organizationLogosById', (organizationLogoIds) => {
   check(organizationLogoIds, Array);
 
   const objectIds = organizationLogoIds.map((organizationLogoId) => {
