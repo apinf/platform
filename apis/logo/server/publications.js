@@ -11,14 +11,6 @@ import { check } from 'meteor/check';
 // Collection imports
 import ApiLogo from '../collection';
 
-Meteor.publish('allApiLogo', () => {
-  return ApiLogo.find({
-    'metadata._Resumable': {
-      $exists: false,
-    },
-  });
-});
-
 Meteor.publish('currentApiLogo', (apiLogoFileId) => {
   check(apiLogoFileId, String);
   // Convert to Mongo ObjectID

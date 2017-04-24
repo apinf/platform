@@ -5,12 +5,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
 
 // Collection imports
 import OrganizationCover from '/organizations/cover/collection/collection';
 
-Meteor.publish('organizationCover', () => {
+Meteor.publish('organizationCoverById', (coverId) => {
+  check(coverId, String);
+  // Convert to Mongo ObjectID
+  const objectId = new Mongo.Collection.ObjectID(coverId);
+
   return OrganizationCover.find({
+    _id: objectId,
     'metadata._Resumable': {
       $exists: false,
     },

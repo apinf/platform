@@ -11,13 +11,6 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import OrganizationCover from '/organizations/cover/collection/collection';
 
-Template.viewOrganizationCover.onCreated(function () {
-  const instance = this;
-
-  // Subscribe to Organization cover
-  instance.subscribe('organizationCover');
-});
-
 Template.viewOrganizationCover.helpers({
   uploadedOrganizationCoverLink () {
     // Get organization from template data
