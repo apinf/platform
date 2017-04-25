@@ -12,3 +12,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   margin-left: auto;
   width: auto;
 }
+
+.swagger-ui .info .title small pre {
+  background-color: #7d8492;
+  border: 0;
+  font-size: 10px;
+  padding: 0;
+}
