@@ -9,6 +9,9 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// Npm packages imports
+import URI from 'urijs';
+
 Template.proxyItem.events({
   'click #edit-proxy': function () {
     // Get proxy document
@@ -29,5 +32,14 @@ Template.proxyItem.events({
 Template.proxyItem.helpers({
   equals (a, b) {
     return a === b;
+  },
+  hideCredentials (url) {
+    // Parse URL with URIJS lib
+    const urlParts = URI.parse(url);
+
+    // Reconstruct URL hiding auth cretentials
+    const urlWithHiddenCreds = `${urlParts.protocol}://*****:*****@${urlParts.hostname}:${urlParts.port}${urlParts.path}`;
+
+    return urlWithHiddenCreds;
   },
 });

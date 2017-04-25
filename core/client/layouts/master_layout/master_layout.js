@@ -12,8 +12,6 @@ import Branding from '/branding/collection';
 Template.masterLayout.onCreated(function () {
   // Subscription to branding collection
   this.subscribe('branding');
-  // Subscribe to project logo
-  this.subscribe('projectLogo');
 });
 
 Template.masterLayout.helpers({
