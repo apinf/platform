@@ -12,10 +12,10 @@ import Apis from '/apis/collection';
 import OrganizationApis from '../';
 
 Organizations.find().forEach((organization) => {
+  // Use variable as in feed argument
   const organizationName = organization.slug;
-  console.log(organizationName);
-// calling Rss feed publication
-// first argument (apis) will build the url for the feed i.e domain-name/rss/apis
+ // calling Rss feed publication
+ // first argument (apis) will build the url for the feed i.e domain-name/rss/apis
   RssFeed.publish(organizationName, function () {
   // initialization of variable feed
     const feed = this;
@@ -30,23 +30,24 @@ Organizations.find().forEach((organization) => {
     feed.setValue('lastBuildDate', new Date());
     feed.setValue('pubDate', new Date());
     feed.setValue('ttl', 1);
-  // Look at each entry of OrganizationApis shcema
+   // Look at each entry of OrganizationApis shcema
     OrganizationApis.find().forEach((organizationApi) => {
-    // make a filter key for Apis schema
+      // make a filter key for Apis schema
       const apiOrganizationId = organizationApi.apiId;
-    // make a filter key for Organization schema
-      const OrganizationId = organizationApi.organizationId;
-    // create object from Apis schema according to apiorganizationId
+      // create object from Apis schema according to apiorganizationId
       const api = Apis.findOne({ _id: apiOrganizationId });
-    // create object from Organizations schema according to OrganizationId
-      const organizatin = Organizations.findOne({ _id: OrganizationId });
-    // append an item to our feed using the .addItem() method
-      feed.addItem({
-        title: api.name,
-        description: `${api.description}is belongs to ${organizatin.name}`,
-        link: `https://apinf.io/apis/${api.slug}`,
-        pubDate: api.created_at,
-      });
+      // make a filter key for Organization schema
+      const OrganizationAPiId = organizationApi.organizationId;
+      // Condition to check if organizationApiID and OrganizationsID match
+      if (OrganizationAPiId === organization._id) {
+      // append an item to our feed using the .addItem() method
+        feed.addItem({
+          title: api.name,
+          description: `${api.description}`,
+          link: `https://apinf.io/apis/${api.slug}`,
+          pubDate: api.created_at,
+        });
+      }
     });
   });
 });
