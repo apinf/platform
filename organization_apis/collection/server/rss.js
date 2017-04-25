@@ -3,13 +3,12 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// importing RssFeed library
+// Meteor contributed packages imports
 import { RssFeed } from 'meteor/raix:rssfeed';
-// importing organizations schema
-import Organizations from '/organizations/collection';
-// importing api schema
+
+// Collection imports
 import Apis from '/apis/collection';
-// importing apis belong to organization schema
+import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 
 Organizations.find().forEach((organization) => {
@@ -20,16 +19,16 @@ Organizations.find().forEach((organization) => {
   RssFeed.publish(organizationName, function () {
     // initialization of variable feed
     const feed = this;
-    // added RSS header information
-    // lastBuildDate: About RSS feed was last built with new information.
-    // pubDate: About RSS feed publish Date
-    /* ttl: The length of time (in minutes) RSS channel can be cached
-            before refreshing from the source*/
+    // RSS header information
     feed.setValue('title', feed.cdata('Apinf organization\'s News Feed'));
     feed.setValue('description', feed.cdata('Apis that are connected to organizations.'));
     feed.setValue('link', 'https://apinf.io');
+    // lastBuildDate: About RSS feed was last built with new information.
     feed.setValue('lastBuildDate', new Date());
+    // pubDate: About RSS feed publish Date
     feed.setValue('pubDate', new Date());
+    /* ttl: The length of time (in minutes) RSS channel can be cached
+            before refreshing from the source*/
     feed.setValue('ttl', 1);
     // Look at each entry of OrganizationApis shcema
     OrganizationApis.find().forEach((organizationApi) => {
