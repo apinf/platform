@@ -913,9 +913,9 @@
                   "access": {
                     "label": "Access",
                     "options": {
-                      "1": "1",
-                      "2": "2",
-                      "3": "3"
+                      "1": "Subscribe",
+                      "2": "Publish",
+                      "3": "Both"
                     }
                   },
                   "topic": {

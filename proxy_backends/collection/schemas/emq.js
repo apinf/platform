@@ -8,6 +8,7 @@ const RateLimitSchema = new SimpleSchema({
       0,
       1,
     ],
+    optional: false,
   },
   ip_addr: {
     type: String,

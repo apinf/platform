@@ -22,13 +22,17 @@
                       <label for="">
                         {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.allow.label' }}
                       </label>
-                      {{> afFieldInput name=this.current.allow }}
+                      <div>
+                        {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
+                      </div>
                     </div>
                     <div class="col-md-4">
                       <label for="">
                         {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.access.label' }}
                       </label>
-                      {{> afFieldInput name=this.current.access }}
+                      <div>
+                        {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
+                      </div>
                     </div>
                     <div class="col-md-4">
                       <label for="">
@@ -64,12 +68,12 @@
           </div>
         </div>
       </li>
+      {{/ afEachArrayItem }}
       <li class="list-group-item emq-add-rule">
-        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field={{ this.arrayFieldName }}>
+        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field="emq.settings.rate_limits">
           <span class="glyphicon glyphicon-plus"></span>
         </button>
       </li>
-      {{/ afEachArrayItem }}
     </ul>
   </div>
 </template>
