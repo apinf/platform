@@ -3,9 +3,10 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// importing RssFeed library
+// Meteor contributed packages imports
 import { RssFeed } from 'meteor/raix:rssfeed';
-// importing api schema
+
+// Collection imports
 import Apis from '/apis/collection';
 
 // calling Rss feed publication
@@ -13,16 +14,16 @@ import Apis from '/apis/collection';
 RssFeed.publish('apis', function () {
   // initialization of variable feed
   const feed = this;
-  // added RSS header information
-  // lastBuildDate: About RSS feed was last built with new information.
-  // pubDate: About RSS feed publish Date
-  /* ttl: The length of time (in minutes) RSS channel can be cached
-          before refreshing from the source*/
+  // add RSS header information
   feed.setValue('title', feed.cdata('APIs feed'));
   feed.setValue('description', feed.cdata('Feed for the latest Apis that are added to the APinf.'));
   feed.setValue('link', 'https://apinf.io');
+  // lastBuildDate: About RSS feed was last built with new information.
   feed.setValue('lastBuildDate', new Date());
+  // pubDate: About RSS feed publish Date
   feed.setValue('pubDate', new Date());
+  /* ttl: The length of time (in minutes) RSS channel can be cached
+          before refreshing from the source*/
   feed.setValue('ttl', 1);
   // Look at each entry of Apis shcema and find the latest apis
   Apis.find({}, { sort: { created_at: -1 } }).forEach((api) => {
