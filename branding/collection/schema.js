@@ -95,6 +95,10 @@ Branding.schema = new SimpleSchema({
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
   },
+  footerCode: {
+    type: String,
+    optional: true,
+  },
 });
 
 // i18n translation
