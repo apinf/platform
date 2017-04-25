@@ -1,0 +1,75 @@
+<template name="emqProxyForm">
+  <!-- Rate limits -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Rate Limits
+    </div>
+    <ul class="list-group" id="emq-rate-limits-list">
+      {{# afEachArrayItem name="emq.settings.rate_limits" }}
+      <li class="list-group-item autoform-array-item">
+        <div>
+          <div class="autoform-remove-item-wrap">
+            <a type="button" class="btn btn-primary autoform-remove-item">
+              <span class="glyphicon glyphicon-minus"></span>
+            </a>
+          </div>
+          <div class="autoform-array-item-body">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="">
+                        Allow
+                      </label>
+                      {{> afFieldInput name=this.current.allow }}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="">
+                        Access
+                      </label>
+                      {{> afFieldInput name=this.current.access }}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="">
+                        Topic
+                      </label>
+                      {{> afFieldInput name=this.current.topic }}
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="">
+                        IP Addr
+                      </label>
+                      {{> afFieldInput name=this.current.ip_addr }}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="">
+                        Username
+                      </label>
+                      {{> afFieldInput name=this.current.username }}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="">
+                        Client Id
+                      </label>
+                      {{> afFieldInput name=this.current.client_id }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item emq-add-rule">
+        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field={{ this.arrayFieldName }}>
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </li>
+      {{/ afEachArrayItem }}
+    </ul>
+  </div>
+</template>
