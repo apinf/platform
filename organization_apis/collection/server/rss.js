@@ -2,6 +2,7 @@
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
 // importing RssFeed library
 import { RssFeed } from 'meteor/raix:rssfeed';
 // importing organizations schema
@@ -14,23 +15,23 @@ import OrganizationApis from '../';
 Organizations.find().forEach((organization) => {
   // Use variable as in feed argument
   const organizationName = organization.slug;
- // calling Rss feed publication
- // first argument (apis) will build the url for the feed i.e domain-name/rss/apis
+  // calling Rss feed publication
+  // first argument (apis) will build the url for the feed i.e domain-name/rss/apis
   RssFeed.publish(organizationName, function () {
-  // initialization of variable feed
+    // initialization of variable feed
     const feed = this;
-  // added RSS header information
-  // lastBuildDate: About RSS feed was last built with new information.
-  // pubDate: About RSS feed publish Date
-  /* ttl: The length of time (in minutes) RSS channel can be cached
-          before refreshing from the source*/
+    // added RSS header information
+    // lastBuildDate: About RSS feed was last built with new information.
+    // pubDate: About RSS feed publish Date
+    /* ttl: The length of time (in minutes) RSS channel can be cached
+            before refreshing from the source*/
     feed.setValue('title', feed.cdata('Apinf organization\'s News Feed'));
     feed.setValue('description', feed.cdata('Apis that are connected to organizations.'));
     feed.setValue('link', 'https://apinf.io');
     feed.setValue('lastBuildDate', new Date());
     feed.setValue('pubDate', new Date());
     feed.setValue('ttl', 1);
-   // Look at each entry of OrganizationApis shcema
+    // Look at each entry of OrganizationApis shcema
     OrganizationApis.find().forEach((organizationApi) => {
       // make a filter key for Apis schema
       const apiOrganizationId = organizationApi.apiId;
