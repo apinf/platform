@@ -10,30 +10,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         <!-- Pin API -->
         <div class="pinApiCard pull-right">
-          {{# if currentUser }}
-            <div
-               class="api-card-pin"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'apiCard_pinTooltip_user' }}">
-              {{> apiCardPin organization=organization api=api catalogueView=true }}
-            </div>
-          {{ else }}
-            <div
-               class="api-card-pin"
-               data-toggle="tooltip"
-               data-placement="bottom"
-               title="{{_ 'catalogue_pinTooltip_nonUser' }}">
-               {{ organization.isFeatured }}
-                 <i class="fa fa-thumb-tack"></i>
-            </div>
-          {{/ if }}
+          <div
+             class="api-card-pin"
+             data-toggle="tooltip"
+             data-placement="bottom"
+             title="{{_ 'apiCard_pinTooltip_user' }}">
+            {{> apiCardPin organization=organization api=api catalogueView=true }}
+          </div>
         </div>
-
-        <!-- <div class="pull-right">
-          {{> apiCardPin organization=organization }}
-        </div> -->
-
 
       {{/ if }}
       <a href="{{ pathFor 'viewApi' slug=api.slug }}">
