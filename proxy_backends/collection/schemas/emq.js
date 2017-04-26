@@ -1,5 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Rate limits schema
 const RateLimitSchema = new SimpleSchema({
   allow: {
@@ -9,17 +12,6 @@ const RateLimitSchema = new SimpleSchema({
       1,
     ],
     optional: false,
-  },
-  ip_addr: {
-    type: String,
-    optional: true,
-  },
-  username: {
-    type: String,
-    optional: true,
-  },
-  client_id: {
-    type: String,
   },
   access: {
     type: Number,
@@ -31,6 +23,37 @@ const RateLimitSchema = new SimpleSchema({
   },
   topic: {
     type: String,
+    autoform: {
+      placeholder: 'Topic',
+    },
+  },
+  fromType: {
+    type: String,
+    autoform: {
+      type: 'select',
+      options () {
+        return [
+          {
+            label: TAPi18n.__('schemas.proxyBackends.emq.settings.rate_limits.$.client_id.label'),
+            value: 'client_id',
+          },
+          {
+            label: TAPi18n.__('schemas.proxyBackends.emq.settings.rate_limits.$.username.label'),
+            value: 'username',
+          },
+          {
+            label: TAPi18n.__('schemas.proxyBackends.emq.settings.rate_limits.$.ip_addr.label'),
+            value: 'ip_addr',
+          },
+        ];
+      },
+    },
+  },
+  fromValue: {
+    type: String,
+    autoform: {
+      placeholder: 'Value',
+    },
   },
 });
 

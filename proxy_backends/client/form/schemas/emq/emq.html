@@ -15,55 +15,24 @@
           </div>
           <div class="autoform-array-item-body">
             <div class="panel-body">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label for="">
-                        {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.allow.label' }}
-                      </label>
-                      <div>
-                        {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <label for="">
-                        {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.access.label' }}
-                      </label>
-                      <div>
-                        {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <label for="">
-                        {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.topic.label' }}
-                      </label>
-                      {{> afFieldInput name=this.current.topic }}
-                    </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label for="">
-                        {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.ip_addr.label' }}
-                      </label>
-                      {{> afFieldInput name=this.current.ip_addr }}
-                    </div>
-                    <div class="col-md-4">
-                      <label for="">
-                        {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.username.label' }}
-                      </label>
-                      {{> afFieldInput name=this.current.username }}
-                    </div>
-                    <div class="col-md-4">
-                      <label for="">
-                        {{_ 'schemas.proxyBackends.emq.settings.rate_limits.$.client_id.label' }}
-                      </label>
-                      {{> afFieldInput name=this.current.client_id }}
-                    </div>
-                  </div>
-                </div>
+
+              <div class="form-group">
+                {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
+                {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
               </div>
+              <div class="form-group">
+                {{> afFieldInput name=this.current.topic }}
+              </div>
+              <div class="form-group">
+                <label for="">From</label>
+              </div>
+              <div class="form-group">
+                {{> afFieldInput type="select" name=this.current.fromType }}
+              </div>
+              <div class="form-group">
+                {{> afFieldInput name=this.current.fromValue }}
+              </div>
+
             </div>
           </div>
         </div>
