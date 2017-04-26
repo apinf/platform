@@ -15,11 +15,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           {{/ each }}
         </div>
-        <!-- about -->
         <div class="col-xs-12 col-sm-3 footer-text">
-          <a id="about-button">
-            {{_ "footer_about" }}
-          </a>
+          <div class="row">
+            <!-- about -->
+            <div class="col-xs-6 col-sm-12">
+              <a id="about-button">
+                {{_ "footer_about" }}
+              </a>
+            </div>
+            <!-- language bar -->
+            <div class="col-xs-6 col-sm-12">
+              {{> languageSelect }}
+            </div>
+          </div>
         </div>
         <!-- sign(s)-->
         <div class="col-xs-12 col-sm-3 footer-text">
@@ -31,7 +39,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </a>
               </div>
             {{ else }}
-
               <div class="col-xs-6 col-md-12">
                 <a href="{{ pathFor 'signUp' }}">
                   {{_ "footer_signUp" }}
@@ -61,7 +68,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-xs-12 footer-text">
           {{ branding.siteFooter }}
