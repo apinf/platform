@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
-This file is covered by the EUPL license.
-You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+ This file is covered by the EUPL license.
+ You may obtain a copy of the licence at
+ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
@@ -15,7 +15,7 @@ import { T9n } from 'meteor/softwarerero:accounts-t9n';
 import _ from 'lodash';
 
 // eslint-disable-next-line prefer-arrow-callback
-Template.languageBar.onCreated(function () {
+Template.languageSelect.onCreated(function () {
   // Get saved language
   const selectedLanguage = Session.get('lang');
 
@@ -30,7 +30,7 @@ Template.languageBar.onCreated(function () {
   }
 });
 
-Template.languageBar.helpers({
+Template.languageSelect.helpers({
   languagesList () {
     // This helper converts the languages object into an array of objects
     // TODO: determine if there is a simpler way to perform these steps
@@ -62,19 +62,19 @@ Template.languageBar.helpers({
     // Get language from the current data context
     const languageTag = this.tag;
 
-    // Add class "active" to highlight active language
+    // Add class "selected" to highlight active language
     if (activeLanguage === languageTag) {
-      return 'active';
+      return 'selected';
     }
     return '';
   },
 });
 
-Template.languageBar.events({
-  // eslint-disable-next-line prefer-arrow-callback
-  'click .language-option': function () {
+Template.languageSelect.events({
+  // Use blur event because change event doesn't correctly work on Safari browser
+  'blur #language-select': (event) => {
     // Get language from the current data context
-    const language = this.tag;
+    const language = event.target.value;
 
     // Update selected language in Session
     Session.update('lang', language);

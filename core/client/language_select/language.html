@@ -1,0 +1,17 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="languageSelect">
+  <select name="language-select" id="language-select">
+    {{# each language in languagesList }}
+      <!-- iterate through languages -->
+      {{# with language }} <!-- create a local data context -->
+        <option value="{{ tag }}" {{ activeLanguage }}>
+      {{ name }}
+    </option>
+      {{/ with }}
+    {{/ each }}
+  </select>
+</template>
