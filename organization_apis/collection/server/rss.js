@@ -31,7 +31,7 @@ Organizations.find().forEach((organization) => {
     feed.setValue('title', feed.cdata(`${organizationName} organization's News Feed`));
 
     // RSS header description
-    feed.setValue('description', feed.cdata('Apis that are connected to organizations.'));
+    feed.setValue('description', feed.cdata(`Apis that are connected to ${organizationName}.`));
 
     // RSS header link
     const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
@@ -53,10 +53,10 @@ Organizations.find().forEach((organization) => {
     // Iterate over all OrganizationApis of this organization
     OrganizationApis.find({ organizationId }).forEach((organizationApi) => {
       // Make a filter key for Apis schema
-      const apiOrganizationId = organizationApi.apiId;
+      const apiId = organizationApi.apiId;
 
       // Get api from apiOrganizationId
-      const api = Apis.findOne({ _id: apiOrganizationId });
+      const api = Apis.findOne(apiId);
 
       // Append an item to our feed using the .addItem() method
       feed.addItem({
