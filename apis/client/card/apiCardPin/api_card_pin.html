@@ -1,17 +1,15 @@
 <template name="apiCardPin">
   {{# if isApiFeatured }}
-  <button class="pin-button pin pinned">
-    <i class="fa fa-thumb-tack"></i>
-    {{# unless catalogueView }}
-    &nbsp;{{_ "apiCardPin_buttonText_unpin" }}
-    {{/ unless }}
-  </button>
+    <button class="pin-button pin pinned"
+            title="{{_ 'apiCardPin_buttonText_unpin' }}">
+      <i class="fa fa-thumb-tack"></i>
+    </button>
   {{ else }}
-  <button class="pin-button pin">
-    <i class="fa fa-thumb-tack"></i>
-    {{# unless catalogueView }}
-    &nbsp;{{_ "apiCardPin_buttonText_pin" }}
+    {{# unless organization.featuredApiListIsFull }}
+      <button class="pin-button pin pin-default"
+              title="{{_ 'apiCardPin_buttonText_pin' }}">
+        <i class="fa fa-thumb-tack"></i>
+      </button>
     {{/ unless }}
-  </button>
   {{/ if }}
 </template>
