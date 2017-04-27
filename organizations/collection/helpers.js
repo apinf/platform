@@ -10,6 +10,7 @@ import { Mongo } from 'meteor/mongo';
 // Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Npm packages imports
 import moment from 'moment';
@@ -80,5 +81,27 @@ Organizations.helpers({
       organizationLogoUrl = `${baseOrganizationLogoURL}/md5/${organizationLogo.md5}`;
     }
     return organizationLogoUrl;
+  },
+  featuredApiListIsFull () {
+    let featuredApiListIsFull = true;
+    // Check if there is space in featured APIs list
+    if (!this.featuredApiIds || this.featuredApiIds.length < 4) {
+      featuredApiListIsFull = false;
+    }
+    return featuredApiListIsFull;
+  },
+  removeApiFromFeaturedList (featuredApiId) {
+    if (this.find({ featuredApiIds: featuredApiId }).count() > 0) {
+      this.update({ },
+        { $pull:
+          { featuredApiIds: featuredApiId },
+        }
+      );
+      // Get localized success message
+      const message = TAPi18n.__('apiCardPin_unfeaturedSuccessfully');
+
+      // Display success message to user
+      sAlert.success(message);
+    }
   },
 });
