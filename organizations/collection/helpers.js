@@ -90,18 +90,4 @@ Organizations.helpers({
     }
     return featuredApiListIsFull;
   },
-  removeApiFromFeaturedList (featuredApiId) {
-    if (this.find({ featuredApiIds: featuredApiId }).count() > 0) {
-      this.update({ },
-        { $pull:
-          { featuredApiIds: featuredApiId },
-        }
-      );
-      // Get localized success message
-      const message = TAPi18n.__('apiCardPin_unfeaturedSuccessfully');
-
-      // Display success message to user
-      sAlert.success(message);
-    }
-  },
 });
