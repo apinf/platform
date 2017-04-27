@@ -682,6 +682,9 @@
           },
           "siteFooter": {
               "label": "Site footer"
+          },
+          "footerCode": {
+              "label": "Footer code"
           }
       },
       "contactForm": {
