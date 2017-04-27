@@ -53,14 +53,12 @@ Template.apiCardPin.events({
 Template.apiCardPin.helpers({
   isApiFeatured () {
     const instance = this;
-    console.log('inst=', instance);
     const featuredApiId = instance.api._id;
-    let paluu = false;
+    let isApiFeatured = false;
     // If API was already featured, remove it from featured list
     if (Organizations.find({ featuredApiIds: featuredApiId }).count() > 0) {
-      let paluu = true;
+      isApiFeatured = true;
     }
-    console.log('paluu=', paluu);
-    return paluu;
+    return isApiFeatured;
   },
 });
