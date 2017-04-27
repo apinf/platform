@@ -22,7 +22,7 @@ RssFeed.publish('apis', function () {
   feed.setValue('title', feed.cdata('APIs feed'));
 
   // RSS header description
-  feed.setValue('description', feed.cdata('Feed for the latest Apis that are added to the APinf.'));
+  feed.setValue('description', feed.cdata('Feed for the latest Apis.'));
 
   // RSS header link
   const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
