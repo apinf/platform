@@ -1,0 +1,15 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationNoFeaturedApis">
+  <div class="alert alert-warning" style="display: inline-block;">
+    <h4>
+      {{_ 'organizationNoFeaturedApis_text_noFeaturedApis' }}
+    </h4>
+    {{# if organization.currentUserCanManage }}
+      {{_ 'organizationNoFeaturedApis_text_useButton' }}
+    {{/ if }}
+  </div>
+</template>
