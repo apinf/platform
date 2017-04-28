@@ -10,7 +10,6 @@ import { Mongo } from 'meteor/mongo';
 // Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Npm packages imports
 import moment from 'moment';
