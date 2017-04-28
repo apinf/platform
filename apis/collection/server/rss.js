@@ -26,7 +26,7 @@ RssFeed.publish('apis', function () {
   // RSS header description
   const branding = Branding.findOne();
   const siteTitle = branding.siteTitle;
-  feed.setValue('description', feed.cdata(`Feed for the latest Apis ${siteTitle}.`));
+  feed.setValue('description', feed.cdata(`Feed for the latest Apis from ${siteTitle} site.`));
 
   // RSS header link
   const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
