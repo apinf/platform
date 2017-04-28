@@ -1,11 +1,15 @@
 <template name="emqProxyForm">
+
+  <!-- Hidden fields -->
+  {{> afQuickField name="type" type="hidden" value="emq" }}
+  <!-- End hidden fields -->
   <!-- Rate limits -->
   <div class="panel panel-default">
     <div class="panel-heading">
-      Rate Limits
+      Access Control Rules
     </div>
     <ul class="list-group" id="emq-rate-limits-list">
-      {{# afEachArrayItem name="emq.settings.rate_limits" }}
+      {{# afEachArrayItem name="emq.settings.acl" }}
       <li class="list-group-item autoform-array-item">
         <div>
           <div class="autoform-remove-item-wrap">
@@ -17,6 +21,7 @@
             <div class="panel-body">
 
               <div class="form-group">
+                {{> afFieldInput name=this.current.id type="hidden" }}
                 {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
                 {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
               </div>
@@ -39,7 +44,7 @@
       </li>
       {{/ afEachArrayItem }}
       <li class="list-group-item emq-add-rule">
-        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field="emq.settings.rate_limits">
+        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field="emq.settings.acl">
           <span class="glyphicon glyphicon-plus"></span>
         </button>
       </li>

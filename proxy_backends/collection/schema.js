@@ -11,6 +11,7 @@ import _ from 'lodash';
 
 // Collection imports
 import Proxies from '/proxies/collection';
+
 // import ApiUmbrellaSchema from './apiUmbrellaSchema';
 import ProxyBackends from './';
 
@@ -34,6 +35,10 @@ const schema = {
   },
   apiId: {
     type: String,
+  },
+  type: {
+    type: String,
+    optional: false,
   },
 };
 

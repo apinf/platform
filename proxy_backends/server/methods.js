@@ -9,6 +9,11 @@ import { check } from 'meteor/check';
 
 // Collection imports
 import ProxyBackends from '/proxy_backends/collection';
+import Proxies from '/proxies/collection';
+
+import URI from 'urijs';
+import _ from 'lodash';
+import got from 'got';
 
 Meteor.methods({
   deleteProxyBackend (proxyBackend, deleteFromMongoDB = true) {
@@ -61,5 +66,58 @@ Meteor.methods({
       return false;
     }
     return true;
+  },
+  removeAuthFromUri (uri) {
+    let url = `${uri.protocol}://${uri.hostname}`;
+
+    if (uri.port) url += `:${uri.port}`;
+
+    return url;
+  },
+  postEmqAcl ({ proxyId, rules }) {
+    check(proxyId, String);
+    check(rules, Array);
+
+    const emqProxy = Proxies.findOne(proxyId);
+
+    const emqHttpApi = emqProxy.emq.httpApi;
+
+    const uri = URI.parse(emqHttpApi);
+    const url = Meteor.call('removeAuthFromUri', uri);
+    const auth = `${uri.username}:${uri.password}`;
+
+    const postedEmqRules = _.map(rules, (rule) => {
+      const data = {
+        allow: rule.allow,
+        access: rule.access,
+        topic: rule.topic,
+      };
+      data[rule.fromType] = rule.fromValue;
+
+      return got.post(`${url}/emq-acl`, {
+        auth,
+        json: true,
+        body: data,
+      })
+        .then(res => {
+          return res;
+        })
+        .catch(err => {
+          return err;
+        });
+    });
+
+    Promise.all(postedEmqRules)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return err;
+      });
+  },
+  updateEmqAcl ({ proxyId, rules }) {
+    check(proxyId, String);
+    check(rules, Array);
+    // TODO: add emq method to update rules
   },
 });

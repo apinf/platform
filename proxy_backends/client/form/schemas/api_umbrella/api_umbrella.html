@@ -1,5 +1,7 @@
 <template name="apiUmbrellaProxyForm">
   <!-- hidden fields, auto-value -->
+  {{> afQuickField name="type" type="hidden" value="apiUmbrella" }}
+
   {{> afQuickField name="apiUmbrella.name" value=api.name type="hidden" }}
   {{> afQuickField name="apiUmbrella.frontend_host" value=proxyHost type="hidden" }}
   {{> afQuickField name="apiUmbrella.backend_host" value=apiHost type="hidden" }}

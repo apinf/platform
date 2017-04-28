@@ -4,7 +4,11 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Rate limits schema
-const RateLimitSchema = new SimpleSchema({
+const aclSchema = new SimpleSchema({
+  id: {
+    type: String,
+    optional: true,
+  },
   allow: {
     type: Number,
     allowedValues: [
@@ -34,16 +38,16 @@ const RateLimitSchema = new SimpleSchema({
       options () {
         return [
           {
-            label: TAPi18n.__('schemas.proxyBackends.emq.settings.rate_limits.$.client_id.label'),
-            value: 'client_id',
+            label: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.client_id.label'),
+            value: 'clientid',
           },
           {
-            label: TAPi18n.__('schemas.proxyBackends.emq.settings.rate_limits.$.username.label'),
+            label: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.username.label'),
             value: 'username',
           },
           {
-            label: TAPi18n.__('schemas.proxyBackends.emq.settings.rate_limits.$.ip_addr.label'),
-            value: 'ip_addr',
+            label: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.ip_addr.label'),
+            value: 'ipaddr',
           },
         ];
       },
@@ -59,8 +63,8 @@ const RateLimitSchema = new SimpleSchema({
 
 // Settings schema
 const SettingsSchema = new SimpleSchema({
-  rate_limits: {
-    type: [RateLimitSchema],
+  acl: {
+    type: [aclSchema],
     optional: true,
   },
 });

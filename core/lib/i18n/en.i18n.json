@@ -891,8 +891,8 @@
           "emq": {
             "label": "EMQ Proxy",
             "settings": {
-              "rate_limits": {
-                "label": "Rate limits",
+              "acl": {
+                "label": "Access Control Rules",
                 "$": {
                   "allow": {
                     "label": "Rule",
