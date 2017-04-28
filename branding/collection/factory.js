@@ -8,7 +8,6 @@ import { Factory } from 'meteor/dburles:factory';
 
 // Npm packages imports
 import _ from 'lodash';
-import faker from 'faker';
 
 // Collection imports
 import Branding from './';
@@ -19,20 +18,20 @@ Factory.define('branding', Branding, {
   projectLogoFileId: () => { return 'projectLogoFileId'; },
   coverPhotoFileId: () => { return 'coverPhotoFileId'; },
   colors: () => {},
-  'colors.primary': () => { return faker.internet.color(); },
-  'colors.primaryText': () => { return faker.commerce.color(); },
-  'colors.coverPhotoOverlay': () => { return faker.internet.color(); },
+  'colors.primary': () => { return '#fff'; },
+  'colors.primaryText': () => { return 'black'; },
+  'colors.coverPhotoOverlay': () => { return 'blue'; },
   'colors.overlayTransparency': () => { return _.random(0, 100); },
-  siteTitle: () => { return faker.company.companyName(); },
-  siteSlogan: () => { return faker.company.catchPhrase(); },
-  siteFooter: () => { return faker.company.bs(); },
-  privacyPolicy: () => { return faker.lorem.sentences(5); },
-  termsOfUse: () => { return faker.lorem.paragraphs(3); },
+  siteTitle: () => { return 'Site Title'; },
+  siteSlogan: () => { return 'Site slogan - catch phrase'; },
+  siteFooter: () => { return 'Copyright Site Title'; },
+  privacyPolicy: () => { return 'Privacy Policy'; },
+  termsOfUse: () => { return 'Terms of Use'; },
   socialMedia: () => {
     return [
       {
         name: ['Facebook', 'Twitter', 'Github'][_.random(0, 2)],
-        url: faker.internet.url(),
+        url: 'https://social.network/site',
       },
     ];
   },
