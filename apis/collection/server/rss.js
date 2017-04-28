@@ -12,6 +12,8 @@ import { RssFeed } from 'meteor/raix:rssfeed';
 // Collection imports
 import Apis from '/apis/collection';
 
+import Branding from '/branding/collection';
+
 // calling Rss feed publication
 // first argument (apis) will build the url for the feed i.e domain-name/rss/apis
 RssFeed.publish('apis', function () {
@@ -22,7 +24,9 @@ RssFeed.publish('apis', function () {
   feed.setValue('title', feed.cdata('APIs feed'));
 
   // RSS header description
-  feed.setValue('description', feed.cdata('Feed for the latest Apis.'));
+  const branding = Branding.findOne();
+  const siteTitle = branding.siteTitle;
+  feed.setValue('description', feed.cdata(`Feed for the latest Apis ${siteTitle}.`));
 
   // RSS header link
   const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
