@@ -14,54 +14,51 @@ import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 
-  // Call Rss feed publication
-  // First argument (apis) will build the url for the feed i.e domain-name/rss/apis
+// Call Rss feed publication
+// First argument (apis) will build the url for the feed i.e domain-name/rss/apis
 RssFeed.publish('organizations', function (query) {
-    // Initialize variable feed
+  // Initialize variable feed
   const feed = this;
 
-   // Create an object with organization's slug.
-  const selector = { slug: query.slug };
+  // Get document containg an organization collection
+  const organization = Organizations.findOne({ slug: query.slug });
 
-   // Get document containg an organization collection
-  const organization = Organizations.findOne(selector);
-
-    // Get organization name
+  // Get organization name
   const organizationName = organization.name;
 
-    // RSS header title
+  // Variable for pubDate and buildDate
+  const dateForPubBuild = new Date();
+
+  // RSS header title
   feed.setValue('title', feed.cdata(`${organizationName} organization's News Feed`));
 
-    // RSS header description
+  // RSS header description
   feed.setValue('description', feed.cdata(`Apis that are connected to ${organizationName}.`));
 
-    // RSS header link
+  // RSS header link
   const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
   feed.setValue('link', meteorAbsoluteUrl);
 
-    // lastBuildDate: About RSS feed was last built with new information.
-  feed.setValue('lastBuildDate', new Date());
+  // lastBuildDate: About RSS feed was last built with new information.
+  feed.setValue('lastBuildDate', dateForPubBuild);
 
-    // pubDate: About RSS feed publish Date
-  feed.setValue('pubDate', new Date());
+  // pubDate: About RSS feed publish Date
+  feed.setValue('pubDate', dateForPubBuild);
 
-    // ttl: The length of time (in minutes).
-    // RSS channel can be cached
-    // before refreshing from the source
+  // ttl: The length of time (in minutes).
+  // RSS channel can be cached
+  // before refreshing from the source
   feed.setValue('ttl', 60);
 
-    // Get the organizationId
+  // Get the organizationId
   const organizationId = organization._id;
 
-    // Iterate over all OrganizationApis of this organization
+  // Iterate over all OrganizationApis of this organization
   OrganizationApis.find({ organizationId }).forEach((organizationApi) => {
-      // Make a filter key for Apis schema
-    const apiId = organizationApi.apiId;
+    // Get api from apiOrganizationId
+    const api = Apis.findOne(organizationApi.apiId);
 
-      // Get api from apiOrganizationId
-    const api = Apis.findOne(apiId);
-
-      // Append an item to our feed using the .addItem() method
+    // Append an item to our feed using the .addItem() method
     feed.addItem({
       title: api.name,
       description: `${api.description}`,
