@@ -21,11 +21,8 @@ RssFeed.publish('organizations', function (query) {
   // Initialize variable feed
   const feed = this;
 
-  // Create an object with organization's slug.
-  const selector = { slug: query.slug };
-
   // Get organization document
-  const organization = Organizations.findOne(selector);
+  const organization = Organizations.findOne({ slug: query.slug });
 
   // make sure organization is found
   if (organization) {
