@@ -43,9 +43,10 @@ Organizations.find().forEach((organization) => {
     // pubDate: About RSS feed publish Date
     feed.setValue('pubDate', new Date());
 
-    /* ttl: The length of time (in minutes) RSS channel can be cached
-            before refreshing from the source*/
-    feed.setValue('ttl', 1);
+    // ttl: The length of time (in minutes).
+    // RSS channel can be cached
+    // before refreshing from the source
+    feed.setValue('ttl', 60);
 
     // Get the organizationId
     const organizationId = organization._id;
