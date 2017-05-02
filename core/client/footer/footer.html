@@ -1,0 +1,78 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="footer">
+  <footer>
+    <div class="container">
+      <div class="row">
+        <!-- icons -->
+        <div class="col-xs-12 col-sm-3 social-media-block">
+          {{# each network in branding.socialMedia }}
+            <a href="{{ network.url }}" target="_blank" class="social-media-link">
+              <img src="/img/social-media-icons/{{ network.name }}.png" alt="{{ network.name }} icon" class="social-media-icon">
+            </a>
+          {{/ each }}
+        </div>
+        <div class="col-xs-12 col-sm-3 footer-text">
+          <div class="row">
+            <!-- about -->
+            <div class="col-xs-6 col-sm-12">
+              <a id="about-button">
+                {{_ "footer_about" }}
+              </a>
+            </div>
+            <!-- language bar -->
+            <div class="col-xs-6 col-sm-12">
+              {{> languageSelect }}
+            </div>
+          </div>
+        </div>
+        <!-- sign(s)-->
+        <div class="col-xs-12 col-sm-3 footer-text">
+          <div class="row">
+            {{# if currentUser }}
+              <div class="col-xs-6 col-md-12">
+                <a href="{{ pathFor 'signOut' }}">
+                  {{_ "footer_signOut" }}
+                </a>
+              </div>
+            {{ else }}
+              <div class="col-xs-6 col-md-12">
+                <a href="{{ pathFor 'signUp' }}">
+                  {{_ "footer_signUp" }}
+                </a>
+              </div>
+              <div class="col-xs-6 col-md-12">
+                <a href="{{ pathFor 'signIn' }}">
+                  {{_ "footer_signIn" }}
+                </a>
+              </div>
+            {{/ if }}
+          </div>
+        </div>
+        <!-- PP & ToU -->
+        <div class="col-xs-12 col-sm-3 footer-text">
+          <div class="row">
+            <div class="col-xs-6 col-md-12">
+              <a href="{{ pathFor 'privacyPolicy' }}">
+                {{_ "footer_privacyPolicy_text" }}
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-12">
+              <a href="{{ pathFor 'termsOfUse' }}">
+                {{_  "footer_termsOfUse_text" }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 footer-text">
+          {{ branding.siteFooter }}
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
