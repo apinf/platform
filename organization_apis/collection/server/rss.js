@@ -25,47 +25,50 @@ RssFeed.publish('organizations', function (query) {
   // Get document containg an organization collection
   const organization = Organizations.findOne({ slug: query.slug });
 
+  // check if object exists
+  if (organization) {
   // Get organization name
-  const organizationName = organization.name;
+    const organizationName = organization.name;
 
   // Variable for pubDate and buildDate
-  const dateForPubBuild = new Date();
+    const dateForPubBuild = new Date();
 
   // RSS header title
-  feed.setValue('title', feed.cdata(`${organizationName} organization's News Feed`));
+    feed.setValue('title', feed.cdata(`${organizationName} organization's News Feed`));
 
   // RSS header description
-  feed.setValue('description', feed.cdata(`Apis that are connected to ${organizationName}.`));
+    feed.setValue('description', feed.cdata(`Apis that are connected to ${organizationName}.`));
 
   // RSS header link
-  const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-  feed.setValue('link', meteorAbsoluteUrl);
+    const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
+    feed.setValue('link', meteorAbsoluteUrl);
 
   // lastBuildDate: About RSS feed was last built with new information.
-  feed.setValue('lastBuildDate', dateForPubBuild);
+    feed.setValue('lastBuildDate', dateForPubBuild);
 
   // pubDate: About RSS feed publish Date
-  feed.setValue('pubDate', dateForPubBuild);
+    feed.setValue('pubDate', dateForPubBuild);
 
   // ttl: The length of time (in minutes).
   // RSS channel can be cached
   // before refreshing from the source
-  feed.setValue('ttl', 60);
+    feed.setValue('ttl', 60);
 
   // Get the organizationId
-  const organizationId = organization._id;
+    const organizationId = organization._id;
 
   // Iterate over all OrganizationApis of this organization
-  OrganizationApis.find({ organizationId }).forEach((organizationApi) => {
+    OrganizationApis.find({ organizationId }).forEach((organizationApi) => {
     // Get api from apiOrganizationId
-    const api = Apis.findOne(organizationApi.apiId);
+      const api = Apis.findOne(organizationApi.apiId);
 
     // Append an item to our feed using the .addItem() method
-    feed.addItem({
-      title: api.name,
-      description: `${api.description}`,
-      link: `${meteorAbsoluteUrl}/apis/${api.slug}`,
-      pubDate: api.created_at,
+      feed.addItem({
+        title: api.name,
+        description: `${api.description}`,
+        link: `${meteorAbsoluteUrl}/apis/${api.slug}`,
+        pubDate: api.created_at,
+      });
     });
-  });
+  }
 });
