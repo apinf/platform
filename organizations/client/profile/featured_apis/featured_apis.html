@@ -5,18 +5,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationFeaturedApis">
   <!-- Show or not content-->
-  {{# if hasFeaturedApi }}
+  {{# if organization.hasFeaturedApis }}
     <div class="block-header">
       <!-- Title -->
       <h3 class="apis-block-title">
         {{_ 'organizationProfile_bigText_featuredApisCount' }}
         <small>
-          {{_ 'organizationProfile_smallText_apisCount' count=featuredApisCount }}
+          {{_ 'organizationProfile_smallText_apisCount' count=organization.featuredApis.length }}
         </small>
       </h3>
       {{> apiFilteredBy }}
     </div>
-    {{> apiCatalogGrid apis=featuredApis organization=organization }}
+    {{> apiCatalogGrid apis=organization.featuredApis organization=organization }}
 
   {{ else }}
     {{> organizationNoFeaturedApis organization=organization }}
