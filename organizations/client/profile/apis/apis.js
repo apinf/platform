@@ -19,9 +19,9 @@ import Apis from '/apis/collection';
 Template.organizationApis.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-
   // Get Organization document from template data
   const organization = instance.data.organization;
+  console.log('organization=', organization);
 
   // Get pagination count for organization APIs
   const perPage = parseInt(instance.data.organization.apisPerPage, 10);
@@ -37,23 +37,25 @@ Template.organizationApis.onCreated(function () {
 
   // Watching on changes of managed APIs after connection to/disconnection from
   instance.autorun(() => {
-    // reactive solution to update pagination with template instant data
-    const updatedApisPerPage = Template.currentData().organization.apisPerPage || 10;
+    if (Template.currentData()) {
+      // reactive solution to update pagination with template instant data
+      const updatedApisPerPage = Template.currentData().organization.apisPerPage || 10;
 
-    // Get ids of managed APIs of organization
-    const apiIds = organization.managedApiIds();
+      // Get ids of managed APIs of organization
+      const apiIds = organization.managedApiIds();
 
-    // Get settings of current filter
-    const currentFilters = instance.pagination.filters();
+      // Get settings of current filter
+      const currentFilters = instance.pagination.filters();
 
-    // Filter by managed APIs
-    currentFilters._id = { $in: apiIds };
+      // Filter by managed APIs
+      currentFilters._id = { $in: apiIds };
 
-    // Set updated filter
-    instance.pagination.filters(currentFilters);
+      // Set updated filter
+      instance.pagination.filters(currentFilters);
 
-    // Set update perpage
-    instance.pagination.perPage(updatedApisPerPage);
+      // Set update perpage
+      instance.pagination.perPage(updatedApisPerPage);
+    }
   });
 
   // Watching for changes of lifecycle parameter
