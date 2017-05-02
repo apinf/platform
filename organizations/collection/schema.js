@@ -12,6 +12,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Collection imports
 import Organizations from './';
 
+// APINF imports
 import contactPhone from './regex';
 
 Organizations.schema = new SimpleSchema({
