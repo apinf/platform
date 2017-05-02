@@ -92,3 +92,4 @@ dispatch:mocha
 practicalmeteor:chai
 dispatch:mocha-browser
 dburles:factory
+practicalmeteor:mocha
