@@ -23,6 +23,12 @@ Template.latestPublicApis.onCreated(function () {
 
   // Subscribe to latestApiBackends publication & pass limit parameter
   instance.subscribe('latestPublicApis', limit);
+
+  // Subscribe to organization apis
+  instance.subscribe('organizationApis');
+
+  // Subscribe to organizations basic details
+  instance.subscribe('allOrganizationBasicDetails');
 });
 
 Template.latestPublicApis.helpers({
