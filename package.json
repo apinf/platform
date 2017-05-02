@@ -49,12 +49,10 @@
     "lintfix": "eslint --fix .",
     "pretest": "yarn run lint --silent",
     "start": "meteor run",
-    "test-app-chrome": "meteor test --full-app --once --driver-package dispatch:mocha-browser",
+    "test-app-chrome": "meteor test --full-app --once --driver-package practicalmeteor:mocha",
     "test-app-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
-    "test-app-watch": "TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha-browser",
-    "test-chrome": "meteor test --once --driver-package dispatch:mocha-browser",
+    "test-chrome": "meteor test --driver-package practicalmeteor:mocha",
     "test-nightmare": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
-    "test-watch": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-browser",
     "test": "yarn run test-nightmare"
   },
   "repository": {

@@ -90,6 +90,5 @@ softwarerero:accounts-t9n
 raix:rssfeed
 dispatch:mocha
 practicalmeteor:chai
-dispatch:mocha-browser
 dburles:factory
 practicalmeteor:mocha
