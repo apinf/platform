@@ -18,6 +18,7 @@ import _ from 'lodash';
 
 // Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
+import Apis from '/apis/collection';
 import Organizations from './';
 
 Organizations.helpers({
@@ -89,4 +90,20 @@ Organizations.helpers({
     }
     return featuredApiListIsFull;
   },
+  hasFeaturedApis () {
+    if (this.featuredApis().length > 0) {
+      return true;
+    }
+    return false;
+  },
+  featuredApis () {
+    const featuredApiList = this.featuredApiIds;
+
+    const featuredApis = Apis.find({
+      _id: { $in: featuredApiList },
+    }).fetch();
+
+    return featuredApis;
+  },
+
 });

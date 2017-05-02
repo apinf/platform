@@ -15,31 +15,40 @@ import { Template } from 'meteor/templating';
 import Apis from '/apis/collection';
 
 Template.organizationFeaturedApis.helpers({
-  featuredApis () {
-    const featuredApiList = Template.currentData().organization.featuredApiIds;
-
-    const featuredApis = Apis.find({
-      _id: { $in: featuredApiList },
-    }).fetch();
-
-    return featuredApis;
-  },
-  featuredApisCount () {
-    const featuredApiList = Template.currentData().organization.featuredApiIds;
-
-    const apis = Apis.find({
-      _id: { $in: featuredApiList },
-    }).fetch();
-
-    return apis.length;
-  },
-  hasFeaturedApi () {
-    const featuredApiList = Template.currentData().organization.featuredApiIds;
-
-    const apis = Apis.find({
-      _id: { $in: featuredApiList },
-    }).fetch();
-
-    return apis.length;
-  },
+  // featuredApis () {
+  //   const featuredApiList = Template.currentData().organization.featuredApiIds;
+  //
+  //   const featuredApis = Apis.find({
+  //     _id: { $in: featuredApiList },
+  //   }).fetch();
+  //
+  //   return featuredApis;
+  // },
+  // featuredApisCount () {
+  //   let featuredApisCount = 0;
+  //
+  //   if (Template.currentData().organization) {
+  //     const featuredApiList = Template.currentData().organization.featuredApiIds;
+  //
+  //     const apis = Apis.find({
+  //       _id: { $in: featuredApiList },
+  //     }).fetch();
+  //     featuredApisCount = apis.length;
+  //   }
+  //
+  //   return featuredApisCount;
+  // },
+  // hasFeaturedApi () {
+  //   let hasFeaturedApi = 0;
+  //   if (Template.currentData().organization) {
+  //     const featuredApiList = Template.currentData().organization.featuredApiIds;
+  //
+  //     const apis = Apis.find({
+  //       _id: { $in: featuredApiList },
+  //     }).fetch();
+  //     hasFeaturedApi = apis.length > 0;
+  //   }
+  //
+  //   return hasFeaturedApi;
+  // },
 });
