@@ -24,7 +24,7 @@ RssFeed.publish('organizations', function (query) {
   // Get document containg an organization collection
   const organization = Organizations.findOne({ slug: query.slug });
 
-  // check if object exists
+  // Make sure organization exists
   if (organization) {
     // Get organization name
     const organizationName = organization.name;
@@ -49,8 +49,7 @@ RssFeed.publish('organizations', function (query) {
     feed.setValue('pubDate', dateForPubBuild);
 
     // ttl: The length of time (in minutes).
-    // RSS channel can be cached
-    // before refreshing from the source
+    // RSS channel can be cached before refreshing from the source
     feed.setValue('ttl', 60);
 
     // Get the organizationId
