@@ -27,7 +27,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </a>
       <p class="api-card-author text-center">
         {{_ "catalogueGrid_addedBy" }}
-        {{ api.getApiManagersByName }}
+        {{# if api.organization }}
+          {{ api.organization.name }}
+        {{ else }}
+          {{ api.getApiManagersByName }}
+        {{/ if }}
       </p>
       <ul class="list-inline api-card-labels">
         <li>

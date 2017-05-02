@@ -9,11 +9,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* Cover photo */
 
 .coverphoto {
-  margin-top: -1.4em;
-  background-repeat: no-repeat;
   background-size: cover;
-  background-position: top center;
-  background-color: @brand-primary;
+  background: @brand-primary no-repeat top center;
 }
 
 /* Header Wrap */
@@ -40,20 +37,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   }
 
   .search-box {
-    min-width: auto;
     max-width: 50em;
-    margin: auto;
-    margin-bottom: 2em;
+    margin: auto auto 2em;
     text-align: center;
 
     /* Tweek to use bootstrap styles */
     @media (min-width: 768px) {
       .navbar-form {
         padding: 10px 15px;
-        margin-top: 8px;
-        margin-right: -15px;
-        margin-bottom: 8px;
-        margin-left: -15px;
+        margin: 8px -15px;
         border-top: 1px solid transparent;
         border-bottom: 1px solid transparent;
         -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1);
@@ -77,8 +69,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       padding: 5px 12px;
     }
 
-    .input-group
-      input,
+    .input-group input,
       button {
       height: 3em;
     }
@@ -112,10 +103,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 #statisticswrap {
   width: 100%;
-  background-color: @brand-primary;
-  color: #fff;
   padding: 1.25em 0 1.25em 0;
   margin-top: 3em;
+  border-bottom: 2px solid white;
 
   .row {
     margin-left: 0;
@@ -125,4 +115,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 #contact-us {
   margin-bottom: 4.37em;
+}
+
+#features {
+  flex: 1;
 }
