@@ -17,7 +17,6 @@ import OrganizationApis from '../';
 // Create RSS feed publication
 // First argument ('organizations') will build the baseurl
 // 'query' argument should contain organization slug
-
 RssFeed.publish('organizations', function (query) {
   // Initialize variable feed
   const feed = this;
