@@ -15,7 +15,6 @@ Organizations.publicFields = {
   apisPerPage: 1,
   contact: 1,
   description: 1,
-  logoUrl: 1,
   managerIds: 1,
   name: 1,
   organizationLogoFileId: 1,

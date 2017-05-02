@@ -64,7 +64,7 @@ Meteor.publishComposite('apiComposite', function (slug) {
   check(slug, String);
   return {
     find () {
-      return Apis.find({ slug }, { fields: Apis.publicFields });
+      return Apis.find({ slug });
     },
     children: [
       {

@@ -18,8 +18,7 @@ import OrganizationApis from '/organization_apis/collection';
 import Organizations from '../';
 
 Meteor.publish('allOrganizationBasicDetails', () => {
-  // return Organizations.find();
-  return Organizations.find({}, { fields: Organizations.publicFields });
+  return Organizations.find({});
 });
 
 // Publish collection for pagination
@@ -50,7 +49,7 @@ Meteor.publishComposite('organizationComposite', (slug) => {
   check(slug, String);
   return {
     find () {
-      return Organizations.find({ slug }, { fields: Organizations.publicFields });
+      return Organizations.find({ slug });
     },
     children: [
       {
