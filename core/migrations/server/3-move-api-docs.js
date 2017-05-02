@@ -9,7 +9,7 @@ import Apis from '/apis/collection';
 import ApiDocs from '/api_docs/collection';
 
 Migrations.add({
-  version: 3,
+  version: 4,
   name: 'Move API documentation from Apis to ApiDocs collection',
   up () {
     // Iterate through Apis collection
