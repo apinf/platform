@@ -14,17 +14,17 @@ import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 
-  // Create RSS feed publication
-  // First argument ('organizations') will build the url for the feed i.e domain-name/rss/organizations
-  // 'query' argument should contain organization slug
+// Create RSS feed publication
+// First argument ('organizations') will build the url for the feed i.e domain-name/rss/organizations
+// 'query' argument should contain organization slug
 RssFeed.publish('organizations', function (query) {
-    // Initialize variable feed
+  // Initialize variable feed
   const feed = this;
 
-   // Create an object with organization's slug.
+  // Create an object with organization's slug.
   const selector = { slug: query.slug };
 
-   // Get organization document
+  // Get organization document
   const organization = Organizations.findOne(selector);
 
   // make sure organization is found
