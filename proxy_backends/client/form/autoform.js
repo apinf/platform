@@ -11,8 +11,6 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-import _ from 'lodash';
-
 // Collection imports
 import ProxyBackends from '../../collection';
 
@@ -84,10 +82,6 @@ AutoForm.hooks({
             }
           });
         } else if (proxyBackend.type === 'emq') {
-          _.forEach(proxyBackend.emq.settings.acl, (rule) => {
-            rule.id = new Meteor.Collection.ObjectID().valueOf();
-          });
-          console.log(proxyBackend);
           // POST ACL rule to EMQ-REST-API
           form.result(proxyBackend);
         }

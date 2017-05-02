@@ -67,35 +67,68 @@ Meteor.methods({
     }
     return true;
   },
-  removeAuthFromUri (uri) {
-    let url = `${uri.protocol}://${uri.hostname}`;
+  removeAuthFromUrl (url) {
+    check(url, String);
 
-    if (uri.port) url += `:${uri.port}`;
+    // Init URI instance
+    const uri = new URI(url);
 
-    return url;
+    // Delete username & password credentials
+    delete uri._parts.username; // eslint-disable-line no-underscore-dangle
+    delete uri._parts.password; // eslint-disable-line no-underscore-dangle
+
+    // Re-construct URI instance without auth credentials
+    uri.normalize();
+
+    // Return string value
+    return uri.valueOf();
+  },
+  getAuthStringFromUrl (url) {
+    check(url, String);
+
+    // Init URI object instance
+    const uri = URI.parse(url);
+
+    // Construct auth string
+    const authString = `${uri.username}:${uri.password}`;
+
+    return authString;
   },
   postEmqAcl ({ proxyId, rules }) {
     check(proxyId, String);
     check(rules, Array);
 
+    // Find proxy attached to API
     const emqProxy = Proxies.findOne(proxyId);
 
+    // Get HTTP API URL
     const emqHttpApi = emqProxy.emq.httpApi;
 
-    const uri = URI.parse(emqHttpApi);
-    const url = Meteor.call('removeAuthFromUri', uri);
-    const auth = `${uri.username}:${uri.password}`;
+    // Get auth string from URL
+    const authString = Meteor.call('getAuthStringFromUrl', emqHttpApi);
+    // Remove auth credentials from URL
+    let url = Meteor.call('removeAuthFromUrl', emqHttpApi);
+    // Append emq-acl path to URL
+    url += 'emq-acl';
 
+    // Map promises for each EMQ ACL rule
     const postedEmqRules = _.map(rules, (rule) => {
+      // Get data to be sent to EMQ-REST-API
       const data = {
         allow: rule.allow,
         access: rule.access,
         topic: rule.topic,
       };
+      // Append ACL type & value
       data[rule.fromType] = rule.fromValue;
 
-      return got.post(`${url}/emq-acl`, {
-        auth,
+      if (!rule.id) {
+        data.id = new Meteor.Collection.ObjectID().valueOf();
+      }
+
+      // Send POST request to EMQ-REST-API
+      return got.post(`${url}`, {
+        auth: authString,
         json: true,
         body: data,
       })
@@ -107,8 +140,10 @@ Meteor.methods({
         });
     });
 
+    // Execute all promises
     Promise.all(postedEmqRules)
       .then(res => {
+        console.log(res)
         return res;
       })
       .catch(err => {
