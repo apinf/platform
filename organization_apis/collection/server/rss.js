@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2017 Apinf Oy.
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -9,7 +9,7 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { RssFeed } from 'meteor/raix:rssfeed';
 
-// Collection imports.
+// Collection imports
 import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
