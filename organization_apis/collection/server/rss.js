@@ -14,8 +14,10 @@ import Apis from '/apis/collection';
 import Organizations from '/organizations/collection';
 import OrganizationApis from '../';
 
-// Call Rss feed publication
-// First argument (apis) will build the url for the feed i.e domain-name/rss/apis
+// Create RSS feed publication
+// First argument ('organizations') will build the baseurl
+// 'query' argument should contain organization slug
+
 RssFeed.publish('organizations', function (query) {
   // Initialize variable feed
   const feed = this;
