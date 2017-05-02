@@ -15,14 +15,14 @@ import { Template } from 'meteor/templating';
 import Apis from '/apis/collection';
 
 Template.organizationFeaturedApis.helpers({
-  apis () {
+  featuredApis () {
     const featuredApiList = Template.currentData().organization.featuredApiIds;
 
-    const apis = Apis.find({
+    const featuredApis = Apis.find({
       _id: { $in: featuredApiList },
     }).fetch();
 
-    return apis;
+    return featuredApis;
   },
   featuredApisCount () {
     const featuredApiList = Template.currentData().organization.featuredApiIds;
