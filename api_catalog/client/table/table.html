@@ -33,7 +33,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <div>
                 <i>
                   {{_ "catalogueTable_addedBy" }}
-                  {{ api.getApiManagersByName }}
+                  {{# if api.organization }}
+                    {{ api.organization.name }}
+                  {{ else }}
+                    {{ api.getApiManagersByName }}
+                  {{/ if }}
                 </i>
                 <br>
                 <i>

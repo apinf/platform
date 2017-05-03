@@ -72,11 +72,7 @@ Meteor.methods({
     const settings = Settings.findOne();
 
     // If the access permission 'only admins can add APIs' is defined, use it
-    // otherwise, allow users to add APIs by default
-    const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
-
-    // Check if only admins are allowed to add APIs
-    if (onlyAdminsCanAddApis) {
+    if (settings && settings.access && settings.access.onlyAdminsCanAddApis) {
       // Make sure current user is admin
       return Roles.userIsInRole(userId, ['admin']);
     }

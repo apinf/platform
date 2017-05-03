@@ -5,14 +5,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="masterLayout">
   {{> customStylesheet }}
-  {{> languageBar }}
   {{# if Template.subscriptionsReady }}
-  <div class="master-layout">
-    {{> navbar branding=branding }}
-    <div class="content-wrapper">
-      {{> Template.dynamic template=main }}
-      {{> sAlert }}
+    <div class="master-layout">
+      {{> navbar branding=branding }}
+      <div class="content-wrapper">
+        {{> Template.dynamic template=main }}
+        {{> sAlert }}
+      </div>
+      {{> footer branding=branding }}
     </div>
-  </div>
   {{/ if }}
 </template>

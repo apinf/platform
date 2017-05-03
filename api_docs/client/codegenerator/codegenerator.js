@@ -5,7 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { HTTP } from 'meteor/http';
-import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
@@ -16,9 +15,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // Npm packages imports
 import _ from 'lodash';
 
-// Collection imports
-import DocumentationFiles from '/api_docs/files/collection';
-
 // APINF imports
 import specificLanguageNames from './codgeneratorSpecificLanguages';
 
@@ -28,15 +24,8 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
   instance.callRequest = new ReactiveVar(false);
   instance.dataReady = new ReactiveVar(false);
 
-  // Get documentation file id
-  const documentationFileId = instance.data.api.documentationFileId;
-
-  // Build documentation files base url
-  const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-  const documentationFilesBaseURL = meteorAbsoluteUrl + DocumentationFiles.baseURL;
-
-  // Save documentation file URL
-  instance.documentationFileURL = `${documentationFilesBaseURL}/id/${documentationFileId}`;
+  // Get documentation url
+  instance.documentationUrl = instance.data.api.documentation();
 
   /* Get list of an available languages from Codegen server */
 
