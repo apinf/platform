@@ -143,7 +143,6 @@ Meteor.methods({
     // Execute all promises
     Promise.all(postedEmqRules)
       .then(res => {
-        console.log(res)
         return res;
       })
       .catch(err => {
