@@ -5,7 +5,10 @@
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.footer.onCreated(function () {
   this.autorun(() => {
