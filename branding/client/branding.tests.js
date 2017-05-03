@@ -45,6 +45,7 @@ describe('Branding', function () {
       };
       withRenderedTemplate('branding', data, (el) => {
         chai.assert.equal($(el).find('.siteTitle').val(), branding.siteTitle);
+        chai.expect(sAlert.collection.findOne().message).to.equal('Test warning message...');
       });
     });
   });
