@@ -42,6 +42,5 @@ export default {
   },
   'emq.elasticsearch': {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
   },
 };
