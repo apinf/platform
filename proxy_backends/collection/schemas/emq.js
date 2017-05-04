@@ -5,6 +5,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // Rate limits schema
 const aclSchema = new SimpleSchema({
+  proxyId: {
+    type: String,
+    optional: false,
+  },
   id: {
     type: String,
     optional: true,

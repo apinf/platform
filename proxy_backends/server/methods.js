@@ -67,36 +67,37 @@ Meteor.methods({
     }
     return true;
   },
-  removeAuthFromUrl (url) {
+  getUrlAndAuthStrings (url) {
     check(url, String);
 
-    // Init URI instance
+    // Init URI object instance
     const uri = new URI(url);
 
+    /* eslint-disable no-underscore-dangle */
+    // Construct auth string
+    const auth = `${uri._parts.username}:${uri._parts.password}`;
+
     // Delete username & password credentials
-    delete uri._parts.username; // eslint-disable-line no-underscore-dangle
-    delete uri._parts.password; // eslint-disable-line no-underscore-dangle
+    delete uri._parts.username;
+    delete uri._parts.password;
 
     // Re-construct URI instance without auth credentials
     uri.normalize();
 
-    // Return string value
-    return uri.valueOf();
+    // Retrun object with both values
+    return {
+      auth,
+      url: `${uri.valueOf()}`,
+    };
   },
-  getAuthStringFromUrl (url) {
-    check(url, String);
-
-    // Init URI object instance
-    const uri = URI.parse(url);
-
-    // Construct auth string
-    const authString = `${uri.username}:${uri.password}`;
-
-    return authString;
-  },
-  postEmqAcl ({ proxyId, rules }) {
+  emqAclRequest ({ method, proxyId, rules }) {
+    check(method, String);
     check(proxyId, String);
     check(rules, Array);
+
+    let rulesMap = [];
+    // Assign default HTTP EMQ-ACL path
+    const apiPath = 'emq-acl';
 
     // Find proxy attached to API
     const emqProxy = Proxies.findOne(proxyId);
@@ -104,54 +105,95 @@ Meteor.methods({
     // Get HTTP API URL
     const emqHttpApi = emqProxy.emq.httpApi;
 
-    // Get auth string from URL
-    const authString = Meteor.call('getAuthStringFromUrl', emqHttpApi);
-    // Remove auth credentials from URL
-    let url = Meteor.call('removeAuthFromUrl', emqHttpApi);
-    // Append emq-acl path to URL
-    url += 'emq-acl';
+    // Get auth and url strings from URI
+    const { auth, url } = Meteor.call('getUrlAndAuthStrings', emqHttpApi);
 
-    // Map promises for each EMQ ACL rule
-    const postedEmqRules = _.map(rules, (rule) => {
-      // Get data to be sent to EMQ-REST-API
-      const data = {
-        allow: rule.allow,
-        access: rule.access,
-        topic: rule.topic,
-      };
-      // Append ACL type & value
-      data[rule.fromType] = rule.fromValue;
+    if (method === 'POST') {
+      // Map promises for each EMQ ACL rule
+      rulesMap = _.map(rules, (rule) => {
+        // Get data to be sent to EMQ-REST-API
+        const data = {
+          proxyId: rule.proxyId,
+          id: rule.id,
+          allow: rule.allow,
+          access: rule.access,
+          topic: rule.topic,
+        };
+        // Append ACL type & value
+        data[rule.fromType] = rule.fromValue;
 
-      if (!rule.id) {
-        data.id = new Meteor.Collection.ObjectID().valueOf();
-      }
-
-      // Send POST request to EMQ-REST-API
-      return got.post(`${url}`, {
-        auth: authString,
-        json: true,
-        body: data,
-      })
-        .then(res => {
-          return res;
+        // Send POST request to EMQ-REST-API
+        // Append emq-acl path to URL
+        return got.post(`${url}${apiPath}`, {
+          auth,
+          json: true,
+          body: data,
         })
-        .catch(err => {
-          return err;
-        });
-    });
+          .then(res => {
+            return res;
+          })
+          .catch(err => {
+            return err;
+          });
+      });
+    } else if (method === 'PUT') {
+      // Get data to be sent to EMQ-REST-API
+      rulesMap = _.map(rules, (rule) => {
+        const data = {
+          allow: rule.allow,
+          access: rule.access,
+          topic: rule.topic,
+        };
+        // Append ACL type & value
+        data[rule.fromType] = rule.fromValue;
+
+        // Fetch list of existing rules from EMQ-REST-API by selected proxy ID
+        return got.get(`${url}${apiPath}?proxyId=${proxyId}`, { auth, json: true })
+          .then(res => {
+            // SailsJS returnes an array of items in JSON format
+            const aclRules = res.body;
+            // Find the same rule as given from iteration
+            const aclRuleExists = _.find(aclRules, (r) => {
+              return r.id === rule.id;
+            });
+
+            // Check if ACL rule actually exists
+            if (aclRuleExists) {
+              // If ACL Rule aleady exists, only update it
+              got.put(`${url}${apiPath}?proxyId=${proxyId}`, { auth, json: true, body: data })
+                .then((res1) => {
+                  return res1;
+                })
+                .catch((err) => {
+                  return err;
+                });
+            } else {
+              // Add ID to rule, since it is only needed for new rules,
+              // Existing rules already have IDs
+              data.id = new Meteor.Collection.ObjectID().valueOf();
+              // If ACL Rule is does not exist on remote, then POST it
+              got.post(`${url}${apiPath}`, { auth, json: true, body: data })
+                .then((res1) => {
+                  return res1;
+                })
+                .catch((err) => {
+                  return err;
+                });
+            }
+          })
+          .catch((err) => {
+            return err;
+          });
+      });
+    }
 
     // Execute all promises
-    Promise.all(postedEmqRules)
+    Promise.all(rulesMap)
       .then(res => {
         return res;
       })
       .catch(err => {
         return err;
       });
-  },
-  updateEmqAcl ({ proxyId, rules }) {
-    check(proxyId, String);
-    check(rules, Array);
-    // TODO: add emq method to update rules
   },
 });

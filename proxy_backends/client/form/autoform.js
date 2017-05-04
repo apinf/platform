@@ -82,6 +82,13 @@ AutoForm.hooks({
             }
           });
         } else if (proxyBackend.type === 'emq') {
+          // Before insert iterate through ACL rules
+          proxyBackend.emq.settings.acl.forEach((aclRule) => {
+            // Adding ID field for each rule separately is needed to differentiate
+            // add edit them
+            aclRule.id = new Meteor.Collection.ObjectID().valueOf();
+          });
+
           // POST ACL rule to EMQ-REST-API
           form.result(proxyBackend);
         }
@@ -187,6 +194,21 @@ AutoForm.hooks({
               });
           }
         } else {
+          if (updateDoc.$set['emq.settings.acl']) {
+            // Before insert iterate through ACL rules
+            updateDoc.$set['emq.settings.acl'].forEach((aclRule) => {
+              // Adding ID field for each rule separately is needed to differentiate
+              // add edit them
+              if (!aclRule.id) {
+                aclRule.id = new Meteor.Collection.ObjectID().valueOf();
+              }
+
+              // Add proxy backend ID value if needed
+              if (!aclRule.proxyId) {
+                aclRule.proxyId = updateDoc.$set.proxyId;
+              }
+            });
+          }
           // Update EMQ proxy backend
           form.result(updateDoc);
         }
@@ -242,7 +264,8 @@ AutoForm.hooks({
           );
         // **** EMQ *****
         } else if (proxyBackend.type === 'emq') {
-          Meteor.call('updateEmqAcl', {
+          Meteor.call('emqAclRequest', {
+            method: 'PUT',
             proxyId: proxyBackend.proxyId,
             rules: proxyBackend.emq.settings.acl,
           }, (err, res) => {
@@ -254,7 +277,8 @@ AutoForm.hooks({
       } else {
         // Check what proxy backend is selected
         if (proxyBackend.type === 'emq') {
-          Meteor.call('postEmqAcl', {
+          Meteor.call('emqAclRequest', {
+            method: 'POST',
             proxyId: proxyBackend.proxyId,
             rules: proxyBackend.emq.settings.acl,
           }, (err, res) => {
