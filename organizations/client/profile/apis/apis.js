@@ -20,24 +20,27 @@ Template.organizationApis.onCreated(function () {
   // Get reference to template instance
   const instance = this;
   console.log('instance=', instance);
+
   // Get Organization document from template data
   const organization = instance.data.organization;
 
-  // Get pagination count for organization APIs
-  const perPage = parseInt(instance.data.organization.apisPerPage, 10);
+  if (organization) {
+    // Get pagination count for organization APIs
+    const perPage = parseInt(instance.data.organization.apisPerPage, 10);
 
-  // Set initial settings of pagination
-  instance.pagination = new Meteor.Pagination(Apis, {
-    // Count of cards in catalog
-    perPage,
-    // Set sort by name on default
-    sort: { name: 1 },
-    filters: organization.userVisibleApiFilter(),
-  });
+    // Set initial settings of pagination
+    instance.pagination = new Meteor.Pagination(Apis, {
+      // Count of cards in catalog
+      perPage,
+      // Set sort by name on default
+      sort: { name: 1 },
+      filters: organization.userVisibleApiFilter(),
+    });
+  }
 
   // Watching on changes of managed APIs after connection to/disconnection from
   instance.autorun(() => {
-    if (Template.currentData()) {
+    if (Template.currentData().organization) {
       // reactive solution to update pagination with template instant data
       const updatedApisPerPage = Template.currentData().organization.apisPerPage || 10;
 
