@@ -22,6 +22,7 @@
 
               <div class="form-group">
                 {{> afFieldInput name=this.current.id type="hidden" }}
+                {{> afFieldInput name=this.current.proxyId type="hidden" value=proxy._id }}
                 {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
                 {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
               </div>
