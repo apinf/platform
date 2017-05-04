@@ -19,9 +19,9 @@ import Apis from '/apis/collection';
 Template.organizationApis.onCreated(function () {
   // Get reference to template instance
   const instance = this;
+  console.log('instance=', instance);
   // Get Organization document from template data
   const organization = instance.data.organization;
-  console.log('organization=', organization);
 
   // Get pagination count for organization APIs
   const perPage = parseInt(instance.data.organization.apisPerPage, 10);
