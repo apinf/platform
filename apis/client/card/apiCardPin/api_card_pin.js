@@ -17,8 +17,10 @@ Template.apiCardPin.events({
     const organizationId = instance.organization._id;
     const featuredApiId = instance.api._id;
     const featuredApiList = instance.organization.featuredApiIds;
-    // If API was already featured, remove it from featured list
+
+    // Check what can be done for API card in question
     if (Organizations.find({ featuredApiIds: featuredApiId }).count() > 0) {
+      // if the API was already featured, remove it from featured list
       Organizations.update({ _id: organizationId },
         { $pull:
           { featuredApiIds: featuredApiId },
@@ -30,6 +32,7 @@ Template.apiCardPin.events({
       // Display success message to user
       sAlert.success(message);
     } else if (!featuredApiList || featuredApiList.length < 4) {
+      // If there is room in featured list, add API there
       Organizations.update({ _id: organizationId },
         { $push:
           { featuredApiIds: featuredApiId },
@@ -41,7 +44,8 @@ Template.apiCardPin.events({
       // Display success message to user
       sAlert.success(message);
     } else {
-        // Get localized error message
+      // There is no room in featured list, API can not be added
+      // Get localized error message
       const message = TAPi18n.__('apiCardPin_featuredListAlreadyFull');
 
         // Display success message to user
@@ -52,13 +56,14 @@ Template.apiCardPin.events({
 
 Template.apiCardPin.helpers({
   apiIsFeatured () {
+    // Check if API in question is in Organization's featured list
     const instance = this;
     const featuredApiId = instance.api._id;
-    let apiIsFeatured = false;
-    // If API was already featured, remove it from featured list
+
     if (Organizations.find({ featuredApiIds: featuredApiId }).count() > 0) {
-      apiIsFeatured = true;
+      // API was found
+      return true;
     }
-    return apiIsFeatured;
+    return false;
   },
 });
