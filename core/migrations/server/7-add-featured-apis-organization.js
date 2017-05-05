@@ -8,7 +8,7 @@ import { Migrations } from 'meteor/percolate:migrations';
 import Organizations from '/organizations/collection/';
 
 Migrations.add({
-  version: 8,
+  version: 7,
   name: 'Adds featuredApiIds to contain a list of featured APIs',
   up () {
     // Code to migrate up to version 8
