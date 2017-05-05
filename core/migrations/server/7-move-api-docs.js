@@ -10,32 +10,10 @@ Migrations.add({
     // Iterate through Apis collection
     Apis.find().forEach((api) => {
       // Check if fields exist
-      if (api.documentationFileId && api.documentation_link) {
-        // New apiDoc object
-        const apiDoc = {
-          apiId: api._id,
-          type: 'file',
-          fileId: api.documentationFileId,
-          otherUrl: api.documentation_link,
-          submit_methods: api.submit_methods,
-        };
-        ApiDocs.insert(apiDoc);
-      } else if (api.documentationFileId) {
-        // New apiDoc object
-        const apiDoc = {
-          apiId: api._id,
-          type: 'file',
-          fileId: api.documentationFileId,
-          submit_methods: api.submit_methods,
-        };
-        ApiDocs.insert(apiDoc);
-      } else if (api.documentation_link) {
-        // New apiDoc object
-        const apiDoc = {
-          apiId: api._id,
-          otherUrl: api.documentation_link,
-        };
-        ApiDocs.insert(apiDoc);
+      if (api.documentationFileId) {
+        ApiDocs.update(api._id, {
+          $set: { type: 'file' },
+        });
       }
     });
   },
