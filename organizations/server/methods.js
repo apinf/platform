@@ -17,6 +17,7 @@ import _ from 'lodash';
 // Collection imports
 import Apis from '/apis/collection';
 import OrganizationApis from '/organization_apis/collection';
+import OrganizationFeaturedApis from '/organization_featured_apis/collection';
 import Organizations from '/organizations/collection';
 
 Meteor.methods({
@@ -115,6 +116,17 @@ Meteor.methods({
 
     // Remove organizationApi links
     OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
+
+    // Get all organizationFeaturedApis links with current organization ID
+    const organizationFeaturedApis = OrganizationFeaturedApis.find({ organizationId }).fetch();
+
+    // Get array with all IDs of found document
+    const organizationFeaturedApisIDs = _.map(organizationFeaturedApis, (link) => {
+      return link._id;
+    });
+
+    // Remove organizationFeaturedApi links
+    OrganizationFeaturedApis.remove({ _id: { $in: organizationFeaturedApisIDs } });
   },
   getOrganizationProfile (slug) {
     // Make sure slug is a string

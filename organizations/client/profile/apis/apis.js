@@ -122,10 +122,38 @@ Template.organizationApis.helpers({
 
     return apis;
   },
+  featuredApis () {
+    // will be replaced with code fetching featured apis
+    const instance = Template.instance();
+    // console.log('inst=', instance);
+    // Get apis collection via Pagination
+    const featuredApis = instance.pagination.getPage();
+    // Get the sort via Pagination
+    const sort = instance.pagination.sort();
+
+    // Make sure sorted by name
+    if (sort.name) {
+      // Get the language
+      const language = TAPi18n.getLanguage();
+
+      // Use custom sort function with i18n support
+      featuredApis.sort((a, b) => {
+        return a.name.localeCompare(b.name, language) * sort.name;
+      });
+    }
+
+    return featuredApis;
+  },
   apisCount () {
     const instance = Template.instance();
     // Get the total number of documents
     return instance.pagination.totalItems();
+  },
+  featuredApisCount () {
+    const instance = Template.instance();
+    console.log('inst=', instance);
+    // Get the total number of documents
+    return 1;
   },
   templatePagination () {
     const instance = Template.instance();

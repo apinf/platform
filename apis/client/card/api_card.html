@@ -6,11 +6,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiCard">
   <div class="panel api-card">
     <div class="panel-heading api-card-heading text-center">
-      <a href="{{ pathFor 'viewApi' slug=api.slug }}">
-        <h3>
-          {{ api.name }}
-        </h3>
-      </a>
+      <div>
+        <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+          <h3>
+            {{ api.name }}
+          </h3>
+        </a>
+      </div>
       <p class="api-card-author text-center">
         {{_ "catalogueGrid_addedBy" }}
         {{# if api.organization }}
