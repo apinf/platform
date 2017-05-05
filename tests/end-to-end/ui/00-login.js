@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
+// Discover chimp-js browser
 /* globals browser */
 
 import signInPage from '../../page-objects/signin.page';
