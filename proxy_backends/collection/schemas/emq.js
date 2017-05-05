@@ -11,7 +11,7 @@ const aclSchema = new SimpleSchema({
   },
   id: {
     type: String,
-    optional: true,
+    optional: false,
   },
   allow: {
     type: Number,
