@@ -11,6 +11,7 @@ import { check } from 'meteor/check';
 import ProxyBackends from '/proxy_backends/collection';
 import Proxies from '/proxies/collection';
 
+// Npm packages imports
 import URI from 'urijs';
 import _ from 'lodash';
 import got from 'got';

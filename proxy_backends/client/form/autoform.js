@@ -92,7 +92,7 @@ AutoForm.hooks({
             aclRule.proxyId = proxyBackend.proxyId;
           });
 
-          // POST ACL rule to EMQ-REST-API
+          // Save proxy backend
           form.result(proxyBackend);
         }
         // Autoform does not expect anything to be returned
