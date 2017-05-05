@@ -10,7 +10,7 @@ import { Meteor } from 'meteor/meteor';
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
-  apiPath: 'api',
+  apiPath: 'apinf-rest',
   version: 'v1',
   defaultHeaders: {
     'Content-Type': 'application/json',
@@ -20,8 +20,7 @@ const ApiV1 = new Restivus({
   enableCors: true,
 });
 
-// Add Restivus Swagger configuration
-// - meta, tags, params, definitions
+// Add Restivus Swagger configuration - meta, tags, params, definitions
 ApiV1.swagger = {
   meta: {
     swagger: '2.0',
@@ -45,16 +44,15 @@ ApiV1.swagger = {
 };
 
 // Enable user endpoints if authentication is enabled
-// eslint-disable-next-line no-underscore-dangle
 if (ApiV1._config.useDefaultAuth) {
-  // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
   // Meteor.users collection
   ApiV1.addCollection(Meteor.users, {
-    excludedEndpoints: ['getAll', 'put'],
+    excludedEndpoints: ['getAll', 'put', 'patch'],
     routeOptions: {
       authRequired: true,
     },
     endpoints: {
+      // GET /apinf-rest/v1/users/:id
       get: {
         swagger: {
           description: 'Returns user with given ID.',
@@ -65,6 +63,7 @@ if (ApiV1._config.useDefaultAuth) {
           },
         },
       },
+      // POST /apinf-rest/v1/users/
       post: {
         authRequired: false,
         swagger: {
@@ -76,6 +75,7 @@ if (ApiV1._config.useDefaultAuth) {
           },
         },
       },
+      // DELETE /apinf-rest/v1/users/:id
       delete: {
         roleRequired: 'admin',
         swagger: {
@@ -91,7 +91,7 @@ if (ApiV1._config.useDefaultAuth) {
   });
 }
 
-// Generate Swagger to route /rest-api/v1/swagger.json
+// Generate Swagger to route /apinf-rest/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
 
 export default ApiV1;
