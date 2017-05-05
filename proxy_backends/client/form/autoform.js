@@ -87,6 +87,9 @@ AutoForm.hooks({
             // Adding ID field for each rule separately is needed to differentiate
             // add edit them
             aclRule.id = new Meteor.Collection.ObjectID().valueOf();
+
+            // Add proxy backend ID value
+            aclRule.proxyId = proxyBackend.proxyId;
           });
 
           // POST ACL rule to EMQ-REST-API
