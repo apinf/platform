@@ -904,6 +904,9 @@
                       "1": "Allow"
                     }
                   },
+                  "from": {
+                    "label": "From"
+                  },
                   "ip_addr": {
                     "label": "IP Address"
                   },
