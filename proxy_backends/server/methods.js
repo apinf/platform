@@ -137,9 +137,12 @@ Meteor.methods({
           });
       });
     } else if (method === 'PUT') {
-      // Get data to be sent to EMQ-REST-API
+      // Map promises for each EMQ ACL rule
       rulesMap = _.map(rules, (rule) => {
+        // Get data to be sent to EMQ-REST-API
         const data = {
+          id: rule.id,
+          proxyId: rule.proxyId,
           allow: rule.allow,
           access: rule.access,
           topic: rule.topic,
@@ -160,7 +163,7 @@ Meteor.methods({
             // Check if ACL rule actually exists
             if (aclRuleExists) {
               // If ACL Rule aleady exists, only update it
-              got.put(`${url}${apiPath}?proxyId=${proxyId}`, { auth, json: true, body: data })
+              got.put(`${url}${apiPath}/${rule.id}`, { auth, json: true, body: data })
                 .then((res1) => {
                   return res1;
                 })
@@ -168,9 +171,6 @@ Meteor.methods({
                   return err;
                 });
             } else {
-              // Add ID to rule, since it is only needed for new rules,
-              // Existing rules already have IDs
-              data.id = new Meteor.Collection.ObjectID().valueOf();
               // If ACL Rule is does not exist on remote, then POST it
               got.post(`${url}${apiPath}`, { auth, json: true, body: data })
                 .then((res1) => {
