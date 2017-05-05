@@ -271,9 +271,8 @@ AutoForm.hooks({
             method: 'PUT',
             proxyId: proxyBackend.proxyId,
             rules: proxyBackend.emq.settings.acl,
-          }, (err, res) => {
+          }, (err) => {
             if (err) console.error(err);
-            console.log('Proxy backend updated successfully.');
           });
         }
       // Form Type - INSERT
@@ -284,9 +283,8 @@ AutoForm.hooks({
             method: 'POST',
             proxyId: proxyBackend.proxyId,
             rules: proxyBackend.emq.settings.acl,
-          }, (err, res) => {
+          }, (err) => {
             if (err) console.error(err);
-            console.log('Proxy backend added successfully.');
           });
         }
 
