@@ -22,6 +22,7 @@ class SignInPage extends Page {
   get errorAlert () { return browser.element('.at-error'); }
 
   open () {
+    super.open();
     super.open('sign-in');
   }
 
