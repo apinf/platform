@@ -9,7 +9,7 @@ import Organizations from '/organizations/collection/';
 
 Migrations.add({
   version: 7,
-  name: 'Adds featuredApiIds to contain a list of featured APIs',
+  name: 'Ensure all Organizations have featuredApiIds array',
   up () {
     // Code to migrate up to version 8
 
