@@ -12,13 +12,6 @@ import { Template } from 'meteor/templating';
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 
-Template.viewProjectLogo.onCreated(function () {
-  const instance = this;
-  // Subscribe to project logo
-  instance.subscribe('projectLogo');
-  instance.subscribe('branding');
-});
-
 Template.viewProjectLogo.helpers({
   uploadedProjectLogoLink () {
     // TODO: Copy & pasted from Template.uploadProjectLogo.helpers.

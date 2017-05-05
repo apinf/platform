@@ -150,7 +150,8 @@ Additionally, the following steps help our team stay coordinated:
 
  ![git flow diagram with peer review step](https://openclipart.org/image/600px/svg_to_png/236560/Gitflow-featureBranch-peerReview.png)
 
-### Copyright statement in source code
+## Copyright statement in source code
+
 All files should have a copyright statement at the top.
 In practise it means that if you create a new file, you need to include a copyright statement as a comment at the top of it.
 
@@ -160,6 +161,14 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
 ```
+
+## CSS styleguide
+
+File structure:
+
+*   Each template - own style file
+*   Each style file - overriding section, function section
+*   Everything global - global.less file
 
 ## Code quality
 In a nutshell, **write code for humans to read and understand**. Our code will be minified for machines during the build process. For further reference, please read the following:
@@ -173,6 +182,37 @@ Please read and follow the following guidelines:
 
 - [10 Rules for Writing Safety Critical Code](http://spinroot.com/p10/)
 - [The Zen of Python](https://www.python.org/dev/peps/pep-0020/)
+
+### Importing 
+
+Add importing statements right after the copyright notice.
+
+The sections should be one of the below and the comments must be exactly the same text. They also should follow this order unless `eslint` complains about it.
+
+* Meteor packages imports - anything imported straight from meteor
+* Meteor contributed packages imports - contributed packages, like kadira:flow-router or tap:i18n
+* Collection imports - all collections needed by the current file
+* APINF imports - any custom file, probably from `/core`
+* Npm packages imports - if importing packages from npm are needed
+
+Examples below:
+
+```js
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
+// Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Collection imports
+import ApiMetadata from '../../collection';
+
+// APINF imports
+import formatDate from '/core/helper_functions/format_date';
+
+// Npm packages imports
+import _ from 'lodash';
+```
 
 ### Comments
 *Every* significant line of code should have an accompanying human language (English) comment. Generally, comments should be placed on the line preceeding the code. This is for several reasons:
@@ -266,10 +306,18 @@ let trash = ["tattered shoe", "broken pencil", "crumpled paper"];
 eat(food);
 disgard(trash);
 ```
-### Code standard(s) and Lint
-Configure your IDE to use eslint with the Airbnb styleguide.
 
-Reference: Meteor Guide - Check  Your Code with ESLint [Integrating with your editor](https://guide.meteor.com/code-style.html#eslint-editor)
+### Code standard(s) and Lint
+
+[eslint](https://eslint.org) is configured to run on every commit on Continuous Integration server.
+
+The project is configured with the Airbnb styleguide and meteor recommendation for eslint.
+
+To run locally, do:
+
+```bash
+yarn run lint
+```
 
 ### Indentation
 Indent all HTML(Blaze) and JavaScript code with two spaces for each level of nesting.

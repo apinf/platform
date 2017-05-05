@@ -9,27 +9,24 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
 Template.viewCoverPhoto.onCreated(function () {
   const instance = this;
-  // Subscribe to Branding collection
-  instance.subscribe('branding');
+
   // Subscribe to Cover Photo collection
   instance.subscribe('coverPhoto');
 });
 
 Template.viewCoverPhoto.helpers({
   coverPhotoExists () {
-    // Get Branding collection
-    const branding = Branding.findOne();
+    const branding = Template.currentData().branding;
 
     // Check Branding collection and cover photo exist
     return branding && branding.coverPhotoFileId;
   },
   uploadedCoverPhotoLink () {
-    const currentCoverPhotoFileId = Branding.findOne().coverPhotoFileId;
+    const currentCoverPhotoFileId = Template.currentData().branding.coverPhotoFileId;
 
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(currentCoverPhotoFileId);

@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 /** CSS for manage container width **/
 
-.swagger-ui-wrap .container {
+.swagger-ui .container {
   padding-right: 10px;
   padding-left: 10px;
   margin-right: auto;
@@ -13,24 +13,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   width: auto;
 }
 
-.swagger-section #header {
-  box-sizing: content-box;
-}
-
-@media (max-width: 1000px) {
-  .swagger-section div.swagger-ui-wrap,
-  .swagger-section div#header {
-    min-width: auto;
-  }
-
-  .swagger-section input#input_baseUrl {
-    width: 30vw;
-  }
-}
-
-@media (max-width: 650px) {
-
-  .swagger-section input#input_baseUrl {
-    width: 20vw;
-  }
+.swagger-ui .info .title small pre {
+  background-color: #7d8492;
+  border: 0;
+  font-size: 10px;
+  padding: 0;
 }

@@ -22,8 +22,10 @@ Template.uploadApiLogo.onCreated(function () {
     // Get Logo ID of current API using reactive way
     const apiLogoFileId = Template.currentData().api.apiLogoFileId;
 
-    // Subscribe to current API logo
-    instance.subscribe('currentApiLogo', apiLogoFileId);
+    if (apiLogoFileId) {
+      // Subscribe to current API logo
+      instance.subscribe('currentApiLogo', apiLogoFileId);
+    }
   });
 });
 

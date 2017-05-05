@@ -21,17 +21,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="label label-default">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
           {{/ unless }}
 
-          <p class="view-api-meta-details">
-            <i class="fa fa-user"></i>
-            {{ api.getApiManagersByName }}
-          </p>
-
           {{# if api.organization }}
             <p class="view-api-meta-details">
               <i class="fa fa-address-card" aria-hidden="true"></i>
               <a href="{{ pathFor 'organizationProfile' slug=api.organization.slug }}">
                 {{ api.organization.name }}
               </a>
+            </p>
+          {{ else }}
+            <p class="view-api-meta-details">
+              <i class="fa fa-user"></i>
+              {{ api.getApiManagersByName }}
             </p>
           {{/ if }}
 

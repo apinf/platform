@@ -18,20 +18,24 @@ import Organizations from '../../../collection';
 Template.uploadOrganizationCover.onCreated(function () {
   const instance = this;
 
-  // Subscribe to Organization cover
-  instance.subscribe('organizationCover');
+  instance.autorun(() => {
+    // Get organization data using reactive way
+    const organization = Template.currentData().organization;
+
+    if (organization.organizationCoverFileId) {
+      // Subscribe to Organization cover
+      instance.subscribe('organizationCoverById', organization.organizationCoverFileId);
+    }
+  });
 });
 
 Template.uploadOrganizationCover.helpers({
   uploadedOrganizationCoverFile () {
     // Get organization ID
-    const organizationId = this.organization._id;
-
-    // Get organization by ID
-    const organizationById = Organizations.findOne({ _id: organizationId });
+    const organization = Template.currentData().organization;
 
     // Get organization cover file ID
-    const organizationCoverFileId = organizationById.organizationCoverFileId;
+    const organizationCoverFileId = organization.organizationCoverFileId;
 
     let organizationCoverFile;
 
