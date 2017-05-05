@@ -57,7 +57,8 @@ Template.customStylesheet.helpers({
     // Get branding
     const branding = Branding.findOne();
 
-    let primaryColor;
+    // Set default color as blue
+    let primaryColor = '#2fa4e7';
 
     if (branding && branding.colors && branding.colors.primary) {
       primaryColor = branding.colors.primary;
@@ -69,7 +70,8 @@ Template.customStylesheet.helpers({
     // Get branding
     const branding = Branding.findOne();
 
-    let primaryColorText;
+    // Set default color of text as white
+    let primaryColorText = 'white';
 
     if (branding && branding.colors && branding.colors.primaryText) {
       primaryColorText = branding.colors.primaryText;

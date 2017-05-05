@@ -60,6 +60,12 @@ Template.apiCatalog.onCreated(function () {
   // Subscribe to bookmarks of current user
   instance.subscribe('userApiBookmarks');
 
+  // Subscribe to organization apis
+  instance.subscribe('organizationApis');
+
+  // Subscribe to organizations basic details
+  instance.subscribe('allOrganizationBasicDetails');
+
   // Watch for changes in the sort settings
   instance.autorun(() => {
     // Check URL parameter for sorting

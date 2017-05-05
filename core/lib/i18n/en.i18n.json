@@ -303,6 +303,12 @@
   "flagApiModal_titleText": "Flag API Backend",
   "flagApiSchema_DefunctText": "Defunct",
   "flagApiSchema_inappropriateText": "Inappropriate",
+  "footer_about": "About",
+  "footer_privacyPolicy_text": "Privacy Policy",
+  "footer_termsOfUse_text": "Terms of Use",
+  "footer_signIn": "Sign In",
+  "footer_signOut": "Sign Out",
+  "footer_signUp": "Sign Up",
   "forbidden_Title": "403 Forbidden",
   "forbidden_Message": "You don't have permissions to view this page.",
   "goBackButton_buttonText": "Return to a previous page",
@@ -327,11 +333,6 @@
   "homeBody_section3_heading": "Completely open source",
   "homeBody_section3_text": "APinf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with EUPL. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
   "homeBody_section3_text_extra": "Find us in ",
-  "homeFooter_privacyPolicy_text": "Privacy Policy",
-  "homeFooter_termsOfUse_text": "Terms of Use",
-  "homeFooter_signIn": "Sign In",
-  "homeFooter_signOut": "Sign Out",
-  "homeFooter_signUp": "Sign Up",
   "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML, .JSON or .TXT format.",
   "import_ApiConfiguration_Drop": "Drop your file here",
   "import_ApiConfiguration_File": "File:",
@@ -375,7 +376,6 @@
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
   "navbar_organizations": "Organizations",
-  "navbar_about": "About",
   "navbar_dashboard": "Dashboard",
   "navbar_signIn": "Sign In",
   "navbar_signUp": "Sign Up",
@@ -676,6 +676,9 @@
           },
           "siteFooter": {
               "label": "Site footer"
+          },
+          "footerCode": {
+              "label": "Footer code"
           }
       },
       "contactForm": {
