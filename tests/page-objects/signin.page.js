@@ -3,16 +3,17 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Discover chimp-js browser
 /* globals browser */
 
 import Page from './page';
 
 class SignInPage extends Page {
-  get emailOrUsernameField () { return browser.element('[name=at-field-username_and_email]'); }
-  get passwordField () { return browser.element('[name=at-field-password]'); }
+  get emailOrUsernameField () { return browser.element('#at-field-username_and_email'); }
+  get passwordField () { return browser.element('#at-field-password'); }
 
   get submitButton () { return browser.element('button#at-btn.submit'); }
-  get githubButton () { return browser.element('button.github'); }
+  get githubButton () { return browser.element('button#at-github'); }
 
   get registerLink () { return browser.element('#at-signUp'); }
   get forgotPasswordLink () { return browser.element('#at-forgotPwd'); }
