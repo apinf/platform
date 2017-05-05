@@ -14,8 +14,8 @@ Migrations.add({
         // New apiDoc object
         const apiDoc = {
           apiId: api._id,
-          type: 'file',
           fileId: api.documentationFileId,
+          type: 'file',
           otherUrl: api.documentation_link,
           submit_methods: api.submit_methods,
         };
