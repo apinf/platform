@@ -10,23 +10,14 @@ Migrations.add({
     // Iterate through Apis collection
     Apis.find().forEach((api) => {
       // Check if fields exist
-      if (api.documentationFileId) {
+      if (api.documentationFileId || api.documentation_link) {
         // New apiDoc object
         const apiDoc = {
           apiId: api._id,
-          fileId: api.documentationFileId,
           type: 'file',
-          submit_methods: api.submit_methods,
-        };
-
-        // Insert migrated API docs
-        ApiDocs.insert(apiDoc);
-      }
-      if (api.documentation_link) {
-        const apiDoc = {
-          apiId: api._id,
-          type: 'url',
+          fileId: api.documentationFileId,
           otherUrl: api.documentation_link,
+          submit_methods: api.submit_methods,
         };
         ApiDocs.insert(apiDoc);
       }
