@@ -270,11 +270,11 @@ AutoForm.hooks({
           );
         // **** EMQ *****
         } else if (proxyBackend.type === 'emq') {
-          Meteor.call('emqAclRequest', {
-            method: 'PUT',
-            proxyId: proxyBackend.proxyId,
-            rules: proxyBackend.emq.settings.acl,
-          }, (err) => {
+          Meteor.call('emqAclRequest',
+            'PUT',
+            proxyBackend.proxyId,
+            proxyBackend.emq.settings.acl,
+          (err) => {
             if (err) sAlert.error(err);
           });
         }
@@ -282,11 +282,11 @@ AutoForm.hooks({
       } else {
         // Check what proxy backend is selected
         if (proxyBackend.type === 'emq') {
-          Meteor.call('emqAclRequest', {
-            method: 'POST',
-            proxyId: proxyBackend.proxyId,
-            rules: proxyBackend.emq.settings.acl,
-          }, (err) => {
+          Meteor.call('emqAclRequest',
+            'POST',
+            proxyBackend.proxyId,
+            proxyBackend.emq.settings.acl,
+          (err) => {
             if (err) sAlert.error(err);
           });
         }

@@ -91,7 +91,7 @@ Meteor.methods({
       url: `${uri.valueOf()}`,
     };
   },
-  emqAclRequest ({ method, proxyId, rules }) {
+  emqAclRequest (method, proxyId, rules) {
     check(method, String);
     check(proxyId, String);
     check(rules, Array);
