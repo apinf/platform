@@ -180,9 +180,6 @@ Template.proxyBackend.helpers({
     // Return boolean value
     return !!(instance.data.proxyBackend);
   },
-  registeredProxies () {
-    return registeredProxies;
-  },
   equals (a, b) {
     return a === b;
   },
