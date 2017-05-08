@@ -11,6 +11,9 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+// Npm packages imports
+import _ from 'lodash';
+
 // Collection imports
 import ProxyBackends from '../../collection';
 
@@ -48,7 +51,7 @@ AutoForm.hooks({
                 }
 
                   // If success, attach API Umbrella backend ID to API
-                if (response.result && response.result.data && response.result.data.api) {
+                if (_.get(response, 'response.result.data.api')) {
                     // Get the API Umbrella ID for newly created backend
                   const umbrellaBackendId = response.result.data.api.id;
 
