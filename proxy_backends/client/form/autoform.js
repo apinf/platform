@@ -275,7 +275,7 @@ AutoForm.hooks({
             proxyId: proxyBackend.proxyId,
             rules: proxyBackend.emq.settings.acl,
           }, (err) => {
-            if (err) console.error(err);
+            if (err) sAlert.error(err);
           });
         }
       // Form Type - INSERT
@@ -287,7 +287,7 @@ AutoForm.hooks({
             proxyId: proxyBackend.proxyId,
             rules: proxyBackend.emq.settings.acl,
           }, (err) => {
-            if (err) console.error(err);
+            if (err) sAlert.error(err);
           });
         }
 
@@ -299,7 +299,7 @@ AutoForm.hooks({
       }
     },
     onError (formType, error) {
-      console.error(formType, error);
+      sAlert.error(error);
     },
   },
 });
