@@ -9,12 +9,16 @@ Migrations.add({
   up () {
     // Iterate through Apis collection
     Apis.find().forEach((api) => {
-      // Check if fields exist
-      if (api.documentationFileId) {
-        ApiDocs.update(api._id, {
-          $set: { type: 'file' },
-        });
-      }
+      // Iterate through ApiDocs collection
+      ApiDocs.find().forEach((apiDoc) => {
+        // Check if fields exist
+        if (api.documentationFileId === apiDoc.fileId) {
+          // perform update operation
+          ApiDocs.update(apiDoc._id, {
+            $set: { type: 'file' },
+          });
+        }
+      });
     });
   },
 });
