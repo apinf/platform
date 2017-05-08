@@ -32,7 +32,7 @@ const aclSchema = new SimpleSchema({
   topic: {
     type: String,
     autoform: {
-      placeholder: 'Topic',
+      placeholder: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.topic.label'),
     },
   },
   fromType: {
@@ -60,7 +60,7 @@ const aclSchema = new SimpleSchema({
   fromValue: {
     type: String,
     autoform: {
-      placeholder: 'Value',
+      placeholder: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.fromValue.label'),
     },
   },
 });

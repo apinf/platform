@@ -926,6 +926,9 @@
                   },
                   "topic": {
                     "label": "Topic"
+                  },
+                  "fromValue": {
+                    "label": "Value"
                   }
                 }
               }
