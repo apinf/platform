@@ -60,7 +60,7 @@ Template.apiCardPin.helpers({
     const instance = this;
     const featuredApiId = instance.api._id;
 
-    if (Organizations.find({ featuredApiIds: featuredApiId }).count() > 0) {
+    if (Organizations.findOne({ featuredApiIds: featuredApiId })) {
       // API was found
       return true;
     }
