@@ -12,11 +12,10 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Organizations from '/organizations/collection';
 
 Template.apiCardPin.events({
-  'click .pin-button': function () {
-    const instance = this;
-    const organizationId = instance.organization._id;
-    const featuredApiId = instance.api._id;
-    const featuredApiList = instance.organization.featuredApiIds;
+  'click .pin-button': function (event, templateInstance) {
+    const organizationId = templateInstance.data.organization._id;
+    const featuredApiId = templateInstance.data.api._id;
+    const featuredApiList = templateInstance.data.organization.featuredApiIds;
 
     // Check what can be done for API card in question
     if (Organizations.findOne({ featuredApiIds: featuredApiId })) {
