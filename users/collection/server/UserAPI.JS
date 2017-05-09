@@ -15,7 +15,7 @@ const UsersAPIV1 = new Restivus({
   defaultHeaders: {
     'Content-Type': 'application/json',
   },
-  useDefaultAuth: true,
+  useDefaultAuth: false,
   prettyJson: true,
   enableCors: true,
 });
@@ -28,7 +28,7 @@ UsersAPIV1.addCollection(Meteor.users);
 UsersAPIV1.addCollection(Meteor.users, {
   excludedEndpoints: ['getAll', 'put'],
   routeOptions: {
-    authRequired: true,
+    authRequired: false,
   },
   endpoints: {
     post: {
@@ -39,8 +39,7 @@ UsersAPIV1.addCollection(Meteor.users, {
     },
   },
 });
-
-  // Maps to: /api/users
+// Maps to: /api/v1/users
 UsersAPIV1.addRoute('users', { authRequired: false }, {
   get () {
     return Meteor.users.find({});
