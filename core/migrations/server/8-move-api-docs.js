@@ -10,15 +10,13 @@ Migrations.add({
     // Iterate through Apis collection
     Apis.find().forEach((api) => {
       // Iterate through ApiDocs collection
-      ApiDocs.find().forEach((apiDoc) => {
-        // Check if fields exist
-        if (api.documentationFileId === apiDoc.fileId) {
+      if (ApiDocs.findOne({ fileId: api.documentationFileId })) {
           // perform update operation
-          ApiDocs.update(apiDoc._id, {
-            $set: { type: 'file' },
+        ApiDocs.update({ apiId: api._id },
+          { $set:
+            { type: 'file' },
           });
-        }
-      });
+      }
     });
   },
 });
