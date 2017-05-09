@@ -17,6 +17,7 @@ import Feedback from '/feedback/collection';
 import OrganizationApis from '/organization_apis/collection';
 import ProxyBackends from '/proxy_backends/collection';
 import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
+import Organizations from '/organizations/collection';
 
 Meteor.methods({
   // Remove API backend and related items
@@ -61,6 +62,14 @@ Meteor.methods({
 
     // Remove linked document between APIs and connected organization
     Meteor.call('removeOrganizationApiLink', apiId);
+
+    // Get organization where API is featured
+    const organization = Organizations.findOne({ featuredApiIds: apiId });
+    // Remove API from featured APIs list, if it exists there
+    if (organization) {
+      const organizationId = organization._id;
+      Meteor.call('removeApiFromFeaturedList', organizationId, apiId);
+    }
 
     // Finally remove the API
     Apis.remove(apiId);
