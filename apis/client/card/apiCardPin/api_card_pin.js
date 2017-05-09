@@ -19,7 +19,7 @@ Template.apiCardPin.events({
     const featuredApiList = instance.organization.featuredApiIds;
 
     // Check what can be done for API card in question
-    if (Organizations.find({ featuredApiIds: featuredApiId }).count() > 0) {
+    if (Organizations.findOne({ featuredApiIds: featuredApiId })) {
       // if the API was already featured, remove it from featured list
       Organizations.update({ _id: organizationId },
         { $pull:
