@@ -7,28 +7,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Meteor contributed packages imports
-import { Restivus } from 'meteor/nimble:restivus';
-
-const UsersAPIV1 = new Restivus({
-  apiPath: 'api',
-  version: 'v1',
-  defaultHeaders: {
-    'Content-Type': 'application/json',
-  },
-  useDefaultAuth: false,
-  prettyJson: true,
-  enableCors: true,
-});
-
-
-UsersAPIV1.addCollection(Meteor.users);
+import ApiV1 from '/core/server/api';
 
 // Generates: POST on /api/users and GET, DELETE /api/users/:id for
 // Meteor.users collection
-UsersAPIV1.addCollection(Meteor.users, {
+ApiV1.addCollection(Meteor.users, {
   excludedEndpoints: ['getAll', 'put'],
   routeOptions: {
-    authRequired: false,
+    authRequired: true,
   },
   endpoints: {
     post: {
@@ -40,8 +26,19 @@ UsersAPIV1.addCollection(Meteor.users, {
   },
 });
 // Maps to: /api/v1/users
-UsersAPIV1.addRoute('users', { authRequired: false }, {
+ApiV1.addRoute('users', { authRequired: true }, {
   get () {
-    return Meteor.users.find({});
+  //  return Meteor.users.find().fetch();
+  // Init response object
+    let response = {};
+    response = {
+      statusCode: 200,
+      body: {
+        status: 'success',
+        data: [{ name: 'test' }],
+      },
+    };
+
+    return response;
   },
 });
