@@ -73,7 +73,6 @@ spiderable@1.0.14-release-testing.0
 standard-minifier-css@1.3.3
 standard-minifier-js@1.2.2
 tap:i18n
-tap:i18n-ui
 tmeasday:publish-counts
 todda00:friendly-slugs
 tracker@1.1.2
@@ -89,3 +88,7 @@ mizzao:sharejs@=0.9.0
 aramk:quill
 softwarerero:accounts-t9n
 raix:rssfeed
+dispatch:mocha
+practicalmeteor:chai
+dburles:factory
+practicalmeteor:mocha

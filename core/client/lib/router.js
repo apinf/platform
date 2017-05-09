@@ -12,21 +12,23 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
-FlowRouter.wait();
+if (Meteor.isClient) {
+  FlowRouter.wait();
 
-Tracker.autorun(() => {
-  // The Roles package actually depends on a subscription.
-  // If the subscription is not ready the Roles.userIsInRole method will always return false.
-  // That is used for checking of does user have the admin role
+  Tracker.autorun(() => {
+    // The Roles package actually depends on a subscription.
+    // If the subscription is not ready the Roles.userIsInRole method will always return false.
+    // That is used for checking of does user have the admin role
 
-  // Make sure the roles subscription is ready & FlowRouter hasn't initialized already
-  if (Roles.subscription.ready() && !FlowRouter._initialized) {
-    // Start routing
-    return FlowRouter.initialize();
-  }
-  // Otherwise nothing
-  return undefined;
-});
+    // Make sure the roles subscription is ready & FlowRouter hasn't initialized already
+    if (Roles.subscription.ready() && !FlowRouter._initialized) {
+      // Start routing
+      return FlowRouter.initialize();
+    }
+    // Otherwise nothing
+    return undefined;
+  });
+}
 
 // Define group for routes that require sign in
 const signedIn = FlowRouter.group({
@@ -84,6 +86,9 @@ const requireAdminRole = function () {
 FlowRouter.triggers.enter([redirectToCatalogue], { only: ['forgotPwd'] });
 
 // Routes that require admin role
-FlowRouter.triggers.enter([requireAdminRole], { only: ['settings', 'branding', 'proxies'] });
+FlowRouter.triggers.enter(
+  [requireAdminRole],
+  { only: ['settings', 'branding', 'proxies'] }
+);
 
 export default signedIn;
