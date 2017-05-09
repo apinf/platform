@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -16,6 +17,15 @@ import OrganizationApis from '../../../collection';
 
 Template.deleteOrganizationApiConfirmation.events({
   'click #delete-api-organization': function (event, templateInstance) {
+    // Get Organization ID from template instance
+    const organizationId = templateInstance.data.organizationApi.organizationId;
+
+    // Get API ID from template instance
+    const apiId = templateInstance.data.organizationApi.apiId;
+
+    // Remove API from featured APIs list
+    Meteor.call('removeApiFromFeaturedList', organizationId, apiId);
+
     // Get Organization API ID from template instance
     const organizationApiId = templateInstance.data.organizationApi._id;
 
