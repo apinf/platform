@@ -9,7 +9,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 class Page {
   get body () { return browser.element('body'); }
 
-  open (path='') {
+  open (path = '') {
     browser.windowHandleSize({
       width: 1280,
       height: 800,
