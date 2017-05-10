@@ -20,6 +20,10 @@ describe('sign up', () => {
       signUpPage.usernameField.isVisible().should.be.true;
     });
 
+    it('should not show username error field', () => {
+      signUpPage.usernameErrorField.isVisible().should.be.false;
+    });
+
     it('should show email field', () => {
       signUpPage.emailField.isVisible().should.be.true;
     });
@@ -41,7 +45,13 @@ describe('sign up', () => {
     });
   });
 
-
+	describe('username', () => {
+		it('should be required', () => {
+			signUpPage.submit();
+			signUpPage.usernameErrorField.isVisible().should.be.true;
+			signUpPage.usernameErrorField.getText().should.not.be.empty;
+		});
+	});
 //   describe('required fields', () => {
 //     before(() => {
 //       signUpPage.submit();

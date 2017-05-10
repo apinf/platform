@@ -17,6 +17,13 @@ class SignUpPage extends Page {
   get registerButton () { return browser.element('button#at-btn.submit'); }
   get githubButton () { return browser.element('button#at-github'); }
 
+  get errorFields () { return browser.elements('span.help-block'); }
+
+  get usernameErrorField () { this.errorFields[0] };
+  get emailErrorField () { this.errorFields[1] };
+  get passwordErrorField () { this.errorFields[2] };
+  get confirmPasswordErrorField () { this.errorFields[3] };
+
   open () {
     super.open();
     super.open('sign-up');
