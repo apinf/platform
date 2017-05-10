@@ -8,7 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import Page from './page';
 
 class SignUpPage extends Page {
-  
+
   get usernameField () { return browser.element('#at-field-username'); }
   get emailField () { return browser.element('#at-field-email'); }
   get passwordField () { return browser.element('#at-field-password'); }
@@ -19,10 +19,10 @@ class SignUpPage extends Page {
 
   get errorFields () { return browser.elements('span.help-block'); }
 
-  get usernameErrorField () { this.errorFields[0] };
-  get emailErrorField () { this.errorFields[1] };
-  get passwordErrorField () { this.errorFields[2] };
-  get confirmPasswordErrorField () { this.errorFields[3] };
+  get usernameErrorField () { return this.errorFields[0]; }
+  get emailErrorField () { return this.errorFields[1]; }
+  get passwordErrorField () { return this.errorFields[2]; }
+  get confirmPasswordErrorField () { return this.errorFields[3]; }
 
   open () {
     super.open();
