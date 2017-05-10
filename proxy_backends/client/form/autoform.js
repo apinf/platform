@@ -299,7 +299,7 @@ AutoForm.hooks({
       }
     },
     onError (formType, error) {
-      sAlert.error(error);
+      sAlert.error(error.message);
     },
   },
 });
