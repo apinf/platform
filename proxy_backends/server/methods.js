@@ -172,7 +172,7 @@ Meteor.methods({
                   return err;
                 });
             } else {
-              // If ACL Rule is does not exist on remote, then POST it
+              // If ACL Rule does not exist on remote, then POST it
               got.post(`${url}${apiPath}`, { auth, json: true, body: data })
                 .then((res1) => {
                   return res1;
