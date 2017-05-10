@@ -97,14 +97,15 @@ Organizations.helpers({
     return false;
   },
   featuredApis () {
-    // Get list of ids of APIs, which are marked as featured
-    const featuredApiList = this.featuredApiIds;
-    // Get APIs according to featured list
-    const featuredApis = Apis.find({
-      _id: { $in: featuredApiList },
-    }).fetch();
+    // Make sure organization has featured APIs
+    if (this.featuredApiIds) {
+      // Get APIs according to featured list
+      const featuredApis = Apis.find({
+        _id: { $in: this.featuredApiIds },
+      }).fetch();
 
-    return featuredApis;
+      return featuredApis;
+    }
+    return [];
   },
-
 });
