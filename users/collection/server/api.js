@@ -40,7 +40,7 @@ if (ApiV1._config.useDefaultAuth) {
           if (queryParams && !_.isEmpty(queryParams)) {
             // Check queryParams for username
             if (queryParams.username) {
-              // Fetch only APIs with given username
+              // Fetch only Users with given username
               const findByUsername = Meteor.users.find(
                 { username: queryParams.username }
               ).fetch();
