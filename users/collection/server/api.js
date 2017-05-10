@@ -3,15 +3,16 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Npm packages imports
-import _ from 'lodash';
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 
 // Collection imports
 import ApiV1 from '/core/server/api';
-// Meteor packages imports
-import { Meteor } from 'meteor/meteor';
+
+// Npm packages imports
+import _ from 'lodash';
+
 // Enable user endpoints if authentication is enabled
-// eslint-disable-next-line no-underscore-dangle
 if (ApiV1._config.useDefaultAuth) {
   // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
   // Meteor.users collection
