@@ -28,12 +28,14 @@ const aclSchema = new SimpleSchema({
       2,
       3,
     ],
+    optional: false,
   },
   topic: {
     type: String,
     autoform: {
       placeholder: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.topic.label'),
     },
+    optional: false,
   },
   fromType: {
     type: String,
@@ -56,12 +58,14 @@ const aclSchema = new SimpleSchema({
         ];
       },
     },
+    optional: false,
   },
   fromValue: {
     type: String,
     autoform: {
       placeholder: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.fromValue.label'),
     },
+    optional: false,
   },
 });
 
@@ -69,7 +73,7 @@ const aclSchema = new SimpleSchema({
 const SettingsSchema = new SimpleSchema({
   acl: {
     type: [aclSchema],
-    optional: true,
+    defaultValue: [],
   },
 });
 
@@ -77,7 +81,7 @@ const SettingsSchema = new SimpleSchema({
 const EmqSchema = new SimpleSchema({
   settings: {
     type: SettingsSchema,
-    optional: true,
+    defaultValue: {},
   },
 });
 
