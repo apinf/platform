@@ -1,0 +1,59 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+/* eslint-env mocha */
+/* eslint-disable no-unused-expressions */
+// Discover chimp-js browser
+/* globals browser */
+
+import signInPage from '../../page-objects/signin.page';
+
+describe('UI forgot password', () => {
+  before(() => {
+    signInPage.open();
+    signInPage.gotToForgotPassword();
+  });
+
+  describe('render', () => {
+    it('should show email field', () => {
+      signInPage.emailField.isVisible().should.be.true;
+    });
+
+    it('should show submit button', () => {
+      signInPage.submitButton.isVisible().should.be.true;
+      signInPage.submitButton.isEnabled().should.be.true;
+    });
+  });
+
+  describe('email', () => {
+    it('should be required', () => {
+      signInPage.submit();
+      signInPage.emailErrorField.isVisible().should.be.true;
+      signInPage.emailErrorField.getText().should.not.be.empty;
+      signInPage.submitButton.isEnabled().should.be.false;
+    });
+
+    it('it should be invalid for email without domain', () => {
+      signInPage.emailField.setValue('invalid-email');
+      signInPage.submit();
+      signInPage.emailErrorField.isVisible().should.be.true;
+      signInPage.emailErrorField.getText().should.not.be.empty;
+    });
+
+    it('it should be invalid for email with invalid domain', () => {
+      signInPage.emailField.setValue('invalid-email@mail');
+      signInPage.submit();
+      signInPage.emailErrorField.isVisible().should.be.true;
+      signInPage.emailErrorField.getText().should.not.be.empty;
+    });
+
+    it.skip('it should be invalid for email space', () => {
+      signInPage.emailField.setValue('invalid email@mail.com');
+      signInPage.submit();
+      signInPage.emailErrorField.isVisible().should.be.true;
+      signInPage.emailErrorField.getText().should.not.be.empty;
+    });
+  });
+});
