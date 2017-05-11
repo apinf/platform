@@ -45,6 +45,13 @@ ApiV1.swagger = {
       required: false,
       type: 'string',
     },
+    organization_id: {
+      name: 'organization ID',
+      in: 'query',
+      description: 'Users of known organization',
+      required: false,
+      type: 'string',
+    },
     skip: {
       name: 'skip',
       in: 'query',
@@ -64,11 +71,12 @@ ApiV1.swagger = {
       minimum: 0,
       maximum: 50,
     },
-    userName: {
-      name: 'Name',
+    sort_by: {
+      name: 'sort By',
       in: 'query',
-      description: 'Name for a new API',
-      required: true,
+      description: 'order of displaying users',
+      required: false,
+      type: 'string',
     },
   },
 };
