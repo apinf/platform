@@ -6,32 +6,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 module.exports = {
 
- 	showXolvioMessages: false,
+  showXolvioMessages: false,
 
   path: 'tests/end-to-end',
   screenshotsOnError: true,
   screenshotsPath: '.screenshots',
   captureAllStepScreenshots: false,
   saveScreenshotsToDisk: true,
-
-
-// 	// - - - - WEBDRIVER-IO  - - - -
-	webdriverio: {
-// 		desiredCapabilities: {},
- 		logLevel: 'info',
-// 		// logOutput: null,
-// 		host: '127.0.0.1',
-// 		port: 4444,
-// 		path: '/wd/hub',
-// 		baseUrl: null,
-// 		coloredLogs: true,
-// 		screenshotPath: null,
-// 		waitforTimeout: 500,
-// 		waitforInterval: 250,
-	},
-
-// 	// - - - - SESSION-MANAGER  - - - -
-// 	noSessionReuse: false,
 
 // 	// - - - - MOCHA  - - - -
   mocha: true,
@@ -49,14 +30,9 @@ module.exports = {
 
 // 	// - - - - METEOR  - - - -
   ddp: 'http://localhost:3000',
- 	serverExecuteTimeout: 10000,
+  serverExecuteTimeout: 10000,
 
 // 	// - - - - DEBUGGING  - - - -
- 	log: 'info',
- 	debug: true,
-// 	seleniumDebug: null,
-// 	debugCucumber: null,
-// 	debugBrkCucumber: null,
- 	debugMocha: true,
-// 	debugBrkMocha: null,
+	// log: 'info',
+	// debug: true,
 };
