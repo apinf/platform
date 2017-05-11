@@ -21,7 +21,11 @@ describe('sign up', () => {
     });
 
     it('should not show username error field', () => {
-      signUpPage.usernameErrorField.isVisible().should.be.false;
+      console.log("This is console.log");
+      console.log(signUpPage.errorFields);
+      console.error("This is console.error");
+      console.error(signUpPage.usernameErrorField);
+      // signUpPage.usernameErrorField.isVisible().should.be.false;
     });
 
     it('should show email field', () => {

@@ -23,6 +23,7 @@ class SignInPage extends Page {
 
   open () {
     super.open();
+    this.pause();
     super.open('sign-in');
   }
 
