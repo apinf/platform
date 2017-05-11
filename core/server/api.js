@@ -38,6 +38,38 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
+    optionalSearch: {
+      name: 'q',
+      in: 'query',
+      description: 'Pass an optional search string for looking up inventory.',
+      required: false,
+      type: 'string',
+    },
+    skip: {
+      name: 'skip',
+      in: 'query',
+      description: 'Number of records to skip for pagination.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+    },
+    limit: {
+      name: 'limit',
+      in: 'query',
+      description: 'Maximum number of records to return in query.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+      maximum: 50,
+    },
+    userName: {
+      name: 'Name',
+      in: 'query',
+      description: 'Name for a new API',
+      required: true,
+    },
   },
 };
 
