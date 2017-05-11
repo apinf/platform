@@ -28,17 +28,104 @@ ApiV1.swagger = {
       version: '1.0.0',
       title: 'Admin API',
     },
+    securityDefinitions: {
+      userSecurityToken: {
+        in: 'header',
+        name: 'X-Auth-Token',
+        type: 'apiKey',
+      },
+      userId: {
+        in: 'header',
+        name: 'X-User-Id',
+        type: 'apiKey',
+      },
+    },
   },
   tags: {
-    apis: 'Apis',
+    api: 'APIs',
   },
   params: {
     apiId: {
       name: 'id',
       in: 'path',
-      description: 'Api ID',
+      description: 'Pass ID of the API',
       required: true,
       type: 'string',
+    },
+    optionalSearch: {
+      name: 'q',
+      in: 'query',
+      description: 'Pass an optional search string for looking up inventory.',
+      required: false,
+      type: 'string',
+    },
+    organization: {
+      name: 'organization',
+      in: 'query',
+      description: 'Pass an optional organization id. ' +
+      'Parameter will limit results to the given organization.',
+      required: false,
+      type: 'string',
+    },
+    skip: {
+      name: 'skip',
+      in: 'query',
+      description: 'Number of records to skip for pagination.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+    },
+    limit: {
+      name: 'limit',
+      in: 'query',
+      description: 'Maximum number of records to return in query.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+      maximum: 50,
+    },
+    lifecycle: {
+      name: 'lifecycle',
+      in: 'query',
+      description: 'Limit the listing based on lifecycle status of APIs.',
+      required: false,
+      type: 'string',
+      enum: ['design', 'development', 'testing', 'production', 'deprecated'],
+    },
+    api: {
+      name: 'api',
+      in: 'body',
+      description: 'Data for adding or editing API',
+      schema: {
+        $ref: '#/definitions/api',
+      },
+    },
+  },
+  definitions: {
+    // The schema defining the type used for the body parameter.
+    api: {
+      required: ['name', 'url'],
+      properties: {
+        name: {
+          type: 'string',
+          example: 'My REST API',
+        },
+        description: {
+          type: 'string',
+          example: 'My REST API description',
+        },
+        url: {
+          type: 'string',
+          format: 'url',
+          example: 'https://my.rest.api.com/v1',
+        },
+        lifecycleStatus: {
+          type: 'string',
+          enum: ['design', 'development', 'testing', 'production', 'deprecated'],
+        },
+      },
     },
   },
 };
