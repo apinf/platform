@@ -52,6 +52,19 @@ if (ApiV1._config.useDefaultAuth) {
                   data: findByUsername,
                 },
               };
+            } else if (queryParams.sort_by) {
+              // Fetch Users and sort by username
+              const findByUsername = Meteor.users.find(
+                { }, { sort: { username: -1 } }
+              ).fetch();
+              // Construct response
+              response = {
+                statusCode: 200,
+                body: {
+                  status: 'success',
+                  data: findByUsername,
+                },
+              };
             } else {
               // Error: bad query params
               response = {
