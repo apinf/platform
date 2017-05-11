@@ -30,30 +30,10 @@ class SignUpPage extends Page {
     super.open('sign-up');
   }
 
-  // registerNewUser ({ username, email, password }) {
-  //   this.nameField.waitForVisible(5000);
-  //   this.nameField.setValue(username);
-  //   this.emailField.setValue(email);
-  //   this.passwordField.setValue(password);
-  //   this.confirmPasswordField.setValue(password);
-
-  //   this.submit();
-  // }
-
-  // registerNewAdmin ({ adminUsername, adminEmail, adminPassword }) {
-  //   this.nameField.waitForVisible(5000);
-  //   this.nameField.setValue(adminUsername);
-  //   this.emailField.setValue(adminEmail);
-  //   this.passwordField.setValue(adminPassword);
-  //   this.confirmPasswordField.setValue(adminPassword);
-
-  //   this.submit();
-  // }
-
-  // gotToRegister () {
-  //   this.registerButton.waitForVisible(5000);
-  //   this.registerButton.click();
-  // }
+  submit () {
+    this.registerButton.waitForVisible(5000);
+    this.registerButton.click();
+  }
 }
 
 module.exports = new SignUpPage();

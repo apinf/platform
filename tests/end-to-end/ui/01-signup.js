@@ -21,23 +21,31 @@ describe('UI sign up', () => {
     });
 
     it('should not show username error field', () => {
-      console.log("This is console.log");
-      console.log(signUpPage.errorFields);
-      console.error("This is console.error");
-      console.error(signUpPage.usernameErrorField);
-      // signUpPage.usernameErrorField.isVisible().should.be.false;
+      signUpPage.usernameErrorField.isVisible().should.be.false;
     });
 
     it('should show email field', () => {
       signUpPage.emailField.isVisible().should.be.true;
     });
 
+    it('should not show email error field', () => {
+      signUpPage.emailErrorField.isVisible().should.be.false;
+    });
+
     it('should show password field', () => {
       signUpPage.passwordField.isVisible().should.be.true;
     });
 
+    it('should not show password error field', () => {
+      signUpPage.passwordErrorField.isVisible().should.be.false;
+    });
+
     it('should show confirm password field', () => {
       signUpPage.confirmPasswordField.isVisible().should.be.true;
+    });
+
+    it('should not show confirmPassword error field', () => {
+      signUpPage.confirmPasswordErrorField.isVisible().should.be.false;
     });
 
     it('should show github button', () => {
@@ -56,15 +64,57 @@ describe('UI sign up', () => {
       signUpPage.usernameErrorField.getText().should.not.be.empty;
     });
   });
-//   describe('required fields', () => {
-//     before(() => {
-//       signUpPage.submit();
-//     });
 
-//     describe('email / username and password', () => {
-//       it('should be required', () => {
-//         signUpPage.errorAlert.isVisible().should.be.true;
-//       });
-//     });
-//   });
+  describe('email', () => {
+    it('should be required', () => {
+      signUpPage.submit();
+      signUpPage.emailErrorField.isVisible().should.be.true;
+      signUpPage.emailErrorField.getText().should.not.be.empty;
+    });
+
+    it('it should be invalid for email without domain', () => {
+      signUpPage.emailField.setValue('invalid-email');
+      signUpPage.submit();
+      signUpPage.emailErrorField.isVisible().should.be.true;
+      signUpPage.emailErrorField.getText().should.not.be.empty;
+    });
+
+    it('it should be invalid for email with invalid domain', () => {
+      signUpPage.emailField.setValue('invalid-email@mail');
+      signUpPage.submit();
+      signUpPage.emailErrorField.isVisible().should.be.true;
+      signUpPage.emailErrorField.getText().should.not.be.empty;
+    });
+
+    it.skip('it should be invalid for email space', () => {
+      signUpPage.emailField.setValue('invalid email@mail.com');
+      signUpPage.submit();
+      signUpPage.emailErrorField.isVisible().should.be.true;
+      signUpPage.emailErrorField.getText().should.not.be.empty;
+    });
+  });
+
+  describe('password', () => {
+    it('should be required', () => {
+      signUpPage.submit();
+      signUpPage.passwordErrorField.isVisible().should.be.true;
+      signUpPage.passwordErrorField.getText().should.not.be.empty;
+    });
+  });
+
+  describe('confirm-password', () => {
+    it('it should be invalid if different from password', () => {
+      signUpPage.passwordField.setValue('password');
+      signUpPage.submit();
+      signUpPage.confirmPasswordErrorField.isVisible().should.be.true;
+      signUpPage.confirmPasswordErrorField.getText().should.not.be.empty;
+    });
+
+    it('it should be valid if equal to password', () => {
+      signUpPage.confirmPasswordField.setValue('password');
+      signUpPage.submit();
+      signUpPage.confirmPasswordErrorField.isVisible().should.be.true;
+      signUpPage.confirmPasswordErrorField.getText().should.not.be.empty;
+    });
+  });
 });
