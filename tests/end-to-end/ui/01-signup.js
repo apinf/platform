@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 import signUpPage from '../../page-objects/signup.page';
 
-describe('sign up', () => {
+describe('UI sign up', () => {
   before(() => {
     signUpPage.open();
   });
