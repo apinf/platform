@@ -19,6 +19,11 @@ class SignInPage extends Page {
   get forgotPasswordLink () { return browser.element('#at-forgotPwd'); }
   get resendVerificationEmailLink () { return browser.element('#at-resend-verification-email'); }
 
+  // This field is only present after clicking on forgot password link
+  get emailField () { return browser.element('#at-field-email'); }
+  // This field is only present after clicking on forgot password link
+  get emailErrorField () { return browser.element('.help-block'); }
+
   get errorAlert () { return browser.element('.at-error'); }
 
   open () {
