@@ -20,7 +20,7 @@ class Page {
     this.body.waitForExist();
   }
 
-  pause(miliseconds = 5000) {
+  pause (miliseconds = 5000) {
     browser.pause(miliseconds);
   }
 }
