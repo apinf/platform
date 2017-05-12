@@ -30,6 +30,16 @@ class SignUpPage extends Page {
     super.open('sign-up');
   }
 
+  registerNewUser ({ username, email, password }) {
+    this.usernameField.waitForVisible(5000);
+    this.usernameField.setValue(username);
+    this.emailField.setValue(email);
+    this.passwordField.setValue(password);
+    this.confirmPasswordField.setValue(password);
+
+    this.submit();
+  }
+
   submit () {
     this.registerButton.waitForVisible(5000);
     this.registerButton.click();
