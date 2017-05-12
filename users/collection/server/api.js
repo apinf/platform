@@ -47,6 +47,7 @@ if (ApiV1._config.useDefaultAuth) {
 
           const query = {};
           const options = {};
+          const searchCondition = {};
           // Handle query params
           if (queryParams && !_.isEmpty(queryParams)) {
             // parse query parameters
@@ -69,15 +70,19 @@ if (ApiV1._config.useDefaultAuth) {
               options.skip = parseInt(queryParams.skip, 10);
             }
 
-            if (queryParams.sort_by &&
-                (queryParams.sort_by === 'username' ||
-                 queryParams.sort_by === 'created_at' ||
-                 queryParams.sort_by === 'updated_at' ||
-                 queryParams.sort_by === 'organization'
-                )
-               ) {
-              options.sortBy = queryParams.sort_by;
-              options.sortDirection = 'ascending';
+            if (queryParams.sort_by === 'username') {
+              searchCondition.username = 1;
+              options.sort = searchCondition;
+            }
+
+            if (queryParams.sort_by === 'created_at') {
+              searchCondition.createdAt = 1;
+              options.sort = searchCondition;
+            }
+
+            if (queryParams.sort_by === 'updated_at') {
+              searchCondition.updatedAt = 1;
+              options.sort = searchCondition;
             }
 
             // Pass an optional search string for looking up inventory.
