@@ -57,7 +57,7 @@ if (ApiV1._config.useDefaultAuth) {
               // Make sure Organization exists
               if (organization) {
                 // Get list of managed API IDs
-                query._id = { $in: organization.managerIds() };
+                query._id = { $in: organization.managerIds };
               }
             }
 
