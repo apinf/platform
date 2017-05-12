@@ -18,7 +18,14 @@ import OrganizationApis from '/organization_apis/collection';
 import Organizations from '../';
 
 Meteor.publish('allOrganizationBasicDetails', () => {
-  return Organizations.find({});
+  return Organizations.find({}, {
+    fields: {
+      _id: 1,
+      name: 1,
+      description: 1,
+      contact: 1,
+    },
+  });
 });
 
 // Publish collection for pagination
