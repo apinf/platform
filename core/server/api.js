@@ -10,7 +10,7 @@ import { Meteor } from 'meteor/meteor';
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
-  apiPath: 'apinf-rest',
+  apiPath: 'rest',
   version: 'v1',
   defaultHeaders: {
     'Content-Type': 'application/json',
@@ -48,22 +48,21 @@ ApiV1.swagger = {
     apiId: {
       name: 'id',
       in: 'path',
-      description: 'Pass ID of the API',
+      description: 'ID of API',
       required: true,
       type: 'string',
     },
     optionalSearch: {
       name: 'q',
       in: 'query',
-      description: 'Pass an optional search string for looking up inventory.',
+      description: 'An optional search string for looking up inventory.',
       required: false,
       type: 'string',
     },
     organization: {
       name: 'organization',
       in: 'query',
-      description: 'Pass an optional organization id. ' +
-      'Parameter will limit results to the given organization.',
+      description: 'An optional organization id will limit results to the given organization.',
       required: false,
       type: 'string',
     },
@@ -139,7 +138,7 @@ if (ApiV1._config.useDefaultAuth) {
       authRequired: true,
     },
     endpoints: {
-      // GET /apinf-rest/v1/users/:id
+      // GET /rest/v1/users/:id
       get: {
         swagger: {
           description: 'Returns user with given ID.',
@@ -150,7 +149,7 @@ if (ApiV1._config.useDefaultAuth) {
           },
         },
       },
-      // POST /apinf-rest/v1/users/
+      // POST /rest/v1/users/
       post: {
         authRequired: false,
         swagger: {
@@ -162,7 +161,7 @@ if (ApiV1._config.useDefaultAuth) {
           },
         },
       },
-      // DELETE /apinf-rest/v1/users/:id
+      // DELETE /rest/v1/users/:id
       delete: {
         roleRequired: 'admin',
         swagger: {
@@ -178,7 +177,7 @@ if (ApiV1._config.useDefaultAuth) {
   });
 }
 
-// Generate Swagger to route /apinf-rest/v1/swagger.json
+// Generate Swagger to route /rest/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
 
 export default ApiV1;

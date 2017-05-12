@@ -3,12 +3,15 @@
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
 // Collection imports
 import Apis from '/apis/collection';
 import ApiV1 from '/core/server/api';
 import Organizations from '/organizations/collection';
 
-// Request /apinf-rest/v1/apis for Apis collection
+// Request /rest/v1/apis for Apis collection
 ApiV1.addCollection(Apis, {
   routeOptions: {
     authRequired: false,
@@ -20,7 +23,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        description: 'List and search APIs.',
+        description: 'List and search public APIs.',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
           ApiV1.swagger.params.organization,
@@ -30,7 +33,7 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            description: 'Returns list of APIs',
+            description: 'Returns list of public APIs',
           },
           400: {
             description: 'Bad query parameters',
@@ -103,16 +106,16 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        description: 'Returns result is one or zero (no match found) APIs',
+        description: 'Returns one API with specified ID or nothing if there is not match found',
         parameters: [
           ApiV1.swagger.params.apiId,
         ],
         responses: {
           200: {
-            description: 'Returns API entity',
+            description: 'Returns API',
           },
           404: {
-            description: 'Bad parameters',
+            description: 'Bad parameter',
           },
         },
       },
@@ -123,13 +126,13 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        description: 'Adds an API to catalog. On success methods return added object with details.',
+        description: 'Adds an API to catalog. On success, returns newly added API object.',
         parameters: [
           ApiV1.swagger.params.api,
         ],
         responses: {
           200: {
-            description: 'API was successful added',
+            description: 'API successfully added',
           },
           401: {
             description: 'Authentication is required',
@@ -143,8 +146,7 @@ ApiV1.addCollection(Apis, {
         ],
       },
     },
-    // Partially modify the entity with the given :id with the data contained in the request body.
-    // Only fields included will be modified.
+    // Modify the entity with the given :id with the data contained in the request body.
     put: {
       authRequired: true,
       // manager role is required. If a user already has an API then the user has manager role
@@ -153,20 +155,23 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        description: 'This is a post route to post things. Updates API to the system.',
+        description: 'Update an API',
         parameters: [
           ApiV1.swagger.params.apiId,
           ApiV1.swagger.params.api,
         ],
         responses: {
           200: {
-            description: 'API was successful edited.',
+            description: 'API successfully edited.',
           },
           401: {
             description: 'Authentication is required',
           },
+          403: {
+            description: 'User does not have permission',
+          },
           404: {
-            description: 'API is not found with specified ID',
+            description: 'API is not found',
           },
         },
         security: [
@@ -181,26 +186,39 @@ ApiV1.addCollection(Apis, {
         const bodyParams = this.bodyParams;
         // Get ID of API
         const apiId = this.urlParams.id;
+        const userId = this.userId;
         const api = Apis.findOne(apiId);
 
-        // Make sure API exists
-        if (api) {
+        // Make sure API exists & user can manage
+        if (api && api.managerIds.indexOf(userId) > 0) {
           // Update API document
           Apis.update(apiId, { $set: bodyParams });
 
           return {
             statusCode: 200,
             body: {
-              status: 'Success updating 12345',
+              status: 'Success updating',
               data: Apis.findOne(apiId),
             },
           };
         }
 
+        // Make sure API exists but user can not manage
+        if (api && api.managerIds.indexOf(userId) === -1) {
+          return {
+            statusCode: 403,
+            body: {
+              status: 'Fail',
+              message: 'You do not have permission for editing this API',
+            },
+          };
+        }
+
+        // API doesn't exist
         return {
           statusCode: 404,
           body: {
-            status: 'fail',
+            status: 'Fail',
             message: 'API is not found with specified ID',
           },
         };
@@ -220,10 +238,16 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            description: 'API was successful removed.',
+            description: 'API successfully removed.',
           },
           401: {
             description: 'Authentication is required',
+          },
+          403: {
+            description: 'User does not have permission',
+          },
+          404: {
+            description: 'API is not found',
           },
         },
         security: [
@@ -232,6 +256,48 @@ ApiV1.addCollection(Apis, {
             userId: [],
           },
         ],
+      },
+      action () {
+        // Get ID of API
+        const apiId = this.urlParams.id;
+        // Get User ID
+        const userId = this.userId;
+        // Get API document
+        const api = Apis.findOne(apiId);
+
+        // Make sure API exists & user can manage
+        if (api && api.managerIds.indexOf(userId) > 0) {
+          // Remove API document
+          Meteor.call('removeApi', api._id);
+
+          return {
+            statusCode: 200,
+            body: {
+              status: 'Api successfully removed',
+              data: Apis.findOne(apiId),
+            },
+          };
+        }
+
+        // Make sure API exists but user can not manage
+        if (api && api.managerIds.indexOf(userId) === -1) {
+          return {
+            statusCode: 403,
+            body: {
+              status: 'Fail',
+              message: 'You do not have permission for removing this API',
+            },
+          };
+        }
+
+        // API doesn't exist
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'API is not found with specified ID',
+          },
+        };
       },
     },
   },
