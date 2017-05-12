@@ -95,7 +95,7 @@ if (ApiV1._config.useDefaultAuth) {
                   },
                 },
                 {
-                  emails: {
+                  'emails.address': {
                     $regex: queryParams.q,
                     $options: 'i', // case-insensitive option
                   },
