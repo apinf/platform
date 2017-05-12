@@ -12,7 +12,7 @@ const Organizations = new Mongo.Collection('Organizations');
 // Default public fields
 Organizations.publicFields = {
   _id: 1,
-  apisPerPage: 1,
+  createdAt: 1,
   contact: 1,
   description: 1,
   managerIds: 1,
