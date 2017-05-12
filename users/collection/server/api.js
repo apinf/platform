@@ -10,9 +10,6 @@ import { Meteor } from 'meteor/meteor';
 import ApiV1 from '/core/server/api';
 import Organizations from '/organizations/collection';
 
-// Npm packages imports
-import _ from 'lodash';
-
 // Enable user endpoints if authentication is enabled
 if (ApiV1._config.useDefaultAuth) {
   // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
@@ -48,81 +45,76 @@ if (ApiV1._config.useDefaultAuth) {
           const query = {};
           const options = {};
           const searchCondition = {};
-          // Handle query params
-          if (queryParams && !_.isEmpty(queryParams)) {
-            // parse query parameters
-            if (queryParams.organization_id) {
-              // Get organization document with specified ID
-              const organization = Organizations.findOne(queryParams.organization_id);
 
-              // Make sure Organization exists
-              if (organization) {
-                // Get list of managed API IDs
-                query._id = { $in: organization.managerIds };
-              }
+          // parse query parameters
+          if (queryParams.organization_id) {
+            // Get organization document with specified ID
+            const organization = Organizations.findOne(queryParams.organization_id);
+
+            // Make sure Organization exists
+            if (organization) {
+              // Get list of managed API IDs
+              query._id = { $in: organization.managerIds };
             }
+          }
 
-            if (queryParams.limit) {
-              options.limit = parseInt(queryParams.limit, 10);
-            }
+          if (queryParams.limit) {
+            options.limit = parseInt(queryParams.limit, 10);
+          } else {
+            // By default 100 users is returned
+            options.limit = 100;
+          }
 
-            if (queryParams.skip) {
-              options.skip = parseInt(queryParams.skip, 10);
-            }
+          if (queryParams.skip) {
+            options.skip = parseInt(queryParams.skip, 10);
+          }
 
-            if (queryParams.sort_by === 'username') {
-              searchCondition.username = 1;
-              options.sort = searchCondition;
-            }
+          // By default users are sorted by username
+          if (!queryParams.sort_by ||
+              queryParams.sort_by === 'username') {
+            searchCondition.username = 1;
+            options.sort = searchCondition;
+          }
 
-            if (queryParams.sort_by === 'created_at') {
-              searchCondition.createdAt = 1;
-              options.sort = searchCondition;
-            }
+          if (queryParams.sort_by === 'created_at') {
+            searchCondition.createdAt = 1;
+            options.sort = searchCondition;
+          }
 
-            if (queryParams.sort_by === 'updated_at') {
-              searchCondition.updatedAt = 1;
-              options.sort = searchCondition;
-            }
+          if (queryParams.sort_by === 'updated_at') {
+            searchCondition.updatedAt = 1;
+            options.sort = searchCondition;
+          }
 
-            // Pass an optional search string for looking up inventory.
-            if (queryParams.q) {
-              query.$or = [
-                {
-                  username: {
-                    $regex: queryParams.q,
-                    $options: 'i', // case-insensitive option
-                  },
+          // Pass an optional search string for looking up inventory.
+          if (queryParams.q) {
+            query.$or = [
+              {
+                username: {
+                  $regex: queryParams.q,
+                  $options: 'i', // case-insensitive option
                 },
-                {
-                  'profile.company': {
-                    $regex: queryParams.q,
-                    $options: 'i', // case-insensitive option
-                  },
-                },
-                {
-                  'emails.address': {
-                    $regex: queryParams.q,
-                    $options: 'i', // case-insensitive option
-                  },
-                },
-              ];
-            }
-            // Construct response
-            return {
-              statusCode: 200,
-              body: {
-                status: 'success',
-                data: Meteor.users.find(query, options).fetch(),
               },
-            };
+              {
+                'profile.company': {
+                  $regex: queryParams.q,
+                  $options: 'i', // case-insensitive option
+                },
+              },
+              {
+                'emails.address': {
+                  $regex: queryParams.q,
+                  $options: 'i', // case-insensitive option
+                },
+              },
+            ];
           }
           // Construct response
           return {
             statusCode: 200,
             body: {
               status: 'success',
-              data: Meteor.users.find().fetch(),
+              data: Meteor.users.find(query, options).fetch(),
             },
           };
         },
