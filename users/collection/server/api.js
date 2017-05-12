@@ -77,6 +77,7 @@ if (ApiV1._config.useDefaultAuth) {
                 )
                ) {
               options.sortBy = queryParams.sort_by;
+              options.sortDirection = 'ascending';
             }
 
             // Pass an optional search string for looking up inventory.
@@ -89,7 +90,7 @@ if (ApiV1._config.useDefaultAuth) {
                   },
                 },
                 {
-                  profile: {
+                  'profile.company': {
                     $regex: queryParams.q,
                     $options: 'i', // case-insensitive option
                   },
@@ -102,6 +103,8 @@ if (ApiV1._config.useDefaultAuth) {
                 },
               ];
             }
+            console.log('options.sortBy', options.sortBy);
+            console.log('query', query);
             // Construct response
             return {
               statusCode: 200,
