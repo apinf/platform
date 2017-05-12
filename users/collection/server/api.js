@@ -103,8 +103,6 @@ if (ApiV1._config.useDefaultAuth) {
                 },
               ];
             }
-            console.log('options.sortBy', options.sortBy);
-            console.log('query', query);
             // Construct response
             return {
               statusCode: 200,
