@@ -31,13 +31,6 @@ ApiV1.swagger = {
     apis: 'Apis',
   },
   params: {
-    apiId: {
-      name: 'id',
-      in: 'path',
-      description: 'Api ID',
-      required: true,
-      type: 'string',
-    },
     optionalSearch: {
       name: 'q',
       in: 'query',
