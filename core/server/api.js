@@ -41,7 +41,7 @@ ApiV1.swagger = {
     organization_id: {
       name: 'organization ID',
       in: 'query',
-      description: 'Users of known organization',
+      description: 'Users of indicated organization',
       required: false,
       type: 'string',
     },
@@ -67,7 +67,7 @@ ApiV1.swagger = {
     sort_by: {
       name: 'sort By',
       in: 'query',
-      description: 'order of displaying users',
+      description: 'determines how to sort returned results',
       required: false,
       type: 'string',
     },
