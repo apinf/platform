@@ -3,14 +3,17 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-.settings-fields {
-  margin-bottom: 20px;
-  .checkbox {
-    margin: 0;
-  }
+@import "/core/client/style/bootstrap-variables.less";
+
+.pin-default {
+  color: @gray-light !important;
 }
 
-[data-toggle="popover"] {
-  float: right;
-  margin-right: 5px;
+.pin {
+  cursor: pointer;
+}
+
+.pinned {
+  cursor: pointer;
+  color: @gray-base  !important;
 }

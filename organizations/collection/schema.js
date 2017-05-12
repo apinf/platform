@@ -166,6 +166,13 @@ Organizations.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  featuredApiIds: {
+    type: [String],
+    optional: true,
+    defaultValue: [],
+    maxCount: 4,
+  },
+
 });
 
 // Enable translations (i18n)
