@@ -74,6 +74,7 @@ const SettingsSchema = new SimpleSchema({
   acl: {
     type: [aclSchema],
     defaultValue: [],
+    optional: true,
   },
 });
 
