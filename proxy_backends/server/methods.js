@@ -21,34 +21,41 @@ Meteor.methods({
     // Make sure proxyBackend is an Object
     check(proxyBackend, Object);
 
-    // Get umbrellaBackendId
-    const umbrellaBackendId = proxyBackend.apiUmbrella.id;
+    // Check what proxy type is selected
+    if (proxyBackend.type === 'emq') {
+      // TODO: remove proxy from EMQ
+      // Delete proxyBackend from Apinf
+      ProxyBackends.remove(proxyBackend._id);
+    } else if (proxyBackend.type === 'apiUmbrella') {
+      // Get umbrellaBackendId
+      const umbrellaBackendId = proxyBackend.apiUmbrella.id;
 
-    // Delete API Backend on API Umbrella
-    Meteor.call(
-      'deleteApiBackendOnApiUmbrella',
-      umbrellaBackendId, proxyBackend.proxyId,
-      (deleteError) => {
-        if (deleteError) {
-          throw new Meteor.Error('delete-error');
-        } else {
-          // Publish changes for deleted API Backend on API Umbrella
-          Meteor.call(
-            'publishApiBackendOnApiUmbrella',
-            umbrellaBackendId, proxyBackend.proxyId,
-            (publishError) => {
-              if (publishError) {
-                throw new Meteor.Error('publish-error');
-              } else if (deleteFromMongoDB && proxyBackend._id) {
-                // Check: delete from MongoDB and proxyBackend has _id
-                // Delete proxyBackend from Apinf
-                ProxyBackends.remove(proxyBackend._id);
+      // Delete API Backend on API Umbrella
+      Meteor.call(
+        'deleteApiBackendOnApiUmbrella',
+        umbrellaBackendId, proxyBackend.proxyId,
+        (deleteError) => {
+          if (deleteError) {
+            throw new Meteor.Error('delete-error');
+          } else {
+            // Publish changes for deleted API Backend on API Umbrella
+            Meteor.call(
+              'publishApiBackendOnApiUmbrella',
+              umbrellaBackendId, proxyBackend.proxyId,
+              (publishError) => {
+                if (publishError) {
+                  throw new Meteor.Error('publish-error');
+                } else if (deleteFromMongoDB && proxyBackend._id) {
+                  // Check: delete from MongoDB and proxyBackend has _id
+                  // Delete proxyBackend from Apinf
+                  ProxyBackends.remove(proxyBackend._id);
+                }
               }
-            }
-          );
+            );
+          }
         }
-      }
-    );
+      );
+    }
   },
   uniqueFrontendPrefix (proxyBackend) {
     // Make sure proxyBackend is an Object

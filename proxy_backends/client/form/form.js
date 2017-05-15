@@ -19,8 +19,6 @@ import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 import deleteProxyBackendConfig from '/proxy_backends/client/methods/delete_proxy_backend';
 
-import registeredProxies from '../../../proxies/collection/registered_proxies';
-
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();
 
@@ -199,8 +197,8 @@ Template.proxyBackend.events({
     // Get proxyBackend from template data
     const proxyBackend = instance.data.proxyBackend;
 
-    // Check proxyBackend exists, type is apiUmbrella, and it has id
-    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.id) {
+    // Check if there is proxy backend with certain type
+    if (proxyBackend.type === 'emq' || proxyBackend.type === 'apiUmbrella') {
       // Call deleteProxyBackend
       deleteProxyBackendConfig(proxyBackend);
     }
