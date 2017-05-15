@@ -29,7 +29,4 @@ export default codeGeneratorSchema = new SimpleSchema({
   documentationFileURL: {
     type: String,
   },
-  urlParameters: {
-    type: String,
-  },
 });
