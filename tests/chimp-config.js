@@ -20,7 +20,7 @@ module.exports = {
   mochaConfig: {
 		// tags and grep only work when watch mode is false
     tags: '',
-    grep: null,
+    grep: '99',
     timeout: 80000,
     reporter: 'spec',
     slow: 100,
