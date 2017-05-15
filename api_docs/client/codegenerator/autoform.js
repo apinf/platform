@@ -21,14 +21,8 @@ AutoForm.addHooks('downloadSDK', {
     // Get selected language from dropdown list
     const selectedLanguage = formValues.selectLanguage;
 
-    // Get index of selected language in global list of languages
-    const index = _.indexOf(instance.languageList, selectedLanguage);
-
-    // Find mask of the language for url
-    const parameter = instance.urlParameters[index];
-
     // Get host of code generator server
-    let host = instance.codegenServer;
+    let host = formValues.host;
 
     // Delete last forward slash if it exists
     if (_.endsWith(host, '/')) {
@@ -36,14 +30,12 @@ AutoForm.addHooks('downloadSDK', {
     }
 
     // Create URL to send request
-    const url = `${host}/api/gen/clients/${parameter}`;
+    const url = `${host}/api/gen/clients/${selectedLanguage}`;
 
-    // Get path to documentation file
-    const pathToFile = instance.documentationFileURL;
 
-    // Create POST options
+    // Create POST options with swagger file URL
     const options = {
-      swaggerUrl: pathToFile,
+      swaggerUrl: formValues.documentationFileURL,
     };
 
     // Start spinner when send request
