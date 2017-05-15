@@ -16,20 +16,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </h1>
       </div>
       <div class="modal-body">
-        {{# if dataFetched }}
-
-          {{> quickForm
-            id="downloadSDK"
-            schema=codeGeneratorSchema
-            doc=getTemplateInstance
-            buttonContent=buttonText }}
-        {{ else }}
-          {{> spinner }}
-         {{/ if }}
-
-      {{# if statusRequest }}
-        {{> spinner }}
-      {{/ if }}
+        {{> quickForm
+          id="downloadSDK"
+          schema=codeGeneratorSchema
+          doc=getTemplateInstance
+          buttonContent=buttonText }}
       </div>
     </div>
   </div>
