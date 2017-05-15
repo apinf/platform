@@ -15,8 +15,11 @@ import _ from 'lodash';
 
 AutoForm.addHooks('downloadSDK', {
   onSubmit (formValues, updateDoc, instance) {
+    // Get reference to form
+    const form = this;
+
     // Prevent form from submitting
-    this.event.preventDefault();
+    form.event.preventDefault();
 
     // Get selected language from dropdown list
     const selectedLanguage = formValues.selectLanguage;
@@ -38,9 +41,6 @@ AutoForm.addHooks('downloadSDK', {
       swaggerUrl: formValues.documentationFileURL,
     };
 
-    // Start spinner when send request
-    instance.callRequest.set(true);
-
     // Send POST request
     HTTP.post(url, { data: options }, (error, result) => {
       // If url is incorrect
@@ -50,29 +50,35 @@ AutoForm.addHooks('downloadSDK', {
 
         // Alert user of error
         sAlert.error(message);
-      } else {
+
+        form.done(new Error(message));
+      } else if (error) {
+        // Alert user of error
+        sAlert.error(error.message);
+
+        form.done(new Error(error.message));
+      } else if (result.statusCode === 200) {
+        console.log('result 200');
+
         // Get information from Swagger API response
         const response = JSON.parse(result.content);
 
-        if (result.statusCode === 200) {
           // Hide modal
-          Modal.hide('sdkCodeGeneratorModal');
+        Modal.hide('sdkCodeGeneratorModal');
 
           // Go to link and download file
-          window.location.href = response.link;
-        } else {
+        window.location.href = response.link;
+      } else {
           // Otherwise show an error message
 
           // Get error message translation
-          const message = TAPi18n.__('sdkCodeGeneratorModal_errorText');
+        const message = TAPi18n.__('sdkCodeGeneratorModal_errorText');
 
           // Alert user of error
-          sAlert.error(message);
-        }
+        sAlert.error(message);
+
+        form.done(new Error(message));
       }
-      $('button').removeAttr('disabled');
-      // Finish spinner
-      instance.callRequest.set(false);
     });
   },
 });
