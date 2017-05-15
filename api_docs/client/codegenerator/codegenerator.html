@@ -22,7 +22,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> afQuickField name='host' value=host }}
             {{> afQuickField name='documentationFileURL' value=api.documentation }}
           </fieldset>
-          <button type="submit" class="btn btn-primary">{{ buttonText }}</button>
+          <button type="submit" class="btn btn-primary">
+            {{_ sdkCodeGeneratorModal_buttonText_download }}
+          </button>
         {{/autoForm}}
 
 
