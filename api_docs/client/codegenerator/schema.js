@@ -23,4 +23,16 @@ export default codeGeneratorSchema = new SimpleSchema({
       },
     },
   },
+  codegenServer: {
+    type: String,
+  },
+  callRequest: {
+    type: String,
+  },
+  documentationFileURL: {
+    type: String,
+  },
+  urlParameters: {
+    type: String,
+  },
 });
