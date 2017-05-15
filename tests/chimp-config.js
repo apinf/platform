@@ -14,25 +14,22 @@ module.exports = {
   captureAllStepScreenshots: false,
   saveScreenshotsToDisk: true,
 
-// 	// - - - - MOCHA  - - - -
   mocha: true,
   mochaCommandLineOptions: ['--color'],
   mochaConfig: {
-		// tags and grep only work when watch mode is false
     tags: '',
-    grep: '99',
+    grep: '', // Change to '99 debug' to debug tests in 99-debug.js
     timeout: 80000,
     reporter: 'spec',
     slow: 100,
-		// retries: 3,
     bail: true, // bail after first test failure
   },
 
-// 	// - - - - METEOR  - - - -
   ddp: 'http://localhost:3000',
   serverExecuteTimeout: 10000,
 
-// 	// - - - - DEBUGGING  - - - -
+ 	// - - - - DEBUGGING  - - - -
+  // Uncomment 2 lines below to print everything
 	// log: 'info',
 	// debug: true,
 };
