@@ -26,9 +26,6 @@ export default codeGeneratorSchema = new SimpleSchema({
   host: {
     type: String,
   },
-  callRequest: {
-    type: String,
-  },
   documentationFileURL: {
     type: String,
   },
