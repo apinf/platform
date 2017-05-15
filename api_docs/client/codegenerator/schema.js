@@ -23,7 +23,7 @@ export default codeGeneratorSchema = new SimpleSchema({
       },
     },
   },
-  codegenServer: {
+  host: {
     type: String,
   },
   callRequest: {
