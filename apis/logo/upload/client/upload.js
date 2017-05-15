@@ -15,20 +15,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Apis from '/apis/collection';
 import ApiLogo from '../../collection';
 
-Template.uploadApiLogo.onCreated(function () {
-  const instance = this;
-
-  instance.autorun(() => {
-    // Get Logo ID of current API using reactive way
-    const apiLogoFileId = Template.currentData().api.apiLogoFileId;
-
-    if (apiLogoFileId) {
-      // Subscribe to current API logo
-      instance.subscribe('currentApiLogo', apiLogoFileId);
-    }
-  });
-});
-
 Template.uploadApiLogo.events({
   'click .delete-apiLogo': function (event, templateInstance) {
     // Show confirmation dialog to user
