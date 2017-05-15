@@ -68,7 +68,7 @@ Template.sdkCodeGeneratorModal.onCreated(function () {
 
 Template.sdkCodeGeneratorModal.helpers({
   // Schema for SDK Code Generator form
-  generateSDK () {
+  codeGeneratorSchema () {
     // Create simple schema for sdk modal
     return new SimpleSchema({
       selectLanguage: {
