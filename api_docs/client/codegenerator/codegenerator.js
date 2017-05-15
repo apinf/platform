@@ -38,8 +38,4 @@ Template.sdkCodeGeneratorModal.helpers({
       urlParameters: instance.urlParameters,
     };
   },
-  buttonText () {
-    // Return button text depending on language
-    return TAPi18n.__('sdkCodeGeneratorModal_buttonText_download');
-  },
 });
