@@ -23,5 +23,10 @@ class Page {
   pause (miliseconds = 5000) {
     browser.pause(miliseconds);
   }
+
+  $$ (selector) {
+    const res = browser.elements(selector);
+    return res.value;
+  }
 }
 module.exports = Page;
