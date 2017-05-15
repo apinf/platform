@@ -15,20 +15,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import OrganizationLogo from '/organizations/logo/collection/collection';
 import Organizations from '../../../collection';
 
-Template.uploadOrganizationLogo.onCreated(function () {
-  const instance = this;
-
-  instance.autorun(() => {
-    // Get organization data using reactive way
-    const organization = Template.currentData().organization;
-
-    if (organization.organizationLogoFileId) {
-      // Subscribe to current Organization logo
-      instance.subscribe('currentOrganizationLogo', organization.organizationLogoFileId);
-    }
-  });
-});
-
 Template.uploadOrganizationLogo.helpers({
   uploadedOrganizationLogoFile () {
     const organizationLogoFileId = Organizations.findOne().organizationLogoFileId;
