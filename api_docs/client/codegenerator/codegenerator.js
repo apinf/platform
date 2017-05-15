@@ -35,7 +35,6 @@ Template.sdkCodeGeneratorModal.helpers({
       codegenServer: instance.data.host,
       callRequest: instance.callRequest,
       documentationFileURL: instance.documentationFileURL,
-      languageList: instance.languageList,
       urlParameters: instance.urlParameters,
     };
   },
