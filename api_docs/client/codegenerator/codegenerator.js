@@ -17,7 +17,7 @@ import _ from 'lodash';
 
 // APINF imports
 import specificLanguageNames from './codgeneratorSpecificLanguages';
-import codeGeneratorLanguageOptions from './codeGeneratorLanguageOptions';
+import codeGeneratorSchema from './schema';
 
 Template.sdkCodeGeneratorModal.onCreated(function () {
   const instance = this;
@@ -70,20 +70,7 @@ Template.sdkCodeGeneratorModal.helpers({
   // Schema for SDK Code Generator form
   codeGeneratorSchema () {
     // Create simple schema for sdk modal
-    return new SimpleSchema({
-      selectLanguage: {
-        label: TAPi18n.__('sdkCodeGeneratorModal_labelText_selectLanguage'),
-        type: String,
-        autoform: {
-          afFieldInput: {
-            firstOption: TAPi18n.__('sdkCodeGeneratorModal_firstOption_language'),
-          },
-          options () {
-            return codeGeneratorLanguageOptions;
-          },
-        },
-      },
-    });
+    return codeGeneratorSchema;
   },
   // Check on ready of data from call GET request
   dataFetched () {
