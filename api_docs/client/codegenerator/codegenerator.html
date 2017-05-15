@@ -16,11 +16,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </h1>
       </div>
       <div class="modal-body">
-        {{> quickForm
+        {{#autoForm id="downloadSDK" type="normal" schema=codeGeneratorSchema }}
+          <fieldset>
+            {{> afQuickField name='selectLanguage'}}
+            {{> afQuickField name='codegenServer'}}
+            {{> afQuickField name='callRequest'}}
+            {{> afQuickField name='documentationFileURL'}}
+            {{> afQuickField name='urlParameters'}}
+          </fieldset>
+          <button type="submit" class="btn btn-primary">{{ buttonText }}</button>
+        {{/autoForm}}
+
+
+        <!-- {{> quickForm
           id="downloadSDK"
           schema=codeGeneratorSchema
           doc=getTemplateInstance
-          buttonContent=buttonText }}
+          buttonContent=buttonText }} -->
       </div>
     </div>
   </div>
