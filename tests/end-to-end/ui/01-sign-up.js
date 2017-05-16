@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 import signUpPage from '../../page-objects/signup.page';
 
-describe('UI sign up', () => {
+describe('01 sign up', () => {
   before(() => {
     signUpPage.open();
   });
@@ -103,15 +103,14 @@ describe('UI sign up', () => {
   });
 
   describe('confirm-password', () => {
-    it('it should be invalid if different from password', () => {
-      signUpPage.passwordField.setValue('password');
+    it('should be required', () => {
       signUpPage.submit();
       signUpPage.confirmPasswordErrorField.isVisible().should.be.true;
       signUpPage.confirmPasswordErrorField.getText().should.not.be.empty;
     });
 
-    it('it should be valid if equal to password', () => {
-      signUpPage.confirmPasswordField.setValue('password');
+    it('it should be invalid if different from password', () => {
+      signUpPage.passwordField.setValue('password');
       signUpPage.submit();
       signUpPage.confirmPasswordErrorField.isVisible().should.be.true;
       signUpPage.confirmPasswordErrorField.getText().should.not.be.empty;
