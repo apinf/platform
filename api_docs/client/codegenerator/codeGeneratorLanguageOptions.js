@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 
-export default codeGeneratorOptions = [
+const codeGeneratorOptions = [
   {
     label: 'Akka Scala',
     value: 'akka-scala',
@@ -158,3 +158,5 @@ export default codeGeneratorOptions = [
     value: 'typescript-node',
   },
 ];
+
+export default codeGeneratorOptions;

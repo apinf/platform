@@ -32,9 +32,6 @@ Meteor.methods({
           // Call Umbrella method to create user with API key
           Meteor.call('createApiUmbrellaUser', currentUser, proxyId, (error, umbrellaUser) => {
             if (error) {
-              // Log error for server
-              console.log(error);
-
               // Throw apiumbrellauser error for client
               throw new Meteor.Error(
                 'apinf-apiumbrellauser-error',

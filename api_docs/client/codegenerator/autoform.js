@@ -14,7 +14,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import _ from 'lodash';
 
 AutoForm.addHooks('downloadSDK', {
-  onSubmit (formValues, updateDoc, instance) {
+  onSubmit (formValues) {
     // Get reference to form
     const form = this;
 
@@ -58,8 +58,6 @@ AutoForm.addHooks('downloadSDK', {
 
         form.done(new Error(error.message));
       } else if (result.statusCode === 200) {
-        console.log('result 200');
-
         // Get information from Swagger API response
         const response = JSON.parse(result.content);
 

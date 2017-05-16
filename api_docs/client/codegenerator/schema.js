@@ -10,7 +10,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // APInf specific imports
 import codeGeneratorLanguageOptions from './codeGeneratorLanguageOptions';
 
-export default codeGeneratorSchema = new SimpleSchema({
+const codeGeneratorSchema = new SimpleSchema({
   selectLanguage: {
     label: TAPi18n.__('sdkCodeGeneratorModal_labelText_selectLanguage'),
     type: String,
@@ -30,3 +30,5 @@ export default codeGeneratorSchema = new SimpleSchema({
     type: String,
   },
 });
+
+export default codeGeneratorSchema;
