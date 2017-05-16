@@ -191,7 +191,12 @@ Apis.helpers({
       Apis.update(this._id, { $unset: { bookmarkCount: '' } });
     }
   },
-  documentation () {
+  documentationUrl () {
+    /*
+    Return a URL to documentation file
+    either from local collection or remote file
+    */
+
     // Get API ID
     const apiId = this._id;
 

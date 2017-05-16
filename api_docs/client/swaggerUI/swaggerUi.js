@@ -14,7 +14,7 @@ Template.swaggerUi.onCreated(() => {
   instance.dataFetched = new ReactiveVar(false);
 
   // Get url of api documentation
-  const documentationURL = instance.data.api.documentation();
+  const documentationURL = instance.data.api.documentationUrl();
 
   // Parsed swagger file
   Meteor.call('parsedDocument', documentationURL, (error, result) => {

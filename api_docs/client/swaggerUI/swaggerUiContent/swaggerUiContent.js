@@ -11,7 +11,7 @@ Template.swaggerUiContent.onRendered(function () {
 
   /* eslint-disable */
   const ui = SwaggerUIBundle({
-    url: api.documentation(),
+    url: api.documentationUrl(),
     dom_id: '#swagger-ui',
     presets: [
       SwaggerUIBundle.presets.apis,
