@@ -86,6 +86,7 @@ describe('01 sign up', () => {
       signUpPage.emailErrorField.getText().should.not.be.empty;
     });
 
+    // Skip this test because current interface accepts email with space
     it.skip('should be invalid for email space', () => {
       signUpPage.emailField.setValue('invalid email@mail.com');
       signUpPage.submit();
