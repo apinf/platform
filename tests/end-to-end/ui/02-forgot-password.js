@@ -55,6 +55,7 @@ describe('02 forgot password', () => {
       signInPage.emailErrorField.getText().should.not.be.empty;
     });
 
+    // Skip this test because current interface accepts email with space
     it.skip('should be invalid for email space', () => {
       signInPage.emailField.setValue('invalid email@mail.com');
       signInPage.submit();
