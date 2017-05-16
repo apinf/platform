@@ -28,7 +28,7 @@ module.exports = {
   ddp: 'http://localhost:3000',
   serverExecuteTimeout: 10000,
 
- 	// - - - - DEBUGGING  - - - -
+  // - - - - DEBUGGING  - - - -
   // Uncomment 2 lines below to print everything
 	// log: 'info',
 	// debug: true,
