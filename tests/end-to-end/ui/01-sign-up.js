@@ -72,21 +72,21 @@ describe('01 sign up', () => {
       signUpPage.emailErrorField.getText().should.not.be.empty;
     });
 
-    it('it should be invalid for email without domain', () => {
+    it('should be invalid for email without domain', () => {
       signUpPage.emailField.setValue('invalid-email');
       signUpPage.submit();
       signUpPage.emailErrorField.isVisible().should.be.true;
       signUpPage.emailErrorField.getText().should.not.be.empty;
     });
 
-    it('it should be invalid for email with invalid domain', () => {
+    it('should be invalid for email with invalid domain', () => {
       signUpPage.emailField.setValue('invalid-email@mail');
       signUpPage.submit();
       signUpPage.emailErrorField.isVisible().should.be.true;
       signUpPage.emailErrorField.getText().should.not.be.empty;
     });
 
-    it.skip('it should be invalid for email space', () => {
+    it.skip('should be invalid for email space', () => {
       signUpPage.emailField.setValue('invalid email@mail.com');
       signUpPage.submit();
       signUpPage.emailErrorField.isVisible().should.be.true;
@@ -109,7 +109,7 @@ describe('01 sign up', () => {
       signUpPage.confirmPasswordErrorField.getText().should.not.be.empty;
     });
 
-    it('it should be invalid if different from password', () => {
+    it('should be invalid if different from password', () => {
       signUpPage.passwordField.setValue('password');
       signUpPage.submit();
       signUpPage.confirmPasswordErrorField.isVisible().should.be.true;
