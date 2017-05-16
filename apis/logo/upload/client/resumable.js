@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
@@ -33,8 +34,11 @@ Meteor.startup(() => {
         // Get the id from API logo file object
         const apiLogoFileId = file.uniqueIdentifier;
 
-        // Get apibackend id
-        const api = Apis.findOne();
+        // Get api slug from route
+        const apiSlug = FlowRouter.getQueryParam('slug');
+
+        // Get API with slug
+        const api = Apis.findOne({ slug: apiSlug });
 
         // Update logo id field
         Apis.update(api._id, { $set: { apiLogoFileId } });
