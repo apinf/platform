@@ -14,7 +14,7 @@ import mainContent from '../../page-objects/main-content.page';
 import { username, email, password } from '../../data/user.js';
 
 
-describe('UI user creation', () => {
+describe('03 user creation', () => {
   before(() => {
     signUpPage.open();
   });
