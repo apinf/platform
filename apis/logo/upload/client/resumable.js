@@ -35,7 +35,7 @@ Meteor.startup(() => {
         const apiLogoFileId = file.uniqueIdentifier;
 
         // Get api slug from route
-        const apiSlug = FlowRouter.getQueryParam('slug');
+        const apiSlug = FlowRouter.getParam('slug');
 
         // Get API with slug
         const api = Apis.findOne({ slug: apiSlug });
