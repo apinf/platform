@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
-This file is covered by the EUPL license.
-You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+ This file is covered by the EUPL license.
+ You may obtain a copy of the licence at
+ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
@@ -43,12 +43,20 @@ ApiV1.swagger = {
   },
   tags: {
     api: 'APIs',
+    organization: 'Organizations',
   },
   params: {
     apiId: {
       name: 'id',
       in: 'path',
       description: 'ID of API',
+      required: true,
+      type: 'string',
+    },
+    organizationId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of Organization',
       required: true,
       type: 'string',
     },
@@ -59,7 +67,7 @@ ApiV1.swagger = {
       required: false,
       type: 'string',
     },
-    organization: {
+    organizationApi: {
       name: 'organization',
       in: 'query',
       description: 'An optional organization id will limit results to the given organization.',
@@ -101,6 +109,14 @@ ApiV1.swagger = {
         $ref: '#/definitions/api',
       },
     },
+    organization: {
+      name: 'organization',
+      in: 'body',
+      description: 'Data for adding or editing Organization',
+      schema: {
+        $ref: '#/definitions/organization',
+      },
+    },
   },
   definitions: {
     // The schema defining the type used for the body parameter.
@@ -123,6 +139,64 @@ ApiV1.swagger = {
         lifecycleStatus: {
           type: 'string',
           enum: ['design', 'development', 'testing', 'production', 'deprecated'],
+        },
+      },
+    },
+    organization: {
+      required: ['name', 'url'],
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Company',
+        },
+        description: {
+          type: 'string',
+          example: 'Description about company',
+        },
+        url: {
+          type: 'string',
+          format: 'url',
+          example: 'https://organization.com',
+        },
+        manager_name: {
+          type: 'string',
+          description: 'Name of company manager',
+          example: 'David Bar',
+        },
+        manager_phone: {
+          type: 'string',
+          description: 'Phone number of company manager',
+          example: '+7 000 000 00 00',
+        },
+        manager_email: {
+          type: 'string',
+          format: 'email',
+          description: 'E-mail address of company manager',
+          example: 'company-mail@gmail.com',
+        },
+        facebook: {
+          type: 'string',
+          format: 'url',
+          description: 'Link to Facebook',
+          example: 'http://url.com',
+        },
+        twitter: {
+          type: 'string',
+          format: 'url',
+          description: 'Link to Twitter',
+          example: 'http://url.com',
+        },
+        instagram: {
+          type: 'string',
+          format: 'url',
+          description: 'Link to Instagram',
+          example: 'http://url.com',
+        },
+        linkedin: {
+          type: 'string',
+          format: 'url',
+          description: 'Link to Linked In',
+          example: 'http://url.com',
         },
       },
     },
