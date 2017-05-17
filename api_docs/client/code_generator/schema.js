@@ -8,7 +8,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf specific imports
-import codeGeneratorLanguageOptions from './code_generator_language_ptions';
+import codeGeneratorLanguageOptions from './code_generator_language_options';
 
 const codeGeneratorSchema = new SimpleSchema({
   selectLanguage: {
