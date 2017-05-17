@@ -26,7 +26,8 @@ Meteor.startup(() => {
     }, (error) => {
       if (error) {
         // Handle error condition
-        throw new Meteor.Error('File creation failed!', error);
+        // eslint-disable-next-line max-len
+        throw new Meteor.Error('branding/logo/client/upload/resumable.js: File creation failed!', error);
       }
 
       const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
