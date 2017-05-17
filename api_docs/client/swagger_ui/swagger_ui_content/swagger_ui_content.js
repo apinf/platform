@@ -10,6 +10,10 @@ Template.swaggerUiContent.onRendered(function () {
   const api = this.data.api;
 
   /* eslint-disable */
+  // Disable eslint here to supress messages
+  // about SwaggerUIBundle, SwaggerUIStandalonePreset, etc.
+  // since we can't figure out how to import them directly
+  // TODO: see if we can fix ESLint errors here properly, without suppressing
   const ui = SwaggerUIBundle({
     url: api.documentationUrl(),
     dom_id: '#swagger-ui',
