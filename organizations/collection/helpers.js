@@ -22,9 +22,9 @@ import Apis from '/apis/collection';
 import Organizations from './';
 
 Organizations.helpers({
-  currentUserCanManage (currentUserId) {
+  currentUserCanManage () {
     // Get current userId
-    const userId = currentUserId || Meteor.userId();
+    const userId = Meteor.userId();
 
     // Check that user is logged in
     if (userId) {

@@ -190,7 +190,7 @@ ApiV1.addCollection(Apis, {
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
-        if (api && api.managerIds.indexOf(userId) > -1) {
+        if (api && api.managerIds.includes(userId)) {
           // Update API document
           Apis.update(apiId, { $set: bodyParams });
 
@@ -266,7 +266,7 @@ ApiV1.addCollection(Apis, {
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
-        if (api && api.managerIds.indexOf(userId) > -1) {
+        if (api && api.managerIds.includes(userId)) {
           // Remove API document
           Meteor.call('removeApi', api._id);
 

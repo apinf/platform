@@ -158,17 +158,17 @@ ApiV1.swagger = {
           format: 'url',
           example: 'https://organization.com',
         },
-        manager_name: {
+        contact_name: {
           type: 'string',
           description: 'Name of company manager',
           example: 'David Bar',
         },
-        manager_phone: {
+        contact_phone: {
           type: 'string',
           description: 'Phone number of company manager',
           example: '+7 000 000 00 00',
         },
-        manager_email: {
+        contact_email: {
           type: 'string',
           format: 'email',
           description: 'E-mail address of company manager',
