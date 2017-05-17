@@ -14,10 +14,15 @@ ProxyBackends.helpers({
     // Get API
     const api = Apis.findOne(apiId);
 
+    // placeholder for API name
+    let apiName;
+
     // Make sure API was found before accessing name property
     if (api) {
-      // Return API Name
-      return api.name;
+      // Set API Name from API
+      apiName = api.name;
     }
+
+    return apiName;
   },
 });
