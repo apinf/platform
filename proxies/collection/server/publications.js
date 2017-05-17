@@ -37,6 +37,7 @@ Meteor.publish('publicProxyDetails', () => {
       _id: 1,
       name: 1,
       'apiUmbrella.url': 1,
+      type: 1,
     },
   });
 

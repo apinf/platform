@@ -6,6 +6,7 @@ accounts-ui@1.1.9
 accounts-ui-unstyled@1.2.1
 alanning:roles@1.2.16
 aldeed:autoform@5.8.1
+aldeed:autoform-bs-button-group-input@1.0.3
 aldeed:collection2@2.10.0
 aldeed:collection2-core@1.2.0
 aldeed:schema-deny@1.1.0

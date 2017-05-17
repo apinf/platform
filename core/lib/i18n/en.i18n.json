@@ -899,6 +899,49 @@
                       }
                   }
               }
+          },
+          "emq": {
+            "label": "EMQ Proxy",
+            "settings": {
+              "acl": {
+                "label": "Access Control Rules",
+                "$": {
+                  "allow": {
+                    "label": "Rule",
+                    "options": {
+                      "0": "Deny",
+                      "1": "Allow"
+                    }
+                  },
+                  "from": {
+                    "label": "From"
+                  },
+                  "ip_addr": {
+                    "label": "IP Address"
+                  },
+                  "username": {
+                    "label": "Username"
+                  },
+                  "client_id": {
+                    "label": "Client Id"
+                  },
+                  "access": {
+                    "label": "Access",
+                    "options": {
+                      "1": "Subscribe",
+                      "2": "Publish",
+                      "3": "Both"
+                    }
+                  },
+                  "topic": {
+                    "label": "Topic"
+                  },
+                  "fromValue": {
+                    "label": "Value"
+                  }
+                }
+              }
+            }
           }
       },
       "related_media": {
