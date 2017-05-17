@@ -3,9 +3,6 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Meteor packages imports
-import { Meteor } from 'meteor/meteor';
-
 // Meteor contributed packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
@@ -49,16 +46,6 @@ Organizations.schema = new SimpleSchema({
       type: 'hidden',
       label: false,
     },
-    autoValue () {
-      // Automatically add the current user to manager IDs array, on insert
-      if (this.isInsert) {
-        return [Meteor.userId()];
-      }
-
-      // Don't allow users to provide a value
-      // Note, this may need to change when we allow adding other managers
-      return this.unset();
-    },
   },
   name: {
     type: String,
@@ -69,7 +56,7 @@ Organizations.schema = new SimpleSchema({
   },
   slug: {
     type: String,
-    optional: false,
+    optional: true,
   },
   url: {
     type: String,
@@ -78,13 +65,6 @@ Organizations.schema = new SimpleSchema({
   /* Internal fields, create, update tracking */
   createdBy: {
     type: String,
-    autoValue () {
-      if (this.isInsert) {
-        return Meteor.userId();
-      }
-
-      return this.unset();
-    },
     denyUpdate: true,
   },
   createdAt: {
