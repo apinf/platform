@@ -228,51 +228,54 @@ ApiV1.addRoute('organizations/:id', {
       ],
     },
     action () {
-      // Get data from body parameters
-      const bodyParams = this.bodyParams;
       // Get ID of API
       const organizationId = this.urlParams.id;
-      // Get ID of User
-      const userId = this.userId;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
 
-      // Make sure Organization exists & user can manage
-      if (organization && organization.managerIds.includes(userId)) {
-        // If bodyParams doesn't contain any fields
-        // then organizationData JSON doesn't contain it as well
-        const organizationData = {
-          name: bodyParams.name,
-          url: bodyParams.url,
-          description: bodyParams.description,
+      if (organization) {
+        // Get ID of User
+        const userId = this.userId;
+        const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
 
-          contact: {
-            person: bodyParams.contact_name,
-            phone: bodyParams.contact_phone,
-            email: bodyParams.contact_email,
-          },
-          socialMedia: {
-            facebook: bodyParams.facebook,
-            instagram: bodyParams.instagram,
-            twitter: bodyParams.twitter,
-            linkedIn: bodyParams.linkedin,
-          },
-        };
+        // Make sure user has permission for action
+        if (userCanManage) {
+          // Get data from body parameters
+          const bodyParams = this.bodyParams;
 
-        // Update Organization document
-        Organizations.update(organizationId, { $set: organizationData });
+          // If bodyParams doesn't contain any fields
+          // then organizationData JSON doesn't contain it as well
+          const organizationData = {
+            name: bodyParams.name,
+            url: bodyParams.url,
+            description: bodyParams.description,
 
-        return {
-          statusCode: 200,
-          body: {
-            status: 'Success updating',
-            data: Organizations.findOne(organizationId),
-          },
-        };
-      }
+            contact: {
+              person: bodyParams.contact_name,
+              phone: bodyParams.contact_phone,
+              email: bodyParams.contact_email,
+            },
+            socialMedia: {
+              facebook: bodyParams.facebook,
+              instagram: bodyParams.instagram,
+              twitter: bodyParams.twitter,
+              linkedIn: bodyParams.linkedin,
+            },
+          };
 
-      // Make sure Organization exists but user can not manage
-      if (organization && !organization.managerIds.includes(userId)) {
+          // Update Organization document
+          Organizations.update(organizationId, { $set: organizationData });
+
+          return {
+            statusCode: 200,
+            body: {
+              status: 'Success updating',
+              data: Organizations.findOne(organizationId),
+            },
+          };
+        }
+
+        // Organization exists but user can not manage
         return {
           statusCode: 403,
           body: {
@@ -326,26 +329,30 @@ ApiV1.addRoute('organizations/:id', {
     action () {
       // Get ID of Organization
       const organizationId = this.urlParams.id;
-      // Get User ID
-      const userId = this.userId;
+
       // Get organization document
       const organization = Organizations.findOne(organizationId);
 
-      // Make sure Organization exists & user can manage
-      if (organization && organization.managerIds.includes(userId)) {
-        // Remove Organization document
-        Meteor.call('removeOrganization', organization._id);
+      // Make sure Organization exists
+      if (organization) {
+        // Get User ID
+        const userId = this.userId;
+        const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
 
-        return {
-          statusCode: 200,
-          body: {
-            status: 'Organization successfully removed',
-          },
-        };
-      }
+        // User has permission for action
+        if (userCanManage) {
+          // Remove Organization document
+          Meteor.call('removeOrganization', organization._id);
 
-      // Make sure Organization exists but user can not manage
-      if (organization && !organization.managerIds.includes(userId)) {
+          return {
+            statusCode: 200,
+            body: {
+              status: 'Organization successfully removed',
+            },
+          };
+        }
+
+        // User doesn't have permission for action
         return {
           statusCode: 403,
           body: {
