@@ -109,16 +109,47 @@ if (ApiV1._config.useDefaultAuth) {
               },
             ];
           }
+          // Get all users
+          const userList = Meteor.users.find(query, options).fetch();
+          // Get Organization names and ids for every User
+          if (userList) {
+            const userListLength = userList.length;
+            // Loop through user list one by one
+            for (let i = 0; i < userListLength; i++) {
+              // Array for Organization name and id
+              const orgDataList = [];
+              // Get user id
+              const userId = userList[i]._id;
+              // Find all Organizations, where User belongs to
+              const organizations = Organizations.find({
+                managerIds: userId,
+              }).fetch();
+              // If there are Users' Organizations
+              if (organizations.length > 0) {
+                const organizationLength = organizations.length;
+                // Loop through Users' Organizations
+                for (let k = 0; k < organizationLength; k++) {
+                  const orgData = {};
+                  // Put Organization name and id into an object
+                  orgData.organization_id = organizations[k]._id;
+                  orgData.organization_name = organizations[k].name;
+                  // Add this Organization data into Users' organization data list
+                  orgDataList.push(orgData);
+                }
+                // Add Organizations' information to Users' data
+                userList[i].organization = orgDataList;
+              }
+            }
+          }
           // Construct response
           return {
             statusCode: 200,
             body: {
               status: 'success',
-              data: Meteor.users.find(query, options).fetch(),
+              data: userList,
             },
           };
         },
-
 
       },
       get: {
