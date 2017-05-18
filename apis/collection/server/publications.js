@@ -8,6 +8,9 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
+// Npm packages imports
+import _ from 'lodash';
+
 // Collection imports
 import ApiBacklogItems from '/backlog/collection';
 import ApiDocs from '/api_docs/collection';
@@ -44,13 +47,17 @@ Meteor.publish('latestPublicApis', (limit) => {
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },
-    { sort: { created_at: -1 }, limit }
+    { fields: Apis.publicFields, sort: { created_at: -1 }, limit }
   );
 });
 
 // Publish collection for pagination
 // eslint-disable-next-line no-new
-new Meteor.Pagination(Apis);
+new Meteor.Pagination(Apis, {
+  transform_options: (filters, options) => {
+    return _.merge({ fields: Apis.publicFields }, options);
+  },
+});
 
 // eslint-disable-next-line prefer-arrow-callback
 Meteor.publishComposite('apiComposite', function (slug) {

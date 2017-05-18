@@ -5,9 +5,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationNoApis">
   <div class="alert alert-warning" style="display: inline-block;">
-    <h4>
+    <div class='no-apis-title'>
       {{_ 'organizationNoApis_text_noConnectedApis' }}
-    </h4>
+    </div>
     {{# if organization.currentUserCanManage }}
       {{_ 'organizationNoApis_text_useButton' }}
     {{/ if }}

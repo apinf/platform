@@ -59,6 +59,8 @@ Template.proxyBackend.onCreated(() => {
 
     return currentProxyId;
   };
+
+  instance.getProxyId();
 });
 
 Template.proxyBackend.helpers({
@@ -176,6 +178,9 @@ Template.proxyBackend.helpers({
     // Return boolean value
     return !!(instance.data.proxyBackend);
   },
+  equals (a, b) {
+    return a === b;
+  },
 });
 
 Template.proxyBackend.events({
@@ -192,8 +197,8 @@ Template.proxyBackend.events({
     // Get proxyBackend from template data
     const proxyBackend = instance.data.proxyBackend;
 
-    // Check proxyBackend exists, type is apiUmbrella, and it has id
-    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.id) {
+    // Check if there is proxy backend with certain type
+    if (proxyBackend.type === 'emq' || proxyBackend.type === 'apiUmbrella') {
       // Call deleteProxyBackend
       deleteProxyBackendConfig(proxyBackend);
     }

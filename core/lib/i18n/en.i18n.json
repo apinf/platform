@@ -62,7 +62,13 @@
   "apiBacklogItems_priorityText_Middle": "Middle",
   "apiBacklogItems_priorityText_None": "None",
   "apiCard_labelText_private": "private",
+  "apiCard_pinTooltip_user": "Mark/Unmark API card featured",
   "apiCard_tooltipTitle_averageRating": "Average Rating",
+  "apiCardPin_buttonText_pin": "Mark this API as a featured one by pinning it",
+  "apiCardPin_buttonText_unpin": "Mark this API as an unfeatured one by UNpinning it",
+  "apiCardPin_featuredSuccessfully": "API card added to featured list successfully",
+  "apiCardPin_featuredListAlreadyFull": "Maximum amount of API cards is already featured!",
+  "apiCardPin_unfeaturedSuccessfully": "API card removed from featured list successfully",
   "apiCatalog_apisCount": "(__count__ api)",
   "apiCatalog_apisCount_plural": "(__count__ apis)",
   "apiSettingsDelete_deleteButton": "Delete",
@@ -419,7 +425,10 @@
   "organizationManagerForm_emailNotRegistered_errorText": "Email address not currently registered.",
   "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
   "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
-  "organizationProfile_bigText_apisCount": "APIs",
+  "organizationNoFeaturedApis_text_noFeaturedApis": "The organization doesn't have any featured APIs.",
+  "organizationNoFeaturedApis_text_useButton": "You can mark APIs as featured ones by clicking the pin button in upper right corner in API card",
+  "organizationProfile_bigText_apisCount": "All APIs",
+  "organizationProfile_bigText_featuredApisCount": "Featured APIs",
   "organizationProfileHeader_editButton_text": "Edit",
   "organizationProfileHeader_tabs_apis": "APIs",
   "organizationProfileHeader_tabs_settings": "Settings",
@@ -890,6 +899,49 @@
                       }
                   }
               }
+          },
+          "emq": {
+            "label": "EMQ Proxy",
+            "settings": {
+              "acl": {
+                "label": "Access Control Rules",
+                "$": {
+                  "allow": {
+                    "label": "Rule",
+                    "options": {
+                      "0": "Deny",
+                      "1": "Allow"
+                    }
+                  },
+                  "from": {
+                    "label": "From"
+                  },
+                  "ip_addr": {
+                    "label": "IP Address"
+                  },
+                  "username": {
+                    "label": "Username"
+                  },
+                  "client_id": {
+                    "label": "Client Id"
+                  },
+                  "access": {
+                    "label": "Access",
+                    "options": {
+                      "1": "Subscribe",
+                      "2": "Publish",
+                      "3": "Both"
+                    }
+                  },
+                  "topic": {
+                    "label": "Topic"
+                  },
+                  "fromValue": {
+                    "label": "Value"
+                  }
+                }
+              }
+            }
           }
       },
       "related_media": {

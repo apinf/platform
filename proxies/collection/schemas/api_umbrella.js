@@ -23,6 +23,5 @@ export default {
   },
   'apiUmbrella.elasticsearch': {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
   },
 };

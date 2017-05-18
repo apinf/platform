@@ -1,0 +1,53 @@
+<template name="emqProxyForm">
+
+  <!-- Hidden fields -->
+  {{> afQuickField name="type" type="hidden" value="emq" }}
+  <!-- End hidden fields -->
+  <!-- Rate limits -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Access Control Rules
+    </div>
+    <ul class="list-group" id="emq-rate-limits-list">
+      {{# afEachArrayItem name="emq.settings.acl" }}
+      <li class="list-group-item autoform-array-item">
+        <div>
+          <div class="autoform-remove-item-wrap">
+            <a type="button" class="btn btn-primary autoform-remove-item">
+              <span class="glyphicon glyphicon-minus"></span>
+            </a>
+          </div>
+          <div class="autoform-array-item-body">
+            <div class="panel-body">
+
+              <div class="form-group">
+                {{> afFieldInput name=this.current.id type="hidden" }}
+                {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
+                {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
+              </div>
+              <div class="form-group">
+                {{> afFieldInput name=this.current.topic }}
+              </div>
+              <div class="form-group">
+                <label>{{_ "schemas.proxyBackends.emq.settings.acl.$.from.label" }}</label>
+              </div>
+              <div class="form-group">
+                {{> afFieldInput type="select" name=this.current.fromType }}
+              </div>
+              <div class="form-group">
+                {{> afFieldInput name=this.current.fromValue }}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </li>
+      {{/ afEachArrayItem }}
+      <li class="list-group-item emq-add-rule">
+        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field="emq.settings.acl">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</template>
