@@ -143,4 +143,16 @@ Meteor.methods({
     // Return organization
     return (organization);
   },
+  userCanManageOrganization (userId, organization) {
+    check(userId, String);
+    check(organization, Object);
+
+    // Check if user is admin
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    // Check if user is manager
+    const userIsManager = organization.managerIds.includes(userId);
+
+    return userIsAdmin || userIsManager;
+  },
 });

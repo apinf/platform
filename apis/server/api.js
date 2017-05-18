@@ -26,7 +26,7 @@ ApiV1.addCollection(Apis, {
         description: 'List and search public APIs.',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
-          ApiV1.swagger.params.organization,
+          ApiV1.swagger.params.organizationApi,
           ApiV1.swagger.params.skip,
           ApiV1.swagger.params.limit,
           ApiV1.swagger.params.lifecycle,
@@ -48,9 +48,9 @@ ApiV1.addCollection(Apis, {
         const options = {};
 
         // Parse query parameters
-        if (queryParams.organization) {
+        if (queryParams.organizationApi) {
           // Get organization document with specified ID
-          const organization = Organizations.findOne(queryParams.organization);
+          const organization = Organizations.findOne(queryParams.organizationApi);
 
           // Make sure Organization exists
           if (organization) {
@@ -190,7 +190,7 @@ ApiV1.addCollection(Apis, {
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
-        if (api && api.managerIds.indexOf(userId) > 0) {
+        if (api && api.managerIds.includes(userId)) {
           // Update API document
           Apis.update(apiId, { $set: bodyParams });
 
@@ -266,7 +266,7 @@ ApiV1.addCollection(Apis, {
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
-        if (api && api.managerIds.indexOf(userId) > 0) {
+        if (api && api.managerIds.includes(userId)) {
           // Remove API document
           Meteor.call('removeApi', api._id);
 
