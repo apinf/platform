@@ -55,13 +55,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </a>
         {{/ if }}
       </div>
-      {{#if proxyBackend }}
-        <div>
-          <span class="pull-right">
-            {{> apiKey api=api proxyBackend=proxyBackend }}
-          </span>
-        </div>
-      {{/if }}
+      {{# if currentUser }}
+        {{# if proxyBackend }}
+          <div>
+            <span class="pull-right">
+              {{> apiKey api=api proxyBackend=proxyBackend }}
+            </span>
+          </div>
+        {{/ if }}
+      {{/ if }}
       <!-- Tabs -->
       <div id="api-navigation-tabs" class="navigation-tabs">
         <ul class="nav nav-tabs">

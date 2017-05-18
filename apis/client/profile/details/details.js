@@ -14,6 +14,20 @@ import Clipboard from 'clipboard';
 import ApiKeys from '/api_keys/collection';
 import Proxies from '/proxies/collection';
 
+Template.apiDetails.onCreated(function () {
+  const instance = this;
+
+  instance.autorun(() => {
+    // Get Logo ID of current API using reactive way
+    const apiLogoFileId = Template.currentData().api.apiLogoFileId;
+
+    if (apiLogoFileId) {
+      // Subscribe to current API logo
+      instance.subscribe('currentApiLogo', apiLogoFileId);
+    }
+  });
+});
+
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy button
   const copyButton = new Clipboard('#copyApiUrl');

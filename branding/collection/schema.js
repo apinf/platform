@@ -98,6 +98,9 @@ Branding.schema = new SimpleSchema({
   footerCode: {
     type: String,
     optional: true,
+    autoform: {
+      rows: 5,
+    },
   },
 });
 

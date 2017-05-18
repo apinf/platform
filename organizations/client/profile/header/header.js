@@ -12,6 +12,30 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 // Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
 
+Template.organizationProfileHeader.onCreated(function () {
+  const instance = this;
+
+  instance.autorun(() => {
+    // Get organization data using reactive way
+    const organization = Template.currentData().organization;
+
+    if (organization && organization.organizationCoverFileId) {
+      // Subscribe to Organization cover
+      instance.subscribe('organizationCoverById', organization.organizationCoverFileId);
+    }
+  });
+
+  instance.autorun(() => {
+    // Get organization data using reactive way
+    const organization = Template.currentData().organization;
+
+    if (organization && organization.organizationLogoFileId) {
+      // Subscribe to current Organization logo
+      instance.subscribe('currentOrganizationLogo', organization.organizationLogoFileId);
+    }
+  });
+});
+
 Template.organizationProfileHeader.onRendered(function () {
   // Assign resumable browse to element
   OrganizationLogo.resumable.assignBrowse(this.$('#organization-file-browse'));

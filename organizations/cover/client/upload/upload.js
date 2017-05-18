@@ -15,20 +15,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import OrganizationCover from '/organizations/cover/collection/collection';
 import Organizations from '../../../collection';
 
-Template.uploadOrganizationCover.onCreated(function () {
-  const instance = this;
-
-  instance.autorun(() => {
-    // Get organization data using reactive way
-    const organization = Template.currentData().organization;
-
-    if (organization.organizationCoverFileId) {
-      // Subscribe to Organization cover
-      instance.subscribe('organizationCoverById', organization.organizationCoverFileId);
-    }
-  });
-});
-
 Template.uploadOrganizationCover.helpers({
   uploadedOrganizationCoverFile () {
     // Get organization ID

@@ -10,6 +10,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="tab-content">
         <!-- APIs tab -->
         <div id="organization-apis" class="tab-pane fade in active">
+          <!-- Featured APIs -->
+          {{> organizationFeaturedApis organization=organization }}
+          <!-- All APIs -->
           {{> organizationApis organization=organization }}
           <!-- Embedded Related Media contents -->
           {{> relatedMedia entity=organization }}

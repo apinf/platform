@@ -4,6 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+
+// Meteor contributed packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
@@ -12,6 +15,19 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   organizationForm: {
+    before: {
+      insert (organization) {
+        // Get current user ID
+        const userId = Meteor.userId();
+
+        // Add current user as Organization manager & creater
+        organization.managerIds = [userId];
+        organization.createdBy = userId;
+
+        // Submit the form
+        return organization;
+      },
+    },
     onSuccess (formType) {
       // Hide organization form modal
       Modal.hide('organizationForm');
