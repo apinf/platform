@@ -64,53 +64,12 @@ Template.proxyBackend.onCreated(() => {
 });
 
 Template.proxyBackend.helpers({
-  apiHost () {
-    // Get API information
-    const api = this.api;
-
-    // Construct URL object for API URL
-    const apiUrl = new URI(api.url);
-
-    // Return the API URL protocol
-    return apiUrl.host();
-  },
-  apiPortHelper () {
-    // Get API information
-    const api = this.api;
-
-    // Construct URL object for API URL
-    const apiUrl = new URI(api.url);
-
-    // Return the API URL protocol
-    const protocol = apiUrl.protocol();
-
-    // Common default ports for HTTP/HTTPS
-    if (protocol === 'https') {
-      return 443;
-    }
-
-    if (protocol === 'http') {
-      return 80;
-    }
-
-    return '';
-  },
   apiProxySettings () {
     // Get API ID
     const apiId = this.api._id;
 
     // Look for existing proxy backend document for this API
     return ProxyBackends.findOne({ apiId });
-  },
-  apiUrlProtocol () {
-    // Get the API information
-    const api = this.api;
-
-    // Construct URL object for API URL
-    const apiUrl = new URI(api.url);
-
-    // Return the API URL protocol
-    return apiUrl.protocol();
   },
   formType () {
     const instance = Template.instance();

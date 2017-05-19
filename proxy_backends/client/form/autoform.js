@@ -51,7 +51,7 @@ AutoForm.hooks({
                 }
 
                   // If success, attach API Umbrella backend ID to API
-                if (_.get(response, 'response.result.data.api')) {
+                if (_.has(response, 'result.data.api')) {
                     // Get the API Umbrella ID for newly created backend
                   const umbrellaBackendId = response.result.data.api.id;
 
