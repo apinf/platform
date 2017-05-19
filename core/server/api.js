@@ -4,7 +4,6 @@
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor contributed packages imports
-import { Meteor } from 'meteor/meteor';
 import { Restivus } from 'meteor/nimble:restivus';
 
 const ApiV1 = new Restivus({
@@ -200,96 +199,6 @@ ApiV1.swagger = {
     },
   },
 };
-
-// Enable user endpoints if authentication is enabled
-// if (ApiV1._config.useDefaultAuth) {
-//   // Meteor.users collection
-//   ApiV1.addCollection(Meteor.users, {
-//     excludedEndpoints: ['put', 'patch'],
-//     routeOptions: {
-//       authRequired: true,
-//     },
-//     endpoints: {
-//       // getAll: {
-//       //   swagger: {
-//       //     description: 'Returns users',
-//       //     parameters: [
-//       //       ApiV1.swagger.params.optionalSearch,
-//       //       ApiV1.swagger.params.organization_id,
-//       //       ApiV1.swagger.params.skip,
-//       //       ApiV1.swagger.params.limit,
-//       //       ApiV1.swagger.params.sort_by,
-//       //     ],
-//       //     responses: {
-//       //       200: {
-//       //         description: 'users',
-//       //       },
-//       //       400: {
-//       //         description: 'Bad query parameters',
-//       //       },
-//       //     },
-//       //   },
-//       //   action () {
-//       //     const queryParams = this.queryParams;
-//       //     console.log('q-param=', queryParams);
-//       //   },
-//       //
-//       // },
-//   // GET /rest/v1/users/:id
-//       get: {
-//         swagger: {
-//           description: 'Returns user with given ID.',
-//           responses: {
-//             200: {
-//               description: 'One user.',
-//             },
-//           },
-//         },
-//       },
-//       // POST /rest/v1/users/
-//       post: {
-//         authRequired: false,
-//         swagger: {
-//           description: 'Add user.',
-//           responses: {
-//             200: {
-//               description: 'Return user that was added.',
-//             },
-//           },
-//         },
-//       },
-//       // DELETE /rest/v1/users/:id
-//       delete: {
-//         roleRequired: 'admin',
-//         swagger: {
-//           description: 'Delete user.',
-//           responses: {
-//             200: {
-//               description: 'Successful delete.',
-//             },
-//           },
-//         },
-//       },
-//     },
-//     limit: {
-//       name: 'limit',
-//       in: 'query',
-//       description: 'Maximum number of records to return in query.',
-//       required: false,
-//       type: 'integer',
-//       format: 'int32',
-//       minimum: 0,
-//       maximum: 50,
-//     },
-//     sort_by: {
-//       name: 'sort By',
-//       in: 'query',
-//       description: 'determines how to sort returned results',
-//       required: false,
-//       type: 'string',
-//     },
-//   });
-// }
 
 // Generate Swagger to route /rest/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
