@@ -107,4 +107,10 @@ Template.apiKey.helpers({
 
     return apiKey;
   },
+  showButton () {
+    // Get proxyBackend from template data
+    const proxyBackend = Template.currentData().proxyBackend;
+
+    return proxyBackend.type === 'apiUmbrella';
+  },
 });
