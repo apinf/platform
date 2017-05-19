@@ -162,19 +162,53 @@ ApiV1.addCollection(Meteor.users, {
       },
     },
     post: {
-      authRequired: false,
+      authRequired: true,
       swagger: {
-        description: 'Add user.',
+        tags: [
+          ApiV1.swagger.tags.user,
+        ],
+        description: 'Adds a new user. On success, returns newly added object.',
         parameters: [
           ApiV1.swagger.params.user,
         ],
         responses: {
           200: {
-            description: 'Return user that was added.',
+            description: 'User successfully added',
+          },
+          401: {
+            description: 'Authentication is required',
+          },
+          403: {
+            description: 'User does not have permission',
           },
         },
+        security: [
+          {
+            userSecurityToken: [],
+            userId: [],
+          },
+        ],
+      },
+      action () {
+        // Get data from body parameters
+        const bodyParams = this.bodyParams;
+        // const userId = this.userId;
+
+        // If bodyParams doesn't contain any fields
+        // then userData JSON doesn't contain it as well
+        const userData = {
+          username: bodyParams.username,
+          password: bodyParams.password,
+        };
+
+
+        return {
+          status: 'Success',
+          data: Meteor.users.findOne(userId),
+        };
       },
     },
+
     delete: {
       roleRequired: 'admin',
       swagger: {
