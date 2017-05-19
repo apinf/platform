@@ -18,6 +18,7 @@ import _ from 'lodash';
 
 // Collection imports
 import OrganizationLogo from '/organizations/logo/collection/collection';
+import Apis from '/apis/collection';
 import Organizations from './';
 
 Organizations.helpers({
@@ -80,5 +81,31 @@ Organizations.helpers({
       organizationLogoUrl = `${baseOrganizationLogoURL}/md5/${organizationLogo.md5}`;
     }
     return organizationLogoUrl;
+  },
+  featuredApiListIsFull () {
+    let featuredApiListIsFull = true;
+    // Check if there is space in featured APIs list
+    if (!this.featuredApiIds || this.featuredApiIds.length < 4) {
+      featuredApiListIsFull = false;
+    }
+    return featuredApiListIsFull;
+  },
+  hasFeaturedApis () {
+    if (this.featuredApis().length > 0) {
+      return true;
+    }
+    return false;
+  },
+  featuredApis () {
+    // Make sure organization has featured APIs
+    if (this.featuredApiIds) {
+      // Get APIs according to featured list
+      const featuredApis = Apis.find({
+        _id: { $in: this.featuredApiIds },
+      }).fetch();
+
+      return featuredApis;
+    }
+    return [];
   },
 });

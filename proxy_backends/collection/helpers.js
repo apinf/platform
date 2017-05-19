@@ -13,7 +13,16 @@ ProxyBackends.helpers({
     const apiId = this.apiId;
     // Get API
     const api = Apis.findOne(apiId);
-    // Return API Name
-    return api.name;
+
+    // placeholder for API name
+    let apiName;
+
+    // Make sure API was found before accessing name property
+    if (api) {
+      // Set API Name from API
+      apiName = api.name;
+    }
+
+    return apiName;
   },
 });

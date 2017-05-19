@@ -11,10 +11,13 @@ import _ from 'lodash';
 
 // Collection imports
 import Proxies from '/proxies/collection';
-import ApiUmbrellaSchema from './apiUmbrellaSchema';
+
+// import ApiUmbrellaSchema from './apiUmbrellaSchema';
 import ProxyBackends from './';
 
-ProxyBackends.schema = new SimpleSchema({
+import registeredProxies from '../../proxies/collection/registered_proxies';
+
+const schema = {
   proxyId: {
     type: String,
     optional: true,
@@ -33,11 +36,25 @@ ProxyBackends.schema = new SimpleSchema({
   apiId: {
     type: String,
   },
-  apiUmbrella: {
-    type: ApiUmbrellaSchema,
-    optional: true,
+  type: {
+    type: String,
+    optional: false,
   },
+};
+
+_.forEach(registeredProxies, (proxyName) => {
+  /* eslint-disable global-require */
+  // Import proxy schema
+  const proxySchema = require(`./schemas/${_.snakeCase(proxyName)}`).default;
+
+  // Add available schemas of proxies to proxy backends schema
+  schema[proxyName] = {
+    type: proxySchema,
+    optional: true,
+  };
 });
+
+ProxyBackends.schema = new SimpleSchema(schema);
 
 // Internationalize schema texts
 ProxyBackends.schema.i18n('schemas.proxyBackends');

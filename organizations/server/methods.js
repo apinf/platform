@@ -100,6 +100,20 @@ Meteor.methods({
       }
      );
   },
+  removeApiFromFeaturedList (organizationId, apiId) {
+    // Make sure organizationId is an String
+    check(organizationId, String);
+
+    // Make sure userId is an String
+    check(apiId, String);
+
+    // Remove API from featurd APIS list array
+    Organizations.update({ _id: organizationId },
+      { $pull:
+         { featuredApiIds: apiId },
+      }
+     );
+  },
   removeOrganization (organizationId) {
     check(organizationId, String);
     // Remove organization document
@@ -128,5 +142,17 @@ Meteor.methods({
 
     // Return organization
     return (organization);
+  },
+  userCanManageOrganization (userId, organization) {
+    check(userId, String);
+    check(organization, Object);
+
+    // Check if user is admin
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    // Check if user is manager
+    const userIsManager = organization.managerIds.includes(userId);
+
+    return userIsAdmin || userIsManager;
   },
 });
