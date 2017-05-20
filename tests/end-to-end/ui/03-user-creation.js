@@ -11,7 +11,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import signUpPage from '../../page-objects/signup.page';
 import mainContent from '../../page-objects/main-content.page';
 
-import { username, email, password } from '../../data/user.js';
+import { username, email, password } from '../../data/user';
 
 
 describe('03 user creation', () => {
