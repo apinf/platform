@@ -107,4 +107,19 @@ Template.apiKey.helpers({
 
     return apiKey;
   },
+  showButton () {
+    // Get proxyBackend from template data
+    const proxyBackend = Template.currentData().proxyBackend;
+
+    // Check is proxy backend exists and contains type field
+    if (proxyBackend && proxyBackend.type) {
+      // Check if proxy backend type is "apiUmbrella"
+      const proxyBackendIsApiUmbrella = proxyBackend.type === 'apiUmbrella';
+
+      return proxyBackendIsApiUmbrella;
+    }
+
+    // Don't show "Get API Key" button if proxtBackend is undefined
+    return false;
+  },
 });
