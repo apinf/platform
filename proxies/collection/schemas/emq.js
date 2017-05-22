@@ -35,7 +35,7 @@ export default {
   },
   'emq.httpApi': {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
+    // regEx: SimpleSchema.RegEx.Url,
     autoform: {
       placeholder: 'https://user:pasword@host[:port][path]',
     },

@@ -1,0 +1,10 @@
+<template name="emqProxyUsers">
+  <h1>EMQ Users</h1>
+  <div>
+    {{# each user in emqUsers }}
+      <div>
+        {{ user.username }}
+      </div>
+    {{/ each }}
+  </div>
+</template>

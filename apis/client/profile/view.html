@@ -8,6 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{> viewApiPageHeader
     api=api
     proxyIsConfigured=proxyIsConfigured
+    proxyIsEmq=proxyIsEmq
     proxyBackend=proxyBackend }}
   <div class="container">
     <div class="tab-content">
@@ -43,9 +44,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if api.currentUserCanManage }}
 
           {{# if proxyIsConfigured }}
-          <div id="api-proxy" class="tab-pane fade">
-            {{> apiProxy api=api proxyBackend=proxyBackend }}
-          </div> <!-- /api-proxy -->
+            <div id="api-proxy" class="tab-pane fade">
+              {{> apiProxy api=api proxyBackend=proxyBackend }}
+            </div> <!-- /api-proxy -->
+          {{/ if }}
+
+          {{# if proxyIsEmq }}
+            <div id="api-emq-proxy-users" class="tab-pane fade">
+              {{> emqProxyUsers proxyBackend=proxyBackend }}
+            </div> <!-- /api-proxy -->
           {{/ if }}
 
           <div id="api-settings" class="tab-pane fade">

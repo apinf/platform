@@ -130,13 +130,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </li>
 
             {{# if proxyIsConfigured }}
-            <!-- Proxy -->
-            <li id="api-proxy-tab">
-              <a href="#api-proxy" data-toggle="tab">
-                <i class="fa fa-sitemap"></i>
-                {{_ "viewApiNavigationMenu_proxy" }}
-              </a>
-            </li>
+              <!-- Proxy -->
+              <li id="api-proxy-tab">
+                <a href="#api-proxy" data-toggle="tab">
+                  <i class="fa fa-sitemap"></i>
+                  {{_ "viewApiNavigationMenu_proxy" }}
+                </a>
+              </li>
+
+              <!-- EMQ Proxy Users -->
+              {{# if proxyIsEmq }}
+                <li id="api-emq-proxy-users-tab">
+                  <a href="#api-emq-proxy-users" data-toggle="tab">
+                    <i class="fa fa-sitemap"></i>
+                    EMQ Users
+                  </a>
+                </li>
+              {{/ if }}
             {{/ if }}
           {{/ if }}
         </ul>

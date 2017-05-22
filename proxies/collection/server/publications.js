@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
@@ -42,4 +43,12 @@ Meteor.publish('publicProxyDetails', () => {
   });
 
   return publicProxyDetails;
+});
+
+Meteor.publish('proxyWithCredentials', (proxyId) => {
+  check(proxyId, String);
+
+  const proxy = Proxies.find(proxyId);
+
+  return proxy;
 });
