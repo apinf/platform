@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
 // Collection imports
 import ApiV1 from '/core/server/api';
@@ -163,6 +164,7 @@ ApiV1.addCollection(Meteor.users, {
     },
     post: {
       authRequired: true,
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ApiV1.swagger.tags.user,
@@ -192,19 +194,19 @@ ApiV1.addCollection(Meteor.users, {
       action () {
         // Get data from body parameters
         const bodyParams = this.bodyParams;
-        // const userId = this.userId;
+        console.log('param=', bodyParams);
+        //
+        // const userId = Meteor.users.insert(userData);
 
-        // If bodyParams doesn't contain any fields
-        // then userData JSON doesn't contain it as well
-        const userData = {
+        Accounts.createUser({
           username: bodyParams.username,
+          email: bodyParams.email,
           password: bodyParams.password,
-        };
-
+        });
 
         return {
           status: 'Success',
-          data: Meteor.users.findOne(userId),
+          data: Meteor.users.findOne({ username: bodyParams.username }),
         };
       },
     },
@@ -219,6 +221,173 @@ ApiV1.addCollection(Meteor.users, {
           },
         },
       },
+    },
+  },
+});
+
+// Request /rest/v1/users/:id for Users collection
+ApiV1.addRoute('Meteor.users/:id', {
+  // Modify the entity with the given :id with the data contained in the request body.
+  // put: {
+  //   authRequired: true,
+  //   swagger: {
+  //     tags: [
+  //       ApiV1.swagger.tags.user,
+  //     ],
+  //     description: 'Update a User',
+  //     parameters: [
+  //       ApiV1.swagger.params.userId,
+  //       ApiV1.swagger.params.user,
+  //     ],
+  //     responses: {
+  //       200: {
+  //         description: 'User successfully edited.',
+  //       },
+  //       401: {
+  //         description: 'Authentication is required',
+  //       },
+  //       403: {
+  //         description: 'User does not have permission',
+  //       },
+  //       404: {
+  //         description: 'User is not found',
+  //       },
+  //     },
+  //     security: [
+  //       {
+  //         userSecurityToken: [],
+  //         userId: [],
+  //       },
+  //     ],
+  //   },
+  //   action () {
+  //     // Get ID of User
+  //     const userId = this.urlParams.id;
+  //     // Get Organization document
+  //     const organization = Organizations.findOne(organizationId);
+  //
+  //     if (organization) {
+  //       // Get ID of User
+  //       const userId = this.userId;
+  //       const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
+  //
+  //       // Make sure user has permission for action
+  //       if (userCanManage) {
+  //         // Get data from body parameters
+  //         const bodyParams = this.bodyParams;
+  //
+  //         // If bodyParams doesn't contain any fields
+  //         // then organizationData JSON doesn't contain it as well
+  //         const organizationData = {
+  //           name: bodyParams.name,
+  //           url: bodyParams.url,
+  //           description: bodyParams.description,
+  //
+  //           contact: {
+  //             person: bodyParams.contact_name,
+  //             phone: bodyParams.contact_phone,
+  //             email: bodyParams.contact_email,
+  //           },
+  //           socialMedia: {
+  //             facebook: bodyParams.facebook,
+  //             instagram: bodyParams.instagram,
+  //             twitter: bodyParams.twitter,
+  //             linkedIn: bodyParams.linkedin,
+  //           },
+  //         };
+  //
+  //         // Update Organization document
+  //         Organizations.update(organizationId, { $set: organizationData });
+  //
+  //         return {
+  //           statusCode: 200,
+  //           body: {
+  //             status: 'Success updating',
+  //             data: Organizations.findOne(organizationId),
+  //           },
+  //         };
+  //       }
+  //
+  //       // Organization exists but user can not manage
+  //       return {
+  //         statusCode: 403,
+  //         body: {
+  //           status: 'Fail',
+  //           message: 'You do not have permission for editing this Organization',
+  //         },
+  //       };
+  //     }
+  //
+  //     // Organization doesn't exist
+  //     return {
+  //       statusCode: 404,
+  //       body: {
+  //         status: 'Fail',
+  //         message: 'Organization is not found with specified ID',
+  //       },
+  //     };
+  //   },
+  // },
+  // Delete a user
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        ApiV1.swagger.tags.user,
+      ],
+      description: 'Deletes the identified Organization from catalog.',
+      parameters: [
+        ApiV1.swagger.params.userId,
+      ],
+      responses: {
+        200: {
+          description: 'User successfully removed.',
+        },
+        400: {
+          description: 'Invalid input, invalid object',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'User is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const userId = this.urlParams.id;
+      const user = Meteor.users.findOne(userId).fetch();
+
+      if (user) {
+        // Remove User account
+        Meteor.call('deleteAccount', userId);
+
+        return {
+          statusCode: 200,
+          body: {
+            status: 'User successfully removed',
+          },
+        };
+      }
+
+      // User doesn't exist
+      return {
+        statusCode: 404,
+        body: {
+          status: 'Fail',
+          message: 'User is not found with specified ID',
+        },
+      };
     },
   },
 });
