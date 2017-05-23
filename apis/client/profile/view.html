@@ -49,12 +49,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div> <!-- /api-proxy -->
           {{/ if }}
 
-          {{# if proxyIsEmq }}
-            <div id="api-emq-proxy-users" class="tab-pane fade">
-              {{> emqProxyUsers proxyBackend=proxyBackend }}
-            </div> <!-- /api-proxy -->
-          {{/ if }}
-
           <div id="api-settings" class="tab-pane fade">
             {{> apiSettings api=api }}
           </div>

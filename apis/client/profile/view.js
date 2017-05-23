@@ -116,20 +116,4 @@ Template.viewApi.helpers({
     }
     return false;
   },
-  proxyIsEmq () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get API ID
-    const apiId = instance.apiId;
-
-    // Look for existing proxy backend document for this API
-    const apiProxySettings = ProxyBackends.findOne({ apiId });
-
-    if (apiProxySettings.type === 'emq') {
-      return true;
-    }
-
-    return false;
-  },
 });

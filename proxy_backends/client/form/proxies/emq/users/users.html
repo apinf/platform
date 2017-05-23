@@ -1,0 +1,37 @@
+<template name="emqUsers">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      EMQ Users
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{# each emqUsers }}
+            <tr id="emq-user-{{ id }}">
+              <td>{{ id }}</td>
+              <td>{{ username }}</td>
+              <td>*****</td>
+              <td class="text-right">
+                <a id="remove-emq-user-confirmation" class="btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </td>
+            </tr>
+          {{/ each }}
+        </tbody>
+      </table>
+      <a id="add-emq-user-modal" class="btn btn-xs btn-info">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add user
+      </a>
+    </div>
+  </div>
+</template>
