@@ -14,7 +14,7 @@ import Organizations from '/organizations/collection';
   // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
   // Meteor.users collection
 ApiV1.addCollection(Meteor.users, {
-  excludedEndpoints: ['put'],
+  excludedEndpoints: [],
   routeOptions: {
     authRequired: true,
   },
@@ -194,10 +194,8 @@ ApiV1.addCollection(Meteor.users, {
       action () {
         // Get data from body parameters
         const bodyParams = this.bodyParams;
-        console.log('param=', bodyParams);
-        //
-        // const userId = Meteor.users.insert(userData);
 
+        // Create a new user
         Accounts.createUser({
           username: bodyParams.username,
           email: bodyParams.email,
@@ -205,129 +203,177 @@ ApiV1.addCollection(Meteor.users, {
         });
 
         return {
+          statusCode: 201,
           status: 'Success',
           data: Meteor.users.findOne({ username: bodyParams.username }),
         };
       },
     },
 
+
+    // Delete a user
     delete: {
-      roleRequired: 'admin',
+      authRequired: true,
       swagger: {
-        description: 'Delete user.',
+        tags: [
+          ApiV1.swagger.tags.user,
+        ],
+        description: 'Deletes the identified Organization from catalog.',
+        parameters: [
+          ApiV1.swagger.params.userId,
+        ],
         responses: {
           200: {
-            description: 'Successful delete.',
+            description: 'User successfully removed.',
+          },
+          400: {
+            description: 'Invalid input, invalid object',
+          },
+          401: {
+            description: 'Authentication is required',
+          },
+          403: {
+            description: 'User does not have permission',
+          },
+          404: {
+            description: 'User not found',
           },
         },
+        security: [
+          {
+            userSecurityToken: [],
+            userId: [],
+          },
+        ],
+      },
+      action () {
+        // Get ID of Organization
+        const userId = this.urlParams.id;
+        console.log('tuhottava userId=', userId);
+        const user = Meteor.users.findOne(userId);
+        console.log('tuhottava user=', user);
+        if (user) {
+          // Remove User account
+          Meteor.call('deleteAccount', userId);
+
+          return {
+            statusCode: 200,
+            body: {
+              status: 'User successfully removed',
+            },
+          };
+        }
+
+        // User doesn't exist
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'User is not found with specified ID',
+          },
+        };
       },
     },
+
   },
 });
 
 // Request /rest/v1/users/:id for Users collection
 ApiV1.addRoute('Meteor.users/:id', {
   // Modify the entity with the given :id with the data contained in the request body.
-  // put: {
-  //   authRequired: true,
-  //   swagger: {
-  //     tags: [
-  //       ApiV1.swagger.tags.user,
-  //     ],
-  //     description: 'Update a User',
-  //     parameters: [
-  //       ApiV1.swagger.params.userId,
-  //       ApiV1.swagger.params.user,
-  //     ],
-  //     responses: {
-  //       200: {
-  //         description: 'User successfully edited.',
-  //       },
-  //       401: {
-  //         description: 'Authentication is required',
-  //       },
-  //       403: {
-  //         description: 'User does not have permission',
-  //       },
-  //       404: {
-  //         description: 'User is not found',
-  //       },
-  //     },
-  //     security: [
-  //       {
-  //         userSecurityToken: [],
-  //         userId: [],
-  //       },
-  //     ],
-  //   },
-  //   action () {
-  //     // Get ID of User
-  //     const userId = this.urlParams.id;
-  //     // Get Organization document
-  //     const organization = Organizations.findOne(organizationId);
-  //
-  //     if (organization) {
-  //       // Get ID of User
-  //       const userId = this.userId;
-  //       const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
-  //
-  //       // Make sure user has permission for action
-  //       if (userCanManage) {
-  //         // Get data from body parameters
-  //         const bodyParams = this.bodyParams;
-  //
-  //         // If bodyParams doesn't contain any fields
-  //         // then organizationData JSON doesn't contain it as well
-  //         const organizationData = {
-  //           name: bodyParams.name,
-  //           url: bodyParams.url,
-  //           description: bodyParams.description,
-  //
-  //           contact: {
-  //             person: bodyParams.contact_name,
-  //             phone: bodyParams.contact_phone,
-  //             email: bodyParams.contact_email,
-  //           },
-  //           socialMedia: {
-  //             facebook: bodyParams.facebook,
-  //             instagram: bodyParams.instagram,
-  //             twitter: bodyParams.twitter,
-  //             linkedIn: bodyParams.linkedin,
-  //           },
-  //         };
-  //
-  //         // Update Organization document
-  //         Organizations.update(organizationId, { $set: organizationData });
-  //
-  //         return {
-  //           statusCode: 200,
-  //           body: {
-  //             status: 'Success updating',
-  //             data: Organizations.findOne(organizationId),
-  //           },
-  //         };
-  //       }
-  //
-  //       // Organization exists but user can not manage
-  //       return {
-  //         statusCode: 403,
-  //         body: {
-  //           status: 'Fail',
-  //           message: 'You do not have permission for editing this Organization',
-  //         },
-  //       };
-  //     }
-  //
-  //     // Organization doesn't exist
-  //     return {
-  //       statusCode: 404,
-  //       body: {
-  //         status: 'Fail',
-  //         message: 'Organization is not found with specified ID',
-  //       },
-  //     };
-  //   },
-  // },
+  put: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        ApiV1.swagger.tags.user,
+      ],
+      description: 'Update a User',
+      parameters: [
+        ApiV1.swagger.params.userId,
+        ApiV1.swagger.params.user,
+      ],
+      responses: {
+        200: {
+          description: 'User successfully edited.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'User is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of User
+      const userId = this.urlParams.id;
+      // Get data from body parameters
+      const bodyParams = this.bodyParams;
+      console.log('bodyParams=', bodyParams);
+      let previousPassword;
+      let previousUsername;
+      let previousCompany;
+
+      // Try to change password
+      if (bodyParams.old_psw && bodyParams.new_psw) {
+        // Save previous password in case restore is needed later
+        previousPassword = Meteor.users.services.password.bcrypt;
+        Accounts.changePassword(bodyParams.old_psw, bodyParams.new_psw, (error) => {
+          if (error) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'Invalid old/new password',
+              },
+            };
+          }
+        });
+      }
+      // Try to change username
+      if (bodyParams.username) {
+        // Save previous username in case restore is needed later
+        previousUsername = Meteor.users.username;
+        Accounts.setUsername(userId, bodyParams.username, (error) => {
+          if (error) {
+            // Try to restore old password
+            if (previousPassword) {
+              Accounts.changePassword(bodyParams.new_psw, previousPassword);
+            }
+            return {
+              statusCode: 400,
+              body: {
+                status: 'Username update failed!',
+              },
+            };
+          }
+        });
+      }
+
+      // Try to change company name
+      if (bodyParams.company) {
+        // Save previous company name in case restore is needed later (for future use)
+        previousCompany = Meteor.users.profile.company;
+        Meteor.users.update(userId, { $set: { 'profile.company': bodyParams.company } });
+      }
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Success updating',
+          data: Meteor.users.findOne(userId),
+        },
+      };
+    },
+  },
   // Delete a user
   delete: {
     authRequired: true,
@@ -353,7 +399,7 @@ ApiV1.addRoute('Meteor.users/:id', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'User is not found',
+          description: 'User not found',
         },
       },
       security: [
@@ -367,7 +413,7 @@ ApiV1.addRoute('Meteor.users/:id', {
       // Get ID of Organization
       const userId = this.urlParams.id;
       const user = Meteor.users.findOne(userId).fetch();
-
+      console.log('tuhottava user=', user);
       if (user) {
         // Remove User account
         Meteor.call('deleteAccount', userId);
