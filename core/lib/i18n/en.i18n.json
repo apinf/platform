@@ -825,7 +825,7 @@
                     },
                     "port": {
                       "label": "Port",
-                      "placeholder": "i.e. 224"
+                      "placeholder": "E.g. 224"
                     },
                     "tls": {
                       "label": "TLS"
