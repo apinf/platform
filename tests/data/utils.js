@@ -10,12 +10,12 @@ import mainContent from '../page-objects/main-content.page';
 
 export default function loginAsOrCreateUser ({ username, email, password }) {
   let tries = 1;
-  const max_tries = 3;
+  const maxTries = 3;
   let isLoggedIn = false;
 
   signinPage.open();
-  
-  while (tries <= max_tries && !isLoggedIn) {
+
+  while (tries <= maxTries && !isLoggedIn) {
     // If nobody is logged in
     if (mainContent.nobodyIsLoggedIn) {
       console.log(`[${tries}] User not logged.`);
