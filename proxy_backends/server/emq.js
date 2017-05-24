@@ -1,7 +1,10 @@
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
 
+// Npm packages imports
+import _ from 'lodash';
 import URI from 'urijs';
 
 const getUrlAndAuthStrings = (url) => {
@@ -44,7 +47,15 @@ Meteor.methods({
       HTTP.call('GET', uri.toString(), { auth }, (err, res) => {
         if (err) reject(err);
 
-        resolve(res.data);
+        // Expose only username and ID
+        const users = _.map(res.data, (user) => {
+          return {
+            id: user.id,
+            username: user.username,
+          };
+        });
+
+        resolve(users);
       });
     });
 
