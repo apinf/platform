@@ -820,10 +820,12 @@
                       "label": "Protocol"
                     },
                     "host": {
-                      "label": "Host"
+                      "label": "Host",
+                      "placeholder": "https:\/\/example.com\/"
                     },
                     "port": {
-                      "label": "Port"
+                      "label": "Port",
+                      "placeholder": "i.e. 224"
                     },
                     "tls": {
                       "label": "TLS"
@@ -831,10 +833,11 @@
                   }
               },
               "httpApi": {
-                  "label": "HTTP API URL"
+                  "label": "Configuration API Endpoint"
               },
               "elasticsearch": {
-                  "label": "ElasticSearch URL"
+                  "label": "ElasticSearch URL",
+                  "placeholder": "https:\/\/example.com\/"
               }
           }
       },
