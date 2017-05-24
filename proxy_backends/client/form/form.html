@@ -30,25 +30,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
       {{> apiUmbrellaProxyForm proxy=proxy proxyHost=proxyHost api=api }}
 
-      <div id="proxy-form-buttons" class="btn-group pull-left">
-        <!-- submit button -->
-        <button
-            type="submit"
-            class="btn btn-success"
-            id="save-proxy-button">
-          {{_ "proxyBackendForm_saveButton" }}
-        </button>
-        <!-- delete button -->
-        {{# if showDeleteButton }}
-          <button
-              type="button"
-              class="btn btn-danger"
-              id="delete-proxy-button">
-            {{_ "proxyBackendForm_deleteButton" }}
-          </button>
-        {{/ if }}
-      </div>
-
     {{/ if }}
 
     <!-- EMQ -->
@@ -56,8 +37,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
       {{> emqProxyForm }}
 
+    {{/ if }}
+
+    <div id="proxy-form-buttons" class="btn-group">
+      <!-- submit button -->
+      <button
+          type="submit"
+          class="btn btn-success"
+          id="save-proxy-button">
+        {{_ "proxyBackendForm_saveButton" }}
+      </button>
+      <!-- delete button -->
+      {{# if showDeleteButton }}
+        <button
+            type="button"
+            class="btn btn-danger"
+            id="delete-proxy-button">
+          {{_ "proxyBackendForm_deleteButton" }}
+        </button>
+      {{/ if }}
+    </div>
+
+    {{# if equals proxy.type "emq" }}
+
       {{> emqUsers apiProxySettings=apiProxySettings }}
 
     {{/ if }}
+
   {{/ autoForm }}
 </template>
