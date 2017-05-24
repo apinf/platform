@@ -21,6 +21,7 @@ Template.sdkCodeGeneratorModal.helpers({
       selectLanguage: {
         label: TAPi18n.__('sdkCodeGeneratorModal_labelText_selectLanguage'),
         type: String,
+        optional: false,
         autoform: {
           afFieldInput: {
             firstOption: TAPi18n.__('sdkCodeGeneratorModal_firstOption_language'),
