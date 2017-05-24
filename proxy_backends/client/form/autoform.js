@@ -37,21 +37,21 @@ AutoForm.hooks({
               // Create API backend on API Umbrella
               Meteor.call('createApiBackendOnApiUmbrella', proxyBackend.apiUmbrella, proxyBackend.proxyId, (createApiBackendOnApiUmbrellaError, response) => { // eslint-disable-line max-len
                 if (createApiBackendOnApiUmbrellaError) {
-                    // Throw a Meteor error
+                  // Throw a Meteor error
                   Meteor.error(500, error);
                   return false;
                 }
 
                   // If response has errors object, notify about it
                 if (response.errors && response.errors.default) {
-                    // Notify about error
+                  // Notify about error
                   sAlert.error(response.errors.default[0]);
                     // return false;
                   form.result(false);
                 }
 
                   // If success, attach API Umbrella backend ID to API
-                if (_.get(response, 'response.result.data.api')) {
+                if (_.has(response, 'result.data.api')) {
                     // Get the API Umbrella ID for newly created backend
                   const umbrellaBackendId = response.result.data.api.id;
 
@@ -73,7 +73,7 @@ AutoForm.hooks({
                       }
                     );
                 }
-                  // Autoform does not expect anything to be returned
+                // Autoform does not expect anything to be returned
                 return undefined;
               });
             } else {
