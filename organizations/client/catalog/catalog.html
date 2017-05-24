@@ -27,11 +27,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> organizationCatalogTable organizations=organizations }}
           {{/ if }}
           {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
-      {{ else }}
-        <!-- Show no APIs message -->
-        {{> noOrganizationsMessage }}
+        {{ else }}
+          <!-- Show no APIs message -->
+          {{> noOrganizationsMessage }}
+        {{/ if }}
       {{/ if }}
-    {{/ if }}
     {{ else }}
       <!-- If no data yet available show spinner -->
       {{> spinner }}
