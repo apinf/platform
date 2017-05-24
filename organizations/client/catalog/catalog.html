@@ -15,27 +15,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{/ if }}
     </h1>
     {{> organizationCatalogueToolbar }}
-
     {{# if Template.subscriptionsReady }}
-      {{# unless organizations }}
-        <div class="alert alert-warning" role="alert">
-          {{_ "organizationCatalog_text_noOrganizationIsAvailable" }}
-          {{# if isInRole 'admin' }}
-            {{_ "organizationCatalog_text_addOrganization" }}
-          {{/ if }}
-        </div>
-      {{/ unless }}
-      <!-- if viewMode is grid, show grid -->
-      {{# if gridViewMode }}
-        {{> organizationCatalogGrid organizations=organizations }}
-      {{/ if }}
-      <!-- if viewMode is table, show table -->
-      {{# if tableViewMode }}
-        {{> organizationCatalogTable organizations=organizations }}
-      {{/ if }}
-      {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
-    {{ else }}
-      {{> spinner }}
+      {{# if organizations }}
+        <!-- if viewMode is grid, show grid -->
+        {{# if gridViewMode }}
+          {{> organizationCatalogGrid organizations=organizations }}
+        {{/ if }}
+        <!-- if viewMode is table, show table -->
+        {{# if tableViewMode }}
+          {{> organizationCatalogTable organizations=organizations }}
+        {{/ if }}
+        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+        {{ else }}
+          {{> noOrganizationsMessage }}
+        {{/ if }}
+      {{ else }}
+        {{> spinner }}
     {{/ if }}
   </div>
 </template>
