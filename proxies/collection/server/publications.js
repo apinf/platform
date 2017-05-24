@@ -48,6 +48,7 @@ Meteor.publish('publicProxyDetails', () => {
 Meteor.publish('proxyWithCredentials', (proxyId) => {
   check(proxyId, String);
 
+  // Fetch one proxy with full details by ID
   const proxy = Proxies.find(proxyId);
 
   return proxy;

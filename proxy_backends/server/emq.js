@@ -27,15 +27,20 @@ const getUrlAndAuthStrings = (url) => {
 };
 
 Meteor.methods({
+  // Meteor method to get all users from emq-rest-api
   async getEmqUsers (emqHttpApi) {
     check(emqHttpApi, String);
 
+    // Get url and auth strings from HTTP API URL
     const { url, auth } = getUrlAndAuthStrings(emqHttpApi);
 
+    // Init uri instance based on url value
     const uri = new URI(url);
+    // Apppend path name to uri
     uri.pathname('/emq-user');
 
     const p = new Promise((resolve, reject) => {
+      // Send HTTP GET request to emq rest api
       HTTP.call('GET', uri.toString(), { auth }, (err, res) => {
         if (err) reject(err);
 
@@ -45,16 +50,21 @@ Meteor.methods({
 
     return await p;
   },
+  // Meteor method to remove user from emq-rest-api
   async removeEmqUser (emqHttpApi, userId) {
     check(emqHttpApi, String);
     check(userId, Number);
 
+    // Get url and auth strings from HTTP API URL
     const { url, auth } = getUrlAndAuthStrings(emqHttpApi);
 
+    // Init uri instance based on url value
     const uri = new URI(url);
+    // Apppend path name to uri
     uri.pathname(`/emq-user/${userId}`);
 
     const p = new Promise((resolve, reject) => {
+      // Send HTTP DELETE request to emq rest api
       HTTP.call('DELETE', uri.toString(), { auth }, (err, res) => {
         if (err) reject(err);
 
@@ -64,16 +74,21 @@ Meteor.methods({
 
     return await p;
   },
+  // Meteor method to add user to emq-rest-api
   async addEmqUser (emqHttpApi, user) {
     check(emqHttpApi, String);
     check(user, Object);
 
+    // Get url and auth strings from HTTP API URL
     const { url, auth } = getUrlAndAuthStrings(emqHttpApi);
 
+    // Init uri instance based on url value
     const uri = new URI(url);
+    // Apppend path name to uri
     uri.pathname('/emq-user');
 
     const p = new Promise((resolve, reject) => {
+      // Send HTTP POST request to emq rest api
       HTTP.call('POST', uri.toString(), { auth, data: user }, (err, res) => {
         if (err) reject(err);
 
