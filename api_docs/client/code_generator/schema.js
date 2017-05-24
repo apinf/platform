@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// APInf specific imports
+// APINF imports
 import codeGeneratorLanguageOptions from './code_generator_language_options';
 
 const codeGeneratorSchema = new SimpleSchema({
@@ -25,9 +25,11 @@ const codeGeneratorSchema = new SimpleSchema({
   },
   host: {
     type: String,
+    optional: false,
   },
   documentationFileURL: {
     type: String,
+    optional: false,
   },
 });
 
