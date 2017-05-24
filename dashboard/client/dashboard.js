@@ -71,7 +71,7 @@ Template.dashboard.onCreated(function () {
                 // Update reactive variable
                 instance.chartData.set(chartData);
               })
-              .catch(err => { return console.error(err); });
+              .catch((err) => { throw new Meteor.Error(err); });
           }
         });
       }

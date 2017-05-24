@@ -55,7 +55,7 @@ AutoForm.hooks({
     },
     onError (error) {
       // do something with the error
-      console.log(error);
+      throw new Meteor.Error(error);
     },
   },
 });
