@@ -4,17 +4,17 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Add EMQ User</h4>
+          <h4 class="modal-title">{{_ "proxyBackendForm_emqProxyForm_addEmqUser_modalTitle" }}</h4>
         </div>
 
         <div class="modal-body">
           <form class="form">
             <div class="form-group">
-              <label for="emq-user-username">Username</label>
+              <label for="emq-user-username">{{_ "proxyBackendForm_emqProxyForm_addEmqUser_username" }}</label>
               <input id="emq-user-username" type="text" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="emq-user-password">Password</label>
+              <label for="emq-user-password">{{_ "proxyBackendForm_emqProxyForm_addEmqUser_password" }}</label>
               <input id="emq-user-password" type="password" class="form-control" />
             </div>
           </form>
@@ -25,13 +25,13 @@
             id="add-emq-user"
             type="button"
             class="btn btn-success">
-            Save
+            {{_ "proxyBackendForm_emqProxyForm_addEmqUser_saveButton" }}
           </button>
           <button
             type="button"
             class="btn btn-default"
             data-dismiss="modal">
-            Cancel
+            {{_ "proxyBackendForm_emqProxyForm_addEmqUser_cancelButton" }}
           </button>
         </div>
 

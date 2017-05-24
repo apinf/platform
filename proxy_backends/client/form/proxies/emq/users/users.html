@@ -1,16 +1,16 @@
 <template name="emqUsers">
   <div class="panel panel-default">
     <div class="panel-heading">
-      EMQ Users
+      {{_ "proxyBackendForm_emqUsers_title" }}
     </div>
     <div class="panel-body">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Actions</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_id" }}</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_username" }}</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_password" }}</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_actions" }}</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
       </table>
       <a id="add-emq-user-modal" class="btn btn-xs btn-info">
         <span class="glyphicon glyphicon-plus"></span>
-        Add user
+        {{_ "proxyBackendForm_emqUsers_addUserButton" }}
       </a>
     </div>
   </div>
