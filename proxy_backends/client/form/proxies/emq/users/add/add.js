@@ -11,7 +11,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import $ from 'jquery';
 
 Template.addEmqUser.events({
-  'click #add-emq-user': function (event, templateInstance) {
+  'submit #add-emq-user-form': function (event, templateInstance) {
     // Prevent default form submit
     event.preventDefault();
 
