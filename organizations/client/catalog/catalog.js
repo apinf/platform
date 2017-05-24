@@ -101,6 +101,10 @@ Template.organizationCatalog.helpers({
     // Return items of organization collection via Pagination
     return Template.instance().pagination.getPage();
   },
+  paginationReady () {
+    // Check if pagination subscription is ready
+    return Template.instance().pagination.ready();
+  },
   templatePagination () {
     // Get reference of pagination
     return Template.instance().pagination;
