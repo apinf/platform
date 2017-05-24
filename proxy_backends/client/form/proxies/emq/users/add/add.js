@@ -5,6 +5,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Npm packages imports
 import $ from 'jquery';
@@ -45,8 +46,11 @@ Template.addEmqUser.events({
           // Hide modal
           Modal.hide('addEmqUser');
 
+          // Get i18n success message
+          const successMessage =
+          TAPi18n.__('proxyBackendForm_emqProxyForm_addEmqUser_successMessage');
           // Show success message
-          sAlert.success('EMQ user successfully added!');
+          sAlert.success(successMessage);
         }
       });
     }
