@@ -41,8 +41,44 @@ ApiV1.swagger = {
   tags: {
     api: 'APIs',
     organization: 'Organizations',
+    users: 'Users',
   },
   params: {
+    userName: {
+      name: 'username',
+      in: 'body',
+      description: 'Username',
+      required: true,
+      type: 'string',
+    },
+    password: {
+      name: 'password',
+      in: 'body',
+      description: 'Password for user',
+      required: true,
+      type: 'string',
+    },
+    email: {
+      name: 'email',
+      in: 'body',
+      description: 'Email address for user',
+      required: true,
+      type: 'string',
+    },
+    userId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of User',
+      required: true,
+      type: 'string',
+    },
+    company: {
+      name: 'company',
+      in: 'body',
+      description: 'Company name of user',
+      required: true,
+      type: 'string',
+    },
     apiId: {
       name: 'id',
       in: 'path',
