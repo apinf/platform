@@ -21,6 +21,9 @@ ApiV1.addCollection(Meteor.users, {
   endpoints: {
     getAll: {
       swagger: {
+        tags: [
+          ApiV1.swagger.tags.users,
+        ],
         description: 'Returns users',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
@@ -31,7 +34,7 @@ ApiV1.addCollection(Meteor.users, {
         ],
         responses: {
           200: {
-            description: 'users',
+            description: 'success',
           },
           400: {
             description: 'Bad query parameters',
@@ -151,6 +154,9 @@ ApiV1.addCollection(Meteor.users, {
     },
     get: {
       swagger: {
+        tags: [
+          ApiV1.swagger.tags.users,
+        ],
         description: 'Returns user with given ID.',
         parameters: [
           ApiV1.swagger.params.userId,
@@ -167,11 +173,14 @@ ApiV1.addCollection(Meteor.users, {
       roleRequired: ['admin'],
       swagger: {
         tags: [
-          ApiV1.swagger.tags.user,
+          ApiV1.swagger.tags.users,
         ],
         description: 'Adds a new user. On success, returns newly added object.',
         parameters: [
-          ApiV1.swagger.params.user,
+          ApiV1.swagger.params.userId,
+          ApiV1.swagger.params.userName,
+          ApiV1.swagger.params.email,
+          ApiV1.swagger.params.password,
         ],
         responses: {
           200: {
@@ -215,7 +224,7 @@ ApiV1.addCollection(Meteor.users, {
       authRequired: true,
       swagger: {
         tags: [
-          ApiV1.swagger.tags.user,
+          ApiV1.swagger.tags.users,
         ],
         description: 'Deletes the identified Organization from catalog.',
         parameters: [
@@ -277,12 +286,14 @@ ApiV1.addCollection(Meteor.users, {
       authRequired: true,
       swagger: {
         tags: [
-          ApiV1.swagger.tags.user,
+          ApiV1.swagger.tags.users,
         ],
         description: 'Update a User',
         parameters: [
           ApiV1.swagger.params.userId,
-          ApiV1.swagger.params.user,
+          ApiV1.swagger.params.userName,
+          ApiV1.swagger.params.company,
+          ApiV1.swagger.params.password,
         ],
         responses: {
           200: {
