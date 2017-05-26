@@ -12,7 +12,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-// APINF imports
+// Collection imports
 import Proxies from '/proxies/collection';
 
 Template.emqUsers.onCreated(function () {
@@ -74,7 +74,7 @@ Template.emqUsers.events({
     // Get reactive variable instance that stores EMQ users
     const emqUsersReactive = templateInstance.emqUsers;
 
-    // Show moda, and pass data to it
+    // Show modal, and pass data to it
     Modal.show('removeEmqUser', { user, emqProxy, emqUsersReactive });
   },
   'click #add-emq-user-modal': function (event, templateInstance) {
