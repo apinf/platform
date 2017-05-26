@@ -828,7 +828,7 @@
                       "placeholder": "E.g. 224"
                     },
                     "tls": {
-                      "label": "TLS"
+                      "label": "TLS (Transport Layer Security)"
                     }
                   }
               },
