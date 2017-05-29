@@ -6,6 +6,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+// import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 
 // Collection imports
 import ApiV1 from '/core/server/api';
@@ -139,6 +141,9 @@ ApiV1.addCollection(Meteor.users, {
               // Add Organizations' information to Users' data
               userData.organization = orgDataList;
             }
+            // Do not show all fields
+            delete userData.services;
+            delete userData.emails;
           });
         }
         // Construct response
@@ -415,13 +420,12 @@ ApiV1.addCollection(Meteor.users, {
         };
       },
     },
-
   },
 });
 
-// Request /rest/v1/users/:id for Users collection
-ApiV1.addRoute('Meteor.users/updates', {
-  getAll: {
+// Request /rest/v1/users/updates for Users collection
+ApiV1.addRoute('users/updates', {
+  get: {
     swagger: {
       tags: [
         ApiV1.swagger.tags.users,
@@ -443,12 +447,12 @@ ApiV1.addRoute('Meteor.users/updates', {
       },
     },
     action () {
+      let badQueryParameters = false;
+      // Read possible query parameters
       const queryParams = this.queryParams;
 
-      console.log('update q=', queryParams);
       const query = {};
       const options = {};
-      const searchCondition = {};
 
       // parse query parameters
       if (queryParams.organization_id) {
@@ -474,48 +478,64 @@ ApiV1.addRoute('Meteor.users/updates', {
       }
 
       if (queryParams.since) {
-        query.createdAt = {
-          $lt: new Date(),
-          $gte: new Date(new Date().setDate(new Date().getDate() - queryParams.since)),
-        };
+        if (queryParams.since % 1 === 0) {
+          query.createdAt = {
+            $lt: new Date(),
+            $gte: new Date(new Date().setDate(new Date().getDate() - queryParams.since)),
+          };
+        } else {
+          badQueryParameters = true;
+        }
       }
 
-      // Get all users
-      const userList = Meteor.users.find(query, options).fetch();
-      // Get Organization names and ids for every User
-      if (userList) {
-        // Loop through user list one by one
-        userList.forEach((userData) => {
-          // Array for Organization name and id
-          const orgDataList = [];
-          // Get user id
-          const userId = userData._id;
-          // Find all Organizations, where User belongs to
-          const organizations = Organizations.find({
-            managerIds: userId,
-          }).fetch();
-          // If there are Users' Organizations
-          if (organizations.length > 0) {
-            // Loop through Users' Organizations
-            organizations.forEach((organization) => {
-              const orgData = {};
-              // Put Organization name and id into an object
-              orgData.organization_id = organization._id;
-              orgData.organization_name = organization.name;
-              // Add this Organization data into Users' organization data list
-              orgDataList.push(orgData);
-            });
-            // Add Organizations' information to Users' data
-            userData.organization = orgDataList;
-          }
-        });
+      if (!badQueryParameters) {
+        // Get all users
+        const userList = Meteor.users.find(query, options).fetch();
+        // Get Organization names and ids for every User
+        if (userList) {
+          // Loop through user list one by one
+          userList.forEach((userData) => {
+            // Array for Organization name and id
+            const orgDataList = [];
+            // Get user id
+            const userId = userData._id;
+            // Find all Organizations, where User belongs to
+            const organizations = Organizations.find({
+              managerIds: userId,
+            }).fetch();
+            // If there are Users' Organizations
+            if (organizations.length > 0) {
+              // Loop through Users' Organizations
+              organizations.forEach((organization) => {
+                const orgData = {};
+                // Put Organization name and id into an object
+                orgData.organization_id = organization._id;
+                orgData.organization_name = organization.name;
+                // Add this Organization data into Users' organization data list
+                orgDataList.push(orgData);
+              });
+              // Add Organizations' information to Users' data
+              userData.organization = orgDataList;
+            }
+            // Do not show all fields
+            delete userData.services;
+            delete userData.emails;
+          });
+        }
+        // Construct response
+        return {
+          statusCode: 200,
+          body: {
+            status: 'success',
+            data: userList,
+          },
+        };
       }
       // Construct response
       return {
-        statusCode: 200,
+        statusCode: 400,
         body: {
-          status: 'success',
-          data: userList,
+          status: 'Bad query parameters',
         },
       };
     },
