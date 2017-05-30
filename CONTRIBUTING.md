@@ -39,6 +39,10 @@ Use the following guidelines when contributing to this project.
     - [i18n key structure](#i18n-key-structure)
     - [Template text (HTML/Blaze)](#template-text-htmlblaze)
     - [JavaScript text](#javascript-text)
+- [Automated testing](#automated-testing)
+  - [End to End](#end-to-end)
+    - [Test suite execution](#test-suite-execution)
+      - [Running only specific test](#running-only-specific-test)
 - [Packages](#packages)
   - [Forms](#forms)
   - [Routing](#routing)
@@ -524,6 +528,34 @@ const message = TAPi18n._("templateName_event_translationString");
 sAlert.warning(message);
 
 ```
+
+# Automated testing
+
+## End to End
+
+There are some end to end tests on the `tests` directory. They were built using [chimp.js](https://github.com/xolvio/chimp).
+
+### Test suite execution
+
+In order to run the end to end tests, the application must be running on a separated process
+
+```bash
+$ meteor run
+```
+
+And the tests can be run via yarn
+
+```bash
+$ yarn run chimp-test
+```
+
+A new google chrome window will open and the scripts will be run there.
+
+#### Running only specific test
+
+It is possible to run a specific test file by changing `tests/chimp-config.js` file, under `mocha_config.grep` setting.
+
+Since the test cases begin with a number, just put a number to run the desired file.
 
 # Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.
