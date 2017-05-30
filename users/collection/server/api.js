@@ -6,15 +6,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-// import { check } from 'meteor/check';
-import { check, Match } from 'meteor/check';
 
 // Collection imports
 import ApiV1 from '/core/server/api';
 import Organizations from '/organizations/collection';
 
-  // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
-  // Meteor.users collection
+// Npm packages imports
+import _ from 'lodash';
+
+
+// Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
+// Meteor.users collection
 ApiV1.addCollection(Meteor.users, {
   excludedEndpoints: [],
   routeOptions: {
@@ -49,6 +51,7 @@ ApiV1.addCollection(Meteor.users, {
         const query = {};
         const options = {};
         const searchCondition = {};
+        const excludeFields = {};
 
         // parse query parameters
         if (queryParams.organization_id) {
@@ -75,17 +78,27 @@ ApiV1.addCollection(Meteor.users, {
 
         // By default users are sorted by username
         if (!queryParams.sort_by ||
-            queryParams.sort_by === 'username') {
+            queryParams.sort_by === 'username' ||
+            _.includes(queryParams.sort_by, 'username')) {
           searchCondition.username = 1;
           options.sort = searchCondition;
         }
 
-        if (queryParams.sort_by === 'created_at') {
+        if (queryParams.sort_by === 'created_at' ||
+            _.includes(queryParams.sort_by, 'created_at')) {
           searchCondition.createdAt = 1;
           options.sort = searchCondition;
         }
 
-        if (queryParams.sort_by === 'updated_at') {
+        if (queryParams.sort_by === 'organization' ||
+            _.includes(queryParams.sort_by, 'organization')) {
+          searchCondition.organizationName = 1;
+          options.sort = searchCondition;
+        }
+
+        // This will be in use when timestamp for user update is taken in use
+        if (queryParams.sort_by === 'updated_at' ||
+            _.includes(queryParams.sort_by, 'updated_at')) {
           searchCondition.updatedAt = 1;
           options.sort = searchCondition;
         }
@@ -113,6 +126,12 @@ ApiV1.addCollection(Meteor.users, {
             },
           ];
         }
+
+        // Exclude password and email
+        excludeFields.services = 0;
+        excludeFields.emails = 0;
+        options.fields = excludeFields;
+
         // Get all users
         const userList = Meteor.users.find(query, options).fetch();
         // Get Organization names and ids for every User
@@ -141,9 +160,6 @@ ApiV1.addCollection(Meteor.users, {
               // Add Organizations' information to Users' data
               userData.organization = orgDataList;
             }
-            // Do not show all fields
-            delete userData.services;
-            delete userData.emails;
           });
         }
         // Construct response
@@ -453,6 +469,7 @@ ApiV1.addRoute('users/updates', {
 
       const query = {};
       const options = {};
+      const excludeFields = {};
 
       // parse query parameters
       if (queryParams.organization_id) {
@@ -487,6 +504,10 @@ ApiV1.addRoute('users/updates', {
           badQueryParameters = true;
         }
       }
+      // Exclude password and email address
+      excludeFields.services = 0;
+      excludeFields.emails = 0;
+      options.fields = excludeFields;
 
       if (!badQueryParameters) {
         // Get all users
@@ -517,9 +538,6 @@ ApiV1.addRoute('users/updates', {
               // Add Organizations' information to Users' data
               userData.organization = orgDataList;
             }
-            // Do not show all fields
-            delete userData.services;
-            delete userData.emails;
           });
         }
         // Construct response
