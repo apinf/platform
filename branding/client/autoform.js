@@ -24,7 +24,12 @@ AutoForm.hooks({
       if (privacyPolicy === '<div><br></div>') {
         Branding.update(this.docId, { $unset: { privacyPolicy: '' } });
       }
-      return false;
+
+      // Get branding form success message translation
+      const message = TAPi18n.__('branding_successMessage');
+
+      // Alert the user of successful save
+      sAlert.success(message);
     },
   },
 });
