@@ -500,6 +500,7 @@
   "proxyBackendForm_emqProxyForm_addEmqUser_saveButton": "Save",
   "proxyBackendForm_emqProxyForm_addEmqUser_cancelButton": "Cancel",
   "proxyBackendForm_emqProxyForm_addEmqUser_successMessage": "EMQ user successfully added!",
+  "proxyBackendForm_emqProxyForm_addEmqUser_errorMessage": "Username or password value(s) not found.",
   "proxyBackendForm_emqProxyForm_removeEmqUser_modalTitle": "Remove EMQ User?",
   "proxyBackendForm_emqProxyForm_removeEmqUser_confirmButton": "Yes, remove",
   "proxyBackendForm_emqProxyForm_removeEmqUser_cancelButton": "Cancel",

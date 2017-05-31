@@ -58,6 +58,12 @@ Template.addEmqUser.events({
           sAlert.success(successMessage);
         }
       });
+    } else {
+      // Get i18n success message
+      const errorMessage =
+      TAPi18n.__('proxyBackendForm_emqProxyForm_addEmqUser_errorMessage');
+      // Show error message
+      sAlert.error(errorMessage);
     }
   },
 });
