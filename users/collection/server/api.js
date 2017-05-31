@@ -90,6 +90,8 @@ ApiV1.addCollection(Meteor.users, {
           options.sort = searchCondition;
         }
 
+        // This will be used when organization name is returned in first find
+        // Needs also rethinking what to do in case there are several organizations
         if (queryParams.sort_by === 'organization' ||
             _.includes(queryParams.sort_by, 'organization')) {
           searchCondition.organizationName = 1;
