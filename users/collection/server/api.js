@@ -129,9 +129,10 @@ ApiV1.addCollection(Meteor.users, {
           ];
         }
 
-        // Exclude password and email
+        // Exclude password, email, role
         excludeFields.services = 0;
         excludeFields.emails = 0;
+        excludeFields.roles = 0;
         options.fields = excludeFields;
 
         // Get all users
@@ -206,14 +207,17 @@ ApiV1.addCollection(Meteor.users, {
           ApiV1.swagger.params.password,
         ],
         responses: {
-          200: {
+          201: {
             description: 'User successfully added',
+          },
+          400: {
+            description: 'Invalid input, object invalid',
           },
           401: {
             description: 'Authentication is required',
           },
-          403: {
-            description: 'User does not have permission',
+          409: {
+            description: 'User already exists',
           },
         },
         security: [
@@ -226,6 +230,42 @@ ApiV1.addCollection(Meteor.users, {
       action () {
         // Get data from body parameters
         const bodyParams = this.bodyParams;
+        const options = {};
+        const excludeFields = {};
+        excludeFields.services = 0;
+        options.fields = excludeFields;
+
+        // Are all parameters given
+        if (!bodyParams.username ||
+            !bodyParams.email ||
+            !bodyParams.password) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'Bad request',
+              message: 'Invalid input, object invalid',
+            },
+          };
+        }
+
+        // Does username already exist
+        let userExists = Meteor.users.findOne({ username: bodyParams.username });
+
+        if (!userExists) {
+          // Is email address already in use
+          userExists = Meteor.users.findOne({ 'emails.address': bodyParams.email });
+        }
+
+        // Either username or email is already in use
+        if (userExists) {
+          return {
+            statusCode: 409,
+            body: {
+              status: 'Bad request',
+              message: 'User already exists',
+            },
+          };
+        }
 
         // Create a new user
         Accounts.createUser({
@@ -236,8 +276,10 @@ ApiV1.addCollection(Meteor.users, {
 
         return {
           statusCode: 201,
-          status: 'Success',
-          data: Meteor.users.findOne({ username: bodyParams.username }),
+          body: {
+            status: 'Success',
+            data: Meteor.users.findOne({ username: bodyParams.username }, options),
+          },
         };
       },
     },
@@ -255,7 +297,7 @@ ApiV1.addCollection(Meteor.users, {
         ],
         responses: {
           200: {
-            description: 'User successfully removed.',
+            description: 'User deleted.',
           },
           400: {
             description: 'Invalid input, invalid object',
@@ -289,7 +331,7 @@ ApiV1.addCollection(Meteor.users, {
             statusCode: 200,
             body: {
               status: 'OK',
-              message: 'User successfully removed',
+              message: 'User deleted',
             },
           };
         }
@@ -320,7 +362,7 @@ ApiV1.addCollection(Meteor.users, {
         ],
         responses: {
           200: {
-            description: 'User successfully edited.',
+            description: 'User successfully updated.',
           },
           401: {
             description: 'Authentication is required',
@@ -329,7 +371,7 @@ ApiV1.addCollection(Meteor.users, {
             description: 'User does not have permission',
           },
           404: {
-            description: 'User is not found',
+            description: 'No user found with given UserID',
           },
         },
         security: [
@@ -361,6 +403,19 @@ ApiV1.addCollection(Meteor.users, {
         let previousPassword;
         let updateDone = false;
 
+        // Are all parameters given
+        if (!bodyParams.username &&
+            !bodyParams.company &&
+            !bodyParams.password) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'Bad request',
+              message: 'Invalid input, object invalid',
+            },
+          };
+        }
+
         // Check error situations before modification
         if (bodyParams.username) {
           // Check if there already is a User by the same name
@@ -369,14 +424,14 @@ ApiV1.addCollection(Meteor.users, {
               statusCode: 403,
               body: {
                 status: 'Failure',
-                message: 'Username already exists!',
+                message: 'Username already exists',
               },
             };
           }
         }
         // Both old and new password has to be given
-        if (bodyParams.new_psw &&
-            typeof bodyParams.new_psw !== 'string') {
+        if (bodyParams.password &&
+            typeof bodyParams.password !== 'string') {
           return {
             statusCode: 400,
             body: {
@@ -396,10 +451,10 @@ ApiV1.addCollection(Meteor.users, {
         }
 
         // Try to change password
-        if (bodyParams.new_psw) {
+        if (bodyParams.password) {
           // Save previous password in case restore is needed later
           previousPassword = user.services.password.bcrypt;
-          Accounts.setPassword(userId, bodyParams.new_psw);
+          Accounts.setPassword(userId, bodyParams.password);
           // Flag the change for response
           updateDone = true;
         }
@@ -416,8 +471,7 @@ ApiV1.addCollection(Meteor.users, {
           return {
             statusCode: 200,
             body: {
-              status: 'Successfully updated',
-              data: Meteor.users.findOne(userId),
+              status: 'User successfully updated',
             },
           };
         }
@@ -483,32 +537,45 @@ ApiV1.addRoute('users/updates', {
           // Get list of managed API IDs
           query._id = { $in: organization.managerIds };
         }
-      }
-
-      if (queryParams.limit) {
-        options.limit = parseInt(queryParams.limit, 10);
       } else {
-        // By default 100 users is returned
-        options.limit = 100;
-      }
-
-      if (queryParams.skip) {
-        options.skip = parseInt(queryParams.skip, 10);
-      }
-
-      if (queryParams.since) {
-        if (queryParams.since % 1 === 0) {
-          query.createdAt = {
-            $lt: new Date(),
-            $gte: new Date(new Date().setDate(new Date().getDate() - queryParams.since)),
-          };
+        // Using organization ID other parameters are overridden
+        if (queryParams.limit) {
+          options.limit = parseInt(queryParams.limit, 10);
+          if (options.limit < 1) {
+            badQueryParameters = true;
+          }
         } else {
-          badQueryParameters = true;
+          // By default 100 users is returned
+          options.limit = 100;
+        }
+
+        if (queryParams.skip) {
+          options.skip = parseInt(queryParams.skip, 10);
+          if (options.skip < 0) {
+            badQueryParameters = true;
+          }
+        }
+
+        // Default value for parameter since is 7
+        if (!queryParams.since) {
+          queryParams.since = 7;
+        }
+        // Set the query for past days according to parameter since
+        if (queryParams.since) {
+          if (queryParams.since % 1 === 0) {
+            query.createdAt = {
+              $lt: new Date(),
+              $gte: new Date(new Date().setDate(new Date().getDate() - queryParams.since)),
+            };
+          } else {
+            badQueryParameters = true;
+          }
         }
       }
-      // Exclude password and email address
+      // Exclude password, email, role
       excludeFields.services = 0;
       excludeFields.emails = 0;
+      excludeFields.roles = 0;
       options.fields = excludeFields;
 
       if (!badQueryParameters) {
