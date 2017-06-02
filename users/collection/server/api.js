@@ -7,6 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
+// Meteor contributed packages imports
+import { Roles } from 'meteor/alanning:roles';
+
 // Collection imports
 import ApiV1 from '/core/server/api';
 import Organizations from '/organizations/collection';
@@ -46,6 +49,8 @@ ApiV1.addCollection(Meteor.users, {
         },
       },
       action () {
+        console.log('this=', this);
+        console.log('userId=', this.userId);
         const queryParams = this.queryParams;
 
         const query = {};
@@ -232,10 +237,8 @@ ApiV1.addCollection(Meteor.users, {
         const bodyParams = this.bodyParams;
         const options = {};
         const excludeFields = {};
-        excludeFields.services = 0;
-        options.fields = excludeFields;
 
-        // Are all parameters given
+        // All parameters must be given
         if (!bodyParams.username ||
             !bodyParams.email ||
             !bodyParams.password) {
@@ -273,6 +276,10 @@ ApiV1.addCollection(Meteor.users, {
           email: bodyParams.email,
           password: bodyParams.password,
         });
+
+        // Do not include password in response
+        excludeFields.services = 0;
+        options.fields = excludeFields;
 
         return {
           statusCode: 201,
@@ -320,11 +327,30 @@ ApiV1.addCollection(Meteor.users, {
         ],
       },
       action () {
-        // Get ID of Organization
+        // Get requestor's id
+        const requestorId = this.userId;
+
+        // Check if requestor is administrator
+        const requestorHasRights = Roles.userIsInRole(requestorId, ['admin']);
+
+        if (!requestorHasRights) {
+          // If not admin and not self-removal, return error
+          if (this.urlParams.id !== requestorId) {
+            return {
+              statusCode: 403,
+              body: {
+                status: 'Fail',
+                message: 'User does not have permission',
+              },
+            };
+          }
+        }
+        // Get ID of User to be removed
         const userId = this.urlParams.id;
+        // Check if user exists
         const user = Meteor.users.findOne(userId);
         if (user) {
-          // Remove User account
+          // Remove existing User account
           Meteor.users.remove(user._id);
 
           return {
@@ -336,7 +362,7 @@ ApiV1.addCollection(Meteor.users, {
           };
         }
 
-        // User doesn't exist
+        // User didn't exist
         return {
           statusCode: 404,
           body: {
@@ -382,6 +408,25 @@ ApiV1.addCollection(Meteor.users, {
         ],
       },
       action () {
+        // Get requestor's id
+        const requestorId = this.userId;
+
+        // Check if requestor is administrator
+        const requestorHasRights = Roles.userIsInRole(requestorId, ['admin']);
+
+        if (!requestorHasRights) {
+          // If not admin and not self-removal, return error
+          if (this.urlParams.id !== requestorId) {
+            return {
+              statusCode: 403,
+              body: {
+                status: 'Fail',
+                message: 'User does not have permission',
+              },
+            };
+          }
+        }
+
         // Get ID of User
         const userId = this.urlParams.id;
         // Check if user to be modified exists
