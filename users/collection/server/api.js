@@ -27,6 +27,8 @@ ApiV1.addCollection(Meteor.users, {
   },
   endpoints: {
     getAll: {
+      authRequired: true,
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ApiV1.swagger.tags.users,
@@ -180,6 +182,7 @@ ApiV1.addCollection(Meteor.users, {
 
     },
     get: {
+      authRequired: true,
       swagger: {
         tags: [
           ApiV1.swagger.tags.users,
