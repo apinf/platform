@@ -49,8 +49,6 @@ ApiV1.addCollection(Meteor.users, {
         },
       },
       action () {
-        console.log('this=', this);
-        console.log('userId=', this.userId);
         const queryParams = this.queryParams;
 
         const query = {};
@@ -160,8 +158,8 @@ ApiV1.addCollection(Meteor.users, {
               organizations.forEach((organization) => {
                 const orgData = {};
                 // Put Organization name and id into an object
-                orgData.organization_id = organization._id;
-                orgData.organization_name = organization.name;
+                orgData.organizationId = organization._id;
+                orgData.organizationName = organization.name;
                 // Add this Organization data into Users' organization data list
                 orgDataList.push(orgData);
               });
@@ -644,8 +642,8 @@ ApiV1.addRoute('users/updates', {
               organizations.forEach((organization) => {
                 const orgData = {};
                 // Put Organization name and id into an object
-                orgData.organization_id = organization._id;
-                orgData.organization_name = organization.name;
+                orgData.organizationId = organization._id;
+                orgData.organizationName = organization.name;
                 // Add this Organization data into Users' organization data list
                 orgDataList.push(orgData);
               });
