@@ -28,7 +28,6 @@ ApiV1.addCollection(Meteor.users, {
   endpoints: {
     getAll: {
       authRequired: true,
-      roleRequired: ['admin'],
       swagger: {
         tags: [
           ApiV1.swagger.tags.users,
@@ -57,9 +56,21 @@ ApiV1.addCollection(Meteor.users, {
         const options = {};
         const searchCondition = {};
         const excludeFields = {};
+        let searchOnlyWithOwnId = false;
+        // Get requestor's id
+        const requestorId = this.userId;
+
+        // Check if requestor is administrator
+        const requestorHasRights = Roles.userIsInRole(requestorId, ['admin']);
+
+        if (!requestorHasRights) {
+          searchOnlyWithOwnId = true;
+        }
 
         // parse query parameters
-        if (queryParams.organization_id) {
+        if (searchOnlyWithOwnId) {
+          query._id = requestorId;
+        } else if (queryParams.organization_id) {
           // Get organization document with specified ID
           const organization = Organizations.findOne(queryParams.organization_id);
 
@@ -134,10 +145,8 @@ ApiV1.addCollection(Meteor.users, {
           ];
         }
 
-        // Exclude password, email, role
+        // Exclude password
         excludeFields.services = 0;
-        excludeFields.emails = 0;
-        excludeFields.roles = 0;
         options.fields = excludeFields;
 
         // Get all users
@@ -544,6 +553,7 @@ ApiV1.addCollection(Meteor.users, {
 // Request /rest/v1/users/updates for Users collection
 ApiV1.addRoute('users/updates', {
   get: {
+    roleRequired: ['admin'],
     swagger: {
       tags: [
         ApiV1.swagger.tags.users,
@@ -618,10 +628,8 @@ ApiV1.addRoute('users/updates', {
           }
         }
       }
-      // Exclude password, email, role
+      // Exclude password
       excludeFields.services = 0;
-      excludeFields.emails = 0;
-      excludeFields.roles = 0;
       options.fields = excludeFields;
 
       if (!badQueryParameters) {
