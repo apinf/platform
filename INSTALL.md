@@ -32,7 +32,7 @@
 
 1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
 2. Install [Meteor.js](https://www.meteor.com/install)
-3. Clone [Apinf](https://github.com/apinf/api-umbrella-dashboard)
+3. Clone [Apinf](https://github.com/apinf/platform)
 4. Run `npm install`
 5. Type `meteor` in the project directory
 
@@ -52,7 +52,7 @@ Register a new admin account. The first user will become Admin.
  3. Fill APInf settings http://YOUR_SITE_DOMAIN/settings
 
 ## With Docker Compose
-1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/api-umbrella-dashboard/blob/develop/docker-compose.yml).
+1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/platform/blob/develop/docker-compose.yml).
 2. In the same folder create file "docker/api-umbrella/config/api-umbrella.yml" based on example "docker/api-umbrella/config/api-umbrella.yml.example". ATTENTION: replace "example.com" on YOUR_SITE_DOMAIN for keys "ssl_cert" and "ssl_cert_key".
 3. Create file "docker/apinf/env" based on example "docker/apinf/env.example".
 4. Create file "docker/ssl/env" based on example "docker/ssl/env.example".

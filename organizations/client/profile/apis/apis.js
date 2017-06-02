@@ -135,6 +135,10 @@ Template.organizationApis.helpers({
     // Get reference of pagination
     return instance.pagination;
   },
+  paginationReady () {
+    // Check if pagination subscription is ready
+    return Template.instance().pagination.ready();
+  },
   hasApi () {
     const instance = Template.instance();
     // Get documents

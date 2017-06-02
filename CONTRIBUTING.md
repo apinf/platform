@@ -13,8 +13,11 @@ Use the following guidelines when contributing to this project.
   - [Bug reports / support requests](#bug-reports--support-requests)
     - [Bug report/support request example](#bug-reportsupport-request-example)
 - [Contributing code](#contributing-code)
+  - [Copyright statement in source code](#copyright-statement-in-source-code)
+  - [CSS styleguide](#css-styleguide)
   - [Code quality](#code-quality)
     - [Simplicity and safety](#simplicity-and-safety)
+    - [Importing](#importing)
     - [Comments](#comments)
       - [Example comment](#example-comment)
     - [One task per line](#one-task-per-line)
@@ -49,10 +52,10 @@ Use the following guidelines when contributing to this project.
 
 There are many ways to get involved:
 * Contribute to our [Planning Documents](https://apinf.hackpad.com)
-* Report bugs on our [issue tracker](https://github.com/apinf/api-umbrella-dashboard/issues/new)
+* Report bugs on our [issue tracker](https://github.com/apinf/platform/issues/new)
 * Add documentation via our [documentation repository](https://github.com/apinf/docs)
 * Improve the code with pull requests
-  * Choose a [task from our backlog](https://github.com/apinf/api-umbrella-dashboard/issues)
+  * Choose a [task from our backlog](https://github.com/apinf/platform/issues)
 
 ## Join the discussion
 
