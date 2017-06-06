@@ -22,6 +22,7 @@ ApiV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
+      description: 'APinf is open source API management and catalog. ',
       version: '1.0.0',
       title: 'Admin API',
     },
