@@ -13,7 +13,7 @@
 - In catalog, make life-cycle phase icon a link to filtered list [\#2133](https://github.com/apinf/platform/issues/2133)
 - Metadata: 'Phone' and 'Email' fields not validated in 'Contact' form [\#2064](https://github.com/apinf/platform/issues/2064)
 - Title and page title should be the same [\#2054](https://github.com/apinf/platform/issues/2054)
-- Add html ids for following elements in APINF. [\#1933](https://github.com/apinf/platform/issues/1933)
+- Add html ids for following elements in APInf. [\#1933](https://github.com/apinf/platform/issues/1933)
 
 **Fixed bugs:**
 
@@ -128,7 +128,7 @@
 
 **Fixed bugs:**
 
-- APINF nightly: API key is not possible to retrieve [\#2149](https://github.com/apinf/platform/issues/2149)
+- APInf nightly: API key is not possible to retrieve [\#2149](https://github.com/apinf/platform/issues/2149)
 - Navigate from one organization profile to another flashes info text [\#2081](https://github.com/apinf/platform/issues/2081)
 - Suomi view: user info text untranslated in Organization profile [\#2076](https://github.com/apinf/platform/issues/2076)
 - Registered user able to edit or delete others feedback  [\#2051](https://github.com/apinf/platform/issues/2051)
@@ -331,7 +331,7 @@
 
 **Fixed bugs:**
 
-- In APINF staging, the language selector bar appears grey when the branding color is set as default [\#1925](https://github.com/apinf/platform/issues/1925)
+- In APInf staging, the language selector bar appears grey when the branding color is set as default [\#1925](https://github.com/apinf/platform/issues/1925)
 - Version number empty in About [\#1910](https://github.com/apinf/platform/issues/1910)
 - Branding form cannot be saved without adding one social media item [\#1879](https://github.com/apinf/platform/issues/1879)
 - Login with invalid username or email displays 'Internal Server Error' message [\#1808](https://github.com/apinf/platform/issues/1808)
@@ -355,7 +355,7 @@
 - Setup a separate API Umbrella instance for testing multiproxy [\#1873](https://github.com/apinf/platform/issues/1873)
 - Allow only selecting one API from API select list [\#1871](https://github.com/apinf/platform/issues/1871)
 - Allow API owner to select one from several configured proxies [\#1869](https://github.com/apinf/platform/issues/1869)
-- Remove Horizontal scrollbar from APINF landing page [\#1867](https://github.com/apinf/platform/issues/1867)
+- Remove Horizontal scrollbar from APInf landing page [\#1867](https://github.com/apinf/platform/issues/1867)
 - Research and Low fidelity sketching for Organizational Management [\#1834](https://github.com/apinf/platform/issues/1834)
 - Ensure that staging has all required deployment settings [\#1707](https://github.com/apinf/platform/issues/1707)
 - Charts not available in deployments created with single Docker image [\#1395](https://github.com/apinf/platform/issues/1395)
@@ -365,7 +365,7 @@
 - Merge develop to master for release 0.35 [\#1946](https://github.com/apinf/platform/pull/1946) ([bajiat](https://github.com/bajiat))
 - Update about.html to version 0.35 [\#1945](https://github.com/apinf/platform/pull/1945) ([bajiat](https://github.com/bajiat))
 - Remove URL parameter instruction [\#1937](https://github.com/apinf/platform/pull/1937) ([jykae](https://github.com/jykae))
-- Remove Horizontal scrollbar from APINF landing page [\#1934](https://github.com/apinf/platform/pull/1934) ([Uzmani](https://github.com/Uzmani))
+- Remove Horizontal scrollbar from APInf landing page [\#1934](https://github.com/apinf/platform/pull/1934) ([Uzmani](https://github.com/Uzmani))
 - Warn admin about proxy removal [\#1932](https://github.com/apinf/platform/pull/1932) ([jykae](https://github.com/jykae))
 - Revert to hardcoded version number [\#1930](https://github.com/apinf/platform/pull/1930) ([jykae](https://github.com/jykae))
 - Fix/return link errorpage [\#1929](https://github.com/apinf/platform/pull/1929) ([nnn](https://github.com/nnn))
@@ -483,7 +483,7 @@
 - ProxyBackend form notification, if form is not filled at all [\#1816](https://github.com/apinf/platform/issues/1816)
 - Deleted account displays its related APIs in Catalog [\#1815](https://github.com/apinf/platform/issues/1815)
 - No notice user about successful deleting user account [\#1787](https://github.com/apinf/platform/issues/1787)
-- IE11 - on clicking Bookmark , user gets back to APINF landing page [\#1767](https://github.com/apinf/platform/issues/1767)
+- IE11 - on clicking Bookmark , user gets back to APInf landing page [\#1767](https://github.com/apinf/platform/issues/1767)
 - Enable 'API key requirement' allows Call API without API Key [\#1762](https://github.com/apinf/platform/issues/1762)
 - Api tabs: anonymous user has access to feedback manipulation [\#1744](https://github.com/apinf/platform/issues/1744)
 - API tabs: doesn't work feedback vote [\#1735](https://github.com/apinf/platform/issues/1735)
@@ -559,7 +559,7 @@
 
 **Fixed bugs:**
 
-- anonymous user \(no logged in\) can find private API using APINF search [\#1774](https://github.com/apinf/platform/issues/1774)
+- anonymous user \(no logged in\) can find private API using APInf search [\#1774](https://github.com/apinf/platform/issues/1774)
 - Dashboard needs a state for owner that has not connected API to proxy [\#1763](https://github.com/apinf/platform/issues/1763)
 - Tab "Manage APIs" ia available yet [\#1755](https://github.com/apinf/platform/issues/1755)
 - Dashboard console error when viewing as non-admin user with proxy backend configured [\#1753](https://github.com/apinf/platform/issues/1753)
@@ -717,11 +717,11 @@
 **Closed issues:**
 
 - Incorrect info text [\#1647](https://github.com/apinf/platform/issues/1647)
-- Finalizing APINF cards [\#1635](https://github.com/apinf/platform/issues/1635)
+- Finalizing APInf cards [\#1635](https://github.com/apinf/platform/issues/1635)
 - Wireframe for "Allow only administrators to add APIs to a deployment" [\#1631](https://github.com/apinf/platform/issues/1631)
 - Add help/about modal and button on navbar [\#1613](https://github.com/apinf/platform/issues/1613)
 - API Proxy form missing Proxy data [\#1607](https://github.com/apinf/platform/issues/1607)
-- Prepare User Instruction to use APINF [\#1550](https://github.com/apinf/platform/issues/1550)
+- Prepare User Instruction to use APInf [\#1550](https://github.com/apinf/platform/issues/1550)
 - wireframe for "Add Apinf release version number to user interface" [\#1549](https://github.com/apinf/platform/issues/1549)
 - Wireframe for "API gives 404 when the base URL responds with 200" [\#1544](https://github.com/apinf/platform/issues/1544)
 - Wireframe for "Allow owner to switch on API monitoring" [\#1542](https://github.com/apinf/platform/issues/1542)
@@ -812,7 +812,7 @@
 - Add missing i18n strings to import API Settings/Documentation [\#1557](https://github.com/apinf/platform/issues/1557)
 - Deprecate /both, /lib, and /server folders [\#1556](https://github.com/apinf/platform/issues/1556)
 - Move ESLint settings to .eslintrc [\#1553](https://github.com/apinf/platform/issues/1553)
-- Design APINF Business Card [\#1551](https://github.com/apinf/platform/issues/1551)
+- Design APInf Business Card [\#1551](https://github.com/apinf/platform/issues/1551)
 - wireframe for "Add a setting for SMTP configuration" [\#1541](https://github.com/apinf/platform/issues/1541)
 - Wireframe for "API owner to be able to control 'Try it out!' button" [\#1540](https://github.com/apinf/platform/issues/1540)
 - Determine how to handle API Umbrella base URL consistently in project [\#1534](https://github.com/apinf/platform/issues/1534)
@@ -947,7 +947,7 @@
 - Add Alert message to notify users about unique API backend [\#1333](https://github.com/apinf/platform/issues/1333)
 - Update Meteor to the latest version [\#1318](https://github.com/apinf/platform/issues/1318)
 - Solve the problem with mixed http and https content [\#1099](https://github.com/apinf/platform/issues/1099)
-- APINF Logo gets hidden if menu in dashboard page is collapsed [\#1074](https://github.com/apinf/platform/issues/1074)
+- APInf Logo gets hidden if menu in dashboard page is collapsed [\#1074](https://github.com/apinf/platform/issues/1074)
 - Setting for API visibility [\#1020](https://github.com/apinf/platform/issues/1020)
 
 **Merged pull requests:**
@@ -1128,7 +1128,7 @@
 **Implemented enhancements:**
 
 - Move API status indicator to the right side of API Name [\#1112](https://github.com/apinf/platform/issues/1112)
-- Make APINF Setup fields Mandatory [\#1025](https://github.com/apinf/platform/issues/1025)
+- Make APInf Setup fields Mandatory [\#1025](https://github.com/apinf/platform/issues/1025)
 - API status check giving false error message [\#918](https://github.com/apinf/platform/issues/918)
 
 **Fixed bugs:**
@@ -1148,7 +1148,7 @@
 - Cannot read property 'host' of undefined [\#1081](https://github.com/apinf/platform/issues/1081)
 - Exception "Sync API Umbrella Users and API Backends" TypeError: Cannot read property 'length' of null [\#1073](https://github.com/apinf/platform/issues/1073)
 - Documentation Editor 'host' not defined [\#1057](https://github.com/apinf/platform/issues/1057)
-- Make APINF Setup fields Mandatory [\#1025](https://github.com/apinf/platform/issues/1025)
+- Make APInf Setup fields Mandatory [\#1025](https://github.com/apinf/platform/issues/1025)
 - Contact form email is not working in nightly [\#961](https://github.com/apinf/platform/issues/961)
 - API status check giving false error message [\#918](https://github.com/apinf/platform/issues/918)
 - Limit jQuery to \< 3.0.0 [\#1150](https://github.com/apinf/platform/pull/1150) ([brylie](https://github.com/brylie))
@@ -1160,7 +1160,7 @@
 - Review and/or delete stale branches [\#1154](https://github.com/apinf/platform/issues/1154)
 - Temporarily restore catalogue table [\#1147](https://github.com/apinf/platform/issues/1147)
 - Toggle Menu HiFi wireframe [\#1143](https://github.com/apinf/platform/issues/1143)
-- HiFi Wireframes for APINF landing page [\#1142](https://github.com/apinf/platform/issues/1142)
+- HiFi Wireframes for APInf landing page [\#1142](https://github.com/apinf/platform/issues/1142)
 - Add a Cancel button and close buttonin API Documentation Manage dialogue [\#1136](https://github.com/apinf/platform/issues/1136)
 - Denormalize averageRating and bookmarksCount for API Backends [\#1130](https://github.com/apinf/platform/issues/1130)
 - Setup Mailgun for monitoring [\#1129](https://github.com/apinf/platform/issues/1129)
@@ -1170,7 +1170,7 @@
 - Usability Testing of Documentation Viewer [\#1108](https://github.com/apinf/platform/issues/1108)
 - LoFi wireframes for Card Table [\#1093](https://github.com/apinf/platform/issues/1093)
 - Create catalog table view [\#1089](https://github.com/apinf/platform/issues/1089)
-- Heuristic Evaluation of APINF Dashboard [\#1084](https://github.com/apinf/platform/issues/1084)
+- Heuristic Evaluation of APInf Dashboard [\#1084](https://github.com/apinf/platform/issues/1084)
 - Restructure catalog and API backend code structure [\#1080](https://github.com/apinf/platform/issues/1080)
 - Chartjs debug print summer cleaning [\#1079](https://github.com/apinf/platform/issues/1079)
 - LoFi wireframe\(s\) for dashboard [\#1039](https://github.com/apinf/platform/issues/1039)
@@ -1306,7 +1306,7 @@
 - Deploy master to apinf.io [\#1015](https://github.com/apinf/platform/issues/1015)
 - Load updated Swagger document to Documentation viewer [\#1006](https://github.com/apinf/platform/issues/1006)
 - Studying Existing API catelogues [\#986](https://github.com/apinf/platform/issues/986)
-- Heuristic Evaluation of APINF [\#978](https://github.com/apinf/platform/issues/978)
+- Heuristic Evaluation of APInf [\#978](https://github.com/apinf/platform/issues/978)
 - Designing Catalog Page pt2 [\#977](https://github.com/apinf/platform/issues/977)
 - Designing Catalog Page pt1 [\#976](https://github.com/apinf/platform/issues/976)
 - Hierarchy and prioritization for project planning [\#962](https://github.com/apinf/platform/issues/962)

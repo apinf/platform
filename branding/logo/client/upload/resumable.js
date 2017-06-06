@@ -14,7 +14,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 
-// APINF imports
+// APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {

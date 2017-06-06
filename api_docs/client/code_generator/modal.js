@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// APINF imports
+// APInf imports
 import codeGeneratorLanguageOptions from './code_generator_language_options';
 
 Template.sdkCodeGeneratorModal.helpers({

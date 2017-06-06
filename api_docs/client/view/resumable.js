@@ -15,7 +15,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import ApiDocs from '/api_docs/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 
-// APINF imports
+// APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 

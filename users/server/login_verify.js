@@ -16,7 +16,7 @@ import _ from 'lodash';
 // Collection imports
 import Settings from '/settings/collection';
 
-// APINF imports
+// APInf imports
 import { mailSettingsValid } from '/core/helper_functions/validate_settings';
 
 // Login attempt verifier to require verified email before login
