@@ -15,7 +15,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import OrganizationCover from '/organizations/cover/collection/collection';
 import Organizations from '/organizations/collection';
 
-// APINF imports
+// APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {

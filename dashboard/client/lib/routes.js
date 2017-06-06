@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-// APINF imports
+// APInf imports
 import signedIn from '/core/client/lib/router';
 
 // Add route to signedIn group, requires user to sign in

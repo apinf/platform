@@ -195,7 +195,7 @@ The sections should be one of the below and the comments must be exactly the sam
 * Meteor packages imports - anything imported straight from meteor
 * Meteor contributed packages imports - contributed packages, like kadira:flow-router or tap:i18n
 * Collection imports - all collections needed by the current file
-* APINF imports - any custom file, probably from `/core`
+* APInf imports - any custom file, probably from `/core`
 * Npm packages imports - if importing packages from npm are needed
 
 Examples below:
@@ -210,7 +210,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import ApiMetadata from '../../collection';
 
-// APINF imports
+// APInf imports
 import formatDate from '/core/helper_functions/format_date';
 
 // Npm packages imports

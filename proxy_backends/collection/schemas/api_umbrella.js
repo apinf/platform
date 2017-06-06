@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-// APINF imports
+// APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({

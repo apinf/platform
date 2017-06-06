@@ -1,7 +1,7 @@
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
-// APINF imports
+// APInf imports
 import formatDate from '/core/helper_functions/format_date';
 
 // Collection imports
