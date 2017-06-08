@@ -14,7 +14,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import Branding from '/branding/collection';
 import CoverPhoto from '/branding/cover_photo/collection';
 
-// APINF imports
+// APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
