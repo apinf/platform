@@ -3,9 +3,6 @@
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Meteor packages imports
-import { Meteor } from 'meteor/meteor';
-
 // Meteor contributed packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
@@ -25,6 +22,7 @@ ApiV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
+      description: 'APinf is open source API management and catalog. ',
       version: '1.0.0',
       title: 'Admin API',
     },
@@ -44,8 +42,17 @@ ApiV1.swagger = {
   tags: {
     api: 'APIs',
     organization: 'Organizations',
+    users: 'Users',
   },
   params: {
+    api: {
+      name: 'api',
+      in: 'body',
+      description: 'Data for adding or editing API',
+      schema: {
+        $ref: '#/definitions/api',
+      },
+    },
     apiId: {
       name: 'id',
       in: 'path',
@@ -53,35 +60,27 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
-    organizationId: {
-      name: 'id',
-      in: 'path',
-      description: 'ID of Organization',
+    company: {
+      name: 'company',
+      in: 'body',
+      description: 'Company name of user',
       required: true,
       type: 'string',
     },
-    optionalSearch: {
-      name: 'q',
-      in: 'query',
-      description: 'An optional search string for looking up inventory.',
-      required: false,
+    email: {
+      name: 'email',
+      in: 'body',
+      description: 'Email address for user',
+      required: true,
       type: 'string',
     },
-    organizationApi: {
-      name: 'organization',
+    lifecycle: {
+      name: 'lifecycle',
       in: 'query',
-      description: 'An optional organization id will limit results to the given organization.',
+      description: 'Limit the listing based on lifecycle status of APIs.',
       required: false,
       type: 'string',
-    },
-    skip: {
-      name: 'skip',
-      in: 'query',
-      description: 'Number of records to skip for pagination.',
-      required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 0,
+      enum: ['design', 'development', 'testing', 'production', 'deprecated'],
     },
     limit: {
       name: 'limit',
@@ -93,21 +92,12 @@ ApiV1.swagger = {
       minimum: 0,
       maximum: 50,
     },
-    lifecycle: {
-      name: 'lifecycle',
+    optionalSearch: {
+      name: 'q',
       in: 'query',
-      description: 'Limit the listing based on lifecycle status of APIs.',
+      description: 'An optional search string for looking up inventory.',
       required: false,
       type: 'string',
-      enum: ['design', 'development', 'testing', 'production', 'deprecated'],
-    },
-    api: {
-      name: 'api',
-      in: 'body',
-      description: 'Data for adding or editing API',
-      schema: {
-        $ref: '#/definitions/api',
-      },
     },
     organization: {
       name: 'organization',
@@ -116,6 +106,59 @@ ApiV1.swagger = {
       schema: {
         $ref: '#/definitions/organization',
       },
+    },
+    organizationApi: {
+      name: 'organization',
+      in: 'query',
+      description: 'An optional organization id will limit results to the given organization.',
+      required: false,
+      type: 'string',
+    },
+    organizationId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of Organization',
+      required: true,
+      type: 'string',
+    },
+    password: {
+      name: 'password',
+      in: 'body',
+      description: 'Password for user',
+      required: true,
+      type: 'string',
+    },
+    since: {
+      name: 'since',
+      in: 'path',
+      description: 'Time frame in days',
+      required: true,
+      type: 'integer',
+      format: 'int32',
+      minimum: 1,
+    },
+    userId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of User',
+      required: true,
+      type: 'string',
+    },
+    userName: {
+      name: 'username',
+      in: 'body',
+      description: 'Username',
+      required: true,
+      type: 'string',
+    },
+    skip: {
+      name: 'skip',
+      in: 'query',
+      description: 'Number of records to skip for pagination.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
     },
   },
   definitions: {
@@ -202,54 +245,6 @@ ApiV1.swagger = {
     },
   },
 };
-
-// Enable user endpoints if authentication is enabled
-if (ApiV1._config.useDefaultAuth) {
-  // Meteor.users collection
-  ApiV1.addCollection(Meteor.users, {
-    excludedEndpoints: ['getAll', 'put', 'patch'],
-    routeOptions: {
-      authRequired: true,
-    },
-    endpoints: {
-      // GET /rest/v1/users/:id
-      get: {
-        swagger: {
-          description: 'Returns user with given ID.',
-          responses: {
-            200: {
-              description: 'One user.',
-            },
-          },
-        },
-      },
-      // POST /rest/v1/users/
-      post: {
-        authRequired: false,
-        swagger: {
-          description: 'Add user.',
-          responses: {
-            200: {
-              description: 'Return user that was added.',
-            },
-          },
-        },
-      },
-      // DELETE /rest/v1/users/:id
-      delete: {
-        roleRequired: 'admin',
-        swagger: {
-          description: 'Delete user.',
-          responses: {
-            200: {
-              description: 'Successful delete.',
-            },
-          },
-        },
-      },
-    },
-  });
-}
 
 // Generate Swagger to route /rest/v1/swagger.json
 ApiV1.addSwagger('swagger.json');
