@@ -13,12 +13,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <!--invisible auto-value field-->
         {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
         <fieldset>
-          {{> afQuickField name='name' }}
-          {{> afQuickField name='description' rows=2 }}
-          {{> afQuickField name='url' }}
-          {{> afQuickField name='lifecycleStatus' }}
+          {{> afQuickField name='name' id="api-name"  }}
+          {{> afQuickField name='description' rows=2 id="api-description" }}
+          {{> afQuickField name='url' id="api-url" }}
+          {{> afQuickField name='lifecycleStatus' id="api-lifecyclestatus" }}
         </fieldset>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" id="submitapi-button">
           {{_ 'addApi_button_text' }}
         </button>
       {{/ autoForm }}
