@@ -340,44 +340,42 @@ ApiV1.addCollection(Meteor.users, {
         // Get requestor's id
         const requestorId = this.userId;
 
-        // Check if requestor is administrator
-        const requestorHasRights = Roles.userIsInRole(requestorId, ['admin']);
+        const userIsEditingOwnAccount = this.urlParams.id === requestorId;
 
-        if (!requestorHasRights) {
-          // If not admin and not self-removal, return error
-          if (this.urlParams.id !== requestorId) {
+        const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+
+        if (userIsEditingOwnAccount || userIsAdmin) {
+          // Get ID of User to be removed
+          const userId = this.urlParams.id;
+          // Check if user exists
+          const user = Meteor.users.findOne(userId);
+          if (user) {
+            // Remove existing User account
+            Meteor.users.remove(user._id);
+
             return {
-              statusCode: 403,
+              statusCode: 200,
               body: {
-                status: 'Fail',
-                message: 'User does not have permission',
+                status: 'OK',
+                message: 'User deleted',
               },
             };
           }
-        }
-        // Get ID of User to be removed
-        const userId = this.urlParams.id;
-        // Check if user exists
-        const user = Meteor.users.findOne(userId);
-        if (user) {
-          // Remove existing User account
-          Meteor.users.remove(user._id);
 
+          // User didn't exist
           return {
-            statusCode: 200,
+            statusCode: 404,
             body: {
-              status: 'OK',
-              message: 'User deleted',
+              status: 'Fail',
+              message: 'No user found with given UserID',
             },
           };
         }
-
-        // User didn't exist
         return {
-          statusCode: 404,
+          statusCode: 403,
           body: {
             status: 'Fail',
-            message: 'No user found with given UserID',
+            message: 'User does not have permission',
           },
         };
       },
@@ -421,22 +419,20 @@ ApiV1.addCollection(Meteor.users, {
         // Get requestor's id
         const requestorId = this.userId;
 
-        // Check if requestor is administrator
-        const requestorHasRights = Roles.userIsInRole(requestorId, ['admin']);
+        const userIsEditingOwnAccount = this.urlParams.id === requestorId;
 
-        if (!requestorHasRights) {
-          // If not admin and not self-removal, return error
-          if (this.urlParams.id !== requestorId) {
-            return {
-              statusCode: 403,
-              body: {
-                status: 'Fail',
-                message: 'User does not have permission',
-              },
-            };
-          }
+        const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+
+        // Return error in case requestor is neither admin nor editing own account
+        if (!userIsEditingOwnAccount && !userIsAdmin) {
+          return {
+            statusCode: 403,
+            body: {
+              status: 'Fail',
+              message: 'User does not have permission',
+            },
+          };
         }
-
         // Get ID of User
         const userId = this.urlParams.id;
         // Check if user to be modified exists
