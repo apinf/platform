@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 import { Meteor } from 'meteor/meteor';
 
-import { OKGAnalytics as okGAnalytics } from '@okgrow/auto-analytics';
+import OKGAnalytics from '@okgrow/auto-analytics';
 
 import Branding from '/branding/collection';
 
@@ -20,8 +20,8 @@ Meteor.autorun(() => {
       const settings = {
         'Google Analytics': { trackingId: googleAnalytics },
       };
-      // Run OKGrow analytics
-      okGAnalytics(settings);
+      // eslint-disable-next-line
+      OKGAnalytics(settings);
     }
   }
 });
