@@ -58,6 +58,13 @@ Branding.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  homeCustomBlock: {
+    type: String,
+    optional: true,
+    autoform: {
+      rows: 5,
+    },
+  },
   siteFooter: {
     type: String,
     optional: true,
