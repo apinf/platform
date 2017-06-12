@@ -23,7 +23,7 @@ services:
 
 before_script:
   # Start X Virtual Frame Buffer for headless testing with real browsers
-  - ./scripts/start-xvfb.sh
+  - ./.scripts/start-xvfb.sh
   # Install node-gyp for running chimp
   - meteor npm install -g node-gyp node-pre-gyp
   - yarn run lint
