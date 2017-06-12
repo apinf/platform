@@ -181,6 +181,8 @@
   "backlogItem_deleteButton_text": "Delete",
   "bookmark_buttonText_bookmark": "Bookmark",
   "bookmark_buttonText_unbookmark": "Unbookmark",
+  "branding_homeCustomBlock_helpIcon_text": "This field gives you the ability to add text and HTML/CSS custom code which will appear on the home page.
+  In additon you may add HTML content like images, social media plugins or YouTube video.",
   "branding_panel_title": "Project Branding",
   "branding_save": "Save",
   "branding_successMessage": "Branding saved",
@@ -647,6 +649,10 @@
           },
           "siteSlogan": {
               "label": "Site slogan"
+          },
+          "homeCustomBlock": {
+              "label": "Custom HTML block",
+              "placeholder": "Your text or HTML/CSS code"
           },
           "privacyPolicy": {
             "label": "Privacy Policy",
