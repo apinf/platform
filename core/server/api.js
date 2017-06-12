@@ -17,6 +17,95 @@ const ApiV1 = new Restivus({
   enableCors: true,
 });
 
+const UserFields = {};
+
+UserFields.params = {
+  company: {
+    name: 'company',
+    in: 'body',
+    description: 'Company name of user',
+    required: true,
+    type: 'string',
+  },
+  email: {
+    name: 'email',
+    in: 'body',
+    description: 'Email address for user',
+    required: true,
+    type: 'string',
+  },
+  limit: {
+    name: 'limit',
+    in: 'query',
+    description: 'Maximum number of records to return in query.',
+    required: false,
+    type: 'integer',
+    format: 'int32',
+    minimum: 0,
+    maximum: 50,
+  },
+  optionalSearch: {
+    name: 'q',
+    in: 'query',
+    description: 'An optional search string for looking up inventory.',
+    required: false,
+    type: 'string',
+  },
+  organizationId: {
+    name: 'id',
+    in: 'path',
+    description: 'ID of Organization',
+    required: false,
+    type: 'string',
+  },
+  password: {
+    name: 'password',
+    in: 'body',
+    description: 'Password for user',
+    required: true,
+    type: 'string',
+  },
+  skip: {
+    name: 'skip',
+    in: 'query',
+    description: 'Number of records to skip for pagination.',
+    required: false,
+    type: 'integer',
+    format: 'int32',
+    minimum: 0,
+  },
+  since: {
+    name: 'since',
+    in: 'path',
+    description: 'Time frame in days',
+    required: true,
+    type: 'integer',
+    format: 'int32',
+    minimum: 1,
+  },
+  sortBy: {
+    name: 'sort_by',
+    in: 'query',
+    description: 'Criteria for sort ',
+    required: false,
+    type: 'string',
+  },
+  userId: {
+    name: 'id',
+    in: 'path',
+    description: 'ID of User',
+    required: true,
+    type: 'string',
+  },
+  userName: {
+    name: 'username',
+    in: 'body',
+    description: 'Username',
+    required: true,
+    type: 'string',
+  },
+};
+
 // Add Restivus Swagger configuration - meta, tags, params, definitions
 ApiV1.swagger = {
   meta: {
@@ -25,6 +114,155 @@ ApiV1.swagger = {
       description: 'APinf is open source API management and catalog. ',
       version: '1.0.0',
       title: 'Admin API',
+    },
+    paths: {
+      '/users': {
+        getAll: {
+          description: 'Returns users',
+          parameters: [
+            UserFields.params.optionalSearch,
+            UserFields.params.organizationId,
+            UserFields.params.skip,
+            UserFields.params.limit,
+            UserFields.params.sortBy,
+          ],
+          responses: {
+            200: {
+              description: 'success',
+            },
+            400: {
+              description: 'Bad query parameters',
+            },
+          },
+        },
+
+        get: {
+          description: 'Returns user with given ID.',
+          parameters: {
+            name: 'id',
+            in: 'path',
+            description: 'ID of User',
+            required: true,
+            type: 'string',
+          },
+
+          responses: {
+            200: {
+              description: 'One user.',
+            },
+          },
+        },
+        post: {
+          description: 'Adds a new user. On success, returns newly added object.',
+          parameters: [
+            UserFields.params.userId,
+            UserFields.params.userName,
+            UserFields.params.email,
+            UserFields.params.password,
+          ],
+          responses: {
+            201: {
+              description: 'User successfully added',
+            },
+            400: {
+              description: 'Invalid input, object invalid',
+            },
+            401: {
+              description: 'Authentication is required',
+            },
+            409: {
+              description: 'User already exists',
+            },
+          },
+          security: [
+            {
+              userSecurityToken: [],
+              userId: [],
+            },
+          ],
+          delete: {
+            description: 'Deletes the identified Organization from catalog.',
+            parameters: [
+              UserFields.params.userId,
+            ],
+            responses: {
+              200: {
+                description: 'User deleted.',
+              },
+              400: {
+                description: 'Invalid input, invalid object',
+              },
+              401: {
+                description: 'Authentication is required',
+              },
+              403: {
+                description: 'User does not have permission',
+              },
+              404: {
+                description: 'User not found',
+              },
+            },
+            security: [
+              {
+                userSecurityToken: [],
+                userId: [],
+              },
+            ],
+            put: {
+              description: 'Update a User',
+              parameters: [
+                UserFields.params.userId,
+                UserFields.params.userName,
+                UserFields.params.company,
+                UserFields.params.password,
+              ],
+              responses: {
+                200: {
+                  description: 'User successfully updated.',
+                },
+                401: {
+                  description: 'Authentication is required',
+                },
+                403: {
+                  description: 'User does not have permission',
+                },
+                404: {
+                  description: 'No user found with given UserID',
+                },
+              },
+              security: [
+                {
+                  userSecurityToken: [],
+                  userId: [],
+                },
+              ],
+
+            },
+
+          },
+        },
+      },
+      '/users/updates': {
+        get: {
+          description: 'Returns users',
+          parameters: [
+            UserFields.params.since,
+            UserFields.params.organizationId,
+            UserFields.params.skip,
+            UserFields.params.limit,
+          ],
+          responses: {
+            200: {
+              description: 'success',
+            },
+            400: {
+              description: 'Bad query parameters',
+            },
+          },
+        },
+
+      },
+
     },
     securityDefinitions: {
       userSecurityToken: {
@@ -244,6 +482,8 @@ ApiV1.swagger = {
       },
     },
   },
+
+
 };
 
 // Generate Swagger to route /rest/v1/swagger.json
