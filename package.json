@@ -51,7 +51,7 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --mocha --path=tests/end-to-end --watch",
     "chimp-test": "chimp tests/chimp-config.js",
     "start": "meteor",
-    "test": "node ./scripts/start.js"
+    "test": "node .scripts/run-chimp.js"
   },
   "repository": {
     "type": "git",
