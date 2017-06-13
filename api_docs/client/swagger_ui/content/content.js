@@ -19,18 +19,20 @@ Template.swaggerUiContent.onCreated(function () {
   const instance = this;
   // Get API item
   const api = instance.data.api;
+  // Get user ID
+  const userId = Meteor.userId();
 
-  // Get proxy backend
-  const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+  // Storage for configs data
+  instance.configs = {};
 
-  // Placeholders
-  let proxyBasePath;
-  let proxyHost;
-  let apiKeyValue;
-  let apiKeyDisabled;
+  // Group together data about Proxy variables that need for Swagger
+  instance.getDataForSwagger = (proxyBackend) => {
+    // Placeholders
+    let proxyBasePath;
+    let proxyHost;
+    let apiKeyValue;
+    let apiKeyDisabled;
 
-  // Make sure API has proxy backend configuration
-  if (proxyBackend) {
     // Get URL of related proxy
     proxyHost = proxyBackend.proxyUrl();
 
@@ -58,7 +60,7 @@ Template.swaggerUiContent.onCreated(function () {
       }
 
       // Get api key item
-      const apiKey = ApiKeys.findOne({ proxyId: proxyBackend.proxyId, userId: Meteor.userId() });
+      const apiKey = ApiKeys.findOne({ proxyId: proxyBackend.proxyId, userId });
 
       // Get value of is API key disabled
       apiKeyDisabled = _.get(proxyBackend, 'apiUmbrella.settings.disable_api_key', false);
@@ -66,45 +68,66 @@ Template.swaggerUiContent.onCreated(function () {
       // Get API key value or an empty line by default
       apiKeyValue = _.get(apiKey, 'apiUmbrella.apiKey', '');
     }
-  }
+
+    return { proxyHost, proxyBasePath, apiKeyDisabled, apiKeyValue };
+  };
 
   // Watch for changes of supportedSubmitMethods value
   instance.autorun(() => {
     // Get related documentation for current API
     const apiDoc = ApiDocs.findOne({ apiId: api._id }) || {};
 
-    instance.configs = {
-      // Set specified methods by API Manager or don't allow any methods on default
-      supportedSubmitMethods: apiDoc.submit_methods || [],
-    };
+    // Set specified methods by API Manager or don't allow any methods on default
+    instance.configs.supportedSubmitMethods = apiDoc.submit_methods || [];
+  });
 
-    // Make sure proxy host and proxy base path exist
-    if (proxyBackend && proxyHost) {
-      // Replace Swagger host to proxy host
-      instance.configs.host = proxyHost;
-      // Replace Swagger base path to proxy base path
-      instance.configs.basePath = proxyBasePath;
+  // Watch for changes of proxy backend configuration value
+  instance.autorun(() => {
+    // Get proxy backend
+    const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
-      // Make sure API key is required for current Proxy backend
-      if (!apiKeyDisabled) {
-        // Create security definition for Swagger spec that provides Authorization for Proxy
-        instance.configs.securityDefinitions = {
-          proxyAuth: {
-            description: 'Provide API key for Proxy authorization',
-            type: 'apiKey',
-            in: 'header',
-            name: 'X-API-Key',
-          },
-        };
+    // Make sure API has proxy backend configuration
+    if (proxyBackend) {
+      // Deconstruct object to single variables
+      // Get Proxy host & base path values and API key values
+      const { proxyHost, proxyBasePath, apiKeyDisabled, apiKeyValue } =
+        instance.getDataForSwagger(proxyBackend);
 
-        // Make sure a user has API key
-        if (apiKeyValue) {
-          // Auto complete API key for Proxy Authorization
-          instance.configs.apiKeyValues = {
-            proxyAuth: apiKeyValue,
+      // Make sure proxy host and proxy base path exist
+      if (proxyHost && proxyBasePath) {
+        // Replace Swagger host to proxy host
+        instance.configs.host = proxyHost;
+        // Replace Swagger base path to proxy base path
+        instance.configs.basePath = proxyBasePath;
+
+        // Make sure API key is required for current Proxy backend
+        if (!apiKeyDisabled) {
+          // Create security definition for Swagger spec that provides Authorization for Proxy
+          instance.configs.securityDefinitions = {
+            proxyAuth: {
+              description: 'Provide API key for Proxy authorization',
+              type: 'apiKey',
+              in: 'header',
+              name: 'X-API-Key',
+            },
           };
+
+          // Make sure a user has API key
+          if (apiKeyValue) {
+            // Auto complete API key for Proxy Authorization
+            instance.configs.apiKeyValues = {
+              proxyAuth: apiKeyValue,
+            };
+          }
         }
       }
+    } else {
+      // Proxy Backend configuration can be removed
+      // Then it needs to remove data about Proxy variables
+      delete instance.configs.host;
+      delete instance.configs.basePath;
+      delete instance.configs.securityDefinitions;
+      delete instance.configs.apiKeyValues;
     }
   });
 });
