@@ -148,7 +148,13 @@ ApiV1.swagger = {
 
           responses: {
             200: {
-              description: 'One user.',
+              description: 'Data of identified user.',
+            },
+            403: {
+              description: 'User does not have permission.',
+            },
+            404: {
+              description: 'No user found with given UserID.',
             },
           },
         },
