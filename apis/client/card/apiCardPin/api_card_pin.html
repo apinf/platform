@@ -1,7 +1,8 @@
 <template name="apiCardPin">
   {{# if apiIsFeatured }}
     <button class="pin-button pin pinned"
-            title="{{_ 'apiCardPin_buttonText_unpin' }}">
+            title="{{_ 'apiCardPin_buttonText_unpin' }}"
+            id="pin-button">
       <i class="fa fa-thumb-tack"></i>
     </button>
   {{ else }}
