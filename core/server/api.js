@@ -118,7 +118,7 @@ ApiV1.swagger = {
     paths: {
       '/users': {
         getAll: {
-          description: 'Returns users',
+          description: 'Returns: For Admin: all users data. For non-admin: only own data.',
           parameters: [
             UserFields.params.optionalSearch,
             UserFields.params.organizationId,
@@ -137,7 +137,7 @@ ApiV1.swagger = {
         },
 
         get: {
-          description: 'Returns user with given ID.',
+          description: 'Returns user data with given ID.',
           parameters: {
             name: 'id',
             in: 'path',
@@ -181,7 +181,7 @@ ApiV1.swagger = {
             },
           ],
           delete: {
-            description: 'Deletes the identified Organization from catalog.',
+            description: 'Deletes the identified User.',
             parameters: [
               UserFields.params.userId,
             ],
@@ -244,7 +244,7 @@ ApiV1.swagger = {
       },
       '/users/updates': {
         get: {
-          description: 'Returns users',
+          description: 'Returns users, who are created in given timeframe',
           parameters: [
             UserFields.params.since,
             UserFields.params.organizationId,
