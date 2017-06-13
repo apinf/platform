@@ -32,7 +32,7 @@ ApiV1.addCollection(Meteor.users, {
         tags: [
           ApiV1.swagger.tags.users,
         ],
-        description: 'Returns users',
+        description: 'Returns: For Admin: all users data. For non-admin: only own data.',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
           ApiV1.swagger.params.organization_id,
@@ -206,6 +206,78 @@ ApiV1.addCollection(Meteor.users, {
           },
         },
       },
+      action () {
+      // Get requestor's id
+        const requestorId = this.userId;
+
+        const userIsGettingOwnAccount = this.urlParams.id === requestorId;
+
+        const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+
+        if (userIsGettingOwnAccount || userIsAdmin) {
+          // Get ID of User to be fetched
+          const userId = this.urlParams.id;
+
+          // Exclude password
+          const options = {};
+          const excludeFields = {};
+
+          excludeFields.services = 0;
+          options.fields = excludeFields;
+
+          // Check if user exists
+          const user = Meteor.users.findOne(userId, options);
+          if (user) {
+            // Array for Organization name and id
+            const orgDataList = [];
+            // Get user id
+            const userIdSearch = user._id;
+            // Find all Organizations, where User belongs to
+            const organizations = Organizations.find({
+              managerIds: userIdSearch,
+            }).fetch();
+            // If there are Users' Organizations
+            if (organizations.length > 0) {
+              // Loop through Users' Organizations
+              organizations.forEach((organization) => {
+                const orgData = {};
+                // Put Organization name and id into an object
+                orgData.organizationId = organization._id;
+                orgData.organizationName = organization.name;
+                // Add this Organization data into Users' organization data list
+                orgDataList.push(orgData);
+              });
+              // Add Organizations' information to Users' data
+              user.organization = orgDataList;
+            }
+            // Construct response
+            return {
+              statusCode: 200,
+              body: {
+                status: 'success',
+                data: user,
+              },
+            };
+          }
+
+          // User didn't exist
+          return {
+            statusCode: 404,
+            body: {
+              status: 'Fail',
+              message: 'No user found with given UserID',
+            },
+          };
+        }
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'User does not have permission',
+          },
+        };
+      },
+
     },
     post: {
       authRequired: true,
@@ -308,7 +380,7 @@ ApiV1.addCollection(Meteor.users, {
         tags: [
           ApiV1.swagger.tags.users,
         ],
-        description: 'Deletes the identified Organization from catalog.',
+        description: 'Deletes the identified User.',
         parameters: [
           ApiV1.swagger.params.userId,
         ],
