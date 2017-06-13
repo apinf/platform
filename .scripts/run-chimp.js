@@ -85,7 +85,7 @@ function startChimp() {
 }
 
 function chimpNoMirror() {
-	appOptions.waitForMessage = 'SERVER RUNNING';
+	appOptions.waitForMessage = 'App running at:';
 	startApp(function() {
 		startChimp();
 	});
