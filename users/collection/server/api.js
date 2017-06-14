@@ -422,6 +422,9 @@ ApiV1.addCollection(Meteor.users, {
           // Check if user exists
           const user = Meteor.users.findOne(userId);
           if (user) {
+            // Remove user from all Organizations
+            Meteor.call('removeUserFromAllOrganizations', userId);
+
             // Remove existing User account
             Meteor.users.remove(user._id);
 
