@@ -1,0 +1,45 @@
+<template name="addEmqUser">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{_ "proxyBackendForm_emqProxyForm_addEmqUser_modalTitle" }}
+          </h4>
+        </div>
+
+        <form class="form" id="add-emq-user-form">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="emq-user-username">
+                  {{_ "proxyBackendForm_emqProxyForm_addEmqUser_username" }}
+                </label>
+                <input id="emq-user-username" type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="emq-user-password">
+                  {{_ "proxyBackendForm_emqProxyForm_addEmqUser_password" }}
+                </label>
+                <input id="emq-user-password" type="password" class="form-control" />
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              id="add-emq-user"
+              type="submit"
+              class="btn btn-success">
+              {{_ "proxyBackendForm_emqProxyForm_addEmqUser_saveButton" }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal">
+              {{_ "proxyBackendForm_emqProxyForm_addEmqUser_cancelButton" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
