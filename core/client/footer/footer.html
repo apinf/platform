@@ -38,18 +38,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             {{# if currentUser }}
               <div class="col-xs-6 col-md-12">
-                <a class="sign-out" href="{{ pathFor 'signOut' }}" id="bottom-signout">
+                <a class="sign-out" href="{{ pathFor 'signOut' }}" id="footer-signout">
                   {{_ "footer_signOut" }}
                 </a>
               </div>
             {{ else }}
               <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signUp' }}" id="bottom-signup">
+                <a href="{{ pathFor 'signUp' }}" id="footer-signup">
                   {{_ "footer_signUp" }}
                 </a>
               </div>
               <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signIn' }}" id="bottom-signin">
+                <a href="{{ pathFor 'signIn' }}" id="footer-signin">
                   {{_ "footer_signIn" }}
                 </a>
               </div>
