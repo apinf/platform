@@ -10,6 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       class="dropdown-toggle"
       data-toggle="dropdown"
       role="button"
+      id="usermenu"
       aria-haspopup="true"
       aria-expanded="false">
       <i class="fa fa-user" aria-hidden="true"></i>
@@ -19,35 +20,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="{{ pathFor 'profile' }}">
+        <a href="{{ pathFor 'profile' }}" id="profile-button">
           {{_ "userMenu_profile" }}
         </a>
       </li>
       <li>
-        <a href="{{ pathFor 'account' }}">
+        <a href="{{ pathFor 'account' }}" id="account-button">
           {{_ "userMenu_account" }}
         </a>
       </li>
       {{# if isInRole 'admin' }}
       <li>
-        <a href="{{ pathFor 'branding' }}">
+        <a href="{{ pathFor 'branding' }}" id="branding-button">
           {{_ "userMenu_branding" }}
         </a>
       </li>
       <li>
-        <a href="{{ pathFor 'settings' }}">
+        <a href="{{ pathFor 'settings' }}" id="settings-button">
           {{_ "userMenu_settings" }}
         </a>
       </li>
       <li>
-        <a href="{{ pathFor 'proxies' }}">
+        <a href="{{ pathFor 'proxies' }}" id="proxies-button">
           {{_ "userMenu_proxies" }}
         </a>
       </li>
       {{/ if }}
       <li class="divider"></li>
       <li>
-        <a href="/sign-out">
+        <a href="/sign-out" id="signout-button">
           {{_ "userMenu_signout" }}
         </a>
       </li>
