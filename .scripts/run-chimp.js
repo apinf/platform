@@ -21,6 +21,14 @@ var appOptions = {
 	}
 };
 
+/**
+ * Start a process on the O.S.
+ * Optionally start a child process if options.waitForMessage
+ * is set to an output message emitted by this process.
+ *
+ * @param {command, options} opts
+ * @param {*} callback
+ */
 function startProcess(opts, callback) {
 	var proc = exec(
 		opts.command,
@@ -58,6 +66,11 @@ function startProcess(opts, callback) {
 	processes.push(proc);
 }
 
+/**
+ * Run meteor
+ *
+ * @param {*} callback
+ */
 function startApp(callback) {
 	startProcess({
 		name: 'Meteor App',
@@ -70,6 +83,9 @@ function startApp(callback) {
 	}, callback);
 }
 
+/**
+ * Start chimp
+ */
 function startChimp() {
 	startProcess({
 		name: 'Chimp',
@@ -84,6 +100,9 @@ function startChimp() {
 	});
 }
 
+/**
+ * Run meteor and then chimp after application has started
+ */
 function chimpNoMirror() {
 	appOptions.waitForMessage = 'App running at:';
 	startApp(function() {
