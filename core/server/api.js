@@ -65,15 +65,6 @@ UserFields.params = {
     required: true,
     type: 'string',
   },
-  skip: {
-    name: 'skip',
-    in: 'query',
-    description: 'Number of records to skip for pagination.',
-    required: false,
-    type: 'integer',
-    format: 'int32',
-    minimum: 0,
-  },
   since: {
     name: 'since',
     in: 'path',
@@ -82,6 +73,15 @@ UserFields.params = {
     type: 'integer',
     format: 'int32',
     minimum: 1,
+  },
+  skip: {
+    name: 'skip',
+    in: 'query',
+    description: 'Number of records to skip for pagination.',
+    required: false,
+    type: 'integer',
+    format: 'int32',
+    minimum: 0,
   },
   sortBy: {
     name: 'sort_by',
