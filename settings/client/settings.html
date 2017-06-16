@@ -21,7 +21,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </span>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='access.onlyAdminsCanAddApis' }}
+            {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
           </div>
         </div>
         <div class="panel panel-default">
@@ -30,12 +30,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "settings_apiDocumentation_editor" }}
             </span>
             <span class="pull-right">
-              {{> afQuickField name='apiDocumentationEditor.enabled' }}
+              {{> afQuickField name='apiDocumentationEditor.enabled' id="api-document-editor" }}
             </span>
           </div>
           <div class="panel-body">
             {{# if afFieldValueIs name="apiDocumentationEditor.enabled" value=true }}
-              {{> afQuickField name='apiDocumentationEditor.host' }}
+              {{> afQuickField name='apiDocumentationEditor.host' id="editor-host" }}
             {{/ if }}
           </div>
         </div>
@@ -45,12 +45,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{_ "settings_sdkCode_generator" }}
               </span>
               <span class="pull-right">
-                {{> afQuickField name='sdkCodeGenerator.enabled' }}
+                {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
               </span>
           </div>
           <div class="panel-body">
             {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
-              {{> afQuickField name='sdkCodeGenerator.host' }}
+              {{> afQuickField name='sdkCodeGenerator.host' id="SDK-host" }}
             {{/ if }}
           </div>
         </div>
@@ -60,15 +60,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "settings_mail" }}
             </span>
             <span class="pull-right">
-              {{> afQuickField name='mail.enabled' }}
+              {{> afQuickField name='mail.enabled' id="email" }}
             </span>
           </div>
           <div class="panel-body">
             {{# if afFieldValueIs name='mail.enabled' value=true }}
-              {{> afQuickField name='mail.username' }}
-              {{> afQuickField name='mail.password' type="password" }}
-              {{> afQuickField name='mail.smtpHost' }}
-              {{> afQuickField name='mail.smtpPort' }}
+              {{> afQuickField name='mail.username' id="email-username" }}
+              {{> afQuickField name='mail.password' type="password" id="email-password" }}
+              {{> afQuickField name='mail.smtpHost' id="email-host" }}
+              {{> afQuickField name='mail.smtpPort' id="email-port" }}
               <a  tabindex="0"
                   role="button"
                   data-toggle="popover"
@@ -77,7 +77,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   data-content="{{_ 'settings_mail_fromEmail' }}">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
               </a>
-              {{> afQuickField name='mail.fromEmail' }}
+              {{> afQuickField name='mail.fromEmail' id="email-send" }}
               <a  tabindex="0"
                   role="button"
                   data-toggle="popover"
@@ -86,7 +86,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   data-content="{{_ 'settings_mail_toEmail' }}">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
               </a>
-              {{> afQuickField name='mail.toEmail' }}
+              {{> afQuickField name='mail.toEmail' id="email-recieve" }}
             {{/ if }}
           </div>
         </div>
@@ -97,8 +97,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='githubConfiguration.clientId' }}
-            {{> afQuickField name='githubConfiguration.secret' }}
+            {{> afQuickField name='githubConfiguration.clientId' id="github-id" }}
+            {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
           </div>
         </div>
         <div id="form-buttons">

@@ -181,6 +181,8 @@
   "backlogItem_deleteButton_text": "Delete",
   "bookmark_buttonText_bookmark": "Bookmark",
   "bookmark_buttonText_unbookmark": "Unbookmark",
+  "branding_homeCustomBlock_helpIcon_text": "This field gives you the ability to add text and HTML/CSS custom code which will appear on the home page.
+  In additon you may add HTML content like images, social media plugins or YouTube video. Bootsrtap classes are also availble, e.g. you may use .container to center your content on a page.",
   "branding_panel_title": "Project Branding",
   "branding_save": "Save",
   "branding_successMessage": "Branding saved",
@@ -489,6 +491,23 @@
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_deleteSuccessMessage": "Successfully deleted proxy settings",
   "proxyBackendForm_update_successMessage": "Successfully updated proxy settings",
+  "proxyBackendForm_emqUsers_title": "EMQ Users",
+  "proxyBackendForm_emqUsers_addUserButton": "Add user",
+  "proxyBackendForm_emqUsers_userTable_id": "ID",
+  "proxyBackendForm_emqUsers_userTable_username": "Username",
+  "proxyBackendForm_emqUsers_userTable_password": "Password",
+  "proxyBackendForm_emqUsers_userTable_actions": "Actions",
+  "proxyBackendForm_emqProxyForm_addEmqUser_modalTitle": "Add EMQ User",
+  "proxyBackendForm_emqProxyForm_addEmqUser_username": "Username",
+  "proxyBackendForm_emqProxyForm_addEmqUser_password": "Password",
+  "proxyBackendForm_emqProxyForm_addEmqUser_saveButton": "Save",
+  "proxyBackendForm_emqProxyForm_addEmqUser_cancelButton": "Cancel",
+  "proxyBackendForm_emqProxyForm_addEmqUser_successMessage": "EMQ user successfully added!",
+  "proxyBackendForm_emqProxyForm_addEmqUser_errorMessage": "Username or password value(s) not found.",
+  "proxyBackendForm_emqProxyForm_removeEmqUser_modalTitle": "Remove EMQ User?",
+  "proxyBackendForm_emqProxyForm_removeEmqUser_confirmButton": "Yes, remove",
+  "proxyBackendForm_emqProxyForm_removeEmqUser_cancelButton": "Cancel",
+  "proxyBackendForm_emqProxyForm_removeEmqUser_successMessage": "EMQ user successfully removed!",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
   "proxyForm_successText": "Proxy settings were saved",
@@ -647,6 +666,10 @@
           },
           "siteSlogan": {
               "label": "Site slogan"
+          },
+          "homeCustomBlock": {
+              "label": "Custom HTML block",
+              "placeholder": "Your text or HTML/CSS code"
           },
           "privacyPolicy": {
             "label": "Privacy Policy",
