@@ -67,14 +67,15 @@ function startProcess(opts, callback) {
 }
 
 /**
- * Run meteor
+ * Always run meteor in production-like environment
+ * since we do not want to reload changing files
  *
  * @param {*} callback
  */
 function startApp(callback) {
 	startProcess({
 		name: 'Meteor App',
-		command: 'meteor',
+		command: 'meteor --production',
 		waitForMessage: appOptions.waitForMessage,
 		options: {
 			cwd: srcDir,
