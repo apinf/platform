@@ -103,7 +103,7 @@ Meteor.methods({
   removeUserFromAllOrganizations (userId) {
     // Make sure userId is an String
     check(userId, String);
-    // Check if user to be deleted is a manager in any Organizations
+    // Get list of Organizations where user is a manager
     const organizations = Organizations.find({
       managerIds: userId,
     }).fetch();
