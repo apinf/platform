@@ -19,8 +19,9 @@ before_cache:
   - rm -f $HOME/.meteor/log/*.log
 
 cache:
-  yarn: true
-  - $HOME/.meteor
+  directories:
+    - $HOME/.meteor
+    - $HOME/.cache/yarn
 
 services:
   - docker
@@ -50,4 +51,3 @@ env:
   - DISPLAY=:99.0
   - TEST_MODE: "true"
   - CXX=g++-4.8
-
