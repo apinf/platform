@@ -15,7 +15,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-// APINF imports
+// APInf imports
 import signedIn from '/core/client/lib/router';
 
 FlowRouter.route('/users', {

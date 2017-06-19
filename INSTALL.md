@@ -60,8 +60,8 @@ Register a new admin account. The first user will become Admin.
 6. Visit https://YOUR_SITE_DOMAIN:3002/signup/ and fill form for get API Key.
 7. Visit https://YOUR_SITE_DOMAIN:3002/admin/ and click on 'My Account' link for find Admin API Token.
 8. Visit https://YOUR_SITE_DOMAIN/sign-up and create new account.
-9. Fill data in "Project Branding: APINF Configuration Wizard".
-10. Fill data in "Settings for API Umbrella: APINF Configuration Wizard".
+9. Fill data in "Project Branding: APInf Configuration Wizard".
+10. Fill data in "Settings for API Umbrella: APInf Configuration Wizard".
 * Host: "https://YOUR_SITE_DOMAIN:3002"
 * API Key: from step #6
 * Auth Token: from step #7

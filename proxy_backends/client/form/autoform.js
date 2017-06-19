@@ -17,7 +17,7 @@ import _ from 'lodash';
 // Collection imports
 import ProxyBackends from '../../collection';
 
-// APINF imports
+// APInf imports
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
 
 AutoForm.hooks({

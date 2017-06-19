@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Accounts } from 'meteor/accounts-base';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-// APINF imports
+// APInf imports
 import { getSiteTitle, getFromEmail } from '/core/helper_functions/mail_helpers';
 
 Accounts.emailTemplates.siteName = getSiteTitle();

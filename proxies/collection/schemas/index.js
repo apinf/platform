@@ -12,7 +12,7 @@ import _ from 'lodash';
 // Collection imports
 import Proxies from '../';
 
-// APINF imports
+// APInf imports
 import registeredProxies from '../registered_proxies';
 
 let schema = {

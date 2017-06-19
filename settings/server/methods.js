@@ -10,7 +10,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
-// APINF imports
+// APInf imports
 import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
 
 // Collection imports

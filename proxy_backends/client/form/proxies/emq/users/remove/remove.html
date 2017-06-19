@@ -1,0 +1,34 @@
+<template name="removeEmqUser">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{_ "proxyBackendForm_emqProxyForm_removeEmqUser_modalTitle" }}
+          </h4>
+        </div>
+
+        <div class="modal-body">
+          <p>{{ user.username }}</p>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            id="remove-emq-user"
+            type="button"
+            class="btn btn-danger">
+            {{_ "proxyBackendForm_emqProxyForm_removeEmqUser_confirmButton" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal">
+            {{_ "proxyBackendForm_emqProxyForm_removeEmqUser_cancelButton" }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>

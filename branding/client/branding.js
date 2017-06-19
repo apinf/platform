@@ -9,6 +9,10 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Branding from '/branding/collection';
 
+Template.branding.onRendered(() => {
+  $('[data-toggle="popover"]').popover();
+});
+
 Template.branding.helpers({
   branding () {
     // Get Branding collection content

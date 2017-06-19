@@ -15,7 +15,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </a>
         {{ else }}
         <div class="project-name">
-          <a href="{{ pathFor 'home' }}" class="project-name-link">
+          <a href="{{ pathFor 'home' }}" class="project-name-link" id="frontpage-button">
             {{ branding.siteTitle }}
           </a>
         </div>
@@ -26,13 +26,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{> userMenu user=currentUser }}
         {{ else }}
         <li>
-          <a class="navbar-login" href="{{ pathFor 'signUp' }}">
+          <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             {{_ "navbar_signUp" }}
           </a>
         </li>
         <li>
-          <a class="navbar-login" href="{{ pathFor 'signIn' }}">
+          <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
             {{_ "navbar_signIn" }}
           </a>
@@ -40,7 +40,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
         {{# unless isActiveRoute 'search'}}
           <li>
-            <a type="button" class="icon-search">
+            <a type="button" class="icon-search" id="search-button">
               <i class="fa fa-search toggle-search-icon"></i>
               <i class="fa fa-times toggle-search-icon"></i>
             </a>
@@ -52,7 +52,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{# if proxyIsDefined }}
             {{# if userCanViewDashboard }}
               <li class="{{ isActiveRoute 'dashboard' }}">
-                <a href="{{ pathFor 'dashboard' }}">
+                <a href="{{ pathFor 'dashboard' }}" id="dashboard-button">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i>
                   {{_ "navbar_dashboard" }}
                 </a>
@@ -61,13 +61,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         {{/ if }}
         <li class="{{ isActiveRoute 'apiCatalog' }}">
-          <a href="{{ pathFor 'apiCatalog' }}">
+          <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
             <i class="fa fa-book" aria-hidden="true"></i>
             {{_ "navbar_apis" }}
           </a>
         </li>
         <li class="{{ isActiveRoute 'organizationCatalog' }}">
-          <a href="{{ pathFor 'organizationCatalog' }}">
+          <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
             <i class="fa fa-address-card" aria-hidden="true"></i>
             {{_ "navbar_organizations" }}
           </a>
@@ -75,7 +75,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if currentUser }}
           {{# if userCanAddApi }}
           <li class="{{ isActiveRoute 'addApi' }}">
-            <a href="{{ pathFor 'addApi' }}">
+            <a href="{{ pathFor 'addApi' }}" id="addapi-button">
               <i class="fa fa-plus" aria-hidden="true"></i>
               {{_ "navbar_addAPIBackend" }}
             </a>
@@ -84,7 +84,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           {{# if isInRole 'admin' }}
             <li class="{{ isActiveRoute 'accountsAdmin' }}">
-              <a href="{{ pathFor 'accountsAdmin' }}">
+              <a href="{{ pathFor 'accountsAdmin' }}" id="users-button">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 {{_ "navbar_users" }}
               </a>
