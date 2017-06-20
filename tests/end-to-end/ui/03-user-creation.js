@@ -13,9 +13,6 @@ import mainContent from '../../page-objects/main-content.page';
 import settingsPage from '../../page-objects/settings.page';
 
 import {
-  username,
-  email,
-  password,
   adminUsername,
   adminEmail,
   adminPassword,
