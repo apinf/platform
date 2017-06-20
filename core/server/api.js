@@ -19,90 +19,148 @@ const ApiV1 = new Restivus({
 
 const UserFields = {};
 
-UserFields.params = {
-  company: {
-    name: 'company',
-    in: 'body',
-    description: 'Company name of user',
-    required: true,
-    type: 'string',
+UserFields.struct = {
+  tags: {
+    users: 'Users',
   },
-  email: {
-    name: 'email',
-    in: 'body',
-    description: 'Email address for user',
-    required: true,
-    type: 'string',
+
+  params: {
+    company: {
+      name: 'company',
+      in: 'body',
+      description: 'Company name of user',
+      required: true,
+      type: 'string',
+    },
+    email: {
+      name: 'email',
+      in: 'body',
+      description: 'Email address for user',
+      required: true,
+      type: 'string',
+    },
+    limit: {
+      name: 'limit',
+      in: 'query',
+      description: 'Maximum number of records to return in query.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+      maximum: 50,
+    },
+    optionalSearch: {
+      name: 'q',
+      in: 'query',
+      description: 'An optional search string for looking up inventory.',
+      required: false,
+      type: 'string',
+    },
+    organizationId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of Organization',
+      required: false,
+      type: 'string',
+    },
+    password: {
+      name: 'password',
+      in: 'body',
+      description: 'Password for user',
+      required: true,
+      type: 'string',
+    },
+    since: {
+      name: 'since',
+      in: 'path',
+      description: 'Time frame in days',
+      required: true,
+      type: 'integer',
+      format: 'int32',
+      minimum: 1,
+    },
+    skip: {
+      name: 'skip',
+      in: 'query',
+      description: 'Number of records to skip for pagination.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+    },
+    sortBy: {
+      name: 'sort_by',
+      in: 'query',
+      description: 'Criteria for sort ',
+      required: false,
+      type: 'string',
+    },
+    updateUser: {
+      name: 'Update user',
+      in: 'body',
+      description: 'Data for editing User',
+      schema: {
+        $ref: '#/definitions/updateUser',
+      },
+    },
+
+    userId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of User',
+      required: true,
+      type: 'string',
+    },
+    userName: {
+      name: 'username',
+      in: 'body',
+      description: 'Username',
+      required: true,
+      type: 'string',
+    },
   },
-  limit: {
-    name: 'limit',
-    in: 'query',
-    description: 'Maximum number of records to return in query.',
-    required: false,
-    type: 'integer',
-    format: 'int32',
-    minimum: 0,
-    maximum: 50,
-  },
-  optionalSearch: {
-    name: 'q',
-    in: 'query',
-    description: 'An optional search string for looking up inventory.',
-    required: false,
-    type: 'string',
-  },
-  organizationId: {
-    name: 'id',
-    in: 'path',
-    description: 'ID of Organization',
-    required: false,
-    type: 'string',
-  },
-  password: {
-    name: 'password',
-    in: 'body',
-    description: 'Password for user',
-    required: true,
-    type: 'string',
-  },
-  since: {
-    name: 'since',
-    in: 'path',
-    description: 'Time frame in days',
-    required: true,
-    type: 'integer',
-    format: 'int32',
-    minimum: 1,
-  },
-  skip: {
-    name: 'skip',
-    in: 'query',
-    description: 'Number of records to skip for pagination.',
-    required: false,
-    type: 'integer',
-    format: 'int32',
-    minimum: 0,
-  },
-  sortBy: {
-    name: 'sort_by',
-    in: 'query',
-    description: 'Criteria for sort ',
-    required: false,
-    type: 'string',
-  },
-  userId: {
-    name: 'id',
-    in: 'path',
-    description: 'ID of User',
-    required: true,
-    type: 'string',
-  },
-  userName: {
-    name: 'username',
-    in: 'body',
-    description: 'Username',
-    required: true,
-    type: 'string',
+
+  definitions: {
+    addUser: {
+      required: ['userName', 'password', 'email'],
+      properties: {
+        userName: {
+          type: 'string',
+          example: 'John Doe',
+        },
+        password: {
+          type: 'string',
+          example: 'secrecy_is_everything#¤%',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+          description: 'E-mail address of user',
+          example: 'company-mail@gmail.com',
+        },
+      },
+    },
+
+    updateUser: {
+      required: [],
+      properties: {
+        userName: {
+          type: 'string',
+          example: 'John Doe',
+        },
+        company: {
+          type: 'string',
+          example: 'Amazing Company Ltd.',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+          description: 'E-mail address of user',
+          example: 'company-mail@gmail.com',
+        },
+      },
+    },
+
   },
 };
 
@@ -118,13 +176,17 @@ ApiV1.swagger = {
     paths: {
       '/users': {
         getAll: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
+
           description: 'Returns: For Admin: all users data. For non-admin: only own data.',
           parameters: [
-            UserFields.params.optionalSearch,
-            UserFields.params.organizationId,
-            UserFields.params.skip,
-            UserFields.params.limit,
-            UserFields.params.sortBy,
+            UserFields.struct.params.optionalSearch,
+            UserFields.struct.params.organizationId,
+            UserFields.struct.params.skip,
+            UserFields.struct.params.limit,
+            UserFields.struct.params.sortBy,
           ],
           responses: {
             200: {
@@ -135,16 +197,14 @@ ApiV1.swagger = {
             },
           },
         },
-
         get: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
           description: 'Returns user data with given ID.',
-          parameters: {
-            name: 'id',
-            in: 'path',
-            description: 'ID of User',
-            required: true,
-            type: 'string',
-          },
+          parameters: [
+            UserFields.struct.params.userId,
+          ],
 
           responses: {
             200: {
@@ -158,13 +218,20 @@ ApiV1.swagger = {
             },
           },
         },
+      },
+
+      '/users/{id}': {
         post: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
           description: 'Adds a new user. On success, returns newly added object.',
+          consumes: 'application/json',
+          produces: 'application/json',
+
           parameters: [
-            UserFields.params.userId,
-            UserFields.params.userName,
-            UserFields.params.email,
-            UserFields.params.password,
+            UserFields.struct.params.userName,
+            UserFields.struct.params.addUser,
           ],
           responses: {
             201: {
@@ -186,76 +253,82 @@ ApiV1.swagger = {
               userId: [],
             },
           ],
-          delete: {
-            description: 'Deletes the identified User.',
-            parameters: [
-              UserFields.params.userId,
-            ],
-            responses: {
-              200: {
-                description: 'User deleted.',
-              },
-              400: {
-                description: 'Invalid input, invalid object',
-              },
-              401: {
-                description: 'Authentication is required',
-              },
-              403: {
-                description: 'User does not have permission',
-              },
-              404: {
-                description: 'User not found',
-              },
+        },
+        delete: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
+          description: 'Deletes the identified User.',
+          parameters: [
+            UserFields.struct.params.userId,
+          ],
+          responses: {
+            200: {
+              description: 'User deleted.',
             },
-            security: [
-              {
-                userSecurityToken: [],
-                userId: [],
-              },
-            ],
-            put: {
-              description: 'Update a User',
-              parameters: [
-                UserFields.params.userId,
-                UserFields.params.userName,
-                UserFields.params.company,
-                UserFields.params.password,
-              ],
-              responses: {
-                200: {
-                  description: 'User successfully updated.',
-                },
-                401: {
-                  description: 'Authentication is required',
-                },
-                403: {
-                  description: 'User does not have permission',
-                },
-                404: {
-                  description: 'No user found with given UserID',
-                },
-              },
-              security: [
-                {
-                  userSecurityToken: [],
-                  userId: [],
-                },
-              ],
-
+            400: {
+              description: 'Invalid input, invalid object',
             },
-
+            401: {
+              description: 'Authentication is required',
+            },
+            403: {
+              description: 'User does not have permission',
+            },
+            404: {
+              description: 'User not found',
+            },
           },
+          security: [
+            {
+              userSecurityToken: [],
+              userId: [],
+            },
+          ],
+        },
+        put: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
+          description: 'Update a User',
+          parameters: [
+            UserFields.struct.params.userId,
+            UserFields.struct.params.updateUser,
+          ],
+          responses: {
+            200: {
+              description: 'User successfully updated.',
+            },
+            401: {
+              description: 'Authentication is required',
+            },
+            403: {
+              description: 'User does not have permission',
+            },
+            404: {
+              description: 'No user found with given UserID',
+            },
+          },
+          security: [
+            {
+              userSecurityToken: [],
+              userId: [],
+            },
+          ],
         },
       },
+
       '/users/updates': {
         get: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
           description: 'Returns users, who are created in given timeframe',
           parameters: [
-            UserFields.params.since,
-            UserFields.params.organizationId,
-            UserFields.params.skip,
-            UserFields.params.limit,
+            UserFields.struct.params.since,
+            UserFields.struct.params.organizationId,
+            UserFields.struct.params.skip,
+            UserFields.struct.params.limit,
           ],
           responses: {
             200: {
@@ -485,6 +558,20 @@ ApiV1.swagger = {
           description: 'Link to Linked In',
           example: 'http://url.com',
         },
+      },
+    },
+
+    users: {
+      required: ['name', 'email', 'password'],
+      properties: {
+        username:
+          UserFields.params.userName,
+        email:
+          UserFields.params.email,
+        password:
+          UserFields.params.password,
+        company:
+          UserFields.params.company,
       },
     },
   },
