@@ -288,7 +288,6 @@ ApiV1.addCollection(Meteor.users, {
         ],
         description: 'Adds a new user. On success, returns newly added object.',
         parameters: [
-          ApiV1.swagger.params.userId,
           ApiV1.swagger.params.userName,
           ApiV1.swagger.params.email,
           ApiV1.swagger.params.password,
