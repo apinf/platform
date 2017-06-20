@@ -45,12 +45,4 @@ describe('03 user creation', () => {
     mainContent.signOutLink.isVisible().should.be.true;
     mainContent.logOut();
   });
-
-  it('create normal user', () => {
-    signUpPage.registerNewUser({ username, email, password });
-
-    mainContent.signOutLink.waitForExist(5000);
-    mainContent.signOutLink.isVisible().should.be.true;
-    mainContent.logOut();
-  });
 });
