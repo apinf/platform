@@ -37,9 +37,7 @@ before_script:
   - yarn run lint
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
-  # Install node-gyp for running chimp
-  - yarn install
-
+ 
 script:
   # Run meteor and chimp from node.js
   - travis_retry yarn test
