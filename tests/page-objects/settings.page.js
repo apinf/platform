@@ -5,9 +5,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 /* globals browser */
 
-import  MainContentPage from './main-content.page';
+import MainContentPage from './main-content.page';
 
-class SettingsPage extends  MainContentPage {
+class SettingsPage extends MainContentPage {
 
   // Left Menu
 

@@ -25,7 +25,7 @@ class SignUpPage extends Page {
   get confirmPasswordErrorField () { return this.errorFields[3]; }
 
   // Modal after first signup
-  get settingsLink () { return browser.element('#setup-settings') }
+  get settingsLink () { return browser.element('#setup-settings'); }
 
   open () {
     super.open();
