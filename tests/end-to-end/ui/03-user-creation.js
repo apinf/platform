@@ -28,8 +28,14 @@ describe('03 user creation', () => {
   });
 
   it('create admin user', () => {
+    const adminCredentials = {
+      username: adminUsername,
+      email: adminEmail,
+      password: adminPassword,
+    };
+
     // Create Admin user
-    signUpPage.registerNewUser({ adminUsername, adminEmail, adminPassword });
+    signUpPage.registerNewUser(adminCredentials);
 
     // Setup settings
     signUpPage.gotModalToSetup();
