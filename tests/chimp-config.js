@@ -18,7 +18,7 @@ module.exports = {
   mochaCommandLineOptions: ['--color'],
   mochaConfig: {
     tags: '',
-    grep: '03', // Change to '03' for testing the 03-user-creation.js file
+    grep: '', // Change to '03' for testing the 03-user-creation.js file
     timeout: 80000,
     reporter: 'spec',
     slow: 100,
