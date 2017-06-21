@@ -6,10 +6,14 @@ node_js:
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
+      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
+        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
     packages:
-    - g++-4.8
+      - g++-4.8
+      - yarn
   chrome: stable
+
 
 branches:
   only:
@@ -29,9 +33,6 @@ services:
 before_install:
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then curl https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh; fi
-  # Install Yarn
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
 
 before_script:
   - yarn run lint
