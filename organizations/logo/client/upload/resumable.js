@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 // Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
@@ -21,8 +22,11 @@ import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 Meteor.startup(() => {
   // Set organization logo id to organization collection on success
   OrganizationLogo.resumable.on('fileSuccess', (file) => {
-    // Get organization id
-    const organization = Organizations.findOne();
+    // Get slug
+    const slug = FlowRouter.getParam('slug');
+
+    // Get organization by slug
+    const organization = Organizations.findOne({ slug });
 
     /* Step 1: Remove existing organization logo */
 
