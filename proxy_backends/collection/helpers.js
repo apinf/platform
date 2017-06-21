@@ -3,12 +3,16 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
 import Apis from '/apis/collection';
+import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
 ProxyBackends.helpers({
-// eslint-disable-next-line object-shorthand
-  apiName: function () {
+  apiName () {
     // Get API ID
     const apiId = this.apiId;
     // Get API
@@ -24,5 +28,15 @@ ProxyBackends.helpers({
     }
 
     return apiName;
+  },
+  proxyUrl () {
+    // Get Proxy ID
+    const proxyId = this.proxyId;
+
+    // Get Proxy item
+    const proxy = Proxies.findOne(proxyId);
+
+    // Returns Proxy URL if it exists else returns false
+    return _.get(proxy, 'apiUmbrella.url', false);
   },
 });

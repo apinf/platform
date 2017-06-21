@@ -9,16 +9,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{_ "apiSortingToolbar_labelText_sortBy" }}
     </label>
     <select id="sort-select" class="form-control">
-      <option value="name">
+      <option value="name" id="sortby-names">
         {{_ "apiSortingToolbar_sortMenuOptions_names" }}
       </option>
-      <option value="created_at">
+      <option value="created_at" id="sortby-date">
         {{_ "apiSortingToolbar_sortMenuOptions_newestCreated" }}
       </option>
-      <option value="bookmarkCount">
+      <option value="bookmarkCount" id="sortby-count">
         {{_ "apiSortingToolbar_sortMenuOptions_bookmarks" }}
       </option>
-      <option value="averageRating">
+      <option value="averageRating" id="sortby-rating">
         {{_ "apiSortingToolbar_sortMenuOptions_ratings" }}
       </option>
     </select>

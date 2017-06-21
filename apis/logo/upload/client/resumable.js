@@ -22,10 +22,10 @@ Meteor.startup(() => {
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type,
-    }, (err) => {
-      if (err) {
-        console.warn('File creation failed!', err);
-        return;
+    }, (error) => {
+      if (error) {
+        // Handle error condition
+        throw new Meteor.Error('File creation failed!', error);
       }
 
       const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];

@@ -14,7 +14,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Branding from '/branding/collection';
 import ProjectLogo from '/branding/logo/collection';
 
-// APINF imports
+// APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
@@ -23,10 +23,11 @@ Meteor.startup(() => {
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type,
-    }, (err) => {
-      if (err) {
-        console.warn('File creation failed!', err);
-        return;
+    }, (error) => {
+      if (error) {
+        // Handle error condition
+        // eslint-disable-next-line max-len
+        throw new Meteor.Error('branding/logo/client/upload/resumable.js: File creation failed!', error);
       }
 
       const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];

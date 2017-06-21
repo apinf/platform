@@ -15,7 +15,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import ApiDocs from '/api_docs/collection';
 import DocumentationFiles from '/api_docs/files/collection';
 
-// APINF imports
+// APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 
@@ -56,10 +56,10 @@ Meteor.startup(() => {
         _id: file.uniqueIdentifier,
         filename: file.fileName,
         contentType: file.file.type,
-      }, (err) => {
-        if (err) {
-          console.warn('File creation failed!', err);
-          return;
+      }, (error) => {
+        if (error) {
+          // Handle error condition
+          throw new Meteor.Error('File creation failed!', error);
         }
 
         const acceptedExtensions = ['yaml', 'yml', 'txt', 'json'];

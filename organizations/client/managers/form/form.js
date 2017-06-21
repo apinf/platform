@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
-// APINF imports
+// APInf imports
 import managerSchema from './schema';
 
 Template.addOrganizationManagerForm.helpers({

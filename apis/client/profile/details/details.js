@@ -51,12 +51,13 @@ Template.apiDetails.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
+    // Get proxyBackend from template data
+    const proxyBackend = instance.data.proxyBackend;
+
     // placeholder for output URL
     let proxyUrl;
 
-    if (instance.data.proxyBackend) {
-      // Get proxyBackend from template data
-      const proxyBackend = instance.data.proxyBackend;
+    if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
       // Get the proxy settings
       const proxy = Proxies.findOne(proxyBackend.proxyId);
       // Get Proxy host

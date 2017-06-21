@@ -13,8 +13,14 @@ Use the following guidelines when contributing to this project.
   - [Bug reports / support requests](#bug-reports--support-requests)
     - [Bug report/support request example](#bug-reportsupport-request-example)
 - [Contributing code](#contributing-code)
+  - [Branching strategy](#branching-strategy)
+    - [Importance of git history](#importance-of-git-history)
+    - [Git rebase](#git-rebase)
+  - [Copyright statement in source code](#copyright-statement-in-source-code)
+  - [CSS styleguide](#css-styleguide)
   - [Code quality](#code-quality)
     - [Simplicity and safety](#simplicity-and-safety)
+    - [Importing](#importing)
     - [Comments](#comments)
       - [Example comment](#example-comment)
     - [One task per line](#one-task-per-line)
@@ -36,6 +42,10 @@ Use the following guidelines when contributing to this project.
     - [i18n key structure](#i18n-key-structure)
     - [Template text (HTML/Blaze)](#template-text-htmlblaze)
     - [JavaScript text](#javascript-text)
+- [Automated testing](#automated-testing)
+  - [End to End](#end-to-end)
+    - [Test suite execution](#test-suite-execution)
+      - [Running only specific test](#running-only-specific-test)
 - [Packages](#packages)
   - [Forms](#forms)
   - [Routing](#routing)
@@ -49,10 +59,10 @@ Use the following guidelines when contributing to this project.
 
 There are many ways to get involved:
 * Contribute to our [Planning Documents](https://apinf.hackpad.com)
-* Report bugs on our [issue tracker](https://github.com/apinf/api-umbrella-dashboard/issues/new)
+* Report bugs on our [issue tracker](https://github.com/apinf/platform/issues/new)
 * Add documentation via our [documentation repository](https://github.com/apinf/docs)
 * Improve the code with pull requests
-  * Choose a [task from our backlog](https://github.com/apinf/api-umbrella-dashboard/issues)
+  * Choose a [task from our backlog](https://github.com/apinf/platform/issues)
 
 ## Join the discussion
 
@@ -150,6 +160,58 @@ Additionally, the following steps help our team stay coordinated:
 
  ![git flow diagram with peer review step](https://openclipart.org/image/600px/svg_to_png/236560/Gitflow-featureBranch-peerReview.png)
 
+## Branching strategy
+
+### Importance of git history
+The idea behind the importance of Git history (to name a few) is that:
+
+1. A clean log allows easy tracking of project over time
+1. Allows using tools like `git bisect` without any hassle
+1. Reduces conflicts during merging the `feature` or `hotfix` branches to `develop` branch
+
+Further, since we would be getting closer to supporting multiple releases and for different customers, it makes a lot of sense to have a code where backporting of minor security fixes is possible. I hope that all of us here appreciate the fact that when merging a PR or even cherry picking a security fix, the whole process should not take more than hitting enter on the relevant command. A relatively linear history allows this to happen with minimum or less hassles.
+
+### Git rebase
+This comment focuses on `git rebase`:
+
+One of the most powerful features of git is the ability to commit often, fix history if needed and push once done. In all the **personal feature branches** we should use this strategy. So, when a feature has to be developed this is what we should follow:
+
+1. Create a feature branch for all the development
+1. Do all the development in the feature branch
+1. Merge to `develop` once the feature has been **DONE**
+
+In a continuous development environment, there are chances that the `develop` will be updated before a developer finishes his/her feature. So, the following thumb rules should be applied:
+
+1. **A rebase a day keeps conflicts away**: These guidelines recommends to a developer that they should rebase their branch _(= update your branch w.r.t. latest develop)_ once every morning before they start their regular work.
+1. **A rebase must be performed before creating a PR**.
+
+An example for rebase is given below (with a new repository and using master instead of develop, apologies ;-) ).
+
+![image](https://cloud.githubusercontent.com/assets/5460151/25945611/397f3bba-3650-11e7-9fd0-f5e6b73e2a08.png)
+^^ above:
+* New repo was initiated
+* Initial commit was added to master
+* Feature branch `feature-01` was created and completed
+* Assumption is that there might be new commits in `master` by the time `feature-01` is finished.
+
+![image](https://cloud.githubusercontent.com/assets/5460151/25945732/b2c2250a-3650-11e7-94c0-7d9713047bf3.png)
+
+^^ and there are new commits in master. We should update our `feature-01` branch w.r.t. latest in `master`
+
+![image](https://cloud.githubusercontent.com/assets/5460151/25945923/8080305e-3651-11e7-82ce-f7c92ac7b272.png)
+
+^^ `feature-01` before `git rebase master`
+
+![image](https://cloud.githubusercontent.com/assets/5460151/25945947/9160cb22-3651-11e7-9431-ee8d1d84599d.png)
+
+^^ Initiated `git rebase master` and state of the feature branch after the rebase. As you can see that the `commit c59309b` has been applied to `feature-01` and then, the implementation of `feature-01` is applied to the tree.. **This is how we should follow**.
+
+Remember that at this stage, you might also get conflicts and you should **resolve the conflicts here**. Once the `feature-01` has been updated w.r.t. `master` (and in our case, w.r.t. `develop`), then a PR must be made from `feature-01` -> `develop`.
+
+![image](https://cloud.githubusercontent.com/assets/5460151/25946082/38cddb2a-3652-11e7-9b4b-696703e7c6ab.png)
+
+Github already uses a --no-ff merge strategy so, we need not worry about that.
+
 ## Copyright statement in source code
 
 All files should have a copyright statement at the top.
@@ -192,7 +254,7 @@ The sections should be one of the below and the comments must be exactly the sam
 * Meteor packages imports - anything imported straight from meteor
 * Meteor contributed packages imports - contributed packages, like kadira:flow-router or tap:i18n
 * Collection imports - all collections needed by the current file
-* APINF imports - any custom file, probably from `/core`
+* APInf imports - any custom file, probably from `/core`
 * Npm packages imports - if importing packages from npm are needed
 
 Examples below:
@@ -207,7 +269,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import ApiMetadata from '../../collection';
 
-// APINF imports
+// APInf imports
 import formatDate from '/core/helper_functions/format_date';
 
 // Npm packages imports
@@ -521,6 +583,34 @@ const message = TAPi18n._("templateName_event_translationString");
 sAlert.warning(message);
 
 ```
+
+# Automated testing
+
+## End to End
+
+There are some end to end tests on the `tests` directory. They were built using [chimp.js](https://github.com/xolvio/chimp).
+
+### Test suite execution
+
+In order to run the end to end tests, the application must be running on a separated process
+
+```bash
+$ meteor run
+```
+
+And the tests can be run via yarn
+
+```bash
+$ yarn run chimp-test
+```
+
+A new google chrome window will open and the scripts will be run there.
+
+#### Running only specific test
+
+It is possible to run a specific test file by changing `tests/chimp-config.js` file, under `mocha_config.grep` setting.
+
+Since the test cases begin with a number, just put a number to run the desired file.
 
 # Packages
 The project is built using the [Meteor.js framework](https://meteor.com). The following Meteor packages provide important functionality.

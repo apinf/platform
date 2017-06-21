@@ -8,12 +8,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="container">
       <div class="row">
         <!-- icons -->
-        <div class="col-xs-12 col-sm-3 social-media-block">
-          {{# each network in branding.socialMedia }}
-            <a href="{{ network.url }}" target="_blank" class="social-media-link">
-              <img src="/img/social-media-icons/{{ network.name }}.png" alt="{{ network.name }} icon" class="social-media-icon">
-            </a>
-          {{/ each }}
+        <div class="col-xs-12 col-sm-3">
+          <ul class="list-inline social-media-block">
+            {{# each network in branding.socialMedia }}
+              <li>
+                <a href="{{ network.url }}" target="_blank" class="social-media-link">
+                  <img src="/img/social-media-icons/{{ network.name }}.png" alt="{{ network.name }} icon" class="social-media-icon">
+                </a>
+              </li>
+            {{/ each }}
+          </ul>
         </div>
         <div class="col-xs-12 col-sm-3 footer-text">
           <div class="row">
@@ -34,18 +38,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             {{# if currentUser }}
               <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signOut' }}">
+                <a class="sign-out" href="{{ pathFor 'signOut' }}" id="footer-signout">
                   {{_ "footer_signOut" }}
                 </a>
               </div>
             {{ else }}
               <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signUp' }}">
+                <a href="{{ pathFor 'signUp' }}" id="footer-signup">
                   {{_ "footer_signUp" }}
                 </a>
               </div>
               <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signIn' }}">
+                <a href="{{ pathFor 'signIn' }}" id="footer-signin">
                   {{_ "footer_signIn" }}
                 </a>
               </div>
@@ -56,12 +60,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="col-xs-12 col-sm-3 footer-text">
           <div class="row">
             <div class="col-xs-6 col-md-12">
-              <a href="{{ pathFor 'privacyPolicy' }}">
+              <a href="{{ pathFor 'privacyPolicy' }}" id="privacypolicy-button">
                 {{_ "footer_privacyPolicy_text" }}
               </a>
             </div>
             <div class="col-xs-6 col-md-12">
-              <a href="{{ pathFor 'termsOfUse' }}">
+              <a href="{{ pathFor 'termsOfUse' }}" id="termsofuse-button">
                 {{_  "footer_termsOfUse_text" }}
               </a>
             </div>

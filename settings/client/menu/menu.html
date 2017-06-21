@@ -8,32 +8,37 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <ul class="list-group">
       <a
         href="{{ pathFor route='profile' }}"
-        class="list-group-item {{ isActiveRoute 'profile' }}">
+        class="list-group-item {{ isActiveRoute 'profile' }}"
+        id="button-profile">
           {{_ "settingsMenu_profile" }}
           <span class="glyphicon glyphicon-chevron-right pull-right"></span>
       </a>
       <a
         href="{{ pathFor route='account' }}"
-        class="list-group-item {{ isActiveRoute 'account' }}">
+        class="list-group-item {{ isActiveRoute 'account' }}"
+        id="button-account">
           {{_ "settingsMenu_account" }}
           <span class="glyphicon glyphicon-chevron-right pull-right"></span>
       </a>
       {{# if isInRole 'admin' }}
         <a
           href="{{ pathFor route='branding' }}"
-          class="list-group-item {{ isActiveRoute 'branding' }}">
+          class="list-group-item {{ isActiveRoute 'branding' }}"
+          id="button-branding">
             {{_ "settingsMenu_branding" }}
             <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
         <a
           href="{{ pathFor route='settings' }}"
-          class="list-group-item {{ isActiveRoute 'settings' }}">
+          class="list-group-item {{ isActiveRoute 'settings' }}"
+          id="button-settings">
             {{_ "settingsMenu_settings" }}
             <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
         <a
           href="{{ pathFor route='proxies' }}"
-          class="list-group-item {{ isActiveRoute 'proxies' }}">
+          class="list-group-item {{ isActiveRoute 'proxies' }}"
+          id="button-proxies">
             {{_ "settingsMenu_proxies" }}
             <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>

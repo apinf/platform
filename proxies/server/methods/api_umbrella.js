@@ -19,7 +19,7 @@ import Apis from '/apis/collection';
 import Proxies from '/proxies/collection';
 import ProxyBackends from '/proxy_backends/collection';
 
-// APINF imports
+// APInf imports
 import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
 
 Meteor.methods({

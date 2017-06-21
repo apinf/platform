@@ -9,7 +9,7 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Proxies from '../../collection';
 
-// APINF imports
+// APInf imports
 import registeredProxies from '../../collection/registered_proxies.js';
 
 Template.proxyForm.helpers({

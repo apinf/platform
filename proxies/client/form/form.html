@@ -19,10 +19,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           type=formType
           doc=proxy }}
           <div class="modal-body">
-            {{> afQuickField name="name" }}
-            {{> afQuickField name="description" }}
+            {{> afQuickField name="name" id="proxy-name" }}
+            {{> afQuickField name="description" id="proxy-description" }}
 
-            {{> afQuickField name="type" options="allowed" }}
+            {{> afQuickField name="type" options="allowed" id="proxy-type" }}
 
             {{# each proxyName in registeredProxies }}
               {{# if afFieldValueIs name="type" value=proxyName }}
@@ -32,7 +32,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" id="proxy-save">
               {{_ "proxyForm_saveButton_text" }}
             </button>
           </div>
