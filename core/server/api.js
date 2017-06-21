@@ -25,6 +25,30 @@ UserFields.struct = {
   },
 
   params: {
+    addUser: {
+      name: 'Update user',
+      in: 'body',
+      description: 'Data for adding User',
+      schema: {
+        required: ['userName', 'password', 'email'],
+        properties: {
+          userName: {
+            type: 'string',
+            example: 'John Doe',
+          },
+          password: {
+            type: 'string',
+            example: 'secrecy_is_everything#¤%',
+          },
+          email: {
+            type: 'string',
+            format: 'email',
+            description: 'E-mail address of user',
+            example: 'company-mail@gmail.com',
+          },
+        },
+      },
+    },
     company: {
       name: 'company',
       in: 'body',
@@ -39,6 +63,22 @@ UserFields.struct = {
       required: true,
       type: 'string',
     },
+    // getUserData {
+    //   properties:
+    //     _id:
+    //       type: string
+    //       example: '7L4jNtdfNFGH3igPs'
+    //     created_at:
+    //       $ref: '#/definitions/get_user_created_at'
+    //     username:
+    //       type: string
+    //       example: myusername
+    //     profile:
+    //       $ref: '#/definitions/get_user_profile'
+    //     organization:
+    //       $ref: '#/definitions/get_user_organization'
+    //
+    // },
     limit: {
       name: 'limit',
       in: 'query',
@@ -52,14 +92,14 @@ UserFields.struct = {
     optionalSearch: {
       name: 'q',
       in: 'query',
-      description: 'An optional search string for looking up inventory.',
+      description: 'Pass an optional search string for looking up users.',
       required: false,
       type: 'string',
     },
     organizationId: {
-      name: 'id',
-      in: 'path',
-      description: 'ID of Organization',
+      name: 'organization_id',
+      in: 'query',
+      description: 'Limit results to the given organization.',
       required: false,
       type: 'string',
     },
@@ -72,9 +112,9 @@ UserFields.struct = {
     },
     since: {
       name: 'since',
-      in: 'path',
+      in: 'query',
       description: 'Time frame in days',
-      required: true,
+      required: false,
       type: 'integer',
       format: 'int32',
       minimum: 1,
@@ -91,7 +131,7 @@ UserFields.struct = {
     sortBy: {
       name: 'sort_by',
       in: 'query',
-      description: 'Criteria for sort ',
+      description: 'options "username, created_at".',
       required: false,
       type: 'string',
     },
@@ -100,68 +140,39 @@ UserFields.struct = {
       in: 'body',
       description: 'Data for editing User',
       schema: {
-        $ref: '#/definitions/updateUser',
+        required: [],
+        properties: {
+          userName: {
+            type: 'string',
+            example: 'John Doe',
+          },
+          company: {
+            type: 'string',
+            example: 'Amazing Company Ltd.',
+          },
+          password: {
+            type: 'string',
+            example: 'secrecy_is_everything#¤%',
+          },
+        },
       },
     },
-
     userId: {
       name: 'id',
       in: 'path',
-      description: 'ID of User',
+      description: 'Id of the user to fetch.',
       required: true,
       type: 'string',
     },
     userName: {
       name: 'username',
       in: 'body',
-      description: 'Username',
+      description: 'Name of user',
       required: true,
       type: 'string',
     },
   },
 
-  definitions: {
-    addUser: {
-      required: ['userName', 'password', 'email'],
-      properties: {
-        userName: {
-          type: 'string',
-          example: 'John Doe',
-        },
-        password: {
-          type: 'string',
-          example: 'secrecy_is_everything#¤%',
-        },
-        email: {
-          type: 'string',
-          format: 'email',
-          description: 'E-mail address of user',
-          example: 'company-mail@gmail.com',
-        },
-      },
-    },
-
-    updateUser: {
-      required: [],
-      properties: {
-        userName: {
-          type: 'string',
-          example: 'John Doe',
-        },
-        company: {
-          type: 'string',
-          example: 'Amazing Company Ltd.',
-        },
-        email: {
-          type: 'string',
-          format: 'email',
-          description: 'E-mail address of user',
-          example: 'company-mail@gmail.com',
-        },
-      },
-    },
-
-  },
 };
 
 // Add Restivus Swagger configuration - meta, tags, params, definitions
@@ -175,7 +186,7 @@ ApiV1.swagger = {
     },
     paths: {
       '/users': {
-        getAll: {
+        get: {
           tags: [
             UserFields.struct.tags.users,
           ],
@@ -195,32 +206,11 @@ ApiV1.swagger = {
             400: {
               description: 'Bad query parameters',
             },
-          },
-        },
-        get: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-          description: 'Returns user data with given ID.',
-          parameters: [
-            UserFields.struct.params.userId,
-          ],
-
-          responses: {
-            200: {
-              description: 'Data of identified user.',
-            },
-            403: {
-              description: 'User does not have permission.',
-            },
-            404: {
-              description: 'No user found with given UserID.',
+            401: {
+              description: 'Authentication is required',
             },
           },
         },
-      },
-
-      '/users/{id}': {
         post: {
           tags: [
             UserFields.struct.tags.users,
@@ -230,7 +220,6 @@ ApiV1.swagger = {
           produces: 'application/json',
 
           parameters: [
-            UserFields.struct.params.userName,
             UserFields.struct.params.addUser,
           ],
           responses: {
@@ -253,6 +242,33 @@ ApiV1.swagger = {
               userId: [],
             },
           ],
+        },
+      },
+
+      '/users/{id}': {
+        get: {
+          tags: [
+            UserFields.struct.tags.users,
+          ],
+          description: 'Returns user data with given ID.',
+          parameters: [
+            UserFields.struct.params.userId,
+          ],
+
+          responses: {
+            200: {
+              description: 'Data of identified user.',
+            },
+            401: {
+              description: 'Authentication is required',
+            },
+            403: {
+              description: 'User does not have permission.',
+            },
+            404: {
+              description: 'No user found with given UserID.',
+            },
+          },
         },
         delete: {
           tags: [
@@ -299,6 +315,9 @@ ApiV1.swagger = {
             200: {
               description: 'User successfully updated.',
             },
+            400: {
+              description: 'Invalid input, object invalid, Erroneous new password',
+            },
             401: {
               description: 'Authentication is required',
             },
@@ -336,6 +355,9 @@ ApiV1.swagger = {
             },
             400: {
               description: 'Bad query parameters',
+            },
+            401: {
+              description: 'Authentication is required',
             },
           },
         },
@@ -565,13 +587,13 @@ ApiV1.swagger = {
       required: ['name', 'email', 'password'],
       properties: {
         username:
-          UserFields.params.userName,
+          UserFields.struct.params.userName,
         email:
-          UserFields.params.email,
+          UserFields.struct.params.email,
         password:
-          UserFields.params.password,
+          UserFields.struct.params.password,
         company:
-          UserFields.params.company,
+          UserFields.struct.params.company,
       },
     },
   },
