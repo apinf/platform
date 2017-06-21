@@ -90,14 +90,7 @@ function startApp(callback) {
 function startChimp() {
 	startProcess({
 		name: 'Chimp',
-		command: 'yarn run chimp-test',
-		options: {
-			env: Object.assign({}, process.env, {
-				NODE_PATH: process.env.NODE_PATH +
-					path.delimiter + srcDir +
-					path.delimiter + srcDir + '/node_modules'
-			})
-		}
+		command: 'yarn run chimp-test'
 	});
 }
 
