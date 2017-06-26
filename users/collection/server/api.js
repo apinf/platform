@@ -42,6 +42,39 @@ ApiV1.swagger.meta.paths['/users/{id}'].get = {
   },
 };
 
+ApiV1.swagger.meta.paths['/users/{id}'].delete = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  description: 'Deletes the identified User.',
+  parameters: [
+    ApiV1.swagger.params.userId,
+  ],
+  responses: {
+    200: {
+      description: 'User deleted.',
+    },
+    400: {
+      description: 'Invalid input, invalid object',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    403: {
+      description: 'User does not have permission',
+    },
+    404: {
+      description: 'User not found',
+    },
+  },
+  security: [
+    {
+      userSecurityToken: [],
+      userId: [],
+    },
+  ],
+};
+
 // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
 // Meteor.users collection
 ApiV1.addCollection(Meteor.users, {
@@ -385,38 +418,6 @@ ApiV1.addCollection(Meteor.users, {
     // Delete a user
     delete: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Deletes the identified User.',
-        parameters: [
-          ApiV1.swagger.params.userId,
-        ],
-        responses: {
-          200: {
-            description: 'User deleted.',
-          },
-          400: {
-            description: 'Invalid input, invalid object',
-          },
-          401: {
-            description: 'Authentication is required',
-          },
-          403: {
-            description: 'User does not have permission',
-          },
-          404: {
-            description: 'User not found',
-          },
-        },
-        security: [
-          {
-            userSecurityToken: [],
-            userId: [],
-          },
-        ],
-      },
       action () {
         // Get requestor's id
         const requestorId = this.userId;
