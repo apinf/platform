@@ -248,39 +248,7 @@ ApiV1.swagger = {
       '/users/{id}': {
         get: {},
         delete: {},
-        put: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-          description: 'Update a User',
-          parameters: [
-            UserFields.struct.params.userId,
-            UserFields.struct.params.updateUser,
-          ],
-          responses: {
-            200: {
-              description: 'User successfully updated.',
-            },
-            400: {
-              description: 'Invalid input, object invalid, Erroneous new password',
-            },
-            401: {
-              description: 'Authentication is required',
-            },
-            403: {
-              description: 'User does not have permission',
-            },
-            404: {
-              description: 'No user found with given UserID',
-            },
-          },
-          security: [
-            {
-              userSecurityToken: [],
-              userId: [],
-            },
-          ],
-        },
+        put: {},
       },
 
       '/users/updates': {
