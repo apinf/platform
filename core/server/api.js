@@ -26,25 +26,25 @@ UserFields.struct = {
 
   params: {
     addUser: {
-      name: 'Update user',
+      name: 'addUserData',
       in: 'body',
-      description: 'Data for adding User',
+      description: 'Data for adding a user account',
       schema: {
-        required: ['userName', 'password', 'email'],
+        required: ['username', 'password', 'email'],
         properties: {
-          userName: {
+          username: {
             type: 'string',
-            example: 'John Doe',
+            example: 'johndoe',
           },
           password: {
             type: 'string',
-            example: 'secrecy_is_everything#¤%',
+            example: 'password',
           },
           email: {
             type: 'string',
             format: 'email',
             description: 'E-mail address of user',
-            example: 'company-mail@gmail.com',
+            example: 'firstname.lastname@vendor.com',
           },
         },
       },
@@ -136,15 +136,15 @@ UserFields.struct = {
       type: 'string',
     },
     updateUser: {
-      name: 'Update user',
+      name: 'updateUserData',
       in: 'body',
-      description: 'Data for editing User',
+      description: 'Data for updating a user account',
       schema: {
         required: [],
         properties: {
-          userName: {
+          username: {
             type: 'string',
-            example: 'John Doe',
+            example: 'johndoe',
           },
           company: {
             type: 'string',
@@ -152,7 +152,7 @@ UserFields.struct = {
           },
           password: {
             type: 'string',
-            example: 'secrecy_is_everything#¤%',
+            example: 'updatedPassword',
           },
         },
       },
@@ -164,7 +164,7 @@ UserFields.struct = {
       required: true,
       type: 'string',
     },
-    userName: {
+    username: {
       name: 'username',
       in: 'body',
       description: 'Name of user',
@@ -460,7 +460,7 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
-    userName: {
+    username: {
       name: 'username',
       in: 'body',
       description: 'Username',
@@ -564,7 +564,7 @@ ApiV1.swagger = {
       required: ['name', 'email', 'password'],
       properties: {
         username:
-          UserFields.struct.params.userName,
+          UserFields.struct.params.username,
         email:
           UserFields.struct.params.email,
         password:
