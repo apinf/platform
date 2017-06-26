@@ -247,38 +247,7 @@ ApiV1.swagger = {
 
       '/users/{id}': {
         get: {},
-        delete: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-          description: 'Deletes the identified User.',
-          parameters: [
-            UserFields.struct.params.userId,
-          ],
-          responses: {
-            200: {
-              description: 'User deleted.',
-            },
-            400: {
-              description: 'Invalid input, invalid object',
-            },
-            401: {
-              description: 'Authentication is required',
-            },
-            403: {
-              description: 'User does not have permission',
-            },
-            404: {
-              description: 'User not found',
-            },
-          },
-          security: [
-            {
-              userSecurityToken: [],
-              userId: [],
-            },
-          ],
-        },
+        delete: {},
         put: {
           tags: [
             UserFields.struct.tags.users,
