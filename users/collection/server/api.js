@@ -75,6 +75,42 @@ ApiV1.swagger.meta.paths['/users/{id}'].delete = {
   ],
 };
 
+ApiV1.swagger.meta.paths['/users/{id}'].put = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  description: 'Update a User',
+  parameters: [
+    ApiV1.swagger.params.userId,
+    ApiV1.swagger.params.username,
+    ApiV1.swagger.params.company,
+    ApiV1.swagger.params.password,
+  ],
+  responses: {
+    200: {
+      description: 'User successfully updated.',
+    },
+    400: {
+      description: 'Invalid input, object invalid, Erroneous new password',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    403: {
+      description: 'User does not have permission',
+    },
+    404: {
+      description: 'No user found with given UserID',
+    },
+  },
+  security: [
+    {
+      userSecurityToken: [],
+      userId: [],
+    },
+  ],
+};
+
 // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
 // Meteor.users collection
 ApiV1.addCollection(Meteor.users, {
@@ -331,7 +367,7 @@ ApiV1.addCollection(Meteor.users, {
         ],
         description: 'Adds a new user. On success, returns newly added object.',
         parameters: [
-          ApiV1.swagger.params.userName,
+          ApiV1.swagger.params.username,
           ApiV1.swagger.params.email,
           ApiV1.swagger.params.password,
         ],
@@ -468,38 +504,6 @@ ApiV1.addCollection(Meteor.users, {
     // Udpdate user data
     put: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Update a User',
-        parameters: [
-          ApiV1.swagger.params.userId,
-          ApiV1.swagger.params.userName,
-          ApiV1.swagger.params.company,
-          ApiV1.swagger.params.password,
-        ],
-        responses: {
-          200: {
-            description: 'User successfully updated.',
-          },
-          401: {
-            description: 'Authentication is required',
-          },
-          403: {
-            description: 'User does not have permission',
-          },
-          404: {
-            description: 'No user found with given UserID',
-          },
-        },
-        security: [
-          {
-            userSecurityToken: [],
-            userId: [],
-          },
-        ],
-      },
       action () {
         // Get requestor's id
         const requestorId = this.userId;
