@@ -246,30 +246,7 @@ ApiV1.swagger = {
       },
 
       '/users/{id}': {
-        get: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-          description: 'Returns user data with given ID.',
-          parameters: [
-            UserFields.struct.params.userId,
-          ],
-
-          responses: {
-            200: {
-              description: 'Data of identified user.',
-            },
-            401: {
-              description: 'Authentication is required',
-            },
-            403: {
-              description: 'User does not have permission.',
-            },
-            404: {
-              description: 'No user found with given UserID.',
-            },
-          },
-        },
+        get: {},
         delete: {
           tags: [
             UserFields.struct.tags.users,
