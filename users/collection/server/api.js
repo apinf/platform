@@ -280,8 +280,8 @@ ApiV1.addCollection(Meteor.users, {
 
     },
     post: {
-      authRequired: true,
-      roleRequired: ['admin'],
+      authRequired: false,
+      // roleRequired: ['admin'],
       swagger: {
         tags: [
           ApiV1.swagger.tags.users,
