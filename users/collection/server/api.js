@@ -18,6 +18,30 @@ import Organizations from '/organizations/collection';
 import _ from 'lodash';
 
 
+ApiV1.swagger.meta.paths['/users/{id}'].get = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  description: 'Returns user data with given ID.',
+  parameters: [
+    ApiV1.swagger.params.userId,
+  ],
+  responses: {
+    200: {
+      description: 'Data of identified user.',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    403: {
+      description: 'User does not have permission.',
+    },
+    404: {
+      description: 'No user found with given UserID.',
+    },
+  },
+};
+
 // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
 // Meteor.users collection
 ApiV1.addCollection(Meteor.users, {
@@ -192,20 +216,6 @@ ApiV1.addCollection(Meteor.users, {
     },
     get: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Returns user with given ID.',
-        parameters: [
-          ApiV1.swagger.params.userId,
-        ],
-        responses: {
-          200: {
-            description: 'One user.',
-          },
-        },
-      },
       action () {
       // Get requestor's id
         const requestorId = this.userId;
