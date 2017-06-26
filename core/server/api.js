@@ -211,38 +211,7 @@ ApiV1.swagger = {
             },
           },
         },
-        post: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-          description: 'Adds a new user. On success, returns newly added object.',
-          consumes: 'application/json',
-          produces: 'application/json',
-
-          parameters: [
-            UserFields.struct.params.addUser,
-          ],
-          responses: {
-            201: {
-              description: 'User successfully added',
-            },
-            400: {
-              description: 'Invalid input, object invalid',
-            },
-            401: {
-              description: 'Authentication is required',
-            },
-            409: {
-              description: 'User already exists',
-            },
-          },
-          security: [
-            {
-              userSecurityToken: [],
-              userId: [],
-            },
-          ],
-        },
+        post: {},
       },
 
       '/users/{id}': {
@@ -252,30 +221,7 @@ ApiV1.swagger = {
       },
 
       '/users/updates': {
-        get: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-          description: 'Returns users, who are created in given timeframe',
-          parameters: [
-            UserFields.struct.params.since,
-            UserFields.struct.params.organizationId,
-            UserFields.struct.params.skip,
-            UserFields.struct.params.limit,
-          ],
-          responses: {
-            200: {
-              description: 'success',
-            },
-            400: {
-              description: 'Bad query parameters',
-            },
-            401: {
-              description: 'Authentication is required',
-            },
-          },
-        },
-
+        get: {},
       },
 
     },
@@ -318,6 +264,12 @@ ApiV1.swagger = {
       in: 'body',
       description: 'Company name of user',
       required: true,
+      type: 'string',
+    },
+    createdAt: {
+      name: 'createdAt',
+      in: 'body',
+      description: 'Date and time in ISODate format, e.g. "2012-07-14T01:00:00+01:00" ',
       type: 'string',
     },
     email: {
@@ -390,9 +342,25 @@ ApiV1.swagger = {
       format: 'int32',
       minimum: 1,
     },
+    skip: {
+      name: 'skip',
+      in: 'query',
+      description: 'Number of records to skip for pagination.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+    },
     userId: {
       name: 'id',
       in: 'path',
+      description: 'ID of User',
+      required: true,
+      type: 'string',
+    },
+    userIdResponse: {
+      name: '_id',
+      in: 'body',
       description: 'ID of User',
       required: true,
       type: 'string',
@@ -404,15 +372,14 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
-    skip: {
-      name: 'skip',
-      in: 'query',
-      description: 'Number of records to skip for pagination.',
+    userOrganizationId: {
+      name: 'organization_id',
+      in: 'path',
+      description: 'ID of Organization, that User belongs to',
       required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 0,
+      type: 'string',
     },
+
   },
   definitions: {
     // The schema defining the type used for the body parameter.
