@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 
 // Npm packages imports
 import Raven from 'raven';
+import _ from 'lodash';
 
 const wrapMethodHanderForErrors = function (name, originalHandler, methodMap) {
   methodMap[name] = function () {
@@ -26,14 +27,14 @@ export default function wrapMethods () {
   const originalMeteorMethods = Meteor.methods;
   // Wrap future method handlers for capturing errors
   Meteor.methods = function (methodMap) {
-    _.each(methodMap, (handler, name) => {
+    _.forEach(methodMap, (handler, name) => {
       wrapMethodHanderForErrors(name, handler, methodMap);
     });
     originalMeteorMethods(methodMap);
   };
 
   // Wrap existing method handlers for capturing errors
-  _.each(Meteor.default_server.method_handlers, (handler, name) => {
+  _.forEach(Meteor.default_server.method_handlers, (handler, name) => {
     wrapMethodHanderForErrors(name, handler, Meteor.default_server.method_handlers);
   });
 }
