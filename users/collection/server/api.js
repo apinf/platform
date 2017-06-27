@@ -21,23 +21,21 @@ ApiV1.swagger.meta.paths['/users'].get = {
   tags: [
     ApiV1.swagger.tags.users,
   ],
-  description: 'Returns all users',
+  summary: 'List and search users.',
+  description: 'By passing options you can search users in system.',
+  produces: 'application/json',
   parameters: [
     ApiV1.swagger.params.optionalSearch,
     ApiV1.swagger.params.userOrganizationId,
     ApiV1.swagger.params.skip,
     ApiV1.swagger.params.limit,
-    ApiV1.swagger.params.sort_by,
+    ApiV1.swagger.params.sortBy,
   ],
   responses: {
     200: {
-      description: 'success',
-      parameters: [
-        ApiV1.swagger.params.userIdResponse,
-        ApiV1.swagger.params.createdAt,
-        ApiV1.swagger.params.username,
-        ApiV1.swagger.params.email,
-      ],
+      description: 'Success',
+      schema:
+        ApiV1.swagger.definitions.get_user_data,
     },
     400: {
       description: 'Bad query parameters',
@@ -52,22 +50,17 @@ ApiV1.swagger.meta.paths['/users'].post = {
   tags: [
     ApiV1.swagger.tags.users,
   ],
+  summary: 'Adds a new user.',
   description: 'Adds a new user. On success, returns newly added object.',
+  produces: 'application/json',
   parameters: [
-    ApiV1.swagger.params.username,
-    ApiV1.swagger.params.email,
-    ApiV1.swagger.params.password,
+    ApiV1.swagger.params.userAddition,
   ],
   responses: {
     201: {
       description: 'User successfully added',
-      parameters: [
-        ApiV1.swagger.params.userIdResponse,
-        ApiV1.swagger.params.createdAt,
-        ApiV1.swagger.params.username,
-        ApiV1.swagger.params.email,
-      ],
-
+      schema:
+        ApiV1.swagger.definitions.post_user_response,
     },
     400: {
       description: 'Invalid input, object invalid',
@@ -92,13 +85,17 @@ ApiV1.swagger.meta.paths['/users/{id}'].get = {
   tags: [
     ApiV1.swagger.tags.users,
   ],
+  summary: 'Search Users one by one with userID.',
   description: 'Returns user data with given ID.',
+  produces: 'application/json',
   parameters: [
     ApiV1.swagger.params.userId,
   ],
   responses: {
     200: {
       description: 'Data of identified user.',
+      schema:
+        ApiV1.swagger.definitions.get_user_data,
 
     },
     401: {
@@ -117,6 +114,7 @@ ApiV1.swagger.meta.paths['/users/{id}'].delete = {
   tags: [
     ApiV1.swagger.tags.users,
   ],
+  summary: 'Delete Users one by one with userID.',
   description: 'Deletes the identified User.',
   parameters: [
     ApiV1.swagger.params.userId,
@@ -150,12 +148,11 @@ ApiV1.swagger.meta.paths['/users/{id}'].put = {
   tags: [
     ApiV1.swagger.tags.users,
   ],
-  description: 'Update a User',
+  summary: 'Update User\'s data.',
+  description: 'Updates data of a User indicated by user ID.',
   parameters: [
     ApiV1.swagger.params.userId,
-    ApiV1.swagger.params.username,
-    ApiV1.swagger.params.company,
-    ApiV1.swagger.params.password,
+    ApiV1.swagger.params.userUpdate,
   ],
   responses: {
     200: {
@@ -186,7 +183,9 @@ ApiV1.swagger.meta.paths['/users/updates'].get = {
   tags: [
     ApiV1.swagger.tags.users,
   ],
-  description: 'Returns users based on creation date',
+  summary: 'List and search user based on addition date',
+  description: 'Returns users based on addition date',
+  produces: 'application/json',
   parameters: [
     ApiV1.swagger.params.since,
     ApiV1.swagger.params.userOrganizationId,
@@ -196,12 +195,8 @@ ApiV1.swagger.meta.paths['/users/updates'].get = {
   responses: {
     200: {
       description: 'success',
-      parameters: [
-        ApiV1.swagger.params.userIdResponse,
-        ApiV1.swagger.params.createdAt,
-        ApiV1.swagger.params.username,
-        ApiV1.swagger.params.email,
-      ],
+      schema:
+        ApiV1.swagger.definitions.get_user_data,
     },
     400: {
       description: 'Bad query parameters',
