@@ -24,4 +24,4 @@ export default function wrapMeteorDebug () {
     // eslint-disable-next-line
     return originalMeteorDebug.apply(this, arguments);
   };
-};
+}
