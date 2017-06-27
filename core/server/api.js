@@ -17,164 +17,6 @@ const ApiV1 = new Restivus({
   enableCors: true,
 });
 
-const UserFields = {};
-
-UserFields.struct = {
-  tags: {
-    users: 'Users',
-  },
-
-  params: {
-    addUser: {
-      name: 'addUserData',
-      in: 'body',
-      description: 'Data for adding a user account',
-      schema: {
-        required: ['username', 'password', 'email'],
-        properties: {
-          username: {
-            type: 'string',
-            example: 'johndoe',
-          },
-          password: {
-            type: 'string',
-            example: 'password',
-          },
-          email: {
-            type: 'string',
-            format: 'email',
-            description: 'E-mail address of user',
-            example: 'firstname.lastname@vendor.com',
-          },
-        },
-      },
-    },
-    company: {
-      name: 'company',
-      in: 'body',
-      description: 'Company name of user',
-      required: true,
-      type: 'string',
-    },
-    email: {
-      name: 'email',
-      in: 'body',
-      description: 'Email address for user',
-      required: true,
-      type: 'string',
-    },
-    // getUserData {
-    //   properties:
-    //     _id:
-    //       type: string
-    //       example: '7L4jNtdfNFGH3igPs'
-    //     created_at:
-    //       $ref: '#/definitions/get_user_created_at'
-    //     username:
-    //       type: string
-    //       example: myusername
-    //     profile:
-    //       $ref: '#/definitions/get_user_profile'
-    //     organization:
-    //       $ref: '#/definitions/get_user_organization'
-    //
-    // },
-    limit: {
-      name: 'limit',
-      in: 'query',
-      description: 'Maximum number of records to return in query.',
-      required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 0,
-      maximum: 50,
-    },
-    optionalSearch: {
-      name: 'q',
-      in: 'query',
-      description: 'Pass an optional search string for looking up users.',
-      required: false,
-      type: 'string',
-    },
-    organizationId: {
-      name: 'organization_id',
-      in: 'query',
-      description: 'Limit results to the given organization.',
-      required: false,
-      type: 'string',
-    },
-    password: {
-      name: 'password',
-      in: 'body',
-      description: 'Password for user',
-      required: true,
-      type: 'string',
-    },
-    since: {
-      name: 'since',
-      in: 'query',
-      description: 'Time frame in days',
-      required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 1,
-    },
-    skip: {
-      name: 'skip',
-      in: 'query',
-      description: 'Number of records to skip for pagination.',
-      required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 0,
-    },
-    sortBy: {
-      name: 'sort_by',
-      in: 'query',
-      description: 'options "username, created_at".',
-      required: false,
-      type: 'string',
-    },
-    updateUser: {
-      name: 'updateUserData',
-      in: 'body',
-      description: 'Data for updating a user account',
-      schema: {
-        required: [],
-        properties: {
-          username: {
-            type: 'string',
-            example: 'johndoe',
-          },
-          company: {
-            type: 'string',
-            example: 'Amazing Company Ltd.',
-          },
-          password: {
-            type: 'string',
-            example: 'updatedPassword',
-          },
-        },
-      },
-    },
-    userId: {
-      name: 'id',
-      in: 'path',
-      description: 'Id of the user to fetch.',
-      required: true,
-      type: 'string',
-    },
-    username: {
-      name: 'username',
-      in: 'body',
-      description: 'Name of user',
-      required: true,
-      type: 'string',
-    },
-  },
-
-};
-
 // Add Restivus Swagger configuration - meta, tags, params, definitions
 ApiV1.swagger = {
   meta: {
@@ -186,31 +28,7 @@ ApiV1.swagger = {
     },
     paths: {
       '/users': {
-        get: {
-          tags: [
-            UserFields.struct.tags.users,
-          ],
-
-          description: 'Returns: For Admin: all users data. For non-admin: only own data.',
-          parameters: [
-            UserFields.struct.params.optionalSearch,
-            UserFields.struct.params.organizationId,
-            UserFields.struct.params.skip,
-            UserFields.struct.params.limit,
-            UserFields.struct.params.sortBy,
-          ],
-          responses: {
-            200: {
-              description: 'success',
-            },
-            400: {
-              description: 'Bad query parameters',
-            },
-            401: {
-              description: 'Authentication is required',
-            },
-          },
-        },
+        get: {},
         post: {},
       },
 
@@ -279,6 +97,14 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
+    emailResponse: {
+      properties: {
+        name: 'address',
+        in: 'body',
+        description: 'Email address for user',
+        type: 'string',
+      },
+    },
     lifecycle: {
       name: 'lifecycle',
       in: 'query',
@@ -321,7 +147,7 @@ ApiV1.swagger = {
     },
     organizationId: {
       name: 'id',
-      in: 'path',
+      in: 'query',
       description: 'ID of Organization',
       required: true,
       type: 'string',
@@ -335,9 +161,9 @@ ApiV1.swagger = {
     },
     since: {
       name: 'since',
-      in: 'path',
+      in: 'query',
       description: 'Time frame in days',
-      required: true,
+      required: false,
       type: 'integer',
       format: 'int32',
       minimum: 1,
@@ -351,6 +177,30 @@ ApiV1.swagger = {
       format: 'int32',
       minimum: 0,
     },
+    sortBy: {
+      name: 'sort_by',
+      in: 'query',
+      description: 'Criteria for sort ',
+      required: false,
+      type: 'string',
+    },
+    userAddition: {
+      name: 'user',
+      in: 'body',
+      description: 'Data for adding a new User',
+      schema: {
+        $ref: '#/definitions/user_addition',
+      },
+    },
+    userUpdate: {
+      name: 'user',
+      in: 'body',
+      description: 'Data for updating a User',
+      schema: {
+        $ref: '#/definitions/user_update',
+      },
+    },
+
     userId: {
       name: 'id',
       in: 'path',
@@ -374,7 +224,7 @@ ApiV1.swagger = {
     },
     userOrganizationId: {
       name: 'organization_id',
-      in: 'path',
+      in: 'query',
       description: 'ID of Organization, that User belongs to',
       required: false,
       type: 'string',
@@ -465,21 +315,198 @@ ApiV1.swagger = {
     },
 
     users: {
-      required: ['name', 'email', 'password'],
+      required: ['username', 'email', 'password'],
       properties: {
-        username:
-          UserFields.struct.params.username,
-        email:
-          UserFields.struct.params.email,
-        password:
-          UserFields.struct.params.password,
-        company:
-          UserFields.struct.params.company,
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+          description: 'E-mail address of user',
+          example: 'john.doe@ispname.com',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
+        company: {
+          type: 'string',
+          description: 'Company name of user',
+          example: 'My Company Ltd',
+        },
       },
     },
+    user_addition: {
+      required: ['username', 'email', 'password'],
+      properties: {
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+          description: 'E-mail address of user',
+          example: 'john.doe@ispname.com',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
+      },
+    },
+    user_update: {
+      required: ['username', 'company', 'password'],
+      properties: {
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
+        },
+        company: {
+          type: 'string',
+          description: 'Name of company user belongs to',
+          example: 'Mighty API owners Ltd.',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
+      },
+    },
+
+    get_user_profile: {
+      type: 'object',
+      properties: {
+        company: {
+          type: 'string',
+          example: 'Mighty API owners Ltd.',
+        },
+      },
+    },
+    get_user_created_at: {
+      type: 'string',
+      example: '2012-07-14T01:00:00+01:00',
+      description: 'Dates and times are stored in ISODate format',
+
+    },
+    post_user_email_address: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          address: {
+            type: 'string',
+            example: 'sam.won@apinf.io',
+          },
+          verified: {
+            type: 'string',
+            example: 'false',
+          },
+        },
+      },
+    },
+    get_user_roles: {
+      type: 'array',
+      items: {
+        type: 'string',
+        example: 'manager',
+      },
+    },
+    get_user_data: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            _id: {
+              type: 'string',
+              example: '7L4jNtdfNFGH3igPs',
+            },
+            created_at: {
+              $ref: '#/definitions/get_user_created_at',
+            },
+            username: {
+              type: 'string',
+              example: 'myusername',
+            },
+            emails: {
+              $ref: '#/definitions/post_user_email_address',
+            },
+            profile: {
+              $ref: '#/definitions/get_user_profile',
+            },
+            roles: {
+              $ref: '#/definitions/get_user_roles',
+            },
+            organization: {
+              $ref: '#/definitions/get_user_organization',
+            },
+          },
+        },
+      },
+    },
+    get_user_organization: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          organization_id: {
+            type: 'string',
+            example: 'eFsLsJH3JTos4HfLc',
+          },
+          organization_name: {
+            type: 'string',
+            example: 'APInf oy',
+          },
+        },
+      },
+    },
+
+    post_user_response: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            _id: {
+              type: 'string',
+              example: '7L4jNtdfNFGH3igPs',
+            },
+            created_at: {
+              $ref: '#/definitions/get_user_created_at',
+            },
+            username: {
+              type: 'string',
+              example: 'myusername',
+            },
+            emails: {
+              $ref: '#/definitions/post_user_email_address',
+            },
+            profile: {
+              $ref: '#/definitions/get_user_profile',
+            },
+          },
+        },
+      },
+    },
+
   },
-
-
 };
 
 // Generate Swagger to route /rest/v1/swagger.json
