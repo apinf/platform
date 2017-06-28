@@ -23,6 +23,7 @@ before_cache:
   - rm -f $HOME/.meteor/log/*.log
 
 cache:
+  yarn: true
   directories:
     - $HOME/.meteor
 #    - $HOME/.cache/yarn
