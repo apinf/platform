@@ -42,6 +42,10 @@ ApiV1.swagger = {
         get: {},
       },
 
+      '/login': {
+        post: {},
+      },
+
     },
     securityDefinitions: {
       userSecurityToken: {
@@ -60,6 +64,7 @@ ApiV1.swagger = {
     api: 'APIs',
     organization: 'Organizations',
     users: 'Users',
+    login: 'Login',
   },
   params: {
     api: {
@@ -192,6 +197,14 @@ ApiV1.swagger = {
         $ref: '#/definitions/user_addition',
       },
     },
+    userLogin: {
+      name: 'user',
+      in: 'body',
+      description: 'User login data',
+      schema: {
+        $ref: '#/definitions/user_login',
+      },
+    },
     userUpdate: {
       name: 'user',
       in: 'body',
@@ -226,6 +239,20 @@ ApiV1.swagger = {
       name: 'organization_id',
       in: 'query',
       description: 'ID of Organization, that User belongs to',
+      required: false,
+      type: 'string',
+    },
+    x_user_id: {
+      name: 'X-User-Id',
+      in: 'header',
+      description: 'User ID for authentication',
+      required: false,
+      type: 'string',
+    },
+    x_auth_token: {
+      name: 'X-Auth-Token',
+      in: 'header',
+      description: 'Authentication Token',
       required: false,
       type: 'string',
     },
@@ -353,6 +380,21 @@ ApiV1.swagger = {
           format: 'email',
           description: 'E-mail address of user',
           example: 'john.doe@ispname.com',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
+      },
+    },
+    user_login: {
+      required: ['username', 'password'],
+      properties: {
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
         },
         password: {
           type: 'string',
@@ -500,6 +542,28 @@ ApiV1.swagger = {
             },
             profile: {
               $ref: '#/definitions/get_user_profile',
+            },
+          },
+        },
+      },
+    },
+    user_login_response: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            authToken: {
+              type: 'string',
+              example: '7L4jNt-dfNFGH3igPslP5VMH0-hrnbMSFtmjfVOMm_zVg0yT8eGQ-',
+            },
+            userId: {
+              type: 'string',
+              example: 'GFJzMtdzqEYgH8PHSQ-',
             },
           },
         },
