@@ -17,6 +17,31 @@ import Organizations from '/organizations/collection';
 // Npm packages imports
 import _ from 'lodash';
 
+ApiV1.swagger.meta.paths['/login'].post = {
+  tags: [
+    ApiV1.swagger.tags.login,
+  ],
+  summary: 'Logging in.',
+  description: 'By giving existing username and password you get login credentials.',
+  produces: 'application/json',
+  parameters: [
+    ApiV1.swagger.params.userLogin,
+  ],
+  responses: {
+    200: {
+      description: 'Success',
+      schema:
+        ApiV1.swagger.definitions.user_login_response,
+    },
+    400: {
+      description: 'Bad query parameters',
+    },
+    401: {
+      description: 'Unauthorized',
+    },
+  },
+};
+
 ApiV1.swagger.meta.paths['/users'].get = {
   tags: [
     ApiV1.swagger.tags.users,
@@ -25,6 +50,8 @@ ApiV1.swagger.meta.paths['/users'].get = {
   description: 'By passing options you can search users in system.',
   produces: 'application/json',
   parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
     ApiV1.swagger.params.optionalSearch,
     ApiV1.swagger.params.userOrganizationId,
     ApiV1.swagger.params.skip,
@@ -89,6 +116,8 @@ ApiV1.swagger.meta.paths['/users/{id}'].get = {
   description: 'Returns user data with given ID.',
   produces: 'application/json',
   parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
     ApiV1.swagger.params.userId,
   ],
   responses: {
@@ -117,6 +146,8 @@ ApiV1.swagger.meta.paths['/users/{id}'].delete = {
   summary: 'Delete Users one by one with userID.',
   description: 'Deletes the identified User.',
   parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
     ApiV1.swagger.params.userId,
   ],
   responses: {
@@ -151,6 +182,8 @@ ApiV1.swagger.meta.paths['/users/{id}'].put = {
   summary: 'Update User\'s data.',
   description: 'Updates data of a User indicated by user ID.',
   parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
     ApiV1.swagger.params.userId,
     ApiV1.swagger.params.userUpdate,
   ],
@@ -187,6 +220,8 @@ ApiV1.swagger.meta.paths['/users/updates'].get = {
   description: 'Returns users based on addition date',
   produces: 'application/json',
   parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
     ApiV1.swagger.params.since,
     ApiV1.swagger.params.userOrganizationId,
     ApiV1.swagger.params.skip,
