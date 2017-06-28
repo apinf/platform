@@ -23,9 +23,10 @@ before_cache:
   - rm -f $HOME/.meteor/log/*.log
 
 cache:
+  yarn: true
   directories:
     - $HOME/.meteor
-    - $HOME/.cache/yarn
+#    - $HOME/.cache/yarn
 
 services:
   - docker
@@ -35,10 +36,14 @@ before_install:
   - if [ ! -e "$HOME/.meteor/meteor" ]; then curl https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
 before_script:
+  - yarn
   - yarn run lint
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
- 
+
+install:
+  - export PATH="$HOME/.meteor:$PATH"
+
 script:
   # Run meteor and chimp from node.js
   - travis_retry yarn test
