@@ -39,6 +39,9 @@ before_script:
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
 
+install:
+  - export PATH="$HOME/.meteor:$PATH"
+
 script:
   # Run meteor and chimp from node.js
   - travis_retry yarn test
