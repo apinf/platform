@@ -1,24 +1,52 @@
 sudo: false
 language: node_js
 node_js:
-  - "node"
+  - '4'
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
+        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
+    packages:
+      - g++-4.8
+      - yarn
+  chrome: stable
+
 
 branches:
   only:
     - develop
 
-cache:
-  yarn: true
+before_cache:
+  - rm -f $HOME/.meteor/log/*.log
 
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
+cache:
+  directories:
+    - $HOME/.meteor
+    - $HOME/.cache/yarn
 
 services:
   - docker
 
+before_install:
+  # Install meteor locally on CI
+  - if [ ! -e "$HOME/.meteor/meteor" ]; then curl https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh; fi
+
 before_script:
   - yarn run lint
-
+  # Start X Virtual Frame Buffer for headless testing with real browsers
+  - ./.scripts/start-xvfb.sh
+ 
 script:
+  # Run meteor and chimp from node.js
+  - travis_retry yarn test
+  # Build docker image
   - ./.scripts/docker_build.sh
+
+env:
+  global:
+  - DISPLAY=:99.0
+  - TEST_MODE: "true"
+  - CXX=g++-4.8
