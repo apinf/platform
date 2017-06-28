@@ -25,7 +25,7 @@ before_cache:
 cache:
   directories:
     - $HOME/.meteor
-    - $HOME/.cache/yarn
+#    - $HOME/.cache/yarn
 
 services:
   - docker
