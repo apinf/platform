@@ -152,7 +152,7 @@ ApiV1.swagger = {
     },
     organizationId: {
       name: 'id',
-      in: 'query',
+      in: 'path',
       description: 'ID of Organization',
       required: true,
       type: 'string',
