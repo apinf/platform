@@ -23,24 +23,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </span>
           </button>
           <h4 class="modal-title" id="removeProxyModalLabel">
-            {{_ "removeProxy_modalLabel" }}
+            {{_ "removeProxy_modalLabel_title" }}
           </h4>
         </div>
         <div class="modal-body">
-          {{ connectedProxyBackends }} {{_ "removeProxy_modalBody" }}
+          <strong>{{_ "removeProxy_modalBody_warning" }}</strong>
+          {{_ "removeProxy_modalBody_text" count=connectedProxyBackends }}
         </div>
         <div class="modal-footer">
           <button
             type="submit"
             class="btn btn-danger"
             id="confirm-remove-proxy">
-            {{_ "removeProxy_confirmRemoveProxy" }}
+            {{_ "removeProxy_buttonText_confirmRemoveProxy" }}
           </button>
           <button
             type="button"
             class="btn btn-default"
             data-dismiss="modal">
-            {{_ "removeProxy_cancelRemove" }}
+            {{_ "removeProxy_buttonText_cancelRemove" }}
           </button>
         </div>
       </div>
