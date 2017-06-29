@@ -75,6 +75,12 @@ ApiV1.swagger.meta.paths = {
           description: 'Authentication is required',
         },
       },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
     post: {
       tags: [
@@ -102,12 +108,6 @@ ApiV1.swagger.meta.paths = {
           description: 'User already exists',
         },
       },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
     },
   },
 
@@ -140,6 +140,12 @@ ApiV1.swagger.meta.paths = {
           description: 'No user found with given UserID.',
         },
       },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
 
     delete: {
@@ -245,6 +251,12 @@ ApiV1.swagger.meta.paths = {
           description: 'Authentication is required',
         },
       },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
   },
 };
