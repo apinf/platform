@@ -17,6 +17,230 @@ import Organizations from '/organizations/collection';
 // Npm packages imports
 import _ from 'lodash';
 
+ApiV1.swagger.meta.paths['/login'].post = {
+  tags: [
+    ApiV1.swagger.tags.login,
+  ],
+  summary: 'Logging in.',
+  description: 'By giving existing username and password you get login credentials.',
+  produces: 'application/json',
+  parameters: [
+    ApiV1.swagger.params.userLogin,
+  ],
+  responses: {
+    200: {
+      description: 'Success',
+      schema:
+        ApiV1.swagger.definitions.user_login_response,
+    },
+    400: {
+      description: 'Bad query parameters',
+    },
+    401: {
+      description: 'Unauthorized',
+    },
+  },
+};
+
+ApiV1.swagger.meta.paths['/users'].get = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  summary: 'List and search users.',
+  description: 'By passing options you can search users in system.',
+  produces: 'application/json',
+  parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
+    ApiV1.swagger.params.optionalSearch,
+    ApiV1.swagger.params.userOrganizationId,
+    ApiV1.swagger.params.skip,
+    ApiV1.swagger.params.limit,
+    ApiV1.swagger.params.sortBy,
+  ],
+  responses: {
+    200: {
+      description: 'Success',
+      schema:
+        ApiV1.swagger.definitions.get_user_data,
+    },
+    400: {
+      description: 'Bad query parameters',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+  },
+};
+
+ApiV1.swagger.meta.paths['/users'].post = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  summary: 'Adds a new user.',
+  description: 'Adds a new user. On success, returns newly added object.',
+  produces: 'application/json',
+  parameters: [
+    ApiV1.swagger.params.userAddition,
+  ],
+  responses: {
+    201: {
+      description: 'User successfully added',
+      schema:
+        ApiV1.swagger.definitions.post_user_response,
+    },
+    400: {
+      description: 'Invalid input, object invalid',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    409: {
+      description: 'User already exists',
+    },
+  },
+  security: [
+    {
+      userSecurityToken: [],
+      userId: [],
+    },
+  ],
+};
+
+
+ApiV1.swagger.meta.paths['/users/{id}'].get = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  summary: 'Search Users one by one with userID.',
+  description: 'Returns user data with given ID.',
+  produces: 'application/json',
+  parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
+    ApiV1.swagger.params.userId,
+  ],
+  responses: {
+    200: {
+      description: 'Data of identified user.',
+      schema:
+        ApiV1.swagger.definitions.get_user_data,
+
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    403: {
+      description: 'User does not have permission.',
+    },
+    404: {
+      description: 'No user found with given UserID.',
+    },
+  },
+};
+
+ApiV1.swagger.meta.paths['/users/{id}'].delete = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  summary: 'Delete Users one by one with userID.',
+  description: 'Deletes the identified User.',
+  parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
+    ApiV1.swagger.params.userId,
+  ],
+  responses: {
+    200: {
+      description: 'User deleted.',
+    },
+    400: {
+      description: 'Invalid input, invalid object',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    403: {
+      description: 'User does not have permission',
+    },
+    404: {
+      description: 'User not found',
+    },
+  },
+  security: [
+    {
+      userSecurityToken: [],
+      userId: [],
+    },
+  ],
+};
+
+ApiV1.swagger.meta.paths['/users/{id}'].put = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  summary: 'Update User\'s data.',
+  description: 'Updates data of a User indicated by user ID.',
+  parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
+    ApiV1.swagger.params.userId,
+    ApiV1.swagger.params.userUpdate,
+  ],
+  responses: {
+    200: {
+      description: 'User successfully updated.',
+    },
+    400: {
+      description: 'Invalid input, object invalid, Erroneous new password',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+    403: {
+      description: 'User does not have permission',
+    },
+    404: {
+      description: 'No user found with given UserID',
+    },
+  },
+  security: [
+    {
+      userSecurityToken: [],
+      userId: [],
+    },
+  ],
+};
+
+ApiV1.swagger.meta.paths['/users/updates'].get = {
+  tags: [
+    ApiV1.swagger.tags.users,
+  ],
+  summary: 'List and search user based on addition date',
+  description: 'Returns users based on addition date',
+  produces: 'application/json',
+  parameters: [
+    ApiV1.swagger.params.x_user_id,
+    ApiV1.swagger.params.x_auth_token,
+    ApiV1.swagger.params.since,
+    ApiV1.swagger.params.userOrganizationId,
+    ApiV1.swagger.params.skip,
+    ApiV1.swagger.params.limit,
+  ],
+  responses: {
+    200: {
+      description: 'success',
+      schema:
+        ApiV1.swagger.definitions.get_user_data,
+    },
+    400: {
+      description: 'Bad query parameters',
+    },
+    401: {
+      description: 'Authentication is required',
+    },
+  },
+};
 
 // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
 // Meteor.users collection
@@ -28,27 +252,6 @@ ApiV1.addCollection(Meteor.users, {
   endpoints: {
     getAll: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Returns users',
-        parameters: [
-          ApiV1.swagger.params.optionalSearch,
-          ApiV1.swagger.params.organization_id,
-          ApiV1.swagger.params.skip,
-          ApiV1.swagger.params.limit,
-          ApiV1.swagger.params.sort_by,
-        ],
-        responses: {
-          200: {
-            description: 'success',
-          },
-          400: {
-            description: 'Bad query parameters',
-          },
-        },
-      },
       action () {
         const queryParams = this.queryParams;
 
@@ -61,9 +264,9 @@ ApiV1.addCollection(Meteor.users, {
         const requestorId = this.userId;
 
         // Check if requestor is administrator
-        const requestorHasRights = Roles.userIsInRole(requestorId, ['admin']);
+        const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
 
-        if (!requestorHasRights) {
+        if (!requestorIsAdmin) {
           searchOnlyWithOwnId = true;
         }
 
@@ -192,56 +395,82 @@ ApiV1.addCollection(Meteor.users, {
     },
     get: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Returns user with given ID.',
-        parameters: [
-          ApiV1.swagger.params.userId,
-        ],
-        responses: {
-          200: {
-            description: 'One user.',
+      action () {
+      // Get requestor's id
+        const requestorId = this.userId;
+
+        const userIsGettingOwnAccount = this.urlParams.id === requestorId;
+
+        const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+
+        if (userIsGettingOwnAccount || userIsAdmin) {
+          // Get ID of User to be fetched
+          const userId = this.urlParams.id;
+
+          // Exclude password
+          const options = {};
+          const excludeFields = {};
+
+          excludeFields.services = 0;
+          options.fields = excludeFields;
+
+          // Check if user exists
+          const user = Meteor.users.findOne(userId, options);
+          if (user) {
+            // Array for Organization name and id
+            const orgDataList = [];
+            // Get user id
+            const userIdSearch = user._id;
+            // Find all Organizations, where User belongs to
+            const organizations = Organizations.find({
+              managerIds: userIdSearch,
+            }).fetch();
+            // If there are Users' Organizations
+            if (organizations.length > 0) {
+              // Loop through Users' Organizations
+              organizations.forEach((organization) => {
+                const orgData = {};
+                // Put Organization name and id into an object
+                orgData.organizationId = organization._id;
+                orgData.organizationName = organization.name;
+                // Add this Organization data into Users' organization data list
+                orgDataList.push(orgData);
+              });
+              // Add Organizations' information to Users' data
+              user.organization = orgDataList;
+            }
+            // Construct response
+            return {
+              statusCode: 200,
+              body: {
+                status: 'success',
+                data: user,
+              },
+            };
+          }
+
+          // User didn't exist
+          return {
+            statusCode: 404,
+            body: {
+              status: 'Fail',
+              message: 'No user found with given UserID',
+            },
+          };
+        }
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'User does not have permission',
           },
-        },
+        };
       },
+
     },
     post: {
-      authRequired: true,
-      roleRequired: ['admin'],
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Adds a new user. On success, returns newly added object.',
-        parameters: [
-          ApiV1.swagger.params.userId,
-          ApiV1.swagger.params.userName,
-          ApiV1.swagger.params.email,
-          ApiV1.swagger.params.password,
-        ],
-        responses: {
-          201: {
-            description: 'User successfully added',
-          },
-          400: {
-            description: 'Invalid input, object invalid',
-          },
-          401: {
-            description: 'Authentication is required',
-          },
-          409: {
-            description: 'User already exists',
-          },
-        },
-        security: [
-          {
-            userSecurityToken: [],
-            userId: [],
-          },
-        ],
-      },
+      authRequired: false,
+      // roleRequired: ['admin'],
       action () {
         // Get data from body parameters
         const bodyParams = this.bodyParams;
@@ -304,38 +533,6 @@ ApiV1.addCollection(Meteor.users, {
     // Delete a user
     delete: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Deletes the identified Organization from catalog.',
-        parameters: [
-          ApiV1.swagger.params.userId,
-        ],
-        responses: {
-          200: {
-            description: 'User deleted.',
-          },
-          400: {
-            description: 'Invalid input, invalid object',
-          },
-          401: {
-            description: 'Authentication is required',
-          },
-          403: {
-            description: 'User does not have permission',
-          },
-          404: {
-            description: 'User not found',
-          },
-        },
-        security: [
-          {
-            userSecurityToken: [],
-            userId: [],
-          },
-        ],
-      },
       action () {
         // Get requestor's id
         const requestorId = this.userId;
@@ -350,6 +547,9 @@ ApiV1.addCollection(Meteor.users, {
           // Check if user exists
           const user = Meteor.users.findOne(userId);
           if (user) {
+            // Remove user from all Organizations
+            Meteor.call('removeUserFromAllOrganizations', userId);
+
             // Remove existing User account
             Meteor.users.remove(user._id);
 
@@ -383,38 +583,6 @@ ApiV1.addCollection(Meteor.users, {
     // Udpdate user data
     put: {
       authRequired: true,
-      swagger: {
-        tags: [
-          ApiV1.swagger.tags.users,
-        ],
-        description: 'Update a User',
-        parameters: [
-          ApiV1.swagger.params.userId,
-          ApiV1.swagger.params.userName,
-          ApiV1.swagger.params.company,
-          ApiV1.swagger.params.password,
-        ],
-        responses: {
-          200: {
-            description: 'User successfully updated.',
-          },
-          401: {
-            description: 'Authentication is required',
-          },
-          403: {
-            description: 'User does not have permission',
-          },
-          404: {
-            description: 'No user found with given UserID',
-          },
-        },
-        security: [
-          {
-            userSecurityToken: [],
-            userId: [],
-          },
-        ],
-      },
       action () {
         // Get requestor's id
         const requestorId = this.userId;
@@ -550,26 +718,6 @@ ApiV1.addCollection(Meteor.users, {
 ApiV1.addRoute('users/updates', {
   get: {
     roleRequired: ['admin'],
-    swagger: {
-      tags: [
-        ApiV1.swagger.tags.users,
-      ],
-      description: 'Returns users',
-      parameters: [
-        ApiV1.swagger.params.since,
-        ApiV1.swagger.params.organization_id,
-        ApiV1.swagger.params.skip,
-        ApiV1.swagger.params.limit,
-      ],
-      responses: {
-        200: {
-          description: 'success',
-        },
-        400: {
-          description: 'Bad query parameters',
-        },
-      },
-    },
     action () {
       let badQueryParameters = false;
       // Read possible query parameters
