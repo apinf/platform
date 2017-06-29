@@ -19,6 +19,7 @@ ApiV1.addRoute('organizations', {
       tags: [
         ApiV1.swagger.tags.organization,
       ],
+      summary: 'List and search organizations.',
       description: 'List and search organizations.',
       parameters: [
         ApiV1.swagger.params.optionalSearch,
@@ -91,6 +92,7 @@ ApiV1.addRoute('organizations', {
       tags: [
         ApiV1.swagger.tags.organization,
       ],
+      summary: 'Add Organization to catalog.',
       description: 'Adds an Organization to catalog. On success, returns newly added object.',
       parameters: [
         ApiV1.swagger.params.organization,
@@ -158,6 +160,7 @@ ApiV1.addRoute('organizations/:id', {
       tags: [
         ApiV1.swagger.tags.organization,
       ],
+      summary: 'Fetch Organization with specified ID',
       description: 'Returns one Organization with specified ID or nothing if not match found',
       parameters: [
         ApiV1.swagger.params.organizationId,
@@ -201,6 +204,7 @@ ApiV1.addRoute('organizations/:id', {
       tags: [
         ApiV1.swagger.tags.organization,
       ],
+      summary: 'Update Organization',
       description: 'Update an Organization',
       parameters: [
         ApiV1.swagger.params.organizationId,
@@ -301,6 +305,7 @@ ApiV1.addRoute('organizations/:id', {
       tags: [
         ApiV1.swagger.tags.organization,
       ],
+      summary: 'Delete identified Organization from catalog.',
       description: 'Deletes the identified Organization from catalog.',
       parameters: [
         ApiV1.swagger.params.organizationId,

@@ -23,6 +23,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
+        summary: 'List and search public APIs.',
         description: 'List and search public APIs.',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
@@ -106,6 +107,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
+        summary: 'Fetch API with specified ID',
         description: 'Returns one API with specified ID or nothing if there is not match found',
         parameters: [
           ApiV1.swagger.params.apiId,
@@ -126,6 +128,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
+        summary: 'Add new API to catalog.',
         description: 'Adds an API to catalog. On success, returns newly added API object.',
         parameters: [
           ApiV1.swagger.params.api,
@@ -155,6 +158,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
+        summary: 'Update API',
         description: 'Update an API',
         parameters: [
           ApiV1.swagger.params.apiId,
@@ -232,6 +236,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
+        summary: 'Delete API.',
         description: 'Deletes the identified API from the system.',
         parameters: [
           ApiV1.swagger.params.apiId,
