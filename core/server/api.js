@@ -242,20 +242,6 @@ ApiV1.swagger = {
       required: false,
       type: 'string',
     },
-    x_user_id: {
-      name: 'X-User-Id',
-      in: 'header',
-      description: 'User ID for authentication',
-      required: false,
-      type: 'string',
-    },
-    x_auth_token: {
-      name: 'X-Auth-Token',
-      in: 'header',
-      description: 'Authentication Token',
-      required: false,
-      type: 'string',
-    },
 
   },
   definitions: {

@@ -54,8 +54,6 @@ ApiV1.swagger.meta.paths = {
       description: 'By passing options you can search users in system.',
       produces: 'application/json',
       parameters: [
-        ApiV1.swagger.params.x_user_id,
-        ApiV1.swagger.params.x_auth_token,
         ApiV1.swagger.params.optionalSearch,
         ApiV1.swagger.params.userOrganizationId,
         ApiV1.swagger.params.skip,
@@ -120,8 +118,6 @@ ApiV1.swagger.meta.paths = {
       description: 'Returns user data with given ID.',
       produces: 'application/json',
       parameters: [
-        ApiV1.swagger.params.x_user_id,
-        ApiV1.swagger.params.x_auth_token,
         ApiV1.swagger.params.userId,
       ],
       responses: {
@@ -155,8 +151,6 @@ ApiV1.swagger.meta.paths = {
       summary: 'Delete Users one by one with userID.',
       description: 'Deletes the identified User.',
       parameters: [
-        ApiV1.swagger.params.x_user_id,
-        ApiV1.swagger.params.x_auth_token,
         ApiV1.swagger.params.userId,
       ],
       responses: {
@@ -191,8 +185,6 @@ ApiV1.swagger.meta.paths = {
       summary: 'Update User\'s data.',
       description: 'Updates data of a User indicated by user ID.',
       parameters: [
-        ApiV1.swagger.params.x_user_id,
-        ApiV1.swagger.params.x_auth_token,
         ApiV1.swagger.params.userId,
         ApiV1.swagger.params.userUpdate,
       ],
@@ -231,8 +223,6 @@ ApiV1.swagger.meta.paths = {
       description: 'Returns users based on addition date',
       produces: 'application/json',
       parameters: [
-        ApiV1.swagger.params.x_user_id,
-        ApiV1.swagger.params.x_auth_token,
         ApiV1.swagger.params.since,
         ApiV1.swagger.params.userOrganizationId,
         ApiV1.swagger.params.skip,
