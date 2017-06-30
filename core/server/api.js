@@ -66,6 +66,7 @@ ApiV1.swagger = {
     users: 'Users',
     login: 'Login',
   },
+
   params: {
     api: {
       name: 'api',
@@ -194,7 +195,27 @@ ApiV1.swagger = {
       in: 'body',
       description: 'Data for adding a new User',
       schema: {
-        $ref: '#/definitions/user_addition',
+        required: ['username', 'email', 'password'],
+        properties: {
+          username: {
+            type: 'string',
+            description: 'Username',
+            example: 'johndoe',
+          },
+          email: {
+            type: 'string',
+            format: 'email',
+            description: 'E-mail address of user',
+            example: 'john.doe@ispname.com',
+          },
+          password: {
+            type: 'string',
+            description: 'Password for user',
+            example: 'mypassword',
+          },
+        },
+
+        // $ref: '#/definitions/user_addition',
       },
     },
     userLogin: {
@@ -202,15 +223,46 @@ ApiV1.swagger = {
       in: 'body',
       description: 'User login data',
       schema: {
-        $ref: '#/definitions/user_login',
+        required: ['username', 'password'],
+        properties: {
+          username: {
+            type: 'string',
+            description: 'Username',
+            example: 'johndoe',
+          },
+          password: {
+            type: 'string',
+            description: 'Password for user',
+            example: 'mypassword',
+          },
+        },
       },
     },
+
     userUpdate: {
       name: 'user',
       in: 'body',
       description: 'Data for updating a User',
       schema: {
-        $ref: '#/definitions/user_update',
+        required: ['username', 'company', 'password'],
+        properties: {
+          username: {
+            type: 'string',
+            description: 'Username',
+            example: 'johndoe',
+          },
+          company: {
+            type: 'string',
+            description: 'Name of company user belongs to',
+            example: 'Mighty API owners Ltd.',
+          },
+          password: {
+            type: 'string',
+            description: 'Password for user',
+            example: 'mypassword',
+          },
+        },
+        // $ref: '#/definitions/user_update',
       },
     },
 
@@ -234,6 +286,7 @@ ApiV1.swagger = {
       description: 'Username',
       required: true,
       type: 'string',
+      example: 'johndoe',
     },
     userOrganizationId: {
       name: 'organization_id',
@@ -241,6 +294,112 @@ ApiV1.swagger = {
       description: 'ID of Organization, that User belongs to',
       required: false,
       type: 'string',
+    },
+    user_login_response: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            authToken: {
+              type: 'string',
+              example: '7L4jNt-dfNFGH3igPslP5VMH0-hrnbMSFtmjfVOMm_zVg0yT8eGQ-',
+            },
+            userId: {
+              type: 'string',
+              example: 'GFJzMtdzqEYgH8PHSQ-',
+            },
+          },
+        },
+      },
+    },
+    get_user_data: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            _id: {
+              type: 'string',
+              example: '7L4jNtdfNFGH3igPs',
+            },
+            created_at: {
+              $ref: '#/definitions/get_user_created_at',
+            },
+            username: {
+              type: 'string',
+              example: 'myusername',
+            },
+            emails: {
+              $ref: '#/definitions/post_user_email_address',
+            },
+            profile: {
+              $ref: '#/definitions/get_user_profile',
+            },
+            roles: {
+              $ref: '#/definitions/get_user_roles',
+            },
+            organization: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  organization_id: {
+                    type: 'string',
+                    example: 'eFsLsJH3JTos4HfLc',
+                  },
+                  organization_name: {
+                    type: 'string',
+                    example: 'APInf oy',
+                  },
+                },
+              },
+
+
+              // $ref: '#/definitions/get_user_organization',
+            },
+          },
+        },
+      },
+    },
+    post_user_response: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            _id: {
+              type: 'string',
+              example: '7L4jNtdfNFGH3igPs',
+            },
+            created_at: {
+              $ref: '#/definitions/get_user_created_at',
+            },
+            username: {
+              type: 'string',
+              example: 'myusername',
+            },
+            emails: {
+              $ref: '#/definitions/post_user_email_address',
+            },
+            profile: {
+              $ref: '#/definitions/get_user_profile',
+            },
+          },
+        },
+      },
     },
 
   },
@@ -353,62 +512,6 @@ ApiV1.swagger = {
         },
       },
     },
-    user_addition: {
-      required: ['username', 'email', 'password'],
-      properties: {
-        username: {
-          type: 'string',
-          description: 'Username',
-          example: 'johndoe',
-        },
-        email: {
-          type: 'string',
-          format: 'email',
-          description: 'E-mail address of user',
-          example: 'john.doe@ispname.com',
-        },
-        password: {
-          type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
-        },
-      },
-    },
-    user_login: {
-      required: ['username', 'password'],
-      properties: {
-        username: {
-          type: 'string',
-          description: 'Username',
-          example: 'johndoe',
-        },
-        password: {
-          type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
-        },
-      },
-    },
-    user_update: {
-      required: ['username', 'company', 'password'],
-      properties: {
-        username: {
-          type: 'string',
-          description: 'Username',
-          example: 'johndoe',
-        },
-        company: {
-          type: 'string',
-          description: 'Name of company user belongs to',
-          example: 'Mighty API owners Ltd.',
-        },
-        password: {
-          type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
-        },
-      },
-    },
 
     get_user_profile: {
       type: 'object',
@@ -446,113 +549,6 @@ ApiV1.swagger = {
       items: {
         type: 'string',
         example: 'manager',
-      },
-    },
-    get_user_data: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            _id: {
-              type: 'string',
-              example: '7L4jNtdfNFGH3igPs',
-            },
-            created_at: {
-              $ref: '#/definitions/get_user_created_at',
-            },
-            username: {
-              type: 'string',
-              example: 'myusername',
-            },
-            emails: {
-              $ref: '#/definitions/post_user_email_address',
-            },
-            profile: {
-              $ref: '#/definitions/get_user_profile',
-            },
-            roles: {
-              $ref: '#/definitions/get_user_roles',
-            },
-            organization: {
-              $ref: '#/definitions/get_user_organization',
-            },
-          },
-        },
-      },
-    },
-    get_user_organization: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          organization_id: {
-            type: 'string',
-            example: 'eFsLsJH3JTos4HfLc',
-          },
-          organization_name: {
-            type: 'string',
-            example: 'APInf oy',
-          },
-        },
-      },
-    },
-
-    post_user_response: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            _id: {
-              type: 'string',
-              example: '7L4jNtdfNFGH3igPs',
-            },
-            created_at: {
-              $ref: '#/definitions/get_user_created_at',
-            },
-            username: {
-              type: 'string',
-              example: 'myusername',
-            },
-            emails: {
-              $ref: '#/definitions/post_user_email_address',
-            },
-            profile: {
-              $ref: '#/definitions/get_user_profile',
-            },
-          },
-        },
-      },
-    },
-    user_login_response: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            authToken: {
-              type: 'string',
-              example: '7L4jNt-dfNFGH3igPslP5VMH0-hrnbMSFtmjfVOMm_zVg0yT8eGQ-',
-            },
-            userId: {
-              type: 'string',
-              example: 'GFJzMtdzqEYgH8PHSQ-',
-            },
-          },
-        },
       },
     },
 
