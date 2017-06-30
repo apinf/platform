@@ -33,7 +33,7 @@ ApiV1.swagger.meta.paths = {
         200: {
           description: 'Success',
           schema:
-            ApiV1.swagger.definitions.user_login_response,
+            ApiV1.swagger.params.user_login_response,
         },
         400: {
           description: 'Bad query parameters',
@@ -64,7 +64,7 @@ ApiV1.swagger.meta.paths = {
         200: {
           description: 'Success',
           schema:
-          ApiV1.swagger.definitions.get_user_data,
+            ApiV1.swagger.params.get_user_data,
         },
         400: {
           description: 'Bad query parameters',
@@ -94,7 +94,7 @@ ApiV1.swagger.meta.paths = {
         201: {
           description: 'User successfully added',
           schema:
-          ApiV1.swagger.definitions.post_user_response,
+            ApiV1.swagger.params.post_user_response,
         },
         400: {
           description: 'Invalid input, object invalid',
@@ -124,7 +124,7 @@ ApiV1.swagger.meta.paths = {
         200: {
           description: 'Data of identified user.',
           schema:
-          ApiV1.swagger.definitions.get_user_data,
+            ApiV1.swagger.params.get_user_data,
         },
         401: {
           description: 'Authentication is required',
@@ -232,7 +232,7 @@ ApiV1.swagger.meta.paths = {
         200: {
           description: 'success',
           schema:
-            ApiV1.swagger.definitions.get_user_data,
+            ApiV1.swagger.params.get_user_data,
         },
         400: {
           description: 'Bad query parameters',
