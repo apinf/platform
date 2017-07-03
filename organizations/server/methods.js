@@ -100,6 +100,23 @@ Meteor.methods({
       }
      );
   },
+  removeUserFromAllOrganizations (userId) {
+    // Make sure userId is an String
+    check(userId, String);
+    // Get list of Organizations where user is a manager
+    const organizations = Organizations.find({
+      managerIds: userId,
+    }).fetch();
+
+    // If user is a manager in any Organization
+    if (organizations.length > 0) {
+      // Loop through Users' Organizations
+      organizations.forEach((organization) => {
+        // Remove user from organization manager list
+        Meteor.call('removeOrganizationManager', organization._id, userId);
+      });
+    }
+  },
   removeApiFromFeaturedList (organizationId, apiId) {
     // Make sure organizationId is an String
     check(organizationId, String);

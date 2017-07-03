@@ -24,6 +24,9 @@ class SignUpPage extends Page {
   get passwordErrorField () { return this.errorFields[2]; }
   get confirmPasswordErrorField () { return this.errorFields[3]; }
 
+  // Modal after first signup
+  get modalSettingsLink () { return browser.element('#setup-settings'); }
+
   open () {
     super.open();
     this.pause();
@@ -38,6 +41,11 @@ class SignUpPage extends Page {
     this.confirmPasswordField.setValue(password);
 
     this.submit();
+  }
+
+  gotModalToSetup () {
+    this.modalSettingsLink.waitForVisible(5000);
+    this.modalSettingsLink.click();
   }
 
   submit () {

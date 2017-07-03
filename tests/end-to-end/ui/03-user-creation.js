@@ -10,19 +10,36 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 import signUpPage from '../../page-objects/signup.page';
 import mainContent from '../../page-objects/main-content.page';
+import settingsPage from '../../page-objects/settings.page';
 
-import { username, email, password } from '../../data/user';
-
+import {
+  adminUsername,
+  adminEmail,
+  adminPassword,
+} from '../../data/user';
+import { githubClientId, githubClientSecret } from '../../data/settings';
 
 describe('03 user creation', () => {
   before(() => {
     signUpPage.open();
   });
 
-  it('create user', () => {
-    signUpPage.registerNewUser({ username, email, password });
+  it('create admin user', () => {
+    const adminCredentials = {
+      username: adminUsername,
+      email: adminEmail,
+      password: adminPassword,
+    };
+
+    // Create Admin user
+    signUpPage.registerNewUser(adminCredentials);
+
+    // Setup settings
+    signUpPage.gotModalToSetup();
+    settingsPage.setupGithub({ githubClientId, githubClientSecret });
 
     mainContent.signOutLink.waitForExist(5000);
     mainContent.signOutLink.isVisible().should.be.true;
+    mainContent.logOut();
   });
 });
