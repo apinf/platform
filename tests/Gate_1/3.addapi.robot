@@ -25,8 +25,8 @@ Create new api (positive)
 	Create API	Kissa	${EMPTY}	https://www.google.com
 	confirm page loaded	Kappa
 
-#Delete api
-	#Delete API
+Delete api
+	Delete API
 
 *** Keywords *** 
 Go to homepage
@@ -57,8 +57,8 @@ Create API
 Delete API
 	Go To	http://localhost:3000/apis/kissa
 	Wait Until Page Contains	media
-	Select From List	id=api-settings-tab
+	Click Element	css=i.fa.fa-cog
+	Wait Until Element Is Visible	id=delete-api
 	Click Element	id=delete-api
 	Wait Until Element Is Visible	id=modal-delete-api
 	Click Element	id=modal-delete-api
-	Page Should Not Contain	${APINAME}
