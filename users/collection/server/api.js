@@ -27,13 +27,14 @@ ApiV1.swagger.meta.paths = {
       description: 'By giving existing username and password you get login credentials.',
       produces: 'application/json',
       parameters: [
-        ApiV1.swagger.params.userLogin,
+        ApiV1.swagger.params.login,
       ],
       responses: {
         200: {
           description: 'Success',
-          schema:
-            ApiV1.swagger.params.user_login_response,
+          schema: {
+            $ref: '#/definitions/loginResponse',
+          },
         },
         400: {
           description: 'Bad query parameters',
@@ -63,8 +64,21 @@ ApiV1.swagger.meta.paths = {
       responses: {
         200: {
           description: 'Success',
-          schema:
-            ApiV1.swagger.params.get_user_data,
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/userItem',
+                },
+              },
+            },
+          },
         },
         400: {
           description: 'Bad query parameters',
@@ -88,13 +102,14 @@ ApiV1.swagger.meta.paths = {
       description: 'Adds a new user. On success, returns newly added object.',
       produces: 'application/json',
       parameters: [
-        ApiV1.swagger.params.userAddition,
+        ApiV1.swagger.params.userData,
       ],
       responses: {
         201: {
           description: 'User successfully added',
-          schema:
-            ApiV1.swagger.params.post_user_response,
+          schema: {
+            $ref: '#/definitions/userItem',
+          },
         },
         400: {
           description: 'Invalid input, object invalid',
@@ -123,17 +138,27 @@ ApiV1.swagger.meta.paths = {
       responses: {
         200: {
           description: 'Data of identified user.',
-          schema:
-            ApiV1.swagger.params.get_user_data,
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-        403: {
-          description: 'User does not have permission.',
-        },
-        404: {
-          description: 'No user found with given UserID.',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                $ref: '#/definitions/userPostResponse',
+              },
+            },
+            401: {
+              description: 'Authentication is required',
+            },
+            403: {
+              description: 'User does not have permission.',
+            },
+            404: {
+              description: 'No user found with given UserID.',
+            },
+          },
         },
       },
       security: [
@@ -143,7 +168,6 @@ ApiV1.swagger.meta.paths = {
         },
       ],
     },
-
     delete: {
       tags: [
         ApiV1.swagger.tags.users,
@@ -177,7 +201,6 @@ ApiV1.swagger.meta.paths = {
         },
       ],
     },
-
     put: {
       tags: [
         ApiV1.swagger.tags.users,
@@ -186,7 +209,7 @@ ApiV1.swagger.meta.paths = {
       description: 'Updates data of a User indicated by user ID.',
       parameters: [
         ApiV1.swagger.params.userId,
-        ApiV1.swagger.params.userUpdate,
+        ApiV1.swagger.params.userData,
       ],
       responses: {
         200: {
@@ -231,8 +254,21 @@ ApiV1.swagger.meta.paths = {
       responses: {
         200: {
           description: 'success',
-          schema:
-            ApiV1.swagger.params.get_user_data,
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/userItem',
+                },
+              },
+            },
+          },
         },
         400: {
           description: 'Bad query parameters',
@@ -479,7 +515,6 @@ ApiV1.addCollection(Meteor.users, {
     },
     post: {
       authRequired: false,
-      // roleRequired: ['admin'],
       action () {
         // Get data from body parameters
         const bodyParams = this.bodyParams;
@@ -538,7 +573,6 @@ ApiV1.addCollection(Meteor.users, {
         };
       },
     },
-
     // Delete a user
     delete: {
       authRequired: true,
@@ -726,6 +760,7 @@ ApiV1.addCollection(Meteor.users, {
 // Request /rest/v1/users/updates for Users collection
 ApiV1.addRoute('users/updates', {
   get: {
+    authRequired: true,
     roleRequired: ['admin'],
     action () {
       let badQueryParameters = false;
