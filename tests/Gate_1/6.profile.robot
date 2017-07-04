@@ -21,25 +21,25 @@ Change profile name (pass)
 	change profile data	qweqw	apinf
 	confirm page loaded	updated
 
-Change name back
-	change profile data	asdas	${EMPTY}
-	confirm page loaded	updated
-
 Change password
 	change account data	asdasd	qweqwe
 	confirm page loaded 	updated
 
-Verify password change
+Verify password and name change
 	Logout of apinf
 	Go to login
-	Login to apinf	asdas	qweqwe
+	Login to apinf	qweqw	qweqwe
 	confirm page loaded	Users
+
+Change name back
+	change profile data	asdas	${EMPTY}
+	confirm page loaded	updated
 
 Change password back
 	change account data	qweqwe	asdasd
 	confirm page loaded 	updated
 
-delete account
+delete this account
 	Delete account
 	
 *** Keywords *** 
