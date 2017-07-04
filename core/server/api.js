@@ -338,7 +338,7 @@ ApiV1.swagger = {
       properties: {
         _id: {
           type: 'string',
-          example: '0',
+          example: 'user-id-value',
         },
         created_at: {
           type: 'string',
@@ -378,7 +378,7 @@ ApiV1.swagger = {
             properties: {
               organization_id: {
                 type: 'string',
-                example: '0',
+                example: 'organization-id-value',
               },
               organization_name: {
                 type: 'string',
@@ -395,7 +395,7 @@ ApiV1.swagger = {
       properties: {
         _id: {
           type: 'string',
-          example: '0',
+          example: 'user-id-value',
         },
         created_at: {
           type: 'string',
