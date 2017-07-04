@@ -108,7 +108,7 @@ ApiV1.swagger.meta.paths = {
         201: {
           description: 'User successfully added',
           schema: {
-            $ref: '#/definitions/userItem',
+            $ref: '#/definitions/userPostResponse',
           },
         },
         400: {
@@ -146,7 +146,7 @@ ApiV1.swagger.meta.paths = {
                 example: 'success',
               },
               data: {
-                $ref: '#/definitions/userPostResponse',
+                $ref: '#/definitions/userItem',
               },
             },
             401: {
