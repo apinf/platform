@@ -256,6 +256,110 @@ ApiV1.swagger = {
         },
       },
     },
+    organizationResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'organization-id-value',
+        },
+        name: {
+          type: 'string',
+          example: 'organization-name',
+        },
+        url: {
+          type: 'string',
+          example: 'organization-url',
+        },
+        managerIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'manager-id',
+          },
+        },
+        createdBy: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        slug: {
+          type: 'string',
+          example: 'organization-slug',
+        },
+        createdAt: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        featuredApiIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'featured-api-id',
+          },
+        },
+        friendlySlugs: {
+          type: 'object',
+          properties: {
+            slug: {
+              type: 'object',
+              properties: {
+                base: {
+                  type: 'string',
+                  example: 'jslug-base-string',
+                },
+                index: {
+                  type: 'string',
+                  example: '0',
+                },
+              },
+            },
+          },
+        },
+        updatedAt: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        socialMedia: {
+          type: 'object',
+          properties: {
+            facebook: {
+              type: 'string',
+              example: 'facebook-url',
+            },
+            twitter: {
+              type: 'string',
+              example: 'twitter-url',
+            },
+            instagram: {
+              type: 'string',
+              example: 'instagram-url',
+            },
+            linkedIn: {
+              type: 'string',
+              example: 'linkedIn-url',
+            },
+          },
+        },
+        contact: {
+          type: 'object',
+          properties: {
+            person: {
+              type: 'string',
+              example: 'contact-person-name',
+            },
+            phone: {
+              type: 'string',
+              example: 'contact-person-phone',
+            },
+            email: {
+              type: 'string',
+              example: 'contact-person-email',
+            },
+          },
+        },
+      },
+    },
+
     loginRequest: {
       required: ['username', 'password'],
       properties: {
@@ -316,6 +420,7 @@ ApiV1.swagger = {
     // Scheme for response parameters
     // TODO: Response for API endpoints
     // TODO: Response for Organization endpoints
+
 
     // Simple data for complex structure
     emailAddress: {
