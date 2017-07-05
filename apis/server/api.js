@@ -6,6 +6,9 @@
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
+// Meteor contributed packages imports
+import { Roles } from 'meteor/alanning:roles';
+
 // Collection imports
 import Apis from '/apis/collection';
 import ApiV1 from '/core/server/api';
@@ -23,7 +26,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'List and search public APIs.',
+        summary: 'List and search public API.',
         description: 'List and search public APIs.',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
@@ -128,7 +131,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Add new API to catalog.',
+        summary: 'Add new API to catalog',
         description: 'Adds an API to catalog. On success, returns newly added API object.',
         parameters: [
           ApiV1.swagger.params.api,
@@ -136,6 +139,9 @@ ApiV1.addCollection(Apis, {
         responses: {
           200: {
             description: 'API successfully added',
+          },
+          400: {
+            description: 'Invalid input, object invalid',
           },
           401: {
             description: 'Authentication is required',
@@ -147,6 +153,38 @@ ApiV1.addCollection(Apis, {
             userId: [],
           },
         ],
+      },
+      action () {
+        const userId = this.userId;
+        const mandatoryFieldsFilled = this.bodyParams.name && this.bodyParams.url;
+
+        // Make sure required fields are set
+        if (mandatoryFieldsFilled) {
+          // Add manager IDs list into
+          const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
+
+          // Insert API data into collection
+          const apiId = Apis.insert(apiData);
+
+          // Give user manager role
+          Roles.addUsersToRoles(userId, 'manager');
+
+          return {
+            statusCode: 200,
+            body: {
+              status: 'Success',
+              data: Apis.findOne(apiId),
+            },
+          };
+        }
+
+        // Otherwise show message about required fields
+        return {
+          statusCode: 409,
+          body: {
+            message: 'Fields "name" and "url" are required',
+          },
+        };
       },
     },
     // Modify the entity with the given :id with the data contained in the request body.
@@ -236,7 +274,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Delete API.',
+        summary: 'Delete API',
         description: 'Deletes the identified API from the system.',
         parameters: [
           ApiV1.swagger.params.apiId,
