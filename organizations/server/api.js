@@ -28,7 +28,23 @@ ApiV1.addRoute('organizations', {
       ],
       responses: {
         200: {
+          name: 'organization',
+          in: 'body',
           description: 'Returns list of organizations',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                type: 'array',
+                items:
+                  ApiV1.swagger.definitions.organizationResponse,
+              },
+            },
+          },
         },
         400: {
           description: 'Bad query parameters',
@@ -99,7 +115,20 @@ ApiV1.addRoute('organizations', {
       ],
       responses: {
         200: {
+          name: 'organization',
+          in: 'body',
           description: 'Organization successfully added',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data:
+                ApiV1.swagger.definitions.organizationResponse,
+            },
+          },
         },
         401: {
           description: 'Authentication is required',
@@ -167,7 +196,16 @@ ApiV1.addRoute('organizations/:id', {
       ],
       responses: {
         200: {
-          description: 'Returns Organization',
+          name: 'organization',
+          in: 'body',
+          description: 'Returns organization',
+          schema: {
+            type: 'object',
+            properties: {
+              data:
+                ApiV1.swagger.definitions.organizationResponse,
+            },
+          },
         },
         404: {
           description: 'Bad parameter',
