@@ -250,7 +250,16 @@ ApiV1.addRoute('organizations/:id', {
       ],
       responses: {
         200: {
+          name: 'organization',
+          in: 'body',
           description: 'Organization successfully edited.',
+          schema: {
+            type: 'object',
+            properties: {
+              data:
+                ApiV1.swagger.definitions.organizationResponse,
+            },
+          },
         },
         401: {
           description: 'Authentication is required',
