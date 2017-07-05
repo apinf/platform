@@ -143,12 +143,20 @@ ApiV1.swagger = {
       required: false,
       type: 'string',
     },
-    userData: {
+    userDataAdd: {
       name: 'user',
       in: 'body',
-      description: 'Data for adding/editing about User',
+      description: 'Data for adding a new User',
       schema: {
-        $ref: '#/definitions/users',
+        $ref: '#/definitions/usersAdd',
+      },
+    },
+    userDataUpdate: {
+      name: 'user',
+      in: 'body',
+      description: 'Data for updating User',
+      schema: {
+        $ref: '#/definitions/usersUpdate',
       },
     },
     userId: {
@@ -263,7 +271,7 @@ ApiV1.swagger = {
         },
       },
     },
-    users: {
+    usersAdd: {
       required: ['username', 'email', 'password'],
       properties: {
         username: {
@@ -276,6 +284,21 @@ ApiV1.swagger = {
           format: 'email',
           description: 'E-mail address of user',
           example: 'john.doe@ispname.com',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
+      },
+    },
+    usersUpdate: {
+      required: [],
+      properties: {
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
         },
         password: {
           type: 'string',
@@ -295,7 +318,7 @@ ApiV1.swagger = {
     // TODO: Response for Organization endpoints
 
     // Simple data for complex structure
-    email_address: {
+    emailAddress: {
       type: 'object',
       properties: {
         address: {
@@ -351,7 +374,7 @@ ApiV1.swagger = {
         emails: {
           type: 'array',
           items: {
-            $ref: '#/definitions/email_address',
+            $ref: '#/definitions/emailAddress',
           },
         },
         profile: {
@@ -408,7 +431,7 @@ ApiV1.swagger = {
         emails: {
           type: 'array',
           items: {
-            $ref: '#/definitions/email_address',
+            $ref: '#/definitions/emailAddress',
           },
         },
         profile: {
