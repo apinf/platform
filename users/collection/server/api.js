@@ -102,7 +102,7 @@ ApiV1.swagger.meta.paths = {
       description: 'Adds a new user. On success, returns newly added object.',
       produces: 'application/json',
       parameters: [
-        ApiV1.swagger.params.userData,
+        ApiV1.swagger.params.userDataAdd,
       ],
       responses: {
         201: {
@@ -209,7 +209,7 @@ ApiV1.swagger.meta.paths = {
       description: 'Updates data of a User indicated by user ID.',
       parameters: [
         ApiV1.swagger.params.userId,
-        ApiV1.swagger.params.userData,
+        ApiV1.swagger.params.userDataUpdate,
       ],
       responses: {
         200: {
