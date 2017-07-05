@@ -108,7 +108,16 @@ ApiV1.swagger.meta.paths = {
         201: {
           description: 'User successfully added',
           schema: {
-            $ref: '#/definitions/userPostResponse',
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                $ref: '#/definitions/userPostResponse',
+              },
+            },
           },
         },
         400: {
@@ -149,16 +158,16 @@ ApiV1.swagger.meta.paths = {
                 $ref: '#/definitions/userItem',
               },
             },
-            401: {
-              description: 'Authentication is required',
-            },
-            403: {
-              description: 'User does not have permission.',
-            },
-            404: {
-              description: 'No user found with given UserID.',
-            },
           },
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission.',
+        },
+        404: {
+          description: 'No user found with given UserID.',
         },
       },
       security: [
@@ -180,6 +189,19 @@ ApiV1.swagger.meta.paths = {
       responses: {
         200: {
           description: 'User deleted.',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'OK',
+              },
+              message: {
+                type: 'string',
+                example: 'User deleted',
+              },
+            },
+          },
         },
         400: {
           description: 'Invalid input, invalid object',
