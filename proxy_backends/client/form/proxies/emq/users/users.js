@@ -23,7 +23,7 @@ Template.emqUsers.onCreated(function () {
   instance.emqProxy = new ReactiveVar();
 
   // Get proxy ID from template instance
-  const proxyId = instance.data.apiProxySettings.proxyId;
+  const proxyId = instance.data.proxyId;
 
   // Subscribe to publication
   instance.subscribe('proxyWithCredentials', proxyId);
