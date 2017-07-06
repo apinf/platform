@@ -37,7 +37,23 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
+            name: 'api',
+            in: 'body',
             description: 'Returns list of public APIs',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data: {
+                  type: 'array',
+                  items:
+                    ApiV1.swagger.definitions.apiResponse,
+                },
+              },
+            },
           },
           400: {
             description: 'Bad query parameters',
@@ -117,7 +133,20 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
+            name: 'api',
+            in: 'body',
             description: 'Returns API',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data:
+                  ApiV1.swagger.definitions.apiResponse,
+              },
+            },
           },
           404: {
             description: 'Bad parameter',
@@ -138,7 +167,20 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
+            name: 'api',
+            in: 'body',
             description: 'API successfully added',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data:
+                  ApiV1.swagger.definitions.apiResponse,
+              },
+            },
           },
           400: {
             description: 'Invalid input, object invalid',
@@ -204,7 +246,20 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
+            name: 'api',
+            in: 'body',
             description: 'API successfully edited.',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data:
+                  ApiV1.swagger.definitions.apiResponse,
+              },
+            },
           },
           401: {
             description: 'Authentication is required',

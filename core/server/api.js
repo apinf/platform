@@ -265,11 +265,11 @@ ApiV1.swagger = {
         },
         name: {
           type: 'string',
-          example: 'organization-name',
+          example: 'my Organization',
         },
         url: {
           type: 'string',
-          example: 'organization-url',
+          example: 'https://my.organization.com',
         },
         managerIds: {
           type: 'array',
@@ -294,7 +294,7 @@ ApiV1.swagger = {
           type: 'array',
           items: {
             type: 'string',
-            example: 'featured-api-id',
+            example: 'id-of-featured-api',
           },
         },
         friendlySlugs: {
@@ -305,7 +305,7 @@ ApiV1.swagger = {
               properties: {
                 base: {
                   type: 'string',
-                  example: 'jslug-base-string',
+                  example: 'my-organization',
                 },
                 index: {
                   type: 'string',
@@ -354,6 +354,83 @@ ApiV1.swagger = {
             email: {
               type: 'string',
               example: 'contact-person-email',
+            },
+          },
+        },
+      },
+    },
+    apiResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'api-id-value',
+        },
+        name: {
+          type: 'string',
+          example: 'My REST API',
+        },
+        latestMonitoringStatusCode: {
+          type: 'string',
+          example: '-1',
+        },
+        description: {
+          type: 'string',
+          example: 'My REST API description',
+        },
+        url: {
+          type: 'string',
+          example: 'http://my.rest.api.com/v1',
+        },
+        managerIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'manager-id',
+          },
+        },
+        slug: {
+          type: 'string',
+          example: 'organization-slug',
+        },
+        lifecycleStatus: {
+          type: 'string',
+          example: 'design',
+        },
+        authorizedUserIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'user-id',
+          },
+        },
+        createdAt: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        bookmarkCount: {
+          type: 'string',
+          example: '0',
+        },
+        isPublic: {
+          type: 'boolean',
+          example: 'true',
+        },
+        friendlySlugs: {
+          type: 'object',
+          properties: {
+            slug: {
+              type: 'object',
+              properties: {
+                base: {
+                  type: 'string',
+                  example: 'my-rest-api',
+                },
+                index: {
+                  type: 'string',
+                  example: '0',
+                },
+              },
             },
           },
         },
