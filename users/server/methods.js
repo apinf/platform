@@ -21,6 +21,9 @@ Meteor.methods({
 
     let user;
     if (this.userId === userId) {
+      // Remove user from all Organizations
+      Meteor.call('removeUserFromAllOrganizations', userId);
+
       user = Meteor.users.remove({
         _id: this.userId,
       });
