@@ -28,8 +28,6 @@ ApiV1.addRoute('organizations', {
       ],
       responses: {
         200: {
-          name: 'organization',
-          in: 'body',
           description: 'Returns list of organizations',
           schema: {
             type: 'object',
@@ -40,8 +38,9 @@ ApiV1.addRoute('organizations', {
               },
               data: {
                 type: 'array',
-                items:
-                  ApiV1.swagger.definitions.organizationResponse,
+                items: {
+                  $ref: '#/definitions/organizationResponse',
+                },
               },
             },
           },
@@ -115,8 +114,6 @@ ApiV1.addRoute('organizations', {
       ],
       responses: {
         200: {
-          name: 'organization',
-          in: 'body',
           description: 'Organization successfully added',
           schema: {
             type: 'object',
@@ -196,8 +193,6 @@ ApiV1.addRoute('organizations/:id', {
       ],
       responses: {
         200: {
-          name: 'organization',
-          in: 'body',
           description: 'Returns organization',
           schema: {
             type: 'object',
@@ -250,8 +245,6 @@ ApiV1.addRoute('organizations/:id', {
       ],
       responses: {
         200: {
-          name: 'organization',
-          in: 'body',
           description: 'Organization successfully edited.',
           schema: {
             type: 'object',

@@ -37,8 +37,6 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            name: 'api',
-            in: 'body',
             description: 'Returns list of public APIs',
             schema: {
               type: 'object',
@@ -49,8 +47,9 @@ ApiV1.addCollection(Apis, {
                 },
                 data: {
                   type: 'array',
-                  items:
-                    ApiV1.swagger.definitions.apiResponse,
+                  items: {
+                    $ref: '#/definitions/apiResponse',
+                  },
                 },
               },
             },
@@ -133,8 +132,6 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            name: 'api',
-            in: 'body',
             description: 'Returns API',
             schema: {
               type: 'object',
@@ -167,8 +164,6 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            name: 'api',
-            in: 'body',
             description: 'API successfully added',
             schema: {
               type: 'object',
@@ -246,8 +241,6 @@ ApiV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            name: 'api',
-            in: 'body',
             description: 'API successfully edited.',
             schema: {
               type: 'object',
