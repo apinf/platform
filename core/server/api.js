@@ -256,6 +256,8 @@ ApiV1.swagger = {
         },
       },
     },
+
+    // Scheme for response parameters
     organizationResponse: {
       type: 'object',
       properties: {
@@ -493,11 +495,6 @@ ApiV1.swagger = {
         },
       },
     },
-
-    // Scheme for response parameters
-    // TODO: Response for API endpoints
-    // TODO: Response for Organization endpoints
-
 
     // Simple data for complex structure
     emailAddress: {
