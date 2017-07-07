@@ -9,7 +9,7 @@
   {{> afQuickField name="apiUmbrella.servers.0.host" value=apiHost type="hidden" }}
   {{> afQuickField name="apiUmbrella.balance_algorithm" value="least_conn" type="hidden" }}
 
-  <div class="form-group">
+  <div class="form-group" data-required="true">
     <!-- Proxy base path (frontend prefix) -->
     <label for="proxy-base-path-field">
       {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
@@ -44,7 +44,7 @@
 
   <!-- API base path (backend prefix) -->
   <div class="row">
-    <div class="form-group col-md-9">
+    <div class="form-group col-md-9" data-required="true">
       <label for="api-base-path-field">
         {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
       </label>
@@ -78,7 +78,7 @@
     </div>
 
     <!-- API port (servers.port) -->
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-3" data-required="true">
       <label for="api-port-field" id="api-port-field-label">
         {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
       </label>
