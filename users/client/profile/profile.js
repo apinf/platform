@@ -15,4 +15,17 @@ Template.profile.helpers({
     // Return reference to Meteor.users collection
     return Meteor.users;
   },
+  userEmail () {
+    let email;
+    // Get current user
+    const user = Meteor.user();
+
+    // Make sure user exists
+    if (user) {
+      // Get e-mail address
+      email = user.emails[0].address;
+    }
+
+    return email;
+  },
 });
