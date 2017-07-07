@@ -140,8 +140,9 @@ ApiV1.addCollection(Apis, {
                   type: 'string',
                   example: 'Success',
                 },
-                data:
-                  ApiV1.swagger.definitions.apiResponse,
+                data: {
+                  $ref: '#/definitions/apiResponse',
+                },
               },
             },
           },
@@ -172,8 +173,9 @@ ApiV1.addCollection(Apis, {
                   type: 'string',
                   example: 'Success',
                 },
-                data:
-                  ApiV1.swagger.definitions.apiResponse,
+                data: {
+                  $ref: '#/definitions/apiResponse',
+                },
               },
             },
           },
@@ -249,8 +251,9 @@ ApiV1.addCollection(Apis, {
                   type: 'string',
                   example: 'Success',
                 },
-                data:
-                  ApiV1.swagger.definitions.apiResponse,
+                data: {
+                  $ref: '#/definitions/apiResponse',
+                },
               },
             },
           },

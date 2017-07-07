@@ -122,8 +122,9 @@ ApiV1.addRoute('organizations', {
                 type: 'string',
                 example: 'Success',
               },
-              data:
-                ApiV1.swagger.definitions.organizationResponse,
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
             },
           },
         },
@@ -197,8 +198,9 @@ ApiV1.addRoute('organizations/:id', {
           schema: {
             type: 'object',
             properties: {
-              data:
-                ApiV1.swagger.definitions.organizationResponse,
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
             },
           },
         },
@@ -249,8 +251,9 @@ ApiV1.addRoute('organizations/:id', {
           schema: {
             type: 'object',
             properties: {
-              data:
-                ApiV1.swagger.definitions.organizationResponse,
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
             },
           },
         },
