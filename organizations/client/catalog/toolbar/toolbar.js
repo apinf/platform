@@ -25,7 +25,7 @@ Template.organizationCatalogueToolbar.onRendered(function () {
     const sortByParameter = FlowRouter.getQueryParam('sortBy');
 
     // Set the sorting by UI state from URL parameter
-    instance.$('#organization-sort-select').val(`${sortByParameter}`).change();
+    instance.$('#organization-sort-select').val(`${sortByParameter}`);
   });
 
   // Runs a function that depends only on sortDirection parameter
