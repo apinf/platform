@@ -17,227 +17,294 @@ import Organizations from '/organizations/collection';
 // Npm packages imports
 import _ from 'lodash';
 
-ApiV1.swagger.meta.paths['/login'].post = {
-  tags: [
-    ApiV1.swagger.tags.login,
-  ],
-  summary: 'Logging in.',
-  description: 'By giving existing username and password you get login credentials.',
-  produces: 'application/json',
-  parameters: [
-    ApiV1.swagger.params.userLogin,
-  ],
-  responses: {
-    200: {
-      description: 'Success',
-      schema:
-        ApiV1.swagger.definitions.user_login_response,
-    },
-    400: {
-      description: 'Bad query parameters',
-    },
-    401: {
-      description: 'Unauthorized',
-    },
-  },
-};
-
-ApiV1.swagger.meta.paths['/users'].get = {
-  tags: [
-    ApiV1.swagger.tags.users,
-  ],
-  summary: 'List and search users.',
-  description: 'By passing options you can search users in system.',
-  produces: 'application/json',
-  parameters: [
-    ApiV1.swagger.params.x_user_id,
-    ApiV1.swagger.params.x_auth_token,
-    ApiV1.swagger.params.optionalSearch,
-    ApiV1.swagger.params.userOrganizationId,
-    ApiV1.swagger.params.skip,
-    ApiV1.swagger.params.limit,
-    ApiV1.swagger.params.sortBy,
-  ],
-  responses: {
-    200: {
-      description: 'Success',
-      schema:
-        ApiV1.swagger.definitions.get_user_data,
-    },
-    400: {
-      description: 'Bad query parameters',
-    },
-    401: {
-      description: 'Authentication is required',
+ApiV1.swagger.meta.paths = {
+  '/login': {
+    post: {
+      tags: [
+        ApiV1.swagger.tags.login,
+      ],
+      summary: 'Logging in.',
+      description: 'By giving existing username and password you get login credentials.',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.login,
+      ],
+      responses: {
+        200: {
+          description: 'Success',
+          schema: {
+            $ref: '#/definitions/loginResponse',
+          },
+        },
+        400: {
+          description: 'Bad query parameters',
+        },
+        401: {
+          description: 'Unauthorized',
+        },
+      },
     },
   },
-};
 
-ApiV1.swagger.meta.paths['/users'].post = {
-  tags: [
-    ApiV1.swagger.tags.users,
-  ],
-  summary: 'Adds a new user.',
-  description: 'Adds a new user. On success, returns newly added object.',
-  produces: 'application/json',
-  parameters: [
-    ApiV1.swagger.params.userAddition,
-  ],
-  responses: {
-    201: {
-      description: 'User successfully added',
-      schema:
-        ApiV1.swagger.definitions.post_user_response,
+  '/users': {
+    get: {
+      tags: [
+        ApiV1.swagger.tags.users,
+      ],
+      summary: 'List and search users.',
+      description: 'By passing options you can search users in system.',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.optionalSearch,
+        ApiV1.swagger.params.userOrganizationId,
+        ApiV1.swagger.params.skip,
+        ApiV1.swagger.params.limit,
+        ApiV1.swagger.params.sortBy,
+      ],
+      responses: {
+        200: {
+          description: 'Success',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/userItem',
+                },
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad query parameters',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
-    400: {
-      description: 'Invalid input, object invalid',
-    },
-    401: {
-      description: 'Authentication is required',
-    },
-    409: {
-      description: 'User already exists',
+    post: {
+      tags: [
+        ApiV1.swagger.tags.users,
+      ],
+      summary: 'Adds a new user.',
+      description: 'Adds a new user. On success, returns newly added object.',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.userDataAdd,
+      ],
+      responses: {
+        201: {
+          description: 'User successfully added',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                $ref: '#/definitions/userPostResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Invalid input, object invalid',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        409: {
+          description: 'User already exists',
+        },
+      },
     },
   },
-  security: [
-    {
-      userSecurityToken: [],
-      userId: [],
-    },
-  ],
-};
 
-
-ApiV1.swagger.meta.paths['/users/{id}'].get = {
-  tags: [
-    ApiV1.swagger.tags.users,
-  ],
-  summary: 'Search Users one by one with userID.',
-  description: 'Returns user data with given ID.',
-  produces: 'application/json',
-  parameters: [
-    ApiV1.swagger.params.x_user_id,
-    ApiV1.swagger.params.x_auth_token,
-    ApiV1.swagger.params.userId,
-  ],
-  responses: {
-    200: {
-      description: 'Data of identified user.',
-      schema:
-        ApiV1.swagger.definitions.get_user_data,
-
+  '/users/{id}': {
+    get: {
+      tags: [
+        ApiV1.swagger.tags.users,
+      ],
+      summary: 'Search Users one by one with userID.',
+      description: 'Returns user data with given ID.',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.userId,
+      ],
+      responses: {
+        200: {
+          description: 'Data of identified user.',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                $ref: '#/definitions/userItem',
+              },
+            },
+          },
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission.',
+        },
+        404: {
+          description: 'No user found with given UserID.',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
-    401: {
-      description: 'Authentication is required',
+    delete: {
+      tags: [
+        ApiV1.swagger.tags.users,
+      ],
+      summary: 'Delete Users one by one with userID.',
+      description: 'Deletes the identified User.',
+      parameters: [
+        ApiV1.swagger.params.userId,
+      ],
+      responses: {
+        200: {
+          description: 'User deleted.',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'OK',
+              },
+              message: {
+                type: 'string',
+                example: 'User deleted',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Invalid input, invalid object',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'User not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
-    403: {
-      description: 'User does not have permission.',
-    },
-    404: {
-      description: 'No user found with given UserID.',
+    put: {
+      tags: [
+        ApiV1.swagger.tags.users,
+      ],
+      summary: 'Update User\'s data.',
+      description: 'Updates data of a User indicated by user ID.',
+      parameters: [
+        ApiV1.swagger.params.userId,
+        ApiV1.swagger.params.userDataUpdate,
+      ],
+      responses: {
+        200: {
+          description: 'User successfully updated.',
+        },
+        400: {
+          description: 'Invalid input, object invalid, Erroneous new password',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'No user found with given UserID',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
   },
-};
 
-ApiV1.swagger.meta.paths['/users/{id}'].delete = {
-  tags: [
-    ApiV1.swagger.tags.users,
-  ],
-  summary: 'Delete Users one by one with userID.',
-  description: 'Deletes the identified User.',
-  parameters: [
-    ApiV1.swagger.params.x_user_id,
-    ApiV1.swagger.params.x_auth_token,
-    ApiV1.swagger.params.userId,
-  ],
-  responses: {
-    200: {
-      description: 'User deleted.',
-    },
-    400: {
-      description: 'Invalid input, invalid object',
-    },
-    401: {
-      description: 'Authentication is required',
-    },
-    403: {
-      description: 'User does not have permission',
-    },
-    404: {
-      description: 'User not found',
-    },
-  },
-  security: [
-    {
-      userSecurityToken: [],
-      userId: [],
-    },
-  ],
-};
-
-ApiV1.swagger.meta.paths['/users/{id}'].put = {
-  tags: [
-    ApiV1.swagger.tags.users,
-  ],
-  summary: 'Update User\'s data.',
-  description: 'Updates data of a User indicated by user ID.',
-  parameters: [
-    ApiV1.swagger.params.x_user_id,
-    ApiV1.swagger.params.x_auth_token,
-    ApiV1.swagger.params.userId,
-    ApiV1.swagger.params.userUpdate,
-  ],
-  responses: {
-    200: {
-      description: 'User successfully updated.',
-    },
-    400: {
-      description: 'Invalid input, object invalid, Erroneous new password',
-    },
-    401: {
-      description: 'Authentication is required',
-    },
-    403: {
-      description: 'User does not have permission',
-    },
-    404: {
-      description: 'No user found with given UserID',
-    },
-  },
-  security: [
-    {
-      userSecurityToken: [],
-      userId: [],
-    },
-  ],
-};
-
-ApiV1.swagger.meta.paths['/users/updates'].get = {
-  tags: [
-    ApiV1.swagger.tags.users,
-  ],
-  summary: 'List and search user based on addition date',
-  description: 'Returns users based on addition date',
-  produces: 'application/json',
-  parameters: [
-    ApiV1.swagger.params.x_user_id,
-    ApiV1.swagger.params.x_auth_token,
-    ApiV1.swagger.params.since,
-    ApiV1.swagger.params.userOrganizationId,
-    ApiV1.swagger.params.skip,
-    ApiV1.swagger.params.limit,
-  ],
-  responses: {
-    200: {
-      description: 'success',
-      schema:
-        ApiV1.swagger.definitions.get_user_data,
-    },
-    400: {
-      description: 'Bad query parameters',
-    },
-    401: {
-      description: 'Authentication is required',
+  '/users/updates': {
+    get: {
+      tags: [
+        ApiV1.swagger.tags.users,
+      ],
+      summary: 'List and search user based on addition date',
+      description: 'Returns users based on addition date',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.since,
+        ApiV1.swagger.params.userOrganizationId,
+        ApiV1.swagger.params.skip,
+        ApiV1.swagger.params.limit,
+      ],
+      responses: {
+        200: {
+          description: 'success',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/userItem',
+                },
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad query parameters',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
     },
   },
 };
@@ -470,7 +537,6 @@ ApiV1.addCollection(Meteor.users, {
     },
     post: {
       authRequired: false,
-      // roleRequired: ['admin'],
       action () {
         // Get data from body parameters
         const bodyParams = this.bodyParams;
@@ -529,7 +595,6 @@ ApiV1.addCollection(Meteor.users, {
         };
       },
     },
-
     // Delete a user
     delete: {
       authRequired: true,
@@ -717,6 +782,7 @@ ApiV1.addCollection(Meteor.users, {
 // Request /rest/v1/users/updates for Users collection
 ApiV1.addRoute('users/updates', {
   get: {
+    authRequired: true,
     roleRequired: ['admin'],
     action () {
       let badQueryParameters = false;

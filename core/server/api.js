@@ -26,27 +26,8 @@ ApiV1.swagger = {
       version: '1.0.0',
       title: 'Admin API',
     },
-    paths: {
-      '/users': {
-        get: {},
-        post: {},
-      },
-
-      '/users/{id}': {
-        get: {},
-        delete: {},
-        put: {},
-      },
-
-      '/users/updates': {
-        get: {},
-      },
-
-      '/login': {
-        post: {},
-      },
-
-    },
+    // Create  placeholder for storage paths for Users collection
+    paths: {},
     securityDefinitions: {
       userSecurityToken: {
         in: 'header',
@@ -82,34 +63,6 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
-    company: {
-      name: 'company',
-      in: 'body',
-      description: 'Company name of user',
-      required: true,
-      type: 'string',
-    },
-    createdAt: {
-      name: 'createdAt',
-      in: 'body',
-      description: 'Date and time in ISODate format, e.g. "2012-07-14T01:00:00+01:00" ',
-      type: 'string',
-    },
-    email: {
-      name: 'email',
-      in: 'body',
-      description: 'Email address for user',
-      required: true,
-      type: 'string',
-    },
-    emailResponse: {
-      properties: {
-        name: 'address',
-        in: 'body',
-        description: 'Email address for user',
-        type: 'string',
-      },
-    },
     lifecycle: {
       name: 'lifecycle',
       in: 'query',
@@ -127,6 +80,14 @@ ApiV1.swagger = {
       format: 'int32',
       minimum: 0,
       maximum: 50,
+    },
+    login: {
+      name: 'user',
+      in: 'body',
+      description: 'User login data',
+      schema: {
+        $ref: '#/definitions/loginRequest',
+      },
     },
     optionalSearch: {
       name: 'q',
@@ -157,13 +118,6 @@ ApiV1.swagger = {
       required: true,
       type: 'string',
     },
-    password: {
-      name: 'password',
-      in: 'body',
-      description: 'Password for user',
-      required: true,
-      type: 'string',
-    },
     since: {
       name: 'since',
       in: 'query',
@@ -189,49 +143,26 @@ ApiV1.swagger = {
       required: false,
       type: 'string',
     },
-    userAddition: {
+    userDataAdd: {
       name: 'user',
       in: 'body',
       description: 'Data for adding a new User',
       schema: {
-        $ref: '#/definitions/user_addition',
+        $ref: '#/definitions/usersAdd',
       },
     },
-    userLogin: {
+    userDataUpdate: {
       name: 'user',
       in: 'body',
-      description: 'User login data',
+      description: 'Data for updating User',
       schema: {
-        $ref: '#/definitions/user_login',
+        $ref: '#/definitions/usersUpdate',
       },
     },
-    userUpdate: {
-      name: 'user',
-      in: 'body',
-      description: 'Data for updating a User',
-      schema: {
-        $ref: '#/definitions/user_update',
-      },
-    },
-
     userId: {
       name: 'id',
       in: 'path',
       description: 'ID of User',
-      required: true,
-      type: 'string',
-    },
-    userIdResponse: {
-      name: '_id',
-      in: 'body',
-      description: 'ID of User',
-      required: true,
-      type: 'string',
-    },
-    username: {
-      name: 'username',
-      in: 'body',
-      description: 'Username',
       required: true,
       type: 'string',
     },
@@ -242,24 +173,9 @@ ApiV1.swagger = {
       required: false,
       type: 'string',
     },
-    x_user_id: {
-      name: 'X-User-Id',
-      in: 'header',
-      description: 'User ID for authentication',
-      required: false,
-      type: 'string',
-    },
-    x_auth_token: {
-      name: 'X-Auth-Token',
-      in: 'header',
-      description: 'Authentication Token',
-      required: false,
-      type: 'string',
-    },
-
   },
   definitions: {
-    // The schema defining the type used for the body parameter.
+    // The schema defining the type used for the body parameter in POST or PUT method
     api: {
       required: ['name', 'url'],
       properties: {
@@ -341,54 +257,189 @@ ApiV1.swagger = {
       },
     },
 
-    users: {
-      required: ['username', 'email', 'password'],
+    // Scheme for response parameters
+    organizationResponse: {
+      type: 'object',
       properties: {
-        username: {
+        _id: {
           type: 'string',
-          description: 'Username',
-          example: 'johndoe',
+          example: 'organization-id-value',
         },
-        email: {
+        name: {
           type: 'string',
-          format: 'email',
-          description: 'E-mail address of user',
-          example: 'john.doe@ispname.com',
+          example: 'my Organization',
         },
-        password: {
+        url: {
           type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
+          example: 'https://my.organization.com',
         },
-        company: {
+        managerIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'manager-id',
+          },
+        },
+        createdBy: {
           type: 'string',
-          description: 'Company name of user',
-          example: 'My Company Ltd',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        slug: {
+          type: 'string',
+          example: 'organization-slug',
+        },
+        createdAt: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        featuredApiIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'id-of-featured-api',
+          },
+        },
+        friendlySlugs: {
+          type: 'object',
+          properties: {
+            slug: {
+              type: 'object',
+              properties: {
+                base: {
+                  type: 'string',
+                  example: 'my-organization',
+                },
+                index: {
+                  type: 'string',
+                  example: '0',
+                },
+              },
+            },
+          },
+        },
+        updatedAt: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        socialMedia: {
+          type: 'object',
+          properties: {
+            facebook: {
+              type: 'string',
+              example: 'facebook-url',
+            },
+            twitter: {
+              type: 'string',
+              example: 'twitter-url',
+            },
+            instagram: {
+              type: 'string',
+              example: 'instagram-url',
+            },
+            linkedIn: {
+              type: 'string',
+              example: 'linkedIn-url',
+            },
+          },
+        },
+        contact: {
+          type: 'object',
+          properties: {
+            person: {
+              type: 'string',
+              example: 'contact-person-name',
+            },
+            phone: {
+              type: 'string',
+              example: 'contact-person-phone',
+            },
+            email: {
+              type: 'string',
+              example: 'contact-person-email',
+            },
+          },
         },
       },
     },
-    user_addition: {
-      required: ['username', 'email', 'password'],
+    apiResponse: {
+      type: 'object',
       properties: {
-        username: {
+        _id: {
           type: 'string',
-          description: 'Username',
-          example: 'johndoe',
+          example: 'api-id-value',
         },
-        email: {
+        name: {
           type: 'string',
-          format: 'email',
-          description: 'E-mail address of user',
-          example: 'john.doe@ispname.com',
+          example: 'My REST API',
         },
-        password: {
+        latestMonitoringStatusCode: {
           type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
+          example: '-1',
+        },
+        description: {
+          type: 'string',
+          example: 'My REST API description',
+        },
+        url: {
+          type: 'string',
+          example: 'http://my.rest.api.com/v1',
+        },
+        managerIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'manager-id',
+          },
+        },
+        slug: {
+          type: 'string',
+          example: 'organization-slug',
+        },
+        lifecycleStatus: {
+          type: 'string',
+          example: 'design',
+        },
+        authorizedUserIds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'user-id',
+          },
+        },
+        createdAt: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        bookmarkCount: {
+          type: 'string',
+          example: '0',
+        },
+        isPublic: {
+          type: 'boolean',
+          example: 'true',
+        },
+        friendlySlugs: {
+          type: 'object',
+          properties: {
+            slug: {
+              type: 'object',
+              properties: {
+                base: {
+                  type: 'string',
+                  example: 'my-rest-api',
+                },
+                index: {
+                  type: 'string',
+                  example: '0',
+                },
+              },
+            },
+          },
         },
       },
     },
-    user_login: {
+
+    loginRequest: {
       required: ['username', 'password'],
       properties: {
         username: {
@@ -403,18 +454,19 @@ ApiV1.swagger = {
         },
       },
     },
-    user_update: {
-      required: ['username', 'company', 'password'],
+    usersAdd: {
+      required: ['username', 'email', 'password'],
       properties: {
         username: {
           type: 'string',
           description: 'Username',
           example: 'johndoe',
         },
-        company: {
+        email: {
           type: 'string',
-          description: 'Name of company user belongs to',
-          example: 'Mighty API owners Ltd.',
+          format: 'email',
+          description: 'E-mail address of user',
+          example: 'john.doe@ispname.com',
         },
         password: {
           type: 'string',
@@ -423,131 +475,44 @@ ApiV1.swagger = {
         },
       },
     },
-
-    get_user_profile: {
-      type: 'object',
+    usersUpdate: {
+      required: [],
       properties: {
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
         company: {
           type: 'string',
-          example: 'Mighty API owners Ltd.',
-        },
-      },
-    },
-    get_user_created_at: {
-      type: 'string',
-      example: '2012-07-14T01:00:00+01:00',
-      description: 'Dates and times are stored in ISODate format',
-
-    },
-    post_user_email_address: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          address: {
-            type: 'string',
-            example: 'sam.won@apinf.io',
-          },
-          verified: {
-            type: 'string',
-            example: 'false',
-          },
-        },
-      },
-    },
-    get_user_roles: {
-      type: 'array',
-      items: {
-        type: 'string',
-        example: 'manager',
-      },
-    },
-    get_user_data: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            _id: {
-              type: 'string',
-              example: '7L4jNtdfNFGH3igPs',
-            },
-            created_at: {
-              $ref: '#/definitions/get_user_created_at',
-            },
-            username: {
-              type: 'string',
-              example: 'myusername',
-            },
-            emails: {
-              $ref: '#/definitions/post_user_email_address',
-            },
-            profile: {
-              $ref: '#/definitions/get_user_profile',
-            },
-            roles: {
-              $ref: '#/definitions/get_user_roles',
-            },
-            organization: {
-              $ref: '#/definitions/get_user_organization',
-            },
-          },
-        },
-      },
-    },
-    get_user_organization: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          organization_id: {
-            type: 'string',
-            example: 'eFsLsJH3JTos4HfLc',
-          },
-          organization_name: {
-            type: 'string',
-            example: 'APInf oy',
-          },
+          description: 'Company name of user',
+          example: 'My Company Ltd',
         },
       },
     },
 
-    post_user_response: {
+    // Simple data for complex structure
+    emailAddress: {
       type: 'object',
       properties: {
-        status: {
+        address: {
           type: 'string',
-          example: 'success',
+          example: 'john.doe@ispname.com',
         },
-        data: {
-          type: 'object',
-          properties: {
-            _id: {
-              type: 'string',
-              example: '7L4jNtdfNFGH3igPs',
-            },
-            created_at: {
-              $ref: '#/definitions/get_user_created_at',
-            },
-            username: {
-              type: 'string',
-              example: 'myusername',
-            },
-            emails: {
-              $ref: '#/definitions/post_user_email_address',
-            },
-            profile: {
-              $ref: '#/definitions/get_user_profile',
-            },
-          },
+        verified: {
+          type: 'boolean',
+          example: 'false',
         },
       },
     },
-    user_login_response: {
+
+    // Good: Structure for response
+    loginResponse: {
       type: 'object',
       properties: {
         status: {
@@ -559,17 +524,106 @@ ApiV1.swagger = {
           properties: {
             authToken: {
               type: 'string',
-              example: '7L4jNt-dfNFGH3igPslP5VMH0-hrnbMSFtmjfVOMm_zVg0yT8eGQ-',
+              example: 'auth-token-value',
             },
             userId: {
               type: 'string',
-              example: 'GFJzMtdzqEYgH8PHSQ-',
+              example: 'user-id-value',
             },
           },
         },
       },
     },
+    // Scheme for describing single object of Users collection
+    userItem: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'user-id-value',
+        },
+        created_at: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        username: {
+          type: 'string',
+          example: 'myusername',
+        },
+        emails: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/emailAddress',
+          },
+        },
+        profile: {
+          type: 'object',
+          properties: {
+            company: {
+              type: 'string',
+              example: 'My Company Ltd',
+            },
+          },
+        },
+        roles: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'manager',
+          },
+        },
+        organization: {
+          type: 'array',
+          items: {
+            type: 'object',
+            // TODO: Return the full information about related Organizations
+            properties: {
+              organization_id: {
+                type: 'string',
+                example: 'organization-id-value',
+              },
+              organization_name: {
+                type: 'string',
+                example: 'My Organization',
+              },
+            },
+          },
 
+        },
+      },
+    },
+    userPostResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'user-id-value',
+        },
+        created_at: {
+          type: 'string',
+          example: '2012-07-14T01:00:00+01:00',
+        },
+        username: {
+          type: 'string',
+          example: 'myusername',
+        },
+        emails: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/emailAddress',
+          },
+        },
+        profile: {
+          type: 'object',
+          properties: {
+            company: {
+              type: 'string',
+              example: 'My Company Ltd',
+            },
+          },
+        },
+      },
+    },
   },
 };
 

@@ -29,6 +29,21 @@ ApiV1.addRoute('organizations', {
       responses: {
         200: {
           description: 'Returns list of organizations',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/organizationResponse',
+                },
+              },
+            },
+          },
         },
         400: {
           description: 'Bad query parameters',
@@ -100,6 +115,18 @@ ApiV1.addRoute('organizations', {
       responses: {
         200: {
           description: 'Organization successfully added',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
         },
         401: {
           description: 'Authentication is required',
@@ -167,7 +194,15 @@ ApiV1.addRoute('organizations/:id', {
       ],
       responses: {
         200: {
-          description: 'Returns Organization',
+          description: 'Returns organization',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
         },
         404: {
           description: 'Bad parameter',
@@ -213,6 +248,14 @@ ApiV1.addRoute('organizations/:id', {
       responses: {
         200: {
           description: 'Organization successfully edited.',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
         },
         401: {
           description: 'Authentication is required',
