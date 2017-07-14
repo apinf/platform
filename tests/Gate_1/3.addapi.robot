@@ -25,14 +25,12 @@ Create new api (positive)
 	Create API	Kissa	${EMPTY}	https://www.google.com
 	confirm page loaded	Kappa
 
-Delete api
-	Delete API
-
 *** Keywords *** 
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
 Go to login
+	confirm page loaded	Users
 	Click Element 	id=frontpage-button
 	Click Element	id=signin-button
 
@@ -52,13 +50,5 @@ Create API
 	Input Text 	id=api-name	${name}
 	Input Text	id=api-description	${description}
 	Input Text	id=api-url	${url}
+	Sleep	0.3
 	Click Element	id=submitapi-button
-
-Delete API
-	Go To	http://localhost:3000/apis/kissa
-	Wait Until Page Contains	media
-	Click Element	css=i.fa.fa-cog
-	Wait Until Element Is Visible	id=delete-api
-	Click Element	id=delete-api
-	Wait Until Element Is Visible	id=modal-delete-api
-	Click Element	id=modal-delete-api

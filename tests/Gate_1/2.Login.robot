@@ -2,6 +2,7 @@
 Library		Selenium2Library
 Suite Setup 	Go to homepage
 Suite Teardown 	Close All Browsers
+Default Tags	Gate 1
 
 *** Variables ***
 ${BROWSER} 	chrome
@@ -9,6 +10,7 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Login to apinf wrong password(fail)
+	confirm page loaded	Users
 	Go to login
 	confirm page loaded	Github
 	Login to apinf	asdas	asdasdasd

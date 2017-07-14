@@ -9,28 +9,37 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 login to apinf
+	Sleep 	0.2
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded 	Users
+	#Page Should Not Contain	Add API
 
-Go to api catalog
+APIs sorting
 	Go to api catalog
-	confirm page loaded 	Kappa
+	confirm page loaded 	asd
+	apis sorting
 
 Filter my apis
+	Go to api catalog
+	confirm page loaded 	asd
 	Show my apis
-	confirm page loaded	Kissa
+	Location Should Contain	By=my-apis
 	Page Should Not Contain	Kappa
 
 Filter my bookmarks
+	Go to api catalog
+	confirm page loaded 	asd
 	Show my bookmarks
-	Page Should Not Contain	Kissa
+	Location Should Contain	By=my-bookmarks
+	Page Should Not Contain	Kappa
 
 *** Keywords *** 
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
 Go to login
+	confirm page loaded	Users
 	Click Element 	id=frontpage-button
 	Click Element	id=signin-button
 
@@ -43,6 +52,20 @@ Login to apinf
 Go to api catalog
 	Click Element	id=frontpage-button
 	Click Element	id=apis-button
+
+Apis sorting
+	Select From List By Value	id=sort-select	bookmarkCount
+	Location Should Contain	By=bookmark
+	Click Element	id=sortDirection-descending
+	Location Should Contain	Direction=descending
+	Select From List By Value	id=sort-select	created_at
+	Location Should Contain	By=created
+	Click Element	id=sortDirection-ascending
+	Location Should Contain	Direction=ascending
+	Select From List By Value	id=sort-select	averageRating
+	Location Should Contain	By=average
+	Select From List By Value	id=sort-select	name
+	Location Should Contain	By=name
 
 Show my apis
 	Click Element	id=filterBy-my-apis

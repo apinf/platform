@@ -9,6 +9,7 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Login to apinf
+	Sleep 	0.2
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users
@@ -30,14 +31,6 @@ Verify password and name change
 	Go to login
 	Login to apinf	qweqw	qweqwe
 	confirm page loaded	Users
-
-Change name back
-	change profile data	asdas	${EMPTY}
-	confirm page loaded	updated
-
-Change password back
-	change account data	qweqwe	asdasd
-	confirm page loaded 	updated
 
 delete this account
 	Delete account
