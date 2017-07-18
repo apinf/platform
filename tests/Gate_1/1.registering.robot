@@ -15,10 +15,12 @@ Make new account no mail (fail)
 	Wait Until Page Contains	Required Field
 
 Make new account no password (fail)
+	Go to signup
 	Register to apinf	asdas	asd@asd.asd	${EMPTY}
 	Wait Until Page Contains	Required Field
 
 Make new account (pass)
+	Go to signup
 	Register to apinf	asdas	asd@asd.asd	asdasd
 	confirm page loaded	Users
 
@@ -37,25 +39,13 @@ Register to apinf
 
 Go to signup
 	Click Element 	id=frontpage-button
+	confirm page loaded	Users
 	Click Element	id=signup-button
-
-Go to login
-	Click Element 	id=frontpage-button
-	Click Element	id=signin-button
-
-Login to apinf	
-	[Arguments]	${username}	${password}
-	Input Text	id=at-field-username_and_email	${username}
-	Input Password 	id=at-field-password	${password}
-	Click Button	id=at-btn
+	confirm page loaded	Username
 
 confirm page loaded
 	[Arguments] 	${searchkey}
 	Wait Until Page Contains 	${searchkey}
-
-Make new admin
-	Click Element	id=users-button
-	
 
 Logout of apinf
 	Click Element 	id=footer-signout
