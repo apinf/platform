@@ -47,29 +47,6 @@ MaintenanceV1.swagger = {
     login: 'Login',
   },
   params: {
-    // // api: {
-    // //   name: 'api',
-    // //   in: 'body',
-    // //   description: 'Data for adding or editing API',
-    // //   schema: {
-    // //     $ref: '#/definitions/api',
-    // //   },
-    // // },
-    // apiId: {
-    //   name: 'id',
-    //   in: 'path',
-    //   description: 'ID of API',
-    //   required: true,
-    //   type: 'string',
-    // },
-    // // lifecycle: {
-    // //   name: 'lifecycle',
-    // //   in: 'query',
-    // //   description: 'Limit the listing based on lifecycle status of APIs.',
-    // //   required: false,
-    // //   type: 'string',
-    // //   enum: ['design', 'development', 'testing', 'production', 'deprecated'],
-    // // },
     limit: {
       name: 'limit',
       in: 'query',
@@ -103,13 +80,6 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/organization',
       },
     },
-    // organizationApi: {
-    //   name: 'organization',
-    //   in: 'query',
-    //   description: 'An optional organization id will limit results to the given organization.',
-    //   required: false,
-    //   type: 'string',
-    // },
     organizationId: {
       name: 'id',
       in: 'path',
@@ -174,29 +144,6 @@ MaintenanceV1.swagger = {
     },
   },
   definitions: {
-    // The schema defining the type used for the body parameter in POST or PUT method
-    // api: {
-    //   required: ['name', 'url'],
-    //   properties: {
-    //     name: {
-    //       type: 'string',
-    //       example: 'My REST API',
-    //     },
-    //     description: {
-    //       type: 'string',
-    //       example: 'My REST API description',
-    //     },
-    //     url: {
-    //       type: 'string',
-    //       format: 'url',
-    //       example: 'https://my.rest.api.com/v1',
-    //     },
-    //     lifecycleStatus: {
-    //       type: 'string',
-    //       enum: ['design', 'development', 'testing', 'production', 'deprecated'],
-    //     },
-    //   },
-    // },
     organization: {
       required: ['name', 'url'],
       properties: {
@@ -360,84 +307,6 @@ MaintenanceV1.swagger = {
         },
       },
     },
-    // apiResponse: {
-    //   type: 'object',
-    //   properties: {
-    //     _id: {
-    //       type: 'string',
-    //       example: 'api-id-value',
-    //     },
-    //     name: {
-    //       type: 'string',
-    //       example: 'My REST API',
-    //     },
-    //     latestMonitoringStatusCode: {
-    //       type: 'string',
-    //       example: '-1',
-    //     },
-    //     description: {
-    //       type: 'string',
-    //       example: 'My REST API description',
-    //     },
-    //     url: {
-    //       type: 'string',
-    //       example: 'http://my.rest.api.com/v1',
-    //     },
-    //     managerIds: {
-    //       type: 'array',
-    //       items: {
-    //         type: 'string',
-    //         example: 'manager-id',
-    //       },
-    //     },
-    //     slug: {
-    //       type: 'string',
-    //       example: 'organization-slug',
-    //     },
-    //     lifecycleStatus: {
-    //       type: 'string',
-    //       example: 'design',
-    //     },
-    //     authorizedUserIds: {
-    //       type: 'array',
-    //       items: {
-    //         type: 'string',
-    //         example: 'user-id',
-    //       },
-    //     },
-    //     createdAt: {
-    //       type: 'string',
-    //       example: '2012-07-14T01:00:00+01:00',
-    //     },
-    //     bookmarkCount: {
-    //       type: 'string',
-    //       example: '0',
-    //     },
-    //     isPublic: {
-    //       type: 'boolean',
-    //       example: 'true',
-    //     },
-    //     friendlySlugs: {
-    //       type: 'object',
-    //       properties: {
-    //         slug: {
-    //           type: 'object',
-    //           properties: {
-    //             base: {
-    //               type: 'string',
-    //               example: 'my-rest-api',
-    //             },
-    //             index: {
-    //               type: 'string',
-    //               example: '0',
-    //             },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   },
-    // },
-    //
     loginRequest: {
       required: ['username', 'password'],
       properties: {
@@ -587,7 +456,6 @@ MaintenanceV1.swagger = {
               },
             },
           },
-
         },
       },
     },
