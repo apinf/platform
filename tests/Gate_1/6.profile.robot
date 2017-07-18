@@ -9,30 +9,35 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Login to apinf
-	Sleep 	0.2
+	confirm page loaded	Users
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users
 
 Change profile name (fail)
+	Go to profile
 	change profile data	asdas#	sampo
 	confirm page loaded	alphanumeric
 
 Change profile name (pass)
+	Go to profile
 	change profile data	qweqw	apinf
 	confirm page loaded	updated
 
 Change password
+	Go to account
 	change account data	asdasd	qweqwe
 	confirm page loaded 	updated
 
 Verify password and name change
 	Logout of apinf
+	confirm page loaded	Sign In
 	Go to login
 	Login to apinf	qweqw	qweqwe
 	confirm page loaded	Users
 
 delete this account
+	Go to account
 	Delete account
 	
 *** Keywords *** 
@@ -41,7 +46,23 @@ Go to homepage
 
 Go to login
 	Click Element 	id=frontpage-button
+	confirm page loaded	Users
 	Click Element	id=signin-button
+	confirm page loaded	Login
+	
+Go to profile
+	Click Element 	id=frontpage-button
+	confirm page loaded	Users
+	Click Element 	id=usermenu
+	Click Element	id=profile-button
+	confirm page loaded	Company
+	
+Go to account
+	Click Element 	id=frontpage-button
+	confirm page loaded	Users
+	Click Element 	id=usermenu
+	Click Element	id=account-button
+	confirm page loaded	Update password
 
 Login to apinf	
 	[Arguments]	${username}	${password}
@@ -55,40 +76,21 @@ confirm page loaded
 
 change profile data
 	[Arguments]	${username}	${Company}
-	Click Element 	id=usermenu
-	Click Element	id=profile-button
 	Input Text 	id=username	${username}
 	Input Text 	id=company	${Company}
 	Click Button	id=update-button
 
 change account data
 	[Arguments]	${oldpassword}	${newpassword}
-	Click Element 	id=usermenu
-	Click Element	id=account-button
 	Input Password 	id=password-old	${oldpassword}
 	Input Password 	id=password-new	${newpassword}
 	Input Password 	id=password-new-again	${newpassword}
 	Click Button 	id=submit-password
 
-
 Logout of apinf
 	Click Element 	id=footer-signout
 
-Register to apinf
-	[Arguments]	${username}	${email}	${password}
-	Go To	http://localhost:3000/
-	Wait Until Page Contains	Users
-	Click Link 	id=footer-signup
-	Input Text	id=at-field-username	${username}
-	Input Text 	id=at-field-email	${email}
-	Input Password 	id=at-field-password	${password}
-	Input Password 	id=at-field-password_again	${password}
-	Click Element	id=at-btn
-	Wait Until Page Contains	Users
-
 Delete account
-	Click Element 	id=usermenu
-	Click Element	id=account-button
 	Click Link	id=delete-account-button
 	Wait Until Element Is Visible	id=delete-account-confirm
 	Click Button	id=delete-account-confirm
