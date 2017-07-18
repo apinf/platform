@@ -8,33 +8,33 @@ ${BROWSER} 	chrome
 ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
-Login to apinf wrong password(fail)
+Login to apinf wrong password(negative)
 	confirm page loaded	Users
 	Go to login
 	Login to apinf	asdas	asdasdasd
 	confirm page loaded	forbidden
 
-Login to apinf wrong username (fail)
+Login to apinf wrong username (negative)
 	Go to login
 	Login to apinf	asdasd	asdasd
 	confirm page loaded	forbidden
 
-password lost wrong email(fail)
+password lost wrong email(negative)
 	Go to login
 	Test reset password	asd@asd.as
 	confirm page loaded	User not found
 
-password lost no email (fail)
+password lost no email (negative)
 	Go to login
 	Test reset password	${EMPTY}
 	confirm page loaded	Required Field
 
-password lost (pass)
+password lost (positive)
 	Go to login
 	Test reset password	asd@asd.asd
 	confirm page loaded	Email sent
 
-Login to apinf (pass)
+Login to apinf (positive)
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users
