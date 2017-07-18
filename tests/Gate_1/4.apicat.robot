@@ -8,8 +8,8 @@ ${BROWSER} 	chrome
 ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
-login to apinf
-	Sleep 	0.2
+Login to apinf
+	confirm page loaded	Users
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded 	Users

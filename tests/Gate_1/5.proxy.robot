@@ -7,9 +7,10 @@ Suite Teardown 	Close All Browsers
 ${BROWSER} 	chrome
 ${HOMEPAGE} 	http://localhost:3000
 ${APIS}	https://nightly.apinf.io:3002/gaagol/
+
 *** Test Cases ***
 Login to apinf
-	Sleep 	0.2
+	confirm page loaded	Users
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users

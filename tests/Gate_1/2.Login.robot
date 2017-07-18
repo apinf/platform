@@ -2,7 +2,6 @@
 Library		Selenium2Library
 Suite Setup 	Go to homepage
 Suite Teardown 	Close All Browsers
-Default Tags	Gate 1
 
 *** Variables ***
 ${BROWSER} 	chrome

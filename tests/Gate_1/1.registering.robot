@@ -9,7 +9,7 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Make new account no mail (fail)
-	Sleep 	0.2
+	confirm page loaded	Users
 	Go to signup
 	Register to apinf	asdas	${EMPTY}	asdasd
 	Wait Until Page Contains	Required Field

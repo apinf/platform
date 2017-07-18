@@ -9,6 +9,7 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Login to apinf
+	confirm page loaded	Users
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users
