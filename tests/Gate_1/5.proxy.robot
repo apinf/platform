@@ -32,7 +32,9 @@ Go to homepage
 
 Go to login
 	Click Element 	id=frontpage-button
+	confirm page loaded	Users
 	Click Element	id=signin-button
+	confirm page loaded	Login
 
 Login to apinf	
 	[Arguments]	${username}	${password}
@@ -47,14 +49,13 @@ setup proxy
 	Go To	http://localhost:3000/apis/kissa
 	Wait Until Page Contains	media
 	Click Element	css=i.fa.fa-sitemap
-	Sleep 	0.2
+	Sleep	0.3
 	Input text	id=proxy-base-path-field	/gaagol/
 	Input text	id=api-base-path-field	/
 	Click Element	id=disable-apikey-box
 	Click Element	id=save-proxy-button
 	Wait Until Page Contains	Settings saved	10
-	Sleep	0.2
-	Capture Page Screenshot
+	Sleep	0.3
 
 Delete API
 	Go To	http://localhost:3000/apis/kissa
@@ -64,6 +65,7 @@ Delete API
 	Click Element	id=delete-api
 	Wait Until Element Is Visible	id=modal-delete-api
 	Click Element	id=modal-delete-api
+	confirm page loaded	deleted API
 
 confirm page loaded
 	[Arguments] 	${searchkey}
