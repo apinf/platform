@@ -1,14 +1,14 @@
 works on meteor localhost:3000
-creates new account and 1 new api. 
-requires proxy setup done by admin,
-1 api called "Kappa" that has proxy adress:
-https://nightly.apinf.io:3002/googol/
+requires proxy setup done by admin.
 
-after the test, Kissa api has to be deleted
-or it fails 1/28 tests next time on same instance.
 
-navigate to docs/testing/gate_1 in cmd
-command to run gate 1 tests:
-python -m robot 1.registering.txt 2.Login.txt 3.addapi.txt 4.apicat.txt 5.proxy.txt 6.profile.txt
-Runtime: 1 min 15sec
+gate 1 runtime: 1 min 30sec
 each failing test adds either 0 or 5 seconds.
+
+gate 2 still needs seeded admin account and proxy setup
+
+how to run:
+navigate to test folder you want to run
+start script called gate_#
+
+test creates log.html that has info on what happened.

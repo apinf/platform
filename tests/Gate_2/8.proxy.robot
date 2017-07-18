@@ -7,10 +7,9 @@ Suite Teardown 	Close All Browsers
 ${BROWSER} 	chrome
 ${HOMEPAGE} 	http://localhost:3000
 ${APIS}	https://nightly.apinf.io:3002/gaagol/
-
 *** Test Cases ***
 Login to apinf
-	confirm page loaded	Users
+	Sleep 	0.2
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users
@@ -32,9 +31,7 @@ Go to homepage
 
 Go to login
 	Click Element 	id=frontpage-button
-	confirm page loaded	Users
 	Click Element	id=signin-button
-	confirm page loaded	Login
 
 Login to apinf	
 	[Arguments]	${username}	${password}
@@ -49,13 +46,14 @@ setup proxy
 	Go To	http://localhost:3000/apis/kissa
 	Wait Until Page Contains	media
 	Click Element	css=i.fa.fa-sitemap
-	Sleep	0.3
+	Sleep 	0.2
 	Input text	id=proxy-base-path-field	/gaagol/
 	Input text	id=api-base-path-field	/
 	Click Element	id=disable-apikey-box
 	Click Element	id=save-proxy-button
 	Wait Until Page Contains	Settings saved	10
-	Sleep	0.3
+	Sleep	0.2
+	Capture Page Screenshot
 
 Delete API
 	Go To	http://localhost:3000/apis/kissa
@@ -65,7 +63,6 @@ Delete API
 	Click Element	id=delete-api
 	Wait Until Element Is Visible	id=modal-delete-api
 	Click Element	id=modal-delete-api
-	confirm page loaded	deleted API
 
 confirm page loaded
 	[Arguments] 	${searchkey}

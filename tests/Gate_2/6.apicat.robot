@@ -8,14 +8,16 @@ ${BROWSER} 	chrome
 ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
-Login to apinf
-	confirm page loaded	Users
+login to apinf
+	Sleep 	0.2
 	Go to login
 	Login to apinf	asdas	asdasd
 	confirm page loaded 	Users
+	#Page Should Not Contain	Add API
 
 APIs sorting
 	Go to api catalog
+	confirm page loaded 	asd
 	apis sorting
 
 Filter my apis
@@ -37,10 +39,9 @@ Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
 Go to login
-	Click Element 	id=frontpage-button
 	confirm page loaded	Users
+	Click Element 	id=frontpage-button
 	Click Element	id=signin-button
-	confirm page loaded	Login
 
 Login to apinf	
 	[Arguments]	${username}	${password}
@@ -50,9 +51,7 @@ Login to apinf
 
 Go to api catalog
 	Click Element	id=frontpage-button
-	confirm page loaded	Users
 	Click Element	id=apis-button
-	confirm page loaded	Sort by
 
 Apis sorting
 	Select From List By Value	id=sort-select	bookmarkCount
