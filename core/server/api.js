@@ -22,7 +22,7 @@ ApiV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
-      description: 'APinf is open source API management and catalog.. ',
+      description: 'APinf is open source API management and catalog. ',
       version: '1.0.0',
       title: 'Admin API for API handling',
     },
@@ -43,6 +43,7 @@ ApiV1.swagger = {
   },
   tags: {
     api: 'APIs',
+    login: 'Login',
   },
   params: {
     api: {
@@ -77,6 +78,14 @@ ApiV1.swagger = {
       format: 'int32',
       minimum: 0,
       maximum: 50,
+    },
+    login: {
+      name: 'user',
+      in: 'body',
+      description: 'User login data',
+      schema: {
+        $ref: '#/definitions/loginRequest',
+      },
     },
     optionalSearch: {
       name: 'q',
@@ -203,10 +212,48 @@ ApiV1.swagger = {
         },
       },
     },
+    loginRequest: {
+      required: ['username', 'password'],
+      properties: {
+        username: {
+          type: 'string',
+          description: 'Username',
+          example: 'johndoe',
+        },
+        password: {
+          type: 'string',
+          description: 'Password for user',
+          example: 'mypassword',
+        },
+      },
+    },
+    loginResponse: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'success',
+        },
+        data: {
+          type: 'object',
+          properties: {
+            authToken: {
+              type: 'string',
+              example: 'auth-token-value',
+            },
+            userId: {
+              type: 'string',
+              example: 'user-id-value',
+            },
+          },
+        },
+      },
+    },
+
   },
 };
 
-// Generate Swagger to route /rest/v1/swagger.json
+// Generate Swagger to route /rest/v1/swagger_api.json
 ApiV1.addSwagger('swagger_api.json');
 
 export default ApiV1;
