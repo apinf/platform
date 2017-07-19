@@ -14,6 +14,37 @@ import Apis from '/apis/collection';
 import ApiV1 from '/core/server/api';
 import Organizations from '/organizations/collection';
 
+ApiV1.swagger.meta.paths = {
+  '/login': {
+    post: {
+      tags: [
+        ApiV1.swagger.tags.login,
+      ],
+      summary: 'Logging in.',
+      description: 'By giving existing username and password you get login credentials.',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.login,
+      ],
+      responses: {
+        200: {
+          description: 'Success',
+          schema: {
+            $ref: '#/definitions/loginResponse',
+          },
+        },
+        400: {
+          description: 'Bad query parameters',
+        },
+        401: {
+          description: 'Unauthorized',
+        },
+      },
+    },
+  },
+
+};
+
 // Request /rest/v1/apis for Apis collection
 ApiV1.addCollection(Apis, {
   routeOptions: {
@@ -125,8 +156,8 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Fetch API with specified ID',
-        description: 'Returns one API with specified ID or nothing if there is not match found',
+        summary: 'Fetch API with specified ID.',
+        description: 'Returns one API with specified ID or nothing if there is not match found.',
         parameters: [
           ApiV1.swagger.params.apiId,
         ],
@@ -158,7 +189,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Add new API to catalog',
+        summary: 'Add new API to catalog.',
         description: 'Adds an API to catalog. On success, returns newly added API object.',
         parameters: [
           ApiV1.swagger.params.api,
@@ -235,8 +266,8 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Update API',
-        description: 'Update an API',
+        summary: 'Update API.',
+        description: 'Update an API.',
         parameters: [
           ApiV1.swagger.params.apiId,
           ApiV1.swagger.params.api,
@@ -325,7 +356,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Delete API',
+        summary: 'Delete API.',
         description: 'Deletes the identified API from the system.',
         parameters: [
           ApiV1.swagger.params.apiId,
