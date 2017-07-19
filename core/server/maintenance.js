@@ -495,7 +495,7 @@ MaintenanceV1.swagger = {
   },
 };
 
-// Generate Swagger to route /rest/v1/swagger.json
+// Generate Swagger to route /rest/v1/swagger_maintenance.json
 MaintenanceV1.addSwagger('swagger_maintenance.json');
 
 export default MaintenanceV1;
