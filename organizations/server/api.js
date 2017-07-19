@@ -186,8 +186,8 @@ MaintenanceV1.addRoute('organizations/:id', {
       tags: [
         MaintenanceV1.swagger.tags.organization,
       ],
-      summary: 'Fetch Organization with specified ID',
-      description: 'Returns one Organization with specified ID or nothing if not match found',
+      summary: 'Fetch Organization with specified ID.',
+      description: 'Returns one Organization with specified ID or nothing if not match found.',
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
       ],
@@ -238,8 +238,8 @@ MaintenanceV1.addRoute('organizations/:id', {
       tags: [
         MaintenanceV1.swagger.tags.organization,
       ],
-      summary: 'Update Organization',
-      description: 'Update an Organization',
+      summary: 'Update Organization.',
+      description: 'Update an Organization.',
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
         MaintenanceV1.swagger.params.organization,

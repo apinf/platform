@@ -264,8 +264,8 @@ MaintenanceV1.swagger.meta.paths = {
       tags: [
         MaintenanceV1.swagger.tags.users,
       ],
-      summary: 'List and search user based on addition date',
-      description: 'Returns users based on addition date',
+      summary: 'List and search user based on addition date.',
+      description: 'Returns users based on addition date.',
       produces: 'application/json',
       parameters: [
         MaintenanceV1.swagger.params.since,
