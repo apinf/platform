@@ -230,6 +230,17 @@ ApiV1.addCollection(Apis, {
 
         // Make sure required fields are set
         if (mandatoryFieldsFilled) {
+          // Check if API with same name already exists
+          if (Apis.findOne({ name: this.bodyParams.name })) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'Fail',
+                message: 'Duplicate API name',
+              },
+            };
+          }
+
           // Add manager IDs list into
           const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
 
