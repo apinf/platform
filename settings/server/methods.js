@@ -11,7 +11,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // APInf imports
-import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
+import { githubSettingsValid, mailSettingsValid, oAuthSettingsValid } from '/core/helper_functions/validate_settings';
 
 // Collection imports
 import Settings from '../collection';
@@ -87,6 +87,35 @@ Meteor.methods({
     } catch (error) {
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
+
+      // Show an error message
+      throw new Meteor.Error(message);
+    }
+  },
+  updateOAuthConfiguration () {
+    // Try if settings exist
+    try {
+      const settings = Settings.findOne();
+
+      // Check if oAuth settings are valid
+      if (oAuthSettingsValid(settings)) {
+        // remove existing configuration
+        ServiceConfiguration.configurations.remove({
+          service: 'oAuth',
+        });
+
+        // Insert new service configuration
+        ServiceConfiguration.configurations.insert({
+          service: 'oAuth',
+          loginStye: 'redirect',
+          rootUrl: settings.oAuthConfiguration.rootUrl,
+          clientId: settings.oAuthConfiguration.clientId,
+          secret: settings.oAuthConfiguration.secret,
+        });
+      }
+    } catch (error) {
+      // otherwise show an error
+      const message = `Update oAuth configuration: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);

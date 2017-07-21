@@ -148,6 +148,31 @@ Settings.schema = new SimpleSchema({
       placeholder: 'xxx',
     },
   },
+  oAuthConfiguration: {
+    type: Object,
+    optional: true,
+  },
+  'oAuthConfiguration.rootUrl': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'https://example.com/oauth/',
+    },
+  },
+  'oAuthConfiguration.clientId': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'oAuthConfiguration.secret': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
   sdkCodeGenerator: {
     type: Object,
     optional: true,

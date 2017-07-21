@@ -14,6 +14,17 @@ export function githubSettingsValid (settings) {
   return false;
 }
 
+// Validates oAuth configuration settings
+export function oAuthSettingsValid (settings) {
+  if ((typeof settings !== 'undefined') && settings.oAuthConfiguration) {
+    if (settings.oAuthConfiguration.clientId && settings.oAuthConfiguration.secret) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 // Validates mail configuration settings
 export function mailSettingsValid (settings) {
   if ((typeof settings !== 'undefined') && settings.mail && settings.mail.enabled) {

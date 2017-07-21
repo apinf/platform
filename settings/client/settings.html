@@ -101,6 +101,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "settings_oauth" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='oAuthConfiguration.rootUrl' id="oauth-root-url" }}
+            {{> afQuickField name='oAuthConfiguration.clientId' id="oauth-id" }}
+            {{> afQuickField name='oAuthConfiguration.secret' id="oauth-secret" }}
+          </div>
+        </div>
         <div id="form-buttons">
           <button
             type="submit"
