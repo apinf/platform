@@ -13,7 +13,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-window">
             <span aria-hidden="true">&times;</span>
           </button>
           <h2 class="modal-title" id="organizationFormModalLabel">
@@ -31,13 +31,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="modal-body">
             <fieldset>
               <span itemprop="name">
-                  {{> afQuickField name='name' }}
+                  {{> afQuickField name='name' id="add-organization-name" }}
               </span>
               <span itemprop="url">
-                  {{> afQuickField name='url' }}
+                  {{> afQuickField name='url' id="add-organization-url" }}
               </span>
               <span itemprop="description">
-                  {{> afQuickField name='description' }}
+                  {{> afQuickField name='description' id="add-organization-description" }}
               </span>
               <div class="panel panel-default">
                 <div class="panel-heading">
@@ -45,13 +45,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
                 <div class="panel-body">
                    <span itemprop="name">
-                       {{> afQuickField name='contact.person' }}
+                       {{> afQuickField name='contact.person' id="add-contact-name" }}
                     </span>
                    <span itemprop="telephone">
-                       {{> afQuickField name='contact.phone' }}
+                       {{> afQuickField name='contact.phone' id="add-contact-phone" }}
                     </span>
                    <span itemprop="email">
-                       {{> afQuickField name='contact.email' }}
+                       {{> afQuickField name='contact.email' id="add-contact-email" }}
                     </span>
                 </div>
               </div>
@@ -59,7 +59,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" id="save-organization">
               {{_ "organizationForm_saveButton_text" }}
             </button>
           </div>
