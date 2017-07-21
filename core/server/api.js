@@ -135,7 +135,7 @@ ApiV1.swagger = {
         },
         isPublic: {
           type: 'boolean',
-          example: 'true',
+          example: true,
         },
       },
 
