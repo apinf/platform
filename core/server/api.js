@@ -133,7 +133,12 @@ ApiV1.swagger = {
           type: 'string',
           enum: ['design', 'development', 'testing', 'production', 'deprecated'],
         },
+        isPublic: {
+          type: 'boolean',
+          example: 'true',
+        },
       },
+
     },
     apiResponse: {
       type: 'object',
