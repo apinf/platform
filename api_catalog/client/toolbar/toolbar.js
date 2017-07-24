@@ -26,7 +26,7 @@ Template.apiCatalogToolbar.onRendered(function () {
   const viewModeParameter = FlowRouter.getQueryParam('viewMode');
 
   // Set the sorting by UI state from URL parameter
-  instance.$('#sort-select').val(`${sortByParameter}`).change();
+  instance.$('#sort-select').val(`${sortByParameter}`);
   // Set the sorting direction by UI state from URL parameter
   instance.$(`#sortDirection-${sortDirectionParameter}`).button('toggle');
   // Set the filter by UI state from URL parameter

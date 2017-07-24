@@ -7,28 +7,42 @@
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import ApiV1 from '/core/server/api';
+import MaintenanceV1 from '/core/server/maintenance';
 import Organizations from '/organizations/collection';
 
-
 // Request /rest/v1/organizations for Organizations collection
-ApiV1.addRoute('organizations', {
+MaintenanceV1.addRoute('organizations', {
   // Return a list of organizations
   get: {
     swagger: {
       tags: [
-        ApiV1.swagger.tags.organization,
+        MaintenanceV1.swagger.tags.organization,
       ],
       summary: 'List and search organizations.',
       description: 'List and search organizations.',
       parameters: [
-        ApiV1.swagger.params.optionalSearch,
-        ApiV1.swagger.params.skip,
-        ApiV1.swagger.params.limit,
+        MaintenanceV1.swagger.params.optionalSearch,
+        MaintenanceV1.swagger.params.skip,
+        MaintenanceV1.swagger.params.limit,
       ],
       responses: {
         200: {
           description: 'Returns list of organizations',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/organizationResponse',
+                },
+              },
+            },
+          },
         },
         400: {
           description: 'Bad query parameters',
@@ -90,16 +104,28 @@ ApiV1.addRoute('organizations', {
     roleRequired: ['admin'],
     swagger: {
       tags: [
-        ApiV1.swagger.tags.organization,
+        MaintenanceV1.swagger.tags.organization,
       ],
       summary: 'Add Organization to catalog.',
       description: 'Adds an Organization to catalog. On success, returns newly added object.',
       parameters: [
-        ApiV1.swagger.params.organization,
+        MaintenanceV1.swagger.params.organization,
       ],
       responses: {
         200: {
           description: 'Organization successfully added',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
         },
         401: {
           description: 'Authentication is required',
@@ -152,22 +178,30 @@ ApiV1.addRoute('organizations', {
 });
 
 // Request /rest/v1/organizations/:id for Organizations collection
-ApiV1.addRoute('organizations/:id', {
+MaintenanceV1.addRoute('organizations/:id', {
   // Return the entity with the given :id
   get: {
     authRequired: false,
     swagger: {
       tags: [
-        ApiV1.swagger.tags.organization,
+        MaintenanceV1.swagger.tags.organization,
       ],
-      summary: 'Fetch Organization with specified ID',
-      description: 'Returns one Organization with specified ID or nothing if not match found',
+      summary: 'Fetch Organization with specified ID.',
+      description: 'Returns one Organization with specified ID or nothing if not match found.',
       parameters: [
-        ApiV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.organizationId,
       ],
       responses: {
         200: {
-          description: 'Returns Organization',
+          description: 'Returns organization',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
         },
         404: {
           description: 'Bad parameter',
@@ -202,17 +236,25 @@ ApiV1.addRoute('organizations/:id', {
     authRequired: true,
     swagger: {
       tags: [
-        ApiV1.swagger.tags.organization,
+        MaintenanceV1.swagger.tags.organization,
       ],
-      summary: 'Update Organization',
-      description: 'Update an Organization',
+      summary: 'Update Organization.',
+      description: 'Update an Organization.',
       parameters: [
-        ApiV1.swagger.params.organizationId,
-        ApiV1.swagger.params.organization,
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.organization,
       ],
       responses: {
         200: {
           description: 'Organization successfully edited.',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
         },
         401: {
           description: 'Authentication is required',
@@ -232,7 +274,7 @@ ApiV1.addRoute('organizations/:id', {
       ],
     },
     action () {
-      // Get ID of API
+      // Get ID of Organization
       const organizationId = this.urlParams.id;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
@@ -303,12 +345,12 @@ ApiV1.addRoute('organizations/:id', {
     authRequired: true,
     swagger: {
       tags: [
-        ApiV1.swagger.tags.organization,
+        MaintenanceV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Organization from catalog.',
       description: 'Deletes the identified Organization from catalog.',
       parameters: [
-        ApiV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.organizationId,
       ],
       responses: {
         200: {

@@ -6,10 +6,44 @@
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
+// Meteor contributed packages imports
+import { Roles } from 'meteor/alanning:roles';
+
 // Collection imports
 import Apis from '/apis/collection';
 import ApiV1 from '/core/server/api';
 import Organizations from '/organizations/collection';
+
+ApiV1.swagger.meta.paths = {
+  '/login': {
+    post: {
+      tags: [
+        ApiV1.swagger.tags.login,
+      ],
+      summary: 'Logging in.',
+      description: 'By giving existing username and password you get login credentials.',
+      produces: 'application/json',
+      parameters: [
+        ApiV1.swagger.params.login,
+      ],
+      responses: {
+        200: {
+          description: 'Success',
+          schema: {
+            $ref: '#/definitions/loginResponse',
+          },
+        },
+        400: {
+          description: 'Bad query parameters',
+        },
+        401: {
+          description: 'Unauthorized',
+        },
+      },
+    },
+  },
+
+};
 
 // Request /rest/v1/apis for Apis collection
 ApiV1.addCollection(Apis, {
@@ -23,7 +57,7 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'List and search public APIs.',
+        summary: 'List and search public API.',
         description: 'List and search public APIs.',
         parameters: [
           ApiV1.swagger.params.optionalSearch,
@@ -35,6 +69,21 @@ ApiV1.addCollection(Apis, {
         responses: {
           200: {
             description: 'Returns list of public APIs',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/definitions/apiResponse',
+                  },
+                },
+              },
+            },
           },
           400: {
             description: 'Bad query parameters',
@@ -107,14 +156,26 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Fetch API with specified ID',
-        description: 'Returns one API with specified ID or nothing if there is not match found',
+        summary: 'Fetch API with specified ID.',
+        description: 'Returns one API with specified ID or nothing if there is not match found.',
         parameters: [
           ApiV1.swagger.params.apiId,
         ],
         responses: {
           200: {
             description: 'Returns API',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data: {
+                  $ref: '#/definitions/apiResponse',
+                },
+              },
+            },
           },
           404: {
             description: 'Bad parameter',
@@ -136,6 +197,21 @@ ApiV1.addCollection(Apis, {
         responses: {
           200: {
             description: 'API successfully added',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data: {
+                  $ref: '#/definitions/apiResponse',
+                },
+              },
+            },
+          },
+          400: {
+            description: 'Invalid input, object invalid',
           },
           401: {
             description: 'Authentication is required',
@@ -148,6 +224,38 @@ ApiV1.addCollection(Apis, {
           },
         ],
       },
+      action () {
+        const userId = this.userId;
+        const mandatoryFieldsFilled = this.bodyParams.name && this.bodyParams.url;
+
+        // Make sure required fields are set
+        if (mandatoryFieldsFilled) {
+          // Add manager IDs list into
+          const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
+
+          // Insert API data into collection
+          const apiId = Apis.insert(apiData);
+
+          // Give user manager role
+          Roles.addUsersToRoles(userId, 'manager');
+
+          return {
+            statusCode: 200,
+            body: {
+              status: 'Success',
+              data: Apis.findOne(apiId),
+            },
+          };
+        }
+
+        // Otherwise show message about required fields
+        return {
+          statusCode: 409,
+          body: {
+            message: 'Fields "name" and "url" are required',
+          },
+        };
+      },
     },
     // Modify the entity with the given :id with the data contained in the request body.
     put: {
@@ -158,8 +266,8 @@ ApiV1.addCollection(Apis, {
         tags: [
           ApiV1.swagger.tags.api,
         ],
-        summary: 'Update API',
-        description: 'Update an API',
+        summary: 'Update API.',
+        description: 'Update an API.',
         parameters: [
           ApiV1.swagger.params.apiId,
           ApiV1.swagger.params.api,
@@ -167,6 +275,18 @@ ApiV1.addCollection(Apis, {
         responses: {
           200: {
             description: 'API successfully edited.',
+            schema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  example: 'Success',
+                },
+                data: {
+                  $ref: '#/definitions/apiResponse',
+                },
+              },
+            },
           },
           401: {
             description: 'Authentication is required',

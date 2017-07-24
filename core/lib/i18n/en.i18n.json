@@ -468,6 +468,7 @@
   "privacyPolicy_title": "Privacy Policy",
   "profile_Header": "Profile",
   "profile_UpdateButton": "Update",
+  "profile_labelText_registeredEmail": "Registered e-mail",
   "profile_setUsername": "Please set your username.",
   "profile_updatedSuccess": "Profile updated",
   "profile_usernameInvalid": "Username must be 3-15 alphanumeric characters. Underscore and hyphens are allowed.",

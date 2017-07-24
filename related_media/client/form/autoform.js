@@ -11,11 +11,8 @@ AutoForm.addHooks('relatedMediaPostsForm', {
   onSuccess () {
     // Close modal after successful insert/update
     Modal.hide('relatedMediaPostsForm');
-    // Quick and dirty solution, to be fixed later
-    // Because after updating URL, the oembed does not refresh
-    // Using flow-router, a refresh is called
-    const context = FlowRouter.current();
-    FlowRouter.go('/');
-    FlowRouter.go(context.path);
+
+    // Refresh page to display fresh oembed data
+    FlowRouter.reload();
   },
 });
