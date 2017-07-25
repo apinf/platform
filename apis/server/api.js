@@ -322,13 +322,13 @@ ApiV1.addCollection(Apis, {
         // Get ID of API
         const apiId = this.urlParams.id;
         const userId = this.userId;
-        const IsAdmin = Roles.userIsInRole(userId, ['admin']);
+        // const IsAdmin = Roles.userIsInRole(userId, ['admin']);
 
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
         if (api) {
-          if (api.managerIds.includes(userId) || IsAdmin) {
+          if (api.currentUserCanManage(userId)) {
             // Update API document
             Apis.update(apiId, { $set: bodyParams });
 
@@ -400,13 +400,12 @@ ApiV1.addCollection(Apis, {
         const apiId = this.urlParams.id;
         // Get User ID
         const userId = this.userId;
-        const IsAdmin = Roles.userIsInRole(userId, ['admin']);
         // Get API document
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
         if (api) {
-          if (api.managerIds.includes(userId) || IsAdmin) {
+          if (api.currentUserCanManage(userId)) {
             // Remove API document
             Meteor.call('removeApi', api._id);
 
