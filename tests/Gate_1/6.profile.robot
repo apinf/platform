@@ -39,8 +39,8 @@ Verify password and name change
 delete this account
 	Go to account
 	Delete account
-	
-*** Keywords *** 
+
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
@@ -49,14 +49,14 @@ Go to login
 	confirm page loaded	Users
 	Click Element	id=signin-button
 	confirm page loaded	Login
-	
+
 Go to profile
 	Click Element 	id=frontpage-button
 	confirm page loaded	Users
 	Click Element 	id=usermenu
 	Click Element	id=profile-button
 	confirm page loaded	Company
-	
+
 Go to account
 	Click Element 	id=frontpage-button
 	confirm page loaded	Users
@@ -64,7 +64,7 @@ Go to account
 	Click Element	id=account-button
 	confirm page loaded	Update password
 
-Login to apinf	
+Login to apinf
 	[Arguments]	${username}	${password}
 	Input Text	id=at-field-username_and_email	${username}
 	Input Password 	id=at-field-password	${password}
@@ -88,6 +88,7 @@ change account data
 	Click Button 	id=submit-password
 
 Logout of apinf
+	Focus	id=footer-signout
 	Click Element 	id=footer-signout
 
 Delete account
