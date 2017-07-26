@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -16,10 +17,18 @@ import Settings from '/settings/collection';
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
+  instance.documenationExists = new ReactiveVar();
+
   // Run subscription in autorun
   instance.autorun(() => {
     // Get current documentation file Id
     const apiDoc = Template.currentData().apiDoc;
+
+    // If apiDoc is undefined then swagger document doesn't exist
+    // If apiDoc exists then swagger document either as file or as url to remtoe file
+    const docAvailable = apiDoc && !!(apiDoc.fileId || apiDoc.remoteFileUrl);
+
+    instance.documenationExists.set(docAvailable);
 
     // Check if it is available
     if (apiDoc) {
@@ -43,11 +52,7 @@ Template.apiDocumentation.onRendered(() => {
 
 Template.apiDocumentation.helpers({
   documentationExists () {
-    if (this.apiDoc) {
-      return !!(this.apiDoc.fileId || this.apiDoc.remoteFileUrl);
-    }
-    // Otherwise return false
-    return false;
+    return Template.instance().documenationExists.get();
   },
   codegenServerExists () {
     // Get template instance
@@ -72,7 +77,20 @@ Template.apiDocumentation.helpers({
     }
     return exists;
   },
+  displayLinkBlock () {
+    const api = this.api;
+    const apiDoc = this.apiDoc;
 
+    // Display block if a user is manager of current API or URL is set
+    return api.currentUserCanManage() || apiDoc.otherUrl;
+  },
+  displayViewBlock () {
+    const api = this.api;
+    const instance = Template.instance();
+
+    // Display block if a user is manager of current API or swagger documentation is available
+    return api.currentUserCanManage() || instance.documenationExists.get();
+  },
 });
 
 Template.apiDocumentation.events({
