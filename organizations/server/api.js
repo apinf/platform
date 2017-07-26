@@ -301,46 +301,35 @@ MaintenanceV1.addRoute('organizations/:id', {
             organizationData.url = bodyParams.url;
           }
 
+          if (bodyParams.manager) {
+            organizationData.manager = [bodyParams.manager];
+          }
+
           if (bodyParams.description) {
             organizationData.description = bodyParams.description;
           }
 
-          if (bodyParams.contact_name ||
-              bodyParams.contact_phone ||
-              bodyParams.contact_email
-            ) {
-            const contact = {};
-            if (bodyParams.contact_name) {
-              contact.person = bodyParams.contact_name;
-            }
-            if (bodyParams.contact_phone) {
-              contact.phone = bodyParams.contact_phone;
-            }
-            if (bodyParams.contact_email) {
-              contact.email = bodyParams.contact_email;
-            }
-            organizationData.contact = contact;
+          if (bodyParams.contact_name) {
+            organizationData.contact.person = bodyParams.contact_name;
+          }
+          if (bodyParams.contact_phone) {
+            organizationData.contact.phone = bodyParams.contact_phone;
+          }
+          if (bodyParams.contact_email) {
+            organizationData.contact.email = bodyParams.contact_email;
           }
 
-          if (bodyParams.facebook ||
-              bodyParams.instagram ||
-              bodyParams.twitter ||
-              bodyParams.linkedin
-            ) {
-            const socialMedia = {};
-            if (bodyParams.facebook) {
-              socialMedia.facebook = bodyParams.facebook;
-            }
-            if (bodyParams.instagram) {
-              socialMedia.instagram = bodyParams.instagram;
-            }
-            if (bodyParams.twitter) {
-              socialMedia.twitter = bodyParams.twitter;
-            }
-            if (bodyParams.linkedin) {
-              socialMedia.linkedin = bodyParams.linkedin;
-            }
-            organizationData.socialMedia = socialMedia;
+          if (bodyParams.facebook) {
+            organizationData.socialMedia.facebook = bodyParams.facebook;
+          }
+          if (bodyParams.instagram) {
+            organizationData.socialMedia.instagram = bodyParams.instagram;
+          }
+          if (bodyParams.twitter) {
+            organizationData.socialMedia.twitter = bodyParams.twitter;
+          }
+          if (bodyParams.linkedin) {
+            organizationData.socialMedia.linkedin = bodyParams.linkedin;
           }
 
 
