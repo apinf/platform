@@ -322,8 +322,6 @@ ApiV1.addCollection(Apis, {
         // Get ID of API
         const apiId = this.urlParams.id;
         const userId = this.userId;
-        // const IsAdmin = Roles.userIsInRole(userId, ['admin']);
-
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
