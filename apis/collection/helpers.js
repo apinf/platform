@@ -28,14 +28,14 @@ import ApiMetadata from '/metadata/collection';
 import Apis from './';
 
 Apis.helpers({
-  currentUserCanManage () {
+  currentUserCanManage (apiUserId) {
     // Get current userId
-    const userId = Meteor.userId();
-
+    // parameter apiUserId is used only in case of REST API
+    const userId = apiUserId || Meteor.userId();
     // Check that user is logged in
     if (userId) {
       // Check if user is manager of this API
-      const userIsManager = this.currentUserIsManager();
+      const userIsManager = this.currentUserIsManager(apiUserId);
 
       // Check if user is administrator
       const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
@@ -47,7 +47,7 @@ Apis.helpers({
       let userIsOrganizationManager;
 
       if (parentOrganization) {
-        userIsOrganizationManager = parentOrganization.currentUserCanManage();
+        userIsOrganizationManager = parentOrganization.currentUserCanManage(userId);
       }
 
       // if user is manager or administrator, they can edit
@@ -69,9 +69,10 @@ Apis.helpers({
     // Only user who can edit, can view private APIs
     return (this.isPublic || userIsAuthorized || this.currentUserCanManage());
   },
-  currentUserIsManager () {
-    // Get current User ID
-    const userId = Meteor.userId();
+  currentUserIsManager (apiUserId) {
+    // Get current userId
+    // parameter apiUserId is used only in case of REST API
+    const userId = apiUserId || Meteor.userId();
 
     // Check if user is manager of this API
     const isManager = _.includes(this.managerIds, userId);

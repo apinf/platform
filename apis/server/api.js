@@ -230,6 +230,17 @@ ApiV1.addCollection(Apis, {
 
         // Make sure required fields are set
         if (mandatoryFieldsFilled) {
+          // Check if API with same name already exists
+          if (Apis.findOne({ name: this.bodyParams.name })) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'Fail',
+                message: 'Duplicate API name',
+              },
+            };
+          }
+
           // Add manager IDs list into
           const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
 
@@ -314,21 +325,21 @@ ApiV1.addCollection(Apis, {
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
-        if (api && api.managerIds.includes(userId)) {
-          // Update API document
-          Apis.update(apiId, { $set: bodyParams });
+        if (api) {
+          if (api.currentUserCanManage(userId)) {
+            // Update API document
+            Apis.update(apiId, { $set: bodyParams });
 
-          return {
-            statusCode: 200,
-            body: {
-              status: 'Success updating',
-              data: Apis.findOne(apiId),
-            },
-          };
-        }
+            return {
+              statusCode: 200,
+              body: {
+                status: 'Success updating',
+                data: Apis.findOne(apiId),
+              },
+            };
+          }
 
-        // Make sure API exists but user can not manage
-        if (api && api.managerIds.indexOf(userId) === -1) {
+          // API exists but user can not manage
           return {
             statusCode: 403,
             body: {
@@ -391,21 +402,21 @@ ApiV1.addCollection(Apis, {
         const api = Apis.findOne(apiId);
 
         // Make sure API exists & user can manage
-        if (api && api.managerIds.includes(userId)) {
-          // Remove API document
-          Meteor.call('removeApi', api._id);
+        if (api) {
+          if (api.currentUserCanManage(userId)) {
+            // Remove API document
+            Meteor.call('removeApi', api._id);
 
-          return {
-            statusCode: 200,
-            body: {
-              status: 'Api successfully removed',
-              data: Apis.findOne(apiId),
-            },
-          };
-        }
+            return {
+              statusCode: 200,
+              body: {
+                status: 'Api successfully removed',
+                data: Apis.findOne(apiId),
+              },
+            };
+          }
 
-        // Make sure API exists but user can not manage
-        if (api && api.managerIds.indexOf(userId) === -1) {
+          // API exists but user can not manage
           return {
             statusCode: 403,
             body: {
