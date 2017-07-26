@@ -291,23 +291,58 @@ MaintenanceV1.addRoute('organizations/:id', {
 
           // If bodyParams doesn't contain any fields
           // then organizationData JSON doesn't contain it as well
-          const organizationData = {
-            name: bodyParams.name,
-            url: bodyParams.url,
-            description: bodyParams.description,
+          const organizationData = {};
 
-            contact: {
-              person: bodyParams.contact_name,
-              phone: bodyParams.contact_phone,
-              email: bodyParams.contact_email,
-            },
-            socialMedia: {
-              facebook: bodyParams.facebook,
-              instagram: bodyParams.instagram,
-              twitter: bodyParams.twitter,
-              linkedIn: bodyParams.linkedin,
-            },
-          };
+          if (bodyParams.name) {
+            organizationData.name = bodyParams.name;
+          }
+
+          if (bodyParams.url) {
+            organizationData.url = bodyParams.url;
+          }
+
+          if (bodyParams.description) {
+            organizationData.description = bodyParams.description;
+          }
+
+          if (bodyParams.contact_name ||
+              bodyParams.contact_phone ||
+              bodyParams.contact_email
+            ) {
+            const contact = {};
+            if (bodyParams.contact_name) {
+              contact.person = bodyParams.contact_name;
+            }
+            if (bodyParams.contact_phone) {
+              contact.phone = bodyParams.contact_phone;
+            }
+            if (bodyParams.contact_email) {
+              contact.email = bodyParams.contact_email;
+            }
+            organizationData.contact = contact;
+          }
+
+          if (bodyParams.facebook ||
+              bodyParams.instagram ||
+              bodyParams.twitter ||
+              bodyParams.linkedin
+            ) {
+            const socialMedia = {};
+            if (bodyParams.facebook) {
+              socialMedia.facebook = bodyParams.facebook;
+            }
+            if (bodyParams.instagram) {
+              socialMedia.instagram = bodyParams.instagram;
+            }
+            if (bodyParams.twitter) {
+              socialMedia.twitter = bodyParams.twitter;
+            }
+            if (bodyParams.linkedin) {
+              socialMedia.linkedin = bodyParams.linkedin;
+            }
+            organizationData.socialMedia = socialMedia;
+          }
+
 
           // Update Organization document
           Organizations.update(organizationId, { $set: organizationData });
