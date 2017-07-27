@@ -239,7 +239,19 @@ MaintenanceV1.addRoute('organizations/:id', {
         MaintenanceV1.swagger.tags.organization,
       ],
       summary: 'Update Organization.',
-      description: 'Update an Organization.',
+      description: `
+   ### Update an Organization ###
+   
+   You can update Organization data with parameters listed on example.
+
+   Parameters can be given one by one or several ones at a time.
+   When several parameters are given, in successful case all of them are
+   updated and in unsuccessful case none of them is updated.
+
+   Only an existing user can be added as a new manager for Organization.
+   In case the manager to be added already exists on list, the operation
+   is considered successful.
+      `,
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
         MaintenanceV1.swagger.params.organization,
@@ -278,7 +290,6 @@ MaintenanceV1.addRoute('organizations/:id', {
       const organizationId = this.urlParams.id;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
-
       if (organization) {
         // Get ID of User
         const userId = this.userId;
@@ -289,7 +300,7 @@ MaintenanceV1.addRoute('organizations/:id', {
           // Get data from body parameters
           const bodyParams = this.bodyParams;
 
-          // If bodyParams doesn't contain any fields
+          // If bodyParams doesn't contain some field
           // then organizationData JSON doesn't contain it as well
           const organizationData = {};
 
@@ -301,37 +312,74 @@ MaintenanceV1.addRoute('organizations/:id', {
             organizationData.url = bodyParams.url;
           }
 
-          if (bodyParams.manager) {
-            organizationData.manager = [bodyParams.manager];
-          }
-
           if (bodyParams.description) {
             organizationData.description = bodyParams.description;
           }
-
-          if (bodyParams.contact_name) {
-            organizationData.contact.person = bodyParams.contact_name;
-          }
-          if (bodyParams.contact_phone) {
-            organizationData.contact.phone = bodyParams.contact_phone;
-          }
-          if (bodyParams.contact_email) {
-            organizationData.contact.email = bodyParams.contact_email;
-          }
-
-          if (bodyParams.facebook) {
-            organizationData.socialMedia.facebook = bodyParams.facebook;
-          }
-          if (bodyParams.instagram) {
-            organizationData.socialMedia.instagram = bodyParams.instagram;
-          }
-          if (bodyParams.twitter) {
-            organizationData.socialMedia.twitter = bodyParams.twitter;
-          }
-          if (bodyParams.linkedin) {
-            organizationData.socialMedia.linkedin = bodyParams.linkedin;
+          // We need to get old manager list and push new user IDs into it
+          if (bodyParams.manager) {
+            // Check if user ID for manager exists
+            if (!Meteor.users.findOne(bodyParams.manager)) {
+              return {
+                statusCode: 404,
+                body: {
+                  status: 'Fail',
+                  message: 'User with given manager ID not found.',
+                },
+              };
+            }
+            // Add new manager only if same user ID was not on list before
+            const alreadyManager = organization.managerIds.includes(bodyParams.manager);
+            if (!alreadyManager) {
+              const managerIds = organization.managerIds;
+              // Add user ID to manager IDs list
+              managerIds.push(bodyParams.manager);
+              organizationData.managerIds = managerIds;
+            }
           }
 
+
+          if (bodyParams.contact_name ||
+              bodyParams.contact_phone ||
+              bodyParams.contact_email) {
+            // Get existing contact data as base for updates
+            const contact = organization.contact;
+
+            if (bodyParams.contact_name) {
+              contact.person = bodyParams.contact_name;
+            }
+            if (bodyParams.contact_phone) {
+              contact.phone = bodyParams.contact_phone;
+            }
+            if (bodyParams.contact_email) {
+              contact.email = bodyParams.contact_email;
+            }
+            // Add contact data into update object
+            organizationData.contact = contact;
+          }
+
+          // Update social media fields if any of them is given
+          if (bodyParams.facebook ||
+              bodyParams.instagram ||
+              bodyParams.twitter ||
+              bodyParams.linkedin) {
+            // Get existing social media data as base for updates
+            const socialMedia = organization.socialMedia;
+
+            if (bodyParams.facebook) {
+              socialMedia.facebook = bodyParams.facebook;
+            }
+            if (bodyParams.instagram) {
+              socialMedia.instagram = bodyParams.instagram;
+            }
+            if (bodyParams.twitter) {
+              socialMedia.twitter = bodyParams.twitter;
+            }
+            if (bodyParams.linkedin) {
+              socialMedia.linkedIn = bodyParams.linkedin;
+            }
+            // Add social media data into update object
+            organizationData.socialMedia = socialMedia;
+          }
 
           // Update Organization document
           Organizations.update(organizationId, { $set: organizationData });
