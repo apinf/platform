@@ -241,16 +241,12 @@ MaintenanceV1.addRoute('organizations/:id', {
       summary: 'Update Organization.',
       description: `
    ### Update an Organization ###
-   
+
    You can update Organization data with parameters listed on example.
 
    Parameters can be given one by one or several ones at a time.
    When several parameters are given, in successful case all of them are
    updated and in unsuccessful case none of them is updated.
-
-   Only an existing user can be added as a new manager for Organization.
-   In case the manager to be added already exists on list, the operation
-   is considered successful.
       `,
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
@@ -258,7 +254,7 @@ MaintenanceV1.addRoute('organizations/:id', {
       ],
       responses: {
         200: {
-          description: 'Organization successfully edited.',
+          description: 'Organization data successfully updated.',
           schema: {
             type: 'object',
             properties: {
@@ -315,28 +311,6 @@ MaintenanceV1.addRoute('organizations/:id', {
           if (bodyParams.description) {
             organizationData.description = bodyParams.description;
           }
-          // We need to get old manager list and push new user IDs into it
-          if (bodyParams.manager) {
-            // Check if user ID for manager exists
-            if (!Meteor.users.findOne(bodyParams.manager)) {
-              return {
-                statusCode: 404,
-                body: {
-                  status: 'Fail',
-                  message: 'User with given manager ID not found.',
-                },
-              };
-            }
-            // Add new manager only if same user ID was not on list before
-            const alreadyManager = organization.managerIds.includes(bodyParams.manager);
-            if (!alreadyManager) {
-              const managerIds = organization.managerIds;
-              // Add user ID to manager IDs list
-              managerIds.push(bodyParams.manager);
-              organizationData.managerIds = managerIds;
-            }
-          }
-
 
           if (bodyParams.contact_name ||
               bodyParams.contact_phone ||
@@ -487,6 +461,232 @@ MaintenanceV1.addRoute('organizations/:id', {
         body: {
           status: 'Fail',
           message: 'Organization is not found with specified ID',
+        },
+      };
+    },
+  },
+});
+
+// Request /rest/v1/organizations/:id for Organizations collection
+MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
+  // Modify the manager list of given entity :id
+  // with the given :userId.
+  put: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        MaintenanceV1.swagger.tags.organization,
+      ],
+      summary: 'Add new User into Organization Manager list.',
+      description: `
+   ### Adding a new User into Organization Manager list ###
+
+   You can add a new managers into Organization manager list one by one.
+   Only a user with existing account can be added as a new manager for Organization.
+   In case the manager to be added already exists on list, the operation
+   is considered successful.
+      `,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerId,
+      ],
+      responses: {
+        200: {
+          description: 'Organization manager list data successfully updated.',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Organization is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const organizationId = this.urlParams.id;
+      // Get Organization document
+      const organization = Organizations.findOne(organizationId);
+      // Organization doesn't exist
+      if (!organization) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Organization is not found with specified ID',
+          },
+        };
+      }
+
+      // Get ID of requesting User
+      const requestorId = this.userId;
+
+      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      // Requestor does not have permission for action
+      if (!userCanManage) {
+        // Organization exists but user can not manage
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+      }
+
+      // Get ID of new Manager
+      const managerId = this.urlParams.managerId;
+      // Manager ID was not given
+      if (!managerId) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager ID not given.',
+          },
+        };
+      }
+
+      // Check if user ID for manager exists
+      if (!Meteor.users.findOne(managerId)) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'User with given manager ID not found.',
+          },
+        };
+      }
+
+      // Add new manager only if same user ID was not on list before
+      const alreadyManager = organization.managerIds.includes(managerId);
+      if (!alreadyManager) {
+        // Update Organization manager list
+        Organizations.update(organizationId, { $push: { managerIds: managerId } });
+      }
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Success updating',
+          data: Organizations.findOne(organizationId),
+        },
+      };
+    },
+  },
+
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        MaintenanceV1.swagger.tags.organization,
+      ],
+      summary: 'Delete identified Manager from Organization Manager list.',
+      description: `
+   ### Deleting a User from Organization Manager list ###
+
+   You can delete managers from Organization manager list one by one.
+
+      `,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerId,
+      ],
+      responses: {
+        200: {
+          description: 'Organization Manager successfully removed.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Organization is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const organizationId = this.urlParams.id;
+      // Get Organization document
+      const organization = Organizations.findOne(organizationId);
+      // Organization doesn't exist
+      if (!organization) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Organization is not found with specified ID',
+          },
+        };
+      }
+
+      // Get ID of requesting User
+      const requestorId = this.userId;
+
+      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      // Requestor does not have permission for action
+      if (!userCanManage) {
+        // Organization exists but user can not manage
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+      }
+
+      // Get ID of new Manager
+      const managerId = this.urlParams.managerId;
+      // Manager ID was not given
+      if (!managerId) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager ID not given.',
+          },
+        };
+      }
+
+      // Remove manager only if same user ID was on list before
+      const alreadyManager = organization.managerIds.includes(managerId);
+      if (alreadyManager) {
+        // Remove user from organization manager list
+        Meteor.call('removeOrganizationManager', organizationId, managerId);
+      }
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Success updating',
+          data: Organizations.findOne(organizationId),
         },
       };
     },
