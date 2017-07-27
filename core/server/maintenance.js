@@ -217,10 +217,6 @@ MaintenanceV1.swagger = {
           type: 'string',
           example: 'Description about company',
         },
-        manager: {
-          type: 'string',
-          example: 'user-id-value',
-        },
         url: {
           type: 'string',
           format: 'url',
