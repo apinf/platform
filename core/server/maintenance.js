@@ -113,6 +113,14 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/loginRequest',
       },
     },
+    managerId: {
+      name: 'managerId',
+      in: 'path',
+      description: 'ID of User to be updated in Manager list',
+      required: true,
+      type: 'string',
+    },
+
     optionalSearch: {
       name: 'q',
       in: 'query',
@@ -129,8 +137,6 @@ MaintenanceV1.swagger = {
   You can give parameters one by one ore several parameters in a same request.
   You can set Organization parameter values to empty by
   setting the parameter value in request to (one) space.
-
-  Note! Manager ID is removed with DELETE method.
       `,
       schema: {
         $ref: '#/definitions/organization',
