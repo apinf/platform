@@ -22,7 +22,55 @@ MaintenanceV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
-      description: 'APinf is open source API management and catalog. ',
+      description: `
+
+   ## What is APInf?
+
+   APinf is open source API management and catalog. Solution supports both REST and MQTT proxies.
+   You can have multiple proxies under one management.
+
+   ----
+
+   ** Check out free to use community instance at https://apinf.io **
+
+   ----
+   ### For API owners
+
+  APInf provides you with a unified, simple interface for publishing your APIs
+  to the developer community and performing complex API management tasks.
+  It allows you to gain a better understanding of your API traffic.
+
+   Each organization has organization page which provides single URL to promote to developers.
+
+  ## APInf Management REST API
+
+  APInf Management REST API enables Organization and User management via simple API.
+  With this API you can add, update and remove (CRUD) catalog content:
+
+  * service users and
+  * information regarding API owner organizations.
+
+  ### Examples for each method to get you started
+
+  In documentation each of the methods contain simple examples to get you started.
+  Here's an example.
+
+  Example call:
+
+      GET /organizations
+
+  Result: returns all Organizations.
+  More examples can be found from each method.
+
+  ### API keys, authentication and dates
+
+  * We require API key in all GET methods. You can get it by creating account to Apinf system. Create it now from https://apinf.io/sign-up
+  * All POST, PUT and DELETE methods require valid authentication.
+  * Dates and times are returned in ISODate format, for example "2012-07-14T01:00:00+01:00".
+
+  ----
+
+   `,
       version: '1.0.0',
       title: 'Admin API for Maintaining Users and Organizations',
     },
@@ -75,7 +123,15 @@ MaintenanceV1.swagger = {
     organization: {
       name: 'organization',
       in: 'body',
-      description: 'Data for adding or editing Organization',
+      description: `
+  Data for adding or editing Organization
+
+  You can give parameters one by one ore several parameters in a same request.
+  You can set Organization parameter values to empty by
+  setting the parameter value in request to (one) space.
+
+  Note! Manager ID is removed with DELETE method.
+      `,
       schema: {
         $ref: '#/definitions/organization',
       },
@@ -154,6 +210,10 @@ MaintenanceV1.swagger = {
         description: {
           type: 'string',
           example: 'Description about company',
+        },
+        manager: {
+          type: 'string',
+          example: 'user-id-value',
         },
         url: {
           type: 'string',
