@@ -17,7 +17,7 @@ import Settings from '/settings/collection';
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
-  instance.documenationExists = new ReactiveVar();
+  instance.documentationExists = new ReactiveVar();
 
   // Run subscription in autorun
   instance.autorun(() => {
@@ -28,7 +28,7 @@ Template.apiDocumentation.onCreated(function () {
     // If apiDoc exists then swagger document either as file or as url to remtoe file
     const docAvailable = apiDoc && !!(apiDoc.fileId || apiDoc.remoteFileUrl);
 
-    instance.documenationExists.set(docAvailable);
+    instance.documentationExists.set(docAvailable);
 
     // Check if it is available
     if (apiDoc) {
@@ -52,7 +52,7 @@ Template.apiDocumentation.onRendered(() => {
 
 Template.apiDocumentation.helpers({
   documentationExists () {
-    return Template.instance().documenationExists.get();
+    return Template.instance().documentationExists.get();
   },
   codegenServerExists () {
     // Get template instance
@@ -89,7 +89,7 @@ Template.apiDocumentation.helpers({
     const instance = Template.instance();
 
     // Display block if a user is manager of current API or swagger documentation is available
-    return api.currentUserCanManage() || instance.documenationExists.get();
+    return api.currentUserCanManage() || instance.documentationExists.get();
   },
 });
 
