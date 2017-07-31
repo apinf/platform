@@ -423,3 +423,250 @@ MaintenanceV1.addRoute('organizations/:id', {
     },
   },
 });
+
+// Request /rest/v1/organizations/:id for Organizations collection
+MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
+  // Modify the manager list of given entity :id
+  // with the given :userId.
+  get: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        MaintenanceV1.swagger.tags.organization,
+      ],
+      summary: 'Get Organization Manager username and email address.',
+      description: `
+   ### Inquiring Organization Manager's username and email address ###
+
+   By giving Organization Managers user ID you can fetch Manager's
+   username and email address.
+      `,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerId,
+      ],
+      responses: {
+        200: {
+          description: 'Organization manager contact information.',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Organization Manager not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const organizationId = this.urlParams.id;
+      // Get Organization document
+      const organization = Organizations.findOne(organizationId);
+      // Organization doesn't exist
+      if (!organization) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Organization is not found with specified ID',
+          },
+        };
+      }
+
+      // Get ID of requesting User
+      const requestorId = this.userId;
+
+      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      // Requestor does not have permission for action
+      if (!userCanManage) {
+        // Organization exists but user can not manage
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+      }
+
+      // Get ID of new Manager
+      const managerId = this.urlParams.managerId;
+      // Manager ID was not given
+      if (!managerId) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager ID not given.',
+          },
+        };
+      }
+
+      // Is user a manager of Organization?
+      const isManager = organization.managerIds.includes(managerId);
+      if (!isManager) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Queried User is not Manager in Organization.',
+          },
+        };
+      }
+
+      // Check if user ID for manager exists
+      if (!Meteor.users.findOne(managerId)) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'User exists but user data not found.',
+          },
+        };
+      }
+
+      // Do not include password in response
+      const options = {};
+      const excludeFields = {};
+      excludeFields.services = 0;
+      excludeFields.createdAt = 0;
+      excludeFields.profile = 0;
+      excludeFields.roles = 0;
+      options.fields = excludeFields;
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Organization manager contact information',
+          data: Meteor.users.findOne({ _id: managerId }, options),
+        },
+      };
+    },
+  },
+
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        MaintenanceV1.swagger.tags.organization,
+      ],
+      summary: 'Delete identified Manager from Organization Manager list.',
+      description: `
+   ### Deleting a User from Organization Manager list ###
+
+   You can delete managers from Organization manager list one by one.
+
+   Note! Removing not existing Manager ID from list is considered failed operation.
+      `,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerId,
+      ],
+      responses: {
+        200: {
+          description: 'Organization Manager successfully removed.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Organization is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const organizationId = this.urlParams.id;
+      // Get Organization document
+      const organization = Organizations.findOne(organizationId);
+      // Organization doesn't exist
+      if (!organization) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Organization is not found with specified ID',
+          },
+        };
+      }
+
+      // Get ID of requesting User
+      const requestorId = this.userId;
+
+      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      // Requestor does not have permission for action
+      if (!userCanManage) {
+        // Organization exists but user can not manage
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+      }
+
+      // Get ID of new Manager
+      const managerId = this.urlParams.managerId;
+      // Manager ID was not given
+      if (!managerId) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager ID not given.',
+          },
+        };
+      }
+
+      // Is user a Manager in Organization?
+      const alreadyManager = organization.managerIds.includes(managerId);
+      if (!alreadyManager) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager not found in Organization.',
+          },
+        };
+      }
+
+      // Remove user from organization manager list
+      Meteor.call('removeOrganizationManager', organizationId, managerId);
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Organization manager successfully removed',
+          data: Organizations.findOne(organizationId),
+        },
+      };
+    },
+  },
+});
