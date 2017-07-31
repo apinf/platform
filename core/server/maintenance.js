@@ -22,7 +22,54 @@ MaintenanceV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
-      description: 'APinf is open source API management and catalog. ',
+      description: `
+   ## What is APInf?
+
+   APinf is open source API management and catalog. Solution supports both REST and MQTT proxies.
+   You can have multiple proxies under one management.
+
+   ----
+
+   ** Check out free to use community instance at https://apinf.io **
+
+   ----
+   ### For API owners
+
+   APInf provides you with a unified, simple interface for publishing your APIs
+   to the developer community and performing complex API management tasks.
+   It allows you to gain a better understanding of your API traffic.
+
+   Each organization has organization page which provides single URL to promote to developers.
+
+   ## APInf Management REST API
+
+   APInf Management REST API enables Organization and User management via simple API.
+   With this API you can add, update and remove (CRUD) catalog content:
+
+   * service users and
+   * information regarding API owner organizations.
+
+   ### Examples for each method to get you started
+
+   In documentation each of the methods contain simple examples to get you started.
+   Here's an example.
+
+   Example call:
+
+       GET /organizations
+
+   Result: returns all Organizations.
+   More examples can be found from each method.
+
+   ### API keys, authentication and dates
+
+   * We require API key in all GET methods. You can get it by creating account to Apinf system. Create it now from https://apinf.io/sign-up
+   * All POST, PUT and DELETE methods require valid authentication.
+   * Dates and times are returned in ISODate format, for example "2012-07-14T01:00:00+01:00".
+
+   ----
+
+      `,
       version: '1.0.0',
       title: 'Admin API for Maintaining Users and Organizations',
     },
@@ -75,7 +122,11 @@ MaintenanceV1.swagger = {
     organization: {
       name: 'organization',
       in: 'body',
-      description: 'Data for adding or editing Organization',
+      description: `
+   Parameters for adding or editing Organization data.
+   
+   You can empty a field in Organization data by giving single space as parameter value.
+      `,
       schema: {
         $ref: '#/definitions/organization',
       },
@@ -149,11 +200,11 @@ MaintenanceV1.swagger = {
       properties: {
         name: {
           type: 'string',
-          example: 'Company',
+          example: 'Organization Name',
         },
         description: {
           type: 'string',
-          example: 'Description about company',
+          example: 'Description about Organization',
         },
         url: {
           type: 'string',
@@ -162,18 +213,18 @@ MaintenanceV1.swagger = {
         },
         contact_name: {
           type: 'string',
-          description: 'Name of company manager',
+          description: 'Name of organization manager',
           example: 'David Bar',
         },
         contact_phone: {
           type: 'string',
-          description: 'Phone number of company manager',
+          description: 'Phone number of organization manager',
           example: '+7 000 000 00 00',
         },
         contact_email: {
           type: 'string',
           format: 'email',
-          description: 'E-mail address of company manager',
+          description: 'E-mail address of organization manager',
           example: 'company-mail@gmail.com',
         },
         facebook: {
@@ -194,10 +245,10 @@ MaintenanceV1.swagger = {
           description: 'Link to Instagram',
           example: 'http://url.com',
         },
-        linkedin: {
+        linkedIn: {
           type: 'string',
           format: 'url',
-          description: 'Link to Linked In',
+          description: 'Link to LinkedIn',
           example: 'http://url.com',
         },
       },
