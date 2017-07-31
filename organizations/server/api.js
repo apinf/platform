@@ -239,14 +239,22 @@ MaintenanceV1.addRoute('organizations/:id', {
         MaintenanceV1.swagger.tags.organization,
       ],
       summary: 'Update Organization.',
-      description: 'Update an Organization.',
+      description: `
+   ### Update an Organization ###
+
+   You can update Organization data with parameters listed on example.
+
+   Parameters can be given one by one or several ones at a time.
+   When several parameters are given, in successful case all of them are
+   updated and in unsuccessful case none of them is updated.
+      `,
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
         MaintenanceV1.swagger.params.organization,
       ],
       responses: {
         200: {
-          description: 'Organization successfully edited.',
+          description: 'Organization data successfully updated.',
           schema: {
             type: 'object',
             properties: {
@@ -278,7 +286,6 @@ MaintenanceV1.addRoute('organizations/:id', {
       const organizationId = this.urlParams.id;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
-
       if (organization) {
         // Get ID of User
         const userId = this.userId;
@@ -289,25 +296,64 @@ MaintenanceV1.addRoute('organizations/:id', {
           // Get data from body parameters
           const bodyParams = this.bodyParams;
 
-          // If bodyParams doesn't contain any fields
+          // If bodyParams doesn't contain some field
           // then organizationData JSON doesn't contain it as well
-          const organizationData = {
-            name: bodyParams.name,
-            url: bodyParams.url,
-            description: bodyParams.description,
+          const organizationData = {};
 
-            contact: {
-              person: bodyParams.contact_name,
-              phone: bodyParams.contact_phone,
-              email: bodyParams.contact_email,
-            },
-            socialMedia: {
-              facebook: bodyParams.facebook,
-              instagram: bodyParams.instagram,
-              twitter: bodyParams.twitter,
-              linkedIn: bodyParams.linkedin,
-            },
-          };
+          if (bodyParams.name) {
+            organizationData.name = bodyParams.name;
+          }
+
+          if (bodyParams.url) {
+            organizationData.url = bodyParams.url;
+          }
+
+          if (bodyParams.description) {
+            organizationData.description = bodyParams.description;
+          }
+
+          if (bodyParams.contact_name ||
+              bodyParams.contact_phone ||
+              bodyParams.contact_email) {
+            // Get existing contact data as base for updates
+            const contact = organization.contact;
+
+            if (bodyParams.contact_name) {
+              contact.person = bodyParams.contact_name;
+            }
+            if (bodyParams.contact_phone) {
+              contact.phone = bodyParams.contact_phone;
+            }
+            if (bodyParams.contact_email) {
+              contact.email = bodyParams.contact_email;
+            }
+            // Add contact data into update object
+            organizationData.contact = contact;
+          }
+
+          // Update social media fields if any of them is given
+          if (bodyParams.facebook ||
+              bodyParams.instagram ||
+              bodyParams.twitter ||
+              bodyParams.linkedin) {
+            // Get existing social media data as base for updates
+            const socialMedia = organization.socialMedia;
+
+            if (bodyParams.facebook) {
+              socialMedia.facebook = bodyParams.facebook;
+            }
+            if (bodyParams.instagram) {
+              socialMedia.instagram = bodyParams.instagram;
+            }
+            if (bodyParams.twitter) {
+              socialMedia.twitter = bodyParams.twitter;
+            }
+            if (bodyParams.linkedin) {
+              socialMedia.linkedIn = bodyParams.linkedin;
+            }
+            // Add social media data into update object
+            organizationData.socialMedia = socialMedia;
+          }
 
           // Update Organization document
           Organizations.update(organizationId, { $set: organizationData });
@@ -415,6 +461,232 @@ MaintenanceV1.addRoute('organizations/:id', {
         body: {
           status: 'Fail',
           message: 'Organization is not found with specified ID',
+        },
+      };
+    },
+  },
+});
+
+// Request /rest/v1/organizations/:id for Organizations collection
+MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
+  // Modify the manager list of given entity :id
+  // with the given :userId.
+  put: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        MaintenanceV1.swagger.tags.organization,
+      ],
+      summary: 'Add new User into Organization Manager list.',
+      description: `
+   ### Adding a new User into Organization Manager list ###
+
+   You can add a new managers into Organization manager list one by one.
+   Only a user with existing account can be added as a new manager for Organization.
+   In case the manager to be added already exists on list, the operation
+   is considered successful.
+      `,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerId,
+      ],
+      responses: {
+        200: {
+          description: 'Organization manager list data successfully updated.',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Organization is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const organizationId = this.urlParams.id;
+      // Get Organization document
+      const organization = Organizations.findOne(organizationId);
+      // Organization doesn't exist
+      if (!organization) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Organization is not found with specified ID',
+          },
+        };
+      }
+
+      // Get ID of requesting User
+      const requestorId = this.userId;
+
+      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      // Requestor does not have permission for action
+      if (!userCanManage) {
+        // Organization exists but user can not manage
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+      }
+
+      // Get ID of new Manager
+      const managerId = this.urlParams.managerId;
+      // Manager ID was not given
+      if (!managerId) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager ID not given.',
+          },
+        };
+      }
+
+      // Check if user ID for manager exists
+      if (!Meteor.users.findOne(managerId)) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'User with given manager ID not found.',
+          },
+        };
+      }
+
+      // Add new manager only if same user ID was not on list before
+      const alreadyManager = organization.managerIds.includes(managerId);
+      if (!alreadyManager) {
+        // Update Organization manager list
+        Organizations.update(organizationId, { $push: { managerIds: managerId } });
+      }
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Success updating',
+          data: Organizations.findOne(organizationId),
+        },
+      };
+    },
+  },
+
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        MaintenanceV1.swagger.tags.organization,
+      ],
+      summary: 'Delete identified Manager from Organization Manager list.',
+      description: `
+   ### Deleting a User from Organization Manager list ###
+
+   You can delete managers from Organization manager list one by one.
+
+      `,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerId,
+      ],
+      responses: {
+        200: {
+          description: 'Organization Manager successfully removed.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Organization is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of Organization
+      const organizationId = this.urlParams.id;
+      // Get Organization document
+      const organization = Organizations.findOne(organizationId);
+      // Organization doesn't exist
+      if (!organization) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Organization is not found with specified ID',
+          },
+        };
+      }
+
+      // Get ID of requesting User
+      const requestorId = this.userId;
+
+      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      // Requestor does not have permission for action
+      if (!userCanManage) {
+        // Organization exists but user can not manage
+        return {
+          statusCode: 403,
+          body: {
+            status: 'Fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+      }
+
+      // Get ID of new Manager
+      const managerId = this.urlParams.managerId;
+      // Manager ID was not given
+      if (!managerId) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Manager ID not given.',
+          },
+        };
+      }
+
+      // Remove manager only if same user ID was on list before
+      const alreadyManager = organization.managerIds.includes(managerId);
+      if (alreadyManager) {
+        // Remove user from organization manager list
+        Meteor.call('removeOrganizationManager', organizationId, managerId);
+      }
+
+      return {
+        statusCode: 200,
+        body: {
+          status: 'Success updating',
+          data: Organizations.findOne(organizationId),
         },
       };
     },
