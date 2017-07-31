@@ -239,7 +239,13 @@ MaintenanceV1.addRoute('organizations/:id', {
         MaintenanceV1.swagger.tags.organization,
       ],
       summary: 'Update Organization.',
-      description: 'Update an Organization.',
+      description: `
+   ### Update an Organization ###
+
+   You can update Organization data with parameters listed below.
+
+   Parameters can be given one by one or several ones at a time.
+      `,
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
         MaintenanceV1.swagger.params.organization,
@@ -296,17 +302,14 @@ MaintenanceV1.addRoute('organizations/:id', {
             url: bodyParams.url,
             description: bodyParams.description,
 
-            contact: {
-              person: bodyParams.contact_name,
-              phone: bodyParams.contact_phone,
-              email: bodyParams.contact_email,
-            },
-            socialMedia: {
-              facebook: bodyParams.facebook,
-              instagram: bodyParams.instagram,
-              twitter: bodyParams.twitter,
-              linkedIn: bodyParams.linkedin,
-            },
+            'contact.person': bodyParams.contact_name,
+            'contact.phone': bodyParams.contact_phone,
+            'contact.email': bodyParams.contact_email,
+
+            'socialMedia.facebook': bodyParams.facebook,
+            'socialMedia.instagram': bodyParams.instagram,
+            'socialMedia.twitter': bodyParams.twitter,
+            'socialMedia.linkedIn': bodyParams.linkedIn,
           };
 
           // Update Organization document
