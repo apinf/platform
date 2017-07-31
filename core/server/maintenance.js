@@ -112,6 +112,13 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/loginRequest',
       },
     },
+    managerId: {
+      name: 'managerId',
+      in: 'path',
+      description: 'ID of User to be used in Manager list',
+      required: true,
+      type: 'string',
+    },
     optionalSearch: {
       name: 'q',
       in: 'query',
@@ -124,7 +131,7 @@ MaintenanceV1.swagger = {
       in: 'body',
       description: `
    Parameters for adding or editing Organization data.
-   
+
    You can empty a field in Organization data by giving single space as parameter value.
       `,
       schema: {
