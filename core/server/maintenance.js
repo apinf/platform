@@ -112,6 +112,13 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/loginRequest',
       },
     },
+    managerEmail: {
+      name: 'managerEmail',
+      in: 'body',
+      description: 'Email address of User to be used in Manager list',
+      required: true,
+      type: 'string',
+    },
     managerId: {
       name: 'managerId',
       in: 'path',
