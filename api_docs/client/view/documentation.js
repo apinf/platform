@@ -19,11 +19,18 @@ Template.apiDocumentation.onCreated(function () {
 
   // On default don't display editor
   instance.displayEditor = new ReactiveVar(false);
+  instance.documentationExists = new ReactiveVar();
 
   // Run subscription in autorun
   instance.autorun(() => {
     // Get current documentation file Id
     const apiDoc = Template.currentData().apiDoc;
+
+    // If apiDoc is undefined then swagger document doesn't exist
+    // If apiDoc exists then swagger document either as file or as url to remote file
+    const docAvailable = apiDoc && !!(apiDoc.fileId || apiDoc.remoteFileUrl);
+
+    instance.documentationExists.set(docAvailable);
 
     // Check if it is available
     if (apiDoc) {
@@ -47,11 +54,7 @@ Template.apiDocumentation.onRendered(() => {
 
 Template.apiDocumentation.helpers({
   documentationExists () {
-    if (this.apiDoc) {
-      return !!(this.apiDoc.fileId || this.apiDoc.remoteFileUrl);
-    }
-    // Otherwise return false
-    return false;
+    return Template.instance().documentationExists.get();
   },
   codegenServerExists () {
     // Get template instance
@@ -78,6 +81,20 @@ Template.apiDocumentation.helpers({
   },
   displayEditor () {
     return Template.instance().displayEditor.get();
+  },
+  displayLinkBlock () {
+    const api = this.api;
+    const apiDoc = this.apiDoc;
+
+    // Display block if a user is manager of current API or URL is set
+    return api.currentUserCanManage() || apiDoc.otherUrl;
+  },
+  displayViewBlock () {
+    const api = this.api;
+    const instance = Template.instance();
+
+    // Display block if a user is manager of current API or swagger documentation is available
+    return api.currentUserCanManage() || instance.documentationExists.get();
   },
 });
 
