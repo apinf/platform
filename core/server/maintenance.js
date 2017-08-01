@@ -260,7 +260,26 @@ MaintenanceV1.swagger = {
         },
       },
     },
-
+    // Scheme for response to Organization Manager query
+    organizationManagerResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'user-id-value',
+        },
+        username: {
+          type: 'string',
+          example: 'myusername',
+        },
+        emails: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/emailAddress',
+          },
+        },
+      },
+    },
     // Scheme for response parameters
     organizationResponse: {
       type: 'object',
