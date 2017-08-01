@@ -70,7 +70,7 @@ ApiV1.addCollection(Apis, {
    Result: returns maximum of 200 APIs which are managed by equesting user.
 
 
-   Note! When using parameter managedAPIS, the requestor user ID is read
+   Note! When using parameter managedAPIs, the requestor user ID is read
    from X-User-Id field in message header.
         `,
 
@@ -114,22 +114,22 @@ ApiV1.addCollection(Apis, {
 
         // Get APIs managed by user requesting operation
         if (queryParams.managedAPIs) {
-          // Reaquestor User ID needed in header
-          const requestorId = this.request.headers['x-user-id'];
+          // Get Manager ID from header
+          const managerId = this.request.headers['x-user-id'];
 
-          // Response with error in case requestorId is missing
-          if (!requestorId) {
+          // Response with error in case managerId is missing
+          if (!managerId) {
             return {
               statusCode: 400,
               body: {
                 status: 'Fail',
-                message: 'Bad query parameters. Managing User ID missing, expected in header.',
+                message: 'Bad query parameters. Manager ID expected in header (X-User-Id).',
               },
             };
           }
 
           // Set condition for a list of managed APIs
-          query.managerIds = requestorId;
+          query.managerIds = managerId;
         }
 
         // Parse query parameters
