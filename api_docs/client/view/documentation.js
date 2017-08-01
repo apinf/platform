@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -15,6 +16,9 @@ import Settings from '/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
+
+  // On default don't display editor
+  instance.displayEditor = new ReactiveVar(false);
 
   // Run subscription in autorun
   instance.autorun(() => {
@@ -72,7 +76,9 @@ Template.apiDocumentation.helpers({
     }
     return exists;
   },
-
+  displayEditor () {
+    return Template.instance().displayEditor.get();
+  },
 });
 
 Template.apiDocumentation.events({
@@ -96,5 +102,13 @@ Template.apiDocumentation.events({
     const host = templateInstance.codegenServer;
     // Show the SDK Code generator form
     Modal.show('sdkCodeGeneratorModal', { api, host });
+  },
+  'click .editor': () => {
+    const editor = Template.instance().displayEditor;
+
+    // Get value of current flag (true or false)
+    const displayEditor = editor.get();
+    // Toggle this value
+    editor.set(!displayEditor);
   },
 });
