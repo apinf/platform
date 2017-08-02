@@ -17,6 +17,8 @@ import Settings from '/settings/collection';
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
+  // On default don't display editor
+  instance.displayEditor = new ReactiveVar(false);
   instance.documentationExists = new ReactiveVar();
 
   // Run subscription in autorun
@@ -25,7 +27,7 @@ Template.apiDocumentation.onCreated(function () {
     const apiDoc = Template.currentData().apiDoc;
 
     // If apiDoc is undefined then swagger document doesn't exist
-    // If apiDoc exists then swagger document either as file or as url to remtoe file
+    // If apiDoc exists then swagger document either as file or as url to remote file
     const docAvailable = apiDoc && !!(apiDoc.fileId || apiDoc.remoteFileUrl);
 
     instance.documentationExists.set(docAvailable);
@@ -77,6 +79,9 @@ Template.apiDocumentation.helpers({
     }
     return exists;
   },
+  displayEditor () {
+    return Template.instance().displayEditor.get();
+  },
   displayLinkBlock () {
     const api = this.api;
     const apiDoc = this.apiDoc;
@@ -114,5 +119,13 @@ Template.apiDocumentation.events({
     const host = templateInstance.codegenServer;
     // Show the SDK Code generator form
     Modal.show('sdkCodeGeneratorModal', { api, host });
+  },
+  'click .editor': () => {
+    const editor = Template.instance().displayEditor;
+
+    // Get value of current flag (true or false)
+    const displayEditor = editor.get();
+    // Toggle this value
+    editor.set(!displayEditor);
   },
 });
