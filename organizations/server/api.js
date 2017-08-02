@@ -555,11 +555,11 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       ],
       summary: 'Add one ore more new Managers into Organization.',
       description: `
-   Adds  one ore more new Managers into Organization.
+   Adds one or more new Managers into Organization.
    On success, returns list of Organization Managers.
       `,
       parameters: [
-        MaintenanceV1.swagger.params.managerEmail,
+        MaintenanceV1.swagger.params.managerEmailList,
       ],
       responses: {
         200: {
@@ -636,9 +636,12 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           },
         };
       }
+      // Convert incoming parameter list (items separated with space) into array
+      const managerEmails = bodyParams.managerEmail.split(/(\s+)/).filter((e) => {
+        return e.trim().length > 0;
+      });
 
       // Check if managers have accounts-base
-      const managerEmails = bodyParams.managerEmail;
       if (!managerEmails) {
         return {
           statusCode: 404,
@@ -648,41 +651,43 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           },
         };
       }
-      console.log('managerEmails', managerEmails);
+      console.log('managerEmails= ', managerEmails);
       const updateManagerList = [];
       // Get User IDs for Manager list
-      // managerEmails.foreach((email) => {
-      //   // Get user with matching email
-      //   const user = Accounts.findUserByEmail(email);
-      //
-      //   if (!user) {
-      //     return {
-      //       statusCode: 404,
-      //       body: {
-      //         status: 'Fail',
-      //         message: 'No user account found',
-      //         data: email,
-      //       },
-      //     };
-      //   }
-      //
-      //   // Check if user is already a manager
-      //   const alreadyManager = organization.managerIds.includes(user._id);
-      //
-      //   // Check if the user is already a manager
-      //   if (alreadyManager) {
-      //     return {
-      //       statusCode: 404,
-      //       body: {
-      //         status: 'Fail',
-      //         message: 'User is already a Manager in Organization',
-      //         data: email,
-      //       },
-      //     };
-      //   }
-      //   // Add user ID to manager IDs field
-      //   updateManagerList.push(user._id);
-      // });
+
+      managerEmails.foreach((email) => {
+        // Get user with matching email
+        const user = Accounts.findUserByEmail(email);
+
+        if (!user) {
+          return {
+            statusCode: 404,
+            body: {
+              status: 'Fail',
+              message: 'No user account found',
+              data: email,
+            },
+          };
+        }
+
+        // Check if user is already a manager
+        const alreadyManager = organization.managerIds.includes(user._id);
+
+        // Check if the user is already a manager
+        if (alreadyManager) {
+          return {
+            statusCode: 404,
+            body: {
+              status: 'Fail',
+              message: 'User is already a Manager in Organization',
+              data: email,
+            },
+          };
+        }
+        // Add user ID to manager IDs field
+        updateManagerList.push(user._id);
+        return;
+      });
 
       // Update Organization manager list
       Organizations.update(organizationId, { $push: { managerIds: updateManagerList } });
