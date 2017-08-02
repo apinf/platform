@@ -110,8 +110,8 @@ ApiV1.swagger = {
       format: 'int32',
       minimum: 0,
     },
-    managedApis: {
-      name: 'managedApis',
+    managedAPIs: {
+      name: 'managedAPIs',
       in: 'query',
       description: 'Limit results to APIs which requesting user can manage.',
       required: false,

@@ -65,13 +65,13 @@ ApiV1.addCollection(Apis, {
 
    Example call:
 
-       GET /apis?limit=200&amp;&managedApis=true
+       GET /apis?limit=200&amp;&managedAPIs=true
 
    Result: returns maximum of 200 APIs which are managed by equesting user.
 
 
-   Note! When using parameter managedAPIs, the requestor user ID is read
-   from X-User-Id field in message header.
+   Note! When using parameter managedAPIs, the Manager's user ID is needed
+   in X-User-Id field in message header.
         `,
 
         parameters: [
@@ -80,7 +80,7 @@ ApiV1.addCollection(Apis, {
           ApiV1.swagger.params.skip,
           ApiV1.swagger.params.limit,
           ApiV1.swagger.params.lifecycle,
-          ApiV1.swagger.params.managedApis,
+          ApiV1.swagger.params.managedAPIs,
         ],
         responses: {
           200: {
