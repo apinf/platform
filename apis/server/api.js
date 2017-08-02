@@ -58,13 +58,29 @@ ApiV1.addCollection(Apis, {
           ApiV1.swagger.tags.api,
         ],
         summary: 'List and search public API.',
-        description: 'List and search public APIs.',
+        description: `
+   ### List and search public APIs ###
+
+   Parameters are optional and combinations or parameters can be used.
+
+   Example call:
+
+       GET /apis?limit=200&amp;&managedAPIs=true
+
+   Result: returns maximum of 200 APIs which are managed by equesting user.
+
+
+   Note! When using parameter managedAPIs, the Manager's user ID is needed
+   in X-User-Id field in message header.
+        `,
+
         parameters: [
           ApiV1.swagger.params.optionalSearch,
           ApiV1.swagger.params.organizationApi,
           ApiV1.swagger.params.skip,
           ApiV1.swagger.params.limit,
           ApiV1.swagger.params.lifecycle,
+          ApiV1.swagger.params.managedAPIs,
         ],
         responses: {
           200: {
@@ -92,21 +108,47 @@ ApiV1.addCollection(Apis, {
       },
       action () {
         const queryParams = this.queryParams;
-
         // Only Public APIs are available for unregistered user
         const query = { isPublic: true };
         const options = {};
 
+        // Get APIs managed by user requesting operation
+        if (queryParams.managedAPIs) {
+          // Get Manager ID from header
+          const managerId = this.request.headers['x-user-id'];
+
+          // Response with error in case managerId is missing
+          if (!managerId) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'Fail',
+                message: 'Bad query parameters. Manager ID expected in header (X-User-Id).',
+              },
+            };
+          }
+
+          // Set condition for a list of managed APIs
+          query.managerIds = managerId;
+        }
+
         // Parse query parameters
-        if (queryParams.organizationApi) {
+        if (queryParams.organization) {
           // Get organization document with specified ID
-          const organization = Organizations.findOne(queryParams.organizationApi);
+          const organization = Organizations.findOne(queryParams.organization);
 
           // Make sure Organization exists
-          if (organization) {
-            // Get list of managed API IDs
-            query._id = { $in: organization.managedApiIds() };
+          if (!organization) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'Fail',
+                message: 'Bad query parameters. Organization not found.',
+              },
+            };
           }
+          // Get list of managed API IDs
+          query._id = { $in: organization.managedApiIds() };
         }
 
         if (queryParams.lifecycle) {
