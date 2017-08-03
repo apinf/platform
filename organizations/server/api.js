@@ -558,9 +558,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
    Adds one or more new Managers into Organization.
    On success, returns list of Organization Managers.
       `,
-      parameters: [
+      parameters:
         MaintenanceV1.swagger.params.managerEmailList,
-      ],
       responses: {
         200: {
           description: 'Organization Manager successfully added',
@@ -605,11 +604,10 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
     action () {
       // Get data from body parameters
       const bodyParams = this.bodyParams;
-      console.log('bodyParams=', bodyParams);
       // Get ID of Organization
       const organizationId = this.urlParams.id;
       // Get Organization document
-      const organization = Organizations.findOne(organizationId);
+      let organization = Organizations.findOne(organizationId);
       // Organization doesn't exist
       if (!organization) {
         return {
@@ -622,9 +620,9 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       }
 
       // Get ID of requesting User
-      const requestorId = this.userId;
+      const userId = this.userId;
 
-      const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+      const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
       // Requestor does not have permission for action
       if (!userCanManage) {
         // Organization exists but user can not manage
@@ -636,13 +634,9 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           },
         };
       }
-      // Convert incoming parameter list (items separated with space) into array
-      const managerEmails = bodyParams.managerEmail.split(/(\s+)/).filter((e) => {
-        return e.trim().length > 0;
-      });
 
-      // Check if managers have accounts-base
-      if (!managerEmails) {
+      // Check if manager list is given
+      if (!bodyParams.managerEmail) {
         return {
           statusCode: 404,
           body: {
@@ -651,47 +645,55 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           },
         };
       }
-      console.log('managerEmails= ', managerEmails);
+
+      // Convert incoming parameter list (items separated with space) into array
+      const managerEmails = bodyParams.managerEmail.split(/(\s+)/).filter((e) => {
+        return e.trim().length > 0;
+      });
+
+      // Check if manager list conversion was successful
+      if (!Array.isArray(managerEmails) || managerEmails.length === 0) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'New Manager email address(es) are erroneous.',
+          },
+        };
+      }
+
       const updateManagerList = [];
       // Get User IDs for Manager list
 
-      managerEmails.foreach((email) => {
-        // Get user with matching email
-        const user = Accounts.findUserByEmail(email);
+      managerEmails.forEach((email) => {
+        // Get user account with matching email
+        const newManager = Accounts.findUserByEmail(email);
 
-        if (!user) {
-          return {
-            statusCode: 404,
-            body: {
-              status: 'Fail',
-              message: 'No user account found',
-              data: email,
-            },
-          };
+        if (newManager) {
+          // Check if user is already a manager
+          const alreadyManager = organization.managerIds.includes(newManager._id);
+          // Check if the user is already a manager
+          if (!alreadyManager) {
+            // Add user ID to manager IDs field
+            updateManagerList.push(newManager._id);
+          }
         }
-
-        // Check if user is already a manager
-        const alreadyManager = organization.managerIds.includes(user._id);
-
-        // Check if the user is already a manager
-        if (alreadyManager) {
-          return {
-            statusCode: 404,
-            body: {
-              status: 'Fail',
-              message: 'User is already a Manager in Organization',
-              data: email,
-            },
-          };
-        }
-        // Add user ID to manager IDs field
-        updateManagerList.push(user._id);
-        return;
       });
 
-      // Update Organization manager list
-      Organizations.update(organizationId, { $push: { managerIds: updateManagerList } });
+      if (managerEmails.length !== updateManagerList.length) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'One or more Users have no account or already are a Manager in Organization',
+          },
+        };
+      }
 
+      // Update Organization manager list
+      updateManagerList.forEach((newManagerid) => {
+        Organizations.update(organizationId, { $push: { managerIds: newManagerid } });
+      });
 
       // Do not include password in response
       const options = {};
@@ -701,6 +703,9 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       excludeFields.profile = 0;
       excludeFields.roles = 0;
       options.fields = excludeFields;
+
+      // Get Organization document after managerIds update
+      organization = Organizations.findOne(organizationId);
 
       return {
         statusCode: 200,
@@ -715,11 +720,9 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
 
 });
 
-
-// Request /rest/v1/organizations/:id/managers/:managerId for Organizations collection
+// Request /rest/v1/organizations/:id/managers/:managerId
 MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
-  // Modify the manager list of given entity :id
-  // with the given :userId.
+  // Get contact information of a manager (:managerId) in given Organization (:id)
   get: {
     authRequired: true,
     swagger: {
@@ -756,7 +759,7 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Organization Manager not found',
+          description: 'Bad parameter',
         },
       },
       security: [
@@ -767,28 +770,27 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       ],
     },
     action () {
-      // Get ID of Organization
+      // Get ID of Organization from request parameter
       const organizationId = this.urlParams.id;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
-      // Organization doesn't exist
+      // Organization must exist
       if (!organization) {
         return {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'Organization is not found with specified ID',
+            message: 'Bad parameter: Organization is not found with specified ID',
           },
         };
       }
 
-      // Get ID of requesting User
+      // Get ID of User requesting operation
       const requestorId = this.userId;
 
       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
-      // Requestor does not have permission for action
+      // Requestor must have permissions for action
       if (!userCanManage) {
-        // Organization exists but user can not manage
         return {
           statusCode: 403,
           body: {
@@ -798,15 +800,15 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         };
       }
 
-      // Get ID of new Manager
+      // Get ID of queried Manager from request parameter
       const managerId = this.urlParams.managerId;
-      // Manager ID was not given
+      // Queried Manager ID must be given
       if (!managerId) {
         return {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'Manager ID not given.',
+            message: 'Bad parameter: Manager ID not given.',
           },
         };
       }
@@ -818,18 +820,18 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'Queried User is not Manager in Organization.',
+            message: 'Bad parameter: Queried User is not Manager in Organization.',
           },
         };
       }
 
-      // Check if user ID for manager exists
+      // Check if user account for manager exists
       if (!Meteor.users.findOne(managerId)) {
         return {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'User exists but user data not found.',
+            message: 'Bad parameter: User exists but user data not found.',
           },
         };
       }
@@ -846,7 +848,7 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       return {
         statusCode: 200,
         body: {
-          status: 'Organization manager contact information',
+          status: 'Success',
           data: Meteor.users.findOne({ _id: managerId }, options),
         },
       };
@@ -882,7 +884,7 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Organization is not found',
+          description: 'Bad parameter',
         },
       },
       security: [
@@ -897,7 +899,7 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       const organizationId = this.urlParams.id;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
-      // Organization doesn't exist
+      // Organization must exist
       if (!organization) {
         return {
           statusCode: 404,
@@ -912,9 +914,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       const requestorId = this.userId;
 
       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
-      // Requestor does not have permission for action
+      // Requestor must have permission for action
       if (!userCanManage) {
-        // Organization exists but user can not manage
         return {
           statusCode: 403,
           body: {
@@ -924,38 +925,50 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         };
       }
 
-      // Get ID of new Manager
-      const managerId = this.urlParams.managerId;
-      // Manager ID was not given
-      if (!managerId) {
+      // Get ID of Manager to be removed
+      const removeManagerId = this.urlParams.managerId;
+      // Manager ID must be given
+      if (!removeManagerId) {
         return {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'Manager ID not given.',
+            message: 'Bad parameter: Manager ID not given.',
           },
         };
       }
 
-      // Is user a Manager in Organization?
-      const alreadyManager = organization.managerIds.includes(managerId);
-      if (!alreadyManager) {
+      // Admin/Manager is not allowed to remove self
+      if (removeManagerId === requestorId) {
         return {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'Manager not found in Organization.',
+            message: 'Bad parameter: Can not remove self.',
+          },
+        };
+      }
+
+      // Only existing Manager can be removed from Organization manager list
+      const isManager = organization.managerIds.includes(removeManagerId);
+
+      if (!isManager) {
+        return {
+          statusCode: 404,
+          body: {
+            status: 'Fail',
+            message: 'Bad parameter: Manager not found in Organization.',
           },
         };
       }
 
       // Remove user from organization manager list
-      Meteor.call('removeOrganizationManager', organizationId, managerId);
+      Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
 
       return {
         statusCode: 200,
         body: {
-          status: 'Organization manager successfully removed',
+          status: 'Success',
           data: Organizations.findOne(organizationId),
         },
       };
