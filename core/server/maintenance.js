@@ -120,11 +120,25 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/managerEmailList',
       },
     },
+    managerQueryEmail: {
+      name: 'managerEmail',
+      in: 'query',
+      description: 'Email address of Organization Manager',
+      required: false,
+      type: 'string',
+    },
     managerId: {
       name: 'managerId',
       in: 'path',
       description: 'ID of User to be used in Manager list',
       required: true,
+      type: 'string',
+    },
+    managerUsername: {
+      name: 'managerUsername',
+      in: 'query',
+      description: 'Username of Organization Manager',
+      required: false,
       type: 'string',
     },
     optionalSearch: {
