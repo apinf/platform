@@ -117,7 +117,7 @@ MaintenanceV1.swagger = {
       in: 'body',
       description: `
    Email address(es) of User(s) to be added in Manager list.
-   Separate emails with space.
+   Separate emails with a space.
       `,
       required: true,
       type: 'string',
