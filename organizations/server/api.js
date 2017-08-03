@@ -450,6 +450,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       `,
       parameters: [
         MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerUsername,
+        MaintenanceV1.swagger.params.managerQueryEmail,
       ],
       responses: {
         200: {
@@ -484,7 +486,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Organization Manager not found',
+          description: 'Bad parameter',
         },
       },
       security: [
@@ -505,7 +507,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           statusCode: 404,
           body: {
             status: 'Fail',
-            message: 'Organization is not found with specified ID',
+            message: 'Bad parameter: Organization not found',
           },
         };
       }
@@ -514,9 +516,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       const requestorId = this.userId;
 
       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
-      // Requestor does not have permission for action
+      // Requestor must have permission for action
       if (!userCanManage) {
-        // Organization exists but user can not manage
         return {
           statusCode: 403,
           body: {
@@ -524,6 +525,38 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
             message: 'You do not have permission for editing this Organization',
           },
         };
+      }
+      // Use list in final query
+      let managerSearchList = [];
+      // Is query limited by manager email or username
+      if (this.queryParams.managerEmail || this.queryParams.managerUsername) {
+        const managerEmail = this.queryParams.managerEmail;
+
+        if (managerEmail) {
+          // Get user account with matching email
+          const managerByEmail = Accounts.findUserByEmail(managerEmail);
+          // Add found Manager ID into search list if Manager
+          if (managerByEmail && organization.managerIds.includes(managerByEmail._id)) {
+            managerSearchList.push(managerByEmail._id);
+          }
+        }
+
+        const managerUsername = this.queryParams.managerUsername;
+
+        if (managerUsername) {
+          // Get user account with matching username
+          const managerByUsername = Accounts.findUserByUsername(managerUsername);
+          // Add found Manager ID into search list
+          if (managerByUsername && organization.managerIds.includes(managerByUsername._id)) {
+            // Add to list if not duplicate
+            if (!managerSearchList.includes(managerByUsername._id)) {
+              managerSearchList.push(managerByUsername._id);
+            }
+          }
+        }
+      } else {
+        // Search with manager list
+        managerSearchList = organization.managerIds;
       }
 
       // Do not include password in response
@@ -540,7 +573,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         body: {
           status: 'Success',
           idList: organization.managerIds,
-          data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
+          data: Meteor.users.find({ _id: { $in: managerSearchList } }, options).fetch(),
         },
       };
     },
