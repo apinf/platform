@@ -112,15 +112,13 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/loginRequest',
       },
     },
-    managerEmailList: {
-      name: 'managerEmailList',
+    managerEmail: {
+      name: 'managerEmail',
       in: 'body',
-      description: `
-   Email address(es) of User(s) to be added in Manager list.
-   Separate emails with a space.
-      `,
-      required: true,
-      type: 'string',
+      description: 'Email address(es) of new Manager(s). Separate email addresses with a space.',
+      schema: {
+        $ref: '#/definitions/managerEmailList',
+      },
     },
     managerId: {
       name: 'managerId',
@@ -406,6 +404,16 @@ MaintenanceV1.swagger = {
           type: 'string',
           description: 'Password for user',
           example: 'mypassword',
+        },
+      },
+    },
+    managerEmailList: {
+      required: ['managerEmail'],
+      properties: {
+        managerEmail: {
+          type: 'string',
+          description: 'Email address for new Manager',
+          example: 'john.doe@apinf.io',
         },
       },
     },

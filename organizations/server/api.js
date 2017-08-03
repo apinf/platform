@@ -438,12 +438,12 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       description: `
    ### Listing all Organization Managers ###
 
-   By giving Organization ID you can fetch all Manager's
+   By giving Organization ID you can fetch all Managers'
    username, email address and ID listed.
 
    There is returned two lists:
-   * list of all Managers' IDs
-   * list of Managers with contact information
+   * idList: list of all Managers' IDs
+   * data: list of Managers with contact information
 
    The lists are differing from each other in case a Manager account is removed,
    but the Manager list is not updated accordingly.
@@ -556,10 +556,17 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       summary: 'Add one ore more new Managers into Organization.',
       description: `
    Adds one or more new Managers into Organization.
-   On success, returns list of Organization Managers.
+   * Managers are identified with email address.
+   * Several managers can be given at a time by separating email addresses with a space.
+   * New manager must have a valid User account.
+   * New manager must not already be a Manager in this Organization.
+
+   On success, complete list of Organization Managers is returned.
       `,
-      parameters:
-        MaintenanceV1.swagger.params.managerEmailList,
+      parameters: [
+        MaintenanceV1.swagger.params.organizationId,
+        MaintenanceV1.swagger.params.managerEmail,
+      ],
       responses: {
         200: {
           description: 'Organization Manager successfully added',
