@@ -22,7 +22,7 @@ ApiV1.swagger.meta.paths = {
       ],
       summary: 'Logging in.',
       description: 'By giving existing username and password you get login credentials.',
-      produces: 'application/json',
+      produces: ['application/json'],
       parameters: [
         ApiV1.swagger.params.login,
       ],

@@ -25,7 +25,7 @@ MaintenanceV1.swagger.meta.paths = {
       ],
       summary: 'Logging in.',
       description: 'By giving existing username and password you get login credentials.',
-      produces: 'application/json',
+      produces: ['application/json'],
       parameters: [
         MaintenanceV1.swagger.params.login,
       ],
@@ -53,7 +53,7 @@ MaintenanceV1.swagger.meta.paths = {
       ],
       summary: 'List and search users.',
       description: 'By passing options you can search users in system.',
-      produces: 'application/json',
+      produces: ['application/json'],
       parameters: [
         MaintenanceV1.swagger.params.optionalSearch,
         MaintenanceV1.swagger.params.userOrganizationId,
@@ -100,7 +100,7 @@ MaintenanceV1.swagger.meta.paths = {
       ],
       summary: 'Adds a new user.',
       description: 'Adds a new user. On success, returns newly added object.',
-      produces: 'application/json',
+      produces: ['application/json'],
       parameters: [
         MaintenanceV1.swagger.params.userDataAdd,
       ],
@@ -140,7 +140,7 @@ MaintenanceV1.swagger.meta.paths = {
       ],
       summary: 'Search Users one by one with userID.',
       description: 'Returns user data with given ID.',
-      produces: 'application/json',
+      produces: ['application/json'],
       parameters: [
         MaintenanceV1.swagger.params.userId,
       ],
@@ -266,7 +266,7 @@ MaintenanceV1.swagger.meta.paths = {
       ],
       summary: 'List and search user based on addition date.',
       description: 'Returns users based on addition date.',
-      produces: 'application/json',
+      produces: ['application/json'],
       parameters: [
         MaintenanceV1.swagger.params.since,
         MaintenanceV1.swagger.params.userOrganizationId,
