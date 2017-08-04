@@ -565,12 +565,11 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
 
       // Do not include password in response
       const options = {};
-      const excludeFields = {};
-      excludeFields.services = 0;
-      excludeFields.createdAt = 0;
-      excludeFields.profile = 0;
-      excludeFields.roles = 0;
-      options.fields = excludeFields;
+      const includeFields = {};
+      includeFields._id = 1;
+      includeFields.username = 1;
+      includeFields.emails = 1;
+      options.fields = includeFields;
 
       return {
         statusCode: 200,
@@ -741,12 +740,11 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
 
       // Do not include password in response
       const options = {};
-      const excludeFields = {};
-      excludeFields.services = 0;
-      excludeFields.createdAt = 0;
-      excludeFields.profile = 0;
-      excludeFields.roles = 0;
-      options.fields = excludeFields;
+      const includeFields = {};
+      includeFields._id = 1;
+      includeFields.username = 1;
+      includeFields.emails = 1;
+      options.fields = includeFields;
 
       // Get Organization document after managerIds update
       organization = Organizations.findOne(organizationId);
@@ -882,12 +880,11 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
 
       // Do not include password in response
       const options = {};
-      const excludeFields = {};
-      excludeFields.services = 0;
-      excludeFields.createdAt = 0;
-      excludeFields.profile = 0;
-      excludeFields.roles = 0;
-      options.fields = excludeFields;
+      const includeFields = {};
+      includeFields._id = 1;
+      includeFields.username = 1;
+      includeFields.emails = 1;
+      options.fields = includeFields;
 
       return {
         statusCode: 200,
