@@ -94,7 +94,7 @@ MaintenanceV1.addRoute('organizations', {
       return {
         statusCode: 200,
         body: {
-          status: 'Success',
+          title: 'Success',
           data: Organizations.find(query, options).fetch(),
         },
       };
@@ -171,8 +171,11 @@ MaintenanceV1.addRoute('organizations', {
       const organizationId = Organizations.insert(organizationData);
 
       return {
-        status: 'Success',
-        data: Organizations.findOne(organizationId),
+        statusCode: 200,
+        body: {
+          title: 'Organization added successfully',
+          data: Organizations.findOne(organizationId),
+        },
       };
     },
   },
@@ -218,6 +221,7 @@ MaintenanceV1.addRoute('organizations/:id', {
         return {
           statusCode: 200,
           body: {
+            title: 'Organization found',
             data: organization,
           },
         };
@@ -226,8 +230,8 @@ MaintenanceV1.addRoute('organizations/:id', {
       return {
         statusCode: 404,
         body: {
-          status: 'fail',
-          message: 'Organization is not found with specified ID',
+          title: 'Organization not found',
+          detail: 'Organization with specified ID is not found',
         },
       };
     },
@@ -319,7 +323,7 @@ MaintenanceV1.addRoute('organizations/:id', {
           return {
             statusCode: 200,
             body: {
-              status: 'Success updating',
+              title: 'Organization updated successfully',
               data: Organizations.findOne(organizationId),
             },
           };
@@ -329,8 +333,8 @@ MaintenanceV1.addRoute('organizations/:id', {
         return {
           statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'You do not have permission for editing this Organization',
+            title: 'User does not have permission',
+            detail: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -339,8 +343,8 @@ MaintenanceV1.addRoute('organizations/:id', {
       return {
         statusCode: 404,
         body: {
-          status: 'Fail',
-          message: 'Organization is not found with specified ID',
+          title: 'Organization is not found',
+          detail: 'Organization with specified ID is not found',
         },
       };
     },
@@ -398,7 +402,7 @@ MaintenanceV1.addRoute('organizations/:id', {
           return {
             statusCode: 200,
             body: {
-              status: 'Organization successfully removed',
+              title: 'Organization removed successfully',
             },
           };
         }
@@ -407,8 +411,8 @@ MaintenanceV1.addRoute('organizations/:id', {
         return {
           statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'You do not have permission for removing this Organization',
+            title: 'User does not have permission',
+            detail: 'You do not have permission for removing this Organization',
           },
         };
       }
@@ -417,8 +421,8 @@ MaintenanceV1.addRoute('organizations/:id', {
       return {
         statusCode: 404,
         body: {
-          status: 'Fail',
-          message: 'Organization is not found with specified ID',
+          title: 'Organization is not found',
+          detail: 'Organization with specified ID is not found',
         },
       };
     },
@@ -443,9 +447,9 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
 
    There is returned two lists:
    * idList: list of all Managers' IDs
-   * data: list of Managers with contact information
+   * data: list (matching to query parameters) of Managers with contact information
 
-   The lists are differing from each other in case a Manager account is removed,
+   The lists can differ from each other in such a case a Manager account is removed,
    but the Manager list is not updated accordingly.
       `,
       parameters: [
@@ -506,8 +510,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Organization not found',
+            title: 'Organization not found',
+            detail: 'Bad parameter: Organization not found',
           },
         };
       }
@@ -521,8 +525,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'You do not have permission for editing this Organization',
+            title: 'Forbidden operation',
+            detail: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -571,7 +575,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       return {
         statusCode: 200,
         body: {
-          status: 'Success',
+          title: 'Organization managers found',
           idList: organization.managerIds,
           data: Meteor.users.find({ _id: { $in: managerSearchList } }, options).fetch(),
         },
@@ -653,8 +657,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Organization is not found with specified ID',
+            title: 'Organization not found',
+            detail: 'Organization with specified ID is not found',
           },
         };
       }
@@ -669,8 +673,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'You do not have permission for editing this Organization',
+            title: 'Forbidden operation',
+            detail: 'You do not have permission to edit this Organization',
           },
         };
       }
@@ -680,8 +684,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'New Manager email address(es) are missing.',
+            title: 'Missing parameter',
+            detail: 'New Manager email address(es) are missing.',
           },
         };
       }
@@ -696,8 +700,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'New Manager email address(es) are erroneous.',
+            title: 'Missing parameter',
+            detail: 'New Manager email address(es) are erroneous.',
           },
         };
       }
@@ -724,8 +728,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'One or more Users have no account or already are a Manager in Organization',
+            title: 'Bad parameter',
+            detail: 'One or more Users have no account or already are a Manager in Organization',
           },
         };
       }
@@ -750,7 +754,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       return {
         statusCode: 200,
         body: {
-          status: 'Success',
+          title: 'Manager(s) addedd successfully',
           idList: organization.managerIds,
           data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
         },
@@ -819,8 +823,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Organization is not found with specified ID',
+            title: 'Organization not found',
+            detail: 'Bad parameter: Organization with specified ID is not found',
           },
         };
       }
@@ -834,8 +838,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'You do not have permission for editing this Organization',
+            title: 'Forbidden operation',
+            detail: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -847,8 +851,19 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Manager ID not given.',
+            title: 'Parameter missing',
+            detail: 'Manager ID is not given in request.',
+          },
+        };
+      }
+
+      // Check if user account for manager exists
+      if (!Meteor.users.findOne(managerId)) {
+        return {
+          statusCode: 404,
+          body: {
+            title: 'Not found',
+            detail: 'User has no User account.',
           },
         };
       }
@@ -859,19 +874,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Queried User is not Manager in Organization.',
-          },
-        };
-      }
-
-      // Check if user account for manager exists
-      if (!Meteor.users.findOne(managerId)) {
-        return {
-          statusCode: 404,
-          body: {
-            status: 'Fail',
-            message: 'Bad parameter: User exists but user data not found.',
+            title: 'Not found',
+            detail: 'Queried User is not a Manager in Organization.',
           },
         };
       }
@@ -888,7 +892,7 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       return {
         statusCode: 200,
         body: {
-          status: 'Success',
+          title: 'Manager found successfully',
           data: Meteor.users.findOne({ _id: managerId }, options),
         },
       };
@@ -944,8 +948,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Organization is not found with specified ID',
+            title: 'Organization not found',
+            detail: 'Organization with specified ID is not found',
           },
         };
       }
@@ -959,8 +963,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'You do not have permission for editing this Organization',
+            title: 'Forbidden operation',
+            detail: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -972,8 +976,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Manager ID not given.',
+            title: 'Parameter not found',
+            detail: 'Missing parameter: Manager ID not given.',
           },
         };
       }
@@ -981,10 +985,10 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       // Admin/Manager is not allowed to remove self
       if (removeManagerId === requestorId) {
         return {
-          statusCode: 404,
+          statusCode: 403,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Can not remove self.',
+            title: 'Removal not allowed',
+            detail: 'Bad parameter: Can not remove self.',
           },
         };
       }
@@ -996,8 +1000,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            status: 'Fail',
-            message: 'Bad parameter: Manager not found in Organization.',
+            title: 'Manager not found',
+            detail: 'Bad parameter: Manager not found in Organization.',
           },
         };
       }
@@ -1008,8 +1012,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       return {
         statusCode: 200,
         body: {
-          status: 'Success',
-          data: Organizations.findOne(organizationId),
+          title: 'Manager deleted successfully',
+          message: 'Manager deleted successfully.',
         },
       };
     },
