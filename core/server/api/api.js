@@ -258,7 +258,7 @@ ApiV1.swagger = {
   },
 };
 
-// Generate Swagger to route /rest/v1/swagger_api.json
-ApiV1.addSwagger('swagger_api.json');
+// Generate Swagger to route /rest/v1/api_catalog.json
+ApiV1.addSwagger('api_catalog.json');
 
 export default ApiV1;

@@ -11,7 +11,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import MaintenanceV1 from '/core/server/maintenance';
+import MaintenanceV1 from '/core/server/api/maintenance';
 import Organizations from '/organizations/collection';
 
 // Npm packages imports
