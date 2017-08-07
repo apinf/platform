@@ -114,14 +114,6 @@ MaintenanceV1.swagger = {
     },
     managerEmail: {
       name: 'managerEmail',
-      in: 'body',
-      description: 'Email address(es) of new Manager(s). Separate email addresses with a space.',
-      schema: {
-        $ref: '#/definitions/managerEmailList',
-      },
-    },
-    managerQueryEmail: {
-      name: 'managerEmail',
       in: 'query',
       description: 'Email address of Organization Manager',
       required: false,
