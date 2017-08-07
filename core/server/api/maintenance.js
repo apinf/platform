@@ -141,6 +141,14 @@ MaintenanceV1.swagger = {
       required: false,
       type: 'string',
     },
+    newManagerEmail: {
+      name: 'newManagerEmail',
+      in: 'body',
+      description: 'Email address of new Manager.',
+      schema: {
+        $ref: '#/definitions/newManagerEmail',
+      },
+    },
     optionalSearch: {
       name: 'q',
       in: 'query',
@@ -421,10 +429,10 @@ MaintenanceV1.swagger = {
         },
       },
     },
-    managerEmailList: {
-      required: ['managerEmail'],
+    newManagerEmail: {
+      required: ['newManagerEmail'],
       properties: {
-        managerEmail: {
+        newManagerEmail: {
           type: 'string',
           description: 'Email address for new Manager',
           example: 'john.doe@apinf.io',
