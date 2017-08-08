@@ -11,23 +11,23 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import MaintenanceV1 from '/core/server/api/maintenance';
+import ManagementV1 from '/rest_apis/management';
 import Organizations from '/organizations/collection';
 
 // Npm packages imports
 import _ from 'lodash';
 
-MaintenanceV1.swagger.meta.paths = {
+ManagementV1.swagger.meta.paths = {
   '/login': {
     post: {
       tags: [
-        MaintenanceV1.swagger.tags.login,
+        ManagementV1.swagger.tags.login,
       ],
       summary: 'Logging in.',
       description: 'By giving existing username and password you get login credentials.',
       produces: 'application/json',
       parameters: [
-        MaintenanceV1.swagger.params.login,
+        ManagementV1.swagger.params.login,
       ],
       responses: {
         200: {
@@ -49,17 +49,17 @@ MaintenanceV1.swagger.meta.paths = {
   '/users': {
     get: {
       tags: [
-        MaintenanceV1.swagger.tags.users,
+        ManagementV1.swagger.tags.users,
       ],
       summary: 'List and search users.',
       description: 'By passing options you can search users in system.',
       produces: 'application/json',
       parameters: [
-        MaintenanceV1.swagger.params.optionalSearch,
-        MaintenanceV1.swagger.params.userOrganizationId,
-        MaintenanceV1.swagger.params.skip,
-        MaintenanceV1.swagger.params.limit,
-        MaintenanceV1.swagger.params.sortBy,
+        ManagementV1.swagger.params.optionalSearch,
+        ManagementV1.swagger.params.userOrganizationId,
+        ManagementV1.swagger.params.skip,
+        ManagementV1.swagger.params.limit,
+        ManagementV1.swagger.params.sortBy,
       ],
       responses: {
         200: {
@@ -96,13 +96,13 @@ MaintenanceV1.swagger.meta.paths = {
     },
     post: {
       tags: [
-        MaintenanceV1.swagger.tags.users,
+        ManagementV1.swagger.tags.users,
       ],
       summary: 'Adds a new user.',
       description: 'Adds a new user. On success, returns newly added object.',
       produces: 'application/json',
       parameters: [
-        MaintenanceV1.swagger.params.userDataAdd,
+        ManagementV1.swagger.params.userDataAdd,
       ],
       responses: {
         201: {
@@ -136,13 +136,13 @@ MaintenanceV1.swagger.meta.paths = {
   '/users/{id}': {
     get: {
       tags: [
-        MaintenanceV1.swagger.tags.users,
+        ManagementV1.swagger.tags.users,
       ],
       summary: 'Search Users one by one with userID.',
       description: 'Returns user data with given ID.',
       produces: 'application/json',
       parameters: [
-        MaintenanceV1.swagger.params.userId,
+        ManagementV1.swagger.params.userId,
       ],
       responses: {
         200: {
@@ -179,12 +179,12 @@ MaintenanceV1.swagger.meta.paths = {
     },
     delete: {
       tags: [
-        MaintenanceV1.swagger.tags.users,
+        ManagementV1.swagger.tags.users,
       ],
       summary: 'Delete Users one by one with userID.',
       description: 'Deletes the identified User.',
       parameters: [
-        MaintenanceV1.swagger.params.userId,
+        ManagementV1.swagger.params.userId,
       ],
       responses: {
         200: {
@@ -225,13 +225,13 @@ MaintenanceV1.swagger.meta.paths = {
     },
     put: {
       tags: [
-        MaintenanceV1.swagger.tags.users,
+        ManagementV1.swagger.tags.users,
       ],
       summary: 'Update User\'s data.',
       description: 'Updates data of a User indicated by user ID.',
       parameters: [
-        MaintenanceV1.swagger.params.userId,
-        MaintenanceV1.swagger.params.userDataUpdate,
+        ManagementV1.swagger.params.userId,
+        ManagementV1.swagger.params.userDataUpdate,
       ],
       responses: {
         200: {
@@ -262,16 +262,16 @@ MaintenanceV1.swagger.meta.paths = {
   '/users/updates': {
     get: {
       tags: [
-        MaintenanceV1.swagger.tags.users,
+        ManagementV1.swagger.tags.users,
       ],
       summary: 'List and search user based on addition date.',
       description: 'Returns users based on addition date.',
       produces: 'application/json',
       parameters: [
-        MaintenanceV1.swagger.params.since,
-        MaintenanceV1.swagger.params.userOrganizationId,
-        MaintenanceV1.swagger.params.skip,
-        MaintenanceV1.swagger.params.limit,
+        ManagementV1.swagger.params.since,
+        ManagementV1.swagger.params.userOrganizationId,
+        ManagementV1.swagger.params.skip,
+        ManagementV1.swagger.params.limit,
       ],
       responses: {
         200: {
@@ -311,7 +311,7 @@ MaintenanceV1.swagger.meta.paths = {
 
 // Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
 // Meteor.users collection
-MaintenanceV1.addCollection(Meteor.users, {
+ManagementV1.addCollection(Meteor.users, {
   excludedEndpoints: [],
   routeOptions: {
     authRequired: true,
@@ -780,7 +780,7 @@ MaintenanceV1.addCollection(Meteor.users, {
 });
 
 // Request /rest/v1/users/updates for Users collection
-MaintenanceV1.addRoute('users/updates', {
+ManagementV1.addRoute('users/updates', {
   get: {
     authRequired: true,
     roleRequired: ['admin'],

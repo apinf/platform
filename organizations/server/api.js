@@ -7,24 +7,24 @@
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import MaintenanceV1 from '/core/server/api/maintenance';
+import ManagementV1 from '/rest_apis/management';
 import Organizations from '/organizations/collection';
 import { Accounts } from 'meteor/accounts-base';
 
 // Request /rest/v1/organizations for Organizations collection
-MaintenanceV1.addRoute('organizations', {
+ManagementV1.addRoute('organizations', {
   // Return a list of organizations
   get: {
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'List and search organizations.',
       description: 'List and search organizations.',
       parameters: [
-        MaintenanceV1.swagger.params.optionalSearch,
-        MaintenanceV1.swagger.params.skip,
-        MaintenanceV1.swagger.params.limit,
+        ManagementV1.swagger.params.optionalSearch,
+        ManagementV1.swagger.params.skip,
+        ManagementV1.swagger.params.limit,
       ],
       responses: {
         200: {
@@ -105,16 +105,16 @@ MaintenanceV1.addRoute('organizations', {
     roleRequired: ['admin'],
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
-      summary: 'Add Organization to catalog.',
-      description: 'Adds an Organization to catalog. On success, returns newly added object.',
+      summary: 'Add a new Organization.',
+      description: 'Adds a new Organization. On success, returns newly added object.',
       parameters: [
-        MaintenanceV1.swagger.params.organization,
+        ManagementV1.swagger.params.organization,
       ],
       responses: {
         200: {
-          description: 'Organization successfully added',
+          description: 'Organization added successfully',
           schema: {
             type: 'object',
             properties: {
@@ -182,22 +182,22 @@ MaintenanceV1.addRoute('organizations', {
 });
 
 // Request /rest/v1/organizations/:id for Organizations collection
-MaintenanceV1.addRoute('organizations/:id', {
+ManagementV1.addRoute('organizations/:id', {
   // Return the entity with the given :id
   get: {
     authRequired: false,
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Fetch Organization with specified ID.',
       description: 'Returns one Organization with specified ID or nothing if not match found.',
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
+        ManagementV1.swagger.params.organizationId,
       ],
       responses: {
         200: {
-          description: 'Returns organization',
+          description: 'Organization found',
           schema: {
             type: 'object',
             properties: {
@@ -208,30 +208,44 @@ MaintenanceV1.addRoute('organizations/:id', {
           },
         },
         404: {
-          description: 'Bad parameter',
+          description: 'Organization not found',
         },
       },
     },
     action () {
       const organizationId = this.urlParams.id;
+      if (!organizationId) {
+        return {
+          statusCode: 404,
+          body: {
+            title: 'Organization not found',
+            detail: 'Organization ID nopt provided',
+          },
+        };
+      }
 
       const organization = Organizations.findOne(organizationId);
 
-      if (organization) {
+      /* Note! This one catches the case when user aims at
+               organization/:id/managers
+               but :id is missing. --> organization/managers
+       */
+      if (!organization) {
+        const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
         return {
-          statusCode: 200,
+          statusCode: 404,
           body: {
-            title: 'Organization found',
-            data: organization,
+            title: 'Organization not found',
+            detail: detailLine,
           },
         };
       }
 
       return {
-        statusCode: 404,
+        statusCode: 200,
         body: {
-          title: 'Organization not found',
-          detail: 'Organization with specified ID is not found',
+          title: 'Organization found',
+          data: organization,
         },
       };
     },
@@ -241,7 +255,7 @@ MaintenanceV1.addRoute('organizations/:id', {
     authRequired: true,
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Update Organization.',
       description: `
@@ -252,8 +266,8 @@ MaintenanceV1.addRoute('organizations/:id', {
    Parameters can be given one by one or several ones at a time.
       `,
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
-        MaintenanceV1.swagger.params.organization,
+        ManagementV1.swagger.params.organizationId,
+        ManagementV1.swagger.params.organization,
       ],
       responses: {
         200: {
@@ -289,46 +303,23 @@ MaintenanceV1.addRoute('organizations/:id', {
       const organizationId = this.urlParams.id;
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
+      // Check if Organization exists
+      if (!organization) {
+        // Organization doesn't exist
+        return {
+          statusCode: 404,
+          body: {
+            title: 'Organization is not found',
+            detail: 'Organization with specified ID is not found',
+          },
+        };
+      }
+      // Get ID of User
+      const userId = this.userId;
+      const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
 
-      if (organization) {
-        // Get ID of User
-        const userId = this.userId;
-        const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
-
-        // Make sure user has permission for action
-        if (userCanManage) {
-          // Get data from body parameters
-          const bodyParams = this.bodyParams;
-
-          // If bodyParams doesn't contain any fields
-          // then organizationData JSON doesn't contain it as well
-          const organizationData = {
-            name: bodyParams.name,
-            url: bodyParams.url,
-            description: bodyParams.description,
-
-            'contact.person': bodyParams.contact_name,
-            'contact.phone': bodyParams.contact_phone,
-            'contact.email': bodyParams.contact_email,
-
-            'socialMedia.facebook': bodyParams.facebook,
-            'socialMedia.instagram': bodyParams.instagram,
-            'socialMedia.twitter': bodyParams.twitter,
-            'socialMedia.linkedIn': bodyParams.linkedIn,
-          };
-
-          // Update Organization document
-          Organizations.update(organizationId, { $set: organizationData });
-
-          return {
-            statusCode: 200,
-            body: {
-              title: 'Organization updated successfully',
-              data: Organizations.findOne(organizationId),
-            },
-          };
-        }
-
+      // Make sure user has permission for action
+      if (!userCanManage) {
         // Organization exists but user can not manage
         return {
           statusCode: 403,
@@ -338,27 +329,49 @@ MaintenanceV1.addRoute('organizations/:id', {
           },
         };
       }
+      // Get data from body parameters
+      const bodyParams = this.bodyParams;
 
-      // Organization doesn't exist
+      // If bodyParams doesn't contain any fields
+      // then organizationData JSON doesn't contain it as well
+      const organizationData = {
+        name: bodyParams.name,
+        url: bodyParams.url,
+        description: bodyParams.description,
+
+        'contact.person': bodyParams.contact_name,
+        'contact.phone': bodyParams.contact_phone,
+        'contact.email': bodyParams.contact_email,
+
+        'socialMedia.facebook': bodyParams.facebook,
+        'socialMedia.instagram': bodyParams.instagram,
+        'socialMedia.twitter': bodyParams.twitter,
+        'socialMedia.linkedIn': bodyParams.linkedIn,
+      };
+
+      // Update Organization document
+      Organizations.update(organizationId, { $set: organizationData });
+
       return {
-        statusCode: 404,
+        statusCode: 200,
         body: {
-          title: 'Organization is not found',
-          detail: 'Organization with specified ID is not found',
+          title: 'Organization updated successfully',
+          data: Organizations.findOne(organizationId),
         },
       };
     },
   },
+
   delete: {
     authRequired: true,
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Organization from catalog.',
       description: 'Deletes the identified Organization from catalog.',
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
+        ManagementV1.swagger.params.organizationId,
       ],
       responses: {
         200: {
@@ -389,25 +402,22 @@ MaintenanceV1.addRoute('organizations/:id', {
       const organization = Organizations.findOne(organizationId);
 
       // Make sure Organization exists
-      if (organization) {
+      if (!organization) {
+        // Organization doesn't exist
+        return {
+          statusCode: 404,
+          body: {
+            title: 'Organization is not found',
+            detail: 'Organization with specified ID is not found',
+          },
+        };
+      }
         // Get User ID
-        const userId = this.userId;
-        const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
+      const userId = this.userId;
+      const userCanManage = Meteor.call('userCanManageOrganization', userId, organization);
 
-        // User has permission for action
-        if (userCanManage) {
-          // Remove Organization document
-          Meteor.call('removeOrganization', organization._id);
-
-          return {
-            statusCode: 200,
-            body: {
-              title: 'Organization removed successfully',
-            },
-          };
-        }
-
-        // User doesn't have permission for action
+      // User has to have permission for action
+      if (!userCanManage) {
         return {
           statusCode: 403,
           body: {
@@ -417,12 +427,13 @@ MaintenanceV1.addRoute('organizations/:id', {
         };
       }
 
-      // Organization doesn't exist
+      // Remove Organization document
+      Meteor.call('removeOrganization', organization._id);
+
       return {
-        statusCode: 404,
+        statusCode: 200,
         body: {
-          title: 'Organization is not found',
-          detail: 'Organization with specified ID is not found',
+          title: 'Organization removed successfully',
         },
       };
     },
@@ -430,13 +441,13 @@ MaintenanceV1.addRoute('organizations/:id', {
 });
 
 // Request /rest/v1/organizations/:id/managers for Organizations collection
-MaintenanceV1.addRoute('organizations/:id/managers', {
+ManagementV1.addRoute('organizations/:id/managers', {
   // Query the manager list or add new managers into it
   get: {
     authRequired: true,
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Get Organization Manager list.',
       description: `
@@ -453,9 +464,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
    but the Manager list is not updated accordingly.
       `,
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
-        MaintenanceV1.swagger.params.managerUsername,
-        MaintenanceV1.swagger.params.managerEmail,
+        ManagementV1.swagger.params.organizationId,
       ],
       responses: {
         200: {
@@ -490,7 +499,11 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Bad parameter',
+          description: `
+   Bad parameter
+   * Organization not found
+   * (Organization ID was not provided)
+          `,
         },
       },
       security: [
@@ -503,26 +516,28 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
     action () {
       // Get ID of Organization
       const organizationId = this.urlParams.id;
-      // Organization ID was not provided
-      if (!organizationId) {
-        return {
-          statusCode: 404,
-          body: {
-            title: 'Organization ID was not provided',
-            detail: 'Bad parameter: Organization ID was not provided',
-          },
-        };
-      }
+      // Note! It can not be checked here, if this parameter is not provided,
+      //       because in that case the parameters are shifted and endpoint is not found at all.
 
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
       // Organization doesn't exist
+      /* Note! This one does NOT catch the case when user aims at
+               organization/:id/managers/managerId
+               but :id is missing.
+               Because in that case --> organization/managers/:managerId
+               - organizationId is 'managers', although an ID was wxpected
+               - endpoint is :managerId, although 'managers' was expected
+        Only with organization/managers/managers is caught here!
+       */
+
       if (!organization) {
+        const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
         return {
           statusCode: 404,
           body: {
             title: 'Organization not found',
-            detail: 'Bad parameter: Organization not found',
+            detail: detailLine,
           },
         };
       }
@@ -541,38 +556,6 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           },
         };
       }
-      // Use list in final query
-      let managerSearchList = [];
-      // Is query limited by manager email or username
-      if (this.queryParams.managerEmail || this.queryParams.managerUsername) {
-        const managerEmail = this.queryParams.managerEmail;
-
-        if (managerEmail) {
-          // Get user account with matching email
-          const managerByEmail = Accounts.findUserByEmail(managerEmail);
-          // Add found Manager ID into search list if Manager
-          if (managerByEmail && organization.managerIds.includes(managerByEmail._id)) {
-            managerSearchList.push(managerByEmail._id);
-          }
-        }
-
-        const managerUsername = this.queryParams.managerUsername;
-
-        if (managerUsername) {
-          // Get user account with matching username
-          const managerByUsername = Accounts.findUserByUsername(managerUsername);
-          // Add found Manager ID into search list
-          if (managerByUsername && organization.managerIds.includes(managerByUsername._id)) {
-            // Add to list if not duplicate
-            if (!managerSearchList.includes(managerByUsername._id)) {
-              managerSearchList.push(managerByUsername._id);
-            }
-          }
-        }
-      } else {
-        // Search with manager list
-        managerSearchList = organization.managerIds;
-      }
 
       // Do not include password in response
       const options = {};
@@ -587,18 +570,19 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         body: {
           title: 'Organization managers found',
           managerIds: organization.managerIds,
-          data: Meteor.users.find({ _id: { $in: managerSearchList } }, options).fetch(),
+          data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
         },
       };
     },
   },
 
+  // Add a new manager to Organization
   post: {
     authRequired: true,
     roleRequired: ['admin', 'manager'],
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Add a new Manager into Organization.',
       description: `
@@ -610,12 +594,12 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
    On success, complete list of Organization Managers is returned.
       `,
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
-        MaintenanceV1.swagger.params.newManagerEmail,
+        ManagementV1.swagger.params.organizationId,
+        ManagementV1.swagger.params.newManagerEmail,
       ],
       responses: {
         200: {
-          description: 'Organization Manager successfully added',
+          description: 'Organization Manager added successfully',
           schema: {
             type: 'object',
             properties: {
@@ -644,7 +628,15 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Bad parameter',
+          description: `
+   Bad parameter
+   * New Manager's email address is missing
+   * User has no account
+   * User is already a Manager in this Organization
+   * Organization not found
+   * (Organization ID was not provided)
+
+          `,
         },
       },
       security: [
@@ -658,17 +650,9 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       // Get data from body parameters
       const bodyParams = this.bodyParams;
       // Get ID of Organization
+      // Note! It can not be checked here, if this parameter is not provided,
+      //       because in that case the parameters are shifted and endpoint is not found at all.
       const organizationId = this.urlParams.id;
-      // Organization ID was not provided
-      if (!organizationId) {
-        return {
-          statusCode: 404,
-          body: {
-            title: 'Organization ID was not provided',
-            detail: 'Bad parameter: Organization ID was not provided',
-          },
-        };
-      }
 
       // Get Organization document
       let organization = Organizations.findOne(organizationId);
@@ -710,22 +694,8 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
         };
       }
 
-      // Convert incoming parameter list (items separated with space) into array
-      const newManagerEmail = bodyParams.newManagerEmail;
-
-      // Check if manager list conversion was successful
-      if (!newManagerEmail) {
-        return {
-          statusCode: 404,
-          body: {
-            title: 'Missing parameter',
-            detail: 'New Manager email address missing.',
-          },
-        };
-      }
-
       // Get user account with matching email
-      const newManager = Accounts.findUserByEmail(newManagerEmail);
+      const newManager = Accounts.findUserByEmail(bodyParams.newManagerEmail);
 
       if (!newManager) {
         return {
@@ -767,7 +737,7 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
       return {
         statusCode: 200,
         body: {
-          title: 'Manager(s) addedd successfully',
+          title: 'Manager addedd successfully',
           managerIds: organization.managerIds,
           data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
         },
@@ -778,13 +748,13 @@ MaintenanceV1.addRoute('organizations/:id/managers', {
 });
 
 // Request /rest/v1/organizations/:id/managers/:managerId
-MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
+ManagementV1.addRoute('organizations/:id/managers/:managerId', {
   // Get contact information of a manager (:managerId) in given Organization (:id)
   get: {
     authRequired: true,
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Get Organization Manager username and email address.',
       description: `
@@ -794,8 +764,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
    username and email address.
       `,
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
-        MaintenanceV1.swagger.params.managerId,
+        ManagementV1.swagger.params.organizationId,
+        ManagementV1.swagger.params.managerId,
       ],
       responses: {
         200: {
@@ -816,7 +786,15 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Bad parameter',
+          description: `
+   Bad parameter
+   * Manager ID was not provided
+   * User has no User account
+   * Queried User is not a Manager in Organization
+   * Organization not found
+   * (Organization ID was not provided)
+
+          `,
         },
       },
       security: [
@@ -827,10 +805,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
       ],
     },
     action () {
-      // Get ID of Organization from request parameter
-      const organizationId = this.urlParams.id;
-      // Organization ID was not provided
-      if (!organizationId) {
+      // Is Organization ID provided
+      if (!this.urlParams.id) {
         return {
           statusCode: 404,
           body: {
@@ -839,6 +815,11 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           },
         };
       }
+      // Get ID of Organization from request parameter
+      // Note! It can not be checked here, if this parameter is not provided,
+      //       because in that case the parameters are shifted and endpoint is not found at all.
+      const organizationId = this.urlParams.id;
+
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
       // Organization must exist
@@ -875,7 +856,7 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           statusCode: 404,
           body: {
             title: 'Parameter missing',
-            detail: 'Manager ID is not given in request.',
+            detail: 'Manager ID was not provided.',
           },
         };
       }
@@ -921,11 +902,12 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
     },
   },
 
+  // Remove a manager (:managerId) from given Organization (:id)
   delete: {
     authRequired: true,
     swagger: {
       tags: [
-        MaintenanceV1.swagger.tags.organization,
+        ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Manager from Organization Manager list.',
       description: `
@@ -936,8 +918,8 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
    Note! Removing not existing Manager ID from list is considered failed operation.
       `,
       parameters: [
-        MaintenanceV1.swagger.params.organizationId,
-        MaintenanceV1.swagger.params.managerId,
+        ManagementV1.swagger.params.organizationId,
+        ManagementV1.swagger.params.managerId,
       ],
       responses: {
         200: {
@@ -947,10 +929,22 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'Authentication is required',
         },
         403: {
-          description: 'User does not have permission',
+          description: `
+   Forbidden operation
+   * User does not have permission
+   * Can not remove self
+
+          `,
         },
         404: {
-          description: 'Bad parameter',
+          description: `
+   Bad parameter
+   * Manager ID not provided
+   * Manager not found
+   * Organization not found
+   * (Organization ID was not provided)
+
+          `,
         },
       },
       security: [
@@ -963,16 +957,9 @@ MaintenanceV1.addRoute('organizations/:id/managers/:managerId', {
     action () {
       // Get ID of Organization
       const organizationId = this.urlParams.id;
-      // Organization ID was not provided
-      if (!organizationId) {
-        return {
-          statusCode: 404,
-          body: {
-            title: 'Organization ID was not provided',
-            detail: 'Bad parameter: Organization ID was not provided',
-          },
-        };
-      }
+      // Note! It can not be checked here, if this parameter is not provided,
+      //       because in that case the parameters are shifted and endpoint is not found at all.
+
       // Get Organization document
       const organization = Organizations.findOne(organizationId);
       // Organization must exist

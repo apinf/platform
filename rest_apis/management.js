@@ -6,7 +6,7 @@
 // Meteor contributed packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
-const MaintenanceV1 = new Restivus({
+const ManagementV1 = new Restivus({
   apiPath: 'rest',
   version: 'v1',
   defaultHeaders: {
@@ -18,14 +18,14 @@ const MaintenanceV1 = new Restivus({
 });
 
 // Add Restivus Swagger configuration - meta, tags, params, definitions
-MaintenanceV1.swagger = {
+ManagementV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
       description: `
    ## What is APInf?
 
-   APinf is open source API management and catalog. Solution supports both REST and MQTT proxies.
+   APinf is open source API management and catalog application. Solution supports both REST and MQTT proxies.
    You can have multiple proxies under one management.
 
    ----
@@ -71,7 +71,7 @@ MaintenanceV1.swagger = {
 
       `,
       version: '1.0.0',
-      title: 'Admin API for Maintaining Users and Organizations',
+      title: 'Admin API for Mananing Users and Organizations',
     },
     // Create  placeholder for storage paths for Users collection
     paths: {},
@@ -112,25 +112,11 @@ MaintenanceV1.swagger = {
         $ref: '#/definitions/loginRequest',
       },
     },
-    managerEmail: {
-      name: 'managerEmail',
-      in: 'query',
-      description: 'Email address of Organization Manager',
-      required: false,
-      type: 'string',
-    },
     managerId: {
       name: 'managerId',
       in: 'path',
       description: 'ID of User to be used in Manager list',
       required: true,
-      type: 'string',
-    },
-    managerUsername: {
-      name: 'managerUsername',
-      in: 'query',
-      description: 'Username of Organization Manager',
-      required: false,
       type: 'string',
     },
     newManagerEmail: {
@@ -605,6 +591,6 @@ MaintenanceV1.swagger = {
 };
 
 // Generate Swagger to route /rest/v1/maintenance.json
-MaintenanceV1.addSwagger('maintenance.json');
+ManagementV1.addSwagger('maintenance.json');
 
-export default MaintenanceV1;
+export default ManagementV1;
