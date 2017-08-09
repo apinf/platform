@@ -592,6 +592,6 @@ ManagementV1.swagger = {
 };
 
 // Generate Swagger to route /rest/v1/maintenance.json
-ManagementV1.addSwagger('maintenance.json');
+ManagementV1.addSwagger('management.json');
 
 export default ManagementV1;
