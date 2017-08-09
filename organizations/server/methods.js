@@ -154,8 +154,11 @@ Meteor.methods({
     // Look for Organization
     const organization = Organizations.findOne({ slug });
 
-    // Attach logo url
-    organization.logoUrl = organization.logoUrl();
+    // Make sure Organization exists
+    if (organization) {
+      // Attach logo url
+      organization.logoUrl = organization.logoUrl();
+    }
 
     // Return organization
     return (organization);

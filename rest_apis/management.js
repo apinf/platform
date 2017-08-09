@@ -71,7 +71,7 @@ ManagementV1.swagger = {
 
       `,
       version: '1.0.0',
-      title: 'Admin API for Mananing Users and Organizations',
+      title: 'Admin API for Managing Users and Organizations',
     },
     // Create  placeholder for storage paths for Users collection
     paths: {},

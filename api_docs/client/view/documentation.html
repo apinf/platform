@@ -7,29 +7,45 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="panel panel-default">
     {{# if Template.subscriptionsReady }}
       <div class="panel-heading">
-        {{# if api.currentUserCanManage }}
-          <button
-            id="manage-api-documentation"
-            class="btn btn-xs btn-info pull-right">
-            <i class="fa fa-pencil"></i>&nbsp;
-            {{_ "apiDocumentation_manageDocumentation_buttonText" }}
-          </button>
-        {{/ if }}
-        {{# if codegenServerExists }}
-          {{# if documentationExists }}
+        <div class="pull-right">
+          {{# if codegenServerExists }}
+            {{# if documentationExists }}
+              <button
+                id="sdk-code-generator"
+                class="btn btn-info btn-xs"
+                data-toggle="tooltip"
+                title="{{_ 'apiDocumentation_tooltipSDKGeneratorButton' }}">
+                {{_ "apiDocumentation_sdkGenerateButton" }}
+              </button>
+            {{/ if }} <!-- /if documentation exists -->
+          {{/ if }}<!-- /if codegen server exists -->
+          {{# if api.currentUserCanManage }}
+            {{# if displayEditor }}
+              <button
+                class="btn btn-xs btn-info editor">
+                <i class="fa fa-file-text-o"></i>&nbsp;
+                {{_ "apiDocumentation_buttonText_closeEditor" }}
+              </button>
+            {{ else }}
+              <button
+                class="btn btn-xs btn-info editor">
+                <i class="fa fa-file-text-o"></i>&nbsp;
+                {{_ "apiDocumentation_buttonText_openEditor" }}
+              </button>
+            {{/ if }}
             <button
-              id="sdk-code-generator"
-              class="btn btn-info btn-xs pull-right"
-              data-toggle="tooltip"
-              title="{{_ 'apiDocumentation_tooltipSDKGeneratorButton' }}">
-              {{_ "apiDocumentation_sdkGenerateButton" }}
+              id="manage-api-documentation"
+              class="btn btn-xs btn-info">
+              <i class="fa fa-pencil"></i>&nbsp;
+              {{_ "apiDocumentation_manageDocumentation_buttonText" }}
             </button>
-          {{/ if }} <!-- /if documentation exists -->
-        {{/ if }}<!-- /if codegen server exists -->
+          {{/ if }} <!-- /if currentUserCanManage -->
+        </div>
         <h2 id="documentation-title" class="panel-title clearfix">
           {{_ "apiDocumentation_Title" }}
         </h2>
       </div>
+
       <div class="panel-body">
         {{# if displayLinkBlock }}
           <div id="documentation-link-panel" class="panel panel-default">
@@ -75,12 +91,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </h2>
             </div>
             <div class="panel-body">
-              {{# if documentationExists }}
-                {{> swaggerUi api=api }}
+              {{# if displayEditor }}
+                {{> openApiEditor api=api }}
               {{ else }}
-                <i>
-                  {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
-                </i>
+                {{# if documentationExists }}
+                  {{> swaggerUi api=api }}
+                {{ else }}
+                  <i>
+                    {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
+                  </i>
+                {{/ if }}
               {{/ if }}
             </div>
           </div>

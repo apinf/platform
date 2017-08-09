@@ -110,6 +110,13 @@ CatalogV1.swagger = {
       format: 'int32',
       minimum: 0,
     },
+    managedAPIs: {
+      name: 'managedAPIs',
+      in: 'query',
+      description: 'Limit results to APIs which requesting user can manage.',
+      required: false,
+      type: 'boolean',
+    },
   },
   definitions: {
     // The schema defining the type used for the body parameter in POST or PUT method
