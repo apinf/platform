@@ -25,7 +25,8 @@ ManagementV1.swagger = {
       description: `
    ## What is APInf?
 
-   APinf is open source API management and catalog application. Solution supports both REST and MQTT proxies.
+   APinf is open source API management and catalog application.
+   Solution supports both REST and MQTT proxies.
    You can have multiple proxies under one management.
 
    ----
