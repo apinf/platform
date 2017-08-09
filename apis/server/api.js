@@ -11,20 +11,20 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Apis from '/apis/collection';
-import ApiV1 from '/core/server/api';
+import CatalogV1 from '/rest_apis/catalog';
 import Organizations from '/organizations/collection';
 
-ApiV1.swagger.meta.paths = {
+CatalogV1.swagger.meta.paths = {
   '/login': {
     post: {
       tags: [
-        ApiV1.swagger.tags.login,
+        CatalogV1.swagger.tags.login,
       ],
       summary: 'Logging in.',
       description: 'By giving existing username and password you get login credentials.',
       produces: ['application/json'],
       parameters: [
-        ApiV1.swagger.params.login,
+        CatalogV1.swagger.params.login,
       ],
       responses: {
         200: {
@@ -46,7 +46,7 @@ ApiV1.swagger.meta.paths = {
 };
 
 // Request /rest/v1/apis for Apis collection
-ApiV1.addCollection(Apis, {
+CatalogV1.addCollection(Apis, {
   routeOptions: {
     authRequired: false,
   },
@@ -55,7 +55,7 @@ ApiV1.addCollection(Apis, {
     getAll: {
       swagger: {
         tags: [
-          ApiV1.swagger.tags.api,
+          CatalogV1.swagger.tags.api,
         ],
         summary: 'List and search public API.',
         description: `
@@ -75,12 +75,11 @@ ApiV1.addCollection(Apis, {
         `,
 
         parameters: [
-          ApiV1.swagger.params.optionalSearch,
-          ApiV1.swagger.params.organizationApi,
-          ApiV1.swagger.params.skip,
-          ApiV1.swagger.params.limit,
-          ApiV1.swagger.params.lifecycle,
-          ApiV1.swagger.params.managedAPIs,
+          CatalogV1.swagger.params.optionalSearch,
+          CatalogV1.swagger.params.organizationApi,
+          CatalogV1.swagger.params.skip,
+          CatalogV1.swagger.params.limit,
+          CatalogV1.swagger.params.lifecycle,
         ],
         responses: {
           200: {
@@ -196,12 +195,12 @@ ApiV1.addCollection(Apis, {
       authRequired: false,
       swagger: {
         tags: [
-          ApiV1.swagger.tags.api,
+          CatalogV1.swagger.tags.api,
         ],
         summary: 'Fetch API with specified ID.',
         description: 'Returns one API with specified ID or nothing if there is not match found.',
         parameters: [
-          ApiV1.swagger.params.apiId,
+          CatalogV1.swagger.params.apiId,
         ],
         responses: {
           200: {
@@ -229,12 +228,12 @@ ApiV1.addCollection(Apis, {
       authRequired: true,
       swagger: {
         tags: [
-          ApiV1.swagger.tags.api,
+          CatalogV1.swagger.tags.api,
         ],
         summary: 'Add new API to catalog.',
         description: 'Adds an API to catalog. On success, returns newly added API object.',
         parameters: [
-          ApiV1.swagger.params.api,
+          CatalogV1.swagger.params.api,
         ],
         responses: {
           200: {
@@ -317,13 +316,13 @@ ApiV1.addCollection(Apis, {
       roleRequired: ['manager', 'admin'],
       swagger: {
         tags: [
-          ApiV1.swagger.tags.api,
+          CatalogV1.swagger.tags.api,
         ],
         summary: 'Update API.',
         description: 'Update an API.',
         parameters: [
-          ApiV1.swagger.params.apiId,
-          ApiV1.swagger.params.api,
+          CatalogV1.swagger.params.apiId,
+          CatalogV1.swagger.params.api,
         ],
         responses: {
           200: {
@@ -407,12 +406,12 @@ ApiV1.addCollection(Apis, {
       roleRequired: ['manager', 'admin'],
       swagger: {
         tags: [
-          ApiV1.swagger.tags.api,
+          CatalogV1.swagger.tags.api,
         ],
         summary: 'Delete API.',
         description: 'Deletes the identified API from the system.',
         parameters: [
-          ApiV1.swagger.params.apiId,
+          CatalogV1.swagger.params.apiId,
         ],
         responses: {
           200: {

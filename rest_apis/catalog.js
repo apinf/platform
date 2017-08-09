@@ -6,7 +6,7 @@
 // Meteor contributed packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
-const ApiV1 = new Restivus({
+const CatalogV1 = new Restivus({
   apiPath: 'rest',
   version: 'v1',
   defaultHeaders: {
@@ -18,7 +18,7 @@ const ApiV1 = new Restivus({
 });
 
 // Add Restivus Swagger configuration - meta, tags, params, definitions
-ApiV1.swagger = {
+CatalogV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
@@ -265,7 +265,7 @@ ApiV1.swagger = {
   },
 };
 
-// Generate Swagger to route /rest/v1/swagger_api.json
-ApiV1.addSwagger('swagger_api.json');
+// Generate Swagger to route /rest/v1/api_catalog.json
+CatalogV1.addSwagger('catalog.json');
 
-export default ApiV1;
+export default CatalogV1;
