@@ -5,9 +5,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
-FlowRouter.route('/settings/proxies', {
+// APInf imports
+import signedIn from '/core/client/lib/router';
+
+signedIn.route('/settings/proxies', {
   name: 'proxies',
   action () {
     BlazeLayout.render('masterLayout', { main: 'proxies' });
