@@ -9,7 +9,6 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Roles } from 'meteor/alanning:roles';
 
 // Define group for routes that require sign in
 const signedIn = FlowRouter.group({
@@ -49,19 +48,12 @@ const redirectToCatalogue = function () {
 };
 
 const requireAdminRole = function () {
-  // Get user ID
-  const userId = Meteor.userId();
-
-  if (userId) {
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-    if (!userIsAdmin) {
+  Meteor.call('userIsAdmin', (error, result) => {
+    if (!result) {
       // User is not authorized to access route
       FlowRouter.go('notAuthorized');
     }
-  } else {
-    FlowRouter.go('signIn');
-  }
+  });
 };
 
 FlowRouter.triggers.enter([redirectToCatalogue], { only: ['forgotPwd'] });
