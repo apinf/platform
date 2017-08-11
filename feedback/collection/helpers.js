@@ -28,6 +28,12 @@ Feedback.helpers({
     const sum = ss.sum(votes);
     return sum;
   },
+  author () {
+    // Fetch only the author's username for current feedback
+    const author = Meteor.users.findOne(this.authorId)
+
+    return author.username
+  },
   currentUserCanEdit () {
     // Get current userId
     const userId = Meteor.userId();
