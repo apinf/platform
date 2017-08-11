@@ -291,6 +291,7 @@
   "feedbackItem_topic": "Topic",
   "feedbackItem_editButton_text": "Edit",
   "feedbackItem_deleteButton_text": "Delete",
+  "feedbackItem_sentBy_text": "Sent by",
   "feedbackItem_usernotloggedin_errorMessage": "Error: Please sign in to vote",
   "feedback_feedbackForm_button": "Send feedback",
   "feedback_feedbackForm_description": "We welcome problem reports, feature ideas and general comments.",

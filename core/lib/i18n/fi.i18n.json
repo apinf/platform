@@ -882,6 +882,7 @@
     "feedbackItem_topic": "Aihe",
     "feedbackItem_editButton_text": "Muokkaa",
     "feedbackItem_deleteButton_text": "Poista",
+    "feedbackItem_sentBy_text": "Sent by",
     "feedbackItem_usernotloggedin_errorMessage": "Virhe: Kirjaudu sis\u00e4\u00e4n \u00e4\u00e4nest\u00e4\u00e4ksesi",
     "feedback_feedbackForm_button": "L\u00e4het\u00e4 palaute",
     "feedback_feedbackForm_description": "Vikaraportit, ominaisuusideat ja yleiset kommentit ovat tervetulleita.",
