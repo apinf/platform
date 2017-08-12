@@ -14,17 +14,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </span>
           <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-arrow-down down-vote {{ userDownvote }}"></span>
         </div>
-        <div class="col-md-2 feedback-type">
-          <span><b>{{_ "feedbackItem_type" }}:&nbsp;</b></span>
-          <span class="badge">
-            {{ feedbackType }}
-          </span>
-        </div>
-        <div class="col-md-8 feedback-topic">
-          <span><b>{{_ "feedbackItem_topic" }}:&nbsp;</b></span>
-          <span>
-            {{ item.topic }}
-          </span>
+        <div class="col-md-9">
+          <div class="feedback-type">
+            <span><b>{{_ "feedbackItem_type" }}:&nbsp;</b></span>
+            <span class="badge">
+              {{ feedbackType }}
+            </span>
+          </div>
+          <div class="feedback-topic">
+            <span><b>{{_ "feedbackItem_topic" }}:&nbsp;</b></span>
+            <span>
+              {{ item.topic }}
+            </span>
+          </div>
         </div>
         {{#if item.currentUserCanEdit }}
         <div class="btn-group pull-right">
