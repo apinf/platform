@@ -30,9 +30,9 @@ Feedback.helpers({
   },
   author () {
     // Fetch only the author's username for current feedback
-    const author = Meteor.users.findOne(this.authorId)
+    const author = Meteor.users.findOne(this.authorId);
 
-    return author.username
+    return author.username;
   },
   currentUserCanEdit () {
     // Get current userId
