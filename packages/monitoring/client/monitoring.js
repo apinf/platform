@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import { MonitoringSettings } from '/monitoring/collection';
+import { MonitoringSettings } from '/packages/monitoring/collection';
 
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance

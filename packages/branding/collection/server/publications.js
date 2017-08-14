@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import Branding from '/branding/collection';
+import Branding from '/packages/branding/collection';
 
 Meteor.publish('branding', () => {
   // Get Branding collection object

@@ -1,6 +1,6 @@
 // Collection imports
-import ApiMetadata from '/metadata/collection';
-import Apis from '/apis/collection';
+import ApiMetadata from '/packages/metadata/collection';
+import Apis from '/packages/apis/collection';
 
 ApiMetadata.allow({
   insert (userId, metadata) {

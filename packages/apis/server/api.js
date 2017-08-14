@@ -10,9 +10,9 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Apis from '/apis/collection';
-import CatalogV1 from '/rest_apis/catalog';
-import Organizations from '/organizations/collection';
+import Apis from '/packages/apis/collection';
+import CatalogV1 from '/packages/rest_apis/catalog';
+import Organizations from '/packages/organizations/collection';
 
 CatalogV1.swagger.meta.paths = {
   '/login': {

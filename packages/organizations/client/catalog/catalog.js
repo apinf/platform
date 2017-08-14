@@ -12,7 +12,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
-import Organizations from '/organizations/collection';
+import Organizations from '/packages/organizations/collection';
 
 Template.organizationCatalog.onCreated(function () {
   // Get reference to template instance

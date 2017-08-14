@@ -15,10 +15,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Apis from '/apis/collection';
-import DocumentationFiles from '/api_docs/files/collection';
-import ApiDocs from '/api_docs/collection';
-import Settings from '/settings/collection';
+import Apis from '/packages/apis/collection';
+import DocumentationFiles from '/packages/api_docs/files/collection';
+import ApiDocs from '/packages/api_docs/collection';
+import Settings from '/packages/settings/collection';
 
 const uploadingSpinner = new ReactiveVar(false);
 

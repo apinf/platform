@@ -4,8 +4,8 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Collection imports
-import Apis from '/apis/collection';
-import Organizations from '/organizations/collection';
+import Apis from '/packages/apis/collection';
+import Organizations from '/packages/organizations/collection';
 import OrganizationApis from '../';
 
 Apis.helpers({

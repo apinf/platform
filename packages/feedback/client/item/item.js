@@ -16,7 +16,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import moment from 'moment';
 
 // Collection imports
-import FeedbackVotes from '/feedback_votes/collection';
+import FeedbackVotes from '/packages/feedback_votes/collection';
 
 Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object

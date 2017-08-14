@@ -15,9 +15,9 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/apis/collection';
-import OrganizationApis from '/organization_apis/collection';
-import Organizations from '/organizations/collection';
+import Apis from '/packages/apis/collection';
+import OrganizationApis from '/packages/organization_apis/collection';
+import Organizations from '/packages/organizations/collection';
 
 Meteor.methods({
   getCurrentUserUnlinkedApis () {

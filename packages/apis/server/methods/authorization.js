@@ -13,8 +13,8 @@ import { Roles } from 'meteor/alanning:roles';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
 // Collection imports
-import Apis from '/apis/collection';
-import Settings from '/settings/collection';
+import Apis from '/packages/apis/collection';
+import Settings from '/packages/settings/collection';
 
 Meteor.methods({
   addAuthorizedUserByEmail (apiId, email) {

@@ -8,8 +8,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
-import { proxyBasePathRegEx, apiBasePathRegEx } from '/proxy_backends/collection/regex';
-import contactPhone from '/organizations/collection/regex';
+import { proxyBasePathRegEx, apiBasePathRegEx } from '/packages/proxy_backends/collection/regex';
+import contactPhone from '/packages/organizations/collection/regex';
 
 const invalidUrlMessage = TAPi18n.__('invalidUrlMessage');
 const invalidIdMessage = TAPi18n.__('invalidIdMessage');

@@ -7,8 +7,8 @@
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import ManagementV1 from '/rest_apis/management';
-import Organizations from '/organizations/collection';
+import ManagementV1 from '/packages/rest_apis/management';
+import Organizations from '/packages/organizations/collection';
 import { Accounts } from 'meteor/accounts-base';
 
 // Request /rest/v1/organizations for Organizations collection

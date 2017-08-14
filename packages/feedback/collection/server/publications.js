@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import FeedbackVotes from '/feedback_votes/collection';
+import FeedbackVotes from '/packages/feedback_votes/collection';
 
 Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
   // Make sure apiBackendId is a String

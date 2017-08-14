@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 import { DocHead } from 'meteor/kadira:dochead';
 
 // Collection imports
-import Branding from '/branding/collection';
+import Branding from '/packages/branding/collection';
 
 Template.home.onCreated(function () {
   // Get reference to template instance

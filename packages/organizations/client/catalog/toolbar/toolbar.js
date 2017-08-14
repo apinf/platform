@@ -11,7 +11,7 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
-import Organizations from '/organizations/collection';
+import Organizations from '/packages/organizations/collection';
 
 Template.organizationCatalogueToolbar.onRendered(function () {
   // Get reference to template instance

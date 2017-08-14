@@ -9,15 +9,15 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // Collection imports
-import ApiBacklogItems from '/backlog/collection';
-import ApiMetadata from '/metadata/collection';
-import Apis from '/apis/collection';
-import DocumentationFiles from '/api_docs/files/collection';
-import Feedback from '/feedback/collection';
-import OrganizationApis from '/organization_apis/collection';
-import ProxyBackends from '/proxy_backends/collection';
-import { MonitoringSettings, MonitoringData } from '/monitoring/collection';
-import Organizations from '/organizations/collection';
+import ApiBacklogItems from '/packages/backlog/collection';
+import ApiMetadata from '/packages/metadata/collection';
+import Apis from '/packages/apis/collection';
+import DocumentationFiles from '/packages/api_docs/files/collection';
+import Feedback from '/packages/feedback/collection';
+import OrganizationApis from '/packages/organization_apis/collection';
+import ProxyBackends from '/packages/proxy_backends/collection';
+import { MonitoringSettings, MonitoringData } from '/packages/monitoring/collection';
+import Organizations from '/packages/organizations/collection';
 
 Meteor.methods({
   // Remove API backend and related items

@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import ApiBackendRatings from '/ratings/collection';
+import ApiBackendRatings from '/packages/ratings/collection';
 
 // User rating for a single API Backend
 Meteor.publish('myApiBackendRating', function (apiBackendId) {

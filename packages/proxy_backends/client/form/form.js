@@ -15,9 +15,9 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import URI from 'urijs';
 
 // Collection imports
-import Proxies from '/proxies/collection';
-import ProxyBackends from '/proxy_backends/collection';
-import deleteProxyBackendConfig from '/proxy_backends/client/methods/delete_proxy_backend';
+import Proxies from '/packages/proxies/collection';
+import ProxyBackends from '/packages/proxy_backends/collection';
+import deleteProxyBackendConfig from '/packages/proxy_backends/client/methods/delete_proxy_backend';
 
 Template.proxyBackend.onCreated(() => {
   const instance = Template.instance();

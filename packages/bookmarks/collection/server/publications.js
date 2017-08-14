@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import ApiBookmarks from '/bookmarks/collection';
+import ApiBookmarks from '/packages/bookmarks/collection';
 
 Meteor.publish('userApiBookmarks', function () {
   // Get current user id

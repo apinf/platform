@@ -12,12 +12,12 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 
 // Collection imports
-import ApiBacklogItems from '/backlog/collection';
-import ApiDocs from '/api_docs/collection';
-import Feedback from '/feedback/collection';
-import Organizations from '/organizations/collection';
-import OrganizationApis from '/organization_apis/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import ApiBacklogItems from '/packages/backlog/collection';
+import ApiDocs from '/packages/api_docs/collection';
+import Feedback from '/packages/feedback/collection';
+import Organizations from '/packages/organizations/collection';
+import OrganizationApis from '/packages/organization_apis/collection';
+import ProxyBackends from '/packages/proxy_backends/collection';
 import Apis from '../';
 
 // eslint-disable-next-line prefer-arrow-callback

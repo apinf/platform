@@ -12,8 +12,8 @@ import { Template } from 'meteor/templating';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 // Collection imports
-import CoverPhoto from '/branding/cover_photo/collection';
-import Settings from '/settings/collection';
+import CoverPhoto from '/packages/branding/cover_photo/collection';
+import Settings from '/packages/settings/collection';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance

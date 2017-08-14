@@ -11,8 +11,8 @@ import { Template } from 'meteor/templating';
 import Clipboard from 'clipboard';
 
 // Collection imports
-import ApiKeys from '/api_keys/collection';
-import Proxies from '/proxies/collection';
+import ApiKeys from '/packages/api_keys/collection';
+import Proxies from '/packages/proxies/collection';
 
 Template.apiDetails.onCreated(function () {
   const instance = this;

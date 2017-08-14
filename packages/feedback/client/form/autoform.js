@@ -11,7 +11,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Apis from '/apis/collection';
+import Apis from '/packages/apis/collection';
 
 AutoForm.hooks({
   feedbackForm: {

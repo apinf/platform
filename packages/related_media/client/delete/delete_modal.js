@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import Posts from '/related_media/collection';
+import Posts from '/packages/related_media/collection';
 
 Template.deletePostConfirmation.events({
   'click #modal-delete-post': function (event, templateInstance) {

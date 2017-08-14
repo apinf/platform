@@ -13,8 +13,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import OrganizationCover from '/organizations/cover/collection/collection';
-import Organizations from '/organizations/collection';
+import OrganizationCover from '/packages/organizations/cover/collection/collection';
+import Organizations from '/packages/organizations/collection';
 
 // APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';

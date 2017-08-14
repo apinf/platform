@@ -12,7 +12,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
 // Collection imports
-import Settings from '/settings/collection';
+import Settings from '/packages/settings/collection';
 
 Meteor.methods({
   deleteAccount (userId) {

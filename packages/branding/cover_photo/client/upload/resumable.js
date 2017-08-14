@@ -11,8 +11,8 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
-import Branding from '/branding/collection';
-import CoverPhoto from '/branding/cover_photo/collection';
+import Branding from '/packages/branding/collection';
+import CoverPhoto from '/packages/branding/cover_photo/collection';
 
 // APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';

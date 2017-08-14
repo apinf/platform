@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import { MonitoringSettings } from '/monitoring/collection';
+import { MonitoringSettings } from '/packages/monitoring/collection';
 
 Meteor.publish('monitoringSettings', (apiId) => {
   // Make sure apiId is a String

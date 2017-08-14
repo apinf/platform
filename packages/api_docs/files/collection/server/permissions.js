@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import DocumentationFiles from '/api_docs/files/collection';
+import DocumentationFiles from '/packages/api_docs/files/collection';
 
 DocumentationFiles.allow({
   insert (userId) {

@@ -8,8 +8,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import ProxyBackends from '/proxy_backends/collection';
-import Proxies from '/proxies/collection';
+import ProxyBackends from '/packages/proxy_backends/collection';
+import Proxies from '/packages/proxies/collection';
 
 // Npm packages imports
 import URI from 'urijs';

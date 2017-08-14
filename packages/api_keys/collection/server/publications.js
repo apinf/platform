@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import ApiKeys from '/api_keys/collection';
+import ApiKeys from '/packages/api_keys/collection';
 
 // Returns logged in user's all API keys (Eg. Umbrella, Kong keys)
 Meteor.publish('apiKeysForCurrentUser', function () {

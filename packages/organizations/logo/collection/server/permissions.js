@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Collection imports
-import OrganizationLogo from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/packages/organizations/logo/collection/collection';
 
 OrganizationLogo.allow({
   insert () {

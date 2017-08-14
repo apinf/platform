@@ -9,7 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // Collection imports
-import OrganizationCover from '/organizations/cover/collection/collection';
+import OrganizationCover from '/packages/organizations/cover/collection/collection';
 
 Meteor.publish('organizationCoverById', (coverId) => {
   check(coverId, String);

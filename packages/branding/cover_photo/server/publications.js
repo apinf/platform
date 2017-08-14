@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import CoverPhoto from '/branding/cover_photo/collection';
+import CoverPhoto from '/packages/branding/cover_photo/collection';
 
 Meteor.publish('coverPhoto', () => {
   return CoverPhoto.find({
