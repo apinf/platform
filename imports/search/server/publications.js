@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 
 Meteor.publish('searchApiBackends', (searchValue) => {
   // Make sure searchValue is a String

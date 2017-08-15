@@ -7,8 +7,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import ApiKeys from '/packages/api_keys/collection';
-import Proxies from '/packages/proxies/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import Proxies from '/imports/proxies/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 
 Meteor.methods({
   createApiKey (apiId) {

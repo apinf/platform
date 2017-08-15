@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
-import Organizations from '/packages/organizations/collection/';
+import Organizations from '/imports/organizations/collection/';
 
 Template.organizationProfile.onCreated(function () {
   // Get reference to template instance

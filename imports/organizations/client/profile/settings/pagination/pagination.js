@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import Organizations from '/packages/organizations/collection/';
+import Organizations from '/imports/organizations/collection/';
 
 Template.organizationSettingsPagination.helpers({
   organizationsCollection () {

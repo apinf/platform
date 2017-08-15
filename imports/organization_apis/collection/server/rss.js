@@ -10,7 +10,7 @@ import { Meteor } from 'meteor/meteor';
 import { RssFeed } from 'meteor/raix:rssfeed';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 import Organizations from '/packages/organizations/collection';
 import OrganizationApis from '../';
 

@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 
 Meteor.methods({
   setAllApiBackendBookmarkCounts () {

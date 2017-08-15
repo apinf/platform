@@ -18,7 +18,7 @@ import _ from 'lodash';
 
 // Collection imports
 import OrganizationLogo from '/packages/organizations/logo/collection/collection';
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 import Organizations from './';
 
 Organizations.helpers({

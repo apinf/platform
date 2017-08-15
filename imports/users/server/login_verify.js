@@ -14,7 +14,7 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 
 // Collection imports
-import Settings from '/packages/settings/collection';
+import Settings from '/imports/settings/collection';
 
 // APInf imports
 import { mailSettingsValid } from '/core/helper_functions/validate_settings';

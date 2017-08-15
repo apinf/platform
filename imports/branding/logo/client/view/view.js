@@ -9,7 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
-import Branding from '/packages/branding/collection';
+import Branding from '/imports/branding/collection';
 import ProjectLogo from '/packages/branding/logo/collection';
 
 Template.viewProjectLogo.helpers({

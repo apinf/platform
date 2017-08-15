@@ -13,7 +13,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 // Collection imports
 import CoverPhoto from '/packages/branding/cover_photo/collection';
-import Settings from '/packages/settings/collection';
+import Settings from '/imports/settings/collection';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance

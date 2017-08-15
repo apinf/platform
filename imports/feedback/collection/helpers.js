@@ -10,7 +10,7 @@ import { Meteor } from 'meteor/meteor';
 import ss from 'simple-statistics';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 import FeedbackVotes from '/packages/feedback_votes/collection';
 import Feedback from './';
 

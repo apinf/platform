@@ -10,9 +10,9 @@ import { Mongo } from 'meteor/mongo';
 import { Migrations } from 'meteor/percolate:migrations';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
-import Proxies from '/packages/proxies/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import Apis from '/imports/apis/collection';
+import Proxies from '/imports/proxies/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 
 Migrations.add({
   version: 2,

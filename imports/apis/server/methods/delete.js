@@ -9,13 +9,13 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // Collection imports
-import ApiBacklogItems from '/packages/backlog/collection';
-import ApiMetadata from '/packages/metadata/collection';
-import Apis from '/packages/apis/collection';
-import DocumentationFiles from '/packages/api_docs/files/collection';
+import ApiBacklogItems from '/imports/backlog/collection';
+import ApiMetadata from '/imports/metadata/collection';
+import Apis from '/imports/apis/collection';
+import DocumentationFiles from '/imports/api_docs/files/collection';
 import Feedback from '/packages/feedback/collection';
 import OrganizationApis from '/packages/organization_apis/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 import { MonitoringSettings, MonitoringData } from '/packages/monitoring/collection';
 import Organizations from '/packages/organizations/collection';
 

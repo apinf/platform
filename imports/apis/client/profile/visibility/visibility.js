@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 
 Template.visibilityToggle.events({
   'click .changeVisibility': function () {

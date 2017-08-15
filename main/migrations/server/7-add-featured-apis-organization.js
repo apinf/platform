@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 import { Migrations } from 'meteor/percolate:migrations';
 
-import Organizations from '/packages/organizations/collection/';
+import Organizations from '/imports/organizations/collection/';
 
 Migrations.add({
   version: 7,

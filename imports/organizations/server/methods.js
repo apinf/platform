@@ -15,7 +15,7 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 import OrganizationApis from '/packages/organization_apis/collection';
 import Organizations from '/packages/organizations/collection';
 

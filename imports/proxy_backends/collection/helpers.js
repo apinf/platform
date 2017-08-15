@@ -7,9 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
-import Proxies from '/packages/proxies/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import Apis from '/imports/apis/collection';
+import Proxies from '/imports/proxies/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 
 ProxyBackends.helpers({
   apiName () {

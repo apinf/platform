@@ -17,7 +17,7 @@ import moment from 'moment';
 import 'moment/min/locales.min';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 
 Template.search.onCreated(function () {
   // Get reference to Template instance

@@ -4,8 +4,8 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Collection imports
-import Branding from '/packages/branding/collection';
-import Settings from '/packages/settings/collection';
+import Branding from '/imports/branding/collection';
+import Settings from '/imports/settings/collection';
 
 // Get site title from Branding
 export function getSiteTitle () {

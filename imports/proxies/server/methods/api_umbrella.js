@@ -15,9 +15,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
-import Proxies from '/packages/proxies/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import Apis from '/imports/apis/collection';
+import Proxies from '/imports/proxies/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 
 // APInf imports
 import hasValidApiUmbrellaSettings from '/packages/proxies/helper_functions/api_umbrella';

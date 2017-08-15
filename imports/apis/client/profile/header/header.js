@@ -2,7 +2,7 @@
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 
 Template.viewApiPageHeader.helpers({
   userShouldSeeBacklogTab () {

@@ -13,8 +13,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
-import Apis from '/packages/apis/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import Apis from '/imports/apis/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 
 // Npm packages imports
 import _ from 'lodash';

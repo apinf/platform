@@ -1,6 +1,6 @@
 import { Migrations } from 'meteor/percolate:migrations';
 
-import Apis from '/packages/apis/collection';
+import Apis from '/imports/apis/collection';
 
 Migrations.add({
   version: 6,

@@ -12,7 +12,7 @@ import Clipboard from 'clipboard';
 
 // Collection imports
 import ApiKeys from '/packages/api_keys/collection';
-import Proxies from '/packages/proxies/collection';
+import Proxies from '/imports/proxies/collection';
 
 Template.apiDetails.onCreated(function () {
   const instance = this;

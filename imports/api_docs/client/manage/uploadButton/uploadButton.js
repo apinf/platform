@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import DocumentationFiles from '/packages/api_docs/files/collection';
+import DocumentationFiles from '/imports/api_docs/files/collection';
 
 Template.manageApiDocumentationModalUploadButton.onRendered(() => {
   // Assign resumable browse to element

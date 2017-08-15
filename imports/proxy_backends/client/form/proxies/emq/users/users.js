@@ -13,7 +13,7 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Proxies from '/packages/proxies/collection';
+import Proxies from '/imports/proxies/collection';
 
 Template.emqUsers.onCreated(function () {
   const instance = this;

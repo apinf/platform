@@ -12,7 +12,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Branding from '/packages/branding/collection';
+import Branding from '/imports/branding/collection';
 import CoverPhoto from '/packages/branding/cover_photo/collection';
 
 Template.uploadCoverPhoto.helpers({

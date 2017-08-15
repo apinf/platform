@@ -11,9 +11,9 @@ import { Template } from 'meteor/templating';
 import _ from 'lodash';
 
 // Collection imports
-import ApiDocs from '/packages/api_docs/collection';
+import ApiDocs from '/imports/api_docs/collection';
 import ApiKeys from '/packages/api_keys/collection';
-import ProxyBackends from '/packages/proxy_backends/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
 
 Template.swaggerUiContent.onCreated(function () {
   const instance = this;

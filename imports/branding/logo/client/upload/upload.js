@@ -13,7 +13,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Branding from '/packages/branding/collection';
+import Branding from '/imports/branding/collection';
 import ProjectLogo from '/packages/branding/logo/collection';
 
 Template.uploadProjectLogo.events({
