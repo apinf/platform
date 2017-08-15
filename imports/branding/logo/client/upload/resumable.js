@@ -12,7 +12,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import Branding from '/imports/branding/collection';
-import ProjectLogo from '/packages/branding/logo/collection';
+import ProjectLogo from '/imports/branding/logo/collection';
 
 // APInf imports
 import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';

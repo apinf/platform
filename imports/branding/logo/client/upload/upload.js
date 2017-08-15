@@ -14,7 +14,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import Branding from '/imports/branding/collection';
-import ProjectLogo from '/packages/branding/logo/collection';
+import ProjectLogo from '/imports/branding/logo/collection';
 
 Template.uploadProjectLogo.events({
   'click .delete-projectLogo': function () {

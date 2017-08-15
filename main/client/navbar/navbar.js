@@ -15,7 +15,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Branding from '/imports/branding/collection';
-import ProjectLogo from '/packages/branding/logo/collection';
+import ProjectLogo from '/imports/branding/logo/collection';
 import Settings from '/imports/settings/collection';
 
 Template.navbar.onCreated(function () {

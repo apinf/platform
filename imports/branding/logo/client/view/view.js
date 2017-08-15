@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import Branding from '/imports/branding/collection';
-import ProjectLogo from '/packages/branding/logo/collection';
+import ProjectLogo from '/imports/branding/logo/collection';
 
 Template.viewProjectLogo.helpers({
   uploadedProjectLogoLink () {
