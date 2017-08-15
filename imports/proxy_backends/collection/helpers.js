@@ -1,0 +1,42 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Npm packages imports
+import _ from 'lodash';
+
+// Collection imports
+import Apis from '/imports/apis/collection';
+import Proxies from '/imports/proxies/collection';
+import ProxyBackends from '/imports/proxy_backends/collection';
+
+ProxyBackends.helpers({
+  apiName () {
+    // Get API ID
+    const apiId = this.apiId;
+    // Get API
+    const api = Apis.findOne(apiId);
+
+    // placeholder for API name
+    let apiName;
+
+    // Make sure API was found before accessing name property
+    if (api) {
+      // Set API Name from API
+      apiName = api.name;
+    }
+
+    return apiName;
+  },
+  proxyUrl () {
+    // Get Proxy ID
+    const proxyId = this.proxyId;
+
+    // Get Proxy item
+    const proxy = Proxies.findOne(proxyId);
+
+    // Returns Proxy URL if it exists else returns false
+    return _.get(proxy, 'apiUmbrella.url', false);
+  },
+});

@@ -270,7 +270,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import ApiMetadata from '../../collection';
 
 // APInf imports
-import formatDate from '/core/helper_functions/format_date';
+import formatDate from '/packages/core/helper_functions/format_date';
 
 // Npm packages imports
 import _ from 'lodash';
