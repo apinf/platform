@@ -7,13 +7,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-import contactPhone from '/packages/organizations/collection/regex';
-
 const invalidUrlMessage = TAPi18n.__('invalidUrlMessage');
 const invalidIdMessage = TAPi18n.__('invalidIdMessage');
 const invalidDomainMessage = TAPi18n.__('invalidDomainMessage');
 const invalidEmailMessage = TAPi18n.__('invalidEmailMessage');
-const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
 
 SimpleSchema.messages({
   regEx: [
@@ -22,6 +19,5 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Id, msg: invalidIdMessage },
     { exp: SimpleSchema.RegEx.Domain, msg: invalidDomainMessage },
     { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
-    { exp: contactPhone, msg: invalidContactPhoneMessage },
   ],
 });
