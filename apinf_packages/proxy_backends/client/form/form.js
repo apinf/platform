@@ -17,6 +17,7 @@ import URI from 'urijs';
 // Collection imports
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+// eslint-disable-next-line max-len
 import deleteProxyBackendConfig from '/apinf_packages/proxy_backends/client/methods/delete_proxy_backend';
 
 Template.proxyBackend.onCreated(() => {

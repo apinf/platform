@@ -8,6 +8,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
+// eslint-disable-next-line max-len
 import { proxyBasePathRegEx, apiBasePathRegEx } from '/apinf_packages/proxy_backends/collection/regex';
 import contactPhone from '/apinf_packages/organizations/collection/regex';
 

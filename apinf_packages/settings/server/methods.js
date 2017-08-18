@@ -11,6 +11,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // APInf imports
+// eslint-disable-next-line max-len
 import { githubSettingsValid, mailSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Collection imports
