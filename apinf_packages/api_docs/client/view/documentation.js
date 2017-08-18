@@ -11,8 +11,8 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
-import ApiDocs from '/api_docs/collection';
-import Settings from '/settings/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Template.apiDocumentation.onCreated(function () {
   const instance = this;

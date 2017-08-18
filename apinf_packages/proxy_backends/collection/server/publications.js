@@ -14,8 +14,8 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/apis/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import Apis from '/apinf_packages/apis/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 Meteor.publish('proxyBackends', function (proxyId) {
   // Make sure proxyId is a String

@@ -17,8 +17,8 @@ import 'moment/min/locales.min';
 import _ from 'lodash';
 
 // Collection imports
-import OrganizationLogo from '/organizations/logo/collection/collection';
-import Apis from '/apis/collection';
+import OrganizationLogo from '/apinf_packages/organizations/logo/collection/collection';
+import Apis from '/apinf_packages/apis/collection';
 import Organizations from './';
 
 Organizations.helpers({

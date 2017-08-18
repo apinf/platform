@@ -9,8 +9,8 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
-import Branding from '/branding/collection';
-import ProjectLogo from '/branding/logo/collection';
+import Branding from '/apinf_packages/branding/collection';
+import ProjectLogo from '/apinf_packages/branding/logo/collection';
 
 Template.viewProjectLogo.helpers({
   uploadedProjectLogoLink () {

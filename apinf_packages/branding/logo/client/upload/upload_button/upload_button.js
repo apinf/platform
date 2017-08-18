@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import ProjectLogo from '/branding/logo/collection';
+import ProjectLogo from '/apinf_packages/branding/logo/collection';
 
 Template.uploadProjectLogoButton.onRendered(() => {
   // Assign resumable browse to element

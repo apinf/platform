@@ -9,7 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import CoverPhoto from '/branding/cover_photo/collection';
+import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 
 Template.viewCoverPhoto.onCreated(function () {
   const instance = this;

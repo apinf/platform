@@ -12,7 +12,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Apis from '/apis/collection';
+import Apis from '/apinf_packages/apis/collection';
 import ApiBackendRatings from '../collection';
 
 Template.apiBackendRating.onCreated(function () {

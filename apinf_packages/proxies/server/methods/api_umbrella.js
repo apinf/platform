@@ -15,12 +15,12 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/apis/collection';
-import Proxies from '/proxies/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import Apis from '/apinf_packages/apis/collection';
+import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf imports
-import hasValidApiUmbrellaSettings from '/proxies/helper_functions/api_umbrella';
+import hasValidApiUmbrellaSettings from '/apinf_packages/proxies/helper_functions/api_umbrella';
 
 Meteor.methods({
   createApiUmbrellaWeb (proxyId) {

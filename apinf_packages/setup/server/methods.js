@@ -7,8 +7,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import Branding from '/branding/collection';
-import Settings from '/settings/collection';
+import Branding from '/apinf_packages/branding/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Meteor.methods({
   isInitialSetupComplete () {

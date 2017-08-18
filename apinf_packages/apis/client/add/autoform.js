@@ -12,7 +12,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Apis from '/apis/collection';
+import Apis from '/apinf_packages/apis/collection';
 
 AutoForm.hooks({
   addApiForm: {

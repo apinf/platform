@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
-import OrganizationLogo from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/apinf_packages/organizations/logo/collection/collection';
 
 Template.organizationProfileHeader.onCreated(function () {
   const instance = this;

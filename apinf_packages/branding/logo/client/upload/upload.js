@@ -13,8 +13,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Branding from '/branding/collection';
-import ProjectLogo from '/branding/logo/collection';
+import Branding from '/apinf_packages/branding/collection';
+import ProjectLogo from '/apinf_packages/branding/logo/collection';
 
 Template.uploadProjectLogo.events({
   'click .delete-projectLogo': function () {

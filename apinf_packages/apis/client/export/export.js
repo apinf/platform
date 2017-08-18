@@ -13,7 +13,7 @@ import { saveAs } from 'meteor/pfafman:filesaver';
 import jsyaml from 'js-yaml';
 
 // Collection imports
-import ProxyBackends from '/proxy_backends/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 Template.apiExport.events({
   'click #exportJSONConfig': function (event, templateInstance) {

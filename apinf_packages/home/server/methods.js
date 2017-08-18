@@ -12,9 +12,9 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Email } from 'meteor/email';
 
 // Collection imports
-import Apis from '/apis/collection';
-import Organizations from '/organizations/collection';
-import Settings from '/settings/collection';
+import Apis from '/apinf_packages/apis/collection';
+import Organizations from '/apinf_packages/organizations/collection';
+import Settings from '/apinf_packages/settings/collection';
 import ContactFormSchema from '../contactFormSchema';
 
 Meteor.methods({

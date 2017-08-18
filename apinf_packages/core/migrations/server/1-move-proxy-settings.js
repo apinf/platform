@@ -7,8 +7,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Migrations } from 'meteor/percolate:migrations';
 
 // Collection imports
-import Proxies from '/proxies/collection';
-import Settings from '/settings/collection';
+import Proxies from '/apinf_packages/proxies/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Migrations.add({
   version: 1,

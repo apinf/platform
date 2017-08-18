@@ -12,8 +12,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Branding from '/branding/collection';
-import CoverPhoto from '/branding/cover_photo/collection';
+import Branding from '/apinf_packages/branding/collection';
+import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 
 Template.uploadCoverPhoto.helpers({
   uploadedCoverPhotoFile () {

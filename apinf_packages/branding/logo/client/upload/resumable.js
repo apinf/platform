@@ -11,11 +11,11 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Branding from '/branding/collection';
-import ProjectLogo from '/branding/logo/collection';
+import Branding from '/apinf_packages/branding/collection';
+import ProjectLogo from '/apinf_packages/branding/logo/collection';
 
 // APInf imports
-import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
   ProjectLogo.resumable.on('fileAdded', (file) => {

@@ -3,8 +3,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
-import ApiMetadata from '/metadata/collection';
-import contactPhone from '/organizations/collection/regex';
+import ApiMetadata from '/apinf_packages/metadata/collection';
+import contactPhone from '/apinf_packages/organizations/collection/regex';
 
 ApiMetadata.schema = new SimpleSchema({
   apiId: {

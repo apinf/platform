@@ -18,13 +18,13 @@ import 'moment/min/locales.min';
 import _ from 'lodash';
 
 // Collection imports
-import ApiBackendRatings from '/ratings/collection';
-import ApiBookmarks from '/bookmarks/collection';
-import DocumentationFiles from '/api_docs/files/collection';
-import ApiDocs from '/api_docs/collection';
-import ApiLogo from '/apis/logo/collection';
-import ApiBacklogItems from '/backlog/collection';
-import ApiMetadata from '/metadata/collection';
+import ApiBackendRatings from '/apinf_packages/ratings/collection';
+import ApiBookmarks from '/apinf_packages/bookmarks/collection';
+import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
+import ApiLogo from '/apinf_packages/apis/logo/collection';
+import ApiBacklogItems from '/apinf_packages/backlog/collection';
+import ApiMetadata from '/apinf_packages/metadata/collection';
 import Apis from './';
 
 Apis.helpers({

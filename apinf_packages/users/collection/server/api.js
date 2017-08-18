@@ -11,8 +11,8 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import ManagementV1 from '/rest_apis/management';
-import Organizations from '/organizations/collection';
+import ManagementV1 from '/apinf_packages/rest_apis/management';
+import Organizations from '/apinf_packages/organizations/collection';
 
 // Npm packages imports
 import _ from 'lodash';

@@ -1,7 +1,7 @@
 import { Migrations } from 'meteor/percolate:migrations';
 
-import Apis from '/apis/collection';
-import ApiDocs from '/api_docs/collection';
+import Apis from '/apinf_packages/apis/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
 
 Migrations.add({
   version: 8,

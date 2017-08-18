@@ -10,9 +10,9 @@ import { Meteor } from 'meteor/meteor';
 import { RssFeed } from 'meteor/raix:rssfeed';
 
 // Collection imports
-import Apis from '/apis/collection';
+import Apis from '/apinf_packages/apis/collection';
 
-import Branding from '/branding/collection';
+import Branding from '/apinf_packages/branding/collection';
 
 // calling Rss feed publication
 // first argument (apis) will build the url for the feed i.e domain-name/rss/apis

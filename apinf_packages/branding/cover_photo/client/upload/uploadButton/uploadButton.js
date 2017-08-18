@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import CoverPhoto from '/branding/cover_photo/collection';
+import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 
 Template.uploadCoverPhotoButton.onRendered(() => {
   // Assign resumable browse to element

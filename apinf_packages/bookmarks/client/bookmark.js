@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import ApiBookmarks from '/bookmarks/collection';
+import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 
 Template.bookmark.onCreated(function () {
   // Get reference to template instance

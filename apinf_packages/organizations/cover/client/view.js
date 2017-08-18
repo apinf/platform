@@ -9,7 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import OrganizationCover from '/organizations/cover/collection/collection';
+import OrganizationCover from '/apinf_packages/organizations/cover/collection/collection';
 
 Template.viewOrganizationCover.helpers({
   uploadedOrganizationCoverLink () {

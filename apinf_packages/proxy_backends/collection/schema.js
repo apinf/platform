@@ -10,7 +10,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
 
 // Collection imports
-import Proxies from '/proxies/collection';
+import Proxies from '/apinf_packages/proxies/collection';
 
 // import ApiUmbrellaSchema from './apiUmbrellaSchema';
 import ProxyBackends from './';

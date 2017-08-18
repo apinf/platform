@@ -14,9 +14,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Branding from '/branding/collection';
-import ProjectLogo from '/branding/logo/collection';
-import Settings from '/settings/collection';
+import Branding from '/apinf_packages/branding/collection';
+import ProjectLogo from '/apinf_packages/branding/logo/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Template.navbar.onCreated(function () {
   const instance = this;

@@ -11,7 +11,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // APInf imports
-import { githubSettingsValid, mailSettingsValid } from '/core/helper_functions/validate_settings';
+import { githubSettingsValid, mailSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Collection imports
 import Settings from '../collection';

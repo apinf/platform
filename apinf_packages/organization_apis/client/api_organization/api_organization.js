@@ -11,7 +11,7 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
-import Organizations from '/organizations/collection';
+import Organizations from '/apinf_packages/organizations/collection';
 import OrganizationApis from '../../collection';
 
 Template.apiOrganization.onCreated(function () {

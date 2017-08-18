@@ -12,8 +12,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Apis from '/apis/collection';
-import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
+import Apis from '/apinf_packages/apis/collection';
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 import ApiLogo from '../../collection';
 
 Meteor.startup(() => {

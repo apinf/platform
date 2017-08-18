@@ -8,7 +8,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
-import { getSiteTitle, getFromEmail } from '/core/helper_functions/mail_helpers';
+import { getSiteTitle, getFromEmail } from '/apinf_packages/core/helper_functions/mail_helpers';
 
 Accounts.emailTemplates.siteName = getSiteTitle();
 

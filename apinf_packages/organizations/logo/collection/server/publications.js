@@ -9,7 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // Collection imports
-import OrganizationLogo from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/apinf_packages/organizations/logo/collection/collection';
 
 Meteor.publish('currentOrganizationLogo', (organizationLogoId) => {
   check(organizationLogoId, String);

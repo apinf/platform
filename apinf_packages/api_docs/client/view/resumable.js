@@ -12,11 +12,11 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import ApiDocs from '/api_docs/collection';
-import DocumentationFiles from '/api_docs/files/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
+import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
 // APInf imports
-import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {

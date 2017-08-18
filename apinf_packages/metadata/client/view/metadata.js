@@ -2,7 +2,7 @@
 import { Template } from 'meteor/templating';
 
 // APInf imports
-import formatDate from '/core/helper_functions/format_date';
+import formatDate from '/apinf_packages/core/helper_functions/format_date';
 
 // Collection imports
 import ApiMetadata from '../../collection';

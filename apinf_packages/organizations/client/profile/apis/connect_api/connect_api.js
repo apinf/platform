@@ -12,7 +12,7 @@ import { Template } from 'meteor/templating';
 import _ from 'lodash';
 
 // Collection imports
-import OrganizationApis from '/organization_apis/collection';
+import OrganizationApis from '/apinf_packages/organization_apis/collection';
 
 Template.connectApiToOrganizationModal.onCreated(function () {
   const instance = this;

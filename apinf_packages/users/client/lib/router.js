@@ -16,7 +16,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // APInf imports
-import signedIn from '/core/client/lib/router';
+import signedIn from '/apinf_packages/core/client/lib/router';
 
 FlowRouter.route('/users', {
   name: 'accountsAdmin',

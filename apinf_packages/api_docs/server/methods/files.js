@@ -9,7 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // Collection imports
-import DocumentationFiles from '/api_docs/files/collection';
+import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
 Meteor.methods({
   findFileById (id) {

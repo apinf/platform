@@ -14,8 +14,8 @@ import { SyncedCron } from 'meteor/percolate:synced-cron';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/apis/collection';
-import { MonitoringSettings } from '/monitoring/collection';
+import Apis from '/apinf_packages/apis/collection';
+import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
 
 Meteor.methods({
   startCron (apiId, url) {

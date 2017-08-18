@@ -13,11 +13,11 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import OrganizationCover from '/organizations/cover/collection/collection';
-import Organizations from '/organizations/collection';
+import OrganizationCover from '/apinf_packages/organizations/cover/collection/collection';
+import Organizations from '/apinf_packages/organizations/collection';
 
 // APInf imports
-import fileNameEndsWith from '/core/helper_functions/file_name_ends_with';
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
   // Set organization cover id to organization collection on success

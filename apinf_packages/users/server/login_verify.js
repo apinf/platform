@@ -14,10 +14,10 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 
 // Collection imports
-import Settings from '/settings/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
-import { mailSettingsValid } from '/core/helper_functions/validate_settings';
+import { mailSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Login attempt verifier to require verified email before login
 export default function loginAttemptVerifier (parameters) {

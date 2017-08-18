@@ -14,7 +14,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import _ from 'lodash';
 
 // Collection imports
-import OrganizationApis from '/organization_apis/collection';
+import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import Organizations from '../';
 
 Meteor.publish('allOrganizationBasicDetails', () => {

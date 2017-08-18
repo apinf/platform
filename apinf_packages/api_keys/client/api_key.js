@@ -10,7 +10,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Clipboard from 'clipboard';
 
 // Collection imports
-import ApiKeys from '/api_keys/collection';
+import ApiKeys from '/apinf_packages/api_keys/collection';
 
 Template.apiKey.onCreated(function () {
   // Subscribe to apiKeys for current user

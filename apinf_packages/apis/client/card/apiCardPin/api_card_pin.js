@@ -9,7 +9,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Organizations from '/organizations/collection';
+import Organizations from '/apinf_packages/organizations/collection';
 
 Template.apiCardPin.events({
   'click .pin-button': function (event, templateInstance) {

@@ -8,8 +8,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import Apis from '/apis/collection';
-import ApiBookmarks from '/bookmarks/collection';
+import Apis from '/apinf_packages/apis/collection';
+import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 
 Meteor.methods({
   toggleBookmarkApi (backendId, currentUserId) {

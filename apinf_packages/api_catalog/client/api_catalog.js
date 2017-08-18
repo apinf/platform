@@ -13,8 +13,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Apis from '/apis/collection';
-import ApiBookmarks from '/bookmarks/collection';
+import Apis from '/apinf_packages/apis/collection';
+import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 
 import 'locale-compare-polyfill';
 

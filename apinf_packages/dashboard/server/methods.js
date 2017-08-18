@@ -8,8 +8,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import Proxies from '/proxies/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 Meteor.methods({
   getProxyData (proxyBackendId) {

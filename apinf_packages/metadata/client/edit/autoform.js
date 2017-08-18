@@ -3,7 +3,7 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
-import Apis from '/apis/collection';
+import Apis from '/apinf_packages/apis/collection';
 
 AutoForm.addHooks('editApiMetadataForm', {
   before: {

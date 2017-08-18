@@ -10,7 +10,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'lodash';
 
 // Collection imports
-import Organizations from '/organizations/collection';
+import Organizations from '/apinf_packages/organizations/collection';
 import OrganizationApis from './';
 
 OrganizationApis.schema = new SimpleSchema({

@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import Branding from '/branding/collection';
+import Branding from '/apinf_packages/branding/collection';
 
 Template.branding.onRendered(() => {
   $('[data-toggle="popover"]').popover();

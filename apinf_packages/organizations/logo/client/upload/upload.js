@@ -12,7 +12,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import OrganizationLogo from '/organizations/logo/collection/collection';
+import OrganizationLogo from '/apinf_packages/organizations/logo/collection/collection';
 import Organizations from '../../../collection';
 
 Template.uploadOrganizationLogo.helpers({

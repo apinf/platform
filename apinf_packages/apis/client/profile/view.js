@@ -11,11 +11,11 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
-import ApiBacklogItems from '/backlog/collection';
-import Apis from '/apis/collection';
-import Feedback from '/feedback/collection';
-import ProxyBackends from '/proxy_backends/collection';
-import ApiDocs from '/api_docs/collection';
+import ApiBacklogItems from '/apinf_packages/backlog/collection';
+import Apis from '/apinf_packages/apis/collection';
+import Feedback from '/apinf_packages/feedback/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
 
 Template.viewApi.onCreated(function () {
   // Get reference to template instance
