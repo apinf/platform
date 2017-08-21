@@ -1,0 +1,119 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+/* Bootstrap */
+@import "/apinf_packages/core/client/style/bootstrap-variables.less";
+
+body {
+  /* The fixed navbar will overlay your other content,
+  unless you add padding to the top of the <body> */
+  padding-top: 3em;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, p {
+  font-family: @font-family-default;
+}
+
+html, body, #__blaze-root {
+  height: 100%
+}
+
+a:hover, a:focus {
+  color: @link-hover-color;
+  text-decoration: underline;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+}
+
+[data-required] label:after,
+.at-pwd-form label:after {
+  content: '*';
+  font-size: 0.8em;
+  color: @brand-danger;
+  padding-left: 0.2em;
+}
+
+#iron-router-progress {
+  background-color: darken(@brand-primary, 20%);
+  box-shadow: 0 0 5px darken(@brand-primary, 20%);
+}
+
+#iron-router-progress.spinner:before {
+  border-color: darken(@brand-primary, 20%);
+}
+
+.help-block {
+  margin-bottom: 1.4em;
+}
+
+hr {
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+.no-margin-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.panel:last-child {
+  margin-bottom: 1.5em;
+}
+
+.panel-body h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.navigation-tabs {
+  position: relative;
+  top: 9px; // needs to be in px
+  margin-top: 0.6em;
+  clear: both;
+
+  .nav-tabs {
+    border-bottom: none;
+    display: inline-block;
+    margin-bottom: 0.23em;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    font-weight: bold;
+    line-height: initial;
+    color: #333;
+    background-color: #fff;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top: 3px @brand-primary;
+    border-right-color: #EEE;
+    border-left-color: #EEE;
+  }
+
+  .nav-tabs > li {
+    border: solid transparent;
+    border-width: 3px 1px 1px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .nav-tabs > li > a {
+    color: #555;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    color: #333;
+    border-color: transparent;
+  }
+}
+
+.padded-container{
+  margin-top: 36px;
+}
