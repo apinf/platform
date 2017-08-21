@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 // APInf imports
-import signedIn from '/core/client/lib/router';
+import signedIn from '/apinf_packages/core/client/lib/router';
 
 signedIn.route('/settings/proxies', {
   name: 'proxies',

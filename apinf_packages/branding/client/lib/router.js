@@ -8,7 +8,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APInf imports
-import signedIn from '/core/client/lib/router';
+import signedIn from '/apinf_packages/core/client/lib/router';
 
 signedIn.route('/settings/branding', {
   name: 'branding',
