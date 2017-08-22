@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
+import Apis from '/apinf_packages/apis/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
@@ -52,5 +53,27 @@ Meteor.methods({
       throw new Meteor.Error('No one proxy was found');
     }
     throw new Meteor.Error('No one proxy backend configuration was selected');
+  },
+  getProxiesList (type) {
+    // Make sure the parameter is String type
+    check(type, String);
+
+    // Return proxies list with specified type
+    return Proxies.find({ type }).fetch();
+  },
+  proxyBackendExists (id) {
+    check(id, String);
+
+    return ProxyBackends.findOne(id);
+  },
+  userCanViewAnalytic (apiId) {
+    // Make sure apiId is a string
+    check(apiId, String);
+
+    // Get API
+    const api = Apis.findOne(apiId);
+
+    // Check if user can edit
+    return api && api.currentUserCanManage();
   },
 });
