@@ -1062,6 +1062,7 @@
   "settings_mail_fromEmail": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
   "settings_mail_toEmail": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
   "settings_github": "Github",
+  "settings_oauth": "O-Auth",
   "settings_save": "Save",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
