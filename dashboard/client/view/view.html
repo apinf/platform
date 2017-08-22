@@ -1,0 +1,30 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardView">
+  {{# if Template.subscriptionsReady }}
+    <!-- Data is not still ready -->
+    {{# unless fetchingData }}
+      {{> spinner }}
+    {{ else }}
+      <!-- Error happened -->
+      {{# if error }}
+        <h1>ElasticSearch query error</h1>
+        <p>{{ error }}</p>
+      {{/ if }} <!-- /error -->
+
+      <!-- ElasticSearch data is already available -->
+      {{# if elasticsearchData }}
+        <h3>
+          My APIs
+        </h3>
+        <!-- Table with summary statistic-->
+        {{> dashboardSummaryStatistic elasticsearchData=elasticsearchData }}
+      {{/ if }}
+    {{/ unless }} <!-- /fetchingData -->
+  {{ else }}
+    {{> spinner }}
+  {{/ if }} <!-- /subscriptionsReady -->
+</template>
