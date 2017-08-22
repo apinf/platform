@@ -1,0 +1,28 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="requestTimeline">
+  <p class="overview-col-title">
+    API Request Timeline
+  </p>
+  <div class="form-group form-inline">
+    <div class="form-group">
+      <label for="requests-path">
+        Path
+      </label>
+    </div>
+    <div class="form-group">
+      <select class="form-control" id="request-path-number">
+        {{# each path in listPaths }}
+          <option value="{{ path }}">
+            {{ path }}
+          </option>
+        {{/ each }}
+      </select>
+    </div>
+  </div>
+
+  <canvas id="request-timeline-chart"></canvas>
+</template>
