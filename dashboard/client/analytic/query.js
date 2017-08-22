@@ -10,8 +10,8 @@ import moment from 'moment';
 export default function queryForAnalyticPage (requestPath) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
-  const oneWeekAgo = moment().subtract(100, 'days').format('YYYY-MM-DD');
-  const twoWeeksAgo = moment().subtract(200, 'days').format('YYYY-MM-DD');
+  const oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
+  const twoWeeksAgo = moment().subtract(14, 'days').format('YYYY-MM-DD');
 
   return {
     size: 0,
