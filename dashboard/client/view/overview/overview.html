@@ -1,0 +1,70 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardOverviewStatistic">
+  {{# with bucket }}
+    <div class="overview-body" data-overview-id="{{ id }}">
+      <div class="row overview-line">
+        <div class="col-xs-12 col-md-3">
+          <p class="overview-col-title">
+            {{ apiName }}
+          </p>
+          <div class="form-group">
+            <p>Request path: {{ requestPath }}</p>
+            <p class="text-success">
+              2XX calls: {{ successCallsCount }}
+            </p>
+            <span class="text-danger">
+            {{ errorCallsCount }} errors in last 7 days
+          </span>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <p class="overview-col-title">
+            {{ requestNumber }} requests
+          </p>
+          <div class="form-group">
+            <span class="overview-col-title">
+              Number of requests
+            </span>
+            {{> requestsOverTime buckets=requestOverTime id=id }}
+            <div class="{{ arrowDirection 'requests' }}"></div>
+            <span>{{ overviewComparing 'requests' }}</span>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <p class="overview-col-title">
+            {{ responseTime }} ms
+          </p>
+          <div class="form-group">
+            <span class="overview-col-title">
+              API Response time
+            </span>
+            {{> averageResponseTime buckets=requestOverTime id=id }}
+            <div class="{{ arrowDirection 'time' }}"></div>
+            <span>{{ overviewComparing 'time' }}</span>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+          <p class="overview-col-title">
+            {{ uniqueUsers }} users
+          </p>
+          <div class="form-group">
+            <span class="overview-col-title">
+              Unique API Users
+            </span>
+            {{> uniqueUsersOverTime buckets=requestOverTime id=id }}
+            <div class="{{ arrowDirection 'users' }}"></div>
+            <span>{{ overviewComparing 'users' }}</span>
+          </div>
+
+          <a href="{{ pathFor 'apiAnalyticsPage' id=id }}" class="pull-right">
+            View details ...
+          </a>
+        </div>
+      </div>
+    </div>
+  {{/ with }}
+</template>

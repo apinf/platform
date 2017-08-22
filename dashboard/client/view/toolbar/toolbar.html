@@ -1,0 +1,41 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardToolbar">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group pull-left">
+        <label for="select-proxy">
+          Proxy &;nbsp;
+        </label>
+        <select class="form-control toolbar-select" id="select-proxy">
+          {{# each proxy in proxies }}
+            {{# with proxy }}
+              <option value="{{ _id }}" {{ selectedOption }}>
+                {{ name }}
+              </option>
+            {{/ with }}
+          {{/ each }}
+        </select>
+      </div>
+      <div class="form-group pull-right">
+        <button class="btn btn-success">
+          APIs are Healthy
+        </button>
+        <button class="btn btn-default">
+          <i class="fa fa-filter" aria-hidden="true"></i>
+        </button>
+        <select class="form-control toolbar-select">
+          <option value="highest">
+            Highest calls
+          </option>
+        </select>
+        <button class="btn btn-default">
+          Last 7 Days
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
