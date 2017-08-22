@@ -12,22 +12,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{ apiName }}
           </p>
           <div class="form-group">
-            <p>Request path: {{ requestPath }}</p>
+            <p>
+              {{_ 'dashboardOverviewStatistic_text_requestPath' path=requestPath }}
+            </p>
             <p class="text-success">
-              2XX calls: {{ successCallsCount }}
+              {{_ 'dashboardOverviewStatistic_text_successCalls' count=successCallsCount }}
             </p>
             <span class="text-danger">
-            {{ errorCallsCount }} errors in last 7 days
-          </span>
+              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=errorCallsCount }}
+            </span>
           </div>
         </div>
         <div class="col-xs-12 col-md-3">
           <p class="overview-col-title">
-            {{ requestNumber }} requests
+            {{_ 'dashboardOverviewStatistic_text_requestsCount' count=requestNumber }}
           </p>
           <div class="form-group">
             <span class="overview-col-title">
-              Number of requests
+              {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
             </span>
             {{> requestsOverTime buckets=requestOverTime id=id }}
             <div class="{{ arrowDirection 'requests' }}"></div>
@@ -36,11 +38,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <div class="col-xs-12 col-md-3">
           <p class="overview-col-title">
-            {{ responseTime }} ms
+            {{_ 'dashboardOverviewStatistic_text_responseTime' time=responseTime }}
           </p>
           <div class="form-group">
             <span class="overview-col-title">
-              API Response time
+              {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
             </span>
             {{> averageResponseTime buckets=requestOverTime id=id }}
             <div class="{{ arrowDirection 'time' }}"></div>
@@ -49,11 +51,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <div class="col-xs-12 col-md-3">
           <p class="overview-col-title">
-            {{ uniqueUsers }} users
+            {{_ 'dashboardOverviewStatistic_text_usersCount' count=uniqueUsers }}
           </p>
           <div class="form-group">
             <span class="overview-col-title">
-              Unique API Users
+              {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
             </span>
             {{> uniqueUsersOverTime buckets=requestOverTime id=id }}
             <div class="{{ arrowDirection 'users' }}"></div>
@@ -61,7 +63,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
 
           <a href="{{ pathFor 'apiAnalyticsPage' id=id }}" class="pull-right">
-            View details ...
+            {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
           </a>
         </div>
       </div>

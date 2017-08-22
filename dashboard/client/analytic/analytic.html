@@ -31,16 +31,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
               {{/ with }}
               <div class="form-group">
-                Proxy: <strong>{{ proxyName }}</strong>
+                <strong>
+                  {{_ 'apiAnalyticPage_labelText_proxyName' name=proxyName }}
+                </strong>
               </div>
             </div>
             <div class="toolbar pull-right">
-              <span class="text-success">
-                API is Healthy &;nbsp;
-              </span>
-              <button class="btn btn-default btn-sm">
-                Last 7 Days
-              </button>
+              <select class="form-control toolbar-select" id="date-range">
+                <option value="yesterday">
+                  {{_ 'apiAnalyticPage_optionText_yesterday' }}
+                </option>
+                <option value="week" selected>
+                  {{_ 'apiAnalyticPage_optionText_7days' }}
+                </option>
+                <option value="month">
+                  {{_ 'apiAnalyticPage_optionText_30days' }}
+                </option>
+              </select>
             </div>
           </div>
         </div>
@@ -51,7 +58,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{ else }}
           <!-- If error returns -->
           {{# if error }}
-            <h1>ElasticSearch query error</h1>
+            <h1>
+              {{_ 'apiAnalyticPage_text_elasticsearchError' }}
+            </h1>
             <p>{{ error }}</p>
           {{/ if }}
 
@@ -60,7 +69,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> apiAnalyticView elasticsearchData=elasticsearchData id=proxyBackendId }}
           {{ else }}
             <p class="alert alert-warning text-center overview-col-title">
-              No data Available. Please select another date
+              {{_ 'apiAnalyticPage_warningText_noData' }}
             </p>
           {{/ if }}
         {{/ unless }} <!-- /fetchingData -->

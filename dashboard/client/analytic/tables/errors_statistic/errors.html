@@ -7,16 +7,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{# if errors }}
     <div class="api-view-card form-group">
       <p class="overview-col-title">
-        Errors Statistic
+        {{_ 'errorsStatisticTable_title_errorsStatistic' }}
       </p>
 
       <table class="table table-bordered table-hover table-statistic">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Status Code</th>
-            <th>Calls</th>
-            <th>Request path</th>
+            <th>
+              {{_ 'errorsStatisticTable_columnTitle_date' }}
+            </th>
+            <th>
+              {{_ 'errorsStatisticTable_columnTitle_status' }}
+            </th>
+            <th>
+              {{_ 'errorsStatisticTable_columnTitle_calls' }}
+            </th>
+            <th>
+              {{_ 'errorsStatisticTable_columnTitle_path' }}
+            </th>
           </tr>
         </thead>
 

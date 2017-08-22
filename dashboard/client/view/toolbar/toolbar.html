@@ -8,7 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="col-xs-12">
       <div class="form-group pull-left">
         <label for="select-proxy">
-          Proxy &;nbsp;
+          {{_ 'dashboardToolbar_labelText_proxy' }} &nbsp;
         </label>
         <select class="form-control toolbar-select" id="select-proxy">
           {{# each proxy in proxies }}
@@ -21,20 +21,34 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </select>
       </div>
       <div class="form-group pull-right">
-        <button class="btn btn-success">
-          APIs are Healthy
-        </button>
         <button class="btn btn-default">
           <i class="fa fa-filter" aria-hidden="true"></i>
         </button>
         <select class="form-control toolbar-select">
-          <option value="highest">
-            Highest calls
+          <option value="name">
+            {{_ 'dashboardToolbar_optionText_apiName' }}
+          </option>
+          <option value="calls">
+            {{_ 'dashboardToolbar_optionText_calls' }}
+          </option>
+          <option value="users">
+            {{_ 'dashboardToolbar_optionText_users' }}
+          </option>
+          <option value="time">
+            {{_ 'dashboardToolbar_optionText_time' }}
           </option>
         </select>
-        <button class="btn btn-default">
-          Last 7 Days
-        </button>
+        <select class="form-control toolbar-select" id="date-range">
+          <option value="yesterday">
+            {{_ 'dashboardToolbar_optionText_yesterday' }}
+          </option>
+          <option value="week" selected>
+            {{_ 'dashboardToolbar_optionText_7days' }}
+          </option>
+          <option value="month">
+            {{_ 'dashboardToolbar_optionText_30days' }}
+          </option>
+        </select>
       </div>
     </div>
   </div>
