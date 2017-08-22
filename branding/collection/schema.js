@@ -109,6 +109,14 @@ Branding.schema = new SimpleSchema({
       rows: 5,
     },
   },
+  analytics: {
+    type: Object,
+    optional: true,
+  },
+  'analytics.googleAnalytics': {
+    type: String,
+    optional: true,
+  },
 });
 
 // i18n translation
