@@ -19,19 +19,18 @@ import ApiDocs from '/api_docs/collection';
 
 Template.viewApi.onCreated(function () {
   // Get reference to template instance
-  const instance = this;
+  Tracker.autorun(()=>{
+    instance.slug = FlowRouter.getParam('slug');
 
-  // Get the API Backend ID from the route
-  instance.slug = FlowRouter.getParam('slug');
+    // Subscribe to API and related organization
+    instance.subscribe('apiComposite', instance.slug);
 
-  // Subscribe to API and related organization
-  instance.subscribe('apiComposite', instance.slug);
+    // Subscribe to public proxy details
+    instance.subscribe('proxyCount');
 
-  // Subscribe to public proxy details
-  instance.subscribe('proxyCount');
-
-  // Subscribe to public proxy details for proxy form
-  instance.subscribe('publicProxyDetails');
+    // Subscribe to public proxy details for proxy form
+    instance.subscribe('publicProxyDetails');
+  });
 });
 
 Template.viewApi.helpers({

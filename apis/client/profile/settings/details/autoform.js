@@ -12,6 +12,15 @@ AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
       // Get success message translation
+      if (this.updateDoc && this.updateDoc.$set.name) {
+      	let slug = this.updateDoc.$set.name.split(' ').join('-').toLowerCase();
+        // Redirect to newly added API
+        FlowRouter.go('viewApi', { slug: slug });
+
+      } else {
+        // Otherwise Redirect to API Catalog
+        FlowRouter.go('apiCatalog');
+      }
       const message = TAPi18n.__('apiDetailsForm_text_updateInformation');
 
       // Show message
