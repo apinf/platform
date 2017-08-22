@@ -15,7 +15,7 @@ AutoForm.hooks({
       // Get success message translation
       if (this.updateDoc && this.updateDoc.$set.name) {
         const slug = this.updateDoc.$set.name.split(' ').join('-').toLowerCase();
-        // Redirect to newly added API
+        // Redirect to updated API with new slug. It is use while api's name will update slug have to change that's mean routing change
         FlowRouter.go('viewApi', { slug });
       } else {
         // Otherwise Redirect to API Catalog
