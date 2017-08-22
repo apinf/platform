@@ -9,22 +9,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="row">
       <div class="col-xs-3">
         <strong>
-          API name
+          {{_ 'dashboardSummaryStatistic_columnTitle_apiName' }}
         </strong>
       </div>
       <div class="col-xs-3">
         <strong>
-          Number of requests
+          {{_ 'dashboardSummaryStatistic_columnTitle_requestsNumber' }}
         </strong>
       </div>
       <div class="col-xs-3">
         <strong>
-          Response time
+          {{_ 'dashboardSummaryStatistic_columnTitle_responseTime' }}
         </strong>
       </div>
       <div class="col-xs-3">
         <strong>
-          Users
+          {{_ 'dashboardSummaryStatistic_columnTitle_users' }}
         </strong>
       </div>
     </div>
@@ -39,21 +39,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{ apiName }}
             </div>
             <div class="col-md-3">
-              <span class="request-number">{{ requestNumber }}</span>
+              <span class="request-number">
+                {{ requestNumber }}
+              </span>
               <div class="{{ arrowDirection 'requests' }}"></div>
               <span class="{{ textColor 'requests' }}">
                 {{ percentages 'requests' }}
               </span>
             </div>
             <div class="col-md-3">
-              <span class="response-time">{{ responseTime }} ms</span>
+              <span class="response-time">
+                {{ responseTime }} ms
+              </span>
               <div class="{{ arrowDirection 'time' }}"></div>
               <span class="{{ textColor 'time' }}">
                 {{ percentages 'time' }}
               </span>
             </div>
             <div class="col-md-3">
-              <span class="unique-users">{{ uniqueUsers }}</span>
+              <span class="unique-users">
+                {{ uniqueUsers }}
+              </span>
               <div class="{{ arrowDirection 'users' }}"></div>
               <span class="{{ textColor 'users' }}">
                 {{ percentages 'users' }}

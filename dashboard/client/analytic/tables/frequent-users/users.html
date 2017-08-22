@@ -7,15 +7,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{# if users }}
     <div class="api-view-card form-group">
       <p class="overview-col-title">
-        Most Frequent Users
+        {{_ 'mostFrequentUsersTable_title_mostUsers' }}
       </p>
 
       <table class="table table-bordered table-hover table-statistic">
         <thead>
           <tr>
-            <th>User</th>
-            <th>Calls</th>
-            <th>Request path</th>
+            <th>
+              {{_ 'mostFrequentUsersTable_columnTitle_user' }}
+            </th>
+            <th>
+              {{_ 'mostFrequentUsersTable_columnTitle_calls' }}
+            </th>
+            <th>
+              {{_ 'mostFrequentUsersTable_columnTitle_path' }}
+            </th>
           </tr>
         </thead>
 
