@@ -12,7 +12,6 @@ aldeed:autoform
 aldeed:collection2
 aldeed:simple-schema
 aldeed:template-extension
-apinf:accounts-admin-ui@0.3.1
 apinf:api-umbrella
 apinf:autoform-bs-datepicker
 apinf:restivus-swagger
@@ -95,3 +94,5 @@ reactive-dict@1.1.9
 dynamic-import
 apinf:accounts-fiware@0.1.1
 apinf:fiware@0.1.1
+http
+apinf:accounts-admin-ui
