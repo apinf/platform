@@ -64,7 +64,32 @@ Meteor.publishComposite('proxyById', (id) => {
     children: [
       {
         find (proxy) {
-          return ProxyBackends.find({ proxyId: proxy._id });
+          // Get current user Id
+          const userId = this.userId;
+
+          // Check if current user is admin
+          const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+          // If current user is admin
+          if (userIsAdmin) {
+            // Get list of all the endpoints
+            return ProxyBackends.find({ proxyId: proxy._id });
+          }
+
+          // If current user is manager
+          const managedApis = Apis.find({ managerIds: userId }).fetch();
+          // If user is manager
+          if (managedApis.length > 0) {
+            // Add the condition to find proxy backend configuration
+            const apisSelector = managedApis.map(api => {
+              return { apiId: api._id };
+            });
+
+            // Get list of proxy backends managed by current user
+            return ProxyBackends.find({ proxyId: proxy._id, $or: apisSelector });
+          }
+
+          return [];
         },
         children: [
           {
