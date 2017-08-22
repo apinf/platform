@@ -1,0 +1,36 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="errorsStatisticTable">
+  {{# if errors }}
+    <div class="api-view-card form-group">
+      <p class="overview-col-title">
+        Errors Statistic
+      </p>
+
+      <table class="table table-bordered table-hover table-statistic">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Status Code</th>
+            <th>Calls</th>
+            <th>Request path</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {{# each error in errors }}
+          <tr>
+            <td>{{ error.date }}</td>
+            <td> {{ error.status }}</td>
+            <td> {{ error.calls }}</td>
+            <td> {{ error.path }}</td>
+          </tr>
+        {{/ each }}
+        </tbody>
+      </table>
+    </div>
+  {{/ if }}
+</template>
