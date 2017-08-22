@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Tracker } from 'meteor/tracker'
 
 // Collection imports
 import ApiBacklogItems from '/backlog/collection';
@@ -20,7 +21,7 @@ import ApiDocs from '/api_docs/collection';
 Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-  Tracker.autorun(()=>{
+  Tracker.autorun(() => {
     instance.slug = FlowRouter.getParam('slug');
 
     // Subscribe to API and related organization

@@ -7,16 +7,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
       // Get success message translation
-      if (this.updateDoc && this.updateDoc.$set.name) {
-      	let slug = this.updateDoc.$set.name.split(' ').join('-').toLowerCase();
+      if(this.updateDoc && this.updateDoc.$set.name) {
+        const slug = this.updateDoc.$set.name.split(' ').join('-').toLowerCase();
         // Redirect to newly added API
         FlowRouter.go('viewApi', { slug: slug });
-
       } else {
         // Otherwise Redirect to API Catalog
         FlowRouter.go('apiCatalog');
