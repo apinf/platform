@@ -11,8 +11,8 @@ export default function queryForDashboardPage (proxyBackendPaths) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
   // Make it depends on timeframe
-  const oneWeekAgo = moment().subtract(100, 'days').format('YYYY-MM-DD');
-  const twoWeeksAgo = moment().subtract(200, 'days').format('YYYY-MM-DD');
+  const oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
+  const twoWeeksAgo = moment().subtract(14, 'days').format('YYYY-MM-DD');
 
   return {
     size: 0,
