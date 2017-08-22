@@ -11,11 +11,11 @@ import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
-import ProxyBackends from '/proxy_backends/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf imports
 // eslint-disable-next-line max-len
-import { arrowDirection, percentageValue, calculateTrend } from '/dashboard/client/compare_indicating';
+import { arrowDirection, percentageValue, calculateTrend } from '/apinf_packages/dashboard/client/compare_indicating';
 
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item

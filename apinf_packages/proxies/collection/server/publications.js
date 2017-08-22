@@ -12,8 +12,8 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Apis from '/apis/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import Apis from '/apinf_packages/apis/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Proxies from '../';
 
 Meteor.publish('allProxies', function () {

@@ -12,9 +12,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
-import Apis from '/apis/collection';
-import Proxies from '/proxies/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import Apis from '/apinf_packages/apis/collection';
+import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf import
 import queryForAnalyticPage from './query';

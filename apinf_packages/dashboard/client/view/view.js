@@ -9,8 +9,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import Proxies from '/proxies/collection';
-import ProxyBackends from '/proxy_backends/collection';
+import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -29,12 +29,12 @@ Template.dashboardView.onCreated(function () {
   instance.autorun(() => {
     const proxy = Proxies.findOne();
 
-    // Get relevant Elasticsearch host
-    const elasticsearchHost = proxy.apiUmbrella.elasticsearch;
+    // Fetch proxy backends
+    const proxyBackends = ProxyBackends.find().fetch();
 
-    if (elasticsearchHost) {
-      // Fetch proxy backends
-      const proxyBackends = ProxyBackends.find().fetch();
+    if (proxy && proxyBackends) {
+      // Get relevant Elasticsearch host
+      const elasticsearchHost = proxy.apiUmbrella.elasticsearch;
 
       // Create a list with requested paths
       const proxyBackendPaths = _.map(proxyBackends, (backend) => {
