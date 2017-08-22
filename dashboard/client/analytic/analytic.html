@@ -1,0 +1,72 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAnalyticPage">
+  <div class="api-view">
+    <div class="container">
+      {{# if Template.subscriptionsReady }}
+        <h1>
+          {{ api.name }}
+        </h1>
+
+        <!-- Toolbar -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-inline form-group pull-left">
+              {{# with api }}
+                <!-- Bookmark -->
+                <div class="api-card-bookmark form-group">
+                  <i class="fa fa-bookmark bookmark-default"></i>
+                  {{ bookmarkCount }}
+                </div>
+                <!-- Rating -->
+                <div class="api-card-star-average form-group"
+                     data-toggle="tooltip"
+                     data-placement="bottom"
+                     data-original-title="{{_ 'apiCard_tooltipTitle_averageRating' }}">
+                  <i class="fa fa-star-half-o"></i>
+                  {{ getAverageRating }}
+                </div>
+              {{/ with }}
+              <div class="form-group">
+                Proxy: <strong>{{ proxyName }}</strong>
+              </div>
+            </div>
+            <div class="toolbar pull-right">
+              <span class="text-success">
+                API is Healthy &;nbsp;
+              </span>
+              <button class="btn btn-default btn-sm">
+                Last 7 Days
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data is not ready -->
+        {{# unless fetchingData }}
+          {{> spinner }}
+        {{ else }}
+          <!-- If error returns -->
+          {{# if error }}
+            <h1>ElasticSearch query error</h1>
+            <p>{{ error }}</p>
+          {{/ if }}
+
+          <!-- Request path has metrics data -->
+          {{# if dataInNotEmpty }}
+            {{> apiAnalyticView elasticsearchData=elasticsearchData id=proxyBackendId }}
+          {{ else }}
+            <p class="alert alert-warning text-center overview-col-title">
+              No data Available. Please select another date
+            </p>
+          {{/ if }}
+        {{/ unless }} <!-- /fetchingData -->
+      {{ else }}
+        {{> spinner }}
+      {{/ if }} <!-- /subscriptionReady -->
+    </div>
+  </div>
+</template>
