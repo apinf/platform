@@ -8,7 +8,7 @@ import { Template } from 'meteor/templating';
 
 // APInf imports
 // eslint-disable-next-line max-len
-import { arrowDirection, percentageValue, summaryComparing, calculateTrend } from '/dashboard/client/compare_indicating';
+import { arrowDirection, percentageValue, summaryComparing, calculateTrend } from '/apinf_packages/dashboard/client/compare_indicating';
 
 Template.apiAnalyticView.helpers({
   arrowDirection (parameter) {
