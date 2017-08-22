@@ -11,10 +11,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="col-xs-12 col-md-4">
           <div class="api-view-card form-group">
             <p class="overview-col-title">
-              {{ requestNumber }} requests
+              {{_ 'apiAnalyticView_text_requestsCount' count=requestNumber }}
             </p>
             <p class="overview-col-title">
-              API Requests
+              {{_ 'apiAnalyticView_chartTitle_apiRequests' }}
             </p>
             <div class="form-group">
               {{> requestsOverTime buckets=requestOverTime id=id }}
@@ -46,10 +46,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="col-xs-12 col-md-4">
           <div class="api-view-card form-group">
             <p class="overview-col-title">
-              {{ responseTime }} ms
+              {{_ 'apiAnalyticView_text_responseTime' time=responseTime }}
             </p>
             <p class="overview-col-title">
-              Average Response Time
+              {{_ 'apiAnalyticView_chartTitle_avgResponseTime' }}
             </p>
             <div class="form-group">
               {{> averageResponseTime buckets=requestOverTime id=id }}
@@ -68,10 +68,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="col-xs-12 col-md-4">
           <div class="api-view-card form-group">
             <p class="overview-col-title">
-              {{ uniqueUsers }} users
+              {{_ 'apiAnalyticView_text_responseTime' count=uniqueUsers }}
             </p>
             <p class="overview-col-title">
-              Unique API users
+              {{_ 'apiAnalyticView_chartTitle_uniqueUsers' }}
             </p>
             <div class="form-group">
               {{> uniqueUsersOverTime buckets=requestOverTime id=id }}
@@ -92,18 +92,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- request timeline chart -->
       <div class="col-xs-12 col-md-6">
         <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticView_timelineChartTitle_requests' }}
+          </p>
           {{> requestTimeline buckets=timelineData }}
         </div>
       </div>
       <!-- response time timeline chart -->
       <div class="col-xs-12 col-md-6">
         <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticView_timelineChartTitle_time' }}
+          </p>
           {{> responseTimeTimeline buckets=timelineData }}
         </div>
       </div>
     </div>
     <div class="row">
-      <!-- table with list of erors -->
+      <!-- table with list of errors -->
       <div class="col-xs-12 col-md-6">
         {{> errorsStatisticTable buckets=timelineData }}
       </div>
