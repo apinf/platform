@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
-This file is covered by the EUPL license.
-You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+ This file is covered by the EUPL license.
+ You may obtain a copy of the licence at
+ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
@@ -15,7 +15,8 @@ import _ from 'lodash';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
-import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '../';
 
 Meteor.publish('proxyBackends', function (proxyId) {
   // Make sure proxyId is a String
@@ -63,4 +64,26 @@ Meteor.publish('proxyApis', function () {
     }
   }
   return [];
+});
+
+// Publish specified proxy backend and related data about Proxy and related API
+Meteor.publishComposite('proxyBackendRelatedData', (id) => {
+  check(id, String);
+  return {
+    find () {
+      return ProxyBackends.find(id);
+    },
+    children: [
+      {
+        find (proxyBackend) {
+          return Proxies.find(proxyBackend.proxyId);
+        },
+      },
+      {
+        find (proxyBackend) {
+          return Apis.find(proxyBackend.apiId);
+        },
+      },
+    ],
+  };
 });
