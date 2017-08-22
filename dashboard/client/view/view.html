@@ -11,7 +11,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{ else }}
       <!-- Error happened -->
       {{# if error }}
-        <h1>ElasticSearch query error</h1>
+        <h1>
+          {{_ 'dashboardView_text_elasticsearchError' }}
+        </h1>
         <p>{{ error }}</p>
       {{/ if }} <!-- /error -->
 

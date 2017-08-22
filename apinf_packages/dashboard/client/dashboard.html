@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="dashboardPage">
   <div class="container">
     <h1 class="page">
-      Dashboard
+      {{_ "dashboardPage_title_dashboard" }}
     </h1>
 
     {{# if Template.subscriptionsReady }}
@@ -22,12 +22,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- Display a message about "No managed API" -->
           <div class="alert alert-warning alert-text" role="alert">
             <h3>
-              {{_ "dashboard_noApisTitle" }}
+              {{_ "dashboardPage_text_noApis" }}
             </h3>
             <a
               href="{{ pathFor route='addApi' }}"
               class="btn btn-sm btn-success">
-              {{_ 'dashboard_addApiButton_text' }}
+              {{_ 'dashboardPage_buttonText_addApi' }}
             </a>
           </div>
         {{/ if }} <!-- /managedApisCount -->
@@ -35,7 +35,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <!-- Display a message about "No connected API" -->
         <div class="alert alert-warning alert-text" role="alert">
           <p>
-            {{_ 'dashboard_noProxyBackendsText' }}
+            {{_ 'dashboardPage_text_noProxyBackends' }}
           </p>
         </div>
       {{/ if }} <!-- /proxyBackendsExists -->
