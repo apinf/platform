@@ -20,26 +20,6 @@ import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Apis from '../';
 
-// eslint-disable-next-line prefer-arrow-callback
-Meteor.publish('userManagedApisName', function () {
-  // Get current user id
-  const userId = this.userId;
-
-  const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-  let filter;
-
-  // if user is not admin
-  if (userIsAdmin) {
-    // Set empty filter (return all APIs)
-    filter = {};
-  } else {
-    // Otherwise only managed
-    filter = { managerIds: userId };
-  }
-  // Get API names
-  return Apis.find(filter, { name: 1 });
-});
-
 Meteor.publish('latestPublicApis', (limit) => {
   // Make sure limit is a Number
   check(limit, Number);
