@@ -1,0 +1,70 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardSummaryStatistic">
+  <!-- Table head -->
+  <div class="dashboard-table-row">
+    <div class="row">
+      <div class="col-xs-3">
+        <strong>
+          API name
+        </strong>
+      </div>
+      <div class="col-xs-3">
+        <strong>
+          Number of requests
+        </strong>
+      </div>
+      <div class="col-xs-3">
+        <strong>
+          Response time
+        </strong>
+      </div>
+      <div class="col-xs-3">
+        <strong>
+          Users
+        </strong>
+      </div>
+    </div>
+  </div>
+  <!-- Table body -->
+  {{# each bucket in buckets }}
+    <div class="statistic-block">
+      {{# with bucket }}
+        <div data-id="{{ id }}" class="dashboard-table-row statistic-line">
+          <div class="row">
+            <div class="col-md-3">
+              {{ apiName }}
+            </div>
+            <div class="col-md-3">
+              <span class="request-number">{{ requestNumber }}</span>
+              <div class="{{ arrowDirection 'requests' }}"></div>
+              <span class="{{ textColor 'requests' }}">
+                {{ percentages 'requests' }}
+              </span>
+            </div>
+            <div class="col-md-3">
+              <span class="response-time">{{ responseTime }} ms</span>
+              <div class="{{ arrowDirection 'time' }}"></div>
+              <span class="{{ textColor 'time' }}">
+                {{ percentages 'time' }}
+              </span>
+            </div>
+            <div class="col-md-3">
+              <span class="unique-users">{{ uniqueUsers }}</span>
+              <div class="{{ arrowDirection 'users' }}"></div>
+              <span class="{{ textColor 'users' }}">
+                {{ percentages 'users' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      {{/ with }}
+      {{# if displayOverview bucket.id }}
+        {{> dashboardOverviewStatistic bucket=bucket }}
+      {{/ if }}
+    </div>
+  {{/ each }}
+</template>

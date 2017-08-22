@@ -3,29 +3,44 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
-<template name="dashboard">
+<template name="dashboardPage">
   <div class="container">
-    <h1 class="page-header">
-      {{_ "dashboard_mainTitle" }}
+    <h1 class="page">
+      Dashboard
     </h1>
-    {{# if Template.subscriptionsReady }}
-      {{# if managedApisCount }}
-        {{# if proxyBackendsExists }}
-          {{> dashboardChartsFiltering proxyBackends=proxyBackends }}
 
-          {{> dashboardCharts chartData=chartData }}
+    {{# if Template.subscriptionsReady }}
+      {{> dashboardToolbar proxies=proxiesList }}
+      <!-- Make sure an API is connected to proxy -->
+      {{# if proxyBackendsCount }}
+        <!-- Make sure a user has any API -->
+        {{# if  managedApisCount }}
+          <!-- TODO: Add case for one user -->
+          <!-- Display Dashboard page-->
+          {{> dashboardView }}
         {{ else }}
+          <!-- Display a message about "No managed API" -->
           <div class="alert alert-warning alert-text" role="alert">
-            <p>
-              {{_ 'dashboard_noProxyBackendsText' }}
-            </p>
+            <h3>
+              {{_ "dashboard_noApisTitle" }}
+            </h3>
+            <a
+              href="{{ pathFor route='addApi' }}"
+              class="btn btn-sm btn-success">
+              {{_ 'dashboard_addApiButton_text' }}
+            </a>
           </div>
-        {{/ if }}
+        {{/ if }} <!-- /managedApisCount -->
       {{ else }}
-        {{> dashboardNoApis }}
-      {{/ if }}
+        <!-- Display a message about "No connected API" -->
+        <div class="alert alert-warning alert-text" role="alert">
+          <p>
+            {{_ 'dashboard_noProxyBackendsText' }}
+          </p>
+        </div>
+      {{/ if }} <!-- /proxyBackendsExists -->
     {{ else }}
       {{> spinner }}
-    {{/ if }}
+    {{/ if }} <!-- /subscriptionsReady -->
   </div>
 </template>
