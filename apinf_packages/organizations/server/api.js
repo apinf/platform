@@ -7,7 +7,7 @@
 import { Meteor } from 'meteor/meteor';
 
 // Collection imports
-import ManagementV1 from '/apinf_packages/rest_apis/management';
+import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
 import { Accounts } from 'meteor/accounts-base';
 
