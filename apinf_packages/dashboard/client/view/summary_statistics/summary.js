@@ -15,7 +15,7 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf imports
 // eslint-disable-next-line max-len
-import { arrowDirection, percentageValue, calculateTrend } from '/apinf_packages/dashboard/client/compare_indicating';
+import { arrowDirection, percentageValue, calculateTrend } from '/apinf_packages/dashboard/client/trend_helpers';
 
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
@@ -36,28 +36,31 @@ Template.dashboardSummaryStatistic.helpers({
     return buckets.map(value => {
       // Get the proxy backend instance with equal frontend_prefix as request_path
       const proxyBackend = ProxyBackends.findOne({
-        'apiUmbrella.url_matches': { $elemMatch: { frontend_prefix: value.key } },
+        'apiUmbrella.url_matches': {
+          $elemMatch: {
+            frontend_prefix: { $regex: value.key, $options: 'i' },
+          },
+        },
       });
 
       if (proxyBackend) {
-        const currentPeriodBucket = value.group_by_interval.buckets.currentPeriod;
-        const previousPeriodBucket = value.group_by_interval.buckets.previousPeriod;
+        const currentPeriodData = value.group_by_interval.buckets.currentPeriod;
 
         // Get the statistic for current period
-        const requestNumber = currentPeriodBucket.doc_count;
-        const responseTime = parseInt(currentPeriodBucket.response_time.values['95.0'], 10) || 0;
-        const uniqueUsers = currentPeriodBucket.unique_users.buckets.length;
-        const successCallsCount = currentPeriodBucket.success_status.buckets.success.doc_count;
-        const errorCallsCount = currentPeriodBucket.success_status.buckets.error.doc_count;
+        const requestNumber = currentPeriodData.doc_count;
+        const responseTime = parseInt(currentPeriodData.response_time.values['50.0'], 10) || 0;
+        const uniqueUsers = currentPeriodData.unique_users.buckets.length;
+        const successCallsCount = currentPeriodData.success_status.buckets.success.doc_count;
+        const errorCallsCount = currentPeriodData.success_status.buckets.error.doc_count;
+
+        const previousPeriodData = value.group_by_interval.buckets.previousPeriod;
+        const previousResponseTime = previousPeriodData.response_time.values['50.0'];
+        const previousUniqueUsers = previousPeriodData.unique_users.buckets.length;
 
         // Get the statistics comparing between previous and current periods
-        const compareRequests = calculateTrend(previousPeriodBucket.doc_count, requestNumber);
-        const compareResponse = calculateTrend(
-          parseInt(previousPeriodBucket.response_time.values['95.0'], 10), responseTime
-        );
-        const compareUsers = calculateTrend(
-          previousPeriodBucket.unique_users.buckets.length, uniqueUsers
-        );
+        const compareRequests = calculateTrend(previousPeriodData.doc_count, requestNumber);
+        const compareResponse = calculateTrend(parseInt(previousResponseTime, 10), responseTime);
+        const compareUsers = calculateTrend(previousUniqueUsers, uniqueUsers);
 
         // Dictionary of Flags about display/not the overview part for current item
         // By default don't display overview template for any proxy backend
@@ -65,15 +68,15 @@ Template.dashboardSummaryStatistic.helpers({
 
         // Get value to display
         return {
-          id: proxyBackend._id,
           apiName: proxyBackend.apiName(),
+          proxyBackendId: proxyBackend._id,
           requestPath: value.key,
           requestNumber,
           responseTime,
           uniqueUsers,
           successCallsCount,
           errorCallsCount,
-          requestOverTime: currentPeriodBucket.requests_over_time.buckets,
+          requestOverTime: currentPeriodData.requests_over_time.buckets,
           compareRequests,
           compareResponse,
           compareUsers,
