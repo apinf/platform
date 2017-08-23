@@ -7,7 +7,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-FlowRouter.route('/settings/branding', {
+// APInf imports
+import signedIn from '/apinf_packages/core/client/lib/router';
+
+signedIn.route('/settings/branding', {
   name: 'branding',
   action () {
     BlazeLayout.render('masterLayout', { main: 'branding' });
