@@ -3,6 +3,9 @@
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor contributed packages import
+import { TAPi18n } from 'meteor/tap:i18n';
+
 export function arrowDirection (parameter, bucket) {
   let positiveTrend = 'arrow-up';
   let negativeTrend = 'arrow-down';
@@ -70,19 +73,19 @@ export function percentageValue (parameter, bucket) {
   return percentage > 0 ? `${percentage}%` : '';
 }
 
-export function calculateTrend (prev, curr) {
+export function calculateTrend (previous, current) {
   // If values are equal
   // then no up-down
-  if (prev === curr) return 0;
+  if (previous === current) return 0;
 
   // it is impossible to divide on 0
   // If previous value is 0 then progress is up on 100%
-  if (prev === 0 || isNaN(prev)) return 100;
+  if (previous === 0 || isNaN(previous)) return 100;
 
   // If current value is 0 then progress is down on 100%
-  if (curr === 0 || isNaN(curr)) return -100;
+  if (current === 0 || isNaN(current)) return -100;
 
-  return Math.round(((curr / prev) - 1) * 100);
+  return Math.round(((current / previous) - 1) * 100);
 }
 
 export function summaryComparing (parameter, bucket) {
@@ -97,13 +100,14 @@ export function summaryComparing (parameter, bucket) {
     // If trend is positive
     if (direction === 'arrow-up' || direction === 'arrow-down_time') {
       // Metric is better
-      trend = 'higher';
+      trend = TAPi18n.__('summaryComparing_trendDirection_higher');
     } else {
       // Otherwise metric is worse
-      trend = 'lower';
+      trend = TAPi18n.__('summaryComparing_trendDirection_lower');
     }
 
-    return `${percentages} ${trend} than last 7 days`;
+    const params = { percentage: percentages, direction: trend };
+    return TAPi18n.__('summaryComparing_displayTrendInfo', params);
   }
 
   // Don't display any text if there is no trend

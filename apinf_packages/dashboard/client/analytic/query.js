@@ -75,11 +75,11 @@ export default function queryForAnalyticPage (requestPath) {
                 interval: 'day',
               },
               aggs: {
-                // Percentiles of response time over interval
+                // median response time over interval
                 percentiles_response_time: {
                   percentiles: {
                     field: 'response_time',
-                    percents: [95],
+                    percents: [50],
                   },
                 },
                 // Count of Unique users over interval
@@ -93,11 +93,11 @@ export default function queryForAnalyticPage (requestPath) {
             // Get total count for general request_path:
             // percentiles of response time, unique users, response status
 
-            // Get Percentiles of response time
+            // Get median response time
             response_time: {
               percentiles: {
                 field: 'response_time',
-                percents: [95],
+                percents: [50],
               },
             },
             // Get total count of unique users

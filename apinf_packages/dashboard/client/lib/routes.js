@@ -19,9 +19,9 @@ signedIn.route('/dashboard', {
   triggersEnter: [(context) => {
     // Initialize the query parameters which can be calculated in code
     // Do it to saving url consistent for the browser history
-    if (!context.queryParams.proxy) {
+    if (!context.queryParams.proxy_id) {
       // Initialize proxy parameter if it doesn't specify
-      context.queryParams.proxy = null;
+      context.queryParams.proxy_id = null;
     }
   }],
   name: 'dashboard',
@@ -30,13 +30,13 @@ signedIn.route('/dashboard', {
   },
 });
 
-signedIn.route('/analytic/:id', {
+signedIn.route('/analytic/:proxyBackendId', {
   name: 'apiAnalyticsPage',
   action (params) {
-    const id = params.id;
+    const proxyBackendId = params.proxyBackendId;
 
     // Make sure proxy Backend exists with this ID
-    Meteor.call('proxyBackendExists', id, (error, proxyBackend) => {
+    Meteor.call('proxyBackendExists', proxyBackendId, (error, proxyBackend) => {
       if (proxyBackend) {
         // Make sure a user has permission to view Analytic page
         Meteor.call('userCanViewAnalytic', proxyBackend.apiId, (viewError, canView) => {

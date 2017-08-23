@@ -6,6 +6,9 @@
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages import
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Npm packages imports
 import moment from 'moment';
 import Chart from 'chart.js';
@@ -18,6 +21,7 @@ Template.requestsOverTime.onRendered(function () {
 
   // Get Labels for chart
   const labels = elasticsearchData.map(value => {
+    // TODO: internationalize date formatting
     return moment(value.key).format('MM/DD');
   });
 
@@ -28,8 +32,9 @@ Template.requestsOverTime.onRendered(function () {
     };
   });
 
+  const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${instance.data.id}"] .requests-over-time-chart`;
+  const querySelector = `[data-overview-id="${id}"] .requests-over-time-chart`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
@@ -42,7 +47,7 @@ Template.requestsOverTime.onRendered(function () {
       labels,
       datasets: [
         {
-          label: 'Requests',
+          label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
           backgroundColor: '#959595',
           borderColor: '#959595',
           pointBorderColor: '#959595',
@@ -69,7 +74,17 @@ Template.requestsOverTime.onRendered(function () {
           },
         }],
       },
-
     },
+  });
+
+  // Reactive update Chart Axis translation
+  instance.autorun(() => {
+    const datasets = instance.chart.data.datasets;
+
+    // Update translation
+    datasets[0].label = TAPi18n.__('requestsOverTime_pointTitle_requests');
+
+    // Update chart with new translation
+    instance.chart.update();
   });
 });

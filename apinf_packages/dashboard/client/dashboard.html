@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </h1>
 
     {{# if Template.subscriptionsReady }}
-      {{> dashboardToolbar proxies=proxiesList }}
+      {{> dashboardToolbar proxiesList=proxiesList }}
       <!-- Make sure an API is connected to proxy -->
       {{# if proxyBackendsCount }}
         <!-- Make sure a user has any API -->
