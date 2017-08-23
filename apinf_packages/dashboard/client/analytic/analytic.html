@@ -65,12 +65,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
 
           <!-- Request path has metrics data -->
-          {{# if dataInNotEmpty }}
-            {{> apiAnalyticView elasticsearchData=elasticsearchData id=proxyBackendId }}
-          {{ else }}
-            <p class="alert alert-warning text-center overview-col-title">
-              {{_ 'apiAnalyticPage_warningText_noData' }}
-            </p>
+          {{# if elasticsearchData }}
+            {{# if dataInNotEmpty }}
+              {{> apiAnalyticView elasticsearchData=elasticsearchData id=proxyBackendId }}
+            {{ else }}
+              <p class="alert alert-warning text-center overview-col-title">
+                {{_ 'apiAnalyticPage_warningText_noData' }}
+              </p>
+            {{/ if }}
           {{/ if }}
         {{/ unless }} <!-- /fetchingData -->
       {{ else }}
