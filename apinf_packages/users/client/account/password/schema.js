@@ -9,17 +9,17 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 const updatePasswordSchema = new SimpleSchema({
   old: {
     type: String,
-    max: 50,
+    // max: 50,
   },
   new: {
     type: String,
     min: 6,
-    max: 20,
+    // max: 50,
   },
   confirm: {
     type: String,
     min: 6,
-    max: 20,
+    // max: 50,
     // TODO: Resolve consistent-return
     // eslint-disable-next-line consistent-return
     custom () {
