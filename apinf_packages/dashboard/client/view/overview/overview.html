@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardOverviewStatistic">
   {{# with bucket }}
-    <div class="overview-body" data-overview-id="{{ id }}">
+    <div class="overview-body" data-overview-id="{{ proxyBackendId }}">
       <div class="row overview-line">
         <div class="col-xs-12 col-md-3">
           <p class="overview-col-title">
@@ -31,7 +31,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="overview-col-title">
               {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
             </span>
-            {{> requestsOverTime buckets=requestOverTime id=id }}
+            {{> requestsOverTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             <div class="{{ arrowDirection 'requests' }}"></div>
             <span>{{ overviewComparing 'requests' }}</span>
           </div>
@@ -44,7 +44,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="overview-col-title">
               {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
             </span>
-            {{> averageResponseTime buckets=requestOverTime id=id }}
+            {{> averageResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             <div class="{{ arrowDirection 'time' }}"></div>
             <span>{{ overviewComparing 'time' }}</span>
           </div>
@@ -57,12 +57,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="overview-col-title">
               {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
             </span>
-            {{> uniqueUsersOverTime buckets=requestOverTime id=id }}
+            {{> uniqueUsersOverTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             <div class="{{ arrowDirection 'users' }}"></div>
             <span>{{ overviewComparing 'users' }}</span>
           </div>
 
-          <a href="{{ pathFor 'apiAnalyticsPage' id=id }}" class="pull-right">
+          <a href="{{ pathFor 'apiAnalyticsPage' proxyBackendId=proxyBackendId }}" class="pull-right">
             {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
           </a>
         </div>

@@ -23,37 +23,46 @@ Template.apiAnalyticPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  instance.id = FlowRouter.getParam('id');
+  instance.proxyBackendId = FlowRouter.getParam('proxyBackendId');
 
   // Subscribe to related Proxy Backend, API, Proxy instances
-  instance.subscribe('proxyBackendRelatedData', instance.id);
+  instance.subscribe('proxyBackendRelatedData', instance.proxyBackendId);
 
   instance.elasticsearchData = new ReactiveVar();
   instance.error = new ReactiveVar();
 
   instance.autorun(() => {
-    const proxy = Proxies.findOne();
-    const proxyBackend = ProxyBackends.findOne();
+    const proxyBackend = ProxyBackends.findOne(instance.proxyBackendId);
 
-    // Make sure proxy backend instance exists
-    if (proxyBackend && proxy) {
-      // Get
-      const proxyBackendPath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+    // Make sure proxy backend is available
+    if (proxyBackend) {
+      // Storage Proxy ID and API ID
+      instance.proxyId = proxyBackend.proxyId;
+      instance.apiId = proxyBackend.apiId;
 
-      // Make query to Elasticsearch for this page
-      const queryParams = queryForAnalyticPage(proxyBackendPath);
-      // Get URL of relevant ElasticSearch
-      const elasticsearchHost = proxy.apiUmbrella.elasticsearch;
+      const proxy = Proxies.findOne(instance.proxyId);
 
-      // Get Elasticsearch data
-      Meteor.call('getElasticsearchData', elasticsearchHost, queryParams, (error, result) => {
-        if (error) {
-          instance.error.set(error);
-          throw Meteor.Error(error);
-        }
-        // Update Elasticsearch data reactive variable with result
-        instance.elasticsearchData.set(result.aggregations);
-      });
+      // Make sure proxy is available
+      if (proxy) {
+        // Get request_path
+        const proxyBackendPath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+
+        // Make query to Elasticsearch for this page
+        const queryParams = queryForAnalyticPage(proxyBackendPath);
+
+        // Get URL of relevant ElasticSearch
+        const elasticsearchHost = proxy.apiUmbrella.elasticsearch;
+
+        // Get Elasticsearch data
+        Meteor.call('getElasticsearchData', elasticsearchHost, queryParams, (error, dataset) => {
+          if (error) {
+            instance.error.set(error);
+            throw Meteor.Error(error);
+          }
+          // Update Elasticsearch data reactive variable with result
+          instance.elasticsearchData.set(dataset.aggregations);
+        });
+      }
     }
   });
 });
@@ -68,7 +77,7 @@ Template.apiAnalyticPage.helpers({
   },
   fetchingData () {
     const instance = Template.instance();
-    //
+    // Data is available if it has possitive or negative (error) result
     return instance.elasticsearchData.get() || instance.error.get();
   },
   error () {
@@ -77,14 +86,18 @@ Template.apiAnalyticPage.helpers({
     return instance.error.get();
   },
   proxyName () {
-    const proxy = Proxies.findOne();
+    const instance = Template.instance();
+
+    const proxy = Proxies.findOne(instance.proxyId);
 
     return proxy.name;
   },
   api () {
-    return Apis.findOne();
+    const instance = Template.instance();
+
+    return Apis.findOne(instance.apiId);
   },
-  dataInNotEmpty () {
+  dataAvailable () {
     const elasticsearchData = Template.instance().elasticsearchData.get();
 
     // Data exists if requests number(dco_count) is more than 0
@@ -93,7 +106,7 @@ Template.apiAnalyticPage.helpers({
   proxyBackendId () {
     const instance = Template.instance();
 
-    return instance.id;
+    return instance.proxyBackendId;
   },
 });
 

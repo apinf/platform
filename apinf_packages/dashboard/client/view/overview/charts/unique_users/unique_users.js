@@ -6,6 +6,9 @@
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages import
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Npm packages imports
 import moment from 'moment';
 import Chart from 'chart.js';
@@ -18,6 +21,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
 
   // Get Labels for chart
   const labels = elasticsearchData.map(value => {
+    // TODO: internationalize date formatting
     return moment(value.key).format('MM/DD');
   });
 
@@ -29,8 +33,9 @@ Template.uniqueUsersOverTime.onRendered(function () {
     };
   });
 
+  const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${instance.data.id}"] .unique-users-time-chart`;
+  const querySelector = `[data-overview-id="${id}"] .users-chart`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
@@ -43,7 +48,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
       labels,
       datasets: [
         {
-          label: 'Users',
+          label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
           backgroundColor: '#959595',
           borderColor: '#959595',
           pointBorderColor: '#959595',
@@ -71,5 +76,16 @@ Template.uniqueUsersOverTime.onRendered(function () {
         }],
       },
     },
+  });
+
+  // Reactive update Chart Axis translation
+  instance.autorun(() => {
+    const datasets = instance.chart.data.datasets;
+
+    // Update translation
+    datasets[0].label = TAPi18n.__('uniqueUsersOverTime_pointTitle_users');
+
+    // Update chart with new translation
+    instance.chart.update();
   });
 });

@@ -8,13 +8,16 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages import
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Npm packages imports
 import moment from 'moment';
 import Chart from 'chart.js';
 
 Template.requestTimeline.onCreated(function () {
   const instance = this;
-  const buckets = instance.data.buckets;
+  const timelineData = instance.data.timelineData;
 
   instance.elasticsearchData = new ReactiveVar();
 
@@ -22,7 +25,7 @@ Template.requestTimeline.onCreated(function () {
   // Get related elasticsearch data when a user changed path
   instance.changePath = (path) => {
     // Find the related data for selected Path
-    const relatedData = buckets.filter(value => {
+    const relatedData = timelineData.filter(value => {
       return value.key === path;
     });
 
@@ -31,7 +34,7 @@ Template.requestTimeline.onCreated(function () {
   };
 
   // On default get data for the first requested path
-  instance.changePath(buckets[0].key);
+  instance.changePath(timelineData[0].key);
 });
 
 Template.requestTimeline.onRendered(function () {
@@ -54,7 +57,7 @@ Template.requestTimeline.onRendered(function () {
           {
             scaleLabel: {
               display: true,
-              labelString: 'Days',
+              labelString: TAPi18n.__('requestTimeline_xAxisTitle_days'),
               fontSize: 14,
               fontColor: '#000000',
             },
@@ -64,7 +67,7 @@ Template.requestTimeline.onRendered(function () {
           {
             scaleLabel: {
               display: true,
-              labelString: 'Requests, number',
+              labelString: TAPi18n.__('requestTimeline_yAxisTitle_requests'),
               fontSize: 14,
               fontColor: '#000000',
             },
@@ -94,6 +97,7 @@ Template.requestTimeline.onRendered(function () {
 
     aggregationData.forEach(value => {
       // Create Labels values
+      // TODO: internationalize date formatting
       labels.push(moment(value.key).format('MM/DD'));
 
       // Data for all requests
@@ -132,7 +136,7 @@ Template.requestTimeline.onRendered(function () {
       labels,
       datasets: [
         {
-          label: 'All Calls',
+          label: TAPi18n.__('requestTimeline_legendItem_allCalls'),
           backgroundColor: '#959595',
           borderColor: '#959595',
           pointBorderColor: '#959595',
@@ -177,15 +181,29 @@ Template.requestTimeline.onRendered(function () {
     // Update chart with relevant data
     instance.chart.update();
   });
+
+  // Reactive update Chart Axis translation
+  instance.autorun(() => {
+    const datasets = instance.chart.data.datasets;
+    const scales = instance.chart.options.scales;
+
+    // Update translation
+    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_xAxisTitle_days');
+    scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_yAxisTitle_requests');
+    datasets[0].label = TAPi18n.__('requestTimeline_legendItem_allCalls');
+
+    // Update chart with new translation
+    instance.chart.update();
+  });
 });
 
 Template.requestTimeline.helpers({
   listPaths () {
-    const buckets = Template.instance().data.buckets;
+    const timelineData = Template.instance().data.timelineData;
 
     // Return all requested paths
-    return buckets.map(bucket => {
-      return bucket.key;
+    return timelineData.map(dataset => {
+      return dataset.key;
     });
   },
 });

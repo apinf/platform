@@ -7,13 +7,16 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages import
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Npm packages imports
 import moment from 'moment';
 import Chart from 'chart.js';
 
 Template.responseTimeTimeline.onCreated(function () {
   const instance = this;
-  const buckets = instance.data.buckets;
+  const timelineData = instance.data.timelineData;
 
   instance.elasticsearchData = new ReactiveVar();
 
@@ -21,7 +24,7 @@ Template.responseTimeTimeline.onCreated(function () {
   // Get related elasticsearch data when a user changed path
   instance.changePath = (path) => {
     // Find the related data for selected Path
-    const relatedData = buckets.filter(value => {
+    const relatedData = timelineData.filter(value => {
       return value.key === path;
     });
 
@@ -30,7 +33,7 @@ Template.responseTimeTimeline.onCreated(function () {
   };
 
   // On default get data for the first requested path
-  instance.changePath(buckets[0].key);
+  instance.changePath(timelineData[0].key);
 });
 
 Template.responseTimeTimeline.onRendered(function () {
@@ -94,7 +97,7 @@ Template.responseTimeTimeline.onRendered(function () {
       };
     });
 
-    // Points for line of the 60th percentiles of response time
+    // Points for line of the 50th percentiles of response time
     const percentiles50 = aggregationData.map((value) => {
       const responseTime = value.percentiles_response_time.values['50.0'];
 
@@ -106,6 +109,7 @@ Template.responseTimeTimeline.onRendered(function () {
 
     // Create Labels values
     const labels = aggregationData.map(value => {
+      // TODO: internationalize date formatting
       return moment(value.key).format('MM/DD');
     });
 
@@ -114,20 +118,20 @@ Template.responseTimeTimeline.onRendered(function () {
       labels,
       datasets: [
         {
-          label: 'The 95th percentiles',
-          backgroundColor: '#959595',
-          borderColor: '#959595',
-          pointBorderColor: '#959595',
-          fill: false,
-          data: percentiles95,
-        },
-        {
-          label: 'The 50th percentiles',
+          label: TAPi18n.__('responseTimeTimeline_legendItem_50thPercentiles'),
           backgroundColor: 'green',
           borderColor: 'green',
           pointBorderColor: 'green',
           fill: false,
           data: percentiles50,
+        },
+        {
+          label: TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles'),
+          backgroundColor: '#959595',
+          borderColor: '#959595',
+          pointBorderColor: '#959595',
+          fill: false,
+          data: percentiles95,
         },
       ],
     };
@@ -135,15 +139,30 @@ Template.responseTimeTimeline.onRendered(function () {
     // Update chart with relevant data
     instance.chart.update();
   });
+
+  // Reactive update Chart Axis translation
+  instance.autorun(() => {
+    const datasets = instance.chart.data.datasets;
+    const scales = instance.chart.options.scales;
+
+    // Update translation
+    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_xAxisTitle_days');
+    scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_yAxisTitle_time');
+    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_50thPercentiles');
+    datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
+
+    // Update chart with new translation
+    instance.chart.update();
+  });
 });
 
 Template.responseTimeTimeline.helpers({
   listPaths () {
-    const buckets = Template.instance().data.buckets;
+    const timelineData = Template.instance().data.timelineData;
 
     // Return all requested paths
-    return buckets.map(bucket => {
-      return bucket.key;
+    return timelineData.map(dataset => {
+      return dataset.key;
     });
   },
 });

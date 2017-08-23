@@ -8,15 +8,15 @@ import { Template } from 'meteor/templating';
 
 Template.mostFrequentUsersTable.helpers({
   users () {
-    const buckets = Template.instance().data.buckets;
+    const mostFrequentUsers = Template.instance().data.mostFrequentUsers;
 
     const users = [];
 
-    buckets.forEach(bucket => {
-      bucket.request_path.buckets.forEach(request => {
+    mostFrequentUsers.forEach(userDataset => {
+      userDataset.request_path.buckets.forEach(request => {
         const user = {};
         // Get value of email
-        user.email = bucket.user_email.buckets[0].key;
+        user.email = userDataset.user_email.buckets[0].key;
         // Get value of requests number
         user.calls = request.doc_count;
         // Get value of request_path
