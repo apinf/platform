@@ -11,7 +11,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ 'dashboardToolbar_labelText_proxy' }} &nbsp;
         </label>
         <select class="form-control toolbar-select" id="select-proxy">
-          {{# each proxy in proxies }}
+          {{# each proxy in proxiesList }}
             {{# with proxy }}
               <option value="{{ _id }}" {{ selectedOption }}>
                 {{ name }}

@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiAnalyticView">
-  <div data-overview-id="{{ id }}">
+  <div data-overview-id="{{ proxyBackendId }}">
     {{# with bucket }}
       <div class="row">
         <!-- number of requests chart -->
@@ -17,12 +17,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'apiAnalyticView_chartTitle_apiRequests' }}
             </p>
             <div class="form-group">
-              {{> requestsOverTime buckets=requestOverTime id=id }}
+              {{> requestsOverTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             </div>
             <div class="form-group">
               <div class="{{ arrowDirection 'requests' }}"></div>
               <!-- Keep the space symbol to set SPAN element a height -->
-              <span>{{ summaryComparing 'requests' }}&nbsp;</span>
+              <span>
+                {{ summaryComparing 'requests' }}&nbsp;
+              </span>
             </div>
             <!-- response status list-->
             <div class="row">
@@ -52,12 +54,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'apiAnalyticView_chartTitle_avgResponseTime' }}
             </p>
             <div class="form-group">
-              {{> averageResponseTime buckets=requestOverTime id=id }}
+              {{> averageResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             </div>
             <div class="form-group">
               <div class="{{ arrowDirection 'time' }}"></div>
               <!-- Keep the space symbol to set a height for SPAN element -->
-              <span>{{ summaryComparing 'time' }}&nbsp;</span>
+              <span>
+                {{ summaryComparing 'time' }}&nbsp;
+              </span>
             </div>
             <!-- Keep the space symbol to set a height the element a height -->
             <div class="row">&nbsp;</div>
@@ -74,12 +78,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'apiAnalyticView_chartTitle_uniqueUsers' }}
             </p>
             <div class="form-group">
-              {{> uniqueUsersOverTime buckets=requestOverTime id=id }}
+              {{> uniqueUsersOverTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             </div>
             <div class="form-group">
               <div class="{{ arrowDirection 'users' }}"></div>
               <!-- Keep the space symbol to set a height for SPAN element -->
-              <span>{{ summaryComparing 'users' }}&nbsp;</span>
+              <span>
+                {{ summaryComparing 'users' }}&nbsp;
+              </span>
             </div>
             <!-- Keep the space symbol to set a height for the element -->
             <div class="row">&nbsp;</div>
@@ -95,7 +101,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <p class="overview-col-title">
             {{_ 'apiAnalyticView_timelineChartTitle_requests' }}
           </p>
-          {{> requestTimeline buckets=timelineData }}
+          {{> requestTimeline timelineData=timelineData }}
         </div>
       </div>
       <!-- response time timeline chart -->
@@ -104,18 +110,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <p class="overview-col-title">
             {{_ 'apiAnalyticView_timelineChartTitle_time' }}
           </p>
-          {{> responseTimeTimeline buckets=timelineData }}
+          {{> responseTimeTimeline timelineData=timelineData }}
         </div>
       </div>
     </div>
     <div class="row">
       <!-- table with list of errors -->
       <div class="col-xs-12 col-md-6">
-        {{> errorsStatisticTable buckets=timelineData }}
+        {{> errorsStatisticTable timelineData=timelineData }}
       </div>
       <!-- most frequent users -->
       <div class="col-xs-12 col-md-6">
-        {{> mostFrequentUsersTable buckets=mostFrequentUsers }}
+        {{> mostFrequentUsersTable mostFrequentUsers=mostFrequentUsers }}
       </div>
     </div>
   </div>

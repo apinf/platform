@@ -63,11 +63,11 @@ export default function queryForDashboardPage (proxyBackendPaths) {
                 ],
               },
               aggs: {
-                // Get response time for each request_path and for each period
+                // Get median response time for each request_path and for each period
                 response_time: {
                   percentiles: {
                     field: 'response_time',
-                    percents: [95],
+                    percents: [50],
                   },
                 },
                 // Get user_id for each request_path and for each period
@@ -95,11 +95,11 @@ export default function queryForDashboardPage (proxyBackendPaths) {
                     interval: 'week',
                   },
                   aggs: {
-                    // Get the average response time over interval
+                    // Get the median response time over interval
                     percentiles_response_time: {
                       percentiles: {
                         field: 'response_time',
-                        percents: [95],
+                        percents: [50],
                       },
                     },
                     unique_users: {

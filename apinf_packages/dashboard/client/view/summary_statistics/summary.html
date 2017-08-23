@@ -33,7 +33,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{# each bucket in buckets }}
     <div class="statistic-block">
       {{# with bucket }}
-        <div data-id="{{ id }}" class="dashboard-table-row statistic-line">
+        <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
           <div class="row">
             <div class="col-md-3">
               {{ apiName }}
@@ -68,7 +68,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
       {{/ with }}
-      {{# if displayOverview bucket.id }}
+      {{# if displayOverview bucket.proxyBackendId }}
         {{> dashboardOverviewStatistic bucket=bucket }}
       {{/ if }}
     </div>
