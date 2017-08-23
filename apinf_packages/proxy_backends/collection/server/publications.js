@@ -28,11 +28,11 @@ Meteor.publish('proxyBackends', function (proxyId) {
 });
 
 // Publish specified proxy backend and related data about Proxy and related API
-Meteor.publishComposite('proxyBackendRelatedData', (id) => {
-  check(id, String);
+Meteor.publishComposite('proxyBackendRelatedData', (proxyBackendId) => {
+  check(proxyBackendId, String);
   return {
     find () {
-      return ProxyBackends.find(id);
+      return ProxyBackends.find(proxyBackendId);
     },
     children: [
       {

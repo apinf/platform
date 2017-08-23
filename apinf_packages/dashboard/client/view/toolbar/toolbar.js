@@ -11,7 +11,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.dashboardToolbar.helpers({
   selectedOption () {
-    const proxyId = FlowRouter.getQueryParam('proxy');
+    const proxyId = FlowRouter.getQueryParam('proxy_id');
 
     // Select this option if it is equal with query param value
     return proxyId === this._id ? 'selected' : '';

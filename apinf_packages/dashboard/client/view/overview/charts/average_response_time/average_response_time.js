@@ -6,6 +6,9 @@
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages import
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Npm packages imports
 import moment from 'moment';
 import Chart from 'chart.js';
@@ -18,6 +21,7 @@ Template.averageResponseTime.onRendered(function () {
 
   // Get Labels for chart
   const labels = elasticsearchData.map(value => {
+    // TODO: internationalize date formatting
     return moment(value.key).format('MM/DD');
   });
 
@@ -25,12 +29,13 @@ Template.averageResponseTime.onRendered(function () {
   const data = elasticsearchData.map(value => {
     return {
       x: value.key,
-      y: parseInt(value.percentiles_response_time.values['95.0'], 10),
+      y: parseInt(value.percentiles_response_time.values['50.0'], 10),
     };
   });
 
+  const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${instance.data.id}"] .average-response-time`;
+  const querySelector = `[data-overview-id="${id}"] .average-response-time`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
@@ -43,7 +48,7 @@ Template.averageResponseTime.onRendered(function () {
       labels,
       datasets: [
         {
-          label: 'Time, ms',
+          label: TAPi18n.__('averageResponseTime_pointTitle_time'),
           backgroundColor: '#959595',
           borderColor: '#959595',
           pointBorderColor: '#959595',
@@ -71,5 +76,16 @@ Template.averageResponseTime.onRendered(function () {
         }],
       },
     },
+  });
+
+  // Reactive update Chart Axis translation
+  instance.autorun(() => {
+    const datasets = instance.chart.data.datasets;
+
+    // Update translation
+    datasets[0].label = TAPi18n.__('averageResponseTime_pointTitle_time');
+
+    // Update chart with new translation
+    instance.chart.update();
   });
 });

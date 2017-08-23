@@ -14,14 +14,14 @@ Template.errorsStatisticTable.helpers({
     // Get value of selected language
     const language = TAPi18n.getLanguage();
 
-    const buckets = Template.instance().data.buckets;
+    const timelineData = Template.instance().data.timelineData;
 
     const errors = [];
 
-    buckets.forEach(bucket => {
-      const requestPath = bucket.key;
+    timelineData.forEach(dataset => {
+      const requestPath = dataset.key;
 
-      bucket.errors_statistic.errors_over_time.buckets.forEach(date => {
+      dataset.errors_statistic.errors_over_time.buckets.forEach(date => {
         date.status.buckets.forEach(status => {
           const error = {
             // Get value of request path

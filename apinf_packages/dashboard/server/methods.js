@@ -20,10 +20,10 @@ Meteor.methods({
     // Return proxies list with specified type
     return Proxies.find({ type }).fetch();
   },
-  proxyBackendExists (id) {
-    check(id, String);
+  proxyBackendExists (proxyBackendId) {
+    check(proxyBackendId, String);
 
-    return ProxyBackends.findOne(id);
+    return ProxyBackends.findOne(proxyBackendId);
   },
   userCanViewAnalytic (apiId) {
     // Make sure apiId is a string

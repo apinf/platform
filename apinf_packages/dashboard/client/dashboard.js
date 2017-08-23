@@ -19,32 +19,37 @@ Template.dashboardPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  // Get proxy ID value from query params
+  const proxyId = FlowRouter.getQueryParam('proxy_id');
+
   instance.proxiesList = new ReactiveVar();
-  instance.proxyId = new ReactiveVar();
+  instance.proxyId = new ReactiveVar(proxyId);
 
   const proxyType = 'apiUmbrella';
 
   Meteor.call('getProxiesList', proxyType, (error, result) => {
-    instance.proxiesList.set(result);
+    // if proxy id value isn't available from Query param then
+    // Set the first item of list as the default value
     // Make sure Proxies list is not empty
-    if (result.length > 0) {
+    if (!proxyId && result.length > 0) {
       // Modifies the current history entry instead of creating a new one
       FlowRouter.withReplaceState(() => {
-        // Set the default value as first item of proxies list
-        FlowRouter.setQueryParams({ proxy: result[0]._id });
+        // Set the default value for query parameter
+        FlowRouter.setQueryParams({ proxy_id: result[0]._id });
       });
-
-      // Set the default value as first item of proxies list
       instance.proxyId.set(result[0]._id);
     }
+
+    // Save result to template instance
+    instance.proxiesList.set(result);
   });
 
   instance.autorun(() => {
-    const proxyId = instance.proxyId.get();
+    const currentProxyId = instance.proxyId.get();
     // Make sure value exists
-    if (proxyId) {
+    if (currentProxyId) {
       // Subscribe to proxy, related backends, related APIs
-      instance.subscribe('proxyById', proxyId);
+      instance.subscribe('proxyById', currentProxyId);
     }
   });
 });
@@ -73,7 +78,7 @@ Template.dashboardPage.events({
     // Modifies the current history entry instead of creating a new one
     FlowRouter.withReplaceState(() => {
       // Update value
-      FlowRouter.setQueryParams({ proxy: proxyId });
+      FlowRouter.setQueryParams({ proxy_id: proxyId });
     });
 
     // Update value

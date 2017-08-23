@@ -32,10 +32,11 @@ Template.dashboardView.onCreated(function () {
     // Fetch proxy backends
     const proxyBackends = ProxyBackends.find().fetch();
 
-    if (proxy && proxyBackends) {
-      // Get relevant Elasticsearch host
-      const elasticsearchHost = proxy.apiUmbrella.elasticsearch;
+    // Get relevant Elasticsearch host
+    const elasticsearchHost = _.get(proxy, 'apiUmbrella.elasticsearch', '');
 
+    // Make sure main variables are available
+    if (proxyBackends && elasticsearchHost) {
       // Create a list with requested paths
       const proxyBackendPaths = _.map(proxyBackends, (backend) => {
         const requestPath = backend.apiUmbrella.url_matches[0].frontend_prefix;
