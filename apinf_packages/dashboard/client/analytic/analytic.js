@@ -94,6 +94,6 @@ Template.apiAnalyticPage.helpers({
     const instance = Template.instance();
 
     return instance.id;
-  }
+  },
 });
 
