@@ -21,7 +21,9 @@ import ApiDocs from '/api_docs/collection';
 Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
-  Tracker.autorun(() => {
+  const templateInstance = this;
+  templateInstance.autorun(()=>{
+
     instance.slug = FlowRouter.getParam('slug');
 
     // Subscribe to API and related organization
