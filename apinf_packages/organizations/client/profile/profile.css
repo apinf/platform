@@ -20,3 +20,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   font-size: 1.3em;
   margin-bottom: 0.8em;
 }
+
+.filter-dropdown{
+	position: relative;
+}
