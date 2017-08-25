@@ -29,48 +29,55 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   </div>
+
   <!-- Table body -->
-  {{# each bucket in buckets }}
+  {{# each proxyBackend in proxyBackends }}
     <div class="statistic-block">
-      {{# with bucket }}
-        <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
+      <div data-id="{{ proxyBackend._id }}" class="dashboard-table-row statistic-line">
+        {{# unless bucket proxyBackend.frontendPrefix }}
+          <!-- Display template with zero values -->
+          {{> dashboardSummaryStatisticNoData proxyBackend=proxyBackend }}
+        {{ else }}
           <div class="row">
             <div class="col-md-3">
-              {{ apiName }}
+              {{ proxyBackend.apiName }}
             </div>
-            <div class="col-md-3">
+            {{# with bucket proxyBackend.frontendPrefix }}
+              <div class="col-md-3">
               <span class="request-number">
                 {{ requestNumber }}
               </span>
-              <div class="{{ arrowDirection 'requests' }}"></div>
-              <span class="{{ textColor 'requests' }}">
-                {{ percentages 'requests' }}
-              </span>
-            </div>
-            <div class="col-md-3">
+                <div class="{{ arrowDirection 'requests' }}"></div>
+                <span class="{{ textColor 'requests' }}">
+                  {{ percentages 'requests' }}
+                </span>
+              </div>
+              <div class="col-md-3">
               <span class="response-time">
                 {{ responseTime }} ms
               </span>
-              <div class="{{ arrowDirection 'time' }}"></div>
-              <span class="{{ textColor 'time' }}">
-                {{ percentages 'time' }}
-              </span>
-            </div>
-            <div class="col-md-3">
+                <div class="{{ arrowDirection 'time' }}"></div>
+                <span class="{{ textColor 'time' }}">
+                  {{ percentages 'time' }}
+                </span>
+              </div>
+              <div class="col-md-3">
               <span class="unique-users">
                 {{ uniqueUsers }}
               </span>
-              <div class="{{ arrowDirection 'users' }}"></div>
-              <span class="{{ textColor 'users' }}">
-                {{ percentages 'users' }}
-              </span>
-            </div>
+                <div class="{{ arrowDirection 'users' }}"></div>
+                <span class="{{ textColor 'users' }}">
+                  {{ percentages 'users' }}
+                </span>
+              </div>
+            {{/ with }}
           </div>
-        </div>
-      {{/ with }}
-      {{# if displayOverview bucket.proxyBackendId }}
-        {{> dashboardOverviewStatistic bucket=bucket }}
-      {{/ if }}
+        {{/ unless }}
+      </div>
     </div>
-  {{/ each }}
+    {{# if displayOverview proxyBackend._id }}
+      <!-- First argument - provide bucket data for selected proxy backend -->
+      {{> dashboardOverviewStatistic bucket=(bucket proxyBackend.frontendPrefix) proxyBackend=proxyBackend }}
+    {{/ if }}
+  {{/ each}}
 </template>
