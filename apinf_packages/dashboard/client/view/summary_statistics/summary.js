@@ -19,80 +19,82 @@ import { arrowDirection, percentageValue, calculateTrend } from '/apinf_packages
 
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
-  this.displayOverview = new ReactiveDict();
-});
+  const instance = this;
 
-Template.dashboardSummaryStatistic.helpers({
-  buckets () {
-    // Get the current language
-    const language = TAPi18n.getLanguage();
+  instance.displayOverview = new ReactiveDict();
+  instance.proxyBackendsWithMetric = {};
 
-    // Get ES data
+  instance.autorun(() => {
+    // Update list of proxy backends
+    instance.proxyBackends = ProxyBackends.find().fetch();
+
+    // Get actual elasticsearch data
     const elasticsearchData = Template.currentData().elasticsearchData;
 
     // Get bucket of aggregated data
     const buckets = elasticsearchData.aggregations.group_by_request_path.buckets;
+    // Prepare dataset for summary statistic
+    instance.aggregatedData = buckets.map(value => {
+      const currentPeriodData = value.group_by_interval.buckets.currentPeriod;
 
-    return buckets.map(value => {
-      // Get the proxy backend instance with equal frontend_prefix as request_path
-      const proxyBackend = ProxyBackends.findOne({
-        'apiUmbrella.url_matches': {
-          $elemMatch: {
-            frontend_prefix: { $regex: value.key, $options: 'i' },
-          },
-        },
+      // Get the statistic for current period
+      const requestNumber = currentPeriodData.doc_count;
+      const responseTime = parseInt(currentPeriodData.response_time.values['50.0'], 10) || 0;
+      const uniqueUsers = currentPeriodData.unique_users.buckets.length;
+      const successCallsCount = currentPeriodData.success_status.buckets.success.doc_count;
+      const errorCallsCount = currentPeriodData.success_status.buckets.error.doc_count;
+
+      const previousPeriodData = value.group_by_interval.buckets.previousPeriod;
+      const previousResponseTime = previousPeriodData.response_time.values['50.0'];
+      const previousUniqueUsers = previousPeriodData.unique_users.buckets.length;
+
+      // Get the statistics comparing between previous and current periods
+      const compareRequests = calculateTrend(previousPeriodData.doc_count, requestNumber);
+      const compareResponse = calculateTrend(parseInt(previousResponseTime, 10), responseTime);
+      const compareUsers = calculateTrend(previousUniqueUsers, uniqueUsers);
+
+      // Get value to display
+      return {
+        requestPath: value.key,
+        requestNumber,
+        responseTime,
+        uniqueUsers,
+        successCallsCount,
+        errorCallsCount,
+        requestOverTime: currentPeriodData.requests_over_time.buckets,
+        compareRequests,
+        compareResponse,
+        compareUsers,
+      };
+    });
+
+    instance.proxyBackends.forEach(backend => {
+      // Dictionary of Flags about display/not the overview part for current item
+      // By default don't display overview template for any proxy backend
+      instance.displayOverview.set(backend._id, false);
+
+      const proxyBackendPath = backend.frontendPrefix();
+
+      // Create a list of proxy backends with metric for current timeframe
+      instance.aggregatedData.forEach(dataset => {
+        const path = dataset.requestPath;
+
+        // Using indexOf to check when frontend prefix and request_path differ in a last slash
+        const theSamePaths = proxyBackendPath.indexOf(path);
+        // If paths are equal or differ in a last slash
+        if (theSamePaths === 0) {
+          // Save it
+          instance.proxyBackendsWithMetric[proxyBackendPath] = dataset;
+          // Add info about API name & id of proxy backend
+          instance.proxyBackendsWithMetric[proxyBackendPath].apiName = backend.apiName();
+          instance.proxyBackendsWithMetric[proxyBackendPath].proxyBackendId = backend._id;
+        }
       });
+    });
+  });
+});
 
-      if (proxyBackend) {
-        const currentPeriodData = value.group_by_interval.buckets.currentPeriod;
-
-        // Get the statistic for current period
-        const requestNumber = currentPeriodData.doc_count;
-        const responseTime = parseInt(currentPeriodData.response_time.values['50.0'], 10) || 0;
-        const uniqueUsers = currentPeriodData.unique_users.buckets.length;
-        const successCallsCount = currentPeriodData.success_status.buckets.success.doc_count;
-        const errorCallsCount = currentPeriodData.success_status.buckets.error.doc_count;
-
-        const previousPeriodData = value.group_by_interval.buckets.previousPeriod;
-        const previousResponseTime = previousPeriodData.response_time.values['50.0'];
-        const previousUniqueUsers = previousPeriodData.unique_users.buckets.length;
-
-        // Get the statistics comparing between previous and current periods
-        const compareRequests = calculateTrend(previousPeriodData.doc_count, requestNumber);
-        const compareResponse = calculateTrend(parseInt(previousResponseTime, 10), responseTime);
-        const compareUsers = calculateTrend(previousUniqueUsers, uniqueUsers);
-
-        // Dictionary of Flags about display/not the overview part for current item
-        // By default don't display overview template for any proxy backend
-        Template.instance().displayOverview.set(proxyBackend._id, false);
-
-        // Get value to display
-        return {
-          apiName: proxyBackend.apiName(),
-          proxyBackendId: proxyBackend._id,
-          requestPath: value.key,
-          requestNumber,
-          responseTime,
-          uniqueUsers,
-          successCallsCount,
-          errorCallsCount,
-          requestOverTime: currentPeriodData.requests_over_time.buckets,
-          compareRequests,
-          compareResponse,
-          compareUsers,
-        };
-      }
-
-      return undefined;
-    })
-      // Before display data filtering it.
-      // These function will return Array with defined value
-      .filter(value => { return value; })
-      // Sort by name
-      .sort((a, b) => {
-        return a.apiName.localeCompare(b.apiName, language);
-      });
-  },
+Template.dashboardSummaryStatistic.helpers({
   arrowDirection (parameter) {
     // Provide compared data
     return arrowDirection(parameter, this);
@@ -118,7 +120,25 @@ Template.dashboardSummaryStatistic.helpers({
     return textColor;
   },
   displayOverview (parameter) {
-    return Template.instance().displayOverview.get(parameter);
+    const instance = Template.instance();
+
+    return instance.displayOverview.get(parameter);
+  },
+  proxyBackends () {
+    const instance = Template.instance();
+
+    // Get the current language
+    const language = TAPi18n.getLanguage();
+
+    // Sort by name
+    return instance.proxyBackends.sort((a, b) => {
+      return a.apiName().localeCompare(b.apiName(), language);
+    });
+  },
+  bucket (proxyBackendPath) {
+    const instance = Template.instance();
+
+    return instance.proxyBackendsWithMetric[proxyBackendPath];
   },
 });
 
