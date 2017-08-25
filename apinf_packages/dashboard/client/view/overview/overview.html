@@ -45,7 +45,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="overview-col-title">
               {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
             </span>
-              {{> averageResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
+              {{> medianResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
               <div class="{{ arrowDirection 'time' }}"></div>
               <span>{{ overviewComparing 'time' }}</span>
             </div>

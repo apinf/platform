@@ -51,10 +51,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'apiAnalyticView_text_responseTime' time=responseTime }}
             </p>
             <p class="overview-col-title">
-              {{_ 'apiAnalyticView_chartTitle_avgResponseTime' }}
+              {{_ 'apiAnalyticView_chartTitle_medianResponseTime' }}
             </p>
             <div class="form-group">
-              {{> averageResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
+              {{> medianResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
             </div>
             <div class="form-group">
               <div class="{{ arrowDirection 'time' }}"></div>

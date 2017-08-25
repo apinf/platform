@@ -13,7 +13,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 import Chart from 'chart.js';
 
-Template.averageResponseTime.onRendered(function () {
+Template.medianResponseTime.onRendered(function () {
   const instance = this;
 
   // Get ElasticSearch aggregated data
@@ -35,7 +35,7 @@ Template.averageResponseTime.onRendered(function () {
 
   const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${id}"] .average-response-time`;
+  const querySelector = `[data-overview-id="${id}"] .median-response-time`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
@@ -48,7 +48,7 @@ Template.averageResponseTime.onRendered(function () {
       labels,
       datasets: [
         {
-          label: TAPi18n.__('averageResponseTime_pointTitle_time'),
+          label: TAPi18n.__('medianResponseTime_pointTitle_time'),
           backgroundColor: '#959595',
           borderColor: '#959595',
           pointBorderColor: '#959595',
@@ -83,7 +83,7 @@ Template.averageResponseTime.onRendered(function () {
     const datasets = instance.chart.data.datasets;
 
     // Update translation
-    datasets[0].label = TAPi18n.__('averageResponseTime_pointTitle_time');
+    datasets[0].label = TAPi18n.__('medianResponseTime_pointTitle_time');
 
     // Update chart with new translation
     instance.chart.update();
