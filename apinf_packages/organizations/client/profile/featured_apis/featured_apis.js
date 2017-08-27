@@ -4,16 +4,36 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 import { Roles } from 'meteor/alanning:roles';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import Organizations from '/apinf_packages/organizations/collection';
+
+Template.organizationFeaturedApis.onCreated(() => {
+    // Get reference to template instance
+    const instance = this;
+  
+    // Get the API Backend ID from the route
+    const slug = FlowRouter.getParam('slug');
+
+    // Look for Organization
+    instance.organization = Organizations.findOne({ slug });
+    
+});
 
 Template.organizationFeaturedApis.helpers({
-    isAdminOrOrganizationManager(){
+    userIsAdminOrOrganizationManager(){
+
+        // Get reference to template instance
+        const instance = Template.instance();
+
+        // Get organization managerIds in template
+        const managerIds = instance.data.organization.managerIds;
 
         // Check if user is admin
-        const userIsAdmin = Roles.userIsInRole(Meteor.userId, ['admin']);
+        const userIsAdmin = Roles.userIsInRole(Meteor.userId(), ['admin']);
 
-        //console.log(organizationManagers);
-        console.log(oi);
+        // Check if user is manager
+        const userIsManager = managerIds.includes(Meteor.userId());
 
-        return userIsAdmin;
+        return userIsAdmin || userIsManager;
     }
 })
