@@ -15,32 +15,31 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import Organizations from '/apinf_packages/organizations/collection';
 
 Template.organizationFeaturedApis.onCreated(() => {
-    // Get reference to template instance
-    const instance = this;
+  // Get reference to template instance
+  const instance = this;
   
-    // Get the API Backend ID from the route
-    const slug = FlowRouter.getParam('slug');
+  // Get the API Backend ID from the route
+  const slug = FlowRouter.getParam('slug');
 
-    // Look for Organization
-    instance.organization = Organizations.findOne({ slug });
+  // Look for Organization
+  instance.organization = Organizations.findOne({ slug });
     
 });
 
 Template.organizationFeaturedApis.helpers({
-    userIsAdminOrOrganizationManager(){
+  userIsAdminOrOrganizationManager(){
+    // Get reference to template instance
+    const instance = Template.instance();
 
-        // Get reference to template instance
-        const instance = Template.instance();
+    // Get organization managerIds in template
+    const managerIds = instance.data.organization.managerIds;
 
-        // Get organization managerIds in template
-        const managerIds = instance.data.organization.managerIds;
+    // Check if user is admin
+    const userIsAdmin = Roles.userIsInRole(Meteor.userId(), ['admin']);
 
-        // Check if user is admin
-        const userIsAdmin = Roles.userIsInRole(Meteor.userId(), ['admin']);
+    // Check if user is manager
+    const userIsManager = managerIds.includes(Meteor.userId());
 
-        // Check if user is manager
-        const userIsManager = managerIds.includes(Meteor.userId());
-
-        return userIsAdmin || userIsManager;
-    }
-})
+    return userIsAdmin || userIsManager;
+  }
+});
