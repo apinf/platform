@@ -43,7 +43,7 @@ Template.responseTimeTimeline.onRendered(function () {
   const ctx = document.getElementById('response-time-timeline-chart').getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'line',
+    type: 'bar',
     // Data for displaying chart
     data: {
       labels: [],
@@ -91,20 +91,14 @@ Template.responseTimeTimeline.onRendered(function () {
     const percentiles95 = aggregationData.map((value) => {
       const responseTime = value.percentiles_response_time.values['95.0'];
 
-      return {
-        x: value.key,
-        y: parseInt(responseTime, 10),
-      };
+      return parseInt(responseTime, 10);
     });
 
     // Points for line of the 50th percentiles of response time
     const percentiles50 = aggregationData.map((value) => {
       const responseTime = value.percentiles_response_time.values['50.0'];
 
-      return {
-        x: value.key,
-        y: parseInt(responseTime, 10),
-      };
+      return parseInt(responseTime, 10);
     });
 
     // Create Labels values
@@ -119,18 +113,16 @@ Template.responseTimeTimeline.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('responseTimeTimeline_legendItem_50thPercentiles'),
-          backgroundColor: 'green',
+          backgroundColor: '#00A421',
           borderColor: 'green',
-          pointBorderColor: 'green',
-          fill: false,
+          borderWidth: 1,
           data: percentiles50,
         },
         {
           label: TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles'),
-          backgroundColor: '#959595',
+          backgroundColor: '#C6C5C5',
           borderColor: '#959595',
-          pointBorderColor: '#959595',
-          fill: false,
+          borderWidth: 1,
           data: percentiles95,
         },
       ],
