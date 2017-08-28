@@ -7,11 +7,14 @@
 // Npm packages imports
 import moment from 'moment';
 
-export default function queryForAnalyticPage (requestPath) {
+export default function queryForAnalyticPage (frontendPrefix) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
   const oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
   const twoWeeksAgo = moment().subtract(14, 'days').format('YYYY-MM-DD');
+
+  // Delete a last slash
+  const requestPath = frontendPrefix.slice(0, -1);
 
   return {
     size: 0,
@@ -194,6 +197,7 @@ export default function queryForAnalyticPage (requestPath) {
             most_frequent_users: {
               terms: {
                 field: 'user_id',
+                order: { _count: 'desc' },
               },
               aggs: {
                 // Get user e-mail (key)
