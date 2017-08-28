@@ -26,10 +26,7 @@ Template.requestsOverTime.onRendered(function () {
   });
 
   const data = elasticsearchData.map(value => {
-    return {
-      x: value.key,
-      y: value.doc_count,
-    };
+    return value.doc_count;
   });
 
   const id = instance.data.proxyBackendId;
@@ -40,7 +37,7 @@ Template.requestsOverTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'line',
+    type: 'bar',
 
     // Data for displaying chart
     data: {
@@ -48,11 +45,10 @@ Template.requestsOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
-          backgroundColor: '#959595',
+          backgroundColor: '#C6C5C5',
           borderColor: '#959595',
-          pointBorderColor: '#959595',
+          borderWidth: 1,
           data,
-          fill: false,
         },
       ],
     },

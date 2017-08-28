@@ -25,12 +25,9 @@ Template.medianResponseTime.onRendered(function () {
     return moment(value.key).format('MM/DD');
   });
 
-  // Get x & y points for chart
+  // Get data for bar chart
   const data = elasticsearchData.map(value => {
-    return {
-      x: value.key,
-      y: parseInt(value.percentiles_response_time.values['50.0'], 10),
-    };
+    return parseInt(value.percentiles_response_time.values['50.0'], 10);
   });
 
   const id = instance.data.proxyBackendId;
@@ -41,7 +38,7 @@ Template.medianResponseTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'line',
+    type: 'bar',
 
     // Data for displaying chart
     data: {
@@ -49,11 +46,10 @@ Template.medianResponseTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('medianResponseTime_pointTitle_time'),
-          backgroundColor: '#959595',
+          backgroundColor: '#C6C5C5',
           borderColor: '#959595',
-          pointBorderColor: '#959595',
+          borderWidth: 1,
           data,
-          fill: false,
         },
       ],
     },
