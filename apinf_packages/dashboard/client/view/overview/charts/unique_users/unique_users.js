@@ -27,10 +27,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
 
   // Get x & y points for chart
   const data = elasticsearchData.map(value => {
-    return {
-      x: value.key,
-      y: value.unique_users.buckets.length,
-    };
+    return value.unique_users.buckets.length;
   });
 
   const id = instance.data.proxyBackendId;
@@ -41,7 +38,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart we want
-    type: 'line',
+    type: 'bar',
 
     // Data for displaying chart
     data: {
@@ -49,11 +46,10 @@ Template.uniqueUsersOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
-          backgroundColor: '#959595',
+          backgroundColor: '#C6C5C5',
           borderColor: '#959595',
-          pointBorderColor: '#959595',
+          borderWidth: 1,
           data,
-          fill: false,
         },
       ],
     },
