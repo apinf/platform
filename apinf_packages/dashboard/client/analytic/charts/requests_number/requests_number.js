@@ -44,7 +44,7 @@ Template.requestTimeline.onRendered(function () {
   const ctx = document.getElementById('request-timeline-chart').getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'line',
+    type: 'bar',
     // Data for displaying chart
     data: {
       labels: [],
@@ -55,6 +55,7 @@ Template.requestTimeline.onRendered(function () {
       scales: {
         xAxes: [
           {
+            stacked: true,
             scaleLabel: {
               display: true,
               labelString: TAPi18n.__('requestTimeline_xAxisTitle_days'),
@@ -65,6 +66,7 @@ Template.requestTimeline.onRendered(function () {
         ],
         yAxes: [
           {
+            stacked: true,
             scaleLabel: {
               display: true,
               labelString: TAPi18n.__('requestTimeline_yAxisTitle_requests'),
@@ -89,7 +91,6 @@ Template.requestTimeline.onRendered(function () {
     const aggregationData = elasticsearchData.requests_over_time.buckets;
 
     const labels = [];
-    const allCalls = [];
     const successCalls = [];
     const redirectCalls = [];
     const failCalls = [];
@@ -100,35 +101,17 @@ Template.requestTimeline.onRendered(function () {
       // TODO: internationalize date formatting
       labels.push(moment(value.key).format('MM/DD'));
 
-      // Data for all requests
-      allCalls.push({
-        x: value.key,
-        y: value.doc_count,
-      });
-
       // Data for requests with success statuses
-      successCalls.push({
-        x: value.key,
-        y: value.response_status.buckets.success.doc_count,
-      });
+      successCalls.push(value.response_status.buckets.success.doc_count);
 
       // Data for requests with redirect statuses
-      redirectCalls.push({
-        x: value.key,
-        y: value.response_status.buckets.redirect.doc_count,
-      });
+      redirectCalls.push(value.response_status.buckets.redirect.doc_count);
 
       // Data for requests with fail statuses
-      failCalls.push({
-        x: value.key,
-        y: value.response_status.buckets.fail.doc_count,
-      });
+      failCalls.push(value.response_status.buckets.fail.doc_count);
 
       // Data for requests with error statuses
-      errorCalls.push({
-        x: value.key,
-        y: value.response_status.buckets.error.doc_count,
-      });
+      errorCalls.push(value.response_status.buckets.error.doc_count);
     });
 
     // Update labels & data
@@ -136,44 +119,32 @@ Template.requestTimeline.onRendered(function () {
       labels,
       datasets: [
         {
-          label: TAPi18n.__('requestTimeline_legendItem_allCalls'),
-          backgroundColor: '#959595',
-          borderColor: '#959595',
-          pointBorderColor: '#959595',
-          data: allCalls,
-          fill: false,
-        },
-        {
           label: '2XX',
           backgroundColor: '#468847',
           borderColor: '#468847',
-          pointBorderColor: '#468847',
+          borderWidth: 1,
           data: successCalls,
-          fill: false,
         },
         {
           label: '3XX',
           backgroundColor: '#04519b',
           borderColor: '#04519b',
-          pointBorderColor: '#04519b',
+          borderWidth: 1,
           data: redirectCalls,
-          fill: false,
         },
         {
           label: '4XX',
           backgroundColor: '#e08600',
           borderColor: '#e08600',
-          pointBorderColor: '#e08600',
+          borderWidth: 1,
           data: failCalls,
-          fill: false,
         },
         {
           label: '5XX',
           backgroundColor: '#b94848',
           borderColor: '#b94848',
-          pointBorderColor: '#b94848',
+          borderWidth: 1,
           data: errorCalls,
-          fill: false,
         },
       ],
     };
