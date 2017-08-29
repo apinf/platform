@@ -652,7 +652,6 @@
     "apiCard_tooltipTitle_averageRating": "Arvostelujen keskiarvo",
     "apiCatalog_apisCount": "(__count__ rajapinta)",
     "apiCatalog_apisCount_plural": "(__count__ rajapintaa)",
-    "apiCatalog_noApis_Found": "Ei APIs-asetusta valitulla elinkaaren tilalla",
     "apiSettingsDelete_deleteButton": "Poista",
     "apiDetails_baseUrl_headingText": "Rajapinnan osoite",
     "apiDetails_description_headingText": "Kuvaus",
