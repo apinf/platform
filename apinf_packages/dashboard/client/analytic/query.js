@@ -7,11 +7,12 @@
 // Npm packages imports
 import moment from 'moment';
 
-export default function queryForAnalyticPage (requestPath) {
+export default function queryForAnalyticPage (requestPath, timeframe) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
-  const oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
-  const twoWeeksAgo = moment().subtract(14, 'days').format('YYYY-MM-DD');
+
+  const oneTimePeriodAgo = moment().subtract(timeframe, 'days').format('YYYY-MM-DD');
+  const twoTimePeriodsAgo = moment().subtract(timeframe * 2, 'days').format('YYYY-MM-DD');
 
   return {
     size: 0,
@@ -24,8 +25,9 @@ export default function queryForAnalyticPage (requestPath) {
                 {
                   wildcard: {
                     request_path: {
+                      // Remove the last slash to get correct data about request path
                       // Add '*' to partially match the url
-                      value: `${requestPath}*`,
+                      value: `${requestPath.slice(0, -1)}*`,
                     },
                   },
                 },
@@ -37,7 +39,7 @@ export default function queryForAnalyticPage (requestPath) {
               request_at: {
                 lt: today,
                 // Extend request to both interval. It needs to compare two interval
-                gte: twoWeeksAgo,
+                gte: twoTimePeriodsAgo,
               },
             },
           },
@@ -53,12 +55,12 @@ export default function queryForAnalyticPage (requestPath) {
             ranges: [
               {
                 key: 'previousPeriod',
-                from: twoWeeksAgo,
-                to: oneWeekAgo,
+                from: twoTimePeriodsAgo,
+                to: oneTimePeriodAgo,
               },
               {
                 key: 'currentPeriod',
-                from: oneWeekAgo,
+                from: oneTimePeriodAgo,
                 to: today,
               },
             ],

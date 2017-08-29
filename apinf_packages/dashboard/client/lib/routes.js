@@ -23,6 +23,12 @@ signedIn.route('/dashboard', {
       // Initialize proxy parameter if it doesn't specify
       context.queryParams.proxy_id = null;
     }
+
+    if (!context.queryParams.timeframe) {
+      // Initialize timeframe parameter if it doesn't specify
+      // Default value is 7
+      context.queryParams.timeframe = 7;
+    }
   }],
   name: 'dashboard',
   action () {
@@ -31,7 +37,15 @@ signedIn.route('/dashboard', {
 });
 
 signedIn.route('/analytic/:proxyBackendId', {
-  name: 'apiAnalyticsPage',
+  // Get the empty query parameters on Enter
+  triggersEnter: [(context) => {
+    if (!context.queryParams.timeframe) {
+      // Initialize timeframe parameter if it doesn't specify
+      // Default value is 7
+      context.queryParams.timeframe = 7;
+    }
+  }],
+  name: 'apiAnalyticPage',
   action (params) {
     const proxyBackendId = params.proxyBackendId;
 
