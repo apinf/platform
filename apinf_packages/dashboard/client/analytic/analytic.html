@@ -12,45 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </h1>
 
         <!-- Toolbar -->
-        <div class="row">
-          <div class="col-md-12 form-group">
-            <div class="form-inline form-group pull-left">
-              {{# with api }}
-                <!-- Bookmark -->
-                <div class="api-card-bookmark form-group">
-                  <i class="fa fa-bookmark bookmark-default"></i>
-                  {{ bookmarkCount }}
-                </div>
-                <!-- Rating -->
-                <div class="api-card-star-average form-group"
-                     data-toggle="tooltip"
-                     data-placement="bottom"
-                     data-original-title="{{_ 'apiCard_tooltipTitle_averageRating' }}">
-                  <i class="fa fa-star-half-o"></i>
-                  {{ getAverageRating }}
-                </div>
-              {{/ with }}
-              <div class="form-group">
-                <strong>
-                  {{_ 'apiAnalyticPage_labelText_proxyName' name=proxyName }}
-                </strong>
-              </div>
-            </div>
-            <div class="toolbar pull-right">
-              <select class="form-control toolbar-select" id="date-range">
-                <option value="yesterday">
-                  {{_ 'apiAnalyticPage_optionText_yesterday' }}
-                </option>
-                <option value="week" selected>
-                  {{_ 'apiAnalyticPage_optionText_7days' }}
-                </option>
-                <option value="month">
-                  {{_ 'apiAnalyticPage_optionText_30days' }}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
+        {{> apiAnalyticToolbar proxyName=proxyName }}
 
         <!-- Data is not ready -->
         {{# unless fetchingData }}

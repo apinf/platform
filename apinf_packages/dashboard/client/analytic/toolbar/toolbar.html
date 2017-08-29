@@ -1,0 +1,47 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAnalyticToolbar">
+  <div class="row">
+    <div class="col-md-12 form-group">
+        <div class="form-inline form-group pull-left">
+          {{# with api }}
+            <!-- Bookmark -->
+            <div class="api-card-bookmark form-group">
+              <i class="fa fa-bookmark bookmark-default"></i>
+              {{ bookmarkCount }}
+            </div>
+            <!-- Rating -->
+            <div class="api-card-star-average form-group"
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 data-original-title="{{_ 'apiCard_tooltipTitle_averageRating' }}">
+              <i class="fa fa-star-half-o"></i>
+              {{ averageRating }}
+            </div>
+          {{/ with }}
+          <div class="form-group">
+            <strong>
+              {{_ 'apiAnalyticPage_labelText_proxyName' name=proxyName }}
+            </strong>
+          </div>
+        </div>
+
+      <div class="toolbar pull-right">
+        <select name="timeframe" class="form-control toolbar-select" id="date-range">
+          <option value="1">
+            {{_ 'apiAnalyticPage_optionText_yesterday' }}
+          </option>
+          <option value="7">
+            {{_ 'apiAnalyticPage_optionText_7days' }}
+          </option>
+          <option value="30">
+            {{_ 'apiAnalyticPage_optionText_30days' }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</template>
