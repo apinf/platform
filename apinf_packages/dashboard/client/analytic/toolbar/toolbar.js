@@ -9,7 +9,10 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-Template.dashboardToolbar.onRendered(function () {
+// Collection imports
+import Apis from '/apinf_packages/apis/collection';
+
+Template.apiAnalyticToolbar.onRendered(() => {
   // Get value of timeframe parameter
   const timeframeParameter = FlowRouter.getQueryParam('timeframe');
 
@@ -17,16 +20,13 @@ Template.dashboardToolbar.onRendered(function () {
   this.$('[name="timeframe"]').val(timeframeParameter);
 });
 
-Template.dashboardToolbar.helpers({
-  selectedProxy () {
-    const proxyId = FlowRouter.getQueryParam('proxy_id');
-
-    // Select this option if it is equal with query param value
-    return proxyId === this._id ? 'selected' : '';
+Template.apiAnalyticToolbar.helpers({
+  api () {
+    return Apis.findOne();
   },
 });
 
-Template.dashboardToolbar.events({
+Template.apiAnalyticToolbar.events({
   'change .toolbar-select': (event) => {
     // Placeholder
     const queryParams = {};

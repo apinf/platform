@@ -19,12 +19,11 @@ Template.dashboardPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  instance.proxiesList = new ReactiveVar();
+
   // Get proxy ID value from query params
   const proxyId = FlowRouter.getQueryParam('proxy_id');
-
-  instance.proxiesList = new ReactiveVar();
-  instance.proxyId = new ReactiveVar(proxyId);
-
+  // Set type of proxy is API Umbrella
   const proxyType = 'apiUmbrella';
 
   Meteor.call('getProxiesList', proxyType, (error, result) => {
@@ -37,7 +36,6 @@ Template.dashboardPage.onCreated(function () {
         // Set the default value for query parameter
         FlowRouter.setQueryParams({ proxy_id: result[0]._id });
       });
-      instance.proxyId.set(result[0]._id);
     }
 
     // Save result to template instance
@@ -45,7 +43,7 @@ Template.dashboardPage.onCreated(function () {
   });
 
   instance.autorun(() => {
-    const currentProxyId = instance.proxyId.get();
+    const currentProxyId = FlowRouter.getQueryParam('proxy_id');
     // Make sure value exists
     if (currentProxyId) {
       // Subscribe to proxy, related backends, related APIs
@@ -68,20 +66,5 @@ Template.dashboardPage.helpers({
 
     // Return list of available proxies
     return instance.proxiesList.get();
-  },
-});
-
-Template.dashboardPage.events({
-  'change #select-proxy': (event, templateInstance) => {
-    const proxyId = event.currentTarget.value;
-
-    // Modifies the current history entry instead of creating a new one
-    FlowRouter.withReplaceState(() => {
-      // Update value
-      FlowRouter.setQueryParams({ proxy_id: proxyId });
-    });
-
-    // Update value
-    templateInstance.proxyId.set(proxyId);
   },
 });
