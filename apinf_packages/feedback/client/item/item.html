@@ -1,0 +1,62 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="feedbackItem">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row list-group-item feedback-list-item">
+        <div class="col-md-2 feedback-voting">
+          <span id="up-vote-{{ item._id }}" class="fa fa-lg fa-arrow-up up-vote {{ userUpvote }}"></span>
+          <span class="badge sum-of-votes">
+            {{ item.sumOfVotes }}
+          </span>
+          <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-arrow-down down-vote {{ userDownvote }}"></span>
+        </div>
+        <div class="col-md-9 form-inline">
+          <div class="form-group feedback-type">
+            <span>
+              <strong>{{_ "feedbackItem_type" }}:&nbsp;</strong>
+            </span>
+            <span class="badge">
+              {{ feedbackType }}
+            </span>
+          </div>
+          <div class="form-group feedback-topic">
+            <span>
+              <strong>{{_ "feedbackItem_topic" }}:&nbsp;</strong>
+            </span>
+            <span>
+              {{ item.topic }}
+            </span>
+          </div>
+        </div>
+        {{#if item.currentUserCanEdit }}
+        <div class="btn-group pull-right">
+          <button class="edit-feedback-item btn btn-primary btn-xs">
+            {{_ "feedbackItem_editButton_text" }}
+          </button>
+          <button class="delete-feedback-item btn btn-danger btn-xs">
+            {{_ "feedbackItem_deleteButton_text" }}
+          </button>
+        </div>
+        {{/ if }}
+      </div>
+    </div>
+    <div class="panel-body">
+      <p>
+        {{ item.message }}
+      </p>
+    </div>
+    <div class="panel-footer">
+      {{_ "feedbackItem_sentBy_text" }}
+      <b>
+        {{ item.author }}
+      </b>
+      <i>
+        {{ relativeTimeStamp item.createdAt }}
+      </i>
+    </div>
+  </div>
+</template>

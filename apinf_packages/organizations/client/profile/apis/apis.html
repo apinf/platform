@@ -1,0 +1,45 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationApis">
+  <div class="form-inline pull-right filter-dropdown">
+    {{# if hasApi }}
+      {{> apiSortingToolbar }}
+      {{> apisFilterIcon }}
+    {{/ if }}
+    <!-- Connection API button -->
+    {{# if organization.currentUserCanManage }}
+      <button type="button" class="btn btn-default" id="connect-api">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {{_ 'organizationProfile_buttonText_connectApi' }}
+      </button>
+    {{/ if }}
+  </div>
+  {{# if Template.subscriptionsReady }}
+    <!-- Show or not content -->
+    {{# if paginationReady }}
+      {{# if hasApi }}
+        <div class="block-header">
+          <!-- Title -->
+          <h3 class="apis-block-title">
+            {{_ 'organizationProfile_bigText_apisCount' }}
+            <small>
+              {{_ 'organizationProfile_smallText_apisCount' count=apisCount }}
+            </small>
+          </h3>
+          {{> apiFilteredBy }}
+        </div>
+        {{> apiCatalogGrid apis=apis organization=organization }}
+        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+      {{ else }}
+        <!-- Show no APIs message -->
+        {{> organizationNoApis organization=organization }}
+    {{/ if }}
+  {{/ if }}
+  {{ else }}
+    <!-- If no data yet available show spinner -->
+    {{> spinner }}
+  {{/ if }}
+</template>

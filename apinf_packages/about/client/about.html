@@ -1,0 +1,206 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="aboutApinf">
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="apiBacklogFormModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <h2 class="modal-title" id="apiBacklogFormModalLabel">
+            {{_ "aboutApinf_title" }}
+          </h2>
+        </div>
+        <div class="modal-body">
+          {{_ "aboutApinf_intro" }}
+          <h3>
+            {{_ "aboutApinf_projectVersions" }}
+          </h3>
+          <dl class="dl-horizontal">
+            <dt>
+              Apinf
+            </dt>
+            <dd>
+              0.49.0
+            </dd>
+            <dt>
+              API Umbrella
+            </dt>
+            <dd>
+              0.13
+            </dd>
+          </dl>
+          <h3>
+            {{_ "aboutApinf_copyrightLicense" }}
+          </h3>
+          <dl class="dl-horizontal">
+            <dt>
+              {{_ "aboutApinf_copyright" }}
+            </dt>
+            <dd>
+              2017 Apinf Oy
+            </dd>
+            <dt>
+              {{_ "aboutApinf_license" }}
+            </dt>
+            <dd>
+              <a href="https://joinup.ec.europa.eu/software/page/eupl" target="_blank">EUPL</a> v.1.1
+            </dd>
+          </dl>
+          <h3>
+            {{_ "aboutApinf_projectLinks" }}
+          </h3>
+          <dl class="dl-horizontal">
+            <dt>
+              {{_ "aboutApinf_homepage" }}
+            </dt>
+            <dd>
+              <a href="http://apinf.org" target="_blank">
+                http://apinf.org
+              </a>
+            </dd>
+            <dt>
+              {{_ "aboutApinf_sourcecode" }}
+            </dt>
+            <dd>
+              <a href="https://github.com/apinf/platform" target="_blank">
+                https://github.com/apinf/platform
+              </a>
+            </dd>
+            <dt>
+              {{_ "aboutApinf_support" }}
+            </dt>
+            <dd>
+              <a href="https://github.com/apinf/platform/issues" target="_blank">
+                https://github.com/apinf/platform/issues
+              </a>
+            </dd>
+            <dt>
+              {{_ "aboutApinf_documentation" }}
+            </dt>
+            <dd>
+              <a href="http://apinf.org/docs" target="_blank">
+                http://apinf.org/docs
+              </a>
+            </dd>
+          </dl>
+
+          <!-- credits section -->
+          <h3>
+            {{_ "aboutApinf_credits" }}
+          </h3>
+          <dl class="dl-horizontal">
+            <dt>
+              {{_ "aboutApinf_createdBy" }}
+            </dt>
+            <dd>
+              <a href="http://apinf.org" target="_blank">
+                APInf Oy
+              </a>
+            </dd>
+            <dt>
+              {{_ "aboutApinf_contributors" }}
+            </dt>
+            <dd>
+              Jawid Ahmadi, Taija Björklund, Vesa Härkönen, Nazia Hasan, Ville Jyrkkä, Matti Leppänen, Philippe Luickx, Jarkko Moilanen, Alapan Mukherjee, Damir Mustafin, Sridevi Nittoor, Illya Nizyev, Yan Nunes, Brylie Christopher Oxley, Sebastian Pancia, Massimo Rangoni, Saransh Dev Singh, Shalva Usubov, Juuso Vallius, Sarala Vanipenta, Cassiano Vellames, Maurício Vieira, Daria Voytova
+            </dd>
+            <dt>
+              {{_ "aboutApinf_openSource" }}
+            </dt>
+            <dd>
+              <ul class="list-inline list-unstyled">
+                <li>
+                  <a href="https://apiumbrella.io" title="API Umbrella" target="_blank">
+                    API Umbrella
+                  </a>
+                </li>
+                <li>
+                  <a href="https://getbootstrap.com" title="Bootstrap" target="_blank">
+                    Bootstrap
+                  </a>
+                </li>
+                <li>
+                  <a href="https://clipboardjs.com" title="Clipboard.js" target="_blank">
+                    Clipboard.js
+                  </a>
+                </li>
+                <li>
+                  <a href="http://square.github.io/crossfilter/" title="Crossfilter" target="_blank">
+                    Crossfilter
+                  </a>
+                </li>
+                <li>
+                  <a href="https://d3js.org" title="d3.js" target="_blank">
+                    d3.js
+                  </a>
+                </li>
+                <li>
+                  <a href="https://dc-js.github.io/dc.js" title="dc.js" target="_blank">
+                    dc.js
+                  </a>
+                </li>
+                <li>
+                  <a href="http://introjs.com" title="Intro.js" target="_blank">
+                    Intro.js
+                  </a>
+                </li>
+                <li>
+                  <a href="https://lodash.com" title="Lodash" target="_blank">
+                    Lodash
+                  </a>
+                </li>
+                <li>
+                  <a href="https://meteor.com" title="Meteor.js" target="_blank">
+                    Meteor.js
+                  </a>
+                </li>
+                <li>
+                  <a href="https://momentjs.com" title="Moment.js" target="_blank">
+                    Moment.js
+                  </a>
+                </li>
+                <li>
+                  <a href="http://simplestatistics.org" title="Simple Statistics" target="_blank">
+                    Simple Statistics
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/swagger-api/swagger-js/" title="Swagger.js" target="_blank">
+                    Swagger.js
+                  </a>
+                </li>
+                <li>
+                  <a href="http://swagger.io/swagger-ui/" title="Swagger UI" target="_blank">
+                    Swagger UI
+                  </a>
+                </li>
+                <li>
+                  <a href="https://medialize.github.io/URI.js/" title="URI.js" target="_blank">
+                    URI.js
+                  </a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">
+            {{_ "aboutApinf_doneButton_text" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,39 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiSettingsDetails">
+  <!-- Details panel -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <i class="fa fa-info-circle" aria-hidden="true"></i>
+        {{_ "apiSettingsDetails_title" }}
+      </h2>
+    </div>
+    <div class="panel-body">
+      <h3>
+        {{_ "apiSettingsDetails_uploadLogo_heading" }}
+      </h3>
+      <p>
+        {{_ "apiSettingsDetails_uploadLogoText" }}
+      </p>
+      {{> uploadApiLogo api=api }}
+      <hr class="panel-hr" />
+      {{# autoForm
+          collection=apisCollection
+          doc=api
+          id="apiDetailsForm"
+          type="update" }}
+        {{> afQuickField name='name' id="api-name" }}
+        {{> afQuickField name='description' id="api-description" }}
+        {{> afQuickField name='url' id="api-url" }}
+        {{> afQuickField name='lifecycleStatus' id="api-status" }}
+        <button type="submit" class="btn btn-success" id="save-settings">
+          {{_ "apiSettingsDetails_saveButton" }}
+        </button>
+      {{/ autoForm }}
+    </div>
+  </div>
+</template>
