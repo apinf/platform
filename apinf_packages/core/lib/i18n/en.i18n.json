@@ -317,7 +317,8 @@
   "errorsStatisticTable_columnTitle_status": "Status Code",
   "errorsStatisticTable_columnTitle_calls": "Calls",
   "errorsStatisticTable_columnTitle_path": "Request path",
-
+  "errorsStatisticTable_text_showOfErrors": "Show __count__ of __all__ errors",
+  "errorsStatisticTable_lintText_downloadFile": "Download CSV file",
   "favourite_Add": "Add bookmark",
   "favourite_Remove": "Remove bookmark",
   "feedbackForm_successMessage": "Thank you! Your feedback has been successfully sent.",
@@ -416,6 +417,8 @@
   "mostFrequentUsersTable_columnTitle_user": "User",
   "mostFrequentUsersTable_columnTitle_calls": "Calls",
   "mostFrequentUsersTable_columnTitle_path": "Request path",
+  "mostFrequentUsersTable_text_showOfUsers": "Show __count__ of __all__ users",
+  "mostFrequentUsersTable_lintText_downloadFile": "Download CSV file",
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
   "navbar_organizations": "Organizations",
