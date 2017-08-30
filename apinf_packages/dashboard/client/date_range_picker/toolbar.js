@@ -12,34 +12,29 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
-Template.apiAnalyticToolbar.onRendered(() => {
+Template.dateRangePicker.onRendered(() => {
   // Get value of timeframe parameter
   const timeframeParameter = FlowRouter.getQueryParam('timeframe');
 
   // Set value
-  this.$('[name="timeframe"]').val(timeframeParameter);
+  this.$('#date-range-picker').val(timeframeParameter);
 });
 
-Template.apiAnalyticToolbar.helpers({
+Template.dateRangePicker.helpers({
   api () {
     return Apis.findOne();
   },
 });
 
-Template.apiAnalyticToolbar.events({
-  'change .toolbar-select': (event) => {
-    // Placeholder
-    const queryParams = {};
-
-    // Get name & value of select item
-    // These parameters are name and value of query parameter related
-    const paramName = event.currentTarget.name;
-    queryParams[paramName] = event.currentTarget.value;
+Template.dateRangePicker.events({
+  'change #date-range-picker': (event) => {
+    // Get value of select item
+    const paramValue = event.currentTarget.value;
 
     // Modifies the current history entry instead of creating a new one
     FlowRouter.withReplaceState(() => {
       // Update value
-      FlowRouter.setQueryParams(queryParams);
+      FlowRouter.setQueryParams({ timeframe: paramValue });
     });
   },
 });

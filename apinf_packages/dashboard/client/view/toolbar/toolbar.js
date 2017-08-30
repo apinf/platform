@@ -9,14 +9,6 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-Template.dashboardToolbar.onRendered(function () {
-  // Get value of timeframe parameter
-  const timeframeParameter = FlowRouter.getQueryParam('timeframe');
-
-  // Set value
-  this.$('[name="timeframe"]').val(timeframeParameter);
-});
-
 Template.dashboardToolbar.helpers({
   selectedProxy () {
     const proxyId = FlowRouter.getQueryParam('proxy_id');
