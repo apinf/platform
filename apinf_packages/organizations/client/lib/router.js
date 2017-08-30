@@ -53,7 +53,7 @@ FlowRouter.route('/organizations/:slug/', {
           rel: 'alternate',
           type: 'application/rss+xml',
           href: `/rss/organizations/?slug=${slug}`,
-          title: `RSS Feed for ${organizationProfile.name}`
+          title: `RSS Feed for ${organizationProfile.name}`,
         });
 
         // Set Social Meta Tags
