@@ -48,10 +48,13 @@ FlowRouter.route('/organizations/:slug/', {
     Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {
       // Check if Organization exists
       if (organizationProfile) {
-
         // Add RSS Link
-        var linkInfo = {rel: "alternate", type: "application/rss+xml", href: `/rss/organizations/?slug=${slug}`, title: `RSS Feed for ${organizationProfile.name}` };
-        DocHead.addLink(linkInfo);
+        DocHead.addLink({
+          rel: 'alternate',
+          type: 'application/rss+xml',
+          href: `/rss/organizations/?slug=${slug}`,
+          title: `RSS Feed for ${organizationProfile.name}`
+        });
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
