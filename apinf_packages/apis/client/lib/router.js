@@ -42,13 +42,15 @@ FlowRouter.route('/apis/:slug/', {
     Meteor.call('getApi', slug, (error, api) => {
       // Check if API exists
       if (api) {
-        // Add RSS Link
-        DocHead.addLink({
-          rel: 'alternate',
-          type: 'application/rss+xml',
-          href: `/rss/apis/?slug=${slug}`,
-          title: `RSS Feed for ${api.name}`,
-        });
+        // Add RSS Link (only for public apis)
+        if (api.isPublic) {
+          DocHead.addLink({
+            rel: 'alternate',
+            type: 'application/rss+xml',
+            href: `/rss/apis/?slug=${slug}`,
+            title: `RSS Feed for ${api.name}`,
+          });
+        }
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
