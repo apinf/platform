@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <label for="select-proxy">
           {{_ 'dashboardToolbar_labelText_proxy' }} &nbsp;
         </label>
-        <select name="proxy_id" class="form-control toolbar-select" id="select-proxy">
+        <select name="proxy_id" class="form-control toolbar-select">
           {{# each proxy in proxiesList }}
             {{# with proxy }}
               <option value="{{ _id }}" {{ selectedProxy }}>
@@ -38,17 +38,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardToolbar_optionText_time' }}
           </option>
         </select>
-        <select name="timeframe" class="form-control toolbar-select">
-          <option name="yesterday" value="1">
-            {{_ 'dashboardToolbar_optionText_yesterday' }}
-          </option>
-          <option name="week" value="7">
-            {{_ 'dashboardToolbar_optionText_7days' }}
-          </option>
-          <option name="month" value="30">
-            {{_ 'dashboardToolbar_optionText_30days' }}
-          </option>
-        </select>
+        {{> dateRangePicker }}
       </div>
     </div>
   </div>
