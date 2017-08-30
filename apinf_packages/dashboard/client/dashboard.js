@@ -67,4 +67,10 @@ Template.dashboardPage.helpers({
     // Return list of available proxies
     return instance.proxiesList.get();
   },
+  managedOneApi () {
+    return ProxyBackends.find().count() === 1;
+  },
+  proxyBackendId () {
+    return ProxyBackends.findOne()._id;
+  },
 });

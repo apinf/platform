@@ -13,11 +13,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> dashboardToolbar proxiesList=proxiesList }}
       <!-- Make sure an API is connected to proxy -->
       {{# if proxyBackendsCount }}
+
         <!-- Make sure a user has any API -->
         {{# if  managedApisCount }}
-          <!-- TODO: Add case for one user -->
-          <!-- Display Dashboard page-->
-          {{> dashboardView }}
+          <!-- Case when user has one API -->
+          {{# if managedOneApi }}
+            <!-- Display directly API Analytic Page -->
+            {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
+            {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+          {{ else }}
+            <!-- Display Dashboard page-->
+            {{> dashboardView }}
+          {{/ if }} <!-- /managedOneApi -->
         {{ else }}
           <!-- Display a message about "No managed API" -->
           <div class="alert alert-warning alert-text" role="alert">
