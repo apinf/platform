@@ -35,7 +35,7 @@ Template.viewApi.onCreated(function () {
     instance.subscribe('publicProxyDetails');
     if (instance.subscriptionsReady()) {
       // Get single API Backend
-      const api = Apis.findOne({ slug });     
+      const api = Apis.findOne({ slug });    
       if (api) {
         instance.api.set(api);
       }
