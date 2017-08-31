@@ -30,9 +30,15 @@ Template.visibilityToggle.helpers({
     // Get ID of current service
     const apiId = api._id;
 
-    // Check visibility status
-    const status = Apis.findOne(apiId).isPublic;
+    // Get api data
+    const apiData = Apis.findOne(apiId);
 
+    // Check apiData is defined or not
+    if(apiData){
+      // Return visibility status
+      return apiData.isPublic;
+    }
+    return false;
     return status;
   },
 });
