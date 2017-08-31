@@ -34,7 +34,7 @@ Template.visibilityToggle.helpers({
     const apiData = Apis.findOne(apiId);
 
     // Check apiData is defined or not
-    if(apiData){
+    if (apiData) {
       // Return visibility status
       return apiData.isPublic;
     }

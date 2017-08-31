@@ -26,5 +26,5 @@ Meteor.methods({
 
     // Return the API
     return api;
-  }
+  },
 });
