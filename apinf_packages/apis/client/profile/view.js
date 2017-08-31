@@ -9,7 +9,6 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Tracker } from 'meteor/tracker';
 
 // Collection imports
 import ApiBacklogItems from '/apinf_packages/backlog/collection';
@@ -23,24 +22,18 @@ Template.viewApi.onCreated(function () {
   const instance = this;
   const templateInstance = this;
 
-  // Reactive variable to hold API document
-  instance.api = new ReactiveVar();
-
-  templateInstance.autorun(()=>{
-
+  // Using to get updated subscription
+  templateInstance.autorun(() => {
+    // Take slug from params
     const slug = FlowRouter.getParam('slug');
     instance.slug = slug;
-    
     // Subscribe to API and related organization
     instance.subscribe('apiComposite', instance.slug);
-
     // Subscribe to public proxy details
     instance.subscribe('proxyCount');
-
     // Subscribe to public proxy details for proxy form
     instance.subscribe('publicProxyDetails');
-
-    if(instance.subscriptionsReady()){
+    if (instance.subscriptionsReady()) {
       // Get single API Backend
       const api = Apis.findOne({ slug });     
       if (api) {
@@ -57,7 +50,7 @@ Template.viewApi.helpers({
 
     // Get single API Backend
     const api = instance.api.get();
-    
+
     // Save the API ID
     instance.apiId = api._id;
 

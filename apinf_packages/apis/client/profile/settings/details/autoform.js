@@ -9,21 +9,17 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// Collection imports
-import Apis from '/apinf_packages/apis/collection';
-
 AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
 
       // Getting new slug from this.udateDoc
-
       const slug = this.updateDoc.$set.slug;
-      console.log(':: slugs ',this.updateDoc.$set.slug,' this.updateDoc ',this.updateDoc)
       if (slug) {
-        
-        // Redirect to updated API with new slug. It is use while api's name will update slug have to change that's mean routing change
-        FlowRouter.go('viewApi', { slug: slug });
+      // Redirect to updated API with new slug. 
+      //It is use while api's name will update slug have to change
+      //that's mean routing change
+        FlowRouter.go('viewApi', { slug });
       } else {
         // Otherwise Redirect to API Catalog
         FlowRouter.go('apiCatalog');

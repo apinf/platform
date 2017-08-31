@@ -38,5 +38,5 @@ Template.viewApiPageHeader.helpers({
       return true;
     }
     return false;
-  }
+  },
 });
