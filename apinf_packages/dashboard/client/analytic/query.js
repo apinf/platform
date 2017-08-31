@@ -8,7 +8,7 @@
 import moment from 'moment';
 
 
-export default function queryForAnalyticPage (requestPath, timeframe) {
+export default function queryForAnalyticPage (frontendPrefix, timeframe) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
 
@@ -31,7 +31,7 @@ export default function queryForAnalyticPage (requestPath, timeframe) {
                     request_path: {
                       // Remove the last slash to get correct data about request path
                       // Add '*' to partially match the url
-                      value: `${requestPath.slice(0, -1)}*`,
+                      value: `${requestPath}*`,
                     },
                   },
                 },
