@@ -19,7 +19,7 @@ AutoForm.hooks({
       // Getting new slug from this.udateDoc
 
       const slug = this.updateDoc.$set.slug;
-      console.log(':: slug ',this.updateDoc.$set.slug,' this.updateDoc ',this.updateDoc)
+      console.log(':: slugs ',this.updateDoc.$set.slug,' this.updateDoc ',this.updateDoc)
       if (slug) {
         
         // Redirect to updated API with new slug. It is use while api's name will update slug have to change that's mean routing change

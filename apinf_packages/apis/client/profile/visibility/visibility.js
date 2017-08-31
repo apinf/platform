@@ -39,6 +39,5 @@ Template.visibilityToggle.helpers({
       return apiData.isPublic;
     }
     return false;
-    return status;
   },
 });

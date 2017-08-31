@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Tracker } from 'meteor/tracker';
 
 // Collection imports
 import ApiBacklogItems from '/apinf_packages/backlog/collection';
@@ -56,6 +57,7 @@ Template.viewApi.helpers({
 
     // Get single API Backend
     const api = instance.api.get();
+    
     // Save the API ID
     instance.apiId = api._id;
 
