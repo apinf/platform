@@ -19,6 +19,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{> apiCatalogGrid apis=organization.featuredApis organization=organization }}
 
   {{ else }}
-    {{> organizationNoFeaturedApis organization=organization }}
+   {{# if organization.currentUserCanManage }}
+      {{> organizationNoFeaturedApis organization=organization }}
+    {{/if}}
   {{/ if }}
 </template>

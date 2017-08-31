@@ -430,7 +430,7 @@
   "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
   "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
   "organizationNoFeaturedApis_text_noFeaturedApis": "The organization doesn't have any featured APIs.",
-  "organizationNoFeaturedApis_text_useButton": "You can mark APIs as featured ones by clicking the pin button in upper right corner in API card",
+  "organizationNoFeaturedApis_text_useButton": "You can feature APIs of your organization by pinning the related API card. You can choose upto four APIs to feature in your organization",
   "organizationProfile_bigText_apisCount": "All APIs",
   "organizationProfile_bigText_featuredApisCount": "Featured APIs",
   "organizationProfileHeader_editButton_text": "Edit",
