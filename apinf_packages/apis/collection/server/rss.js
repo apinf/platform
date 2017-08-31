@@ -16,7 +16,7 @@ import Branding from '/apinf_packages/branding/collection';
 
 // calling Rss feed publication
 // first argument (apis) will build the url for the feed i.e domain-name/rss/apis
-RssFeed.publish('apis', function () {
+RssFeed.publish('apis', function (query) {
   // initialization of variable feed
   const feed = this;
 
@@ -42,8 +42,12 @@ RssFeed.publish('apis', function () {
           before refreshing from the source*/
   feed.setValue('ttl', 1);
 
-  // Look at each entry of Apis shcema and find the latest apis
-  Apis.find({}, { sort: { created_at: -1 } }).forEach((api) => {
+  // Look at each entry of public Apis shcema and find the latest apis
+  const filter = { isPublic: true };
+  if (query.slug !== undefined) {
+    filter.slug = query.slug;
+  }
+  Apis.find(filter, { sort: { created_at: -1 } }).forEach((api) => {
     // append an item to our feed using the .addItem() method
     feed.addItem({
       title: api.name,
