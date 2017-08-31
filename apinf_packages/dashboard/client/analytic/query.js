@@ -10,8 +10,8 @@ import moment from 'moment';
 export default function queryForAnalyticPage (requestPath) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
-  const oneWeekAgo = moment().subtract(33, 'days').format('YYYY-MM-DD');
-  const twoWeeksAgo = moment().subtract(66, 'days').format('YYYY-MM-DD');
+  const oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
+  const twoWeeksAgo = moment().subtract(14, 'days').format('YYYY-MM-DD');
 
   return {
     size: 0,
@@ -25,7 +25,8 @@ export default function queryForAnalyticPage (requestPath) {
                   wildcard: {
                     request_path: {
                       // Add '*' to partially match the url
-                      value: `${requestPath.slice(-1)}*`,
+                      // Remove the last slash to correct data
+                      value: `${requestPath.slice(0, -1)}*`,
                     },
                   },
                 },
