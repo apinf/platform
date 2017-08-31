@@ -22,10 +22,15 @@ Template.viewApi.onCreated(function () {
   // Get reference to template instance
   const instance = this;
   const templateInstance = this;
+
+  // Reactive variable to hold API document
+  instance.api = new ReactiveVar();
+
   templateInstance.autorun(()=>{
 
-    instance.slug = FlowRouter.getParam('slug');
-
+    const slug = FlowRouter.getParam('slug');
+    instance.slug = slug;
+    
     // Subscribe to API and related organization
     instance.subscribe('apiComposite', instance.slug);
 
@@ -34,6 +39,14 @@ Template.viewApi.onCreated(function () {
 
     // Subscribe to public proxy details for proxy form
     instance.subscribe('publicProxyDetails');
+
+    if(instance.subscriptionsReady()){
+      // Get single API Backend
+      const api = Apis.findOne({ slug });     
+      if (api) {
+        instance.api.set(api);
+      }
+    }
   });
 });
 
@@ -46,7 +59,8 @@ Template.viewApi.helpers({
     const slug = instance.slug;
 
     // Get single API Backend
-    const api = Apis.findOne({ slug });
+    const api = instance.api.get();
+    
     // Save the API ID
     instance.apiId = api._id;
 

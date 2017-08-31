@@ -15,11 +15,14 @@ import Apis from '/apis/collection';
 AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
-      const api = Apis.findOne(this.docId);
-      if (api && api.slug) {
+
+      // Getting new slug from this.udateDoc
+
+      const slug = this.updateDoc.$set.slug;
+      if (slug) {
         
         // Redirect to updated API with new slug. It is use while api's name will update slug have to change that's mean routing change
-        FlowRouter.go('viewApi', { slug: api.slug });
+        FlowRouter.go('viewApi', { slug: slug });
       } else {
         // Otherwise Redirect to API Catalog
         FlowRouter.go('apiCatalog');

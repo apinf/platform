@@ -30,7 +30,6 @@ AutoForm.hooks({
     },
     onSuccess (formType, apiId) {
       const api = Apis.findOne(apiId);
-
       // Make sure slug exists
       if (api && api.slug) {
         // Redirect to newly added API
