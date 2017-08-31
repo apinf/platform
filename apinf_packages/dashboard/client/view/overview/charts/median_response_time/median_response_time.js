@@ -16,20 +16,6 @@ import Chart from 'chart.js';
 Template.medianResponseTime.onRendered(function () {
   const instance = this;
 
-  // Get ElasticSearch aggregated data
-  const elasticsearchData = Template.currentData().buckets;
-
-  // Get Labels for chart
-  const labels = elasticsearchData.map(value => {
-    // TODO: internationalize date formatting
-    return moment(value.key).format('MM/DD');
-  });
-
-  // Get data for bar chart
-  const data = elasticsearchData.map(value => {
-    return parseInt(value.percentiles_response_time.values['50.0'], 10);
-  });
-
   const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
   const querySelector = `[data-overview-id="${id}"] .median-response-time`;
@@ -42,14 +28,13 @@ Template.medianResponseTime.onRendered(function () {
 
     // Data for displaying chart
     data: {
-      labels,
+      labels: [],
       datasets: [
         {
           label: TAPi18n.__('medianResponseTime_pointTitle_time'),
           backgroundColor: '#C6C5C5',
           borderColor: '#959595',
           borderWidth: 1,
-          data,
         },
       ],
     },
@@ -73,6 +58,31 @@ Template.medianResponseTime.onRendered(function () {
       },
     },
   });
+
+  // Update reactively when Elasticsearch data is updated
+  instance.autorun(() => {
+    // Get ElasticSearch aggregated data
+    const elasticsearchData = Template.currentData().buckets;
+
+    // Get Labels for chart
+    const labels = elasticsearchData.map(value => {
+      // TODO: internationalize date formatting
+      return moment(value.key).format('MM/DD');
+    });
+
+    // Get data for bar chart
+    const data = elasticsearchData.map(value => {
+      return parseInt(value.percentiles_response_time.values['50.0'], 10);
+    });
+
+    // Update labels & data
+    instance.chart.data.labels = labels;
+    instance.chart.data.datasets[0].data = data;
+
+    // Update chart with relevant data
+    instance.chart.update();
+  });
+
 
   // Reactive update Chart Axis translation
   instance.autorun(() => {
