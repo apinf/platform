@@ -17,7 +17,6 @@ import Chart from 'chart.js';
 
 Template.requestTimeline.onCreated(function () {
   const instance = this;
-  const timelineData = instance.data.timelineData;
 
   instance.elasticsearchData = new ReactiveVar();
 
@@ -25,7 +24,7 @@ Template.requestTimeline.onCreated(function () {
   // Get related elasticsearch data when a user changed path
   instance.changePath = (path) => {
     // Find the related data for selected Path
-    const relatedData = timelineData.filter(value => {
+    const relatedData = Template.currentData().timelineData.filter(value => {
       return value.key === path;
     });
 
@@ -33,8 +32,11 @@ Template.requestTimeline.onCreated(function () {
     instance.elasticsearchData.set(relatedData[0]);
   };
 
-  // On default get data for the first requested path
-  instance.changePath(timelineData[0].key);
+  instance.autorun(() => {
+    const timelineData = Template.currentData().timelineData;
+    // On default get data for the first requested path
+    instance.changePath(timelineData[0].key);
+  });
 });
 
 Template.requestTimeline.onRendered(function () {
