@@ -16,20 +16,6 @@ import Chart from 'chart.js';
 Template.uniqueUsersOverTime.onRendered(function () {
   const instance = this;
 
-  // Get ElasticSearch aggregated data
-  const elasticsearchData = Template.currentData().buckets;
-
-  // Get Labels for chart
-  const labels = elasticsearchData.map(value => {
-    // TODO: internationalize date formatting
-    return moment(value.key).format('MM/DD');
-  });
-
-  // Get x & y points for chart
-  const data = elasticsearchData.map(value => {
-    return value.unique_users.buckets.length;
-  });
-
   const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
   const querySelector = `[data-overview-id="${id}"] .users-chart`;
@@ -42,14 +28,13 @@ Template.uniqueUsersOverTime.onRendered(function () {
 
     // Data for displaying chart
     data: {
-      labels,
+      labels: [],
       datasets: [
         {
           label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
           backgroundColor: '#C6C5C5',
           borderColor: '#959595',
           borderWidth: 1,
-          data,
         },
       ],
     },
@@ -72,6 +57,30 @@ Template.uniqueUsersOverTime.onRendered(function () {
         }],
       },
     },
+  });
+
+  // Update reactively when Elasticsearch data is updated
+  instance.autorun(() => {
+    // Get ElasticSearch aggregated data
+    const elasticsearchData = Template.currentData().buckets;
+
+    // Get Labels for chart
+    const labels = elasticsearchData.map(value => {
+      // TODO: internationalize date formatting
+      return moment(value.key).format('MM/DD');
+    });
+
+    // Get x & y points for chart
+    const data = elasticsearchData.map(value => {
+      return value.unique_users.buckets.length;
+    });
+
+    // Update labels & data
+    instance.chart.data.labels = labels;
+    instance.chart.data.datasets[0].data = data;
+
+    // Update chart with relevant data
+    instance.chart.update();
   });
 
   // Reactive update Chart Axis translation
