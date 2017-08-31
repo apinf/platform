@@ -88,12 +88,13 @@ export function calculateTrend (previous, current) {
   return Math.round(((current / previous) - 1) * 100);
 }
 
-export function summaryComparing (parameter, bucket) {
+export function summaryComparing (parameter, bucket, timeframe) {
   // Get a trend direction value
   const direction = arrowDirection(parameter, bucket);
   // Get percentage trend value
   const percentages = percentageValue(parameter, bucket);
   let trend;
+  let text = '';
 
   // Make sure trend exists
   if (direction && percentages) {
@@ -106,10 +107,16 @@ export function summaryComparing (parameter, bucket) {
       trend = TAPi18n.__('summaryComparing_trendDirection_lower');
     }
 
-    const params = { percentage: percentages, direction: trend };
-    return TAPi18n.__('summaryComparing_displayTrendInfo', params);
+    const params = { percentage: percentages, direction: trend, day: timeframe };
+    // If comparison with 1 day then it is "yesterday"
+    if (timeframe === 1) {
+      text = TAPi18n.__('summaryComparing_displayTrendInfo_yesterday', params);
+    } else {
+      text = TAPi18n.__('summaryComparing_displayTrendInfo_days', params);
+    }
   }
 
   // Don't display any text if there is no trend
-  return '';
+  // Or display trend information
+  return text;
 }
