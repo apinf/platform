@@ -6,6 +6,9 @@
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 // APInf imports
 // eslint-disable-next-line max-len
 import { arrowDirection, percentageValue, summaryComparing } from '/apinf_packages/dashboard/client/trend_helpers';
@@ -20,6 +23,9 @@ Template.dashboardOverviewStatistic.helpers({
     return percentageValue(parameter, this);
   },
   overviewComparing (parameter) {
-    return summaryComparing(parameter, this);
+    // Get value of timeframe
+    const currentTimeframe = FlowRouter.getQueryParam('timeframe');
+
+    return summaryComparing(parameter, this, currentTimeframe);
   },
 });
