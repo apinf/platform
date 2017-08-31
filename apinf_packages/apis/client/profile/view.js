@@ -33,7 +33,7 @@ Template.viewApi.onCreated(function () {
     instance.subscribe('proxyCount');
     // Subscribe to public proxy details for proxy form
     instance.subscribe('publicProxyDetails');
-    if (instance.subscriptionsReady()) {      
+    if (instance.subscriptionsReady()) {
       // Get single API Backend
       const api = Apis.findOne({ slug });
       if (api) {
