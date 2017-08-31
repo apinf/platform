@@ -42,11 +42,18 @@ RssFeed.publish('apis', function (query) {
           before refreshing from the source*/
   feed.setValue('ttl', 1);
 
-  // Look at each entry of public Apis shcema and find the latest apis
+  // The feed should only look for public APIs
   const filter = { isPublic: true };
+
+  /*
+    If the slug has been passed in query, the feed searches the specific
+    API (if it are public), if not, the feed returns all public apis
+  */
   if (query.slug !== undefined) {
     filter.slug = query.slug;
   }
+
+  // Look at each entry of public Apis schema and find the latest apis in filter
   Apis.find(filter, { sort: { created_at: -1 } }).forEach((api) => {
     // append an item to our feed using the .addItem() method
     feed.addItem({
