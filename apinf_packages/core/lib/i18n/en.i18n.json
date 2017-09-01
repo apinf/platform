@@ -475,6 +475,8 @@
   "profile_updatedSuccess": "Profile updated",
   "profile_usernameInvalid": "Username must be 3-15 alphanumeric characters. Underscore and hyphens are allowed.",
   "profile_usernameIsTaken": "User name already exists. Enter another user name.",
+  "projectLogoTitle_logoTitle":"Site Logo",
+  "projectCoverPhotoTitle_coverPhotoTitle":"Cover Image",
   "proxies_pageHeader": "Proxies",
   "proxies_addProxy": "Add proxy",
   "proxies_noProxiesFound": "No proxies found.",

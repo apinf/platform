@@ -17,10 +17,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
           <div class="panel-body">
             {{# if branding }}
-              {{> viewProjectLogo branding=branding }}
-              {{> uploadProjectLogo branding=branding }}
-              {{> viewCoverPhoto branding=branding }}
-              {{> uploadCoverPhoto branding=branding }}
+              <div class="form-group">
+                <label for="branding-site-logo" class="control-label">
+                {{_ "projectLogoTitle_logoTitle" }}
+                </label>
+                <br>
+                {{> viewProjectLogo branding=branding }}
+                {{> uploadProjectLogo branding=branding }}
+              </div>
+              <div class="form-group">
+                <label for="branding-site-cover-photo" class="control-label">
+                  {{_ "projectCoverPhotoTitle_coverPhotoTitle" }}
+                </label>
+                <br>
+                {{> viewCoverPhoto branding=branding }}
+                {{> uploadCoverPhoto branding=branding }}
+              </div>
               {{# autoForm
                 id="brandingEdit"
                 type="update"
