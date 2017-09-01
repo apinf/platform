@@ -22,6 +22,8 @@ Template.viewApi.onCreated(function () {
   const instance = this;
   const templateInstance = this;
 
+  instance.api = new ReactiveVar();
+
   // Using to get updated subscription
   templateInstance.autorun(() => {
     // Take slug from params
