@@ -28,8 +28,8 @@ Template.viewApi.onCreated(function () {
   templateInstance.autorun(() => {
     // Take slug from params
     const slug = FlowRouter.getParam('slug');
-    // Subscribe to API and related organization
-    templateInstance.subscribe('apiComposite',slug);
+    templateInstance.subscribe('apiComposite',slug)
+    // Subscribe to API and related organization;
     // Subscribe to public proxy details
     templateInstance.subscribe('proxyCount');
     // Subscribe to public proxy details for proxy form
@@ -49,7 +49,6 @@ Template.viewApi.helpers({
 
     // Get single API Backend
     const api = templateInstance.api.get();
-
     // Save the API ID
     templateInstance.apiId = api._id;
 
