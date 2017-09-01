@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 // Collection imports
 import ApiBacklogItems from '/apinf_packages/backlog/collection';
@@ -18,20 +19,31 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
 
 Template.viewApi.onCreated(function () {
-  // Get reference to template instance
+   // Get reference to template instance
   const instance = this;
+  const templateInstance = this;
 
-  // Get the API Backend ID from the route
-  instance.slug = FlowRouter.getParam('slug');
+  instance.api = new ReactiveVar();
 
-  // Subscribe to API and related organization
-  instance.subscribe('apiComposite', instance.slug);
-
-  // Subscribe to public proxy details
-  instance.subscribe('proxyCount');
-
-  // Subscribe to public proxy details for proxy form
-  instance.subscribe('publicProxyDetails');
+  // Using to get updated subscription
+  templateInstance.autorun(() => {
+    // Take slug from params
+    const slug = FlowRouter.getParam('slug');
+    instance.slug = slug;
+    // Subscribe to API and related organization
+    instance.subscribe('apiComposite', instance.slug);
+    // Subscribe to public proxy details
+    instance.subscribe('proxyCount');
+    // Subscribe to public proxy details for proxy form
+    instance.subscribe('publicProxyDetails');
+    if (instance.subscriptionsReady()) {
+      // Get single API Backend
+      const api = Apis.findOne({ slug });
+      if (api) {
+        instance.api.set(api);
+      }
+    }
+  });
 });
 
 Template.viewApi.helpers({
@@ -39,11 +51,9 @@ Template.viewApi.helpers({
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Get API slug
-    const slug = instance.slug;
-
     // Get single API Backend
-    const api = Apis.findOne({ slug });
+    const api = instance.api.get();
+
     // Save the API ID
     instance.apiId = api._id;
 
