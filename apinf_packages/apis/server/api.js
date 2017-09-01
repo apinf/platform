@@ -269,42 +269,47 @@ CatalogV1.addCollection(Apis, {
         const userId = this.userId;
         const mandatoryFieldsFilled = this.bodyParams.name && this.bodyParams.url;
 
-        // Make sure required fields are set
-        if (mandatoryFieldsFilled) {
-          // Check if API with same name already exists
-          if (Apis.findOne({ name: this.bodyParams.name })) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'Fail',
-                message: 'Duplicate API name',
-              },
-            };
-          }
-
-          // Add manager IDs list into
-          const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
-
-          // Insert API data into collection
-          const apiId = Apis.insert(apiData);
-
-          // Give user manager role
-          Roles.addUsersToRoles(userId, 'manager');
-
+        // Required fields are not set
+        if (!mandatoryFieldsFilled) {
           return {
-            statusCode: 200,
+            statusCode: 409,
             body: {
-              status: 'Success',
-              data: Apis.findOne(apiId),
+              title: 'Mandatory fields missing',
+              detail: 'Fields "name" and "url" are required',
             },
           };
         }
 
-        // Otherwise show message about required fields
+        // Description must not exceed field length in DB
+
+        // Is value of lifecycle status allowed
+
+
+        // Check if API with same name already exists
+        if (Apis.findOne({ name: this.bodyParams.name })) {
+          return {
+            statusCode: 400,
+            body: {
+              title: 'Duplicate API name',
+              detail: 'API with same name already exists',
+            },
+          };
+        }
+
+        // Add manager IDs list into
+        const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
+
+        // Insert API data into collection
+        const apiId = Apis.insert(apiData);
+
+        // Give user manager role
+        Roles.addUsersToRoles(userId, 'manager');
+
         return {
-          statusCode: 409,
+          statusCode: 200,
           body: {
-            message: 'Fields "name" and "url" are required',
+            title: 'API added successfully',
+            data: Apis.findOne(apiId),
           },
         };
       },
