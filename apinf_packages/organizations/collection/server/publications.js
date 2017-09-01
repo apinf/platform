@@ -15,6 +15,7 @@ import _ from 'lodash';
 
 // Collection imports
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
+import Apis from '/apinf_packages/apis/collection';
 import Organizations from '../';
 
 Meteor.publish('allOrganizationBasicDetails', () => {
@@ -44,8 +45,39 @@ Meteor.publish('userManagedOrganizations', function () {
 Meteor.publish('organizationApisCount', function (organizationId) {
   // Make sure 'organizationId' is a String
   check(organizationId, String);
+
+  // Get current user Id
+  const userId = this.userId;
+
+  // Get the organization information
+  const organization = Organizations.findOne({ _id: organizationId });
+
+  // Checks if user can manage apis of organization
+  const userCanViewPrivateApis = userId && organization.currentUserCanManage(userId);
+
   // Publish count of organization apis
-  const organizationApisCount = OrganizationApis.find({ organizationId });
+  let organizationApisCount = OrganizationApis.find({ organizationId });
+
+  // Get only the publics APIs or this organization
+  if (!userCanViewPrivateApis) {
+    // Ids of publics APIs
+    const apisSelector = [];
+
+    // Iterates over api organizations to get the publics apis
+    organizationApisCount.forEach((organizationApi) => {
+      // Get API information
+      const api = Apis.findOne({ _id: organizationApi.apiId });
+
+      // Checks if the user is manager of this API
+      if (api.isPublic || (userId && api.currentUserCanManage(userId))) {
+        apisSelector.push({ apiId: api._id });
+      }
+    });
+
+    // Uses the apisSelector to get get only publics APIs
+    organizationApisCount = OrganizationApis.find({ $or: apisSelector });
+  }
+
   // Publish an Api Counter for each Organization
   Counts.publish(this, `organizationApisCount-${organizationId}`, organizationApisCount);
 });
