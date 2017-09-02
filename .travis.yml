@@ -48,7 +48,7 @@ script:
   # Build docker image
   - ./.scripts/docker_build.sh
   # Run Endpoint testing
-  - ./node_modules/mocha/bin/mocha --recursive tests/endpoints
+  - npm run test-endpoints
 
 env:
   global:
