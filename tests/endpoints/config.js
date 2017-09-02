@@ -13,4 +13,4 @@ const config = {
   organizations,
 };
 
-export default config;
+module.exports = config;
