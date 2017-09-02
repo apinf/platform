@@ -49,6 +49,7 @@
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-meteor": "^4.0.0",
+    "superagent": "^3.6.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
