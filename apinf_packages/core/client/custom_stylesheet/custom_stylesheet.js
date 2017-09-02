@@ -18,7 +18,7 @@ Template.customStylesheet.helpers({
 
     // Placeholder variables
     let backgroundColor;
-    let textColor;
+    let textColor = '#ffffff';
     let lighterBackgroundReadability;
     let darkerBackgroundReadability;
     let mostReadableBackground;
