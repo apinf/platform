@@ -39,11 +39,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{> dashboardSummaryStatisticNoData proxyBackend=proxyBackend }}
         {{ else }}
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-xs-3">
               {{ proxyBackend.apiName }}
             </div>
             {{# with bucket proxyBackend.frontendPrefix }}
-              <div class="col-md-3">
+              <div class="col-xs-3">
               <span class="request-number">
                 {{ requestNumber }}
               </span>
@@ -52,7 +52,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{ percentages 'requests' }}
                 </span>
               </div>
-              <div class="col-md-3">
+              <div class="col-xs-3">
               <span class="response-time">
                 {{ responseTime }} ms
               </span>
@@ -61,7 +61,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{ percentages 'time' }}
                 </span>
               </div>
-              <div class="col-md-3">
+              <div class="col-xs-3">
               <span class="unique-users">
                 {{ uniqueUsers }}
               </span>
