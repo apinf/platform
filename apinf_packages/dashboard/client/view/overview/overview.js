@@ -30,8 +30,8 @@ Template.dashboardOverviewStatistic.helpers({
   },
   timeframeYesterday () {
     const timeframe = FlowRouter.getQueryParam('timeframe');
-
-    return timeframe === 1;
+    // Because typeof timeframe is string
+    return timeframe === '1';
   },
   timeframe () {
     return FlowRouter.getQueryParam('timeframe');
