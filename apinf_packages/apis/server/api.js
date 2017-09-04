@@ -279,11 +279,43 @@ CatalogV1.addCollection(Apis, {
             },
           };
         }
+        // validate values
+        const validateFields = {
+          description: this.bodyParams.description,
+          lifecycleStatus: this.bodyParams.lifecycleStatus,
+        };
 
         // Description must not exceed field length in DB
+        if (this.bodyParams.description) {
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'description');
+
+          if (!isValid) {
+            return {
+              statusCode: 409,
+              body: {
+                title: 'Description too long',
+                detail: 'Description length must not exceed 1000 characters',
+              },
+            };
+          }
+        }
 
         // Is value of lifecycle status allowed
+        if (this.bodyParams.lifecycleStatus) {
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'lifecycleStatus');
 
+          if (!isValid) {
+            return {
+              statusCode: 409,
+              body: {
+                title: 'Erroneous value',
+                detail: 'Parameter lifecycleStatus has erroenous value',
+              },
+            };
+          }
+        }
 
         // Check if API with same name already exists
         if (Apis.findOne({ name: this.bodyParams.name })) {
@@ -299,8 +331,22 @@ CatalogV1.addCollection(Apis, {
         // Add manager IDs list into
         const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
 
-        // Insert API data into collection
-        const apiId = Apis.insert(apiData);
+        let apiId;
+
+        try {
+          // Insert API data into collection
+          apiId = Apis.insert(apiData);
+        } catch (e) {
+          // status.message = JSON.stringify(e);
+          return {
+            statusCode: 409,
+            body: {
+              title: 'Error in field',
+              detail: e,
+            },
+          };
+        }
+
 
         // Give user manager role
         Roles.addUsersToRoles(userId, 'manager');
@@ -370,37 +416,75 @@ CatalogV1.addCollection(Apis, {
         const userId = this.userId;
         const api = Apis.findOne(apiId);
 
-        // Make sure API exists & user can manage
-        if (api) {
-          if (api.currentUserCanManage(userId)) {
-            // Update API document
-            Apis.update(apiId, { $set: bodyParams });
-
-            return {
-              statusCode: 200,
-              body: {
-                status: 'Success updating',
-                data: Apis.findOne(apiId),
-              },
-            };
-          }
-
-          // API exists but user can not manage
+        // API doesn't exist
+        if (!api) {
           return {
-            statusCode: 403,
+            statusCode: 404,
             body: {
-              status: 'Fail',
-              message: 'You do not have permission for editing this API',
+              title: 'Fail',
+              detail: 'API is not found with specified ID',
             },
           };
         }
 
-        // API doesn't exist
+        // API exists but user can not manage
+        if (!api.currentUserCanManage(userId)) {
+          return {
+            statusCode: 403,
+            body: {
+              title: 'Fail',
+              detail: 'You do not have permission for editing this API',
+            },
+          };
+        }
+
+        // validate values
+        const validateFields = {
+          description: this.bodyParams.description,
+          lifecycleStatus: this.bodyParams.lifecycleStatus,
+        };
+
+        // Description must not exceed field length in DB
+        if (this.bodyParams.description) {
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'description');
+
+          if (!isValid) {
+            return {
+              statusCode: 409,
+              body: {
+                title: 'Description too long',
+                detail: 'Description length must not exceed 1000 characters',
+              },
+            };
+          }
+        }
+
+        // Is value of lifecycle status allowed
+        if (this.bodyParams.lifecycleStatus) {
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'lifecycleStatus');
+
+          if (!isValid) {
+            return {
+              statusCode: 409,
+              body: {
+                title: 'Erroneous value',
+                detail: 'Parameter lifecycleStatus has erroenous value',
+              },
+            };
+          }
+        }
+
+        // Update API document
+        Apis.update(apiId, { $set: bodyParams });
+
+        // OK response with API data
         return {
-          statusCode: 404,
+          statusCode: 200,
           body: {
-            status: 'Fail',
-            message: 'API is not found with specified ID',
+            title: 'Success updating',
+            data: Apis.findOne(apiId),
           },
         };
       },
