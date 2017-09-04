@@ -28,4 +28,12 @@ Template.dashboardOverviewStatistic.helpers({
 
     return summaryComparing(parameter, this, currentTimeframe);
   },
+  timeframeYesterday () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+
+    return timeframe === 1;
+  },
+  timeframe () {
+    return FlowRouter.getQueryParam('timeframe');
+  },
 });

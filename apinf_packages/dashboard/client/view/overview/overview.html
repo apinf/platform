@@ -6,24 +6,28 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="dashboardOverviewStatistic">
   <div class="overview-body" data-overview-id="{{ proxyBackend._id }}">
     {{# if bucket }}
-      {{# with bucket }}
-        <div class="row overview-line">
-          <div class="col-xs-12 col-md-3">
-            <p class="overview-col-title">
-              {{ apiName }}
+      <div class="row overview-line">
+        <div class="col-xs-12 col-md-3">
+          <p class="overview-col-title">
+            {{ bucket.apiName }}
+          </p>
+          <div class="form-group">
+            <p>
+              {{_ 'dashboardOverviewStatistic_text_requestPath' path=bucket.requestPath }}
             </p>
-            <div class="form-group">
-              <p>
-                {{_ 'dashboardOverviewStatistic_text_requestPath' path=requestPath }}
-              </p>
-              <p class="text-success">
-                {{_ 'dashboardOverviewStatistic_text_successCalls' count=successCallsCount }}
-              </p>
-              <span class="text-danger">
-                {{_ 'dashboardOverviewStatistic_text_errorCalls' count=errorCallsCount }}
-              </span>
-            </div>
+            <p class="text-success">
+              {{_ 'dashboardOverviewStatistic_text_successCalls' count=bucket.successCallsCount }}
+            </p>
+            <span class="text-danger">
+              {{# if timeframeYesterday }}
+                {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=bucket.errorCallsCount }}
+              {{ else }}
+                {{_ 'dashboardOverviewStatistic_text_errorCalls' count=bucket.errorCallsCount timeframe=timeframe }}
+              {{/ if }}
+            </span>
           </div>
+        </div>
+        {{# with bucket }}
           <div class="col-xs-12 col-md-3">
             <p class="overview-col-title">
               {{_ 'dashboardOverviewStatistic_text_requestsCount' count=requestNumber }}
@@ -67,8 +71,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
             </a>
           </div>
-        </div>
-      {{/ with }}
+        {{/ with }}
+      </div>
     {{ else }}
       <!-- Display template with "No Data Available -->
       {{> dashboardOverviewStatisticNoData proxyBackend=proxyBackend }}
