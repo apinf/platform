@@ -14,6 +14,17 @@ export function githubSettingsValid (settings) {
   return false;
 }
 
+// Validates github configuration settings
+export function fiwareSettingsValid (settings) {
+  if ((typeof settings !== 'undefined') && settings.fiwareConfiguration) {
+    if (settings.fiwareConfiguration.clientId && settings.fiwareConfiguration.secret && settings.fiwareConfiguration.rootURL) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 // Validates mail configuration settings
 export function mailSettingsValid (settings) {
   if ((typeof settings !== 'undefined') && settings.mail && settings.mail.enabled) {
