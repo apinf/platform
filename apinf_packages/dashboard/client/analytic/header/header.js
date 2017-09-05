@@ -10,13 +10,31 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+
+Template.apiAnalyticPageHeader.onCreated(function () {
+  const instance = this;
+  // Get ID of current proxy backend
+  const proxyBackendId = instance.data.proxyBackendId;
+  // Get instance of Proxy Backend
+  const proxyBackend = ProxyBackends.findOne(proxyBackendId);
+
+  // Get IDs of relevant API and Proxy
+  instance.apiId = proxyBackend.apiId;
+  instance.proxyId = proxyBackend.proxyId;
+});
 
 Template.apiAnalyticPageHeader.helpers({
   api () {
-    return Apis.findOne();
+    // Get ID
+    const apiId = Template.instance().apiId;
+
+    return Apis.findOne(apiId);
   },
   proxyName () {
-    const proxy = Proxies.findOne();
+    // Get ID
+    const proxyId = Template.instance().proxyId;
+    const proxy = Proxies.findOne(proxyId);
 
     return proxy.name;
   },
