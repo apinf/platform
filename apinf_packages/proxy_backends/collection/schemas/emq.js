@@ -3,6 +3,9 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
+// APInf imports
+import { topicPrefix } from '../regex';
+
 // Rate limits schema
 const aclSchema = new SimpleSchema({
   proxyId: {
@@ -71,6 +74,12 @@ const aclSchema = new SimpleSchema({
 
 // Settings schema
 const SettingsSchema = new SimpleSchema({
+  topicPrefix: {
+    type: String,
+    optional: true,
+    // unique: true,
+    regEx: topicPrefix,
+  },
   acl: {
     type: [aclSchema],
     defaultValue: [],

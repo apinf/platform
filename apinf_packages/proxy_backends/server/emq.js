@@ -59,7 +59,6 @@ Meteor.methods({
             username: user.username,
           };
         });
-
         resolve(users);
       });
     });

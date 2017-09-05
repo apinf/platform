@@ -3,6 +3,33 @@
   <!-- Hidden fields -->
   {{> afQuickField name="type" type="hidden" value="emq" }}
   <!-- End hidden fields -->
+
+  <!-- Topic prefix -->
+  {{#unless proxyBackend.emq.settings.topicPrefix}}
+    <div class="form-group" data-required="true">
+      <!-- Topic prefix label -->
+      <label for="proxy-base-path-field">
+        {{ afFieldLabelText name='emq.settings.topicPrefix' }}
+      </label>
+
+      {{> afFieldInput
+        name="emq.settings.topicPrefix"
+      }}
+
+      <!-- validation messages -->
+      {{# if afFieldIsInvalid name='emq.settings.topicPrefix' }}
+      <p class="text-danger">
+        {{{ afFieldMessage name='emq.settings.topicPrefix' }}}
+      </p>
+      {{/ if }}
+
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_topicPrefix_helpText" }}
+      </p>
+    </div>
+  {{/unless}}
+
   <!-- Rate limits -->
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -25,9 +52,18 @@
                 {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
                 {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
               </div>
+
               <div class="form-group">
-                {{> afFieldInput name=this.current.topic }}
+                <div class="input-group">
+                  {{#if ../proxyBackend.emq.settings.topicPrefix}}
+                    <span class="input-group-addon" id="topic-prefix">
+                      {{ ../proxyBackend.emq.settings.topicPrefix }}
+                    </span>
+                  {{/if}}
+                  {{> afFieldInput name=this.current.topic }}
+                </div>
               </div>
+
               <div class="form-group">
                 <label>{{_ "schemas.proxyBackends.emq.settings.acl.$.from.label" }}</label>
               </div>

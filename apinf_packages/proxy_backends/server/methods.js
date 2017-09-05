@@ -98,7 +98,7 @@ Meteor.methods({
       url: `${uri.valueOf()}`,
     };
   },
-  emqAclRequest (method, proxyId, rules) {
+  emqAclRequest (method, proxyId, rules, topicPrefix) {
     check(method, String);
     check(proxyId, String);
     check(rules, Array);
@@ -125,7 +125,7 @@ Meteor.methods({
           id: rule.id,
           allow: rule.allow,
           access: rule.access,
-          topic: rule.topic,
+          topic: topicPrefix + rule.topic,
         };
         // Append ACL type & value
         data[rule.fromType] = rule.fromValue;
@@ -153,8 +153,8 @@ Meteor.methods({
           proxyId: rule.proxyId,
           allow: rule.allow,
           access: rule.access,
-          topic: rule.topic,
-        };
+          topic: topicPrefix + rule.topic,
+        }; 
         // Append ACL type & value
         data[rule.fromType] = rule.fromValue;
 
