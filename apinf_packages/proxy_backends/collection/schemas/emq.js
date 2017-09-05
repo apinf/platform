@@ -77,7 +77,7 @@ const SettingsSchema = new SimpleSchema({
   topicPrefix: {
     type: String,
     optional: true,
-    // unique: true,
+    unique: true,
     regEx: topicPrefix,
   },
   acl: {

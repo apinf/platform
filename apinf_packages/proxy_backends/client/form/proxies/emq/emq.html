@@ -31,7 +31,7 @@
   {{/unless}}
 
   <!-- Rate limits -->
-  <div class="panel panel-default">
+  <div class="panel panel-default {{# unless proxyBackend.emq.settings.topicPrefix }} disabled-div {{/ unless}}">
     <div class="panel-heading">
       Access Control Rules
     </div>
@@ -45,35 +45,37 @@
             </a>
           </div>
           <div class="autoform-array-item-body">
-            <div class="panel-body">
-
-              <div class="form-group">
-                {{> afFieldInput name=this.current.id type="hidden" }}
-                {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
-                {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
-              </div>
-
-              <div class="form-group">
-                <div class="input-group">
-                  {{#if ../proxyBackend.emq.settings.topicPrefix}}
-                    <span class="input-group-addon" id="topic-prefix">
-                      {{ ../proxyBackend.emq.settings.topicPrefix }}
-                    </span>
-                  {{/if}}
-                  {{> afFieldInput name=this.current.topic }}
+            <div class="panel-body ">
+              {{> afFieldInput name=this.current.id type="hidden" }}
+              <div class="row">
+                <div class="col-sm-2 form-group">
+                  {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
+                </div>
+                <div class="col-sm-3 form-group">
+                  {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
+                </div>
+                <div class="col-sm-3 form-group">
+                  <div class="input-group">
+                    {{#if ../proxyBackend.emq.settings.topicPrefix}}
+                      <span class="input-group-addon" id="topic-prefix">
+                        {{ ../proxyBackend.emq.settings.topicPrefix }}
+                      </span>
+                    {{/if}}
+                    {{> afFieldInput name=this.current.topic }}
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>{{_ "schemas.proxyBackends.emq.settings.acl.$.from.label" }}</label>
+                  </div>
+                  <div class="form-group">
+                    {{> afFieldInput type="select" name=this.current.fromType }}
+                  </div>
+                  <div class="form-group">
+                    {{> afFieldInput name=this.current.fromValue }}
+                  </div>
                 </div>
               </div>
-
-              <div class="form-group">
-                <label>{{_ "schemas.proxyBackends.emq.settings.acl.$.from.label" }}</label>
-              </div>
-              <div class="form-group">
-                {{> afFieldInput type="select" name=this.current.fromType }}
-              </div>
-              <div class="form-group">
-                {{> afFieldInput name=this.current.fromValue }}
-              </div>
-
             </div>
           </div>
         </div>
