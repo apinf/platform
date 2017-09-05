@@ -69,7 +69,7 @@ Template.apiCatalog.onCreated(function () {
   // Watch for changes in the sort settings
   instance.autorun(() => {
     let sortByParameter = '';
-    
+
     // Check URL parameter for sort direction and convert to integer
     let sortDirectionParameter = -1;
 
