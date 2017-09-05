@@ -102,6 +102,7 @@ Meteor.methods({
     check(method, String);
     check(proxyId, String);
     check(rules, Array);
+    check(topicPrefix, String);
 
     let rulesMap = [];
     // Assign default HTTP EMQ-ACL path
@@ -154,7 +155,7 @@ Meteor.methods({
           allow: rule.allow,
           access: rule.access,
           topic: topicPrefix + rule.topic,
-        }; 
+        };
         // Append ACL type & value
         data[rule.fromType] = rule.fromValue;
 

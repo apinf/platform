@@ -24,9 +24,7 @@ AutoForm.hooks({
   proxyBackendForm: {
     before: {
       insert (proxyBackend) {
-
         // TODO: Refactor this method. It is too long and complex
-
         // Get reference to autoform instance, for form submission callback
         const form = this;
 
@@ -87,7 +85,7 @@ AutoForm.hooks({
           });
         } else if (proxyBackend.type === 'emq') {
           // Before insert iterate through ACL rules
-          if(proxyBackend.emq.settings.acl && proxyBackend.emq.settings.acl.length != 0){
+          if (proxyBackend.emq.settings.acl && proxyBackend.emq.settings.acl.length !== 0) {
             proxyBackend.emq.settings.acl.forEach((aclRule) => {
               // Adding ID field for each rule separately is needed to differentiate
               // add edit them
@@ -294,7 +292,7 @@ AutoForm.hooks({
       } else {
         // Check what proxy backend is selected
         if (proxyBackend.type === 'emq') {
-          if(proxyBackend.emq.settings.acl && proxyBackend.emq.settings.acl.length != 0){
+          if (proxyBackend.emq.settings.acl && proxyBackend.emq.settings.acl.length !== 0) {
             Meteor.call('emqAclRequest',
               'POST',
               proxyBackend.proxyId,
