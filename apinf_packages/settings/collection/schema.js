@@ -153,6 +153,31 @@ Settings.schema = new SimpleSchema({
       placeholder: 'xxx',
     },
   },
+  fiwareConfiguration: {
+    type: Object,
+    optional: true,
+  },
+  'fiwareConfiguration.clientId': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'fiwareConfiguration.secret': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'fiwareConfiguration.rootURL': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
   sdkCodeGenerator: {
     type: Object,
     optional: true,
