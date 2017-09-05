@@ -16,3 +16,4 @@ packages
 public/swagger.json
 settings.json
 uploads/
+**/.DS_Store

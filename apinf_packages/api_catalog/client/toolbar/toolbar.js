@@ -38,7 +38,9 @@ Template.apiCatalogToolbar.onRendered(function () {
 Template.apiCatalogToolbar.events({
   'change #sort-select': function (event) {
     // Set URL parameter
-    FlowRouter.setQueryParams({ sortBy: event.target.value });
+    FlowRouter.setQueryParams({
+      sortBy: event.target.value
+    });
   },
   'change [name=sort-direction]': function (event) {
     // Set URL parameter
