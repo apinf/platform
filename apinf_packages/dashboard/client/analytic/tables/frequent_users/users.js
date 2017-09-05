@@ -13,31 +13,34 @@ import json2csv from 'json2csv';
 Template.mostFrequentUsersTable.onCreated(function () {
   const instance = this;
 
-  // Get aggregated data about users
-  const mostFrequentUsers = instance.data.mostFrequentUsers;
+  instance.autorun(() => {
+    // Get aggregated data about users
+    const mostFrequentUsers = Template.currentData().mostFrequentUsers;
 
-  // Init
-  instance.users = [];
+    // Init
+    instance.users = [];
 
-  mostFrequentUsers.forEach(userDataset => {
-    userDataset.request_path.buckets.forEach(request => {
-      const user = {};
-      // Get value of email
-      user.email = userDataset.user_email.buckets[0].key;
-      // Get value of requests number
-      user.calls = request.doc_count;
-      // Get value of request_path
-      user.url = request.key;
+    mostFrequentUsers.forEach(userDataset => {
+      userDataset.request_path.buckets.forEach(request => {
+        const user = {};
+        // Get value of email
+        user.email = userDataset.user_email.buckets[0].key;
+        // Get value of requests number
+        user.calls = request.doc_count;
+        // Get value of request_path
+        user.url = request.key;
 
-      instance.users.push(user);
+        instance.users.push(user);
+      });
+    });
+
+    // Sorting by the highest calls
+    instance.users.sort((a, b) => {
+      return b.calls - a.calls;
     });
   });
-
-  // Sorting by the highest calls
-  instance.users.sort((a, b) => {
-    return b.calls - a.calls;
-  });
 });
+
 Template.mostFrequentUsersTable.helpers({
   users () {
     const instance = Template.instance();
