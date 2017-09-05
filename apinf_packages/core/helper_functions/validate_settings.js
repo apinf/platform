@@ -17,7 +17,8 @@ export function githubSettingsValid (settings) {
 // Validates github configuration settings
 export function fiwareSettingsValid (settings) {
   if ((typeof settings !== 'undefined') && settings.fiwareConfiguration) {
-    if (settings.fiwareConfiguration.clientId && settings.fiwareConfiguration.secret && settings.fiwareConfiguration.rootURL) {
+    const fiwareConfiguration = settings.fiwareConfiguration;
+    if (fiwareConfiguration.clientId && fiwareConfiguration.secret && fiwareConfiguration.rootURL) {
       return true;
     }
   }
