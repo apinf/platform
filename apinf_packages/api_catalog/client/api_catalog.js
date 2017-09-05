@@ -74,13 +74,13 @@ Template.apiCatalog.onCreated(function () {
     let sortDirectionParameter = -1;
 
     // Check URL parameter for sorting
-    if(FlowRouter.getQueryParam('sortBy') == "name-a-z"){
-      sortByParameter = "name";
+    if (FlowRouter.getQueryParam('sortBy') === 'name-a-z') {
+      sortByParameter = 'name';
       sortDirectionParameter = 1;
-    }else if(FlowRouter.getQueryParam('sortBy') == "name-z-a"){
-      sortByParameter = "name";
+    } else if (FlowRouter.getQueryParam('sortBy') === 'name-z-a') {
+      sortByParameter = 'name';
       sortDirectionParameter = -1;
-    }else{
+    } else {
       sortByParameter = FlowRouter.getQueryParam('sortBy');
     }
     // Create a object for storage sorting parameters
