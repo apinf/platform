@@ -18,28 +18,30 @@ Template.errorsStatisticTable.onCreated(function () {
   // Get value of selected language
   const language = TAPi18n.getLanguage();
 
-  const aggregatedData = instance.data.timelineData;
+  instance.autorun(() => {
+    const aggregatedData = Template.currentData().timelineData;
 
-  // Init
-  instance.errors = [];
+    // Init
+    instance.errors = [];
 
-  aggregatedData.forEach(dataset => {
-    const requestPath = dataset.key;
+    aggregatedData.forEach(dataset => {
+      const requestPath = dataset.key;
 
-    dataset.errors_statistic.errors_over_time.buckets.forEach(date => {
-      date.status.buckets.forEach(status => {
-        const error = {
-          // Get value of request path
-          path: requestPath,
-          // Get value of request date
-          date: new Date(date.key).toLocaleString(language),
-          // Get values of request code status
-          status: status.key,
-          // Get value of request number
-          calls: status.doc_count,
-        };
+      dataset.errors_statistic.errors_over_time.buckets.forEach(date => {
+        date.status.buckets.forEach(status => {
+          const error = {
+            // Get value of request path
+            path: requestPath,
+            // Get value of request date
+            date: new Date(date.key).toLocaleString(language),
+            // Get values of request code status
+            status: status.key,
+            // Get value of request number
+            calls: status.doc_count,
+          };
 
-        instance.errors.push(error);
+          instance.errors.push(error);
+        });
       });
     });
   });

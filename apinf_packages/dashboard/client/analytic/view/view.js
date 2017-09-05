@@ -32,7 +32,7 @@ Template.apiAnalyticView.helpers({
   bucket () {
     const instance = Template.instance();
     // Get ES data
-    const elasticsearchData = instance.data.elasticsearchData;
+    const elasticsearchData = Template.currentData().elasticsearchData;
 
     const currentPeriodData = elasticsearchData.group_by_interval.buckets.currentPeriod;
 
@@ -70,17 +70,15 @@ Template.apiAnalyticView.helpers({
     };
   },
   timelineData () {
-    const instance = Template.instance();
     // Get ES data
-    const elasticsearchData = instance.data.elasticsearchData;
+    const elasticsearchData = Template.currentData().elasticsearchData;
     const currentPeriodData = elasticsearchData.group_by_interval.buckets.currentPeriod;
 
     return currentPeriodData.group_by_request_path.buckets;
   },
   mostFrequentUsers () {
-    const instance = Template.instance();
     // Get ES data
-    const elasticsearchData = instance.data.elasticsearchData;
+    const elasticsearchData = Template.currentData().elasticsearchData;
     const currentPeriodData = elasticsearchData.group_by_interval.buckets.currentPeriod;
 
     return currentPeriodData.most_frequent_users.buckets;
