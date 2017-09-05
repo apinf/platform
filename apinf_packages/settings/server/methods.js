@@ -65,7 +65,8 @@ Meteor.methods({
     //   /* Password */
     //   showForgotPasswordLink: true,
     // });
-  }
+  },
+
   updateMailConfiguration () {
     // Try if settings exist
     try {
