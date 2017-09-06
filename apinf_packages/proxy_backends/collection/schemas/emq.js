@@ -4,7 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
-import { topicPrefix } from '../regex';
+import { topicPrefixRegEx, topicRegEx } from '../regex';
 
 // Rate limits schema
 const aclSchema = new SimpleSchema({
@@ -35,10 +35,11 @@ const aclSchema = new SimpleSchema({
   },
   topic: {
     type: String,
+    optional: false,
+    regEx: topicRegEx,
     autoform: {
       placeholder: TAPi18n.__('schemas.proxyBackends.emq.settings.acl.$.topic.label'),
     },
-    optional: false,
   },
   fromType: {
     type: String,
@@ -78,7 +79,7 @@ const SettingsSchema = new SimpleSchema({
     type: String,
     optional: true,
     unique: true,
-    regEx: topicPrefix,
+    regEx: topicPrefixRegEx,
   },
   acl: {
     type: [aclSchema],

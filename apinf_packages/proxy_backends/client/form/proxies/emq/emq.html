@@ -5,82 +5,107 @@
   <!-- End hidden fields -->
 
   <!-- Topic prefix -->
-  {{#unless proxyBackend.emq.settings.topicPrefix}}
+  {{# unless proxyBackend.emq.settings.topicPrefix }}
     <div class="form-group" data-required="true">
       <!-- Topic prefix label -->
       <label for="proxy-base-path-field">
         {{ afFieldLabelText name='emq.settings.topicPrefix' }}
       </label>
 
-      {{> afFieldInput
-        name="emq.settings.topicPrefix"
-      }}
+      {{> afFieldInput name='emq.settings.topicPrefix' }}
 
       <!-- validation messages -->
       {{# if afFieldIsInvalid name='emq.settings.topicPrefix' }}
-      <p class="text-danger">
-        {{{ afFieldMessage name='emq.settings.topicPrefix' }}}
-      </p>
+        <p class="text-danger">
+          {{{ afFieldMessage name='emq.settings.topicPrefix' }}}
+        </p>
       {{/ if }}
 
       <!-- help text -->
       <p class="help-block">
-        {{_ "proxyBackendForm_topicPrefix_helpText" }}
+        {{_ "proxyBackendForm_topicPrefix_helpText" }} <b>/topic_prefix/topic</b>
       </p>
     </div>
   {{/unless}}
 
   <!-- Rate limits -->
-  <div class="panel panel-default {{# unless proxyBackend.emq.settings.topicPrefix }} disabled-div {{/ unless}}">
+  <div class="panel panel-default {{ isDisabled }}">
     <div class="panel-heading">
       Access Control Rules
     </div>
+
     <ul class="list-group" id="emq-rate-limits-list">
+      
       {{# afEachArrayItem name="emq.settings.acl" }}
-      <li class="list-group-item autoform-array-item">
-        <div>
-          <div class="autoform-remove-item-wrap">
-            <a type="button" class="btn btn-primary autoform-remove-item">
-              <span class="glyphicon glyphicon-minus"></span>
-            </a>
-          </div>
-          <div class="autoform-array-item-body">
-            <div class="panel-body ">
-              {{> afFieldInput name=this.current.id type="hidden" }}
-              <div class="row">
-                <div class="col-sm-2 form-group">
-                  {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
-                </div>
-                <div class="col-sm-3 form-group">
-                  {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
-                </div>
-                <div class="col-sm-3 form-group">
-                  <div class="input-group">
-                    {{#if ../proxyBackend.emq.settings.topicPrefix}}
-                      <span class="input-group-addon" id="topic-prefix">
-                        {{ ../proxyBackend.emq.settings.topicPrefix }}
-                      </span>
-                    {{/if}}
-                    {{> afFieldInput name=this.current.topic }}
+        <li class="list-group-item autoform-array-item">
+          <div>
+            <div class="autoform-remove-item-wrap">
+              <a type="button" class="btn btn-primary autoform-remove-item">
+                <span class="glyphicon glyphicon-minus"></span>
+              </a>
+            </div>
+
+            <div class="autoform-array-item-body">
+              <div class="panel-body ">
+                {{> afFieldInput name=this.current.id type="hidden" }}
+
+                <div class="row">
+                  <div class="col-sm-2 form-group">
+                    {{> afFieldInput name=this.current.allow type="select-radio" template="buttonGroup" }}
                   </div>
+
+                  <div class="col-sm-3 form-group">
+                    {{> afFieldInput name=this.current.access type="select-radio" template="buttonGroup" }}
+                  </div>
+
+                  <div class="col-sm-3 form-group">
+                    <div class="input-group">
+                      {{#if ../proxyBackend.emq.settings.topicPrefix }}
+                        <span class="input-group-addon" id="topic-prefix">
+                          {{ ../proxyBackend.emq.settings.topicPrefix }}
+                        </span>
+                      {{/if}}
+                      {{> afFieldInput name=this.current.topic }}
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>{{_ "schemas.proxyBackends.emq.settings.acl.$.from.label" }}</label>
+                    </div>
+
+                    <div class="form-group">
+                      {{> afFieldInput type="select" name=this.current.fromType }}
+                    </div>
+
+                    <div class="form-group">
+                      {{> afFieldInput name=this.current.fromValue }}
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-12">
+                    <!-- topic validation messages -->
+                    {{# if afFieldIsInvalid name=this.current.topic }}
+                      <p class="text-danger">
+                        {{{ afFieldMessage name=this.current.topic }}}
+                      </p>
+                    {{/ if }}
+                  </div>
+                  
+                  <div class="col-sm-12">
+                    <!-- topic help text -->
+                    <p class="help-block">
+                      {{_ "proxyBackendForm_topic_helpText" }} <b>/topic_prefix/topic</b>
+                    </p>
+                  </div>  
                 </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label>{{_ "schemas.proxyBackends.emq.settings.acl.$.from.label" }}</label>
-                  </div>
-                  <div class="form-group">
-                    {{> afFieldInput type="select" name=this.current.fromType }}
-                  </div>
-                  <div class="form-group">
-                    {{> afFieldInput name=this.current.fromValue }}
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
       {{/ afEachArrayItem }}
+
       <li class="list-group-item emq-add-rule">
         <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field="emq.settings.acl">
           <span class="glyphicon glyphicon-plus"></span>

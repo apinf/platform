@@ -29,7 +29,6 @@ Meteor.methods({
     } else if (proxyBackend.type === 'apiUmbrella') {
       // Get umbrellaBackendId
       const umbrellaBackendId = proxyBackend.apiUmbrella.id;
-
       // Delete API Backend on API Umbrella
       Meteor.call(
         'deleteApiBackendOnApiUmbrella',
@@ -98,11 +97,13 @@ Meteor.methods({
       url: `${uri.valueOf()}`,
     };
   },
-  emqAclRequest (method, proxyId, rules, topicPrefix) {
+  emqAclRequest (method, proxyId, rules) {
     check(method, String);
     check(proxyId, String);
     check(rules, Array);
-    check(topicPrefix, String);
+
+    // topicPrefix initialization
+    let topicPrefix = false
 
     let rulesMap = [];
     // Assign default HTTP EMQ-ACL path
@@ -111,13 +112,23 @@ Meteor.methods({
     // Find proxy attached to API
     const emqProxy = Proxies.findOne(proxyId);
 
+    // Find backend proxy
+    const emqProxyBackend = ProxyBackends.findOne(
+      { 'emq.settings.acl.id': { $in: [rules && rules.length ? rules[0].id : ''] } },
+      { fields: { 'emq.settings.topicPrefix': 1 } });
+
+    // set topicPrefix if available in db
+    if (emqProxyBackend && emqProxyBackend.emq.settings.topicPrefix) {
+      topicPrefix = emqProxyBackend.emq.settings.topicPrefix;
+    }
+
     // Get HTTP API URL
     const emqHttpApi = emqProxy.emq.httpApi;
 
     // Get auth and url strings from URI
     const { auth, url } = Meteor.call('getUrlAndAuthStrings', emqHttpApi);
 
-    if (method === 'POST') {
+    if (method === 'POST' && topicPrefix) {
       // Map promises for each EMQ ACL rule
       rulesMap = _.map(rules, (rule) => {
         // Get data to be sent to EMQ-REST-API
@@ -130,7 +141,6 @@ Meteor.methods({
         };
         // Append ACL type & value
         data[rule.fromType] = rule.fromValue;
-
         // Send POST request to EMQ-REST-API
         // Append emq-acl path to URL
         return got.post(`${url}${apiPath}`, {
@@ -145,7 +155,7 @@ Meteor.methods({
             return err;
           });
       });
-    } else if (method === 'PUT') {
+    } else if (method === 'PUT' && topicPrefix) {
       // Map promises for each EMQ ACL rule
       rulesMap = _.map(rules, (rule) => {
         // Get data to be sent to EMQ-REST-API
@@ -158,7 +168,6 @@ Meteor.methods({
         };
         // Append ACL type & value
         data[rule.fromType] = rule.fromValue;
-
         // Fetch list of existing rules from EMQ-REST-API by selected proxy ID
         return got.get(`${url}${apiPath}?proxyId=${proxyId}`, { auth, json: true })
           .then(res => {

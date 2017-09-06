@@ -9,7 +9,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
 // eslint-disable-next-line max-len
-import { proxyBasePathRegEx, apiBasePathRegEx, topicPrefix } from '/apinf_packages/proxy_backends/collection/regex';
+import { proxyBasePathRegEx, apiBasePathRegEx, topicPrefixRegEx, topicRegEx } from '/apinf_packages/proxy_backends/collection/regex';
 import contactPhone from '/apinf_packages/organizations/collection/regex';
 
 const invalidUrlMessage = TAPi18n.__('invalidUrlMessage');
@@ -20,6 +20,7 @@ const invalidProxyBasePathMessage = TAPi18n.__('invalidProxyBasePathMessage');
 const invalidApiBasePathMessage = TAPi18n.__('invalidApiBasePathMessage');
 const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
 const invalidTopicPrefixMessage = TAPi18n.__('invalidTopicPrefix');
+const invalidTopicMessage = TAPi18n.__('invalidTopic');
 
 SimpleSchema.messages({
   regEx: [
@@ -30,7 +31,8 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
     { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
     { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
-    { exp: topicPrefix, msg: invalidTopicPrefixMessage },
+    { exp: topicPrefixRegEx, msg: invalidTopicPrefixMessage },
+    { exp: topicRegEx, msg: invalidTopicMessage },
     { exp: contactPhone, msg: invalidContactPhoneMessage },
   ],
 });

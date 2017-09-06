@@ -275,7 +275,6 @@ AutoForm.hooks({
             'PUT',
             proxyBackend.proxyId,
             proxyBackend.emq.settings.acl,
-            proxyBackend.emq.settings.topicPrefix,
           (err) => {
             if (err) {
               sAlert.error(err);
@@ -297,7 +296,6 @@ AutoForm.hooks({
               'POST',
               proxyBackend.proxyId,
               proxyBackend.emq.settings.acl,
-              proxyBackend.emq.settings.topicPrefix,
             (err) => {
               if (err) sAlert.error(err);
             });

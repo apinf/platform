@@ -53,7 +53,8 @@ Meteor.methods({
         if (err) reject(err);
 
         // Expose only username and ID
-        const users = _.map(res.data, (user) => {
+        let users = res ? res.data : [];
+        users = _.map(users, (user) => {
           return {
             id: user.id,
             username: user.username,
