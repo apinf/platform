@@ -14,8 +14,8 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import _ from 'lodash';
 
 // Collection imports
-import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import Apis from '/apinf_packages/apis/collection';
+import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import Organizations from '../';
 
 Meteor.publish('allOrganizationBasicDetails', () => {
@@ -43,7 +43,7 @@ Meteor.publish('userManagedOrganizations', function () {
 });
 
 Meteor.publish('organizationApisCount', function (organizationId) {
-  // Make sure 'organizationId' is a String
+  // Make sure organizationId is a String
   check(organizationId, String);
 
   // Get current user Id
@@ -52,15 +52,15 @@ Meteor.publish('organizationApisCount', function (organizationId) {
   // Get the organization information
   const organization = Organizations.findOne({ _id: organizationId });
 
-  // Checks if user can manage apis of organization
+  // User is Organization manager
   const userCanViewPrivateApis = userId && organization.currentUserCanManage(userId);
 
-  // Publish count of organization apis
+  // Then make cursor on all organization apis
   let organizationApisCount = OrganizationApis.find({ organizationId });
 
-  // Get only the publics APIs or this organization
+  // If a user is not Organization Manager
   if (!userCanViewPrivateApis) {
-    // Ids of publics APIs
+    // Placeholder for available APIs IDs
     const apisSelector = [];
 
     // Iterates over api organizations to get the publics apis
@@ -68,13 +68,14 @@ Meteor.publish('organizationApisCount', function (organizationId) {
       // Get API information
       const api = Apis.findOne({ _id: organizationApi.apiId });
 
-      // Checks if the user is manager of this API
+      // Checks if the user is manager of this API or API is public
       if (api.isPublic || (userId && api.currentUserCanManage(userId))) {
+        // Then add IDs in list
         apisSelector.push({ apiId: api._id });
       }
     });
 
-    // Uses the apisSelector to get get only publics APIs
+    // Uses the apisSelector to get available APIs
     organizationApisCount = OrganizationApis.find({ $or: apisSelector });
   }
 
