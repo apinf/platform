@@ -34,7 +34,7 @@ CatalogV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad query parameters',
+          description: 'Bad Request',
         },
         401: {
           description: 'Unauthorized',
@@ -101,7 +101,7 @@ CatalogV1.addCollection(Apis, {
             },
           },
           400: {
-            description: 'Bad query parameters',
+            description: 'Bad Request',
           },
         },
       },
@@ -121,7 +121,7 @@ CatalogV1.addCollection(Apis, {
             return {
               statusCode: 400,
               body: {
-                status: 'Fail',
+                status: 'fail',
                 message: 'Bad query parameters. Manager ID expected in header (X-User-Id).',
               },
             };
@@ -141,7 +141,7 @@ CatalogV1.addCollection(Apis, {
             return {
               statusCode: 400,
               body: {
-                status: 'Fail',
+                status: 'fail',
                 message: 'Bad query parameters. Organization not found.',
               },
             };
@@ -219,11 +219,12 @@ CatalogV1.addCollection(Apis, {
             },
           },
           404: {
-            description: 'Bad parameter',
+            description: 'Not Found',
           },
         },
       },
     },
+    // Create a new API
     post: {
       authRequired: true,
       swagger: {
@@ -252,10 +253,13 @@ CatalogV1.addCollection(Apis, {
             },
           },
           400: {
-            description: 'Invalid input, object invalid',
+            description: 'Bad Request',
           },
           401: {
             description: 'Authentication is required',
+          },
+          500: {
+            description: 'Internal server error',
           },
         },
         security: [
@@ -267,54 +271,63 @@ CatalogV1.addCollection(Apis, {
       },
       action () {
         const userId = this.userId;
-        const mandatoryFieldsFilled = this.bodyParams.name && this.bodyParams.url;
 
-        // Required fields are not set
-        if (!mandatoryFieldsFilled) {
-          return {
-            statusCode: 409,
-            body: {
-              title: 'Mandatory fields missing',
-              detail: 'Fields "name" and "url" are required',
-            },
-          };
-        }
-        // validate values
+        // structure for validating values against schema
         const validateFields = {
+          name: this.bodyParams.name,
+          url: this.bodyParams.url,
           description: this.bodyParams.description,
           lifecycleStatus: this.bodyParams.lifecycleStatus,
         };
 
-        // Description must not exceed field length in DB
-        if (this.bodyParams.description) {
-          const isValid = Apis.simpleSchema().namedContext().validateOne(
-            validateFields, 'description');
-
-          if (!isValid) {
-            return {
-              statusCode: 409,
-              body: {
-                title: 'Description too long',
-                detail: 'Description length must not exceed 1000 characters',
-              },
-            };
-          }
+        // Name is a required field
+        if (!this.bodyParams.name) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "name" is mandatory',
+            },
+          };
         }
 
-        // Is value of lifecycle status allowed
-        if (this.bodyParams.lifecycleStatus) {
-          const isValid = Apis.simpleSchema().namedContext().validateOne(
-            validateFields, 'lifecycleStatus');
+        // Validate name
+        let isValid = Apis.simpleSchema().namedContext().validateOne(
+          validateFields, 'name');
 
-          if (!isValid) {
-            return {
-              statusCode: 409,
-              body: {
-                title: 'Erroneous value',
-                detail: 'Parameter lifecycleStatus has erroenous value',
-              },
-            };
-          }
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "name" is erroneous',
+            },
+          };
+        }
+
+        // URL is a mandatory field
+        if (!this.bodyParams.url) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "url" is mandatory',
+            },
+          };
+        }
+
+        // Validate URL
+        isValid = Apis.simpleSchema().namedContext().validateOne(
+          validateFields, 'url');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "URL" is erroneous',
+            },
+          };
         }
 
         // Check if API with same name already exists
@@ -322,31 +335,61 @@ CatalogV1.addCollection(Apis, {
           return {
             statusCode: 400,
             body: {
-              title: 'Duplicate API name',
-              detail: 'API with same name already exists',
+              status: 'fail',
+              message: 'Duplicate: API with same name already exists',
             },
           };
+        }
+
+
+        // Description must not exceed field length in DB
+        if (this.bodyParams.description) {
+          isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'description');
+
+          if (!isValid) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'fail',
+                message: 'Description length must not exceed 1000 characters',
+              },
+            };
+          }
+        }
+
+        // Is value of lifecycle status allowed
+        if (this.bodyParams.lifecycleStatus) {
+          isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'lifecycleStatus');
+
+          if (!isValid) {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'fail',
+                message: 'Parameter lifecycleStatus has erroneous value',
+              },
+            };
+          }
         }
 
         // Add manager IDs list into
         const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
 
-        let apiId;
+        // Insert API data into collection
+        const apiId = Apis.insert(apiData);
 
-        try {
-          // Insert API data into collection
-          apiId = Apis.insert(apiData);
-        } catch (e) {
-          // status.message = JSON.stringify(e);
+        // Did insert fail
+        if (!apiId) {
           return {
-            statusCode: 409,
+            statusCode: 500,
             body: {
-              title: 'Error in field',
-              detail: e,
+              status: 'fail',
+              message: 'Inserting API into database failed',
             },
           };
         }
-
 
         // Give user manager role
         Roles.addUsersToRoles(userId, 'manager');
@@ -354,12 +397,13 @@ CatalogV1.addCollection(Apis, {
         return {
           statusCode: 200,
           body: {
-            title: 'API added successfully',
+            status: 'success',
             data: Apis.findOne(apiId),
           },
         };
       },
     },
+
     // Modify the entity with the given :id with the data contained in the request body.
     put: {
       authRequired: true,
@@ -391,11 +435,14 @@ CatalogV1.addCollection(Apis, {
               },
             },
           },
+          400: {
+            description: 'Bad Request',
+          },
           401: {
             description: 'Authentication is required',
           },
           403: {
-            description: 'User does not have permission',
+            description: 'No permission',
           },
           404: {
             description: 'API is not found',
@@ -421,8 +468,8 @@ CatalogV1.addCollection(Apis, {
           return {
             statusCode: 404,
             body: {
-              title: 'Fail',
-              detail: 'API is not found with specified ID',
+              status: 'fail',
+              message: 'API with specified ID is not found',
             },
           };
         }
@@ -432,8 +479,8 @@ CatalogV1.addCollection(Apis, {
           return {
             statusCode: 403,
             body: {
-              title: 'Fail',
-              detail: 'You do not have permission for editing this API',
+              status: 'fail',
+              message: 'You do not have permission for editing this API',
             },
           };
         }
@@ -451,10 +498,10 @@ CatalogV1.addCollection(Apis, {
 
           if (!isValid) {
             return {
-              statusCode: 409,
+              statusCode: 400,
               body: {
-                title: 'Description too long',
-                detail: 'Description length must not exceed 1000 characters',
+                status: 'fail',
+                message: 'Description length must not exceed 1000 characters',
               },
             };
           }
@@ -467,10 +514,10 @@ CatalogV1.addCollection(Apis, {
 
           if (!isValid) {
             return {
-              statusCode: 409,
+              statusCode: 400,
               body: {
-                title: 'Erroneous value',
-                detail: 'Parameter lifecycleStatus has erroenous value',
+                status: 'fail',
+                message: 'Parameter lifecycleStatus has erroneous value',
               },
             };
           }
@@ -483,12 +530,13 @@ CatalogV1.addCollection(Apis, {
         return {
           statusCode: 200,
           body: {
-            title: 'Success updating',
+            status: 'success',
             data: Apis.findOne(apiId),
           },
         };
       },
     },
+    // Remove an API
     delete: {
       authRequired: true,
       // manager role is required. If a user already has an API then the user has manager role
@@ -498,7 +546,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Delete API.',
-        description: 'Deletes the identified API from the system.',
+        description: 'Deletes the identified API from the Catalog.',
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -510,10 +558,10 @@ CatalogV1.addCollection(Apis, {
             description: 'Authentication is required',
           },
           403: {
-            description: 'User does not have permission',
+            description: 'No permission',
           },
           404: {
-            description: 'API is not found',
+            description: 'API not found',
           },
         },
         security: [
@@ -531,37 +579,37 @@ CatalogV1.addCollection(Apis, {
         // Get API document
         const api = Apis.findOne(apiId);
 
-        // Make sure API exists & user can manage
-        if (api) {
-          if (api.currentUserCanManage(userId)) {
-            // Remove API document
-            Meteor.call('removeApi', api._id);
-
-            return {
-              statusCode: 200,
-              body: {
-                status: 'Api successfully removed',
-                data: Apis.findOne(apiId),
-              },
-            };
-          }
-
-          // API exists but user can not manage
+        // API must exist
+        if (!api) {
+          // API doesn't exist
           return {
-            statusCode: 403,
+            statusCode: 404,
             body: {
-              status: 'Fail',
-              message: 'You do not have permission for removing this API',
+              status: 'fail',
+              message: 'API with specified ID is not found',
             },
           };
         }
 
-        // API doesn't exist
+        // User must be able to manage API
+        if (!api.currentUserCanManage(userId)) {
+          return {
+            statusCode: 403,
+            body: {
+              status: 'fail',
+              message: 'User does not have permission to remove this API',
+            },
+          };
+        }
+
+        // Remove API document
+        Meteor.call('removeApi', api._id);
+
         return {
-          statusCode: 404,
+          statusCode: 200,
           body: {
-            status: 'Fail',
-            message: 'API is not found with specified ID',
+            status: 'success',
+            data: Apis.findOne(apiId),
           },
         };
       },
