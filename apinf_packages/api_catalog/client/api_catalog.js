@@ -84,6 +84,7 @@ Template.apiCatalog.onCreated(function () {
         sortDirectionParameter = -1;
         break;
       default:
+        sortByParameter = FlowRouter.getQueryParam('sortBy');
         break;
     }
     // Create a object for storage sorting parameters
