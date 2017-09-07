@@ -21,7 +21,17 @@ CatalogV1.swagger.meta.paths = {
         CatalogV1.swagger.tags.login,
       ],
       summary: 'Logging in.',
-      description: 'By giving existing username and password you get login credentials.',
+      description: `
+   By giving existing username and password you get login credentials,
+   which you can use in authenticating requests.
+
+   login response parameter value | to be filled into request header field
+   :--- | :---
+   auth-token-value | X-Auth-Token
+   user-id-value | X-User-Id
+
+
+      `,
       produces: ['application/json'],
       parameters: [
         CatalogV1.swagger.params.login,
@@ -61,13 +71,13 @@ CatalogV1.addCollection(Apis, {
         description: `
    ### List and search public APIs ###
 
-   Parameters are optional and combinations or parameters can be used.
+   Parameters are optional and also combinations of parameters can be used.
 
    Example call:
 
-       GET /apis?limit=200&amp;&managedAPIs=true
+       GET /apis?limit=200&managedAPIs=true
 
-   Result: returns maximum of 200 APIs which are managed by equesting user.
+   Result: returns maximum of 200 APIs which are managed by requesting user.
 
 
    Note! When using parameter managedAPIs, the Manager's user ID is needed
@@ -198,7 +208,16 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Fetch API with specified ID.',
-        description: 'Returns one API with specified ID or nothing if there is not match found.',
+        description: `
+   Returns the API with specified ID, if a match is found.
+
+   Example call:
+
+        GET /apis/:id
+
+   Result: returns the data of API identified with :id.
+
+        `,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -232,13 +251,22 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Add new API to catalog.',
-        description: 'Adds an API to catalog. On success, returns newly added API object.',
+        description: `
+   Adds an API to catalog. On success, returns the added API object.
+
+
+   Parameters
+   * mandatory: name and url
+   * length of description must not exceed 1000 characters
+   * value of lifecycleStatus must be one of example list
+   * if isPublic is false, only admin or manager can see the API
+        `,
         parameters: [
           CatalogV1.swagger.params.api,
         ],
         responses: {
-          200: {
-            description: 'API successfully added',
+          201: {
+            description: 'API added successfully',
             schema: {
               type: 'object',
               properties: {
@@ -395,7 +423,7 @@ CatalogV1.addCollection(Apis, {
         Roles.addUsersToRoles(userId, 'manager');
 
         return {
-          statusCode: 200,
+          statusCode: 201,
           body: {
             status: 'success',
             data: Apis.findOne(apiId),
@@ -414,14 +442,20 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Update API.',
-        description: 'Update an API.',
+        description: `
+   Updates an API in catalog. On success, returns the updated API object.
+
+   Parameters
+   * length of description must not exceed 1000 characters
+   * value of lifecycleStatus must be one of example list
+        `,
         parameters: [
           CatalogV1.swagger.params.apiId,
           CatalogV1.swagger.params.api,
         ],
         responses: {
           200: {
-            description: 'API successfully edited.',
+            description: 'API updated successfully',
             schema: {
               type: 'object',
               properties: {
@@ -546,13 +580,23 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Delete API.',
-        description: 'Deletes the identified API from the Catalog.',
+        description: `
+   Deletes the identified API from the Catalog, if a match is found.
+
+
+   Example call:
+
+        DELETE /apis/:id
+
+   Result: deletes the API identified with :id and responds with HTTP code 204.
+
+        `,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
         responses: {
-          200: {
-            description: 'API successfully removed.',
+          204: {
+            description: 'API removed successfully.',
           },
           401: {
             description: 'Authentication is required',
@@ -605,11 +649,12 @@ CatalogV1.addCollection(Apis, {
         // Remove API document
         Meteor.call('removeApi', api._id);
 
+        // No content with 204
         return {
-          statusCode: 200,
+          statusCode: 204,
           body: {
             status: 'success',
-            data: Apis.findOne(apiId),
+            message: 'API removed',
           },
         };
       },
