@@ -7,14 +7,30 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="panel panel-default">
     <div class="panel-heading">
       {{# if currentUser }}
-      <button
-        type="button"
-        class="btn btn-info btn-xs pull-right feedback-form-button"
-        id="add-feedback">
-          <i class="fa fa-comments-o"></i>
-          &nbsp;
-          {{_ "feedback_feedbackForm_button" }}
-      </button>
+      <div id="feedback-options">
+        <button
+          type="button"
+          class="btn btn-info btn-xs pull-right feedback-form-button"
+          id="add-feedback">
+            <i class="fa fa-comments-o"></i>
+            &nbsp;
+            {{_ "feedback_feedbackForm_button" }}
+        </button>
+        <div id="feedback-visibility-options" class="btn-group pull-right">
+          <button 
+            type="button"
+            class="btn btn-info btn-xs"
+            id="mark-all-feedbacks-as-private">
+              Mark All Feedbacks as Private
+          </button>
+          <button 
+            type="button"
+            class="btn btn-info btn-xs"
+            id="mark-all-feedbacks-as-private">
+            Mark All Feedbacks as Public
+        </button>
+        </div>
+      </div>
       {{/ if }}
       <h2 id="feedback-title" class="panel-title clearfix">
         {{_ "feedback_main_title" }}
