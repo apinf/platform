@@ -195,6 +195,7 @@
   "catalogue_paginationButtons_previous": "Previous",
   "catalogue_toolbar_filterOptions_myApis": "My APIs",
   "catalogue_toolbar_filterOptions_showAll": "Show all",
+  "catalogue_toolbar_filterOptions_myBookmarks": "My bookmarks",
   "catalogue_toolbar_sortBy_title": "Sort by",
   "catalogue_toolbar_sortMenuOptions_highRating": "Highest Rating",
   "catalogue_toolbar_sortMenuOptions_mostBookmarked": "Most Bookmarked",
