@@ -7,12 +7,13 @@
 // Npm packages imports
 import moment from 'moment';
 
-export default function queryForDashboardPage (proxyBackendPaths) {
+export default function queryForDashboardPage (proxyBackendPaths, timeframe) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
+
   // Make it depends on timeframe
-  const oneWeekAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
-  const twoWeeksAgo = moment().subtract(14, 'days').format('YYYY-MM-DD');
+  const oneTimePeriodAgo = moment().subtract(timeframe, 'days').format('YYYY-MM-DD');
+  const twoTimePeriodsAgo = moment().subtract(2 * timeframe, 'days').format('YYYY-MM-DD');
 
   return {
     size: 0,
@@ -29,7 +30,7 @@ export default function queryForDashboardPage (proxyBackendPaths) {
               // Extend request to both interval. It needs to compare two interval
               request_at: {
                 lt: today,
-                gte: twoWeeksAgo,
+                gte: twoTimePeriodsAgo,
               },
             },
           },
@@ -52,12 +53,12 @@ export default function queryForDashboardPage (proxyBackendPaths) {
                 ranges: [
                   {
                     key: 'previousPeriod',
-                    from: twoWeeksAgo,
-                    to: oneWeekAgo,
+                    from: twoTimePeriodsAgo,
+                    to: oneTimePeriodAgo,
                   },
                   {
                     key: 'currentPeriod',
-                    from: oneWeekAgo,
+                    from: oneTimePeriodAgo,
                     to: today,
                   },
                 ],
