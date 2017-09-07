@@ -14,10 +14,10 @@ import Apis from '/apinf_packages/apis/collection';
 
 Template.apiAnalyticToolbar.onRendered(() => {
   // Get value of timeframe parameter
-  const selectElement = document.getElementById('date-range');
-  // Set value
+  const timeframeParameter = FlowRouter.getQueryParam('timeframe');
 
-  selectElement.value = FlowRouter.getQueryParam('timeframe');
+  // Set value
+  this.$('[name="timeframe"]').val(timeframeParameter);
 });
 
 Template.apiAnalyticToolbar.helpers({
