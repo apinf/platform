@@ -55,6 +55,9 @@ Template.medianResponseTime.onRendered(function () {
             beginAtZero: true,
           },
         }],
+        xAxes: [{
+          maxBarThickness: 30,
+        }],
       },
     },
   });

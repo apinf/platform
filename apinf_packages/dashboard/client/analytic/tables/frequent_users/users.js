@@ -34,7 +34,7 @@ Template.mostFrequentUsersTable.onCreated(function () {
       });
     });
 
-    // Sorting by the highest calls
+    // Sort by the highest calls
     instance.users.sort((a, b) => {
       return b.calls - a.calls;
     });

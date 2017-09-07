@@ -27,7 +27,7 @@ export default function queryForDashboardPage (proxyBackendPaths, timeframe) {
           },
           filter: {
             range: {
-              // Extend request to both interval. It needs to compare two interval
+              // Extend request to both intervals. It needs to compare two intervals
               request_at: {
                 lt: today,
                 gte: twoTimePeriodsAgo,

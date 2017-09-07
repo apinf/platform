@@ -10,8 +10,12 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APInf imports
-// eslint-disable-next-line max-len
-import { arrowDirection, percentageValue, summaryComparing, calculateTrend } from '/apinf_packages/dashboard/client/trend_helpers';
+import {
+  arrowDirection,
+  percentageValue,
+  summaryComparing,
+  calculateTrend,
+} from '/apinf_packages/dashboard/client/trend_helpers';
 
 Template.apiAnalyticView.helpers({
   arrowDirection (parameter) {

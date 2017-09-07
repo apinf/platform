@@ -41,7 +41,7 @@ export default function queryForAnalyticPage (frontendPrefix, timeframe) {
             range: {
               request_at: {
                 lt: today,
-                // Extend request to both interval. It needs to compare two interval
+                // Extend request to both intervals. It needs to compare two intervals
                 gte: twoTimePeriodsAgo,
               },
             },

@@ -57,6 +57,7 @@ Template.requestTimeline.onRendered(function () {
       scales: {
         xAxes: [
           {
+            maxBarThickness: 30,
             stacked: true,
             scaleLabel: {
               display: true,
@@ -157,13 +158,11 @@ Template.requestTimeline.onRendered(function () {
 
   // Reactive update Chart Axis translation
   instance.autorun(() => {
-    const datasets = instance.chart.data.datasets;
     const scales = instance.chart.options.scales;
 
     // Update translation
     scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_xAxisTitle_days');
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_yAxisTitle_requests');
-    datasets[0].label = TAPi18n.__('requestTimeline_legendItem_allCalls');
 
     // Update chart with new translation
     instance.chart.update();
