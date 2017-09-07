@@ -55,6 +55,9 @@ Template.uniqueUsersOverTime.onRendered(function () {
             beginAtZero: true,
           },
         }],
+        xAxes: [{
+          maxBarThickness: 30,
+        }],
       },
     },
   });
