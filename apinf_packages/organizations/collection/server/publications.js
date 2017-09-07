@@ -14,6 +14,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import _ from 'lodash';
 
 // Collection imports
+import Apis from '/apinf_packages/apis/collection';
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import Organizations from '../';
 
@@ -42,10 +43,42 @@ Meteor.publish('userManagedOrganizations', function () {
 });
 
 Meteor.publish('organizationApisCount', function (organizationId) {
-  // Make sure 'organizationId' is a String
+  // Make sure organizationId is a String
   check(organizationId, String);
-  // Publish count of organization apis
-  const organizationApisCount = OrganizationApis.find({ organizationId });
+
+  // Get current user Id
+  const userId = this.userId;
+
+  // Get the organization information
+  const organization = Organizations.findOne({ _id: organizationId });
+
+  // User is Organization manager
+  const userCanViewPrivateApis = userId && organization.currentUserCanManage(userId);
+
+  // Then make cursor on all organization apis
+  let organizationApisCount = OrganizationApis.find({ organizationId });
+
+  // If a user is not Organization Manager
+  if (!userCanViewPrivateApis) {
+    // Placeholder for available APIs IDs
+    const apisSelector = [];
+
+    // Iterates over api organizations to get the publics apis
+    organizationApisCount.forEach((organizationApi) => {
+      // Get API information
+      const api = Apis.findOne({ _id: organizationApi.apiId });
+
+      // Checks if the user is manager of this API or API is public
+      if (api.isPublic || (userId && api.currentUserCanManage(userId))) {
+        // Then add IDs in list
+        apisSelector.push({ apiId: api._id });
+      }
+    });
+
+    // Uses the apisSelector to get available APIs
+    organizationApisCount = OrganizationApis.find({ $or: apisSelector });
+  }
+
   // Publish an Api Counter for each Organization
   Counts.publish(this, `organizationApisCount-${organizationId}`, organizationApisCount);
 });
