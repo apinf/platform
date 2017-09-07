@@ -40,6 +40,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <button class="delete-feedback-item btn btn-danger btn-xs">
             {{_ "feedbackItem_deleteButton_text" }}
           </button>
+          <button class="visibility-feedback-item btn btn-info btn-xs">
+            {{#if item.isPublic}}
+              {{_ "feedbackItem_visibilityButton_makePrivate"}}
+            {{else}}
+              {{_ "feedbackItem_visibilityButton_makePublic"}}
+            {{/if}}
+          </button>
         </div>
         {{/ if }}
       </div>

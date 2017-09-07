@@ -323,6 +323,8 @@
   "feedbackItem_topic": "Topic",
   "feedbackItem_editButton_text": "Edit",
   "feedbackItem_deleteButton_text": "Delete",
+  "feedbackItem_visibilityButton_makePrivate": "Make Private",
+  "feedbackItem_visibilityButton_makePublic": "Make Public",
   "feedbackItem_sentBy_text": "Sent by",
   "feedbackItem_usernotloggedin_errorMessage": "Error: Please sign in to vote",
   "feedback_feedbackForm_button": "Send feedback",

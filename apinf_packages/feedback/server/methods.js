@@ -15,6 +15,16 @@ import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 import Feedback from '../collection';
 
 Meteor.methods({
+  changeFeedbackVisibility (feedbackItemId, isPublic) {
+    // Make sure feedbackItemId is a String
+    check(feedbackItemId, String);
+
+    // Make sure isPublic is a Boolean
+    check(isPublic, Boolean);
+
+    // Change the visibility of feedback
+    Feedback.update({ _id: feedbackItemId }, { $set: { isPublic } });
+  },
   deleteFeedback (feedbackItemId) {
     // Make sure feedbackItemId is a String
     check(feedbackItemId, String);
