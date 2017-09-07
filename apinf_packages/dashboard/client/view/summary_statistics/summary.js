@@ -21,6 +21,7 @@ Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
   const instance = this;
 
+  // Dictionary of Flags about display/not the overview part for current item
   instance.displayOverview = new ReactiveDict();
   instance.proxyBackendsWithMetric = {};
 
@@ -69,10 +70,6 @@ Template.dashboardSummaryStatistic.onCreated(function () {
     });
 
     instance.proxyBackends.forEach(backend => {
-      // Dictionary of Flags about display/not the overview part for current item
-      // By default don't display overview template for any proxy backend
-      instance.displayOverview.set(backend._id, false);
-
       const proxyBackendPath = backend.frontendPrefix();
 
       // Create a list of proxy backends with metric for current timeframe
