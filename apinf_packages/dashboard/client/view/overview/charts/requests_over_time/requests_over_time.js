@@ -55,6 +55,9 @@ Template.requestsOverTime.onRendered(function () {
             beginAtZero: true,
           },
         }],
+        xAxes: [{
+          maxBarThickness: 30,
+        }],
       },
     },
   });

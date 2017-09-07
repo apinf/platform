@@ -31,7 +31,7 @@ Template.dashboardPage.onCreated(function () {
     // Set the first item of list as the default value
     // Make sure Proxies list is not empty
     if (!proxyId && result.length > 0) {
-      // Modifies the current history entry instead of creating a new one
+      // Modify the current history entry instead of creating a new one
       FlowRouter.withReplaceState(() => {
         // Set the default value for query parameter
         FlowRouter.setQueryParams({ proxy_id: result[0]._id });

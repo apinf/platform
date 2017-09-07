@@ -73,7 +73,7 @@ Template.apiAnalyticPageBody.helpers({
   },
   fetchingData () {
     const instance = Template.instance();
-    // Data is available if it has possitive or negative (error) result
+    // Data is available if it has positive or negative (error) result
     return instance.elasticsearchData.get() || instance.error.get();
   },
   error () {
@@ -84,7 +84,7 @@ Template.apiAnalyticPageBody.helpers({
   dataAvailable () {
     const elasticsearchData = Template.instance().elasticsearchData.get();
 
-    // Data exists if requests number(dco_count) is more than 0
+    // Data exists if requests number(doc_count) is greater than 0
     return elasticsearchData.group_by_interval.buckets.currentPeriod.doc_count > 0;
   },
 });

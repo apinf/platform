@@ -56,6 +56,7 @@ Template.responseTimeTimeline.onRendered(function () {
       scales: {
         xAxes: [
           {
+            maxBarThickness: 30,
             scaleLabel: {
               display: true,
               labelString: 'Days',

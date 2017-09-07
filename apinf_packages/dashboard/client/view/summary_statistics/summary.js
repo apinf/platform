@@ -14,8 +14,11 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf imports
-// eslint-disable-next-line max-len
-import { arrowDirection, percentageValue, calculateTrend } from '/apinf_packages/dashboard/client/trend_helpers';
+import {
+  arrowDirection,
+  percentageValue,
+  calculateTrend,
+} from '/apinf_packages/dashboard/client/trend_helpers';
 
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
