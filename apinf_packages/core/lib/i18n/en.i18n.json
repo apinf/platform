@@ -242,6 +242,7 @@
   "dashboardOverviewStatistic_text_responseTime": "__time__ ms",
   "dashboardOverviewStatistic_text_usersCount": "__count__ user",
   "dashboardOverviewStatistic_text_usersCount_plural": "__count__ users",
+  "dashboardOverviewStatisticNoData_text_noDataAvailable": "No Data Available",
   "dashboardOverviewStatistic_chartTitle_requestsNumber": "Number of requests",
   "dashboardOverviewStatistic_chartTitle_responseTime": "API Response time",
   "dashboardOverviewStatistic_chartTitle_uniqueUsers": "Unique API Users",
