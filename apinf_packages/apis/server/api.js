@@ -22,6 +22,8 @@ CatalogV1.swagger.meta.paths = {
       ],
       summary: 'Logging in.',
       description: `
+   ### Logging in ###
+   
    By giving existing username and password you get login credentials,
    which you can use in authenticating requests.
 
