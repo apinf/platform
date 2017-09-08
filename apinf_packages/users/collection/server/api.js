@@ -25,6 +25,8 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Logging in.',
       description: `
+   ### Logging in ###
+
    By giving existing username and password you get login credentials,
    which you can use in authenticating requests.
 
@@ -47,10 +49,10 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad query parameters',
+          description: 'Bad Request',
         },
         401: {
-          description: 'Unauthorized',
+          description: 'Authentication is required',
         },
       },
     },
@@ -63,18 +65,29 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'List and search users.',
       description: `
-   Returns a list of Users.
+   ### Listing and searching Users ###
+
+   With this method the Admin can list Users (has access to all Users data)
+   or a non-Admin can list own data.
+
+   With query parameters Users can be filtered and the number and order of
+   returned list can be managed.
+
+   Sort criteria are following:
+   * username
+   * creation dates
+   * organization
 
    Parameters are optional and can be combined.
 
-   GET /users?q=apinf&organization_id=<org_id>
+   Example call:
+
+    GET /users?q=apinf&organization_id=<org_id>
 
    Returns Users, who have string "apinf" either in username, company or email address
-   AND belong to Organization identified with <org_id>
-   
+   AND who belong to Organization identified with <org_id>.
 
-   The operation is allowed to Admin (has access to all Users data)
-   or a on-Admin (has access only to own data).
+
       `,
       produces: ['application/json'],
       parameters: [
@@ -104,7 +117,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad query parameters',
+          description: 'Bad Request',
         },
         401: {
           description: 'Authentication is required',
@@ -123,16 +136,18 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Adds a new user.',
       description: `
+   ### Adding a new User ###
+
    With this method a new user account is created.
 
    Parameters:
    * all parameters are mandatory
-   * username must be unique
-   * email address must be unique
-   * password must be at least 6 character long
+   * *username* must be unique
+   * *email address* must be unique
+   * *password* must be at least 6 characters long
 
-    On successful case returns a response message with HTTP code 201.
-    Payload contains the data of created User.
+   On a successful case a response message with HTTP code 201 is returned.
+   Payload contains the data of created User.
 
 
       `,
@@ -157,7 +172,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Invalid input, object invalid',
+          description: 'Bad Request',
         },
         401: {
           description: 'Authentication is required',
@@ -173,13 +188,18 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Search User with userID.',
       description: `
-   Returns data of user identified with ID.
+  ### Searching Users with UserID ###
 
-   GET /users/:id
+   With this method an Admin user can list data of a User identified with ID.
+   Also a non-Admin user can list own data.
 
-   Returns data of user identified with :id, in case a match is found.
+   Example call:
 
-   Operation is allowed to a logged-on User, who is either Admin or requesting own data.
+    GET /users/<users id>
+
+   Returns data of user identified with <users id>, in case a match is found.
+
+
       `,
       produces: ['application/json'],
       parameters: [
@@ -187,7 +207,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Data of identified user.',
+          description: 'Success',
           schema: {
             type: 'object',
             properties: {
@@ -208,7 +228,7 @@ ManagementV1.swagger.meta.paths = {
           description: 'User does not have permission.',
         },
         404: {
-          description: 'No user found with given UserID.',
+          description: 'Not found',
         },
       },
       security: [
@@ -224,36 +244,28 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Remove Users one by one with userID.',
       description: `
-   Removes the identified User.
+   ### Removes the identified User ###
 
-    DELETE /users/:id
+   With this method an Admin user can remove user accounts. Also a non-Admin user
+   can remove own user account.
 
-   Rmoves the user identified with :id and responses with HTTP code 204.
+   Example call:
 
-   Operation is allowed to a logged-on User, who is either Admin or removing own data.
+    DELETE /users/<users id>
+
+   Rmoves the user identified with <users id> and responses with HTTP code 204 without content.
+
+
       `,
       parameters: [
         ManagementV1.swagger.params.userId,
       ],
       responses: {
         204: {
-          description: 'User deleted.',
-          schema: {
-            type: 'object',
-            properties: {
-              status: {
-                type: 'string',
-                example: 'OK',
-              },
-              message: {
-                type: 'string',
-                example: 'User deleted',
-              },
-            },
-          },
+          description: 'User deleted successfully.',
         },
         400: {
-          description: 'Invalid input, invalid object',
+          description: 'Bad Request',
         },
         401: {
           description: 'Authentication is required',
@@ -262,7 +274,7 @@ ManagementV1.swagger.meta.paths = {
           description: 'User does not have permission',
         },
         404: {
-          description: 'User not found',
+          description: 'Not Found',
         },
       },
       security: [
@@ -278,11 +290,14 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Update User\'s data.',
       description: `
-   Updates data of a User indicated by user ID.
+   ### Updates data of a User indicated by user ID ###
+
+   With this method a user can edit own account.
+
    Parameters:
    * At least one parameter must be given.
-   * Username must be unique.
-   * Password must be at least 6 characters.
+   * *Username* must be unique.
+   * *Password* must be at least 6 characters.
 
       `,
       parameters: [
@@ -291,10 +306,10 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'User successfully updated.',
+          description: 'Success',
         },
         400: {
-          description: 'Invalid input, object invalid, Erroneous new password',
+          description: 'Bad Request',
         },
         401: {
           description: 'Authentication is required',
@@ -303,7 +318,7 @@ ManagementV1.swagger.meta.paths = {
           description: 'User does not have permission',
         },
         404: {
-          description: 'No user found with given UserID',
+          description: 'Not Found',
         },
       },
       security: [
@@ -322,10 +337,13 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'List and search user based on addition date.',
       description: `
-   Returns users based on addition date.
+   ### Returns users based on addition date ###
+
    Parameters are optional and they can be combined.
 
-   GET /users/updates?since=7&organization_id=<org_id>
+   Example call:
+
+    GET /users/updates?since=7&organization_id=<org_id>
 
    As a response is returned an array containing Users, which have been created within
    last seven days and who are managers in Organization identified with <org_id>.
@@ -340,7 +358,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'success',
+          description: 'Success',
           schema: {
             type: 'object',
             properties: {
@@ -358,7 +376,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad query parameters',
+          description: 'Bad Request',
         },
         401: {
           description: 'Authentication is required',
@@ -523,8 +541,8 @@ ManagementV1.addCollection(Meteor.users, {
           },
         };
       },
-
     },
+
     get: {
       authRequired: true,
       action () {
@@ -598,8 +616,8 @@ ManagementV1.addCollection(Meteor.users, {
           },
         };
       },
-
     },
+
     post: {
       authRequired: false,
       action () {
