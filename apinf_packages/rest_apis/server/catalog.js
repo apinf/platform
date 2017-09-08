@@ -76,7 +76,7 @@ CatalogV1.swagger = {
    2. The user logs in via API.
    * The username and password are given as parameters in login request.
    * The login credentials (a **user ID** and a **auth token**) are returned in response.
-   3. In request via API, include the login credentials as parameters in header of request message
+   3. The login credentials are included as parameters in header of request message
    * in fields **X-User-Id** and **X-Auth-Token**.
 
 
