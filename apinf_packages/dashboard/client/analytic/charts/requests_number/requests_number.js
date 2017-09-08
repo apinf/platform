@@ -10,6 +10,10 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages import
 import { TAPi18n } from 'meteor/tap:i18n';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// APInf imports
+import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/generate_date';
 
 // Npm packages imports
 import moment from 'moment';
@@ -46,7 +50,7 @@ Template.requestTimeline.onRendered(function () {
   const ctx = document.getElementById('request-timeline-chart').getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'bar',
+    type: 'line',
     // Data for displaying chart
     data: {
       labels: [],
@@ -54,11 +58,14 @@ Template.requestTimeline.onRendered(function () {
     },
     // Configuration options
     options: {
+      elements: {
+        line: {
+          tension: 0, // disables bezier curves
+        },
+      },
       scales: {
         xAxes: [
           {
-            maxBarThickness: 30,
-            stacked: true,
             scaleLabel: {
               display: true,
               labelString: TAPi18n.__('requestTimeline_xAxisTitle_days'),
@@ -69,7 +76,6 @@ Template.requestTimeline.onRendered(function () {
         ],
         yAxes: [
           {
-            stacked: true,
             scaleLabel: {
               display: true,
               labelString: TAPi18n.__('requestTimeline_yAxisTitle_requests'),
@@ -87,34 +93,51 @@ Template.requestTimeline.onRendered(function () {
 
   // Update chart when elasticsearchData was changed
   instance.autorun(() => {
+    window.moment = moment;
+
     // Get ElasticSearch data
     const elasticsearchData = instance.elasticsearchData.get();
 
     // Get aggregated data for current chart
     const aggregationData = elasticsearchData.requests_over_time.buckets;
 
-    const labels = [];
-    const successCalls = [];
-    const redirectCalls = [];
-    const failCalls = [];
-    const errorCalls = [];
+    // Get current timeframe
+    const dateCount = FlowRouter.getQueryParam('timeframe');
+
+    const params = {
+      // Date range must have equal length with dateCount value
+      // Today value is included then subtract less days
+      startDate: moment().subtract(dateCount - 1, 'd'),
+      endDate: moment(),
+      // Interval is 1 day
+      step: 1,
+      // TODO: internationalize date formatting
+      format: 'MM/DD',
+    };
+
+    const labels = generateDate(params);
+    const successCalls = arrayWithZeros(dateCount);
+    const redirectCalls = arrayWithZeros(dateCount);
+    const failCalls = arrayWithZeros(dateCount);
+    const errorCalls = arrayWithZeros(dateCount);
 
     aggregationData.forEach(value => {
       // Create Labels values
-      // TODO: internationalize date formatting
-      labels.push(moment(value.key).format('MM/DD'));
+      const currentDateValue = moment(value.key).format(params.format);
+
+      const index = labels.indexOf(currentDateValue);
 
       // Data for requests with success statuses
-      successCalls.push(value.response_status.buckets.success.doc_count);
+      successCalls[index] = value.response_status.buckets.success.doc_count;
 
       // Data for requests with redirect statuses
-      redirectCalls.push(value.response_status.buckets.redirect.doc_count);
+      redirectCalls[index] = value.response_status.buckets.redirect.doc_count;
 
       // Data for requests with fail statuses
-      failCalls.push(value.response_status.buckets.fail.doc_count);
+      failCalls[index] = value.response_status.buckets.fail.doc_count;
 
       // Data for requests with error statuses
-      errorCalls.push(value.response_status.buckets.error.doc_count);
+      errorCalls[index] = value.response_status.buckets.error.doc_count;
     });
 
     // Update labels & data
@@ -125,32 +148,33 @@ Template.requestTimeline.onRendered(function () {
           label: '2XX',
           backgroundColor: '#468847',
           borderColor: '#468847',
-          borderWidth: 1,
           data: successCalls,
+          fill: false,
         },
         {
           label: '3XX',
           backgroundColor: '#04519b',
           borderColor: '#04519b',
-          borderWidth: 1,
           data: redirectCalls,
+          fill: false,
         },
         {
           label: '4XX',
           backgroundColor: '#e08600',
           borderColor: '#e08600',
-          borderWidth: 1,
           data: failCalls,
+          fill: false,
         },
         {
           label: '5XX',
           backgroundColor: '#b94848',
           borderColor: '#b94848',
-          borderWidth: 1,
           data: errorCalls,
+          fill: false,
         },
       ],
     };
+
 
     // Update chart with relevant data
     instance.chart.update();
@@ -171,7 +195,7 @@ Template.requestTimeline.onRendered(function () {
 
 Template.requestTimeline.helpers({
   listPaths () {
-    const timelineData = Template.instance().data.timelineData;
+    const timelineData = Template.currentData().timelineData;
 
     // Return all requested paths
     return timelineData.map(dataset => {
