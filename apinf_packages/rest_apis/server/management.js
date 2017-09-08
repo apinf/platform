@@ -489,11 +489,6 @@ ManagementV1.swagger = {
           description: 'Username',
           example: 'johndoe',
         },
-        oldPassword: {
-          type: 'string',
-          description: 'Old password for user',
-          example: 'myoldpassword',
-        },
         password: {
           type: 'string',
           description: 'Password for user',
