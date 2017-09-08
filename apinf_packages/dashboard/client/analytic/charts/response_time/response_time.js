@@ -115,7 +115,7 @@ Template.responseTimeTimeline.onRendered(function () {
       labels,
       datasets: [
         {
-          label: TAPi18n.__('responseTimeTimeline_legendItem_50thPercentiles'),
+          label: TAPi18n.__('responseTimeTimeline_legendItem_median'),
           backgroundColor: '#00A421',
           borderColor: 'green',
           borderWidth: 1,
@@ -143,7 +143,7 @@ Template.responseTimeTimeline.onRendered(function () {
     // Update translation
     scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_xAxisTitle_days');
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_yAxisTitle_time');
-    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_50thPercentiles');
+    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
     datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
 
     // Update chart with new translation
