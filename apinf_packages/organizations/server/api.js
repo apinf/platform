@@ -20,7 +20,23 @@ ManagementV1.addRoute('organizations', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'List and search organizations.',
-      description: 'List and search organizations.',
+      description: `
+   ### List and search organizations ###
+
+   Parameters are optional and several parametes can be combined.
+
+   Example calls:
+
+    GET /organizations
+
+   As a response all Organizations' datas are listed.
+
+    GET /organizations?q=apinf&limit=10
+
+   As a response is returned up to ten first Organizations,
+   which contain string "apinf" in Name, Description or URL.
+
+      `,
       parameters: [
         ManagementV1.swagger.params.optionalSearch,
         ManagementV1.swagger.params.skip,
@@ -28,13 +44,13 @@ ManagementV1.addRoute('organizations', {
       ],
       responses: {
         200: {
-          description: 'Returns list of organizations',
+          description: 'Returns a list of organizations',
           schema: {
             type: 'object',
             properties: {
               status: {
                 type: 'string',
-                example: 'Success',
+                example: 'success',
               },
               data: {
                 type: 'array',
@@ -94,7 +110,7 @@ ManagementV1.addRoute('organizations', {
       return {
         statusCode: 200,
         body: {
-          title: 'Success',
+          status: 'success',
           data: Organizations.find(query, options).fetch(),
         },
       };
@@ -108,22 +124,48 @@ ManagementV1.addRoute('organizations', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Add a new Organization.',
-      description: 'Adds a new Organization. On success, returns newly added object.',
+      description: `
+   ### Adds a new Organization ###
+
+   Admin user can add a new Organization into Catalog.
+
+   Parameters:
+   * *name* and *url* are mandatory parameters
+   * *description* length must not exceed 1000 characters.
+
+   On success, a response message with HTTP code 201 returns the created organization data.
+      `,
       parameters: [
         ManagementV1.swagger.params.organization,
       ],
       responses: {
-        200: {
+        201: {
           description: 'Organization added successfully',
           schema: {
             type: 'object',
             properties: {
               status: {
                 type: 'string',
-                example: 'Success',
+                example: 'success',
               },
               data: {
                 $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'Parameter "name" is erroneous or missing',
               },
             },
           },
@@ -168,12 +210,56 @@ ManagementV1.addRoute('organizations', {
         },
       };
 
+      // Validate name
+      let isValid = Organizations.simpleSchema().namedContext().validateOne(
+        organizationData, 'name');
+
+      if (!isValid) {
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Parameter "name" is erroneous or missing',
+          },
+        };
+      }
+
+      // Validate url
+      isValid = Organizations.simpleSchema().namedContext().validateOne(
+        organizationData, 'url');
+
+      if (!isValid) {
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Parameter "url" is erroneous or missing',
+          },
+        };
+      }
+
+      // Validate description, if provided
+      if (bodyParams.description) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'description');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "description" is erroneous or too long',
+            },
+          };
+        }
+      }
+
       const organizationId = Organizations.insert(organizationData);
 
       return {
-        statusCode: 200,
+        statusCode: 201,
         body: {
-          title: 'Organization added successfully',
+          status: 'success',
           data: Organizations.findOne(organizationId),
         },
       };
@@ -191,7 +277,16 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Fetch Organization with specified ID.',
-      description: 'Returns one Organization with specified ID or nothing if not match found.',
+      description: `
+   ### List the data of the Organization specified with ID ###
+
+   Example call
+
+    GET /organization/:id
+
+   Returns the data of the Organization specified with :id in case a match is found.
+
+      `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -218,8 +313,8 @@ ManagementV1.addRoute('organizations/:id', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization not found',
-            detail: 'Organization ID nopt provided',
+            status: 'fail',
+            message: 'Organization ID not provided',
           },
         };
       }
@@ -235,8 +330,8 @@ ManagementV1.addRoute('organizations/:id', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization not found',
-            detail: detailLine,
+            status: 'fail',
+            message: detailLine,
           },
         };
       }
@@ -244,7 +339,7 @@ ManagementV1.addRoute('organizations/:id', {
       return {
         statusCode: 200,
         body: {
-          title: 'Organization found',
+          status: 'success',
           data: organization,
         },
       };
@@ -261,9 +356,12 @@ ManagementV1.addRoute('organizations/:id', {
       description: `
    ### Update an Organization ###
 
-   You can update Organization data with parameters listed below.
+   Admin user or Organization manager can update Organization data with parameters listed below.
 
-   Parameters can be given one by one or several ones at a time.
+   Parameters
+   * can be given one by one or several ones at a time
+   * length of parameter *description* must not exceed 1000 characters
+
       `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
@@ -277,6 +375,22 @@ ManagementV1.addRoute('organizations/:id', {
             properties: {
               data: {
                 $ref: '#/definitions/organizationResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'Parameter "description" is erroneous or too long',
               },
             },
           },
@@ -309,8 +423,8 @@ ManagementV1.addRoute('organizations/:id', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization is not found',
-            detail: 'Organization with specified ID is not found',
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
           },
         };
       }
@@ -324,8 +438,8 @@ ManagementV1.addRoute('organizations/:id', {
         return {
           statusCode: 403,
           body: {
-            title: 'User does not have permission',
-            detail: 'You do not have permission for editing this Organization',
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -349,13 +463,30 @@ ManagementV1.addRoute('organizations/:id', {
         'socialMedia.linkedIn': bodyParams.linkedIn,
       };
 
+      // Validate description, if provided
+      if (bodyParams.description) {
+        const isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'description');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "description" is erroneous or too long',
+            },
+          };
+        }
+      }
+
+
       // Update Organization document
       Organizations.update(organizationId, { $set: organizationData });
 
       return {
         statusCode: 200,
         body: {
-          title: 'Organization updated successfully',
+          status: 'success',
           data: Organizations.findOne(organizationId),
         },
       };
@@ -369,12 +500,19 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Organization from catalog.',
-      description: 'Deletes the identified Organization from catalog.',
+      description: `
+   ### Deletes the identified Organization from catalog ###
+
+   Admin user or Organization manager can remove Organization from Catalog.
+
+   In successful case a response message with HTTP code 204 without any content is returned.
+
+      `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
       responses: {
-        200: {
+        204: {
           description: 'Organization successfully removed.',
         },
         401: {
@@ -407,8 +545,8 @@ ManagementV1.addRoute('organizations/:id', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization is not found',
-            detail: 'Organization with specified ID is not found',
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
           },
         };
       }
@@ -421,8 +559,8 @@ ManagementV1.addRoute('organizations/:id', {
         return {
           statusCode: 403,
           body: {
-            title: 'User does not have permission',
-            detail: 'You do not have permission for removing this Organization',
+            status: 'fail',
+            message: 'You do not have permission for removing this Organization',
           },
         };
       }
@@ -431,9 +569,9 @@ ManagementV1.addRoute('organizations/:id', {
       Meteor.call('removeOrganization', organization._id);
 
       return {
-        statusCode: 200,
+        statusCode: 204,
         body: {
-          title: 'Organization removed successfully',
+          status: 'success',
         },
       };
     },
@@ -453,15 +591,22 @@ ManagementV1.addRoute('organizations/:id/managers', {
       description: `
    ### Listing all Organization Managers ###
 
-   By giving Organization ID you can fetch all Managers'
-   username, email address and ID listed.
+   Admin user or Organization manager can list all Organization managers'
+   username, email address and ID of Organization identified with :id.
 
    There is returned two lists:
    * managerIds: list of all Managers' IDs
    * data: list (matching to query parameters) of Managers with contact information
 
-   The lists can differ from each other in such a case a Manager account is removed,
+   Note! The lists can differ from each other in such a case a Manager account is removed,
    but the Manager list is not updated accordingly.
+
+   Example call:
+
+    GET /organizations/<organization_id>/managers
+
+
+
       `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
@@ -499,11 +644,20 @@ ManagementV1.addRoute('organizations/:id/managers', {
           description: 'User does not have permission',
         },
         404: {
-          description: `
-   Bad parameter
-   * Organization not found
-   * (Organization ID was not provided)
-          `,
+          description: 'Not Found',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'Organization with specified ID is not found',
+              },
+            },
+          },
         },
       },
       security: [
@@ -536,8 +690,8 @@ ManagementV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization not found',
-            detail: detailLine,
+            status: 'fail',
+            message: detailLine,
           },
         };
       }
@@ -551,8 +705,8 @@ ManagementV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 403,
           body: {
-            title: 'Forbidden operation',
-            detail: 'You do not have permission for editing this Organization',
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -568,7 +722,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
       return {
         statusCode: 200,
         body: {
-          title: 'Organization managers found',
+          status: 'success',
           managerIds: organization.managerIds,
           data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
         },
@@ -586,12 +740,15 @@ ManagementV1.addRoute('organizations/:id/managers', {
       ],
       summary: 'Add a new Manager into Organization.',
       description: `
-   Adds a new Manager into Organization.
+   ### Adds a new Manager into Organization ###
+
+   Admin user or Organization manager can add a new manager into organization.
+
    * Manager is identified with email address.
    * New manager must have a valid User account.
-   * New manager must not already be a Manager in this Organization.
+   * New manager must not already be a Manager in same Organization.
 
-   On success, complete list of Organization Managers is returned.
+   On success, a complete list of Organization Managers is returned.
       `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
@@ -605,7 +762,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
             properties: {
               status: {
                 type: 'string',
-                example: 'Success',
+                example: 'success',
               },
               managerIds: {
                 type: 'array',
@@ -621,6 +778,22 @@ ManagementV1.addRoute('organizations/:id/managers', {
             },
           },
         },
+        400: {
+          description: 'Bad Request',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'New Manager\'s email address is missing',
+              },
+            },
+          },
+        },
         401: {
           description: 'Authentication is required',
         },
@@ -628,15 +801,20 @@ ManagementV1.addRoute('organizations/:id/managers', {
           description: 'User does not have permission',
         },
         404: {
-          description: `
-   Bad parameter
-   * New Manager's email address is missing
-   * User has no account
-   * User is already a Manager in this Organization
-   * Organization not found
-   * (Organization ID was not provided)
-
-          `,
+          description: 'Not Found',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'Organization with specified ID is not found',
+              },
+            },
+          },
         },
       },
       security: [
@@ -661,8 +839,8 @@ ManagementV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization not found',
-            detail: 'Organization with specified ID is not found',
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
           },
         };
       }
@@ -677,8 +855,8 @@ ManagementV1.addRoute('organizations/:id/managers', {
         return {
           statusCode: 403,
           body: {
-            title: 'Forbidden operation',
-            detail: 'You do not have permission to edit this Organization',
+            status: 'fail',
+            message: 'You do not have permission to edit this Organization',
           },
         };
       }
@@ -686,10 +864,10 @@ ManagementV1.addRoute('organizations/:id/managers', {
       // Check if manager list is given
       if (!bodyParams.newManagerEmail) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Missing parameter',
-            detail: 'New Manager\'s email address is missing.',
+            status: 'fail',
+            message: 'New Manager\'s email address is missing.',
           },
         };
       }
@@ -699,10 +877,10 @@ ManagementV1.addRoute('organizations/:id/managers', {
 
       if (!newManager) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Bad parameter',
-            detail: 'User has no account',
+            status: 'fail',
+            message: 'User has no account',
           },
         };
       }
@@ -712,10 +890,10 @@ ManagementV1.addRoute('organizations/:id/managers', {
       // Check if the user is already a manager
       if (alreadyManager) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Bad parameter',
-            detail: 'User is already a Manager in this Organization',
+            status: 'fail',
+            message: 'User is already a Manager in this Organization',
           },
         };
       }
@@ -737,7 +915,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
       return {
         statusCode: 200,
         body: {
-          title: 'Manager addedd successfully',
+          status: 'success',
           managerIds: organization.managerIds,
           data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
         },
@@ -760,8 +938,14 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       description: `
    ### Inquiring Organization Manager's username and email address ###
 
-   By giving Organization Managers user ID you can fetch Manager's
-   username and email address.
+   Admin user or Organization manager can fetch username and email address of a
+   Manager identified by :managerId.
+
+   Example call:
+
+    GET /organizations/<organization_id>/managers/<manager_id>
+
+   .
       `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
@@ -779,6 +963,22 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
             },
           },
         },
+        400: {
+          description: 'Bad Request',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'Organization ID was not provided',
+              },
+            },
+          },
+        },
         401: {
           description: 'Authentication is required',
         },
@@ -786,15 +986,20 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'User does not have permission',
         },
         404: {
-          description: `
-   Bad parameter
-   * Manager ID was not provided
-   * User has no User account
-   * Queried User is not a Manager in Organization
-   * Organization not found
-   * (Organization ID was not provided)
-
-          `,
+          description: 'Not Found',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'fail',
+              },
+              message: {
+                type: 'string',
+                example: 'Organization with specified ID is not found',
+              },
+            },
+          },
         },
       },
       security: [
@@ -808,10 +1013,10 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Is Organization ID provided
       if (!this.urlParams.id) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Organization ID was not provided',
-            detail: 'Bad parameter: Organization ID was not provided',
+            status: 'fail',
+            message: 'Organization ID was not provided',
           },
         };
       }
@@ -827,8 +1032,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization not found',
-            detail: 'Bad parameter: Organization with specified ID is not found',
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
           },
         };
       }
@@ -842,8 +1047,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 403,
           body: {
-            title: 'Forbidden operation',
-            detail: 'You do not have permission for editing this Organization',
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -853,10 +1058,10 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Queried Manager ID must be given
       if (!managerId) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Parameter missing',
-            detail: 'Manager ID was not provided.',
+            status: 'fail',
+            message: 'Manager ID was not provided.',
           },
         };
       }
@@ -864,10 +1069,10 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Check if user account for manager exists
       if (!Meteor.users.findOne(managerId)) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Not found',
-            detail: 'User has no User account.',
+            status: 'fail',
+            message: 'User has no User account.',
           },
         };
       }
@@ -876,10 +1081,10 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       const isManager = organization.managerIds.includes(managerId);
       if (!isManager) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
-            title: 'Not found',
-            detail: 'Queried User is not a Manager in Organization.',
+            status: 'fail',
+            message: 'Queried User is not a Manager in Organization.',
           },
         };
       }
@@ -895,7 +1100,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       return {
         statusCode: 200,
         body: {
-          title: 'Manager found successfully',
+          status: 'success',
           data: Meteor.users.findOne({ _id: managerId }, options),
         },
       };
@@ -913,7 +1118,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       description: `
    ### Deleting a User from Organization Manager list ###
 
-   You can delete managers from Organization manager list one by one.
+   Admin user or Organization manager can delete managers from Organization manager list one by one.
 
    Note! Removing not existing Manager ID from list is considered failed operation.
       `,
@@ -929,22 +1134,10 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'Authentication is required',
         },
         403: {
-          description: `
-   Forbidden operation
-   * User does not have permission
-   * Can not remove self
-
-          `,
+          description: 'Forbidden operation',
         },
         404: {
-          description: `
-   Bad parameter
-   * Manager ID not provided
-   * Manager not found
-   * Organization not found
-   * (Organization ID was not provided)
-
-          `,
+          description: 'Not Found',
         },
       },
       security: [
@@ -967,8 +1160,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            title: 'Organization not found',
-            detail: 'Organization with specified ID is not found',
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
           },
         };
       }
@@ -982,8 +1175,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 403,
           body: {
-            title: 'Forbidden operation',
-            detail: 'You do not have permission for editing this Organization',
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
           },
         };
       }
@@ -995,8 +1188,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            title: 'Parameter not found',
-            detail: 'Missing parameter: Manager ID not provided.',
+            status: 'fail',
+            message: 'Missing parameter: Manager ID not provided.',
           },
         };
       }
@@ -1006,8 +1199,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 403,
           body: {
-            title: 'Removal not allowed',
-            detail: 'Bad parameter: Can not remove self.',
+            status: 'fail',
+            message: 'Bad parameter: Can not remove self.',
           },
         };
       }
@@ -1019,8 +1212,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         return {
           statusCode: 404,
           body: {
-            title: 'Manager not found',
-            detail: 'Bad parameter: Manager not found in Organization.',
+            status: 'fail',
+            message: 'Bad parameter: Manager not found in Organization.',
           },
         };
       }
@@ -1028,11 +1221,20 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Remove user from organization manager list
       Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
 
+      // Do not include password in response
+      const options = {};
+      const includeFields = {};
+      includeFields._id = 1;
+      includeFields.username = 1;
+      includeFields.emails = 1;
+      options.fields = includeFields;
+
       return {
         statusCode: 200,
         body: {
-          title: 'Manager deleted successfully',
-          message: 'Manager deleted successfully.',
+          status: 'success',
+          managerIds: organization.managerIds,
+          data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
         },
       };
     },
