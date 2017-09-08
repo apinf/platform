@@ -51,19 +51,6 @@ CatalogV1.swagger = {
    With this API you can list, add, update and remove (CRUD) the APIs in catalog.
 
 
-   ### Examples for each method to get you started
-
-   In documentation each of the methods contain simple examples to get you started.
-   Here's an example.
-
-   Example call:
-
-       GET /apis
-
-   Result: returns all APIs.
-   More examples can be found from each method.
-
-
    ### Authentication
 
    Authentication is implemented according to functionality in [Restivus Swagger](https://github.com/apinf/restivus-swagger).
@@ -90,6 +77,36 @@ CatalogV1.swagger = {
 
    Dates and times are provided and returned in ISODate format,
    * for example "2012-07-14T01:00:00+01:00" or "2012-07-14".
+
+   ----
+
+   ### Examples for each method to get you started
+
+
+   Example call:
+
+       GET /apis
+
+   Result: returns all APIs.
+   More examples can be found from each method.
+
+   ----
+
+   Responses contain approriate HTTP code and in message payload extended infomation
+   depending on case.
+
+   Successful case:
+   * HTTP code 2xx
+   * the payload contains fields (except in HTTP 204 case)
+     * status: value "success"
+     * data: data of object(s)
+
+
+   Unsuccessful case:
+   * HTTP code 3xx/4xx/5xx
+   * the payload contains fields
+     * status: value "fail"
+     * message: extended information about reason of failure
 
    ----
 
