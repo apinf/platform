@@ -23,7 +23,7 @@ CatalogV1.swagger.meta.paths = {
       summary: 'Logging in.',
       description: `
    ### Logging in ###
-   
+
    By giving existing username and password you get login credentials,
    which you can use in authenticating requests.
 
@@ -211,6 +211,8 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Fetch API with specified ID.',
         description: `
+   ### Fetching API with specified ID ###
+
    Returns the API with specified ID, if a match is found.
 
    Example call:
@@ -254,6 +256,8 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Add new API to catalog.',
         description: `
+   ### Adding a new API to Catalog ###
+
    Adds an API to catalog. On success, returns the added API object.
 
 
@@ -445,7 +449,10 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Update API.',
         description: `
-   Updates an API in catalog. On success, returns the updated API object.
+   ### Update an API ###
+
+   Admin or API manager can updates an API in catalog.
+   On success, returns the updated API object.
 
    Parameters
    * length of description must not exceed 1000 characters
@@ -583,14 +590,16 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Delete API.',
         description: `
-   Deletes the identified API from the Catalog, if a match is found.
+   ### Deleting an API ###
+
+   Admin user or API manager can delete an identified API from the Catalog,
 
 
    Example call:
 
-        DELETE /apis/:id
+        DELETE /apis/<API id>
 
-   Result: deletes the API identified with :id and responds with HTTP code 204.
+   Result: deletes the API identified with <API id> and responds with HTTP code 204.
 
         `,
         parameters: [
