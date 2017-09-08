@@ -19,6 +19,7 @@ import ProxyBackends from '../../collection';
 
 // APInf imports
 import convertToApiUmbrellaObject from '../methods/convert_to_apiUmbrella_object';
+import requiredFieldsFilled from './required_fields';
 
 AutoForm.hooks({
   proxyBackendForm: {
@@ -31,6 +32,17 @@ AutoForm.hooks({
 
         // Empty fields case, check doc exists & has apiUmbrella object
         if (proxyBackend.type === 'apiUmbrella') {
+          // Make sure all required fileds are filled
+          const requiredFields = requiredFieldsFilled(proxyBackend);
+
+          if (!requiredFields) {
+            // Alert the user of missing values
+            const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
+            sAlert.error(errorMessage);
+            // Cancel form
+            return false;
+          }
+
           Meteor.call('uniqueFrontendPrefix', proxyBackend, (error, unique) => {
             // Check if frontend prefix is unique
             if (unique) {
@@ -110,18 +122,9 @@ AutoForm.hooks({
         const currentProxyBackend = updateDoc.$set;
 
         if (currentProxyBackend.type === 'apiUmbrella') {
-          // Check all required fields have values
-          const requiredUrlMatches = currentProxyBackend['apiUmbrella.url_matches'] &&
-            currentProxyBackend['apiUmbrella.url_matches'][0] &&
-            currentProxyBackend['apiUmbrella.url_matches'][0].frontend_prefix &&
-            currentProxyBackend['apiUmbrella.url_matches'][0].backend_prefix;
+          const requiredFields = requiredFieldsFilled(currentProxyBackend);
 
-          const requiredServers = currentProxyBackend['apiUmbrella.servers'] &&
-            currentProxyBackend['apiUmbrella.servers'][0] &&
-            currentProxyBackend['apiUmbrella.servers'][0].host &&
-            currentProxyBackend['apiUmbrella.servers'][0].port;
-
-          if (!(requiredUrlMatches) || !(requiredServers)) {
+          if (!requiredFields) {
             // Alert the user of missing values
             const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
             sAlert.error(errorMessage);
