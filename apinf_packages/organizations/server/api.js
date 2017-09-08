@@ -506,6 +506,7 @@ ManagementV1.addRoute('organizations/:id', {
    Admin user or Organization manager can remove Organization from Catalog.
 
    In successful case a response message with HTTP code 204 without any content is returned.
+   Note! Trying to remove a non-existing Organization is considered a failed operation.
 
       `,
       parameters: [
@@ -594,17 +595,17 @@ ManagementV1.addRoute('organizations/:id/managers', {
    Admin user or Organization manager can list all Organization managers'
    username, email address and ID of Organization identified with :id.
 
-   There is returned two lists:
+   Two lists are returned:
    * managerIds: list of all Managers' IDs
    * data: list (matching to query parameters) of Managers with contact information
 
    Note! The lists can differ from each other in such a case a Manager account is removed,
    but the Manager list is not updated accordingly.
 
+
    Example call:
 
     GET /organizations/<organization_id>/managers
-
 
 
       `,
@@ -939,13 +940,13 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
    ### Inquiring Organization Manager's username and email address ###
 
    Admin user or Organization manager can fetch username and email address of a
-   Manager identified by :managerId.
+   Manager identified by {managerId}.
 
    Example call:
 
-    GET /organizations/<organization_id>/managers/<manager_id>
+    GET /organizations/<organizations id>/managers/<managers id>
 
-   .
+
       `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
@@ -1120,7 +1121,13 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
 
    Admin user or Organization manager can delete managers from Organization manager list one by one.
 
-   Note! Removing not existing Manager ID from list is considered failed operation.
+
+   Example call:
+
+    DELETE /organizations/<organizations id>/managers/<managers id>
+
+
+   Note! Trying to remove a not existing Manager is considered a failed operation.
       `,
       parameters: [
         ManagementV1.swagger.params.organizationId,
@@ -1129,6 +1136,17 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       responses: {
         200: {
           description: 'Organization Manager successfully removed.',
+          schema: {
+            type: 'object',
+            properties: {
+              data: {
+                $ref: '#/definitions/organizationManagerResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request',
         },
         401: {
           description: 'Authentication is required',
@@ -1186,7 +1204,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Manager ID must be given
       if (!removeManagerId) {
         return {
-          statusCode: 404,
+          statusCode: 400,
           body: {
             status: 'fail',
             message: 'Missing parameter: Manager ID not provided.',
@@ -1200,7 +1218,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           statusCode: 403,
           body: {
             status: 'fail',
-            message: 'Bad parameter: Can not remove self.',
+            message: 'User can not remove self.',
           },
         };
       }
