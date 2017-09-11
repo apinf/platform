@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container">
     <h1 class="page-header">
       {{_ "organizationCatalog_Title" }}
-      {{# if isInRole 'admin' }}
+      {{# if userCanAddOrganization }}
         <button id="add-organization" type="button" class="btn btn-default pull-right">
           <i class="fa fa-plus" aria-hidden="true"></i>
           {{_ "organizationCatalog_buttonText_addOrganization" }}

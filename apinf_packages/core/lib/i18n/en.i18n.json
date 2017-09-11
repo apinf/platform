@@ -798,6 +798,9 @@
       "access": {
         "onlyAdminsCanAddApis": {
           "label": "Only platform administrators are allowed to add new APIs"
+        },
+        "onlyAdminsCanAddOrganizations": {
+          "label": "Only platform administrators are allowed to add new Organizations"
         }
       },
       "apiDocumentationEditor": {
@@ -1095,7 +1098,7 @@
   "searchPage_searchForm_helpText": "Start typing your query for live search results.",
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchResultsHeader": "Search results",
-  "settings_addingApis": "Adding APIs",
+  "settings_panelTitle_addingApisAndOrganizations": "Adding APIs and Organizations",
   "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
   "settings_mail_fromEmail": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
