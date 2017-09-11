@@ -49,15 +49,17 @@ Template.apiAnalyticPageBody.onCreated(function () {
         // Get URL of relevant ElasticSearch
         const elasticsearchHost = proxy.apiUmbrella.elasticsearch;
 
-        // Get Elasticsearch data
-        Meteor.call('getElasticsearchData', elasticsearchHost, queryParams, (error, dataset) => {
-          if (error) {
-            instance.error.set(error);
-            throw Meteor.Error(error);
-          }
-          // Update Elasticsearch data reactive variable with result
-          instance.elasticsearchData.set(dataset.aggregations);
-        });
+        if (elasticsearchHost) {
+          // Get Elasticsearch data
+          Meteor.call('getElasticsearchData', elasticsearchHost, queryParams, (error, dataset) => {
+            if (error) {
+              instance.error.set(error);
+              throw Meteor.Error(error);
+            }
+            // Update Elasticsearch data reactive variable with result
+            instance.elasticsearchData.set(dataset.aggregations);
+          });
+        }
       }
     }
   });
