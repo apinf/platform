@@ -10,9 +10,14 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Organizations from '/apinf_packages/organizations/collection';
+import Settings from '/apinf_packages/settings/collection';
+
+// Npm packages imports
+import _ from 'lodash';
 
 Template.organizationCatalog.onCreated(function () {
   // Get reference to template instance
@@ -120,6 +125,34 @@ Template.organizationCatalog.helpers({
     const viewMode = FlowRouter.getQueryParam('viewMode');
 
     return (viewMode === 'table');
+  },
+  userCanAddOrganization () {
+    const userId = Meteor.userId();
+
+    if (userId) {
+      // Get settigns document
+      const settings = Settings.findOne();
+
+      if (settings) {
+        // Get value of field or false as default value
+        const onlyAdmins = _.get(settings, 'access.onlyAdminsCanAddOrganizations', false);
+
+        // Allow user to add an Organization because not only for admin
+        if (!onlyAdmins) {
+          return true;
+        }
+
+        // Otherwise check if current user is admin
+        return Roles.userIsInRole(userId, ['admin']);
+      }
+
+      // Return true because no settings are set
+      // By default allowing all user to add an Organization
+      return true;
+    }
+
+    // If user isn'tloggin then don't allow
+    return false;
   },
 });
 
