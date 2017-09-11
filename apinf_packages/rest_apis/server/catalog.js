@@ -230,8 +230,9 @@ CatalogV1.swagger = {
           example: 'design/development/testing/production/deprecated',
         },
         isPublic: {
-          type: 'boolean',
-          example: true,
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'ture/false',
         },
       },
 
