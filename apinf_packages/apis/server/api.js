@@ -81,9 +81,12 @@ CatalogV1.addCollection(Apis, {
 
    Result: returns maximum of 200 APIs which are managed by requesting user.
 
+   -----
 
-   Note! When using parameter managedAPIs, the Manager's user ID is needed
-   in X-User-Id field in message header.
+   Note! The field X-User-Id in message header can be used
+   * to contain necessary Manager's user ID with parameter managedAPIs provided
+   * to contain Admin user's ID, when indicated, that user is Admin
+
         `,
 
         parameters: [
@@ -119,16 +122,24 @@ CatalogV1.addCollection(Apis, {
       },
       action () {
         const queryParams = this.queryParams;
-        // Only Public APIs are available for unregistered user
-        const query = { isPublic: true };
+        let query = { };
+
+        // Get Manager ID from header
+        const managerId = this.request.headers['x-user-id'];
+
+        // Check if requestor is administrator
+        const requestorIsAdmin = Roles.userIsInRole(managerId, ['admin']);
+
+        if (!requestorIsAdmin) {
+          // Only Public APIs are available for unregistered user
+          query = { isPublic: true };
+        }
+
         const options = {};
 
         // Get APIs managed by user requesting operation
         if (queryParams.managedAPIs === 'true') {
-          // Get Manager ID from header
-          const managerId = this.request.headers['x-user-id'];
-
-          // Response with error in case managerId is missing
+          // Response with error in case managerId is missing from header
           if (!managerId) {
             return {
               statusCode: 400,
@@ -265,7 +276,8 @@ CatalogV1.addCollection(Apis, {
    * mandatory: name and url
    * length of description must not exceed 1000 characters
    * value of lifecycleStatus must be one of example list
-   * if isPublic is false, only admin or manager can see the API
+   * allowed values for parameter isPublic are "true" and "false"
+     * if isPublic is set false, only admin or manager can see the API
         `,
         parameters: [
           CatalogV1.swagger.params.api,
@@ -474,6 +486,9 @@ CatalogV1.addCollection(Apis, {
    Parameters
    * length of description must not exceed 1000 characters
    * value of lifecycleStatus must be one of example list
+   * allowed values for parameter isPublic are "true" and "false"
+     * if isPublic is set false, only admin or manager can see the API
+
         `,
         parameters: [
           CatalogV1.swagger.params.apiId,
