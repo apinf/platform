@@ -408,6 +408,23 @@ CatalogV1.addCollection(Apis, {
           }
         }
 
+        // Is the API set to public or private
+        if (this.bodyParams.isPublic) {
+          if (this.bodyParams.isPublic === 'true') {
+            this.bodyParams.isPublic = true;
+          } else if (this.bodyParams.isPublic === 'false') {
+            this.bodyParams.isPublic = false;
+          } else {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'fail',
+                message: 'Parameter isPublic has erroneous value',
+              },
+            };
+          }
+        }
+
         // Add manager IDs list into
         const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
 
@@ -561,6 +578,23 @@ CatalogV1.addCollection(Apis, {
               body: {
                 status: 'fail',
                 message: 'Parameter lifecycleStatus has erroneous value',
+              },
+            };
+          }
+        }
+
+        // Is the API set to public or private
+        if (this.bodyParams.isPublic) {
+          if (this.bodyParams.isPublic === 'true') {
+            this.bodyParams.isPublic = true;
+          } else if (this.bodyParams.isPublic === 'false') {
+            this.bodyParams.isPublic = false;
+          } else {
+            return {
+              statusCode: 400,
+              body: {
+                status: 'fail',
+                message: 'Parameter isPublic has erroneous value',
               },
             };
           }
