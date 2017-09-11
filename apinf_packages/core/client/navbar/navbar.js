@@ -27,8 +27,8 @@ Template.navbar.onCreated(function () {
   instance.autorun(() => {
     // Check if user is logged in
     if (Meteor.userId()) {
-      // If user logged in, subscribe to 'onlyAdminCanAddApis' setting
-      instance.subscribe('singleSetting', 'access.onlyAdminsCanAddApis');
+      // If user logged in, subscribe to Access setting
+      instance.subscribe('singleSetting', 'access');
     }
   });
 });

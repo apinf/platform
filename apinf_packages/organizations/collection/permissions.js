@@ -6,20 +6,34 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Roles } from 'meteor/alanning:roles';
 
+// Npm packages imports
+import _ from 'lodash';
+
 // Collection imports
+import Settings from '/apinf_packages/settings/collection';
 import Organizations from './';
 
 Organizations.allow({
   insert (userId) {
-    // Check if current user is admin
-    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+    // Get settigns document
+    const settings = Settings.findOne();
 
-    // Only admin can insert
-    if (userIsAdmin) {
-      return true;
+    if (settings) {
+      // Get value of field or false as default value
+      const onlyAdmins = _.get(settings, 'access.onlyAdminsCanAddOrganizations', false);
+
+      // Allow user to add an Organization because not only for admin
+      if (!onlyAdmins) {
+        return true;
+      }
+
+      // Otherwise check if current user is admin
+      return Roles.userIsInRole(userId, ['admin']);
     }
 
-    return false;
+    // Return true because no settings are set
+    // By default allowing all user to add an Organization
+    return true;
   },
   update (userId, organization) {
     // Check if current user can update
