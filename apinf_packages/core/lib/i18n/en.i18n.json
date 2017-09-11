@@ -593,7 +593,7 @@
   "removeProxy_errorMessage": "Error: Proxy removal failed",
   "requestTimeline_labelText_path": "Path",
   "requestTimeline_xAxisTitle_days": "Days",
-  "requestTimeline_yAxisTitle_requests": "Requests, number",
+  "requestTimeline_yAxisTitle_requests": "API Requests",
   "requestTimeline_legendItem_allCalls": "All calls",
   "requestsOverTime_pointTitle_requests": "Requests",
   "responseTimeTimeline_labelText_path": "Path",
