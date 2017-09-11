@@ -18,6 +18,11 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+  'access.onlyAdminsCanAddOrganizations': {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
   apiDocumentationEditor: {
     type: Object,
     optional: true,
