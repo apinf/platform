@@ -124,7 +124,7 @@ CatalogV1.addCollection(Apis, {
         const options = {};
 
         // Get APIs managed by user requesting operation
-        if (queryParams.managedAPIs) {
+        if (queryParams.managedAPIs === 'true') {
           // Get Manager ID from header
           const managerId = this.request.headers['x-user-id'];
 
@@ -451,7 +451,7 @@ CatalogV1.addCollection(Apis, {
         description: `
    ### Update an API ###
 
-   Admin or API manager can updates an API in catalog.
+   Admin or API manager can update an API in catalog.
    On success, returns the updated API object.
 
    Parameters
