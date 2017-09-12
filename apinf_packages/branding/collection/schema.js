@@ -58,6 +58,11 @@ Branding.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  featuredApis: {
+    type: [String],
+    optional: true,
+    maxCount: 3,
+  },
   homeCustomBlock: {
     type: String,
     optional: true,

@@ -38,30 +38,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 type="update"
                 collection=brandingCollection
                 doc=branding }}
-              {{> afQuickField name='siteTitle' id="branding-site-title" }}
-              {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
-              {{> afQuickField name='colors' }}
-              {{> afQuickField name='siteFooter' id="site-footer" }}
-              {{> afQuickField name='footerCode' id="footer-code" }}
-              {{> afQuickField name='privacyPolicy' type="quill" }}
-              {{> afQuickField name='termsOfUse' type="quill" }}
-              {{> afQuickField name='socialMedia' }}
-              <a
-                 tabindex="0"
-                 class="pull-right"
-                 role="button"
-                 data-toggle="popover"
-                 data-placement="top"
-                 data-trigger="focus"
-                 data-content="{{_ 'branding_homeCustomBlock_helpIcon_text' }}">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-              {{> afQuickField name='homeCustomBlock' id="custom-html" }}
-              <div id="form-buttons">
-                <button id="branding-update-button" type="submit" class="btn btn-primary">
-                  {{_ "branding_update" }}
-                </button>
-              </div>
+                {{> afQuickField name='siteTitle' id="branding-site-title" }}
+                {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
+                
+                {{>  afQuickField name="featuredApis" type="select2" multiple=true select2Options=s2Opts options=optionsAPi }}
+                
+                {{> afQuickField name='colors' }}
+                {{> afQuickField name='siteFooter' id="site-footer" }}
+                {{> afQuickField name='footerCode' id="footer-code" }}
+                {{> afQuickField name='privacyPolicy' type="quill" }}
+                {{> afQuickField name='termsOfUse' type="quill" }}
+                {{> afQuickField name='socialMedia' }}
+                <a
+                   tabindex="0"
+                   class="pull-right"
+                   role="button"
+                   data-toggle="popover"
+                   data-placement="top"
+                   data-trigger="focus"
+                   data-content="{{_ 'branding_homeCustomBlock_helpIcon_text' }}">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </a>
+                {{> afQuickField name='homeCustomBlock' id="custom-html" }}
+                <div id="form-buttons">
+                  <button id="branding-update-button" type="submit" class="btn btn-primary">
+                    {{_ "branding_update" }}
+                  </button>
+                </div>
               {{/ autoForm }}
             {{ else }}
               {{# autoForm
@@ -70,6 +73,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 collection=brandingCollection }}
               {{> afQuickField name='siteTitle' }}
               {{> afQuickField name='siteSlogan' }}
+              {{> afQuickField name='featuredApis' }}
               {{> afQuickField name='siteFooter' }}
               {{> afQuickField name='footerCode' }}
               {{> afQuickField name='socialMedia' }}
