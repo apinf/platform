@@ -56,6 +56,6 @@ LoginPlatforms.schema = new SimpleSchema({
 });
 
 // Enable translations (i18n)
-LoginPlatforms.schema.i18n('loginPlatforms.settings');
+LoginPlatforms.schema.i18n('schemas.loginPlatforms');
 
 LoginPlatforms.attachSchema(LoginPlatforms.schema);
