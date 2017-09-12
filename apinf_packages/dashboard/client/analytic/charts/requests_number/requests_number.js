@@ -13,7 +13,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APInf imports
-import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/generate_date';
+import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/chart_helpers';
 
 // Npm packages imports
 import moment from 'moment';
@@ -93,8 +93,6 @@ Template.requestTimeline.onRendered(function () {
 
   // Update chart when elasticsearchData was changed
   instance.autorun(() => {
-    window.moment = moment;
-
     // Get ElasticSearch data
     const elasticsearchData = instance.elasticsearchData.get();
 
@@ -112,6 +110,7 @@ Template.requestTimeline.onRendered(function () {
       // Interval is 1 day
       step: 1,
       // TODO: internationalize date formatting
+      // https://github.com/apinf/platform/issues/2900
       format: 'MM/DD',
     };
 

@@ -8,7 +8,7 @@
  * Generate date range with specified parameters
  * @param {Object} params - Parameters for date range
  * @param {*} params.startDate - start date of range (included value)
- * @param {*} params.startDate - end date of range (included value)
+ * @param {*} params.endDate - end date of range (included value)
  * @param {string} params.format - date format
  * @param {number} params.step - step of interval
  */
