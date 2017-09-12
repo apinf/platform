@@ -1,0 +1,20 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAnalyticPage">
+  <div class="api-view">
+    <div class="container">
+      {{# if Template.subscriptionsReady }}
+        {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
+        <div class="form-group">
+          {{> dateRangePicker }}
+        </div>
+        {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+      {{ else }}
+        {{> spinner }}
+      {{/ if }} <!-- /subscriptionReady -->
+    </div>
+  </div>
+</template>

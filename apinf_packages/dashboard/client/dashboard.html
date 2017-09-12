@@ -3,29 +3,51 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
-<template name="dashboard">
+<template name="dashboardPage">
   <div class="container">
-    <h1 class="page-header">
-      {{_ "dashboard_mainTitle" }}
+    <h1 class="page">
+      {{_ "dashboardPage_title_dashboard" }}
     </h1>
-    {{# if Template.subscriptionsReady }}
-      {{# if managedApisCount }}
-        {{# if proxyBackendsExists }}
-          {{> dashboardChartsFiltering proxyBackends=proxyBackends }}
 
-          {{> dashboardCharts chartData=chartData }}
+    {{# if Template.subscriptionsReady }}
+      {{> dashboardToolbar proxiesList=proxiesList }}
+      <!-- Make sure an API is connected to proxy -->
+      {{# if proxyBackendsCount }}
+
+        <!-- Make sure a user has any API -->
+        {{# if  managedApisCount }}
+          <!-- Case when user has one API -->
+          {{# if managedOneApi }}
+            <!-- Display directly API Analytic Page -->
+            {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
+            {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+          {{ else }}
+            <!-- Display Dashboard page-->
+            {{> dashboardView }}
+          {{/ if }} <!-- /managedOneApi -->
         {{ else }}
+          <!-- Display a message about "No managed API" -->
           <div class="alert alert-warning alert-text" role="alert">
-            <p>
-              {{_ 'dashboard_noProxyBackendsText' }}
-            </p>
+            <h3>
+              {{_ "dashboardPage_text_noApis" }}
+            </h3>
+            <a
+              href="{{ pathFor route='addApi' }}"
+              class="btn btn-sm btn-success">
+              {{_ 'dashboardPage_buttonText_addApi' }}
+            </a>
           </div>
-        {{/ if }}
+        {{/ if }} <!-- /managedApisCount -->
       {{ else }}
-        {{> dashboardNoApis }}
-      {{/ if }}
+        <!-- Display a message about "No connected API" -->
+        <div class="alert alert-warning alert-text" role="alert">
+          <p>
+            {{_ 'dashboardPage_text_noProxyBackends' }}
+          </p>
+        </div>
+      {{/ if }} <!-- /proxyBackendsExists -->
     {{ else }}
       {{> spinner }}
-    {{/ if }}
+    {{/ if }} <!-- /subscriptionsReady -->
   </div>
 </template>

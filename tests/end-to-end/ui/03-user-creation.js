@@ -8,6 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Discover chimp-js browser
 /* globals browser */
 
+/*
 import signUpPage from '../../page-objects/signup.page';
 import mainContent from '../../page-objects/main-content.page';
 import settingsPage from '../../page-objects/settings.page';
@@ -43,3 +44,4 @@ describe('03 user creation', () => {
     mainContent.logOut();
   });
 });
+*/

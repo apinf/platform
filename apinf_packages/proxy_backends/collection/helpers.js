@@ -39,4 +39,9 @@ ProxyBackends.helpers({
     // Returns Proxy URL if it exists else returns false
     return _.get(proxy, 'apiUmbrella.url', false);
   },
+  frontendPrefix () {
+    const path = 'apiUmbrella.url_matches[0].frontend_prefix';
+
+    return _.get(this, path, '');
+  },
 });
