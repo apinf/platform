@@ -121,7 +121,7 @@ Apis.helpers({
       }
     }
 
-    return false;
+    return 0;
   },
   getBookmarkCount () {
     // Get API Backend ID

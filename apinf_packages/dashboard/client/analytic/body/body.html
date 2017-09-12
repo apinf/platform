@@ -1,0 +1,32 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAnalyticPageBody">
+  <!-- Data is not ready -->
+  {{# unless fetchingData }}
+    {{> spinner }}
+  {{ else }}
+    <!-- If error returns -->
+    {{# if error }}
+      <h1>
+        {{_ 'apiAnalyticPageBody_text_elasticsearchError' }}
+      </h1>
+      <p>
+        {{ error }}
+      </p>
+    {{/ if }}
+
+    <!-- Request path has metrics data -->
+    {{# if elasticsearchData }}
+      {{# if dataAvailable }}
+        {{> apiAnalyticView elasticsearchData=elasticsearchData proxyBackendId=proxyBackendId }}
+      {{ else }}
+        <p class="alert alert-warning text-center overview-col-title">
+          {{_ 'apiAnalyticPageBody_warningText_noData' }}
+        </p>
+      {{/ if }}
+    {{/ if }}
+  {{/ unless }} <!-- /fetchingData -->
+</template>

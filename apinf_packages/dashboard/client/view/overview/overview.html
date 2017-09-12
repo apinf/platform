@@ -1,0 +1,81 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardOverviewStatistic">
+  <div class="overview-body" data-overview-id="{{ proxyBackend._id }}">
+    {{# if bucket }}
+      <div class="row overview-line">
+        <div class="col-xs-12 col-md-3">
+          <p class="overview-col-title">
+            {{ bucket.apiName }}
+          </p>
+          <div class="form-group">
+            <p>
+              {{_ 'dashboardOverviewStatistic_text_requestPath' path=bucket.requestPath }}
+            </p>
+            <p class="text-success">
+              {{_ 'dashboardOverviewStatistic_text_successCalls' count=bucket.successCallsCount }}
+            </p>
+            <span class="text-danger">
+              {{# if timeframeYesterday }}
+                {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=bucket.errorCallsCount }}
+              {{ else }}
+                {{_ 'dashboardOverviewStatistic_text_errorCalls' count=bucket.errorCallsCount timeframe=timeframe }}
+              {{/ if }}
+            </span>
+          </div>
+        </div>
+        {{# with bucket }}
+          <div class="col-xs-12 col-md-3">
+            <p class="overview-col-title">
+              {{_ 'dashboardOverviewStatistic_text_requestsCount' count=requestNumber }}
+            </p>
+            <div class="form-group">
+            <span class="overview-col-title">
+              {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
+            </span>
+              {{> requestsOverTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
+              <div class="{{ arrowDirection 'requests' }}"></div>
+              <span>{{ overviewComparing 'requests' }}</span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <p class="overview-col-title">
+              {{_ 'dashboardOverviewStatistic_text_responseTime' time=responseTime }}
+            </p>
+            <div class="form-group">
+            <span class="overview-col-title">
+              {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
+            </span>
+              {{> medianResponseTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
+              <div class="{{ arrowDirection 'time' }}"></div>
+              <span>{{ overviewComparing 'time' }}</span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <p class="overview-col-title">
+              {{_ 'dashboardOverviewStatistic_text_usersCount' count=uniqueUsers }}
+            </p>
+            <div class="form-group">
+            <span class="overview-col-title">
+              {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
+            </span>
+              {{> uniqueUsersOverTime buckets=requestOverTime proxyBackendId=proxyBackendId }}
+              <div class="{{ arrowDirection 'users' }}"></div>
+              <span>{{ overviewComparing 'users' }}</span>
+            </div>
+
+            <a href="{{ pathFor 'apiAnalyticPage' proxyBackendId=proxyBackendId }}" class="pull-right">
+              {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
+            </a>
+          </div>
+        {{/ with }}
+      </div>
+    {{ else }}
+      <!-- Display template with "No Data Available -->
+      {{> dashboardOverviewStatisticNoData proxyBackend=proxyBackend }}
+    {{/ if }}
+  </div>
+</template>

@@ -71,8 +71,7 @@ Template.languageSelect.helpers({
 });
 
 Template.languageSelect.events({
-  // Use blur event because change event doesn't correctly work on Safari browser
-  'blur #language-select': (event) => {
+  'change #language-select': (event) => {
     // Get language from the current data context
     const language = event.target.value;
 

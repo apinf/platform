@@ -27,16 +27,20 @@ Template.featuredApiBranding.onCreated(function () {
 
 Template.featuredApiBranding.helpers({
   featuredApi () {
+    console.log(':: subscribe ',Template.instance().subscriptionsReady())
     if (Template.instance().subscriptionsReady()) {
       const branding = Branding.findOne();
 
       let api = [];
 
       if (branding.featuredApis && branding.featuredApis.length !== 0) {
-        for (const apiId of branding.featuredApis) {
-          api.push(Apis.findOne(apiId));
+        for (let apiId of branding.featuredApis) {
+          let apiData = Apis.findOne(apiId);
+          if (apiData) {
+            api.push(apiData);
+          }
         }
-
+        console.log(':: api ',api)
         // Retrieve last API Backends
         return api;
       }
