@@ -7,11 +7,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import LoginPlatforms from '/apinf_packages/login_platforms/collection';
+import LoginPlatforms from '../collection';
 
 Template.loginPlatforms.onCreated(function () {
   // Subscription to feedback collection
-  this.subscribe('login-platforms');
+  this.subscribe('loginPlatforms');
 });
 
 Template.loginPlatforms.onRendered(() => {
@@ -20,7 +20,7 @@ Template.loginPlatforms.onRendered(() => {
 });
 
 Template.loginPlatforms.helpers({
-  settingsCollection () {
+  loginPlatformsCollection () {
     // Return reference to Settings collection, for AutoForm
     return LoginPlatforms;
   },
