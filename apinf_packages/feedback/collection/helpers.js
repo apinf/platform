@@ -19,6 +19,11 @@ Feedback.helpers({
     // Get current userId
     const userId = Meteor.userId();
 
+    // User without login can't see private feedbacks
+    if (!userId && !this.isPublic) {
+      return false;
+    }
+
     // Check if user is owner of feedback
     const userIsOwner = this.authorId === userId;
 
