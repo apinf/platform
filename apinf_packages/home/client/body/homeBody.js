@@ -14,6 +14,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 // Collection imports
 import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 import Settings from '/apinf_packages/settings/collection';
+import Branding from '/apinf_packages/branding/collection';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance
@@ -47,7 +48,16 @@ Template.homeBody.helpers({
   usersCount () {
     return Counts.get('usersCount');
   },
+  checkFeaturedAPi () {
+    let branding = Branding.findOne();
+    return branding.featuredApis && branding.featuredApis.length !== 0 ?true : false;
+  },
+  checkAdminUser () {
+    let userId = Meteor.userId();
 
+    // Check if current user is admin
+    return userId ? Roles.userIsInRole(userId, ['admin']) : false;
+  },
   contactFormEnabled () {
     const settings = Settings.findOne();
 

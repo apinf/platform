@@ -1,0 +1,15 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="featuredApiBranding">
+  <h2 class="feature-section-heading text-center">
+    {{_ "featuredApiBranding_Heading" }}
+  </h2>
+  {{# if featuredApi }}
+    {{> apiCatalogGrid apis=featuredApi }}
+  {{ else }}
+    {{_ "featuredApiBranding_Message" }}
+  {{/ if }}
+</template>
