@@ -10,6 +10,7 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
@@ -49,11 +50,11 @@ Template.homeBody.helpers({
     return Counts.get('usersCount');
   },
   checkFeaturedAPi () {
-    let branding = Branding.findOne();
-    return branding.featuredApis && branding.featuredApis.length !== 0 ?true : false;
+    const branding = Branding.findOne();
+    return branding.featuredApis && branding.featuredApis.length !== 0;
   },
   checkAdminUser () {
-    let userId = Meteor.userId();
+    const userId = Meteor.userId();
 
     // Check if current user is admin
     return userId ? Roles.userIsInRole(userId, ['admin']) : false;
