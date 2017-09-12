@@ -29,6 +29,8 @@ Template.dashboardSummaryStatistic.onCreated(function () {
   instance.proxyBackendsWithMetric = {};
 
   instance.autorun(() => {
+    // Update list
+    instance.proxyBackendsWithMetric = {};
     // Update list of proxy backends
     instance.proxyBackends = ProxyBackends.find().fetch();
 
@@ -138,6 +140,7 @@ Template.dashboardSummaryStatistic.helpers({
   bucket (proxyBackendPath) {
     const instance = Template.instance();
 
+    console.log(instance.proxyBackendsWithMetric[proxyBackendPath]);
     return instance.proxyBackendsWithMetric[proxyBackendPath];
   },
 });
