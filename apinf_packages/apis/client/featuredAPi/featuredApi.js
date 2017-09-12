@@ -29,9 +29,7 @@ Template.featuredApiBranding.helpers({
   featuredApi () {
     if (Template.instance().subscriptionsReady()) {
       const branding = Branding.findOne();
-
       const api = [];
-
       if (branding.featuredApis && branding.featuredApis.length !== 0) {
         // Retrieve last API Backends
         for (const apiId of branding.featuredApis) {
