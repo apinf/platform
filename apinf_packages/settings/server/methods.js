@@ -8,7 +8,6 @@ import { Meteor } from 'meteor/meteor';
 
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
-import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // APInf imports
 // eslint-disable-next-line max-len
