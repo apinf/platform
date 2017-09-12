@@ -20,10 +20,10 @@ Organizations.allow({
 
     if (settings) {
       // Get value of field or false as default value
-      const onlyAdmins = _.get(settings, 'access.onlyAdminsCanAddOrganizations', false);
+      const onlyAdminsCanInsert = _.get(settings, 'access.onlyAdminsCanAddOrganizations', false);
 
       // Allow user to add an Organization because not only for admin
-      if (!onlyAdmins) {
+      if (!onlyAdminsCanInsert) {
         return true;
       }
 

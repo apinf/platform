@@ -137,8 +137,8 @@ Template.organizationCatalog.helpers({
         // Get value of field or false as default value
         const onlyAdmins = _.get(settings, 'access.onlyAdminsCanAddOrganizations', false);
 
-        // Allow user to add an Organization because not only for admin
         if (!onlyAdmins) {
+          // Allow user to add an Organization because not only for admin
           return true;
         }
 
@@ -151,7 +151,7 @@ Template.organizationCatalog.helpers({
       return true;
     }
 
-    // If user isn'tloggin then don't allow
+    // If user isn't loggin then don't allow
     return false;
   },
 });
