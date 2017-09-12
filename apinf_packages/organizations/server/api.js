@@ -206,7 +206,7 @@ ManagementV1.addRoute('organizations', {
           facebook: bodyParams.facebook,
           instagram: bodyParams.instagram,
           twitter: bodyParams.twitter,
-          linkedIn: bodyParams.linkedin,
+          linkedIn: bodyParams.linkedIn,
         },
       };
 
@@ -249,6 +249,118 @@ ManagementV1.addRoute('organizations', {
             body: {
               status: 'fail',
               message: 'Parameter "description" is erroneous or too long',
+            },
+          };
+        }
+      }
+
+      // Validate contact person name, if provided
+      if (bodyParams.contact_name) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'contact.person');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_name" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate contact person phone, if provided
+      if (bodyParams.contact_phone) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'contact.phone');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_phone" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate contact person email, if provided
+      if (bodyParams.contact_email) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'contact.email');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_email" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate facebook address, if provided
+      if (bodyParams.facebook) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.facebook');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "facebook" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate instagram address, if provided
+      if (bodyParams.instagram) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.instagram');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "instagram" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate twitter address, if provided
+      if (bodyParams.twitter) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.twitter');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "twitter" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate linkedIn address, if provided
+      if (bodyParams.linkedIn) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.linkedIn');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "linkedIn" is erroneous',
             },
           };
         }
