@@ -74,11 +74,11 @@ ManagementV1.swagger.meta.paths = {
    returned list can be managed.
 
    Sort criteria are following:
-   * username
-   * creation dates
-   * organization
+   * by user's name: *username*
+   * by user account creation dates: *created_at*
+   * by organization name: *organization*
 
-   Parameters are optional and can be combined.
+   Parameters are optional and can be combined. Default value is to sort by ascending by username.
 
    Example call:
 
@@ -157,7 +157,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         201: {
-          description: 'User successfully added',
+          description: 'Created',
           schema: {
             type: 'object',
             properties: {
@@ -190,7 +190,7 @@ ManagementV1.swagger.meta.paths = {
       description: `
   ### Searching Users with UserID ###
 
-   With this method an Admin user can list data of a User identified with ID.
+   With this method an Admin user can list data of a any User identified with ID.
    Also a non-Admin user can list own data.
 
    Example call:
@@ -253,7 +253,7 @@ ManagementV1.swagger.meta.paths = {
 
     DELETE /users/<users id>
 
-   Rmoves the user identified with <users id> and responses with HTTP code 204 without content.
+   Removes the user identified with <users id> and responses with HTTP code 204 without content.
 
 
       `,
@@ -299,6 +299,9 @@ ManagementV1.swagger.meta.paths = {
    * *Username* must be unique.
    * *Password* must be at least 6 characters.
 
+
+   Note! Users needs a new login after password change in order to get new valid credentials.
+
       `,
       parameters: [
         ManagementV1.swagger.params.userId,
@@ -307,6 +310,18 @@ ManagementV1.swagger.meta.paths = {
       responses: {
         200: {
           description: 'Success',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                $ref: '#/definitions/userItem',
+              },
+            },
+          },
         },
         400: {
           description: 'Bad Request',
@@ -553,53 +568,29 @@ ManagementV1.addCollection(Meteor.users, {
 
         const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
 
-        if (userIsGettingOwnAccount || userIsAdmin) {
-          // Get ID of User to be fetched
-          const userId = this.urlParams.id;
+        if (!userIsGettingOwnAccount && !userIsAdmin) {
+          return {
+            statusCode: 403,
+            body: {
+              status: 'fail',
+              message: 'User does not have permission',
+            },
+          };
+        }
 
-          // Exclude password
-          const options = {};
-          const excludeFields = {};
+        // Get ID of User to be fetched
+        const userId = this.urlParams.id;
 
-          excludeFields.services = 0;
-          options.fields = excludeFields;
+        // Exclude password from response
+        const options = {};
+        const excludeFields = {};
 
-          // Check if user exists
-          const user = Meteor.users.findOne(userId, options);
-          if (user) {
-            // Array for Organization name and id
-            const orgDataList = [];
-            // Get user id
-            const userIdSearch = user._id;
-            // Find all Organizations, where User belongs to
-            const organizations = Organizations.find({
-              managerIds: userIdSearch,
-            }).fetch();
-            // If there are Users' Organizations
-            if (organizations.length > 0) {
-              // Loop through Users' Organizations
-              organizations.forEach((organization) => {
-                const orgData = {};
-                // Put Organization name and id into an object
-                orgData.organizationId = organization._id;
-                orgData.organizationName = organization.name;
-                // Add this Organization data into Users' organization data list
-                orgDataList.push(orgData);
-              });
-              // Add Organizations' information to Users' data
-              user.organization = orgDataList;
-            }
-            // Construct response
-            return {
-              statusCode: 200,
-              body: {
-                status: 'success',
-                data: user,
-              },
-            };
-          }
+        excludeFields.services = 0;
+        options.fields = excludeFields;
 
-          // User didn't exist
+        // Check if user exists
+        const user = Meteor.users.findOne(userId, options);
+        if (!user) {
           return {
             statusCode: 404,
             body: {
@@ -608,11 +599,35 @@ ManagementV1.addCollection(Meteor.users, {
             },
           };
         }
+
+        // Array for Organization name and id
+        const orgDataList = [];
+        // Get user id
+        const userIdSearch = user._id;
+        // Find all Organizations, where User belongs to
+        const organizations = Organizations.find({
+          managerIds: userIdSearch,
+        }).fetch();
+        // If there are Users' Organizations
+        if (organizations.length > 0) {
+          // Loop through Users' Organizations
+          organizations.forEach((organization) => {
+            const orgData = {};
+            // Put Organization name and id into an object
+            orgData.organizationId = organization._id;
+            orgData.organizationName = organization.name;
+            // Add this Organization data into Users' organization data list
+            orgDataList.push(orgData);
+          });
+          // Add Organizations' information to Users' data
+          user.organization = orgDataList;
+        }
+        // Construct response
         return {
-          statusCode: 403,
+          statusCode: 200,
           body: {
-            status: 'fail',
-            message: 'User does not have permission',
+            status: 'success',
+            data: user,
           },
         };
       },
@@ -820,7 +835,7 @@ ManagementV1.addCollection(Meteor.users, {
           // Check if there already is a User by the same name
           if (Accounts.findUserByUsername(bodyParams.username)) {
             return {
-              statusCode: 403,
+              statusCode: 400,
               body: {
                 status: 'fail',
                 message: 'Username already exists',
@@ -828,10 +843,10 @@ ManagementV1.addCollection(Meteor.users, {
             };
           }
         }
-        // Is new password
-        if (bodyParams.password &&
-            typeof bodyParams.password !== 'string' &&
-            bodyParams.password.length > 5) {
+        // Is there a new password
+        if (bodyParams.password && (
+            typeof bodyParams.password !== 'string' ||
+            bodyParams.password.length < 5)) {
           return {
             statusCode: 400,
             body: {
@@ -840,6 +855,9 @@ ManagementV1.addCollection(Meteor.users, {
             },
           };
         }
+
+        // Preparations for possible failure in DB write and rollback Needs
+        // rethinking
 
         // Try to change username
         if (bodyParams.username) {
@@ -865,14 +883,20 @@ ManagementV1.addCollection(Meteor.users, {
           // Flag the change for response
           updateDone = true;
         }
-
         // Successful update (one or more) is done
         if (updateDone) {
+          // Prepare response
+          const options = {};
+          const excludeFields = {};
+          // Do not include password in response
+          excludeFields.services = 0;
+          options.fields = excludeFields;
+
           return {
             statusCode: 200,
             body: {
               status: 'success',
-              message: 'User successfully updated',
+              data: Meteor.users.findOne(userId, options),
             },
           };
         }
@@ -883,6 +907,7 @@ ManagementV1.addCollection(Meteor.users, {
         }
 
         if (previousPassword) {
+          // Restore old password
           Meteor.users.update(userId, { $set: { 'services.password.bcrypt': previousPassword } });
         }
         return {
@@ -960,52 +985,51 @@ ManagementV1.addRoute('users/updates', {
       excludeFields.services = 0;
       options.fields = excludeFields;
 
-      if (!badQueryParameters) {
-        // Get all users
-        const userList = Meteor.users.find(query, options).fetch();
-        // Get Organization names and ids for every User
-        if (userList) {
-          // Loop through user list one by one
-          userList.forEach((userData) => {
-            // Array for Organization name and id
-            const orgDataList = [];
-            // Get user id
-            const userId = userData._id;
-            // Find all Organizations, where User belongs to
-            const organizations = Organizations.find({
-              managerIds: userId,
-            }).fetch();
-            // If there are Users' Organizations
-            if (organizations.length > 0) {
-              // Loop through Users' Organizations
-              organizations.forEach((organization) => {
-                const orgData = {};
-                // Put Organization name and id into an object
-                orgData.organizationId = organization._id;
-                orgData.organizationName = organization.name;
-                // Add this Organization data into Users' organization data list
-                orgDataList.push(orgData);
-              });
-              // Add Organizations' information to Users' data
-              userData.organization = orgDataList;
-            }
-          });
-        }
-        // Construct response
+      if (badQueryParameters) {
         return {
-          statusCode: 200,
+          statusCode: 400,
           body: {
-            status: 'success',
-            data: userList,
+            status: 'fail',
+            message: 'Bad query parameters',
           },
         };
       }
+      // Get all users
+      const userList = Meteor.users.find(query, options).fetch();
+      // Get Organization names and ids for every User
+      if (userList) {
+        // Loop through user list one by one
+        userList.forEach((userData) => {
+          // Array for Organization name and id
+          const orgDataList = [];
+          // Get user id
+          const userId = userData._id;
+          // Find all Organizations, where User belongs to
+          const organizations = Organizations.find({
+            managerIds: userId,
+          }).fetch();
+          // If there are Users' Organizations
+          if (organizations.length > 0) {
+            // Loop through Users' Organizations
+            organizations.forEach((organization) => {
+              const orgData = {};
+              // Put Organization name and id into an object
+              orgData.organizationId = organization._id;
+              orgData.organizationName = organization.name;
+              // Add this Organization data into Users' organization data list
+              orgDataList.push(orgData);
+            });
+            // Add Organizations' information to Users' data
+            userData.organization = orgDataList;
+          }
+        });
+      }
       // Construct response
       return {
-        statusCode: 400,
+        statusCode: 200,
         body: {
-          status: 'fail',
-          message: 'Bad query parameters',
+          status: 'success',
+          data: userList,
         },
       };
     },
