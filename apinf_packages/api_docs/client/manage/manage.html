@@ -29,40 +29,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <p class="help-text">
               {{_ 'manageApiDocumentationModal_helpText_useHttpsProtocol' }}
             </p>
-            {{> afQuickField
-              name="type"
-              firstOption=false
-            }}
-            {{#if afFieldValueIs
-              name="type"
-              value="file"
-            }}
-            <div class="documentation-file">
-              {{# unless documentationFile }}
-                {{> manageApiDocumentationModalUploadButton }}
-              {{ else }}
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                    {{ documentationFile.filename }}
-                    <span class="pull-right">
+            {{> afQuickField name="type" firstOption=false }}
+
+            {{#if afFieldValueIs name="type" value="file" }}
+              <div class="documentation-file">
+                {{# unless documentationFile }}
+                  {{> manageApiDocumentationModalUploadButton }}
+                {{ else }}
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                      {{ documentationFile.filename }}
+                      <span class="pull-right">
                     <button type="button" class="btn btn-xs btn-danger delete-documentation">
                       <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
                     </button>
                   </span>
-                  </li>
-                </ul>
-                {{> afQuickField
-                    name="submit_methods"
-                    options=supportedSubmitMethods
-                    type="select-checkbox-inline"
-                    noselect=false
-                }}
-              {{/ unless }}
-            </div>
+                    </li>
+                  </ul>
+                {{/ unless }}
+              </div>
             {{ else }}
-            {{> afQuickField name='remoteFileUrl' }}
+              {{> afQuickField name='remoteFileUrl' }}
             {{/ if }}
+            {{> afQuickField
+              name="submit_methods"
+              options=supportedSubmitMethods
+              type="select-checkbox-inline"
+              noselect=false
+            }}
             {{# if apiDocumentationEditorIsEnabled }}
               <legend>
                 {{> showHelp 'documentation_editor_create_file' }}

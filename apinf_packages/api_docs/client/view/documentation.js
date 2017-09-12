@@ -87,7 +87,7 @@ Template.apiDocumentation.helpers({
     const apiDoc = this.apiDoc;
 
     // Display block if a user is manager of current API or URL is set
-    return api.currentUserCanManage() || apiDoc.otherUrl;
+    return api.currentUserCanManage() || (apiDoc && apiDoc.otherUrl);
   },
   displayViewBlock () {
     const api = this.api;
