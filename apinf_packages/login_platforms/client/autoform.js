@@ -9,6 +9,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
+// Define hooks for the form
 AutoForm.hooks({
   loginPlatforms: {
     onSuccess () {
@@ -20,23 +21,23 @@ AutoForm.hooks({
 
       // Executes all promises and wait for their responses
       Promise.all(callsArray)
-        .then(result => {
-          if (result) {
-            // Get settings form success message translation
-            const message = TAPi18n.__('settings_successMessage');
+      .then(result => {
+        if (result) {
+          // Get settings form success message translation
+          const message = TAPi18n.__('settings_successMessage');
 
-            // Alert the user of successful save
-            sAlert.success(message);
-          }
-        })
-        .catch(err => {
-          if (err) {
-            // Get settings form success message translation
-            const message = TAPi18n.__('settings_errorMessage');
-            // Alert the user of successful save
-            sAlert.error(message);
-          }
-        });
+          // Alert the user of successful save
+          sAlert.success(message);
+        }
+      })
+      .catch(err => {
+        if (err) {
+          // Get settings form success message translation
+          const message = TAPi18n.__('settings_errorMessage');
+          // Alert the user of successful save
+          sAlert.error(message);
+        }
+      });
     },
   },
 });

@@ -9,6 +9,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Collection imports
 import LoginPlatforms from './';
 
+// Define LoginPlatforms schema
 LoginPlatforms.schema = new SimpleSchema({
   githubConfiguration: {
     type: Object,
@@ -58,4 +59,5 @@ LoginPlatforms.schema = new SimpleSchema({
 // Enable translations (i18n)
 LoginPlatforms.schema.i18n('schemas.loginPlatforms');
 
+// Attach the schema to the module
 LoginPlatforms.attachSchema(LoginPlatforms.schema);

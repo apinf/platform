@@ -6,7 +6,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Mongo } from 'meteor/mongo';
 
-
+// Create Mongo collection for LoginPlatforms module.
 const LoginPlatforms = new Mongo.Collection('LoginPlatforms');
 
+// Export the collection
 export default LoginPlatforms;

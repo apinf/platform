@@ -9,6 +9,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 // APInf imports
 import signedIn from '/apinf_packages/core/client/lib/router';
 
+// Define route for loginPlatforms module
 signedIn.route('/login-platforms', {
   name: 'login-platforms',
   action () {
