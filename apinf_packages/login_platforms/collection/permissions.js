@@ -9,6 +9,7 @@ import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import LoginPlatforms from './';
 
+// Define permissions for the LoginPlatforms collections
 LoginPlatforms.allow({
   insert (userId) {
     // Check if current user is admin

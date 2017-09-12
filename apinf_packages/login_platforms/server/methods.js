@@ -53,6 +53,7 @@ Meteor.methods({
       throw new Meteor.Error(message);
     }
 
+    // Return method status to the client
     return status;
   },
   updateFiwareConfiguration () {
@@ -92,6 +93,7 @@ Meteor.methods({
       throw new Meteor.Error(message);
     }
 
+    // Return method status to the client
     return status;
   },
 });
