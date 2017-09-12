@@ -19,7 +19,7 @@ import 'select2-bootstrap-theme/dist/select2-bootstrap.css';
 Template.branding.onCreated(function () {
   const templateInstance = this;
   templateInstance.autorun(() => {
-  	templateInstance.subscribe('userManagedApisName');
+    templateInstance.subscribe('userManagedApisName');
   });
 });
 
@@ -35,21 +35,19 @@ Template.branding.helpers({
   brandingCollection () {
     return Branding;
   },
-	s2Opts () {
-		const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
-		return { placeholder: message, tags: true };
-	},
-	optionsAPi () {
-  	if (Template.instance().subscriptionsReady()) {
-	  	return Apis.find().map( (api) => {
-				return {
-					label: api.name,
-					value: api._id
-				};
-			});
-		}
-		return false;
-	},
+  s2Opts () {
+    const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
+    return { placeholder: message, tags: true };
+  },
+  optionsAPi () {
+    if (Template.instance().subscriptionsReady()) {
+      return Apis.find().map((api) => {
+        return {
+          label: api.name,
+          value: api._id,
+        };
+      });
+    }
+    return false;
+  },
 });
-
-
