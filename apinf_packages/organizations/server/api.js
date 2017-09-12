@@ -282,7 +282,7 @@ ManagementV1.addRoute('organizations/:id', {
 
    Example call
 
-    GET /organization/:id
+    GET /organizations/:id
 
    Returns the data of the Organization specified with :id in case a match is found.
 
