@@ -1108,6 +1108,7 @@
   "settings_save": "Save",
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
+  "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
   "settingsMenu_branding": "Branding",

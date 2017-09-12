@@ -1133,6 +1133,7 @@
     "settings_save": "Tallenna",
     "settings_sdkCode_generator": "SDK-koodigeneraattori",
     "settings_successMessage": "Asetukset tallennettu",
+    "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
     "settingsMenu_profile": "Profiili",
     "settingsMenu_account": "K\u00e4ytt\u00e4j\u00e4tili",
     "settingsMenu_branding": "Br\u00e4nd\u00e4ys",
