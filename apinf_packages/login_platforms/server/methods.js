@@ -74,9 +74,9 @@ Meteor.methods({
         // Insert new service configuration
         ServiceConfiguration.configurations.insert({
           service: 'fiware',
-          clientId: settings.githubConfiguration.clientId,
-          rootURL: settings.githubConfiguration.rootURL,
-          secret: settings.githubConfiguration.secret,
+          clientId: settings.fiwareConfiguration.clientId,
+          rootURL: settings.fiwareConfiguration.rootURL,
+          secret: settings.fiwareConfiguration.secret,
         });
 
         // Set success status message
