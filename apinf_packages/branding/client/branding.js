@@ -17,37 +17,37 @@ import 'select2/dist/css/select2.css';
 import 'select2-bootstrap-theme/dist/select2-bootstrap.css';
 
 Template.branding.onCreated(function () {
-	const templateInstance = this;
-	templateInstance.autorun(() => {
-		templateInstance.subscribe('userManagedApisName');
-	});
+  const templateInstance = this;
+  templateInstance.autorun(() => {
+	 templateInstance.subscribe('userManagedApisName');
+  });
 });
 
 Template.branding.onRendered(() => {
-	$('[data-toggle="popover"]').popover();
+  $('[data-toggle="popover"]').popover();
 });
 
 Template.branding.helpers({
-  branding () {
-    // Get Branding collection content
-    return Branding.findOne();
-  },
-  brandingCollection () {
-    return Branding;
-  },
-  s2Opts () {
-  	const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
-  	return { placeholder: message, tags: true };
-  },
-	optionsAPi () {
-  	if (Template.instance().subscriptionsReady()) {
-  		return Apis.find().map((api) => {
-  			return {
-  				label: api.name,
-  				value: api._id,
-  			};
-  		});
-  	}
-  	return false;
-	},
+branding () {
+  // Get Branding collection content
+  return Branding.findOne();
+},
+brandingCollection () {
+  return Branding;
+},
+s2Opts () {
+	const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
+	return { placeholder: message, tags: true };
+},
+optionsAPi () {
+	if (Template.instance().subscriptionsReady()) {
+		return Apis.find().map((api) => {
+			return {
+				label: api.name,
+				value: api._id,
+			};
+		});
+	}
+	return false;
+},
 });
