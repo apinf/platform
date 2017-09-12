@@ -18,6 +18,9 @@ import LoginPlatforms from '../collection';
 
 Meteor.methods({
   updateGithubConfiguration () {
+    // Status variable returned to client
+    let status = null;
+
     // Try if settings exist
     try {
       const settings = LoginPlatforms.findOne();
@@ -35,6 +38,12 @@ Meteor.methods({
           clientId: settings.githubConfiguration.clientId,
           secret: settings.githubConfiguration.secret,
         });
+
+        // Set success status message
+        status = 'GitHub configuration updated successfully';
+      } else {
+        // Throw excpetion if githubSettings are not valid
+        throw new Error();
       }
     } catch (error) {
       // otherwise show an error
@@ -43,8 +52,13 @@ Meteor.methods({
       // Show an error message
       throw new Meteor.Error(message);
     }
+
+    return status;
   },
   updateFiwareConfiguration () {
+    // Status variable returned to client
+    let status = null;
+
     // Try if settings exist
     try {
       const settings = LoginPlatforms.findOne();
@@ -63,6 +77,12 @@ Meteor.methods({
           rootURL: settings.githubConfiguration.rootURL,
           secret: settings.githubConfiguration.secret,
         });
+
+        // Set success status message
+        status = 'FIWARE configuration updated successfully';
+      } else {
+        // Throw excpetion if fiwareSettings are not valid
+        throw new Error();
       }
     } catch (error) {
       // otherwise show an error
@@ -71,5 +91,7 @@ Meteor.methods({
       // Show an error message
       throw new Meteor.Error(message);
     }
+
+    return status;
   },
 });
