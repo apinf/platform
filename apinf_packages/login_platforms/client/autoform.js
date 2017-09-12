@@ -12,7 +12,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
-  settings: {
+  loginPlatforms: {
     onSuccess () {
       // Call for configuration updates
       Meteor.call('updateGithubConfiguration');
