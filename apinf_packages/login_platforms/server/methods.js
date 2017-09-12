@@ -14,13 +14,13 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 import { githubSettingsValid, fiwareSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Collection imports
-import Settings from '../collection';
+import LoginPlatforms from '../collection';
 
 Meteor.methods({
   updateGithubConfiguration () {
     // Try if settings exist
     try {
-      const settings = Settings.findOne();
+      const settings = LoginPlatforms.findOne();
 
       // Check if github settings are valid
       if (githubSettingsValid(settings)) {
@@ -47,7 +47,7 @@ Meteor.methods({
   updateFiwareConfiguration () {
     // Try if settings exist
     try {
-      const settings = Settings.findOne();
+      const settings = LoginPlatforms.findOne();
 
       // Check if fiware settings are valid
       if (fiwareSettingsValid(settings)) {

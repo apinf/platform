@@ -18,16 +18,16 @@ Meteor.publish('loginPlatforms', function () {
   const userIsAdministrator = Roles.userIsInRole(this.userId, 'admin');
 
   // Placeholder for settings, if user is authorized
-  let settingsCursor;
+  let loginPlatformsCursor;
 
   if (userIsAdministrator) {
     // User is authorized
-    settingsCursor = LoginPlatforms.find();
+    loginPlatformsCursor = LoginPlatforms.find();
   } else {
     // User is not authorized
-    settingsCursor = [];
+    loginPlatformsCursor = [];
   }
-  return settingsCursor;
+  return loginPlatformsCursor;
 });
 
 Meteor.publish('singleLoginPlatform', (loginPlatform) => {
