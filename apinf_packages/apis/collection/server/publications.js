@@ -30,6 +30,14 @@ Meteor.publish('latestPublicApis', (limit) => {
   );
 });
 
+Meteor.publish('userManagedApisName', () => {
+  // Return cursor to latest API Backends
+  return Apis.find(
+    { isPublic: true },
+    { fields: Apis.publicFields, sort: { created_at: -1 } }
+  );
+});
+
 // Publish collection for pagination
 // eslint-disable-next-line no-new
 new Meteor.Pagination(Apis, {
