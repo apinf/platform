@@ -232,7 +232,7 @@ CatalogV1.swagger = {
         isPublic: {
           type: 'string',
           enum: ['true', 'false'],
-          example: 'ture/false',
+          example: 'true/false',
         },
       },
 
