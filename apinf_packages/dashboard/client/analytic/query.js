@@ -11,8 +11,9 @@ export default function queryForAnalyticPage (frontendPrefix, timeframe) {
   // Plus one day to include current day in selection
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
 
-  const oneTimePeriodAgo = moment().subtract(timeframe, 'days').format('YYYY-MM-DD');
-  const twoTimePeriodsAgo = moment().subtract(timeframe * 2, 'days').format('YYYY-MM-DD');
+  const oneTimePeriodAgo = moment().subtract(timeframe - 1, 'days').format('YYYY-MM-DD');
+  // eslint-disable-next-line no-mixed-operators
+  const twoTimePeriodsAgo = moment().subtract(2 * timeframe - 1, 'days').format('YYYY-MM-DD');
 
   // Delete a last slash
   const requestPath = frontendPrefix.slice(0, -1);
