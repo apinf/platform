@@ -10,7 +10,6 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
-import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';

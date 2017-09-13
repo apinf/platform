@@ -37,8 +37,8 @@ Template.branding.helpers({
     const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
     const options = {
       placeholder: message,
-      tags: true
-    }
+      tags: true,
+    };
     return options;
   },
   optionsAPi () {

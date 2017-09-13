@@ -33,7 +33,7 @@ Template.featuredApiBranding.helpers({
 
     if (haveFeaturedApis) {
       // Filter out featured apis from all apis
-      const featuredApis = Apis.find({ _id: { $in: branding.featuredApis }}).fetch()
+      const featuredApis = Apis.find({ _id: { $in: branding.featuredApis } }).fetch();
       return featuredApis;
     }
     return false;
