@@ -18,9 +18,7 @@ import 'select2-bootstrap-theme/dist/select2-bootstrap.css';
 
 Template.branding.onCreated(function () {
   const templateInstance = this;
-  templateInstance.autorun(() => {
-    templateInstance.subscribe('userManagedApisName');
-  });
+  templateInstance.subscribe('apisForBranding');
 });
 
 Template.branding.onRendered(() => {
@@ -37,17 +35,18 @@ Template.branding.helpers({
   },
   s2Opts () {
     const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
-    return { placeholder: message, tags: true };
+    const options = {
+      placeholder: message,
+      tags: true
+    }
+    return options;
   },
   optionsAPi () {
-    if (Template.instance().subscriptionsReady()) {
-      return Apis.find().map((api) => {
-        return {
-          label: api.name,
-          value: api._id,
-        };
-      });
-    }
-    return false;
+    return Apis.find().map((api) => {
+      return {
+        label: api.name,
+        value: api._id,
+      };
+    });
   },
 });

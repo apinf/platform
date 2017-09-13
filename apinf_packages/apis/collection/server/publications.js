@@ -30,7 +30,7 @@ Meteor.publish('latestPublicApis', (limit) => {
   );
 });
 
-Meteor.publish('userManagedApisName', () => {
+Meteor.publish('apisForBranding', () => {
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },

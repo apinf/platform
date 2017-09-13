@@ -16,7 +16,7 @@ Template.featuredApiBranding.onCreated(function () {
 
 
   // Subscribe to userManagedApisName publication
-  instance.subscribe('userManagedApisName');
+  instance.subscribe('apisForBranding');
 
   // Subscribe to organization apis
   instance.subscribe('organizationApis');
@@ -26,21 +26,15 @@ Template.featuredApiBranding.onCreated(function () {
 });
 
 Template.featuredApiBranding.helpers({
-  featuredApi () {
-    if (Template.instance().subscriptionsReady()) {
-      const branding = Branding.findOne();
-      const api = [];
-      if (branding.featuredApis && branding.featuredApis.length !== 0) {
-        // Retrieve last API Backends
-        for (const apiId of branding.featuredApis) {
-          const apiData = Apis.findOne(apiId);
-          if (apiData) {
-            api.push(apiData);
-          }
-        }
-        return api;
-      }
-      return false;
+  featuredApis () {
+    const branding = Branding.findOne();
+    // Check whether any APIs have been featured
+    const haveFeaturedApis = branding.featuredApis && branding.featuredApis.length !== 0;
+
+    if (haveFeaturedApis) {
+      // Filter out featured apis from all apis
+      const featuredApis = Apis.find({ _id: { $in: branding.featuredApis }}).fetch()
+      return featuredApis;
     }
     return false;
   },

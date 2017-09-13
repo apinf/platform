@@ -4,88 +4,90 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="branding">
-  <div class="container padded-container">
-    <div class="row">
-      {{> settingsMenu }}
+  {{# if Template.subscriptionsReady }}
+    <div class="container padded-container">
+      <div class="row">
+        {{> settingsMenu }}
 
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {{_ "branding_panel_title" }}
-            </h3>
-          </div>
-          <div class="panel-body">
-            {{# if branding }}
-              <div class="form-group">
-                <label for="branding-site-logo" class="control-label">
-                  {{_ "branding_projectLogoTitle_logoTitle" }}
-                </label>
-                <br>
-                {{> viewProjectLogo branding=branding }}
-                {{> uploadProjectLogo branding=branding }}
-              </div>
-              <div class="form-group">
-                <label for="branding-site-cover-photo" class="control-label">
-                  {{_ "branding_projectCoverPhotoTitle_coverPhotoTitle" }}
-                </label>
-                <br>
-                {{> viewCoverPhoto branding=branding }}
-                {{> uploadCoverPhoto branding=branding }}
-              </div>
-              {{# autoForm
-                id="brandingEdit"
-                type="update"
-                collection=brandingCollection
-                doc=branding }}
-              {{> afQuickField name='siteTitle' id="branding-site-title" }}
-              {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                {{_ "branding_panel_title" }}
+              </h3>
+            </div>
+            <div class="panel-body">
+              {{# if branding }}
+                <div class="form-group">
+                  <label for="branding-site-logo" class="control-label">
+                    {{_ "branding_projectLogoTitle_logoTitle" }}
+                  </label>
+                  <br>
+                  {{> viewProjectLogo branding=branding }}
+                  {{> uploadProjectLogo branding=branding }}
+                </div>
+                <div class="form-group">
+                  <label for="branding-site-cover-photo" class="control-label">
+                    {{_ "branding_projectCoverPhotoTitle_coverPhotoTitle" }}
+                  </label>
+                  <br>
+                  {{> viewCoverPhoto branding=branding }}
+                  {{> uploadCoverPhoto branding=branding }}
+                </div>
+                {{# autoForm
+                  id="brandingEdit"
+                  type="update"
+                  collection=brandingCollection
+                  doc=branding }}
+                {{> afQuickField name='siteTitle' id="branding-site-title" }}
+                {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
 
-              {{>  afQuickField name="featuredApis" type="select2" multiple=true select2Options=s2Opts options=optionsAPi }}
-              
-              {{> afQuickField name='colors' }}
-              {{> afQuickField name='siteFooter' id="site-footer" }}
-              {{> afQuickField name='footerCode' id="footer-code" }}
-              {{> afQuickField name='privacyPolicy' type="quill" }}
-              {{> afQuickField name='termsOfUse' type="quill" }}
-              {{> afQuickField name='socialMedia' }}
-              <a
-                 tabindex="0"
-                 class="pull-right"
-                 role="button"
-                 data-toggle="popover"
-                 data-placement="top"
-                 data-trigger="focus"
-                 data-content="{{_ 'branding_homeCustomBlock_helpIcon_text' }}">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-              {{> afQuickField name='homeCustomBlock' id="custom-html" }}
-              <div id="form-buttons">
-                <button id="branding-update-button" type="submit" class="btn btn-primary">
-                  {{_ "branding_update" }}
-                </button>
-              </div>
-              {{/ autoForm }}
-            {{ else }}
-              {{# autoForm
-                id="brandingAdd"
-                type="insert"
-                collection=brandingCollection }}
-              {{> afQuickField name='siteTitle' }}
-              {{> afQuickField name='siteSlogan' }}
-              {{> afQuickField name='siteFooter' }}
-              {{> afQuickField name='footerCode' }}
-              {{> afQuickField name='socialMedia' }}
-              <div id="form-buttons">
-                <button id="branding-save-button" type="submit" class="btn btn-primary">
-                  {{_ "branding_save" }}
-                </button>
-              </div>
-              {{/ autoForm }}
-            {{/ if }}
+                {{>  afQuickField name="featuredApis" type="select2" multiple=true select2Options=s2Opts options=optionsAPi }}
+                
+                {{> afQuickField name='colors' }}
+                {{> afQuickField name='siteFooter' id="site-footer" }}
+                {{> afQuickField name='footerCode' id="footer-code" }}
+                {{> afQuickField name='privacyPolicy' type="quill" }}
+                {{> afQuickField name='termsOfUse' type="quill" }}
+                {{> afQuickField name='socialMedia' }}
+                <a
+                   tabindex="0"
+                   class="pull-right"
+                   role="button"
+                   data-toggle="popover"
+                   data-placement="top"
+                   data-trigger="focus"
+                   data-content="{{_ 'branding_homeCustomBlock_helpIcon_text' }}">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </a>
+                {{> afQuickField name='homeCustomBlock' id="custom-html" }}
+                <div id="form-buttons">
+                  <button id="branding-update-button" type="submit" class="btn btn-primary">
+                    {{_ "branding_update" }}
+                  </button>
+                </div>
+                {{/ autoForm }}
+              {{ else }}
+                {{# autoForm
+                  id="brandingAdd"
+                  type="insert"
+                  collection=brandingCollection }}
+                {{> afQuickField name='siteTitle' }}
+                {{> afQuickField name='siteSlogan' }}
+                {{> afQuickField name='siteFooter' }}
+                {{> afQuickField name='footerCode' }}
+                {{> afQuickField name='socialMedia' }}
+                <div id="form-buttons">
+                  <button id="branding-save-button" type="submit" class="btn btn-primary">
+                    {{_ "branding_save" }}
+                  </button>
+                </div>
+                {{/ autoForm }}
+              {{/ if }}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  {{/ if }}
 </template>
