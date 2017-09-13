@@ -575,9 +575,42 @@ ManagementV1.addRoute('organizations/:id', {
         'socialMedia.linkedIn': bodyParams.linkedIn,
       };
 
+      let isValid;
+      // Validate name, if provided
+      if (bodyParams.name) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'name');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "name" is erroneous or missing',
+            },
+          };
+        }
+      }
+
+      // Validate url, if provided
+      if (bodyParams.url) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'url');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "url" is erroneous or missing',
+            },
+          };
+        }
+      }
+
       // Validate description, if provided
       if (bodyParams.description) {
-        const isValid = Organizations.simpleSchema().namedContext().validateOne(
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
           organizationData, 'description');
 
         if (!isValid) {
@@ -591,6 +624,117 @@ ManagementV1.addRoute('organizations/:id', {
         }
       }
 
+      // Validate contact person name, if provided
+      if (bodyParams.contact_name) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'contact.person');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_name" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate contact person phone, if provided
+      if (bodyParams.contact_phone) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'contact.phone');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_phone" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate contact person email, if provided
+      if (bodyParams.contact_email) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'contact.email');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_email" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate facebook address, if provided
+      if (bodyParams.facebook) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.facebook');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "facebook" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate instagram address, if provided
+      if (bodyParams.instagram) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.instagram');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "instagram" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate twitter address, if provided
+      if (bodyParams.twitter) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.twitter');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "twitter" is erroneous',
+            },
+          };
+        }
+      }
+
+      // Validate linkedIn address, if provided
+      if (bodyParams.linkedIn) {
+        isValid = Organizations.simpleSchema().namedContext().validateOne(
+          organizationData, 'socialMedia.linkedIn');
+
+        if (!isValid) {
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "linkedIn" is erroneous',
+            },
+          };
+        }
+      }
 
       // Update Organization document
       Organizations.update(organizationId, { $set: organizationData });
@@ -751,10 +895,10 @@ ManagementV1.addRoute('organizations/:id/managers', {
           },
         },
         401: {
-          description: 'Authentication is required',
+          description: 'Unauthorized',
         },
         403: {
-          description: 'User does not have permission',
+          description: 'Forbidden',
         },
         404: {
           description: 'Not Found',
@@ -908,10 +1052,10 @@ ManagementV1.addRoute('organizations/:id/managers', {
           },
         },
         401: {
-          description: 'Authentication is required',
+          description: 'Unauthorized',
         },
         403: {
-          description: 'User does not have permission',
+          description: 'Forbidden',
         },
         404: {
           description: 'Not Found',
@@ -1161,7 +1305,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           statusCode: 403,
           body: {
             status: 'fail',
-            message: 'You do not have permission for editing this Organization',
+            message: 'You do not have permission for this Organization',
           },
         };
       }
@@ -1261,10 +1405,10 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'Bad Request',
         },
         401: {
-          description: 'Authentication is required',
+          description: 'Unauthorized',
         },
         403: {
-          description: 'Forbidden operation',
+          description: 'Forbidden',
         },
         404: {
           description: 'Not Found',
@@ -1351,20 +1495,11 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Remove user from organization manager list
       Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
 
-      // Do not include password in response
-      const options = {};
-      const includeFields = {};
-      includeFields._id = 1;
-      includeFields.username = 1;
-      includeFields.emails = 1;
-      options.fields = includeFields;
-
       return {
-        statusCode: 200,
+        statusCode: 204,
         body: {
           status: 'success',
-          managerIds: organization.managerIds,
-          data: Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch(),
+          message: 'Manager removed successfully.',
         },
       };
     },
