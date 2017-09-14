@@ -77,13 +77,12 @@ const aclSchema = new SimpleSchema({
 const SettingsSchema = new SimpleSchema({
   topicPrefix: {
     type: String,
-    optional: true,
+    optional: false,
     unique: true,
     regEx: topicPrefixRegEx,
   },
   acl: {
     type: [aclSchema],
-    defaultValue: [],
     optional: true,
   },
 });

@@ -103,7 +103,7 @@ Meteor.methods({
     check(rules, Array);
 
     // topicPrefix initialization
-    let topicPrefix = false
+    let topicPrefix = false;
 
     let rulesMap = [];
     // Assign default HTTP EMQ-ACL path

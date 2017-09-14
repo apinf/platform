@@ -12,13 +12,12 @@ export const proxyBasePathRegEx = new RegExp(/^\/[\w\-\.\?\$\*\+\'\)\(/:#@!&,;=]
 // eslint-disable-next-line no-useless-escape
 export const apiBasePathRegEx = new RegExp(/^\/[\w\-\?\.\$\*\+\)\'\(/:#@!&,;=]*$/);
 
-/*******************************************************************
-* Topic is a string of segments joined by /. A segment is either:  *
-* 	-> a string of letters, numbers or literals - or _             *
-* 	-> Or just the literal +                                       *
-* In addition, the last segment can be a literal #.                *
-********************************************************************/
-// TopicPrefix
+/*
+	Topic is a string of segments joined by /. A segment is either:
+		a string of letters, numbers or literals - or _             
+		Or just the literal +                                       
+	In addition, the last segment can be a literal #.                
+*/
 export const topicPrefixRegEx = new RegExp(/^\/[\w-]+\/$/);
 // Topic must begin with alphanumeric. Allowed character is / and end with + or # delimited by /
 export const topicRegEx = new RegExp(/^(([\w-]+|\+)\/)*([\w-]+|\+|#)$/);
