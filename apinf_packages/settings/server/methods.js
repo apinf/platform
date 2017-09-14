@@ -10,8 +10,9 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 // APInf imports
-// eslint-disable-next-line max-len
-import { mailSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
+import {
+  mailSettingsValid,
+} from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Collection imports
 import Settings from '../collection';
