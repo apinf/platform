@@ -14,8 +14,6 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 // Collection imports
 import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 import Settings from '/apinf_packages/settings/collection';
-import Branding from '/apinf_packages/branding/collection';
-import Apis from '/apinf_packages/apis/collection';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance
@@ -64,13 +62,12 @@ Template.homeBody.helpers({
   },
   brandingFeaturedAPi () {
     const branding = this.branding;
-    return branding
-
+    return branding;
   },
   coverPhotoUrl () {
     // Get Branding collection
     const branding = this.branding;
-   
+
     // Check Branding collection and cover photo exist
     if (branding && branding.coverPhotoFileId) {
       // Get ID

@@ -39,13 +39,9 @@ Meteor.publish('apisForBranding', () => {
 
 Meteor.publish('apisById', (featuredApis) => {
   // Make sure featuredApis is an Array
-  check(featuredApis,Array);
+  check(featuredApis, Array);
   // Return cursor to latest API Backends
-  return Apis.find({
-    _id: {
-      $in: featuredApis
-    }
-  });
+  return Apis.find({ _id: { $in: featuredApis } });
 });
 // Publish collection for pagination
 // eslint-disable-next-line no-new

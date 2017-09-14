@@ -8,7 +8,6 @@ import { Template } from 'meteor/templating';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
-import Branding from '/apinf_packages/branding/collection';
 
 Template.homePageApis.onCreated(function () {
   // Reference to Template instance
@@ -17,7 +16,7 @@ Template.homePageApis.onCreated(function () {
   // check featured apis available or not
   const haveFeaturedApis = branding.featuredApis && branding.featuredApis.length !== 0;
   if (haveFeaturedApis) {
-    templateInstance.subscribe('apisById',branding.featuredApis);
+    templateInstance.subscribe('apisById', branding.featuredApis);
   }
 });
 
@@ -28,8 +27,8 @@ Template.homePageApis.helpers({
     const haveFeaturedApis = branding.featuredApis && branding.featuredApis.length !== 0;
     if (haveFeaturedApis) {
       // Fetch featured apis from all apis
-      let featuredApis = Apis.find().fetch();
-      return  featuredApis;
+      const featuredApis = Apis.find().fetch();
+      return featuredApis;
     }
     return false;
   },
