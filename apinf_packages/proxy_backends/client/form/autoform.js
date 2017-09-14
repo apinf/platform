@@ -85,12 +85,12 @@ AutoForm.hooks({
           });
         } else if (proxyBackend.type === 'emq') {
           // Cancel form if topicPrefix is not present
-          if (!proxyBackend.emq || !proxyBackend.emq.settings || !proxyBackend.emq.settings.topicPrefix) {
-              const errorMessage = TAPi18n.__('proxyBackendForm_topicPrefixRequired');
-              sAlert.error(errorMessage);
-              // Cancel form
-              form.result(false);
-          } 
+          if (!proxyBackend.emq || !proxyBackend.emq.settings.topicPrefix) {
+            const errorMessage = TAPi18n.__('proxyBackendForm_topicPrefixRequired');
+            sAlert.error(errorMessage);
+            // Cancel form
+            form.result(false);
+          }
 
           // Before insert iterate through ACL rules
           if (proxyBackend.emq.settings.acl && proxyBackend.emq.settings.acl.length !== 0) {
