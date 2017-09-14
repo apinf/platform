@@ -37,7 +37,7 @@ Meteor.publish('apisForBranding', () => {
   );
 });
 
-Meteor.publish('apisById', (featuredApis) => {
+Meteor.publish('apisId', (featuredApis) => {
   // Make sure featuredApis is an Array
   check(featuredApis, Array);
   // Return cursor to latest API Backends
