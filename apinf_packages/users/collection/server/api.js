@@ -43,13 +43,13 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Success',
+          description: 'Logged in successfully',
           schema: {
             $ref: '#/definitions/loginResponse',
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Missing or erroneous parameter.',
         },
         401: {
           description: 'Authentication is required',
@@ -99,7 +99,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Success',
+          description: 'Users found',
           schema: {
             type: 'object',
             properties: {
@@ -117,7 +117,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Missing or erroneous parameter.',
         },
         401: {
           description: 'Authentication is required',
@@ -157,7 +157,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         201: {
-          description: 'Created',
+          description: 'User account added successfully',
           schema: {
             type: 'object',
             properties: {
@@ -172,7 +172,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Missing or erroneous parameter.',
         },
         401: {
           description: 'Authentication is required',
@@ -207,7 +207,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Success',
+          description: 'User found',
           schema: {
             type: 'object',
             properties: {
@@ -228,7 +228,7 @@ ManagementV1.swagger.meta.paths = {
           description: 'User does not have permission.',
         },
         404: {
-          description: 'Not found',
+          description: 'User is not found',
         },
       },
       security: [
@@ -262,10 +262,10 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         204: {
-          description: 'User deleted successfully.',
+          description: 'User account removed successfully.',
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Missing or erroneous parameter.',
         },
         401: {
           description: 'Authentication is required',
@@ -274,7 +274,7 @@ ManagementV1.swagger.meta.paths = {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Not Found',
+          description: 'User is not found',
         },
       },
       security: [
@@ -309,7 +309,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Success',
+          description: 'User updates successfully',
           schema: {
             type: 'object',
             properties: {
@@ -324,7 +324,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Missing or erroneous parameter.',
         },
         401: {
           description: 'Authentication is required',
@@ -333,7 +333,7 @@ ManagementV1.swagger.meta.paths = {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Not Found',
+          description: 'User is not found',
         },
       },
       security: [
@@ -373,7 +373,7 @@ ManagementV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Success',
+          description: 'Users found',
           schema: {
             type: 'object',
             properties: {
@@ -391,7 +391,7 @@ ManagementV1.swagger.meta.paths = {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Missing or erroneous parameter.',
         },
         401: {
           description: 'Authentication is required',
@@ -772,7 +772,7 @@ ManagementV1.addCollection(Meteor.users, {
           statusCode: 204,
           body: {
             status: 'success',
-            message: 'User deleted',
+            message: 'User removed',
           },
         };
       },

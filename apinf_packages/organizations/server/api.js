@@ -44,7 +44,7 @@ ManagementV1.addRoute('organizations', {
       ],
       responses: {
         200: {
-          description: 'Returns a list of organizations',
+          description: 'List of organizations',
           schema: {
             type: 'object',
             properties: {
@@ -62,7 +62,7 @@ ManagementV1.addRoute('organizations', {
           },
         },
         400: {
-          description: 'Bad query parameters',
+          description: 'Bad Request. Erroneous or missing parameter.',
         },
       },
     },
@@ -155,7 +155,7 @@ ManagementV1.addRoute('organizations', {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Erroneous or missing parameter.',
           schema: {
             type: 'object',
             properties: {
@@ -415,7 +415,7 @@ ManagementV1.addRoute('organizations/:id', {
           },
         },
         404: {
-          description: 'Organization not found',
+          description: 'Organization is not found',
         },
       },
     },
@@ -426,7 +426,7 @@ ManagementV1.addRoute('organizations/:id', {
           statusCode: 404,
           body: {
             status: 'fail',
-            message: 'Organization ID not provided',
+            message: 'Organization with provided ID is not found',
           },
         };
       }
@@ -492,7 +492,7 @@ ManagementV1.addRoute('organizations/:id', {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Erroneous or missing parameter.',
           schema: {
             type: 'object',
             properties: {
@@ -770,7 +770,7 @@ ManagementV1.addRoute('organizations/:id', {
       ],
       responses: {
         204: {
-          description: 'Organization successfully removed.',
+          description: 'Organization removed successfully.',
         },
         401: {
           description: 'Authentication is required',
@@ -870,7 +870,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
       ],
       responses: {
         200: {
-          description: 'Returns list of organization\'s managers',
+          description: 'List of organization\'s managers',
           schema: {
             type: 'object',
             properties: {
@@ -895,13 +895,13 @@ ManagementV1.addRoute('organizations/:id/managers', {
           },
         },
         401: {
-          description: 'Unauthorized',
+          description: 'Authentication is required',
         },
         403: {
-          description: 'Forbidden',
+          description: 'User does not have permission',
         },
         404: {
-          description: 'Not Found',
+          description: 'Organization is not found',
           schema: {
             type: 'object',
             properties: {
@@ -1036,7 +1036,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Erroneous or missing parameter.',
           schema: {
             type: 'object',
             properties: {
@@ -1052,13 +1052,13 @@ ManagementV1.addRoute('organizations/:id/managers', {
           },
         },
         401: {
-          description: 'Unauthorized',
+          description: 'Authentication is required',
         },
         403: {
-          description: 'Forbidden',
+          description: 'User does not have permission',
         },
         404: {
-          description: 'Not Found',
+          description: 'Organization is not found',
           schema: {
             type: 'object',
             properties: {
@@ -1221,7 +1221,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Erroneous or missing parameter.',
           schema: {
             type: 'object',
             properties: {
@@ -1243,7 +1243,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           description: 'User does not have permission',
         },
         404: {
-          description: 'Not Found',
+          description: 'Organization is not found',
           schema: {
             type: 'object',
             properties: {
@@ -1390,8 +1390,8 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         ManagementV1.swagger.params.managerId,
       ],
       responses: {
-        200: {
-          description: 'Organization Manager successfully removed.',
+        204: {
+          description: 'Organization Manager removed successfully.',
           schema: {
             type: 'object',
             properties: {
@@ -1402,16 +1402,16 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Erroneous or missing parameter.',
         },
         401: {
-          description: 'Unauthorized',
+          description: 'Authentication is required',
         },
         403: {
-          description: 'Forbidden',
+          description: 'User does not have permission',
         },
         404: {
-          description: 'Not Found',
+          description: 'Organization is not found',
         },
       },
       security: [
@@ -1487,7 +1487,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
           statusCode: 404,
           body: {
             status: 'fail',
-            message: 'Bad parameter: Manager not found in Organization.',
+            message: 'Manager not found in Organization.',
           },
         };
       }
