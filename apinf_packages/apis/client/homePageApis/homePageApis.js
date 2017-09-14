@@ -18,7 +18,7 @@ Template.homePageApis.onRendered(function () {
     // check featured apis available or not
     const haveFeaturedApis = templateInstance.branding.featuredApis && templateInstance.branding.featuredApis.length !== 0;
     if (haveFeaturedApis) {
-      templateInstance.subscribe('apisId', templateInstance.branding.featuredApis);
+      templateInstance.subscribe('apiIds', templateInstance.branding.featuredApis);
     }
   });
 });
