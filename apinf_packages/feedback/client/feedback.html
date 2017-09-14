@@ -16,20 +16,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             &nbsp;
             {{_ "feedback_feedbackForm_button" }}
         </button>
-        <div id="feedback-visibility-options" class="btn-group pull-right">
-          <button 
-            type="button"
-            class="btn btn-info btn-xs"
-            id="mark-all-feedbacks-as-private">
-              {{_ "feedback_mark_all_feedbacks_as_private"}}
-          </button>
-          <button 
-            type="button"
-            class="btn btn-info btn-xs"
-            id="mark-all-feedbacks-as-public">
-            {{_ "feedback_mark_all_feedbacks_as_public"}}
-        </button>
-        </div>
+        {{#if api.currentUserCanManage}}
+          <div id="feedback-visibility-options" class="btn-group pull-right">
+            <button 
+              type="button"
+              class="btn btn-info btn-xs"
+              id="mark-all-feedbacks-as-private">
+                {{_ "feedback_mark_all_feedbacks_as_private"}}
+            </button>
+            <button 
+              type="button"
+              class="btn btn-info btn-xs"
+              id="mark-all-feedbacks-as-public">
+              {{_ "feedback_mark_all_feedbacks_as_public"}}
+            </button>
+          </div>
+        {{/if}}
       </div>
       {{/ if }}
       <h2 id="feedback-title" class="panel-title clearfix">

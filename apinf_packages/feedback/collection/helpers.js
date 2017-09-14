@@ -15,6 +15,12 @@ import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 import Feedback from './';
 
 Feedback.helpers({
+  currentUserCanChangeVisibility () {
+    // Get API infos to check if user can manage the feedback's api
+    const api = Apis.findOne({ _id: this.apiBackendId });
+
+    return api.currentUserCanManage();
+  },
   currentUserCanSee () {
     // Get current userId
     const userId = Meteor.userId();
