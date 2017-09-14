@@ -84,7 +84,7 @@ CatalogV1.addCollection(Apis, {
    -----
 
    Note! The field X-User-Id in message header can be used
-   * to contain necessary Manager's user ID with parameter managedAPIs provided
+   * to contain required Manager's user ID with parameter managedAPIs provided
    * to contain Admin user's ID, when indicated, that user is Admin
 
         `,
@@ -95,6 +95,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.params.skip,
           CatalogV1.swagger.params.limit,
           CatalogV1.swagger.params.lifecycle,
+          CatalogV1.swagger.params.managedAPIs,
         ],
         responses: {
           200: {
