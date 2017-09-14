@@ -14,11 +14,6 @@ Template.loginPlatforms.onCreated(function () {
   this.subscribe('loginPlatforms');
 });
 
-Template.loginPlatforms.onRendered(() => {
-  // Initialize all popovers on a page
-  $('[data-toggle="popover"]').popover();
-});
-
 Template.loginPlatforms.helpers({
   loginPlatformsCollection () {
     // Return reference to Settings collection, for AutoForm
