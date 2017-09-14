@@ -10,8 +10,10 @@ import { Meteor } from 'meteor/meteor';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // APInf imports
-// eslint-disable-next-line max-len
-import { githubSettingsValid, fiwareSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
+import {
+  githubSettingsValid,
+  fiwareSettingsValid,
+} from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Collection imports
 import LoginPlatforms from '../collection';
