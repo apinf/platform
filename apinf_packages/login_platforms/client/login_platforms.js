@@ -16,15 +16,15 @@ Template.loginPlatforms.onCreated(function () {
 
 Template.loginPlatforms.helpers({
   loginPlatformsCollection () {
-    // Return reference to Settings collection, for AutoForm
+    // Return reference to LoginPlatform collection, for AutoForm
     return LoginPlatforms;
   },
   formType () {
     if (LoginPlatforms.findOne()) {
-      // Updating existing Settings
+      // Updating existing LoginPlatform
       return 'update';
     }
-    // Editing Settings
+    // Editing LoginPlatform
     return 'insert';
   },
   editDoc () {
