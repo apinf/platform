@@ -1,0 +1,30 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="homePageApis">
+  {{# if Template.subscriptionsReady }}
+    {{# if homePageApis }}
+  		<h2 class="feature-section-heading text-center">
+  	    {{_ "homePageApis_Heading" }}
+  	  </h2>
+    	{{> apiCatalogGrid apis=homePageApis }}
+    {{ else }}
+    	{{# if isInRole 'admin'}}
+  	  	<h2 class="feature-section-heading text-center">
+  		    {{_ "homePageApis_Heading" }}
+  		  </h2>
+  	    {{_ "homePageApis_Message" }}
+  	  {{/ if }}
+  	  {{> latestPublicApis limit = 8 }}
+      <div class="text-center">
+        <a href="{{ pathFor 'apiCatalog' }}"
+          class="btn btn-primary btn-lg"
+          id="get-more-apis">
+          {{_ "homeBody_getMoreApis_text" }}
+        </a>
+      </div>
+    {{/ if }}
+  {{/ if }}
+</template>

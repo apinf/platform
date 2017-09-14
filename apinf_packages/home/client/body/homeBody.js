@@ -14,19 +14,21 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 // Collection imports
 import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 import Settings from '/apinf_packages/settings/collection';
+import Branding from '/apinf_packages/branding/collection';
+import Apis from '/apinf_packages/apis/collection';
 
 Template.homeBody.onCreated(function () {
   // Get reference to template instance
-  const instance = this;
+  const templateInstance = this;
 
   // Subscribe to settings publication
-  instance.subscribe('singleSetting', 'mail.enabled');
+  templateInstance.subscribe('singleSetting', 'mail.enabled');
   // Subscribe to CoverPhoto collection
-  instance.subscribe('coverPhoto');
+  templateInstance.subscribe('coverPhoto');
   // Subscribe to Apis , Organizations and Users collection for statistic block
-  instance.subscribe('apisCount');
-  instance.subscribe('organizationsCount');
-  instance.subscribe('usersCount');
+  templateInstance.subscribe('apisCount');
+  templateInstance.subscribe('organizationsCount');
+  templateInstance.subscribe('usersCount');
 });
 
 Template.homeBody.onRendered = function () {
@@ -60,10 +62,15 @@ Template.homeBody.helpers({
 
     return mailEnabled;
   },
+  brandingFeaturedAPi () {
+    const branding = this.branding;
+    return branding
+
+  },
   coverPhotoUrl () {
     // Get Branding collection
     const branding = this.branding;
-
+   
     // Check Branding collection and cover photo exist
     if (branding && branding.coverPhotoFileId) {
       // Get ID

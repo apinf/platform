@@ -22,7 +22,6 @@ import Apis from '../';
 Meteor.publish('latestPublicApis', (limit) => {
   // Make sure limit is a Number
   check(limit, Number);
-
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },
@@ -38,6 +37,16 @@ Meteor.publish('apisForBranding', () => {
   );
 });
 
+Meteor.publish('apisById', (featuredApis) => {
+  // Make sure featuredApis is an Array
+  check(featuredApis,Array);
+  // Return cursor to latest API Backends
+  return Apis.find({
+    _id: {
+      $in: featuredApis
+    }
+  });
+});
 // Publish collection for pagination
 // eslint-disable-next-line no-new
 new Meteor.Pagination(Apis, {

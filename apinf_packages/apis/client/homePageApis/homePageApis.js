@@ -10,31 +10,26 @@ import { Template } from 'meteor/templating';
 import Apis from '/apinf_packages/apis/collection';
 import Branding from '/apinf_packages/branding/collection';
 
-Template.featuredApiBranding.onCreated(function () {
+Template.homePageApis.onCreated(function () {
   // Reference to Template instance
-  const instance = this;
-
-
-  // Subscribe to userManagedApisName publication
-  instance.subscribe('apisForBranding');
-
-  // Subscribe to organization apis
-  instance.subscribe('organizationApis');
-
-  // Subscribe to organizations basic details
-  instance.subscribe('allOrganizationBasicDetails');
+  const templateInstance = this;
+  const branding = this.data.branding;
+  // check featured apis available or not
+  const haveFeaturedApis = branding.featuredApis && branding.featuredApis.length !== 0;
+  if (haveFeaturedApis) {
+    templateInstance.subscribe('apisById',branding.featuredApis);
+  }
 });
 
-Template.featuredApiBranding.helpers({
-  featuredApis () {
-    const branding = Branding.findOne();
+Template.homePageApis.helpers({
+  homePageApis () {
+    const branding = this.branding;
     // Check whether any APIs have been featured
     const haveFeaturedApis = branding.featuredApis && branding.featuredApis.length !== 0;
-
     if (haveFeaturedApis) {
-      // Filter out featured apis from all apis
-      const featuredApis = Apis.find({ _id: { $in: branding.featuredApis } }).fetch();
-      return featuredApis;
+      // Fetch featured apis from all apis
+      let featuredApis = Apis.find().fetch();
+      return  featuredApis;
     }
     return false;
   },
