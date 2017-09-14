@@ -60,10 +60,6 @@ Template.homeBody.helpers({
 
     return mailEnabled;
   },
-  brandingFeaturedAPi () {
-    const branding = this.branding;
-    return branding;
-  },
   coverPhotoUrl () {
     // Get Branding collection
     const branding = this.branding;
