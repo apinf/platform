@@ -29,8 +29,8 @@ Template.homePageApis.helpers({
     const templateInstance = Template.instance();
     const branding = templateInstance.branding;
     // Check whether any APIs have been featured
-    const haveFeaturedApis = branding && 
-      branding.featuredApis && 
+    const haveFeaturedApis = branding &&
+      branding.featuredApis &&
       branding.featuredApis.length !== 0;
     if (haveFeaturedApis) {
       // Fetch featured apis from all apis
