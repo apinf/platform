@@ -319,7 +319,7 @@
     "errorsStatisticTable_columnTitle_status": "Tilakoodi:",
     "errorsStatisticTable_columnTitle_calls": "Kutsut",
     "errorsStatisticTable_columnTitle_path": "Pyynn\u00f6n polku",
-    "errorsStatisticTable_text_showOfErrors": "N\u00e4yt\u00e4 __count__ __all__ virheist\u00e4",
+    "errorsStatisticTable_text_showOfErrors": "N\u00e4yt\u00e4 __count__ __all__ virheest\u00e4",
     "errorsStatisticTable_lintText_downloadFile": "Lataa kaikki virheet",
     "favourite_Add": "Lis\u00e4\u00e4 kirjanmerkki",
     "favourite_Remove": "Poista kirjanmerkki",
