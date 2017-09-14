@@ -40,16 +40,16 @@ CatalogV1.swagger.meta.paths = {
       ],
       responses: {
         200: {
-          description: 'Success',
+          description: 'Logged in successfully',
           schema: {
             $ref: '#/definitions/loginResponse',
           },
         },
         400: {
-          description: 'Bad Request',
+          description: 'Bad Request. Erroneous or missing parameter.',
         },
         401: {
-          description: 'Unauthorized',
+          description: 'Authentication is required',
         },
       },
     },
@@ -98,7 +98,7 @@ CatalogV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            description: 'Returns list of public APIs',
+            description: 'List of APIs',
             schema: {
               type: 'object',
               properties: {
@@ -116,7 +116,7 @@ CatalogV1.addCollection(Apis, {
             },
           },
           400: {
-            description: 'Bad Request',
+            description: 'Bad Request. Erroneous or missing parameter.',
           },
         },
       },
@@ -238,13 +238,13 @@ CatalogV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            description: 'Returns API',
+            description: 'API found successfully',
             schema: {
               type: 'object',
               properties: {
                 status: {
                   type: 'string',
-                  example: 'Success',
+                  example: 'success',
                 },
                 data: {
                   $ref: '#/definitions/apiResponse',
@@ -253,7 +253,7 @@ CatalogV1.addCollection(Apis, {
             },
           },
           404: {
-            description: 'Not Found',
+            description: 'API is not Found',
           },
         },
       },
@@ -299,7 +299,7 @@ CatalogV1.addCollection(Apis, {
             },
           },
           400: {
-            description: 'Bad Request',
+            description: 'Bad Request. Erroneous or missing parameter.',
           },
           401: {
             description: 'Authentication is required',
@@ -511,13 +511,13 @@ CatalogV1.addCollection(Apis, {
             },
           },
           400: {
-            description: 'Bad Request',
+            description: 'Bad Request. Erroneous or missing parameter.',
           },
           401: {
             description: 'Authentication is required',
           },
           403: {
-            description: 'No permission',
+            description: 'User does not have permission',
           },
           404: {
             description: 'API is not found',
@@ -662,10 +662,10 @@ CatalogV1.addCollection(Apis, {
             description: 'Authentication is required',
           },
           403: {
-            description: 'No permission',
+            description: 'User does not have permission',
           },
           404: {
-            description: 'API not found',
+            description: 'API is not found',
           },
         },
         security: [
