@@ -1,72 +1,577 @@
 {
+    "aboutApinf_documentation": "Dokumentaatio",
+    "aboutApinf_contributors": "Tekij\u00e4t",
+    "aboutApinf_copyright": "Tekij\u00e4noikeus",
+    "aboutApinf_copyrightLicense": "Tekij\u00e4noikeus ja lisenssi",
+    "aboutApinf_createdBy": "Kehitt\u00e4nyt",
+    "aboutApinf_credits": "Kiitokset",
+    "aboutApinf_license": "Lisenssi",
+    "aboutApinf_doneButton_text": "Valmis",
+    "aboutApinf_intro": "APInf on avoimella l\u00e4hdekoodilla toteutettu rajapintojen hallintaj\u00e4rjestelm\u00e4.",
+    "aboutApinf_homepage": "Kotisivu",
+    "aboutApinf_openSource": "Avointa l\u00e4hdekoodia",
+    "aboutApinf_projectLinks": "Linkit projektiin",
+    "aboutApinf_projectVersions": "Versiotiedot",
+    "aboutApinf_sourcecode": "L\u00e4hdekoodi",
+    "aboutApinf_support": "Tukea",
+    "aboutApinf_title": "APInfista",
+    "account_delete_button_text": "Poista tili",
+    "account_delete_warning": "Toimintoa ei voi peruuttaa",
+    "account_delete_title": "Poista tili",
+    "account_details": "K\u00e4ytt\u00e4j\u00e4tilin tiedot",
+    "addApi_button_text": "Lis\u00e4\u00e4 rajapinta",
+    "addApi_header": "Lis\u00e4\u00e4 rajapinta",
+    "addApiBacklogItem_addBacklogItem_button": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
+    "addApiBacklogItem_modalTitle": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
+    "addBackend_simple_backendInformation_helptext": "Sy\u00f6t\u00e4 rajapintapalvelimen osoite ja porttinumero. Esim. google.com:80",
+    "addBackend_simple_baseInformation_helptext": "Sy\u00f6t\u00e4 rajapinnan nimi.",
+    "addBackend_simple_prefixInformation_helptext": "Sy\u00f6t\u00e4 frontend- ja backend-polut, laita alkuun kauttaviiva '\/'",
+    "addOrganizationManagerForm_title": "Lis\u00e4\u00e4 organisaation yll\u00e4pit\u00e4j\u00e4",
+    "addOrganizationManagerForm_description": "Kun rajapinta on yhdistetty organisaatioon, organisaation yll\u00e4pit\u00e4j\u00e4ll\u00e4 on samat oikeudet kuin rajapinnan omistajalla muokata rajapintaa ja poistaa rajapinta.",
+    "addOrganizationManagerForm_button": "Lis\u00e4\u00e4",
+    "organizationManagerForm_managerAlreadyExist_errorText": "K\u00e4ytt\u00e4j\u00e4 on jo t\u00e4m\u00e4n organisaation yll\u00e4pit\u00e4j\u00e4.",
+    "apiAnalyticPageBody_warningText_noData": "Rajapintojen k\u00e4ytt\u00f6tilastoja ei ole saatavilla.",
+    "apiAnalyticPageBody_text_elasticsearchError": "Jokin ep\u00e4onnistui. Yrit\u00e4 uudelleen.",
+    "apiAnalyticPageHeader_labelText_proxyName": "V\u00e4lityspalvelin: __name__",
+    "apiAnalyticView_text_requestsCount": "__count__ pyynt\u00f6",
+    "apiAnalyticView_text_requestsCount_plural": "__count__ pyynt\u00f6\u00e4",
+    "apiAnalyticView_text_responseTime": "__time__ ms",
+    "apiAnalyticView_text_usersCount": "__count__ k\u00e4ytt\u00e4j\u00e4",
+    "apiAnalyticView_text_usersCount_plural": "__count__ k\u00e4ytt\u00e4j\u00e4\u00e4",
+    "apiAnalyticView_chartTitle_apiRequests": "Rajapintapyynn\u00f6t",
+    "apiAnalyticView_chartTitle_medianResponseTime": "Vasteaikojen mediaani",
+    "apiAnalyticView_chartTitle_uniqueUsers": "Rajapinnan k\u00e4ytt\u00e4ji\u00e4",
+    "apiAnalyticView_timelineChartTitle_requests": "Rajapintapyynt\u00f6jen aikajana",
+    "apiAnalyticView_timelineChartTitle_time": "Kuvaaja rajapinnan vasteajoista",
+    "apiAuthorizedUsersList_ header_text": "Sallitut k\u00e4ytt\u00e4j\u00e4t",
+    "apiBackend_Status_Checking": "Rajapinnan tilaa tarkistetaan. Odota hetki...",
+    "apiBackend_Status_Title": "Tila",
+    "apiBackend_Status_Updated": "P\u00e4ivitetty:",
+    "apiBackend_Usage_Instructions_Headline": "Kutsu rajapintaaa osoitteesta:",
+    "apiBackend_Usage_Instructions_Note": "Huomaa:",
+    "apiBackend_Usage_Instructions_Note_Text": "L\u00f6yd\u00e4t rajapinta-avaimesi rajapinnan profiilisivulta.",
+    "apiBackend_Usage_Instructions_Profile_Page_Link": "Tarkastele profiilia.",
+    "apiBackendRating_anonymousError": "Kirjaudu pisteytt\u00e4\u00e4ksesi t\u00e4m\u00e4 rajapinta.",
+    "apiBackends_Add_API_Title": "Lis\u00e4\u00e4 rajapinta",
+    "apiBackends_AdvancedRequestsRewriting": "Monipuolinen pyynt\u00f6jen uudelleenkirjoitus",
+    "apiBackends_AdvancedRequestsRewriting_Help": "Muokkaa Umbrellan front-endiin tulevia pyynt\u00f6j\u00e4 ennen kuin ne vied\u00e4\u00e4n rajapintasi taustaj\u00e4rjestelm\u00e4\u00e4n.",
+    "apiBackends_AdvancedSettings": "Lis\u00e4asetukset",
+    "apiBackends_Backend_Help": "M\u00e4\u00e4rit\u00e4 rajapintapalvelin. Voit antaa useamman palvelimen tiedot hy\u00f6dynt\u00e4\u00e4ksesi kuormantasausta.",
+    "apiBackends_Backend_Title": "Taustaj\u00e4rjestelm\u00e4",
+    "apiBackends_DocumentationTitle": "Dokumentaatio",
+    "apiBackends_Documentation_Link": "Linkki dokumentaatioon",
+    "apiBackends_Edit_API_Title": "Muokkaa rajapintaa",
+    "apiBackends_GlobalRequestSettings_Title": "Yleiset pyynt\u00f6asetukset",
+    "apiBackends_HostRewrite": "uudelleenkirjoita muotoon",
+    "apiBackends_Host_Title": "Is\u00e4nt\u00e4kone",
+    "apiBackends_Matching_Title": "Vastaavat URL-etuliitteet",
+    "apiBackends_Matching_Title_Help": "Mitk\u00e4 URL-etuliitteet tulisi reititt\u00e4\u00e4 t\u00e4h\u00e4n rajapinnan taustaj\u00e4rjestelm\u00e4\u00e4n?",
+    "apiBackends_Submit": "L\u00e4het\u00e4",
+    "apiBackends_Title_Help": "Rajapinnan nimi",
+    "apiBacklog_addBacklogItem_buttonText": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
+    "apiBacklogList_noApiBacklogItemsFound": "Ei l\u00f6ydetty teht\u00e4vi\u00e4 t\u00e4lle rajapinnalle.",
+    "apiBacklog_mainTitle": "Kehitysjono",
+    "apiBacklogItems_priorityText_High": "Korkea",
+    "apiBacklogItems_priorityText_Middle": "Normaali",
+    "apiBacklogItems_priorityText_None": "Ei m\u00e4\u00e4ritelty",
+    "apiCard_labelText_private": "yksityinen",
     "apiCard_pinTooltip_user": "Valitse rajapinta Suositelluksi rajapinnaksi tai poista valinta",
-    "apiCardPin_buttonText_unpin": "Poista valinta Suositelluksi rajapinnaksi klikkaamalla nuppineulaa",
+    "apiCard_tooltipTitle_averageRating": "Arvostelujen keskiarvo",
     "apiCardPin_buttonText_pin": "Valitse rajapinta Suositelluksi rajapinnaksi klikkaamalla nuppineulaa",
+    "apiCardPin_buttonText_unpin": "Poista valinta Suositelluksi rajapinnaksi klikkaamalla nuppineulaa",
     "apiCardPin_featuredSuccessfully": "Rajapinta lis\u00e4tty Suositeltuihin rajapintoihin",
     "apiCardPin_featuredListAlreadyFull": "Suositeltujen rajapintojen maksimim\u00e4\u00e4r\u00e4 jo t\u00e4ynn\u00e4!",
     "apiCardPin_unfeaturedSuccessfully": "Rajapinta poistettu Suositelluista rajapinnoista",
+    "apiCatalog_apisCount": "(__count__ rajapinta)",
+    "apiCatalog_apisCount_plural": "(__count__ rajapintaa)",
+    "apiCatalog_noApis_Found": "Ei l\u00f6ytynyt yht\u00e4\u00e4n rajapintaa, jolla olisi valittu elinkaaren tila.",
+    "apiSettingsDelete_deleteButton": "Poista",
+    "apiDetails_baseUrl_headingText": "Rajapinnan osoite",
+    "apiDetails_description_headingText": "Kuvaus",
+    "apiDetails_usageInstructions_headingText": "Tehd\u00e4ksesi kutsuja t\u00e4h\u00e4n rajapintaan voit:",
+    "apiDetails_usageInstructions_requestHeaders_text": "kutsua rajapintaa antamalla avaimesi pyynn\u00f6n otsikkotiedoissa:",
+    "apiDetails_usageInstructions_disableApiKeyText": "K\u00e4yt\u00e4 osoitetta:",
+    "apiDetails_usageInstructions_noApiKeyText": "K\u00e4yt\u00e4 rajapinta-avainta. Klikkaa \"Hae rajapinta-avain\" -nappia saadaksesi avaimen.",
+    "apiDetailsForm_text_updateInformation": "Rajapinnan tietoja p\u00e4ivitettiin",
+    "apiDocumentationEditor_notAvailable": "Dokumentaation muokkausohjelma ei ole saatavilla.",
+    "apiDocumentation_APICall_Warning_Message": "Swaggerista tehdyt rajapintakutsut (PUT, POST ja DELETE) ovat todellisia kutsuja.",
+    "apiDocumentation_APICall_Warning_Title": "Varoitus!",
+    "apiDocumentation_buttonText_closeEditor": "Sulje editori",
+    "apiDocumentation_buttonText_openEditor": "Avaa editori",
+    "apiDocumentation_Link_Title": "Linkki",
+    "apiDocumentation_manageDocumentation_buttonText": "Hallinnoi",
+    "apiDocumentation_No_Link_Manager_Message": "Voit lis\u00e4t\u00e4 yhden k\u00e4ytt\u00e4en Hallinnoi rajapintaa -toimintoa.",
+    "apiDocumentation_No_Swagger_Manager_Message": "Voit lis\u00e4t\u00e4 yhden k\u00e4ytt\u00e4en Hallinnoi rajapintaa -toimintoa.",
+    "apiDocumentation_Title": "Dokumentaatio",
+    "apiDocumentation_Viewer_Title": "Katselu",
+    "apiDocumentation_sdkGenerateButton": "Luo SDK",
+    "apiDocumentation_tooltipSDKGeneratorButton": "Mik\u00e4li Swagger-tiedosto on kelvollinen, voit ladata haluamasi ohjelmointikielen SDK:n k\u00e4ytt\u00e4m\u00e4ll\u00e4 t\u00e4t\u00e4 velhoa",
+    "apiExport_json_button": "Lataa .json",
+    "apiExport_yaml_button": "Lataa .yaml",
+    "apiExport_api_title": "Lataa rajapintakonfiguraatio",
+    "apiExport_api_description": "Lataa rajapintakonfiguraatio JSON- tai YAML-muodossa",
+    "apiExport_proxy_title": "Lataa v\u00e4lityspalvelimen konfiguraatio",
+    "apiExport_proxy_description": "Lataa rajapintakonfiguraatio JSON- tai YAML-muodossa",
+    "apiExport_title": "Lataa",
+    "apiFilteredBy_text_filteredBy": "Suodatin: \"__tag__\"",
+    "apiFilteredBy_buttonText_clear": "Tyhjenn\u00e4 kaikki",
+    "apisFilterForm_buttonText_filter": "Suodata",
+    "apisFilterForm_buttonText_clear": "Tyhjenn\u00e4",
+    "apisFilterForm_labelText_lifecycle": "Elinkaaren vaihe",
+    "apisFilterForm_optionText_selectOne": "(Valitse yksi)",
+    "apisFilterIcon_tooltipText_filter": "Suodatusvalinnat",
+    "apiIntro_doneLabel": "Valmis",
+    "apiIntro_nextLabel": "Seuraava",
+    "apiIntro_previousLabel": "Edellinen",
+    "apiIntro_steps_backlog_intro": "Lis\u00e4\u00e4 rajapintaasi suunnitellut piirteet ja niiden t\u00e4rkeysj\u00e4rjestys kehitt\u00e4j\u00e4yhteis\u00f6si n\u00e4ht\u00e4v\u00e4ksi.",
+    "apiIntro_steps_details_intro": "Sis\u00e4lt\u00e4\u00e4 rajapinnan perustiedot ja ohjeita rajapinnan k\u00e4ytt\u00e4miseen.",
+    "apiIntro_steps_documentation_intro": "Lataa ja jaa rajapintaasi kuvaavaa dokumentaatiota. Kehitt\u00e4j\u00e4t voivat ladata esimerkkikoodia haluamallaan ohjelmointikielell\u00e4.",
+    "apiIntro_steps_export_intro": "Lataa rajapintasi asetukset .JSON- tai .YAML-tiedostona varmuuskopiointia tai siirtoa varten.",
+    "apiIntro_steps_feedback_intro": "Rajapintasi k\u00e4ytt\u00e4j\u00e4t voivat j\u00e4tt\u00e4\u00e4 palautetta ja virheilmoituksia tai tehd\u00e4 toiminnallisuuspyynt\u00f6j\u00e4.",
+    "apiIntro_steps_metadata_intro": "Anna rajapintaasi liittyvi\u00e4 tausta- ja kuvaustietoja.",
+    "apiIntro_steps_proxy_intro": "K\u00e4yt\u00e4 t\u00e4t\u00e4 v\u00e4lilehte\u00e4 liitt\u00e4\u00e4ksesi rajapintasi v\u00e4lityspalvelimeen. V\u00e4lityspalvelimen avulla saat k\u00e4ytt\u00f6\u00f6si erilaisia rajapintahallintaan kuuluvia piirteit\u00e4, kuten analytiikan ja API-avaimet.",
+    "apiIntro_steps_settings_intro": "Muokkaa rajapintasi asetuksia t\u00e4ll\u00e4 v\u00e4lilehdell\u00e4. T\u00e4\u00e4ll\u00e4 voit my\u00f6s poistaa rajapintasi.",
+    "apiIntro_steps_welcome_intro": "Tervetuloa",
+    "apiIntro_skipLabel": "J\u00e4t\u00e4 v\u00e4liin",
+    "apiIntro_quickTour_button_text": "Tutustumiskierros",
+    "apiKeys_label": "Rajapinta-avain",
+    "apiKeys_getApiKeyButton": "Hae rajapinta-avain",
+    "apiKeys_copyButtonText": "Kopioi rajapinta-avain",
+    "apiKeys_copySuccessful": "Rajapinta-avain kopioitu leikep\u00f6yd\u00e4lle.",
+    "apiKeys_getApiKeyButton_success": "Rajapinta-avain haettu onnistuneesti.",
+    "apiKeys_getApiKeyButton_processing": "Prosessoidaan...",
+    "apiLifecycleStatus_labelText_development": "Kehitys",
+    "apiLifecycleStatus_labelText_deprecated": "K\u00e4yt\u00f6st\u00e4 poistettu",
+    "apiLifecycleStatus_labelText_design": "Suunnittelu",
+    "apiLifecycleStatus_labelText_production": "Tuotanto",
+    "apiLifecycleStatus_labelText_testing": "Testaus",
+    "apiLifecycleStatus_labelText_unknown": "Tuntematon",
+    "apiLogo_resumable_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
+    "apiLogo_resumable_successfully_uploaded": "Logon lataus onnistui!",
+    "apiMetadata_dateInvalid": "Loppup\u00e4iv\u00e4n pit\u00e4\u00e4 olla aloitusp\u00e4iv\u00e4n j\u00e4lkeen",
+    "apiOrganization_disconnectButton": "Katkaise yhteys",
+    "apiOrganization_panelTitle": "Yhdist\u00e4 rajapinta organisaatioon",
+    "apiRemoveAuthorizedUser_cancelButton_text": "Peruuta",
+    "apiRemoveAuthorizedUser_confirmation_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n sallitun k\u00e4ytt\u00e4j\u00e4n?",
+    "apiRemoveAuthorizedUser_modalTitle": "Poista sallittu k\u00e4ytt\u00e4j\u00e4",
+    "apiRemoveAuthorizedUser_removeButton_text": "Poista",
+    "apiSettingsDelete_apiText": "Toimintoa ei voi peruuttaa. Rajapinta ja kaikki siihen liittyv\u00e4 tieto, kuten metadata, dokumentaatio, teht\u00e4v\u00e4lista ja palaute, poistetaan.",
+    "apiSettingsDelete_apiTitle": "Poista rajapinta",
+    "apiSettingsDelete_panelTitle": "Poista",
+    "apiSettingsDetails_title": "Tiedot",
+    "apiSettingsDetails_saveButton": "Tallenna",
+    "apiSettingsDetails_uploadLogo_heading": "Lis\u00e4\u00e4 logo",
+    "apiSettingsDetails_uploadLogoText": "Voit lis\u00e4t\u00e4 logon rajapinnallesi. Logo n\u00e4kyy rajapintaluettelossa ja rajapinnan profiilisivulla.",
+    "apiSettingsVisibility_title": "N\u00e4kyvyys",
+    "apiSettingsVisibility_heading": "Muuta rajapinnan n\u00e4kyvyytt\u00e4",
+    "apiSettingsVisibility_text": "Muuta rajapinta julkiseksi tai yksityiseksi",
     "apiSortingToolbar_labelText_sortBy": "Lajitteluperuste",
     "apiSortingToolbar_sortMenuOptions_names": "Nimet (A-\u00d6)",
     "apiSortingToolbar_sortMenuOptions_newestCreated": "Uusin",
     "apiSortingToolbar_sortMenuOptions_bookmarks": "Kirjanmerkit",
     "apiSortingToolbar_sortMenuOptions_ratings": "Arvostelut",
+    "apiAuthorizedUsersList_authorizedUsers": "Anna yksitt\u00e4isille k\u00e4ytt\u00e4jille oikeus n\u00e4hd\u00e4 yksityiseksi merkitty rajapintasi.",
+    "api_backend_rating_anonymous": "Kirjaudu sis\u00e4\u00e4n pisteytt\u00e4\u00e4ksesi rajapinta.",
+    "apinf_apiumbrellauser_error": "Virhe: K\u00e4ytt\u00e4j\u00e4n luominen v\u00e4lityspalvelimeen ei onnistunut",
+    "apinf_noproxy_error": "Virhe: V\u00e4lityspalvelinta ei l\u00f6ytynyt",
+    "apinf_noproxybackend_error": "Virhe: V\u00e4lityspalvelimeen liitetty\u00e4 rajapintaa ei l\u00f6ytynyt",
+    "apinf_usernotloggedin_error": "Kirjautunutta k\u00e4ytt\u00e4j\u00e4\u00e4 ei l\u00f6ytynyt.",
+    "apiMonitoring_panelTitle_Monitoring": "Rajapinnan valvonta",
+    "apiMonitoring_helpIcon_text": "Anna polku p\u00e4\u00e4tepisteeseen (endpoint), johon voidaan tehd\u00e4 rajapintakutsuja. Rajapinnan valvonta suoritetaan tekem\u00e4ll\u00e4 HTTP-pyynt\u00f6j\u00e4. Voit k\u00e4ytt\u00e4\u00e4 ainoastaan GET-metodia.",
+    "apiMonitoring_saveButton_text": "Tallenna",
+    "apiMonitoringForm_successMessage": "Rajapinnan valvonnan asetukset on tallennettu!",
+    "apiMonitoringForm_errorMessage": "Valvottava p\u00e4\u00e4tepiste vaaditaan",
+    "apiProxy_headerText": "Rajapinnan v\u00e4lityspalvelinasetukset",
+    "apiUserAuthorizationForm_addButton_text": "Lis\u00e4\u00e4 sallittu k\u00e4ytt\u00e4j\u00e4",
+    "apiUserAuthorizationForm_header_text": "Lis\u00e4\u00e4 sallittuja k\u00e4ytt\u00e4ji\u00e4",
+    "medianResponseTime_pointTitle_time": "Aika, ms",
+    "authorizedUserForm_emailNotRegistered_errorText": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta ei ole viel\u00e4 rekister\u00f6ity j\u00e4rjestelm\u00e4\u00e4n.",
+    "authorizedUserForm_success_message": "K\u00e4ytt\u00e4j\u00e4 lis\u00e4tty sallittuihin k\u00e4ytt\u00e4jiin",
+    "backlogItem_addedByYou": "Lis\u00e4nnyt: nykyinen k\u00e4ytt\u00e4j\u00e4",
+    "backlogItem_editButton_text": "Muokkaa",
+    "backlogItem_deleteButton_text": "Poista",
+    "bookmark_buttonText_bookmark": "Kirjanmerkki",
+    "bookmark_buttonText_unbookmark": "Poista kirjanmerkki",
     "branding_homeCustomBlock_helpIcon_text": [
         "T\u00e4m\u00e4n kent\u00e4n avulla voit lis\u00e4t\u00e4 teksti\u00e4 tai HTML\/CSS-koodia, joka n\u00e4ytet\u00e4\u00e4n etusivulla.",
         "",
         "Lis\u00e4ksi voit lis\u00e4t\u00e4 HTML-sis\u00e4lt\u00f6\u00e4 kuten kuvia, sosiaalisen median liit\u00e4nn\u00e4isen tai Youtube-videon."
     ],
+    "branding_panel_title": "Projektin br\u00e4nd\u00e4ys",
+    "branding_projectLogoTitle_logoTitle": "Sivun logo",
+    "branding_projectCoverPhotoTitle_coverPhotoTitle": "Kansikuva",
+    "branding_save": "Tallenna",
     "branding_successMessage": "Br\u00e4nd\u00e4ysasetukset tallennettu",
+    "branding_update": "P\u00e4ivit\u00e4",
+    "catalogue_bookmarkTooltip_nonUser": "Kirjanmerkkien lukum\u00e4\u00e4r\u00e4. Kirjaudu sis\u00e4\u00e4n lis\u00e4t\u00e4ksesi kirjanmerkin.",
+    "catalogue_BookmarkTooltip_user": "Lis\u00e4\u00e4 rajapinta kirjanmerkkeihin",
+    "catalogue_paginationButtons_next": "Seuraava",
+    "catalogue_paginationButtons_previous": "Edellinen",
+    "catalogue_toolbar_filterOptions_myApis": "Rajapintani",
+    "catalogue_toolbar_filterOptions_myBookmarks": "Kirjanmerkkini",
+    "catalogue_toolbar_filterOptions_showAll": "N\u00e4yt\u00e4 kaikki",
+    "catalogue_toolbar_sortBy_title": "J\u00e4rjest\u00e4",
+    "catalogue_toolbar_sortMenuOptions_averageRating": "Arvostelujen keskiarvo",
+    "catalogue_toolbar_sortMenuOptions_bookmarkCount": "Kirjanmerkkien lukum\u00e4\u00e4r\u00e4",
+    "catalogue_toolbar_sortMenuOptions_dateCreated": "Luontip\u00e4iv\u00e4",
+    "catalogue_toolbar_sortMenuOptions_name": "Nimi",
+    "catalogue_toolbar_sortMenuOptions_sortAscending": "Nouseva",
+    "catalogue_toolbar_sortMenuOptions_sortDescending": "Laskeva",
+    "catalogue_toolbar_toggleCollapse": "Vaihda ty\u00f6kaluvalikon navigaatiota",
+    "catalogue_toolbar_viewMode_grid": "Ruudukko",
+    "catalogue_toolbar_viewMode_table": "Taulukko",
+    "catalogueGrid_addedBy": "Lis\u00e4nnyt",
+    "catalogueTable_added": "Lis\u00e4tty",
+    "catalogueTable_addedBy": "Lis\u00e4nnyt",
+    "catalogueTable_labelText_private": "yksityinen",
+    "catalogue_Title": "Rajapintaluettelo",
+    "changeSelectedProxy_buttonCancel": "Peruuta",
+    "changeSelectedProxy_buttonConfirm": "Vaihda v\u00e4lityspalvelin",
+    "changeSelectedProxy_title": "Vaihda v\u00e4lityspalvelin",
+    "changeSelectedProxy_textCaution": "Huomio!",
+    "changeSelectedProxy_textConfirm": "V\u00e4lityspalvelimen vaihto muuttaa kutsuosoitetta ja saattaa rikkoa rajapintakutsut sovelluksista. Ilmoita rajapinnan k\u00e4ytt\u00e4jille t\u00e4st\u00e4 muutoksesta ja pyyd\u00e4 heit\u00e4 tarkastamaan, tarvitseeko heid\u00e4n tarvitsee hankkia uusi rajapinta-avain uudelle v\u00e4lityspalvelimelle",
+    "connectApiToOrganizationModal_helpText": "Voit lis\u00e4t\u00e4 hallinnoimasi rajapinnan organisaatioon. Sen j\u00e4lkeen lis\u00e4\u00e4m\u00e4si rajapinta n\u00e4kyy organisaation profiilisivulla.",
+    "connectApiToOrganizationModal_buttonText_close": "Sulje",
+    "connectApiToOrganizationModal_text_noOneApis": "Kaikki hallinnoimasi rajapinnat on jo yhdistetty.",
+    "connectApiToOrganizationModal_modalTitle": "Yhdist\u00e4 rajapinta",
+    "contactForm_reset": "Nollaa",
+    "contactForm_successMessage": "Kiitos! Viestisi on l\u00e4hetetty.",
+    "contactForm_submit": "L\u00e4het\u00e4",
+    "dashboardOverviewStatistic_text_requestPath": "Pyynn\u00f6n polku: __path__",
+    "dashboardOverviewStatistic_text_successCalls": "2XX vastauksia: __count__",
+    "dashboardOverviewStatistic_text_errorCallsYesterday": "__count__ virhett\u00e4 viimeisen p\u00e4iv\u00e4n aikana",
+    "dashboardOverviewStatistic_text_errorCalls": "__count__ virhett\u00e4 viimeisen  __timeframe__ p\u00e4iv\u00e4n aikana",
+    "dashboardOverviewStatistic_text_requestsCount": "__count__ pyynt\u00f6",
+    "dashboardOverviewStatistic_text_requestsCount_plural": "__count__ pyynt\u00f6\u00e4",
+    "dashboardOverviewStatistic_text_responseTime": "__time__ ms",
+    "dashboardOverviewStatistic_text_usersCount": "__count__ k\u00e4ytt\u00e4j\u00e4",
+    "dashboardOverviewStatistic_text_usersCount_plural": "__count__ k\u00e4ytt\u00e4j\u00e4\u00e4",
+    "dashboardOverviewStatisticNoData_text_noDataAvailable": "Dataa ei ole saatavilla.",
+    "dashboardOverviewStatistic_chartTitle_requestsNumber": "Pyynt\u00f6jen m\u00e4\u00e4r\u00e4",
+    "dashboardOverviewStatistic_chartTitle_responseTime": "Rajapinnan vasteaika",
+    "dashboardOverviewStatistic_chartTitle_uniqueUsers": "Rajapinnan k\u00e4ytt\u00e4ji\u00e4",
+    "dashboardOverviewStatistic_linkText_viewDetails": "Tarkastele tietoja",
+    "dashboardSummaryStatistic_columnTitle_apiName": "Rajapinnan nimi",
+    "dashboardSummaryStatistic_columnTitle_requestsNumber": "Pyynt\u00f6j\u00e4",
+    "dashboardSummaryStatistic_columnTitle_responseTime": "Vasteaika (mediaani)",
+    "dashboardSummaryStatistic_columnTitle_users": "K\u00e4ytt\u00e4ji\u00e4",
+    "dashboardToolbar_labelText_proxy": "V\u00e4lityspalvelin",
+    "dashboardToolbar_optionText_apiName": "Rajapinnan nimi",
+    "dashboardToolbar_optionText_calls": "Eniten kutsuja",
+    "dashboardToolbar_optionText_users": "Eniten k\u00e4ytt\u00e4ji\u00e4",
+    "dashboardToolbar_optionText_time": "Pisin vasteaika",
+    "dashboardPage_buttonText_addApi": "Lis\u00e4\u00e4 rajapinta",
+    "dashboardPage_title_dashboard": "Analytiikkan\u00e4kym\u00e4",
+    "dashboardPage_text_noApis": "Et hallinnoi yht\u00e4\u00e4n rajapintaa.",
+    "dashboardPage_text_noProxyBackends": "Et ole viel\u00e4 liitt\u00e4nyt yht\u00e4\u00e4n rajapintaa v\u00e4lityspalvelimeen. N\u00e4hd\u00e4ksesi analytiikkaa rajapintasi k\u00e4yt\u00f6st\u00e4, etsi rajapintasi rajapintaluettelosta ja yhdist\u00e4 rajapintasi v\u00e4lityspalvelimeen rajapinnan profiilisivulta.",
+    "dashboardView_text_elasticsearchError": "Jokin ep\u00e4onnistui. Yrit\u00e4 uudelleen.",
+    "dateRangePicker_optionText_yesterday": "Eilen",
+    "dateRangePicker_optionText_7days": "Viimeiset 7 p\u00e4iv\u00e4\u00e4",
+    "dateRangePicker_optionText_30days": "Viimeiset 30 p\u00e4iv\u00e4\u00e4",
+    "deleteAccount_closeButton": "Sulje",
+    "deleteAccount_confirmDelete": "Poista",
+    "deleteAccount_success_message": "Tili poistettu",
+    "deleteApiConfirmation_cancelButton": "Peruuta",
+    "deleteApiConfirmation_confirmDeleteInformation": "Toimintoa ei voi peruuttaa! Rajapinta ja kaikki siihen liittyv\u00e4 tieto, kuten metadata, dokumentaatio, kehitysjono ja palaute, poistetaan.",
+    "deleteApiConfirmation_confirmDeleteMessage": "Haluatko varmasti poistaa",
+    "deleteApiConfirmation_confirmDeleteNote": "Huomaa:",
+    "deleteApiConfirmation_deleteButton": "Poista",
+    "deleteApiConfirmation_header": "Poista rajapinta",
+    "deleteApiConfirmation_successMessage": "Poistettu rajapinta: ",
+    "deleteOrganizationConfirmation_cancelButton": "Peruuta",
+    "deleteOrganizationConfirmation_confirmDeleteInformation": "Kaikki organisaatioon liittyv\u00e4 tieto poistetaan. Toimintoa ei voi peruuttaa.",
+    "deleteOrganizationConfirmation_confirmDeleteMessage": "Haluatko varmasti poistaa",
+    "deleteOrganizationConfirmation_confirmDeleteNote": "Huomaa:",
+    "deleteOrganizationConfirmation_deleteButton": "Poista",
+    "deleteOrganizationConfirmation_header": "Poista organisaatio",
+    "deleteOrganizationConfirmation_successMessage": "Organisaatio poistettu: ",
+    "deleteAccount_title": "Poista k\u00e4ytt\u00e4j\u00e4tili",
+    "deleteAccount_confirm_text": "Haluatko varmasti poistaa k\u00e4ytt\u00e4j\u00e4tilisi?",
+    "deleteBacklogItem_modalTitle": "Poista teht\u00e4v\u00e4",
+    "deleteBacklogItem_confirmation_text": "Haluatko varmasi poistaa t\u00e4m\u00e4n teht\u00e4v\u00e4n?",
+    "deleteBacklogItem_cancelButton_text": "Peruuta",
+    "deleteBacklogItem_deleteButton_text": "Poista teht\u00e4v\u00e4",
+    "deleteFeedbackItem_modalTitle": "Poista palaute",
+    "deleteFeedbackItem_confirmation_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n palautteen ja kaikki sen saamat \u00e4\u00e4net?",
+    "deleteFeedbackItem_cancelButton_text": "Peruuta",
+    "deleteFeedbackItem_deleteButton_text": "Poista palaute",
+    "feedbackItem_messageType": {
+        "Feedback": "Palaute",
+        "Error report": "Virheraportti",
+        "Feature request": "Ehdotus toiminnallisuudeksi"
+    },
+    "deleteOrganizationApiConfirmation_cancelButton_text": "Peruuta",
+    "deleteOrganizationApiConfirmation_confirm_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n rajapinnan seuraavasta organisaatiosta: ",
+    "deleteOrganizationApiConfirmation_disconnectButton_text": "Katkaise yhteys",
+    "deleteOrganizationApiConfirmation_header_text": "Poista rajapinta seuraavasta organisaatiosta",
+    "deleteOrganizationApiConfirmation_success_message": "Rajapinta poistettu organisaatiosta",
+    "editApiMetadata_editButton": "Muokkaa metadataa",
+    "editApiMetadata_editApiMetadataForm_title": "Muokkaa rajapinnan metadataa",
+    "editApiMetadata_submitButtonText": "Tallenna metadata",
+    "editBacklogItem_modalTitle": "Muokkaa teht\u00e4v\u00e4\u00e4",
+    "editBacklogItem_submit_buttonText": "Tallenna",
+    "emailTemplates_verifyEmail_message": "Vahvistaaksesi s\u00e4hk\u00f6postiosoitteesi mene t\u00e4h\u00e4n osoitteeseen:",
+    "emailTemplates_verifyEmail_title": "Vahvista s\u00e4hk\u00f6postiosoitteesi",
+    "emailVerification_successMessage": "S\u00e4hk\u00f6postisi on nyt vahvistettu. Kiitos!",
+    "esData_notFound": "Rajapintojen k\u00e4ytt\u00f6tilastoja ei ole saatavilla.",
+    "errorsStatisticTable_title_errorsStatistic": "Virhetilastot",
+    "errorsStatisticTable_columnTitle_date": "P\u00e4iv\u00e4m\u00e4\u00e4r\u00e4",
+    "errorsStatisticTable_columnTitle_status": "Tilakoodi:",
+    "errorsStatisticTable_columnTitle_calls": "Kutsut",
+    "errorsStatisticTable_columnTitle_path": "Pyynn\u00f6n polku",
+    "errorsStatisticTable_text_showOfErrors": "N\u00e4yt\u00e4 __count__ __all__ virheist\u00e4",
+    "errorsStatisticTable_lintText_downloadFile": "Lataa kaikki virheet",
+    "favourite_Add": "Lis\u00e4\u00e4 kirjanmerkki",
+    "favourite_Remove": "Poista kirjanmerkki",
+    "feedbackForm_successMessage": "Kiitos! Palautteesi on l\u00e4hetetty.",
+    "feedbackItem_type": "Tyyppi",
+    "feedbackItem_topic": "Aihe",
+    "feedbackItem_editButton_text": "Muokkaa",
+    "feedbackItem_deleteButton_text": "Poista",
+    "feedbackItem_sentBy_text": "L\u00e4hett\u00e4j\u00e4",
+    "feedbackItem_usernotloggedin_errorMessage": "Virhe: Kirjaudu sis\u00e4\u00e4n \u00e4\u00e4nest\u00e4\u00e4ksesi",
+    "feedback_feedbackForm_button": "L\u00e4het\u00e4 palaute",
+    "feedback_feedbackForm_description": "Vikaraportit, ominaisuusideat ja yleiset kommentit ovat tervetulleita.",
+    "feedback_feedbackForm_title": "L\u00e4het\u00e4 palautetta tai ilmoita ongelmasta",
+    "feedback_main_title": "Palautteet ja raportit",
+    "feedback_no_feedback": "Ei palautetta.",
+    "feedback_remove_button": "Poista",
+    "feedback_sendFeedback": "L\u00e4het\u00e4",
+    "feedback_view_button": "N\u00e4yt\u00e4",
+    "flagApiButton_buttonText": "Merkint\u00e4",
+    "flagApiButton_buttonText_active": "Merkitty",
+    "flagApiModal_cancelButton": "Peruuta",
+    "flagApiModal_removeApiFlag_insertMessage": "Rajapinta on merkitty.",
+    "flagApiModal_removeApiFlag_successMessage": "Merkint\u00e4 on poistettu rajapinnalta.",
+    "flagApiModal_removeApiFlag_updateMessage": "Rajapinnan merkint\u00e4tieto on p\u00e4ivitetty.",
+    "flagApiModal_removeButton": "Poista merkint\u00e4",
+    "flagApiModal_saveButton": "Tallenna",
+    "flagApiModal_titleText": "Tee merkint\u00e4 rajapinnasta",
+    "flagApiSchema_DefunctText": "Toimimaton",
+    "flagApiSchema_inappropriateText": "Ep\u00e4asiallinen",
     "footer_about": "Tietoja",
     "footer_privacyPolicy_text": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
     "footer_termsOfUse_text": "K\u00e4ytt\u00f6ehdot",
     "footer_signIn": "Kirjaudu",
     "footer_signOut": "Kirjaudu ulos",
     "footer_signUp": "Rekister\u00f6idy",
+    "forbidden_Title": "403 P\u00e4\u00e4sy estetty",
+    "forbidden_Message": "Oikeutesi eiv\u00e4t riit\u00e4 sis\u00e4ll\u00f6n katseluun.",
+    "goBackButton_buttonText": "Palaa edelliselle sivulle",
+    "homeBody_featureSection_statistics_apisCount_heading": "Rajapintoja:",
+    "homeBody_featureSection_statistics_organizationsCount_heading": "Organisaatioita:",
+    "homeBody_featureSection_statistics_usersCount_heading": "K\u00e4ytt\u00e4ji\u00e4:",
+    "homeBody_contactUs_heading": "Ota yhteytt\u00e4",
+    "homeBody_contactUs_text": "Ota yhteytt\u00e4 ja kysy lis\u00e4tietoja.",
     "homeBody_getMoreApis_text": "Lis\u00e4\u00e4 rajapintoja",
+    "homeBody_openSource_imageAltText": "100% avointa l\u00e4hdekoodia",
+    "homeBody_section1_heading": "N\u00e4in p\u00e4\u00e4set alkuun",
+    "homeBody_section1_text": "Aloita luomalla k\u00e4ytt\u00e4j\u00e4tunnus. Kehitt\u00e4j\u00e4portaali tarjoaa yhden pys\u00e4hdyksen taktiikalla esimerkiksi mahdollisuuden l\u00f6yt\u00e4\u00e4 rajapintoja tai seurata oman sovelluksen kautta tehtyj\u00e4 rajapintakutsuja.",
+    "homeBody_section1_text_extra": "Rekister\u00f6idy",
+    "homeBody_section2_heading": "Tavoita kehitt\u00e4j\u00e4t",
+    "homeBody_section2_text": "APInf tarjoaa yhten\u00e4isen ja helpon k\u00e4ytt\u00f6liittym\u00e4n rajapintojen julkaisuun kehitt\u00e4j\u00e4yhteis\u00f6lle ja ty\u00f6kalut rajapintojen hallintaan. Sen avulla saat paremman k\u00e4sityksen rajapintasi k\u00e4yt\u00f6st\u00e4.",
+    "homeBody_section2_text_extra": "Ota yhteytt\u00e4",
+    "homeBody_section3_communityLinkText": "APInf yhteis\u00f6",
+    "homeBody_section3_heading": "T\u00e4ysin avointa l\u00e4hdekoodia",
+    "homeBody_section3_text": "APInfin moottorina toimii API Umbrella. APInf tarjoaa k\u00e4ytt\u00f6liittym\u00e4kerroksen API Umbrellan toiminnoille. Ratkaisu on kehitetty avoimena l\u00e4hdekoodina ja lisensoitu MIT-lisenssill\u00e4. K\u00e4ytt\u00f6liittym\u00e4n rakentamiseeen on k\u00e4ytetty Meteor.js- ja D3-teknologioita. Arvostamme yhteisty\u00f6t\u00e4, pyrimme kuuntelemaan k\u00e4ytt\u00e4ji\u00e4mme ja rohkaisemaan ihmisi\u00e4 liittym\u00e4\u00e4n kehitt\u00e4jiksi.",
+    "homeBody_section3_text_extra": "L\u00f6yd\u00e4t meid\u00e4t sosiaalisesta mediasta:",
+    "importApiConfiguration_errorMessage": "Konfiguraatiotiedoston tulee olla .YAML-, .YML-, .JSON- tai .TXT-muodossa.",
+    "import_ApiConfiguration_Drop": "Raahaa tiedosto t\u00e4h\u00e4n",
+    "import_ApiConfiguration_File": "Tiedosto:",
+    "import_ApiConfiguration_Preview": "Esikatselu",
+    "importApiConfiguration_jsonError_message": "Konfiguraatiotiedosto ei ole kelvollinen JSON-objekti.",
+    "import_ApiConfiguration_Title": "Tuo rajapinnan m\u00e4\u00e4rittelyt tiedostosta",
+    "import_ApiConfiguration_Upload": "Lataa palvelimelle",
+    "import_ApiDocumentation_File": "M\u00e4\u00e4rittelytiedosto dokumentaatiolle",
+    "importApiDocumentation_fileExtensionError_message": "Vain .json- and .yaml(.yml)-tiedostot ovat tuettu.",
+    "importApiDocumentation_fileReadError_message": "Virhe tiedoston luvussa. Tarkista tiedoston sis\u00e4lt\u00f6.",
     "invalidUrlMessage": "Tarvitaan t\u00e4ydellinen http- tai https-alkuinen URL-osoite",
     "invalidIdMessage": "Tunnukseen vain kirjaimia ja numeroita",
     "invalidDomainMessage": "Tarvitaan validi verkkotunnus",
     "invalidEmailMessage": "Tarvitaan validi s\u00e4hk\u00f6postiosoite",
-    "invalidApiBasePathMessage": "T\u00e4ytyy alkaa kauttaviivalla ja p\u00e4\u00e4tty\u00e4 kauttaviivaan. Sallittuja merkkej\u00e4 ovat kirjaimet, numerot sek\u00e4  -.?$*+'()\/:#@!&,;=",
     "invalidProxyBasePathMessage": "T\u00e4ytyy alkaa kauttaviivalla ja p\u00e4\u00e4tty\u00e4 kauttaviivaan. Sallittuja merkkej\u00e4 ovat kirjaimet, numerot sek\u00e4 -.?$*+'()\/:#@!&,;=",
+    "invalidApiBasePathMessage": "T\u00e4ytyy alkaa kauttaviivalla ja p\u00e4\u00e4tty\u00e4 kauttaviivaan. Sallittuja merkkej\u00e4 ovat kirjaimet, numerot sek\u00e4  -.?$*+'()\/:#@!&,;=",
     "invalidContactPhoneMessage": "Puhelinnumeroon hyv\u00e4ksytt\u00e4vi\u00e4 merkkej\u00e4 ovat numerot 0-9, +, -, \/ ja v\u00e4lily\u00f6nti",
+    "latestApiBackends_DateAdded": "Lis\u00e4tty %s",
+    "latestApiBackends_Heading": "Uusimmat rajapinnat",
+    "latestApiBackends_MoreInfo": "Lis\u00e4\u00e4 tietoa",
+    "latestApiBackends_NotFound": "Ei l\u00f6ydetty rajapintoja.",
+    "loginVerify_errorMessage": "Olet saanut s\u00e4hk\u00f6postin osoitteesi vahvistusta varten. Viimeistele s\u00e4hk\u00f6postin vahvistus, jotta voit kirjautua.",
+    "manageApiDocumentationModalUploadButton": "Valitse tiedosto",
+    "manageApiDocumentationModal_AddedFile_Message": "Dokumentaatiotiedosto ladattu!",
+    "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Peruuta",
+    "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Tallenna",
+    "manageApiDocumentationModal_CreateDocumentation_Title": "Luo dokumentaatiotiedosto",
+    "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Haluatko varmasti poistaa dokumentaatiotiedoston?",
+    "manageApiDocumentationModal_DeletedFile_Message": "Dokumentaatiotiedosto poistettu!",
+    "manageApiDocumentationModal_DocumentationLink_Title": "Linkki ulkoiseen dokumentaation",
+    "manageApiDocumentationModal_FileType_Message": "Vain .json- and .yaml(.yml)-tiedostot ovat tuettu.",
+    "manageApiDocumentationModal_LinkField_Updated_Message": "Dokumentaatiolinkki p\u00e4ivitetty!",
+    "manageApiDocumentationModal_SizeLimit_Message": "Tiedoston maksimikoko 10 MB",
+    "manageApiDocumentationModal_Title": "Rajapintadokumentaatio",
+    "manageApiDocumentationModal_hints_createApiDocumentation": "Jos sinulla ei ole dokumentaatiotiedostoa, voit luoda sen ja ladata sen palveluun.",
+    "manageApiDocumentationModal_hints_documentation_link": "Linkki Wiki- tai Github-sivuun tai muuhun verkkoresurssiin, josta rajapintasi dokumentaatio on luettavissa.",
+    "manageApiDocumentationModal_hints_uploadApiDocumentation": "Voit my\u00f6s luoda uuden dokumentaatiotiedoston rajapinnallesi k\u00e4ytt\u00e4en Swagger-muokkausohjelmaa.",
+    "manageApiDocumentationModal_openDocumentationEditor": "Avaa dokumentaation muokkausohjelma",
+    "manageApiDocumentationModal_addDocumentation_title": "Lis\u00e4\u00e4 dokumentaatiota",
     "manageApiDocumentationModal_helpText_useHttpsProtocol": "T\u00e4m\u00e4 j\u00e4rjestelm\u00e4 k\u00e4ytt\u00e4\u00e4 https-protokollaa. Rajapintapyynn\u00f6t dokumentaatiosta eiv\u00e4t toimi, koska rajapinta k\u00e4ytt\u00e4\u00e4 http-protokollaa.",
-    "organizationCover_resumable_successfully_uploaded": "Kansikuvan lataus onnistui!",
+    "mostFrequentUsersTable_title_mostUsers": "Eniten kutsuja tehneet k\u00e4ytt\u00e4j\u00e4t",
+    "mostFrequentUsersTable_columnTitle_user": "K\u00e4ytt\u00e4j\u00e4",
+    "mostFrequentUsersTable_columnTitle_calls": "Kutsuja",
+    "mostFrequentUsersTable_columnTitle_path": "Pyynn\u00f6n polku",
+    "mostFrequentUsersTable_text_showOfUsers": "N\u00e4yt\u00e4 __count__ __all__ k\u00e4ytt\u00e4j\u00e4st\u00e4",
+    "mostFrequentUsersTable_lintText_downloadFile": "Lataa kaikki k\u00e4ytt\u00e4j\u00e4t",
+    "navbar_addAPIBackend": "Lis\u00e4\u00e4 rajapinta",
+    "navbar_apis": "Rajapinnat",
+    "navbar_organizations": "Organisaatiot",
+    "navbar_dashboard": "Analytiikkan\u00e4kym\u00e4",
+    "navbar_signIn": "Kirjaudu",
+    "navbar_signUp": "Rekister\u00f6idy",
+    "navbar_users": "K\u00e4ytt\u00e4j\u00e4t",
+    "notAuthorized_Message": "Sinulla ei ole oikeutta tarkastella t\u00e4t\u00e4 sivua.",
+    "notAuthorized_Title": "Ei oikeuksia.",
+    "notFound_Message_Part1": "Hakemaasi sivua ei l\u00f6ytynyt.",
+    "notFound_Title": "Sivua ei l\u00f6ytynyt.",
+    "organizationApis_connectButton": "Yhdist\u00e4",
+    "organizationApisForm_successText": "Rajapinta on nyt yhdistetty organisaatioon.",
+    "organizationCatalog_Title": "Organisaatioluettelo",
+    "organizationCatalog_buttonText_addOrganization": "Lis\u00e4\u00e4 organisaatio",
+    "organizationCatalog_toolbar_filterOptions_myOrganizations": "Organisaationi",
+    "organizationCatalog_toolbar_filterOptions_showAll": "N\u00e4yt\u00e4 kaikki",
+    "organizationCatalog_toolbar_sortBy_title": "J\u00e4rjest\u00e4",
+    "organizationCatalog_toolbar_sortMenuOptions_dateCreated": "Luontip\u00e4iv\u00e4",
+    "organizationCatalog_toolbar_sortMenuOptions_name": "Nimi",
+    "organizationCatalog_toolbar_sortMenuOptions_sortAscending": "Nouseva",
+    "organizationCatalog_toolbar_sortMenuOptions_sortDescending": "Laskeva",
+    "organizationCatalog_toolbar_toggleCollapse": "Vaihda ty\u00f6kaluvalikon navigaatiota",
+    "organizationCatalog_toolbar_viewMode_grid": "Ruudukko",
+    "organizationCatalog_toolbar_viewMode_table": "Taulukko",
+    "organizationCatalog_text_noOrganizationIsAvailable": "Organisaatioita ei ole saatavilla.",
+    "organizationCatalog_text_addOrganization": "Paina \"Lis\u00e4\u00e4 organisaatio\" -painiketta lis\u00e4t\u00e4ksesi uuden organisaation.",
+    "organizationCatalogTable_added": "Lis\u00e4tty",
+    "organizationCatalogGrid_organizationCardCreated_addedText": "Lis\u00e4tty %s",
+    "organizationCatalogGrid_organizationCardApisCount_apisText": "Rajapinnat",
     "organizationCover_resumable_errorText": "Tiedoston luonti ei onnistunut!",
+    "organizationCover_resumable_successfully_uploaded": "Kansikuvan lataus onnistui!",
     "organizationCover_resumable_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
-    "organizationNoFeaturedApis_text_useButton": "Voit valita rajapinnan Suositelluksi rajapinnaksi klikkaamalla nuppineulaa rajapintakortin oikeassa yl\u00e4kulmassa",
+    "organizationForm_title": "Organisaation tiedot",
+    "organizationForm_contact_panelTitle": "Yhteyshenkil\u00f6",
+    "organizationForm_saveButton_text": "Tallenna",
+    "organizationForm_successText": "Organisaatio tallennettu",
+    "organizationLogo_noPermissions": "Oikeudet eiv\u00e4t riit\u00e4 logon lataamiseen.",
+    "organizationLogo_resumable_errorText": "Tiedoston luonti ei onnistunut!",
+    "organizationLogo_resumable_successfully_uploaded": "Logon lataus onnistui!",
+    "organizationLogo_resumable_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
+    "organizationManagersList_title": "Organisaation yll\u00e4pit\u00e4j\u00e4t",
+    "organizationManagerForm_successMessage": "Uusi yll\u00e4pit\u00e4j\u00e4 lis\u00e4tty.",
+    "organizationManagerForm_emailNotRegistered_errorText": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta ei ole viel\u00e4 rekister\u00f6ity j\u00e4rjestelm\u00e4\u00e4n.",
+    "organizationNoApis_text_noConnectedApis": "Organisaatioon ei ole liitetty yht\u00e4\u00e4n rajapintaa.",
+    "organizationNoApis_text_useButton": "Voit lis\u00e4t\u00e4 rajapinnan painamalla \"Yhdist\u00e4 rajapinta organisaatioon\" -painiketta.",
     "organizationNoFeaturedApis_text_noFeaturedApis": "T\u00e4ll\u00e4 organisaatiolla ei ole Suositeltuja rajapintoja",
+    "organizationNoFeaturedApis_text_useButton": "Voit valita rajapinnan Suositelluksi rajapinnaksi klikkaamalla nuppineulaa rajapintakortin oikeassa yl\u00e4kulmassa",
+    "organizationProfile_bigText_apisCount": "Rajapinnat",
     "organizationProfile_bigText_featuredApisCount": "Suositellut rajapinnat",
+    "organizationProfileHeader_editButton_text": "Muokkaa",
+    "organizationProfileHeader_tabs_apis": "Rajapinnat",
+    "organizationProfileHeader_tabs_settings": "Asetukset",
     "organizationProfileHeader_uploadCoverButton_text": "Lataa kansikuva",
+    "organizationProfile_smallText_apisCount": "(__count__ rajapinta)",
+    "organizationProfile_smallText_apisCount_plural": "(__count__ rajapintaa)",
+    "organizationProfile_buttonText_connectApi": "Yhdist\u00e4 rajapinta organisaatioon",
+    "organizationProfile_buttonText_clear": "Tyhjenn\u00e4 kaikki",
+    "organizationProfile_text_error": "Yhdist\u00e4minen ei onnistunut. Ilmoita ongelmasta yll\u00e4pidolle.",
+    "organizationRemoveManagers_cancelButton": "Peruuta",
+    "organizationRemoveManagers_description": "Haluatko varmasti poistaa t\u00e4m\u00e4n k\u00e4ytt\u00e4j\u00e4n organisaation yll\u00e4pit\u00e4jist\u00e4?",
+    "organizationRemoveManagers_removeButton": "Poista",
+    "organizationRemoveManagers_title": "Poista k\u00e4ytt\u00e4j\u00e4 yll\u00e4pit\u00e4jist\u00e4",
     "organizationSettingsPagination_panelTitle_contentManagement": "Sis\u00e4ll\u00f6nhallinta",
     "organizationSettingsPagination_saveButton": "Tallenna",
     "organizationSettingsPagination_successMessage": "Numero muutettu onnistuneesti",
+    "organizationSettings_uploadLogo_heading": "Lataa logo",
     "organizationSettings_uploadCover_heading": "Lataa kansikuva",
+    "organizationSettings_uploadLogoText": "Voit lis\u00e4t\u00e4 logon organisaatiollesi. Logo n\u00e4kyy organisaatioluettelossa ja organisaation omalla sivulla.",
     "organizationSettings_uploadCoverText": "Voit ladata kansikuvan organisaatiollesi",
+    "organizationSettingsDelete_buttonText_delete": "Poista",
+    "organizationSettingsDelete_text_information": "Organisaatioon liittyv\u00e4 tieto poistetaan. Toimintoa ei voi peruuttaa.",
+    "organizationSettingsDelete_title": "Poista organisaatioprofiili",
+    "organizationSettingsDelete_panelTitle": "Poista",
     "organizationSettingsContactInfo_cancelButton_text": "Peruuta",
     "organizationSettingsContactInfo_saveButton_text": "Tallenna",
     "organizationSettingsContactInfo_title": "Yhteystiedot",
     "organizationSettingsCoverAndLogo_title": "Logo ja kansikuva",
-    "organizationSettingsGeneral_saveButton_text": "Tallenna",
     "organizationSettingsGeneral_cancelButton_text": "Peruuta",
-    "organizationSettingsSocialMedia_saveButton_text": "Tallenna",
+    "organizationSettingsGeneral_saveButton_text": "Tallenna",
     "organizationSettingsGeneral_title": "Yleiset asetukset",
     "organizationSettingsSocialMedia_cancelButton_text": "Peruuta",
+    "organizationSettingsSocialMedia_saveButton_text": "Tallenna",
     "organizationSettingsSocialMedia_title": "Sosiaalisen median alustat",
+    "privacyPolicy_title": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
+    "profile_Header": "Profiili",
+    "profile_UpdateButton": "P\u00e4ivit\u00e4",
+    "profile_labelText_registeredEmail": "Rekister\u00f6ity s\u00e4hk\u00f6posti",
+    "profile_setUsername": "Anna k\u00e4ytt\u00e4j\u00e4nimesi.",
+    "profile_updatedSuccess": "Profiili p\u00e4ivitetty",
+    "profile_usernameInvalid": "K\u00e4ytt\u00e4j\u00e4nimen t\u00e4ytyy olla 3-15 merkki\u00e4. Ala- ja v\u00e4liviivat ovat sallittuja.",
+    "profile_usernameIsTaken": "K\u00e4ytt\u00e4j\u00e4nimi on jo olemassa. Sy\u00f6t\u00e4 uusi k\u00e4ytt\u00e4j\u00e4nimi.",
+    "proxies_pageHeader": "V\u00e4lityspalvelimet",
+    "proxies_addProxy": "Lis\u00e4\u00e4 v\u00e4lityspalvelin",
+    "proxies_noProxiesFound": "V\u00e4lityspalvelimia ei l\u00f6ytynyt.",
+    "proxyBackendForm_advancedSettings_title": "Lis\u00e4asetukset",
+    "proxyBackendForm_apiBasePath_helpText": "Peruspolku jokaiseen rajapintakutsuun. Esimerkiksi:",
+    "proxyBackendForm_apiPort_helpText": "Rajapintapalvelimen portin numero",
+    "proxyBackendForm_disableApiKey_helpText": "Salli k\u00e4ytt\u00e4jien kutsua rajapintaa ilman rajapinta-avainta.",
+    "proxyBackendForm_proxyBasePath_helpText": "Peruspolku jokaiseen v\u00e4lityspalvelinkutsuun. Esimerkiksi:",
+    "proxyBackendForm_successMessage": "Asetukset tallennettu.",
+    "proxyBackendForm_saveButton": "Tallenna ja julkaise",
+    "proxyBackendForm_deleteButton": "Poista",
+    "proxyBackendForm_deleteErrorMessage": "Poisto API Umbrella -v\u00e4lityspalvelimelta ep\u00e4onnistui",
+    "proxyBackendForm_frontendPrefixNotUnique": "Frontend-etuliite on jo k\u00e4yt\u00f6ss\u00e4. Valitse toinen etuliite.",
+    "proxyBackendForm_publishErrorMessage": "Julkaisu API Umbrella -v\u00e4lityspalvelimelle ep\u00e4onnistui",
+    "proxyBackendForm_requiredErrorMessage": "T\u00e4yt\u00e4 kaikki vaaditut kent\u00e4t",
+    "proxyBackendForm_deleteSuccessMessage": "V\u00e4lityspalvelinasetukset poistettu",
+    "proxyBackendForm_update_successMessage": "V\u00e4lityspalvelinasetukset p\u00e4ivitetty",
+    "proxyBackendForm_emqUsers_title": "EMQ-k\u00e4ytt\u00e4j\u00e4t",
+    "proxyBackendForm_emqUsers_addUserButton": "Lis\u00e4\u00e4 k\u00e4ytt\u00e4j\u00e4",
+    "proxyBackendForm_emqUsers_userTable_id": "ID",
+    "proxyBackendForm_emqUsers_userTable_username": "K\u00e4ytt\u00e4j\u00e4tunnus",
+    "proxyBackendForm_emqUsers_userTable_password": "Salasana",
+    "proxyBackendForm_emqUsers_userTable_actions": "Toimenpiteet",
+    "proxyBackendForm_emqProxyForm_addEmqUser_modalTitle": "Lis\u00e4\u00e4 EMQ-k\u00e4ytt\u00e4j\u00e4",
+    "proxyBackendForm_emqProxyForm_addEmqUser_username": "K\u00e4ytt\u00e4j\u00e4tunnus",
+    "proxyBackendForm_emqProxyForm_addEmqUser_password": "Salasana",
+    "proxyBackendForm_emqProxyForm_addEmqUser_saveButton": "Tallenna",
+    "proxyBackendForm_emqProxyForm_addEmqUser_cancelButton": "Peruuta",
+    "proxyBackendForm_emqProxyForm_addEmqUser_successMessage": "EMQ-k\u00e4ytt\u00e4j\u00e4 lis\u00e4tty!",
+    "proxyBackendForm_emqProxyForm_addEmqUser_errorMessage": "K\u00e4ytt\u00e4j\u00e4tunnusta tai salasanaa ei l\u00f6ydetty.",
+    "proxyBackendForm_emqProxyForm_removeEmqUser_modalTitle": "Poista EMQ-k\u00e4ytt\u00e4j\u00e4?",
+    "proxyBackendForm_emqProxyForm_removeEmqUser_confirmButton": "Kyll\u00e4, poista",
+    "proxyBackendForm_emqProxyForm_removeEmqUser_cancelButton": "Peruuta",
+    "proxyBackendForm_emqProxyForm_removeEmqUser_successMessage": "EMQ-k\u00e4ytt\u00e4j\u00e4 poistettu!",
+    "proxyForm_header_text": "Lis\u00e4\u00e4 v\u00e4lityspalvelin",
+    "proxyForm_saveButton_text": "Tallenna",
+    "proxyForm_successText": "V\u00e4lityspalvelimen asetukset tallennettu.",
+    "proxyForm_errorText": "Kaikki t\u00e4hdell\u00e4 merkityt kent\u00e4t ovat pakollisia",
+    "proxyItem_editProxy": "Muokkaa",
+    "proxyItem_removeProxy": "Poista",
+    "proxyItem_type": "Tyyppi",
+    "proxyItem_url": "Web-osoite",
+    "proxyItem_apiKey": "Rajapinta-avain",
+    "proxyItem_apiToken": "Rajapinnan tunnisteavain",
+    "proxyItem_elasticsearch": "Elasticsearch",
     "proxyItem_brokerEndpoints": "V\u00e4litt\u00e4j\u00e4n p\u00e4\u00e4tepisteet",
     "proxyItem_brokerEndpoints_table_protocol": "Protokolla",
     "proxyItem_brokerEndpoints_table_host": "Is\u00e4nt\u00e4kone",
     "proxyItem_brokerEndpoints_table_port": "Portti",
     "proxyItem_brokerEndpoints_table_tls": "TLS",
     "proxyItem_httpApi": "HTTP-rajapinta",
-    "proxyItem_httpApi_host": "Is\u00e4nt\u00e4kone",
     "proxyItem_httpApi_protocol": "Protokolla",
+    "proxyItem_httpApi_host": "Is\u00e4nt\u00e4kone",
     "proxyItem_httpApi_port": "Portti",
     "proxyItem_adminUsername": "Yll\u00e4pit\u00e4j\u00e4n k\u00e4ytt\u00e4j\u00e4tunnus",
     "proxyItem_adminPassword": "Yll\u00e4pit\u00e4j\u00e4n salasana",
     "deletePostConfirmation_modalTitle_text": "Poista sis\u00e4lt\u00f6",
-    "deletePostConfirmation_text_confirmDeleteNote": "HUOM:",
     "deletePostConfirmation_text_confirmDeleteMessage": "Haluatko varmasti poistaa __title__?",
+    "deletePostConfirmation_text_confirmDeleteNote": "HUOM:",
     "deletePostConfirmation_text_confirmDeleteInformation": "T\u00e4t\u00e4 toimintoa ei voi peruuttaa!",
     "deletePostConfirmation_buttonText_cancel": "Peruuta",
     "deletePostConfirmation_buttonText_delete": "Poista",
@@ -79,273 +584,28 @@
     },
     "relatedMediaPostsForm_modalTitle_relatedMedia": "T\u00e4ydent\u00e4v\u00e4 media",
     "relatedMediaPostsForm_Cancel": "Peruuta",
-    "relatedMediaPostsForm_Text": "Voit lis\u00e4t\u00e4 sis\u00e4lt\u00f6\u00e4, jota k\u00e4ytt\u00e4j\u00e4 voi klikata n\u00e4hd\u00e4kseen alkuper\u00e4isen l\u00e4hteen. Voit lis\u00e4t\u00e4 esimerkiksi blogitekstej\u00e4, videoita ja esityksi\u00e4.",
     "relatedMediaPostsForm_Submit": "Lis\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4",
-    "postItem_buttonText_edit": "Muokkaa",
+    "relatedMediaPostsForm_Text": "Voit lis\u00e4t\u00e4 sis\u00e4lt\u00f6\u00e4, jota k\u00e4ytt\u00e4j\u00e4 voi klikata n\u00e4hd\u00e4kseen alkuper\u00e4isen l\u00e4hteen. Voit lis\u00e4t\u00e4 esimerkiksi blogitekstej\u00e4, videoita ja esityksi\u00e4.",
     "postItem_buttonText_delete": "Poista",
+    "postItem_buttonText_edit": "Muokkaa",
     "postItem_text_added": "Lis\u00e4tty",
+    "removeProxy_modalLabel_title": "V\u00e4lityspalvelimen poisto",
+    "removeProxy_modalBody_warning": "Varoitus!",
+    "removeProxy_modalBody_text": "Olet poistamassa v\u00e4lityspalvelinta. T\u00e4h\u00e4n v\u00e4lityspalvelimeen on yhdistetty __count__ rajapintaa. V\u00e4lityspalvelimen poistaminen tarkoittaa, ett\u00e4 rajapintakutsut n\u00e4ihin rajapintoihin lakkaavat toimimasta. Haluatko varmasti jatkaa?",
+    "removeProxy_buttonText_confirmRemoveProxy": "Kyll\u00e4",
+    "removeProxy_buttonText_cancelRemove": "Ei",
+    "removeProxy_errorMessage": "Virhe: V\u00e4lityspalvelimen poisto ep\u00e4onnistui",
+    "requestTimeline_labelText_path": "Polku",
+    "requestTimeline_xAxisTitle_days": "Aika",
+    "requestTimeline_yAxisTitle_requests": "Rajapintapyynn\u00f6t",
+    "requestTimeline_legendItem_allCalls": "Kaikki pyynn\u00f6t",
+    "requestsOverTime_pointTitle_requests": "Pyynn\u00f6t",
+    "responseTimeTimeline_labelText_path": "Polku",
+    "responseTimeTimeline_xAxisTitle_days": "Aika",
+    "responseTimeTimeline_yAxisTitle_time": "Aika, ms",
+    "responseTimeTimeline_legendItem_95thPercentiles": "95 prosenttia",
+    "responseTimeTimeline_legendItem_median": "Mediaani",
     "schemas": {
-        "branding": {
-            "homeCustomBlock": {
-                "label": "R\u00e4\u00e4t\u00e4l\u00f6ity HTML-lohko",
-                "placeholder": "Lis\u00e4\u00e4 teksti\u00e4 tai HTML\/CSS-koodia"
-            },
-            "colors": {
-                "coverPhotoOverlay": {
-                    "label": "Kansikuvan peitto"
-                },
-                "overlayTransparency": {
-                    "label": "Peiton l\u00e4pin\u00e4kyvyys"
-                },
-                "label": "V\u00e4rit",
-                "primary": {
-                    "label": "P\u00e4\u00e4v\u00e4ri"
-                },
-                "primaryText": {
-                    "label": "P\u00e4\u00e4tekstiv\u00e4ri"
-                }
-            },
-            "footerCode": {
-                "label": "Alatunnistekoodi"
-            },
-            "siteTitle": {
-                "label": "Sivun otsikko"
-            },
-            "siteSlogan": {
-                "label": "Sivun iskulause"
-            },
-            "privacyPolicy": {
-                "label": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
-                "placeholder": "Lis\u00e4\u00e4 yksityisyysk\u00e4yt\u00e4nt\u00f6 t\u00e4h\u00e4n"
-            },
-            "termsOfUse": {
-                "label": "K\u00e4ytt\u00f6ehdot",
-                "placeholder": "Lis\u00e4\u00e4 k\u00e4ytt\u00f6ehdot t\u00e4h\u00e4n"
-            },
-            "socialMedia": {
-                "label": "Sosiaalinen media",
-                "$": {
-                    "name": {
-                        "label": "Nimi",
-                        "firstOption": "(Valitse yksi)"
-                    },
-                    "url": {
-                        "label": "Web-osoite",
-                        "placeholder": "http:\/\/esimerkki.com\/k\u00e4ytt\u00e4j\u00e4nimi"
-                    }
-                }
-            },
-            "siteFooter": {
-                "label": "Sivun alatunniste"
-            }
-        },
-        "proxies": {
-            "emq": {
-                "brokerEndpoints": {
-                    "label": "V\u00e4litt\u00e4j\u00e4n p\u00e4\u00e4tepisteet",
-                    "$": {
-                        "protocol": {
-                            "label": "Protokolla"
-                        },
-                        "host": {
-                            "placeholder": "https:\/\/esimerkki.fi\/",
-                            "label": "Is\u00e4nt\u00e4kone"
-                        },
-                        "port": {
-                            "label": "Portti",
-                            "placeholder": "Esim. 224"
-                        },
-                        "tls": {
-                            "label": "TLS-suojaus (Transport Layer Security)"
-                        }
-                    }
-                },
-                "elasticsearch": {
-                    "label": "ElasticSearch URL",
-                    "placeholder": "https:\/\/esimerkki.fi\/"
-                },
-                "httpApi": {
-                    "label": "Konfiguraatiorajapinnan p\u00e4\u00e4tepiste"
-                }
-            },
-            "name": {
-                "label": "Nimi"
-            },
-            "description": {
-                "label": "Kuvaus"
-            },
-            "type": {
-                "label": "Tyyppi"
-            },
-            "apiUmbrella": {
-                "url": {
-                    "label": "Web-osoite"
-                },
-                "apiKey": {
-                    "label": "Rajapinta-avain"
-                },
-                "authToken": {
-                    "label": "Autentikointitunnus"
-                },
-                "elasticsearch": {
-                    "label": "ElasticSearch"
-                }
-            },
-            "emqtt": {
-                "url": {
-                    "label": "Web-osoite"
-                },
-                "elasticsearch": {
-                    "label": "ElasticSearch"
-                }
-            }
-        },
-        "proxyBackends": {
-            "emq": {
-                "label": "EMQ-v\u00e4lityspalvelin",
-                "settings": {
-                    "acl": {
-                        "label": "K\u00e4ytt\u00f6oikeuksien m\u00e4\u00e4rittely",
-                        "$": {
-                            "from": {
-                                "label": "Mist\u00e4"
-                            },
-                            "allow": {
-                                "label": "S\u00e4\u00e4nt\u00f6",
-                                "options": [
-                                    "Kiell\u00e4",
-                                    "Salli"
-                                ]
-                            },
-                            "ip_addr": {
-                                "label": "IP-osoite"
-                            },
-                            "username": {
-                                "label": "K\u00e4ytt\u00e4j\u00e4nimi"
-                            },
-                            "client_id": {
-                                "label": "Client Id"
-                            },
-                            "access": {
-                                "label": "P\u00e4\u00e4sy",
-                                "options": [
-                                    "Tilaa",
-                                    "Julkaise",
-                                    "Tilaa ja julkaise"
-                                ]
-                            },
-                            "fromValue": {
-                                "label": "Arvo"
-                            },
-                            "topic": {
-                                "label": "Aihe"
-                            }
-                        }
-                    }
-                }
-            },
-            "proxyId": {
-                "label": "Valitse v\u00e4lityspalvelin"
-            },
-            "apiUmbrella": {
-                "servers": {
-                    "$": {
-                        "port": {
-                            "label": "Rajapinta-portti"
-                        }
-                    }
-                },
-                "settings": {
-                    "append_query_string": {
-                        "label": "Lis\u00e4\u00e4 hakulauseen parametrit"
-                    },
-                    "disable_api_key": {
-                        "label": "Rajapinta-avaimen k\u00e4ytt\u00f6\u00e4 ei vaadita"
-                    },
-                    "headers_string": {
-                        "label": "Aseta pyynn\u00f6n otsikkotiedot"
-                    },
-                    "rate_limit_mode": {
-                        "label": "Kuormituksen rajoitustila",
-                        "options": {
-                            "custom": "R\u00e4\u00e4t\u00e4l\u00f6ity kuormitusrajoitus",
-                            "unlimited": "Kutsujen m\u00e4\u00e4r\u00e4\u00e4 ei rajoiteta"
-                        }
-                    },
-                    "rate_limits": {
-                        "label": "Kuormitusrajoitukset"
-                    },
-                    "rate_limit": {
-                        "duration": {
-                            "label": "Kesto (ms)"
-                        },
-                        "limit_by": {
-                            "label": "Rajoitusperuste",
-                            "options": {
-                                "apiKey": "Rajapinta-avain",
-                                "ip": "IP-osoite"
-                            }
-                        },
-                        "limit": {
-                            "label": "Pyynt\u00f6jen m\u00e4\u00e4r\u00e4"
-                        },
-                        "response_headers": {
-                            "label": "N\u00e4yt\u00e4 kuormitusrajoitus vastauksen otsikkotiedoissa"
-                        }
-                    }
-                },
-                "url_matches": {
-                    "$": {
-                        "frontend_prefix": {
-                            "label": "V\u00e4lityspalvelimen peruspolku"
-                        },
-                        "backend_prefix": {
-                            "label": "Rajapinnan peruspolku"
-                        }
-                    }
-                }
-            }
-        },
-        "related_media": {
-            "title": {
-                "label": "Otsikko"
-            },
-            "url": {
-                "label": "Web-osoite"
-            }
-        },
-        "organizations": {
-            "socialMedia": {
-                "label": "Linkit sosiaaliseen mediaan"
-            },
-            "apisPerPage": {
-                "label": "Rajapintoja per sivu"
-            },
-            "mediaPerPage": {
-                "label": "Mediasis\u00e4ll\u00f6n m\u00e4\u00e4r\u00e4 per sivu"
-            },
-            "name": {
-                "label": "Nimi"
-            },
-            "url": {
-                "label": "Web-osoite"
-            },
-            "description": {
-                "label": "Kuvaus"
-            },
-            "contact": {
-                "label": "Yhteyshenkil\u00f6",
-                "person": {
-                    "label": "Nimi"
-                },
-                "phone": {
-                    "label": "Puhelinnumero"
-                },
-                "email": {
-                    "label": "S\u00e4hk\u00f6posti"
-                }
-            }
-        },
         "apis": {
             "name": {
                 "label": "Rajapinnan nimi"
@@ -445,6 +705,60 @@
                 "label": "T\u00e4rkeys"
             }
         },
+        "branding": {
+            "siteTitle": {
+                "label": "Sivun otsikko"
+            },
+            "siteSlogan": {
+                "label": "Sivun iskulause"
+            },
+            "homeCustomBlock": {
+                "label": "R\u00e4\u00e4t\u00e4l\u00f6ity HTML-lohko",
+                "placeholder": "Lis\u00e4\u00e4 teksti\u00e4 tai HTML\/CSS-koodia"
+            },
+            "privacyPolicy": {
+                "label": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
+                "placeholder": "Lis\u00e4\u00e4 yksityisyysk\u00e4yt\u00e4nt\u00f6 t\u00e4h\u00e4n"
+            },
+            "termsOfUse": {
+                "label": "K\u00e4ytt\u00f6ehdot",
+                "placeholder": "Lis\u00e4\u00e4 k\u00e4ytt\u00f6ehdot t\u00e4h\u00e4n"
+            },
+            "colors": {
+                "label": "V\u00e4rit",
+                "primary": {
+                    "label": "P\u00e4\u00e4v\u00e4ri"
+                },
+                "primaryText": {
+                    "label": "P\u00e4\u00e4tekstiv\u00e4ri"
+                },
+                "coverPhotoOverlay": {
+                    "label": "Kansikuvan peitto"
+                },
+                "overlayTransparency": {
+                    "label": "Peiton l\u00e4pin\u00e4kyvyys"
+                }
+            },
+            "socialMedia": {
+                "label": "Sosiaalinen media",
+                "$": {
+                    "name": {
+                        "label": "Nimi",
+                        "firstOption": "(Valitse yksi)"
+                    },
+                    "url": {
+                        "label": "Web-osoite",
+                        "placeholder": "http:\/\/esimerkki.com\/k\u00e4ytt\u00e4j\u00e4nimi"
+                    }
+                }
+            },
+            "siteFooter": {
+                "label": "Sivun alatunniste"
+            },
+            "footerCode": {
+                "label": "Alatunnistekoodi"
+            }
+        },
         "contactForm": {
             "name": {
                 "label": "Nimesi",
@@ -489,6 +803,9 @@
             "access": {
                 "onlyAdminsCanAddApis": {
                     "label": "Vain j\u00e4rjestelm\u00e4n yll\u00e4pit\u00e4j\u00e4t voivat lis\u00e4t\u00e4 uusia rajapintoja"
+                },
+                "onlyAdminsCanAddOrganizations": {
+                    "label": "Vain j\u00e4rjestelm\u00e4n yll\u00e4pit\u00e4j\u00e4t voivat lis\u00e4t\u00e4 uusia organisaatioita"
                 }
             },
             "apiDocumentationEditor": {
@@ -543,12 +860,203 @@
                 }
             }
         },
-        "api_media": {
+        "proxies": {
+            "name": {
+                "label": "Nimi"
+            },
+            "description": {
+                "label": "Kuvaus"
+            },
+            "type": {
+                "label": "Tyyppi"
+            },
+            "apiUmbrella": {
+                "url": {
+                    "label": "Web-osoite"
+                },
+                "apiKey": {
+                    "label": "Rajapinta-avain"
+                },
+                "authToken": {
+                    "label": "Autentikointitunnus"
+                },
+                "elasticsearch": {
+                    "label": "ElasticSearch"
+                }
+            },
+            "emq": {
+                "brokerEndpoints": {
+                    "label": "V\u00e4litt\u00e4j\u00e4n p\u00e4\u00e4tepisteet",
+                    "$": {
+                        "protocol": {
+                            "label": "Protokolla"
+                        },
+                        "host": {
+                            "label": "Is\u00e4nt\u00e4kone",
+                            "placeholder": "https:\/\/esimerkki.fi\/"
+                        },
+                        "port": {
+                            "label": "Portti",
+                            "placeholder": "Esim. 224"
+                        },
+                        "tls": {
+                            "label": "TLS-suojaus (Transport Layer Security)"
+                        }
+                    }
+                },
+                "httpApi": {
+                    "label": "Konfiguraatiorajapinnan p\u00e4\u00e4tepiste"
+                },
+                "elasticsearch": {
+                    "label": "ElasticSearch URL",
+                    "placeholder": "https:\/\/esimerkki.fi\/"
+                }
+            }
+        },
+        "proxyBackends": {
+            "proxyId": {
+                "label": "Valitse v\u00e4lityspalvelin"
+            },
+            "apiUmbrella": {
+                "servers": {
+                    "$": {
+                        "port": {
+                            "label": "Rajapinta-portti"
+                        }
+                    }
+                },
+                "settings": {
+                    "append_query_string": {
+                        "label": "Lis\u00e4\u00e4 hakulauseen parametrit"
+                    },
+                    "disable_api_key": {
+                        "label": "Rajapinta-avaimen k\u00e4ytt\u00f6\u00e4 ei vaadita"
+                    },
+                    "headers_string": {
+                        "label": "Aseta pyynn\u00f6n otsikkotiedot"
+                    },
+                    "rate_limit_mode": {
+                        "label": "Kuormituksen rajoitustila",
+                        "options": {
+                            "custom": "R\u00e4\u00e4t\u00e4l\u00f6ity kuormitusrajoitus",
+                            "unlimited": "Kutsujen m\u00e4\u00e4r\u00e4\u00e4 ei rajoiteta"
+                        }
+                    },
+                    "rate_limits": {
+                        "label": "Kuormitusrajoitukset"
+                    },
+                    "rate_limit": {
+                        "duration": {
+                            "label": "Kesto (ms)"
+                        },
+                        "limit_by": {
+                            "label": "Rajoitusperuste",
+                            "options": {
+                                "apiKey": "Rajapinta-avain",
+                                "ip": "IP-osoite"
+                            }
+                        },
+                        "limit": {
+                            "label": "Pyynt\u00f6jen m\u00e4\u00e4r\u00e4"
+                        },
+                        "response_headers": {
+                            "label": "N\u00e4yt\u00e4 kuormitusrajoitus vastauksen otsikkotiedoissa"
+                        }
+                    }
+                },
+                "url_matches": {
+                    "$": {
+                        "frontend_prefix": {
+                            "label": "V\u00e4lityspalvelimen peruspolku"
+                        },
+                        "backend_prefix": {
+                            "label": "Rajapinnan peruspolku"
+                        }
+                    }
+                }
+            },
+            "emq": {
+                "label": "EMQ-v\u00e4lityspalvelin",
+                "settings": {
+                    "acl": {
+                        "label": "K\u00e4ytt\u00f6oikeuksien m\u00e4\u00e4rittely",
+                        "$": {
+                            "allow": {
+                                "label": "S\u00e4\u00e4nt\u00f6",
+                                "options": [
+                                    "Kiell\u00e4",
+                                    "Salli"
+                                ]
+                            },
+                            "from": {
+                                "label": "Mist\u00e4"
+                            },
+                            "ip_addr": {
+                                "label": "IP-osoite"
+                            },
+                            "username": {
+                                "label": "K\u00e4ytt\u00e4j\u00e4nimi"
+                            },
+                            "client_id": {
+                                "label": "Client Id"
+                            },
+                            "access": {
+                                "label": "P\u00e4\u00e4sy",
+                                "options": [
+                                    "Tilaa",
+                                    "Julkaise",
+                                    "Tilaa ja julkaise"
+                                ]
+                            },
+                            "topic": {
+                                "label": "Aihe"
+                            },
+                            "fromValue": {
+                                "label": "Arvo"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "related_media": {
             "title": {
                 "label": "Otsikko"
             },
             "url": {
                 "label": "Web-osoite"
+            }
+        },
+        "organizations": {
+            "name": {
+                "label": "Nimi"
+            },
+            "url": {
+                "label": "Web-osoite"
+            },
+            "description": {
+                "label": "Kuvaus"
+            },
+            "contact": {
+                "label": "Yhteyshenkil\u00f6",
+                "person": {
+                    "label": "Nimi"
+                },
+                "phone": {
+                    "label": "Puhelinnumero"
+                },
+                "email": {
+                    "label": "S\u00e4hk\u00f6posti"
+                }
+            },
+            "socialMedia": {
+                "label": "Linkit sosiaaliseen mediaan"
+            },
+            "apisPerPage": {
+                "label": "Rajapintoja per sivu"
+            },
+            "mediaPerPage": {
+                "label": "Mediasis\u00e4ll\u00f6n m\u00e4\u00e4r\u00e4 per sivu"
             }
         },
         "organizationApis": {
@@ -581,515 +1089,6 @@
             }
         }
     },
-    "swaggerUi_alertText_Warning": "Varoitus!",
-    "swaggerUi_alertText_mainText": "T\u00e4m\u00e4 j\u00e4rjestelm\u00e4 k\u00e4ytt\u00e4\u00e4 https-protokollaa. Rajapintapyynn\u00f6t dokumentaatiosta eiv\u00e4t toimi, koska rajapinta k\u00e4ytt\u00e4\u00e4 http-protokollaa.",
-    "uploadOrganizationCoverButton_text": "Lataa kansikuva",
-    "uploadOrganizationCover_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n kansikuvan?",
-    "uploadOrganizationCover_successfully_deleted": "Kansikuva on poistettu!",
-    "aboutApinf_documentation": "Dokumentaatio",
-    "aboutApinf_contributors": "Tekij\u00e4t",
-    "aboutApinf_copyright": "Tekij\u00e4noikeus",
-    "aboutApinf_copyrightLicense": "Tekij\u00e4noikeus ja lisenssi",
-    "aboutApinf_createdBy": "Kehitt\u00e4nyt",
-    "aboutApinf_credits": "Kiitokset",
-    "aboutApinf_license": "Lisenssi",
-    "aboutApinf_doneButton_text": "Valmis",
-    "aboutApinf_intro": "APInf on avoimella l\u00e4hdekoodilla toteutettu rajapintojen hallintaj\u00e4rjestelm\u00e4.",
-    "aboutApinf_homepage": "Kotisivu",
-    "aboutApinf_openSource": "Avointa l\u00e4hdekoodia",
-    "aboutApinf_projectLinks": "Linkit projektiin",
-    "aboutApinf_projectVersions": "Versiotiedot",
-    "aboutApinf_sourcecode": "L\u00e4hdekoodi",
-    "aboutApinf_support": "Tukea",
-    "aboutApinf_title": "APInfista",
-    "account_delete_button_text": "Poista tili",
-    "account_delete_warning": "Toimintoa ei voi peruuttaa",
-    "account_delete_title": "Poista tili",
-    "account_details": "K\u00e4ytt\u00e4j\u00e4tilin tiedot",
-    "addApi_button_text": "Lis\u00e4\u00e4 rajapinta",
-    "addApi_header": "Lis\u00e4\u00e4 rajapinta",
-    "addApiBacklogItem_addBacklogItem_button": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
-    "addApiBacklogItem_modalTitle": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
-    "addBackend_simple_backendInformation_helptext": "Sy\u00f6t\u00e4 rajapintapalvelimen osoite ja porttinumero. Esim. google.com:80",
-    "addBackend_simple_baseInformation_helptext": "Sy\u00f6t\u00e4 rajapinnan nimi.",
-    "addBackend_simple_prefixInformation_helptext": "Sy\u00f6t\u00e4 frontend- ja backend-polut, laita alkuun kauttaviiva '\/'",
-    "addOrganizationManagerForm_title": "Lis\u00e4\u00e4 organisaation yll\u00e4pit\u00e4j\u00e4",
-    "addOrganizationManagerForm_description": "Kun rajapinta on yhdistetty organisaatioon, organisaation yll\u00e4pit\u00e4j\u00e4ll\u00e4 on samat oikeudet kuin rajapinnan omistajalla muokata rajapintaa ja poistaa rajapinta.",
-    "addOrganizationManagerForm_button": "Lis\u00e4\u00e4",
-    "organizationManagerForm_managerAlreadyExist_errorText": "K\u00e4ytt\u00e4j\u00e4 on jo t\u00e4m\u00e4n organisaation yll\u00e4pit\u00e4j\u00e4.",
-    "apiAuthorizedUsersList_ header_text": "Sallitut k\u00e4ytt\u00e4j\u00e4t",
-    "apiBackend_Status_Checking": "Rajapinnan tilaa tarkistetaan. Odota hetki...",
-    "apiBackend_Status_Title": "Tila",
-    "apiBackend_Status_Updated": "P\u00e4ivitetty:",
-    "apiBackend_Usage_Instructions_Headline": "Kutsu rajapintaaa osoitteesta:",
-    "apiBackend_Usage_Instructions_Note": "Huomaa:",
-    "apiBackend_Usage_Instructions_Note_Text": "L\u00f6yd\u00e4t rajapinta-avaimesi rajapinnan profiilisivulta.",
-    "apiBackend_Usage_Instructions_Profile_Page_Link": "Tarkastele profiilia.",
-    "apiBackendRating_anonymousError": "Kirjaudu pisteytt\u00e4\u00e4ksesi t\u00e4m\u00e4 rajapinta.",
-    "apiBackends_Add_API_Title": "Lis\u00e4\u00e4 rajapinta",
-    "apiBackends_AdvancedRequestsRewriting": "Monipuolinen pyynt\u00f6jen uudelleenkirjoitus",
-    "apiBackends_AdvancedRequestsRewriting_Help": "Muokkaa Umbrellan front-endiin tulevia pyynt\u00f6j\u00e4 ennen kuin ne vied\u00e4\u00e4n rajapintasi taustaj\u00e4rjestelm\u00e4\u00e4n.",
-    "apiBackends_AdvancedSettings": "Lis\u00e4asetukset",
-    "apiBackends_Backend_Help": "M\u00e4\u00e4rit\u00e4 rajapintapalvelin. Voit antaa useamman palvelimen tiedot hy\u00f6dynt\u00e4\u00e4ksesi kuormantasausta.",
-    "apiBackends_Backend_Title": "Taustaj\u00e4rjestelm\u00e4",
-    "apiBackends_DocumentationTitle": "Dokumentaatio",
-    "apiBackends_Documentation_Link": "Linkki dokumentaatioon",
-    "apiBackends_Edit_API_Title": "Muokkaa rajapintaa",
-    "apiBackends_GlobalRequestSettings_Title": "Yleiset pyynt\u00f6asetukset",
-    "apiBackends_HostRewrite": "uudelleenkirjoita muotoon",
-    "apiBackends_Host_Title": "Is\u00e4nt\u00e4kone",
-    "apiBackends_Matching_Title": "Vastaavat URL-etuliitteet",
-    "apiBackends_Matching_Title_Help": "Mitk\u00e4 URL-etuliitteet tulisi reititt\u00e4\u00e4 t\u00e4h\u00e4n rajapinnan taustaj\u00e4rjestelm\u00e4\u00e4n?",
-    "apiBackends_Submit": "L\u00e4het\u00e4",
-    "apiBackends_Title_Help": "Rajapinnan nimi",
-    "apiBacklog_addBacklogItem_buttonText": "Lis\u00e4\u00e4 uusi teht\u00e4v\u00e4",
-    "apiBacklogList_noApiBacklogItemsFound": "Ei l\u00f6ydetty teht\u00e4vi\u00e4 t\u00e4lle rajapinnalle.",
-    "apiBacklog_mainTitle": "Kehitysjono",
-    "apiBacklogItems_priorityText_High": "Korkea",
-    "apiBacklogItems_priorityText_Middle": "Normaali",
-    "apiBacklogItems_priorityText_None": "Ei m\u00e4\u00e4ritelty",
-    "apiCard_labelText_private": "yksityinen",
-    "apiCard_tooltipTitle_averageRating": "Arvostelujen keskiarvo",
-    "apiCatalog_apisCount": "(__count__ rajapinta)",
-    "apiCatalog_apisCount_plural": "(__count__ rajapintaa)",
-    "apiSettingsDelete_deleteButton": "Poista",
-    "apiDetails_baseUrl_headingText": "Rajapinnan osoite",
-    "apiDetails_description_headingText": "Kuvaus",
-    "apiDetails_usageInstructions_headingText": "Tehd\u00e4ksesi kutsuja t\u00e4h\u00e4n rajapintaan voit:",
-    "apiDetails_usageInstructions_requestHeaders_text": "kutsua rajapintaa antamalla avaimesi pyynn\u00f6n otsikkotiedoissa:",
-    "apiDetails_usageInstructions_disableApiKeyText": "K\u00e4yt\u00e4 osoitetta:",
-    "apiDetails_usageInstructions_noApiKeyText": "K\u00e4yt\u00e4 rajapinta-avainta. Klikkaa \"Hae rajapinta-avain\" -nappia saadaksesi avaimen.",
-    "apiDetailsForm_text_updateInformation": "Rajapinnan tietoja p\u00e4ivitettiin",
-    "apiDocumentationEditor_notAvailable": "Dokumentaation muokkausohjelma ei ole saatavilla.",
-    "apiDocumentation_APICall_Warning_Message": "Swaggerista tehdyt rajapintakutsut (PUT, POST ja DELETE) ovat todellisia kutsuja.",
-    "apiDocumentation_APICall_Warning_Title": "Varoitus!",
-    "apiDocumentation_Link_Title": "Linkki",
-    "apiDocumentation_manageDocumentation_buttonText": "Hallinnoi",
-    "apiDocumentation_No_Link_Manager_Message": "Voit lis\u00e4t\u00e4 yhden k\u00e4ytt\u00e4en Hallinnoi rajapintaa -toimintoa.",
-    "apiDocumentation_No_Link_Message": "Linkki\u00e4 dokumentaatioon ei ole saatavilla.",
-    "apiDocumentation_No_Swagger_Manager_Message": "Voit lis\u00e4t\u00e4 yhden k\u00e4ytt\u00e4en Hallinnoi rajapintaa -toimintoa.",
-    "apiDocumentation_No_Swagger_Message": "Swagger-dokumentti ei ole saatavilla",
-    "apiDocumentation_Title": "Dokumentaatio",
-    "apiDocumentation_Viewer_Title": "Katselu",
-    "apiDocumentation_sdkGenerateButton": "Luo SDK",
-    "apiDocumentation_tooltipSDKGeneratorButton": "Mik\u00e4li Swagger-tiedosto on kelvollinen, voit ladata haluamasi ohjelmointikielen SDK:n k\u00e4ytt\u00e4m\u00e4ll\u00e4 t\u00e4t\u00e4 velhoa",
-    "apiExport_json_button": "Lataa .json",
-    "apiExport_yaml_button": "Lataa .yaml",
-    "apiExport_api_title": "Lataa rajapintakonfiguraatio",
-    "apiExport_api_description": "Lataa rajapintakonfiguraatio JSON- tai YAML-muodossa",
-    "apiExport_proxy_title": "Lataa v\u00e4lityspalvelimen konfiguraatio",
-    "apiExport_proxy_description": "Lataa rajapintakonfiguraatio JSON- tai YAML-muodossa",
-    "apiExport_title": "Lataa",
-    "apiFilteredBy_text_filteredBy": "Suodatin: \"__tag__\"",
-    "apiFilteredBy_buttonText_clear": "Tyhjenn\u00e4 kaikki",
-    "apisFilterForm_buttonText_filter": "Suodata",
-    "apisFilterForm_buttonText_clear": "Tyhjenn\u00e4",
-    "apisFilterForm_labelText_lifecycle": "Elinkaaren vaihe",
-    "apisFilterForm_optionText_selectOne": "(Valitse yksi)",
-    "apisFilterIcon_tooltipText_filter": "Suodatusvalinnat",
-    "apiIntro_doneLabel": "Valmis",
-    "apiIntro_nextLabel": "Seuraava",
-    "apiIntro_previousLabel": "Edellinen",
-    "apiIntro_steps_backlog_intro": "Lis\u00e4\u00e4 rajapintaasi suunnitellut piirteet ja niiden t\u00e4rkeysj\u00e4rjestys kehitt\u00e4j\u00e4yhteis\u00f6si n\u00e4ht\u00e4v\u00e4ksi.",
-    "apiIntro_steps_details_intro": "Sis\u00e4lt\u00e4\u00e4 rajapinnan perustiedot ja ohjeita rajapinnan k\u00e4ytt\u00e4miseen.",
-    "apiIntro_steps_documentation_intro": "Lataa ja jaa rajapintaasi kuvaavaa dokumentaatiota. Kehitt\u00e4j\u00e4t voivat ladata esimerkkikoodia haluamallaan ohjelmointikielell\u00e4.",
-    "apiIntro_steps_export_intro": "Lataa rajapintasi asetukset .JSON- tai .YAML-tiedostona varmuuskopiointia tai siirtoa varten.",
-    "apiIntro_steps_feedback_intro": "Rajapintasi k\u00e4ytt\u00e4j\u00e4t voivat j\u00e4tt\u00e4\u00e4 palautetta ja virheilmoituksia tai tehd\u00e4 toiminnallisuuspyynt\u00f6j\u00e4.",
-    "apiIntro_steps_metadata_intro": "Anna rajapintaasi liittyvi\u00e4 tausta- ja kuvaustietoja.",
-    "apiIntro_steps_proxy_intro": "K\u00e4yt\u00e4 t\u00e4t\u00e4 v\u00e4lilehte\u00e4 liitt\u00e4\u00e4ksesi rajapintasi v\u00e4lityspalvelimeen. V\u00e4lityspalvelimen avulla saat k\u00e4ytt\u00f6\u00f6si erilaisia rajapintahallintaan kuuluvia piirteit\u00e4, kuten analytiikan ja API-avaimet.",
-    "apiIntro_steps_settings_intro": "Muokkaa rajapintasi asetuksia t\u00e4ll\u00e4 v\u00e4lilehdell\u00e4. T\u00e4\u00e4ll\u00e4 voit my\u00f6s poistaa rajapintasi.",
-    "apiIntro_steps_welcome_intro": "Tervetuloa",
-    "apiIntro_skipLabel": "J\u00e4t\u00e4 v\u00e4liin",
-    "apiIntro_quickTour_button_text": "Tutustumiskierros",
-    "apiKeys_label": "Rajapinta-avain",
-    "apiKeys_getApiKeyButton": "Hae rajapinta-avain",
-    "apiKeys_copyButtonText": "Kopioi rajapinta-avain",
-    "apiKeys_copySuccessful": "Rajapinta-avain kopioitu leikep\u00f6yd\u00e4lle.",
-    "apiKeys_getApiKeyButton_success": "Rajapinta-avain haettu onnistuneesti.",
-    "apiKeys_getApiKeyButton_processing": "Prosessoidaan...",
-    "apiLifecycleStatus_labelText_development": "Kehitys",
-    "apiLifecycleStatus_labelText_deprecated": "K\u00e4yt\u00f6st\u00e4 poistettu",
-    "apiLifecycleStatus_labelText_design": "Suunnittelu",
-    "apiLifecycleStatus_labelText_production": "Tuotanto",
-    "apiLifecycleStatus_labelText_testing": "Testaus",
-    "apiLifecycleStatus_labelText_unknown": "Tuntematon",
-    "apiLogo_resumable_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
-    "apiLogo_resumable_successfully_uploaded": "Logon lataus onnistui!",
-    "apiMedia_apiRelatedMedia_Add_Button_Help": "Lis\u00e4\u00e4 t\u00e4ydent\u00e4v\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4",
-    "apiMedia_RelatedMedia_CreationTime": "Luotu %s",
-    "apiMetadata_dateInvalid": "Loppup\u00e4iv\u00e4n pit\u00e4\u00e4 olla aloitusp\u00e4iv\u00e4n j\u00e4lkeen",
-    "apiOrganization_disconnectButton": "Katkaise yhteys",
-    "apiOrganization_panelTitle": "Yhdist\u00e4 rajapinta organisaatioon",
-    "apiRemoveAuthorizedUser_cancelButton_text": "Peruuta",
-    "apiRemoveAuthorizedUser_confirmation_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n sallitun k\u00e4ytt\u00e4j\u00e4n?",
-    "apiRemoveAuthorizedUser_modalTitle": "Poista sallittu k\u00e4ytt\u00e4j\u00e4",
-    "apiRemoveAuthorizedUser_removeButton_text": "Poista",
-    "apiSelectPicker_administratorApis": "Yll\u00e4pit\u00e4j\u00e4",
-    "apiSelectPicker_myApis": "Rajapintani",
-    "apiSelectPicker_otherApis": "Muut rajapinnat",
-    "apiSelectPicker_selectAPI": "Valitse rajapinta",
-    "apiSettingsDelete_apiText": "Toimintoa ei voi peruuttaa. Rajapinta ja kaikki siihen liittyv\u00e4 tieto, kuten metadata, dokumentaatio, teht\u00e4v\u00e4lista ja palaute, poistetaan.",
-    "apiSettingsDelete_apiTitle": "Poista rajapinta",
-    "apiSettingsDelete_panelTitle": "Poista",
-    "apiSettingsDetails_title": "Tiedot",
-    "apiSettingsDetails_saveButton": "Tallenna",
-    "apiSettingsDetails_uploadLogo_heading": "Lis\u00e4\u00e4 logo",
-    "apiSettingsDetails_uploadLogoText": "Voit lis\u00e4t\u00e4 logon rajapinnallesi. Logo n\u00e4kyy rajapintaluettelossa ja rajapinnan profiilisivulla.",
-    "apiSettingsVisibility_title": "N\u00e4kyvyys",
-    "apiSettingsVisibility_heading": "Muuta rajapinnan n\u00e4kyvyytt\u00e4",
-    "apiSettingsVisibility_text": "Muuta rajapinta julkiseksi tai yksityiseksi",
-    "apiAuthorizedUsersList_authorizedUsers": "Anna yksitt\u00e4isille k\u00e4ytt\u00e4jille oikeus n\u00e4hd\u00e4 yksityiseksi merkitty rajapintasi.",
-    "api_backend_rating_anonymous": "Kirjaudu sis\u00e4\u00e4n pisteytt\u00e4\u00e4ksesi rajapinta.",
-    "apinf_apiumbrellauser_error": "Virhe: K\u00e4ytt\u00e4j\u00e4n luominen v\u00e4lityspalvelimeen ei onnistunut",
-    "apinf_noproxy_error": "Virhe: V\u00e4lityspalvelinta ei l\u00f6ytynyt",
-    "apinf_noproxybackend_error": "Virhe: V\u00e4lityspalvelimeen liitetty\u00e4 rajapintaa ei l\u00f6ytynyt",
-    "apinf_usernotloggedin_error": "Kirjautunutta k\u00e4ytt\u00e4j\u00e4\u00e4 ei l\u00f6ytynyt.",
-    "apiMonitoring_panelTitle_Monitoring": "Rajapinnan valvonta",
-    "apiMonitoring_helpIcon_text": "Anna polku p\u00e4\u00e4tepisteeseen (endpoint), johon voidaan tehd\u00e4 rajapintakutsuja. Rajapinnan valvonta suoritetaan tekem\u00e4ll\u00e4 HTTP-pyynt\u00f6j\u00e4. Voit k\u00e4ytt\u00e4\u00e4 ainoastaan GET-metodia.",
-    "apiMonitoring_saveButton_text": "Tallenna",
-    "apiMonitoringForm_successMessage": "Rajapinnan valvonnan asetukset on tallennettu!",
-    "apiMonitoringForm_errorMessage": "Valvottava p\u00e4\u00e4tepiste vaaditaan",
-    "apiMedia_apiRelatedMedia_Add_Button": "Lis\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4",
-    "apiMedia_PostItem_Added_Text": "Lis\u00e4tty",
-    "apiMediaPostsForm_Add_Edit_Title": "T\u00e4ydent\u00e4v\u00e4 media",
-    "apiMedia_deletePostConfirmation_cancelButton": "Peruuta",
-    "apiMedia_deletePostConfirmation_deleteButton": "Poista",
-    "apiMedia_deletePostConfirmation_confirmDeleteMessage": "Haluatko varmasti poistaa",
-    "apiMedia_deletePostConfirmation_confirmDeleteNote": "Huomaa:",
-    "apiMedia_deletePostConfirmation_confirmDeleteInformation": "T\u00e4t\u00e4 toimintoa ei voi peruuttaa!",
-    "apiMedia_PostItem_Edit_Button": "Muokkaa",
-    "apiMedia_PostItem_Delete_Button": "Poista",
-    "apiMediaPostsForm_Submit": "L\u00e4het\u00e4",
-    "apiMedia_apiRelatedMedia_Title": "T\u00e4ydent\u00e4v\u00e4 media",
-    "apiMedia_deletePostConfirmation_title_text": "Poista sis\u00e4lt\u00f6",
-    "apiOembed_No_Link_message": "T\u00e4ydent\u00e4v\u00e4\u00e4 mediasis\u00e4lt\u00f6\u00e4 ei ole saatavilla.",
-    "apiMedia_apiRelatedMedia_Well_Message": "T\u00e4t\u00e4 rajapintaa koskevaa mediasis\u00e4lt\u00f6\u00e4 ei ole lis\u00e4tty .",
-    "apiProxy_headerText": "Rajapinnan v\u00e4lityspalvelinasetukset",
-    "apiUserAuthorizationForm_addButton_text": "Lis\u00e4\u00e4 sallittu k\u00e4ytt\u00e4j\u00e4",
-    "apiUserAuthorizationForm_header_text": "Lis\u00e4\u00e4 sallittuja k\u00e4ytt\u00e4ji\u00e4",
-    "authorizedUserForm_emailNotRegistered_errorText": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta ei ole viel\u00e4 rekister\u00f6ity j\u00e4rjestelm\u00e4\u00e4n.",
-    "authorizedUserForm_success_message": "K\u00e4ytt\u00e4j\u00e4 lis\u00e4tty sallittuihin k\u00e4ytt\u00e4jiin",
-    "backlogItem_addedByYou": "Lis\u00e4nnyt: nykyinen k\u00e4ytt\u00e4j\u00e4",
-    "backlogItem_editButton_text": "Muokkaa",
-    "backlogItem_deleteButton_text": "Poista",
-    "bookmark_buttonText_bookmark": "Kirjanmerkki",
-    "bookmark_buttonText_unbookmark": "Poista kirjanmerkki",
-    "branding_update": "P\u00e4ivit\u00e4",
-    "branding_save": "Tallenna",
-    "branding_panel_title": "Projektin br\u00e4nd\u00e4ys",
-    "catalogue_bookmarkTooltip_nonUser": "Kirjanmerkkien lukum\u00e4\u00e4r\u00e4. Kirjaudu sis\u00e4\u00e4n lis\u00e4t\u00e4ksesi kirjanmerkin.",
-    "catalogue_BookmarkTooltip_user": "Lis\u00e4\u00e4 rajapinta kirjanmerkkeihin",
-    "catalogue_paginationButtons_next": "Seuraava",
-    "catalogue_paginationButtons_previous": "Edellinen",
-    "catalogue_toolbar_filterOptions_myApis": "Rajapintani",
-    "catalogue_toolbar_filterOptions_myBookmarks": "Kirjanmerkkini",
-    "catalogue_toolbar_filterOptions_showAll": "N\u00e4yt\u00e4 kaikki",
-    "catalogue_toolbar_sortBy_title": "J\u00e4rjest\u00e4",
-    "catalogue_toolbar_sortMenuOptions_averageRating": "Arvostelujen keskiarvo",
-    "catalogue_toolbar_sortMenuOptions_bookmarkCount": "Kirjanmerkkien lukum\u00e4\u00e4r\u00e4",
-    "catalogue_toolbar_sortMenuOptions_dateCreated": "Luontip\u00e4iv\u00e4",
-    "catalogue_toolbar_sortMenuOptions_name": "Nimi",
-    "catalogue_toolbar_sortMenuOptions_sortAscending": "Nouseva",
-    "catalogue_toolbar_sortMenuOptions_sortDescending": "Laskeva",
-    "catalogue_toolbar_toggleCollapse": "Vaihda ty\u00f6kaluvalikon navigaatiota",
-    "catalogue_toolbar_viewMode_grid": "Ruudukko",
-    "catalogue_toolbar_viewMode_table": "Taulukko",
-    "catalogueGrid_addedBy": "Lis\u00e4nnyt",
-    "catalogueTable_added": "Lis\u00e4tty",
-    "catalogueTable_addedBy": "Lis\u00e4nnyt",
-    "catalogueTable_labelText_private": "yksityinen",
-    "catalogue_Title": "Rajapintaluettelo",
-    "changeSelectedProxy_buttonCancel": "Peruuta",
-    "changeSelectedProxy_buttonConfirm": "Vaihda v\u00e4lityspalvelin",
-    "changeSelectedProxy_title": "Vaihda v\u00e4lityspalvelin",
-    "changeSelectedProxy_textCaution": "Huomio!",
-    "changeSelectedProxy_textConfirm": "V\u00e4lityspalvelimen vaihto muuttaa kutsuosoitetta ja saattaa rikkoa rajapintakutsut sovelluksista. Ilmoita rajapinnan k\u00e4ytt\u00e4jille t\u00e4st\u00e4 muutoksesta ja pyyd\u00e4 heit\u00e4 tarkastamaan, tarvitseeko heid\u00e4n tarvitsee hankkia uusi rajapinta-avain uudelle v\u00e4lityspalvelimelle",
-    "connectApiToOrganizationModal_helpText": "Voit lis\u00e4t\u00e4 hallinnoimasi rajapinnan organisaatioon. Sen j\u00e4lkeen lis\u00e4\u00e4m\u00e4si rajapinta n\u00e4kyy organisaation profiilisivulla.",
-    "connectApiToOrganizationModal_buttonText_close": "Sulje",
-    "connectApiToOrganizationModal_text_noOneApis": "Kaikki hallinnoimasi rajapinnat on jo yhdistetty.",
-    "connectApiToOrganizationModal_modalTitle": "Yhdist\u00e4 rajapinta",
-    "contactForm_reset": "Nollaa",
-    "contactForm_successMessage": "Kiitos! Viestisi on l\u00e4hetetty.",
-    "contactForm_submit": "L\u00e4het\u00e4",
-    "dashboard_addApiButton_text": "Lis\u00e4\u00e4 rajapinta",
-    "dashboard_mainTitle": "Analytiikkan\u00e4kym\u00e4",
-    "dashboard_noApisTitle": "Sinulla ei ole hallinnoitavia rajapintoja.",
-    "dashboard_noProxyBackendsText": "Et ole viel\u00e4 liitt\u00e4nyt yht\u00e4\u00e4n rajapintaa v\u00e4lityspalvelimeen. N\u00e4hd\u00e4ksesi analytiikkaa rajapintasi k\u00e4yt\u00f6st\u00e4, etsi rajapintasi rajapintaluettelosta ja yhdist\u00e4 rajapintasi v\u00e4lityspalvelimeen rajapinnan profiilisivulta.",
-    "dashboardDataTable_help_text": "Saatavilla oleva data riippuu rajapinnan vasteajan, HTTP-statuskodien tai rajapinnan vasteaikojen kuvaajissa tehdyist\u00e4 rajauksista.",
-    "dashboardDataTable_nextPage": "Seuraava",
-    "dashboardDataTable_prevPage": "Edellinen",
-    "dashboardDataTable_recordsPerPage": "tulosta per sivu",
-    "dashboardDataTable_requestCountry": "Maa",
-    "dashboardDataTable_requestIP": "IP",
-    "dashboardDataTable_requestPath": "Polku",
-    "dashboardDataTable_responseStatus": "HTTP-statuskoodit",
-    "dashboardDataTable_responseTime": "Vasteaika (ms)",
-    "dashboardDataTable_timeStamp": "P\u00e4iv\u00e4ys",
-    "dashboardDataTable_title": "Analytiikka",
-    "dashboardDataTable_pageCount": "Sivu",
-    "dashboardCharts_placeholder_noDataFound": "Tietoja ei l\u00f6ytynyt. <br\/> Kokeile muuttaa suodatusvaihtoehtoja n\u00e4hd\u00e4ksesi analytiikkadataa.",
-    "dashboardCharts_placeholder_loadingData": "Haetaan uusinta dataa...",
-    "deleteAccount_closeButton": "Sulje",
-    "deleteAccount_confirmDelete": "Poista",
-    "deleteAccount_success_message": "Tili poistettu",
-    "deleteApiConfirmation_cancelButton": "Peruuta",
-    "deleteApiConfirmation_confirmDeleteInformation": "Toimintoa ei voi peruuttaa! Rajapinta ja kaikki siihen liittyv\u00e4 tieto, kuten metadata, dokumentaatio, kehitysjono ja palaute, poistetaan.",
-    "deleteApiConfirmation_confirmDeleteMessage": "Haluatko varmasti poistaa",
-    "deleteApiConfirmation_confirmDeleteNote": "Huomaa:",
-    "deleteApiConfirmation_deleteButton": "Poista",
-    "deleteApiConfirmation_header": "Poista rajapinta",
-    "deleteApiConfirmation_successMessage": "Poistettu rajapinta: ",
-    "deleteOrganizationConfirmation_cancelButton": "Peruuta",
-    "deleteOrganizationConfirmation_confirmDeleteInformation": "Kaikki organisaatioon liittyv\u00e4 tieto poistetaan. Toimintoa ei voi peruuttaa.",
-    "deleteOrganizationConfirmation_confirmDeleteMessage": "Haluatko varmasti poistaa",
-    "deleteOrganizationConfirmation_confirmDeleteNote": "Huomaa:",
-    "deleteOrganizationConfirmation_deleteButton": "Poista",
-    "deleteOrganizationConfirmation_header": "Poista organisaatio",
-    "deleteOrganizationConfirmation_successMessage": "Organisaatio poistettu: ",
-    "deleteAccount_title": "Poista k\u00e4ytt\u00e4j\u00e4tili",
-    "deleteAccount_confirm_text": "Haluatko varmasti poistaa k\u00e4ytt\u00e4j\u00e4tilisi?",
-    "deleteBacklogItem_modalTitle": "Poista teht\u00e4v\u00e4",
-    "deleteBacklogItem_confirmation_text": "Haluatko varmasi poistaa t\u00e4m\u00e4n teht\u00e4v\u00e4n?",
-    "deleteBacklogItem_cancelButton_text": "Peruuta",
-    "deleteBacklogItem_deleteButton_text": "Poista teht\u00e4v\u00e4",
-    "deleteFeedbackItem_modalTitle": "Poista palaute",
-    "deleteFeedbackItem_confirmation_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n palautteen ja kaikki sen saamat \u00e4\u00e4net?",
-    "deleteFeedbackItem_cancelButton_text": "Peruuta",
-    "deleteFeedbackItem_deleteButton_text": "Poista palaute",
-    "feedbackItem_messageType": {
-        "Feedback": "Palaute",
-        "Error report": "Virheraportti",
-        "Feature request": "Ehdotus toiminnallisuudeksi"
-    },
-    "deleteOrganizationApiConfirmation_cancelButton_text": "Peruuta",
-    "deleteOrganizationApiConfirmation_confirm_text": "Haluatko varmasti poistaa t\u00e4m\u00e4n rajapinnan seuraavasta organisaatiosta: ",
-    "deleteOrganizationApiConfirmation_disconnectButton_text": "Katkaise yhteys",
-    "deleteOrganizationApiConfirmation_header_text": "Poista rajapinta seuraavasta organisaatiosta",
-    "deleteOrganizationApiConfirmation_success_message": "Rajapinta poistettu organisaatiosta",
-    "editApiMetadata_editButton": "Muokkaa metadataa",
-    "editApiMetadata_editApiMetadataForm_title": "Muokkaa rajapinnan metadataa",
-    "editApiMetadata_submitButtonText": "Tallenna metadata",
-    "editBacklogItem_modalTitle": "Muokkaa teht\u00e4v\u00e4\u00e4",
-    "editBacklogItem_submit_buttonText": "Tallenna",
-    "emailTemplates_verifyEmail_message": "Vahvistaaksesi s\u00e4hk\u00f6postiosoitteesi mene t\u00e4h\u00e4n osoitteeseen:",
-    "emailTemplates_verifyEmail_title": "Vahvista s\u00e4hk\u00f6postiosoitteesi",
-    "emailVerification_successMessage": "S\u00e4hk\u00f6postisi on nyt vahvistettu. Kiitos!",
-    "esData_notFound": "Rajapintojen k\u00e4ytt\u00f6tilastoja ei ole saatavilla.",
-    "favourite_Add": "Lis\u00e4\u00e4 kirjanmerkki",
-    "favourite_Remove": "Poista kirjanmerkki",
-    "feedbackForm_successMessage": "Kiitos! Palautteesi on l\u00e4hetetty.",
-    "feedbackItem_type": "Tyyppi",
-    "feedbackItem_topic": "Aihe",
-    "feedbackItem_editButton_text": "Muokkaa",
-    "feedbackItem_deleteButton_text": "Poista",
-    "feedbackItem_sentBy_text": "L\u00e4hetti",
-    "feedbackItem_usernotloggedin_errorMessage": "Virhe: Kirjaudu sis\u00e4\u00e4n \u00e4\u00e4nest\u00e4\u00e4ksesi",
-    "feedback_feedbackForm_button": "L\u00e4het\u00e4 palaute",
-    "feedback_feedbackForm_description": "Vikaraportit, ominaisuusideat ja yleiset kommentit ovat tervetulleita.",
-    "feedback_feedbackForm_title": "L\u00e4het\u00e4 palautetta tai ilmoita ongelmasta",
-    "feedback_main_title": "Palautteet ja raportit",
-    "feedback_no_feedback": "Ei palautetta.",
-    "feedback_remove_button": "Poista",
-    "feedback_sendFeedback": "L\u00e4het\u00e4",
-    "feedback_view_button": "N\u00e4yt\u00e4",
-    "flagApiButton_buttonText": "Merkint\u00e4",
-    "flagApiButton_buttonText_active": "Merkitty",
-    "flagApiModal_cancelButton": "Peruuta",
-    "flagApiModal_removeApiFlag_insertMessage": "Rajapinta on merkitty.",
-    "flagApiModal_removeApiFlag_successMessage": "Merkint\u00e4 on poistettu rajapinnalta.",
-    "flagApiModal_removeApiFlag_updateMessage": "Rajapinnan merkint\u00e4tieto on p\u00e4ivitetty.",
-    "flagApiModal_removeButton": "Poista merkint\u00e4",
-    "flagApiModal_saveButton": "Tallenna",
-    "flagApiModal_titleText": "Tee merkint\u00e4 rajapinnasta",
-    "flagApiSchema_DefunctText": "Toimimaton",
-    "flagApiSchema_inappropriateText": "Ep\u00e4asiallinen",
-    "forbidden_Title": "403 P\u00e4\u00e4sy estetty",
-    "forbidden_Message": "Oikeutesi eiv\u00e4t riit\u00e4 sis\u00e4ll\u00f6n katseluun.",
-    "goBackButton_buttonText": "Palaa edelliselle sivulle",
-    "granularity_hour": "Tunti",
-    "granularity_day": "P\u00e4iv\u00e4",
-    "granularity_week": "Viikko",
-    "granularity_month": "Kuukausi",
-    "homeBody_feature_section_Statistic": "P\u00e4hkin\u00e4nkuoressa",
-    "homeBody_featureSection_statistics_apisCount_heading": "Rajapintoja:",
-    "homeBody_featureSection_statistics_organizationsCount_heading": "Organisaatioita:",
-    "homeBody_featureSection_statistics_usersCount_heading": "K\u00e4ytt\u00e4ji\u00e4:",
-    "homeBody_contactUs_heading": "Ota yhteytt\u00e4",
-    "homeBody_contactUs_text": "Ota yhteytt\u00e4 ja kysy lis\u00e4tietoja.",
-    "homeBody_feature_section_heading1": "Oletko rajapintojen hy\u00f6dynt\u00e4j\u00e4?",
-    "homeBody_feature_section_heading2": "Oletko rajapinnan omistaja?",
-    "homeBody_feature_title1": "Rajapintojen l\u00f6yt\u00e4minen",
-    "homeBody_feature_title1_text": "L\u00f6yd\u00e4 rajapintoja ja luo kirjanmerkkej\u00e4 kiinnostaviin rajapintoihin",
-    "homeBody_feature_title2": "Yhdist\u00e4 rajapintoja toisiinsa",
-    "homeBody_feature_title2_text": "Yhdist\u00e4 rajapintoja useista l\u00e4hteist\u00e4 (suunnitteilla)",
-    "homeBody_feature_title3": "Tutustu rajapintojen k\u00e4ytt\u00f6\u00e4 kuvaavaan dokumentaatioon",
-    "homeBody_feature_title3_text": "Rajapintadokumentaatio luettavissa",
-    "homeBody_feature_title4": "Seuraa sovelluksen k\u00e4ytt\u00f6tiheytt\u00e4",
-    "homeBody_feature_title4_text": "Voit tarkastella analytiikkaa sovelluksestasi teht\u00e4vist\u00e4 rajapintakutsuista",
-    "homeBody_feature_title5": "Julkaise rajapintasi",
-    "homeBody_feature_title5_text": "Tuo rajapinnat kehitt\u00e4jien saataville",
-    "homeBody_feature_title6": "Hallinnoi rajapintojasi",
-    "homeBody_feature_title6_text": "Hallinnoi helposti rajapintojasi, niiden m\u00e4\u00e4rittelyj\u00e4 ja k\u00e4ytt\u00f6oikeuksia",
-    "homeBody_feature_title7": "Seuraa rajapintojesi k\u00e4ytt\u00f6\u00e4",
-    "homeBody_feature_title7_text": "Tarkastele rajapintojesi k\u00e4ytt\u00f6\u00f6n liittyv\u00e4\u00e4 analytiikkaa",
-    "homeBody_feature_title8": "Selainpohjainen",
-    "homeBody_feature_title8_text": "Keskitetty k\u00e4ytt\u00e4j\u00e4hallinta",
-    "homeBody_openSource_imageAltText": "100% avointa l\u00e4hdekoodia",
-    "homeBody_section1_heading": "N\u00e4in p\u00e4\u00e4set alkuun",
-    "homeBody_section1_text": "Aloita luomalla k\u00e4ytt\u00e4j\u00e4tunnus. Kehitt\u00e4j\u00e4portaali tarjoaa yhden pys\u00e4hdyksen taktiikalla esimerkiksi mahdollisuuden l\u00f6yt\u00e4\u00e4 rajapintoja tai seurata oman sovelluksen kautta tehtyj\u00e4 rajapintakutsuja.",
-    "homeBody_section1_text_extra": "Rekister\u00f6idy",
-    "homeBody_section2_heading": "Tavoita kehitt\u00e4j\u00e4t",
-    "homeBody_section2_text": "APInf tarjoaa yhten\u00e4isen ja helpon k\u00e4ytt\u00f6liittym\u00e4n rajapintojen julkaisuun kehitt\u00e4j\u00e4yhteis\u00f6lle ja ty\u00f6kalut rajapintojen hallintaan. Sen avulla saat paremman k\u00e4sityksen rajapintasi k\u00e4yt\u00f6st\u00e4.",
-    "homeBody_section2_text_extra": "Ota yhteytt\u00e4",
-    "homeBody_section3_communityLinkText": "APInf yhteis\u00f6",
-    "homeBody_section3_heading": "T\u00e4ysin avointa l\u00e4hdekoodia",
-    "homeBody_section3_text": "APInfin moottorina toimii API Umbrella. APInf tarjoaa k\u00e4ytt\u00f6liittym\u00e4kerroksen API Umbrellan toiminnoille. Ratkaisu on kehitetty avoimena l\u00e4hdekoodina ja lisensoitu MIT-lisenssill\u00e4. K\u00e4ytt\u00f6liittym\u00e4n rakentamiseeen on k\u00e4ytetty Meteor.js- ja D3-teknologioita. Arvostamme yhteisty\u00f6t\u00e4, pyrimme kuuntelemaan k\u00e4ytt\u00e4ji\u00e4mme ja rohkaisemaan ihmisi\u00e4 liittym\u00e4\u00e4n kehitt\u00e4jiksi.",
-    "homeBody_section3_text_extra": "L\u00f6yd\u00e4t meid\u00e4t sosiaalisesta mediasta:",
-    "homeFooter_privacyPolicy_text": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
-    "homeFooter_termsOfUse_text": "K\u00e4ytt\u00f6ehdot",
-    "homeFooter_signIn": "Kirjaudu",
-    "homeFooter_signOut": "Kirjaudu ulos",
-    "homeFooter_signUp": "Rekister\u00f6idy",
-    "importApiConfiguration_errorMessage": "Konfiguraatiotiedoston tulee olla .YAML-, .YML-, .JSON- tai .TXT-muodossa.",
-    "import_ApiConfiguration_Drop": "Raahaa tiedosto t\u00e4h\u00e4n",
-    "import_ApiConfiguration_File": "Tiedosto:",
-    "import_ApiConfiguration_Preview": "Esikatselu",
-    "importApiConfiguration_jsonError_message": "Konfiguraatiotiedosto ei ole kelvollinen JSON-objekti.",
-    "import_ApiConfiguration_Title": "Tuo rajapinnan m\u00e4\u00e4rittelyt tiedostosta",
-    "import_ApiConfiguration_Upload": "Lataa palvelimelle",
-    "import_ApiDocumentation_File": "M\u00e4\u00e4rittelytiedosto dokumentaatiolle",
-    "importApiDocumentation_fileExtensionError_message": "Vain .json- and .yaml(.yml)-tiedostot ovat tuettu.",
-    "importApiDocumentation_fileReadError_message": "Virhe tiedoston luvussa. Tarkista tiedoston sis\u00e4lt\u00f6.",
-    "latestApiBackends_DateAdded": "Lis\u00e4tty %s",
-    "latestApiBackends_Heading": "Uusimmat rajapinnat",
-    "latestApiBackends_MoreInfo": "Lis\u00e4\u00e4 tietoa",
-    "latestApiBackends_NotFound": "Ei l\u00f6ydetty rajapintoja.",
-    "loginVerify_errorMessage": "Olet saanut s\u00e4hk\u00f6postin osoitteesi vahvistusta varten. Viimeistele s\u00e4hk\u00f6postin vahvistus, jotta voit kirjautua.",
-    "manageApiDocumentationModalUploadButton": "Valitse tiedosto",
-    "manageApiDocumentationModal_AddedFile_Message": "Dokumentaatiotiedosto ladattu!",
-    "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Peruuta",
-    "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Tallenna",
-    "manageApiDocumentationModal_CreateDocumentation_Title": "Luo dokumentaatiotiedosto",
-    "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Haluatko varmasti poistaa dokumentaatiotiedoston?",
-    "manageApiDocumentationModal_DeletedFile_Message": "Dokumentaatiotiedosto poistettu!",
-    "manageApiDocumentationModal_DocumentationLink_Title": "Linkki ulkoiseen dokumentaation",
-    "manageApiDocumentationModal_FileType_Message": "Vain .json- and .yaml(.yml)-tiedostot ovat tuettu.",
-    "manageApiDocumentationModal_LinkField_Updated_Message": "Dokumentaatiolinkki p\u00e4ivitetty!",
-    "manageApiDocumentationModal_SizeLimit_Message": "Tiedoston maksimikoko 10 MB",
-    "manageApiDocumentationModal_Title": "Rajapintadokumentaatio",
-    "manageApiDocumentationModal_hints_createApiDocumentation": "Jos sinulla ei ole dokumentaatiotiedostoa, voit luoda sen ja ladata sen palveluun.",
-    "manageApiDocumentationModal_hints_documentation_link": "Linkki Wiki- tai Github-sivuun tai muuhun verkkoresurssiin, josta rajapintasi dokumentaatio on luettavissa.",
-    "manageApiDocumentationModal_hints_uploadApiDocumentation": "Voit my\u00f6s luoda uuden dokumentaatiotiedoston rajapinnallesi k\u00e4ytt\u00e4en Swagger-muokkausohjelmaa.",
-    "manageApiDocumentationModal_openDocumentationEditor": "Avaa dokumentaation muokkausohjelma",
-    "manageApiDocumentationModal_addDocumentation_title": "Lis\u00e4\u00e4 dokumentaatiota",
-    "navbar_addAPIBackend": "Lis\u00e4\u00e4 rajapinta",
-    "navbar_apis": "Rajapinnat",
-    "navbar_organizations": "Organisaatiot",
-    "navbar_about": "Tietoja",
-    "navbar_dashboard": "Analytiikkan\u00e4kym\u00e4",
-    "navbar_signIn": "Kirjaudu",
-    "navbar_signUp": "Rekister\u00f6idy",
-    "navbar_users": "K\u00e4ytt\u00e4j\u00e4t",
-    "notAuthorized_Message": "Sinulla ei ole oikeutta tarkastella t\u00e4t\u00e4 sivua.",
-    "notAuthorized_Title": "Ei oikeuksia.",
-    "notFound_Message_Part1": "Hakemaasi sivua ei l\u00f6ytynyt.",
-    "notFound_Title": "Sivua ei l\u00f6ytynyt.",
-    "organizationApis_connectButton": "Yhdist\u00e4",
-    "organizationApisForm_successText": "Rajapinta on nyt yhdistetty organisaatioon.",
-    "organizationCatalog_Title": "Organisaatioluettelo",
-    "organizationCatalog_buttonText_addOrganization": "Lis\u00e4\u00e4 organisaatio",
-    "organizationCatalog_toolbar_filterOptions_myOrganizations": "Organisaationi",
-    "organizationCatalog_toolbar_filterOptions_showAll": "N\u00e4yt\u00e4 kaikki",
-    "organizationCatalog_toolbar_sortBy_title": "J\u00e4rjest\u00e4",
-    "organizationCatalog_toolbar_sortMenuOptions_dateCreated": "Luontip\u00e4iv\u00e4",
-    "organizationCatalog_toolbar_sortMenuOptions_name": "Nimi",
-    "organizationCatalog_toolbar_sortMenuOptions_sortAscending": "Nouseva",
-    "organizationCatalog_toolbar_sortMenuOptions_sortDescending": "Laskeva",
-    "organizationCatalog_toolbar_toggleCollapse": "Vaihda ty\u00f6kaluvalikon navigaatiota",
-    "organizationCatalog_toolbar_viewMode_grid": "Ruudukko",
-    "organizationCatalog_toolbar_viewMode_table": "Taulukko",
-    "organizationCatalog_text_noOrganizationIsAvailable": "Organisaatioita ei ole saatavilla.",
-    "organizationCatalog_text_addOrganization": "Paina \"Lis\u00e4\u00e4 organisaatio\" -painiketta lis\u00e4t\u00e4ksesi uuden organisaation.",
-    "organizationCatalogTable_added": "Lis\u00e4tty",
-    "organizationCatalogGrid_organizationCardCreated_addedText": "Lis\u00e4tty %s",
-    "organizationCatalogGrid_organizationCardApisCount_apisText": "Rajapinnat",
-    "organizationForm_title": "Organisaation tiedot",
-    "organizationForm_contact_panelTitle": "Yhteyshenkil\u00f6",
-    "organizationForm_saveButton_text": "Tallenna",
-    "organizationForm_successText": "Organisaatio tallennettu",
-    "organizationLogo_noPermissions": "Oikeudet eiv\u00e4t riit\u00e4 logon lataamiseen.",
-    "organizationLogo_resumable_errorText": "Tiedoston luonti ei onnistunut!",
-    "organizationLogo_resumable_successfully_uploaded": "Logon lataus onnistui!",
-    "organizationLogo_resumable_acceptedExtensions": "Tuetut tiedostomuodot: .jpg, .jpeg, .png, .gif.",
-    "organizationManagersList_title": "Organisaation yll\u00e4pit\u00e4j\u00e4t",
-    "organizationManagerForm_successMessage": "Uusi yll\u00e4pit\u00e4j\u00e4 lis\u00e4tty.",
-    "organizationManagerForm_emailNotRegistered_errorText": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta ei ole viel\u00e4 rekister\u00f6ity j\u00e4rjestelm\u00e4\u00e4n.",
-    "organizationNoApis_text_noConnectedApis": "Organisaatioon ei ole liitetty yht\u00e4\u00e4n rajapintaa.",
-    "organizationNoApis_text_useButton": "Voit lis\u00e4t\u00e4 rajapinnan painamalla \"Yhdist\u00e4 rajapinta organisaatioon\" -painiketta.",
-    "organizationProfile_bigText_apisCount": "Rajapinnat",
-    "organizationProfileHeader_editButton_text": "Muokkaa",
-    "organizationProfileHeader_tabs_apis": "Rajapinnat",
-    "organizationProfileHeader_tabs_settings": "Asetukset",
-    "organizationProfile_smallText_apisCount": "(__count__ rajapinta)",
-    "organizationProfile_smallText_apisCount_plural": "(__count__ rajapintaa)",
-    "organizationProfile_buttonText_connectApi": "Yhdist\u00e4 rajapinta organisaatioon",
-    "organizationProfile_buttonText_clear": "Tyhjenn\u00e4 kaikki",
-    "organizationProfile_text_error": "Yhdist\u00e4minen ei onnistunut. Ilmoita ongelmasta yll\u00e4pidolle.",
-    "organizationRemoveManagers_cancelButton": "Peruuta",
-    "organizationRemoveManagers_description": "Haluatko varmasti poistaa t\u00e4m\u00e4n k\u00e4ytt\u00e4j\u00e4n organisaation yll\u00e4pit\u00e4jist\u00e4?",
-    "organizationRemoveManagers_removeButton": "Poista",
-    "organizationRemoveManagers_title": "Poista k\u00e4ytt\u00e4j\u00e4 yll\u00e4pit\u00e4jist\u00e4",
-    "organizationSettings_uploadLogo_heading": "Lataa logo",
-    "organizationSettings_uploadLogoText": "Voit lis\u00e4t\u00e4 logon organisaatiollesi. Logo n\u00e4kyy organisaatioluettelossa ja organisaation omalla sivulla.",
-    "organizationSettingsDelete_buttonText_delete": "Poista",
-    "organizationSettingsDelete_text_information": "Organisaatioon liittyv\u00e4 tieto poistetaan. Toimintoa ei voi peruuttaa.",
-    "organizationSettingsDelete_title": "Poista organisaatioprofiili",
-    "organizationSettingsDelete_panelTitle": "Poista",
-    "privacyPolicy_title": "Yksityisyysk\u00e4yt\u00e4nt\u00f6",
-    "profile_Header": "Profiili",
-    "profile_UpdateButton": "P\u00e4ivit\u00e4",
-    "profile_setUsername": "Anna k\u00e4ytt\u00e4j\u00e4nimesi.",
-    "profile_updatedSuccess": "Profiili p\u00e4ivitetty",
-    "profile_usernameInvalid": "K\u00e4ytt\u00e4j\u00e4nimen t\u00e4ytyy olla 3-15 merkki\u00e4. Ala- ja v\u00e4liviivat ovat sallittuja.",
-    "profile_usernameIsTaken": "K\u00e4ytt\u00e4j\u00e4nimi on jo olemassa. Sy\u00f6t\u00e4 uusi k\u00e4ytt\u00e4j\u00e4nimi.",
-    "proxies_pageHeader": "V\u00e4lityspalvelimet",
-    "proxies_addProxy": "Lis\u00e4\u00e4 v\u00e4lityspalvelin",
-    "proxies_noProxiesFound": "V\u00e4lityspalvelimia ei l\u00f6ytynyt.",
-    "proxyBackendForm_advancedSettings_title": "Lis\u00e4asetukset",
-    "proxyBackendForm_apiBasePath_helpText": "Peruspolku jokaiseen rajapintakutsuun. Esimerkiksi:",
-    "proxyBackendForm_apiPort_helpText": "Rajapintapalvelimen portin numero",
-    "proxyBackendForm_disableApiKey_helpText": "Salli k\u00e4ytt\u00e4jien kutsua rajapintaa ilman rajapinta-avainta.",
-    "proxyBackendForm_proxyBasePath_helpText": "Peruspolku jokaiseen v\u00e4lityspalvelinkutsuun. Esimerkiksi:",
-    "proxyBackendForm_successMessage": "Asetukset tallennettu.",
-    "proxyBackendForm_saveButton": "Tallenna ja julkaise",
-    "proxyBackendForm_deleteButton": "Poista",
-    "proxyBackendForm_deleteErrorMessage": "Poisto API Umbrella -v\u00e4lityspalvelimelta ep\u00e4onnistui",
-    "proxyBackendForm_frontendPrefixNotUnique": "Frontend-etuliite on jo k\u00e4yt\u00f6ss\u00e4. Valitse toinen etuliite.",
-    "proxyBackendForm_publishErrorMessage": "Julkaisu API Umbrella -v\u00e4lityspalvelimelle ep\u00e4onnistui",
-    "proxyBackendForm_requiredErrorMessage": "T\u00e4yt\u00e4 kaikki vaaditut kent\u00e4t",
-    "proxyBackendForm_deleteSuccessMessage": "V\u00e4lityspalvelinasetukset poistettu",
-    "proxyBackendForm_update_successMessage": "V\u00e4lityspalvelinasetukset p\u00e4ivitetty",
-    "proxyForm_header_text": "Lis\u00e4\u00e4 v\u00e4lityspalvelin",
-    "proxyForm_saveButton_text": "Tallenna",
-    "proxyForm_successText": "V\u00e4lityspalvelimen asetukset tallennettu.",
-    "proxyForm_errorText": "Kaikki t\u00e4hdell\u00e4 merkityt kent\u00e4t ovat pakollisia",
-    "proxyItem_editProxy": "Muokkaa",
-    "proxyItem_removeProxy": "Poista",
-    "proxyItem_type": "Tyyppi",
-    "proxyItem_url": "Web-osoite",
-    "proxyItem_apiKey": "Rajapinta-avain",
-    "proxyItem_apiToken": "Rajapinnan tunnisteavain",
-    "proxyItem_elasticsearch": "Elasticsearch",
-    "removeProxy_modalLabel": "Haluatko varmasti poistaa v\u00e4lityspalvelimen?",
-    "removeProxy_modalBody": "T\u00e4h\u00e4n v\u00e4lityspalvelimeen on yhdistetty rajapintoja. V\u00e4lityspalvelimen poistaminen tarkoittaa, ett\u00e4 rajapintakutsut n\u00e4ihin rajapintoihin lakkaavat toimimasta.",
-    "removeProxy_confirmRemoveProxy": "Kyll\u00e4, poista",
-    "removeProxy_cancelRemove": "Peruuta",
-    "removeProxy_errorMessage": "Virhe: V\u00e4lityspalvelimen poisto ep\u00e4onnistui",
-    "requestsOverTimeChart_showingRecordsCount": "N\u00e4ytet\u00e4\u00e4n tuloksia",
-    "requestsOverTimeChart_title": "Rajapintapyynt\u00f6jen aikajana",
-    "requestsOverTimeChart_help_text": "Klikkaa alapuolella olevaa yleiskuvaa aktivoidakseksi aikarajauksen. Voit k\u00e4ytt\u00e4\u00e4 sit\u00e4 valitaksesi jakson, jonka ajalta haluat n\u00e4hd\u00e4 rajapintakutsuja. My\u00f6s HTTP-statuskoodit ja rajapinnan vasteaikakuvaaja p\u00e4ivitet\u00e4\u00e4n valitsemasi ajanjakson perusteella.",
-    "responseTimeDistributionChart_title": "Rajapinnan vasteaika",
-    "responseTimeDistributionChart_help_text": "Valitse haluamasi vasteaikaa kuvaava pylv\u00e4s. Muut kuvaajat p\u00e4ivittyv\u00e4t vastaamaan valintaasi.",
     "sdkCodeGeneratorModal_buttonText_download": "Lataa",
     "sdkCodeGeneratorModal_labelText_selectLanguage": "Valitse kieli",
     "sdkCodeGeneratorModal_firstOption_language": "(Kieli)",
@@ -1104,7 +1103,7 @@
     "searchPage_searchForm_helpText": "Sy\u00f6t\u00e4 hakusanasi hakua varten.",
     "searchPage_searchForm_placeholderText": "Hae...",
     "searchPage_searchResultsHeader": "Hakutulokset",
-    "settings_addingApis": "Rajapintojen lis\u00e4\u00e4minen",
+    "settings_panelTitle_addingApisAndOrganizations": "Rajapintojen ja organisaatioiden lis\u00e4\u00e4minen",
     "settings_apiDocumentation_editor": "Rajapintadokumentaation editori",
     "settings_mail": "S\u00e4hk\u00f6posti",
     "settings_mail_fromEmail": "T\u00e4t\u00e4 s\u00e4hk\u00f6postiosoitetta k\u00e4ytet\u00e4\u00e4n yhteydenottolomakkeen ja s\u00e4hk\u00f6postiosoitteiden vahvistusten l\u00e4hett\u00e4miseen. Osoitteen tulee olla oikea, voimassa oleva s\u00e4hk\u00f6postiosoite.",
@@ -1124,29 +1123,31 @@
     "setupNeededModal_viewSettingsButton": "Tarkastele asetuksia",
     "setUserName_legend_text": "Anna k\u00e4ytt\u00e4j\u00e4nimesi.",
     "setUserName_saveButton_text": "Tallenna",
-    "statisticsSummary_captionRequests": "Pyynn\u00f6t",
-    "statisticsSummary_captionResponseTime": "Keskim\u00e4\u00e4r\u00e4inen vasteaika",
-    "statisticsSummary_captionResponseRate": "Vastausaste",
-    "statisticsSummary_captionUniqueUsers": "K\u00e4ytt\u00e4ji\u00e4",
     "statusCheckTitle": "Tila",
     "statusCheckUpdated": "P\u00e4ivitetty:",
     "statusCheck_ApinfWebApp": "Apinf-verkkosovellus",
     "statusCheck_ApiUmbrella": "Api Umbrella",
     "statusCheck_Elasticsearch": "Elasticsearch",
-    "statusCodeCountsChart_title": "HTTP-tilakoodit",
-    "statusCodeCountsChart_help_text": "Valitse haluamaasi HTTP-tilakoodia kuvaava pylv\u00e4s. Muut kuvaajat p\u00e4ivittyv\u00e4t vastaamaan valintaasi.",
+    "summaryComparing_trendDirection_lower": "v\u00e4hemm\u00e4n",
+    "summaryComparing_trendDirection_higher": "enemm\u00e4n",
+    "summaryComparing_displayTrendInfo_yesterday": "__percentage__ __direction__ kuin eilen",
+    "summaryComparing_displayTrendInfo_days": "__percentage__ __direction__ kuin viimeiseen __day__ p\u00e4iv\u00e4\u00e4n",
     "swaggerUi_swaggerDocumentInvalidText": "Swagger-tiedosto ei ole kelvollinen.",
+    "swaggerUi_alertText_Warning": "Varoitus!",
+    "swaggerUi_alertText_mainText": "T\u00e4m\u00e4 j\u00e4rjestelm\u00e4 k\u00e4ytt\u00e4\u00e4 https-protokollaa. Rajapintapyynn\u00f6t dokumentaatiosta eiv\u00e4t toimi, koska rajapinta k\u00e4ytt\u00e4\u00e4 http-protokollaa.",
     "termsOfUse_title": "K\u00e4ytt\u00f6ehdot",
-    "timeFrameSelectPicker_from": "alkaen",
-    "timeFrameSelectPicker_to": "p\u00e4\u00e4ttyen",
     "updatePassword_legend_text": "P\u00e4ivit\u00e4 salasana",
+    "uniqueUsersOverTime_pointTitle_users": "K\u00e4ytt\u00e4j\u00e4t",
     "umbrella_createuser_error": "K\u00e4ytt\u00e4j\u00e4n luonti API Umbrellaan ep\u00e4onnistui.",
     "updatePassword_submitButton_text": "Vaihda salasanaa",
     "updatePasswordForm_successMessage": "Salasana p\u00e4ivitetty.",
     "uploadApiLogoButton": "Lataa logo",
     "uploadApiLogo_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n logon?",
     "uploadApiLogo_successfully_deleted": "Logo poistettu!",
+    "uploadOrganizationCoverButton_text": "Lataa kansikuva",
     "uploadOrganizationLogoButton": "Lataa logo",
+    "uploadOrganizationCover_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n kansikuvan?",
+    "uploadOrganizationCover_successfully_deleted": "Kansikuva on poistettu!",
     "uploadOrganizationLogo_confirm_delete": "Haluatko varmasti poistaa t\u00e4m\u00e4n logon?",
     "uploadOrganizationLogo_successfully_deleted": "Logo poistettu!",
     "uploadProjectLogoButton_uploadButton_uploadLogo": "Lataa logo",
