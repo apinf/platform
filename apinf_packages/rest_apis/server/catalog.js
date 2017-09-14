@@ -175,6 +175,14 @@ CatalogV1.swagger = {
         $ref: '#/definitions/loginRequest',
       },
     },
+    managedAPIs: {
+      name: 'managedAPIs',
+      in: 'query',
+      description: 'Limit results to APIs which requesting user can manage.',
+      required: false,
+      type: 'string',
+      enum: ['true', 'false'],
+    },
     optionalSearch: {
       name: 'q',
       in: 'query',
@@ -197,13 +205,6 @@ CatalogV1.swagger = {
       type: 'integer',
       format: 'int32',
       minimum: 0,
-    },
-    managedAPIs: {
-      name: 'managedAPIs',
-      in: 'query',
-      description: 'Limit results to APIs which requesting user can manage.',
-      required: false,
-      type: 'boolean',
     },
   },
   definitions: {
