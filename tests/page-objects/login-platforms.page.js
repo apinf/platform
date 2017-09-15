@@ -20,9 +20,9 @@ class LoginPlatformsPage extends Page {
   // Login Platforms
   get githubId () { return browser.element('#github-id'); }
   get githubSecret () { return browser.element('#github-secret'); }
-  get fiwareId () { return browser.element('#github-id'); }
-  get fiwareSecret () { return browser.element('#github-secret'); }
-  get rootURL () { return browser.element('#github-rootURL'); }
+  get fiwareId () { return browser.element('#fiware-id'); }
+  get fiwareSecret () { return browser.element('#fiware-secret'); }
+  get rootURL () { return browser.element('#fiware-rootURL'); }
   get saveSettingsButton () { return browser.element('#save-settings'); }
 
   setupGithub ({ githubClientId, githubClientSecret }) {
