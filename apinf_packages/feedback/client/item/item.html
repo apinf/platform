@@ -39,12 +39,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
           </div>
           {{#if item.currentUserCanEdit }}
-          <div class="btn-group pull-right">
+          <div id="feedback-item-actions" class="btn-group pull-right">
             <button class="edit-feedback-item btn btn-primary btn-xs">
               {{_ "feedbackItem_editButton_text" }}
-            </button>
-            <button class="delete-feedback-item btn btn-danger btn-xs">
-              {{_ "feedbackItem_deleteButton_text" }}
             </button>
             {{#if item.currentUserCanChangeVisibility}}
               <button class="visibility-feedback-item btn btn-info btn-xs">
@@ -55,6 +52,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{/if}}
               </button>
             {{/if}}
+            <button class="delete-feedback-item btn btn-danger btn-xs">
+              {{_ "feedbackItem_deleteButton_text" }}
+            </button>
           </div>
           {{/ if }}
         </div>
