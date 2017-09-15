@@ -14,6 +14,7 @@ class SignInPage extends Page {
 
   get submitButton () { return browser.element('button#at-btn.submit'); }
   get githubButton () { return browser.element('button#at-github'); }
+  get fiwareButton () { return browser.element('button#at-fiware'); }
 
   get registerLink () { return browser.element('#at-signUp'); }
   get forgotPasswordLink () { return browser.element('#at-forgotPwd'); }
