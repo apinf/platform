@@ -28,6 +28,10 @@ describe('00 login', () => {
       signInPage.githubButton.isVisible().should.be.true;
     });
 
+    it('should show fiware button', () => {
+      signInPage.fiwareButton.isVisible().should.be.true;
+    });
+
     it('should show submit button', () => {
       signInPage.submitButton.isVisible().should.be.true;
     });
