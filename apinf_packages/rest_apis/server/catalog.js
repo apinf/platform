@@ -132,6 +132,7 @@ CatalogV1.swagger = {
   tags: {
     api: 'APIs',
     login: 'Login',
+    logout: 'Logout',
   },
   params: {
     api: {

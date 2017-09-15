@@ -134,6 +134,7 @@ ManagementV1.swagger = {
     organization: 'Organizations',
     users: 'Users',
     login: 'Login',
+    logout: 'Logout',
   },
   params: {
     limit: {
