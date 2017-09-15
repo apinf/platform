@@ -27,7 +27,7 @@ ManagementV1.swagger.meta.paths = {
       description: `
    ### Logging in ###
 
-   By giving existing username and password you get login credentials,
+   By giving existing user account username and password you get login credentials,
    which you can use in authenticating requests.
 
    login response parameter value | to be filled into request header field
@@ -57,6 +57,61 @@ ManagementV1.swagger.meta.paths = {
       },
     },
   },
+
+  '/logout': {
+    post: {
+      tags: [
+        ManagementV1.swagger.tags.logout,
+      ],
+      summary: 'Logging out.',
+      description: `
+   ### Logging out ###
+
+   The login credentials must be filled in header of the message.
+
+   login response parameter value | to be filled into request header field
+   :--- | :---
+   auth-token-value | X-Auth-Token
+   user-id-value | X-User-Id
+
+   After logout the User has to do a *new log in* in order to be able to
+   make requests towards API endpoints.
+
+      `,
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'You\'ve been logged out!',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              message: {
+                type: 'string',
+                example: 'You\'ve been logged out!',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Missing or erroneous parameter.',
+        },
+        401: {
+          description: 'Unauthorized',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+  },
+
 
   '/users': {
     get: {
