@@ -241,6 +241,7 @@
   "dashboardOverviewStatistic_text_responseTime": "__time__ ms",
   "dashboardOverviewStatistic_text_usersCount": "__count__ user",
   "dashboardOverviewStatistic_text_usersCount_plural": "__count__ users",
+  "dashboardOverviewStatisticNoData_text_noDataAvailable": "No Data Available",
   "dashboardOverviewStatistic_chartTitle_requestsNumber": "Number of requests",
   "dashboardOverviewStatistic_chartTitle_responseTime": "API Response time",
   "dashboardOverviewStatistic_chartTitle_uniqueUsers": "Unique API Users",
@@ -591,14 +592,14 @@
   "removeProxy_errorMessage": "Error: Proxy removal failed",
   "requestTimeline_labelText_path": "Path",
   "requestTimeline_xAxisTitle_days": "Days",
-  "requestTimeline_yAxisTitle_requests": "Requests, number",
+  "requestTimeline_yAxisTitle_requests": "API Requests",
   "requestTimeline_legendItem_allCalls": "All calls",
   "requestsOverTime_pointTitle_requests": "Requests",
   "responseTimeTimeline_labelText_path": "Path",
   "responseTimeTimeline_xAxisTitle_days": "Days",
   "responseTimeTimeline_yAxisTitle_time": "Time, ms",
   "responseTimeTimeline_legendItem_95thPercentiles": "95th percentiles",
-  "responseTimeTimeline_legendItem_50thPercentiles": "50th percentiles",
+  "responseTimeTimeline_legendItem_median": "Median",
   "schemas": {
     "apis": {
       "name": {
