@@ -15,26 +15,25 @@ import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call'
 AutoForm.hooks({
   loginPlatforms: {
     onSuccess () {
+      // Call updateLoginPlatformsConfiguration through the promise wrapper
+      promisifyCall('updateLoginPlatformsConfiguration')
+        .then(result => {
+          if (result) {
+            // Get settings form success message translation
+            const message = TAPi18n.__('settings_successMessage');
 
-    // Call updateLoginPlatformsConfiguration through the promise wrapper
-    promisifyCall('updateLoginPlatformsConfiguration')
-      .then(result => {
-        if (result) {
-          // Get settings form success message translation
-          const message = TAPi18n.__('settings_successMessage');
-
-          // Alert the user of successful save
-          sAlert.success(message);
-        }
-      })
-      .catch(err => {
-        if (err) {
-          // Get settings form success message translation
-          const message = TAPi18n.__('settings_errorMessage');
-          // Alert the user of successful save
-          sAlert.error(message);
-        }
-      });
+            // Alert the user of successful save
+            sAlert.success(message);
+          }
+        })
+        .catch(err => {
+          if (err) {
+            // Get settings form success message translation
+            const message = TAPi18n.__('settings_errorMessage');
+            // Alert the user of successful save
+            sAlert.error(message);
+          }
+        });
     },
   },
 });

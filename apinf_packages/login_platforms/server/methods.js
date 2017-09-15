@@ -53,7 +53,7 @@ const updateFunctions = {
     // Return status message
     return 'FIWARE configuration updated successfully';
   },
-}
+};
 
 Meteor.methods({
   updateLoginPlatformsConfiguration () {
@@ -66,9 +66,9 @@ Meteor.methods({
 
       // Check if github settings are valid
       if (githubSettingsValid(settings)) {
-        status = updateFunctions.saveGithubConfiguration(settings)
+        status = updateFunctions.saveGithubConfiguration(settings);
       } else if (fiwareSettingsValid(settings)) {
-        status = updateFunctions.saveFiwareConfiguration(settings)
+        status = updateFunctions.saveFiwareConfiguration(settings);
       } else {
         // Throw excpetion if githubSettings are not valid
         throw new Error();
