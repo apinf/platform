@@ -43,8 +43,8 @@ FlowRouter.notFound = {
   },
 };
 
-const redirectToCatalogue = function () {
-  FlowRouter.go('catalogue');
+const redirectTocatalog = function () {
+  FlowRouter.go('catalog');
 };
 
 const requireAdminRole = function () {
@@ -56,7 +56,7 @@ const requireAdminRole = function () {
   });
 };
 
-FlowRouter.triggers.enter([redirectToCatalogue], { only: ['forgotPwd'] });
+FlowRouter.triggers.enter([redirectTocatalog], { only: ['forgotPwd'] });
 
 // Routes that require admin role
 FlowRouter.triggers.enter(
