@@ -19,21 +19,21 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import queryForAnalyticPage from '../query';
 
 Template.apiAnalyticPageBody.onCreated(function () {
-  const instance = this;
+  const templateInstance = this;
 
-  instance.elasticsearchData = new ReactiveVar();
-  instance.error = new ReactiveVar();
+  templateInstance.elasticsearchData = new ReactiveVar();
+  templateInstance.error = new ReactiveVar();
 
-  instance.autorun(() => {
-    const proxyBackend = ProxyBackends.findOne(instance.data.proxyBackendId);
+  templateInstance.autorun(() => {
+    const proxyBackend = ProxyBackends.findOne(templateInstance.data.proxyBackendId);
 
     // Make sure proxy backend is available
     if (proxyBackend) {
       // Storage Proxy ID and API ID
-      instance.proxyId = proxyBackend.proxyId;
-      instance.apiId = proxyBackend.apiId;
+      templateInstance.proxyId = proxyBackend.proxyId;
+      templateInstance.apiId = proxyBackend.apiId;
 
-      const proxy = Proxies.findOne(instance.proxyId);
+      const proxy = Proxies.findOne(templateInstance.proxyId);
 
       // Make sure proxy is available
       if (proxy) {
@@ -53,11 +53,11 @@ Template.apiAnalyticPageBody.onCreated(function () {
           // Get Elasticsearch data
           Meteor.call('getElasticsearchData', elasticsearchHost, queryParams, (error, dataset) => {
             if (error) {
-              instance.error.set(error);
+              templateInstance.error.set(error);
               throw Meteor.Error(error);
             }
             // Update Elasticsearch data reactive variable with result
-            instance.elasticsearchData.set(dataset.aggregations);
+            templateInstance.elasticsearchData.set(dataset.aggregations);
           });
         }
       }

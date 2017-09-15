@@ -29,6 +29,8 @@ Template.dashboardSummaryStatistic.onCreated(function () {
   instance.proxyBackendsWithMetric = {};
 
   instance.autorun(() => {
+    // Update list
+    instance.proxyBackendsWithMetric = {};
     // Update list of proxy backends
     instance.proxyBackends = ProxyBackends.find().fetch();
 

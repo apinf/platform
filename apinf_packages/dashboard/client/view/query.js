@@ -12,8 +12,9 @@ export default function queryForDashboardPage (proxyBackendPaths, timeframe) {
   const today = moment().add(1, 'days').format('YYYY-MM-DD');
 
   // Make it depends on timeframe
-  const oneTimePeriodAgo = moment().subtract(timeframe, 'days').format('YYYY-MM-DD');
-  const twoTimePeriodsAgo = moment().subtract(2 * timeframe, 'days').format('YYYY-MM-DD');
+  const oneTimePeriodAgo = moment().subtract(timeframe - 1, 'days').format('YYYY-MM-DD');
+  // eslint-disable-next-line no-mixed-operators
+  const twoTimePeriodsAgo = moment().subtract(2 * timeframe - 1, 'days').format('YYYY-MM-DD');
 
   return {
     size: 0,
