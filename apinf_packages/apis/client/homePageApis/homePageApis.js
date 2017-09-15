@@ -16,7 +16,8 @@ Template.homePageApis.onRendered(function () {
   templateInstance.autorun(() => {
     templateInstance.branding = Branding.findOne();
     // check featured apis available or not
-    const haveFeaturedApis = templateInstance.branding.featuredApis &&
+    const haveFeaturedApis = templateInstance.branding &&
+      templateInstance.branding.featuredApis &&
       templateInstance.branding.featuredApis.length !== 0;
     if (haveFeaturedApis) {
       templateInstance.subscribe('apiIds', templateInstance.branding.featuredApis);
