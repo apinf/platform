@@ -516,6 +516,7 @@
   "proxyBackendForm_emqProxyForm_removeEmqUser_confirmButton": "Yes, remove",
   "proxyBackendForm_emqProxyForm_removeEmqUser_cancelButton": "Cancel",
   "proxyBackendForm_emqProxyForm_removeEmqUser_successMessage": "EMQ user successfully removed!",
+  "proxyBackendForm_emqProxyForm_removeAcl_confirmationMessage": "Are you sure you want to remove this access control rule?",
   "proxyForm_header_text": "Add Proxy",
   "proxyForm_saveButton_text": "Save",
   "proxyForm_successText": "Proxy settings were saved",
