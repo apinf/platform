@@ -15,14 +15,9 @@ import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call'
 AutoForm.hooks({
   loginPlatforms: {
     onSuccess () {
-      // Promise array of all method calls to be executed.
-      const callsArray = [
-        promisifyCall('updateGithubConfiguration'),
-        promisifyCall('updateFiwareConfiguration'),
-      ];
 
-      // Executes all promises and wait for their responses
-      Promise.all(callsArray)
+    // Call updateLoginPlatformsConfiguration through the promise wrapper
+    promisifyCall('updateLoginPlatformsConfiguration')
       .then(result => {
         if (result) {
           // Get settings form success message translation

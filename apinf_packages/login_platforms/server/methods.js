@@ -18,8 +18,45 @@ import {
 // Collection imports
 import LoginPlatforms from '../collection';
 
+// Helper object to organize save functions for each service configuration
+const updateFunctions = {
+  saveGithubConfiguration (settings) {
+    // remove existing configuration
+    ServiceConfiguration.configurations.remove({
+      service: 'github',
+    });
+
+    // Insert new service configuration
+    ServiceConfiguration.configurations.insert({
+      service: 'github',
+      clientId: settings.githubConfiguration.clientId,
+      secret: settings.githubConfiguration.secret,
+    });
+
+    // Return status message
+    return 'GitHub configuration updated successfully';
+  },
+  saveFiwareConfiguration (settings) {
+    // remove existing configuration
+    ServiceConfiguration.configurations.remove({
+      service: 'fiware',
+    });
+
+    // Insert new service configuration
+    ServiceConfiguration.configurations.insert({
+      service: 'fiware',
+      clientId: settings.fiwareConfiguration.clientId,
+      rootURL: settings.fiwareConfiguration.rootURL,
+      secret: settings.fiwareConfiguration.secret,
+    });
+
+    // Return status message
+    return 'FIWARE configuration updated successfully';
+  },
+}
+
 Meteor.methods({
-  updateGithubConfiguration () {
+  updateLoginPlatformsConfiguration () {
     // Status variable returned to client
     let status = null;
 
@@ -29,20 +66,9 @@ Meteor.methods({
 
       // Check if github settings are valid
       if (githubSettingsValid(settings)) {
-        // remove existing configuration
-        ServiceConfiguration.configurations.remove({
-          service: 'github',
-        });
-
-        // Insert new service configuration
-        ServiceConfiguration.configurations.insert({
-          service: 'github',
-          clientId: settings.githubConfiguration.clientId,
-          secret: settings.githubConfiguration.secret,
-        });
-
-        // Set success status message
-        status = 'GitHub configuration updated successfully';
+        status = updateFunctions.saveGithubConfiguration(settings)
+      } else if (fiwareSettingsValid(settings)) {
+        status = updateFunctions.saveFiwareConfiguration(settings)
       } else {
         // Throw excpetion if githubSettings are not valid
         throw new Error();
@@ -50,46 +76,6 @@ Meteor.methods({
     } catch (error) {
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
-
-      // Show an error message
-      throw new Meteor.Error(message);
-    }
-
-    // Return method status to the client
-    return status;
-  },
-  updateFiwareConfiguration () {
-    // Status variable returned to client
-    let status = null;
-
-    // Try if settings exist
-    try {
-      const settings = LoginPlatforms.findOne();
-
-      // Check if fiware settings are valid
-      if (fiwareSettingsValid(settings)) {
-        // remove existing configuration
-        ServiceConfiguration.configurations.remove({
-          service: 'fiware',
-        });
-
-        // Insert new service configuration
-        ServiceConfiguration.configurations.insert({
-          service: 'fiware',
-          clientId: settings.fiwareConfiguration.clientId,
-          rootURL: settings.fiwareConfiguration.rootURL,
-          secret: settings.fiwareConfiguration.secret,
-        });
-
-        // Set success status message
-        status = 'FIWARE configuration updated successfully';
-      } else {
-        // Throw excpetion if fiwareSettings are not valid
-        throw new Error();
-      }
-    } catch (error) {
-      // otherwise show an error
-      const message = `Update FIWARE configuration: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
