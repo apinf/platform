@@ -36,6 +36,10 @@ Template.apiAnalyticPageHeader.helpers({
     const proxyId = Template.instance().proxyId;
     const proxy = Proxies.findOne(proxyId);
 
-    return proxy.name;
+    if (proxy) {
+      return proxy.name;
+    }
+
+    return '';
   },
 });
