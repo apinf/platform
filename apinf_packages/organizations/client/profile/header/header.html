@@ -15,9 +15,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <span class="fa fa-camera"></span>
     </div>
     <div class="about-organization col-md-10">
-      <h1 id="organization-name">
-        {{ organization.name }}
-      </h1>
+      <div class="organization-header">
+        <h1 id="organization-name" class="pull-left">
+          {{ organization.name }}
+        </h1>
+        <a href="/rss/organizations?slug={{organization.slug}}" target="_blank" class="pull-right rss-feed fa fa-rss-square fa-2x btn" title="{{_ 'organizationProfileHeader_rss_feed'}}"></a>
+      </div>
       {{> organizationSocialMediaIcons organization=organization }}
       <p>
         <i class="fa fa-link" aria-hidden="true"></i>

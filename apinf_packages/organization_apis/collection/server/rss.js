@@ -20,7 +20,6 @@ import OrganizationApis from '../';
 RssFeed.publish('organizations', function (query) {
   // Initialize variable feed
   const feed = this;
-
   // Get document containg an organization collection
   const organization = Organizations.findOne({ slug: query.slug });
 
