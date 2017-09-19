@@ -76,7 +76,7 @@ Template.medianResponseTime.onRendered(function () {
 
     const params = {
       // Date range must have equal length with dateCount value
-      // Today value is included then subtract less days
+      // To include also today, subtract one day less than count of days in period
       startDate: moment().subtract(dateCount - 1, 'd'),
       endDate: moment(),
       // Interval is 1 day
