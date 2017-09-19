@@ -13,6 +13,8 @@ import { Roles } from 'meteor/alanning:roles';
 import Apis from '/apinf_packages/apis/collection';
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
+import descriptionApis from '/apinf_packages/rest_apis/descriptions/apis_texts';
+import descriptionLoginLogout from '/apinf_packages/rest_apis/descriptions/login_logout_texts';
 
 CatalogV1.swagger.meta.paths = {
   '/login': {
@@ -21,19 +23,21 @@ CatalogV1.swagger.meta.paths = {
         CatalogV1.swagger.tags.login,
       ],
       summary: 'Logging in.',
-      description: `
-   ### Logging in ###
 
-   By giving existing user account username and password you get login credentials,
-   which you can use in authenticating requests.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-
-      `,
+      description: descriptionLoginLogout.login,
+  //     description: `
+  //  ### Logging in ###
+   //
+  //  By giving existing user account username and password you get login credentials,
+  //  which you can use in authenticating requests.
+   //
+  //  login response parameter value | to be filled into request header field
+  //  :--- | :---
+  //  auth-token-value | X-Auth-Token
+  //  user-id-value | X-User-Id
+   //
+   //
+  //     `,
       produces: ['application/json'],
       parameters: [
         CatalogV1.swagger.params.login,
@@ -61,20 +65,22 @@ CatalogV1.swagger.meta.paths = {
         CatalogV1.swagger.tags.logout,
       ],
       summary: 'Logging out.',
-      description: `
-   ### Logging out ###
 
-   The login credentials must be filled in header of the message.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-   After logout the User has to do a *new log in* in order to be able to
-   make requests towards API endpoints.
-
-      `,
+      description: descriptionLoginLogout.logout,
+  //     description: `
+  //  ### Logging out ###
+   //
+  //  The login credentials must be filled in header of the message.
+   //
+  //  login response parameter value | to be filled into request header field
+  //  :--- | :---
+  //  auth-token-value | X-Auth-Token
+  //  user-id-value | X-User-Id
+   //
+  //  After logout the User has to do a *new log in* in order to be able to
+  //  make requests towards API endpoints.
+   //
+  //     `,
       produces: ['application/json'],
       responses: {
         200: {
@@ -124,24 +130,25 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'List and search public API.',
-        description: `
-   ### List and search public APIs ###
-
-   Parameters are optional and also combinations of parameters can be used.
-
-   Example call:
-
-       GET /apis?limit=200&managedAPIs=true
-
-   Result: returns maximum of 200 APIs which are managed by requesting user.
-
-   -----
-
-   Note! The field X-User-Id in message header can be used
-   * to contain required Manager's user ID with parameter managedAPIs provided
-   * to contain Admin user's ID, when indicated, that user is Admin
-
-        `,
+        description: descriptionApis.getAll,
+  //       description: `
+  //  ### List and search public APIs ###
+   //
+  //  Parameters are optional and also combinations of parameters can be used.
+   //
+  //  Example call:
+   //
+  //      GET /apis?limit=200&managedAPIs=true
+   //
+  //  Result: returns maximum of 200 APIs which are managed by requesting user.
+   //
+  //  -----
+   //
+  //  Note! The field X-User-Id in message header can be used
+  //  * to contain required Manager's user ID with parameter managedAPIs provided
+  //  * to contain Admin user's ID, when indicated, that user is Admin
+   //
+  //       `,
 
         parameters: [
           CatalogV1.swagger.params.optionalSearch,
@@ -276,18 +283,19 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Fetch API with specified ID.',
-        description: `
-   ### Fetching API with specified ID ###
-
-   Returns the API with specified ID, if a match is found.
-
-   Example call:
-
-        GET /apis/:id
-
-   Result: returns the data of API identified with :id.
-
-        `,
+        description: descriptionApis.get,
+  //       description: `
+  //  ### Fetching API with specified ID ###
+   //
+  //  Returns the API with specified ID, if a match is found.
+   //
+  //  Example call:
+   //
+  //       GET /apis/:id
+   //
+  //  Result: returns the data of API identified with :id.
+   //
+  //       `,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -321,19 +329,20 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Add new API to catalog.',
-        description: `
-   ### Adding a new API to Catalog ###
-
-   Adds an API to catalog. On success, returns the added API object.
-
-
-   Parameters
-   * mandatory: name and url
-   * length of description must not exceed 1000 characters
-   * value of lifecycleStatus must be one of example list
-   * allowed values for parameter isPublic are "true" and "false"
-     * if isPublic is set false, only admin or manager can see the API
-        `,
+        description: descriptionApis.post,
+  //       description: `
+  //  ### Adding a new API to Catalog ###
+   //
+  //  Adds an API to catalog. On success, returns the added API object.
+   //
+   //
+  //  Parameters
+  //  * mandatory: name and url
+  //  * length of description must not exceed 1000 characters
+  //  * value of lifecycleStatus must be one of example list
+  //  * allowed values for parameter isPublic are "true" and "false"
+  //    * if isPublic is set false, only admin or manager can see the API
+  //       `,
         parameters: [
           CatalogV1.swagger.params.api,
         ],
@@ -532,19 +541,20 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Update API.',
-        description: `
-   ### Update an API ###
-
-   Admin or API manager can update an API in catalog.
-   On success, returns the updated API object.
-
-   Parameters
-   * length of description must not exceed 1000 characters
-   * value of lifecycleStatus must be one of example list
-   * allowed values for parameter isPublic are "true" and "false"
-     * if isPublic is set false, only admin or manager can see the API
-
-        `,
+        description: descriptionApis.put,
+  //       description: `
+  //  ### Update an API ###
+   //
+  //  Admin or API manager can update an API in catalog.
+  //  On success, returns the updated API object.
+   //
+  //  Parameters
+  //  * length of description must not exceed 1000 characters
+  //  * value of lifecycleStatus must be one of example list
+  //  * allowed values for parameter isPublic are "true" and "false"
+  //    * if isPublic is set false, only admin or manager can see the API
+   //
+  //       `,
         parameters: [
           CatalogV1.swagger.params.apiId,
           CatalogV1.swagger.params.api,
@@ -693,19 +703,20 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Delete API.',
-        description: `
-   ### Deleting an API ###
-
-   Admin user or API manager can delete an identified API from the Catalog,
-
-
-   Example call:
-
-        DELETE /apis/<API id>
-
-   Result: deletes the API identified with <API id> and responds with HTTP code 204.
-
-        `,
+        description: descriptionApis.delete,
+  //       description: `
+  //  ### Deleting an API ###
+   //
+  //  Admin user or API manager can delete an identified API from the Catalog,
+   //
+   //
+  //  Example call:
+   //
+  //       DELETE /apis/<API id>
+   //
+  //  Result: deletes the API identified with <API id> and responds with HTTP code 204.
+   //
+  //       `,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
