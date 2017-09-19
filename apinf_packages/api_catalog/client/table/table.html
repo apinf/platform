@@ -5,19 +5,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiCatalogTable">
   <div class="table-responsive">
-    <table class="table table-striped table-bordered api-catalogue-table">
+    <table class="table table-striped table-bordered api-catalog-table">
       <tbody>
       {{# each api in apis }}
         {{# if api.currentUserCanView }}
           <tr>
             <td class="col-sm-1">
               {{> viewApiStatus api=api width="0.6" }}
-              <div class="api-catalogue-table-logo center-block">
+              <div class="api-catalog-table-logo center-block">
                 {{> viewApiLogo api=api }}
               </div>
             </td>
             <td class="col-sm-9">
-              <h4 class="api-catalogue-table-title">
+              <h4 class="api-catalog-table-title">
                 <a href="{{ pathFor 'viewApi' slug=api.slug }}">
                   {{ api.name }}
                 </a>
@@ -27,12 +27,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
               {{# unless api.isPublic }}
                 <span class="label label-default">
-                  {{_ "catalogueTable_labelText_private" }}
+                  {{_ "catalogTable_labelText_private" }}
                 </span>
               {{/ unless }}
               <div>
                 <i>
-                  {{_ "catalogueTable_addedBy" }}
+                  {{_ "catalogTable_addedBy" }}
                   {{# if api.organization }}
                     {{ api.organization.name }}
                   {{ else }}
@@ -41,11 +41,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </i>
                 <br>
                 <i>
-                  {{_ "catalogueTable_added" }}
+                  {{_ "catalogTable_added" }}
                   {{ api.relativeCreatedAt }}
                 </i>
                 {{# if api.description }}
-                  <p class="api-catalogue-table-description">
+                  <p class="api-catalog-table-description">
                     {{ api.description }}
                   </p>
                 {{/ if }}
@@ -57,7 +57,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <td class="col-sm-1 text-center">
               {{# if currentUser }}
                 <span class="api-card-bookmark">
-                  {{> bookmark api=api catalogueView=true }}
+                  {{> bookmark api=api catalogView=true }}
                 </span>
               {{ else }}
                 <span class="api-card-bookmark">

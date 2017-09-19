@@ -15,6 +15,7 @@ class SettingsPage extends Page {
   get buttonBrandingLink () { return browser.element('#button-branding'); }
   get buttonSettingsLink () { return browser.element('#button-settings'); }
   get buttonProxiesLink () { return browser.element('#button-proxies'); }
+  get buttonLoginPlatformsLink () { return browser.element('#button-loginPlatforms'); }
 
   // Profile
   get username () { return browser.element('#username'); }
@@ -30,20 +31,6 @@ class SettingsPage extends Page {
   // Branding
   get brandingUpdateButton () { return browser.element('#branding-update-button'); }
   get brandingSaveButton () { return browser.element('#branding-save-button'); }
-
-  // Settings
-  get githubId () { return browser.element('#github-id'); }
-  get githubSecret () { return browser.element('#github-secret'); }
-  get saveSettingsButton () { return browser.element('#save-settings'); }
-
-  setupGithub ({ githubClientId, githubClientSecret }) {
-    this.githubId.waitForVisible(5000);
-
-    this.githubId.setValue(githubClientId);
-    this.githubSecret.setValue(githubClientSecret);
-
-    this.submit();
-  }
 
   submit () {
     this.saveSettingsButton.waitForVisible(5000);

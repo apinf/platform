@@ -10,12 +10,12 @@ import { Meteor } from 'meteor/meteor';
 import ApiBackendRatings from '/apinf_packages/ratings/collection';
 import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 
-Meteor.publish('catalogueRatings', () => {
+Meteor.publish('catalogRatings', () => {
   // Find all API Backends
   return ApiBackendRatings.find();
 });
 
-Meteor.publish('catalogueBookmarks', () => {
+Meteor.publish('catalogBookmarks', () => {
   // Find all API Backends
   return ApiBookmarks.find();
 });

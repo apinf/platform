@@ -17,11 +17,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="panel panel-default">
           <div class="panel-heading">
             <span class="panel-title">
-              {{_ "settings_addingApis" }}
+              {{_ "settings_panelTitle_addingApisAndOrganizations" }}
             </span>
           </div>
           <div class="panel-body">
             {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
+            {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
           </div>
         </div>
         <div class="panel panel-default">
@@ -88,17 +89,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </a>
               {{> afQuickField name='mail.toEmail' id="email-recieve" }}
             {{/ if }}
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {{_ "settings_github" }}
-            </h3>
-          </div>
-          <div class="panel-body">
-            {{> afQuickField name='githubConfiguration.clientId' id="github-id" }}
-            {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
           </div>
         </div>
         <div id="form-buttons">

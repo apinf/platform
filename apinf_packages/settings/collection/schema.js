@@ -18,6 +18,11 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+  'access.onlyAdminsCanAddOrganizations': {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
   apiDocumentationEditor: {
     type: Object,
     optional: true,
@@ -129,24 +134,6 @@ Settings.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Email,
     optional: true,
-  },
-  githubConfiguration: {
-    type: Object,
-    optional: true,
-  },
-  'githubConfiguration.clientId': {
-    type: String,
-    optional: true,
-    autoform: {
-      placeholder: 'xxx',
-    },
-  },
-  'githubConfiguration.secret': {
-    type: String,
-    optional: true,
-    autoform: {
-      placeholder: 'xxx',
-    },
   },
   sdkCodeGenerator: {
     type: Object,

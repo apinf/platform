@@ -19,16 +19,16 @@ import ProjectLogo from '/apinf_packages/branding/logo/collection';
 import Settings from '/apinf_packages/settings/collection';
 
 Template.navbar.onCreated(function () {
-  const instance = this;
+  const templateInstance = this;
   // Subscribe to project logo
-  instance.subscribe('projectLogo');
-  instance.subscribe('proxyCount');
+  templateInstance.subscribe('projectLogo');
+  templateInstance.subscribe('proxyCount');
 
-  instance.autorun(() => {
+  templateInstance.autorun(() => {
     // Check if user is logged in
     if (Meteor.userId()) {
-      // If user logged in, subscribe to 'onlyAdminCanAddApis' setting
-      instance.subscribe('singleSetting', 'access.onlyAdminsCanAddApis');
+      // If user logged in, subscribe to Access setting
+      templateInstance.subscribe('singleSetting', 'access');
     }
   });
 });

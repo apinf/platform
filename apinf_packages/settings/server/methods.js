@@ -8,11 +8,11 @@ import { Meteor } from 'meteor/meteor';
 
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
-import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // APInf imports
-// eslint-disable-next-line max-len
-import { githubSettingsValid, mailSettingsValid } from '/apinf_packages/core/helper_functions/validate_settings';
+import {
+  mailSettingsValid,
+} from '/apinf_packages/core/helper_functions/validate_settings';
 
 // Collection imports
 import Settings from '../collection';
@@ -66,33 +66,7 @@ Meteor.methods({
     //   showForgotPasswordLink: true,
     // });
   },
-  updateGithubConfiguration () {
-    // Try if settings exist
-    try {
-      const settings = Settings.findOne();
 
-      // Check if github settings are valid
-      if (githubSettingsValid(settings)) {
-        // remove existing configuration
-        ServiceConfiguration.configurations.remove({
-          service: 'github',
-        });
-
-        // Insert new service configuration
-        ServiceConfiguration.configurations.insert({
-          service: 'github',
-          clientId: settings.githubConfiguration.clientId,
-          secret: settings.githubConfiguration.secret,
-        });
-      }
-    } catch (error) {
-      // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
-
-      // Show an error message
-      throw new Meteor.Error(message);
-    }
-  },
   updateMailConfiguration () {
     // Try if settings exist
     try {

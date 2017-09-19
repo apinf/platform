@@ -1,0 +1,45 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardToolbar">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group pull-left">
+        <label for="select-proxy">
+          {{_ 'dashboardToolbar_labelText_proxy' }} &nbsp;
+        </label>
+        <select name="proxy_id" class="form-control toolbar-select">
+          {{# each proxy in proxiesList }}
+            {{# with proxy }}
+              <option value="{{ _id }}" {{ selectedProxy }}>
+                {{ name }}
+              </option>
+            {{/ with }}
+          {{/ each }}
+        </select>
+      </div>
+      <div class="form-group pull-right">
+        <button class="btn btn-default">
+          <i class="fa fa-filter" aria-hidden="true"></i>
+        </button>
+        <select name="sort" class="form-control toolbar-select">
+          <option value="name">
+            {{_ 'dashboardToolbar_optionText_apiName' }}
+          </option>
+          <option value="calls">
+            {{_ 'dashboardToolbar_optionText_calls' }}
+          </option>
+          <option value="users">
+            {{_ 'dashboardToolbar_optionText_users' }}
+          </option>
+          <option value="time">
+            {{_ 'dashboardToolbar_optionText_time' }}
+          </option>
+        </select>
+        {{> dateRangePicker }}
+      </div>
+    </div>
+  </div>
+</template>

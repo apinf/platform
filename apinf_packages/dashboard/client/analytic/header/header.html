@@ -1,0 +1,33 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAnalyticPageHeader">
+  <h1>
+    {{ api.name }}
+  </h1>
+  <div class="row">
+    <div class="col-xs-12 form-group">
+      {{# with api }}
+        <!-- Bookmark -->
+        <div class="item-list">
+          <i class="fa fa-bookmark bookmark-default"></i>
+          {{ bookmarkCount }}
+        </div>
+        <!-- Rating -->
+        <div class="item-list">
+          <i class="fa fa-star-half-o"></i>
+          {{# if averageRating }}
+            {{ averageRating }}
+          {{ else }}
+            0
+          {{/ if }}
+        </div>
+      {{/ with }}
+      <strong>
+        {{_ 'apiAnalyticPageHeader_labelText_proxyName' name=proxyName }}
+      </strong>
+    </div>
+  </div>
+</template>
