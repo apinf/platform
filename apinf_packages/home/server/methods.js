@@ -48,7 +48,7 @@ ${doc.message}`;
 });
 // eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('apisCount', function () {
-  Counts.publish(this, 'apisCount', Apis.find());
+  Counts.publish(this, 'apisCount', Apis.find({ isPublic: true }));
 });
 
 Meteor.publish('organizationsCount', function () {
