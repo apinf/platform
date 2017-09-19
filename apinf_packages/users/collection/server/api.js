@@ -13,6 +13,8 @@ import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
+import descriptionUsers from '/apinf_packages/rest_apis/descriptions/users_texts';
+import descriptionLoginLogout from '/apinf_packages/rest_apis/descriptions/login_logout_texts';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -24,19 +26,20 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.login,
       ],
       summary: 'Logging in.',
-      description: `
-   ### Logging in ###
-
-   By giving existing user account username and password you get login credentials,
-   which you can use in authenticating requests.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-
-      `,
+      description: descriptionLoginLogout.login,
+  //     description: `
+  //  ### Logging in ###
+   //
+  //  By giving existing user account username and password you get login credentials,
+  //  which you can use in authenticating requests.
+   //
+  //  login response parameter value | to be filled into request header field
+  //  :--- | :---
+  //  auth-token-value | X-Auth-Token
+  //  user-id-value | X-User-Id
+   //
+   //
+  //     `,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.login,
@@ -64,20 +67,21 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.logout,
       ],
       summary: 'Logging out.',
-      description: `
-   ### Logging out ###
-
-   The login credentials must be filled in header of the message.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-   After logout the User has to do a *new log in* in order to be able to
-   make requests towards API endpoints.
-
-      `,
+      description: descriptionLoginLogout.logout,
+  //     description: `
+  //  ### Logging out ###
+   //
+  //  The login credentials must be filled in header of the message.
+   //
+  //  login response parameter value | to be filled into request header field
+  //  :--- | :---
+  //  auth-token-value | X-Auth-Token
+  //  user-id-value | X-User-Id
+   //
+  //  After logout the User has to do a *new log in* in order to be able to
+  //  make requests towards API endpoints.
+   //
+  //     `,
       produces: ['application/json'],
       responses: {
         200: {
