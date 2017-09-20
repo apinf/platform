@@ -6,76 +6,77 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 const descriptionApis = {
   // --------------------------------------------
   getAll: `
-### List and search public APIs ###
+  ### Searches and lists APIs ###
 
-Parameters are optional and also combinations of parameters can be used.
+  Parameters are optional and also combinations of parameters can be used.
+  In case Admin user sends the request, also private APIs are listed.
 
-Example call:
+  Example call:
 
-    GET /apis?limit=200&managedAPIs=true
+      GET /apis?limit=200&managedAPIs=true
 
-Result: returns maximum of 200 APIs which are managed by requesting user.
+  Result: returns maximum of 200 APIs which are managed by requesting user.
 
------
+  -----
 
-Note! The field X-User-Id in message header can be used
-* to contain required Manager's user ID with parameter managedAPIs provided
-* to contain Admin user's ID, when indicated, that user is Admin
+  Note! The field X-User-Id in message header can be used
+  * to contain required Manager's user ID with parameter managedAPIs provided
+  * to contain Admin user's ID, when indicated, that user is Admin
 
   `,
   // --------------------------------------------
   get: `
-### Fetching API with specified ID ###
+  ### Lists data of API with specified ID ###
 
-Returns the API with specified ID, if a match is found.
+  Returns the API with specified ID, if a match is found.
 
-Example call:
+  Example call:
 
-    GET /apis/:id
+      GET /apis/:id
 
-Result: returns the data of API identified with :id.
+  Result: returns the data of API identified with :id.
 
   `,
   // --------------------------------------------
   post: `
-### Adding a new API to Catalog ###
+  ### Adds a new API to Catalog ###
 
-Adds an API to catalog. On success, returns the added API object.
+  Adds an API to catalog. On success, returns the added API object.
 
 
-Parameters
-* mandatory: name and url
-* length of description must not exceed 1000 characters
-* value of lifecycleStatus must be one of example list
-* allowed values for parameter isPublic are "true" and "false"
-* if isPublic is set false, only admin or manager can see the API
+  Parameters
+  * mandatory: name and url
+  * length of description must not exceed 1000 characters
+  * value of lifecycleStatus must be one of example list
+  * allowed values for parameter isPublic are "true" and "false"
+  * if isPublic is set false, only admin or manager can see the API
   `,
   // --------------------------------------------
   put: `
-### Update an API ###
+  ### Updates an API ###
 
-Admin or API manager can update an API in catalog.
-On success, returns the updated API object.
+  Admin or API manager can update an API in catalog.
+  On success, returns the updated API object.
 
-Parameters
-* length of description must not exceed 1000 characters
-* value of lifecycleStatus must be one of example list
-* allowed values for parameter isPublic are "true" and "false"
-* if isPublic is set false, only admin or manager can see the API
+  Parameters
+  * length of description must not exceed 1000 characters
+  * value of lifecycleStatus must be one of example list
+  * allowed values for parameter isPublic are "true" and "false"
+  * if isPublic is set false, only admin or manager can see the API
 
   `,
   // --------------------------------------------
   delete: `
-### Deleting an API ###
+  ### Deletes an API ###
 
-Admin user or API manager can delete an identified API from the Catalog,
+  Admin user or API manager can delete an identified API from the Catalog,
 
 
-Example call:
+  Example call:
 
-  DELETE /apis/<API id>
+    DELETE /apis/<API id>
 
-Result: deletes the API identified with <API id> and responds with HTTP code 204.
+  Result: deletes the API identified with <API id> and responds with HTTP code 204.
 
   `,
 
