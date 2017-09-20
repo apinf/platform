@@ -12,6 +12,6 @@ Migrations.add({
   version: 9,
   name: 'Ensure that all feedbacks have the isPublic flag',
   up () {
-    Feedback.update({}, { $set: { isPublic: true } });
+    Feedback.update({ isPublic: { $exists: false } }, { $set: { isPublic: true } });
   },
 });
