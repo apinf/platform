@@ -11,7 +11,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import {
   apiBasePathRegEx,
   proxyBasePathRegEx,
-  topicPrefixRegEx, 
+  topicPrefixRegEx,
   topicRegEx,
 } from '/apinf_packages/proxy_backends/collection/regex';
 import contactPhone from '/apinf_packages/organizations/collection/regex';
