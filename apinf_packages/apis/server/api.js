@@ -25,19 +25,6 @@ CatalogV1.swagger.meta.paths = {
       summary: 'Logging in.',
 
       description: descriptionLoginLogout.login,
-  //     description: `
-  //  ### Logging in ###
-   //
-  //  By giving existing user account username and password you get login credentials,
-  //  which you can use in authenticating requests.
-   //
-  //  login response parameter value | to be filled into request header field
-  //  :--- | :---
-  //  auth-token-value | X-Auth-Token
-  //  user-id-value | X-User-Id
-   //
-   //
-  //     `,
       produces: ['application/json'],
       parameters: [
         CatalogV1.swagger.params.login,
@@ -67,20 +54,6 @@ CatalogV1.swagger.meta.paths = {
       summary: 'Logging out.',
 
       description: descriptionLoginLogout.logout,
-  //     description: `
-  //  ### Logging out ###
-   //
-  //  The login credentials must be filled in header of the message.
-   //
-  //  login response parameter value | to be filled into request header field
-  //  :--- | :---
-  //  auth-token-value | X-Auth-Token
-  //  user-id-value | X-User-Id
-   //
-  //  After logout the User has to do a *new log in* in order to be able to
-  //  make requests towards API endpoints.
-   //
-  //     `,
       produces: ['application/json'],
       responses: {
         200: {
@@ -131,25 +104,6 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'List and search public API.',
         description: descriptionApis.getAll,
-  //       description: `
-  //  ### List and search public APIs ###
-   //
-  //  Parameters are optional and also combinations of parameters can be used.
-   //
-  //  Example call:
-   //
-  //      GET /apis?limit=200&managedAPIs=true
-   //
-  //  Result: returns maximum of 200 APIs which are managed by requesting user.
-   //
-  //  -----
-   //
-  //  Note! The field X-User-Id in message header can be used
-  //  * to contain required Manager's user ID with parameter managedAPIs provided
-  //  * to contain Admin user's ID, when indicated, that user is Admin
-   //
-  //       `,
-
         parameters: [
           CatalogV1.swagger.params.optionalSearch,
           CatalogV1.swagger.params.organizationApi,
@@ -284,18 +238,6 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Fetch API with specified ID.',
         description: descriptionApis.get,
-  //       description: `
-  //  ### Fetching API with specified ID ###
-   //
-  //  Returns the API with specified ID, if a match is found.
-   //
-  //  Example call:
-   //
-  //       GET /apis/:id
-   //
-  //  Result: returns the data of API identified with :id.
-   //
-  //       `,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -330,19 +272,6 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Add new API to catalog.',
         description: descriptionApis.post,
-  //       description: `
-  //  ### Adding a new API to Catalog ###
-   //
-  //  Adds an API to catalog. On success, returns the added API object.
-   //
-   //
-  //  Parameters
-  //  * mandatory: name and url
-  //  * length of description must not exceed 1000 characters
-  //  * value of lifecycleStatus must be one of example list
-  //  * allowed values for parameter isPublic are "true" and "false"
-  //    * if isPublic is set false, only admin or manager can see the API
-  //       `,
         parameters: [
           CatalogV1.swagger.params.api,
         ],
@@ -542,19 +471,6 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Update API.',
         description: descriptionApis.put,
-  //       description: `
-  //  ### Update an API ###
-   //
-  //  Admin or API manager can update an API in catalog.
-  //  On success, returns the updated API object.
-   //
-  //  Parameters
-  //  * length of description must not exceed 1000 characters
-  //  * value of lifecycleStatus must be one of example list
-  //  * allowed values for parameter isPublic are "true" and "false"
-  //    * if isPublic is set false, only admin or manager can see the API
-   //
-  //       `,
         parameters: [
           CatalogV1.swagger.params.apiId,
           CatalogV1.swagger.params.api,
@@ -704,19 +620,6 @@ CatalogV1.addCollection(Apis, {
         ],
         summary: 'Delete API.',
         description: descriptionApis.delete,
-  //       description: `
-  //  ### Deleting an API ###
-   //
-  //  Admin user or API manager can delete an identified API from the Catalog,
-   //
-   //
-  //  Example call:
-   //
-  //       DELETE /apis/<API id>
-   //
-  //  Result: deletes the API identified with <API id> and responds with HTTP code 204.
-   //
-  //       `,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
