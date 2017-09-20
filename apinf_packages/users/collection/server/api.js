@@ -27,19 +27,6 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Logging in.',
       description: descriptionLoginLogout.login,
-  //     description: `
-  //  ### Logging in ###
-   //
-  //  By giving existing user account username and password you get login credentials,
-  //  which you can use in authenticating requests.
-   //
-  //  login response parameter value | to be filled into request header field
-  //  :--- | :---
-  //  auth-token-value | X-Auth-Token
-  //  user-id-value | X-User-Id
-   //
-   //
-  //     `,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.login,
@@ -68,20 +55,6 @@ ManagementV1.swagger.meta.paths = {
       ],
       summary: 'Logging out.',
       description: descriptionLoginLogout.logout,
-  //     description: `
-  //  ### Logging out ###
-   //
-  //  The login credentials must be filled in header of the message.
-   //
-  //  login response parameter value | to be filled into request header field
-  //  :--- | :---
-  //  auth-token-value | X-Auth-Token
-  //  user-id-value | X-User-Id
-   //
-  //  After logout the User has to do a *new log in* in order to be able to
-  //  make requests towards API endpoints.
-   //
-  //     `,
       produces: ['application/json'],
       responses: {
         200: {
@@ -123,31 +96,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'List and search users.',
-      description: `
-   ### Listing and searching Users ###
-
-   With this method the Admin can list Users (has access to all Users data)
-   or a non-Admin can list own data.
-
-   With query parameters Users can be filtered and the number and order of
-   returned list can be managed.
-
-   Sort criteria are following:
-   * by user's name: *username*
-   * by user account creation dates: *created_at*
-   * by organization name: *organization*
-
-   Parameters are optional and can be combined. Default value is to sort by ascending by username.
-
-   Example call:
-
-    GET /users?q=apinf&organization_id=<org_id>
-
-   Returns Users, who have string "apinf" either in username, company or email address
-   AND who belong to Organization identified with <org_id>.
-
-
-      `,
+      description: descriptionUsers.get,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.optionalSearch,
@@ -194,22 +143,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Adds a new user.',
-      description: `
-   ### Adding a new User ###
-
-   With this method a new user account is created.
-
-   Parameters:
-   * all parameters are mandatory
-   * *username* must be unique
-   * *email address* must be unique
-   * *password* must be at least 6 characters long
-
-   On a successful case a response message with HTTP code 201 is returned.
-   Payload contains the data of created User.
-
-
-      `,
+      description: descriptionUsers.post,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.userDataAdd,
@@ -246,20 +180,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Search User with userID.',
-      description: `
-  ### Searching Users with UserID ###
-
-   With this method an Admin user can list data of a any User identified with ID.
-   Also a non-Admin user can list own data.
-
-   Example call:
-
-    GET /users/<users id>
-
-   Returns data of user identified with <users id>, in case a match is found.
-
-
-      `,
+      description: descriptionUsers.getId,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.userId,
@@ -302,20 +223,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Remove Users one by one with userID.',
-      description: `
-   ### Removes the identified User ###
-
-   With this method an Admin user can remove user accounts. Also a non-Admin user
-   can remove own user account.
-
-   Example call:
-
-    DELETE /users/<users id>
-
-   Removes the user identified with <users id> and responses with HTTP code 204 without content.
-
-
-      `,
+      description: descriptionUsers.deleteId,
       parameters: [
         ManagementV1.swagger.params.userId,
       ],
@@ -348,20 +256,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Update User\'s data.',
-      description: `
-   ### Updates data of a User indicated by user ID ###
-
-   With this method a user can edit own account.
-
-   Parameters:
-   * At least one parameter must be given.
-   * *Username* must be unique.
-   * *Password* must be at least 6 characters.
-
-
-   Note! Users needs a new login after password change in order to get new valid credentials.
-
-      `,
+      description: descriptionUsers.putId,
       parameters: [
         ManagementV1.swagger.params.userId,
         ManagementV1.swagger.params.userDataUpdate,
@@ -410,19 +305,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'List and search user based on addition date.',
-      description: `
-   ### Returns users based on addition date ###
-
-   Parameters are optional and they can be combined.
-
-   Example call:
-
-    GET /users/updates?since=7&organization_id=<org_id>
-
-   As a response is returned an array containing Users, which have been created within
-   last seven days and who are managers in Organization identified with <org_id>.
-
-      `,
+      description: descriptionUsers.getUpdates,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.since,
