@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="feedbackItem">
-  {{# if item.currentUserCanSee}}
+  {{ #if item.currentUserCanSee }}
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="row list-group-item feedback-list-item">
@@ -31,27 +31,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <span>
                 {{ item.topic }}
               </span>
-              {{#unless item.isPublic}}
-                {{#if item.currentUserCanChangeVisibility}}
+              {{ #unless item.isPublic }}
+                {{ #if item.currentUserCanChangeVisibility }}
                   <span class="fa fa-lg fa-eye-slash private-icon-feedback"></span>
-                {{/if}}
-              {{/ unless}}
+                {{ /if }}
+              {{ /unless }}
             </div>
           </div>
-          {{#if item.currentUserCanEdit }}
+          {{ #if item.currentUserCanEdit }}
           <div id="feedback-item-actions" class="btn-group pull-right">
             <button class="edit-feedback-item btn btn-primary btn-xs">
               {{_ "feedbackItem_editButton_text" }}
             </button>
-            {{#if item.currentUserCanChangeVisibility}}
+            {{ #if item.currentUserCanChangeVisibility }}
               <button class="visibility-feedback-item btn btn-info btn-xs">
-                  {{#if item.isPublic}}
-                    {{_ "feedbackItem_visibilityButton_makePrivate"}}
+                  {{ #if item.isPublic }}
+                    {{_ "feedbackItem_visibilityButton_makePrivate" }}
                   {{else}}
-                    {{_ "feedbackItem_visibilityButton_makePublic"}}
-                  {{/if}}
+                    {{_ "feedbackItem_visibilityButton_makePublic" }}
+                  {{ /if }}
               </button>
-            {{/if}}
+            {{ /if }}
             <button class="delete-feedback-item btn btn-danger btn-xs">
               {{_ "feedbackItem_deleteButton_text" }}
             </button>
@@ -74,5 +74,5 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </i>
       </div>
     </div>
-  {{/ if}}
+  {{ /if }}
 </template>

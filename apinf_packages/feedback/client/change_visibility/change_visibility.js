@@ -8,16 +8,15 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
 Template.changeFeedbackVisibility.events({
-  'click #confirm-change-visibility': function () {
+  'click #confirm-change-visibility': () => {
     // Get slug
     const slug = FlowRouter.getParam('slug');
 
-    // Call meteor method
+    // Change the visibility of all api's feedbacks
     Meteor.call('changeAllFeedbacksVisibility', slug, this.toPublic);
 
     // Close modal
