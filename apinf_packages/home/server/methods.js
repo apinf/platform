@@ -48,7 +48,26 @@ ${doc.message}`;
 });
 // eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('apisCount', function () {
-  Counts.publish(this, 'apisCount', Apis.find({ $or: [{ isPublic: true }, { authorizedUserIds: { $in: [ Meteor.userId() ]} } ]}));
+  // Construct query for checking if API is public or current user is authorized for the API
+  const query = {
+    $or: [
+      {
+        isPublic: true,
+      },
+      {
+        authorizedUserIds: {
+          $in: [Meteor.userId()],
+        },
+      },
+      {
+        managerIds: {
+          $in: [Meteor.userId()],
+        },
+      },
+    ],
+  };
+
+  Counts.publish(this, 'apisCount', Apis.find(query));
 });
 
 Meteor.publish('organizationsCount', function () {
