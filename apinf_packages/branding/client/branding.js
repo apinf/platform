@@ -38,6 +38,7 @@ Template.branding.helpers({
     const options = {
       placeholder: message,
       tags: true,
+      tokenSeparators: [',', ' ']
     };
     return options;
   },

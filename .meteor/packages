@@ -90,7 +90,7 @@ aramk:quill
 softwarerero:accounts-t9n
 aldeed:autoform-bs-button-group-input
 raix:rssfeed
-aldeed:autoform-select2
 http@1.2.12
 reactive-dict@1.1.9
 dynamic-import
+custom:autoform-select2
