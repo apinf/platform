@@ -15,6 +15,29 @@ import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 import Feedback from './';
 
 Feedback.helpers({
+  currentUserCanChangeVisibility () {
+    // Get API infos to check if user can manage the feedback's api
+    const api = Apis.findOne({ _id: this.apiBackendId });
+
+    return api.currentUserCanManage();
+  },
+  currentUserCanSee () {
+    // Get current userId
+    const userId = Meteor.userId();
+
+    // User without login can't see private feedbacks
+    if (!userId && !this.isPublic) {
+      return false;
+    }
+
+    // Check if user is owner of feedback
+    const userIsOwner = this.authorId === userId;
+
+    // Get API infos to check if user can manage the feedback's api
+    const api = Apis.findOne({ _id: this.apiBackendId });
+
+    return this.isPublic || userIsOwner || api.currentUserCanManage();
+  },
   sumOfVotes () {
     // Get all votes for current feedback
     const allFeedback = FeedbackVotes.find({ feedbackId: this._id }).fetch();

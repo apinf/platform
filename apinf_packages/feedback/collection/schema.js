@@ -30,6 +30,11 @@ Feedback.schema = new SimpleSchema({
     type: String,
     allowedValues: ['Feedback', 'Error report', 'Feature request'],
   },
+  isPublic: {
+    type: Boolean,
+    optional: true,
+    defaultValue: true,
+  },
   authorId: {
     type: String,
     autoValue () {
