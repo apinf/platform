@@ -72,6 +72,20 @@ Meteor.publishComposite('apiComposite', function (slug) {
       },
       {
         find (api) {
+          // Subscribe to feedback authors
+          const authorIds = [];
+
+          Feedback.find({ apiBackendId: api._id }).fetch().forEach((feedback) => {
+            // Get value of author IDs
+            authorIds.push(feedback.authorId);
+          });
+
+          // Publish feedback authors
+          return Meteor.users.find({ $or: authorIds });
+        },
+      },
+      {
+        find (api) {
           // Get related proxy backend configuration
           return ProxyBackends.find({ apiId: api._id });
         },
