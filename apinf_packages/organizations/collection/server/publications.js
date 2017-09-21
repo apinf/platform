@@ -76,7 +76,11 @@ Meteor.publish('organizationApisCount', function (organizationId) {
     });
 
     // Uses the apisSelector to get available APIs
-    organizationApisCount = OrganizationApis.find({ $or: apisSelector });
+    if (apisSelector.length > 0) {
+      organizationApisCount = OrganizationApis.find({ $or: apisSelector });
+    } else {
+      organizationApisCount = OrganizationApis.find(null);
+    }
   }
 
   // Publish an Api Counter for each Organization
