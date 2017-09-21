@@ -13,8 +13,10 @@ import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
-import descriptionUsers from '/apinf_packages/rest_apis/descriptions/users_texts';
-import descriptionLoginLogout from '/apinf_packages/rest_apis/descriptions/login_logout_texts';
+
+// APInf imports
+import descriptionUsers from '/apinf_packages/rest_apis/lib/descriptions/users_texts';
+import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
 
 // Npm packages imports
 import _ from 'lodash';

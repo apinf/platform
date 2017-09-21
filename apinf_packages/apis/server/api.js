@@ -13,8 +13,10 @@ import { Roles } from 'meteor/alanning:roles';
 import Apis from '/apinf_packages/apis/collection';
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
-import descriptionApis from '/apinf_packages/rest_apis/descriptions/apis_texts';
-import descriptionLoginLogout from '/apinf_packages/rest_apis/descriptions/login_logout_texts';
+
+// APInf imports
+import descriptionApis from '/apinf_packages/rest_apis/lib/descriptions/apis_texts';
+import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
 
 CatalogV1.swagger.meta.paths = {
   '/login': {

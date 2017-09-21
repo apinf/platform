@@ -6,7 +6,9 @@
 // Meteor contributed packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
-import managementGeneralDescription from '/apinf_packages/rest_apis/descriptions/management_texts';
+// APInf imports
+import managementGeneralDescription from
+             '/apinf_packages/rest_apis/lib/descriptions/management_texts';
 
 const ManagementV1 = new Restivus({
   apiPath: 'rest',

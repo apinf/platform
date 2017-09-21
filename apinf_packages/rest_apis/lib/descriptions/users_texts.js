@@ -27,8 +27,6 @@ const descriptionUsers = {
 
   Returns Users, who have string "apinf" either in username, company or email address
   AND who belong to Organization identified with <org_id>.
-
-
   `,
   // --------------------------------------------
   post: `
@@ -44,8 +42,6 @@ const descriptionUsers = {
 
   On a successful case a response message with HTTP code 201 is returned.
   Payload contains the data of created User account.
-
-
   `,
   // --------------------------------------------
   getId: `
@@ -59,8 +55,6 @@ const descriptionUsers = {
     GET /users/<user-id>
 
   Returns data of user identified with users-id, in case a match is found.
-
-
   `,
   // --------------------------------------------
   deleteId: `
@@ -74,8 +68,6 @@ const descriptionUsers = {
     DELETE /users/<users-id>
 
   Removes the user identified with users-id and responses with HTTP code 204 without content.
-
-
   `,
   // --------------------------------------------
   putId: `
@@ -90,7 +82,6 @@ const descriptionUsers = {
 
 
   Note! Users needs a new login after password change in order to get new valid credentials.
-
   `,
   // --------------------------------------------
   getUpdates: `
@@ -104,11 +95,7 @@ const descriptionUsers = {
 
   As a response is returned an array containing Users, which have been created within
   last seven days and who are managers in Organization identified with org-id.
-
   `,
-
-
 };
-
 
 export default descriptionUsers;

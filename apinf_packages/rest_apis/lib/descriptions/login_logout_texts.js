@@ -10,14 +10,12 @@ const descriptionLoginLogout = {
   ### Logging in ###
 
   By giving existing user account username and password you get login credentials,
-  which you can use in authenticating requests.
+  which you can use when authenticating requests.
 
   login response parameter value | to be filled into request header field
   :--- | :---
   auth-token-value | X-Auth-Token
   user-id-value | X-User-Id
-
-
 `,
   // --------------------------------------------
   logout: `
@@ -33,7 +31,6 @@ const descriptionLoginLogout = {
 
   After logout the User has to do a *new log in* in order to be able to
   make requests towards API endpoints.
-
 `,
 };
 

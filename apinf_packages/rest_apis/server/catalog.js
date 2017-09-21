@@ -6,7 +6,8 @@
 // Meteor contributed packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
-import catalogGeneralDescription from '/apinf_packages/rest_apis/descriptions/catalog_texts';
+// APInf imports
+import catalogGeneralDescription from '/apinf_packages/rest_apis/lib/descriptions/catalog_texts';
 
 const CatalogV1 = new Restivus({
   apiPath: 'rest',

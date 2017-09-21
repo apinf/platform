@@ -5,13 +5,14 @@
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
 // Collection imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
-import descriptionOrganizations from '/apinf_packages/rest_apis/descriptions/organizations_texts';
 
-import { Accounts } from 'meteor/accounts-base';
+// APInf imports
+import descriptionOrganizations from '/apinf_packages/rest_apis/lib/descriptions/organizations_texts';
 
 // Request /rest/v1/organizations for Organizations collection
 ManagementV1.addRoute('organizations', {

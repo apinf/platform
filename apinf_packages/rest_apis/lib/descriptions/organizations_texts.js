@@ -20,7 +20,6 @@ const descriptionOrganizations = {
 
   As a response is returned up to ten first Organizations,
   which contain string "apinf" in Name, Description or URL.
-
   `,
   // --------------------------------------------
   post: `
@@ -43,7 +42,6 @@ const descriptionOrganizations = {
     GET /organizations/:id
 
   Returns the data of the Organization specified with :id in case a match is found.
-
   `,
   // --------------------------------------------
   putId: `
@@ -54,7 +52,6 @@ const descriptionOrganizations = {
   Parameters
   * can be given one by one or several ones at a time
   * length of parameter *description* must not exceed 1000 characters
-
   `,
   // --------------------------------------------
   deleteId: `
@@ -64,7 +61,6 @@ const descriptionOrganizations = {
 
   In successful case a response message with HTTP code 204 without any content is returned.
   Note! Trying to remove a non-existing Organization is considered a failed operation.
-
   `,
   // --------------------------------------------
   getIdManagers: `
@@ -85,7 +81,6 @@ const descriptionOrganizations = {
   Example call:
 
     GET /organizations/<organization_id>/managers
-
 
   `,
   // --------------------------------------------
@@ -111,7 +106,6 @@ const descriptionOrganizations = {
 
     GET /organizations/<organizations id>/managers/<managers id>
 
-
   `,
   // --------------------------------------------
   deleteIdManagersManagerid: `
@@ -125,11 +119,8 @@ const descriptionOrganizations = {
     DELETE /organizations/<organizations id>/managers/<managers id>
 
 
-
   Note! Trying to remove a not existing Manager is considered a failed operation.
   `,
-
 };
-
 
 export default descriptionOrganizations;

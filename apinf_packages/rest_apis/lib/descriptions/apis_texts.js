@@ -22,7 +22,6 @@ const descriptionApis = {
   Note! The field X-User-Id in message header can be used
   * to contain required Manager's user ID with parameter managedAPIs provided
   * to contain Admin user's ID, when indicated, that user is Admin
-
   `,
   // --------------------------------------------
   get: `
@@ -35,7 +34,6 @@ const descriptionApis = {
       GET /apis/:id
 
   Result: returns the data of API identified with :id.
-
   `,
   // --------------------------------------------
   post: `
@@ -63,7 +61,6 @@ const descriptionApis = {
   * value of lifecycleStatus must be one of example list
   * allowed values for parameter isPublic are "true" and "false"
   * if isPublic is set false, only admin or manager can see the API
-
   `,
   // --------------------------------------------
   delete: `
@@ -71,16 +68,12 @@ const descriptionApis = {
 
   Admin user or API manager can delete an identified API from the Catalog,
 
-
   Example call:
 
     DELETE /apis/<API id>
 
   Result: deletes the API identified with <API id> and responds with HTTP code 204.
-
   `,
-
 };
-
 
 export default descriptionApis;

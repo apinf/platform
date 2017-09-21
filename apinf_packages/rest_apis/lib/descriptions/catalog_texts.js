@@ -25,7 +25,6 @@ to the developer community and performing complex API management tasks.
 It allows you to gain a better understanding of your API traffic.
 
 
-
 ## APInf Catalog REST API
 
 APInf Catalog REST API enables API management via a simple API.
@@ -90,7 +89,6 @@ Unsuccessful case:
   * message: extended information about reason of failure
 
 ----
-
 `;
 
 export default catalogGeneralDescription;
