@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiFeedback">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{ #if currentUser }}
+      {{# if currentUser }}
       <div id="feedback-options">
         <button
           type="button"
@@ -16,22 +16,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             &nbsp;
             {{_ "feedback_feedbackForm_button" }}
         </button>
-        {{ #if api.currentUserCanManage }}
-          <button 
+        {{# if api.currentUserCanManage }}
+          <button
             type="button"
             class="btn btn-info btn-xs pull-right feedback-form-button"
             id="mark-all-feedbacks-as-private">
               {{_ "feedback_mark_all_feedbacks_as_private" }}
           </button>
-          <button 
+          <button
             type="button"
             class="btn btn-info btn-xs pull-right feedback-form-button"
             id="mark-all-feedbacks-as-public">
             {{_ "feedback_mark_all_feedbacks_as_public" }}
           </button>
-        {{ /if }}
+        {{/ if }}
       </div>
-      {{ /if }}
+      {{/ if }}
       <h2 id="feedback-title" class="panel-title clearfix">
         {{_ "feedback_main_title" }}
       </h2>
