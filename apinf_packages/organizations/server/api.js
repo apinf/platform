@@ -5,11 +5,15 @@
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
 // Collection imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
-import { Accounts } from 'meteor/accounts-base';
+
+// APInf imports
+/* eslint-disable max-len */
+import descriptionOrganizations from '/apinf_packages/rest_apis/lib/descriptions/organizations_texts';
 
 // Request /rest/v1/organizations for Organizations collection
 ManagementV1.addRoute('organizations', {
@@ -20,23 +24,7 @@ ManagementV1.addRoute('organizations', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'List and search organizations.',
-      description: `
-   ### List and search organizations ###
-
-   Parameters are optional and several parametes can be combined.
-
-   Example calls:
-
-    GET /organizations
-
-   As a response all Organizations' datas are listed.
-
-    GET /organizations?q=apinf&limit=10
-
-   As a response is returned up to ten first Organizations,
-   which contain string "apinf" in Name, Description or URL.
-
-      `,
+      description: descriptionOrganizations.get,
       parameters: [
         ManagementV1.swagger.params.optionalSearch,
         ManagementV1.swagger.params.skip,
@@ -124,17 +112,7 @@ ManagementV1.addRoute('organizations', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Add a new Organization.',
-      description: `
-   ### Adds a new Organization ###
-
-   Admin user can add a new Organization into Catalog.
-
-   Parameters:
-   * *name* and *url* are mandatory parameters
-   * *description* length must not exceed 1000 characters.
-
-   On success, a response message with HTTP code 201 returns the created organization data.
-      `,
+      description: descriptionOrganizations.post,
       parameters: [
         ManagementV1.swagger.params.organization,
       ],
@@ -389,16 +367,7 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Fetch Organization with specified ID.',
-      description: `
-   ### List the data of the Organization specified with ID ###
-
-   Example call
-
-    GET /organizations/:id
-
-   Returns the data of the Organization specified with :id in case a match is found.
-
-      `,
+      description: descriptionOrganizations.getId,
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -465,16 +434,7 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Update Organization.',
-      description: `
-   ### Update an Organization ###
-
-   Admin user or Organization manager can update Organization data with parameters listed below.
-
-   Parameters
-   * can be given one by one or several ones at a time
-   * length of parameter *description* must not exceed 1000 characters
-
-      `,
+      description: descriptionOrganizations.putId,
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.organization,
@@ -756,15 +716,7 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Organization from catalog.',
-      description: `
-   ### Deletes the identified Organization from catalog ###
-
-   Admin user or Organization manager can remove Organization from Catalog.
-
-   In successful case a response message with HTTP code 204 without any content is returned.
-   Note! Trying to remove a non-existing Organization is considered a failed operation.
-
-      `,
+      description: descriptionOrganizations.deleteId,
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -845,26 +797,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Get Organization Manager list.',
-      description: `
-   ### Listing all Organization Managers ###
-
-   Admin user or Organization manager can list all Organization managers'
-   username, email address and ID of Organization identified with :id.
-
-   Two lists are returned:
-   * managerIds: list of all Managers' IDs
-   * data: list (matching to query parameters) of Managers with contact information
-
-   Note! The lists can differ from each other in such a case a Manager account is removed,
-   but the Manager list is not updated accordingly.
-
-
-   Example call:
-
-    GET /organizations/<organization_id>/managers
-
-
-      `,
+      description: descriptionOrganizations.getIdManagers,
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -996,17 +929,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Add a new Manager into Organization.',
-      description: `
-   ### Adds a new Manager into Organization ###
-
-   Admin user or Organization manager can add a new manager into organization.
-
-   * Manager is identified with email address.
-   * New manager must have a valid User account.
-   * New manager must not already be a Manager in same Organization.
-
-   On success, a complete list of Organization Managers is returned.
-      `,
+      description: descriptionOrganizations.postIdManagers,
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.newManagerEmail,
@@ -1192,18 +1115,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Get Organization Manager username and email address.',
-      description: `
-   ### Inquiring Organization Manager's username and email address ###
-
-   Admin user or Organization manager can fetch username and email address of a
-   Manager identified by {managerId}.
-
-   Example call:
-
-    GET /organizations/<organizations id>/managers/<managers id>
-
-
-      `,
+      description: descriptionOrganizations.getIdManagersManagerid,
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.managerId,
@@ -1372,19 +1284,7 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Manager from Organization Manager list.',
-      description: `
-   ### Deleting a User from Organization Manager list ###
-
-   Admin user or Organization manager can delete managers from Organization manager list one by one.
-
-
-   Example call:
-
-    DELETE /organizations/<organizations id>/managers/<managers id>
-
-
-   Note! Trying to remove a not existing Manager is considered a failed operation.
-      `,
+      description: descriptionOrganizations.deleteIdManagersManagerid,
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.managerId,
