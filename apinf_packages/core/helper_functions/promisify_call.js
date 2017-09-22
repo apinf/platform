@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 // Validates Promisify Meteor.call, for better response handling.
 export default function promisifyCall (...args) {
   return new Promise((resolve, reject) => {
+    // Call function with arguments and callback function
     Meteor.call(...args, (err, response) => {
       return err ? reject(err) : resolve(response);
     });
