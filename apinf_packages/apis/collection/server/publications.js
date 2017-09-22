@@ -81,7 +81,7 @@ Meteor.publishComposite('apiComposite', function (slug) {
           });
 
           // Publish feedback authors
-          return Meteor.users.find({ $or: authorIds });
+          return Meteor.users.find({ _id: { $in: authorIds } });
         },
       },
       {
