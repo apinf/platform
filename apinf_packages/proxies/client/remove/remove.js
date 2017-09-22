@@ -1,9 +1,10 @@
 /* Copyright 2017 Apinf Oy
-This file is covered by the EUPL license.
-You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+ This file is covered by the EUPL license.
+ You may obtain a copy of the licence at
+ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -13,7 +14,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
-import Proxies from '../../collection';
 
 Template.removeProxy.onCreated(function () {
   const proxyId = Template.currentData().proxy._id;
@@ -38,18 +38,30 @@ Template.removeProxy.helpers({
 });
 
 Template.removeProxy.events({
-  'click #confirm-remove-proxy': function () {
+  'click #confirm-remove-proxy': (event) => {
+    const button = event.currentTarget;
+
     const proxyId = Template.currentData().proxy._id;
 
     // Check proxyId
     if (proxyId) {
-      Proxies.remove(proxyId);
+      // Disabled button while request is in process
+      button.disabled = true;
+      // Remove proxy and all related proxy backends configurations
+      Meteor.call('removeProxy', proxyId, (err) => {
+        // Display error if something went wrong
+        if (err) sAlert.error(err);
+
+        // Enabled button when request is end
+        button.disabled = false;
+
+        // Hide form
+        Modal.hide('removeProxy');
+      });
     } else {
       // Show alert of failed removal
       const errorMessage = TAPi18n.__('removeProxy_errorMessage');
       sAlert.error(errorMessage);
     }
-
-    Modal.hide('removeProxy');
   },
 });
