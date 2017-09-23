@@ -99,7 +99,7 @@ export function summaryComparing (parameter, bucket, timeframe) {
   // Make sure trend exists
   if (direction && percentages) {
     // If trend is positive
-    if (direction === 'arrow-up' || direction === 'arrow-down_time') {
+    if (direction === 'arrow-up' || direction === 'arrow-up_time') {
       // Metric is better
       trend = TAPi18n.__('summaryComparing_trendDirection_higher');
     } else {

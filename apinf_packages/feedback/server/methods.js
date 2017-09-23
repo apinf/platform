@@ -12,9 +12,31 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
+import Apis from '/apinf_packages/apis/collection';
 import Feedback from '../collection';
 
 Meteor.methods({
+  changeAllFeedbacksVisibility (slug, isPublic) {
+    // Check params
+    check(slug, String);
+    check(isPublic, Boolean);
+
+    // Get api infos
+    const api = Apis.findOne({ slug });
+
+    // Change the visibility of all api's feedbacks
+    Feedback.update({ apiBackendId: api._id }, { $set: { isPublic } }, { multi: true });
+  },
+  changeFeedbackVisibility (feedbackItemId, isPublic) {
+    // Make sure feedbackItemId is a String
+    check(feedbackItemId, String);
+
+    // Make sure isPublic is a Boolean
+    check(isPublic, Boolean);
+
+    // Change the visibility of feedback
+    Feedback.update({ _id: feedbackItemId }, { $set: { isPublic } });
+  },
   deleteFeedback (feedbackItemId) {
     // Make sure feedbackItemId is a String
     check(feedbackItemId, String);

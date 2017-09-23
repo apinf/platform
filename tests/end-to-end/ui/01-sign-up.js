@@ -52,6 +52,10 @@ describe('01 sign up', () => {
       signUpPage.githubButton.isVisible().should.be.true;
     });
 
+    it('should show fiware button', () => {
+      signUpPage.fiwareButton.isVisible().should.be.true;
+    });
+
     it('should show register button', () => {
       signUpPage.registerButton.isVisible().should.be.true;
     });

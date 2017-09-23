@@ -135,24 +135,6 @@ Settings.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email,
     optional: true,
   },
-  githubConfiguration: {
-    type: Object,
-    optional: true,
-  },
-  'githubConfiguration.clientId': {
-    type: String,
-    optional: true,
-    autoform: {
-      placeholder: 'xxx',
-    },
-  },
-  'githubConfiguration.secret': {
-    type: String,
-    optional: true,
-    autoform: {
-      placeholder: 'xxx',
-    },
-  },
   sdkCodeGenerator: {
     type: Object,
     optional: true,

@@ -10,6 +10,7 @@ import { check } from 'meteor/check';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Email } from 'meteor/email';
+import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -48,7 +49,35 @@ ${doc.message}`;
 });
 // eslint-disable-next-line prefer-arrow-callback
 Meteor.publish('apisCount', function () {
-  Counts.publish(this, 'apisCount', Apis.find());
+  // Get CurrentUser
+  const userId = Meteor.userId();
+  let query = {};
+
+  // Check if currentUser is administrator
+  const isAdmin = Roles.userIsInRole(userId, ['admin']);
+
+  if (!isAdmin) {
+    // Construct query for checking if API is public or current user is authorized for the API
+    query = {
+      $or: [
+        {
+          isPublic: true,
+        },
+        {
+          authorizedUserIds: {
+            $in: [userId],
+          },
+        },
+        {
+          managerIds: {
+            $in: [userId],
+          },
+        },
+      ],
+    };
+  }
+
+  Counts.publish(this, 'apisCount', Apis.find(query));
 });
 
 Meteor.publish('organizationsCount', function () {

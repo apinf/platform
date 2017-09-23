@@ -13,7 +13,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Organizations from '/apinf_packages/organizations/collection';
 
-Template.organizationCatalogueToolbar.onRendered(function () {
+Template.organizationCatalogToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;
 
@@ -56,7 +56,7 @@ Template.organizationCatalogueToolbar.onRendered(function () {
   });
 });
 
-Template.organizationCatalogueToolbar.helpers({
+Template.organizationCatalogToolbar.helpers({
   userIsOrganizationManager () {
     // Get ID of current user
     const userId = Meteor.userId();
@@ -67,7 +67,7 @@ Template.organizationCatalogueToolbar.helpers({
   },
 });
 
-Template.organizationCatalogueToolbar.events({
+Template.organizationCatalogToolbar.events({
   'change .filter-sort-control': (event) => {
     // Initialize placeholder for query parameters
     const queryParameters = {};

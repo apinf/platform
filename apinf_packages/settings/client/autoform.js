@@ -15,7 +15,6 @@ AutoForm.hooks({
   settings: {
     onSuccess () {
       // Call for configuration updates
-      Meteor.call('updateGithubConfiguration');
       Meteor.call('configureSmtpSettings');
 
       // Get settings form success message translation

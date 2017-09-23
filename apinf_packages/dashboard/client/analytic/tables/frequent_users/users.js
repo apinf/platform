@@ -55,7 +55,7 @@ Template.mostFrequentUsersTable.helpers({
 });
 
 Template.mostFrequentUsersTable.events({
-  'click #generate-errors-log': (event, templateInstance) => {
+  'click #generate-users-log': (event, templateInstance) => {
     const fields = ['email', 'calls', 'url'];
     // converts from json to csv
     const csv = json2csv({ data: templateInstance.users, fields });
