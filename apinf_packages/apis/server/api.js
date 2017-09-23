@@ -14,6 +14,10 @@ import Apis from '/apinf_packages/apis/collection';
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
 
+// APInf imports
+import descriptionApis from '/apinf_packages/rest_apis/lib/descriptions/apis_texts';
+import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
+
 CatalogV1.swagger.meta.paths = {
   '/login': {
     post: {
@@ -21,19 +25,8 @@ CatalogV1.swagger.meta.paths = {
         CatalogV1.swagger.tags.login,
       ],
       summary: 'Logging in.',
-      description: `
-   ### Logging in ###
 
-   By giving existing username and password you get login credentials,
-   which you can use in authenticating requests.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-
-      `,
+      description: descriptionLoginLogout.login,
       produces: ['application/json'],
       parameters: [
         CatalogV1.swagger.params.login,
@@ -55,6 +48,48 @@ CatalogV1.swagger.meta.paths = {
     },
   },
 
+  '/logout': {
+    post: {
+      tags: [
+        CatalogV1.swagger.tags.logout,
+      ],
+      summary: 'Logging out.',
+
+      description: descriptionLoginLogout.logout,
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'You\'ve been logged out!',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              message: {
+                type: 'string',
+                example: 'You\'ve been logged out!',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Missing or erroneous parameter.',
+        },
+        401: {
+          description: 'Unauthorized',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+  },
+
 };
 
 // Request /rest/v1/apis for Apis collection
@@ -70,25 +105,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'List and search public API.',
-        description: `
-   ### List and search public APIs ###
-
-   Parameters are optional and also combinations of parameters can be used.
-
-   Example call:
-
-       GET /apis?limit=200&managedAPIs=true
-
-   Result: returns maximum of 200 APIs which are managed by requesting user.
-
-   -----
-
-   Note! The field X-User-Id in message header can be used
-   * to contain required Manager's user ID with parameter managedAPIs provided
-   * to contain Admin user's ID, when indicated, that user is Admin
-
-        `,
-
+        description: descriptionApis.getAll,
         parameters: [
           CatalogV1.swagger.params.optionalSearch,
           CatalogV1.swagger.params.organizationApi,
@@ -222,18 +239,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Fetch API with specified ID.',
-        description: `
-   ### Fetching API with specified ID ###
-
-   Returns the API with specified ID, if a match is found.
-
-   Example call:
-
-        GET /apis/:id
-
-   Result: returns the data of API identified with :id.
-
-        `,
+        description: descriptionApis.get,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -267,19 +273,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Add new API to catalog.',
-        description: `
-   ### Adding a new API to Catalog ###
-
-   Adds an API to catalog. On success, returns the added API object.
-
-
-   Parameters
-   * mandatory: name and url
-   * length of description must not exceed 1000 characters
-   * value of lifecycleStatus must be one of example list
-   * allowed values for parameter isPublic are "true" and "false"
-     * if isPublic is set false, only admin or manager can see the API
-        `,
+        description: descriptionApis.post,
         parameters: [
           CatalogV1.swagger.params.api,
         ],
@@ -478,19 +472,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Update API.',
-        description: `
-   ### Update an API ###
-
-   Admin or API manager can update an API in catalog.
-   On success, returns the updated API object.
-
-   Parameters
-   * length of description must not exceed 1000 characters
-   * value of lifecycleStatus must be one of example list
-   * allowed values for parameter isPublic are "true" and "false"
-     * if isPublic is set false, only admin or manager can see the API
-
-        `,
+        description: descriptionApis.put,
         parameters: [
           CatalogV1.swagger.params.apiId,
           CatalogV1.swagger.params.api,
@@ -639,19 +621,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Delete API.',
-        description: `
-   ### Deleting an API ###
-
-   Admin user or API manager can delete an identified API from the Catalog,
-
-
-   Example call:
-
-        DELETE /apis/<API id>
-
-   Result: deletes the API identified with <API id> and responds with HTTP code 204.
-
-        `,
+        description: descriptionApis.delete,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],

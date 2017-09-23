@@ -29,6 +29,23 @@ const UserSchema = new SimpleSchema({
     type: String,
     regEx: UsernameRegEx,
     optional: false,
+    autoValue () {
+      // If Fiware was used
+      const fiware = (this.field('services').value || {}).fiware;
+
+      // If Github was used
+      const github = (this.field('services').value || {}).github;
+
+      // Check login service used
+      if (fiware) {
+        return fiware.displayName;
+        // If Github was used, get Github username
+      } else if (github) {
+        return github.username;
+      }
+      // If regular signup was used, get passed username
+      return this.value;
+    },
   },
   apiUmbrellaUserId: {
     type: String,
@@ -36,7 +53,26 @@ const UserSchema = new SimpleSchema({
   },
   emails: {
     type: [Object],
-    optional: false,
+    optional: true,
+    autoValue () {
+      // Set fiware object to variable
+      const fiware = (this.field('services').value || {}).fiware;
+
+      // Set Github object to variable
+      const github = (this.field('services').value || {}).github;
+
+      // If Fiware was used, get Fiware email
+      if (fiware) {
+        return [{ address: fiware.email, verified: false }];
+
+      // If Github was used, get Github email
+      } else if (github) {
+        return [{ address: github.email, verified: false }];
+      }
+
+      // If regular signup was used, get passed email
+      return this.value;
+    },
   },
   'emails.$.address': {
     type: String,

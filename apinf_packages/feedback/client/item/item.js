@@ -126,4 +126,11 @@ Template.feedbackItem.events({
     // Show the Delete Confirmation dialogue
     Modal.show('deleteFeedbackItem', { feedbackItem: item });
   },
+  'click .visibility-feedback-item': () => {
+    // Get feedback item
+    const item = Template.currentData().item;
+
+    // Set the new visibility of feedback
+    Meteor.call('changeFeedbackVisibility', item._id, !item.isPublic);
+  },
 });

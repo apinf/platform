@@ -8,24 +8,29 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Discover chimp-js browser
 /* globals browser */
 
-/*
 import signUpPage from '../../page-objects/signup.page';
 import mainContent from '../../page-objects/main-content.page';
-import settingsPage from '../../page-objects/settings.page';
+import loginPlatformsPage from '../../page-objects/login-platforms.page';
 
 import {
   adminUsername,
   adminEmail,
   adminPassword,
 } from '../../data/user';
-import { githubClientId, githubClientSecret } from '../../data/settings';
+import {
+  githubClientId,
+  githubClientSecret,
+  fiwareClientId,
+  fiwareClientSecret,
+  rootURL,
+ } from '../../data/settings';
 
 describe('03 user creation', () => {
   before(() => {
     signUpPage.open();
   });
 
-  it('create admin user', () => {
+  it.skip('create admin user using github', () => {
     const adminCredentials = {
       username: adminUsername,
       email: adminEmail,
@@ -37,11 +42,11 @@ describe('03 user creation', () => {
 
     // Setup settings
     signUpPage.gotModalToSetup();
-    settingsPage.setupGithub({ githubClientId, githubClientSecret });
+    loginPlatformsPage.setupGithub({ githubClientId, githubClientSecret });
+    loginPlatformsPage.setupFiware({ fiwareClientId, fiwareClientSecret, rootURL });
 
     mainContent.signOutLink.waitForExist(5000);
     mainContent.signOutLink.isVisible().should.be.true;
     mainContent.logOut();
   });
 });
-*/
