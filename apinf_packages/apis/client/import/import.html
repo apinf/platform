@@ -4,18 +4,24 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="importApiConfiguration">
-    <form id="apiConfigurationUploadForm" class="form" method="post">
-      <legend>
-        {{_ "import_ApiConfiguration_Title" }}
-      </legend>
-      <div class="col-xs-12">
-          <label for="import-api">File:</label>
-          <input type="file" id="import-api" class="form-control">
-          <span>Only yml, yaml, json and txt format will be accepted</span>
-      </div> 
-      <div class="col-xs-12 file-preview">
-        <pre></pre>
-        <button class="btn btn-primary">Import API</button>
-      </div>
-    </form>
+  <div class="content-wrapper">
+    <div class="container">
+      <form id="apiConfigurationUploadForm" class="form" method="post">
+        <legend>
+          {{_ "import_ApiConfiguration_Title" }}
+        </legend>
+        <div class="row">
+          <div class="col-xs-12">
+              <label for="import-api">{{_ "import_ApiConfiguration_FileLabel"}}</label>
+              <input type="file" id="import-api" class="form-control">
+              <span>{{_ "import_ApiConfiguration_Extensions" }}</span>
+          </div> 
+          <div class="col-xs-12 file-preview">
+            <pre></pre>
+            <button class="btn btn-primary">{{_ "import_ApiConfiguration_ImportApi" }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div> 
 </template>
