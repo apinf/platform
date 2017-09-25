@@ -21,7 +21,13 @@ Template.deleteApiConfirmation.events({
     // Route to API Catalog
     FlowRouter.go('apiCatalog');
 
+    // Disable delete button
+    $('#modal-delete-api').attr('disabled', true);
+
     Meteor.call('removeApi', apiId, () => {
+      // Enable delete button
+      $('#modal-delete-api').attr('disabled', false);
+      
       // Dismiss the confirmation modal
       Modal.hide('deleteApiConfirmation');
 
