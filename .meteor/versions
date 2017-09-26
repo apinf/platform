@@ -13,7 +13,7 @@ aldeed:schema-deny@1.1.0
 aldeed:schema-index@1.1.1
 aldeed:simple-schema@1.5.3
 aldeed:template-extension@4.1.0
-allow-deny@1.0.6
+allow-deny@1.0.9
 amplify@1.0.0
 apinf:accounts-admin-ui@0.3.2
 apinf:accounts-fiware@0.1.1
