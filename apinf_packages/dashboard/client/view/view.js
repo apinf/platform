@@ -25,11 +25,23 @@ Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  instance.groupingIds = {
+    myApis: [],
+    managedApis: [],
+    otherApis: [],
+  };
+
   // Init variables
-  instance.elasticsearchData = new ReactiveVar();
+  instance.chartData = new ReactiveVar();
   instance.error = new ReactiveVar();
   instance.elasticsearchHost = new ReactiveVar();
   instance.proxyBackendPaths = new ReactiveVar();
+
+
+  // Get API IDs for grouping
+  Meteor.call('groupingApiIds', (err, res) => {
+    instance.groupingIds = res;
+  });
 
   // Reactive update Elasticsearch host
   instance.autorun(() => {
@@ -78,36 +90,40 @@ Template.dashboardView.onCreated(function () {
       // Make query object
       const queryParams = queryForDashboardPage(proxyBackendPaths, timeframe);
 
-      // Get Elasticsearch data
-      Meteor.call('getElasticsearchData', elasticsearchHost, queryParams, (error, result) => {
+      // Get chart data for dashboard
+      Meteor.call('dashboardChartData', elasticsearchHost, queryParams, (error, result) => {
         if (error) {
           instance.error.set(error);
           throw Meteor.Error(error);
         }
-
-        // Update Elasticsearch data reactive variable with result
-        instance.elasticsearchData.set(result);
+        // Update chart data reactive variable with result
+        instance.chartData.set(result);
       });
     }
   });
 });
 
 Template.dashboardView.helpers({
-  elasticsearchData () {
+  chartData () {
     // Get reference to template instance
     const instance = Template.instance();
 
-    // Return Elasticsearch data
-    return instance.elasticsearchData.get();
+    // Return data for charts
+    return instance.chartData.get();
   },
   fetchingData () {
     const instance = Template.instance();
-    // Return status about error or elasticsearch data
-    return instance.elasticsearchData.get() || instance.error.get();
+    // Return status about error or chart data
+    return instance.chartData.get() || instance.error.get();
   },
   error () {
     const instance = Template.instance();
     // Return value of error
     return instance.error.get();
+  },
+  grouping () {
+    const instance = Template.instance();
+    //
+    return instance.groupingIds;
   },
 });
