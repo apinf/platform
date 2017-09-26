@@ -12,40 +12,25 @@ import Apis from '/apinf_packages/apis/collection';
 
 // validation function
 function apiIsValid (jsonObj) {
-  // initial status obj
   const status = {
     isValid: false,
     message: '',
   };
+  const possiblesLifecycleStatus = ['design', 'develop', 'testing', 'production', 'deprecated'];
 
-  // iterates through object keys and checks if required fields are provided
-  // otherwise returns a message with missing field
-
-  if (Object.prototype.hasOwnProperty.call(jsonObj, '_id')) {
-    status.message += "'_id' field is not allowed to import.";
+  // Basic check fields:
+  if (!Object.prototype.hasOwnProperty.call(jsonObj, 'name')) {
+    status.message = 'mame is a required field';
+  } else if (!Object.prototype.hasOwnProperty.call(jsonObj, 'description')) {
+    status.message = 'description is a required field';
+  } else if (!Object.prototype.hasOwnProperty.call(jsonObj, 'url')) {
+    status.message = 'url is a required field';
+  } else if (!Object.prototype.hasOwnProperty.call(jsonObj, 'lifecycleStatus')) {
+    status.message = 'lifecycleStatus is a required field';
+  } else if (possiblesLifecycleStatus.indexOf(jsonObj.lifecycleStatus) === -1) {
+    status.message = `Invalid lifecycleStatus, please use: ${possiblesLifecycleStatus.join(', ')}`;
   } else {
-    if (Object.prototype.hasOwnProperty.call(jsonObj, 'name')) {
-      if (Object.prototype.hasOwnProperty.call(jsonObj, 'backend_host')) {
-        if (Object.prototype.hasOwnProperty.call(jsonObj, 'backend_protocol')) {
-          if (Object.prototype.hasOwnProperty.call(jsonObj, 'frontend_host')) {
-            if (Object.prototype.hasOwnProperty.call(jsonObj, 'balance_algorithm')) {
-              status.isValid = true;
-            } else {
-              status.message += "'balance_algorithm'";
-            }
-          } else {
-            status.message += "'frontend_host'";
-          }
-        } else {
-          status.message += "'backend_protocol'";
-        }
-      } else {
-        status.message += "'backend_host'";
-      }
-    } else {
-      status.message += "'name'";
-    }
-    status.message += ' field is required.';
+    status.isValid = true;
   }
 
   return status;
@@ -71,7 +56,12 @@ Meteor.methods({
       if (parsedJson.isValid) {
         // additional error handling
         try {
-          const newApiBackend = Apis.insert(jsonObj);
+          const newApiBackend = Apis.insert({
+            name: jsonObj.name,
+            description: jsonObj.description,
+            url: jsonObj.url,
+            lifecycleStatus: jsonObj.lifecycleStatus,
+          });
 
           status.isSuccessful = true;
           status.message = 'API config has been successfully imported.';
