@@ -99,7 +99,7 @@ CatalogV1.addCollection(Apis, {
     authRequired: false,
   },
   endpoints: {
-    // Return a list of all public entities within the collection
+    // Response contains a list of all public entities within the collection
     getAll: {
       swagger: {
         tags: [
@@ -161,13 +161,6 @@ CatalogV1.addCollection(Apis, {
           // Response with error in case managerId is missing from header
           if (!managerId) {
             return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id).');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Bad query parameters. Manager ID expected in header (X-User-Id).',
-            //   },
-            // };
           }
 
           // Set condition for a list of managed APIs
@@ -182,13 +175,6 @@ CatalogV1.addCollection(Apis, {
           // Make sure Organization exists
           if (!organization) {
             return errorMessagePayload(400, 'Bad query parameters. Organization not found.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Bad query parameters. Organization not found.',
-            //   },
-            // };
           }
           // Get list of managed API IDs
           query._id = { $in: organization.managedApiIds() };
@@ -234,7 +220,7 @@ CatalogV1.addCollection(Apis, {
         };
       },
     },
-    // Return the entity with the given :id
+    // Response contains the entity with the given :id
     get: {
       authRequired: false,
       swagger: {
@@ -327,13 +313,6 @@ CatalogV1.addCollection(Apis, {
         // Name is a required field
         if (!this.bodyParams.name) {
           return errorMessagePayload(400, 'Parameter "name" is mandatory.');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "name" is mandatory',
-          //   },
-          // };
         }
 
         // Validate name
@@ -342,25 +321,11 @@ CatalogV1.addCollection(Apis, {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous.');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "name" is erroneous',
-          //   },
-          // };
         }
 
         // URL is a mandatory field
         if (!this.bodyParams.url) {
           return errorMessagePayload(400, 'Parameter "url" is mandatory.');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "url" is mandatory',
-          //   },
-          // };
         }
 
         // Validate URL
@@ -369,25 +334,11 @@ CatalogV1.addCollection(Apis, {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "url" is erroneous.');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "URL" is erroneous',
-          //   },
-          // };
         }
 
         // Check if API with same name already exists
         if (Apis.findOne({ name: this.bodyParams.name })) {
           return errorMessagePayload(400, 'Duplicate: API with same name already exists.');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Duplicate: API with same name already exists',
-          //   },
-          // };
         }
 
 
@@ -398,13 +349,6 @@ CatalogV1.addCollection(Apis, {
 
           if (!isValid) {
             return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Description length must not exceed 1000 characters',
-            //   },
-            // };
           }
         }
 
@@ -415,13 +359,6 @@ CatalogV1.addCollection(Apis, {
 
           if (!isValid) {
             return errorMessagePayload(400, 'Parameter lifecycleStatus has erroneous value.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Parameter lifecycleStatus has erroneous value',
-            //   },
-            // };
           }
         }
 
@@ -433,13 +370,6 @@ CatalogV1.addCollection(Apis, {
             this.bodyParams.isPublic = false;
           } else {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Parameter isPublic has erroneous value',
-            //   },
-            // };
           }
         }
 
@@ -452,13 +382,6 @@ CatalogV1.addCollection(Apis, {
         // Did insert fail
         if (!apiId) {
           return errorMessagePayload(500, 'Inserting API into database failed.');
-          // return {
-          //   statusCode: 500,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Inserting API into database failed',
-          //   },
-          // };
         }
 
         // Give user manager role
@@ -536,25 +459,11 @@ CatalogV1.addCollection(Apis, {
         // API doesn't exist
         if (!api) {
           return errorMessagePayload(404, 'API with specified ID is not found.');
-          // return {
-          //   statusCode: 404,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'API with specified ID is not found',
-          //   },
-          // };
         }
 
         // API exists but user can not manage
         if (!api.currentUserCanManage(userId)) {
           return errorMessagePayload(403, 'You do not have permission for editing this API.');
-          // return {
-          //   statusCode: 403,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'You do not have permission for editing this API',
-          //   },
-          // };
         }
 
         // validate values
@@ -570,13 +479,6 @@ CatalogV1.addCollection(Apis, {
 
           if (!isValid) {
             return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Description length must not exceed 1000 characters',
-            //   },
-            // };
           }
         }
 
@@ -587,13 +489,6 @@ CatalogV1.addCollection(Apis, {
 
           if (!isValid) {
             return errorMessagePayload(400, 'Parameter lifecycleStatus has erroneous value.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Parameter lifecycleStatus has erroneous value',
-            //   },
-            // };
           }
         }
 
@@ -605,13 +500,6 @@ CatalogV1.addCollection(Apis, {
             this.bodyParams.isPublic = false;
           } else {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
-            // return {
-            //   statusCode: 400,
-            //   body: {
-            //     status: 'fail',
-            //     message: 'Parameter isPublic has erroneous value',
-            //   },
-            // };
           }
         }
 
@@ -675,25 +563,11 @@ CatalogV1.addCollection(Apis, {
         if (!api) {
           // API doesn't exist
           return errorMessagePayload(404, 'API with specified ID is not found.');
-          // return {
-          //   statusCode: 404,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'API with specified ID is not found',
-          //   },
-          // };
         }
 
         // User must be able to manage API
         if (!api.currentUserCanManage(userId)) {
           return errorMessagePayload(403, 'User does not have permission to remove this API.');
-          // return {
-          //   statusCode: 403,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'User does not have permission to remove this API',
-          //   },
-          // };
         }
 
         // Remove API document

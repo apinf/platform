@@ -18,7 +18,7 @@ import errorMessagePayload from '/apinf_packages/rest_apis/rest_api_helpers';
 
 // Request /rest/v1/organizations for Organizations collection
 ManagementV1.addRoute('organizations', {
-  // Return a list of organizations
+  // Response contains a list of organizations
   get: {
     swagger: {
       tags: [
@@ -203,13 +203,6 @@ ManagementV1.addRoute('organizations', {
 
       if (!isValid) {
         return errorMessagePayload(400, 'Parameter "url" is erroneous or missing');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Parameter "url" is erroneous or missing',
-        //   },
-        // };
       }
 
       // Validate description, if provided
@@ -219,13 +212,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "description" is erroneous or too long');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "description" is erroneous or too long',
-          //   },
-          // };
         }
       }
 
@@ -236,13 +222,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "contact_name" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "contact_name" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -253,13 +232,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "contact_phone" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "contact_phone" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -270,13 +242,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "contact_email" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "contact_email" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -287,13 +252,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "facebook" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "facebook" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -304,13 +262,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "instagram" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "instagram" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -321,13 +272,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "twitter" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "twitter" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -338,13 +282,6 @@ ManagementV1.addRoute('organizations', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "linkedIn" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -363,7 +300,7 @@ ManagementV1.addRoute('organizations', {
 
 // Request /rest/v1/organizations/:id for Organizations collection
 ManagementV1.addRoute('organizations/:id', {
-  // Return the entity with the given :id
+  // Response contains the entity with the given :id
   get: {
     authRequired: false,
     swagger: {
@@ -396,13 +333,6 @@ ManagementV1.addRoute('organizations/:id', {
       const organizationId = this.urlParams.id;
       if (!organizationId) {
         return errorMessagePayload(404, 'Organization with provided ID is not found');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization with provided ID is not found',
-        //   },
-        // };
       }
 
       const organization = Organizations.findOne(organizationId);
@@ -414,13 +344,6 @@ ManagementV1.addRoute('organizations/:id', {
       if (!organization) {
         const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
         return errorMessagePayload(404, detailLine);
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: detailLine,
-        //   },
-        // };
       }
 
       return {
@@ -499,13 +422,6 @@ ManagementV1.addRoute('organizations/:id', {
       if (!organization) {
         // Organization doesn't exist
         return errorMessagePayload(404, 'Organization with specified ID is not found');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization with specified ID is not found',
-        //   },
-        // };
       }
       // Get ID of User
       const userId = this.userId;
@@ -515,13 +431,6 @@ ManagementV1.addRoute('organizations/:id', {
       if (!userCanManage) {
         // Organization exists but user can not manage
         return errorMessagePayload(403, 'You do not have permission for editing this Organization');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'You do not have permission for editing this Organization',
-        //   },
-        // };
       }
       // Get data from body parameters
       const bodyParams = this.bodyParams;
@@ -551,13 +460,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "name" is erroneous or missing',
-          //   },
-          // };
         }
       }
 
@@ -568,13 +470,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "url" is erroneous or missing');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "url" is erroneous or missing',
-          //   },
-          // };
         }
       }
 
@@ -585,13 +480,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "description" is erroneous or too long');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "description" is erroneous or too long',
-          //   },
-          // };
         }
       }
 
@@ -602,13 +490,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "contact_name" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "contact_name" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -619,13 +500,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "contact_phone" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "contact_phone" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -636,13 +510,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "contact_email" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "contact_email" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -653,13 +520,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "facebook" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "facebook" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -670,13 +530,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "instagram" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "instagram" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -687,13 +540,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "twitter" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "twitter" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -704,13 +550,6 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
-          // return {
-          //   statusCode: 400,
-          //   body: {
-          //     status: 'fail',
-          //     message: 'Parameter "linkedIn" is erroneous',
-          //   },
-          // };
         }
       }
 
@@ -770,13 +609,6 @@ ManagementV1.addRoute('organizations/:id', {
       if (!organization) {
         // Organization doesn't exist
         return errorMessagePayload(404, 'Organization with specified ID is not found');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization with specified ID is not found',
-        //   },
-        // };
       }
         // Get User ID
       const userId = this.userId;
@@ -785,13 +617,6 @@ ManagementV1.addRoute('organizations/:id', {
       // User has to have permission for action
       if (!userCanManage) {
         return errorMessagePayload(403, 'You do not have permission for removing this Organization');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'You do not have permission for removing this Organization',
-        //   },
-        // };
       }
 
       // Remove Organization document
@@ -898,13 +723,6 @@ ManagementV1.addRoute('organizations/:id/managers', {
       if (!organization) {
         const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
         return errorMessagePayload(404, detailLine);
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: detailLine,
-        //   },
-        // };
       }
 
       // Get ID of requesting User
@@ -914,13 +732,6 @@ ManagementV1.addRoute('organizations/:id/managers', {
       // Requestor must have permission for action
       if (!userCanManage) {
         return errorMessagePayload(403, 'You do not have permission for editing this Organization');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'You do not have permission for editing this Organization',
-        //   },
-        // };
       }
 
       // Do not include password in response
@@ -1039,13 +850,6 @@ ManagementV1.addRoute('organizations/:id/managers', {
       // Organization doesn't exist
       if (!organization) {
         return errorMessagePayload(404, 'Organization with specified ID is not found');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization with specified ID is not found',
-        //   },
-        // };
       }
 
       // Get ID of requesting User
@@ -1056,25 +860,11 @@ ManagementV1.addRoute('organizations/:id/managers', {
       if (!userCanManage) {
         // Organization exists but user can not manage
         return errorMessagePayload(403, 'You do not have permission to edit this Organization');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'You do not have permission to edit this Organization',
-        //   },
-        // };
       }
 
       // Check if manager list is given
       if (!bodyParams.newManagerEmail) {
         return errorMessagePayload(400, 'New Manager\'s email address is missing.');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'New Manager\'s email address is missing.',
-        //   },
-        // };
       }
 
       // Get user account with matching email
@@ -1082,13 +872,6 @@ ManagementV1.addRoute('organizations/:id/managers', {
 
       if (!newManager) {
         return errorMessagePayload(400, 'User has no account');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'User has no account',
-        //   },
-        // };
       }
 
       // Check if user is already a manager
@@ -1096,13 +879,6 @@ ManagementV1.addRoute('organizations/:id/managers', {
       // Check if the user is already a manager
       if (alreadyManager) {
         return errorMessagePayload(400, 'User is already a Manager in this Organization');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'User is already a Manager in this Organization',
-        //   },
-        // };
       }
 
       // Update Organization manager list
@@ -1219,13 +995,6 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Is Organization ID provided
       if (!this.urlParams.id) {
         return errorMessagePayload(400, 'Organization ID was not provided');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization ID was not provided',
-        //   },
-        // };
       }
       // Get ID of Organization from request parameter
       // Note! It can not be checked here, if this parameter is not provided,
@@ -1237,13 +1006,6 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Organization must exist
       if (!organization) {
         return errorMessagePayload(404, 'Organization with specified ID is not found');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization with specified ID is not found',
-        //   },
-        // };
       }
 
       // Get ID of User requesting operation
@@ -1253,13 +1015,6 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Requestor must have permissions for action
       if (!userCanManage) {
         return errorMessagePayload(403, 'You do not have permission for this Organization');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'You do not have permission for this Organization',
-        //   },
-        // };
       }
 
       // Get ID of queried Manager from request parameter
@@ -1267,38 +1022,17 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Queried Manager ID must be given
       if (!managerId) {
         return errorMessagePayload(400, 'Manager ID was not provided.');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Manager ID was not provided.',
-        //   },
-        // };
       }
 
       // Check if user account for manager exists
       if (!Meteor.users.findOne(managerId)) {
         return errorMessagePayload(400, 'User has no User account.');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'User has no User account.',
-        //   },
-        // };
       }
 
       // Is user a manager of Organization?
       const isManager = organization.managerIds.includes(managerId);
       if (!isManager) {
         return errorMessagePayload(400, 'Queried User is not a Manager in Organization.');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Queried User is not a Manager in Organization.',
-        //   },
-        // };
       }
 
       // Do not include password in response
@@ -1375,13 +1109,6 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Organization must exist
       if (!organization) {
         return errorMessagePayload(404, 'Organization with specified ID is not found');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Organization with specified ID is not found',
-        //   },
-        // };
       }
 
       // Get ID of requesting User
@@ -1391,13 +1118,6 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Requestor must have permission for action
       if (!userCanManage) {
         return errorMessagePayload(403, 'You do not have permission for editing this Organization');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'You do not have permission for editing this Organization',
-        //   },
-        // };
       }
 
       // Get ID of Manager to be removed
@@ -1405,25 +1125,11 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       // Manager ID must be given
       if (!removeManagerId) {
         return errorMessagePayload(400, 'Missing parameter: Manager ID not provided.');
-        // return {
-        //   statusCode: 400,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Missing parameter: Manager ID not provided.',
-        //   },
-        // };
       }
 
       // Admin/Manager is not allowed to remove self
       if (removeManagerId === requestorId) {
         return errorMessagePayload(403, 'User can not remove self.');
-        // return {
-        //   statusCode: 403,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'User can not remove self.',
-        //   },
-        // };
       }
 
       // Only existing Manager can be removed from Organization manager list
@@ -1431,13 +1137,6 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
 
       if (!isManager) {
         return errorMessagePayload(404, 'Manager not found in Organization.');
-        // return {
-        //   statusCode: 404,
-        //   body: {
-        //     status: 'fail',
-        //     message: 'Manager not found in Organization.',
-        //   },
-        // };
       }
 
       // Remove user from organization manager list
