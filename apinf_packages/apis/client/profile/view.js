@@ -29,7 +29,7 @@ Template.viewApi.onCreated(function () {
     // Take slug from params
     const slug = FlowRouter.getParam('slug');
     // Subscribe to API and related organization
-    templateInstance.subscribe('apiComposite',slug);
+    templateInstance.subscribe('apiComposite', slug);
     // Subscribe to public proxy details
     templateInstance.subscribe('proxyCount');
     // Subscribe to public proxy details for proxy form
