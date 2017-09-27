@@ -45,7 +45,7 @@ Meteor.methods({
     return api && api.currentUserCanManage();
   },
   myApisIds () {
-    // Get APIs are managed ny current user
+    // Get APIs are managed by current user
     const myApis = Apis.find({ managerIds: { $in: [this.userId] } }, { _id: 1 }).fetch();
 
     // Return list of IDs
@@ -57,7 +57,7 @@ Meteor.methods({
     // Make sure parameter exists and is Array
     check(myApis, Array);
 
-    // Get Organizations are managed by current user
+    // Get Organizations which are managed by current user
     const managedOrganizations = Organizations.find(
       { managerIds: { $in: [this.userId] } },
       { _id: 1 }
@@ -92,6 +92,8 @@ Meteor.methods({
     check(myApis, Array);
     check(managedApis, Array);
 
+    // Get APIs which are not managed by current user
+    // And are not connected to Organizations which the current user is manager
     const otherApis = Apis.find({ _id: { $nin: myApis.concat(managedApis) } }, { _id: 1 }).fetch();
 
     // Return list of IDs

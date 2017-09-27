@@ -37,7 +37,6 @@ Template.dashboardView.onCreated(function () {
   instance.elasticsearchHost = new ReactiveVar();
   instance.proxyBackendPaths = new ReactiveVar();
 
-
   // Get API IDs for grouping
   Meteor.call('groupingApiIds', (err, res) => {
     instance.groupingIds = res;
@@ -123,7 +122,7 @@ Template.dashboardView.helpers({
   },
   grouping () {
     const instance = Template.instance();
-    //
+    // Return object with IDs groups
     return instance.groupingIds;
   },
 });
