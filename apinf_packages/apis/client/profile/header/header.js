@@ -8,11 +8,9 @@ Template.viewApiPageHeader.helpers({
   userShouldSeeBacklogTab () {
     // Get API id
     const apiId = this.api._id;
-
     const api = Apis.findOne(apiId);
-
     // Check if API Backlog exist or user allowed to see
-    if (api.backlogIsNotEmpty() || api.currentUserCanManage()) {
+    if (api && (api.backlogIsNotEmpty() || api.currentUserCanManage())) {
       return true;
     }
     return false;
@@ -24,7 +22,7 @@ Template.viewApiPageHeader.helpers({
     const api = Apis.findOne(apiId);
 
     // Check if API Metadata exist or user allowed to see
-    if (api.apiMetadataIsNotEmpty() || api.currentUserCanManage()) {
+    if (api && (api.apiMetadataIsNotEmpty() || api.currentUserCanManage())) {
       return true;
     }
     return false;
@@ -36,7 +34,7 @@ Template.viewApiPageHeader.helpers({
     const api = Apis.findOne(apiId);
 
     // Check if API documentation exist or user allowed to see
-    if (api.apiDocsIsNotEmpty() || api.currentUserCanManage()) {
+    if (api && (api.apiDocsIsNotEmpty() || api.currentUserCanManage())) {
       return true;
     }
     return false;
