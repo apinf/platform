@@ -5,16 +5,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiCatalogGrid">
   <div class="row">
-    {{#if apis.length}}
-      {{# each api in apis }}
-        <div class="col-grid col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-          {{> apiCard api=api organization=organization }}
+    {{# if Template.subscriptionsReady }}
+      {{# if apis.length }}
+        {{# each api in apis }}
+          <div class="col-grid col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            {{> apiCard api=api organization=organization }}
+          </div>
+        {{/ each }}
+      {{ else }}
+        <div class="col-xs-12">
+          <p>
+            {{_ 'apiCatalog_noApis_Found' }}
+          </p>
         </div>
-      {{/ each }}
-    {{else}}
-      <div class="col-xs-12">
-        <p>{{_ 'apiCatalog_noApis_Found'}}</p>
-      </div>
-    {{/if}}
+      {{/ if }}
+    {{/ if }}
   </div>
 </template>
