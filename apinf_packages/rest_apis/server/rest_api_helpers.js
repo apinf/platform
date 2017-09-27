@@ -5,7 +5,7 @@
 
  // Fill and return error response message body
  function errorMessagePayload (statusCode, messageText) {
-   // Get branding
+   // Fill payload
    const errorPayload = {
      statusCode,
      body: {

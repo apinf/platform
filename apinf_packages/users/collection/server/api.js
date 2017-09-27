@@ -17,7 +17,7 @@ import Organizations from '/apinf_packages/organizations/collection';
 // APInf imports
 import descriptionUsers from '/apinf_packages/rest_apis/lib/descriptions/users_texts';
 import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
-import errorMessagePayload from '/apinf_packages/rest_apis/rest_api_helpers';
+import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 // Npm packages imports
 import _ from 'lodash';

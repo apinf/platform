@@ -14,7 +14,7 @@ import Organizations from '/apinf_packages/organizations/collection';
 // APInf imports
 /* eslint-disable max-len */
 import descriptionOrganizations from '/apinf_packages/rest_apis/lib/descriptions/organizations_texts';
-import errorMessagePayload from '/apinf_packages/rest_apis/rest_api_helpers';
+import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 // Request /rest/v1/organizations for Organizations collection
 ManagementV1.addRoute('organizations', {
