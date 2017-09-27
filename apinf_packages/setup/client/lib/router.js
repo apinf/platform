@@ -29,5 +29,11 @@ const additionalSetupRequired = function () {
   }
 };
 
+// This is used for scroll page to top while change the route.
+const scrollToTop = () => {
+  return $(this).scrollTop(0);
+};
+FlowRouter.triggers.enter([scrollToTop]);
+
 // check if setup is required before opening any page
 FlowRouter.triggers.enter([additionalSetupRequired], { except: ['settings', 'branding'] });
