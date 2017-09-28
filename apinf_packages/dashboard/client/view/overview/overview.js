@@ -14,7 +14,7 @@ import {
   arrowDirection,
   percentageValue,
   summaryComparing,
-} from '/apinf_packages/dashboard/client/trend_helpers';
+} from '/apinf_packages/dashboard/lib/trend_helpers';
 
 Template.dashboardOverviewStatistic.helpers({
   arrowDirection (parameter) {
