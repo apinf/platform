@@ -91,7 +91,7 @@ Template.importApiConfiguration.events({
       // import apiConfiguration: expects status from callback
       Meteor.call('importApiConfigs', api, (err, status) => {
         // error handing
-        if (err) sAlert.error(err);
+        if (err) sAlert.error(err.reason);
 
         // checks of status is successfull`
         if (status.isSuccessful) {
@@ -99,7 +99,7 @@ Template.importApiConfiguration.events({
           sAlert.success(status.message);
 
           // redirects to apiBackend view page
-          FlowRouter.go(`/api/${status.newBackendId}`);
+          FlowRouter.go(`/apis/${status.slug}`);
         } else {
           // error message
           sAlert.error(status.message);

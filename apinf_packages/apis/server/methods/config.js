@@ -10,32 +10,6 @@ import { check } from 'meteor/check';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
-// validation function
-function apiIsValid (jsonObj) {
-  const status = {
-    isValid: false,
-    message: '',
-  };
-  const possiblesLifecycleStatus = ['design', 'develop', 'testing', 'production', 'deprecated'];
-
-  // Basic check fields:
-  if (!Object.prototype.hasOwnProperty.call(jsonObj, 'name')) {
-    status.message = 'mame is a required field';
-  } else if (!Object.prototype.hasOwnProperty.call(jsonObj, 'description')) {
-    status.message = 'description is a required field';
-  } else if (!Object.prototype.hasOwnProperty.call(jsonObj, 'url')) {
-    status.message = 'url is a required field';
-  } else if (!Object.prototype.hasOwnProperty.call(jsonObj, 'lifecycleStatus')) {
-    status.message = 'lifecycleStatus is a required field';
-  } else if (possiblesLifecycleStatus.indexOf(jsonObj.lifecycleStatus) === -1) {
-    status.message = `Invalid lifecycleStatus, please use: ${possiblesLifecycleStatus.join(', ')}`;
-  } else {
-    status.isValid = true;
-  }
-
-  return status;
-}
-
 Meteor.methods({
   importApiConfigs (jsonObj) {
     // Check if jsonObj is an Object
@@ -47,33 +21,51 @@ Meteor.methods({
       message: '',
     };
 
+    // Get user id
+    const userId = Meteor.userId();
+
+    // Check if user is logged
+    if (!userId) {
+      status.message = 'You must be logged to import an API';
+      return status;
+    }
+
     // checks if file was passed
     if (jsonObj) {
-      // parses json object
-      const parsedJson = apiIsValid(jsonObj);
+      // Api object
+      const api = {
+        name: jsonObj.name,
+        description: jsonObj.description,
+        url: jsonObj.url,
+        lifecycleStatus: jsonObj.lifecycleStatus,
+        managerIds: [userId],
+      };
 
-      // checks if valid
-      if (parsedJson.isValid) {
-        // additional error handling
-        try {
-          const newApiBackend = Apis.insert({
-            name: jsonObj.name,
-            description: jsonObj.description,
-            url: jsonObj.url,
-            lifecycleStatus: jsonObj.lifecycleStatus,
-          });
+      // Validate the api
+      Apis.schema.validate(api);
 
+      // additional error handling
+      try {
+        // Check unique api name
+        const count = Apis.find({ name: jsonObj.name }).count();
+        if (count === 0) {
+          // Insert the API and get the id
+          const newApiBackend = Apis.insert(api);
+
+          // Get the new api
+          const newApi = Apis.findOne({ _id: newApiBackend });
+
+          // Set message
           status.isSuccessful = true;
           status.message = 'API config has been successfully imported.';
 
-          // gets new backend's id and passes it to client to be able to redirect then
-          status.newBackendId = newApiBackend;
-        } catch (e) {
-          status.message = JSON.stringify(e);
+          // set the slug to do the redirect
+          status.slug = newApi.slug;
+        } else {
+          status.message = 'API name must be unique';
         }
-      } else {
-        // if validation check failed - passing message returned by validation function
-        status.message = parsedJson.message;
+      } catch (e) {
+        status.message = 'Error while import API';
       }
     } else {
       status.message = 'Config is not found.';
