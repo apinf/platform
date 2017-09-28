@@ -9,20 +9,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 
 const request = require('superagent');
-const { common, organizations } = require('../config.js');
+const { common, organizations } = require('../endpointConfiguration.js');
 
 
-describe('endpoints for organization module', () => {
+describe('Endpoints for organization module', () => {
   describe('GET - /organizations', () => {
     it('should return all organizations from the collection', done => {
+      // Define variable with organization endpoint
       const organizationsEndpoint = `${common.baseURL}/${organizations.endpoint}`;
+
+      // Initiate test request
       request
         .get(organizationsEndpoint)
         .end((err, res) => {
           // If there was an error, stops right here and reject
           if (err) return done(err);
 
-          // Erro variable for try/catch control
+          // Error variable for try/catch control
           let error = null;
 
           // Try/Catch statement throws error
