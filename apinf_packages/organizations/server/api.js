@@ -95,12 +95,21 @@ ManagementV1.addRoute('organizations', {
         ];
       }
 
+      // Fetch the list of Organizations matching with conditions
+      const organizationList = Organizations.find(query, options).fetch();
+      // Replace internal logo id (when exists) with correct link
+      organizationList.forEach((organization) => {
+        if (organization.organizationLogoFileId) {
+          organization.organizationLogoFileId = organization.logoUrl();
+        }
+      });
+
       // Construct response
       return {
         statusCode: 200,
         body: {
           status: 'success',
-          data: Organizations.find(query, options).fetch(),
+          data: organizationList,
         },
       };
     },
@@ -344,6 +353,11 @@ ManagementV1.addRoute('organizations/:id', {
       if (!organization) {
         const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
         return errorMessagePayload(404, detailLine);
+      }
+
+      // Replace internal logo id (when exists) with correct link
+      if (organization.organizationLogoFileId) {
+        organization.organizationLogoFileId = organization.logoUrl();
       }
 
       return {
