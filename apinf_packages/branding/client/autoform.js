@@ -54,6 +54,5 @@ Template.autoForm.onRendered(function () {
     $('[name=featuredApis]').select2({
       placeholder: message,
     });
-
   }
 });
