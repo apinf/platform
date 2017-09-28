@@ -24,6 +24,12 @@ Template.homePageApis.onCreated(function () {
   if (featuredApis) {
     // Subscribe to featured APIs
     templateInstance.subscribe('homePageFeaturedApis', featuredApis);
+
+    // Subscribe to organization apis
+    templateInstance.subscribe('organizationApis');
+
+    // Subscribe to organizations basic details
+    templateInstance.subscribe('allOrganizationBasicDetails');
   }
 });
 
