@@ -210,12 +210,23 @@ CatalogV1.addCollection(Apis, {
           ];
         }
 
+        // Fetch the list of APIs matching with conditions
+        const apiList = Apis.find(query, options).fetch();
+        // Replace internal logo id with correct link
+        if (apiList) {
+          apiList.forEach((api) => {
+            if (api.apiLogoFileId) {
+              api.apiLogoFileId = api.logoUrl();
+            }
+          });
+        }
+
         // Construct response
         return {
           statusCode: 200,
           body: {
             status: 'success',
-            data: Apis.find(query, options).fetch(),
+            data: apiList,
           },
         };
       },
