@@ -212,14 +212,12 @@ CatalogV1.addCollection(Apis, {
 
         // Fetch the list of APIs matching with conditions
         const apiList = Apis.find(query, options).fetch();
-        // Replace internal logo id with correct link
-        if (apiList) {
-          apiList.forEach((api) => {
-            if (api.apiLogoFileId) {
-              api.apiLogoFileId = api.logoUrl();
-            }
-          });
-        }
+        // Replace internal logo id (when exists) with correct link
+        apiList.forEach((api) => {
+          if (api.apiLogoFileId) {
+            api.apiLogoFileId = api.logoUrl();
+          }
+        });
 
         // Construct response
         return {
@@ -263,6 +261,43 @@ CatalogV1.addCollection(Apis, {
             description: 'API is not Found',
           },
         },
+      },
+      action () {
+        const apiId = this.urlParams.id;
+
+        let query = { _id: apiId };
+
+        // Get Manager ID from header
+        const managerId = this.request.headers['x-user-id'];
+
+        // Check if requestor is administrator
+        const requestorIsAdmin = Roles.userIsInRole(managerId, ['admin']);
+
+        if (!requestorIsAdmin) {
+          // Only Public APIs are available for unregistered user
+          query = { isPublic: true };
+        }
+
+        console.log('query', query);
+        const options = {};
+
+        // Fetch the list of APIs matching with conditions
+        const api = Apis.findOne({ _id: apiId }, query, options);
+        // Replace internal logo id (when exists) with correct link
+        if (api) {
+          if (api.apiLogoFileId) {
+            api.apiLogoFileId = api.logoUrl();
+          }
+        }
+
+        // Construct response
+        return {
+          statusCode: 200,
+          body: {
+            status: 'success',
+            data: api,
+          },
+        };
       },
     },
     // Create a new API
