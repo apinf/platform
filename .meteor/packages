@@ -93,6 +93,5 @@ raix:rssfeed
 http@1.2.12
 reactive-dict@1.1.9
 dynamic-import
-custom:autoform-select2
 apinf:accounts-fiware@0.1.1
 apinf:fiware@0.1.1
