@@ -28,7 +28,7 @@ Template.branding.onCreated(function () {
         id: api._id,
       };
     });
-  })
+  });
 });
 
 Template.branding.onRendered(function () {
