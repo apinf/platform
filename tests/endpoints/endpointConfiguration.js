@@ -8,9 +8,7 @@ const organizations = {
   endpoint: '/organizations',
 };
 
-const config = {
+module.exports = {
   common,
   organizations,
 };
-
-module.exports = config;
