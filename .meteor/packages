@@ -46,7 +46,6 @@ matb33:collection-hooks
 meteor-base@1.1.0
 meteorhacks:subs-manager
 michalvalasek:autoform-bootstrap-colorpicker
-mizzao:sharejs-ace
 mobile-experience@1.0.4
 mongo@1.2.0
 nimble:restivus@=0.8.11
@@ -85,7 +84,6 @@ useraccounts:flow-routing
 vsivsi:file-collection
 zimme:active-route
 github-config-ui@1.0.0
-mizzao:sharejs@=0.9.0
 aramk:quill
 softwarerero:accounts-t9n
 aldeed:autoform-bs-button-group-input
