@@ -61,7 +61,7 @@ Template.branding.helpers({
     };
     return options;
   },
-  optionsAPi () {
+  apiOptions () {
     return Apis.find().map((api) => {
       return {
         label: api.name,
