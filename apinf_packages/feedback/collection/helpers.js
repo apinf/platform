@@ -19,7 +19,7 @@ Feedback.helpers({
     // Get API infos to check if user can manage the feedback's api
     const api = Apis.findOne({ _id: this.apiBackendId });
 
-    return api.currentUserCanManage();
+    return api && api.currentUserCanManage();
   },
   currentUserCanSee () {
     // Get current userId

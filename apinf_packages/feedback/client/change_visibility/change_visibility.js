@@ -12,12 +12,12 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.changeFeedbackVisibility.events({
-  'click #confirm-change-visibility': () => {
+  'click #confirm-change-visibility': (event, templateInstance) => {
     // Get slug
     const slug = FlowRouter.getParam('slug');
 
     // Change the visibility of all api's feedbacks
-    Meteor.call('changeAllFeedbacksVisibility', slug, this.toPublic);
+    Meteor.call('changeAllFeedbacksVisibility', slug, templateInstance.data.toPublic);
 
     // Close modal
     Modal.hide('changeFeedbackVisibility');

@@ -17,8 +17,7 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import {
   arrowDirection,
   percentageValue,
-  calculateTrend,
-} from '/apinf_packages/dashboard/client/trend_helpers';
+} from '/apinf_packages/dashboard/lib/trend_helpers';
 
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
@@ -31,54 +30,21 @@ Template.dashboardSummaryStatistic.onCreated(function () {
   instance.autorun(() => {
     // Update list
     instance.proxyBackendsWithMetric = {};
+
+    // Get API IDs
+    const apiIds = Template.currentData().apiIds;
+
     // Update list of proxy backends
-    instance.proxyBackends = ProxyBackends.find().fetch();
+    const proxyBackends = ProxyBackends.find({ apiId: { $in: apiIds } }).fetch();
 
     // Get actual elasticsearch data
-    const elasticsearchData = Template.currentData().elasticsearchData;
+    const chartData = Template.currentData().chartData;
 
-    // Get bucket of aggregated data
-    const buckets = elasticsearchData.aggregations.group_by_request_path.buckets;
-    // Prepare dataset for summary statistic
-    instance.aggregatedData = buckets.map(value => {
-      const currentPeriodData = value.group_by_interval.buckets.currentPeriod;
-
-      // Get the statistic for current period
-      const requestNumber = currentPeriodData.doc_count;
-      const responseTime = parseInt(currentPeriodData.response_time.values['50.0'], 10) || 0;
-      const uniqueUsers = currentPeriodData.unique_users.buckets.length;
-      const successCallsCount = currentPeriodData.success_status.buckets.success.doc_count;
-      const errorCallsCount = currentPeriodData.success_status.buckets.error.doc_count;
-
-      const previousPeriodData = value.group_by_interval.buckets.previousPeriod;
-      const previousResponseTime = previousPeriodData.response_time.values['50.0'];
-      const previousUniqueUsers = previousPeriodData.unique_users.buckets.length;
-
-      // Get the statistics comparing between previous and current periods
-      const compareRequests = calculateTrend(previousPeriodData.doc_count, requestNumber);
-      const compareResponse = calculateTrend(parseInt(previousResponseTime, 10), responseTime);
-      const compareUsers = calculateTrend(previousUniqueUsers, uniqueUsers);
-
-      // Get value to display
-      return {
-        requestPath: value.key,
-        requestNumber,
-        responseTime,
-        uniqueUsers,
-        successCallsCount,
-        errorCallsCount,
-        requestOverTime: currentPeriodData.requests_over_time.buckets,
-        compareRequests,
-        compareResponse,
-        compareUsers,
-      };
-    });
-
-    instance.proxyBackends.forEach(backend => {
+    proxyBackends.forEach(backend => {
       const proxyBackendPath = backend.frontendPrefix();
 
       // Create a list of proxy backends with metric for current timeframe
-      instance.aggregatedData.forEach(dataset => {
+      chartData.forEach(dataset => {
         const path = dataset.requestPath;
 
         // Using indexOf to check when frontend prefix and request_path differ in a last slash
@@ -92,6 +58,14 @@ Template.dashboardSummaryStatistic.onCreated(function () {
           instance.proxyBackendsWithMetric[proxyBackendPath].proxyBackendId = backend._id;
         }
       });
+    });
+
+    // Get the current language
+    const language = TAPi18n.getLanguage();
+
+    // Sort by name
+    instance.proxyBackends = proxyBackends.sort((a, b) => {
+      return a.apiName().localeCompare(b.apiName(), language);
     });
   });
 });
@@ -129,18 +103,18 @@ Template.dashboardSummaryStatistic.helpers({
   proxyBackends () {
     const instance = Template.instance();
 
-    // Get the current language
-    const language = TAPi18n.getLanguage();
-
     // Sort by name
-    return instance.proxyBackends.sort((a, b) => {
-      return a.apiName().localeCompare(b.apiName(), language);
-    });
+    return instance.proxyBackends;
   },
   bucket (proxyBackendPath) {
     const instance = Template.instance();
 
     return instance.proxyBackendsWithMetric[proxyBackendPath];
+  },
+  tableTitle () {
+    const title = Template.currentData().title;
+
+    return TAPi18n.__(`dashboardSummaryStatistic_groupTitle_${title}`);
   },
 });
 

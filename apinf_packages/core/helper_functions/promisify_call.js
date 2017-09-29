@@ -7,9 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 
 // Validates Promisify Meteor.call, for better response handling.
-export default function promisifyCall (method) {
+export default function promisifyCall (...args) {
   return new Promise((resolve, reject) => {
-    Meteor.call(method, (err, response) => {
+    Meteor.call(...args, (err, response) => {
       return err ? reject(err) : resolve(response);
     });
   });
