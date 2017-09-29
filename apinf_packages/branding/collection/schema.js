@@ -62,11 +62,8 @@ Branding.schema = new SimpleSchema({
     type: [String],
     optional: true,
     maxCount: 8,
-    label:"featuredApis",
     autoform:{
-      afFieldInput:{
-        type: "select-multiple",
-      },
+      type: "select-multiple",
     },
   },
   homeCustomBlock: {

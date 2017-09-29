@@ -37,12 +37,13 @@ Meteor.publish('apisForBranding', () => {
   );
 });
 
-Meteor.publish('apiIds', (featuredApis) => {
+Meteor.publish('homePageFeaturedApis', (featuredApis) => {
   // Make sure featuredApis is an Array
   check(featuredApis, Array);
-  // Return cursor to latest API Backends
+  // Return cursor to global featured APIs
   return Apis.find({ _id: { $in: featuredApis } });
 });
+
 // Publish collection for pagination
 // eslint-disable-next-line no-new
 new Meteor.Pagination(Apis, {

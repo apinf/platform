@@ -20,10 +20,11 @@ Template.branding.onCreated(function () {
   // Get reference to template instance
   const templateInstance = this;
 
+  // Get public APIs
   templateInstance.subscribe('apisForBranding');
 });
 
-Template.branding.onRendered(function () {
+Template.branding.onRendered(() => {
   $('[data-toggle="popover"]').popover();
 });
 
@@ -36,19 +37,22 @@ Template.branding.helpers({
     return Branding;
   },
   s2Opts () {
+    // Get featuredApis or an empty array on default
+    const featuredApis = Branding.findOne().featuredApis || [];
+    // Message for placeholder
     const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
-    const options = {
+
+    return {
       placeholder: message,
-      tags: true,
+      // Data for select box
+      data: Apis.find().map((api) => {
+        return {
+          text: api.name,
+          id: api._id,
+          // If featured APIs contains current one then mark it as "selected"
+          selected: featuredApis.indexOf(api._id) > -1,
+        };
+      }),
     };
-    return options;
-  },
-  apiOptions () {
-    return Apis.find().map((api) => {
-      return {
-        label: api.name,
-        value: api._id,
-      };
-    });
   },
 });

@@ -10,34 +10,47 @@ import { Template } from 'meteor/templating';
 import Apis from '/apinf_packages/apis/collection';
 import Branding from '/apinf_packages/branding/collection';
 
-Template.homePageApis.onRendered(function () {
+Template.homePageApis.onCreated(function () {
   // Reference to Template instance
   const templateInstance = this;
+
   templateInstance.autorun(() => {
-    templateInstance.branding = Branding.findOne();
-    // check featured apis available or not
-    const haveFeaturedApis = templateInstance.branding &&
-      templateInstance.branding.featuredApis &&
-      templateInstance.branding.featuredApis.length !== 0;
-    if (haveFeaturedApis) {
-      templateInstance.subscribe('apiIds', templateInstance.branding.featuredApis);
+    // Get Branding configuration
+    const branding = Branding.findOne();
+
+    // Get featured APIs IDs
+    const featuredApis = branding && branding.featuredApis;
+
+    // Check if feature apis exist
+    if (featuredApis) {
+      // Subscribe to featured APIs
+      templateInstance.subscribe('homePageFeaturedApis', featuredApis);
+
+      // Subscribe to organization apis
+      templateInstance.subscribe('organizationApis');
+
+      // Subscribe to organizations basic details
+      templateInstance.subscribe('allOrganizationBasicDetails');
     }
   });
 });
 
 Template.homePageApis.helpers({
-  homePageApis () {
-    const templateInstance = Template.instance();
-    const branding = templateInstance.branding;
-    // Check whether any APIs have been featured
-    const haveFeaturedApis = branding &&
-      branding.featuredApis &&
-      branding.featuredApis.length !== 0;
-    if (haveFeaturedApis) {
-      // Fetch featured apis from all apis
-      const featuredApis = Apis.find().fetch();
-      return featuredApis;
+  featuredApis () {
+    // Get Branding configuration
+    const branding = Branding.findOne();
+
+    // Get featured APIs IDs
+    const featuredApis = branding && branding.featuredApis;
+
+    let apis;
+
+    // Check if feature apis exist
+    if (featuredApis) {
+      // Save featured APIs
+      apis = Apis.find().fetch();
     }
-    return false;
+
+    return apis;
   },
 });

@@ -4,27 +4,25 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="homePageApis">
-  {{# if Template.subscriptionsReady }}
-    {{# if homePageApis }}
-  		<h2 class="feature-section-heading text-center">
-  	    {{_ "homePageApis_Heading" }}
-  	  </h2>
-    	{{> apiCatalogGrid apis=homePageApis }}
-    {{ else }}
-    	{{# if isInRole 'admin'}}
-  	  	<h2 class="feature-section-heading text-center">
-  		    {{_ "homePageApis_Heading" }}
-  		  </h2>
-  	    {{_ "homePageApis_Message" }}
-  	  {{/ if }}
-  	  {{> latestPublicApis limit = 8 }}
-      <div class="text-center">
-        <a href="{{ pathFor 'apiCatalog' }}"
-          class="btn btn-primary btn-lg"
-          id="get-more-apis">
-          {{_ "homeBody_getMoreApis_text" }}
-        </a>
-      </div>
+  {{# if featuredApis }}
+    <h2 class="feature-section-heading text-center">
+      {{_ "homePageApis_title_featuredApis" }}
+    </h2>
+    {{> apiCatalogGrid apis=featuredApis }}
+  {{ else }}
+    {{# if isInRole 'admin'}}
+      <h2 class="feature-section-heading text-center">
+        {{_ "homePageApis_title_featuredApis" }}
+      </h2>
+      {{_ "homePageApis_text_addFeaturedApis" }}
     {{/ if }}
+    {{> latestPublicApis limit=8 }}
+    <div class="text-center">
+      <a href="{{ pathFor 'apiCatalog' }}"
+         class="btn btn-primary btn-lg"
+         id="get-more-apis">
+        {{_ "homePageApis_text_getMoreApis" }}
+      </a>
+    </div>
   {{/ if }}
 </template>
