@@ -71,12 +71,11 @@ Meteor.publish('organizationApisCount', function (organizationId) {
       // Checks if the user is manager of this API or API is public
       if (api.isPublic || (userId && api.currentUserCanManage(userId))) {
         // Then add IDs in list
-        apisSelector.push({ apiId: api._id });
+        apisSelector.push(api._id);
       }
     });
 
-    // Uses the apisSelector to get available APIs
-    organizationApisCount = OrganizationApis.find({ $or: apisSelector });
+    organizationApisCount = OrganizationApis.find({ apiId: { $in: apisSelector } });
   }
 
   // Publish an Api Counter for each Organization
