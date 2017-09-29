@@ -25,15 +25,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
   </div>
   <div class="container" id="features">
-    {{> latestPublicApis limit = 8 }}
-    <div class="text-center">
-      <a href="{{ pathFor 'apiCatalog' }}"
-        class="btn btn-primary btn-lg"
-        id="get-more-apis">
-        {{_ "homeBody_getMoreApis_text" }}
-      </a>
-    </div>
+    {{> homePageApis }}
   </div>
+  
   {{{ branding.homeCustomBlock }}}
   {{# if contactFormEnabled }}
     <div id="contact-us" class="container">
