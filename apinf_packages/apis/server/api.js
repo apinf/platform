@@ -257,6 +257,9 @@ CatalogV1.addCollection(Apis, {
               },
             },
           },
+          204: {
+            description: 'No data to return',
+          },
           404: {
             description: 'API is not Found',
           },
@@ -265,29 +268,40 @@ CatalogV1.addCollection(Apis, {
       action () {
         const apiId = this.urlParams.id;
 
-        let query = { _id: apiId };
-
-        // Get Manager ID from header
-        const managerId = this.request.headers['x-user-id'];
-
-        // Check if requestor is administrator
-        const requestorIsAdmin = Roles.userIsInRole(managerId, ['admin']);
-
-        if (!requestorIsAdmin) {
-          // Only Public APIs are available for unregistered user
-          query = { isPublic: true };
+        // Fetch the API matching with condition
+        const api = Apis.findOne({ _id: apiId });
+        // Return error response, it API is not found.
+        if (!api) {
+          return errorMessagePayload(404, 'API with specified ID is not found.');
         }
 
-        console.log('query', query);
-        const options = {};
+        // Only Public APIs are available for non-admin/non-manager user
+        if (api.isPublic === false) {
+          let displayPrivateAPI = false;
+          // Get requestor ID from header
+          const requestorId = this.request.headers['x-user-id'];
 
-        // Fetch the list of APIs matching with conditions
-        const api = Apis.findOne({ _id: apiId }, query, options);
-        // Replace internal logo id (when exists) with correct link
-        if (api) {
-          if (api.apiLogoFileId) {
-            api.apiLogoFileId = api.logoUrl();
+          if (requestorId) {
+            // Check if requestor is administrator
+            const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+            // Check if requestor is manager
+            const requestorIsManager = api.currentUserCanManage(requestorId);
+            displayPrivateAPI = requestorIsAdmin || requestorIsManager;
           }
+          if (!displayPrivateAPI) {
+            return {
+              statusCode: 204,
+              body: {
+                status: 'success',
+              },
+            };
+          }
+        }
+
+
+        // Replace internal logo id (when exists) with correct link
+        if (api.apiLogoFileId) {
+          api.apiLogoFileId = api.logoUrl();
         }
 
         // Construct response
