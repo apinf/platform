@@ -19,30 +19,12 @@ import 'select2-bootstrap-theme/dist/select2-bootstrap.css';
 Template.branding.onCreated(function () {
   // Get reference to template instance
   const templateInstance = this;
-  templateInstance.autorun(() => {
-    templateInstance.subscribe('apisForBranding');
-    // Get all api relevant data for option
-    templateInstance.options = Apis.find().map((api) => {
-      return {
-        text: api.name,
-        id: api._id,
-      };
-    });
-  });
+
+  templateInstance.subscribe('apisForBranding');
 });
 
 Template.branding.onRendered(function () {
   $('[data-toggle="popover"]').popover();
-  const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
-  setTimeout(() => {
-    const options = this.options;
-    $('[name=featuredApis]').select2({
-      placeholder: message,
-      tags: true,
-      tokenSeparators: [',', ' '],
-      data: options,
-    });
-  }, 800);
 });
 
 Template.branding.helpers({
