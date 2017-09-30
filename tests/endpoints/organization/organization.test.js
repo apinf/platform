@@ -15,12 +15,10 @@ const { common, organizations } = require('../endpointConfiguration.js');
 describe('Endpoints for organization module', () => {
   describe('GET - /organizations', () => {
     it('should return all organizations from the collection', done => {
-      // Define variable with organization endpoint
-      const organizationsEndpoint = `${common.baseURL}/${organizations.endpoint}`;
 
       // Initiate test request
       request
-        .get(organizationsEndpoint)
+        .get(organizations.endpoint)
         .end((err, res) => {
           // If there was an error, stops right here and reject
           if (err) return done(err);
