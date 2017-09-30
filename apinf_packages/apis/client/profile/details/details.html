@@ -54,38 +54,39 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   </div>
-  {{# if proxyUrl }}
-    <div id="usage-instructions" class="bs-callout bs-callout-primary">
-      <h4>
-        {{_ "apiDetails_usageInstructions_headingText" }}
-      </h4>
-      <ul>
-        {{# unless disableApiKey }}
-          {{# if hasApiKey }}
-            <!-- Proxy Backend is completed, "Disable api key" is false, user has got an api key -->
-            <li>
-              {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
-              <span>
-                <i>X-Api-Key:</i> {{ apiKey }}
-              </span>
-            </li>
+  {{# if currentUser }}
+    {{# if proxyUrl }}
+      <div id="usage-instructions" class="bs-callout bs-callout-primary">
+        <h4>
+          {{_ "apiDetails_usageInstructions_headingText" }}
+        </h4>
+        <ul>
+          {{# unless disableApiKey }}
+            {{# if hasApiKey }}
+              <!-- Proxy Backend is completed, "Disable api key" is false, user has got an api key -->
+              <li>
+                {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
+                <span>
+                  <i>X-Api-Key:</i> {{ apiKey }}
+                </span>
+              </li>
+            {{ else }}
+              <!-- Proxy Backend is completed, "Disable api key" is false, user hasn't got an api key -->
+              <li>
+                {{_ "apiDetails_usageInstructions_noApiKeyText" }}
+              </li>
+            {{/ if }}
           {{ else }}
-            <!-- Proxy Backend is completed, "Disable api key" is false, user hasn't got an api key -->
+            <!-- Proxy Backend is completed, "Disable api key" is true -->
             <li>
-              {{_ "apiDetails_usageInstructions_noApiKeyText" }}
+              {{_ "apiDetails_usageInstructions_disableApiKeyText" }}
+              <i>{{ proxyUrl }}&lt;optional_path&gt;</i>
             </li>
-          {{/ if }}
-        {{ else }}
-          <!-- Proxy Backend is completed, "Disable api key" is true -->
-          <li>
-            {{_ "apiDetails_usageInstructions_disableApiKeyText" }}
-            <i>{{ proxyUrl }}&lt;optional_path&gt;</i>
-          </li>
-        {{/ unless }}
-      </ul>
-    </div>
+          {{/ unless }}
+        </ul>
+      </div>
+    {{/ if }}
   {{/ if }}
-
   <!-- Embedded Related Media contents -->
   {{> relatedMedia entity=api }}
 
