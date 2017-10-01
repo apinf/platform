@@ -15,6 +15,12 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.deleteApiConfirmation.events({
   'click #modal-delete-api': function (event, templateInstance) {
+    // Get button instance
+    const clickedButton = event.currentTarget;
+
+    // Disable delete button
+    clickedButton.disabled = true;
+
     // Get API ID
     const apiId = templateInstance.data.api._id;
 
@@ -22,6 +28,9 @@ Template.deleteApiConfirmation.events({
     FlowRouter.go('apiCatalog');
 
     Meteor.call('removeApi', apiId, () => {
+      // Enable delete button
+      clickedButton.disabled = false;
+
       // Dismiss the confirmation modal
       Modal.hide('deleteApiConfirmation');
 
