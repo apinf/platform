@@ -1,7 +1,7 @@
 const request = require('superagent');
 const { common, users, login } = require('./endpointConfiguration.js');
 
-const createUser = ({ username, email, password }) =>
+module.exports.createUser = ({ username, email, password }) =>
   new Promise((resolve, reject) => {
     // Define new user variable
     const newUser = { username, email, password }
@@ -14,7 +14,7 @@ const createUser = ({ username, email, password }) =>
   });
 
 
-const performLogin = ({ username, password }) =>
+module.exports.performLogin = ({ username, password }) =>
   new Promise((resolve, reject) => {
     // Define user variable
     const user = { username, password }
@@ -27,11 +27,21 @@ const performLogin = ({ username, password }) =>
   });
 
 
-const getUserCredentials = ({ username, password }) =>
+module.exports.getUserCredentials = ({ username, email, password }) =>
   new Promise((resolve, reject) => {
-    // First login
-    // If status == 200, resolve data with promise
-    // If status == 401, create new username
-    // Login with new user
-    // Resolve data with promise
+    /*
+     * First login
+     * If status == 200, resolve data with promise
+     * If status == 401, create new username
+     * Login with new user
+     * Resolve data with promise
+     */
+    performLogin({ username, password })
+      .then(resolve)
+      .catch(err => {
+        createUser({ username, email, password })
+        .then(res => performLogin({ username, password }))
+        .then(resolve)
+        .catch(reject)
+      })
   });
