@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 const request = require('superagent');
 const { common, organizations } = require('../endpointConfiguration.js');
-
+const { getUserCredentials } = require('../testHelpers.js')
 
 describe('Endpoints for organization module', () => {
   describe('GET - /organizations', () => {
