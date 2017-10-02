@@ -29,6 +29,7 @@
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.5",
     "moment": "^2.17.1",
+    "mongodb": "^2.2.31",
     "raven": "^2.1.0",
     "raven-js": "^3.16.0",
     "select2": "^4.0.3",
