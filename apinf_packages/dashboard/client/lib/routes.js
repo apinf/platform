@@ -36,7 +36,7 @@ signedIn.route('/dashboard', {
   },
 });
 
-signedIn.route('/analytic/:proxyBackendId', {
+signedIn.route('/analytic/:apiSlug', {
   // Get the empty query parameters on Enter
   triggersEnter: [(context) => {
     if (!context.queryParams.timeframe) {
@@ -47,10 +47,8 @@ signedIn.route('/analytic/:proxyBackendId', {
   }],
   name: 'apiAnalyticPage',
   action (params) {
-    const proxyBackendId = params.proxyBackendId;
-
-    // Make sure proxy Backend exists with this ID
-    Meteor.call('proxyBackendExists', proxyBackendId, (error, proxyBackend) => {
+    // Make sure API with this slug has proxy Backend configuration
+    Meteor.call('proxyBackendExists', params.apiSlug, (error, proxyBackend) => {
       if (proxyBackend) {
         // Make sure a user has permission to view Analytic page
         Meteor.call('userCanViewAnalytic', proxyBackend.apiId, (viewError, canView) => {

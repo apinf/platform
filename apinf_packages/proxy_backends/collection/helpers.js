@@ -44,4 +44,21 @@ ProxyBackends.helpers({
 
     return _.get(this, path, '');
   },
+  apiSlug () {
+    // Get API ID
+    const apiId = this.apiId;
+    // Get API
+    const api = Apis.findOne(apiId);
+
+    // placeholder for API slug
+    let apiSlug;
+
+    // Make sure API was found before accessing slug property
+    if (api) {
+      // Get API slug
+      apiSlug = api.slug;
+    }
+
+    return apiSlug;
+  },
 });

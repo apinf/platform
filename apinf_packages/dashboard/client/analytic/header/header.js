@@ -19,9 +19,10 @@ Template.apiAnalyticPageHeader.onCreated(function () {
   // Get instance of Proxy Backend
   const proxyBackend = ProxyBackends.findOne(proxyBackendId);
 
+  // make sure proxy backend exists and
   // Get IDs of relevant API and Proxy
-  instance.apiId = proxyBackend.apiId;
-  instance.proxyId = proxyBackend.proxyId;
+  instance.apiId = proxyBackend && proxyBackend.apiId;
+  instance.proxyId = proxyBackend && proxyBackend.proxyId;
 });
 
 Template.apiAnalyticPageHeader.helpers({
