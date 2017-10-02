@@ -210,13 +210,14 @@ CatalogV1.addCollection(Apis, {
           ];
         }
 
-        // Fetch the list of APIs matching with conditions
-        const apiList = Apis.find(query, options).fetch();
-        // Replace internal logo id (when exists) with correct link
-        apiList.forEach((api) => {
+        // Create new API list that is based on APIs collection with extended field logoUrl
+        const apiList = Apis.find(query, options).map((api) => {
+          // Make sure logo is uploaded
           if (api.apiLogoFileId) {
-            api.apiLogoFileId = api.logoUrl();
+            // Create a new field to store logo URL
+            api.logoUrl = api.logoUrl();
           }
+          return api;
         });
 
         // Construct response
@@ -298,10 +299,9 @@ CatalogV1.addCollection(Apis, {
           }
         }
 
-
-        // Replace internal logo id (when exists) with correct link
+        // Extend API structure with correct link to API logo
         if (api.apiLogoFileId) {
-          api.apiLogoFileId = api.logoUrl();
+          api.logoUrl = api.logoUrl();
         }
 
         // Construct response
