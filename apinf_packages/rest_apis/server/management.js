@@ -349,6 +349,15 @@ ManagementV1.swagger = {
             },
           },
         },
+        organizationLogoFileId: {
+          type: 'string',
+          example: 'file-id',
+        },
+        logoURL: {
+          type: 'string',
+          example: 'link-address-to-logo-image',
+        },
+
       },
     },
     loginRequest: {
