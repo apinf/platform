@@ -235,6 +235,10 @@ CatalogV1.swagger = {
         },
         apiLogoFileId: {
           type: 'string',
+          example: 'file-id',
+        },
+        logoURL: {
+          type: 'string',
           example: 'link-address-to-logo-image',
         },
       },

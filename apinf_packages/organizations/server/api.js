@@ -95,13 +95,14 @@ ManagementV1.addRoute('organizations', {
         ];
       }
 
-      // Fetch the list of Organizations matching with conditions
-      const organizationList = Organizations.find(query, options).fetch();
-      // Replace internal logo id (when exists) with correct link
-      organizationList.forEach((organization) => {
+      // Create new Organization list that is based on Organization collection with extended field logoUrl
+      const organizationList = Organizations.find(query, options).map((organization) => {
+        // Make sure logo is uploaded
         if (organization.organizationLogoFileId) {
-          organization.organizationLogoFileId = organization.logoUrl();
+          // Create a new field to store logo URL
+          organization.logoUrl = organization.logoUrl();
         }
+        return organization;
       });
 
       // Construct response
@@ -355,9 +356,9 @@ ManagementV1.addRoute('organizations/:id', {
         return errorMessagePayload(404, detailLine);
       }
 
-      // Replace internal logo id (when exists) with correct link
+      // When internal logo id exists, add also correct link
       if (organization.organizationLogoFileId) {
-        organization.organizationLogoFileId = organization.logoUrl();
+        organization.logoURL = organization.logoUrl();
       }
 
       return {
