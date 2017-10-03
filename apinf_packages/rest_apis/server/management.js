@@ -46,10 +46,9 @@ ManagementV1.swagger = {
     },
   },
   tags: {
+    authentication: 'Authentication',
     organization: 'Organizations',
     users: 'Users',
-    login: 'Login',
-    logout: 'Logout',
   },
   params: {
     limit: {

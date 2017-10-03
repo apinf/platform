@@ -23,7 +23,7 @@ CatalogV1.swagger.meta.paths = {
   '/login': {
     post: {
       tags: [
-        CatalogV1.swagger.tags.login,
+        CatalogV1.swagger.tags.authentication,
       ],
       summary: 'Logging in.',
 
@@ -52,7 +52,7 @@ CatalogV1.swagger.meta.paths = {
   '/logout': {
     post: {
       tags: [
-        CatalogV1.swagger.tags.logout,
+        CatalogV1.swagger.tags.authentication,
       ],
       summary: 'Logging out.',
 

@@ -45,9 +45,8 @@ CatalogV1.swagger = {
     },
   },
   tags: {
+    authentication: 'Authentication',
     api: 'APIs',
-    login: 'Login',
-    logout: 'Logout',
   },
   params: {
     api: {
