@@ -1,4 +1,4 @@
-## Automated tests for REST APIs ##
+## Automated tests for REST APIs
 
 With testing tool Postman there are done sets of automated tests for REST APIs.
 
