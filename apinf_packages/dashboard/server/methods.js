@@ -29,10 +29,21 @@ Meteor.methods({
     // Return proxies list with specified type
     return Proxies.find({ type }).fetch();
   },
-  proxyBackendExists (proxyBackendId) {
-    check(proxyBackendId, String);
+  proxyBackendExists (apiSlug) {
+    check(apiSlug, String);
 
-    return ProxyBackends.findOne(proxyBackendId);
+    // Get API
+    const api = Apis.findOne({ slug: apiSlug });
+
+    let proxyBackend;
+
+    // Make sure API exists
+    if (api) {
+      // Get related Proxy Backend configuretion
+      proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+    }
+
+    return proxyBackend;
   },
   userCanViewAnalytic (apiId) {
     // Make sure apiId is a string

@@ -53,8 +53,9 @@ Template.dashboardSummaryStatistic.onCreated(function () {
         if (theSamePaths === 0) {
           // Save it
           instance.proxyBackendsWithMetric[proxyBackendPath] = dataset;
-          // Add info about API name & id of proxy backend
+          // Add info about API name & slug and id of proxy backend
           instance.proxyBackendsWithMetric[proxyBackendPath].apiName = backend.apiName();
+          instance.proxyBackendsWithMetric[proxyBackendPath].apiSlug = backend.apiSlug();
           instance.proxyBackendsWithMetric[proxyBackendPath].proxyBackendId = backend._id;
         }
       });
