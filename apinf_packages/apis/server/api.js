@@ -23,7 +23,7 @@ CatalogV1.swagger.meta.paths = {
   '/login': {
     post: {
       tags: [
-        CatalogV1.swagger.tags.login,
+        CatalogV1.swagger.tags.authentication,
       ],
       summary: 'Logging in.',
 
@@ -52,7 +52,7 @@ CatalogV1.swagger.meta.paths = {
   '/logout': {
     post: {
       tags: [
-        CatalogV1.swagger.tags.logout,
+        CatalogV1.swagger.tags.authentication,
       ],
       summary: 'Logging out.',
 
@@ -210,12 +210,22 @@ CatalogV1.addCollection(Apis, {
           ];
         }
 
+        // Create new API list that is based on APIs collection with extended field logoUrl
+        const apiList = Apis.find(query, options).map((api) => {
+          // Make sure logo is uploaded
+          if (api.apiLogoFileId) {
+            // Create a new field to store logo URL
+            api.logoUrl = api.logoUrl();
+          }
+          return api;
+        });
+
         // Construct response
         return {
           statusCode: 200,
           body: {
             status: 'success',
-            data: Apis.find(query, options).fetch(),
+            data: apiList,
           },
         };
       },
@@ -248,10 +258,60 @@ CatalogV1.addCollection(Apis, {
               },
             },
           },
+          204: {
+            description: 'No data to return',
+          },
           404: {
             description: 'API is not Found',
           },
         },
+      },
+      action () {
+        const apiId = this.urlParams.id;
+
+        // Fetch the API matching with condition
+        const api = Apis.findOne({ _id: apiId });
+        // Return error response, it API is not found.
+        if (!api) {
+          return errorMessagePayload(404, 'API with specified ID is not found.');
+        }
+
+        // Only Public APIs are available for non-admin/non-manager user
+        if (api.isPublic === false) {
+          let displayPrivateAPI = false;
+          // Get requestor ID from header
+          const requestorId = this.request.headers['x-user-id'];
+
+          if (requestorId) {
+            // Check if requestor is administrator
+            const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+            // Check if requestor is manager
+            const requestorIsManager = api.currentUserCanManage(requestorId);
+            displayPrivateAPI = requestorIsAdmin || requestorIsManager;
+          }
+          if (!displayPrivateAPI) {
+            return {
+              statusCode: 204,
+              body: {
+                status: 'success',
+              },
+            };
+          }
+        }
+
+        // Extend API structure with correct link to API logo
+        if (api.apiLogoFileId) {
+          api.logoUrl = api.logoUrl();
+        }
+
+        // Construct response
+        return {
+          statusCode: 200,
+          body: {
+            status: 'success',
+            data: api,
+          },
+        };
       },
     },
     // Create a new API

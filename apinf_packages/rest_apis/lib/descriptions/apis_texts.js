@@ -27,13 +27,17 @@ const descriptionApis = {
   get: `
   ### Lists data of API with specified ID ###
 
-  Returns the API with specified ID, if a match is found.
+  Returns the API with specified ID, if a match is found. In case API is private,
+  only Admin user or API manager can get it.
 
   Example call:
 
       GET /apis/:id
 
   Result: returns the data of API identified with :id.
+
+  Note! The field X-User-Id in message header can be used
+  * to contain Admin/Manager user's ID, when indicated, that user is Admin/Manager
   `,
   // --------------------------------------------
   post: `

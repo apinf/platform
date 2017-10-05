@@ -95,12 +95,22 @@ ManagementV1.addRoute('organizations', {
         ];
       }
 
+      // Create new Organization list that is based on Organization collection with extended field logoUrl
+      const organizationList = Organizations.find(query, options).map((organization) => {
+        // Make sure logo is uploaded
+        if (organization.organizationLogoFileId) {
+          // Create a new field to store logo URL
+          organization.logoUrl = organization.logoUrl();
+        }
+        return organization;
+      });
+
       // Construct response
       return {
         statusCode: 200,
         body: {
           status: 'success',
-          data: Organizations.find(query, options).fetch(),
+          data: organizationList,
         },
       };
     },
@@ -344,6 +354,11 @@ ManagementV1.addRoute('organizations/:id', {
       if (!organization) {
         const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
         return errorMessagePayload(404, detailLine);
+      }
+
+      // When internal logo id exists, add also correct link
+      if (organization.organizationLogoFileId) {
+        organization.logoURL = organization.logoUrl();
       }
 
       return {

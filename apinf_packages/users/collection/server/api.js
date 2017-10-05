@@ -26,7 +26,7 @@ ManagementV1.swagger.meta.paths = {
   '/login': {
     post: {
       tags: [
-        ManagementV1.swagger.tags.login,
+        ManagementV1.swagger.tags.authentication,
       ],
       summary: 'Logging in.',
       description: descriptionLoginLogout.login,
@@ -54,7 +54,7 @@ ManagementV1.swagger.meta.paths = {
   '/logout': {
     post: {
       tags: [
-        ManagementV1.swagger.tags.logout,
+        ManagementV1.swagger.tags.authentication,
       ],
       summary: 'Logging out.',
       description: descriptionLoginLogout.logout,
