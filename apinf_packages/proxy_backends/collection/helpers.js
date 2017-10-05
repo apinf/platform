@@ -19,7 +19,7 @@ ProxyBackends.helpers({
     const api = Apis.findOne(apiId);
 
     // placeholder for API name
-    let apiName;
+    let apiName = '';
 
     // Make sure API was found before accessing name property
     if (api) {
