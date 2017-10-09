@@ -7,3 +7,10 @@ The master collection contains all subcollections
   * each test set for REST API contains
     * collection of tests for successful requests (2xx HTTP code expected)
     * tests for each endpoint in REST API in question, covering all unsuccessful (3xx/4xx/5xx expected) cases
+
+
+To test you need standalone edition of Postman.
+Import collection you want to test and import environment.
+Then open Postman Runner and select collection you want to test and select correct environment.
+Click big blue button that says run "collection_name".
+And Postman should run the tests.
