@@ -10,7 +10,9 @@ The master collection contains all subcollections
 
 
 To test you need standalone edition of Postman.
-Import collection you want to test and import environment.
-Then open Postman Runner and select collection you want to test and select correct environment.
+Import collection you want to test.
+Add url = http://nightly.apinf.io/rest/v1 to your global variables
+Then open Postman Runner and select collection you want to test
+and select any environment where you can store ids and tokens.
 Click big blue button that says run "collection_name".
 And Postman should run the tests.
