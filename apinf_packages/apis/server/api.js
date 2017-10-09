@@ -13,84 +13,15 @@ import { Roles } from 'meteor/alanning:roles';
 import Apis from '/apinf_packages/apis/collection';
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
+import Authentication from '/apinf_packages/rest_apis/server/authentication';
 
 // APInf imports
 import descriptionApis from '/apinf_packages/rest_apis/lib/descriptions/apis_texts';
-import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 CatalogV1.swagger.meta.paths = {
-  '/login': {
-    post: {
-      tags: [
-        CatalogV1.swagger.tags.authentication,
-      ],
-      summary: 'Logging in.',
-
-      description: descriptionLoginLogout.login,
-      produces: ['application/json'],
-      parameters: [
-        CatalogV1.swagger.params.login,
-      ],
-      responses: {
-        200: {
-          description: 'Logged in successfully',
-          schema: {
-            $ref: '#/definitions/loginResponse',
-          },
-        },
-        400: {
-          description: 'Bad Request. Erroneous or missing parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-      },
-    },
-  },
-
-  '/logout': {
-    post: {
-      tags: [
-        CatalogV1.swagger.tags.authentication,
-      ],
-      summary: 'Logging out.',
-
-      description: descriptionLoginLogout.logout,
-      produces: ['application/json'],
-      responses: {
-        200: {
-          description: 'You\'ve been logged out!',
-          schema: {
-            type: 'object',
-            properties: {
-              status: {
-                type: 'string',
-                example: 'success',
-              },
-              message: {
-                type: 'string',
-                example: 'You\'ve been logged out!',
-              },
-            },
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Unauthorized',
-        },
-      },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
-    },
-  },
-
+  '/login': Authentication.login,
+  '/logout': Authentication.logout,
 };
 
 // Request /rest/v1/apis for Apis collection
