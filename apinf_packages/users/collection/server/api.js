@@ -12,86 +12,19 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
+import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import Organizations from '/apinf_packages/organizations/collection';
 
 // APInf imports
 import descriptionUsers from '/apinf_packages/rest_apis/lib/descriptions/users_texts';
-import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 // Npm packages imports
 import _ from 'lodash';
 
 ManagementV1.swagger.meta.paths = {
-  '/login': {
-    post: {
-      tags: [
-        ManagementV1.swagger.tags.authentication,
-      ],
-      summary: 'Logging in.',
-      description: descriptionLoginLogout.login,
-      produces: ['application/json'],
-      parameters: [
-        ManagementV1.swagger.params.login,
-      ],
-      responses: {
-        200: {
-          description: 'Logged in successfully',
-          schema: {
-            $ref: '#/definitions/loginResponse',
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-      },
-    },
-  },
-
-  '/logout': {
-    post: {
-      tags: [
-        ManagementV1.swagger.tags.authentication,
-      ],
-      summary: 'Logging out.',
-      description: descriptionLoginLogout.logout,
-      produces: ['application/json'],
-      responses: {
-        200: {
-          description: 'You\'ve been logged out!',
-          schema: {
-            type: 'object',
-            properties: {
-              status: {
-                type: 'string',
-                example: 'success',
-              },
-              message: {
-                type: 'string',
-                example: 'You\'ve been logged out!',
-              },
-            },
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Unauthorized',
-        },
-      },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
-    },
-  },
-
+  '/login': Authentication.login,
+  '/logout': Authentication.logout,
 
   '/users': {
     get: {
