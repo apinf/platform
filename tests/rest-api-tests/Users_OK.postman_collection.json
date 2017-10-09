@@ -1,0 +1,683 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Users_OK",
+		"_postman_id": "13fdfdcb-4ffe-0ebb-c765-c16cef859bd2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{url}}/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    if (pm.response.to.have.status(200)) {",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"userid\", jsonData.data.userId);",
+							"        pm.environment.set(\"token\", jsonData.data.authToken);",
+							"    }",
+							"    ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "aGvjaBmoSKjNxye9Q",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er511@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}",
+						"description": ""
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er511@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "List users (requestor needs to be logged in)"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    if (pm.response.to.have.status(201)) {",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"new_userid\", jsonData.data._id);",
+							"    }",
+							"    ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}",
+						"description": ""
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti11",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Adding a new user account"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/{{new_userid}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/{{new_userid}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}",
+						"description": ""
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti11",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get a certain user data"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/{{new_userid}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/{{new_userid}}",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}",
+						"description": ""
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti11",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Remove created user."
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/{{userid}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/{{userid}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}",
+						"description": ""
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti11",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "User can change own data"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/updates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/updates",
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "GFJzMtdzqEYgH8PHS",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}",
+						"description": ""
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti11",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get list of Users according to creation date"
+			},
+			"response": []
+		}
+	]
+}
