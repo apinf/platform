@@ -25,7 +25,27 @@ ManagementV1.addRoute('organizations', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'List and search organizations.',
+<<<<<<< HEAD
       description: descriptionOrganizations.get,
+=======
+      description: `
+   ### List and search organizations ###
+
+   Parameters are optional and several parametes can be combined.
+
+   Example calls:
+
+    GET /organizations
+
+   As a response all Organizations' datas are listed.
+
+    GET /organizations?q=apinf&limit=10
+
+   As a response is returned up to ten first Organizations,
+   which contain string "apinf" in Name, Description or URL.
+
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.optionalSearch,
         ManagementV1.swagger.params.skip,
@@ -110,7 +130,11 @@ ManagementV1.addRoute('organizations', {
         statusCode: 200,
         body: {
           status: 'success',
+<<<<<<< HEAD
           data: organizationList,
+=======
+          data: Organizations.find(query, options).fetch(),
+>>>>>>> master
         },
       };
     },
@@ -123,7 +147,21 @@ ManagementV1.addRoute('organizations', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Add a new Organization.',
+<<<<<<< HEAD
       description: descriptionOrganizations.post,
+=======
+      description: `
+   ### Adds a new Organization ###
+
+   Admin user can add a new Organization into Catalog.
+
+   Parameters:
+   * *name* and *url* are mandatory parameters
+   * *description* length must not exceed 1000 characters.
+
+   On success, a response message with HTTP code 201 returns the created organization data.
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organization,
       ],
@@ -204,7 +242,17 @@ ManagementV1.addRoute('organizations', {
         organizationData, 'name');
 
       if (!isValid) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Parameter "name" is erroneous or missing',
+          },
+        };
+>>>>>>> master
       }
 
       // Validate url
@@ -212,7 +260,17 @@ ManagementV1.addRoute('organizations', {
         organizationData, 'url');
 
       if (!isValid) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'Parameter "url" is erroneous or missing');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Parameter "url" is erroneous or missing',
+          },
+        };
+>>>>>>> master
       }
 
       // Validate description, if provided
@@ -221,7 +279,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'description');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "description" is erroneous or too long');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "description" is erroneous or too long',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -231,7 +299,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'contact.person');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "contact_name" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_name" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -241,7 +319,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'contact.phone');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "contact_phone" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_phone" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -251,7 +339,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'contact.email');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "contact_email" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_email" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -261,7 +359,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'socialMedia.facebook');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "facebook" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "facebook" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -271,7 +379,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'socialMedia.instagram');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "instagram" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "instagram" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -281,7 +399,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'socialMedia.twitter');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "twitter" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "twitter" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -291,7 +419,17 @@ ManagementV1.addRoute('organizations', {
           organizationData, 'socialMedia.linkedIn');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "linkedIn" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -318,7 +456,20 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Fetch Organization with specified ID.',
+<<<<<<< HEAD
       description: descriptionOrganizations.getId,
+=======
+      description: `
+   ### List the data of the Organization specified with ID ###
+
+   Example call
+
+    GET /organizations/:id
+
+   Returns the data of the Organization specified with :id in case a match is found.
+
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -342,7 +493,17 @@ ManagementV1.addRoute('organizations/:id', {
     action () {
       const organizationId = this.urlParams.id;
       if (!organizationId) {
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Organization with provided ID is not found');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Organization with provided ID is not found',
+          },
+        };
+>>>>>>> master
       }
 
       const organization = Organizations.findOne(organizationId);
@@ -353,12 +514,22 @@ ManagementV1.addRoute('organizations/:id', {
        */
       if (!organization) {
         const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
+<<<<<<< HEAD
         return errorMessagePayload(404, detailLine);
       }
 
       // When internal logo id exists, add also correct link
       if (organization.organizationLogoFileId) {
         organization.logoURL = organization.logoUrl();
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: detailLine,
+          },
+        };
+>>>>>>> master
       }
 
       return {
@@ -378,7 +549,20 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Update Organization.',
+<<<<<<< HEAD
       description: descriptionOrganizations.putId,
+=======
+      description: `
+   ### Update an Organization ###
+
+   Admin user or Organization manager can update Organization data with parameters listed below.
+
+   Parameters
+   * can be given one by one or several ones at a time
+   * length of parameter *description* must not exceed 1000 characters
+
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.organization,
@@ -436,7 +620,17 @@ ManagementV1.addRoute('organizations/:id', {
       // Check if Organization exists
       if (!organization) {
         // Organization doesn't exist
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Organization with specified ID is not found');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
+          },
+        };
+>>>>>>> master
       }
       // Get ID of User
       const userId = this.userId;
@@ -445,7 +639,17 @@ ManagementV1.addRoute('organizations/:id', {
       // Make sure user has permission for action
       if (!userCanManage) {
         // Organization exists but user can not manage
+<<<<<<< HEAD
         return errorMessagePayload(403, 'You do not have permission for editing this Organization');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+>>>>>>> master
       }
       // Get data from body parameters
       const bodyParams = this.bodyParams;
@@ -474,7 +678,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'name');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "name" is erroneous or missing',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -484,7 +698,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'url');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "url" is erroneous or missing');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "url" is erroneous or missing',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -494,7 +718,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'description');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "description" is erroneous or too long');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "description" is erroneous or too long',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -504,7 +738,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'contact.person');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "contact_name" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_name" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -514,7 +758,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'contact.phone');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "contact_phone" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_phone" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -524,7 +778,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'contact.email');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "contact_email" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "contact_email" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -534,7 +798,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'socialMedia.facebook');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "facebook" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "facebook" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -544,7 +818,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'socialMedia.instagram');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "instagram" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "instagram" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -554,7 +838,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'socialMedia.twitter');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "twitter" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "twitter" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -564,7 +858,17 @@ ManagementV1.addRoute('organizations/:id', {
           organizationData, 'socialMedia.linkedIn');
 
         if (!isValid) {
+<<<<<<< HEAD
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
+=======
+          return {
+            statusCode: 400,
+            body: {
+              status: 'fail',
+              message: 'Parameter "linkedIn" is erroneous',
+            },
+          };
+>>>>>>> master
         }
       }
 
@@ -588,7 +892,19 @@ ManagementV1.addRoute('organizations/:id', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Organization from catalog.',
+<<<<<<< HEAD
       description: descriptionOrganizations.deleteId,
+=======
+      description: `
+   ### Deletes the identified Organization from catalog ###
+
+   Admin user or Organization manager can remove Organization from Catalog.
+
+   In successful case a response message with HTTP code 204 without any content is returned.
+   Note! Trying to remove a non-existing Organization is considered a failed operation.
+
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -623,7 +939,17 @@ ManagementV1.addRoute('organizations/:id', {
       // Make sure Organization exists
       if (!organization) {
         // Organization doesn't exist
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Organization with specified ID is not found');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
+          },
+        };
+>>>>>>> master
       }
         // Get User ID
       const userId = this.userId;
@@ -631,7 +957,17 @@ ManagementV1.addRoute('organizations/:id', {
 
       // User has to have permission for action
       if (!userCanManage) {
+<<<<<<< HEAD
         return errorMessagePayload(403, 'You do not have permission for removing this Organization');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'You do not have permission for removing this Organization',
+          },
+        };
+>>>>>>> master
       }
 
       // Remove Organization document
@@ -657,7 +993,30 @@ ManagementV1.addRoute('organizations/:id/managers', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Get Organization Manager list.',
+<<<<<<< HEAD
       description: descriptionOrganizations.getIdManagers,
+=======
+      description: `
+   ### Listing all Organization Managers ###
+
+   Admin user or Organization manager can list all Organization managers'
+   username, email address and ID of Organization identified with :id.
+
+   Two lists are returned:
+   * managerIds: list of all Managers' IDs
+   * data: list (matching to query parameters) of Managers with contact information
+
+   Note! The lists can differ from each other in such a case a Manager account is removed,
+   but the Manager list is not updated accordingly.
+
+
+   Example call:
+
+    GET /organizations/<organization_id>/managers
+
+
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
       ],
@@ -737,7 +1096,17 @@ ManagementV1.addRoute('organizations/:id/managers', {
 
       if (!organization) {
         const detailLine = `Organization with specified ID (${this.urlParams.id}) is not found`;
+<<<<<<< HEAD
         return errorMessagePayload(404, detailLine);
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: detailLine,
+          },
+        };
+>>>>>>> master
       }
 
       // Get ID of requesting User
@@ -746,7 +1115,17 @@ ManagementV1.addRoute('organizations/:id/managers', {
       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
       // Requestor must have permission for action
       if (!userCanManage) {
+<<<<<<< HEAD
         return errorMessagePayload(403, 'You do not have permission for editing this Organization');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+>>>>>>> master
       }
 
       // Do not include password in response
@@ -777,7 +1156,21 @@ ManagementV1.addRoute('organizations/:id/managers', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Add a new Manager into Organization.',
+<<<<<<< HEAD
       description: descriptionOrganizations.postIdManagers,
+=======
+      description: `
+   ### Adds a new Manager into Organization ###
+
+   Admin user or Organization manager can add a new manager into organization.
+
+   * Manager is identified with email address.
+   * New manager must have a valid User account.
+   * New manager must not already be a Manager in same Organization.
+
+   On success, a complete list of Organization Managers is returned.
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.newManagerEmail,
@@ -864,7 +1257,17 @@ ManagementV1.addRoute('organizations/:id/managers', {
       let organization = Organizations.findOne(organizationId);
       // Organization doesn't exist
       if (!organization) {
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Organization with specified ID is not found');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
+          },
+        };
+>>>>>>> master
       }
 
       // Get ID of requesting User
@@ -874,26 +1277,66 @@ ManagementV1.addRoute('organizations/:id/managers', {
       // Requestor does not have permission for action
       if (!userCanManage) {
         // Organization exists but user can not manage
+<<<<<<< HEAD
         return errorMessagePayload(403, 'You do not have permission to edit this Organization');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'You do not have permission to edit this Organization',
+          },
+        };
+>>>>>>> master
       }
 
       // Check if manager list is given
       if (!bodyParams.newManagerEmail) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'New Manager\'s email address is missing.');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'New Manager\'s email address is missing.',
+          },
+        };
+>>>>>>> master
       }
 
       // Get user account with matching email
       const newManager = Accounts.findUserByEmail(bodyParams.newManagerEmail);
 
       if (!newManager) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'User has no account');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'User has no account',
+          },
+        };
+>>>>>>> master
       }
 
       // Check if user is already a manager
       const alreadyManager = organization.managerIds.includes(newManager._id);
       // Check if the user is already a manager
       if (alreadyManager) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'User is already a Manager in this Organization');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'User is already a Manager in this Organization',
+          },
+        };
+>>>>>>> master
       }
 
       // Update Organization manager list
@@ -943,7 +1386,22 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Get Organization Manager username and email address.',
+<<<<<<< HEAD
       description: descriptionOrganizations.getIdManagersManagerid,
+=======
+      description: `
+   ### Inquiring Organization Manager's username and email address ###
+
+   Admin user or Organization manager can fetch username and email address of a
+   Manager identified by {managerId}.
+
+   Example call:
+
+    GET /organizations/<organizations id>/managers/<managers id>
+
+
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.managerId,
@@ -1009,7 +1467,17 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
     action () {
       // Is Organization ID provided
       if (!this.urlParams.id) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'Organization ID was not provided');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Organization ID was not provided',
+          },
+        };
+>>>>>>> master
       }
       // Get ID of Organization from request parameter
       // Note! It can not be checked here, if this parameter is not provided,
@@ -1020,7 +1488,17 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       const organization = Organizations.findOne(organizationId);
       // Organization must exist
       if (!organization) {
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Organization with specified ID is not found');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
+          },
+        };
+>>>>>>> master
       }
 
       // Get ID of User requesting operation
@@ -1029,25 +1507,65 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
       // Requestor must have permissions for action
       if (!userCanManage) {
+<<<<<<< HEAD
         return errorMessagePayload(403, 'You do not have permission for this Organization');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'You do not have permission for this Organization',
+          },
+        };
+>>>>>>> master
       }
 
       // Get ID of queried Manager from request parameter
       const managerId = this.urlParams.managerId;
       // Queried Manager ID must be given
       if (!managerId) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'Manager ID was not provided.');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Manager ID was not provided.',
+          },
+        };
+>>>>>>> master
       }
 
       // Check if user account for manager exists
       if (!Meteor.users.findOne(managerId)) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'User has no User account.');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'User has no User account.',
+          },
+        };
+>>>>>>> master
       }
 
       // Is user a manager of Organization?
       const isManager = organization.managerIds.includes(managerId);
       if (!isManager) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'Queried User is not a Manager in Organization.');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Queried User is not a Manager in Organization.',
+          },
+        };
+>>>>>>> master
       }
 
       // Do not include password in response
@@ -1076,7 +1594,23 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         ManagementV1.swagger.tags.organization,
       ],
       summary: 'Delete identified Manager from Organization Manager list.',
+<<<<<<< HEAD
       description: descriptionOrganizations.deleteIdManagersManagerid,
+=======
+      description: `
+   ### Deleting a User from Organization Manager list ###
+
+   Admin user or Organization manager can delete managers from Organization manager list one by one.
+
+
+   Example call:
+
+    DELETE /organizations/<organizations id>/managers/<managers id>
+
+
+   Note! Trying to remove a not existing Manager is considered a failed operation.
+      `,
+>>>>>>> master
       parameters: [
         ManagementV1.swagger.params.organizationId,
         ManagementV1.swagger.params.managerId,
@@ -1123,7 +1657,17 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       const organization = Organizations.findOne(organizationId);
       // Organization must exist
       if (!organization) {
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Organization with specified ID is not found');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Organization with specified ID is not found',
+          },
+        };
+>>>>>>> master
       }
 
       // Get ID of requesting User
@@ -1132,26 +1676,66 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
       // Requestor must have permission for action
       if (!userCanManage) {
+<<<<<<< HEAD
         return errorMessagePayload(403, 'You do not have permission for editing this Organization');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'You do not have permission for editing this Organization',
+          },
+        };
+>>>>>>> master
       }
 
       // Get ID of Manager to be removed
       const removeManagerId = this.urlParams.managerId;
       // Manager ID must be given
       if (!removeManagerId) {
+<<<<<<< HEAD
         return errorMessagePayload(400, 'Missing parameter: Manager ID not provided.');
+=======
+        return {
+          statusCode: 400,
+          body: {
+            status: 'fail',
+            message: 'Missing parameter: Manager ID not provided.',
+          },
+        };
+>>>>>>> master
       }
 
       // Admin/Manager is not allowed to remove self
       if (removeManagerId === requestorId) {
+<<<<<<< HEAD
         return errorMessagePayload(403, 'User can not remove self.');
+=======
+        return {
+          statusCode: 403,
+          body: {
+            status: 'fail',
+            message: 'User can not remove self.',
+          },
+        };
+>>>>>>> master
       }
 
       // Only existing Manager can be removed from Organization manager list
       const isManager = organization.managerIds.includes(removeManagerId);
 
       if (!isManager) {
+<<<<<<< HEAD
         return errorMessagePayload(404, 'Manager not found in Organization.');
+=======
+        return {
+          statusCode: 404,
+          body: {
+            status: 'fail',
+            message: 'Manager not found in Organization.',
+          },
+        };
+>>>>>>> master
       }
 
       // Remove user from organization manager list
