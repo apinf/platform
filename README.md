@@ -46,9 +46,9 @@ For API consumers APInf provides simple key management, key usage analytics and 
 ## Source code visualization
 Our project source code has changed throughout the project lifespan.
 
-[![source code structure](public/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1)
+[![source code structure](public/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/apinf-opensource-development-visualization-from-0.1-to-0.50)
 
-See the [high definition video (with music) of Apinf Development Activity up to version 0.33.1](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1) on the Internet Archive.
+See the [high definition video (with music) of Apinf Development Activity up to version 0.50](https://archive.org/details/apinf-opensource-development-visualization-from-0.1-to-0.50) on the Internet Archive.
 
 # Nightly build
 You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.
