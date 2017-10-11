@@ -3,14 +3,33 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Validates github configuration settings
-export function githubSettingsValid (settings) {
-  if ((typeof settings !== 'undefined') && settings.githubConfiguration) {
-    if (settings.githubConfiguration.clientId && settings.githubConfiguration.secret) {
+// Validates github configuration on LoginPlatforms
+export function githubSettingsValid (LoginPlatforms) {
+  // Verifies if LoginPlatforms exists and if it has the githubConfiguration property
+  if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.githubConfiguration) {
+    // Verifies if githubConfiguration property has clientId and secret
+    if (LoginPlatforms.githubConfiguration.clientId && LoginPlatforms.githubConfiguration.secret) {
+      // returns true if get to this point. It has all the required fields
       return true;
     }
   }
+  // Returns false if LoginPlatforms does not have all the required fields
+  return false;
+}
 
+// Validates FIWARE configuration on LoginPlatforms
+export function fiwareSettingsValid (LoginPlatforms) {
+  // Verifies if LoginPlatforms exists and if it has the fiwareConfiguration property
+  if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.fiwareConfiguration) {
+    // Assigns object referece to variable for better readability
+    const fiwareConfiguration = LoginPlatforms.fiwareConfiguration;
+    // Verifies if fiwareConfiguration property has clientId, rootURL and secret
+    if (fiwareConfiguration.clientId && fiwareConfiguration.secret && fiwareConfiguration.rootURL) {
+      // returns true if get to this point. It has all the required fields
+      return true;
+    }
+  }
+  // Returns false if LoginPlatforms does not have all the required fields
   return false;
 }
 

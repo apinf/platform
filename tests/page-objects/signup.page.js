@@ -16,6 +16,7 @@ class SignUpPage extends Page {
 
   get registerButton () { return browser.element('button#at-btn.submit'); }
   get githubButton () { return browser.element('button#at-github'); }
+  get fiwareButton () { return browser.element('button#at-fiware'); }
 
   get errorFields () { return this.$$('.help-block'); }
 

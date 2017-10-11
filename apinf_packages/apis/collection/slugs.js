@@ -11,7 +11,7 @@ Apis.friendlySlugs({
   // Slug is unique
   distinct: true,
   // Don't change slug
-  updateSlug: false,
+  updateSlug: true,
   // Translates characters with accents to URL compatible characters
   transliteration: [
     { from: 'àáâäåãа', to: 'a' },

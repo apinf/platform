@@ -38,6 +38,7 @@ For API consumers APInf provides simple key management, key usage analytics and 
 
 
 # Development status
+[![Community dashboard badge](https://img.shields.io/badge/Community-Dashboard-blue.svg)](https://dashboard.cauldron.io/goto/afe91edf4f1c66a3bcfd3717f12e43c5)
 [![Stories in Ready](https://badge.waffle.io/apinf/platform.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
 
 [![Throughput Graph](https://graphs.waffle.io/apinf/platform/throughput.svg)](https://waffle.io/apinf/platform/metrics)
@@ -45,9 +46,9 @@ For API consumers APInf provides simple key management, key usage analytics and 
 ## Source code visualization
 Our project source code has changed throughout the project lifespan.
 
-[![source code structure](public/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1)
+[![source code structure](public/Apinf-developmentActivity-upTo-0.33.1.gif)](https://archive.org/details/apinf-opensource-development-visualization-from-0.1-to-0.50)
 
-See the [high definition video (with music) of Apinf Development Activity up to version 0.33.1](https://archive.org/details/ApinfDevelopmentActivityUpTo0.33.1) on the Internet Archive.
+See the [high definition video (with music) of Apinf Development Activity up to version 0.50](https://archive.org/details/apinf-opensource-development-visualization-from-0.1-to-0.50) on the Internet Archive.
 
 # Nightly build
 You can preview our latest version at [nightly.apinf.io](http://nightly.apinf.io). Feel free to register an account and test things out.

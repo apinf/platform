@@ -204,7 +204,7 @@ Apis.helpers({
     const apiDocs = ApiDocs.findOne({ apiId });
 
     // Placeholder documentation Object
-    let documentation;
+    let documentation = '';
 
     // Placeholder documentation file Object
     let documentationFile;

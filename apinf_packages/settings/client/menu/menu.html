@@ -42,6 +42,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "settingsMenu_proxies" }}
             <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
+        <a
+          href="{{ pathFor route='login-platforms' }}"
+          class="list-group-item {{ isActiveRoute 'login-platforms' }}"
+          id="button-loginPlatforms">
+            {{_ "settingsMenu_loginPlatforms" }}
+            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+        </a>
       {{/ if }}
     </ul>
   </div>

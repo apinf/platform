@@ -14,4 +14,10 @@ Template.apiFeedback.events({
     // Show feedbackForm modal
     Modal.show('feedbackForm', { formType: 'insert' });
   },
+  'click #mark-all-feedbacks-as-private': () => {
+    Modal.show('changeFeedbackVisibility', { toPublic: false });
+  },
+  'click #mark-all-feedbacks-as-public': () => {
+    Modal.show('changeFeedbackVisibility', { toPublic: true });
+  },
 });

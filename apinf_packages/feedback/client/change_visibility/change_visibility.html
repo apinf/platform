@@ -1,0 +1,45 @@
+<!-- Copyright 2017 Apinf Oy
+  This file is covered by the EUPL license.
+  You may obtain a copy of the licence at
+  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+<template name="changeFeedbackVisibility">
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="changeFeedbackVisibilityItemModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title">
+            {{_ "feedback_change_visibility_header" }}
+          </h2>
+        </div>
+        <div class="modal-body">
+          {{# if toPublic }}
+            {{_ "feedback_changeAllVisibility_toPublic" }}
+          {{ else }}
+            {{_ "feedback_changeAllVisibility_toPrivate" }}
+          {{/ if }}
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-right">
+            <button id="cancel-change-visibility" class="btn btn-primary" data-dismiss="modal">
+              {{_ "feedback_changeAllVisibility_cancelButton_text" }}
+            </button>
+            <button id="confirm-change-visibility" class="btn btn-danger">
+              {{_ "feedback_changeAllVisibility_confirmButton_text" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

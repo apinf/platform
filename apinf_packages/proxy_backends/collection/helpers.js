@@ -19,7 +19,7 @@ ProxyBackends.helpers({
     const api = Apis.findOne(apiId);
 
     // placeholder for API name
-    let apiName;
+    let apiName = '';
 
     // Make sure API was found before accessing name property
     if (api) {
@@ -43,5 +43,22 @@ ProxyBackends.helpers({
     const path = 'apiUmbrella.url_matches[0].frontend_prefix';
 
     return _.get(this, path, '');
+  },
+  apiSlug () {
+    // Get API ID
+    const apiId = this.apiId;
+    // Get API
+    const api = Apis.findOne(apiId);
+
+    // placeholder for API slug
+    let apiSlug;
+
+    // Make sure API was found before accessing slug property
+    if (api) {
+      // Get API slug
+      apiSlug = api.slug;
+    }
+
+    return apiSlug;
   },
 });

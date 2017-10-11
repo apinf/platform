@@ -36,7 +36,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <p>
         {{_ 'dashboardOverviewStatisticNoData_text_noDataAvailable' }}
       </p>
-      <a href="{{ pathFor 'apiAnalyticPage' proxyBackendId=proxyBackend._id }}" class="pull-right">
+      <a href="{{ pathFor 'apiAnalyticPage' apiSlug=proxyBackend.apiSlug }}" class="pull-right">
         {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
       </a>
     </div>

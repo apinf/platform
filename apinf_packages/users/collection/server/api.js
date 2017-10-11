@@ -12,51 +12,19 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
+import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import Organizations from '/apinf_packages/organizations/collection';
+
+// APInf imports
+import descriptionUsers from '/apinf_packages/rest_apis/lib/descriptions/users_texts';
+import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 // Npm packages imports
 import _ from 'lodash';
 
 ManagementV1.swagger.meta.paths = {
-  '/login': {
-    post: {
-      tags: [
-        ManagementV1.swagger.tags.login,
-      ],
-      summary: 'Logging in.',
-      description: `
-   ### Logging in ###
-
-   By giving existing username and password you get login credentials,
-   which you can use in authenticating requests.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-
-      `,
-      produces: ['application/json'],
-      parameters: [
-        ManagementV1.swagger.params.login,
-      ],
-      responses: {
-        200: {
-          description: 'Logged in successfully',
-          schema: {
-            $ref: '#/definitions/loginResponse',
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-      },
-    },
-  },
+  '/login': Authentication.login,
+  '/logout': Authentication.logout,
 
   '/users': {
     get: {
@@ -64,31 +32,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'List and search users.',
-      description: `
-   ### Listing and searching Users ###
-
-   With this method the Admin can list Users (has access to all Users data)
-   or a non-Admin can list own data.
-
-   With query parameters Users can be filtered and the number and order of
-   returned list can be managed.
-
-   Sort criteria are following:
-   * by user's name: *username*
-   * by user account creation dates: *created_at*
-   * by organization name: *organization*
-
-   Parameters are optional and can be combined. Default value is to sort by ascending by username.
-
-   Example call:
-
-    GET /users?q=apinf&organization_id=<org_id>
-
-   Returns Users, who have string "apinf" either in username, company or email address
-   AND who belong to Organization identified with <org_id>.
-
-
-      `,
+      description: descriptionUsers.get,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.optionalSearch,
@@ -135,22 +79,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Adds a new user.',
-      description: `
-   ### Adding a new User ###
-
-   With this method a new user account is created.
-
-   Parameters:
-   * all parameters are mandatory
-   * *username* must be unique
-   * *email address* must be unique
-   * *password* must be at least 6 characters long
-
-   On a successful case a response message with HTTP code 201 is returned.
-   Payload contains the data of created User.
-
-
-      `,
+      description: descriptionUsers.post,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.userDataAdd,
@@ -187,20 +116,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Search User with userID.',
-      description: `
-  ### Searching Users with UserID ###
-
-   With this method an Admin user can list data of a any User identified with ID.
-   Also a non-Admin user can list own data.
-
-   Example call:
-
-    GET /users/<users id>
-
-   Returns data of user identified with <users id>, in case a match is found.
-
-
-      `,
+      description: descriptionUsers.getId,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.userId,
@@ -243,20 +159,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Remove Users one by one with userID.',
-      description: `
-   ### Removes the identified User ###
-
-   With this method an Admin user can remove user accounts. Also a non-Admin user
-   can remove own user account.
-
-   Example call:
-
-    DELETE /users/<users id>
-
-   Removes the user identified with <users id> and responses with HTTP code 204 without content.
-
-
-      `,
+      description: descriptionUsers.deleteId,
       parameters: [
         ManagementV1.swagger.params.userId,
       ],
@@ -289,20 +192,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'Update User\'s data.',
-      description: `
-   ### Updates data of a User indicated by user ID ###
-
-   With this method a user can edit own account.
-
-   Parameters:
-   * At least one parameter must be given.
-   * *Username* must be unique.
-   * *Password* must be at least 6 characters.
-
-
-   Note! Users needs a new login after password change in order to get new valid credentials.
-
-      `,
+      description: descriptionUsers.putId,
       parameters: [
         ManagementV1.swagger.params.userId,
         ManagementV1.swagger.params.userDataUpdate,
@@ -351,19 +241,7 @@ ManagementV1.swagger.meta.paths = {
         ManagementV1.swagger.tags.users,
       ],
       summary: 'List and search user based on addition date.',
-      description: `
-   ### Returns users based on addition date ###
-
-   Parameters are optional and they can be combined.
-
-   Example call:
-
-    GET /users/updates?since=7&organization_id=<org_id>
-
-   As a response is returned an array containing Users, which have been created within
-   last seven days and who are managers in Organization identified with <org_id>.
-
-      `,
+      description: descriptionUsers.getUpdates,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.since,
@@ -569,13 +447,7 @@ ManagementV1.addCollection(Meteor.users, {
         const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
 
         if (!userIsGettingOwnAccount && !userIsAdmin) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
         // Get ID of User to be fetched
@@ -591,13 +463,7 @@ ManagementV1.addCollection(Meteor.users, {
         // Check if user exists
         const user = Meteor.users.findOne(userId, options);
         if (!user) {
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'No user found with given UserID',
-            },
-          };
+          return errorMessagePayload(404, 'No user found with given UserID.');
         }
 
         // Array for Organization name and id
@@ -652,13 +518,7 @@ ManagementV1.addCollection(Meteor.users, {
           validateFields, 'username');
 
         if (!isValid) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "username" is erroneous',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "username" is erroneous.');
         }
 
         // Validate email address
@@ -666,24 +526,12 @@ ManagementV1.addCollection(Meteor.users, {
           validateFields, 'emails.$.address');
 
         if (!isValid) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "email" is erroneous',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "email" is erroneous.');
         }
 
         // PSW must be at least 6 characters long
         if (bodyParams.password.length < 6) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Password minimum length is 6',
-            },
-          };
+          return errorMessagePayload(400, 'Password minimum length is 6.');
         }
 
         // Does username already exist
@@ -696,13 +544,7 @@ ManagementV1.addCollection(Meteor.users, {
 
         // Either username or email is already in use
         if (userExists) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'User already exists',
-            },
-          };
+          return errorMessagePayload(400, 'User already exists.');
         }
 
         // Create a new user
@@ -738,13 +580,7 @@ ManagementV1.addCollection(Meteor.users, {
 
         // User must be either admin or modifying own account
         if (!userIsEditingOwnAccount && !userIsAdmin) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
         // Get ID of User to be removed
@@ -753,13 +589,7 @@ ManagementV1.addCollection(Meteor.users, {
         const user = Meteor.users.findOne(userId);
         if (!user) {
           // User didn't exist
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'No user found with given UserID',
-            },
-          };
+          return errorMessagePayload(404, 'No user found with given UserID.');
         }
 
         // Remove user from all Organizations
@@ -788,13 +618,7 @@ ManagementV1.addCollection(Meteor.users, {
 
         // Return error in case requestor is not editing own account
         if (!userIsEditingOwnAccount) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission.');
         }
         // Get ID of User
         const userId = this.urlParams.id;
@@ -802,13 +626,7 @@ ManagementV1.addCollection(Meteor.users, {
         const user = Meteor.users.findOne(userId);
         if (!user) {
           // User doesn't exist
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'No user found with given UserID',
-            },
-          };
+          return errorMessagePayload(404, 'No user found with given UserID.');
         }
 
         // Get data from body parameters
@@ -821,39 +639,21 @@ ManagementV1.addCollection(Meteor.users, {
         if (!bodyParams.username &&
             !bodyParams.company &&
             !bodyParams.password) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'No update parameters provided',
-            },
-          };
+          return errorMessagePayload(400, 'No update parameters provided.');
         }
 
         // Check error situations before modification
         if (bodyParams.username) {
           // Check if there already is a User by the same name
           if (Accounts.findUserByUsername(bodyParams.username)) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Username already exists',
-              },
-            };
+            return errorMessagePayload(400, 'Username already exists.');
           }
         }
         // Is there a new password
         if (bodyParams.password && (
             typeof bodyParams.password !== 'string' ||
             bodyParams.password.length < 5)) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Erroneous new password',
-            },
-          };
+          return errorMessagePayload(400, 'Erroneous new password.');
         }
 
         // Preparations for possible failure in DB write and rollback Needs
@@ -910,13 +710,7 @@ ManagementV1.addCollection(Meteor.users, {
           // Restore old password
           Meteor.users.update(userId, { $set: { 'services.password.bcrypt': previousPassword } });
         }
-        return {
-          statusCode: 400,
-          body: {
-            status: 'fail',
-            message: 'User update failed!',
-          },
-        };
+        return errorMessagePayload(400, 'User update failed!');
       },
     },
   },
@@ -986,13 +780,7 @@ ManagementV1.addRoute('users/updates', {
       options.fields = excludeFields;
 
       if (badQueryParameters) {
-        return {
-          statusCode: 400,
-          body: {
-            status: 'fail',
-            message: 'Bad query parameters',
-          },
-        };
+        return errorMessagePayload(400, 'Bad query parameters.');
       }
       // Get all users
       const userList = Meteor.users.find(query, options).fetch();

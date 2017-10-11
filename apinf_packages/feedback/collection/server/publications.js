@@ -17,3 +17,4 @@ Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
   // show feedbackvotes for single feedback
   return FeedbackVotes.find({ feedbackId });
 });
+

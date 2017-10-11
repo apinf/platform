@@ -13,48 +13,15 @@ import { Roles } from 'meteor/alanning:roles';
 import Apis from '/apinf_packages/apis/collection';
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
+import Authentication from '/apinf_packages/rest_apis/server/authentication';
+
+// APInf imports
+import descriptionApis from '/apinf_packages/rest_apis/lib/descriptions/apis_texts';
+import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 CatalogV1.swagger.meta.paths = {
-  '/login': {
-    post: {
-      tags: [
-        CatalogV1.swagger.tags.login,
-      ],
-      summary: 'Logging in.',
-      description: `
-   ### Logging in ###
-
-   By giving existing username and password you get login credentials,
-   which you can use in authenticating requests.
-
-   login response parameter value | to be filled into request header field
-   :--- | :---
-   auth-token-value | X-Auth-Token
-   user-id-value | X-User-Id
-
-
-      `,
-      produces: ['application/json'],
-      parameters: [
-        CatalogV1.swagger.params.login,
-      ],
-      responses: {
-        200: {
-          description: 'Logged in successfully',
-          schema: {
-            $ref: '#/definitions/loginResponse',
-          },
-        },
-        400: {
-          description: 'Bad Request. Erroneous or missing parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-      },
-    },
-  },
-
+  '/login': Authentication.login,
+  '/logout': Authentication.logout,
 };
 
 // Request /rest/v1/apis for Apis collection
@@ -63,32 +30,14 @@ CatalogV1.addCollection(Apis, {
     authRequired: false,
   },
   endpoints: {
-    // Return a list of all public entities within the collection
+    // Response contains a list of all public entities within the collection
     getAll: {
       swagger: {
         tags: [
           CatalogV1.swagger.tags.api,
         ],
         summary: 'List and search public API.',
-        description: `
-   ### List and search public APIs ###
-
-   Parameters are optional and also combinations of parameters can be used.
-
-   Example call:
-
-       GET /apis?limit=200&managedAPIs=true
-
-   Result: returns maximum of 200 APIs which are managed by requesting user.
-
-   -----
-
-   Note! The field X-User-Id in message header can be used
-   * to contain required Manager's user ID with parameter managedAPIs provided
-   * to contain Admin user's ID, when indicated, that user is Admin
-
-        `,
-
+        description: descriptionApis.getAll,
         parameters: [
           CatalogV1.swagger.params.optionalSearch,
           CatalogV1.swagger.params.organizationApi,
@@ -142,13 +91,7 @@ CatalogV1.addCollection(Apis, {
         if (queryParams.managedAPIs === 'true') {
           // Response with error in case managerId is missing from header
           if (!managerId) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Bad query parameters. Manager ID expected in header (X-User-Id).',
-              },
-            };
+            return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id).');
           }
 
           // Set condition for a list of managed APIs
@@ -162,13 +105,7 @@ CatalogV1.addCollection(Apis, {
 
           // Make sure Organization exists
           if (!organization) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Bad query parameters. Organization not found.',
-              },
-            };
+            return errorMessagePayload(400, 'Bad query parameters. Organization not found.');
           }
           // Get list of managed API IDs
           query._id = { $in: organization.managedApiIds() };
@@ -204,17 +141,27 @@ CatalogV1.addCollection(Apis, {
           ];
         }
 
+        // Create new API list that is based on APIs collection with extended field logoUrl
+        const apiList = Apis.find(query, options).map((api) => {
+          // Make sure logo is uploaded
+          if (api.apiLogoFileId) {
+            // Create a new field to store logo URL
+            api.logoUrl = api.logoUrl();
+          }
+          return api;
+        });
+
         // Construct response
         return {
           statusCode: 200,
           body: {
             status: 'success',
-            data: Apis.find(query, options).fetch(),
+            data: apiList,
           },
         };
       },
     },
-    // Return the entity with the given :id
+    // Response contains the entity with the given :id
     get: {
       authRequired: false,
       swagger: {
@@ -222,18 +169,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Fetch API with specified ID.',
-        description: `
-   ### Fetching API with specified ID ###
-
-   Returns the API with specified ID, if a match is found.
-
-   Example call:
-
-        GET /apis/:id
-
-   Result: returns the data of API identified with :id.
-
-        `,
+        description: descriptionApis.get,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -253,10 +189,60 @@ CatalogV1.addCollection(Apis, {
               },
             },
           },
+          204: {
+            description: 'No data to return',
+          },
           404: {
             description: 'API is not Found',
           },
         },
+      },
+      action () {
+        const apiId = this.urlParams.id;
+
+        // Fetch the API matching with condition
+        const api = Apis.findOne({ _id: apiId });
+        // Return error response, it API is not found.
+        if (!api) {
+          return errorMessagePayload(404, 'API with specified ID is not found.');
+        }
+
+        // Only Public APIs are available for non-admin/non-manager user
+        if (api.isPublic === false) {
+          let displayPrivateAPI = false;
+          // Get requestor ID from header
+          const requestorId = this.request.headers['x-user-id'];
+
+          if (requestorId) {
+            // Check if requestor is administrator
+            const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+            // Check if requestor is manager
+            const requestorIsManager = api.currentUserCanManage(requestorId);
+            displayPrivateAPI = requestorIsAdmin || requestorIsManager;
+          }
+          if (!displayPrivateAPI) {
+            return {
+              statusCode: 204,
+              body: {
+                status: 'success',
+              },
+            };
+          }
+        }
+
+        // Extend API structure with correct link to API logo
+        if (api.apiLogoFileId) {
+          api.logoUrl = api.logoUrl();
+        }
+
+        // Construct response
+        return {
+          statusCode: 200,
+          body: {
+            status: 'success',
+            data: api,
+          },
+        };
       },
     },
     // Create a new API
@@ -267,19 +253,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Add new API to catalog.',
-        description: `
-   ### Adding a new API to Catalog ###
-
-   Adds an API to catalog. On success, returns the added API object.
-
-
-   Parameters
-   * mandatory: name and url
-   * length of description must not exceed 1000 characters
-   * value of lifecycleStatus must be one of example list
-   * allowed values for parameter isPublic are "true" and "false"
-     * if isPublic is set false, only admin or manager can see the API
-        `,
+        description: descriptionApis.post,
         parameters: [
           CatalogV1.swagger.params.api,
         ],
@@ -329,13 +303,7 @@ CatalogV1.addCollection(Apis, {
 
         // Name is a required field
         if (!this.bodyParams.name) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "name" is mandatory',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "name" is mandatory.');
         }
 
         // Validate name
@@ -343,24 +311,12 @@ CatalogV1.addCollection(Apis, {
           validateFields, 'name');
 
         if (!isValid) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "name" is erroneous',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "name" is erroneous.');
         }
 
         // URL is a mandatory field
         if (!this.bodyParams.url) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "url" is mandatory',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "url" is mandatory.');
         }
 
         // Validate URL
@@ -368,24 +324,12 @@ CatalogV1.addCollection(Apis, {
           validateFields, 'url');
 
         if (!isValid) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "URL" is erroneous',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "url" is erroneous.');
         }
 
         // Check if API with same name already exists
         if (Apis.findOne({ name: this.bodyParams.name })) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Duplicate: API with same name already exists',
-            },
-          };
+          return errorMessagePayload(400, 'Duplicate: API with same name already exists.');
         }
 
 
@@ -395,13 +339,7 @@ CatalogV1.addCollection(Apis, {
             validateFields, 'description');
 
           if (!isValid) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Description length must not exceed 1000 characters',
-              },
-            };
+            return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
           }
         }
 
@@ -411,13 +349,7 @@ CatalogV1.addCollection(Apis, {
             validateFields, 'lifecycleStatus');
 
           if (!isValid) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Parameter lifecycleStatus has erroneous value',
-              },
-            };
+            return errorMessagePayload(400, 'Parameter lifecycleStatus has erroneous value.');
           }
         }
 
@@ -428,13 +360,7 @@ CatalogV1.addCollection(Apis, {
           } else if (this.bodyParams.isPublic === 'false') {
             this.bodyParams.isPublic = false;
           } else {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Parameter isPublic has erroneous value',
-              },
-            };
+            return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
 
@@ -446,13 +372,7 @@ CatalogV1.addCollection(Apis, {
 
         // Did insert fail
         if (!apiId) {
-          return {
-            statusCode: 500,
-            body: {
-              status: 'fail',
-              message: 'Inserting API into database failed',
-            },
-          };
+          return errorMessagePayload(500, 'Inserting API into database failed.');
         }
 
         // Give user manager role
@@ -478,19 +398,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Update API.',
-        description: `
-   ### Update an API ###
-
-   Admin or API manager can update an API in catalog.
-   On success, returns the updated API object.
-
-   Parameters
-   * length of description must not exceed 1000 characters
-   * value of lifecycleStatus must be one of example list
-   * allowed values for parameter isPublic are "true" and "false"
-     * if isPublic is set false, only admin or manager can see the API
-
-        `,
+        description: descriptionApis.put,
         parameters: [
           CatalogV1.swagger.params.apiId,
           CatalogV1.swagger.params.api,
@@ -541,24 +449,12 @@ CatalogV1.addCollection(Apis, {
 
         // API doesn't exist
         if (!api) {
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'API with specified ID is not found',
-            },
-          };
+          return errorMessagePayload(404, 'API with specified ID is not found.');
         }
 
         // API exists but user can not manage
         if (!api.currentUserCanManage(userId)) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'You do not have permission for editing this API',
-            },
-          };
+          return errorMessagePayload(403, 'You do not have permission for editing this API.');
         }
 
         // validate values
@@ -573,13 +469,7 @@ CatalogV1.addCollection(Apis, {
             validateFields, 'description');
 
           if (!isValid) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Description length must not exceed 1000 characters',
-              },
-            };
+            return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
           }
         }
 
@@ -589,13 +479,7 @@ CatalogV1.addCollection(Apis, {
             validateFields, 'lifecycleStatus');
 
           if (!isValid) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Parameter lifecycleStatus has erroneous value',
-              },
-            };
+            return errorMessagePayload(400, 'Parameter lifecycleStatus has erroneous value.');
           }
         }
 
@@ -606,13 +490,7 @@ CatalogV1.addCollection(Apis, {
           } else if (this.bodyParams.isPublic === 'false') {
             this.bodyParams.isPublic = false;
           } else {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Parameter isPublic has erroneous value',
-              },
-            };
+            return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
 
@@ -639,19 +517,7 @@ CatalogV1.addCollection(Apis, {
           CatalogV1.swagger.tags.api,
         ],
         summary: 'Delete API.',
-        description: `
-   ### Deleting an API ###
-
-   Admin user or API manager can delete an identified API from the Catalog,
-
-
-   Example call:
-
-        DELETE /apis/<API id>
-
-   Result: deletes the API identified with <API id> and responds with HTTP code 204.
-
-        `,
+        description: descriptionApis.delete,
         parameters: [
           CatalogV1.swagger.params.apiId,
         ],
@@ -687,24 +553,12 @@ CatalogV1.addCollection(Apis, {
         // API must exist
         if (!api) {
           // API doesn't exist
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'API with specified ID is not found',
-            },
-          };
+          return errorMessagePayload(404, 'API with specified ID is not found.');
         }
 
         // User must be able to manage API
         if (!api.currentUserCanManage(userId)) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission to remove this API',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission to remove this API.');
         }
 
         // Remove API document

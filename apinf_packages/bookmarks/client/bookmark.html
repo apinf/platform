@@ -7,14 +7,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{# if isBookmarked }}
   <button class="bookmark-button bookmark bookmarked">
     <i class="fa fa-bookmark"></i>
-    {{# unless catalogueView }}
+    {{# unless catalogView }}
     &nbsp;{{_ "bookmark_buttonText_unbookmark" }}
     {{/ unless }}
   </button>
   {{ else }}
   <button class="bookmark-button bookmark">
     <i class="fa fa-bookmark-o"></i>
-    {{# unless catalogueView }}
+    {{# unless catalogView }}
     &nbsp;{{_ "bookmark_buttonText_bookmark" }}
     {{/ unless }}
   </button>
