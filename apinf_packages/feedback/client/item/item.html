@@ -5,74 +5,88 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="feedbackItem">
   {{# if item.currentUserCanSee }}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="row list-group-item feedback-list-item">
-          <div class="col-md-2 feedback-voting">
-            <span id="up-vote-{{ item._id }}" class="fa fa-lg fa-arrow-up up-vote {{ userUpvote }}"></span>
-            <span class="badge sum-of-votes">
-              {{ item.sumOfVotes }}
+    <div class="api-feedback-item {{ checkIsPrivate }}">
+      <div class="row">
+        <div class="col-md-10">
+          {{# unless item.isPublic }}
+            <span class="private-feedback">
+                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
             </span>
-            <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-arrow-down down-vote {{ userDownvote }}"></span>
+          {{/ unless }}
+          <p class="feedback-topic">
+            {{ item.topic }}&nbsp;
+            <span class="badge">
+              {{ feedbackType }}
+            </span>
+            </p>
+          <div class="feedback-author">
+            <p>
+              <b>
+                {{ item.author }}
+              </b>
+              {{ relativeTimeStamp item.createdAt }}
+            </p>
           </div>
-          <div class="col-md-9 form-inline">
-            <div class="form-group feedback-type">
-              <span>
-                <strong>{{_ "feedbackItem_type" }}:&nbsp;</strong>
-              </span>
-              <span class="badge">
-                {{ feedbackType }}
-              </span>
-            </div>
-            <div class="form-group feedback-topic">
-              <span>
-                <strong>{{_ "feedbackItem_topic" }}:&nbsp;</strong>
-              </span>
-              <span>
-                {{ item.topic }}
-              </span>
-              {{# unless item.isPublic }}
-                {{# if item.currentUserCanChangeVisibility }}
-                  <span class="fa fa-lg fa-eye-slash private-icon-feedback"></span>
-                {{/ if }}
-              {{/ unless }}
-            </div>
-          </div>
-          {{# if item.currentUserCanEdit }}
-          <div id="feedback-item-actions" class="btn-group pull-right">
-            <button class="edit-feedback-item btn btn-primary btn-xs">
-              {{_ "feedbackItem_editButton_text" }}
-            </button>
-            {{# if item.currentUserCanChangeVisibility }}
-              <button class="visibility-feedback-item btn btn-info btn-xs">
-                  {{# if item.isPublic }}
-                    {{_ "feedbackItem_visibilityButton_makePrivate" }}
-                  {{ else }}
-                    {{_ "feedbackItem_visibilityButton_makePublic" }}
-                  {{/ if }}
-              </button>
-            {{/ if }}
-            <button class="delete-feedback-item btn btn-danger btn-xs">
-              {{_ "feedbackItem_deleteButton_text" }}
-            </button>
-          </div>
-          {{/ if }}
         </div>
+        {{# if item.currentUserCanChangeVisibility }}
+          <div class="col-md-2">
+            <a
+              href="#"
+              class="dropdown-toggle pull-right"
+              data-toggle="dropdown"
+              role="button"
+              id="feedback-menu"
+              aria-haspopup="true"
+              aria-expanded="false">
+              <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
+            </a>
+            <ul id="feedback-menu-options" class="dropdown-menu pull-right">
+              <li>
+                 <a href="#" class="edit-feedback-item">
+                  {{_ "feedbackItem_editButton_text" }}
+                </a>
+              </li>
+              <li>
+                <a href="#" class="visibility-feedback-item">
+                    {{# if item.isPublic }}
+                      {{_ "feedbackItem_visibilityButton_makePrivate" }}
+                    {{ else }}
+                      {{_ "feedbackItem_visibilityButton_makePublic" }}
+                    {{/ if }}
+                </a>
+              </li>
+              <li>
+                <a href="#" class="delete-feedback-item">
+                  {{_ "feedbackItem_deleteButton_text" }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        {{/ if }}
       </div>
-      <div class="panel-body">
+      
+      <div class="feedback-message">
         <p>
           {{ item.message }}
         </p>
       </div>
-      <div class="panel-footer">
-        {{_ "feedbackItem_sentBy_text" }}
-        <b>
-          {{ item.author }}
-        </b>
-        <i>
-          {{ relativeTimeStamp item.createdAt }}
-        </i>
+      <div class="row">
+        <div class="col-md-10">
+          <button id="{{item._id}}" class="pull-left feedback-reply">
+            Reply
+          </button>
+        </div>
+        <div class="col-md-2">
+          <div class="pull-right">
+            <span id="up-vote-{{ item._id }}" class="fa fa-lg fa-angle-up up-vote {{ userUpvote }}"></span>
+            <span class="sum-of-votes">
+              {{ item.sumOfVotes }}
+            </span>
+            <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-angle-down down-vote {{ userDownvote }}"></span>
+          </div>
+        </div>
       </div>
+      {{> feedbackComment item=item }}
     </div>
   {{/ if }}
 </template>

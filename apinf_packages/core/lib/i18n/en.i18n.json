@@ -313,6 +313,9 @@
   "emailTemplates_verifyEmail_message": "To verify your email address visit the following link:",
   "emailTemplates_verifyEmail_title": "Verify Your Email Address",
   "emailVerification_successMessage": "Email verified! Thanks!",
+  "entityComment_sendComment": "Send",
+  "entityComment_cancelComment": "Cancel",
+  "entityCommentm_successMessage": "Thank you! Your feedback has been successfully sent.",
   "esData_notFound": "There are no API usage statistics available.",
   "errorsStatisticTable_title_errorsStatistic": "Errors Statistic",
   "errorsStatisticTable_columnTitle_date": "Date",
@@ -787,6 +790,9 @@
         "label": "Message",
         "placeholder": "Your message"
       }
+    },
+    "entityComment": {
+      "comment": "Comment"
     },
     "feedback": {
       "topic": {

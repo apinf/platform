@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -18,15 +19,26 @@ import moment from 'moment';
 // Collection imports
 import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 
+const feedbackData = new ReactiveVar(false);
+
 Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object
   const feedbackId = Template.currentData().item._id;
 
   // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
+  // this.subscribe('getCommentForSingleFeedback', feedbackId);
 });
 
 Template.feedbackItem.helpers({
+  checkIsPrivate () {
+    // Check it is private
+    if (!Template.currentData().item.isPublic) {
+      // If private, then show background yellow by class
+      return 'private-feedback-background';
+    }
+    return '';
+  },
   feedbackType () {
     // Return translation for feedback message type
 
@@ -133,4 +145,15 @@ Template.feedbackItem.events({
     // Set the new visibility of feedback
     Meteor.call('changeFeedbackVisibility', item._id, !item.isPublic);
   },
+  'click .feedback-reply': () => {
+    $('.feedback-reply-form').css('display', 'none');
+    const commentData = {
+      postId: Template.currentData().item._id,
+      type: 'Feedback',
+    };
+    feedbackData.set(commentData);
+    $(`#feedback-reply-${Template.currentData().item._id}`)
+      .css('display', 'block');
+  },
 });
+export default feedbackData;

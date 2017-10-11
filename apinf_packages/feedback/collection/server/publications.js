@@ -9,6 +9,7 @@ import { check } from 'meteor/check';
 
 // Collection imports
 import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
+import EntityComment from '/apinf_packages/entityComment/collection';
 
 Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
   // Make sure apiBackendId is a String
@@ -16,5 +17,12 @@ Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
 
   // show feedbackvotes for single feedback
   return FeedbackVotes.find({ feedbackId });
+});
+
+Meteor.publish('getCommentForSingleFeedback', (postId) => {
+  // Make sure apiBackendId is a String
+  check(postId, String);
+  // show feedbackvotes for single feedback
+  return EntityComment.find({ postId });
 });
 

@@ -134,6 +134,11 @@ Apis.schema = new SimpleSchema({
     optional: true,
     defaultValue: true,
   },
+  feedbackIsPublic: {
+    type: Boolean,
+    optional: true,
+    defaultValue: true,
+  },
 });
 
 // Enable translations (i18n)
