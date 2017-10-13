@@ -34,17 +34,18 @@ Template.organizationManagersList.helpers({
 
     return organizationManagers;
   },
-  managerIsCurrentUser () {
-    // Used to hide the delete button, so user cannot remove themselves
+  hasMultipleManagers () {
+    // Used to hide the delete button, when the organization has only one manager
 
-    // Get ID of current Manager
-    const currentManagerId = this._id;
+    const organization = Template.parentData().organization;
 
-    // Get ID of logged in user
-    const currentUserId = Meteor.userId();
+    // Get manager count for currently selected organization
+    const organizationManagerCount = Meteor.users.find({
+      _id: { $in: organization.managerIds },
+    }).count();
 
-    // Check if the Manager ID and User ID match
-    return (currentUserId === currentManagerId);
+    // Return a boolean indicating if the organization has multiple managers
+    return organizationManagerCount > 1;
   },
 });
 
