@@ -6,6 +6,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Mongo } from 'meteor/mongo';
 
-
 const EntityComment = new Mongo.Collection('entityComment');
+
 export default EntityComment;

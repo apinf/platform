@@ -4,15 +4,20 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="feedbackCommentItem">
-    <div class="feedback-comment-item">
+  {{# if Template.subscriptionsReady }}
+    <div class="feedback-comment-item" id="reply-{{item._id}}">
       <div class="feedback-author">
         <p>
           <b>
             {{ item.author }}
           </b>
           {{ relativeTimeStamp item.createdAt }}&nbsp;
-          <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;
-          {{ item.postAuthor }}
+          {{# if item.postAuthor }}
+            <span class="post-author" id={{postId}}>
+              <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;
+              {{ item.postAuthor }}
+            </span>
+          {{/ if }}
         </p>
       </div>
       
@@ -21,11 +26,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{ item.comment }}
         </p>
       </div>
-      <div class="reply-to-feedback-reply">
-        <button id="{{item._id}}" class="pull-left comment-reply">
-          Reply
-        </button>
-      </div>
-      {{> commentForm }}
+      {{# if currentUser }}
+        <div class="reply-to-feedback-reply">
+          {{# if item.currentUserCanReply }}
+            <div class="comment-button">
+              <button class="pull-left comment-reply">
+                {{_ "entityComment_replyComment" }}
+              </button>
+            </div>
+          {{/ if }}
+          {{# if item.currentUserCanEdit }}
+            <div class="comment-button">
+              <button class="pull-left comment-edit">
+                {{_ "entityComment_editComment" }}
+              </button>
+            </div>
+          {{/ if }}
+          {{# if item.currentUserCanDelete }}
+            <div class="comment-button">
+              <button class="pull-left comment-delete">
+                {{_ "entityComment_deleteComment" }}
+              </button>
+            </div>
+          {{/ if }}
+        </div>
+        {{> commentForm type='commentReply' item=item formType=formType }}
+      {{/ if }}
     </div>
+  {{/ if }}
 </template>

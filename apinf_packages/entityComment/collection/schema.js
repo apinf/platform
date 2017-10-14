@@ -29,7 +29,6 @@ EntityComment.schema = new SimpleSchema({
   },
   commentedOn: {
     type: String,
-    denyUpdate: true,
     optional: true,
   },
   authorId: {
@@ -57,6 +56,18 @@ EntityComment.schema = new SimpleSchema({
         this.unset();
       }
       return now;
+    },
+    denyUpdate: true,
+  },
+  updated_at: {
+    type: Date,
+    optional: true,
+    autoValue () {
+      let value;
+      if (this.isUpdate) {
+        value = new Date();
+      }
+      return value;
     },
   },
 });

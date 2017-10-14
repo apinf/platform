@@ -313,9 +313,12 @@
   "emailTemplates_verifyEmail_message": "To verify your email address visit the following link:",
   "emailTemplates_verifyEmail_title": "Verify Your Email Address",
   "emailVerification_successMessage": "Email verified! Thanks!",
-  "entityComment_sendComment": "Send",
   "entityComment_cancelComment": "Cancel",
-  "entityCommentm_successMessage": "Thank you! Your feedback has been successfully sent.",
+  "entityComment_deleteComment": "Delete",
+  "entityComment_editComment": "Edit",
+  "entityComment_replyComment": "Reply",
+  "entityComment_sendComment": "Send",
+  "entityComment_successMessage": "Thank you! Your Comment has been successfully sent.",
   "esData_notFound": "There are no API usage statistics available.",
   "errorsStatisticTable_title_errorsStatistic": "Errors Statistic",
   "errorsStatisticTable_columnTitle_date": "Date",
@@ -341,6 +344,7 @@
   "feedback_main_title": "Feedback and report messages",
   "feedback_no_feedback": "No feedback, yet.",
   "feedback_remove_button": "Remove",
+  "feedback_replyFeedback": "Reply",
   "feedback_sendFeedback": "Send",
   "feedback_view_button": "View",
   "feedback_mark_all_feedbacks_as_private": "Make all feedback private",
@@ -792,7 +796,10 @@
       }
     },
     "entityComment": {
-      "comment": "Comment"
+      "comment": {
+        "label": "Comment",
+        "placeholder": "Your comment"
+      }
     },
     "feedback": {
       "topic": {

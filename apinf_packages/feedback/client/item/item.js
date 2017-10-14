@@ -5,7 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -19,15 +18,15 @@ import moment from 'moment';
 // Collection imports
 import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 
-const feedbackData = new ReactiveVar(false);
-
 Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object
   const feedbackId = Template.currentData().item._id;
-
+  // Get author Id of currnet feedback object
+  const authorId = Template.currentData().item.authorId;
+  // Fetch author's username of this feedback
+  this.subscribe('getUsernameForSingleComment', authorId);
   // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
-  // this.subscribe('getCommentForSingleFeedback', feedbackId);
 });
 
 Template.feedbackItem.helpers({
@@ -93,6 +92,17 @@ Template.feedbackItem.helpers({
 
     return moment(givenTimeStamp).locale(language).fromNow();
   },
+  checkVote (vote) {
+    // check vote is postive
+    if (vote > 0) {
+      // return positive vote class
+      return 'positive-vote';
+    } else if (vote < 0) {
+      // return negative vote class
+      return 'negative-vote';
+    }
+    return 'no-vote';
+  },
 });
 
 Template.feedbackItem.events({
@@ -147,13 +157,7 @@ Template.feedbackItem.events({
   },
   'click .feedback-reply': () => {
     $('.feedback-reply-form').css('display', 'none');
-    const commentData = {
-      postId: Template.currentData().item._id,
-      type: 'Feedback',
-    };
-    feedbackData.set(commentData);
     $(`#feedback-reply-${Template.currentData().item._id}`)
       .css('display', 'block');
   },
 });
-export default feedbackData;

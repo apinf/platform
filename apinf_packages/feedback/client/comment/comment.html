@@ -5,8 +5,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="feedbackComment">
   <div class="">
-    {{ > commentForm }}
-   
+    {{# if currentUser }}
+      {{ > commentForm type='feedbackReply' item=item formType='insert' }}
+    {{/ if }}
     <div class="feedback-comment-list"> 
       {{> feedbackCommentList feedback=item }}
     </div>

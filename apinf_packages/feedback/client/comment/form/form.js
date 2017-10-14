@@ -8,24 +8,37 @@ import { Template } from 'meteor/templating';
 
 // Collection imports
 import EntityComment from '/apinf_packages/entityComment/collection';
-import feedbackData from '../../item/item.js';
 
 Template.commentForm.helpers({
   entityCommentCollection () {
     // Return a reference to Entity comment collection, for AutoForm
     return EntityComment;
   },
+  commentFormType () {
+    return this.formType;
+  },
+  comment () {
+    let commentData;
+    if (this.type === 'commentReply') {
+      commentData = {
+        postId: this.item.postId,
+        type: this.item.type,
+        commentedOn: this.item._id,
+      };
+    } else {
+      commentData = {
+        postId: this.item._id,
+        type: 'Feedback',
+        commentedOn: '',
+      };
+    }
+    return commentData;
+  },
 });
 
 
 Template.commentForm.events({
   'click .cancel-comment-reply': () => {
-    // Get postId either from comment or feedback
-    const postId = feedbackData.get().commentedOn ?
-      feedbackData.get().commentedOn
-    :
-      feedbackData.get().postId;
-    feedbackData.set(false);
-    $(`#feedback-reply-${postId}`).css('display', 'none');
+    $('.feedback-reply-form').css('display', 'none');
   },
 });

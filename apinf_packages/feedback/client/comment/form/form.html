@@ -8,9 +8,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{# autoForm
       id="commentForm"
       collection=entityCommentCollection
-      type="insert"
+      type=commentFormType
     }}
-      
+      {{> afQuickField name='postId' value=comment.postId type='hidden' }}
+      {{> afQuickField name='type' value=comment.type type='hidden' }}
+      {{> afQuickField name='commentedOn' value=comment.commentedOn type='hidden' }}
       {{> afQuickField name='comment' rows=4 }}
       <div class="pull-right">
         <button type="button" class="cancel-comment-reply">

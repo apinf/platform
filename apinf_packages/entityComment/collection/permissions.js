@@ -11,30 +11,25 @@ import EntityComment from './';
 EntityComment.allow({
   insert (userId) {
     // Only allow logged in user to comment
-    if (userId) {
-      return true;
-    }
-    return false;
+    return !!(userId);
   },
   update (userId, entityComment) {
     // only allow user to update own comment
-    if (userId && entityComment && entityComment.authorId &&
-      userId === entityComment.authorId) {
-      return true;
-    }
-    return false;
+    const authorId = entityComment && entityComment.authorId;
+    // Make sure user is logged and author of current entity
+    return !!(userId && userId === authorId);
   },
   remove (userId, entityComment) {
     if (entityComment) {
-      /* 1. Allow user to remove own comment */
-      if (userId && entityComment.authorId &&
-        userId === entityComment.authorId) {
+      /* Allow admins & API owners/managers remove comments */
+      const authorId = entityComment && entityComment.authorId;
+      if (userId && userId === authorId) {
         return true;
       }
-      let api = {};
+      let api;
+
       switch (entityComment.type) {
         case 'Feedback': {
-          /* 2. Allow admins & API owners/managers remove comments */
           // Get feedback by feedbackId of the feedback comment
           const feedback = Feedback.findOne(entityComment.postId);
           if (feedback) {

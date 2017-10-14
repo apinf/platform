@@ -8,8 +8,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 import EntityComment from '/apinf_packages/entityComment/collection';
+import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 
 Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
   // Make sure apiBackendId is a String
@@ -20,9 +20,15 @@ Meteor.publish('getAllVotesForSingleFeedback', (feedbackId) => {
 });
 
 Meteor.publish('getCommentForSingleFeedback', (postId) => {
-  // Make sure apiBackendId is a String
+  // Make sure feedbackId is a String
   check(postId, String);
-  // show feedbackvotes for single feedback
+  // show comment for single feedback
   return EntityComment.find({ postId });
 });
 
+Meteor.publish('getUsernameForSingleComment', (userId) => {
+  // Make sure userId is a String
+  check(userId, String);
+  // show author's username for single comment/feedback
+  return Meteor.users.find(userId);
+});

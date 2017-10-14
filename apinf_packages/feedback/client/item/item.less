@@ -12,6 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   display: inline-block;
   vertical-align: middle;
   line-height: 0px;
+  font-size: 16px;
 }
 
 .visibility-feedback-item {
@@ -33,16 +34,22 @@ div.feedback-message {
   margin: 10px 0px;
 }
 
+div.feedback-message > p {
+  font-size: 14px;
+}
+
 .feedback-author > p {
   color: #9b9b9b;
+  font-size: 12px;
 }
 
 .feedback-author > p > b {
   color: #333;
+  font-size: 14px;
 }
 
 .api-feedback-item { 
-  border-bottom: 1px solid #e9e8e8;
+  border-bottom: 1px solid #d7d7d7;
   padding: 10px 0px;
 }
 
@@ -55,6 +62,7 @@ button.feedback-reply {
   background: transparent;
   border: none;
   color: #9b9b9b;
+  font-size: 14px;
   padding: 0px;
   border-bottom: 1px dashed #9b9b9b;
   margin-bottom: 1em
@@ -62,10 +70,30 @@ button.feedback-reply {
 
 span.private-feedback > i {
   display: inline-block;
-  font-size:15px;
+  font-size:16px;
   margin-right: 5px;
 }
 
 .private-feedback-background {
   background-color: #fffff4;
+}
+
+.up-vote:hover {
+  color: #CCEEA7;
+}
+
+.down-vote:hover {
+  color: #EDA6A6;
+}
+
+.positive-vote {
+  background-color: #CCEEA7;
+}
+
+.negative-vote {
+  background-color: #EDA6A6; 
+}
+
+.no-vote {
+  background-color: #EEEEEE
 }

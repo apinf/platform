@@ -12,23 +12,46 @@ import EntityComment from './';
 
 EntityComment.helpers({
   author () {
-    // Fetch only the author's username for current feedback
+    // Fetch only the author's username for current comment/feedback
     const author = Meteor.users.findOne(this.authorId);
-
     return author.username;
   },
   postAuthor () {
     let userId = '';
     if (this.commentedOn) {
       const entityComment = EntityComment.findOne(this.commentedOn);
-      userId = entityComment.authorId;
+      if (entityComment) {
+        userId = entityComment.authorId;
+      }
     } else {
       const feedback = Feedback.findOne(this.postId);
-      userId = feedback.authorId;
+      if (feedback) {
+        userId = feedback.authorId;
+      }
     }
-    // Fetch only the post Author's username for current feedback's comment
-    const postAuthor = Meteor.users.findOne(userId);
+    if (userId) {
+      // Fetch only the post Author's username for current feedback's comment
+      const postAuthor = Meteor.users.findOne(userId);
 
-    return postAuthor.username;
+      return postAuthor.username;
+    }
+    return false;
+  },
+  currentUserCanReply () {
+    // Get current userId
+    const userId = Meteor.userId();
+
+    return !!(userId !== this.authorId);
+  },
+  currentUserCanEdit () {
+    // Get current userId
+    const userId = Meteor.userId();
+    return !!(userId === this.authorId);
+  },
+  currentUserCanDelete () {
+    // Fetch respective feedback
+    const feedback = Feedback.findOne(this.postId);
+
+    return feedback && feedback.currentUserCanChangeVisibility();
   },
 });

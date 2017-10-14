@@ -11,8 +11,9 @@ import { check } from 'meteor/check';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
-import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 import Apis from '/apinf_packages/apis/collection';
+import EntityComment from '/apinf_packages/entityComment/collection';
+import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 import Feedback from '../collection';
 
 Meteor.methods({
@@ -44,7 +45,10 @@ Meteor.methods({
     // 1. Remove feedback votes
     FeedbackVotes.remove({ feedbackId: feedbackItemId });
 
-    // 2. Remove feedback item
+    // 2. Remove feedback comments
+    EntityComment.remove({ postId: feedbackItemId });
+
+    // 3. Remove feedback item
     Feedback.remove(feedbackItemId);
   },
   submitVote (feedbackId, vote) {
@@ -91,5 +95,28 @@ Meteor.methods({
         TAPi18n.__('apinf_usernotloggedin_error')
       );
     }
+  },
+  deleteComment (commentId) {
+    // Make sure commentId is a string
+    check(commentId, String);
+
+    // Create a array variable for storing comment Ids
+    const commentIds = [];
+
+    // fetch all reply
+    const childComments = function (id) {
+      commentIds.push(id);
+      // fetch reply of reply
+      const comments = EntityComment.find({ commentedOn: id }).fetch();
+      comments.map((comment) => {
+        return childComments(comment._id);
+      });
+    };
+
+    // call function for main comment which initate to delete
+    childComments(commentId);
+
+    // Delete comment and all replis on that comment
+    EntityComment.remove({ _id: { $in: commentIds } });
   },
 });
