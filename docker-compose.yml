@@ -26,6 +26,7 @@ services:
       - "3002:3002"
     depends_on:
       - ssl
+      - mongo
     links:
       - elasticsearch:elasticsearch.docker
   mongo:
