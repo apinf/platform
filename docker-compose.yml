@@ -3,7 +3,6 @@ services:
   apinf:
     image: apinf/platform
     restart: always
-    mem_limit: 300m
     env_file:
       - 'docker/apinf/env'
     environment:
@@ -16,7 +15,6 @@ services:
   apiumbrella:
     image: nrel/api-umbrella:0.13.0
     restart: always
-    mem_limit: 800m
     command: bash -c "apt-get update && apt-get install -qq -y --no-install-recommends curl && api-umbrella run"
     volumes:
       - ./docker/api-umbrella/config:/etc/api-umbrella
@@ -32,7 +30,6 @@ services:
       - elasticsearch:elasticsearch.docker
   mongo:
     restart: always
-    mem_limit: 200m
     image: mongo:3.2.6
     command: --storageEngine wiredTiger
   ssl:
@@ -52,10 +49,8 @@ services:
   elasticsearch:
     image: elasticsearch:2.4
     restart: always
-    mem_limit: 300m
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-    command: elasticsearch -Des.index.max_result_window=50000
 volumes:
     letsencrypt: {}
     letsencrypt_backups: {}
