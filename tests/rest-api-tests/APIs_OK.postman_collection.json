@@ -1,17 +1,11 @@
 {
-	"variables": [],
 	"info": {
 		"name": "APIs_OK",
-		"_postman_id": "2d687006-0622-b7fb-b971-bb055f077f66",
+		"_postman_id": "fe1a4d1b-e2e5-bf25-c873-290578b5cc78",
 		"description": "- log in \n- List all APIs\n- create a new API\n- list created APIs data\n- delete created API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "APIs_OK",
-			"description": "",
-			"item": []
-		},
 		{
 			"name": "{{url}}/login",
 			"event": [
@@ -36,31 +30,74 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/login",
 				"method": "POST",
 				"header": [
 					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
 						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
+						"value": "{{userid}}",
 						"disabled": true
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
+						"value": "{{token}}",
 						"disabled": true
-					},
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/apis",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
-					},
-					{
-						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
-						"disabled": true
+						"value": "application/x-www-form-urlencoded"
 					}
 				],
 				"body": {
@@ -104,94 +141,13 @@
 						}
 					]
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "{{url}}/apis",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{url}}/apis",
-				"method": "GET",
-				"header": [
-					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
-					},
-					{
-						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "matti2",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "er511@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text"
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "koe-API matti2 postman",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						}
+				"url": {
+					"raw": "{{url}}/apis",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apis"
 					]
 				},
 				"description": ""
@@ -222,70 +178,24 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/apis",
 				"method": "POST",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
-						{
-							"key": "username",
-							"value": "matti2",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "email",
-							"value": "er511@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
 						{
 							"key": "name",
 							"value": "API matti2 postman collection",
@@ -316,6 +226,15 @@
 							"description": "",
 							"type": "text"
 						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/apis",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apis"
 					]
 				},
 				"description": "Create a new API"
@@ -341,31 +260,11 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/apis/{{createdApi_id}}",
 				"method": "GET",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
-					},
-					{
-						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
-						"disabled": true
+						"value": "application/x-www-form-urlencoded"
 					}
 				],
 				"body": {
@@ -407,6 +306,16 @@
 							"type": "text",
 							"disabled": true
 						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/apis/{{createdApi_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apis",
+						"{{createdApi_id}}"
 					]
 				},
 				"description": "Get an API with id"
@@ -432,84 +341,40 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/apis/{{createdApi_id}}",
 				"method": "PUT",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "username",
-							"value": "matti2",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "email",
-							"value": "er511@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "koe-API matti2 postman",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
 							"key": "description",
 							"value": "This API will be used mostly on testing purposes. Thus its lifetime is not going to be very long.",
 							"description": "",
 							"type": "text"
 						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/apis/{{createdApi_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apis",
+						"{{createdApi_id}}"
 					]
 				},
 				"description": ""
@@ -535,105 +400,30 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/apis/{{createdApi_id}}",
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "matti2",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "email",
-							"value": "er511@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "API matti2 postman collection",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "description",
-							"value": "New API created by runner",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "lifecycleStatus",
-							"value": "development",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "isPublic",
-							"value": "true",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						}
+				"body": {},
+				"url": {
+					"raw": "{{url}}/apis/{{createdApi_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"apis",
+						"{{createdApi_id}}"
 					]
 				},
 				"description": ""
@@ -659,105 +449,29 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/logout",
 				"method": "POST",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "matti2",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "email",
-							"value": "er511@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "API matti2 postman collection",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "description",
-							"value": "New API created by runner",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "lifecycleStatus",
-							"value": "development",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "isPublic",
-							"value": "true",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						}
+				"body": {},
+				"url": {
+					"raw": "{{url}}/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout"
 					]
 				},
 				"description": ""

@@ -50,12 +50,12 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "wuder3",
+							"value": "{{username}}",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "salasana",
+							"value": "{{password}}",
 							"type": "text"
 						}
 					]
@@ -399,7 +399,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/organizations/{{createdOrg_id}}/managers copy",
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers",
 			"event": [
 				{
 					"listen": "test",
@@ -462,7 +462,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/organizations/{{createdOrg_id}}/managers copy",
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers/id",
 			"event": [
 				{
 					"listen": "test",
@@ -553,7 +553,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/organizations/{{createdOrg_id}}/managers copy copy",
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers/delete",
 			"event": [
 				{
 					"listen": "test",
@@ -646,6 +646,54 @@
 					"path": [
 						"organizations",
 						"{{createdOrg_id}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout"
 					]
 				},
 				"description": ""
