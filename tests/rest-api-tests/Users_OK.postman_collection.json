@@ -1,10 +1,9 @@
 {
-	"variables": [],
 	"info": {
 		"name": "Users_OK",
-		"_postman_id": "13fdfdcb-4ffe-0ebb-c765-c16cef859bd2",
+		"_postman_id": "16895853-9a9d-d361-f901-cda094731979",
 		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -31,30 +30,20 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/login",
 				"method": "POST",
 				"header": [
 					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
 						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
+						"value": "{{userid}}",
 						"disabled": true
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
-					},
-					{
-						"key": "X-User-Id",
-						"value": "aGvjaBmoSKjNxye9Q",
-						"description": "",
+						"value": "{{token}}",
 						"disabled": true
 					}
 				],
@@ -63,40 +52,23 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "admin",
+							"value": "{{username}}",
 							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "er511@osoite.fi",
-							"type": "text",
-							"disabled": true
 						},
 						{
 							"key": "password",
-							"value": "salasana",
+							"value": "{{password}}",
 							"type": "text"
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "koe-API matti2 postman",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
 						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
 					]
 				},
 				"description": ""
@@ -122,35 +94,19 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/users",
 				"method": "GET",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -194,6 +150,15 @@
 						}
 					]
 				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
 				"description": "List users (requestor needs to be logged in)"
 			},
 			"response": []
@@ -221,35 +186,19 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/users",
 				"method": "POST",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -257,7 +206,7 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "matti11",
+							"value": "postman_testing",
 							"type": "text"
 						},
 						{
@@ -269,27 +218,16 @@
 							"key": "password",
 							"value": "salasana",
 							"type": "text"
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "koe-API matti2 postman",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
 						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
 					]
 				},
 				"description": "Adding a new user account"
@@ -315,35 +253,19 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/users/{{new_userid}}",
 				"method": "GET",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -384,6 +306,16 @@
 							"type": "text",
 							"disabled": true
 						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/users/{{new_userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{new_userid}}"
 					]
 				},
 				"description": "Get a certain user data"
@@ -409,78 +341,30 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/users/{{new_userid}}",
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "matti11",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "email",
-							"value": "er11@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "name",
-							"value": "koe-API matti2 postman",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						}
+				"body": {},
+				"url": {
+					"raw": "{{url}}/users/{{new_userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{new_userid}}"
 					]
 				},
 				"description": "Remove created user."
@@ -506,35 +390,77 @@
 				}
 			],
 			"request": {
-				"url": "{{url}}/users/{{userid}}",
 				"method": "PUT",
 				"header": [
 					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
 						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/users/{{userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{userid}}"
+					]
+				},
+				"description": "User can change own data"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/updates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
+						"value": "application/x-www-form-urlencoded"
 					},
 					{
 						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
+						"value": "{{userid}}"
 					},
 					{
 						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -579,99 +505,20 @@
 						}
 					]
 				},
-				"description": "User can change own data"
-			},
-			"response": []
-		},
-		{
-			"name": "{{url}}/users/updates",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"",
-							"});",
-							"",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{url}}/users/updates",
-				"method": "GET",
-				"header": [
-					{
-						"key": "X-User-Id",
-						"value": "GFJzMtdzqEYgH8PHS",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "V44Z2Dosu60-UhRunwTVWKWBG3u2Txo0hmadFCBsBwf",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"description": ""
-					},
-					{
-						"key": "X-User-Id",
-						"value": "{{userid}}",
-						"description": ""
-					},
-					{
-						"key": "X-Auth-Token",
-						"value": "{{token}}",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+				"url": {
+					"raw": "{{url}}/users/updates?since=7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"updates"
+					],
+					"query": [
 						{
-							"key": "username",
-							"value": "matti11",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "email",
-							"value": "er11@osoite.fi",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "salasana",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "company",
-							"value": "Osakeköyhtiö 3124",
-							"type": "text"
-						},
-						{
-							"key": "name",
-							"value": "koe-API matti2 postman",
-							"description": "",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "url",
-							"value": "http://koe.koe2.fi",
-							"description": "",
-							"type": "text",
-							"disabled": true
+							"key": "since",
+							"value": "7",
+							"equals": true
 						}
 					]
 				},
