@@ -399,6 +399,77 @@
 			"response": []
 		},
 		{
+			"name": "{{url}}/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    if (pm.response.to.have.status(201)) {",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"new_userid\", jsonData.data._id);",
+							"    }",
+							"    ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "postman_testing",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Adding a new user account"
+			},
+			"response": []
+		},
+		{
 			"name": "{{url}}/organizations/{{createdOrg_id}}/managers",
 			"event": [
 				{
@@ -441,7 +512,7 @@
 					"urlencoded": [
 						{
 							"key": "newManagerEmail",
-							"value": "Joonas.heikkila@samposoftware.com",
+							"value": "er11@osoite.fi",
 							"type": "text"
 						}
 					]
@@ -537,7 +608,7 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers/k78qdmzLqRQ6TqiYb",
+					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers/{{new_userid}}",
 					"host": [
 						"{{url}}"
 					],
@@ -545,7 +616,7 @@
 						"organizations",
 						"{{createdOrg_id}}",
 						"managers",
-						"k78qdmzLqRQ6TqiYb"
+						"{{new_userid}}"
 					]
 				},
 				"description": "Get an API with id"
@@ -588,7 +659,7 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers/k78qdmzLqRQ6TqiYb",
+					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers/{{new_userid}}",
 					"host": [
 						"{{url}}"
 					],
@@ -596,7 +667,7 @@
 						"organizations",
 						"{{createdOrg_id}}",
 						"managers",
-						"k78qdmzLqRQ6TqiYb"
+						"{{new_userid}}"
 					]
 				},
 				"description": "Get an API with id"
@@ -649,6 +720,55 @@
 					]
 				},
 				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/{{new_userid}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/users/{{new_userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{new_userid}}"
+					]
+				},
+				"description": "Remove created user."
 			},
 			"response": []
 		},
