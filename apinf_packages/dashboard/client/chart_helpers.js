@@ -11,15 +11,16 @@
  * @param {*} params.endDate - end date of range (included value)
  * @param {string} params.format - date format
  * @param {number} params.step - step of interval
+ * @param {string} params.granularity - granularity
  */
 export function generateDate (params) {
-  const { startDate, endDate, step, format } = params;
+  const { startDate, endDate, step, format, granularity } = params;
   // Placeholders for date
   const dateList = [];
   // Include endDate
   while (startDate <= endDate) {
     dateList.push(startDate.format(format));
-    startDate.add(step, 'days');
+    startDate.add(step, granularity);
   }
   return dateList;
 }

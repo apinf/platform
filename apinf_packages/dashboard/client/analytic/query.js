@@ -7,13 +7,13 @@
 // Npm packages imports
 import moment from 'moment';
 
-export default function queryForAnalyticPage (frontendPrefix, timeframe) {
+export default function queryForAnalyticPage (frontendPrefix, timeframe, interval) {
   // Plus one day to include current day in selection
-  const today = moment().add(1, 'days').format('YYYY-MM-DD');
-
-  const oneTimePeriodAgo = moment().subtract(timeframe - 1, 'days').format('YYYY-MM-DD');
+  const today = moment().add(1, interval)._d.getTime();
+  // Make it depends on timeframe & interval
+  const oneTimePeriodAgo = moment().subtract(timeframe - 1, interval)._d.getTime();
   // eslint-disable-next-line no-mixed-operators
-  const twoTimePeriodsAgo = moment().subtract(2 * timeframe - 1, 'days').format('YYYY-MM-DD');
+  const twoTimePeriodsAgo = moment().subtract(2 * timeframe - 1, interval)._d.getTime();
 
   // Delete a last slash
   const requestPath = frontendPrefix.slice(0, -1);
@@ -78,7 +78,7 @@ export default function queryForAnalyticPage (frontendPrefix, timeframe) {
             requests_over_time: {
               date_histogram: {
                 field: 'request_at',
-                interval: 'day',
+                interval,
               },
               aggs: {
                 // median response time over interval
@@ -141,7 +141,7 @@ export default function queryForAnalyticPage (frontendPrefix, timeframe) {
                 requests_over_time: {
                   date_histogram: {
                     field: 'request_at',
-                    interval: 'day',
+                    interval,
                   },
                   aggs: {
                     // Percentiles of response time over interval

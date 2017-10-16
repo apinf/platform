@@ -26,8 +26,8 @@ signedIn.route('/dashboard', {
 
     if (!context.queryParams.timeframe) {
       // Initialize timeframe parameter if it doesn't specify
-      // Default value is 7
-      context.queryParams.timeframe = 7;
+      // It contains on timeframe value and granularity
+      context.queryParams.timeframe = '7-day';
     }
   }],
   name: 'dashboard',
@@ -41,8 +41,8 @@ signedIn.route('/analytic/:apiSlug', {
   triggersEnter: [(context) => {
     if (!context.queryParams.timeframe) {
       // Initialize timeframe parameter if it doesn't specify
-      // Default value is 7
-      context.queryParams.timeframe = 7;
+      // It contains on timeframe value and granularity
+      context.queryParams.timeframe = '7-day';
     }
   }],
   name: 'apiAnalyticPage',

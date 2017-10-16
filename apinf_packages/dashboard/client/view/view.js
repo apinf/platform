@@ -83,11 +83,14 @@ Template.dashboardView.onCreated(function () {
     if (elasticsearchHost) {
       // Get list of proxy backends paths
       const proxyBackendPaths = instance.proxyBackendPaths.get();
-      // Get timeframe
-      const timeframe = FlowRouter.getQueryParam('timeframe');
+
+      // Get query parameter
+      const queryParamValue = FlowRouter.getQueryParam('timeframe');
+      // Get values of timeframe & granularity
+      const [timeframe, granularity] = queryParamValue.split('-');
 
       // Make query object
-      const queryParams = queryForDashboardPage(proxyBackendPaths, timeframe);
+      const queryParams = queryForDashboardPage(proxyBackendPaths, timeframe, granularity);
 
       // Get chart data for dashboard
       Meteor.call('dashboardChartData', elasticsearchHost, queryParams, (error, result) => {
