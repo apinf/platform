@@ -1,17 +1,11 @@
 {
-	"variables": [],
 	"info": {
 		"name": "APIs_OK",
-		"_postman_id": "2d687006-0622-b7fb-b971-bb055f077f66",
+		"_postman_id": "fe1a4d1b-e2e5-bf25-c873-290578b5cc78",
 		"description": "- log in \n- List all APIs\n- create a new API\n- list created APIs data\n- delete created API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "APIs_OK",
-			"description": "",
-			"item": []
-		},
 		{
 			"name": "{{url}}/login",
 			"event": [
