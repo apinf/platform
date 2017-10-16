@@ -33,6 +33,8 @@ services:
     restart: always
     image: mongo:3.2.6
     command: --storageEngine wiredTiger
+    volumes:
+      - mongodata:/data/db
   ssl:
     restart: always
     image: smashwilson/lets-nginx
@@ -59,3 +61,4 @@ volumes:
     elasticsearch_data: {}
     apiumbrella_db: {}
     apiumbrella_log: {}
+    mongodata: {}
