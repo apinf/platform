@@ -16,23 +16,20 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 // Npm packages imports
 import jsyaml from 'js-yaml';
 
-// Store the value inside the input file
-const apiConfiguration = new ReactiveVar();
-
 Template.importApiConfiguration.onCreated(() => {
   // Create the apiConfiguration variable
-  apiConfiguration.set('aaa');
+  Template.instance().data.apiConfiguration = new ReactiveVar();
 });
 
 Template.importApiConfiguration.helpers({
   // Get apiConfiguration value
   apiConfiguration: () => {
-    return apiConfiguration.get();
+    return Template.instance().data.apiConfiguration.get();
   },
 });
 
 Template.importApiConfiguration.events({
-  'change #import-api': (event) => {
+  'change #import-api': (event, templateInstance) => {
     // File in input
     const file = event.target.files[0];
 
@@ -48,7 +45,7 @@ Template.importApiConfiguration.events({
 
       // Hide preview and reset data template value
       $('.file-preview').animate({ opacity: 0 }, 400, () => {
-        apiConfiguration.set(null);
+        templateInstance.data.apiConfiguration.set(null);
       });
 
       return;
@@ -74,19 +71,19 @@ Template.importApiConfiguration.events({
       }
 
       // Output value in screen
-      apiConfiguration.set(importedFile);
+      templateInstance.data.apiConfiguration.set(importedFile);
       $('.file-preview').animate({ opacity: 1 });
     };
   },
 
-  'submit #apiConfigurationUploadForm': (event) => {
+  'submit #apiConfigurationUploadForm': (event, templateInstance) => {
     // Prevents the form submit
     event.preventDefault();
 
     // try catch here, so that page does not reload if JSON is incorrect
     try {
       // parses JSON String to apiConfiguration
-      const api = JSON.parse(apiConfiguration.get());
+      const api = JSON.parse(templateInstance.data.apiConfiguration.get());
 
       // import apiConfiguration: expects status from callback
       Meteor.call('importApiConfigs', api, (err, status) => {
@@ -102,7 +99,7 @@ Template.importApiConfiguration.events({
           FlowRouter.go(`/apis/${status.slug}`);
         } else {
           // error message
-          sAlert.error(status.message);
+          sAlert.error(status.message); // apiConfiguration.set('aaa');
         }
       });
     } catch (e) {
