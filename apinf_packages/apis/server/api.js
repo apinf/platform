@@ -11,11 +11,12 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+
+// APInf imports
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
 import Authentication from '/apinf_packages/rest_apis/server/authentication';
-
-// APInf imports
 import descriptionApis from '/apinf_packages/rest_apis/lib/descriptions/apis_texts';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
@@ -148,6 +149,14 @@ CatalogV1.addCollection(Apis, {
             // Create a new field to store logo URL
             api.logoUrl = api.logoUrl();
           }
+
+          // Instead of API URL, return API Proxy's URL, if it exists
+          const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+          // If Proxy is API Umbrella, fill in proxy URL
+          if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
+            const url = proxyBackend.proxyUrl().concat(proxyBackend.frontendPrefix());
+            api.url = url;
+          }
           return api;
         });
 
@@ -233,6 +242,14 @@ CatalogV1.addCollection(Apis, {
         // Extend API structure with correct link to API logo
         if (api.apiLogoFileId) {
           api.logoUrl = api.logoUrl();
+        }
+
+        // Instead of API URL, return API Proxy's URL, if it exists
+        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+        // If Proxy is API Umbrella, fill in proxy URL
+        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
+          const url = proxyBackend.proxyUrl().concat(proxyBackend.frontendPrefix());
+          api.url = url;
         }
 
         // Construct response
