@@ -23,7 +23,7 @@ Template.homePageApis.onCreated(function () {
   // Check if feature apis exist
   if (featuredApis) {
     // Subscribe to featured APIs
-    templateInstance.subscribe('homePageFeaturedApis', featuredApis);
+    templateInstance.subscribe('homePageApis', featuredApis);
 
     // Subscribe to organization apis
     templateInstance.subscribe('organizationApis');

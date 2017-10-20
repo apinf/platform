@@ -37,7 +37,7 @@ Meteor.publish('apisForBranding', () => {
   );
 });
 
-Meteor.publish('homePageFeaturedApis', (featuredApis) => {
+Meteor.publish('homePageApis', (featuredApis) => {
   // Make sure featuredApis is an Array
   check(featuredApis, Array);
   // Return cursor to global featured APIs

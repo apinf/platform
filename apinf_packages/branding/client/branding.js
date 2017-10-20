@@ -38,7 +38,7 @@ Template.branding.helpers({
   brandingCollection () {
     return Branding;
   },
-  s2Opts () {
+  homepageApisSelect2Options () {
     // Get featuredApis or an empty array on default
     const featuredApis = Branding.findOne().featuredApis || [];
     // Message for placeholder

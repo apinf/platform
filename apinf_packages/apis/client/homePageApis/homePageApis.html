@@ -17,12 +17,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{_ "homePageApis_text_addFeaturedApis" }}
     {{/ if }}
     {{> latestPublicApis limit=8 }}
-    <div class="text-center">
+  {{/ if }}
+   <div class="text-center">
       <a href="{{ pathFor 'apiCatalog' }}"
          class="btn btn-primary btn-lg"
          id="get-more-apis">
         {{_ "homePageApis_text_getMoreApis" }}
       </a>
     </div>
-  {{/ if }}
 </template>
