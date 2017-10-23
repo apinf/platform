@@ -9,7 +9,6 @@ The master collection contains all subcollections
     * tests for each endpoint in REST API in question, covering all unsuccessful (3xx/4xx/5xx expected) cases
 
 
-<<<<<<< HEAD
 ## Running tests
 
 To run tests you need standalone version of Postman.
@@ -32,15 +31,3 @@ To run tests you need standalone version of Postman.
 - Select the environment where you stored username and password
 - Click big blue button that says [Run <collection_name>]
 - Verify, that tests are run with expected results
-=======
-To run tests you need standalone version of Postman.
-Import collection you want to test.
-Add url = http://nightly.apinf.io/rest/v1 to your global variables
-Then open Postman Runner and select collection you want to test
-and select any environment where you can store ids and tokens.
-Add username and password to selected environment.
-Click big blue button that says run "collection_name".
-And Postman should run the tests.
-
-To run organization tests you need to have admin account.
->>>>>>> updating readme to have more information
