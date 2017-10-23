@@ -15,52 +15,43 @@ Accounts.onCreateUser((options, user) => {
 
   // Check services object exists
   if (user.services) {
-    // Case 1: Register with Github
-    if (user.services.github) {
-      // Set user email address from Github email
-      user.emails = [
-        {
-          address: user.services.github.email,
-          verified: true,
-        },
-      ];
-      // Search 'githubUsername' from database.
-      const githubUsername = user.services.github.username;
-      const existingUser = Meteor.users.findOne({ username: githubUsername });
-      if (existingUser === undefined) {
-        // Username available, set username to Github username.
-        user.username = githubUsername;
-      } else {
-        // Username clashes with existing username, add prefix
-        user.username = `gh-${githubUsername}`;
-      }
-      console.log('Registered via github');
-    // Case 2: Register with Fiware
-    } else if (user.services.fiware) {
-      // Set user email address from FIWARE email
-      user.emails = [
-        {
-          address: user.services.fiware.email,
-          verified: true,
-        },
-      ];
-      // Search 'fiwareUsername' from database.
-      const fiwareUsername = user.services.github.username;
-      const existingUser = Meteor.users.findOne({ username: fiwareUsername });
-      if (existingUser === undefined) {
-        // Username available, set username to FIWARE username.
-        user.username = fiwareUsername;
-      } else {
-        // Username clashes with existing username, add prefix
-        user.username = `gh-${fiwareUsername}`;
-      }
-      console.log('Registered via fiware');
-    // Case 3: Register with local account, email verification required
-    } else if (user.services.password) {
+
+    // Get the service, can be 'github', 'fiware' or 'password'
+    const service =  _.keys(user.services)[0];
+
+    // password: Register with local account, email verification required
+    if (services === 'password') {
       // we wait for Meteor to create the user before sending an email
       Meteor.setTimeout(() => {
         Meteor.call('sendRegistrationEmailVerification', user._id);
       }, 2 * 1000);
+    } else {
+
+      // Set user email address from Github/Fiware email
+      user.emails = [
+        {
+          address: user.services[service].email,
+          verified: true,
+        },
+      ];
+
+      // Search 'username' from database.
+      const username = user.services[service].username;
+      const existingUser = Meteor.users.findOne({ username });
+
+      if (existingUser === undefined) {
+        user.username = username;
+      } else {
+        // Username clashes with existing username
+        user.username = `gh-${username}`;
+
+        // Case 1: it's the same username and same email
+
+        // Case 2: it's a different email, add prefix
+        if (service === 'github') {
+        user.username = `gh-${username}`;
+      }
+
     }
   }
 
