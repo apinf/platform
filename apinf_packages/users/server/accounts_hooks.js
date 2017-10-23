@@ -34,7 +34,28 @@ Accounts.onCreateUser((options, user) => {
         // Username clashes with existing username, add prefix
         user.username = `gh-${githubUsername}`;
       }
-    // Case 2: Register with local account, email verification required
+      console.log('Registered via github');
+    // Case 2: Register with Fiware
+    } else if (user.services.fiware) {
+      // Set user email address from FIWARE email
+      user.emails = [
+        {
+          address: user.services.fiware.email,
+          verified: true,
+        },
+      ];
+      // Search 'fiwareUsername' from database.
+      const fiwareUsername = user.services.github.username;
+      const existingUser = Meteor.users.findOne({ username: fiwareUsername });
+      if (existingUser === undefined) {
+        // Username available, set username to FIWARE username.
+        user.username = fiwareUsername;
+      } else {
+        // Username clashes with existing username, add prefix
+        user.username = `gh-${fiwareUsername}`;
+      }
+      console.log('Registered via fiware');
+    // Case 3: Register with local account, email verification required
     } else if (user.services.password) {
       // we wait for Meteor to create the user before sending an email
       Meteor.setTimeout(() => {
