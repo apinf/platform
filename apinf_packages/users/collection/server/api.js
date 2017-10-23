@@ -11,11 +11,11 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import ManagementV1 from '/apinf_packages/rest_apis/server/management';
-import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import Organizations from '/apinf_packages/organizations/collection';
 
 // APInf imports
+import ManagementV1 from '/apinf_packages/rest_apis/server/management';
+import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import descriptionUsers from '/apinf_packages/rest_apis/lib/descriptions/users_texts';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
