@@ -34,7 +34,10 @@ Accounts.onCreateUser((options, user) => {
         // Username clashes with existing username, add prefix
         user.username = `gh-${githubUsername}`;
       }
-    // Case 2: Register with local account, email verification required
+    // Case 2: Register with Fiware
+    } else if (user.services.fiware) {
+
+    // Case 3: Register with local account, email verification required
     } else if (user.services.password) {
       // we wait for Meteor to create the user before sending an email
       Meteor.setTimeout(() => {
