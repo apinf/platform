@@ -3,6 +3,9 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
+import { Template } from 'meteor/templating';
+
 // Meteor contributed packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { TAPi18n } from 'meteor/tap:i18n';
@@ -37,4 +40,19 @@ AutoForm.hooks({
       sAlert.success(message);
     },
   },
+});
+
+Template.autoForm.onRendered(function () {
+  // Get ID of current AutoForm
+  const formId = this.data.id;
+
+  // Get localized text for featured APIs field
+  const message = TAPi18n.__('branding_projectFeaturedApisMessage_featuredApiMessage');
+
+  if (formId === 'brandingEdit') {
+    // Render select2 widget on Featured APIs field
+    $('[name=featuredApis]').select2({
+      placeholder: message,
+    });
+  }
 });
