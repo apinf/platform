@@ -63,11 +63,11 @@ const UserSchema = new SimpleSchema({
 
       // If Fiware was used, get Fiware email
       if (fiware) {
-        return [{ address: fiware.email, verified: false }];
+        return [{ address: fiware.email, verified: true }];
 
       // If Github was used, get Github email
       } else if (github) {
-        return [{ address: github.email, verified: false }];
+        return [{ address: github.email, verified: true }];
       }
 
       // If regular signup was used, get passed email
