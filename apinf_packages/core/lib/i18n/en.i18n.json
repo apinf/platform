@@ -197,6 +197,7 @@
   "branding_panel_title": "Project Branding",
   "branding_projectLogoTitle_logoTitle": "Site Logo",
   "branding_projectCoverPhotoTitle_coverPhotoTitle": "Cover Image",
+  "branding_projectFeaturedApisMessage_featuredApiMessage": "Select upto 8 APIs to be featured in the Homepage",
   "branding_save": "Save",
   "branding_successMessage": "Branding saved",
   "branding_update": "Update",
@@ -371,7 +372,6 @@
   "homeBody_featureSection_statistics_usersCount_heading": "Users",
   "homeBody_contactUs_heading": "Contact Us",
   "homeBody_contactUs_text": "Contact us for more information.",
-  "homeBody_getMoreApis_text": "More APIs",
   "homeBody_openSource_imageAltText": "100% open source",
   "homeBody_section1_heading": "Getting started",
   "homeBody_section1_text": "Just create an account and be on your way! The developer dashboard offers you a one stop location to discover APIs, track your application API usage, and more.",
@@ -383,6 +383,9 @@
   "homeBody_section3_heading": "Completely open source",
   "homeBody_section3_text": "APInf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with EUPL. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
   "homeBody_section3_text_extra": "Find us in ",
+  "homePageApis_title_featuredApis": "Featured APIs",
+  "homePageApis_text_addFeaturedApis": "You can add featured APIs from Branding section under Settings.",
+  "homePageApis_text_getMoreApis": "More APIs",
   "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML, .JSON or .TXT format.",
   "import_ApiConfiguration_Drop": "Drop your file here",
   "import_ApiConfiguration_File": "File:",
@@ -476,7 +479,7 @@
   "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
   "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
   "organizationNoFeaturedApis_text_noFeaturedApis": "The organization doesn't have any featured APIs.",
-  "organizationNoFeaturedApis_text_useButton": "You can feature APIs of your organization by pinning the related API card. You can choose upto four APIs to feature in your organization",
+  "organizationNoFeaturedApis_text_useButton": "You can feature APIs of your organization by pinning the related API card. You can choose up to four APIs to feature in your organization",
   "organizationProfile_bigText_apisCount": "All APIs",
   "organizationProfile_bigText_featuredApisCount": "Featured APIs",
   "organizationProfileHeader_editButton_text": "Edit",
@@ -766,6 +769,9 @@
       },
       "footerCode": {
         "label": "Footer code"
+      },
+      "featuredApis": {
+        "label": "Featured APIs"
       }
     },
     "contactForm": {

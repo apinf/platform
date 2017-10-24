@@ -95,3 +95,5 @@ useraccounts:core
 useraccounts:flow-routing
 vsivsi:file-collection
 zimme:active-route
+aldeed:autoform-select2
+natestrauser:select2
