@@ -71,19 +71,22 @@ Template.requestsOverTime.onRendered(function () {
     // Get ElasticSearch aggregated data
     const elasticsearchData = Template.currentData().buckets;
 
-    // Get current timeframe
-    const dateCount = FlowRouter.getQueryParam('timeframe');
+    // Get timeframe query parameter
+    const queryParamValue = FlowRouter.getQueryParam('timeframe');
+    // Get timeframe & granularity values
+    const [dateCount, granularity] = queryParamValue.split('-');
+
+    // Generate today date and just current hour
+    const today = moment().millisecond(0).second(0).minute(0);
 
     const params = {
-      // Date range must have equal length with dateCount value
-      // Today value is included then subtract less days
-      startDate: moment().subtract(dateCount - 1, 'd'),
-      endDate: moment(),
-      // Interval is 1 day
+      endDate: today.clone(),
+      startDate: today.subtract(dateCount - 1, granularity),
       step: 1,
+      granularity,
       // TODO: internationalize date formatting
       // https://github.com/apinf/platform/issues/2900
-      format: 'MM/DD',
+      format: granularity === 'hour' ? 'H:mm' : 'MM/DD',
     };
 
     const labels = generateDate(params);

@@ -16,6 +16,15 @@ import {
   summaryComparing,
 } from '/apinf_packages/dashboard/lib/trend_helpers';
 
+Template.dashboardOverviewStatistic.onCreated(function () {
+  this.autorun(() => {
+    // Get query parameter value
+    const queryParamValue = FlowRouter.getQueryParam('timeframe');
+    // Get timeframe value
+    this.timeframe = queryParamValue.split('-')[0];
+  });
+});
+
 Template.dashboardOverviewStatistic.helpers({
   arrowDirection (parameter) {
     // Provide compared data
@@ -26,17 +35,19 @@ Template.dashboardOverviewStatistic.helpers({
     return percentageValue(parameter, this);
   },
   overviewComparing (parameter) {
-    // Get value of timeframe
-    const currentTimeframe = FlowRouter.getQueryParam('timeframe');
+    const instance = Template.instance();
 
-    return summaryComparing(parameter, this, currentTimeframe);
+    return summaryComparing(parameter, this, instance.timeframe);
   },
   timeframeYesterday () {
-    const timeframe = FlowRouter.getQueryParam('timeframe');
+    const instance = Template.instance();
     // Because typeof timeframe is string
-    return timeframe === '1';
+    // TODO: Remake phrase "yesterday/last day" to "last 24 hour
+    return instance.timeframe === '24';
   },
   timeframe () {
-    return FlowRouter.getQueryParam('timeframe');
+    const instance = Template.instance();
+
+    return instance.timeframe;
   },
 });

@@ -17,6 +17,15 @@ import {
   calculateTrend,
 } from '/apinf_packages/dashboard/lib/trend_helpers';
 
+Template.apiAnalyticView.onCreated(function () {
+  this.autorun(() => {
+    // Get query parameter value
+    const queryParamValue = FlowRouter.getQueryParam('timeframe');
+    // Get timeframe value
+    this.timeframe = queryParamValue.split('-')[0];
+  });
+});
+
 Template.apiAnalyticView.helpers({
   arrowDirection (parameter) {
     // Provide compared data
@@ -27,11 +36,10 @@ Template.apiAnalyticView.helpers({
     return percentageValue(parameter, this);
   },
   summaryComparing (parameter) {
-    // Get value of timeframe
-    const currentTimeframe = FlowRouter.getQueryParam('timeframe');
+    const instance = Template.instance();
 
     // Provide compared data
-    return summaryComparing(parameter, this, currentTimeframe);
+    return summaryComparing(parameter, this, instance.timeframe);
   },
   bucket () {
     const instance = Template.instance();

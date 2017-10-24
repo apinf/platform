@@ -7,14 +7,13 @@
 // Npm packages imports
 import moment from 'moment';
 
-export default function queryForDashboardPage (proxyBackendPaths, timeframe) {
-  // Plus one day to include current day in selection
-  const today = moment().add(1, 'days').format('YYYY-MM-DD');
-
-  // Make it depends on timeframe
-  const oneTimePeriodAgo = moment().subtract(timeframe - 1, 'days').format('YYYY-MM-DD');
+export default function queryForDashboardPage (proxyBackendPaths, timeframe, interval) {
+  // Plus one granularity to include current day in selection
+  const today = moment().add(1, interval)._d.getTime();
+  // Make it depends on timeframe & interval
+  const oneTimePeriodAgo = moment().subtract(timeframe - 1, interval)._d.getTime();
   // eslint-disable-next-line no-mixed-operators
-  const twoTimePeriodsAgo = moment().subtract(2 * timeframe - 1, 'days').format('YYYY-MM-DD');
+  const twoTimePeriodsAgo = moment().subtract(2 * timeframe - 1, interval)._d.getTime();
 
   return {
     size: 0,
@@ -94,7 +93,7 @@ export default function queryForDashboardPage (proxyBackendPaths, timeframe) {
                 requests_over_time: {
                   date_histogram: {
                     field: 'request_at',
-                    interval: 'week',
+                    interval,
                   },
                   aggs: {
                     // Get the median response time over interval

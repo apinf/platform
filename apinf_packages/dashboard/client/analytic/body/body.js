@@ -40,11 +40,13 @@ Template.apiAnalyticPageBody.onCreated(function () {
         // Get request_path
         const proxyBackendPath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
 
-        // Get timeframe
-        const timeframe = FlowRouter.getQueryParam('timeframe');
+        // Get query parameter value
+        const queryParamValue = FlowRouter.getQueryParam('timeframe');
+        // Get values of timeframe & granularity
+        const [timeframe, granularity] = queryParamValue.split('-');
 
         // Make query to Elasticsearch for this page
-        const queryParams = queryForAnalyticPage(proxyBackendPath, timeframe);
+        const queryParams = queryForAnalyticPage(proxyBackendPath, timeframe, granularity);
 
         // Get URL of relevant ElasticSearch
         const elasticsearchHost = proxy.apiUmbrella.elasticsearch;

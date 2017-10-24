@@ -8,6 +8,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages import
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Npm packages imports
@@ -84,6 +85,11 @@ Template.responseTimeTimeline.onRendered(function () {
 
   // Update chart when elasticsearchData was changed
   instance.autorun(() => {
+    // Get query parameter value
+    const queryParamValue = FlowRouter.getQueryParam('timeframe');
+    // Get value of granularity
+    const granularity = queryParamValue.split('-')[1];
+
     // Get ElasticSearch data
     const elasticsearchData = instance.elasticsearchData.get();
 
@@ -104,10 +110,12 @@ Template.responseTimeTimeline.onRendered(function () {
       return parseInt(responseTime, 10);
     });
 
+    const format = granularity === 'hour' ? 'H:mm' : 'MM/DD';
+
     // Create Labels values
     const labels = aggregationData.map(value => {
       // TODO: internationalize date formatting
-      return moment(value.key).format('MM/DD');
+      return moment(value.key).format(format);
     });
 
     // Update labels & data

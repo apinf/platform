@@ -110,7 +110,8 @@ export function summaryComparing (parameter, bucket, timeframe) {
     const params = { percentage: percentages, direction: trend, day: timeframe };
     // If comparison with 1 day then it is "yesterday"
     // typeof timeframe is string
-    if (timeframe === '1') {
+    // TODO: remake phrase "yesterday" to "last 24 hours"
+    if (timeframe === '24') {
       text = TAPi18n.__('summaryComparing_displayTrendInfo_yesterday', params);
     } else {
       text = TAPi18n.__('summaryComparing_displayTrendInfo_days', params);
