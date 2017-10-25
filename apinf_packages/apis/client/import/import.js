@@ -34,7 +34,7 @@ Template.importApiConfiguration.events({
     const file = event.target.files[0];
 
     // Check file extension
-    const acceptedExtensions = ['json', 'yml', 'yaml', 'txt'];
+    const acceptedExtensions = ['json', 'yml', 'yaml'];
     const fileNameArray = file.name.split('.');
     if (acceptedExtensions.indexOf(fileNameArray[fileNameArray.length - 1]) === -1) {
       // Get error message translation

@@ -383,7 +383,7 @@
   "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML, .JSON or .TXT format.",
   "importApiConfiguration_jsonError_message": "Configuration file is not a valid JSON object.",
   "import_ApiConfiguration_Title": "Import API Configuration",
-  "import_ApiConfiguration_Extensions": "Only yml, yaml, json and txt format will be accepted",
+  "import_ApiConfiguration_Extensions": "Only yml, yaml and json format will be accepted",
   "import_ApiConfiguration_ImportApi": "Import API",
   "import_ApiConfiguration_FileLabel": "File:",
   "import_ApiConfiguration_Upload": "Upload",
