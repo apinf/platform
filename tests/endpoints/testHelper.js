@@ -94,12 +94,24 @@ const setUserToAdmin = ({ username }) => {
 
       // Set user role to admin
       Users
-        .findOne(
+        .findOneAndUpdate(
           { username },
           { $set: { roles: ['admin'] } }
         )
         .then(resolve)
         .catch(reject);
+    });
+  });
+};
+
+const clearCollection = (collection) => {
+  return new Promise((resolve, reject) => {
+    // Connect to Meteor's MongoDB
+    MongoClient.connect('mongodb://localhost:3001/meteor', (err, db) => {
+      db.collection(collection).remove({}, (err, result) => {
+        if (err) return reject(err);
+        return resolve(result);
+      });
     });
   });
 };
@@ -110,4 +122,5 @@ module.exports = {
   getUserCredentials,
   performLogin,
   createUser,
+  clearCollection,
 };
