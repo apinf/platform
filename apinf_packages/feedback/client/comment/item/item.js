@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
@@ -18,7 +19,9 @@ Template.feedbackCommentItem.onCreated(function () {
   const authorId = Template.currentData().item.authorId;
   // Fetch author's username of this comment
   this.subscribe('getUsernameForSingleComment', authorId);
-  this.formType = 'insert';
+  // this.formType = 'insert';
+  this.showForm = new ReactiveVar(false);
+  this.formType = new ReactiveVar('insert');
 });
 
 Template.feedbackCommentItem.helpers({
@@ -29,12 +32,19 @@ Template.feedbackCommentItem.helpers({
     return moment(givenTimeStamp).locale(language).fromNow();
   },
   formType () {
-    return Template.instance().formType;
+    return Template.instance().formType.get();
+  },
+  currentComment () {
+    if (Template.instance().formType.get() === 'update') {
+      return Template.currentData().item;
+    }
+    return '';
   },
 });
 
 Template.feedbackCommentItem.events({
   'click .comment-reply': () => {
+    Template.instance().formType.set('insert');
     // hide all other comment field
     $('.feedback-reply-form').css('display', 'none');
     // show comment input
@@ -42,6 +52,7 @@ Template.feedbackCommentItem.events({
       .css('display', 'block');
   },
   'click .comment-edit': () => {
+    Template.instance().formType.set('update');
     $('.feedback-reply-form').css('display', 'none');
     $(`#feedback-reply-${Template.currentData().item._id}`)
       .css('display', 'block');

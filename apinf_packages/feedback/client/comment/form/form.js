@@ -9,6 +9,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import EntityComment from '/apinf_packages/entityComment/collection';
 
+// import showForm from '../../reactiveVar/showForm.js';
+
 Template.commentForm.helpers({
   entityCommentCollection () {
     // Return a reference to Entity comment collection, for AutoForm
@@ -33,6 +35,15 @@ Template.commentForm.helpers({
       };
     }
     return commentData;
+  },
+  currnetDoc () {
+    return this.currentComment;
+  },
+  checkFormType () {
+    if (this.formType === 'insert') {
+      return true;
+    }
+    return false;
   },
 });
 

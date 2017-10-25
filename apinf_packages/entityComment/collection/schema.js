@@ -30,6 +30,7 @@ EntityComment.schema = new SimpleSchema({
   commentedOn: {
     type: String,
     optional: true,
+    denyUpdate: true,
   },
   authorId: {
     type: String,
