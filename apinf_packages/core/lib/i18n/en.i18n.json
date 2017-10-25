@@ -380,7 +380,7 @@
   "homeBody_section3_heading": "Completely open source",
   "homeBody_section3_text": "APInf is powered by API Umbrella and builds a dashboard on top of the API Umbrella features. The solution is fully open source licensed with EUPL. It is written in Meteor.js and D3. We like to collaborate, to listen to our users and want to encourage people to become contributors.",
   "homeBody_section3_text_extra": "Find us in ",
-  "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML, .JSON or .TXT format.",
+  "importApiConfiguration_errorMessage": "Config file must be either in .YAML, .YML or .JSON format.",
   "importApiConfiguration_jsonError_message": "Configuration file is not a valid JSON object.",
   "import_ApiConfiguration_Title": "Import API Configuration",
   "import_ApiConfiguration_Extensions": "Only yml, yaml and json format will be accepted",

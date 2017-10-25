@@ -16,6 +16,9 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 // Npm packages imports
 import jsyaml from 'js-yaml';
 
+// APInf imports
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
+
 Template.importApiConfiguration.onCreated(() => {
   // Create the apiConfiguration variable
   Template.instance().data.apiConfiguration = new ReactiveVar();
@@ -35,8 +38,7 @@ Template.importApiConfiguration.events({
 
     // Check file extension
     const acceptedExtensions = ['json', 'yml', 'yaml'];
-    const fileNameArray = file.name.split('.');
-    if (acceptedExtensions.indexOf(fileNameArray[fileNameArray.length - 1]) === -1) {
+    if (!fileNameEndsWith(file.name, acceptedExtensions)) {
       // Get error message translation
       const message = TAPi18n.__('importApiConfiguration_errorMessage');
 
