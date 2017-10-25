@@ -23,7 +23,7 @@ Template.importApiConfiguration.onCreated(() => {
 
 Template.importApiConfiguration.helpers({
   // Get apiConfiguration value
-  apiConfiguration: () => {
+  apiConfiguration () {
     return Template.instance().data.apiConfiguration.get();
   },
 });
