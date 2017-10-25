@@ -14,8 +14,24 @@ const {
   getUserCredentials,
   buildCredentialHeader,
   hasError,
+  clearCollection,
 } = require('../testHelper.js');
 
+// Clear database before test runs
+beforeAll(() => {
+  return Promise.all([
+    clearCollection('users'),
+    clearCollection('Organizations'),
+  ]);
+});
+
+// Clear database before test runs
+afterAll(() => {
+  return Promise.all([
+    clearCollection('users'),
+    clearCollection('Organizations'),
+  ]);
+});
 
 describe('Endpoints for organization module', () => {
   describe('GET - /organizations', () => {
@@ -76,7 +92,6 @@ describe('Endpoints for organization module', () => {
             .set(buildCredentialHeader(credentials.data))
             .send(newOrganization)
             .end((err, res) => {
-              // console.log(err, res)
               if (err) return done(!hasError({ err, res }));
 
               // Error variable for try/catch control
