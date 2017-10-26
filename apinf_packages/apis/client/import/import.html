@@ -5,23 +5,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="importApiConfiguration">
   <div class="content-wrapper">
-    <div class="container">
-      <form id="apiConfigurationUploadForm" class="form" method="post">
-        <legend>
-          {{_ "import_ApiConfiguration_Title" }}
-        </legend>
-        <div class="row">
-          <div class="col-xs-12">
-              <label for="import-api">{{_ "import_ApiConfiguration_FileLabel"}}</label>
-              <input type="file" id="import-api" class="form-control">
-              <span>{{_ "import_ApiConfiguration_Extensions" }}</span>
-          </div> 
-          <div class="col-xs-12 file-preview">
-            <pre>{{ apiConfiguration }}</pre>
-            <button class="btn btn-primary">{{_ "import_ApiConfiguration_ImportApi" }}</button>
-          </div>
+    <form id="apiConfigurationUploadForm" class="form" method="post">
+      <div class="row">
+        <div class="col-xs-12">
+            <label for="import-api">{{_ "import_ApiConfiguration_FileLabel"}}</label>
+            <input type="file" id="import-api" class="form-control">
+            <span>{{_ "import_ApiConfiguration_Extensions" }}</span>
+        </div> 
+        <div class="col-xs-12 file-preview">
+          <pre>{{ apiConfiguration }}</pre>
+          <button class="btn btn-primary">{{_ "import_ApiConfiguration_ImportApi" }}</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div> 
 </template>
