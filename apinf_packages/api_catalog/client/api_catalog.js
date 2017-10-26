@@ -15,8 +15,12 @@ import { Roles } from 'meteor/alanning:roles';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ApiBookmarks from '/apinf_packages/bookmarks/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
 
 import 'locale-compare-polyfill';
+
+// Npm packages imports
+import _ from 'lodash';
 
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
@@ -56,6 +60,9 @@ Template.apiCatalog.onCreated(function () {
     sort: defaultSort,
     filters,
   });
+
+  // Subscribe to apiDocs that contains either 'fileId' or 'remoteFileUrl'
+  instance.subscribe('apisDocuments');
 
   // Subscribe to bookmarks of current user
   instance.subscribe('userApiBookmarks');
@@ -154,6 +161,28 @@ Template.apiCatalog.onCreated(function () {
 
       // Delete field from object.
       delete currentFilters.lifecycleStatus;
+    }
+
+    // Check URL parameter for apisWithDocumentation filter
+    const apisWithDocumentation = FlowRouter.getQueryParam('apisWithDocumentation');
+
+    // Checking if 'APIs with Documentation' filter is checked or not
+    if (apisWithDocumentation === 'true') {
+      // Fetching published ApiDocs
+      const apiDocs = ApiDocs.find().fetch();
+      // Creating array of ApiIds
+      let apiIds = _.map(apiDocs, 'apiId');
+
+      // checking if 'My Bookmarks' filter is checked or not
+      if (filterByParameter === 'my-bookmarks') {
+        // fetch bookmarked ApiIds
+        const bookmarkedApiIds = currentFilters._id.$in;
+        // find ApiIds that are bookmarked and that contains Api Documentation
+        apiIds = _.intersection(bookmarkedApiIds, apiIds);
+      }
+
+      // Set filter for filtering out apiIds that dont contain Api Documentation
+      currentFilters._id = { $in: apiIds };
     }
 
     instance.pagination.filters(currentFilters);

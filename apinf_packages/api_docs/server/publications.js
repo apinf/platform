@@ -9,6 +9,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 // Collection imports
+import ApiDocs from '/apinf_packages/api_docs/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
 Meteor.publish(
@@ -26,3 +27,20 @@ Meteor.publish(
       },
     });
   });
+
+Meteor.publish('apisDocuments', () => {
+  // Construct query
+  const query = {
+    $or: [
+      {
+        remoteFileUrl: { $exists: true, $ne: null },
+      },
+      {
+        fileId: { $exists: true, $ne: null },
+      },
+    ],
+  };
+
+  // Return a cursor containing documents that contains either 'fileId' or 'remoteFileUrl'
+  return ApiDocs.find(query, { fields: { apiId: 1 } });
+});

@@ -208,6 +208,7 @@
   "catalog_toolbar_filterOptions_myApis": "My APIs",
   "catalog_toolbar_filterOptions_showAll": "Show all",
   "catalog_toolbar_filterOptions_myBookmarks": "My bookmarks",
+  "catalog_toolbar_filterOptions_apisWithDocumentation": "APIs with Documentation",
   "catalog_toolbar_sortBy_title": "Sort by",
   "catalog_toolbar_sortMenuOptions_highRating": "Highest Rating",
   "catalog_toolbar_sortMenuOptions_mostBookmarked": "Most Bookmarked",
