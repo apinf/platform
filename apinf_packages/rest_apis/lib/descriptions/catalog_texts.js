@@ -80,6 +80,8 @@ Successful case:
 * the payload contains fields (except in HTTP 204 case)
   * status: value "success"
   * data: data of object(s)
+    * Note! Only fields, which have a value are returned in response message.
+      E.g. When API has no logo, no apiLogoFileId field is included in response message. 
 
 
 Unsuccessful case:

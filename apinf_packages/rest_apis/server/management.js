@@ -46,10 +46,9 @@ ManagementV1.swagger = {
     },
   },
   tags: {
+    authentication: 'Authentication',
     organization: 'Organizations',
     users: 'Users',
-    login: 'Login',
-    logout: 'Logout',
   },
   params: {
     limit: {
@@ -349,6 +348,15 @@ ManagementV1.swagger = {
             },
           },
         },
+        organizationLogoFileId: {
+          type: 'string',
+          example: 'file-id',
+        },
+        logoURL: {
+          type: 'string',
+          example: 'link-address-to-logo-image',
+        },
+
       },
     },
     loginRequest: {

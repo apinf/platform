@@ -82,14 +82,17 @@ Meteor.methods({
     // Get API object
     const api = Apis.findOne(apiId);
 
-    // Get documentationFileId
-    const documentationFileId = api.documentationFileId;
+    // Make sure document exists
+    if (api) {
+      // Get documentationFileId
+      const documentationFileId = api.documentationFileId;
 
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-    // Remove documentation object
-    DocumentationFiles.remove(objectId);
+      // Remove documentation object
+      DocumentationFiles.remove(objectId);
+    }
   },
   removeMonitoring (apiId) {
     // Make sure apiId is a string

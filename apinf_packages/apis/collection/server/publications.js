@@ -22,12 +22,26 @@ import Apis from '../';
 Meteor.publish('latestPublicApis', (limit) => {
   // Make sure limit is a Number
   check(limit, Number);
-
   // Return cursor to latest API Backends
   return Apis.find(
     { isPublic: true },
     { fields: Apis.publicFields, sort: { created_at: -1 }, limit }
   );
+});
+
+Meteor.publish('apisForBranding', () => {
+  // Return cursor to latest API Backends
+  return Apis.find(
+    { isPublic: true },
+    { fields: Apis.publicFields, sort: { created_at: -1 } }
+  );
+});
+
+Meteor.publish('homePageApis', (featuredApis) => {
+  // Make sure featuredApis is an Array
+  check(featuredApis, Array);
+  // Return cursor to global featured APIs
+  return Apis.find({ _id: { $in: featuredApis } });
 });
 
 // Publish collection for pagination

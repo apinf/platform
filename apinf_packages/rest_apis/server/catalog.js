@@ -45,9 +45,8 @@ CatalogV1.swagger = {
     },
   },
   tags: {
+    authentication: 'Authentication',
     api: 'APIs',
-    login: 'Login',
-    logout: 'Logout',
   },
   params: {
     api: {
@@ -199,7 +198,7 @@ CatalogV1.swagger = {
             example: 'user-id',
           },
         },
-        createdAt: {
+        created_at: {
           type: 'string',
           example: '2012-07-14T01:00:00+01:00',
         },
@@ -228,6 +227,18 @@ CatalogV1.swagger = {
               },
             },
           },
+        },
+        updated_at: {
+          type: 'string',
+          example: '2017-07-14T01:00:00+01:00',
+        },
+        apiLogoFileId: {
+          type: 'string',
+          example: 'file-id',
+        },
+        logoURL: {
+          type: 'string',
+          example: 'link-address-to-logo-image',
         },
       },
     },

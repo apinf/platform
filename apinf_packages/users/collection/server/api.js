@@ -11,86 +11,20 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
 
 // APInf imports
+import ManagementV1 from '/apinf_packages/rest_apis/server/management';
+import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import descriptionUsers from '/apinf_packages/rest_apis/lib/descriptions/users_texts';
-import descriptionLoginLogout from '/apinf_packages/rest_apis/lib/descriptions/login_logout_texts';
+import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 // Npm packages imports
 import _ from 'lodash';
 
 ManagementV1.swagger.meta.paths = {
-  '/login': {
-    post: {
-      tags: [
-        ManagementV1.swagger.tags.login,
-      ],
-      summary: 'Logging in.',
-      description: descriptionLoginLogout.login,
-      produces: ['application/json'],
-      parameters: [
-        ManagementV1.swagger.params.login,
-      ],
-      responses: {
-        200: {
-          description: 'Logged in successfully',
-          schema: {
-            $ref: '#/definitions/loginResponse',
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-      },
-    },
-  },
-
-  '/logout': {
-    post: {
-      tags: [
-        ManagementV1.swagger.tags.logout,
-      ],
-      summary: 'Logging out.',
-      description: descriptionLoginLogout.logout,
-      produces: ['application/json'],
-      responses: {
-        200: {
-          description: 'You\'ve been logged out!',
-          schema: {
-            type: 'object',
-            properties: {
-              status: {
-                type: 'string',
-                example: 'success',
-              },
-              message: {
-                type: 'string',
-                example: 'You\'ve been logged out!',
-              },
-            },
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Unauthorized',
-        },
-      },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
-    },
-  },
-
+  '/login': Authentication.login,
+  '/logout': Authentication.logout,
 
   '/users': {
     get: {
@@ -513,13 +447,7 @@ ManagementV1.addCollection(Meteor.users, {
         const userIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
 
         if (!userIsGettingOwnAccount && !userIsAdmin) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
         // Get ID of User to be fetched
@@ -535,13 +463,7 @@ ManagementV1.addCollection(Meteor.users, {
         // Check if user exists
         const user = Meteor.users.findOne(userId, options);
         if (!user) {
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'No user found with given UserID',
-            },
-          };
+          return errorMessagePayload(404, 'No user found with given UserID.');
         }
 
         // Array for Organization name and id
@@ -596,13 +518,7 @@ ManagementV1.addCollection(Meteor.users, {
           validateFields, 'username');
 
         if (!isValid) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "username" is erroneous',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "username" is erroneous.');
         }
 
         // Validate email address
@@ -610,24 +526,12 @@ ManagementV1.addCollection(Meteor.users, {
           validateFields, 'emails.$.address');
 
         if (!isValid) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Parameter "email" is erroneous',
-            },
-          };
+          return errorMessagePayload(400, 'Parameter "email" is erroneous.');
         }
 
         // PSW must be at least 6 characters long
         if (bodyParams.password.length < 6) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Password minimum length is 6',
-            },
-          };
+          return errorMessagePayload(400, 'Password minimum length is 6.');
         }
 
         // Does username already exist
@@ -640,13 +544,7 @@ ManagementV1.addCollection(Meteor.users, {
 
         // Either username or email is already in use
         if (userExists) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'User already exists',
-            },
-          };
+          return errorMessagePayload(400, 'User already exists.');
         }
 
         // Create a new user
@@ -682,13 +580,7 @@ ManagementV1.addCollection(Meteor.users, {
 
         // User must be either admin or modifying own account
         if (!userIsEditingOwnAccount && !userIsAdmin) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
         // Get ID of User to be removed
@@ -697,13 +589,7 @@ ManagementV1.addCollection(Meteor.users, {
         const user = Meteor.users.findOne(userId);
         if (!user) {
           // User didn't exist
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'No user found with given UserID',
-            },
-          };
+          return errorMessagePayload(404, 'No user found with given UserID.');
         }
 
         // Remove user from all Organizations
@@ -732,13 +618,7 @@ ManagementV1.addCollection(Meteor.users, {
 
         // Return error in case requestor is not editing own account
         if (!userIsEditingOwnAccount) {
-          return {
-            statusCode: 403,
-            body: {
-              status: 'fail',
-              message: 'User does not have permission',
-            },
-          };
+          return errorMessagePayload(403, 'User does not have permission.');
         }
         // Get ID of User
         const userId = this.urlParams.id;
@@ -746,13 +626,7 @@ ManagementV1.addCollection(Meteor.users, {
         const user = Meteor.users.findOne(userId);
         if (!user) {
           // User doesn't exist
-          return {
-            statusCode: 404,
-            body: {
-              status: 'fail',
-              message: 'No user found with given UserID',
-            },
-          };
+          return errorMessagePayload(404, 'No user found with given UserID.');
         }
 
         // Get data from body parameters
@@ -765,39 +639,21 @@ ManagementV1.addCollection(Meteor.users, {
         if (!bodyParams.username &&
             !bodyParams.company &&
             !bodyParams.password) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'No update parameters provided',
-            },
-          };
+          return errorMessagePayload(400, 'No update parameters provided.');
         }
 
         // Check error situations before modification
         if (bodyParams.username) {
           // Check if there already is a User by the same name
           if (Accounts.findUserByUsername(bodyParams.username)) {
-            return {
-              statusCode: 400,
-              body: {
-                status: 'fail',
-                message: 'Username already exists',
-              },
-            };
+            return errorMessagePayload(400, 'Username already exists.');
           }
         }
         // Is there a new password
         if (bodyParams.password && (
             typeof bodyParams.password !== 'string' ||
             bodyParams.password.length < 5)) {
-          return {
-            statusCode: 400,
-            body: {
-              status: 'fail',
-              message: 'Erroneous new password',
-            },
-          };
+          return errorMessagePayload(400, 'Erroneous new password.');
         }
 
         // Preparations for possible failure in DB write and rollback Needs
@@ -854,13 +710,7 @@ ManagementV1.addCollection(Meteor.users, {
           // Restore old password
           Meteor.users.update(userId, { $set: { 'services.password.bcrypt': previousPassword } });
         }
-        return {
-          statusCode: 400,
-          body: {
-            status: 'fail',
-            message: 'User update failed!',
-          },
-        };
+        return errorMessagePayload(400, 'User update failed!');
       },
     },
   },
@@ -930,13 +780,7 @@ ManagementV1.addRoute('users/updates', {
       options.fields = excludeFields;
 
       if (badQueryParameters) {
-        return {
-          statusCode: 400,
-          body: {
-            status: 'fail',
-            message: 'Bad query parameters',
-          },
-        };
+        return errorMessagePayload(400, 'Bad query parameters.');
       }
       // Get all users
       const userList = Meteor.users.find(query, options).fetch();

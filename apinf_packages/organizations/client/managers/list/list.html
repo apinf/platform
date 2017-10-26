@@ -10,13 +10,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{ username }}
         ({{ email }})
 
-        {{# unless managerIsCurrentUser }}
+        {{# if hasMultipleManagers }}
           <button
             id="remove-organization-manager"
             class="btn btn-danger btn-xs pull-right">
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
-        {{/ unless }}
+        {{/ if }}
       </li>
     {{/ each }}
   </ul>

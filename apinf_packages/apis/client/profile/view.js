@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 // Collection imports
 import ApiBacklogItems from '/apinf_packages/backlog/collection';
@@ -18,43 +19,48 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
 
 Template.viewApi.onCreated(function () {
-  // Get reference to template instance
-  const instance = this;
+   // Get reference to template instance
+  const templateInstance = this;
 
-  // Get the API Backend ID from the route
-  instance.slug = FlowRouter.getParam('slug');
+  templateInstance.api = new ReactiveVar();
 
-  // Subscribe to API and related organization
-  instance.subscribe('apiComposite', instance.slug);
-
-  // Subscribe to public proxy details
-  instance.subscribe('proxyCount');
-
-  // Subscribe to public proxy details for proxy form
-  instance.subscribe('publicProxyDetails');
+  // Using to get updated subscription
+  templateInstance.autorun(() => {
+    // Take slug from params
+    const slug = FlowRouter.getParam('slug');
+    // Subscribe to API and related organization
+    templateInstance.subscribe('apiComposite', slug);
+    // Subscribe to public proxy details
+    templateInstance.subscribe('proxyCount');
+    // Subscribe to public proxy details for proxy form
+    templateInstance.subscribe('publicProxyDetails');
+    // Get single API Backend
+    const api = Apis.findOne({ slug });
+    if (api) {
+      templateInstance.api.set(api);
+    }
+  });
 });
 
 Template.viewApi.helpers({
   api () {
     // Get reference to template instance
-    const instance = Template.instance();
-
-    // Get API slug
-    const slug = instance.slug;
+    const templateInstance = Template.instance();
 
     // Get single API Backend
-    const api = Apis.findOne({ slug });
+    const api = templateInstance.api.get();
+
     // Save the API ID
-    instance.apiId = api._id;
+    templateInstance.apiId = api._id;
 
     return api;
   },
   apiDoc () {
     // Get reference to template instance
-    const instance = Template.instance();
+    const templateInstance = Template.instance();
 
     // Get API ID
-    const apiId = instance.apiId;
+    const apiId = templateInstance.apiId;
 
     // Get single API Backend
     const apiDoc = ApiDocs.findOne({ apiId });
@@ -63,10 +69,10 @@ Template.viewApi.helpers({
   },
   proxyBackend () {
     // Get reference to template instance
-    const instance = Template.instance();
+    const templateInstance = Template.instance();
 
     // Get API ID
-    const apiId = instance.apiId;
+    const apiId = templateInstance.apiId;
 
     // Look for existing proxy backend document for this API
     const apiProxySettings = ProxyBackends.findOne({ apiId });
@@ -75,10 +81,10 @@ Template.viewApi.helpers({
   },
   backlogItems () {
     // Get reference to template instance
-    const instance = Template.instance();
+    const templateInstance = Template.instance();
 
     // Get API ID
-    const apiId = instance.apiId;
+    const apiId = templateInstance.apiId;
 
     // Fetch all backlog items for a specific API Backend
     // Sort by priority value and created date
@@ -91,10 +97,10 @@ Template.viewApi.helpers({
   },
   feedbackItems () {
     // Get reference to template instance
-    const instance = Template.instance();
+    const templateInstance = Template.instance();
 
     // Get API ID
-    const apiId = instance.apiId;
+    const apiId = templateInstance.apiId;
 
     // Fetch all feedback items for a specific API Backend
     // Sort by created date

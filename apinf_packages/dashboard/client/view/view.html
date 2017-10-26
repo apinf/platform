@@ -18,12 +18,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{/ if }} <!-- /error -->
 
       <!-- ElasticSearch data is already available -->
-      {{# if elasticsearchData }}
-        <h3>
-          My APIs
-        </h3>
+      {{# if chartData }}
+
         <!-- Table with summary statistic-->
-        {{> dashboardSummaryStatistic elasticsearchData=elasticsearchData }}
+        <!-- My APIs group -->
+        {{> dashboardSummaryStatistic chartData=chartData apiIds=grouping.myApis title="myApis" }}
+
+        <!-- Managed APIs group -->
+        {{> dashboardSummaryStatistic chartData=chartData apiIds=grouping.managedApis title="managedApis" }}
+
+        <!-- Other APIs group -->
+        {{> dashboardSummaryStatistic chartData=chartData apiIds=grouping.otherApis title="otherApis" }}
       {{/ if }}
     {{/ unless }} <!-- /fetchingData -->
   {{ else }}

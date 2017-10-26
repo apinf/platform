@@ -9,20 +9,25 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+// Collection imports
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+
 Template.apiAnalyticPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  instance.proxyBackendId = FlowRouter.getParam('proxyBackendId');
+  // Get API slug from route parameter
+  const apiSlug = FlowRouter.getParam('apiSlug');
 
   // Subscribe to related Proxy Backend, API, Proxy instances
-  instance.subscribe('proxyBackendRelatedData', instance.proxyBackendId);
+  instance.subscribe('proxyBackendRelatedData', apiSlug);
 });
 
 Template.apiAnalyticPage.helpers({
   proxyBackendId () {
-    const instance = Template.instance();
+    const proxyBackend = ProxyBackends.findOne();
 
-    return instance.proxyBackendId;
+    // Make sure proxy backend exists and return ID
+    return proxyBackend && proxyBackend._id;
   },
 });
