@@ -15,43 +15,49 @@ Accounts.onCreateUser((options, user) => {
 
   // Check services object exists
   if (user.services) {
-
     // Get the service, can be 'github', 'fiware' or 'password'
-    const service =  _.keys(user.services)[0];
+    const service = Object.keys(user.services)[0];
 
     // password: Register with local account, email verification required
-    if (services === 'password') {
+    if (service === 'password') {
       // we wait for Meteor to create the user before sending an email
       Meteor.setTimeout(() => {
         Meteor.call('sendRegistrationEmailVerification', user._id);
       }, 2 * 1000);
     } else {
-
-      // Set user email address from Github/Fiware email
-      user.emails = [
-        {
-          address: user.services[service].email,
-          verified: true,
-        },
-      ];
+      // Define current service username to variable
+      const username = user.services[service].username;
 
       // Search 'username' from database.
-      const username = user.services[service].username;
       const existingUser = Meteor.users.findOne({ username });
 
+      // Define email object for current register action
+      const currentRegisteringEmail = {
+        address: user.services[service].email,
+        verified: true,
+      };
+
       if (existingUser === undefined) {
+        // Set service username to username
         user.username = username;
+
+        // Set service email to user email
+        user.emails = [
+          currentRegisteringEmail,
+        ];
       } else {
+        // Get username prefix based on service being used
+        const prefix = service === 'github' ? 'gh' : 'fw';
+
         // Username clashes with existing username
-        user.username = `gh-${username}`;
+        user.username = `${prefix}-${username}`;
 
-        // Case 1: it's the same username and same email
-
-        // Case 2: it's a different email, add prefix
-        if (service === 'github') {
-        user.username = `gh-${username}`;
+        // Append service email to user emails
+        user.emails = [
+          ...existingUser.emails,
+          currentRegisteringEmail,
+        ];
       }
-
     }
   }
 
