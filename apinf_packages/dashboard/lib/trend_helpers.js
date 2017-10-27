@@ -78,6 +78,10 @@ export function calculateTrend (previous, current) {
   // then no up-down
   if (previous === current) return 0;
 
+  // If no data was in previous period and an empty value in current period
+  // then no up-down
+  if (isNaN(previous) && current === 0) return 0;
+
   // it is impossible to divide on 0
   // If previous value is 0 then progress is up on 100%
   if (previous === 0 || isNaN(previous)) return 100;
