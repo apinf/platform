@@ -47,8 +47,8 @@ script:
   - travis_retry yarn test
   # Build docker image
   - ./.scripts/docker_build.sh
-  # Run Endpoint testing
-  - npm run test-endpoints
+  # Run Endpoint testing with latests version of NodeJS
+  - nvm install 8 && nvm use 8 && npm run test-endpoints
 
 env:
   global:
