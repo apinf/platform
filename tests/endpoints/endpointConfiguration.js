@@ -26,6 +26,11 @@ const users = {
     email,
     password,
   },
+  nonAdminCredentials: {
+    username: `regular-${username}`,
+    email: `regular-${email}r`,
+    password: `regular-${password}`,
+  },
 };
 
 // Data specific for the /organizations endpoint
