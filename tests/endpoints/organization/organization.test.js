@@ -12,6 +12,7 @@ const request = require('superagent');
 const { organizations, users } = require('../endpointConfiguration.js');
 const {
   getUserCredentials,
+  getRegularUserCredentials,
   buildCredentialHeader,
   isArray,
   clearCollection,
@@ -82,7 +83,7 @@ describe('Endpoints for organization module', () => {
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
       // Get user credentials
-      const credentials = await getUserCredentials(users.credentials);
+      const credentials = await getRegularUserCredentials(users.credentials);
 
       // Remove name property from new organization object
       const namelessOrganization = Object.assign({}, newOrganization);
@@ -92,7 +93,7 @@ describe('Endpoints for organization module', () => {
 
       try {
         await request
-            .post(organizations.endpoint)
+          .post(organizations.endpoint)
           .set(buildCredentialHeader(credentials.data))
           .send(namelessOrganization);
       } catch(error) {
@@ -116,11 +117,16 @@ describe('Endpoints for organization module', () => {
       // Get user credentials
       const credentials = await getUserCredentials(users.credentials);
 
+      // Wrong authentication hearders
+      let headers = buildCredentialHeader(credentials.data)
+      headers['X-Auth-Token'] = headers['X-Auth-Token'] + 'wrong'
+
       try {
         await request
           .post(organizations.endpoint)
+          .set(headers)
           .send(newOrganization);
-      } catch(error) {
+      } catch (error) {
         // Check if is error Object
         expect(error instanceof Error).toEqual(true);
 
@@ -128,10 +134,36 @@ describe('Endpoints for organization module', () => {
         expect(error.status).toEqual(401);
 
         // Check if status message is fail
-        expect(error.response.body.status).toEqual('fail');
+        expect(error.response.body.status).toEqual('error');
 
         // Check if body message is expected
-        expect(error.response.body.message).toEqual('Parameter \"name\" is erroneous or missing');
+        expect(error.response.body.message).toEqual('You must be logged in to do this.');
+      }
+    });
+    it('should return 403 because of unauthoreized user', async () => {
+      // Set test max timeout to 10 seconds
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+      // Get user credentials
+      const credentials = await getRegularUserCredentials(users.credentials);
+
+      try {
+        const { body, status } = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.data))
+          .send(newOrganization);
+
+      } catch (error) {
+        // Check if is error Object
+        // expect(error instanceof Error).toEqual(true);
+
+        // // Check if status is 400
+        // expect(error.status).toEqual(403);
+        // // Check if status message is fail
+        // expect(error.response.body.status).toEqual('error');
+        //
+        // // Check if body message is expected
+        // expect(error.response.body.message).toEqual('You must be logged in to do this.');
       }
     });
   });
