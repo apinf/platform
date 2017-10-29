@@ -116,6 +116,8 @@ const clearCollection = (collection) => {
   });
 };
 
+const isArray = item => Array.isArray(item)
+
 module.exports = {
   buildCredentialHeader,
   hasError,
@@ -123,4 +125,5 @@ module.exports = {
   performLogin,
   createUser,
   clearCollection,
+  isArray,
 };
