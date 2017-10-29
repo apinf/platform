@@ -11,43 +11,48 @@ const request = require('superagent');
 const MongoClient = require('mongodb').MongoClient;
 const { users, login } = require('./endpointConfiguration.js');
 
-const createUser = ({ username, email, password }) => {
-  return new Promise((resolve, reject) => {
+const createUser = ({ username, email, password, isRegular = false }) => {
+  return new Promise(async (resolve, reject) => {
     // Define new user variable
     const newUser = { username, email, password };
 
     // Perform request to register new user
-    request
-      .post(users.endpoint)
-      .send(newUser)
-      .end((err, res) => {
-        setUserToAdmin({ username })
-          .then(res => {
-            return resolve({ username, password });
-          })
-          .catch(reject);
-      });
+    try {
+      // Clear users collection
+      const clearCollectionResponse = await clearCollection('users')
+
+      // Add new user
+      const newUserResponse = await request.post(users.endpoint).send(newUser)
+
+      if (!isRegular) {
+        await setUserToAdmin({ username })
+      }
+
+      resolve(newUserResponse)
+    } catch (error) {
+      reject(error)
+    }
   });
 };
 
 const performLogin = ({ username, password }) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     // Define user variable
     const user = { username, password };
 
-    // Perform request to retrieve user credentials
-    request
-      .post(login.endpoint)
-      .send(user)
-      .end((err, res) => {
-        if (err) return reject(err);
-        return resolve(res);
-      });
+    try {
+      // Perform login
+      const loginResult = await request.post(login.endpoint).send(user)
+
+      resolve(loginResult)
+    } catch(error) {
+      reject(error)
+    }
   });
 };
 
-const getUserCredentials = ({ username, email, password }) => {
-  return new Promise((resolve, reject) => {
+const getUserCredentials = ({ username, email, password, regular = false }) => {
+  return new Promise(async (resolve, reject) => {
     /*
      * First login
      * If status == 200, resolve data with promise
@@ -55,21 +60,7 @@ const getUserCredentials = ({ username, email, password }) => {
      * Login with new user
      * Resolve data with promise
      */
-
-    performLogin({ username, password })
-      .then(res => {
-        return resolve(res.body);
-      })
-      .catch(err => {
-        createUser({ username, email, password })
-          .then(res => {
-            return performLogin({ username, password });
-          })
-          .then(res => {
-            return resolve(res.body);
-          })
-          .catch(reject);
-      });
+     resolve({})
   });
 };
 
@@ -86,39 +77,62 @@ const buildCredentialHeader = ({ authToken, userId }) => {
 };
 
 const setUserToAdmin = ({ username }) => {
-  return new Promise((resolve, reject) => {
-    // Connect to Meteor's MongoDB
-    MongoClient.connect('mongodb://localhost:3001/meteor', (err, db) => {
-      // Ger Users collection
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Connect to Meteor's MongoDB
+      const db = await mongoConnect('mongodb://localhost:3001/meteor');
+
+      // Get users collection reference
       const Users = db.collection('users');
 
+      // Define findOneAndUpdate arguments
+      const query = { username };
+      const updateOptions = { $set: { roles: ['admin'] } }
+
       // Set user role to admin
-      Users
-        .findOneAndUpdate(
-          { username },
-          { $set: { roles: ['admin'] } }
-        )
-        .then(resolve)
-        .catch(reject);
-    });
-  });
+      const newAdminResult = await Users.findOneAndUpdate(query, updateOptions)
+
+      resolve(newAdminResult)
+    } catch (error) {
+      reject(error)
+    }
 };
 
 const clearCollection = (collection) => {
-  return new Promise((resolve, reject) => {
-    // Connect to Meteor's MongoDB
-    MongoClient.connect('mongodb://localhost:3001/meteor', (err, db) => {
-      db.collection(collection).remove({}, (err, result) => {
-        if (err) return reject(err);
-        return resolve(result);
-      });
-    });
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Get mongoDb connection
+      const db = await mongoConnect('mongodb://localhost:3001/meteor');
+
+      // Clear entire collection
+      const remove = await promisify(db.collection(collection).remove);
+      resolve(remove);
+    } catch (mongoError) {
+      reject(mongoError);
+    }
   });
 };
 
 const isArray = item => {
   return Array.isArray(item);
 };
+
+const promisify = (method , args = {}) => {
+  return new Promise((resolve, reject) => {
+    // If no method is provided, resolve empty object
+    if (typeof method !== 'function') return resolve({})
+
+    // Promisify the method
+    method(args, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
+    })
+  })
+}
+
+const mongoConnect = (url) => {
+  return promisify(MongoClient.connect, url);
+}
 
 // New organization data, as in the swagger example
 const newOrganization = {

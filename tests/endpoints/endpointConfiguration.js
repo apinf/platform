@@ -27,9 +27,9 @@ const users = {
     password,
   },
   nonAdminCredentials: {
-    username: `regular-${username}`,
-    email: `regular-${email}r`,
-    password: `regular-${password}`,
+    username: `regular_${username}`,
+    email: `regular_${email}`,
+    password: `regular_${password}`,
   },
 };
 
