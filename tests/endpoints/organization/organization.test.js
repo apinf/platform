@@ -14,6 +14,7 @@ const {
   getUserCredentials,
   buildCredentialHeader,
   hasError,
+  isArray,
   clearCollection,
 } = require('../testHelper.js');
 
@@ -35,34 +36,17 @@ afterAll(() => {
 
 describe('Endpoints for organization module', () => {
   describe('GET - /organizations', () => {
-    it('should return all organizations from the collection', done => {
-      // Initiate test request
-      request
-        .get(organizations.endpoint)
-        .end((err, res) => {
-          // If there was an error, stops right here and reject
-          if (err) return hasError({ err, res });
+    it('should return all organizations from the collection', async () => {
+      // Define response variable
+      const { body } = await request.get(organizations.endpoint)
 
-          // Error variable for try/catch control
-          let error = null;
-
-          // Try/Catch statement throws error
-          try {
-            // Expects to be function. If not, throws error
-            expect(res.body.title).toEqual('success');
-            expect(res.body.data).arrayContaining([]);
-          } catch (e) {
-            // Catchs thrown error and sets it to error variable
-            error = e;
-          }
-
-          // Test done
-          return done(error);
-        });
+      // Expect to be successful and to by an empty array
+      expect(body.status).toEqual('success');
+      expect(isArray(body.data)).toEqual(true);
     });
   });
   describe('POST - /organizations', () => {
-    it('add a new organization', done => {
+    it('add a new organization', async () => {
       // Set test max timeout to 10 seconds
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
@@ -83,36 +67,32 @@ describe('Endpoints for organization module', () => {
         linkedIn: 'http://url.com',
       };
 
-      // Get user credentrials
-      getUserCredentials(users.credentials)
-        .then(credentials => {
-          // Initiate test request
-          request
-            .post(organizations.endpoint)
-            .set(buildCredentialHeader(credentials.data))
-            .send(newOrganization)
-            .end((err, res) => {
-              if (err) return done(!hasError({ err, res }));
+      // Get user credentials
+      const credentials = await getUserCredentials(users.credentials);
 
-              // Error variable for try/catch control
-              let error = null;
+      // Get response body
+      const { body } = await request
+        .post(organizations.endpoint)
+        .set(buildCredentialHeader(credentials.data))
+        .send(newOrganization);
 
-              // Try/Catch statement throws error
-              try {
-                // Expects to be function. If not, throws error
-                expect(res.body.status).toEqual('success');
-              } catch (e) {
-                // Catchs thrown error and sets it to error variable
-                error = e;
-              }
+      // Deconstruct status and data from response body
+      const { status, data } = body
 
-              // Test done
-              return done(error);
-            });
-        })
-        .catch(err => {
-          done(err);
-        });
+      // Check if request was successful
+      expect(status).toEqual('success');
+
+      // Check if saved organization matches sent object
+      expect(data.name).toEqual(newOrganization.name)
+      expect(data.description).toEqual(newOrganization.description)
+      expect(data.url).toEqual(newOrganization.url)
+      expect(data.contact.person).toEqual(newOrganization.contact_name)
+      expect(data.contact.phone).toEqual(newOrganization.contact_phone)
+      expect(data.contact.email).toEqual(newOrganization.contact_email)
+      expect(data.socialMedia.facebook).toEqual(newOrganization.facebook)
+      expect(data.socialMedia.instagram).toEqual(newOrganization.instagram)
+      expect(data.socialMedia.twitter).toEqual(newOrganization.twitter)
+      expect(data.socialMedia.linkedIn).toEqual(newOrganization.linkedIn)
     });
   });
 });
