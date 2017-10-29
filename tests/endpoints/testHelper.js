@@ -116,7 +116,23 @@ const clearCollection = (collection) => {
   });
 };
 
-const isArray = item => Array.isArray(item)
+const isArray = item => {
+  return Array.isArray(item);
+};
+
+// New organization data, as in the swagger example
+const newOrganization = {
+  name: `Organization Name - ${new Date().getTime()}`,
+  description: 'Description about Organization',
+  url: 'https://organization.com',
+  contact_name: 'David Bar',
+  contact_phone: '+7 000 000 00 00',
+  contact_email: 'company-mail@gmail.com',
+  facebook: 'http://url.com',
+  twitter: 'http://url.com',
+  instagram: 'http://url.com',
+  linkedIn: 'http://url.com',
+};
 
 module.exports = {
   buildCredentialHeader,
@@ -126,4 +142,5 @@ module.exports = {
   createUser,
   clearCollection,
   isArray,
+  newOrganization,
 };
