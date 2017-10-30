@@ -14,6 +14,18 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Feedback from '../collection';
 
+Template.apiFeedback.onCreated(function () {
+  // Get IDs of feedbacks
+  const feedbackIds = Feedback.find().map((feedback) => {
+    return feedback._id;
+  });
+
+  // Subscribe to feedbacks comments
+  this.subscribe('getEntitiesComments', feedbackIds);
+  // Subscribe to usernames of comments authors
+  this.subscribe('commentUsersUsername', feedbackIds);
+});
+
 Template.apiFeedback.helpers({
   checkAllPublic () {
     // Fetch count of feedbacks
@@ -21,10 +33,8 @@ Template.apiFeedback.helpers({
 
     // Fetch count of feedbacks as public
     const publicFeedbackCount = Feedback.find({ isPublic: true }).count();
-    if (feedbackCount === publicFeedbackCount) {
-      return true;
-    }
-    return false;
+
+    return feedbackCount === publicFeedbackCount;
   },
 });
 

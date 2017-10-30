@@ -15,13 +15,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 
 Template.feedbackCommentItem.onCreated(function () {
-  // Get author Id of currnet comment object
-  const authorId = Template.currentData().item.authorId;
-  // Fetch author's username of this comment
-  this.subscribe('getUsernameForSingleComment', authorId);
-  // this.formType = 'insert';
-  this.showForm = new ReactiveVar(false);
-  this.formType = new ReactiveVar('insert');
+  const instance = this;
+
+  instance.formType = new ReactiveVar('insert');
 });
 
 Template.feedbackCommentItem.helpers({
@@ -32,33 +28,36 @@ Template.feedbackCommentItem.helpers({
     return moment(givenTimeStamp).locale(language).fromNow();
   },
   formType () {
-    return Template.instance().formType.get();
-  },
-  currentComment () {
-    if (Template.instance().formType.get() === 'update') {
-      return Template.currentData().item;
-    }
-    return '';
+    const instance = Template.instance();
+
+    return instance.formType.get();
   },
 });
 
 Template.feedbackCommentItem.events({
-  'click .comment-reply': () => {
-    Template.instance().formType.set('insert');
-    // hide all other comment field
-    $('.feedback-reply-form').css('display', 'none');
-    // show comment input
-    $(`#feedback-reply-${Template.currentData().item._id}`)
-      .css('display', 'block');
+  'click .comment-reply': (event, templateInstance) => {
+    // Get ID of current comment or feedback
+    const itemId = templateInstance.data.item._id;
+    // Get comment form
+    const commentForm = document.getElementById(`feedback-reply-${itemId}`);
+
+    // Show comment form
+    commentForm.classList.remove('hide');
+
+    // Create a new entityComment
+    // formType is insert
+    templateInstance.formType.set('insert');
   },
-  'click .comment-edit': () => {
-    Template.instance().formType.set('update');
-    $('.feedback-reply-form').css('display', 'none');
-    $(`#feedback-reply-${Template.currentData().item._id}`)
-      .css('display', 'block');
-  },
-  'click .comment-delete': () => {
-    const commentId = Template.currentData().item._id;
+  'click .comment-delete': (event, templateInstance) => {
+    // Get ID of current comment
+    const commentId = templateInstance.data.item._id;
+    // Get comment form
+    const commentForm = document.getElementById(`feedback-reply-${commentId}`);
+
+    // Hide comment form if it is displayed
+    commentForm.classList.add('hide');
+
+    // Delete this comment and replies of this comment
     Meteor.call('deleteComment', commentId);
   },
 });

@@ -100,23 +100,7 @@ Meteor.methods({
     // Make sure commentId is a string
     check(commentId, String);
 
-    // Create a array variable for storing comment Ids
-    const commentIds = [];
-
-    // fetch all reply
-    const childComments = function (id) {
-      commentIds.push(id);
-      // fetch reply of reply
-      const comments = EntityComment.find({ commentedOn: id }).fetch();
-      comments.map((comment) => {
-        return childComments(comment._id);
-      });
-    };
-
-    // call function for main comment which initate to delete
-    childComments(commentId);
-
-    // Delete comment and all replis on that comment
-    EntityComment.remove({ _id: { $in: commentIds } });
+    // Remove all replies of current comment and this comment
+    EntityComment.remove({ $or: [{ _id: commentId }, { commentedOn: commentId }] });
   },
 });

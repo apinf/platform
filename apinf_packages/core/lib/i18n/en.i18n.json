@@ -315,7 +315,6 @@
   "emailVerification_successMessage": "Email verified! Thanks!",
   "entityComment_cancelComment": "Cancel",
   "entityComment_deleteComment": "Delete",
-  "entityComment_editComment": "Edit",
   "entityComment_replyComment": "Reply",
   "entityComment_sendComment": "Send",
   "entityComment_successMessage": "Thank you! Your Comment has been successfully sent.",

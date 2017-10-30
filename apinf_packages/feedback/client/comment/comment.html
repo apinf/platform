@@ -4,13 +4,10 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="feedbackComment">
-  <div class="">
-    {{# if currentUser }}
-      {{ > commentForm type='feedbackReply' item=item formType='insert' }}
-    {{/ if }}
-    <div class="feedback-comment-list"> 
-      {{> feedbackCommentList feedback=item }}
-    </div>
-  
+  {{# if currentUser }}
+    {{> commentForm type='feedback' item=item formType='insert' }}
+  {{/ if }}
+  <div class="feedback-comment-list">
+    {{> feedbackCommentList feedback=item }}
   </div>
 </template>

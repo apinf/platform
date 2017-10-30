@@ -4,11 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="feedbackCommentList">
-	{{# if Template.subscriptionsReady }}
-	  {{# if userFeedbackComment }}
-	    {{# each item in userFeedbackComment }}
-	      {{> feedbackCommentItem item=item }}
-	    {{/ each }}
-	  {{/ if }}
-	{{/ if }}
+  {{# if Template.subscriptionsReady }}
+    {{# each item in userFeedbackComment }}
+      {{> feedbackCommentItem item=item }}
+    {{/ each }}
+  {{/ if }}
 </template>
