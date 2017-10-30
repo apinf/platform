@@ -100,7 +100,25 @@ Meteor.methods({
     // Make sure commentId is a string
     check(commentId, String);
 
-    // Remove all replies of current comment and this comment
-    EntityComment.remove({ $or: [{ _id: commentId }, { commentedOn: commentId }] });
+    // Create a array variable for storing comment Ids
+    const commentIds = [];
+
+    // Use recursive function to get all replies and replies of replies
+    const childComments = function (id) {
+      // Store ID
+      commentIds.push(id);
+      // Fetch reply of reply
+      const comments = EntityComment.find({ commentedOn: id }).fetch();
+
+      comments.map((comment) => {
+        return childComments(comment._id);
+      });
+    };
+
+    // call function for main comment which initate to delete
+    childComments(commentId);
+
+    // Delete comment and all replies on that comment
+    EntityComment.remove({ _id: { $in: commentIds } });
   },
 });
