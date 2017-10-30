@@ -17,29 +17,32 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
 import _ from 'lodash';
+import moment from 'moment';
 
 // APInf imports
-import queryForDashboardPage from './query';
+import overviewChartsRequest from '../elasticsearch_queries/overview_charts';
+import responseStatusCodesRequest from '../elasticsearch_queries/status_codes';
+import totalNumbersRequest from '../elasticsearch_queries/total_numbers';
 
 Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  instance.groupingIds = {
+  // Init variables
+  instance.elasticsearchHost = new ReactiveVar();
+  instance.filteredRequestPaths = new ReactiveVar();
+  instance.overviewChartResponse = new ReactiveVar();
+  instance.totalNumberResponse = new ReactiveVar();
+  instance.statusCodesResponse = new ReactiveVar();
+  instance.groupingIds = new ReactiveVar({
     myApis: [],
     managedApis: [],
     otherApis: [],
-  };
-
-  // Init variables
-  instance.chartData = new ReactiveVar();
-  instance.error = new ReactiveVar();
-  instance.elasticsearchHost = new ReactiveVar();
-  instance.proxyBackendPaths = new ReactiveVar();
+  });
 
   // Get API IDs for grouping
   Meteor.call('groupingApiIds', (err, res) => {
-    instance.groupingIds = res;
+    instance.groupingIds.set(res);
   });
 
   // Reactive update Elasticsearch host
@@ -54,75 +57,102 @@ Template.dashboardView.onCreated(function () {
     instance.elasticsearchHost.set(host);
   });
 
-  // Reactive update Proxy Backends paths list
+  // Reactive update "filters" option when Proxy Backends paths list is changed
   instance.autorun(() => {
     // Fetch proxy backends
     const proxyBackends = ProxyBackends.find().fetch();
 
-    // Create a list with requested paths
-    const paths = _.map(proxyBackends, (backend) => {
-      const requestPath = backend.apiUmbrella.url_matches[0].frontend_prefix;
-      return {
-        wildcard: {
-          request_path: {
-            // Add '*' to partially match the url
-            // Remove the last slash
-            value: `${requestPath.slice(0, -1)}*`,
-          },
-        },
-      };
+    const filters = {
+      filters: {},
+    };
+
+    // Create "filters" option for elasticsearch queries
+    proxyBackends.forEach(backend => {
+      const requestPath = backend.frontendPrefix();
+
+      filters.filters[requestPath] = { prefix: { request_path: requestPath } };
     });
 
     // Save it in reactive variable
-    instance.proxyBackendPaths.set(paths);
+    instance.filteredRequestPaths.set(filters);
   });
 
   instance.autorun(() => {
     const elasticsearchHost = instance.elasticsearchHost.get();
     // Make sure Host exists
     if (elasticsearchHost) {
-      // Get list of proxy backends paths
-      const proxyBackendPaths = instance.proxyBackendPaths.get();
+      // Get list of filtered proxy backends paths
+      const filteredRequestPaths = instance.filteredRequestPaths.get();
+
       // Get timeframe
       const timeframe = FlowRouter.getQueryParam('timeframe');
 
-      // Make query object
-      const queryParams = queryForDashboardPage(proxyBackendPaths, timeframe);
+      // Create date range parameter
+      const dateRange = {
+        // Plus one day to include current day in selection
+        today: moment().add(1, 'days').format('YYYY-MM-DD'),
+        oneTimePeriodAgo: moment().subtract(timeframe - 1, 'days').format('YYYY-MM-DD'),
+        // eslint-disable-next-line no-mixed-operators
+        twoTimePeriodsAgo: moment().subtract(2 * timeframe - 1, 'days').format('YYYY-MM-DD'),
+      };
 
-      // Get chart data for dashboard
-      Meteor.call('dashboardChartData', elasticsearchHost, queryParams, (error, result) => {
+      // Make query object
+      const overviewChartsQuery = overviewChartsRequest(filteredRequestPaths, dateRange);
+
+      // Send request to get data for overview charts
+      Meteor.call('overviewChartData', elasticsearchHost, overviewChartsQuery, (error, result) => {
         if (error) {
-          instance.error.set(error);
           throw Meteor.Error(error);
         }
-        // Update chart data reactive variable with result
-        instance.chartData.set(result);
+        instance.overviewChartResponse.set(result);
+      });
+
+      // Make query object
+      const totalNumbersQuery = totalNumbersRequest(filteredRequestPaths, dateRange);
+
+      // Send request to get data about summary statistics numbers &
+      // Parse data for Total numbers & trend blocks
+      Meteor.call('totalNumbersData', elasticsearchHost, totalNumbersQuery, (error, result) => {
+        if (error) {
+          throw Meteor.Error(error);
+        }
+        instance.totalNumberResponse.set(result);
+      });
+
+      // Make query object
+      const statusCodesQuery = responseStatusCodesRequest(filteredRequestPaths, dateRange);
+
+      // Send request to get data about response status codes &
+      // Parse data for Response status codes block
+      Meteor.call('statusCodesData', elasticsearchHost, statusCodesQuery, (error, result) => {
+        if (error) {
+          throw Meteor.Error(error);
+        }
+        instance.statusCodesResponse.set(result);
       });
     }
   });
 });
 
 Template.dashboardView.helpers({
-  chartData () {
-    // Get reference to template instance
-    const instance = Template.instance();
-
-    // Return data for charts
-    return instance.chartData.get();
-  },
-  fetchingData () {
-    const instance = Template.instance();
-    // Return status about error or chart data
-    return instance.chartData.get() || instance.error.get();
-  },
-  error () {
-    const instance = Template.instance();
-    // Return value of error
-    return instance.error.get();
-  },
   grouping () {
     const instance = Template.instance();
     // Return object with IDs groups
-    return instance.groupingIds;
+    return instance.groupingIds.get();
+  },
+  overviewChartResponse () {
+    const instance = Template.instance();
+
+    return instance.overviewChartResponse.get();
+  },
+  totalNumberResponse () {
+    const instance = Template.instance();
+
+    return instance.totalNumberResponse.get();
+  },
+  statusCodesResponse () {
+    const instance = Template.instance();
+
+    return instance.statusCodesResponse.get();
   },
 });
