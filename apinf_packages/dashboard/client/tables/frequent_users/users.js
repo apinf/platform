@@ -15,20 +15,18 @@ Template.mostFrequentUsersTable.onCreated(function () {
 
   instance.autorun(() => {
     // Get aggregated data about users
-    const mostFrequentUsers = Template.currentData().mostFrequentUsers;
+    const frequentUsers = Template.currentData().frequentUsers;
 
     // Init
     instance.users = [];
 
-    mostFrequentUsers.forEach(userDataset => {
+    frequentUsers.forEach(userDataset => {
       userDataset.request_path.buckets.forEach(request => {
-        const user = {};
-        // Get value of email
-        user.email = userDataset.user_email.buckets[0].key;
-        // Get value of requests number
-        user.calls = request.doc_count;
-        // Get value of request_path
-        user.url = request.key;
+        const user = {
+          email: userDataset.key,
+          calls: request.doc_count,
+          url: request.key,
+        };
 
         instance.users.push(user);
       });

@@ -17,7 +17,7 @@ import Chart from 'chart.js';
 Template.responseTimeTimeline.onCreated(function () {
   const instance = this;
 
-  instance.elasticsearchData = new ReactiveVar();
+  instance.aggregationData = new ReactiveVar();
 
   // Chart depends on selected request path
   // Get related elasticsearch data when a user changed path
@@ -28,7 +28,7 @@ Template.responseTimeTimeline.onCreated(function () {
     });
 
     // Update value
-    instance.elasticsearchData.set(relatedData[0]);
+    instance.aggregationData.set(relatedData[0]);
   };
 
   instance.autorun(() => {
@@ -82,30 +82,30 @@ Template.responseTimeTimeline.onRendered(function () {
     },
   });
 
-  // Update chart when elasticsearchData was changed
+  // Update chart when aggregationData was changed
   instance.autorun(() => {
-    // Get ElasticSearch data
-    const elasticsearchData = instance.elasticsearchData.get();
+    // Get aggregated data
+    const aggregationData = instance.aggregationData.get();
 
-    // Get aggregated data for current chart
-    const aggregationData = elasticsearchData.requests_over_time.buckets;
+    // Get chart data for the selected request path
+    const chartData = aggregationData.requests_over_time.buckets;
 
     // Points for line of the 95th percentiles of response time
-    const percentiles95 = aggregationData.map((value) => {
+    const percentiles95 = chartData.map((value) => {
       const responseTime = value.percentiles_response_time.values['95.0'];
 
       return parseInt(responseTime, 10);
     });
 
     // Points for line of the 50th percentiles of response time
-    const percentiles50 = aggregationData.map((value) => {
+    const percentiles50 = chartData.map((value) => {
       const responseTime = value.percentiles_response_time.values['50.0'];
 
       return parseInt(responseTime, 10);
     });
 
     // Create Labels values
-    const labels = aggregationData.map(value => {
+    const labels = chartData.map(value => {
       // TODO: internationalize date formatting
       return moment(value.key).format('MM/DD');
     });
@@ -153,7 +153,7 @@ Template.responseTimeTimeline.onRendered(function () {
 
 Template.responseTimeTimeline.helpers({
   listPaths () {
-    const timelineData = Template.instance().data.timelineData;
+    const timelineData = Template.currentData().timelineData;
 
     // Return all requested paths
     return timelineData.map(dataset => {
