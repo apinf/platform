@@ -25,13 +25,6 @@ FlowRouter.route('/apis/new', {
   },
 });
 
-FlowRouter.route('/apis/import', {
-  name: 'importApiConfiguration',
-  action () {
-    BlazeLayout.render('masterLayout', { main: 'importApiConfiguration' });
-  },
-});
-
 FlowRouter.route('/apis/:slug/', {
   name: 'viewApi',
   action (params) {
