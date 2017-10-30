@@ -80,7 +80,7 @@ const setUserToAdmin = ({ username }) => {
   return new Promise(async (resolve, reject) => {
     try {
       // Connect to Meteor's MongoDB
-      const db = await mongoConnect('mongodb://localhost:3001/meteor');
+      const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
 
       // Get users collection reference
       const Users = db.collection('users');
@@ -96,17 +96,23 @@ const setUserToAdmin = ({ username }) => {
     } catch (error) {
       reject(error)
     }
+  })
 };
 
 const clearCollection = (collection) => {
   return new Promise(async (resolve, reject) => {
     try {
       // Get mongoDb connection
-      const db = await mongoConnect('mongodb://localhost:3001/meteor');
+      const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
+
+      // Get mongoDb connection
+      const Users = db.collection('users');
 
       // Clear entire collection
-      const remove = await promisify(db.collection(collection).remove);
-      resolve(remove);
+      const { result } = await Users.remove({});
+
+      // Resolve with result
+      resolve(result);
     } catch (mongoError) {
       reject(mongoError);
     }
@@ -116,23 +122,6 @@ const clearCollection = (collection) => {
 const isArray = item => {
   return Array.isArray(item);
 };
-
-const promisify = (method , args = {}) => {
-  return new Promise((resolve, reject) => {
-    // If no method is provided, resolve empty object
-    if (typeof method !== 'function') return resolve({})
-
-    // Promisify the method
-    method(args, (err, result) => {
-      if (err) return reject(err);
-      return resolve(result);
-    })
-  })
-}
-
-const mongoConnect = (url) => {
-  return promisify(MongoClient.connect, url);
-}
 
 // New organization data, as in the swagger example
 const newOrganization = {
