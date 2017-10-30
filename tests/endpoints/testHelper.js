@@ -11,7 +11,7 @@ const request = require('superagent');
 const MongoClient = require('mongodb').MongoClient;
 const { users, login } = require('./endpointConfiguration.js');
 
-const createUser = ({ username, email, password, isRegular = false }) => {
+const createUser = ({ username, email, password, regular = false }) => {
   return new Promise(async (resolve, reject) => {
     // Define new user variable
     const newUser = { username, email, password };
@@ -19,18 +19,19 @@ const createUser = ({ username, email, password, isRegular = false }) => {
     // Perform request to register new user
     try {
       // Clear users collection
-      const clearCollectionResponse = await clearCollection('users')
+      const clearCollectionResponse = await clearCollection('users');
 
       // Add new user
-      const newUserResponse = await request.post(users.endpoint).send(newUser)
+      const { body, status } = await request.post(users.endpoint).send(newUser);
 
-      if (!isRegular) {
-        await setUserToAdmin({ username })
+      if (!regular) {
+        await setUserToAdmin({ username });
       }
 
-      resolve(newUserResponse)
+      // Resolve with repsonse body and status
+      resolve({ body, status });
     } catch (error) {
-      reject(error)
+      reject(error);
     }
   });
 };
@@ -42,31 +43,30 @@ const performLogin = ({ username, password }) => {
 
     try {
       // Perform login
-      const loginResult = await request.post(login.endpoint).send(user)
+      const { status, body } = await request.post(login.endpoint).send(user);
 
-      resolve(loginResult)
-    } catch(error) {
-      reject(error)
+      resolve({ status, body });
+    } catch (error) {
+      reject(error);
     }
   });
 };
 
 const getUserCredentials = ({ username, email, password, regular = false }) => {
   return new Promise(async (resolve, reject) => {
-    /*
-     * First login
-     * If status == 200, resolve data with promise
-     * If status == 401, create new username
-     * Login with new user
-     * Resolve data with promise
-     */
-     resolve({})
-  });
-};
+    try {
+      // Create user
+      const userResponse = await createUser({ username, email, password, regular });
 
-const hasError = ({ err, res }) => {
-  // Is falsy when err is not null or status is not successful
-  return err || res.status !== 201 || res.body.status !== 'success';
+      // Perform Login
+      const loginResult = await performLogin({ username, password });
+
+      // Resolve with login response
+      resolve(loginResult);
+    } catch (error) {
+      reject(error);
+    }
+  });
 };
 
 const buildCredentialHeader = ({ authToken, userId }) => {
@@ -87,16 +87,17 @@ const setUserToAdmin = ({ username }) => {
 
       // Define findOneAndUpdate arguments
       const query = { username };
-      const updateOptions = { $set: { roles: ['admin'] } }
+      const updateOptions = { $set: { roles: ['admin'] } };
 
       // Set user role to admin
-      const newAdminResult = await Users.findOneAndUpdate(query, updateOptions)
+      const newAdminResult = await Users.findOneAndUpdate(query, updateOptions);
 
-      resolve(newAdminResult)
+      // Resolve with found object
+      resolve(newAdminResult);
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
+  });
 };
 
 const clearCollection = (collection) => {
@@ -105,11 +106,8 @@ const clearCollection = (collection) => {
       // Get mongoDb connection
       const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
 
-      // Get mongoDb connection
-      const Users = db.collection('users');
-
       // Clear entire collection
-      const { result } = await Users.remove({});
+      const { result } = await db.collection(collection).remove({});
 
       // Resolve with result
       resolve(result);
@@ -139,7 +137,6 @@ const newOrganization = {
 
 module.exports = {
   buildCredentialHeader,
-  hasError,
   getUserCredentials,
   performLogin,
   createUser,
