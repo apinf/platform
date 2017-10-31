@@ -11,8 +11,13 @@ const request = require('superagent');
 const MongoClient = require('mongodb').MongoClient;
 const { users, login } = require('./endpointConfiguration.js');
 
+const generateUniqueId = () => {
+  return Math.random().toString(36).substr(2, 9)
+}
+
 const createUser = ({ username, email, password, regular = false }) => {
   return new Promise(async (resolve, reject) => {
+
     // Define new user variable
     const newUser = { username, email, password };
 
@@ -54,6 +59,12 @@ const performLogin = ({ username, password }) => {
 
 const getUserCredentials = ({ username, email, password, regular = false }) => {
   return new Promise(async (resolve, reject) => {
+    // Get uniqueID
+    const uniqueID = generateUniqueId()
+
+    username = `${uniqueID}${username}`;
+    email = `${uniqueID}${email}`;
+
     try {
       // Create user
       const userResponse = await createUser({ username, email, password, regular });
@@ -143,4 +154,5 @@ module.exports = {
   clearCollection,
   isArray,
   newOrganization,
+  generateUniqueId,
 };
