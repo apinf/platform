@@ -20,7 +20,7 @@ const {
 } = require('../testHelper.js');
 
 // Clear database before test runs
-beforeAll(() => {
+beforeEach(() => {
   return Promise.all([
     clearCollection('users'),
     clearCollection('Organizations'),
@@ -49,7 +49,7 @@ describe('Endpoints for organization module', () => {
   describe('POST - /organizations', () => {
     it('add a new organization', async () => {
       // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
       // Get user credentials
       const credentials = await getUserCredentials(users.credentials);
@@ -57,7 +57,7 @@ describe('Endpoints for organization module', () => {
       // Get response body
       const { body } = await request
         .post(organizations.endpoint)
-        .set(buildCredentialHeader(credentials.data))
+        .set(buildCredentialHeader(credentials.body.data))
         .send(newOrganization);
 
       // Deconstruct status and data from response body
@@ -80,10 +80,10 @@ describe('Endpoints for organization module', () => {
     });
     it('should return 400 because of missing name paramenter', async () => {
       // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
       // Get user credentials
-      const credentials = await getRegularUserCredentials(users.credentials);
+      const { body } = await getUserCredentials(users.credentials);
 
       // Remove name property from new organization object
       const namelessOrganization = Object.assign({}, newOrganization);
@@ -94,32 +94,29 @@ describe('Endpoints for organization module', () => {
       try {
         await request
           .post(organizations.endpoint)
-          .set(buildCredentialHeader(credentials.data))
+          .set(buildCredentialHeader(body.data))
           .send(namelessOrganization);
-      } catch(error) {
-        // Check if is error Object
+      } catch (error) {
+        // Deconstruct status and response from error
+        const { status, response } = error;
+
+        // Test assertion logic
         expect(error instanceof Error).toEqual(true);
-
-        // Check if status is 400
         expect(error.status).toEqual(400);
-
-        // Check if status message is fail
         expect(error.response.body.status).toEqual('fail');
-
-        // Check if body message is expected
         expect(error.response.body.message).toEqual('Parameter "name" is erroneous or missing');
       }
     });
     it('should return 401 because of wrong authentication headers', async () => {
       // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
       // Get user credentials
-      const credentials = await getUserCredentials(users.credentials);
+      const { body } = await getUserCredentials(users.credentials);
 
       // Wrong authentication hearders
-      let headers = buildCredentialHeader(credentials.data)
-      headers['X-Auth-Token'] = headers['X-Auth-Token'] + 'wrong'
+      const headers = buildCredentialHeader(body.data);
+      headers['X-Auth-Token'] += 'wrong';
 
       try {
         await request
@@ -127,43 +124,43 @@ describe('Endpoints for organization module', () => {
           .set(headers)
           .send(newOrganization);
       } catch (error) {
-        // Check if is error Object
+        // Deconstruct status and response from error
+        const { status, response } = error;
+
+        // Test assertion logic
         expect(error instanceof Error).toEqual(true);
-
-        // Check if status is 400
         expect(error.status).toEqual(401);
-
-        // Check if status message is fail
         expect(error.response.body.status).toEqual('error');
-
-        // Check if body message is expected
         expect(error.response.body.message).toEqual('You must be logged in to do this.');
       }
     });
     it('should return 403 because of unauthoreized user', async () => {
       // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+      // Flag to ser user to regular
+      const regularFlag = { regular: true };
+
+      // Assign object property
+      const credentialParams = Object.assign({}, users.credentials, regularFlag);
 
       // Get user credentials
-      const credentials = await getRegularUserCredentials(users.credentials);
+      const { body } = await getUserCredentials(credentialParams);
 
       try {
-        const { body, status } = await request
+        await request
           .post(organizations.endpoint)
-          .set(buildCredentialHeader(credentials.data))
+          .set(buildCredentialHeader(body.data))
           .send(newOrganization);
-
       } catch (error) {
-        // Check if is error Object
-        // expect(error instanceof Error).toEqual(true);
+        // Deconstruct status and response from error
+        const { status, response } = error;
 
-        // // Check if status is 400
-        // expect(error.status).toEqual(403);
-        // // Check if status message is fail
-        // expect(error.response.body.status).toEqual('error');
-        //
-        // // Check if body message is expected
-        // expect(error.response.body.message).toEqual('You must be logged in to do this.');
+        // Test assertion logic
+        expect(error instanceof Error).toEqual(true);
+        expect(status).toEqual(403);
+        expect(response.body.status).toEqual('error');
+        expect(response.body.message).toEqual('You do not have permission to do this.');
       }
     });
   });
