@@ -27,21 +27,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </button>
         </div>
         {{# if api.currentUserCanManage }}
-          <div class="col-md-2 pull-right">
-            {{# if checkAllPublic }}
-              <span
-                class="mark-feedback-private-button pull-right"
-                id="mark-all-feedbacks-as-private">
-                  <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-              </span>
-            {{ else }}
-              <span
-                class="mark-feedback-public-button pull-right"
-                id="mark-all-feedbacks-as-public">
-                  <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-              </span>
-            {{/ if }}
-          </div>
+          {{# if checkFeedbackCount }}
+            <div class="col-md-2 pull-right">
+              {{# if checkAllPublic }}
+                <span
+                  class="mark-feedback-private-button pull-right"
+                  id="mark-all-feedbacks-as-private"
+                  title={{_ "feedback_mark_all_feedbacks_as_private"}}>
+                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                </span>
+              {{ else }}
+                <span
+                  class="mark-feedback-public-button pull-right"
+                  id="mark-all-feedbacks-as-public"
+                  title={{_ "feedback_mark_all_feedbacks_as_public"}}>
+                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </div>
+          {{/ if }}
         {{/ if }}
       </div>
     {{/ if }}

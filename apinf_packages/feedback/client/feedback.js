@@ -27,6 +27,10 @@ Template.apiFeedback.onCreated(function () {
 });
 
 Template.apiFeedback.helpers({
+  checkFeedbackCount () {
+    // Fetch count of feedbacks
+    return Feedback.find().count();
+  },
   checkAllPublic () {
     // Fetch count of feedbacks
     const feedbackCount = Feedback.find().count();
