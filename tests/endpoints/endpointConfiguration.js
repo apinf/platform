@@ -25,7 +25,7 @@ const users = {
     username,
     email,
     password,
-  }
+  },
 };
 
 // Data specific for the /organizations endpoint

@@ -12,7 +12,6 @@ const request = require('superagent');
 const { organizations, users } = require('../endpointConfiguration.js');
 const {
   getUserCredentials,
-  getRegularUserCredentials,
   buildCredentialHeader,
   isArray,
   clearCollection,
@@ -102,9 +101,9 @@ describe('Endpoints for organization module', () => {
 
         // Test assertion logic
         expect(error instanceof Error).toEqual(true);
-        expect(error.status).toEqual(400);
-        expect(error.response.body.status).toEqual('fail');
-        expect(error.response.body.message).toEqual('Parameter "name" is erroneous or missing');
+        expect(status).toEqual(400);
+        expect(response.body.status).toEqual('fail');
+        expect(response.body.message).toEqual('Parameter "name" is erroneous or missing');
       }
     });
     it('should return 401 because of wrong authentication headers', async () => {
@@ -129,9 +128,9 @@ describe('Endpoints for organization module', () => {
 
         // Test assertion logic
         expect(error instanceof Error).toEqual(true);
-        expect(error.status).toEqual(401);
-        expect(error.response.body.status).toEqual('error');
-        expect(error.response.body.message).toEqual('You must be logged in to do this.');
+        expect(status).toEqual(401);
+        expect(response.body.status).toEqual('error');
+        expect(response.body.message).toEqual('You must be logged in to do this.');
       }
     });
     it('should return 403 because of unauthoreized user', async () => {
