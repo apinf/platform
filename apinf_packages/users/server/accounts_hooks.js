@@ -55,7 +55,7 @@ Accounts.onCreateUser((options, user) => {
         ];
       } else {
         // Get username prefix based on service being used
-        const prefix = servicePrefixDictionary[service] || 'oauth'
+        const prefix = servicePrefixDictionary[service] || 'oauth';
 
         // Username clashes with existing username
         user.username = `${prefix}-${username}`;
