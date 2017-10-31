@@ -9,6 +9,14 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 
+// OAuth Services dictionary to get the correct prefix
+const servicePrefixDictionary = {
+  fiware: 'fw',
+  github: 'gh',
+  twitter: 'tw',
+  facebook: 'fb',
+};
+
 Accounts.onCreateUser((options, user) => {
   // Create empty user profile if none exists
   user.profile = user.profile || {};
@@ -47,7 +55,7 @@ Accounts.onCreateUser((options, user) => {
         ];
       } else {
         // Get username prefix based on service being used
-        const prefix = service === 'github' ? 'gh' : 'fw';
+        const prefix = servicePrefixDictionary[service] || 'oauth'
 
         // Username clashes with existing username
         user.username = `${prefix}-${username}`;
