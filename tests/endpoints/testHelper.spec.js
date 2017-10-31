@@ -17,7 +17,23 @@ const {
   clearCollection,
   isArray,
   newOrganization,
+  generateUniqueId,
 } = require('./testHelper.js');
+
+// Clear database before test runs
+beforeEach(() => {
+  return Promise.all([
+    clearCollection('users'),
+    clearCollection('Organizations'),
+  ]);
+});
+
+describe('generateUniqueId method', () => {
+  it('should generate a unique Id every time', () => {
+    const isDifferent = generateUniqueId() != generateUniqueId()
+    expect(isDifferent).toEqual(true)
+  })
+})
 
 describe('newOrganization object', () => {
   it('should equal to expected object', () => {
@@ -54,7 +70,7 @@ describe('isArray method', () => {
 
 describe('buildCredentialHeader method', () => {
   it('should return correct object with right property names', () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
     // Credential data
     const authData = {
@@ -73,7 +89,7 @@ describe('buildCredentialHeader method', () => {
 
 describe('clearCollection method', () => {
   it('should completely clear collection', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
     // Clear Organizations collection
     const result = await clearCollection('Organizations');
@@ -85,7 +101,7 @@ describe('clearCollection method', () => {
 
 describe('createUser Method', () => {
   it('should create new user', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
     // Get body and status from user creation function
     const { body, status } = await createUser(users.credentials);
@@ -99,7 +115,7 @@ describe('createUser Method', () => {
 
 describe('getUserCredentials method', () => {
   it('should get user credential with username and password', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
     // Get user credential from login/password
     const { body, status } = await getUserCredentials(users.credentials);
@@ -112,7 +128,7 @@ describe('getUserCredentials method', () => {
 
 describe('performLogin method', () => {
   it('should login with existing user', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
     // Make sure user is created
     await createUser(users.credentials);
