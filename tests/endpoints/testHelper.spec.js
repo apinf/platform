@@ -30,10 +30,10 @@ beforeEach(() => {
 
 describe('generateUniqueId method', () => {
   it('should generate a unique Id every time', () => {
-    const isDifferent = generateUniqueId() != generateUniqueId()
-    expect(isDifferent).toEqual(true)
-  })
-})
+    const isDifferent = generateUniqueId() !== generateUniqueId();
+    expect(isDifferent).toEqual(true);
+  });
+});
 
 describe('newOrganization object', () => {
   it('should equal to expected object', () => {

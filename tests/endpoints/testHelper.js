@@ -6,18 +6,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable no-use-before-define */
+/* eslint-disable no-param-reassign */
 
 const request = require('superagent');
 const MongoClient = require('mongodb').MongoClient;
 const { users, login } = require('./endpointConfiguration.js');
 
 const generateUniqueId = () => {
-  return Math.random().toString(36).substr(2, 9)
-}
+  return Math.random().toString(36).substr(2, 9);
+};
 
 const createUser = ({ username, email, password, regular = false }) => {
   return new Promise(async (resolve, reject) => {
-
     // Define new user variable
     const newUser = { username, email, password };
 
@@ -60,7 +60,7 @@ const performLogin = ({ username, password }) => {
 const getUserCredentials = ({ username, email, password, regular = false }) => {
   return new Promise(async (resolve, reject) => {
     // Get uniqueID
-    const uniqueID = generateUniqueId()
+    const uniqueID = generateUniqueId();
 
     username = `${uniqueID}${username}`;
     email = `${uniqueID}${email}`;
