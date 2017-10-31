@@ -13,9 +13,6 @@ AutoForm.hooks({
     onSuccess () {
       // Get success message translation
       const message = TAPi18n.__('entityComment_successMessage');
-      // Hide comment input after submit successfully
-      // showForm.set(false);
-      $('.feedback-reply-form').css('display', 'none');
       // Alert user of success
       sAlert.success(message);
     },

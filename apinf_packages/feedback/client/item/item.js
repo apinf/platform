@@ -21,10 +21,6 @@ import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object
   const feedbackId = Template.currentData().item._id;
-  // Get author Id of currnet feedback object
-  const authorId = Template.currentData().item.authorId;
-  // Fetch author's username of this feedback
-  this.subscribe('getUsernameForSingleComment', authorId);
   // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
 });
@@ -97,10 +93,13 @@ Template.feedbackItem.helpers({
     if (vote > 0) {
       // return positive vote class
       return 'positive-vote';
-    } else if (vote < 0) {
+    }
+
+    if (vote < 0) {
       // return negative vote class
       return 'negative-vote';
     }
+
     return 'no-vote';
   },
 });
@@ -155,9 +154,12 @@ Template.feedbackItem.events({
     // Set the new visibility of feedback
     Meteor.call('changeFeedbackVisibility', item._id, !item.isPublic);
   },
-  'click .feedback-reply': () => {
-    $('.feedback-reply-form').css('display', 'none');
-    $(`#feedback-reply-${Template.currentData().item._id}`)
-      .css('display', 'block');
+  'click .feedback-reply': (event, templateInstance) => {
+    const itemId = templateInstance.data.item._id;
+    // Get comment form
+    const commentForm = document.getElementById(`feedback-reply-${itemId}`);
+
+    // Show comment form
+    commentForm.classList.remove('hide');
   },
 });

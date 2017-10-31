@@ -4,24 +4,23 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="commentForm">
-  <div id="feedback-reply-{{item._id}}" class="feedback-reply-form" key={{item._id}}>
+  <div id="feedback-reply-{{ item._id }}" class="feedback-reply-form hide">
     {{# autoForm
       id="commentForm"
       collection=entityCommentCollection
-      type=commentFormType
-      doc=currnetDoc
+      type=formType
     }}
       {{> afQuickField name='postId' value=comment.postId type='hidden' }}
       {{> afQuickField name='type' value=comment.type type='hidden' }}
-      {{# if checkFormType }}
-        {{> afQuickField name='commentedOn' value=comment.commentedOn type='hidden' }}
-      {{/ if }}
+      {{> afQuickField name='commentedOn' value=comment.commentedOn type='hidden' }}
+
       {{> afQuickField name='comment' rows=4 }}
+
       <div class="pull-right">
         <button type="button" class="cancel-comment-reply">
           {{_ "entityComment_cancelComment" }}
         </button>&nbsp;&nbsp;
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary submit-comment">
           {{_ "entityComment_sendComment" }}
         </button>
       </div>

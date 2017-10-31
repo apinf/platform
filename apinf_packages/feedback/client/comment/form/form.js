@@ -9,47 +9,62 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import EntityComment from '/apinf_packages/entityComment/collection';
 
-// import showForm from '../../reactiveVar/showForm.js';
-
 Template.commentForm.helpers({
   entityCommentCollection () {
     // Return a reference to Entity comment collection, for AutoForm
     return EntityComment;
   },
-  commentFormType () {
-    return this.formType;
-  },
   comment () {
-    let commentData;
-    if (this.type === 'commentReply') {
-      commentData = {
-        postId: this.item.postId,
-        type: this.item.type,
-        commentedOn: this.item._id,
-      };
-    } else {
-      commentData = {
-        postId: this.item._id,
-        type: 'Feedback',
-        commentedOn: '',
-      };
+    const comment = {};
+    const item = Template.instance().data.item;
+
+    const commentType = Template.instance().data.type;
+
+    switch (commentType) {
+      case 'feedback': {
+        comment.postId = item._id;
+        comment.type = commentType;
+        break;
+      }
+      case 'comment': {
+        comment.postId = item.postId;
+        comment.type = commentType;
+        comment.commentedOn = item._id;
+        break;
+      }
+      default: {
+        comment.postId = item._id;
+        comment.type = commentType;
+        break;
+      }
     }
-    return commentData;
-  },
-  currnetDoc () {
-    return this.currentComment;
-  },
-  checkFormType () {
-    if (this.formType === 'insert') {
-      return true;
-    }
-    return false;
+
+    return comment;
   },
 });
 
 
 Template.commentForm.events({
-  'click .cancel-comment-reply': () => {
-    $('.feedback-reply-form').css('display', 'none');
+  'click .cancel-comment-reply': (event, templateInstance) => {
+    // Get ID of current comment or feedback
+    const itemId = templateInstance.data.item._id;
+    // Get comment form
+    const commentForm = document.getElementById(`feedback-reply-${itemId}`);
+
+    // Hide comment form
+    commentForm.classList.add('hide');
+
+    // Reset any added text by user
+    // It needs when a user's started to write text but clicks on Cancel button
+    commentForm.children.commentForm.reset();
+  },
+  'click .submit-comment': (event, templateInstance) => {
+    // Get ID of current comment or feedback
+    const itemId = templateInstance.data.item._id;
+    // Get comment form
+    const commentForm = document.getElementById(`feedback-reply-${itemId}`);
+
+    // Hide comment form
+    commentForm.classList.add('hide');
   },
 });

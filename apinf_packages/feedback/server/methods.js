@@ -103,11 +103,13 @@ Meteor.methods({
     // Create a array variable for storing comment Ids
     const commentIds = [];
 
-    // fetch all reply
+    // Use recursive function to get all replies and replies of replies
     const childComments = function (id) {
+      // Store ID
       commentIds.push(id);
-      // fetch reply of reply
+      // Fetch reply of reply
       const comments = EntityComment.find({ commentedOn: id }).fetch();
+
       comments.map((comment) => {
         return childComments(comment._id);
       });
@@ -116,7 +118,7 @@ Meteor.methods({
     // call function for main comment which initate to delete
     childComments(commentId);
 
-    // Delete comment and all replis on that comment
+    // Delete comment and all replies on that comment
     EntityComment.remove({ _id: { $in: commentIds } });
   },
 });
