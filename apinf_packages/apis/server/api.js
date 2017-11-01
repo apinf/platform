@@ -309,17 +309,18 @@ CatalogV1.addCollection(Apis, {
       },
       action () {
         const userId = this.userId;
+        const bodyParams = this.bodyParams;
 
         // structure for validating values against schema
         const validateFields = {
-          name: this.bodyParams.name,
-          url: this.bodyParams.url,
-          description: this.bodyParams.description,
-          lifecycleStatus: this.bodyParams.lifecycleStatus,
+          name: bodyParams.name,
+          url: bodyParams.url,
+          description: bodyParams.description,
+          lifecycleStatus: bodyParams.lifecycleStatus,
         };
 
         // Name is a required field
-        if (!this.bodyParams.name) {
+        if (!bodyParams.name) {
           return errorMessagePayload(400, 'Parameter "name" is mandatory.');
         }
 
@@ -332,7 +333,7 @@ CatalogV1.addCollection(Apis, {
         }
 
         // URL is a mandatory field
-        if (!this.bodyParams.url) {
+        if (!bodyParams.url) {
           return errorMessagePayload(400, 'Parameter "url" is mandatory.');
         }
 
@@ -341,17 +342,17 @@ CatalogV1.addCollection(Apis, {
           validateFields, 'url');
 
         if (!isValid) {
-          return errorMessagePayload(400, 'Parameter "url" is erroneous.');
+          return errorMessagePayload(400, 'Parameter "url" must be a valid URL with http(s).');
         }
 
         // Check if API with same name already exists
-        if (Apis.findOne({ name: this.bodyParams.name })) {
+        if (Apis.findOne({ name: bodyParams.name })) {
           return errorMessagePayload(400, 'Duplicate: API with same name already exists.');
         }
 
 
         // Description must not exceed field length in DB
-        if (this.bodyParams.description) {
+        if (bodyParams.description) {
           isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'description');
 
@@ -361,7 +362,7 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is value of lifecycle status allowed
-        if (this.bodyParams.lifecycleStatus) {
+        if (bodyParams.lifecycleStatus) {
           isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'lifecycleStatus');
 
@@ -371,18 +372,20 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is the API set to public or private
-        if (this.bodyParams.isPublic) {
-          if (this.bodyParams.isPublic === 'true') {
-            this.bodyParams.isPublic = true;
-          } else if (this.bodyParams.isPublic === 'false') {
-            this.bodyParams.isPublic = false;
+        const isPublicParam = bodyParams.isPublic;
+
+        if (isPublicParam) {
+          if (isPublicParam === 'true') {
+            bodyParams.isPublic = true;
+          } else if (isPublicParam === 'false') {
+            bodyParams.isPublic = false;
           } else {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
 
         // Add manager IDs list into
-        const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
+        const apiData = Object.assign({ managerIds: [userId] }, bodyParams);
 
         // Insert API data into collection
         const apiId = Apis.insert(apiData);
@@ -404,7 +407,6 @@ CatalogV1.addCollection(Apis, {
         };
       },
     },
-
     // Modify the entity with the given :id with the data contained in the request body.
     put: {
       authRequired: true,
@@ -461,7 +463,10 @@ CatalogV1.addCollection(Apis, {
         const bodyParams = this.bodyParams;
         // Get ID of API
         const apiId = this.urlParams.id;
+        // Get current user ID
         const userId = this.userId;
+
+        // Find API with specified ID
         const api = Apis.findOne(apiId);
 
         // API doesn't exist
@@ -476,12 +481,12 @@ CatalogV1.addCollection(Apis, {
 
         // validate values
         const validateFields = {
-          description: this.bodyParams.description,
-          lifecycleStatus: this.bodyParams.lifecycleStatus,
+          description: bodyParams.description,
+          lifecycleStatus: bodyParams.lifecycleStatus,
         };
 
         // Description must not exceed field length in DB
-        if (this.bodyParams.description) {
+        if (bodyParams.description) {
           const isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'description');
 
@@ -491,7 +496,7 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is value of lifecycle status allowed
-        if (this.bodyParams.lifecycleStatus) {
+        if (bodyParams.lifecycleStatus) {
           const isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'lifecycleStatus');
 
@@ -501,11 +506,13 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is the API set to public or private
-        if (this.bodyParams.isPublic) {
-          if (this.bodyParams.isPublic === 'true') {
-            this.bodyParams.isPublic = true;
-          } else if (this.bodyParams.isPublic === 'false') {
-            this.bodyParams.isPublic = false;
+        const isPublicParam = bodyParams.isPublic;
+
+        if (isPublicParam) {
+          if (isPublicParam === 'true') {
+            bodyParams.isPublic = true;
+          } else if (isPublicParam === 'false') {
+            bodyParams.isPublic = false;
           } else {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
