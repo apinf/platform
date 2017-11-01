@@ -16,7 +16,7 @@ Template.feedbackCommentList.onCreated(function () {
 
 Template.feedbackCommentList.helpers({
   userFeedbackComment () {
-		// Return Comments for this feedback
+    // Return Comments for this feedback
     return EntityComment.find({
       postId: this.feedback._id,
     }, {

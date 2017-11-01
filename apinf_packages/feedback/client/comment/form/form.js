@@ -43,7 +43,6 @@ Template.commentForm.helpers({
   },
 });
 
-
 Template.commentForm.events({
   'click .cancel-comment-reply': (event, templateInstance) => {
     // Get ID of current comment or feedback
