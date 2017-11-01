@@ -21,12 +21,19 @@ import FeedbackVotes from '/apinf_packages/feedback_votes/collection';
 Template.feedbackItem.onCreated(function () {
   // Get ID of current feedback object
   const feedbackId = Template.currentData().item._id;
-
   // Subscribe to votes for this feedback
   this.subscribe('getAllVotesForSingleFeedback', feedbackId);
 });
 
 Template.feedbackItem.helpers({
+  checkIsPrivate () {
+    // Check it is private
+    if (!Template.currentData().item.isPublic) {
+      // If private, then show background yellow by class
+      return 'private-feedback-background';
+    }
+    return '';
+  },
   feedbackType () {
     // Return translation for feedback message type
 
@@ -81,6 +88,20 @@ Template.feedbackItem.helpers({
 
     return moment(givenTimeStamp).locale(language).fromNow();
   },
+  checkVote (vote) {
+    // check vote is postive
+    if (vote > 0) {
+      // return positive vote class
+      return 'positive-vote';
+    }
+
+    if (vote < 0) {
+      // return negative vote class
+      return 'negative-vote';
+    }
+
+    return 'no-vote';
+  },
 });
 
 Template.feedbackItem.events({
@@ -132,5 +153,13 @@ Template.feedbackItem.events({
 
     // Set the new visibility of feedback
     Meteor.call('changeFeedbackVisibility', item._id, !item.isPublic);
+  },
+  'click .feedback-reply': (event, templateInstance) => {
+    const itemId = templateInstance.data.item._id;
+    // Get comment form
+    const commentForm = document.getElementById(`feedback-reply-${itemId}`);
+
+    // Show comment form
+    commentForm.classList.remove('hide');
   },
 });

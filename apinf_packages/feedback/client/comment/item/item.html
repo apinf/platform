@@ -1,0 +1,47 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="feedbackCommentItem">
+  <div class="feedback-comment-item" id="reply-{{ item._id }}">
+    <div class="feedback-author">
+      <p>
+        <b>
+          {{ item.author }}
+        </b>
+        {{ relativeTimeStamp item.createdAt }}&nbsp;
+        <span class="post-author">
+          <i class="fa fa-reply" aria-hidden="true"></i>&nbsp;
+          {{ item.postAuthor }}
+        </span>
+      </p>
+    </div>
+
+    <div class="feedback-message">
+      <p>
+        {{ item.comment }}
+      </p>
+    </div>
+
+    {{# if currentUser }}
+      <div class="reply-to-feedback-reply">
+        {{# if item.currentUserCanReply }}
+          <div class="comment-button">
+            <button class="comment-reply">
+              {{_ "entityComment_replyComment" }}
+            </button>
+          </div>
+        {{/ if }}
+        {{# if item.currentUserCanDelete }}
+          <div class="comment-button">
+            <button class="comment-delete">
+              {{_ "entityComment_deleteComment" }}
+            </button>
+          </div>
+        {{/ if }}
+      </div>
+      {{> commentForm type='comment' formType='insert' item=item }}
+    {{/ if }}
+  </div>
+</template>
