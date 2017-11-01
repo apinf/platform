@@ -7,46 +7,45 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="">
     {{# if currentUser }}
       <div class="row">
-        <div class="col-md-10">
-          <h4 id="feedback-title" class="">
+        <div class="col-md-10 col-sm-8 col-xs-8">
+          <h4 id="feedback-title">
             {{_ "feedback_main_title" }}
           </h4>
-          &nbsp;
-          &nbsp;
-          <button
-            type="button"
-            class="hidden-sm hidden-xs btn btn-md feedback-form-button"
-            id="add-feedback">
-              {{_ "feedback_feedbackForm_button" }}
-          </button>
-           <button
-            type="button"
-            class="hidden-md hidden-lg btn btn-md feedback-form-button "
-            id="add-feedback">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-          </button>
         </div>
-        {{# if api.currentUserCanManage }}
-          {{# if checkFeedbackCount }}
-            <div class="col-md-2 pull-right">
+        <div class="col-md-2 feedback-title-buttons">
+          {{# if api.currentUserCanManage }}
+            {{# if checkFeedbackCount }}
               {{# if checkAllPublic }}
                 <span
                   class="mark-feedback-private-button pull-right"
                   id="mark-all-feedbacks-as-private"
                   title={{_ "feedback_mark_all_feedbacks_as_private"}}>
-                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-lock" aria-hidden="true"></i>
                 </span>
               {{ else }}
                 <span
                   class="mark-feedback-public-button pull-right"
                   id="mark-all-feedbacks-as-public"
                   title={{_ "feedback_mark_all_feedbacks_as_public"}}>
-                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-lock" aria-hidden="true"></i>
                 </span>
               {{/ if }}
-            </div>
+            {{/ if }}
           {{/ if }}
-        {{/ if }}
+          <button
+            type="button"
+            class="hidden-sm hidden-xs btn btn-info btn-xs feedback-form-button pull-right"
+            id="add-feedback">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+              {{_ "feedback_feedbackForm_button" }}
+          </button>
+           <button
+            type="button"
+            class="hidden-md hidden-lg btn btn-info btn-md feedback-form-button pull-right"
+            id="add-feedback">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
     {{/ if }}
     {{> feedbackList feedbackItems=feedbackItems api=api }}

@@ -22,9 +22,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </p>
             <div class="feedback-author">
               <p>
-                <b>
+                <span>
                   {{ item.author }}
-                </b>
+                </span>
                 {{ relativeTimeStamp item.createdAt }}
               </p>
             </div>
@@ -39,7 +39,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 id="feedback-menu"
                 aria-haspopup="true"
                 aria-expanded="false">
-                <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
               </a>
               <ul id="feedback-menu-options" class="dropdown-menu pull-right">
                 <li>
@@ -65,7 +65,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
           {{/ if }}
         </div>
-        
+
         <div class="feedback-message">
           <p>
             {{ item.message }}
@@ -80,11 +80,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
             <div class="col-md-2">
               <div class="pull-right">
-                <span id="up-vote-{{ item._id }}" class="fa fa-lg fa-angle-up up-vote {{ userUpvote }}"></span>
+                <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-angle-down down-vote {{ userDownvote }}"></span>
                 <span class="sum-of-votes {{checkVote item.sumOfVotes}}">
                   {{ item.sumOfVotes }}
                 </span>
-                <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-angle-down down-vote {{ userDownvote }}"></span>
+                <span id="up-vote-{{ item._id }}" class="fa fa-lg fa-angle-up up-vote {{ userUpvote }}"></span>
               </div>
             </div>
           </div>
