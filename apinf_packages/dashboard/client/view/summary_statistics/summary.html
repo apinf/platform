@@ -71,7 +71,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
         {{# if displayOverview proxyBackend._id }}
-          <!-- First argument - provide bucket data for selected proxy backend -->
           {{> dashboardOverviewStatistic overviewChartResponse=overviewChartResponse
             totalNumberResponse=totalNumberResponse statusCodesResponse=statusCodesResponse proxyBackend=proxyBackend }}
         {{/ if }}
