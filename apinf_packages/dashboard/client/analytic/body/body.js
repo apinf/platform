@@ -335,7 +335,7 @@ Template.apiAnalyticPageBody.helpers({
     return instance.errorsStatisticsResponse.get();
   },
   errorsStatisticsData () {
-    // Get data of rrorsStatistics response
+    // Get data of errorsStatistics response
     const errors = Template.instance().errorsStatisticsResponse.get();
 
     // Return dataset for table or an empty array

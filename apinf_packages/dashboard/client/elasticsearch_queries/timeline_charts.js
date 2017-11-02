@@ -50,6 +50,7 @@ export default function timelineChartsRequest (requestPath, dateRange) {
                 },
                 // Get status codes per each day
                 response_status: {
+                  // Includes the *from* value and excludes the *to* value for each range
                   range: {
                     field: 'response_status',
                     keyed: true,

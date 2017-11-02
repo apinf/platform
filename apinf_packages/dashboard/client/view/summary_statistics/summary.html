@@ -48,7 +48,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
             <div class="col-xs-3">
               <span class="response-time">
-                {{ getCount proxyBackend.frontendPrefix  'time' }} ms
+                {{ getCount proxyBackend.frontendPrefix 'time' }} ms
               </span>
               {{# with comparisonData proxyBackend.frontendPrefix  }}
                 <div class="{{ arrowDirection 'time' }}"></div>
@@ -59,7 +59,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
             <div class="col-xs-3">
               <span class="unique-users">
-                {{ getCount proxyBackend.frontendPrefix  'users' }}
+                {{ getCount proxyBackend.frontendPrefix 'users' }}
               </span>
               {{# with comparisonData proxyBackend.frontendPrefix  }}
                 <div class="{{ arrowDirection 'users' }}"></div>
