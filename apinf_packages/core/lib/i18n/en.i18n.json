@@ -453,6 +453,8 @@
   "organizationApis_connectButton": "Connect",
   "organizationApisForm_successText": "The API and Organization are now connected.",
   "organizationCatalog_Title": "Organizations",
+  "organizationCatalog_organizationCount": "(__count__ organization)",
+  "organizationCatalog_organizationCount_plural": "(__count__ organizations)",
   "organizationCatalog_buttonText_addOrganization": "Add Organization",
   "organizationCatalog_toolbar_filterOptions_myOrganizations": "My organizations",
   "organizationCatalog_toolbar_filterOptions_showAll": "Show all",
