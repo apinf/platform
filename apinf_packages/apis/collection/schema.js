@@ -97,6 +97,13 @@ Apis.schema = new SimpleSchema({
   updated_by: {
     type: String,
     optional: true,
+    autoValue () {
+      let updateBy;
+      if (this.isUpdate) {
+        updateBy = Meteor.userId();
+      }
+      return updateBy;
+    },
   },
   version: {
     type: Number,
