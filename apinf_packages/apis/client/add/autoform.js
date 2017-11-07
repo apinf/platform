@@ -24,6 +24,9 @@ AutoForm.hooks({
         // Add current user as API manager
         api.managerIds = [userId];
 
+        // Add current user as API created by
+        api.created_by = userId;
+
         // Submit the form
         return api;
       },
