@@ -5,33 +5,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardView">
   {{# if Template.subscriptionsReady }}
-    <!-- Data is not still ready -->
-    {{# unless fetchingData }}
-      {{> spinner }}
-    {{ else }}
-      <!-- Error happened -->
-      {{# if error }}
-        <h1>
-          {{_ 'dashboardView_text_elasticsearchError' }}
-        </h1>
-        <p>{{ error }}</p>
-      {{/ if }} <!-- /error -->
+    <!-- My APIs group -->
+    {{> dashboardSummaryStatistic apiIds=grouping.myApis title="myApis"
+      totalNumberResponse=totalNumberResponse
+      overviewChartResponse=overviewChartResponse
+      statusCodesResponse=statusCodesResponse
+    }}
 
-      <!-- ElasticSearch data is already available -->
-      {{# if chartData }}
+    <!-- Managed APIs group -->
+    {{> dashboardSummaryStatistic apiIds=grouping.managedApis title="managedApis"
+      overviewChartResponse=overviewChartResponse
+      totalNumberResponse=totalNumberResponse
+      statusCodesResponse=statusCodesResponse
+    }}
 
-        <!-- Table with summary statistic-->
-        <!-- My APIs group -->
-        {{> dashboardSummaryStatistic chartData=chartData apiIds=grouping.myApis title="myApis" }}
-
-        <!-- Managed APIs group -->
-        {{> dashboardSummaryStatistic chartData=chartData apiIds=grouping.managedApis title="managedApis" }}
-
-        <!-- Other APIs group -->
-        {{> dashboardSummaryStatistic chartData=chartData apiIds=grouping.otherApis title="otherApis" }}
-      {{/ if }}
-    {{/ unless }} <!-- /fetchingData -->
+    <!-- Other APIs group -->
+    {{> dashboardSummaryStatistic apiIds=grouping.otherApis title="otherApis"
+      overviewChartResponse=overviewChartResponse
+      totalNumberResponse=totalNumberResponse
+      statusCodesResponse=statusCodesResponse
+    }}
   {{ else }}
     {{> spinner }}
-  {{/ if }} <!-- /subscriptionsReady -->
+  {{/ if }}
 </template>

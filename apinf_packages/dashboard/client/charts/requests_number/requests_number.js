@@ -22,7 +22,7 @@ import Chart from 'chart.js';
 Template.requestTimeline.onCreated(function () {
   const instance = this;
 
-  instance.elasticsearchData = new ReactiveVar();
+  instance.aggregationData = new ReactiveVar();
 
   // Chart depends on selected request path
   // Get related elasticsearch data when a user changed path
@@ -33,11 +33,12 @@ Template.requestTimeline.onCreated(function () {
     });
 
     // Update value
-    instance.elasticsearchData.set(relatedData[0]);
+    instance.aggregationData.set(relatedData[0]);
   };
 
   instance.autorun(() => {
     const timelineData = Template.currentData().timelineData;
+
     // On default get data for the first requested path
     instance.changePath(timelineData[0].key);
   });
@@ -93,11 +94,11 @@ Template.requestTimeline.onRendered(function () {
 
   // Update chart when elasticsearchData was changed
   instance.autorun(() => {
-    // Get ElasticSearch data
-    const elasticsearchData = instance.elasticsearchData.get();
+    // Get aggregated data
+    const aggregationData = instance.aggregationData.get();
 
-    // Get aggregated data for current chart
-    const aggregationData = elasticsearchData.requests_over_time.buckets;
+    // Get chart data for the selected request path
+    const chartData = aggregationData.requests_over_time.buckets;
 
     // Get current timeframe
     const dateCount = FlowRouter.getQueryParam('timeframe');
@@ -120,7 +121,7 @@ Template.requestTimeline.onRendered(function () {
     const failCalls = arrayWithZeros(dateCount);
     const errorCalls = arrayWithZeros(dateCount);
 
-    aggregationData.forEach(value => {
+    chartData.forEach(value => {
       // Create Labels values
       const currentDateValue = moment(value.key).format(params.format);
 

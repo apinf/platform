@@ -39,4 +39,66 @@ Template.dashboardOverviewStatistic.helpers({
   timeframe () {
     return FlowRouter.getQueryParam('timeframe');
   },
+  getCount (param) {
+    const instance = Template.instance();
+    const proxyBackend = instance.data.proxyBackend;
+    const path = proxyBackend.frontendPrefix();
+
+    const statusCodesResponse = Template.currentData().statusCodesResponse;
+    const statusCodes = statusCodesResponse && statusCodesResponse[path];
+
+    const totalNumberResponse = Template.currentData().totalNumberResponse;
+    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+
+    let count;
+
+    switch (param) {
+      case 'success': {
+        count = statusCodes ? statusCodes.successCallsCount : 0;
+        break;
+      }
+      case 'error': {
+        count = statusCodes ? statusCodes.errorCallsCount : 0;
+        break;
+      }
+      case 'requests': {
+        count = totalNumber ? totalNumber.requestNumber : 0;
+        break;
+      }
+      case 'time': {
+        count = totalNumber ? totalNumber.responseTime : 0;
+        break;
+      }
+      case 'users': {
+        count = totalNumber ? totalNumber.uniqueUsers : 0;
+        break;
+      }
+      default: {
+        count = 0;
+        break;
+      }
+    }
+
+    return count;
+  },
+  comparisonData () {
+    const instance = Template.instance();
+    const proxyBackend = instance.data.proxyBackend;
+    const path = proxyBackend.frontendPrefix();
+
+    const totalNumberResponse = Template.currentData().totalNumberResponse;
+    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+
+    return totalNumber ? totalNumber.comparisons : {};
+  },
+  requestOverTime () {
+    const instance = Template.instance();
+    const proxyBackend = instance.data.proxyBackend;
+    const path = proxyBackend.frontendPrefix();
+
+    const overviewChartResponse = Template.currentData().overviewChartResponse;
+    const overviewChartData = overviewChartResponse && overviewChartResponse[path];
+
+    return overviewChartData ? overviewChartData.requests_over_time.buckets : [];
+  },
 });

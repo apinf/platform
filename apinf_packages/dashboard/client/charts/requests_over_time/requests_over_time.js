@@ -17,17 +17,17 @@ import Chart from 'chart.js';
 // APInf imports
 import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/chart_helpers';
 
-Template.uniqueUsersOverTime.onRendered(function () {
+Template.requestsOverTime.onRendered(function () {
   const instance = this;
 
   const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${id}"] .users-chart`;
+  const querySelector = `[data-overview-id="${id}"] .requests-over-time-chart`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
-    // The type of chart we want
+    // The type of chart
     type: 'bar',
 
     // Data for displaying chart
@@ -35,7 +35,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
       labels: [],
       datasets: [
         {
-          label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
+          label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
           backgroundColor: '#C6C5C5',
           borderColor: '#959595',
           borderWidth: 1,
@@ -66,17 +66,17 @@ Template.uniqueUsersOverTime.onRendered(function () {
     },
   });
 
-  // Update reactively when Elasticsearch data is updated
+  // Update reactively when chart data is updated
   instance.autorun(() => {
-    // Get ElasticSearch aggregated data
-    const elasticsearchData = Template.currentData().buckets;
+    // Get aggregated chart data
+    const chartData = Template.currentData().buckets;
 
     // Get current timeframe
     const dateCount = FlowRouter.getQueryParam('timeframe');
 
     const params = {
       // Date range must have equal length with dateCount value
-      // To include also today, subtract one day less than count of days in period
+      // Today value is included then subtract less days
       startDate: moment().subtract(dateCount - 1, 'd'),
       endDate: moment(),
       // Interval is 1 day
@@ -90,11 +90,11 @@ Template.uniqueUsersOverTime.onRendered(function () {
     const data = arrayWithZeros(dateCount);
 
     // Get data for bar chart
-    elasticsearchData.forEach(value => {
+    chartData.forEach(value => {
       // Create Labels values
       const currentDateValue = moment(value.key).format(params.format);
       const index = labels.indexOf(currentDateValue);
-      data[index] = value.unique_users.buckets.length;
+      data[index] = value.doc_count;
     });
 
     // Update labels & data
@@ -110,7 +110,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
     const datasets = instance.chart.data.datasets;
 
     // Update translation
-    datasets[0].label = TAPi18n.__('uniqueUsersOverTime_pointTitle_users');
+    datasets[0].label = TAPi18n.__('requestsOverTime_pointTitle_requests');
 
     // Update chart with new translation
     instance.chart.update();

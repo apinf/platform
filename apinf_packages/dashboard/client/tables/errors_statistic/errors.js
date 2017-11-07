@@ -19,21 +19,21 @@ Template.errorsStatisticTable.onCreated(function () {
   const language = TAPi18n.getLanguage();
 
   instance.autorun(() => {
-    const aggregatedData = Template.currentData().timelineData;
+    const errorsStatistic = Template.currentData().errorsStatistic;
 
     // Init
     instance.errors = [];
 
-    aggregatedData.forEach(dataset => {
-      const requestPath = dataset.key;
+    errorsStatistic.forEach(dataset => {
+      const date = new Date(dataset.key).toLocaleDateString(language);
 
-      dataset.errors_statistic.errors_over_time.buckets.forEach(date => {
-        date.status.buckets.forEach(status => {
+      dataset.request_path.buckets.forEach(path => {
+        path.response_status.buckets.forEach(status => {
           const error = {
             // Get value of request path
-            path: requestPath,
+            path: path.key,
             // Get value of request date
-            date: new Date(date.key).toLocaleString(language),
+            date,
             // Get values of request code status
             status: status.key,
             // Get value of request number
