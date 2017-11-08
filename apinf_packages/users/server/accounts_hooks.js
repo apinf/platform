@@ -13,8 +13,6 @@ import { Accounts } from 'meteor/accounts-base';
 const servicePrefixDictionary = {
   fiware: 'fw',
   github: 'gh',
-  twitter: 'tw',
-  facebook: 'fb',
 };
 
 Accounts.onCreateUser((options, user) => {
