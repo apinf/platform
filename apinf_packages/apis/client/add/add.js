@@ -15,3 +15,10 @@ Template.addApi.helpers({
     return Apis;
   },
 });
+
+Template.addApi.events({
+  'click #openModal': function (event) {
+    event.preventDefault();
+    Modal.show('addApiBySwagger');
+  },
+})

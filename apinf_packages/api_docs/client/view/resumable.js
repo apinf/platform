@@ -32,7 +32,13 @@ Meteor.startup(() => {
     const api = Session.get('api');
 
     // Get ApiDoc object
-    const apiDoc = ApiDocs.findOne({ apiId: api._id });
+    let apiDoc;
+    // Check apiDocId 
+    if (Session.get('apiDocId')) {
+      apiDoc = ApiDocs.findOne(Session.get('apiDocId'));
+    } else {
+      apiDoc = ApiDocs.findOne({ apiId: api._id });
+    }
 
     // Check if ApiDoc is available
     // if so - update it with new values

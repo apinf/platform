@@ -9,6 +9,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <h1 class="page-header">
         {{_ "addApi_header" }}
       </h1>
+      <button type="click" class="btn btn-primary" id="openModal">
+        Upload Swagger File
+      </button>
+      
       {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
         <!--invisible auto-value field-->
         {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
