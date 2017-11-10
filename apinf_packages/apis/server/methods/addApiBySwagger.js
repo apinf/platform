@@ -20,13 +20,13 @@ Meteor.methods({
     check(parseData, Object);
     try {
       if (!parseData) {
-        throw { status: 'error', message: 'No api data found' };
+        throw new Error({ status: 'error', message: 'No api data found' });
       }
       if (!parseData.info || !parseData.info.title || !parseData.info.description) {
-        throw { status: 'error', message: 'No api title or description found' };
+        throw new Error({ status: 'error', message: 'No api title or description found' });
       }
       if (!parseData.schemes || !parseData.host || !parseData.basePath) {
-        throw { status: 'error', message: 'No api url found or api url not in correct format' };
+        throw new Error({ status: 'error', message: 'No api url found or api url not in correct format' });
       }
       return { status: 'success', message: 'all data is in correct format' };
     } catch (error) {
@@ -40,15 +40,15 @@ Meteor.methods({
     const future = new Future();
     // Getting data from url and validate the data
     SwaggerParser.validate(parseData.url)
-    .then( (api) => {
+    .then((api) => {
       if (!api) {
-        throw { status: 'error', message: 'No api data found' };
+        throw new Error({ status: 'error', message: 'No api data found' });
       }
       if (!api.info || !api.info.title || !api.info.description) {
-        throw { status: 'error', message: 'No api title or description found' };
+        throw new Error({ status: 'error', message: 'No api title or description found' });
       }
       if (!api.schemes || !api.host || !api.basePath) {
-        throw { status: 'error', message: 'No api url found or api url not in correct format' };
+        throw new Error({ status: 'error', message: 'No api url found or api url not in correct format' });
       }
       const apiDocData = {
         type: 'url',
@@ -57,7 +57,7 @@ Meteor.methods({
       Meteor.call('updateApiDocById', parseData.docId, apiDocData);
       future.return({ status: 'success', docId: parseData.docId, data: api });
     })
-    .catch( (err) => {
+    .catch((err) => {
       future.return({ status: 'error', data: err });
     });
     return future.wait();
@@ -73,11 +73,11 @@ Meteor.methods({
     check(apiId, String);
     check(docId, String);
 
-    ApiDocs.update(docId,{
-      $set:{ apiId },
+    ApiDocs.update(docId, {
+      $set: { apiId },
     });
   },
-  updateApiDocById (docId,apiDocData) {
+  updateApiDocById (docId, apiDocData) {
     // Update api doc with some data
     check(docId, String);
     check(apiDocData, Object);
@@ -91,7 +91,7 @@ Meteor.methods({
   checkApiIdInDoc (docId) {
     check(docId, String);
     // Check api doc available or not
-    const apiDoc = ApiDocs.findOne({ _id: docId, apiId: { $exists:true, $ne: null } });
+    const apiDoc = ApiDocs.findOne({ _id: docId, apiId: { $exists: true, $ne: null } });
     return apiDoc || false;
   },
 });

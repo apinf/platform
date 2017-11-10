@@ -101,8 +101,7 @@ Template.addApiBySwagger.helpers({
     if (parseData) {
       api.name = parseData.info.title;
       api.desc = parseData.info.description;
-      api.url = arseData.schemes[0] + '://' +
-        parseData.host + parseData. basePath;
+      api.url = `${parseData.schemes[0]}://${parseData.host}/${parseData.basePath}`;
     } else {
       api.name = '';
       api.desc = '';
@@ -169,7 +168,7 @@ Template.addApiBySwagger.events({
     event.preventDefault();
     // Set template instance
     const templateInstance = Template.instance();
-    
+
     // Defince variable as FileReader
     const file = $('#file')[0].files[0];
     const reader = new FileReader();
@@ -180,14 +179,14 @@ Template.addApiBySwagger.events({
           // Parse data from yaml or json file
           const parseData = SwaggerParser.YAML.parse(reader.result);
           // Validate data
-          Meteor.call('checkData', parseData, (err, res) => {
+          Meteor.call('checkData',parseData,(err, res) => {
             if (err || !res) {
               sAlert.error(err);
             } else if (res.status === 'error') {
               sAlert.error(res.message);
             } else {
               // Set data in reactive variable
-              /*const docId = DocumentationFiles.insert({
+              /* const docId = DocumentationFiles.insert({
                   _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
                   filename: file.name,
                   contentType: 'application/x-yaml',
@@ -221,7 +220,7 @@ Template.addApiBySwagger.events({
                     DocumentationFiles.resumable.upload();
                   }
                 );
-              });*/
+              }); */
 
               templateInstance.apiParseData.set(parseData);
               templateInstance.uploadingSpinner.set(false);
@@ -258,7 +257,7 @@ Template.addApiBySwagger.events({
           } else {
             templateInstance.apiParseData.set(res.data);
             templateInstance.docId.set(res.docId);
-            $('#modal-upload-swagger').modal('hide').css('display','none');
+            $('#modal-upload-swagger').modal('hide').css('display', 'none');
           }
           $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
           templateInstance.uploadingSpinner.set(false);
@@ -274,6 +273,6 @@ Template.addApiBySwagger.events({
     Meteor.call('removeApiDocById', templateInstance.docId.get());
     templateInstance.apiParseData.set(false);
     templateInstance.docId.set(false);
-    $('#url , #file').val('');
+    $('#url, #file').val('');
   },
 });

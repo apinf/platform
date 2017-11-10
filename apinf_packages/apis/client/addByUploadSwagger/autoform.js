@@ -5,10 +5,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
 
 // Meteor contributed packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
