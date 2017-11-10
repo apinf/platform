@@ -315,4 +315,14 @@ Apis.helpers({
     }
     return false;
   },
+  otherUrl () {
+    // Get API ID
+    const apiId = this._id;
+
+    // Get related documentation
+    const apiDocs = ApiDocs.findOne({ apiId });
+
+    // Return value of otherUrl
+    return apiDocs && apiDocs.otherUrl;
+  },
 });
