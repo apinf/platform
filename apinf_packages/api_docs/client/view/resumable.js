@@ -33,7 +33,7 @@ Meteor.startup(() => {
 
     // Get ApiDoc object
     let apiDoc;
-    // Check apiDocId 
+    // Check apiDocId
     if (Session.get('apiDocId')) {
       apiDoc = ApiDocs.findOne(Session.get('apiDocId'));
     } else {

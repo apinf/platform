@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 
 // Meteor contributed packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
@@ -33,8 +34,6 @@ AutoForm.hooks({
       Modal.hide('addApiBySwagger');
       const docId = $('#apiDocId').val();
       Meteor.call('updateApiIdInDoc', apiId, docId, () => {
-        console.log(':: docId ',docId)
-        console.log(':: apiId ',apiId)
         // Make sure slug exists
         if (api && api.slug) {
           // Redirect to newly added API
@@ -45,7 +44,6 @@ AutoForm.hooks({
         }
         $('#apiDocId').val('');
       });
-     
 
       // Get current user ID
       const userId = Meteor.userId();

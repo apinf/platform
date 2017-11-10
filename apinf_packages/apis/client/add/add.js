@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Template } from 'meteor/templating';
 
 // Collection imports
@@ -21,4 +22,4 @@ Template.addApi.events({
     event.preventDefault();
     Modal.show('addApiBySwagger');
   },
-})
+});

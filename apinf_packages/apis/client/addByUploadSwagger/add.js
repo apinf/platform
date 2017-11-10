@@ -4,11 +4,15 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Mongo } from 'meteor/mongo';
+
+// Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Session } from 'meteor/session'
+import { Session } from 'meteor/session';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -25,24 +29,24 @@ Template.addApiBySwagger.onCreated(function () {
   this.docId = new ReactiveVar(false);
   this.autorun(() => {
     if (this.docId.get()) {
-      Meteor.subscribe('apisDocumentById',this.docId.get());
+      Meteor.subscribe('apisDocumentById', this.docId.get());
     }
   });
-})
+});
 
 Template.addApiBySwagger.onRendered(function () {
   // Check api doc id is not available
-  if (!this.docId.get()) {
+  if (this.docId.get()) {
+    // Set api doc id if it is available
+    Session.set('apiDocId', this.docId.get());
+  } else {
     Meteor.call('insertApiDoc', (err, res) => {
       if (res) {
         this.docId.set(res);
         // Set api doc id
-        Session.set('apiDocId',res);
+        Session.set('apiDocId', res);
       }
     });
-  } else {
-    // Set api doc id if it is available
-    Session.set('apiDocId',this.docId.get());
   }
 });
 
@@ -60,7 +64,8 @@ Template.addApiBySwagger.onDestroyed(function () {
   this.apiParseData.set(false);
   this.docId.set(false);
   $('#url , #file').val('');
-})
+});
+
 Template.addApiBySwagger.helpers({
   documentationFile () {
     const apiDoc = $('#apiDocId').val();
@@ -91,13 +96,18 @@ Template.addApiBySwagger.helpers({
     return Template.instance().selectOption.get();
   },
   apiData () {
-    let api = {};
+    const api = {};
     const parseData = Template.instance().apiParseData.get();
-    const url = parseData ?parseData.schemes[0] + '://' +
-      parseData.host + parseData. basePath : '';
-    api.name = parseData ? parseData.info.title : '';
-    api.desc = parseData ? parseData.info.description : '';
-    api.url = url;
+    if (parseData) {
+      api.name = parseData.info.title;
+      api.desc = parseData.info.description;
+      api.url = arseData.schemes[0] + '://' +
+        parseData.host + parseData. basePath;
+    } else {
+      api.name = '';
+      api.desc = '';
+      api.url = '';
+    }
     return api;
   },
   spinnerEnabled () {
@@ -165,80 +175,78 @@ Template.addApiBySwagger.events({
     const reader = new FileReader();
     if ($('#file').val()) {
       templateInstance.uploadingSpinner.set(true);
-      reader.onload = function(fileLoadEvent) {
-        try{
+      reader.onload = function () {
+        try {
           // Parse data from yaml or json file
           const parseData = SwaggerParser.YAML.parse(reader.result);
           // Validate data
           Meteor.call('checkData', parseData, (err, res) => {
             if (err || !res) {
               sAlert.error(err);
+            } else if (res.status === 'error') {
+              sAlert.error(res.message);
             } else {
-              if (res.status === 'error') {
-                sAlert.error(res.message);
-              } else {
-                // Set data in reactive variable
-                // const docId = DocumentationFiles.insert({
-                //     _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
-                //     filename: file.name,
-                //     contentType: 'application/x-yaml',
-                //   },
-                //   function (err, _id) {  // Callback to .insert
-                //     if (err) { return console.error("File creation failed!", err); }
-                //     const apiDocData = {
-                //       "type": "file",
-                //       "fileId": _id._str,
-                //     }
-                //     Meteor.call('insertApiDoc', apiDocData, (err, res) => {
-                //       if(!err && res) {
-                //         templateInstance.docId.set(res);
-                //       }
-                //     });
-                //     templateInstance.docId.set(_id._str);
-                //     // Once the file exists on the server, start uploading
-                //     DocumentationFiles.resumable.upload();
-                // });
-                //  DocumentationFiles.resumable.on('fileAdded', function (file) {
+              // Set data in reactive variable
+              /*const docId = DocumentationFiles.insert({
+                  _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
+                  filename: file.name,
+                  contentType: 'application/x-yaml',
+                },
+                function (err, _id) {  // Callback to .insert
+                  if (err) { return console.error("File creation failed!", err); }
+                  const apiDocData = {
+                    "type": "file",
+                    "fileId": _id._str,
+                  }
+                  Meteor.call('insertApiDoc', apiDocData, (err, res) => {
+                    if(!err && res) {
+                      templateInstance.docId.set(res);
+                    }
+                  });
+                  templateInstance.docId.set(_id._str);
+                  // Once the file exists on the server, start uploading
+                  DocumentationFiles.resumable.upload();
+              });
+               DocumentationFiles.resumable.on('fileAdded', function (file) {
 
-                // // Create a new file in the file collection to upload
-                //   DocumentationFiles.insert({
-                //     _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
-                //     filename: file.name,
-                //     contentType: 'application/x-yaml'
-                //     },
-                //     function (err, _id) {  // Callback to .insert
-                //       if (err) { return console.error("File creation failed!", err); }
-                //       // Once the file exists on the server, start uploading
-                //       DocumentationFiles.resumable.upload();
-                //     }
-                //   );
-                // });
+              // Create a new file in the file collection to upload
+                DocumentationFiles.insert({
+                  _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
+                  filename: file.name,
+                  contentType: 'application/x-yaml'
+                  },
+                  function (err, _id) {  // Callback to .insert
+                    if (err) { return console.error("File creation failed!", err); }
+                    // Once the file exists on the server, start uploading
+                    DocumentationFiles.resumable.upload();
+                  }
+                );
+              });*/
 
-                templateInstance.apiParseData.set(parseData);
-                templateInstance.uploadingSpinner.set(false);
-                $('#submitApiBySwagger-button').removeAttr("disabled", "disabled");
-                $('#modal-upload-swagger').modal('hide').css('display','none');
-              }
+              templateInstance.apiParseData.set(parseData);
+              templateInstance.uploadingSpinner.set(false);
+              $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
+              $('#modal-upload-swagger').modal('hide').css('display', 'none');
             }
           });
         } catch (e) {
           sAlert.error('File is not in correct format');
         }
-      }
+      };
       // Read file as binary String
-      reader.readAsBinaryString($('#file')[0].files[0]);
+      reader.readAsBinaryString(file);
     } else {
-      $('#submitApiBySwagger-button').attr("disabled", "disabled");
+      $('#submitApiBySwagger-button').attr('disabled', 'disabled');
     }
   },
   'change #url': function (event) {
     event.preventDefault();
     const templateInstance = Template.instance();
     const parseData = {
-      'url': $('#url').val(),
-      'docId': templateInstance.docId.get(),
+      url: $('#url').val(),
+      docId: templateInstance.docId.get(),
     };
-   
+
     if ($('#url').val()) {
       templateInstance.uploadingSpinner.set(true);
       Meteor.call('parseDataByUrl', parseData, (err, res) => {
@@ -252,15 +260,15 @@ Template.addApiBySwagger.events({
             templateInstance.docId.set(res.docId);
             $('#modal-upload-swagger').modal('hide').css('display','none');
           }
-          $('#submitApiBySwagger-button').removeAttr("disabled", "disabled");
+          $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
           templateInstance.uploadingSpinner.set(false);
         }
       });
     } else {
-      $('#submitApiBySwagger-button').attr("disabled", "disabled");
+      $('#submitApiBySwagger-button').attr('disabled', 'disabled');
     }
   },
-  'click .btn-reset' : function (event) {
+  'click .btn-reset': function (event) {
     event.preventDefault();
     const templateInstance = Template.instance();
     Meteor.call('removeApiDocById', templateInstance.docId.get());
@@ -268,4 +276,4 @@ Template.addApiBySwagger.events({
     templateInstance.docId.set(false);
     $('#url , #file').val('');
   },
-})
+});
