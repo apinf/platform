@@ -16,68 +16,48 @@ const generateUniqueId = () => {
   return Math.random().toString(36).substr(2, 9);
 };
 
-const createUser = ({ username, email, password, regular = false }) => {
-  return new Promise(async (resolve, reject) => {
-    // Define new user variable
-    const newUser = { username, email, password };
+const createUser = async ({ username, email, password, regular = false }) => {
+  // Define new user variable
+  const newUser = { username, email, password };
 
-    // Perform request to register new user
-    try {
-      // Clear users collection
-      const clearCollectionResponse = await clearCollection('users');
+  // Clear users collection
+  const clearCollectionResponse = await clearCollection('users');
 
-      // Add new user
-      const { body, status } = await request.post(users.endpoint).send(newUser);
+  // Add new user
+  const { body, status } = await request.post(users.endpoint).send(newUser);
 
-      if (!regular) {
-        await setUserToAdmin({ username });
-      }
+  if (!regular) {
+    await setUserToAdmin({ username });
+  }
 
-      // Resolve with repsonse body and status
-      resolve({ body, status });
-    } catch (error) {
-      reject(error);
-    }
-  });
+  return { body, status };
 };
 
-const performLogin = ({ username, password }) => {
-  return new Promise(async (resolve, reject) => {
-    // Define user variable
-    const user = { username, password };
+const performLogin = async ({ username, password }) => {
+  // Define user variable
+  const user = { username, password };
 
-    try {
-      // Perform login
-      const { status, body } = await request.post(login.endpoint).send(user);
+  // Perform login
+  const { status, body } = await request.post(login.endpoint).send(user);
 
-      resolve({ status, body });
-    } catch (error) {
-      reject(error);
-    }
-  });
+  return { status, body };
 };
 
-const getUserCredentials = ({ username, email, password, regular = false }) => {
-  return new Promise(async (resolve, reject) => {
-    // Get uniqueID
-    const uniqueID = generateUniqueId();
+const getUserCredentials = async ({ username, email, password, regular = false }) => {
+  // Get uniqueID
+  const uniqueID = generateUniqueId();
 
-    username = `${uniqueID}${username}`;
-    email = `${uniqueID}${email}`;
+  username = `${uniqueID}${username}`;
+  email = `${uniqueID}${email}`;
 
-    try {
-      // Create user
-      const userResponse = await createUser({ username, email, password, regular });
+  // Create user
+  const userResponse = await createUser({ username, email, password, regular });
 
-      // Perform Login
-      const loginResult = await performLogin({ username, password });
+  // Perform Login. Needs to be executed after user is created
+  const loginResult = await performLogin({ username, password });
 
-      // Resolve with login response
-      resolve(loginResult);
-    } catch (error) {
-      reject(error);
-    }
-  });
+  // Resolve with login response
+  return loginResult;
 };
 
 const buildCredentialHeader = ({ authToken, userId }) => {
@@ -87,45 +67,33 @@ const buildCredentialHeader = ({ authToken, userId }) => {
   };
 };
 
-const setUserToAdmin = ({ username }) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      // Connect to Meteor's MongoDB
-      const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
+const setUserToAdmin = async ({ username }) => {
+  // Connect to Meteor's MongoDB
+  const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
 
-      // Get users collection reference
-      const Users = db.collection('users');
+  // Get users collection reference
+  const Users = db.collection('users');
 
-      // Define findOneAndUpdate arguments
-      const query = { username };
-      const updateOptions = { $set: { roles: ['admin'] } };
+  // Define findOneAndUpdate arguments
+  const query = { username };
+  const updateOptions = { $set: { roles: ['admin'] } };
 
-      // Set user role to admin
-      const newAdminResult = await Users.findOneAndUpdate(query, updateOptions);
+  // Set user role to admin
+  const newAdminResult = await Users.findOneAndUpdate(query, updateOptions);
 
-      // Resolve with found object
-      resolve(newAdminResult);
-    } catch (error) {
-      reject(error);
-    }
-  });
+  // Resolve with found object
+  return newAdminResult;
 };
 
-const clearCollection = (collection) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      // Get mongoDb connection
-      const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
+const clearCollection = async (collection) => {
+  // Get mongoDb connection
+  const db = await MongoClient.connect('mongodb://localhost:3001/meteor');
 
-      // Clear entire collection
-      const { result } = await db.collection(collection).remove({});
+  // Clear entire collection
+  const { result } = await db.collection(collection).remove({});
 
-      // Resolve with result
-      resolve(result);
-    } catch (mongoError) {
-      reject(mongoError);
-    }
-  });
+  // Resolve with result
+  return result;
 };
 
 const isArray = item => {
