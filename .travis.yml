@@ -43,12 +43,12 @@ install:
   - export PATH="$HOME/.meteor:$PATH"
 
 script:
+  # Run Endpoint testing with latests version of NodeJS
+  - nvm install 8 && nvm use 8 && yarn run test-endpoints
   # Run meteor and chimp from node.js
   - travis_retry yarn test
   # Build docker image
   - ./.scripts/docker_build.sh
-  # Run Endpoint testing with latests version of NodeJS
-  - nvm install 8 && nvm use 8 && npm run test-endpoints
 
 env:
   global:
