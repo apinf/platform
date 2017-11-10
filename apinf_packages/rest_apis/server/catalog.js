@@ -150,8 +150,17 @@ CatalogV1.swagger = {
           enum: ['true', 'false'],
           example: 'true/false',
         },
+        documentationUrl: {
+          type: 'string',
+          description: 'URI to OpenAPI (Swagger) specification of the API',
+          example: 'http://link-address-to-specification.com',
+        },
+        externalDocumentation: {
+          type: 'string',
+          description: 'A URL to an external site page with API documentation',
+          example: 'http://url-to-external-site.com',
+        },
       },
-
     },
     apiResponse: {
       type: 'object',
@@ -239,6 +248,16 @@ CatalogV1.swagger = {
         logoURL: {
           type: 'string',
           example: 'link-address-to-logo-image',
+        },
+        documentationUrl: {
+          type: 'string',
+          description: 'URI to OpenAPI (Swagger) specification of the API',
+          example: 'link-address-to-specification',
+        },
+        externalDocumentation: {
+          type: 'string',
+          description: 'A URL to an external site page with API documentation',
+          example: 'url-to-external-site',
         },
       },
     },
