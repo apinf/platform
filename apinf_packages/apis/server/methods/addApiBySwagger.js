@@ -26,7 +26,7 @@ Meteor.methods({
         throw new Error({ status: 'error', message: 'No api title or description found' });
       }
       if (!parseData.schemes || !parseData.host || !parseData.basePath) {
-        throw new Error({ 
+        throw new Error({
           status: 'error',
           message: 'No api url found or api url not in correct format',
         });
@@ -51,7 +51,8 @@ Meteor.methods({
         throw new Error({ status: 'error', message: 'No api title or description found' });
       }
       if (!api.schemes || !api.host || !api.basePath) {
-        throw new Error({ status: 'error',
+        throw new Error({
+          status: 'error',
           message: 'No api url found or api url not in correct format',
         });
       }

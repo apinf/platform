@@ -179,49 +179,12 @@ Template.addApiBySwagger.events({
           // Parse data from yaml or json file
           const parseData = SwaggerParser.YAML.parse(reader.result);
           // Validate data
-          Meteor.call('checkData', parseData, (err,res) => {
+          Meteor.call('checkData', parseData, (err, res) => {
             if (err || !res) {
               sAlert.error(err);
             } else if (res.status === 'error') {
               sAlert.error(res.message);
             } else {
-              // Set data in reactive variable
-              /* const docId = DocumentationFiles.insert({
-                  _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
-                  filename: file.name,
-                  contentType: 'application/x-yaml',
-                },
-                function (err, _id) {  // Callback to .insert
-                  if (err) { return console.error("File creation failed!", err); }
-                  const apiDocData = {
-                    "type": "file",
-                    "fileId": _id._str,
-                  }
-                  Meteor.call('insertApiDoc', apiDocData, (err, res) => {
-                    if(!err && res) {
-                      templateInstance.docId.set(res);
-                    }
-                  });
-                  templateInstance.docId.set(_id._str);
-                  // Once the file exists on the server, start uploading
-                  DocumentationFiles.resumable.upload();
-              });
-               DocumentationFiles.resumable.on('fileAdded', function (file) {
-
-              // Create a new file in the file collection to upload
-                DocumentationFiles.insert({
-                  _id: new Meteor.Collection.ObjectID(),  // This is the ID resumable will use
-                  filename: file.name,
-                  contentType: 'application/x-yaml'
-                  },
-                  function (err, _id) {  // Callback to .insert
-                    if (err) { return console.error("File creation failed!", err); }
-                    // Once the file exists on the server, start uploading
-                    DocumentationFiles.resumable.upload();
-                  }
-                );
-              }); */
-
               templateInstance.apiParseData.set(parseData);
               templateInstance.uploadingSpinner.set(false);
               $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
