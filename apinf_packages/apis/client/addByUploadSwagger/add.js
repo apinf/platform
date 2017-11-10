@@ -179,7 +179,7 @@ Template.addApiBySwagger.events({
           // Parse data from yaml or json file
           const parseData = SwaggerParser.YAML.parse(reader.result);
           // Validate data
-          Meteor.call('checkData',parseData,(err, res) => {
+          Meteor.call('checkData', parseData, (err,res) => {
             if (err || !res) {
               sAlert.error(err);
             } else if (res.status === 'error') {
