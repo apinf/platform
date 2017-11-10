@@ -29,7 +29,7 @@ AutoForm.hooks({
       const message = TAPi18n.__('organizationSettingsGeneral_update_failedMessage');
 
       // Alert failure message to user
-      sAlert.warning(message);
+      sAlert.error(message);
     },
   },
 });
