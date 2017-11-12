@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
+/* eslint-disable max-len */
 
 
 const request = require('superagent');
@@ -35,132 +36,439 @@ afterAll(() => {
 });
 
 describe('Endpoints for organization module', () => {
-  describe('GET - /organizations', () => {
-    it('should return all organizations from the collection', async () => {
-      // Define response variable
-      const { body } = await request.get(organizations.endpoint);
+  describe('GET', () => {
+    describe('/organizations - List and search organizations', () => {
+      it('should return all organizations from the collection', async () => {
+        // Define response variable
+        const { body } = await request.get(organizations.endpoint);
+        console.log(body)
+        // Expect to be successful and to by an empty array
+        expect(body.status).toEqual('success');
+        expect(isArray(body.data)).toEqual(true);
+      });
 
-      // Expect to be successful and to by an empty array
-      expect(body.status).toEqual('success');
-      expect(isArray(body.data)).toEqual(true);
+      it('should return 400 because of erroneous parameter', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+    });
+
+    describe('/organizations/{id} - Fetch Organization with specified ID', () => {
+      it('return organization by id', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 404 because of organization was not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+    });
+
+    describe('/organizations/{id}/managers - Get Organization Manager list', () => {
+      it('should return 200 with List of organization’s managers', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "Success",
+            "managerIds": [
+              "user-id-value"
+            ],
+            "data": [
+              {
+                "_id": "user-id-value",
+                "username": "myusername",
+                "emails": [
+                  {
+                    "address": "john.doe@ispname.com",
+                    "verified": "false"
+                  }
+                ]
+              }
+            ]
+          }
+        */
+      });
+
+      it('should return 401 because authentication is required', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 403 because user does not have permission', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 404 because organization is not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "Organization with specified ID is not found"
+          }
+        */
+      });
+    });
+
+    describe('/organizations/{id}/managers/{id} - Get Organization Manager username and email address.', () => {
+      it('should return 200 with organization manager contact information.', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "data": {
+              "_id": "user-id-value",
+              "username": "myusername",
+              "emails": [
+                {
+                  "address": "john.doe@ispname.com",
+                  "verified": "false"
+                }
+              ]
+            }
+          }
+        */
+      });
+
+      it('should return 400 because of erroneous parameter', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+        EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "Organization ID was not provided"
+          }
+        */
+      });
+
+      it('should return 401 because authentication is required', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 403 because user does not have permission', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 404 because organization is not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "Organization with specified ID is not found"
+          }
+        */
+      });
     });
   });
-  describe('POST - /organizations', () => {
-    it('add a new organization', async () => {
-      // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
-      // Get user credentials
-      const credentials = await getUserCredentials(users.credentials);
+  describe('POST', () => {
+    describe('/organizations - Add new organization', () => {
+      it('add a new organization', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
-      // Get response body
-      const { body } = await request
-        .post(organizations.endpoint)
-        .set(buildCredentialHeader(credentials.body.data))
-        .send(newOrganization);
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
 
-      // Deconstruct status and data from response body
-      const { status, data } = body;
-
-      // Check if request was successful
-      expect(status).toEqual('success');
-
-      // Check if saved organization matches sent object
-      expect(data.name).toEqual(newOrganization.name);
-      expect(data.description).toEqual(newOrganization.description);
-      expect(data.url).toEqual(newOrganization.url);
-      expect(data.contact.person).toEqual(newOrganization.contact_name);
-      expect(data.contact.phone).toEqual(newOrganization.contact_phone);
-      expect(data.contact.email).toEqual(newOrganization.contact_email);
-      expect(data.socialMedia.facebook).toEqual(newOrganization.facebook);
-      expect(data.socialMedia.instagram).toEqual(newOrganization.instagram);
-      expect(data.socialMedia.twitter).toEqual(newOrganization.twitter);
-      expect(data.socialMedia.linkedIn).toEqual(newOrganization.linkedIn);
-    });
-    it('should return 400 because of missing name paramenter', async () => {
-      // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-
-      // Get user credentials
-      const { body } = await getUserCredentials(users.credentials);
-
-      // Remove name property from new organization object
-      const namelessOrganization = Object.assign({}, newOrganization);
-
-      // delete name property
-      delete namelessOrganization.name;
-
-      try {
-        await request
+        // Get response body
+        const { body } = await request
           .post(organizations.endpoint)
-          .set(buildCredentialHeader(body.data))
-          .send(namelessOrganization);
-      } catch (error) {
-        // Deconstruct status and response from error
-        const { status, response } = error;
-
-        // Test assertion logic
-        expect(error instanceof Error).toEqual(true);
-        expect(status).toEqual(400);
-        expect(response.body.status).toEqual('fail');
-        expect(response.body.message).toEqual('Parameter "name" is erroneous or missing');
-      }
-    });
-    it('should return 401 because of wrong authentication headers', async () => {
-      // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-
-      // Get user credentials
-      const { body } = await getUserCredentials(users.credentials);
-
-      // Wrong authentication hearders
-      const headers = buildCredentialHeader(body.data);
-      headers['X-Auth-Token'] += 'wrong';
-
-      try {
-        await request
-          .post(organizations.endpoint)
-          .set(headers)
+          .set(buildCredentialHeader(credentials.body.data))
           .send(newOrganization);
-      } catch (error) {
-        // Deconstruct status and response from error
-        const { status, response } = error;
 
-        // Test assertion logic
-        expect(error instanceof Error).toEqual(true);
-        expect(status).toEqual(401);
-        expect(response.body.status).toEqual('error');
-        expect(response.body.message).toEqual('You must be logged in to do this.');
-      }
+        // Deconstruct status and data from response body
+        const { status, data } = body;
+
+        // Check if request was successful
+        expect(status).toEqual('success');
+
+        // Check if saved organization matches sent object
+        expect(data.name).toEqual(newOrganization.name);
+        expect(data.description).toEqual(newOrganization.description);
+        expect(data.url).toEqual(newOrganization.url);
+        expect(data.contact.person).toEqual(newOrganization.contact_name);
+        expect(data.contact.phone).toEqual(newOrganization.contact_phone);
+        expect(data.contact.email).toEqual(newOrganization.contact_email);
+        expect(data.socialMedia.facebook).toEqual(newOrganization.facebook);
+        expect(data.socialMedia.instagram).toEqual(newOrganization.instagram);
+        expect(data.socialMedia.twitter).toEqual(newOrganization.twitter);
+        expect(data.socialMedia.linkedIn).toEqual(newOrganization.linkedIn);
+      });
+
+      it('should return 400 because of missing name paramenter', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        // Get user credentials
+        const { body } = await getUserCredentials(users.credentials);
+
+        // Remove name property from new organization object
+        const namelessOrganization = Object.assign({}, newOrganization);
+
+        // delete name property
+        delete namelessOrganization.name;
+
+        try {
+          await request
+            .post(organizations.endpoint)
+            .set(buildCredentialHeader(body.data))
+            .send(namelessOrganization);
+        } catch (error) {
+          // Deconstruct status and response from error
+          const { status, response } = error;
+
+          // Test assertion logic
+          expect(error instanceof Error).toEqual(true);
+          expect(status).toEqual(400);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Parameter "name" is erroneous or missing');
+        }
+      });
+
+      it('should return 401 because of wrong authentication headers', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        // Get user credentials
+        const { body } = await getUserCredentials(users.credentials);
+
+        // Wrong authentication hearders
+        const headers = buildCredentialHeader(body.data);
+        headers['X-Auth-Token'] += 'wrong';
+
+        try {
+          await request
+            .post(organizations.endpoint)
+            .set(headers)
+            .send(newOrganization);
+        } catch (error) {
+          // Deconstruct status and response from error
+          const { status, response } = error;
+
+          // Test assertion logic
+          expect(error instanceof Error).toEqual(true);
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
+        }
+      });
+
+      it('should return 403 because of unauthoreized user', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        // Flag to ser user to regular
+        const regularFlag = { regular: true };
+
+        // Assign object property
+        const credentialParams = Object.assign({}, users.credentials, regularFlag);
+
+        // Get user credentials
+        const { body } = await getUserCredentials(credentialParams);
+
+        try {
+          await request
+            .post(organizations.endpoint)
+            .set(buildCredentialHeader(body.data))
+            .send(newOrganization);
+        } catch (error) {
+          // Deconstruct status and response from error
+          const { status, response } = error;
+
+          // Test assertion logic
+          expect(error instanceof Error).toEqual(true);
+          expect(status).toEqual(403);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You do not have permission to do this.');
+        }
+      });
     });
-    it('should return 403 because of unauthoreized user', async () => {
-      // Set test max timeout to 10 seconds
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
-      // Flag to ser user to regular
-      const regularFlag = { regular: true };
+    describe('/organizations/{id}/managers - Add new manager to organization', () => {
+      it('should return 200 because organization Manager added successfully', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "success",
+            "managerIds": [
+              "user-id-value"
+            ],
+            "data": {
+              "_id": "user-id-value",
+              "username": "myusername",
+              "emails": [
+                {
+                  "address": "john.doe@ispname.com",
+                  "verified": "false"
+                }
+              ]
+            }
+          }
+        */
+      });
 
-      // Assign object property
-      const credentialParams = Object.assign({}, users.credentials, regularFlag);
+      it('should return 400 because erroneous or missing parameter.', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "New Manager's email address is missing"
+          }
+        */
+      });
 
-      // Get user credentials
-      const { body } = await getUserCredentials(credentialParams);
+      it('should return 401 because authentication is required', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
 
-      try {
-        await request
-          .post(organizations.endpoint)
-          .set(buildCredentialHeader(body.data))
-          .send(newOrganization);
-      } catch (error) {
-        // Deconstruct status and response from error
-        const { status, response } = error;
+      it('should return 403 because user does not have permission', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
 
-        // Test assertion logic
-        expect(error instanceof Error).toEqual(true);
-        expect(status).toEqual(403);
-        expect(response.body.status).toEqual('error');
-        expect(response.body.message).toEqual('You do not have permission to do this.');
-      }
+      it('should return 404 because organization is not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "Organization with specified ID is not found"
+          }
+        */
+      });
+    });
+  });
+
+  describe('PUT', () => {
+    describe('/organizations/{id} - Update organization', () => {
+      it('return organization by id', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 400 because of erroneous parameter', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED OBJECT
+          {
+            "status": "fail",
+            "message": "Parameter \"description\" is erroneous or too long"
+          }
+        */
+      });
+
+      it('should return 401 because authentication is required', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 403 because user does not have permission', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 404 because organization is not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+    });
+  });
+
+  describe('DELETE', () => {
+    describe('/organizations/{id} - Delete identified Organization from catalog', () => {
+      it('should return 204 because organization removed successfully', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 401 because authentication is required', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 403 because user does not have permission', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 404 because organization is not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+    });
+
+    describe('/organizations/{id}/managers/{id} - Delete identified Manager from Organization Manager list', () => {
+      it('should return 200 because organization Manager removed successfully', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "data": {
+              "_id": "user-id-value",
+              "username": "myusername",
+              "emails": [
+                {
+                  "address": "john.doe@ispname.com",
+                  "verified": "false"
+                }
+              ]
+            }
+          }
+        */
+      });
+
+      it('should return 400 because of erroneous parameter', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+        EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "Organization ID was not provided"
+          }
+        */
+      });
+
+      it('should return 401 because authentication is required', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 403 because user does not have permission', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+      });
+
+      it('should return 404 because organization is not found', async () => {
+        // Set test max timeout to 10 seconds
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        /*
+          EXPECTED Object sample
+          {
+            "status": "fail",
+            "message": "Organization with specified ID is not found"
+          }
+        */
+      });
     });
   });
 });
