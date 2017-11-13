@@ -76,11 +76,52 @@ describe('Endpoints for organization module', () => {
       it('return organization by id', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body from inserting organization
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Define response variable
+        const { body } = await request.get(`${organizations.endpoint}/${_id}`);
+
+        // Expect to be successful and to by an empty array
+        expect(body.data.name).toEqual(newOrganization.name);
+        expect(body.data.description).toEqual(newOrganization.description);
+        expect(body.data.url).toEqual(newOrganization.url);
+        expect(body.data.contact.person).toEqual(newOrganization.contact_name);
+        expect(body.data.contact.phone).toEqual(newOrganization.contact_phone);
+        expect(body.data.contact.email).toEqual(newOrganization.contact_email);
+        expect(body.data.socialMedia.facebook).toEqual(newOrganization.facebook);
+        expect(body.data.socialMedia.instagram).toEqual(newOrganization.instagram);
+        expect(body.data.socialMedia.twitter).toEqual(newOrganization.twitter);
+        expect(body.data.socialMedia.linkedIn).toEqual(newOrganization.linkedIn);
       });
 
       it('should return 404 because of organization was not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        // Define response variable
+        try {
+          await request.get(`${organizations.endpoint}/invalidId`);
+        } catch (invalidIdError) {
+          // Deconstruct status and response from error
+          const { status, response } = invalidIdError;
+
+          // Test assertion logic
+          expect(invalidIdError instanceof Error).toEqual(true);
+          expect(status).toEqual(404);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Organization with specified ID (invalidId) is not found');
+        }
       });
     });
 
