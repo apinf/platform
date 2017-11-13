@@ -614,26 +614,116 @@ describe('Endpoints for organization module', () => {
       it('return organization by id', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { data } = insertedOrganization.body;
+
+        // Defining edited data fields
+        const newName = {
+          name: 'Edited name',
+        };
+
+        const editedOrganization = Object.assign({}, data, newName);
+
+        // Get response body
+        const { status, body } = await request
+          .put(`${organizations.endpoint}/${data._id}`)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(editedOrganization);
+
+        // Test assertion logic
+        expect(status).toEqual(200);
+        expect(body.status).toEqual('success');
+        expect(body.data._id).toEqual(data._id);
+        expect(body.data.name).toEqual(newName.name)
       });
 
       it('should return 400 because of erroneous parameter', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED OBJECT
-          {
-            "status": "fail",
-            "message": "Parameter \"description\" is erroneous or too long"
-          }
-        */
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { data } = insertedOrganization.body;
+
+        // Defining edited data fields
+        const newName = {
+          name: 123456789,
+        };
+
+        const editedOrganization = Object.assign({}, data, newName);
+
+        // Try to set invalid name
+        try {
+          await request
+            .put(`${organizations.endpoint}/${data._id}`)
+            .set(buildCredentialHeader(credentials.body.data))
+            .send(editedOrganization);
+        } catch (editNameError) {
+          // Deconstruct status and response from error
+          const { status, response } = editNameError;
+
+          // Test assetion logic
+          expect(status).toEqual(400);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Parameter "name" is erroneous or missing');
+        }
       });
 
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { data } = insertedOrganization.body;
+
+        // Defining edited data fields
+        const newName = {
+          name: 'Edited name',
+        };
+
+        const editedOrganization = Object.assign({}, data, newName);
+
+        // Try to edit name without authenication
+        try {
+          await request
+            .put(`${organizations.endpoint}/${data._id}`)
+            .send(editedOrganization);
+        } catch (editNameError) {
+          // Deconstruct status and response from error
+          const { status, response } = editNameError;
+
+          // Test assetion logic
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
+        }
       });
 
       it('should return 403 because of unauthoreized user', async () => {
