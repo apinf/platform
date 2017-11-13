@@ -17,6 +17,9 @@ import descriptionOrganizations from '/apinf_packages/rest_apis/lib/descriptions
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
+// Javascript's Number API
+const { isInteger } = Number;
+
 // Request /rest/v1/organizations for Organizations collection
 ManagementV1.addRoute('organizations', {
   // Response contains a list of organizations
@@ -70,6 +73,15 @@ ManagementV1.addRoute('organizations', {
 
       if (queryParams.skip) {
         options.skip = parseInt(queryParams.skip, 10);
+      }
+
+      // If skip or limit is not a valid integer, return error 400
+      if (Object.keys(options).length) {
+        if (!isInteger(options.skip) || !isInteger(options.limit)) {
+          let err = errorMessagePayload(400, 'Bad Request. Erroneous or missing parameter.');
+          console.log(err)
+          return err
+        }
       }
 
       // Pass an optional search string for looking up inventory.
