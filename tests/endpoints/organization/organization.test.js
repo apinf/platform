@@ -278,7 +278,41 @@ describe('Endpoints for organization module', () => {
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Build regular user OBJECT
+        const regularUser = Object.assign({}, users.credentials, { regular: true });
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Get regular credentials.
+        // Has to be called after the insertion because this clears users Collection
+        const regularCredentials = await getUserCredentials(regularUser);
+
+        // Deconstruct _id from organization
+        const { _id, managerIds } = insertedOrganization.body.data;
+
+        // Define response variable
+        try {
+          await request
+          .get(`${organizations.endpoint}/${_id}/managers/${managerIds[0]}`)
+          .set(buildCredentialHeader(regularCredentials.body.data));
+        } catch (authorizationError) {
+          // Deconstruct error object
+          const { status, response } = authorizationError;
+
+          // Test assertion logic
+          expect(authorizationError instanceof Error).toEqual(true);
+          expect(status).toEqual(403);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('You do not have permission for this Organization');
+        }
       });
 
       it('should return 404 because organization is not found', async () => {
@@ -477,7 +511,42 @@ describe('Endpoints for organization module', () => {
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Build regular user OBJECT
+        const regularUser = Object.assign({}, users.credentials, { regular: true });
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Get regular credentials.
+        // Has to be called after the insertion because this clears users Collection
+        const regularCredentials = await getUserCredentials(regularUser);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Define response variable
+        try {
+          await request
+          .post(`${organizations.endpoint}/${_id}/managers`)
+          .set(buildCredentialHeader(regularCredentials.body.data))
+          .send({ newManagerEmail: 'john.doe@apinf.io' });
+        } catch (authorizationError) {
+          // Deconstruct error object
+          const { status, response } = authorizationError;
+
+          // Test assertion logic
+          expect(authorizationError instanceof Error).toEqual(true);
+          expect(status).toEqual(403);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You do not have permission to do this.');
+        }
       });
 
       it('should return 404 because organization is not found', async () => {
@@ -532,10 +601,45 @@ describe('Endpoints for organization module', () => {
         throw new Error();
       });
 
-      it('should return 403 because user does not have permission', async () => {
+      it('should return 403 because of unauthoreized user', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Flag to ser user to regular
+        const regularFlag = { regular: true };
+
+        // Assign object property
+        const credentialParams = Object.assign({}, users.credentials, regularFlag);
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        const { _id } = insertedOrganization.body.data;
+
+        // Get user credentials
+        const { body } = await getUserCredentials(credentialParams);
+
+        try {
+          await request
+            .put(`${organizations.endpoint}/${_id}`)
+            .set(buildCredentialHeader(body.data))
+            .send(newOrganization);
+        } catch (error) {
+          // Deconstruct status and response from error
+          const { status, response } = error;
+
+          // Test assertion logic
+          expect(error instanceof Error).toEqual(true);
+          expect(status).toEqual(403);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('You do not have permission for editing this Organization');
+        }
       });
 
       it('should return 404 because organization is not found', async () => {
@@ -580,7 +684,41 @@ describe('Endpoints for organization module', () => {
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Build regular user OBJECT
+        const regularUser = Object.assign({}, users.credentials, { regular: true });
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Get regular credentials.
+        // Has to be called after the insertion because this clears users Collection
+        const regularCredentials = await getUserCredentials(regularUser);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Define response variable
+        try {
+          await request
+          .delete(`${organizations.endpoint}/${_id}`)
+          .set(buildCredentialHeader(regularCredentials.body.data))
+        } catch (authorizationError) {
+          // Deconstruct error object
+          const { status, response } = authorizationError;
+
+          // Test assertion logic
+          expect(authorizationError instanceof Error).toEqual(true);
+          expect(status).toEqual(403);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('No permission to removing this Organization');
+        }
       });
 
       it('should return 404 because organization is not found', async () => {
@@ -651,7 +789,44 @@ describe('Endpoints for organization module', () => {
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Build regular user OBJECT
+        const regularUser = Object.assign({}, users.credentials, { regular: true });
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get userID from manager
+        const userId = adminCredentials.body.data.userId;
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Get regular credentials.
+        // Has to be called after the insertion because this clears users Collection
+        const regularCredentials = await getUserCredentials(regularUser);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Define response variable
+        try {
+          await request
+          .delete(`${organizations.endpoint}/${_id}/managers/${userId}`)
+          .set(buildCredentialHeader(regularCredentials.body.data));
+        } catch (authorizationError) {
+          // Deconstruct error object
+          const { status, response } = authorizationError;
+
+          // Test assertion logic
+          expect(authorizationError instanceof Error).toEqual(true);
+          expect(status).toEqual(403);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('You do not have permission for editing this Organization');
+        }
       });
 
       it('should return 404 because organization is not found', async () => {
