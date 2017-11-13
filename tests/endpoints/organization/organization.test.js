@@ -240,41 +240,63 @@ describe('Endpoints for organization module', () => {
       it('should return 200 with organization manager contact information.', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "data": {
-              "_id": "user-id-value",
-              "username": "myusername",
-              "emails": [
-                {
-                  "address": "john.doe@ispname.com",
-                  "verified": "false"
-                }
-              ]
-            }
-          }
-        */
-      });
 
-      it('should return 400 because of erroneous parameter', async () => {
-        // Set test max timeout to 10 seconds
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-        EXPECTED Object sample
-          {
-            "status": "fail",
-            "message": "Organization ID was not provided"
-          }
-        */
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { _id, managerIds } = insertedOrganization.body.data;
+
+        // Get manager info from ID
+        const { status, body } = await request
+          .get(`${organizations.endpoint}/${_id}/managers/${managerIds[0]}`)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Test assertion logic
+        expect(status).toEqual(200);
+        expect(body.status).toEqual('success');
+        expect(body.data._id).toEqual(managerIds[0]);
+        expect(body.data.emails.length).toBeGreaterThan(0);
       });
 
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { _id, managerIds } = insertedOrganization.body.data;
+
+        // Try to get managers Info without authentication
+        try {
+          await request
+            .get(`${organizations.endpoint}/${_id}/managers/${managerIds[0]}`)
+            .send(newOrganization);
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
+        }
       });
 
       it('should return 403 because user does not have permission', async () => {
@@ -498,7 +520,7 @@ describe('Endpoints for organization module', () => {
         // Test assertion logic
         expect(status).toEqual(200);
         expect(body.status).toEqual('success');
-        expect(body.managerIds.length).toEqual(2);
+        expect(body.data.length).toBeGreaterThan(1);
       });
 
       it('should return 401 because authentication is required', async () => {
