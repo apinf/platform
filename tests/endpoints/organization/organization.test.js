@@ -129,42 +129,58 @@ describe('Endpoints for organization module', () => {
       it('should return 200 with List of organization’s managers', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        /*
-          EXPECTED Object sample
-          {
-            "status": "Success",
-            "managerIds": [
-              "user-id-value"
-            ],
-            "data": [
-              {
-                "_id": "user-id-value",
-                "username": "myusername",
-                "emails": [
-                  {
-                    "address": "john.doe@ispname.com",
-                    "verified": "false"
-                  }
-                ]
-              }
-            ]
-          }
-        */
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body from inserting organization
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct _id from organization
+        const { _id, managerIds } = insertedOrganization.body.data;
+
+        // Define response variable
+        const { body, status } = await request
+          .get(`${organizations.endpoint}/${_id}/managers`)
+          .set(buildCredentialHeader(credentials.body.data));
+
+        // Test assertion logic
+        expect(status).toEqual(200);
+        expect(body.managerIds).toEqual(expect.arrayContaining(managerIds));
+        expect(body.data[0]._id).toEqual(credentials.body.data.userId);
       });
 
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        try {
+          await request.get(`${organizations.endpoint}/noId/managers`);
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
+        }
       });
 
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -179,6 +195,7 @@ describe('Endpoints for organization module', () => {
       it('should return 200 with organization manager contact information.', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -199,6 +216,7 @@ describe('Endpoints for organization module', () => {
       it('should return 400 because of erroneous parameter', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
         EXPECTED Object sample
           {
@@ -211,16 +229,19 @@ describe('Endpoints for organization module', () => {
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -359,6 +380,7 @@ describe('Endpoints for organization module', () => {
       it('should return 200 because organization Manager added successfully', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -383,6 +405,7 @@ describe('Endpoints for organization module', () => {
       it('should return 400 because erroneous or missing parameter.', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -395,16 +418,19 @@ describe('Endpoints for organization module', () => {
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -421,11 +447,13 @@ describe('Endpoints for organization module', () => {
       it('return organization by id', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 400 because of erroneous parameter', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED OBJECT
           {
@@ -438,16 +466,19 @@ describe('Endpoints for organization module', () => {
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
     });
   });
@@ -457,21 +488,25 @@ describe('Endpoints for organization module', () => {
       it('should return 204 because organization removed successfully', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
     });
 
@@ -479,6 +514,7 @@ describe('Endpoints for organization module', () => {
       it('should return 200 because organization Manager removed successfully', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
@@ -499,6 +535,7 @@ describe('Endpoints for organization module', () => {
       it('should return 400 because of erroneous parameter', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
         EXPECTED Object sample
           {
@@ -511,16 +548,19 @@ describe('Endpoints for organization module', () => {
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 403 because user does not have permission', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
       });
 
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+        throw new Error();
         /*
           EXPECTED Object sample
           {
