@@ -644,7 +644,7 @@ describe('Endpoints for organization module', () => {
         expect(status).toEqual(200);
         expect(body.status).toEqual('success');
         expect(body.data._id).toEqual(data._id);
-        expect(body.data.name).toEqual(newName.name)
+        expect(body.data.name).toEqual(newName.name);
       });
 
       it('should return 400 because of erroneous parameter', async () => {
@@ -797,13 +797,58 @@ describe('Endpoints for organization module', () => {
       it('should return 204 because organization removed successfully', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { _id } = insertedOrganization.body.data;
+
+        // Get response body
+        const { status } = await request
+          .delete(`${organizations.endpoint}/${_id}`)
+          .set(buildCredentialHeader(credentials.body.data));
+
+        // Test assertion logic
+        expect(status).toEqual(204);
       });
 
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(credentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct status and data from response body
+        const { _id } = insertedOrganization.body.data;
+
+        // Try to delete organization without authentication
+        try {
+          await request
+            .delete(`${organizations.endpoint}/${_id}`);
+        } catch (deleteError) {
+          // Deconstruct error object
+          const { status, response } = deleteError;
+
+          // Test assertion logic
+          expect(deleteError instanceof Error).toEqual(true);
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
+        }
       });
 
       it('should return 403 because user does not have permission', async () => {
