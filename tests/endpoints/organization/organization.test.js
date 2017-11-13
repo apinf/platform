@@ -284,14 +284,24 @@ describe('Endpoints for organization module', () => {
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "status": "fail",
-            "message": "Organization with specified ID is not found"
-          }
-        */
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        try {
+          await request
+            .get(`${organizations.endpoint}/noId/managers/noId`)
+            .set(buildCredentialHeader(credentials.body.data));
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(404);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Organization with specified ID is not found');
+        }
       });
     });
   });
@@ -473,14 +483,24 @@ describe('Endpoints for organization module', () => {
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "status": "fail",
-            "message": "Organization with specified ID is not found"
-          }
-        */
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        try {
+          await request
+            .post(`${organizations.endpoint}/noId/managers`)
+            .set(buildCredentialHeader(credentials.body.data));
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(404);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Organization with specified ID is not found');
+        }
       });
     });
   });
@@ -521,7 +541,24 @@ describe('Endpoints for organization module', () => {
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        try {
+          await request
+            .put(`${organizations.endpoint}/noId`)
+            .set(buildCredentialHeader(credentials.body.data));
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(404);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Organization with specified ID is not found');
+        }
       });
     });
   });
@@ -549,7 +586,24 @@ describe('Endpoints for organization module', () => {
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        try {
+          await request
+            .delete(`${organizations.endpoint}/noId`)
+            .set(buildCredentialHeader(credentials.body.data));
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(404);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Organization with specified ID is not found');
+        }
       });
     });
 
@@ -603,14 +657,24 @@ describe('Endpoints for organization module', () => {
       it('should return 404 because organization is not found', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "status": "fail",
-            "message": "Organization with specified ID is not found"
-          }
-        */
+
+        // Get user credentials
+        const credentials = await getUserCredentials(users.credentials);
+
+        try {
+          await request
+            .delete(`${organizations.endpoint}/noId/managers/noId`)
+            .set(buildCredentialHeader(credentials.body.data));
+        } catch (authenticationError) {
+          // Deconstruct error object
+          const { status, response } = authenticationError;
+
+          // Test assertion logic
+          expect(authenticationError instanceof Error).toEqual(true);
+          expect(status).toEqual(404);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Organization with specified ID is not found');
+        }
       });
     });
   });
