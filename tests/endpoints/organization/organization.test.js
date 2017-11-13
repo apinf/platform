@@ -41,7 +41,7 @@ describe('Endpoints for organization module', () => {
       it('should return all organizations from the collection', async () => {
         // Define response variable
         const { body } = await request.get(organizations.endpoint);
-        console.log(body)
+
         // Expect to be successful and to by an empty array
         expect(body.status).toEqual('success');
         expect(isArray(body.data)).toEqual(true);
@@ -50,6 +50,25 @@ describe('Endpoints for organization module', () => {
       it('should return 400 because of erroneous parameter', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
+
+        // Set erroneous params
+        const queryParams = { skip: 'He was 40' };
+
+        try {
+          // Define response variable
+          await request
+            .get(organizations.endpoint)
+            .query(queryParams);
+        } catch (getOrganizationError) {
+          // Deconstruct error object
+          const { response, status } = getOrganizationError;
+
+          // Test assertion logic
+          expect(getOrganizationError instanceof Error).toEqual(true);
+          expect(status).toEqual(400);
+          expect(response.body.status).toEqual('fail');
+          expect(response.body.message).toEqual('Bad Request. Erroneous or missing parameter.');
+        }
       });
     });
 
