@@ -21,7 +21,7 @@ const createUser = async ({ username, email, password, regular = false }) => {
   const newUser = { username, email, password };
 
   // Clear users collection
-  const clearCollectionResponse = await clearCollection('users');
+  // const clearCollectionResponse = await clearCollection('users');
 
   // Add new user
   const { body, status } = await request.post(users.endpoint).send(newUser);
