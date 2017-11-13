@@ -13,6 +13,7 @@ const request = require('superagent');
 const { organizations, users } = require('../endpointConfiguration.js');
 const {
   getUserCredentials,
+  createUser,
   buildCredentialHeader,
   isArray,
   clearCollection,
@@ -22,7 +23,7 @@ const {
 // Clear database before test runs
 beforeEach(() => {
   return Promise.all([
-
+    clearCollection('users'),
     clearCollection('Organizations'),
   ]);
 });
@@ -30,6 +31,7 @@ beforeEach(() => {
 // Clear database before test runs
 afterAll(() => {
   return Promise.all([
+    clearCollection('users'),
     clearCollection('Organizations'),
   ]);
 });
@@ -467,45 +469,56 @@ describe('Endpoints for organization module', () => {
       it('should return 200 because organization Manager added successfully', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "status": "success",
-            "managerIds": [
-              "user-id-value"
-            ],
-            "data": {
-              "_id": "user-id-value",
-              "username": "myusername",
-              "emails": [
-                {
-                  "address": "john.doe@ispname.com",
-                  "verified": "false"
-                }
-              ]
-            }
-          }
-        */
-      });
 
-      it('should return 400 because erroneous or missing parameter.', async () => {
-        // Set test max timeout to 10 seconds
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "status": "fail",
-            "message": "New Manager's email address is missing"
-          }
-        */
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get second adminUser data
+        const secondUser = await createUser(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Deconstruct _id from organization
+        const { address } = secondUser.body.data.emails[0];
+
+        // Define response variable
+
+        const { status, body } = await request
+          .post(`${organizations.endpoint}/${_id}/managers`)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send({ newManagerEmail: address });
+
+        // Test assertion logic
+        expect(status).toEqual(200);
+        expect(body.status).toEqual('success');
+        expect(body.managerIds.length).toEqual(2);
       });
 
       it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
+
+        // Try to add organization without authentication
+        try {
+          await request
+            .post(organizations.endpoint)
+            .send(newOrganization);
+        } catch (addOrganizationError) {
+          // Deconstruct error object
+          const { status, response } = addOrganizationError;
+
+          // Test assertion logic
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
+        }
       });
 
       it('should return 403 because user does not have permission', async () => {
@@ -708,7 +721,7 @@ describe('Endpoints for organization module', () => {
         try {
           await request
           .delete(`${organizations.endpoint}/${_id}`)
-          .set(buildCredentialHeader(regularCredentials.body.data))
+          .set(buildCredentialHeader(regularCredentials.body.data));
         } catch (authorizationError) {
           // Deconstruct error object
           const { status, response } = authorizationError;
