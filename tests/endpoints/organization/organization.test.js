@@ -919,35 +919,86 @@ describe('Endpoints for organization module', () => {
       it('should return 200 because organization Manager removed successfully', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-          EXPECTED Object sample
-          {
-            "data": {
-              "_id": "user-id-value",
-              "username": "myusername",
-              "emails": [
-                {
-                  "address": "john.doe@ispname.com",
-                  "verified": "false"
-                }
-              ]
-            }
-          }
-        */
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get second adminUser data
+        const secondUser = await createUser(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Deconstruct _id from organization
+        const { address } = secondUser.body.data.emails[0];
+
+        // Define response variable
+        const insertedManagers = await request
+          .post(`${organizations.endpoint}/${_id}/managers`)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send({ newManagerEmail: address });
+
+        // Get second manager of list to delete (not self)
+        const managerToDelete = insertedManagers.body.data.filter(manager => {
+          return manager._id !== adminCredentials.body.data.userId;
+        })[0]._id;
+
+        const { status } = await request
+          .delete(`${organizations.endpoint}/${_id}/managers/${managerToDelete}`)
+          .set(buildCredentialHeader(adminCredentials.body.data));
+
+        // Test assertion logic
+        expect(status).toEqual(204);
       });
 
       it('should return 400 because of erroneous parameter', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
-        /*
-        EXPECTED Object sample
-          {
-            "status": "fail",
-            "message": "Organization ID was not provided"
-          }
-        */
+
+        // Get adminUser credentials
+        const adminCredentials = await getUserCredentials(users.credentials);
+
+        // Get second adminUser data
+        const secondUser = await createUser(users.credentials);
+
+        // Get response body
+        const insertedOrganization = await request
+          .post(organizations.endpoint)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send(newOrganization);
+
+        // Deconstruct _id from organization
+        const { _id } = insertedOrganization.body.data;
+
+        // Deconstruct _id from organization
+        const { address } = secondUser.body.data.emails[0];
+
+        // Define response variable
+        await request
+          .post(`${organizations.endpoint}/${_id}/managers`)
+          .set(buildCredentialHeader(adminCredentials.body.data))
+          .send({ newManagerEmail: address });
+
+        // Get second manager of list to delete (not self)
+        const managerToDelete = '';
+
+        // Try to delete without managerId
+        try {
+          await request
+            .delete(`${organizations.endpoint}/${_id}/managers`)
+            .set(buildCredentialHeader(adminCredentials.body.data));
+        } catch (deleteManagerError) {
+          // Deconstruct error object
+          const { status, response } = deleteManagerError;
+
+          console.log(status, response)
+        }
       });
 
       it('should return 401 because authentication is required', async () => {
