@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // Collection imports
@@ -97,6 +98,13 @@ Apis.schema = new SimpleSchema({
   updated_by: {
     type: String,
     optional: true,
+    autoValue () {
+      let updateBy;
+      if (this.isUpdate) {
+        updateBy = Meteor.userId();
+      }
+      return updateBy;
+    },
   },
   version: {
     type: Number,

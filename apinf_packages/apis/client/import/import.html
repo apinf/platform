@@ -4,39 +4,25 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="importApiConfiguration">
-  <form id="apiConfigurationUploadForm" class="form" method="post">
-
-    <legend>
-      {{_ "import_ApiConfiguration_Title" }}
-    </legend>
-    <div class="row">
-      <div class="col-lg-5 col-md-5 col-sm-12">
-        <b>
-          {{_ "import_ApiConfiguration_File" }}
-        </b>
-        <div id="dropzone" class="dropzone">
-          <div>
-            {{_ "import_ApiConfiguration_Drop" }}
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-7 col-md-7 col-sm-12">
-        <b>
-          {{_ "import_ApiConfiguration_Preview" }}
-        </b>
-        <div id="editor">
-
-        </div>
-      </div>
-      <div class="col-lg-12">
-        <div class="btn-divider"></div>
-        <div class="form-group" style="text-align: right">
-          <button class="btn btn-success" type="submit">
-            {{_ "import_ApiConfiguration_Upload" }}
+  <div class="content-wrapper">
+    <form id="apiConfigurationUploadForm" class="form" method="post">
+      <div class="row">
+        <div class="col-xs-12">
+            <label for="import-api">
+              {{_ "import_ApiConfiguration_FileLabel"}}
+            </label>
+            <input type="file" id="import-api" class="form-control">
+            <span>
+              {{_ "import_ApiConfiguration_Extensions" }}
+            </span>
+        </div> 
+        <div class="col-xs-12 file-preview">
+          <pre>{{ apiConfiguration }}</pre>
+          <button class="btn btn-primary" type="submit">
+            {{_ "import_ApiConfiguration_ImportApi" }}
           </button>
         </div>
       </div>
-    </div>
-  </form>
-  <hr>
+    </form>
+  </div> 
 </template>

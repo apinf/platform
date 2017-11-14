@@ -54,8 +54,8 @@ Register a new admin account. The first user will become Admin.
 ## With Docker Compose
 1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/platform/blob/develop/docker-compose.yml).
 2. In the same folder create file "docker/api-umbrella/config/api-umbrella.yml" based on example "docker/api-umbrella/config/api-umbrella.yml.example". ATTENTION: replace "example.com" on YOUR_SITE_DOMAIN for keys "ssl_cert" and "ssl_cert_key".
-3. Create file "docker/apinf/env" based on example "docker/apinf/env.example".
-4. Create file "docker/ssl/env" based on example "docker/ssl/env.example".
+3. Create file "docker/env.apinf" based on example "docker/env.apinf.example".
+4. Create file "docker/env.ssl" based on example "docker/env.ssl.example".
 5. Run ```docker-compose up -d```. The first launch of will be slow because (take couple of minutes) of the DH parameter computation and configure Let's Encrypt certificate.
 6. Visit https://YOUR_SITE_DOMAIN:3002/signup/ and fill form for get API Key.
 7. Visit https://YOUR_SITE_DOMAIN:3002/admin/ and click on 'My Account' link for find Admin API Token.
