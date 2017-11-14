@@ -1207,6 +1207,8 @@
   "uploadProjectLogoButton_uploadButton_uploadLogo": "Upload Logo",
   "uploadCoverPhoto_confirm_delete": "Cover photo area will show primary branding color after photo has been deleted. The image will be removed from the collection.",
   "uploadCoverPhoto_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
+  "uploadCoverPhoto_text_fileMaxSize": "Max size 10 MB and supported formats jpg/jpeg/png/gif.",
+  "uploadCoverPhoto_message_fileMaxSize": "File size exceeded max limit. Please upload a photo within 10 MB size.",
   "uploadCoverPhoto_acceptedExtensions_errorText": "File creation failed!",
   "uploadCoverPhoto_successfully_uploaded": "Your cover photo was successfully uploaded!",
   "uploadCoverPhoto_successfully_deleted": "Your cover photo was successfully deleted!",
