@@ -50,10 +50,10 @@ Meteor.methods({
         const count = Apis.find({ name: jsonObj.name }).count();
         if (count === 0) {
           // Insert the API and get the id
-          const newApiBackend = Apis.insert(api);
+          const newApiId = Apis.insert(api);
 
           // Get the new api
-          const newApi = Apis.findOne({ _id: newApiBackend });
+          const newApi = Apis.findOne({ _id: newApiId });
 
           // Set message
           status.isSuccessful = true;

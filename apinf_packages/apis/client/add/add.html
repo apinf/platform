@@ -11,7 +11,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </h1>
       <!-- Manual Add API -->
       <section>
-        <h2 class="second-title">{{_ 'addApi_enterApiDetails' }}</h2>
+        <h2 class="second-title">
+          {{_ 'addApi_enterApiDetails' }}
+        </h2>
         {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
           <!--invisible auto-value field-->
           {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
@@ -28,11 +30,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </section>
       <!-- separator -->
       <div class="line-and-text">
-        <span>{{_ 'addApi_or' }}</span>
+        <span>
+          {{_ 'addApi_separateLineTitle_or' }}
+        </span>
       </div>
       <!-- Import API -->
       <section>
-        <h2 class="second-title">{{_ "import_ApiConfiguration_Title" }}</h2>
+        <h2 class="second-title">
+          {{_ "addApi_sectionTitle_importApiConfiguration" }}
+        </h2>
         {{> importApiConfiguration}}
       </section>
     </div>

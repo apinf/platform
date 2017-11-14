@@ -101,7 +101,7 @@ Template.importApiConfiguration.events({
           FlowRouter.go(`/apis/${status.slug}`);
         } else {
           // error message
-          sAlert.error(status.message); // apiConfiguration.set('aaa');
+          sAlert.error(status.message); 
         }
       });
     } catch (e) {
