@@ -78,9 +78,7 @@ ManagementV1.addRoute('organizations', {
       // If skip or limit is not a valid integer, return error 400
       if (Object.keys(options).length) {
         if (!isInteger(options.skip) || !isInteger(options.limit)) {
-          let err = errorMessagePayload(400, 'Bad Request. Erroneous or missing parameter.');
-          console.log(err)
-          return err
+          return errorMessagePayload(400, 'Bad Request. Erroneous or missing parameter.');
         }
       }
 
