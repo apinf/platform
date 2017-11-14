@@ -39,11 +39,12 @@ afterAll(() => {
 describe('Endpoints for organization module', () => {
   describe('GET', () => {
     describe('/organizations - List and search organizations', () => {
-      it('should return all organizations from the collection', async () => {
+      it('should return 200 with list and search organizations.', async () => {
         // Define response variable
-        const { body } = await request.get(organizations.endpoint);
+        const { status, body } = await request.get(organizations.endpoint);
 
         // Expect to be successful and to by an empty array
+        expect(status).toEqual(200);
         expect(body.status).toEqual('success');
         expect(isArray(body.data)).toEqual(true);
       });
@@ -74,7 +75,7 @@ describe('Endpoints for organization module', () => {
     });
 
     describe('/organizations/{id} - Fetch Organization with specified ID', () => {
-      it('return organization by id', async () => {
+      it('should return 200 when fetching Organization with specified ID.', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
@@ -91,9 +92,10 @@ describe('Endpoints for organization module', () => {
         const { _id } = insertedOrganization.body.data;
 
         // Define response variable
-        const { body } = await request.get(`${organizations.endpoint}/${_id}`);
+        const { status, body } = await request.get(`${organizations.endpoint}/${_id}`);
 
         // Expect to be successful and to by an empty array
+        expect(status).toEqual(200);
         expect(body.data.name).toEqual(newOrganization.name);
         expect(body.data.description).toEqual(newOrganization.description);
         expect(body.data.url).toEqual(newOrganization.url);
@@ -366,7 +368,7 @@ describe('Endpoints for organization module', () => {
 
   describe('POST', () => {
     describe('/organizations - Add new organization', () => {
-      it('add a new organization', async () => {
+      it('should return 201 because added a new organization', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
@@ -374,18 +376,19 @@ describe('Endpoints for organization module', () => {
         const credentials = await getUserCredentials(users.credentials);
 
         // Get response body
-        const { body } = await request
+        const { status, body } = await request
           .post(organizations.endpoint)
           .set(buildCredentialHeader(credentials.body.data))
           .send(newOrganization);
 
         // Deconstruct status and data from response body
-        const { status, data } = body;
+        const { data } = body;
 
         // Check if request was successful
-        expect(status).toEqual('success');
+        expect(body.status).toEqual('success');
 
         // Check if saved organization matches sent object
+        expect(status).toEqual(201);
         expect(data.name).toEqual(newOrganization.name);
         expect(data.description).toEqual(newOrganization.description);
         expect(data.url).toEqual(newOrganization.url);
@@ -611,7 +614,7 @@ describe('Endpoints for organization module', () => {
 
   describe('PUT', () => {
     describe('/organizations/{id} - Update organization', () => {
-      it('return organization by id', async () => {
+      it('should return 200 with organization by id', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
