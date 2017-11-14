@@ -957,7 +957,7 @@ describe('Endpoints for organization module', () => {
         expect(status).toEqual(204);
       });
 
-      it('should return 400 because of erroneous parameter', async () => {
+      it('should return 401 because authentication is required', async () => {
         // Set test max timeout to 10 seconds
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
 
@@ -980,31 +980,30 @@ describe('Endpoints for organization module', () => {
         const { address } = secondUser.body.data.emails[0];
 
         // Define response variable
-        await request
+        const insertedManagers = await request
           .post(`${organizations.endpoint}/${_id}/managers`)
           .set(buildCredentialHeader(adminCredentials.body.data))
           .send({ newManagerEmail: address });
 
         // Get second manager of list to delete (not self)
-        const managerToDelete = '';
+        const managerToDelete = insertedManagers.body.data.filter(manager => {
+          return manager._id !== adminCredentials.body.data.userId;
+        })[0]._id;
 
         // Try to delete without managerId
         try {
           await request
-            .delete(`${organizations.endpoint}/${_id}/managers`)
-            .set(buildCredentialHeader(adminCredentials.body.data));
+            .delete(`${organizations.endpoint}/${_id}/managers/${managerToDelete}`);
         } catch (deleteManagerError) {
           // Deconstruct error object
           const { status, response } = deleteManagerError;
 
-          console.log(status, response)
+          // Test assertion logic
+          expect(deleteManagerError instanceof Error).toEqual(true);
+          expect(status).toEqual(401);
+          expect(response.body.status).toEqual('error');
+          expect(response.body.message).toEqual('You must be logged in to do this.');
         }
-      });
-
-      it('should return 401 because authentication is required', async () => {
-        // Set test max timeout to 10 seconds
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-        throw new Error();
       });
 
       it('should return 403 because user does not have permission', async () => {
