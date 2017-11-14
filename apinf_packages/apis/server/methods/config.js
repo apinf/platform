@@ -48,6 +48,7 @@ Meteor.methods({
       try {
         // Check unique api name
         const count = Apis.find({ name: jsonObj.name }).count();
+
         if (count === 0) {
           // Insert the API and get the id
           const newApiId = Apis.insert(api);

@@ -19,15 +19,17 @@ import jsyaml from 'js-yaml';
 // APInf imports
 import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 
-Template.importApiConfiguration.onCreated(() => {
-  // Create the apiConfiguration variable
-  Template.instance().data.apiConfiguration = new ReactiveVar();
+Template.importApiConfiguration.onCreated(function () {
+  // Initialize variable
+  this.apiConfiguration = new ReactiveVar();
 });
 
 Template.importApiConfiguration.helpers({
-  // Get apiConfiguration value
   apiConfiguration () {
-    return Template.instance().data.apiConfiguration.get();
+    const instance = Template.instance();
+
+    // Get apiConfiguration value
+    return instance.apiConfiguration.get();
   },
 });
 
@@ -38,46 +40,44 @@ Template.importApiConfiguration.events({
 
     // Check file extension
     const acceptedExtensions = ['json', 'yml', 'yaml'];
-    if (!fileNameEndsWith(file.name, acceptedExtensions)) {
+
+    if (fileNameEndsWith(file.name, acceptedExtensions)) {
+      // Initialize a new FileReader to reader the file
+      const fileReader = new FileReader();
+
+      // Read file
+      fileReader.readAsText(file, 'UTF-8');
+
+      // Callback when the file is loaded
+      fileReader.onload = (onLoadEvent) => {
+        let importedFile = onLoadEvent.target.result;
+
+        // If file is not a JSON, convert it
+        if (!file.name.endsWith('json')) {
+          // converts YAML to JSON
+          const yamlToJson = jsyaml.load(importedFile);
+
+          // parses JSON obj to JSON String with indentation
+          importedFile = JSON.stringify(yamlToJson, null, '\t');
+        }
+
+        // Output value in screen
+        templateInstance.apiConfiguration.set(importedFile);
+        $('.file-preview').animate({ opacity: 1 });
+      };
+    } else {
       // Get error message translation
       const message = TAPi18n.__('importApiConfiguration_errorMessage');
 
-      // notifies user if file extension is not as expected
+      // Notifies user if file extension is not as expected
       sAlert.error(message);
 
       // Hide preview and reset data template value
       $('.file-preview').animate({ opacity: 0 }, 400, () => {
-        templateInstance.data.apiConfiguration.set(null);
+        templateInstance.apiConfiguration.set(null);
       });
-
-      return;
     }
-
-    // Instanciate a new FileReader to reader the file
-    const fileReader = new FileReader();
-
-    // Read file
-    fileReader.readAsText(file, 'UTF-8');
-
-    // Callback when the file is loaded
-    fileReader.onload = (onLoadEvent) => {
-      let importedFile = onLoadEvent.target.result;
-
-      // If file is not a JSON, convert it
-      if (!file.name.endsWith('json')) {
-        // converts YAML to JSON
-        const yamlToJson = jsyaml.load(importedFile);
-
-        // parses JSON obj to JSON String with indentation
-        importedFile = JSON.stringify(yamlToJson, null, '\t');
-      }
-
-      // Output value in screen
-      templateInstance.data.apiConfiguration.set(importedFile);
-      $('.file-preview').animate({ opacity: 1 });
-    };
   },
-
   'submit #apiConfigurationUploadForm': (event, templateInstance) => {
     // Prevents the form submit
     event.preventDefault();
@@ -85,30 +85,30 @@ Template.importApiConfiguration.events({
     // try catch here, so that page does not reload if JSON is incorrect
     try {
       // parses JSON String to apiConfiguration
-      const api = JSON.parse(templateInstance.data.apiConfiguration.get());
+      const api = JSON.parse(templateInstance.apiConfiguration.get());
 
-      // import apiConfiguration: expects status from callback
+      // Create a new API and get status about action
       Meteor.call('importApiConfigs', api, (err, status) => {
-        // error handing
+        // Error handing
         if (err) sAlert.error(err.reason);
 
-        // checks of status is successfull`
+        // Make sure status is successful
         if (status.isSuccessful) {
-          // success message
+          // Show message
           sAlert.success(status.message);
 
-          // redirects to apiBackend view page
-          FlowRouter.go(`/apis/${status.slug}`);
+          // Redirects to API profile page
+          FlowRouter.go('viewApi', { slug: status.slug });
         } else {
-          // error message
-          sAlert.error(status.message); 
+          // Show message about error
+          sAlert.error(status.message);
         }
       });
     } catch (e) {
-      // Get translated error message
+      // Get message text
       const message = TAPi18n.__('importApiConfiguration_jsonError_message');
 
-      // Alert user of error
+      // Show message
       sAlert.error(message);
     }
   },
