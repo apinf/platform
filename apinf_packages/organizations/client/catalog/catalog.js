@@ -154,6 +154,10 @@ Template.organizationCatalog.helpers({
     // If user isn't loggin then don't allow
     return false;
   },
+  organizationCount () {
+    // Return organizations count
+    return Template.instance().pagination.totalItems();
+  },
 });
 
 Template.organizationCatalog.events({
