@@ -115,7 +115,7 @@ CatalogV1.addCollection(Apis, {
 
         if (queryParams.lifecycle) {
           // Make sure lifecycle parameters only accept string
-          if (!queryParams.lifecycle.match(/^[a-z]+$/)) {
+          if (typeof queryParams.lifecycle !== 'string') {
             return errorMessagePayload(400,
               'Bad query parameters value. Lifecycle parameters only accept string.');
           }
@@ -124,20 +124,23 @@ CatalogV1.addCollection(Apis, {
 
         if (queryParams.limit) {
           // Make sure limit parameters only accept integer
-          if (!queryParams.limit.match(/^\d+$/)) {
+          const limit = parseInt(queryParams.limit, 10);
+
+          if (!Number.isInteger(limit)) {
             return errorMessagePayload(400,
               'Bad query parameters value. Limit parameters only accept integer.');
           }
-          options.limit = parseInt(queryParams.limit, 10);
+          options.limit = limit;
         }
 
         if (queryParams.skip) {
           // Make sure skip parameters only accept integer
-          if (!queryParams.skip.match(/^\d+$/)) {
+          const skip = parseInt(queryParams.skip, 10);
+          if (!Number.isInteger(skip)) {
             return errorMessagePayload(400,
               'Bad query parameters value. Skip parameters only accept integer.');
           }
-          options.skip = parseInt(queryParams.skip, 10);
+          options.skip = skip;
         }
 
         // Pass an optional search string for looking up inventory.
