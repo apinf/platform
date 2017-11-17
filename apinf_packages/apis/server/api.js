@@ -114,12 +114,23 @@ CatalogV1.addCollection(Apis, {
         }
 
         if (queryParams.lifecycle) {
-          // Make sure lifecycle parameters only accept string
-          if (typeof queryParams.lifecycle !== 'string') {
-            return errorMessagePayload(400,
-              'Bad query parameters value. Lifecycle parameters only accept string.');
+          // Convert lifecycle value to lower case
+          const lifecycle = queryParams.lifecycle.toLowerCase();
+
+          // Structure for validating values against schema
+          const validateFields = {
+            lifecycleStatus: lifecycle,
+          };
+
+          // Validate lifecycleStatus
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'lifecycleStatus');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'Parameter lifecycle has erroneous value.');
           }
-          query.lifecycleStatus = queryParams.lifecycle;
+
+          query.lifecycleStatus = lifecycle;
         }
 
         if (queryParams.limit) {
