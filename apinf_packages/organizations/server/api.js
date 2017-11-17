@@ -63,13 +63,28 @@ ManagementV1.addRoute('organizations', {
       const query = {};
       const options = {};
 
-      // Parse query parameters
       if (queryParams.limit) {
-        options.limit = parseInt(queryParams.limit, 10);
+        // Parse query parameters
+        const limit = parseInt(queryParams.limit, 10);
+
+        // Make sure limit parameters only accept integer
+        if (!Number.isInteger(limit)) {
+          return errorMessagePayload(400,
+            'Bad query parameters value. Limit parameters only accept integer.');
+        }
+        options.limit = limit;
       }
 
       if (queryParams.skip) {
-        options.skip = parseInt(queryParams.skip, 10);
+        // Parse query parameters
+        const skip = parseInt(queryParams.skip, 10);
+
+        // Make sure skip parameters only accept integer
+        if (!Number.isInteger(skip)) {
+          return errorMessagePayload(400,
+            'Bad query parameters value. Skip parameters only accept integer.');
+        }
+        options.skip = skip;
       }
 
       // Pass an optional search string for looking up inventory.
