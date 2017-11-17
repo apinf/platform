@@ -350,7 +350,7 @@ ManagementV1.addCollection(Meteor.users, {
           if (!Number.isInteger(skip)) {
             return errorMessagePayload(400,
               'Bad query parameters value. Skip parameters only accept integer.');
-            }
+          }
           options.skip = skip;
         }
 
@@ -785,7 +785,7 @@ ManagementV1.addRoute('users/updates', {
           if (!Number.isInteger(skip)) {
             return errorMessagePayload(400,
               'Bad query parameters value. Skip parameters only accept integer.');
-            }
+          }
           options.skip = skip;
 
           if (options.skip < 0) {
