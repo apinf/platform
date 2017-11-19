@@ -61,7 +61,7 @@
     "chimp-test": "chimp tests/chimp-config.js",
     "start": "meteor",
     "test": "node .scripts/run-chimp.js",
-    "test-endpoints": "./node_modules/jest/bin/jest.js tests/endpoints"
+    "test-endpoints": "./node_modules/jest/bin/jest.js --verbose tests/endpoints"
   },
   "repository": {
     "type": "git",
