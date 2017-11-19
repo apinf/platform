@@ -7,6 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import ApiBackendRatings from './';
 
 // Import functions
-import { insert, update } from './functions.js';
+import collectionFunction from './functions.js';
+
+// Deconstruct relevante functions
+const { insert, update } = collectionFunction;
 
 ApiBackendRatings.allow({ insert, update });
