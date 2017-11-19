@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* eslint-disable no-unused-expressions */
 // Discover chimp-js browser
 /* globals browser */
+/* eslint-disable no-console */
 
 import signInPage from '../../page-objects/signin.page';
 
@@ -58,9 +59,9 @@ describe('02 forgot password', () => {
     // Skip this test because current interface accepts email with space
     it.skip('should be invalid for email space', () => {
       signInPage.emailField.setValue('invalid email@mail.com');
-      console.log('email was set')
+      console.log('email was set');
       signInPage.submit();
-      console.log('email was submitted')
+      console.log('email was submitted');
       signInPage.emailErrorField.isVisible().should.be.true;
       signInPage.emailErrorField.getText().should.not.be.empty;
     });
