@@ -45,6 +45,8 @@ install:
 script:
   # Run meteor and chimp from node.js
   - travis_retry yarn test
+  # Run unit testing for Apinf Packages
+  - travis_retry nvm install 8 && nvm use 8 && yarn run test-packages
   # Build docker image
   - ./.scripts/docker_build.sh
 
