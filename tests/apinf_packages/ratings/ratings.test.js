@@ -23,7 +23,6 @@ const { collection } = require(ratingsPath);
 const { insert, update } = collection;
 
 describe('Ratings Package', () => {
-  console.log()
   describe('Collection module', () => {
     describe('permission.js functions', () => {
       describe('insert function', () => {
