@@ -58,6 +58,7 @@ describe('02 forgot password', () => {
 
     // Skip this test because current interface accepts email with space
     it.skip('should be invalid for email space', () => {
+      console.log('setting email value');
       signInPage.emailField.setValue('invalid email@mail.com');
       console.log('email was set');
       signInPage.submit();
