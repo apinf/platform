@@ -9,18 +9,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* eslint-disable max-len */
 
 // Import node packages
-import path from 'path';
+const path = require('path');
 
 // Defining root path of the project
 const currentPath = path.resolve(__dirname);
 const rootPath = currentPath.replace('/tests/apinf_packages/ratings', '');
-const ratingsPath = `${rootPath}/apinf_packages/ratings/functions_index.js`;
+const ratingsPath = `${rootPath}/apinf_packages/ratings`;
 
-// ES5 require had to be used because the 'import' statement is static and cannot
-// depend on runtime information
-const { collection } = require(ratingsPath);
+// Import functions from Collection modules
+const { insert, update } = require(`${ratingsPath}/collection/functions.js`);
 
-const { insert, update } = collection;
+// Import functions from Collections server modules
+const { buildPublishFunctionWith } = require(`${ratingsPath}/collection/server/functions.js`);
 
 describe('Ratings Package', () => {
   describe('Collection module', () => {
@@ -72,6 +72,49 @@ describe('Ratings Package', () => {
           const canUpdate = update(userId, rating);
 
           expect(canUpdate).toEqual(false);
+        });
+      });
+    });
+
+    describe('publications.js functions', () => {
+      describe('buildPublishFunctionWith fucntion', () => {
+        it('should return rating from a user', () => {
+          // Mock external functions needed by the module
+          const check = (value, pattern, stringedPattern = pattern.toString()) => {
+            // toString signature of pattern function
+            const stringPattern = 'function String() { [native code] }';
+
+            // Compare toString signature of function
+            const isStringPattern = stringPattern === stringedPattern;
+
+            if (isStringPattern) {
+              return typeof value === 'string';
+            }
+
+            return undefined;
+          };
+
+          const ApiBackendRatings = {
+            find ({ userId, apiBackendId }) {
+              return {
+                userId,
+                apiBackendId,
+                rating: Math.round(4 * Math.random()),
+              };
+            },
+          };
+
+          // Define variables
+          const userId = 'userId';
+          const apiBackendId = 'apiBackendId';
+
+          // Define context
+          const context = { userId }
+
+          const result =
+            buildPublishFunctionWith({ check, ApiBackendRatings, context })(apiBackendId)
+
+          console.log(result);
         });
       });
     });
