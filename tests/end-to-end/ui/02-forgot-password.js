@@ -55,16 +55,5 @@ describe('02 forgot password', () => {
       signInPage.emailErrorField.isVisible().should.be.true;
       signInPage.emailErrorField.getText().should.not.be.empty;
     });
-
-    // Skip this test because current interface accepts email with space
-    it.skip('should be invalid for email space', () => {
-      console.log('setting email value');
-      signInPage.emailField.setValue('invalid email@mail.com');
-      console.log('email was set');
-      signInPage.submit();
-      console.log('email was submitted');
-      signInPage.emailErrorField.isVisible().should.be.true;
-      signInPage.emailErrorField.getText().should.not.be.empty;
-    });
   });
 });
