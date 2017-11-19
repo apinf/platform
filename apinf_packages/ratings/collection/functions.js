@@ -12,7 +12,7 @@ function update (userId, rating) {
   return (userId === rating.userId);
 }
 
-export default {
+module.exports = {
   insert,
   update,
 };
