@@ -7,12 +7,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Import functions from package
 import collection from './collection/functions.js';
-// import server from './collection/server/functions.js';
+import server from './collection/server/functions.js';
 // import client from './client/functions.js';
 
 // Export all functions
 export {
   collection,
-  // server,
+  server,
   // client,
 };
