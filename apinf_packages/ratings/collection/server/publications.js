@@ -14,11 +14,11 @@ import ApiBackendRatings from '/apinf_packages/ratings/collection';
 import serverFunctions from './functions.js';
 
 // Deconstruct server serverFunctions
-const { publishMyApiBackendRating } = serverFunctions;
-console.log(publishMyApiBackendRating)
+const { buildPublishFunctionWith } = serverFunctions;
+
 // User rating for a single API Backend
 Meteor.publish('myApiBackendRating',
-  publishMyApiBackendRating({ check, ApiBackendRatings }));
+  buildPublishFunctionWith({ check, ApiBackendRatings, context: this });
 
 // User ratings for all API Backends
 Meteor.publish('myApiBackendRatings', function () {
