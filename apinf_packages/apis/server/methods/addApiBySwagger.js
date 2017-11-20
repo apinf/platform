@@ -7,8 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-// Collection imports
+// APInf imports
 import ApiDocs from '/apinf_packages/api_docs/collection';
+import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
 // Npm packages imports
 import SwaggerParser from 'swagger-parser';
@@ -35,6 +36,10 @@ Meteor.methods({
     } catch (error) {
       return error;
     }
+  },
+  insertApiDoc () {
+    const apiDocId = ApiDocs.insert({ type: 'file' });
+    return apiDocId
   },
   parseDataByUrl (parseData) {
     // Check type of url is String
@@ -68,10 +73,22 @@ Meteor.methods({
     });
     return future.wait();
   },
-  insertApiDoc () {
+  updateApiDoc (docData) {
     // Create new api doc
-    // check(apiDocData, Object);
-    const apiDocId = ApiDocs.insert({ type: 'file' });
+    check(docData, Object);
+    const objectId = new Mongo.Collection.ObjectID(docData.docId)
+    DocumentationFiles.update(objectId, {
+      $set: {
+        filename: docData.filename,
+        contentType: docData.contentType,
+      },
+    });
+    const apiDocId = ApiDocs.update(docData.apiDocId, {
+      $set: { 
+        type: 'file',
+        fileId: docData.docId, 
+      },
+    });
     return apiDocId;
   },
   updateApiIdInDoc (apiId, docId) {

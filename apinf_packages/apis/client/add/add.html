@@ -12,9 +12,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <h2 class="second-title">
           {{_ 'addApi_enterApiDetails' }}
         </h2>
-        <button type="click" class="btn btn-primary" id="openModal">
-          Upload Swagger File
-        </button>
         {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
           <!--invisible auto-value field-->
           {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
@@ -42,7 +39,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </h2>
         {{> importApiConfiguration}}
       </section>
-
+      <!-- separator -->
+      <div class="line-and-text">
+        <span>
+          {{_ 'addApi_separateLineTitle_or' }}
+        </span>
+      </div>
+      <!-- Add API by link or file -->
+      <section>
+        <h2 class="second-title">
+          {{_ "addApi_sectionTitle_importOpenApiSpecification" }}
+        </h2>
+        {{> addApiBySwagger}}
+      </section>
     </div>
   {{ else }}
     {{> spinner }}

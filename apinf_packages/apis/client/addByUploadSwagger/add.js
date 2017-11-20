@@ -9,18 +9,23 @@ import { Template } from 'meteor/templating';
 import { Mongo } from 'meteor/mongo';
 
 // Meteor contributed packages imports
+import { FS } from 'meteor/cfs:filesystem';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
+ 
 
-// Collection imports
+// APInf imports
 import Apis from '/apinf_packages/apis/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 
 // Npm packages imports
 import SwaggerParser from 'swagger-parser';
+import _ from 'lodash';
+import jsyaml from 'js-yaml';
 
 Template.addApiBySwagger.onCreated(function () {
   this.selectOption = new ReactiveVar(true);
@@ -36,15 +41,10 @@ Template.addApiBySwagger.onCreated(function () {
 
 Template.addApiBySwagger.onRendered(function () {
   // Check api doc id is not available
-  if (this.docId.get()) {
-    // Set api doc id if it is available
-    Session.set('apiDocId', this.docId.get());
-  } else {
+  if (!this.docId.get()) {
     Meteor.call('insertApiDoc', (err, res) => {
       if (res) {
         this.docId.set(res);
-        // Set api doc id
-        Session.set('apiDocId', res);
       }
     });
   }
@@ -101,7 +101,7 @@ Template.addApiBySwagger.helpers({
     if (parseData) {
       api.name = parseData.info.title;
       api.desc = parseData.info.description;
-      api.url = `${parseData.schemes[0]}://${parseData.host}/${parseData.basePath}`;
+      api.url = `${parseData.schemes[0]}://${parseData.host}${parseData.basePath}`;
     } else {
       api.name = '';
       api.desc = '';
@@ -127,34 +127,34 @@ Template.addApiBySwagger.helpers({
 Template.addApiBySwagger.events({
   'click #delete-documentation': function (event, templateInstance) {
     // Get confirmation message translation
-    const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
+    // const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
 
     // Show confirmation dialog to user
     // eslint-disable-next-line no-alert
-    const confirmation = confirm(message);
+    // const confirmation = confirm(message);
 
     // Check if user clicked "OK"
-    if (confirmation === true) {
-      // Get ApiDic fileId
-      const documentationFileId = this.apiDoc.fileId;
+    // if (confirmation === true) {
+    //   // Get ApiDic fileId
+    //   const documentationFileId = this.apiDoc.fileId;
 
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
+    //   // Convert to Mongo ObjectID
+    //   const objectId = new Mongo.Collection.ObjectID(documentationFileId);
 
-      // Remove documentation object
-      DocumentationFiles.remove(objectId);
+    //   // Remove documentation object
+    //   DocumentationFiles.remove(objectId);
 
-      // Remove fileId
-      ApiDocs.update(templateInstance.data.apiDoc._id, {
-        $unset: { fileId: '' },
-      });
+    //   // Remove fileId
+    //   ApiDocs.update(templateInstance.data.apiDoc._id, {
+    //     $unset: { fileId: '' },
+    //   });
 
-      // Get deletion success message translation
-      const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
+    //   // Get deletion success message translation
+    //   const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
 
-      // Alert user of successful deletion
-      sAlert.success(successfulMessage);
-    }
+    //   // Alert user of successful deletion
+    //   sAlert.success(successfulMessage);
+    // }
   },
   'change #selectOption': function (event) {
     event.preventDefault();
@@ -164,40 +164,83 @@ Template.addApiBySwagger.events({
       Template.instance().selectOption.set(false);
     }
   },
-  'change #file': function (event) {
+  'change #apiDocumentFile': function (event) {
     event.preventDefault();
-    // Set template instance
     const templateInstance = Template.instance();
+    const parseData = {
+      file: event.target.files[0],
+      docId: templateInstance.docId.get(),
+    };
+    console.log(':: file ',parseData.file)
+    // Iterates through each file uploaded
+    // const file = event.target.files[0];
 
-    // Defince variable as FileReader
-    const file = $('#file')[0].files[0];
-    const reader = new FileReader();
-    if ($('#file').val()) {
-      templateInstance.uploadingSpinner.set(true);
-      reader.onload = function () {
-        try {
-          // Parse data from yaml or json file
-          const parseData = SwaggerParser.YAML.parse(reader.result);
-          Meteor.call('checkData', parseData, (err, res) => {
-            if (err || !res) {
-              sAlert.error(err);
-            } else if (res.status === 'error') {
-              sAlert.error(res.message);
-            } else {
-              templateInstance.apiParseData.set(parseData);
-              templateInstance.uploadingSpinner.set(false);
-              $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
-              $('#modal-upload-swagger').modal('hide').css('display', 'none');
-            }
-          });
-        } catch (e) {
-          sAlert.error('File is not in correct format');
+    // Check file extension
+    const acceptedExtensions = ['json', 'yml', 'yaml'];
+
+    if (fileNameEndsWith(parseData.file.name, acceptedExtensions)) {
+      // Initialize a new FileReader to reader the file
+      const fileReader = new FileReader();
+
+      // Read file
+      fileReader.readAsText(parseData.file, 'UTF-8');
+
+      // Callback when the file is loaded
+      fileReader.onload = (onLoadEvent) => {
+        let importedFile = onLoadEvent.target.result;
+        let yamlToJson;
+
+        // If file is not a JSON, convert it
+        if (!parseData.file.name.endsWith('json')) {
+          // converts YAML to JSON
+          yamlToJson = jsyaml.load(importedFile);
+          
+          // parses JSON obj to JSON String with indentation
+          importedFile = JSON.stringify(yamlToJson, null, '\t');
         }
+        const apiData = yamlToJson || JSON.parse(importedFile);
+        console.log(':: importedFile ',apiData)
+        Meteor.call('checkData', apiData, (err, res) => {
+          if (err || !res) {
+            sAlert.error(err);
+          } else {
+            if (res.status === 'error') {
+              sAlert.error(res.data);
+            } else {
+              templateInstance.apiParseData.set(apiData);
+              DocumentationFiles.insert(parseData.file, (err, res) => {
+                if (err || !res ) {
+                  console.log(':: err ',err)
+                } else {
+                  console.log(':: res ',res._str)
+                  const docData = {
+                    apiDocId:   templateInstance.docId.get(),
+                    docId : res._str,
+                    filename: parseData.file.name,
+                    contentType: parseData.file.type || "application/x-yaml",
+                  };
+                  Meteor.call('updateApiDoc', docData , (err, res) => {
+                    if (err || !res) {
+                      sAlert.error(err);
+                    } else {
+                      $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
+                    }
+                  });
+                }
+              });
+            }
+          }
+          templateInstance.uploadingSpinner.set(false);
+        });
       };
-      // Read file as binary String
-      reader.readAsBinaryString(file);
     } else {
-      $('#submitApiBySwagger-button').attr('disabled', 'disabled');
+      // Get error message translation
+      const message = TAPi18n.__('importApiConfiguration_errorMessage');
+
+      // Notifies user if file extension is not as expected
+      sAlert.error(message);
+
+      // Hide preview and reset data template value
     }
   },
   'change #url': function (event) {
@@ -218,8 +261,6 @@ Template.addApiBySwagger.events({
             sAlert.error(res.data);
           } else {
             templateInstance.apiParseData.set(res.data);
-            templateInstance.docId.set(res.docId);
-            $('#modal-upload-swagger').modal('hide').css('display', 'none');
           }
           $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
           templateInstance.uploadingSpinner.set(false);

@@ -31,7 +31,6 @@ AutoForm.hooks({
     },
     onSuccess (formType, apiId) {
       const api = Apis.findOne(apiId);
-      Modal.hide('addApiBySwagger');
       const docId = $('#apiDocId').val();
       Meteor.call('updateApiIdInDoc', apiId, docId, () => {
         // Make sure slug exists
