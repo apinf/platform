@@ -161,8 +161,8 @@ Template.navbar.events({
     // Set cursor to search field
     $('#search-text').focus();
   },
-  'click #dashboard-button': function() {
-    //Redirect to Dashboard
+  'click #dashboard-button': function () {
+    // Redirect to Dashboard
     FlowRouter.go('dashboardPage');
   },
 });
