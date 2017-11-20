@@ -198,14 +198,14 @@ Template.addApiBySwagger.events({
           if (errorFromCheckData || !responseFromCheckData) {
             sAlert.error(errorFromCheckData);
           } else if (responseFromCheckData.status === 'error') {
-              sAlert.error(responseFromCheckData.data);
+            sAlert.error(responseFromCheckData.data);
           } else {
             templateInstance.apiParseData.set(apiData);
             DocumentationFiles.insert(parseData.file, (error, response) => {
-              if (response ) {
+              if (response) {
                 const docData = {
-                  apiDocId:   templateInstance.docId.get(),
-                  docId : response._str,
+                  apiDocId: templateInstance.docId.get(),
+                  docId: response._str,
                   filename: parseData.file.name,
                   contentType: parseData.file.type || 'application/x-yaml',
                 };
