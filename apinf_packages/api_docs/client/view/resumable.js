@@ -33,7 +33,7 @@ Meteor.startup(() => {
 
     // Get ApiDoc object
     const apiDoc = ApiDocs.findOne({ apiId: api._id });
-    
+
     // Check if ApiDoc is available
     // if so - update it with new values
     // if not - insert them

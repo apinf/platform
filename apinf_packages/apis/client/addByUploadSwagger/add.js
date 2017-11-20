@@ -9,22 +9,17 @@ import { Template } from 'meteor/templating';
 import { Mongo } from 'meteor/mongo';
 
 // Meteor contributed packages imports
-import { FS } from 'meteor/cfs:filesystem';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Session } from 'meteor/session';
- 
+
 
 // APInf imports
 import Apis from '/apinf_packages/apis/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
-import ApiDocs from '/apinf_packages/api_docs/collection';
 import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 
 // Npm packages imports
-import SwaggerParser from 'swagger-parser';
-import _ from 'lodash';
 import jsyaml from 'js-yaml';
 
 Template.addApiBySwagger.onCreated(function () {
@@ -125,7 +120,7 @@ Template.addApiBySwagger.helpers({
 });
 
 Template.addApiBySwagger.events({
-  'click #delete-documentation': function (event, templateInstance) {
+  // 'click #delete-documentation': function (event, templateInstance) {
     // Get confirmation message translation
     // const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
 
@@ -155,7 +150,7 @@ Template.addApiBySwagger.events({
     //   // Alert user of successful deletion
     //   sAlert.success(successfulMessage);
     // }
-  },
+  // },
   'change #selectOption': function (event) {
     event.preventDefault();
     if ($('#selectOption').val() === 'file') {
@@ -171,7 +166,7 @@ Template.addApiBySwagger.events({
       file: event.target.files[0],
       docId: templateInstance.docId.get(),
     };
-    console.log(':: file ',parseData.file)
+
     // Iterates through each file uploaded
     // const file = event.target.files[0];
 
@@ -194,41 +189,35 @@ Template.addApiBySwagger.events({
         if (!parseData.file.name.endsWith('json')) {
           // converts YAML to JSON
           yamlToJson = jsyaml.load(importedFile);
-          
+
           // parses JSON obj to JSON String with indentation
           importedFile = JSON.stringify(yamlToJson, null, '\t');
         }
         const apiData = yamlToJson || JSON.parse(importedFile);
-        console.log(':: importedFile ',apiData)
-        Meteor.call('checkData', apiData, (err, res) => {
-          if (err || !res) {
-            sAlert.error(err);
+        Meteor.call('checkData', apiData, (errorFromCheckData, responseFromCheckData) => {
+          if (errorFromCheckData || !responseFromCheckData) {
+            sAlert.error(errorFromCheckData);
+          } else if (responseFromCheckData.status === 'error') {
+              sAlert.error(responseFromCheckData.data);
           } else {
-            if (res.status === 'error') {
-              sAlert.error(res.data);
-            } else {
-              templateInstance.apiParseData.set(apiData);
-              DocumentationFiles.insert(parseData.file, (err, res) => {
-                if (err || !res ) {
-                  console.log(':: err ',err)
-                } else {
-                  console.log(':: res ',res._str)
-                  const docData = {
-                    apiDocId:   templateInstance.docId.get(),
-                    docId : res._str,
-                    filename: parseData.file.name,
-                    contentType: parseData.file.type || "application/x-yaml",
-                  };
-                  Meteor.call('updateApiDoc', docData , (err, res) => {
-                    if (err || !res) {
-                      sAlert.error(err);
-                    } else {
-                      $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
-                    }
-                  });
-                }
-              });
-            }
+            templateInstance.apiParseData.set(apiData);
+            DocumentationFiles.insert(parseData.file, (error, response) => {
+              if (response ) {
+                const docData = {
+                  apiDocId:   templateInstance.docId.get(),
+                  docId : response._str,
+                  filename: parseData.file.name,
+                  contentType: parseData.file.type || 'application/x-yaml',
+                };
+                Meteor.call('updateApiDoc', docData, (err, res) => {
+                  if (err || !res) {
+                    sAlert.error(err);
+                  } else {
+                    $('#submitApiBySwagger-button').removeAttr('disabled', 'disabled');
+                  }
+                });
+              }
+            });
           }
           templateInstance.uploadingSpinner.set(false);
         });

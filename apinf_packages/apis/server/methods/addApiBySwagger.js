@@ -4,8 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 
 // APInf imports
 import ApiDocs from '/apinf_packages/api_docs/collection';
@@ -39,7 +40,7 @@ Meteor.methods({
   },
   insertApiDoc () {
     const apiDocId = ApiDocs.insert({ type: 'file' });
-    return apiDocId
+    return apiDocId;
   },
   parseDataByUrl (parseData) {
     // Check type of url is String
@@ -76,7 +77,7 @@ Meteor.methods({
   updateApiDoc (docData) {
     // Create new api doc
     check(docData, Object);
-    const objectId = new Mongo.Collection.ObjectID(docData.docId)
+    const objectId = new Mongo.Collection.ObjectID(docData.docId);
     DocumentationFiles.update(objectId, {
       $set: {
         filename: docData.filename,
@@ -84,9 +85,9 @@ Meteor.methods({
       },
     });
     const apiDocId = ApiDocs.update(docData.apiDocId, {
-      $set: { 
+      $set: {
         type: 'file',
-        fileId: docData.docId, 
+        fileId: docData.docId,
       },
     });
     return apiDocId;

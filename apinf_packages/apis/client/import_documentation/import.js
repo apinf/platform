@@ -23,7 +23,7 @@ Template.importApiDocumentation.events({
   'change #apiDocumentationFile': function (event) {
     // Allowed file extensions for API documentation file
     const acceptedExtensions = ['yaml', 'yml', 'json'];
-    
+
     // Iterates through each file uploaded
     FS.Utility.eachFile(event, (file) => {
       if (file) {
