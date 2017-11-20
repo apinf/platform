@@ -17,12 +17,12 @@ import Chart from 'chart.js';
 // APInf imports
 import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/chart_helpers';
 
-Template.requestsOverTime.onRendered(function () {
+Template.medianResponseTime.onRendered(function () {
   const instance = this;
 
   const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${id}"] .requests-over-time-chart`;
+  const querySelector = `[data-overview-id="${id}"] .median-response-time`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
@@ -35,7 +35,7 @@ Template.requestsOverTime.onRendered(function () {
       labels: [],
       datasets: [
         {
-          label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
+          label: TAPi18n.__('medianResponseTime_pointTitle_time'),
           backgroundColor: '#C6C5C5',
           borderColor: '#959595',
           borderWidth: 1,
@@ -66,17 +66,17 @@ Template.requestsOverTime.onRendered(function () {
     },
   });
 
-  // Update reactively when Elasticsearch data is updated
+  // Update reactively when chart data is updated
   instance.autorun(() => {
-    // Get ElasticSearch aggregated data
-    const elasticsearchData = Template.currentData().buckets;
+    // Get aggregated chart data
+    const chartData = Template.currentData().buckets;
 
     // Get current timeframe
     const dateCount = FlowRouter.getQueryParam('timeframe');
 
     const params = {
       // Date range must have equal length with dateCount value
-      // Today value is included then subtract less days
+      // To include also today, subtract one day less than count of days in period
       startDate: moment().subtract(dateCount - 1, 'd'),
       endDate: moment(),
       // Interval is 1 day
@@ -90,11 +90,11 @@ Template.requestsOverTime.onRendered(function () {
     const data = arrayWithZeros(dateCount);
 
     // Get data for bar chart
-    elasticsearchData.forEach(value => {
+    chartData.forEach(value => {
       // Create Labels values
       const currentDateValue = moment(value.key).format(params.format);
       const index = labels.indexOf(currentDateValue);
-      data[index] = value.doc_count;
+      data[index] = parseInt(value.median_response_time.values['50.0'], 10);
     });
 
     // Update labels & data
@@ -105,14 +105,16 @@ Template.requestsOverTime.onRendered(function () {
     instance.chart.update();
   });
 
+
   // Reactive update Chart Axis translation
   instance.autorun(() => {
     const datasets = instance.chart.data.datasets;
 
     // Update translation
-    datasets[0].label = TAPi18n.__('requestsOverTime_pointTitle_requests');
+    datasets[0].label = TAPi18n.__('medianResponseTime_pointTitle_time');
 
     // Update chart with new translation
     instance.chart.update();
   });
 });
+

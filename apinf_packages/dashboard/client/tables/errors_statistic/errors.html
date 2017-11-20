@@ -1,0 +1,50 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="errorsStatisticTable">
+  <table class="table table-bordered table-hover table-statistic">
+    <thead>
+    <tr>
+      <th>
+        {{_ 'errorsStatisticTable_columnTitle_date' }}
+      </th>
+      <th>
+        {{_ 'errorsStatisticTable_columnTitle_status' }}
+      </th>
+      <th>
+        {{_ 'errorsStatisticTable_columnTitle_calls' }}
+      </th>
+      <th>
+        {{_ 'errorsStatisticTable_columnTitle_path' }}
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{# each error in errors }}
+      <tr>
+        <td>{{ error.date }}</td>
+        <td>{{ error.status }}</td>
+        <td>{{ error.calls }}</td>
+        <td>{{ error.path }}</td>
+      </tr>
+    {{/ each }}
+    </tbody>
+  </table>
+  <div class="form-inline">
+    <div class="form-group">
+      <span>
+        <strong>
+          {{_ 'errorsStatisticTable_text_showOfErrors' count=errors.length all=allErrorsCount }}
+        </strong>
+      </span>
+    </div>
+    <div class="form-group pull-right">
+      <a id="generate-errors-log" href="">
+        {{_ 'errorsStatisticTable_lintText_downloadFile' }}
+      </a>
+    </div>
+  </div>
+</template>

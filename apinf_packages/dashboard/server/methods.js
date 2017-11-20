@@ -21,6 +21,8 @@ import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
 import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
+import _ from 'lodash';
+
 Meteor.methods({
   getProxiesList (type) {
     // Make sure the parameter is String type
@@ -136,7 +138,7 @@ Meteor.methods({
     // Return all lists of IDs
     return groupingIds;
   },
-  dashboardChartData (host, queryParams) {
+  overviewChartData (host, queryParams) {
     // Make sure params are String type
     check(host, String);
     check(queryParams, Object);
@@ -146,20 +148,38 @@ Meteor.methods({
       // Prepare dataset for charts and table with trend
       .then((result) => {
         // Get bucket of aggregated data
-        const buckets = result.aggregations.group_by_request_path.buckets;
+        return result.aggregations.group_by_request_path.buckets;
+      }).catch((error) => {
+        throw new Meteor.Error(error);
+      });
+  },
+  totalNumbersData (host, queryParams) {
+    // Make sure params are String type
+    check(host, String);
+    check(queryParams, Object);
 
-        return buckets.map(value => {
-          const currentPeriodData = value.group_by_interval.buckets.currentPeriod;
+    // Fetch data from elasticsearch
+    return promisifyCall('getElasticsearchData', host, queryParams)
+      .then(result => {
+        const requestPathsDataset = result.aggregations.group_by_request_path.buckets;
+
+        // Prepared object to total statistics
+        const totalNumberPerPath = {};
+
+        // Go through all requested path and fill object
+        _.mapKeys(requestPathsDataset, (bucket, path) => {
+          const currentPeriodData = bucket.group_by_interval.buckets.currentPeriod;
 
           // Get the statistic for current period
           const requestNumber = currentPeriodData.doc_count;
-          const responseTime = parseInt(currentPeriodData.response_time.values['50.0'], 10) || 0;
+          const responseTime =
+            parseInt(currentPeriodData.median_response_time.values['50.0'], 10) || 0;
           const uniqueUsers = currentPeriodData.unique_users.buckets.length;
-          const successCallsCount = currentPeriodData.success_status.buckets.success.doc_count;
-          const errorCallsCount = currentPeriodData.success_status.buckets.error.doc_count;
 
-          const previousPeriodData = value.group_by_interval.buckets.previousPeriod;
-          const previousResponseTime = previousPeriodData.response_time.values['50.0'];
+
+          // Get the statistic for previous period
+          const previousPeriodData = bucket.group_by_interval.buckets.previousPeriod;
+          const previousResponseTime = previousPeriodData.median_response_time.values['50.0'];
           const previousUniqueUsers = previousPeriodData.unique_users.buckets.length;
 
           // Get the statistics comparing between previous and current periods
@@ -167,22 +187,45 @@ Meteor.methods({
           const compareResponse = calculateTrend(parseInt(previousResponseTime, 10), responseTime);
           const compareUsers = calculateTrend(previousUniqueUsers, uniqueUsers);
 
-          // Get value to display
-          return {
-            requestPath: value.key,
+          totalNumberPerPath[path] = {
             requestNumber,
             responseTime,
             uniqueUsers,
-            successCallsCount,
-            errorCallsCount,
-            requestOverTime: currentPeriodData.requests_over_time.buckets,
-            compareRequests,
-            compareResponse,
-            compareUsers,
+            comparisons: {
+              compareRequests,
+              compareUsers,
+              compareResponse,
+            },
           };
         });
-      }).catch((error) => {
-        throw new Meteor.Error(error);
+
+        return totalNumberPerPath;
+      });
+  },
+  statusCodesData (host, queryParams) {
+    // Make sure params are String type
+    check(host, String);
+    check(queryParams, Object);
+
+    // Fetch data from elasticsearch
+    return promisifyCall('getElasticsearchData', host, queryParams)
+      .then(result => {
+        const requestPathsDataset = result.aggregations.group_by_request_path.buckets;
+
+        // Prepared object to responses status codes statistics
+        const statusCodesPerPath = {};
+
+        // Go through all requested path and fill object
+        _.mapKeys(requestPathsDataset, (bucket, path) => {
+          const statusCodesData = bucket.response_status.buckets;
+
+          statusCodesPerPath[path] = {
+            successCallsCount: statusCodesData.success.doc_count,
+            errorCallsCount: statusCodesData.error.doc_count,
+          };
+        });
+
+        return statusCodesPerPath;
       });
   },
 });

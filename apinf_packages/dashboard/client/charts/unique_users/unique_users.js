@@ -17,17 +17,17 @@ import Chart from 'chart.js';
 // APInf imports
 import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/chart_helpers';
 
-Template.medianResponseTime.onRendered(function () {
+Template.uniqueUsersOverTime.onRendered(function () {
   const instance = this;
 
   const id = instance.data.proxyBackendId;
   // Get querySelector to related <canvas>
-  const querySelector = `[data-overview-id="${id}"] .median-response-time`;
+  const querySelector = `[data-overview-id="${id}"] .users-chart`;
 
   // Realize chart
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
-    // The type of chart
+    // The type of chart we want
     type: 'bar',
 
     // Data for displaying chart
@@ -35,7 +35,7 @@ Template.medianResponseTime.onRendered(function () {
       labels: [],
       datasets: [
         {
-          label: TAPi18n.__('medianResponseTime_pointTitle_time'),
+          label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
           backgroundColor: '#C6C5C5',
           borderColor: '#959595',
           borderWidth: 1,
@@ -66,10 +66,10 @@ Template.medianResponseTime.onRendered(function () {
     },
   });
 
-  // Update reactively when Elasticsearch data is updated
+  // Update reactively when chart data is updated
   instance.autorun(() => {
-    // Get ElasticSearch aggregated data
-    const elasticsearchData = Template.currentData().buckets;
+    // Get aggregated chart data
+    const chartData = Template.currentData().buckets;
 
     // Get current timeframe
     const dateCount = FlowRouter.getQueryParam('timeframe');
@@ -90,11 +90,11 @@ Template.medianResponseTime.onRendered(function () {
     const data = arrayWithZeros(dateCount);
 
     // Get data for bar chart
-    elasticsearchData.forEach(value => {
+    chartData.forEach(value => {
       // Create Labels values
       const currentDateValue = moment(value.key).format(params.format);
       const index = labels.indexOf(currentDateValue);
-      data[index] = parseInt(value.percentiles_response_time.values['50.0'], 10);
+      data[index] = value.unique_users.buckets.length;
     });
 
     // Update labels & data
@@ -105,13 +105,12 @@ Template.medianResponseTime.onRendered(function () {
     instance.chart.update();
   });
 
-
   // Reactive update Chart Axis translation
   instance.autorun(() => {
     const datasets = instance.chart.data.datasets;
 
     // Update translation
-    datasets[0].label = TAPi18n.__('medianResponseTime_pointTitle_time');
+    datasets[0].label = TAPi18n.__('uniqueUsersOverTime_pointTitle_users');
 
     // Update chart with new translation
     instance.chart.update();
