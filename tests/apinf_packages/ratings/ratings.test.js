@@ -25,6 +25,11 @@ const {
   publishMyApiBackendRatings,
 } = require(`${ratingsPath}/collection/server/functions.js`);
 
+// Import functions from client module
+const {
+  clickRateIt,
+} = require(`${ratingsPath}/client/functions.js`);
+
 describe('Ratings Package', () => {
   describe('Collection module', () => {
     describe('permission.js functions', () => {
@@ -201,6 +206,16 @@ describe('Ratings Package', () => {
 
           expect(Array.isArray(result)).toEqual(true);
           expect(result.length).toEqual(2);
+        });
+      });
+    });
+  });
+
+  describe('Client module', () => {
+    describe('rating.js functions', () => {
+      describe('clickRateIt function', () => {
+        it('', () => {
+
         });
       });
     });

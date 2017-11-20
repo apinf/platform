@@ -15,6 +15,14 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Apis from '/apinf_packages/apis/collection';
 import ApiBackendRatings from '../collection';
 
+// Function imports
+import ratingFunctions from './functions.js';
+
+// Deconstruct server ratingFunctions
+const {
+  clickRateIt,
+} = ratingFunctions;
+
 Template.apiBackendRating.onCreated(function () {
   // Get reference to template instance
   const instance = this;
@@ -70,50 +78,11 @@ Template.apiBackendRating.onRendered(function () {
 
 Template.apiBackendRating.events({
   'click .rateit': function (event, templateInstance) {
-    // Make sure there is a Meteor user ID for voting
-    if (Meteor.userId() === null) {
-      // Get translated user message
-      const message = TAPi18n.__('apiBackendRating_anonymousError');
+    // Define function scope
+    const functionScope = { Meteor, ApiBackendRatings, TAPi18n, sAlert, $ };
 
-      // Alert the user that they must log in
-      sAlert.error(message);
-
-      return false;
-    }
-
-    // Get API Backend ID from template data context
-    const apiBackendId = templateInstance.data._id;
-
-    // Get rating from template based on API Backend ID
-    const rating = $(`#rating-${apiBackendId}`).rateit('value');
-
-    // Get current user ID
-    const userId = Meteor.userId();
-
-    // Create an rating object with user ID, API Backend ID, and rating
-    const apiBackendRating = {
-      apiBackendId,
-      userId,
-      rating,
-    };
-
-    // Check if user has previously rated API Backend
-    const previousRating = ApiBackendRatings.findOne({
-      apiBackendId,
-      userId,
-    });
-
-    // If previous rating exists
-    if (previousRating) {
-      // Update the existing rating
-      ApiBackendRatings.update(previousRating._id, { $set: apiBackendRating });
-    } else {
-      // Otherwise, create a new rating
-      ApiBackendRatings.insert(apiBackendRating);
-    }
-
-    // Update the API Backend average rating
-    return Meteor.call('setApiBackendAverageRating', apiBackendId);
+    // Build function scope with and execute task after scope is built
+    return clickRateIt(functionScope)(event, templateInstance);
   },
 });
 
