@@ -109,12 +109,14 @@ describe('Ratings Package', () => {
           const apiBackendId = 'apiBackendId';
 
           // Define context
-          const context = { userId }
+          const context = { userId };
 
           const result =
-            buildPublishFunctionWith({ check, ApiBackendRatings, context })(apiBackendId)
+            buildPublishFunctionWith({ check, ApiBackendRatings, context })(apiBackendId);
 
-          console.log(result);
+          expect(result.userId).toEqual(userId);
+          expect(result.apiBackendId).toEqual(apiBackendId);
+          expect(Number.isInteger(result.rating)).toEqual(true);
         });
       });
     });

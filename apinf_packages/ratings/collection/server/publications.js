@@ -18,7 +18,7 @@ const { buildPublishFunctionWith } = serverFunctions;
 
 // User rating for a single API Backend
 Meteor.publish('myApiBackendRating',
-  buildPublishFunctionWith({ check, ApiBackendRatings, context: this });
+  buildPublishFunctionWith({ check, ApiBackendRatings, context: this }));
 
 // User ratings for all API Backends
 Meteor.publish('myApiBackendRatings', function () {
