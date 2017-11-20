@@ -3,6 +3,8 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+/* eslint-disable meteor/audit-argument-checks */
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
@@ -14,21 +16,29 @@ import ApiBackendRatings from '/apinf_packages/ratings/collection';
 import serverFunctions from './functions.js';
 
 // Deconstruct server serverFunctions
-const { buildPublishFunctionWith } = serverFunctions;
+const { publishMyApiBackendRating, publishMyApiBackendRatings } = serverFunctions;
 
 // User rating for a single API Backend
-Meteor.publish('myApiBackendRating',
-  buildPublishFunctionWith({ check, ApiBackendRatings, context: this }));
+Meteor.publish('myApiBackendRating', function (apiBackendId) {
+  // Get function context
+  const context = this;
+
+  // Build function scope
+  const functionScope = { check, ApiBackendRatings, context };
+
+  // Build publish function scope and return publish data
+  return publishMyApiBackendRating(functionScope)(apiBackendId);
+});
 
 // User ratings for all API Backends
 Meteor.publish('myApiBackendRatings', function () {
-  // get current user ID
-  const userId = this.userId;
+  // Get function context
+  const context = this;
 
-  // get user API Backend ratings
-  const userApiBackendRatings = ApiBackendRatings.find({ userId });
+  // Build function scope
+  const functionScope = { ApiBackendRatings, context };
 
-  return userApiBackendRatings;
+  return publishMyApiBackendRatings(functionScope)();
 });
 
 // All ratings for a given API Backend, anonymized

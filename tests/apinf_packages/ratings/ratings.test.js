@@ -20,7 +20,10 @@ const ratingsPath = `${rootPath}/apinf_packages/ratings`;
 const { insert, update } = require(`${ratingsPath}/collection/functions.js`);
 
 // Import functions from Collections server modules
-const { buildPublishFunctionWith } = require(`${ratingsPath}/collection/server/functions.js`);
+const {
+  publishMyApiBackendRating,
+  publishMyApiBackendRatings,
+} = require(`${ratingsPath}/collection/server/functions.js`);
 
 describe('Ratings Package', () => {
   describe('Collection module', () => {
@@ -77,7 +80,7 @@ describe('Ratings Package', () => {
     });
 
     describe('publications.js functions', () => {
-      describe('buildPublishFunctionWith fucntion', () => {
+      describe('publishMyApiBackendRating fucntion', () => {
         it('should return rating from a user', () => {
           // Mock external functions needed by the module
           const check = (value, pattern, stringedPattern = pattern.toString()) => {
@@ -112,11 +115,46 @@ describe('Ratings Package', () => {
           const context = { userId };
 
           const result =
-            buildPublishFunctionWith({ check, ApiBackendRatings, context })(apiBackendId);
+            publishMyApiBackendRating({ check, ApiBackendRatings, context })(apiBackendId);
 
           expect(result.userId).toEqual(userId);
           expect(result.apiBackendId).toEqual(apiBackendId);
           expect(Number.isInteger(result.rating)).toEqual(true);
+        });
+      });
+
+      describe('publishMyApiBackendRatings fucntion', () => {
+        it('should return all ratings from a user', () => {
+          // Mock external functions needed by the module
+          const ApiBackendRatings = {
+            find ({ userId }) {
+              const apiBackendId = 'apiBackendId';
+              return [
+                {
+                  userId,
+                  apiBackendId,
+                  rating: Math.round(4 * Math.random()),
+                },
+                {
+                  userId,
+                  apiBackendId,
+                  rating: Math.round(4 * Math.random()),
+                },
+              ];
+            },
+          };
+
+          // Define variables
+          const userId = 'userId';
+
+          // Define context
+          const context = { userId };
+
+          const result =
+            publishMyApiBackendRatings({ ApiBackendRatings, context })();
+
+          expect(Array.isArray(result)).toEqual(true);
+          expect(result.length).toEqual(2);
         });
       });
     });
