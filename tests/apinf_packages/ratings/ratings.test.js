@@ -94,7 +94,7 @@ describe('Ratings Package', () => {
               return typeof value === 'string';
             }
 
-            return undefined;
+            return false;
           };
 
           const ApiBackendRatings = {
@@ -152,6 +152,52 @@ describe('Ratings Package', () => {
 
           const result =
             publishMyApiBackendRatings({ ApiBackendRatings, context })();
+
+          expect(Array.isArray(result)).toEqual(true);
+          expect(result.length).toEqual(2);
+        });
+      });
+
+      describe('publishApiBackendRatings fucntion', () => {
+        it('should return all ratings of a api', () => {
+          // Mock external functions needed by the module
+          const ApiBackendRatings = {
+            find ({ apiBackendId }) {
+              const userId = 'userId';
+              return [
+                {
+                  userId,
+                  apiBackendId,
+                  rating: Math.round(4 * Math.random()),
+                },
+                {
+                  userId,
+                  apiBackendId,
+                  rating: Math.round(4 * Math.random()),
+                },
+              ];
+            },
+          };
+
+          const check = (value, pattern, stringedPattern = pattern.toString()) => {
+            // toString signature of pattern function
+            const stringPattern = 'function String() { [native code] }';
+
+            // Compare toString signature of function
+            const isStringPattern = stringPattern === stringedPattern;
+
+            if (isStringPattern) {
+              return typeof value === 'string';
+            }
+
+            return false;
+          };
+
+          // Define variables
+          const apiBackendId = 'apiBackendId';
+
+          const result =
+            publishMyApiBackendRatings({ check, ApiBackendRatings })(apiBackendId);
 
           expect(Array.isArray(result)).toEqual(true);
           expect(result.length).toEqual(2);

@@ -16,7 +16,11 @@ import ApiBackendRatings from '/apinf_packages/ratings/collection';
 import serverFunctions from './functions.js';
 
 // Deconstruct server serverFunctions
-const { publishMyApiBackendRating, publishMyApiBackendRatings } = serverFunctions;
+const {
+  publishMyApiBackendRating,
+  publishMyApiBackendRatings,
+  publishApiBackendRatings,
+} = serverFunctions;
 
 // User rating for a single API Backend
 Meteor.publish('myApiBackendRating', function (apiBackendId) {
@@ -38,18 +42,15 @@ Meteor.publish('myApiBackendRatings', function () {
   // Build function scope
   const functionScope = { ApiBackendRatings, context };
 
+  // Build publish function scope and return publish data
   return publishMyApiBackendRatings(functionScope)();
 });
 
 // All ratings for a given API Backend, anonymized
 Meteor.publish('apiBackendRatings', (apiBackendId) => {
-  // Make sure apiBackendId is a String
-  check(apiBackendId, String);
+  // Build function scope
+  const functionScope = { check, ApiBackendRatings };
 
-  // get API Backend Ratings, excluding the User ID field
-  const apiBackendRatings = ApiBackendRatings.find(
-    { apiBackendId }
-  );
-
-  return apiBackendRatings;
+  // Build publish function scope and return publish data
+  return publishApiBackendRatings(functionScope)(apiBackendId);
 });

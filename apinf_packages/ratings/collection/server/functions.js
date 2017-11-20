@@ -33,7 +33,22 @@ function publishMyApiBackendRatings ({ ApiBackendRatings, context }) {
   }.bind(context);
 }
 
+function publishApiBackendRatings ({ check, ApiBackendRatings }) {
+  return function (apiBackendId) {
+    // Make sure apiBackendId is a String
+    check(apiBackendId, String);
+
+    // get API Backend Ratings, excluding the User ID field
+    const apiBackendRatings = ApiBackendRatings.find(
+      { apiBackendId }
+    );
+
+    return apiBackendRatings;
+  };
+}
+
 module.exports = {
   publishMyApiBackendRating,
   publishMyApiBackendRatings,
+  publishApiBackendRatings,
 };
