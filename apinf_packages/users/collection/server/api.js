@@ -328,14 +328,30 @@ ManagementV1.addCollection(Meteor.users, {
         }
 
         if (queryParams.limit) {
-          options.limit = parseInt(queryParams.limit, 10);
+          // Parse query parameters
+          const limit = parseInt(queryParams.limit, 10);
+
+          // Make sure limit parameters only accept integer
+          if (!Number.isInteger(limit)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Limit parameters only accept integer.');
+          }
+          options.limit = limit;
         } else {
           // By default 100 users is returned
           options.limit = 100;
         }
 
         if (queryParams.skip) {
-          options.skip = parseInt(queryParams.skip, 10);
+          // Parse query parameters
+          const skip = parseInt(queryParams.skip, 10);
+
+          // Make sure skip parameters only accept integer
+          if (!Number.isInteger(skip)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Skip parameters only accept integer.');
+          }
+          options.skip = skip;
         }
 
         // By default users are sorted by username
@@ -743,7 +759,16 @@ ManagementV1.addRoute('users/updates', {
       } else {
         // Using organization ID other parameters are overridden
         if (queryParams.limit) {
-          options.limit = parseInt(queryParams.limit, 10);
+          // Parse query parameters
+          const limit = parseInt(queryParams.limit, 10);
+
+          // Make sure limit parameters only accept integer
+          if (!Number.isInteger(limit)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Limit parameters only accept integer.');
+          }
+          options.limit = limit;
+
           if (options.limit < 1) {
             badQueryParameters = true;
           }
@@ -753,7 +778,16 @@ ManagementV1.addRoute('users/updates', {
         }
 
         if (queryParams.skip) {
-          options.skip = parseInt(queryParams.skip, 10);
+          // Parse query parameters
+          const skip = parseInt(queryParams.skip, 10);
+
+          // Make sure skip parameters only accept integer
+          if (!Number.isInteger(skip)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Skip parameters only accept integer.');
+          }
+          options.skip = skip;
+
           if (options.skip < 0) {
             badQueryParameters = true;
           }
