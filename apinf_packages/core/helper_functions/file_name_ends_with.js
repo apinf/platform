@@ -9,17 +9,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     @param {array} suffixList - Array of file extension names e.g ['json', 'txt', 'yaml']
     */
 export default function fileNameEndsWith (filename, suffixList) {
-  // variable that keeps state of is this filename contains provided extensions - false by default
-  let state = false;
+  // Low case the filename
+  const filenameLowCase = filename.toLowerCase();
 
-  // iterating through extensions passed into suffixList array
+  // Iterating through extensions passed into suffixList array
   for (let i = 0; i < suffixList.length; i++) {
+    // Calculate index to start search
+    const fromIndex = filenameLowCase.length - suffixList[i].length;
     // parses line to check if filename contains current suffix
-    const endsWith = filename.indexOf(suffixList[i], filename.length - suffixList[i].length) !== -1;
+    const endsWith = filenameLowCase.indexOf(suffixList[i], fromIndex) !== -1;
 
-    // if current extension found in filename then change the state variable
-    if (endsWith) state = true;
+    // if current extension found in filename then return true
+    if (endsWith) return true;
   }
 
-  return state;
+  // Otherwise the extension isn't allowed
+  return false;
 }

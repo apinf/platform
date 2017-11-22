@@ -114,15 +114,44 @@ CatalogV1.addCollection(Apis, {
         }
 
         if (queryParams.lifecycle) {
-          query.lifecycleStatus = queryParams.lifecycle;
+          // Convert lifecycle value to lower case
+          const lifecycle = queryParams.lifecycle.toLowerCase();
+
+          // Structure for validating values against schema
+          const validateFields = {
+            lifecycleStatus: lifecycle,
+          };
+
+          // Validate lifecycleStatus
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'lifecycleStatus');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'Parameter lifecycle has erroneous value.');
+          }
+
+          query.lifecycleStatus = lifecycle;
         }
 
         if (queryParams.limit) {
-          options.limit = parseInt(queryParams.limit, 10);
+          // Make sure limit parameters only accept integer
+          const limit = parseInt(queryParams.limit, 10);
+
+          if (!Number.isInteger(limit)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Limit parameters only accept integer.');
+          }
+          options.limit = limit;
         }
 
         if (queryParams.skip) {
-          options.skip = parseInt(queryParams.skip, 10);
+          // Make sure skip parameters only accept integer
+          const skip = parseInt(queryParams.skip, 10);
+          if (!Number.isInteger(skip)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Skip parameters only accept integer.');
+          }
+          options.skip = skip;
         }
 
         // Pass an optional search string for looking up inventory.
