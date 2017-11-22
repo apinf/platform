@@ -8,11 +8,14 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
+import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
+import Branding from '/apinf_packages/branding/collection';
 import Organizations from '/apinf_packages/organizations/collection';
 import Settings from '/apinf_packages/settings/collection';
 
@@ -22,6 +25,17 @@ import _ from 'lodash';
 Template.organizationCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
+
+  instance.autorun(() => {
+    // Get Branding collection content
+    const branding = Branding.findOne();
+    // Check if Branding collection and siteTitle are available
+    if (branding && branding.siteTitle) {
+      // Set the page title
+      const pageTitle = TAPi18n.__('organizationsCatalogPage_title_organizationsCatalog');
+      DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
+    }
+  });
 
   // Get user id
   const userId = Meteor.userId();
