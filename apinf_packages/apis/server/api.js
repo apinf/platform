@@ -665,7 +665,12 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Update API document
-        Apis.update(apiId, { $set: bodyParams });
+        const apiUpdate = Apis.update(apiId, { $set: bodyParams });
+
+        // Did update fail
+        if (!apiUpdate) {
+          return errorMessagePayload(500, 'Updating API into database failed.');
+        }
 
         // Prepare data to response, extend it with Documentation URLs
         const responseData = Object.assign(
