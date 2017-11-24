@@ -52,6 +52,50 @@ Template.dashboardPage.onCreated(function () {
   });
 });
 
+Template.dashboardPage.onRendered(function () {
+
+  /*const currentDate = new Date();
+
+  // 10 min interval
+  const timeinterval = 1 * 60 * 1000
+  const countDownDate = new Date(currentDate.getTime() + timeinterval);
+
+  // Update the count down every 1 second
+  let intervalObj = setInterval(function() {
+    // Get todays date and time
+    const now = new Date().getTime();
+
+    // Find the distance between now an the count down date
+    const distance = countDownDate - now;
+
+    // Time calculations for minutes and seconds
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="countdown"
+    document.getElementById("countdown").innerHTML ="Page reload in " + minutes + "m " + seconds + "s ";
+
+    // If the count down is over, write some text
+    if (distance < 1) {
+      clearInterval(intervalObj);
+      //document.getElementById("countdown").innerHTML ="Page reload in 0m 0s";
+
+      // Redirect to Dashboard
+      location.reload();
+    }
+  }, 1000);*/
+
+  const currDate = new Date();
+  const endtime = Date.parse(new Date(currDate.getTime() + (1 * 60000)));
+  timeinterval = setInterval(function () {
+    const currenttime = Date.parse(new Date());
+    Session.set("time", currenttime);
+    const contdown = getTimeRemaining(endtime);
+    Session.set("contdown", contdown);
+    console.log(contdown);
+  }, 1000);
+});
+
 Template.dashboardPage.helpers({
   proxyBackendsCount () {
     // Fetch proxy backends
@@ -73,4 +117,26 @@ Template.dashboardPage.helpers({
   proxyBackendId () {
     return ProxyBackends.findOne()._id;
   },
+  countdown: function () {
+      return Session.get("contdown");
+  },
 });
+
+function getTimeRemaining(endtime){
+  // get endtime
+  const interval = endtime - Session.get('time');
+  const seconds = ("0" + Math.floor( (interval/1000) % 60 )).slice(-2);
+  const minutes = ("0" + Math.floor( (interval/1000/60) % 60 )).slice(-2);
+
+  if(interval <= 1) {
+    clearInterval(timeinterval);
+    // Redirect to Dashboard
+    location.reload();
+  }
+
+  return {
+    'total': interval,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
