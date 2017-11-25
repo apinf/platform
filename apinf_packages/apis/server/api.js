@@ -345,10 +345,10 @@ CatalogV1.addCollection(Apis, {
             description: 'Bad Request. Erroneous or missing parameter.',
           },
           401: {
-            description: 'Authentication is required.ß',
+            description: 'Authentication is required.',
           },
           500: {
-            description: 'Internal server error.ß',
+            description: 'Internal server error.',
           },
         },
         security: [
