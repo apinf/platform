@@ -107,7 +107,7 @@ CatalogV1.addCollection(Apis, {
 
           // Make sure Organization exists
           if (!organization) {
-            return errorMessagePayload(400, 'Bad query parameters. Organization not found.');
+            return errorMessagePayload(400, 'Bad query parameters. Given organization was not found.');
           }
           // Get list of managed API IDs
           query._id = { $in: organization.managedApiIds() };
@@ -127,7 +127,7 @@ CatalogV1.addCollection(Apis, {
             validateFields, 'lifecycleStatus');
 
           if (!isValid) {
-            return errorMessagePayload(400, 'Parameter lifecycle has erroneous value.');
+            return errorMessagePayload(400, 'Parameter lifecycle has erroneous value. Allowed values: Design, Development, Testing, Production, Deprecated.');
           }
 
           query.lifecycleStatus = lifecycle;
@@ -139,7 +139,7 @@ CatalogV1.addCollection(Apis, {
 
           if (!Number.isInteger(limit)) {
             return errorMessagePayload(400,
-              'Bad query parameters value. Limit parameters only accept integer.');
+              'Bad query parameters value. Limit parameter only accepts integer.');
           }
           options.limit = limit;
         }
@@ -149,7 +149,7 @@ CatalogV1.addCollection(Apis, {
           const skip = parseInt(queryParams.skip, 10);
           if (!Number.isInteger(skip)) {
             return errorMessagePayload(400,
-              'Bad query parameters value. Skip parameters only accept integer.');
+              'Bad query parameters value. Skip parameter only accepts integer.');
           }
           options.skip = skip;
         }
@@ -240,10 +240,10 @@ CatalogV1.addCollection(Apis, {
             },
           },
           204: {
-            description: 'No data to return',
+            description: 'No data to return.',
           },
           404: {
-            description: 'API is not Found',
+            description: 'API was not found.',
           },
         },
       },
@@ -254,7 +254,7 @@ CatalogV1.addCollection(Apis, {
         const api = Apis.findOne({ _id: apiId });
         // Return error response, it API is not found.
         if (!api) {
-          return errorMessagePayload(404, 'API with specified ID is not found.');
+          return errorMessagePayload(404, 'API with specified ID was not found.');
         }
 
         // Only Public APIs are available for non-admin/non-manager user
@@ -320,7 +320,7 @@ CatalogV1.addCollection(Apis, {
         tags: [
           CatalogV1.swagger.tags.api,
         ],
-        summary: 'Add new API to catalog.',
+        summary: 'Add new API to APInf catalog.',
         description: descriptionApis.post,
         parameters: [
           CatalogV1.swagger.params.api,
@@ -345,10 +345,10 @@ CatalogV1.addCollection(Apis, {
             description: 'Bad Request. Erroneous or missing parameter.',
           },
           401: {
-            description: 'Authentication is required',
+            description: 'Authentication is required.ß',
           },
           500: {
-            description: 'Internal server error',
+            description: 'Internal server error.ß',
           },
         },
         security: [
@@ -431,7 +431,7 @@ CatalogV1.addCollection(Apis, {
           } else if (isPublicParam === 'false') {
             bodyParams.isPublic = false;
           } else {
-            return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
+            return errorMessagePayload(400, 'Parameter isPublic has erroneous value. Allowed values are: "true" and "false".');
           }
         }
 
@@ -518,7 +518,7 @@ CatalogV1.addCollection(Apis, {
         ],
         responses: {
           200: {
-            description: 'API updated successfully',
+            description: 'API updated successfully.',
             schema: {
               type: 'object',
               properties: {
@@ -536,13 +536,13 @@ CatalogV1.addCollection(Apis, {
             description: 'Bad Request. Erroneous or missing parameter.',
           },
           401: {
-            description: 'Authentication is required',
+            description: 'Authentication is required.',
           },
           403: {
-            description: 'User does not have permission',
+            description: 'User does not have permission.',
           },
           404: {
-            description: 'API is not found',
+            description: 'API was not found.',
           },
         },
         security: [
@@ -565,12 +565,12 @@ CatalogV1.addCollection(Apis, {
 
         // API doesn't exist
         if (!api) {
-          return errorMessagePayload(404, 'API with specified ID is not found.');
+          return errorMessagePayload(404, 'API with specified ID was not found.');
         }
 
         // API exists but user can not manage
         if (!api.currentUserCanManage(userId)) {
-          return errorMessagePayload(403, 'You do not have permission for editing this API.');
+          return errorMessagePayload(403, 'You do not have permission to edit information related to this API.');
         }
 
         // validate values
@@ -706,13 +706,13 @@ CatalogV1.addCollection(Apis, {
             description: 'API removed successfully.',
           },
           401: {
-            description: 'Authentication is required',
+            description: 'Authentication is required.',
           },
           403: {
-            description: 'User does not have permission',
+            description: 'User does not have permission to remove this API.',
           },
           404: {
-            description: 'API is not found',
+            description: 'API was not found',
           },
         },
         security: [
@@ -733,7 +733,7 @@ CatalogV1.addCollection(Apis, {
         // API must exist
         if (!api) {
           // API doesn't exist
-          return errorMessagePayload(404, 'API with specified ID is not found.');
+          return errorMessagePayload(404, 'API with specified ID was not found.');
         }
 
         // User must be able to manage API
