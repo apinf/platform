@@ -10,6 +10,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Feedback from '../collection';
@@ -40,12 +41,26 @@ Template.apiFeedback.helpers({
 
     return feedbackCount === publicFeedbackCount;
   },
+  isToolTip () {
+    if (Meteor.userId()) {
+      // Add tooltip for loged In users
+      return TAPi18n.__('feedback_feedbackForm_withLogin_tooltip');
+    }
+    // Add tooltip for anonymous users
+    return TAPi18n.__('feedback_feedbackForm_withoutLogin_tooltip');
+  },
 });
 
 Template.apiFeedback.events({
   'click #add-feedback': function () {
-    // Show feedbackForm modal
-    Modal.show('feedbackForm', { formType: 'insert' });
+    const userId = Meteor.userId();
+    if (userId) {
+      // Show feedbackForm modal
+      Modal.show('feedbackForm', { formType: 'insert' });
+    } else {
+      // Redirect to login page
+      FlowRouter.go('signIn');
+    }
   },
   'click #mark-all-feedbacks-as-private': () => {
     // Get slug
