@@ -8,8 +8,9 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
-import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import AnalyticsData from '/apinf_packages/analytics/collection/index';
 import Proxies from '/apinf_packages/proxies/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
 import URI from 'urijs';
@@ -26,7 +27,9 @@ Meteor.methods({
       // TODO: remove proxy from EMQ
       // Delete proxyBackend from Apinf
       ProxyBackends.remove(proxyBackend._id);
-    } else if (proxyBackend.type === 'apiUmbrella') {
+    }
+
+    if (proxyBackend.type === 'apiUmbrella') {
       // Get umbrellaBackendId
       const umbrellaBackendId = proxyBackend.apiUmbrella.id;
 
@@ -45,10 +48,16 @@ Meteor.methods({
               (publishError) => {
                 if (publishError) {
                   throw new Meteor.Error('publish-error');
-                } else if (deleteFromMongoDB && proxyBackend._id) {
-                  // Check: delete from MongoDB and proxyBackend has _id
+                }
+
+                // Check: delete from MongoDB and proxyBackend has _id
+                if (deleteFromMongoDB && proxyBackend._id) {
                   // Delete proxyBackend from Apinf
                   ProxyBackends.remove(proxyBackend._id);
+                  // Delete related AnalyticsData
+                  AnalyticsData.remove({ proxyBackendId: proxyBackend._id });
+                  // Stop cron to calculate Analytics Data
+                  Meteor.call('stopCalculateAnalyticsData', proxyBackend._id);
                 }
               }
             );
@@ -69,11 +78,8 @@ Meteor.methods({
       'apiUmbrella.url_matches.frontend_prefix': frontendPrefix,
     });
 
-    // Return boolean based on uniqueness
-    if (documentExist) {
-      return false;
-    }
-    return true;
+    // Frontend prefix is unique if no proxy backend exists
+    return !(documentExist);
   },
   getUrlAndAuthStrings (url) {
     check(url, String);
