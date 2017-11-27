@@ -38,7 +38,7 @@ Meteor.methods({
         const lastDayType = 'today';
 
         // Store analytics data in MongoDB
-        Meteor.call('proxyBackendAnalyticsData', daysCount, proxyBackendId, lastDayType);
+        Meteor.call('proxyBackendAnalyticsData', proxyBackendId, daysCount, lastDayType);
       },
     });
 
@@ -62,7 +62,7 @@ Meteor.methods({
         const lastDayType = 'yesterday';
 
         // Store analytics data in MongoDB
-        Meteor.call('proxyBackendAnalyticsData', daysCount, proxyBackendId, lastDayType);
+        Meteor.call('proxyBackendAnalyticsData', proxyBackendId, daysCount, lastDayType);
       },
     });
   },

@@ -50,9 +50,7 @@ Meteor.startup(() => {
         // Make sync call
         // eslint-disable-next-line
         const syncCall = Meteor.call('storeAnalyticsData',
-          daysCount, proxyBackendsPrefixes, elasticsearchHost, lastDayType);
-
-        console.log('AnalyticsData collection is created for proxy ', proxy.name);
+          proxyBackendsPrefixes, elasticsearchHost, daysCount, lastDayType);
       }
     });
   }
