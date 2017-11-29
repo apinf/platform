@@ -8,12 +8,14 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
+import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 // Collection imports
 import ApiBacklogItems from '/apinf_packages/backlog/collection';
 import Apis from '/apinf_packages/apis/collection';
+import Branding from '/apinf_packages/branding/collection';
 import Feedback from '/apinf_packages/feedback/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
@@ -38,6 +40,11 @@ Template.viewApi.onCreated(function () {
     const api = Apis.findOne({ slug });
     if (api) {
       templateInstance.api.set(api);
+      const branding = Branding.findOne();
+      // Check if Branding collection and siteTitle are available
+      if (branding && branding.siteTitle) {
+        DocHead.setTitle(`${branding.siteTitle} - ${api.name}`);
+      }
     }
   });
 });
