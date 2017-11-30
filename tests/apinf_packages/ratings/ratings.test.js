@@ -217,6 +217,118 @@ describe('Ratings Package', () => {
         it('should be a function', () => {
           expect(typeof clickRateIt).toEqual('function');
         });
+
+        it('should be a currying function', () => {
+          const validScopeArguments = {
+            Meteor: true,
+            ApiBackendRatings: true,
+            TAPi18n: true,
+            sAlert: true,
+            $: true,
+          };
+
+          expect(typeof clickRateIt(validScopeArguments)).toEqual('function');
+        });
+
+        it('should return missing Meteor error', () => {
+          const invalidScopeArguments = {
+            ApiBackendRatings: true,
+            TAPi18n: true,
+            sAlert: true,
+            $: true,
+          };
+
+          expect(clickRateIt(invalidScopeArguments).message).toEqual('Meteor not defined');
+        });
+
+        it('should return missing ApiBackendRatings error', () => {
+          const invalidScopeArguments = {
+            TAPi18n: true,
+            Meteor: true,
+            sAlert: true,
+            $: true,
+          };
+
+          expect(clickRateIt(invalidScopeArguments).message).toEqual('ApiBackendRatings not defined');
+        });
+
+        it('should return missing TAPi18n error', () => {
+          const invalidScopeArguments = {
+            ApiBackendRatings: true,
+            Meteor: true,
+            sAlert: true,
+            $: true,
+          };
+
+          expect(clickRateIt(invalidScopeArguments).message).toEqual('TAPi18n not defined');
+        });
+
+        it('should return missing sAlert error', () => {
+          const invalidScopeArguments = {
+            ApiBackendRatings: true,
+            Meteor: true,
+            TAPi18n: true,
+            $: true,
+          };
+
+          expect(clickRateIt(invalidScopeArguments).message).toEqual('sAlert not defined');
+        });
+
+        it('should return missing jQuery error', () => {
+          const invalidScopeArguments = {
+            ApiBackendRatings: true,
+            Meteor: true,
+            TAPi18n: true,
+            sAlert: true,
+          };
+
+          expect(clickRateIt(invalidScopeArguments).message).toEqual('jQuery not defined');
+        });
+
+        it('should return missing event error', () => {
+          const validScopeArguments = {
+            ApiBackendRatings: true,
+            Meteor: true,
+            TAPi18n: true,
+            sAlert: true,
+            $: true,
+          };
+
+          const curryingFunction = clickRateIt(validScopeArguments);
+
+          expect(curryingFunction(false).message)
+            .toEqual('event not defined');
+        });
+
+        it('should return missing event error', () => {
+          const validScopeArguments = {
+            ApiBackendRatings: true,
+            Meteor: true,
+            TAPi18n: true,
+            sAlert: true,
+            $: true,
+          };
+
+          const curryingFunction = clickRateIt(validScopeArguments);
+
+          expect(curryingFunction(true, false).message)
+            .toEqual('templateInstance not provided');
+        });
+
+        it('should return missing event error', () => {
+          const validScopeArguments = {
+            ApiBackendRatings: true,
+            Meteor: true,
+            TAPi18n: true,
+            sAlert: true,
+            $: true,
+          };
+
+          const curryingFunction = clickRateIt(validScopeArguments);
+
+          expect(curryingFunction(true, { data: false }).message)
+            .toEqual('templateInstance is invalid');
+        });
       });
     });
   });

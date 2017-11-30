@@ -4,7 +4,17 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 function clickRateIt ({ Meteor, ApiBackendRatings, TAPi18n, sAlert, $ }) {
+  if (!Meteor) return new Error('Meteor not defined');
+  if (!ApiBackendRatings) return new Error('ApiBackendRatings not defined');
+  if (!TAPi18n) return new Error('TAPi18n not defined');
+  if (!sAlert) return new Error('sAlert not defined');
+  if (!$) return new Error('jQuery not defined');
+
   return function (event, templateInstance) {
+    if (!event) return new Error('event not defined');
+    if (!templateInstance) return new Error('templateInstance not provided');
+    if (!templateInstance.data) return new Error('templateInstance is invalid');
+
     // Make sure there is a Meteor user ID for voting
     if (Meteor.userId() === null) {
       // Get translated user message
