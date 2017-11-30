@@ -5,53 +5,43 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Mongo } from 'meteor/mongo';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import Apis from '/apinf_packages/apis/collection';
-import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
+import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 import Settings from '/apinf_packages/settings/collection';
-
-const uploadingSpinner = new ReactiveVar(false);
 
 Template.manageApiDocumentationModal.onCreated(function () {
   const instance = this;
 
-  instance.autorun(() => {
-    const api = Apis.findOne(instance.data.api._id);
-
-    // Get API id
-    const apiId = api._id;
-
-    // Get ApiDoc object
-    const apiDoc = ApiDocs.findOne({ apiId });
-
-    // Save API
-    Session.set('api', api);
-
-    // Save ApiDoc
-    Session.set('apiDoc', apiDoc);
-  });
-
   // Turn off spinner if it was on
-  uploadingSpinner.set(false);
+  Session.set('fileUploading', false);
 
   // Subscribe to documentation editor settings
   instance.subscribe('singleSetting', 'apiDocumentationEditor');
+
+  instance.removeDocumentationFile = (fileId) => {
+    // Convert to Mongo ObjectID
+    const objectId = new Mongo.Collection.ObjectID(fileId);
+
+    // Remove documentation object
+    DocumentationFiles.remove(objectId);
+
+    // Remove value from Session variable
+    Session.set('fileId', undefined);
+  };
 });
 
 Template.manageApiDocumentationModal.onDestroyed(() => {
   // Unset sessions
-  Session.set('api', undefined);
-  Session.set('apiDoc', undefined);
+  Session.set('fileUploading', undefined);
 });
 
 Template.manageApiDocumentationModal.events({
@@ -65,14 +55,11 @@ Template.manageApiDocumentationModal.events({
 
     // Check if user clicked "OK"
     if (confirmation === true) {
-      // Get ApiDic fileId
-      const documentationFileId = this.apiDoc.fileId;
+      // Get fileId value
+      const documentationFileId = Session.get('fileId');
 
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
-      // Remove documentation object
-      DocumentationFiles.remove(objectId);
+      // Remove file from DocumentationFile collection
+      templateInstance.removeDocumentationFile(documentationFileId);
 
       // Remove fileId
       ApiDocs.update(templateInstance.data.apiDoc._id, {
@@ -94,26 +81,29 @@ Template.manageApiDocumentationModal.events({
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
   },
+  'click #cancel-button': function (event, templateInstance) {
+    // Get fileId value
+    const fileId = Session.get('fileId');
+
+    // If file is uploaded and a user clicks on "Cancel" button
+    if (fileId) {
+      // Remove uploaded file from collection
+      templateInstance.removeDocumentationFile(fileId);
+    }
+  },
 });
 
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
-    const apiDoc = Session.get('apiDoc');
+    // Get fileId value
+    const fileId = Session.get('fileId');
 
-    if (apiDoc) {
-      // const documentationFileId = api.documentationFileId;
-      const documentationFileId = apiDoc.fileId;
+    if (fileId) {
+      // Convert to Mongo ObjectID
+      const objectId = new Mongo.Collection.ObjectID(fileId);
 
-      if (documentationFileId) {
-        // Convert to Mongo ObjectID
-        const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
-        // Get documentation file Object
-        const documentationFile = DocumentationFiles.findOne(objectId);
-
-        // Check if documentation file is available
-        return documentationFile;
-      }
+      // Get documentation file Object
+      return DocumentationFiles.findOne(objectId);
     }
     // Otherwise return false
     return false;
@@ -155,10 +145,8 @@ Template.manageApiDocumentationModal.helpers({
       { label: 'PUT', value: 'put' },
     ];
   },
-  spinnerEnabled () {
+  fileUploding () {
     // Return spinner status
-    return uploadingSpinner.get();
+    return Session.get('fileUploading');
   },
 });
-
-export default uploadingSpinner;

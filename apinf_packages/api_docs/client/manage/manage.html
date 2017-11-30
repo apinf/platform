@@ -75,10 +75,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <button type="submit" class="btn btn-success" id="save-documentation-link">
               {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
             </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel-button">
               {{_ "manageApiDocumentationModal_CreateDocumentation_CancelButton" }}
             </button>
-            {{# if spinnerEnabled }}
+            {{# if fileUploding }}
               {{> spinner }}
             {{/ if }}
             {{> afQuickField name='apiId' value=api._id type="hidden" }}
