@@ -44,3 +44,9 @@ Meteor.publish('apisDocuments', () => {
   // Return a cursor containing documents that contains either 'fileId' or 'remoteFileUrl'
   return ApiDocs.find(query, { fields: { apiId: 1 } });
 });
+
+Meteor.publish('apisDocumentById', (docId) => {
+  check(docId, String);
+  // Return a cursor containing documents that contains either 'fileId' or 'remoteFileUrl'
+  return ApiDocs.find(docId);
+});

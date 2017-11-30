@@ -1,0 +1,62 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="addApiBySwagger">
+  {{# if Template.subscriptionsReady }}
+    <div class="form-group">
+      <label for="selectOption">Select</label>
+      <select class="form-control" id="selectOption">
+        <option value="file">File</option>
+        <option value="url">Url</option>
+      </select>
+    </div>
+    {{# autoForm collection=ApisCollection id="addApiBySwaggerForm" type="insert" }}
+      {{# if optionFile }}
+        <div class="form-group">
+          <label for="apiDocumentFile">
+            {{_ "import_OpenApiSpecification_file_label" }}
+          </label>
+
+          <input
+           id="apiDocumentFile"
+           name="apiDocumentFile"
+           class="form-control"
+           type="file"
+           >
+           <span>
+             {{_ "import_OpenApiSpecification_Extensions" }} <b>{{_ "import_OpenApiSpecification_Note" }}</b>
+           </span>
+        </div>
+      {{ else }}
+        <div class="form-group">
+          <label for="url">
+            {{_ "import_OpenApiSpecification_remoteUrl_label" }}
+          </label>
+          <input type="text" class="form-control" name='url' id="url" placeholder="Remote URL" required>
+        </div>
+      {{/ if }}
+      <!--invisible auto-value field-->
+      {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden" }}
+      <input type="hidden" name="apiDocId" id="apiDocId" value={{docId}}>
+      <fieldset>
+        {{> afQuickField type="hidden" name='name' id="api-name" value=apiData.name disabled=shouldBeDisabled }}
+        {{> afQuickField type="hidden" name='description' rows=2 id="api-description" value=apiData.desc disabled=shouldBeDisabled }}
+        {{> afQuickField type="hidden" name='url' id="api-url" value=apiData.url disabled=shouldBeDisabled }}
+        {{> afQuickField name='lifecycleStatus' id="api-lifecyclestatus" }}
+      </fieldset>
+      <button type="submit" class="btn btn-primary" id="submitApiBySwagger-button" disabled>
+        {{_ 'addApi_button_text' }}
+      </button>
+      <button type="button" class="btn btn-reset" data-dismiss="modal" aria-label="Close">
+        {{_ "import_OpenApiSpecification_cancel_button" }}
+      </button>
+    {{/ autoForm }}
+    {{# if spinnerEnabled }}
+      {{> spinner }}
+    {{/ if }}
+  {{ else }}
+    {{> spinner }}
+  {{/ if }}
+</template>
