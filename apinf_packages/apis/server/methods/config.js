@@ -9,6 +9,7 @@ import { check } from 'meteor/check';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
 
 Meteor.methods({
   importApiConfigs (jsonObj) {
@@ -62,6 +63,7 @@ Meteor.methods({
 
           // set the slug to do the redirect
           status.slug = newApi.slug;
+          status.apiId = newApiId;
         } else {
           status.message = 'API name must be unique';
         }
@@ -72,5 +74,52 @@ Meteor.methods({
       status.message = 'Config is not found.';
     }
     return status;
+  },
+  importApiByDocument (url, lifecycleStatus, query) {
+    check(url, String);
+    check(lifecycleStatus, String);
+    check(query, Object);
+
+    // Parse provided file as OpenAPI file
+    const result = Meteor.call('parsedDocument', url);
+
+    // Incorrect result if "info" part doesn't exist
+    if (!result.info) {
+      // Then provided file is invalid
+      throw new Meteor.Error('Swagger schema validation failed.');
+    }
+
+    // HTTP protocol by default
+    let urlSchema = 'http';
+
+    // Make sure a user adds schemes in specification
+    if (result.schemes && result.schemes.length > 0) {
+      // Use provided schema
+      urlSchema = result.schemes[0];
+    }
+
+    // Create config file
+    const apiData = {
+      name: result.info.title,
+      description: result.info.description,
+      url: `${urlSchema}://${result.host}`,
+    };
+
+    // Save value of lifecycleStatus if it isn't empty
+    if (lifecycleStatus) {
+      apiData.lifecycleStatus = lifecycleStatus;
+    }
+
+    // Insert a new API using config
+    const addedApi = Meteor.call('importApiConfigs', apiData);
+
+    // If API is added successfully
+    if (addedApi.isSuccessful) {
+      query.apiId = addedApi.apiId;
+      // Insert OpenAPI specification in ApiDocs collection
+      ApiDocs.insert(query);
+    }
+
+    return addedApi;
   },
 });
