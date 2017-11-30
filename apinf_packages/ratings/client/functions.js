@@ -52,6 +52,6 @@ function clickRateIt ({ Meteor, ApiBackendRatings, TAPi18n, sAlert, $ }) {
   };
 }
 
-export default {
+module.exports = {
   clickRateIt,
 };

@@ -214,8 +214,8 @@ describe('Ratings Package', () => {
   describe('Client module', () => {
     describe('rating.js functions', () => {
       describe('clickRateIt function', () => {
-        it('', () => {
-
+        it('should be a function', () => {
+          expect(typeof clickRateIt).toEqual('function');
         });
       });
     });
