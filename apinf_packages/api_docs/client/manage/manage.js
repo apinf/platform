@@ -44,55 +44,6 @@ Template.manageApiDocumentationModal.onDestroyed(() => {
   Session.set('fileUploading', undefined);
 });
 
-Template.manageApiDocumentationModal.events({
-  'click .delete-documentation': function (event, templateInstance) {
-    // Get confirmation message translation
-    const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
-
-    // Show confirmation dialog to user
-    // eslint-disable-next-line no-alert
-    const confirmation = confirm(message);
-
-    // Check if user clicked "OK"
-    if (confirmation === true) {
-      // Get fileId value
-      const documentationFileId = Session.get('fileId');
-
-      // Remove file from DocumentationFile collection
-      templateInstance.removeDocumentationFile(documentationFileId);
-
-      // Remove fileId
-      ApiDocs.update(templateInstance.data.apiDoc._id, {
-        $unset: { fileId: '' },
-      });
-
-      // Get deletion success message translation
-      const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
-
-      // Alert user of successful deletion
-      sAlert.success(successfulMessage);
-    }
-  },
-  'click #save-documentation-link': function () {
-    // Hide modal
-    Modal.hide('manageApiDocumentationModal');
-  },
-  'click #open-api-editor': function () {
-    // Hide modal
-    Modal.hide('manageApiDocumentationModal');
-  },
-  'click #cancel-button': function (event, templateInstance) {
-    // Get fileId value
-    const fileId = Session.get('fileId');
-
-    // If file is uploaded and a user clicks on "Cancel" button
-    if (fileId) {
-      // Remove uploaded file from collection
-      templateInstance.removeDocumentationFile(fileId);
-    }
-  },
-});
-
 Template.manageApiDocumentationModal.helpers({
   documentationFile () {
     // Get fileId value
@@ -148,5 +99,54 @@ Template.manageApiDocumentationModal.helpers({
   fileUploding () {
     // Return spinner status
     return Session.get('fileUploading');
+  },
+});
+
+Template.manageApiDocumentationModal.events({
+  'click .delete-documentation': function (event, templateInstance) {
+    // Get confirmation message translation
+    const message = TAPi18n.__('manageApiDocumentationModal_DeletedFile_ConfirmationMessage');
+
+    // Show confirmation dialog to user
+    // eslint-disable-next-line no-alert
+    const confirmation = confirm(message);
+
+    // Check if user clicked "OK"
+    if (confirmation === true) {
+      // Get fileId value
+      const documentationFileId = Session.get('fileId');
+
+      // Remove file from DocumentationFile collection
+      templateInstance.removeDocumentationFile(documentationFileId);
+
+      // Remove fileId
+      ApiDocs.update(templateInstance.data.apiDoc._id, {
+        $unset: { fileId: '' },
+      });
+
+      // Get deletion success message translation
+      const successfulMessage = TAPi18n.__('manageApiDocumentationModal_DeletedFile_Message');
+
+      // Alert user of successful deletion
+      sAlert.success(successfulMessage);
+    }
+  },
+  'click #save-documentation-link': function () {
+    // Hide modal
+    Modal.hide('manageApiDocumentationModal');
+  },
+  'click #open-api-editor': function () {
+    // Hide modal
+    Modal.hide('manageApiDocumentationModal');
+  },
+  'click #cancel-button': function (event, templateInstance) {
+    // Get fileId value
+    const fileId = Session.get('fileId');
+
+    // If file is uploaded and a user clicks on "Cancel" button
+    if (fileId) {
+      // Remove uploaded file from collection
+      templateInstance.removeDocumentationFile(fileId);
+    }
   },
 });
