@@ -16,7 +16,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <select class="form-control" id="select-type">
             <option value="file">
               {{_ 'importOpenApiSpecification_optionText_file' }}
-             </option>
+            </option>
             <option value="url">
               {{_ 'importOpenApiSpecification_optionText_url' }}
             </option>
@@ -35,10 +35,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                 {{ documentationFile.filename }}
                 <span class="pull-right">
-                    <button type="button" id="delete-document" class="btn btn-xs btn-danger">
-                      <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                    </button>
-                  </span>
+                  <button type="button" id="delete-document" class="btn btn-xs btn-danger">
+                    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                  </button>
+                </span>
               </li>
             </ul>
           {{/ unless }}
@@ -61,10 +61,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'importOpenApiSpecification_optionText_firstOption' }}
             </option>
             {{# each status in lifecycleStatus }}
-            <option value={{ status.value }}>
-              {{ status.option }}
-            </option>
-              {{/ each }}
+              <option value={{ status.value }}>
+                {{ status.option }}
+              </option>
+            {{/ each }}
           </select>
         </div>
       </div>

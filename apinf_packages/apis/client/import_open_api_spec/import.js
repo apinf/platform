@@ -15,7 +15,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-
+// Collections imports
+import Apis from '/apinf_packages/apis/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
 Template.importOpenApiSpecification.onCreated(function () {
@@ -34,13 +35,13 @@ Template.importOpenApiSpecification.onCreated(function () {
   // The selected option is file on default
   instance.selectFileType = new ReactiveVar(true);
   instance.submitForm = new ReactiveVar(false);
-  // Finish spinner
+  // Stop spinner
   Session.set('fileUploading', false);
 
   instance.autorun(() => {
     // Get ID of uploaded file
     const fileId = Session.get('fileId');
-    // Get status of form: submited or not
+    // Get status of form: submitted or not
     const submitForm = instance.submitForm.get();
 
     // File is uploaded and a user submit form
@@ -58,7 +59,7 @@ Template.importOpenApiSpecification.onCreated(function () {
       // Add API by uploading OpenAPI specification file
       Meteor.call('importApiByDocument', documentUrl, instance.lifecycleStatus, query,
         (error, response) => {
-          // Finish spinner
+          // Stop spinner
           Session.set('fileUploading', false);
           // If everything is ok
           if (response && response.isSuccessful) {
@@ -76,7 +77,7 @@ Template.importOpenApiSpecification.onCreated(function () {
     // Convert to Mongo ObjectID
     const objectId = new Mongo.Collection.ObjectID(fileId);
 
-    // Get documentation file Object
+    // Remove the document
     DocumentationFiles.remove(objectId);
 
     // Remove fileId
@@ -128,14 +129,14 @@ Template.importOpenApiSpecification.helpers({
     return false;
   },
   lifecycleStatus () {
-    // Set allowed lyfecucle status values
-    const allowedStatuses = ['design', 'development', 'testing', 'production', 'deprecated'];
+    // Get allowed lyfecycle status values
+    const allowedStatuses = Apis.schema._schema.lifecycleStatus.allowedValues;
 
     return allowedStatuses.map(status => {
       // Put value and translated text for label
       return {
         value: status,
-        option: TAPi18n.__(`importOpenApiSpecification_optionText_options.${status}`) };
+        option: TAPi18n.__(`schemas.apis.lifecycleStatus.options.${status}`) };
     });
   },
 });
@@ -181,7 +182,7 @@ Template.importOpenApiSpecification.events({
 
       Meteor.call('importApiByDocument', url.value, templateInstance.lifecycleStatus, query,
         (error, response) => {
-          // Finish spinner
+          // Stop spinner
           Session.set('fileUploading', false);
           // If everything is ok
           if (response && response.isSuccessful) {
