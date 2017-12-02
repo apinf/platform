@@ -25,18 +25,20 @@ Template.viewApi.onCreated(function () {
   const templateInstance = this;
 
   templateInstance.api = new ReactiveVar();
+  // Subscribe to public proxy details
+  templateInstance.subscribe('proxyCount');
+  // Subscribe to public proxy details for proxy form
+  templateInstance.subscribe('publicProxyDetails');
 
   // Using to get updated subscription
   templateInstance.autorun(() => {
     // Take slug from params
     const slug = FlowRouter.getParam('slug');
-    // Subscribe to API and related organization
-    templateInstance.subscribe('apiComposite', slug);
-    // Subscribe to public proxy details
-    templateInstance.subscribe('proxyCount');
-    // Subscribe to public proxy details for proxy form
-    templateInstance.subscribe('publicProxyDetails');
-    // Get single API Backend
+    if (slug) {
+      // Subscribe to API and related organization
+      templateInstance.subscribe('apiComposite', slug);
+    }
+   // Get single API Backend
     const api = Apis.findOne({ slug });
     if (api) {
       templateInstance.api.set(api);

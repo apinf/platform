@@ -13,16 +13,11 @@ AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
       // Getting new slug from this.udateDoc
-      const slug = this.updateDoc.$set.slug;
-      if (slug) {
+      const updateDoc = this.updateDoc.$set.slug;
       // Redirect to updated API with new slug.
       // It is use while api's name will update slug have to change
       // that's mean routing change
-        FlowRouter.go('viewApi', { slug });
-      } else {
-        // Otherwise Redirect to API Catalog
-        FlowRouter.go('apiCatalog');
-      }
+      FlowRouter.go('viewApi', { slug: updateDoc });
       // Get success message translation
       const message = TAPi18n.__('apiDetailsForm_text_updateInformation');
 
