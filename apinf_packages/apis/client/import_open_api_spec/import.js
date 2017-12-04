@@ -129,7 +129,7 @@ Template.importOpenApiSpecification.helpers({
     return false;
   },
   lifecycleStatus () {
-    // Get allowed lyfecycle status values
+    // Get allowed lifecycle status values from collection schema
     const allowedStatuses = Apis.schema._schema.lifecycleStatus.allowedValues;
 
     return allowedStatuses.map(status => {
