@@ -9,7 +9,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <h1 class="page-header">
         {{_ "addApi_header" }}
       </h1>
-      <!-- Manual Add API -->
+      <!-- Add API by entering API details -->
       <section>
         <h2 class="second-title">
           {{_ 'addApi_enterApiDetails' }}
@@ -34,12 +34,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ 'addApi_separateLineTitle_or' }}
         </span>
       </div>
-      <!-- Import API -->
+      <!-- Add API by uploading OpenAPI specification -->
+      <div class="form-group">
+        <h2 class="second-title">
+          {{_ "addApi_sectionTitle_importOpenApiSpecification" }}
+        </h2>
+        {{> importOpenApiSpecification }}
+      </div>
+      <!-- separator -->
+      <div class="line-and-text">
+        <span>
+          {{_ 'addApi_separateLineTitle_or' }}
+        </span>
+      </div>
+      <!-- Add API by uploading API configuration -->
       <section>
         <h2 class="second-title">
           {{_ "addApi_sectionTitle_importApiConfiguration" }}
         </h2>
-        {{> importApiConfiguration}}
+        {{> importApiConfiguration }}
       </section>
     </div>
   {{ else }}

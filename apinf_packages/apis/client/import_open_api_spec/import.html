@@ -1,0 +1,81 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="importOpenApiSpecification">
+  <i>{{_ "importOpenApiSpecification_text_addApiByImporting" }}</i>
+
+  <form id="import-specification-form" class="form" method="post">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="selectOption">
+            {{_ 'importOpenApiSpecification_labelText_provideSpecification' }}
+          </label>
+          <select class="form-control" id="select-type">
+            <option value="file">
+              {{_ 'importOpenApiSpecification_optionText_file' }}
+            </option>
+            <option value="url">
+              {{_ 'importOpenApiSpecification_optionText_url' }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 form-group">
+        {{# if optionFile }}
+          {{# unless documentationFile }}
+            {{> importOpenApiSpecificationUploadButton }}
+          {{ else }}
+            <ul class="list-group">
+              <li class="list-group-item">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                {{ documentationFile.filename }}
+                <span class="pull-right">
+                  <button type="button" id="delete-document" class="btn btn-xs btn-danger">
+                    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                  </button>
+                </span>
+              </li>
+            </ul>
+          {{/ unless }}
+        {{ else }}
+          <label for="document-url">
+            {{_ "importOpenApiSpecification_labelText_linkTo" }}
+          </label>
+          <input type="text" id="document-url" class="form-control" data-required="true">
+        {{/ if }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="lifecycle-status" class="control-label">
+            {{_ 'importOpenApiSpecification_labelText_lifecycleStatus' }}
+          </label>
+          <select id="lifecycle-status" class="form-control">
+            <option value="">
+              {{_ 'importOpenApiSpecification_optionText_firstOption' }}
+            </option>
+            {{# each status in lifecycleStatus }}
+              <option value={{ status.value }}>
+                {{ status.option }}
+              </option>
+            {{/ each }}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      {{_ 'importOpenApiSpecification_buttonText_import' }}
+    </button>
+  </form>
+
+  {{# if fileUploding }}
+    {{> spinner }}
+  {{/ if }}
+</template>

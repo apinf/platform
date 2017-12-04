@@ -12,42 +12,18 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
-import ApiDocs from '/apinf_packages/api_docs/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
 // APInf imports
 import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
-import uploadingSpinner from '../manage/manage';
 
 Meteor.startup(() => {
   // Set documentation id to api collection on Success
   DocumentationFiles.resumable.on('fileSuccess', (file) => {
-    // Turn off spinner
-    uploadingSpinner.set(false);
-
-    // Get the id from documentation file object
-    const fileId = file.uniqueIdentifier;
-
-    // Get api id
-    const api = Session.get('api');
-
-    // Get ApiDoc object
-    const apiDoc = ApiDocs.findOne({ apiId: api._id });
-
-    // Check if ApiDoc is available
-    // if so - update it with new values
-    // if not - insert them
-    if (apiDoc) {
-      ApiDocs.update(apiDoc._id, { $set: { fileId, type: 'file' } });
-    } else {
-      ApiDocs.insert({ apiId: api._id, fileId, type: 'file' });
-    }
-
-    // Get success message translation
-    const message = TAPi18n.__('manageApiDocumentationModal_AddedFile_Message');
-
-    // Alert user of success
-    sAlert.success(message);
+    // Uploading finished
+    Session.set('fileUploading', false);
+    // Save value of file ID
+    Session.set('fileId', file.uniqueIdentifier);
   });
 
   DocumentationFiles.resumable.on('fileAdded', (file) => {
@@ -62,11 +38,11 @@ Meteor.startup(() => {
           throw new Meteor.Error('File creation failed!', error);
         }
 
-        const acceptedExtensions = ['yaml', 'yml', 'txt', 'json'];
+        const acceptedExtensions = ['yaml', 'yml', 'json'];
 
         if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
-          // Turn on spinner
-          uploadingSpinner.set(true);
+          // Uploading start
+          Session.set('fileUploading', true);
 
           // Upload documentation
           DocumentationFiles.resumable.upload();
@@ -79,6 +55,9 @@ Meteor.startup(() => {
         }
       });
     } else {
+      // Finish uploading
+      Session.set('fileUploading', false);
+
       // Get file size limit message translation
       const message = TAPi18n.__('manageApiDocumentationModal_SizeLimit_Message');
 
