@@ -362,6 +362,9 @@ CatalogV1.addCollection(Apis, {
         const userId = this.userId;
         const bodyParams = this.bodyParams;
 
+        // Include also user ID into DB
+        bodyParams.created_by = userId;
+
         // structure for validating values against schema
         const validateFields = {
           name: bodyParams.name,
@@ -639,30 +642,35 @@ CatalogV1.addCollection(Apis, {
           }
         }
 
-        const apiDoc = ApiDocs.findOne({ apiId });
+        // Save new or updated documentation links
+        if (documentationUrl || externalDocumentation) {
+          // Try to fetch existing documentation
+          const apiDoc = ApiDocs.findOne({ apiId });
 
-        // Make sure a user provides Documentation data & API is created
-        if (apiDoc && (documentationUrl || externalDocumentation)) {
-          ApiDocs.update(
-            { apiId },
-            { $set: {
+          if (apiDoc) {
+            // Update existing documentation
+            ApiDocs.update(
+              { apiId },
+              { $set: {
+                type: 'url',
+                remoteFileUrl: bodyParams.documentationUrl,
+                otherUrl: bodyParams.externalDocumentation,
+              },
+              });
+          } else {
+            // Create a new apiDoc instance
+            ApiDocs.insert({
+              apiId,
               type: 'url',
-              remoteFileUrl: bodyParams.documentationUrl,
               otherUrl: bodyParams.externalDocumentation,
-            },
+              remoteFileUrl: bodyParams.documentationUrl,
             });
+          }
         }
 
-        // API doesn't have documentation yet and Documentation data is provided
-        if (!apiDoc && (documentationUrl || externalDocumentation)) {
-          // Create a new apiDoc instance
-          ApiDocs.insert({
-            apiId,
-            type: 'url',
-            otherUrl: bodyParams.externalDocumentation,
-            remoteFileUrl: bodyParams.documentationUrl,
-          });
-        }
+        // Include user ID here so it can be filled to DB correspondingly
+        // Note! Meteor.userId is not available!
+        bodyParams.updated_by = userId;
 
         // Update API document
         Apis.update(apiId, { $set: bodyParams });

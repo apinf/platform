@@ -101,7 +101,7 @@ Apis.schema = new SimpleSchema({
     autoValue () {
       let updateBy;
       if (this.isUpdate) {
-        updateBy = Meteor.userId();
+        updateBy = this.value || Meteor.userId();
       }
       return updateBy;
     },
