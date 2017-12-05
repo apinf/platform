@@ -33,6 +33,26 @@ Template.navbar.onCreated(function () {
   });
 });
 
+Template.navbar.onRendered(() => {
+  const branding = Branding.findOne();
+  if (branding && branding.analyticCode) {
+    // Create Script tag with src and type
+    const script = $('<script>', {
+      type: 'text/javascript',
+      src: 'https://www.googletagmanager.com/gtag/js?id=${branding.analyticCode}',
+    });
+    $('body').append(script);
+
+    // For google analytic data
+    $('body').append(`<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${branding.analyticCode}');
+    </script>`);
+  }
+});
+
 Template.navbar.helpers({
   isSearchRoute () {
     // Get name of current route from Router
