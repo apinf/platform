@@ -8,6 +8,8 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import ApiBacklogItems from '../../collection';
@@ -22,5 +24,9 @@ Template.deleteBacklogItem.events({
 
     // Close the modal
     Modal.hide('deleteBacklogItem');
+
+    // Get message text & display
+    const message = TAPi18n.__('deleteBacklogItem_message_backlogRemoved');
+    sAlert.success(message);
   },
 });
