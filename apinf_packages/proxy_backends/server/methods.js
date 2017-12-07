@@ -52,12 +52,12 @@ Meteor.methods({
 
                 // Check: delete from MongoDB and proxyBackend has _id
                 if (deleteFromMongoDB && proxyBackend._id) {
+                  // Stop cron to calculate Analytics Data
+                  Meteor.call('stopCalculateAnalyticsData', proxyBackend._id);
                   // Delete proxyBackend from Apinf
                   ProxyBackends.remove(proxyBackend._id);
                   // Delete related AnalyticsData
                   AnalyticsData.remove({ proxyBackendId: proxyBackend._id });
-                  // Stop cron to calculate Analytics Data
-                  Meteor.call('stopCalculateAnalyticsData', proxyBackend._id);
                 }
               }
             );
