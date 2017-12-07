@@ -3,9 +3,16 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Meteor packages imports
-import { Mongo } from 'meteor/mongo';
+function insert (userId) {
+  // User must be logged in to vote
+  return !!userId;
+}
 
-const ApiBackendRatings = new Mongo.Collection('apiBackendRatings');
+function update (userId, rating) {
+  return (userId === rating.userId);
+}
 
-export default ApiBackendRatings;
+module.exports = {
+  insert,
+  update,
+};
