@@ -48,6 +48,10 @@ Template.apiCatalogToolbar.events({
     // Set URL parameter
     FlowRouter.setQueryParams({ filterBy: event.target.value });
   },
+  'change [name=filter-api-documentation]': function (event) {
+    // Set URL parameter
+    FlowRouter.setQueryParams({ apisWithDocumentation: event.currentTarget.checked });
+  },
   'change [name=view-mode]': function (event) {
     // Set URL parameter
     FlowRouter.setQueryParams({ viewMode: event.target.value });

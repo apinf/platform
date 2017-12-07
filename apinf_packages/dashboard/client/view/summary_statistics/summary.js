@@ -25,41 +25,13 @@ Template.dashboardSummaryStatistic.onCreated(function () {
 
   // Dictionary of Flags about display/not the overview part for current item
   instance.displayOverview = new ReactiveDict();
-  instance.proxyBackendsWithMetric = {};
 
   instance.autorun(() => {
-    // Update list
-    instance.proxyBackendsWithMetric = {};
-
     // Get API IDs
     const apiIds = Template.currentData().apiIds;
 
     // Update list of proxy backends
     const proxyBackends = ProxyBackends.find({ apiId: { $in: apiIds } }).fetch();
-
-    // Get actual elasticsearch data
-    const chartData = Template.currentData().chartData;
-
-    proxyBackends.forEach(backend => {
-      const proxyBackendPath = backend.frontendPrefix();
-
-      // Create a list of proxy backends with metric for current timeframe
-      chartData.forEach(dataset => {
-        const path = dataset.requestPath;
-
-        // Using indexOf to check when frontend prefix and request_path differ in a last slash
-        const theSamePaths = proxyBackendPath.indexOf(path);
-        // If paths are equal or differ in a last slash
-        if (theSamePaths === 0) {
-          // Save it
-          instance.proxyBackendsWithMetric[proxyBackendPath] = dataset;
-          // Add info about API name & slug and id of proxy backend
-          instance.proxyBackendsWithMetric[proxyBackendPath].apiName = backend.apiName();
-          instance.proxyBackendsWithMetric[proxyBackendPath].apiSlug = backend.apiSlug();
-          instance.proxyBackendsWithMetric[proxyBackendPath].proxyBackendId = backend._id;
-        }
-      });
-    });
 
     // Get the current language
     const language = TAPi18n.getLanguage();
@@ -107,15 +79,54 @@ Template.dashboardSummaryStatistic.helpers({
     // Sort by name
     return instance.proxyBackends;
   },
-  bucket (proxyBackendPath) {
-    const instance = Template.instance();
-
-    return instance.proxyBackendsWithMetric[proxyBackendPath];
-  },
   tableTitle () {
     const title = Template.currentData().title;
 
     return TAPi18n.__(`dashboardSummaryStatistic_groupTitle_${title}`);
+  },
+  getCount (path, param) {
+    const statusCodesResponse = Template.currentData().statusCodesResponse;
+    const statusCodes = statusCodesResponse && statusCodesResponse[path];
+
+    const totalNumberResponse = Template.currentData().totalNumberResponse;
+    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+
+    let count;
+
+    switch (param) {
+      case 'success': {
+        count = statusCodes ? statusCodes.successCallsCount : 0;
+        break;
+      }
+      case 'error': {
+        count = statusCodes ? statusCodes.errorCallsCount : 0;
+        break;
+      }
+      case 'requests': {
+        count = totalNumber ? totalNumber.requestNumber : 0;
+        break;
+      }
+      case 'time': {
+        count = totalNumber ? totalNumber.responseTime : 0;
+        break;
+      }
+      case 'users': {
+        count = totalNumber ? totalNumber.uniqueUsers : 0;
+        break;
+      }
+      default: {
+        count = 0;
+        break;
+      }
+    }
+
+    return count;
+  },
+  comparisonData (path) {
+    const totalNumberResponse = Template.currentData().totalNumberResponse;
+    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+
+    return totalNumber ? totalNumber.comparisons : {};
   },
 });
 

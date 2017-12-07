@@ -9,37 +9,61 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 
+// OAuth Services dictionary to get the correct prefix
+const servicePrefixDictionary = {
+  fiware: 'fw',
+  github: 'gh',
+};
+
 Accounts.onCreateUser((options, user) => {
   // Create empty user profile if none exists
   user.profile = user.profile || {};
 
   // Check services object exists
   if (user.services) {
-    // Case 1: Register with Github
-    if (user.services.github) {
-      // Set user email address from Github email
-      user.emails = [
-        {
-          address: user.services.github.email,
-          verified: true,
-        },
-      ];
-      // Search 'githubUsername' from database.
-      const githubUsername = user.services.github.username;
-      const existingUser = Meteor.users.findOne({ username: githubUsername });
-      if (existingUser === undefined) {
-        // Username available, set username to Github username.
-        user.username = githubUsername;
-      } else {
-        // Username clashes with existing username, add prefix
-        user.username = `gh-${githubUsername}`;
-      }
-    // Case 2: Register with local account, email verification required
-    } else if (user.services.password) {
+    // Get the service, can be 'github', 'fiware' or 'password'
+    const service = Object.keys(user.services)[0];
+
+    // password: Register with local account, email verification required
+    if (service === 'password') {
       // we wait for Meteor to create the user before sending an email
       Meteor.setTimeout(() => {
         Meteor.call('sendRegistrationEmailVerification', user._id);
       }, 2 * 1000);
+    } else {
+      // Define current service username to variable
+      const username = user.services[service].username;
+
+      // Search 'username' from database.
+      const existingUser = Meteor.users.findOne({ username });
+
+      // Define email object for current register action
+      const currentRegisteringEmail = {
+        address: user.services[service].email,
+        verified: true,
+      };
+
+      if (existingUser === undefined) {
+        // Set service username to username
+        user.username = username;
+
+        // Set service email to user email
+        user.emails = [
+          currentRegisteringEmail,
+        ];
+      } else {
+        // Get username prefix based on service being used
+        const prefix = servicePrefixDictionary[service] || 'oauth';
+
+        // Username clashes with existing username
+        user.username = `${prefix}-${username}`;
+
+        // Append service email to user emails
+        user.emails = [
+          ...existingUser.emails,
+          currentRegisteringEmail,
+        ];
+      }
     }
   }
 

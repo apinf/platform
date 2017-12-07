@@ -8,12 +8,13 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 // Collection imports
-import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import Organizations from '/apinf_packages/organizations/collection';
 
 // APInf imports
 /* eslint-disable max-len */
 import descriptionOrganizations from '/apinf_packages/rest_apis/lib/descriptions/organizations_texts';
+/* eslint-enable max-len */
+import ManagementV1 from '/apinf_packages/rest_apis/server/management';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 // Request /rest/v1/organizations for Organizations collection
@@ -62,13 +63,28 @@ ManagementV1.addRoute('organizations', {
       const query = {};
       const options = {};
 
-      // Parse query parameters
       if (queryParams.limit) {
-        options.limit = parseInt(queryParams.limit, 10);
+        // Parse query parameters
+        const limit = parseInt(queryParams.limit, 10);
+
+        // Make sure limit parameters only accept integer
+        if (!Number.isInteger(limit)) {
+          return errorMessagePayload(400,
+            'Bad query parameters value. Limit parameters only accept integer.');
+        }
+        options.limit = limit;
       }
 
       if (queryParams.skip) {
-        options.skip = parseInt(queryParams.skip, 10);
+        // Parse query parameters
+        const skip = parseInt(queryParams.skip, 10);
+
+        // Make sure skip parameters only accept integer
+        if (!Number.isInteger(skip)) {
+          return errorMessagePayload(400,
+            'Bad query parameters value. Skip parameters only accept integer.');
+        }
+        options.skip = skip;
       }
 
       // Pass an optional search string for looking up inventory.
@@ -95,7 +111,8 @@ ManagementV1.addRoute('organizations', {
         ];
       }
 
-      // Create new Organization list that is based on Organization collection with extended field logoUrl
+      // Return list of Organizations.
+      // Extend an Organization data field logoUrl, when Organization has a logo.
       const organizationList = Organizations.find(query, options).map((organization) => {
         // Make sure logo is uploaded
         if (organization.organizationLogoFileId) {
@@ -631,7 +648,7 @@ ManagementV1.addRoute('organizations/:id', {
 
       // User has to have permission for action
       if (!userCanManage) {
-        return errorMessagePayload(403, 'You do not have permission for removing this Organization');
+        return errorMessagePayload(403, 'No permission to removing this Organization');
       }
 
       // Remove Organization document
@@ -914,7 +931,8 @@ ManagementV1.addRoute('organizations/:id/managers', {
         return errorMessagePayload(500, 'Could not get Organization from DB');
       }
 
-      const managerUserAccountList = Meteor.users.find({ _id: { $in: organization.managerIds } }, options).fetch();
+      const managerUserAccountList = Meteor.users.find({
+        _id: { $in: organization.managerIds } }, options).fetch();
 
       if (!managerUserAccountList) {
         return errorMessagePayload(500, 'Could not get Organization Manager\'s data from DB');

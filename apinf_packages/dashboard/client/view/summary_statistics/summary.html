@@ -31,49 +31,48 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Table body -->
       {{# each proxyBackend in proxyBackends }}
         <div data-id="{{ proxyBackend._id }}" class="dashboard-table-row statistic-line">
-          {{# unless bucket proxyBackend.frontendPrefix }}
-            <!-- Display template with zero values -->
-            {{> dashboardSummaryStatisticNoData proxyBackend=proxyBackend }}
-          {{ else }}
-            <div class="row">
-              <div class="col-xs-3">
-                {{ proxyBackend.apiName }}
-              </div>
-              {{# with bucket proxyBackend.frontendPrefix }}
-                <div class="col-xs-3">
-                  <span class="request-number">
-                    {{ requestNumber }}
-                  </span>
-                  <div class="{{ arrowDirection 'requests' }}"></div>
-                  <span class="{{ textColor 'requests' }}">
-                    {{ percentages 'requests' }}
-                  </span>
-                </div>
-                <div class="col-xs-3">
-                  <span class="response-time">
-                    {{ responseTime }} ms
-                  </span>
-                  <div class="{{ arrowDirection 'time' }}"></div>
-                  <span class="{{ textColor 'time' }}">
-                    {{ percentages 'time' }}
-                  </span>
-                </div>
-                <div class="col-xs-3">
-                  <span class="unique-users">
-                    {{ uniqueUsers }}
-                  </span>
-                  <div class="{{ arrowDirection 'users' }}"></div>
-                  <span class="{{ textColor 'users' }}">
-                    {{ percentages 'users' }}
-                  </span>
-                </div>
+          <div class="row">
+            <div class="col-xs-3">
+              {{ proxyBackend.apiName }}
+            </div>
+            <div class="col-xs-3">
+              <span class="request-number">
+                {{ getCount proxyBackend.frontendPrefix 'requests' }}
+              </span>
+              {{# with comparisonData proxyBackend.frontendPrefix  }}
+                <div class="{{ arrowDirection 'requests' }}"></div>
+                <span class="{{ textColor 'requests' }}">
+                  {{ percentages 'requests' }}
+                </span>
               {{/ with }}
             </div>
-          {{/ unless }}
+            <div class="col-xs-3">
+              <span class="response-time">
+                {{ getCount proxyBackend.frontendPrefix 'time' }} ms
+              </span>
+              {{# with comparisonData proxyBackend.frontendPrefix  }}
+                <div class="{{ arrowDirection 'time' }}"></div>
+                <span class="{{ textColor 'time' }}">
+                  {{ percentages 'time' }}
+                </span>
+              {{/ with }}
+            </div>
+            <div class="col-xs-3">
+              <span class="unique-users">
+                {{ getCount proxyBackend.frontendPrefix 'users' }}
+              </span>
+              {{# with comparisonData proxyBackend.frontendPrefix  }}
+                <div class="{{ arrowDirection 'users' }}"></div>
+                <span class="{{ textColor 'users' }}">
+                  {{ percentages 'users' }}
+                </span>
+              {{/ with }}
+            </div>
+          </div>
         </div>
         {{# if displayOverview proxyBackend._id }}
-          <!-- First argument - provide bucket data for selected proxy backend -->
-          {{> dashboardOverviewStatistic bucket=(bucket proxyBackend.frontendPrefix) proxyBackend=proxyBackend }}
+          {{> dashboardOverviewStatistic overviewChartResponse=overviewChartResponse
+            totalNumberResponse=totalNumberResponse statusCodesResponse=statusCodesResponse proxyBackend=proxyBackend }}
         {{/ if }}
       {{/ each}}
     </div>

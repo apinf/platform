@@ -11,11 +11,13 @@ import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+
+// APInf imports
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
 import Authentication from '/apinf_packages/rest_apis/server/authentication';
-
-// APInf imports
 import descriptionApis from '/apinf_packages/rest_apis/lib/descriptions/apis_texts';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
@@ -112,15 +114,44 @@ CatalogV1.addCollection(Apis, {
         }
 
         if (queryParams.lifecycle) {
-          query.lifecycleStatus = queryParams.lifecycle;
+          // Convert lifecycle value to lower case
+          const lifecycle = queryParams.lifecycle.toLowerCase();
+
+          // Structure for validating values against schema
+          const validateFields = {
+            lifecycleStatus: lifecycle,
+          };
+
+          // Validate lifecycleStatus
+          const isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'lifecycleStatus');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'Parameter lifecycle has erroneous value.');
+          }
+
+          query.lifecycleStatus = lifecycle;
         }
 
         if (queryParams.limit) {
-          options.limit = parseInt(queryParams.limit, 10);
+          // Make sure limit parameters only accept integer
+          const limit = parseInt(queryParams.limit, 10);
+
+          if (!Number.isInteger(limit)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Limit parameters only accept integer.');
+          }
+          options.limit = limit;
         }
 
         if (queryParams.skip) {
-          options.skip = parseInt(queryParams.skip, 10);
+          // Make sure skip parameters only accept integer
+          const skip = parseInt(queryParams.skip, 10);
+          if (!Number.isInteger(skip)) {
+            return errorMessagePayload(400,
+              'Bad query parameters value. Skip parameters only accept integer.');
+          }
+          options.skip = skip;
         }
 
         // Pass an optional search string for looking up inventory.
@@ -148,6 +179,25 @@ CatalogV1.addCollection(Apis, {
             // Create a new field to store logo URL
             api.logoUrl = api.logoUrl();
           }
+
+          // Instead of API URL, return API Proxy's URL, if it exists
+          const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+
+          // If Proxy is API Umbrella
+          if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
+            // Get connected proxy url
+            const proxyUrl = proxyBackend.proxyUrl();
+            // Get proxy backend path
+            const frontendPrefix = proxyBackend.frontendPrefix();
+            // Provide full proxy path
+            api.url = proxyUrl.concat(frontendPrefix);
+          }
+
+          // Get URl of Swagger specification
+          api.documentationUrl = api.documentationUrl();
+          // Get URL to external site with API documentation
+          api.externalDocumentation = api.otherUrl();
+
           return api;
         });
 
@@ -235,6 +285,24 @@ CatalogV1.addCollection(Apis, {
           api.logoUrl = api.logoUrl();
         }
 
+        // Instead of API URL, return API Proxy's URL, if it exists
+        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+
+        // If Proxy is API Umbrella, fill in proxy URL
+        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
+          // Get connected proxy url
+          const proxyUrl = proxyBackend.proxyUrl();
+          // Get proxy backend path
+          const frontendPrefix = proxyBackend.frontendPrefix();
+          // Provide full proxy path
+          api.url = proxyUrl.concat(frontendPrefix);
+        }
+
+        // Get URl of Swagger specification
+        api.documentationUrl = api.documentationUrl();
+        // Get URL to external site with API documentation
+        api.externalDocumentation = api.otherUrl();
+
         // Construct response
         return {
           statusCode: 200,
@@ -292,17 +360,18 @@ CatalogV1.addCollection(Apis, {
       },
       action () {
         const userId = this.userId;
+        const bodyParams = this.bodyParams;
 
         // structure for validating values against schema
         const validateFields = {
-          name: this.bodyParams.name,
-          url: this.bodyParams.url,
-          description: this.bodyParams.description,
-          lifecycleStatus: this.bodyParams.lifecycleStatus,
+          name: bodyParams.name,
+          url: bodyParams.url,
+          description: bodyParams.description,
+          lifecycleStatus: bodyParams.lifecycleStatus,
         };
 
         // Name is a required field
-        if (!this.bodyParams.name) {
+        if (!bodyParams.name) {
           return errorMessagePayload(400, 'Parameter "name" is mandatory.');
         }
 
@@ -315,7 +384,7 @@ CatalogV1.addCollection(Apis, {
         }
 
         // URL is a mandatory field
-        if (!this.bodyParams.url) {
+        if (!bodyParams.url) {
           return errorMessagePayload(400, 'Parameter "url" is mandatory.');
         }
 
@@ -324,17 +393,17 @@ CatalogV1.addCollection(Apis, {
           validateFields, 'url');
 
         if (!isValid) {
-          return errorMessagePayload(400, 'Parameter "url" is erroneous.');
+          return errorMessagePayload(400, 'Parameter "url" must be a valid URL with http(s).');
         }
 
         // Check if API with same name already exists
-        if (Apis.findOne({ name: this.bodyParams.name })) {
+        if (Apis.findOne({ name: bodyParams.name })) {
           return errorMessagePayload(400, 'Duplicate: API with same name already exists.');
         }
 
 
         // Description must not exceed field length in DB
-        if (this.bodyParams.description) {
+        if (bodyParams.description) {
           isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'description');
 
@@ -344,7 +413,7 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is value of lifecycle status allowed
-        if (this.bodyParams.lifecycleStatus) {
+        if (bodyParams.lifecycleStatus) {
           isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'lifecycleStatus');
 
@@ -354,18 +423,47 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is the API set to public or private
-        if (this.bodyParams.isPublic) {
-          if (this.bodyParams.isPublic === 'true') {
-            this.bodyParams.isPublic = true;
-          } else if (this.bodyParams.isPublic === 'false') {
-            this.bodyParams.isPublic = false;
+        const isPublicParam = bodyParams.isPublic;
+
+        if (isPublicParam) {
+          if (isPublicParam === 'true') {
+            bodyParams.isPublic = true;
+          } else if (isPublicParam === 'false') {
+            bodyParams.isPublic = false;
           } else {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
 
+        const documentationUrl = bodyParams.documentationUrl;
+        const externalDocumentation = bodyParams.externalDocumentation;
+
+        // Documentation URL must have URL format
+        if (documentationUrl) {
+          isValid = ApiDocs.simpleSchema().namedContext()
+            .validateOne({ remoteFileUrl: documentationUrl }, 'remoteFileUrl');
+
+          if (!isValid) {
+            // Error message
+            const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
+            return errorMessagePayload(400, message);
+          }
+        }
+
+        // Link to an external site must have URL format
+        if (externalDocumentation) {
+          isValid = ApiDocs.simpleSchema().namedContext()
+            .validateOne({ otherUrl: externalDocumentation }, 'otherUrl');
+
+          if (!isValid) {
+            // Error message
+            const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
+            return errorMessagePayload(400, message);
+          }
+        }
+
         // Add manager IDs list into
-        const apiData = Object.assign({ managerIds: [userId] }, this.bodyParams);
+        const apiData = Object.assign({ managerIds: [userId] }, bodyParams);
 
         // Insert API data into collection
         const apiId = Apis.insert(apiData);
@@ -375,6 +473,22 @@ CatalogV1.addCollection(Apis, {
           return errorMessagePayload(500, 'Inserting API into database failed.');
         }
 
+
+        // Make sure a user provides some Documentation data & API is created
+        if (documentationUrl || externalDocumentation) {
+          ApiDocs.insert({
+            apiId,
+            type: 'url',
+            otherUrl: externalDocumentation,
+            remoteFileUrl: documentationUrl,
+          });
+        }
+
+        // Prepare data to response, extend it with Documentation URLs
+        const responseData = Object.assign(
+          Apis.findOne(apiId),
+          { documentationUrl, externalDocumentation });
+
         // Give user manager role
         Roles.addUsersToRoles(userId, 'manager');
 
@@ -382,12 +496,11 @@ CatalogV1.addCollection(Apis, {
           statusCode: 201,
           body: {
             status: 'success',
-            data: Apis.findOne(apiId),
+            data: responseData,
           },
         };
       },
     },
-
     // Modify the entity with the given :id with the data contained in the request body.
     put: {
       authRequired: true,
@@ -444,7 +557,10 @@ CatalogV1.addCollection(Apis, {
         const bodyParams = this.bodyParams;
         // Get ID of API
         const apiId = this.urlParams.id;
+        // Get current user ID
         const userId = this.userId;
+
+        // Find API with specified ID
         const api = Apis.findOne(apiId);
 
         // API doesn't exist
@@ -459,12 +575,12 @@ CatalogV1.addCollection(Apis, {
 
         // validate values
         const validateFields = {
-          description: this.bodyParams.description,
-          lifecycleStatus: this.bodyParams.lifecycleStatus,
+          description: bodyParams.description,
+          lifecycleStatus: bodyParams.lifecycleStatus,
         };
 
         // Description must not exceed field length in DB
-        if (this.bodyParams.description) {
+        if (bodyParams.description) {
           const isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'description');
 
@@ -474,7 +590,7 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is value of lifecycle status allowed
-        if (this.bodyParams.lifecycleStatus) {
+        if (bodyParams.lifecycleStatus) {
           const isValid = Apis.simpleSchema().namedContext().validateOne(
             validateFields, 'lifecycleStatus');
 
@@ -484,25 +600,89 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Is the API set to public or private
-        if (this.bodyParams.isPublic) {
-          if (this.bodyParams.isPublic === 'true') {
-            this.bodyParams.isPublic = true;
-          } else if (this.bodyParams.isPublic === 'false') {
-            this.bodyParams.isPublic = false;
+        const isPublicParam = bodyParams.isPublic;
+
+        if (isPublicParam) {
+          if (isPublicParam === 'true') {
+            bodyParams.isPublic = true;
+          } else if (isPublicParam === 'false') {
+            bodyParams.isPublic = false;
           } else {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
 
+        const documentationUrl = bodyParams.documentationUrl;
+        const externalDocumentation = bodyParams.externalDocumentation;
+
+        // Documentation URL must have URL format
+        if (documentationUrl) {
+          const isValid = ApiDocs.simpleSchema().namedContext()
+            .validateOne({ remoteFileUrl: documentationUrl }, 'remoteFileUrl');
+
+          if (!isValid) {
+            // Error message
+            const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
+            return errorMessagePayload(400, message);
+          }
+        }
+
+        // Link to an external site must have URL format
+        if (externalDocumentation) {
+          const isValid = ApiDocs.simpleSchema().namedContext()
+            .validateOne({ otherUrl: externalDocumentation }, 'otherUrl');
+
+          if (!isValid) {
+            // Error message
+            const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
+            return errorMessagePayload(400, message);
+          }
+        }
+
+        const apiDoc = ApiDocs.findOne({ apiId });
+
+        // Make sure a user provides Documentation data & API is created
+        if (apiDoc && (documentationUrl || externalDocumentation)) {
+          ApiDocs.update(
+            { apiId },
+            { $set: {
+              type: 'url',
+              remoteFileUrl: bodyParams.documentationUrl,
+              otherUrl: bodyParams.externalDocumentation,
+            },
+            });
+        }
+
+        // API doesn't have documentation yet and Documentation data is provided
+        if (!apiDoc && (documentationUrl || externalDocumentation)) {
+          // Create a new apiDoc instance
+          ApiDocs.insert({
+            apiId,
+            type: 'url',
+            otherUrl: bodyParams.externalDocumentation,
+            remoteFileUrl: bodyParams.documentationUrl,
+          });
+        }
+
         // Update API document
         Apis.update(apiId, { $set: bodyParams });
+
+        // Prepare data to response, extend it with Documentation URLs
+        const responseData = Object.assign(
+          // Get updated value of API
+          Apis.findOne(apiId),
+          // Get updated values of Documentation urls
+          {
+            externalDocumentation: api.otherUrl(),
+            documentationUrl: api.documentationUrl(),
+          });
 
         // OK response with API data
         return {
           statusCode: 200,
           body: {
             status: 'success',
-            data: Apis.findOne(apiId),
+            data: responseData,
           },
         };
       },

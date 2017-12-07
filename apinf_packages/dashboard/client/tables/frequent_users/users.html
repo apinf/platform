@@ -1,0 +1,46 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="mostFrequentUsersTable">
+  <table class="table table-bordered table-hover table-statistic">
+    <thead>
+    <tr>
+      <th>
+        {{_ 'mostFrequentUsersTable_columnTitle_user' }}
+      </th>
+      <th>
+        {{_ 'mostFrequentUsersTable_columnTitle_calls' }}
+      </th>
+      <th>
+        {{_ 'mostFrequentUsersTable_columnTitle_path' }}
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {{# each user in users }}
+      <tr>
+        <td>{{ user.email }}</td>
+        <td>{{ user.calls }}</td>
+        <td>{{ user.url }}</td>
+      </tr>
+    {{/ each }}
+    </tbody>
+  </table>
+  <div class="form-inline">
+    <div class="form-group">
+      <span>
+        <strong>
+          {{_ 'mostFrequentUsersTable_text_showOfUsers' count=users.length all=allUsersCount }}
+        </strong>
+      </span>
+    </div>
+    <div class="form-group pull-right">
+      <a id="generate-users-log" href="">
+        {{_ 'mostFrequentUsersTable_lintText_downloadFile' }}
+      </a>
+    </div>
+  </div>
+</template>

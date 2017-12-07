@@ -10,6 +10,7 @@ import { check } from 'meteor/check';
 
 // Collection imports
 import ApiBacklogItems from '/apinf_packages/backlog/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
 import ApiMetadata from '/apinf_packages/metadata/collection';
 import Apis from '/apinf_packages/apis/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
@@ -79,20 +80,19 @@ Meteor.methods({
     // Make sure apiId is a string
     check(apiId, String);
 
-    // Get API object
-    const api = Apis.findOne(apiId);
+    // Go through all related ApiDocs instances
+    ApiDocs.find({ apiId }).forEach(apiDoc => {
+      // If file exists
+      if (apiDoc.fileId) {
+        // Convert to Mongo ObjectID
+        const objectId = new Mongo.Collection.ObjectID(apiDoc.fileId);
 
-    // Make sure document exists
-    if (api) {
-      // Get documentationFileId
-      const documentationFileId = api.documentationFileId;
+        // Remove documentation object
+        DocumentationFiles.remove(objectId);
+      }
+    });
 
-      // Convert to Mongo ObjectID
-      const objectId = new Mongo.Collection.ObjectID(documentationFileId);
-
-      // Remove documentation object
-      DocumentationFiles.remove(objectId);
-    }
+    ApiDocs.remove({ apiId });
   },
   removeMonitoring (apiId) {
     // Make sure apiId is a string

@@ -9,15 +9,29 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
+import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
+import Branding from '/apinf_packages/branding/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 Template.dashboardPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
+
+  instance.autorun(() => {
+    // Get Branding collection content
+    const branding = Branding.findOne();
+    // Check if Branding collection and siteTitle are available
+    if (branding && branding.siteTitle) {
+      // Set the page title
+      const pageTitle = TAPi18n.__('dashboardPage_title_dashboard');
+      DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
+    }
+  });
 
   instance.proxiesList = new ReactiveVar();
 

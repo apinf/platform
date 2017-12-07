@@ -7,9 +7,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
+import { DocHead } from 'meteor/kadira:dochead';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
+import Branding from '/apinf_packages/branding/collection';
 import OrganizationLogo from '/apinf_packages/organizations/logo/collection/collection';
 
 Template.organizationProfileHeader.onCreated(function () {
@@ -19,19 +21,22 @@ Template.organizationProfileHeader.onCreated(function () {
     // Get organization data using reactive way
     const organization = Template.currentData().organization;
 
-    if (organization && organization.organizationCoverFileId) {
-      // Subscribe to Organization cover
-      instance.subscribe('organizationCoverById', organization.organizationCoverFileId);
-    }
-  });
-
-  instance.autorun(() => {
-    // Get organization data using reactive way
-    const organization = Template.currentData().organization;
-
-    if (organization && organization.organizationLogoFileId) {
-      // Subscribe to current Organization logo
-      instance.subscribe('currentOrganizationLogo', organization.organizationLogoFileId);
+    if (organization) {
+      if (organization.organizationCoverFileId) {
+        // Subscribe to Organization cover
+        instance.subscribe('organizationCoverById', organization.organizationCoverFileId);
+      }
+      // Get organization data using reactive way
+      if (organization && organization.organizationLogoFileId) {
+        // Subscribe to current Organization logo
+        instance.subscribe('currentOrganizationLogo', organization.organizationLogoFileId);
+      }
+      const branding = Branding.findOne();
+      // Check if Branding collection and siteTitle are available
+      if (branding && branding.siteTitle) {
+        // Set the page title
+        DocHead.setTitle(`${branding.siteTitle} - ${organization.name}`);
+      }
     }
   });
 });

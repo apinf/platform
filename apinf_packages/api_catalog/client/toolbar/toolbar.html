@@ -50,25 +50,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </div>
           </form>
         </div>
-        
+
         {{# if currentUser }}
-        <div class="nav navbar-nav">
-          <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
-            <label class="btn btn-default active" id="filterBy-all">
-              <input type="radio" name="filter-options" value="all" checked>
-              {{_ "catalog_toolbar_filterOptions_showAll" }}
-            </label>
-            <label class="btn btn-default" id="filterBy-my-apis">
-              <input type="radio" name="filter-options" value="my-apis">
-              {{_ "catalog_toolbar_filterOptions_myApis" }}
-            </label>
-            <label class="btn btn-default" id="filterBy-my-bookmarks">
-              <input type="radio" name="filter-options" value="my-bookmarks">
-              {{_ "catalog_toolbar_filterOptions_myBookmarks" }}
-            </label>
+          <div class="nav navbar-nav">
+            <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
+              <label class="btn btn-default active" id="filterBy-all">
+                <input type="radio" name="filter-options" value="all" checked>
+                {{_ "catalog_toolbar_filterOptions_showAll" }}
+              </label>
+              <label class="btn btn-default" id="filterBy-my-apis">
+                <input type="radio" name="filter-options" value="my-apis">
+                {{_ "catalog_toolbar_filterOptions_myApis" }}
+              </label>
+              <label class="btn btn-default" id="filterBy-my-bookmarks">
+                <input type="radio" name="filter-options" value="my-bookmarks">
+                {{_ "catalog_toolbar_filterOptions_myBookmarks" }}
+              </label>
+            </div>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-default" id="filterBy-with-docs">
+                <input type="checkbox" name="filter-api-documentation" value="with-docs">
+                {{_ "catalog_toolbar_filterOptions_apisWithDocumentation" }}
+              </label>
+            </div>
           </div>
-        </div>
         {{/ if }}
+
         <div class="nav navbar-nav navbar-right">
           <a href="/rss/apis" target="_blank" class="rss-feed fa fa-rss-square fa-3x btn" title="{{_ 'apisRssIcon_tooltipText_Rss'}}">
           </a>
