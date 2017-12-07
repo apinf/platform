@@ -83,6 +83,13 @@ Apis.schema = new SimpleSchema({
   created_by: {
     type: String,
     optional: true,
+    autoValue () {
+      let createdBy;
+      if (this.isInsert) {
+        createdBy = this.value || Meteor.userId();
+      }
+      return createdBy;
+    },
   },
   updated_at: {
     type: Date,
