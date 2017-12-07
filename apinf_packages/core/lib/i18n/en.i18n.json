@@ -177,6 +177,7 @@
   "apiSortingToolbar_sortMenuOptions_bookmarks": "Bookmarks",
   "apiSortingToolbar_sortMenuOptions_ratings": "Ratings",
   "apiAuthorizedUsersList_authorizedUsers": "Give single users permissions to view API even when API is globally marked Private.",
+  "apiViewAnalytics_button_viewAnalytics": "View Analytics",
   "api_backend_rating_anonymous": "Please log in to vote.",
   "apinf_apiumbrellauser_error": "Error: Could not create user on proxy",
   "apinf_noproxy_error": "Error: No proxy found",
