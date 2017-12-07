@@ -343,6 +343,8 @@
   "feedbackItem_sentBy_text": "Sent by",
   "feedbackItem_usernotloggedin_errorMessage": "Error: Please sign in to vote",
   "feedback_feedbackForm_button": "Send feedback",
+  "feedback_feedbackForm_withLogin_tooltip": "Add feedback to the API",
+  "feedback_feedbackForm_withoutLogin_tooltip": "Login or register to provide your feedback to the API",
   "feedback_feedbackForm_description": "We welcome problem reports, feature ideas and general comments.",
   "feedback_feedbackForm_title": "Send feedback or report a problem",
   "feedback_main_title": "Feedback and report messages",
