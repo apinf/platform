@@ -3,6 +3,9 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Node packages imports
+import slugs from 'limax';
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
@@ -174,5 +177,70 @@ Meteor.methods({
     const userIsManager = organization.managerIds.includes(userId);
 
     return userIsAdmin || userIsManager;
+  },
+  updateOrganizationBySlug (query) {
+    // Make sure query is a object
+    check(query, Object);
+    const organization = Organizations.findOne(query);
+
+    if (!organization) {
+      // Throw Organization error for client
+      throw new Meteor.Error(`The Organization doesn't exist with parameter ${query}`);
+    }
+    const organizationName = organization.name;
+
+    // Transliterates non-Latin scripts
+    const slug = slugs(organizationName, { tone: false });
+
+    // Look for existing duplicate slug beginning of the newest one
+    const duplicateSlug = Organizations.findOne(
+      {
+        $or: [
+          { 'friendlySlugs.slug.base': slug },
+          { slug },
+        ],
+      },
+      { sort: { 'friendlySlugs.slug.index': -1 } }
+    );
+
+    // Initialize index value 0
+    let index = 0;
+    let newSlug = slug;
+    let slugBase = slug;
+
+    // If duplicate slug exists
+    if (duplicateSlug && duplicateSlug.friendlySlugs) {
+      // Return existing slug if organization name exists
+      if (organization._id === duplicateSlug._id
+        && slug === duplicateSlug.friendlySlugs.slug.base) {
+        return organization.slug;
+      }
+      // Set new index value
+      index = duplicateSlug.friendlySlugs.slug.index + 1;
+
+      // Get base slug value
+      slugBase = duplicateSlug.friendlySlugs.slug.base;
+
+      // Create new slug
+      newSlug = `${slugBase}-${index}`;
+    } else if (duplicateSlug && duplicateSlug.slug) {
+      // Set new index value
+      index += 1;
+
+      // Create new slug
+      newSlug = `${slugBase}-${index}`;
+    }
+
+    // Update new slug
+    Organizations.update({ name: organizationName }, {
+      $set: {
+        slug: newSlug,
+        'friendlySlugs.slug.base': slugBase,
+        'friendlySlugs.slug.index': index,
+      },
+    });
+
+    // Return the API slug
+    return newSlug;
   },
 });

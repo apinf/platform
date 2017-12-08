@@ -28,7 +28,7 @@ AutoForm.hooks({
         return organization;
       },
     },
-    onSuccess (formType) {
+    onSuccess (formType, organizationId) {
       // Hide organization form modal
       Modal.hide('organizationForm');
 
@@ -41,14 +41,23 @@ AutoForm.hooks({
 
       // Check if form is in insert mode
       if (formType === 'insert') {
-        // Get reference to template instance
-        const instance = this;
-
-        // Get organization URL slug
-        const slug = instance.insertDoc.slug;
-
-        // Redirect to newly added organization
-        FlowRouter.go('organizationProfile', { slug });
+        if (organizationId) {
+          Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, result) => {
+            if (error) {
+              // Show message
+              sAlert.error(error);
+            } else if (result && result !== '') {
+              // Redirect to newly added organization
+              FlowRouter.go('organizationProfile', { slug: result });
+            } else {
+              // Otherwise Redirect to organization Catalog
+              FlowRouter.go('organizations');
+            }
+          });
+        } else {
+          // Otherwise Redirect to organization Catalog
+          FlowRouter.go('organizations');
+        }
       } else if (formType === 'update') {
         // Get reference to template instance
         const instance = this;

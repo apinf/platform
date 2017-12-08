@@ -49,6 +49,8 @@ Organizations.schema = new SimpleSchema({
   },
   name: {
     type: String,
+    optional: false,
+    unique: true,
   },
   organizationLogoFileId: {
     type: String,
@@ -152,7 +154,14 @@ Organizations.schema = new SimpleSchema({
     defaultValue: [],
     maxCount: 4,
   },
-
+  'friendlySlugs.slug.base': {
+    type: String,
+    optional: true,
+  },
+  'friendlySlugs.slug.index': {
+    type: Number,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)
