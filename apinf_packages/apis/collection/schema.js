@@ -25,6 +25,14 @@ Apis.schema = new SimpleSchema({
     autoform: {
       rows: 3,
     },
+    optional: false,
+  },
+  description2: {
+    type: String,
+    max: 1000,
+    autoform: {
+      rows: 3,
+    },
     optional: true,
   },
   url: {
