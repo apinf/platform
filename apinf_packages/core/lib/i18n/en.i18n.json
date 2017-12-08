@@ -93,6 +93,7 @@
   "apiSettingsDelete_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "API URL",
   "apiDetails_description_headingText": "Description",
+  "apiDetails_description_headingText2": "Description2",
   "apiDetails_usageInstructions_headingText": "To make calls to this API:",
   "apiDetails_usageInstructions_requestHeaders_text": "use your API key in the request headers:",
   "apiDetails_usageInstructions_disableApiKeyText": "use the URL:",

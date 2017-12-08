@@ -22,6 +22,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </p>
             <hr class="panel-hr" />
           {{/ if }}
+          {{# if api.description2 }}
+            <h3 id="description-title2">
+              {{_ "apiDetails_description_headingText2" }}
+            </h3>
+            <p>
+              {{ api.description2 }}
+            </p>
+            <hr class="panel-hr" />
+          {{/ if }}
             <h3 id="api-url-title">
               {{_ "apiDetails_baseUrl_headingText" }}
             </h3>
