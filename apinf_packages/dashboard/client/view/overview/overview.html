@@ -15,26 +15,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardOverviewStatistic_text_requestPath' path=proxyBackend.frontendPrefix }}
           </p>
           <p class="text-success">
-            {{_ 'dashboardOverviewStatistic_text_successCalls' count=(getCount 'success') }}
+            {{_ 'dashboardOverviewStatistic_text_successCalls' count=(getStatistics 'success') }}
           </p>
           <span class="text-danger">
             {{# if timeframeYesterday }}
-              {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=(getCount 'error') }}
+              {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=(getStatistics 'error') }}
             {{ else }}
-              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=(getCount 'error') timeframe=timeframe }}
+              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=(getStatistics 'error') timeframe=timeframe }}
             {{/ if }}
           </span>
         </div>
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_requestsCount' count=(getCount 'requests')}}
+          {{_ 'dashboardOverviewStatistic_text_requestsCount' count=(getStatistics 'requests')}}
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
           </span>
-          {{> requestsOverTime buckets=requestOverTime proxyBackendId=proxyBackend._id }}
+          {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=proxyBackend._id }}
           {{# with comparisonData }}
             <div class="{{ arrowDirection 'requests' }}"></div>
             <span>{{ overviewComparing 'requests' }}</span>
@@ -43,13 +43,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_responseTime' time=(getCount 'time') }}
+          {{_ 'dashboardOverviewStatistic_text_responseTime' time=(getStatistics 'time') }}
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
           </span>
-          {{> medianResponseTime buckets=requestOverTime proxyBackendId=proxyBackend._id }}
+          {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackend._id }}
           {{# with comparisonData }}
             <div class="{{ arrowDirection 'time' }}"></div>
             <span>{{ overviewComparing 'time' }}</span>
@@ -58,17 +58,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_usersCount' count=(getCount 'users') }}
+          {{_ 'dashboardOverviewStatistic_text_usersCount' count=(getStatistics 'users') }} <sup>*</sup>
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
           </span>
-          {{> uniqueUsersOverTime buckets=requestOverTime proxyBackendId=proxyBackend._id }}
+          {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=proxyBackend._id }}
           {{# with comparisonData }}
             <div class="{{ arrowDirection 'users' }}"></div>
             <span>{{ overviewComparing 'users' }}</span>
           {{/ with }}
+          <div class="overview-help-text">
+            <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
+          </div>
         </div>
 
         <a href="{{ pathFor 'apiAnalyticPage' apiSlug=proxyBackend.apiSlug }}" class="pull-right">

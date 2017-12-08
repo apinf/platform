@@ -11,29 +11,16 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// Collection imports
-import Proxies from '/apinf_packages/proxies/collection';
-import ProxyBackends from '/apinf_packages/proxy_backends/collection';
-
 // Npm packages imports
-import _ from 'lodash';
 import moment from 'moment';
 
 // APInf imports
-import overviewChartsRequest from '../elasticsearch_queries/overview_charts';
-import responseStatusCodesRequest from '../elasticsearch_queries/status_codes';
-import totalNumbersRequest from '../elasticsearch_queries/total_numbers';
+import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
 Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  // Init variables
-  instance.elasticsearchHost = new ReactiveVar();
-  instance.filteredRequestPaths = new ReactiveVar();
-  instance.overviewChartResponse = new ReactiveVar();
-  instance.totalNumberResponse = new ReactiveVar();
-  instance.statusCodesResponse = new ReactiveVar();
   instance.groupingIds = new ReactiveVar({
     myApis: [],
     managedApis: [],
@@ -45,92 +32,47 @@ Template.dashboardView.onCreated(function () {
     instance.groupingIds.set(res);
   });
 
-  // Reactive update Elasticsearch host
+  // Init variables
+  instance.overviewChartResponse = new ReactiveVar();
+  instance.summaryStatisticResponse = new ReactiveVar();
+  instance.comparisonStatisticResponse = new ReactiveVar();
+  instance.statusCodesResponse = new ReactiveVar();
+
   instance.autorun(() => {
-    // Get proxy
-    const proxy = Proxies.findOne();
+    const proxyId = FlowRouter.getQueryParam('proxy_id');
+    const timeframe = FlowRouter.getQueryParam('timeframe');
 
-    // Get relevant Elasticsearch host
-    const host = _.get(proxy, 'apiUmbrella.elasticsearch', '');
+    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
+    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
 
-    // Save it in reactive variable
-    instance.elasticsearchHost.set(host);
-  });
+    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
+    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
 
-  // Reactive update "filters" option when Proxy Backends paths list is changed
-  instance.autorun(() => {
-    // Fetch proxy backends
-    const proxyBackends = ProxyBackends.find().fetch();
+    // Get data about summary statistic for current period
+    promisifyCall('summaryStatisticNumber', { proxyId, fromDate, toDate })
+      .then((currentPeriodDataset) => {
+        instance.summaryStatisticResponse.set(currentPeriodDataset);
 
-    const filters = {
-      filters: {},
-    };
+        const previousFromDate = moment(fromDate).subtract(timeframe, 'd').valueOf();
 
-    // Create "filters" option for elasticsearch queries
-    proxyBackends.forEach(backend => {
-      const requestPath = backend.frontendPrefix();
+        // Get trend data is based on the current period data
+        Meteor.call('summaryStatisticTrend',
+          { proxyId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset,
+          (err, compareResponse) => {
+            // Save the response about Comparison data
+            instance.comparisonStatisticResponse.set(compareResponse);
+          });
+      }).catch((error) => {
+        throw new Meteor.Error(error);
+      });
 
-      filters.filters[requestPath] = { prefix: { request_path: requestPath } };
+    Meteor.call('overviewChartsData', { proxyId, fromDate, toDate }, (error, dataset) => {
+      instance.overviewChartResponse.set(dataset);
     });
 
-    // Save it in reactive variable
-    instance.filteredRequestPaths.set(filters);
-  });
-
-  instance.autorun(() => {
-    const elasticsearchHost = instance.elasticsearchHost.get();
-    // Make sure Host exists
-    if (elasticsearchHost) {
-      // Get list of filtered proxy backends paths
-      const filteredRequestPaths = instance.filteredRequestPaths.get();
-
-      // Get timeframe
-      const timeframe = FlowRouter.getQueryParam('timeframe');
-
-      // Create date range parameter
-      const dateRange = {
-        // Plus one day to include current day in selection
-        today: moment().add(1, 'days').format('YYYY-MM-DD'),
-        oneTimePeriodAgo: moment().subtract(timeframe - 1, 'days').format('YYYY-MM-DD'),
-        // eslint-disable-next-line no-mixed-operators
-        twoTimePeriodsAgo: moment().subtract(2 * timeframe - 1, 'days').format('YYYY-MM-DD'),
-      };
-
-      // Make query object
-      const overviewChartsQuery = overviewChartsRequest(filteredRequestPaths, dateRange);
-
-      // Send request to get data for overview charts
-      Meteor.call('overviewChartData', elasticsearchHost, overviewChartsQuery, (error, result) => {
-        if (error) {
-          throw Meteor.Error(error);
-        }
-        instance.overviewChartResponse.set(result);
-      });
-
-      // Make query object
-      const totalNumbersQuery = totalNumbersRequest(filteredRequestPaths, dateRange);
-
-      // Send request to get data about summary statistics numbers &
-      // Parse data for Total numbers & trend blocks
-      Meteor.call('totalNumbersData', elasticsearchHost, totalNumbersQuery, (error, result) => {
-        if (error) {
-          throw Meteor.Error(error);
-        }
-        instance.totalNumberResponse.set(result);
-      });
-
-      // Make query object
-      const statusCodesQuery = responseStatusCodesRequest(filteredRequestPaths, dateRange);
-
-      // Send request to get data about response status codes &
-      // Parse data for Response status codes block
-      Meteor.call('statusCodesData', elasticsearchHost, statusCodesQuery, (error, result) => {
-        if (error) {
-          throw Meteor.Error(error);
-        }
-        instance.statusCodesResponse.set(result);
-      });
-    }
+    Meteor.call('statusCodesData', { proxyId, fromDate, toDate }, (error, dataset) => {
+      instance.statusCodesResponse.set(dataset);
+    });
   });
 });
 
@@ -145,10 +87,15 @@ Template.dashboardView.helpers({
 
     return instance.overviewChartResponse.get();
   },
-  totalNumberResponse () {
+  summaryStatisticResponse () {
     const instance = Template.instance();
 
-    return instance.totalNumberResponse.get();
+    return instance.summaryStatisticResponse.get();
+  },
+  comparisonStatisticResponse () {
+    const instance = Template.instance();
+
+    return instance.comparisonStatisticResponse.get();
   },
   statusCodesResponse () {
     const instance = Template.instance();

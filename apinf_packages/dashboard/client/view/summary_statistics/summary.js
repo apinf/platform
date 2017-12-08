@@ -85,21 +85,19 @@ Template.dashboardSummaryStatistic.helpers({
     return TAPi18n.__(`dashboardSummaryStatistic_groupTitle_${title}`);
   },
   getCount (path, param) {
-    const statusCodesResponse = Template.currentData().statusCodesResponse;
-    const statusCodes = statusCodesResponse && statusCodesResponse[path];
-
-    const totalNumberResponse = Template.currentData().totalNumberResponse;
-    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+    const summaryStatisticResponse = Template.currentData().summaryStatisticResponse;
+    // Get summary statistics data that relates to provided Proxy Backend
+    const totalNumber = summaryStatisticResponse && summaryStatisticResponse[path];
 
     let count;
 
     switch (param) {
       case 'success': {
-        count = statusCodes ? statusCodes.successCallsCount : 0;
+        count = totalNumber ? totalNumber.successCallsCount : 0;
         break;
       }
       case 'error': {
-        count = statusCodes ? statusCodes.errorCallsCount : 0;
+        count = totalNumber ? totalNumber.errorCallsCount : 0;
         break;
       }
       case 'requests': {
@@ -107,11 +105,11 @@ Template.dashboardSummaryStatistic.helpers({
         break;
       }
       case 'time': {
-        count = totalNumber ? totalNumber.responseTime : 0;
+        count = totalNumber ? totalNumber.medianResponseTime : 0;
         break;
       }
       case 'users': {
-        count = totalNumber ? totalNumber.uniqueUsers : 0;
+        count = totalNumber ? totalNumber.avgUniqueUsers : 0;
         break;
       }
       default: {
@@ -123,10 +121,11 @@ Template.dashboardSummaryStatistic.helpers({
     return count;
   },
   comparisonData (path) {
-    const totalNumberResponse = Template.currentData().totalNumberResponse;
-    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+    const comparisonResponse = Template.currentData().comparisonStatisticResponse;
+    // Get comparison data that relates to provided Proxy Backend
+    const comparisonData = comparisonResponse && comparisonResponse[path];
 
-    return totalNumber ? totalNumber.comparisons : {};
+    return comparisonData || {};
   },
 });
 

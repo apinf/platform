@@ -19,6 +19,6 @@ Template.registerHelper('dateInTimeAgoFormat', (date) => {
 Template.registerHelper('localeFormatDate', (date) => {
   // Get current language
   const language = TAPi18n.getLanguage();
-  // return moment(date).format('YYYY-MM-DD HH:mm');
-  return moment(date).locale(language).format('LLL');
+
+  return new Date(date).toLocaleDateString(language);
 });

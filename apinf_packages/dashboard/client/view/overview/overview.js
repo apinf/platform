@@ -39,38 +39,39 @@ Template.dashboardOverviewStatistic.helpers({
   timeframe () {
     return FlowRouter.getQueryParam('timeframe');
   },
-  getCount (param) {
-    const instance = Template.instance();
-    const proxyBackend = instance.data.proxyBackend;
+  getStatistics (param) {
+    const proxyBackend = Template.instance().data.proxyBackend;
     const path = proxyBackend.frontendPrefix();
 
-    const statusCodesResponse = Template.currentData().statusCodesResponse;
-    const statusCodes = statusCodesResponse && statusCodesResponse[path];
+    const summaryStatisticResponse = Template.currentData().summaryStatisticResponse;
+    // Get summary statistics data that relates to provided Proxy Backend
+    const summaryStatistic = summaryStatisticResponse && summaryStatisticResponse[path];
 
-    const totalNumberResponse = Template.currentData().totalNumberResponse;
-    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+    const statusCodesResponse = Template.currentData().statusCodesResponse;
+    // Get response status codes data that relates to provided Proxy Backend
+    const statusCodesData = statusCodesResponse && statusCodesResponse[path];
 
     let count;
 
     switch (param) {
       case 'success': {
-        count = statusCodes ? statusCodes.successCallsCount : 0;
+        count = statusCodesData ? statusCodesData.successCallsCount : 0;
         break;
       }
       case 'error': {
-        count = statusCodes ? statusCodes.errorCallsCount : 0;
+        count = statusCodesData ? statusCodesData.errorCallsCount : 0;
         break;
       }
       case 'requests': {
-        count = totalNumber ? totalNumber.requestNumber : 0;
+        count = summaryStatistic ? summaryStatistic.requestNumber : 0;
         break;
       }
       case 'time': {
-        count = totalNumber ? totalNumber.responseTime : 0;
+        count = summaryStatistic ? summaryStatistic.medianResponseTime : 0;
         break;
       }
       case 'users': {
-        count = totalNumber ? totalNumber.uniqueUsers : 0;
+        count = summaryStatistic ? summaryStatistic.avgUniqueUsers : 0;
         break;
       }
       default: {
@@ -82,23 +83,44 @@ Template.dashboardOverviewStatistic.helpers({
     return count;
   },
   comparisonData () {
-    const instance = Template.instance();
-    const proxyBackend = instance.data.proxyBackend;
+    const proxyBackend = Template.instance().data.proxyBackend;
     const path = proxyBackend.frontendPrefix();
 
-    const totalNumberResponse = Template.currentData().totalNumberResponse;
-    const totalNumber = totalNumberResponse && totalNumberResponse[path];
+    const comparisonResponse = Template.currentData().comparisonStatisticResponse;
+    // Get comparison data that relates to provided Proxy Backend
+    const comparisonData = comparisonResponse && comparisonResponse[path];
 
-    return totalNumber ? totalNumber.comparisons : {};
+    return comparisonData || {};
   },
-  requestOverTime () {
-    const instance = Template.instance();
-    const proxyBackend = instance.data.proxyBackend;
+  getChartData (param) {
+    const proxyBackend = Template.instance().data.proxyBackend;
     const path = proxyBackend.frontendPrefix();
 
     const overviewChartResponse = Template.currentData().overviewChartResponse;
+    // Get Overview chart data that relates to provided Proxy Backend
     const overviewChartData = overviewChartResponse && overviewChartResponse[path];
 
-    return overviewChartData ? overviewChartData.requests_over_time.buckets : [];
+    let dataset;
+
+    switch (param) {
+      case 'requests': {
+        dataset = overviewChartData ? overviewChartData.requestNumber : [];
+        break;
+      }
+      case 'time': {
+        dataset = overviewChartData ? overviewChartData.medianTime : [];
+        break;
+      }
+      case 'users': {
+        dataset = overviewChartData ? overviewChartData.uniqueUsers : [];
+        break;
+      }
+      default: {
+        dataset = [];
+        break;
+      }
+    }
+
+    return dataset;
   },
 });

@@ -14,8 +14,8 @@ export default function mostUsersRequest (requestPath, dateRange) {
               {
                 range: {
                   request_at: {
-                    lt: dateRange.today,
-                    gte: dateRange.oneTimePeriodAgo,
+                    lt: dateRange.toDate,
+                    gte: dateRange.fromDate,
                   },
                 },
               },

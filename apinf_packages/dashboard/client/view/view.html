@@ -7,22 +7,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{# if Template.subscriptionsReady }}
     <!-- My APIs group -->
     {{> dashboardSummaryStatistic apiIds=grouping.myApis title="myApis"
-      totalNumberResponse=totalNumberResponse
       overviewChartResponse=overviewChartResponse
+      summaryStatisticResponse=summaryStatisticResponse
+      comparisonStatisticResponse=comparisonStatisticResponse
       statusCodesResponse=statusCodesResponse
     }}
 
     <!-- Managed APIs group -->
     {{> dashboardSummaryStatistic apiIds=grouping.managedApis title="managedApis"
       overviewChartResponse=overviewChartResponse
-      totalNumberResponse=totalNumberResponse
+      summaryStatisticResponse=summaryStatisticResponse
+      comparisonStatisticResponse=comparisonStatisticResponse
       statusCodesResponse=statusCodesResponse
     }}
 
     <!-- Other APIs group -->
     {{> dashboardSummaryStatistic apiIds=grouping.otherApis title="otherApis"
       overviewChartResponse=overviewChartResponse
-      totalNumberResponse=totalNumberResponse
+      summaryStatisticResponse=summaryStatisticResponse
+      comparisonStatisticResponse=comparisonStatisticResponse
       statusCodesResponse=statusCodesResponse
     }}
   {{ else }}
