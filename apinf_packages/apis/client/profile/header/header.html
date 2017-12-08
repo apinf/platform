@@ -37,6 +37,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           {{> apiBackendRating api }}
         </div>
+        <div>
+          {{# if proxyBackend }}
+            <!-- View Analytics -->
+            <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}" class="btn btn-primary">
+              {{_ "apiViewAnalytics_button_viewAnalytics" }}
+            </a>
+          {{/ if}}
+        </div>
       </div>
 
       <div class="page-head-bookmarks pull-right">
