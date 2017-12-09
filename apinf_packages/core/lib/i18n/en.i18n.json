@@ -1146,6 +1146,7 @@
   "settings_fiware": "FIWARE",
   "settings_save": "Save",
   "settings_sdkCode_generator": "SDK Code Generator",
+  "settings_dashboardAutomaticUpdatePeriod": "Dashboard Automatic Update Period",
   "settings_successMessage": "Settings saved",
   "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
   "settingsMenu_profile": "Profile",

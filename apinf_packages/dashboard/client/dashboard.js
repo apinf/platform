@@ -14,12 +14,26 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Template.dashboardPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
   instance.proxiesList = new ReactiveVar();
+
+  //const settings = Settings.findOne();
+  //const period = settings.pageReloadTime;
+
+  const currDate = new Date();
+  const endtime = Date.parse(new Date(currDate.getTime() + (1 * 60000)));
+  timeinterval = setInterval(function () {
+    const currenttime = Date.parse(new Date());
+    Session.set("time", currenttime);
+    const contdown = getTimeRemaining(endtime);
+    Session.set("contdown", contdown);
+    console.log(contdown);
+  }, 1000);
 
   // Get proxy ID value from query params
   const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -85,7 +99,7 @@ Template.dashboardPage.onRendered(function () {
     }
   }, 1000);*/
 
-  const currDate = new Date();
+  /*const currDate = new Date();
   const endtime = Date.parse(new Date(currDate.getTime() + (1 * 60000)));
   timeinterval = setInterval(function () {
     const currenttime = Date.parse(new Date());
@@ -93,7 +107,7 @@ Template.dashboardPage.onRendered(function () {
     const contdown = getTimeRemaining(endtime);
     Session.set("contdown", contdown);
     console.log(contdown);
-  }, 1000);
+  }, 1000);*/
 });
 
 Template.dashboardPage.helpers({
@@ -122,6 +136,10 @@ Template.dashboardPage.helpers({
   },
 });
 
+Template.dashboardPage.onDestroyed(function () {
+    clearInterval(timeinterval);
+});
+
 function getTimeRemaining(endtime){
   // get endtime
   const interval = endtime - Session.get('time');
@@ -129,9 +147,11 @@ function getTimeRemaining(endtime){
   const minutes = ("0" + Math.floor( (interval/1000/60) % 60 )).slice(-2);
 
   if(interval <= 1) {
-    clearInterval(timeinterval);
+    clearInterval(this.timeinterval);
     // Redirect to Dashboard
     location.reload();
+    // Redirect to Dashboard
+    //FlowRouter.go('dashboard');
   }
 
   return {

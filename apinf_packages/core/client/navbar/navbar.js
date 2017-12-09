@@ -162,6 +162,10 @@ Template.navbar.events({
     $('#search-text').focus();
   },
   'click #dashboard-button': function () {
+    if (typeof timeinterval !== 'undefined') {
+      // clear timeinterval value
+      clearInterval(timeinterval);
+    }
     // Redirect to Dashboard
     FlowRouter.go('dashboardPage');
   },

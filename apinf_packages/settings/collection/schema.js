@@ -161,6 +161,11 @@ Settings.schema = new SimpleSchema({
       return validation;
     },
   },
+  pageReloadTime: {
+    type: Number,
+    optional: true,
+    defaultValue: 10,
+  }
 });
 
 // Enable translations (i18n)
