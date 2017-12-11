@@ -19,6 +19,17 @@ const UserProfileSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  updated_at: {
+    type: Date,
+    optional: true,
+    autoValue () {
+      let value;
+      if (this.isUpdate) {
+        value = new Date();
+      }
+      return value;
+    },
+  },
 });
 // Username must be 3-15 alphanumeric string combinations with hyphens and underscore allowed
 // Username cannot begin with a hypen , underscore
