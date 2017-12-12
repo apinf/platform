@@ -16,6 +16,7 @@ import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Organizations from '/apinf_packages/organizations/collection';
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
 import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
@@ -227,5 +228,13 @@ Meteor.methods({
 
         return statusCodesPerPath;
       });
+  },
+  getPeriod () {
+    // Get setting data
+    const settings = Settings.findOne();
+
+    return {
+      period: settings.pageReloadTime,
+    };
   },
 });

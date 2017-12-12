@@ -14,26 +14,51 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
-import Settings from '/apinf_packages/settings/collection';
 
 Template.dashboardPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
   instance.proxiesList = new ReactiveVar();
+  instance.countdown = new ReactiveVar();
 
-  //const settings = Settings.findOne();
-  //const period = settings.pageReloadTime;
+  // Create Chart reload countdown
+  Meteor.call('getPeriod', (error, result) => {
+    timeInterval = '';
+    if (error) {
+      // Alert failure message to user
+      sAlert.error(error);
+    } else {
+      // Set default value 10 minutes
+      let period = 10;
+      if (result && result.period) {
+        period = result.period;
+      }
+      const startDate = new Date();
+      const endtime = Date.parse(new Date(startDate.getTime() + (period * 60000)));
+      timeInterval = setInterval(function () {
+        // Construct countdown
+        const currentTime = Date.parse(new Date());
+        const remainingTime = endtime - currentTime;
+        const seconds = ("0" + Math.floor( (remainingTime/1000) % 60 )).slice(-2);
+        const minutes = ("0" + Math.floor( (remainingTime/1000/60) % 60 )).slice(-2);
 
-  const currDate = new Date();
-  const endtime = Date.parse(new Date(currDate.getTime() + (1 * 60000)));
-  timeinterval = setInterval(function () {
-    const currenttime = Date.parse(new Date());
-    Session.set("time", currenttime);
-    const contdown = getTimeRemaining(endtime);
-    Session.set("contdown", contdown);
-    console.log(contdown);
-  }, 1000);
+        // Clear timeinterval
+        if (remainingTime <= 1) {
+          clearInterval(this.timeInterval);
+          // Page reload
+          location.reload();
+        }
+        const countdown = {
+          minutes,
+          seconds,
+        };
+
+        // Save countdown to template instance
+        instance.countdown.set(countdown);
+      }, 1000);
+    }
+  });
 
   // Get proxy ID value from query params
   const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -66,50 +91,6 @@ Template.dashboardPage.onCreated(function () {
   });
 });
 
-Template.dashboardPage.onRendered(function () {
-
-  /*const currentDate = new Date();
-
-  // 10 min interval
-  const timeinterval = 1 * 60 * 1000
-  const countDownDate = new Date(currentDate.getTime() + timeinterval);
-
-  // Update the count down every 1 second
-  let intervalObj = setInterval(function() {
-    // Get todays date and time
-    const now = new Date().getTime();
-
-    // Find the distance between now an the count down date
-    const distance = countDownDate - now;
-
-    // Time calculations for minutes and seconds
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Output the result in an element with id="countdown"
-    document.getElementById("countdown").innerHTML ="Page reload in " + minutes + "m " + seconds + "s ";
-
-    // If the count down is over, write some text
-    if (distance < 1) {
-      clearInterval(intervalObj);
-      //document.getElementById("countdown").innerHTML ="Page reload in 0m 0s";
-
-      // Redirect to Dashboard
-      location.reload();
-    }
-  }, 1000);*/
-
-  /*const currDate = new Date();
-  const endtime = Date.parse(new Date(currDate.getTime() + (1 * 60000)));
-  timeinterval = setInterval(function () {
-    const currenttime = Date.parse(new Date());
-    Session.set("time", currenttime);
-    const contdown = getTimeRemaining(endtime);
-    Session.set("contdown", contdown);
-    console.log(contdown);
-  }, 1000);*/
-});
-
 Template.dashboardPage.helpers({
   proxyBackendsCount () {
     // Fetch proxy backends
@@ -132,31 +113,13 @@ Template.dashboardPage.helpers({
     return ProxyBackends.findOne()._id;
   },
   countdown: function () {
-      return Session.get("contdown");
+    const instance = Template.instance();
+
+    // Return list of countdown
+    return instance.countdown.get();
   },
 });
 
 Template.dashboardPage.onDestroyed(function () {
-    clearInterval(timeinterval);
+  clearInterval(timeInterval);
 });
-
-function getTimeRemaining(endtime){
-  // get endtime
-  const interval = endtime - Session.get('time');
-  const seconds = ("0" + Math.floor( (interval/1000) % 60 )).slice(-2);
-  const minutes = ("0" + Math.floor( (interval/1000/60) % 60 )).slice(-2);
-
-  if(interval <= 1) {
-    clearInterval(this.timeinterval);
-    // Redirect to Dashboard
-    location.reload();
-    // Redirect to Dashboard
-    //FlowRouter.go('dashboard');
-  }
-
-  return {
-    'total': interval,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-}
