@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Collection imports
+import AnalyticsData from '/apinf_packages/analytics/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
@@ -39,6 +40,10 @@ Meteor.methods({
         .then(() => {
           // Remove Proxy backend configuration from database
           ProxyBackends.remove(proxyBackend._id);
+          // Remove related AnalyticsData
+          AnalyticsData.remove({ proxyId });
+          // Stop cron to calculate Analytics Data
+          Meteor.call('stopCalculateAnalyticsData', proxyBackend._id);
         })
         .catch(err => {
           throw new Meteor.Error(err);

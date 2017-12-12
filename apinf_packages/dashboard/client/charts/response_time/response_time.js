@@ -16,25 +16,25 @@ import Chart from 'chart.js';
 
 Template.responseTimeTimeline.onCreated(function () {
   const instance = this;
+  const placeholderData = { dates: [] };
 
-  instance.aggregationData = new ReactiveVar();
+  instance.selectedPathData = new ReactiveVar();
 
-  // Chart depends on selected request path
-  // Get related elasticsearch data when a user changed path
+  // Chart area depends on selected request path
+  // Get related analytics data when a user changed path
   instance.changePath = (path) => {
-    // Find the related data for selected Path
-    const relatedData = Template.currentData().timelineData.filter(value => {
-      return value.key === path;
-    });
+    // Find the analytics data for selected Path
+    const selectedPathData = Template.currentData().chartData[path] || placeholderData;
 
     // Update value
-    instance.aggregationData.set(relatedData[0]);
+    instance.selectedPathData.set(selectedPathData);
   };
 
   instance.autorun(() => {
-    const timelineData = Template.currentData().timelineData;
+    const listPaths = Template.currentData().listPaths;
+
     // On default get data for the first requested path
-    instance.changePath(timelineData[0].key);
+    instance.changePath(listPaths[0]);
   });
 });
 
@@ -82,32 +82,14 @@ Template.responseTimeTimeline.onRendered(function () {
     },
   });
 
-  // Update chart when aggregationData was changed
+  // Update chart when selectedPathData was changed
   instance.autorun(() => {
-    // Get aggregated data
-    const aggregationData = instance.aggregationData.get();
+    // Get analytics data
+    const selectedPathData = instance.selectedPathData.get();
 
-    // Get chart data for the selected request path
-    const chartData = aggregationData.requests_over_time.buckets;
-
-    // Points for line of the 95th percentiles of response time
-    const percentiles95 = chartData.map((value) => {
-      const responseTime = value.percentiles_response_time.values['95.0'];
-
-      return parseInt(responseTime, 10);
-    });
-
-    // Points for line of the 50th percentiles of response time
-    const percentiles50 = chartData.map((value) => {
-      const responseTime = value.percentiles_response_time.values['50.0'];
-
-      return parseInt(responseTime, 10);
-    });
-
-    // Create Labels values
-    const labels = chartData.map(value => {
-      // TODO: internationalize date formatting
-      return moment(value.key).format('MM/DD');
+    // Create labels value
+    const labels = selectedPathData.dates.map(date => {
+      return moment(date).format('MM/DD');
     });
 
     // Update labels & data
@@ -119,14 +101,14 @@ Template.responseTimeTimeline.onRendered(function () {
           backgroundColor: '#00A421',
           borderColor: 'green',
           borderWidth: 1,
-          data: percentiles50,
+          data: selectedPathData.median,
         },
         {
           label: TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles'),
           backgroundColor: '#C6C5C5',
           borderColor: '#959595',
           borderWidth: 1,
-          data: percentiles95,
+          data: selectedPathData.percentiles95,
         },
       ],
     };
@@ -149,17 +131,6 @@ Template.responseTimeTimeline.onRendered(function () {
     // Update chart with new translation
     instance.chart.update();
   });
-});
-
-Template.responseTimeTimeline.helpers({
-  listPaths () {
-    const timelineData = Template.currentData().timelineData;
-
-    // Return all requested paths
-    return timelineData.map(dataset => {
-      return dataset.key;
-    });
-  },
 });
 
 Template.responseTimeTimeline.events({
