@@ -51,7 +51,7 @@ Template.dashboardPage.onCreated(function () {
       }
       const startDate = new Date();
       const endtime = Date.parse(new Date(startDate.getTime() + (period * 60000)));
-      instance.timeInterval.set(setInterval( () => {
+      instance.timeInterval.set(setInterval(() => {
         // Construct countdown
         const currentTime = Date.parse(new Date());
         const remainingTime = endtime - currentTime;
