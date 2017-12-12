@@ -525,6 +525,53 @@
 				"description": "Get list of Users according to creation date"
 			},
 			"response": []
+		},
+		{
+			"name": "{{url}}/logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout"
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
