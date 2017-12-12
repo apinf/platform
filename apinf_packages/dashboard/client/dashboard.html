@@ -13,7 +13,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="pull-right ">
         <h4 class="countdown " id="countdown">
-          Page reload in {{countdown.minutes}}min {{countdown.seconds}}sec
+          {{# if countdown }}
+            Page reload in {{countdown.minutes}}min {{countdown.seconds}}sec
+          {{/ if }}
         </h4>
       </div>
     </div>

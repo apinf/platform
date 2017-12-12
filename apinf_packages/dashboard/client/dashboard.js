@@ -36,10 +36,10 @@ Template.dashboardPage.onCreated(function () {
 
   instance.proxiesList = new ReactiveVar();
   instance.countdown = new ReactiveVar();
+  instance.timeInterval = new ReactiveVar(null);
 
   // Create Chart reload countdown
   Meteor.call('getPeriod', (error, result) => {
-    timeInterval = '';
     if (error) {
       // Alert failure message to user
       sAlert.error(error);
@@ -51,16 +51,17 @@ Template.dashboardPage.onCreated(function () {
       }
       const startDate = new Date();
       const endtime = Date.parse(new Date(startDate.getTime() + (period * 60000)));
-      timeInterval = setInterval(function () {
+      instance.timeInterval.set(setInterval(function () {
         // Construct countdown
         const currentTime = Date.parse(new Date());
         const remainingTime = endtime - currentTime;
-        const seconds = ("0" + Math.floor( (remainingTime/1000) % 60 )).slice(-2);
-        const minutes = ("0" + Math.floor( (remainingTime/1000/60) % 60 )).slice(-2);
+        const seconds = Math.floor((remainingTime / 1000) % 60);
+        const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
 
         // Clear timeinterval
         if (remainingTime <= 1) {
-          clearInterval(this.timeInterval);
+          //clearInterval(this.timeInterval);
+          clearInterval(instance.timeInterval.get());
           // Page reload
           location.reload();
         }
@@ -71,7 +72,7 @@ Template.dashboardPage.onCreated(function () {
 
         // Save countdown to template instance
         instance.countdown.set(countdown);
-      }, 1000);
+      }, 1000));
     }
   });
 
@@ -106,6 +107,13 @@ Template.dashboardPage.onCreated(function () {
   });
 });
 
+Template.dashboardPage.onDestroyed(function () {
+  const instance = this;
+  if (instance.timeInterval.get()) {
+    clearInterval(instance.timeInterval.get());
+  }
+});
+
 Template.dashboardPage.helpers({
   proxyBackendsCount () {
     // Fetch proxy backends
@@ -127,16 +135,10 @@ Template.dashboardPage.helpers({
   proxyBackendId () {
     return ProxyBackends.findOne()._id;
   },
-  countdown: function () {
+  countdown () {
     const instance = Template.instance();
 
     // Return list of countdown
     return instance.countdown.get();
   },
-});
-
-Template.dashboardPage.onDestroyed(function () {
-  if (typeof timeInterval !== 'undefined') {
-    clearInterval(timeInterval);
-  }
 });
