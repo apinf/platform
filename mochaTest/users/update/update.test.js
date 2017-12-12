@@ -8,7 +8,7 @@ import { Accounts } from 'meteor/accounts-base';
 if (Meteor.isServer) {
   describe('Update', function () {
     beforeEach(function () {
-      Meteor.users.remove({})
+      Meteor.users.remove({});
       const userData = {
         email: 'random@gmail.com',
         username: 'random-name',
@@ -18,9 +18,9 @@ if (Meteor.isServer) {
     });
     it('Success: User Updated', function () {
       chai.assert.equal(
-        Meteor.users.update({ username:'random-name' }, {
-          $set:{
-            profile:{
+        Meteor.users.update({ username: 'random-name' }, {
+          $set: {
+            profile: {
               name: 'Random',
             },
           },

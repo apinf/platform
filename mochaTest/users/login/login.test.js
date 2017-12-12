@@ -18,7 +18,7 @@ if (Meteor.isClient) {
       userId = Accounts.createUser(userData);
     });
     it('Success: User Login', function () {
-      Meteor.loginWithPassword(userData.email, userData.password, (err) => {
+      Meteor.loginWithPassword(userData.email, userData.password, () => {
         chai.assert.equal(Meteor.userId(), userId);
       });
     });
