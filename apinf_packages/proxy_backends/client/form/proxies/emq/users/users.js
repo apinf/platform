@@ -41,7 +41,7 @@ Template.emqUsers.onCreated(function () {
 
       // Call method to get all users
       Meteor.call('getEmqUsers', emqHttpApi, (err, users) => {
-        if (err) sAlert(err.message);
+        if (err) sAlert.error(err.message);
 
         // Uodate reactive variable instance
         instance.emqUsers.set(users);

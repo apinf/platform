@@ -6,12 +6,29 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
+import { DocHead } from 'meteor/kadira:dochead';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // Collection imports
+import Branding from '/apinf_packages/branding/collection';
 import Settings from '/apinf_packages/settings/collection';
 
 Template.settings.onCreated(function () {
+  const instance = this;
+
+  instance.autorun(() => {
+    // Get Branding collection content
+    const branding = Branding.findOne();
+    // Check if Branding collection and siteTitle are available
+    if (branding && branding.siteTitle) {
+      // Set the page title
+      const pageTitle = TAPi18n.__('settingsPage_title_settings');
+      DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
+    }
+  });
   // Subscription to feedback collection
-  this.subscribe('settings');
+  instance.subscribe('settings');
 });
 
 Template.settings.onRendered(() => {

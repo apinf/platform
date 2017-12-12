@@ -5,17 +5,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { TAPi18n } from 'meteor/tap:i18n';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
+import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
+import Branding from '/apinf_packages/branding/collection';
 
 import 'locale-compare-polyfill';
 
@@ -26,6 +28,16 @@ Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  instance.autorun(() => {
+    // Get Branding collection content
+    const branding = Branding.findOne();
+    // Check if Branding collection and siteTitle are available
+    if (branding && branding.siteTitle) {
+      // Set the page title
+      const pageTitle = TAPi18n.__('apiCatalogPage_title_apiCatalog');
+      DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
+    }
+  });
   // Get user id
   const userId = Meteor.userId();
 

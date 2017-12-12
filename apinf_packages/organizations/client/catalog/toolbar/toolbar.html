@@ -25,12 +25,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse sort-filter-toolbar">
         <div class="nav navbar-nav">
-          <p class="navbar-text sort-filter-toolbar-title">
-            {{_ "organizationCatalog_toolbar_sortBy_title" }}
-          </p>
-          <div class="form-group sort-options-form">
-            <form class="form navbar-form navbar-nav">
-              <select name="sortBy" class="form-control filter-sort-control" id="organization-sort-select">
+         <form class="navbar-form">
+            <div class="form-group">
+              <label for="organization-sort-select">
+                {{_ "organizationCatalog_toolbar_sortBy_title" }}
+              </label>
+              <select name="sortBy" class="form-control" id="organization-sort-select">
                 <option value="name">
                   {{_ "organizationCatalog_toolbar_sortMenuOptions_name" }}
                 </option>
@@ -38,8 +38,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{_ "organizationCatalog_toolbar_sortMenuOptions_dateCreated" }}
                 </option>
               </select>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
         <div class="nav navbar-nav">
           <div class="btn-group navbar-btn" role="group" aria-label="Sort Direction" data-toggle="buttons">

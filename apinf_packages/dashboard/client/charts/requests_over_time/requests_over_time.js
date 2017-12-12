@@ -7,15 +7,11 @@
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages import
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Npm packages imports
 import moment from 'moment';
 import Chart from 'chart.js';
-
-// APInf imports
-import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/chart_helpers';
 
 Template.requestsOverTime.onRendered(function () {
   const instance = this;
@@ -69,32 +65,16 @@ Template.requestsOverTime.onRendered(function () {
   // Update reactively when chart data is updated
   instance.autorun(() => {
     // Get aggregated chart data
-    const chartData = Template.currentData().buckets;
+    const chartData = Template.currentData().chartData;
 
-    // Get current timeframe
-    const dateCount = FlowRouter.getQueryParam('timeframe');
+    // Get dates
+    const labels = chartData.map(dataset => {
+      return moment(dataset.date).format('MM/DD');
+    });
 
-    const params = {
-      // Date range must have equal length with dateCount value
-      // Today value is included then subtract less days
-      startDate: moment().subtract(dateCount - 1, 'd'),
-      endDate: moment(),
-      // Interval is 1 day
-      step: 1,
-      // TODO: internationalize date formatting
-      // https://github.com/apinf/platform/issues/2900
-      format: 'MM/DD',
-    };
-
-    const labels = generateDate(params);
-    const data = arrayWithZeros(dateCount);
-
-    // Get data for bar chart
-    chartData.forEach(value => {
-      // Create Labels values
-      const currentDateValue = moment(value.key).format(params.format);
-      const index = labels.indexOf(currentDateValue);
-      data[index] = value.doc_count;
+    // Get data for chart
+    const data = chartData.map(dataset => {
+      return dataset.value;
     });
 
     // Update labels & data

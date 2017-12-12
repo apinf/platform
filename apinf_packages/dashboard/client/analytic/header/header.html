@@ -26,8 +26,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
       {{/ with }}
       <strong>
-        {{_ 'apiAnalyticPageHeader_labelText_proxyName' name=proxyName }}
+        {{_ 'apiAnalyticPageHeader_labelText_proxyName' name=proxyName }} &nbsp;
       </strong>
+      <i>
+        {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
+      </i>
     </div>
   </div>
 </template>

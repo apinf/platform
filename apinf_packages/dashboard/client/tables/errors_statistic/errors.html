@@ -25,10 +25,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <tbody>
     {{# each error in errors }}
       <tr>
-        <td>{{ error.date }}</td>
+        <td>{{ localeFormatDate error.date }}</td>
         <td>{{ error.status }}</td>
         <td>{{ error.calls }}</td>
-        <td>{{ error.path }}</td>
+        <td>{{ error.requestPath }}</td>
       </tr>
     {{/ each }}
     </tbody>

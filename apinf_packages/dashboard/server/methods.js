@@ -18,12 +18,6 @@ import Organizations from '/apinf_packages/organizations/collection';
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import Settings from '/apinf_packages/settings/collection';
 
-// APInf imports
-import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
-import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
-
-import _ from 'lodash';
-
 Meteor.methods({
   getProxiesList (type) {
     // Make sure the parameter is String type
@@ -138,96 +132,6 @@ Meteor.methods({
 
     // Return all lists of IDs
     return groupingIds;
-  },
-  overviewChartData (host, queryParams) {
-    // Make sure params are String type
-    check(host, String);
-    check(queryParams, Object);
-
-    // Fetch data from elasticsearch
-    return promisifyCall('getElasticsearchData', host, queryParams)
-      // Prepare dataset for charts and table with trend
-      .then((result) => {
-        // Get bucket of aggregated data
-        return result.aggregations.group_by_request_path.buckets;
-      }).catch((error) => {
-        throw new Meteor.Error(error);
-      });
-  },
-  totalNumbersData (host, queryParams) {
-    // Make sure params are String type
-    check(host, String);
-    check(queryParams, Object);
-
-    // Fetch data from elasticsearch
-    return promisifyCall('getElasticsearchData', host, queryParams)
-      .then(result => {
-        const requestPathsDataset = result.aggregations.group_by_request_path.buckets;
-
-        // Prepared object to total statistics
-        const totalNumberPerPath = {};
-
-        // Go through all requested path and fill object
-        _.mapKeys(requestPathsDataset, (bucket, path) => {
-          const currentPeriodData = bucket.group_by_interval.buckets.currentPeriod;
-
-          // Get the statistic for current period
-          const requestNumber = currentPeriodData.doc_count;
-          const responseTime =
-            parseInt(currentPeriodData.median_response_time.values['50.0'], 10) || 0;
-          const uniqueUsers = currentPeriodData.unique_users.buckets.length;
-
-
-          // Get the statistic for previous period
-          const previousPeriodData = bucket.group_by_interval.buckets.previousPeriod;
-          const previousResponseTime = previousPeriodData.median_response_time.values['50.0'];
-          const previousUniqueUsers = previousPeriodData.unique_users.buckets.length;
-
-          // Get the statistics comparing between previous and current periods
-          const compareRequests = calculateTrend(previousPeriodData.doc_count, requestNumber);
-          const compareResponse = calculateTrend(parseInt(previousResponseTime, 10), responseTime);
-          const compareUsers = calculateTrend(previousUniqueUsers, uniqueUsers);
-
-          totalNumberPerPath[path] = {
-            requestNumber,
-            responseTime,
-            uniqueUsers,
-            comparisons: {
-              compareRequests,
-              compareUsers,
-              compareResponse,
-            },
-          };
-        });
-
-        return totalNumberPerPath;
-      });
-  },
-  statusCodesData (host, queryParams) {
-    // Make sure params are String type
-    check(host, String);
-    check(queryParams, Object);
-
-    // Fetch data from elasticsearch
-    return promisifyCall('getElasticsearchData', host, queryParams)
-      .then(result => {
-        const requestPathsDataset = result.aggregations.group_by_request_path.buckets;
-
-        // Prepared object to responses status codes statistics
-        const statusCodesPerPath = {};
-
-        // Go through all requested path and fill object
-        _.mapKeys(requestPathsDataset, (bucket, path) => {
-          const statusCodesData = bucket.response_status.buckets;
-
-          statusCodesPerPath[path] = {
-            successCallsCount: statusCodesData.success.doc_count,
-            errorCallsCount: statusCodesData.error.doc_count,
-          };
-        });
-
-        return statusCodesPerPath;
-      });
   },
   getPeriod () {
     // Get setting data

@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -32,15 +33,20 @@ Template.apiDocumentation.onCreated(function () {
 
     instance.documentationExists.set(docAvailable);
 
-    // Check if it is available
-    if (apiDoc) {
-      const documentationFileId = apiDoc.fileId;
+    // Get fileId if apiDoc exists
+    const documentationFileId = apiDoc && apiDoc.fileId;
 
-      // Check if it is available
-      if (documentationFileId) {
-        // Subscribe to documentation
-        instance.subscribe('singleDocumentationFile', documentationFileId);
-      }
+    // Set value
+    Session.set('fileId', documentationFileId);
+  });
+
+  instance.autorun(() => {
+    // Get value of FileId
+    const fileId = Session.get('fileId');
+
+    if (fileId) {
+      // Subscribe to documentation
+      instance.subscribe('singleDocumentationFile', fileId);
     }
   });
 
@@ -50,6 +56,11 @@ Template.apiDocumentation.onCreated(function () {
 
 Template.apiDocumentation.onRendered(() => {
   $('[data-toggle="popover"]').popover();
+});
+
+Template.apiDocumentation.onDestroyed(() => {
+  // Unset sessions
+  Session.set('fileId', undefined);
 });
 
 Template.apiDocumentation.helpers({

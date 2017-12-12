@@ -25,7 +25,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <li class="time pull-left">
           <span title='{{ localeFormatDate organization.createdAt }}'>
             <i class="fa fa-clock-o"></i>
-            {{_ "organizationCatalogGrid_organizationCardCreated_addedText" organization.relativeCreatedAt }}
+            {{ dateInTimeAgoFormat organization.createdAt }}
           </span>
         </li>
         <li class="apis-count pull-right">

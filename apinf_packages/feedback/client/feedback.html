@@ -5,7 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiFeedback">
   <div class="">
-    {{# if currentUser }}
       <div class="row">
         <div class="col-md-10 col-sm-8 col-xs-8">
           <h4 id="feedback-title">
@@ -35,19 +34,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <button
             type="button"
             class="hidden-sm hidden-xs btn btn-info btn-xs feedback-form-button pull-right"
-            id="add-feedback">
+            id="add-feedback" data-toggle="tooltip" data-original-title="{{isToolTip}}">
               <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
               {{_ "feedback_feedbackForm_button" }}
           </button>
            <button
             type="button"
             class="hidden-md hidden-lg btn btn-info btn-md feedback-form-button pull-right"
-            id="add-feedback">
+            id="add-feedback" title="{{isToolTip}}">
               <i class="fa fa-plus" aria-hidden="true"></i>
           </button>
         </div>
       </div>
-    {{/ if }}
-    {{> feedbackList feedbackItems=feedbackItems api=api }}
+      {{> feedbackList feedbackItems=feedbackItems api=api }}
   </div>
 </template>

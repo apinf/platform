@@ -49,19 +49,29 @@ Meteor.startup(() => {
         return;
       }
 
-      // Available extensions for pictures
-      const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+      // Set the max size as 10Mb
+      const uploadFileMaxSize = 10000000;
+      if (file.size > uploadFileMaxSize) {
+        // Get file size error message
+        const message = TAPi18n.__('uploadCoverPhoto_message_fileMaxSize');
 
-      // Check extensions for uploading file: is it a picture or not?
-      if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
-        // Upload the cover photo
-        CoverPhoto.resumable.upload();
-      } else {
-        // Get extension error message
-        const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
-
-        // Alert user of extension error
+        // Alert user of max size error
         sAlert.error(message);
+      } else {
+        // Available extensions for pictures
+        const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        // Check extensions for uploading file: is it a picture or not?
+        if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
+          // Upload the cover photo
+          CoverPhoto.resumable.upload();
+        } else {
+          // Get extension error message
+          const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
+
+          // Alert user of extension error
+          sAlert.error(message);
+        }
       }
     });
   });

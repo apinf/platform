@@ -32,7 +32,7 @@ export function arrowDirection (parameter, bucket) {
   }
 
   // If there is no trend
-  if (comparison === 0) {
+  if (comparison === 0 || comparison === undefined) {
     // Don't display an arrow indicating
     return undefined;
   }

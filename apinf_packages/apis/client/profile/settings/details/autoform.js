@@ -12,17 +12,15 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 AutoForm.hooks({
   apiDetailsForm: {
     onSuccess () {
-      // Getting new slug from this.udateDoc
+      // Try to get a new slug value
       const slug = this.updateDoc.$set.slug;
+
+      // Check if it is updated
       if (slug) {
-      // Redirect to updated API with new slug.
-      // It is use while api's name will update slug have to change
-      // that's mean routing change
+        // Redirect to new url because of that
         FlowRouter.go('viewApi', { slug });
-      } else {
-        // Otherwise Redirect to API Catalog
-        FlowRouter.go('apiCatalog');
       }
+
       // Get success message translation
       const message = TAPi18n.__('apiDetailsForm_text_updateInformation');
 

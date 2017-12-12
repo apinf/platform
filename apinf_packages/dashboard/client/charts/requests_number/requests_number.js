@@ -10,10 +10,6 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages import
 import { TAPi18n } from 'meteor/tap:i18n';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
-// APInf imports
-import { generateDate, arrayWithZeros } from '/apinf_packages/dashboard/client/chart_helpers';
 
 // Npm packages imports
 import moment from 'moment';
@@ -22,25 +18,24 @@ import Chart from 'chart.js';
 Template.requestTimeline.onCreated(function () {
   const instance = this;
 
-  instance.aggregationData = new ReactiveVar();
+  instance.selectedPathData = new ReactiveVar();
+  const placeholderData = { dates: [] };
 
-  // Chart depends on selected request path
-  // Get related elasticsearch data when a user changed path
+  // Chart area depends on selected request path
+  // Get related analytics data when a user changed path
   instance.changePath = (path) => {
-    // Find the related data for selected Path
-    const relatedData = Template.currentData().timelineData.filter(value => {
-      return value.key === path;
-    });
+    // Find the analytics data for selected Path
+    const selectedPathData = Template.currentData().chartData[path] || placeholderData;
 
     // Update value
-    instance.aggregationData.set(relatedData[0]);
+    instance.selectedPathData.set(selectedPathData);
   };
 
   instance.autorun(() => {
-    const timelineData = Template.currentData().timelineData;
+    const listPaths = Template.currentData().listPaths;
 
     // On default get data for the first requested path
-    instance.changePath(timelineData[0].key);
+    instance.changePath(listPaths[0]);
   });
 });
 
@@ -94,50 +89,12 @@ Template.requestTimeline.onRendered(function () {
 
   // Update chart when elasticsearchData was changed
   instance.autorun(() => {
-    // Get aggregated data
-    const aggregationData = instance.aggregationData.get();
+    // Get analytics data
+    const selectedPathData = instance.selectedPathData.get();
 
-    // Get chart data for the selected request path
-    const chartData = aggregationData.requests_over_time.buckets;
-
-    // Get current timeframe
-    const dateCount = FlowRouter.getQueryParam('timeframe');
-
-    const params = {
-      // Date range must have equal length with dateCount value
-      // To include also today, subtract one day less than count of days in period
-      startDate: moment().subtract(dateCount - 1, 'd'),
-      endDate: moment(),
-      // Interval is 1 day
-      step: 1,
-      // TODO: internationalize date formatting
-      // https://github.com/apinf/platform/issues/2900
-      format: 'MM/DD',
-    };
-
-    const labels = generateDate(params);
-    const successCalls = arrayWithZeros(dateCount);
-    const redirectCalls = arrayWithZeros(dateCount);
-    const failCalls = arrayWithZeros(dateCount);
-    const errorCalls = arrayWithZeros(dateCount);
-
-    chartData.forEach(value => {
-      // Create Labels values
-      const currentDateValue = moment(value.key).format(params.format);
-
-      const index = labels.indexOf(currentDateValue);
-
-      // Data for requests with success statuses
-      successCalls[index] = value.response_status.buckets.success.doc_count;
-
-      // Data for requests with redirect statuses
-      redirectCalls[index] = value.response_status.buckets.redirect.doc_count;
-
-      // Data for requests with fail statuses
-      failCalls[index] = value.response_status.buckets.fail.doc_count;
-
-      // Data for requests with error statuses
-      errorCalls[index] = value.response_status.buckets.error.doc_count;
+    // Initialization
+    const labels = selectedPathData.dates.map(date => {
+      return moment(date).format('MM/DD');
     });
 
     // Update labels & data
@@ -148,28 +105,28 @@ Template.requestTimeline.onRendered(function () {
           label: '2XX',
           backgroundColor: '#468847',
           borderColor: '#468847',
-          data: successCalls,
+          data: selectedPathData.success,
           fill: false,
         },
         {
           label: '3XX',
           backgroundColor: '#04519b',
           borderColor: '#04519b',
-          data: redirectCalls,
+          data: selectedPathData.redirect,
           fill: false,
         },
         {
           label: '4XX',
           backgroundColor: '#e08600',
           borderColor: '#e08600',
-          data: failCalls,
+          data: selectedPathData.fail,
           fill: false,
         },
         {
           label: '5XX',
           backgroundColor: '#b94848',
           borderColor: '#b94848',
-          data: errorCalls,
+          data: selectedPathData.error,
           fill: false,
         },
       ],
@@ -191,17 +148,6 @@ Template.requestTimeline.onRendered(function () {
     // Update chart with new translation
     instance.chart.update();
   });
-});
-
-Template.requestTimeline.helpers({
-  listPaths () {
-    const timelineData = Template.currentData().timelineData;
-
-    // Return all requested paths
-    return timelineData.map(dataset => {
-      return dataset.key;
-    });
-  },
 });
 
 Template.requestTimeline.events({

@@ -26,7 +26,7 @@ Meteor.methods({
       })
       .catch((err) => {
         // Return error object
-        return err;
+        throw new Meteor.Error(err);
       });
   },
 });
