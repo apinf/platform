@@ -11,9 +11,6 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 
-// Collection imports
-import Apis from '/apinf_packages/apis/collection';
-
 AutoForm.hooks({
   addApiForm: {
     before: {
@@ -32,15 +29,15 @@ AutoForm.hooks({
       },
     },
     onSuccess (formType, apiId) {
-      const api = Apis.findOne(apiId);
-      // Make sure slug exists
-      if (api && api.slug) {
-        // Redirect to newly added API
-        FlowRouter.go('viewApi', { slug: api.slug });
-      } else {
-        // Otherwise Redirect to API Catalog
-        FlowRouter.go('apiCatalog');
-      }
+      Meteor.call('getApiById', apiId, (error, api) => {
+        if (api && api.slug) {
+          // Redirect to newly added API
+          FlowRouter.go('viewApi', { slug: api.slug });
+        } else {
+          // Otherwise Redirect to API Catalog
+          FlowRouter.go('apiCatalog');
+        }
+      });
 
       // Get current user ID
       const userId = Meteor.userId();
