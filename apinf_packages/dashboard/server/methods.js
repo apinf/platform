@@ -22,7 +22,7 @@ Meteor.methods({
   getProxiesList (type) {
     // Make sure the parameter is String type
     check(type, String);
-    
+
     // Return proxies list with specified type
     return Proxies.find({ type }).fetch();
   },

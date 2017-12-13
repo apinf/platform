@@ -85,7 +85,7 @@ Template.dashboardPage.onRendered(function () {
           // Alert failure message to user
           sAlert.error(error);
         } else {
-          let period = result.period;
+          const period = result.period;
           // Get end time value
           const endTime = moment().add(period, 'm').unix();
 
@@ -103,20 +103,20 @@ Template.dashboardPage.onRendered(function () {
               // Clear timeinterval value
               clearInterval(instance.timeInterval.get());
               const proxyType = 'apiUmbrella';
-              Meteor.call('getProxiesList', proxyType, (error, result) => {
+              Meteor.call('getProxiesList', proxyType, (err, resp) => {
                 // if proxy id value isn't available from Query param then
                 // Set the first item of list as the default value
                 // Make sure Proxies list is not empty
-                if (result.length > 0) {
+                if (resp.length > 0) {
                   // Modify the current history entry instead of creating a new one
                   FlowRouter.withReplaceState(() => {
                     // Set the default value for query parameter
-                    FlowRouter.setQueryParams({ proxy_id: result[0]._id });
+                    FlowRouter.setQueryParams({ proxy_id: resp[0]._id });
                   });
                 }
 
                 // Save result to template instance
-                instance.proxiesList.set(result);
+                instance.proxiesList.set(resp);
                 instance.reload.set(true);
               });
             }
