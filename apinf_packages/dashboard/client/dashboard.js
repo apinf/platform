@@ -72,7 +72,7 @@ Template.dashboardPage.onCreated(function () {
     }
   });
 });
-let i = 0;
+
 Template.dashboardPage.onRendered(function () {
   const instance = this;
   instance.autorun(() => {
