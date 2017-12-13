@@ -37,43 +37,10 @@ Template.dashboardPage.onCreated(function () {
   instance.proxiesList = new ReactiveVar();
   instance.countdown = new ReactiveVar();
   instance.timeInterval = new ReactiveVar(null);
+  instance.reload = new ReactiveVar(true);
 
   // Create Chart reload countdown
-  Meteor.call('getPeriod', (error, result) => {
-    if (error) {
-      // Alert failure message to user
-      sAlert.error(error);
-    } else {
-      // Set default value 10 minutes
-      let period = 10;
-      if (result && result.period) {
-        period = result.period;
-      }
-      const startDate = new Date();
-      const endtime = Date.parse(new Date(startDate.getTime() + (period * 60000)));
-      instance.timeInterval.set(setInterval(() => {
-        // Construct countdown
-        const currentTime = Date.parse(new Date());
-        const remainingTime = endtime - currentTime;
-        const seconds = Math.floor((remainingTime / 1000) % 60);
-        const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
 
-        // Clear timeinterval
-        if (remainingTime <= 1) {
-          clearInterval(instance.timeInterval.get());
-          // Page reload
-          location.reload();
-        }
-        const countdown = {
-          minutes,
-          seconds,
-        };
-
-        // Save countdown to template instance
-        instance.countdown.set(countdown);
-      }, 1000));
-    }
-  });
 
   // Get proxy ID value from query params
   const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -105,6 +72,63 @@ Template.dashboardPage.onCreated(function () {
     }
   });
 });
+
+Template.dashboardPage.onRendered(function () {
+  const instance = this;
+  instance.autorun(() => {
+    if (instance.reload.get()) {
+      Meteor.call('getPeriod', (error, result) => {
+        if (error) {
+          // Alert failure message to user
+          sAlert.error(error);
+        } else {
+          let period = result.period;
+          const startDate = new Date();
+          const endtime = Date.parse(new Date(startDate.getTime() + (period * 60000)));
+          instance.timeInterval.set(setInterval(() => {
+            instance.reload.set(false);
+            // Construct countdown
+            const currentTime = Date.parse(new Date());
+            const remainingTime = endtime - currentTime;
+            const seconds = Math.floor((remainingTime / 1000) % 60);
+            const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
+
+            // Clear timeinterval
+            if (remainingTime <= 1) {
+              clearInterval(instance.timeInterval.get());
+              const proxyType = 'apiUmbrella';
+              Meteor.call('getProxiesList', proxyType, (error, result) => {
+                // if proxy id value isn't available from Query param then
+                // Set the first item of list as the default value
+                // Make sure Proxies list is not empty
+                if (result.length > 0) {
+                  // Modify the current history entry instead of creating a new one
+                  FlowRouter.withReplaceState(() => {
+                    // Set the default value for query parameter
+                    FlowRouter.setQueryParams({ proxy_id: result[0]._id });
+                  });
+                }
+
+                // Save result to template instance
+                instance.proxiesList.set(result);
+                instance.reload.set(true);
+              });
+              // Page reload
+              // location.reload();
+            }
+            const countdown = {
+              minutes,
+              seconds,
+            };
+
+            // Save countdown to template instance
+            instance.countdown.set(countdown);
+          }, 1000));
+        }
+      });
+    }
+  });
+})
 
 Template.dashboardPage.onDestroyed(function () {
   const instance = this;

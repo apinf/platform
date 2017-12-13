@@ -30,7 +30,7 @@ Template.swaggerUi.onCreated(() => {
     }
 
     // Checking of scheme contains only http protocol
-    if (result.schemes && result.schemes[0] === 'http') {
+    if (result && result.schemes && result.schemes[0] === 'http') {
       // Set the document contains only http protocol
       instance.useHttpProtocol = true;
     }
