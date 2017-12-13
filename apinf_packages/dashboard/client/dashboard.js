@@ -3,6 +3,9 @@
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Npm packages imports
+import moment from 'moment';
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -39,9 +42,6 @@ Template.dashboardPage.onCreated(function () {
   instance.timeInterval = new ReactiveVar(null);
   instance.reload = new ReactiveVar(true);
 
-  // Create Chart reload countdown
-
-
   // Get proxy ID value from query params
   const proxyId = FlowRouter.getQueryParam('proxy_id');
   // Set type of proxy is API Umbrella
@@ -74,27 +74,33 @@ Template.dashboardPage.onCreated(function () {
 });
 
 Template.dashboardPage.onRendered(function () {
+  // Get reference to template instance
   const instance = this;
   instance.autorun(() => {
+    // Check reload instance exists
     if (instance.reload.get()) {
+      // Get period value from MongoDB
       Meteor.call('getPeriod', (error, result) => {
         if (error) {
           // Alert failure message to user
           sAlert.error(error);
         } else {
           let period = result.period;
-          const startDate = new Date();
-          const endtime = Date.parse(new Date(startDate.getTime() + (period * 60000)));
+          // Get end time value
+          const endTime = moment().add(period, 'm').unix();
+
           instance.timeInterval.set(setInterval(() => {
             instance.reload.set(false);
-            // Construct countdown
-            const currentTime = Date.parse(new Date());
-            const remainingTime = endtime - currentTime;
-            const seconds = Math.floor((remainingTime / 1000) % 60);
-            const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
+            // Get remaining time
+            const remainingTime = endTime - moment().unix();
+            // Get countdown in second
+            const seconds = moment.duration(remainingTime * 1000).seconds();
+            // Get countdown in minutes
+            const minutes = moment.duration(remainingTime * 1000).minutes();
 
-            // Clear timeinterval
+            // Check countdown remaining time
             if (remainingTime <= 1) {
+              // Clear timeinterval value
               clearInterval(instance.timeInterval.get());
               const proxyType = 'apiUmbrella';
               Meteor.call('getProxiesList', proxyType, (error, result) => {
@@ -113,9 +119,9 @@ Template.dashboardPage.onRendered(function () {
                 instance.proxiesList.set(result);
                 instance.reload.set(true);
               });
-              // Page reload
-              // location.reload();
             }
+
+            // Construct countdown object
             const countdown = {
               minutes,
               seconds,
@@ -128,11 +134,13 @@ Template.dashboardPage.onRendered(function () {
       });
     }
   });
-})
+});
 
 Template.dashboardPage.onDestroyed(function () {
+  // Get reference to template instance
   const instance = this;
   if (instance.timeInterval.get()) {
+    // Clear timeinterval value
     clearInterval(instance.timeInterval.get());
   }
 });
