@@ -22,7 +22,7 @@ Meteor.methods({
   getProxiesList (type) {
     // Make sure the parameter is String type
     check(type, String);
-
+    
     // Return proxies list with specified type
     return Proxies.find({ type }).fetch();
   },
@@ -136,9 +136,12 @@ Meteor.methods({
   getPeriod () {
     // Get setting data
     const settings = Settings.findOne();
-
-    return {
-      period: settings.pageReloadTime,
-    };
+    const reloadTime = {};
+    if (settings && settings.pageReloadTime) {
+      reloadTime.period = settings.pageReloadTime;
+    } else {
+      reloadTime.period = 10;
+    }
+    return reloadTime;
   },
 });
