@@ -800,8 +800,8 @@
       "siteFooter": {
         "label": "Site footer"
       },
-      "footerCode": {
-        "label": "Footer code"
+      "analyticCode": {
+        "label": "Analytic code"
       },
       "featuredApis": {
         "label": "Featured APIs"
