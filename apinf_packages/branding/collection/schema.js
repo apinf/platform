@@ -25,6 +25,7 @@ Branding.schema = new SimpleSchema({
   'colors.primary': {
     type: String,
     optional: true,
+    defaultValue: '#2fa4e7',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
@@ -32,6 +33,7 @@ Branding.schema = new SimpleSchema({
   'colors.primaryText': {
     type: String,
     optional: true,
+    defaultValue: '#ffffff',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
@@ -39,6 +41,7 @@ Branding.schema = new SimpleSchema({
   'colors.coverPhotoOverlay': {
     type: String,
     optional: true,
+    defaultValue: '#ffffff',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
@@ -48,6 +51,7 @@ Branding.schema = new SimpleSchema({
     min: 0,
     max: 100,
     optional: true,
+    defaultValue: 0,
   },
   siteTitle: {
     type: String,

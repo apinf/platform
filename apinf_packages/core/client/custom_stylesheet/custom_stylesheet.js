@@ -71,7 +71,7 @@ Template.customStylesheet.helpers({
     const branding = Branding.findOne();
 
     // Set default color of text as white
-    let primaryColorText = 'white';
+    let primaryColorText = '#ffffff';
 
     if (branding && branding.colors && branding.colors.primaryText) {
       primaryColorText = branding.colors.primaryText;
