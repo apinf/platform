@@ -8,6 +8,10 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
+// Meteor contributed packages imports
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
@@ -31,9 +35,22 @@ AutoForm.hooks({
       // Enable form elements after form submission
       $('[data-schema-key],button').removeAttr('disabled');
     },
-    onSuccess () {
+    onSuccess (formType) {
       // Hide apiBacklogItemForm modal
       Modal.hide('apiBacklogItemForm');
+
+      let message;
+
+      // Backlog is created
+      if (formType === 'insert') {
+        message = TAPi18n.__('apiBacklogItemForm_message_backlogAdded');
+      } else {
+        // Backlog is changed
+        message = TAPi18n.__('apiBacklogItemForm_message_backlogChanged');
+      }
+
+      // Display message text
+      sAlert.success(message);
     },
   },
 });

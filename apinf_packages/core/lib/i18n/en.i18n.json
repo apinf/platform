@@ -80,6 +80,8 @@
   "apiBacklogItems_priorityText_High": "High",
   "apiBacklogItems_priorityText_Middle": "Middle",
   "apiBacklogItems_priorityText_None": "None",
+  "apiBacklogItemForm_message_backlogAdded": "A backlog item was added",
+  "apiBacklogItemForm_message_backlogChanged": "The backlog item was changed",
   "apiCard_labelText_private": "private",
   "apiCard_pinTooltip_user": "Mark/Unmark API card featured",
   "apiCard_tooltipTitle_averageRating": "Average Rating",
@@ -300,6 +302,7 @@
   "deleteBacklogItem_confirmation_text": "Are you sure you want to delete this backlog item?",
   "deleteBacklogItem_cancelButton_text": "Cancel",
   "deleteBacklogItem_deleteButton_text": "Delete backlog item",
+  "deleteBacklogItem_message_backlogRemoved": "The backlog item was removed",
   "deleteFeedbackItem_modalTitle": "Delete feedback item",
   "deleteFeedbackItem_confirmation_text": "Are you sure you want to delete this feedback item & all related votes?",
   "deleteFeedbackItem_cancelButton_text": "Cancel",
@@ -790,8 +793,8 @@
       "siteFooter": {
         "label": "Site footer"
       },
-      "footerCode": {
-        "label": "Footer code"
+      "analyticCode": {
+        "label": "Analytic code"
       },
       "featuredApis": {
         "label": "Featured APIs"

@@ -106,12 +106,9 @@ Branding.schema = new SimpleSchema({
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
   },
-  footerCode: {
+  analyticCode: {
     type: String,
     optional: true,
-    autoform: {
-      rows: 5,
-    },
   },
 });
 
