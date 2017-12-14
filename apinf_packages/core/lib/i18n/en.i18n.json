@@ -784,18 +784,8 @@
           "label": "Overlay transparency"
         }
       },
-      "socialMedia": {
-        "label": "Social media",
-        "$": {
-          "name": {
-            "label": "Name",
-            "firstOption": "(Select One)"
-          },
-          "url": {
-            "label": "Url",
-            "placeholder": "http://example.com/accountname"
-          }
-        }
+      "socialMediaLinks": {
+        "label": "Social Media Links"
       },
       "siteFooter": {
         "label": "Site footer"
