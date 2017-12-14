@@ -1202,6 +1202,7 @@
   "umbrella_createuser_error": "Failed to create user on API Umbrella.",
   "updatePassword_submitButton_text": "Change Password",
   "updatePasswordForm_successMessage": "Password updated.",
+  "passwordsMismatch": "Passwords do not match",
   "uploadApiLogoButton": "Upload logo",
   "uploadApiLogo_confirm_delete": "Are you sure you want to delete this logo?",
   "uploadApiLogo_successfully_deleted": "Logo successfully deleted!",
