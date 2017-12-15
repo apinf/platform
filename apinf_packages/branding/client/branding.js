@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
@@ -41,6 +42,12 @@ Template.branding.onRendered(() => {
   $('[data-toggle="popover"]').popover();
 });
 
+Template.branding.onDestroyed(() => {
+  // Unset sessions
+  Session.set('logoUploading', undefined);
+  Session.set('coverUploading', undefined);
+});
+
 Template.branding.helpers({
   branding () {
     // Get Branding collection content
@@ -67,5 +74,13 @@ Template.branding.helpers({
         };
       }),
     };
+  },
+  logoUploading () {
+    // Get status of logo uploading
+    return Session.get('logoUploading');
+  },
+  coverUploading () {
+    // Get status of cover uploading
+    return Session.get('coverUploading');
   },
 });

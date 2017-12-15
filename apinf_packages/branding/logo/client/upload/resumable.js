@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
@@ -20,6 +21,9 @@ import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_en
 Meteor.startup(() => {
   // Set cover photo id to branding collection on Success
   ProjectLogo.resumable.on('fileSuccess', (file) => {
+    // Finish uploading
+    Session.set('logoUploading', false);
+
     // Get the id from project logo file object
     const projectLogoFileId = file.uniqueIdentifier;
 
@@ -53,10 +57,16 @@ Meteor.startup(() => {
           throw new Meteor.Error('File creation failed!', error);
         }
 
+        // Start uploading
+        Session.set('logoUploading', true);
+
         // Upload file
         ProjectLogo.resumable.upload();
       });
     } else {
+      // Finish uploading
+      Session.set('logoUploading', false);
+
       // Get extension error message
       const message = TAPi18n.__('uploadProjectLogo_acceptedExtensions');
 

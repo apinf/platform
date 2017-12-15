@@ -90,4 +90,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   {{/ if }}
+
+  <!-- Display spinner if logo is uploading -->
+  {{# if logoUploading }}
+    {{> spinner }}
+  {{/ if }}
+
+  <!-- Display spinner if cover is uploading -->
+  {{# if coverUploading }}
+    {{> spinner }}
+  {{/ if }}
 </template>
