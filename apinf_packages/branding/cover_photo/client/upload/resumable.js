@@ -37,42 +37,40 @@ Meteor.startup(() => {
   });
 
   CoverPhoto.resumable.on('fileAdded', (file) => {
-    return CoverPhoto.insert({
-      _id: file.uniqueIdentifier,
-      filename: file.fileName,
-      contentType: file.file.type,
-    }, (err) => {
-      if (err) {
-        // Create & show a message about failed
-        const message = `${TAPi18n.__('uploadCoverPhoto_acceptedExtensions_errorText')} ${err}`;
-        sAlert.warning(message);
-        return;
-      }
+    // Limit file size to 10MB
+    if (file && file.size <= 10485760) {
+      // Available extensions for pictures
+      const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
-      // Set the max size as 10Mb
-      const uploadFileMaxSize = 10000000;
-      if (file.size > uploadFileMaxSize) {
-        // Get file size error message
-        const message = TAPi18n.__('uploadCoverPhoto_message_fileMaxSize');
+      // Make sure the file extension is allowed
+      if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
+        // Insert record about file to collection
+        CoverPhoto.insert({
+          _id: file.uniqueIdentifier,
+          filename: file.fileName,
+          contentType: file.file.type,
+        }, (error) => {
+          if (error) {
+            // Handle error condition
+            throw new Meteor.Error('File creation failed!', error);
+          }
 
-        // Alert user of max size error
-        sAlert.error(message);
-      } else {
-        // Available extensions for pictures
-        const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-
-        // Check extensions for uploading file: is it a picture or not?
-        if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
-          // Upload the cover photo
+          // Upload photo
           CoverPhoto.resumable.upload();
-        } else {
-          // Get extension error message
-          const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
+        });
+      } else {
+        // Get extension error message
+        const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
 
-          // Alert user of extension error
-          sAlert.error(message);
-        }
+        // Alert user of extension error
+        sAlert.error(message);
       }
-    });
+    } else {
+      // Get file size error message
+      const message = TAPi18n.__('uploadCoverPhoto_message_fileMaxSize');
+
+      // Alert user of max size error
+      sAlert.error(message);
+    }
   });
 });
