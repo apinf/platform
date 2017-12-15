@@ -27,33 +27,36 @@ Meteor.startup(() => {
   });
 
   DocumentationFiles.resumable.on('fileAdded', (file) => {
-    if (file && file.size <= 10485760) { // Limit file size to 10 MB
-      DocumentationFiles.insert({
-        _id: file.uniqueIdentifier,
-        filename: file.fileName,
-        contentType: file.file.type,
-      }, (error) => {
-        if (error) {
-          // Handle error condition
-          throw new Meteor.Error('File creation failed!', error);
-        }
+    // Limit file size to 10MB
+    if (file && file.size <= 10485760) {
+      const acceptedExtensions = ['yaml', 'yml', 'json'];
 
-        const acceptedExtensions = ['yaml', 'yml', 'json'];
+      // Make sure the file extension is allowed
+      if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
+        // Upload file to collection
+        DocumentationFiles.insert({
+          _id: file.uniqueIdentifier,
+          filename: file.fileName,
+          contentType: file.file.type,
+        }, (error) => {
+          if (error) {
+            // Handle error condition
+            throw new Meteor.Error('File creation failed!', error);
+          }
 
-        if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
           // Uploading start
           Session.set('fileUploading', true);
 
           // Upload documentation
           DocumentationFiles.resumable.upload();
-        } else {
-          // Get error message translation
-          const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
+        });
+      } else {
+        // Get error message translation
+        const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
 
-          // Alert user of error
-          sAlert.error(message);
-        }
-      });
+        // Alert user of error
+        sAlert.error(message);
+      }
     } else {
       // Finish uploading
       Session.set('fileUploading', false);
