@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
 // Meteor contributed packages imports
 import { sAlert } from 'meteor/juliancwirko:s-alert';
@@ -20,6 +21,9 @@ import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_en
 Meteor.startup(() => {
   // Set cover photo id to branding collection on Success
   CoverPhoto.resumable.on('fileSuccess', (file) => {
+    // Finish uploading
+    Session.set('coverUploading', false);
+
     // Get the id from project logo file object
     const coverPhotoFileId = file.uniqueIdentifier;
 
@@ -55,6 +59,9 @@ Meteor.startup(() => {
             throw new Meteor.Error('File creation failed!', error);
           }
 
+          // Start uploading
+          Session.set('coverUploading', true);
+
           // Upload photo
           CoverPhoto.resumable.upload();
         });
@@ -66,6 +73,9 @@ Meteor.startup(() => {
         sAlert.error(message);
       }
     } else {
+      // Finish uploading
+      Session.set('coverUploading', false);
+
       // Get file size error message
       const message = TAPi18n.__('uploadCoverPhoto_message_fileMaxSize');
 
