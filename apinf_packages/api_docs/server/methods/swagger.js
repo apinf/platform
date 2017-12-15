@@ -12,7 +12,7 @@ import SwaggerParser from 'swagger-parser';
 
 Meteor.methods({
   // Parameter is URL or file path to Swagger file
-  parsedDocument (swaggerFileUrl) {
+  parsedSwaggerDocument (swaggerFileUrl) {
     // Make sure swaggerFileUrl is a String
     check(swaggerFileUrl, String);
 

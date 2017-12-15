@@ -23,7 +23,7 @@ Template.swaggerUi.onCreated(() => {
   const documentationURL = instance.data.api.documentationUrl();
 
   // Parsed swagger file
-  Meteor.call('parsedDocument', documentationURL, (error, result) => {
+  Meteor.call('parsedSwaggerDocument', documentationURL, (error, result) => {
     if (error) {
       sAlert.error(error);
       // Document is invalid
