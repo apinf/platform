@@ -11,10 +11,8 @@ import { check } from 'meteor/check';
 import SwaggerParser from 'swagger-parser';
 
 Meteor.methods({
-  // Validate Swagger JSON/YAML
-  // Params: URL or file path to Swagger file
-  // Returns: true if valid else return error object
-  parsedDocument (swaggerFileUrl) {
+  // Parameter is URL or file path to Swagger file
+  parsedSwaggerDocument (swaggerFileUrl) {
     // Make sure swaggerFileUrl is a String
     check(swaggerFileUrl, String);
 
@@ -26,7 +24,7 @@ Meteor.methods({
       })
       .catch((err) => {
         // Return error object
-        throw new Meteor.Error(err);
+        throw new Meteor.Error(err.message);
       });
   },
 });
