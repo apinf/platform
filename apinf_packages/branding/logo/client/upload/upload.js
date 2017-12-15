@@ -4,7 +4,6 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 
@@ -17,7 +16,7 @@ import Branding from '/apinf_packages/branding/collection';
 import ProjectLogo from '/apinf_packages/branding/logo/collection';
 
 Template.uploadProjectLogo.events({
-  'click .delete-projectLogo': function () {
+  'click .delete-project-logo': () => {
     // Show confirmation dialog to user
     // eslint-disable-next-line no-alert
     const confirmation = confirm(TAPi18n.__('uploadProjectLogo_confirm_delete'));
@@ -49,27 +48,6 @@ Template.uploadProjectLogo.events({
 });
 
 Template.uploadProjectLogo.helpers({
-  uploadedLogoLink () {
-    const currentProjectLogoFileId = this.branding.projectLogoFileId;
-
-    // Convert to Mongo ObjectID
-    const objectId = new Mongo.Collection.ObjectID(currentProjectLogoFileId);
-
-    // Get project logo file Object
-    const currentProjectLogoFile = ProjectLogo.findOne(objectId);
-
-    let projectLogoFileUrl;
-    // Check if project logo file is available
-    if (currentProjectLogoFile) {
-      // Get Meteor absolute URL
-      const meteorAbsoluteUrl = Meteor.absoluteUrl().slice(0, -1);
-
-      const baseProjectLogoFotoUrl = meteorAbsoluteUrl + ProjectLogo.baseURL;
-      // Get project logo file URL
-      projectLogoFileUrl = `${baseProjectLogoFotoUrl}/id/${currentProjectLogoFileId}`;
-    }
-    return projectLogoFileUrl;
-  },
   uploadedProjectLogoFile () {
     const currentProjectLogoFileId = this.branding.projectLogoFileId;
 
@@ -77,9 +55,6 @@ Template.uploadProjectLogo.helpers({
     const objectId = new Mongo.Collection.ObjectID(currentProjectLogoFileId);
 
     // Get project logo file Object
-    const currentProjectLogoFile = ProjectLogo.findOne(objectId);
-
-    // Check if project logo file is available
-    return currentProjectLogoFile;
+    return ProjectLogo.findOne(objectId);
   },
 });
