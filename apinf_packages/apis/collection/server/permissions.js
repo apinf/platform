@@ -15,57 +15,37 @@ import Apis from '../';
 
 Apis.allow({
   insert (userId) {
-    // Get settings document
-    const settings = Settings.findOne();
+    if (userId) {
+      // Get settings document
+      const settings = Settings.findOne();
 
-    try {
       // Get access setting value
-      const onlyAdminsCanAddApis = settings.access.onlyAdminsCanAddApis;
+      const onlyAdminsCanAddApis = _.get(settings, 'access.onlyAdminsCanAddApis');
 
-      if (!onlyAdminsCanAddApis) {
-        return true;
+      // Check if access settings is set
+      if (onlyAdminsCanAddApis) {
+        // If a user is admin then the user can add an API
+        return Roles.userIsInRole(userId, ['admin']);
       }
 
-      // Check if current user is admin
-      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-      // Check if current user is admin and access settings is set
-      return onlyAdminsCanAddApis && userIsAdmin;
-    } catch (e) {
-      // If caught an error, then returning true because no access settings is set
-      // By default allowing all user to add an API
+      // Otherwise any registered user can add an API
       return true;
     }
+
+    // Anonymous user doesn't have permission to add an API
+    return false;
   },
   update (userId, apiBackendDoc) {
-    // Save ID of API Backend
-    const apiBackendId = apiBackendDoc._id;
-    // Get API backend with ID
-    const apiBackend = Apis.findOne(apiBackendId);
-    // Check if current user can edit API Backend
-    const currentUserCanEdit = apiBackend.currentUserCanManage();
-
-    if (currentUserCanEdit) {
-      // User is allowed to perform action
-      return true;
-    }
-    // User is not allowded to perform action
-    return false;
+    // Get API with ID
+    const api = Apis.findOne(apiBackendDoc._id);
+    // If a user can manage api then the user can edit that
+    return api && api.currentUserCanManage();
   },
   remove (userId, apiBackendDoc) {
-    // Save ID of API Backend
-    const apiBackendId = apiBackendDoc._id;
-    // Get API backend with ID
-    const apiBackend = Apis.findOne(apiBackendId);
-    // Check if current user can edit API Backend
-    const currentUserCanEdit = apiBackend.currentUserCanManage();
-
-    if (currentUserCanEdit) {
-      // User is allowed to perform action
-      return true;
-    }
-    // User is not allowded to perform action
-    return false;
+    // Get API with ID
+    const api = Apis.findOne(apiBackendDoc._id);
+    // If a user can manage api then the user can remove that
+    return api && api.currentUserCanManage();
   },
 });
 
