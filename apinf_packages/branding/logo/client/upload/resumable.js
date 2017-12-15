@@ -18,44 +18,50 @@ import ProjectLogo from '/apinf_packages/branding/logo/collection';
 import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
 
 Meteor.startup(() => {
+  // Set cover photo id to branding collection on Success
+  ProjectLogo.resumable.on('fileSuccess', (file) => {
+    // Get the id from project logo file object
+    const projectLogoFileId = file.uniqueIdentifier;
+
+    // Get branding
+    const branding = Branding.findOne();
+
+    // Update logo id field
+    Branding.update(branding._id, { $set: { projectLogoFileId } });
+
+    // Get upload success message translation
+    const message = TAPi18n.__('uploadProjectLogo_successfully_uploaded');
+
+    // Alert user of successful upload
+    sAlert.success(message);
+  });
+
   ProjectLogo.resumable.on('fileAdded', (file) => {
-    return ProjectLogo.insert({
-      _id: file.uniqueIdentifier,
-      filename: file.fileName,
-      contentType: file.file.type,
-    }, (error) => {
-      if (error) {
-        // Handle error condition
-        const errorMessage = 'branding/logo/client/upload/resumable.js: File creation failed!';
-        throw new Meteor.Error(errorMessage, error);
-      }
+    // Available extensions for pictures
+    const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
-      const acceptedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    // Make sure the file extension is allowed
+    if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
+      // Insert record about file to collection
+      ProjectLogo.insert({
+        _id: file.uniqueIdentifier,
+        filename: file.fileName,
+        contentType: file.file.type,
+      }, (error) => {
+        if (error) {
+          // Handle error condition
+          throw new Meteor.Error('File creation failed!', error);
+        }
 
-      if (fileNameEndsWith(file.file.name, acceptedExtensions)) {
-        // Get the id from project logo file object
-        const projectLogoFileId = file.uniqueIdentifier;
-
-        // Get branding
-        const branding = Branding.findOne();
-
-        // Update logo id field
-        Branding.update(branding._id, { $set: { projectLogoFileId } });
-
-        // Get upload success message translation
-        const message = TAPi18n.__('uploadProjectLogo_successfully_uploaded');
-
-        // Alert user of successful upload
-        sAlert.success(message);
-
+        // Upload file
         ProjectLogo.resumable.upload();
-      } else {
-        // Get extension error message
-        const message = TAPi18n.__('uploadProjectLogo_acceptedExtensions');
+      });
+    } else {
+      // Get extension error message
+      const message = TAPi18n.__('uploadProjectLogo_acceptedExtensions');
 
-        // Alert user of extension error
-        sAlert.error(message);
-      }
-    });
+      // Alert user of extension error
+      sAlert.error(message);
+    }
   });
 });
