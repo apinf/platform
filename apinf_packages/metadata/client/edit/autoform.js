@@ -1,6 +1,8 @@
 // Meteor packages imports
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -17,8 +19,21 @@ AutoForm.addHooks('editApiMetadataForm', {
       return metadata;
     },
   },
-  onSuccess () {
+  onSuccess (formType) {
     // Close modal dialogue
     $('#apiMetadataModal').modal('hide');
+
+    let message;
+
+    // Metadata is created
+    if (formType === 'insert') {
+      message = TAPi18n.__('editApiMetadataForm_messageText_added');
+    } else {
+      // Metadata is updated
+      message = TAPi18n.__('editApiMetadataForm_messageText_updated');
+    }
+
+    // Display message text
+    sAlert.success(message);
   },
 });
