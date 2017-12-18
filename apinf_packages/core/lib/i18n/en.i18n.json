@@ -158,6 +158,7 @@
   "apiLifecycleStatus_labelText_unknown": "Unknown",
   "apiLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "apiLogo_resumable_successfully_uploaded": "Logo successfully uploaded!",
+  "apiLogo_resumable_message_fileMaxSize": "File size exceeded max limit. Please upload a photo within 10 MB size.",
   "apiMetadata_dateInvalid": "End date must be after begin date",
   "apiOrganization_disconnectButton": "Disconnect",
   "apiOrganization_panelTitle": "Connect API to Organization",

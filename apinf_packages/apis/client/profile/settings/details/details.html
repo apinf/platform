@@ -36,4 +36,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{/ autoForm }}
     </div>
   </div>
+
+  <!-- Display status of logo uploading -->
+  {{# if apiLogoUploading }}
+    {{> spinner }}
+  {{/ if }}
 </template>
