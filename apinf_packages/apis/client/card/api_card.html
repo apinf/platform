@@ -7,7 +7,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="panel api-card">
     <div class="panel-heading api-card-heading text-center">
       {{# if organization.currentUserCanManage }}
-
         <!-- Pin API -->
         <div class="pinApiCard pull-right">
           <div
@@ -18,9 +17,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> apiCardPin organization=organization api=api }}
           </div>
         </div>
-
       {{/ if }}
-      <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+      <a href="{{ pathFor 'viewApi' slug=api.slug }}" title="{{ api.name }}">
         <h3>
           {{ api.name }}
         </h3>
