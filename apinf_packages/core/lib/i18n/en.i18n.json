@@ -323,6 +323,8 @@
   "editApiMetadata_submitButtonText": "Save metadata",
   "editBacklogItem_modalTitle": "Edit backlog item",
   "editBacklogItem_submit_buttonText": "Save",
+  "editApiMetadataForm_messageText_added": "API Metadata is successfully added",
+  "editApiMetadataForm_messageText_updated": "API Metadata is successfully updated",
   "emailTemplates_verifyEmail_message": "To verify your email address visit the following link:",
   "emailTemplates_verifyEmail_title": "Verify Your Email Address",
   "emailVerification_successMessage": "Email verified! Thanks!",
