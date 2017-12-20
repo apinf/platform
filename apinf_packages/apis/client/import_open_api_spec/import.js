@@ -188,29 +188,27 @@ Template.importOpenApiSpecification.events({
         const message = TAPi18n.__('importApiFile_invalidExtension_message');
         // Alert error Message
         sAlert.error(message);
+      } else {
+        // Prepare query to insert ApiDocs collection
+        const query = { type: 'url', remoteFileUrl: url.value };
 
-        return false;
+        // Start spinner
+        Session.set('fileUploading', true);
+
+        Meteor.call('importApiByDocument', url.value, templateInstance.lifecycleStatus, query,
+          (error, response) => {
+            // Stop spinner
+            Session.set('fileUploading', false);
+            // If everything is ok
+            if (response && response.isSuccessful) {
+              templateInstance.successCase(response);
+            } else {
+              // Get error message
+              const message = error ? error.message : response.message;
+              templateInstance.errorCase(message, fileId);
+            }
+          });
       }
-
-      // Prepare query to insert ApiDocs collection
-      const query = { type: 'url', remoteFileUrl: url.value };
-
-      // Start spinner
-      Session.set('fileUploading', true);
-
-      Meteor.call('importApiByDocument', url.value, templateInstance.lifecycleStatus, query,
-        (error, response) => {
-          // Stop spinner
-          Session.set('fileUploading', false);
-          // If everything is ok
-          if (response && response.isSuccessful) {
-            templateInstance.successCase(response);
-          } else {
-            // Get error message
-            const message = error ? error.message : response.message;
-            templateInstance.errorCase(message, fileId);
-          }
-        });
     }
 
     // A user doesn't upload file and doesn't fill URL field
