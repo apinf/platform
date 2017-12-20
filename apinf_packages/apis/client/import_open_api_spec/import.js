@@ -207,7 +207,7 @@ Template.importOpenApiSpecification.events({
         // Get translated text
         const message = TAPi18n.__('importApiFile_invalidExtension_message');
         // Alert error Message
-        sAlert.error(message);        
+        sAlert.error(message);
       }
     }
 
