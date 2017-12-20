@@ -81,7 +81,7 @@ Meteor.methods({
     check(query, Object);
 
     // Parse provided file as OpenAPI file
-    const result = Meteor.call('parsedDocument', url);
+    const result = Meteor.call('parsedSwaggerDocument', url);
 
     // Incorrect result if "info" part doesn't exist
     if (!result.info) {

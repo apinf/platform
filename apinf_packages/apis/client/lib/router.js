@@ -32,7 +32,7 @@ FlowRouter.route('/apis/:slug/', {
     const slug = params.slug;
 
     // Check if API exists
-    Meteor.call('getApi', slug, (error, api) => {
+    Meteor.call('getApiBySlug', slug, (error, api) => {
       // Check if API exists
       if (api) {
         // Add RSS Link (only for public apis)

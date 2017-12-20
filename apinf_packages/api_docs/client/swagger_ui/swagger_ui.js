@@ -8,6 +8,12 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
+// Meteor contributed packages imports
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Npm packages import
+import _ from 'lodash';
+
 Template.swaggerUi.onCreated(() => {
   const instance = Template.instance();
   // Set flag on Data is not Ready
@@ -17,22 +23,26 @@ Template.swaggerUi.onCreated(() => {
   const documentationURL = instance.data.api.documentationUrl();
 
   // Parsed swagger file
-  Meteor.call('parsedDocument', documentationURL, (error, result) => {
-    // Document is valid on default
-    instance.documentationValid = true;
-    // Document doesn't contain http protocol on default
-    instance.useHttpProtocol = false;
-
-    // Document is not valid if result is {}
-    if (result === {}) {
-      // Set that document is not valid
+  Meteor.call('parsedSwaggerDocument', documentationURL, (error, result) => {
+    if (error) {
+      sAlert.error(error);
+      // Document is invalid
       instance.documentationValid = false;
-    }
+    } else {
+      // Document is valid
+      instance.documentationValid = true;
 
-    // Checking of scheme contains only http protocol
-    if (result && result.schemes && result.schemes[0] === 'http') {
-      // Set the document contains only http protocol
-      instance.useHttpProtocol = true;
+      // Get "schemes" property or set an empty array on default
+      const schemes = _.get(result, 'schemes', []);
+
+      // Checking of scheme contains only http protocol
+      if (schemes[0] === 'http' && schemes.length === 1) {
+        // Set the document contains only http protocol
+        instance.useHttpProtocol = true;
+      } else {
+        // Document doesn't contain http protocol
+        instance.useHttpProtocol = false;
+      }
     }
 
     // Set flag Data is Ready

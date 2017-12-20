@@ -11,7 +11,7 @@ import { check } from 'meteor/check';
 import Apis from '/apinf_packages/apis/collection';
 
 Meteor.methods({
-  getApi (slug) {
+  getApiBySlug (slug) {
     // Make sure slug is a string
     check(slug, String);
 
@@ -26,5 +26,12 @@ Meteor.methods({
 
     // Return the API
     return api;
+  },
+  getApiById (id) {
+    // Make sure slug is a string
+    check(id, String);
+
+    // Look for API
+    return Apis.findOne(id);
   },
 });

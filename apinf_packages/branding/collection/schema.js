@@ -5,7 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Branding from './';
@@ -26,6 +25,7 @@ Branding.schema = new SimpleSchema({
   'colors.primary': {
     type: String,
     optional: true,
+    defaultValue: '#2fa4e7',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
@@ -33,6 +33,7 @@ Branding.schema = new SimpleSchema({
   'colors.primaryText': {
     type: String,
     optional: true,
+    defaultValue: '#ffffff',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
@@ -40,6 +41,7 @@ Branding.schema = new SimpleSchema({
   'colors.coverPhotoOverlay': {
     type: String,
     optional: true,
+    defaultValue: '#ffffff',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
@@ -49,6 +51,7 @@ Branding.schema = new SimpleSchema({
     min: 0,
     max: 100,
     optional: true,
+    defaultValue: 0,
   },
   siteTitle: {
     type: String,
@@ -88,31 +91,28 @@ Branding.schema = new SimpleSchema({
       rows: 5,
     },
   },
-  socialMedia: {
-    type: [Object],
+  socialMediaLinks: {
+    type: Object,
     optional: true,
   },
-  'socialMedia.$.name': {
-    type: String,
-    optional: true,
-    allowedValues: ['Facebook', 'Twitter', 'Github'],
-    autoform: {
-      firstOption () {
-        return TAPi18n.__('schemas.branding.socialMedia.$.name.firstOption');
-      },
-    },
-  },
-  'socialMedia.$.url': {
+  'socialMediaLinks.facebook': {
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
   },
-  footerCode: {
+  'socialMediaLinks.twitter': {
     type: String,
     optional: true,
-    autoform: {
-      rows: 5,
-    },
+    regEx: SimpleSchema.RegEx.Url,
+  },
+  'socialMediaLinks.github': {
+    type: String,
+    optional: true,
+    regEx: SimpleSchema.RegEx.Url,
+  },
+  analyticCode: {
+    type: String,
+    optional: true,
   },
 });
 
