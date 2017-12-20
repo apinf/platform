@@ -106,7 +106,6 @@ Template.importApiConfiguration.events({
       Meteor.call('importApiConfigs', api, (err, status) => {
         // Error handing
         if (err) sAlert.error(err.reason);
-        console.log(err);
         // Make sure status is successful
         if (status.isSuccessful) {
           // Show message
