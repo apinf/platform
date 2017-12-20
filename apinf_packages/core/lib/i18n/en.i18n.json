@@ -405,6 +405,7 @@
   "import_ApiConfiguration_ImportApi": "Import API",
   "importOpenApiSpecification_text_addApiByImporting": "You can add API by importing the OpenAPI Specification.",
   "importOpenApiSpecification_message_provideSpecification": "You need provide OpenAPI specification using any method",
+  "importApiFile_invalidExtension_message": "Invalid file type. Please provide link of a json, yaml or yml file containing atleast API name and Endpoint URL",
   "importOpenApiSpecification_labelText_provideSpecification": "Provide API Documentation via",
   "importOpenApiSpecification_labelText_linkTo": "Link to OpenAPI Specification",
   "importOpenApiSpecification_labelText_lifecycleStatus": "Lifecycle status",
