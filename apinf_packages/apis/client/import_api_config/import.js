@@ -101,7 +101,7 @@ Template.importApiConfiguration.events({
         const withOutUrl = TAPi18n.__('importApiConfiguration_file_without_url');
         sAlert.error(withOutUrl);
         return;
-        }
+      }
       // Create a new API and get status about action
       Meteor.call('importApiConfigs', api, (err, status) => {
         // Error handing
