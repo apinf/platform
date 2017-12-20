@@ -55,7 +55,7 @@ Template.removeProxy.events({
         } else {
           const message = TAPi18n.__('proxyItem_removeProxy_successMessage');
           sAlert.success(message);
-        }  
+        }
         // Enabled button when request is end
         button.disabled = false;
 
