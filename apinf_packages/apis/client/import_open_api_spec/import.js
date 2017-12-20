@@ -181,14 +181,7 @@ Template.importOpenApiSpecification.events({
       const acceptedExtensions = ['json', 'yml', 'yaml'];
 
       // Make sure the file extension
-      if (!fileNameEndsWith(url.value, acceptedExtensions)) {
-        // Form isn't submitted because of error
-        templateInstance.submitForm.set(false);
-        // Get translated text
-        const message = TAPi18n.__('importApiFile_invalidExtension_message');
-        // Alert error Message
-        sAlert.error(message);
-      } else {
+      if (fileNameEndsWith(url.value, acceptedExtensions)) {
         // Prepare query to insert ApiDocs collection
         const query = { type: 'url', remoteFileUrl: url.value };
 
@@ -208,6 +201,13 @@ Template.importOpenApiSpecification.events({
               templateInstance.errorCase(message, fileId);
             }
           });
+      } else {
+        // Form isn't submitted because of error
+        templateInstance.submitForm.set(false);
+        // Get translated text
+        const message = TAPi18n.__('importApiFile_invalidExtension_message');
+        // Alert error Message
+        sAlert.error(message);        
       }
     }
 
