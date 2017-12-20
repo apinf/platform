@@ -50,8 +50,12 @@ Template.removeProxy.events({
       // Remove proxy and all related proxy backends configurations
       Meteor.call('removeProxy', proxyId, (err) => {
         // Display error if something went wrong
-        if (err) sAlert.error(err);
-
+        if (err) {
+          sAlert.error(err);
+        } else {
+          const message = TAPi18n.__('proxyItem_removeProxy_successMessage');
+          sAlert.success(message);
+        }  
         // Enabled button when request is end
         button.disabled = false;
 

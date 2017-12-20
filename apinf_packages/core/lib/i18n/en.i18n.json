@@ -593,6 +593,7 @@
   "proxyForm_errorText": "All fields with asterisk symbol are required",
   "proxyItem_editProxy": "Edit",
   "proxyItem_removeProxy": "Remove",
+  "proxyItem_removeProxy_successMessage": "Proxy settings were removed",
   "proxyItem_type": "Type",
   "proxyItem_url": "URL",
   "proxyItem_apiKey": "API Key",
