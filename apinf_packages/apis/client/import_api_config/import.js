@@ -90,17 +90,17 @@ Template.importApiConfiguration.events({
       if (api && !api.name && !api.url) {
         const withoutNameUrl = TAPi18n.__('importApiConfiguration_file_without_name_and_url');
         sAlert.error(withoutNameUrl);
-        return ;
+        return;
         // If json doesn't have name
       } else if (api && !api.name) {
-          const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
-          sAlert.error(withOuthName);
-          return ;
+        const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
+        sAlert.error(withOuthName);
+        return;
           // if json does't have url
-        } else if (api && !api.url) {
-          const withOutUrl = TAPi18n.__('importApiConfiguration_file_without_url');
-          sAlert.error(withOutUrl);
-          return ;
+      } else if (api && !api.url) {
+        const withOutUrl = TAPi18n.__('importApiConfiguration_file_without_url');
+        sAlert.error(withOutUrl);
+        return;
         }
       // Create a new API and get status about action
       Meteor.call('importApiConfigs', api, (err, status) => {
