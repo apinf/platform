@@ -26,8 +26,6 @@ cache:
   directories:
     - $HOME/.meteor
 
-group: deprecated-2017Q4
-
 services:
   - docker
 
@@ -38,6 +36,8 @@ before_install:
 before_script:
   - yarn
   - yarn run lint
+  - npm view chimp version
+  - npm view chromedriver version
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
 
