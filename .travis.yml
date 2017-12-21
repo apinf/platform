@@ -26,6 +26,8 @@ cache:
   directories:
     - $HOME/.meteor
 
+group: deprecated-2017Q4
+
 services:
   - docker
 
