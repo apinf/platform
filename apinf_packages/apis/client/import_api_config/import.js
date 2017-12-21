@@ -145,12 +145,12 @@ Template.importApiConfiguration.events({
           }
         }
       });
-      } catch (e) {
+    } catch (e) {
       // Get message text
       const message = TAPi18n.__('importApiConfiguration_jsonError_message');
 
       // Show message
       sAlert.error(message);
-      }
+    }
   },
 });
