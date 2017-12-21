@@ -84,10 +84,13 @@ Template.importApiConfiguration.events({
     event.preventDefault();
 
     // try catch here, so that page does not reload if JSON is incorrect
-    /*try {*/
+    try {
       // parses JSON String to apiConfiguration
       const api = JSON.parse(templateInstance.apiConfiguration.get());
       const apiData = {};
+      Object.keys(api).forEach((key, index) => {
+            apiData[key.toLowerCase()] = api[key];
+      });
       for (let i in api) {
         // Make all key in lowerCase
         apiData[i.toLowerCase()] = api[i];
@@ -95,7 +98,7 @@ Template.importApiConfiguration.events({
       // For valid Url
       const regex = SimpleSchema.RegEx.Url;
       // If json does't contain name and URL
-      if (apiData && !apiData.name && !apiData.url) { 
+      if (apiData && !apiData.name && !apiData.url) {
         const withoutNameUrl = TAPi18n.__('importApiConfiguration_file_without_name_and_url');
         sAlert.error(withoutNameUrl);
         return;
@@ -104,27 +107,27 @@ Template.importApiConfiguration.events({
         const isValidUrl = regex.test(api.url);
         // If Url is invalid and Name field doesn't exist
         if (!isValidUrl && !apiData.name) {
-          const invalidUrlAndWithoutName = TAPi18n.
-          __('importApiConfiguration_file_with_invalid_url_withoutName');
-          sAlert.error(invalidUrlAndWithoutName);
-        } else {
-            // Only name exist
-            const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
-            sAlert.error(withOuthName);
+        const invalidUrlAndWithoutName = TAPi18n
+        .__('importApiConfiguration_file_with_invalid_url_withoutName');
+        sAlert.error(invalidUrlAndWithoutName);
+      } else {
+        // Only name exist
+        const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
+        sAlert.error(withOuthName);
         }
         return;
-          // if json does't have url
+        // if json does't have url
       } else if (apiData && !apiData.url) {
         const withOutUrl = TAPi18n.__('importApiConfiguration_file_without_url');
         sAlert.error(withOutUrl);
         return;
         // If Name and Url exist but invalid Url
-      } else if(apiData && apiData.name && apiData.url) {
-          const isValidUrl = regex.test(api.url);
-          if (!isValidUrl) {
-            const invalidMessage = TAPi18n.__('importApiConfiguration_file_with_invalid_url');
-            sAlert.error(invalidMessage);
-          }
+      } else if (apiData && apiData.name && apiData.url) {
+        const isValidUrl = regex.test(api.url);
+        if (!isValidUrl) {
+          const invalidMessage = TAPi18n.__('importApiConfiguration_file_with_invalid_url');
+          sAlert.error(invalidMessage);
+        }
         return;
       }
       // Create a new API and get status about action
@@ -134,7 +137,7 @@ Template.importApiConfiguration.events({
         // Make sure status is successful
         if (status) {
           if (status.isSuccessful) {
-            // Show message
+          // Show message
             sAlert.success(status.message);
 
             // Redirects to API profile page
@@ -145,12 +148,12 @@ Template.importApiConfiguration.events({
           }
         }
       });
-    /*} catch (e) {
-      // Get message text
-      const message = TAPi18n.__('importApiConfiguration_jsonError_message');
+      } catch (e) {
+        // Get message text
+        const message = TAPi18n.__('importApiConfiguration_jsonError_message');
 
-      // Show message
-      sAlert.error(message);
-    }*/
+        // Show message
+        sAlert.error(message);
+      }
   },
 });
