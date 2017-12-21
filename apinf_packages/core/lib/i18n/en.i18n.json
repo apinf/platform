@@ -358,7 +358,7 @@
   "feedback_feedbackForm_description": "We welcome problem reports, feature ideas and general comments.",
   "feedback_feedbackForm_title": "Send feedback or report a problem",
   "feedback_main_title": "Feedback and report messages",
-  "feedback_no_feedback": "No feedback, yet.",
+  "feedback_no_feedback": "The API contains no feedback or you do not have permission to view them.",
   "feedback_remove_button": "Remove",
   "feedback_replyFeedback": "Reply",
   "feedback_sendFeedback": "Send",
