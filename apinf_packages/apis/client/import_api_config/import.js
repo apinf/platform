@@ -88,13 +88,10 @@ Template.importApiConfiguration.events({
       // parses JSON String to apiConfiguration
       const api = JSON.parse(templateInstance.apiConfiguration.get());
       const apiData = {};
-      Object.keys(api).forEach((key, index) => {
-            apiData[key.toLowerCase()] = api[key];
-      });
-      for (let i in api) {
+      Object.keys(api).forEach((key) => {
         // Make all key in lowerCase
-        apiData[i.toLowerCase()] = api[i];
-      }
+        apiData[key.toLowerCase()] = api[key];
+      });
       // For valid Url
       const regex = SimpleSchema.RegEx.Url;
       // If json does't contain name and URL
@@ -107,13 +104,13 @@ Template.importApiConfiguration.events({
         const isValidUrl = regex.test(api.url);
         // If Url is invalid and Name field doesn't exist
         if (!isValidUrl && !apiData.name) {
-        const invalidUrlAndWithoutName = TAPi18n
-        .__('importApiConfiguration_file_with_invalid_url_withoutName');
-        sAlert.error(invalidUrlAndWithoutName);
-      } else {
+          const invalidUrlAndWithoutName = TAPi18n
+          .__('importApiConfiguration_file_with_invalid_url_withoutName');
+          sAlert.error(invalidUrlAndWithoutName);
+        } else {
         // Only name exist
-        const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
-        sAlert.error(withOuthName);
+          const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
+          sAlert.error(withOuthName);
         }
         return;
         // if json does't have url
@@ -149,11 +146,11 @@ Template.importApiConfiguration.events({
         }
       });
       } catch (e) {
-        // Get message text
-        const message = TAPi18n.__('importApiConfiguration_jsonError_message');
+      // Get message text
+      const message = TAPi18n.__('importApiConfiguration_jsonError_message');
 
-        // Show message
-        sAlert.error(message);
+      // Show message
+      sAlert.error(message);
       }
   },
 });
