@@ -400,10 +400,13 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Check if API with same name already exists
-        if (Apis.findOne({ name: bodyParams.name })) {
-          return errorMessagePayload(400, 'Duplicate: API with same name already exists.');
-        }
+        const duplicateApi = Apis.findOne({ name: bodyParams.name });
 
+        if (duplicateApi) {
+          const detailLine = 'Duplicate: API with same name exists.';
+          const idValue = `${duplicateApi._id}`;
+          return errorMessagePayload(400, detailLine, 'id', idValue);
+        }
 
         // Description must not exceed field length in DB
         if (bodyParams.description) {
