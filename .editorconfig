@@ -10,7 +10,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 # JavaScript and CoffeeScript files
-[*.{js,coffee}]
+[*.{js,coffee,ts}]
 charset = utf-8
 indent_style = space
 indent_size = 2
