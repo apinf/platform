@@ -23,26 +23,43 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </span>
           </button>
           <h4 class="modal-title" id="removeProxyModalLabel">
-            {{_ "removeProxy_modalLabel_title" }}
+            {{# if connectedProxyBackends }}
+              {{_ "removeProxy_modalLabel_cancelTitle" }}
+            {{ else }}
+              {{_ "removeProxy_modalLabel_title" }}
+            {{/ if }}
           </h4>
         </div>
         <div class="modal-body">
-          <strong>{{_ "removeProxy_modalBody_warning" }}</strong>
-          {{_ "removeProxy_modalBody_text" count=connectedProxyBackends }}
+          {{# if connectedProxyBackends }}
+            {{_ "removeProxy_modalBody_cancelText" count=connectedProxyBackends }}
+          {{ else }}
+            <strong>{{_ "removeProxy_modalBody_warning" }}</strong>
+            {{_ "removeProxy_modalBody_text" count=connectedProxyBackends }}
+          {{/ if }}
         </div>
         <div class="modal-footer">
-          <button
-            type="submit"
-            class="btn btn-danger"
-            id="confirm-remove-proxy">
-            {{_ "removeProxy_buttonText_confirmRemoveProxy" }}
-          </button>
-          <button
-            type="button"
-            class="btn btn-default"
-            data-dismiss="modal">
-            {{_ "removeProxy_buttonText_cancelRemove" }}
-          </button>
+          {{# if connectedProxyBackends }}
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal">
+              {{_ "removeProxy_buttonText_cancel" }}
+            </button>
+          {{ else }}
+            <button
+              type="submit"
+              class="btn btn-danger"
+              id="confirm-remove-proxy">
+              {{_ "removeProxy_buttonText_confirmRemoveProxy" }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal">
+              {{_ "removeProxy_buttonText_cancelRemove" }}
+            </button>
+          {{/ if }}
         </div>
       </div>
     </div>
