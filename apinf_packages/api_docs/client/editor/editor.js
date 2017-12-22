@@ -15,6 +15,8 @@ Template.openApiEditor.onRendered(function () {
 
   // Get login user id
   const userId = Meteor.userId();
+
+  // Account-base package puts login token in local storage
   // Get login token
   const loginToken = localStorage.getItem('Meteor.loginToken');
 
