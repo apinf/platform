@@ -5,6 +5,7 @@
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
+import { Meteor } from 'meteor/meteor';
 
 Template.openApiEditor.onRendered(function () {
   const designer = document.getElementById('designer-iframe').contentWindow;
@@ -12,7 +13,16 @@ Template.openApiEditor.onRendered(function () {
   // Get URL of document
   const documentation = this.data.api.documentationUrl();
 
+  // Get login user id
+  const userId = Meteor.userId();
+
+  // Account-base package puts login token in local storage
+  // Get login token
+  const loginToken = localStorage.getItem('Meteor.loginToken');
+
   designer.postMessage({
+    apinfUserID: userId,
+    apinfToken: loginToken,
     noDelete: true,
     swagger: documentation,
   }, '*');
