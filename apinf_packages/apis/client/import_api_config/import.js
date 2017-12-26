@@ -94,41 +94,46 @@ Template.importApiConfiguration.events({
       });
       // For valid Url
       const regex = SimpleSchema.RegEx.Url;
+
+      let isValidUrl = true;
+      if (apiData.url)
+        isValidUrl = regex.test(apiData.url);
+      
       // If json does't contain name and URL
       if (apiData && !apiData.name && !apiData.url) {
         const withoutNameUrl = TAPi18n.__('importApiConfiguration_file_without_name_and_url');
         sAlert.error(withoutNameUrl);
         return;
+
+        // If json doesn't have name and valid url
+      } else if (apiData && !apiData.name && !isValidUrl) {
+        const isValidUrl = regex.test(apiData.url);
+        const invalidUrlAndWithoutName = TAPi18n
+        .__('importApiConfiguration_file_with_invalid_url_withoutName');
+        sAlert.error(invalidUrlAndWithoutName);
+        return;
+
         // If json doesn't have name
       } else if (apiData && !apiData.name) {
-        const isValidUrl = regex.test(api.url);
-        // If Url is invalid and Name field doesn't exist
-        if (!isValidUrl && !apiData.name) {
-          const invalidUrlAndWithoutName = TAPi18n
-          .__('importApiConfiguration_file_with_invalid_url_withoutName');
-          sAlert.error(invalidUrlAndWithoutName);
-        } else {
-        // Only name exist
-          const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
-          sAlert.error(withOuthName);
-        }
+        const withOuthName = TAPi18n.__('importApiConfiguration_file_without_name');
+        sAlert.error(withOuthName);
         return;
+
         // if json does't have url
       } else if (apiData && !apiData.url) {
         const withOutUrl = TAPi18n.__('importApiConfiguration_file_without_url');
         sAlert.error(withOutUrl);
         return;
+
         // If Name and Url exist but invalid Url
-      } else if (apiData && apiData.name && apiData.url) {
-        const isValidUrl = regex.test(api.url);
-        if (!isValidUrl) {
-          const invalidMessage = TAPi18n.__('importApiConfiguration_file_with_invalid_url');
-          sAlert.error(invalidMessage);
-        }
+      } else if (apiData && apiData.name && apiData.url && !isValidUrl) {
+        const invalidMessage = TAPi18n.__('importApiConfiguration_file_with_invalid_url');
+        sAlert.error(invalidMessage);
         return;
       }
+
       // Create a new API and get status about action
-      Meteor.call('importApiConfigs', api, (err, status) => {
+      Meteor.call('importApiConfigs', apiData, (err, status) => {
         // Error handing
         if (err) sAlert.error(err.reason);
         // Make sure status is successful
