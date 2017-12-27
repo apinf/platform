@@ -12,6 +12,7 @@ import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Session } from 'meteor/session';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -197,6 +198,7 @@ Template.apiCatalog.onCreated(function () {
       currentFilters._id = { $in: apiIds };
     }
 
+    instance.pagination.currentPage([Session.get('currentIndex')]);
     instance.pagination.filters(currentFilters);
   });
 });
@@ -227,6 +229,12 @@ Template.apiCatalog.helpers({
   templatePagination () {
     // Get reference of pagination
     return Template.instance().pagination;
+  },
+  clickEvent () {
+    return (e, templateInstance, clickedPage) => {
+      e.preventDefault();
+      Session.set('currentIndex', clickedPage);
+    };
   },
   gridViewMode () {
     // Get view mode from template

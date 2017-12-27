@@ -32,7 +32,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
       <!-- show pagination button only if APIs are available -->
       {{# if apis }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
       {{/ if }}
     {{ else }}
       {{> spinner }}
