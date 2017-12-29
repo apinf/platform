@@ -1,0 +1,176 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAnalyticPageBody">
+  <div data-overview-id="{{ proxyBackendId }}">
+    <div class="row">
+      <!-- Requests number -->
+      <div class="col-xs-12 col-md-4">
+        <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_text_requestsCount' count=(getStatistics 'requests') }}
+          </p>
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_chartTitle_apiRequests' }}
+          </p>
+          <div class="form-group">
+            {{# if overviewChartResponse }}
+              {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=proxyBackendId }}
+            {{ else }}
+              {{> spinner}}
+            {{/ if }}
+          </div>
+
+          {{# with comparisonData }}
+            <div class="form-group">
+              <div class="{{ arrowDirection 'requests' }}"></div>
+              <!-- Keep the space symbol to set SPAN element a height -->
+              <span>
+                {{ summaryComparing 'requests' }}&nbsp;
+              </span>
+            </div>
+          {{/ with }}
+
+          <!-- response status list-->
+          <div class="row">
+            <span class="text-success col-xs-6 col-md-3">
+              2XX: {{ getStatusCode 'success' }}
+            </span>
+            <span class="text-info col-xs-6 col-md-3">
+              3XX: {{ getStatusCode 'redirect' }}
+            </span>
+            <span class="text-warning col-xs-6 col-md-3">
+              4XX: {{ getStatusCode 'fail' }}
+            </span>
+            <span class="text-danger col-xs-6 col-md-3">
+              5XX: {{ getStatusCode 'error' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- response time chart -->
+      <div class="col-xs-12 col-md-4">
+        <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_text_responseTime' time=(getStatistics 'time') }}
+          </p>
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_chartTitle_medianResponseTime' }}
+          </p>
+          <div class="form-group">
+            {{# if overviewChartResponse }}
+              {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackendId }}
+            {{ else }}
+              {{> spinner}}
+            {{/ if }}
+          </div>
+          {{# with comparisonData }}
+            <div class="form-group">
+              <div class="{{ arrowDirection 'time' }}"></div>
+              <!-- Keep the space symbol to set SPAN element a height -->
+              <span>
+                {{ summaryComparing 'time' }}&nbsp;
+              </span>
+            </div>
+          {{/ with }}
+          <!-- Keep the space symbol to set a height the element a height -->
+          <div class="row">&nbsp;</div>
+        </div>
+      </div>
+
+      <!-- unique users chart -->
+      <div class="col-xs-12 col-md-4">
+        <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_text_usersCount' count=(getStatistics 'users') }} <sup>*</sup>
+          </p>
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_chartTitle_uniqueUsers' }}
+          </p>
+          <div class="form-group">
+            {{# if overviewChartResponse }}
+              {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=proxyBackendId }}
+            {{ else }}
+              {{> spinner}}
+            {{/ if }}
+          </div>
+          {{# with comparisonData }}
+            <div class="form-group">
+              <div class="{{ arrowDirection 'users' }}"></div>
+              <!-- Keep the space symbol to set SPAN element a height -->
+              <span>
+                {{ summaryComparing 'users' }}&nbsp;
+              </span>
+            </div>
+          {{/ with }}
+          <div class="overview-help-text">
+            <sup>*</sup> {{_ 'apiAnalyticPageBody_helpText_averageUniqueUsers' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- request timeline chart -->
+      <div class="col-xs-12 col-md-6">
+        <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_timelineChartTitle_requests' }}
+          </p>
+          {{# if timelineChartData }}
+            {{> requestTimeline chartData=timelineChartData listPaths=listPaths }}
+          {{ else }}
+            {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+
+      <!-- response time timeline chart -->
+      <div class="col-xs-12 col-md-6">
+        <div class="api-view-card form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_timelineChartTitle_time' }}
+          </p>
+          {{# if timelineChartData }}
+            {{> responseTimeTimeline chartData=timelineChartData listPaths=listPaths }}
+          {{ else }}
+            {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- table with list of errors -->
+      <div class="col-xs-12 col-md-6">
+        <div class="api-view-card table-view form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_title_errorsStatistic' }}
+          </p>
+          {{# if errorsStatisticsResponse }}
+            {{> errorsStatisticTable errorsStatistic=errorsStatisticsData }}
+          {{ else }}
+            {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+
+      <!-- table with most frequent users -->
+      <div class="col-xs-12 col-md-6">
+        <div class="api-view-card table-view form-group">
+          <p class="overview-col-title">
+            {{_ 'apiAnalyticPageBody_title_mostUsers' }}
+          </p>
+          {{# if frequentUsersResponse }}
+            {{> mostFrequentUsersTable frequentUsers=frequentUsersData }}
+          {{ else }}
+            {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

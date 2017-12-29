@@ -1,0 +1,27 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="addOrganizationManagerForm">
+  <h3>
+    {{_ "addOrganizationManagerForm_title" }}
+  </h3>
+  <p>
+    {{_ "addOrganizationManagerForm_description" }}
+  </p>
+    {{# autoForm
+    schema=managerSchema
+    id="organizationManagerForm"
+    class="form-inline"
+    type="method"
+    meteormethod="addOrganizationManagerByEmail"}}
+
+    {{> afQuickField name='email' id="manager-email" }}
+    {{> afQuickField name='organizationId' value=organization._id type="hidden" }}
+
+    <button type="submit" class="btn btn-primary" id="add-manager">
+      {{_ "addOrganizationManagerForm_button" }}
+    </button>
+  {{/ autoForm }}
+</template>

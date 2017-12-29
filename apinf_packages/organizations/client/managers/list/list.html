@@ -1,0 +1,23 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationManagersList">
+  <ul class="list-group">
+    {{# each organizationManagers }}
+      <li class="list-group-item">
+        {{ username }}
+        ({{ email }})
+
+        {{# if hasMultipleManagers }}
+          <button
+            id="remove-organization-manager"
+            class="btn btn-danger btn-xs pull-right">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        {{/ if }}
+      </li>
+    {{/ each }}
+  </ul>
+</template>

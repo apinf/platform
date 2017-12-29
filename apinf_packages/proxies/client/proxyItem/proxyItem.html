@@ -1,0 +1,133 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="proxyItem">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        {{ proxy.name }}
+      </div>
+    </div>
+    <div class="panel-body">
+      <p>
+        {{ proxy.description }}
+      </p>
+      <br>
+      {{# if equals proxy.type 'apiUmbrella' }}
+        <table class="table table-condensed">
+          <tbody>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_type" }}
+              </th>
+              <td>
+                {{ proxy.type }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_url" }}
+              </th>
+              <td>
+                {{ proxy.apiUmbrella.url }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_apiKey" }}
+              </th>
+              <td>
+                *****
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_apiToken" }}
+              </th>
+              <td>
+                *****
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_elasticsearch" }}
+              </th>
+              <td>
+                {{ proxy.apiUmbrella.elasticsearch }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      {{/ if }}
+      {{# if equals proxy.type 'emq' }}
+        <table class="table table-condensed">
+          <tbody>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_type" }}
+              </th>
+              <td>
+                {{ proxy.type }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_brokerEndpoints" }}
+              </th>
+              <td>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_protocol" }}</th>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_host"}}</th>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_port" }}</th>
+                      <th>{{_ "proxyItem_brokerEndpoints_table_tls" }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{# each brokerEndpoint in proxy.emq.brokerEndpoints }}
+                      <tr>
+                        <td>{{ brokerEndpoint.protocol }}</td>
+                        <td>{{ brokerEndpoint.host }}</td>
+                        <td>{{ brokerEndpoint.port }}</td>
+                        <td>{{ brokerEndpoint.tls }}</td>
+                      </tr>
+                    {{/ each }}
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_httpApi" }}
+              </th>
+              <td>
+                {{ hideCredentials proxy.emq.httpApi }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_elasticsearch" }}
+              </th>
+              <td>
+                {{ proxy.emq.elasticsearch }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      {{/ if }}
+    </div>
+    <div class="panel-footer">
+      <div class="text-right">
+        <button class="btn btn-success btn-xs" id="edit-proxy">
+          {{_ "proxyItem_editProxy" }}
+        </button>
+        <button class="btn btn-danger btn-xs" id="remove-proxy">
+          {{_ "proxyItem_removeProxy" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</template>

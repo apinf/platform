@@ -1,0 +1,37 @@
+<template name="emqUsers">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{_ "proxyBackendForm_emqUsers_title" }}
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_id" }}</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_username" }}</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_password" }}</th>
+            <th>{{_ "proxyBackendForm_emqUsers_userTable_actions" }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{# each emqUsers }}
+            <tr id="emq-user-{{ id }}">
+              <td>{{ id }}</td>
+              <td>{{ username }}</td>
+              <td>*****</td>
+              <td class="text-right">
+                <a id="remove-emq-user-confirmation" class="btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </td>
+            </tr>
+          {{/ each }}
+        </tbody>
+      </table>
+      <a id="add-emq-user-modal" class="btn btn-xs btn-info">
+        <span class="glyphicon glyphicon-plus"></span>
+        {{_ "proxyBackendForm_emqUsers_addUserButton" }}
+      </a>
+    </div>
+  </div>
+</template>

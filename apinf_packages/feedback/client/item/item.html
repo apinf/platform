@@ -1,0 +1,96 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="feedbackItem">
+  {{# if item.currentUserCanSee }}
+    <div class="api-feedback-item {{ checkIsPrivate }}">
+      <div id="reply-{{item._id}}">
+        <div class="row">
+          <div class="col-md-10">
+            {{# unless item.isPublic }}
+              <span class="private-feedback">
+                  <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+              </span>
+            {{/ unless }}
+            <p class="feedback-topic">
+              {{ item.topic }}&nbsp;
+              <span class="badge">
+                {{ feedbackType }}
+              </span>
+              </p>
+            <div class="feedback-author">
+              <p>
+                <span>
+                  {{ item.author }}
+                </span>
+                {{ relativeTimeStamp item.createdAt }}
+              </p>
+            </div>
+          </div>
+          {{# if item.currentUserCanChangeVisibility }}
+            <div class="col-md-2">
+              <a
+                href="#"
+                class="dropdown-toggle pull-right"
+                data-toggle="dropdown"
+                role="button"
+                id="feedback-menu"
+                aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </a>
+              <ul id="feedback-menu-options" class="dropdown-menu pull-right">
+                <li>
+                   <a href="#" class="edit-feedback-item">
+                    {{_ "feedbackItem_editButton_text" }}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="visibility-feedback-item">
+                      {{# if item.isPublic }}
+                        {{_ "feedbackItem_visibilityButton_makePrivate" }}
+                      {{ else }}
+                        {{_ "feedbackItem_visibilityButton_makePublic" }}
+                      {{/ if }}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="delete-feedback-item">
+                    {{_ "feedbackItem_deleteButton_text" }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {{/ if }}
+        </div>
+
+        <div class="feedback-message">
+          <p>
+            {{ item.message }}
+          </p>
+        </div>
+        {{# if currentUser }}
+          <div class="row">
+            <div class="col-md-10">
+              <button id="{{item._id}}" class="pull-left feedback-reply">
+                {{_ "feedback_replyFeedback" }}
+              </button>
+            </div>
+            <div class="col-md-2">
+              <div class="pull-right">
+                <span id="down-vote-{{ item._id }}" class="fa fa-lg fa-angle-down down-vote {{ userDownvote }}"></span>
+                <span class="sum-of-votes {{checkVote item.sumOfVotes}}">
+                  {{ item.sumOfVotes }}
+                </span>
+                <span id="up-vote-{{ item._id }}" class="fa fa-lg fa-angle-up up-vote {{ userUpvote }}"></span>
+              </div>
+            </div>
+          </div>
+        {{/ if }}
+      </div>
+      {{> feedbackComment item=item }}
+    </div>
+  {{/ if }}
+</template>

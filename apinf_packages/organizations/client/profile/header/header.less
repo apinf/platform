@@ -1,0 +1,92 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+.organization-cover-block {
+  width: 100%;
+  height: 300px; // this controls a size of the cover
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  margin-top: -2em; // this controls position of the cover
+  z-index: -1;
+
+  .organization-cover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto 0;
+    width: 100%;
+  }
+}
+
+.organization-about-block {
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15),
+              -1px 0 0 rgba(0,0,0,0.03),
+              1px 0 0 rgba(0,0,0,0.03),
+              0 1px 0 rgba(0,0,0,0.12);
+  display: block;
+  min-height: 60px;
+  margin-bottom: 2em;
+  margin-top: -3em;
+  z-index: 1;
+
+  .org-logo-wrapper {
+    float: left;
+    min-height: 100px;
+    min-width: 150px;
+    position: relative;
+    width: auto;
+
+    img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      border: 5px solid #fff;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15),
+                  -1px 0 0 rgba(0, 0, 0, 0.03),
+                  1px 0 0 rgba(0, 0, 0, 0.03),
+                  0 1px 0 rgba(0, 0, 0, 0.12);
+      border-radius: 5px;
+      background-color: #fff;
+    }
+  }
+
+  .about-organization {
+    display: block;
+    margin-left: 1em;
+
+    h1 {
+      font-weight: 600;
+      margin-top: 0.7em;
+      font-size: 1.8em;
+    }
+  }
+
+  .org-logo-wrapper span {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    text-align: center;
+  }
+
+  .org-logo-wrapper:hover span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+}

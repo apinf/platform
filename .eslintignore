@@ -1,10 +1,9 @@
-apis/client/profile/visibility/lib/bootstrap-switch.js
-api_media/lib/client/jquery.oembed.all.js
-related_media/client/lib/jquery.oembed.all.js
-core/client/lib/bootstrap-select/*
-core/client/lib/chartsjs/*
-dashboard/client/charts/filtering/datepicker/
-dashboard/client/charts/filtering/selectpicker/
+/apinf_packages/apis/client/profile/visibility/lib/bootstrap-switch.js
+/apinf_packages/related_media/client/lib/jquery.oembed.all.js
+/apinf_packages/core/client/lib/bootstrap-select/*
+/apinf_packages/core/client/lib/chartsjs/*
+/apinf_packages/dashboard/client/charts/filtering/datepicker/
+/apinf_packages/dashboard/client/charts/filtering/selectpicker/
 node_modules/
 public/
 scripts/

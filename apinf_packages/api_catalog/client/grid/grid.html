@@ -1,0 +1,24 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiCatalogGrid">
+  <div class="row">
+    {{# if Template.subscriptionsReady }}
+      {{# if apis.length }}
+        {{# each api in apis }}
+          <div class="col-grid col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            {{> apiCard api=api organization=organization }}
+          </div>
+        {{/ each }}
+      {{ else }}
+        <div class="col-xs-12">
+          <p>
+            {{_ 'apiCatalog_noApis_Found' }}
+          </p>
+        </div>
+      {{/ if }}
+    {{/ if }}
+  </div>
+</template>

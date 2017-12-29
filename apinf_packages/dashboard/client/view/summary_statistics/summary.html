@@ -1,0 +1,84 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardSummaryStatistic">
+  {{# if proxyBackends }}
+    <!-- Table head -->
+    <h4>
+      {{ tableTitle }} ({{ proxyBackends.length }})
+    </h4>
+
+    <div class="dashboard-table-row statistic-title">
+      <div class="row">
+        <div class="col-xs-3">
+          {{_ 'dashboardSummaryStatistic_columnTitle_apiName' }}
+        </div>
+        <div class="col-xs-3">
+          {{_ 'dashboardSummaryStatistic_columnTitle_requestsNumber' }}
+        </div>
+        <div class="col-xs-3">
+          {{_ 'dashboardSummaryStatistic_columnTitle_responseTime' }}
+        </div>
+        <div class="col-xs-3">
+          {{_ 'dashboardSummaryStatistic_columnTitle_users' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="statistic-block">
+      <!-- Table body -->
+      {{# each proxyBackend in proxyBackends }}
+        <div data-id="{{ proxyBackend._id }}" class="dashboard-table-row statistic-line">
+          <div class="row">
+            <div class="col-xs-3">
+              {{ proxyBackend.apiName }}
+            </div>
+            <div class="col-xs-3">
+              <span class="request-number">
+                {{ getCount proxyBackend.frontendPrefix 'requests' }}
+              </span>
+              {{# with comparisonData proxyBackend.frontendPrefix  }}
+                <div class="{{ arrowDirection 'requests' }}"></div>
+                <span class="{{ textColor 'requests' }}">
+                  {{ percentages 'requests' }}
+                </span>
+              {{/ with }}
+            </div>
+            <div class="col-xs-3">
+              <span class="response-time">
+                {{ getCount proxyBackend.frontendPrefix 'time' }} ms
+              </span>
+              {{# with comparisonData proxyBackend.frontendPrefix  }}
+                <div class="{{ arrowDirection 'time' }}"></div>
+                <span class="{{ textColor 'time' }}">
+                  {{ percentages 'time' }}
+                </span>
+              {{/ with }}
+            </div>
+            <div class="col-xs-3">
+              <span class="unique-users">
+                {{ getCount proxyBackend.frontendPrefix 'users' }}
+              </span>
+              {{# with comparisonData proxyBackend.frontendPrefix  }}
+                <div class="{{ arrowDirection 'users' }}"></div>
+                <span class="{{ textColor 'users' }}">
+                  {{ percentages 'users' }}
+                </span>
+              {{/ with }}
+            </div>
+          </div>
+        </div>
+        {{# if displayOverview proxyBackend._id }}
+          {{> dashboardOverviewStatistic proxyBackend=proxyBackend
+            overviewChartResponse=overviewChartResponse
+            summaryStatisticResponse=summaryStatisticResponse
+            comparisonStatisticResponse=comparisonStatisticResponse
+            statusCodesResponse=statusCodesResponse
+          }}
+        {{/ if }}
+      {{/ each}}
+    </div>
+  {{/ if }}
+</template>

@@ -1,0 +1,62 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="viewApi">
+  {{# if Template.subscriptionsReady }}
+    {{> viewApiPageHeader
+      api=api
+      proxyIsConfigured=proxyIsConfigured
+      proxyIsEmq=proxyIsEmq
+      proxyBackend=proxyBackend }}
+    <div class="container">
+      <div class="tab-content">
+        <div id="api-details" class="tab-pane fade in active">
+          {{> apiDetails api=api proxyBackend=proxyBackend }}
+        </div> <!-- /api-backend-details -->
+
+        <div id="api-documentation" class="tab-pane fade">
+          {{> apiDocumentation api=api apiDoc=apiDoc }}
+        </div> <!-- /api-documentation -->
+
+        <div id="api-metadata" class="tab-pane fade">
+          {{> viewApiMetadata api=api }}
+        </div> <!-- /api-metadata -->
+
+        <div id="api-feedback" class="tab-pane fade">
+          {{> apiFeedback api=api feedbackItems=feedbackItems }}
+        </div> <!-- /api-feedback -->
+
+        {{# if currentUser }}
+          {{# if api.currentUserCanManage }}
+            <div id="api-export" class="tab-pane fade">
+              {{> apiExport api=api proxyBackend=proxyBackend }}
+            </div> <!-- /api-export -->
+          {{/ if }}
+        {{/ if }}
+
+        <div id="api-backlog" class="tab-pane fade">
+          {{> apiBacklog api=api backlogItems=backlogItems }}
+        </div> <!-- /api-backlog -->
+
+        {{# if currentUser }}
+          {{# if api.currentUserCanManage }}
+
+            {{# if proxyIsConfigured }}
+              <div id="api-proxy" class="tab-pane fade">
+                {{> apiProxy api=api proxyBackend=proxyBackend }}
+              </div> <!-- /api-proxy -->
+            {{/ if }}
+
+            <div id="api-settings" class="tab-pane fade">
+              {{> apiSettings api=api }}
+            </div>
+          {{/ if }}
+        {{/ if }}
+      </div>
+    </div>
+  {{ else }}
+    {{> spinner }}
+  {{/ if }}
+</template>

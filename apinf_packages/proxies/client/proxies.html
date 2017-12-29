@@ -1,0 +1,36 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="proxies">
+  <div class="container padded-container">
+    <div class="row">
+      {{> settingsMenu }}
+      <div class="col-md-6">
+        <h2>
+          <button class="btn btn-default btn-sm pull-right" id="add-proxy">
+            {{_ "proxies_addProxy" }}
+          </button>
+          {{_ "proxies_pageHeader" }}
+        </h2>
+        <hr>
+        <div>
+          {{# if Template.subscriptionsReady }}
+            {{# if proxies }}
+              {{# each proxy in proxies }}
+                 {{> proxyItem proxy=proxy }}
+              {{/ each }}
+            {{ else }}
+              <p class="text-center">
+                <i>
+                  {{_ "proxies_noProxiesFound" }}
+                </i>
+              </p>
+            {{/ if }}
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

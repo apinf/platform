@@ -1,0 +1,99 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="homeBody">
+  <div class="coverphoto" style="background-image: url({{ coverPhotoUrl }})">
+    <div class="container" id="headerwrap">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+          <h1 id="site-title" class="text-center">
+            {{ branding.siteTitle }}
+            <br>
+            <small id="site-slogan" >
+              {{ branding.siteSlogan }}
+            </small>
+          </h1>
+        </div>
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="search-box">
+            {{> searchField }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="features">
+    {{> homePageApis }}
+  </div>
+  
+  {{# if contactFormEnabled }}
+    <div id="contact-us" class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="feature-section-heading">
+            {{_ "homeBody_contactUs_heading" }}
+          </h2>
+          <hr class="primary">
+          <h4 class="text-muted">
+            {{_ "homeBody_contactUs_text" }}
+          </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-push-3">
+          {{> contactForm }}
+        </div>
+      </div>
+    </div>
+  {{/ if }}
+  <!-- Statistics Block Message -->
+  <div class="container" id="statisticswrap">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="media">
+          <div class="media-body">
+            <h2 class="media-heading">
+              <p class="count">
+                {{ apisCount }}
+              </p>
+              <p>
+                {{_ "homeBody_featureSection_statistics_apisCount_heading" }}
+              </p>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media">
+          <div class="media-body" >
+            <h2 class="media-heading">
+              <p class="count">
+                {{ organizationsCount }}
+              </p>
+              <p>
+                {{_ "homeBody_featureSection_statistics_organizationsCount_heading" }}
+              </p>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="media">
+          <div class="media-body">
+            <h2 class="media-heading">
+              <p class="count">
+                {{ usersCount }}
+              </p>
+              <p>
+                {{_ "homeBody_featureSection_statistics_usersCount_heading" }}
+              </p>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Statistics Block Message -->
+</template>

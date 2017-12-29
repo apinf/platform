@@ -1,0 +1,67 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="removeProxy">
+  <div
+    class="modal fade"
+    id="removeProxyModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="removeProxyModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">
+              &times;
+            </span>
+          </button>
+          <h4 class="modal-title" id="removeProxyModalLabel">
+            {{# if connectedProxyBackends }}
+              {{_ "removeProxy_modalLabel_cancelTitle" }}
+            {{ else }}
+              {{_ "removeProxy_modalLabel_title" }}
+            {{/ if }}
+          </h4>
+        </div>
+        <div class="modal-body">
+          {{# if connectedProxyBackends }}
+            {{_ "removeProxy_modalBody_cancelText" count=connectedProxyBackends }}
+          {{ else }}
+            <strong>{{_ "removeProxy_modalBody_warning" }}</strong>
+            {{_ "removeProxy_modalBody_text" count=connectedProxyBackends }}
+          {{/ if }}
+        </div>
+        <div class="modal-footer">
+          {{# if connectedProxyBackends }}
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal">
+              {{_ "removeProxy_buttonText_cancel" }}
+            </button>
+          {{ else }}
+            <button
+              type="submit"
+              class="btn btn-danger"
+              id="confirm-remove-proxy">
+              {{_ "removeProxy_buttonText_confirmRemoveProxy" }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal">
+              {{_ "removeProxy_buttonText_cancelRemove" }}
+            </button>
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

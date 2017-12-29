@@ -1,0 +1,66 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="proxyBackend">
+  {{# autoForm
+      collection=proxyBackendsCollection
+      id="proxyBackendForm"
+      type=formType
+      doc=apiProxySettings
+      validation="keyup"
+  }}
+
+    <!-- hidden fields, auto-value -->
+    {{> afQuickField name="apiId" value=api._id type="hidden" }}
+
+    <!-- visible fields -->
+    <!-- Selector for proxy list if proxyies are more one otherwise hidden field-->
+    {{# if oneProxy }}
+      {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
+    {{ else }}
+      {{> afQuickField name="proxyId" firstOption=false id="proxy-selector" }}
+    {{/ if }}
+
+    <!-- Check which proxy is selected and render related fields -->
+
+    <!-- API Umbrella -->
+    {{# if equals proxy.type "apiUmbrella" }}
+
+      {{> apiUmbrellaProxyForm proxy=proxy proxyHost=proxyHost api=api }}
+
+    {{/ if }}
+
+    <!-- EMQ -->
+    {{# if equals proxy.type "emq" }}
+
+      {{> emqProxyForm }}
+
+    {{/ if }}
+
+    <div id="proxy-form-buttons" class="btn-group">
+      <!-- submit button -->
+      <button
+          type="submit"
+          class="btn btn-success"
+          id="save-proxy-button">
+        {{_ "proxyBackendForm_saveButton" }}
+      </button>
+      <!-- delete button -->
+      {{# if showDeleteButton }}
+        <button
+            type="button"
+            class="btn btn-danger"
+            id="delete-proxy-button">
+          {{_ "proxyBackendForm_deleteButton" }}
+        </button>
+      {{/ if }}
+    </div>
+
+    {{# if equals proxy.type "emq" }}
+      {{> emqUsers proxyId=proxy._id }}
+    {{/ if }}
+
+  {{/ autoForm }}
+</template>

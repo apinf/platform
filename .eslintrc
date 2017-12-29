@@ -44,7 +44,7 @@
     "no-underscore-dangle": [
       2,
       {
-        "allow": ["_id", "__", "_initialized"]
+        "allow": ["_id", "__", "_initialized", "_config", "_debug", "_schema"]
       }
     ],
     "no-negated-condition": [

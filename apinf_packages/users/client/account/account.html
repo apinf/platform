@@ -1,0 +1,44 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="account">
+  <div class="container padded-container">
+    <div class="row">
+      {{> settingsMenu }}
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "account_details" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            {{> updatePassword }}
+          </div>
+        </div>
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "account_delete_title" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            <p>
+              {{_ "account_delete_warning" }}
+            </p>
+            <p>
+              <a class="btn btn-danger" id="delete-account-button">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                &nbsp;
+                {{_ "account_delete_button_text" }}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

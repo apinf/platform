@@ -1,0 +1,45 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationCatalog">
+  <div class="container">
+    <h1 class="page-header">
+      {{_ "organizationCatalog_Title" }}
+      {{# if organizationCount }}
+        <small>
+          {{_ 'organizationCatalog_organizationCount' count=organizationCount }}
+        </small>
+      {{/ if }}
+      {{# if userCanAddOrganization }}
+        <button id="add-organization" type="button" class="btn btn-default pull-right">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          {{_ "organizationCatalog_buttonText_addOrganization" }}
+        </button>
+      {{/ if }}
+    </h1>
+    {{> organizationCatalogToolbar }}
+    {{# if Template.subscriptionsReady }}
+      {{# if paginationReady }}
+        {{# if organizations }}
+          <!-- if viewMode is grid, show grid -->
+          {{# if gridViewMode }}
+            {{> organizationCatalogGrid organizations=organizations }}
+          {{/ if }}
+          <!-- if viewMode is table, show table -->
+          {{# if tableViewMode }}
+            {{> organizationCatalogTable organizations=organizations }}
+          {{/ if }}
+          {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
+        {{ else }}
+          <!-- Show no organizations message -->
+          {{> noOrganizationsMessage }}
+        {{/ if }}
+      {{/ if }}
+    {{ else }}
+      <!-- If no data yet available show spinner -->
+      {{> spinner }}
+    {{/ if }}
+  </div>
+</template>

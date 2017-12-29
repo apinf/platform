@@ -1,0 +1,52 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationSettings">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        {{> organizationSettingsGeneral organization=organization }}
+
+        <div class="setting-section">
+          <h3>
+            {{_ "organizationSettingsCoverAndLogo_title" }}
+          </h3>
+
+          <label>
+            {{_ "organizationSettings_uploadLogo_heading" }}
+          </label>
+          <p>
+            {{_ "organizationSettings_uploadLogoText" }}
+          </p>
+
+          {{> uploadOrganizationLogo organization=organization }}
+
+          <label>
+            {{_ "organizationSettings_uploadCover_heading" }}
+          </label>
+
+          <p>
+            {{_ "organizationSettings_uploadCoverText" }}
+          </p>
+
+          {{> uploadOrganizationCover organization=organization }}
+        </div>
+
+        {{> organizationSettingsPagination organization=organization }}
+        {{> organizationSettingsSocialMedia organization=organization }}
+        {{> organizationSettingsContactInfo organization=organization }}
+
+        <div class="setting-section">
+          {{> addOrganizationManagerForm organization=organization }}
+          {{> organizationManagersList organization=organization }}
+        </div>
+
+        {{> organizationSettingsDelete organization=organization }}
+
+      </div>
+    </div>
+  </div>
+</template>

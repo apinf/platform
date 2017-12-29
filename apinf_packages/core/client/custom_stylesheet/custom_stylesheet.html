@@ -1,0 +1,97 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="customStylesheet">
+  <style>
+    footer {
+      background-color: {{ primaryColor }};
+    }
+
+    .footer-text, footer a, footer a:hover, footer a:focus {
+      color: {{ primaryColorText }};
+    }
+
+    #language-select, #language-select:focus, #language-select:active {
+      color: {{ primaryColorText}};
+      background-color: {{ primaryColor }};
+      border: 1px solid {{ primaryColor }};
+      margin-left: -0.7em;
+    }
+
+    .coverphoto {
+      background-color: {{ primaryColor }} !important;
+    }
+
+    .dropdown-toggle {
+      background-color: {{ mostReadableBackground }} !important;
+      color: {{ primaryColorText }} !important;
+    }
+
+    .project-name-link {
+      color: {{ primaryColorText }} !important;
+    }
+
+    .introjs-bullets ul li a.active {
+      background: {{ primaryColor }} !important;
+    }
+
+    .main-navigation {
+      background-color: {{ primaryColor }} !important;
+    }
+
+    .navbar-nav > li > a:hover,
+    .navbar-nav > .active > a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
+      background-color: {{ mostReadableBackground }} !important;
+    }
+
+    .search-box {
+      background-color: {{ primaryColor }} !important;
+    }
+
+    .media-heading {
+      color: {{ primaryColorText }} !important;
+    }
+
+    #api-navigation-tabs .nav-tabs > li.active > a {
+      border-top-color: {{ primaryColor }} !important;
+    }
+
+    #statisticswrap {
+      background-color: {{ primaryColor }};
+      color: {{ primaryColorText }};
+    }
+
+    #headerwrap {
+      background: {{ coverPhotoOverlay }};
+    }
+
+    /* Only select top-level navigation menu items */
+    #main-navbar > li > a {
+      color: {{ primaryColorText }} !important;
+    }
+
+    #settings-menu .list-group-item.active {
+      color: {{ primaryColorText }} !important;
+      background-color: {{ primaryColor }} !important;
+      border-color: {{ primaryColor }};
+    }
+
+    #site-title {
+      color: {{ primaryColorText }} !important;
+    }
+
+    #site-slogan {
+      color: {{ primaryColorText }} !important;
+    }
+
+    #get-more-apis {
+      color: {{ primaryColorText }} !important;
+      background-color: {{ primaryColor }} !important;
+      border-color: {{ primaryColor }};
+    }
+  </style>
+</template>

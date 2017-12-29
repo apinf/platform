@@ -1,0 +1,83 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="dashboardOverviewStatistic">
+  <div class="overview-body" data-overview-id="{{ proxyBackend._id }}">
+    <div class="row overview-line">
+      <div class="col-xs-12 col-md-3">
+        <p class="overview-col-title">
+          {{ proxyBackend.apiName }}
+        </p>
+        <div class="form-group">
+          <p>
+            {{_ 'dashboardOverviewStatistic_text_requestPath' path=proxyBackend.frontendPrefix }}
+          </p>
+          <p class="text-success">
+            {{_ 'dashboardOverviewStatistic_text_successCalls' count=(getStatistics 'success') }}
+          </p>
+          <span class="text-danger">
+            {{# if timeframeYesterday }}
+              {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=(getStatistics 'error') }}
+            {{ else }}
+              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=(getStatistics 'error') timeframe=timeframe }}
+            {{/ if }}
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-3">
+        <p class="overview-col-title">
+          {{_ 'dashboardOverviewStatistic_text_requestsCount' count=(getStatistics 'requests')}}
+        </p>
+        <div class="form-group">
+          <span class="overview-col-title">
+            {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
+          </span>
+          {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=proxyBackend._id }}
+          {{# with comparisonData }}
+            <div class="{{ arrowDirection 'requests' }}"></div>
+            <span>{{ overviewComparing 'requests' }}</span>
+          {{/ with }}
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-3">
+        <p class="overview-col-title">
+          {{_ 'dashboardOverviewStatistic_text_responseTime' time=(getStatistics 'time') }}
+        </p>
+        <div class="form-group">
+          <span class="overview-col-title">
+            {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
+          </span>
+          {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackend._id }}
+          {{# with comparisonData }}
+            <div class="{{ arrowDirection 'time' }}"></div>
+            <span>{{ overviewComparing 'time' }}</span>
+          {{/ with }}
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-3">
+        <p class="overview-col-title">
+          {{_ 'dashboardOverviewStatistic_text_usersCount' count=(getStatistics 'users') }} <sup>*</sup>
+        </p>
+        <div class="form-group">
+          <span class="overview-col-title">
+            {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
+          </span>
+          {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=proxyBackend._id }}
+          {{# with comparisonData }}
+            <div class="{{ arrowDirection 'users' }}"></div>
+            <span>{{ overviewComparing 'users' }}</span>
+          {{/ with }}
+          <div class="overview-help-text">
+            <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
+          </div>
+        </div>
+
+        <a href="{{ pathFor 'apiAnalyticPage' apiSlug=proxyBackend.apiSlug }}" class="pull-right">
+          {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
+        </a>
+      </div>
+    </div>
+  </div>
+</template>

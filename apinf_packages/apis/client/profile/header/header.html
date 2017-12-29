@@ -1,0 +1,158 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="viewApiPageHeader">
+  <div class="page-head-topblock">
+    <div class="container">
+      <!-- Header -->
+      <div class="page-head-infoblock">
+        {{> viewApiLogo }}
+        <div class="api-info">
+          <h1 id="api-header">
+            {{ api.name }}
+            {{> viewApiStatus api=api width="0.4" }}
+          </h1>
+
+          {{> apiLifecycleStatus api=api }}
+
+          {{# unless api.isPublic }}
+            <span class="label label-default">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
+          {{/ unless }}
+
+          {{# if api.organization }}
+            <p class="view-api-meta-details">
+              <i class="fa fa-address-card" aria-hidden="true"></i>
+              <a href="{{ pathFor 'organizationProfile' slug=api.organization.slug }}">
+                {{ api.organization.name }}
+              </a>
+            </p>
+          {{ else }}
+            <p class="view-api-meta-details">
+              <i class="fa fa-user"></i>
+              {{ api.getApiManagersByName }}
+            </p>
+          {{/ if }}
+
+          {{> apiBackendRating api }}
+        </div>
+        <div>
+          {{# if proxyBackend }}
+            <!-- View Analytics -->
+            <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}" class="btn btn-primary">
+              {{_ "apiViewAnalytics_button_viewAnalytics" }}
+            </a>
+          {{/ if}}
+        </div>
+      </div>
+
+      <div class="page-head-bookmarks pull-right">
+        {{# if currentUser }}
+          {{> bookmark api=api }}
+        {{else}}
+          <a href="#" class="bookmark-button">
+            <div
+                class="api-card-bookmark"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
+              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+              <i class="fa fa-bookmark bookmark-default"></i>
+            </div>
+          </a>
+        {{/ if }}
+      </div>
+      {{# if currentUser }}
+        {{# if proxyBackend }}
+          <div>
+            <span class="pull-right">
+              {{> apiKey api=api proxyBackend=proxyBackend }}
+            </span>
+          </div>
+        {{/ if }}
+      {{/ if }}
+      <!-- Tabs -->
+      <div id="api-navigation-tabs" class="navigation-tabs">
+        <ul class="nav nav-tabs">
+          <li id ="api-details-tab" class="active">
+            <a href="#api-details" data-toggle="tab">
+              <i class="fa fa-info-circle"></i>
+              {{_ "viewApiNavigationMenu_details" }}
+            </a>
+          </li>
+
+          {{# if userShouldSeeApiDocsTab }}
+            <!-- Documentatoin -->
+            <li id="api-documentation-tab">
+              <a href="#api-documentation" data-toggle="tab">
+                <i class="fa fa-file-text"></i>
+                {{_ "viewApiNavigationMenu_documentation" }}
+              </a>
+            </li>
+          {{/ if }}
+
+          {{# if userShouldSeeApiMetadataTab }}
+            <!-- Metadata -->
+            <li id="api-metadata-tab">
+              <a href="#api-metadata" data-toggle="tab">
+                <i class="fa fa-book"></i>
+                {{_ "viewApiNavigationMenu_metadata" }}
+              </a>
+            </li>
+          {{/ if }}
+
+          <!-- Feedback -->
+          <li id="api-feedback-tab">
+            <a href="#api-feedback" data-toggle="tab">
+              <i class="fa fa-comments-o"></i>
+              {{_ "viewApiNavigationMenu_feedback" }}
+            </a>
+          </li>
+
+          {{# if userShouldSeeBacklogTab }}
+            <!-- Backlog -->
+            <li id="api-backlog-tab">
+              <a href="#api-backlog" data-toggle="tab">
+                <i class="fa fa-check-square-o"></i>
+                {{_ "viewApiNavigationMenu_backlog" }}
+              </a>
+            </li>
+          {{/ if }}
+
+          {{# if api.currentUserCanManage }}
+            <!-- Export -->
+            <li id="api-export-tab">
+              <a href="#api-export" data-toggle="tab">
+                <i class="fa fa-cloud-download"></i>
+                {{_ "viewApiNavigationMenu_export" }}
+              </a>
+            </li>
+
+            <!-- Settings -->
+            <li id="api-settings-tab">
+              <a href="#api-settings" data-toggle="tab">
+                <i class="fa fa-cog"></i>
+                {{_ "viewApiNavigationMenu_settings" }}
+              </a>
+            </li>
+
+            {{# if proxyIsConfigured }}
+              <!-- Proxy -->
+              <li id="api-proxy-tab">
+                <a href="#api-proxy" data-toggle="tab">
+                  <i class="fa fa-sitemap"></i>
+                  {{_ "viewApiNavigationMenu_proxy" }}
+                </a>
+              </li>
+
+            {{/ if }}
+          {{/ if }}
+        </ul>
+        {{# if api.currentUserCanView }}
+          {{> apiIntro }}
+        {{/ if }}
+      </div>
+    </div>
+  </div>
+</template>

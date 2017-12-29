@@ -1,0 +1,125 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+.api-card {
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.15);
+  .api-card-action-bar ul {
+    margin: 0;
+    width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #eee;
+    padding: 1em 0;
+  }
+  .api-card-action-bar li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    font-size: 1em;
+    color: #555;
+  }
+
+  .api-card-action-bar li.time {
+    width: 60%;
+    text-align: left;
+    padding: 0 0 0 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .api-card-action-bar li.rating, .api-card-action-bar li.bookmark {
+    width: 20%;
+  }
+  .api-card-action-bar li.rating {
+    padding: 0 1em 0 0;
+  }
+
+  .api-card-action-bar li.bookmark {
+    padding: 0;
+    .api-card-bookmark button {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+
+  .api-card-pin button {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .api-card-heading h3 {
+    font-size: 1.5em;
+    margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .api-card-author {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .api-card-author {
+    color: #777;
+  }
+
+  .api-card-labels {
+    height: 1.45em;
+    li {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  .api-card-description p {
+    color: #777;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    line-height: 1.3em;
+    height: 2.6em;
+    margin-right: 1.6em;
+    margin-left: 1.6em;
+  }
+
+  .api-card-description p:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 0.7em;
+    background: linear-gradient(to bottom,rgba(255,255,255,0),#fff 100%,#fff);
+  }
+
+  .api-card-logo {
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+    text-align: center;
+  }
+
+  .api-card-logo:before {    /* create a full-height inline block pseudo=element */
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+    height: 100%;
+}
+
+  .view-api-logo {
+    max-width: 200px;
+    max-height: 100px;
+    border-radius: 0;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

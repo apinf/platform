@@ -1,0 +1,24 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="uploadProjectLogo">
+  <div class="project-logo-file">
+    {{# unless uploadedProjectLogoFile }}
+      {{> uploadProjectLogoButton }}
+    {{ else }}
+      <ul class="list-group">
+        <li class="list-group-item">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          {{ uploadedProjectLogoFile.filename }}
+          <span class="pull-right">
+          <button class="btn btn-xs btn-danger delete-project-logo">
+            <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+          </button>
+        </span>
+        </li>
+      </ul>
+    {{/ unless }}
+  </div>
+</template>

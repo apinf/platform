@@ -1,0 +1,55 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="settingsMenu">
+  <div id="settings-menu" class="col-md-3">
+    <ul class="list-group">
+      <a
+        href="{{ pathFor route='profile' }}"
+        class="list-group-item {{ isActiveRoute 'profile' }}"
+        id="button-profile">
+          {{_ "settingsMenu_profile" }}
+          <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+      </a>
+      <a
+        href="{{ pathFor route='account' }}"
+        class="list-group-item {{ isActiveRoute 'account' }}"
+        id="button-account">
+          {{_ "settingsMenu_account" }}
+          <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+      </a>
+      {{# if isInRole 'admin' }}
+        <a
+          href="{{ pathFor route='branding' }}"
+          class="list-group-item {{ isActiveRoute 'branding' }}"
+          id="button-branding">
+            {{_ "settingsMenu_branding" }}
+            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+        </a>
+        <a
+          href="{{ pathFor route='settings' }}"
+          class="list-group-item {{ isActiveRoute 'settings' }}"
+          id="button-settings">
+            {{_ "settingsMenu_settings" }}
+            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+        </a>
+        <a
+          href="{{ pathFor route='proxies' }}"
+          class="list-group-item {{ isActiveRoute 'proxies' }}"
+          id="button-proxies">
+            {{_ "settingsMenu_proxies" }}
+            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+        </a>
+        <a
+          href="{{ pathFor route='login-platforms' }}"
+          class="list-group-item {{ isActiveRoute 'login-platforms' }}"
+          id="button-loginPlatforms">
+            {{_ "settingsMenu_loginPlatforms" }}
+            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+        </a>
+      {{/ if }}
+    </ul>
+  </div>
+</template>

@@ -1,0 +1,28 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationSettingsGeneral">
+  <div class="setting-section">
+    <h3>
+      {{_ "organizationSettingsGeneral_title" }}
+    </h3>
+
+    {{# autoForm
+      collection=organizationCollection
+      doc=organization
+      id="organizationSettingsGeneral"
+      type="update"
+    }}
+
+      {{> afQuickField name='name' id="organisation-name" }}
+      {{> afQuickField name='url' id="organisation-url" }}
+      {{> afQuickField name='description' id="organisation-description" }}
+
+      <button type="submit" class="btn btn-success" id="save-org-general-settings">
+        {{_ "organizationSettingsGeneral_saveButton_text" }}
+      </button>
+    {{/ autoForm }}
+  </div>
+</template>

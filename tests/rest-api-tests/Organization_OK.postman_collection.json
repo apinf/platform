@@ -1,0 +1,824 @@
+{
+	"info": {
+		"name": "Organization_OK",
+		"_postman_id": "603c790f-cf7c-d2cd-e92c-d9c092253f6d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{url}}/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    if (pm.response.to.have.status(200)) {",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"userid\", jsonData.data.userId);",
+							"        pm.environment.set(\"token\", jsonData.data.authToken);",
+							"    }",
+							"    ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er511@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/organizations",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    if (pm.response.to.have.status(201)) {",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"createdOrg_id\", jsonData.data._id);",
+							"",
+							"    }",
+							"    ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "postman testing org",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "New org created by runner",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/organizations",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations"
+					]
+				},
+				"description": "Create a new API"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations/{{createdOrg_id}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er511@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/organizations/{{createdOrg_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations",
+						"{{createdOrg_id}}"
+					]
+				},
+				"description": "Get an API with id"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er511@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations",
+						"{{createdOrg_id}}",
+						"managers"
+					]
+				},
+				"description": "Get an API with id"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    if (pm.response.to.have.status(201)) {",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"new_userid\", jsonData.data._id);",
+							"    }",
+							"    ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "postman_testing",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er11@osoite.fi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Adding a new user account"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    if (pm.response.to.have.status(200)){",
+							"        var jsonData = pm.response.json();",
+							"        pm.environment.set(\"managerId\", jsonData.data.managerIds);",
+							"    }",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "newManagerEmail",
+							"value": "er11@osoite.fi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations",
+						"{{createdOrg_id}}",
+						"managers"
+					]
+				},
+				"description": "Get an API with id"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers/id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "matti2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "er511@osoite.fi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "salasana",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "Osakeköyhtiö 3124",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "koe-API matti2 postman",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "url",
+							"value": "http://koe.koe2.fi",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers/{{new_userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations",
+						"{{createdOrg_id}}",
+						"managers",
+						"{{new_userid}}"
+					]
+				},
+				"description": "Get an API with id"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations/{{createdOrg_id}}/managers/delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/organizations/{{createdOrg_id}}/managers/{{new_userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations",
+						"{{createdOrg_id}}",
+						"managers",
+						"{{new_userid}}"
+					]
+				},
+				"description": "Get an API with id"
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/organizations/{{createdOrg_id}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/organizations/{{createdOrg_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"organizations",
+						"{{createdOrg_id}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/users/{{new_userid}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/users/{{new_userid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"{{new_userid}}"
+					]
+				},
+				"description": "Remove created user."
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "X-User-Id",
+						"value": "{{userid}}"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

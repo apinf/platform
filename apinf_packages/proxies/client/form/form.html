@@ -1,0 +1,43 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="proxyForm">
+  <div class="modal fade" id="addProxyModal" tabindex="-1" role="dialog" aria-labelledby="proxyFormModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="proxyFormModalLabel">
+            {{_ "proxyForm_header_text" }}
+          </h4>
+        </div>
+        {{# autoForm
+          collection=proxiesCollection
+          id="proxyForm"
+          type=formType
+          doc=proxy }}
+          <div class="modal-body">
+            {{> afQuickField name="name" id="proxy-name" }}
+            {{> afQuickField name="description" id="proxy-description" }}
+
+            {{> afQuickField name="type" options="allowed" id="proxy-type" }}
+
+            {{# each proxyName in registeredProxies }}
+              {{# if afFieldValueIs name="type" value=proxyName }}
+                {{> afQuickField name=proxyName }}
+              {{/ if }}
+            {{/ each }}
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="proxy-save">
+              {{_ "proxyForm_saveButton_text" }}
+            </button>
+          </div>
+        {{/ autoForm }}
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,26 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationFeaturedApis">
+  <!-- Show or not content-->
+  {{# if organization.hasFeaturedApis }}
+    <div class="block-header">
+      <!-- Title -->
+      <h3 class="apis-block-title">
+        {{_ 'organizationProfile_bigText_featuredApisCount' }}
+        <small>
+          {{_ 'organizationProfile_smallText_apisCount' count=organization.featuredApis.length }}
+        </small>
+      </h3>
+      {{> apiFilteredBy }}
+    </div>
+    {{> apiCatalogGrid apis=organization.featuredApis organization=organization }}
+
+  {{ else }}
+   {{# if organization.currentUserCanManage }}
+      {{> organizationNoFeaturedApis organization=organization }}
+    {{/if}}
+  {{/ if }}
+</template>

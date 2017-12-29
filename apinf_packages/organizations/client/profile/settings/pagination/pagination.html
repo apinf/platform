@@ -1,0 +1,28 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="organizationSettingsPagination">
+  <div class="setting-section">
+    <h3>
+      {{_ 'organizationSettingsPagination_panelTitle_contentManagement' }}
+    </h3>
+
+     {{# autoForm
+        collection=organizationsCollection
+        doc=organization
+        id="organizationSettingsPagination"
+        type="update"
+      }}
+
+      {{> afQuickField  name='apisPerPage' id="apis-perpage" }}
+
+      {{> afQuickField  name='mediaPerPage' id="media-perpage" }}
+
+      <button type="submit" class="btn btn-primary" id="submit-button">
+        {{_ "organizationSettingsPagination_saveButton" }}
+      </button>
+    {{/ autoForm }}
+  </div>
+</template>
