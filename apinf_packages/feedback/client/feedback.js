@@ -16,15 +16,19 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import Feedback from '../collection';
 
 Template.apiFeedback.onCreated(function () {
-  // Get IDs of feedbacks
-  const feedbackIds = Feedback.find().map((feedback) => {
-    return feedback._id;
-  });
+  const instance = this;
 
-  // Subscribe to feedbacks comments
-  this.subscribe('getEntitiesComments', feedbackIds);
-  // Subscribe to usernames of comments authors
-  this.subscribe('commentUsersUsername', feedbackIds);
+  instance.autorun(() => {
+    // Get IDs of feedbacks
+    const feedbackIds = Feedback.find().map((feedback) => {
+      return feedback._id;
+    });
+
+    // Subscribe to feedbacks comments
+    instance.subscribe('getEntitiesComments', feedbackIds);
+    // Subscribe to usernames of comments authors
+    instance.subscribe('commentUsersUsername', feedbackIds);
+  });
 });
 
 Template.apiFeedback.helpers({
