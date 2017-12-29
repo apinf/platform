@@ -406,7 +406,6 @@ ManagementV1.swagger = {
       },
     },
     usersUpdate: {
-      required: [],
       properties: {
         username: {
           type: 'string',
