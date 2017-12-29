@@ -6,3 +6,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 .documentation-file {
   margin-bottom: 2em;
 }
+
+.cursor {
+  cursor: pointer;
+}
+
+.bg-red {
+  background-color: red;
+  color: #fff;
+}
+
+.marg-b {
+	margin: 5px;
+}

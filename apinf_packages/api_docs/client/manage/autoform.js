@@ -24,6 +24,10 @@ AutoForm.hooks({
           // Save ID
           doc.fileId = fileId;
         }
+        const getLinks = Session.get('links');
+        if (getLinks) {
+          doc.otherUrl = getLinks;
+        }
 
         // Return data
         return doc;
@@ -37,7 +41,7 @@ AutoForm.hooks({
           // Save ID
           doc.$set.fileId = fileId;
         }
-
+        doc.$set.otherUrl = Session.get('links');
         // Return data
         return doc;
       },

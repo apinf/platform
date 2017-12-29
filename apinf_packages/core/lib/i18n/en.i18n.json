@@ -107,7 +107,7 @@
   "apiDocumentation_APICall_Warning_Title": "Warning!",
   "apiDocumentation_buttonText_closeEditor": "Close editor",
   "apiDocumentation_buttonText_openEditor": "Open editor",
-  "apiDocumentation_Link_Title": "Link",
+  "apiDocumentation_Link_Title": "Links",
   "apiDocumentation_manageDocumentation_buttonText": "Manage",
   "apiDocumentation_No_Link_Manager_Message": "You can add a documentation link using Manage API feature.",
   "apiDocumentation_No_Swagger_Manager_Message": "You can add Swagger documentation using Manage API feature.",
@@ -431,19 +431,21 @@
   "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Cancel",
   "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Save",
   "manageApiDocumentationModal_CreateDocumentation_Title": "Create documentation file",
+  "manageApiDocumentationModal_CreateLinks_AddButton": "Add",
   "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Are you sure you want to remove the documentation file?",
   "manageApiDocumentationModal_DeletedFile_Message": "Documentation file successfully deleted!",
-  "manageApiDocumentationModal_DocumentationLink_Title": "Link to external documentation resource",
+  "manageApiDocumentationModal_DocumentationLinks_Title": "Links to external documentation resource",
   "manageApiDocumentationModal_FileType_Message": "Only YAML (YML) and JSON file formats are supported.",
   "manageApiDocumentationModal_LinkField_Updated_Message": "Documentation link successfully updated!",
   "manageApiDocumentationModal_SizeLimit_Message": "File size limit 10MB",
   "manageApiDocumentationModal_Title": "API Documentation",
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
-  "manageApiDocumentationModal_hints_documentation_link": "Link to the Wiki, Github page or other web resource where the documentation of your API is located",
+  "manageApiDocumentationModal_hints_documentation_link": "Link to the Wiki, Github page or other web resource where the documentation of your API is located. You can add upto 8 external documentation links",
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can add a Swagger document by uploading a file or by giving a link to the remote file. Note: Try out methods can only be controlled, if the file is uploaded.",
   "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
   "manageApiDocumentationModal_addDocumentation_title": "Add documentation",
   "manageApiDocumentationModal_helpText_useHttpsProtocol": "This application platform uses HTTPS. API requests from documentation will not work, if API uses HTTP.",
+  "manageApiDocumentationModal_ToolTip_Message": "Maximum 8 external documentation links are allowed. Please delete from existing ones if you wish to add a new one.",
   "apiAnalyticPageBody_title_mostUsers": "Most Frequent Users",
   "mostFrequentUsersTable_columnTitle_user": "User",
   "mostFrequentUsersTable_columnTitle_calls": "Calls",
@@ -688,7 +690,7 @@
         "label": "Link to API Documentation"
       },
       "otherUrl": {
-        "label": "Link to other API Documentation"
+        "label": "Links to other API Documentation"
       },
       "submit_methods": {
         "label": "Allow try-out for following methods:"
