@@ -116,7 +116,7 @@ Meteor.methods({
               ApiKeys.insert(newApiKey);
 
               // Remove collection
-              ApiKeys.remove({'apiUmbrella.apiKey': apiKey});
+              ApiKeys.remove({ 'apiUmbrella.apiKey': apiKey });
             }
           });
         } else {
