@@ -77,17 +77,17 @@ Template.apiKey.events({
       });
     }
   },
-  'click #revoke-api-key': function () {
+  'click #regenerate-api-key': function () {
     // Get current template instance
     const instance = Template.instance();
 
     // Get processing message translation
     const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
     // Set bootstrap loadingText
-    instance.$('#revoke-api-key').button({ loadingText: message });
+    instance.$('#regenerate-api-key').button({ loadingText: message });
 
     // Set button to processing state
-    instance.$('#revoke-api-key').button('loading');
+    instance.$('#regenerate-api-key').button('loading');
 
     // Get api from template data
     const api = Template.currentData().api;
@@ -97,8 +97,8 @@ Template.apiKey.events({
 
     // Check api and apikey is defined
     if (api && apiKey) {
-      // Call revokeApiKey function
-      Meteor.call('revokeApiKey', api._id, apiKey, (error) => {
+      // Call regenerateApiKey function
+      Meteor.call('regenerateApiKey', api._id, apiKey, (error) => {
         if (error) {
           // Show human-readable reason for error
           sAlert.error(error.reason);
@@ -110,7 +110,7 @@ Template.apiKey.events({
           sAlert.success(successMessage);
 
           // Reset processing button
-          instance.$('#revoke-api-key').button('reset');
+          instance.$('#regenerate-api-key').button('reset');
         }
       });
     }
