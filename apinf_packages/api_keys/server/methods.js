@@ -74,7 +74,7 @@ Meteor.methods({
       );
     }
   },
-  revokeApiKey (apiId, apiKey) {
+  regenerateApiKey (apiId, apiKey) {
     // Make sure apiId is a string
     check(apiId, String);
     // Make sure apiKey is a string
