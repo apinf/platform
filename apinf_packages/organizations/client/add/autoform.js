@@ -42,16 +42,15 @@ AutoForm.hooks({
       // Check if form is in insert mode
       if (formType === 'insert') {
         if (organizationId) {
-          Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, result) => {
+          Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
             if (error) {
-              // Show message
+              // Show error message
               sAlert.error(error);
-            } else if (result && result !== '') {
-              // Redirect to newly added organization
-              FlowRouter.go('organizationProfile', { slug: result });
-            } else {
-              // Otherwise Redirect to organization Catalog
+              // Redirect to organization Catalog
               FlowRouter.go('organizations');
+            } else {
+              // Redirect to newly added organization
+              FlowRouter.go('organizationProfile', { slug });
             }
           });
         } else {
