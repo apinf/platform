@@ -146,6 +146,7 @@
   "apiIntro_quickTour_button_text": "Quick tour",
   "apiKeys_label": "API Key",
   "apiKeys_getApiKeyButton": "Get API key",
+  "apiKeys_revokeButton": "Revoke API key",
   "apiKeys_copyButtonText": "Copy API key",
   "apiKeys_copySuccessful": "API key copied to clipboard.",
   "apiKeys_getApiKeyButton_success": "API key retrieved successfully.",

@@ -2,6 +2,12 @@
   {{# if showButton }}
     {{# if apiKey }}
     <div id="api-key-copy" class="input-group">
+      <span class="input-group-btn">
+        <!-- Revoke API key button -->
+        <button id="revoke-api-key" class="btn btn-success">
+          {{_ "apiKeys_revokeButton" }}
+        </button>
+      </span>
       <input
              type="text"
              class="form-control"
