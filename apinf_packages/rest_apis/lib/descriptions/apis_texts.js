@@ -47,11 +47,13 @@ const descriptionApis = {
 
 
   Parameters
-  * mandatory: name and url
-  * length of description must not exceed 1000 characters
-  * value of lifecycleStatus must be one of example list
-  * allowed values for parameter isPublic are "true" and "false"
-  * if isPublic is set false, only admin or manager can see the API
+  * mandatory: *name* and *url*
+  * length of *description* must not exceed 1000 characters
+  * value of *lifecycleStatus* must be one of example list
+  * allowed values for parameter *isPublic* are "true" and "false"
+    * if isPublic is set false, only admin or manager can see the API
+  * *documentationUrl* contains a http(s) link to OpenAPI (or Swagger) documentationUrl
+  * *externalDocument* contains a http(s) link for other types of documentation
   `,
   // --------------------------------------------
   put: `
@@ -61,10 +63,13 @@ const descriptionApis = {
   On success, returns the updated API object.
 
   Parameters
-  * length of description must not exceed 1000 characters
-  * value of lifecycleStatus must be one of example list
-  * allowed values for parameter isPublic are "true" and "false"
-  * if isPublic is set false, only admin or manager can see the API
+  * length of *description* must not exceed 1000 characters
+  * value of *lifecycleStatus* must be one of example list
+  * allowed values for parameter *isPublic* are "true" and "false"
+    * if isPublic is set false, only admin or manager can see the API
+  * *documentationUrl* contains a http(s) link to OpenAPI (or Swagger) documentationUrl
+  * *externalDocument* contains a http(s) link for other types of documentation
+
   `,
   // --------------------------------------------
   delete: `
