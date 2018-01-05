@@ -255,9 +255,12 @@ CatalogV1.swagger = {
           example: 'link-address-to-specification',
         },
         externalDocumentation: {
-          type: 'string',
+          type: 'array',
           description: 'A URL to an external site page with API documentation',
-          example: 'url-to-external-site',
+          items: {
+            type: 'string',
+            example: 'url-to-external-site',
+          },
         },
       },
     },
