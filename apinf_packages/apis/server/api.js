@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 
 // Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -443,13 +444,14 @@ CatalogV1.addCollection(Apis, {
 
         const documentationUrl = bodyParams.documentationUrl;
         const externalDocumentation = bodyParams.externalDocumentation;
+        // Regex for http(s) protocol
+        const regex = SimpleSchema.RegEx.Url;
 
         // Documentation URL must have URL format
         if (documentationUrl) {
-          isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ remoteFileUrl: documentationUrl }, 'remoteFileUrl');
-
-          if (!isValid) {
+          // Check link validity
+          const regexUrl = regex.test(documentationUrl);
+          if (!regexUrl) {
             // Error message
             const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
             return errorMessagePayload(400, message);
@@ -458,10 +460,10 @@ CatalogV1.addCollection(Apis, {
 
         // Link to an external site must have URL format
         if (externalDocumentation) {
-          isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ otherUrl: externalDocumentation }, 'otherUrl');
+          // Check link validity
+          const regexUrl = regex.test(externalDocumentation);
 
-          if (!isValid) {
+          if (!regexUrl) {
             // Error message
             const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
             return errorMessagePayload(400, message);
@@ -474,20 +476,28 @@ CatalogV1.addCollection(Apis, {
         // Insert API data into collection
         const apiId = Apis.insert(apiData);
 
-        // Did insert fail
+        // If insert failed, stop and send response
         if (!apiId) {
-          return errorMessagePayload(500, 'Inserting API into database failed.');
+          return errorMessagePayload(500, 'Insert API card into database failed.');
         }
 
-
-        // Make sure a user provides some Documentation data & API is created
+        // Add also documentation, if links are given
         if (documentationUrl || externalDocumentation) {
-          ApiDocs.insert({
-            apiId,
-            type: 'url',
-            otherUrl: externalDocumentation,
-            remoteFileUrl: documentationUrl,
-          });
+          const result = ApiDocs.update(
+            { apiId },
+            { $set: {
+              type: 'url',
+              remoteFileUrl: bodyParams.documentationUrl,
+            },
+              $push: { otherUrl: bodyParams.externalDocumentation } },
+            { upsert: true },
+          );
+          // Integrity: If insertion of document link failed, remove also API card
+          if (result === 0) {
+            // Remove newly created API document
+            Meteor.call('removeApi', apiId);
+            return errorMessagePayload(500, 'Insert documentation failed. API card not created.');
+          }
         }
 
         // Prepare data to response, extend it with Documentation URLs
@@ -559,6 +569,9 @@ CatalogV1.addCollection(Apis, {
         ],
       },
       action () {
+        // Used in case of rollback
+        let previousDocumentationUrl;
+
         // Get data from body parameters
         const bodyParams = this.bodyParams;
         // Get ID of API
@@ -617,57 +630,73 @@ CatalogV1.addCollection(Apis, {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
-
+        // Check if link for openAPI documentation was given
         const documentationUrl = bodyParams.documentationUrl;
+        // Cehck if link for external documentation was given
         const externalDocumentation = bodyParams.externalDocumentation;
 
-        // Documentation URL must have URL format
-        if (documentationUrl) {
-          const isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ remoteFileUrl: documentationUrl }, 'remoteFileUrl');
-
-          if (!isValid) {
-            // Error message
-            const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
-            return errorMessagePayload(400, message);
-          }
-        }
-
-        // Link to an external site must have URL format
-        if (externalDocumentation) {
-          const isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ otherUrl: externalDocumentation }, 'otherUrl');
-
-          if (!isValid) {
-            // Error message
-            const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
-            return errorMessagePayload(400, message);
-          }
-        }
-
-        // Save new or updated documentation links
         if (documentationUrl || externalDocumentation) {
           // Try to fetch existing documentation
           const apiDoc = ApiDocs.findOne({ apiId });
+          console.log('apiDoc=', apiDoc);
+          // Regex for http(s) protocol
+          const regex = SimpleSchema.RegEx.Url;
 
-          if (apiDoc) {
-            // Update existing documentation
-            ApiDocs.update(
-              { apiId },
-              { $set: {
-                type: 'url',
-                remoteFileUrl: bodyParams.documentationUrl,
-                otherUrl: bodyParams.externalDocumentation,
-              },
-              });
-          } else {
-            // Create a new apiDoc instance
-            ApiDocs.insert({
-              apiId,
+          // Check link to Documentation URL
+          if (documentationUrl) {
+            // Check link validity
+            const regexUrl = regex.test(documentationUrl);
+            // If value is https(s)
+            if (!regexUrl) {
+              // Error message
+              const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
+              return errorMessagePayload(400, message);
+            }
+          }
+
+          // Check link to an external documentation
+          if (externalDocumentation) {
+            // Check link validity
+            const regexUrl = regex.test(externalDocumentation);
+            // If value is https(s)
+            if (!regexUrl) {
+              // Error message
+              const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
+              return errorMessagePayload(400, message);
+            }
+
+            // Check if new external documentation link can be added
+            if (apiDoc && apiDoc.otherUrl) {
+              // Can not add same link again
+              const isLinkAlreadyPresent = apiDoc.otherUrl.includes(externalDocumentation);
+              if (isLinkAlreadyPresent) {
+                const message = 'Same link to "externalDocumentation" already exists.';
+                return errorMessagePayload(400, message, 'url', externalDocumentation);
+              }
+              // Max 8 external documentation links can be added
+              if (apiDoc.otherUrl.length > 7) {
+                const message = 'Maximum number of external documentation links (8) already given.';
+                return errorMessagePayload(400, message);
+              }
+            }
+            // Prepare for rollback after possible failure
+            previousDocumentationUrl = apiDoc.remoteFileUrl;
+          }
+
+          // Update Documentation
+          const result = ApiDocs.update(
+            { apiId },
+            { $set: {
               type: 'url',
-              otherUrl: bodyParams.externalDocumentation,
               remoteFileUrl: bodyParams.documentationUrl,
-            });
+            },
+              $push: { otherUrl: bodyParams.externalDocumentation } },
+            { upsert: true },
+          );
+          // If insertion of document link failed
+          if (result === 0) {
+            // Remove newly created API document
+            return errorMessagePayload(500, 'Update failed because Documentation update fail.');
           }
         }
 
@@ -676,7 +705,46 @@ CatalogV1.addCollection(Apis, {
         bodyParams.updated_by = userId;
 
         // Update API document
-        Apis.update(apiId, { $set: bodyParams });
+        const result = Apis.update(apiId, { $set: bodyParams });
+        // Check if API update failed
+        if (result !== 0) {
+          // try to rollback documentation update, if necessary
+          if (documentationUrl || externalDocumentation) {
+            if (documentationUrl) {
+              // Restore previous documentation link, if it exist
+              if (previousDocumentationUrl) {
+                ApiDocs.update(
+                  { apiId },
+                  { $set: {
+                    type: 'url',
+                    remoteFileUrl: previousDocumentationUrl,
+                  },
+                  },
+              );
+              } else {
+                // No previous link, just make it empty
+                ApiDocs.update(
+                  { apiId },
+                  { $unset: {
+                    remoteFileUrl: '',
+                  },
+                  },
+                );
+              }
+            }
+            // Rollback external documentation by removing latest added link
+            if (externalDocumentation) {
+              ApiDocs.update(
+                { apiId },
+                { $set: {
+                  type: 'url',
+                },
+                  $pull: { otherUrl: externalDocumentation } },
+              );
+            }
+          }
+          return errorMessagePayload(500, 'Update failed because API update fail.');
+        }
 
         // Prepare data to response, extend it with Documentation URLs
         const responseData = Object.assign(
@@ -767,3 +835,106 @@ CatalogV1.addCollection(Apis, {
     },
   },
 });
+
+
+// // Request /rest/v1/apis/:id/documents/
+// CatalogV1.addRoute('apis/:id/documents', {
+//   // Remove a manager (:managerId) from given Organization (:id)
+//   delete: {
+//     authRequired: true,
+//     swagger: {
+//       tags: [
+//         CatalogV1.swagger.tags.organization,
+//       ],
+//       summary: 'Delete identified Manager from Organization Manager list.',
+//       description: descriptionOrganizations.deleteIdManagersManagerid,
+//       parameters: [
+//         CatalogV1.swagger.params.organizationId,
+//         CatalogV1.swagger.params.managerId,
+//       ],
+//       responses: {
+//         204: {
+//           description: 'Organization Manager removed successfully.',
+//           schema: {
+//             type: 'object',
+//             properties: {
+//               data: {
+//                 $ref: '#/definitions/organizationManagerResponse',
+//               },
+//             },
+//           },
+//         },
+//         400: {
+//           description: 'Bad Request. Erroneous or missing parameter.',
+//         },
+//         401: {
+//           description: 'Authentication is required',
+//         },
+//         403: {
+//           description: 'User does not have permission',
+//         },
+//         404: {
+//           description: 'Organization is not found',
+//         },
+//       },
+//       security: [
+//         {
+//           userSecurityToken: [],
+//           userId: [],
+//         },
+//       ],
+//     },
+//     action () {
+//       // Get ID of Organization
+//       const organizationId = this.urlParams.id;
+//       // Note! It can not be checked here, if this parameter is not provided,
+//       //       because in that case the parameters are shifted and endpoint is not found at all.
+//
+//       // Get Organization document
+//       const organization = Organizations.findOne(organizationId);
+//       // Organization must exist
+//       if (!organization) {
+//         return errorMessagePayload(404, 'Organization with specified ID is not found');
+//       }
+//
+//       // Get ID of requesting User
+//       const requestorId = this.userId;
+//
+//       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
+//       // Requestor must have permission for action
+//       if (!userCanManage) {
+//         return errorMessagePayload(403, 'You do not have permission for edit this Organization');
+//       }
+//
+//       // Get ID of Manager to be removed
+//       const removeManagerId = this.urlParams.managerId;
+//       // Manager ID must be given
+//       if (!removeManagerId) {
+//         return errorMessagePayload(400, 'Missing parameter: Manager ID not provided.');
+//       }
+//
+//       // Admin/Manager is not allowed to remove self
+//       if (removeManagerId === requestorId) {
+//         return errorMessagePayload(403, 'User can not remove self.');
+//       }
+//
+//       // Only existing Manager can be removed from Organization manager list
+//       const isManager = organization.managerIds.includes(removeManagerId);
+//
+//       if (!isManager) {
+//         return errorMessagePayload(404, 'Manager not found in Organization.');
+//       }
+//
+//       // Remove user from organization manager list
+//       Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
+//
+//       return {
+//         statusCode: 204,
+//         body: {
+//           status: 'success',
+//           message: 'Manager removed successfully.',
+//         },
+//       };
+//     },
+//   },
+// });
