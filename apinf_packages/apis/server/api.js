@@ -638,7 +638,6 @@ CatalogV1.addCollection(Apis, {
         if (documentationUrl || externalDocumentation) {
           // Try to fetch existing documentation
           const apiDoc = ApiDocs.findOne({ apiId });
-          console.log('apiDoc=', apiDoc);
           // Regex for http(s) protocol
           const regex = SimpleSchema.RegEx.Url;
 
@@ -679,8 +678,10 @@ CatalogV1.addCollection(Apis, {
                 return errorMessagePayload(400, message);
               }
             }
-            // Prepare for rollback after possible failure
-            previousDocumentationUrl = apiDoc.remoteFileUrl;
+            // Prepare for rollback of openAPI documentation after possible failure
+            if (apiDoc && apiDoc.remoteFileUrl) {
+              previousDocumentationUrl = apiDoc.remoteFileUrl;
+            }
           }
 
           // Update Documentation
@@ -695,7 +696,6 @@ CatalogV1.addCollection(Apis, {
           );
           // If insertion of document link failed
           if (result === 0) {
-            // Remove newly created API document
             return errorMessagePayload(500, 'Update failed because Documentation update fail.');
           }
         }
@@ -707,11 +707,11 @@ CatalogV1.addCollection(Apis, {
         // Update API document
         const result = Apis.update(apiId, { $set: bodyParams });
         // Check if API update failed
-        if (result !== 0) {
-          // try to rollback documentation update, if necessary
+        if (result === 0) {
+          // Try to rollback documentation update, if necessary
           if (documentationUrl || externalDocumentation) {
             if (documentationUrl) {
-              // Restore previous documentation link, if it exist
+              // Restore previous openAPI documentation link, if it exists
               if (previousDocumentationUrl) {
                 ApiDocs.update(
                   { apiId },
@@ -837,104 +837,145 @@ CatalogV1.addCollection(Apis, {
 });
 
 
-// // Request /rest/v1/apis/:id/documents/
-// CatalogV1.addRoute('apis/:id/documents', {
-//   // Remove a manager (:managerId) from given Organization (:id)
-//   delete: {
-//     authRequired: true,
-//     swagger: {
-//       tags: [
-//         CatalogV1.swagger.tags.organization,
-//       ],
-//       summary: 'Delete identified Manager from Organization Manager list.',
-//       description: descriptionOrganizations.deleteIdManagersManagerid,
-//       parameters: [
-//         CatalogV1.swagger.params.organizationId,
-//         CatalogV1.swagger.params.managerId,
-//       ],
-//       responses: {
-//         204: {
-//           description: 'Organization Manager removed successfully.',
-//           schema: {
-//             type: 'object',
-//             properties: {
-//               data: {
-//                 $ref: '#/definitions/organizationManagerResponse',
-//               },
-//             },
-//           },
-//         },
-//         400: {
-//           description: 'Bad Request. Erroneous or missing parameter.',
-//         },
-//         401: {
-//           description: 'Authentication is required',
-//         },
-//         403: {
-//           description: 'User does not have permission',
-//         },
-//         404: {
-//           description: 'Organization is not found',
-//         },
-//       },
-//       security: [
-//         {
-//           userSecurityToken: [],
-//           userId: [],
-//         },
-//       ],
-//     },
-//     action () {
-//       // Get ID of Organization
-//       const organizationId = this.urlParams.id;
-//       // Note! It can not be checked here, if this parameter is not provided,
-//       //       because in that case the parameters are shifted and endpoint is not found at all.
-//
-//       // Get Organization document
-//       const organization = Organizations.findOne(organizationId);
-//       // Organization must exist
-//       if (!organization) {
-//         return errorMessagePayload(404, 'Organization with specified ID is not found');
-//       }
-//
-//       // Get ID of requesting User
-//       const requestorId = this.userId;
-//
-//       const userCanManage = Meteor.call('userCanManageOrganization', requestorId, organization);
-//       // Requestor must have permission for action
-//       if (!userCanManage) {
-//         return errorMessagePayload(403, 'You do not have permission for edit this Organization');
-//       }
-//
-//       // Get ID of Manager to be removed
-//       const removeManagerId = this.urlParams.managerId;
-//       // Manager ID must be given
-//       if (!removeManagerId) {
-//         return errorMessagePayload(400, 'Missing parameter: Manager ID not provided.');
-//       }
-//
-//       // Admin/Manager is not allowed to remove self
-//       if (removeManagerId === requestorId) {
-//         return errorMessagePayload(403, 'User can not remove self.');
-//       }
-//
-//       // Only existing Manager can be removed from Organization manager list
-//       const isManager = organization.managerIds.includes(removeManagerId);
-//
-//       if (!isManager) {
-//         return errorMessagePayload(404, 'Manager not found in Organization.');
-//       }
-//
-//       // Remove user from organization manager list
-//       Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
-//
-//       return {
-//         statusCode: 204,
-//         body: {
-//           status: 'success',
-//           message: 'Manager removed successfully.',
-//         },
-//       };
-//     },
-//   },
-// });
+// Request /rest/v1/apis/:id/documents/
+CatalogV1.addRoute('apis/:id/documents', {
+  // Remove documentation from given API (:id) either completely or partially
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'Delete identified documentation or all documentation.',
+      description: descriptionApis.deleteDocumentation,
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.url,
+      ],
+      responses: {
+        200: {
+          description: 'API documentation updated successfully',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/apiResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of API
+      const apiId = this.urlParams.id;
+      // Get User ID
+      const userId = this.userId;
+      // Get API document
+      const api = Apis.findOne(apiId);
+
+      // API must exist
+      if (!api) {
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+      // User must be able to manage API
+      if (!api.currentUserCanManage(userId)) {
+        return errorMessagePayload(403, 'User does not have permission to this API.');
+      }
+
+      // Check if documentation exists
+      const apiDoc = ApiDocs.findOne({ apiId });
+
+      if (!apiDoc) {
+        return errorMessagePayload(404, 'No documentation exists for this API.');
+      }
+
+      // Check if link for openAPI documentation was given
+      const documentUrl = this.queryParams.url;
+
+      // Remove identified documentation link
+      if (documentUrl) {
+        // Check if it is openAPI documentation or external documentation link
+        if (documentUrl === apiDoc.remoteFileUrl) {
+          // Matching link found as openAPI documentatin, try to remove
+          const removeResult = ApiDocs.update(
+            { apiId },
+            { $unset: {
+              remoteFileUrl: '',
+            },
+            },
+          );
+          // If removal of openAPI document link failed
+          if (removeResult === 0) {
+            const message = 'OpenAPI Documentation link removal failure.';
+            return errorMessagePayload(500, message, 'url', documentUrl);
+          }
+        } else if (apiDoc.otherUrl.includes(documentUrl)) {
+          // Matching link found as external documentatin, try to remove
+          const removeResult = ApiDocs.update(
+            { apiId },
+            { $set: {
+              type: 'url',
+            },
+              $pull: { otherUrl: documentUrl } },
+          );
+          // If removal of external document link failed
+          if (removeResult === 0) {
+            const message = 'External Documentation link removal failure.';
+            return errorMessagePayload(500, message, 'url', documentUrl);
+          }
+        } else {
+          // No matching link found
+          const message = 'Documentation link match not found.';
+          return errorMessagePayload(404, message, 'url', documentUrl);
+        }
+      } else {
+        // Remove all documentation, because no link identified
+        Meteor.call('removeApiDoc', apiId);
+      }
+
+      // Prepare data to response, extend it with Documentation URLs
+      const responseData = Object.assign(
+        // Get updated value of API
+        Apis.findOne(apiId),
+        // Get updated values of Documentation urls
+        {
+          externalDocumentation: api.otherUrl(),
+          documentationUrl: api.documentationUrl(),
+        });
+
+      // OK response with API data
+      return {
+        statusCode: 200,
+        body: {
+          status: 'success',
+          data: responseData,
+        },
+      };
+    },
+  },
+});
