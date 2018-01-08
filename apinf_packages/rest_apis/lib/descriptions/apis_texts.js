@@ -75,13 +75,41 @@ const descriptionApis = {
   delete: `
   ### Deletes an API ###
 
-  Admin user or API manager can delete an identified API from the Catalog,
+  Admin user or API manager can delete an identified API from the Catalog.
 
   Example call:
 
     DELETE /apis/<API id>
 
   Result: deletes the API identified with <API id> and responds with HTTP code 204.
+
+  If match is not found, the operation is considered as failed.
+  `,
+  // --------------------------------------------
+  deleteDocumentation: `
+  ### Removes documentation of an API ###
+
+  Admin user or API manager can remove whole documentation or part of it of an identified API.
+  On success returns API object.
+
+  Example calls:
+
+    DELETE /apis/<API id>/documents
+
+  Result: Removes all documentation of the API identified with <API id>
+  and responds with HTTP code 200.
+
+
+    DELETE /apis/<API id>/documents?url=http://link-to-documentation
+
+  Result: Removes (if finds the match of) the mentioned documentation link of the API identified
+  with <API id> and responds with HTTP code 200.
+
+  Order of finding the match for the link
+  - openAPI documentation (documentationUrl)
+  - external documentation links
+
+  If match is not found, the operation is considered as failed.
   `,
 };
 
