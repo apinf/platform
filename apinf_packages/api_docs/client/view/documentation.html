@@ -57,12 +57,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <div class="panel-body">
               <!-- Display link to remote documentation-->
               {{# if apiDoc.otherUrl }}
-                <div id="documentation-link" class="documentation-link">
-                  <i class="fa fa-external-link"></i>&nbsp;
-                  <a href="{{ apiDoc.otherUrl }}" target="_blank">
-                    {{ apiDoc.otherUrl }}
-                  </a>
-                </div>
+                {{# each link in apiDoc.otherUrl }}
+                  <div id="documentation-link" class="documentation-link">
+                    <i class="fa fa-external-link"></i>&nbsp;
+                    <a href="{{ link }}" target="_blank">
+                      {{ link }}
+                    </a>  
+                  </div>
+                {{/ each }}
               {{ else }}
                 <i>
                   {{_ "apiDocumentation_No_Link_Manager_Message" }}

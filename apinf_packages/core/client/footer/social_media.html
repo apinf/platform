@@ -1,0 +1,37 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="footerSocialMediaLinks">
+  {{# if socialMediaLinks }}
+    <ul class="list-inline social-media-block">
+      {{# with socialMediaLinks }}
+        <!-- Facebook icon -->
+        {{# if facebook }}
+          <li>
+            <a href="{{ facebook }}" target="_blank" class="social-media-link">
+              <img src="/img/social-media-icons/Facebook.png" alt="Facebook icon" class="social-media-icon">
+            </a>
+          </li>
+        {{/ if }}
+        <!-- twitter icon -->
+        {{# if twitter }}
+          <li>
+            <a href="{{ twitter }}" target="_blank" class="social-media-link">
+              <img src="/img/social-media-icons/Twitter.png" alt="Twitter icon" class="social-media-icon">
+            </a>
+          </li>
+        {{/ if }}
+        <!-- github icon -->
+        {{# if github }}
+          <li>
+            <a href="{{ github }}" target="_blank" class="social-media-link">
+              <img src="/img/social-media-icons/Github.png" alt="Github icon" class="social-media-icon">
+            </a>
+          </li>
+        {{/ if }}
+      {{/ with }}
+    </ul>
+  {{/ if }}
+</template>

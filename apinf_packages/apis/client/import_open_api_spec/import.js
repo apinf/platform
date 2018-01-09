@@ -19,6 +19,9 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import Apis from '/apinf_packages/apis/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
 
+// APInf imports
+import fileNameEndsWith from '/apinf_packages/core/helper_functions/file_name_ends_with';
+
 Template.importOpenApiSpecification.onCreated(function () {
   const instance = this;
 
@@ -174,25 +177,38 @@ Template.importOpenApiSpecification.events({
 
     // A user select "URL" option and inputs URL value
     if (url && url.value) {
-      // Prepare query to insert ApiDocs collection
-      const query = { type: 'url', remoteFileUrl: url.value };
+      // Check file extension
+      const acceptedExtensions = ['json', 'yml', 'yaml'];
 
-      // Start spinner
-      Session.set('fileUploading', true);
+      // Make sure the file extension
+      if (fileNameEndsWith(url.value, acceptedExtensions)) {
+        // Prepare query to insert ApiDocs collection
+        const query = { type: 'url', remoteFileUrl: url.value };
 
-      Meteor.call('importApiByDocument', url.value, templateInstance.lifecycleStatus, query,
-        (error, response) => {
-          // Stop spinner
-          Session.set('fileUploading', false);
-          // If everything is ok
-          if (response && response.isSuccessful) {
-            templateInstance.successCase(response);
-          } else {
-            // Get error message
-            const message = error ? error.message : response.message;
-            templateInstance.errorCase(message, fileId);
-          }
-        });
+        // Start spinner
+        Session.set('fileUploading', true);
+
+        Meteor.call('importApiByDocument', url.value, templateInstance.lifecycleStatus, query,
+          (error, response) => {
+            // Stop spinner
+            Session.set('fileUploading', false);
+            // If everything is ok
+            if (response && response.isSuccessful) {
+              templateInstance.successCase(response);
+            } else {
+              // Get error message
+              const message = error ? error.message : response.message;
+              templateInstance.errorCase(message, fileId);
+            }
+          });
+      } else {
+        // Form isn't submitted because of error
+        templateInstance.submitForm.set(false);
+        // Get translated text
+        const message = TAPi18n.__('importApiFile_invalidExtension_message');
+        // Alert error Message
+        sAlert.error(message);
+      }
     }
 
     // A user doesn't upload file and doesn't fill URL field

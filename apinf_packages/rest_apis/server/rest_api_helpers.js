@@ -4,7 +4,7 @@
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
  // Fill and return error response message body
- function errorMessagePayload (statusCode, messageText) {
+ function errorMessagePayload (statusCode, messageText, additionalKey, additionalValue) {
    // Fill payload
    const errorPayload = {
      statusCode,
@@ -13,6 +13,10 @@
        message: messageText,
      },
    };
+   // When an additional information is needed to be included in response
+   if (additionalKey) {
+     errorPayload.body[additionalKey] = additionalValue;
+   }
    return errorPayload;
  }
 

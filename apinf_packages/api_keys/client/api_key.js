@@ -77,6 +77,44 @@ Template.apiKey.events({
       });
     }
   },
+  'click #regenerate-api-key': function () {
+    // Get current template instance
+    const instance = Template.instance();
+
+    // Get processing message translation
+    const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
+    // Set bootstrap loadingText
+    instance.$('#regenerate-api-key').button({ loadingText: message });
+
+    // Set button to processing state
+    instance.$('#regenerate-api-key').button('loading');
+
+    // Get api from template data
+    const api = Template.currentData().api;
+
+    // Get api Key from template data
+    const apiKey = instance.$('#api-key').val();
+
+    // Check api and apikey is defined
+    if (api && apiKey) {
+      // Call regenerateApiKey function
+      Meteor.call('regenerateApiKey', api._id, apiKey, (error) => {
+        if (error) {
+          // Show human-readable reason for error
+          sAlert.error(error.reason);
+        } else {
+          // Get success message translation
+          const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');
+
+          // Alert the user of success
+          sAlert.success(successMessage);
+
+          // Reset processing button
+          instance.$('#regenerate-api-key').button('reset');
+        }
+      });
+    }
+  },
 });
 
 Template.apiKey.helpers({

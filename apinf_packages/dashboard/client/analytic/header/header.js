@@ -5,6 +5,8 @@
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Collection imports
@@ -14,6 +16,9 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 Template.apiAnalyticPageHeader.onCreated(function () {
   const instance = this;
+
+  instance.lastUpdateTime = new ReactiveVar();
+
   // Get ID of current proxy backend
   const proxyBackendId = instance.data.proxyBackendId;
   // Get instance of Proxy Backend
@@ -23,6 +28,11 @@ Template.apiAnalyticPageHeader.onCreated(function () {
   // Get IDs of relevant API and Proxy
   instance.apiId = proxyBackend && proxyBackend.apiId;
   instance.proxyId = proxyBackend && proxyBackend.proxyId;
+
+  Meteor.call('lastUpdateTime', { proxyBackendId }, (error, result) => {
+    // Save value
+    instance.lastUpdateTime.set(result);
+  });
 });
 
 Template.apiAnalyticPageHeader.helpers({
@@ -42,5 +52,10 @@ Template.apiAnalyticPageHeader.helpers({
     }
 
     return '';
+  },
+  lastUpdateTime () {
+    const instance = Template.instance();
+
+    return instance.lastUpdateTime.get();
   },
 });

@@ -9,15 +9,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="row">
         <!-- icons -->
         <div class="col-xs-12 col-sm-3">
-          <ul class="list-inline social-media-block">
-            {{# each network in branding.socialMedia }}
-              <li>
-                <a href="{{ network.url }}" target="_blank" class="social-media-link">
-                  <img src="/img/social-media-icons/{{ network.name }}.png" alt="{{ network.name }} icon" class="social-media-icon">
-                </a>
-              </li>
-            {{/ each }}
-          </ul>
+          {{> footerSocialMediaLinks socialMediaLinks=branding.socialMediaLinks }}
         </div>
         <div class="col-xs-12 col-sm-3 footer-text">
           <div class="row">

@@ -232,6 +232,19 @@ AutoForm.hooks({
       // Get Proxy Backend document
       const proxyBackend = ProxyBackends.findOne(proxyBackendId);
 
+      if (formType === 'insert' && proxyBackend.type === 'apiUmbrella') {
+        // Start cron tasks that run storing Analytics Data to MongoDB
+        Meteor.call('calculateAnalyticsData', proxyBackendId);
+
+        // Get data about last 30 days
+        const daysCount = 30;
+        // Set the last day is "today"
+        const lastDayType = 'today';
+
+        // Create a placeholder in 30 days for charts for particular Proxy Backend
+        Meteor.call('proxyBackendAnalyticsData', proxyBackendId, daysCount, lastDayType);
+      }
+
       // Get API Umbrella configuration object from Proxy Backend
       const apiUmbrellaBackend = proxyBackend.apiUmbrella;
 

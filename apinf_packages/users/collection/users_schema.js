@@ -62,6 +62,17 @@ const UserSchema = new SimpleSchema({
     blackbox: true,
     optional: true,
   },
+  updated_at: {
+    type: Date,
+    optional: true,
+    autoValue () {
+      let value;
+      if (this.isUpdate) {
+        value = new Date();
+      }
+      return value;
+    },
+  },
 });
 
 // Fetch username invalid message
