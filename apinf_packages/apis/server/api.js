@@ -450,8 +450,7 @@ CatalogV1.addCollection(Apis, {
         // Documentation URL must have URL format
         if (documentationUrl) {
           // Check link validity
-          const regexUrl = regex.test(documentationUrl);
-          if (!regexUrl) {
+          if (!regex.test(documentationUrl)) {
             // Error message
             const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
             return errorMessagePayload(400, message);
@@ -461,9 +460,7 @@ CatalogV1.addCollection(Apis, {
         // Link to an external site must have URL format
         if (externalDocumentation) {
           // Check link validity
-          const regexUrl = regex.test(externalDocumentation);
-
-          if (!regexUrl) {
+          if (!regex.test(externalDocumentation)) {
             // Error message
             const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
             return errorMessagePayload(400, message);
@@ -483,15 +480,12 @@ CatalogV1.addCollection(Apis, {
 
         // Add also documentation, if links are given
         if (documentationUrl || externalDocumentation) {
-          const result = ApiDocs.update(
-            { apiId },
-            { $set: {
-              type: 'url',
-              remoteFileUrl: bodyParams.documentationUrl,
-            },
-              $push: { otherUrl: bodyParams.externalDocumentation } },
-            { upsert: true },
-          );
+          const result = ApiDocs.insert({
+            apiId,
+            type: 'url',
+            remoteFileUrl: documentationUrl,
+            otherUrl: [externalDocumentation],
+          });
           // Integrity: If insertion of document link failed, remove also API card
           if (result === 0) {
             // Remove newly created API document
@@ -644,9 +638,7 @@ CatalogV1.addCollection(Apis, {
           // Check link to Documentation URL
           if (documentationUrl) {
             // Check link validity
-            const regexUrl = regex.test(documentationUrl);
-            // If value is https(s)
-            if (!regexUrl) {
+            if (!regex.test(documentationUrl)) {
               // Error message
               const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
               return errorMessagePayload(400, message);
@@ -656,9 +648,7 @@ CatalogV1.addCollection(Apis, {
           // Check link to an external documentation
           if (externalDocumentation) {
             // Check link validity
-            const regexUrl = regex.test(externalDocumentation);
-            // If value is https(s)
-            if (!regexUrl) {
+            if (!regex.test(externalDocumentation)) {
               // Error message
               const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
               return errorMessagePayload(400, message);
@@ -684,7 +674,7 @@ CatalogV1.addCollection(Apis, {
             }
           }
 
-          // Update Documentation
+          // Update Documentation (or create a new one)
           const result = ApiDocs.update(
             { apiId },
             { $set: {
@@ -692,9 +682,10 @@ CatalogV1.addCollection(Apis, {
               remoteFileUrl: bodyParams.documentationUrl,
             },
               $push: { otherUrl: bodyParams.externalDocumentation } },
+            // If apiDocs document did not exist, create a new one
             { upsert: true },
           );
-          // If insertion of document link failed
+          // If update/insert of document link(s) failed
           if (result === 0) {
             return errorMessagePayload(500, 'Update failed because Documentation update fail.');
           }
@@ -938,10 +929,7 @@ CatalogV1.addRoute('apis/:id/documents', {
           // Matching link found as external documentatin, try to remove
           const removeResult = ApiDocs.update(
             { apiId },
-            { $set: {
-              type: 'url',
-            },
-              $pull: { otherUrl: documentUrl } },
+            { $pull: { otherUrl: documentUrl } },
           );
           // If removal of external document link failed
           if (removeResult === 0) {
@@ -960,8 +948,8 @@ CatalogV1.addRoute('apis/:id/documents', {
 
       // Prepare data to response, extend it with Documentation URLs
       const responseData = Object.assign(
-        // Get updated value of API
-        Apis.findOne(apiId),
+        // API has not changed, use already fetched value
+        api,
         // Get updated values of Documentation urls
         {
           externalDocumentation: api.otherUrl(),
