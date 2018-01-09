@@ -2,6 +2,12 @@
   {{# if showButton }}
     {{# if apiKey }}
     <div id="api-key-copy" class="input-group">
+      <span class="input-group-btn">
+        <!-- Regenerate API key button -->
+        <button id="regenerate-api-key" class="btn btn-success">
+          {{_ "apiKeys_regenerateButton" }}
+        </button>
+      </span>
       <input
              type="text"
              class="form-control"
