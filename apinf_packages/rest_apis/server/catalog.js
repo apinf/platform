@@ -121,6 +121,13 @@ CatalogV1.swagger = {
       format: 'int32',
       minimum: 0,
     },
+    url: {
+      name: 'url',
+      in: 'query',
+      description: 'Documentation link to be removed.',
+      required: false,
+      type: 'string',
+    },
   },
   definitions: {
     // The schema defining the type used for the body parameter in POST or PUT method
@@ -255,9 +262,12 @@ CatalogV1.swagger = {
           example: 'link-address-to-specification',
         },
         externalDocumentation: {
-          type: 'string',
+          type: 'array',
           description: 'A URL to an external site page with API documentation',
-          example: 'url-to-external-site',
+          items: {
+            type: 'string',
+            example: 'url-to-external-site',
+          },
         },
       },
     },
