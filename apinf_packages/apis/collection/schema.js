@@ -149,6 +149,14 @@ Apis.schema = new SimpleSchema({
     optional: true,
     defaultValue: true,
   },
+  'friendlySlugs.slug.base': {
+    type: String,
+    optional: true,
+  },
+  'friendlySlugs.slug.index': {
+    type: Number,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)

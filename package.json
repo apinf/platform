@@ -25,6 +25,7 @@
     "jquery.rateit": "^1.0.23",
     "js-yaml": "^3.8.1",
     "json2csv": "^3.11.1",
+    "limax": "^1.6.0",
     "locale-compare-polyfill": "0.0.2",
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.5",
