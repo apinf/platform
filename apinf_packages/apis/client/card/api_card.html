@@ -44,7 +44,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </ul>
     </div>
     <div class="api-card-logo clearfix">
+      <a href="{{ pathFor 'viewApi' slug=api.slug }}" title="{{ api.name }}">
         {{> viewApiLogo api=api }}
+      </a>
     </div>
     <div class="api-card-description">
       <p class="text-center">
