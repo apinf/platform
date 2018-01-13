@@ -97,13 +97,13 @@ Meteor.methods({
       // Use provided schema
       urlSchema = result.schemes[0];
     }
-    const description = result.info.description.length <= 1000 ? 
+    const description = result.info.description.length <= 1000 ?
       result.info.description : '';
 
     // Create config file
     const apiData = {
       name: result.info.title,
-      description: description,
+      description,
       url: `${urlSchema}://${result.host}`,
     };
 
