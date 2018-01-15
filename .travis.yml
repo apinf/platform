@@ -19,6 +19,7 @@ before_cache:
 
 cache:
   yarn: true
+  bundler: true
   directories:
     - $HOME/.meteor
 
@@ -38,6 +39,7 @@ before_script:
   - ./.scripts/start-xvfb.sh
 
 install:
+  - export PATH=$PATH:`yarn global bin`
   - export PATH="$HOME/.meteor:$PATH"
 
 script:
