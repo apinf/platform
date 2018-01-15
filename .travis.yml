@@ -10,11 +10,8 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
-        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
     packages:
       - g++-4.8
-      - yarn
   chrome: stable
 
 branches:
@@ -45,7 +42,6 @@ before_script:
   - ./.scripts/start-xvfb.sh
 
 install:
-  - export PATH=$PATH:`yarn global bin`
   - export PATH="$HOME/.meteor:$PATH"
 
 script:
