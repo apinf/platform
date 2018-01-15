@@ -5,10 +5,9 @@ node_js:
 
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+
   chrome: stable
 
 branches:
