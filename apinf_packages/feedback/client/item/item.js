@@ -135,19 +135,25 @@ Template.feedbackItem.events({
       }
     });
   },
-  'click .edit-feedback-item': function () {
+  'click .edit-feedback-item': function (event) {
+    // Prevent default action of the event will not be triggered
+    event.preventDefault();
     // Get feedback item
     const item = Template.currentData().item;
     // Show edit feedback form modal
     Modal.show('feedbackForm', { formType: 'update', feedbackItem: item });
   },
-  'click .delete-feedback-item': function () {
+  'click .delete-feedback-item': function (event) {
+    // Prevent default action of the event will not be triggered
+    event.preventDefault();
     // Get feedback item
     const item = Template.currentData().item;
     // Show the Delete Confirmation dialogue
     Modal.show('deleteFeedbackItem', { feedbackItem: item });
   },
-  'click .visibility-feedback-item': () => {
+  'click .visibility-feedback-item': (event) => {
+    // Prevent default action of the event will not be triggered
+    event.preventDefault();
     // Get feedback item
     const item = Template.currentData().item;
 
