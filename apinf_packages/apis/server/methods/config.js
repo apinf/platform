@@ -52,18 +52,13 @@ Meteor.methods({
 
         if (count === 0) {
           // Insert the API and get the id
-          const newApiId = Apis.insert(api);
-
-          // Get the new api
-          const newApi = Apis.findOne({ _id: newApiId });
+          status.apiId = Apis.insert(api);
+          // set the slug to do the redirect
+          status.slug = Meteor.call('updateApiBySlug', { _id: status.apiId });
 
           // Set message
           status.isSuccessful = true;
           status.message = 'API config has been successfully imported.';
-
-          // set the slug to do the redirect
-          status.slug = newApi.slug;
-          status.apiId = newApiId;
         } else {
           status.message = 'API name must be unique';
         }
@@ -121,7 +116,6 @@ Meteor.methods({
       // Insert OpenAPI specification in ApiDocs collection
       ApiDocs.insert(query);
     }
-
     return addedApi;
   },
 });
