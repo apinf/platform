@@ -1,12 +1,17 @@
 sudo: false
 language: node_js
 node_js:
-  - '4'
+  - '8'
 
 addons:
   apt:
+    sources:
+    - google-chrome
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - google-chrome-stable
+    - g++-4.8
+
 
   chrome: stable
 
@@ -40,7 +45,6 @@ before_script:
   - ./.scripts/start-xvfb.sh
 
 install:
-  - export PATH=$PATH:`yarn global bin`
   - export PATH="$HOME/.meteor:$PATH"
 
 script:
