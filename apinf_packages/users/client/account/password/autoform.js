@@ -26,7 +26,8 @@ AutoForm.hooks({
 
           // Alert the user of success
           sAlert.success(message);
-          instance.done(message);
+          // submitted successfully, call onSuccess with `result` arg set to "message"
+          instance.done(null, message);
 
           // Clear the form
           AutoForm.resetForm('updatePassword');
