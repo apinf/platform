@@ -5,13 +5,16 @@ group: deprecated-2017Q4
 language: node_js
 node_js:
   - '4'
-
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - google-chrome
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - google-chrome-stable
+    - g++-4.8
+
+
   chrome: stable
 
 branches:
@@ -23,6 +26,7 @@ before_cache:
 
 cache:
   yarn: true
+  bundler: true
   directories:
     - $HOME/.meteor
 
@@ -38,6 +42,7 @@ before_script:
   - yarn run lint
   - npm view chimp version
   - npm view chromedriver version
+  - meteor --version
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
 
