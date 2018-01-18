@@ -47,6 +47,8 @@ install:
 script:
   # Run meteor and chimp from node.js
   - travis_retry yarn test
+  # Run Endpoint testing with latests version of NodeJS
+  - travis_retry nvm install 8 && nvm use 8 && yarn run test-endpoints
   # Build docker image
   - ./.scripts/docker_build.sh
 

@@ -30,6 +30,7 @@
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.5",
     "moment": "^2.17.1",
+    "mongodb": "^2.2.31",
     "raven": "^2.1.0",
     "raven-js": "^3.16.0",
     "select2": "^4.0.3",
@@ -50,6 +51,8 @@
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-meteor": "^4.0.0",
+    "jest": "^20.0.4",
+    "superagent": "^3.6.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
@@ -58,7 +61,8 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --mocha --path=tests/end-to-end --watch",
     "chimp-test": "chimp tests/chimp-config.js",
     "start": "meteor",
-    "test": "node .scripts/run-chimp.js"
+    "test": "node .scripts/run-chimp.js",
+    "test-endpoints": "./node_modules/jest/bin/jest.js --verbose --forceExit tests/endpoints"
   },
   "repository": {
     "type": "git",
