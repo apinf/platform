@@ -1,7 +1,4 @@
-sudo: required
-dist: trusty
-group: deprecated-2017Q4
-
+sudo: false
 language: node_js
 node_js:
   - '4'
@@ -9,11 +6,11 @@ node_js:
 addons:
   apt:
     sources:
+      - google-chrome
       - ubuntu-toolchain-r-test
     packages:
+      - google-chrome-stable
       - g++-4.8
-  chrome: stable
-
 branches:
   only:
     - develop
@@ -38,6 +35,7 @@ before_script:
   - yarn run lint
   - npm view chimp version
   - npm view chromedriver version
+  - meteor --version
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
 
