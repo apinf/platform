@@ -9,6 +9,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import ApiKeys from '/apinf_packages/api_keys/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import Apis from '/apinf_packages/apis/collection';
 
 Meteor.methods({
   createApiKey (apiId) {
@@ -137,5 +138,17 @@ Meteor.methods({
         'apinf-usernotloggedin-error', TAPi18n.__('apinf_usernotloggedin_error')
       );
     }
+  },
+  getApisList (proxyId) {
+    // Get logged in user
+    const currentUser = Meteor.user();
+    // Make sure proxyId is a string
+    check(proxyId, String);
+    // Get all APIs ID that are connected to specify Proxy
+    const apiIds = ProxyBackends.find({ proxyId }).map(backend => { return backend.apiId; });
+    // Find all APIs that are connected to Proxy
+    const apisList = Apis.find({ _id: { $in: apiIds }, managerIds: currentUser._id }).fetch();
+
+    return apisList;
   },
 });
