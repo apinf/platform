@@ -70,12 +70,6 @@ You can have multiple proxies under one management.
     -H  "content-type: application/json"
   </pre>
 
-
-
-
-
-
-
   **List my organizations**
 
   Endpoint contains search as optional parameter.
@@ -117,12 +111,6 @@ You can have multiple proxies under one management.
   You can see detailed analytics data for one API by adding
   API Id as path parameter. With additional query parameters you can
   limit the results. See /analytics/{apiID} endpoint for details.
-
-
-
-
-
-
 
   #### GET /analytics/2
 
@@ -166,40 +154,55 @@ You can have multiple proxies under one management.
   * for example "2012-07-14T01:00:00+01:00" or "2012-07-14".
 
   ----
-
-
-
-
-
-  
     `,
   // --------------------------------------------
+  getMyOrganizations: `
+  ## List User's Organizations
+  This method lists User's Organizations in APInf API management catalog.
+  The list contains either all Organizations or a set of Organizations limited by a search string.
+
+  The list consists of names and IDs of each Organization meeting the condition.
+   `,
+  // --------------------------------------------
   getAnalytics: `
-  ### Adds a new User account ###
+  ## List APIs' traffic data on KPI level
+  Show key performance indicator (KPI) values and identification information of APIs.
 
-  With this method a new user account is created.
+  ### Request parameters
 
-  Parameters:
-  * all parameters are mandatory
-  * *username* must be unique
-  * *email address* must be unique
-  * *password* must be at least 6 characters long
+  APIs are listed depending on value given to parameter **apisBy**
+  - **organization** = all APIs, *that belong to Organizations*,
+  which are managed by User (default value)
+  - **owner** = all APIs, which are managed by User
 
-  On a successful case a response message with HTTP code 201 is returned.
+  By using parameter **organizationId** the User can limit the search
+  in one Organization in both cases.
 
 
+  With parameter **period** the User can select the one of three periods,
+  over which the data is returned. Periods are calculated by server time.
+  - **Today** is todays values (default value)
+  - **Week** is for past week (7 days back beginning from yesterday)
+  - **month** (30 days back beginning from yesterday).
 
-  Payload contains the data of created User account.
+  ### Response content
+  The response contains meta data
+  - the API URL (proxy base path)
+  - name of API
+  - ID of API
+  - data interval (here always 1440, i.e. a day)
+
+  In addition to that, the response contains summaries during the selected period
+  - number of requests
+  - median response time
+  - number of unique users
+
+  Note! When period is set to 'Today' the current day data from midnight
+  (on server time) to current moment is returned, not a complete 24 hour period.
   `,
   // --------------------------------------------
   getAnalyticsApiId: `
   ## List API with detailed information
-
-
-
-
-
-
   Show KPI values and detailed information related to one specific API defined by ID.
 
   ## Approaches
@@ -208,10 +211,7 @@ You can have multiple proxies under one management.
   - a predefined period (today, week, month)
   - or a specific date with granularity interval.
 
-
   If the parameter *period* is used, the latter two parameters are obsolete.
-
-
 
   ### Request parameters
 
@@ -223,8 +223,7 @@ You can have multiple proxies under one management.
   - **Week** is for past week (7 days back beginning from yesterday)
   - **month** (30 days back beginning from yesterday).
 
-  With parameter **date** the User can identify a date of which more granular
-  details are fetched.
+  With parameter **date** the User can identify a date of which more granular details are fetched.
   The form of value for parameter is given according to ISO 8601, YYYY-MM-DD.
   With parameter user can pick one of days between yesterday to 7 days back from today
   (which, by the way, is same as the range indicated with value *week* of parameter *period*).
@@ -232,34 +231,21 @@ You can have multiple proxies under one management.
   Parameter **date** is obsolete in case parameter *period* was given.
 
   With parameter **interval** is indicated the granularity of analytic data.
-  E.g. when granularity is set to 5, the analytics data is summed up for each 5 minutes
-  during the day and returned as a table 12 * 24 lines.
+  E.g. when granularity is set to 5, the analytics data is summed up
+  for each 5 minutes during the day and returned as a table 12 * 24 lines.
   Accordingly when granularity is set to 60 (an hour), the returned table contains 24 lines.
 
   Parameter **interval** is obsolete in case parameter *period* was given.
 
   ### Response content
   The response contains meta data
-
-
-
   - the API URL (proxy base path)
   - name of API
   - ID of API
   - data interval (here always 1440, i.e. a day)
 
-
-
-
-
-
-
   In addition to that, the response contains summaries during the selected period
-
   - number of requests
-
-
-
   - median response time
   - number of unique users
 
@@ -269,11 +255,7 @@ You can have multiple proxies under one management.
   - change in number of unique users
 
   Information about frequent users as array of
-
   - users email address
-
-
-
   - number of calls made
   - request path
 
@@ -289,9 +271,44 @@ You can have multiple proxies under one management.
   - responses divided by HTTP code (2xx, 3xx, 4xx, 5xx)
   - response times (shortest, median, 95 percentile and longest)
 
-  Note! When period is set to 'Today' the current day data from midnight (on server time)
-   to current moment is returned, not a complete 24 hour period.
+  Note! When period is set to 'Today' the current day data from midnight
+  (on server time) to current moment is returned, not a complete 24 hour period.
+  `,
+  // --------------------------------------------
+  apisBy: `
+  Optional parameter to limit the search to APIs in Organizations
+  managed by user (value 'organization') or managed by user (value 'owner').
+  *Default value is 'organization'*.
+  `,
+  organizationId: `
+  Optional parameter to limit the search to one Organization only.
+  `,
+  period: `
+  Predefined periods for detailed API performance data.
+  Periods are calculated by server time.
+  - **Today** is current day values from midnight to current moment. (Default)
+  - **Week** is past 7 days (does not include current day).
+  - **Month** is 30 days (does not include current day).
+  `,
+  startDate: `
+  Provide start date value from which the analytics is provided from.
+  Date is expected in following format: yyyy-mm-dd, example 2017-11-30
+  (Standard: ISO 8601). With *days* parameter you define the period length.
 
+  **Note!** Keep in mind that our platform can provide fast access to
+  data only 30 days backwards. Any request going further down the history
+  will most likely cause slower API response time.
+
+  **Note!** If you use combination of *startDate* and *days* parameters,
+  you can not use *period* parameter.
+  `,
+  days: `
+  Provide number (integer) of days you want to include
+  in the result set. The start date defined with *startDate* parameter is
+  included in the count.
+
+  **Note!** If you use combination of *startDate* and *days* parameters,
+  you can not use *period* parameter.   
   `,
 };
 
