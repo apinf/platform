@@ -267,23 +267,43 @@ AnalyticsV1.addRoute('analytics', {
       let toDate;
       if (period === 'today') {
         // only one day
-        fromDate = moment().format('MM-DD-YYYY');
+        fromDate = moment();
+        fromDate_x = fromDate.format('x');
+        fromDate_f = fromDate.format('MM-DD-YYYY');
         toDate = fromDate;
+        toDate_x = toDate.format('x');
+        toDate_f = toDate.format('MM-DD-YYYY');
       } else if (period === 'week') {
         // previous week, ending yesterday
-        fromDate = moment().subtract(1, 'weeks').format('MM-DD-YYYY');
-        toDate = moment().subtract(1, 'days').format('MM-DD-YYYY');
+        fromDate = moment().subtract(1, 'weeks');
+        fromDate_x = fromDate.format('x');
+        fromDate_f = fromDate.format('MM-DD-YYYY');
+        toDate = moment().subtract(1, 'days');
+        toDate_x = toDate.format('x');
+        toDate_f = toDate.format('MM-DD-YYYY');
       } else if (period === 'month') {
         // previous month, ending yesterday
-        fromDate = moment().subtract(1, 'months').format('MM-DD-YYYY');
-        toDate = moment().subtract(1, 'days').format('MM-DD-YYYY');
+        fromDate = moment().subtract(1, 'months');
+        fromDate_x = fromDate.format('x');
+        fromDate_f = fromDate.format('MM-DD-YYYY');
+        toDate = moment().subtract(1, 'days');
+        toDate_x = toDate.format('x');
+        toDate_f = toDate.format('MM-DD-YYYY');
       } else {
         // free value, starting from given, duration of days
-        fromDate = moment(startDate).format('MM-DD-YYYY');
-        toDate = moment(startDate).add(days - 1, 'days').format('MM-DD-YYYY');
+        fromDate = moment(startDate);
+        fromDate_x = fromDate.format('x');
+        fromDate_f = fromDate.format('MM-DD-YYYY');
+        toDate = moment(startDate).add(days - 1, 'days');
+        toDate_x = toDate.format('x');
+        toDate_f = toDate.format('MM-DD-YYYY');
       }
       console.log('fromDate=', fromDate);
+      console.log('fromDate_f=', fromDate_f);
+      console.log('fromDate_x=', fromDate_x);
       console.log('toDate=', toDate);
+      console.log('toDate_f=', toDate_f);
+      console.log('toDate_x=', toDate_x);
       // To date
 
 
@@ -292,7 +312,7 @@ AnalyticsV1.addRoute('analytics', {
       const options = {};
 
       // Set condition for a list of managed APIs
-      query.managerIds = managerId;
+      //query.managerIds = managerId;
 
       // Pass an optional search string for looking up inventory.
       if (queryParams.q) {
@@ -336,13 +356,13 @@ AnalyticsV1.addRoute('analytics', {
         metaAnalytics.apiName = api.name;
         metaAnalytics.apiId = api._id;
         metaAnalytics.interval = 1440;
+        metaAnalytics.proxyPath = '';
 
         // For summary counters
-        summariesRequestCount = {};
-        summariesResponseTime = {};
-        summariesUniqueUsers = {};
+        const summariesRequestCount = {};
+        const summariesResponseTime = {};
+        const summariesUniqueUsers = {};
 
-        metaAnalytics.proxyPath = '';
         // Return API Proxy's URL, if it exists
         const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
@@ -354,12 +374,18 @@ AnalyticsV1.addRoute('analytics', {
           const frontendPrefix = proxyBackend.frontendPrefix();
           // Provide full proxy path
           metaAnalytics.proxyPath = proxyUrl.concat(frontendPrefix);
-        }
 
-        // Fill and return analytics data
-        apiAnalytics.meta = metaAnalytics;
-        apiAnalytics.summaries = summariesAnalytics;
-        return apiAnalytics;
+          // Fill summaries
+          summariesAnalytics.requestCount = 1;
+          summariesAnalytics.responseTime = 131;
+          summariesAnalytics.uniqueUsers = 1313;
+          
+          // Fill and return analytics data4
+          apiAnalytics.meta = metaAnalytics;
+          apiAnalytics.summaries = summariesAnalytics;
+          return apiAnalytics;
+        }
+        
       });
 
       // Construct response
