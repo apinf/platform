@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // APInf import
+import '/apinf_packages/apis/client/profile/status/status.html';
 import convertStatusCode from './convert_status_code';
 
 Template.viewApiStatus.onRendered(() => {

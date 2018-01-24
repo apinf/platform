@@ -5,6 +5,7 @@ import { Template } from 'meteor/templating';
 import formatDate from '/apinf_packages/core/helper_functions/format_date';
 
 // Collection imports
+import '/apinf_packages/metadata/client/view/metadata.html';
 import ApiMetadata from '../../collection';
 
 Template.viewApiMetadata.onCreated(function () {

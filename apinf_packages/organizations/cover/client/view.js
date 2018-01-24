@@ -11,6 +11,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import OrganizationCover from '/apinf_packages/organizations/cover/collection/collection';
 
+import '/apinf_packages/organizations/cover/client/view.html';
+
 Template.viewOrganizationCover.helpers({
   uploadedOrganizationCoverLink () {
     // Get organization from template data

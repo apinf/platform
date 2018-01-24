@@ -13,7 +13,9 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
-import ApiBackendRatings from '../collection';
+import ApiBackendRatings from '/apinf_packages/ratings/collection';
+
+import '/apinf_packages/ratings/client/rating.html';
 
 Template.apiBackendRating.onCreated(function () {
   // Get reference to template instance

@@ -13,6 +13,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Organizations from '/apinf_packages/organizations/collection';
 
+import '/apinf_packages/organizations/client/catalog/toolbar/toolbar.html';
+
 Template.organizationCatalogToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;

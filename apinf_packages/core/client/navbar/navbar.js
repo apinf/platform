@@ -18,6 +18,10 @@ import Branding from '/apinf_packages/branding/collection';
 import ProjectLogo from '/apinf_packages/branding/logo/collection';
 import Settings from '/apinf_packages/settings/collection';
 
+import '/apinf_packages/core/client/navbar/navbar.html';
+import '/apinf_packages/core/lib/i18n/en.i18n.json';
+import '/apinf_packages/core/client/userMenu.html';
+
 Template.navbar.onCreated(function () {
   const templateInstance = this;
   // Subscribe to project logo

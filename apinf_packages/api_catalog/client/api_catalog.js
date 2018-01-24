@@ -25,6 +25,10 @@ import 'locale-compare-polyfill';
 // Npm packages imports
 import _ from 'lodash';
 
+import '/apinf_packages/api_catalog/client/api_catalog.html';
+import '/apinf_packages/api_catalog/client/toolbar/toolbar.js';
+import '/apinf_packages/api_filter/client/filtered_by/filtered_by.js';
+
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;

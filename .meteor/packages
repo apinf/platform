@@ -98,3 +98,6 @@ natestrauser:select2
 meteorhacks:aggregate
 practicalmeteor:mocha
 practicalmeteor:chai
+ddp-client
+promise
+xolvio:cleaner

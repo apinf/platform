@@ -13,7 +13,10 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
-import Feedback from '../collection';
+import Feedback from '/apinf_packages/feedback/collection';
+
+import '/apinf_packages/feedback/client/feedback.html';
+import '/apinf_packages/feedback/client/list/list.js';
 
 Template.apiFeedback.onCreated(function () {
   const instance = this;

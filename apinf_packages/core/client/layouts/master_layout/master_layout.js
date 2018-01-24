@@ -9,6 +9,11 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
 
+import '/apinf_packages/core/client/layouts/master_layout/master_layout.html';
+import '/apinf_packages/core/client/custom_stylesheet/custom_stylesheet.js';
+import '/apinf_packages/core/client/navbar/navbar.js';
+import '/apinf_packages/core/client/footer/footer.js';
+
 Template.masterLayout.onCreated(function () {
   // Subscription to branding collection
   this.subscribe('branding');

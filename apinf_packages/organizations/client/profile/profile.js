@@ -12,6 +12,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Collection imports
 import Organizations from '/apinf_packages/organizations/collection/';
 
+import '/apinf_packages/organizations/client/profile/profile.html';
+import '/apinf_packages/organizations/client/profile/header/header.js';
+import '/apinf_packages/organizations/client/profile/featured_apis/featured_apis.html';
+import '/apinf_packages/organizations/client/profile/apis/apis.js';
+
 Template.organizationProfile.onCreated(function () {
   // Get reference to template instance
   const instance = this;

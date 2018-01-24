@@ -16,6 +16,8 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
+import '/apinf_packages/organizations/client/profile/apis/apis.html';
+
 Template.organizationApis.onCreated(function () {
   // Get reference to template instance
   const instance = this;

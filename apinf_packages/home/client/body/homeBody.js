@@ -15,6 +15,12 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import CoverPhoto from '/apinf_packages/branding/cover_photo/collection';
 import Settings from '/apinf_packages/settings/collection';
 
+
+import '/apinf_packages/home/client/contact/contact.js';
+import '/apinf_packages/core/client/search_field/search-field.html';
+import '/apinf_packages/apis/client/homePageApis/homePageApis.js';
+import '/apinf_packages/home/client/body/homeBody.html';
+
 Template.homeBody.onCreated(function () {
   // Get reference to template instance
   const templateInstance = this;

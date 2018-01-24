@@ -6,6 +6,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+import '/apinf_packages/api_filter/client/filter_icon.html';
+import '/apinf_packages/api_filter/client/form/filter_form.js';
+
 Template.apisFilterIcon.events({
   'click #filter-icon': (event, templateInstance) => {
     // Show/hide filter options

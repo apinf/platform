@@ -9,6 +9,9 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+import '/apinf_packages/api_catalog/client/toolbar/toolbar.html';
+import '/apinf_packages/api_filter/client/filter_icon.js';
+
 Template.apiCatalogToolbar.onRendered(function () {
   // Get reference to template instance
   const instance = this;

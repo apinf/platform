@@ -8,6 +8,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+import '/apinf_packages/api_filter/client/filtered_by/filtered_by.html';
+
 Template.apiFilteredBy.onCreated(function () {
   const instance = this;
 

@@ -10,6 +10,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 
+import '/apinf_packages/bookmarks/client/bookmark.html';
+
 Template.bookmark.onCreated(function () {
   // Get reference to template instance
   const instance = this;

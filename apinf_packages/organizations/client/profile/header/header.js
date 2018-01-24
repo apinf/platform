@@ -14,6 +14,11 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import Branding from '/apinf_packages/branding/collection';
 import OrganizationLogo from '/apinf_packages/organizations/logo/collection/collection';
 
+import '/apinf_packages/organizations/client/profile/header/header.html';
+import '/apinf_packages/organizations/cover/client/view.js';
+import '/apinf_packages/organizations/logo/client/view.js';
+import './social-media-icons/social-media-icons.html';
+
 Template.organizationProfileHeader.onCreated(function () {
   const instance = this;
 

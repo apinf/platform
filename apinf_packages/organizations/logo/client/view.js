@@ -6,6 +6,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+import '/apinf_packages/organizations/logo/client/view.html';
+
 Template.viewOrganizationLogo.helpers({
   uploadedOrganizationLogoLink () {
     // Get Organization from template data
