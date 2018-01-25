@@ -49,6 +49,12 @@ Settings.schema = new SimpleSchema({
       return validation;
     },
   },
+  developmentFeatures: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+    label: 'Enabled',
+  },
   mail: {
     type: Object,
     optional: true,
