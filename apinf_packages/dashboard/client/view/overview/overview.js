@@ -18,18 +18,21 @@ import {
 
 Template.dashboardOverviewStatistic.helpers({
   arrowDirection (parameter) {
+    const dataset = Template.instance().data.dataset;
     // Provide compared data
-    return arrowDirection(parameter, this);
+    return arrowDirection(parameter, dataset);
   },
   percentages (parameter) {
+    const dataset = Template.instance().data.dataset;
     // Provide compared data
-    return percentageValue(parameter, this);
+    return percentageValue(parameter, dataset);
   },
   overviewComparing (parameter) {
+    const dataset = Template.instance().data.dataset;
     // Get value of timeframe
     const currentTimeframe = FlowRouter.getQueryParam('timeframe');
 
-    return summaryComparing(parameter, this, currentTimeframe);
+    return summaryComparing(parameter, dataset, currentTimeframe);
   },
   timeframeYesterday () {
     const timeframe = FlowRouter.getQueryParam('timeframe');
@@ -39,88 +42,34 @@ Template.dashboardOverviewStatistic.helpers({
   timeframe () {
     return FlowRouter.getQueryParam('timeframe');
   },
-  getStatistics (param) {
-    const proxyBackend = Template.instance().data.proxyBackend;
-    const path = proxyBackend.frontendPrefix();
-
-    const summaryStatisticResponse = Template.currentData().summaryStatisticResponse;
-    // Get summary statistics data that relates to provided Proxy Backend
-    const summaryStatistic = summaryStatisticResponse && summaryStatisticResponse[path];
-
-    const statusCodesResponse = Template.currentData().statusCodesResponse;
-    // Get response status codes data that relates to provided Proxy Backend
-    const statusCodesData = statusCodesResponse && statusCodesResponse[path];
-
-    let count;
-
-    switch (param) {
-      case 'success': {
-        count = statusCodesData ? statusCodesData.successCallsCount : 0;
-        break;
-      }
-      case 'error': {
-        count = statusCodesData ? statusCodesData.errorCallsCount : 0;
-        break;
-      }
-      case 'requests': {
-        count = summaryStatistic ? summaryStatistic.requestNumber : 0;
-        break;
-      }
-      case 'time': {
-        count = summaryStatistic ? summaryStatistic.medianResponseTime : 0;
-        break;
-      }
-      case 'users': {
-        count = summaryStatistic ? summaryStatistic.avgUniqueUsers : 0;
-        break;
-      }
-      default: {
-        count = 0;
-        break;
-      }
-    }
-
-    return count;
-  },
-  comparisonData () {
-    const proxyBackend = Template.instance().data.proxyBackend;
-    const path = proxyBackend.frontendPrefix();
-
-    const comparisonResponse = Template.currentData().comparisonStatisticResponse;
-    // Get comparison data that relates to provided Proxy Backend
-    const comparisonData = comparisonResponse && comparisonResponse[path];
-
-    return comparisonData || {};
-  },
   getChartData (param) {
-    const proxyBackend = Template.instance().data.proxyBackend;
-    const path = proxyBackend.frontendPrefix();
+    const prefix = Template.instance().data.prefix;
 
     const overviewChartResponse = Template.currentData().overviewChartResponse;
     // Get Overview chart data that relates to provided Proxy Backend
-    const overviewChartData = overviewChartResponse && overviewChartResponse[path];
+    const overviewChartData = overviewChartResponse && overviewChartResponse[prefix];
 
-    let dataset;
+    let chartData;
 
     switch (param) {
       case 'requests': {
-        dataset = overviewChartData ? overviewChartData.requestNumber : [];
+        chartData = overviewChartData ? overviewChartData.requestNumber : [];
         break;
       }
       case 'time': {
-        dataset = overviewChartData ? overviewChartData.medianTime : [];
+        chartData = overviewChartData ? overviewChartData.medianTime : [];
         break;
       }
       case 'users': {
-        dataset = overviewChartData ? overviewChartData.uniqueUsers : [];
+        chartData = overviewChartData ? overviewChartData.uniqueUsers : [];
         break;
       }
       default: {
-        dataset = [];
+        chartData = [];
         break;
       }
     }
 
-    return dataset;
+    return chartData;
   },
 });

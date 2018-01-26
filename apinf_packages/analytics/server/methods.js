@@ -9,9 +9,11 @@ import { check } from 'meteor/check';
 
 // Collections imports
 import AnalyticsData from '/apinf_packages/analytics/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
 import _ from 'lodash';
+import moment from 'moment/moment';
 
 // APInf imports
 import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
@@ -107,21 +109,15 @@ Meteor.methods({
 
     return errors;
   },
-  summaryStatisticNumber (filter) {
+  summaryStatisticNumber (filter, proxyBackendIds) {
     check(filter, Object);
+    check(proxyBackendIds, Array);
 
     // Create query to $match
     const matchQuery = {
       date: { $gte: filter.fromDate, $lt: filter.toDate },
+      proxyBackendId: { $in: proxyBackendIds },
     };
-
-    if (filter.proxyId) {
-      // Fetch data for particular Proxy (and several Proxy Backends)
-      matchQuery.proxyId = filter.proxyId;
-    } else {
-      // Fetch data for particular Proxy Backend
-      matchQuery.proxyBackendId = filter.proxyBackendId;
-    }
 
     const requestPathsData = {};
 
@@ -142,27 +138,21 @@ Meteor.methods({
             sumMedianTime: { $sum: '$medianResponseTime' },
             sumUniqueUsers: { $sum: '$uniqueUsers' },
             successCallsCount: { $sum: '$successCallsCount' },
-            redirectCallsCount: { $sum: '$redirectCallsCount' },
-            failCallsCount: { $sum: '$failCallsCount' },
             errorCallsCount: { $sum: '$errorCallsCount' },
           },
         },
       ]
     ).forEach(dataset => {
-      // Create query
-      const query = { prefix: dataset._id, date: matchQuery.date, requestNumber: { $ne: 0 } };
+      // Expend query
+      matchQuery.prefix = dataset._id;
+      matchQuery.requestNumber = { $ne: 0 };
 
-      if (filter.proxyId) {
-        query.proxyId = filter.proxyId;
-      } else {
-        query.proxyBackendId = filter.proxyBackendId;
-      }
-
-      // Get the number of date when requests were
-      const existedValuesCount = AnalyticsData.find(query).count();
+      // Get the number of date when requests were no 0
+      const existedValuesCount = AnalyticsData.find(matchQuery).count();
 
       // Calculate average (mean) value of Response time and Uniques users during period
       requestPathsData[dataset._id] = {
+        prefix: dataset._id, // Just rename it
         medianResponseTime: parseInt(dataset.sumMedianTime / existedValuesCount, 10) || 0,
         avgUniqueUsers: parseInt(dataset.sumUniqueUsers / existedValuesCount, 10) || 0,
       };
@@ -171,29 +161,6 @@ Meteor.methods({
     });
 
     return requestPathsData;
-  },
-  summaryStatisticTrend (filter, currentPeriodResponse) {
-    check(filter, Object);
-    check(currentPeriodResponse, Object);
-
-    // Get summary statistic data about previous period
-    const previousPeriodResponse = Meteor.call('summaryStatisticNumber', filter);
-
-    const comparisonData = {};
-
-    // Compare the current and previous periods data
-    _.mapKeys(currentPeriodResponse, (dataset, path) => {
-      const previousPeriodData = previousPeriodResponse[path] || {};
-
-      comparisonData[path] = {
-        compareRequests: calculateTrend(previousPeriodData.requestNumber, dataset.requestNumber),
-        compareResponse:
-          calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime),
-        compareUsers: calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers),
-      };
-    });
-
-    return comparisonData;
   },
   statusCodesData (filter) {
     check(filter, Object);
@@ -281,5 +248,51 @@ Meteor.methods({
     });
 
     return requestPathsData;
+  },
+  totalNumberRequestsAndTrend (filter, proxyBackendIds) {
+    check(filter, Object);
+    check(proxyBackendIds, Array);
+
+    // Get data for Current period
+    const currentPeriodResponse =
+      Meteor.call('summaryStatisticNumber', filter, proxyBackendIds);
+
+    // Create date range filter for Previous period
+    const previousPeriodFilter = {
+      fromDate: moment(filter.fromDate).subtract(filter.timeframe, 'd').valueOf(),
+      toDate: filter.fromDate,
+    };
+
+    // Get data for Previous period
+    const previousPeriodResponse =
+      Meteor.call('summaryStatisticNumber', previousPeriodFilter, proxyBackendIds);
+
+    const response = [];
+
+    // Compare the current and previous periods data
+    _.mapKeys(currentPeriodResponse, (dataset, path) => {
+      const proxyBackend = ProxyBackends.findOne({
+        'apiUmbrella.url_matches.frontend_prefix': dataset.prefix,
+      });
+
+      if (proxyBackend) {
+        dataset.proxyBackendId = proxyBackend._id;
+        dataset.apiName = proxyBackend.apiName();
+        dataset.apiSlug = proxyBackend.apiSlug();
+      }
+
+      // Create a comparison data
+      const previousPeriodData = previousPeriodResponse[path] || {};
+      dataset.compareRequests =
+        calculateTrend(previousPeriodData.requestNumber, dataset.requestNumber);
+      dataset.compareResponse =
+        calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime);
+      dataset.compareUsers =
+        calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers);
+
+      response.push(dataset);
+    });
+
+    return response;
   },
 });
