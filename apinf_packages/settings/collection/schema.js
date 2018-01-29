@@ -23,6 +23,12 @@ Settings.schema = new SimpleSchema({
     optional: true,
     defaultValue: false,
   },
+  developmentFeatures: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+    label: 'Enabled',
+  },
   mail: {
     type: Object,
     optional: true,
