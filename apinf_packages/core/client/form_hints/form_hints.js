@@ -25,14 +25,6 @@ const formHints = {
       placement: 'left',
     },
   },
-  documentation_editor_create_file: {
-    message () {
-      return TAPi18n.__('manageApiDocumentationModal_hints_createApiDocumentation');
-    },
-    options: {
-      placement: 'left',
-    },
-  },
 };
 
 InlineHelp.initHelp(formHints);
