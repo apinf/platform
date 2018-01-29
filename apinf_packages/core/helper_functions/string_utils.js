@@ -15,10 +15,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
   @param {string} sort - string format
 */
 
-// use custom sort function with i18n support
 export default function localisedSorting (string1, string2, sort = 1) {
   // Get current language
   const language = TAPi18n.getLanguage();
-  
-  return string1.localeCompare(string2, language) * sort;  
+
+  return string1.localeCompare(string2, language) * sort;
 }
