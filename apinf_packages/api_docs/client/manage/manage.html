@@ -58,15 +58,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               type="select-checkbox-inline"
               noselect=false
             }}
-            {{# if apiDocumentationEditorIsEnabled }}
-              <legend>
-                {{> showHelp 'documentation_editor_create_file' }}
-                {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
-              </legend>
-              <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
-                {{_ "manageApiDocumentationModal_openDocumentationEditor" }}
-              </a>
-            {{/ if }}
             <legend>
               {{> showHelp 'documentation_link' }}
               {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}

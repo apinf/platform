@@ -102,7 +102,6 @@
   "apiDetails_usageInstructions_disableApiKeyText": "use the URL:",
   "apiDetails_usageInstructions_noApiKeyText": "use your API key. Click the \"Get API key\" button to request the key.",
   "apiDetailsForm_text_updateInformation": "API information was updated",
-  "apiDocumentationEditor_notAvailable": "API documentation editor is not available.",
   "apiDocumentation_APICall_Warning_Message": "API calls (PUT, POST, or DELETE) from Swagger are real calls.",
   "apiDocumentation_APICall_Warning_Title": "Warning!",
   "apiDocumentation_buttonText_closeEditor": "Close editor",
@@ -437,7 +436,6 @@
   "manageApiDocumentationModal_AddedFile_Message": "Documentation file successfully uploaded!",
   "manageApiDocumentationModal_CreateDocumentation_CancelButton": "Cancel",
   "manageApiDocumentationModal_CreateDocumentation_SaveButton": "Save",
-  "manageApiDocumentationModal_CreateDocumentation_Title": "Create documentation file",
   "manageApiDocumentationModal_CreateLinks_AddButton": "Add",
   "manageApiDocumentationModal_DeletedFile_ConfirmationMessage": "Are you sure you want to remove the documentation file?",
   "manageApiDocumentationModal_DeletedFile_Message": "Documentation file successfully deleted!",
@@ -449,7 +447,6 @@
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
   "manageApiDocumentationModal_hints_documentation_link": "Link to the Wiki, Github page or other web resource where the documentation of your API is located. You can add upto 8 external documentation links",
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can add a Swagger document by uploading a file or by giving a link to the remote file. Note: Try out methods can only be controlled, if the file is uploaded.",
-  "manageApiDocumentationModal_openDocumentationEditor": "Open API documentation editor",
   "manageApiDocumentationModal_addDocumentation_title": "Add documentation",
   "manageApiDocumentationModal_helpText_useHttpsProtocol": "This application platform uses HTTPS. API requests from documentation will not work, if API uses HTTP.",
   "manageApiDocumentationModal_ToolTip_Message": "Maximum 8 external documentation links are allowed. Please delete from existing ones if you wish to add a new one.",
@@ -861,16 +858,6 @@
           "label": "Only platform administrators are allowed to add new Organizations"
         }
       },
-      "apiDocumentationEditor": {
-        "label": "API Documentation Editor",
-        "enabled": {
-          "label": "Enabled"
-        },
-        "host": {
-          "label": "Host",
-          "placeholder": "https:\/\/editor.example.com\/"
-        }
-      },
       "mail": {
         "enabled": {
           "label": "Enabled"
@@ -1157,7 +1144,6 @@
   "searchPage_searchForm_placeholderText": "Search...",
   "searchPage_searchResultsHeader": "Search results",
   "settings_panelTitle_addingApisAndOrganizations": "Adding APIs and Organizations",
-  "settings_apiDocumentation_editor": "API Documentation Editor",
   "settings_mail": "Mail",
   "settings_mail_fromEmail": "This email is used to validate email addresses used for user registration and contact form submission. It needs to be a valid, pre-existing, domain-specific email",
   "settings_mail_toEmail": "This email is used for receiving contact form submissions. It needs to be a valid, pre-existing, domain-specific email",
