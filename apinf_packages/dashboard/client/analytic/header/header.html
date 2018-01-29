@@ -5,7 +5,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiAnalyticPageHeader">
   <h1>
-    {{ api.name }}
+    <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+      {{ api.name }}
+    </a>
   </h1>
   <div class="row">
     <div class="col-xs-12 form-group">
