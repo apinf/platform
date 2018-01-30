@@ -234,6 +234,7 @@ AnalyticsV1.addRoute('analytics', {
          'apisBy', apisBy);
       }
 
+      let searchDates = {};
       // Default value for period is 'today'
       let period = this.queryParams.period || 'today';
 
@@ -244,7 +245,7 @@ AnalyticsV1.addRoute('analytics', {
            'period', period);
         } else {
         // Get period begin and end dates
-        const searchDates = searchBeginEndDates ('', startDate, days);        
+        searchDates = searchBeginEndDates(period, '', '');        
 
         }
 
@@ -275,12 +276,10 @@ AnalyticsV1.addRoute('analytics', {
         days *= 1;
 
         // Get period begin and end dates
-        const searchDates = searchBeginEndDates ('', startDate, days);        
+        searchDates = searchBeginEndDates('', startDate, days);        
 
       }
         
-      console.log('searchDates=',searchDates);
-
       // Pass an optional search string for looking up inventory.
       if (queryParams.q) {
         query.$or = [
@@ -417,7 +416,7 @@ AnalyticsV1.addRoute('analytics/:id', {
     },
     action () {
       // Get Manager ID from header
-      const managerId = this.userId;
+      const managerId = this.request.headers['x-user-id'];
       if (!managerId) {
         return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id).');
       }
@@ -439,7 +438,8 @@ AnalyticsV1.addRoute('analytics/:id', {
       if (!queryParams.period && !queryParams.date) {
         return errorMessagePayload(400, 'Either of parameters "date" and "period" must be given!');
       }
-
+      // Object for begin and end dates of search
+      let searchDates = {};
       // Is period given?
       let period = queryParams.period;
 
@@ -451,7 +451,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         }
 
         // Get period begin and end dates
-        const searchDates = searchBeginEndDates (period, '', '');
+        searchDates = searchBeginEndDates (period, '', '');
 
         // Default value for interval is 60 minutes
         let interval = 60;
@@ -469,7 +469,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         
         
         // Get period begin and end dates
-        const searchDates = searchBeginEndDates ('', startDate, days);        
+        searchDates = searchBeginEndDates ('', startDate, days);        
         
         // Get given interval or default value?
         let interval = queryParams.interval || 60;
