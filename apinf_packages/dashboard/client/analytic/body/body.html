@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-xs-12 col-md-4">
         <div class="api-view-card form-group">
           <p class="overview-col-title">
-            {{_ 'apiAnalyticPageBody_text_requestsCount' count=(getStatistics 'requests') }}
+            {{_ 'apiAnalyticPageBody_text_requestsCount' count=analyticsData.requestNumber }}
           </p>
           <p class="overview-col-title">
             {{_ 'apiAnalyticPageBody_chartTitle_apiRequests' }}
@@ -23,7 +23,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           </div>
 
-          {{# with comparisonData }}
+          {{# if analyticsData }}
             <div class="form-group">
               <div class="{{ arrowDirection 'requests' }}"></div>
               <!-- Keep the space symbol to set SPAN element a height -->
@@ -31,7 +31,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{ summaryComparing 'requests' }}&nbsp;
               </span>
             </div>
-          {{/ with }}
+          {{/ if }}
 
           <!-- response status list-->
           <div class="row">
@@ -55,7 +55,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-xs-12 col-md-4">
         <div class="api-view-card form-group">
           <p class="overview-col-title">
-            {{_ 'apiAnalyticPageBody_text_responseTime' time=(getStatistics 'time') }}
+            {{_ 'apiAnalyticPageBody_text_responseTime' time=analyticsData.medianResponseTime }}
           </p>
           <p class="overview-col-title">
             {{_ 'apiAnalyticPageBody_chartTitle_medianResponseTime' }}
@@ -67,7 +67,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{> spinner}}
             {{/ if }}
           </div>
-          {{# with comparisonData }}
+          {{# if analyticsData }}
             <div class="form-group">
               <div class="{{ arrowDirection 'time' }}"></div>
               <!-- Keep the space symbol to set SPAN element a height -->
@@ -75,7 +75,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{ summaryComparing 'time' }}&nbsp;
               </span>
             </div>
-          {{/ with }}
+          {{/ if }}
           <!-- Keep the space symbol to set a height the element a height -->
           <div class="row">&nbsp;</div>
         </div>
@@ -85,7 +85,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-xs-12 col-md-4">
         <div class="api-view-card form-group">
           <p class="overview-col-title">
-            {{_ 'apiAnalyticPageBody_text_usersCount' count=(getStatistics 'users') }} <sup>*</sup>
+            {{_ 'apiAnalyticPageBody_text_usersCount' count=analyticsData.avgUniqueUsers }} <sup>*</sup>
           </p>
           <p class="overview-col-title">
             {{_ 'apiAnalyticPageBody_chartTitle_uniqueUsers' }}
@@ -97,7 +97,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{> spinner}}
             {{/ if }}
           </div>
-          {{# with comparisonData }}
+          {{# if analyticsData }}
             <div class="form-group">
               <div class="{{ arrowDirection 'users' }}"></div>
               <!-- Keep the space symbol to set SPAN element a height -->
@@ -105,7 +105,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{ summaryComparing 'users' }}&nbsp;
               </span>
             </div>
-          {{/ with }}
+          {{/ if }}
           <div class="overview-help-text">
             <sup>*</sup> {{_ 'apiAnalyticPageBody_helpText_averageUniqueUsers' }}
           </div>

@@ -14,9 +14,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Npm packages imports
 import moment from 'moment';
 
-// APInf imports
-import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
-
 Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
@@ -27,16 +24,21 @@ Template.dashboardView.onCreated(function () {
     otherApis: [],
   });
 
-  // Get API IDs for grouping
-  Meteor.call('groupingApiIds', (err, res) => {
-    instance.groupingIds.set(res);
+  instance.autorun(() => {
+    const proxyId = FlowRouter.getQueryParam('proxy_id');
+    if (proxyId) {
+      // Get Proxy backend IDs for grouping
+      Meteor.call('groupingBackendIds', proxyId, (err, res) => {
+        instance.groupingIds.set(res);
+      });
+    }
   });
 
   // Init variables
   instance.overviewChartResponse = new ReactiveVar();
-  instance.summaryStatisticResponse = new ReactiveVar();
-  instance.comparisonStatisticResponse = new ReactiveVar();
-  instance.statusCodesResponse = new ReactiveVar();
+  instance.analyticsDataMyApis = new ReactiveVar();
+  instance.analyticsDataManagedApis = new ReactiveVar();
+  instance.analyticsDataOtherApis = new ReactiveVar();
 
   instance.autorun(() => {
     const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -48,58 +50,50 @@ Template.dashboardView.onCreated(function () {
     // Get timestamp of timeframe ago 00:00:00 Date time (included value)
     const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
 
-    // Get data about summary statistic for current period
-    promisifyCall('summaryStatisticNumber', { proxyId, fromDate, toDate })
-      .then((currentPeriodDataset) => {
-        instance.summaryStatisticResponse.set(currentPeriodDataset);
-
-        const previousFromDate = moment(fromDate).subtract(timeframe, 'd').valueOf();
-
-        // Get trend data is based on the current period data
-        Meteor.call('summaryStatisticTrend',
-          { proxyId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset,
-          (err, compareResponse) => {
-            // Save the response about Comparison data
-            instance.comparisonStatisticResponse.set(compareResponse);
-          });
-      }).catch((error) => {
-        throw new Meteor.Error(error);
-      });
-
     Meteor.call('overviewChartsData', { proxyId, fromDate, toDate }, (error, dataset) => {
       instance.overviewChartResponse.set(dataset);
     });
+  });
 
-    Meteor.call('statusCodesData', { proxyId, fromDate, toDate }, (error, dataset) => {
-      instance.statusCodesResponse.set(dataset);
-    });
+  instance.autorun(() => {
+    const grouping = instance.groupingIds.get();
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
+    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
+
+    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
+    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+
+    Meteor.call('totalNumberRequestsAndTrend',
+      { fromDate, toDate, timeframe }, grouping.myApis, (error, result) => {
+        this.analyticsDataMyApis.set(result);
+      });
+
+    Meteor.call('totalNumberRequestsAndTrend',
+      { fromDate, toDate, timeframe }, grouping.managedApis, (error, result) => {
+        this.analyticsDataManagedApis.set(result);
+      });
+
+    Meteor.call('totalNumberRequestsAndTrend',
+      { fromDate, toDate, timeframe }, grouping.otherApis, (error, result) => {
+        this.analyticsDataOtherApis.set(result);
+      });
   });
 });
 
 Template.dashboardView.helpers({
-  grouping () {
-    const instance = Template.instance();
-    // Return object with IDs groups
-    return instance.groupingIds.get();
-  },
   overviewChartResponse () {
     const instance = Template.instance();
 
     return instance.overviewChartResponse.get();
   },
-  summaryStatisticResponse () {
-    const instance = Template.instance();
-
-    return instance.summaryStatisticResponse.get();
+  analyticsDataMyApis () {
+    return Template.instance().analyticsDataMyApis.get();
   },
-  comparisonStatisticResponse () {
-    const instance = Template.instance();
-
-    return instance.comparisonStatisticResponse.get();
+  analyticsDataManagedApis () {
+    return Template.instance().analyticsDataManagedApis.get();
   },
-  statusCodesResponse () {
-    const instance = Template.instance();
-
-    return instance.statusCodesResponse.get();
+  analyticsDataOtherApis () {
+    return Template.instance().analyticsDataOtherApis.get();
   },
 });

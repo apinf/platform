@@ -21,7 +21,6 @@ import _ from 'lodash';
 
 // APInf import
 import mostUsersRequest from '/apinf_packages/dashboard/client/elasticsearch_queries/most_users';
-import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 import {
   arrowDirection,
   percentageValue,
@@ -38,8 +37,7 @@ Template.apiAnalyticPageBody.onCreated(function () {
 
   // Init variables
   instance.overviewChartResponse = new ReactiveVar();
-  instance.summaryStatisticResponse = new ReactiveVar();
-  instance.comparisonStatisticResponse = new ReactiveVar();
+  instance.analyticsData = new ReactiveVar();
   instance.statusCodesResponse = new ReactiveVar();
   instance.timelineChartResponse = new ReactiveVar();
   instance.allRequestPaths = new ReactiveVar();
@@ -55,22 +53,9 @@ Template.apiAnalyticPageBody.onCreated(function () {
     // Get timestamp of timeframe ago 00:00:00 Date time (included value)
     const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
 
-    // Get data about summary statistic for current period
-    promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
-      .then((currentPeriodDataset) => {
-        instance.summaryStatisticResponse.set(currentPeriodDataset);
-
-        const previousFromDate = moment(fromDate).subtract(timeframe, 'd').valueOf();
-
-        // Get trend data is based on the current period data
-        Meteor.call('summaryStatisticTrend',
-          { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset,
-          (err, compareResponse) => {
-            // Save the response about Comparison data
-            instance.comparisonStatisticResponse.set(compareResponse);
-          });
-      }).catch((error) => {
-        throw new Meteor.Error(error);
+    Meteor.call('totalNumberRequestsAndTrend',
+      { fromDate, toDate, timeframe }, [proxyBackendId], (error, result) => {
+        this.analyticsData.set(result);
       });
 
     // Get data about summary statistic over time
@@ -135,21 +120,32 @@ Template.apiAnalyticPageBody.onCreated(function () {
 });
 
 Template.apiAnalyticPageBody.helpers({
-// TODO: Keep in mind to case with error result
   arrowDirection (parameter) {
+    const instance = Template.instance();
+
+    const dataset = instance.analyticsData.get();
+
     // Provide compared data
-    return arrowDirection(parameter, this);
+    return arrowDirection(parameter, dataset[0]);
   },
   percentages (parameter) {
+    const instance = Template.instance();
+
+    const dataset = instance.analyticsData.get() || [];
+
     // Provide compared data
-    return percentageValue(parameter, this);
+    return percentageValue(parameter, dataset[0]);
   },
   summaryComparing (parameter) {
+    const instance = Template.instance();
+
     // Get value of timeframe
     const currentTimeframe = FlowRouter.getQueryParam('timeframe');
 
+    const dataset = instance.analyticsData.get() || [];
+
     // Provide compared data
-    return summaryComparing(parameter, this, currentTimeframe);
+    return summaryComparing(parameter, dataset[0], currentTimeframe);
   },
   overviewChartResponse () {
     const instance = Template.instance();
@@ -157,36 +153,12 @@ Template.apiAnalyticPageBody.helpers({
     // Return boolean value of available overviewChart response
     return !!(instance.overviewChartResponse.get());
   },
-  getStatistics (param) {
+  analyticsData () {
     const instance = Template.instance();
-    const path = instance.requestPath;
+    const dataset = instance.analyticsData.get() || [];
 
-    const summaryStatisticResponse = instance.summaryStatisticResponse.get();
-    const summaryStatistic = summaryStatisticResponse && summaryStatisticResponse[path];
-
-    let count;
-
-    switch (param) {
-
-      case 'requests': {
-        count = summaryStatistic ? summaryStatistic.requestNumber : 0;
-        break;
-      }
-      case 'time': {
-        count = summaryStatistic ? summaryStatistic.medianResponseTime : 0;
-        break;
-      }
-      case 'users': {
-        count = summaryStatistic ? summaryStatistic.avgUniqueUsers : 0;
-        break;
-      }
-      default: {
-        count = 0;
-        break;
-      }
-    }
-
-    return count;
+    // Return boolean value of available analyticsData response
+    return dataset[0];
   },
   getChartData (param) {
     const instance = Template.instance();
@@ -217,15 +189,6 @@ Template.apiAnalyticPageBody.helpers({
     }
 
     return dataset;
-  },
-  comparisonData () {
-    const instance = Template.instance();
-    const path = instance.requestPath;
-
-    const comparisonResponse = instance.comparisonStatisticResponse.get();
-    const comparisonData = comparisonResponse && comparisonResponse[path];
-
-    return comparisonData || {};
   },
   getStatusCode (param) {
     const instance = Template.instance();

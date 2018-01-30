@@ -5,13 +5,12 @@
 
 // Meteor packages imports
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
-
-// Collection imports
-import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APInf imports
 import {
@@ -25,21 +24,51 @@ Template.dashboardSummaryStatistic.onCreated(function () {
 
   // Dictionary of Flags about display/not the overview part for current item
   instance.displayOverview = new ReactiveDict();
+  instance.sortedAnalyticsData = new ReactiveVar();
 
+  // Watching on Sort parameter
   instance.autorun(() => {
-    // Get API IDs
-    const apiIds = Template.currentData().apiIds;
+    let sortedAnalyticsData;
+    const sortParameter = FlowRouter.getQueryParam('sort');
 
-    // Update list of proxy backends
-    const proxyBackends = ProxyBackends.find({ apiId: { $in: apiIds } }).fetch();
+    const analyticsData = Template.currentData().analyticsData;
 
-    // Get the current language
-    const language = TAPi18n.getLanguage();
+    if (analyticsData) {
+      switch (sortParameter) {
+        case 'calls': {
+          // Sort by desc requests number
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return b.requestNumber - a.requestNumber;
+          });
+          break;
+        }
+        case 'users': {
+          // Sort by desc unique users count
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return b.avgUniqueUsers - a.avgUniqueUsers;
+          });
+          break;
+        }
+        case 'time': {
+          // Sort by desc median response time
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return b.medianResponseTime - a.medianResponseTime;
+          });
+          break;
+        }
+        default: {
+          // sort by name on default
+          const language = TAPi18n.getLanguage();
 
-    // Sort by name
-    instance.proxyBackends = proxyBackends.sort((a, b) => {
-      return a.apiName().localeCompare(b.apiName(), language);
-    });
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return a.apiName.localeCompare(b.apiName, language);
+          });
+        }
+      }
+    }
+
+    // Update
+    instance.sortedAnalyticsData.set(sortedAnalyticsData);
   });
 });
 
@@ -73,59 +102,13 @@ Template.dashboardSummaryStatistic.helpers({
 
     return instance.displayOverview.get(parameter);
   },
-  proxyBackends () {
-    const instance = Template.instance();
-
-    // Sort by name
-    return instance.proxyBackends;
-  },
   tableTitle () {
     const title = Template.currentData().title;
 
     return TAPi18n.__(`dashboardSummaryStatistic_groupTitle_${title}`);
   },
-  getCount (path, param) {
-    const summaryStatisticResponse = Template.currentData().summaryStatisticResponse;
-    // Get summary statistics data that relates to provided Proxy Backend
-    const totalNumber = summaryStatisticResponse && summaryStatisticResponse[path];
-
-    let count;
-
-    switch (param) {
-      case 'success': {
-        count = totalNumber ? totalNumber.successCallsCount : 0;
-        break;
-      }
-      case 'error': {
-        count = totalNumber ? totalNumber.errorCallsCount : 0;
-        break;
-      }
-      case 'requests': {
-        count = totalNumber ? totalNumber.requestNumber : 0;
-        break;
-      }
-      case 'time': {
-        count = totalNumber ? totalNumber.medianResponseTime : 0;
-        break;
-      }
-      case 'users': {
-        count = totalNumber ? totalNumber.avgUniqueUsers : 0;
-        break;
-      }
-      default: {
-        count = 0;
-        break;
-      }
-    }
-
-    return count;
-  },
-  comparisonData (path) {
-    const comparisonResponse = Template.currentData().comparisonStatisticResponse;
-    // Get comparison data that relates to provided Proxy Backend
-    const comparisonData = comparisonResponse && comparisonResponse[path];
-
-    return comparisonData || {};
+  sortedAnalyticsData () {
+    return Template.instance().sortedAnalyticsData.get();
   },
 });
 
