@@ -21,7 +21,7 @@ AutoForm.hooks({
         Meteor.call('updateOrganizationBySlug', { name: organizationName }, (error, slug) => {
           if (error) {
             // Show error message
-            sAlert.error(error);
+            sAlert.error(error, { timeout: 'none' });
             // Redirect to organization catalog
             FlowRouter.go('organizations');
           } else {
@@ -41,7 +41,7 @@ AutoForm.hooks({
       const message = TAPi18n.__('organizationSettingsGeneral_update_failedMessage');
 
       // Show failure message to user
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     },
   },
 });

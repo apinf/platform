@@ -39,7 +39,7 @@ AutoForm.hooks({
         const message = TAPi18n.__('apiMonitoringForm_errorMessage');
 
         // Alert the user of error
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
         return false;
       },
     },
@@ -85,7 +85,7 @@ AutoForm.hooks({
       const message = TAPi18n.__('apiMonitoringForm_errorMessage');
 
       // Alert the user of error
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     },
   },
 });

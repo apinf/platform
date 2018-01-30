@@ -51,7 +51,7 @@ Template.removeProxy.events({
       Meteor.call('removeProxy', proxyId, (err) => {
         // Display error if something went wrong
         if (err) {
-          sAlert.error(err);
+          sAlert.error(err, { timeout: 'none' });
         } else {
           const message = TAPi18n.__('proxyItem_removeProxy_successMessage');
           sAlert.success(message);
@@ -65,7 +65,7 @@ Template.removeProxy.events({
     } else {
       // Show alert of failed removal
       const errorMessage = TAPi18n.__('removeProxy_errorMessage');
-      sAlert.error(errorMessage);
+      sAlert.error(errorMessage, { timeout: 'none' });
     }
   },
 });

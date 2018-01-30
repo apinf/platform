@@ -49,12 +49,12 @@ AutoForm.addHooks('downloadSDK', {
         const message = TAPi18n.__('sdkCodeGeneratorModal_errorTextInvalidHost');
 
         // Alert user of error
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
 
         form.done(new Error(message));
       } else if (error) {
         // Alert user of error
-        sAlert.error(error.message);
+        sAlert.error(error.message, { timeout: 'none' });
 
         form.done(new Error(error.message));
       } else if (result.statusCode === 200) {
@@ -73,7 +73,7 @@ AutoForm.addHooks('downloadSDK', {
         const message = TAPi18n.__('sdkCodeGeneratorModal_errorText');
 
           // Alert user of error
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
 
         form.done(new Error(message));
       }

@@ -29,7 +29,7 @@ Template.apiKey.onCreated(function () {
   Meteor.call('getApisList', proxyBackend.proxyId, (error, result) => {
     if (error) {
       // Show human-readable reason for error
-      sAlert.error(error.reason);
+      sAlert.error(error.reason, { timeout: 'none' });
     } else {
       // Set result in reactive variable
       instance.apisList.set(result);
@@ -86,7 +86,7 @@ Template.apiKey.events({
       Meteor.call('createApiKey', api._id, (error, result) => {
         if (error) {
           // Show human-readable reason for error
-          sAlert.error(error.reason);
+          sAlert.error(error.reason, { timeout: 'none' });
         } else {
           // Get success message translation
           const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');

@@ -18,7 +18,7 @@ AutoForm.hooks({
         $('.btn-primary').attr('disabled', null);
         if (error) {
           // Alert the user of failure
-          sAlert.error(error.message);
+          sAlert.error(error.message, { timeout: 'none' });
           instance.done(error.message);
         } else {
           // Get password update success message translation

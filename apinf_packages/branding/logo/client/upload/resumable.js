@@ -71,7 +71,7 @@ Meteor.startup(() => {
       const message = TAPi18n.__('uploadProjectLogo_acceptedExtensions');
 
       // Alert user of extension error
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   });
 });
