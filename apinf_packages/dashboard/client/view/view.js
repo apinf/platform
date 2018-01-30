@@ -14,6 +14,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 // Npm packages imports
 import moment from 'moment';
 
+import Apis from '/apinf_packages/apis/collection';
+
 Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
@@ -95,5 +97,19 @@ Template.dashboardView.helpers({
   },
   analyticsDataOtherApis () {
     return Template.instance().analyticsDataOtherApis.get();
+  },
+  displayTables () {
+    const searchValue = Template.currentData().searchValue;
+
+    // Make sure searchValue exists
+    if (searchValue) {
+      const query = { name: { $regex: searchValue, $options: 'i' } };
+
+      // Display tables if result is not empty
+      return Apis.find(query).count() !== 0;
+    }
+
+    // Display tables by default
+    return true;
   },
 });
