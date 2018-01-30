@@ -18,6 +18,9 @@ import {
   percentageValue,
 } from '/apinf_packages/dashboard/lib/trend_helpers';
 
+// Collections imports
+import Apis from '../../../../apis/collection';
+
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
   const instance = this;
@@ -70,6 +73,27 @@ Template.dashboardSummaryStatistic.onCreated(function () {
     // Update
     instance.sortedAnalyticsData.set(sortedAnalyticsData);
   });
+
+  this.autorun(() => {
+    const analyticsData = Template.currentData().analyticsData;
+    const searchValue = Template.currentData().searchValue;
+
+    // Make sure analyticsData exist and searchValue is provided
+    if (searchValue && analyticsData) {
+      // Get API IDs that satisfy provided search value
+      const apiIds = Apis.find({
+        name: {
+          $regex: searchValue,
+          $options: 'i', // case-insensitive option
+        },
+      }).map(api => { return api._id; });
+
+      // Find in Analytics Dataset
+      this.searchResult = analyticsData.filter(dataset => {
+        return apiIds.indexOf(dataset.apiId) > -1;
+      });
+    }
+  });
 });
 
 Template.dashboardSummaryStatistic.helpers({
@@ -108,7 +132,42 @@ Template.dashboardSummaryStatistic.helpers({
     return TAPi18n.__(`dashboardSummaryStatistic_groupTitle_${title}`);
   },
   sortedAnalyticsData () {
+    const searchValue = Template.currentData().searchValue;
+
+    // Case: SearchName is specified
+    if (searchValue) {
+      // Display search result
+      return Template.instance().searchResult;
+    }
+    // Otherwise: display all data
     return Template.instance().sortedAnalyticsData.get();
+  },
+  displayTable () {
+    const searchValue = Template.currentData().searchValue;
+
+    // Case: SearchName is specified
+    if (searchValue) {
+      // Get search data
+      const searchResult = Template.instance().searchResult;
+      // Display if table contains result
+      return searchResult && searchResult.length > 0;
+    }
+
+    // Otherwise display table is analytics data is not empty
+    const analyticsData = Template.currentData().analyticsData;
+
+    return analyticsData && analyticsData.length > 0;
+  },
+  count () {
+    const searchValue = Template.currentData().searchValue;
+
+    // Case: SearchName is specified
+    if (searchValue) {
+      // Display search result
+      return Template.instance().searchResult.length;
+    }
+    // Otherwise: display all data
+    return Template.currentData().analyticsData.length;
   },
 });
 
