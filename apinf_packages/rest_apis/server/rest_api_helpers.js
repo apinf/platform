@@ -3,6 +3,9 @@
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Npm packages imports
+import moment from 'moment';
+
  // Fill and return error response message body
  export function errorMessagePayload (statusCode, messageText, additionalKey, additionalValue) {
    // Fill payload
@@ -23,8 +26,8 @@
  export function searchBeginEndDates (period, startDate, days) {
   // Search dates, beginning and end
   const searchDates = {
-    begin,
-    end,
+    begin: '',
+    end: '',
   }
   let fromDate;
   let toDate;
@@ -72,6 +75,8 @@
 
   searchDates.begin = fromDate_f;
   searchDates.end = toDate_f;
+
+  console.log('helper searchDates=', searchDates);
 
   return searchDates;
 }
