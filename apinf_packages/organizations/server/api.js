@@ -199,6 +199,9 @@ ManagementV1.addRoute('organizations', {
         403: {
           description: 'User does not have permission',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -331,6 +334,11 @@ ManagementV1.addRoute('organizations', {
 
       const organizationId = Organizations.insert(organizationData);
 
+      // If insert failed, stop and send response
+      if (!organizationId) {
+        return errorMessagePayload(500, 'Insert organization failed. Organization not created');
+      }
+
       return {
         statusCode: 201,
         body: {
@@ -453,6 +461,9 @@ ManagementV1.addRoute('organizations/:id', {
         },
         404: {
           description: 'Organization is not found',
+        },
+        500: {
+          description: 'Internal server error',
         },
       },
       security: [
@@ -603,7 +614,12 @@ ManagementV1.addRoute('organizations/:id', {
       }
 
       // Update Organization document
-      Organizations.update(organizationId, { $set: organizationData });
+      const result = Organizations.update(organizationId, { $set: organizationData });
+
+      // Check if organiztions update failed
+      if (result === 0) {
+        return errorMessagePayload(500, 'Organization update failed');
+      }
 
       return {
         statusCode: 200,
@@ -639,6 +655,9 @@ ManagementV1.addRoute('organizations/:id', {
         404: {
           description: 'Organization is not found',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -669,7 +688,11 @@ ManagementV1.addRoute('organizations/:id', {
       }
 
       // Remove Organization document
-      Meteor.call('removeOrganization', organization._id);
+      const result = Meteor.call('removeOrganization', organization._id);
+
+      if (result === 0) {
+        return errorMessagePayload(500, 'Organization removing failed.');
+      }
 
       return {
         statusCode: 204,
@@ -878,6 +901,9 @@ ManagementV1.addRoute('organizations/:id/managers', {
             },
           },
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -889,6 +915,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
     action () {
       // Get data from body parameters
       const bodyParams = this.bodyParams;
+
       // Get ID of Organization
       // Note! It can not be checked here, if this parameter is not provided,
       //       because in that case the parameters are shifted and endpoint is not found at all.
@@ -931,7 +958,13 @@ ManagementV1.addRoute('organizations/:id/managers', {
       }
 
       // Update Organization manager list
-      Organizations.update(organizationId, { $push: { managerIds: newManager._id } });
+      const result = Organizations.update(organizationId,
+        { $push: { managerIds: newManager._id } });
+
+      // If organiztions update failed
+      if (result === 0) {
+        return errorMessagePayload(500, 'Organization update failed');
+      }
 
       // Do not include password in response
       const options = {};
@@ -1140,6 +1173,9 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         404: {
           description: 'Organization is not found',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -1190,7 +1226,11 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       }
 
       // Remove user from organization manager list
-      Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
+      const result = Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
+
+      if (result === 0) {
+        return errorMessagePayload(500, 'Removing manager id from organization failed.');
+      }
 
       return {
         statusCode: 204,
