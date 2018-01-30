@@ -26,7 +26,7 @@ AutoForm.hooks({
         const message = TAPi18n.__('organizationManagerForm_emailNotRegistered_errorText');
 
         // Warn manager that user email is not registered
-        sAlert.warning(message);
+        sAlert.error(message);
       }
 
       if (errorType === 'manager-already-exist') {
@@ -34,7 +34,7 @@ AutoForm.hooks({
         const message = TAPi18n.__('organizationManagerForm_managerAlreadyExist_errorText');
 
         // Warn manager that manager is already exist
-        sAlert.warning(message);
+        sAlert.error(message);
       }
     },
   },
