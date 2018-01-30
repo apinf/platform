@@ -181,8 +181,8 @@ You can have multiple proxies under one management.
 
   With parameter **period** the User can select the one of three periods,
   over which the data is returned. Periods are calculated by server time.
-  - **Today** is todays values (default value)
-  - **Week** is for past week (7 days back beginning from yesterday)
+  - **today** is todays values (default value)
+  - **week** is for past week (7 days back beginning from yesterday)
   - **month** (30 days back beginning from yesterday).
 
   ### Response content
@@ -286,9 +286,9 @@ You can have multiple proxies under one management.
   period: `
   Predefined periods for detailed API performance data.
   Periods are calculated by server time.
-  - **Today** is current day values from midnight to current moment. (Default)
-  - **Week** is past 7 days (does not include current day).
-  - **Month** is 30 days (does not include current day).
+  - **today** is current day values from midnight to current moment. (Default)
+  - **week** is past 7 days (does not include current day).
+  - **month** is 30 days (does not include current day).
   `,
   startDate: `
   Provide start date value from which the analytics is provided from.
