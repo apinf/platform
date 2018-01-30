@@ -27,7 +27,7 @@ Template.removeEmqUser.events({
 
     // Call method to remove emq user
     Meteor.call('removeEmqUser', emqHttpApi, user.id, (err, res) => {
-      if (err) sAlert.error(err.message);
+      if (err) sAlert.error(err.message, { timeout: 'none' });
 
       // Check if user has really been added to EMQ
       if (res.id === user.id) {

@@ -55,7 +55,7 @@ Meteor.startup(() => {
         const message = TAPi18n.__('manageApiDocumentationModal_FileType_Message');
 
         // Alert user of error
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
       }
     } else {
       // Finish uploading

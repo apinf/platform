@@ -25,7 +25,7 @@ Template.swaggerUi.onCreated(() => {
   // Parsed swagger file
   Meteor.call('parsedSwaggerDocument', documentationURL, (error, result) => {
     if (error) {
-      sAlert.error(error);
+      sAlert.error(error, { timeout: 'none' });
       // Document is invalid
       instance.documentationValid = false;
     } else {

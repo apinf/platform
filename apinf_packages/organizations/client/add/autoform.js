@@ -45,7 +45,7 @@ AutoForm.hooks({
           Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
             if (error) {
               // Show error message
-              sAlert.error(error);
+              sAlert.error(error, { timeout: 'none' });
               // Redirect to organization Catalog
               FlowRouter.go('organizations');
             } else {
