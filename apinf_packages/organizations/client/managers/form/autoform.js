@@ -36,6 +36,22 @@ AutoForm.hooks({
         // Display error
         sAlert.error(message, { timeout: 'none' });
       }
+
+      if (errorType === 'email-failed') {
+        // Get error message translation
+        const message = TAPi18n.__('organizationManagerForm_sendingVerificationEmailFailed');
+
+        // Show error to manager that verification email failed
+        sAlert.error(message, { timeout: 'none' });
+      }
+
+      if (errorType === 'email-failed-mail-setting-invalid') {
+        // Get error message translation
+        const message = TAPi18n.__('organizationManagerForm_invalidMailSetting_emailFailed');
+
+        // Show error to manager that mail settings invalid
+        sAlert.error(message, { timeout: 'none' });
+      }
     },
   },
 });
