@@ -22,7 +22,7 @@ AutoForm.hooks({
       const message = TAPi18n.__('organizationSettingsContactInfo_update_failedMessage');
 
       // Alert failure message to user
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     },
   },
 });

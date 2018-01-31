@@ -33,7 +33,7 @@ Template.regenerateApiKey.events({
       Meteor.call('regenerateApiKey', api._id, apiKey, (error) => {
         if (error) {
           // Show human-readable reason for error
-          sAlert.error(error.reason);
+          sAlert.error(error.reason, { timeout: 'none' });
         } else {
           // Get success message translation
           const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');

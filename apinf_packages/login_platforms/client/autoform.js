@@ -31,7 +31,7 @@ AutoForm.hooks({
             // Get settings form success message translation
             const message = TAPi18n.__('settings_errorMessage');
             // Alert the user of successful save
-            sAlert.error(message);
+            sAlert.error(message, { timeout: 'none' });
           }
         });
     },
