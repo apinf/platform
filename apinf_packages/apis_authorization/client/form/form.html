@@ -10,10 +10,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{# autoForm
     schema=emailSchema
     id="authorizedUserForm"
-    class="form-inline" }}
+    class="form-inline"
+    type="method"
+    meteormethod="addAuthorizedUser"
+  }}
     <fieldset>
-      {{> afQuickField name='email' }}
-      {{> afQuickField name='apiId' value=apiId type="hidden" }}
+      {{> afQuickField name='user' }}
+      {{> afQuickField name='apiId' value=api._id type="hidden" }}
     </fieldset>
 
     <button type="submit" class="btn btn-primary">
