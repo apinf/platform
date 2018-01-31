@@ -11,6 +11,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import {
   apiBasePathRegEx,
   proxyBasePathRegEx,
+  topicPrefixRegEx,
+  topicRegEx,
 } from '/apinf_packages/proxy_backends/collection/regex';
 import contactPhone from '/apinf_packages/organizations/collection/regex';
 
@@ -21,6 +23,8 @@ const invalidEmailMessage = TAPi18n.__('invalidEmailMessage');
 const invalidProxyBasePathMessage = TAPi18n.__('invalidProxyBasePathMessage');
 const invalidApiBasePathMessage = TAPi18n.__('invalidApiBasePathMessage');
 const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
+const invalidTopicPrefixMessage = TAPi18n.__('invalidTopicPrefix');
+const invalidTopicMessage = TAPi18n.__('invalidTopic');
 
 SimpleSchema.messages({
   regEx: [
@@ -31,6 +35,8 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
     { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
     { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
+    { exp: topicPrefixRegEx, msg: invalidTopicPrefixMessage },
+    { exp: topicRegEx, msg: invalidTopicMessage },
     { exp: contactPhone, msg: invalidContactPhoneMessage },
   ],
 });
