@@ -95,7 +95,7 @@ Template.dashboardPage.helpers({
 });
 
 Template.dashboardPage.events({
-  'change #search-box': (event, templateInstance) => {
+  'keyup #search-box': (event, templateInstance) => {
     const apiName = event.currentTarget.value;
     templateInstance.searchValue.set(apiName);
   },
