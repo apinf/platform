@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
-import Apis from '/apinf_packages/apis/collection';
+import Apis from '/apinf_packages/apis/collection/index';
 
 Template.apiRemoveAuthorizedUser.events({
   'click #confirm-remove': function (event, templateInstance) {
