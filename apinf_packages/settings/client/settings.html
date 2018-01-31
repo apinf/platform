@@ -52,6 +52,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
+              <span class="panel-title">
+                {{_ "settings_dashboardAutomaticUpdatePeriod" }}
+              </span>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='pageReloadTime' id="page-reload-time" }}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
             <span class="panel-title">
               {{_ "settings_mail" }}
             </span>

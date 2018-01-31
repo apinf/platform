@@ -1152,6 +1152,7 @@
   "settings_save": "Save",
   "settings_development_features": "Enable development features",
   "settings_sdkCode_generator": "SDK Code Generator",
+  "settings_dashboardAutomaticUpdatePeriod": "Dashboard Automatic Update Period",
   "settings_successMessage": "Settings saved",
   "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
   "settingsPage_title_settings": "Settings",

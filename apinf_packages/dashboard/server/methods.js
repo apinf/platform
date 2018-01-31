@@ -16,6 +16,7 @@ import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Organizations from '/apinf_packages/organizations/collection';
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Meteor.methods({
   getProxiesList (type) {
@@ -131,5 +132,16 @@ Meteor.methods({
 
     // Return all lists of IDs
     return groupingIds;
+  },
+  getPeriod () {
+    // Get setting data
+    const settings = Settings.findOne();
+    const reloadTime = {};
+    if (settings && settings.pageReloadTime) {
+      reloadTime.period = settings.pageReloadTime;
+    } else {
+      reloadTime.period = 10;
+    }
+    return reloadTime;
   },
 });

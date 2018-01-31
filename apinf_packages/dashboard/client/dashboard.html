@@ -5,9 +5,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardPage">
   <div class="container">
-    <h1 class="page">
-      {{_ "dashboardPage_title_dashboard" }}
-    </h1>
+    <div class="row">
+      <div class="pull-left">
+        <h1 class="page">
+          {{_ "dashboardPage_title_dashboard" }}
+        </h1>
+      </div>
+      <div class="pull-right ">
+        <h4 class="countdown " id="countdown">
+          {{# if countdown }}
+            Page reload in {{countdown.minutes}}min {{countdown.seconds}}sec
+          {{/ if }}
+        </h4>
+      </div>
+    </div>
 
     {{# if Template.subscriptionsReady }}
       {{> dashboardToolbar proxiesList=proxiesList }}

@@ -3,6 +3,9 @@
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Npm packages imports
+import moment from 'moment';
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -12,6 +15,7 @@ import { Template } from 'meteor/templating';
 import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -34,6 +38,9 @@ Template.dashboardPage.onCreated(function () {
   });
 
   instance.proxiesList = new ReactiveVar();
+  instance.countdown = new ReactiveVar();
+  instance.timeInterval = new ReactiveVar(null);
+  instance.reload = new ReactiveVar(true);
 
   // Get proxy ID value from query params
   const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -66,6 +73,78 @@ Template.dashboardPage.onCreated(function () {
   });
 });
 
+Template.dashboardPage.onRendered(function () {
+  // Get reference to template instance
+  const instance = this;
+  instance.autorun(() => {
+    // Check reload instance exists
+    if (instance.reload.get()) {
+      // Get period value from MongoDB
+      Meteor.call('getPeriod', (error, result) => {
+        if (error) {
+          // Alert failure message to user
+          sAlert.error(error);
+        } else {
+          const period = result.period;
+          // Get end time value
+          const endTime = moment().add(period, 'm').unix();
+
+          instance.timeInterval.set(setInterval(() => {
+            instance.reload.set(false);
+            // Get remaining time
+            const remainingTime = endTime - moment().unix();
+            // Get countdown in second
+            const seconds = moment.duration(remainingTime * 1000).seconds();
+            // Get countdown in minutes
+            const minutes = moment.duration(remainingTime * 1000).minutes();
+
+            // Check countdown remaining time
+            if (remainingTime <= 1) {
+              // Clear timeinterval value
+              clearInterval(instance.timeInterval.get());
+              const proxyType = 'apiUmbrella';
+              Meteor.call('getProxiesList', proxyType, (err, resp) => {
+                // if proxy id value isn't available from Query param then
+                // Set the first item of list as the default value
+                // Make sure Proxies list is not empty
+                if (resp.length > 0) {
+                  // Modify the current history entry instead of creating a new one
+                  FlowRouter.withReplaceState(() => {
+                    // Set the default value for query parameter
+                    FlowRouter.setQueryParams({ proxy_id: resp[0]._id });
+                  });
+                }
+
+                // Save result to template instance
+                instance.proxiesList.set(resp);
+                instance.reload.set(true);
+              });
+            }
+
+            // Construct countdown object
+            const countdown = {
+              minutes,
+              seconds,
+            };
+
+            // Save countdown to template instance
+            instance.countdown.set(countdown);
+          }, 1000));
+        }
+      });
+    }
+  });
+});
+
+Template.dashboardPage.onDestroyed(function () {
+  // Get reference to template instance
+  const instance = this;
+  if (instance.timeInterval.get()) {
+    // Clear timeinterval value
+    clearInterval(instance.timeInterval.get());
+  }
+});
+
 Template.dashboardPage.helpers({
   proxyBackendsCount () {
     // Fetch proxy backends
@@ -86,5 +165,11 @@ Template.dashboardPage.helpers({
   },
   proxyBackendId () {
     return ProxyBackends.findOne()._id;
+  },
+  countdown () {
+    const instance = Template.instance();
+
+    // Return list of countdown
+    return instance.countdown.get();
   },
 });
