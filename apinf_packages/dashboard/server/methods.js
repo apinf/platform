@@ -69,17 +69,11 @@ Meteor.methods({
       });
 
     // Get APIs IDs that are connected to the managed organizations
-    const apiIds = OrganizationApis
-      .find({ organizationId: { $in: managedOrganizationIds } })
+    // and not managed by current user
+    return OrganizationApis
+      .find({ organizationId: { $in: managedOrganizationIds }, apiId: { $nin: myApis } })
       .map(organizationApi => {
         return organizationApi.apiId;
-      });
-
-    // Return IDs list of managed APIs of Organizations and no owned
-    return Apis
-      .find({ _id: { $in: apiIds, $nin: myApis } })
-      .map(api => {
-        return api._id;
       });
   },
   otherApisIds (myApis, managedApis) {
@@ -109,7 +103,7 @@ Meteor.methods({
     // Get IDs of owned APIs
     const myApis = Meteor.call('myApisIds');
     // Get IDs of managed APIs
-    const managedApis = Meteor.call('managedApisIds', groupingIds.myApis);
+    const managedApis = Meteor.call('managedApisIds', myApis);
     // Make sure user is admin
     if (Roles.userIsInRole(this.userId, ['admin'])) {
       // Get IDs of other APIs
