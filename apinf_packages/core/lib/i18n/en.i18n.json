@@ -502,7 +502,7 @@
   "organizationLogo_resumable_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "organizationManagersList_title": "Managers",
   "organizationManagerForm_successMessage": "New manager added.",
-  "organizationManagerForm_emailNotRegistered_errorText": "Email address not currently registered.",
+  "organizationManagerForm_userNotRegistered_errorText": "User not currently registered.",
   "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
   "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
   "organizationNoFeaturedApis_text_noFeaturedApis": "The organization doesn't have any featured APIs.",

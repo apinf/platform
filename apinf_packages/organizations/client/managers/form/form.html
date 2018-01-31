@@ -15,9 +15,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     id="organizationManagerForm"
     class="form-inline"
     type="method"
-    meteormethod="addOrganizationManagerByEmail"}}
+    meteormethod="addOrganizationManager"}}
 
-    {{> afQuickField name='email' id="manager-email" }}
+    {{> afQuickField name='user' id="manager" }}
     {{> afQuickField name='organizationId' value=organization._id type="hidden" }}
 
     <button type="submit" class="btn btn-primary" id="add-manager">
