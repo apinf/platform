@@ -4,10 +4,10 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardSummaryStatistic">
-  {{# if analyticsData }}
+  {{# if displayTable }}
     <!-- Table head -->
     <h4>
-      {{ tableTitle }} ({{ analyticsData.length }})
+      {{ tableTitle }} ({{ count }})
     </h4>
 
     <div class="dashboard-table-row statistic-title">

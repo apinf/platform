@@ -279,6 +279,7 @@ Meteor.methods({
         dataset.proxyBackendId = proxyBackend._id;
         dataset.apiName = proxyBackend.apiName();
         dataset.apiSlug = proxyBackend.apiSlug();
+        dataset.apiId = proxyBackend.apiId;
       }
 
       // Create a comparison data

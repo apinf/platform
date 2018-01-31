@@ -5,23 +5,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardView">
   {{# if Template.subscriptionsReady }}
-    <!-- My APIs group -->
-    {{> dashboardSummaryStatistic title="myApis"
-      overviewChartResponse=overviewChartResponse
-      analyticsData=analyticsDataMyApis
-    }}
+    {{# if displayTables }}
+      <!-- My APIs group -->
+      {{> dashboardSummaryStatistic title="myApis"
+        overviewChartResponse=overviewChartResponse
+        analyticsData=analyticsDataMyApis
+        searchValue=searchValue
+      }}
 
-    <!-- Managed APIs group -->
-    {{> dashboardSummaryStatistic title="managedApis"
-      overviewChartResponse=overviewChartResponse
-      analyticsData=analyticsDataManagedApis
-    }}
+      <!-- Managed APIs group -->
+      {{> dashboardSummaryStatistic title="managedApis"
+        overviewChartResponse=overviewChartResponse
+        analyticsData=analyticsDataManagedApis
+        searchValue=searchValue
+      }}
 
-    <!-- Other APIs group -->
-    {{> dashboardSummaryStatistic title="otherApis"
-      overviewChartResponse=overviewChartResponse
-      analyticsData=analyticsDataOtherApis
-    }}
+      <!-- Other APIs group -->
+      {{> dashboardSummaryStatistic title="otherApis"
+        overviewChartResponse=overviewChartResponse
+        analyticsData=analyticsDataOtherApis
+        searchValue=searchValue
+      }}
+    {{ else }}
+      <p>
+        {{_ 'dashboardView_text_noApisFound' }}
+      </p>
+    {{/ if }}
   {{ else }}
     {{> spinner }}
   {{/ if }}
