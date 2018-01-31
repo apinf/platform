@@ -14,6 +14,8 @@ import { T9n } from 'meteor/softwarerero:accounts-t9n';
 // Npm packages imports
 import _ from 'lodash';
 
+import '/apinf_packages/core/client/language_select/language.html';
+
 // eslint-disable-next-line prefer-arrow-callback
 Template.languageSelect.onCreated(function () {
   // Get saved language

@@ -12,6 +12,9 @@ import { DocHead } from 'meteor/kadira:dochead';
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
 
+import './home.html';
+import './body/homeBody.js';
+
 Template.home.onCreated(function () {
   // Get reference to template instance
   const instance = this;

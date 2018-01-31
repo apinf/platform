@@ -22,6 +22,9 @@ import Settings from '/apinf_packages/settings/collection';
 // Npm packages imports
 import _ from 'lodash';
 
+import '/apinf_packages/organizations/client/catalog/catalog.html';
+import '/apinf_packages/organizations/client/catalog/toolbar/toolbar.js';
+
 Template.organizationCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;

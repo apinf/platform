@@ -12,7 +12,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
-import Posts from '../../collection';
+import Posts from '/apinf_packages/related_media/collection';
+
+import '/apinf_packages/related_media/client/related_media/media.html';
 
 Template.relatedMedia.onCreated(function () {
   const instance = this;

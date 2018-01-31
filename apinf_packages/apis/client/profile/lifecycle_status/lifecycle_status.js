@@ -9,6 +9,8 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 
+import '/apinf_packages/apis/client/profile/lifecycle_status/lifecycle_status.html';
+
 Template.apiLifecycleStatus.helpers({
   labelType () {
     // Get reference to template instance

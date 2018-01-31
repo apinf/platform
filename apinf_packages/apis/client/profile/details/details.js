@@ -14,6 +14,9 @@ import Clipboard from 'clipboard';
 import ApiKeys from '/apinf_packages/api_keys/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 
+import '/apinf_packages/apis/client/profile/details/details.html';
+import '/apinf_packages/related_media/client/related_media/media.js';
+
 Template.apiDetails.onCreated(function () {
   const instance = this;
 

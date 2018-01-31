@@ -11,6 +11,7 @@ import { Template } from 'meteor/templating';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Collection imports
+import '/apinf_packages/feedback/client/list/list.html';
 import Feedback from '../../collection';
 
 Template.feedbackList.helpers({

@@ -15,6 +15,8 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import ApiDocs from '/apinf_packages/api_docs/collection';
 import Settings from '/apinf_packages/settings/collection';
 
+import '/apinf_packages/api_docs/client/view/documentation.html';
+
 Template.apiDocumentation.onCreated(function () {
   const instance = this;
 
@@ -98,14 +100,14 @@ Template.apiDocumentation.helpers({
     const apiDoc = this.apiDoc;
 
     // Display block if a user is manager of current API or URL is set
-    return api.currentUserCanManage() || (apiDoc && apiDoc.otherUrl);
+    return (api && api.currentUserCanManage()) || (apiDoc && apiDoc.otherUrl);
   },
   displayViewBlock () {
     const api = this.api;
     const instance = Template.instance();
 
     // Display block if a user is manager of current API or swagger documentation is available
-    return api.currentUserCanManage() || instance.documentationExists.get();
+    return (api && api.currentUserCanManage()) || instance.documentationExists.get();
   },
 });
 

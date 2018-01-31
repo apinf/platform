@@ -9,6 +9,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
+import '/apinf_packages/apis/client/latest/latest.html';
+
 Template.latestPublicApis.onCreated(function () {
   // Reference to Template instance
   const instance = this;

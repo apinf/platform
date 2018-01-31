@@ -10,6 +10,8 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+import '/apinf_packages/api_filter/client/form/filter_form.html';
+
 Template.apisFilterForm.onRendered(function () {
   this.autorun(() => {
     // Get the query parameter

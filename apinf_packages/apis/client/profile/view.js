@@ -20,11 +20,19 @@ import Branding from '/apinf_packages/branding/collection';
 import Feedback from '/apinf_packages/feedback/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
+import '/apinf_packages/apis/client/profile/view.html';
+import '/apinf_packages/apis/client/profile/header/header.js';
+import '/apinf_packages/apis/client/profile/details/details.js';
+import '/apinf_packages/api_docs/client/view/documentation.js';
+import '/apinf_packages/metadata/client/view/metadata.js';
+import '/apinf_packages/feedback/client/feedback.js';
+import '/apinf_packages/backlog/client/backlog.js';
+
 Template.viewApi.onCreated(function () {
    // Get reference to template instance
   const templateInstance = this;
 
-  templateInstance.api = new ReactiveVar();
+  templateInstance.api = new ReactiveVar(false);
 
   // Subscribe to public proxy details
   templateInstance.subscribe('proxyCount');

@@ -9,6 +9,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
 
+import '/apinf_packages/core/client/custom_stylesheet/custom_stylesheet.html';
+
 const tinycolor = require('tinycolor2');
 
 Template.customStylesheet.helpers({

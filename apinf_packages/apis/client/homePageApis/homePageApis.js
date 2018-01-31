@@ -10,6 +10,9 @@ import { Template } from 'meteor/templating';
 import Apis from '/apinf_packages/apis/collection';
 import Branding from '/apinf_packages/branding/collection';
 
+import '/apinf_packages/apis/client/homePageApis/homePageApis.html';
+import '/apinf_packages/apis/client/latest/latest.js';
+
 Template.homePageApis.onCreated(function () {
   // Reference to Template instance
   const templateInstance = this;
