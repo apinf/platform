@@ -16,6 +16,9 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
+// APInf imports
+import localisedSorting from '/apinf_packages/core/helper_functions/string_utils';
+
 Template.organizationApis.onCreated(function () {
   // Get reference to template instance
   const instance = this;
@@ -114,12 +117,9 @@ Template.organizationApis.helpers({
 
     // Make sure sorted by name
     if (sort.name) {
-      // Get the language
-      const language = TAPi18n.getLanguage();
-
       // Use custom sort function with i18n support
       apis.sort((a, b) => {
-        return a.name.localeCompare(b.name, language) * sort.name;
+        return localisedSorting(a.name, b.name, sort.name);
       });
     }
 

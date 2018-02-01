@@ -17,6 +17,7 @@ import {
   arrowDirection,
   percentageValue,
 } from '/apinf_packages/dashboard/lib/trend_helpers';
+import localisedSorting from '/apinf_packages/core/helper_functions/string_utils';
 
 // Collections imports
 import Apis from '../../../../apis/collection';
@@ -61,10 +62,8 @@ Template.dashboardSummaryStatistic.onCreated(function () {
         }
         default: {
           // sort by name on default
-          const language = TAPi18n.getLanguage();
-
           sortedAnalyticsData = analyticsData.sort((a, b) => {
-            return a.apiName.localeCompare(b.apiName, language);
+            return localisedSorting(a.apiName, b.apiName);
           });
         }
       }
