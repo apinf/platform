@@ -29,7 +29,7 @@ FlowRouter.route('/verify-email/:token', {
     Accounts.verifyEmail(token, (error) => {
       if (error) {
         // Eg. token invalid or already used
-        sAlert.error(error.reason);
+        sAlert.error(error.reason, { timeout: 'none' });
       } else {
         // Email successfully verified
         sAlert.success(TAPi18n.__('emailVerification_successMessage'));

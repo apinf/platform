@@ -1,10 +1,12 @@
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Npm packages imports
 import Clipboard from 'clipboard';
@@ -15,6 +17,24 @@ import ApiKeys from '/apinf_packages/api_keys/collection';
 Template.apiKey.onCreated(function () {
   // Subscribe to apiKeys for current user
   this.subscribe('apiKeysForCurrentUser');
+
+  // Get reference to template instance
+  const instance = this;
+  // Init the  apisList reactive variable
+  instance.apisList = new ReactiveVar();
+  // Get proxyBackend from template data
+  const proxyBackend = Template.currentData().proxyBackend;
+
+  // Get Apis list
+  Meteor.call('getApisList', proxyBackend.proxyId, (error, result) => {
+    if (error) {
+      // Show human-readable reason for error
+      sAlert.error(error.reason, { timeout: 'none' });
+    } else {
+      // Set result in reactive variable
+      instance.apisList.set(result);
+    }
+  });
 });
 
 Template.apiKey.onRendered(function () {
@@ -66,7 +86,7 @@ Template.apiKey.events({
       Meteor.call('createApiKey', api._id, (error, result) => {
         if (error) {
           // Show human-readable reason for error
-          sAlert.error(error.reason);
+          sAlert.error(error.reason, { timeout: 'none' });
         } else {
           // Get success message translation
           const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');
@@ -80,40 +100,13 @@ Template.apiKey.events({
   'click #regenerate-api-key': function () {
     // Get current template instance
     const instance = Template.instance();
-
-    // Get processing message translation
-    const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
-    // Set bootstrap loadingText
-    instance.$('#regenerate-api-key').button({ loadingText: message });
-
-    // Set button to processing state
-    instance.$('#regenerate-api-key').button('loading');
-
-    // Get api from template data
     const api = Template.currentData().api;
-
     // Get api Key from template data
     const apiKey = instance.$('#api-key').val();
-
-    // Check api and apikey is defined
-    if (api && apiKey) {
-      // Call regenerateApiKey function
-      Meteor.call('regenerateApiKey', api._id, apiKey, (error) => {
-        if (error) {
-          // Show human-readable reason for error
-          sAlert.error(error.reason);
-        } else {
-          // Get success message translation
-          const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');
-
-          // Alert the user of success
-          sAlert.success(successMessage);
-
-          // Reset processing button
-          instance.$('#regenerate-api-key').button('reset');
-        }
-      });
-    }
+    // Get all api list linked to a api key
+    const apisList = instance.apisList.get();
+    // Show regenerate api key modal
+    Modal.show('regenerateApiKey', { apisList, api, apiKey });
   },
 });
 

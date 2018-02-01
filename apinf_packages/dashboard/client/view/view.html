@@ -5,29 +5,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardView">
   {{# if Template.subscriptionsReady }}
-    <!-- My APIs group -->
-    {{> dashboardSummaryStatistic apiIds=grouping.myApis title="myApis"
-      overviewChartResponse=overviewChartResponse
-      summaryStatisticResponse=summaryStatisticResponse
-      comparisonStatisticResponse=comparisonStatisticResponse
-      statusCodesResponse=statusCodesResponse
-    }}
+    {{# if displayTables }}
+      <!-- My APIs group -->
+      {{> dashboardSummaryStatistic title="myApis"
+        overviewChartResponse=overviewChartResponse
+        analyticsData=analyticsDataMyApis
+        searchValue=searchValue
+      }}
 
-    <!-- Managed APIs group -->
-    {{> dashboardSummaryStatistic apiIds=grouping.managedApis title="managedApis"
-      overviewChartResponse=overviewChartResponse
-      summaryStatisticResponse=summaryStatisticResponse
-      comparisonStatisticResponse=comparisonStatisticResponse
-      statusCodesResponse=statusCodesResponse
-    }}
+      <!-- Managed APIs group -->
+      {{> dashboardSummaryStatistic title="managedApis"
+        overviewChartResponse=overviewChartResponse
+        analyticsData=analyticsDataManagedApis
+        searchValue=searchValue
+      }}
 
-    <!-- Other APIs group -->
-    {{> dashboardSummaryStatistic apiIds=grouping.otherApis title="otherApis"
-      overviewChartResponse=overviewChartResponse
-      summaryStatisticResponse=summaryStatisticResponse
-      comparisonStatisticResponse=comparisonStatisticResponse
-      statusCodesResponse=statusCodesResponse
-    }}
+      <!-- Other APIs group -->
+      {{> dashboardSummaryStatistic title="otherApis"
+        overviewChartResponse=overviewChartResponse
+        analyticsData=analyticsDataOtherApis
+        searchValue=searchValue
+      }}
+    {{ else }}
+      <p>
+        {{_ 'dashboardView_text_noApisFound' }}
+      </p>
+    {{/ if }}
   {{ else }}
     {{> spinner }}
   {{/ if }}

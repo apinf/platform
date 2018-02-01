@@ -163,7 +163,7 @@ Template.organizationApis.events({
     } else {
       // Otherwise show error
       const message = TAPi18n.__('organizationProfile_text_error');
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   },
   'click [data-lifecycle]': (event) => {

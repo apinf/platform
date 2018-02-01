@@ -23,31 +23,11 @@ Settings.schema = new SimpleSchema({
     optional: true,
     defaultValue: false,
   },
-  apiDocumentationEditor: {
-    type: Object,
-    optional: true,
-  },
-  'apiDocumentationEditor.enabled': {
+  developmentFeatures: {
     type: Boolean,
     optional: true,
-  },
-  'apiDocumentationEditor.host': {
-    type: String,
-    regEx: SimpleSchema.RegEx.Url,
-    optional: true,
-    autoform: {
-      placeholder: 'http://editor.example.com/',
-    },
-    custom () {
-      const apiDocumentationEditorEnabled = this.field('apiDocumentationEditor.enabled').value;
-      const apiDocumentationEditorHost = this.value;
-      let validation;
-      // Require editor host if apiDocumentationEditor.enabled is checked
-      if (apiDocumentationEditorEnabled === true && !apiDocumentationEditorHost) {
-        validation = 'required';
-      }
-      return validation;
-    },
+    defaultValue: false,
+    label: 'Enabled',
   },
   mail: {
     type: Object,

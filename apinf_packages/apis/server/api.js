@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 
 // Meteor contributed packages imports
 import { Roles } from 'meteor/alanning:roles';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -443,13 +444,13 @@ CatalogV1.addCollection(Apis, {
 
         const documentationUrl = bodyParams.documentationUrl;
         const externalDocumentation = bodyParams.externalDocumentation;
+        // Regex for http(s) protocol
+        const regex = SimpleSchema.RegEx.Url;
 
         // Documentation URL must have URL format
         if (documentationUrl) {
-          isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ remoteFileUrl: documentationUrl }, 'remoteFileUrl');
-
-          if (!isValid) {
+          // Check link validity
+          if (!regex.test(documentationUrl)) {
             // Error message
             const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
             return errorMessagePayload(400, message);
@@ -458,10 +459,8 @@ CatalogV1.addCollection(Apis, {
 
         // Link to an external site must have URL format
         if (externalDocumentation) {
-          isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ otherUrl: externalDocumentation }, 'otherUrl');
-
-          if (!isValid) {
+          // Check link validity
+          if (!regex.test(externalDocumentation)) {
             // Error message
             const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
             return errorMessagePayload(400, message);
@@ -474,20 +473,25 @@ CatalogV1.addCollection(Apis, {
         // Insert API data into collection
         const apiId = Apis.insert(apiData);
 
-        // Did insert fail
+        // If insert failed, stop and send response
         if (!apiId) {
-          return errorMessagePayload(500, 'Inserting API into database failed.');
+          return errorMessagePayload(500, 'Insert API card into database failed.');
         }
 
-
-        // Make sure a user provides some Documentation data & API is created
+        // Add also documentation, if links are given
         if (documentationUrl || externalDocumentation) {
-          ApiDocs.insert({
+          const result = ApiDocs.insert({
             apiId,
             type: 'url',
-            otherUrl: externalDocumentation,
             remoteFileUrl: documentationUrl,
+            otherUrl: [externalDocumentation],
           });
+          // Integrity: If insertion of document link failed, remove also API card
+          if (result === 0) {
+            // Remove newly created API document
+            Meteor.call('removeApi', apiId);
+            return errorMessagePayload(500, 'Insert documentation failed. API card not created.');
+          }
         }
 
         // Prepare data to response, extend it with Documentation URLs
@@ -559,6 +563,9 @@ CatalogV1.addCollection(Apis, {
         ],
       },
       action () {
+        // Used in case of rollback
+        let previousDocumentationUrl;
+
         // Get data from body parameters
         const bodyParams = this.bodyParams;
         // Get ID of API
@@ -617,57 +624,70 @@ CatalogV1.addCollection(Apis, {
             return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
           }
         }
-
+        // Check if link for openAPI documentation was given
         const documentationUrl = bodyParams.documentationUrl;
+        // Cehck if link for external documentation was given
         const externalDocumentation = bodyParams.externalDocumentation;
 
-        // Documentation URL must have URL format
-        if (documentationUrl) {
-          const isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ remoteFileUrl: documentationUrl }, 'remoteFileUrl');
-
-          if (!isValid) {
-            // Error message
-            const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
-            return errorMessagePayload(400, message);
-          }
-        }
-
-        // Link to an external site must have URL format
-        if (externalDocumentation) {
-          const isValid = ApiDocs.simpleSchema().namedContext()
-            .validateOne({ otherUrl: externalDocumentation }, 'otherUrl');
-
-          if (!isValid) {
-            // Error message
-            const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
-            return errorMessagePayload(400, message);
-          }
-        }
-
-        // Save new or updated documentation links
         if (documentationUrl || externalDocumentation) {
           // Try to fetch existing documentation
           const apiDoc = ApiDocs.findOne({ apiId });
+          // Regex for http(s) protocol
+          const regex = SimpleSchema.RegEx.Url;
 
-          if (apiDoc) {
-            // Update existing documentation
-            ApiDocs.update(
-              { apiId },
-              { $set: {
-                type: 'url',
-                remoteFileUrl: bodyParams.documentationUrl,
-                otherUrl: bodyParams.externalDocumentation,
-              },
-              });
-          } else {
-            // Create a new apiDoc instance
-            ApiDocs.insert({
-              apiId,
+          // Check link to Documentation URL
+          if (documentationUrl) {
+            // Check link validity
+            if (!regex.test(documentationUrl)) {
+              // Error message
+              const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
+              return errorMessagePayload(400, message);
+            }
+          }
+
+          // Check link to an external documentation
+          if (externalDocumentation) {
+            // Check link validity
+            if (!regex.test(externalDocumentation)) {
+              // Error message
+              const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
+              return errorMessagePayload(400, message);
+            }
+
+            // Check if new external documentation link can be added
+            if (apiDoc && apiDoc.otherUrl) {
+              // Can not add same link again
+              const isLinkAlreadyPresent = apiDoc.otherUrl.includes(externalDocumentation);
+              if (isLinkAlreadyPresent) {
+                const message = 'Same link to "externalDocumentation" already exists.';
+                return errorMessagePayload(400, message, 'url', externalDocumentation);
+              }
+              // Max 8 external documentation links can be added
+              if (apiDoc.otherUrl.length > 7) {
+                const message = 'Maximum number of external documentation links (8) already given.';
+                return errorMessagePayload(400, message);
+              }
+            }
+            // Prepare for rollback of openAPI documentation after possible failure
+            if (apiDoc && apiDoc.remoteFileUrl) {
+              previousDocumentationUrl = apiDoc.remoteFileUrl;
+            }
+          }
+
+          // Update Documentation (or create a new one)
+          const result = ApiDocs.update(
+            { apiId },
+            { $set: {
               type: 'url',
-              otherUrl: bodyParams.externalDocumentation,
               remoteFileUrl: bodyParams.documentationUrl,
-            });
+            },
+              $push: { otherUrl: bodyParams.externalDocumentation } },
+            // If apiDocs document did not exist, create a new one
+            { upsert: true },
+          );
+          // If update/insert of document link(s) failed
+          if (result === 0) {
+            return errorMessagePayload(500, 'Update failed because Documentation update fail.');
           }
         }
 
@@ -676,7 +696,46 @@ CatalogV1.addCollection(Apis, {
         bodyParams.updated_by = userId;
 
         // Update API document
-        Apis.update(apiId, { $set: bodyParams });
+        const result = Apis.update(apiId, { $set: bodyParams });
+        // Check if API update failed
+        if (result === 0) {
+          // Try to rollback documentation update, if necessary
+          if (documentationUrl || externalDocumentation) {
+            if (documentationUrl) {
+              // Restore previous openAPI documentation link, if it exists
+              if (previousDocumentationUrl) {
+                ApiDocs.update(
+                  { apiId },
+                  { $set: {
+                    type: 'url',
+                    remoteFileUrl: previousDocumentationUrl,
+                  },
+                  },
+              );
+              } else {
+                // No previous link, just make it empty
+                ApiDocs.update(
+                  { apiId },
+                  { $unset: {
+                    remoteFileUrl: '',
+                  },
+                  },
+                );
+              }
+            }
+            // Rollback external documentation by removing latest added link
+            if (externalDocumentation) {
+              ApiDocs.update(
+                { apiId },
+                { $set: {
+                  type: 'url',
+                },
+                  $pull: { otherUrl: externalDocumentation } },
+              );
+            }
+          }
+          return errorMessagePayload(500, 'Update failed because API update fail.');
+        }
 
         // Prepare data to response, extend it with Documentation URLs
         const responseData = Object.assign(
@@ -764,6 +823,147 @@ CatalogV1.addCollection(Apis, {
           },
         };
       },
+    },
+  },
+});
+
+
+// Request /rest/v1/apis/:id/documents/
+CatalogV1.addRoute('apis/:id/documents', {
+  // Remove documentation from given API (:id) either completely or partially
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'Delete identified documentation or all documentation.',
+      description: descriptionApis.deleteDocumentation,
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.url,
+      ],
+      responses: {
+        200: {
+          description: 'API documentation updated successfully',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/apiResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of API
+      const apiId = this.urlParams.id;
+      // Get User ID
+      const userId = this.userId;
+      // Get API document
+      const api = Apis.findOne(apiId);
+
+      // API must exist
+      if (!api) {
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+      // User must be able to manage API
+      if (!api.currentUserCanManage(userId)) {
+        return errorMessagePayload(403, 'User does not have permission to this API.');
+      }
+
+      // Check if documentation exists
+      const apiDoc = ApiDocs.findOne({ apiId });
+
+      if (!apiDoc) {
+        return errorMessagePayload(404, 'No documentation exists for this API.');
+      }
+
+      // Check if link for openAPI documentation was given
+      const documentUrl = this.queryParams.url;
+
+      // Remove identified documentation link
+      if (documentUrl) {
+        // Check if it is openAPI documentation or external documentation link
+        if (documentUrl === apiDoc.remoteFileUrl) {
+          // Matching link found as openAPI documentatin, try to remove
+          const removeResult = ApiDocs.update(
+            { apiId },
+            { $unset: {
+              remoteFileUrl: '',
+            },
+            },
+          );
+          // If removal of openAPI document link failed
+          if (removeResult === 0) {
+            const message = 'OpenAPI Documentation link removal failure.';
+            return errorMessagePayload(500, message, 'url', documentUrl);
+          }
+        } else if (apiDoc.otherUrl.includes(documentUrl)) {
+          // Matching link found as external documentatin, try to remove
+          const removeResult = ApiDocs.update(
+            { apiId },
+            { $pull: { otherUrl: documentUrl } },
+          );
+          // If removal of external document link failed
+          if (removeResult === 0) {
+            const message = 'External Documentation link removal failure.';
+            return errorMessagePayload(500, message, 'url', documentUrl);
+          }
+        } else {
+          // No matching link found
+          const message = 'Documentation link match not found.';
+          return errorMessagePayload(404, message, 'url', documentUrl);
+        }
+      } else {
+        // Remove all documentation, because no link identified
+        Meteor.call('removeApiDoc', apiId);
+      }
+
+      // Prepare data to response, extend it with Documentation URLs
+      const responseData = Object.assign(
+        // API has not changed, use already fetched value
+        api,
+        // Get updated values of Documentation urls
+        {
+          externalDocumentation: api.otherUrl(),
+          documentationUrl: api.documentationUrl(),
+        });
+
+      // OK response with API data
+      return {
+        statusCode: 200,
+        body: {
+          status: 'success',
+          data: responseData,
+        },
+      };
     },
   },
 });

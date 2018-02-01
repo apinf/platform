@@ -1,4 +1,7 @@
-sudo: false
+sudo: required
+dist: trusty
+group: deprecated-2017Q4
+
 language: node_js
 node_js:
   - '4'
@@ -7,11 +10,8 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
-        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
     packages:
       - g++-4.8
-      - yarn
   chrome: stable
 
 branches:

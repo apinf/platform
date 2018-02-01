@@ -48,7 +48,7 @@ Template.apiCardPin.events({
       const message = TAPi18n.__('apiCardPin_featuredListAlreadyFull');
 
         // Display success message to user
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   },
 });

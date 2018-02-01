@@ -70,7 +70,7 @@ Meteor.startup(() => {
         const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
 
         // Alert user of extension error
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
       }
     } else {
       // Finish uploading
@@ -80,7 +80,7 @@ Meteor.startup(() => {
       const message = TAPi18n.__('uploadCoverPhoto_message_fileMaxSize');
 
       // Alert user of max size error
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   });
 });

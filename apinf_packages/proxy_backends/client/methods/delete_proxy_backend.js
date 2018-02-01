@@ -22,14 +22,14 @@ export default function deleteProxyBackendConfig (proxyBackend) {
         ${error.error}
         `;
 
-        sAlert.error(deleteErrorMessage);
+        sAlert.error(deleteErrorMessage, { timeout: 'none' });
       } else if (error.error === 'publish-error') {
         // Create & show message about publish error
         const publishErrorMessage = `
         ${TAPi18n.__('proxyBackendForm_publishErrorMessage')}:\n
         ${error.error}
         `;
-        sAlert.error(publishErrorMessage);
+        sAlert.error(publishErrorMessage, { timeout: 'none' });
       }
     } else {
       // Show successMessage

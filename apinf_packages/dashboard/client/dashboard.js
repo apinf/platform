@@ -22,6 +22,8 @@ Template.dashboardPage.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  instance.searchValue = new ReactiveVar();
+
   instance.autorun(() => {
     // Get Branding collection content
     const branding = Branding.findOne();
@@ -86,5 +88,15 @@ Template.dashboardPage.helpers({
   },
   proxyBackendId () {
     return ProxyBackends.findOne()._id;
+  },
+  searchValue () {
+    return Template.instance().searchValue.get();
+  },
+});
+
+Template.dashboardPage.events({
+  'keyup #search-box': (event, templateInstance) => {
+    const apiName = event.currentTarget.value;
+    templateInstance.searchValue.set(apiName);
   },
 });
