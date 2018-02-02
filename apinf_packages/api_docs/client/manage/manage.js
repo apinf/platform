@@ -152,13 +152,18 @@ Template.manageApiDocumentationModal.events({
     Modal.hide('manageApiDocumentationModal');
   },
   'click #cancel-button': function (event, templateInstance) {
-    // Get fileId value
-    const fileId = Session.get('fileId');
+    const apiDocs = ApiDocs.findOne();
 
-    // If file is uploaded and a user clicks on "Cancel" button
-    if (fileId) {
-      // Remove uploaded file from collection
-      templateInstance.removeDocumentationFile(fileId);
+    // Make sure File isn't uploaded
+    if (!apiDocs || !apiDocs.fileId) {
+      // Get fileId value
+      const fileId = Session.get('fileId');
+
+      // If file is uploaded and a user clicks on "Cancel" button
+      if (fileId) {
+        // Remove uploaded file from collection
+        templateInstance.removeDocumentationFile(fileId);
+      }
     }
   },
   'click #add-link': function () {
