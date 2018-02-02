@@ -25,7 +25,6 @@ import _ from 'lodash';
 ManagementV1.swagger.meta.paths = {
   '/login': Authentication.login,
   '/logout': Authentication.logout,
-
   '/users': {
     get: {
       tags: [
@@ -109,7 +108,54 @@ ManagementV1.swagger.meta.paths = {
       },
     },
   },
-
+  '/users/updates': {
+    get: {
+      tags: [
+        ManagementV1.swagger.tags.users,
+      ],
+      summary: 'List and search user based on addition date.',
+      description: descriptionUsers.getUpdates,
+      produces: ['application/json'],
+      parameters: [
+        ManagementV1.swagger.params.since,
+        ManagementV1.swagger.params.userOrganizationId,
+        ManagementV1.swagger.params.skip,
+        ManagementV1.swagger.params.limit,
+      ],
+      responses: {
+        200: {
+          description: 'Users found',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/userItem',
+                },
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Missing or erroneous parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+  },
   '/users/{id}': {
     get: {
       tags: [
@@ -224,55 +270,6 @@ ManagementV1.swagger.meta.paths = {
         },
         404: {
           description: 'User is not found',
-        },
-      },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
-    },
-  },
-
-  '/users/updates': {
-    get: {
-      tags: [
-        ManagementV1.swagger.tags.users,
-      ],
-      summary: 'List and search user based on addition date.',
-      description: descriptionUsers.getUpdates,
-      produces: ['application/json'],
-      parameters: [
-        ManagementV1.swagger.params.since,
-        ManagementV1.swagger.params.userOrganizationId,
-        ManagementV1.swagger.params.skip,
-        ManagementV1.swagger.params.limit,
-      ],
-      responses: {
-        200: {
-          description: 'Users found',
-          schema: {
-            type: 'object',
-            properties: {
-              status: {
-                type: 'string',
-                example: 'success',
-              },
-              data: {
-                type: 'array',
-                items: {
-                  $ref: '#/definitions/userItem',
-                },
-              },
-            },
-          },
-        },
-        400: {
-          description: 'Bad Request. Missing or erroneous parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
         },
       },
       security: [
