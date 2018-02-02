@@ -11,7 +11,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Organizations from '/apinf_packages/organizations/collection';
+import Organizations from '/apinf_packages/organizations/collection/index';
 
 // APInf imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
