@@ -616,7 +616,7 @@ ManagementV1.addRoute('organizations/:id', {
       // Update Organization document
       const result = Organizations.update(organizationId, { $set: organizationData });
 
-      // Check if organiztions update failed
+      // Check if organization update failed
       if (result === 0) {
         return errorMessagePayload(500, 'Organization update failed');
       }
@@ -961,9 +961,9 @@ ManagementV1.addRoute('organizations/:id/managers', {
       const result = Organizations.update(organizationId,
         { $push: { managerIds: newManager._id } });
 
-      // If organiztions update failed
+      // If organization update failed
       if (result === 0) {
-        return errorMessagePayload(500, 'Organization update failed');
+        return errorMessagePayload(500, 'Organization manager update failed');
       }
 
       // Do not include password in response
