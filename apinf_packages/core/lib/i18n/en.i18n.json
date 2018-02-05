@@ -202,6 +202,7 @@
   "apiProxy_headerText": "Proxy backend configuration",
   "apiUserAuthorizationForm_addButton_text": "Add authorized user",
   "apiUserAuthorizationForm_header_text": "Add authorized users",
+  "apiUserAuthorizationForm_helpText_usernameEmail": "Give either username or email address",
   "medianResponseTime_pointTitle_time": "Time, ms",
   "authorizedUserForm_errorText_userNotRegistered": "User not currently registered.",
   "authorizedUserForm_errorText_alreadyAuthorized": "User is already authorized for this API.",
