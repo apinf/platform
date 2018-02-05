@@ -40,8 +40,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{> organizationSettingsContactInfo organization=organization }}
 
         <div class="setting-section">
-          {{> addOrganizationManagerForm organization=organization }}
+          <h3>
+            {{_ "organizationSettings_title_organizationManagers" }}
+          </h3>
+          <p>
+            {{_ "organizationSettings_description_organizationManagers" }}
+          </p>
           {{> organizationManagersList organization=organization }}
+          {{> addOrganizationManagerForm organization=organization }}
         </div>
 
         {{> organizationSettingsDelete organization=organization }}
