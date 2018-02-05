@@ -57,37 +57,35 @@ Meteor.methods({
     // Return undefined result for anonymous user
     return undefined;
   },
-  addOrganizationManagerByEmail (manager) {
-    // Make sure manager (with organizationId and email) is an Object
+  addOrganizationManager (manager) {
     check(manager, Object);
 
-    // Subsequent checks for the expected object properties
-    check(manager.organizationId, String);
-    check(manager.email, String);
+    // Get any user with matching email
+    const userByEmail = Accounts.findUserByEmail(manager.user);
+    // Get any user with matching username
+    const userByUsername = Accounts.findUserByUsername(manager.user);
 
-    // Check if email is registered
-    const emailIsRegistered = Meteor.call('checkIfEmailIsRegistered', manager.email);
+    // "User" field can be e-mail value or username value
+    const user = userByEmail || userByUsername;
 
-    if (emailIsRegistered) {
-      // Get user with matching email
-      const user = Accounts.findUserByEmail(manager.email);
-
-      // Get organization document
-      const organization = Organizations.findOne(manager.organizationId);
-
-      // Check if user is already a manager
-      const alreadyManager = organization.managerIds.includes(user._id);
-
-      // Check if the user is already a manager
-      if (alreadyManager) {
-        throw new Meteor.Error('manager-already-exist');
-      } else {
-        // Add user ID to manager IDs field
-        Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
-      }
-    } else {
-      throw new Meteor.Error('email-not-registered');
+    // No matching in both direction
+    if (!user) {
+      throw new Meteor.Error('user-not-registered');
     }
+
+    // Get organization document
+    const organization = Organizations.findOne(manager.organizationId);
+
+    // Check if user is already a manager
+    const alreadyManager = organization.managerIds.includes(user._id);
+
+    // Check if the user is already a manager
+    if (alreadyManager) {
+      throw new Meteor.Error('manager-already-exist');
+    }
+
+    // Add user ID to manager IDs field
+    Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
   },
   removeOrganizationManager (organizationId, userId) {
     // Make sure organizationId is an String
