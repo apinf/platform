@@ -227,6 +227,15 @@ ManagementV1.addRoute('organizations', {
         return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
       }
 
+      // Organization with same name must not already exist
+      const duplicateOrganization = Organizations.findOne({ name: bodyParams.name });
+
+      if (duplicateOrganization) {
+        const detailLine = 'Duplicate: Organization with same name exists.';
+        const idValue = `${duplicateOrganization._id}`;
+        return errorMessagePayload(400, detailLine, 'id', idValue);
+      }
+
       // Validate url
       isValid = Organizations.simpleSchema().namedContext().validateOne(
         organizationData, 'url');
@@ -319,8 +328,19 @@ ManagementV1.addRoute('organizations', {
 
       // If insert failed, stop and send response
       if (!organizationId) {
-        return errorMessagePayload(500, 'Insert organization failed. Organization not created');
+        return errorMessagePayload(500, 'Insert organization failed. Organization not created!');
       }
+
+      // Add slug to Organization
+      Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
+        if (error) {
+          // Slug creation failed, remove Organization
+          const result = Meteor.call('removeOrganization', organization._id);
+          // Organization rollback delete failed
+          if (result === 0) {
+            return errorMessagePayload(500, 'Organization removal because of missing slug failed!');
+          }
+      });
 
       return {
         statusCode: 201,
@@ -504,7 +524,16 @@ ManagementV1.addRoute('organizations/:id', {
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
         }
+        // Organization with same name must not already exist
+        const duplicateOrganization = Organizations.findOne({ name: bodyParams.name });
+
+        if (duplicateOrganization) {
+          const detailLine = 'Duplicate: Organization with same name exists.';
+          const idValue = `${duplicateOrganization._id}`;
+          return errorMessagePayload(400, detailLine, 'id', idValue);
+        }
       }
+
 
       // Validate url, if provided
       if (bodyParams.url) {
@@ -602,6 +631,31 @@ ManagementV1.addRoute('organizations/:id', {
       // Check if organization update failed
       if (result === 0) {
         return errorMessagePayload(500, 'Organization update failed');
+      }
+
+      // If Organization name was changed, new slug needs to be formed correspondingly
+      if (bodyParams.name) {
+
+        // Update slug to Organization
+        // const vastaus = Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
+        //   console.log('Vastausta varrotaan, slug=', slug);
+        //   console.log('Vastausta varrotaan, error=', error);
+        //   console.log('Vastausta varrotaan, vastaus=', vastaus);
+        //   if (error) {
+        //     console.log('Slug failed, yritetään poistaa Organizaatio' );
+        //     // Slug creation failed, remove Organization
+        //     const result = Meteor.call('removeOrganization', organization._id);
+        //     // Organization rollback delete failed
+        //     if (result === 0) {
+        //       console.log('Poisto ei onnistunut' );
+        //       return errorMessagePayload(500, 'Organization removal because of missing slug failed!');
+        //     }
+        //     console.log('Poiston pitäisi olla onnistunut');
+        //     return errorMessagePayload(500, 'Slug creation failed. Organization not created!');
+        //   }
+        // });
+
+        const vastaus = Meteor.call('updateOrganizationBySlug', { _id: organizationId });
       }
 
       return {
