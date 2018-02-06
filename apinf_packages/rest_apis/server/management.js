@@ -58,6 +58,9 @@ ManagementV1.swagger = {
       required: true,
       type: 'string',
       enum: ['admin', 'manager'],
+      schema: {
+        $ref: '#/definitions/addRole',
+      },
     },
     limit: {
       name: 'limit',
@@ -184,6 +187,15 @@ ManagementV1.swagger = {
     },
   },
   definitions: {
+    addRole: {
+      required: ['role'],
+      properties: {
+        role: {
+          type: 'string',
+          example: 'manager',
+        },
+      },
+    },
     organization: {
       required: ['name', 'url'],
       properties: {
