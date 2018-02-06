@@ -340,6 +340,8 @@ ManagementV1.addRoute('organizations', {
           if (result === 0) {
             return errorMessagePayload(500, 'Organization removal because of missing slug failed!');
           }
+          return errorMessagePayload(500, 'Slug creation failed. Organization not created!');
+        }
       });
 
       return {
