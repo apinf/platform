@@ -21,10 +21,12 @@ Template.organizationProfile.onCreated(function () {
     // Get the Organization slug from the route
     const organizationSlug = FlowRouter.getParam('slug');
 
-    // Subscribe to Organization document
-    instance.subscribe('organizationComposite', organizationSlug);
-    // Subscribe to OrganizationAPIs link documents
-    instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
+    if (organizationSlug) {
+      // Subscribe to Organization document
+      instance.subscribe('organizationComposite', organizationSlug);
+      // Subscribe to OrganizationAPIs link documents
+      instance.subscribe('organizationApiLinksByOrganizationSlug', organizationSlug);
+    }
   });
 });
 
