@@ -50,7 +50,7 @@ AutoForm.hooks({
               FlowRouter.go('organizations');
             } else {
               // Redirect to newly added organization
-              FlowRouter.go('organizationProfile', { slug });
+              FlowRouter.go('organizationProfile', { orgSlug: slug });
             }
           });
         } else {
@@ -67,7 +67,7 @@ AutoForm.hooks({
           const slug = instance.updateDoc.$set.slug;
 
           // Redirect to newly added organization
-          FlowRouter.go('organizationProfile', { slug });
+          FlowRouter.go('organizationProfile', { orgSlug: slug });
         }
       }
     },
