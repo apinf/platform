@@ -95,11 +95,13 @@ Meteor.methods({
     check(userId, String);
 
     // Remove User ID from managers array
-    Organizations.update({ _id: organizationId },
+    const result = Organizations.update({ _id: organizationId },
       { $pull:
          { managerIds: userId },
       }
      );
+
+    return result;
   },
   removeUserFromAllOrganizations (userId) {
     // Make sure userId is an String
@@ -135,18 +137,23 @@ Meteor.methods({
   removeOrganization (organizationId) {
     check(organizationId, String);
     // Remove organization document
-    Organizations.remove(organizationId);
+    const result = Organizations.remove(organizationId);
 
-    // Get all organizationApis links with current organization ID
-    const organizationApis = OrganizationApis.find({ organizationId }).fetch();
+    // Make sure Organization removed
+    if (result) {
+      // Get all organizationApis links with current organization ID
+      const organizationApis = OrganizationApis.find({ organizationId }).fetch();
 
-    // Get array with all IDs of found document
-    const organizationApisIDs = _.map(organizationApis, (link) => {
-      return link._id;
-    });
+      // Get array with all IDs of found document
+      const organizationApisIDs = _.map(organizationApis, (link) => {
+        return link._id;
+      });
 
-    // Remove organizationApi links
-    OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
+      // Remove organizationApi links
+      OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
+    }
+
+    return result;
   },
   getOrganizationProfile (slug) {
     // Make sure slug is a string
