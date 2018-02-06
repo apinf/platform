@@ -27,7 +27,7 @@ Template.organizationApis.onCreated(function () {
 
   if (organization) {
     // Get pagination count for organization APIs
-    const perPage = parseInt(instance.data.organization.apisPerPage, 10);
+    const perPage = parseInt(organization.apisPerPage, 10);
 
     // Set initial settings of pagination
     instance.pagination = new Meteor.Pagination(Apis, {
@@ -41,25 +41,25 @@ Template.organizationApis.onCreated(function () {
 
   // Watching on changes of managed APIs after connection to/disconnection from
   instance.autorun(() => {
-    if (Template.currentData().organization) {
-      // reactive solution to update pagination with template instant data
-      const updatedApisPerPage = Template.currentData().organization.apisPerPage || 10;
+    // Get ids of managed APIs of organization
+    const apiIds = organization.managedApiIds();
 
-      // Get ids of managed APIs of organization
-      const apiIds = organization.managedApiIds();
+    // Get settings of current filter
+    const currentFilters = instance.pagination.filters();
 
-      // Get settings of current filter
-      const currentFilters = instance.pagination.filters();
+    // Filter by managed APIs
+    currentFilters._id = { $in: apiIds };
 
-      // Filter by managed APIs
-      currentFilters._id = { $in: apiIds };
+    // Set updated filter
+    instance.pagination.filters(currentFilters);
+  });
 
-      // Set updated filter
-      instance.pagination.filters(currentFilters);
-
-      // Set update perpage
-      instance.pagination.perPage(updatedApisPerPage);
-    }
+  instance.autorun(() => {
+    const updatedOrganization = Template.currentData().organization;
+    // reactive solution to update pagination with template instant data
+    const updatedApisPerPage = updatedOrganization.apisPerPage || 4;
+    // Set update perpage
+    instance.pagination.perPage(updatedApisPerPage);
   });
 
   // Watching for changes of lifecycle parameter
@@ -93,9 +93,7 @@ Template.organizationApis.onCreated(function () {
     // Make sure sorting is set
     if (sortByParameter) {
       // Sort by name is ascending other cases are descending sort
-      const sortDirection = sortByParameter === 'name' ? 1 : -1;
-      // Set sorting
-      sort[sortByParameter] = sortDirection;
+      sort[sortByParameter] = sortByParameter === 'name' ? 1 : -1;
     } else {
       // Sort by name is default
       sort.name = 1;
