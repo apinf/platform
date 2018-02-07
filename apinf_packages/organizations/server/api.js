@@ -323,6 +323,9 @@ ManagementV1.addRoute('organizations', {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
         }
       }
+      // TODO Add slug to Organization
+      //      Solve slug and add it into organizationData
+      // Can be implemented after issue 3389
 
       const organizationId = Organizations.insert(organizationData);
 
@@ -330,19 +333,6 @@ ManagementV1.addRoute('organizations', {
       if (!organizationId) {
         return errorMessagePayload(500, 'Insert organization failed. Organization not created!');
       }
-
-      // Add slug to Organization
-      Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
-        if (error) {
-          // Slug creation failed, remove Organization
-          const result = Meteor.call('removeOrganization', organization._id);
-          // Organization rollback delete failed
-          if (result === 0) {
-            return errorMessagePayload(500, 'Organization removal because of missing slug failed!');
-          }
-          return errorMessagePayload(500, 'Slug creation failed. Organization not created!');
-        }
-      });
 
       return {
         statusCode: 201,
@@ -536,7 +526,6 @@ ManagementV1.addRoute('organizations/:id', {
         }
       }
 
-
       // Validate url, if provided
       if (bodyParams.url) {
         isValid = Organizations.simpleSchema().namedContext().validateOne(
@@ -627,37 +616,16 @@ ManagementV1.addRoute('organizations/:id', {
         }
       }
 
+      // TODO Add slug to Organization in case Organization name is altered
+      //      Solve slug and add it into organizationData
+      // Can be implemented after issue 3389
+
       // Update Organization document
       const result = Organizations.update(organizationId, { $set: organizationData });
 
       // Check if organization update failed
       if (result === 0) {
         return errorMessagePayload(500, 'Organization update failed');
-      }
-
-      // If Organization name was changed, new slug needs to be formed correspondingly
-      if (bodyParams.name) {
-
-        // Update slug to Organization
-        // const vastaus = Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
-        //   console.log('Vastausta varrotaan, slug=', slug);
-        //   console.log('Vastausta varrotaan, error=', error);
-        //   console.log('Vastausta varrotaan, vastaus=', vastaus);
-        //   if (error) {
-        //     console.log('Slug failed, yritetään poistaa Organizaatio' );
-        //     // Slug creation failed, remove Organization
-        //     const result = Meteor.call('removeOrganization', organization._id);
-        //     // Organization rollback delete failed
-        //     if (result === 0) {
-        //       console.log('Poisto ei onnistunut' );
-        //       return errorMessagePayload(500, 'Organization removal because of missing slug failed!');
-        //     }
-        //     console.log('Poiston pitäisi olla onnistunut');
-        //     return errorMessagePayload(500, 'Slug creation failed. Organization not created!');
-        //   }
-        // });
-
-        const vastaus = Meteor.call('updateOrganizationBySlug', { _id: organizationId });
       }
 
       return {
