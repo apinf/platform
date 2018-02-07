@@ -23,7 +23,6 @@ Settings.schema = new SimpleSchema({
     optional: true,
     defaultValue: false,
   },
-<<<<<<< HEAD
   apiDocumentationEditor: {
     type: Object,
     optional: true,
@@ -56,8 +55,6 @@ Settings.schema = new SimpleSchema({
     defaultValue: false,
     label: 'Enabled',
   },
-=======
->>>>>>> Clean up the old Documentation Editor
   mail: {
     type: Object,
     optional: true,
