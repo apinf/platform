@@ -227,6 +227,15 @@ ManagementV1.addRoute('organizations', {
         return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
       }
 
+      // Organization with same name must not already exist
+      const duplicateOrganization = Organizations.findOne({ name: bodyParams.name });
+
+      if (duplicateOrganization) {
+        const detailLine = 'Duplicate: Organization with same name exists.';
+        const idValue = `${duplicateOrganization._id}`;
+        return errorMessagePayload(400, detailLine, 'id', idValue);
+      }
+
       // Validate url
       isValid = Organizations.simpleSchema().namedContext().validateOne(
         organizationData, 'url');
@@ -314,12 +323,15 @@ ManagementV1.addRoute('organizations', {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
         }
       }
+      // TODO Add slug to Organization
+      //      Solve slug and add it into organizationData
+      // Can be implemented after issue 3389
 
       const organizationId = Organizations.insert(organizationData);
 
       // If insert failed, stop and send response
       if (!organizationId) {
-        return errorMessagePayload(500, 'Insert organization failed. Organization not created');
+        return errorMessagePayload(500, 'Insert organization failed. Organization not created!');
       }
 
       return {
@@ -504,6 +516,14 @@ ManagementV1.addRoute('organizations/:id', {
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
         }
+        // Organization with same name must not already exist
+        const duplicateOrganization = Organizations.findOne({ name: bodyParams.name });
+
+        if (duplicateOrganization) {
+          const detailLine = 'Duplicate: Organization with same name exists.';
+          const idValue = `${duplicateOrganization._id}`;
+          return errorMessagePayload(400, detailLine, 'id', idValue);
+        }
       }
 
       // Validate url, if provided
@@ -595,6 +615,10 @@ ManagementV1.addRoute('organizations/:id', {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
         }
       }
+
+      // TODO Add slug to Organization in case Organization name is altered
+      //      Solve slug and add it into organizationData
+      // Can be implemented after issue 3389
 
       // Update Organization document
       const result = Organizations.update(organizationId, { $set: organizationData });
