@@ -589,7 +589,7 @@ CatalogV1.addCollection(Apis, {
         // If API name given, check if API with same name already exists
         if (bodyParams.name) {
           const duplicateApi = Apis.findOne({ name: bodyParams.name });
-  
+
           if (duplicateApi) {
             const detailLine = 'Duplicate: API with same name already exists.';
             const idValue = `${duplicateApi._id}`;
