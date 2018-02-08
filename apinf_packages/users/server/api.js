@@ -11,7 +11,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Organizations from '/apinf_packages/organizations/collection';
+import Organizations from '/apinf_packages/organizations/collection/index';
 
 // APInf imports
 import ManagementV1 from '/apinf_packages/rest_apis/server/management';
@@ -25,7 +25,6 @@ import _ from 'lodash';
 ManagementV1.swagger.meta.paths = {
   '/login': Authentication.login,
   '/logout': Authentication.logout,
-
   '/users': {
     get: {
       tags: [
@@ -109,7 +108,54 @@ ManagementV1.swagger.meta.paths = {
       },
     },
   },
-
+  '/users/updates': {
+    get: {
+      tags: [
+        ManagementV1.swagger.tags.users,
+      ],
+      summary: 'List and search user based on addition date.',
+      description: descriptionUsers.getUpdates,
+      produces: ['application/json'],
+      parameters: [
+        ManagementV1.swagger.params.since,
+        ManagementV1.swagger.params.userOrganizationId,
+        ManagementV1.swagger.params.skip,
+        ManagementV1.swagger.params.limit,
+      ],
+      responses: {
+        200: {
+          description: 'Users found',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                type: 'array',
+                items: {
+                  $ref: '#/definitions/userItem',
+                },
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Missing or erroneous parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+  },
   '/users/{id}': {
     get: {
       tags: [
@@ -234,24 +280,20 @@ ManagementV1.swagger.meta.paths = {
       ],
     },
   },
-
-  '/users/updates': {
-    get: {
+  '/users/{id}/roles': {
+    post: {
       tags: [
         ManagementV1.swagger.tags.users,
       ],
-      summary: 'List and search user based on addition date.',
-      description: descriptionUsers.getUpdates,
+      summary: 'Add a role to User with userId',
       produces: ['application/json'],
       parameters: [
-        ManagementV1.swagger.params.since,
-        ManagementV1.swagger.params.userOrganizationId,
-        ManagementV1.swagger.params.skip,
-        ManagementV1.swagger.params.limit,
+        ManagementV1.swagger.params.userId,
+        ManagementV1.swagger.params.addRole,
       ],
       responses: {
-        200: {
-          description: 'Users found',
+        201: {
+          description: 'A role added successfully',
           schema: {
             type: 'object',
             properties: {
@@ -260,10 +302,7 @@ ManagementV1.swagger.meta.paths = {
                 example: 'success',
               },
               data: {
-                type: 'array',
-                items: {
-                  $ref: '#/definitions/userItem',
-                },
+                $ref: '#/definitions/userPostResponse',
               },
             },
           },
@@ -273,6 +312,45 @@ ManagementV1.swagger.meta.paths = {
         },
         401: {
           description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'User is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    delete: {
+      tags: [
+        ManagementV1.swagger.tags.users,
+      ],
+      summary: 'Remove specified role of User with userID.',
+      parameters: [
+        ManagementV1.swagger.params.userId,
+        ManagementV1.swagger.params.removeRole,
+      ],
+      responses: {
+        204: {
+          description: 'User account removed successfully.',
+        },
+        400: {
+          description: 'Bad Request. Missing or erroneous parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'User is not found',
         },
       },
       security: [
@@ -285,7 +363,7 @@ ManagementV1.swagger.meta.paths = {
   },
 };
 
-// Generates: POST on /api/v1/users and GET, DELETE /api/v1/users/:id for
+// Generates: POST on /rest/v1/users and GET, DELETE /rest/v1/users/:id for
 // Meteor.users collection
 ManagementV1.addCollection(Meteor.users, {
   excludedEndpoints: [],
@@ -858,3 +936,115 @@ ManagementV1.addRoute('users/updates', {
 
   },
 });
+
+// Request /rest/v1/users/:id/roles for User Collection
+ManagementV1.addRoute('users/:id/roles', {
+  delete: {
+    authRequired: true,
+    roleRequired: ['admin'],
+    action () {
+      const allowedRoles = ['manager', 'admin'];
+      // Get role value
+      const role = this.queryParams.role;
+      // Get user id value
+      const userId = this.urlParams.id;
+
+      // Check if the parameter is not provided
+      if (!role) {
+        const message = 'The parameter "role" is required';
+        // Return message
+        return errorMessagePayload(400, message);
+      }
+
+      // Make sure the value is allowed
+      if (!allowedRoles.includes(role)) {
+        const message = 'The parameter "role" must be "admin" or "manager" value';
+        // Return message
+        return errorMessagePayload(400, message);
+      }
+
+      // Get a user with userId
+      const user = Meteor.users.findOne(userId);
+
+      // Check if the user exists
+      if (!user) {
+        // Return message
+        return errorMessagePayload(404, 'No user found with given user ID');
+      }
+
+      // Get user roles or an empty array on default
+      const userRoles = user.roles || [];
+
+      // Check if a user does not have the role
+      if (!userRoles.includes(role)) {
+        return errorMessagePayload(400, 'User does not have this role');
+      }
+
+      Meteor.users.update({ _id: userId }, { $pop: { roles: role } });
+
+      // Construct response
+      return {
+        statusCode: 204,
+        body: {
+          status: 'succes',
+          data: 'Role remove',
+        },
+      };
+    },
+  },
+  post: {
+    authRequired: true,
+    roleRequired: ['admin'],
+    action () {
+      const allowedRoles = ['manager', 'admin'];
+      // Get role value
+      const role = this.bodyParams.role;
+      // Get user id value
+      const userId = this.urlParams.id;
+
+      // Check if the parameter is not provided
+      if (!role) {
+        const message = 'The parameter "role" is required';
+        // Return message
+        return errorMessagePayload(400, message);
+      }
+
+      // Make sure the value is allowed
+      if (!allowedRoles.includes(role)) {
+        const message = 'The parameter "role" must be "admin" or "manager" value';
+        // Return message
+        return errorMessagePayload(400, message);
+      }
+
+      // Get a user with userId
+      const user = Meteor.users.findOne(userId);
+
+      // Check if the user exists
+      if (!user) {
+        // Return message
+        return errorMessagePayload(404, 'No user found with given user ID');
+      }
+
+      // Get user roles or an empty array on default
+      const userRoles = user.roles || [];
+
+      // Check if a user has already the role
+      if (userRoles.includes(role)) {
+        return errorMessagePayload(400, 'User has already this role');
+      }
+
+      Meteor.users.update({ _id: userId }, { $push: { roles: role } });
+
+      // Construct response
+      return {
+        statusCode: 201,
+        body: {
+          status: 'success',
+          // Get a user with userId, excluding password value
+          data: Meteor.users.findOne(userId, { fields: { services: 0 } }),
+        },
+      };
+    },
+  },
+});
+
