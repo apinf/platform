@@ -55,9 +55,6 @@ ManagementV1.swagger = {
       name: 'role',
       in: 'body',
       description: 'A role value to add',
-      required: true,
-      type: 'string',
-      enum: ['admin', 'manager'],
       schema: {
         $ref: '#/definitions/addRole',
       },
@@ -193,6 +190,7 @@ ManagementV1.swagger = {
         role: {
           type: 'string',
           example: 'manager',
+          enum: ['admin', 'manager'],
         },
       },
     },
