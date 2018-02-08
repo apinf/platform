@@ -404,7 +404,7 @@ CatalogV1.addCollection(Apis, {
         const duplicateApi = Apis.findOne({ name: bodyParams.name });
 
         if (duplicateApi) {
-          const detailLine = 'Duplicate: API with same name exists.';
+          const detailLine = 'Duplicate: API with same name already exists.';
           const idValue = `${duplicateApi._id}`;
           return errorMessagePayload(400, detailLine, 'id', idValue);
         }
@@ -584,6 +584,17 @@ CatalogV1.addCollection(Apis, {
         // API exists but user can not manage
         if (!api.currentUserCanManage(userId)) {
           return errorMessagePayload(403, 'You do not have permission for editing this API.');
+        }
+
+        // If API name given, check if API with same name already exists
+        if (bodyParams.name) {
+          const duplicateApi = Apis.findOne({ name: bodyParams.name });
+  
+          if (duplicateApi) {
+            const detailLine = 'Duplicate: API with same name already exists.';
+            const idValue = `${duplicateApi._id}`;
+            return errorMessagePayload(400, detailLine, 'id', idValue);
+          }
         }
 
         // validate values
