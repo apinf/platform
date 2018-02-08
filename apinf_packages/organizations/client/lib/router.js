@@ -38,11 +38,11 @@ FlowRouter.route('/organizations', {
   },
 });
 
-FlowRouter.route('/organizations/:slug/', {
+FlowRouter.route('/organizations/:orgSlug/', {
   name: 'organizationProfile',
   action (params) {
     // Get organization slug
-    const slug = params.slug;
+    const slug = params.orgSlug;
 
     // Get Organization
     Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {

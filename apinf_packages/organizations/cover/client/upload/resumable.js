@@ -23,7 +23,7 @@ Meteor.startup(() => {
   // Set organization cover id to organization collection on success
   OrganizationCover.resumable.on('fileSuccess', (file) => {
     // Get slug
-    const slug = FlowRouter.getParam('slug');
+    const slug = FlowRouter.getParam('orgSlug');
 
     // Get organization by slug
     const organization = Organizations.findOne({ slug });
