@@ -187,7 +187,7 @@ AnalyticsV1.addRoute('analytics', {
       if (!managerId) {
         return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id).');
       }
-      
+
       const queryParams = this.queryParams;
 
       // With "period" neither "startDate" nor "days" simultaneously
@@ -206,7 +206,7 @@ AnalyticsV1.addRoute('analytics', {
 
       // Default value for apisBy is 'organization'
       const apisBy = queryParams.apisBy || 'organization';
-      
+
       // Check if correct value (owner/organization) was given
       if (apisBy === 'owner') {
         // Set condition for a list of managed APIs
@@ -216,7 +216,7 @@ AnalyticsV1.addRoute('analytics', {
         if (!queryParams.organizationId) {
           return errorMessagePayload(400, 'Parameter "organizationId" is required when "apisBy" has value "organization".');
         }
-        
+
         // Check if Organization exists
         const organizationId = queryParams.organizationId;
         if (organizationId) {
@@ -244,9 +244,8 @@ AnalyticsV1.addRoute('analytics', {
           return errorMessagePayload(400, 'Parameter "period" has an erroneous value.',
            'period', period);
         } else {
-        // Get period begin and end dates
-        searchDates = searchBeginEndDates(period, '', '');        
-
+          // Get period begin and end dates
+          searchDates = searchBeginEndDates(period, '', '');
         }
 
       } else {
@@ -258,7 +257,7 @@ AnalyticsV1.addRoute('analytics', {
           const message = 'Parameter "startDate" must be a valid date.';
           return errorMessagePayload(400, message, 'startDate', startDate);
         }
-  
+
         // If start date is given, also days is needed
         if (!queryParams.days) {
           const message = 'Parameter "startDate" requires also parameter "days".';
@@ -267,7 +266,7 @@ AnalyticsV1.addRoute('analytics', {
 
         // Is number of days given?
         let days = this.queryParams.days;
-  
+
         // Days must be integer
         if (!Number.isInteger(days * 1)) {
           const message = 'Parameter "days" has to be integer.';
@@ -276,10 +275,10 @@ AnalyticsV1.addRoute('analytics', {
         days *= 1;
 
         // Get period begin and end dates
-        searchDates = searchBeginEndDates('', startDate, days);        
+        searchDates = searchBeginEndDates('', startDate, days);
 
       }
-        
+
       // Pass an optional search string for looking up inventory.
       if (queryParams.q) {
         query.$or = [
@@ -305,53 +304,41 @@ AnalyticsV1.addRoute('analytics', {
       }
 
       // Include only id and name
-      const includeFields = {};
-      includeFields._id = 1;
-      includeFields.name = 1;
-      options.fields = includeFields;
-
+      options.fields = {
+        _id: 1,
+        name: 1,
+      };
 
       // Create new API list that is based on APIs collection with extended field logoUrl
       const apiAnalyticsList = Apis.find(query, options).map((api) => {
-        // Initiate response structure
-        const apiAnalytics = {};
-        const metaAnalytics = {};
-        const summariesAnalytics = {};
-
-        // Gather API metadata
-        metaAnalytics.apiName = api.name;
-        metaAnalytics.apiId = api._id;
-        metaAnalytics.interval = 1440;
-        metaAnalytics.proxyPath = '';
-
-        // For summary counters
-        const summariesRequestCount = {};
-        const summariesResponseTime = {};
-        const summariesUniqueUsers = {};
-
         // Return API Proxy's URL, if it exists
         const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
         // If Proxy is API Umbrella
         if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
+          // Initiate response structure
+          const apiAnalytics = {};
+
           // Get connected proxy url
           const proxyUrl = proxyBackend.proxyUrl();
           // Get proxy backend path
           const frontendPrefix = proxyBackend.frontendPrefix();
-          // Provide full proxy path
-          metaAnalytics.proxyPath = proxyUrl.concat(frontendPrefix);
 
+          // Fill and return analytics data
+          apiAnalytics.meta = {
+            apiName: api.name,
+            apiId: api._id,
+            interval: 1440,
+            proxyPath: proxyUrl.concat(frontendPrefix),
+          };
           // Fill summaries
-          summariesAnalytics.requestCount = 1;
-          summariesAnalytics.responseTime = 131;
-          summariesAnalytics.uniqueUsers = 1313;
-          
-          // Fill and return analytics data4
-          apiAnalytics.meta = metaAnalytics;
-          apiAnalytics.summaries = summariesAnalytics;
+          apiAnalytics.summaries = {
+            requestCount: 1,
+            responseTime: 131,
+            uniqueUsers: 1313,
+          };
           return apiAnalytics;
         }
-        
       });
 
       // Construct response
@@ -426,7 +413,7 @@ AnalyticsV1.addRoute('analytics/:id', {
       if (!apiId) {
         return errorMessagePayload(404, 'API ID is missing');
       }
-      
+
       const queryParams = this.queryParams;
 
       // With "period" neither "date" nor "interval" simultaneously
@@ -459,18 +446,18 @@ AnalyticsV1.addRoute('analytics/:id', {
       } else {
         // ...or for date
         const date = queryParams.date;
-        
+
         // Format check for date to be ISO 8601
         if (!moment(date).isValid()) {
           // Error message
           const message = 'Parameter "date" must be a valid date.';
           return errorMessagePayload(400, message, 'date', date);
         }
-        
-        
+
+
         // Get period begin and end dates
-        searchDates = searchBeginEndDates ('', startDate, days);        
-        
+        searchDates = searchBeginEndDates ('', startDate, days);
+
         // Get given interval or default value?
         let interval = queryParams.interval || 60;
 
@@ -482,7 +469,7 @@ AnalyticsV1.addRoute('analytics/:id', {
           }
           interval *= 1;
         }
-      }  
+      }
 
       // Find API with specified ID
       const api = Apis.findOne(apiId);
@@ -490,12 +477,12 @@ AnalyticsV1.addRoute('analytics/:id', {
       // If API doesn't exist
       if (!api) {
         return errorMessagePayload(404, 'API with specified ID is not found.');
-      }  
-      
+      }
+
       // If API exists but user can not manage
       if (!api.currentUserCanManage(managerId)) {
         return errorMessagePayload(403, 'You do not have permission for this API.');
-      }  
+      }
 
 
 
@@ -535,11 +522,10 @@ AnalyticsV1.addRoute('analytics/:id', {
       }
 
       // Include only id and name
-      const includeFields = {};
-      includeFields._id = 1;
-      includeFields.name = 1;
-      options.fields = includeFields;
-
+      options.fields = {
+        _id: 1,
+        name: 1,
+      };
 
       // Create new API list that is based on APIs collection with extended field logoUrl
       const apiAnalyticsList = Apis.find(query, options).map((api) => {
@@ -575,13 +561,13 @@ AnalyticsV1.addRoute('analytics/:id', {
           summariesAnalytics.requestCount = 1;
           summariesAnalytics.responseTime = 131;
           summariesAnalytics.uniqueUsers = 1313;
-          
-          // Fill and return analytics data4
+
+          // Fill and return analytics data
           apiAnalytics.meta = metaAnalytics;
           apiAnalytics.summaries = summariesAnalytics;
           return apiAnalytics;
         }
-        
+
       });
 
       // Construct response
