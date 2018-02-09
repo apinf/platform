@@ -405,8 +405,7 @@ CatalogV1.addCollection(Apis, {
 
         if (duplicateApi) {
           const detailLine = 'Duplicate: API with same name already exists.';
-          const idValue = `${duplicateApi._id}`;
-          return errorMessagePayload(400, detailLine, 'id', idValue);
+          return errorMessagePayload(400, detailLine, 'id', duplicateApi._id);
         }
 
         // Description must not exceed field length in DB
@@ -592,8 +591,7 @@ CatalogV1.addCollection(Apis, {
 
           if (duplicateApi) {
             const detailLine = 'Duplicate: API with same name already exists.';
-            const idValue = `${duplicateApi._id}`;
-            return errorMessagePayload(400, detailLine, 'id', idValue);
+            return errorMessagePayload(400, detailLine, 'id', duplicateApi._id);
           }
         }
 
