@@ -248,4 +248,62 @@ Meteor.methods({
     // Return the API slug
     return newSlug;
   },
+  formSlugFromOrganizationsName (organizationName) {
+    // Make sure organizationName is a string
+    check(organizationName, String);
+    // Get organization
+    const organization = Organizations.findOne(organizationName);
+    // Transliterates non-Latin scripts
+    const slug = slugs(organizationName, { tone: false });
+
+    // Look for existing duplicate slug beginning of the newest one
+    const duplicateSlug = Organizations.findOne(
+      {
+        $or: [
+          { 'friendlySlugs.slug.base': slug },
+          { slug },
+        ],
+      },
+      { sort: { 'friendlySlugs.slug.index': -1 } }
+    );
+
+    // Initialize index value 0
+    let index = 0;
+    let newSlug = slug;
+    let slugBase = slug;
+
+    // If duplicate slug exists
+    if (duplicateSlug && duplicateSlug.friendlySlugs) {
+      // Return false, this block only execute in case of update slug
+      if (organization && organization._id === duplicateSlug._id
+        && slug === duplicateSlug.friendlySlugs.slug.base) {
+        return false;
+      }
+      // Set new index value
+      index = duplicateSlug.friendlySlugs.slug.index + 1;
+
+      // Get base slug value
+      slugBase = duplicateSlug.friendlySlugs.slug.base;
+
+      // Create new slug
+      newSlug = `${slugBase}-${index}`;
+    } else if (duplicateSlug && duplicateSlug.slug) {
+      // Set new index value
+      index += 1;
+
+      // Create new slug
+      newSlug = `${slugBase}-${index}`;
+    }
+
+    // Return slug and friendly slug value inside object
+    return {
+      slug: newSlug,
+      friendlySlugs: {
+        slug: {
+          base: slugBase,
+          index,
+        },
+      },
+    };
+  },
 });

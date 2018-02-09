@@ -323,10 +323,13 @@ ManagementV1.addRoute('organizations', {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
         }
       }
-      // TODO Add slug to Organization
-      //      Solve slug and add it into organizationData
-      // Can be implemented after issue 3389
 
+      // Get Formed slug
+      const slugData = Meteor.call('formSlugFromOrganizationsName', bodyParams.name);
+      // Include slug
+      organizationData.slug = slugData.slug;
+      // Include friendlySlugs
+      organizationData.friendlySlugs = slugData.friendlySlugs;
       const organizationId = Organizations.insert(organizationData);
 
       // If insert failed, stop and send response
@@ -616,10 +619,18 @@ ManagementV1.addRoute('organizations/:id', {
         }
       }
 
-      // TODO Add slug to Organization in case Organization name is altered
-      //      Solve slug and add it into organizationData
-      // Can be implemented after issue 3389
-
+      // If Organization name given
+      if (bodyParams.name) {
+        // Get Formed slug
+        const slugData = Meteor.call('formSlugFromOrganizationsName', bodyParams.name);
+        // Check slugData
+        if (slugData) {
+          // Include slug
+          organizationData.slug = slugData.slug;
+          // Include friendlySlugs
+          organizationData.friendlySlugs = slugData.friendlySlugs;
+        }
+      }
       // Update Organization document
       const result = Organizations.update(organizationId, { $set: organizationData });
 
