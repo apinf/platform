@@ -52,6 +52,9 @@ Branding.schema = new SimpleSchema({
     max: 100,
     optional: true,
     defaultValue: 0,
+    autoform: {
+      type: 'number',
+    },
   },
   siteTitle: {
     type: String,

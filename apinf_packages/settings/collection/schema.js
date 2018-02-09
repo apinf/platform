@@ -84,6 +84,9 @@ Settings.schema = new SimpleSchema({
   'mail.smtpPort': {
     type: Number,
     optional: true,
+    autoform: {
+      type: 'number',
+    },
     custom () {
       const mailEnabled = this.field('mail.enabled').value;
       const smtpPort = this.value;
