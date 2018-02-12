@@ -112,22 +112,23 @@ const descriptionUsers = {
 
   As a response is returned an array containing updated User data.
   `,
-// --------------------------------------------
-deleteUserRole: `
-### Remove a role from a User  ###
+  // --------------------------------------------
+  deleteUserRole: `
+  ### Remove a role from a User  ###
 
-With this method an Admin can remove from a User a role, which is "admin" or "manager".
+  With this method an Admin can remove from a User a role, which is "admin" or "manager".
 
-Parameters:
-* *Users id* (is given as a path parameter) is mandatory
-* *role* (is given as a body parameter) is mandatory
+  Parameters:
+  * *Users id* (is given as a path parameter) is mandatory
+  * *role* (is given as a body parameter) is mandatory
 
-Example call:
+  Example call:
 
-  GET /users/<users-id>/roles?role=manager
+    GET /users/<users-id>/roles?role=manager
 
-Removes the role "manager" from User identified with users-id and responses with HTTP code 204 without content.
-`,
+  Removes the role "manager" from User identified with users-id and responses
+  with HTTP code 204 without content.
+  `,
 };
 
 export default descriptionUsers;
