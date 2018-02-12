@@ -96,6 +96,38 @@ const descriptionUsers = {
   As a response is returned an array containing Users, which have been created within
   last seven days and who are managers in Organization identified with org-id.
   `,
+  // --------------------------------------------
+  postUserRole: `
+  ### Add a role to User ###
+
+  With this method an Admin can provide to a User a new role, which is "admin" or "manager".
+
+  Parameters:
+  * *Users id* (is given as a path parameter) is mandatory
+  * *role* (is given as a body parameter) is mandatory
+
+  Example call:
+
+    GET /users/<users-id>/roles
+
+  As a response is returned an array containing updated User data.
+  `,
+// --------------------------------------------
+deleteUserRole: `
+### Remove a role from a User  ###
+
+With this method an Admin can remove from a User a role, which is "admin" or "manager".
+
+Parameters:
+* *Users id* (is given as a path parameter) is mandatory
+* *role* (is given as a body parameter) is mandatory
+
+Example call:
+
+  GET /users/<users-id>/roles?role=manager
+
+Removes the role "manager" from User identified with users-id and responses with HTTP code 204 without content.
+`,
 };
 
 export default descriptionUsers;
