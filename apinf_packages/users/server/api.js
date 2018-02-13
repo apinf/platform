@@ -285,7 +285,8 @@ ManagementV1.swagger.meta.paths = {
       tags: [
         ManagementV1.swagger.tags.users,
       ],
-      summary: 'Add a role to User with userId',
+      summary: 'Add a specified role to a User.',
+      description: descriptionUsers.postUserRole,
       produces: ['application/json'],
       parameters: [
         ManagementV1.swagger.params.userId,
@@ -331,7 +332,8 @@ ManagementV1.swagger.meta.paths = {
       tags: [
         ManagementV1.swagger.tags.users,
       ],
-      summary: 'Remove specified role of User with userID.',
+      summary: 'Remove a specified role from a User.',
+      description: descriptionUsers.deleteUserRole,
       parameters: [
         ManagementV1.swagger.params.userId,
         ManagementV1.swagger.params.removeRole,
