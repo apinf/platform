@@ -49,17 +49,48 @@ AnalyticsV1.swagger = {
     authentication: 'Authentication',
   },
   params: {
-    optionalSearch: {
-      name: 'q',
-      in: 'query',
-      description: 'An optional search string for looking up inventory.',
-      required: false,
+    apiId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of API',
+      required: true,
       type: 'string',
     },
     apisBy: {
       name: 'apisBy',
       in: 'query',
       description: analyticsDescription.apisBy,
+      required: false,
+      type: 'string',
+      default: 'organization',
+      enum: ['organization', 'owner'],
+    },
+    date: {
+      name: 'date',
+      in: 'query',
+      description: analyticsDescription.date,
+      required: false,
+      type: 'string',
+    },
+    days: {
+      name: 'days',
+      in: 'query',
+      description: analyticsDescription.days,
+      required: false,
+      type: 'integer',
+    },
+    interval: {
+      name: 'interval',
+      in: 'query',
+      description: analyticsDescription.interval,
+      required: false,
+      type: 'string',
+      enum: ['5', '10', '15', '30', '60'],
+    },
+    optionalSearch: {
+      name: 'q',
+      in: 'query',
+      description: 'An optional search string for looking up inventory.',
       required: false,
       type: 'string',
     },
@@ -76,6 +107,7 @@ AnalyticsV1.swagger = {
       description: analyticsDescription.period,
       required: false,
       type: 'string',
+      default: 'today',
       enum: ['today', 'week', 'month'],
     },
     startDate: {
@@ -85,22 +117,7 @@ AnalyticsV1.swagger = {
       required: false,
       type: 'string',
     },
-    days: {
-      name: 'days',
-      in: 'query',
-      description: analyticsDescription.days,
-      required: false,
-      type: 'integer',
-    },
 
-
-    apiId: {
-      name: 'id',
-      in: 'path',
-      description: 'ID of API',
-      required: true,
-      type: 'string',
-    },
     login: {
       name: 'user',
       in: 'body',
