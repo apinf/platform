@@ -7,46 +7,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="page-head-topblock">
     <div class="container">
       <!-- Header -->
-      <div class="page-head-infoblock">
-        {{> viewApiLogo }}
-        <div class="api-info">
-          <h1 id="api-header">
-            {{ api.name }}
-            <!-- {{> viewApiStatus api=api width="0.4" }} -->
-          </h1>
-
-          {{# if api.organization }}
-            <p class="view-api-meta-details">
-              <i class="fa fa-address-card" aria-hidden="true"></i>
-              <a href="{{ pathFor 'organizationProfile' slug=api.organization.slug }}">
-                {{ api.organization.name }}
-              </a>
-            </p>
-          {{ else }}
-            <p class="view-api-meta-details">
-              <i class="fa fa-user"></i>
-              {{ api.getApiManagersByName }}
-            </p>
-          {{/ if }}
-
-          <div class="pull-left">
-            {{> apiLifecycleStatus api=api }}
-
-            {{# unless api.isPublic }}
-              <span class="label label-default">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
-            {{/ unless }}
-          </div>
-
-
-          <!-- {{> apiBackendRating api }} -->
-        </div>
-      </div>
-
-      <div class="page-head-bookmarks pull-right">
+      <div class="page-head-infoblock" style="margin-top: 1em;position:relative;">
         {{# if currentUser }}
           {{> bookmark api=api }}
         {{else}}
-          <a href="#" class="bookmark-button">
+          <!-- <a href="#" class="bookmark-button">
             <div
                 class="api-card-bookmark"
                 data-toggle="tooltip"
@@ -55,10 +20,51 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
               <i class="fa fa-bookmark bookmark-default"></i>
             </div>
-          </a>
+          </a> -->
         {{/ if }}
+        <!-- {{> viewApiLogo }} -->
+        <div class="api-info">
+          <h1 id="api-header"
+          style="font-size: 1.7em;
+          font-weight: 500;
+          color: #55626c;">
+            {{ api.name }}
+            <!-- {{> viewApiStatus api=api width="0.4" }} -->
+          </h1>
+
+          {{# if api.organization }}
+            <p class="view-api-meta-details">
+              <!-- <i class="fa fa-address-card" aria-hidden="true"></i> -->
+              <a href="{{ pathFor 'organizationProfile' slug=api.organization.slug }}">
+                {{ api.organization.name }}
+              </a>
+            </p>
+          {{ else }}
+            <!-- <p class="view-api-meta-details">
+              <i class="fa fa-user"></i>
+              {{ api.getApiManagersByName }}
+            </p> -->
+          {{/ if }}
+
+          <div class="pull-right"
+            style="padding-left: 10px;
+            padding-top: 3px;">
+            <!-- {{> apiLifecycleStatus api=api }} -->
+
+            {{# unless api.isPublic }}
+              <span class="label label-default" style="background-color:transparent;">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
+            {{/ unless }}
+          </div>
+
+
+          <!-- {{> apiBackendRating api }} -->
+        </div>
       </div>
-      {{# if currentUser }}
+
+      <!-- <div class="page-head-bookmarks pull-right"> -->
+
+      <!-- </div> -->
+      <!-- {{# if currentUser }}
         {{# if proxyBackend }}
           <div>
             <span class="pull-right">
@@ -66,12 +72,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </span>
           </div>
         {{/ if }}
-      {{/ if }}
+      {{/ if }} -->
       <!-- Tabs -->
       <div id="api-navigation-tabs" class="navigation-tabs">
         {{# if proxyBackend }}
           <!-- View Analytics -->
-          <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}" class="btn btn-sm btn-primary pull-right">
+          <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}" class="btn btn-sm btn-default pull-right">
             {{_ "apiViewAnalytics_button_viewAnalytics" }}
           </a>
         {{/ if}}
