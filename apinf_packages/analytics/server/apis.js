@@ -364,11 +364,10 @@ AnalyticsV1.addRoute('analytics/:id', {
       summary: 'List APIs showing their Ids and KPI values.',
       description: descriptionAnalytics.getAnalytics,
       parameters: [
-        AnalyticsV1.swagger.params.apisBy,
-        AnalyticsV1.swagger.params.organizationId,
+        AnalyticsV1.swagger.params.apiId,
         AnalyticsV1.swagger.params.period,
         AnalyticsV1.swagger.params.startDate,
-        AnalyticsV1.swagger.params.days,
+        AnalyticsV1.swagger.params.interval,
       ],
       responses: {
         200: {

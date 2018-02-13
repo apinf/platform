@@ -23,11 +23,6 @@ You can have multiple proxies under one management.
   APInf provides you with a unified, simple interface for publishing
   your APIs to the developer community and performing complex API management tasks.
 
-
-
-
-
-
   It allows you to gain a better understanding of your API traffic.
 
   Each organization has an organization page which provides single URL to promote to developers.
@@ -280,6 +275,10 @@ You can have multiple proxies under one management.
   managed by user (value 'organization') or managed by user (value 'owner').
   *Default value is 'organization'*.
   `,
+  date: `
+  Date of which detailed information is retrieved. Format: yyyy-mm-dd (Standard: ISO 8601).
+  **Note!** If _period_ parameter is used, then _date_ parameter is obsolete.
+  `,
   organizationId: `
   Optional parameter to limit the search to one Organization only.
   `,
@@ -308,7 +307,18 @@ You can have multiple proxies under one management.
   included in the count.
 
   **Note!** If you use combination of *startDate* and *days* parameters,
-  you can not use *period* parameter.   
+  you can not use *period* parameter.
+  `,
+  interval: `
+  Granularity (in minutes) of the data within a day. Available options are:
+  - 5
+  - 10
+  - 15
+  - 30
+  - 60
+
+  If granularity interval is not given, default value is 24 hours (1440 minutes), which is by the way the same as to use _today_ option in period parameter.
+  **Note!** If _period_ parameter is used, then _interval_ parameter is obsolete.
   `,
 };
 
