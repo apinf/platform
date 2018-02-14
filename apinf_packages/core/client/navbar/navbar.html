@@ -40,13 +40,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </a>
       </li>
       {{# if currentUser }}
-      {{# if userCanAddApi }}
-      <li class="{{ isActiveRoute 'addApi' }}">
-        <a href="{{ pathFor 'addApi' }}" id="addapi-button">
-          {{_ "navbar_addAPIBackend" }}
-        </a>
-      </li>
-      {{/ if }}
 
       {{# if isInRole 'admin' }}
       <li class="{{ isActiveRoute 'accountsAdmin' }}">
@@ -55,50 +48,44 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </a>
       </li>
       {{/ if }}
-      {{/ if }}
-      {{# if branding.homeCustomBlock }}
-      <li class="{{ isActiveRoute 'pricing' }}">
-        <a href="{{ pathFor 'pricing' }}" id="pricing-button">
-          {{_ "navbar_pricing" }}
+
+      {{# if userCanAddApi }}
+      <li class="{{ isActiveRoute 'addApi' }}">
+        <a href="{{ pathFor 'addApi' }}" id="addapi-button">
+          + {{_ "navbar_addAPIBackend" }}
         </a>
       </li>
       {{/ if }}
+      {{/ if }}
+      {{# if currentUser }}
+      {{> userMenu user=currentUser }}
+      {{ else }}
+      <li>
+        <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
+          {{_ "navbar_signUp" }}
+        </a>
+      </li>
+      <li>
+        <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
+          {{_ "navbar_signIn" }}
+        </a>
+      </li>
+      {{/ if }}
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right" id="user-menu">
+
+      <!-- {{# unless isActiveRoute 'search'}}
+      <li>
+        <a type="button" class="icon-search" id="search-button">
+          <i class="fa fa-search toggle-search-icon"></i>
+          <i class="fa fa-times toggle-search-icon"></i>
+        </a>
+      </li>
+      {{/ unless}} -->
     </ul>
   </div>
-  <!-- <nav class="navbar navbar-default navbar-fixed-top main-navigation">
-  <div class="container">
-</div>
-<ul class="nav navbar-nav navbar-right" id="user-menu">
-{{# if currentUser }}
-{{> userMenu user=currentUser }}
-{{ else }}
-<li>
-<a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
-{{_ "navbar_signUp" }}
-</a>
-</li>
-<li>
-<a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
-{{_ "navbar_signIn" }}
-</a>
-</li>
-{{/ if }}
-{{# unless isActiveRoute 'search'}}
-<li>
-<a type="button" class="icon-search" id="search-button">
-<i class="fa fa-search toggle-search-icon"></i>
-<i class="fa fa-times toggle-search-icon"></i>
-</a>
-</li>
-{{/ unless}}
-</ul>
-<ul class="nav navbar-nav nanbar-left" id="main-navbar">
-
-
-</ul>
-</div>
-<div class="container">
-{{> searchField }}
-</div>
-</nav> -->
+  <!-- <div class="container">
+    {{> searchField }}
+  </div> -->
 </template>

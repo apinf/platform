@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="userMenu">
-  <li class="dropdown">
+  <li class="dropdown pull-right" style="margin-right:20px;">
     <a
       href="#"
       class="dropdown-toggle"
@@ -12,13 +12,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       role="button"
       id="usermenu"
       aria-haspopup="true"
-      aria-expanded="false">
-      <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+      aria-expanded="false"
+      style="text-decoration:none; text-transform:none;">
         <span class="username">{{ user.username }}</span>
-        &nbsp;
-        <i class="fa fa-chevron-down"></i>
+        <i class="fa fa-chevron-down" style="padding-left: 5px;
+    font-size: 10px;"></i>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="margin-right:20px;">
       <li>
         <a href="{{ pathFor 'profile' }}" id="profile-button">
           {{_ "userMenu_profile" }}

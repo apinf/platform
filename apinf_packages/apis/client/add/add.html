@@ -6,14 +6,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="addApi">
   {{# if Template.subscriptionsReady }}
     <div class="container">
-      <h1 class="page-header">
-        {{_ "addApi_header" }}
+      <h1 style="font-size:1.4em;color:#333;text-transform:uppercase;margin-top:30px;font-weight:600;">
+        Add new API
       </h1>
+      <p style="margin-bottom: 30px;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
+        In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+      </p>
       <!-- Add API by entering API details -->
       <section>
-        <h2 class="second-title">
+        <!-- <h2 class="second-title">
           {{_ 'addApi_enterApiDetails' }}
-        </h2>
+        </h2> -->
         {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
           <!--invisible auto-value field-->
           {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
@@ -21,39 +25,39 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> afQuickField name='name' id="api-name" }}
             {{> afQuickField name='description' rows=2 id="api-description" }}
             {{> afQuickField name='url' id="api-url" }}
-            {{> afQuickField name='lifecycleStatus' id="api-lifecyclestatus" }}
+            <!-- {{> afQuickField name='lifecycleStatus' id="api-lifecyclestatus" }} -->
           </fieldset>
-          <button type="submit" class="btn btn-primary" id="submitapi-button">
+          <button type="submit" class="btn btn-success" id="submitapi-button">
             {{_ 'addApi_button_text' }}
           </button>
         {{/ autoForm }}
       </section>
       <!-- separator -->
-      <div class="line-and-text">
+      <!-- <div class="line-and-text">
         <span>
           {{_ 'addApi_separateLineTitle_or' }}
         </span>
-      </div>
+      </div> -->
       <!-- Add API by uploading OpenAPI specification -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <h2 class="second-title">
           {{_ "addApi_sectionTitle_importOpenApiSpecification" }}
         </h2>
         {{> importOpenApiSpecification }}
-      </div>
+      </div> -->
       <!-- separator -->
-      <div class="line-and-text">
+      <!-- <div class="line-and-text">
         <span>
           {{_ 'addApi_separateLineTitle_or' }}
         </span>
-      </div>
+      </div> -->
       <!-- Add API by uploading API configuration -->
-      <section>
+      <!-- <section>
         <h2 class="second-title">
           {{_ "addApi_sectionTitle_importApiConfiguration" }}
         </h2>
         {{> importApiConfiguration }}
-      </section>
+      </section> -->
     </div>
   {{ else }}
     {{> spinner }}
