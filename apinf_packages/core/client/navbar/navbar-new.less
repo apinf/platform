@@ -1,0 +1,60 @@
+.navbar-new {
+	background-color: #1a75d2;
+	padding-left: 40px;
+	padding-top: 1em;
+
+	.navbar-logo {
+		padding-bottom: 10px;
+		width: 110px;
+	}
+
+	.nav-tabs {
+		border: none;
+	}
+
+	.nav-tabs > li {
+    margin-bottom: 6px;
+	}
+
+	.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+		border-width: 0;
+	}
+	.nav-tabs > li > a {
+		border: none;
+		color: rgba(255,255,255,0.65);
+		text-transform: uppercase;
+		font-size: 12px;
+		letter-spacing: 0.6px;
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+		margin-right: 20px;
+	}
+	.nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+		border: none;
+		color: #fff !important;
+		background: transparent;
+	}
+	.nav-tabs > li > a::after {
+		content: "";
+		background: #fff;
+		height: 4px;
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: -6px;
+		transition: all 250ms ease 0s; transform: scale(0);
+	}
+	.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+		transform: scale(1);
+	}
+	.tab-nav > li > a::after {
+		background: #21527d none repeat scroll 0% 0%;
+		color: #fff;
+	}
+	.tab-pane {
+		padding: 5px 0;
+	}
+	.tab-content {
+		padding: 20px
+	}
+}
