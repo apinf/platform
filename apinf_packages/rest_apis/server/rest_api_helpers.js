@@ -23,7 +23,7 @@ import moment from 'moment';
    return errorPayload;
  }
 
- export function searchBeginEndDates (period, startDate, days) {
+ export function searchBeginEndDates (rawDate) {
   // Search dates, beginning and end
   const searchDates = {
     begin: '',
@@ -31,8 +31,8 @@ import moment from 'moment';
   }
   let fromDate;
   let toDate;
-  
-  if (period === 'today') {
+
+  if (rawDate.period === 'today') {
     // only one day
     fromDate = moment();
     fromDate_x = fromDate.format('x');
@@ -40,7 +40,7 @@ import moment from 'moment';
     toDate = fromDate;
     toDate_x = toDate.format('x');
     toDate_f = toDate.format('MM-DD-YYYY');
-  } else if (period === 'week') {
+  } else if (rawDate.period === 'week') {
     // previous week, ending yesterday
     fromDate = moment().subtract(1, 'weeks');
     fromDate_x = fromDate.format('x');
@@ -48,7 +48,7 @@ import moment from 'moment';
     toDate = moment().subtract(1, 'days');
     toDate_x = toDate.format('x');
     toDate_f = toDate.format('MM-DD-YYYY');
-  } else if (period === 'month') {
+  } else if (rawDate.period === 'month') {
     // previous month, ending yesterday
     fromDate = moment().subtract(1, 'months');
     fromDate_x = fromDate.format('x');
@@ -58,10 +58,10 @@ import moment from 'moment';
     toDate_f = toDate.format('MM-DD-YYYY');
   } else {
     // free value, starting from given, duration of days
-    fromDate = moment(startDate);
+    fromDate = moment(rawDate.startDate);
     fromDate_x = fromDate.format('x');
     fromDate_f = fromDate.format('MM-DD-YYYY');
-    toDate = moment(startDate).add(days - 1, 'days');
+    toDate = moment(rawDate.startDate).add(days - 1, 'days');
     toDate_x = toDate.format('x');
     toDate_f = toDate.format('MM-DD-YYYY');
   }
