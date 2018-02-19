@@ -21,7 +21,8 @@ import Organizations from '/apinf_packages/organizations/collection';
 import AnalyticsV1 from '/apinf_packages/rest_apis/server/analytics';
 import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import descriptionAnalytics from '/apinf_packages/rest_apis/lib/descriptions/analytics_texts';
-import { errorMessagePayload, searchBeginEndDates } from '/apinf_packages/rest_apis/server/rest_api_helpers';
+import { errorMessagePayload, searchBeginEndDates } from
+  '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 AnalyticsV1.swagger.meta.paths = {
   '/login': Authentication.login,
@@ -209,13 +210,14 @@ AnalyticsV1.addRoute('analytics', {
 
       // Check if correct value (owner/organization) was given
       if (apisBy === 'owner') {
+        // Organization ID can not be given when apisBy has value 'owner'
+        if (queryParams.organizationId) {
+          return errorMessagePayload(400,
+            'Parameter "organizationId" is not permitted when "apisBy" has value "owner".');
+        }
         // Set condition for a list of managed APIs
         query.managerIds = managerId;
       } else if (apisBy === 'organization') {
-        // Also organization ID is needed
-        if (!queryParams.organizationId) {
-          return errorMessagePayload(400, 'Parameter "organizationId" is required when "apisBy" has value "organization".');
-        }
 
         // Check if Organization exists
         const organizationId = queryParams.organizationId;
@@ -235,17 +237,20 @@ AnalyticsV1.addRoute('analytics', {
       }
 
       let searchDates = {};
+      const rawDate = {};
+
       // Default value for period is 'today'
       let period = this.queryParams.period || 'today';
-
       if (period) {
+        let allowedPeriodNames = ['today', 'week', 'month'];
         // Check if correct value was given
-        if (period !== 'today' && period !== 'week' && period !== 'month') {
+        if (!allowedPeriodNames.includes(period)) {
           return errorMessagePayload(400, 'Parameter "period" has an erroneous value.',
            'period', period);
         } else {
           // Get period begin and end dates
-          searchDates = searchBeginEndDates(period, '', '');
+          rawDate.period = period;
+          searchDates = searchBeginEndDates(rawDate);
         }
 
       } else {
@@ -274,8 +279,10 @@ AnalyticsV1.addRoute('analytics', {
         }
         days *= 1;
 
+        rawDate.startDate = startDate;
+        rawDate.days = days;
         // Get period begin and end dates
-        searchDates = searchBeginEndDates('', startDate, days);
+        searchDates = searchBeginEndDates(rawDate);
 
       }
 
@@ -426,18 +433,21 @@ AnalyticsV1.addRoute('analytics/:id', {
       }
       // Object for begin and end dates of search
       let searchDates = {};
+      const rawDate = {};
       // Is period given?
       let period = queryParams.period;
 
       // Check if correct value was given either for period...
       if (period) {
-        if (period !== 'today' && period !== 'week' && period !== 'month') {
+        let allowedPeriodNames = ['today', 'week', 'month'];
+        // Check if correct value was given
+        if (!allowedPeriodNames.includes(period)) {
           return errorMessagePayload(400, 'Parameter "period" has erroneous value.',
           'period', period);
         }
-
+        rawDate.period = period;
         // Get period begin and end dates
-        searchDates = searchBeginEndDates (period, '', '');
+        searchDates = searchBeginEndDates (rawDate);
 
         // Default value for interval is 60 minutes
         let interval = 60;
@@ -453,9 +463,10 @@ AnalyticsV1.addRoute('analytics/:id', {
           return errorMessagePayload(400, message, 'date', date);
         }
 
-
+        rawDate.period = startDate;
+        rawDate.days = days;
         // Get period begin and end dates
-        searchDates = searchBeginEndDates ('', startDate, days);
+        searchDates = searchBeginEndDates (rawDate);
 
         // Get given interval or default value?
         let interval = queryParams.interval || 60;
