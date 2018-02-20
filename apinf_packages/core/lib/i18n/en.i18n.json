@@ -449,7 +449,7 @@
   "manageApiDocumentationModal_hints_createApiDocumentation": "If you don't have a documentation file, you can create one and then upload it.",
   "manageApiDocumentationModal_hints_documentation_link": "Link to the Wiki, Github page or other web resource where the documentation of your API is located. You can add upto 8 external documentation links",
   "manageApiDocumentationModal_hints_uploadApiDocumentation": "You can add a Swagger document by uploading a file or by giving a link to the remote file. Note: Try out methods can only be controlled, if the file is uploaded.",
-  "manageApiDocumentationModal_addDocumentation_title": "Add documentation",
+  "manageApiDocumentationModal_addDocumentation_title": "Add OpenAPI Specification",
   "manageApiDocumentationModal_helpText_useHttpsProtocol": "This application platform uses HTTPS. API requests from documentation will not work, if API uses HTTP.",
   "manageApiDocumentationModal_ToolTip_Message": "Maximum 8 external documentation links are allowed. Please delete from existing ones if you wish to add a new one.",
   "apiAnalyticPageBody_title_mostUsers": "Most Frequent Users",
@@ -670,7 +670,7 @@
         "label": "Description"
       },
       "url": {
-        "label": "URL"
+        "label": "API Endpoint"
       },
       "organizationId": {
         "label": "Connect API to organization"
