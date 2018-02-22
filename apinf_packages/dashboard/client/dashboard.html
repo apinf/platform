@@ -5,9 +5,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardPage">
   <div class="container">
-    <h1 class="page">
-      {{_ "dashboardPage_title_dashboard" }}
-    </h1>
+    <div class="row page-header">
+      <div class="col-xs-12 col-sm-8">
+        <h1 class="page">
+          {{_ "dashboardPage_title_dashboard" }}
+        </h1>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="search">
+          <i class="fa fa-search"></i>
+          <input type="text" class="form-control pull-right" id="search-box"
+                 placeholder={{_ "dashboardPage_placeholderText_search" }} >
+        </div>
+      </div>
+    </div>
 
     {{# if Template.subscriptionsReady }}
       {{> dashboardToolbar proxiesList=proxiesList }}
@@ -23,7 +34,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
           {{ else }}
             <!-- Display Dashboard page-->
-            {{> dashboardView }}
+            {{> dashboardView searchValue=searchValue }}
           {{/ if }} <!-- /managedOneApi -->
         {{ else }}
           <!-- Display a message about "No managed API" -->

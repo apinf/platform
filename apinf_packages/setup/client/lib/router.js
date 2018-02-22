@@ -14,7 +14,7 @@ import { Roles } from 'meteor/alanning:roles';
 const additionalSetupRequired = function () {
   if (Meteor.user()) {
     // Get user ID
-    const userId = Meteor.user()._id;
+    const userId = Meteor.userId();
 
     const userIsAdmin = Roles.userIsInRole(userId, 'admin');
 

@@ -23,7 +23,7 @@ Meteor.startup(() => {
   // Set organization logo id to organization collection on success
   OrganizationLogo.resumable.on('fileSuccess', (file) => {
     // Get slug
-    const slug = FlowRouter.getParam('slug');
+    const slug = FlowRouter.getParam('orgSlug');
 
     // Get organization by slug
     const organization = Organizations.findOne({ slug });
@@ -66,7 +66,7 @@ Meteor.startup(() => {
     if (err) {
       // Create & show a message about failed insert
       const message = `${TAPi18n.__('organizationLogo_resumable_errorText')} ${err}`;
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
       return;
     }
 
@@ -76,7 +76,7 @@ Meteor.startup(() => {
     if (organization && !organization.currentUserCanManage()) {
       // Create & show error message about permissions
       const message = TAPi18n.__('organizationLogo_noPermissions');
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
       return;
     }
 
@@ -97,7 +97,7 @@ Meteor.startup(() => {
     // Get error message translation related to accepted extensions
     const message = TAPi18n.__('organizationLogo_resumable_acceptedExtensions');
     // Alert user of error
-    sAlert.error(message);
+    sAlert.error(message, { timeout: 'none' });
 
     /* Step 2: Remove uploaded file that was NOT image */
 

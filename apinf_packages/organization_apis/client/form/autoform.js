@@ -13,7 +13,7 @@ AutoForm.hooks({
   organizationApisForm: {
     onError (formType, error) {
       // Show error message to user
-      sAlert.error(error.message);
+      sAlert.error(error.message, { timeout: 'none' });
     },
     onSuccess () {
       // Create & show message on success

@@ -4,10 +4,10 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardSummaryStatistic">
-  {{# if proxyBackends }}
+  {{# if displayTable }}
     <!-- Table head -->
     <h4>
-      {{ tableTitle }} ({{ proxyBackends.length }})
+      {{ tableTitle }} ({{ count }})
     </h4>
 
     <div class="dashboard-table-row statistic-title">
@@ -29,53 +29,46 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     <div class="statistic-block">
       <!-- Table body -->
-      {{# each proxyBackend in proxyBackends }}
-        <div data-id="{{ proxyBackend._id }}" class="dashboard-table-row statistic-line">
-          <div class="row">
-            <div class="col-xs-3">
-              {{ proxyBackend.apiName }}
-            </div>
-            <div class="col-xs-3">
-              <span class="request-number">
-                {{ getCount proxyBackend.frontendPrefix 'requests' }}
-              </span>
-              {{# with comparisonData proxyBackend.frontendPrefix  }}
+      {{# each dataset in sortedAnalyticsData }}
+        {{# with dataset }}
+          <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
+            <div class="row">
+              <div class="col-xs-3">
+                {{ apiName }}
+              </div>
+              <div class="col-xs-3">
+                <span class="request-number">
+                  {{ requestNumber }}
+                </span>
                 <div class="{{ arrowDirection 'requests' }}"></div>
                 <span class="{{ textColor 'requests' }}">
                   {{ percentages 'requests' }}
                 </span>
-              {{/ with }}
-            </div>
-            <div class="col-xs-3">
-              <span class="response-time">
-                {{ getCount proxyBackend.frontendPrefix 'time' }} ms
-              </span>
-              {{# with comparisonData proxyBackend.frontendPrefix  }}
+              </div>
+              <div class="col-xs-3">
+                <span class="response-time">
+                  {{ medianResponseTime }} ms
+                </span>
                 <div class="{{ arrowDirection 'time' }}"></div>
                 <span class="{{ textColor 'time' }}">
                   {{ percentages 'time' }}
                 </span>
-              {{/ with }}
-            </div>
-            <div class="col-xs-3">
-              <span class="unique-users">
-                {{ getCount proxyBackend.frontendPrefix 'users' }}
-              </span>
-              {{# with comparisonData proxyBackend.frontendPrefix  }}
+              </div>
+              <div class="col-xs-3">
+                <span class="unique-users">
+                  {{ avgUniqueUsers }}
+                </span>
                 <div class="{{ arrowDirection 'users' }}"></div>
                 <span class="{{ textColor 'users' }}">
                   {{ percentages 'users' }}
                 </span>
-              {{/ with }}
+              </div>
             </div>
           </div>
-        </div>
-        {{# if displayOverview proxyBackend._id }}
-          {{> dashboardOverviewStatistic proxyBackend=proxyBackend
+        {{/ with }}
+        {{# if displayOverview dataset.proxyBackendId }}
+          {{> dashboardOverviewStatistic dataset=dataset prefix=dataset.prefix
             overviewChartResponse=overviewChartResponse
-            summaryStatisticResponse=summaryStatisticResponse
-            comparisonStatisticResponse=comparisonStatisticResponse
-            statusCodesResponse=statusCodesResponse
           }}
         {{/ if }}
       {{/ each}}

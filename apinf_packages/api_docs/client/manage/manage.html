@@ -58,15 +58,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               type="select-checkbox-inline"
               noselect=false
             }}
-            {{# if apiDocumentationEditorIsEnabled }}
-              <legend>
-                {{> showHelp 'documentation_editor_create_file' }}
-                {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
-              </legend>
-              <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
-                {{_ "manageApiDocumentationModal_openDocumentationEditor" }}
-              </a>
-            {{/ if }}
             <legend>
               {{> showHelp 'documentation_link' }}
               {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
@@ -92,20 +83,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                      </small>
                    </fieldset>
                  </div>
-             {{# each url in otherUrls }}
                <div id="otherUrl-link" class="otherUrl-link">
                  <ul class="list-group">
-                   <li class="list-group-item">
-                    <a href="{{ url }}" id="other-url-@index" target="_blank">
-                    {{ url }}
-                    </a>
-                    <span class="pull-right bg-red">
-                      <i class="fa fa-times cursor delete-link" id="{{ @index }}"></i>
-                    </span>
-                   </li>
+                  {{# each url in otherUrls }}
+                    <li class="list-group-item">
+                      <a href="{{ url }}" id="other-url-@index" target="_blank">
+                        {{ url }}
+                      </a>
+                      <span class="pull-right btn-danger btn-xs">
+                        <i class="fa fa-trash-o fa-lg cursor delete-link" id="{{ @index }}"></i>
+                      </span>
+                    </li>
+                  {{/ each }}
                  </ul>
               </div>
-            {{/ each }}
             <button type="submit" class="btn btn-success" id="save-documentation-link">
               {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
             </button>

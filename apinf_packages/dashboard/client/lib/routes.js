@@ -29,6 +29,12 @@ signedIn.route('/dashboard', {
       // Default value is 7
       context.queryParams.timeframe = 7;
     }
+
+    if (!context.queryParams.sort) {
+      // Initialize sort parameter if it doesn't specify
+      // Default value is 'name'
+      context.queryParams.sort = 'name';
+    }
   }],
   name: 'dashboard',
   action () {

@@ -4,77 +4,71 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardOverviewStatistic">
-  <div class="overview-body" data-overview-id="{{ proxyBackend._id }}">
+  <div class="overview-body" data-overview-id="{{ dataset.proxyBackendId }}">
     <div class="row overview-line">
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{ proxyBackend.apiName }}
+          {{ dataset.apiName }}
         </p>
         <div class="form-group">
           <p>
-            {{_ 'dashboardOverviewStatistic_text_requestPath' path=proxyBackend.frontendPrefix }}
+            {{_ 'dashboardOverviewStatistic_text_requestPath' path=prefix }}
           </p>
           <p class="text-success">
-            {{_ 'dashboardOverviewStatistic_text_successCalls' count=(getStatistics 'success') }}
+            {{_ 'dashboardOverviewStatistic_text_successCalls' count=dataset.successCallsCount }}
           </p>
           <span class="text-danger">
             {{# if timeframeYesterday }}
-              {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=(getStatistics 'error') }}
+              {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=dataset.errorCallsCount }}
             {{ else }}
-              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=(getStatistics 'error') timeframe=timeframe }}
+              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=dataset.errorCallsCount timeframe=timeframe }}
             {{/ if }}
           </span>
         </div>
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_requestsCount' count=(getStatistics 'requests')}}
+          {{_ 'dashboardOverviewStatistic_text_requestsCount' count=dataset.requestNumber}}
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
           </span>
-          {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=proxyBackend._id }}
-          {{# with comparisonData }}
-            <div class="{{ arrowDirection 'requests' }}"></div>
-            <span>{{ overviewComparing 'requests' }}</span>
-          {{/ with }}
+          {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=dataset.proxyBackendId }}
+          <div class="{{ arrowDirection 'requests' }}"></div>
+          <span>{{ overviewComparing 'requests' }}</span>
         </div>
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_responseTime' time=(getStatistics 'time') }}
+          {{_ 'dashboardOverviewStatistic_text_responseTime' time=dataset.medianResponseTime }}
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
           </span>
-          {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackend._id }}
-          {{# with comparisonData }}
-            <div class="{{ arrowDirection 'time' }}"></div>
-            <span>{{ overviewComparing 'time' }}</span>
-          {{/ with }}
+          {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=dataset.proxyBackendId }}
+          <div class="{{ arrowDirection 'time' }}"></div>
+          <span>{{ overviewComparing 'time' }}</span>
         </div>
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_usersCount' count=(getStatistics 'users') }} <sup>*</sup>
+          {{_ 'dashboardOverviewStatistic_text_usersCount' count=dataset.avgUniqueUsers }} <sup>*</sup>
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
           </span>
-          {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=proxyBackend._id }}
-          {{# with comparisonData }}
-            <div class="{{ arrowDirection 'users' }}"></div>
-            <span>{{ overviewComparing 'users' }}</span>
-          {{/ with }}
+          {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=dataset.proxyBackendId }}
+          <div class="{{ arrowDirection 'users' }}"></div>
+          <span>{{ overviewComparing 'users' }}</span>
           <div class="overview-help-text">
             <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
           </div>
         </div>
 
-        <a href="{{ pathFor 'apiAnalyticPage' apiSlug=proxyBackend.apiSlug }}" class="pull-right">
+        <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}" class="pull-right">
           {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
         </a>
       </div>

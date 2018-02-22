@@ -57,37 +57,35 @@ Meteor.methods({
     // Return undefined result for anonymous user
     return undefined;
   },
-  addOrganizationManagerByEmail (manager) {
-    // Make sure manager (with organizationId and email) is an Object
+  addOrganizationManager (manager) {
     check(manager, Object);
 
-    // Subsequent checks for the expected object properties
-    check(manager.organizationId, String);
-    check(manager.email, String);
+    // Get any user with matching email
+    const userByEmail = Accounts.findUserByEmail(manager.user);
+    // Get any user with matching username
+    const userByUsername = Accounts.findUserByUsername(manager.user);
 
-    // Check if email is registered
-    const emailIsRegistered = Meteor.call('checkIfEmailIsRegistered', manager.email);
+    // "User" field can be e-mail value or username value
+    const user = userByEmail || userByUsername;
 
-    if (emailIsRegistered) {
-      // Get user with matching email
-      const user = Accounts.findUserByEmail(manager.email);
-
-      // Get organization document
-      const organization = Organizations.findOne(manager.organizationId);
-
-      // Check if user is already a manager
-      const alreadyManager = organization.managerIds.includes(user._id);
-
-      // Check if the user is already a manager
-      if (alreadyManager) {
-        throw new Meteor.Error('manager-already-exist');
-      } else {
-        // Add user ID to manager IDs field
-        Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
-      }
-    } else {
-      throw new Meteor.Error('email-not-registered');
+    // No matching in both direction
+    if (!user) {
+      throw new Meteor.Error('user-not-registered');
     }
+
+    // Get organization document
+    const organization = Organizations.findOne(manager.organizationId);
+
+    // Check if user is already a manager
+    const alreadyManager = organization.managerIds.includes(user._id);
+
+    // Check if the user is already a manager
+    if (alreadyManager) {
+      throw new Meteor.Error('manager-already-exist');
+    }
+
+    // Add user ID to manager IDs field
+    Organizations.update(manager.organizationId, { $push: { managerIds: user._id } });
   },
   removeOrganizationManager (organizationId, userId) {
     // Make sure organizationId is an String
@@ -97,11 +95,13 @@ Meteor.methods({
     check(userId, String);
 
     // Remove User ID from managers array
-    Organizations.update({ _id: organizationId },
+    const result = Organizations.update({ _id: organizationId },
       { $pull:
          { managerIds: userId },
       }
      );
+
+    return result;
   },
   removeUserFromAllOrganizations (userId) {
     // Make sure userId is an String
@@ -137,18 +137,23 @@ Meteor.methods({
   removeOrganization (organizationId) {
     check(organizationId, String);
     // Remove organization document
-    Organizations.remove(organizationId);
+    const result = Organizations.remove(organizationId);
 
-    // Get all organizationApis links with current organization ID
-    const organizationApis = OrganizationApis.find({ organizationId }).fetch();
+    // Make sure Organization removed
+    if (result) {
+      // Get all organizationApis links with current organization ID
+      const organizationApis = OrganizationApis.find({ organizationId }).fetch();
 
-    // Get array with all IDs of found document
-    const organizationApisIDs = _.map(organizationApis, (link) => {
-      return link._id;
-    });
+      // Get array with all IDs of found document
+      const organizationApisIDs = _.map(organizationApis, (link) => {
+        return link._id;
+      });
 
-    // Remove organizationApi links
-    OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
+      // Remove organizationApi links
+      OrganizationApis.remove({ _id: { $in: organizationApisIDs } });
+    }
+
+    return result;
   },
   getOrganizationProfile (slug) {
     // Make sure slug is a string
