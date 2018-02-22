@@ -47,6 +47,25 @@ Organizations.schema = new SimpleSchema({
       label: false,
     },
   },
+  emailVerification: {
+    type: [Object],
+    optional: true,
+  },
+  'emailVerification.$.managerIds': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    autoform: {
+      type: 'hidden',
+      label: false,
+    },
+  },
+  'emailVerification.$.verified': {
+    type: Boolean,
+  },
+  'emailVerification.$.verificationToken': {
+    type: String,
+    optional: true,
+  },
   name: {
     type: String,
     optional: false,
