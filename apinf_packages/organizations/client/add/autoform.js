@@ -22,6 +22,12 @@ AutoForm.hooks({
 
         // Add current user as Organization manager & creater
         organization.managerIds = [userId];
+        // Set default value for the owner of organization
+        organization.emailVerification = [{
+          managerIds: userId,
+          verified: true,
+        }];
+
         organization.createdBy = userId;
 
         // Submit the form
