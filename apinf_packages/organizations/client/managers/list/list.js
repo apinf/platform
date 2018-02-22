@@ -25,10 +25,20 @@ Template.organizationManagersList.helpers({
 
     // flatten structure of users within organization managers array
     organizationManagers = _.map(organizationManagers, (user) => {
+      // Construct empty object
+      let verificationData = {};
+      const result = _.find(organization.emailVerification, { managerIds: user._id });
+      if (result) {
+        verificationData = result;
+      } else {
+        verificationData.verified = organization.createdBy === user._id;
+      }
+
       return {
         username: user.username,
         email: user.emails[0].address,
         _id: user._id,
+        emailVerified: verificationData.verified,
       };
     });
 
