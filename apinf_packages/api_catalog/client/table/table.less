@@ -5,6 +5,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 .api-catalog-table {
   tbody > tr > td {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  tbody > tr:first-child td {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  tbody > tr > td {
     vertical-align: middle;
   }
   .api-catalog-table-logo img {
@@ -20,13 +30,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .api-catalog-table-title {
     margin-top: 0;
     display: inline;
-
+    color: #55626c;
+    font-weight: 400;
+    font-size: 1.3em;
+    margin-left: 0.2em;
   }
   .label {
-    vertical-align: text-top;
-    margin-right: .2em;
+    color: #666;
+    border: 1px solid #999;
+    font-weight: 400;
+    background-color: transparent;
+    position: relative;
+    bottom: 2px;
+    margin-left: 5px;
   }
   .api-catalog-table-description {
     margin-top: 0.5em;
+    color: #55626c;
   }
 }

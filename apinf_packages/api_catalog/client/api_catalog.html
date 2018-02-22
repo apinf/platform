@@ -5,37 +5,40 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiCatalog">
   <div class="container">
-    <h1 class="page-header">
-      {{_ "catalog_Title" }}
-      {{# if apisCount }}
-      <small>
-        {{_ 'apiCatalog_apisCount' count=apisCount }}
-      </small>
-      {{/ if }}
-    </h1>
-    {{> apiCatalogToolbar apis=apis }}
+    <div class="row">
+      <h1 class="page-header" style="font-size:1.7em;color:#24292e;">
+        <!-- {{_ "catalog_Title" }} -->
+        {{# if apisCount }}
+          {{_ 'apiCatalog_apisCount' count=apisCount }}
+        {{/ if }}
+        available
+      </h1>
+      {{> apiCatalogToolbar apis=apis }}
 
-    <p>
-      {{> apiFilteredBy apisCount=apisCount }}
-    </p>
+      <p>
+        {{> apiFilteredBy apisCount=apisCount }}
+      </p>
 
-    {{# if Template.subscriptionsReady }}
-      <!-- if viewMode is grid, show grid -->
-      {{# if gridViewMode }}
-        {{> apiCatalogGrid apis=apis }}
-      {{/ if }}
+      <div class="col-md-9">
+        {{# if Template.subscriptionsReady }}
+          <!-- if viewMode is grid, show grid -->
+          {{# if gridViewMode }}
+            {{> apiCatalogGrid apis=apis }}
+          {{/ if }}
 
-      <!-- if viewMode is table, show table -->
-      {{# if tableViewMode }}
-        {{> apiCatalogTable apis=apis }}
-      {{/ if }}
+          <!-- if viewMode is table, show table -->
+          {{# if tableViewMode }}
+            {{> apiCatalogTable apis=apis }}
+          {{/ if }}
 
-      <!-- show pagination button only if APIs are available -->
-      {{# if apis }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
-      {{/ if }}
-    {{ else }}
-      {{> spinner }}
-    {{/ if }}
+          <!-- show pagination button only if APIs are available -->
+          {{# if apis }}
+            {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
+          {{/ if }}
+        {{ else }}
+          {{> spinner }}
+        {{/ if }}
+      </div>
+    </div>
   </div>
 </template>

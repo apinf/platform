@@ -7,25 +7,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="table-responsive">
     {{# if Template.subscriptionsReady }}
       {{# if apis.length }}
-        <table class="table table-striped table-bordered api-catalog-table">
+        <table class="table api-catalog-table">
           <tbody>
           {{# each api in apis }}
             {{# if api.currentUserCanView }}
               <tr>
-                <td class="col-sm-1">
+                <!-- <td class="col-sm-1">
                   {{> viewApiStatus api=api width="0.6" }}
                   <div class="api-catalog-table-logo center-block">
                     {{> viewApiLogo api=api }}
                   </div>
-                </td>
+                </td> -->
                 <td class="col-sm-9">
+                  {{# if currentUser }}
+                    <span class="api-card-bookmark">
+                      {{> bookmark api=api catalogView=true }}
+                    </span>
+                    {{/ if }}
                   <h4 class="api-catalog-table-title">
-                    <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+                    {{# if api.organization }}
+                      {{ api.organization.name }}
+                    {{ else }}
+                      {{ api.getApiManagersByName }}
+                    {{/ if }}
+                    /<a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
                       {{ api.name }}
                     </a>
                   </h4>
                   <!-- Api LifeCycleStatus Label -->
-                  {{> apiLifecycleStatus api=api }}
+                  <!-- {{> apiLifecycleStatus api=api }} -->
 
                   {{# unless api.isPublic }}
                     <span class="label label-default">
@@ -33,41 +43,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     </span>
                   {{/ unless }}
                   <div>
-                    <i>
-                      {{_ "catalogTable_addedBy" }}
-                      {{# if api.organization }}
-                        {{ api.organization.name }}
-                      {{ else }}
-                        {{ api.getApiManagersByName }}
-                      {{/ if }}
-                    </i>
-                    <br>
-                    <i>
-                      {{_ "catalogTable_added" }}
-                      {{ api.relativeCreatedAt }}
-                    </i>
                     {{# if api.description }}
                       <p class="api-catalog-table-description">
                         {{ api.description }}
                       </p>
                     {{/ if }}
+                    <i>
+                      {{_ "catalogTable_added" }}
+                      {{ api.relativeCreatedAt }}
+                    </i>
                   </div>
                 </td>
-                <td class="col-sm-1" style="vertical-align:middle">
+                <!-- <td class="col-sm-1" style="vertical-align:middle">
                   {{> apiBackendRating api }}
-                </td>
-                <td class="col-sm-1 text-center">
-                  {{# if currentUser }}
-                    <span class="api-card-bookmark">
-                      {{> bookmark api=api catalogView=true }}
-                    </span>
-                  {{ else }}
+                </td> -->
+                <!-- <td class="col-sm-1 text-center"> -->
+                  <!-- {{ else }}
                     <span class="api-card-bookmark">
                       <i class="fa fa-bookmark bookmark-default"></i>
                       {{ api.bookmarkCount }}
-                    </span>
-                  {{/ if }}
-                </td>
+                    </span> -->
+                <!-- </td> -->
               </tr>
             {{/ if }}
           {{/ each }}
