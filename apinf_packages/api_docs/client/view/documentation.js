@@ -52,6 +52,8 @@ Template.apiDocumentation.onCreated(function () {
 
   // Subscribe to code generator settings
   instance.subscribe('singleSetting', 'sdkCodeGenerator');
+  // Subscribe to development Features settings
+  instance.subscribe('singleSetting', 'developmentFeatures');
 });
 
 Template.apiDocumentation.onRendered(() => {
