@@ -325,11 +325,17 @@ ManagementV1.addRoute('organizations', {
       }
 
       // Get Formed slug
-      const slugData = Meteor.call('formSlugFromOrganizationsName', bodyParams.name);
-      // Include slug
-      organizationData.slug = slugData.slug;
-      // Include friendlySlugs
-      organizationData.friendlySlugs = slugData.friendlySlugs;
+      const slugData = Meteor.call('formSlugFromName', 'Organizations', bodyParams.name);
+
+      // If formed slug true
+      if (slugData && typeof slugData === 'object') {
+        // Include slug
+        organizationData.slug = slugData.slug;
+        // Include friendlySlugs
+        organizationData.friendlySlugs = slugData.friendlySlugs;
+      }
+
+      // Insert query
       const organizationId = Organizations.insert(organizationData);
 
       // If insert failed, stop and send response
@@ -622,9 +628,9 @@ ManagementV1.addRoute('organizations/:id', {
       // If Organization name given
       if (bodyParams.name) {
         // Get Formed slug
-        const slugData = Meteor.call('formSlugFromOrganizationsName', bodyParams.name);
+        const slugData = Meteor.call('formSlugFromName', 'Organizations', bodyParams.name);
         // Check slugData
-        if (slugData) {
+        if (slugData && typeof slugData === 'object') {
           // Include slug
           organizationData.slug = slugData.slug;
           // Include friendlySlugs

@@ -467,9 +467,16 @@ CatalogV1.addCollection(Apis, {
         }
 
         // Get formed slug
-        const slugData = Meteor.call('formSlugFromApiName', bodyParams.name);
-        // Add manager IDs list into and slug
-        const apiData = Object.assign({ managerIds: [userId] }, bodyParams, slugData);
+        const slugData = Meteor.call('formSlugFromName', 'Apis', bodyParams.name);
+        let apiData = {};
+        // If formed slug true
+        if (slugData && typeof slugData === 'object') {
+          // Add manager IDs list into and slug
+          apiData = Object.assign({ managerIds: [userId] }, bodyParams, slugData);
+        } else {
+          // Add manager IDs list into
+          const apiData = Object.assign({ managerIds: [userId] }, bodyParams);
+        }
 
         // Insert API data into collection
         const apiId = Apis.insert(apiData);
@@ -709,9 +716,9 @@ CatalogV1.addCollection(Apis, {
         // If API name given
         if (bodyParams.name) {
           // Get Formed slug
-          const slugData = Meteor.call('formSlugFromApiName', bodyParams.name);
+          const slugData = Meteor.call('formSlugFromName', 'Apis', bodyParams.name);
           // Check slugData
-          if (slugData) {
+          if (slugData && typeof slugData === 'object') {
             // Include slug
             bodyParams.slug = slugData.slug;
             // Include friendlySlugs
