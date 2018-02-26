@@ -23,7 +23,7 @@ import ContactFormSchema from '../contactFormSchema';
 
 const Collections = {
   Apis,
-  Organizations
+  Organizations,
 };
 
 Meteor.methods({

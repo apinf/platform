@@ -475,7 +475,7 @@ CatalogV1.addCollection(Apis, {
           apiData = Object.assign({ managerIds: [userId] }, bodyParams, slugData);
         } else {
           // Add manager IDs list into
-          const apiData = Object.assign({ managerIds: [userId] }, bodyParams);
+          apiData = Object.assign({ managerIds: [userId] }, bodyParams);
         }
 
         // Insert API data into collection
