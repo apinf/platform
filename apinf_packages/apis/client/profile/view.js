@@ -19,6 +19,7 @@ import Apis from '/apinf_packages/apis/collection';
 import Branding from '/apinf_packages/branding/collection';
 import Feedback from '/apinf_packages/feedback/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Template.viewApi.onCreated(function () {
    // Get reference to template instance
@@ -139,5 +140,11 @@ Template.viewApi.helpers({
       return true;
     }
     return false;
+  },
+  developmentFeatures () {
+    // Get settings
+    const settings = Settings.findOne();
+
+    return settings.developmentFeatures;
   },
 });
