@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="page-head-topblock">
     <div class="container">
       <!-- Header -->
-      {{# if currentUser }}
+      <!-- {{# if currentUser }}
         {{# if proxyBackend }}
           <div>
             <span class="pull-right" style="padding-top:0.6em;">
@@ -15,11 +15,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </span>
           </div>
         {{/ if }}
-      {{/ if }}
-      <div class="page-head-infoblock" style="margin-top: 1em;position:relative;">
-        {{# if currentUser }}
+      {{/ if }} -->
+      <div class="page-head-infoblock" style="margin-top: 1em;position:relative; display: block">
+        <!-- {{# if currentUser }}
           {{> bookmark api=api }}
-        {{else}}
+        {{else}} -->
           <!-- <a href="#" class="bookmark-button">
             <div
                 class="api-card-bookmark"
@@ -30,20 +30,29 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <i class="fa fa-bookmark bookmark-default"></i>
             </div>
           </a> -->
-        {{/ if }}
-        <!-- {{> viewApiLogo }} -->
+        <!-- {{/ if }} -->
+        {{> viewApiLogo }}
         <div class="api-info">
           <h1 id="api-header"
           style="font-size: 1.7em;
           font-weight: 500;
-          color: #55626c;">
+          color: #55626c;
+          margin-left: 10px;">
             {{ api.name }}
             <!-- {{> viewApiStatus api=api width="0.4" }} -->
           </h1>
 
+          {{# unless api.isPublic }}
+            <span class="label label-default"
+            style="background-color:transparent;
+            position:relative;
+            bottom:5px;
+            margin-left:5px;">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
+          {{/ unless }}
+
           {{# if api.organization }}
             <p class="view-api-meta-details">
-              <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}">
+              <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="margin-left: 10px;">
                 {{ api.organization.name }}
               </a>
             </p>
@@ -53,17 +62,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{ api.getApiManagersByName }}
             </p> -->
           {{/ if }}
-
-          <div class="pull-right"
-            style="padding-left: 10px;
-            padding-top: 3px;">
-            <!-- {{> apiLifecycleStatus api=api }} -->
-
-            {{# unless api.isPublic }}
-              <span class="label label-default" style="background-color:transparent;">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
-            {{/ unless }}
-          </div>
-
 
           <!-- {{> apiBackendRating api }} -->
         </div>

@@ -19,6 +19,16 @@ html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: @font-family-default;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: @headings-color;
+}
+
+h1 {
+  font-size: 1.4em;
+  text-transform: uppercase;
+  font-weight: @headings-font-weight;
+}
+
 html, body, #__blaze-root {
   height: 100%
 }
@@ -99,7 +109,12 @@ hr {
 .rss-feed {
   color: #ff9d00;
 }
+
 .rss-feed:hover {
-  color: #ff9d00!important;
-  text-decoration: none!important;
+  color: #ff9d00 !important;
+  text-decoration: none !important;
+}
+
+.control-label, .form-group label {
+  font-weight: 500 !important;
 }
