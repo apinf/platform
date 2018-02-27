@@ -20,13 +20,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </td> -->
                 <td class="col-sm-9">
                   {{# if currentUser }}
-                    <span class="api-card-bookmark">
+                    <span class="api-card-bookmark pull-right">
                       {{> bookmark api=api catalogView=true }}
                     </span>
                     {{/ if }}
+                    {{> viewApiLogo api=api }}
                   <h4 class="api-catalog-table-title">
                     {{# if api.organization }}
-                      {{ api.organization.name }}
+                    <!-- TODO: link to organization -->
+                      <a href="#" style="font-weight: 400;">
+                        {{ api.organization.name }}
+                      </a>
                     {{ else }}
                       {{ api.getApiManagersByName }}
                     {{/ if }}
@@ -43,11 +47,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     </span>
                   {{/ unless }}
                   <div>
-                    {{# if api.description }}
                       <p class="api-catalog-table-description">
-                        {{ api.description }}
+                        {{# if api.description }}
+                          {{ api.description }}
+                        {{/ if }}
                       </p>
-                    {{/ if }}
                     <i>
                       {{_ "catalogTable_added" }}
                       {{ api.relativeCreatedAt }}

@@ -14,7 +14,7 @@ FlowRouter.route('/apis', {
   // Get query parameters for Catalog page on Enter
   triggersEnter: [function (context) {
     if (!context.queryParams.sortBy) {
-      context.queryParams.sortBy = 'created_at';
+      context.queryParams.sortBy = 'bookmarkCount';
     }
     if (!context.queryParams.viewMode) {
       context.queryParams.viewMode = 'table';
