@@ -8,8 +8,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="panel panel-danger">
     <div class="panel-heading">
       <h2 class="panel-title">
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-        {{_ "apiSettingsDelete_panelTitle" }}
+        <!-- <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> -->
+        <!-- {{_ "apiSettingsDelete_panelTitle" }} -->
+        Danger Zone
       </h2>
     </div>
     <div class="panel-body">
@@ -25,6 +26,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
          id="delete-api">
         {{_ "apiSettingsDelete_deleteButton" }}
       </a>
+
+      <hr class="panel-hr" />
+
+      <h3>
+        {{_ "apiSettingsVisibility_heading" }}
+      </h3>
+      <p>
+        {{_ "apiSettingsVisibility_text" }}
+      </p>
+
+      {{> visibilityToggle api=api }}
+
     </div>
   </div>
 </template>
