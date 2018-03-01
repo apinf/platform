@@ -149,7 +149,6 @@ AnalyticsV1.addRoute('analytics', {
         AnalyticsV1.swagger.params.organizationId,
         AnalyticsV1.swagger.params.period,
         AnalyticsV1.swagger.params.startDate,
-        AnalyticsV1.swagger.params.days,
       ],
       responses: {
         200: {
@@ -191,17 +190,7 @@ AnalyticsV1.addRoute('analytics', {
 
       const queryParams = this.queryParams;
 
-      // With "period" neither "startDate" nor "days" simultaneously
-      if (queryParams.period && (queryParams.startDate || queryParams.days)) {
-        return errorMessagePayload(400, 'Parameters "startDate" or "days" can not be given with "period"!');
-      }
-
-      // One of the parameters "period" and "startDate" must be given
-      if (!queryParams.period && !queryParams.startDate) {
-        return errorMessagePayload(400, 'Either parameter "startDate" or "period" must be given!');
-      }
-
-      // Create placeholders
+      // Create placeholders for query
       const query = {};
       const options = {};
 
@@ -239,52 +228,83 @@ AnalyticsV1.addRoute('analytics', {
       let searchDates = {};
       const rawDate = {};
 
-      // Default value for period is 'today'
-      let period = this.queryParams.period || 'today';
-      if (period) {
-        let allowedPeriodNames = ['today', 'week', 'month'];
-        // Check if correct value was given
-        if (!allowedPeriodNames.includes(period)) {
-          return errorMessagePayload(400, 'Parameter "period" has an erroneous value.',
-           'period', period);
-        } else {
-          // Get period begin and end dates
-          rawDate.period = period;
-          searchDates = searchBeginEndDates(rawDate);
-        }
+      // Default value for period is 0
+      let period = this.queryParams.period || 0;
 
-      } else {
-        // Is start date given?
-        const startDate = this.queryParams.startDate;
+      // Period must be integer
+      if (!Number.isInteger(period * 1)) {
+        const message = 'Parameter "period" has to be an integer.';
+        return errorMessagePayload(400, message, 'period', period);
+      }
+      period *= 1;
+
+      // Period value must be 0 - 30
+      if (period > 30 || period < 0) {
+        const message = 'Parameter "period" value erroneous.';
+        return errorMessagePayload(400, message, 'period', period);
+      }
+
+      let fromDate, toDate;
+
+      // Check parameter "startDate"
+      if (queryParams.startDate) {
+        // When "period" is zero, no "startDate" is allowed
+        if (period === 0 ) {
+          return errorMessagePayload(400, 'Parameter "startDate" can not be given when "period" is zero!');
+        }
+        // Is startDate valid?
+        const startDate = queryParams.startDate;
         // Start date has to be according to ISO 8601
         if (!moment(startDate).isValid()) {
           // Error message
           const message = 'Parameter "startDate" must be a valid date.';
           return errorMessagePayload(400, message, 'startDate', startDate);
         }
+        // Period is in past. Set beginning and end.
+        // Get timestamp of startDate 00:00:00 Date time
+        fromDate = moment(startDate).valueOf();
+        // Get timestamp of period after start 24:00:00 Date time (included value)
+        toDate = moment(fromDate).add(period, 'd').valueOf();
 
-        // If start date is given, also days is needed
-        if (!queryParams.days) {
-          const message = 'Parameter "startDate" requires also parameter "days".';
+        // StartDate must be in past
+        if (fromDate > moment(0, 'HH').valueOf()) {
+          const message = 'Parameter "startDate" must be in past.';
           return errorMessagePayload(400, message);
         }
 
-        // Is number of days given?
-        let days = this.queryParams.days;
-
-        // Days must be integer
-        if (!Number.isInteger(days * 1)) {
-          const message = 'Parameter "days" has to be integer.';
-          return errorMessagePayload(400, message, 'days', days);
+        // StartDate must be max 30 days in past
+        if (fromDate < moment(0, 'HH').subtract(30, 'days').valueOf()) {
+          const message = 'Parameter "startDate" must be max 30 days in past.';
+          return errorMessagePayload(400, message);
         }
-        days *= 1;
 
-        rawDate.startDate = startDate;
-        rawDate.days = days;
-        // Get period begin and end dates
-        searchDates = searchBeginEndDates(rawDate);
+        // StartDate + period must not exceed yesterday
+        if (toDate > moment(0, 'HH').valueOf()) {
+          const message = 'Period of days must not exceed yesterday.';
+          return errorMessagePayload(400, message);
+        }
+
+      } else {
+        if (period === 0) {
+          // Get today's data
+          // Get timestamp of today 00:00:00 Date time
+          fromDate = moment(0, 'HH').valueOf();
+          // Get timestamp of today 24:00:00 Date time (included value)
+          toDate = moment(fromDate).add(1, 'd').valueOf();
+        } else {
+          // Get period data from start to end of yesterday
+          // Get timestamp of today 00:00:00 Date time
+          toDate = moment(0, 'HH').valueOf();
+          // Get timestamp of timeframe ago 00:00:00 Date time (included value)
+          fromDate = moment(toDate).subtract(period, 'd').valueOf();
+        }
 
       }
+
+      console.log('fromDate=', fromDate);
+      console.log('fromDate=', moment(fromDate).format());
+      console.log('toDate=', toDate);
+      console.log('toDate=', moment(toDate).format());
 
       // Pass an optional search string for looking up inventory.
       if (queryParams.q) {
@@ -372,8 +392,8 @@ AnalyticsV1.addRoute('analytics/:id', {
       description: descriptionAnalytics.getAnalytics,
       parameters: [
         AnalyticsV1.swagger.params.apiId,
-        AnalyticsV1.swagger.params.period,
-        AnalyticsV1.swagger.params.startDate,
+        AnalyticsV1.swagger.params.periodApiId,
+        AnalyticsV1.swagger.params.date,
         AnalyticsV1.swagger.params.interval,
       ],
       responses: {
