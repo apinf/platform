@@ -21,8 +21,7 @@ import Organizations from '/apinf_packages/organizations/collection';
 import AnalyticsV1 from '/apinf_packages/rest_apis/server/analytics';
 import Authentication from '/apinf_packages/rest_apis/server/authentication';
 import descriptionAnalytics from '/apinf_packages/rest_apis/lib/descriptions/analytics_texts';
-import { errorMessagePayload, searchBeginEndDates } from
-  '/apinf_packages/rest_apis/server/rest_api_helpers';
+import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
 
 AnalyticsV1.swagger.meta.paths = {
   '/login': Authentication.login,
@@ -298,7 +297,6 @@ AnalyticsV1.addRoute('analytics', {
           // Get timestamp of timeframe ago 00:00:00 Date time (included value)
           fromDate = moment(toDate).subtract(period, 'd').valueOf();
         }
-
       }
 
       console.log('fromDate=', fromDate);
@@ -409,7 +407,7 @@ AnalyticsV1.addRoute('analytics/:id', {
               data: {
                 type: 'array',
                 items: {
-                  $ref: '#/definitions/apiListFlowData',
+                  $ref: '#/definitions/flowData',
                 },
               },
             },
@@ -444,38 +442,53 @@ AnalyticsV1.addRoute('analytics/:id', {
 
       // With "period" neither "date" nor "interval" simultaneously
       if (queryParams.period && (queryParams.date || queryParams.interval)) {
-        return errorMessagePayload(400, 'Parameters "date" or "interval " can not be given with "period"!');
+        return errorMessagePayload(400,
+          'Parameters "date" or "interval " can not be given with "period"!');
       }
 
       // One of the parameters period and date must be given
       if (!queryParams.period && !queryParams.date) {
-        return errorMessagePayload(400, 'Either of parameters "date" and "period" must be given!');
+        return errorMessagePayload(400, 'Either parameter "date" or "period" must be given!');
       }
-      // Object for begin and end dates of search
-      let searchDates = {};
-      const rawDate = {};
+      // Begin and end dates for search
+      let fromDate, toDate, interval;
       // Is period given?
-      let period = queryParams.period;
+      if (queryParams.period) {
+        // Default value for period is 0
+        let period = this.queryParams.period || 0;
 
-      // Check if correct value was given either for period...
-      if (period) {
-        let allowedPeriodNames = ['today', 'week', 'month'];
-        // Check if correct value was given
-        if (!allowedPeriodNames.includes(period)) {
-          return errorMessagePayload(400, 'Parameter "period" has erroneous value.',
-          'period', period);
+        // Period must be integer
+        if (!Number.isInteger(period * 1)) {
+          const message = 'Parameter "period" has to be an integer.';
+          return errorMessagePayload(400, message, 'period', period);
         }
-        rawDate.period = period;
-        // Get period begin and end dates
-        searchDates = searchBeginEndDates (rawDate);
+        period *= 1;
 
-        // Default value for interval is 60 minutes
-        let interval = 60;
+        // Period value must be 0 - 30
+        if (period > 30 || period < 0) {
+          const message = 'Parameter "period" value erroneous.';
+          return errorMessagePayload(400, message, 'period', period);
+        }
+        // Set beginning and end dates
+        if (period === 0) {
+          // Get today's data
+          // Get timestamp of today 00:00:00 Date time
+          fromDate = moment(0, 'HH').valueOf();
+          // Get timestamp of today 24:00:00 Date time (included value)
+          toDate = moment(fromDate).add(1, 'd').valueOf();
+        } else {
+          // Get period data from start to end of yesterday
+          // Get timestamp of today 00:00:00 Date time
+          toDate = moment(0, 'HH').valueOf();
+          // Get timestamp of timeframe ago 00:00:00 Date time (included value)
+          fromDate = moment(toDate).subtract(period, 'd').valueOf();
+        }
+        // Default value in case of period is 1440 minutes = 24 hours
+        interval = 1440;
 
       } else {
-        // ...or for date
-        const date = queryParams.date;
-
+        // Date is given
+        let date = this.queryParams.date;
         // Format check for date to be ISO 8601
         if (!moment(date).isValid()) {
           // Error message
@@ -483,13 +496,23 @@ AnalyticsV1.addRoute('analytics/:id', {
           return errorMessagePayload(400, message, 'date', date);
         }
 
-        rawDate.period = startDate;
-        rawDate.days = days;
-        // Get period begin and end dates
-        searchDates = searchBeginEndDates (rawDate);
+        // Get timestamp of startDate 00:00:00 Date time
+        fromDate = moment(date).valueOf();
+        // Get timestamp of period after start 24:00:00 Date time (included value)
+        toDate = moment(fromDate).add(1, 'd').valueOf();
+        // Date must be in past
+        if (fromDate > moment(0, 'HH').valueOf()) {
+          const message = 'Parameter "date" must be in past.';
+          return errorMessagePayload(400, message);
+        }
 
-        // Get given interval or default value?
-        let interval = queryParams.interval || 60;
+        // StartDate must be max 30 days in past
+        if (fromDate < moment(0, 'HH').subtract(30, 'days').valueOf()) {
+          const message = 'Parameter "date" must be max 30 days in past.';
+          return errorMessagePayload(400, message);
+        }
+        // Get given interval or default value
+        interval = queryParams.interval || 60;
 
         if (interval) {
           // interval must be an integer
@@ -499,7 +522,20 @@ AnalyticsV1.addRoute('analytics/:id', {
           }
           interval *= 1;
         }
+        let allowedIntervals = [30, 60];
+        // Check if correct value was given
+        if (!allowedIntervals.includes(interval)) {
+          return errorMessagePayload(400, 'Parameter "interval" has erroneous value.',
+          'interval', interval);
+        }
       }
+
+      console.log('fromDate=', fromDate);
+      console.log('fromDate=', moment(fromDate).format());
+      console.log('toDate=', toDate);
+      console.log('toDate=', moment(toDate).format());
+      console.log('interval=', interval);
+
 
       // Find API with specified ID
       const api = Apis.findOne(apiId);
@@ -514,42 +550,9 @@ AnalyticsV1.addRoute('analytics/:id', {
         return errorMessagePayload(403, 'You do not have permission for this API.');
       }
 
-
-
-
-
-
-
       // Create placeholders
-      const query = {};
+      const query = { _id: apiId };
       const options = {};
-
-      // Set condition for a list of managed APIs
-      //query.managerIds = managerId;
-
-      // Pass an optional search string for looking up inventory.
-      if (queryParams.q) {
-        query.$or = [
-          {
-            name: {
-              $regex: queryParams.q,
-              $options: 'i', // case-insensitive option
-            },
-          },
-          {
-            description: {
-              $regex: queryParams.q,
-              $options: 'i', // case-insensitive option
-            },
-          },
-          {
-            url: {
-              $regex: queryParams.q,
-              $options: 'i', // case-insensitive option
-            },
-          },
-        ];
-      }
 
       // Include only id and name
       options.fields = {
@@ -597,7 +600,6 @@ AnalyticsV1.addRoute('analytics/:id', {
           apiAnalytics.summaries = summariesAnalytics;
           return apiAnalytics;
         }
-
       });
 
       // Construct response
