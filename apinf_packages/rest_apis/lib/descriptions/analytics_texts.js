@@ -166,15 +166,19 @@ You can have multiple proxies under one management.
   ### Request parameters
 
   APIs are listed depending on value given to parameter **apisBy**
-  - **organization** = all APIs, *that belong to Organizations*, which are managed by User (default value)
+  - **organization** = all APIs, *belonging to Organizations* managed by User (default value)
   - **owner** = all APIs, which are managed by User
 
-  In both cases the User can limit the search in one Organization by using parameter **organizationId**.
+  In both cases the User can limit the search in one Organization
+  by using parameter **organizationId**.
 
 
-  With parameter **period** the User can select the period (up to 30 days), over which the data is returned. Periods are calculated by server time.
-  - **0** | **period not given**, data contains todays values, i.e. from midnight to moment, when request was sent (default value)
-  - **1** to **30**, is period length in full days. Period either ends yesterday (when startDate not given) or begins on startDate.
+  With parameter **period** the User can select the period (up to 30 days),
+  over which the data is returned. Periods are calculated by server time.
+  - **0** | **period not given**, data contains todays values,
+  i.e. from midnight to moment, when request was sent (default value)
+  - **1** to **30**, is period length in full days. Period either ends yesterday
+  (when startDate not given) or begins on startDate.
 
   Suitable values for parameter *period* are 7 (last week) or 28 (four last weeks).
   Note! Todays response dataset will never be complete 24 hours
@@ -209,7 +213,8 @@ You can have multiple proxies under one management.
 
   API is identified with parameter **apiId**.
 
-  With parameter **period** the User can select length of the period, over which the data is returned. Period is calculated based on server time.
+  With parameter **period** the User can select length of the period,
+  over which the data is returned. Period is calculated based on server time.
   - **0** is todays data (default value)
   - **1** - **30** is length of period, ending yesterday (yesterday included)
 
@@ -294,7 +299,8 @@ You can have multiple proxies under one management.
   but it must not exceed yesterday.
 `,
   periodApiId: `
-  Predefined periods for detailed API performance data.  Periods are calculated based on server time.
+  Predefined periods for detailed API performance data.
+  Periods are calculated based on server time.
   - **0** is current day data from midnight to current moment.
   - **1** - **30** period length is given number of days (yesterday as last included day)
   `,
