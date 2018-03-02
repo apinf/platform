@@ -148,19 +148,6 @@ AnalyticsV1.swagger = {
     },
   },
   definitions: {
-    organizationResponse: {
-      type: 'object',
-      properties: {
-        _id: {
-          type: 'string',
-          example: 'organization-id-value',
-        },
-        name: {
-          type: 'string',
-          example: 'my Organization',
-        },
-      },
-    },
     apiListFlowData: {
       type: 'object',
       properties: {
@@ -191,30 +178,195 @@ AnalyticsV1.swagger = {
         },
       },
     },
-    meta: {
-      type: 'object',
+    deltaValues: {
       properties: {
-        proxyPath: {
-          type: 'string',
-          example: 'http://apinf.io:3002/catalog_api',
+        requestDelta: {
+          type: 'integer',
+          format: 'int32',
+          example: 150,
         },
-        apiName: {
-          type: 'string',
-          example: 'My API',
+        medianResponseDelta: {
+          type: 'integer',
+          format: 'int32',
+          example: -50,
         },
-        apiId: {
-          type: 'string',
-          example: 'api-id-string',
-        },
-        interval: {
-          type: 'string',
-          example: 1440,
+        uniqueUsersDelta: {
+          type: 'integer',
+          format: 'int32',
+          example: 120,
         },
       },
     },
-
-
-    // The schema defining the type used for the body parameter in POST or PUT method
+    dailyDetails: {
+      type: 'object',
+      properties: {
+        trafficDate: {
+          type: 'string',
+          format: 'date',
+          example: '2017-07-21',
+          description: 'Date yyyy-mm-dd as in ISO 8601',
+        },
+        intervals: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              intervalStart: {
+                type: 'string',
+                example: '00:00',
+                description: 'Time hh:mm as in ISO 8601',
+              },
+              requestCount: {
+                type: 'integer',
+                format: 'int32',
+                example: 333,
+              },
+              uniqueUsers: {
+                type: 'integer',
+                format: 'int32',
+                example: 17,
+              },
+              responses: {
+                type: 'object',
+                properties: {
+                  status200: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 299,
+                  },
+                  status300: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 5,
+                  },
+                  status400: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 28,
+                  },
+                  status500: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 1,
+                  },
+                },
+              },
+              responseTime: {
+                type: 'object',
+                properties: {
+                  shortest: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 22,
+                  },
+                  median: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 54,
+                  },
+                  percentile95: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 78,
+                  },
+                  longest: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: 80,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    details: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          endpoint: {
+            type: 'string',
+            example: '/catalog2/{id}',
+          },
+          days: {
+            type: 'array',
+            items: {
+              $ref: '#/definitions/dailyDetails',
+            },
+          },
+        },
+      },
+    },
+    errorStatistics: {
+      type: 'object',
+      properties: {
+        timestamp: {
+          type: 'string',
+          format: 'date',
+          example: '2017-07-21T13:59:59,99',
+        },
+        httpCode: {
+          type: 'integer',
+          example: 403,
+        },
+        calls: {
+          type: 'integer',
+          example: 3,
+        },
+        requestPath: {
+          type: 'string',
+          example: 'catalog2/users',
+        },
+      },
+    },
+    flowData: {
+      type: 'object',
+      properties: {
+        meta: {
+          $ref: '#/definitions/meta'
+        },
+        kpi: {
+          $ref: '#/definitions/countersKPI'
+        },
+        delta: {
+          $ref: '#/definitions/deltaValues'
+        },
+        frequentUsers: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/frequentUser',
+          },
+        },
+        errorStatistics: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/errorStatistics',
+          },
+        },
+        details: {
+          $ref: '#/definitions/details',
+        },
+      },
+    },
+    frequentUser: {
+      type: 'object',
+      properties: {
+        user: {
+          type: 'string',
+          example: '<user-email-address>',
+        },
+        calls: {
+          type: 'integer',
+          example: 15,
+        },
+        requestPath: {
+          type: 'string',
+          example: 'catalog2/users',
+        },
+      },
+    },
     loginRequest: {
       required: ['username', 'password'],
       properties: {
@@ -252,6 +404,44 @@ AnalyticsV1.swagger = {
         },
       },
     },
+    meta: {
+      type: 'object',
+      properties: {
+        proxyPath: {
+          type: 'string',
+          example: 'http://apinf.io:3002/catalog_api',
+        },
+        apiName: {
+          type: 'string',
+          example: 'My API',
+        },
+        apiId: {
+          type: 'string',
+          example: 'api-id-string',
+        },
+        interval: {
+          type: 'string',
+          example: 1440,
+        },
+      },
+    },
+    organizationResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'organization-id-value',
+        },
+        name: {
+          type: 'string',
+          example: 'my Organization',
+        },
+      },
+    },
+
+
+    // The schema defining the type used for the body parameter in POST or PUT method
+
 
   },
 };
