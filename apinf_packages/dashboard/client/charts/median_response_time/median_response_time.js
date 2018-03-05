@@ -24,7 +24,7 @@ Template.medianResponseTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'bar',
+    type: 'line',
 
     // Data for displaying chart
     data: {
@@ -32,15 +32,22 @@ Template.medianResponseTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('medianResponseTime_pointTitle_time'),
-          backgroundColor: '#C6C5C5',
-          borderColor: '#959595',
-          borderWidth: 1,
+          backgroundColor: 'transparent',
+          borderColor: '#3886d4',
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 5,
         },
       ],
     },
 
     // Configuration options
     options: {
+      elements: {
+        line: {
+          tension: 0, // disables bezier curves
+        },
+      },
       legend: {
         display: false,
       },
@@ -97,4 +104,3 @@ Template.medianResponseTime.onRendered(function () {
     instance.chart.update();
   });
 });
-
