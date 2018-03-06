@@ -28,9 +28,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <h4 class="api-catalog-table-title">
                     {{# if api.organization }}
                     <!-- TODO: link to organization -->
-                      <a href="#" style="font-weight: 400;">
-                        {{ api.organization.name }}
-                      </a>
+                      {{ api.organization.name }}
                     {{ else }}
                       {{ api.getApiManagersByName }}
                     {{/ if }}

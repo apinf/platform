@@ -284,7 +284,7 @@
   "dashboardPage_text_noApis": "There are no APIs that you manage.",
   "dashboardPage_text_noProxyBackends": "You have not yet connected your API to a proxy. To see analytics of your API usage, browse your API from Catalog and configure a proxy from the API profile.",
   "dashboardView_text_noApisFound": "No APIs found with the specified name",
-  "dashboardPage_placeholderText_search": "Search",
+  "dashboardPage_placeholderText_search": "Type to filter APIs...",
   "dateRangePicker_optionText_yesterday": "Last 24 hours",
   "dateRangePicker_optionText_7days": "Last 7 Days",
   "dateRangePicker_optionText_30days": "Last 30 Days",
