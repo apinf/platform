@@ -4,13 +4,37 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiSettings">
-  {{> apiSettingsDetails api=api }}
+  <div class="container api-settings">
+    <div class="row">
+      <div class="col-md-12" style="padding:0;">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+          <li><a href="#organization" data-toggle="tab">Organization</a></li>
+          <li><a href="#user-managment" data-toggle="tab">User Management</a></li>
+          <li><a href="#monitoring" data-toggle="tab">Monitoring</a></li>
+          <li><a href="#danger-zone" data-toggle="tab">Danger Zone</a></li>
+        </ul>
 
-  {{> apiOrganization api=api }}
-
-  {{> apiSettingsVisibility api=api }}
-
-  <!-- {{> apiMonitoring api=api }} -->
-
-  {{> apiSettingsDelete api=api }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="about">
+            {{> apiSettingsDetails api=api }}
+          </div>
+          <div class="tab-pane fade" id="organization">
+            {{> apiOrganization api=api }}
+          </div>
+          <div class="tab-pane fade" id="user-managment">
+            {{> apiSettingsVisibility api=api }}
+          </div>
+          <div class="tab-pane fade" id="monitoring">
+            {{> apiMonitoring api=api }}
+          </div>
+          <div class="tab-pane fade" id="danger-zone">
+            {{> apiSettingsDelete api=api }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

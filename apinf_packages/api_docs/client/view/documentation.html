@@ -37,8 +37,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
             <button
               id="manage-api-documentation"
-              class="btn btn-xs btn-default">
-              <i class="fa fa-pencil"></i>&nbsp;
+              class="btn btn-xs btn-success">
               {{_ "apiDocumentation_manageDocumentation_buttonText" }}
             </button>
           {{/ if }} <!-- /if currentUserCanManage -->
@@ -92,9 +91,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{# if documentationExists }}
                   {{> swaggerUi api=api }}
                 {{ else }}
-                  <i>
+                  <p>
                     {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
-                  </i>
+                </p>
                 {{/ if }}
               {{/ if }}
             <!-- </div> -->

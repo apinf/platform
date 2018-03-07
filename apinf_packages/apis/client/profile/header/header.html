@@ -39,7 +39,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           color: #55626c;
           margin-left: 10px;">
             {{ api.name }}
-            <!-- {{> viewApiStatus api=api width="0.4" }} -->
           </h1>
 
           {{# unless api.isPublic }}
@@ -57,19 +56,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </a>
             </p>
           {{ else }}
-            <!-- <p class="view-api-meta-details">
-              <i class="fa fa-user"></i>
-              {{ api.getApiManagersByName }}
-            </p> -->
           {{/ if }}
-
-          <!-- {{> apiBackendRating api }} -->
         </div>
       </div>
 
-      <!-- <div class="page-head-bookmarks pull-right"> -->
-
-      <!-- </div> -->
       <!-- Tabs -->
       <div id="api-navigation-tabs" class="navigation-tabs">
         {{# if proxyBackend }}
@@ -81,63 +71,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <ul class="nav nav-tabs">
           <li id ="api-details-tab" class="active">
             <a href="#api-details" data-toggle="tab">
-              <!-- <i class="fa fa-info-circle"></i> -->
               {{_ "viewApiNavigationMenu_details" }}
             </a>
           </li>
 
           {{# if userShouldSeeApiDocsTab }}
-            <!-- Documentatoin -->
+            <!-- API Console -->
             <li id="api-documentation-tab">
               <a href="#api-documentation" data-toggle="tab">
-                <!-- <i class="fa fa-file-text"></i> -->
-                <!-- {{_ "viewApiNavigationMenu_documentation" }} -->
-                API Specification
+                {{_ "viewApiNavigationMenu_documentation" }}
               </a>
             </li>
           {{/ if }}
 
-            <!-- {{# if userShouldSeeApiMetadataTab }}
-            Metadata
-            <li id="api-metadata-tab">
-              <a href="#api-metadata" data-toggle="tab">
-                <i class="fa fa-book"></i>
-                {{_ "viewApiNavigationMenu_metadata" }}
-              </a>
-            </li>
-          {{/ if }} -->
-
-          <!-- Feedback
-          <li id="api-feedback-tab">
-            <a href="#api-feedback" data-toggle="tab">
-              <i class="fa fa-comments-o"></i>
-              {{_ "viewApiNavigationMenu_feedback" }}
-            </a>
-          </li>  -->
-
-          <!-- {{# if userShouldSeeBacklogTab }}
-            Backlog
-            <li id="api-backlog-tab">
-              <a href="#api-backlog" data-toggle="tab">
-                <i class="fa fa-check-square-o"></i>
-                {{_ "viewApiNavigationMenu_backlog" }}
-              </a>
-            </li>
-          {{/ if }} -->
-
           {{# if api.currentUserCanManage }}
-            <!-- Export
-            <li id="api-export-tab">
-              <a href="#api-export" data-toggle="tab">
-                <i class="fa fa-cloud-download"></i>
-                {{_ "viewApiNavigationMenu_export" }}
-              </a>
-            </li> -->
-
             <!-- Settings -->
             <li id="api-settings-tab">
               <a href="#api-settings" data-toggle="tab">
-                <!-- <i class="fa fa-cog"></i> -->
                 {{_ "viewApiNavigationMenu_settings" }}
               </a>
             </li>
@@ -146,17 +96,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <!-- Proxy -->
               <li id="api-proxy-tab">
                 <a href="#api-proxy" data-toggle="tab">
-                  <!-- <i class="fa fa-sitemap"></i> -->
                   {{_ "viewApiNavigationMenu_proxy" }}
                 </a>
               </li>
-
             {{/ if }}
           {{/ if }}
         </ul>
-        <!-- {{# if api.currentUserCanView }}
-          {{> apiIntro }}
-        {{/ if }} -->
       </div>
     </div>
   </div>
