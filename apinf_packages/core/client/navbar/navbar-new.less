@@ -1,7 +1,7 @@
 .navbar-new {
 	background-color: #1a75d2;
-	padding-left: 40px;
-	padding-top: 20px;
+	padding-left: 45px;
+	padding-right: 45px;
 
 	.navbar-logo {
 		padding-bottom: 10px;
@@ -10,10 +10,6 @@
 
 	.nav-tabs {
 		border: none;
-	}
-
-	.nav-tabs > li {
-    margin-bottom: 6px;
 	}
 
 	.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
@@ -25,9 +21,9 @@
 		text-transform: uppercase;
 		font-size: 12px;
 		letter-spacing: 0.6px;
-		padding-left: 5px !important;
-		padding-right: 5px !important;
-		margin-right: 20px;
+		padding-left: 25px !important;
+		padding-right: 25px !important;
+		line-height: 40px;
 	}
 	.nav-tabs > li.active > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus{
 		border: none;
@@ -41,7 +37,7 @@
 		position: absolute;
 		width: 100%;
 		left: 0px;
-		bottom: -6px;
+		bottom: 0px;
 		transition: all 250ms ease 0s; transform: scale(0);
 	}
 	.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
@@ -61,4 +57,15 @@
 	.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
 		background-color: transparent !important;
 	}
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	text-decoration: none;
+	background-color: transparent;
+}
+
+.navbar-nav > li > a {
+	padding-top: 0;
+	padding-bottom: 0;
+	line-height: 55px;
 }

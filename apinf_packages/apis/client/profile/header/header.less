@@ -6,13 +6,63 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 /* Bootstrap */
 @import "/apinf_packages/core/client/style/bootstrap-variables.less";
 
+.secondary-menu-block {
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgba(108,133,159,.3);
+  height: 60px;
+  text-align: center;
+
+  .nav-tabs {
+    border: none;
+    display: inline-block;
+  }
+
+  .nav-tabs > li {
+    margin-bottom: 6px;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    border-width: 0;
+  }
+  .nav-tabs > li > a {
+    border: none;
+    color: #9bacbf;
+    font-size: 14px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    font-weight: 500;
+    line-height: 41px;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+    border: none;
+    color: #4c6072 !important;
+    background: transparent;
+  }
+  .nav-tabs > li > a::after {
+    content: "";
+    background: #1a75d2;
+    height: 4px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: all 250ms ease 0s; transform: scale(0);
+  }
+  .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+    transform: scale(1);
+  }
+}
+
 .page-head-topblock {
   position: relative;
   padding-top: 1.7em;
   padding-bottom: 0;
   margin-bottom: 1.5em;
   color: #666;
-  background-color: #f4f8fb;
+  background-color: #f8f8f8;
   border-bottom: 1px solid #eee;
 
   #api-header {
@@ -28,12 +78,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     margin-top: 0.5em;
   }
 
-  // .api-info {
-  //   margin-left: 6.5em;
-  // }
-
-  .view-api-logo {
-    float: left;
+  .api-info {
+    text-align: center;
   }
 
   .label {
@@ -56,7 +102,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 }
 
 .nav-tabs > li {
-  margin-bottom: -2px;
+  margin-bottom: -5px;
 }
 
 .page-head-bookmarks {
@@ -108,7 +154,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 #api-navigation-tabs {
   .nav-tabs > li {padding-right: 30px;}
   .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
-  .nav-tabs > li > a { border: none; color: #666; padding-left: 0; padding-right: 0;}
+  .nav-tabs > li > a { border: none; color: #3e4850; padding-left: 0; padding-right: 0; text-transform: uppercase; padding-bottom: 15px; font-weight: 400;}
   .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #333 !important; background: transparent; }
   .nav-tabs > li > a::after { content: ""; background: #1a75d2; height: 3px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
   .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }

@@ -10,7 +10,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <h2 id="description-title" style="font-size:16px;margin-top:0;">
           {{_ "apiDetails_description_headingText" }}
         </h2>
-        <p>
+        <p style="color:#6d859e;">
           {{ api.description }}
         </p>
         <hr class="panel-hr" />
@@ -21,7 +21,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <h2 id="api-url-title" style="font-size:16px;margin-top:0;">
           Endpoint URL
         </h2>
-        <p>
+        <p style="color:#6d859e;">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
           In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
         </p>
@@ -47,12 +47,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               data-original-title="Copied!"
               data-clipboard-target="#api-url">
               <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
+              &nbsp;&nbsp;Copy to clipboard
             </button>
           </span>
         </div>
     </div>
   </div>
-  {{# if currentUser }}
+  <!-- {{# if currentUser }}
     {{# if proxyUrl }}
       <div id="usage-instructions" class="bs-callout bs-callout-primary">
         <h4>
@@ -61,7 +62,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <ul>
           {{# unless disableApiKey }}
             {{# if hasApiKey }}
-              <!-- Proxy Backend is completed, "Disable api key" is false, user has got an api key -->
+
               <li>
                 {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
                 <span>
@@ -69,13 +70,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </span>
               </li>
             {{ else }}
-              <!-- Proxy Backend is completed, "Disable api key" is false, user hasn't got an api key -->
+
               <li>
                 {{_ "apiDetails_usageInstructions_noApiKeyText" }}
               </li>
             {{/ if }}
           {{ else }}
-            <!-- Proxy Backend is completed, "Disable api key" is true -->
+
             <li>
               {{_ "apiDetails_usageInstructions_disableApiKeyText" }}
               <i>{{ proxyUrl }}&lt;optional_path&gt;</i>
@@ -84,7 +85,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </ul>
       </div>
     {{/ if }}
-  {{/ if }}
+  {{/ if }} -->
   <!-- Embedded Related Media contents -->
   <!-- {{> relatedMedia entity=api }} -->
 
