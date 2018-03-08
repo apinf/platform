@@ -5,13 +5,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiCatalog">
   <div class="container">
-    <h1 class="page-header block-wrapper" style="margin-bottom: 0;">
-      <!-- {{_ "catalog_Title" }} -->
-      {{# if apisCount }}
-        {{_ 'apiCatalog_apisCount' count=apisCount }}
-      {{/ if }}
-      available
-    </h1>
+    <div class="block-wrapper">
+      <ul class="list-inline" style="margin-bottom: 0;">
+        <li>
+      <h1 style="margin-bottom: 5px;margin-top:5px;">
+        <!-- {{_ "catalog_Title" }} -->
+        {{# if apisCount }}
+          {{_ 'apiCatalog_apisCount' count=apisCount }}
+        {{/ if }}
+        available
+      </h1>
+    </li>
+    <li class="pull-right">
+      <a href="#" class="btn btn-success" style="margin-top: -5px;">
+        <!-- {{_ 'addApi_button_text' }} -->
+        Add New API
+      </a>
+    </li>
+  </ul>
+    </div>
     <div class="row">
       {{> apiCatalogToolbar apis=apis }}
 
