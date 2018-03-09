@@ -300,9 +300,9 @@ AnalyticsV1.addRoute('analytics', {
       }
 
       console.log('fromDate=', fromDate);
-      console.log('fromDate=', moment(fromDate).format());
+      console.log('fromDate_h=', moment(fromDate).format());
       console.log('toDate=', toDate);
-      console.log('toDate=', moment(toDate).format());
+      console.log('toDate_h=', moment(toDate).format());
 
       // Pass an optional search string for looking up inventory.
       if (queryParams.q) {
@@ -334,36 +334,37 @@ AnalyticsV1.addRoute('analytics', {
         name: 1,
       };
 
-      // Create new API list that is based on APIs collection with extended field logoUrl
-      const apiAnalyticsList = Apis.find(query, options).map((api) => {
-        // Return API Proxy's URL, if it exists
-        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+      // Create list of API analytical data based on ProxyBackends
+      const apiAnalyticsList = ProxyBackends.find({ 'type': 'apiUmbrella' }).map((proxyBackend) => {
+        const apiAnalytics = {};
 
-        // If Proxy is API Umbrella
-        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
-          // Initiate response structure
-          const apiAnalytics = {};
+        // Get connected proxy url
+        const proxyUrl = proxyBackend.proxyUrl();
+        // Get proxy backend path
+        const frontendPrefix = proxyBackend.frontendPrefix();
 
-          // Get connected proxy url
-          const proxyUrl = proxyBackend.proxyUrl();
-          // Get proxy backend path
-          const frontendPrefix = proxyBackend.frontendPrefix();
+        const backendId = proxyBackend._id;
+        // Fill and return analytics data
+        apiAnalytics.meta = {
+          proxyPath: proxyUrl.concat(frontendPrefix),
+          apiName: proxyBackend.apiUmbrella.name,
+          apiId: proxyBackend.apiId,
+          interval: 1440,
+        };
 
-          // Fill and return analytics data
-          apiAnalytics.meta = {
-            apiName: api.name,
-            apiId: api._id,
-            interval: 1440,
-            proxyPath: proxyUrl.concat(frontendPrefix),
-          };
-          // Fill summaries
-          apiAnalytics.summaries = {
-            requestCount: 1,
-            responseTime: 131,
-            uniqueUsers: 1313,
-          };
-          return apiAnalytics;
-        }
+        Meteor.call('overviewChartsData', { backendId, fromDate, toDate }, (error, dataset) => {
+          console.log('backendId=', backendId);
+          console.log('dataset=', dataset);
+        });
+
+        // Fill summaries
+        apiAnalytics.summaries = {
+          requestCount: 1234124,
+          responseTime: 131,
+          uniqueUsers: 5,
+        };
+        return apiAnalytics;
+
       });
 
       // Construct response
