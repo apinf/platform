@@ -13,21 +13,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       id="usermenu"
       aria-haspopup="true"
       aria-expanded="false"
-      style="text-decoration:none; text-transform:none;color:#fff;padding-right: 0;">
-        <span class="username">{{ user.username }}</span>
+      style="text-decoration:none; text-transform:none;color:#fff;padding-right:0;top:4px;line-height:54px;">
+        <i class="mdi mdi-account-circle" style="font-size:30px;"></i>
     </a>
-    <ul class="dropdown-menu" style="margin-right:20px;">
+    <ul class="dropdown-menu block-wrapper dropdown-menu-triangle-b-r" style="top: 54px;
+    right: -4px;">
       <li>
         <a href="{{ pathFor 'profile' }}" id="profile-button">
           <!-- {{_ "userMenu_profile" }} -->
           Account Settings
         </a>
       </li>
-      <!-- <li>
+      <li>
         <a href="{{ pathFor 'account' }}" id="account-button">
           {{_ "userMenu_account" }}
         </a>
-      </li> -->
+      </li>
       <li>
         <a href="/sign-out" id="signout-button">
           {{_ "userMenu_signout" }}
@@ -36,7 +37,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </ul>
   </li>
   {{# if isInRole 'admin' }}
-    <li class="dropdown pull-right" style="margin-right:10px;">
+    <li class="dropdown pull-right">
       <a
         href="#"
         class="dropdown-toggle"
@@ -45,11 +46,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         id="usermenu"
         aria-haspopup="true"
         aria-expanded="false"
-        style="text-decoration:none; text-transform:none;">
-          <i class="fa fa-cog" style="padding-left: 5px;
-      font-size: 22px;color:#fff;padding-top:18px;"></i>
+        style="text-decoration:none; text-transform:none;top:4px;">
+        <i class="mdi mdi-settings" style="padding-left: 5px;
+    font-size: 22px;color:#fff;padding-top:18px;"></i>
       </a>
-      <ul class="dropdown-menu" style="margin-right:20px;">
+      <ul class="dropdown-menu block-wrapper dropdown-menu-triangle-b-r" style="right: 7px; top: 55px;">
     <li>
       <a href="{{ pathFor 'branding' }}" id="branding-button">
         {{_ "userMenu_branding" }}

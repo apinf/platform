@@ -4,8 +4,38 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="viewApiPageHeader">
-  <div class="container-fluid secondary-menu-block">
-    <div class="container secondary-menu-block-inner">
+  <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
+    <span style="float: left; padding-top:12px">
+    {{> viewApiLogo }}
+    </span>
+    <h1 style="font-size: 1.2em;
+    font-weight: 600;
+    color: #55626c;
+    display: inline;
+    float: left;
+    margin-top: 27px;
+    left: 15px;
+    position: relative;">
+      {{ api.name }}
+    </h1>
+    {{# if api.organization }}
+      <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="float: left;
+      position: absolute;
+      left: 95px;
+      padding-top: 8px;
+      color: #555;">
+        {{ api.organization.name }}
+      </a>
+    {{ else }}
+      <span style="float: left;
+      position: absolute;
+      left: 95px;
+      padding-top: 8px;
+      color: #555;">
+        {{ api.getApiManagersByName }}
+      </span>
+    {{/ if }}
+    <div class="container secondary-menu-block-inner" style="text-align:center;">
       <ul class="nav nav-tabs">
         <li id ="api-details-tab" class="active">
           <a href="#api-details" data-toggle="tab">
@@ -70,27 +100,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <!-- {{/ if }} -->
 
         <div class="api-info">
-          {{> viewApiLogo }}
+          <!-- {{> viewApiLogo }}
           <h1 id="api-header" style="font-size: 1.4em; font-weight: 500; color: #55626c;">
             {{ api.name }}
-          </h1>
+          </h1> -->
 
-          {{# unless api.isPublic }}
+          <!-- {{# unless api.isPublic }}
             <span class="label label-default"
             style="background-color:transparent;
             position:relative;
             bottom:5px;
             margin-left:5px;">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
-          {{/ unless }}
+          {{/ unless }} -->
 
-          {{# if api.organization }}
-            <p class="view-api-meta-details">
-              <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="margin-left: 10px;">
-                {{ api.organization.name }}
-              </a>
-            </p>
-          {{ else }}
-          {{/ if }}
         </div>
       </div>
 

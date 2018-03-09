@@ -4,11 +4,11 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiCatalogToolbar">
-    <div class="col-md-3" id="catalog-toolbar">
+    <div class="col-md-3" id="catalog-toolbar" style="padding-left:5px;">
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div id="catalog-toolbar-navbar" class="block-wrapper">
         <div class="form-group">
-          <label for="sort-select">
+          <label for="sort-select" style="font-size: 12px;color: #4c6072;">
             {{_ "catalog_toolbar_sortBy_title" }}
           </label>
           <select id="sort-select" class="form-control">
@@ -31,23 +31,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
 
         {{# if currentUser }}
-          <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons"
+          <div class="filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons"
           style="padding-left: 0;">
-            <label class="btn btn-default active" id="filterBy-all">
+            <label class="btn active" id="filterBy-all" style="width: 100%;text-align: left;">
               <input type="radio" name="filter-options" value="all" checked>
               {{_ "catalog_toolbar_filterOptions_showAll" }}
             </label>
-            <label class="btn btn-default" id="filterBy-my-apis">
+            <label class="btn" id="filterBy-my-apis" style="width: 100%;text-align: left;color: #4c6072;">
               <input type="radio" name="filter-options" value="my-apis">
               {{_ "catalog_toolbar_filterOptions_myApis" }}
             </label>
-            <label class="btn btn-default" id="filterBy-my-bookmarks">
+            <label class="btn" id="filterBy-my-bookmarks" style="width: 100%;text-align: left;color: #4c6072;">
               <input type="radio" name="filter-options" value="my-bookmarks">
               {{_ "catalog_toolbar_filterOptions_myBookmarks" }}
             </label>
           </div>
           <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default" id="filterBy-with-docs">
+            <label class="btn" id="filterBy-with-docs" style="width: 100%;text-align: left;color: #4c6072;">
               <input type="checkbox" name="filter-api-documentation" value="with-docs">
               {{_ "catalog_toolbar_filterOptions_apisWithDocumentation" }}
             </label>
@@ -58,6 +58,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <a href="/rss/apis" target="_blank" class="rss-feed fa fa-rss-square fa-3x btn" title="{{_ 'apisRssIcon_tooltipText_Rss'}}">
           </a>
         </div> -->
+        <a href="#" class="btn btn-success" style="margin-top: 15px;width: 100%;">
+          Add New API
+        </a>
       </div>
     </div>
 </template>

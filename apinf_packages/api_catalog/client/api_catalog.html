@@ -8,24 +8,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="block-wrapper">
       <ul class="list-inline" style="margin-bottom: 0;">
         <li>
-      <h1 style="margin-bottom: 5px;margin-top:5px;">
+      <h1 style="margin-bottom: 5px;margin-top:5px;text-transform: none;">
         <!-- {{_ "catalog_Title" }} -->
-        {{# if apisCount }}
+        Explore public APIs
+        <!-- {{# if apisCount }}
           {{_ 'apiCatalog_apisCount' count=apisCount }}
         {{/ if }}
-        available
+        available -->
       </h1>
     </li>
     <li class="pull-right">
-      <a href="#" class="btn btn-success" style="margin-top: -5px;">
-        <!-- {{_ 'addApi_button_text' }} -->
+      <!-- <a href="#" class="btn btn-success" style="margin-top: -5px;">
         Add New API
-      </a>
+      </a> -->
+      {{> searchField }}
     </li>
   </ul>
     </div>
     <div class="row">
-      {{> apiCatalogToolbar apis=apis }}
 
       <!-- <p>
         {{> apiFilteredBy apisCount=apisCount }}
@@ -51,6 +51,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{> spinner }}
         {{/ if }}
       </div>
+        {{> apiCatalogToolbar apis=apis }}
     </div>
   </div>
 </template>
