@@ -39,7 +39,6 @@ github-config-ui@1.0.0
 gwendall:autoform-i18n
 harrison:papa-parse
 http@1.2.12
-jquery@1.11.10
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 kadira:blaze-layout
@@ -96,3 +95,4 @@ zimme:active-route
 aldeed:autoform-select2
 natestrauser:select2
 meteorhacks:aggregate
+thelohoadmin:bootstrap
