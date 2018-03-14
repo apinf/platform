@@ -24,7 +24,7 @@ Template.bookmark.events({
     const apiId = (this.api) ? this.api._id : this._id;
 
     // Store the user ID of the current user clicking the button
-    const currentUserId = Meteor.user()._id;
+    const currentUserId = Meteor.userId();
 
     // Toggle (add/remove) the bookmark with method toogleBookmarkApi
     Meteor.call('toggleBookmarkApi', apiId, currentUserId);
@@ -43,7 +43,7 @@ Template.bookmark.helpers({
     // Make sure bookmark subscription is ready
     if (instance.bookmarksSubscription.ready()) {
       // Get current user bookmark (should be only one API Bookmarks result available)
-      userBookmark = ApiBookmarks.findOne({ userId: Meteor.user()._id, apiIds: apiId });
+      userBookmark = ApiBookmarks.findOne({ userId: Meteor.userId(), apiIds: apiId });
     }
     // Return true if user has an API bookmark
     return !!(userBookmark);

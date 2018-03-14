@@ -76,7 +76,7 @@ Template.apiBackendRating.events({
       const message = TAPi18n.__('apiBackendRating_anonymousError');
 
       // Alert the user that they must log in
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
 
       return false;
     }

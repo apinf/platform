@@ -25,6 +25,9 @@ import 'locale-compare-polyfill';
 // Npm packages imports
 import _ from 'lodash';
 
+// APInf imports
+import localisedSorting from '/apinf_packages/core/helper_functions/string_utils';
+
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
@@ -213,15 +216,14 @@ Template.apiCatalog.helpers({
   apis () {
     // Get apis collection via Pagination
     const apis = Template.instance().pagination.getPage();
-    // Get the language
-    const language = TAPi18n.getLanguage();
+
     // Get the sort via Pagination
     const sort = Template.instance().pagination.sort();
     // When sorted by name
     if (sort.name) {
       // use custom sort function with i18n support
       apis.sort((a, b) => {
-        return a.name.localeCompare(b.name, language) * sort.name;
+        return localisedSorting(a.name, b.name, sort.name);
       });
     }
     return apis;

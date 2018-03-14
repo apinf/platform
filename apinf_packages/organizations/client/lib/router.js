@@ -10,6 +10,8 @@ import { Meteor } from 'meteor/meteor';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { DocHead } from 'meteor/kadira:dochead';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 FlowRouter.route('/organizations', {
   // Get query parameters for Catalog page on Enter
@@ -38,11 +40,11 @@ FlowRouter.route('/organizations', {
   },
 });
 
-FlowRouter.route('/organizations/:slug/', {
+FlowRouter.route('/organizations/:orgSlug/', {
   name: 'organizationProfile',
   action (params) {
     // Get organization slug
-    const slug = params.slug;
+    const slug = params.orgSlug;
 
     // Get Organization
     Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {
@@ -72,5 +74,26 @@ FlowRouter.route('/organizations/:slug/', {
         FlowRouter.go('notFound');
       }
     });
+  },
+});
+
+FlowRouter.route('/email-verify/:token/:slug', {
+  name: 'email-verification',
+  action (params) {
+    // Get token from Router params
+    const token = params.token;
+    const slug = params.slug;
+    // Update verification status
+    Meteor.call('verifyToken', token, (error) => {
+      if (error) {
+        // Show token invalid
+        sAlert.error(error.error, { timeout: 'none' });
+      } else {
+        // Email successfully verified
+        sAlert.success(TAPi18n.__('emailVerification_successMessage'));
+      }
+    });
+    // Go to front page
+    FlowRouter.go('organizationProfile', { orgSlug: slug });
   },
 });

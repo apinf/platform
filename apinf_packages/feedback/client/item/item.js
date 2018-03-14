@@ -116,7 +116,7 @@ Template.feedbackItem.events({
         // Get error message
         const message = TAPi18n.__('feedbackItem_usernotloggedin_errorMessage');
         // Notifies user to login to vote
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
       }
     });
   },
@@ -131,7 +131,7 @@ Template.feedbackItem.events({
         // Get error message
         const message = TAPi18n.__('feedbackItem_usernotloggedin_errorMessage');
         // Notifies user to login to vote
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
       }
     });
   },

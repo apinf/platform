@@ -22,6 +22,12 @@ AutoForm.hooks({
 
         // Add current user as Organization manager & creater
         organization.managerIds = [userId];
+        // Set default value for the owner of organization
+        organization.emailVerification = [{
+          managerIds: userId,
+          verified: true,
+        }];
+
         organization.createdBy = userId;
 
         // Submit the form
@@ -45,12 +51,12 @@ AutoForm.hooks({
           Meteor.call('updateOrganizationBySlug', { _id: organizationId }, (error, slug) => {
             if (error) {
               // Show error message
-              sAlert.error(error);
+              sAlert.error(error, { timeout: 'none' });
               // Redirect to organization Catalog
               FlowRouter.go('organizations');
             } else {
               // Redirect to newly added organization
-              FlowRouter.go('organizationProfile', { slug });
+              FlowRouter.go('organizationProfile', { orgSlug: slug });
             }
           });
         } else {
@@ -67,7 +73,7 @@ AutoForm.hooks({
           const slug = instance.updateDoc.$set.slug;
 
           // Redirect to newly added organization
-          FlowRouter.go('organizationProfile', { slug });
+          FlowRouter.go('organizationProfile', { orgSlug: slug });
         }
       }
     },

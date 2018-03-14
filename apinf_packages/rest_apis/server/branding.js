@@ -6,7 +6,10 @@
 // Meteor contributed packages imports
 import { Restivus } from 'meteor/nimble:restivus';
 
-const SettingsV1 = new Restivus({
+// APInf imports
+import descriptionBranding from '/apinf_packages/rest_apis/lib/descriptions/branding_texts';
+
+const BrandingV1 = new Restivus({
   apiPath: 'rest',
   version: 'v1',
   defaultHeaders: {
@@ -17,12 +20,13 @@ const SettingsV1 = new Restivus({
   enableCors: true,
 });
 
-SettingsV1.swagger = {
+BrandingV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
+      description: descriptionBranding.general,
       version: '1.0.0',
-      title: 'Branding configuration',
+      title: 'Branding APInf site',
     },
     securityDefinitions: {
       userSecurityToken: {
@@ -234,7 +238,7 @@ SettingsV1.swagger = {
   },
 };
 
-// Generate Swagger to route /rest/v1/settings.json
-SettingsV1.addSwagger('settings.json');
+// Generate Swagger to route /rest/v1/branding.json
+BrandingV1.addSwagger('branding.json');
 
-export default SettingsV1;
+export default BrandingV1;

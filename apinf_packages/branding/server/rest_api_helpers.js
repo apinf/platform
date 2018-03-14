@@ -23,31 +23,11 @@ export function convertBodyParametersToBrandingData (bodyParams, brandingData = 
     featuredApis = splittedIds.map(id => id.trim());
   }
 
-  const socialMedia = [];
-
-  if (bodyParams.facebook) {
-    socialMedia.push({
-      name: 'Facebook',
-      url: bodyParams.facebook,
-    });
-  }
-
-  if (bodyParams.twitter) {
-    socialMedia.push({
-      name: 'Twitter',
-      url: bodyParams.twitter,
-    });
-  }
-
-  if (bodyParams.github) {
-    socialMedia.push({
-      name: 'Github',
-      url: bodyParams.github,
-    });
-  }
-
   // Get colors object or an empty object by default
   const brandingColorsData = _.get(brandingData, 'colors', {});
+
+  // Get social media links object or an empty object by default
+  const socialMediaLinksData = _.get(brandingData, 'socialMediaLinks', {});
 
   // PUT method: if bodyParams value is undefined, use old value (if exists)
   // POST method: undefined bodyParams values remain undefined, because there are no old values
@@ -62,8 +42,12 @@ export function convertBodyParametersToBrandingData (bodyParams, brandingData = 
       coverPhotoOverlay: bodyParams.coverPhotoOverlay || brandingColorsData.coverPhotoOverlay,
       overlayTransparency: bodyParams.overlayTransparency || brandingColorsData.overlayTransparency,
     },
+    socialMediaLinks: {
+      facebook: bodyParams.facebook || socialMediaLinksData.facebook,
+      twitter: bodyParams.twitter || socialMediaLinksData.twitter,
+      github: bodyParams.github || socialMediaLinksData.github,
+    },
     featuredApis: featuredApis || brandingData.featuredApis,
-    socialMedia: socialMedia.length > 0 ? socialMedia : brandingData.socialMedia,
   };
 }
 

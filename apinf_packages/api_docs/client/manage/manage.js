@@ -20,16 +20,12 @@ import _ from 'lodash';
 // Collection imports
 import ApiDocs from '/apinf_packages/api_docs/collection';
 import DocumentationFiles from '/apinf_packages/api_docs/files/collection';
-import Settings from '/apinf_packages/settings/collection';
 
 Template.manageApiDocumentationModal.onCreated(function () {
   const instance = this;
 
   // Turn off spinner if it was on
   Session.set('fileUploading', false);
-
-  // Subscribe to documentation editor settings
-  instance.subscribe('singleSetting', 'apiDocumentationEditor');
 
   instance.removeDocumentationFile = (fileId) => {
     // Convert to Mongo ObjectID
@@ -83,22 +79,6 @@ Template.manageApiDocumentationModal.helpers({
 
       // Get documentation file Object
       return DocumentationFiles.findOne(objectId);
-    }
-    // Otherwise return false
-    return false;
-  },
-  apiDocumentationEditorIsEnabled () {
-    // Get settings
-    const settings = Settings.findOne();
-
-    // Check settings exists, editor is enabled and host setting exists
-    if (
-      settings &&
-      settings.apiDocumentationEditor &&
-      settings.apiDocumentationEditor.enabled &&
-      settings.apiDocumentationEditor.host) {
-      // Editor is enabled and has host setting, return true
-      return true;
     }
     // Otherwise return false
     return false;
@@ -172,13 +152,18 @@ Template.manageApiDocumentationModal.events({
     Modal.hide('manageApiDocumentationModal');
   },
   'click #cancel-button': function (event, templateInstance) {
-    // Get fileId value
-    const fileId = Session.get('fileId');
+    const apiDocs = ApiDocs.findOne();
 
-    // If file is uploaded and a user clicks on "Cancel" button
-    if (fileId) {
-      // Remove uploaded file from collection
-      templateInstance.removeDocumentationFile(fileId);
+    // Make sure File isn't uploaded
+    if (!apiDocs || !apiDocs.fileId) {
+      // Get fileId value
+      const fileId = Session.get('fileId');
+
+      // If file is uploaded and a user clicks on "Cancel" button
+      if (fileId) {
+        // Remove uploaded file from collection
+        templateInstance.removeDocumentationFile(fileId);
+      }
     }
   },
   'click #add-link': function () {

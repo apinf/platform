@@ -10,34 +10,37 @@ import { check } from 'meteor/check';
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
-import { ValidEmail } from 'meteor/froatsnook:valid-email';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import Settings from '/apinf_packages/settings/collection';
 
 Meteor.methods({
-  addAuthorizedUserByEmail (apiId, email) {
-    // Make sure apiId is a string
-    check(apiId, String);
-
-    // Make sure email is a valid email
-    check(email, ValidEmail);
+  addAuthorizedUser (formData) {
+    check(formData, Object);
 
     // Get user with matching email
-    const user = Accounts.findUserByEmail(email);
+    const userByEmail = Accounts.findUserByEmail(formData.user);
+    const userByUsername = Accounts.findUserByUsername(formData.user);
+
+    // "User" field can be e-mail value or username value
+    const user = userByEmail || userByUsername;
+
+    // No matching in both direction
+    if (!user) {
+      throw new Meteor.Error('user-not-registered');
+    }
 
     // Get API document
-    const api = Apis.findOne(apiId);
-
-    // Check if user is already authorized
-    const userAlreadyAuthorized = api.authorizedUserIds.includes(user._id);
+    const api = Apis.findOne(formData.apiId);
 
     // Check if the user is already authorized
-    if (!userAlreadyAuthorized) {
-      // Add user ID to API authorized user IDs field
-      Apis.update(apiId, { $push: { authorizedUserIds: user._id } });
+    if (api.authorizedUserIds.includes(user._id)) {
+      throw new Meteor.Error('user-already-exist');
     }
+
+    // Add user ID to API authorized user IDs field
+    Apis.update(formData.apiId, { $push: { authorizedUserIds: user._id } });
   },
   currentUserCanViewApi (slug) {
     // Make sure apiId is a string

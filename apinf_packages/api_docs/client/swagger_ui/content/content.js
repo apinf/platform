@@ -146,6 +146,7 @@ Template.swaggerUiContent.onRendered(function () {
     const ui = SwaggerUIBundle({
       url: api.documentationUrl(),
       dom_id: '#swagger-ui',
+      defaultModelsExpandDepth: 0,
       // Provides custom configs for Swagger
       configs: this.configs,
       presets: [

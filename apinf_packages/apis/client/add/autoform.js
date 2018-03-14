@@ -34,7 +34,7 @@ AutoForm.hooks({
       Meteor.call('updateApiBySlug', { _id: apiId }, (error, slug) => {
         if (error) {
           // Show error message
-          sAlert.error(error);
+          sAlert.error(error, { timeout: 'none' });
           // Redirect to API catalog
           FlowRouter.go('apiCatalog');
         } else {

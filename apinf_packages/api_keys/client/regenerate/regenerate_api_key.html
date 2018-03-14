@@ -1,0 +1,47 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="regenerateApiKey">
+  <div class="modal fade" id="regenerate-api-key-confirmation-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">
+            {{_ "regenerateApiKeyConfirmation_header" }}
+          </h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            {{_ "regenerateApiKeyConfirmation_confirmRegenerateMessage" }}
+          </p>
+          <p>
+            <span class="text-danger">
+              {{_ "regenerateApiKeyConfirmation_confirmRegenerateNote" }}
+            </span>
+            {{_ "regenerateApiKeyConfirmation_confirmRegenerateInformation" }}
+          </p>
+          <ol>
+            {{# if apisList.length }}
+              {{# each api in apisList }}
+                <li>
+                  {{ api.name }}
+                </li>
+              {{/ each }}
+            {{/ if }}
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel-regenerate-api-key">
+            {{_ "regenerateApiKeyConfirmation_cancelButton" }}
+          </button>
+          <button type="button" class="btn btn-danger" id="regenerate-api-key-confirm">
+            {{_ "regenerateApiKeyConfirmation_RegenerateButton" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

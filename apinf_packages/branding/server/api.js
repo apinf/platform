@@ -8,16 +8,17 @@ import Branding from '/apinf_packages/branding/collection';
 
 // APInf imports
 import Authentication from '/apinf_packages/rest_apis/server/authentication';
-import SettingsV1 from '/apinf_packages/rest_apis/server/settings';
+import BrandingV1 from '/apinf_packages/rest_apis/server/branding';
 import errorMessagePayload from '/apinf_packages/rest_apis/server/rest_api_helpers';
+import descriptionBranding from '/apinf_packages/rest_apis/lib/descriptions/branding_texts';
 import { convertBodyParametersToBrandingData, validateProvidedApisIds } from './rest_api_helpers';
 
-SettingsV1.swagger.meta.paths = {
+BrandingV1.swagger.meta.paths = {
   '/login': Authentication.login,
   '/logout': Authentication.logout,
 };
 
-SettingsV1.addRoute('branding', {
+BrandingV1.addRoute('branding', {
   // Response contains the Branding configuration
   get: {
     authRequired: true,
@@ -25,9 +26,10 @@ SettingsV1.addRoute('branding', {
     roleRequired: ['admin'],
     swagger: {
       tags: [
-        SettingsV1.swagger.tags.branding,
+        BrandingV1.swagger.tags.branding,
       ],
       summary: 'Branding settings',
+      description: descriptionBranding.get,
       responses: {
         200: {
           description: 'Branding settings',
@@ -91,11 +93,12 @@ SettingsV1.addRoute('branding', {
     roleRequired: ['admin'],
     swagger: {
       tags: [
-        SettingsV1.swagger.tags.branding,
+        BrandingV1.swagger.tags.branding,
       ],
       summary: 'Add a Branding configuration',
+      description: descriptionBranding.post,
       parameters: [
-        SettingsV1.swagger.params.branding,
+        BrandingV1.swagger.params.branding,
       ],
       responses: {
         201: {
@@ -163,7 +166,7 @@ SettingsV1.addRoute('branding', {
         Branding.schema.validate(brandingData);
       } catch (e) {
         // Return error and message text
-        return errorMessagePayload(400, e.reason);
+        return errorMessagePayload(400, e.reason, 'parameter', e.details);
       }
 
       // Insert Branding data into collection
@@ -190,11 +193,12 @@ SettingsV1.addRoute('branding', {
     roleRequired: ['admin'],
     swagger: {
       tags: [
-        SettingsV1.swagger.tags.branding,
+        BrandingV1.swagger.tags.branding,
       ],
       summary: 'Update branding.',
+      description: descriptionBranding.put,
       parameters: [
-        SettingsV1.swagger.params.branding,
+        BrandingV1.swagger.params.branding,
       ],
       responses: {
         200: {
@@ -259,7 +263,7 @@ SettingsV1.addRoute('branding', {
         Branding.schema.validate(brandingData);
       } catch (e) {
         // Return error and message text
-        return errorMessagePayload(400, e.reason);
+        return errorMessagePayload(400, e.reason, 'parameter', e.details);
       }
 
       // Update Branding document
@@ -282,9 +286,10 @@ SettingsV1.addRoute('branding', {
     roleRequired: ['admin'],
     swagger: {
       tags: [
-        SettingsV1.swagger.tags.branding,
+        BrandingV1.swagger.tags.branding,
       ],
       summary: 'Delete branding.',
+      description: descriptionBranding.delete,
       responses: {
         204: {
           description: 'Branding removed successfully',

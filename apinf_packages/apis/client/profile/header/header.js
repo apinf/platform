@@ -4,6 +4,17 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
+Template.viewApiPageHeader.onRendered(() => {
+  // Get current url hash value
+  const hashTabValue = location.hash.substr(1);
+
+  // If url contain hash value
+  if (hashTabValue) {
+    // Show tab
+    $(`.nav-tabs a[href='#${hashTabValue}']`).tab('show');
+  }
+});
+
 Template.viewApiPageHeader.helpers({
   userShouldSeeBacklogTab () {
     // Get API id
@@ -38,5 +49,12 @@ Template.viewApiPageHeader.helpers({
       return true;
     }
     return false;
+  },
+});
+
+Template.viewApiPageHeader.events({
+  'click #api-navigation-tabs li > a': (event) => {
+    // Show hash value in url
+    window.location = `${event.currentTarget.hash}`;
   },
 });

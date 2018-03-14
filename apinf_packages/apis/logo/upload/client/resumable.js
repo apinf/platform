@@ -72,7 +72,7 @@ Meteor.startup(() => {
         const message = TAPi18n.__('apiLogo_resumable_acceptedExtensions');
 
         // Alert user of error
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
       }
     } else {
       // Finish uploading
@@ -82,7 +82,7 @@ Meteor.startup(() => {
       const message = TAPi18n.__('apiLogo_resumable_message_fileMaxSize');
 
       // Alert user of max size error
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   });
 });
