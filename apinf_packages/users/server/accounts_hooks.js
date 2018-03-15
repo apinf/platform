@@ -9,11 +9,28 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
 
+import LoginPlatforms from '/apinf_packages/login_platforms/collection';
+
 // OAuth Services dictionary to get the correct prefix
 const servicePrefixDictionary = {
   fiware: 'fw',
   github: 'gh',
 };
+
+
+/*const LoginPlatform = LoginPlatforms.findOne();
+
+console.log(LoginPlatform)
+ServiceConfiguration.configurations.upsert(
+  { service: 'github' },
+  {
+    $set: {
+      loginStyle: "popup",
+      clientId: LoginPlatform.githubConfiguration.clientId,
+      secret: LoginPlatform.githubConfiguration.secret
+    }
+  }
+);*/
 
 Accounts.onCreateUser((options, user) => {
   // Create empty user profile if none exists

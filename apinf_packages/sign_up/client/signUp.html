@@ -1,0 +1,84 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="signUp">
+  <div class="">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="at-form">
+          <div class="at-title">
+            <h3>Create an Account</h3>
+          </div>
+          <div class="at-oauth">
+            <button class="btn at-social-btn" id="at-fiware" name="fiware">
+              <i class="fa fa-fiware"></i> Configure Fiware
+            </button>
+  
+            <button class="btn at-social-btn" id="at-github" name="github">
+              <i class="fa fa-github"></i> Register with Github
+            </button>
+          </div>
+          <div class="at-sep">
+            <strong>OR</strong>
+          </div>
+          <div class="at-pwd-form">
+            <div class="alert" id="alert-message">
+              
+            </div>
+            <form role="form" id="at-pwd-form" novalidate="">
+              <fieldset>
+                <div class="at-input form-group has-feedback">
+                  <label class="control-label" for="at-field-username">
+                    Username 
+                  </label>
+                  <input type="text" class="form-control" id="at-field-username" name="at-field-username" placeholder="Username" autocapitalize="none" autocorrect="off">
+                  <span class="help-block hide"></span>
+                </div>
+                <div class="at-input form-group has-feedback">
+                  <label class="control-label" for="at-field-email">
+                    Email 
+                  </label>
+                  <input type="email" class="form-control" id="at-field-email" name="at-field-email" placeholder="Email" autocapitalize="none" autocorrect="off">
+                  <span class="help-block hide"></span>
+                </div>
+                <div class="at-input form-group has-feedback">
+                  <label class="control-label" for="at-field-password">
+                    Password 
+                  </label>
+                  <input type="password" class="form-control" id="at-field-password" name="at-field-password" placeholder="Password" autocapitalize="none" autocorrect="off">
+                  <span class="help-block hide"></span>
+                </div>
+                <div class="at-input form-group has-feedback">
+                  <label class="control-label" for="at-field-password_again">
+                    Password (again) 
+                  </label>
+                  <input type="password" class="form-control" id="at-field-password_again" name="at-field-password_again" placeholder="Password (again)" autocapitalize="none" autocorrect="off">
+                  <span class="help-block hide"></span>
+                </div>
+                <button type="submit" class="at-btn submit btn btn-lg btn-block btn-default" id="at-btn">
+                  Register
+                </button>
+              </fieldset>
+            </form>
+          </div>
+          <div class="at-terms-link at-wrap">
+            <p>
+              By clicking Register, you agree to our
+              <a href="privacy-policy">Privacy Policy</a>
+              and
+              <a href="terms-of-use">Terms of Use</a>
+            </p>
+          </div>
+          <div class="at-signin-link">
+            <p>
+              If you already have an account
+              <a href="/signIn" id="at-signIn" class="at-link at-signin">sign in</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
