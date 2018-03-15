@@ -270,7 +270,7 @@ You can have multiple proxies under one management.
   `,
   // --------------------------------------------
   apisBy: `
-  Optional parameter to limit the search to APIs in Organizations
+  Optional parameter to limit the search to APIs either in Organizations
   managed by user (value 'organization') or managed by user (value 'owner').
   *Default value is 'organization'*.
   `,
