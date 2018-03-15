@@ -11,11 +11,14 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Match } from 'meteor/check';
 import moment from 'moment';
+import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Organizations from '/apinf_packages/organizations/collection';
+import OrganizationApis from '/apinf_packages/organization_apis/collection';
 
 // APInf imports
 import AnalyticsV1 from '/apinf_packages/rest_apis/server/analytics';
@@ -192,6 +195,7 @@ AnalyticsV1.addRoute('analytics', {
       // Create placeholders for query
       const query = {};
       const options = {};
+      let managedApis;
 
       // Default value for apisBy is 'organization'
       const apisBy = queryParams.apisBy || 'organization';
@@ -203,8 +207,13 @@ AnalyticsV1.addRoute('analytics', {
           return errorMessagePayload(400,
             'Parameter "organizationId" is not permitted when "apisBy" has value "owner".');
         }
-        // Set condition for a list of managed APIs
-        query.managerIds = managerId;
+        // Get list of Apis managed by User
+        const apisFoundList = Apis.find({ managerIds: managerId }).fetch();
+        // Cleaning: Return list of IDs
+        managedApis = apisFoundList.map(api => {
+          return api._id;
+        });
+
       } else if (apisBy === 'organization') {
 
         // Check if Organization exists
@@ -217,15 +226,36 @@ AnalyticsV1.addRoute('analytics', {
           }
         }
 
-        // TODO Here is needed preparation for search of list of APIs belonging to this Organization
+        // Get list of Organizations managed by User
+        const organizationFoundList = Organizations.find({ managerIds: managerId }).fetch();
+        // Cleaning: Return list of IDs
+        const organizationList = organizationFoundList.map(organization => {
+          return organization._id;
+        });
+
+        console.log('organizationList=', organizationList);
+        // Is User a manager in any Organization
+        if (!Array.isArray(organizationList) || !organizationList.length) {
+          return errorMessagePayload(400, 'User is not an admin in any Organization.');
+        }
+
+        // Get list of APIs under managed Organizations
+        const managedFoundApis = OrganizationApis.find({ organizationId: { $in: organizationList } }).fetch();
+
+        // Cleaning: Return list of IDs
+        managedApis = managedFoundApis.map(api => {
+          return api.apiId;
+        });
+
+        // Is User a managing APIs via Organizations
+        if (!Array.isArray(managedApis) || !managedApis.length) {
+          return errorMessagePayload(400, 'User is not an managing any APIs via Organization.');
+        }
 
       } else {
         return errorMessagePayload(400, 'Parameter "apisBy" has erroneous value.',
          'apisBy', apisBy);
       }
-
-      let searchDates = {};
-      const rawDate = {};
 
       // Default value for period is 0
       let period = this.queryParams.period || 0;
@@ -303,6 +333,7 @@ AnalyticsV1.addRoute('analytics', {
       console.log('fromDate_h=', moment(fromDate).format());
       console.log('toDate=', toDate);
       console.log('toDate_h=', moment(toDate).format());
+      console.log('managedApis=', managedApis);
 
       // Pass an optional search string for looking up inventory.
       if (queryParams.q) {
@@ -335,7 +366,14 @@ AnalyticsV1.addRoute('analytics', {
       };
 
       // Create list of API analytical data based on ProxyBackends
-      const apiAnalyticsList = ProxyBackends.find({ 'type': 'apiUmbrella' }).map((proxyBackend) => {
+
+      const apiAnalyticsList = ProxyBackends.find({
+        $and : [
+          { apiId: { $in: managedApis }},
+          { 'type': 'apiUmbrella' }
+        ]
+        }).map((proxyBackend) => {
+
         const apiAnalytics = {};
 
         // Get connected proxy url
@@ -343,7 +381,22 @@ AnalyticsV1.addRoute('analytics', {
         // Get proxy backend path
         const frontendPrefix = proxyBackend.frontendPrefix();
 
-        const backendId = proxyBackend._id;
+        const proxyBackendId = proxyBackend._id;
+
+        // Get data about summary statistic for current period
+        promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
+        .then((currentPeriodDataset) => {
+
+          // Fill summaries
+          apiAnalytics.summaries = {
+            requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
+            responseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
+            uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
+          };
+
+        }).catch((error) => {
+          return errorMessagePayload(400, 'Error retrieving analytic data!');
+        });
         // Fill and return analytics data
         apiAnalytics.meta = {
           proxyPath: proxyUrl.concat(frontendPrefix),
@@ -352,17 +405,10 @@ AnalyticsV1.addRoute('analytics', {
           interval: 1440,
         };
 
-        Meteor.call('overviewChartsData', { backendId, fromDate, toDate }, (error, dataset) => {
-          console.log('backendId=', backendId);
-          console.log('dataset=', dataset);
-        });
+        // TODO: solve problem for last proxyBAckend.
+        //       meta is included in, but
+        //       summaries are not included in returned apiAnalytics
 
-        // Fill summaries
-        apiAnalytics.summaries = {
-          requestCount: 1234124,
-          responseTime: 131,
-          uniqueUsers: 5,
-        };
         return apiAnalytics;
 
       });
@@ -551,6 +597,15 @@ AnalyticsV1.addRoute('analytics/:id', {
         return errorMessagePayload(403, 'You do not have permission for this API.');
       }
 
+      // Return API Proxy's URL, if it exists
+      const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+
+      // If proxy backend for API does not exist
+      if (!proxyBackend) {
+        return errorMessagePayload(404, 'No Proxy Backend exists for API.');
+      }
+
+      const proxyBackendId = proxyBackend._id;
       // Create placeholders
       const query = { _id: apiId };
       const options = {};
@@ -561,54 +616,33 @@ AnalyticsV1.addRoute('analytics/:id', {
         name: 1,
       };
 
-      // Create new API list that is based on APIs collection with extended field logoUrl
-      const apiAnalyticsList = Apis.find(query, options).map((api) => {
-        // Initiate response structure
-        const apiAnalytics = {};
-        const metaAnalytics = {};
-        const summariesAnalytics = {};
+      let currentPeriodDataset = {};
+      // Get data about summary statistic for current period
+      promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
+        .then((currentPeriodDataset) => {
 
-        // Gather API metadata
-        metaAnalytics.apiName = api.name;
-        metaAnalytics.apiId = api._id;
-        metaAnalytics.interval = 1440;
-        metaAnalytics.proxyPath = '';
+          console.log('API currentPeriodDataset=', currentPeriodDataset);
+          const previousFromDate = moment(fromDate).subtract(timeframe, 'd').valueOf();
 
-        // For summary counters
-        const summariesRequestCount = {};
-        const summariesResponseTime = {};
-        const summariesUniqueUsers = {};
+          // Get trend data is based on the current period data
+          Meteor.call('summaryStatisticTrend',
+            { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset,
+            (err, compareResponse) => {
+              console.log('API compareResponse=', compareResponse);
+            });
+        }).catch((error) => {
+          throw new Meteor.Error(error);
+        });
 
-        // Return API Proxy's URL, if it exists
-        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
-        // If Proxy is API Umbrella
-        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
-          // Get connected proxy url
-          const proxyUrl = proxyBackend.proxyUrl();
-          // Get proxy backend path
-          const frontendPrefix = proxyBackend.frontendPrefix();
-          // Provide full proxy path
-          metaAnalytics.proxyPath = proxyUrl.concat(frontendPrefix);
-
-          // Fill summaries
-          summariesAnalytics.requestCount = 1;
-          summariesAnalytics.responseTime = 131;
-          summariesAnalytics.uniqueUsers = 1313;
-
-          // Fill and return analytics data
-          apiAnalytics.meta = metaAnalytics;
-          apiAnalytics.summaries = summariesAnalytics;
-          return apiAnalytics;
-        }
-      });
 
       // Construct response
       return {
         statusCode: 200,
         body: {
           status: 'success',
-          data: apiAnalyticsList,
+//          data: apiAnalyticsList,
+          data: currentPeriodDataset,
         },
       };
     },
