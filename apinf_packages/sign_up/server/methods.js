@@ -11,9 +11,6 @@ import { check } from 'meteor/check';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Accounts } from 'meteor/accounts-base';
 
-// Collection imports
-
-
 Meteor.methods({
   'user.register' (user) {
     check(user, Object);

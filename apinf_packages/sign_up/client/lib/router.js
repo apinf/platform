@@ -10,8 +10,8 @@ import { Meteor } from 'meteor/meteor';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-FlowRouter.route('/signUp', {
-  name: 'up',
+FlowRouter.route('/sign-up', {
+  name: 'signUp',
   action () {
     BlazeLayout.render('masterLayout', { main: 'signUp' });
   },

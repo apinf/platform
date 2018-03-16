@@ -9,72 +9,71 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-md-6 col-md-offset-3">
         <div class="at-form">
           <div class="at-title">
-            <h3>Create an Account</h3>
+            <h3>{{_ "user_signup_heading" }}</h3>
           </div>
           <div class="at-oauth">
             <button class="btn at-social-btn" id="at-fiware" name="fiware">
-              <i class="fa fa-fiware"></i> Configure Fiware
+              <i class="fa fa-fiware"></i> {{_ "user_signup_fiwareButton" }}
             </button>
   
             <button class="btn at-social-btn" id="at-github" name="github">
-              <i class="fa fa-github"></i> Register with Github
+              <i class="fa fa-github"></i> {{_ "user_signup_gitHubButton" }}
             </button>
           </div>
           <div class="at-sep">
-            <strong>OR</strong>
+            <strong>{{_ "user_signup_orText" }}</strong>
           </div>
           <div class="at-pwd-form">
             <div class="alert" id="alert-message">
-              
             </div>
-            <form role="form" id="at-pwd-form" novalidate="">
+            <form  id="at-pwd-form">
               <fieldset>
                 <div class="at-input form-group has-feedback">
                   <label class="control-label" for="at-field-username">
-                    Username 
+                    {{_ "user_signup_label_username" }} 
                   </label>
-                  <input type="text" class="form-control" id="at-field-username" name="at-field-username" placeholder="Username" autocapitalize="none" autocorrect="off">
+                  <input type="text" class="form-control" id="at-field-username" name="at-field-username" placeholder="Username" required autocapitalize="none" autocorrect="off">
                   <span class="help-block hide"></span>
                 </div>
                 <div class="at-input form-group has-feedback">
                   <label class="control-label" for="at-field-email">
-                    Email 
+                    {{_ "user_signup_label_email" }} 
                   </label>
-                  <input type="email" class="form-control" id="at-field-email" name="at-field-email" placeholder="Email" autocapitalize="none" autocorrect="off">
+                  <input type="email" class="form-control" id="at-field-email" name="at-field-email" placeholder="Email" required autocapitalize="none" autocorrect="off">
                   <span class="help-block hide"></span>
                 </div>
                 <div class="at-input form-group has-feedback">
                   <label class="control-label" for="at-field-password">
-                    Password 
+                    {{_ "user_signup_label_password" }} 
                   </label>
-                  <input type="password" class="form-control" id="at-field-password" name="at-field-password" placeholder="Password" autocapitalize="none" autocorrect="off">
+                  <input type="password" class="form-control" id="at-field-password" name="at-field-password" placeholder="Password" required autocapitalize="none" autocorrect="off">
                   <span class="help-block hide"></span>
                 </div>
                 <div class="at-input form-group has-feedback">
                   <label class="control-label" for="at-field-password_again">
-                    Password (again) 
+                    {{_ "user_signup_label_passwordAgain" }} 
                   </label>
-                  <input type="password" class="form-control" id="at-field-password_again" name="at-field-password_again" placeholder="Password (again)" autocapitalize="none" autocorrect="off">
+                  <input type="password" class="form-control" id="at-field-password_again" name="at-field-password_again" placeholder="Password (again)" required autocapitalize="none" autocorrect="off">
                   <span class="help-block hide"></span>
                 </div>
                 <button type="submit" class="at-btn submit btn btn-lg btn-block btn-default" id="at-btn">
-                  Register
+                  {{_ "user_signup_registerButton" }}
                 </button>
               </fieldset>
             </form>
           </div>
           <div class="at-terms-link at-wrap">
             <p>
-              By clicking Register, you agree to our
-              <a href="privacy-policy">Privacy Policy</a>
-              and
-              <a href="terms-of-use">Terms of Use</a>
+              {{_ "user_signup_message_byClickingRegister" }}
+              <a href="privacy-policy">{{_ "user_signup_message_privacyPolicy" }}</a>
+              {{_ "user_signup_message_and" }}
+              <a href="terms-of-use">{{_ "user_signup_message_termOfUse" }}</a>
             </p>
           </div>
           <div class="at-signin-link">
             <p>
-              If you already have an account
-              <a href="/signIn" id="at-signIn" class="at-link at-signin">sign in</a>
+              {{_ "user_signup_message_ifYouAlready" }}
+              <a href="/sign-in" id="at-signIn" class="at-link at-signin">{{_ "user_signup_message_signIn" }}</a>
             </p>
           </div>
         </div>

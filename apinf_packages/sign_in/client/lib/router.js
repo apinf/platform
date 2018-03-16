@@ -10,9 +10,24 @@ import { Meteor } from 'meteor/meteor';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-FlowRouter.route('/signIn', {
-  name: 'in',
+FlowRouter.route('/sign-in', {
+  name: 'signIn',
   action () {
     BlazeLayout.render('masterLayout', { main: 'signIn' });
+  },
+});
+
+
+FlowRouter.route('/verfication', {
+  name: 'verfication',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'verfication' });
+  },
+});
+
+FlowRouter.route('/reset-password', {
+  name: 'resetPassword',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'resetPassword' });
   },
 });

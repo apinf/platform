@@ -26,21 +26,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="at-pwd-form">
             <div class="alert" id="alert-message">
             </div>
-            <form role="form" id="at-pwd-form" novalidate="">
+            <form id="at-pwd-form">
               <fieldset>
                 <div class="at-input form-group has-feedback">
                   <label class="control-label" for="at-field-username_and_email">
                     Login 
                   </label>
-                  <input type="text" class="form-control" id="at-field-username_and_email" name="at-field-username_and_email" placeholder="Username and Email" autocapitalize="none" autocorrect="off">
+                  <input type="text" class="form-control" id="at-field-username_and_email" name="at-field-username_and_email" placeholder="Username and Email" autocapitalize="none" autocorrect="off" required>
                   <span class="help-block hide"></span>
                 </div>
                 <div class="at-input form-group has-feedback">
                   <label class="control-label" for="at-field-password">
                     Password 
                   </label>
-                  <input type="password" class="form-control" id="at-field-password" name="at-field-password" placeholder="Password" autocapitalize="none" autocorrect="off">
+                  <input type="password" class="form-control" id="at-field-password" name="at-field-password" placeholder="Password" autocapitalize="none" autocorrect="off" required>
                   <span class="help-block hide"></span>
+                </div>
+                <div class="at-pwd-link">
+                  <p>
+                    <a href="/reset-password" id="at-forgotPwd" class="at-link at-pwd">Forgot your password?</a>
+                  </p>
                 </div>
                 <button type="submit" class="at-btn submit btn btn-lg btn-block btn-default" id="at-btn">
                   Sign In
@@ -51,42 +56,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="at-signup-link">
             <p>
               Don't have an account?
-              <a href="/signUp" id="at-signUp" class="at-link at-signup">Register</a>
+              <a href="/sign-up" id="at-signUp" class="at-link at-signup">Register</a>
             </p>
           </div>
           <div class="at-resend-verification-email-link at-wrap">
             <p>
               Verification email lost?
-              <a href="#" id="at-resend-verification-email" class="at-link at-resend-verification-email">Send again</a>  
+              <a href="/verfication" id="at-resend-verification-email" class="at-link at-resend-verification-email">Send again</a>  
             </p>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="at-form">
-          <div class="at-title">
-            <h3>Send the verification email again</h3>
-          </div>
-          <div class="at-pwd-form">
-            <form role="form" id="at-pwd-form" novalidate="" action="#" >
-              <fieldset>
-                <div class="at-input form-group has-feedback">
-                  <label class="control-label" for="at-field-email">
-                    Email 
-                  </label>
-                  <input type="email" class="form-control" id="at-field-email" name="at-field-email" placeholder="Email" autocapitalize="none" autocorrect="off">
-                  <span class="help-block hide"></span>
-                </div>
-                <button type="submit" class="at-btn submit btn btn-lg btn-block btn-default" id="at-btn">
-                  Send email again
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>

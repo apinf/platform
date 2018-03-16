@@ -17,20 +17,54 @@ const servicePrefixDictionary = {
   github: 'gh',
 };
 
+// Get login Platform data from DB
+const loginPlatformsData = LoginPlatforms.findOne();
 
-/*const LoginPlatform = LoginPlatforms.findOne();
+// Get check Login Platform data is available or not
+if (loginPlatformsData) {
 
-console.log(LoginPlatform)
-ServiceConfiguration.configurations.upsert(
-  { service: 'github' },
-  {
-    $set: {
-      loginStyle: "popup",
-      clientId: LoginPlatform.githubConfiguration.clientId,
-      secret: LoginPlatform.githubConfiguration.secret
+  // get githubConfiguration from DB
+  const githubConfiguration = loginPlatformsData.githubConfiguration;
+
+  // check githubConfiguration is available or not.
+  if (githubConfiguration) {
+
+    // check clientId and secret are available or not for githubConfiguration
+    if (githubConfiguration.clientId && githubConfiguration.secret) {
+      ServiceConfiguration.configurations.upsert(
+        { service: 'github' },
+        {
+          $set: {
+            loginStyle: "popup",
+            clientId: githubConfiguration.clientId,
+            secret: githubConfiguration.secret
+          }
+        }
+      );
     }
   }
-);*/
+
+  // get fiwareConfiguration from DB
+  const fiwareConfiguration = loginPlatformsData.fiwareConfiguration;
+
+  // check fiwareConfiguration is available or not.
+  if (fiwareConfiguration) {
+
+    // check clientId, rootURL and secret are available or not for fiwareConfiguration
+    if (fiwareConfiguration.clientId && fiwareConfiguration.rootURL && fiwareConfiguration.secret) {
+      ServiceConfiguration.configurations.upsert(
+        {  service: 'fiware' },
+        {
+          $set: {
+            clientId: loginPlatformsData.fiwareConfiguration.clientId,
+            rootURL: loginPlatformsData.fiwareConfiguration.rootURL,
+            secret: loginPlatformsData.fiwareConfiguration.secret,
+          }
+        }
+      );
+    }
+  }
+}
 
 Accounts.onCreateUser((options, user) => {
   // Create empty user profile if none exists
@@ -86,3 +120,15 @@ Accounts.onCreateUser((options, user) => {
 
   return user;
 });
+
+Accounts.emailTemplates.siteName = "APInf";
+Accounts.emailTemplates.from = "apinf.nightly@apinf.io";
+
+Accounts.emailTemplates.enrollAccount.subject = function (user) {
+  return "Verify Your Email Address";
+};
+
+Accounts.emailTemplates.enrollAccount.text = function (user, link) {
+  console.log(link)
+  return `To verify your email address visit the following link: \n \n ${link}`
+}
