@@ -5,115 +5,90 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="footer">
   <footer class="footer-bs">
-    <div class="row">
-      <div class="col-md-3 footer-brand animated fadeInLeft">
-          <h2>Logo</h2>
-            <p>Suspendisse hendrerit tellus laoreet luctus pharetra. Aliquam porttitor vitae orci nec ultricies. Curabitur vehicula, libero eget faucibus faucibus, purus erat eleifend enim, porta pellentesque ex mi ut sem.</p>
-            <p>© 2014 BS3 UI Kit, All rights reserved</p>
-        </div>
-      <div class="col-md-4 footer-nav animated fadeInUp">
-          <h4>Menu —</h4>
-          <div class="col-md-6">
-                <ul class="pages">
-                    <li><a href="#">Travel</a></li>
-                    <li><a href="#">Nature</a></li>
-                    <li><a href="#">Explores</a></li>
-                    <li><a href="#">Science</a></li>
-                    <li><a href="#">Advice</a></li>
-                </ul>
-            </div>
-          <div class="col-md-6">
-                <ul class="list">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contacts</a></li>
-                    <li><a href="#">Terms & Condition</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-        </div>
-      <div class="col-md-2 footer-social animated fadeInDown">
-          <h4>Follow Us</h4>
-          <ul>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">RSS</a></li>
-            </ul>
-        </div>
-      <div class="col-md-3 footer-ns animated fadeInRight">
-          <h4>Newsletter</h4>
-            <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
-            <p>
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
-                  </span>
-                </div><!-- /input-group -->
-             </p>
-        </div>
-    </div>
-</footer>
-  <!-- <footer>
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">
-          {{> footerSocialMediaLinks socialMediaLinks=branding.socialMediaLinks }}
-        </div>
-        <div class="col-xs-12 col-sm-3 footer-text">
-          <div class="row">
-            <div class="col-xs-6 col-sm-12">
-              <a id="about-button">
-                {{_ "footer_about" }}
-              </a>
-            </div>
-            <div class="col-xs-6 col-sm-12">
-              {{> languageSelect }}
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-3 footer-text">
-          <div class="row">
-            {{# if currentUser }}
-              <div class="col-xs-6 col-md-12">
-                <a class="sign-out" href="{{ pathFor 'signOut' }}" id="footer-signout">
-                  {{_ "footer_signOut" }}
-                </a>
-              </div>
-            {{ else }}
-              <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signUp' }}" id="footer-signup">
-                  {{_ "footer_signUp" }}
-                </a>
-              </div>
-              <div class="col-xs-6 col-md-12">
-                <a href="{{ pathFor 'signIn' }}" id="footer-signin">
-                  {{_ "footer_signIn" }}
-                </a>
-              </div>
-            {{/ if }}
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-3 footer-text">
-          <div class="row">
-            <div class="col-xs-6 col-md-12">
-              <a href="{{ pathFor 'privacyPolicy' }}" id="privacypolicy-button">
-                {{_ "footer_privacyPolicy_text" }}
-              </a>
-            </div>
-            <div class="col-xs-6 col-md-12">
-              <a href="{{ pathFor 'termsOfUse' }}" id="termsofuse-button">
-                {{_  "footer_termsOfUse_text" }}
-              </a>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-4 footer-brand animated fadeInLeft">
+        {{# if projectLogoExists }}
+        <a href="{{ pathFor 'home' }}" id="frontpage-button" class="pull-left">
+          <img class="footer-logo" src="{{ uploadedProjectLogoLink }}">
+        </a>
+        {{/ if }}
+        <p style="margin-top: 50px;">{{ branding.siteFooter }}</p>
       </div>
-      <div class="row">
-        <div class="col-xs-12 footer-text">
-          {{ branding.siteFooter }}
-        </div>
+      <div class="col-md-3 footer-nav animated fadeInUp">
+        <h4>Menu</h4>
+        <ul class="list">
+          <li><a id="about-button" style="cursor:pointer;">{{_ "footer_about" }}</a></li>
+          <li><a href="#">Contacts</a></li>
+          <li><a href="{{ pathFor 'termsOfUse' }}">{{_  "footer_termsOfUse_text" }}</a></li>
+          <li><a href="{{ pathFor 'privacyPolicy' }}">{{_ "footer_privacyPolicy_text" }}</a></li>
+        </ul>
+      </div>
+      {{> footerSocialMediaLinks socialMediaLinks=branding.socialMediaLinks }}
+      <div class="col-md-2 footer-nav animated fadeInUp">
+        {{> languageSelect }}
       </div>
     </div>
-  </footer> -->
+  </footer>
+  <!-- <footer>
+  <div class="container">
+  <div class="row">
+  <div class="col-xs-12 col-sm-3">
+  {{> footerSocialMediaLinks socialMediaLinks=branding.socialMediaLinks }}
+</div>
+<div class="col-xs-12 col-sm-3 footer-text">
+<div class="row">
+<div class="col-xs-6 col-sm-12">
+<a id="about-button">
+{{_ "footer_about" }}
+</a>
+</div>
+<div class="col-xs-6 col-sm-12">
+{{> languageSelect }}
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-3 footer-text">
+<div class="row">
+{{# if currentUser }}
+<div class="col-xs-6 col-md-12">
+<a class="sign-out" href="{{ pathFor 'signOut' }}" id="footer-signout">
+{{_ "footer_signOut" }}
+</a>
+</div>
+{{ else }}
+<div class="col-xs-6 col-md-12">
+<a href="{{ pathFor 'signUp' }}" id="footer-signup">
+{{_ "footer_signUp" }}
+</a>
+</div>
+<div class="col-xs-6 col-md-12">
+<a href="{{ pathFor 'signIn' }}" id="footer-signin">
+{{_ "footer_signIn" }}
+</a>
+</div>
+{{/ if }}
+</div>
+</div>
+<div class="col-xs-12 col-sm-3 footer-text">
+<div class="row">
+<div class="col-xs-6 col-md-12">
+<a href="{{ pathFor 'privacyPolicy' }}" id="privacypolicy-button">
+{{_ "footer_privacyPolicy_text" }}
+</a>
+</div>
+<div class="col-xs-6 col-md-12">
+<a href="{{ pathFor 'termsOfUse' }}" id="termsofuse-button">
+{{_  "footer_termsOfUse_text" }}
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 footer-text">
+{{ branding.siteFooter }}
+</div>
+</div>
+</div>
+</footer> -->
 </template>
