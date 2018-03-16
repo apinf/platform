@@ -4,10 +4,15 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Roles } from 'meteor/alanning:roles';
+
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
 
 Template.apiCatalogToolbar.onRendered(function () {
   // Get reference to template instance
@@ -55,5 +60,35 @@ Template.apiCatalogToolbar.events({
   'change [name=view-mode]': function (event) {
     // Set URL parameter
     FlowRouter.setQueryParams({ viewMode: event.target.value });
+  },
+});
+
+Template.apiCatalogToolbar.helpers({
+  userCanAddApi () {
+    // Get settigns document
+    const settings = Settings.findOne();
+
+    if (settings) {
+      // Get access setting value
+      // If access field doesn't exist, these is false. Allow users to add an API on default
+      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
+
+      // Allow user to add an API because not only for admin
+      if (!onlyAdminsCanAddApis) {
+        return true;
+      }
+
+      // Otherwise check of user role
+      // Get current user Id
+      const userId = Meteor.userId();
+
+      // Check if current user is admin
+      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+      return userIsAdmin;
+    }
+    // Return true because no settings are set
+    // By default allowing all user to add an API
+    return true;
   },
 });

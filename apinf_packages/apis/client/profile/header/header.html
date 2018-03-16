@@ -9,11 +9,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{> viewApiLogo }}
     </span>
     <h1 style="font-size: 1.2em;
-    font-weight: 600;
     color: #55626c;
     display: inline;
     float: left;
-    margin-top: 27px;
+    margin-top: 29px;
     left: 15px;
     position: relative;">
       {{ api.name }}
@@ -22,7 +21,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="float: left;
       position: absolute;
       left: 95px;
-      padding-top: 8px;
+      padding-top: 9px;
       color: #555;">
         {{ api.organization.name }}
       </a>
@@ -42,6 +41,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "viewApiNavigationMenu_details" }}
           </a>
         </li>
+
+        {{# if proxyBackend }}
+          <li>
+            <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}">
+              {{_ "apiViewAnalytics_button_viewAnalytics" }}
+            </a>
+          </li>
+        {{/ if}}
 
         {{# if userShouldSeeApiDocsTab }}
           <!-- API Console -->
@@ -71,57 +78,5 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </ul>
     </div>
-  </div>
-  <div class="container page-head-topblock block-wrapper ">
-      <!-- Header -->
-      <!-- {{# if currentUser }}
-        {{# if proxyBackend }}
-          <div>
-            <span class="pull-right" style="padding-top:0.6em;">
-              {{> apiKey api=api proxyBackend=proxyBackend }}
-            </span>
-          </div>
-        {{/ if }}
-      {{/ if }} -->
-      <div class="page-head-infoblock" style="margin-top: 1em;position:relative; display: block">
-        <!-- {{# if currentUser }}
-          {{> bookmark api=api }}
-        {{else}} -->
-          <!-- <a href="#" class="bookmark-button">
-            <div
-                class="api-card-bookmark"
-                data-toggle="tooltip"
-                data-placement="bottom"
-                title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
-              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
-              <i class="fa fa-bookmark bookmark-default"></i>
-            </div>
-          </a> -->
-        <!-- {{/ if }} -->
-
-        <div class="api-info">
-          <!-- {{> viewApiLogo }}
-          <h1 id="api-header" style="font-size: 1.4em; font-weight: 500; color: #55626c;">
-            {{ api.name }}
-          </h1> -->
-
-          <!-- {{# unless api.isPublic }}
-            <span class="label label-default"
-            style="background-color:transparent;
-            position:relative;
-            bottom:5px;
-            margin-left:5px;">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
-          {{/ unless }} -->
-
-        </div>
-      </div>
-
-      <div id="api-navigation-tabs" class="navigation-tabs">
-        {{# if proxyBackend }}
-          <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}" class="btn btn-sm btn-default pull-right">
-            {{_ "apiViewAnalytics_button_viewAnalytics" }}
-          </a>
-        {{/ if}}
-      </div>
   </div>
 </template>

@@ -4,25 +4,68 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiDetails">
+  <div class="page-head-topblock">
+      <!-- Header -->
+      <!-- {{# if currentUser }}
+        {{# if proxyBackend }}
+          <div>
+            <span class="pull-right" style="padding-top:0.6em;">
+              {{> apiKey api=api proxyBackend=proxyBackend }}
+            </span>
+          </div>
+        {{/ if }}
+      {{/ if }} -->
+      <div class="page-head-infoblock">
+        <!-- {{# if currentUser }}
+          {{> bookmark api=api }}
+        {{else}} -->
+          <!-- <a href="#" class="bookmark-button">
+            <div
+                class="api-card-bookmark"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
+              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+              <i class="fa fa-bookmark bookmark-default"></i>
+            </div>
+          </a> -->
+        <!-- {{/ if }} -->
+
+        <div class="api-info">
+          <h1 id="api-header" style="font-size: 1.4em; font-weight: 400; color: #55626c;">
+            {{# if api.organization }}
+            <!-- TODO: link to organization -->
+              {{ api.organization.name }}
+            {{ else }}
+              {{ api.getApiManagersByName }}
+            {{/ if }}
+            /<a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
+              {{ api.name }}
+            </a>
+          </h1>
+          <p style="color:#6d859e;margin-bottom:0">
+            {{ api.description }}
+          </p>
+
+          <!-- {{# unless api.isPublic }}
+            <span class="label label-default"
+            style="background-color:transparent;
+            position:relative;
+            bottom:5px;
+            margin-left:5px;">{{_ "viewApiPageHeader_privateLabel_text" }}</span>
+          {{/ unless }} -->
+
+        </div>
+      </div>
+
+  </div>
   <div class="row">
     <div class="col-lg-12 api-details-block">
-      {{# if api.description }}
-        <!-- <h2 id="description-title" style="font-size:16px;margin-top:0;">
-          {{_ "apiDetails_description_headingText" }}
-        </h2> -->
-        <h1 style="font-size:1.6em;margin-top:0;text-transform: none;">
-          Quick Start
-        </h1>
-        <p style="color:#6d859e;">
-          {{ api.description }}
-        </p>
-        <hr class="panel-hr" />
-      {{/ if }}
-        <!-- <h2 id="api-url-title" style="font-size:18px;margin-top:0;">
-          {{_ "apiDetails_baseUrl_headingText" }}
-        </h2> -->
+      <h1 style="font-size:1.6em;margin-top:0;text-transform: none;">
+        Quick Start
+      </h1>
         <h2 id="api-url-title" style="font-size:16px;margin-top:0;">
-          Endpoint URL
+          {{_ "apiDetails_baseUrl_headingText" }}
         </h2>
         <p style="color:#6d859e;">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
@@ -54,9 +97,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </button>
           </span>
         </div>
+        <div style="margin-top:10px">
+          <h2 id="api-url-title" style="font-size:16px;margin-top:0;">
+            Authorization
+          </h2>
+          <span>
+            X-Api-Key:
+            {{# if currentUser }}
+              {{# if proxyUrl }}
+                {{# unless disableApiKey }}
+                  {{# if hasApiKey }}
+                    {{ apiKey }}
+                  {{/ if }}
+                {{/ unless }}
+              {{/ if }}
+            {{/ if }}
+          </span>
+        </div>
     </div>
   </div>
-  <!-- {{# if currentUser }}
+  {{# if currentUser }}
     {{# if proxyUrl }}
       <div id="usage-instructions" class="bs-callout bs-callout-primary">
         <h4>
@@ -88,7 +148,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </ul>
       </div>
     {{/ if }}
-  {{/ if }} -->
+  {{/ if }}
   <!-- Embedded Related Media contents -->
   <!-- {{> relatedMedia entity=api }} -->
 

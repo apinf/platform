@@ -2,6 +2,7 @@
 	background-color: #2655C9;
 	padding-left: 45px;
 	padding-right: 45px;
+	min-height: 60px;
 
 	.navbar-logo {
 		padding-bottom: 10px;
@@ -17,7 +18,7 @@
 	}
 	.nav-tabs > li > a {
 		border: none;
-		color: rgba(255,255,255,1);
+		color: rgba(255,255,255,0.9);
 		text-transform: uppercase;
 		font-size: 12px;
 		letter-spacing: 0.6px;
@@ -32,23 +33,11 @@
 		background-color: #284DB2;
 		border-radius: 4px;
 	}
-	// .nav-tabs > li > a::after {
-	// 	content: "";
-	// 	background: #fff;
-	// 	height: 4px;
-	// 	position: absolute;
-	// 	width: 100%;
-	// 	left: 0px;
-	// 	bottom: 0px;
-	// 	transition: all 250ms ease 0s; transform: scale(0);
-	// }
+
 	.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
 		transform: scale(1);
 	}
-	// .tab-nav > li > a::after {
-	// 	background: #21527d none repeat scroll 0% 0%;
-	// 	color: #fff;
-	// }
+
 	.tab-pane {
 		padding: 5px 0;
 	}
@@ -113,4 +102,12 @@
 	border-bottom: 10px solid #fff;
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
+}
+
+.nav-bar-right-links a {
+	color: rgba(255,255,255,0.9);
+}
+
+.nav-bar-right-links a:hover, .nav-bar-right-links a:focus, .nav-bar-right-links a:active {
+	color: #fff;
 }

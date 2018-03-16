@@ -8,7 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div id="catalog-toolbar-navbar" class="block-wrapper">
         <div class="form-group">
-          <label for="sort-select" style="font-size: 12px;color: #4c6072;">
+          <label for="sort-select" style="color: #4c6072;">
             {{_ "catalog_toolbar_sortBy_title" }}
           </label>
           <select id="sort-select" class="form-control">
@@ -52,15 +52,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "catalog_toolbar_filterOptions_apisWithDocumentation" }}
             </label>
           </div>
-        {{/ if }}
 
         <!-- <div class="nav navbar-nav navbar-right">
           <a href="/rss/apis" target="_blank" class="rss-feed fa fa-rss-square fa-3x btn" title="{{_ 'apisRssIcon_tooltipText_Rss'}}">
           </a>
         </div> -->
-        <a href="#" class="btn btn-success" style="margin-top: 15px;width: 100%;">
-          Add New API
-        </a>
+        {{# if userCanAddApi }}
+          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success" style="margin-top: 15px;width: 100%;">
+            Add New API
+          </a>
+        {{/ if }}
+        {{/ if }}
       </div>
     </div>
 </template>

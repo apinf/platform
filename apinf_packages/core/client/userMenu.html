@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="userMenu">
-  <li class="dropdown pull-right">
+  <li class="dropdown pull-right nav-bar-right-links">
     <a
       href="#"
       class="dropdown-toggle"
@@ -13,7 +13,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       id="usermenu"
       aria-haspopup="true"
       aria-expanded="false"
-      style="text-decoration:none; text-transform:none;color:#fff;padding-right:0;top:4px;line-height:54px;">
+      style="text-decoration:none; text-transform:none;padding-right:0;top:4px;line-height:54px;">
         <i class="mdi mdi-account-circle" style="font-size:30px;"></i>
     </a>
     <ul class="dropdown-menu block-wrapper dropdown-menu-triangle-b-r" style="top: 54px;
@@ -37,7 +37,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </ul>
   </li>
   {{# if isInRole 'admin' }}
-    <li class="dropdown pull-right">
+    <li class="dropdown pull-right nav-bar-right-links">
       <a
         href="#"
         class="dropdown-toggle"
@@ -48,7 +48,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         aria-expanded="false"
         style="text-decoration:none; text-transform:none;top:4px;">
         <i class="mdi mdi-settings" style="padding-left: 5px;
-    font-size: 22px;color:#fff;padding-top:18px;"></i>
+    font-size: 22px;padding-top:18px;"></i>
       </a>
       <ul class="dropdown-menu block-wrapper dropdown-menu-triangle-b-r" style="right: 7px; top: 55px;">
     <li>
