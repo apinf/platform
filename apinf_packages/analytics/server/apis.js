@@ -200,23 +200,24 @@ AnalyticsV1.addRoute('analytics', {
       // Default value for apisBy is 'organization'
       const apisBy = queryParams.apisBy || 'organization';
 
-      // Check if correct value (owner/organization) was given
+      // Check if correct value (owner/organization) was given and
+      // prepare list of managed APIs according to selection
       if (apisBy === 'owner') {
-        // Organization ID can not be given when apisBy has value 'owner'
+        // Error response if Organization ID is given when apisBy has value 'owner'
         if (queryParams.organizationId) {
           return errorMessagePayload(400,
             'Parameter "organizationId" is not permitted when "apisBy" has value "owner".');
         }
-        // Get list of Apis managed by User
+        // Get list of APIs managed by User
         const apisFoundList = Apis.find({ managerIds: managerId }).fetch();
-        // Cleaning: Return list of IDs
+        // Cleaning: Return list of only API IDs
         managedApis = apisFoundList.map(api => {
           return api._id;
         });
 
       } else if (apisBy === 'organization') {
 
-        // Check if Organization exists
+        // Check if given Organization exists
         const organizationId = queryParams.organizationId;
         if (organizationId) {
           const organization = Organizations.findOne(organizationId);
@@ -234,58 +235,60 @@ AnalyticsV1.addRoute('analytics', {
         });
 
         console.log('organizationList=', organizationList);
-        // Is User a manager in any Organization
+        // Error if User is not a manager in any Organization
         if (!Array.isArray(organizationList) || !organizationList.length) {
           return errorMessagePayload(400, 'User is not an admin in any Organization.');
         }
 
         // Get list of APIs under managed Organizations
-        const managedFoundApis = OrganizationApis.find({ organizationId: { $in: organizationList } }).fetch();
+        const managedFoundApis = OrganizationApis.find({
+          organizationId: { $in: organizationList } }).fetch();
 
-        // Cleaning: Return list of IDs
+        // Cleaning: Return list of IDs only
         managedApis = managedFoundApis.map(api => {
           return api.apiId;
         });
 
-        // Is User a managing APIs via Organizations
+        // Error if User is not managing any APIs via Organizations
         if (!Array.isArray(managedApis) || !managedApis.length) {
           return errorMessagePayload(400, 'User is not an managing any APIs via Organization.');
         }
 
       } else {
+        // Error if erroneous value given in apisBy
         return errorMessagePayload(400, 'Parameter "apisBy" has erroneous value.',
          'apisBy', apisBy);
       }
 
-      // Default value for period is 0
+      // If period is not given, use default value (0)
       let period = this.queryParams.period || 0;
 
-      // Period must be integer
+      // Error if period is not an integer
       if (!Number.isInteger(period * 1)) {
         const message = 'Parameter "period" has to be an integer.';
         return errorMessagePayload(400, message, 'period', period);
       }
       period *= 1;
 
-      // Period value must be 0 - 30
+      // Error if period value is not 0 - 30
       if (period > 30 || period < 0) {
         const message = 'Parameter "period" value erroneous.';
         return errorMessagePayload(400, message, 'period', period);
       }
 
+      // Prepare beginning and end of period
       let fromDate, toDate;
 
       // Check parameter "startDate"
       if (queryParams.startDate) {
-        // When "period" is zero, no "startDate" is allowed
+        // Error if "period" is zero and "startDate" is given
         if (period === 0 ) {
           return errorMessagePayload(400, 'Parameter "startDate" can not be given when "period" is zero!');
         }
         // Is startDate valid?
         const startDate = queryParams.startDate;
-        // Start date has to be according to ISO 8601
+        // Error if Start date is not according to ISO 8601
         if (!moment(startDate).isValid()) {
-          // Error message
           const message = 'Parameter "startDate" must be a valid date.';
           return errorMessagePayload(400, message, 'startDate', startDate);
         }
@@ -295,19 +298,19 @@ AnalyticsV1.addRoute('analytics', {
         // Get timestamp of period after start 24:00:00 Date time (included value)
         toDate = moment(fromDate).add(period, 'd').valueOf();
 
-        // StartDate must be in past
+        // Error if StartDate is not in past
         if (fromDate > moment(0, 'HH').valueOf()) {
           const message = 'Parameter "startDate" must be in past.';
           return errorMessagePayload(400, message);
         }
 
-        // StartDate must be max 30 days in past
+        // Error if StartDate is more than 30 days in past
         if (fromDate < moment(0, 'HH').subtract(30, 'days').valueOf()) {
           const message = 'Parameter "startDate" must be max 30 days in past.';
           return errorMessagePayload(400, message);
         }
 
-        // StartDate + period must not exceed yesterday
+        // Error if StartDate + period exceed yesterday
         if (toDate > moment(0, 'HH').valueOf()) {
           const message = 'Period of days must not exceed yesterday.';
           return errorMessagePayload(400, message);
@@ -335,45 +338,14 @@ AnalyticsV1.addRoute('analytics', {
       console.log('toDate_h=', moment(toDate).format());
       console.log('managedApis=', managedApis);
 
-      // Pass an optional search string for looking up inventory.
-      if (queryParams.q) {
-        query.$or = [
-          {
-            name: {
-              $regex: queryParams.q,
-              $options: 'i', // case-insensitive option
-            },
-          },
-          {
-            description: {
-              $regex: queryParams.q,
-              $options: 'i', // case-insensitive option
-            },
-          },
-          {
-            url: {
-              $regex: queryParams.q,
-              $options: 'i', // case-insensitive option
-            },
-          },
-        ];
-      }
-
-      // Include only id and name
-      options.fields = {
-        _id: 1,
-        name: 1,
-      };
-
       // Create list of API analytical data based on ProxyBackends
-
       const apiAnalyticsList = ProxyBackends.find({
         $and : [
-          { apiId: { $in: managedApis }},
+          { 'apiId': { $in: managedApis }},
           { 'type': 'apiUmbrella' }
         ]
         }).map((proxyBackend) => {
-
+        console.log('proxy_api=', proxyBackend.apiId);
         const apiAnalytics = {};
 
         // Get connected proxy url
@@ -473,13 +445,13 @@ AnalyticsV1.addRoute('analytics/:id', {
 
     },
     action () {
-      // Get Manager ID from header
+      // Error if no Manager ID from header
       const managerId = this.request.headers['x-user-id'];
       if (!managerId) {
         return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id).');
       }
 
-      // Id of API, of which analytics data is required
+      // Error is API id, is missing
       const apiId = this.urlParams.id;
       if (!apiId) {
         return errorMessagePayload(404, 'API ID is missing');
@@ -487,13 +459,13 @@ AnalyticsV1.addRoute('analytics/:id', {
 
       const queryParams = this.queryParams;
 
-      // With "period" neither "date" nor "interval" simultaneously
+      // Error if "date" or "interval" is given with "period"
       if (queryParams.period && (queryParams.date || queryParams.interval)) {
         return errorMessagePayload(400,
           'Parameters "date" or "interval " can not be given with "period"!');
       }
 
-      // One of the parameters period and date must be given
+      // Error if neither "period" nor "date" is given
       if (!queryParams.period && !queryParams.date) {
         return errorMessagePayload(400, 'Either parameter "date" or "period" must be given!');
       }
@@ -504,14 +476,14 @@ AnalyticsV1.addRoute('analytics/:id', {
         // Default value for period is 0
         let period = this.queryParams.period || 0;
 
-        // Period must be integer
+        // Error if "Period" is not integer
         if (!Number.isInteger(period * 1)) {
           const message = 'Parameter "period" has to be an integer.';
           return errorMessagePayload(400, message, 'period', period);
         }
         period *= 1;
 
-        // Period value must be 0 - 30
+        // Error if "Period" is not between 0 - 30
         if (period > 30 || period < 0) {
           const message = 'Parameter "period" value erroneous.';
           return errorMessagePayload(400, message, 'period', period);
@@ -536,9 +508,8 @@ AnalyticsV1.addRoute('analytics/:id', {
       } else {
         // Date is given
         let date = this.queryParams.date;
-        // Format check for date to be ISO 8601
+        // Error if "date" format is not according to ISO 8601
         if (!moment(date).isValid()) {
-          // Error message
           const message = 'Parameter "date" must be a valid date.';
           return errorMessagePayload(400, message, 'date', date);
         }
@@ -547,13 +518,13 @@ AnalyticsV1.addRoute('analytics/:id', {
         fromDate = moment(date).valueOf();
         // Get timestamp of period after start 24:00:00 Date time (included value)
         toDate = moment(fromDate).add(1, 'd').valueOf();
-        // Date must be in past
+        // Error is "Date" is not in past
         if (fromDate > moment(0, 'HH').valueOf()) {
           const message = 'Parameter "date" must be in past.';
           return errorMessagePayload(400, message);
         }
 
-        // StartDate must be max 30 days in past
+        // Error is "StartDate" is over 30 days in past
         if (fromDate < moment(0, 'HH').subtract(30, 'days').valueOf()) {
           const message = 'Parameter "date" must be max 30 days in past.';
           return errorMessagePayload(400, message);
@@ -562,7 +533,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         interval = queryParams.interval || 60;
 
         if (interval) {
-          // interval must be an integer
+          // Error if "interval" is not an integer
           if (!Number.isInteger(interval * 1)) {
             const message = 'Parameter "interval" has to be an integer.';
             return errorMessagePayload(400, message, 'interval', interval);
@@ -570,7 +541,7 @@ AnalyticsV1.addRoute('analytics/:id', {
           interval *= 1;
         }
         let allowedIntervals = [30, 60];
-        // Check if correct value was given
+        // Error is "interval" is not accepted value
         if (!allowedIntervals.includes(interval)) {
           return errorMessagePayload(400, 'Parameter "interval" has erroneous value.',
           'interval', interval);
@@ -587,12 +558,12 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Find API with specified ID
       const api = Apis.findOne(apiId);
 
-      // If API doesn't exist
+      // Error if API doesn't exist
       if (!api) {
         return errorMessagePayload(404, 'API with specified ID is not found.');
       }
 
-      // If API exists but user can not manage
+      // Error if API exists but user can not manage
       if (!api.currentUserCanManage(managerId)) {
         return errorMessagePayload(403, 'You do not have permission for this API.');
       }
@@ -600,7 +571,7 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Return API Proxy's URL, if it exists
       const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
 
-      // If proxy backend for API does not exist
+      // Error if proxy backend for API does not exist
       if (!proxyBackend) {
         return errorMessagePayload(404, 'No Proxy Backend exists for API.');
       }
