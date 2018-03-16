@@ -27,14 +27,12 @@ Template.verfication.events({
           .addClass('at-error alert-danger')
           .text(TAPi18n.__("user_verification_message"));
       } else {
-        console.log(res)
         if (res.status === "failed") {
           $('#alert-message').css('display', 'block')
             .removeClass('at-result alert-success')
             .addClass('at-error alert-danger')
             .text(res.message);
         } else {
-          console.log("else")
           $('#alert-message').css('display', 'block')
             .removeClass('at-error alert-danger')
             .addClass('at-result alert-success')

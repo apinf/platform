@@ -17,7 +17,6 @@ Template.signIn.events({
 
     // login with fiware
     Meteor.loginWithFiware ((err) => {
-      console.log(err)
       if (err) {
         $('#alert-message').css('display', 'block')
           .addClass('at-error alert-danger')
@@ -60,7 +59,6 @@ Template.signIn.events({
     // login with email and password
     Meteor.loginWithPassword(user.usernameAndEmail, user.password, (err) => {
       if (err) {
-        console.log(err)
         $('#alert-message').css('display', 'block')
           .addClass('at-error alert-danger')
           .text(TAPi18n.__("user_signin_message_loginForbidden"));

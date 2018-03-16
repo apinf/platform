@@ -17,7 +17,6 @@ Template.signUp.events({
 
     // login with fiware
     Meteor.loginWithFiware ((err) => {
-      console.log(err)
       if (err) {
         $('#alert-message').css('display', 'block')
           .addClass('at-error alert-danger')

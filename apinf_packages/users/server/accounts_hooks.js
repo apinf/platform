@@ -129,6 +129,5 @@ Accounts.emailTemplates.enrollAccount.subject = function (user) {
 };
 
 Accounts.emailTemplates.enrollAccount.text = function (user, link) {
-  console.log(link)
   return `To verify your email address visit the following link: \n \n ${link}`
 }
