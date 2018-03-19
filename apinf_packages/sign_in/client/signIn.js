@@ -8,32 +8,29 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.signIn.events({
-  'click #at-fiware' () {
-
+  'click #at-fiware': function () {
     // login with fiware
-    Meteor.loginWithFiware ((err) => {
+    Meteor.loginWithFiware((err) => {
       if (err) {
         $('#alert-message').css('display', 'block')
           .addClass('at-error alert-danger')
-          .text(TAPi18n.__("user_signin_message_notAbleToSignInWithFiware"));
+          .text(TAPi18n.__('user_signin_message_notAbleToSignInWithFiware'));
       } else {
         $('#alert-message').css('display', 'none')
           .removeClass('at-error alert-danger')
-          .text("");
+          .text('');
         FlowRouter.go('/');
       }
     });
   },
-  'click #at-github' () {
-
+  'click #at-github': function () {
     // login with github
-    Meteor.loginWithGithub ({
-      requestPermission: ['user', 'public_repo']
+    Meteor.loginWithGithub({
+      requestPermission: ['user', 'public_repo'],
     }, (err) => {
       if (err) {
         $('#alert-message').css('display', 'block')
@@ -47,25 +44,25 @@ Template.signIn.events({
       }
     });
   },
-  'submit #at-pwd-form' (event) {
+  'submit #at-pwd-form': function (event) {
     event.preventDefault();
-    
+
     // get user data email and password
     const user = {
       usernameAndEmail: $('#at-field-username_and_email').val(),
-      password: $('#at-field-password').val()
-    }
+      password: $('#at-field-password').val(),
+    };
 
     // login with email and password
     Meteor.loginWithPassword(user.usernameAndEmail, user.password, (err) => {
       if (err) {
         $('#alert-message').css('display', 'block')
           .addClass('at-error alert-danger')
-          .text(TAPi18n.__("user_signin_message_loginForbidden"));
+          .text(TAPi18n.__('user_signin_message_loginForbidden'));
       } else {
         $('#alert-message').css('display', 'none')
           .removeClass('at-error alert-danger')
-          .text("");
+          .text('');
         FlowRouter.go('/');
       }
     });

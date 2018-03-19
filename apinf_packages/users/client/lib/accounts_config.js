@@ -38,7 +38,7 @@ AccountsTemplates.configure({
 });
 
 // rearranging the fields on Sign-Up, so that username comes first.
-/*const passwordField = AccountsTemplates.removeField('password');
+/* const passwordField = AccountsTemplates.removeField('password');
 
 AccountsTemplates.removeField('email');
 AccountsTemplates.addFields([
@@ -83,4 +83,4 @@ AccountsTemplates.configureRoute('signUp', {
   path: '/sign-up',
   layoutTemplate: 'masterLayout',
   contentRegion: 'main',
-});*/
+}); */

@@ -4,17 +4,17 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
+import { Accounts } from 'meteor/accounts-base';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.resetPassword.events({
-  'submit #at-reset-password-form' (event) {
+  'submit #at-reset-password-form': function (event) {
     event.preventDefault();
-    
+
     // Get user email
     const userEmail = $('#at-field-email').val();
 
