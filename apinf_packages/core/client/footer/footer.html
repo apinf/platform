@@ -15,7 +15,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <p style="margin-top: 50px;">{{ branding.siteFooter }}</p>
       </div>
       <div class="col-md-3 footer-nav animated fadeInUp">
-        <h4>Menu</h4>
+        <h4 style="color: rgba(255,255,255,0.7);">Links</h4>
         <ul class="list">
           <li><a id="about-button" style="cursor:pointer;">{{_ "footer_about" }}</a></li>
           <li><a href="#">Contacts</a></li>
@@ -29,66 +29,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   </footer>
-  <!-- <footer>
-  <div class="container">
-  <div class="row">
-  <div class="col-xs-12 col-sm-3">
-  {{> footerSocialMediaLinks socialMediaLinks=branding.socialMediaLinks }}
-</div>
-<div class="col-xs-12 col-sm-3 footer-text">
-<div class="row">
-<div class="col-xs-6 col-sm-12">
-<a id="about-button">
-{{_ "footer_about" }}
-</a>
-</div>
-<div class="col-xs-6 col-sm-12">
-{{> languageSelect }}
-</div>
-</div>
-</div>
-<div class="col-xs-12 col-sm-3 footer-text">
-<div class="row">
-{{# if currentUser }}
-<div class="col-xs-6 col-md-12">
-<a class="sign-out" href="{{ pathFor 'signOut' }}" id="footer-signout">
-{{_ "footer_signOut" }}
-</a>
-</div>
-{{ else }}
-<div class="col-xs-6 col-md-12">
-<a href="{{ pathFor 'signUp' }}" id="footer-signup">
-{{_ "footer_signUp" }}
-</a>
-</div>
-<div class="col-xs-6 col-md-12">
-<a href="{{ pathFor 'signIn' }}" id="footer-signin">
-{{_ "footer_signIn" }}
-</a>
-</div>
-{{/ if }}
-</div>
-</div>
-<div class="col-xs-12 col-sm-3 footer-text">
-<div class="row">
-<div class="col-xs-6 col-md-12">
-<a href="{{ pathFor 'privacyPolicy' }}" id="privacypolicy-button">
-{{_ "footer_privacyPolicy_text" }}
-</a>
-</div>
-<div class="col-xs-6 col-md-12">
-<a href="{{ pathFor 'termsOfUse' }}" id="termsofuse-button">
-{{_  "footer_termsOfUse_text" }}
-</a>
-</div>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-xs-12 footer-text">
-{{ branding.siteFooter }}
-</div>
-</div>
-</div>
-</footer> -->
 </template>

@@ -4,46 +4,31 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiDetails">
+  {{# if api.description }}
   <div class="page-head-topblock">
       <!-- Header -->
-      <!-- {{# if currentUser }}
-        {{# if proxyBackend }}
-          <div>
-            <span class="pull-right" style="padding-top:0.6em;">
-              {{> apiKey api=api proxyBackend=proxyBackend }}
-            </span>
-          </div>
-        {{/ if }}
-      {{/ if }} -->
       <div class="page-head-infoblock">
-        <!-- {{# if currentUser }}
-          {{> bookmark api=api }}
-        {{else}} -->
-          <!-- <a href="#" class="bookmark-button">
-            <div
-                class="api-card-bookmark"
-                data-toggle="tooltip"
-                data-placement="bottom"
-                title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
-              <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
-              <i class="fa fa-bookmark bookmark-default"></i>
-            </div>
-          </a> -->
-        <!-- {{/ if }} -->
-
         <div class="api-info">
-          <h1 id="api-header" style="font-size: 1.4em; font-weight: 400; color: #55626c;">
-            {{# if api.organization }}
-            <!-- TODO: link to organization -->
-              {{ api.organization.name }}
-            {{ else }}
-              {{ api.getApiManagersByName }}
-            {{/ if }}
-            /<a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
-              {{ api.name }}
+          <!-- <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+            About
+          </h2> -->
+          <!-- <div class="pull-right" style="display:inline;">
+          {{# if currentUser }}
+            {{> bookmark api=api }}
+          {{ else }}
+            <a href="#" class="bookmark-button">
+              <div
+                  class="api-card-bookmark"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
+                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
+                <i class="fa fa-bookmark bookmark-default"></i>
+              </div>
             </a>
-          </h1>
-          <p style="color:#6d859e;margin-bottom:0">
+          {{/ if }}
+        </div> -->
+          <p style="color:#37474F;margin-bottom:0;font-size:16px;padding-bottom:1em;">
             {{ api.description }}
           </p>
 
@@ -57,51 +42,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         </div>
       </div>
-
+      <hr style="color: rgba(59, 59, 88, 0.15);">
   </div>
+  {{/ if }}
   <div class="row">
     <div class="col-lg-12 api-details-block">
-      <h1 style="font-size:1.6em;margin-top:0;text-transform: none;">
-        Quick Start
-      </h1>
-        <h2 id="api-url-title" style="font-size:16px;margin-top:0;">
+        {{# if proxyUrl }}
+      <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+        Get Started. <span style="font-weight:400;">Three simple steps to start using this API.</span>
+      </h2>
+        <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
+          <span class="num">1</span>
           {{_ "apiDetails_baseUrl_headingText" }}
         </h2>
-        <p style="color:#6d859e;">
+        <a href="{{ proxyUrl }}" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:600;border-radius: 2px;">
+          {{ proxyUrl }}
+          <i class="mdi mdi-open-in-new"></i>
+        </a>
+        <p style="color:#6d859e;margin-top:1.5em;">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
           In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
         </p>
-        <div class="input-group">
-          {{# if proxyUrl }}
-          <input
-            type="text"
-            class="form-control"
-            id="api-url"
-            value="{{ proxyUrl }}" disabled>
-            {{ else }}
-            <input
-              type="text"
-              class="form-control"
-              id="api-url"
-              value="{{ api.url }}" disabled>
-            {{/ if }}
-          <span class="input-group-btn">
-            <button
-              class="btn btn-default"
-              id="copyApiUrl"
-              type="button"
-              data-original-title="Copied!"
-              data-clipboard-target="#api-url">
-              <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
-              &nbsp;&nbsp;Copy to clipboard
-            </button>
-          </span>
-        </div>
-        <div style="margin-top:10px">
-          <h2 id="api-url-title" style="font-size:16px;margin-top:0;">
+        <div style="margin-top:2em;">
+          <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
+            <span class="num">2</span>
             Authorization
           </h2>
-          <span>
+          <span style="padding: 10px 15px;background-color:#ECEFF1;color:#37474F;text-decoration:none;font-weight:600;border-radius: 2px;">
             X-Api-Key:
             {{# if currentUser }}
               {{# if proxyUrl }}
@@ -112,11 +79,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{/ unless }}
               {{/ if }}
             {{/ if }}
+            <i class="mdi mdi-content-copy"></i>
           </span>
+          <p style="color:#6d859e;margin-top:1.5em;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
+            In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+          </p>
         </div>
+      <div style="margin-top:2em;">
+        <h2 style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
+          <span class="num">3</span>
+          Documentation
+        </h2>
+        <p style="color:#6d859e;margin-top:1.5em;">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
+          In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+        </p>
+      </div>
+      {{ else }}
+      <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+        API is not configured
+      </h2>
+      <p style="color:#6d859e;margin-top:1.5em;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
+        In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+      </p>
+      {{/ if }}
     </div>
   </div>
-  {{# if currentUser }}
+  <!-- {{# if currentUser }}
     {{# if proxyUrl }}
       <div id="usage-instructions" class="bs-callout bs-callout-primary">
         <h4>
@@ -148,7 +139,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </ul>
       </div>
     {{/ if }}
-  {{/ if }}
+  {{/ if }} -->
   <!-- Embedded Related Media contents -->
   <!-- {{> relatedMedia entity=api }} -->
 

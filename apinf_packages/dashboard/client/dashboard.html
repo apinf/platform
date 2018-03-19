@@ -4,24 +4,29 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardPage">
-  <div class="container">
-    <div class="row page-header">
-      <div class="col-xs-12 col-sm-9">
-        <h1 class="page">
+    <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
+      <div class="col-md-4" style="padding-left: 0;">
+        <h1>
           {{_ "dashboardPage_title_dashboard" }}
         </h1>
       </div>
-      <div class="col-xs-12 col-sm-3">
-        <div class="search">
+      <div class="col-md-4">
+        <div class="search" style="margin-top:1em;">
           <i class="fa fa-search"></i>
           <input type="text" class="form-control pull-right" id="search-box"
                  placeholder={{_ "dashboardPage_placeholderText_search" }} >
         </div>
       </div>
+      <div class="col-md-4 text-right" style="margin-top: 1em;padding-right: 0;">
+        {{# if Template.subscriptionsReady }}
+          {{> dashboardToolbar proxiesList=proxiesList }}
+        {{/ if }}
+      </div>
     </div>
+  <div class="container block-wrapper" style="padding-top: 0;padding-bottom: 0;">
 
     {{# if Template.subscriptionsReady }}
-      {{> dashboardToolbar proxiesList=proxiesList }}
+      <!-- {{> dashboardToolbar proxiesList=proxiesList }} -->
       <!-- Make sure an API is connected to proxy -->
       {{# if proxyBackendsCount }}
 
@@ -52,7 +57,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{ else }}
         <!-- Display a message about "No connected API" -->
         <div class="alert alert-warning alert-text" role="alert">
-          <p>
+          <p style="margin: 20px 30px;">
             {{_ 'dashboardPage_text_noProxyBackends' }}
           </p>
         </div>

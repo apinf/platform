@@ -4,10 +4,10 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="proxies">
-  <div class="container padded-container">
+  {{> settingsMenu }}
+  <div class="container">
     <div class="row">
-      {{> settingsMenu }}
-      <div class="col-md-6">
+      <div class="col-md-6 col-md-offset-3 block-wrapper">
         <h2>
           <button class="btn btn-default btn-sm pull-right" id="add-proxy">
             {{_ "proxies_addProxy" }}

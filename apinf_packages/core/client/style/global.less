@@ -21,13 +21,18 @@ html, body, h1, h2, h3, h4, h5, h6, p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #5c617b;
+  color: #37474F;
+  font-family: @headings-font-family;
+  font-weight: @headings-font-weight;
 }
 
 h1 {
   font-size: 1.4em;
-  font-weight: @headings-font-weight;
 }
+//
+// .special-headings {
+//   font-family: "IBM Plex Sans", sans-serif;
+// }
 
 html, body, #__blaze-root {
   height: 100%
@@ -41,7 +46,7 @@ html, body, #__blaze-root {
 
 a:hover, a:focus {
   color: @link-hover-color;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a {
@@ -122,7 +127,7 @@ hr {
 }
 
 .control-label, .form-group label {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   font-size: 14px;
   color: #4c6072;
 }
@@ -132,6 +137,25 @@ hr {
   border: none;
   border-radius: 5px;
   box-shadow: 0 1px 3px 0 rgba(59,59,88,.15);
-  padding: 15px;
+  padding: 20px;
   margin-top: 20px;
 }
+
+.mdi-delete {
+  font-size: 14px;
+}
+
+.form-control {
+  border: 1px solid #C1C7CD !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.form-control::-webkit-input-placeholder { color: #6d859e; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #6d859e; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #6d859e; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #6d859e; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #6d859e; }  /* Microsoft Edge */

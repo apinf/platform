@@ -7,8 +7,8 @@
 import { TAPi18n } from 'meteor/tap:i18n';
 
 export function arrowDirection (parameter, bucket) {
-  let positiveTrend = 'arrow-up';
-  let negativeTrend = 'arrow-down';
+  let positiveTrend = 'trending-up';
+  let negativeTrend = 'trending-down';
   let comparison;
 
   switch (parameter) {
@@ -18,8 +18,8 @@ export function arrowDirection (parameter, bucket) {
 
     case 'time':
       comparison = bucket.compareResponse;
-      positiveTrend = 'arrow-up_time';
-      negativeTrend = 'arrow-down_time';
+      positiveTrend = 'trending-up';
+      negativeTrend = 'trending-down';
       break;
 
     case 'users':
@@ -103,7 +103,7 @@ export function summaryComparing (parameter, bucket, timeframe) {
   // Make sure trend exists
   if (direction && percentages) {
     // If trend is positive
-    if (direction === 'arrow-up' || direction === 'arrow-up_time') {
+    if (direction === 'trending-up' || direction === 'trending-up') {
       // Metric is better
       trend = TAPi18n.__('summaryComparing_trendDirection_higher');
     } else {

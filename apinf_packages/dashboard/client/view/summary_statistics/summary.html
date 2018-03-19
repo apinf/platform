@@ -6,26 +6,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="dashboardSummaryStatistic">
   {{# if displayTable }}
     <!-- Table head -->
-    <h4>
+    <h2 style="margin: 0;
+    font-size: 14px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 0;
+    padding: 20px 20px;
+    font-weight: 400;
+    border-bottom: 1px solid #ecf3f8;">
       {{ tableTitle }} ({{ count }})
-    </h4>
-
-    <div class="dashboard-table-row statistic-title">
-      <div class="row">
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_apiName' }}
-        </div>
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_requestsNumber' }}
-        </div>
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_responseTime' }}
-        </div>
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_users' }}
-        </div>
-      </div>
-    </div>
+      <span class="pull-right" style="color: #6d859e;font-size: 12px;padding-top: 2px;">Analytics metrics</span>
+    </h2>
 
     <div class="statistic-block">
       <!-- Table body -->
@@ -33,33 +24,48 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# with dataset }}
           <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
             <div class="row">
-              <div class="col-xs-3">
-                {{ apiName }}
+              <div class="col-xs-6">
+                <h2 class="special-headings" style="
+                font-weight: 600;
+                font-size: 16px;
+                padding-bottom: 7px;
+                color: #37474F;
+                margin: 0;">{{ apiName }}</h2>
+                <span style="font-size: 12px;color:#5c617b;border-radius: 2px;">{{ prefix }}</span>
               </div>
-              <div class="col-xs-3">
-                <span class="request-number">
-                  {{ requestNumber }}
-                </span>
-                <div class="{{ arrowDirection 'requests' }}"></div>
-                <span class="{{ textColor 'requests' }}">
+              <div class="col-xs-2 text-left">
+                <div style="display:inline;">
+                  <span class="summary-number-label">Requests</span>
+                  <span class="request-number">
+                    {{ requestNumber }}
+                  </span>
+                </div>
+                <i class="mdi mdi-{{ arrowDirection 'requests' }}" style="font-size: inherit;"></i>
+                <span class="{{ textColor 'requests' }}" style="font-size:12px;">
                   {{ percentages 'requests' }}
                 </span>
               </div>
-              <div class="col-xs-3">
-                <span class="response-time">
-                  {{ medianResponseTime }} ms
-                </span>
-                <div class="{{ arrowDirection 'time' }}"></div>
-                <span class="{{ textColor 'time' }}">
+              <div class="col-xs-2 text-left">
+                <div style="display:inline;">
+                  <span class="summary-number-label">Response</span>
+                  <span class="response-time">
+                    {{ medianResponseTime }} ms
+                  </span>
+                </div>
+                <i class="mdi mdi-{{ arrowDirection 'time' }}" style="font-size: inherit;"></i>
+                <span class="{{ textColor 'time' }}" style="font-size:12px;">
                   {{ percentages 'time' }}
                 </span>
               </div>
-              <div class="col-xs-3">
-                <span class="unique-users">
-                  {{ avgUniqueUsers }}
-                </span>
-                <div class="{{ arrowDirection 'users' }}"></div>
-                <span class="{{ textColor 'users' }}">
+              <div class="col-xs-2 text-left">
+                <div style="display:inline;">
+                  <span class="summary-number-label">Users</span>
+                  <span class="unique-users">
+                    {{ avgUniqueUsers }}
+                  </span>
+                </div>
+                <i class="mdi mdi-{{ arrowDirection 'users' }}" style="font-size: inherit;"></i>
+                <span class="{{ textColor 'users' }}" style="font-size:12px;">
                   {{ percentages 'users' }}
                 </span>
               </div>

@@ -4,8 +4,6 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardToolbar">
-  <div class="row">
-    <div class="col-xs-12">
       <!-- <div class="form-group pull-left">
         <label for="select-proxy">
           {{_ 'dashboardToolbar_labelText_proxy' }} &nbsp;
@@ -20,7 +18,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ each }}
         </select>
       </div> -->
-      <div class="form-group pull-right">
         <select name="sort" class="form-control toolbar-select">
           <option value="name">
             {{_ 'dashboardToolbar_optionText_apiName' }}
@@ -35,10 +32,5 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardToolbar_optionText_time' }}
           </option>
         </select>
-      </div>
-      <div class="form-group pull-left">
         {{> dateRangePicker }}
-      </div>
-    </div>
-  </div>
 </template>

@@ -4,27 +4,18 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="settings">
-  <div class="container padded-container">
+  {{> settingsMenu }}
+  <div class="container">
     <div class="row">
-      {{> settingsMenu }}
-
       {{# autoForm
         collection=settingsCollection
         doc=editDoc
         id="settings"
         type=formType }}
-      <div class="col-md-6 settings-fields">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <span class="panel-title">
-              {{_ "settings_panelTitle_addingApisAndOrganizations" }}
-            </span>
-          </div>
-          <div class="panel-body">
-            {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
-            {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
-          </div>
-        </div>
+      <div class="col-md-6 col-md-offset-3 block-wrapper settings-fields">
+        {{_ "settings_panelTitle_addingApisAndOrganizations" }}
+        {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
+        {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
         <div class="panel panel-default">
           <div class="panel-heading">
             <span class="panel-title">
@@ -86,14 +77,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           </div>
         </div>
-        <div id="form-buttons">
-          <button
-            type="submit"
-            class="btn btn-lg btn-success"
-            id="save-settings">
-            {{_ "settings_save" }}
-          </button>
-        </div>
+        <button
+          type="submit"
+          class="btn btn-success"
+          id="save-settings">
+          {{_ "settings_save" }}
+        </button>
       </div>
       {{/ autoForm }}
     </div>

@@ -4,16 +4,15 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="loginPlatforms">
-  <div class="container padded-container">
+  {{> settingsMenu }}
+  <div class="container">
     <div class="row">
-      {{> settingsMenu }}
-
       {{# autoForm
         collection=loginPlatformsCollection
         doc=editDoc
         id="loginPlatforms"
         type=formType }}
-      <div class="col-md-6 login-platforms-fields">
+      <div class="col-md-6 col-md-offset-3 block-wrapper login-platforms-fields">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
