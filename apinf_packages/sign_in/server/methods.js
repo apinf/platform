@@ -11,7 +11,7 @@ import { check } from 'meteor/check';
 import { Accounts } from 'meteor/accounts-base';
 
 Meteor.methods({
-  'userVerification': function (userEmail) {
+  userVerification (userEmail) {
     check(userEmail, String);
     // check user exists or not
     const userData = Meteor.users.findOne({ 'emails.0.address': userEmail });
@@ -31,11 +31,11 @@ Meteor.methods({
       };
     }
     let message = 'A new email has been sent to you.';
-    message += " If the email doesn't show up in your inbox, be sure to check your spam folderx."; 
+    message += " If the email doesn't show up in your inbox, be sure to check your spam folderx.";
     Accounts.sendEnrollmentEmail(userData._id);
     return {
       status: 'success',
-      message: message,
+      message,
     };
   },
 });
