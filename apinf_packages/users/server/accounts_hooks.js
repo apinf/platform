@@ -23,7 +23,6 @@ const loginPlatformsData = LoginPlatforms.findOne();
 
 // Get check Login Platform data is available or not
 if (loginPlatformsData) {
-
   // get githubConfiguration from DB
   const githubConfiguration = loginPlatformsData.githubConfiguration;
   // check githubConfiguration is available or not.

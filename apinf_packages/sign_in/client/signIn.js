@@ -35,11 +35,11 @@ Template.signIn.events({
       if (err) {
         $('#alert-message').css('display', 'block')
           .addClass('at-error alert-danger')
-          .text(TAPi18n.__("user_signin_message_notAbleToSignInWithGitHub"));
+          .text(TAPi18n.__('user_signin_message_notAbleToSignInWithGitHub'));
       } else {
         $('#alert-message').css('display', 'none')
           .removeClass('at-error alert-danger')
-          .text("");
+          .text('');
         FlowRouter.go('/');
       }
     });

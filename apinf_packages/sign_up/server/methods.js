@@ -11,15 +11,15 @@ import { check } from 'meteor/check';
 import { Accounts } from 'meteor/accounts-base';
 
 Meteor.methods({
-  'userRegister' (user) {
+  'userRegister': function (user) {
     check(user, Object);
     // check user already exists or not
     const userData = Meteor.users.findOne({
       $or: [{
         username: user.username,
-      },{
+      }, {
         'emails.0.address': user.email,
-      }]
+      }],
     });
 
     // check user exists or not by username
