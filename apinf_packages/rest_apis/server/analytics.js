@@ -166,7 +166,7 @@ AnalyticsV1.swagger = {
           format: 'int32',
           example: 666,
         },
-        responseTime: {
+        medianResponseTime: {
           type: 'integer',
           format: 'int32',
           example: 78,
@@ -325,13 +325,13 @@ AnalyticsV1.swagger = {
       type: 'object',
       properties: {
         meta: {
-          $ref: '#/definitions/meta'
+          $ref: '#/definitions/meta',
         },
         kpi: {
-          $ref: '#/definitions/countersKPI'
+          $ref: '#/definitions/countersKPI',
         },
         delta: {
-          $ref: '#/definitions/deltaValues'
+          $ref: '#/definitions/deltaValues',
         },
         frequentUsers: {
           type: 'array',
