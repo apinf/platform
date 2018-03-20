@@ -26,6 +26,32 @@ export function arrowDirection (parameter, bucket) {
       comparison = bucket.compareUsers;
       break;
 
+    case 'message_published':
+      comparison = bucket.publishedMessages;
+      break;
+
+    case 'message_delivered':
+      comparison = bucket.deliveredMessages;
+      break;
+
+    case 'client_subscribe':
+      comparison = bucket.subscribedClients;
+      break;
+
+    case 'client_publish':
+      comparison = bucket.publishedClients;
+      break;
+
+    case 'incoming_bandwidth': {
+      comparison = bucket.incomingBandwidth;
+      break;
+    }
+
+    case 'outgoing_bandwidth': {
+      comparison = bucket.outgoingBandwidth;
+      break;
+    }
+
     default:
       comparison = 0;
 
@@ -61,6 +87,26 @@ export function percentageValue (parameter, bucket) {
     case 'users':
       comparison = bucket.compareUsers;
       break;
+    case 'message_published':
+      comparison = bucket.publishedMessages;
+      break;
+    case 'message_delivered':
+      comparison = bucket.deliveredMessages;
+      break;
+    case 'client_subscribe':
+      comparison = bucket.subscribedClients;
+      break;
+    case 'client_publish':
+      comparison = bucket.publishedClients;
+      break;
+    case 'incoming_bandwidth': {
+      comparison = bucket.incomingBandwidth;
+      break;
+    }
+    case 'outgoing_bandwidth': {
+      comparison = bucket.outgoingBandwidth;
+      break;
+    }
     default:
       comparison = 0;
       break;
@@ -70,7 +116,7 @@ export function percentageValue (parameter, bucket) {
   const percentage = Math.abs(comparison);
 
   // Don't display 0%
-  return percentage > 0 ? `${percentage}%` : '';
+  return percentage > 0 ? `${percentage}% ` : '';
 }
 
 export function calculateTrend (previous, current) {

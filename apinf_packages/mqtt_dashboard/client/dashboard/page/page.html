@@ -1,0 +1,217 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="mqttDashboardPage">
+  <div class="container layout-content">
+    <div class="row">
+      <div class="col-xs-12">
+        <strong class="text-uppercase">
+          Mqtt real-time statistics
+        </strong>
+        <p>
+          Data is selected for last 24 hours and is automatically updated every 20 seconds
+          <button class="btn btn-default btn-xs" id="reload-charts">
+            Reload charts
+          </button>
+        </p>
+      </div>
+    </div>
+    {{# if dataIsReady }}
+      {{# if error }}
+        <div class="row form-group">
+          {{> mqttDashboardErrorBlock errorText=errorText }}
+        </div>
+      {{ else }}
+        <div class="row form-group">
+          <div class="col-xs-4">
+            <div class="chart-card">
+              <div class="margin-block">
+                <small class="text-uppercase">
+                  Incoming bandwidth
+                </small><br>
+                <label class="statistics-numbers">
+                  {{# if summaryIsReady }}
+                    {{ totalNumber 'incoming_bandwidth' }} Kb/s
+                  {{ else }}
+                    <div class="loader"></div>
+                  {{/ if }}
+                </label>
+                <span class={{ textColor 'incoming_bandwidth' }}>
+                  {{ percentageValue 'incoming_bandwidth' }}
+                  <i class="fa fa-{{ arrowDirection 'incoming_bandwidth' }}" aria-hidden="true"></i>
+                </span>
+              </div>
+              {{# if incomingBandwidthData }}
+                {{> mqttDashboardDisplayRealTimeChart
+                  chartData=incomingBandwidthData
+                  query='incoming-bandwith'
+                  queryOptions=queryOptions
+                }}
+              {{/ if }}
+            </div>
+          </div>
+
+          <div class="col-xs-4">
+            <div class="chart-card">
+              <div class="margin-block">
+                <small class="text-uppercase">
+                  Published messages
+                </small><br>
+                <label class="statistics-numbers">
+                  {{# if summaryIsReady }}
+                    {{ totalNumber 'message_published' }}
+                  {{ else }}
+                    <div class="loader"></div>
+                  {{/ if }}
+                </label>
+                <span class={{ textColor 'message_published' }}>
+                  {{ percentageValue 'message_published' }}
+                  <i class="fa fa-{{ arrowDirection 'message_published' }}" aria-hidden="true"></i>
+                </span>
+              </div>
+              {{# if publishedMessagesData }}
+                {{> mqttDashboardDisplayRealTimeChart
+                  query='published-messages'
+                  chartData=publishedMessagesData
+                  queryOptions=queryOptions
+                }}
+              {{/ if }}
+            </div>
+          </div>
+
+          <div class="col-xs-4">
+            <div class="chart-card">
+              <div class="margin-block">
+                <small class="text-uppercase">
+                  Published clients
+                </small><br>
+                <label class="statistics-numbers">
+                  {{# if summaryIsReady }}
+                    {{ totalNumber 'client_publish' }}
+                  {{ else }}
+                    <div class="loader"></div>
+                  {{/ if }}
+                </label>
+                <span class={{ textColor 'client_publish' }}>
+                  {{ percentageValue 'client_publish' }}
+                  <i class="fa fa-{{ arrowDirection 'client_publish' }}" aria-hidden="true"></i>
+                </span>
+              </div>
+              {{# if publishedClientsData }}
+                {{> mqttDashboardDisplayRealTimeChart
+                  chartData=publishedClientsData
+                  query='published-clients'
+                  queryOptions=queryOptions
+                }}
+              {{/ if }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <!-- Bandwith -->
+          <div class="col-xs-4">
+            <div class="chart-card">
+              <div class="margin-block">
+                <small class="text-uppercase">
+                  Outgoing bandwidth
+                </small><br>
+                <label class="statistics-numbers">
+                  {{# if summaryIsReady }}
+                    {{ totalNumber 'outgoing_bandwidth' }} Kb/s
+                  {{ else }}
+                    <div class="loader"></div>
+                  {{/ if }}
+                </label>
+                <span class={{ textColor 'outgoing_bandwidth' }}>
+                  {{ percentageValue 'outgoing_bandwidth' }}
+                  <i class="fa fa-{{ arrowDirection 'outgoing_bandwidth' }}" aria-hidden="true"></i>
+                </span>
+              </div>
+              {{# if outgoingBandwidthData }}
+                {{> mqttDashboardDisplayRealTimeChart
+                  chartData=outgoingBandwidthData
+                  query='outgoing_bandwidth'
+                  queryOptions=queryOptions
+                }}
+              {{/ if }}
+            </div>
+          </div>
+
+          <div class="col-xs-4">
+            <div class="chart-card">
+              <div class="margin-block">
+                <small class="text-uppercase">
+                  Delivered messages
+                </small><br>
+                <label class="statistics-numbers">
+                  {{# if summaryIsReady }}
+                    {{ totalNumber 'message_delivered' }}
+                  {{ else }}
+                    <div class="loader"></div>
+                  {{/ if }}
+                </label>
+                <span class={{ textColor 'message_delivered' }}>
+                  {{ percentageValue 'message_delivered' }}
+                  <i class="fa fa-{{ arrowDirection 'message_delivered' }}" aria-hidden="true"></i>
+                </span>
+              </div>
+              {{# if deliveredMessagesData }}
+                {{> mqttDashboardDisplayRealTimeChart
+                  chartData=deliveredMessagesData
+                  query='delivered-messages'
+                  queryOptions=queryOptions
+                }}
+              {{/ if }}
+            </div>
+          </div>
+
+          <div class="col-xs-4">
+            <div class="chart-card">
+              <div class="margin-block">
+                <small class="text-uppercase">
+                  Subscribed clients
+                </small><br>
+                <label class="statistics-numbers">
+                  {{# if summaryIsReady }}
+                    {{ totalNumber 'client_subscribe' }}
+                  {{ else }}
+                    <div class="loader"></div>
+                  {{/ if }}
+                </label>
+                <span class={{ textColor 'client_subscribe' }}>
+                  {{ percentageValue 'client_subscribe' }}
+                  <i class="fa fa-{{ arrowDirection 'client_subscribe' }}" aria-hidden="true"></i>
+                </span>
+              </div>
+              {{# if subscribedClientsData }}
+                {{> mqttDashboardDisplayRealTimeChart
+                  chartData=subscribedClientsData
+                  query='subscribed-clients'
+                  queryOptions=queryOptions
+                }}
+              {{/ if }}
+            </div>
+          </div>
+        </div>
+      {{/ if }}
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <strong class="text-uppercase">
+              Selected topics
+            </strong>
+          </div>
+          {{# if Template.subscriptionsReady }}
+            {{> displayTopicsTable mainPage=true }}
+          {{/ if }}
+        </div>
+      </div>
+    {{ else }}
+      {{> spinner }}
+    {{/ if }}
+  </div>
+</template>

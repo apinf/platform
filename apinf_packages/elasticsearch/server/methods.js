@@ -8,7 +8,9 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // Npm packages imports
-import ElasticSearch from 'elasticsearch';
+import { Client as ESClient } from 'elasticsearch';
+
+import Proxies from '../../proxies/collection';
 
 Meteor.methods({
   getElasticsearchData (host, queryParams) {
@@ -17,7 +19,7 @@ Meteor.methods({
     check(queryParams, Object);
 
     // Initialize Elasticsearch client, using provided host value
-    const esClient = new ElasticSearch.Client({ host });
+    const esClient = new ESClient({ host });
 
     return esClient
       .ping({
@@ -31,5 +33,46 @@ Meteor.methods({
         // Throw an error
         throw new Meteor.Error(error);
       });
+  },
+  async emqElasticsearchPing () {
+    const proxy = Proxies.findOne({ type: 'emq' });
+
+    const host = proxy.emq.elasticsearch;
+
+    // Initialize Elasticsearch client, using provided host value
+    const esClient = new ESClient({ host });
+
+    try {
+      return await esClient.ping({
+        // ping usually has a 5s timeout
+        requestTimeout: 5000,
+      });
+    } catch (e) {
+      // Throw an error message
+      throw new Meteor.Error(e.message);
+    }
+  },
+  async emqElastisticsearchSearch (requestBody) {
+    check(requestBody, Object);
+
+    const proxy = Proxies.findOne({ type: 'emq' });
+
+    const host = proxy.emq.elasticsearch;
+
+    const query = {
+      index: 'mqtt',
+      size: 0,
+      body: requestBody,
+    };
+
+    // Initialize Elasticsearch client, using provided host value
+    const esClient = new ESClient({ host });
+
+    try {
+      return await esClient.search(query);
+    } catch (e) {
+      // Throw an error message
+      throw new Meteor.Error(e.message);
+    }
   },
 });
