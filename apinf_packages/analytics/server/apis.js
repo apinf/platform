@@ -189,9 +189,7 @@ AnalyticsV1.addRoute('analytics', {
 
       const queryParams = this.queryParams;
 
-      // Create placeholders for query
-      const query = {};
-      const options = {};
+      // Create placeholders for list of managed APIs
       let managedApis;
 
       // Default value for apisBy is 'organization'
@@ -229,7 +227,6 @@ AnalyticsV1.addRoute('analytics', {
           return organization._id;
         });
 
-        console.log('organizationList=', organizationList);
         // Error if User is not a manager in any Organization
         if (!Array.isArray(organizationList) || !organizationList.length) {
           return errorMessagePayload(400, 'User is not an admin in any Organization.');
@@ -311,36 +308,27 @@ AnalyticsV1.addRoute('analytics', {
           const message = 'Period of days must not exceed yesterday.';
           return errorMessagePayload(400, message);
         }
-      } else {
-        if (period === 0) {
+      } else if (period === 0) {
           // Get today's data
           // Get timestamp of today 00:00:00 Date time
           fromDate = moment(0, 'HH').valueOf();
           // Get timestamp of today 24:00:00 Date time (included value)
           toDate = moment(fromDate).add(1, 'd').valueOf();
-        } else {
+      } else {
           // Get period data from start to end of yesterday
           // Get timestamp of today 00:00:00 Date time
           toDate = moment(0, 'HH').valueOf();
           // Get timestamp of timeframe ago 00:00:00 Date time (included value)
           fromDate = moment(toDate).subtract(period, 'd').valueOf();
-        }
       }
-
-      console.log('fromDate=', fromDate);
-      console.log('fromDate_h=', moment(fromDate).format());
-      console.log('toDate=', toDate);
-      console.log('toDate_h=', moment(toDate).format());
-      console.log('managedApis=', managedApis);
 
       // Create list of API analytical data based on ProxyBackends
       const apiAnalyticsList = ProxyBackends.find({
         $and: [
-          { 'apiId': { $in: managedApis } },
-          { type: 'apiUmbrella' }
-        ]
-        }).map((proxyBackend) => {
-        console.log('proxy_api=', proxyBackend.apiId);
+          { apiId: { $in: managedApis } },
+          { type: 'apiUmbrella' },
+        ],
+      }).map((proxyBackend) => {
         const apiAnalytics = {};
 
         // Get connected proxy url
@@ -350,20 +338,6 @@ AnalyticsV1.addRoute('analytics', {
 
         const proxyBackendId = proxyBackend._id;
 
-        // Get data about summary statistic for current period
-        promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
-        .then((currentPeriodDataset) => {
-
-          // Fill summaries
-          apiAnalytics.summaries = {
-            requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
-            medianResponseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
-            uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
-          };
-
-        }).catch((error) => {
-          return errorMessagePayload(400, 'Error retrieving analytic data!');
-        });
         // Fill and return analytics data
         apiAnalytics.meta = {
           proxyPath: proxyUrl.concat(frontendPrefix),
@@ -371,13 +345,17 @@ AnalyticsV1.addRoute('analytics', {
           apiId: proxyBackend.apiId,
           interval: 1440,
         };
-
-        // TODO: solve problem for last proxyBAckend.
-        //       meta is included in, but
-        //       summaries are not included in returned apiAnalytics
+        // Get statistic data for each API
+        const currentPeriodDataset = Meteor.call('summaryStatisticNumber', {
+          proxyBackendId, fromDate, toDate });
+        // Fill summaries
+        apiAnalytics.summaries = {
+          requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
+          medianResponseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
+          uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
+        };
 
         return apiAnalytics;
-
       });
 
       // Construct response
@@ -496,7 +474,6 @@ AnalyticsV1.addRoute('analytics/:id', {
           toDate = moment(fromDate).add(1, 'd').valueOf();
           // Get timestamp of previous from date
           previousFromDate = moment(fromDate).subtract(1, 'd').valueOf();
-
         } else {
           // Get period data from start to end of yesterday
           // Get timestamp of today 00:00:00 Date time
@@ -508,10 +485,9 @@ AnalyticsV1.addRoute('analytics/:id', {
         }
         // Default value in case of period is 1440 minutes = 24 hours
         interval = 1440;
-
       } else {
         // Date is given
-        let date = this.queryParams.date;
+        const date = this.queryParams.date;
         // Error if "date" format is not according to ISO 8601
         if (!moment(date).isValid()) {
           const message = 'Parameter "date" must be a valid date.';
@@ -548,7 +524,7 @@ AnalyticsV1.addRoute('analytics/:id', {
           }
           interval *= 1;
         }
-        let allowedIntervals = [30, 60];
+        const allowedIntervals = [30, 60];
         // Error is "interval" is not accepted value
         if (!allowedIntervals.includes(interval)) {
           return errorMessagePayload(400, 'Parameter "interval" has erroneous value.',
@@ -580,11 +556,11 @@ AnalyticsV1.addRoute('analytics/:id', {
 
       // Return API Proxy's URL, if it exists
       const proxyBackend = ProxyBackends.findOne({
-        $and : [
-          { 'apiId': api._id },
-          { 'type': 'apiUmbrella' }
-        ]
-         });
+        $and: [
+          { apiId: api._id },
+          { type: 'apiUmbrella' },
+        ],
+      });
 
       // Error if proxy backend for API does not exist
       if (!proxyBackend) {
@@ -598,7 +574,7 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get proxy backend path
       const frontendPrefix = proxyBackend.frontendPrefix();
 
-      let apiAnalyticsList = {};
+      const apiAnalyticsList = {};
       // Fill and return analytics data
       apiAnalyticsList.meta = {
         proxyPath: proxyUrl.concat(frontendPrefix),
@@ -610,7 +586,6 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get data about summary statistic for current period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
         .then((currentPeriodDataset) => {
-
           console.log('API currentPeriodDataset=', currentPeriodDataset);
           // Fill summaries
           apiAnalyticsList.kpi = {
@@ -621,29 +596,28 @@ AnalyticsV1.addRoute('analytics/:id', {
 
           // Get trend data is based on the current period data
           const comparisonData = Meteor.call('summaryStatisticTrend',
-            { proxyId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset);
+            { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset);
 
-            console.log('API comparisonData=', comparisonData);
+          console.log('API comparisonData=', comparisonData);
 
-            // Save the response about Comparison data
-            apiAnalyticsList.comparisonData = {
-              requestCount: comparisonData[frontendPrefix].requestNumber,
-              medianResponseTime: comparisonData[frontendPrefix].medianResponseTime,
-              uniqueUsers: comparisonData[frontendPrefix].avgUniqueUsers,
-            };
+          // Save the response about Comparison data
+          apiAnalyticsList.comparisonData = {
+            requestCount: comparisonData[frontendPrefix].requestNumber,
+            medianResponseTime: comparisonData[frontendPrefix].medianResponseTime,
+            uniqueUsers: comparisonData[frontendPrefix].avgUniqueUsers,
+          };
 
           // Get summary statistic data about previous period
           const previousPeriodResponse = Meteor.call('summaryStatisticNumber', {
             proxyBackendId, fromDate: previousFromDate, toDate: fromDate });
 
-            console.log('API previousPeriodResponse=', previousPeriodResponse);
+          console.log('API previousPeriodResponse=', previousPeriodResponse);
 
-            apiAnalyticsList.previousPeriodResponse = {
-              requestCount: previousPeriodResponse[frontendPrefix].requestNumber,
-              responseTime: previousPeriodResponse[frontendPrefix].medianResponseTime,
-              uniqueUsers: previousPeriodResponse[frontendPrefix].avgUniqueUsers,
-            };
-
+          apiAnalyticsList.previousPeriodResponse = {
+            requestCount: previousPeriodResponse[frontendPrefix].requestNumber,
+            responseTime: previousPeriodResponse[frontendPrefix].medianResponseTime,
+            uniqueUsers: previousPeriodResponse[frontendPrefix].avgUniqueUsers,
+          };
         }).catch((error) => {
           throw new Meteor.Error(error);
         });
@@ -651,7 +625,6 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get data about summary statistic for previous period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, previousFromDate, fromDate })
         .then((previousPeriodDataset) => {
-
           console.log('API previousPeriodDataset=', previousPeriodDataset);
           // Fill summaries
           apiAnalyticsList.delta = {
@@ -659,7 +632,6 @@ AnalyticsV1.addRoute('analytics/:id', {
             medianResponseTime: previousPeriodDataset[frontendPrefix].medianResponseTime,
             uniqueUsers: previousPeriodDataset[frontendPrefix].avgUniqueUsers,
           };
-
         }).catch((error) => {
           throw new Meteor.Error(error);
         });
