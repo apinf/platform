@@ -5,17 +5,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="navbar">
   <nav class="container-fluid navbar-new">
+  <div class="col-md-2" style="padding-left:0;">
     {{# if projectLogoExists }}
     <a href="{{ pathFor 'home' }}" id="frontpage-button" class="pull-left" style="padding-top:20px;">
       <img class="navbar-logo" src="{{ uploadedProjectLogoLink }}">
     </a>
     {{/ if }}
-      <ul class="nav navbar-nav" id="user-menu" style="float:right;">
-        {{# if currentUser }}
-          {{> userMenu user=currentUser }}
-        {{/ if }}
-      </ul>
-    <div class="secondary-menu-block-inner" style="text-align:center;">
+  </div>
+    <div class="col-md-8 secondary-menu-block-inner" style="text-align:center;">
     <ul class="nav nav-tabs" role="tablist" style="display: inline-block;">
       {{# if currentUser }}
       {{# if proxyIsDefined }}
@@ -47,14 +44,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </a>
       </li>
       {{/ if }}
-
-      <!-- {{# if userCanAddApi }}
-      <li class="{{ isActiveRoute 'addApi' }}">
-        <a href="{{ pathFor 'addApi' }}" id="addapi-button">
-          + {{_ "navbar_addAPIBackend" }}
-        </a>
-      </li>
-      {{/ if }} -->
       {{/ if }}
       {{# if currentUser }}
       {{ else }}
@@ -72,8 +61,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     </ul>
   </div>
+  <div class="col-md-2" style="padding-right:0;">
+    <ul class="nav navbar-nav pull-right" id="user-menu">
+      {{# if currentUser }}
+        {{> userMenu user=currentUser }}
+      {{/ if }}
+    </ul>
+  </div>
   </nav>
-  <!-- <div class="container">
-    {{> searchField }}
-  </div> -->
 </template>

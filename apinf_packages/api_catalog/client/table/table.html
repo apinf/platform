@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiCatalogTable">
-  <div class="table-responsive block-wrapper" style="min-height: 500px;">
+  <div class="table-responsive block-wrapper" style="min-height: 100%;">
     {{# if Template.subscriptionsReady }}
       {{# if apis.length }}
         <table class="table api-catalog-table">
@@ -26,7 +26,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     {{/ if }}
                     {{> viewApiLogo api=api }}
                   <h4 class="api-catalog-table-title special-headings">
-                    <a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 600;">
+                    <a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
                     <span style="font-weight: 400;">
                       {{# if api.organization }}
                       <!-- TODO: link to organization -->
@@ -75,7 +75,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </table>
       {{ else }}
         <div class="col-xs-12">
-          <p>{{_ 'apiCatalog_noApis_Found'}}</p>
+          <p style="margin-bottom: 0;">{{_ 'apiCatalog_noApis_Found'}}</p>
         </div>
       {{/ if }}
     {{/ if }}
