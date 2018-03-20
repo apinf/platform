@@ -38,7 +38,7 @@ signedIn.route('/dashboard', {
   }],
   name: 'dashboard',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'dashboardPage' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'dashboardPage' });
   },
 });
 
@@ -59,7 +59,7 @@ signedIn.route('/analytic/:apiSlug', {
         // Make sure a user has permission to view Analytic page
         Meteor.call('userCanViewAnalytic', proxyBackend.apiId, (viewError, canView) => {
           if (canView) {
-            BlazeLayout.render('masterLayout', { main: 'apiAnalyticPage' });
+            BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'apiAnalyticPage' });
           } else {
             // User don't have permission
             FlowRouter.go('forbidden');

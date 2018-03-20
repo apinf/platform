@@ -23,6 +23,7 @@ Template.navbar.onCreated(function () {
   // Subscribe to project logo
   templateInstance.subscribe('projectLogo');
   templateInstance.subscribe('proxyCount');
+  templateInstance.subscribe('emqProxyCount');
 
   templateInstance.autorun(() => {
     // Check if user is logged in
@@ -167,6 +168,18 @@ Template.navbar.helpers({
     // Return true because no settings are set
     // By default allowing all user to add an API
     return true;
+  },
+  userCanViewMqttDashboard () {
+    // Get current user Id
+    const userId = Meteor.userId();
+    // User is admin
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    // Get count of EMQ Proxies
+    const proxyCount = Counts.get('emqProxyCount');
+
+    // Can view if he is Admin and Emq Proxy is defined
+    return userIsAdmin && proxyCount > 0;
   },
 });
 

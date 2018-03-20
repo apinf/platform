@@ -34,7 +34,7 @@ FlowRouter.route('/organizations', {
   }],
   name: 'organizationCatalog',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'organizationCatalog' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'organizationCatalog' });
   },
 });
 
@@ -66,7 +66,7 @@ FlowRouter.route('/organizations/:orgSlug/', {
         DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
         DocHead.addMeta({ property: 'twitter:image', content: organizationProfile.logoUrl });
 
-        BlazeLayout.render('masterLayout', { main: 'organizationProfile' });
+        BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'organizationProfile' });
       } else {
         // If Organization doesn't exist, show 'Not Found'
         FlowRouter.go('notFound');

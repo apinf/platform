@@ -1,0 +1,52 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="mqttDashboardNavbar">
+  <nav class="navbar navbar-default navbar-fixed-top main-navigation">
+    <div class="container">
+      <div class="navbar-header">
+        {{# if projectLogoExists }}
+          <a class="navbar-brand text-hide"
+             href="{{ pathFor 'home' }}" id="frontpage-button"
+             style="background-image:url({{ uploadedProjectLogoLink }})">
+            {{ branding.siteTitle }}
+          </a>
+        {{ else }}
+          <div class="project-name">
+            <a href="{{ pathFor 'home' }}" class="project-name-link" id="frontpage-button">
+              {{ branding.siteTitle }}
+            </a>
+          </div>
+        {{/ if }}
+      </div>
+      <ul class="nav navbar-nav nanbar-left" id="main-navbar">
+        <li class="{{ isActiveRoute 'mqtt' }}">
+          <a href="{{ pathFor 'mqtt' }}">
+            {{_ 'mqttDashboardNavbar_linkText_mqttDashboard' }}
+          </a>
+        </li>
+        <li class="{{ isActiveRoute 'topics' }}">
+          <a href="{{ pathFor 'topics' }}">
+            {{_ 'mqttDashboardNavbar_linkText_topics' }}
+          </a>
+        </li>
+        <li class="{{ isActiveRoute 'acl' }}">
+          <a href="{{ pathFor 'acl' }}">
+            {{_ 'mqttDashboardNavbar_linkText_acl' }}
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="user-menu">
+        <li>
+          <a class="navbar-login" href="{{ pathFor 'dashboard' }}" id="rest-dashboard">
+            {{_ 'mqttDashboardNavbar_linkText_restDashboard' }}
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </li>
+        {{> userMenu user=currentUser }}
+      </ul>
+    </div>
+  </nav>
+</template>
