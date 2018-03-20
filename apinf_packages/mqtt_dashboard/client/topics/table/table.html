@@ -1,0 +1,222 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="displayTopicsTable">
+  <div class="form-group">
+    {{> dateRangePickerMqtt }}
+    <button class="btn btn-default" id="reload-table">
+      Reload table
+    </button>
+  </div>
+
+  {{# if error }}
+    {{> mqttDashboardErrorBlock errorText=error }}
+  {{/ if }}
+
+  {{# if noStarredTopic }}
+    <div class="alert alert-warning" role="alert">
+      <p>
+        <strong>
+          There is no starred topic.
+        </strong>
+        Click on the start icon to add one in the table on the Topics page.
+      </p>
+    </div>
+  {{ else }}
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Topic tree</th>
+        <th colspan="2">Incoming bandwidth</th>
+        <th colspan="2">Outgoing bandwidth</th>
+        <th colspan="2">Published messages</th>
+        <th colspan="2">Delivered messages</th>
+        <th colspan="2">Published clients</th>
+        <th colspan="3">Subscribed clients</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{# unless mainPage }}
+        {{# with remainingTraffic }}
+          <tr>
+            <td>
+              Remaining traffic
+              {{# unless remainingTrafficReady }}
+                <div class="loader"></div>
+              {{/ unless }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString incomingBandwidth }} Kb/s
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'incoming_bandwidth' }}>
+                  {{ percentageValue 'incoming_bandwidth' }}
+                  <i class="fa fa-{{ arrowDirection 'incoming_bandwidth' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString outgoingBandwidth }} Kb/s
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'outgoing_bandwidth' }}>
+                  {{ percentageValue 'outgoing_bandwidth' }}
+                  <i class="fa fa-{{ arrowDirection 'outgoing_bandwidth' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString publishedMessages }}
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'message_published' }}>
+                  {{ percentageValue 'message_published' }}
+                  <i class="fa fa-{{ arrowDirection 'message_published' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString deliveredMessages }}
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'message_delivered' }}>
+                  {{ percentageValue 'message_delivered' }}
+                  <i class="fa fa-{{ arrowDirection 'message_delivered' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString publishedClients }}
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'client_publish' }}>
+                  {{ percentageValue 'client_publish' }}
+                  <i class="fa fa-{{ arrowDirection 'client_publish' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString subscribedClients }}
+            </td>
+            <td class="text-right" colspan="2">
+              {{# if trend }}
+                <span class={{ textColor 'client_subscribe' }}>
+                  {{ percentageValue 'client_subscribe' }}
+                  <i class="fa fa-{{ arrowDirection 'client_subscribe' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+          </tr>
+        {{/ with }}
+      {{/ unless }}
+
+      {{# each topic in topicsData }}
+        {{# with topic }}
+          <tr>
+            <td>
+              <a href="{{ pathFor 'topicPage' id=_id }}">
+                {{ value }}#
+              </a>
+              <i class="fa {{ starIcon }} starred" aria-hidden="true" data-id="{{ _id }}"></i>
+              {{# unless dataIsReady }}
+                <div class="loader"></div>
+              {{/ unless }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString incomingBandwidth }} Kb/s
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'incoming_bandwidth' }}>
+                  {{ percentageValue 'incoming_bandwidth' }}
+                  <i class="fa fa-{{ arrowDirection 'incoming_bandwidth' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString outgoingBandwidth }} Kb/s
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'outgoing_bandwidth' }}>
+                  {{ percentageValue 'outgoing_bandwidth' }}
+                  <i class="fa fa-{{ arrowDirection 'outgoing_bandwidth' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString publishedMessages }}
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'message_published' }}>
+                  {{ percentageValue 'message_published' }}
+                  <i class="fa fa-{{ arrowDirection 'message_published' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString deliveredMessages }}
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'message_delivered' }}>
+                  {{ percentageValue 'message_delivered' }}
+                  <i class="fa fa-{{ arrowDirection 'message_delivered' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString publishedClients }}
+            </td>
+            <td class="text-right">
+              {{# if trend }}
+                <span class={{ textColor 'client_publish' }}>
+                  {{ percentageValue 'client_publish' }}
+                  <i class="fa fa-{{ arrowDirection 'client_publish' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right no-right-border">
+              {{ localeString subscribedClients }}
+            </td>
+            <td class="text-right no-right-border">
+              {{# if trend }}
+                <span class={{ textColor 'client_subscribe' }}>
+                  {{ percentageValue 'client_subscribe' }}
+                  <i class="fa fa-{{ arrowDirection 'client_subscribe' }}" aria-hidden="true"></i>
+                </span>
+              {{/ if }}
+            </td>
+
+            <td class="text-right">
+              <div class="remove-topic" data-id={{ _id }}>
+                <i class="fa fa-trash text-danger"></i>
+              </div>
+            </td>
+          </tr>
+        {{/ with }}
+      {{/ each }}
+      </tbody>
+    </table>
+  {{/ if }}
+</template>

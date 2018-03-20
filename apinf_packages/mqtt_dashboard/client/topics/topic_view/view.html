@@ -1,0 +1,157 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="topicPage">
+  <div class="container layout-content">
+    {{# if Template.subscriptionsReady }}
+      <p>
+        <strong>Topic tree: </strong>{{ topicValue }}#
+      </p>
+      <p>
+        Automatically updates every 1 minute
+        <button class="btn btn-default btn-xs" id="reload-chart">
+          Reload chart
+        </button>
+      </p>
+
+      {{> dateRangePickerMqtt }}
+
+      <div class="topic-detailed-chart form-group">
+        <div class="row form-group">
+          <div class="col-xs-2 event-type {{ selectedType "incoming_bandwidth" }}" data-type="incoming_bandwidth">
+            <small class="text-uppercase">
+              Incoming bandwidth
+            </small><br>
+            <label for="" class="statistics-numbers">
+              {{# if statisticsReady }}
+                {{ totalNumber 'incoming_bandwidth' }} Kb/s
+              {{ else }}
+                <div class="loader"></div>
+              {{/ if }}
+            </label><br>
+            <span class={{ textColor 'incoming_bandwidth' }}>
+              {{ percentageValue 'incoming_bandwidth' }}
+              <i class="fa fa-{{ arrowDirection 'incoming_bandwidth' }}" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div class="col-xs-2 event-type {{ selectedType "outgoing_bandwidth" }}" data-type="outgoing_bandwidth">
+            <small class="text-uppercase">
+              Outgoing bandwidth
+            </small><br>
+            <label for="" class="statistics-numbers">
+              {{# if statisticsReady }}
+                {{ totalNumber 'outgoing_bandwidth' }} Kb/s
+              {{ else }}
+                <div class="loader"></div>
+              {{/ if }}
+            </label><br>
+            <span class={{ textColor 'outgoing_bandwidth' }}>
+              {{ percentageValue 'outgoing_bandwidth' }}
+              <i class="fa fa-{{ arrowDirection 'outgoing_bandwidth' }}" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div class="col-xs-2 event-type {{ selectedType "message_published" }}" data-type="message_published">
+            <small class="text-uppercase">
+              Published messages
+            </small><br>
+            <label for="" class="statistics-numbers">
+              {{# if statisticsReady }}
+                {{ totalNumber 'message_published' }}
+              {{ else }}
+                <div class="loader"></div>
+              {{/ if }}
+            </label><br>
+            <span class={{ textColor 'message_published' }}>
+              {{ percentageValue 'message_published' }}
+              <i class="fa fa-{{ arrowDirection 'message_published' }}" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div class="col-xs-2 event-type {{ selectedType "message_delivered" }}" data-type="message_delivered">
+            <small class="text-uppercase">
+              Delivered Messages
+            </small><br>
+            <label for="" class="statistics-numbers">
+              {{# if statisticsReady }}
+                {{ totalNumber 'message_delivered' }}
+              {{ else }}
+                <div class="loader"></div>
+              {{/ if }}
+            </label><br>
+            <span class={{ textColor 'message_delivered' }}>
+              {{ percentageValue 'message_delivered' }}
+              <i class="fa fa-{{ arrowDirection 'message_delivered' }}" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div class="col-xs-2 event-type {{ selectedType "client_subscribe" }}" data-type="client_subscribe">
+            <small class="text-uppercase">
+              Subscribe Clients
+            </small><br>
+            <label for="" class="statistics-numbers">
+              {{# if statisticsReady }}
+                {{ totalNumber 'client_subscribe' }}
+              {{ else }}
+                <div class="loader"></div>
+              {{/ if }}
+            </label><br>
+            <span class={{ textColor 'client_subscribe' }}>
+              {{ percentageValue 'client_subscribe' }}
+              <i class="fa fa-{{ arrowDirection 'client_subscribe' }}" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div class="col-xs-2 event-type {{ selectedType "client_publish" }}" data-type="client_publish">
+            <small class="text-uppercase">
+              Published Clients
+            </small><br>
+            <label for="" class="statistics-numbers">
+              {{# if statisticsReady }}
+                {{ totalNumber 'client_publish' }}
+              {{ else }}
+                <div class="loader"></div>
+              {{/ if }}
+            </label><br>
+            <span class={{ textColor 'client_publish' }}>
+              {{ percentageValue 'client_publish' }}
+              <i class="fa fa-{{ arrowDirection 'client_publish' }}" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          {{# if chartDataReady }}
+            {{# if error }}
+              {{> mqttDashboardErrorBlock errorText=error }}
+            {{ else }}
+              <div class="col-xs-12">
+                {{# if realTimeMode }}
+                  {{> displayRealTimeChart
+                    chart=chartData
+                    query='real-time-chart'
+                    queryOptions=queryOptions
+                  }}
+                {{ else }}
+                  {{> displayGeneralChart
+                    chart=chartData
+                    query='general-chart'
+                    format=format
+                    queryOptions=queryOptions
+                  }}
+                {{/ if }}
+              </div>
+            {{/ if }}
+          {{ else }}
+            {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+    {{ else }}
+      {{> spinner }}
+    {{/ if }}
+  </div>
+</template>
