@@ -4,7 +4,8 @@
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
  // Fill and return error response message body
-export default function errorMessagePayload (statusCode, messageText, additionalKey, additionalValue) {
+export default function errorMessagePayload (
+  statusCode, messageText, additionalKey, additionalValue) {
   // Fill payload
   const errorPayload = {
     statusCode,
