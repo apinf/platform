@@ -243,7 +243,8 @@ You can have multiple proxies under one management.
   - median response time
   - number of unique users
 
-  Delta values, i.e. comparison of summaries between previous and selected periods.
+  Delta values, i.e. comparison of summaries between selected period and previous period.
+  Comparison result is shown as percentage.
   - change in number of requests
   - change in median response time
   - change in number of unique users
