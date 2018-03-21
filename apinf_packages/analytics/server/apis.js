@@ -309,17 +309,17 @@ AnalyticsV1.addRoute('analytics', {
           return errorMessagePayload(400, message);
         }
       } else if (period === 0) {
-          // Get today's data
-          // Get timestamp of today 00:00:00 Date time
-          fromDate = moment(0, 'HH').valueOf();
-          // Get timestamp of today 24:00:00 Date time (included value)
-          toDate = moment(fromDate).add(1, 'd').valueOf();
+        // Get today's data
+        // Get timestamp of today 00:00:00 Date time
+        fromDate = moment(0, 'HH').valueOf();
+        // Get timestamp of today 24:00:00 Date time (included value)
+        toDate = moment(fromDate).add(1, 'd').valueOf();
       } else {
-          // Get period data from start to end of yesterday
-          // Get timestamp of today 00:00:00 Date time
-          toDate = moment(0, 'HH').valueOf();
-          // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-          fromDate = moment(toDate).subtract(period, 'd').valueOf();
+        // Get period data from start to end of yesterday
+        // Get timestamp of today 00:00:00 Date time
+        toDate = moment(0, 'HH').valueOf();
+        // Get timestamp of timeframe ago 00:00:00 Date time (included value)
+        fromDate = moment(toDate).subtract(period, 'd').valueOf();
       }
 
       // Create list of API analytical data based on ProxyBackends
@@ -379,7 +379,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         AnalyticsV1.swagger.tags.analytics,
       ],
       summary: 'List APIs showing their Ids and KPI values.',
-      description: descriptionAnalytics.getAnalytics,
+      description: descriptionAnalytics.getAnalyticsApiId,
       parameters: [
         AnalyticsV1.swagger.params.apiId,
         AnalyticsV1.swagger.params.periodApiId,
@@ -574,8 +574,10 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get proxy backend path
       const frontendPrefix = proxyBackend.frontendPrefix();
 
-      const apiAnalyticsList = {};
       // Fill and return analytics data
+      const apiAnalyticsList = {};
+
+      // Meta information
       apiAnalyticsList.meta = {
         proxyPath: proxyUrl.concat(frontendPrefix),
         apiName: proxyBackend.apiUmbrella.name,
@@ -583,29 +585,46 @@ AnalyticsV1.addRoute('analytics/:id', {
         interval: 1440,
       };
 
+      // KPI values for period
+      const currentPeriodDataset = Meteor.call('summaryStatisticNumber', {
+        proxyBackendId, fromDate, toDate });
+      // Fill summaries
+      apiAnalyticsList.kpi = {
+        requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
+        medianResponseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
+        uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
+      };
+
+      // Get trend data. Data of previous period is compared to current period data.
+      const comparisonData = Meteor.call('summaryStatisticTrend',
+      { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset);
+      // Fill response containing Comparison data
+      apiAnalyticsList.delta = {
+        requestCount: comparisonData[frontendPrefix].compareRequests,
+        medianResponseTime: comparisonData[frontendPrefix].compareResponse,
+        uniqueUsers: comparisonData[frontendPrefix].compareUsers,
+      };
+      // Get data for Errors table
+      const errorStatistics = Meteor.call('errorsStatisticsData', {
+        proxyBackendId, fromDate, toDate });
+      console.log('errorStatistics=', errorStatistics);
+      apiAnalyticsList.errorsStatisticsData = {
+        requestCount: comparisonData[frontendPrefix].compareRequests,
+        medianResponseTime: comparisonData[frontendPrefix].compareResponse,
+        uniqueUsers: comparisonData[frontendPrefix].compareUsers,
+      };
+
       // Get data about summary statistic for current period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
         .then((currentPeriodDataset) => {
           console.log('API currentPeriodDataset=', currentPeriodDataset);
           // Fill summaries
-          apiAnalyticsList.kpi = {
+          apiAnalyticsList.kpi2 = {
             requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
             medianResponseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
             uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
           };
 
-          // Get trend data is based on the current period data
-          const comparisonData = Meteor.call('summaryStatisticTrend',
-            { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset);
-
-          console.log('API comparisonData=', comparisonData);
-
-          // Save the response about Comparison data
-          apiAnalyticsList.comparisonData = {
-            requestCount: comparisonData[frontendPrefix].requestNumber,
-            medianResponseTime: comparisonData[frontendPrefix].medianResponseTime,
-            uniqueUsers: comparisonData[frontendPrefix].avgUniqueUsers,
-          };
 
           // Get summary statistic data about previous period
           const previousPeriodResponse = Meteor.call('summaryStatisticNumber', {
@@ -659,14 +678,6 @@ AnalyticsV1.addRoute('analytics/:id', {
           apiAnalyticsList.timelineChartData = response;
         });
 
-      // Get data for Errors table
-      Meteor.call('errorsStatisticsData', { proxyBackendId, fromDate, toDate },
-        (error, dataset) => {
-          if (error) throw new Error(error);
-
-          console.log('4 API dataset=', dataset);
-          apiAnalyticsList.errorsStatisticsData = dataset;
-        });
 
 
       console.log('melkein responsen lähettämisessä');
