@@ -604,27 +604,29 @@ AnalyticsV1.addRoute('analytics/:id', {
         medianResponseTime: comparisonData[frontendPrefix].compareResponse,
         uniqueUsers: comparisonData[frontendPrefix].compareUsers,
       };
+
+      apiAnalyticsList.frequentUsers = {};
+
       // Get data for Errors table
       const errorStatistics = Meteor.call('errorsStatisticsData', {
         proxyBackendId, fromDate, toDate });
       console.log('errorStatistics=', errorStatistics);
-      apiAnalyticsList.errorsStatisticsData = {
-        requestCount: comparisonData[frontendPrefix].compareRequests,
-        medianResponseTime: comparisonData[frontendPrefix].compareResponse,
-        uniqueUsers: comparisonData[frontendPrefix].compareUsers,
-      };
+      // Get data, modify date and store it to list
+      const errorStatisticsList = errorStatistics.map(errorData => {
+        return errorStatisticsItem = {
+          timestamp: moment(errorData.date).format(),
+          httpCode: errorData.status,
+          calls: errorData.calls,
+          requestPath: errorData.requestPath,
+        };;
+      });
+      // Attach error data list to response
+      apiAnalyticsList.errorStatistics = errorStatisticsList;
 
       // Get data about summary statistic for current period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
         .then((currentPeriodDataset) => {
           console.log('API currentPeriodDataset=', currentPeriodDataset);
-          // Fill summaries
-          apiAnalyticsList.kpi2 = {
-            requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
-            medianResponseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
-            uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
-          };
-
 
           // Get summary statistic data about previous period
           const previousPeriodResponse = Meteor.call('summaryStatisticNumber', {
@@ -641,7 +643,7 @@ AnalyticsV1.addRoute('analytics/:id', {
           throw new Meteor.Error(error);
         });
 
-      // Get data about summary statistic for previous period
+/*      // Get data about summary statistic for previous period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, previousFromDate, fromDate })
         .then((previousPeriodDataset) => {
           console.log('API previousPeriodDataset=', previousPeriodDataset);
@@ -654,7 +656,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         }).catch((error) => {
           throw new Meteor.Error(error);
         });
-
+*/
 
         // Get data about summary statistic over time
       Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
