@@ -109,13 +109,13 @@ Template.dashboardSummaryStatistic.helpers({
     const direction = arrowDirection(parameter, this);
 
     // Green color for text -  percentage value near arrow
-    if (direction === 'trending-up' || direction === 'arrow-down_time') {
-      textColor = 'text-success';
+    if (direction === 'trending-up arrow-up' || direction === 'trending-down arrow-down_time') {
+      textColor = 'arrow-up';
     }
 
     // Red color for text - percentage value near arrow
-    if (direction === 'trending-down' || direction === 'arrow-up_time') {
-      textColor = 'text-danger';
+    if (direction === 'trending-down arrow-down' || direction === 'trending-up arrow-up_time') {
+      textColor = 'arrow-down';
     }
 
     return textColor;
