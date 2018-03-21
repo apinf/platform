@@ -287,7 +287,7 @@
   "dashboardPage_placeholderText_search": "Search",
   "dateRangePicker_optionText_yesterday": "Last 24 hours",
   "dateRangePicker_optionText_7days": "Last 7 Days",
-  "dateRangePicker_optionText_30days": "Last 30 Days",
+  "dateRangePicker_optionText_28days": "Last 28 Days",
   "deleteAccount_closeButton": "Close",
   "deleteAccount_confirmDelete": "Delete",
   "deleteAccount_success_message": "Account deleted",
