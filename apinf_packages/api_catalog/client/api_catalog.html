@@ -26,14 +26,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if tableViewMode }}
         {{> apiCatalogTable apis=apis }}
         {{/ if }}
-
-        <!-- show pagination button only if APIs are available -->
-        {{# if apis }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
-        {{/ if }}
-        {{ else }}
-        {{> spinner }}
-        {{/ if }}
+        
         <a href="/rss/apis" target="_blank" class="rss-feed" title="{{_ 'apisRssIcon_tooltipText_Rss'}}"
         style="color: #999;
         margin-top: 10px;
@@ -42,6 +35,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         font-size: 10px;">
           RSS Feed
         </a>
+
+        <!-- show pagination button only if APIs are available -->
+        {{# if apis }}
+        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
+        {{/ if }}
+        {{ else }}
+        {{> spinner }}
+        {{/ if }}
       </div>
       {{> apiCatalogToolbar apis=apis }}
     </div>

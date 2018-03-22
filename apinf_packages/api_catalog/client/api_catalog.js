@@ -71,7 +71,7 @@ Template.apiCatalog.onCreated(function () {
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Apis, {
     // Count of cards in catalog
-    perPage: 4,
+    perPage: 12,
     // Set sort by name on default
     sort: defaultSort,
     filters,

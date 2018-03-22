@@ -4,18 +4,16 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiAnalyticPageHeader">
-  <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
-    <div class="col-md-8" style="padding-left: 0;">
-      <h1 style="margin-top: 0.8em;">
-        <a href="{{ pathFor 'viewApi' slug=api.slug }}">
-          {{ api.name }}
-        </a>
-      </h1>
-    </div>
-    <div class="col-md-4" style="padding-right: 0;text-align: right;line-height: 60px;">
-      <i>
-        {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
-      </i>
-    </div>
+  <div class="col-md-8" style="padding-left: 0;">
+    <h1 style="margin-top: 0.8em;">
+      <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+        {{ api.name }}
+      </a>
+    </h1>
+  </div>
+  <div class="col-md-4" style="padding-right: 0;text-align: right;line-height: 60px;">
+    <i>
+      {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
+    </i>
   </div>
 </template>
