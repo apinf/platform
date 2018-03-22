@@ -23,7 +23,7 @@ Template.mostFrequentUsersTable.onCreated(function () {
     frequentUsers.forEach(userDataset => {
       userDataset.request_path.buckets.forEach(request => {
         const user = {
-          email: userDataset.key,
+          apiKey: userDataset.key,
           calls: request.doc_count,
           url: request.key,
         };
@@ -54,7 +54,7 @@ Template.mostFrequentUsersTable.helpers({
 
 Template.mostFrequentUsersTable.events({
   'click #generate-users-log': (event, templateInstance) => {
-    const fields = ['email', 'calls', 'url'];
+    const fields = ['apiKey', 'calls', 'url'];
     // converts from json to csv
     const csv = json2csv({ data: templateInstance.users, fields });
     // creates file object with content type of text/plain

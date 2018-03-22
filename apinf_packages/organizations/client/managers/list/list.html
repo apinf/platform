@@ -7,8 +7,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <ul class="list-group">
     {{# each organizationManagers }}
       <li class="list-group-item">
-        {{ username }}
-        ({{ email }})
+      <!-- temporarily outcomment because of issue 3437 -->
+      <!--  {{ username }}
+        ({{ email }}) -->
+        {{ email }}
         <div class="pull-right">
           {{# unless emailVerified }}
             <span class="label label-default">
