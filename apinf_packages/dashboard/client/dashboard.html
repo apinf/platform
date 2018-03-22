@@ -26,7 +26,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container block-wrapper" style="padding-top: 0;padding-bottom: 0;">
 
     {{# if Template.subscriptionsReady }}
-      <!-- {{> dashboardToolbar proxiesList=proxiesList }} -->
       <!-- Make sure an API is connected to proxy -->
       {{# if proxyBackendsCount }}
 
@@ -56,7 +55,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }} <!-- /managedApisCount -->
       {{ else }}
         <!-- Display a message about "No connected API" -->
-        <div class="alert alert-warning alert-text" role="alert">
+        <div class="alert alert-warning alert-text" role="alert" style="margin-top: 20px;">
           <p style="margin: 20px 30px;">
             {{_ 'dashboardPage_text_noProxyBackends' }}
           </p>
