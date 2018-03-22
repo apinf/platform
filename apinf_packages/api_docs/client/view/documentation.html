@@ -4,9 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiDocumentation">
-  <!-- <div class="panel panel-default"> -->
     {{# if Template.subscriptionsReady }}
-      <!-- <div class="panel-heading"> -->
         <div class="pull-right">
           {{# if codegenServerExists }}
             {{# if documentationExists }}
@@ -42,12 +40,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </button>
           {{/ if }} <!-- /if currentUserCanManage -->
         </div>
-        <!-- <h2 id="documentation-title" class="panel-title clearfix"> -->
         <h2 id="documentation-title" style="font-size:1.6em;display: inline;">
           {{_ "apiDocumentation_Title" }}
         </h2>
         <hr style="margin-top:1em;" />
-      <!-- </div> -->
 
       <!-- <div class="panel-body"> -->
         <!-- {{# if displayLinkBlock }}
@@ -77,14 +73,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }} -->
 
         {{# if displayViewBlock }}
-          <!-- <div id="documentation-viewer-panel" class="panel panel-default"> -->
           <div id="documentation-viewer-panel" style="margin-top:1em;">
-            <!-- <div class="panel-heading"> -->
-              <!-- <h2 id="documentation-viewer-title" class="panel-title">
-                {{_ "apiDocumentation_Viewer_Title" }}
-              </h2> -->
-            <!-- </div> -->
-            <!-- <div class="panel-body"> -->
               {{# if displayEditor }}
                 {{> openApiEditor api=api }}
               {{ else }}
@@ -96,12 +85,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </p>
                 {{/ if }}
               {{/ if }}
-            <!-- </div> -->
           </div>
         {{/ if }}
-      <!-- </div> -->
     {{ else }}
       {{> spinner }}
     {{/ if }}<!-- /if template subscriptions ready -->
-  <!-- </div> -->
 </template>

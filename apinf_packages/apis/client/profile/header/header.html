@@ -84,18 +84,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
     <div class="col-md-2" style="text-align:right;">
       {{# if currentUser }}
-        {{> bookmark api=api }}
-      {{ else }}
-        <a href="#" class="bookmark-button">
-          <div
-              class="api-card-bookmark"
-              data-toggle="tooltip"
-              data-placement="bottom"
-              title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
-            <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
-            <i class="fa fa-bookmark bookmark-default"></i>
-          </div>
-        </a>
+        {{# if proxyBackend }}
+            <span class="pull-right" style="margin-top:0.9em;">
+              {{> apiKey api=api proxyBackend=proxyBackend }}
+            </span>
+        {{/ if }}
       {{/ if }}
     </div>
   </div>

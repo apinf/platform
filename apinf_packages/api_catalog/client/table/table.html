@@ -12,12 +12,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{# each api in apis }}
             {{# if api.currentUserCanView }}
               <tr>
-                <!-- <td class="col-sm-1">
-                  {{> viewApiStatus api=api width="0.6" }}
-                  <div class="api-catalog-table-logo center-block">
-                    {{> viewApiLogo api=api }}
-                  </div>
-                </td> -->
                 <td class="col-sm-9" style="padding-left:0;padding-right:0;">
                   {{# if currentUser }}
                     <span class="api-card-bookmark pull-right">
@@ -29,7 +23,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     <a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
                     <span style="font-weight: 400;">
                       {{# if api.organization }}
-                      <!-- TODO: link to organization -->
                         {{ api.organization.name }}
                       {{ else }}
                         {{ api.getApiManagersByName }}
@@ -38,9 +31,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     /&nbsp;{{ api.name }}
                     </a>
                   </h4>
-                  <!-- Api LifeCycleStatus Label -->
-                  <!-- {{> apiLifecycleStatus api=api }} -->
-
                   {{# unless api.isPublic }}
                     <span class="label label-default">
                       {{_ "catalogTable_labelText_private" }}
@@ -58,16 +48,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     </span>
                   </div>
                 </td>
-                <!-- <td class="col-sm-1" style="vertical-align:middle">
-                  {{> apiBackendRating api }}
-                </td> -->
-                <!-- <td class="col-sm-1 text-center"> -->
-                  <!-- {{ else }}
-                    <span class="api-card-bookmark">
-                      <i class="fa fa-bookmark bookmark-default"></i>
-                      {{ api.bookmarkCount }}
-                    </span> -->
-                <!-- </td> -->
               </tr>
             {{/ if }}
           {{/ each }}

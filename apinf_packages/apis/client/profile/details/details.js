@@ -41,8 +41,8 @@ Template.apiDetails.onRendered(() => {
   // Tell the user when copy is successful
   copyButton.on('success', () => {
     $('#copyApiUrl').tooltip('hide')
-      .attr('data-original-title', 'Copied!')
-      .tooltip('show');
+    .attr('data-original-title', 'Copied!')
+    .tooltip('show');
   });
 });
 
@@ -125,5 +125,19 @@ Template.apiDetails.helpers({
     }
     // Return apiKey
     return apiKey;
+  },
+  displayLinkBlock () {
+    const api = this.api;
+    const apiDoc = this.apiDoc;
+
+    // Display block if a user is manager of current API or URL is set
+    return api.currentUserCanManage() || (apiDoc && apiDoc.otherUrl);
+  },
+  displayViewBlock () {
+    const api = this.api;
+    const instance = Template.instance();
+
+    // Display block if a user is manager of current API or swagger documentation is available
+    return api.currentUserCanManage() || instance.documentationExists.get();
   },
 });

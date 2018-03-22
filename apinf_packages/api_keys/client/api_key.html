@@ -2,12 +2,12 @@
   {{# if showButton }}
     {{# if apiKey }}
     <div id="api-key-copy" class="input-group">
-      <span class="input-group-btn">
-        <!-- Regenerate API key button -->
+              <!-- Regenerate API key button -->
+      <!-- <span class="input-group-btn">
         <button id="regenerate-api-key" class="btn btn-success">
           {{_ "apiKeys_regenerateButton" }}
         </button>
-      </span>
+      </span> -->
       <input
              type="text"
              class="form-control"
@@ -20,7 +20,7 @@
                 type="button"
                 data-original-title="Copied!"
                 data-clipboard-target="#api-key">
-          <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
+          <i class="mdi mdi-content-copy"></i>
           {{_ "apiKeys_copyButtonText" }}
         </button>
       </span>

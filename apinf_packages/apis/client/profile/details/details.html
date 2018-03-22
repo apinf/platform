@@ -9,25 +9,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Header -->
       <div class="page-head-infoblock">
         <div class="api-info">
-          <!-- <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-            About
-          </h2> -->
-          <!-- <div class="pull-right" style="display:inline;">
-          {{# if currentUser }}
-            {{> bookmark api=api }}
-          {{ else }}
-            <a href="#" class="bookmark-button">
-              <div
-                  class="api-card-bookmark"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
-                <span class="api-card-bookmark-number">{{ api.bookmarkCount }}</span>
-                <i class="fa fa-bookmark bookmark-default"></i>
-              </div>
-            </a>
-          {{/ if }}
-        </div> -->
           <p style="color:#37474F;margin-bottom:0;font-size:16px;padding-bottom:1em;">
             {{ api.description }}
           </p>
@@ -55,7 +36,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <span class="num">1</span>
           {{_ "apiDetails_baseUrl_headingText" }}
         </h2>
-        <a href="{{ proxyUrl }}" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
+        <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
           {{ proxyUrl }}
           <i class="mdi mdi-open-in-new"></i>
         </a>
@@ -91,6 +72,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <span class="num">3</span>
           Documentation
         </h2>
+        {{# if displayLinkBlock }}
+        {{# if apiDoc.otherUrl }}
+          {{# each link in apiDoc.otherUrl }}
+            <div id="documentation-link" class="documentation-link">
+              <i class="fa fa-external-link"></i>&nbsp;
+              <a href="{{ link }}" target="_blank">
+                {{ link }}
+              </a>
+            </div>
+          {{/ each }}
+        {{/ if }}
+        {{/ if }}
         <p style="color:#6d859e;margin-top:1.5em;">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
           In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
