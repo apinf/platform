@@ -14,6 +14,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 import Chart from 'chart.js';
 
+// APInf imports
+import { getLocaleDateFormat } from '/apinf_packages/core/helper_functions/format_date';
+
 Template.responseTimeTimeline.onCreated(function () {
   const instance = this;
   const placeholderData = { dates: [] };
@@ -87,9 +90,12 @@ Template.responseTimeTimeline.onRendered(function () {
     // Get analytics data
     const selectedPathData = instance.selectedPathData.get();
 
+    // Get locale date format
+    const localeDateFormat = getLocaleDateFormat();
+
     // Create labels value
     const labels = selectedPathData.dates.map(date => {
-      return moment(date).format('MM/DD');
+      return moment(date).format(localeDateFormat);
     });
 
     // Update labels & data
