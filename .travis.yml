@@ -1,6 +1,4 @@
-sudo: required
-dist: trusty
-group: deprecated-2017Q4
+sudo: false
 
 language: node_js
 node_js:
@@ -30,8 +28,11 @@ services:
   - docker
 
 before_install:
+  - pwd
+  - ls -la
   # Install meteor locally on CI
-  - if [ ! -e "$HOME/.meteor/meteor" ]; then cat $HOME/.travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
+  - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
+
 
 before_script:
   - yarn

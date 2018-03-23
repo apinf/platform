@@ -95,4 +95,62 @@ Meteor.methods({
     // Return the API slug
     return newSlug;
   },
+  formSlugFromApiName (apiName) {
+    // Make sure apiName is a string
+    check(apiName, String);
+    // Get api
+    const api = Apis.findOne(apiName);
+    // Transliterates non-Latin scripts
+    const slug = slugs(apiName, { tone: false });
+
+    // Look for existing duplicate slug beginning of the newest one
+    const existingApi = Apis.findOne(
+      {
+        $or: [
+          { 'friendlySlugs.slug.base': slug },
+          { slug },
+        ],
+      },
+      { sort: { 'friendlySlugs.slug.index': -1 } }
+    );
+
+    // Initialize index value 0
+    let index = 0;
+    let newSlug = slug;
+    let slugBase = slug;
+
+    // If duplicate slug exists
+    if (existingApi && existingApi.friendlySlugs) {
+      // Return false, this block only execute in case of update slug
+      if (api && api._id === existingApi._id
+        && slug === existingApi.friendlySlugs.slug.base) {
+        return false;
+      }
+      // Set new index value
+      index = existingApi.friendlySlugs.slug.index + 1;
+
+      // Get base slug value
+      slugBase = existingApi.friendlySlugs.slug.base;
+
+      // Create new slug
+      newSlug = `${slugBase}-${index}`;
+    } else if (existingApi && existingApi.slug) {
+      // Set new index value
+      index += 1;
+
+      // Create new slug
+      newSlug = `${slugBase}-${index}`;
+    }
+
+    // Return slug and friendly slug value inside object
+    return {
+      slug: newSlug,
+      friendlySlugs: {
+        slug: {
+          base: slugBase,
+          index,
+        },
+      },
+    };
+  },
 });

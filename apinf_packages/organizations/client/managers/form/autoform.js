@@ -21,20 +21,36 @@ AutoForm.hooks({
       // Get error type string from error object
       const errorType = error.error;
 
-      if (errorType === 'email-not-registered') {
-        // Get 'email not registered' error message translation
-        const message = TAPi18n.__('organizationManagerForm_emailNotRegistered_errorText');
+      if (errorType === 'user-not-registered') {
+        // Get error message translation
+        const message = TAPi18n.__('organizationManagerForm_userNotRegistered_errorText');
 
-        // Warn manager that user email is not registered
-        sAlert.warning(message);
+        // Display error
+        sAlert.error(message, { timeout: 'none' });
       }
 
       if (errorType === 'manager-already-exist') {
-        // Get 'manager already exist' error message translation
+        // Get error message translation
         const message = TAPi18n.__('organizationManagerForm_managerAlreadyExist_errorText');
 
-        // Warn manager that manager is already exist
-        sAlert.warning(message);
+        // Display error
+        sAlert.error(message, { timeout: 'none' });
+      }
+
+      if (errorType === 'email-failed') {
+        // Get error message translation
+        const message = TAPi18n.__('organizationManagerForm_sendingVerificationEmailFailed');
+
+        // Show error to manager that verification email failed
+        sAlert.error(message, { timeout: 'none' });
+      }
+
+      if (errorType === 'email-failed-mail-setting-invalid') {
+        // Get error message translation
+        const message = TAPi18n.__('organizationManagerForm_invalidMailSetting_emailFailed');
+
+        // Show error to manager that mail settings invalid
+        sAlert.error(message, { timeout: 'none' });
       }
     },
   },

@@ -31,7 +31,7 @@ AutoForm.hooks({
             // Show success message to user
             sAlert.success(message);
             // Redirect to newly added organization
-            FlowRouter.go('organizationProfile', { slug });
+            FlowRouter.go('organizationProfile', { orgSlug: slug });
           }
         });
       }

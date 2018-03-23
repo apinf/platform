@@ -51,6 +51,14 @@ ManagementV1.swagger = {
     users: 'Users',
   },
   params: {
+    addRole: {
+      name: 'role',
+      in: 'body',
+      description: 'A role value to add',
+      schema: {
+        $ref: '#/definitions/addRole',
+      },
+    },
     limit: {
       name: 'limit',
       in: 'query',
@@ -111,6 +119,14 @@ ManagementV1.swagger = {
       required: true,
       type: 'string',
     },
+    removeRole: {
+      name: 'role',
+      in: 'query',
+      description: 'A role value to remove',
+      required: true,
+      type: 'string',
+      enum: ['admin', 'manager'],
+    },
     since: {
       name: 'since',
       in: 'query',
@@ -168,6 +184,16 @@ ManagementV1.swagger = {
     },
   },
   definitions: {
+    addRole: {
+      required: ['role'],
+      properties: {
+        role: {
+          type: 'string',
+          example: 'manager',
+          enum: ['admin', 'manager'],
+        },
+      },
+    },
     organization: {
       required: ['name', 'url'],
       properties: {
@@ -550,9 +576,15 @@ ManagementV1.swagger = {
             },
           },
         },
+        roles: {
+          type: 'array',
+          items: {
+            type: 'string',
+            example: 'manager',
+          },
+        },
       },
     },
-
   },
 };
 

@@ -11,9 +11,8 @@ const emailSchema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-  email: {
+  user: {
     type: String,
-    regEx: SimpleSchema.RegEx.Email,
   },
 });
 

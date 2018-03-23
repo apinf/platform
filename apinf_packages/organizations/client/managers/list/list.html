@@ -7,16 +7,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <ul class="list-group">
     {{# each organizationManagers }}
       <li class="list-group-item">
-        {{ username }}
-        ({{ email }})
-
-        {{# if hasMultipleManagers }}
-          <button
-            id="remove-organization-manager"
-            class="btn btn-danger btn-xs pull-right">
-            <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-          </button>
-        {{/ if }}
+      <!-- temporarily outcomment because of issue 3437 -->
+      <!--  {{ username }}
+        ({{ email }}) -->
+        {{ email }}
+        <div class="pull-right">
+          {{# unless emailVerified }}
+            <span class="label label-default">
+            {{_ 'organizationSettings_listManager_emailUnverifiedLabel' }}
+            </span>&nbsp;
+          {{/ unless }}
+          {{# if hasMultipleManagers }}
+            <button
+              id="remove-organization-manager"
+              class="btn btn-danger btn-xs">
+              <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+            </button>
+          {{/ if }}
+        </div>
       </li>
     {{/ each }}
   </ul>
