@@ -166,7 +166,7 @@ Template.manageApiDocumentationModal.events({
       }
     }
   },
-  'click #add-link': function () {
+  'click #add-link': function (event, templateInstance) {
     // Get Value from textbox
     const link = $('#link-value').val().trim();
     // Regex for https protocol
@@ -182,6 +182,17 @@ Template.manageApiDocumentationModal.events({
         linksData.push(link);
         Session.set('links', linksData);
       }
+
+      // Update Documentation (or create a new one)
+      const result = ApiDocs.update(
+        templateInstance.data.apiDoc._id,
+        { $push: { otherUrl: link } },
+        // If apiDocs document did not exist, create a new one
+        { upsert: true },
+      );
+
+      console.log('result=', result);
+
       // clear the text box
       $('#link-value').val('');
     } else {

@@ -26,6 +26,47 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </button>
   {{/ autoForm }}
 
+  <legend>
+    {{> showHelp 'documentation_link' }}
+    {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
+  </legend>
+  <div >
+    <fieldset class="form-group">
+      <label for="links">
+      {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
+      </label>
+      <div class="row">
+        <div class="col-sm-10">
+        <input id="link-value" name="links" class="form-control" title="">
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-primary" id="add-link" title={{ userCanAddUrl }}>
+            <span class="fa fa-plus"></span>
+          {{_ "manageApiDocumentationModal_CreateLinks_AddButton" }}
+          </button>
+      </div>
+    </div>
+      <small class="text-danger invisible" id="errorMessage">
+      {{_ "invalidUrlMessage" }}
+      </small>
+    </fieldset>
+  </div>
+
+  <div id="otherUrl-link" class="otherUrl-link">
+    <ul class="list-group">
+    {{# each url in otherUrls }}
+      <li class="list-group-item">
+        <a href="{{ url }}" id="other-url-@index" target="_blank">
+          {{ url }}
+        </a>
+        <span class="pull-right btn-danger btn-xs">
+          <i class="fa mdi mdi-delete cursor delete-link" id="{{ @index }}"></i>
+        </span>
+      </li>
+    {{/ each }}
+    </ul>
+  </div>
+
   <!-- Display status of logo uploading -->
   {{# if apiLogoUploading }}
     {{> spinner }}
