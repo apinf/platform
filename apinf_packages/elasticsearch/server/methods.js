@@ -11,7 +11,7 @@ import { check } from 'meteor/check';
 import ElasticSearch from 'elasticsearch';
 
 Meteor.methods({
-  getElasticsearchData (host, queryParams) {
+  async getElasticsearchData (host, queryParams) {
     // Make sure params are String type
     check(host, String);
     check(queryParams, Object);
@@ -19,17 +19,6 @@ Meteor.methods({
     // Initialize Elasticsearch client, using provided host value
     const esClient = new ElasticSearch.Client({ host });
 
-    return esClient
-      .ping({
-        // ping usually has a 5000ms timeout
-        requestTimeout: 5000,
-      })
-      .then(() => {
-        return esClient.search(queryParams);
-      })
-      .catch(error => {
-        // Throw an error
-        throw new Meteor.Error(error);
-      });
+    return await esClient.search(queryParams);
   },
 });

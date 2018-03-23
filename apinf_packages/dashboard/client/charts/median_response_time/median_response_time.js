@@ -20,6 +20,8 @@ Template.medianResponseTime.onRendered(function () {
   const instance = this;
 
   const id = instance.data.proxyBackendId;
+  // Get Date format
+  const dateFormat = instance.data.dateFormat;
   // Get querySelector to related <canvas>
   const querySelector = `[data-overview-id="${id}"] .median-response-time`;
 
@@ -71,7 +73,7 @@ Template.medianResponseTime.onRendered(function () {
     const chartData = Template.currentData().chartData;
 
     // Get locale date format
-    const localeDateFormat = getLocaleDateFormat();
+    const localeDateFormat = getLocaleDateFormat(dateFormat);
 
     // Get dates
     const labels = chartData.map(dataset => {

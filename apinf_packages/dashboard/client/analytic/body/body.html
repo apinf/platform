@@ -17,7 +17,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </p>
           <div class="form-group">
             {{# if overviewChartResponse }}
-              {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=proxyBackendId }}
+              {{> requestsOverTime
+                chartData=(getChartData 'requests')
+                proxyBackendId=proxyBackendId
+                dateFormat=dateFormat
+              }}
             {{ else }}
               {{> spinner}}
             {{/ if }}
@@ -62,7 +66,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </p>
           <div class="form-group">
             {{# if overviewChartResponse }}
-              {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackendId }}
+              {{> medianResponseTime
+                chartData=(getChartData 'time')
+                proxyBackendId=proxyBackendId
+                dateFormat=dateFormat
+              }}
             {{ else }}
               {{> spinner}}
             {{/ if }}
@@ -92,7 +100,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </p>
           <div class="form-group">
             {{# if overviewChartResponse }}
-              {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=proxyBackendId }}
+              {{> uniqueUsersOverTime
+                chartData=(getChartData 'users')
+                proxyBackendId=proxyBackendId
+                dateFormat=dateFormat
+              }}
             {{ else }}
               {{> spinner}}
             {{/ if }}
@@ -121,7 +133,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'apiAnalyticPageBody_timelineChartTitle_requests' }}
           </p>
           {{# if timelineChartData }}
-            {{> requestTimeline chartData=timelineChartData listPaths=listPaths }}
+            {{> requestTimeline
+              chartData=timelineChartData
+              listPaths=listPaths
+              dateFormat=dateFormat
+            }}
           {{ else }}
             {{> spinner }}
           {{/ if }}
@@ -135,7 +151,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'apiAnalyticPageBody_timelineChartTitle_time' }}
           </p>
           {{# if timelineChartData }}
-            {{> responseTimeTimeline chartData=timelineChartData listPaths=listPaths }}
+            {{> responseTimeTimeline
+              chartData=timelineChartData
+              listPaths=listPaths
+              dateFormat=dateFormat
+            }}
           {{ else }}
             {{> spinner }}
           {{/ if }}

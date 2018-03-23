@@ -8,6 +8,7 @@
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -57,5 +58,10 @@ Template.apiAnalyticPageHeader.helpers({
     const instance = Template.instance();
 
     return instance.lastUpdateTime.get();
+  },
+  displayLastUpdateTime () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Not display info about Last update if selected "Yesterday"
+    return timeframe !== '48';
   },
 });

@@ -16,7 +16,6 @@ import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
-import moment from 'moment';
 import _ from 'lodash';
 
 // APInf import
@@ -25,6 +24,7 @@ import {
   arrowDirection,
   percentageValue,
   summaryComparing } from '/apinf_packages/dashboard/lib/trend_helpers';
+import getDateRange from '../../../../core/helper_functions/date_range';
 
 Template.apiAnalyticPageBody.onCreated(function () {
   const instance = this;
@@ -47,40 +47,63 @@ Template.apiAnalyticPageBody.onCreated(function () {
   instance.autorun(() => {
     const timeframe = FlowRouter.getQueryParam('timeframe');
 
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
+    const queryOption = getDateRange(timeframe);
 
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+    const params = {
+      proxyBackendId,
+      fromDate: queryOption.from,
+      toDate: queryOption.to,
+      interval: queryOption.interval,
+      timeframe,
+    };
 
-    Meteor.call('totalNumberRequestsAndTrend',
-      { fromDate, toDate, timeframe }, [proxyBackendId], (error, result) => {
-        this.analyticsData.set(result);
-      });
+    // "Today" or "Yesterday".
+    if (timeframe === '12' || timeframe === '48') {
+      // Make ES request to aggregated by hour
+      Meteor.call('overviewChartsDataFromElasticsearch', params, [proxyBackendId],
+        (error, dataset) => {
+          if (error) throw new Meteor.Error(error.message);
 
-    // Get data about summary statistic over time
-    Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
-      (error, dataset) => {
+          instance.overviewChartResponse.set(dataset);
+        });
+
+      Meteor.call('timelineChartDataFromElasticsearch', instance.requestPath, params,
+        (error, response) => {
+          if (error) throw new Error(error);
+
+          instance.timelineChartResponse.set(response.requestPathsData);
+          instance.allRequestPaths.set(response.allRequestPaths);
+        });
+    } else {
+      // "Last N Days"
+      // Get data for Overview charts
+      Meteor.call('overviewChartsData', params, (error, dataset) => {
         instance.overviewChartResponse.set(dataset);
       });
 
+      // Get data for Timeline charts
+      Meteor.call('timelineChartData', params,
+        (error, response) => {
+          if (error) throw new Error(error);
+
+          instance.timelineChartResponse.set(response.requestPathsData);
+          instance.allRequestPaths.set(response.allRequestPaths);
+        });
+    }
+
+    Meteor.call('totalNumberRequestsAndTrend',
+      params, [proxyBackendId], (error, result) => {
+        this.analyticsData.set(result);
+      });
+
     // Get data about response status codes
-    Meteor.call('statusCodesData', { proxyBackendId, fromDate, toDate },
+    Meteor.call('statusCodesData', params,
       (error, dataset) => {
         instance.statusCodesResponse.set(dataset);
       });
 
-    // Get data for Timeline charts
-    Meteor.call('timelineChartData', { proxyBackendId, fromDate, toDate },
-      (error, response) => {
-        if (error) throw new Error(error);
-
-        instance.timelineChartResponse.set(response.requestPathsData);
-        instance.allRequestPaths.set(response.allRequestPaths);
-      });
-
     // Get data for Errors table
-    Meteor.call('errorsStatisticsData', { proxyBackendId, fromDate, toDate },
+    Meteor.call('errorsStatisticsData', params,
       (error, dataset) => {
         if (error) throw new Error(error);
 
@@ -92,11 +115,7 @@ Template.apiAnalyticPageBody.onCreated(function () {
   instance.autorun(() => {
     const timeframe = FlowRouter.getQueryParam('timeframe');
 
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
-
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+    const queryOption = getDateRange(timeframe);
 
     // Get related instance of Proxy
     const proxy = Proxies.findOne(proxyBackend.proxyId);
@@ -106,7 +125,8 @@ Template.apiAnalyticPageBody.onCreated(function () {
 
     if (elasticsearchHost) {
       // Create a query. It depends on requestPath
-      const usersQuery = mostUsersRequest(instance.requestPath, { fromDate, toDate });
+      const usersQuery = mostUsersRequest(instance.requestPath,
+        { fromDate: queryOption.from, toDate: queryOption.to });
 
       // Send request to get data about most frequent users
       Meteor.call('getElasticsearchData', elasticsearchHost, usersQuery,
@@ -259,5 +279,16 @@ Template.apiAnalyticPageBody.helpers({
 
     // Return value of errors statistics
     return instance.errorsStatisticsResponse.get();
+  },
+  dateFormat () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+
+    if (timeframe === '12' || timeframe === '48') {
+      // Locale format of Hours * minutes
+      return 'LT';
+    }
+
+    // Otherwise It's Date format
+    return 'L';
   },
 });

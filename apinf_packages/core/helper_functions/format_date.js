@@ -23,7 +23,7 @@ export function formatDate (date, dateFormat = 'LL') {
   return moment(date).locale(language).format(dateFormat);
 }
 
-export function getLocaleDateFormat () {
+export function getLocaleDateFormat (dateFormat = 'L') {
   // Use regex to define Finnish locale for different browsers
   const regex = RegExp('fi*');
 
@@ -36,7 +36,7 @@ export function getLocaleDateFormat () {
   // Get locale data
   const localeData = moment.localeData();
 
-  let format = localeData.longDateFormat('L');
+  let format = localeData.longDateFormat(dateFormat);
 
   if (regex.test(locale)) {
     // Remove year part (save the last dot)

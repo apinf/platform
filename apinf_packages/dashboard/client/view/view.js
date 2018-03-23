@@ -11,20 +11,17 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// Npm packages imports
-import moment from 'moment';
-
+// COllection imports
 import Apis from '/apinf_packages/apis/collection';
+
+// APInf import
+import getDateRange from '/apinf_packages/core/helper_functions/date_range';
 
 Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  instance.groupingIds = new ReactiveVar({
-    myApis: [],
-    managedApis: [],
-    otherApis: [],
-  });
+  instance.groupingIds = new ReactiveVar();
 
   instance.autorun(() => {
     const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -43,43 +40,53 @@ Template.dashboardView.onCreated(function () {
   instance.analyticsDataOtherApis = new ReactiveVar();
 
   instance.autorun(() => {
-    const proxyId = FlowRouter.getQueryParam('proxy_id');
-    const timeframe = FlowRouter.getQueryParam('timeframe');
-
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
-
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
-
-    Meteor.call('overviewChartsData', { proxyId, fromDate, toDate }, (error, dataset) => {
-      instance.overviewChartResponse.set(dataset);
-    });
-  });
-
-  instance.autorun(() => {
     const grouping = instance.groupingIds.get();
     const timeframe = FlowRouter.getQueryParam('timeframe');
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
+    const proxyId = FlowRouter.getQueryParam('proxy_id');
 
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+    if (grouping && timeframe && proxyId) {
+      const queryOption = getDateRange(timeframe);
 
-    Meteor.call('totalNumberRequestsAndTrend',
-      { fromDate, toDate, timeframe }, grouping.myApis, (error, result) => {
-        this.analyticsDataMyApis.set(result);
-      });
+      const params = {
+        proxyId,
+        fromDate: queryOption.from,
+        toDate: queryOption.to,
+        interval: queryOption.interval,
+        timeframe,
+      };
 
-    Meteor.call('totalNumberRequestsAndTrend',
-      { fromDate, toDate, timeframe }, grouping.managedApis, (error, result) => {
-        this.analyticsDataManagedApis.set(result);
-      });
+      Meteor.call('totalNumberRequestsAndTrend',
+        params, grouping.myApis, (error, result) => {
+          this.analyticsDataMyApis.set(result);
+        });
 
-    Meteor.call('totalNumberRequestsAndTrend',
-      { fromDate, toDate, timeframe }, grouping.otherApis, (error, result) => {
-        this.analyticsDataOtherApis.set(result);
-      });
+      Meteor.call('totalNumberRequestsAndTrend',
+        params, grouping.managedApis, (error, result) => {
+          this.analyticsDataManagedApis.set(result);
+        });
+
+      Meteor.call('totalNumberRequestsAndTrend',
+        params, grouping.otherApis, (error, result) => {
+          this.analyticsDataOtherApis.set(result);
+        });
+
+      // "Last 7 Days" or "Last 30 Days"
+      if (timeframe === '7' || timeframe === '28') {
+        Meteor.call('overviewChartsData', params, (error, dataset) => {
+          instance.overviewChartResponse.set(dataset);
+        });
+      } else {
+        const proxyBackendsIds = grouping.myApis.concat(
+          grouping.managedApis, grouping.otherApis
+        );
+
+        // "Today" or "Yesterday". Make ES request to aggregated by hour
+        Meteor.call('overviewChartsDataFromElasticsearch', params, proxyBackendsIds,
+          (error, dataset) => {
+            instance.overviewChartResponse.set(dataset);
+          });
+      }
+    }
   });
 });
 

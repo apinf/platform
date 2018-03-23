@@ -91,7 +91,7 @@ Template.responseTimeTimeline.onRendered(function () {
     const selectedPathData = instance.selectedPathData.get();
 
     // Get locale date format
-    const localeDateFormat = getLocaleDateFormat();
+    const localeDateFormat = getLocaleDateFormat(instance.data.dateFormat);
 
     // Create labels value
     const labels = selectedPathData.dates.map(date => {

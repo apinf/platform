@@ -71,7 +71,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
     const chartData = Template.currentData().chartData;
 
     // Get locale date format
-    const localeDateFormat = getLocaleDateFormat();
+    const localeDateFormat = getLocaleDateFormat(instance.data.dateFormat);
 
     // Get dates
     const labels = chartData.map(dataset => {
