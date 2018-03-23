@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="userMenu">
-  <li class="dropdown">
+  <li class="dropdown pull-right nav-bar-right-links">
     <a
       href="#"
       class="dropdown-toggle"
@@ -12,46 +12,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       role="button"
       id="usermenu"
       aria-haspopup="true"
-      aria-expanded="false">
-      <i class="fa fa-user" aria-hidden="true"></i>
-        <span class="username">{{ user.username }}</span>
-        &nbsp;
-        <i class="fa fa-chevron-down"></i>
+      aria-expanded="false"
+      style="text-decoration:none; text-transform:none;padding-right:0;top:4px;line-height:54px;">
+        <i class="mdi mdi-account-circle" style="font-size:30px;"></i>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu block-wrapper dropdown-menu-triangle-b-r" style="top: 54px;
+    right: -4px;">
       <li>
         <a href="{{ pathFor 'profile' }}" id="profile-button">
-          {{_ "userMenu_profile" }}
+          <!-- {{_ "userMenu_profile" }} -->
+          Account Settings
         </a>
       </li>
-      <li>
-        <a href="{{ pathFor 'account' }}" id="account-button">
-          {{_ "userMenu_account" }}
-        </a>
-      </li>
-      {{# if isInRole 'admin' }}
-      <li>
-        <a href="{{ pathFor 'branding' }}" id="branding-button">
-          {{_ "userMenu_branding" }}
-        </a>
-      </li>
-      <li>
-        <a href="{{ pathFor 'settings' }}" id="settings-button">
-          {{_ "userMenu_settings" }}
-        </a>
-      </li>
-      <li>
-        <a href="{{ pathFor 'proxies' }}" id="proxies-button">
-          {{_ "userMenu_proxies" }}
-        </a>
-      </li>
-      <li>
-        <a href="{{ pathFor 'login-platforms' }}" id="login-platforms-button">
-          {{_ "userMenu_loginPlatforms" }}
-        </a>
-      </li>
-      {{/ if }}
-      <li class="divider"></li>
       <li>
         <a href="/sign-out" id="signout-button">
           {{_ "userMenu_signout" }}
@@ -59,4 +31,42 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </li>
     </ul>
   </li>
+  {{# if isInRole 'admin' }}
+    <li class="dropdown pull-right nav-bar-right-links">
+      <a
+        href="#"
+        class="dropdown-toggle"
+        data-toggle="dropdown"
+        role="button"
+        id="usermenu"
+        aria-haspopup="true"
+        aria-expanded="false"
+        style="text-decoration:none; text-transform:none;top:4px;">
+        <i class="mdi mdi-settings" style="padding-left: 5px;
+    font-size: 22px;padding-top:18px;"></i>
+      </a>
+      <ul class="dropdown-menu block-wrapper dropdown-menu-triangle-b-r" style="right: 7px; top: 55px;">
+    <li>
+      <a href="{{ pathFor 'branding' }}" id="branding-button">
+        {{_ "userMenu_branding" }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ pathFor 'settings' }}" id="settings-button">
+        {{_ "userMenu_settings" }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ pathFor 'proxies' }}" id="proxies-button">
+        {{_ "userMenu_proxies" }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ pathFor 'login-platforms' }}" id="login-platforms-button">
+        {{_ "userMenu_loginPlatforms" }}
+      </a>
+    </li>
+  </ul>
+  </li>
+  {{/ if }}
 </template>

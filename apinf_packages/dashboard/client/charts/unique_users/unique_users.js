@@ -27,7 +27,7 @@ Template.uniqueUsersOverTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart we want
-    type: 'bar',
+    type: 'line',
 
     // Data for displaying chart
     data: {
@@ -35,9 +35,12 @@ Template.uniqueUsersOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
-          backgroundColor: '#C6C5C5',
-          borderColor: '#959595',
-          borderWidth: 1,
+          backgroundColor: '#e3f2fc',
+          borderColor: '#3886d4',
+          borderWidth: 2,
+          data: [],
+          pointRadius: 0,
+          pointHoverRadius: 5,
         },
       ],
     },

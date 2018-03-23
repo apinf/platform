@@ -3,29 +3,58 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-.settings-menu {
-  .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
-    color: #fff;
-    background-color: #428bca;
-  }
+// .settings-menu {
+//   .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+//     color: #fff;
+//     background-color: #428bca;
+//   }
+//
+//   .nav-pills > li > a {
+//     padding-left: 0.4em;
+//     padding-right: 0.4em;
+//   }
+//
+//   .nav-stacked > li + li {
+//     margin-top: 0;
+//     margin-left: 0;
+//   }
+//
+//   .active2 {
+//     font-weight: bold;
+//     border-radius: 0;
+//     border-right: 4px solid #428bca;
+//   }
+//
+//   .panel-body {
+//     padding: 0;
+//   }
+// }
 
-  .nav-pills > li > a {
-    padding-left: 0.4em;
-    padding-right: 0.4em;
-  }
+.platform-branding {
+  .nav-tabs { border-bottom: 1px solid #f2f2f2; }
+  .nav-tabs > li {padding-right: 30px;}
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+  .nav-tabs > li > a { border: none; color: #666; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 15px;}
+  .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #333 !important; background: transparent;}
+  .nav-tabs > li > a::after { content: ""; background: #1a75d2; height: 3px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+  .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+  .tab-nav > li > a::after { background: #1a75d2 none repeat; color: #fff; }
+  .tab-pane { padding-top: 1.5em; }
 
-  .nav-stacked > li + li {
-    margin-top: 0;
-    margin-left: 0;
-  }
+  .select2 {
+    width: 100% !important;
 
-  .active2 {
-    font-weight: bold;
-    border-radius: 0;
-    border-right: 4px solid #428bca;
-  }
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+      border-top: 1px solid #C1C7CD;
+      outline: 0;
+    }
 
-  .panel-body {
-    padding: 0;
+    li.select2-search {
+      width: 100% !important;
+
+      input {
+        width: 100% !important;
+      }
+    }
   }
 }

@@ -6,18 +6,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="searchField">
   <div class="searchblock searchblock-toggle" id="search-form">
     <form id="search-form" action="{{ pathFor 'search' }}">
-      <div class="input-group">
+      <div class="input-group" style="width: 300px;max-width: 500px;">
         <input
                name="q"
                type="text"
                class="form-control"
                id="search-text"
-               placeholder="{{_ 'searchField_placeholder' }}">
-        <div class="input-group-btn">
+               placeholder="Search APIs..."
+               style="border-radius: 5px;z-index: 1;">
+        <!-- <div class="input-group-btn">
           <button class="btn btn-primary" type="submit" id="execute-search">
             {{_ "searchField_button" }}
           </button>
-        </div>
+        </div> -->
       </div>
     </form>
   </div>

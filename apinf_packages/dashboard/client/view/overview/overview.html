@@ -35,7 +35,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
           </span>
           {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=dataset.proxyBackendId }}
-          <div class="{{ arrowDirection 'requests' }}"></div>
+          <i class="mdi mdi-{{ arrowDirection 'requests' }}"></i>
           <span>{{ overviewComparing 'requests' }}</span>
         </div>
       </div>
@@ -48,7 +48,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
           </span>
           {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=dataset.proxyBackendId }}
-          <div class="{{ arrowDirection 'time' }}"></div>
+          <i class="mdi mdi-{{ arrowDirection 'time' }}"></i>
           <span>{{ overviewComparing 'time' }}</span>
         </div>
       </div>
@@ -61,7 +61,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
           </span>
           {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=dataset.proxyBackendId }}
-          <div class="{{ arrowDirection 'users' }}"></div>
+          <i class="mdi mdi-{{ arrowDirection 'users' }}"></i>
           <span>{{ overviewComparing 'users' }}</span>
           <div class="overview-help-text">
             <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}

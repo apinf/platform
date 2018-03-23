@@ -4,37 +4,67 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiSettingsDetails">
-  <!-- Details panel -->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
-        {{_ "apiSettingsDetails_title" }}
-      </h2>
+  <h2 style="font-size:16px;margin-top:0;">
+    {{_ "apiSettingsDetails_uploadLogo_heading" }}
+  </h2>
+  <p>
+    {{_ "apiSettingsDetails_uploadLogoText" }}
+  </p>
+  {{> uploadApiLogo api=api }}
+  <hr class="panel-hr" />
+  {{# autoForm
+      collection=apisCollection
+      doc=api
+      id="apiDetailsForm"
+      type="update" }}
+    {{> afQuickField name='name' id="api-name" }}
+    {{> afQuickField name='description' id="api-description" }}
+    {{> afQuickField name='url' id="api-url" }}
+    <!-- {{> afQuickField name='lifecycleStatus' id="api-status" }} -->
+    <button type="submit" class="btn btn-success" id="save-settings">
+      {{_ "apiSettingsDetails_saveButton" }}
+    </button>
+  {{/ autoForm }}
+
+  <legend>
+    {{> showHelp 'documentation_link' }}
+    {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
+  </legend>
+  <div >
+    <fieldset class="form-group">
+      <label for="links">
+      {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
+      </label>
+      <div class="row">
+        <div class="col-sm-10">
+        <input id="link-value" name="links" class="form-control" title="">
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-primary" id="add-link" title={{ userCanAddUrl }}>
+            <span class="fa fa-plus"></span>
+          {{_ "manageApiDocumentationModal_CreateLinks_AddButton" }}
+          </button>
+      </div>
     </div>
-    <div class="panel-body">
-      <h3>
-        {{_ "apiSettingsDetails_uploadLogo_heading" }}
-      </h3>
-      <p>
-        {{_ "apiSettingsDetails_uploadLogoText" }}
-      </p>
-      {{> uploadApiLogo api=api }}
-      <hr class="panel-hr" />
-      {{# autoForm
-          collection=apisCollection
-          doc=api
-          id="apiDetailsForm"
-          type="update" }}
-        {{> afQuickField name='name' id="api-name" }}
-        {{> afQuickField name='description' id="api-description" }}
-        {{> afQuickField name='url' id="api-url" }}
-        {{> afQuickField name='lifecycleStatus' id="api-status" }}
-        <button type="submit" class="btn btn-success" id="save-settings">
-          {{_ "apiSettingsDetails_saveButton" }}
-        </button>
-      {{/ autoForm }}
-    </div>
+      <small class="text-danger invisible" id="errorMessage">
+      {{_ "invalidUrlMessage" }}
+      </small>
+    </fieldset>
+  </div>
+
+  <div id="otherUrl-link" class="otherUrl-link">
+    <ul class="list-group">
+    {{# each url in otherUrls }}
+      <li class="list-group-item">
+        <a href="{{ url }}" id="other-url-@index" target="_blank">
+          {{ url }}
+        </a>
+        <span class="pull-right btn-danger btn-xs">
+          <i class="fa mdi mdi-delete cursor delete-link" id="{{ @index }}"></i>
+        </span>
+      </li>
+    {{/ each }}
+    </ul>
   </div>
 
   <!-- Display status of logo uploading -->

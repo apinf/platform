@@ -4,27 +4,28 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiSettingsDelete">
-  <!-- Delete panel -->
-  <div class="panel panel-danger">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-        {{_ "apiSettingsDelete_panelTitle" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      <h3>
-        {{_ "apiSettingsDelete_apiTitle" }}
-      </h3>
-      <p>
-        {{_ "apiSettingsDelete_apiText" }}
-      </p>
-      <a
-         href="#"
-         class="btn btn-danger"
-         id="delete-api">
-        {{_ "apiSettingsDelete_deleteButton" }}
-      </a>
-    </div>
-  </div>
+  <h2 style="font-size:16px;margin-top:0;">
+    {{_ "apiSettingsDelete_apiTitle" }}
+  </h2>
+  <p>
+    {{_ "apiSettingsDelete_apiText" }}
+  </p>
+  <a
+     href="#"
+     class="btn btn-danger"
+     id="delete-api">
+    {{_ "apiSettingsDelete_deleteButton" }}
+  </a>
+
+  <hr class="panel-hr" />
+
+  <h2 style="font-size:16px;margin-top:0;">
+    {{_ "apiSettingsVisibility_heading" }}
+  </h2>
+  <p>
+    {{_ "apiSettingsVisibility_text" }}
+  </p>
+
+  {{> visibilityToggle api=api }}
+
 </template>

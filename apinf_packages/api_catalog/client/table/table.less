@@ -4,6 +4,18 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 .api-catalog-table {
+  margin-bottom: 0;
+
+  tbody > tr > td {
+    padding-top: 2em;
+    padding-bottom: 1em;
+  }
+
+  tbody > tr:first-child td {
+    border-top: none;
+    padding-top: 0;
+  }
+
   tbody > tr > td {
     vertical-align: middle;
   }
@@ -20,13 +32,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .api-catalog-table-title {
     margin-top: 0;
     display: inline;
-
+    color: #55626c;
+    font-weight: 400;
+    font-size: 1.3em;
+    margin-left: 0.3em;
+    position: relative;
+    top: 3px;
   }
   .label {
-    vertical-align: text-top;
-    margin-right: .2em;
+    color: #666;
+    border: 1px solid #999;
+    font-weight: 400;
+    background-color: transparent;
+    position: relative;
+    bottom: 2px;
+    margin-left: 5px;
   }
   .api-catalog-table-description {
     margin-top: 0.5em;
+    color: #55626c;
+    min-height: 10px;
   }
+  .created-at {
+    color: #55626c;
+  }
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+  border-top: 1px solid #ecf3f8;
 }

@@ -27,8 +27,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 /* Success button */
 .btn-success {
-  background-color: @brand-success;
-  border-color: @brand-success;
+  background: #19B934;
+  border-color: #19B934;
+  text-align: center;
+  min-width: 80px;
+  line-height: 40px;
+  height: 40px;
+  display: inline-block;
+  padding: 0 20px;
+  outline: none;
+  border-radius: 4px;
+  transition: all .2s;
+  border: 1px solid transparent;
+  text-decoration: none;
 }
 
 .btn-success:hover {
@@ -39,7 +50,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 .btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover, .open>.dropdown-toggle.btn-success.focus, .open>.dropdown-toggle.btn-success:focus, .open>.dropdown-toggle.btn-success:hover {
   background-color: darken(@brand-success, 5%);
   border-color: darken(@brand-success, 5%);
-  color: #FFF;
+  color: #fff;
 }
 
 /* Info button */

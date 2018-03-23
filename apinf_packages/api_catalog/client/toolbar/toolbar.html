@@ -4,104 +4,60 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiCatalogToolbar">
-  <nav id="catalog-toolbar" class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button
-                type="button"
-                class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#catalog-toolbar-navbar"
-                aria-expanded="false">
-          <span class="sr-only">
-            {{_ "catalog_toolbar_toggleCollapse" }}
-          </span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-
+    <div class="col-md-3" id="catalog-toolbar" style="padding-left:5px;">
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="catalog-toolbar-navbar">
-        <div class="nav navbar-nav">
-          <form class="navbar-form">
-            <div class="form-group">
-              <label for="sort-select">
-                {{_ "catalog_toolbar_sortBy_title" }}
-              </label>
-              <select id="sort-select" class="form-control">
-                <option value="name-asc" id="sortby-name-a-z">
-                  {{_ "catalog_toolbar_sortMenuOptions_name-a-z" }}
-                </option>
-                 <option value="name-desc" id="sortby-name-z-a">
-                  {{_ "catalog_toolbar_sortMenuOptions_name-z-a" }}
-                </option>
-                <option value="created_at" id="sortby-recent">
-                  {{_ "catalog_toolbar_sortMenuOptions_recent" }}
-                </option>bookmarkCount
-                <option value="bookmarkCount" id="sortby-most-bookmarked">
-                  {{_ "catalog_toolbar_sortMenuOptions_mostBookmarked" }}
-                </option>
-                <option value="averageRating" id="sortby-rating">
-                  {{_ "catalog_toolbar_sortMenuOptions_highRating" }}
-                </option>
-              </select>
-            </div>
-          </form>
+      <div id="catalog-toolbar-navbar" class="block-wrapper">
+        <div class="form-group">
+          <label for="sort-select" style="color: #4c6072;">
+            {{_ "catalog_toolbar_sortBy_title" }}
+          </label>
+          <select id="sort-select" class="form-control">
+            <option value="name-asc" id="sortby-name-a-z">
+              {{_ "catalog_toolbar_sortMenuOptions_name-a-z" }}
+            </option>
+             <option value="name-desc" id="sortby-name-z-a">
+              {{_ "catalog_toolbar_sortMenuOptions_name-z-a" }}
+            </option>
+            <option value="created_at" id="sortby-recent">
+              {{_ "catalog_toolbar_sortMenuOptions_recent" }}
+            </option>bookmarkCount
+            <option value="bookmarkCount" id="sortby-most-bookmarked">
+              {{_ "catalog_toolbar_sortMenuOptions_mostBookmarked" }}
+            </option>
+            <option value="averageRating" id="sortby-rating">
+              {{_ "catalog_toolbar_sortMenuOptions_highRating" }}
+            </option>
+          </select>
         </div>
 
         {{# if currentUser }}
-          <div class="nav navbar-nav">
-            <div class="btn-group navbar-btn filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons">
-              <label class="btn btn-default active" id="filterBy-all">
-                <input type="radio" name="filter-options" value="all" checked>
-                {{_ "catalog_toolbar_filterOptions_showAll" }}
-              </label>
-              <label class="btn btn-default" id="filterBy-my-apis">
-                <input type="radio" name="filter-options" value="my-apis">
-                {{_ "catalog_toolbar_filterOptions_myApis" }}
-              </label>
-              <label class="btn btn-default" id="filterBy-my-bookmarks">
-                <input type="radio" name="filter-options" value="my-bookmarks">
-                {{_ "catalog_toolbar_filterOptions_myBookmarks" }}
-              </label>
-            </div>
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-default" id="filterBy-with-docs">
-                <input type="checkbox" name="filter-api-documentation" value="with-docs">
-                {{_ "catalog_toolbar_filterOptions_apisWithDocumentation" }}
-              </label>
-            </div>
+          <div class="filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons"
+          style="padding-left: 0;">
+            <label class="btn active" id="filterBy-all" style="width: 100%;text-align: left;color: #4c6072;">
+              <input type="radio" name="filter-options" value="all" checked>
+              {{_ "catalog_toolbar_filterOptions_showAll" }}
+            </label>
+            <label class="btn" id="filterBy-my-apis" style="width: 100%;text-align: left;color: #4c6072;">
+              <input type="radio" name="filter-options" value="my-apis">
+              {{_ "catalog_toolbar_filterOptions_myApis" }}
+            </label>
+            <label class="btn" id="filterBy-my-bookmarks" style="width: 100%;text-align: left;color: #4c6072;">
+              <input type="radio" name="filter-options" value="my-bookmarks">
+              {{_ "catalog_toolbar_filterOptions_myBookmarks" }}
+            </label>
           </div>
-        {{/ if }}
-
-        <div class="nav navbar-nav navbar-right">
-          <a href="/rss/apis" target="_blank" class="rss-feed fa fa-rss-square fa-3x btn" title="{{_ 'apisRssIcon_tooltipText_Rss'}}">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn" id="filterBy-with-docs" style="width: 100%;text-align: left;color: #4c6072;">
+              <input type="checkbox" name="filter-api-documentation" value="with-docs">
+              {{_ "catalog_toolbar_filterOptions_apisWithDocumentation" }}
+            </label>
+          </div>
+        {{# if userCanAddApi }}
+          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success" style="margin-top: 15px;width: 100%;">
+            Add New API
           </a>
-          {{> apisFilterIcon }}
-          <div class="btn-group navbar-btn" role="group" aria-label="View mode" data-toggle="buttons">
-            <label
-                   class="btn btn-default toolbar-tooltip active"
-                   data-toggle="tooltip"
-                   data-placement="bottom"
-                   data-original-title="{{_ 'catalog_toolbar_viewMode_grid' }}"
-                   id="viewMode-grid">
-              <input type="radio" name="view-mode" id="grid-mode" value="grid" checked>
-              <i class="fa fa-th-large" aria-hidden="true"></i>
-            </label>
-            <label
-                   class="btn btn-default toolbar-tooltip"
-                   data-toggle="tooltip"
-                   data-placement="bottom"
-                   data-original-title="{{_ 'catalog_toolbar_viewMode_table' }}"
-                   id="viewMode-table">
-              <input type="radio" name="view-mode" id="table-mode" value="table">
-              <i class="fa fa-table" aria-hidden="true"></i>
-            </label>
-          </div>
-        </div>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+        {{/ if }}
+        {{/ if }}
+      </div>
+    </div>
 </template>

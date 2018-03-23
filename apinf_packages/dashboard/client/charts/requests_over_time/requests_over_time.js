@@ -27,7 +27,7 @@ Template.requestsOverTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'bar',
+    type: 'line',
 
     // Data for displaying chart
     data: {
@@ -35,9 +35,12 @@ Template.requestsOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
-          backgroundColor: '#C6C5C5',
-          borderColor: '#959595',
-          borderWidth: 1,
+          backgroundColor: '#e3f2fc',
+          borderColor: '#3886d4',
+          borderWidth: 2,
+          data: [],
+          pointRadius: 0,
+          pointHoverRadius: 5,
         },
       ],
     },

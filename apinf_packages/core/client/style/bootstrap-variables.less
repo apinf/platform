@@ -6,7 +6,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // APInf
 // Variables
 // --------------------------------------------------
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 //== Elements
 @home-navigation: @brand-primary;
@@ -44,7 +45,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 //** Global textual link color.
 @link-color:            #0288D1;
 //** Link hover color set via `darken()` function.
-@link-hover-color:      darken(@link-color, 5%);
+@link-hover-color:      darken(@link-color, 10%);
 //** Link hover decoration.
 @link-hover-decoration: underline;
 
@@ -57,7 +58,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 @font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-family-monospace:   'Roboto Mono', monospace;
 @font-family-base:        @font-family-sans-serif;
 
 @font-size-base:          14px;
@@ -77,10 +78,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:    @font-family-base;
+@headings-font-family:    "Roboto", sans-serif;
 @headings-font-weight:    500;
 @headings-line-height:    1.1;
-@headings-color:          #317EAC;
+@headings-color:          #000;
 
 
 //== Iconography

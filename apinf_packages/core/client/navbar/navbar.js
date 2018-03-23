@@ -111,33 +111,6 @@ Template.navbar.helpers({
 
     return false;
   },
-  userCanAddApi () {
-    // Get settigns document
-    const settings = Settings.findOne();
-
-    if (settings) {
-      // Get access setting value
-      // If access field doesn't exist, these is false. Allow users to add an API on default
-      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
-
-      // Allow user to add an API because not only for admin
-      if (!onlyAdminsCanAddApis) {
-        return true;
-      }
-
-      // Otherwise check of user role
-      // Get current user Id
-      const userId = Meteor.userId();
-
-      // Check if current user is admin
-      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-      return userIsAdmin;
-    }
-    // Return true because no settings are set
-    // By default allowing all user to add an API
-    return true;
-  },
   userCanViewDashboard () {
     // Allow or not regular user to view Dashboard page
     // It depends on onlyAdminsCanAddApis settings

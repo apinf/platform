@@ -7,8 +7,8 @@
 import { TAPi18n } from 'meteor/tap:i18n';
 
 export function arrowDirection (parameter, bucket) {
-  let positiveTrend = 'arrow-up';
-  let negativeTrend = 'arrow-down';
+  let positiveTrend = 'trending-up arrow-up';
+  let negativeTrend = 'trending-down arrow-down';
   let comparison;
 
   switch (parameter) {
@@ -18,8 +18,8 @@ export function arrowDirection (parameter, bucket) {
 
     case 'time':
       comparison = bucket.compareResponse;
-      positiveTrend = 'arrow-up_time';
-      negativeTrend = 'arrow-down_time';
+      positiveTrend = 'trending-up arrow-up_time';
+      negativeTrend = 'trending-down arrow-down_time';
       break;
 
     case 'users':

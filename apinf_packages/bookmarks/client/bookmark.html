@@ -4,22 +4,12 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="bookmark">
-  {{# if isBookmarked }}
-  <button class="bookmark-button bookmark bookmarked">
-    <i class="fa fa-bookmark"></i>
-    {{# unless catalogView }}
-    &nbsp;{{_ "bookmark_buttonText_unbookmark" }}
-    {{/ unless }}
-  </button>
-  {{ else }}
-  <button class="bookmark-button bookmark">
-    <i class="fa fa-bookmark-o"></i>
-    {{# unless catalogView }}
-    &nbsp;{{_ "bookmark_buttonText_bookmark" }}
-    {{/ unless }}
-  </button>
-  {{/ if }}
   <span class="bookmark-counter">
     {{ api.bookmarkCount }}
   </span>
+  {{# if isBookmarked }}
+    <i class="bookmark-button bookmark bookmarked fa fa-star"></i>
+  {{ else }}
+    <i class="bookmark-button bookmark fa fa-star-o"></i>
+  {{/ if }}
 </template>
