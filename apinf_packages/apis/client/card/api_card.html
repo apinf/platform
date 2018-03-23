@@ -23,22 +23,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{ api.name }}
         </h3>
       </a>
-      <p class="api-card-author text-center">
+      <p class="api-card-author text-center" style="margin-bottom: 0;">
         {{# if api.organization }}
           {{ api.organization.name }}
         {{ else }}
           {{ api.getApiManagersByName }}
         {{/ if }}
       </p>
-      <ul class="list-inline api-card-labels">
-        <li>
-          {{# unless api.isPublic }}
-            <span class="label label-default">
-              {{_ "apiCard_labelText_private"}}
-            </span>
-          {{/ unless }}
-        </li>
-      </ul>
     </div>
     <div class="api-card-logo clearfix">
       <a href="{{ pathFor 'viewApi' slug=api.slug }}" title="{{ api.name }}">

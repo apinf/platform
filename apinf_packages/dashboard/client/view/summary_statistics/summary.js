@@ -170,17 +170,17 @@ Template.dashboardSummaryStatistic.helpers({
   },
 });
 
-Template.dashboardSummaryStatistic.events({
-  'click [data-id]': (event, templateInstance) => {
-    const target = event.currentTarget;
-
-    // Get status of specified Overview template (shown or not)
-    const display = templateInstance.displayOverview.get(target.dataset.id);
-
-    // Inverse the value
-    templateInstance.displayOverview.set(target.dataset.id, !display);
-
-    // Display or not the box-shadow for table line
-    target.classList.toggle('open');
-  },
-});
+// Template.dashboardSummaryStatistic.events({
+//   'click [data-id]': (event, templateInstance) => {
+//     const target = event.currentTarget;
+//
+//     // Get status of specified Overview template (shown or not)
+//     const display = templateInstance.displayOverview.get(target.dataset.id);
+//
+//     // Inverse the value
+//     templateInstance.displayOverview.set(target.dataset.id, !display);
+//
+//     // Display or not the box-shadow for table line
+//     target.classList.toggle('open');
+//   },
+// });
