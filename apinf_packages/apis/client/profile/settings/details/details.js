@@ -80,6 +80,18 @@ Template.apiSettingsDetails.events({
         linksData.push(link);
         Session.set('links', linksData);
       }
+
+      const apiId = this.api._id;
+
+      const apiDocs = ApiDocs.findOne({ apiId: apiId });
+      const apiDocsId = apiDocs._id;
+
+      // Update Documentation (or create a new one)
+      const result = ApiDocs.update(
+        { _id: apiDocsId },
+        { $push: { otherUrl: link } },
+      );
+
       // clear the text box
       $('#link-value').val('');
     } else {
@@ -89,14 +101,29 @@ Template.apiSettingsDetails.events({
   },
 
   'click .delete-link': function (event) {
+    // TODO clean-up code
     // get links from session
     const otherUrlLinks = Session.get('links');
+
     // get cross id
     const deleteLinkId = event.currentTarget.id;
+    const deletedLink = otherUrlLinks[deleteLinkId];
     if (otherUrlLinks) {
-    // Remove elemnt from Session
+    // Remove element from Session
       otherUrlLinks.splice(deleteLinkId, 1);
       Session.set('links', otherUrlLinks);
     }
+
+    const apiId = this.api._id;
+
+    const apiDocs = ApiDocs.findOne({ apiId: apiId });
+    const apiDocsId = apiDocs._id;
+
+    // Update Documentation (or create a new one)
+    const result = ApiDocs.update(
+      { _id: apiDocsId },
+      { $pull: { otherUrl: deletedLink } },
+    );
+
   },
 });
