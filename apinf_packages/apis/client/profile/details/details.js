@@ -13,6 +13,7 @@ import Clipboard from 'clipboard';
 // Collection imports
 import ApiKeys from '/apinf_packages/api_keys/collection';
 import Proxies from '/apinf_packages/proxies/collection';
+import ApiDocs from '/apinf_packages/api_docs/collection';
 
 Template.apiDetails.onCreated(function () {
   const instance = this;
@@ -127,9 +128,8 @@ Template.apiDetails.helpers({
     return apiKey;
   },
   displayLinkBlock () {
-    const api = this.api;
-    const apiDoc = this.apiDoc;
-
+     const api = this.api;
+     const apiDoc = this.apiDoc;
     // Display block if a user is manager of current API or URL is set
     return api.currentUserCanManage() || (apiDoc && apiDoc.otherUrl);
   },
