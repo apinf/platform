@@ -13,11 +13,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="container-fluid">
       <div class="tab-content">
         <div id="api-details" class="container block-wrapper tab-pane fade in active">
-          {{> apiDetails api=api proxyBackend=proxyBackend }}
+          {{> apiDetails api=api apiDoc=apiDoc proxyBackend=proxyBackend }}
         </div> <!-- /api-backend-details -->
 
         <div id="api-documentation" class="tab-pane fade container-fluid block-wrapper" style="max-width: 1440px;">
-          {{> apiDocumentation api=api apiDoc=apiDoc  developmentFeatures=developmentFeatures }}
+          {{> apiDocumentation api=api apiDoc=apiDoc developmentFeatures=developmentFeatures }}
         </div> <!-- /api-documentation -->
 
         {{# if currentUser }}
