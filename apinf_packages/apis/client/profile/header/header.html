@@ -45,24 +45,28 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "viewApiNavigationMenu_details" }}
           </a>
         </li>
-        
-        {{# if api.currentUserCanManage }}
-          {{# if proxyBackend }}
-            <li>
-              <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}">
-                {{_ "apiViewAnalytics_button_viewAnalytics" }}
-              </a>
-            </li>
+
+        {{# if currentUser }}
+          {{# if api.currentUserCanManage }}
+            {{# if proxyBackend }}
+              <li>
+                <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}">
+                  {{_ "apiViewAnalytics_button_viewAnalytics" }}
+                </a>
+              </li>
+            {{/ if }}
           {{/ if }}
         {{/ if }}
 
-        {{# if userShouldSeeApiDocsTab }}
-          <!-- API Console -->
-          <li id="api-documentation-tab">
-            <a href="#api-documentation" data-toggle="tab">
-              {{_ "viewApiNavigationMenu_documentation" }}
-            </a>
-          </li>
+        {{# if currentUser }}
+          {{# if userShouldSeeApiDocsTab }}
+            <!-- API Console -->
+            <li id="api-documentation-tab">
+              <a href="#api-documentation" data-toggle="tab">
+                {{_ "viewApiNavigationMenu_documentation" }}
+              </a>
+            </li>
+          {{/ if }}
         {{/ if }}
 
         {{# if api.currentUserCanManage }}

@@ -675,6 +675,9 @@
       "url": {
         "label": "API Endpoint"
       },
+      "documentationURL": {
+        "label": "Link to documentation"
+      },
       "organizationId": {
         "label": "Connect API to organization"
       },

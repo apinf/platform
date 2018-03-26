@@ -48,10 +48,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div style="margin-top:2em;">
             <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
               <span class="num">2</span>
-              Authorization
+              Authorization (X-Api-Key)
             </h2>
-            <span style="padding: 10px 15px;background-color:#ECEFF1;color:#37474F;text-decoration:none;font-weight:500;border-radius: 2px;">
-              X-Api-Key:
+            <span id="api-url" style="padding: 10px 15px;background-color:#ECEFF1;color:#37474F;text-decoration:none;font-weight:500;border-radius: 2px;">
               {{# if currentUser }}
                 {{# if proxyUrl }}
                   {{# unless disableApiKey }}
@@ -61,7 +60,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{/ unless }}
                 {{/ if }}
               {{/ if }}
-              <i class="mdi mdi-content-copy"></i>
+              <i
+              id="copyApiUrl"
+              class="mdi mdi-content-copy"
+              data-clipboard-target="#api-url"></i>
             </span>
             <p style="color:#6d859e;margin-top:1.5em;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
@@ -73,17 +75,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="num">3</span>
             Documentation
           </h2>
-          {{# if displayLinkBlock }}
-          {{# if apiDoc.otherUrl }}
-            {{# each link in apiDoc.otherUrl }}
-              <div id="documentation-link" class="documentation-link">
-                <i class="fa fa-external-link"></i>&nbsp;
-                <a href="{{ link }}" target="_blank">
-                  {{ link }}
-                </a>
-              </div>
-            {{/ each }}
-          {{/ if }}
+          {{# if api.documentationURL }}
+          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
+            {{ api.documentationURL }}
+            <i class="mdi mdi-open-in-new"></i>
+          </a>
           {{/ if }}
           <p style="color:#6d859e;margin-top:1.5em;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.

@@ -22,57 +22,59 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Table body -->
       {{# each dataset in sortedAnalyticsData }}
         {{# with dataset }}
-          <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
-            <div class="row">
-              <div class="col-xs-6">
-                <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
-                <h2 class="special-headings" style="
-                font-weight: 500;
-                font-size: 16px;
-                padding-bottom: 7px;
-                color: #37474F;
-                margin: 0;">{{ apiName }}</h2>
-                </a>
-                <span style="font-size: 12px;color:#5c617b;border-radius: 2px;">{{ prefix }}</span>
-              </div>
-              <div class="col-xs-2 text-left">
-                <div style="display:inline;">
-                  <span class="summary-number-label">Requests</span>
-                  <span class="request-number">
-                    {{ requestNumber }}
+          <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
+            <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
+              <div class="row">
+                <div class="col-xs-6">
+                  <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
+                  <h2 class="special-headings" style="
+                  font-weight: 500;
+                  font-size: 16px;
+                  padding-bottom: 7px;
+                  color: #37474F;
+                  margin: 0;">{{ apiName }}</h2>
+                  </a>
+                  <span style="font-size: 12px;color:#5c617b;border-radius: 2px;">{{ prefix }}</span>
+                </div>
+                <div class="col-xs-2 text-left">
+                  <div style="display:inline;">
+                    <span class="summary-number-label">Requests</span>
+                    <span class="request-number">
+                      {{ requestNumber }}
+                    </span>
+                  </div>
+                  <i class="mdi mdi-{{ arrowDirection 'requests' }}" style="font-size: inherit;"></i>
+                  <span class="{{ textColor 'requests' }}" style="font-size:12px;">
+                    {{ percentages 'requests' }}
                   </span>
                 </div>
-                <i class="mdi mdi-{{ arrowDirection 'requests' }}" style="font-size: inherit;"></i>
-                <span class="{{ textColor 'requests' }}" style="font-size:12px;">
-                  {{ percentages 'requests' }}
-                </span>
-              </div>
-              <div class="col-xs-2 text-left">
-                <div style="display:inline;">
-                  <span class="summary-number-label">Response Time</span>
-                  <span class="response-time">
-                    {{ medianResponseTime }} ms
+                <div class="col-xs-2 text-left">
+                  <div style="display:inline;">
+                    <span class="summary-number-label">Response Time</span>
+                    <span class="response-time">
+                      {{ medianResponseTime }} ms
+                    </span>
+                  </div>
+                  <i class="mdi mdi-{{ arrowDirection 'time' }}" style="font-size: inherit;"></i>
+                  <span class="{{ textColor 'time' }}" style="font-size:12px;">
+                    {{ percentages 'time' }}
                   </span>
                 </div>
-                <i class="mdi mdi-{{ arrowDirection 'time' }}" style="font-size: inherit;"></i>
-                <span class="{{ textColor 'time' }}" style="font-size:12px;">
-                  {{ percentages 'time' }}
-                </span>
-              </div>
-              <div class="col-xs-2 text-left">
-                <div style="display:inline;">
-                  <span class="summary-number-label">Developers</span>
-                  <span class="unique-users">
-                    {{ avgUniqueUsers }}
+                <div class="col-xs-2 text-left">
+                  <div style="display:inline;">
+                    <span class="summary-number-label">Developers</span>
+                    <span class="unique-users">
+                      {{ avgUniqueUsers }}
+                    </span>
+                  </div>
+                  <i class="mdi mdi-{{ arrowDirection 'users' }}" style="font-size: inherit;"></i>
+                  <span class="{{ textColor 'users' }}" style="font-size:12px;">
+                    {{ percentages 'users' }}
                   </span>
                 </div>
-                <i class="mdi mdi-{{ arrowDirection 'users' }}" style="font-size: inherit;"></i>
-                <span class="{{ textColor 'users' }}" style="font-size:12px;">
-                  {{ percentages 'users' }}
-                </span>
               </div>
             </div>
-          </div>
+          </a>
         {{/ with }}
         {{# if displayOverview dataset.proxyBackendId }}
           {{> dashboardOverviewStatistic dataset=dataset prefix=dataset.prefix
