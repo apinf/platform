@@ -30,6 +30,8 @@ Template.viewApi.onCreated(function () {
   templateInstance.subscribe('proxyCount');
   // Subscribe to public proxy details for proxy form
   templateInstance.subscribe('publicProxyDetails');
+  // Subscribe to Settings "supportsGraphql"
+  templateInstance.subscribe('singleSetting', 'supportsGraphql');
 
   // Using to get updated subscription
   templateInstance.autorun(() => {

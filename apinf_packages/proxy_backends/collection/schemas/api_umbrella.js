@@ -6,6 +6,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
+
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
 
@@ -17,11 +20,25 @@ const RateLimitSchema = new SimpleSchema({
   limit_by: {
     type: String,
     optional: true,
-    allowedValues: [
-      'apiKey',
-      'ip',
-    ],
-    defaultValue: 'apiKey',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          { label: 'API Key', value: 'apiKey' },
+          { label: 'IP Address', value: 'ip' },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({ label: 'Origin Header', value: 'originHeader' });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'apiKey',
+    },
   },
   limit: {
     type: Number,
@@ -31,6 +48,32 @@ const RateLimitSchema = new SimpleSchema({
     type: Boolean,
     optional: true,
     defaultValue: false,
+  },
+  originHeaderOptions: {
+    type: String,
+    optional: true,
+    autoform: {
+      type: 'select-radio',
+      defaultValue: 'constant',
+      options: () => {
+        return [
+          {
+            label: 'Constant (every request costs 1 unit)', value: 'constant',
+          },
+          {
+            label: 'Returned in the header', value: 'header',
+          },
+        ];
+      },
+    },
+  },
+  headerName: {
+    type: String,
+    optional: true,
+  },
+  totalCost: {
+    type: String,
+    optional: true,
   },
 });
 

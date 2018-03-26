@@ -9,6 +9,9 @@ import { Template } from 'meteor/templating';
 // Npm packages imports
 import URI from 'urijs';
 
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
+
 Template.apiUmbrellaProxyForm.helpers({
   apiHost () {
     // Get API information
@@ -50,5 +53,10 @@ Template.apiUmbrellaProxyForm.helpers({
 
     // Return the API URL protocol
     return apiUrl.protocol();
+  },
+  supportsGraphql () {
+    const settings = Settings.findOne();
+    // Boolean value of "supportsGraphql" field
+    return settings ? settings.supportsGraphql : false;
   },
 });

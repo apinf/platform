@@ -27,7 +27,11 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
     defaultValue: false,
-    label: 'Enabled',
+  },
+  supportsGraphql: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
   },
   mail: {
     type: Object,

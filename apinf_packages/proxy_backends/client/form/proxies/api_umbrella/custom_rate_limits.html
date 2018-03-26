@@ -1,0 +1,60 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="customRateLimits">
+  <div class="col-md-12 " id="rate-limits">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{ afFieldLabelText name="apiUmbrella.settings.rate_limits" }}
+      </div>
+      <ul class="list-group">
+        {{# afEachArrayItem
+          name="apiUmbrella.settings.rate_limits"
+        }}
+          <li class="list-group-item autoform-array-item">
+            <div>
+              <div class="autoform-remove-item-wrap">
+                <button type="button" class="btn btn-primary autoform-remove-item">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </div>
+              <div class="autoform-array-item-body">
+                <div class="panel panel-default">
+
+                  <div class="panel-body">
+                    {{> afQuickField name=this.current.duration }}
+
+                    {{> afQuickField name=this.current.limit_by firstOption=false }}
+
+                    <!-- Display additional Options -->
+                    {{#if afFieldValueIs name=this.current.limit_by value="originHeader" }}
+                      {{> afFieldInput name=this.current.originHeaderOptions }}
+
+                      {{# if afFieldValueIs name=this.current.originHeaderOptions value="constant" }}
+                        {{> afQuickField name=this.current.limit }}
+                      {{ else }}
+                        {{> afQuickField name=this.current.headerName }}
+                        {{> afQuickField name=this.current.totalCost }}
+                      {{/ if }}
+                    {{ else }}
+                      <!-- Number of request field -->
+                      {{> afQuickField name=this.current.limit }}
+                    {{/ if }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        {{/ afEachArrayItem }}
+        <li class="list-group-item">
+          <button type="button" class="btn btn-primary autoform-add-item"
+                  data-autoform-field="apiUmbrella.settings.rate_limits">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>

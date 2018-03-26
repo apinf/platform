@@ -30,9 +30,9 @@
 
     <!-- validation messages -->
     {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.frontend_prefix' }}
-    <p class="text-danger">
-      {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
-    </p>
+      <p class="text-danger">
+        {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
+      </p>
     {{/ if }}
 
     <!-- help text -->
@@ -65,9 +65,9 @@
 
       <!-- validation messages -->
       {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix' }}
-      <p class="text-danger">
-        {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix' }}}
-      </p>
+        <p class="text-danger">
+          {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix' }}}
+        </p>
       {{/ if }}
 
       <!-- help text -->
@@ -93,9 +93,9 @@
 
       <!-- validation messages -->
       {{# if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
-      <p class="text-danger">
-        {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
-      </p>
+        <p class="text-danger">
+          {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
+        </p>
       {{/ if }}
 
       <!-- help text -->
@@ -141,17 +141,10 @@
           firstOption=false
         }}
       </div>
-      {{#if afFieldValueIs
-        name="apiUmbrella.settings.rate_limit_mode"
-        value="custom"
-      }}
-      <div class="col-md-12" id="rate-limits">
-        {{> afQuickField
-          name="apiUmbrella.settings.rate_limits"
-        }}
-      </div>
+
+      {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom" }}
+        {{> customRateLimits supportsGraphql=supportsGraphql }}
       {{/if }}
     </div>
-
   </div>
 </template>
