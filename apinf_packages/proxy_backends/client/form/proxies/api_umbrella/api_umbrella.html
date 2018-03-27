@@ -135,7 +135,7 @@
 
     <!-- Rate limiting -->
     <div id="rate-limiting">
-      <div class="col-md-3" id="rate-limit-mode">
+      <div class="col-md-5" id="rate-limit-mode">
         {{> afQuickField
           name="apiUmbrella.settings.rate_limit_mode"
           firstOption=false
@@ -143,8 +143,20 @@
       </div>
 
       {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom" }}
-        {{> customRateLimits supportsGraphql=supportsGraphql }}
+        <div class="col-md-12" id="rate-limits">
+          {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
+        </div>
       {{/if }}
+
+      {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom-header" }}
+        <div class="col-md-12" id="rate-limit-cost-header">
+          {{> afQuickField name="apiUmbrella.settings.rate_limit_cost_header" }}
+        </div>
+
+        <div class="col-md-12" id="rate-limits">
+          {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
+        </div>
+      {{/ if }}
     </div>
   </div>
 </template>

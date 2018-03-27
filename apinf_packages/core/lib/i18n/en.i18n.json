@@ -198,6 +198,11 @@
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
   "apiProxy_headerText": "Proxy backend configuration",
+  "apiUmbrellaProxyForm_rateLimitMode_options": {
+    "custom": "Custom rate limits",
+    "unlimited": "Unlimited requests",
+    "custom-header": "Custom rate limits based on response header"
+  },
   "apiUserAuthorizationForm_addButton_text": "Add authorized user",
   "apiUserAuthorizationForm_header_text": "Add authorized user",
   "apiUserAuthorizationForm_helpText_usernameEmail": "Give either username or email address",
@@ -996,7 +1001,8 @@
             "label": "Rate limit mode",
             "options": {
               "custom": "Custom rate limits",
-              "unlimited": "Unlimited requests"
+              "unlimited": "Unlimited requests",
+              "custom-header": "Custom rate limits based on response header"
             }
           },
           "rate_limits": {

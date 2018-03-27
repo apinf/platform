@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Settings from '/apinf_packages/settings/collection';
@@ -20,25 +21,11 @@ const RateLimitSchema = new SimpleSchema({
   limit_by: {
     type: String,
     optional: true,
-    autoform: {
-      firstOption: false,
-      options () {
-        const commonList = [
-          { label: 'API Key', value: 'apiKey' },
-          { label: 'IP Address', value: 'ip' },
-        ];
-
-        const settings = Settings.findOne();
-        const supportsGraphql = settings ? settings.supportsGraphql : false;
-
-        if (supportsGraphql) {
-          commonList.push({ label: 'Origin Header', value: 'originHeader' });
-        }
-
-        return commonList;
-      },
-      defaultValue: 'apiKey',
-    },
+    allowedValues: [
+      'apiKey',
+      'ip',
+    ],
+    defaultValue: 'apiKey',
   },
   limit: {
     type: Number,
@@ -48,32 +35,6 @@ const RateLimitSchema = new SimpleSchema({
     type: Boolean,
     optional: true,
     defaultValue: false,
-  },
-  originHeaderOptions: {
-    type: String,
-    optional: true,
-    autoform: {
-      type: 'select-radio',
-      defaultValue: 'constant',
-      options: () => {
-        return [
-          {
-            label: 'Constant (every request costs 1 unit)', value: 'constant',
-          },
-          {
-            label: 'Returned in the header', value: 'header',
-          },
-        ];
-      },
-    },
-  },
-  headerName: {
-    type: String,
-    optional: true,
-  },
-  totalCost: {
-    type: String,
-    optional: true,
   },
 });
 
@@ -89,11 +50,44 @@ const SettingsSchema = new SimpleSchema({
   rate_limit_mode: {
     type: String,
     optional: false,
-    allowedValues: [
-      'custom',
-      'unlimited',
-    ],
-    defaultValue: 'unlimited',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.unlimited');
+            },
+            value: 'unlimited',
+          },
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom');
+            },
+            value: 'custom',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom-header');
+            },
+            value: 'custom-header',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'unlimited',
+    },
+  },
+  rate_limit_cost_header: {
+    type: String,
+    optional: true,
   },
   rate_limits: {
     type: [RateLimitSchema],
