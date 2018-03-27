@@ -31,7 +31,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{# if currentUser }}
         {{# if proxyUrl }}
         <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-          Get Started. <span style="font-weight:400;">Three simple steps to start using this API.</span>
+          Get Started <span style="font-weight:400;">with <span style="font-weight:500;">{{ api.name }}</span> API.</span>
         </h2>
           <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
             <span class="num">1</span>
@@ -50,21 +50,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <span class="num">2</span>
               Authorization (X-Api-Key)
             </h2>
-            <span id="api-url" style="padding: 10px 15px;background-color:#ECEFF1;color:#37474F;text-decoration:none;font-weight:500;border-radius: 2px;">
+
               {{# if currentUser }}
                 {{# if proxyUrl }}
                   {{# unless disableApiKey }}
                     {{# if hasApiKey }}
-                      {{ apiKey }}
+                      <span id="api-url" style="padding: 10px 15px;background-color:#ECEFF1;color:#37474F;text-decoration:none;font-weight:500;border-radius: 2px;">
+                        {{ apiKey }}
+                        <i
+                        id="copyApiUrl"
+                        class="mdi mdi-content-copy"
+                        data-clipboard-target="#api-url"></i>
+                      </span>
+                      {{ else }}
+                        Click "Get API key" in the upper right corner.
                     {{/ if }}
+                  {{ else }}
+                    No X-Api-Key needed
                   {{/ unless }}
                 {{/ if }}
               {{/ if }}
-              <i
-              id="copyApiUrl"
-              class="mdi mdi-content-copy"
-              data-clipboard-target="#api-url"></i>
-            </span>
             <p style="color:#6d859e;margin-top:1.5em;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
               In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
@@ -76,10 +81,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             Documentation
           </h2>
           {{# if api.documentationURL }}
-          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
-            {{ api.documentationURL }}
-            <i class="mdi mdi-open-in-new"></i>
-          </a>
+            <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
+              {{ api.documentationURL }}
+              <i class="mdi mdi-open-in-new"></i>
+            </a>
+          {{ else }}
+          <span>No documentation available</span>
           {{/ if }}
           <p style="color:#6d859e;margin-top:1.5em;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.

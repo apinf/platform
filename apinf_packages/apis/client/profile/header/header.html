@@ -6,37 +6,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
     <div class="row">
-    <div class="col-md-2">
-    <span style="float: left; padding-top:12px">
-    {{> viewApiLogo }}
-    </span>
-    <h1 class="special-headings" style="font-size: 1.2em;
-    color: #37474F;
-    display: inline;
-    float: left;
-    margin-top: 29px;
-    left: 15px;
-    position: relative;">
-      {{ api.name }}
-    </h1>
-    {{# if api.organization }}
-      <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="float: left;
-      position: absolute;
-      left: 65px;
-      padding-top: 9px;
-      color: #555;">
-        {{ api.organization.name }}
-      </a>
-    {{ else }}
-      <span style="float: left;
-      position: absolute;
-      left: 65px;
-      padding-top: 8px;
-      color: #555;">
-        {{ api.getApiManagersByName }}
+      <div class="col-md-2">
+      <span style="float: left; padding-top:12px">
+      {{> viewApiLogo }}
       </span>
-    {{/ if }}
-  </div>
+      <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;margin-top: 29px;left: 15px;position: relative;">
+        {{ api.name }}
+      </h1>
+        {{# if api.organization }}
+          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="float: left;position: absolute;left: 65px;padding-top: 9px;color: #555;">
+            {{ api.organization.name }}
+          </a>
+        {{ else }}
+          <span style="float: left;position: absolute;left: 65px;padding-top: 8px;color: #555;">
+            {{ api.getApiManagersByName }}
+          </span>
+        {{/ if }}
+      </div>
 
     <div class="col-md-8 secondary-menu-block-inner" style="text-align:center;">
       <ul class="nav nav-tabs">

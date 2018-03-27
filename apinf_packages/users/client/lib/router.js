@@ -17,7 +17,7 @@ import signedIn from '/apinf_packages/core/client/lib/router';
 signedIn.route('/users', {
   name: 'accountsAdmin',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'accountsAdmin' });
+    BlazeLayout.render('adminLayout', { main: 'accountsAdmin' });
   },
 });
 
