@@ -74,6 +74,7 @@ AccountsTemplates.configureRoute('signIn', {
   path: '/sign-in',
   layoutTemplate: 'masterLayout',
   contentRegion: 'main',
+  redirect: '/apis',
 });
 
 // Sign up
@@ -83,4 +84,5 @@ AccountsTemplates.configureRoute('signUp', {
   path: '/sign-up',
   layoutTemplate: 'masterLayout',
   contentRegion: 'main',
+  redirect: '/apis',
 });
