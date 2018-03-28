@@ -8,3 +8,5 @@ import { Template } from 'meteor/templating';
 
 Template.customAtForm.replaces('atForm');
 Template.customAtTitle.replaces('atTitle');
+Template.customFullPageAtForm.replaces('fullPageAtForm');
+Template.customAtPwdFormBtn.replaces('atPwdFormBtn');

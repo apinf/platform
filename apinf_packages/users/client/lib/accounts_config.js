@@ -72,7 +72,7 @@ AccountsTemplates.configureRoute('signIn', {
   layoutType: 'blaze',
   name: 'signIn',
   path: '/sign-in',
-  layoutTemplate: 'masterLayout',
+  layoutTemplate: 'atLayout',
   contentRegion: 'main',
   redirect: '/apis',
 });
@@ -82,7 +82,7 @@ AccountsTemplates.configureRoute('signUp', {
   layoutType: 'blaze',
   name: 'signUp',
   path: '/sign-up',
-  layoutTemplate: 'masterLayout',
+  layoutTemplate: 'atLayout',
   contentRegion: 'main',
   redirect: '/apis',
 });
