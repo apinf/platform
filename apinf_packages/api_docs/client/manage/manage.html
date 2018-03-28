@@ -12,7 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
           <h1 class="modal-title">
-            {{_ "manageApiDocumentationModal_Title" }}
+            {{_ "manageApiDocumentationModal_addDocumentation_title" }}
           </h1>
         </div>
         <div class="modal-body">
@@ -22,11 +22,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             id="apiDocumentationForm"
             type=formType }}
 
-            <legend>
-              {{> showHelp 'addApiDocumentation' }}
-              {{_ "manageApiDocumentationModal_addDocumentation_title" }}
-            </legend>
-            <p class="help-text">
+            <p style="color: #6d859e;">
+              {{_ 'manageApiDocumentationModal_hints_uploadApiDocumentation' }}
               {{_ 'manageApiDocumentationModal_helpText_useHttpsProtocol' }}
             </p>
             {{> afQuickField name="type" firstOption=false }}

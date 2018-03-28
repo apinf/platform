@@ -15,9 +15,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </p>
       <!-- Add API by entering API details -->
       <section>
-        <!-- <h2 class="second-title">
-          {{_ 'addApi_enterApiDetails' }}
-        </h2> -->
         {{# autoForm collection=ApisCollection id="addApiForm" type="insert" }}
           <!--invisible auto-value field-->
           {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
@@ -25,39 +22,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> afQuickField name='name' id="api-name" }}
             {{> afQuickField name='description' rows=2 id="api-description" }}
             {{> afQuickField name='url' id="api-url" }}
-            <!-- {{> afQuickField name='lifecycleStatus' id="api-lifecyclestatus" }} -->
           </fieldset>
-          <button type="submit" class="btn btn-success" id="submitapi-button">
+          <button type="submit" class="btn btn-success btn-success-special" id="submitapi-button">
             {{_ 'addApi_button_text' }}
           </button>
         {{/ autoForm }}
       </section>
-      <!-- separator -->
-      <!-- <div class="line-and-text">
-        <span>
-          {{_ 'addApi_separateLineTitle_or' }}
-        </span>
-      </div> -->
-      <!-- Add API by uploading OpenAPI specification -->
-      <!-- <div class="form-group">
-        <h2 class="second-title">
-          {{_ "addApi_sectionTitle_importOpenApiSpecification" }}
-        </h2>
-        {{> importOpenApiSpecification }}
-      </div> -->
-      <!-- separator -->
-      <!-- <div class="line-and-text">
-        <span>
-          {{_ 'addApi_separateLineTitle_or' }}
-        </span>
-      </div> -->
-      <!-- Add API by uploading API configuration -->
-      <!-- <section>
-        <h2 class="second-title">
-          {{_ "addApi_sectionTitle_importApiConfiguration" }}
-        </h2>
-        {{> importApiConfiguration }}
-      </section> -->
     </div>
   {{ else }}
     {{> spinner }}
