@@ -4,17 +4,26 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationSettings">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+  <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">Settings</h2>
+  <div class="api-settings">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+      <li><a href="#logo-and-cover" data-toggle="tab">Logo & Cover Image</a></li>
+      <li><a href="#content-managment" data-toggle="tab">Content Management</a></li>
+      <li><a href="#social" data-toggle="tab">Social Media Platforms</a></li>
+      <li><a href="#contact-information" data-toggle="tab">Contact Information</a></li>
+      <li><a href="#managers" data-toggle="tab">Organization Managers</a></li>
+      <li><a href="#danger-zone" data-toggle="tab">Delete Organization</a></li>
+    </ul>
 
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="about">
         {{> organizationSettingsGeneral organization=organization }}
-
+      </div>
+      <div class="tab-pane fade" id="logo-and-cover">
         <div class="setting-section">
-          <h3>
-            {{_ "organizationSettingsCoverAndLogo_title" }}
-          </h3>
-
           <label>
             {{_ "organizationSettings_uploadLogo_heading" }}
           </label>
@@ -34,24 +43,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           {{> uploadOrganizationCover organization=organization }}
         </div>
-
+      </div>
+      <div class="tab-pane fade" id="content-managment">
         {{> organizationSettingsPagination organization=organization }}
+      </div>
+      <div class="tab-pane fade" id="social">
         {{> organizationSettingsSocialMedia organization=organization }}
+      </div>
+      <div class="tab-pane fade" id="contact-information">
         {{> organizationSettingsContactInfo organization=organization }}
-
+      </div>
+      <div class="tab-pane fade" id="managers">
         <div class="setting-section">
-          <h3>
-            {{_ "organizationSettings_title_organizationManagers" }}
-          </h3>
           <p>
             {{_ "organizationSettings_description_organizationManagers" }}
           </p>
           {{> organizationManagersList organization=organization }}
           {{> addOrganizationManagerForm organization=organization }}
         </div>
-
+      </div>
+      <div class="tab-pane fade" id="danger-zone">
         {{> organizationSettingsDelete organization=organization }}
-
       </div>
     </div>
   </div>
