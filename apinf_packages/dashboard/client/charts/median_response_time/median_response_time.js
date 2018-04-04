@@ -46,6 +46,7 @@ Template.medianResponseTime.onRendered(function () {
 
     // Configuration options
     options: {
+      responsive: true,
       elements: {
         line: {
           tension: 0, // disables bezier curves
@@ -56,7 +57,7 @@ Template.medianResponseTime.onRendered(function () {
       },
       layout: {
         padding: {
-          left: 10,
+          left: 0,
         },
       },
       scales: {

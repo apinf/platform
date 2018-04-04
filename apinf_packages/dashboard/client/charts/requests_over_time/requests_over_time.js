@@ -52,7 +52,7 @@ Template.requestsOverTime.onRendered(function () {
       },
       layout: {
         padding: {
-          left: 10,
+          left: 0,
         },
       },
       scales: {
