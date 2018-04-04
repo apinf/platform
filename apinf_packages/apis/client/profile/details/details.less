@@ -26,13 +26,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   }
 }
 
-.api-details-block .input-group input {
-  cursor: default;
-  background: #F0F4F8;
-  border: 1px solid #D5DCE6;
-  box-shadow: none;
-  outline: none;;
-  color: #333C4A;
+.api-details-block {
+  .mdi-content-copy {
+    cursor: pointer;
+    color: lighten(#37474F, 30%);
+  }
+
+  .mdi-content-copy:hover {
+    cursor: pointer;
+    color: #37474F;
+  }
+
+  .input-group input {
+    cursor: default;
+    background: #F0F4F8;
+    border: 1px solid #D5DCE6;
+    box-shadow: none;
+    outline: none;;
+    color: #333C4A;
+  }
 }
 
 
@@ -47,8 +59,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   margin-right: 3px;
   text-align: center;
   width: 20px;
-}
-
-#copyApiUrl {
-  cursor: pointer;
 }
