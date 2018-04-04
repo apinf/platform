@@ -9,9 +9,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- Header -->
       <div class="page-head-infoblock">
         <div class="api-info">
-          <p style="color:#37474F;margin-bottom:0;font-size:16px;padding-bottom:1em;">
+          <p style="color:#37474F;margin-bottom:0;font-size:16px;padding-bottom:1.5em;">
             {{ api.description }}
           </p>
+          {{# if api.documentationURL }}
+            <a href="{{ api.documentationURL }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
+              {{ api.documentationURL }}
+              <i class="mdi mdi-open-in-new" style="padding-left:5px;"></i>
+            </a>
+          {{/ if }}
 
           <!-- {{# unless api.isPublic }}
             <span class="label label-default"
@@ -23,7 +29,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         </div>
       </div>
-      <hr style="color: rgba(59, 59, 88, 0.15);margin-left: -20px;margin-right: -20px;">
+      <hr style="color: rgba(59, 59, 88, 0.15);margin-left: -20px;margin-right: -20px;margin-top: 2em;">
   </div>
   {{/ if }}
   <div class="row">
@@ -31,15 +37,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{# if currentUser }}
         {{# if proxyUrl }}
         <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-          Get Started <span style="font-weight:400;">with <span style="font-weight:500;">{{ api.name }}</span> API.</span>
+          Get Started <span style="font-weight:400;">with <span style="font-weight:500;">{{ api.name }}</span>.</span>
         </h2>
           <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
             <span class="num">1</span>
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
-          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
+          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#ECEFF1;text-decoration:none;font-weight:500;border-radius: 2px;">
             {{ proxyUrl }}
-            <i class="mdi mdi-open-in-new"></i>
+            <i class="mdi mdi-open-in-new" style="padding-left:5px;"></i>
           </a>
           <p style="color:#6d859e;margin-top:1.5em;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
@@ -60,7 +66,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                         <i
                         id="copyApiUrl"
                         class="mdi mdi-content-copy"
-                        data-clipboard-target="#api-url"></i>
+                        data-clipboard-target="#api-url"
+                        style="padding-left:5px;"></i>
                       </span>
                       {{ else }}
                         Click "Get API key" in the upper right corner.
@@ -78,20 +85,36 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div style="margin-top:2em;">
           <h2 style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
             <span class="num">3</span>
-            Documentation
+            Examples using API Key
           </h2>
-          {{# if api.documentationURL }}
-            <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
-              {{ api.documentationURL }}
-              <i class="mdi mdi-open-in-new"></i>
-            </a>
-          {{ else }}
-          <span>No documentation available</span>
-          {{/ if }}
-          <p style="color:#6d859e;margin-top:1.5em;">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
-            In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+          {{# if proxyUrl }}
+          <h3 style="font-size:14px;">GET Query Param</h3>
+          <span id="example-one" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px; display: inline-block;">
+            curl <span style="color: #F44336;">'{{ proxyUrl }}?api_key={{ apiKey }}'</span>
+            <i
+            id="copyExampleOne"
+            class="mdi mdi-content-copy"
+            data-clipboard-target="#api-url"
+            style="padding-left:5px;"></i>
+          </span>
+          <p style="color:#6d859e;margin-top:10px;">
+            Pass the API key into the api_key GET query string parameter. The GET query parameter may be used for non-GET requests (such as POST and PUT).
           </p>
+          <h3 style="font-size:14px;">HTTP Header</h3>
+          <span id="example-two" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px; display: inline-block;">
+            curl -H <span style="color: #F44336;">'X-Api-Key: {{ apiKey }}' '{{ proxyUrl }}'</span>
+            <i
+            id="copyExampleTwo"
+            class="mdi mdi-content-copy"
+            data-clipboard-target="#api-url"
+            style="padding-left:5px;"></i>
+          </span>
+          <p style="color:#6d859e;margin-top:10px;">
+            Pass the API key into the X-Api-Key header.
+          </p>
+          {{ else }}
+          <span>API is not configured</span>
+          {{/ if }}
         </div>
         {{ else }}
         <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">

@@ -42,6 +42,15 @@ Template.organizationProfileHeader.onCreated(function () {
 });
 
 Template.organizationProfileHeader.onRendered(function () {
+  // Get current url hash value
+  const hashTabValue = location.hash.substr(1);
+
+  // If url contain hash value
+  if (hashTabValue) {
+    // Show tab
+    $(`.nav-tabs a[href='#${hashTabValue}']`).tab('show');
+  }
+
   // Assign resumable browse to element
   OrganizationLogo.resumable.assignBrowse(this.$('#organization-file-browse'));
 });
@@ -53,5 +62,9 @@ Template.organizationProfileHeader.events({
 
     // Show organization form modal
     Modal.show('organizationForm', { organization, formType: 'update' });
+  },
+  'click #nav-tabs li > a': (event) => {
+    // Show hash value in url
+    window.location = `${event.currentTarget.hash}`;
   },
 });
