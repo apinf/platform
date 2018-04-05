@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
- This file is covered by the EUPL license.
- You may obtain a copy of the licence at
- https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
@@ -35,11 +35,12 @@ Template.medianResponseTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('medianResponseTime_pointTitle_time'),
-          backgroundColor: 'transparent',
-          borderColor: '#3886d4',
+          backgroundColor: 'rgba(26, 117, 210, 0.2)',
+          borderColor: 'rgb(26, 117, 210)',
+          pointBackgroundColor: 'rgb(26, 117, 210)',
           borderWidth: 2,
-          pointRadius: 0,
-          pointHoverRadius: 5,
+          pointRadius: 3,
+          pointHoverRadius: 4,
         },
       ],
     },
