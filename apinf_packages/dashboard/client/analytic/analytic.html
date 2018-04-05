@@ -9,11 +9,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
       {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
     </div>
-    <div class="container" style="margin-top:2em;">
-      <div class="form-group">
-        {{> dateRangePicker }}
-      </div>
+    <div class="container">
       {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+      <span style="color: #999;margin-top: 10px;float: right;font-size: 10px;">
+        {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
+      </span>
     </div>
     {{ else }}
     {{> spinner }}

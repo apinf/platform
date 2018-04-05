@@ -13,7 +13,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{ api.description }}
           </p>
           {{# if api.documentationURL }}
-            <a href="{{ api.documentationURL }}" target="_blank" style="padding: 10px 15px;background-color:#E3F2FD;text-decoration:none;font-weight:500;border-radius: 2px;">
+            <a href="{{ api.documentationURL }}" target="_blank" style="padding: 10px 15px;background-color:#f1f8ff;text-decoration:none;border-radius: 2px;">
               {{ api.documentationURL }}
               <i class="mdi mdi-open-in-new" style="padding-left:5px;"></i>
             </a>
@@ -43,7 +43,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="num">1</span>
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
-          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#ECEFF1;text-decoration:none;font-weight:500;border-radius: 2px;">
+          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#F5F5F5;text-decoration:none;border-radius: 2px;">
             {{ proxyUrl }}
             <i
             id="copyProxyUrl"
@@ -65,7 +65,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{# if proxyUrl }}
                   {{# unless disableApiKey }}
                     {{# if hasApiKey }}
-                      <span id="api-url" style="padding: 10px 15px;background-color:#ECEFF1;color:#37474F;text-decoration:none;font-weight:500;border-radius: 2px;">
+                      <span id="api-url" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;">
                         {{ apiKey }}
                         <i
                         id="copyApiUrl"

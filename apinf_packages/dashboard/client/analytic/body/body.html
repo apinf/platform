@@ -23,11 +23,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <p class="overview-col-title">
-                  {{_ 'apiAnalyticPageBody_text_requestsCount' count=analyticsData.requestNumber }}
-                </p>
-                <p class="overview-col-title">
+                <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 5px;">
                   {{_ 'apiAnalyticPageBody_chartTitle_apiRequests' }}
+                </h2>
+                <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;">
+                  {{_ 'apiAnalyticPageBody_text_requestsCount' count=analyticsData.requestNumber }}
                 </p>
                 <div class="form-group">
                   {{# if overviewChartResponse }}
@@ -48,7 +48,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{/ if }}
 
                 <!-- response status list-->
-                <div class="row">
+                <!-- <div class="row">
                   <span class="text-success col-xs-6 col-md-3">
                     2XX: {{ getStatusCode 'success' }}
                   </span>
@@ -61,7 +61,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <span class="text-danger col-xs-6 col-md-3">
                     5XX: {{ getStatusCode 'error' }}
                   </span>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

@@ -35,18 +35,23 @@ Template.requestsOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
-          backgroundColor: '#e3f2fc',
-          borderColor: '#3886d4',
+          backgroundColor: 'rgba(26, 117, 210, 0.2)',
+          borderColor: 'rgb(26, 117, 210)',
+          pointBackgroundColor: 'rgb(26, 117, 210)',
           borderWidth: 2,
-          data: [],
-          pointRadius: 0,
-          pointHoverRadius: 5,
+          pointRadius: 3,
+          pointHoverRadius: 4,
         },
       ],
     },
 
     // Configuration options
     options: {
+      elements: {
+        line: {
+          tension: 0, // disables bezier curves
+        },
+      },
       legend: {
         display: false,
       },
@@ -60,9 +65,6 @@ Template.requestsOverTime.onRendered(function () {
           ticks: {
             beginAtZero: true,
           },
-        }],
-        xAxes: [{
-          maxBarThickness: 30,
         }],
       },
     },
