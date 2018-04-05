@@ -4,41 +4,71 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationApis">
-  <div class="form-inline pull-right filter-dropdown">
-    {{# if hasApi }}
-      {{> apiSortingToolbar }}
-    {{/ if }}
-    <!-- Connection API button -->
-    {{# if organization.currentUserCanManage }}
-      <button type="button" class="btn btn-default" id="connect-api">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        {{_ 'organizationProfile_buttonText_connectApi' }}
-      </button>
+  <div class="row">
+    {{# if Template.subscriptionsReady }}
+      <div class="col-md-9">
+        <!-- Show or not content -->
+        {{# if paginationReady }}
+          {{# if hasApi }}
+            {{> apiCatalogTable apis=apis organization=organization }}
+          {{ else }}
+            <!-- Show no APIs message -->
+            {{> organizationNoApis organization=organization }}
+          {{/ if }}
+        {{/ if }}
+      </div>
+      {{# if hasApi }}
+        <div class="col-md-3" style="padding-left: 5px;">
+          <div class="filter-dropdown block-wrapper">
+            {{> apiSortingToolbar }}
+            <!-- Connection API button -->
+            {{# if organization.currentUserCanManage }}
+              <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="width:100%;">
+                {{_ 'organizationProfile_buttonText_connectApi' }}
+              </button>
+            {{/ if }}
+          </div>
+          <div class="about-organization block-wrapper" style="margin-left: 0;">
+            <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 0.5em;"> {{ organization.name }}</h2>
+            {{# if organization.description }}
+              <p style="color:#37474F;">
+                {{ organization.description }}
+              </p>
+            {{/ if }}
+            <p style="padding: 10px 15px; background-color:#f1f8ff; text-decoration:none; border-radius: 2px;">
+              <a href="{{ organization.url }}">
+                {{ organization.url }}
+                <i class="mdi mdi-open-in-new" style="padding-left:5px;"></i>
+              </a>
+            </p>
+            <ul class="list-inline">
+              {{# if organization.contact.person }}
+                <li>
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  {{ organization.contact.person }}
+                </li>
+              {{/ if }}
+              {{# if organization.contact.phone }}
+                <li>
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  {{ organization.contact.phone }}
+                </li>
+              {{/ if }}
+              {{# if organization.contact.email }}
+                <li>
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <a href="mailto:{{ organization.contact.email }}">
+                    {{ organization.contact.email }}
+                  </a>
+                </li>
+              {{/ if }}
+            </ul>
+          </div>
+        </div>
+      {{/ if }}
+    {{ else }}
+      <!-- If no data yet available show spinner -->
+      {{> spinner }}
     {{/ if }}
   </div>
-  {{# if Template.subscriptionsReady }}
-    <!-- Show or not content -->
-    {{# if paginationReady }}
-      {{# if hasApi }}
-        <div class="block-header">
-          <!-- Title -->
-          <h3 class="apis-block-title">
-            {{_ 'organizationProfile_bigText_apisCount' }}
-            <small>
-              {{_ 'organizationProfile_smallText_apisCount' count=apisCount }}
-            </small>
-          </h3>
-          {{> apiFilteredBy }}
-        </div>
-        {{> apiCatalogGrid apis=apis organization=organization }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
-      {{ else }}
-        <!-- Show no APIs message -->
-        {{> organizationNoApis organization=organization }}
-    {{/ if }}
-  {{/ if }}
-  {{ else }}
-    <!-- If no data yet available show spinner -->
-    {{> spinner }}
-  {{/ if }}
 </template>
