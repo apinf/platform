@@ -23,10 +23,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 5px;">
+                <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
                   {{_ 'apiAnalyticPageBody_chartTitle_apiRequests' }}
                 </h2>
-                <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;">
+                <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
                   {{_ 'apiAnalyticPageBody_text_requestsCount' count=analyticsData.requestNumber }}
                 </p>
                 <div class="form-group">
@@ -72,10 +72,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="row">
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card form-group">
-              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 5px;">
+              <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
                 {{_ 'apiAnalyticPageBody_chartTitle_medianResponseTime' }}
               </h2>
-              <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;">
+              <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
                 {{_ 'apiAnalyticPageBody_text_responseTime' time=analyticsData.medianResponseTime }}
               </p>
               <div class="form-group">
@@ -104,11 +104,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- unique users chart -->
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card form-group">
-              <p class="overview-col-title">
-                {{_ 'apiAnalyticPageBody_text_usersCount' count=analyticsData.avgUniqueUsers }} <sup>*</sup>
-              </p>
-              <p class="overview-col-title">
+              <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
                 {{_ 'apiAnalyticPageBody_chartTitle_uniqueUsers' }}
+              </h2>
+              <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
+                {{_ 'apiAnalyticPageBody_text_usersCount' count=analyticsData.avgUniqueUsers }} <sup>*</sup>
               </p>
               <div class="form-group">
                 {{# if overviewChartResponse }}
@@ -139,9 +139,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- request timeline chart -->
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card form-group">
-              <p class="overview-col-title">
+              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
                 {{_ 'apiAnalyticPageBody_timelineChartTitle_requests' }}
-              </p>
+              </h2>
               {{# if timelineChartData }}
                 {{> requestTimeline chartData=timelineChartData listPaths=listPaths }}
               {{ else }}
@@ -157,9 +157,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- response time timeline chart -->
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card form-group">
-              <p class="overview-col-title">
+              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
                 {{_ 'apiAnalyticPageBody_timelineChartTitle_time' }}
-              </p>
+              </h2>
               {{# if timelineChartData }}
                 {{> responseTimeTimeline chartData=timelineChartData listPaths=listPaths }}
               {{ else }}
@@ -175,9 +175,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- table with list of errors -->
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card table-view form-group">
-              <p class="overview-col-title">
+              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
                 {{_ 'apiAnalyticPageBody_title_errorsStatistic' }}
-              </p>
+              </h2>
               {{# if errorsStatisticsResponse }}
                 {{> errorsStatisticTable errorsStatistic=errorsStatisticsData }}
               {{ else }}
@@ -193,9 +193,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- table with most frequent users -->
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card table-view form-group">
-              <p class="overview-col-title">
+              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
                 {{_ 'apiAnalyticPageBody_title_mostUsers' }}
-              </p>
+              </h2>
               {{# if frequentUsersResponse }}
                 {{> mostFrequentUsersTable frequentUsers=frequentUsersData }}
               {{ else }}

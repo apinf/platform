@@ -42,7 +42,7 @@
   "apiAnalyticPageBody_text_usersCount": "__count__ user",
   "apiAnalyticPageBody_text_usersCount_plural": "__count__ users",
   "apiAnalyticPageBody_helpText_averageUniqueUsers": "The average unique users per selected period",
-  "apiAnalyticPageBody_chartTitle_apiRequests": "API Requests",
+  "apiAnalyticPageBody_chartTitle_apiRequests": "Number of API requests for selected time",
   "apiAnalyticPageBody_chartTitle_medianResponseTime": "Median Response Time",
   "apiAnalyticPageBody_chartTitle_uniqueUsers": "Unique API Users",
   "apiAnalyticPageBody_timelineChartTitle_requests": "API Request Timeline",
