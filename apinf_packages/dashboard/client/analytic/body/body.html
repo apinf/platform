@@ -105,10 +105,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="col-xs-12 col-md-12">
             <div class="api-view-card form-group">
               <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
-                {{_ 'apiAnalyticPageBody_chartTitle_uniqueUsers' }}
+                {{_ 'apiAnalyticPageBody_helpText_averageUniqueUsers' }}
               </h2>
               <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
-                {{_ 'apiAnalyticPageBody_text_usersCount' count=analyticsData.avgUniqueUsers }} <sup>*</sup>
+                {{_ 'apiAnalyticPageBody_text_usersCount' count=analyticsData.avgUniqueUsers }}
               </p>
               <div class="form-group">
                 {{# if overviewChartResponse }}
@@ -126,9 +126,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   </span>
                 </div>
               {{/ if }}
-              <div class="overview-help-text">
-                <sup>*</sup> {{_ 'apiAnalyticPageBody_helpText_averageUniqueUsers' }}
-              </div>
             </div>
           </div>
         </div>
