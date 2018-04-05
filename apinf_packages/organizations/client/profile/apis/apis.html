@@ -38,31 +38,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <p style="padding: 10px 15px; background-color:#f1f8ff; text-decoration:none; border-radius: 2px;">
               <a href="{{ organization.url }}">
                 {{ organization.url }}
-                <i class="mdi mdi-open-in-new" style="padding-left:5px;"></i>
               </a>
             </p>
-            <ul class="list-inline">
-              {{# if organization.contact.person }}
-                <li>
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  {{ organization.contact.person }}
-                </li>
-              {{/ if }}
-              {{# if organization.contact.phone }}
-                <li>
-                  <i class="fa fa-phone" aria-hidden="true"></i>
-                  {{ organization.contact.phone }}
-                </li>
-              {{/ if }}
-              {{# if organization.contact.email }}
-                <li>
-                  <i class="fa fa-envelope" aria-hidden="true"></i>
-                  <a href="mailto:{{ organization.contact.email }}">
-                    {{ organization.contact.email }}
-                  </a>
-                </li>
-              {{/ if }}
-            </ul>
+            {{# if organization.contact.email }}
+              <p style="padding: 10px 15px; background-color:#f1f8ff; text-decoration:none; border-radius: 2px;margin-bottom:0;">
+                <a href="mailto:{{ organization.contact.email }}">
+                  {{ organization.contact.email }}
+                </a>
+              </p>
+            {{/ if }}
           </div>
         </div>
       {{/ if }}
