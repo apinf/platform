@@ -19,15 +19,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       {{# if hasApi }}
         <div class="col-md-3" style="padding-left: 5px;">
-          <div class="filter-dropdown block-wrapper">
+          {{# if organization.currentUserCanManage }}
+            <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="width:100%;display: block;margin-top: 20px;">
+              {{_ 'organizationProfile_buttonText_connectApi' }}
+            </button>
+          {{/ if }}
+          <!-- <div class="filter-dropdown block-wrapper">
             {{> apiSortingToolbar }}
-            <!-- Connection API button -->
-            {{# if organization.currentUserCanManage }}
-              <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="width:100%;">
-                {{_ 'organizationProfile_buttonText_connectApi' }}
-              </button>
-            {{/ if }}
-          </div>
+          </div> -->
           <div class="about-organization block-wrapper" style="margin-left: 0;">
             <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 0.5em;"> {{ organization.name }}</h2>
             {{# if organization.description }}
@@ -47,6 +46,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </a>
               </p>
             {{/ if }}
+            <div class="organization-header-side-icon" style="padding-top: 1.1em;">
+              <!-- <a href="/rss/organizations?slug={{organization.slug}}" target="_blank" class="rss-feed fa fa-rss-square fa-2x btn" title="{{_ 'organizationProfileHeader_rss_feed'}}"></a> -->
+              {{> organizationSocialMediaIcons organization=organization }}
+            </div>
           </div>
         </div>
       {{/ if }}

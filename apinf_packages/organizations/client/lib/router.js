@@ -18,7 +18,7 @@ FlowRouter.route('/organizations', {
   triggersEnter: [function (context) {
     if (!context.queryParams.sortBy) {
       // Set query parameter if it doesn't exist
-      context.queryParams.sortBy = 'name';
+      context.queryParams.sortBy = 'bookmarkCount';
     }
     if (!context.queryParams.sortDirection) {
       // Set query parameter if it doesn't exist
@@ -26,7 +26,7 @@ FlowRouter.route('/organizations', {
     }
     if (!context.queryParams.viewMode) {
       // Set query parameter if it doesn't exist
-      context.queryParams.viewMode = 'grid';
+      context.queryParams.viewMode = 'table';
     }
     // filterBy parameter must be available only for registered users
     if (!context.queryParams.filterBy && Meteor.userId()) {
