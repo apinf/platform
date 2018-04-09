@@ -37,9 +37,10 @@ Meteor.publish('emqProxyCount', function () {
   Counts.publish(this, 'emqProxyCount', Proxies.find({ type: 'emq' }));
 });
 
-Meteor.publish('publicProxyDetails', () => {
+Meteor.publish('publicProxyDetails', (type) => {
+  check(type, String);
   // Return all proxies with public data: name, url, type
-  return Proxies.find({}, {
+  return Proxies.find({ type }, {
     fields: {
       _id: 1,
       name: 1,
