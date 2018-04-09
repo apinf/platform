@@ -1177,7 +1177,7 @@
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
   "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
-  "settings_title_supportsGraphql": "API-Umbrella proxy supports GraphQL requests",
+  "settings_title_supportsGraphql": "API Umbrella proxy supports GraphQL requests",
   "settingsPage_title_settings": "Settings",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account",
