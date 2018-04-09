@@ -906,6 +906,9 @@
         "host": {
           "label": "Host"
         }
+      },
+      "developmentFeatures": {
+        "label": "Enabled"
       }
     },
     "proxies": {
