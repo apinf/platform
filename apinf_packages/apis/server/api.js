@@ -474,8 +474,7 @@ CatalogV1.addCollection(Apis, {
           // Add manager IDs list into and slug
           apiData = Object.assign({ managerIds: [userId] }, bodyParams, slugData);
         } else {
-          // Add manager IDs list into
-          apiData = Object.assign({ managerIds: [userId] }, bodyParams);
+          return errorMessagePayload(500, 'Forming slug for API failed.');
         }
 
         // Insert API data into collection
@@ -602,6 +601,18 @@ CatalogV1.addCollection(Apis, {
             const detailLine = 'Duplicate: API with same name already exists.';
             return errorMessagePayload(400, detailLine, 'id', duplicateApi._id);
           }
+
+          // Get formed slug
+          const slugData = Meteor.call('formSlugFromName', 'Apis', bodyParams.name);
+          // Check slugData
+          if (slugData && typeof slugData === 'object') {
+            // Include slug
+            bodyParams.slug = slugData.slug;
+            // Include friendlySlugs
+            bodyParams.friendlySlugs = slugData.friendlySlugs;
+          } else {
+            return errorMessagePayload(500, 'Forming slug for API failed!');
+          }
         }
 
         // validate values
@@ -712,19 +723,6 @@ CatalogV1.addCollection(Apis, {
         // Include user ID here so it can be filled to DB correspondingly
         // Note! Meteor.userId is not available!
         bodyParams.updated_by = userId;
-
-        // If API name given
-        if (bodyParams.name) {
-          // Get Formed slug
-          const slugData = Meteor.call('formSlugFromName', 'Apis', bodyParams.name);
-          // Check slugData
-          if (slugData && typeof slugData === 'object') {
-            // Include slug
-            bodyParams.slug = slugData.slug;
-            // Include friendlySlugs
-            bodyParams.friendlySlugs = slugData.friendlySlugs;
-          }
-        }
 
         // Update API document
         const result = Apis.update(apiId, { $set: bodyParams });
