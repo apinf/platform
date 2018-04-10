@@ -27,7 +27,7 @@ Create new api no url (negative)
 Create new api (positive)
 	Go to addapi
 	Create API	Kissa	${EMPTY}	https://www.google.com
-	confirm page loaded	Kappa
+	confirm page loaded	media
 
 *** Keywords *** 
 Go to homepage
