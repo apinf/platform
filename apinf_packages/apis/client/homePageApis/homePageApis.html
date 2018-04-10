@@ -5,9 +5,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="homePageApis">
   {{# if featuredApis }}
-    <h2 class="feature-section-heading text-center">
-      {{_ "homePageApis_title_featuredApis" }}
-    </h2>
+    <div style="margin-bottom:1em;">
+      <span style="color: #37474F;font-weight: 500;text-transform: uppercase;letter-spacing: 0.1px;">
+        {{_ "homePageApis_title_featuredApis" }}
+      </span>
+      <a href="{{ pathFor 'apiCatalog' }}" style="text-transform: uppercase;letter-spacing: 0.1px;float:right">
+        See more <i class="mdi mdi-arrow-right"></i>
+      </a>
+    </div>
     {{> apiCatalogGrid apis=featuredApis }}
   {{ else }}
     {{# if isInRole 'admin'}}
