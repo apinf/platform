@@ -4,22 +4,27 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationCatalog">
-  <div class="container">
-    <h1 class="page-header">
-      {{_ "organizationCatalog_Title" }}
-      {{# if organizationCount }}
-        <small>
-          {{_ 'organizationCatalog_organizationCount' count=organizationCount }}
-        </small>
-      {{/ if }}
-      {{# if userCanAddOrganization }}
-        <button id="add-organization" type="button" class="btn btn-default pull-right">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          {{_ "organizationCatalog_buttonText_addOrganization" }}
-        </button>
-      {{/ if }}
-    </h1>
-    {{> organizationCatalogToolbar }}
+  <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
+    <ul class="list-inline catalog-header" style="margin-bottom: 0;">
+      <li class="col-md-4">
+        <h1 style="margin-top:0.8em;">
+          {{_ "organizationCatalog_Title" }}
+        </h1>
+      </li>
+      <li class="col-md-4 text-center toolbar" style="padding-right: 0;margin-top: 0.9em;">
+        {{> organizationCatalogToolbar }}
+      </li>
+      <li class="col-md-4 text-right add-organization" style="padding-right: 0;margin-top: 0.7em;">
+        {{# if userCanAddOrganization }}
+          <button id="add-organization" type="button" class="btn btn-success btn-success-special">
+            {{_ "organizationCatalog_buttonText_addOrganization" }}
+          </button>
+        {{/ if }}
+      </li>
+    </ul>
+  </div>
+  <div class="container" style="margin-top:20px;">
+
     {{# if Template.subscriptionsReady }}
       {{# if paginationReady }}
         {{# if organizations }}
