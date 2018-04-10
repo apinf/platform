@@ -43,7 +43,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="num">1</span>
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
-          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#F5F5F5;text-decoration:none;border-radius: 2px;">
+          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#F5F5F5;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
             {{ proxyUrl }}
             <i
             id="copyProxyUrl"
@@ -65,7 +65,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{# if proxyUrl }}
                   {{# unless disableApiKey }}
                     {{# if hasApiKey }}
-                      <span id="api-url" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;">
+                      <span id="api-url" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
                         {{ apiKey }}
                         <i
                         id="copyApiUrl"
@@ -93,7 +93,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </h2>
           {{# if proxyUrl }}
           <h3 style="font-size:14px;">GET Query Param</h3>
-          <span id="example-one" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px; display: inline-block;">
+          <span id="example-one" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px; display: inline-block;font-family:'Roboto Mono', monospace;">
             curl <span style="color: #F44336;">'{{ proxyUrl }}?api_key={{ apiKey }}'</span>
             <i
             id="copyExampleOne"
@@ -105,7 +105,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             Pass the API key into the api_key GET query string parameter. The GET query parameter may be used for non-GET requests (such as POST and PUT).
           </p>
           <h3 style="font-size:14px;">HTTP Header</h3>
-          <span id="example-two" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px; display: inline-block;">
+          <span id="example-two" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px; display: inline-block;font-family:'Roboto Mono', monospace;">
             curl -H <span style="color: #F44336;">'X-Api-Key: {{ apiKey }}' '{{ proxyUrl }}'</span>
             <i
             id="copyExampleTwo"

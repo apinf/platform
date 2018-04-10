@@ -174,3 +174,38 @@ select.form-control {
   -o-transition: none;
   transition: none;
 }
+
+.api-view .dashboard-filter-buttons {
+  line-height: 57px;
+}
+
+@media (max-width: 767px) {
+  .dashboard-search, .dashboard-filter-buttons .toolbar-select {
+    display: none;
+  }
+
+  .dashboard-filter-buttons {
+    margin-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 20px;
+    line-height: normal !important;
+  }
+
+  .secondary-menu-block {
+    height: auto;
+  }
+
+  #date-range-picker {
+    width: 100%;
+  }
+
+  .dashboard-api-name {
+    margin-bottom: 20px;
+  }
+
+  .dashboard-summary-block {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}

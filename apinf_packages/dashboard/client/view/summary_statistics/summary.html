@@ -6,14 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="dashboardSummaryStatistic">
   {{# if displayTable }}
     <!-- Table head -->
-    <h2 style="margin: 0;
-    font-size: 14px;
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: 0;
-    padding: 20px 20px;
-    font-weight: 400;
-    border-bottom: 1px solid #ecf3f8;">
+    <h2 style="margin: 0;font-size: 14px;margin-left: -20px;margin-right: -20px;margin-bottom: 0;padding: 20px 20px;font-weight: 400;border-bottom: 1px solid #ecf3f8;">
       {{ tableTitle }} ({{ count }})
       <span class="pull-right" style="color: #6d859e;font-size: 12px;padding-top: 2px;">Analytics summary</span>
     </h2>
@@ -25,18 +18,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
             <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
               <div class="row">
-                <div class="col-xs-6">
+                <div class="col-md-6 col-xs-12 dashboard-api-name">
                   <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
-                  <h2 class="special-headings" style="
-                  font-weight: 500;
-                  font-size: 16px;
-                  padding-bottom: 7px;
-                  color: #37474F;
-                  margin: 0;">{{ apiName }}</h2>
+                  <h2 class="special-headings" style="font-weight: 500;font-size: 16px;padding-bottom: 7px;color: #37474F;margin: 0;">{{ apiName }}</h2>
                   </a>
-                  <span style="font-size: 12px;color:#5c617b;border-radius: 2px;">{{ prefix }}</span>
+                  <span style="font-size: 12px;color:#1a75d2;border-radius: 2px;">{{ prefix }}</span>
                 </div>
-                <div class="col-xs-2 text-left">
+                <div class="col-md-2 col-xs-12 text-left">
                   <div style="display:inline;">
                     <span class="summary-number-label">Requests</span>
                     <span class="request-number">
@@ -48,7 +36,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     {{ percentages 'requests' }}
                   </span>
                 </div>
-                <div class="col-xs-2 text-left">
+                <div class="col-md-2 col-xs-12 text-left">
                   <div style="display:inline;">
                     <span class="summary-number-label">Response Time</span>
                     <span class="response-time">
@@ -60,7 +48,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     {{ percentages 'time' }}
                   </span>
                 </div>
-                <div class="col-xs-2 text-left">
+                <div class="col-md-2 col-xs-12 text-left">
                   <div style="display:inline;">
                     <span class="summary-number-label">Developers</span>
                     <span class="unique-users">

@@ -10,20 +10,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ "dashboardPage_title_dashboard" }}
         </h1>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 dashboard-search">
         <div class="search" style="margin-top:1em;">
           <i class="fa fa-search"></i>
           <input type="text" class="form-control pull-right" id="search-box"
                  placeholder={{_ "dashboardPage_placeholderText_search" }} >
         </div>
       </div>
-      <div class="col-md-4 text-right" style="margin-top: 1em;padding-right: 0;">
+      <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;padding-right: 0;">
         {{# if Template.subscriptionsReady }}
           {{> dashboardToolbar proxiesList=proxiesList }}
         {{/ if }}
       </div>
     </div>
-  <div class="container block-wrapper" style="padding-top: 0;padding-bottom: 0;max-width:960px;">
+  <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;max-width:960px;">
 
     {{# if Template.subscriptionsReady }}
       <!-- Make sure an API is connected to proxy -->

@@ -29,7 +29,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
           <!-- if viewMode is table, show table -->
           {{# if tableViewMode }}
-            {{> organizationCatalogTable organizations=organizations }}
+            {{> organizationCatalogGrid organizations=organizations }}
           {{/ if }}
           {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
         {{ else }}

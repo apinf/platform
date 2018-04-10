@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="organizationProfileHeader">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-5">
       <span style="float: left; padding-top:12px" title="Upload new logo" class="organization-header-logo" id="organization-file-browse">
         {{> viewOrganizationLogo organization=organization }}
       </span>
@@ -15,7 +15,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </h1>
       </div>
 
-    <div class="col-md-8 secondary-menu-block-inner" style="text-align:center;">
+    <div class="col-md-2 secondary-menu-block-inner" style="text-align:center;">
       {{# if organization.currentUserCanManage }}
       <ul class="nav nav-tabs">
         <li id="organization-apis-tab" class="active">
@@ -31,7 +31,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </ul>
       {{/ if }}
     </div>
-    <div class="col-md-2" style="text-align:right;">
+    <div class="col-md-5" style="text-align:right;">
+      {{# if organization.currentUserCanManage }}
+        <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="margin-top:10px;">
+          Connect API
+        </button>
+      {{/ if }}
     </div>
   </div>
 </div>

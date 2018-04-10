@@ -18,12 +18,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </div>
       {{# if hasApi }}
-        <div class="col-md-3" style="padding-left: 5px;">
-          {{# if organization.currentUserCanManage }}
-            <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="width:100%;display: block;margin-top: 20px;">
-              {{_ 'organizationProfile_buttonText_connectApi' }}
-            </button>
-          {{/ if }}
+        <div class="col-md-3 organization-side-block" style="padding-left: 5px;">
           <!-- <div class="filter-dropdown block-wrapper">
             {{> apiSortingToolbar }}
           </div> -->
@@ -51,6 +46,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{> organizationSocialMediaIcons organization=organization }}
             </div>
           </div>
+          <!-- {{# if organization.currentUserCanManage }}
+            <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="width:100%;display: block;margin-top: 20px;">
+              {{_ 'organizationProfile_buttonText_connectApi' }}
+            </button>
+          {{/ if }} -->
         </div>
       {{/ if }}
     {{ else }}

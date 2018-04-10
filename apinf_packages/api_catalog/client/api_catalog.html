@@ -5,14 +5,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiCatalog">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
-    <ul class="list-inline" style="margin-bottom: 0;">
+    <ul class="list-inline catalog-header" style="margin-bottom: 0;">
       <li>
         <h1 style="margin-top: 0.8em;">
           <!-- {{_ "catalog_Title" }} -->
           Explore public APIs
         </h1>
       </li>
-      <li class="pull-right" style="padding-right: 0;margin-top: 0.9em;">
+      <li class="pull-right catalog-header-search" style="padding-right: 0;margin-top: 0.9em;">
         {{> searchField }}
       </li>
     </ul>
@@ -26,7 +26,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if tableViewMode }}
         {{> apiCatalogTable apis=apis }}
         {{/ if }}
-        
+
         <a href="/rss/apis" target="_blank" class="rss-feed" title="{{_ 'apisRssIcon_tooltipText_Rss'}}"
         style="color: #999;
         margin-top: 10px;
