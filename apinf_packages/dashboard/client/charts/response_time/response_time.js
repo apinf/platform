@@ -131,7 +131,7 @@ Template.responseTimeTimeline.onRendered(function () {
     const scales = instance.chart.options.scales;
 
     // Update translation
-    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_xAxisTitle_days');
+    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_xAxisTitle_times');
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_yAxisTitle_time');
     datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
     datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
