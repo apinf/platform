@@ -94,9 +94,11 @@ Template.requestTimeline.onRendered(function () {
   instance.autorun(() => {
     // Get analytics data
     const selectedPathData = instance.selectedPathData.get();
+    // Get Date format
+    const dateFormat = Template.currentData().dateFormat;
 
     // Get locale date format
-    const localeDateFormat = getLocaleDateFormat(instance.data.dateFormat);
+    const localeDateFormat = getLocaleDateFormat(dateFormat);
 
     // Initialization
     const labels = selectedPathData.dates.map(date => {
