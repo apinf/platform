@@ -4,26 +4,37 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardPage">
-    <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
-      <div class="col-md-4" style="padding-left: 0;">
-        <h1 style="margin-top: 0.8em;">
-          {{_ "dashboardPage_title_dashboard" }}
-        </h1>
-      </div>
-      <div class="col-md-4 dashboard-search">
-        <div class="search" style="margin-top:1em;">
-          <i class="fa fa-search"></i>
-          <input type="text" class="form-control pull-right" id="search-box"
-                 placeholder={{_ "dashboardPage_placeholderText_search" }} >
-        </div>
-      </div>
-      <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;padding-right: 0;">
-        {{# if Template.subscriptionsReady }}
-          {{> dashboardToolbar proxiesList=proxiesList }}
-        {{/ if }}
-      </div>
+  <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
+    <div class="col-md-4" style="padding-left: 0;">
+      <h1 style="margin-top: 0.8em;">
+        {{_ "dashboardPage_title_dashboard" }}
+      </h1>
     </div>
-  <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;max-width:960px;">
+    {{# if Template.subscriptionsReady }}
+      <!-- Make sure an API is connected to proxy -->
+      {{# if proxyBackendsCount }}
+
+        <!-- Make sure a user has any API -->
+        {{# if managedApisCount }}
+          <!-- Case when user has one API -->
+          <div class="col-md-4 dashboard-search">
+            {{# unless managedOneApi }}
+              <div class="search" style="margin-top:1em;">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control pull-right" id="search-box"
+                       placeholder={{_ "dashboardPage_placeholderText_search" }} >
+              </div>
+            {{/ unless }}
+          </div>
+        {{/ if }}
+      {{/ if }}
+    {{/ if }}
+    <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;padding-right: 0;">
+      {{# if Template.subscriptionsReady }}
+        {{> dashboardToolbar proxiesList=proxiesList }}
+      {{/ if }}
+    </div>
+  </div>
 
     {{# if Template.subscriptionsReady }}
       <!-- Make sure an API is connected to proxy -->
@@ -34,13 +45,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- Case when user has one API -->
           {{# if managedOneApi }}
             <!-- Display directly API Analytic Page -->
-            {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
-            {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+            <!-- {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }} -->
+            <div class="container dashboard-summary-block" style="padding-top: 0;padding-bottom: 0;">
+              {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+            </div>
           {{ else }}
+            <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
             <!-- Display Dashboard page-->
             {{> dashboardView searchValue=searchValue }}
+          </div>
           {{/ if }} <!-- /managedOneApi -->
         {{ else }}
+        <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
           <!-- Display a message about "No managed API" -->
           <div class="alert alert-warning alert-text" role="alert">
             <h3>
@@ -52,17 +68,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ 'dashboardPage_buttonText_addApi' }}
             </a>
           </div>
+        </div>
         {{/ if }} <!-- /managedApisCount -->
       {{ else }}
         <!-- Display a message about "No connected API" -->
-        <div class="alert alert-warning alert-text" role="alert" style="margin-top: 20px;">
-          <p style="margin: 20px 30px;">
-            {{_ 'dashboardPage_text_noProxyBackends' }}
-          </p>
+        <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
+          <div class="alert alert-warning alert-text" role="alert" style="margin-top: 20px;">
+            <p style="margin: 20px 30px;">
+              {{_ 'dashboardPage_text_noProxyBackends' }}
+            </p>
+          </div>
         </div>
       {{/ if }} <!-- /proxyBackendsExists -->
     {{ else }}
       {{> spinner }}
     {{/ if }} <!-- /subscriptionsReady -->
-  </div>
 </template>
