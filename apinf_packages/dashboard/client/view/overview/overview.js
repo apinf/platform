@@ -98,7 +98,7 @@ Template.dashboardOverviewStatistic.helpers({
     const timeframe = FlowRouter.getQueryParam('timeframe');
 
     if (timeframe === '12' || timeframe === '48') {
-      // Locale format of Hours * minutes
+      // Locale format of Hours & minutes
       return 'LT';
     }
 
