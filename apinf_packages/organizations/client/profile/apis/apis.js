@@ -148,26 +148,3 @@ Template.organizationApis.helpers({
     return (apis.length || (apis.length === 0 && switchedFilter.lifecycleStatus));
   },
 });
-
-Template.organizationApis.events({
-  'click #connect-api': () => {
-    // Get Organization from template instance
-    const organization = Template.currentData().organization;
-
-    // Check organization exist
-    if (organization) {
-      // Show modal with list of suggested apis and id of current organization
-      Modal.show('connectApiToOrganizationModal', { organization });
-    } else {
-      // Otherwise show error
-      const message = TAPi18n.__('organizationProfile_text_error');
-      sAlert.error(message, { timeout: 'none' });
-    }
-  },
-  'click [data-lifecycle]': (event) => {
-    // Get value of data-lifecycle
-    const selectedTag = event.currentTarget.dataset.lifecycle;
-    // Set value in query parameter
-    FlowRouter.setQueryParams({ lifecycle: selectedTag });
-  },
-});
