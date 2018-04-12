@@ -90,7 +90,7 @@
   "apiCardPin_unfeaturedSuccessfully": "API card removed from featured list successfully",
   "apiCatalog_apisCount": "__count__ APIs",
   "apiCatalog_apisCount_plural": "__count__ APIs",
-  "apiCatalog_noApis_Found": "No APIs found with the selected life cycle status",
+  "apiCatalog_noApis_Found": "No APIs found",
   "apiCatalogPage_title_apiCatalog": "APIs Catalog",
   "apiSettingsDelete_deleteButton": "Delete",
   "apiDetails_baseUrl_headingText": "Endpoint URL",

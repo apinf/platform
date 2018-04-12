@@ -4,6 +4,10 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationProfileHeader">
+  <!-- Cover image block -->
+  <div class="organization-cover-block">
+    {{> viewOrganizationCover organization=organization }}
+  </div>
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
     <div class="row">
       <div class="col-md-5">
@@ -40,8 +44,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
   </div>
 </div>
-  <!-- Cover image block -->
-  <!-- <div class="organization-cover-block">
-    {{> viewOrganizationCover organization=organization }}
-  </div> -->
 </template>

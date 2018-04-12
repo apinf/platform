@@ -12,25 +12,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 .organization-cover-block {
   width: 100%;
-  height: 400px; // this controls a size of the cover
+  height: 300px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   overflow: hidden;
-  margin-top: 8em !important; // this controls position of the cover
-  z-index: -1;
 
   .organization-cover {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto 0;
     width: 100%;
+    position: relative;
+    bottom: 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  .organization-cover-block {
+    display: none;
   }
 }
 

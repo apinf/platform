@@ -55,32 +55,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
             In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
           </p>
+          {{# if currentUser }}
+          {{# if proxyUrl }}
+          {{# unless disableApiKey }}
+          {{# if hasApiKey }}
           <div style="margin-top:2em;">
             <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
               <span class="num">2</span>
               Authorization (X-Api-Key)
             </h2>
-
-              {{# if currentUser }}
-                {{# if proxyUrl }}
-                  {{# unless disableApiKey }}
-                    {{# if hasApiKey }}
-                      <span id="api-url" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
-                        {{ apiKey }}
-                        <i
-                        id="copyApiUrl"
-                        class="mdi mdi-content-copy"
-                        data-clipboard-target="#api-url"
-                        style="padding-left:5px;"></i>
-                      </span>
-                      {{ else }}
-                        Click "Get API key" in the upper right corner.
-                    {{/ if }}
-                  {{ else }}
-                    No X-Api-Key needed
-                  {{/ unless }}
-                {{/ if }}
-              {{/ if }}
+            <span id="api-url" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
+              {{ apiKey }}
+              <i
+              id="copyApiUrl"
+              class="mdi mdi-content-copy"
+              data-clipboard-target="#api-url"
+              style="padding-left:5px;"></i>
+            </span>
             <p style="color:#6d859e;margin-top:1.5em;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
               In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
@@ -121,6 +112,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         </div>
         {{ else }}
+        <div style="margin-top:2em;">
+          <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
+            <span class="num">2</span>
+            Authorization (X-Api-Key)
+          </h2>
+          <p style="color:#6d859e;margin-top:1.5em;">
+            Click "Get API key" in the upper right corner.
+          </p>
+        </div>
+        {{/ if }}
+        {{/ unless }}
+        {{/ if }}
+        {{/ if }}
+        {{ else }}
         <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
           API is not configured
         </h2>
@@ -139,41 +144,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{/ if }}
     </div>
   </div>
-  <!-- {{# if currentUser }}
-    {{# if proxyUrl }}
-      <div id="usage-instructions" class="bs-callout bs-callout-primary">
-        <h4>
-          {{_ "apiDetails_usageInstructions_headingText" }}
-        </h4>
-        <ul>
-          {{# unless disableApiKey }}
-            {{# if hasApiKey }}
-
-              <li>
-                {{_ "apiDetails_usageInstructions_requestHeaders_text" }}
-                <span>
-                  <i>X-Api-Key:</i> {{ apiKey }}
-                </span>
-              </li>
-            {{ else }}
-
-              <li>
-                {{_ "apiDetails_usageInstructions_noApiKeyText" }}
-              </li>
-            {{/ if }}
-          {{ else }}
-
-            <li>
-              {{_ "apiDetails_usageInstructions_disableApiKeyText" }}
-              <i>{{ proxyUrl }}&lt;optional_path&gt;</i>
-            </li>
-          {{/ unless }}
-        </ul>
-      </div>
-    {{/ if }}
-  {{/ if }} -->
   <!-- Embedded Related Media contents -->
   <!-- {{> relatedMedia entity=api }} -->
-
-
 </template>
