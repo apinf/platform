@@ -147,10 +147,20 @@ Template.requestTimeline.onRendered(function () {
 
   // Reactive update Chart Axis translation
   instance.autorun(() => {
+    let xAxesLabel;
+    // Get Date format
+    const dateFormat = Template.currentData().dateFormat;
     const scales = instance.chart.options.scales;
 
+    // If it's Day format
+    if (dateFormat === 'L') {
+      xAxesLabel = TAPi18n.__('requestTimeline_xAxisTitle_days');
+    } else {
+      xAxesLabel = TAPi18n.__('requestTimeline_xAxisTitle_hours');
+    }
+
     // Update translation
-    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_xAxisTitle_days');
+    scales.xAxes[0].scaleLabel.labelString = xAxesLabel;
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_yAxisTitle_requests');
 
     // Update chart with new translation

@@ -127,11 +127,22 @@ Template.responseTimeTimeline.onRendered(function () {
 
   // Reactive update Chart Axis translation
   instance.autorun(() => {
+    let xAxesLabel;
+
     const datasets = instance.chart.data.datasets;
     const scales = instance.chart.options.scales;
+    // Get Date format
+    const dateFormat = Template.currentData().dateFormat;
+
+    // If it's Day format
+    if (dateFormat === 'L') {
+      xAxesLabel = TAPi18n.__('responseTimeTimeline_xAxisTitle_days');
+    } else {
+      xAxesLabel = TAPi18n.__('responseTimeTimeline_xAxisTitle_hours');
+    }
 
     // Update translation
-    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_xAxisTitle_times');
+    scales.xAxes[0].scaleLabel.labelString = xAxesLabel;
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_yAxisTitle_time');
     datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
     datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
