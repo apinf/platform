@@ -25,7 +25,7 @@ export default function getDateRange (timeframe) {
     }
     // From midnight to now (Today)
     case '12': {
-      const nextHourTime = moment(today).add(1, 'h').minute(0).second(0);
+      const nextHourTime = moment(today).add(1, 'h').set({ m: 0, s: 0, ms: 0 });
       // Add to range the next hour (excluded value)
       tomorrow = nextHourTime.valueOf();
       // Subtract a 1 Day
@@ -64,10 +64,11 @@ export default function getDateRange (timeframe) {
   }
 
   const startDay = moment(tomorrow).subtract(subtractValue, subtractInterval).valueOf();
-  const doublePeriodAgo = moment(startDay).subtract(subtractValue, subtractInterval).valueOf();
+  // Set 00:00 hours for previous range. It need for Today period
+  const doublePeriodAgo = moment(startDay).subtract(subtractValue, subtractInterval).hour(0);
 
   return {
-    doublePeriodAgo,
+    doublePeriodAgo: doublePeriodAgo.valueOf(),
     onePeriodAgo: startDay,
     from: startDay,
     to: tomorrow,

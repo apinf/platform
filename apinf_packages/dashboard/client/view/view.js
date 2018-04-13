@@ -53,6 +53,8 @@ Template.dashboardView.onCreated(function () {
         toDate: queryOption.to,
         interval: queryOption.interval,
         timeframe,
+        onePeriodAgo: queryOption.onePeriodAgo,
+        doublePeriodAgo: queryOption.doublePeriodAgo,
       };
 
       Meteor.call('totalNumberRequestsAndTrend',
