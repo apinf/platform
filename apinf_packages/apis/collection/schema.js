@@ -32,7 +32,7 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  documentationURL: {
+  externalURL: {
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,

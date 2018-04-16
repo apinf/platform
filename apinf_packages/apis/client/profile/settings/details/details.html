@@ -7,19 +7,31 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <h2 style="font-size:16px;margin-top:0;">
     {{_ "apiSettingsDetails_uploadLogo_heading" }}
   </h2>
-  <p style="color: #6d859e">
+  {{> uploadApiLogo api=api }}
+  <p style="color: #6d859e;margin-top: -0.5em;margin-bottom: 1em;">
     {{_ "apiSettingsDetails_uploadLogoText" }}
   </p>
-  {{> uploadApiLogo api=api }}
   {{# autoForm
       collection=apisCollection
       doc=api
       id="apiDetailsForm"
       type="update" }}
     {{> afQuickField name='name' id="api-name" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
+      Your API name
+    </p>
     {{> afQuickField name='description' id="api-description" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
+      Desribe your API
+    </p>
     {{> afQuickField name='url' id="api-url" }}
-    {{> afQuickField name='documentationURL' id="documentation-url" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
+      Your API BASE PATH
+    </p>
+    {{> afQuickField name='externalURL' id="external-url" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 2em;">
+      URL to your website, documentation, developer portal etc.
+    </p>
     <button type="submit" class="btn btn-success btn-success-special" id="save-settings">
       {{_ "apiSettingsDetails_saveButton" }}
     </button>
