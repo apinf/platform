@@ -67,7 +67,7 @@ Template.requestTimeline.onRendered(function () {
           {
             scaleLabel: {
               display: true,
-              labelString: TAPi18n.__('requestTimeline_xAxisTitle_times'),
+              labelString: TAPi18n.__('requestTimeline_xAxisTitle_days'),
               fontSize: 14,
               fontColor: '#000000',
             },
