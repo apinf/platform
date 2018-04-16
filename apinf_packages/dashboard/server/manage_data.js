@@ -162,6 +162,16 @@ Meteor.methods({
             median[index] = backendData.percentiles_response_time.values['50.0'];
             percentiles95[index] = backendData.percentiles_response_time.values['95.0'];
           });
+
+          requestPathsData[dataset.key] = {
+            dates,
+            success,
+            redirect,
+            fail,
+            error,
+            median,
+            percentiles95,
+          };
         });
       }
 
