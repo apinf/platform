@@ -13,6 +13,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
+import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf imports
@@ -195,6 +196,12 @@ CatalogV1.addCollection(Apis, {
             if (requestorIsAdmin) {
               api.backendURL = api.url;
               api.backendPrefix = proxyBackend.backendPrefix();
+              // Get name and type of proxy
+              const proxy = Proxies.findOne(proxyBackend.proxyId);
+              if (proxy) {
+                api.proxyName = proxy.name;
+                api.proxyType = proxy.type;
+              }
             }
 
             // Provide full proxy path
@@ -309,6 +316,13 @@ CatalogV1.addCollection(Apis, {
           if (userCanManage) {
             api.backendURL = api.url;
             api.backendPrefix = proxyBackend.backendPrefix();
+
+            // Get name and type of proxy
+            const proxy = Proxies.findOne(proxyBackend.proxyId);
+            if (proxy) {
+              api.proxyName = proxy.name;
+              api.proxyType = proxy.type;
+            }
           }
 
           // Provide full proxy path
@@ -671,7 +685,7 @@ CatalogV1.addCollection(Apis, {
         }
         // Check if link for openAPI documentation was given
         const documentationUrl = bodyParams.documentationUrl;
-        // Cehck if link for external documentation was given
+        // Check if link for external documentation was given
         const externalDocumentation = bodyParams.externalDocumentation;
 
         if (documentationUrl || externalDocumentation) {
@@ -805,10 +819,17 @@ CatalogV1.addCollection(Apis, {
           // Display also actual API URL
           responseData.backendURL = responseData.url;
           responseData.backendPrefix = proxyBackend.backendPrefix();
+
+          // Get name of proxy
+          const proxy = Proxies.findOne(proxyBackend.proxyId);
+          if (proxy) {
+            responseData.proxyName = proxy.name;
+            responseData.proxyType = proxy.type;
+          }
+
           // Provide full proxy path
           responseData.url = proxyUrl.concat(frontendPrefix);
         }
-
 
         // OK response with API data
         return {
