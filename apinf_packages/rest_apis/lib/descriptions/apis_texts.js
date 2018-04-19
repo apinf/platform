@@ -111,6 +111,24 @@ const descriptionApis = {
 
   If match is not found, the operation is considered as failed.
   `,
+  // --------------------------------------------
+  getProxies: `
+  ### List of available proxies ###
+
+  Admin user can get list of available proxies.
+  On success returns list of proxies detailing
+  - proxy id
+  - proxy name
+  - proxy type.
+
+  Example calls:
+
+    GET /proxies
+
+  Result: Responds with HTTP code 200 and a list of available proxies.
+
+  If no proxies are defined, returns an empty list.
+  `,
 };
 
 export default descriptionApis;
