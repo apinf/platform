@@ -190,6 +190,13 @@ CatalogV1.addCollection(Apis, {
             const proxyUrl = proxyBackend.proxyUrl();
             // Get proxy backend path
             const frontendPrefix = proxyBackend.frontendPrefix();
+
+            // Admin can see also actual API URL
+            if (requestorIsAdmin) {
+              api.backendURL = api.url;
+              api.backendPrefix = proxyBackend.backendPrefix();
+            }
+
             // Provide full proxy path
             api.url = proxyUrl.concat(frontendPrefix);
           }
@@ -258,20 +265,22 @@ CatalogV1.addCollection(Apis, {
           return errorMessagePayload(404, 'API with specified ID is not found.');
         }
 
+        // Check if user is Admin or Manager
+        let userCanManage = false;
+        // Get requestor ID from header
+        const requestorId = this.request.headers['x-user-id'];
+
+        if (requestorId) {
+          // Check if requestor is administrator
+          const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
+          // Check if requestor is manager
+          const requestorIsManager = api.currentUserCanManage(requestorId);
+          userCanManage = requestorIsAdmin || requestorIsManager;
+        }
+
         // Only Public APIs are available for non-admin/non-manager user
         if (api.isPublic === false) {
-          let displayPrivateAPI = false;
-          // Get requestor ID from header
-          const requestorId = this.request.headers['x-user-id'];
-
-          if (requestorId) {
-            // Check if requestor is administrator
-            const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
-            // Check if requestor is manager
-            const requestorIsManager = api.currentUserCanManage(requestorId);
-            displayPrivateAPI = requestorIsAdmin || requestorIsManager;
-          }
-          if (!displayPrivateAPI) {
+          if (!userCanManage) {
             return {
               statusCode: 204,
               body: {
@@ -295,6 +304,13 @@ CatalogV1.addCollection(Apis, {
           const proxyUrl = proxyBackend.proxyUrl();
           // Get proxy backend path
           const frontendPrefix = proxyBackend.frontendPrefix();
+
+          // Manager can see also actual API URL
+          if (userCanManage) {
+            api.backendURL = api.url;
+            api.backendPrefix = proxyBackend.backendPrefix();
+          }
+
           // Provide full proxy path
           api.url = proxyUrl.concat(frontendPrefix);
         }
@@ -775,6 +791,24 @@ CatalogV1.addCollection(Apis, {
             externalDocumentation: api.otherUrl(),
             documentationUrl: api.documentationUrl(),
           });
+
+
+        // Instead of API URL, return API Proxy's URL, if it exists
+        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
+
+        // If Proxy is API Umbrella, fill in proxy URL
+        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
+          // Get connected proxy url
+          const proxyUrl = proxyBackend.proxyUrl();
+          // Get proxy backend path
+          const frontendPrefix = proxyBackend.frontendPrefix();
+          // Display also actual API URL
+          responseData.backendURL = responseData.url;
+          responseData.backendPrefix = proxyBackend.backendPrefix();
+          // Provide full proxy path
+          responseData.url = proxyUrl.concat(frontendPrefix);
+        }
+
 
         // OK response with API data
         return {
