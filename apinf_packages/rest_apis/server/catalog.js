@@ -47,6 +47,7 @@ CatalogV1.swagger = {
   tags: {
     authentication: 'Authentication',
     api: 'APIs',
+    proxy: 'Proxies',
   },
   params: {
     api: {
@@ -305,6 +306,23 @@ CatalogV1.swagger = {
               example: 'user-id-value',
             },
           },
+        },
+      },
+    },
+    proxyResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'proxy-id-value',
+        },
+        name: {
+          type: 'string',
+          example: 'API Umbrella',
+        },
+        type: {
+          type: 'string',
+          example: 'apiUmbrella',
         },
       },
     },
