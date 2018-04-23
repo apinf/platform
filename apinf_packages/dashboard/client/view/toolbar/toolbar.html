@@ -4,33 +4,36 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardToolbar">
-      <!-- <div class="form-group pull-left">
-        <label for="select-proxy">
-          {{_ 'dashboardToolbar_labelText_proxy' }} &nbsp;
-        </label>
-        <select name="proxy_id" class="form-control toolbar-select">
-          {{# each proxy in proxiesList }}
-            {{# with proxy }}
-              <option value="{{ _id }}" {{ selectedProxy }}>
-                {{ name }}
-              </option>
-            {{/ with }}
-          {{/ each }}
-        </select>
-      </div> -->
-        <select name="sort" class="form-control toolbar-select">
-          <option value="name">
-            {{_ 'dashboardToolbar_optionText_apiName' }}
+  <div style="display:inline-block;margin-right:10px;">
+    <label for="select-proxy" class="dashboard-form-label">
+      {{_ 'dashboardToolbar_labelText_proxy' }}
+    </label>
+    <select name="proxy_id" class="form-control toolbar-select">
+      {{# each proxy in proxiesList }}
+        {{# with proxy }}
+          <option value="{{ _id }}" {{ selectedProxy }}>
+            {{ name }}
           </option>
-          <option value="calls">
-            {{_ 'dashboardToolbar_optionText_calls' }}
-          </option>
-          <option value="users">
-            {{_ 'dashboardToolbar_optionText_users' }}
-          </option>
-          <option value="time">
-            {{_ 'dashboardToolbar_optionText_time' }}
-          </option>
-        </select>
-        {{> dateRangePicker }}
+        {{/ with }}
+      {{/ each }}
+    </select>
+  </div>
+  <label for="sort" class="dashboard-form-label">
+    Sort by
+  </label>
+  <select name="sort" class="form-control toolbar-select" style="margin-right:10px;">
+    <option value="name">
+      {{_ 'dashboardToolbar_optionText_apiName' }}
+    </option>
+    <option value="calls">
+      {{_ 'dashboardToolbar_optionText_calls' }}
+    </option>
+    <option value="users">
+      {{_ 'dashboardToolbar_optionText_users' }}
+    </option>
+    <option value="time">
+      {{_ 'dashboardToolbar_optionText_time' }}
+    </option>
+  </select>
+  {{> dateRangePicker }}
 </template>
