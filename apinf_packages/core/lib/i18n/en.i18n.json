@@ -667,13 +667,16 @@
   "schemas": {
     "apis": {
       "name": {
-        "label": "API Name"
+        "label": "API Name",
+        "placeholder": "E.g. My first API"
       },
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "placeholder": "Tell your potential user what your API is about"
       },
       "url": {
-        "label": "API Endpoint"
+        "label": "API Endpoint",
+        "placeholder": "E.g. https://example.com/api/v1"
       },
       "documentationURL": {
         "label": "Link to documentation"
