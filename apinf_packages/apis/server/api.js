@@ -1225,14 +1225,13 @@ CatalogV1.addRoute('apis/:id/proxy', {
       newProxyBackendData.type = proxy.type;
 
       if (proxy.type === 'apiUmbrella') {
-
         // frontendPrefix is a required field
         if (!bodyParams.frontendPrefix) {
           return errorMessagePayload(400, 'Parameter "frontendPrefix" is mandatory.');
         }
 
         // Validation of frontendPrefix  TODO
-        let frontendPrefix = bodyParams.frontendPrefix;
+        const frontendPrefix = bodyParams.frontendPrefix;
 
         // Check if given frontend_prefix is already in use
         const proxyBackendExist = ProxyBackends.findOne({
@@ -1249,7 +1248,7 @@ CatalogV1.addRoute('apis/:id/proxy', {
 
         // Frontend host address comes from proxy document
         const frontendAddress = proxy.apiUmbrella.url.split('://');
-        apiUmbrella.frontend_host = proxy.apiUmbrella.url;
+        apiUmbrella.frontend_host = frontendAddress[1];
 
         // Backend host address comes from API
         const backendAddress = api.url.split('://');
@@ -1257,12 +1256,11 @@ CatalogV1.addRoute('apis/:id/proxy', {
         apiUmbrella.backend_protocol = backendAddress[0];
 
         // If backendPrefix is not given, the default value is "/"
-        let backendPrefix = bodyParams.backendPrefix | '/';
+        const backendPrefix = bodyParams.backendPrefix | '/';
 
         // Validation of backendPrefix  TODO
 
-
-        const url_matches = [{
+        const urlMatches = [{
           frontend_prefix: frontendPrefix,
           backend_prefix: backendPrefix,
         }];
@@ -1301,13 +1299,11 @@ CatalogV1.addRoute('apis/:id/proxy', {
         // Fill setting into data
         apiUmbrella.settings = settings;
         apiUmbrella.servers = servers;
-        apiUmbrella.url_matches = url_matches;
+        apiUmbrella.url_matches = urlMatches;
 
         // Fill the new backend data
         newProxyBackendData.apiUmbrella = apiUmbrella;
       }
-
-
 
       // Insert corresponding proxy backend
  //     const proxyBackend = ProxyBackends.insert(proxyBackendData);
