@@ -626,7 +626,7 @@ AnalyticsV1.addRoute('analytics/:id', {
 
       // Get data about summary statistic for current period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
-        .then((currentPeriodDataset) => {
+        .then((currentPeriodSummaryDataset) => {
           // console.log('API currentPeriodDataset=', currentPeriodDataset);
 
           // Get summary statistic data about previous period
