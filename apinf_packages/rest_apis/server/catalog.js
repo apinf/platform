@@ -326,6 +326,34 @@ CatalogV1.swagger = {
         },
       },
     },
+    // The proxy schema for POST method
+    proxyConnection: {
+      required: ['proxyId', 'frontendPrefix', 'backendPrefix'],
+      properties: {
+        proxyId: {
+          type: 'string',
+          example: 'id-of-proxy',
+        },
+        frontendPrefix: {
+          type: 'string',
+          example: '/api_name/',
+        },
+        backendPrefix: {
+          type: 'string',
+          example: '/rest/v1/',
+        },
+        apiPort: {
+          type: 'integer',
+          format: 'int32',
+          example: '448',
+        },
+        noApiKey: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+      },
+    },
 
   },
 };
