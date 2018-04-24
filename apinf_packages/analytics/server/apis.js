@@ -625,7 +625,7 @@ AnalyticsV1.addRoute('analytics/:id', {
       apiAnalyticsList.errorStatistics = errorStatisticsList;
 
       // Get data about summary statistic for current period
-      promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
+  /*    promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
         .then((currentPeriodSummaryDataset) => {
           // console.log('API currentPeriodDataset=', currentPeriodDataset);
 
@@ -643,7 +643,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         }).catch((error) => {
           throw new Meteor.Error(error);
         });
-
+*/
 /*      // Get data about summary statistic for previous period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, previousFromDate, fromDate })
         .then((previousPeriodDataset) => {
