@@ -1000,7 +1000,7 @@ CatalogV1.addRoute('apis/:id/documents', {
             { apiId },
             { $unset: {
               remoteFileUrl: '',
-              },
+            },
             },
           );
           // If removal of openAPI document link failed
@@ -1107,7 +1107,7 @@ CatalogV1.addRoute('proxies', {
       // Requestor must be an administrator
       if (!Roles.userIsInRole(requestorId, ['admin'])) {
         return errorMessagePayload(403, 'User does not have permission.');
-      };
+      }
 
       const proxyList = Proxies.find().map((proxy) => {
         return {
@@ -1128,3 +1128,205 @@ CatalogV1.addRoute('proxies', {
     },
   },
 });
+
+// Request /rest/v1/apis/:id/proxy/
+CatalogV1.addRoute('apis/:id/proxy', {
+  // Add to API a connection to a given proxy
+  post: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'Add connection to an identified proxy.',
+      description: descriptionApis.postProxy,
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.proxyConnection,
+      ],
+      responses: {
+        200: {
+          description: 'API connected to a Proxy successfully',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/apiResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of API (URL parameter)
+      const apiId = this.urlParams.id;
+      // Get User ID
+      const userId = this.userId;
+
+      // API related checkings
+      // Get API document
+      const api = Apis.findOne(apiId);
+
+      // API must exist
+      if (!api) {
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+      // User must be able to manage API
+      if (!api.currentUserCanManage(userId)) {
+        return errorMessagePayload(403, 'User does not have permission to this API.');
+      }
+
+      // Get body parameters
+      const bodyParams = this.bodyParams;
+
+      // Proxy related checkings
+      // proxyId is a required field
+      if (!bodyParams.proxyId) {
+        return errorMessagePayload(400, 'Parameter "proxyId" is mandatory.');
+      }
+
+      // Get proxy document
+      const proxy = Proxies.findOne(bodyParams.proxyId);
+      // proxy must exist
+      if (!proxy) {
+        return errorMessagePayload(404, 'Proxy with specified ID is not found.');
+      }
+
+      // Collect data to be inserted
+      const newProxyBackendData = {};
+      newProxyBackendData.apiId = apiId;
+      newProxyBackendData.proxyId = proxy._id;
+      // Type comes from selected proxy
+      newProxyBackendData.type = proxy.type;
+
+      if (proxy.type === 'apiUmbrella') {
+
+        // frontendPrefix is a required field
+        if (!bodyParams.frontendPrefix) {
+          return errorMessagePayload(400, 'Parameter "frontendPrefix" is mandatory.');
+        }
+
+        // Validation of frontendPrefix  TODO
+        let frontendPrefix = bodyParams.frontendPrefix;
+
+        // Check if given frontend_prefix is already in use
+        const proxyBackendExist = ProxyBackends.findOne({
+          'apiUmbrella.url_matches.frontend_prefix': frontendPrefix,
+        });
+
+        if (proxyBackendExist) {
+          return errorMessagePayload(400, 'Parameter "frontendPrefix" must be unique.');
+        }
+
+        // Get API details from API document
+        const apiUmbrella = {};
+        apiUmbrella.name = api.name;
+
+        // Frontend host address comes from proxy document
+        const frontendAddress = proxy.apiUmbrella.url.split('://');
+        apiUmbrella.frontend_host = proxy.apiUmbrella.url;
+
+        // Backend host address comes from API
+        const backendAddress = api.url.split('://');
+        apiUmbrella.backend_host = backendAddress[1];
+        apiUmbrella.backend_protocol = backendAddress[0];
+
+        // If backendPrefix is not given, the default value is "/"
+        let backendPrefix = bodyParams.backendPrefix | '/';
+
+        // Validation of backendPrefix  TODO
+
+
+        const url_matches = [{
+          frontend_prefix: frontendPrefix,
+          backend_prefix: backendPrefix,
+        }];
+
+        // Information of server address and port
+        // By default apiPort is set to 443
+        let apiPort = 443;
+        // apiPort must be a numeric value
+        if (bodyParams.apiPort) {
+          if (isNaN(bodyParams.apiPort) || bodyParams.apiPort < 0 || bodyParams.apiPort > 65535) {
+            return errorMessagePayload(400, 'Parameter "apiPort" has erroneous value.',
+            'apiPort', bodyParams.apiPort);
+          }
+          apiPort = bodyParams.apiPort;
+        }
+
+        const servers = [{
+          host: backendAddress[1],
+          port: apiPort,
+        }];
+
+        // Prepare and fill setting object
+        const settings = {};
+
+        settings.disableApiKey = false;
+        // disableApiKey can be only true or false, if given
+        if (bodyParams.disableApiKey) {
+          if (bodyParams.disableApiKey === 'true' || bodyParams.disableApiKey === 'false') {
+            settings.disableApiKey = bodyParams.disableApiKey;
+          } else {
+            return errorMessagePayload(400, 'Parameter "disableApiKey" has erroneous value.',
+            'disableApiKey', bodyParams.disableApiKey);
+          }
+        }
+
+        // Fill setting into data
+        apiUmbrella.settings = settings;
+        apiUmbrella.servers = servers;
+        apiUmbrella.url_matches = url_matches;
+
+        // Fill the new backend data
+        newProxyBackendData.apiUmbrella = apiUmbrella;
+      }
+
+
+
+      // Insert corresponding proxy backend
+ //     const proxyBackend = ProxyBackends.insert(proxyBackendData);
+
+      // If insert failed, stop and send response
+ //     if (!proxyBackend) {
+ //       return errorMessagePayload(500, 'Connecting to proxy failed!');
+ //     }
+
+      // OK response with API data
+      return {
+        statusCode: 200,
+        body: {
+          status: 'success',
+  //        data: responseData,
+          data: newProxyBackendData,
+        },
+      };
+    },
+  },
+});
+
