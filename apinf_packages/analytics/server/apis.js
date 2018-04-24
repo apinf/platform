@@ -9,7 +9,7 @@ import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 // import { Roles } from 'meteor/alanning:roles';
 import moment from 'moment';
-import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
+// import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
