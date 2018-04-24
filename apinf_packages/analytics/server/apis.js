@@ -531,7 +531,7 @@ AnalyticsV1.addRoute('analytics/:id', {
           'interval', interval);
         }
       }
-      console.log('prev_fromDate=', previousFromDate);
+     /* console.log('prev_fromDate=', previousFromDate);
       console.log('prev_fromDate=', moment(previousFromDate).format());
 
       console.log('fromDate=', fromDate);
@@ -539,7 +539,7 @@ AnalyticsV1.addRoute('analytics/:id', {
       console.log('toDate=', toDate);
       console.log('toDate=', moment(toDate).format());
       console.log('interval=', interval);
-
+     */
 
       // Find API with specified ID
       const api = Apis.findOne(apiId);
@@ -610,7 +610,7 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get data for Errors table
       const errorStatistics = Meteor.call('errorsStatisticsData', {
         proxyBackendId, fromDate, toDate });
-      console.log('errorStatistics=', errorStatistics);
+      //console.log('errorStatistics=', errorStatistics);
       // Get data, modify date and store it to list
       const errorStatisticsList = errorStatistics.map(errorData => {
         return errorStatisticsItem = {
@@ -626,13 +626,13 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get data about summary statistic for current period
       promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
         .then((currentPeriodDataset) => {
-          console.log('API currentPeriodDataset=', currentPeriodDataset);
+          //console.log('API currentPeriodDataset=', currentPeriodDataset);
 
           // Get summary statistic data about previous period
           const previousPeriodResponse = Meteor.call('summaryStatisticNumber', {
             proxyBackendId, fromDate: previousFromDate, toDate: fromDate });
 
-          console.log('API previousPeriodResponse=', previousPeriodResponse);
+          //console.log('API previousPeriodResponse=', previousPeriodResponse);
 
           apiAnalyticsList.previousPeriodResponse = {
             requestCount: previousPeriodResponse[frontendPrefix].requestNumber,
@@ -661,14 +661,14 @@ AnalyticsV1.addRoute('analytics/:id', {
         // Get data about summary statistic over time
       Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
         (error, dataset) => {
-          console.log('1 API dataset=', dataset);
+          //console.log('1 API dataset=', dataset);
           apiAnalyticsList.statistic = dataset;
         });
 
       // Get data about response status codes
       Meteor.call('statusCodesData', { proxyBackendId, fromDate, toDate },
         (error, dataset) => {
-          console.log('2 API dataset=', dataset);
+          //console.log('2 API dataset=', dataset);
           apiAnalyticsList.statusCode = dataset;
         });
 
@@ -682,7 +682,7 @@ AnalyticsV1.addRoute('analytics/:id', {
 
 
 
-      console.log('melkein responsen lähettämisessä');
+      //console.log('melkein responsen lähettämisessä');
 
       // Construct response
       return {
