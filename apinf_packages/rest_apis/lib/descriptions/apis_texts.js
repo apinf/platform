@@ -129,6 +129,24 @@ const descriptionApis = {
 
   If no proxies are defined, returns an empty list.
   `,
+// --------------------------------------------
+postProxy: `
+### Connect API to a Proxy ###
+
+Adds to API a connection to an identified Proxy.
+On success, returns the updated API object.
+
+
+Parameters
+* *:id* is API id, mandatory (in URL)
+* *proxyId* is id of the Proxy, to which the API is to be connected, mandatory
+* *frontendPrefix* is a unique identification for
+summarizing requests and responses done via this proxy connection, mandatory
+* *backendPrefix* is an identification of API on server, mandatory
+* *apiPort* is port used on API server, default value is...
+* *disableApiKey* tells whether API key is required (false, default) not (true)
+`,
+
 };
 
 export default descriptionApis;
