@@ -61,7 +61,7 @@ Template.apiAnalyticPageHeader.helpers({
   },
   displayLastUpdateTime () {
     const timeframe = FlowRouter.getQueryParam('timeframe');
-    // Not display info about Last update if selected "Yesterday"
-    return timeframe !== '48';
+    // Not display info about Last update if selected "Yesterday" or Today
+    return timeframe !== '48' && timeframe !== '12';
   },
 });
