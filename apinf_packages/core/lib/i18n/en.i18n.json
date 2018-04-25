@@ -681,6 +681,10 @@
       "documentationURL": {
         "label": "Link to documentation"
       },
+      "externalURL": {
+        "label": "External URL",
+        "placeholder": "E.g. https://example.com/"
+      },
       "organizationId": {
         "label": "Connect API to organization"
       },
