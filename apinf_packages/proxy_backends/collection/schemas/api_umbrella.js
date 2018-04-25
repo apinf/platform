@@ -21,11 +21,34 @@ const RateLimitSchema = new SimpleSchema({
   limit_by: {
     type: String,
     optional: true,
-    allowedValues: [
-      'apiKey',
-      'ip',
-    ],
-    defaultValue: 'apiKey',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label: 'API Key',
+            value: 'apiKey',
+          },
+          {
+            label: 'IP Address',
+            value: 'ip',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label: 'Origin Header',
+            value: 'origin',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'apiKey',
+    },
   },
   limit: {
     type: Number,
