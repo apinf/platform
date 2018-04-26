@@ -506,7 +506,7 @@
   "organizationManagerForm_successMessage": "New manager added.",
   "organizationManagerForm_userNotRegistered_errorText": "User not currently registered.",
   "organizationNoApis_text_noConnectedApis": "The organization doesn't have any connected APIs.",
-  "organizationNoApis_text_useButton": "You can connect one via button \"Connect API to Organization\"",
+  "organizationNoApis_text_useButton": "You can connect one via button \"Connect API\"",
   "organizationNoFeaturedApis_text_noFeaturedApis": "The organization doesn't have any featured APIs.",
   "organizationNoFeaturedApis_text_useButton": "You can feature APIs of your organization by pinning the related API card. You can choose up to four APIs to feature in your organization",
   "organizationProfile_bigText_apisCount": "All APIs",
