@@ -17,6 +17,8 @@ import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // APInf imports
+import { proxyBasePathRegEx,
+         apiBasePathRegEx } from '/apinf_packages/proxy_backends/collection/regex';
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
 import Organizations from '/apinf_packages/organizations/collection';
 import Authentication from '/apinf_packages/rest_apis/server/authentication';
@@ -1203,6 +1205,7 @@ CatalogV1.addRoute('apis/:id/proxy', {
 
       // Get body parameters
       const bodyParams = this.bodyParams;
+      console.log('body=', bodyParams);
 
       // Proxy related checkings
       // proxyId is a required field
@@ -1212,12 +1215,13 @@ CatalogV1.addRoute('apis/:id/proxy', {
 
       // Get proxy document
       const proxy = Proxies.findOne(bodyParams.proxyId);
+
       // proxy must exist
       if (!proxy) {
         return errorMessagePayload(404, 'Proxy with specified ID is not found.');
       }
 
-      // Collect data to be inserted
+      // Collect data to be inserted into proxyBackend
       const newProxyBackendData = {};
       newProxyBackendData.apiId = apiId;
       newProxyBackendData.proxyId = proxy._id;
@@ -1230,20 +1234,44 @@ CatalogV1.addRoute('apis/:id/proxy', {
           return errorMessagePayload(400, 'Parameter "frontendPrefix" is mandatory.');
         }
 
-        // Validation of frontendPrefix  TODO
-        const frontendPrefix = bodyParams.frontendPrefix;
+        // Validation of frontendPrefix
+        if (!proxyBasePathRegEx.test(bodyParams.frontendPrefix)) {
+          return errorMessagePayload(400, 'Parameter "frontendPrefix" not valid.',
+          'frontendPrefix', bodyParams.frontendPrefix);
+        }
 
         // Check if given frontend_prefix is already in use
-        const proxyBackendExist = ProxyBackends.findOne({
-          'apiUmbrella.url_matches.frontend_prefix': frontendPrefix,
+        const proxyBackendWithGivenFrontendPrefixExist = ProxyBackends.findOne({
+          'apiUmbrella.url_matches.frontend_prefix': bodyParams.frontendPrefix,
         });
-
-        if (proxyBackendExist) {
+        if (proxyBackendWithGivenFrontendPrefixExist) {
           return errorMessagePayload(400, 'Parameter "frontendPrefix" must be unique.');
         }
 
-        // Get API details from API document
+        const frontendPrefix = bodyParams.frontendPrefix;
+
+        // backendPrefix is a required field
+        if (!bodyParams.backendPrefix) {
+          return errorMessagePayload(400, 'Parameter "backendPrefix" is mandatory.');
+        }
+
+        // Validation of backendPrefix
+        if (!apiBasePathRegEx.test(bodyParams.backendPrefix)) {
+          return errorMessagePayload(400, 'Parameter "backendPrefix" not valid.',
+          'backendPrefix', bodyParams.backendPrefix);
+        }
+        const backendPrefix = bodyParams.backendPrefix;
+
+        // Collect prefixes
+        const urlMatches = [{
+          frontend_prefix: frontendPrefix,
+          backend_prefix: backendPrefix,
+        }];
+
+        // Prepare apiUmbrella object
         const apiUmbrella = {};
+
+        // Get API details from API document
         apiUmbrella.name = api.name;
 
         // Frontend host address comes from proxy document
@@ -1254,16 +1282,6 @@ CatalogV1.addRoute('apis/:id/proxy', {
         const backendAddress = api.url.split('://');
         apiUmbrella.backend_host = backendAddress[1];
         apiUmbrella.backend_protocol = backendAddress[0];
-
-        // If backendPrefix is not given, the default value is "/"
-        const backendPrefix = bodyParams.backendPrefix | '/';
-
-        // Validation of backendPrefix  TODO
-
-        const urlMatches = [{
-          frontend_prefix: frontendPrefix,
-          backend_prefix: backendPrefix,
-        }];
 
         // Information of server address and port
         // By default apiPort is set to 443
@@ -1282,24 +1300,35 @@ CatalogV1.addRoute('apis/:id/proxy', {
           port: apiPort,
         }];
 
-        // Prepare and fill setting object
+        // Prepare and fill settings object
         const settings = {};
 
-        settings.disableApiKey = false;
-        // disableApiKey can be only true or false, if given
+        // If disableApiKey is given, it can be only literal true/false
         if (bodyParams.disableApiKey) {
-          if (bodyParams.disableApiKey === 'true' || bodyParams.disableApiKey === 'false') {
-            settings.disableApiKey = bodyParams.disableApiKey;
-          } else {
+          const allowedDisableApiKeyValues = ['false', 'true'];
+          if (!allowedDisableApiKeyValues.includes(bodyParams.disableApiKey)) {
             return errorMessagePayload(400, 'Parameter "disableApiKey" has erroneous value.',
             'disableApiKey', bodyParams.disableApiKey);
           }
         }
 
-        // Fill setting into data
-        apiUmbrella.settings = settings;
+        // Convert given value to boolean. Also sets default false, if value not given.
+        settings.disableApiKey = (bodyParams.disableApiKey === 'true');
+
+        // Rate limit modes, default value is unlimited
+        settings.rate_limit_mode = bodyParams.rateLimitMode || 'unlimited';
+        const allowedRateLimitModeValues = ['custom', 'unlimited'];
+
+        // Is Rate limit mode allowed value
+        if (!allowedRateLimitModeValues.includes(settings.rate_limit_mode)) {
+          return errorMessagePayload(400, 'Parameter "rateLimitMode" has erroneous value.',
+          'rateLimitMode', bodyParams.rateLimitMode);
+        }
+
+        // Collect apiUmrella related data
         apiUmbrella.servers = servers;
         apiUmbrella.url_matches = urlMatches;
+        apiUmbrella.settings = settings;
 
         // Fill the new backend data
         newProxyBackendData.apiUmbrella = apiUmbrella;
