@@ -17,7 +17,10 @@ import ProxyBackends from '../../proxy_backends/collection';
 // APInf imports
 import overviewChartsRequest from '../lib/histogram_data';
 import timelineChartsRequest from '../lib/timeline_chart';
+import totalNumbersRequest from '../lib/total_numbers';
+import responseStatusCodesRequest from '../lib/status_codes';
 import { arrayWithZeros, generateDate } from '../lib/chart_helpers';
+import { calculateTrend } from '../lib/trend_helpers';
 
 Meteor.methods({
   async overviewChartsDataFromElasticsearch (params, proxyBackendIds) {
@@ -95,8 +98,7 @@ Meteor.methods({
       throw new Meteor.Error(e.message);
     }
   },
-  timelineChartDataFromElasticsearch (requestPath, params) {
-    check(requestPath, String);
+  timelineChartDataFromElasticsearch (params) {
     check(params, Object);
 
     const requestPathsData = {};
@@ -105,6 +107,9 @@ Meteor.methods({
 
     // Get Elasticsearch Host
     const elasticsearchHost = proxyBackend.elasticsearchHost();
+
+    // Get Frontend prefix
+    const requestPath = proxyBackend.frontendPrefix();
 
     // Build query request
     const queryBody = timelineChartsRequest(requestPath, params);
@@ -182,5 +187,118 @@ Meteor.methods({
     } catch (e) {
       throw new Meteor.Error(e.message);
     }
+  },
+  totalNumberRequestFromElasticsearch (params, proxyBackendIds) {
+    check(params, Object);
+    check(proxyBackendIds, Array);
+
+    if (proxyBackendIds.length === 0) {
+      return [];
+    }
+    // Create a Filter by ProxyBackend frontend prefixes
+    const filters = { filters: {} };
+
+    ProxyBackends
+      .find({ _id: { $in: proxyBackendIds } })
+      .forEach(proxyBackend => {
+        // Get Fronted prefix
+        const requestPath = proxyBackend.frontendPrefix();
+        // Add in Filter
+        filters.filters[requestPath] = { prefix: { request_path: requestPath } };
+      });
+
+    // Fetch the first proxy backend
+    const proxyBackend = ProxyBackends.findOne({ _id: { $in: proxyBackendIds } });
+    // Get Elasticsearch Host
+    const elasticsearchHost = proxyBackend.elasticsearchHost();
+    // Build query request
+    const queryBody = totalNumbersRequest(params, filters);
+
+    // Fetch ES data
+    const result = Meteor.call('getElasticsearchData', elasticsearchHost, queryBody);
+
+    try {
+      // Process data
+      const aggregatedData = result.aggregations.group_by_request_path.buckets;
+      const analyticsData = [];
+
+      ProxyBackends
+        .find({ _id: { $in: proxyBackendIds } })
+        .forEach(backend => {
+          const prefix = backend.frontendPrefix();
+
+          // const related = aggregatedData[data.prefix];
+          const currentPeriod = aggregatedData[prefix].by_period.buckets.current;
+          const previousPeriod = aggregatedData[prefix].by_period.buckets.previous;
+
+          analyticsData.push({
+            prefix,
+            apiName: backend.apiName(),
+            apiSlug: backend.apiSlug(),
+            proxyBackendId: backend._id,
+            requestNumber: currentPeriod.doc_count,
+            medianResponseTime: parseFloat(currentPeriod.median_response_time.values['50.0']) || 0,
+            avgUniqueUsers: currentPeriod.unique_users.value,
+            compareRequests: calculateTrend(previousPeriod.doc_count,
+              currentPeriod.doc_count),
+            compareResponse: calculateTrend(previousPeriod.median_response_time.values['50.0'],
+              currentPeriod.median_response_time.values['50.0']),
+            compareUsers: calculateTrend(previousPeriod.unique_users.value,
+              currentPeriod.unique_users.value),
+          });
+        });
+
+      if (params.responseCode) {
+        // Get data for Success & Error calls
+        // Build query request
+        const bodyRequest = responseStatusCodesRequest(params, filters);
+
+        // Fetch ES data
+        const statusCodes = Meteor.call('getElasticsearchData', elasticsearchHost, bodyRequest);
+
+        const aggsData = statusCodes.aggregations.group_by_request_path.buckets;
+
+        analyticsData.forEach(dataset => {
+          const bucket = aggsData[dataset.prefix].response_status.buckets;
+          dataset.successCallsCount = bucket.success.doc_count;
+          dataset.errorCallsCount = bucket.fail.doc_count;
+        });
+      }
+      return analyticsData;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  statusCodesFromElasticsearch (params) {
+    check(params, Object);
+
+    // Get Proxy backend
+    const proxyBackend = ProxyBackends.findOne(params.proxyBackendId);
+
+    // Get Elasticsearch Host
+    const elasticsearchHost = proxyBackend.elasticsearchHost();
+
+    // Get Frontend prefix
+    const requestPath = proxyBackend.frontendPrefix();
+
+    const filters = { filters: { [requestPath]: { prefix: { request_path: requestPath } } } };
+
+    // Build query request
+    const bodyRequest = responseStatusCodesRequest(params, filters);
+
+    // Fetch ES data
+    const statusCodes = Meteor.call('getElasticsearchData', elasticsearchHost, bodyRequest);
+
+    const aggsData = statusCodes.aggregations.group_by_request_path.buckets;
+    const bucket = aggsData[requestPath].response_status.buckets;
+
+    return {
+      [requestPath]: {
+        successCallsCount: bucket.success.doc_count,
+        redirectCallsCount: bucket.redirect.doc_count,
+        failCallsCount: bucket.fail.doc_count,
+        errorCallsCount: bucket.error.doc_count,
+      },
+    };
   },
 });

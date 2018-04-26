@@ -105,4 +105,9 @@ Template.dashboardOverviewStatistic.helpers({
     // Otherwise It's Date format
     return 'L';
   },
+  displayTextAverageUsers () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Display text about "Average unique users" for each period except "Today"
+    return timeframe !== '12';
+  },
 });

@@ -58,7 +58,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_usersCount' count=dataset.avgUniqueUsers }} <sup>*</sup>
+          {{_ 'dashboardOverviewStatistic_text_usersCount' count=dataset.avgUniqueUsers }}
+          {{# if displayTextAverageUsers }}
+              <sup>*</sup>
+          {{/ if }}
         </p>
         <div class="form-group">
           <span class="overview-col-title">
@@ -71,9 +74,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           }}
           <div class="{{ arrowDirection 'users' }}"></div>
           <span>{{ overviewComparing 'users' }}</span>
-          <div class="overview-help-text">
-            <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
-          </div>
+          {{# if displayTextAverageUsers }}
+            <div class="overview-help-text">
+              <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
+            </div>
+          {{/ if }}
         </div>
 
         <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}" class="pull-right">

@@ -59,54 +59,37 @@ Template.apiAnalyticPageBody.onCreated(function () {
       doublePeriodAgo: queryOption.doublePeriodAgo,
     };
 
-    // "Today" or "Yesterday".
-    if (timeframe === '12' || timeframe === '48') {
-      // Make ES request to aggregated by hour
-      Meteor.call('overviewChartsDataFromElasticsearch', params, [proxyBackendId],
-        (error, dataset) => {
-          if (error) throw new Meteor.Error(error.message);
+    // Get data for Overview charts
+    Meteor.call('overviewChartsGeneral',
+      params, [proxyBackendId], (error, dataset) => {
+        if (error) throw new Meteor.Error(error.message);
 
-          instance.overviewChartResponse.set(dataset);
-        });
-
-      Meteor.call('timelineChartDataFromElasticsearch', instance.requestPath, params,
-        (error, response) => {
-          if (error) throw new Error(error);
-
-          instance.timelineChartResponse.set(response.requestPathsData);
-          instance.allRequestPaths.set(response.allRequestPaths);
-        });
-    } else {
-      // "Last N Days"
-      // Get data for Overview charts
-      Meteor.call('overviewChartsData', params, (error, dataset) => {
         instance.overviewChartResponse.set(dataset);
       });
 
-      // Get data for Timeline charts
-      Meteor.call('timelineChartData', params,
-        (error, response) => {
-          if (error) throw new Error(error);
-
-          instance.timelineChartResponse.set(response.requestPathsData);
-          instance.allRequestPaths.set(response.allRequestPaths);
-        });
-    }
-
-    Meteor.call('totalNumberRequestsAndTrend',
+    Meteor.call('totalNumberAndTrendGeneral',
       params, [proxyBackendId], (error, result) => {
         this.analyticsData.set(result);
       });
 
+    // Get data for Timeline charts
+    Meteor.call('timelineChartsGeneral',
+      params, (error, dataset) => {
+        if (error) throw new Meteor.Error(error.message);
+
+        instance.timelineChartResponse.set(dataset.requestPathsData);
+        instance.allRequestPaths.set(dataset.allRequestPaths);
+      });
+
     // Get data about response status codes
-    Meteor.call('statusCodesData', params,
-      (error, dataset) => {
+    Meteor.call('statusCodesGeneral',
+      params, (error, dataset) => {
         instance.statusCodesResponse.set(dataset);
       });
 
     // Get data for Errors table
-    Meteor.call('errorsStatisticsData', params,
-      (error, dataset) => {
+    Meteor.call('errorsStatisticsData',
+      params, (error, dataset) => {
         if (error) throw new Error(error);
 
         instance.errorsStatisticsResponse.set(dataset);
@@ -131,8 +114,8 @@ Template.apiAnalyticPageBody.onCreated(function () {
         { fromDate: queryOption.from, toDate: queryOption.to });
 
       // Send request to get data about most frequent users
-      Meteor.call('getElasticsearchData', elasticsearchHost, usersQuery,
-        (error, dataset) => {
+      Meteor.call('getElasticsearchData',
+        elasticsearchHost, usersQuery, (error, dataset) => {
           if (error) throw Meteor.Error(error);
 
           instance.frequentUsersResponse.set(dataset.aggregations);
@@ -292,5 +275,10 @@ Template.apiAnalyticPageBody.helpers({
 
     // Otherwise It's Date format
     return 'L';
+  },
+  displayTextAverageUsers () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Display text about "Average unique users" for each period except "Today"
+    return timeframe !== '12';
   },
 });

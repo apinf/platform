@@ -55,39 +55,36 @@ Template.dashboardView.onCreated(function () {
         timeframe,
         onePeriodAgo: queryOption.onePeriodAgo,
         doublePeriodAgo: queryOption.doublePeriodAgo,
+        responseCode: true,
       };
 
-      Meteor.call('totalNumberRequestsAndTrend',
+      const proxyBackendsIds = grouping.myApis.concat(
+        grouping.managedApis, grouping.otherApis
+      );
+
+      // Get data for Overview charts
+      Meteor.call('overviewChartsGeneral',
+        params, proxyBackendsIds, (error, dataset) => {
+          if (error) throw new Meteor.Error(error.message);
+
+          instance.overviewChartResponse.set(dataset);
+        });
+
+      Meteor.call('totalNumberAndTrendGeneral',
         params, grouping.myApis, (error, result) => {
+          console.log(error);
           this.analyticsDataMyApis.set(result);
         });
 
-      Meteor.call('totalNumberRequestsAndTrend',
+      Meteor.call('totalNumberAndTrendGeneral',
         params, grouping.managedApis, (error, result) => {
           this.analyticsDataManagedApis.set(result);
         });
 
-      Meteor.call('totalNumberRequestsAndTrend',
+      Meteor.call('totalNumberAndTrendGeneral',
         params, grouping.otherApis, (error, result) => {
           this.analyticsDataOtherApis.set(result);
         });
-
-      // "Last 7 Days" or "Last 30 Days"
-      if (timeframe === '7' || timeframe === '28') {
-        Meteor.call('overviewChartsData', params, (error, dataset) => {
-          instance.overviewChartResponse.set(dataset);
-        });
-      } else {
-        const proxyBackendsIds = grouping.myApis.concat(
-          grouping.managedApis, grouping.otherApis
-        );
-
-        // "Today" or "Yesterday". Make ES request to aggregated by hour
-        Meteor.call('overviewChartsDataFromElasticsearch', params, proxyBackendsIds,
-          (error, dataset) => {
-            instance.overviewChartResponse.set(dataset);
-          });
-      }
     }
   });
 });
