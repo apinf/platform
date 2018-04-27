@@ -43,14 +43,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span class="num">1</span>
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
-          <a href="{{ proxyUrl }}" target="_blank" style="padding: 10px 15px;background-color:#F5F5F5;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
-            {{ proxyUrl }}
+          <span style="padding: 10px 15px;background-color:#F5F5F5;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
+            <a href="{{ proxyUrl }}" target="_blank" id="proxy-url">
+              {{ proxyUrl }}
+            </a>
             <i
             id="copyProxyUrl"
             class="mdi mdi-content-copy"
             data-clipboard-target="#proxy-url"
             style="padding-left:5px;"></i>
-          </a>
+          </span>
           <p style="color:#6d859e;margin-top:1.5em;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
             In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
@@ -89,7 +91,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <i
             id="copyExampleOne"
             class="mdi mdi-content-copy"
-            data-clipboard-target="#api-url"
+            data-clipboard-target="#example-one"
             style="padding-left:5px;"></i>
           </span>
           <p style="color:#6d859e;margin-top:10px;">
@@ -101,7 +103,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <i
             id="copyExampleTwo"
             class="mdi mdi-content-copy"
-            data-clipboard-target="#api-url"
+            data-clipboard-target="#example-two"
             style="padding-left:5px;"></i>
           </span>
           <p style="color:#6d859e;margin-top:10px;">

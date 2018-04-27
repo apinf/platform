@@ -29,21 +29,11 @@ Template.apiDetails.onCreated(function () {
 });
 
 Template.apiDetails.onRendered(() => {
-  // Initialize Clipboard copy button
-  const copyButton = new Clipboard('#copyApiUrl');
-
-  // Tooltip position
-  $('#copyApiUrl').tooltip({
-    trigger: 'click',
-    placement: 'bottom',
-  });
-
-  // Tell the user when copy is successful
-  copyButton.on('success', () => {
-    $('#copyApiUrl').tooltip('hide')
-    .attr('data-original-title', 'Copied!')
-    .tooltip('show');
-  });
+  // Initialize Clipboard copy buttons
+  const copyApiUrl = new Clipboard('#copyApiUrl');
+  const copyProxyUrl = new Clipboard('#copyProxyUrl');
+  const copyExampleOne = new Clipboard('#copyExampleOne');
+  const copyExampleTwo = new Clipboard('#copyExampleTwo');
 });
 
 Template.apiDetails.helpers({
