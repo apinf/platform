@@ -198,7 +198,7 @@ ProxyV1.addCollection(Proxies, {
                   example: 'Success',
                 },
                 data: {
-                  $ref: '#/definitions/apiResponse',
+                  $ref: '#/definitions/proxyResponse',
                 },
               },
             },
@@ -405,7 +405,7 @@ ProxyV1.addCollection(Proxies, {
                   example: 'Success',
                 },
                 data: {
-                  $ref: '#/definitions/apiResponse',
+                  $ref: '#/definitions/proxyResponse',
                 },
               },
             },

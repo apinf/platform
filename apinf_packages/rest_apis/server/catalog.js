@@ -113,6 +113,14 @@ CatalogV1.swagger = {
       required: false,
       type: 'string',
     },
+    proxyConnectionRequest: {
+      name: 'user',
+      in: 'body',
+      description: 'Proxy connection data',
+      schema: {
+        $ref: '#/definitions/proxyConnectionRequest',
+      },
+    },
     skip: {
       name: 'skip',
       in: 'query',
@@ -327,8 +335,8 @@ CatalogV1.swagger = {
       },
     },
     // The proxy schema for POST method
-    proxyConnection: {
-      required: ['proxyId', 'frontendPrefix', 'backendPrefix'],
+    proxyConnectionRequest: {
+      required: ['proxyId', 'frontendPrefix', 'backendPrefix', 'apiPort'],
       properties: {
         proxyId: {
           type: 'string',
@@ -351,6 +359,113 @@ CatalogV1.swagger = {
           type: 'string',
           enum: ['true', 'false'],
           example: 'false',
+        },
+      },
+    },
+    // The proxy backend response schema
+    proxyConnectionResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'id-of-proxy-backend',
+        },
+        apiId: {
+          type: 'string',
+          example: 'id-of-connected-api',
+        },
+        proxyId: {
+          type: 'string',
+          example: 'id-of-proxy',
+        },
+        type: {
+          type: 'string',
+          example: 'apiUmberlla | EMQ',
+        },
+        apiUmbrella: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'name-of-connected-api',
+            },
+            frontend_host: {
+              type: 'string',
+              example: 'url-of-proxy',
+            },
+            backend_host: {
+              type: 'string',
+              example: 'url-of-api',
+            },
+            backend_protocol: {
+              type: 'string',
+              example: 'http | https',
+            },
+            servers: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  host: {
+                    type: 'string',
+                    example: 'host-url-of-api',
+                  },
+                  port: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: '448',
+                  },
+                }
+              },
+            },
+            balance_algorithm: {
+              type: 'string',
+              example: 'least_conn | XXX',
+            },
+            settings: {
+              type: 'object',
+              properties: {
+                disable_api_key: {
+                  type: 'string',
+                  example: 'false | true',
+                },
+                rate_limit_mode: {
+                  type: 'string',
+                  example: 'custom | unlimited',
+                },
+                rate_limits: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      duration: {
+                        type: 'integer',
+                        format: 'int32',
+                        example: '100',
+                      },
+                      limit_by: {
+                        type: 'string',
+                        example: 'apiKey',
+                      },
+                      limit: {
+                        type: 'integer',
+                        format: 'int32',
+                        example: '99',
+                      },
+                      response_headers: {
+                        type: 'string',
+                        example: 'false | true',
+                      },
+                    },
+                  },
+                }
+              },
+            },
+            id: {
+              type: 'string',
+              example: 'id-of-XXX',
+            },
+          },
         },
       },
     },
