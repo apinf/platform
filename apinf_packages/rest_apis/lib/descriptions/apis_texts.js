@@ -115,7 +115,7 @@ const descriptionApis = {
   postProxyBackend: `
   ### Connect an API to a Proxy ###
 
-  Adds to API a connection to an identified Proxy.
+  Adds API connection to an identified Proxy.
   On success, returns the updated API object.
 
 
@@ -127,6 +127,17 @@ const descriptionApis = {
   * *backendPrefix* is an identification of API on server, mandatory
   * *apiPort* is port used on API server, default value is...
   * *disableApiKey* tells whether API key is required (false, default) not (true)
+  `,
+  // --------------------------------------------
+  getProxyBackend: `
+  ### Lists API's Proxy connection information ###
+
+  Lists Proxy connection information of an identified API.
+  On success, returns the updated API object.
+
+
+  Parameters
+  * *:id* is API id, mandatory (in URL)
   `,
 
 };
