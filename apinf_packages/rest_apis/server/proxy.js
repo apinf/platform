@@ -7,9 +7,9 @@
 import { Restivus } from 'meteor/nimble:restivus';
 
 // APInf imports
-import catalogGeneralDescription from '/apinf_packages/rest_apis/lib/descriptions/catalog_texts';
+import proxyGeneralDescription from '/apinf_packages/rest_apis/lib/descriptions/proxies_texts';
 
-const CatalogV1 = new Restivus({
+const ProxyV1 = new Restivus({
   apiPath: 'rest',
   version: 'v1',
   defaultHeaders: {
@@ -21,13 +21,13 @@ const CatalogV1 = new Restivus({
 });
 
 // Add Restivus Swagger configuration - meta, tags, params, definitions
-CatalogV1.swagger = {
+ProxyV1.swagger = {
   meta: {
     swagger: '2.0',
     info: {
-      description: catalogGeneralDescription,
+      description: proxyGeneralDescription.generalDescription,
       version: '1.0.0',
-      title: 'Admin API for API handling',
+      title: 'Admin API for Proxy handling',
     },
     // Create  placeholder for storage paths for Users collection
     paths: {},
@@ -46,7 +46,6 @@ CatalogV1.swagger = {
   },
   tags: {
     authentication: 'Authentication',
-    api: 'APIs',
     proxy: 'Proxies',
   },
   params: {
@@ -57,21 +56,6 @@ CatalogV1.swagger = {
       schema: {
         $ref: '#/definitions/api',
       },
-    },
-    apiId: {
-      name: 'id',
-      in: 'path',
-      description: 'ID of API',
-      required: true,
-      type: 'string',
-    },
-    lifecycle: {
-      name: 'lifecycle',
-      in: 'query',
-      description: 'Limit the listing based on lifecycle status of APIs.',
-      required: false,
-      type: 'string',
-      enum: ['design', 'development', 'testing', 'production', 'deprecated'],
     },
     limit: {
       name: 'limit',
@@ -99,28 +83,12 @@ CatalogV1.swagger = {
       type: 'string',
       enum: ['true', 'false'],
     },
-    optionalSearch: {
-      name: 'q',
-      in: 'query',
-      description: 'An optional search string for looking up inventory.',
-      required: false,
-      type: 'string',
-    },
     organizationApi: {
       name: 'organization',
       in: 'query',
       description: 'An optional organization id will limit results to the given organization.',
       required: false,
       type: 'string',
-    },
-    skip: {
-      name: 'skip',
-      in: 'query',
-      description: 'Number of records to skip for pagination.',
-      required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 0,
     },
     url: {
       name: 'url',
@@ -129,6 +97,16 @@ CatalogV1.swagger = {
       required: false,
       type: 'string',
     },
+
+    // Proxy related parameters
+    proxyId: {
+      name: 'id',
+      in: 'path',
+      description: 'ID of Proxy',
+      required: true,
+      type: 'string',
+    },
+
   },
   definitions: {
     // The schema defining the type used for the body parameter in POST or PUT method
@@ -309,6 +287,8 @@ CatalogV1.swagger = {
         },
       },
     },
+
+    // proxy related definitions
     proxyResponse: {
       type: 'object',
       properties: {
@@ -320,45 +300,41 @@ CatalogV1.swagger = {
           type: 'string',
           example: 'API Umbrella',
         },
+        description: {
+          type: 'string',
+          example: 'Description of proxy in question',
+        },
         type: {
           type: 'string',
           example: 'apiUmbrella',
         },
-      },
-    },
-    // The proxy schema for POST method
-    proxyConnection: {
-      required: ['proxyId', 'frontendPrefix', 'backendPrefix'],
-      properties: {
-        proxyId: {
-          type: 'string',
-          example: 'id-of-proxy',
-        },
-        frontendPrefix: {
-          type: 'string',
-          example: '/api_name/',
-        },
-        backendPrefix: {
-          type: 'string',
-          example: '/rest/v1/',
-        },
-        apiPort: {
-          type: 'integer',
-          format: 'int32',
-          example: '448',
-        },
-        noApiKey: {
-          type: 'string',
-          enum: ['true', 'false'],
-          example: 'false',
+        apiUmbrella: {
+          type: 'object',
+          properties: {
+            url: {
+              type: 'string',
+              example: 'https://proxy.url.and:port',
+            },
+            apiKey: {
+              type: 'string',
+              example: 'proxy-id-value',
+            },
+            authToken: {
+              type: 'string',
+              example: 'token-value',
+            },
+            elasticsearch: {
+              type: 'string',
+              example: 'https://search.address.and:port',
+            },
+          },
         },
       },
     },
-
   },
 };
 
 // Generate Swagger to route /rest/v1/api_catalog.json
-CatalogV1.addSwagger('catalog.json');
+ProxyV1.addSwagger('proxy.json');
 
-export default CatalogV1;
+export default ProxyV1;

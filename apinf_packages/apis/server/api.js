@@ -60,7 +60,7 @@ CatalogV1.addCollection(Apis, {
               properties: {
                 status: {
                   type: 'string',
-                  example: 'Success',
+                  example: 'success',
                 },
                 data: {
                   type: 'array',
@@ -366,7 +366,7 @@ CatalogV1.addCollection(Apis, {
               properties: {
                 status: {
                   type: 'string',
-                  example: 'Success',
+                  example: 'success',
                 },
                 data: {
                   $ref: '#/definitions/apiResponse',
@@ -573,7 +573,7 @@ CatalogV1.addCollection(Apis, {
               properties: {
                 status: {
                   type: 'string',
-                  example: 'Success',
+                  example: 'success',
                 },
                 data: {
                   $ref: '#/definitions/apiResponse',
@@ -1047,84 +1047,6 @@ CatalogV1.addRoute('apis/:id/documents', {
         body: {
           status: 'success',
           data: responseData,
-        },
-      };
-    },
-  },
-});
-
-// Request /rest/v1/proxys/
-CatalogV1.addRoute('proxies', {
-  // Get list of available proxies
-  get: {
-    authRequired: true,
-    swagger: {
-      tags: [
-        CatalogV1.swagger.tags.proxy,
-      ],
-      summary: 'Get list of available proxies.',
-      description: descriptionApis.getProxies,
-      parameters: [],
-      responses: {
-        200: {
-          description: 'List of available proxies',
-          schema: {
-            type: 'object',
-            properties: {
-              status: {
-                type: 'string',
-                example: 'Success',
-              },
-              data: {
-                $ref: '#/definitions/proxyResponse',
-              },
-            },
-          },
-        },
-        400: {
-          description: 'Bad Request. Erroneous or missing parameter.',
-        },
-        401: {
-          description: 'Authentication is required',
-        },
-        403: {
-          description: 'User does not have permission',
-        },
-      },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
-    },
-    action () {
-      // Get requestor ID from header
-      const requestorId = this.request.headers['x-user-id'];
-
-      if (!requestorId) {
-        return errorMessagePayload(400, 'Erroneous or missing parameter.');
-      }
-
-      // Requestor must be an administrator
-      if (!Roles.userIsInRole(requestorId, ['admin'])) {
-        return errorMessagePayload(403, 'User does not have permission.');
-      }
-
-      const proxyList = Proxies.find().map((proxy) => {
-        return {
-          id: proxy._id,
-          name: proxy.name,
-          type: proxy.type,
-        };
-      });
-
-      // OK response with Proxy data
-      return {
-        statusCode: 200,
-        body: {
-          status: 'success',
-          data: proxyList,
         },
       };
     },
