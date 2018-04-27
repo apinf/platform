@@ -1053,20 +1053,19 @@ CatalogV1.addRoute('apis/:id/documents', {
   },
 });
 
-// Request /rest/v1/apis/:id/proxy/
-CatalogV1.addRoute('apis/:id/proxy', {
-  // Add to API a connection to a given proxy
-  post: {
+// Request /rest/v1/apis/:id/proxyBackend/
+CatalogV1.addRoute('apis/:id/proxyBackend', {
+  // Get API's proxy connection information
+  get: {
     authRequired: true,
     swagger: {
       tags: [
         CatalogV1.swagger.tags.api,
       ],
-      summary: 'Add connection to an identified proxy.',
-      description: descriptionApis.postProxy,
+      summary: 'Get Proxy connection information of an identified API.',
+      description: descriptionApis.getProxyBackend,
       parameters: [
         CatalogV1.swagger.params.apiId,
-        CatalogV1.swagger.params.proxyConnection,
       ],
       responses: {
         200: {
@@ -1079,7 +1078,92 @@ CatalogV1.addRoute('apis/:id/proxy', {
                 example: 'Success',
               },
               data: {
-                $ref: '#/definitions/apiResponse',
+                $ref: '#/definitions/proxyConnectionResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of API (URL parameter)
+      const apiId = this.urlParams.id;
+      // Get User ID
+      const userId = this.userId;
+
+      // API related checkings
+      // Get API document
+      const api = Apis.findOne(apiId);
+
+      // API must exist
+      if (!api) {
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+      // User must be able to manage API
+      if (!api.currentUserCanManage(userId)) {
+        return errorMessagePayload(403, 'User does not have permission to this API.');
+      }
+
+      // Get API's Proxy connection data
+      const proxyBackend = ProxyBackends.findOne({ apiId: apiId });
+
+      const returnedStatusCode = proxyBackend ? 200 : 204;
+
+      // OK response with API data
+      return {
+        statusCode: returnedStatusCode,
+        body: {
+          status: 'success',
+          data: proxyBackend,
+        },
+      };
+    },
+  },
+  // Connect an API to a given proxy
+  post: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'Connect an API to a proxy.',
+      description: descriptionApis.postProxyBackend,
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.proxyConnectionRequest,
+      ],
+      responses: {
+        200: {
+          description: 'API connected to a Proxy successfully',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/proxyConnectionResponse',
               },
             },
           },
