@@ -1,25 +1,19 @@
+<!-- Copyright 2018 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiKey">
   {{# if showButton }}
     {{# if apiKey }}
+    <!-- Regenerate API key button -->
+    <span id="regenerate-api-key">
+      {{_ "apiKeys_regenerateButton" }}
+    </span>
     <div id="api-key-copy" class="input-group">
-              <!-- Regenerate API key button -->
-      <!-- <span class="input-group-btn">
-        <button id="regenerate-api-key" class="btn btn-success">
-          {{_ "apiKeys_regenerateButton" }}
-        </button>
-      </span> -->
-      <input
-             type="text"
-             class="form-control"
-             id="api-key"
-             value="{{ apiKey }}">
+      <input type="text" class="form-control" id="api-key" value="{{ apiKey }}">
       <span class="input-group-btn">
-        <button
-                class="btn btn-default"
-                id="copy-api-key"
-                type="button"
-                data-original-title="Copied!"
-                data-clipboard-target="#api-key">
+        <button class="btn btn-default" id="copy-api-key" type="button" data-original-title="Copied!" data-clipboard-target="#api-key">
           <i class="mdi mdi-content-copy"></i>
           {{_ "apiKeys_copyButtonText" }}
         </button>
