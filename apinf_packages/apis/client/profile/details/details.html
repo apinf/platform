@@ -40,7 +40,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           Get Started <span style="font-weight:400;">with <span style="font-weight:500;">{{ api.name }}</span>.</span>
         </h2>
           <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1.5em;">
-            <span class="num">1</span>
+            {{# unless disableApiKey }}
+              {{# if hasApiKey }}
+                <span class="num">1</span>
+              {{/ if }}
+            {{/ unless }}
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
           <span style="padding: 10px 15px;background-color:#F5F5F5;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
