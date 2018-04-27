@@ -151,7 +151,7 @@ CatalogV1.swagger = {
         lifecycleStatus: {
           type: 'string',
           enum: ['design', 'development', 'testing', 'production', 'deprecated'],
-          example: 'design/development/testing/production/deprecated',
+          example: 'design | development | testing | production | deprecated',
         },
         isPublic: {
           type: 'string',
@@ -206,7 +206,7 @@ CatalogV1.swagger = {
         },
         lifecycleStatus: {
           type: 'string',
-          example: 'design/development/testing/production/deprecated',
+          example: 'design | development | testing | production | deprecated',
         },
         authorizedUserIds: {
           type: 'array',
