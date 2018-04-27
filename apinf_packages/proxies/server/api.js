@@ -51,10 +51,13 @@ ProxyV1.addCollection(Proxies, {
               properties: {
                 status: {
                   type: 'string',
-                  example: 'Success',
+                  example: 'success',
                 },
                 data: {
-                  $ref: '#/definitions/proxyResponse',
+                  type: 'array',
+                  items: {
+                    $ref: '#/definitions/proxyResponse',
+                  }
                 },
               },
             },
@@ -89,13 +92,8 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        const proxyList = Proxies.find().map((proxy) => {
-          return {
-            id: proxy._id,
-            name: proxy.name,
-            type: proxy.type,
-          };
-        });
+        // Get proxies data
+        const proxyList = Proxies.find().fetch();
 
         // OK response with Proxy data
         return {
@@ -114,14 +112,14 @@ ProxyV1.addCollection(Proxies, {
         tags: [
           ProxyV1.swagger.tags.proxy,
         ],
-        summary: 'Fetch API with specified ID.',
-        description: descriptionProxies.get,
+        summary: 'Fetch Proxy with specified ID.',
+        description: descriptionProxies.getProxy,
         parameters: [
-          ProxyV1.swagger.params.apiId,
+          ProxyV1.swagger.params.proxyId,
         ],
         responses: {
           200: {
-            description: 'API found successfully',
+            description: 'Proxy found successfully',
             schema: {
               type: 'object',
               properties: {
@@ -130,7 +128,7 @@ ProxyV1.addCollection(Proxies, {
                   example: 'success',
                 },
                 data: {
-                  $ref: '#/definitions/apiResponse',
+                  $ref: '#/definitions/proxyResponse',
                 },
               },
             },
@@ -139,93 +137,45 @@ ProxyV1.addCollection(Proxies, {
             description: 'No data to return',
           },
           404: {
-            description: 'API is not Found',
+            description: 'Proxy is not Found',
           },
         },
       },
       action () {
-        const apiId = this.urlParams.id;
+        const proxyId = this.urlParams.id;
 
-        // Fetch the API matching with condition
-        const api = Apis.findOne({ _id: apiId });
-        // Return error response, it API is not found.
-        if (!api) {
-          return errorMessagePayload(404, 'API with specified ID is not found.');
-        }
-
-        // Check if user is Admin or Manager
-        let userCanManage = false;
         // Get requestor ID from header
         const requestorId = this.request.headers['x-user-id'];
 
-        if (requestorId) {
-          // Check if requestor is administrator
-          const requestorIsAdmin = Roles.userIsInRole(requestorId, ['admin']);
-          // Check if requestor is manager
-          const requestorIsManager = api.currentUserCanManage(requestorId);
-          userCanManage = requestorIsAdmin || requestorIsManager;
+        if (!requestorId) {
+          return errorMessagePayload(400, 'Erroneous or missing parameter.');
         }
 
-        // Only Public APIs are available for non-admin/non-manager user
-        if (api.isPublic === false) {
-          if (!userCanManage) {
-            return {
-              statusCode: 204,
-              body: {
-                status: 'success',
-              },
-            };
-          }
+        // Requestor must be an administrator
+        if (!Roles.userIsInRole(requestorId, ['admin'])) {
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        // Extend API structure with correct link to API logo
-        if (api.apiLogoFileId) {
-          api.logoUrl = api.logoUrl();
+        // Get proxies data
+        const proxy = Proxies.findOne({ _id: proxyId });
+
+        // Return error response, it Proxy is not found.
+        if (!proxy) {
+          return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
-
-        // Instead of API URL, return API Proxy's URL, if it exists
-        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
-
-        // If Proxy is API Umbrella, fill in proxy URL
-        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
-          // Get connected proxy url
-          const proxyUrl = proxyBackend.proxyUrl();
-          // Get proxy backend path
-          const frontendPrefix = proxyBackend.frontendPrefix();
-
-          // Manager can see also actual API URL
-          if (userCanManage) {
-            api.backendURL = api.url;
-            api.backendPrefix = proxyBackend.backendPrefix();
-
-            // Get name and type of proxy
-            const proxy = Proxies.findOne(proxyBackend.proxyId);
-            if (proxy) {
-              api.proxyName = proxy.name;
-              api.proxyType = proxy.type;
-            }
-          }
-
-          // Provide full proxy path
-          api.url = proxyUrl.concat(frontendPrefix);
-        }
-
-        // Get URl of Swagger specification
-        api.documentationUrl = api.documentationUrl();
-        // Get URL to external site with API documentation
-        api.externalDocumentation = api.otherUrl();
 
         // Construct response
         return {
           statusCode: 200,
           body: {
             status: 'success',
-            data: api,
+            data: proxy,
           },
         };
       },
     },
-    // Create a new API
+
+    // Create a new Proxy
     post: {
       authRequired: true,
       swagger: {
@@ -233,7 +183,7 @@ ProxyV1.addCollection(Proxies, {
           ProxyV1.swagger.tags.proxy,
         ],
         summary: 'Add new API to catalog.',
-        description: descriptionProxies.post,
+        description: descriptionProxies.postProxy,
         parameters: [
           ProxyV1.swagger.params.api,
         ],
@@ -439,9 +389,9 @@ ProxyV1.addCollection(Proxies, {
           ProxyV1.swagger.tags.proxy,
         ],
         summary: 'Update API.',
-        description: descriptionProxies.put,
+        description: descriptionProxies.putProxy,
         parameters: [
-          ProxyV1.swagger.params.apiId,
+          ProxyV1.swagger.params.proxyId,
           ProxyV1.swagger.params.api,
         ],
         responses: {
@@ -722,7 +672,7 @@ ProxyV1.addCollection(Proxies, {
         };
       },
     },
-    // Remove an API
+    // Remove a Proxy
     delete: {
       authRequired: true,
       // manager role is required. If a user already has an API then the user has manager role
@@ -732,9 +682,9 @@ ProxyV1.addCollection(Proxies, {
           ProxyV1.swagger.tags.proxy,
         ],
         summary: 'Delete API.',
-        description: descriptionProxies.delete,
+        description: descriptionProxies.deleteProxy,
         parameters: [
-          ProxyV1.swagger.params.apiId,
+          ProxyV1.swagger.params.proxyId,
         ],
         responses: {
           204: {
