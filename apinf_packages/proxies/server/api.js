@@ -57,7 +57,7 @@ ProxyV1.addCollection(Proxies, {
                   type: 'array',
                   items: {
                     $ref: '#/definitions/proxyResponse',
-                  }
+                  },
                 },
               },
             },

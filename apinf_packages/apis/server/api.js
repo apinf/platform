@@ -1125,7 +1125,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       }
 
       // Get API's Proxy connection data
-      const proxyBackend = ProxyBackends.findOne({ apiId: apiId });
+      const proxyBackend = ProxyBackends.findOne({ apiId });
 
       const returnedStatusCode = proxyBackend ? 200 : 204;
 
@@ -1331,6 +1331,56 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           'rateLimitMode', bodyParams.rateLimitMode);
         }
 
+        // When rate_limit_mode is 'custom', also additional parameters can be given
+        if (settings.rate_limit_mode === 'custom') {
+          // duration must be a numeric value
+          if (bodyParams.duration) {
+            if (isNaN(bodyParams.duration) || bodyParams.duration < 0 ) {
+              return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
+              'duration', bodyParams.duration);
+            }
+          }
+
+          // Is limitBy allowed value
+          if (bodyParams.limitBy) {
+            const allowedRateLimitByValues = ['apiKey', 'ip'];
+            if (!allowedRateLimitByValues.includes(bodyParams.limitBy)) {
+              return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
+              'limitBy', bodyParams.limitBy);
+            }
+          }
+
+          // limit must be a numeric value
+          if (bodyParams.limit) {
+            if (isNaN(bodyParams.limit) || bodyParams.limit < 0 ) {
+              return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
+              'limit', bodyParams.limit);
+            }
+          }
+
+          // If disableApiKey is given, it can be only literal true/false
+          if (bodyParams.showLimitInResponseHeaders) {
+            const allowedLimitInResponseHeadersValues = ['false', 'true'];
+            if (!allowedLimitInResponseHeadersValues.includes(bodyParams.showLimitInResponseHeaders)) {
+              return errorMessagePayload(400, 'Parameter "showLimitInResponseHeaders" has erroneous value.',
+              'showLimitInResponseHeaders', bodyParams.showLimitInResponseHeaders);
+            }
+          }
+
+          // Convert given value to boolean. Also sets default false, if value not given.
+          const showLimitInResponseHeaders = (bodyParams.showLimitInResponseHeaders === 'true');
+
+          // Get given values ready for DB write
+          const rate_limits = [{
+            duration: bodyParams.duration,
+            limit_by: bodyParams.limitBy,
+            limit: bodyParams.limit,
+            response_headers: showLimitInResponseHeaders,
+          }];
+          // Add into settings
+          settings.rate_limits = rate_limits;
+        }
+
         // Collect apiUmrella related data
         apiUmbrella.servers = servers;
         apiUmbrella.url_matches = urlMatches;
@@ -1338,6 +1388,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
         // Fill the new backend data
         newProxyBackendData.apiUmbrella = apiUmbrella;
+
       }
 
       // Insert corresponding proxy backend

@@ -355,7 +355,32 @@ CatalogV1.swagger = {
           format: 'int32',
           example: '448',
         },
-        noApiKey: {
+        disableApiKey: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        rateLimitMode: {
+          type: 'string',
+          enum: ['unlimited', 'custom'],
+          example: 'unlimited',
+        },
+        duration: {
+          type: 'integer',
+          format: 'int32',
+          example: '100',
+        },
+        limitBy: {
+          type: 'string',
+          enum: ['apiKey', 'ip'],
+          example: 'apiKey',
+        },
+        limit: {
+          type: 'integer',
+          format: 'int32',
+          example: '500',
+        },
+        showLimitInResponseHeaders: {
           type: 'string',
           enum: ['true', 'false'],
           example: 'false',
@@ -415,7 +440,7 @@ CatalogV1.swagger = {
                     format: 'int32',
                     example: '448',
                   },
-                }
+                },
               },
             },
             balance_algorithm: {
@@ -458,7 +483,7 @@ CatalogV1.swagger = {
                       },
                     },
                   },
-                }
+                },
               },
             },
             id: {

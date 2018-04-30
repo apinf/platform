@@ -50,7 +50,7 @@ const descriptionApis = {
   * mandatory: *name* and *url*
   * length of *description* must not exceed 1000 characters
   * value of *lifecycleStatus* must be one of example list
-  * allowed values for parameter *isPublic* are "true" and "false"
+  * *isPublic*, ["true" |"false"]
     * if isPublic is set false, only admin or manager can see the API
   * *documentationUrl* contains a http(s) link to OpenAPI (or Swagger) documentationUrl
   * *externalDocument* contains a http(s) link for other types of documentation
@@ -65,7 +65,7 @@ const descriptionApis = {
   Parameters
   * length of *description* must not exceed 1000 characters
   * value of *lifecycleStatus* must be one of example list
-  * allowed values for parameter *isPublic* are "true" and "false"
+  * *isPublic*, ["true" | "false"]
     * if isPublic is set false, only admin or manager can see the API
   * *documentationUrl* contains a http(s) link to OpenAPI (or Swagger) documentationUrl
   * *externalDocument* contains a http(s) link for other types of documentation
@@ -119,14 +119,21 @@ const descriptionApis = {
   On success, returns the updated API object.
 
 
-  Parameters
-  * *:id* is API id, mandatory (in URL)
-  * *proxyId* is id of the Proxy, to which the API is to be connected, mandatory
+  Parameters (M = mandatory)
+  * *:id* is API id (in URL), (M)
+  * *proxyId* is id of the Proxy, to which the API is to be connected, (M)
   * *frontendPrefix* is a unique identification for
-  summarizing requests and responses done via this proxy connection, mandatory
-  * *backendPrefix* is an identification of API on server, mandatory
-  * *apiPort* is port used on API server, default value is...
-  * *disableApiKey* tells whether API key is required (false, default) not (true)
+  summarizing requests and responses done via this proxy connection, (M)
+  * *backendPrefix* is an identification of API on server, (M)
+  * *apiPort* is port used on API server, default value is 443. (M)
+  * *disableApiKey*, [true | false], true = skip API key requirement in Proxy, default false
+  * *rateLimitMode*, [unlimited | custom], default 'unlimited', (M)
+
+  When parameter rateLimitMode has value 'custom', following parameters are needed
+  * *duration*, set request duration in milliseconds
+  * *limitBy*, [apiKey | ip],
+  * *limit*, set number of request
+  * *showLimitInResponseHeaders*, [true | false], is limit shown in response headers or not
   `,
   // --------------------------------------------
   getProxyBackend: `
