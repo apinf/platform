@@ -5,6 +5,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiSettingsDelete">
   <h2 style="font-size:16px;margin-top:0;">
+    {{_ "apiSettingsVisibility_heading" }}
+  </h2>
+  <p>
+    {{_ "apiSettingsVisibility_text" }}
+  </p>
+
+  {{> visibilityToggle api=api }}
+
+  <hr class="panel-hr" />
+
+  <h2 style="font-size:16px;margin-top:0;">
     {{_ "apiSettingsDelete_apiTitle" }}
   </h2>
   <p>
@@ -16,16 +27,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
      id="delete-api">
     {{_ "apiSettingsDelete_deleteButton" }}
   </a>
-
-  <hr class="panel-hr" />
-
-  <h2 style="font-size:16px;margin-top:0;">
-    {{_ "apiSettingsVisibility_heading" }}
-  </h2>
-  <p>
-    {{_ "apiSettingsVisibility_text" }}
-  </p>
-
-  {{> visibilityToggle api=api }}
-
 </template>
