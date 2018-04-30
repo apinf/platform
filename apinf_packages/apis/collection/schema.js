@@ -152,7 +152,7 @@ Apis.schema = new SimpleSchema({
   isPublic: {
     type: Boolean,
     optional: true,
-    defaultValue: true,
+    defaultValue: false,
   },
   'friendlySlugs.slug.base': {
     type: String,
