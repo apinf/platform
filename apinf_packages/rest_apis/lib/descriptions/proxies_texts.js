@@ -66,7 +66,8 @@ const descriptionProxies = {
   - proxy description
   - proxy type.
 
-  In addition there is (if defined) information according to proxy type
+  Depending on proxy type, there is information accordingly either about
+  apiUmbrella of EMQ
   - API Umbrella
     - proxy URL
     - API key
@@ -74,7 +75,14 @@ const descriptionProxies = {
     - elastic search URL.
 
   - EMQ
-    - corresponding fields...
+  - brokerEndpoints
+    - Protocol
+    - Host
+    - Port
+    - TLS
+  - httpApi
+  - elastic search URL
+
 
   Example calls:
 
@@ -109,7 +117,7 @@ const descriptionProxies = {
   * name
   * description
   * proxy type (apiUmbrella | EMQ)
-  *
+
   Proxy type related parameters according to selected proxy type:
 
   API Umbrella:
@@ -119,7 +127,7 @@ const descriptionProxies = {
   - ElasticSearch URL
 
   EMQ:
-  One or several Broker Endpoints consisting of:
+  - Broker Endpoint (one or several) consisting of:
     - protocol (MQTT | MQTT over websockets)
     - Host URL
     - Port
@@ -139,12 +147,32 @@ const descriptionProxies = {
   putProxy: `
   ### Updates a Proxy ###
 
-  Admin can update an existing Proxy settings.
+  Admin can update settings of an existing Proxy.
   On success, returns the updated API object.
 
   Parameters:
   * proxy ID
-  *
+  * name
+  * description
+  * proxy type (apiUmbrella | EMQ)
+
+  Proxy type related parameters according to selected proxy type:
+
+  API Umbrella:
+  - proxy URL
+  - API key
+  - Authentication Token
+  - ElasticSearch URL
+
+  EMQ:
+  - Broker Endpoint (one or several) consisting of:
+    - protocol (MQTT | MQTT over websockets)
+    - Host URL
+    - Port
+    - TLS activation (true | false)
+  - Configuration API endpoint
+  - ElasticSearch URL
+
 
   Example call:
 

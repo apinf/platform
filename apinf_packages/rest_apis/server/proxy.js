@@ -49,14 +49,6 @@ ProxyV1.swagger = {
     proxy: 'Proxies',
   },
   params: {
-    api: {
-      name: 'api',
-      in: 'body',
-      description: 'Data for adding or editing API',
-      schema: {
-        $ref: '#/definitions/api',
-      },
-    },
     limit: {
       name: 'limit',
       in: 'query',
@@ -106,46 +98,81 @@ ProxyV1.swagger = {
       required: true,
       type: 'string',
     },
+    proxyRequest: {
+      name: 'proxy',
+      in: 'body',
+      description: 'Data for adding or editing a Proxy',
+      schema: {
+        $ref: '#/definitions/proxyRequest',
+      },
+    },
 
   },
   definitions: {
     // The schema defining the type used for the body parameter in POST or PUT method
-    api: {
-      required: ['name', 'url'],
+    proxyRequest: {
+      required: ['name', 'description', 'type'],
       properties: {
         name: {
           type: 'string',
-          example: 'My REST API',
+          example: 'Name of proxy',
         },
         description: {
           type: 'string',
-          example: 'My REST API description',
+          example: 'Description of proxy functionality',
         },
-        url: {
+        type: {
+          type: 'string',
+          enum: ['apiUmbrella', 'emq'],
+          example: 'apiUmbrella | emq',
+        },
+        umbProxyUrl: {
           type: 'string',
           format: 'url',
-          example: 'https://my.rest.api.com/v1',
+          example: 'https://my.proxy.com:port',
         },
-        lifecycleStatus: {
+        umbApiKey: {
           type: 'string',
-          enum: ['design', 'development', 'testing', 'production', 'deprecated'],
-          example: 'design/development/testing/production/deprecated',
+          description: 'API key for API Umbrella',
+          example: 'api-key-string',
         },
-        isPublic: {
+        umbAuthToken: {
           type: 'string',
-          enum: ['true', 'false'],
-          example: 'true/false',
-        },
-        documentationUrl: {
-          type: 'string',
-          description: 'URI to OpenAPI (Swagger) specification of the API',
+          description: 'Authentication Token for API Umbrella',
           example: 'http://link-address-to-specification.com',
         },
-        externalDocumentation: {
+        elasticSearch: {
           type: 'string',
-          description: 'A URL to an external site page with API documentation',
-          example: 'http://url-to-external-site.com',
+          description: 'A URL to ElasticSearch',
+          example: 'http://url-to-elastic-searchite.com:port',
         },
+        emqProtocol: {
+          type: 'string',
+          enum: ['MQTT', 'MQTTow'],
+          description: 'Protocol is either MQTT or MQTT over websockets',
+          example: 'MQTT | MQTTow',
+        },
+        emqHost: {
+          type: 'string',
+          format: 'url',
+          example: 'https://emq.host.com',
+        },
+        emqPort: {
+          type: 'integer',
+          format: 'int32',
+          example: '666',
+        },
+        emqTLS: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'true | false',
+        },
+        emqHttpApi: {
+          type: 'string',
+          format: 'url',
+          example: 'https://emq.httpapi.com',
+        },
+
       },
     },
     apiResponse: {
