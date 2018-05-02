@@ -156,7 +156,7 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        // Get proxies data
+        // Get selected Proxy data
         const proxy = Proxies.findOne({ _id: proxyId });
 
         // Return error response, it Proxy is not found.
@@ -182,14 +182,14 @@ ProxyV1.addCollection(Proxies, {
         tags: [
           ProxyV1.swagger.tags.proxy,
         ],
-        summary: 'Add new API to catalog.',
+        summary: 'Add a new Proxy.',
         description: descriptionProxies.postProxy,
         parameters: [
-          ProxyV1.swagger.params.api,
+          ProxyV1.swagger.params.proxyRequest,
         ],
         responses: {
           201: {
-            description: 'API added successfully',
+            description: 'Proxy added successfully',
             schema: {
               type: 'object',
               properties: {
@@ -230,9 +230,15 @@ ProxyV1.addCollection(Proxies, {
         // structure for validating values against schema
         const validateFields = {
           name: bodyParams.name,
-          url: bodyParams.url,
           description: bodyParams.description,
-          lifecycleStatus: bodyParams.lifecycleStatus,
+          type: bodyParams.type,
+          apiUmbrella: {
+            url: bodyParams.umbProxyUrl,
+            apikey: bodyParams.umbApiKey,
+            authToken: bodyParams.umbAuthToken,
+            elasticSearch: bodyParams.elasticSearch,
+
+          }
         };
 
         // Name is a required field
@@ -708,33 +714,44 @@ ProxyV1.addCollection(Proxies, {
         ],
       },
       action () {
-        // Get ID of API
-        const apiId = this.urlParams.id;
-        // Get User ID
-        const userId = this.userId;
-        // Get API document
-        const api = Apis.findOne(apiId);
+        // Get ID of Proxy
+        const proxyId = this.urlParams.id;
 
-        // API must exist
-        if (!api) {
-          // API doesn't exist
-          return errorMessagePayload(404, 'API with specified ID is not found.');
+        // Get requestor ID from header
+        const requestorId = this.request.headers['x-user-id'];
+
+        if (!requestorId) {
+          return errorMessagePayload(400, 'Erroneous or missing parameter.');
         }
 
-        // User must be able to manage API
-        if (!api.currentUserCanManage(userId)) {
-          return errorMessagePayload(403, 'User does not have permission to remove this API.');
+        // Requestor must be an administrator
+        if (!Roles.userIsInRole(requestorId, ['admin'])) {
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        // Remove API document
-        Meteor.call('removeApi', api._id);
+        // Get proxy in question
+        const proxy = Proxies.findOne({ _id: proxyId });
+
+        // Return error response, it Proxy is not found.
+        if (!proxy) {
+          return errorMessagePayload(404, 'Proxy with specified ID is not found.');
+        }
+
+        // Remove Proxy document
+        // Remove proxy and all related proxy backends configurations
+        Meteor.call('removeProxy', proxyId, (err) => {
+          // Display error if something went wrong
+          if (err) {
+            return errorMessagePayload(500, 'Proxy removal failed.');
+          }
+        });
 
         // No content with 204
         return {
           statusCode: 204,
           body: {
             status: 'success',
-            message: 'API removed',
+            message: 'Proxy removed',
           },
         };
       },
