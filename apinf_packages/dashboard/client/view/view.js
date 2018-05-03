@@ -72,17 +72,22 @@ Template.dashboardView.onCreated(function () {
 
       Meteor.call('totalNumberAndTrendGeneral',
         params, grouping.myApis, (error, result) => {
-          console.log(error);
+          if (error) throw new Meteor.Error(error.message);
+
           this.analyticsDataMyApis.set(result);
         });
 
       Meteor.call('totalNumberAndTrendGeneral',
         params, grouping.managedApis, (error, result) => {
+          if (error) throw new Meteor.Error(error.message);
+
           this.analyticsDataManagedApis.set(result);
         });
 
       Meteor.call('totalNumberAndTrendGeneral',
         params, grouping.otherApis, (error, result) => {
+          if (error) throw new Meteor.Error(error.message);
+
           this.analyticsDataOtherApis.set(result);
         });
     }
