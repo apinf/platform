@@ -118,6 +118,11 @@ Template.dashboardSummaryStatistic.helpers({
       textColor = 'text-danger';
     }
 
+    // Grey color for text
+    if (direction === 'no-trend') {
+      textColor = 'text-default';
+    }
+
     return textColor;
   },
   displayOverview (parameter) {

@@ -1192,6 +1192,8 @@
   "summaryComparing_displayTrendInfo_today": "__percentage__ __direction__ than yesterday",
   "summaryComparing_displayTrendInfo_yesterday": "__percentage__ __direction__ than the previous day",
   "summaryComparing_displayTrendInfo_days": "__percentage__ __direction__ than the previous __day__ days",
+  "summaryComparing_displayTrendInfo_noTrend": "same as the previous day",
+  "summaryComparing_displayTrendInfo_noTrendDays": "same as the previous __day__ days",
   "swaggerUi_swaggerDocumentInvalidText": "Swagger document is not valid.",
   "swaggerUi_alertText_Warning": "Warning!",
   "swaggerUi_alertText_mainText": "This application platform uses HTTPS. API requests from documentation will not work because API uses HTTP.",
