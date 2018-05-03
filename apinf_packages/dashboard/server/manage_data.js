@@ -227,7 +227,6 @@ Meteor.methods({
         .forEach(backend => {
           const prefix = backend.frontendPrefix();
 
-          // const related = aggregatedData[data.prefix];
           const currentPeriod = aggregatedData[prefix].by_period.buckets.current;
           const previousPeriod = aggregatedData[prefix].by_period.buckets.previous;
 
