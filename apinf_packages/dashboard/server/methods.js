@@ -126,4 +126,90 @@ Meteor.methods({
     // Return all lists of IDs
     return groupingIds;
   },
+  overviewChartsGeneral (params, proxyBackendIds) {
+    check(params, Object);
+    check(proxyBackendIds, Array);
+
+    let response;
+
+    // "Yesterday" or "Today"
+    if (params.timeframe === '48' || params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('overviewChartsDataFromElasticsearch', params, proxyBackendIds);
+    } else {
+      // Last N days
+      // Fetch from MongoDB
+      response = Meteor.call('overviewChartsData', params, proxyBackendIds);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  timelineChartsGeneral (params) {
+    check(params, Object);
+
+    let response;
+
+    // "Yesterday" or "Today"
+    if (params.timeframe === '48' || params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('timelineChartDataFromElasticsearch', params);
+    } else {
+      // Last N days
+      // Fetch from MongoDB
+      response = Meteor.call('timelineChartData', params);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  totalNumberAndTrendGeneral (params, proxyBackendIds) {
+    check(params, Object);
+    check(proxyBackendIds, Array);
+
+    let response;
+
+    // "Today"
+    if (params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('totalNumberRequestFromElasticsearch', params, proxyBackendIds);
+    } else {
+      // Last N days And Yesterday
+      // Fetch from MongoDB
+      response = Meteor.call('totalNumberRequestsAndTrend', params, proxyBackendIds);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  statusCodesGeneral (params) {
+    check(params, Object);
+
+    let response;
+
+    // "Today"
+    if (params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('statusCodesFromElasticsearch', params);
+    } else {
+      // Last N days And Yesterday
+      // Fetch from MongoDB
+      response = Meteor.call('statusCodesData', params);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
 });

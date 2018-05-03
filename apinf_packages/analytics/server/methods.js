@@ -13,7 +13,6 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
 import _ from 'lodash';
-import moment from 'moment/moment';
 
 // APInf imports
 import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
@@ -259,8 +258,8 @@ Meteor.methods({
 
     // Create date range filter for Previous period
     const previousPeriodFilter = {
-      fromDate: moment(filter.fromDate).subtract(filter.timeframe, 'd').valueOf(),
-      toDate: filter.fromDate,
+      fromDate: filter.doublePeriodAgo,
+      toDate: filter.onePeriodAgo,
     };
 
     // Get data for Previous period
