@@ -238,7 +238,7 @@ ProxyV1.addCollection(Proxies, {
             authToken: bodyParams.umbAuthToken,
             elasticSearch: bodyParams.elasticSearch,
 
-          }
+          },
         };
 
         // Name is a required field
@@ -253,6 +253,17 @@ ProxyV1.addCollection(Proxies, {
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous.');
         }
+
+        // Description must not exceed field length in DB
+        if (bodyParams.description) {
+          isValid = Apis.simpleSchema().namedContext().validateOne(
+            validateFields, 'description');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
+          }
+        }
+
 
         // URL is a mandatory field
         if (!bodyParams.url) {
@@ -275,15 +286,6 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, detailLine, 'id', duplicateApi._id);
         }
 
-        // Description must not exceed field length in DB
-        if (bodyParams.description) {
-          isValid = Apis.simpleSchema().namedContext().validateOne(
-            validateFields, 'description');
-
-          if (!isValid) {
-            return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
-          }
-        }
 
         // Is value of lifecycle status allowed
         if (bodyParams.lifecycleStatus) {
@@ -394,15 +396,15 @@ ProxyV1.addCollection(Proxies, {
         tags: [
           ProxyV1.swagger.tags.proxy,
         ],
-        summary: 'Update API.',
+        summary: 'Update Proxy.',
         description: descriptionProxies.putProxy,
         parameters: [
           ProxyV1.swagger.params.proxyId,
-          ProxyV1.swagger.params.api,
+          ProxyV1.swagger.params.proxyRequest,
         ],
         responses: {
           200: {
-            description: 'API updated successfully',
+            description: 'Proxy updated successfully',
             schema: {
               type: 'object',
               properties: {
@@ -426,7 +428,7 @@ ProxyV1.addCollection(Proxies, {
             description: 'User does not have permission',
           },
           404: {
-            description: 'API is not found',
+            description: 'Proxy is not found',
           },
         },
         security: [
@@ -737,13 +739,20 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
 
+        // Return error response, it there are connected Proxy backends.
+        const connectedProxyBackends = ProxyBackends.find({ proxyId }).count();
+        if (connectedProxyBackends) {
+          return errorMessagePayload(404, 'Not allowed because of connected proxy backends.');
+        }
+
         // Remove Proxy document
         // Remove proxy and all related proxy backends configurations
         Meteor.call('removeProxy', proxyId, (err) => {
-          // Display error if something went wrong
+          // Response with error if something went wrong
           if (err) {
             return errorMessagePayload(500, 'Proxy removal failed.');
           }
+          return 0;
         });
 
         // No content with 204
