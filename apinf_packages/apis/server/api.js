@@ -1335,7 +1335,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         if (settings.rate_limit_mode === 'custom') {
           // duration must be a numeric value
           if (bodyParams.duration) {
-            if (isNaN(bodyParams.duration) || bodyParams.duration < 0 ) {
+            if (isNaN(bodyParams.duration) || bodyParams.duration < 0) {
               return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
               'duration', bodyParams.duration);
             }
@@ -1352,18 +1352,18 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
           // limit must be a numeric value
           if (bodyParams.limit) {
-            if (isNaN(bodyParams.limit) || bodyParams.limit < 0 ) {
+            if (isNaN(bodyParams.limit) || bodyParams.limit < 0) {
               return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
               'limit', bodyParams.limit);
             }
           }
 
           // If disableApiKey is given, it can be only literal true/false
-          if (bodyParams.showLimitInResponseHeaders) {
-            const allowedLimitInResponseHeadersValues = ['false', 'true'];
-            if (!allowedLimitInResponseHeadersValues.includes(bodyParams.showLimitInResponseHeaders)) {
-              return errorMessagePayload(400, 'Parameter "showLimitInResponseHeaders" has erroneous value.',
-              'showLimitInResponseHeaders', bodyParams.showLimitInResponseHeaders);
+          if (bodyParams.showLimit) {
+            const allowedshowLimitValues = ['false', 'true'];
+            if (!allowedshowLimitValues.includes(bodyParams.showLimit)) {
+              return errorMessagePayload(400, 'Parameter "showLimit" has erroneous value.',
+              'showLimit', bodyParams.showLimit);
             }
           }
 
@@ -1371,14 +1371,14 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           const showLimitInResponseHeaders = (bodyParams.showLimitInResponseHeaders === 'true');
 
           // Get given values ready for DB write
-          const rate_limits = [{
+          const rateLimits = [{
             duration: bodyParams.duration,
             limit_by: bodyParams.limitBy,
             limit: bodyParams.limit,
             response_headers: showLimitInResponseHeaders,
           }];
           // Add into settings
-          settings.rate_limits = rate_limits;
+          settings.rate_limits = rateLimits;
         }
 
         // Collect apiUmrella related data
@@ -1388,7 +1388,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
         // Fill the new backend data
         newProxyBackendData.apiUmbrella = apiUmbrella;
-
       }
 
       // Insert corresponding proxy backend
