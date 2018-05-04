@@ -36,7 +36,7 @@ CatalogV1.addCollection(Apis, {
     authRequired: false,
   },
   endpoints: {
-    // Response contains a list of all public entities within the collection
+    // Show information of all APIs
     getAll: {
       swagger: {
         tags: [
@@ -228,7 +228,7 @@ CatalogV1.addCollection(Apis, {
         };
       },
     },
-    // Response contains the entity with the given :id
+    // Show information of an identified API
     get: {
       authRequired: false,
       swagger: {
@@ -550,7 +550,7 @@ CatalogV1.addCollection(Apis, {
         };
       },
     },
-    // Modify the entity with the given :id with the data contained in the request body.
+    // Modify identified API
     put: {
       authRequired: true,
       // manager role is required. If a user already has an API then the user has manager role
@@ -1055,7 +1055,7 @@ CatalogV1.addRoute('apis/:id/documents', {
 
 // Request /rest/v1/apis/:id/proxyBackend/
 CatalogV1.addRoute('apis/:id/proxyBackend', {
-  // Get API's proxy connection information
+  // Show information of API's proxy connection
   get: {
     authRequired: true,
     swagger: {
@@ -1069,7 +1069,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       ],
       responses: {
         200: {
-          description: 'API connected to a Proxy successfully',
+          description: 'Proxy connection exists for this API',
           schema: {
             type: 'object',
             properties: {
@@ -1126,12 +1126,14 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
       // Get API's Proxy connection data
       const proxyBackend = ProxyBackends.findOne({ apiId });
+      if (!proxyBackend) {
+        // The Proxy backend doesn't exist
+        return errorMessagePayload(404, 'Proxy connection for the API with specified ID is not found.');
+      }
 
-      const returnedStatusCode = proxyBackend ? 200 : 204;
-
-      // OK response with API data
+      // OK response with Proxy backend data
       return {
-        statusCode: returnedStatusCode,
+        statusCode: 200,
         body: {
           status: 'success',
           data: proxyBackend,
@@ -1139,7 +1141,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       };
     },
   },
-  // Connect an API to a given proxy
+  // Connect given API to a given proxy
   post: {
     authRequired: true,
     swagger: {
@@ -1409,5 +1411,88 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       };
     },
   },
+  // Delete API's proxy connection
+  delete: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'Remove Proxy connection an identified API.',
+      description: descriptionApis.deleteProxyBackend,
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+      ],
+      responses: {
+        204: {
+          description: 'Proxy connection removed from this API',
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'Proxy connection was not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of API (URL parameter)
+      const apiId = this.urlParams.id;
+      // Get User ID
+      const userId = this.userId;
+
+      // API related checkings
+      // Get API document
+      const api = Apis.findOne(apiId);
+
+      // API must exist
+      if (!api) {
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+      // User must be able to manage API
+      if (!api.currentUserCanManage(userId)) {
+        return errorMessagePayload(403, 'User does not have permission to this API.');
+      }
+
+      // Get API's Proxy connection data
+      const proxyBackend = ProxyBackends.findOne({ apiId });
+      if (!proxyBackend) {
+        // The Proxy backend doesn't exist
+        return errorMessagePayload(404, 'Proxy connection for the API with specified ID is not found.');
+      }
+
+      // Remove the proxy backend
+      // Check if there is proxy backend with certain type
+      if (proxyBackend.type === 'emq' || proxyBackend.type === 'apiUmbrella') {
+        // Call deleteProxyBackend
+        deleteProxyBackendConfig(proxyBackend);
+      }
+
+
+      // OK response with HTTP code only
+      return {
+        statusCode: 204,
+        body: {
+          status: 'success',
+          data: proxyBackend,
+        },
+      };
+    },
+  },
+
 });
 
