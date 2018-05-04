@@ -36,6 +36,8 @@ ProxyV1.addCollection(Proxies, {
     // Response contains a list of all public entities within the collection
     getAll: {
       authRequired: true,
+      // Admin role is required
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -178,6 +180,8 @@ ProxyV1.addCollection(Proxies, {
     // Create a new Proxy
     post: {
       authRequired: true,
+      // Admin role is required
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -390,8 +394,8 @@ ProxyV1.addCollection(Proxies, {
     // Modify the entity with the given :id with the data contained in the request body.
     put: {
       authRequired: true,
-      // manager role is required. If a user already has an API then the user has manager role
-      roleRequired: ['manager', 'admin'],
+      // Admin role is required
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -683,8 +687,8 @@ ProxyV1.addCollection(Proxies, {
     // Remove a Proxy
     delete: {
       authRequired: true,
-      // manager role is required. If a user already has an API then the user has manager role
-      roleRequired: ['manager', 'admin'],
+      // Admin role is required
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -739,14 +743,14 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
 
-        // Return error response, it there are connected Proxy backends.
+        // Return error response, if there are connected Proxy backends.
         const connectedProxyBackends = ProxyBackends.find({ proxyId }).count();
         if (connectedProxyBackends) {
-          return errorMessagePayload(404, 'Not allowed because of connected proxy backends.');
+          const detailLine = 'Not allowed because of connected proxy backends.';
+          return errorMessagePayload(404, detailLine, 'nbr of ', connectedProxyBackends);
         }
 
         // Remove Proxy document
-        // Remove proxy and all related proxy backends configurations
         Meteor.call('removeProxy', proxyId, (err) => {
           // Response with error if something went wrong
           if (err) {
@@ -767,3 +771,83 @@ ProxyV1.addCollection(Proxies, {
     },
   },
 });
+
+// Request /rest/v1/proxies/:id/proxyBackends/
+ProxyV1.addRoute('proxies/:id/proxyBackends', {
+  // Show list of proxy backends connected to Proxy
+  get: {
+    authRequired: false,
+    swagger: {
+      tags: [
+        ProxyV1.swagger.tags.proxy,
+      ],
+      summary: 'Get list of proxy backends connected to Proxy with specified ID.',
+      description: descriptionProxies.getProxyBackends,
+      parameters: [
+        ProxyV1.swagger.params.proxyId,
+      ],
+      responses: {
+        200: {
+          description: 'Proxy backend list found successfully',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'success',
+              },
+              data: {
+                $ref: '#/definitions/proxyResponse',
+              },
+            },
+          },
+        },
+        204: {
+          description: 'No data to return',
+        },
+        404: {
+          description: 'Proxy is not Found',
+        },
+      },
+    },
+    action () {
+      const proxyId = this.urlParams.id;
+
+      // Get requestor ID from header
+      const requestorId = this.request.headers['x-user-id'];
+
+      if (!requestorId) {
+        return errorMessagePayload(400, 'Erroneous or missing parameter.');
+      }
+
+      // Requestor must be an administrator
+      if (!Roles.userIsInRole(requestorId, ['admin'])) {
+        return errorMessagePayload(403, 'User does not have permission.');
+      }
+
+      // Get selected Proxy data
+      const proxy = Proxies.findOne({ _id: proxyId });
+
+      // Return error response, if Proxy is not found.
+      if (!proxy) {
+        return errorMessagePayload(404, 'Proxy with specified ID is not found.');
+      }
+
+      // Return list of proxy backend ids.
+      const connectedProxyBackends = ProxyBackends.find({ proxyId }).map((proxyBackend) => {
+        return proxyBackend._id;
+      });
+
+      // Construct response
+      return {
+        statusCode: 200,
+        body: {
+          status: 'success',
+          data: connectedProxyBackends,
+        },
+      };
+    },
+  },
+
+});
+
