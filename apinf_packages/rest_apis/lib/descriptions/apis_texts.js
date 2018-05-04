@@ -112,6 +112,18 @@ const descriptionApis = {
   If match is not found, the operation is considered as failed.
   `,
   // --------------------------------------------
+  getProxyBackend: `
+  ### Lists API's Proxy connection information ###
+
+  Lists Proxy connection information of an identified API.
+  When proxy connection exists, returns the Proxy backend settings information (200).
+  In case no proxy connection for API in question exists, returns an error response (404).
+
+
+  Parameters
+  * *:id* is API id, mandatory (in URL)
+  `,
+// --------------------------------------------
   postProxyBackend: `
   ### Connect an API to a Proxy ###
 
@@ -135,12 +147,13 @@ const descriptionApis = {
   * *limit*, set number of request
   * *showLimitInResponseHeaders*, [true | false], is limit shown in response headers or not
   `,
-  // --------------------------------------------
-  getProxyBackend: `
-  ### Lists API's Proxy connection information ###
+    // --------------------------------------------
+  deleteProxyBackend: `
+  ### Removes API's Proxy connection ###
 
-  Lists Proxy connection information of an identified API.
-  On success, returns the updated API object.
+  Removes Proxy connection identified API.
+  When proxy connection exists, returns an empty response (204).
+  Trying to remove a non-existing proxy connection for API is considered error (404).
 
 
   Parameters
