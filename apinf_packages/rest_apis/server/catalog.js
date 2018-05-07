@@ -498,7 +498,7 @@ CatalogV1.swagger = {
   },
 };
 
-// Generate Swagger to route /rest/v1/api_catalog.json
+// Generate Swagger to route /rest/v1/catalog.json
 CatalogV1.addSwagger('catalog.json');
 
 export default CatalogV1;
