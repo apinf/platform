@@ -89,7 +89,6 @@ ProxyV1.swagger = {
       required: false,
       type: 'string',
     },
-
     // Proxy related parameters
     proxyId: {
       name: 'id',
@@ -106,7 +105,6 @@ ProxyV1.swagger = {
         $ref: '#/definitions/proxyRequest',
       },
     },
-
   },
   definitions: {
     // The schema defining the type used for the body parameter in POST or PUT method
@@ -172,7 +170,6 @@ ProxyV1.swagger = {
           format: 'url',
           example: 'https://emq.httpapi.com',
         },
-
       },
     },
     apiResponse: {
@@ -314,7 +311,6 @@ ProxyV1.swagger = {
         },
       },
     },
-
     // proxy related definitions
     proxyResponse: {
       type: 'object',
@@ -361,7 +357,7 @@ ProxyV1.swagger = {
   },
 };
 
-// Generate Swagger to route /rest/v1/api_catalog.json
+// Generate Swagger to route /rest/v1/proxy.json
 ProxyV1.addSwagger('proxy.json');
 
 export default ProxyV1;
