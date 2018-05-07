@@ -94,8 +94,21 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
+        let query = {};
+
+        const queryParams = this.queryParams;
+        // Parse query parameters
+        if (queryParams.type) {
+          const allowedTypes = ['apiUmbrella', 'emq'];
+          if (!allowedTypes.includes(queryParams.type)) {
+            return errorMessagePayload(400, 'Parameter "type" has erroneous value.',
+            'type', queryParams.type);
+          }
+          query = { type: queryParams.type };
+        }
+
         // Get proxies data
-        const proxyList = Proxies.find().fetch();
+        const proxyList = Proxies.find(query).fetch();
 
         // OK response with Proxy data
         return {
@@ -110,6 +123,7 @@ ProxyV1.addCollection(Proxies, {
     // Response contains the entity with the given :id
     get: {
       authRequired: false,
+      roleRequired: ['admin'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -135,13 +149,22 @@ ProxyV1.addCollection(Proxies, {
               },
             },
           },
-          204: {
-            description: 'No data to return',
+          400: {
+            description: 'Erroneous or missing parameter',
+          },
+          403: {
+            description: 'User does not have permission',
           },
           404: {
             description: 'Proxy is not Found',
           },
         },
+        security: [
+          {
+            userSecurityToken: [],
+            userId: [],
+          },
+        ],
       },
       action () {
         const proxyId = this.urlParams.id;
