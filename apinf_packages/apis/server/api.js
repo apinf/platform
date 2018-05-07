@@ -1128,7 +1128,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       const proxyBackend = ProxyBackends.findOne({ apiId });
       if (!proxyBackend) {
         // The Proxy backend doesn't exist
-        return errorMessagePayload(404, 'Proxy connection for the API with specified ID is not found.');
+        return errorMessagePayload(404, 'Proxy connection for the API is not found.');
       }
 
       // OK response with Proxy backend data
@@ -1472,7 +1472,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       const proxyBackend = ProxyBackends.findOne({ apiId });
       if (!proxyBackend) {
         // The Proxy backend doesn't exist
-        return errorMessagePayload(404, 'Proxy connection for the API with specified ID is not found.');
+        return errorMessagePayload(404, 'Proxy connection for the API is not found.');
       }
 
       // Remove the proxy backend
