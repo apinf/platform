@@ -1478,8 +1478,8 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       // Remove the proxy backend
       // Check if there is proxy backend with certain type
       if (proxyBackend.type === 'emq' || proxyBackend.type === 'apiUmbrella') {
-        // Call deleteProxyBackend
-        deleteProxyBackendConfig(proxyBackend);
+        // Delete proxyBackend
+        Meteor.call('deleteProxyBackend', proxyBackend);
       }
 
 
