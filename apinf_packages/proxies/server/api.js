@@ -272,18 +272,20 @@ ProxyV1.addCollection(Proxies, {
         if (!bodyParams.name) {
           return errorMessagePayload(400, 'Parameter "name" is mandatory.');
         }
-
         // Validate name
-        let isValid = Apis.simpleSchema().namedContext().validateOne(
+        let isValid = Proxies.simpleSchema().namedContext().validateOne(
           validateFields, 'name');
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous.');
         }
 
+        if (!bodyParams.description) {
+          return errorMessagePayload(400, 'Parameter "description" is mandatory.');
+        }
         // Description must not exceed field length in DB
         if (bodyParams.description) {
-          isValid = Apis.simpleSchema().namedContext().validateOne(
+          isValid = Proxies.simpleSchema().namedContext().validateOne(
             validateFields, 'description');
 
           if (!isValid) {
@@ -291,6 +293,35 @@ ProxyV1.addCollection(Proxies, {
           }
         }
 
+        if (!bodyParams.type) {
+          return errorMessagePayload(400, 'Parameter "type" is mandatory.');
+        }
+        // Type is either apiUmbrella or emq
+        if (bodyParams.type) {
+          isValid = Proxies.simpleSchema().namedContext().validateOne(
+            validateFields, 'type');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'Erroneous Proxy type.');
+          }
+        }
+
+        // Check parameter sets depending on proxy type
+        if (bodyParams.type === 'apiUmbrella') {
+          if (!bodyParams.umbProxyUrl) {
+            return errorMessagePayload(400, 'Parameter "umbProxyUrl" is mandatory.');
+          }
+          // Description must not exceed field length in DB
+          if (bodyParams.umbProxyUrl) {
+            isValid = Proxies.simpleSchema().namedContext().validateOne(
+              validateFields, 'umbProxyUrl');
+
+            if (!isValid) {
+              return errorMessagePayload(400, 'Proxy URL not valid.');
+            }
+          }
+
+        }
 
         // URL is a mandatory field
         if (!bodyParams.url) {
