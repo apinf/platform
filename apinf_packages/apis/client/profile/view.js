@@ -32,6 +32,8 @@ Template.viewApi.onCreated(function () {
   templateInstance.subscribe('publicProxyDetails', 'apiUmbrella');
   // Subscribe to Settings "supportsGraphql"
   templateInstance.subscribe('singleSetting', 'supportsGraphql');
+  // Subscribe to development Features settings
+  templateInstance.subscribe('singleSetting', 'developmentFeatures');
 
   // Using to get updated subscription
   templateInstance.autorun(() => {
