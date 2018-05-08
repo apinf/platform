@@ -677,7 +677,7 @@
         "label": "Description"
       },
       "url": {
-        "label": "API Endpoint"
+        "label": "API Host URL"
       },
       "organizationId": {
         "label": "Connect API to organization"
