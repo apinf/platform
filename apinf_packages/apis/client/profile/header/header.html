@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block api-page-header" style="padding-left: 45px; padding-right: 45px;">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
       <span style="float: left; padding-top:12px">
       {{> viewApiLogo }}
       </span>
@@ -24,7 +24,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </div>
 
-    <div class="col-md-8 secondary-menu-block-inner" style="text-align:center;">
+    <div class="col-md-6 secondary-menu-block-inner" style="text-align:center;line-height: 0;">
       <ul class="nav nav-tabs">
         {{# if currentUser }}
           <li id ="api-details-tab" class="active">
@@ -76,7 +76,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </ul>
     </div>
-    <div class="col-md-2" style="text-align:right;">
+    <div class="col-md-3" style="text-align:right;">
       {{# if currentUser }}
         {{# if proxyBackend }}
             <span class="pull-right" style="margin-top:0.9em;">
