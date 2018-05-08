@@ -23,7 +23,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <ul class="nav navbar-nav navbar-right" id="user-menu">
         {{# if currentUser }}
-        {{> userMenu user=currentUser }}
+          {{> userMenu user=currentUser }}
         {{ else }}
         <li>
           <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">

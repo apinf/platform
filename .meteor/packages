@@ -3,10 +3,10 @@
 # 'meteor add' and 'meteor remove' will edit this fill for you,
 # but you can also edit it by hand.
 
-accounts-base@1.3.2
+#accounts-base@1.3.2
 accounts-github@1.3.0
 accounts-password@1.4.0
-accounts-ui@1.1.9
+accounts-ui
 alanning:roles
 aldeed:autoform
 aldeed:autoform-bs-button-group-input
@@ -39,7 +39,6 @@ github-config-ui@1.0.0
 gwendall:autoform-i18n
 harrison:papa-parse
 http@1.2.12
-jquery@1.11.10
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
 kadira:blaze-layout
@@ -72,7 +71,7 @@ reactive-var@1.0.11
 reload@1.1.11
 reywood:publish-composite
 sacha:spin
-service-configuration@1.0.11
+service-configuration
 session@1.1.7
 shell-server@0.2.4
 simple:reactive-method
@@ -96,3 +95,5 @@ zimme:active-route
 aldeed:autoform-select2
 natestrauser:select2
 meteorhacks:aggregate
+thelohoadmin:bootstrap
+

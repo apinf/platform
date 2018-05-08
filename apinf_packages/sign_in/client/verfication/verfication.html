@@ -1,0 +1,36 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="verfication">
+  <div class="">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="at-form">
+          <div class="at-title">
+            <h3>{{_ "user_verification_heading" }}</h3>
+          </div>
+          <div class="at-pwd-form">
+            <div class="alert" id="alert-message">
+            </div>
+            <form id="at-verification-form">
+              <fieldset>
+                <div class="at-input form-group has-feedback">
+                  <label class="control-label" for="at-field-email">
+                    {{_ "user_verification_email" }} 
+                  </label>
+                  <input type="email" class="form-control" id="at-field-email" name="at-field-email" placeholder="Email" autocapitalize="none" autocorrect="off">
+                  <span class="help-block hide"></span>
+                </div>
+                <button type="submit" class="at-btn submit btn btn-lg btn-block btn-default" id="at-btn">
+                  {{_ "user_verification_verificationButton" }}
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
