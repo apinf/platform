@@ -49,46 +49,6 @@ ProxyV1.swagger = {
     proxy: 'Proxies',
   },
   params: {
-    limit: {
-      name: 'limit',
-      in: 'query',
-      description: 'Maximum number of records to return in query.',
-      required: false,
-      type: 'integer',
-      format: 'int32',
-      minimum: 0,
-      maximum: 50,
-    },
-    login: {
-      name: 'user',
-      in: 'body',
-      description: 'User login data',
-      schema: {
-        $ref: '#/definitions/loginRequest',
-      },
-    },
-    managedAPIs: {
-      name: 'managedAPIs',
-      in: 'query',
-      description: 'Limit results to APIs which requesting user can manage.',
-      required: false,
-      type: 'string',
-      enum: ['true', 'false'],
-    },
-    organizationApi: {
-      name: 'organization',
-      in: 'query',
-      description: 'An optional organization id will limit results to the given organization.',
-      required: false,
-      type: 'string',
-    },
-    url: {
-      name: 'url',
-      in: 'query',
-      description: 'Documentation link to be removed.',
-      required: false,
-      type: 'string',
-    },
     // Proxy related parameters
     proxyId: {
       name: 'id',
@@ -107,7 +67,7 @@ ProxyV1.swagger = {
     },
   },
   definitions: {
-    // The schema defining the type used for the body parameter in POST or PUT method
+    // proxy related definitions
     proxyRequest: {
       required: ['name', 'description', 'type'],
       properties: {
@@ -172,146 +132,6 @@ ProxyV1.swagger = {
         },
       },
     },
-    apiResponse: {
-      type: 'object',
-      properties: {
-        _id: {
-          type: 'string',
-          example: 'api-id-value',
-        },
-        name: {
-          type: 'string',
-          example: 'My REST API',
-        },
-        latestMonitoringStatusCode: {
-          type: 'string',
-          example: '-1',
-        },
-        description: {
-          type: 'string',
-          example: 'My REST API description',
-        },
-        url: {
-          type: 'string',
-          example: 'http://my.rest.api.com/v1',
-        },
-        managerIds: {
-          type: 'array',
-          items: {
-            type: 'string',
-            example: 'manager-id',
-          },
-        },
-        slug: {
-          type: 'string',
-          example: 'organization-slug',
-        },
-        lifecycleStatus: {
-          type: 'string',
-          example: 'design/development/testing/production/deprecated',
-        },
-        authorizedUserIds: {
-          type: 'array',
-          items: {
-            type: 'string',
-            example: 'user-id',
-          },
-        },
-        created_at: {
-          type: 'string',
-          example: '2012-07-14T01:00:00+01:00',
-        },
-        bookmarkCount: {
-          type: 'string',
-          example: '0',
-        },
-        isPublic: {
-          type: 'boolean',
-          example: 'true',
-        },
-        friendlySlugs: {
-          type: 'object',
-          properties: {
-            slug: {
-              type: 'object',
-              properties: {
-                base: {
-                  type: 'string',
-                  example: 'my-rest-api',
-                },
-                index: {
-                  type: 'string',
-                  example: '0',
-                },
-              },
-            },
-          },
-        },
-        updated_at: {
-          type: 'string',
-          example: '2017-07-14T01:00:00+01:00',
-        },
-        apiLogoFileId: {
-          type: 'string',
-          example: 'file-id',
-        },
-        logoURL: {
-          type: 'string',
-          example: 'link-address-to-logo-image',
-        },
-        documentationUrl: {
-          type: 'string',
-          description: 'URI to OpenAPI (Swagger) specification of the API',
-          example: 'link-address-to-specification',
-        },
-        externalDocumentation: {
-          type: 'array',
-          description: 'A URL to an external site page with API documentation',
-          items: {
-            type: 'string',
-            example: 'url-to-external-site',
-          },
-        },
-      },
-    },
-    loginRequest: {
-      required: ['username', 'password'],
-      properties: {
-        username: {
-          type: 'string',
-          description: 'Username',
-          example: 'johndoe',
-        },
-        password: {
-          type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
-        },
-      },
-    },
-    loginResponse: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            authToken: {
-              type: 'string',
-              example: 'auth-token-value',
-            },
-            userId: {
-              type: 'string',
-              example: 'user-id-value',
-            },
-          },
-        },
-      },
-    },
-    // proxy related definitions
     proxyResponse: {
       type: 'object',
       properties: {
