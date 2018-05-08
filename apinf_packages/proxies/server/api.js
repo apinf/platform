@@ -122,7 +122,7 @@ ProxyV1.addCollection(Proxies, {
     },
     // Response contains the entity with the given :id
     get: {
-      authRequired: false,
+      authRequired: true,
       roleRequired: ['admin'],
       swagger: {
         tags: [
@@ -456,6 +456,9 @@ ProxyV1.addCollection(Proxies, {
           },
           404: {
             description: 'Proxy is not found',
+          },
+          500: {
+            description: 'Internal server error',
           },
         },
         security: [
