@@ -34,7 +34,7 @@ Meteor.methods({
 
       const proxyBackendFilter = {
         filters: {
-          [requestPath]: { prefix: { request_path: requestPath } },
+          [requestPath]: { prefix: { request_path: requestPath.toLowerCase() } },
         },
       };
 
