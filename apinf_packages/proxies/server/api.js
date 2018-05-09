@@ -257,15 +257,10 @@ ProxyV1.addCollection(Proxies, {
         // structure for validating values against schema
         const validateFields = {
           name: bodyParams.name,
-          description: bodyParams.description,
           type: bodyParams.type,
-          apiUmbrella: {
-            url: bodyParams.umbProxyUrl,
-            apikey: bodyParams.umbApiKey,
-            authToken: bodyParams.umbAuthToken,
-            elasticSearch: bodyParams.elasticSearch,
-
-          },
+          'apiUmbrella.url': bodyParams.umbProxyUrl,
+          'emq.brokerEndpoints.$.protocol': bodyParams.emqProtocol,
+          'emq.brokerEndpoints.$.port': bodyParams.emqPort,
         };
 
         // Name is a required field
@@ -280,17 +275,16 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, 'Parameter "name" is erroneous.');
         }
 
+        // Check if Proxy with same name already exists
+        const duplicateProxy = Proxies.findOne({ name: bodyParams.name });
+
+        if (duplicateProxy) {
+          const detailLine = 'Duplicate: Proxy with same name already exists.';
+          return errorMessagePayload(400, detailLine, 'id', duplicateProxy._id);
+        }
+
         if (!bodyParams.description) {
           return errorMessagePayload(400, 'Parameter "description" is mandatory.');
-        }
-        // Description must not exceed field length in DB
-        if (bodyParams.description) {
-          isValid = Proxies.simpleSchema().namedContext().validateOne(
-            validateFields, 'description');
-
-          if (!isValid) {
-            return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
-          }
         }
 
         if (!bodyParams.type) {
@@ -306,22 +300,105 @@ ProxyV1.addCollection(Proxies, {
           }
         }
 
+        // Check apiUmbrella elasticSearch URL, used in both cases
+        if (!bodyParams.esUrl) {
+          return errorMessagePayload(400, 'Parameter "esUrl" is mandatory.');
+        }
+        // regex missing from table, so check generally
+        var re = new RegExp(SimpleSchema.RegEx.Url);
+        if (!bodyParams.esUrl.match(re)) {
+          return errorMessagePayload(400, 'Parameter "esUrl" is not valid.');
+        }
+
         // Check parameter sets depending on proxy type
         if (bodyParams.type === 'apiUmbrella') {
+          // Check apiUmbrella Proxy URL
           if (!bodyParams.umbProxyUrl) {
             return errorMessagePayload(400, 'Parameter "umbProxyUrl" is mandatory.');
           }
-          // Description must not exceed field length in DB
-          if (bodyParams.umbProxyUrl) {
-            isValid = Proxies.simpleSchema().namedContext().validateOne(
-              validateFields, 'umbProxyUrl');
+          // Check URL validation
+          isValid = Proxies.simpleSchema().namedContext().validateOne(
+            validateFields, 'apiUmbrella.url');
 
-            if (!isValid) {
-              return errorMessagePayload(400, 'Proxy URL not valid.');
-            }
+          if (!isValid) {
+            return errorMessagePayload(400, 'Proxy URL not valid.');
+          }
+          // Check apiUmbrella API Key
+          if (!bodyParams.umbApiKey) {
+            return errorMessagePayload(400, 'Parameter "umbApiKey" is mandatory.');
+          }
+          // Check apiUmbrella Authentication Token
+          if (!bodyParams.umbAuthToken) {
+            return errorMessagePayload(400, 'Parameter "umbAuthToken" is mandatory.');
+          }
+          // Fill apiUmbrella parameters
+
+        } else {
+          // Has to be EMQ parameters of broker endpoints in question
+          // Check Protocol
+          if (!bodyParams.emqProtocol) {
+            return errorMessagePayload(400, 'Parameter "emqProtocol" is mandatory.');
+          }
+          // Check URL validation
+          isValid = Proxies.simpleSchema().namedContext().validateOne(
+            validateFields, 'emq.brokerEndpoints.$.protocol');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'EMQ protocol not valid.');
+          }
+          // Check EMQ host
+          if (!bodyParams.emqHost) {
+            return errorMessagePayload(400, 'Parameter "emqHost" is mandatory.');
+          }
+          // regex missing from table, so check generally
+          var re = new RegExp(SimpleSchema.RegEx.Url);
+          if (!bodyParams.emqHost.match(re)) {
+            return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
           }
 
+          // Check EMQ host port
+          if (!bodyParams.emqPort) {
+            return errorMessagePayload(400, 'Parameter "emqPort" is mandatory.');
+          }
+          // Check port validation
+          if (isNaN(bodyParams.emqPort) || bodyParams.emqPort < 0 || bodyParams.emqPort > 65535) {
+            return errorMessagePayload(400, 'Parameter "emqPort" has erroneous value.',
+            'emqPort', bodyParams.emqPort);
+          }
+
+          // Check EMQ TLS
+          if (!bodyParams.emqTLS) {
+            return errorMessagePayload(400, 'Parameter "emqTLS" is mandatory.');
+          }
+
+          // Is the API set to public or private
+          const isPublicParam = bodyParams.isPublic;
+
+          if (bodyParams.emqTLS === 'true') {
+            bodyParams.emqTLS = true;
+          } else if (bodyParams.emqTLS === 'false') {
+            bodyParams.emqTLS = false;
+          } else {
+            return errorMessagePayload(400, 'Parameter "emqTLS" has erroneous value.');
+          }
+
+          // Check EMQ http API
+          if (!bodyParams.emqHttpApi) {
+            return errorMessagePayload(400, 'Parameter "emqHttpApi" is mandatory.');
+          }
+          // regex missing from table, so check generally
+          var re = new RegExp(SimpleSchema.RegEx.Url);
+          if (!bodyParams.emqHttpApi.match(re)) {
+            return errorMessagePayload(400, 'Parameter "emqHttpApi" is not valid.');
+          }
+
+          // Fill EMQ parameters
+
         }
+
+
+
+
 
         // URL is a mandatory field
         if (!bodyParams.url) {
@@ -336,40 +413,8 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, 'Parameter "url" must be a valid URL with http(s).');
         }
 
-        // Check if API with same name already exists
-        const duplicateApi = Apis.findOne({ name: bodyParams.name });
-
-        if (duplicateApi) {
-          const detailLine = 'Duplicate: API with same name already exists.';
-          return errorMessagePayload(400, detailLine, 'id', duplicateApi._id);
-        }
 
 
-        // Is value of lifecycle status allowed
-        if (bodyParams.lifecycleStatus) {
-          isValid = Apis.simpleSchema().namedContext().validateOne(
-            validateFields, 'lifecycleStatus');
-
-          if (!isValid) {
-            return errorMessagePayload(400, 'Parameter lifecycleStatus has erroneous value.');
-          }
-        }
-
-        // Is the API set to public or private
-        const isPublicParam = bodyParams.isPublic;
-
-        if (isPublicParam) {
-          if (isPublicParam === 'true') {
-            bodyParams.isPublic = true;
-          } else if (isPublicParam === 'false') {
-            bodyParams.isPublic = false;
-          } else {
-            return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
-          }
-        }
-
-        const documentationUrl = bodyParams.documentationUrl;
-        const externalDocumentation = bodyParams.externalDocumentation;
         // Regex for http(s) protocol
         const regex = SimpleSchema.RegEx.Url;
 
@@ -383,50 +428,16 @@ ProxyV1.addCollection(Proxies, {
           }
         }
 
-        // Link to an external site must have URL format
-        if (externalDocumentation) {
-          // Check link validity
-          if (!regex.test(externalDocumentation)) {
-            // Error message
-            const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
-            return errorMessagePayload(400, message);
-          }
-        }
 
-        // Get formed slug
-        const slugData = Meteor.call('formSlugFromName', 'Apis', bodyParams.name);
-        let apiData = {};
-        // If formed slug true
-        if (slugData && typeof slugData === 'object') {
-          // Add manager IDs list into and slug
-          apiData = Object.assign({ managerIds: [userId] }, bodyParams, slugData);
-        } else {
-          return errorMessagePayload(500, 'Forming slug for API failed.');
-        }
 
         // Insert API data into collection
-        const apiId = Apis.insert(apiData);
+        const proxyId = Proxies.insert(apiData);
 
         // If insert failed, stop and send response
         if (!apiId) {
           return errorMessagePayload(500, 'Insert API card into database failed.');
         }
 
-        // Add also documentation, if links are given
-        if (documentationUrl || externalDocumentation) {
-          const result = ApiDocs.insert({
-            apiId,
-            type: 'url',
-            remoteFileUrl: documentationUrl,
-            otherUrl: [externalDocumentation],
-          });
-          // Integrity: If insertion of document link failed, remove also API card
-          if (result === 0) {
-            // Remove newly created API document
-            Meteor.call('removeApi', apiId);
-            return errorMessagePayload(500, 'Insert documentation failed. API card not created.');
-          }
-        }
 
         // Prepare data to response, extend it with Documentation URLs
         const responseData = Object.assign(
