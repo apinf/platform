@@ -4,32 +4,40 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="viewApiPageHeader">
-  <div class="container-fluid secondary-menu-block api-page-header" style="padding-left: 45px; padding-right: 45px;">
+  <div class="container-fluid secondary-menu-block api-page-header" style="padding-left: 45px; padding-right: 30px;">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-lg-5 col-md-4 col-xs-12">
       <span style="float: left; padding-top:12px">
       {{> viewApiLogo }}
       </span>
-      <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;margin-top: 29px;left: 15px;position: relative;">
-        {{ api.name }}
-      </h1>
+      <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;">
         {{# if api.organization }}
-          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="float: left;position: absolute;left: 65px;padding-top: 9px;color: #555;">
-            {{ api.organization.name }}
+          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
+            {{ api.organization.name }}&nbsp;/
           </a>
         {{ else }}
-          <span style="float: left;position: absolute;left: 65px;padding-top: 8px;color: #555;">
-            {{ api.getApiManagersByName }}
+          <span style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
+            {{ api.getApiManagersByName }}&nbsp;/
           </span>
         {{/ if }}
+        {{ api.name }}
+      </h1>
       </div>
 
-    <div class="col-md-6 secondary-menu-block-inner" style="text-align:center;line-height: 0;">
+    <div class="col-lg-7 col-md-8 col-xs-12 secondary-menu-block-inner" style="text-align:right;line-height: 0;">
       <ul class="nav nav-tabs">
         {{# if currentUser }}
           <li id ="api-details-tab" class="active">
             <a href="#api-details" data-toggle="tab">
               {{_ "viewApiNavigationMenu_details" }}
+            </a>
+          </li>
+        {{/ if }}
+
+        {{# if currentUser }}
+          <li id ="api-auth-tab">
+            <a href="#api-auth" data-toggle="tab">
+              Auth
             </a>
           </li>
         {{/ if }}
@@ -75,15 +83,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         {{/ if }}
       </ul>
-    </div>
-    <div class="col-md-3" style="text-align:right;">
-      {{# if currentUser }}
-        {{# if proxyBackend }}
-            <span class="pull-right" style="margin-top:0.9em;">
-              {{> apiKey api=api proxyBackend=proxyBackend }}
-            </span>
-        {{/ if }}
-      {{/ if }}
     </div>
   </div>
 </div>

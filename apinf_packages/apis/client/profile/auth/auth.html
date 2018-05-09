@@ -1,0 +1,16 @@
+<template name="apiAuth">
+  <h2 style="font-size:1.6em;margin-top:0;text-transform: none;">
+    Authorization
+  </h2>
+  <p style="color: #6d859e;margin-bottom: 1em;">
+    <span class="text-danger">NOTE:&nbsp;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  {{# if currentUser }}
+    {{# if proxyBackend }}
+        <span style="margin-top:0.9em;">
+          {{> apiKey api=api proxyBackend=proxyBackend }}
+        </span>
+    {{/ if }}
+  {{/ if }}
+</template>
