@@ -86,6 +86,7 @@ ProxyV1.swagger = {
         },
         umbProxyUrl: {
           type: 'string',
+          description: 'A URL to proxy',
           format: 'url',
           example: 'https://my.proxy.com:port',
         },
@@ -99,16 +100,17 @@ ProxyV1.swagger = {
           description: 'Authentication Token for API Umbrella',
           example: 'http://link-address-to-specification.com',
         },
-        elasticSearch: {
+        esUrl: {
           type: 'string',
           description: 'A URL to ElasticSearch',
-          example: 'http://url-to-elastic-searchite.com:port',
+          format: 'url',
+          example: 'http://url-to-elastic-search.com:port',
         },
         emqProtocol: {
           type: 'string',
-          enum: ['MQTT', 'MQTTow'],
+          enum: ['MQTT', 'MQTT over websockets'],
           description: 'Protocol is either MQTT or MQTT over websockets',
-          example: 'MQTT | MQTTow',
+          example: 'MQTT | MQTT over websockets',
         },
         emqHost: {
           type: 'string',
