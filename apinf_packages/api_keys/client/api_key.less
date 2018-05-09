@@ -3,26 +3,17 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-#api-key-copy {
-  width: 20em;
-}
-
 #regenerate-api-key {
-  position: absolute;
-  right: 21.5em;
-  padding-top: 0.5em;
-  text-transform: uppercase;
-  display: none;
-  cursor: pointer;
-  color: #4c6072;
+  margin-top: 2em;
+  background-color: transparent;
+  color: rgb(204, 20, 16);
+  font-weight: 400;
+  display: block;
 }
 
-#regenerate-api-key:hover {
-  color: darken(#4c6072, 10%);
-}
-
-.api-page-header:hover {
-  #regenerate-api-key {
-    display: inherit;
-  }
+#regenerate-api-key:focus, #regenerate-api-key.focus {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: transparent;
+  font-weight: 500;
 }

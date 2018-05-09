@@ -5,20 +5,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiKey">
   {{# if showButton }}
+    <h2 style="font-size: 16px;margin-top: 0;">X-Api-Key</h2>
+    <p style="color: #6d859e;margin-bottom:2em;">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
     {{# if apiKey }}
-    <!-- Regenerate API key button -->
-    <span id="regenerate-api-key">
-      {{_ "apiKeys_regenerateButton" }}
-    </span>
-    <div id="api-key-copy" class="input-group">
-      <input type="text" class="form-control" id="api-key" value="{{ apiKey }}">
-      <span class="input-group-btn">
-        <button class="btn btn-default" id="copy-api-key" type="button" data-original-title="Copied!" data-clipboard-target="#api-key">
-          <i class="mdi mdi-content-copy"></i>
-          {{_ "apiKeys_copyButtonText" }}
-        </button>
+      <!-- Regenerate API key button -->
+      <span id="api-key" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
+        {{ apiKey }}
+        <i id="api-key-copy" class="mdi mdi-content-copy" data-clipboard-target="#api-key" style="padding-left:5px;"></i>
       </span>
-    </div>
+      <button class="btn btn-danger" id="regenerate-api-key">
+        {{_ "apiKeys_regenerateButton" }}
+      </button>
     {{ else }}
       <!-- Get API key button -->
       <button id="get-api-key" class="btn btn-success">
