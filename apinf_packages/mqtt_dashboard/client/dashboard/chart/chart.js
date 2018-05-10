@@ -24,8 +24,8 @@ Template.mqttDashboardDisplayRealTimeChart.onRendered(function () {
       labels: [],
       datasets: [
         {
-          backgroundColor: '#e3f2fc',
-          borderColor: '#3886d4',
+          backgroundColor: 'rgba(26, 117, 210, 0.2)',
+          borderColor: 'rgb(26, 117, 210)',
           borderWidth: 2,
           data: [],
           pointRadius: 0,
