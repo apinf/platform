@@ -37,6 +37,6 @@ Meteor.startup(() => {
 
   if (proxy && topics.length > 0) {
     // Restart all cron tasks are related to fetching EMQ Analytics Data
-    Meteor.call('restartEmqAnalyticsDataCron');
+    // Meteor.call('restartEmqAnalyticsDataCron');
   }
 });
