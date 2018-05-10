@@ -25,14 +25,14 @@ Meteor.startup(() => {
     // get data about last 60 days
     const daysCount = 60;
     // get data about last 48 hours
-    const hoursCount = 48;
+    const hoursCount = 24;
     // Set the last day is "today"
     const lastDayType = 'today';
 
     // Make sync call
     // eslint-disable-next-line
     const syncCall = Meteor.call('emqAnalyticsData',
-      proxy._id, daysCount, hoursCount, lastDayType);
+      hoursCount, daysCount, lastDayType);
   }
 
   if (proxy && topics.length > 0) {

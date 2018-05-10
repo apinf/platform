@@ -119,7 +119,7 @@ Meteor.methods({
         const data = {
           proxyId,
           topicId: topic._id,
-          topics: requestTopic,
+          topic: requestTopic,
           date: from,
           date_as_string: dateAsString,
           time_as_string: timeAsString,
