@@ -222,22 +222,22 @@ Meteor.methods({
           // Store comparison data for the current Period for the Topic
           trend[topic] = {
             incomingBandwidth: calculateTrend(
-              currentDataset[topic].incoming_bandwidth, previousDataset[topic].incoming_bandwidth
+              previousDataset[topic].incoming_bandwidth, currentDataset[topic].incoming_bandwidth
             ),
             outgoingBandwidth: calculateTrend(
-              currentDataset[topic].outgoing_bandwidth, previousDataset[topic].outgoing_bandwidth
+              previousDataset[topic].outgoing_bandwidth, currentDataset[topic].outgoing_bandwidth
             ),
             publishedMessages: calculateTrend(
-              currentDataset[topic].message_published, previousDataset[topic].message_published
+              previousDataset[topic].message_published, currentDataset[topic].message_published
             ),
             deliveredMessages: calculateTrend(
-              currentDataset[topic].message_delivered, previousDataset[topic].message_delivered
+              previousDataset[topic].message_delivered, currentDataset[topic].message_delivered
             ),
             subscribedClients: calculateTrend(
-              currentDataset[topic].client_subscribe, previousDataset[topic].client_subscribe
+              previousDataset[topic].client_subscribe, currentDataset[topic].client_subscribe
             ),
             publishedClients: calculateTrend(
-              currentDataset[topic].client_publish, previousDataset[topic].client_publish
+              previousDataset[topic].client_publish, currentDataset[topic].client_publish
             ),
           };
         });
