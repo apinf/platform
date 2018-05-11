@@ -74,9 +74,10 @@ Template.requestsOverTime.onRendered(function () {
   instance.autorun(() => {
     // Get aggregated chart data
     const chartData = Template.currentData().chartData;
+    const dateFormat = Template.currentData().dateFormat;
 
     // Get locale date format
-    const localeDateFormat = getLocaleDateFormat();
+    const localeDateFormat = getLocaleDateFormat(dateFormat);
 
     // Get dates
     const labels = chartData.map(dataset => {

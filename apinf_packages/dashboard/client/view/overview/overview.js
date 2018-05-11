@@ -8,6 +8,7 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
 import {
@@ -34,10 +35,31 @@ Template.dashboardOverviewStatistic.helpers({
 
     return summaryComparing(parameter, dataset, currentTimeframe);
   },
-  timeframeYesterday () {
+  errorCallsText (errorCalls) {
     const timeframe = FlowRouter.getQueryParam('timeframe');
-    // Because typeof timeframe is string
-    return timeframe === '1';
+    let textVariable;
+    const params = {
+      count: errorCalls,
+    };
+    switch (timeframe) {
+      // "Today" is selected
+      case '12': {
+        textVariable = 'dashboardOverviewStatistic_text_errorCallsToday';
+        break;
+      }
+      // "Yesterday" is selected
+      case '48': {
+        textVariable = 'dashboardOverviewStatistic_text_errorCallsYesterday';
+        break;
+      }
+      // "Last N days"
+      default: {
+        textVariable = 'dashboardOverviewStatistic_text_errorCalls';
+        params.timeframe = timeframe;
+      }
+    }
+
+    return TAPi18n.__(textVariable, params);
   },
   timeframe () {
     return FlowRouter.getQueryParam('timeframe');
@@ -71,5 +93,21 @@ Template.dashboardOverviewStatistic.helpers({
     }
 
     return chartData;
+  },
+  dateFormat () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+
+    if (timeframe === '12' || timeframe === '48') {
+      // Locale format of Hours & minutes
+      return 'LT';
+    }
+
+    // Otherwise It's Date format
+    return 'L';
+  },
+  displayTextAverageUsers () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Display text about "Average unique users" for each period except "Today"
+    return timeframe !== '12';
   },
 });

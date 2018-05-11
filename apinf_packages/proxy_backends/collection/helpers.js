@@ -61,4 +61,14 @@ ProxyBackends.helpers({
 
     return apiSlug;
   },
+  elasticsearchHost () {
+    // Get Proxy ID
+    const proxyId = this.proxyId;
+
+    // Get Proxy item
+    const proxy = Proxies.findOne(proxyId);
+
+    // Returns elasticsearch URL if it exists else returns an empty string
+    return _.get(proxy, 'apiUmbrella.elasticsearch', '');
+  },
 });

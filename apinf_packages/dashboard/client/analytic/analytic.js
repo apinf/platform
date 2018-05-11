@@ -42,15 +42,14 @@ Template.apiAnalyticPage.onCreated(function () {
 });
 
 Template.apiAnalyticPage.helpers({
-  proxyBackendId () {
-    const proxyBackend = ProxyBackends.findOne();
-
-    // Make sure proxy backend exists and return ID
-    return proxyBackend && proxyBackend._id;
-  },
   lastUpdateTime () {
     const instance = Template.instance();
 
     return instance.lastUpdateTime.get();
+  },
+  displayLastUpdateTime () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Not display info about Last update if selected "Yesterday" or Today
+    return timeframe !== '48' && timeframe !== '12';
   },
 });

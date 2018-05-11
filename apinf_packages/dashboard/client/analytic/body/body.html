@@ -2,7 +2,6 @@
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
-
 <template name="apiAnalyticPageBody">
   <div data-overview-id="{{ proxyBackendId }}" class="block-wrapper">
     <div class="api-settings">
@@ -31,178 +30,66 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </p>
                 <div class="form-group">
                   {{# if overviewChartResponse }}
-                    {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=proxyBackendId }}
+                  {{> requestsOverTime
+                    chartData=(getChartData 'requests')
+                    proxyBackendId=proxyBackendId
+                    dateFormat=dateFormat
+                  }}
                   {{ else }}
-                    {{> spinner}}
+                  {{> spinner}}
                   {{/ if }}
                 </div>
 
                 {{# if analyticsData }}
-                  <div class="form-group">
-                    <i class="mdi mdi-{{ arrowDirection 'requests' }}"></i>
-                    <!-- Keep the space symbol to set SPAN element a height -->
-                    <span>
-                      {{ summaryComparing 'requests' }}&nbsp;
-                    </span>
-                  </div>
-                {{/ if }}
-
-                <!-- response status list-->
-                <!-- <div class="row">
-                  <span class="text-success col-xs-6 col-md-3">
-                    2XX: {{ getStatusCode 'success' }}
-                  </span>
-                  <span class="text-info col-xs-6 col-md-3">
-                    3XX: {{ getStatusCode 'redirect' }}
-                  </span>
-                  <span class="text-warning col-xs-6 col-md-3">
-                    4XX: {{ getStatusCode 'fail' }}
-                  </span>
-                  <span class="text-danger col-xs-6 col-md-3">
-                    5XX: {{ getStatusCode 'error' }}
-                  </span>
-                </div> -->
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <div class="tab-pane fade" id="response-time-chart">
-        <!-- response time chart -->
-        <div class="row">
-          <div class="col-xs-12 col-md-12">
-            <div class="api-view-card form-group">
-              <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
-                {{_ 'apiAnalyticPageBody_chartTitle_medianResponseTime' }}
-              </h2>
-              <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
-                {{_ 'apiAnalyticPageBody_text_responseTime' time=analyticsData.medianResponseTime }}
-              </p>
-              <div class="form-group">
-                {{# if overviewChartResponse }}
-                  {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackendId }}
-                {{ else }}
-                  {{> spinner}}
-                {{/ if }}
-              </div>
-              {{# if analyticsData }}
                 <div class="form-group">
-                  <i class="mdi mdi-{{ arrowDirection 'time' }}"></i>
+                  <i class="mdi mdi-{{ arrowDirection 'requests' }}"></i>
                   <!-- Keep the space symbol to set SPAN element a height -->
                   <span>
-                    {{ summaryComparing 'time' }}&nbsp;
+                    {{ summaryComparing 'requests' }}&nbsp;
                   </span>
                 </div>
-              {{/ if }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="unique-users-chart">
-        <div class="row">
-          <!-- unique users chart -->
-          <div class="col-xs-12 col-md-12">
-            <div class="api-view-card form-group">
-              <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
-                {{_ 'apiAnalyticPageBody_helpText_averageUniqueUsers' }}
-              </h2>
-              <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
-                {{_ 'apiAnalyticPageBody_text_usersCount' count=analyticsData.avgUniqueUsers }}
-              </p>
-              <div class="form-group">
-                {{# if overviewChartResponse }}
-                  {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=proxyBackendId }}
-                {{ else }}
-                  {{> spinner}}
                 {{/ if }}
               </div>
-              {{# if analyticsData }}
-                <div class="form-group">
-                  <i class="mdi mdi-{{ arrowDirection 'users' }}"></i>
-                  <!-- Keep the space symbol to set SPAN element a height -->
-                  <span>
-                    {{ summaryComparing 'users' }}&nbsp;
-                  </span>
-                </div>
-              {{/ if }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="request-timeline">
-        <div class="row">
-          <!-- request timeline chart -->
-          <div class="col-xs-12 col-md-12">
-            <div class="api-view-card form-group">
-              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-                {{_ 'apiAnalyticPageBody_timelineChartTitle_requests' }}
-              </h2>
-              {{# if timelineChartData }}
-                {{> requestTimeline chartData=timelineChartData listPaths=listPaths }}
-              {{ else }}
-                {{> spinner }}
-              {{/ if }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="response-time-timeline">
-        <div class="row">
-          <!-- response time timeline chart -->
-          <div class="col-xs-12 col-md-12">
-            <div class="api-view-card form-group">
-              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-                {{_ 'apiAnalyticPageBody_timelineChartTitle_time' }}
-              </h2>
-              {{# if timelineChartData }}
-                {{> responseTimeTimeline chartData=timelineChartData listPaths=listPaths }}
-              {{ else }}
-                {{> spinner }}
-              {{/ if }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="list-of-errors">
-        <div class="row">
-          <!-- table with list of errors -->
-          <div class="col-xs-12 col-md-12">
-            <div class="api-view-card table-view form-group">
-              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-                {{_ 'apiAnalyticPageBody_title_errorsStatistic' }}
-              </h2>
-              {{# if errorsStatisticsResponse }}
-                {{> errorsStatisticTable errorsStatistic=errorsStatisticsData }}
-              {{ else }}
-                {{> spinner }}
-              {{/ if }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="most-frequent-users">
-        <div class="row">
-          <!-- table with most frequent users -->
-          <div class="col-xs-12 col-md-12">
-            <div class="api-view-card table-view form-group">
-              <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-                {{_ 'apiAnalyticPageBody_title_mostUsers' }}
-              </h2>
-              {{# if frequentUsersResponse }}
-                {{> mostFrequentUsersTable frequentUsers=frequentUsersData }}
-              {{ else }}
-                {{> spinner }}
-              {{/ if }}
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="tab-pane fade" id="list-of-errors">
+    <div class="row">
+      <!-- table with list of errors -->
+      <div class="col-xs-12 col-md-12">
+        <div class="api-view-card table-view form-group">
+          <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+            {{_ 'apiAnalyticPageBody_title_errorsStatistic' }}
+          </h2>
+          {{# if errorsStatisticsResponse }}
+          {{> errorsStatisticTable errorsStatistic=errorsStatisticsData }}
+          {{ else }}
+          {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="most-frequent-users">
+    <div class="row">
+      <!-- table with most frequent users -->
+      <div class="col-xs-12 col-md-12">
+        <div class="api-view-card table-view form-group">
+          <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+            {{_ 'apiAnalyticPageBody_title_mostUsers' }}
+          </h2>
+          {{# if frequentUsersResponse }}
+          {{> mostFrequentUsersTable frequentUsers=frequentUsersData }}
+          {{ else }}
+          {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

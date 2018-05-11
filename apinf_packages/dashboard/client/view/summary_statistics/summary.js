@@ -118,6 +118,11 @@ Template.dashboardSummaryStatistic.helpers({
       textColor = 'arrow-down';
     }
 
+    // Grey color for text
+    if (direction === 'no-trend') {
+      textColor = 'text-default';
+    }
+
     return textColor;
   },
   displayOverview (parameter) {
