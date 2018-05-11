@@ -251,8 +251,8 @@ ProxyV1.addCollection(Proxies, {
         const userId = this.userId;
         const bodyParams = this.bodyParams;
 
-        // Include also user ID into DB
-        bodyParams.created_by = userId;
+        // structure for inserting values
+        const proxyData = {};
 
         // structure for validating values against schema
         const validateFields = {
@@ -283,9 +283,11 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, detailLine, 'id', duplicateProxy._id);
         }
 
+
         if (!bodyParams.description) {
           return errorMessagePayload(400, 'Parameter "description" is mandatory.');
         }
+
 
         if (!bodyParams.type) {
           return errorMessagePayload(400, 'Parameter "type" is mandatory.');
@@ -304,11 +306,17 @@ ProxyV1.addCollection(Proxies, {
         if (!bodyParams.esUrl) {
           return errorMessagePayload(400, 'Parameter "esUrl" is mandatory.');
         }
-        // regex missing from table, so check generally
-        var re = new RegExp(SimpleSchema.RegEx.Url);
+        // regexes are missing from table, so check generally
+        const re = new RegExp(SimpleSchema.RegEx.Url);
+
         if (!bodyParams.esUrl.match(re)) {
           return errorMessagePayload(400, 'Parameter "esUrl" is not valid.');
         }
+
+        // Fill common parameters
+        proxyData.name = bodyParams.name;
+        proxyData.type = bodyParams.type;
+        proxyData.description = bodyParams.description;
 
         // Check parameter sets depending on proxy type
         if (bodyParams.type === 'apiUmbrella') {
@@ -332,6 +340,14 @@ ProxyV1.addCollection(Proxies, {
             return errorMessagePayload(400, 'Parameter "umbAuthToken" is mandatory.');
           }
           // Fill apiUmbrella parameters
+          const apiUmbrella = {
+            url: bodyParams.umbProxyUrl,
+            apiKey: bodyParams.umbApiKey,
+            authToken: bodyParams.umbAuthToken,
+            elasticsearch: bodyParams.esUrl,
+          };
+          // Add apiUmbrella data into proxy data
+          proxyData.apiUmbrella = apiUmbrella;
 
         } else {
           // Has to be EMQ parameters of broker endpoints in question
@@ -351,7 +367,6 @@ ProxyV1.addCollection(Proxies, {
             return errorMessagePayload(400, 'Parameter "emqHost" is mandatory.');
           }
           // regex missing from table, so check generally
-          var re = new RegExp(SimpleSchema.RegEx.Url);
           if (!bodyParams.emqHost.match(re)) {
             return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
           }
@@ -371,9 +386,6 @@ ProxyV1.addCollection(Proxies, {
             return errorMessagePayload(400, 'Parameter "emqTLS" is mandatory.');
           }
 
-          // Is the API set to public or private
-          const isPublicParam = bodyParams.isPublic;
-
           if (bodyParams.emqTLS === 'true') {
             bodyParams.emqTLS = true;
           } else if (bodyParams.emqTLS === 'false') {
@@ -387,71 +399,50 @@ ProxyV1.addCollection(Proxies, {
             return errorMessagePayload(400, 'Parameter "emqHttpApi" is mandatory.');
           }
           // regex missing from table, so check generally
-          var re = new RegExp(SimpleSchema.RegEx.Url);
           if (!bodyParams.emqHttpApi.match(re)) {
             return errorMessagePayload(400, 'Parameter "emqHttpApi" is not valid.');
           }
 
           // Fill EMQ parameters
+          const emq = {};
+          const brokerEndpoints = [];
+          const brokerEndpoint = {
+            protocol: bodyParams.emqProtocol,
+            host: bodyParams.emqHost,
+            port: bodyParams.emqPort,
+            tls: bodyParams.emqTLS,
+          };
 
+          brokerEndpoints[0] = brokerEndpoint;
+          emq.brokerEndpoints = brokerEndpoints;
+          emq.httpApi = bodyParams.emqHttpApi;
+          emq.elasticsearch = bodyParams.esUrl;
+
+          // Add EMQ data into proxy data
+          proxyData.emq = emq;
         }
 
-
-
-
-
-        // URL is a mandatory field
-        if (!bodyParams.url) {
-          return errorMessagePayload(400, 'Parameter "url" is mandatory.');
-        }
-
-        // Validate URL
-        isValid = Apis.simpleSchema().namedContext().validateOne(
-          validateFields, 'url');
-
-        if (!isValid) {
-          return errorMessagePayload(400, 'Parameter "url" must be a valid URL with http(s).');
-        }
-
-
-
-        // Regex for http(s) protocol
-        const regex = SimpleSchema.RegEx.Url;
-
-        // Documentation URL must have URL format
-        if (documentationUrl) {
-          // Check link validity
-          if (!regex.test(documentationUrl)) {
-            // Error message
-            const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
-            return errorMessagePayload(400, message);
-          }
-        }
-
-
-
-        // Insert API data into collection
-        const proxyId = Proxies.insert(apiData);
+        // Insert Proxy data into collection
+        const proxyId = Proxies.insert(proxyData);
 
         // If insert failed, stop and send response
-        if (!apiId) {
-          return errorMessagePayload(500, 'Insert API card into database failed.');
+        if (!proxyId) {
+          return errorMessagePayload(500, 'Insert Proxy into database failed.');
         }
 
+        // Get inserted Proxy data to check, if insert was successful
+        const insertedProxy = Proxies.findOne({ _id: proxyId });
 
-        // Prepare data to response, extend it with Documentation URLs
-        const responseData = Object.assign(
-          Apis.findOne(apiId),
-          { documentationUrl, externalDocumentation });
-
-        // Give user manager role
-        Roles.addUsersToRoles(userId, 'manager');
+        // Return error response, it Proxy is not found.
+        if (!insertedProxy) {
+          return errorMessagePayload(404, 'Proxy with specified ID is not found.');
+        }
 
         return {
           statusCode: 201,
           body: {
             status: 'success',
-            data: responseData,
+            data: insertedProxy,
           },
         };
       },
@@ -511,235 +502,38 @@ ProxyV1.addCollection(Proxies, {
         ],
       },
       action () {
-        // Used in case of rollback
-        let previousDocumentationUrl;
 
-        // Get data from body parameters
-        const bodyParams = this.bodyParams;
-        // Get ID of API
-        const apiId = this.urlParams.id;
-        // Get current user ID
-        const userId = this.userId;
+        // Get ID of Proxy
+        const proxyId = this.urlParams.id;
 
-        // Find API with specified ID
-        const api = Apis.findOne(apiId);
+        // Get requestor ID from header
+        const requestorId = this.request.headers['x-user-id'];
 
-        // API doesn't exist
-        if (!api) {
-          return errorMessagePayload(404, 'API with specified ID is not found.');
+        if (!requestorId) {
+          return errorMessagePayload(400, 'Erroneous or missing parameter.');
         }
 
-        // API exists but user can not manage
-        if (!api.currentUserCanManage(userId)) {
-          return errorMessagePayload(403, 'You do not have permission for editing this API.');
+        // Requestor must be an administrator
+        if (!Roles.userIsInRole(requestorId, ['admin'])) {
+          return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        // If API name given, check if API with same name already exists
-        if (bodyParams.name) {
-          const duplicateApi = Apis.findOne({ name: bodyParams.name });
+        // Get proxy in question
+        const proxy = Proxies.findOne({ _id: proxyId });
 
-          if (duplicateApi) {
-            const detailLine = 'Duplicate: API with same name already exists.';
-            return errorMessagePayload(400, detailLine, 'id', duplicateApi._id);
-          }
-
-          // Get formed slug
-          const slugData = Meteor.call('formSlugFromName', 'Apis', bodyParams.name);
-          // Check slugData
-          if (slugData && typeof slugData === 'object') {
-            // Include slug
-            bodyParams.slug = slugData.slug;
-            // Include friendlySlugs
-            bodyParams.friendlySlugs = slugData.friendlySlugs;
-          } else {
-            return errorMessagePayload(500, 'Forming slug for API failed!');
-          }
+        // Return error response, it Proxy is not found.
+        if (!proxy) {
+          return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
 
-        // validate values
-        const validateFields = {
-          description: bodyParams.description,
-          lifecycleStatus: bodyParams.lifecycleStatus,
-        };
+        // Proxy modify functionality TODO
 
-        // Description must not exceed field length in DB
-        if (bodyParams.description) {
-          const isValid = Apis.simpleSchema().namedContext().validateOne(
-            validateFields, 'description');
+        // Get inserted Proxy data to check, if insert was successful
+        const insertedProxy = Proxies.findOne({ _id: proxyId });
 
-          if (!isValid) {
-            return errorMessagePayload(400, 'Description length must not exceed 1000 characters.');
-          }
-        }
-
-        // Is value of lifecycle status allowed
-        if (bodyParams.lifecycleStatus) {
-          const isValid = Apis.simpleSchema().namedContext().validateOne(
-            validateFields, 'lifecycleStatus');
-
-          if (!isValid) {
-            return errorMessagePayload(400, 'Parameter lifecycleStatus has erroneous value.');
-          }
-        }
-
-        // Is the API set to public or private
-        const isPublicParam = bodyParams.isPublic;
-
-        if (isPublicParam) {
-          if (isPublicParam === 'true') {
-            bodyParams.isPublic = true;
-          } else if (isPublicParam === 'false') {
-            bodyParams.isPublic = false;
-          } else {
-            return errorMessagePayload(400, 'Parameter isPublic has erroneous value.');
-          }
-        }
-        // Check if link for openAPI documentation was given
-        const documentationUrl = bodyParams.documentationUrl;
-        // Check if link for external documentation was given
-        const externalDocumentation = bodyParams.externalDocumentation;
-
-        if (documentationUrl || externalDocumentation) {
-          // Try to fetch existing documentation
-          const apiDoc = ApiDocs.findOne({ apiId });
-          // Regex for http(s) protocol
-          const regex = SimpleSchema.RegEx.Url;
-
-          // Check link to Documentation URL
-          if (documentationUrl) {
-            // Check link validity
-            if (!regex.test(documentationUrl)) {
-              // Error message
-              const message = 'Parameter "documentationUrl" must be a valid URL with http(s).';
-              return errorMessagePayload(400, message);
-            }
-          }
-
-          // Check link to an external documentation
-          if (externalDocumentation) {
-            // Check link validity
-            if (!regex.test(externalDocumentation)) {
-              // Error message
-              const message = 'Parameter "externalDocumentation" must be a valid URL with http(s).';
-              return errorMessagePayload(400, message);
-            }
-
-            // Check if new external documentation link can be added
-            if (apiDoc && apiDoc.otherUrl) {
-              // Can not add same link again
-              const isLinkAlreadyPresent = apiDoc.otherUrl.includes(externalDocumentation);
-              if (isLinkAlreadyPresent) {
-                const message = 'Same link to "externalDocumentation" already exists.';
-                return errorMessagePayload(400, message, 'url', externalDocumentation);
-              }
-              // Max 8 external documentation links can be added
-              if (apiDoc.otherUrl.length > 7) {
-                const message = 'Maximum number of external documentation links (8) already given.';
-                return errorMessagePayload(400, message);
-              }
-            }
-            // Prepare for rollback of openAPI documentation after possible failure
-            if (apiDoc && apiDoc.remoteFileUrl) {
-              previousDocumentationUrl = apiDoc.remoteFileUrl;
-            }
-          }
-
-          // Update Documentation (or create a new one)
-          const result = ApiDocs.update(
-            { apiId },
-            { $set: {
-              type: 'url',
-              remoteFileUrl: bodyParams.documentationUrl,
-            },
-              $push: { otherUrl: bodyParams.externalDocumentation } },
-            // If apiDocs document did not exist, create a new one
-            { upsert: true },
-          );
-          // If update/insert of document link(s) failed
-          if (result === 0) {
-            return errorMessagePayload(500, 'Update failed because Documentation update fail.');
-          }
-        }
-
-        // Include user ID here so it can be filled to DB correspondingly
-        // Note! Meteor.userId is not available!
-        bodyParams.updated_by = userId;
-
-        // Update API document
-        const result = Apis.update(apiId, { $set: bodyParams });
-        // Check if API update failed
-        if (result === 0) {
-          // Try to rollback documentation update, if necessary
-          if (documentationUrl || externalDocumentation) {
-            if (documentationUrl) {
-              // Restore previous openAPI documentation link, if it exists
-              if (previousDocumentationUrl) {
-                ApiDocs.update(
-                  { apiId },
-                  { $set: {
-                    type: 'url',
-                    remoteFileUrl: previousDocumentationUrl,
-                  },
-                  },
-              );
-              } else {
-                // No previous link, just make it empty
-                ApiDocs.update(
-                  { apiId },
-                  { $unset: {
-                    remoteFileUrl: '',
-                  },
-                  },
-                );
-              }
-            }
-            // Rollback external documentation by removing latest added link
-            if (externalDocumentation) {
-              ApiDocs.update(
-                { apiId },
-                { $set: {
-                  type: 'url',
-                },
-                  $pull: { otherUrl: externalDocumentation } },
-              );
-            }
-          }
-          return errorMessagePayload(500, 'Update failed because API update fail.');
-        }
-
-        // Prepare data to response, extend it with Documentation URLs
-        const responseData = Object.assign(
-          // Get updated value of API
-          Apis.findOne(apiId),
-          // Get updated values of Documentation urls
-          {
-            externalDocumentation: api.otherUrl(),
-            documentationUrl: api.documentationUrl(),
-          });
-
-
-        // Instead of API URL, return API Proxy's URL, if it exists
-        const proxyBackend = ProxyBackends.findOne({ apiId: api._id });
-
-        // If Proxy is API Umbrella, fill in proxy URL
-        if (proxyBackend && proxyBackend.type === 'apiUmbrella') {
-          // Get connected proxy url
-          const proxyUrl = proxyBackend.proxyUrl();
-          // Get proxy backend path
-          const frontendPrefix = proxyBackend.frontendPrefix();
-          // Display also actual API URL
-          responseData.backendURL = responseData.url;
-          responseData.backendPrefix = proxyBackend.backendPrefix();
-
-          // Get name of proxy
-          const proxy = Proxies.findOne(proxyBackend.proxyId);
-          if (proxy) {
-            responseData.proxyName = proxy.name;
-            responseData.proxyType = proxy.type;
-          }
-
-          // Provide full proxy path
-          responseData.url = proxyUrl.concat(frontendPrefix);
+        // Return error response, it Proxy is not found.
+        if (!insertedProxy) {
+          return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
 
         // OK response with API data
@@ -747,7 +541,7 @@ ProxyV1.addCollection(Proxies, {
           statusCode: 200,
           body: {
             status: 'success',
-            data: responseData,
+            data: insertedProxy,
           },
         };
       },
