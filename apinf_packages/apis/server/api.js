@@ -1213,7 +1213,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
       // Get body parameters
       const bodyParams = this.bodyParams;
-      console.log('body=', bodyParams);
 
       // Proxy related checkings
       // proxyId is a required field
