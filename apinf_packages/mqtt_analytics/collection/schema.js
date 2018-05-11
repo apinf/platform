@@ -13,7 +13,7 @@ EmqAnalyticsData.schema = new SimpleSchema({
     type: String,
     optional: false,
   },
-  topicsId: {
+  topicId: {
     type: String,
     optional: false,
   },
