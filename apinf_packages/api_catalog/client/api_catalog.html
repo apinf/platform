@@ -11,8 +11,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ "catalog_Title" }}
         </h1>
       </li>
-      <li class="pull-right catalog-header-search" style="padding-right: 0;margin-top: 0.9em;">
-        {{> searchField }}
+      <!-- <li class=" catalog-header-search" style="padding-right: 0;margin-top: 0.9em;">
+
+      </li> -->
+      <li class="pull-right">
+        {{# if userCanAddApi }}
+          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 0.7em;">
+            Add new API
+          </a>
+        {{/ if }}
       </li>
     </ul>
   </div>

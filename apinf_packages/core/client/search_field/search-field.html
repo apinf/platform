@@ -4,9 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="searchField">
-  <div class="searchblock searchblock-toggle" id="search-form">
+  <div class="searchblock searchblock-toggle" id="search-form" style="margin-top: 15px;">
     <form id="search-form" action="{{ pathFor 'search' }}">
-      <div class="input-group" style="width: 300px;max-width: 500px;">
+      <div class="input-group" style="width: 100%;max-width: 500px;">
         <input
                name="q"
                type="text"
@@ -14,11 +14,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                id="search-text"
                placeholder="Search APIs..."
                style="border-radius: 5px;z-index: 1;">
-        <!-- <div class="input-group-btn">
-          <button class="btn btn-primary" type="submit" id="execute-search">
-            {{_ "searchField_button" }}
-          </button>
-        </div> -->
       </div>
     </form>
   </div>

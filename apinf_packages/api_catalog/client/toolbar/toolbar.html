@@ -49,12 +49,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "catalog_toolbar_filterOptions_apisWithDocumentation" }}
             </label>
           </div>
-        {{# if userCanAddApi }}
-          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 15px;width: 100%;">
-            Add new API
-          </a>
         {{/ if }}
-        {{/ if }}
+        {{> searchField }}
       </div>
     </div>
 </template>

@@ -5,13 +5,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="search">
   <div class="container">
-    <div class="page-header">
+    <div class="row">
       <h1>
         {{_ "searchPage_pageHeader" }}
       </h1>
-    </div>
-
-    <div class="row">
       <form id="search-form">
         <div class="input-group">
           <span class="input-group-addon">
@@ -40,7 +37,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </em>
           </small>
         </h3>
-        {{> apiCatalogGrid apis=searchResults }}
+        {{> apiCatalogTable apis=searchResults }}
       {{ else }}
       <i>
         {{_ "searchPage_noResults" }}
