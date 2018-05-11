@@ -57,6 +57,14 @@ EmqAnalyticsData.schema = new SimpleSchema({
     type: Number,
     optional: false,
   },
+  incomingMessageSizeBytes: {
+    type: Number,
+    optional: false,
+  },
+  outgoingMessageSizeBytes: {
+    type: Number,
+    optional: false,
+  },
 });
 
 EmqAnalyticsData.attachSchema(EmqAnalyticsData.schema);

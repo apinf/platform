@@ -15,6 +15,7 @@ import StoredTopics from '../collection';
 
 // APInf imports
 import { calculateTrend } from '../../dashboard/lib/trend_helpers';
+import promisifyCall from '../../core/helper_functions/promisify_call';
 
 Meteor.methods({
   topicsDataFetch (result, topicsList, secondsCount) {
@@ -182,5 +183,66 @@ Meteor.methods({
     } catch (e) {
       throw new Meteor.Error(e.message);
     }
+  },
+  async dataForTable (dateRange, topicsList) {
+    let currentDataset;
+    const secondsCount = 60 * 60 * 24;
+    const topicsData = [];
+    const trend = {};
+
+    return await promisifyCall('summaryStatisticsTopicMongo', dateRange, topicsList, secondsCount)
+      .then(response => {
+        currentDataset = response;
+
+        const previousPeriodRange = {
+          from: dateRange.doublePeriodAgo,
+          to: dateRange.onePeriodAgo,
+        };
+
+        return promisifyCall('summaryStatisticsTopicMongo', previousPeriodRange, topicsList, secondsCount)
+      })
+      .then(previousDataset => {
+        _.forEach(topicsList, (topic) => {
+          const topicItem = StoredTopics.findOne({value: topic});
+
+          // Store data for the current Period for the Topic
+          const datasetItem = {
+            _id: topicItem._id,
+            value: topic,
+            incomingBandwidth: currentDataset[topic].incoming_bandwidth,
+            outgoingBandwidth: currentDataset[topic].outgoing_bandwidth,
+            publishedMessages: currentDataset[topic].message_published,
+            deliveredMessages: currentDataset[topic].message_delivered,
+            subscribedClients: currentDataset[topic].client_subscribe,
+            publishedClients: currentDataset[topic].client_publish,
+          };
+
+          topicsData.push(datasetItem);
+
+          // Store comparison data for the current Period for the Topic
+          trend[topic] = {
+            incomingBandwidth: calculateTrend(
+              currentDataset[topic].incoming_bandwidth, previousDataset[topic].incoming_bandwidth
+            ),
+            outgoingBandwidth: calculateTrend(
+              currentDataset[topic].outgoing_bandwidth, previousDataset[topic].outgoing_bandwidth
+            ),
+            publishedMessages: calculateTrend(
+              currentDataset[topic].message_published, previousDataset[topic].message_published
+            ),
+            deliveredMessages: calculateTrend(
+              currentDataset[topic].message_delivered, previousDataset[topic].message_delivered
+            ),
+            subscribedClients: calculateTrend(
+              currentDataset[topic].client_subscribe, previousDataset[topic].client_subscribe
+            ),
+            publishedClients: calculateTrend(
+              currentDataset[topic].client_publish, previousDataset[topic].client_publish
+            ),
+          };
+        });
+
+        return { topicsData, trend };
+      });
   },
 });

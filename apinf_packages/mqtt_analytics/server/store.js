@@ -129,6 +129,8 @@ Meteor.methods({
           subscribedClients,
           incomingBandwidth,
           outgoingBandwidth,
+          incomingMessageSizeBytes: incomingSizeBytes,
+          outgoingMessageSizeBytes: outgoingSizeBytes,
         };
 
         if (dataForCurrentTime) {

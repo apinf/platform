@@ -25,7 +25,7 @@ export function getDateRange (timeframe) {
       interval = 'hour';
       subtractInterval = 'hour';
       // Add to range the next hour (excluded border)
-      tomorrow = moment(today).add(1, 'h').valueOf();
+      tomorrow = moment(today).add(1, 'h').set({ m: 0, s: 0, ms: 0 }).valueOf();
       break;
     }
     default: {
@@ -39,11 +39,19 @@ export function getDateRange (timeframe) {
   const startDay = moment(tomorrow).subtract(timeframe, subtractInterval).valueOf();
   const doublePeriodAgo = moment(startDay).subtract(timeframe, subtractInterval).valueOf();
 
+  // return {
+  //   doublePeriodAgo,
+  //   onePeriodAgo: startDay,
+  //   from: startDay,
+  //   to: tomorrow,
+  //   interval,
+  // };
+
   return {
-    doublePeriodAgo,
-    onePeriodAgo: startDay,
-    from: startDay,
-    to: tomorrow,
+    doublePeriodAgo: 1525780800000,
+    onePeriodAgo: 1525867200000,
+    from: 1525867200000,
+    to: 1525953600000,
     interval,
   };
 }

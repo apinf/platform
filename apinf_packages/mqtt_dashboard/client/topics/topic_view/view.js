@@ -25,8 +25,8 @@ Template.topicPage.onCreated(function () {
   const instance = this;
   instance.startDay = '';
 
-  instance.eventType = new ReactiveVar('incoming_bandwidth');
-  instance.timeframe = '1';
+  instance.eventType = new ReactiveVar('message_published');
+  instance.timeframe = '24';
   instance.resetChart = false;
 
   instance.error = new ReactiveVar();
@@ -44,7 +44,7 @@ Template.topicPage.onCreated(function () {
     const secondsCount = calculateSecondsCount(instance.timeframe);
 
     // Fetch & process data
-    Meteor.call('dateHistogramDetailedTopic',
+    Meteor.call('histogramTopicMongo',
       eventType, instance.queryOption, topic, secondsCount, (error, result) => {
         // Mark data is ready
         instance.chartDataReady.set(true);
@@ -70,8 +70,8 @@ Template.topicPage.onCreated(function () {
     const secondsCount = calculateSecondsCount(instance.timeframe);
 
     // Fetch & process data
-    Meteor.call('summaryStatisticsDetailedTopic',
-      dateRange, topic, secondsCount, (error, result) => {
+    Meteor.call('summaryStatisticsTopicMongo',
+      dateRange, [topic], secondsCount, (error, result) => {
         // Mark data is ready
         instance.statisticsReady.set(true);
 
@@ -84,10 +84,10 @@ Template.topicPage.onCreated(function () {
 
         if (periodType === 'current') {
           // Store data for Current Period
-          instance.summaryStatistics.set(result);
+          instance.summaryStatistics.set(result[topic]);
         } else {
           // Store data for Previous Period
-          instance.previousPeriod.set(result);
+          instance.previousPeriod.set(result[topic]);
         }
       });
   };
