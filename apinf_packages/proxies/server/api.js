@@ -11,8 +11,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // Collection imports
-import Apis from '/apinf_packages/apis/collection';
-import ApiDocs from '/apinf_packages/api_docs/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
@@ -248,7 +246,18 @@ ProxyV1.addCollection(Proxies, {
         ],
       },
       action () {
-        const userId = this.userId;
+        // Get requestor ID from header
+        const requestorId = this.request.headers['x-user-id'];
+
+        if (!requestorId) {
+          return errorMessagePayload(400, 'Erroneous or missing parameter.');
+        }
+
+        // Requestor must be an administrator
+        if (!Roles.userIsInRole(requestorId, ['admin'])) {
+          return errorMessagePayload(403, 'User does not have permission.');
+        }
+
         const bodyParams = this.bodyParams;
 
         // structure for inserting values
@@ -348,7 +357,6 @@ ProxyV1.addCollection(Proxies, {
           };
           // Add apiUmbrella data into proxy data
           proxyData.apiUmbrella = apiUmbrella;
-
         } else {
           // Has to be EMQ parameters of broker endpoints in question
           // Check Protocol
@@ -502,7 +510,6 @@ ProxyV1.addCollection(Proxies, {
         ],
       },
       action () {
-
         // Get ID of Proxy
         const proxyId = this.urlParams.id;
 
