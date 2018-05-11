@@ -64,7 +64,7 @@ Template.displayTopicsTable.onCreated(function () {
     Meteor.call('dataForTable', instance.dateRange, topics, (error, result) => {
       // Mark is Ready
       instance.dataIsReady.set(true);
-console.log(result.topicsData)
+
       if (error) {
         // Display error message
         instance.error.set(error.message);
