@@ -4,107 +4,120 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="navbar">
-  <nav class="navbar navbar-new" style="margin-bottom: 0;border-radius: 0;">
+  <nav class="navbar navbar-default main-navigation">
     <div class="container-fluid">
-      <div class="row">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header col-md-3" style="padding-left: 0">
-          <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          {{# if projectLogoExists }}
-          <a href="{{ pathFor 'home' }}" id="frontpage-button" class="pull-left" style="padding-top:14px;">
-            <img class="navbar-logo" src="https://i.imgur.com/1jNbAuL.png">
+      <div class="navbar-header">
+        {{# if projectLogoExists }}
+        <a class="navbar-brand text-hide"
+          href="{{ pathFor 'home' }}" id="frontpage-button"
+          style="background-image:url({{ uploadedProjectLogoLink }})">
+          APInf
+        </a>
+        {{ else }}
+        <div class="project-name">
+          <a href="{{ pathFor 'home' }}" class="project-name-link" id="frontpage-button">
+            {{ branding.siteTitle }}
           </a>
-          {{/ if }}
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="col-md-6 secondary-menu-block-inner collapse navbar-collapse" id="navbar-collapse">
-          <ul class="nav nav-tabs" role="tablist" style="display: inline-block;">
-            {{# if currentUser }}
-            {{# if proxyIsDefined }}
+        {{/ if }}
+      </div>
+      <ul class="nav navbar-nav" id="main-navbar">
+        {{# if currentUser }}
+          {{# if proxyIsDefined }}
             {{# if userCanViewDashboard }}
-            <li class="{{ isActiveRoute 'dashboardPage' }}">
-              <a href="{{ pathFor 'dashboardPage' }}" id="dashboard-button">
-                {{_ "navbar_dashboard" }}
-              </a>
-            </li>
+              <li class="{{ isActiveRoute 'dashboardPage' }} main-links">
+                <a href="{{ pathFor 'dashboardPage' }}" id="dashboard-button">
+                  {{_ "navbar_dashboard" }}
+                </a>
+              </li>
             {{/ if }}
-            {{/ if }}
-            {{/ if }}
-            {{# unless currentUser }}
-            <li>
-              <a href="#">
-                How it works
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Company
-              </a>
-            </li>
-            {{/ unless }}
-            {{# if currentUser }}
-            <li class="{{ isActiveRoute 'apiCatalog' }}">
-              <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
-                APIs
-              </a>
-            </li>
-            {{ else }}
-            <li class="{{ isActiveRoute 'apiCatalog' }}">
-              <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
-                Explore APIs
-              </a>
-            </li>
-            {{/ if }}
-            {{# if currentUser }}
-            <li class="{{ isActiveRoute 'organizationCatalog' }}">
-              <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
-                {{_ "navbar_organizations" }}
-              </a>
-            </li>
-            {{/ if }}
-            {{# if currentUser }}
-            {{# if isInRole 'admin' }}
-            <li class="{{ isActiveRoute 'accountsAdmin' }}">
+          {{/ if }}
+        {{/ if }}
+        <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
+          <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
+            {{_ "navbar_apis" }}
+          </a>
+        </li>
+        <li class="{{ isActiveRoute 'organizationCatalog' }} main-links">
+          <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
+            {{_ "navbar_organizations" }}
+          </a>
+        </li>
+        {{# if currentUser }}
+          {{# if userCanAddApi }}
+          <li class="{{ isActiveRoute 'addApi' }} main-links">
+            <a href="{{ pathFor 'addApi' }}" id="addapi-button">
+              {{_ "navbar_addAPIBackend" }}
+            </a>
+          </li>
+          {{/ if }}
+
+          {{# if isInRole 'admin' }}
+            <li class="{{ isActiveRoute 'accountsAdmin' }} main-links">
               <a href="{{ pathFor 'accountsAdmin' }}" id="users-button">
                 {{_ "navbar_users" }}
               </a>
             </li>
-            {{/ if }}
-            {{/ if }}
-          </ul>
-        </div>
-        <div class="col-md-3 right-menu-div" style="padding-right:0; text-align:right;">
-          {{# if currentUser }}
-          <ul class="nav navbar-nav pull-right" id="user-menu">
-            {{> userMenu user=currentUser }}
-          </ul>
-          {{ else }}
-          <ul class="nav nav-tabs" role="tablist" style="display: inline-block;">
-            <li>
-              <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
-                {{_ "navbar_signIn" }}
-              </a>
-            </li>
-            <li>
-              <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button" style="color: #fff;background-color: #19B934; border-radius: 4px;">
-                {{_ "navbar_signUp" }}
-              </a>
-            </li>
-          </ul>
           {{/ if }}
-        </div>
-      </div>
-    </div><!-- /.navbar-collapse -->
+        {{/ if }}
+        {{# if branding.homeCustomBlock }}
+        <li class="{{ isActiveRoute 'pricing' }} main-links">
+          <a href="{{ pathFor 'pricing' }}" id="pricing-button">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+            {{_ "navbar_pricing" }}
+          </a>
+        </li>
+        {{/ if }}
+        {{# if isInRole 'admin' }}
+        <li class="mobile-links-only  hide-link">
+          <a href="{{ pathFor 'branding' }}" id="branding-button">
+            {{_ "userMenu_branding" }}
+          </a>
+        </li>
+        <li class="mobile-links-only  hide-link">
+          <a href="{{ pathFor 'settings' }}" id="settings-button">
+            {{_ "userMenu_settings" }}
+          </a>
+        </li>
+        <li class="mobile-links-only  hide-link">
+          <a href="{{ pathFor 'proxies' }}" id="proxies-button">
+            {{_ "userMenu_proxies" }}
+          </a>
+        </li>
+        <li class="mobile-links-only  hide-link">
+          <a href="{{ pathFor 'login-platforms' }}" id="login-platforms-button">
+            {{_ "userMenu_loginPlatforms" }}
+          </a>
+        </li>
+        {{/ if }}
+        {{# if currentUser }}
+        <li class="mobile-links-only hide-link">
+          <a href="{{ pathFor 'profile' }}" id="profile-button">
+            <!-- {{_ "userMenu_profile" }} -->
+            Account Settings
+          </a>
+        </li>
+        <li class="mobile-links-only hide-link">
+          <a href="/sign-out" id="signout-button">
+            {{_ "userMenu_signout" }}
+          </a>
+        </li>
+        {{/ if }}
+        {{# if currentUser }}
+        {{> userMenu user=currentUser }}
+        {{ else }}
+        <li class="mobile-links-only">
+          <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
+            {{_ "navbar_signUp" }}
+          </a>
+        </li>
+        <li class="mobile-links-only">
+          <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
+            {{_ "navbar_signIn" }}
+          </a>
+        </li>
+        {{/ if }}
+      </ul>
+    </div>
   </nav>
 </template>
