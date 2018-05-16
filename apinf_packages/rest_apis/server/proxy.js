@@ -174,7 +174,56 @@ ProxyV1.swagger = {
             },
           },
         },
+        emq: {
+          type: 'object',
+          properties: {
+            brokerEndpoints: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  protocol: {
+                    type: 'string',
+                    format: 'url',
+                    example: 'MQTT',
+                  },
+                  host: {
+                    type: 'string',
+                    example: 'https://proxy.url',
+                  },
+                  port: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: '14002',
+                  },
+                  tls: {
+                    type: 'string',
+                    example: 'true',
+                  },
+                }
+              },
+            },
+            httpApi: {
+              type: 'string',
+              format: 'url',
+              example: 'https://emq.httpapi.com',
+            },
+            elasticsearch: {
+              type: 'string',
+              description: 'A URL to ElasticSearch',
+              format: 'url',
+              example: 'http://url-to-elastic-search.com:port',
+            },
+          },
+        },
       },
+    },
+    proxyBackendResponse: {
+      type: 'array',
+      items: {
+        type: 'string',
+        example: 'backend-id',
+      }
     },
   },
 };
