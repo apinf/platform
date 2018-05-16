@@ -19,6 +19,7 @@ import StoredTopics from '../../../collection/index';
 import { remainingTrafficRequest, topicsDataRequest } from '../../../lib/es_requests';
 import { calculateSecondsCount, getDateRange } from '../../../lib/helpers';
 import { arrowDirection, percentageValue } from '../../../../dashboard/lib/trend_helpers';
+import promisifyCall from '../../../../core/helper_functions/promisify_call';
 
 Template.displayTopicsTable.onCreated(function () {
   const instance = this;
@@ -61,24 +62,30 @@ Template.displayTopicsTable.onCreated(function () {
     // Calculate for Bandwidth data
     const secondsCount = calculateSecondsCount(instance.timeframe);
 
-    Meteor.call('dataForTable', instance.dateRange, topics, (error, result) => {
-      // Mark is Ready
-      instance.dataIsReady.set(true);
+    promisifyCall('emqElastisticsearchMulti', instance.timeframe)
+      .then(response => {
+        // Mark is Ready
+          instance.dataIsReady.set(true);
+      })
 
-      if (error) {
-        // Display error message
-        instance.error.set(error.message);
-        throw new Meteor.Error(error.message);
-      }
-
-      // Store the table data
-      instance.topicsData.set(result.topicsData);
-
-      // Store the comparison data
-      const trend = instance.trend.get();
-      // Extend the current Object
-      instance.trend.set(Object.assign(trend, result.trend));
-    });
+    // Meteor.call('dataForTable', instance.dateRange, topics, (error, result) => {
+    //   // Mark is Ready
+    //   instance.dataIsReady.set(true);
+    //
+    //   if (error) {
+    //     // Display error message
+    //     instance.error.set(error.message);
+    //     throw new Meteor.Error(error.message);
+    //   }
+    //
+    //   // Store the table data
+    //   instance.topicsData.set(result.topicsData);
+    //
+    //   // Store the comparison data
+    //   const trend = instance.trend.get();
+    //   // Extend the current Object
+    //   instance.trend.set(Object.assign(trend, result.trend));
+    // });
 
     // // Build Request body
     // const queryBody = topicsDataRequest(instance.dateRange, filters, clientFilters);

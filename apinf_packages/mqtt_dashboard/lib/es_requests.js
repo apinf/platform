@@ -423,3 +423,113 @@ export function summaryStatisticsTopicsRequest (dateRange) {
     },
   };
 }
+
+export function topicsTablePublishedType (topicsFilter) {
+  return JSON.stringify({
+    size: 0,
+    query: {
+      bool: {},
+    },
+    aggs: {
+      group_by_topic: {
+        filters: {
+          filters: {"/hfp/v1/journey/ongoing/train/": { prefix: { "topic.keyword": "/hfp/v1/journey/ongoing/train/"}}}},
+        aggs: {
+          client_published: {
+            cardinality: {
+              field: 'from.client_id.keyword',
+            },
+          },
+          incoming_bandwidth: {
+            sum: { field: 'size' },
+          },
+        },
+      },
+    },
+  });
+}
+
+export function topicsTableDeliveredType (topicsFilter) {
+  return JSON.stringify({
+    size: 1,
+    query: {
+      bool: {},
+    },
+    // aggs: {
+    //   group_by_topic: {
+    //     filters: {
+    //       filters: {
+    //         "/hfp/v1/journey/ongoing/train/": {
+    //           prefix: {
+    //             "topic.keyword": "/hfp/v1/journey/ongoing/train/"
+    //           }
+    //         }
+    //       }
+    //     },
+    //     aggs: {
+    //       outgoing_bandwidth: {
+    //         sum: { field: 'size' },
+    //       },
+    //     },
+    //   },
+    // },
+  });
+}
+
+export function topicsTableSubscribedType (topicsFilter) {
+  return JSON.stringify({
+    size: 0,
+    query: {
+      bool: {},
+    },
+    aggs: {
+      group_by_topic: {
+        "filters": {
+          "filters": {"/hfp/v1/journey/ongoing/train/": { "prefix": { "topic.keyword": "/hfp/v1/journey/ongoing/train/"}}}},
+        aggs: {
+          client_subscribe: {
+            cardinality: {
+              field: 'from.client_id.keyword',
+            },
+          }
+        },
+      },
+    },
+  });
+}
+
+export function indexesSet(timeframe, eventType, period) {
+  // Last 24 hours
+  if (timeframe === '48') {
+    return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>`;
+  }
+
+  // Last 7 days
+  if (timeframe === '7') {
+    if (period === 'current') {
+      return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>,` +
+        `<${eventType}-{now/d-2d}>,<${eventType}-{now/d-3d}>,` +
+        `<${eventType}-{now/d-4d}>,<${eventType}-{now/d-5d}>,` +
+        `<${eventType}-{now/d-6d}>`;
+    }
+
+    // Previous period
+    return `<${eventType}-{now/d-7d}>,<${eventType}-{now/d-8d}>,` +
+      `<${eventType}-{now/d-9d}>,<${eventType}-{now/d-10d}>,` +
+      `<${eventType}-{now/d-11d}>,<${eventType}-{now/d-12d}>,` +
+      `<${eventType}-{now/d-13d}>`;
+  }
+
+  // Last 30 days
+  if (timeframe === '30') {
+    return `<${eventType}-*>`;
+  }
+
+  // Last 24 hours
+  if (timeframe === '1') {
+    if (period === 'current') {
+      return `<${eventType}-{now/d}>`;
+    }
+    return `<${eventType}-{now/d-1d}>`;
+  }
+}

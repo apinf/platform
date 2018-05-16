@@ -31,8 +31,8 @@ Meteor.startup(() => {
 
     // Make sync call
     // eslint-disable-next-line
-    const syncCall = Meteor.call('emqAnalyticsData',
-      hoursCount, daysCount, lastDayType);
+    // const syncCall = Meteor.call('emqAnalyticsData',
+    //   hoursCount, daysCount, lastDayType);
   }
 
   if (proxy && topics.length > 0) {
