@@ -8,13 +8,14 @@ const descriptionProxies = {
   generalDescription: `
   ### Providing traffic information of APIs ###
 
-  When API calls are redirected via proxy, data of use is collected automatically.
+  When API calls are redirected via proxy, data about API calls (requests and responses)
+  is collected automatically.
   Based on this data, the API owner gets information of API usage.
 
   With this API the proxies can be
   - created
   - listed
-  - edited
+  - modified
   - removed.
 
   Example calls:
@@ -22,21 +23,21 @@ const descriptionProxies = {
   GET /proxies
 
   Result: Responds with HTTP code 200 and a list of available proxies.
-
   `,
   // --------------------------------------------
   getAllProxies: `
-  ### List of available proxies ###
+  ### List all available proxies ###
 
   Admin user can get list of available proxies.
 
-  On success case the response contains list of proxies with following information
+  On successful case the response contains list of existing proxies including following information
   - proxy id
   - proxy name
   - proxy description
   - proxy type
 
-  In addition there is (if defined) information according to proxy type
+  Depending on proxy type, there is information accordingly either about
+  apiUmbrella of EMQ
   - API Umbrella
     - proxy URL
     - API key
@@ -44,11 +45,17 @@ const descriptionProxies = {
     - elastic search URL.
 
   - EMQ
-    - corresponding fields...
+    - brokerEndpoints
+      - Protocol
+      - Host
+      - Port
+      - TLS activation status
+    - httpApi
+    - elastic search URL
 
   Example calls:
 
-  GET /proxies
+    GET /proxies
 
   Result: Responds with HTTP code 200 and a list of available proxies.
 
@@ -56,11 +63,11 @@ const descriptionProxies = {
   `,
   // --------------------------------------------
   getProxy: `
-  ### Details of one proxy ###
+  ### List details of an identified proxy ###
 
   Admin user can get information of a proxy identified with proxy id.
 
-  On success returns list of proxies detailing
+  On success returns list of proxy's details
   - proxy id
   - proxy name
   - proxy description
@@ -79,14 +86,13 @@ const descriptionProxies = {
     - Protocol
     - Host
     - Port
-    - TLS
+    - TLS activation status
   - httpApi
   - elastic search URL
 
-
   Example calls:
 
-  GET /proxies
+    GET /proxies/<proxy id>
 
   Result: Responds with HTTP code 200 and proxy information.
 
@@ -94,7 +100,7 @@ const descriptionProxies = {
   `,
   // --------------------------------------------
   deleteProxy: `
-  ### Deletes a proxy ###
+  ### Remove an identified proxy ###
 
   Admin user can delete an identified Proxy.
 
@@ -104,75 +110,94 @@ const descriptionProxies = {
 
   Result: deletes the Proxy identified with <proxy id> and responds with HTTP code 204.
 
-  If match is not found, the operation is considered as failed.
+  If match is not found, the operation is considered as failure. A Proxy with
+  are connected backends cannot be removed.
   `,
   // --------------------------------------------
   postProxy: `
-  ### Adds a new Proxy ###
+  ### Add a new Proxy ###
 
-  Adds a new Proxy. On success, returns the added Proxy object.
-
+  Admin can add a new Proxy.
+  On success, returns the added Proxy object.
 
   Parameters (all are mandatory)
-  * name
+  * name (must be unique)
   * description
-  * proxy type (apiUmbrella | EMQ)
+  * type = proxy type, (apiUmbrella | EMQ)
 
-  Proxy type related parameters according to selected proxy type:
+  Proxy type related parameters.
+  The parameter set according to selected proxy type is mandatory.
 
   API Umbrella:
-  - proxy URL
-  - API key
-  - Authentication Token
-  - ElasticSearch URL
+  - umbProxyUrl = proxy URL
+  - umbApiKey = API key
+  - umbAuthToken = Authentication Token
+  - esUrl = ElasticSearch URL
 
   EMQ:
+  - emqHttpApi = Configuration API endpoint
+  - esUrl = ElasticSearch URL
   - Broker Endpoint (one or several) consisting of:
-    - protocol (MQTT | MQTT over websockets)
-    - Host URL
-    - Port
-    - TLS activation (true | false)
-  - Configuration API endpoint
-  - ElasticSearch URL
+    - emqProtocol = protocol to be used (MQTT | MQTT over websockets)
+    - emqHost = Host URL
+    - emqPort = Port used in Host URL
+    - emqTLS = TLS activation (true | false)
 
   Example call:
 
     POST /proxies/
 
   Result: creates a new Proxy and responds with HTTP code 201.
-
-
   `,
   // --------------------------------------------
   putProxy: `
-  ### Updates a Proxy ###
+  ### Update an existing Proxy ###
 
-  Admin can update settings of an existing Proxy.
-  On success, returns the updated API object.
+  Admin can update settings of an existing Proxy. Only parameters related to existing
+  proxy type can be modified.
+  At least one parameter in set according to proxy type must be given.
+  Parameters in wrong set must not be given.
+
+  With parameter *beIndex* is indicated, which broker endpoint data is to be modified.
+  Also a new occurrence can be added to
+  - a hole in broker endpoint list (*beIndex* points to hole) or
+  - end of broker endpoint list (*beIndex* points to length of list)
+
+  With parameter *beIndexRemove* is indicated, which broker endpoint data is to be removed.
+
+
+  Note! Type of Proxy can not be changed.
+
+  On success, returns the updated Proxy object.
+  Error cases:
+  - no parameter given
+  - unknown parameter or parameter in wrong type set given
+  - parameter validation fails
 
   Parameters:
-  * proxy ID
+  * proxy ID (in path)
   * name
   * description
-  * proxy type (apiUmbrella | EMQ)
 
-  Proxy type related parameters according to selected proxy type:
+  Proxy type related parameters.
 
   API Umbrella:
-  - proxy URL
-  - API key
-  - Authentication Token
-  - ElasticSearch URL
+  - umbProxyUrl = proxy URL
+  - umbApiKey = API key
+  - umbAuthToken = Authentication Token
+  - esUrl = ElasticSearch URL
 
   EMQ:
+  - emqHttpApi = Configuration API endpoint
+  - esUrl = ElasticSearch URL
   - Broker Endpoint (one or several) consisting of:
-    - protocol (MQTT | MQTT over websockets)
-    - Host URL
-    - Port
-    - TLS activation (true | false)
-  - Configuration API endpoint
-  - ElasticSearch URL
+    - emqProtocol = protocol to be used (MQTT | MQTT over websockets)
+    - emqHost = Host URL
+    - emqPort = Port used in Host URL
+    - emqTLS = TLS activation (true | false)
 
+  - beIndex = indicates the broker endpoint occurrence, which data is modified
+  - beIndexRemove = indicates, which broker endpoint is to be removed
 
   Example call:
 
@@ -180,7 +205,23 @@ const descriptionProxies = {
 
   Result: updates the Proxy identified with <proxy id> and responds with HTTP code 200
   and proxy information.
+  `,
+  // --------------------------------------------
+  getProxyBackends: `
+  ### List all backends connected to Proxy in question ###
 
+  Admin user can get list of backends connected to Proxy in question.
+
+  Parameters:
+  - proxy id (in path)
+
+  Example calls:
+
+    GET /proxies/<proxy_id>/proxyBackends
+
+  Result: Responds with HTTP code 200 and a list of connected backend ids.
+
+  If no backends are connected, returns an empty list.
   `,
 
 };
