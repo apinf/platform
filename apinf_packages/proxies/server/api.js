@@ -41,7 +41,7 @@ ProxyV1.addCollection(Proxies, {
           ProxyV1.swagger.tags.proxy,
         ],
         summary: 'Get list of available proxies.',
-        description: descriptionProxies.getProxies,
+        description: descriptionProxies.getAllProxies,
         parameters: [],
         responses: {
           200: {
@@ -197,7 +197,6 @@ ProxyV1.addCollection(Proxies, {
         };
       },
     },
-
     // Create a new Proxy
     post: {
       authRequired: true,
@@ -292,11 +291,9 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, detailLine, 'id', duplicateProxy._id);
         }
 
-
         if (!bodyParams.description) {
           return errorMessagePayload(400, 'Parameter "description" is mandatory.');
         }
-
 
         if (!bodyParams.type) {
           return errorMessagePayload(400, 'Parameter "type" is mandatory.');
@@ -510,7 +507,26 @@ ProxyV1.addCollection(Proxies, {
         ],
       },
       action () {
-        // Get ID of Proxy
+        /* Logic in nutshell
+           1. Given parameter values are copied to bodyParams
+           2. Existing Proxy values are read from DB to be basis for update (proxyData)
+           3. Processing
+              3.1 Given parameter values are verified, if necessary
+              3.2 proxyData parameters are modified with new parameter values (bodyParams)
+              3.3 Processed parameters are removed from bodyParams
+           4. Checked, if unprocessed, i.e. erroneous parameters are left in bodyParams
+           5. Modified proxyData is updated to DB
+           6. Proxy data is read from DB and returned in response
+        */
+
+        // Get given parameters
+        const bodyParams = this.bodyParams;
+
+        if (!Object.keys(bodyParams).length){
+          return errorMessagePayload(400, 'No parameters given.');
+        }
+
+        // Get ID of Proxy to be updated
         const proxyId = this.urlParams.id;
 
         // Get requestor ID from header
@@ -525,17 +541,211 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        // Get proxy in question
-        const proxy = Proxies.findOne({ _id: proxyId });
+        // Get the proxy data to be updated
+        const proxyData = Proxies.findOne({ _id: proxyId });
 
         // Return error response, it Proxy is not found.
-        if (!proxy) {
+        if (!proxyData) {
           return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
 
-        // Proxy modify functionality TODO
+        // Structure for validating values against schema
+        const validateFields = {
+          name: bodyParams.name,
+          type: bodyParams.type,
+          'apiUmbrella.url': bodyParams.umbProxyUrl,
+          'emq.brokerEndpoints.$.protocol': bodyParams.emqProtocol,
+          'emq.brokerEndpoints.$.port': bodyParams.emqPort,
+        };
 
-        // Get inserted Proxy data to check, if insert was successful
+        // In update we do not need id of existing proxy's data
+        delete proxyData['_id'];
+
+        // regexes are missing from table from part of fields, so check generally
+        const re = new RegExp(SimpleSchema.RegEx.Url);
+
+        // Check apiUmbrella elasticSearch URL, might be used in both cases
+        if (bodyParams.esUrl) {
+          if (!bodyParams.esUrl.match(re)) {
+            return errorMessagePayload(400, 'Parameter "esUrl" is not valid.');
+          }
+        }
+
+        // Update Name, if it is given properly
+        if (bodyParams.name) {
+          // Validate name
+          let isValid = Proxies.simpleSchema().namedContext().validateOne(
+            validateFields, 'name');
+
+          if (!isValid) {
+            return errorMessagePayload(400, 'Parameter "name" is erroneous.');
+          }
+          // Check if Proxy with same name already exists
+          const duplicateProxy = Proxies.findOne({ name: bodyParams.name });
+
+          if (duplicateProxy) {
+            const detailLine = 'Duplicate: Proxy with same name already exists.';
+            return errorMessagePayload(400, detailLine, 'id', duplicateProxy._id);
+          }
+
+          proxyData.name = bodyParams.name;
+          delete bodyParams['name'];
+        }
+
+        // Check if Description is given
+        if (bodyParams.description) {
+          proxyData.description = bodyParams.description;
+          delete bodyParams['description'];
+        }
+
+        // Update parameter sets depending on existing proxy type
+        if (proxyData.type === 'apiUmbrella') {
+          // Check apiUmbrella Proxy URL
+          if (bodyParams.umbProxyUrl) {
+            // Check URL validation
+            isValid = Proxies.simpleSchema().namedContext().validateOne(
+              validateFields, 'apiUmbrella.url');
+
+            if (!isValid) {
+              return errorMessagePayload(400, 'Proxy URL not valid.');
+            }
+            proxyData.apiUmbrella.url = bodyParams.umbProxyUrl;
+            delete bodyParams['umbProxyUrl'];
+          }
+
+          // Check apiUmbrella API Key
+          if (bodyParams.umbApiKey) {
+            proxyData.apiUmbrella.apiKey = bodyParams.umbApiKey;
+            delete bodyParams['umbApiKey'];
+          }
+          // Check apiUmbrella Authentication Token
+          if (bodyParams.umbAuthToken) {
+            proxyData.apiUmbrella.authToken = bodyParams.umbAuthToken;
+            delete bodyParams['umbAuthToken'];
+          }
+          if (bodyParams.esUrl) {
+            proxyData.apiUmbrella.elasticsearch = bodyParams.esUrl;
+            delete bodyParams['esUrl'];
+          };
+        } else {
+          // Based on current EMQ parameters
+          // Check EMQ http API
+          if (bodyParams.emqHttpApi) {
+            // regex missing from table, so check generally
+            if (!bodyParams.emqHttpApi.match(re)) {
+              return errorMessagePayload(400, 'Parameter "emqHttpApi" is not valid.');
+            }
+            proxyData.emq.httpApi = bodyParams.emqHttpApi;
+            delete bodyParams['emqHttpApi'];
+          }
+
+          // Check is ElasticSearch URL was given
+          if (bodyParams.esUrl) {
+            proxyData.emq.elasticsearch = bodyParams.esUrl;
+            delete bodyParams['esUrl'];
+          };
+          // Count number of broker endpoints
+          const countOfEndpoints = proxyData.emq.brokerEndpoints.length;
+
+          // If broker endpoint data is given, an index parameter is needed to point to one updated
+          if (bodyParams.emqProtocol || bodyParams.emqHost || bodyParams.emqPort || bodyParams.emqTLS) {
+            if (!bodyParams.beIndex) {
+              return errorMessagePayload(400, 'Index for broker endpoint is missing.');
+            }
+
+            // Check if beIndex has correct value
+            if (isNaN(bodyParams.beIndex) || 1 * bodyParams.beIndex < 0 || 1 * bodyParams.beIndex > countOfEndpoints) {
+              const detailLine = `Allowed value range for "beIndex" are 0 - ${countOfEndpoints}`;
+              return errorMessagePayload(400, detailLine, 'beIndex', bodyParams.beIndex);
+            }
+            // Object for collecting input parameters
+            let brokerEndpoint = {};
+            if (proxyData.emq.brokerEndpoints[bodyParams.beIndex]) {
+              // If broker endpoint exists, we are updating it
+              brokerEndpoint = proxyData.emq.brokerEndpoints[bodyParams.beIndex];
+            } else {
+              // BE does not exist, so we are creating a new one
+              // All related parameters are needed
+              if (!bodyParams.emqProtocol || !bodyParams.emqHost || !bodyParams.emqPort || !bodyParams.emqTLS) {
+                return errorMessagePayload(400, 'All broker endpoint parameters are needed.');
+              }
+            }
+
+            // Check Protocol
+            if (bodyParams.emqProtocol) {
+              // Check URL validation
+              isValid = Proxies.simpleSchema().namedContext().validateOne(
+                validateFields, 'emq.brokerEndpoints.$.protocol');
+
+              if (!isValid) {
+                return errorMessagePayload(400, 'EMQ protocol not valid.');
+              }
+              brokerEndpoint.protocol = bodyParams.emqProtocol;
+              delete bodyParams['emqProtocol'];
+            }
+            // Check EMQ host
+            if (bodyParams.emqHost) {
+              // regex missing from table, so check generally
+              if (!bodyParams.emqHost.match(re)) {
+                return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
+              }
+              brokerEndpoint.host = bodyParams.emqHost;
+              delete bodyParams['emqHost'];
+            }
+            // Check EMQ host port
+            if (bodyParams.emqPort) {
+              // Check port validation
+              if (isNaN(bodyParams.emqPort) || bodyParams.emqPort < 0 || bodyParams.emqPort > 65535) {
+                return errorMessagePayload(400, 'Parameter "emqPort" has erroneous value.',
+                'emqPort', bodyParams.emqPort);
+              }
+              brokerEndpoint.port = bodyParams.emqPort;
+              delete bodyParams['emqPort'];
+            }
+            // Check EMQ TLS
+            if (bodyParams.emqTLS) {
+              if (bodyParams.emqTLS === 'true') {
+                bodyParams.emqTLS = true;
+              } else if (bodyParams.emqTLS === 'false') {
+                bodyParams.emqTLS = false;
+              } else {
+                return errorMessagePayload(400, 'Parameter "emqTLS" has erroneous value.');
+              }
+              brokerEndpoint.tls = bodyParams.emqTLS;
+              delete bodyParams['emqTLS'];
+            }
+            // Fill newly filled or modified broker endpoint to proxy data
+            proxyData.emq.brokerEndpoints[bodyParams.beIndex] = brokerEndpoint;
+            delete bodyParams['beIndex'];
+          }
+
+          // Check if a broker endpoint is to be removed
+          if (bodyParams.beIndexRemove) {
+            // Check if beIndexRemove has correct value
+            if (isNaN(bodyParams.beIndexRemove) ||
+                1 * bodyParams.beIndexRemove < 0 ||
+                1 * bodyParams.beIndexRemove > (countOfEndpoints - 1)) {
+              const detailLine = `Allowed value range for "beIndexRemove" are 0 - ${countOfEndpoints-1}`;
+              return errorMessagePayload(400, detailLine, 'beIndexRemove', bodyParams.beIndexRemove);
+            }
+            if (!proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove]) {
+              // Error: Broker Endpoint does not exist
+              return errorMessagePayload(400, 'Broker endpoint does not exist.');
+            }
+            // Remove the indicated broker endpoint
+            delete proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove];
+            delete bodyParams['beIndexRemove'];
+          }
+        }
+        // If there are any parameters left, they are erroneous
+        if (Object.keys(bodyParams).length){
+          return errorMessagePayload(400, 'Unknown parameters were given.', 'Params', bodyParams);
+        }
+
+        // Update changed Proxy data
+        Proxies.update({ _id: proxyId }, { $set: proxyData });
+
+        // Get inserted Proxy data to response with successful outcome
         const insertedProxy = Proxies.findOne({ _id: proxyId });
 
         // Return error response, it Proxy is not found.
@@ -640,12 +850,13 @@ ProxyV1.addCollection(Proxies, {
     },
   },
 });
-
 // Request /rest/v1/proxies/:id/proxyBackends/
 ProxyV1.addRoute('proxies/:id/proxyBackends', {
   // Show list of proxy backends connected to Proxy
   get: {
-    authRequired: false,
+    authRequired: true,
+    // Admin role is required
+    roleRequired: ['admin'],
     swagger: {
       tags: [
         ProxyV1.swagger.tags.proxy,
@@ -666,13 +877,10 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
                 example: 'success',
               },
               data: {
-                $ref: '#/definitions/proxyResponse',
+                $ref: '#/definitions/proxyBackendResponse',
               },
             },
           },
-        },
-        204: {
-          description: 'No data to return',
         },
         404: {
           description: 'Proxy is not Found',
