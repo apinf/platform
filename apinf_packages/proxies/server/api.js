@@ -522,7 +522,7 @@ ProxyV1.addCollection(Proxies, {
         // Get given parameters
         const bodyParams = this.bodyParams;
 
-        if (!Object.keys(bodyParams).length){
+        if (!Object.keys(bodyParams).length) {
           return errorMessagePayload(400, 'No parameters given.');
         }
 
@@ -559,7 +559,7 @@ ProxyV1.addCollection(Proxies, {
         };
 
         // In update we do not need id of existing proxy's data
-        delete proxyData['_id'];
+        delete proxyData._id;
 
         // regexes are missing from table from part of fields, so check generally
         const re = new RegExp(SimpleSchema.RegEx.Url);
@@ -574,7 +574,7 @@ ProxyV1.addCollection(Proxies, {
         // Update Name, if it is given properly
         if (bodyParams.name) {
           // Validate name
-          let isValid = Proxies.simpleSchema().namedContext().validateOne(
+          const isValid = Proxies.simpleSchema().namedContext().validateOne(
             validateFields, 'name');
 
           if (!isValid) {
@@ -589,13 +589,13 @@ ProxyV1.addCollection(Proxies, {
           }
 
           proxyData.name = bodyParams.name;
-          delete bodyParams['name'];
+          delete bodyParams.name;
         }
 
         // Check if Description is given
         if (bodyParams.description) {
           proxyData.description = bodyParams.description;
-          delete bodyParams['description'];
+          delete bodyParams.description;
         }
 
         // Update parameter sets depending on existing proxy type
@@ -603,30 +603,30 @@ ProxyV1.addCollection(Proxies, {
           // Check apiUmbrella Proxy URL
           if (bodyParams.umbProxyUrl) {
             // Check URL validation
-            isValid = Proxies.simpleSchema().namedContext().validateOne(
+            const isValid = Proxies.simpleSchema().namedContext().validateOne(
               validateFields, 'apiUmbrella.url');
 
             if (!isValid) {
               return errorMessagePayload(400, 'Proxy URL not valid.');
             }
             proxyData.apiUmbrella.url = bodyParams.umbProxyUrl;
-            delete bodyParams['umbProxyUrl'];
+            delete bodyParams.umbProxyUrl;
           }
 
           // Check apiUmbrella API Key
           if (bodyParams.umbApiKey) {
             proxyData.apiUmbrella.apiKey = bodyParams.umbApiKey;
-            delete bodyParams['umbApiKey'];
+            delete bodyParams.umbApiKey;
           }
           // Check apiUmbrella Authentication Token
           if (bodyParams.umbAuthToken) {
             proxyData.apiUmbrella.authToken = bodyParams.umbAuthToken;
-            delete bodyParams['umbAuthToken'];
+            delete bodyParams.umbAuthToken;
           }
           if (bodyParams.esUrl) {
             proxyData.apiUmbrella.elasticsearch = bodyParams.esUrl;
-            delete bodyParams['esUrl'];
-          };
+            delete bodyParams.esUrl;
+          }
         } else {
           // Based on current EMQ parameters
           // Check EMQ http API
@@ -636,52 +636,72 @@ ProxyV1.addCollection(Proxies, {
               return errorMessagePayload(400, 'Parameter "emqHttpApi" is not valid.');
             }
             proxyData.emq.httpApi = bodyParams.emqHttpApi;
-            delete bodyParams['emqHttpApi'];
+            delete bodyParams.emqHttpApi;
           }
 
           // Check is ElasticSearch URL was given
           if (bodyParams.esUrl) {
             proxyData.emq.elasticsearch = bodyParams.esUrl;
-            delete bodyParams['esUrl'];
-          };
-          // Count number of broker endpoints
-          const countOfEndpoints = proxyData.emq.brokerEndpoints.length;
+            delete bodyParams.esUrl;
+          }
+          // Check if broker endpoint data is to be modified
+          // Count number of broker endpoints currently in DB
+          const countOfBE = proxyData.emq.brokerEndpoints.length;
 
-          // If broker endpoint data is given, an index parameter is needed to point to one updated
-          if (bodyParams.emqProtocol || bodyParams.emqHost || bodyParams.emqPort || bodyParams.emqTLS) {
+          // Is the beIndex given
+          if (bodyParams.beIndex) {
+            // Does the beIndex have correct value
+            if (isNaN(bodyParams.beIndex) ||
+                1 * bodyParams.beIndex < 0 ||
+                1 * bodyParams.beIndex > countOfBE) {
+              const detailLine = `Allowed range for "beIndex" is 0 - ${countOfBE}`;
+              return errorMessagePayload(400, detailLine, 'beIndex', bodyParams.beIndex);
+            }
+            // At least one of broker endpoint values must be given
+            if (!bodyParams.emqProtocol &&
+                !bodyParams.emqHost &&
+                !bodyParams.emqPort &&
+                !bodyParams.emqTLS) {
+              const detailLine = `Broker endpoint index given without change values.`;
+              return errorMessagePayload(400, detailLine);
+            }
+          }
+
+          // Is broker endpoint data given
+          if (bodyParams.emqProtocol ||
+              bodyParams.emqHost ||
+              bodyParams.emqPort ||
+              bodyParams.emqTLS) {
+            // Also broker endpoint index must be given
             if (!bodyParams.beIndex) {
               return errorMessagePayload(400, 'Index for broker endpoint is missing.');
             }
 
-            // Check if beIndex has correct value
-            if (isNaN(bodyParams.beIndex) || 1 * bodyParams.beIndex < 0 || 1 * bodyParams.beIndex > countOfEndpoints) {
-              const detailLine = `Allowed value range for "beIndex" are 0 - ${countOfEndpoints}`;
-              return errorMessagePayload(400, detailLine, 'beIndex', bodyParams.beIndex);
-            }
             // Object for collecting input parameters
             let brokerEndpoint = {};
             if (proxyData.emq.brokerEndpoints[bodyParams.beIndex]) {
               // If broker endpoint exists, we are updating it
               brokerEndpoint = proxyData.emq.brokerEndpoints[bodyParams.beIndex];
-            } else {
+            } else if (!bodyParams.emqProtocol ||
+                       !bodyParams.emqHost ||
+                       !bodyParams.emqPort ||
+                       !bodyParams.emqTLS) {
               // BE does not exist, so we are creating a new one
               // All related parameters are needed
-              if (!bodyParams.emqProtocol || !bodyParams.emqHost || !bodyParams.emqPort || !bodyParams.emqTLS) {
-                return errorMessagePayload(400, 'All broker endpoint parameters are needed.');
-              }
+              return errorMessagePayload(400, 'All broker endpoint parameters are needed.');
             }
 
             // Check Protocol
             if (bodyParams.emqProtocol) {
               // Check URL validation
-              isValid = Proxies.simpleSchema().namedContext().validateOne(
+              const isValid = Proxies.simpleSchema().namedContext().validateOne(
                 validateFields, 'emq.brokerEndpoints.$.protocol');
 
               if (!isValid) {
                 return errorMessagePayload(400, 'EMQ protocol not valid.');
               }
               brokerEndpoint.protocol = bodyParams.emqProtocol;
-              delete bodyParams['emqProtocol'];
+              delete bodyParams.emqProtocol;
             }
             // Check EMQ host
             if (bodyParams.emqHost) {
@@ -690,17 +710,19 @@ ProxyV1.addCollection(Proxies, {
                 return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
               }
               brokerEndpoint.host = bodyParams.emqHost;
-              delete bodyParams['emqHost'];
+              delete bodyParams.emqHost;
             }
             // Check EMQ host port
             if (bodyParams.emqPort) {
               // Check port validation
-              if (isNaN(bodyParams.emqPort) || bodyParams.emqPort < 0 || bodyParams.emqPort > 65535) {
+              if (isNaN(bodyParams.emqPort) ||
+                  bodyParams.emqPort < 0 ||
+                  bodyParams.emqPort > 65535) {
                 return errorMessagePayload(400, 'Parameter "emqPort" has erroneous value.',
                 'emqPort', bodyParams.emqPort);
               }
               brokerEndpoint.port = bodyParams.emqPort;
-              delete bodyParams['emqPort'];
+              delete bodyParams.emqPort;
             }
             // Check EMQ TLS
             if (bodyParams.emqTLS) {
@@ -712,11 +734,11 @@ ProxyV1.addCollection(Proxies, {
                 return errorMessagePayload(400, 'Parameter "emqTLS" has erroneous value.');
               }
               brokerEndpoint.tls = bodyParams.emqTLS;
-              delete bodyParams['emqTLS'];
+              delete bodyParams.emqTLS;
             }
             // Fill newly filled or modified broker endpoint to proxy data
             proxyData.emq.brokerEndpoints[bodyParams.beIndex] = brokerEndpoint;
-            delete bodyParams['beIndex'];
+            delete bodyParams.beIndex;
           }
 
           // Check if a broker endpoint is to be removed
@@ -724,9 +746,10 @@ ProxyV1.addCollection(Proxies, {
             // Check if beIndexRemove has correct value
             if (isNaN(bodyParams.beIndexRemove) ||
                 1 * bodyParams.beIndexRemove < 0 ||
-                1 * bodyParams.beIndexRemove > (countOfEndpoints - 1)) {
-              const detailLine = `Allowed value range for "beIndexRemove" are 0 - ${countOfEndpoints-1}`;
-              return errorMessagePayload(400, detailLine, 'beIndexRemove', bodyParams.beIndexRemove);
+                1 * bodyParams.beIndexRemove > (countOfBE - 1)) {
+              const detailLine = `Allowed range for "beIndexRemove" is 0 - ${ countOfBE-1 }`;
+              return errorMessagePayload(400, detailLine, 'beIndexRemove',
+                bodyParams.beIndexRemove);
             }
             if (!proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove]) {
               // Error: Broker Endpoint does not exist
@@ -734,11 +757,11 @@ ProxyV1.addCollection(Proxies, {
             }
             // Remove the indicated broker endpoint
             delete proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove];
-            delete bodyParams['beIndexRemove'];
+            delete bodyParams.beIndexRemove;
           }
         }
         // If there are any parameters left, they are erroneous
-        if (Object.keys(bodyParams).length){
+        if (Object.keys(bodyParams).length) {
           return errorMessagePayload(400, 'Unknown parameters were given.', 'Params', bodyParams);
         }
 

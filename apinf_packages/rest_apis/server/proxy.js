@@ -200,7 +200,7 @@ ProxyV1.swagger = {
                     type: 'string',
                     example: 'true',
                   },
-                }
+                },
               },
             },
             httpApi: {
@@ -223,7 +223,7 @@ ProxyV1.swagger = {
       items: {
         type: 'string',
         example: 'backend-id',
-      }
+      },
     },
   },
 };
