@@ -124,18 +124,6 @@ Template.apiAnalyticPageBody.onCreated(function () {
   });
 });
 
-Template.apiAnalyticPageBody.onRendered(() => {
-  // Get current url hash value
-  const hashTabValue = location.hash.substr(1);
-
-  // If url contain hash value
-  if (hashTabValue) {
-    // Show tab
-    $(`.nav-tabs a[href='#${hashTabValue}']`).tab('show');
-  }
-});
-
-
 Template.apiAnalyticPageBody.helpers({
   arrowDirection (parameter) {
     const instance = Template.instance();
@@ -292,12 +280,5 @@ Template.apiAnalyticPageBody.helpers({
     const timeframe = FlowRouter.getQueryParam('timeframe');
     // Display text about "Average unique users" for each period except "Today"
     return timeframe !== '12';
-  },
-});
-
-Template.apiAnalyticPageBody.events({
-  'click #nav-tabs li > a': (event) => {
-    // Show hash value in url
-    window.location = `${event.currentTarget.hash}`;
   },
 });
