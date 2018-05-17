@@ -16,10 +16,8 @@ import _ from 'lodash';
 import StoredTopics from '../../../collection/index';
 
 // APInf imports
-import { remainingTrafficRequest } from '../../../lib/es_requests';
-import { calculateSecondsCount, getDateRange } from '../../../lib/helpers';
+import { getDateRange } from '../../../lib/helpers';
 import { arrowDirection, percentageValue } from '../../../../dashboard/lib/trend_helpers';
-import promisifyCall from '../../../../core/helper_functions/promisify_call';
 
 Template.displayTopicsTable.onCreated(function () {
   const instance = this;
@@ -32,7 +30,7 @@ Template.displayTopicsTable.onCreated(function () {
   instance.topicsData = new ReactiveVar();
   instance.remainingTraffic = new ReactiveVar();
 
-  instance.timeframe = '7';
+  instance.timeframe = '24';
 
   // Update data for Stored Topics
   instance.getTopicsData = () => {
@@ -47,39 +45,29 @@ Template.displayTopicsTable.onCreated(function () {
       return topicItem.value;
     });
 
+    Meteor.call('fetchTopicsTableData',
+      topics, instance.timeframe, instance.dateRange, (error, response) => {
+        // Mark is Ready
+        instance.dataIsReady.set(true);
 
-    Meteor.call('fetchTopicsTableData', topics, instance.timeframe, (error, response) => {
-      // Mark is Ready
-      instance.dataIsReady.set(true);
+        if (error) {
+          // Display error message
+          instance.error.set(error.message);
+          throw new Meteor.Error(error.message);
+        }
 
-      if (error) {
-        // Display error message
-        instance.error.set(error.message);
-        throw new Meteor.Error(error.message);
-      }
+        // Store the table data
+        instance.topicsData.set(response.topicsData);
 
-      // Store the table data
-      instance.topicsData.set(response.topicsData);
-
-      // Store the comparison data
-      const trend = instance.trend.get();
-      // Extend the current Object
-      instance.trend.set(Object.assign(trend, response.trend));
-    });
+        // Store the comparison data
+        const trend = instance.trend.get();
+        // Extend the current Object
+        instance.trend.set(Object.assign(trend, response.trend));
+      });
   };
 
   // Update data for Remaining traffic
   instance.updateRemainingTraffic = () => {
-    let filter;
-
-    if (instance.staticTopicsData.length === 0) {
-      filter = [{ match_phrase_prefix: { topic: '' } }];
-    } else {
-      filter = instance.staticTopicsData.map(topicItem => {
-        return { match_phrase_prefix: { topic: topicItem.value } };
-      });
-    }
-
     instance.remainingTrafficReady.set(false);
     instance.remainingTraffic.set({
       value: 'remaining',
@@ -91,42 +79,28 @@ Template.displayTopicsTable.onCreated(function () {
       publishedClients: 0,
     });
 
-    // Build query request
-    const queryBody = remainingTrafficRequest(instance.dateRange, filter);
+    // Build the current Topics list
+    const topics = _.map(instance.staticTopicsData, (topicItem) => {
+      return topicItem.value;
+    });
 
-    // Send request to ES
-    Meteor.call('emqElastisticsearchSearch', queryBody, (fetchingError, fetchingResult) => {
-      if (fetchingError) {
-        // Mark is ready
-        instance.remainingTrafficReady.set(true);
+    // Process data
+    Meteor.call('fetchRemainingTrafficData', topics, instance.timeframe, instance.dateRange, (error, result) => {
+      // Mark is ready
+      instance.remainingTrafficReady.set(true);
 
-        // Display message error
-        const message = `Fetching remaining traffic fails. ${fetchingError.message}`;
-        sAlert.error(message);
-
-        throw new Meteor.Error(fetchingError.message);
+      if (error) {
+        sAlert.error(error.message);
+        throw new Meteor.Error(error.message);
       }
 
-      // Calculate for Bandwidth data
-      const secondsCount = calculateSecondsCount(instance.timeframe);
-
-      // Process data
-      Meteor.call('remainingTrafficFetch', fetchingResult, secondsCount, (error, result) => {
-        // Mark is ready
-        instance.remainingTrafficReady.set(true);
-
-        if (error) {
-          sAlert.error(error.message);
-          throw new Meteor.Error(error.message);
-        }
-        // Store the table data
-        instance.remainingTraffic.set(result.dataset);
-        // Get the comparison data
-        const trend = instance.trend.get();
-        // Extend the global variable
-        trend[result.dataset.value] = result.trend;
-        instance.trend.set(trend);
-      });
+      // Store the table data
+      instance.remainingTraffic.set(result.trafficData);
+      // Get the comparison data
+      const trend = instance.trend.get();
+      // Extend the global variable
+      trend[result.trafficData.value] = result.trend;
+      instance.trend.set(trend);
     });
   };
 

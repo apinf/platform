@@ -111,7 +111,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <td class="text-right no-right-border">
               {{ localeString subscribedClients }}
             </td>
-            <td class="text-right" colspan="2">
+            <td class="text-right no-right-border">
               {{# if trend }}
                 <span class={{ textColor 'client_subscribe' }}>
                   {{ percentageValue 'client_subscribe' }}
@@ -119,6 +119,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </span>
               {{/ if }}
             </td>
+            <td></td>
           </tr>
         {{/ with }}
       {{/ unless }}

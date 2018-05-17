@@ -39,19 +39,11 @@ export function getDateRange (timeframe) {
   const startDay = moment(tomorrow).subtract(timeframe, subtractInterval).valueOf();
   const doublePeriodAgo = moment(startDay).subtract(timeframe, subtractInterval).valueOf();
 
-  // return {
-  //   doublePeriodAgo,
-  //   onePeriodAgo: startDay,
-  //   from: startDay,
-  //   to: tomorrow,
-  //   interval,
-  // };
-
   return {
-    doublePeriodAgo: 1525780800000,
-    onePeriodAgo: 1525867200000,
-    from: 1525867200000,
-    to: 1525953600000,
+    doublePeriodAgo,
+    onePeriodAgo: startDay,
+    from: startDay,
+    to: tomorrow,
     interval,
   };
 }

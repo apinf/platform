@@ -119,6 +119,10 @@ export function percentageValue (parameter, bucket) {
   return percentage > 0 ? `${percentage}% ` : '';
 }
 
+/**
+ * @param previous
+ * @param current
+ */
 export function calculateTrend (previous, current) {
   // If values are equal
   // then no up-down

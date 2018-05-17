@@ -424,11 +424,22 @@ export function summaryStatisticsTopicsRequest (dateRange) {
   };
 }
 
-export function topicsTablePublishedType (topicsFilter) {
+export function topicsTablePublishedType (topicsFilter, dateRange) {
   return JSON.stringify({
     size: 0,
     query: {
-      bool: {},
+      bool: {
+        must: [
+          {
+            range: {
+              timestamp: {
+                gte: dateRange.from,
+                lt: dateRange.to,
+              },
+            },
+          },
+        ],
+      },
     },
     aggs: {
       group_by_topic: {
@@ -448,11 +459,22 @@ export function topicsTablePublishedType (topicsFilter) {
   });
 }
 
-export function topicsTableDeliveredType (topicsFilter) {
+export function topicsTableDeliveredType (topicsFilter, dateRange) {
   return JSON.stringify({
     size: 0,
     query: {
-      bool: {},
+      bool: {
+        must: [
+          {
+            range: {
+              timestamp: {
+                gte: dateRange.from,
+                lt: dateRange.to,
+              },
+            },
+          },
+        ],
+      },
     },
     aggs: {
       group_by_topic: {
@@ -467,11 +489,22 @@ export function topicsTableDeliveredType (topicsFilter) {
   });
 }
 
-export function topicsTableSubscribedType (topicsFilter) {
+export function topicsTableSubscribedType (topicsFilter, dateRange) {
   return JSON.stringify({
     size: 0,
     query: {
-      bool: {},
+      bool: {
+        must: [
+          {
+            range: {
+              timestamp: {
+                gte: dateRange.from,
+                lt: dateRange.to,
+              },
+            },
+          },
+        ],
+      },
     },
     aggs: {
       group_by_topic: {
@@ -479,7 +512,7 @@ export function topicsTableSubscribedType (topicsFilter) {
         aggs: {
           client_subscribe: {
             cardinality: {
-              field: 'client_id',
+              field: 'client_id.keyword',
             },
           },
         },
@@ -487,11 +520,14 @@ export function topicsTableSubscribedType (topicsFilter) {
     },
   });
 }
-// eslint-disabled next-line
+
 export function indexesSet (timeframe, eventType, period) {
   // Last 24 hours
-  if (timeframe === '48') {
-    return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>`;
+  if (timeframe === '24') {
+    if (period === 'current') {
+      return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>`;
+    }
+    return `<${eventType}-{now/d-1d}>,<${eventType}-{now/d-2d}>`;
   }
 
   // Last 7 days
@@ -516,8 +552,89 @@ export function indexesSet (timeframe, eventType, period) {
   }
 
   // By default send for current day
-  if (period === 'current') {
-    return `<${eventType}-{now/d}>`;
-  }
-  return `<${eventType}-{now/d-1d}>`;
+  return `<${eventType}-{now/d}>`;
+}
+
+export function remainingTrafficPublishedType (filter, dateRange) {
+  return JSON.stringify({
+    size: 0,
+    query: {
+      bool: {
+        must_not: filter,
+        must: [
+          {
+            range: {
+              timestamp: {
+                gte: dateRange.from,
+                lt: dateRange.to,
+              },
+            },
+          },
+        ],
+      },
+    },
+    aggs: {
+      client_published: {
+        cardinality: {
+          field: 'from.client_id.keyword',
+        },
+      },
+      incoming_bandwidth: {
+        sum: { field: 'size' },
+      },
+    },
+  });
+}
+
+export function remainingTrafficDeliveredType (filter, dateRange) {
+  return JSON.stringify({
+    size: 0,
+    query: {
+      bool: {
+        must_not: filter,
+        must: [
+          {
+            range: {
+              timestamp: {
+                gte: dateRange.from,
+                lt: dateRange.to,
+              },
+            },
+          },
+        ],
+      },
+    },
+    aggs: {
+      outgoing_bandwidth: {
+        sum: { field: 'size' },
+      },
+    },
+  });
+}
+export function remainingTrafficSubscribedType (filter, dateRange) {
+  return JSON.stringify({
+    size: 0,
+    query: {
+      bool: {
+        must_not: filter,
+        must: [
+          {
+            range: {
+              timestamp: {
+                gte: dateRange.from,
+                lt: dateRange.to,
+              },
+            },
+          },
+        ],
+      },
+    },
+    aggs: {
+      client_subscribe: {
+        cardinality: {
+          field: 'client_id.keyword',
+        },
+      },
+    },
+  });
 }
