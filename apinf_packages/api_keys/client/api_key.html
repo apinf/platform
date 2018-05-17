@@ -11,8 +11,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </p>
     {{# if apiKey }}
       <!-- Regenerate API key button -->
-      <span id="api-key" style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
-        {{ apiKey }}
+      <span style="padding: 10px 15px;background-color:#F5F5F5;color:#37474F;text-decoration:none;border-radius: 2px;font-family:'Roboto Mono', monospace;">
+        <span id="api-key">{{ apiKey }}</span>
         <i id="api-key-copy" class="mdi mdi-content-copy" data-clipboard-target="#api-key" style="padding-left:5px;"></i>
       </span>
       <button class="btn btn-danger" id="regenerate-api-key">

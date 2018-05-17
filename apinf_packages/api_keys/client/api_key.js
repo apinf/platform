@@ -105,11 +105,16 @@ Template.apiKey.events({
   'click #regenerate-api-key': function () {
     // Get current template instance
     const instance = Template.instance();
+
     const api = Template.currentData().api;
+
     // Get api Key from template data
-    const apiKey = instance.$('#api-key').val();
+    const apiKey = instance.$('#api-key').text();
+    console.log(apiKey);
+
     // Get all api list linked to a api key
     const apisList = instance.apisList.get();
+
     // Show regenerate api key modal
     Modal.show('regenerateApiKey', { apisList, api, apiKey });
   },
@@ -155,7 +160,7 @@ Template.apiKey.helpers({
       return proxyBackendIsApiUmbrella;
     }
 
-    // Don't show "Get API Key" button if proxtBackend is undefined
+    // Don't show "Get API Key" button if proxyBackend is undefined
     return false;
   },
 });
