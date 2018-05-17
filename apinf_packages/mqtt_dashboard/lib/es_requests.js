@@ -432,8 +432,7 @@ export function topicsTablePublishedType (topicsFilter) {
     },
     aggs: {
       group_by_topic: {
-        filters: {
-          filters: {"/hfp/v1/journey/ongoing/train/": { prefix: { "topic.keyword": "/hfp/v1/journey/ongoing/train/"}}}},
+        filters: topicsFilter,
         aggs: {
           client_published: {
             cardinality: {
@@ -451,28 +450,20 @@ export function topicsTablePublishedType (topicsFilter) {
 
 export function topicsTableDeliveredType (topicsFilter) {
   return JSON.stringify({
-    size: 1,
+    size: 0,
     query: {
       bool: {},
     },
-    // aggs: {
-    //   group_by_topic: {
-    //     filters: {
-    //       filters: {
-    //         "/hfp/v1/journey/ongoing/train/": {
-    //           prefix: {
-    //             "topic.keyword": "/hfp/v1/journey/ongoing/train/"
-    //           }
-    //         }
-    //       }
-    //     },
-    //     aggs: {
-    //       outgoing_bandwidth: {
-    //         sum: { field: 'size' },
-    //       },
-    //     },
-    //   },
-    // },
+    aggs: {
+      group_by_topic: {
+        filters: topicsFilter,
+        aggs: {
+          outgoing_bandwidth: {
+            sum: { field: 'size' },
+          },
+        },
+      },
+    },
   });
 }
 
@@ -484,21 +475,20 @@ export function topicsTableSubscribedType (topicsFilter) {
     },
     aggs: {
       group_by_topic: {
-        "filters": {
-          "filters": {"/hfp/v1/journey/ongoing/train/": { "prefix": { "topic.keyword": "/hfp/v1/journey/ongoing/train/"}}}},
+        filters: topicsFilter,
         aggs: {
           client_subscribe: {
             cardinality: {
-              field: 'from.client_id.keyword',
+              field: 'client_id',
             },
-          }
+          },
         },
       },
     },
   });
 }
-
-export function indexesSet(timeframe, eventType, period) {
+// eslint-disabled next-line
+export function indexesSet (timeframe, eventType, period) {
   // Last 24 hours
   if (timeframe === '48') {
     return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>`;
@@ -525,11 +515,9 @@ export function indexesSet(timeframe, eventType, period) {
     return `<${eventType}-*>`;
   }
 
-  // Last 24 hours
-  if (timeframe === '1') {
-    if (period === 'current') {
-      return `<${eventType}-{now/d}>`;
-    }
-    return `<${eventType}-{now/d-1d}>`;
+  // By default send for current day
+  if (period === 'current') {
+    return `<${eventType}-{now/d}>`;
   }
+  return `<${eventType}-{now/d-1d}>`;
 }

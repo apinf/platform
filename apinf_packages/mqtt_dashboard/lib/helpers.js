@@ -96,3 +96,9 @@ export function calculateSecondsCount (timeframe) {
     }
   }
 }
+
+export function calculateBandwidthKbs (bytes, secondsCount) {
+  const kbs = (bytes * 0.001) / secondsCount;
+
+  return +kbs.toFixed(2);
+}

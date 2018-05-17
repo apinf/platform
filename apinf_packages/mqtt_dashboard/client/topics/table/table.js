@@ -16,7 +16,7 @@ import _ from 'lodash';
 import StoredTopics from '../../../collection/index';
 
 // APInf imports
-import { remainingTrafficRequest, topicsDataRequest } from '../../../lib/es_requests';
+import { remainingTrafficRequest } from '../../../lib/es_requests';
 import { calculateSecondsCount, getDateRange } from '../../../lib/helpers';
 import { arrowDirection, percentageValue } from '../../../../dashboard/lib/trend_helpers';
 import promisifyCall from '../../../../core/helper_functions/promisify_call';
@@ -32,7 +32,7 @@ Template.displayTopicsTable.onCreated(function () {
   instance.topicsData = new ReactiveVar();
   instance.remainingTraffic = new ReactiveVar();
 
-  instance.timeframe = '24';
+  instance.timeframe = '7';
 
   // Update data for Stored Topics
   instance.getTopicsData = () => {
@@ -42,90 +42,30 @@ Template.displayTopicsTable.onCreated(function () {
     // Mark data is fetching
     instance.dataIsReady.set(false);
 
-    const filters = { filters: {} };
-    const clientFilters = { filters: {} };
-
-    // Go through all topics and create the filters objects
-    instance.staticTopicsData.forEach(topicItem => {
-      const topic = topicItem.value;
-      const field = `topics.${topic}#.qos`;
-
-      filters.filters[topic] = { prefix: { 'topic.keyword': topic } };
-      clientFilters.filters[topic] = { term: { [field]: 0 } };
-    });
-
     // Build the current Topics list
     const topics = _.map(instance.staticTopicsData, (topicItem) => {
       return topicItem.value;
     });
 
-    // Calculate for Bandwidth data
-    const secondsCount = calculateSecondsCount(instance.timeframe);
 
-    promisifyCall('emqElastisticsearchMulti', instance.timeframe)
-      .then(response => {
-        // Mark is Ready
-          instance.dataIsReady.set(true);
-      })
+    Meteor.call('fetchTopicsTableData', topics, instance.timeframe, (error, response) => {
+      // Mark is Ready
+      instance.dataIsReady.set(true);
 
-    // Meteor.call('dataForTable', instance.dateRange, topics, (error, result) => {
-    //   // Mark is Ready
-    //   instance.dataIsReady.set(true);
-    //
-    //   if (error) {
-    //     // Display error message
-    //     instance.error.set(error.message);
-    //     throw new Meteor.Error(error.message);
-    //   }
-    //
-    //   // Store the table data
-    //   instance.topicsData.set(result.topicsData);
-    //
-    //   // Store the comparison data
-    //   const trend = instance.trend.get();
-    //   // Extend the current Object
-    //   instance.trend.set(Object.assign(trend, result.trend));
-    // });
+      if (error) {
+        // Display error message
+        instance.error.set(error.message);
+        throw new Meteor.Error(error.message);
+      }
 
-    // // Build Request body
-    // const queryBody = topicsDataRequest(instance.dateRange, filters, clientFilters);
-    //
-    // // Send request to ES
-    // Meteor.call('emqElastisticsearchSearch', queryBody, (fetchingError, fetchingResult) => {
-    //   if (fetchingError) {
-    //     // Mark is Ready
-    //     instance.dataIsReady.set(true);
-    //     // Display error message
-    //     instance.error.set(fetchingError.message);
-    //     throw new Meteor.Error(fetchingError.message);
-    //   }
-    //
-    //   // Build the current Topics list
-    //   const topicsList = _.map(instance.staticTopicsData, (topicItem) => {
-    //     return topicItem.value;
-    //   });
-    //
-    //
-    //   // Process data
-    //   Meteor.call('topicsDataFetch', fetchingResult, topicsList, secondsCount, (error, result) => {
-    //     // Mark is Ready
-    //     instance.dataIsReady.set(true);
-    //
-    //     if (error) {
-    //       // Display error message
-    //       instance.error.set(error.message);
-    //       throw new Meteor.Error(error.message);
-    //     }
-    //
-    //     // Store the table data
-    //     instance.topicsData.set(result.topicsData);
-    //
-    //     // Store the comparison data
-    //     const trend = instance.trend.get();
-    //     // Extend the current Object
-    //     instance.trend.set(Object.assign(trend, result.trend));
-    //   });
-    // });
+      // Store the table data
+      instance.topicsData.set(response.topicsData);
+
+      // Store the comparison data
+      const trend = instance.trend.get();
+      // Extend the current Object
+      instance.trend.set(Object.assign(trend, response.trend));
+    });
   };
 
   // Update data for Remaining traffic
