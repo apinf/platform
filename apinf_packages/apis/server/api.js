@@ -1062,7 +1062,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       tags: [
         CatalogV1.swagger.tags.api,
       ],
-      summary: 'Get Proxy connection information of an identified API.',
+      summary: 'Show Proxy connection of an API.',
       description: descriptionApis.getProxyBackend,
       parameters: [
         CatalogV1.swagger.params.apiId,
@@ -1229,11 +1229,12 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       }
 
       // Collect data to be inserted into proxyBackend
-      const newProxyBackendData = {};
-      newProxyBackendData.apiId = apiId;
-      newProxyBackendData.proxyId = proxy._id;
-      // Type comes from selected proxy
-      newProxyBackendData.type = proxy.type;
+      const newProxyBackendData = {
+        apiId: apiId,
+        proxyId: proxy._id,
+        // Type comes from selected proxy
+        type: proxy.type,
+      };
 
       if (proxy.type === 'apiUmbrella') {
         // frontendPrefix is a required field
@@ -1417,7 +1418,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       tags: [
         CatalogV1.swagger.tags.api,
       ],
-      summary: 'Remove Proxy connection an identified API.',
+      summary: 'Disconnect an APIs from Proxy.',
       description: descriptionApis.deleteProxyBackend,
       parameters: [
         CatalogV1.swagger.params.apiId,
