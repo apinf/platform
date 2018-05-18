@@ -1,0 +1,50 @@
+/* Copyright 2018 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+.buttons-block {
+	width: 100%;
+	height: 34px;
+	position: relative;
+	border-radius: .5rem;
+	overflow: hidden;
+	user-select: none;
+	cursor: pointer;
+	float: right;
+
+	.inner-buttons-block {
+		height: inherit;
+		text-transform: uppercase;
+		font-size: 1.2rem;
+		letter-spacing: 0.6px;
+	}
+
+	.inner-buttons-block:first-child {
+		background: #e9e9e9;
+		color: #a9a9a9;
+	}
+
+	.inner-buttons-block:nth-child(2) {
+		background: dodgerblue;
+		color: white;
+		clip-path: inset(0 50% 0 0);
+		transition: .3s cubic-bezier(0,0,0,1);
+	}
+
+	.toggle {
+		width: 50%;
+		position: absolute;
+		height: inherit;
+		display: flex;
+		box-sizing: border-box;
+	}
+
+	.toggle p {
+		margin: auto;
+	}
+
+	.toggle:nth-child(1) {
+		right: 0;
+	}
+}

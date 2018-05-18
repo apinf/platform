@@ -4,11 +4,23 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="visibilityToggle">
-  <button class="btn btn-danger changeVisibility">
-    {{# if isPublic }}
-      {{_ "visibilityToggle_buttonPrivate" }}
-    {{ else }}
-      {{_ "visibilityToggle_buttonPublic" }}
-    {{/ if }}
-  </button>
+	<div class="buttons-block changeVisibility">
+		<div class="inner-buttons-block">
+			{{# if isPublic }}
+			<div id="public" class="toggle btn-success">
+				<p>Public</p>
+			</div>
+			<div id="private" class="toggle">
+				<p>{{_ "visibilityToggle_buttonPrivate" }}</p>
+			</div>
+			{{ else }}
+			<div id="public" class="toggle">
+				<p>{{_ "visibilityToggle_buttonPublic" }}</p>
+			</div>
+			<div id="private" class="toggle btn-danger">
+				<p>Private</p>
+			</div>
+			{{/ if }}
+		</div>
+	</div>
 </template>

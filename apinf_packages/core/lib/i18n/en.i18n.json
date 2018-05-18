@@ -92,7 +92,7 @@
   "apiCatalog_apisCount_plural": "__count__ APIs",
   "apiCatalog_noApis_Found": "No APIs found",
   "apiCatalogPage_title_apiCatalog": "APIs Catalog",
-  "apiSettingsDelete_deleteButton": "Delete",
+  "apiSettingsDelete_deleteButton": "Delete this API",
   "apiDetails_baseUrl_headingText": "Endpoint URL",
   "apiDetails_description_headingText": "About this API",
   "apiDetails_usageInstructions_headingText": "To make calls to this API:",
