@@ -130,7 +130,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <i class="fa fa-{{ arrowDirection 'outgoing_bandwidth' }}" aria-hidden="true"></i>
                 </span>
               </div>
-              {{# if outgoingBandwidthData }}
+              {{# if histogramIsReady }}
                 {{> mqttDashboardDisplayRealTimeChart
                   chartData=outgoingBandwidthData
                   query='outgoing_bandwidth'
@@ -158,7 +158,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <i class="fa fa-{{ arrowDirection 'message_delivered' }}" aria-hidden="true"></i>
                 </span>
               </div>
-              {{# if deliveredMessagesData }}
+              {{# if histogramIsReady }}
                 {{> mqttDashboardDisplayRealTimeChart
                   chartData=deliveredMessagesData
                   query='delivered-messages'
@@ -186,7 +186,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <i class="fa fa-{{ arrowDirection 'client_subscribe' }}" aria-hidden="true"></i>
                 </span>
               </div>
-              {{# if subscribedClientsData }}
+              {{# if histogramIsReady }}
                 {{> mqttDashboardDisplayRealTimeChart
                   chartData=subscribedClientsData
                   query='subscribed-clients'

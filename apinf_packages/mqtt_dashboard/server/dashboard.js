@@ -7,92 +7,137 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import _ from 'lodash';
-import { histogramDataRequestAllTopics, summaryStatisticsTopicsRequest,
-} from '../lib/es_requests';
-import { publishedClients } from '../lib/helpers';
+import {
+  histogramDataRequestAllTopics,
+  indexesSet,
+  summaryStatisticsTopicsRequest } from '../lib/es_requests';
+import {
+  calculateBandwidthKbs,
+  calculateSecondsCount,
+} from '../lib/helpers';
+import promisifyCall from '../../core/helper_functions/promisify_call';
+import {
+  histogramDashboardDeliveredType, histogramDashboardPublishedType,
+  histogramDashboardSubscribedType, statisticsDashboardDeliveredType,
+  statisticsDashboardPublishedType, statisticsDashboardSubscribedType,
+} from '../lib/dashboard_requests';
 
 Meteor.methods({
-  getHistogramDataAllTopics (dateRange, secondsCount) {
+  buildRequestDashboardData (timeframe, type, dateRange) {
+    check(timeframe, String);
+    check(type, String);
     check(dateRange, Object);
-    check(secondsCount, Number);
+console.log(type, dateRange)
+    const url = 'http://hap.cinfra.fi:9200/_msearch?pretty=true';
 
-    // Build request to fetch data for Subscribed clients
-    const bodyRequest = histogramDataRequestAllTopics(dateRange);
+    if (type === 'histogram') {
+      // Build index for each event type (Histogram charts)
+      const publishedIndex = indexesSet(timeframe, 'message_published', 'current');
+      const deliveredIndex = indexesSet(timeframe, 'message_delivered', 'current');
+      const subscribeIndex = indexesSet(timeframe, 'client_subscribe', 'current');
 
-    // Get data from ES
-    const result = Meteor.call('emqElastisticsearchSearch', bodyRequest);
+      const publishedQuery = histogramDashboardPublishedType(dateRange);
+      const deliveredQuery = histogramDashboardDeliveredType(dateRange);
+      const subscribeQuery = histogramDashboardSubscribedType(dateRange);
 
-    // Parsed it
-    try {
-      const aggregatedData = result.aggregations;
+      const content =
+        `{"index" : "${publishedIndex}", "ignoreUnavailable": true}\n${publishedQuery}\n` +
+        `{"index" : "${deliveredIndex}", "ignoreUnavailable": true}\n${deliveredQuery}\n` +
+        `{"index" : "${subscribeIndex}", "ignoreUnavailable": true}\n${subscribeQuery}\n`;
 
-      const publishedMessagesData = aggregatedData.published.data_over_time.buckets;
-      const deliveredMessagesData = aggregatedData.message_delivered.data_over_time.buckets;
-      const publishedClientsData =
-        publishedClients(aggregatedData.published.data_over_time.buckets, dateRange.to);
-      const subscribedClientsData = aggregatedData.client_subscribe.data_over_time.buckets;
-
-      const incomingBandwidthData = _.map(publishedMessagesData, (dataset) => {
-        // Calculate Bandwidth in Kbps
-        const kbps = (dataset.incoming_bandwidth.value * 0.001) / secondsCount;
-        return {
-          key: dataset.key,
-          doc_count: +kbps.toFixed(2),
-        };
-      });
-
-      const outgoingBandwidthData = _.map(deliveredMessagesData, (dataset) => {
-        // Calculate Bandwidth in Kbps
-        const kbps = (dataset.outgoing_bandwidth.value * 0.001) / secondsCount;
-        return {
-          key: dataset.key,
-          doc_count: +kbps.toFixed(2),
-        };
-      });
-
-      return {
-        publishedMessagesData,
-        deliveredMessagesData,
-        publishedClientsData,
-        subscribedClientsData,
-        incomingBandwidthData,
-        outgoingBandwidthData,
-      };
-    } catch (e) {
-      throw new Meteor.Error(e.message);
+      // Send request to ES
+      return promisifyCall('multiSearchElasticsearch', url, content);
     }
+
+    // Build index for each event type (Summary statistics)
+    const publishedIndex = indexesSet(timeframe, 'message_published', type);
+    const deliveredIndex = indexesSet(timeframe, 'message_delivered', type);
+    const subscribeIndex = indexesSet(timeframe, 'client_subscribe', type);
+
+    const publishedQuery = statisticsDashboardPublishedType(dateRange);
+    const deliveredQuery = statisticsDashboardDeliveredType(dateRange);
+    const subscribeQuery = statisticsDashboardSubscribedType(dateRange);
+
+    const content =
+      `{"index" : "${publishedIndex}", "ignoreUnavailable": true}\n${publishedQuery}\n` +
+      `{"index" : "${deliveredIndex}", "ignoreUnavailable": true}\n${deliveredQuery}\n` +
+      `{"index" : "${subscribeIndex}", "ignoreUnavailable": true}\n${subscribeQuery}\n`;
+
+    // Send request to ES
+    return promisifyCall('multiSearchElasticsearch', url, content);
   },
-  getSummaryStatisticsTopics (dateRange, secondsCount) {
+  fetchHistogramDashboardData (timeframe, dateRange) {
+    check(timeframe, String);
     check(dateRange, Object);
-    check(secondsCount, Number);
 
-    // Build request to fetch data for Subscribed clients
-    const bodyRequest = summaryStatisticsTopicsRequest(dateRange);
+    const secondsCount = calculateSecondsCount(timeframe);
 
-    // Get data from ES
-    const result = Meteor.call('emqElastisticsearchSearch', bodyRequest);
-    // Parsed it
-    try {
-      const aggregatedData = result.aggregations;
+    return promisifyCall('buildRequestDashboardData', timeframe, 'histogram', dateRange)
+      .then(response => {
+        const publishedData = _.get(response[0], 'aggregations.data_over_time.buckets', []);
+        const deliveredData = _.get(response[1], 'aggregations.data_over_time.buckets', []);
+        const subscribedData = _.get(response[2], 'aggregations.data_over_time.buckets', []);
 
-      // Get Size in bytes
-      const incomingSizeBytes = aggregatedData.message_published.incoming_bandwidth.value;
-      const outgoingSizeBytes = aggregatedData.message_delivered.outgoing_bandwidth.value;
+        const publishedMessagesData = _.map(publishedData, (dataset) => {
+          return { key: dataset.key, doc_count: dataset.doc_count };
+        });
 
-      // Calculate Bandwidth in Kbps
-      const incomingBandwidthKbps = (incomingSizeBytes * 0.001) / secondsCount;
-      const outgoingBandwidthKbps = (outgoingSizeBytes * 0.001) / secondsCount;
+        const publishedClientsData = _.map(publishedData, (dataset) => {
+          return { key: dataset.key, doc_count: dataset.client_publish.value };
+        });
 
-      return {
-        incomingBandwidth: +incomingBandwidthKbps.toFixed(2),
-        outgoingBandwidth: +outgoingBandwidthKbps.toFixed(2),
-        pubMessagesCount: aggregatedData.message_published.doc_count,
-        delMessagesCount: aggregatedData.message_delivered.doc_count,
-        pubClientsCount: aggregatedData.message_published.client_published.value,
-        subClientsCount: aggregatedData.client_subscribe.doc_count,
-      };
-    } catch (e) {
-      throw new Meteor.Error(e.message);
-    }
+        const incomingBandwidthData = _.map(publishedData, (dataset) => {
+          return {
+            key: dataset.key,
+            doc_count: calculateBandwidthKbs(dataset.incoming_bandwidth.value, secondsCount) };
+        });
+
+        const deliveredMessagesData = _.map(deliveredData, (dataset) => {
+          return { key: dataset.key, doc_count: dataset.doc_count };
+        });
+
+        const outgoingBandwidthData = _.map(deliveredData, (dataset) => {
+          return {
+            key: dataset.key,
+            doc_count: calculateBandwidthKbs(dataset.outgoing_bandwidth.value, secondsCount) };
+        });
+
+        const subscribedClientsData = _.map(subscribedData, (dataset) => {
+          return { key: dataset.key, doc_count: dataset.client_subscribe.value };
+        });
+
+        return {
+          publishedMessagesData,
+          publishedClientsData,
+          deliveredMessagesData,
+          incomingBandwidthData,
+          outgoingBandwidthData,
+          subscribedClientsData,
+        };
+      })
+      .catch(error => { console.log('ERROR', error); });
+  },
+  fetchSummaryStatisticsTopics (timeframe, dateRange, period) {
+    check(timeframe, String);
+    check(dateRange, Object);
+    check(period, String);
+
+    const secondsCount = calculateSecondsCount(timeframe);
+
+    return promisifyCall('buildRequestDashboardData', timeframe, period, dateRange)
+      .then(response => {
+        const incomingSizeBytes = _.get(response[0], 'aggregations.incoming_bandwidth.value', 0);
+        const outgoingSizeBytes = _.get(response[1], 'aggregations.outgoing_bandwidth.value', 0);
+
+        return {
+          incomingBandwidth: calculateBandwidthKbs(incomingSizeBytes, secondsCount),
+          outgoingBandwidth: calculateBandwidthKbs(outgoingSizeBytes, secondsCount),
+          publishedMessages: response[0].hits.total,
+          deliveredMessages: response[1].hits.total,
+          publishedClients: _.get(response[0], 'aggregations.client_publish.value', 0),
+          subscribedClients: _.get(response[2], 'aggregations.client_subscribe.value', 0),
+        };
+      })
+      .catch(error => { console.log('ERROR', error); });
   },
 });

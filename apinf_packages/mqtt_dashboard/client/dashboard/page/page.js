@@ -11,7 +11,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import { calculateTrend, arrowDirection, percentageValue }
   from '/apinf_packages/dashboard/lib/trend_helpers';
-import { calculateSecondsCount, getDateRange } from '../../../lib/helpers';
+import { getDateRange } from '../../../lib/helpers';
 
 Template.mqttDashboardPage.onCreated(function () {
   const instance = this;
@@ -24,6 +24,7 @@ Template.mqttDashboardPage.onCreated(function () {
   instance.error = new ReactiveVar();
   instance.dataIsReady = new ReactiveVar();
   instance.summaryIsReady = new ReactiveVar();
+  instance.histogramIsReady = new ReactiveVar();
 
   instance.trend = new ReactiveVar({});
   instance.previousPeriod = new ReactiveVar();
@@ -37,10 +38,8 @@ Template.mqttDashboardPage.onCreated(function () {
   instance.outgoingBandwidthData = new ReactiveVar();
 
   instance.dateHistogramRequest = () => {
-    const secondsCount = calculateSecondsCount(instance.timeframe);
-
-    Meteor.call('getHistogramDataAllTopics',
-      instance.queryOption, secondsCount, (error, result) => {
+    Meteor.call('fetchHistogramDashboardData',
+      instance.timeframe, instance.queryOption, (error, result) => {
         if (error) {
           // Display message error
           const message = `Fetching chart data fails. ${error.message}`;
@@ -53,33 +52,32 @@ Template.mqttDashboardPage.onCreated(function () {
           instance.deliveredMessagesData.set(result.deliveredMessagesData);
           instance.publishedClientsData.set(result.publishedClientsData);
           instance.subscribedClientsData.set(result.subscribedClientsData);
+          instance.histogramIsReady.set(true);
         }
       });
   };
 
   instance.totalNumberRequest = (dateRange, periodType) => {
-    const secondsCount = calculateSecondsCount(instance.timeframe);
-
     // Fetching & process data
-    Meteor.call('getSummaryStatisticsTopics', dateRange, secondsCount, (error, result) => {
-      // Mark as Ready
-      instance.summaryIsReady.set(true);
+    Meteor.call('fetchSummaryStatisticsTopics',
+      instance.timeframe, dateRange, periodType, (error, result) => {
+        if (error) {
+          // Create & display error message
+          const message = `Fetching ${periodType} summary statistics fails. ${error.message}`;
+          sAlert.error(message);
+          throw Meteor.Error(error.message);
+        }
 
-      if (error) {
-        // Create & display error message
-        const message = `Fetching ${periodType} summary statistics fails. ${error.message}`;
-        sAlert.error(message);
-        throw Meteor.Error(error.message);
-      }
-
-      if (periodType === 'current') {
-        // Store summary statics for current period
-        instance.currentPeriod.set(result);
-      } else {
-        // Store summary statistics for previous period
-        instance.previousPeriod.set(result);
-      }
-    });
+        if (periodType === 'current') {
+          // Mark as Ready
+          instance.summaryIsReady.set(true);
+          // Store summary statics for current period
+          instance.currentPeriod.set(result);
+        } else {
+          // Store summary statistics for previous period
+          instance.previousPeriod.set(result);
+        }
+      });
   };
 
   instance.summaryStatisticsData = () => {
@@ -97,9 +95,10 @@ Template.mqttDashboardPage.onCreated(function () {
     instance.totalNumberRequest(previousPeriodRange, 'previous');
   };
 
-  this.getDashboardData = () => {
+  instance.getDashboardData = () => {
     instance.error.set(false);
     instance.dataIsReady.set(false);
+    instance.histogramIsReady.set(false);
     // Set default values
     instance.queryOption = getDateRange(instance.timeframe);
 
@@ -113,7 +112,7 @@ Template.mqttDashboardPage.onCreated(function () {
       }
 
       // Send request for chart data
-      this.dateHistogramRequest();
+      instance.dateHistogramRequest();
 
       // Summary statistics data
       instance.summaryStatisticsData();
@@ -131,13 +130,13 @@ Template.mqttDashboardPage.onCreated(function () {
   };
 
   // Fetching all data
-  this.getDashboardData();
+  instance.getDashboardData();
 
   // Update compare data
   instance.autorun(() => {
     // Get data for Previous period
     const previousPeriod = instance.previousPeriod.get();
-    const currentPeriod = instance.previousPeriod.get();
+    const currentPeriod = instance.currentPeriod.get();
 
     if (previousPeriod && currentPeriod) {
       // Calculate trend
@@ -149,16 +148,16 @@ Template.mqttDashboardPage.onCreated(function () {
           previousPeriod.outgoingBandwidth, currentPeriod.outgoingBandwidth
         ),
         publishedMessages: calculateTrend(
-          previousPeriod.pubMessagesCount, currentPeriod.pubMessagesCount
+          previousPeriod.publishedMessages, currentPeriod.publishedMessages
         ),
         deliveredMessages: calculateTrend(
-          previousPeriod.delMessagesCount, currentPeriod.delMessagesCount
+          previousPeriod.deliveredMessages, currentPeriod.deliveredMessages
         ),
         subscribedClients: calculateTrend(
-          previousPeriod.subClientsCount, currentPeriod.subClientsCount
+          previousPeriod.subscribedClients, currentPeriod.subscribedClients
         ),
         publishedClients: calculateTrend(
-          previousPeriod.pubMessagesCount, currentPeriod.pubClientsCount
+          previousPeriod.publishedClients, currentPeriod.publishedClients
         ),
       };
       // Save it
@@ -201,6 +200,9 @@ Template.mqttDashboardPage.helpers({
   summaryIsReady () {
     return Template.instance().summaryIsReady.get();
   },
+  histogramIsReady () {
+    return Template.instance().histogramIsReady.get();
+  },
   queryOptions () {
     const timeframe = Template.instance().timeframe;
 
@@ -234,19 +236,19 @@ Template.mqttDashboardPage.helpers({
 
     switch (param) {
       case 'message_published': {
-        count = currentPeriod.pubMessagesCount;
+        count = currentPeriod.publishedMessages;
         break;
       }
       case 'message_delivered': {
-        count = currentPeriod.delMessagesCount;
+        count = currentPeriod.deliveredMessages;
         break;
       }
       case 'client_subscribe': {
-        count = currentPeriod.subClientsCount;
+        count = currentPeriod.subscribedClients;
         break;
       }
       case 'client_publish': {
-        count = currentPeriod.pubClientsCount;
+        count = currentPeriod.publishedClients;
         break;
       }
       case 'incoming_bandwidth': {
