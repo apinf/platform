@@ -34,12 +34,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </li>
         {{/ if }}
 
-        {{# if currentUser }}
-          <li id ="api-auth-tab">
-            <a href="#api-auth" data-toggle="tab">
-              Auth
-            </a>
-          </li>
+        {{# if proxyIsConfigured }}
+          {{# if currentUser }}
+            <li id ="api-auth-tab">
+              <a href="#api-auth" data-toggle="tab">
+                Auth
+              </a>
+            </li>
+          {{/ if }}
         {{/ if }}
 
         {{# if currentUser }}

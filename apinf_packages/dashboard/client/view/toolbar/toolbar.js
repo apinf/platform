@@ -16,6 +16,13 @@ Template.dashboardToolbar.helpers({
     // Select this option if it is equal with query param value
     return proxyId === this._id ? 'selected' : '';
   },
+  managedOneApi () {
+    return ProxyBackends.find().count() === 1;
+  },
+  managedApisCount () {
+    // Return count of managed APIs
+    return Apis.find().count();
+  },
 });
 
 Template.dashboardToolbar.events({

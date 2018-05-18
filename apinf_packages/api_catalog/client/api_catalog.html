@@ -6,17 +6,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiCatalog">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height: 60px;">
     <ul class="list-inline catalog-header" style="margin-bottom: 0;">
-      <li>
-        <h1 style="margin-top: 0.8em;">
+      <li class="col-md-8">
+        <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px;">
           {{_ "catalog_Title" }}
         </h1>
       </li>
       <!-- <li class=" catalog-header-search" style="padding-right: 0;margin-top: 0.9em;">
 
       </li> -->
-      <li class="pull-right">
+      <li class="col-md-4 pull-right text-right">
         {{# if userCanAddApi }}
-          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 0.7em;">
+          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 1rem;">
             Add new API
           </a>
         {{/ if }}

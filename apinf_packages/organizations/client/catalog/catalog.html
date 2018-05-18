@@ -7,16 +7,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height: 60px;">
     <ul class="list-inline catalog-header" style="margin-bottom: 0;">
       <li class="col-md-4">
-        <h1 style="margin-top:0.8em;">
+        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px;">
           {{_ "organizationCatalog_Title" }}
         </h1>
       </li>
       <li class="col-md-4 text-center toolbar" style="padding-right: 0;margin-top: 0.9em;">
         {{> organizationCatalogToolbar }}
       </li>
-      <li class="col-md-4 text-right add-organization" style="padding-right: 0;margin-top: 0.7em;">
+      <li class="col-md-4 text-right pull-right add-organization">
         {{# if userCanAddOrganization }}
-          <button id="add-organization" type="button" class="btn btn-success btn-success-special">
+          <button id="add-organization" type="button" class="btn btn-success btn-success-special" style="margin-top: 1rem;">
             {{_ "organizationCatalog_buttonText_addOrganization" }}
           </button>
         {{/ if }}
