@@ -86,7 +86,7 @@ ProxyV1.addCollection(Proxies, {
         const requestorId = this.request.headers['x-user-id'];
 
         if (!requestorId) {
-          return errorMessagePayload(400, 'Erroneous or missing parameter.');
+          return errorMessagePayload(400, 'User ID missing.');
         }
 
         // Requestor must be an administrator
@@ -173,7 +173,7 @@ ProxyV1.addCollection(Proxies, {
         const requestorId = this.request.headers['x-user-id'];
 
         if (!requestorId) {
-          return errorMessagePayload(400, 'Erroneous or missing parameter.');
+          return errorMessagePayload(400, 'User ID missing.');
         }
 
         // Requestor must be an administrator
@@ -235,6 +235,9 @@ ProxyV1.addCollection(Proxies, {
           401: {
             description: 'Authentication is required',
           },
+          404: {
+            description: 'Proxy is not found',
+          },
           500: {
             description: 'Internal server error',
           },
@@ -251,7 +254,7 @@ ProxyV1.addCollection(Proxies, {
         const requestorId = this.request.headers['x-user-id'];
 
         if (!requestorId) {
-          return errorMessagePayload(400, 'Erroneous or missing parameter.');
+          return errorMessagePayload(400, 'User ID missing.');
         }
 
         // Requestor must be an administrator
@@ -273,7 +276,7 @@ ProxyV1.addCollection(Proxies, {
           'emq.brokerEndpoints.$.port': bodyParams.emqPort,
         };
 
-        // Name is a required field
+        // Name is a mandatory field
         if (!bodyParams.name) {
           return errorMessagePayload(400, 'Parameter "name" is mandatory.');
         }
@@ -297,6 +300,7 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, 'Parameter "description" is mandatory.');
         }
 
+        // Type is a mandatory field
         if (!bodyParams.type) {
           return errorMessagePayload(400, 'Parameter "type" is mandatory.');
         }
@@ -310,11 +314,11 @@ ProxyV1.addCollection(Proxies, {
           }
         }
 
-        // Check apiUmbrella elasticSearch URL, used in both cases
+        // Check apiUmbrella elasticSearch URL, can be used in both cases
         if (!bodyParams.esUrl) {
           return errorMessagePayload(400, 'Parameter "esUrl" is mandatory.');
         }
-        // regexes are missing from table, so check generally
+        // part of regexes are missing from table, so check generally
         const re = new RegExp(SimpleSchema.RegEx.Url);
 
         if (!bodyParams.esUrl.match(re)) {
@@ -328,7 +332,7 @@ ProxyV1.addCollection(Proxies, {
 
         // Check parameter sets depending on proxy type
         if (bodyParams.type === 'apiUmbrella') {
-          // Check apiUmbrella Proxy URL
+          // Check mandatory apiUmbrella Proxy URL
           if (!bodyParams.umbProxyUrl) {
             return errorMessagePayload(400, 'Parameter "umbProxyUrl" is mandatory.');
           }
@@ -339,11 +343,11 @@ ProxyV1.addCollection(Proxies, {
           if (!isValid) {
             return errorMessagePayload(400, 'Proxy URL not valid.');
           }
-          // Check apiUmbrella API Key
+          // Check mandatory apiUmbrella API Key
           if (!bodyParams.umbApiKey) {
             return errorMessagePayload(400, 'Parameter "umbApiKey" is mandatory.');
           }
-          // Check apiUmbrella Authentication Token
+          // Check mandatory apiUmbrella Authentication Token
           if (!bodyParams.umbAuthToken) {
             return errorMessagePayload(400, 'Parameter "umbAuthToken" is mandatory.');
           }
@@ -357,8 +361,8 @@ ProxyV1.addCollection(Proxies, {
           // Add apiUmbrella data into proxy data
           proxyData.apiUmbrella = apiUmbrella;
         } else {
-          // Has to be EMQ parameters of broker endpoints in question
-          // Check Protocol
+          // Here has to be EMQ parameters of broker endpoints in question
+          // Check mandatory Protocol
           if (!bodyParams.emqProtocol) {
             return errorMessagePayload(400, 'Parameter "emqProtocol" is mandatory.');
           }
@@ -369,7 +373,7 @@ ProxyV1.addCollection(Proxies, {
           if (!isValid) {
             return errorMessagePayload(400, 'EMQ protocol not valid.');
           }
-          // Check EMQ host
+          // Check mandatory EMQ host
           if (!bodyParams.emqHost) {
             return errorMessagePayload(400, 'Parameter "emqHost" is mandatory.');
           }
@@ -378,7 +382,7 @@ ProxyV1.addCollection(Proxies, {
             return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
           }
 
-          // Check EMQ host port
+          // Check mandatory EMQ (host) port
           if (!bodyParams.emqPort) {
             return errorMessagePayload(400, 'Parameter "emqPort" is mandatory.');
           }
@@ -388,7 +392,7 @@ ProxyV1.addCollection(Proxies, {
             'emqPort', bodyParams.emqPort);
           }
 
-          // Check EMQ TLS
+          // Check mandatory EMQ TLS
           if (!bodyParams.emqTLS) {
             return errorMessagePayload(400, 'Parameter "emqTLS" is mandatory.');
           }
@@ -401,7 +405,7 @@ ProxyV1.addCollection(Proxies, {
             return errorMessagePayload(400, 'Parameter "emqTLS" has erroneous value.');
           }
 
-          // Check EMQ http API
+          // Check mandatory EMQ http API
           if (!bodyParams.emqHttpApi) {
             return errorMessagePayload(400, 'Parameter "emqHttpApi" is mandatory.');
           }
@@ -440,7 +444,7 @@ ProxyV1.addCollection(Proxies, {
         // Get inserted Proxy data to check, if insert was successful
         const insertedProxy = Proxies.findOne({ _id: proxyId });
 
-        // Return error response, it Proxy is not found.
+        // Return error response, if Proxy is not found.
         if (!insertedProxy) {
           return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
@@ -524,6 +528,7 @@ ProxyV1.addCollection(Proxies, {
         // Get given parameters
         const bodyParams = this.bodyParams;
 
+        // At least one parameter has to be given
         if (!Object.keys(bodyParams).length) {
           return errorMessagePayload(400, 'No parameters given.');
         }
@@ -535,7 +540,7 @@ ProxyV1.addCollection(Proxies, {
         const requestorId = this.request.headers['x-user-id'];
 
         if (!requestorId) {
-          return errorMessagePayload(400, 'Erroneous or missing parameter.');
+          return errorMessagePayload(400, 'User ID missing.');
         }
 
         // Requestor must be an administrator
@@ -543,7 +548,7 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
-        // Get the proxy data to be updated
+        // Get data of the proxy to be updated
         const proxyData = Proxies.findOne({ _id: proxyId });
 
         // Return error response, it Proxy is not found.
@@ -566,7 +571,7 @@ ProxyV1.addCollection(Proxies, {
         // regexes are missing from table from part of fields, so check generally
         const re = new RegExp(SimpleSchema.RegEx.Url);
 
-        // Check apiUmbrella elasticSearch URL, might be used in both cases
+        // Check apiUmbrella elasticSearch URL, can be used in either case
         if (bodyParams.esUrl) {
           if (!bodyParams.esUrl.match(re)) {
             return errorMessagePayload(400, 'Parameter "esUrl" is not valid.');
@@ -659,7 +664,7 @@ ProxyV1.addCollection(Proxies, {
               const detailLine = `Allowed range for 'beIndex' is 0 - ${countOfBE}`;
               return errorMessagePayload(400, detailLine, 'beIndex', bodyParams.beIndex);
             }
-            // At least one of broker endpoint values must be given
+            // At least one of broker endpoint values must be given with beIndex
             if (!bodyParams.emqProtocol &&
                 !bodyParams.emqHost &&
                 !bodyParams.emqPort &&
@@ -669,20 +674,20 @@ ProxyV1.addCollection(Proxies, {
             }
           }
 
-          // Is broker endpoint data given
+          // Is any broker endpoint data given
           if (bodyParams.emqProtocol ||
               bodyParams.emqHost ||
               bodyParams.emqPort ||
               bodyParams.emqTLS) {
-            // Also broker endpoint index must be given
+            // Also broker endpoint index must be given with broker endpoint data
             if (!bodyParams.beIndex) {
               return errorMessagePayload(400, 'Index for broker endpoint is missing.');
             }
 
-            // Object for collecting input parameters
+            // Object for collecting input parameters for broker endpoint
             let brokerEndpoint = {};
             if (proxyData.emq.brokerEndpoints[bodyParams.beIndex]) {
-              // If broker endpoint exists, we are updating it
+              // If broker endpoint exists, it is the basis, which we are updating
               brokerEndpoint = proxyData.emq.brokerEndpoints[bodyParams.beIndex];
             } else if (!bodyParams.emqProtocol ||
                        !bodyParams.emqHost ||
@@ -714,7 +719,7 @@ ProxyV1.addCollection(Proxies, {
               brokerEndpoint.host = bodyParams.emqHost;
               delete bodyParams.emqHost;
             }
-            // Check EMQ host port
+            // Check EMQ (host) port
             if (bodyParams.emqPort) {
               // Check port validation
               if (isNaN(bodyParams.emqPort) ||
@@ -739,6 +744,7 @@ ProxyV1.addCollection(Proxies, {
               delete bodyParams.emqTLS;
             }
             // Fill newly filled or modified broker endpoint to proxy data
+            // using beIndex
             proxyData.emq.brokerEndpoints[bodyParams.beIndex] = brokerEndpoint;
             delete bodyParams.beIndex;
           }
@@ -753,8 +759,8 @@ ProxyV1.addCollection(Proxies, {
               return errorMessagePayload(400, detailLine, 'beIndexRemove',
                 bodyParams.beIndexRemove);
             }
+            // Broker Endpoint to be removed must exist
             if (!proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove]) {
-              // Error: Broker Endpoint does not exist
               return errorMessagePayload(400, 'Broker endpoint does not exist.');
             }
             // Remove the indicated broker endpoint
@@ -768,7 +774,11 @@ ProxyV1.addCollection(Proxies, {
         }
 
         // Update changed Proxy data
-        Proxies.update({ _id: proxyId }, { $set: proxyData });
+        const updatedProxy = Proxies.update({ _id: proxyId }, { $set: proxyData });
+        // If update failed, stop and send response
+        if (!proxyId) {
+          return errorMessagePayload(500, 'Update Proxy into database failed.');
+        }
 
         // Get inserted Proxy data to response with successful outcome
         const insertedProxy = Proxies.findOne({ _id: proxyId });
@@ -831,7 +841,7 @@ ProxyV1.addCollection(Proxies, {
         const requestorId = this.request.headers['x-user-id'];
 
         if (!requestorId) {
-          return errorMessagePayload(400, 'Erroneous or missing parameter.');
+          return errorMessagePayload(400, 'User ID missing.');
         }
 
         // Requestor must be an administrator
@@ -907,6 +917,12 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
             },
           },
         },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
         404: {
           description: 'Proxy is not Found',
         },
@@ -919,7 +935,7 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
       const requestorId = this.request.headers['x-user-id'];
 
       if (!requestorId) {
-        return errorMessagePayload(400, 'Erroneous or missing parameter.');
+        return errorMessagePayload(400, 'User ID missing.');
       }
 
       // Requestor must be an administrator
@@ -950,6 +966,5 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
       };
     },
   },
-
 });
 
