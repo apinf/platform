@@ -57,7 +57,8 @@ const descriptionProxies = {
 
     GET /proxies
 
-  Result: Responds with HTTP code 200 and a list of available proxies.
+  Result: Responds with HTTP code 200 and a list of available Proxies containing
+  proxy information by proxy type.
 
   If no proxies are defined, returns an empty list.
   `,
@@ -94,7 +95,7 @@ const descriptionProxies = {
 
     GET /proxies/<proxy id>
 
-  Result: Responds with HTTP code 200 and proxy information.
+  Result: Responds with HTTP code 200 and Proxy information by proxy type.
 
   If no proxy is not found, responds with corresponding error.
   `,
@@ -109,9 +110,8 @@ const descriptionProxies = {
     DELETE /proxies/<proxy id>
 
   Result: deletes the Proxy identified with <proxy id> and responds with HTTP code 204.
-
-  If match is not found, the operation is considered as failure. A Proxy with
-  are connected backends cannot be removed.
+  A Proxy with connected backends cannot be removed.
+  If match is not found, the operation is considered as a failure.
   `,
   // --------------------------------------------
   postProxy: `
@@ -123,7 +123,7 @@ const descriptionProxies = {
   Parameters (all are mandatory)
   * name (must be unique)
   * description
-  * type = proxy type, (apiUmbrella | EMQ)
+  * type = proxy type, [apiUmbrella | EMQ]
 
   Proxy type related parameters.
   The parameter set according to selected proxy type is mandatory.
@@ -138,7 +138,7 @@ const descriptionProxies = {
   - emqHttpApi = Configuration API endpoint
   - esUrl = ElasticSearch URL
   - Broker Endpoint (one or several) consisting of:
-    - emqProtocol = protocol to be used (MQTT | MQTT over websockets)
+    - emqProtocol = protocol to be used [MQTT | MQTT over websockets]
     - emqHost = Host URL
     - emqPort = Port used in Host URL
     - emqTLS = TLS activation (true | false)
@@ -153,17 +153,17 @@ const descriptionProxies = {
   putProxy: `
   ### Update an existing Proxy ###
 
-  Admin can update settings of an existing Proxy. Only parameters related to existing
-  proxy type can be modified.
+  Admin can update settings of an existing Proxy. Only parameters related to identified
+  proxy's type can be modified.
   At least one parameter in set according to proxy type must be given.
   Parameters in wrong set must not be given.
 
-  With parameter *beIndex* is indicated, which broker endpoint data is to be modified.
-  Also a new occurrence can be added to
+  With parameter *beIndex* it is indicated, which broker endpoint data is to be modified.
+  Also a new broker endpoint occurrence can be added to
   - a hole in broker endpoint list (*beIndex* points to hole) or
   - end of broker endpoint list (*beIndex* points to length of list)
 
-  With parameter *beIndexRemove* is indicated, which broker endpoint data is to be removed.
+  With parameter *beIndexRemove* it is indicated, which broker endpoint data is to be removed.
 
 
   Note! Type of Proxy can not be changed.
@@ -191,12 +191,12 @@ const descriptionProxies = {
   - emqHttpApi = Configuration API endpoint
   - esUrl = ElasticSearch URL
   - Broker Endpoint (one or several) consisting of:
-    - emqProtocol = protocol to be used (MQTT | MQTT over websockets)
+    - emqProtocol = protocol to be used [MQTT | MQTT over websockets]
     - emqHost = Host URL
     - emqPort = Port used in Host URL
-    - emqTLS = TLS activation (true | false)
+    - emqTLS = TLS activation [true | false]
 
-  - beIndex = indicates the broker endpoint occurrence, which data is modified
+  - beIndex = indicates the broker endpoint occurrence, which data is modified or added
   - beIndexRemove = indicates, which broker endpoint is to be removed
 
   Example call:
@@ -204,7 +204,7 @@ const descriptionProxies = {
     PUT /proxies/<proxy id>
 
   Result: updates the Proxy identified with <proxy id> and responds with HTTP code 200
-  and proxy information.
+  and updated Proxy's information.
   `,
   // --------------------------------------------
   getProxyBackends: `

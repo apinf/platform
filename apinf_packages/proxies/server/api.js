@@ -42,7 +42,9 @@ ProxyV1.addCollection(Proxies, {
         ],
         summary: 'Get list of available proxies.',
         description: descriptionProxies.getAllProxies,
-        parameters: [],
+        parameters: [
+          ProxyV1.swagger.params.proxyType,
+        ],
         responses: {
           200: {
             description: 'List of available proxies',
@@ -209,7 +211,7 @@ ProxyV1.addCollection(Proxies, {
         summary: 'Add a new Proxy.',
         description: descriptionProxies.postProxy,
         parameters: [
-          ProxyV1.swagger.params.proxyRequest,
+          ProxyV1.swagger.params.proxyPostRequest,
         ],
         responses: {
           201: {
@@ -465,7 +467,7 @@ ProxyV1.addCollection(Proxies, {
         description: descriptionProxies.putProxy,
         parameters: [
           ProxyV1.swagger.params.proxyId,
-          ProxyV1.swagger.params.proxyRequest,
+          ProxyV1.swagger.params.proxyPutRequest,
         ],
         responses: {
           200: {
@@ -654,7 +656,7 @@ ProxyV1.addCollection(Proxies, {
             if (isNaN(bodyParams.beIndex) ||
                 1 * bodyParams.beIndex < 0 ||
                 1 * bodyParams.beIndex > countOfBE) {
-              const detailLine = `Allowed range for "beIndex" is 0 - ${countOfBE}`;
+              const detailLine = `Allowed range for 'beIndex' is 0 - ${countOfBE}`;
               return errorMessagePayload(400, detailLine, 'beIndex', bodyParams.beIndex);
             }
             // At least one of broker endpoint values must be given
@@ -662,7 +664,7 @@ ProxyV1.addCollection(Proxies, {
                 !bodyParams.emqHost &&
                 !bodyParams.emqPort &&
                 !bodyParams.emqTLS) {
-              const detailLine = `Broker endpoint index given without change values.`;
+              const detailLine = 'Broker endpoint index given without change values.';
               return errorMessagePayload(400, detailLine);
             }
           }
@@ -747,7 +749,7 @@ ProxyV1.addCollection(Proxies, {
             if (isNaN(bodyParams.beIndexRemove) ||
                 1 * bodyParams.beIndexRemove < 0 ||
                 1 * bodyParams.beIndexRemove > (countOfBE - 1)) {
-              const detailLine = `Allowed range for "beIndexRemove" is 0 - ${ countOfBE-1 }`;
+              const detailLine = `Allowed range for "beIndexRemove" is 0 - ${countOfBE - 1}`;
               return errorMessagePayload(400, detailLine, 'beIndexRemove',
                 bodyParams.beIndexRemove);
             }
