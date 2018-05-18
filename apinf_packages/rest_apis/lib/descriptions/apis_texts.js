@@ -125,7 +125,7 @@ const descriptionApis = {
   `,
 // --------------------------------------------
   postProxyBackend: `
-  ### Connect an API to a Proxy ###
+  ### Connects an API to a Proxy ###
 
   Adds API connection to an identified Proxy.
   On success, returns the updated API object.
@@ -141,7 +141,7 @@ const descriptionApis = {
   * *disableApiKey*, [true | false], true = skip API key requirement in Proxy, default false
   * *rateLimitMode*, [unlimited | custom], default 'unlimited', (M)
 
-  When parameter rateLimitMode has value 'custom', following parameters are needed
+  When parameter *rateLimitMode* has value 'custom', following parameters are needed
   * *duration*, set request duration in milliseconds
   * *limitBy*, [apiKey | ip],
   * *limit*, set number of request
@@ -149,15 +149,12 @@ const descriptionApis = {
   `,
     // --------------------------------------------
   deleteProxyBackend: `
-  ### Removes API's Proxy connection ###
+  ### Disconnects API from a Proxy ###
 
-  Removes Proxy connection identified API.
-  When proxy connection exists, returns an empty response (204).
-  Trying to remove a non-existing proxy connection for API is considered error (404).
-
-
-  Parameters
-  * *:id* is API id, mandatory (in URL)
+  Disconnects an identified API from Proxy by removing Proxy Backend.
+  When proxy connection exists and it is successfully removed,
+  returns an empty response (204).
+  Trying to remove a non-existing proxy connection from API is considered error (404).
   `,
 
 };
