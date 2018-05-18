@@ -57,18 +57,33 @@ ProxyV1.swagger = {
       required: true,
       type: 'string',
     },
-    proxyRequest: {
+    proxyPostRequest: {
       name: 'proxy',
       in: 'body',
-      description: 'Data for adding or editing a Proxy',
+      description: 'Data for adding a new Proxy',
       schema: {
-        $ref: '#/definitions/proxyRequest',
+        $ref: '#/definitions/proxyPostRequest',
       },
+    },
+    proxyPutRequest: {
+      name: 'proxy',
+      in: 'body',
+      description: 'Data for editing a Proxy',
+      schema: {
+        $ref: '#/definitions/proxyPutRequest',
+      },
+    },
+    proxyType: {
+      name: 'type',
+      in: 'query',
+      description: 'List Proxies according to given type',
+      required: false,
+      type: 'string',
     },
   },
   definitions: {
     // proxy related definitions
-    proxyRequest: {
+    proxyPostRequest: {
       required: ['name', 'description', 'type'],
       properties: {
         name: {
@@ -83,6 +98,77 @@ ProxyV1.swagger = {
           type: 'string',
           enum: ['apiUmbrella', 'emq'],
           example: 'apiUmbrella | emq',
+        },
+        umbProxyUrl: {
+          type: 'string',
+          description: 'A URL to proxy',
+          format: 'url',
+          example: 'https://my.proxy.com:port',
+        },
+        umbApiKey: {
+          type: 'string',
+          description: 'API key for API Umbrella',
+          example: 'api-key-string',
+        },
+        umbAuthToken: {
+          type: 'string',
+          description: 'Authentication Token for API Umbrella',
+          example: 'http://link-address-to-specification.com',
+        },
+        esUrl: {
+          type: 'string',
+          description: 'A URL to ElasticSearch',
+          format: 'url',
+          example: 'http://url-to-elastic-search.com:port',
+        },
+        emqProtocol: {
+          type: 'string',
+          enum: ['MQTT', 'MQTT over websockets'],
+          description: 'Protocol is either MQTT or MQTT over websockets',
+          example: 'MQTT | MQTT over websockets',
+        },
+        emqHost: {
+          type: 'string',
+          format: 'url',
+          example: 'https://emq.host.com',
+        },
+        emqPort: {
+          type: 'integer',
+          format: 'int32',
+          example: '666',
+        },
+        emqTLS: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'true | false',
+        },
+        emqHttpApi: {
+          type: 'string',
+          format: 'url',
+          example: 'https://emq.httpapi.com',
+        },
+      },
+    },
+    proxyPutRequest: {
+      required: ['name', 'description'],
+      properties: {
+        beIndex: {
+          type: 'integer',
+          description: 'Index of Broker Endpoint to be modified',
+          example: '3',
+        },
+        beIndexRemove: {
+          type: 'integer',
+          description: 'Index of Broker Endpoint to be removed',
+          example: '2',
+        },
+        name: {
+          type: 'string',
+          example: 'Name of proxy',
+        },
+        description: {
+          type: 'string',
+          example: 'Description of proxy functionality',
         },
         umbProxyUrl: {
           type: 'string',
