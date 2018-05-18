@@ -774,17 +774,17 @@ ProxyV1.addCollection(Proxies, {
         }
 
         // Update changed Proxy data
-        const updatedProxy = Proxies.update({ _id: proxyId }, { $set: proxyData });
+        const success = Proxies.update({ _id: proxyId }, { $set: proxyData });
         // If update failed, stop and send response
-        if (!proxyId) {
+        if (!success) {
           return errorMessagePayload(500, 'Update Proxy into database failed.');
         }
 
         // Get inserted Proxy data to response with successful outcome
-        const insertedProxy = Proxies.findOne({ _id: proxyId });
+        const updatedProxy = Proxies.findOne({ _id: proxyId });
 
         // Return error response, it Proxy is not found.
-        if (!insertedProxy) {
+        if (!updatedProxy) {
           return errorMessagePayload(404, 'Proxy with specified ID is not found.');
         }
 
@@ -793,7 +793,7 @@ ProxyV1.addCollection(Proxies, {
           statusCode: 200,
           body: {
             status: 'success',
-            data: insertedProxy,
+            data: updatedProxy,
           },
         };
       },
