@@ -20,7 +20,7 @@ Meteor.methods({
     check(topic, String);
 
     // Build index for each event type
-    const indexName = indexesSet('24', 'message_published', 'current');
+    const indexName = indexesSet('1', 'message_published', 'current');
 
     // Build query body for each event type
     const queryBody = autoCompleteRequest(topic);
