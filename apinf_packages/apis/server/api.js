@@ -10,6 +10,9 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// Npm packages imports
+import URI from 'urijs';
+
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
@@ -1230,7 +1233,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
       // Collect data to be inserted into proxyBackend
       const newProxyBackendData = {
-        apiId: apiId,
+        apiId,
         proxyId: proxy._id,
         // Type comes from selected proxy
         type: proxy.type,
@@ -1283,17 +1286,21 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         apiUmbrella.name = api.name;
 
         // Frontend host address comes from proxy document
-        const frontendAddress = proxy.apiUmbrella.url.split('://');
-        apiUmbrella.frontend_host = frontendAddress[1];
+        const apiUmbrellaUrl = new URI(proxy.apiUmbrella.url);
+        apiUmbrella.frontend_host = apiUmbrellaUrl.host();
 
         // Backend host address comes from API
-        const backendAddress = api.url.split('://');
-        apiUmbrella.backend_host = backendAddress[1];
-        apiUmbrella.backend_protocol = backendAddress[0];
+        const apiUrl = new URI(api.url);
+        apiUmbrella.backend_host = apiUrl.host();
+        apiUmbrella.backend_protocol = apiUrl.protocol();
 
         // Information of server address and port
-        // By default apiPort is set to 443
+        // By default apiPort is set to 443 for https
         let apiPort = 443;
+        // Default apiPort for https is 80
+        if (apiUmbrella.backend_protocol === 'http') {
+          apiPort = 80;
+        }
         // apiPort must be a numeric value
         if (bodyParams.apiPort) {
           if (isNaN(bodyParams.apiPort) || bodyParams.apiPort < 0 || bodyParams.apiPort > 65535) {
@@ -1370,7 +1377,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           }
 
           // Convert given value to boolean. Also sets default false, if value not given.
-          const showLimitInResponseHeaders = (bodyParams.showLimitInResponseHeaders === 'true');
+          const showLimitInResponseHeaders = (bodyParams.showLimit === 'true');
 
           // Get given values ready for DB write
           const rateLimits = [{
@@ -1383,7 +1390,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           settings.rate_limits = rateLimits;
         }
 
-        // Collect apiUmrella related data
+        // Collect apiUmbrella related data
         apiUmbrella.servers = servers;
         apiUmbrella.url_matches = urlMatches;
         apiUmbrella.settings = settings;
