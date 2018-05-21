@@ -16,37 +16,11 @@ import StoredTopics from '../collection';
 // APInf imports
 import { calculateTrend } from '../../dashboard/lib/trend_helpers';
 import promisifyCall from '../../core/helper_functions/promisify_call';
-import { indexesSet,
-  topicsTableDeliveredType, topicsTablePublishedType,
-  topicsTableSubscribedType,
-} from '../lib/es_requests';
-import { calculateSecondsCount, calculateBandwidthKbs } from '../lib/helpers';
+import { topicsTableDeliveredType, topicsTablePublishedType, topicsTableSubscribedType }
+from '../lib/topics_requests';
+import { indexesSet, calculateSecondsCount, calculateBandwidthKbs } from '../lib/helpers';
 
 Meteor.methods({
-  autocompletedDataFetch (response, searchedTopic) {
-    check(response, Object);
-    check(searchedTopic, String);
-
-    try {
-      const topicsData = response.aggregations.autocomplete.topic_value.buckets;
-
-      const topicsList = topicsData.map(x => {
-        // Truncate to next '/'
-        const topicTree = x.key.substr(0, x.key.indexOf('/', searchedTopic.length) + 1);
-        return `${topicTree}#`;
-      });
-
-      // Return unique values
-      return _.uniq(topicsList).map(topic => {
-        return {
-          id: topic,
-          text: topic,
-        };
-      });
-    } catch (e) {
-      throw new Meteor.Error(e.message);
-    }
-  },
   buildRequestTopicsTableData (topicsList, timeframe, period, dateRange) {
     check(topicsList, Array);
     check(timeframe, String);
@@ -184,6 +158,6 @@ Meteor.methods({
 
         return { topicsData, trend };
       })
-      .catch(error => { console.log('ERROR', error); });
+      .catch(error => { console.log(error);throw new Meteor.Error(error); });
   },
 });

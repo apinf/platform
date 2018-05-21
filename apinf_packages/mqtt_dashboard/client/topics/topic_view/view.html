@@ -26,7 +26,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </small><br>
             <label for="" class="statistics-numbers">
               {{# if statisticsReady }}
-                {{ totalNumber 'incoming_bandwidth' }} Kb/s
+                {{ totalNumber 'incomingBandwidth' }} Kb/s
               {{ else }}
                 <div class="loader"></div>
               {{/ if }}
@@ -43,7 +43,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </small><br>
             <label for="" class="statistics-numbers">
               {{# if statisticsReady }}
-                {{ totalNumber 'outgoing_bandwidth' }} Kb/s
+                {{ totalNumber 'outgoingBandwidth' }} Kb/s
               {{ else }}
                 <div class="loader"></div>
               {{/ if }}
@@ -60,12 +60,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </small><br>
             <label for="" class="statistics-numbers">
               {{# if statisticsReady }}
-                {{ totalNumber 'message_published' }}
+                {{ totalNumber 'publishedMessages' }}
               {{ else }}
                 <div class="loader"></div>
               {{/ if }}
             </label><br>
-            <span class={{ textColor 'message_published' }}>
+            <span class={{ textColor 'deliveredMessages' }}>
               {{ percentageValue 'message_published' }}
               <i class="fa fa-{{ arrowDirection 'message_published' }}" aria-hidden="true"></i>
             </span>
@@ -77,7 +77,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </small><br>
             <label for="" class="statistics-numbers">
               {{# if statisticsReady }}
-                {{ totalNumber 'message_delivered' }}
+                {{ totalNumber 'deliveredMessages' }}
               {{ else }}
                 <div class="loader"></div>
               {{/ if }}
@@ -94,7 +94,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </small><br>
             <label for="" class="statistics-numbers">
               {{# if statisticsReady }}
-                {{ totalNumber 'client_subscribe' }}
+                {{ totalNumber 'subscribedClients' }}
               {{ else }}
                 <div class="loader"></div>
               {{/ if }}
@@ -111,7 +111,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </small><br>
             <label for="" class="statistics-numbers">
               {{# if statisticsReady }}
-                {{ totalNumber 'client_publish' }}
+                {{ totalNumber 'publishedClients' }}
               {{ else }}
                 <div class="loader"></div>
               {{/ if }}

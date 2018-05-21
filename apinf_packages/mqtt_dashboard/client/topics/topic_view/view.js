@@ -19,7 +19,7 @@ import StoredTopics from '/apinf_packages/mqtt_dashboard/collection';
 // APInf imports
 import { arrowDirection, calculateTrend, percentageValue }
 from '/apinf_packages/dashboard/lib/trend_helpers';
-import { calculateSecondsCount, getDateRange } from '../../../lib/helpers';
+import { getDateRange } from '../../../lib/helpers';
 
 Template.topicPage.onCreated(function () {
   const instance = this;
@@ -40,12 +40,16 @@ Template.topicPage.onCreated(function () {
   instance.summaryStatistics = new ReactiveVar();
 
   instance.dateHistogramRequest = (eventType, topic) => {
-    // Calculate for Bandwidth
-    const secondsCount = calculateSecondsCount(instance.timeframe);
+    const params = {
+      timeframe: instance.timeframe,
+      dataType: 'histogram',
+      topic,
+      eventType,
+    };
 
     // Fetch & process data
-    Meteor.call('histogramTopicMongo',
-      eventType, instance.queryOption, topic, secondsCount, (error, result) => {
+    Meteor.call('fetchHistogramTopicData',
+      instance.queryOption, params, (error, result) => {
         // Mark data is ready
         instance.chartDataReady.set(true);
 
@@ -66,15 +70,15 @@ Template.topicPage.onCreated(function () {
   };
 
   instance.totalNumberRequest = (dateRange, periodType, topic) => {
-    // Calculate for Bandwidth data
-    const secondsCount = calculateSecondsCount(instance.timeframe);
+    const params = {
+      timeframe: instance.timeframe,
+      dataType: periodType,
+      topic,
+    };
 
     // Fetch & process data
-    Meteor.call('summaryStatisticsTopicMongo',
-      dateRange, [topic], secondsCount, (error, result) => {
-        // Mark data is ready
-        instance.statisticsReady.set(true);
-
+    Meteor.call('fetchSummaryStatisticsTopic',
+      dateRange, params, (error, result) => {
         if (error) {
           // Display message error
           const message = `Fetching ${periodType} summary statistics fails. ${error.message}`;
@@ -83,11 +87,13 @@ Template.topicPage.onCreated(function () {
         }
 
         if (periodType === 'current') {
+          // Mark data is ready
+          instance.statisticsReady.set(true);
           // Store data for Current Period
-          instance.summaryStatistics.set(result[topic]);
+          instance.summaryStatistics.set(result);
         } else {
           // Store data for Previous Period
-          instance.previousPeriod.set(result[topic]);
+          instance.previousPeriod.set(result);
         }
       });
   };
@@ -189,18 +195,24 @@ Template.topicPage.onCreated(function () {
 
     if (previousPeriod && currentPeriod) {
       const compareData = {
-        incomingBandwidth: calculateTrend(previousPeriod.incoming_bandwidth,
-          currentPeriod.incoming_bandwidth),
-        outgoingBandwidth: calculateTrend(previousPeriod.outgoing_bandwidth,
-          currentPeriod.outgoing_bandwidth),
-        publishedMessages: calculateTrend(previousPeriod.message_published,
-          currentPeriod.message_published),
-        deliveredMessages: calculateTrend(previousPeriod.message_delivered,
-          currentPeriod.message_delivered),
-        subscribedClients: calculateTrend(previousPeriod.client_subscribe,
-          currentPeriod.client_subscribe),
-        publishedClients: calculateTrend(previousPeriod.client_publish,
-          currentPeriod.client_publish),
+        incomingBandwidth: calculateTrend(
+          previousPeriod.incomingBandwidth, currentPeriod.incomingBandwidth
+        ),
+        outgoingBandwidth: calculateTrend(
+          previousPeriod.outgoingBandwidth, currentPeriod.outgoingBandwidth
+        ),
+        publishedMessages: calculateTrend(
+          previousPeriod.publishedMessages, currentPeriod.publishedMessages
+        ),
+        deliveredMessages: calculateTrend(
+          previousPeriod.deliveredMessages, currentPeriod.deliveredMessages
+        ),
+        subscribedClients: calculateTrend(
+          previousPeriod.subscribedClients, currentPeriod.subscribedClients
+        ),
+        publishedClients: calculateTrend(
+          previousPeriod.publishedClients, currentPeriod.publishedClients
+        ),
       };
       instance.trend.set(compareData);
     }

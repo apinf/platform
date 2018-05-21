@@ -14,18 +14,18 @@ import _ from 'lodash';
 // APInf imports
 import { calculateTrend } from '../../dashboard/lib/trend_helpers';
 import promisifyCall from '../../core/helper_functions/promisify_call';
-import { indexesSet,
-  remainingTrafficDeliveredType, remainingTrafficPublishedType,
+import { remainingTrafficDeliveredType, remainingTrafficPublishedType,
   remainingTrafficSubscribedType,
-} from '../lib/es_requests';
-import { calculateSecondsCount, calculateBandwidthKbs } from '../lib/helpers';
+} from '../lib/topics_requests';
+import { indexesSet, calculateSecondsCount, calculateBandwidthKbs } from '../lib/helpers';
 
 Meteor.methods({
-  buildRequestRemainingTraffic (topicsList, timeframe, period, dateRang) {
+  buildRequestRemainingTraffic (topicsList, params, dateRang) {
     check(topicsList, Array);
-    check(timeframe, String);
-    check(period, String);
+    check(params, Object);
     check(dateRang, Object);
+
+    const { timeframe, period } = params;
 
     let filter;
 
@@ -65,7 +65,12 @@ Meteor.methods({
     const secondsCount = calculateSecondsCount(timeframe);
     let currentDatasetTraffic = {};
 
-    return promisifyCall('buildRequestRemainingTraffic', topicsList, timeframe, 'current', dateRange)
+    const params = {
+      timeframe,
+      period: 'current',
+    };
+
+    return promisifyCall('buildRequestRemainingTraffic', topicsList, params, dateRange)
       .then(response => {
         const incomingSizeBytes = _.get(response[0], 'aggregations.incoming_bandwidth.value', 0);
         const outgoingSizeBytes = _.get(response[1], 'aggregations.outgoing_bandwidth.value', 0);
@@ -74,8 +79,8 @@ Meteor.methods({
           value: 'remaining',
           incomingBandwidth: calculateBandwidthKbs(incomingSizeBytes, secondsCount),
           outgoingBandwidth: calculateBandwidthKbs(outgoingSizeBytes, secondsCount),
-          publishedMessages: response[0].hits.total,
-          deliveredMessages: response[1].hits.total,
+          publishedMessages: _.get(response[0], 'hits.total', 0),
+          deliveredMessages: _.get(response[1], 'hits.total', 0),
           subscribedClients: _.get(response[2], 'aggregations.client_subscribe.value', 0),
           publishedClients: _.get(response[0], 'aggregations.client_published.value', 0),
         };
@@ -85,7 +90,9 @@ Meteor.methods({
           to: dateRange.onePeriodAgo,
         };
 
-        return promisifyCall('buildRequestRemainingTraffic', topicsList, timeframe, 'previous', previousDateRange);
+        params.period = 'previous';
+
+        return promisifyCall('buildRequestRemainingTraffic', topicsList, params, previousDateRange);
       })
       .then(response => {
         const incomingSizeBytes = _.get(response[0], 'aggregations.incoming_bandwidth.value', 0);
@@ -94,8 +101,8 @@ Meteor.methods({
         const previousDatasetTraffic = {
           incomingBandwidth: calculateBandwidthKbs(incomingSizeBytes, secondsCount),
           outgoingBandwidth: calculateBandwidthKbs(outgoingSizeBytes, secondsCount),
-          publishedMessages: response[0].hits.total,
-          deliveredMessages: response[0].hits.total,
+          publishedMessages: _.get(response[0], 'hits.total', 0),
+          deliveredMessages: _.get(response[1], 'hits.total', 0),
           subscribedClients: _.get(response[2], 'aggregations.client_subscribe.value', 0),
           publishedClients: _.get(response[0], 'aggregations.client_published.value', 0),
         };
@@ -126,6 +133,6 @@ Meteor.methods({
           trend,
         };
       })
-      .catch(error => { console.log('Error: ', error); });
+      .catch(error => { throw new Meteor.Error(error); });
   },
 });

@@ -7,13 +7,11 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import _ from 'lodash';
-import {
-  histogramDataRequestAllTopics,
-  indexesSet,
-  summaryStatisticsTopicsRequest } from '../lib/es_requests';
+
 import {
   calculateBandwidthKbs,
   calculateSecondsCount,
+  indexesSet,
 } from '../lib/helpers';
 import promisifyCall from '../../core/helper_functions/promisify_call';
 import {
@@ -27,7 +25,7 @@ Meteor.methods({
     check(timeframe, String);
     check(type, String);
     check(dateRange, Object);
-console.log(type, dateRange)
+
     const url = 'http://hap.cinfra.fi:9200/_msearch?pretty=true';
 
     if (type === 'histogram') {
@@ -115,7 +113,7 @@ console.log(type, dateRange)
           subscribedClientsData,
         };
       })
-      .catch(error => { console.log('ERROR', error); });
+      .catch(error => { throw new Meteor.Error(error); });
   },
   fetchSummaryStatisticsTopics (timeframe, dateRange, period) {
     check(timeframe, String);
@@ -132,12 +130,12 @@ console.log(type, dateRange)
         return {
           incomingBandwidth: calculateBandwidthKbs(incomingSizeBytes, secondsCount),
           outgoingBandwidth: calculateBandwidthKbs(outgoingSizeBytes, secondsCount),
-          publishedMessages: response[0].hits.total,
-          deliveredMessages: response[1].hits.total,
+          publishedMessages: _.get(response[0], 'hits.total', 0),
+          deliveredMessages: _.get(response[1], 'hits.total', 0),
           publishedClients: _.get(response[0], 'aggregations.client_publish.value', 0),
           subscribedClients: _.get(response[2], 'aggregations.client_subscribe.value', 0),
         };
       })
-      .catch(error => { console.log('ERROR', error); });
+      .catch(error => { console.log(error); throw new Meteor.Error(error); });
   },
 });

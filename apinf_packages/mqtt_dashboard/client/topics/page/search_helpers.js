@@ -8,8 +8,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import _ from 'lodash';
 
-import { autoCompleteRequest } from '../../../lib/es_requests';
-
 const ArrayAdapter = jQuery.fn.select2.amd.require('select2/data/array');
 
 // Adapter for Select2
@@ -21,10 +19,7 @@ export default class ESData extends ArrayAdapter {
     this.query = _.debounce((params, callback) => {
       // A value is provided
       if (params.term) {
-        // Build request to ES
-        const bodyParam = autoCompleteRequest(params.term);
-
-        Meteor.call('emqElastisticsearchSearch', bodyParam, (fetchingError, fetchingResult) => {
+        Meteor.call('buildRequestAutocomplete', params.term, (fetchingError, fetchingResult) => {
           if (fetchingError) {
             callback({ results: [] });
 

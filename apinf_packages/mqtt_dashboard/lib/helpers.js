@@ -94,3 +94,37 @@ export function calculateBandwidthKbs (bytes, secondsCount) {
 
   return +kbs.toFixed(2);
 }
+
+export function indexesSet (timeframe, eventType, period) {
+  // Last 24 hours
+  if (timeframe === '24') {
+    if (period === 'current') {
+      return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>`;
+    }
+    return `<${eventType}-{now/d-1d}>,<${eventType}-{now/d-2d}>`;
+  }
+
+  // Last 7 days
+  if (timeframe === '7') {
+    if (period === 'current') {
+      return `<${eventType}-{now/d}>,<${eventType}-{now/d-1d}>,` +
+        `<${eventType}-{now/d-2d}>,<${eventType}-{now/d-3d}>,` +
+        `<${eventType}-{now/d-4d}>,<${eventType}-{now/d-5d}>,` +
+        `<${eventType}-{now/d-6d}>`;
+    }
+
+    // Previous period
+    return `<${eventType}-{now/d-7d}>,<${eventType}-{now/d-8d}>,` +
+      `<${eventType}-{now/d-9d}>,<${eventType}-{now/d-10d}>,` +
+      `<${eventType}-{now/d-11d}>,<${eventType}-{now/d-12d}>,` +
+      `<${eventType}-{now/d-13d}>`;
+  }
+
+  // Last 30 days
+  if (timeframe === '30') {
+    return `<${eventType}-*>`;
+  }
+
+  // By default send for current day
+  return `<${eventType}-{now/d}>`;
+}

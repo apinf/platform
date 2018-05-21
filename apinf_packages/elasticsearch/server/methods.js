@@ -13,12 +13,6 @@ import { Client as ESClient } from 'elasticsearch';
 
 import Proxies from '../../proxies/collection';
 
-import {calculateBandwidthKbs,topicsTablePublishedType, topicsTableDeliveredType, topicsTableSubscribedType,indexesSet} from '/apinf_packages/mqtt_dashboard/lib/es_requests'
-import promisifyCall from '../../core/helper_functions/promisify_call';
-import _ from 'lodash';
-import {calculateTrend} from '../../dashboard/lib/trend_helpers';
-import StoredTopics from '../../mqtt_dashboard/collection';
-
 Meteor.methods({
   getElasticsearchData (host, queryParams) {
     // Make sure params are String type
@@ -90,8 +84,8 @@ Meteor.methods({
 
     return new Promise((resolve, reject) => {
       HTTP.call('GET', url, { content, headers }, (error, response) => {
-        if (error) reject(error);
-        resolve(response.data.responses);
+        if (response.statusCode === 200) resolve(response.data.responses);
+        reject(response.content)
       });
     });
   },
