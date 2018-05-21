@@ -56,6 +56,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .created-at {
     color: #55626c;
   }
+
+  .api-catalog-table-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    max-height: 66px;      /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
