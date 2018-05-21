@@ -10,6 +10,16 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
+Template.apiSettingsDetails.onRendered(() => {
+  this.$('#counter').textCounter({
+    target: '#api-description', // required: string
+    count: 1000, // optional: if string, specifies attribute of target to use as value
+    alertAt: 900, // optional: integer [defaults 20]
+    warnAt: 700, // optional: integer [defaults 0]
+    stopAtLimit: true // optional: defaults to false
+  });
+});
+
 Template.apiSettingsDetails.onDestroyed(() => {
   // Unset Session variable
   Session.set('apiLogoUploading', undefined);

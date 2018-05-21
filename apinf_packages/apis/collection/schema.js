@@ -23,7 +23,7 @@ Apis.schema = new SimpleSchema({
     type: String,
     max: 1000,
     autoform: {
-      rows: 3,
+      rows: 6,
     },
     optional: true,
   },
