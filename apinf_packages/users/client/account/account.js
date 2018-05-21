@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
@@ -34,5 +35,28 @@ Template.account.events({
   'click #delete-account-button': function () {
     // Show the delete account modal
     Modal.show('deleteAccount');
+  },
+});
+
+Template.account.helpers({
+  currentUser () {
+    return Meteor.user();
+  },
+  usersCollection () {
+    // Return reference to Meteor.users collection
+    return Meteor.users;
+  },
+  userEmail () {
+    let email;
+    // Get current user
+    const user = Meteor.user();
+
+    // Make sure user exists
+    if (user) {
+      // Get e-mail address
+      email = user.emails[0].address;
+    }
+
+    return email;
   },
 });
