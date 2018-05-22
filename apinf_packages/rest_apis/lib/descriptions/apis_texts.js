@@ -137,9 +137,9 @@ const descriptionApis = {
   * *frontendPrefix* is a unique identification for
   summarizing requests and responses done via this proxy connection, (M)
   * *backendPrefix* is an identification of API on server, (M)
-  * *apiPort* is port used on API server, default value is 443. (M)
-  * *disableApiKey*, [true | false], true = skip API key requirement in Proxy, default false
-  * *rateLimitMode*, [unlimited | custom], default 'unlimited', (M)
+  * *apiPort* is port used on API server, default value for https is 443, http is 80.
+  * *disableApiKey*, [false | true], true = skip API key requirement in Proxy, default false
+  * *rateLimitMode*, [unlimited | custom], default 'unlimited'
 
   When parameter *rateLimitMode* has value 'custom', following parameters are needed
   * *duration*, set request duration in milliseconds
