@@ -14,7 +14,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         type=formType }}
       <div class="col-md-6 col-md-offset-3 block-wrapper settings-fields">
         <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">General Settings</h2>
-        {{_ "settings_panelTitle_addingApisAndOrganizations" }}
+        <h3 style="font-size:16px;margin-top:0;margin-bottom:1em;">
+          {{_ "settings_panelTitle_addingApisAndOrganizations" }}
+        </h3>
         {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
         {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
         <div class="panel panel-default">

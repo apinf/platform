@@ -21,6 +21,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </span>
         {{/ if }}
         {{ api.name }}
+        {{# unless api.isPublic }}
+          <span class="label label-default">
+            {{_ "catalogTable_labelText_private" }}
+          </span>
+        {{/ unless }}
       </h1>
       </div>
 
