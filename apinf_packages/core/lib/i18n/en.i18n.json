@@ -922,7 +922,7 @@
         }
       },
       "developmentFeatures": {
-        "label": "Enabled"
+        "label": "Enable development features"
       }
     },
     "proxies": {
