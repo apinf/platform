@@ -12,6 +12,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // Npm packages imports
 import URI from 'urijs';
+import _ from 'lodash';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -1311,7 +1312,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         const servers = [{
-          host: backendAddress[1],
+          host: apiUrl.host(),
           port: apiPort,
         }];
 
@@ -1391,21 +1392,69 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         // Collect apiUmbrella related data
+        apiUmbrella.balance_algorithm = 'least_conn';
         apiUmbrella.servers = servers;
         apiUmbrella.url_matches = urlMatches;
         apiUmbrella.settings = settings;
 
         // Fill the new backend data
         newProxyBackendData.apiUmbrella = apiUmbrella;
+
+        console.log('newProxyBackendData=', newProxyBackendData);
+        // Insert corresponding proxy backend
+        const response = Meteor.call('createApiBackendOnApiUmbrella',
+          newProxyBackendData.apiUmbrella,
+          newProxyBackendData.proxyId);
+
+        console.log('response=', response);
+        console.log('response.errors=', response.errors);
+        console.log('response.errors.default=', response.errors.default);
+
+        // If response has errors object, notify about it
+        if (response.errors && response.errors.default) {
+          // Notify about error
+          return errorMessagePayload(500, response.errors.default[0]);
+        }
+
+        // If success, attach API Umbrella backend ID to API
+        if (_.has(response, 'result.data.api')) {
+          // Get the API Umbrella ID for newly created backend
+          const umbrellaBackendId = response.result.data.api.id;
+
+          console.log('umbrellaBackendId=', umbrellaBackendId);
+          // Attach the API Umbrella backend ID to backend document
+          newProxyBackendData.apiUmbrella.id = umbrellaBackendId;
+
+            // Publish the API Backend on API Umbrella
+          const publishSuccess = Meteor.call('publishApiBackendOnApiUmbrella',
+                        umbrellaBackendId, newProxyBackendData.proxyId);
+          console.log('publishSuccess=', publishSuccess);
+          if (publishSuccess.errors && response.errors.default) {
+            return errorMessagePayload(publishSuccess.errors.http_status,
+              publishSuccess.errors.default);
+          }
+          console.log('lisätäänpä=', newProxyBackendData);
+          // Insert the Proxy Backend document, asynchronous
+          const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+          console.log('proxyBackendId=', proxyBackendId);
+          if (!proxyBackendId) {
+            return errorMessagePayload(500, 'Creating proxyBackend failed.');
+          }
+          // Start cron tasks that run storing Analytics Data to MongoDB
+          Meteor.call('calculateAnalyticsData', proxyBackendId);
+
+          // Create a placeholder in 30 days for charts for particular Proxy Backend
+          Meteor.call('proxyBackendAnalyticsData', proxyBackendId, 30, 'today');
+
+        }
       }
 
-      // Insert corresponding proxy backend
- //     const proxyBackend = ProxyBackends.insert(proxyBackendData);
-
-      // If insert failed, stop and send response
- //     if (!proxyBackend) {
- //       return errorMessagePayload(500, 'Connecting to proxy failed!');
- //     }
+      // Get API's Proxy connection data
+      const createdProxyBackend = ProxyBackends.findOne({ apiId: apiId });
+      if (!createdProxyBackend) {
+        // The Proxy backend doesn't exist
+        return errorMessagePayload(500, 'Proxy connection for the API is not created.');
+      }
 
       // OK response with API data
       return {
@@ -1413,7 +1462,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         body: {
           status: 'success',
   //        data: responseData,
-          data: newProxyBackendData,
+          data: createdProxyBackend,
         },
       };
     },
