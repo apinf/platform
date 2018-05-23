@@ -51,14 +51,4 @@ Template.apiUmbrellaProxyForm.helpers({
     // Return the API URL protocol
     return apiUrl.protocol();
   },
-  autoProxyUrl () {
-
-    const api = this.api;
-
-    const apiName = api.name;
-
-    const autoProxyUrl = '/' + apiName + '-' + 'url' + '/';
-
-    return autoProxyUrl;
-  },
 });

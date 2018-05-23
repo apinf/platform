@@ -20,10 +20,6 @@
 
     <div class="tab-content">
       <div class="tab-pane active" id="network">
-        <p>Your API will sit behind our Proxy, that provides all the Apinf functionalities to your API
-        without writing a single line of code. We'll generate an URL that developers can use to consume the API,
-        that will be transparently translated to the target URL of your API.</p>
-
         <div class="form-group" data-required="true">
           <!-- Proxy base path (frontend prefix) -->
           <label for="proxy-base-path-field">
@@ -40,7 +36,6 @@
               class="form-control"
               aria-describedby="proxy-url"
               id="proxy-base-path-field"
-              value=autoProxyUrl
             }}
           </div>
 
@@ -76,7 +71,6 @@
                 class="form-control"
                 aria-describedby="api-url"
                 id="api-base-path-field"
-                value='/'
               }}
             </div>
 
