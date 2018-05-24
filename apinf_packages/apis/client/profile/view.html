@@ -43,9 +43,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{ else }}
     {{> spinner }}
   {{/ if }}
-  <div id="container-floating">
-    <div id="floating-button" class="small-tooltip">
-      {{> bookmark api=api }}
+  {{# if Template.subscriptionsReady }}
+    <div id="container-floating">
+      <div id="floating-button" class="small-tooltip">
+        {{> bookmark api=api }}
+      </div>
     </div>
-  </div>
+  {{/ if }}
 </template>
