@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
+import { ReactiveVar } from 'meteor/reactive-var';
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -31,6 +32,13 @@ import localisedSorting from '/apinf_packages/core/helper_functions/string_utils
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
+
+  // Init reactive var for search value with empty string for all results
+  instance.searchValue = new ReactiveVar('');
+
+  // Init the query reactive variable
+  instance.query = new ReactiveVar();
+
 
   instance.autorun(() => {
     // Get Branding collection content
@@ -201,6 +209,29 @@ Template.apiCatalog.onCreated(function () {
       currentFilters._id = { $in: apiIds };
     }
 
+    const searchValue = instance.searchValue.get();
+    // Construct query using regex using search value
+    instance.query.set({
+      $or: [
+        {
+          name: {
+            $regex: searchValue,
+            $options: 'i', // case-insensitive option
+          },
+        },
+        {
+          backend_host: {
+            $regex: searchValue,
+            $options: 'i', // case-insensitive option
+          },
+        },
+      ],
+    });
+  
+    if(searchValue != ""){
+      currentFilters = instance.query.get()
+    }
+
     instance.pagination.currentPage([Session.get('currentIndex')]);
     instance.pagination.filters(currentFilters);
   });
@@ -261,5 +292,26 @@ Template.apiCatalog.events({
     const selectedTag = event.currentTarget.dataset.lifecycle;
     // Set value in query parameter
     FlowRouter.setQueryParams({ lifecycle: selectedTag });
+  },
+  'keyup #search-field': function (event) {
+    event.preventDefault();
+
+    // Get reference to Template instance
+    const instance = Template.instance();
+
+    // Get search text from a text field.
+    const searchValue = instance.$('#search-field').val();
+    
+    // Assign searchValue to a reactive variable
+    instance.searchValue.set(searchValue);
+
+    // Set query parameter to value of search text
+    FlowRouter.setQueryParams({ q: searchValue });
+
+    return false;
+  },
+  'submit #search-form': function (event) {
+    // Prevent the 'submit' event
+    event.preventDefault();
   },
 });
