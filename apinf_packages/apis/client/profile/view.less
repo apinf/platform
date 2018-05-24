@@ -24,7 +24,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   }
 
   .fa {
-    //color: #FFDE03;
     position: absolute;
     top: 0;
     display: block;
@@ -35,8 +34,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     padding: 0;
     margin: 0;
     line-height: 55px;
-    font-size: 24px;
-    transition: all 0.3s;
+    font-size: 23px;
+    transition: all 0.2s;
   }
 
   .fa:hover {
@@ -46,4 +45,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .bookmark-counter {
     display: none;
   }
+}
+
+.small-tooltip .small-tooltiptext {
+  min-width: 100%;
+  visibility: hidden;
+  background-color: #37474F;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 2px 7px;
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  right: 130%;
+  font-size: 1.4rem;
+  transition: all 0.2s;
+}
+
+.small-tooltip:hover .small-tooltiptext {
+  visibility: visible;
 }
