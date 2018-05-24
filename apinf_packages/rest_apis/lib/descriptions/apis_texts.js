@@ -128,12 +128,15 @@ const descriptionApis = {
   ### Connects an API to a Proxy ###
 
   Adds API connection to an identified Proxy.
+  The given parameter set depends on the type of selected proxy.
   On success, returns the updated API object.
 
 
-  Parameters (M = mandatory)
+  Common parameters (M = mandatory)
   * *:id* is API id (in URL), (M)
   * *proxyId* is id of the Proxy, to which the API is to be connected, (M)
+
+  #### In case type of selected proxy is **apiUmbrella**, the following parameters are needed ####
   * *frontendPrefix* is a unique identification for
   summarizing requests and responses done via this proxy connection, (M)
   * *backendPrefix* is an identification of API on server, (M)
@@ -146,6 +149,14 @@ const descriptionApis = {
   * *limitBy*, [apiKey | ip],
   * *limit*, set number of request
   * *showLimitInResponseHeaders*, [true | false], is limit shown in response headers or not
+
+  #### In case type of proxy is **emq**, the following Access Control Rules (ACL)
+  parameters are needed ####
+  * *allow*, values [0 | 1], 0 = deny, 1 = access
+  * *access*, values [1 | 2 | 3], 1 = subscribe, 2 = publish, 3 = both
+  * *topic*, value is a string
+  * *fromType*, values [clientid | username | ipaddr]
+  * *fromValue*, value is a string
   `,
     // --------------------------------------------
   deleteProxyBackend: `
