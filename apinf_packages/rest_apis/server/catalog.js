@@ -385,6 +385,29 @@ CatalogV1.swagger = {
           enum: ['true', 'false'],
           example: 'false',
         },
+        allow: {
+          type: 'string',
+          enum: ['deny', 'allow'],
+          example: 'deny',
+        },
+        access: {
+          type: 'string',
+          enum: ['subscribe', 'publish', 'both'],
+          example: 'subscribe',
+        },
+        topic: {
+          type: 'string',
+          example: 'certain-topic',
+        },
+        fromType: {
+          type: 'string',
+          enum: ['clientid', 'username', 'ipaddr'],
+          example: 'clientid',
+        },
+        fromValue: {
+          type: 'string',
+          example: '666',
+        },
       },
     },
     // The proxy backend response schema
@@ -492,9 +515,54 @@ CatalogV1.swagger = {
             },
           },
         },
+        emq: {
+          type: 'object',
+          properties: {
+            settings: {
+              type: 'object',
+              properties: {
+                acl: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      allow: {
+                        type: 'string',
+                        example: 1,
+                      },
+                      access: {
+                        type: 'string',
+                        example: 3,
+                      },
+                      topic: {
+                        type: 'string',
+                        example: 'some-topic',
+                      },
+                      fromType: {
+                        type: 'string',
+                        example: 'clientid',
+                      },
+                      fromValue: {
+                        type: 'string',
+                        example: '666',
+                      },
+                      id: {
+                        type: 'string',
+                        example: 'id-of-something',
+                      },
+                      proxyId: {
+                        type: 'string',
+                        example: 'id-of-proxy',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     },
-
   },
 };
 
