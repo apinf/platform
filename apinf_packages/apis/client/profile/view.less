@@ -3,25 +3,16 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-#container-floating {
+#floating-button {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #fff;
   position: fixed;
-  width: 70px;
-  height: 70px;
-  bottom: 45px;
-  right: 45px;
-  z-index: 50px;
-
-  #floating-button {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    background: #fff;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    cursor: pointer;
-    box-shadow: 0 1px 3px 0 rgba(59, 59, 88, 0.15);
-  }
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 0 rgba(59, 59, 88, 0.15);
 
   .fa {
     position: absolute;
