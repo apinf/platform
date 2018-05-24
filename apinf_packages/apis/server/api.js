@@ -1400,15 +1400,10 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         // Fill the new backend data
         newProxyBackendData.apiUmbrella = apiUmbrella;
 
-        console.log('newProxyBackendData=', newProxyBackendData);
-        // Insert corresponding proxy backend
+        // Insert corresponding proxy backend to apiUmbrella
         const response = Meteor.call('createApiBackendOnApiUmbrella',
           newProxyBackendData.apiUmbrella,
           newProxyBackendData.proxyId);
-
-        console.log('response=', response);
-        console.log('response.errors=', response.errors);
-        console.log('response.errors.default=', response.errors.default);
 
         // If response has errors object, notify about it
         if (response.errors && response.errors.default) {
@@ -1417,39 +1412,107 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         // If success, attach API Umbrella backend ID to API
-        if (_.has(response, 'result.data.api')) {
-          // Get the API Umbrella ID for newly created backend
-          const umbrellaBackendId = response.result.data.api.id;
-
-          console.log('umbrellaBackendId=', umbrellaBackendId);
-          // Attach the API Umbrella backend ID to backend document
-          newProxyBackendData.apiUmbrella.id = umbrellaBackendId;
-
-            // Publish the API Backend on API Umbrella
-          const publishSuccess = Meteor.call('publishApiBackendOnApiUmbrella',
-                        umbrellaBackendId, newProxyBackendData.proxyId);
-          console.log('publishSuccess=', publishSuccess);
-          if (publishSuccess.errors && response.errors.default) {
-            return errorMessagePayload(publishSuccess.errors.http_status,
-              publishSuccess.errors.default);
-          }
-          console.log('lisätäänpä=', newProxyBackendData);
-          // Insert the Proxy Backend document, asynchronous
-          const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
-          console.log('proxyBackendId=', proxyBackendId);
-          if (!proxyBackendId) {
-            return errorMessagePayload(500, 'Creating proxyBackend failed.');
-          }
-          // Start cron tasks that run storing Analytics Data to MongoDB
-          Meteor.call('calculateAnalyticsData', proxyBackendId);
-
-          // Create a placeholder in 30 days for charts for particular Proxy Backend
-          Meteor.call('proxyBackendAnalyticsData', proxyBackendId, 30, 'today');
-
+        if (!_.has(response, 'result.data.api')) {
+          return errorMessagePayload(500, 'apiUmbrella update failed.');
         }
+        // Get the API Umbrella ID for newly created backend
+        const umbrellaBackendId = response.result.data.api.id;
+
+        // Attach the API Umbrella backend ID to backend document
+        newProxyBackendData.apiUmbrella.id = umbrellaBackendId;
+
+          // Publish the API Backend on API Umbrella
+        const publishSuccess = Meteor.call('publishApiBackendOnApiUmbrella',
+                      umbrellaBackendId, newProxyBackendData.proxyId);
+        if (publishSuccess.errors && response.errors.default) {
+          return errorMessagePayload(publishSuccess.errors.http_status,
+            publishSuccess.errors.default);
+        }
+
+        // Insert the apiUmbrella Proxy Backend document on APInf
+        const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+        if (!proxyBackendId) {
+          return errorMessagePayload(500, 'Creating proxyBackend failed.');
+        }
+
+        // Start cron tasks that run storing Analytics Data to MongoDB
+        Meteor.call('calculateAnalyticsData', proxyBackendId);
+
+        // Create a placeholder in 30 days for charts for particular Proxy Backend
+        Meteor.call('proxyBackendAnalyticsData', proxyBackendId, 30, 'today');
+
+      } else if (proxy.type === 'emq') {
+
+        // allow is a mandatory field, values 0/1
+        if (bodyParams.allow) {
+          if (isNaN(bodyParams.allow) || bodyParams.allow < 0 || bodyParams.allow > 1) {
+            return errorMessagePayload(400, 'Parameter "allow" has erroneous value.',
+            'allow', bodyParams.allow);
+          }
+        } else {
+          return errorMessagePayload(400, 'Parameter "allow" is mandatory.');
+        }
+
+        // access is a mandatory field, values 1/2/3
+        if (bodyParams.access) {
+          if (isNaN(bodyParams.access) || bodyParams.access < 1 || bodyParams.access > 3) {
+            return errorMessagePayload(400, 'Parameter "access" has erroneous value.',
+            'access', bodyParams.access);
+          }
+        } else {
+          return errorMessagePayload(400, 'Parameter "access" is mandatory.');
+        }
+
+        // topic is a mandatory field
+        if (!bodyParams.topic) {
+          return errorMessagePayload(400, 'Parameter "topic" is mandatory.');
+        }
+
+        // fromType is a mandatory field
+        if (bodyParams.fromType) {
+          const allowedfromTypeValues = ['clientid', 'username', 'ipaddr'];
+          if (!allowedfromTypeValues.includes(bodyParams.fromType)) {
+            return errorMessagePayload(400, 'Parameter "fromType" has erroneous value.',
+            'fromType', bodyParams.fromType);
+          }
+        } else {
+          return errorMessagePayload(400, 'Parameter "fromType" is mandatory.');
+        }
+
+        // fromValue is a mandatory field
+        if (!bodyParams.fromValue) {
+          return errorMessagePayload(400, 'Parameter "fromValue" is mandatory.');
+        }
+
+
+        // structure for validating values against schema
+        const aclFields = [{
+          id: new Meteor.Collection.ObjectID().valueOf(),
+          allow: bodyParams.allow,
+          access: bodyParams.access,
+          topic: bodyParams.topic,
+          fromType: bodyParams.fromType,
+          fromValue: bodyParams.fromValue,
+          proxyId: proxy._id,
+        }];
+
+        // Fill the new backend data
+        const settings = {};
+        settings.acl = aclFields;
+        const emq = {};
+        emq.settings = settings;
+        newProxyBackendData.emq = emq;
+
+        // Insert the emq Proxy Backend document on APInf
+        const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+        if (!proxyBackendId) {
+          return errorMessagePayload(500, 'Creating proxyBackend failed.');
+        }
+      } else {
+        return errorMessagePayload(400, 'Unknown proxy type.');
       }
 
-      // Get API's Proxy connection data
+      // Get API's just inserted Proxy connection data for response
       const createdProxyBackend = ProxyBackends.findOne({ apiId: apiId });
       if (!createdProxyBackend) {
         // The Proxy backend doesn't exist
@@ -1461,7 +1524,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         statusCode: 200,
         body: {
           status: 'success',
-  //        data: responseData,
           data: createdProxyBackend,
         },
       };
