@@ -121,6 +121,13 @@ CatalogV1.swagger = {
         $ref: '#/definitions/proxyConnectionRequest',
       },
     },
+    proxyId: {
+      name: 'proxyId',
+      in: 'body',
+      description: 'ID of Proxy',
+      required: true,
+      type: 'string',
+    },
     skip: {
       name: 'skip',
       in: 'query',
@@ -336,12 +343,8 @@ CatalogV1.swagger = {
     },
     // The proxy schema for POST method
     proxyConnectionRequest: {
-      required: ['proxyId', 'frontendPrefix', 'backendPrefix', 'apiPort'],
+      required: ['frontendPrefix', 'backendPrefix', 'apiPort'],
       properties: {
-        proxyId: {
-          type: 'string',
-          example: 'id-of-proxy',
-        },
         frontendPrefix: {
           type: 'string',
           example: '/api_name/',
@@ -563,6 +566,7 @@ CatalogV1.swagger = {
         },
       },
     },
+
   },
 };
 
