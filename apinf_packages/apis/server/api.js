@@ -1513,7 +1513,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       }
 
       // Get API's just inserted Proxy connection data for response
-      const createdProxyBackend = ProxyBackends.findOne({ apiId: apiId });
       if (!createdProxyBackend) {
         // The Proxy backend doesn't exist
         return errorMessagePayload(500, 'Proxy connection for the API is not created.');
@@ -1613,4 +1612,3 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
   },
 
 });
-
