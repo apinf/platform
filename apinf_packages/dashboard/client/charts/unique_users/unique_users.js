@@ -35,18 +35,23 @@ Template.uniqueUsersOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('uniqueUsersOverTime_pointTitle_users'),
-          backgroundColor: '#e3f2fc',
-          borderColor: '#3886d4',
+          backgroundColor: 'rgba(26, 117, 210, 0.2)',
+          borderColor: 'rgb(26, 117, 210)',
+          pointBackgroundColor: 'rgb(26, 117, 210)',
           borderWidth: 2,
-          data: [],
-          pointRadius: 0,
-          pointHoverRadius: 5,
+          pointRadius: 3,
+          pointHoverRadius: 4,
         },
       ],
     },
 
     // Configuration options
     options: {
+      elements: {
+        line: {
+          tension: 0, // disables bezier curves
+        },
+      },
       legend: {
         display: false,
       },
