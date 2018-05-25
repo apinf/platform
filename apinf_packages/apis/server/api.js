@@ -1156,6 +1156,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       description: descriptionApis.postProxyBackend,
       parameters: [
         CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.proxyId,
         CatalogV1.swagger.params.proxyConnectionRequest,
       ],
       responses: {
@@ -1440,9 +1441,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
         // Create a placeholder in 30 days for charts for particular Proxy Backend
         Meteor.call('proxyBackendAnalyticsData', proxyBackendId, 30, 'today');
-
       } else if (proxy.type === 'emq') {
-
         // allow is a mandatory field, values 0/1
         if (bodyParams.allow) {
           if (isNaN(bodyParams.allow) || bodyParams.allow < 0 || bodyParams.allow > 1) {
@@ -1484,6 +1483,386 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           return errorMessagePayload(400, 'Parameter "fromValue" is mandatory.');
         }
 
+        // structure for validating values against schema
+        const aclFields = [{
+          id: new Meteor.Collection.ObjectID().valueOf(),
+          allow: bodyParams.allow,
+          access: bodyParams.access,
+          topic: bodyParams.topic,
+          fromType: bodyParams.fromType,
+          fromValue: bodyParams.fromValue,
+          proxyId: proxy._id,
+        }];
+
+        // Fill the new backend data
+        const settings = {};
+        settings.acl = aclFields;
+        const emq = {};
+        emq.settings = settings;
+        newProxyBackendData.emq = emq;
+
+        // Insert the emq Proxy Backend document on APInf
+        const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+        if (!proxyBackendId) {
+          return errorMessagePayload(500, 'Creating proxyBackend failed.');
+        }
+      } else {
+        return errorMessagePayload(400, 'Unknown proxy type.');
+      }
+
+      // Get API's just inserted Proxy connection data for response
+      const createdProxyBackend = ProxyBackends.findOne({ apiId });
+      if (!createdProxyBackend) {
+        // The Proxy backend doesn't exist
+        return errorMessagePayload(500, 'Proxy connection for the API is not created.');
+      }
+
+      // OK response with API data
+      return {
+        statusCode: 200,
+        body: {
+          status: 'success',
+          data: createdProxyBackend,
+        },
+      };
+    },
+  },
+  // Modify proxy backend parameters of given API
+  put: {
+    authRequired: true,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'Modify Proxy connection parameters of an API.',
+      description: descriptionApis.putProxyBackend,
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.proxyConnectionRequest,
+      ],
+      responses: {
+        200: {
+          description: 'Proxy connection parameters modified successfully',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/proxyConnectionResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+      // Get ID of API (URL parameter)
+      const apiId = this.urlParams.id;
+      // Get User ID
+      const userId = this.userId;
+
+      // API related checkings
+      // Get API document
+      const api = Apis.findOne(apiId);
+
+      // API must exist
+      if (!api) {
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+      // User must be able to manage API
+      if (!api.currentUserCanManage(userId)) {
+        return errorMessagePayload(403, 'User does not have permission to this API.');
+      }
+
+      // Get body parameters
+      const bodyParams = this.bodyParams;
+
+      // Proxy related checkings
+      // proxyId is a required field
+      if (!bodyParams.proxyId) {
+        return errorMessagePayload(400, 'Parameter "proxyId" is mandatory.');
+      }
+
+      // Get proxy document
+      const proxy = Proxies.findOne(bodyParams.proxyId);
+
+      // proxy must exist
+      if (!proxy) {
+        return errorMessagePayload(404, 'Proxy with specified ID is not found.');
+      }
+
+      // Collect data to be inserted into proxyBackend
+      const newProxyBackendData = {
+        apiId,
+        proxyId: proxy._id,
+        // Type comes from selected proxy
+        type: proxy.type,
+      };
+
+      if (proxy.type === 'apiUmbrella') {
+        // frontendPrefix is a required field
+        if (!bodyParams.frontendPrefix) {
+          return errorMessagePayload(400, 'Parameter "frontendPrefix" is mandatory.');
+        }
+
+        // Validation of frontendPrefix
+        if (!proxyBasePathRegEx.test(bodyParams.frontendPrefix)) {
+          return errorMessagePayload(400, 'Parameter "frontendPrefix" not valid.',
+          'frontendPrefix', bodyParams.frontendPrefix);
+        }
+
+        // Check if given frontend_prefix is already in use
+        const proxyBackendWithGivenFrontendPrefixExist = ProxyBackends.findOne({
+          'apiUmbrella.url_matches.frontend_prefix': bodyParams.frontendPrefix,
+        });
+        if (proxyBackendWithGivenFrontendPrefixExist) {
+          return errorMessagePayload(400, 'Parameter "frontendPrefix" must be unique.');
+        }
+
+        const frontendPrefix = bodyParams.frontendPrefix;
+
+        // backendPrefix is a required field
+        if (!bodyParams.backendPrefix) {
+          return errorMessagePayload(400, 'Parameter "backendPrefix" is mandatory.');
+        }
+
+        // Validation of backendPrefix
+        if (!apiBasePathRegEx.test(bodyParams.backendPrefix)) {
+          return errorMessagePayload(400, 'Parameter "backendPrefix" not valid.',
+          'backendPrefix', bodyParams.backendPrefix);
+        }
+        const backendPrefix = bodyParams.backendPrefix;
+
+        // Collect prefixes
+        const urlMatches = [{
+          frontend_prefix: frontendPrefix,
+          backend_prefix: backendPrefix,
+        }];
+
+        // Prepare apiUmbrella object
+        const apiUmbrella = {};
+
+        // Get API details from API document
+        apiUmbrella.name = api.name;
+
+        // Frontend host address comes from proxy document
+        const apiUmbrellaUrl = new URI(proxy.apiUmbrella.url);
+        apiUmbrella.frontend_host = apiUmbrellaUrl.host();
+
+        // Backend host address comes from API
+        const apiUrl = new URI(api.url);
+        apiUmbrella.backend_host = apiUrl.host();
+        apiUmbrella.backend_protocol = apiUrl.protocol();
+
+        // Information of server address and port
+        // By default apiPort is set to 443 for https
+        let apiPort = 443;
+        // Default apiPort for https is 80
+        if (apiUmbrella.backend_protocol === 'http') {
+          apiPort = 80;
+        }
+        // apiPort must be a numeric value
+        if (bodyParams.apiPort) {
+          if (isNaN(bodyParams.apiPort) || bodyParams.apiPort < 0 || bodyParams.apiPort > 65535) {
+            return errorMessagePayload(400, 'Parameter "apiPort" has erroneous value.',
+            'apiPort', bodyParams.apiPort);
+          }
+          apiPort = bodyParams.apiPort;
+        }
+
+        const servers = [{
+          host: apiUrl.host(),
+          port: apiPort,
+        }];
+
+        // Prepare and fill settings object
+        const settings = {};
+
+        // If disableApiKey is given, it can be only literal true/false
+        if (bodyParams.disableApiKey) {
+          const allowedDisableApiKeyValues = ['false', 'true'];
+          if (!allowedDisableApiKeyValues.includes(bodyParams.disableApiKey)) {
+            return errorMessagePayload(400, 'Parameter "disableApiKey" has erroneous value.',
+            'disableApiKey', bodyParams.disableApiKey);
+          }
+        }
+
+        // Convert given value to boolean. Also sets default false, if value not given.
+        settings.disableApiKey = (bodyParams.disableApiKey === 'true');
+
+        // Rate limit modes, default value is unlimited
+        settings.rate_limit_mode = bodyParams.rateLimitMode || 'unlimited';
+        const allowedRateLimitModeValues = ['custom', 'unlimited'];
+
+        // Is Rate limit mode allowed value
+        if (!allowedRateLimitModeValues.includes(settings.rate_limit_mode)) {
+          return errorMessagePayload(400, 'Parameter "rateLimitMode" has erroneous value.',
+          'rateLimitMode', bodyParams.rateLimitMode);
+        }
+
+        // When rate_limit_mode is 'custom', also additional parameters can be given
+        if (settings.rate_limit_mode === 'custom') {
+          // duration must be a numeric value
+          if (bodyParams.duration) {
+            if (isNaN(bodyParams.duration) || bodyParams.duration < 0) {
+              return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
+              'duration', bodyParams.duration);
+            }
+          }
+
+          // Is limitBy allowed value
+          if (bodyParams.limitBy) {
+            const allowedRateLimitByValues = ['apiKey', 'ip'];
+            if (!allowedRateLimitByValues.includes(bodyParams.limitBy)) {
+              return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
+              'limitBy', bodyParams.limitBy);
+            }
+          }
+
+          // limit must be a numeric value
+          if (bodyParams.limit) {
+            if (isNaN(bodyParams.limit) || bodyParams.limit < 0) {
+              return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
+              'limit', bodyParams.limit);
+            }
+          }
+
+          // If disableApiKey is given, it can be only literal true/false
+          if (bodyParams.showLimit) {
+            const allowedshowLimitValues = ['false', 'true'];
+            if (!allowedshowLimitValues.includes(bodyParams.showLimit)) {
+              return errorMessagePayload(400, 'Parameter "showLimit" has erroneous value.',
+              'showLimit', bodyParams.showLimit);
+            }
+          }
+
+          // Convert given value to boolean. Also sets default false, if value not given.
+          const showLimitInResponseHeaders = (bodyParams.showLimit === 'true');
+
+          // Get given values ready for DB write
+          const rateLimits = [{
+            duration: bodyParams.duration,
+            limit_by: bodyParams.limitBy,
+            limit: bodyParams.limit,
+            response_headers: showLimitInResponseHeaders,
+          }];
+          // Add into settings
+          settings.rate_limits = rateLimits;
+        }
+
+        // Collect apiUmbrella related data
+        apiUmbrella.balance_algorithm = 'least_conn';
+        apiUmbrella.servers = servers;
+        apiUmbrella.url_matches = urlMatches;
+        apiUmbrella.settings = settings;
+
+        // Fill the new backend data
+        newProxyBackendData.apiUmbrella = apiUmbrella;
+
+        // Insert corresponding proxy backend to apiUmbrella
+        const response = Meteor.call('createApiBackendOnApiUmbrella',
+          newProxyBackendData.apiUmbrella,
+          newProxyBackendData.proxyId);
+
+        // If response has errors object, notify about it
+        if (response.errors && response.errors.default) {
+          // Notify about error
+          return errorMessagePayload(500, response.errors.default[0]);
+        }
+
+        // If success, attach API Umbrella backend ID to API
+        if (!_.has(response, 'result.data.api')) {
+          return errorMessagePayload(500, 'apiUmbrella update failed.');
+        }
+        // Get the API Umbrella ID for newly created backend
+        const umbrellaBackendId = response.result.data.api.id;
+
+        // Attach the API Umbrella backend ID to backend document
+        newProxyBackendData.apiUmbrella.id = umbrellaBackendId;
+
+          // Publish the API Backend on API Umbrella
+        const publishSuccess = Meteor.call('publishApiBackendOnApiUmbrella',
+                      umbrellaBackendId, newProxyBackendData.proxyId);
+        if (publishSuccess.errors && response.errors.default) {
+          return errorMessagePayload(publishSuccess.errors.http_status,
+            publishSuccess.errors.default);
+        }
+
+        // Insert the apiUmbrella Proxy Backend document on APInf
+        const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+        if (!proxyBackendId) {
+          return errorMessagePayload(500, 'Creating proxyBackend failed.');
+        }
+
+        // Start cron tasks that run storing Analytics Data to MongoDB
+        Meteor.call('calculateAnalyticsData', proxyBackendId);
+
+        // Create a placeholder in 30 days for charts for particular Proxy Backend
+        Meteor.call('proxyBackendAnalyticsData', proxyBackendId, 30, 'today');
+      } else if (proxy.type === 'emq') {
+        // allow is a mandatory field, values 0/1
+        if (bodyParams.allow) {
+          if (isNaN(bodyParams.allow) || bodyParams.allow < 0 || bodyParams.allow > 1) {
+            return errorMessagePayload(400, 'Parameter "allow" has erroneous value.',
+            'allow', bodyParams.allow);
+          }
+        } else {
+          return errorMessagePayload(400, 'Parameter "allow" is mandatory.');
+        }
+
+        // access is a mandatory field, values 1/2/3
+        if (bodyParams.access) {
+          if (isNaN(bodyParams.access) || bodyParams.access < 1 || bodyParams.access > 3) {
+            return errorMessagePayload(400, 'Parameter "access" has erroneous value.',
+            'access', bodyParams.access);
+          }
+        } else {
+          return errorMessagePayload(400, 'Parameter "access" is mandatory.');
+        }
+
+        // topic is a mandatory field
+        if (!bodyParams.topic) {
+          return errorMessagePayload(400, 'Parameter "topic" is mandatory.');
+        }
+
+        // fromType is a mandatory field
+        if (bodyParams.fromType) {
+          const allowedfromTypeValues = ['clientid', 'username', 'ipaddr'];
+          if (!allowedfromTypeValues.includes(bodyParams.fromType)) {
+            return errorMessagePayload(400, 'Parameter "fromType" has erroneous value.',
+            'fromType', bodyParams.fromType);
+          }
+        } else {
+          return errorMessagePayload(400, 'Parameter "fromType" is mandatory.');
+        }
+
+        // fromValue is a mandatory field
+        if (!bodyParams.fromValue) {
+          return errorMessagePayload(400, 'Parameter "fromValue" is mandatory.');
+        }
 
         // structure for validating values against schema
         const aclFields = [{
@@ -1513,6 +1892,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       }
 
       // Get API's just inserted Proxy connection data for response
+      const createdProxyBackend = ProxyBackends.findOne({ apiId });
       if (!createdProxyBackend) {
         // The Proxy backend doesn't exist
         return errorMessagePayload(500, 'Proxy connection for the API is not created.');
