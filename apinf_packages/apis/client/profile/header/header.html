@@ -5,92 +5,81 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block api-page-header" style="padding-left: 45px; padding-right: 30px;">
-    <div class="row">
-      <div class="col-lg-5 col-md-4 col-xs-12">
-      <span style="float: left; padding-top:12px">
-      {{> viewApiLogo }}
+    <nav class='api-profile_navigation secondary-menu-block-inner'>
+      <span style="float: left;">
+        {{> viewApiLogo }}
       </span>
       <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;">
         {{# if api.organization }}
-          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
-            {{ api.organization.name }}&nbsp;/
-          </a>
+        <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
+          {{ api.organization.name }}&nbsp;/
+        </a>
         {{ else }}
-          <span style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
-            {{ api.getApiManagersByName }}&nbsp;/
-          </span>
+        <span style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
+          {{ api.getApiManagersByName }}&nbsp;/
+        </span>
         {{/ if }}
         {{ api.name }}
         {{# unless api.isPublic }}
-          <span class="label label-default">
-            {{_ "catalogTable_labelText_private" }}
-          </span>
+        <span class="label label-default">
+          {{_ "catalogTable_labelText_private" }}
+        </span>
         {{/ unless }}
       </h1>
-      </div>
-
-    <div class="col-lg-7 col-md-8 col-xs-12 secondary-menu-block-inner" style="text-align:right;line-height: 0;">
-      <ul class="nav nav-tabs">
+      <ul class='links'>
         {{# if currentUser }}
-          <li id ="api-details-tab" class="active">
-            <a href="#api-details" data-toggle="tab">
-              {{_ "viewApiNavigationMenu_details" }}
-            </a>
-          </li>
+        <li id ="api-details-tab" class="active">
+          <a href="#api-details" data-toggle="tab">
+            {{_ "viewApiNavigationMenu_details" }}
+          </a>
+        </li>
         {{/ if }}
-
         {{# if proxyBackend }}
-          {{# if currentUser }}
-            <li id ="api-auth-tab">
-              <a href="#api-auth" data-toggle="tab">
-                Authentication
-              </a>
-            </li>
-          {{/ if }}
-        {{/ if }}
-
         {{# if currentUser }}
-          {{# if api.currentUserCanManage }}
-            {{# if proxyBackend }}
-              <li>
-                <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}">
-                  {{_ "apiViewAnalytics_button_viewAnalytics" }}
-                </a>
-              </li>
-            {{/ if }}
-          {{/ if }}
+        <li id ="api-auth-tab">
+          <a href="#api-auth" data-toggle="tab">
+            Authentication
+          </a>
+        </li>
         {{/ if }}
-
+        {{/ if }}
         {{# if currentUser }}
-          {{# if userShouldSeeApiDocsTab }}
-            <!-- API Console -->
-            <li id="api-documentation-tab">
-              <a href="#api-documentation" data-toggle="tab">
-                {{_ "viewApiNavigationMenu_documentation" }}
-              </a>
-            </li>
-          {{/ if }}
-        {{/ if }}
-
         {{# if api.currentUserCanManage }}
-          <!-- Settings -->
-          <li id="api-settings-tab">
-            <a href="#api-settings" data-toggle="tab">
-              {{_ "viewApiNavigationMenu_settings" }}
-            </a>
-          </li>
-
-          {{# if proxyIsConfigured }}
-            <!-- Proxy -->
-            <li id="api-proxy-tab">
-              <a href="#api-proxy" data-toggle="tab">
-                {{_ "viewApiNavigationMenu_proxy" }}
-              </a>
-            </li>
-          {{/ if }}
+        {{# if proxyBackend }}
+        <li>
+          <a href="{{ pathFor 'apiAnalyticPage' apiSlug=api.slug }}">
+            {{_ "apiViewAnalytics_button_viewAnalytics" }}
+          </a>
+        </li>
+        {{/ if }}
+        {{/ if }}
+        {{/ if }}
+        {{# if currentUser }}
+        {{# if userShouldSeeApiDocsTab }}
+        <li id="api-documentation-tab">
+          <a href="#api-documentation" data-toggle="tab">
+            {{_ "viewApiNavigationMenu_documentation" }}
+          </a>
+        </li>
+        {{/ if }}
+        {{/ if }}
+        {{# if api.currentUserCanManage }}
+        <li id="api-settings-tab">
+          <a href="#api-settings" data-toggle="tab">
+            {{_ "viewApiNavigationMenu_settings" }}
+          </a>
+        </li>
+        {{# if proxyIsConfigured }}
+        <li id="api-proxy-tab">
+          <a href="#api-proxy" data-toggle="tab">
+            {{_ "viewApiNavigationMenu_proxy" }}
+          </a>
+        </li>
+        {{/ if }}
         {{/ if }}
       </ul>
-    </div>
+      <button>MENU</button>
+      <ul class='hidden-links hidden'></ul>
+    </nav>
   </div>
-</div>
 </template>

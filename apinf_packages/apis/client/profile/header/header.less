@@ -9,46 +9,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 .secondary-menu-block {
   background: #fff;
   box-shadow: 0 1px 3px 0 rgba(108,133,159,.3);
-
-  .nav-tabs {
-    border: none;
-    display: inline-block;
-  }
-
-  .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-    border-width: 0;
-  }
-
-  .nav-tabs > li > a {
-    letter-spacing: 0.3px;
-    border: none;
-    color: #9bacbf;
-    font-size: 1.4rem;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    line-height: 41px;
-  }
-
-  .nav-tabs > li.active > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-    border: none;
-    color: #4c6072 !important;
-    background: transparent;
-  }
-  .nav-tabs > li > a::after {
-    content: "";
-    background: #1a75d2;
-    height: 4px;
-    position: absolute;
-    width: 70%;
-    left: 15%;
-    bottom: 1px;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: all 250ms ease 0s; transform: scale(0);
-  }
-  .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
-    transform: scale(1);
-  }
 }
 
 .page-head-topblock {
@@ -134,11 +94,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   .nav-tabs > li > a::after { content: ""; background: #1a75d2; height: 3px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
   .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
   .tab-nav > li > a::after { background: #1a75d2 none repeat scroll 0% 0%; color: #fff; }
-
-  #api-intro {
-    float: right;
-    margin-top: 0.3em;
-  }
 }
 
 @media (max-width: 767px) {
@@ -151,4 +106,140 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
+}
+
+nav.api-profile_navigation {
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+nav.api-profile_navigation h1 {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+ul.links {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  overflow: hidden;
+  list-style-type: none;
+  border: none;
+  margin-bottom: 0;
+}
+
+ul.links > li {
+  flex: none;
+  padding: 1.5rem;
+}
+
+ul.links > li > a {
+  border: none;
+  letter-spacing: 0.3px;
+  color: #9bacbf;
+  font-size: 1.4rem;
+  position: relative;
+  line-height: 30px;
+}
+
+ul.links > li.active > a,
+ul.links > li.active > a:focus,
+ul.links > li.active > a:hover {
+  border-width: 0;
+}
+
+ul.links > li.active > a,
+ul.links > li > a:hover {
+  border: none;
+  color: #4c6072 !important;
+  background: transparent;
+}
+
+ul.links > li > a::after {
+  content: "";
+  background: #1a75d2;
+  height: 4px;
+  position: absolute;
+  width: 100%;
+  top: 35px;
+  transition: all 250ms ease 0s; transform: scale(0);
+}
+
+ul.links > li.active > a::after,
+ul.links > li:hover > a::after {
+  transform: scale(1);
+}
+
+// mobile //
+nav.api-profile_navigation button {
+  align-self: stretch;
+  transition: all .4s ease-out;
+  padding: 0 1rem 0 1.5rem;
+  outline: 0;
+  border: 0;
+  font-size: 1rem;
+  background: #ecf3f8;
+  color: #4c6072;
+}
+
+nav.api-profile_navigation button.hidden {
+  transition: none;
+  border-right: 0.5rem solid #b6b6b6;
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav.api-profile_navigation button::after {
+  content: attr(count);
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #4c6072;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.8);
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 14px;
+  margin-left: 1rem;
+}
+
+ul.hidden-links {
+  position: absolute;
+  background: #fff;
+  right: 0;
+  top: 100%;
+  list-style-type: none;
+  padding-left: 0;
+  box-shadow: 0 1px 3px 0 rgba(59, 59, 88, 0.15);
+}
+
+ul.hidden-links li a {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  color: #4c6072;
+}
+
+ul.hidden-links > li > a:hover,
+ul.hidden-links > li > a:focus {
+  color: #4c6072;
+  text-decoration: underline;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+ul.hidden-links.hidden {
+  display: none;
+}
+
+ul.hidden-links li {
+  padding: 1.5rem;
 }
