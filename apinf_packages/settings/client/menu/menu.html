@@ -4,16 +4,18 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="settingsMenu">
-<div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height: 60px;">
-  <div class="col-md-8 secondary-menu-block-inner col-md-offset-2" id="settings-menu" style="text-align:center;">
-    <ul class="nav nav-tabs">
+<div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 25px;height: 60px;">
+  <nav class="col-md-12 secondary-menu_navigation secondary-menu-block-inner" id="settings-menu" style="padding-left: 0;">
+    <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
+      Platform settings
+    </h1>
+    <ul class="links">
       {{# if isInRole 'admin' }}
       <li class="{{ isActiveRoute 'branding' }}">
         <a
           href="{{ pathFor route='branding' }}"
           id="button-branding">
             {{_ "settingsMenu_branding" }}
-
         </a>
         </li>
         <li class="{{ isActiveRoute 'settings' }}">
@@ -39,6 +41,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </li>
       {{/ if }}
     </ul>
-  </div>
+    <button>MENU</button>
+    <ul class='hidden-links hidden'></ul>
+  </nav>
 </div>
 </template>
