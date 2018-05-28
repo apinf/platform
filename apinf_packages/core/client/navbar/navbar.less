@@ -445,30 +445,38 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   text-decoration: none;
 }
 
-.dropdown-menu-triangle-b-r {
+.user-menu-icon, .admin-user-icon {
   top: 53px;
 }
 
-.dropdown-menu-triangle-b-r:before, .dropdown-menu-triangle-b-r:after {
+.user-menu-icon:before, .user-menu-icon:after,
+.admin-menu-icon:before, .admin-user-icon:before {
+  content: '';
   display: inline-block;
   position: absolute;
-  content: '';
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 }
 
-.dropdown-menu-triangle-b-r:before {
+.user-menu-icon:before {
   top: 0;
   right: 9px;
-  border-bottom: 10px solid #fff;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
 }
 
-.dropdown-menu-triangle-b-r:after {
+.user-menu-icon:after {
+  top: -10px;
+  right: 5px;
+}
+
+.admin-menu-icon:before {
+  top: -7px;
+  right: 16px;
+}
+
+.admin-menu-icon:after {
   top: -9px;
   right: 5px;
-  border-bottom: 10px solid #fff;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
 }
 
 navbar-nav > li > a {
@@ -495,4 +503,10 @@ navbar-nav > li > a {
 .navbar-nav > li > .dropdown-menu {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+}
+
+#signup-button {
+  background-color: #19b934;
+  border-color: #19b934;
+  border-radius: 4px;
 }
