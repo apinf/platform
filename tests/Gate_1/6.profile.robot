@@ -14,6 +14,7 @@ Login to apinf
 	Login to apinf	asdas	asdasd
 	confirm page loaded	Users
 
+*** Profile data now is under Account Settings view ***
 Change profile name (fail)
 	Go to profile
 	change profile data	asdas#	sampo
@@ -50,11 +51,12 @@ Go to login
 	Click Element	id=signin-button
 	confirm page loaded	Login
 
+*** Profile data now is under Account Settings view ***
 Go to profile
 	Click Element 	id=frontpage-button
 	confirm page loaded	Users
 	Click Element 	id=usermenu
-	Click Element	id=profile-button
+	Click Element	id=account-button
 	confirm page loaded	Company
 
 Go to account
@@ -74,6 +76,7 @@ confirm page loaded
 	[Arguments] 	${searchkey}
 	Wait Until Page Contains 	${searchkey}
 
+*** Profile data now is under Account Settings view ***
 change profile data
 	[Arguments]	${username}	${Company}
 	Input Text 	id=username	${username}
