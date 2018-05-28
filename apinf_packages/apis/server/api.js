@@ -1215,6 +1215,13 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         return errorMessagePayload(403, 'User does not have permission to this API.');
       }
 
+      // Check if the API is already connected to a Proxy
+      const existingProxyBackend = ProxyBackends.findOne({ apiId });
+      if (existingProxyBackend) {
+        // The Proxy backend already exist
+        return errorMessagePayload(400, 'Proxy connection for the API already exist.');
+      }
+
       // Get body parameters
       const bodyParams = this.bodyParams;
 
@@ -1596,109 +1603,68 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         return errorMessagePayload(403, 'User does not have permission to this API.');
       }
 
+      // Check if the API is connected to a Proxy
+      const newProxyBackendData = ProxyBackends.findOne({ apiId });
+      if (!newProxyBackendData) {
+        // The Proxy backend must exist
+        return errorMessagePayload(400, 'The API must have a Proxy connection.');
+      }
+
       // Get body parameters
       const bodyParams = this.bodyParams;
 
-      // Proxy related checkings
-      // proxyId is a required field
-      if (!bodyParams.proxyId) {
-        return errorMessagePayload(400, 'Parameter "proxyId" is mandatory.');
-      }
-
-      // Get proxy document
-      const proxy = Proxies.findOne(bodyParams.proxyId);
-
-      // proxy must exist
-      if (!proxy) {
-        return errorMessagePayload(404, 'Proxy with specified ID is not found.');
-      }
-
-      // Collect data to be inserted into proxyBackend
-      const newProxyBackendData = {
-        apiId,
-        proxyId: proxy._id,
-        // Type comes from selected proxy
-        type: proxy.type,
-      };
-
-      if (proxy.type === 'apiUmbrella') {
-        // frontendPrefix is a required field
-        if (!bodyParams.frontendPrefix) {
-          return errorMessagePayload(400, 'Parameter "frontendPrefix" is mandatory.');
+      if (newProxyBackendData.type === 'apiUmbrella') {
+        // is frontendPrefix given
+        if (bodyParams.frontendPrefix) {
+          // Validation of frontendPrefix
+          if (!proxyBasePathRegEx.test(bodyParams.frontendPrefix)) {
+            return errorMessagePayload(400, 'Parameter "frontendPrefix" not valid.',
+            'frontendPrefix', bodyParams.frontendPrefix);
+          }
+          // Check if given frontend_prefix is already in use
+          const proxyBackendWithGivenFrontendPrefixExist = ProxyBackends.findOne({
+            'apiUmbrella.url_matches.frontend_prefix': bodyParams.frontendPrefix,
+          });
+          if (proxyBackendWithGivenFrontendPrefixExist) {
+            return errorMessagePayload(400, 'Parameter "frontendPrefix" must be unique.');
+          }
+          newProxyBackendData.apiUmbrella.urlMatches[0].frontend_prefix = bodyParams.frontendPrefix;
+          delete bodyParams.frontendPrefix;
         }
 
-        // Validation of frontendPrefix
-        if (!proxyBasePathRegEx.test(bodyParams.frontendPrefix)) {
-          return errorMessagePayload(400, 'Parameter "frontendPrefix" not valid.',
-          'frontendPrefix', bodyParams.frontendPrefix);
+        // is backendPrefix given
+        if (bodyParams.backendPrefix) {
+          // Validation of backendPrefix
+          if (!apiBasePathRegEx.test(bodyParams.backendPrefix)) {
+            return errorMessagePayload(400, 'Parameter "backendPrefix" not valid.',
+            'backendPrefix', bodyParams.backendPrefix);
+          }
+          newProxyBackendData.apiUmbrella.urlMatches[0].backend_prefix = bodyParams.backendPrefix;
+          delete bodyParams.backendPrefix;
         }
-
-        // Check if given frontend_prefix is already in use
-        const proxyBackendWithGivenFrontendPrefixExist = ProxyBackends.findOne({
-          'apiUmbrella.url_matches.frontend_prefix': bodyParams.frontendPrefix,
-        });
-        if (proxyBackendWithGivenFrontendPrefixExist) {
-          return errorMessagePayload(400, 'Parameter "frontendPrefix" must be unique.');
-        }
-
-        const frontendPrefix = bodyParams.frontendPrefix;
-
-        // backendPrefix is a required field
-        if (!bodyParams.backendPrefix) {
-          return errorMessagePayload(400, 'Parameter "backendPrefix" is mandatory.');
-        }
-
-        // Validation of backendPrefix
-        if (!apiBasePathRegEx.test(bodyParams.backendPrefix)) {
-          return errorMessagePayload(400, 'Parameter "backendPrefix" not valid.',
-          'backendPrefix', bodyParams.backendPrefix);
-        }
-        const backendPrefix = bodyParams.backendPrefix;
-
-        // Collect prefixes
-        const urlMatches = [{
-          frontend_prefix: frontendPrefix,
-          backend_prefix: backendPrefix,
-        }];
-
-        // Prepare apiUmbrella object
-        const apiUmbrella = {};
 
         // Get API details from API document
-        apiUmbrella.name = api.name;
+        newProxyBackendData.apiUmbrella.name = api.name;
 
         // Frontend host address comes from proxy document
         const apiUmbrellaUrl = new URI(proxy.apiUmbrella.url);
-        apiUmbrella.frontend_host = apiUmbrellaUrl.host();
+        newProxyBackendData.apiUmbrella.frontend_host = apiUmbrellaUrl.host();
 
         // Backend host address comes from API
         const apiUrl = new URI(api.url);
-        apiUmbrella.backend_host = apiUrl.host();
-        apiUmbrella.backend_protocol = apiUrl.protocol();
+        newProxyBackendData.apiUmbrella.backend_host = apiUrl.host();
+        newProxyBackendData.apiUmbrella.backend_protocol = apiUrl.protocol();
 
-        // Information of server address and port
-        // By default apiPort is set to 443 for https
-        let apiPort = 443;
-        // Default apiPort for https is 80
-        if (apiUmbrella.backend_protocol === 'http') {
-          apiPort = 80;
-        }
         // apiPort must be a numeric value
         if (bodyParams.apiPort) {
           if (isNaN(bodyParams.apiPort) || bodyParams.apiPort < 0 || bodyParams.apiPort > 65535) {
             return errorMessagePayload(400, 'Parameter "apiPort" has erroneous value.',
             'apiPort', bodyParams.apiPort);
           }
-          apiPort = bodyParams.apiPort;
+          newProxyBackendData.apiUmbrella.servers[0].apiPort = bodyParams.apiPort;
+          delete bodyParams.apiPort;
         }
-
-        const servers = [{
-          host: apiUrl.host(),
-          port: apiPort,
-        }];
-
-        // Prepare and fill settings object
-        const settings = {};
+        newProxyBackendData.apiUmbrella.servers[0].host = bodyParams.apiUrl.host();
 
         // If disableApiKey is given, it can be only literal true/false
         if (bodyParams.disableApiKey) {
@@ -1707,79 +1673,95 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             return errorMessagePayload(400, 'Parameter "disableApiKey" has erroneous value.',
             'disableApiKey', bodyParams.disableApiKey);
           }
-        }
-
-        // Convert given value to boolean. Also sets default false, if value not given.
-        settings.disableApiKey = (bodyParams.disableApiKey === 'true');
-
-        // Rate limit modes, default value is unlimited
-        settings.rate_limit_mode = bodyParams.rateLimitMode || 'unlimited';
-        const allowedRateLimitModeValues = ['custom', 'unlimited'];
-
-        // Is Rate limit mode allowed value
-        if (!allowedRateLimitModeValues.includes(settings.rate_limit_mode)) {
-          return errorMessagePayload(400, 'Parameter "rateLimitMode" has erroneous value.',
-          'rateLimitMode', bodyParams.rateLimitMode);
-        }
-
-        // When rate_limit_mode is 'custom', also additional parameters can be given
-        if (settings.rate_limit_mode === 'custom') {
-          // duration must be a numeric value
-          if (bodyParams.duration) {
-            if (isNaN(bodyParams.duration) || bodyParams.duration < 0) {
-              return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
-              'duration', bodyParams.duration);
-            }
-          }
-
-          // Is limitBy allowed value
-          if (bodyParams.limitBy) {
-            const allowedRateLimitByValues = ['apiKey', 'ip'];
-            if (!allowedRateLimitByValues.includes(bodyParams.limitBy)) {
-              return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
-              'limitBy', bodyParams.limitBy);
-            }
-          }
-
-          // limit must be a numeric value
-          if (bodyParams.limit) {
-            if (isNaN(bodyParams.limit) || bodyParams.limit < 0) {
-              return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
-              'limit', bodyParams.limit);
-            }
-          }
-
-          // If disableApiKey is given, it can be only literal true/false
-          if (bodyParams.showLimit) {
-            const allowedshowLimitValues = ['false', 'true'];
-            if (!allowedshowLimitValues.includes(bodyParams.showLimit)) {
-              return errorMessagePayload(400, 'Parameter "showLimit" has erroneous value.',
-              'showLimit', bodyParams.showLimit);
-            }
-          }
-
           // Convert given value to boolean. Also sets default false, if value not given.
-          const showLimitInResponseHeaders = (bodyParams.showLimit === 'true');
-
-          // Get given values ready for DB write
-          const rateLimits = [{
-            duration: bodyParams.duration,
-            limit_by: bodyParams.limitBy,
-            limit: bodyParams.limit,
-            response_headers: showLimitInResponseHeaders,
-          }];
-          // Add into settings
-          settings.rate_limits = rateLimits;
+          newProxyBackendData.apiUmbrella.settings.disableApiKey = (bodyParams.disableApiKey === 'true');
+          delete bodyParams.disableApiKey;
         }
 
-        // Collect apiUmbrella related data
-        apiUmbrella.balance_algorithm = 'least_conn';
-        apiUmbrella.servers = servers;
-        apiUmbrella.url_matches = urlMatches;
-        apiUmbrella.settings = settings;
+        // Is rateLimitMode given with correct value
+        if (bodyParams.rateLimitMode) {
+          const allowedRateLimitModeValues = ['custom', 'unlimited'];
+          // Is Rate limit mode allowed value
+          if (!allowedRateLimitModeValues.includes(bodyParams.rateLimitMode)) {
+            return errorMessagePayload(400, 'Parameter "rateLimitMode" has erroneous value.',
+            'rateLimitMode', bodyParams.rateLimitMode);
+          }
+          newProxyBackendData.apiUmbrella.settings.rate_limit_mode = bodyParams.rateLimitMode;
+          delete bodyParams.rateLimitMode;
+        }
 
-        // Fill the new backend data
-        newProxyBackendData.apiUmbrella = apiUmbrella;
+        // Check if broker endpoint data is to be modified
+        // Count number of broker endpoints currently in DB
+        const countOfrates = newProxyBackendData.apiUmbrella.settings.rateLimits.length;
+
+        // Is the beIndex given
+        if (bodyParams.rateLimitIndex) {
+          // Does the beIndex have correct value
+          if (isNaN(bodyParams.rateLimitIndex) ||
+              1 * bodyParams.rateLimitIndex < 0 ||
+              1 * bodyParams.rateLimitIndex > countOfrates) {
+            const detailLine = `Allowed range for 'rateLimitIndex' is 0 - ${countOfrates}`;
+            return errorMessagePayload(400, detailLine, 'rateLimitIndex', bodyParams.rateLimitIndex);
+          }
+          // At least one of rate values must be given with rateLimitIndex
+          if (!bodyParams.duration &&
+              !bodyParams.limitBy &&
+              !bodyParams.limit &&
+              !bodyParams.showLimit) {
+            const detailLine = 'Rate value index given without change values.';
+            return errorMessagePayload(400, detailLine);
+          }
+        }
+
+
+        // duration must be a numeric value
+        if (bodyParams.duration) {
+          if (isNaN(bodyParams.duration) || bodyParams.duration < 0) {
+            return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
+            'duration', bodyParams.duration);
+          }
+          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].duration =
+            bodyParams.duration;
+          delete bodyParams.duration;
+        }
+
+        // Is limitBy allowed value
+        if (bodyParams.limitBy) {
+          const allowedRateLimitByValues = ['apiKey', 'ip'];
+          if (!allowedRateLimitByValues.includes(bodyParams.limitBy)) {
+            return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
+            'limitBy', bodyParams.limitBy);
+          }
+          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].limitBy =
+            bodyParams.limitBy;
+          delete bodyParams.limitBy;
+        }
+
+        // limit must be a numeric value
+        if (bodyParams.limit) {
+          if (isNaN(bodyParams.limit) || bodyParams.limit < 0) {
+            return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
+            'limit', bodyParams.limit);
+          }
+          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].limit =
+            bodyParams.limit;
+          delete bodyParams.limit;
+        }
+
+        // If disableApiKey is given, it can be only literal true/false
+        if (bodyParams.showLimit) {
+          const allowedshowLimitValues = ['false', 'true'];
+          if (!allowedshowLimitValues.includes(bodyParams.showLimit)) {
+            return errorMessagePayload(400, 'Parameter "showLimit" has erroneous value.',
+            'showLimit', bodyParams.showLimit);
+          }
+          // Convert given value to boolean. Also sets default false, if value not given.
+          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].response_headers =
+          (bodyParams.showLimit === 'true');
+          delete bodyParams.showLimit;
+        }
+
+        // Which operations needed here TODO
 
         // Insert corresponding proxy backend to apiUmbrella
         const response = Meteor.call('createApiBackendOnApiUmbrella',
