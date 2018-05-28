@@ -446,6 +446,16 @@ CatalogV1.swagger = {
           enum: ['true', 'false'],
           example: 'false',
         },
+        rateLimitIndex: {
+          type: 'integer',
+          format: 'int32',
+          example: '1',
+        },
+        rateLimitRemoveIndex: {
+          type: 'integer',
+          format: 'int32',
+          example: '1',
+        },
         rateLimitMode: {
           type: 'string',
           enum: ['unlimited', 'custom'],

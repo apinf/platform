@@ -168,7 +168,8 @@ const descriptionApis = {
   Common parameters (M = mandatory)
   * *:id* is API id (in URL), (M)
 
-  #### In case type of selected proxy is **apiUmbrella**, at least one of following parameters must be given ####
+  #### In case type of selected proxy is **apiUmbrella**,
+  at least one of following parameters must be given ####
   * *frontendPrefix* is a unique identification for
   summarizing requests and responses done via this proxy connection, (M)
   * *backendPrefix* is an identification of API on server, (M)
@@ -176,7 +177,10 @@ const descriptionApis = {
   * *disableApiKey*, [false | true], true = skip API key requirement in Proxy, default false
   * *rateLimitMode*, [unlimited | custom], default 'unlimited'
 
-  When parameter *rateLimitMode* has value 'custom', at least one of following parameters must be given
+  When parameter *rateLimitMode* has value 'custom',
+  at least one of following parameters must be given
+  * *rateLimitIndex*, indicates, which occurrence of rate limit set is updated
+  * *rateLimitRemoveIndex*, indicates, which occurrence of rate limit set is removed
   * *duration*, set request duration in milliseconds
   * *limitBy*, [apiKey | ip],
   * *limit*, set number of request
