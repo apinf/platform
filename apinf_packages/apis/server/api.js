@@ -1156,8 +1156,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       description: descriptionApis.postProxyBackend,
       parameters: [
         CatalogV1.swagger.params.apiId,
-        CatalogV1.swagger.params.proxyId,
-        CatalogV1.swagger.params.proxyConnectionRequest,
+        CatalogV1.swagger.params.proxyConnectionRequestPost,
       ],
       responses: {
         200: {
@@ -1538,7 +1537,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       description: descriptionApis.putProxyBackend,
       parameters: [
         CatalogV1.swagger.params.apiId,
-        CatalogV1.swagger.params.proxyConnectionRequest,
+        CatalogV1.swagger.params.proxyConnectionRequestPut,
       ],
       responses: {
         200: {
