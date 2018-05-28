@@ -113,12 +113,20 @@ CatalogV1.swagger = {
       required: false,
       type: 'string',
     },
-    proxyConnectionRequest: {
-      name: 'user',
+    proxyConnectionRequestPost: {
+      name: 'proxyBackendPost',
       in: 'body',
       description: 'Proxy connection data',
       schema: {
-        $ref: '#/definitions/proxyConnectionRequest',
+        $ref: '#/definitions/proxyConnectionRequestPost',
+      },
+    },
+    proxyConnectionRequestPut: {
+      name: 'proxyBackendPut',
+      in: 'body',
+      description: 'Proxy connection data',
+      schema: {
+        $ref: '#/definitions/proxyConnectionRequestPut',
       },
     },
     proxyId: {
@@ -342,8 +350,83 @@ CatalogV1.swagger = {
       },
     },
     // The proxy schema for POST method
-    proxyConnectionRequest: {
+    proxyConnectionRequestPost: {
       required: ['frontendPrefix', 'backendPrefix', 'apiPort'],
+      properties: {
+        proxyId: {
+          type: 'string',
+          example: 'id-of-proxy',
+        },
+        frontendPrefix: {
+          type: 'string',
+          example: '/api_name/',
+        },
+        backendPrefix: {
+          type: 'string',
+          example: '/rest/v1/',
+        },
+        apiPort: {
+          type: 'integer',
+          format: 'int32',
+          example: '448',
+        },
+        disableApiKey: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        rateLimitMode: {
+          type: 'string',
+          enum: ['unlimited', 'custom'],
+          example: 'unlimited',
+        },
+        duration: {
+          type: 'integer',
+          format: 'int32',
+          example: '100',
+        },
+        limitBy: {
+          type: 'string',
+          enum: ['apiKey', 'ip'],
+          example: 'apiKey',
+        },
+        limit: {
+          type: 'integer',
+          format: 'int32',
+          example: '500',
+        },
+        showLimitInResponseHeaders: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        allow: {
+          type: 'string',
+          enum: ['deny', 'allow'],
+          example: 'deny',
+        },
+        access: {
+          type: 'string',
+          enum: ['subscribe', 'publish', 'both'],
+          example: 'subscribe',
+        },
+        topic: {
+          type: 'string',
+          example: 'certain-topic',
+        },
+        fromType: {
+          type: 'string',
+          enum: ['clientid', 'username', 'ipaddr'],
+          example: 'clientid',
+        },
+        fromValue: {
+          type: 'string',
+          example: '666',
+        },
+      },
+    },
+    // The proxy schema for PUT method
+    proxyConnectionRequestPut: {
       properties: {
         frontendPrefix: {
           type: 'string',
