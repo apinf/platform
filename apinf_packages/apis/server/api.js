@@ -1690,17 +1690,21 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           delete bodyParams.rateLimitMode;
         }
 
+        // In case rate limits are modified, also index to point to changed object is needed
+
         // Check if broker endpoint data is to be modified
         // Count number of broker endpoints currently in DB
-        const countOfrates = newProxyBackendData.apiUmbrella.settings.rateLimits.length;
+        const countOfRates = newProxyBackendData.apiUmbrella.settings.rate_limits.length;
 
-        // Is the beIndex given
-        if (bodyParams.rateLimitIndex) {
+        // Prepare index
+        const rlIndex = bodyParams.rateLimitIndex;
+        // Is the rateLimitIndex given
+        if (rlIndex) {
           // Does the beIndex have correct value
-          if (isNaN(bodyParams.rateLimitIndex) ||
-              1 * bodyParams.rateLimitIndex < 0 ||
-              1 * bodyParams.rateLimitIndex > countOfrates) {
-            const detailLine = `Allowed range for 'rateLimitIndex' is 0 - ${countOfrates}`;
+          if (isNaN(rlIndex) ||
+              1 * rlIndex < 0 ||
+              1 * rlIndex > countOfRates) {
+            const detailLine = `Allowed range for 'rateLimitIndex' is 0 - ${countOfRates}`;
             return errorMessagePayload(400, detailLine, 'rateLimitIndex', bodyParams.rateLimitIndex);
           }
           // At least one of rate values must be given with rateLimitIndex
@@ -1711,54 +1715,58 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             const detailLine = 'Rate value index given without change values.';
             return errorMessagePayload(400, detailLine);
           }
-        }
+          // Prepare rate_limits object
+          let rate_limits = {};
 
-
-        // duration must be a numeric value
-        if (bodyParams.duration) {
-          if (isNaN(bodyParams.duration) || bodyParams.duration < 0) {
-            return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
-            'duration', bodyParams.duration);
+          // if the rate limits object exits, it is used as a basis
+          if (newProxyBackendData.apiUmbrella.settings.rate_limits[rlIndex]) {
+            rate_limits = newProxyBackendData.apiUmbrella.settings.rate_limits[rlIndex];
           }
-          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].duration =
-            bodyParams.duration;
-          delete bodyParams.duration;
-        }
 
-        // Is limitBy allowed value
-        if (bodyParams.limitBy) {
-          const allowedRateLimitByValues = ['apiKey', 'ip'];
-          if (!allowedRateLimitByValues.includes(bodyParams.limitBy)) {
-            return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
-            'limitBy', bodyParams.limitBy);
+          // duration must be a numeric value
+          if (bodyParams.duration) {
+            if (isNaN(bodyParams.duration) || bodyParams.duration < 0) {
+              return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
+              'duration', bodyParams.duration);
+            }
+            rate_limits.duration = bodyParams.duration;
+            delete bodyParams.duration;
           }
-          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].limitBy =
-            bodyParams.limitBy;
-          delete bodyParams.limitBy;
-        }
 
-        // limit must be a numeric value
-        if (bodyParams.limit) {
-          if (isNaN(bodyParams.limit) || bodyParams.limit < 0) {
-            return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
-            'limit', bodyParams.limit);
+          // Is limitBy allowed value
+          if (bodyParams.limitBy) {
+            const allowedRateLimitByValues = ['apiKey', 'ip'];
+            if (!allowedRateLimitByValues.includes(bodyParams.limitBy)) {
+              return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
+              'limitBy', bodyParams.limitBy);
+            }
+            rate_limits.limitBy = bodyParams.limitBy;
+            delete bodyParams.limitBy;
           }
-          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].limit =
-            bodyParams.limit;
-          delete bodyParams.limit;
-        }
 
-        // If disableApiKey is given, it can be only literal true/false
-        if (bodyParams.showLimit) {
-          const allowedshowLimitValues = ['false', 'true'];
-          if (!allowedshowLimitValues.includes(bodyParams.showLimit)) {
-            return errorMessagePayload(400, 'Parameter "showLimit" has erroneous value.',
-            'showLimit', bodyParams.showLimit);
+          // limit must be a numeric value
+          if (bodyParams.limit) {
+            if (isNaN(bodyParams.limit) || bodyParams.limit < 0) {
+              return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
+              'limit', bodyParams.limit);
+            }
+            rate_limits.limit = bodyParams.limit;
+            delete bodyParams.limit;
           }
-          // Convert given value to boolean. Also sets default false, if value not given.
-          newProxyBackendData.apiUmbrella.settings.rate_limits[rateLimitIndex].response_headers =
-          (bodyParams.showLimit === 'true');
-          delete bodyParams.showLimit;
+
+          // If disableApiKey is given, it can be only literal true/false
+          if (bodyParams.showLimit) {
+            const allowedshowLimitValues = ['false', 'true'];
+            if (!allowedshowLimitValues.includes(bodyParams.showLimit)) {
+              return errorMessagePayload(400, 'Parameter "showLimit" has erroneous value.',
+              'showLimit', bodyParams.showLimit);
+            }
+            // Convert given value to boolean. Also sets default false, if value not given.
+            rate_limits.response_headers = (bodyParams.showLimit === 'true');
+            delete bodyParams.showLimit;
+          }
+
+          newProxyBackendData.apiUmbrella.settings.rate_limits[rlIndex] = rate_limits;
         }
 
         // Which operations needed here TODO
