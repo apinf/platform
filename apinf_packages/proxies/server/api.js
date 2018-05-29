@@ -35,7 +35,7 @@ ProxyV1.addCollection(Proxies, {
     getAll: {
       authRequired: true,
       // Admin role is required
-      roleRequired: ['admin'],
+      roleRequired: ['admin', 'manager'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -90,7 +90,7 @@ ProxyV1.addCollection(Proxies, {
         }
 
         // Requestor must be an administrator
-        if (!Roles.userIsInRole(requestorId, ['admin'])) {
+        if (!Roles.userIsInRole(requestorId, ['admin', 'manager'])) {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
@@ -123,7 +123,7 @@ ProxyV1.addCollection(Proxies, {
     // Response contains the entity with the given :id
     get: {
       authRequired: true,
-      roleRequired: ['admin'],
+      roleRequired: ['admin', 'manager'],
       swagger: {
         tags: [
           ProxyV1.swagger.tags.proxy,
@@ -152,6 +152,9 @@ ProxyV1.addCollection(Proxies, {
           400: {
             description: 'Erroneous or missing parameter',
           },
+          401: {
+            description: 'Unauthorized',
+          },
           403: {
             description: 'User does not have permission',
           },
@@ -176,8 +179,8 @@ ProxyV1.addCollection(Proxies, {
           return errorMessagePayload(400, 'User ID missing.');
         }
 
-        // Requestor must be an administrator
-        if (!Roles.userIsInRole(requestorId, ['admin'])) {
+        // Requestor must be an administrator or manager
+        if (!Roles.userIsInRole(requestorId, ['admin', 'manager'])) {
           return errorMessagePayload(403, 'User does not have permission.');
         }
 
@@ -235,8 +238,8 @@ ProxyV1.addCollection(Proxies, {
           401: {
             description: 'Authentication is required',
           },
-          404: {
-            description: 'Proxy is not found',
+          403: {
+            description: 'Forbidden',
           },
           500: {
             description: 'Internal server error',
@@ -446,7 +449,7 @@ ProxyV1.addCollection(Proxies, {
 
         // Return error response, if Proxy is not found.
         if (!insertedProxy) {
-          return errorMessagePayload(404, 'Proxy with specified ID is not found.');
+          return errorMessagePayload(500, 'Inserted Proxy is not found.');
         }
 
         return {
@@ -807,14 +810,14 @@ ProxyV1.addCollection(Proxies, {
         tags: [
           ProxyV1.swagger.tags.proxy,
         ],
-        summary: 'Delete API.',
+        summary: 'Delete Proxy.',
         description: descriptionProxies.deleteProxy,
         parameters: [
           ProxyV1.swagger.params.proxyId,
         ],
         responses: {
           204: {
-            description: 'API removed successfully.',
+            description: 'Proxy removed successfully.',
           },
           401: {
             description: 'Authentication is required',
@@ -823,7 +826,10 @@ ProxyV1.addCollection(Proxies, {
             description: 'User does not have permission',
           },
           404: {
-            description: 'API is not found',
+            description: 'Proxy is not found',
+          },
+          500: {
+            description: 'Internal server error',
           },
         },
         security: [
@@ -841,7 +847,7 @@ ProxyV1.addCollection(Proxies, {
         const requestorId = this.request.headers['x-user-id'];
 
         if (!requestorId) {
-          return errorMessagePayload(400, 'User ID missing.');
+          return errorMessagePayload(401, 'User ID missing.');
         }
 
         // Requestor must be an administrator
@@ -891,7 +897,7 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
   get: {
     authRequired: true,
     // Admin role is required
-    roleRequired: ['admin'],
+    roleRequired: ['manager', 'admin'],
     swagger: {
       tags: [
         ProxyV1.swagger.tags.proxy,
@@ -920,6 +926,9 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
         400: {
           description: 'Bad Request. Erroneous or missing parameter.',
         },
+        401: {
+          description: 'Unauthorized.',
+        },
         403: {
           description: 'User does not have permission',
         },
@@ -935,11 +944,11 @@ ProxyV1.addRoute('proxies/:id/proxyBackends', {
       const requestorId = this.request.headers['x-user-id'];
 
       if (!requestorId) {
-        return errorMessagePayload(400, 'User ID missing.');
+        return errorMessagePayload(401, 'User ID missing.');
       }
 
-      // Requestor must be an administrator
-      if (!Roles.userIsInRole(requestorId, ['admin'])) {
+      // Requestor must be an administrator or manager
+      if (!Roles.userIsInRole(requestorId, ['admin', 'manager'])) {
         return errorMessagePayload(403, 'User does not have permission.');
       }
 

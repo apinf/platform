@@ -28,7 +28,7 @@ const descriptionProxies = {
   getAllProxies: `
   ### List all available proxies ###
 
-  Admin user can get list of available proxies.
+  Admin user or manager can get list of available proxies.
 
   On successful case the response contains list of existing proxies including following information
   - proxy id
@@ -66,7 +66,7 @@ const descriptionProxies = {
   getProxy: `
   ### List details of an identified proxy ###
 
-  Admin user can get information of a proxy identified with proxy id.
+  Admin user or manager can get information of a proxy identified with proxy id.
 
   On success returns list of proxy's details
   - proxy id
@@ -210,7 +210,7 @@ const descriptionProxies = {
   getProxyBackends: `
   ### List all backends connected to Proxy in question ###
 
-  Admin user can get list of backends connected to Proxy in question.
+  Admin user or manager can get list of backends connected to Proxy in question.
 
   Parameters:
   - proxy id (in path)
