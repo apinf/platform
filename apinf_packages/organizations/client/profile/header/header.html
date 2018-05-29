@@ -10,38 +10,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
   <!-- Navigation -->
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
-    <div class="row">
-      <div class="col-md-5">
-        <span style="float: left; padding-top:12px" title="Upload new logo" class="organization-header-logo" id="organization-file-browse">
-          {{> viewOrganizationLogo organization=organization }}
-        </span>
-        <h1 id="organization-name" class="special-headings" style="font-size: 1.6em;color: #37474F;display: inline;float: left; margin-left: 15px;margin-top: 18px;">
-          {{ organization.name }}
-        </h1>
-      </div>
-      <div class="col-md-2 secondary-menu-block-inner" style="text-align:center;line-height: 0;">
-        {{# if organization.currentUserCanManage }}
-          <ul class="nav nav-tabs">
-            <li id="organization-apis-tab" class="active">
-              <a href="#organization-apis" data-toggle="tab">
-                {{_ "organizationProfileHeader_tabs_apis" }}
-              </a>
-            </li>
-            <li id="organization-settings-tab">
-              <a href="#organization-settings" data-toggle="tab">
-                {{_ "organizationProfileHeader_tabs_settings" }}
-              </a>
-            </li>
-          </ul>
-        {{/ if }}
-      </div>
-      <div class="col-md-5" style="text-align:right;">
-        {{# if organization.currentUserCanManage }}
-          <button type="button" class="btn btn-success btn-success-special" id="connect-api" style="margin-top:9px;">
-            Connect API
-          </button>
-        {{/ if }}
-      </div>
+    <nav class="secondary-menu-block-inner secondary-menu_navigation">
+      <span style="float: left;" title="Upload new logo" class="organization-header-logo" id="organization-file-browse">
+        {{> viewOrganizationLogo organization=organization }}
+      </span>
+      <h1 id="organization-name" class="special-headings" style="font-size: 1.6em;color: #37474F;display: inline;float: left; margin-left: 15px;margin-top: 18px;">
+        {{ organization.name }}
+      </h1>
+      {{# if organization.currentUserCanManage }}
+      <ul class="links">
+        <li id="organization-apis-tab" class="active">
+          <a href="#organization-apis" data-toggle="tab">
+            {{_ "organizationProfileHeader_tabs_apis" }}
+          </a>
+        </li>
+        <li id="organization-settings-tab">
+          <a href="#organization-settings" data-toggle="tab">
+            {{_ "organizationProfileHeader_tabs_settings" }}
+          </a>
+        </li>
+      </ul>
+      {{/ if }}
+      <button>MENU</button>
+      <ul class='hidden-links hidden'></ul>
+    </nav>
+    {{# if organization.currentUserCanManage }}
+    <div id="connect-api" class="small-tooltip">
+      <span class="small-tooltiptext">Connect API to Organization</span>
+      <i class="mdi mdi-plus"></i>
     </div>
+    {{/ if }}
   </div>
 </template>

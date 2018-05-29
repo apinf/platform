@@ -19,6 +19,7 @@ Template.viewApiPageHeader.onRendered(() => {
     $(`.nav-tabs a[href='#${hashTabValue}']`).tab('show');
   }
 
+  // Mobile menu
   $(function() {
 
     var $nav = $('nav.secondary-menu_navigation');
@@ -39,7 +40,6 @@ Template.viewApiPageHeader.onRendered(() => {
 
     var availableSpace, numOfVisibleItems, requiredSpace;
 
-    // Mobile menu
     function check() {
 
       // Get instant state
@@ -74,7 +74,6 @@ Template.viewApiPageHeader.onRendered(() => {
     });
 
     check();
-
   });
 });
 

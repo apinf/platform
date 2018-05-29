@@ -88,3 +88,42 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     opacity: 1;
   }
 }
+
+#connect-api {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: rgb(25, 185, 52);
+  position: fixed;
+  z-index: 1;
+  // float: right;
+  // display: inline-block;
+  bottom: 25px;
+  right: 25px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 0 rgba(59, 59, 88, 0.15);
+
+  &:hover {
+    background: rgb(22, 163, 46);
+  }
+
+  .mdi {
+    position: absolute;
+    top: 0;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    line-height: 55px;
+    font-size: 26px;
+    color: #fff;
+    transition: all 0.2s;
+  }
+
+  .small-tooltiptext {
+    width: 200px;
+  }
+}
