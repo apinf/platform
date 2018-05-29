@@ -1604,16 +1604,24 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       }
 
       // Check if the API is connected to a Proxy
-      const newProxyBackendData = ProxyBackends.findOne({ apiId });
-      if (!newProxyBackendData) {
+      const proxyBackend = ProxyBackends.findOne({ apiId });
+      if (!proxyBackend) {
         // The Proxy backend must exist
         return errorMessagePayload(400, 'The API must have a Proxy connection.');
+      }
+
+      // Get proxy document
+      const proxy = Proxies.findOne(proxyBackend.proxyId);
+
+      // proxy must exist
+      if (!proxy) {
+        return errorMessagePayload(404, 'Proxy with specified ID is not found.');
       }
 
       // Get body parameters
       const bodyParams = this.bodyParams;
 
-      if (newProxyBackendData.type === 'apiUmbrella') {
+      if (proxyBackend.type === 'apiUmbrella') {
         // is frontendPrefix given
         if (bodyParams.frontendPrefix) {
           // Validation of frontendPrefix
@@ -1628,7 +1636,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           if (proxyBackendWithGivenFrontendPrefixExist) {
             return errorMessagePayload(400, 'Parameter "frontendPrefix" must be unique.');
           }
-          newProxyBackendData.apiUmbrella.urlMatches[0].frontend_prefix = bodyParams.frontendPrefix;
+          proxyBackend.apiUmbrella.urlMatches[0].frontend_prefix = bodyParams.frontendPrefix;
           delete bodyParams.frontendPrefix;
         }
 
@@ -1639,21 +1647,21 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             return errorMessagePayload(400, 'Parameter "backendPrefix" not valid.',
             'backendPrefix', bodyParams.backendPrefix);
           }
-          newProxyBackendData.apiUmbrella.urlMatches[0].backend_prefix = bodyParams.backendPrefix;
+          proxyBackend.apiUmbrella.urlMatches[0].backend_prefix = bodyParams.backendPrefix;
           delete bodyParams.backendPrefix;
         }
 
         // Get API details from API document
-        newProxyBackendData.apiUmbrella.name = api.name;
+        proxyBackend.apiUmbrella.name = api.name;
 
         // Frontend host address comes from proxy document
         const apiUmbrellaUrl = new URI(proxy.apiUmbrella.url);
-        newProxyBackendData.apiUmbrella.frontend_host = apiUmbrellaUrl.host();
+        proxyBackend.apiUmbrella.frontend_host = apiUmbrellaUrl.host();
 
         // Backend host address comes from API
         const apiUrl = new URI(api.url);
-        newProxyBackendData.apiUmbrella.backend_host = apiUrl.host();
-        newProxyBackendData.apiUmbrella.backend_protocol = apiUrl.protocol();
+        proxyBackend.apiUmbrella.backend_host = apiUrl.host();
+        proxyBackend.apiUmbrella.backend_protocol = apiUrl.protocol();
 
         // apiPort must be a numeric value
         if (bodyParams.apiPort) {
@@ -1661,10 +1669,10 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             return errorMessagePayload(400, 'Parameter "apiPort" has erroneous value.',
             'apiPort', bodyParams.apiPort);
           }
-          newProxyBackendData.apiUmbrella.servers[0].apiPort = bodyParams.apiPort;
+          proxyBackend.apiUmbrella.servers[0].apiPort = bodyParams.apiPort;
           delete bodyParams.apiPort;
         }
-        newProxyBackendData.apiUmbrella.servers[0].host = bodyParams.apiUrl.host();
+        proxyBackend.apiUmbrella.servers[0].host = bodyParams.apiUrl.host();
 
         // If disableApiKey is given, it can be only literal true/false
         if (bodyParams.disableApiKey) {
@@ -1674,7 +1682,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             'disableApiKey', bodyParams.disableApiKey);
           }
           // Convert given value to boolean. Also sets default false, if value not given.
-          newProxyBackendData.apiUmbrella.settings.disableApiKey = (bodyParams.disableApiKey === 'true');
+          proxyBackend.apiUmbrella.settings.disableApiKey = (bodyParams.disableApiKey === 'true');
           delete bodyParams.disableApiKey;
         }
 
@@ -1686,7 +1694,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             return errorMessagePayload(400, 'Parameter "rateLimitMode" has erroneous value.',
             'rateLimitMode', bodyParams.rateLimitMode);
           }
-          newProxyBackendData.apiUmbrella.settings.rate_limit_mode = bodyParams.rateLimitMode;
+          proxyBackend.apiUmbrella.settings.rate_limit_mode = bodyParams.rateLimitMode;
           delete bodyParams.rateLimitMode;
         }
 
@@ -1694,7 +1702,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
         // Check if broker endpoint data is to be modified
         // Count number of broker endpoints currently in DB
-        const countOfRates = newProxyBackendData.apiUmbrella.settings.rate_limits.length;
+        const countOfRates = proxyBackend.apiUmbrella.settings.rate_limits.length;
 
         // Prepare index
         const rlIndex = bodyParams.rateLimitIndex;
@@ -1705,7 +1713,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
               1 * rlIndex < 0 ||
               1 * rlIndex > countOfRates) {
             const detailLine = `Allowed range for 'rateLimitIndex' is 0 - ${countOfRates}`;
-            return errorMessagePayload(400, detailLine, 'rateLimitIndex', bodyParams.rateLimitIndex);
+            return errorMessagePayload(400, detailLine, 'rateLimitIndex', rlIndex);
           }
           // At least one of rate values must be given with rateLimitIndex
           if (!bodyParams.duration &&
@@ -1716,11 +1724,11 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             return errorMessagePayload(400, detailLine);
           }
           // Prepare rate_limits object
-          let rate_limits = {};
+          let rateLimits = {};
 
           // if the rate limits object exits, it is used as a basis
-          if (newProxyBackendData.apiUmbrella.settings.rate_limits[rlIndex]) {
-            rate_limits = newProxyBackendData.apiUmbrella.settings.rate_limits[rlIndex];
+          if (proxyBackend.apiUmbrella.settings.rate_limits[rlIndex]) {
+            rateLimits = proxyBackend.apiUmbrella.settings.rate_limits[rlIndex];
           }
 
           // duration must be a numeric value
@@ -1729,7 +1737,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
               return errorMessagePayload(400, 'Parameter "duration" has erroneous value.',
               'duration', bodyParams.duration);
             }
-            rate_limits.duration = bodyParams.duration;
+            rateLimits.duration = bodyParams.duration;
             delete bodyParams.duration;
           }
 
@@ -1740,7 +1748,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
               return errorMessagePayload(400, 'Parameter "limitBy" has erroneous value.',
               'limitBy', bodyParams.limitBy);
             }
-            rate_limits.limitBy = bodyParams.limitBy;
+            rateLimits.limitBy = bodyParams.limitBy;
             delete bodyParams.limitBy;
           }
 
@@ -1750,7 +1758,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
               return errorMessagePayload(400, 'Parameter "limit" has erroneous value.',
               'limit', bodyParams.limit);
             }
-            rate_limits.limit = bodyParams.limit;
+            rateLimits.limit = bodyParams.limit;
             delete bodyParams.limit;
           }
 
@@ -1762,19 +1770,19 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
               'showLimit', bodyParams.showLimit);
             }
             // Convert given value to boolean. Also sets default false, if value not given.
-            rate_limits.response_headers = (bodyParams.showLimit === 'true');
+            rateLimits.response_headers = (bodyParams.showLimit === 'true');
             delete bodyParams.showLimit;
           }
 
-          newProxyBackendData.apiUmbrella.settings.rate_limits[rlIndex] = rate_limits;
+          proxyBackend.apiUmbrella.settings.rate_limits[rlIndex] = rateLimits;
         }
 
         // Which operations needed here TODO
 
         // Insert corresponding proxy backend to apiUmbrella
         const response = Meteor.call('createApiBackendOnApiUmbrella',
-          newProxyBackendData.apiUmbrella,
-          newProxyBackendData.proxyId);
+          proxyBackend.apiUmbrella,
+          proxyBackend.proxyId);
 
         // If response has errors object, notify about it
         if (response.errors && response.errors.default) {
@@ -1790,18 +1798,18 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         const umbrellaBackendId = response.result.data.api.id;
 
         // Attach the API Umbrella backend ID to backend document
-        newProxyBackendData.apiUmbrella.id = umbrellaBackendId;
+        proxyBackend.apiUmbrella.id = umbrellaBackendId;
 
           // Publish the API Backend on API Umbrella
         const publishSuccess = Meteor.call('publishApiBackendOnApiUmbrella',
-                      umbrellaBackendId, newProxyBackendData.proxyId);
+                      umbrellaBackendId, proxyBackend.proxyId);
         if (publishSuccess.errors && response.errors.default) {
           return errorMessagePayload(publishSuccess.errors.http_status,
             publishSuccess.errors.default);
         }
 
         // Insert the apiUmbrella Proxy Backend document on APInf
-        const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+        const proxyBackendId = ProxyBackends.insert(proxyBackend);
         if (!proxyBackendId) {
           return errorMessagePayload(500, 'Creating proxyBackend failed.');
         }
@@ -1811,7 +1819,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
         // Create a placeholder in 30 days for charts for particular Proxy Backend
         Meteor.call('proxyBackendAnalyticsData', proxyBackendId, 30, 'today');
-      } else if (proxy.type === 'emq') {
+      } else if (proxyBackend.type === 'emq') {
         // allow is a mandatory field, values 0/1
         if (bodyParams.allow) {
           if (isNaN(bodyParams.allow) || bodyParams.allow < 0 || bodyParams.allow > 1) {
@@ -1869,10 +1877,10 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         settings.acl = aclFields;
         const emq = {};
         emq.settings = settings;
-        newProxyBackendData.emq = emq;
+        proxyBackend.emq = emq;
 
         // Insert the emq Proxy Backend document on APInf
-        const proxyBackendId = ProxyBackends.insert(newProxyBackendData);
+        const proxyBackendId = ProxyBackends.insert(proxyBackend);
         if (!proxyBackendId) {
           return errorMessagePayload(500, 'Creating proxyBackend failed.');
         }
