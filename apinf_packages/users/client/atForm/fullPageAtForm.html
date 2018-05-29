@@ -1,20 +1,33 @@
 <template name="customFullPageAtForm">
+  <nav class="navbar navbar-default main-navigation navbar-fixed-top" style="padding-right:136px;padding-left:136px">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/">
+          <img src="https://i.imgur.com/1jNbAuL.png" style="display: block;padding-top:25px;width:100px;">
+        </a>
+      </div>
+      <ul class="nav navbar-nav" id="main-navbar" style="line-height:70px;">
+        <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
+          <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
+            Explore APIs
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div class="container-fluid" style="padding-left:0;">
     <div class="row">
       <div class="col-md-8 sign-up-welcome-block">
-        <a href="/">
-          <img src="https://i.imgur.com/1jNbAuL.png" style="display: block;padding-left:45px;padding-top:20px;width:150px;">
-        </a>
         <h1 id="site-title">
           See who is using your APIs
           <small id="site-slogan" >
             Just one step left to start using Apinf.
           </small>
         </h1>
-        <div class="atform-footer" style="position: fixed;bottom: 40px;left: 170px;">
+        <!-- <div class="atform-footer" style="position: fixed;bottom: 40px;left: 170px;">
           <p style="font-size: 1em;color: rgba(255,255,255,0.40);">Companies who trust us</p>
           <img src="https://projects.invisionapp.com/assets/apps/d/img/login-signup/enterprise-logos-2.png" style="max-width: 500px;">
-        </div>
+        </div> -->
       </div>
       <div class="col-xs-12 col-md-4" style="background-color: #fff;height: 100vh;overflow: auto;">
         {{> atForm}}

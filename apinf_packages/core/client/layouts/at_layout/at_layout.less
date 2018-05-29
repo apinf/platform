@@ -3,12 +3,16 @@
   background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
 
   .at-form {
-    max-width: 90%;
     margin-top: 20vh;
     padding-left: 50px;
-    padding-right: 50px;
+    padding-right: 150px;
     padding-top: 0;
     padding-bottom: 0;
+  }
+
+  .at-terms-link, .at-signin-link {
+    text-align: left;
+    color: #4c6072;
   }
 
   h1 {
@@ -68,6 +72,28 @@
       margin-top: 50px;
       padding-left: 20px;
       padding-right: 20px;
+    }
+  }
+
+  .main-navigation {
+    background-color: transparent;
+    height: 70px;
+
+    .navbar-nav > li > a {
+      color: #333;
+      text-transform: none;
+      font-size: 1.6rem;
+      letter-spacing: 0.6px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .navbar-nav > .main-links > a:hover,
+    .navbar-nav > .main-links > a:active {
+      background-color: transparent;
+      border-radius: 0;
+      text-decoration: underline;
+      color: inherit;
     }
   }
 }
