@@ -164,30 +164,39 @@ const descriptionApis = {
   The given parameter set depends on the type of connected proxy.
   On success, returns the updated Proxy connection object.
 
-
-  Common parameters (M = mandatory)
+  #### Common parameters (M = mandatory) ####
   * *:id* is API id (in URL), (M)
 
-  #### In case type of selected proxy is **apiUmbrella**,
-  at least one of following parameters must be given ####
-  * *frontendPrefix* is a unique identification for
-  summarizing requests and responses done via this proxy connection, (M)
-  * *backendPrefix* is an identification of API on server, (M)
-  * *apiPort* is port used on API server, default value for https is 443, http is 80.
-  * *disableApiKey*, [false | true], true = skip API key requirement in Proxy, default false
-  * *rateLimitMode*, [unlimited | custom], default 'unlimited'
-
-  When parameter *rateLimitMode* has value 'custom',
+  #### apiUmbrella parameters ####
+  In case type of selected proxy is **apiUmbrella**,
   at least one of following parameters must be given
-  * *rateLimitIndex*, indicates, which occurrence of rate limit set is updated
+
+  * *frontendPrefix* is a unique identification for
+  summarizing requests and responses done via this proxy connection
+  * *backendPrefix* is an identification of API on server
+  * *apiPort* is port used on API server, default value for https is 443, http is 80.
+  * *disableApiKey*, [false | true], true = skip API key requirement in Proxy
+  * *rateLimitMode*, [unlimited | custom]
+
+  #### Parameters related to rate limit ####
+
+  ##### Rate index parameters #####
+  * *rateLimitIndex*, indicates, which occurrence of rate limit sets is updated
+    * With this parameter at least one of other parameters must be given
+  * *rateLimitIndexRemove*, indicates, which rate limit set is to be removed
+    * no other parameters are given with this one
+
+  ##### Rate value parameters #####
   * *rateLimitRemoveIndex*, indicates, which occurrence of rate limit set is removed
   * *duration*, set request duration in milliseconds
   * *limitBy*, [apiKey | ip],
   * *limit*, set number of request
   * *showLimitInResponseHeaders*, [true | false], is limit shown in response headers or not
 
-  #### In case type of proxy is **emq**, at least one of following Access Control Rules (ACL)
-  parameters must be given ####
+  #### EMQ related parameters ####
+  In case type of proxy is **emq**, at least one of following Access Control Rules (ACL)
+  parameters must be given.
+
   * *allow*, values [0 | 1], 0 = deny, 1 = access
   * *access*, values [1 | 2 | 3], 1 = subscribe, 2 = publish, 3 = both
   * *topic*, value is a string

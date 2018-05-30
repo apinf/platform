@@ -451,10 +451,10 @@ CatalogV1.swagger = {
           format: 'int32',
           example: '1',
         },
-        rateLimitRemoveIndex: {
+        rateLimitIndexRemove: {
           type: 'integer',
           format: 'int32',
-          example: '1',
+          example: '3',
         },
         rateLimitMode: {
           type: 'string',
