@@ -167,6 +167,13 @@ const descriptionApis = {
   #### Common parameters (M = mandatory) ####
   * *:id* is API id (in URL), (M)
 
+  ##### Index parameters #####
+  * *editIndex*, indicates, which occurrence of rate limit set or EMQ set is updated
+    * With this parameter at least one of other parameters must be given
+    * new parameter set can be added at the end of list or into a gap in list
+  * *removeIndex*, indicates, which rate limit set or emq set is to be removed
+    * no other set related parameters are given with this parameter
+
   #### apiUmbrella parameters ####
   In case type of selected proxy is **apiUmbrella**,
   at least one of following parameters must be given
@@ -180,14 +187,7 @@ const descriptionApis = {
 
   #### Parameters related to rate limit ####
 
-  ##### Rate index parameters #####
-  * *rateLimitIndex*, indicates, which occurrence of rate limit sets is updated
-    * With this parameter at least one of other parameters must be given
-  * *rateLimitIndexRemove*, indicates, which rate limit set is to be removed
-    * no other parameters are given with this one
-
   ##### Rate value parameters #####
-  * *rateLimitRemoveIndex*, indicates, which occurrence of rate limit set is removed
   * *duration*, set request duration in milliseconds
   * *limitBy*, [apiKey | ip],
   * *limit*, set number of request
@@ -212,7 +212,6 @@ const descriptionApis = {
   returns an empty response (204).
   Trying to remove a non-existing proxy connection from API is considered error (404).
   `,
-
 };
 
 export default descriptionApis;
