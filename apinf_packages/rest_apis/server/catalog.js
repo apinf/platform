@@ -428,6 +428,16 @@ CatalogV1.swagger = {
     // The proxy schema for PUT method
     proxyConnectionRequestPut: {
       properties: {
+        editIndex: {
+          type: 'integer',
+          format: 'int32',
+          example: '1',
+        },
+        removeIndex: {
+          type: 'integer',
+          format: 'int32',
+          example: '3',
+        },
         frontendPrefix: {
           type: 'string',
           example: '/api_name/',
@@ -445,16 +455,6 @@ CatalogV1.swagger = {
           type: 'string',
           enum: ['true', 'false'],
           example: 'false',
-        },
-        rateLimitIndex: {
-          type: 'integer',
-          format: 'int32',
-          example: '1',
-        },
-        rateLimitIndexRemove: {
-          type: 'integer',
-          format: 'int32',
-          example: '3',
         },
         rateLimitMode: {
           type: 'string',
