@@ -48,6 +48,7 @@ Go to api page
 setup proxy
 	Go To	http://localhost:3000/apis/kissa
 	Wait Until Page Contains	media
+	Sleep	0.3
 	Click Element	css=i.fa.fa-sitemap
 	Sleep	0.3
 	Input text	id=proxy-base-path-field	/gaagol/
