@@ -1493,7 +1493,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           return errorMessagePayload(400, 'Parameter "fromValue" is mandatory.');
         }
 
-        // structure for validating values against schema
+        // structure for inserting new ACL object
         const aclFields = [{
           id: new Meteor.Collection.ObjectID().valueOf(),
           allow: bodyParams.allow,
@@ -1614,7 +1614,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         return errorMessagePayload(400, 'The API must have a Proxy connection.');
       }
 
-      console.log('proxyBackend=', proxyBackend);
       // _id and apiUmbrella id are not needed
       const proxyBackendId = proxyBackend._id;
       delete proxyBackend._id;
@@ -1636,6 +1635,8 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         return errorMessagePayload(400, 'No parameters given.');
       }
 
+      // Functionality related to proxy type
+      //           apiUmbrella
       if (proxyBackend.type === 'apiUmbrella') {
         // No changes to emq part here
         delete proxyBackend.emq;
@@ -1717,54 +1718,53 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         // In case rate limits are modified, also index to point to changed object is needed
-        if (bodyParams.rateLimitIndex) {
+        if (bodyParams.editIndex) {
           if (!bodyParams.duration &&
               !bodyParams.limitBy &&
               !bodyParams.limit &&
               !bodyParams.showLimit) {
-            return errorMessagePayload(400, 'At least on rate parameter needed with rateLimitIndex');
+            return errorMessagePayload(400, 'At least one rate parameter needed with editIndex');
           }
         }
 
-        if (!bodyParams.rateLimitIndex) {
+        if (!bodyParams.editIndex) {
           if (bodyParams.duration ||
               bodyParams.limitBy ||
               bodyParams.limit ||
               bodyParams.showLimit) {
-            return errorMessagePayload(400, 'rateLimitIndex is needed with rate parameters');
+            return errorMessagePayload(400, 'editIndex is needed with rate parameters');
           }
         }
+        // Count number of rate limits currently in DB
+        const countOfRates = proxyBackend.apiUmbrella.settings.rate_limits.length || 0;
 
-        // Prepare index
-        const rlIndex = bodyParams.rateLimitIndex;
-        // Is the rateLimitIndex given
-        if (rlIndex) {
+        // Is the editIndex given
+        if (bodyParams.editIndex) {
           // Rate limits can be modified only in case rate limit mode is 'custom'
           if (proxyBackend.apiUmbrella.settings.rate_limit_mode !== 'custom') {
-            return errorMessagePayload(400, 'Rate parameters can only be modified when mode is custom');
+            return errorMessagePayload(400, 'Rate parameters allowed only when mode is custom');
           }
 
-          // Count number of rate limits currently in DB
-          const countOfRates = proxyBackend.apiUmbrella.settings.rate_limits.length || 0;
+          // Prepare index
+          const rlIndex = 1 * bodyParams.editIndex;
 
-          // Does the beIndex have correct value
-          if (isNaN(rlIndex) ||
-              1 * rlIndex < 0 ||
-              1 * rlIndex > countOfRates) {
-            const detailLine = `Allowed range for 'rateLimitIndex' is 0 - ${countOfRates}`;
-            return errorMessagePayload(400, detailLine, 'rateLimitIndex', rlIndex);
+          // Does the rate limit index have correct value
+          if (isNaN(rlIndex) || rlIndex < 0 || rlIndex > countOfRates) {
+            const detailLine = `Allowed range for 'editIndex' is 0 - ${countOfRates}`;
+            return errorMessagePayload(400, detailLine, 'editIndex', rlIndex);
           }
 
           // Prepare rate_limits object
           let rateLimits = {};
-          // if the rate limits object exits, it is used as a basis
+          // if the rate limits object exists, it is used as a basis
           if (proxyBackend.apiUmbrella.settings.rate_limits[rlIndex]) {
             rateLimits = proxyBackend.apiUmbrella.settings.rate_limits[rlIndex];
           } else if (!bodyParams.duration ||
                      !bodyParams.limitBy ||
                      !bodyParams.limit ||
                      !bodyParams.showLimit) {
-            return errorMessagePayload(400, 'All rate parameters needed when adding a new rate set');
+            const detailLine = 'All rate parameters needed when adding a new rate set';
+            return errorMessagePayload(400, detailLine);
           }
 
           // duration must be a numeric value
@@ -1811,84 +1811,166 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           }
 
           proxyBackend.apiUmbrella.settings.rate_limits[rlIndex] = rateLimits;
+          delete bodyParams.editIndex;
         }
 
-        // Update the apiUmbrella Proxy Backend document on APInf
-        const result = ProxyBackends.update(proxyBackendId, { $set: proxyBackend });
-        if (!result) {
-          return errorMessagePayload(500, 'Updating proxyBackend failed.');
-        }
+        // Check if correct value is given for remove index
+        if (bodyParams.removeIndex) {
+          // Rate limits can be removed only in case rate limit mode is 'custom'
+          if (proxyBackend.apiUmbrella.settings.rate_limit_mode !== 'custom') {
+            return errorMessagePayload(400, 'Rate set removal allowed only when mode is custom');
+          }
 
+          // Prepare index
+          const removeIndex = 1 * bodyParams.removeIndex;
+
+          // Does the rate limit remove index have correct value
+          if (isNaN(removeIndex) || removeIndex < 0 || removeIndex > countOfRates) {
+            const detailLine = `Allowed range for 'removeIndex' is 0 - ${countOfRates - 1}`;
+            return errorMessagePayload(400, detailLine, 'removeIndex', removeIndex);
+          }
+          // find the rate limits object
+          if (!proxyBackend.apiUmbrella.settings.rate_limits[removeIndex]) {
+            const detailLine = 'Rate limit object does not exist';
+            return errorMessagePayload(400, detailLine);
+          }
+
+          // Remove the indicated rate limit object
+          proxyBackend.apiUmbrella.settings.rate_limits.splice(removeIndex, 1);
+          delete bodyParams.removeIndex;
+        }
+        // Functionality related to proxy type
+        //              EMQ
       } else if (proxyBackend.type === 'emq') {
         // No changes to apiUmbrella part here
         delete proxyBackend.apiUmbrella;
 
-        // allow is a mandatory field, values 0/1
-        if (bodyParams.allow) {
-          if (isNaN(bodyParams.allow) || bodyParams.allow < 0 || bodyParams.allow > 1) {
-            return errorMessagePayload(400, 'Parameter "allow" has erroneous value.',
-            'allow', bodyParams.allow);
+        if (!bodyParams.editIndex && !bodyParams.removeIndex) {
+          return errorMessagePayload(400, 'Either editIndex or removeINdex must be given.');
+        }
+
+        // Count number of ACL objects in DB
+        const countOfACL = proxyBackend.emq.settings.acl.length || 0;
+
+        // Modification of ACL data
+        if (bodyParams.editIndex) {
+          // Prepare index
+          const ACLIndex = 1 * bodyParams.editIndex;
+
+          // Does the ACL index have correct value
+          if (isNaN(ACLIndex) || ACLIndex < 0 || ACLIndex > countOfACL) {
+            const detailLine = `Allowed range for 'editIndex' is 0 - ${countOfACL}`;
+            return errorMessagePayload(400, detailLine, 'editIndex', ACLIndex);
           }
-        } else {
-          return errorMessagePayload(400, 'Parameter "allow" is mandatory.');
-        }
 
-        // access is a mandatory field, values 1/2/3
-        if (bodyParams.access) {
-          if (isNaN(bodyParams.access) || bodyParams.access < 1 || bodyParams.access > 3) {
-            return errorMessagePayload(400, 'Parameter "access" has erroneous value.',
-            'access', bodyParams.access);
+          if (!bodyParams.allow &&
+              !bodyParams.access &&
+              !bodyParams.topic &&
+              !bodyParams.fromType &&
+              !bodyParams.fromValue) {
+            return errorMessagePayload(400, 'At least one ACL parameter needed with editIndex');
           }
-        } else {
-          return errorMessagePayload(400, 'Parameter "access" is mandatory.');
-        }
 
-        // topic is a mandatory field
-        if (!bodyParams.topic) {
-          return errorMessagePayload(400, 'Parameter "topic" is mandatory.');
-        }
-
-        // fromType is a mandatory field
-        if (bodyParams.fromType) {
-          const allowedfromTypeValues = ['clientid', 'username', 'ipaddr'];
-          if (!allowedfromTypeValues.includes(bodyParams.fromType)) {
-            return errorMessagePayload(400, 'Parameter "fromType" has erroneous value.',
-            'fromType', bodyParams.fromType);
+          // Prepare ACL object to be modified or added
+          let aclFields = {};
+          // if the ACL object exists, it is used as a basis
+          if (proxyBackend.emq.settings.acl[ACLIndex]) {
+            aclFields = proxyBackend.emq.settings.acl[ACLIndex];
+          } else if (!bodyParams.allow ||
+                      !bodyParams.access ||
+                      !bodyParams.topic ||
+                      !bodyParams.fromType ||
+                      !bodyParams.fromValue) {
+            const detailLine = 'All ACL parameters needed when adding a ACL set';
+            return errorMessagePayload(400, detailLine);
+          } else {
+            // Fill in general values for new ACL object
+            aclFields.id = new Meteor.Collection.ObjectID().valueOf();
+            aclFields.proxyId = proxy._id;
           }
-        } else {
-          return errorMessagePayload(400, 'Parameter "fromType" is mandatory.');
+
+          // is parameter allow given, properly, values 0/1
+          if (bodyParams.allow) {
+            if (isNaN(bodyParams.allow) || 1 * bodyParams.allow < 0 || 1 * bodyParams.allow > 1) {
+              return errorMessagePayload(400, 'Parameter "allow", allowed values are 0 and 1.',
+              'allow', bodyParams.allow);
+            }
+            aclFields.allow = 1 * bodyParams.allow;
+            delete bodyParams.allow;
+          }
+
+          // is parameter access given, properly, values 1/2/3
+          if (bodyParams.access) {
+            if (isNaN(bodyParams.access) || 1 * bodyParams.access < 1 || 1 * bodyParams.access > 3) {
+              return errorMessagePayload(400, 'Parameter "access" has erroneous value.',
+              'access', bodyParams.access);
+            }
+            aclFields.access = 1 * bodyParams.access;
+            delete bodyParams.access;
+          }
+
+          // is topic given
+          if (bodyParams.topic) {
+            aclFields.topic = bodyParams.topic;
+            delete bodyParams.topic;
+          }
+
+          // is parameter fromType given, properly
+          if (bodyParams.fromType) {
+            const allowedfromTypeValues = ['clientid', 'username', 'ipaddr'];
+            if (!allowedfromTypeValues.includes(bodyParams.fromType)) {
+              return errorMessagePayload(400, 'Parameter "fromType" has erroneous value.',
+              'fromType', bodyParams.fromType);
+            }
+            aclFields.topic = bodyParams.fromType;
+            delete bodyParams.fromType;
+          }
+
+          // is parameter fromValue given, properly
+          if (bodyParams.fromValue) {
+            aclFields.topic = bodyParams.fromValue;
+            delete bodyParams.fromValue;
+          }
+
+          // add or update modified ACL object
+          proxyBackend.emq.settings.acl[ACLIndex] = aclFields;
+          delete bodyParams.ACLIndex;
         }
 
-        // fromValue is a mandatory field
-        if (!bodyParams.fromValue) {
-          return errorMessagePayload(400, 'Parameter "fromValue" is mandatory.');
+        // Removal of ACL data
+        if (bodyParams.removeIndex) {
+          // Prepare index
+          const removeIndex = 1 * bodyParams.removeIndex;
+
+          // Does the ACL remove index have correct value
+          if (isNaN(removeIndex) || removeIndex < 0 || removeIndex > countOfACL) {
+            const detailLine = `Allowed range for 'removeIndex' is 0 - ${countOfACL - 1}`;
+            return errorMessagePayload(400, detailLine, 'removeIndex', removeIndex);
+          }
+          // find the ACL object
+          if (!proxyBackend.emq.settings.acl[removeIndex]) {
+            const detailLine = 'ACL object does not exist';
+            return errorMessagePayload(400, detailLine);
+          }
+
+          // Remove the indicated ACL object
+          proxyBackend.emq.settings.acl.splice(removeIndex, 1);
+          delete bodyParams.removeIndex;
         }
 
-        // structure for validating values against schema
-        const aclFields = [{
-          id: new Meteor.Collection.ObjectID().valueOf(),
-          allow: bodyParams.allow,
-          access: bodyParams.access,
-          topic: bodyParams.topic,
-          fromType: bodyParams.fromType,
-          fromValue: bodyParams.fromValue,
-          proxyId: proxy._id,
-        }];
-
-        // Fill the new backend data
-        const settings = {};
-        settings.acl = aclFields;
-        const emq = {};
-        emq.settings = settings;
-        proxyBackend.emq = emq;
-
-        // Insert the emq Proxy Backend document on APInf
-        const proxyBackendId = ProxyBackends.insert(proxyBackend);
-        if (!proxyBackendId) {
-          return errorMessagePayload(500, 'Creating proxyBackend failed.');
-        }
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
+      }
+
+      // Are there not handled parameters still left
+      if (Object.keys(bodyParams).length) {
+        return errorMessagePayload(400, 'Erroneous parameters given.', 'params', bodyParams);
+      }
+
+      // Update the apiUmbrella Proxy Backend document on APInf
+      const result = ProxyBackends.update(proxyBackendId, { $set: proxyBackend });
+      if (!result) {
+        return errorMessagePayload(500, 'Updating proxyBackend failed.');
       }
 
       // Get API's just inserted Proxy connection data for response
