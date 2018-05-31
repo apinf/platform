@@ -7,136 +7,134 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   {{> settingsMenu }}
   {{# if Template.subscriptionsReady }}
   <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 block-wrapper platform-branding">
-        <!-- {{_ "branding_panel_title" }} -->
-        <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">Platform Branding</h2>
-        {{# if branding }}
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#logo" data-toggle="tab">Logo</a></li>
-          <li><a href="#about" data-toggle="tab">About</a></li>
-          <li><a href="#featured-apis" data-toggle="tab">Showcase APIs</a></li>
-          <li><a href="#analytics" data-toggle="tab">Analytics</a></li>
-          <li><a href="#privacy-terms" data-toggle="tab">Privacy & Terms</a></li>
-          <li><a href="#social-media-links" data-toggle="tab">Social Media Links</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="logo">
-            <div class="form-group">
-              <label for="branding-site-logo" class="control-label">
-                {{_ "branding_projectLogoTitle_logoTitle" }}
-              </label>
-              <br>
-              {{> viewProjectLogo branding=branding }}
-              {{> uploadProjectLogo branding=branding }}
-            </div>
-            <div class="form-group">
-              <label for="branding-site-cover-photo" class="control-label">
-                {{_ "branding_projectCoverPhotoTitle_coverPhotoTitle" }}
-              </label>
-              <br>
-              {{> viewCoverPhoto branding=branding }}
-              {{> uploadCoverPhoto branding=branding }}
-            </div>
+    <div class="block-wrapper platform-branding">
+      <!-- {{_ "branding_panel_title" }} -->
+      <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">Platform Branding</h2>
+      {{# if branding }}
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#logo" data-toggle="tab">Logo</a></li>
+        <li><a href="#about" data-toggle="tab">About</a></li>
+        <li><a href="#featured-apis" data-toggle="tab">Showcase APIs</a></li>
+        <li><a href="#analytics" data-toggle="tab">Analytics</a></li>
+        <li><a href="#privacy-terms" data-toggle="tab">Privacy & Terms</a></li>
+        <li><a href="#social-media-links" data-toggle="tab">Social Media Links</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="logo">
+          <div class="form-group">
+            <label for="branding-site-logo" class="control-label">
+              {{_ "branding_projectLogoTitle_logoTitle" }}
+            </label>
+            <br>
+            {{> viewProjectLogo branding=branding }}
+            {{> uploadProjectLogo branding=branding }}
           </div>
-
-          <div class="tab-pane fade" id="about">
-            {{# autoForm
-              id="brandingEdit"
-              type="update"
-              collection=brandingCollection
-              doc=branding }}
-              {{> afQuickField name='siteTitle' id="branding-site-title" }}
-              {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
-              {{> afQuickField name='siteFooter' id="site-footer" }}
-              <div id="form-buttons">
-                <button id="branding-update-button" type="submit" class="btn btn-primary">
-                  {{_ "branding_update" }}
-                </button>
-              </div>
-            {{/ autoForm }}
-          </div>
-
-          <div class="tab-pane fade" id="featured-apis">
-            {{# autoForm
-              id="brandingEdit"
-              type="update"
-              collection=brandingCollection
-              doc=branding }}
-            {{> afQuickField name="featuredApis" multiple=true type="select2" select2Options=homepageApisSelect2Options }}
-            <div id="form-buttons">
-              <button id="branding-update-button" type="submit" class="btn btn-primary">
-                {{_ "branding_update" }}
-              </button>
-            </div>
-            {{/ autoForm }}
-          </div>
-
-          <div class="tab-pane fade" id="analytics">
-            {{# autoForm
-              id="brandingEdit"
-              type="update"
-              collection=brandingCollection
-              doc=branding }}
-            {{> afQuickField name='analyticCode' id="analytic-code" }}
-            <div id="form-buttons">
-              <button id="branding-update-button" type="submit" class="btn btn-primary">
-                {{_ "branding_update" }}
-              </button>
-            </div>
-            {{/ autoForm }}
-          </div>
-
-          <div class="tab-pane fade" id="privacy-terms">
-            {{# autoForm
-              id="brandingEdit"
-              type="update"
-              collection=brandingCollection
-              doc=branding }}
-            {{> afQuickField name='privacyPolicy' type="quill" }}
-            {{> afQuickField name='termsOfUse' type="quill" }}
-            <div id="form-buttons">
-              <button id="branding-update-button" type="submit" class="btn btn-primary">
-                {{_ "branding_update" }}
-              </button>
-            </div>
-            {{/ autoForm }}
-          </div>
-
-          <div class="tab-pane fade" id="social-media-links">
-            {{# autoForm
-              id="brandingEdit"
-              type="update"
-              collection=brandingCollection
-              doc=branding }}
-            {{> afQuickField name='socialMediaLinks' }}
-            <div id="form-buttons">
-              <button id="branding-update-button" type="submit" class="btn btn-primary">
-                {{_ "branding_update" }}
-              </button>
-            </div>
-            {{/ autoForm }}
+          <div class="form-group">
+            <label for="branding-site-cover-photo" class="control-label">
+              {{_ "branding_projectCoverPhotoTitle_coverPhotoTitle" }}
+            </label>
+            <br>
+            {{> viewCoverPhoto branding=branding }}
+            {{> uploadCoverPhoto branding=branding }}
           </div>
         </div>
 
-        {{ else }}
-        {{# autoForm
-          id="brandingAdd"
-          type="insert"
-          collection=brandingCollection }}
-          {{> afQuickField name='siteTitle' }}
-          {{> afQuickField name='siteSlogan' }}
-          {{> afQuickField name='siteFooter' }}
-          {{> afQuickField name='analyticCode' }}
-          {{> afQuickField name='socialMedia' }}
+        <div class="tab-pane fade" id="about">
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+            {{> afQuickField name='siteTitle' id="branding-site-title" }}
+            {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
+            {{> afQuickField name='siteFooter' id="site-footer" }}
+            <div id="form-buttons">
+              <button id="branding-update-button" type="submit" class="btn btn-primary">
+                {{_ "branding_update" }}
+              </button>
+            </div>
+          {{/ autoForm }}
+        </div>
+
+        <div class="tab-pane fade" id="featured-apis">
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+          {{> afQuickField name="featuredApis" multiple=true type="select2" select2Options=homepageApisSelect2Options }}
           <div id="form-buttons">
-            <button id="branding-save-button" type="submit" class="btn btn-primary">
-              {{_ "branding_save" }}
+            <button id="branding-update-button" type="submit" class="btn btn-primary">
+              {{_ "branding_update" }}
             </button>
           </div>
           {{/ autoForm }}
-          {{/ if }}
         </div>
+
+        <div class="tab-pane fade" id="analytics">
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+          {{> afQuickField name='analyticCode' id="analytic-code" }}
+          <div id="form-buttons">
+            <button id="branding-update-button" type="submit" class="btn btn-primary">
+              {{_ "branding_update" }}
+            </button>
+          </div>
+          {{/ autoForm }}
+        </div>
+
+        <div class="tab-pane fade" id="privacy-terms">
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+          {{> afQuickField name='privacyPolicy' type="quill" }}
+          {{> afQuickField name='termsOfUse' type="quill" }}
+          <div id="form-buttons">
+            <button id="branding-update-button" type="submit" class="btn btn-primary">
+              {{_ "branding_update" }}
+            </button>
+          </div>
+          {{/ autoForm }}
+        </div>
+
+        <div class="tab-pane fade" id="social-media-links">
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+          {{> afQuickField name='socialMediaLinks' }}
+          <div id="form-buttons">
+            <button id="branding-update-button" type="submit" class="btn btn-primary">
+              {{_ "branding_update" }}
+            </button>
+          </div>
+          {{/ autoForm }}
+        </div>
+      </div>
+
+      {{ else }}
+      {{# autoForm
+        id="brandingAdd"
+        type="insert"
+        collection=brandingCollection }}
+        {{> afQuickField name='siteTitle' }}
+        {{> afQuickField name='siteSlogan' }}
+        {{> afQuickField name='siteFooter' }}
+        {{> afQuickField name='analyticCode' }}
+        {{> afQuickField name='socialMedia' }}
+        <div id="form-buttons">
+          <button id="branding-save-button" type="submit" class="btn btn-primary">
+            {{_ "branding_save" }}
+          </button>
+        </div>
+        {{/ autoForm }}
+        {{/ if }}
       </div>
     </div>
     {{/ if }}

@@ -6,29 +6,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="proxies">
   {{> settingsMenu }}
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 block-wrapper">
-        <h2 style="font-size:1.6em; margin-top:0; text-transform: none; margin-bottom: 1em;">
-          <button class="btn btn-success pull-right" id="add-proxy">
-            {{_ "proxies_addProxy" }}
-          </button>
-          {{_ "proxies_pageHeader" }}
-        </h2>
-        <div>
-          {{# if Template.subscriptionsReady }}
-            {{# if proxies }}
-              {{# each proxy in proxies }}
-                 {{> proxyItem proxy=proxy }}
-              {{/ each }}
-            {{ else }}
-              <p class="text-center">
-                <i>
-                  {{_ "proxies_noProxiesFound" }}
-                </i>
-              </p>
+    <div class="block-wrapper">
+      <h2 style="font-size:1.6em; margin-top:0; text-transform: none; margin-bottom: 1em;">
+        <button class="btn btn-success pull-right" id="add-proxy">
+          {{_ "proxies_addProxy" }}
+        </button>
+        {{_ "proxies_pageHeader" }}
+      </h2>
+      <div>
+        {{# if Template.subscriptionsReady }}
+          {{# if proxies }}
+            {{# each proxy in proxies }}
+              {{> proxyItem proxy=proxy }}
+            {{/ each }}
+          {{ else }}
+            <p class="text-center">
+              <i>
+                {{_ "proxies_noProxiesFound" }}
+              </i>
+            </p>
             {{/ if }}
-          {{/ if }}
-        </div>
+        {{/ if }}
       </div>
     </div>
   </div>

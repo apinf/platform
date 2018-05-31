@@ -3,32 +3,19 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 <template name="postItem">
-  <div class="panel panel-default">
-    <div class="responsive-video panel-body">
-      <h3>
-        <a href="{{ post.url }}" target="_blank">
-          {{ post.title }}
-        </a>
-      </h3>
-      <br>
-      <a href="{{ post.url }}" id="{{ post._id }}" target="_blank">
-        {{ post.url }}
-      </a>
-      <br>
-      {{_ "postItem_text_added" }}
-      <span id="related-media-creation-time" title='{{ localeFormatDate post.createdAt }}'>
-        {{  dateInTimeAgoFormat post.createdAt }}
-      </span>
-      <p class="pull-right">
-        {{# if entity.currentUserCanManage }}
-          <button class="edit-post-item btn btn-default">
-            {{_ "postItem_buttonText_edit"}}
-          </button>
-          <button class="delete-post-item btn btn-danger">
-            {{_ "postItem_buttonText_delete"}}
-          </button>
-        {{/ if}}
-      </p>
-    </div>
-  </div>
+  <li class="link-color-wrapper related-link" style="background-color: #F5F5F5;margin-bottom:10px;">
+    <a href="{{ post.url }}" target="_blank" id="{{ post._id }}">
+      {{ post.title }}
+    </a>
+    <span class="manage-media_buttons pull-right">
+      {{# if entity.currentUserCanManage }}
+        <button class="text-default edit-post-item btn-link" style="padding:0;">
+          <i class="mdi mdi-pencil"></i>
+        </button>
+        <button class="text-danger delete-post-item btn-link" style="padding:0; margin-left:5px;">
+          <i class="mdi mdi-delete"></i>
+        </button>
+      {{/ if}}
+    </span>
+  </li>
 </template>

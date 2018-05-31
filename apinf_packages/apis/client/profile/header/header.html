@@ -5,13 +5,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block api-page-header" style="padding-left: 45px; padding-right: 40px;">
-    <nav class='secondary-menu_navigation secondary-menu-block-inner'>
+    <nav class="container secondary-menu_navigation secondary-menu-block-inner" style="padding-left: 0;padding-right: 0;">
       <span style="float: left;">
         {{> viewApiLogo }}
       </span>
-      <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;">
+      <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;padding-left: 0; padding-right: 0; margin-left: 5px;">
         {{# if api.organization }}
-          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
+          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="color: #555;line-height: 27px;font-weight: 400;padding-left:5px">
             {{ api.organization.name }}&nbsp;/
           </a>
         {{ else }}
@@ -24,6 +24,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <span class="label label-default">
             {{_ "catalogTable_labelText_private" }}
           </span>
+          <i class="mdi mdi-lock"></i>
         {{/ unless }}
       </h1>
       <ul class='links'>

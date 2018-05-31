@@ -5,33 +5,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dashboardPage">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height:60px;">
-    <div class="col-md-4" style="padding-left: 0;">
-      <h1 style="margin-top: 0.8em;">
-        {{_ "dashboardPage_title_dashboard" }}
-      </h1>
-    </div>
-    {{# if Template.subscriptionsReady }}
-      <!-- Make sure an API is connected to proxy -->
-      {{# if proxyBackendsCount }}
-        <!-- Make sure a user has any API -->
-        {{# if managedApisCount }}
-          <!-- Case when user has one API -->
-          <div class="col-md-4 dashboard-search">
-            {{# unless managedOneApi }}
-              <div class="search" style="margin-top:1em;">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control pull-right" id="search-box"
-                       placeholder={{_ "dashboardPage_placeholderText_search" }} >
-              </div>
-            {{/ unless }}
-          </div>
+    <div class="container" style="padding-left: 0;padding-right: 0;">
+      <div class="col-md-4" style="padding-left: 0;">
+        <h1 style="margin-top: 0.8em;">
+          {{_ "dashboardPage_title_dashboard" }}
+        </h1>
+      </div>
+      {{# if Template.subscriptionsReady }}
+        <!-- Make sure an API is connected to proxy -->
+        {{# if proxyBackendsCount }}
+          <!-- Make sure a user has any API -->
+          {{# if managedApisCount }}
+            <!-- Case when user has one API -->
+            <div class="col-md-4 dashboard-search">
+              {{# unless managedOneApi }}
+                <div class="search" style="margin-top:1em;">
+                  <i class="fa fa-search"></i>
+                  <input type="text" class="form-control pull-right" id="search-box"
+                         placeholder={{_ "dashboardPage_placeholderText_search" }} >
+                </div>
+              {{/ unless }}
+            </div>
+          {{/ if }}
         {{/ if }}
       {{/ if }}
-    {{/ if }}
-    <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;padding-right: 0;float:right;">
-      {{# if Template.subscriptionsReady }}
-        {{> dashboardToolbar proxiesList=proxiesList }}
-      {{/ if }}
+      <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;padding-right: 0;float:right;">
+        {{# if Template.subscriptionsReady }}
+          {{> dashboardToolbar proxiesList=proxiesList }}
+        {{/ if }}
+      </div>
     </div>
   </div>
 

@@ -4,60 +4,31 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="relatedMedia">
-  <!-- Show media area in case either -->
-  <!-- there are posts -->
   {{# if posts }}
-  <div class="panel panel-default related-media-panel">
-    <div class="panel-heading">
-      <h2 id="oembedded-title" class="panel-title clearfix">
-        <!-- Related Media -->
+    <div class="related-media-panel" style="margin-bottom:13px;">
+      <h5 id="oembedded-title" class="panel-title clearfix" style="color:#5c617b;">
         {{_ "relatedMedia_Title" }}
         {{# if entity.currentUserCanManage }}
-            <button
-              type="button"
-              class="btn btn-success pull-right"
-              id="add-media"
-              title='{{_ "relatedMedia_addButton_help" }}'>
-                {{_ "relatedMedia_addButton" }}
-            </button>
+          <a type="button" class="btn-link pull-right" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;">
+            <small>
+              Add New
+            </small>
+          </a>
         {{/ if }}
-      </h2>
+      </h5>
     </div>
-    <div class="panel-body">
-      <div class="container">
-        <div class="row">
-            {{# each post in posts }}
-              <div class="col-grid-post col-xl-2 col-md-3 col-sm-6 col-xs-12">
-                {{> postItem post=post entity=entity }}
-              </div>
-            {{/ each }}
-        </div>
-
-        <div class="centered">
-          {{> defaultBootstrapPaginator
-              pagination=templatePagination
-              limit=4
-              containerClass="text-center"
-             }}
-        </div>
-      </div>
-    </div>
-  </div>
+    <ul style="padding-left:0;list-style:none;">
+      {{# each post in posts }}
+        {{> postItem post=post entity=entity }}
+      {{/ each }}
+    </ul>
   {{ else }}
-    <!-- or user has rights -->
     {{# if entity.currentUserCanManage }}
-      <div class="well">
-        <button
-          type="button"
-          class="btn btn-success pull-right"
-          id="add-media"
-          title='{{_ "relatedMedia_addButton_help" }}'>
-            {{_ "relatedMedia_addButton" }}
-        </button>
-        <p>
-          {{ noRelatedMedia }}
-        </p>
-      </div>
+      <button type="button" class="btn-link pull-right" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;">
+        <small>
+          Add
+        </small>
+      </button>
     {{/ if }}
   {{/ if }}
 </template>

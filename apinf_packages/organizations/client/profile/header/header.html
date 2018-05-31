@@ -10,27 +10,28 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
   <!-- Navigation -->
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;">
-    <nav class="secondary-menu-block-inner secondary-menu_navigation">
+    <nav class="container secondary-menu-block-inner secondary-menu_navigation">
       <span style="float: left;" title="Upload new logo" class="organization-header-logo" id="organization-file-browse">
         {{> viewOrganizationLogo organization=organization }}
       </span>
-      <h1 id="organization-name" class="special-headings" style="font-size: 1.6em;color: #37474F;display: inline;float: left; margin-left: 15px;margin-top: 18px;">
+      <h1 id="organization-name" class="special-headings" style="font-size: 1.6em;color: #37474F;display: inline;float: left;margin-top: 18px;">
         {{ organization.name }}
       </h1>
-      {{# if organization.currentUserCanManage }}
       <ul class="links">
         <li id="organization-apis-tab" class="active">
           <a href="#organization-apis" data-toggle="tab">
-            {{_ "organizationProfileHeader_tabs_apis" }}
+            <!-- {{_ "organizationProfileHeader_tabs_apis" }} -->
+            Profile
           </a>
         </li>
+        {{# if organization.currentUserCanManage }}
         <li id="organization-settings-tab">
           <a href="#organization-settings" data-toggle="tab">
             {{_ "organizationProfileHeader_tabs_settings" }}
           </a>
         </li>
+        {{/ if }}
       </ul>
-      {{/ if }}
       <button>MENU</button>
       <ul class='hidden-links hidden'></ul>
     </nav>

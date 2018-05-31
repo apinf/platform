@@ -27,13 +27,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{ organization.description }}
             </p>
           {{/ if }}
-          <p style="padding: 10px 15px; background-color:#f1f8ff; text-decoration:none; border-radius: 2px;">
+          <p class="link-color-wrapper">
             <a href="{{ organization.url }}">
               {{ organization.url }}
             </a>
           </p>
           {{# if organization.contact.email }}
-            <p style="padding: 10px 15px; background-color:#f1f8ff; text-decoration:none; border-radius: 2px;margin-bottom:0;">
+            <p class="link-color-wrapper" style="margin-bottom: 0;">
               <a href="mailto:{{ organization.contact.email }}">
                 {{ organization.contact.email }}
               </a>
@@ -42,6 +42,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="organization-header-side-icon" style="padding-top: 1.1em;">
             {{> organizationSocialMediaIcons organization=organization }}
           </div>
+        </div>
+        <div class="block-wrapper">
+          {{> relatedMedia entity=organization }}
         </div>
       </div>
     {{ else }}

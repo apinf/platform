@@ -6,79 +6,77 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="settings">
   {{> settingsMenu }}
   <div class="container">
-    <div class="row">
-      {{# autoForm
-        collection=settingsCollection
-        doc=editDoc
-        id="settings"
-        type=formType }}
-      <div class="col-md-6 col-md-offset-3 block-wrapper settings-fields">
-        <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">General Settings</h2>
-        <!-- <h3 style="font-size:16px;margin-top:0;margin-bottom:1em;">
-          {{_ "settings_panelTitle_addingApisAndOrganizations" }}
-        </h3> -->
-        {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
-        {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
-        {{> afQuickField name='developmentFeatures' id="development-features" }}
-        <div class="panel panel-default">
-          <div class="panel-heading">
-              <span class="panel-title">
-                {{_ "settings_sdkCode_generator" }}
-              </span>
-              <span class="pull-right">
-                {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
-              </span>
-          </div>
-          {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
-            <div class="panel-body">
-              {{> afQuickField name='sdkCodeGenerator.host' id="SDK-host" }}
-            </div>
-          {{/ if }}
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
+    {{# autoForm
+      collection=settingsCollection
+      doc=editDoc
+      id="settings"
+      type=formType }}
+    <div class="block-wrapper settings-fields">
+      <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">General Settings</h2>
+      <!-- <h3 style="font-size:16px;margin-top:0;margin-bottom:1em;">
+        {{_ "settings_panelTitle_addingApisAndOrganizations" }}
+      </h3> -->
+      {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
+      {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
+      {{> afQuickField name='developmentFeatures' id="development-features" }}
+      <div class="panel panel-default">
+        <div class="panel-heading">
             <span class="panel-title">
-              {{_ "settings_mail" }}
+              {{_ "settings_sdkCode_generator" }}
             </span>
             <span class="pull-right">
-              {{> afQuickField name='mail.enabled' id="email" }}
+              {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
             </span>
-          </div>
-          {{# if afFieldValueIs name='mail.enabled' value=true }}
-            <div class="panel-body">
-              {{> afQuickField name='mail.username' id="email-username" }}
-              {{> afQuickField name='mail.password' type="password" id="email-password" }}
-              {{> afQuickField name='mail.smtpHost' id="email-host" }}
-              {{> afQuickField name='mail.smtpPort' id="email-port" }}
-              <a  tabindex="0"
-                  role="button"
-                  data-toggle="popover"
-                  data-placement="left"
-                  data-trigger="focus"
-                  data-content="{{_ 'settings_mail_fromEmail' }}">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-              {{> afQuickField name='mail.fromEmail' id="email-send" }}
-              <a  tabindex="0"
-                  role="button"
-                  data-toggle="popover"
-                  data-placement="left"
-                  data-trigger="focus"
-                  data-content="{{_ 'settings_mail_toEmail' }}">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </a>
-              {{> afQuickField name='mail.toEmail' id="email-recieve" }}
-            </div>
-          {{/ if }}
         </div>
-        <button
-          type="submit"
-          class="btn btn-success btn-success-special"
-          id="save-settings">
-          {{_ "settings_save" }}
-        </button>
+        {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
+          <div class="panel-body">
+            {{> afQuickField name='sdkCodeGenerator.host' id="SDK-host" }}
+          </div>
+        {{/ if }}
       </div>
-      {{/ autoForm }}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_mail" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='mail.enabled' id="email" }}
+          </span>
+        </div>
+        {{# if afFieldValueIs name='mail.enabled' value=true }}
+          <div class="panel-body">
+            {{> afQuickField name='mail.username' id="email-username" }}
+            {{> afQuickField name='mail.password' type="password" id="email-password" }}
+            {{> afQuickField name='mail.smtpHost' id="email-host" }}
+            {{> afQuickField name='mail.smtpPort' id="email-port" }}
+            <a  tabindex="0"
+                role="button"
+                data-toggle="popover"
+                data-placement="left"
+                data-trigger="focus"
+                data-content="{{_ 'settings_mail_fromEmail' }}">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </a>
+            {{> afQuickField name='mail.fromEmail' id="email-send" }}
+            <a  tabindex="0"
+                role="button"
+                data-toggle="popover"
+                data-placement="left"
+                data-trigger="focus"
+                data-content="{{_ 'settings_mail_toEmail' }}">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </a>
+            {{> afQuickField name='mail.toEmail' id="email-recieve" }}
+          </div>
+        {{/ if }}
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success btn-success-special"
+        id="save-settings">
+        {{_ "settings_save" }}
+      </button>
     </div>
+    {{/ autoForm }}
   </div>
 </template>
