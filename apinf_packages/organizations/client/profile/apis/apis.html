@@ -9,7 +9,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-md-8">
         <div class="block-wrapper">
           <div style="margin-bottom:1em;">
-            <h5 class="panel-title" style="color:#5c617b;">
+            <h5 class="panel-title">
               Our APIs
               {{# if organization.currentUserCanManage }}
               <a type="button" class="btn-link pull-right" id="connect-api" style="height:auto;cursor:pointer;">
@@ -34,7 +34,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="col-md-4 organization-side-block" style="padding-left: 5px;">
         <div class="about-organization block-wrapper" style="margin-left: 0;">
-          <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 0.5em;"> {{ organization.name }}</h2>
+          <h2 class="organization-name" style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 0.5em;">
+            {{ organization.name }}
+            {{# if organization.currentUserCanManage }}
+              <a href="#organization-settings" class="btn-link pull-right" id="edit-api" style="height:auto;cursor:pointer;">
+                <small style="font-size:12px;">
+                  Edit
+                </small>
+              </a>
+            {{/ if }}
+          </h2>
           {{# if organization.description }}
             <p style="color:#37474F;font-size:1.2rem;">
               {{ organization.description }}

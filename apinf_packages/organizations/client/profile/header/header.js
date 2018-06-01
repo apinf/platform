@@ -48,7 +48,7 @@ Template.organizationProfileHeader.onRendered(function () {
   // If url contain hash value
   if (hashTabValue) {
     // Show tab
-    $(`.nav-tabs a[href='#${hashTabValue}']`).tab('show');
+    $(`.secondary-menu_navigation a[href='#${hashTabValue}']`).tab('show');
   }
 
   // Mobile menu
@@ -120,7 +120,7 @@ Template.organizationProfileHeader.events({
     // Show organization form modal
     Modal.show('organizationForm', { organization, formType: 'update' });
   },
-  'click #nav-tabs li > a': (event) => {
+  'click .secondary-menu_navigation li > a': (event) => {
     // Show hash value in url
     window.location = `${event.currentTarget.hash}`;
   },

@@ -164,4 +164,17 @@ Template.organizationApis.events({
       sAlert.error(message, { timeout: 'none' });
     }
   },
+  'click .about-organization a': (event) => {
+    // Remove active class
+    $(`.secondary-menu_navigation .links li#organization-apis-tab`).removeClass('active');
+
+    // Add active class to settings tab link
+    $(`.secondary-menu_navigation .links li#organization-settings-tab`).addClass('active');
+
+    // Show settings tab
+    $(`.about-organization a[href='#organization-settings']`).tab('show');
+
+    // Show hash value in url
+    window.location = `${event.currentTarget.hash}`;
+  },
 });
