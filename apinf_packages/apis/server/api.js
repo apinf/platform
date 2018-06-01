@@ -1642,6 +1642,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
       // Functionality related to proxy type
       //           apiUmbrella
+      // -----------------------------------
       if (proxyBackend.type === 'apiUmbrella') {
         // No changes to emq part here
         delete proxyBackend.emq;
@@ -1846,6 +1847,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
         // Functionality related to proxy type
         //              EMQ
+        // -----------------------------------
       } else if (proxyBackend.type === 'emq') {
         // No changes to apiUmbrella part here
         delete proxyBackend.apiUmbrella;
@@ -1889,10 +1891,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
                       !bodyParams.fromValue) {
             const detailLine = 'All ACL parameters needed when adding a ACL set';
             return errorMessagePayload(400, detailLine);
-          } else {
-            // Fill in general values for new ACL object
-            aclFields.id = new Meteor.Collection.ObjectID().valueOf();
-            aclFields.proxyId = proxy._id;
           }
 
           // is parameter allow given, properly, values 0/1
@@ -1908,8 +1906,8 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           // is parameter access given, properly, values 1/2/3
           if (bodyParams.access) {
             if (isNaN(bodyParams.access) ||
-                1 * bodyParams.access < 1 ||
-                1 * bodyParams.access > 3) {
+            1 * bodyParams.access < 1 ||
+            1 * bodyParams.access > 3) {
               return errorMessagePayload(400, 'Parameter "access" has erroneous value.',
               'access', bodyParams.access);
             }
@@ -1938,6 +1936,15 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           if (bodyParams.fromValue) {
             aclFields.fromValue = bodyParams.fromValue;
             delete bodyParams.fromValue;
+          }
+
+          // Fill in general values for new ACL object
+          if (!aclFields.id) {
+            aclFields.id = new Meteor.Collection.ObjectID().valueOf();
+          }
+
+          if (!aclFields.proxyId) {
+            aclFields.proxyId = proxy._id;
           }
 
           // add or update modified ACL object
