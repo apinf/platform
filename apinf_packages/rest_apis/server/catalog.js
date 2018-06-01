@@ -564,7 +564,7 @@ CatalogV1.swagger = {
             },
             balance_algorithm: {
               type: 'string',
-              example: 'least_conn | XXX',
+              example: 'least_conn',
             },
             settings: {
               type: 'object',

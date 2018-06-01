@@ -156,7 +156,7 @@ const descriptionApis = {
   * *fromType*, values [clientid | username | ipaddr]
   * *fromValue*, value is a string
   `,
-// --------------------------------------------
+  // --------------------------------------------
   putProxyBackend: `
   ### Modifies Proxy connection parameters of an API ###
 
@@ -203,7 +203,7 @@ const descriptionApis = {
   * *fromType*, values [clientid | username | ipaddr]
   * *fromValue*, value is a string
   `,
-    // --------------------------------------------
+  // ---------------------------------------------
   deleteProxyBackend: `
   ### Disconnects API from a Proxy ###
 
