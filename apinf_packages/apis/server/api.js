@@ -1635,6 +1635,11 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         return errorMessagePayload(400, 'No parameters given.');
       }
 
+      // For simplicity: either edit or remove at a time
+      if (bodyParams.editIndex && bodyParams.removeIndex) {
+        return errorMessagePayload(400, 'Only editIndex or removeIndex can be given at a time.');
+      }
+
       // Functionality related to proxy type
       //           apiUmbrella
       if (proxyBackend.type === 'apiUmbrella') {
@@ -1845,8 +1850,9 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         // No changes to apiUmbrella part here
         delete proxyBackend.apiUmbrella;
 
+        // In EMQ case either one of indices must be given
         if (!bodyParams.editIndex && !bodyParams.removeIndex) {
-          return errorMessagePayload(400, 'Either editIndex or removeINdex must be given.');
+          return errorMessagePayload(400, 'Either editIndex or removeIndex must be given.');
         }
 
         // Count number of ACL objects in DB
@@ -1901,7 +1907,9 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
 
           // is parameter access given, properly, values 1/2/3
           if (bodyParams.access) {
-            if (isNaN(bodyParams.access) || 1 * bodyParams.access < 1 || 1 * bodyParams.access > 3) {
+            if (isNaN(bodyParams.access) ||
+                1 * bodyParams.access < 1 ||
+                1 * bodyParams.access > 3) {
               return errorMessagePayload(400, 'Parameter "access" has erroneous value.',
               'access', bodyParams.access);
             }
@@ -1922,19 +1930,19 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
               return errorMessagePayload(400, 'Parameter "fromType" has erroneous value.',
               'fromType', bodyParams.fromType);
             }
-            aclFields.topic = bodyParams.fromType;
+            aclFields.fromType = bodyParams.fromType;
             delete bodyParams.fromType;
           }
 
           // is parameter fromValue given, properly
           if (bodyParams.fromValue) {
-            aclFields.topic = bodyParams.fromValue;
+            aclFields.fromValue = bodyParams.fromValue;
             delete bodyParams.fromValue;
           }
 
           // add or update modified ACL object
           proxyBackend.emq.settings.acl[ACLIndex] = aclFields;
-          delete bodyParams.ACLIndex;
+          delete bodyParams.editIndex;
         }
 
         // Removal of ACL data
@@ -1957,7 +1965,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           proxyBackend.emq.settings.acl.splice(removeIndex, 1);
           delete bodyParams.removeIndex;
         }
-
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
