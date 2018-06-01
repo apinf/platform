@@ -6,20 +6,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="organizationApis">
   <div class="row">
     {{# if Template.subscriptionsReady }}
-      <div class="col-md-9">
-        <!-- Show or not content -->
-        {{# if paginationReady }}
-          {{# if hasApi }}
-            {{> apiCatalogTable apis=apis organization=organization }}
-          {{ else }}
-            <!-- Show no APIs message -->
-            <div class="block-wrapper">
+      <div class="col-md-8">
+        <div class="block-wrapper">
+          <div style="margin-bottom:1em;">
+            <h5 class="panel-title" style="color:#5c617b;">
+              Our APIs
+              {{# if organization.currentUserCanManage }}
+              <a type="button" class="btn-link pull-right" id="connect-api" style="height:auto;cursor:pointer;">
+                <small>
+                  Connect API to Organization
+                </small>
+              </a>
+              {{/ if }}
+            </h5>
+            <hr style="background-color: #ecf3f8; margin-top: 1em;">
+          </div>
+          <!-- Show or not content -->
+          {{# if paginationReady }}
+            {{# if hasApi }}
+              {{> apiCatalogTable apis=apis organization=organization }}
+            {{ else }}
+              <!-- Show no APIs message -->
               {{> organizationNoApis organization=organization }}
-            </div>
+            {{/ if }}
           {{/ if }}
-        {{/ if }}
+        </div>
       </div>
-      <div class="col-md-3 organization-side-block" style="padding-left: 5px;">
+      <div class="col-md-4 organization-side-block" style="padding-left: 5px;">
         <div class="about-organization block-wrapper" style="margin-left: 0;">
           <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 0.5em;"> {{ organization.name }}</h2>
           {{# if organization.description }}
@@ -32,6 +45,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
           <p class="link-color-wrapper">
             <a href="{{ organization.url }}">
+              <i class="mdi mdi-open-in-new"></i>
               {{ organization.url }}
             </a>
           </p>

@@ -30,7 +30,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         <!-- if viewMode is table, show table -->
         {{# if tableViewMode }}
-        {{> apiCatalogTable apis=apis }}
+          <div class="block-wrapper">
+            {{> apiCatalogTable apis=apis }}
+          </div>
         {{/ if }}
 
         <a href="/rss/apis" target="_blank" class="rss-feed" title="{{_ 'apisRssIcon_tooltipText_Rss'}}" style="color: #657786;margin-top: 10px;display: block;float: right;font-size: 10px;">

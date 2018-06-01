@@ -5,9 +5,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="postItem">
   <li class="link-color-wrapper related-link" style="background-color: #F5F5F5;margin-bottom:10px;">
     <a href="{{ post.url }}" target="_blank" id="{{ post._id }}">
+      <i class="mdi mdi-open-in-new"></i>
       {{ post.title }}
     </a>
-    <span class="manage-media_buttons pull-right">
+    <span class="manage-media_buttons pull-right" style="line-height: 18px;">
       {{# if entity.currentUserCanManage }}
         <button class="text-default edit-post-item btn-link" style="padding:0;">
           <i class="mdi mdi-pencil"></i>
