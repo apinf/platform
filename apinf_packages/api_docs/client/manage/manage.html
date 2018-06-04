@@ -55,16 +55,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               type="select-checkbox-inline"
               noselect=false
             }}
+            <div class="text-right">
+              <button type="submit" class="btn btn-success" id="save-documentation-link">
+                {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
+              </button>
+            </div>
             {{# if fileUploding }}
               {{> spinner }}
             {{/ if }}
             {{> afQuickField name='apiId' value=api._id type="hidden" }}
           {{/ autoForm }}
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success" id="save-documentation-link">
-            {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
-          </button>
         </div>
       </div>
     </div>
