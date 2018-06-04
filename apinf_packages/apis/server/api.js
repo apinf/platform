@@ -1516,6 +1516,17 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         if (!proxyBackendId) {
           return errorMessagePayload(500, 'Creating proxyBackend failed.');
         }
+
+        const emqResponse = Meteor.call('emqAclRequest',
+                                        'POST',
+                                        newProxyBackendData.proxyId,
+                                        newProxyBackendData.emq.settings.acl);
+
+        console.log('emqResponse=', emqResponse);
+
+
+
+
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
@@ -1972,6 +1983,16 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           proxyBackend.emq.settings.acl.splice(removeIndex, 1);
           delete bodyParams.removeIndex;
         }
+
+        const emqResponseError = Meteor.call('emqAclRequest',
+                                             'PUT',
+                                             proxyBackend.proxyId,
+                                             proxyBackend.emq.settings.acl);
+
+        if (emqResponseError) {
+          return errorMessagePayload(500, 'Settings update to EMQ proxy failed.');
+        }
+
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
