@@ -17,17 +17,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <div class="modal-body">
           {{# if unlinkedApis }}
-            {{_ 'connectApiToOrganizationModal_helpText' }}
+            <p>
+              {{_ 'connectApiToOrganizationModal_helpText' }}
+            </p>
             {{> organizationApisForm organization=organization unlinkedApis=unlinkedApis }}
           {{ else }}
             <p>
               {{_ 'connectApiToOrganizationModal_text_noOneApis' }}
             </p>
+          {{/ if }}
+        </div>
+        {{# unless unlinkedApis }}
+          <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">
               {{_ 'connectApiToOrganizationModal_buttonText_close' }}
             </button>
-          {{/ if }}
-        </div>
+          </div>
+        {{/ unless }}
       </div>
     </div>
   </div>
