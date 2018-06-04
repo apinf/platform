@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="dashboardPage">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height:60px;">
     <div class="container" style="padding-left: 0;padding-right: 0;">
-      <div class="col-md-4" style="padding-left: 0;">
+      <div class="col-md-4">
         <h1 style="margin-top: 0.8em;">
           {{_ "dashboardPage_title_dashboard" }}
         </h1>
@@ -29,7 +29,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         {{/ if }}
       {{/ if }}
-      <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;padding-right: 0;float:right;">
+      <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;float:right;">
         {{# if Template.subscriptionsReady }}
           {{> dashboardToolbar proxiesList=proxiesList }}
         {{/ if }}

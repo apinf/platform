@@ -11,19 +11,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </span>
       <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;padding-left: 0; padding-right: 0; margin-left: 5px;">
         {{# if api.organization }}
-          <a href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}" style="color: #555;line-height: 27px;font-weight: 400;padding-left:5px">
-            {{ api.organization.name }}&nbsp;/
-          </a>
+          <a class="organization-name" href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}">{{ api.organization.name }}</a>
+          <span class="path-divider">/</span>
         {{ else }}
-          <span style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">
-            {{ api.getApiManagersByName }}&nbsp;/
-          </span>
+          <span style="color: #555;line-height: 27px;padding-left: 10px;font-weight: 400;">{{ api.getApiManagersByName }}</span>
+          <span class="path-divider">/</span>
         {{/ if }}
         {{ api.name }}
         {{# unless api.isPublic }}
-          <span class="label label-default">
+          <!-- <span class="label label-default">
             {{_ "catalogTable_labelText_private" }}
-          </span>
+          </span> -->
           <i class="mdi mdi-lock"></i>
         {{/ unless }}
       </h1>

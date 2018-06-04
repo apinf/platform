@@ -49,7 +49,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   }
 
   .mdi-lock {
-    display: none;
+    display: initial;
+    color: #4c6072;
+  }
+
+  a.organization-name {
+    color: rgb(55,71,79);
+    line-height: 27px;
+    font-weight: 400;
+    margin-left: 5px;
+    border-bottom: 1px solid rgba(55,71,79,0.3);
+  }
+
+  a.organization-name:link:hover,
+  a.organization-name:visited:hover {
+    color: #f41224;
+    border-color: rgba(244,18,36,.3);
+  }
+
+  .path-divider {
+    font-weight: 400;
   }
 }
 
@@ -115,11 +134,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     .label {
       display: none;
     }
-    
-    .mdi-lock {
-      display: initial;
-      color: #5c617b;
-    }
   }
 }
 
@@ -176,11 +190,11 @@ ul.links > li > a:hover {
 
 ul.links > li > a::after {
   content: "";
-  background: #1a75d2;
-  height: 4px;
+  background: #4c6072;
+  height: 3px;
   position: absolute;
   width: 100%;
-  top: 35px;
+  top: 36px;
   transition: all 250ms ease 0s; transform: scale(0);
 }
 
