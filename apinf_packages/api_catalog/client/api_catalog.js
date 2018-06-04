@@ -228,7 +228,7 @@ Template.apiCatalog.onCreated(function () {
       ],
     });
   
-    if(searchValue != ""){
+    if(searchValue !== ""){
       currentFilters = instance.query.get()
     }
 
