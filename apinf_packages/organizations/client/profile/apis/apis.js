@@ -164,7 +164,7 @@ Template.organizationApis.events({
       sAlert.error(message, { timeout: 'none' });
     }
   },
-  'click .about-organization a': (event) => {
+  'click #edit-api': (event) => {
     // Remove active class
     $(`.secondary-menu_navigation .links li#organization-apis-tab`).removeClass('active');
 
