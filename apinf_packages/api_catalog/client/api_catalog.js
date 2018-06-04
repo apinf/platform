@@ -227,11 +227,9 @@ Template.apiCatalog.onCreated(function () {
         },
       ],
     });
-  
-    if(searchValue !== ""){
-      currentFilters = instance.query.get()
+    if (searchValue !== '') {
+      currentFilters = instance.query.get();
     }
-
     instance.pagination.currentPage([Session.get('currentIndex')]);
     instance.pagination.filters(currentFilters);
   });
@@ -295,19 +293,14 @@ Template.apiCatalog.events({
   },
   'keyup #search-field': function (event) {
     event.preventDefault();
-
     // Get reference to Template instance
     const instance = Template.instance();
-
     // Get search text from a text field.
     const searchValue = instance.$('#search-field').val();
-    
     // Assign searchValue to a reactive variable
     instance.searchValue.set(searchValue);
-
     // Set query parameter to value of search text
     FlowRouter.setQueryParams({ q: searchValue });
-
     return false;
   },
   'submit #search-form': function (event) {
