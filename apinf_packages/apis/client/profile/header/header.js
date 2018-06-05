@@ -16,7 +16,7 @@ Template.viewApiPageHeader.onRendered(() => {
   // If url contain hash value
   if (hashTabValue) {
     // Show tab
-    $(`.nav-tabs a[href='#${hashTabValue}']`).tab('show');
+    $(`#api-navigation-tabs li > a[href='#${hashTabValue}']`).tab('show');
   }
 
   // Mobile menu

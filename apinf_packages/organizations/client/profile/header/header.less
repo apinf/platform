@@ -3,12 +3,23 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-.organization-header-logo img {
-  max-width: 150px;
+.organization-header-logo {
   border-radius: 5px;
-  cursor: pointer;
-  background-color: #fff;
-  padding: 10px;
+  float: left;
+  position: relative;
+  bottom: 40px;
+  right: 0;
+  box-shadow: 0 1px 3px 0 rgba(59, 59, 88, 0.15);
+  min-height:150px;
+  background-color:#fff;
+
+  img {
+    max-width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 10px;
+  }
 }
 
 .organization-cover-block {
@@ -88,4 +99,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     transform: translateY(-50%);
     opacity: 1;
   }
+}
+
+.secondary-menu_navigation {
+  padding-right: 0;
 }

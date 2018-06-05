@@ -11,16 +11,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       proxyIsEmq=proxyIsEmq
       proxyBackend=proxyBackend }}
     <div class="container-fluid">
-      <div class="tab-content">
-        <div id="api-details" class="container block-wrapper tab-pane fade in active">
+      <div class="tab-content container">
+        <div id="api-details" class="block-wrapper tab-pane fade in active">
           {{> apiDetails api=api proxyBackend=proxyBackend }}
         </div> <!-- /api-backend-details -->
 
-        <div id="api-auth" class="container block-wrapper tab-pane fade">
+        <div id="api-auth" class="block-wrapper tab-pane fade">
           {{> apiAuth api=api proxyBackend=proxyBackend }}
         </div> <!-- /api-backend-details -->
 
-        <div id="api-documentation" class="tab-pane fade container block-wrapper">
+        <div id="api-documentation" class="tab-pane fade block-wrapper">
           {{> apiDocumentation api=api apiDoc=apiDoc developmentFeatures=developmentFeatures }}
         </div> <!-- /api-documentation -->
 
@@ -28,18 +28,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{# if api.currentUserCanManage }}
 
             {{# if proxyIsConfigured }}
-              <div id="api-proxy" class="container block-wrapper tab-pane fade">
+              <div id="api-proxy" class="block-wrapper tab-pane fade">
                 {{> apiProxy api=api proxyBackend=proxyBackend }}
               </div> <!-- /api-proxy -->
             {{/ if }}
 
-            <div id="api-settings" class="container block-wrapper tab-pane fade">
+            <div id="api-settings" class="block-wrapper tab-pane fade">
               {{> apiSettings api=api }}
             </div>
           {{/ if }}
         {{/ if }}
       </div>
     </div>
+    {{# if currentUser }}
+      <div id="floating-button" class="small-tooltip">
+        {{> bookmark api=api }}
+      </div>
+    {{/ if }}
   {{ else }}
     {{> spinner }}
   {{/ if }}

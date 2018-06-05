@@ -8,6 +8,7 @@
   {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol type="hidden" }}
   {{> afQuickField name="apiUmbrella.servers.0.host" value=apiHost type="hidden" }}
   {{> afQuickField name="apiUmbrella.balance_algorithm" value="least_conn" type="hidden" }}
+  {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper type="hidden" }}
 
   <div class="api-settings">
     <!-- Nav tabs -->
@@ -15,7 +16,6 @@
       <li class="active"><a href="#network" data-toggle="tab">Network</a></li>
       <li><a href="#disable-apikey" data-toggle="tab">API Key</a></li>
       <li><a href="#rate-limiting" data-toggle="tab">Rate Limiting</a></li>
-      <li><a href="#advanced" data-toggle="tab">Advanced Settings</a></li>
     </ul>
 
     <div class="tab-content">
@@ -55,7 +55,7 @@
 
         <!-- API base path (backend prefix) -->
         <div class="row">
-          <div class="form-group col-md-9" data-required="true" style="margin-bottom: 0;">
+          <div class="form-group col-md-12" data-required="true" style="margin-bottom: 0;">
             <label for="api-base-path-field">
               {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
             </label>
@@ -85,33 +85,6 @@
             <p class="help-block">
               {{_ "proxyBackendForm_apiBasePath_helpText" }}&nbsp;
               {{ api.url }} <b>/api_base_path/</b>
-            </p>
-          </div>
-
-          <!-- API port (servers.port) -->
-          <div class="form-group col-md-3" data-required="true" style="margin-bottom: 0;">
-            <label for="api-port-field" id="api-port-field-label">
-              {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
-            </label>
-
-            {{> afFieldInput
-              name="apiUmbrella.servers.0.port"
-              value=apiPortHelper
-              class="form-control"
-              aria-describedby="api-port-field-label"
-              id="api-port-field"
-            }}
-
-            <!-- validation messages -->
-            {{# if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
-            <p class="text-danger">
-              {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
-            </p>
-            {{/ if }}
-
-            <!-- help text -->
-            <p class="help-block">
-              {{_ "proxyBackendForm_apiPort_helpText" }}
             </p>
           </div>
         </div>
@@ -150,19 +123,6 @@
           {{/if }}
         </div>
       </div>
-      <div class="tab-pane fade" id="advanced">
-        <!-- Query String Parameters -->
-        {{> afQuickField
-          name="apiUmbrella.settings.append_query_string"
-          placeholder="param1=value& param2=value"
-        }}
-
-        <!-- Request Headers -->
-        {{> afQuickField
-          name="apiUmbrella.settings.headers_string"
-          placeholder="X-Example-Header: value"
-        }}
-      </div>
+    </div>
   </div>
-</div>
 </template>

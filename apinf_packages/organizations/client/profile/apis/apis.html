@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="organizationApis">
   <div class="row">
     {{# if Template.subscriptionsReady }}
-      <div class="col-md-4 organization-side-block" style="padding-left: 5px;">
+      <div class="col-md-4 organization-side-block">
         <div class="about-organization block-wrapper" style="margin-left: 0;">
           <h5 class="organization-name panel-title clearfix" style="margin-top:0;text-transform: none;margin-bottom: 14px;">
             About
@@ -26,18 +26,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="organization-header-side-icon">
             {{> organizationSocialMediaIcons organization=organization }}
           </div>
-          <p class="link-color-wrapper">
-            <a href="{{ organization.url }}" target="_blank">
+          <a href="{{ organization.url }}" target="_blank">
+            <p class="link-color-wrapper">
               <i class="mdi mdi-open-in-new"></i>
               {{ organization.url }}
-            </a>
-          </p>
-          {{# if organization.contact.email }}
-            <p class="link-color-wrapper" style="margin-bottom: 0;">
-              <a href="mailto:{{ organization.contact.email }}">
-                {{ organization.contact.email }}
-              </a>
             </p>
+          </a>
+          {{# if organization.contact.email }}
+            <a href="mailto:{{ organization.contact.email }}">
+              <p class="link-color-wrapper" style="margin-bottom: 0;">
+                {{ organization.contact.email }}
+              </p>
+            </a>
           {{/ if }}
         </div>
         {{> relatedMedia entity=organization }}

@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationSettings">
-  <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">Settings</h2>
+  <h2 style="font-size:1.4em;margin-top:0;text-transform: none;margin-bottom: 1em;">Settings</h2>
   <div class="api-settings">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
@@ -12,7 +12,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <li><a href="#logo-and-cover" data-toggle="tab">Logo & Cover Image</a></li>
       <li><a href="#social" data-toggle="tab">Social Media Platforms</a></li>
       <li><a href="#contact-information" data-toggle="tab">Contact Information</a></li>
-      <li><a href="#managers" data-toggle="tab">Organization Managers</a></li>
       <li><a href="#danger-zone" data-toggle="tab">Delete Organization</a></li>
     </ul>
 
@@ -48,15 +47,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="tab-pane fade" id="contact-information">
         {{> organizationSettingsContactInfo organization=organization }}
-      </div>
-      <div class="tab-pane fade" id="managers">
-        <div class="setting-section">
-          <p>
-            {{_ "organizationSettings_description_organizationManagers" }}
-          </p>
-          {{> organizationManagersList organization=organization }}
-          {{> addOrganizationManagerForm organization=organization }}
-        </div>
       </div>
       <div class="tab-pane fade" id="danger-zone">
         {{> organizationSettingsDelete organization=organization }}

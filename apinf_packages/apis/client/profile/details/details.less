@@ -3,30 +3,56 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-#usage-instructions {
-  ul {
-    margin-bottom: 0;
+.api-profile_topblock {
+  .api-profile_external-url {
+    padding: 10px 15px;
+    background-color: #f1f8ff;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
   }
-  li {
-    padding-top: 0.5em;
-    span {
-      margin-top: 0.7em;
-      background-color: rgba(0,0,0,0.04);
-      border-radius: 3px;
-      padding: 0.2em;
-      color: #333;
-    }
 
-    a {
-      margin-top: 0.7em;
-      background-color: rgba(0,0,0,0.04);
-      border-radius: 3px;
-      padding: 0.2em;
-    }
+  hr {
+    color: rgba(59, 59, 88, 0.15);
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  .api-profile_description {
+    color: #37474F;
+    margin-bottom: 0;
+    font-size: 16px;
+    padding-bottom: 1.5em;
   }
 }
 
-.api-details-block {
+.api-profile_details {
+  h1 {
+    font-size: 1.6em;
+    margin-top: 0 !important;
+    text-transform: none;
+    margin-bottom: 1em;
+  }
+
+  h2 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+  }
+
+  .api-profile_details-text-wrapper {
+    padding: 10px 15px;
+    background-color: #F5F5F5;
+    text-decoration: none;
+    border-radius: 2px;
+    font-family: 'Roboto Mono', monospace;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+  }
+
   .mdi-content-copy {
     cursor: pointer;
     color: lighten(#37474F, 30%);
@@ -45,18 +71,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     outline: none;;
     color: #333C4A;
   }
-}
 
-
-.num {
-  background: #6d859e;
-  border-radius: 50px;
-  color: #fff;
-  display: inline-block;
-  font-size: 13px;
-  height: 20px;
-  line-height: 21px;
-  margin-right: 3px;
-  text-align: center;
-  width: 20px;
+  .num {
+    background: #6d859e;
+    border-radius: 50px;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    height: 20px;
+    line-height: 21px;
+    margin-right: 3px;
+    text-align: center;
+    width: 20px;
+  }
 }
