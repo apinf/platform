@@ -26,15 +26,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         {{# if currentUser }}
           {{# if api.currentUserCanManage }}
-
-            {{# if proxyIsConfigured }}
-              <div id="api-proxy" class="block-wrapper tab-pane fade">
-                {{> apiProxy api=api proxyBackend=proxyBackend }}
-              </div> <!-- /api-proxy -->
-            {{/ if }}
-
             <div id="api-settings" class="block-wrapper tab-pane fade">
-              {{> apiSettings api=api }}
+              {{> apiSettings api=api proxyBackend=proxyBackend }}
             </div>
           {{/ if }}
         {{/ if }}

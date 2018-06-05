@@ -11,118 +11,109 @@
   {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper type="hidden" }}
 
   <div class="api-settings">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#network" data-toggle="tab">Network</a></li>
-      <li><a href="#disable-apikey" data-toggle="tab">API Key</a></li>
-      <li><a href="#rate-limiting" data-toggle="tab">Rate Limiting</a></li>
-    </ul>
+    <div class="form-group" data-required="true">
+      <!-- Proxy base path (frontend prefix) -->
+      <label for="proxy-base-path-field">
+        {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
+      </label>
 
-    <div class="tab-content">
-      <div class="tab-pane active" id="network">
-        <div class="form-group" data-required="true">
-          <!-- Proxy base path (frontend prefix) -->
-          <label for="proxy-base-path-field">
-            {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
-          </label>
+      <div class="input-group">
+        <span class="input-group-addon" id="proxy-url">
+          {{ proxy.apiUmbrella.url }}
+        </span>
 
-          <div class="input-group">
-            <span class="input-group-addon" id="proxy-url">
-              {{ proxy.apiUmbrella.url }}
-            </span>
-
-            {{> afFieldInput
-              name="apiUmbrella.url_matches.0.frontend_prefix"
-              class="form-control"
-              aria-describedby="proxy-url"
-              id="proxy-base-path-field"
-            }}
-          </div>
-
-          <!-- validation messages -->
-          {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.frontend_prefix' }}
-          <p class="text-danger">
-            {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
-          </p>
-          {{/ if }}
-
-          <!-- help text -->
-          <p class="help-block">
-            {{_ "proxyBackendForm_proxyBasePath_helpText" }}&nbsp;
-            {{ proxy.apiUmbrella.url }} <b>/proxy_base_path/</b>
-          </p>
-        </div>
-
-        <!-- API base path (backend prefix) -->
-        <div class="row">
-          <div class="form-group col-md-12" data-required="true" style="margin-bottom: 0;">
-            <label for="api-base-path-field">
-              {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
-            </label>
-
-            <div class="input-group">
-              <!-- API url addon -->
-              <span class="input-group-addon" id="api-url">
-                {{ api.url }}
-              </span>
-
-              {{> afFieldInput
-                name="apiUmbrella.url_matches.0.backend_prefix"
-                class="form-control"
-                aria-describedby="api-url"
-                id="api-base-path-field"
-              }}
-            </div>
-
-            <!-- validation messages -->
-            {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix' }}
-            <p class="text-danger">
-              {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix' }}}
-            </p>
-            {{/ if }}
-
-            <!-- help text -->
-            <p class="help-block">
-              {{_ "proxyBackendForm_apiBasePath_helpText" }}&nbsp;
-              {{ api.url }} <b>/api_base_path/</b>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="disable-apikey">
-        <!-- Disable API key checkbox -->
-        {{> afQuickField
-          name="apiUmbrella.settings.disable_api_key"
-          type="boolean-checkbox"
-          id="disable-apikey-box"
+        {{> afFieldInput
+          name="apiUmbrella.url_matches.0.frontend_prefix"
+          class="form-control"
+          aria-describedby="proxy-url"
+          id="proxy-base-path-field"
         }}
+      </div>
+
+      <!-- validation messages -->
+      {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.frontend_prefix' }}
+      <p class="text-danger">
+        {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
+      </p>
+      {{/ if }}
+
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_proxyBasePath_helpText" }}&nbsp;
+        {{ proxy.apiUmbrella.url }} <b>/proxy_base_path/</b>
+      </p>
+    </div>
+
+    <!-- API base path (backend prefix) -->
+    <div class="row">
+      <div class="form-group col-md-12" data-required="true" style="margin-bottom: 0;">
+        <label for="api-base-path-field">
+          {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
+        </label>
+
+        <div class="input-group">
+          <!-- API url addon -->
+          <span class="input-group-addon" id="api-url">
+            {{ api.url }}
+          </span>
+
+          {{> afFieldInput
+            name="apiUmbrella.url_matches.0.backend_prefix"
+            class="form-control"
+            aria-describedby="api-url"
+            id="api-base-path-field"
+          }}
+        </div>
+
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix' }}
+        <p class="text-danger">
+          {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix' }}}
+        </p>
+        {{/ if }}
+
         <!-- help text -->
         <p class="help-block">
-          {{_ "proxyBackendForm_disableApiKey_helpText" }}
+          {{_ "proxyBackendForm_apiBasePath_helpText" }}&nbsp;
+          {{ api.url }} <b>/api_base_path/</b>
         </p>
       </div>
-      <div class="tab-pane fade" id="rate-limiting">
+    </div>
 
-        <!-- Rate limiting -->
-        <div id="rate-limiting">
-          <div class="col-md-12" id="rate-limit-mode">
-            {{> afQuickField
-              name="apiUmbrella.settings.rate_limit_mode"
-              firstOption=false
-            }}
-          </div>
-          {{#if afFieldValueIs
-            name="apiUmbrella.settings.rate_limit_mode"
-            value="custom"
-          }}
-          <div class="col-md-12" id="rate-limits">
-            {{> afQuickField
-              name="apiUmbrella.settings.rate_limits"
-            }}
-          </div>
-          {{/if }}
-        </div>
+    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+
+    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">API Key</label>
+    <!-- Disable API key checkbox -->
+    {{> afQuickField
+      name="apiUmbrella.settings.disable_api_key"
+      type="boolean-checkbox"
+      id="disable-apikey-box"
+    }}
+    <!-- help text -->
+    <p class="help-block" style="margin-top: -1em;">
+      {{_ "proxyBackendForm_disableApiKey_helpText" }}
+    </p>
+
+    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+
+    <!-- Rate limiting -->
+    <div id="rate-limiting">
+      <div class="col-md-12" id="rate-limit-mode">
+        {{> afQuickField
+          name="apiUmbrella.settings.rate_limit_mode"
+          firstOption=false
+        }}
       </div>
+      {{#if afFieldValueIs
+        name="apiUmbrella.settings.rate_limit_mode"
+        value="custom"
+      }}
+      <div class="col-md-12" id="rate-limits">
+        {{> afQuickField
+          name="apiUmbrella.settings.rate_limits"
+        }}
+      </div>
+      {{/if }}
     </div>
   </div>
 </template>
