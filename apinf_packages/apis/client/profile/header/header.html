@@ -68,6 +68,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "viewApiNavigationMenu_settings" }}
             </a>
           </li>
+          {{# if proxyIsConfigured }}
+            <li id="api-proxy-tab">
+              <a href="#api-proxy" data-toggle="tab">
+                {{_ "viewApiNavigationMenu_proxy" }}
+              </a>
+            </li>
+          {{/ if }}
         {{/ if }}
       </ul>
       <button>MENU</button>
