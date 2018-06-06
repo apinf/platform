@@ -4,16 +4,18 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationCatalogToolbar">
-  {{# if userIsOrganizationManager }}
-    <div class="btn-group filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons" >
-      <label class="btn btn-default active" id="filter-all">
-        <input type="radio" class= "filter-sort-control" name="filterBy" value="all">
-        {{_ "organizationCatalog_toolbar_filterOptions_showAll" }}
-      </label>
-      <label class="btn btn-default" id="filter-my-organizations">
-        <input type="radio" class= "filter-sort-control" name="filterBy" value="my-organizations">
-        {{_ "organizationCatalog_toolbar_filterOptions_myOrganizations" }}
-      </label>
-    </div>
+  {{# if currentUser }}
+    {{# if userIsOrganizationManager }}
+      <div class="btn-group filter-options-menu" role="group" aria-label="Filter options" data-toggle="buttons" >
+        <label class="btn btn-default active" id="filter-all">
+          <input type="radio" class= "filter-sort-control" name="filterBy" value="all">
+          {{_ "organizationCatalog_toolbar_filterOptions_showAll" }}
+        </label>
+        <label class="btn btn-default" id="filter-my-organizations">
+          <input type="radio" class= "filter-sort-control" name="filterBy" value="my-organizations">
+          {{_ "organizationCatalog_toolbar_filterOptions_myOrganizations" }}
+        </label>
+      </div>
+    {{/ if }}
   {{/ if }}
 </template>

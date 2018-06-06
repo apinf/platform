@@ -15,10 +15,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
       </li> -->
       <li class="col-md-4 pull-right text-right">
-        {{# if userCanAddApi }}
-          <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 1rem;">
-            Add new API
-          </a>
+        {{# if currentUser }}
+          {{# if userCanAddApi }}
+            <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 1rem;">
+              Add new API
+            </a>
+          {{/ if }}
         {{/ if }}
       </li>
     </ul>

@@ -106,14 +106,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if currentUser }}
         {{> userMenu user=currentUser }}
         {{ else }}
-        <li class="main-links">
-          <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
-            {{_ "navbar_signIn" }}
-          </a>
-        </li>
-        <li class="main-links">
+        <li class="main-links pull-right">
           <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
             {{_ "navbar_signUp" }}
+          </a>
+        </li>
+        <li class="main-links pull-right">
+          <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
+            {{_ "navbar_signIn" }}
           </a>
         </li>
         {{/ if }}
