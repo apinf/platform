@@ -9,7 +9,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <span style="float: left;">
         {{> viewApiLogo }}
       </span>
-      <h1 class="special-headings" style="font-size: 1.2em;color: #37474F;display: inline;float: left;padding-left: 0; padding-right: 0; margin-left: 5px;">
+      <h1 class="special-headings" style="font-size: 1.2em; color: #37474F; display: block; float: left; padding-left: 0; padding-right: 0; margin-left: 5px; text-overflow: ellipsis; overflow: hidden; max-width: 600px; max-height: 1.2em; }">
         {{# if api.organization }}
           <a class="organization-name" href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}">{{ api.organization.name }}</a>
           <span class="path-divider">/</span>

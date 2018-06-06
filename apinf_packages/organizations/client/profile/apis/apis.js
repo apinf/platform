@@ -164,7 +164,7 @@ Template.organizationApis.events({
       sAlert.error(message, { timeout: 'none' });
     }
   },
-  'click #edit-api': (event) => {
+  'click #edit': (event) => {
     // Remove active class
     $(`.secondary-menu_navigation .links li#organization-apis-tab`).removeClass('active');
 
@@ -172,7 +172,7 @@ Template.organizationApis.events({
     $(`.secondary-menu_navigation .links li#organization-settings-tab`).addClass('active');
 
     // Show settings tab
-    $(`.about-organization a[href='#organization-settings']`).tab('show');
+    $(`.about-organization a[href='#settings']`).tab('show');
 
     // Show hash value in url
     window.location = `${event.currentTarget.hash}`;
