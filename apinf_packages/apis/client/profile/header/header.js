@@ -16,7 +16,7 @@ Template.viewApiPageHeader.onRendered(() => {
   // If url contain hash value
   if (hashTabValue) {
     // Show tab
-    $(`#api-navigation-tabs li > a[href='#${hashTabValue}']`).tab('show');
+    $(`.links a[href='#${hashTabValue}']`).tab('show');
   }
 
   // Mobile menu
@@ -111,12 +111,5 @@ Template.viewApiPageHeader.helpers({
       return true;
     }
     return false;
-  },
-});
-
-Template.viewApiPageHeader.events({
-  'click #api-navigation-tabs li > a': (event) => {
-    // Show hash value in url
-    window.location = `${event.currentTarget.hash}`;
   },
 });
