@@ -58,14 +58,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "navbar_apis" }}
           </a>
         </li>
-        {{# if currentUser }}
-          <li class="{{ isActiveRoute 'myApiCatalog' }}">
-            <a href="{{ pathFor 'myApiCatalog' }}" id="apis-button">
-              <i class="fa fa-book" aria-hidden="true"></i>
-              {{_ "navbar_my_apis" }}
-            </a>
-          </li>
-        {{/ if }}
         <li class="{{ isActiveRoute 'organizationCatalog' }}">
           <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
             <i class="fa fa-address-card" aria-hidden="true"></i>
