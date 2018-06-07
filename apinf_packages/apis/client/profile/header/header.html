@@ -25,13 +25,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </nav>
     <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="api-menu">
       <ul class='links'>
-        {{# if currentUser }}
-          <li id ="api-details-tab" class="active">
-            <a href="#api-details" data-toggle="tab">
-              {{_ "viewApiNavigationMenu_details" }}
-            </a>
-          </li>
-        {{/ if }}
+        <li id ="api-details-tab" class="active">
+          <a href="#api-details" data-toggle="tab">
+            {{_ "viewApiNavigationMenu_details" }}
+          </a>
+        </li>
         {{# if proxyBackend }}
           {{# if currentUser }}
             <li id ="api-auth-tab">
