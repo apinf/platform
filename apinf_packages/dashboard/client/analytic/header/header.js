@@ -34,6 +34,13 @@ Template.apiAnalyticPageHeader.onCreated(function () {
     // Save value
     instance.lastUpdateTime.set(result);
   });
+
+  //get server timezone
+  instance.serverTimeZone = new ReactiveVar();
+  Meteor.call('getServerTimeZone',(error, result) => {
+    // Save value
+    instance.serverTimeZone.set(result);
+  });
 });
 
 Template.apiAnalyticPageHeader.helpers({
@@ -56,8 +63,11 @@ Template.apiAnalyticPageHeader.helpers({
   },
   lastUpdateTime () {
     const instance = Template.instance();
-
     return instance.lastUpdateTime.get();
+  },
+  serverTimeZone () {
+    const instance = Template.instance();
+    return instance.serverTimeZone.get();
   },
   displayLastUpdateTime () {
     const timeframe = FlowRouter.getQueryParam('timeframe');

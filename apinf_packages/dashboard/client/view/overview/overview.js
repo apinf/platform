@@ -17,6 +17,16 @@ import {
   summaryComparing,
 } from '/apinf_packages/dashboard/lib/trend_helpers';
 
+Template.dashboardOverviewStatistic.onCreated(function () {
+  const instance = this;
+  //get server timezone
+  instance.serverTimeZone = new ReactiveVar();
+  Meteor.call('getServerTimeZone',(error, result) => {
+    // Save value
+    instance.serverTimeZone.set(result);
+  });
+});
+
 Template.dashboardOverviewStatistic.helpers({
   arrowDirection (parameter) {
     const dataset = Template.instance().data.dataset;
@@ -109,5 +119,9 @@ Template.dashboardOverviewStatistic.helpers({
     const timeframe = FlowRouter.getQueryParam('timeframe');
     // Display text about "Average unique users" for each period except "Today"
     return timeframe !== '12';
+  },
+  serverTimeZone () {
+    const instance = Template.instance();
+    return instance.serverTimeZone.get();
   },
 });
