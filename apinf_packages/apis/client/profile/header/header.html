@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block api-page-header">
     <nav class="container secondary-menu_navigation secondary-menu-block-inner">
-      <span style="float: left;">
+      <span style="float: left;top: 5px; position: relative;">
         {{> viewApiLogo }}
       </span>
       <h1 class="special-headings" style="font-size: 1.2em; color: #37474F; display: block; float: left; padding-left: 0; padding-right: 0; margin-left: 5px; text-overflow: ellipsis; overflow: hidden; max-width: 600px; max-height: 1.2em; }">
@@ -19,12 +19,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
         {{ api.name }}
         {{# unless api.isPublic }}
-          <!-- <span class="label label-default">
-            {{_ "catalogTable_labelText_private" }}
-          </span> -->
           <i class="mdi mdi-lock"></i>
         {{/ unless }}
       </h1>
+    </nav>
+    <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="api-menu">
       <ul class='links'>
         {{# if currentUser }}
           <li id ="api-details-tab" class="active">
