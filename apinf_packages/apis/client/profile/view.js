@@ -22,7 +22,7 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Settings from '/apinf_packages/settings/collection';
 
 Template.viewApi.onCreated(function () {
-   // Get reference to template instance
+  // Get reference to template instance
   const templateInstance = this;
 
   templateInstance.api = new ReactiveVar();
@@ -145,6 +145,8 @@ Template.viewApi.helpers({
     // Get settings
     const settings = Settings.findOne();
 
-    return settings.developmentFeatures;
+    if (settings) {
+      return settings.developmentFeatures;
+    }
   },
 });

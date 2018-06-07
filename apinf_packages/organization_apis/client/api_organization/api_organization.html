@@ -1,25 +1,32 @@
-<!-- Copyright 2017 Apinf Oy
+<!-- Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiOrganization">
   {{# if userIsOrganizationManager }}
-    <h2 style="font-size:16px;margin-top:0;">
-      {{_ "apiOrganization_panelTitle" }}
-    </h2>
-
-    {{# if api.organization }}
-      <!-- Show API Organization details -->
-      <p>
-        {{ api.organization.name }}
-      </p>
-      <button class="btn btn-danger" id="disconnect-from-organization">
-        {{_ "apiOrganization_disconnectButton" }}
-      </button>
-    {{ else }}
-      <!-- Show API Organization form -->
-      {{> organizationApisForm api=api organizationApi=organizationApi }}
-    {{/ if }}
+    <div class="row">
+      <div class="col-md-8">
+        <h2 style="font-size:16px;margin-top:0;">
+          {{_ "apiOrganization_panelTitle" }}
+        </h2>
+        <p>
+          Make your API part of existing organization
+        </p>
+      </div>
+      {{# if api.organization }}
+        <div class="col-md-4 text-right">
+          <!-- Show API Organization details -->
+          <a href="#" class="btn btn-danger" id="disconnect-from-organization">
+            {{_ "apiOrganization_disconnectButton" }} from {{ api.organization.name }}
+          </a>
+        </div>
+      {{ else }}
+      <div class="col-md-12">
+        <!-- Show API Organization form -->
+        {{> organizationApisForm api=api organizationApi=organizationApi }}
+      </div>
+      {{/ if }}
+    </div>
   {{/ if }}
 </template>
