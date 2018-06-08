@@ -211,8 +211,8 @@ Meteor.methods({
     return analytics && analytics.date;
   },
   getServerTimeZone () {
-    var serverTime = new Date();
-    var timeZone = serverTime.toString().substring(25);
+    const serverTime = new Date();
+    const timeZone = serverTime.toString().substring(25);
     return timeZone;
   },
 });

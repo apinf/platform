@@ -5,7 +5,8 @@
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
-
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Meteor } from 'meteor/meteor';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
@@ -19,9 +20,9 @@ import {
 
 Template.dashboardOverviewStatistic.onCreated(function () {
   const instance = this;
-  //get server timezone
+  // get server timezone
   instance.serverTimeZone = new ReactiveVar();
-  Meteor.call('getServerTimeZone',(error, result) => {
+  Meteor.call('getServerTimeZone', (error, result) => {
     // Save value
     instance.serverTimeZone.set(result);
   });

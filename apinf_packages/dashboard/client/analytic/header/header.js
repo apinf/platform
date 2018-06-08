@@ -35,9 +35,9 @@ Template.apiAnalyticPageHeader.onCreated(function () {
     instance.lastUpdateTime.set(result);
   });
 
-  //get server timezone
+  // get server timezone
   instance.serverTimeZone = new ReactiveVar();
-  Meteor.call('getServerTimeZone',(error, result) => {
+  Meteor.call('getServerTimeZone', (error, result) => {
     // Save value
     instance.serverTimeZone.set(result);
   });
