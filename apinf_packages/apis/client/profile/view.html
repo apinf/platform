@@ -26,6 +26,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         {{# if currentUser }}
           {{# if api.currentUserCanManage }}
+            <div id="monitoring" class="block-wrapper tab-pane fade">
+              {{> apiMonitoring api=api }}
+            </div>
             <div id="collaborators" class="block-wrapper tab-pane fade">
               {{> apiSettingsVisibility api=api }}
             </div>
