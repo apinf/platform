@@ -1517,15 +1517,11 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           return errorMessagePayload(500, 'Creating proxyBackend failed.');
         }
 
+        // Send ACL settings to EMQ proxy
         const emqResponse = Meteor.call('emqAclRequest',
                                         'POST',
                                         newProxyBackendData.proxyId,
                                         newProxyBackendData.emq.settings.acl);
-
-        console.log('emqResponse=', emqResponse);
-
-
-
 
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
@@ -1984,6 +1980,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           delete bodyParams.removeIndex;
         }
 
+        // Send updated ACL parameters to EMQ proxy
         const emqResponseError = Meteor.call('emqAclRequest',
                                              'PUT',
                                              proxyBackend.proxyId,
