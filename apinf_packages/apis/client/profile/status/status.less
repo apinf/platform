@@ -15,20 +15,30 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 }
 
 .status-wait {
-  background-color: #a0a0a0;
+  color: #a0a0a0;
 }
+
 .status-success {
-  background-color: @brand-success;
+  color: @brand-success;
 }
 
 .status-warning {
-  background-color: @brand-warning;
+  color: @brand-warning;
 }
 
 .status-danger {
-  background-color: @brand-danger;
+  color: @brand-danger;
 }
 
 .status-info {
-  background-color: @brand-info;
+  color: @brand-info;
+}
+
+@media only screen and (max-width: 768px) {
+  span.status-message {
+    display: none;
+  }
+  .api-status {
+    right: 0;
+  }
 }

@@ -4,9 +4,6 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiUserAuthorizationForm">
-  <!-- <h4>
-    {{_ 'apiUserAuthorizationForm_header_text' }}
-  </h4> -->
   {{# autoForm
     schema=emailSchema
     id="authorizedUserForm"
@@ -15,16 +12,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     meteormethod="addAuthorizedUser"
   }}
     <fieldset>
-      <!-- <p>
-        {{_ "apiUserAuthorizationForm_helpText_usernameEmail" }}
-      </p> -->
       {{> afQuickField name='user' }}
       {{> afQuickField name='apiId' value=api._id type="hidden" }}
     </fieldset>
 
     <button type="submit" class="btn btn-primary">
-      {{_ 'apiUserAuthorizationForm_addButton_text' }}
-      <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+      Add collaborator
     </button>
   {{/ autoForm }}
 </template>

@@ -26,18 +26,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
         {{# if currentUser }}
           {{# if api.currentUserCanManage }}
+            <div id="collaborators" class="block-wrapper tab-pane fade">
+              {{> apiSettingsVisibility api=api }}
+            </div>
             <div id="api-settings" class="block-wrapper tab-pane fade">
               {{> apiSettings api=api proxyBackend=proxyBackend }}
             </div>
           {{/ if }}
         {{/ if }}
       </div>
+      <!-- <ul class="list-inline">
+        <li class="pull-left">
+          <a href="/rss/apis" target="_blank" class="btn-link" title="{{_ 'apisRssIcon_tooltipText_Rss'}}" style="color: #657786;margin-top: 10px;display: block;float: right;font-size: 1.2rem;">
+          © 2018 Star Wars Radar
+          </a>
+        </li>
+        <li class="pull-right">
+          <a href="/rss/apis" target="_blank" class="btn-link" title="{{_ 'apisRssIcon_tooltipText_Rss'}}" style="color: #657786;margin-top: 10px;display: block;float: right;font-size: 1.2rem;">
+            Report
+          </a>
+        </li>
+      </ul> -->
     </div>
-    {{# if currentUser }}
+    <!-- {{# if currentUser }}
       <div id="floating-button" class="small-tooltip">
         {{> bookmark api=api }}
       </div>
-    {{/ if }}
+    {{/ if }} -->
   {{ else }}
     {{> spinner }}
   {{/ if }}

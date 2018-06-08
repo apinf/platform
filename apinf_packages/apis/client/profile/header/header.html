@@ -22,6 +22,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <i class="mdi mdi-lock"></i>
         {{/ unless }}
       </h1>
+      {{> viewApiStatus api=api width="0.4" }}
+      <!-- <a class="btn btn-default pull-right" style="background: #fff;border: 2px solid #e5eef4;;position: absolute; right: 15px; top: 15px;color: #6d859e;font-weight: 500;font-size:1.2rem;">SAVE FOR LATER</a> -->
     </nav>
     <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="api-menu">
       <ul class='links'>
@@ -40,6 +42,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         {{/ if }}
         {{# if currentUser }}
+          {{# if userShouldSeeApiDocsTab }}
+            <li id="api-documentation-tab">
+              <a href="#api-documentation" data-toggle="tab">
+                {{_ "viewApiNavigationMenu_documentation" }}
+              </a>
+            </li>
+          {{/ if }}
+        {{/ if }}
+        {{# if currentUser }}
           {{# if api.currentUserCanManage }}
             {{# if proxyBackend }}
               <li>
@@ -50,16 +61,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           {{/ if }}
         {{/ if }}
-        {{# if currentUser }}
-          {{# if userShouldSeeApiDocsTab }}
-            <li id="api-documentation-tab">
-              <a href="#api-documentation" data-toggle="tab">
-                {{_ "viewApiNavigationMenu_documentation" }}
-              </a>
-            </li>
-          {{/ if }}
-        {{/ if }}
         {{# if api.currentUserCanManage }}
+          <li id="api-collaborators-tab">
+            <a href="#collaborators" data-toggle="tab">
+              Collaborators
+            </a>
+          </li>
           <li id="api-settings-tab">
             <a href="#api-settings" data-toggle="tab">
               {{_ "viewApiNavigationMenu_settings" }}
