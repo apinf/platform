@@ -30,7 +30,6 @@ MonitoringSettings.schema = new SimpleSchema({
       const monitoringUrl = this.value;
       let validation;
 
-      // Require editor host if apiDocumentationEditor.enabled is checked
       if (monitoringUrlEnabled === true && !monitoringUrl) {
         validation = 'required';
       }

@@ -5,9 +5,38 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiMonitoring">
   <h2 style="font-size:1.4em;margin-top:0;">
-    {{_ "apiMonitoring_panelTitle_Monitoring" }}
+    Status Messages
   </h2>
-  <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}"</p>
+  <p style="color:#6d859e;">
+    Historical data on API availability
+  </p>
+  <table class="rtable">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>June 11, 2018 00:00 EEST</td>
+        <td>
+          <i class="mdi {{ statusIcon }} {{ classList }}" data-toggle="tooltip" data-placement="top" data-original-title="{{ originalTitle }}" style="font-size: 1.8rem;"></i>
+        </td>
+        <td>
+          {{ originalTitle }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
+
+  <h3 style="font-size:16px; margin-top:0;">
+    {{_ "apiMonitoring_panelTitle_Monitoring" }}
+  </h3>
+  <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}</p>
   <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
       <!-- hidden field, auto-value -->

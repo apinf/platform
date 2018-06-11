@@ -9,6 +9,9 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
 
+// APInf import
+import convertStatusCode from '/apinf_packages/apis/client/profile/status/convert_status_code';
+
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
   const instance = this;
@@ -23,6 +26,9 @@ Template.apiMonitoring.onCreated(function () {
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
+
+  // Init tooltip
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 Template.apiMonitoring.helpers({
@@ -49,5 +55,34 @@ Template.apiMonitoring.helpers({
     }
 
     return 'insert';
+  },
+  classList () {
+    // Get api
+    const api = Template.currentData().api;
+    // Get class name depending on the api status code
+    const { className } = convertStatusCode(api.latestMonitoringStatusCode);
+
+    // Create a new line using join
+    return [
+      `api-status-indicator-${api._id}`,
+      className,
+    ].join(' ');
+  },
+  originalTitle () {
+    // Get api
+    const api = Template.currentData().api;
+
+    // Get original title depending on the api status code
+    const { statusText } = convertStatusCode(api.latestMonitoringStatusCode);
+
+    return statusText;
+  },
+  statusIcon () {
+    // Get api
+    const api = Template.currentData().api;
+
+    const { statusIcon } = convertStatusCode(api.latestMonitoringStatusCode);
+
+    return statusIcon;
   },
 });
