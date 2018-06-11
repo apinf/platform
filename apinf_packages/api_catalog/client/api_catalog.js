@@ -38,7 +38,6 @@ Template.apiCatalog.onCreated(function () {
 
   // Init the query reactive variable
   instance.query = new ReactiveVar();
-  
   instance.autorun(() => {
     // Get Branding collection content
     const branding = Branding.findOne();
