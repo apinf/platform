@@ -149,5 +149,7 @@ Template.viewApi.helpers({
     if (settings) {
       return settings.developmentFeatures;
     }
+    // Otherwise return false
+    return false;
   },
 });
