@@ -464,6 +464,7 @@
   "mostFrequentUsersTable_lintText_downloadFile": "Download all users",
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
+  "navbar_my_apis": "My APIs",
   "navbar_organizations": "Organizations",
   "navbar_dashboard": "Dashboard",
   "navbar_signIn": "Sign In",
