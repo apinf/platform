@@ -2,18 +2,19 @@
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
-
 <template name="search_form">
-  <form id="search-form">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <i class="fa fa-search"></i>
-      </span>
-      <input
-      type="text"
-      placeholder="{{_ 'searchPage_searchForm_placeholderText' }}"
-      class="form-control"
-      id="search-field" />
-    </div>
-  </form>
+  <div class="container">
+      <form id="search-form">
+          <div class="col-xs-12 col-sm-4">
+              <div class="search">
+                  <i class="fa fa-search"></i>
+                    <input
+                      type="text"
+                      placeholder="{{_ 'searchPage_searchForm_placeholderText' }}"
+                      class="form-control pull-right"
+                      id="search-field" />
+              </div>
+          </div>
+      </form>
+  </div>
 </template>

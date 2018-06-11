@@ -38,8 +38,7 @@ Template.apiCatalog.onCreated(function () {
 
   // Init the query reactive variable
   instance.query = new ReactiveVar();
-
-
+  
   instance.autorun(() => {
     // Get Branding collection content
     const branding = Branding.findOne();
@@ -229,6 +228,9 @@ Template.apiCatalog.onCreated(function () {
     });
     if (searchValue !== '') {
       currentFilters = instance.query.get();
+    }
+    if (FlowRouter.current().route.name === 'myApiCatalog') {
+      currentFilters.managerIds = userId;
     }
     instance.pagination.currentPage([Session.get('currentIndex')]);
     instance.pagination.filters(currentFilters);
