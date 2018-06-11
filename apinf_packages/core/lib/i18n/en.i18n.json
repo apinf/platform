@@ -1169,7 +1169,7 @@
   "searchPage_noResults": "Nothing found.",
   "searchPage_pageHeader": "Search APIs",
   "searchPage_searchForm_helpText": "Start typing your query for live search results.",
-  "searchPage_searchForm_placeholderText": "Search...",
+  "searchPage_searchForm_placeholderText": "Start typing to search APIs...",
   "searchPage_searchResultsHeader": "Search results",
   "settings_panelTitle_addingApisAndOrganizations": "Adding APIs and Organizations",
   "settings_mail": "Mail",
