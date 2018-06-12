@@ -638,7 +638,7 @@
   "deletePostConfirmation_buttonText_delete": "Delete",
   "relatedMedia_addButton_help": "Add embedded related media content",
   "relatedMedia_addButton": "Add related media",
-  "relatedMedia_Title": "Related links",
+  "relatedMedia_Title": "Links",
   "relatedMedia_text_noRelatedMedia": {
     "api": "You don't have any media related to this API",
     "organization": "The organization doesn't have any related media"

@@ -5,39 +5,43 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="relatedMedia">
   {{# if posts }}
-    <div class="block-wrapper">
-      <div class="related-media-panel" style="margin-bottom:14px;">
-        <h5 id="oembedded-title" class="panel-title clearfix">
-          Links
-          {{# if entity.currentUserCanManage }}
-            <a type="button" class="btn-link pull-right" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
-              <small style="color: #9bacbf;font-weight: 500;">
-                Add New
-              </small>
-            </a>
-          {{/ if }}
-        </h5>
-      </div>
-      <ul style="padding-left:0;list-style:none;">
-        {{# each post in posts }}
-          {{> postItem post=post entity=entity }}
-        {{/ each }}
-      </ul>
+    <div class="related-media-panel" style="margin-bottom:14px;">
+      <h5 id="oembedded-title" class="panel-title clearfix">
+        {{_ "relatedMedia_Title" }}
+        {{# if entity.currentUserCanManage }}
+          <a type="button" class="btn-link pull-right" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
+            <small style="color: #9bacbf;font-weight: 500;">
+              Add New
+            </small>
+          </a>
+        {{/ if }}
+      </h5>
     </div>
+    <ul class="related-links-list">
+      {{# each post in posts }}
+        {{> postItem post=post entity=entity }}
+      {{/ each }}
+      {{# if entity.currentUserCanManage }}
+        <li class="link-color-wrapper related-link"><a type="button" class="btn-link" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;color: #9bacbf;font-weight: 500;">Add New</a></li>
+      {{/ if }}
+    </ul>
   {{ else }}
     {{# if entity.currentUserCanManage }}
-      <div class="block-wrapper">
-        <div class="related-media-panel" style="margin-bottom:0;">
-          <h5 id="oembedded-title" class="panel-title clearfix" style="color:#5c617b;">
-            {{_ "relatedMedia_Title" }}
-            <a type="button" class="btn-link pull-right" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
-              <small style="color: #19B934;font-weight: 500;">
-                Add New
-              </small>
-            </a>
-          </h5>
-        </div>
+      <div class="related-media-panel" style="margin-bottom:0;">
+        <h5 id="oembedded-title" class="panel-title clearfix" style="color:#5c617b;">
+          {{_ "relatedMedia_Title" }}
+          <a type="button" class="btn-link pull-right" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
+            <small style="color: #9bacbf;font-weight: 500;">
+              Add New
+            </small>
+          </a>
+        </h5>
       </div>
+      <ul class="related-links-list api-profile-visible">
+      {{# if entity.currentUserCanManage }}
+        <li class="link-color-wrapper related-link"><a type="button" class="btn-link" id="add-media" title='{{_ "relatedMedia_addButton_help" }}' style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;color: #9bacbf;font-weight: 500;">Add Link</a></li>
+      {{/ if }}
+      </ul>
     {{/ if }}
   {{/ if }}
 </template>
