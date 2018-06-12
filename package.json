@@ -19,7 +19,6 @@
     "elasticsearch": "^11.0.1",
     "github": "^1.4.0",
     "got": "^6.7.1",
-    "intro.js": "^2.4.0",
     "jquery": "^2.2.4",
     "jquery-bbq": "^1.0.0",
     "jquery.rateit": "^1.0.23",
