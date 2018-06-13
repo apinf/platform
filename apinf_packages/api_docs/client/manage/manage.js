@@ -113,6 +113,9 @@ Template.manageApiDocumentationModal.helpers({
     // Return Session
     return Session.get('links');
   },
+  spaceUrls () {
+    return Session.get('spaceUrls');
+  },
 });
 
 Template.manageApiDocumentationModal.events({
@@ -204,7 +207,7 @@ Template.manageApiDocumentationModal.events({
   'click #get-from-space': function (event) {
     Meteor.call('testing', function(error, results) {
       const json = JSON.parse(results.content);
-      console.log(json[0].url);
+      Session.set('spaceUrls', json);
     });
   },
   'change #space-select': function (event) {

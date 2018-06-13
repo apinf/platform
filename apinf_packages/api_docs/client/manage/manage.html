@@ -55,12 +55,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   Select one from space
                 </label>
                 <select id="space-select" class="form-control">
-                  <option value="one" id="space_one">
-                    one
-                  </option>
-                  <option value="two" id="space_two">
-                    two
-                  </option>
+                  {{# each spaceUrls }}
+                    <option value="{{ this.url }}" id="space_one">
+                      {{ this.url }}
+                    </option>
+                  {{/ each}}
                 </select>
               </div>
               {{> afQuickField name='remoteFileUrl' }}
