@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
@@ -189,16 +190,21 @@ Template.manageApiDocumentationModal.events({
       $('#errorMessage').removeClass('invisible');
     }
   },
-
   'click .delete-link': function (event) {
     // get links from session
     const otherUrlLinks = Session.get('links');
     // get cross id
     const deleteLinkId = event.currentTarget.id;
     if (otherUrlLinks) {
-    // Remove elemtn from Session
+      // Remove elemtn from Session
       otherUrlLinks.splice(deleteLinkId, 1);
       Session.set('links', otherUrlLinks);
     }
+  },
+  'click #get-from-space': function (event) {
+    Meteor.call('testing', function(error, results) {
+      const json = JSON.parse(results.content);
+      console.log(json[0].url);
+    });
   },
 });
