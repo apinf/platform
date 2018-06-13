@@ -14,6 +14,7 @@ ApiDocs.schema = new SimpleSchema({
     allowedValues: [
       'url',
       'file',
+      'space',
     ],
     defaultValue: 'url',
   },
