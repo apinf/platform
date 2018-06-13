@@ -50,6 +50,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{/ unless }}
               </div>
             {{ else }}
+              <div class="form-group">
+                <label for="space-select">
+                  Select one from space
+                </label>
+                <select id="space-select" class="form-control">
+                  <option value="one" id="space_one">
+                    one
+                  </option>
+                  <option value="two" id="space_two">
+                    two
+                  </option>
+                </select>
+              </div>
               {{> afQuickField name='remoteFileUrl' }}
             {{/ if }}
             {{> afQuickField
