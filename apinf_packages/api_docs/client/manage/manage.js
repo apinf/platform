@@ -211,7 +211,11 @@ Template.manageApiDocumentationModal.events({
     });
   },
   'change #space-select': function (event) {
-    // Copy to input field
-    console.log('Here copy link to input field', event);
+    let e = document.getElementById('space-select');
+    let selected = e.options[e.selectedIndex].value;
+
+    const inputUrl = document.getElementById('remoteFileUrl');
+
+    inputUrl.value = selected;
   },
 });

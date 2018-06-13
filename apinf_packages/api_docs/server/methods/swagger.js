@@ -29,6 +29,6 @@ Meteor.methods({
   },
   testing: function () {
     this.unblock();
-    return Meteor.http.call("GET", "https://openapi.space/api/v1/apis?limit=10&offset=0&sort=NAME&order=ASC");
+    return Meteor.http.call("GET", "https://openapi.space/api/v1/apis?limit=100&offset=0&sort=NAME&order=ASC");
   }
 });

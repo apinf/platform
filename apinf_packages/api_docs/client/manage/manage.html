@@ -61,10 +61,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     </option>
                   {{/ each}}
                 </select>
+                <button type="button" class="btn btn-default" id="get-from-space" style="margin-top:1em;">Get URLs from Space</button>
               </div>
-              {{> afQuickField name='remoteFileUrl' }}
+              {{> afQuickField name='remoteFileUrl' id="remoteFileUrl" }}
             {{/ if }}
-            <button type="button" class="btn btn-default" id="get-from-space">Get URLs from Space</button>
             {{> afQuickField
               name="submit_methods"
               options=supportedSubmitMethods
