@@ -6,10 +6,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block api-page-header">
     <nav class="container secondary-menu_navigation secondary-menu-block-inner">
-      <span style="float: left;top: 5px; position: relative;">
+      <span style="float: left;top: 3px; position: relative;">
         {{> viewApiLogo }}
       </span>
-      <h1 class="special-headings" style="font-size: 1.2em; color: #37474F; display: block; float: left; padding-left: 0; padding-right: 0; margin-left: 5px; text-overflow: ellipsis; overflow: hidden; max-width: 600px; max-height: 1.2em; }">
+      <h1 class="special-headings" style="font-size: 1.2em; color: #37474F; display: block; float: left; padding-left: 0; padding-right: 0; margin-left: 5px; text-overflow: ellipsis; overflow: hidden; max-width: 600px;}">
         {{# if api.organization }}
           <a class="organization-name" href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}">{{ api.organization.name }}</a>
           <span class="path-divider">/</span>
