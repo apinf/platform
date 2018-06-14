@@ -207,6 +207,9 @@ Template.manageApiDocumentationModal.events({
   'click #get-from-space': function (event) {
     Meteor.call('testing', function(error, results) {
       const json = JSON.parse(results.content);
+      json.forEach(line => {
+        line.url = line.url.replace(/ /g, "%20");
+      });
       Session.set('spaceUrls', json);
     });
   },
