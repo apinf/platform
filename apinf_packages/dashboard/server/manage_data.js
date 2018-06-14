@@ -36,7 +36,7 @@ Meteor.methods({
         // Get Fronted prefix
         const requestPath = proxyBackend.frontendPrefix();
         // Add in Filter
-        filters.filters[requestPath] = { prefix: { request_path: requestPath } };
+        filters.filters[requestPath] = { prefix: { request_path: requestPath.toLowerCase() } };
       });
 
     // Fetch the first proxy backend
@@ -204,7 +204,7 @@ Meteor.methods({
         // Get Fronted prefix
         const requestPath = proxyBackend.frontendPrefix();
         // Add in Filter
-        filters.filters[requestPath] = { prefix: { request_path: requestPath } };
+        filters.filters[requestPath] = { prefix: { request_path: requestPath.toLowerCase() } };
       });
 
     // Fetch the first proxy backend
@@ -280,7 +280,9 @@ Meteor.methods({
     // Get Frontend prefix
     const requestPath = proxyBackend.frontendPrefix();
 
-    const filters = { filters: { [requestPath]: { prefix: { request_path: requestPath } } } };
+    const filters = { filters: {
+      [requestPath]: { prefix: { request_path: requestPath.toLowerCase() },
+      } } };
 
     // Build query request
     const bodyRequest = responseStatusCodesRequest(params, filters);
