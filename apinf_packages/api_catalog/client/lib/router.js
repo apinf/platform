@@ -20,7 +20,7 @@ FlowRouter.route('/apis', {
       context.queryParams.viewMode = 'table';
     }
     if (!context.queryParams.filterBy && Meteor.userId()) {
-      context.queryParams.filterBy = 'my-apis';
+      context.queryParams.filterBy = 'all';
     }
   }],
   name: 'apiCatalog',
