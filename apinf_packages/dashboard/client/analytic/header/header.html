@@ -35,6 +35,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
         </i>
       {{/ if }}
+      <div class="overview-help-text">
+        {{_ 'apiAnalyticPageHeader_helpText_serverTimezone' servertimezone=(serverTimeZone)}}
+      </div>
     </div>
   </div>
 </template>
