@@ -201,4 +201,9 @@ Template.manageApiDocumentationModal.events({
       Session.set('links', otherUrlLinks);
     }
   },
+  'change #space-select': function (event) {
+    // Copy to input field
+    console.log('Here copy link to input field', event);
+  },
+
 });
