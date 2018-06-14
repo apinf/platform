@@ -18,11 +18,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!--invisible auto-value field-->
           {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
           <fieldset>
-            {{> afQuickField name='name' id="api-name" }}
-            {{> afQuickField name='description' rows=2 id="api-description" }}
-            {{> afQuickField name='url' id="api-url" }}
+            {{> afQuickField name='name' id="api-name" placeholder="e.g. Tampere Bus Service" }}
+            <p class="field-description-text">
+              {{_ 'addApi_nameFieldInfo' }}
+            </p>
+            {{> afQuickField name='description' rows=2 id="api-description" placeholder="e.g. Plan your journey across Tampere city by getting up-to-date bus information, including real-time vehicle location detection and inter zone routing. You can lookup bus timing by line and stoppage." }}
+            <p class="field-description-text">
+              {{_ 'addApi_descriptionFieldInfo' }}
+            </p>
+            {{> afQuickField name='url' id="api-url" placeholder="e.g. https://tampere-bus-service.fi" }}
+            <p class="field-description-text">
+              {{_ 'addApi_urlFieldInfo' }}
+            </p>
             {{> afQuickField name='lifecycleStatus' id="api-lifecyclestatus" }}
           </fieldset>
+          <p class="overview-help-text">
+              {{_ 'addApi_ownerHelpText' }}
+          </p>
           <button type="submit" class="btn btn-primary" id="submitapi-button">
             {{_ 'addApi_button_text' }}
           </button>
