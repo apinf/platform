@@ -51,17 +51,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </div>
             {{ else }}
               <div class="form-group">
-                <label for="space-select">
-                  Select one from space
-                </label>
-                <select id="space-select" class="form-control">
-                  {{# each spaceUrls }}
-                    <option value="{{ this.url }}" id="space_one">
-                      {{ this.url }}
-                    </option>
-                  {{/ each}}
-                </select>
                 <button type="button" class="btn btn-default" id="get-from-space" style="margin-top:1em;">Get URLs from Space</button>
+                <div>
+                  <label for="space-select">
+                    Documents from Space
+                  </label>
+                  <select id="space-select" class="form-control">
+                    <option value='' disabled selected style='display:none;'>Select one as a documentation link</option>
+                    {{# each spaceUrls }}
+                      <option value="{{ this.url }}" id="space_one">
+                        {{ this.url }}
+                      </option>
+                    {{/ each}}
+                  </select>
+                </div>
               </div>
               {{> afQuickField name='remoteFileUrl' id="remoteFileUrl" }}
             {{/ if }}
