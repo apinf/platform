@@ -145,8 +145,11 @@ Template.viewApi.helpers({
     // Get settings
     const settings = Settings.findOne();
 
+    // Make sure that Settings exist
     if (settings) {
       return settings.developmentFeatures;
     }
+    // Otherwise return false
+    return false;
   },
 });
