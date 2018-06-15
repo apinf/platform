@@ -32,11 +32,6 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
   },
-  externalURL: {
-    type: String,
-    optional: true,
-    regEx: SimpleSchema.RegEx.Url,
-  },
   slug: {
     type: String,
     optional: true,
