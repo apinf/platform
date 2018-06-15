@@ -133,7 +133,7 @@ Template.responseTimeTimeline.onRendered(function () {
           borderColor: '#F08080',
           borderWidth: 1,
           data: selectedPathData.percentiles95,
-        },   
+        },
       ],
     };
 
@@ -164,7 +164,6 @@ Template.responseTimeTimeline.onRendered(function () {
     datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
     datasets[2].label = TAPi18n.__('responseTimeTimeline_legendItem_long');
     datasets[3].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
-    
     // Update chart with new translation
     instance.chart.update();
   });

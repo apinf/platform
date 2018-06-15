@@ -142,7 +142,7 @@ Meteor.methods({
           median: arrayWithZeros(dates.length),
           percentiles95: arrayWithZeros(dates.length),
           long: arrayWithZeros(dates.length),
-          short: arrayWithZeros(dates.length)
+          short: arrayWithZeros(dates.length),
         };
       } else {
         _.forEach(aggregatedData, (dataset) => {
@@ -183,7 +183,7 @@ Meteor.methods({
             median,
             percentiles95,
             long,
-            short
+            short,
           };
         });
       }
