@@ -1340,7 +1340,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         // Convert given value to boolean. Also sets default false, if value not given.
-        settings.disableApiKey = (bodyParams.disableApiKey === 'true');
+        settings.disable_api_key = (bodyParams.disableApiKey === 'true');
 
         // Rate limit modes, default value is unlimited
         settings.rate_limit_mode = bodyParams.rateLimitMode || 'unlimited';
@@ -1701,7 +1701,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             return errorMessagePayload(400, 'Parameter "apiPort" has erroneous value.',
             'apiPort', bodyParams.apiPort);
           }
-          proxyBackend.apiUmbrella.servers[0].apiPort = bodyParams.apiPort;
+          proxyBackend.apiUmbrella.servers[0].port = 1 * bodyParams.apiPort;
           delete bodyParams.apiPort;
         }
         proxyBackend.apiUmbrella.servers[0].host = apiUrl.host();
@@ -1714,7 +1714,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             'disableApiKey', bodyParams.disableApiKey);
           }
           // Convert given value to boolean. Also sets default false, if value not given.
-          proxyBackend.apiUmbrella.settings.disableApiKey = (bodyParams.disableApiKey === 'true');
+          proxyBackend.apiUmbrella.settings.disable_api_key = (bodyParams.disableApiKey === 'true');
           delete bodyParams.disableApiKey;
         }
 
@@ -1749,7 +1749,10 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           }
         }
         // Count number of rate limits currently in DB
-        const countOfRates = proxyBackend.apiUmbrella.settings.rate_limits.length || 0;
+        let countOfRates = 0;
+        if (proxyBackend.apiUmbrella.settings.rate_limits) {
+          countOfRates = proxyBackend.apiUmbrella.settings.rate_limits.length;
+        }
 
         // Is the editIndex given
         if (bodyParams.editIndex) {
