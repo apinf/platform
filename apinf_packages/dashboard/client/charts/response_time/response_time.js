@@ -59,6 +59,7 @@ Template.responseTimeTimeline.onRendered(function () {
       scales: {
         xAxes: [
           {
+            stacked: true,
             maxBarThickness: 30,
             scaleLabel: {
               display: true,
@@ -70,6 +71,7 @@ Template.responseTimeTimeline.onRendered(function () {
         ],
         yAxes: [
           {
+            stacked: true,
             scaleLabel: {
               display: true,
               labelString: 'Time, ms',
