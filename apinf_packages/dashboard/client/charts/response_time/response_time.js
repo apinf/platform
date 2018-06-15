@@ -107,19 +107,33 @@ Template.responseTimeTimeline.onRendered(function () {
       labels,
       datasets: [
         {
-          label: TAPi18n.__('responseTimeTimeline_legendItem_median'),
+          label: TAPi18n.__('responseTimeTimeline_legendItem_short'),
           backgroundColor: '#00A421',
-          borderColor: 'green',
+          borderColor: '#00A421',
+          borderWidth: 1,
+          data: selectedPathData.short,
+        },
+        {
+          label: TAPi18n.__('responseTimeTimeline_legendItem_median'),
+          backgroundColor: '#A5D6A7',
+          borderColor: '#A5D6A7',
           borderWidth: 1,
           data: selectedPathData.median,
         },
         {
-          label: TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles'),
+          label: TAPi18n.__('responseTimeTimeline_legendItem_long'),
           backgroundColor: '#C6C5C5',
-          borderColor: '#959595',
+          borderColor: '#C6C5C5',
+          borderWidth: 1,
+          data: selectedPathData.long,
+        },
+        {
+          label: TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles'),
+          backgroundColor: '#F08080',
+          borderColor: '#F08080',
           borderWidth: 1,
           data: selectedPathData.percentiles95,
-        },
+        },   
       ],
     };
 
@@ -146,9 +160,11 @@ Template.responseTimeTimeline.onRendered(function () {
     // Update translation
     scales.xAxes[0].scaleLabel.labelString = xAxesLabel;
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_yAxisTitle_time');
-    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
-    datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
-
+    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_short');
+    datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
+    datasets[2].label = TAPi18n.__('responseTimeTimeline_legendItem_long');
+    datasets[3].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
+    
     // Update chart with new translation
     instance.chart.update();
   });

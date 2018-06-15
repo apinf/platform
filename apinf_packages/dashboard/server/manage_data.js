@@ -141,6 +141,8 @@ Meteor.methods({
           error: arrayWithZeros(dates.length),
           median: arrayWithZeros(dates.length),
           percentiles95: arrayWithZeros(dates.length),
+          long: arrayWithZeros(dates.length),
+          short: arrayWithZeros(dates.length)
         };
       } else {
         _.forEach(aggregatedData, (dataset) => {
@@ -153,6 +155,8 @@ Meteor.methods({
           const error = arrayWithZeros(dates.length);
           const median = arrayWithZeros(dates.length);
           const percentiles95 = arrayWithZeros(dates.length);
+          const long = arrayWithZeros(dates.length);
+          const short = arrayWithZeros(dates.length);
 
           dataset.requests_over_time.buckets.forEach(backendData => {
             // Format Date
@@ -166,6 +170,8 @@ Meteor.methods({
             error[index] = backendData.response_status.buckets.error.doc_count;
             median[index] = backendData.percentiles_response_time.values['50.0'];
             percentiles95[index] = backendData.percentiles_response_time.values['95.0'];
+            long[index] = backendData.percentiles_response_time.values['75.0'];
+            short[index] = backendData.percentiles_response_time.values['25.0'];
           });
 
           requestPathsData[dataset.key] = {
@@ -176,6 +182,8 @@ Meteor.methods({
             error,
             median,
             percentiles95,
+            long,
+            short
           };
         });
       }
