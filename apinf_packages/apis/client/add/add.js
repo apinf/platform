@@ -16,7 +16,7 @@ import Apis from '../../collection';
 
 // variables to check placeholder values from Add API fieldset
 const apiNameFieldValue = 'e.g. Tampere Bus Service';
-const apiDescriptionFieldValue = 'e.g. Plan your journey across Tampere city by getting up-to-date bus information, including real-time vehicle location and inter zone routing. You can lookup bus timing by line and stoppage.';
+const apiDescriptionFieldValue = 'e.g. Plan your journey across Tampere city by getting up-to-date bus information, real-time vehicle location and inter zone routing. You can lookup bus times by line and stoppage.';
 const apiUrlFieldValue = 'e.g. https://tampere-bus-service.fi';
 
 Template.addApi.onCreated(function () {
@@ -45,7 +45,7 @@ Template.addApi.events({
   'click #api-name': function () {
     // on clicking field, placeholder value is removed.
     const field = document.getElementById('api-name');
-    if (field.placeholder === apiNameFieldValue){
+    if (field.placeholder === apiNameFieldValue) {
       field.placeholder = '';
     }
   },
@@ -59,7 +59,7 @@ Template.addApi.events({
   'click #api-description': function () {
     // on clicking field, placeholder value is removed.
     const field = document.getElementById('api-description');
-    if (field.placeholder === apiDescriptionFieldValue){
+    if (field.placeholder === apiDescriptionFieldValue) {
       field.placeholder = '';
     }
   },
@@ -73,7 +73,7 @@ Template.addApi.events({
   'click #api-url': function () {
     // on clicking field, placeholder value is removed.
     const field = document.getElementById('api-url');
-    if (field.placeholder === apiUrlFieldValue){
+    if (field.placeholder === apiUrlFieldValue) {
       field.placeholder = '';
     }
   },
