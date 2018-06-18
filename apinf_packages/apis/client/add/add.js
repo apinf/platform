@@ -15,9 +15,9 @@ import Branding from '/apinf_packages/branding/collection';
 import Apis from '../../collection';
 
 // variables to check placeholder values from Add API fieldset
-const apiNameFieldValue = "e.g. Tampere Bus Service";
-const apiDescriptionFieldValue = "e.g. Plan your journey across Tampere city by getting up-to-date bus information, including real-time vehicle location detection and inter zone routing. You can lookup bus timing by line and stoppage.";
-const apiUrlFieldValue = "e.g. https://tampere-bus-service.fi";
+const apiNameFieldValue = 'e.g. Tampere Bus Service';
+const apiDescriptionFieldValue = 'e.g. Plan your journey across Tampere city by getting up-to-date bus information, including real-time vehicle location and inter zone routing. You can lookup bus timing by line and stoppage.';
+const apiUrlFieldValue = 'e.g. https://tampere-bus-service.fi';
 
 Template.addApi.onCreated(function () {
   const instance = this;
@@ -42,44 +42,44 @@ Template.addApi.helpers({
 });
 
 Template.addApi.events({
-  'click #api-name': function(event) {
+  'click #api-name': function () {
     // on clicking field, placeholder value is removed.
-    const field = document.getElementById("api-name");
+    const field = document.getElementById('api-name');
     if (field.placeholder === apiNameFieldValue){
       field.placeholder = '';
     }
   },
-  'blur #api-name': function(event) {
+  'blur #api-name': function () {
     // If no field value is provided, placeholder value is restored on blur event
-    const field = document.getElementById("api-name");
+    const field = document.getElementById('api-name');
     if (field.placeholder === '') {
       field.placeholder = apiNameFieldValue;
     }
   },
-  'click #api-description': function(event) {
+  'click #api-description': function () {
     // on clicking field, placeholder value is removed.
-    const field = document.getElementById("api-description");
+    const field = document.getElementById('api-description');
     if (field.placeholder === apiDescriptionFieldValue){
       field.placeholder = '';
     }
   },
-  'blur #api-description': function(event) {
+  'blur #api-description': function () {
     // If no field value is provided, placeholder value is restored on blur event
-    const field = document.getElementById("api-description");
+    const field = document.getElementById('api-description');
     if (field.placeholder === '') {
       field.placeholder = apiDescriptionFieldValue;
     }
   },
-  'click #api-url': function(event) {
+  'click #api-url': function () {
     // on clicking field, placeholder value is removed.
-    const field = document.getElementById("api-url");
+    const field = document.getElementById('api-url');
     if (field.placeholder === apiUrlFieldValue){
       field.placeholder = '';
     }
   },
-  'blur #api-url': function(event) {
+  'blur #api-url': function () {
     // If no field value is provided, placeholder value is restored on blur event
-    const field = document.getElementById("api-url");
+    const field = document.getElementById('api-url');
     if (field.placeholder === '') {
       field.placeholder = apiUrlFieldValue;
     }
