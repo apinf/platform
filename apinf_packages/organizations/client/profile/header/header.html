@@ -12,6 +12,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container-fluid secondary-menu-block">
     <nav class="container secondary-menu-block-inner secondary-menu_navigation">
       <div class="organization-header-logo" id="organization-file-browse">
+        {{# if organization.currentUserCanManage }}
+          <span class="organization-header-logo_hover">
+            Upload new logo
+          </span>
+        {{/ if }}
         {{> viewOrganizationLogo organization=organization }}
       </div>
       <h1 id="organization-name" class="special-headings" style="font-size: 1.6em;color: #37474F;display: inline;float: left;margin-top: 18px;padding-left: 2rem;">
