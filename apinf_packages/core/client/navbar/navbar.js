@@ -131,6 +131,9 @@ Template.navbar.helpers({
     // By default allowing all user to add an API
     return true;
   },
+  currentUser () {
+    return Meteor.user();
+  },
 });
 
 Template.navbar.events({
