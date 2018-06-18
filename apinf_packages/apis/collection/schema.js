@@ -38,7 +38,7 @@ Apis.schema = new SimpleSchema({
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
     autoform: {
-      placeholder: "e.g. https://tampere-bus-service.fi",
+      placeholder: 'e.g. https://tampere-bus-service.fi',
     },
   },
   slug: {
