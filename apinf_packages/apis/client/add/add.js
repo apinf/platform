@@ -16,7 +16,9 @@ import Apis from '../../collection';
 
 // variables to check placeholder values from Add API fieldset
 const apiNameFieldValue = 'e.g. Tampere Bus Service';
-const apiDescriptionFieldValue = 'e.g. Plan your journey across Tampere city with latest bus information, real-time vehicle location and inter zone routing. You can lookup bus times by line and stoppage.';
+const apiDescriptionFieldValue = `e.g. Plan your journey across Tampere city with
+           latest bus information, real-time vehicle location and inter zone routing.
+           You can lookup bus times by line and stoppage.`; 
 const apiUrlFieldValue = 'e.g. https://tampere-bus-service.fi';
 
 Template.addApi.onCreated(function () {
