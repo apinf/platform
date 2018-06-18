@@ -1522,7 +1522,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
                                         'POST',
                                         newProxyBackendData.proxyId,
                                         newProxyBackendData.emq.settings.acl);
-
+        console.log('emqResponse', emqResponse);
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
@@ -1992,7 +1992,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         if (emqResponseError) {
           return errorMessagePayload(500, 'Settings update to EMQ proxy failed.');
         }
-
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
