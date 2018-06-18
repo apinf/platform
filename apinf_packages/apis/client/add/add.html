@@ -18,15 +18,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!--invisible auto-value field-->
           {{> afQuickField name='latestMonitoringStatusCode' value="-1" type="hidden"}}
           <fieldset>
-            {{> afQuickField name='name' id="api-name" placeholder="e.g. Tampere Bus Service" }}
+            {{> afQuickField name='name' id="api-name" }}
             <p class="field-description-text">
               {{_ 'addApi_nameFieldInfo' }}
             </p>
-            {{> afQuickField name='description' rows=2 id="api-description" placeholder="e.g. Plan your journey across Tampere city with latest bus information, real-time vehicle location and inter zone routing. You can lookup bus times by line and stoppage." }}
+            {{> afQuickField name='description' rows=2 id="api-description" }}
             <p class="field-description-text">
               {{_ 'addApi_descriptionFieldInfo' }}
             </p>
-            {{> afQuickField name='url' id="api-url" placeholder="e.g. https://tampere-bus-service.fi" }}
+            {{> afQuickField name='url' id="api-url" }}
             <p class="field-description-text">
               {{_ 'addApi_urlFieldInfo' }}
             </p>

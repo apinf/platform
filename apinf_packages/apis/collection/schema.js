@@ -18,12 +18,16 @@ Apis.schema = new SimpleSchema({
       // synchronization with proxy
       // distinct catalog entries
     unique: true,
+    autoform: {
+      placeholder: "e.g. Tampere Bus Service",
+    },
   },
   description: {
     type: String,
     max: 1000,
     autoform: {
       rows: 3,
+      placeholder: "e.g. Plan your journey across Tampere city with latest bus information, real-time vehicle location and inter zone routing. You can lookup bus times by line and stoppage.",
     },
     optional: true,
   },
@@ -31,6 +35,9 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
+    autoform: {
+      placeholder: "e.g. https://tampere-bus-service.fi",
+    },
   },
   slug: {
     type: String,
