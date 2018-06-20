@@ -542,7 +542,7 @@
   "organizationManagerForm_managerAlreadyExist_errorText": "User is already a manager of this organization.",
   "organizationManagerForm_sendingVerificationEmailFailed": "Sending verification email failed",
   "organizationManagerForm_invalidMailSetting_emailFailed": "Sending verification email failed:Invalid mail settings",
-  "organizationSettingsDelete_buttonText_delete": "Delete",
+  "organizationSettingsDelete_buttonText_delete": "Delete this organization",
   "organizationSettingsDelete_text_information": "The organization information will be removed and all APIs will be disconnected. This action cannot be undone.",
   "organizationSettingsDelete_title": "Delete Organization",
   "organizationSettingsDelete_panelTitle": "Delete",

@@ -12,13 +12,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <li><a href="#logo-and-cover" data-toggle="tab">Logo & Cover Image</a></li>
       <li><a href="#social" data-toggle="tab">Social Media Platforms</a></li>
       <li><a href="#contact-information" data-toggle="tab">Contact Information</a></li>
-      <li><a href="#danger-zone" data-toggle="tab">Delete Organization</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane active" id="about">
         {{> organizationSettingsGeneral organization=organization }}
+        <hr style="border-top: 1px solid #ddd;margin-right: -20px;margin-left: -20px;margin-top: 2em;margin-bottom: 2em;height:2px;">
+        {{> organizationSettingsDelete organization=organization }}
       </div>
       <div class="tab-pane fade" id="logo-and-cover">
         <div class="setting-section">
@@ -47,9 +48,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <div class="tab-pane fade" id="contact-information">
         {{> organizationSettingsContactInfo organization=organization }}
-      </div>
-      <div class="tab-pane fade" id="danger-zone">
-        {{> organizationSettingsDelete organization=organization }}
       </div>
     </div>
   </div>
