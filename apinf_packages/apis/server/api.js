@@ -1522,7 +1522,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
                                         'POST',
                                         newProxyBackendData.proxyId,
                                         newProxyBackendData.emq.settings.acl);
-        console.log('emqResponse', emqResponse);
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
