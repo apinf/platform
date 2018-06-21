@@ -112,6 +112,10 @@ Meteor.methods({
         // Store data about summary statistic numbers
         const requestNumber = analyticsData.requests_number.value;
         const medianResponseTime = analyticsData.median_response_time.values['50.0'];
+        const shortestResponseTime = analyticsData.median_response_time.values['0.0'];
+        const shortResponseTime = analyticsData.median_response_time.values['25.0'];
+        const longResponseTime = analyticsData.median_response_time.values['75.0'];
+        const longestResponseTime = analyticsData.median_response_time.values['100.0'];
         const uniqueUsers = analyticsData.unique_users.buckets.length;
 
         // Store data about summary response status codes
@@ -130,6 +134,10 @@ Meteor.methods({
           const statusCodes = dataset.response_status.buckets;
           // Get data about response time in dimension
           const percentile50ResponseTime = dataset.percentiles_response_time.values['50.0'];
+          const percentileShortestResponseTime = dataset.percentiles_response_time.values['0.0'];
+          const percentileShortResponseTime = dataset.percentiles_response_time.values['25.0'];
+          const percentileLongResponseTime = dataset.percentiles_response_time.values['75.0'];
+          const percentileLontestResponseTime = dataset.percentiles_response_time.values['100.0'];
           const percentile95ResponseTime = dataset.percentiles_response_time.values['95.0'];
 
           return {
@@ -139,6 +147,10 @@ Meteor.methods({
             failCallsCount: statusCodes.fail.doc_count,
             errorCallsCount: statusCodes.error.doc_count,
             medianResponseTime: parseInt(percentile50ResponseTime, 10) || 0,
+            shortestResponseTime: parseInt(percentileShortestResponseTime, 10) || 0,
+            shortResponseTime: parseInt(percentileShortResponseTime, 10) || 0,
+            longResponseTime: parseInt(percentileLongResponseTime, 10) || 0,
+            longestResponseTime: parseInt(percentileLongResponseTime, 10) || 0,
             percentile95ResponseTime: parseInt(percentile95ResponseTime, 10) || 0,
           };
         });
@@ -179,6 +191,10 @@ Meteor.methods({
           prefix: frontedPrefix,
           requestNumber,
           medianResponseTime: parseInt(medianResponseTime, 10) || 0,
+          shortestResponseTime: parseInt(shortestResponseTime, 10) || 0,
+          shortResponseTime: parseInt(shortResponseTime, 10) || 0,
+          longResponseTime: parseInt(longResponseTime, 10) || 0,
+          longestResponseTime: parseInt(longestResponseTime, 10) || 0,
           uniqueUsers,
           successCallsCount: responseStatusCode.success.doc_count,
           redirectCallsCount: responseStatusCode.redirect.doc_count,

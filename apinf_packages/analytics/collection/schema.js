@@ -83,6 +83,22 @@ AnalyticsData.schema = new SimpleSchema({
     type: Number,
     optional: false,
   },
+  shortestResponseTime: {
+    type: Number,
+    optional: false,
+  },
+  shortResponseTime: {
+    type: Number,
+    optional: false,
+  },
+  longResponseTime: {
+    type: Number,
+    optional: false,
+  },
+  longestResponseTime: {
+    type: Number,
+    optional: false,
+  },
   uniqueUsers: {
     type: Number,
     optional: false,

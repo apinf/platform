@@ -64,6 +64,10 @@ Meteor.methods({
             fail: { $push: { date: '$date', value: '$requestPathsData.failCallsCount' } },
             error: { $push: { date: '$date', value: '$requestPathsData.errorCallsCount' } },
             medianTime: { $push: { date: '$date', value: '$requestPathsData.medianResponseTime' } },
+            shortest: { $push: { date: '$date', value: '$requestPathsData.shortest' } },
+            short: { $push: { date: '$date', value: '$requestPathsData.short' } },
+            long: { $push: { date: '$date', value: '$requestPathsData.long' } },
+            longest: { $push: { date: '$date', value: '$requestPathsData.longest' } },
             percentiles95Time: { $push: {
               date: '$date',
               value: '$requestPathsData.percentile95ResponseTime',
@@ -75,6 +79,7 @@ Meteor.methods({
       /* eslint-disable arrow-body-style */
       dataset._id.paths.forEach((path, index) => {
         // Fill data for each request path
+        console.log(dataset)
         requestPathsData[path] = {
           dates: dataset.success.map(x => x.date),
           success: dataset.success.map(x => x.value[index] || 0),
@@ -82,6 +87,10 @@ Meteor.methods({
           fail: dataset.fail.map(x => x.value[index] || 0),
           error: dataset.error.map(x => x.value[index] || 0),
           median: dataset.medianTime.map(x => x.value[index] || 0),
+          shortest: dataset.shortest.map(x => x.value[index] || 0),
+          short: dataset.short.map(x => x.value[index] || 0),
+          long: dataset.long.map(x => x.value[index] || 0),
+          longest: dataset.longest.map(x => x.value[index] || 0),
           percentiles95: dataset.percentiles95Time.map(x => x.value[index] || 0),
         };
       });
