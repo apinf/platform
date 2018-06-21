@@ -61,7 +61,7 @@ Template.responseTimeTimeline.onRendered(function () {
         display: true,
         labels: {
           boxWidth: 20,
-        }
+        },
       },
       scales: {
         xAxes: [
@@ -106,7 +106,7 @@ Template.responseTimeTimeline.onRendered(function () {
     const labels = selectedPathData.dates.map(date => {
       return moment(date).format(localeDateFormat);
     });
-    
+
     // Update labels & data
     instance.chart.data = {
       labels,
