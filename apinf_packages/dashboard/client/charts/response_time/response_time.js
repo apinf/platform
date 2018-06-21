@@ -58,10 +58,10 @@ Template.responseTimeTimeline.onRendered(function () {
 
     options: {
       legend: {
-            display: true,
-            labels: {
-                 boxWidth: 20,
-            }
+        display: true,
+        labels: {
+          boxWidth: 20,
+        }
       },
       scales: {
         xAxes: [

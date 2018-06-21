@@ -150,7 +150,7 @@ Meteor.methods({
             shortestResponseTime: parseInt(percentileShortestResponseTime, 10) || 0,
             shortResponseTime: parseInt(percentileShortResponseTime, 10) || 0,
             longResponseTime: parseInt(percentileLongResponseTime, 10) || 0,
-            longestResponseTime: parseInt(percentileLongResponseTime, 10) || 0,
+            longestResponseTime: parseInt(percentileLontestResponseTime, 10) || 0,
             percentile95ResponseTime: parseInt(percentile95ResponseTime, 10) || 0,
           };
         });

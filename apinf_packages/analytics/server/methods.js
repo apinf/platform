@@ -79,7 +79,6 @@ Meteor.methods({
       /* eslint-disable arrow-body-style */
       dataset._id.paths.forEach((path, index) => {
         // Fill data for each request path
-        console.log(dataset)
         requestPathsData[path] = {
           dates: dataset.success.map(x => x.date),
           success: dataset.success.map(x => x.value[index] || 0),
