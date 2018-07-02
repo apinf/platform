@@ -26,7 +26,7 @@
   "addApi_enterApiDetails": "Enter API details",
   "addApi_descriptionFieldInfo": "The description will appear in in the API profile and API card in the catalog. Briefly describe what your API does and what information can user access using this API.",
   "addApi_nameFieldInfo": "The name will appear in the API profile, API catalog and API Dashboard. Please provide a meaningful name to understand the type of the API at a glance.",
-  "addApi_urlFieldInfo": "Provide the base path of your API as a valid URL starting with 'https://..'. This will appear at proxy settings of the API profile and cannot be changed.",
+  "addApi_urlFieldInfo": "Provide the base path of your API as a valid URL starting with 'https://..'. This will appear at proxy settings of the API profile.",
   "addApi_ownerHelpText": "Your API will appear in the catalog with public visibility. You can change the visibility from the settings tab in the API profile.",
   "addApi_separateLineTitle_or": "or",
   "addApi_sectionTitle_importOpenApiSpecification": "Import OpenAPI Specification",
