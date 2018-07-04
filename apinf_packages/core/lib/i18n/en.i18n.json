@@ -198,7 +198,7 @@
   "apinf_noproxybackend_error": "Error: No proxy backend found",
   "apinf_usernotloggedin_error": "Error: Could not find signed-in user.",
   "apiMonitoring_panelTitle_Monitoring": "API Health Monitoring",
-  "apiMonitoring_helpIcon_text": "Monitoring is a highly recommended functionality to keep enabled in your API to let API Management to perform healthy check that API is alive. API monitoring is done using HTTP requests. Choose one of your APIs GET method so that accidental data insertion in your API is prevented. When monitoring is setup, you will see a dot next to your API name indicating the health of your API based on calls made in monitoring.",
+  "apiMonitoring_helpIcon_text": "API Monitoring indicates current state of your API. API monitoring is done using HTTP requests. Choose one of your APIs GET method so that accidental data insertion in your API is prevented. When monitoring is setup, you will see a dot next to your API name indicating the health of your API based on calls made in monitoring.  Green = OK, Red = not OK.",
   "apiMonitoring_saveButton_text": "Save",
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
