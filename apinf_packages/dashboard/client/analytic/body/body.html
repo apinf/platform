@@ -40,16 +40,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{> spinner}}
                   {{/ if }}
                 </div>
-
-                {{# if analyticsData }}
-                <div class="form-group">
-                  <i class="mdi mdi-{{ arrowDirection 'requests' }}"></i>
-                  <!-- Keep the space symbol to set SPAN element a height -->
-                  <span>
-                    {{ summaryComparing 'requests' }}&nbsp;
-                  </span>
-                </div>
-                {{/ if }}
               </div>
             </div>
           </div>
@@ -73,15 +63,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{> spinner}}
                   {{/ if }}
                 </div>
-                {{# if analyticsData }}
-                <div class="form-group">
-                  <i class="mdi mdi-{{ arrowDirection 'time' }}"></i>
-                  <!-- Keep the space symbol to set SPAN element a height -->
-                  <span>
-                    {{ summaryComparing 'time' }}&nbsp;
-                  </span>
-                </div>
-                {{/ if }}
               </div>
             </div>
           </div>
@@ -109,15 +90,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   {{> spinner}}
                   {{/ if }}
                 </div>
-                {{# if analyticsData }}
-                <div class="form-group">
-                  <i class="mdi mdi-{{ arrowDirection 'users' }}"></i>
-                  <!-- Keep the space symbol to set SPAN element a height -->
-                  <span>
-                    {{ summaryComparing 'users' }}&nbsp;
-                  </span>
-                </div>
-                {{/ if }}
               </div>
             </div>
           </div>
@@ -205,4 +177,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
   </div>
+  <span style="color: #657786;margin-top: 10px;float: right;font-size: 10px;">
+    {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
+  </span>
 </template>

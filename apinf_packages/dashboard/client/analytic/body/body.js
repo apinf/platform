@@ -43,6 +43,7 @@ Template.apiAnalyticPageBody.onCreated(function () {
   instance.allRequestPaths = new ReactiveVar();
   instance.frequentUsersResponse = new ReactiveVar();
   instance.errorsStatisticsResponse = new ReactiveVar();
+  instance.lastUpdateTime = new ReactiveVar();
 
   instance.autorun(() => {
     const timeframe = FlowRouter.getQueryParam('timeframe');
@@ -93,6 +94,11 @@ Template.apiAnalyticPageBody.onCreated(function () {
         if (error) throw new Error(error);
 
         instance.errorsStatisticsResponse.set(dataset);
+      });
+
+      Meteor.call('lastUpdateTime', { proxyBackendId }, (error, result) => {
+        // Save value
+        instance.lastUpdateTime.set(result);
       });
   });
 
@@ -280,5 +286,15 @@ Template.apiAnalyticPageBody.helpers({
     const timeframe = FlowRouter.getQueryParam('timeframe');
     // Display text about "Average unique users" for each period except "Today"
     return timeframe !== '12';
+  },
+  lastUpdateTime () {
+    const instance = Template.instance();
+
+    return instance.lastUpdateTime.get();
+  },
+  displayLastUpdateTime () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Not display info about Last update if selected "Yesterday" or Today
+    return timeframe !== '48' && timeframe !== '12';
   },
 });

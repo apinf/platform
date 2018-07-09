@@ -11,9 +11,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
     <div class="container">
       {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
-      <span style="color: #657786;margin-top: 10px;float: right;font-size: 10px;">
-        {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
-      </span>
     </div>
     {{ else }}
     {{> spinner }}

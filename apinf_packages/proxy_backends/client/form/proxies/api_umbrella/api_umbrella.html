@@ -82,20 +82,6 @@
 
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
 
-    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">API Key</label>
-    <!-- Disable API key checkbox -->
-    {{> afQuickField
-      name="apiUmbrella.settings.disable_api_key"
-      type="boolean-checkbox"
-      id="disable-apikey-box"
-    }}
-    <!-- help text -->
-    <p class="help-block" style="margin-top: -1em;">
-      {{_ "proxyBackendForm_disableApiKey_helpText" }}
-    </p>
-
-    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
-
     <!-- Rate limiting -->
     <div id="rate-limiting">
       <div class="col-md-12" id="rate-limit-mode">
@@ -115,5 +101,42 @@
       </div>
       {{/if }}
     </div>
+
+    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+
+    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">API Key</label>
+    <!-- Disable API key checkbox -->
+    {{> afQuickField
+      name="apiUmbrella.settings.disable_api_key"
+      type="boolean-checkbox"
+      id="disable-apikey-box"
+    }}
+    <!-- help text -->
+    <p class="help-block" style="margin-top: -1em;">
+      {{_ "proxyBackendForm_disableApiKey_helpText" }}
+    </p>
+
+    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+
+    <div data-toggle="collapse" data-target="#advance-proxy-settings">
+      <label style="color: #4c6072;font-weight: 500;font-size:1.6rem;">Advance settings</label>
+      <i class="mdi mdi-chevron-down mdi-18px pull-right"></i>
+    </div>
+
+    <div id="advance-proxy-settings" class="collapse" style="margin-top: 0.5em;">
+
+      <!-- Query String Parameters -->
+      {{> afQuickField
+        name="apiUmbrella.settings.append_query_string"
+        placeholder="param1=value& param2=value"
+      }}
+
+      <!-- Request Headers -->
+      {{> afQuickField
+        name="apiUmbrella.settings.headers_string"
+        placeholder="X-Example-Header: value"
+      }}
+    </div>
+    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;margin-top: 0.5em;">
   </div>
 </template>
