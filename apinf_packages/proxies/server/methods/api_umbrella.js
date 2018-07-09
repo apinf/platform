@@ -18,6 +18,7 @@ import _ from 'lodash';
 import Apis from '/apinf_packages/apis/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import ApiKeys from '/apinf_packages/api_keys/collection';
 
 // APInf imports
 import hasValidApiUmbrellaSettings from '/apinf_packages/proxies/helper_functions/api_umbrella';
@@ -82,6 +83,8 @@ Meteor.methods({
 
       const umbrellaUser = response.data.user;
 
+      console.log(umbrellaUser)
+
       // Return created umbrellaUser
       return umbrellaUser;
     } catch (error) {
@@ -92,6 +95,65 @@ Meteor.methods({
       );
     }
   },
+
+  deleteApiUmbrellaUser (currentUser, proxyId) {
+
+    /*
+    Create API key & attach it for given user,
+    Might throw errors, catch on client callback
+    */
+
+    // Make sure currentUser is a String
+    check(currentUser, Object);
+
+    // Make sure proxyId is a String
+    check(proxyId, String);
+
+    // Create apiUmbrellaWeb instance
+    const umbrella = Meteor.call('createApiUmbrellaWeb', proxyId);
+    // Create API Umbrella user object with required fields
+    
+    if (proxyId) {
+     
+      // Get API Key document
+      //const userApiId = ApiKeys.findOne({ proxyId: proxyId });
+      const userApiKey = ApiKeys.findOne({ proxyId: proxyId });
+    
+      // Check that Umbrella API key exists
+      if (userApiKey && userApiKey.apiUmbrella) {
+        // Get the API Key, from API key document
+        console.log("************************************");
+        console.log(userApiKey);
+        
+        apiId = userApiKey.apiUmbrella.id;
+       
+            // Try to create user on API Umbrella
+        try {
+          // Add user on API Umbrella
+          console.log("************************************");
+          console.log(umbrella.adminApi.v1.apiUsers)
+          const response = umbrella.adminApi.v1.apiUsers.deleteUser(apiId);
+          console.log("************************************");
+          console.log(response);
+          console.log(response.data);
+          console.log(response.data.user);
+          const umbrellaUser = response.data.user;
+
+          // Return created umbrellaUser
+          return umbrellaUser;
+        } catch (error) {
+          // Meteor Error (User create failed on Umbrella)
+          throw new Meteor.Error(
+            'umbrella-createuser-error',
+            TAPi18n.__('umbrella_createuser_error')
+          );
+        }
+
+
+      }
+    }
+  },
+
   createApiBackendOnApiUmbrella (apiBackend, proxyId) {
     // Make sure apiBackend is an Object
     check(apiBackend, Object);
