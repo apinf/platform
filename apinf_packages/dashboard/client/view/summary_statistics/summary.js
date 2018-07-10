@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
- This file is covered by the EUPL license.
- You may obtain a copy of the licence at
- https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { ReactiveDict } from 'meteor/reactive-dict';
@@ -173,19 +173,7 @@ Template.dashboardSummaryStatistic.helpers({
     // Otherwise: display all data
     return Template.currentData().analyticsData.length;
   },
+  localeString (number) {
+    return number.toLocaleString();
+  },
 });
-
-// Template.dashboardSummaryStatistic.events({
-//   'click [data-id]': (event, templateInstance) => {
-//     const target = event.currentTarget;
-//
-//     // Get status of specified Overview template (shown or not)
-//     const display = templateInstance.displayOverview.get(target.dataset.id);
-//
-//     // Inverse the value
-//     templateInstance.displayOverview.set(target.dataset.id, !display);
-//
-//     // Display or not the box-shadow for table line
-//     target.classList.toggle('open');
-//   },
-// });
