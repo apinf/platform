@@ -47,6 +47,8 @@ set -u
 # Let's display everything on stderr.
 exec 1>&2
 
+df -h
+
 
 UNAME=$(uname)
 # Check to see if it starts with MINGW.
@@ -179,9 +181,11 @@ do
 done
 set -e
 
+df -h
+
 # bomb out if it didn't work, eg no net
 test -e "${TARBALL_FILE}"
-bsdtar -xzf "$TARBALL_FILE" -C "$INSTALL_TMPDIR" -o
+tar -xzf "$TARBALL_FILE" -C "$INSTALL_TMPDIR" -o
 
 test -x "${INSTALL_TMPDIR}/.meteor/meteor"
 mv "${INSTALL_TMPDIR}/.meteor" "$HOME"
