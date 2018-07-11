@@ -7,6 +7,8 @@
 
 set -ev
 
+echo "kissa1"
+
 docker build -t apinf/platform:$DOCKER_TAG .
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
