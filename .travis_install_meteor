@@ -47,7 +47,12 @@ set -u
 # Let's display everything on stderr.
 exec 1>&2
 
+echo "df -h starts, woow!"
 df -h
+echo "df -h ends, woow!"
+echo "another df -h starts, woow!"
+echo df -h
+echo "another df -h ends, woow!"
 
 
 UNAME=$(uname)
@@ -181,7 +186,12 @@ do
 done
 set -e
 
+echo "df -h starts, woow!"
 df -h
+echo "df -h ends, woow!"
+echo "another df -h starts, woow!"
+echo df -h
+echo "another df -h ends, woow!"
 
 # bomb out if it didn't work, eg no net
 test -e "${TARBALL_FILE}"
