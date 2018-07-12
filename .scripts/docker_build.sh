@@ -14,9 +14,12 @@ sudo -i export tar='bsdtar'
 tar --version
 bsdtar --version
 
-echo "docker_build.sh - backup tar (i've no idea if this is needed) create symlink so that bsdtar is used"
+#docker_build.sh - backup tar (i've no idea if this is needed) create symlink so that bsdtar is used
+which tar
+which bsdtar
 sudo cp $(which tar) $(which tar)~
 sudo ln -sf $(which bsdtar) $(which tar)
+tar --version
 
 docker build -t apinf/platform:$DOCKER_TAG .
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
@@ -26,5 +29,5 @@ then
   docker push apinf/platform:$DOCKER_TAG
 fi
 
-echo "docker_build.sh - restore old tar"
+#docker_build.sh - restore old tar
 sudo mv $(which tar)~ $(which tar)
