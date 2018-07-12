@@ -11,7 +11,7 @@ echo "docker_build.sh - kissa1"
 
 sudo apt-get install -y --no-install-recommends bsdtar
 sudo -i export tar='bsdtar'
-tar -v
+tar --version
 
 echo "df -h starts, woow!"
 df -h
