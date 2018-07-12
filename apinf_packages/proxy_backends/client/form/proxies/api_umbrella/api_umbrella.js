@@ -25,19 +25,13 @@ Template.apiUmbrellaProxyForm.helpers({
   apiPortHelper () {
     // Get API information
     const api = this.api;
-
     // Construct URL object for API URL
     const apiUrl = new URI(api.url);
-
-    console.log(apiUrl.host());
-    //console.log(api);
-
     const apiId = this.api._id;
+    const proxyBackend = ProxyBackends.findOne({ apiId });
 
-    proxyBackend = ProxyBackends.findOne({ apiId });
-
-    if(proxyBackend.apiUmbrella.servers[0].port){
-      return proxyBackend.apiUmbrella.servers[0].port
+    if (proxyBackend.apiUmbrella.servers[0].port) {
+      return proxyBackend.apiUmbrella.servers[0].port;
     }
 
     // Return the API URL protocol
