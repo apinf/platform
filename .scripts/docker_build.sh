@@ -16,10 +16,7 @@ bsdtar --version
 
 echo "df -h starts, woow!"
 df -h
-echo "df -h ends, woow!"
-echo "another df -h starts, woow!"
-echo df -h
-echo "another df -h ends, woow!"
+
 docker build -t apinf/platform:$DOCKER_TAG .
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
