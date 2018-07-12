@@ -9,8 +9,8 @@ set -ev
 
 echo "docker_build.sh - kissa1"
 
-apt-get install -y --no-install-recommends bsdtar
-export tar='bsdtar'
+sudo apt-get install -y --no-install-recommends bsdtar
+sudo export tar='bsdtar'
 
 echo "df -h starts, woow!"
 df -h
