@@ -20,23 +20,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{/ each }}
     </select>
   </div>
-    <label for="sort" class="dashboard-form-label">
-      Sort by
-    </label>
-    <select name="sort" class="form-control toolbar-select" style="margin-right:10px;">
-      <option value="name">
-        {{_ 'dashboardToolbar_optionText_apiName' }}
-      </option>
-      <option value="calls">
-        {{_ 'dashboardToolbar_optionText_calls' }}
-      </option>
-      <option value="users">
-        {{_ 'dashboardToolbar_optionText_users' }}
-      </option>
-      <option value="time">
-        {{_ 'dashboardToolbar_optionText_time' }}
-      </option>
-    </select>
   {{/ unless }}
   {{/ if }}
   {{> dateRangePicker }}

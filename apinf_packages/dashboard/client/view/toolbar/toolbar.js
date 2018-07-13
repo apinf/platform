@@ -9,6 +9,10 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+// Collection imports
+import Apis from '/apinf_packages/apis/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+
 Template.dashboardToolbar.helpers({
   selectedProxy () {
     const proxyId = FlowRouter.getQueryParam('proxy_id');
@@ -20,8 +24,13 @@ Template.dashboardToolbar.helpers({
     return ProxyBackends.find().count() === 1;
   },
   managedApisCount () {
+    const apis = Apis.find();
+
     // Return count of managed APIs
-    return Apis.find().count();
+    if (apis) {
+      return apis.count();
+    }
+    return false;
   },
 });
 
