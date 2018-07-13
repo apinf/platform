@@ -456,7 +456,7 @@
   "manageApiDocumentationModal_addDocumentation_title": "Add OpenAPI Specification",
   "manageApiDocumentationModal_helpText_useHttpsProtocol": "This application platform uses HTTPS. API requests from documentation will not work, if API uses HTTP.",
   "manageApiDocumentationModal_ToolTip_Message": "Maximum 8 external documentation links are allowed. Please delete from existing ones if you wish to add a new one.",
-  "apiAnalyticPageBody_title_mostUsers": "Most Frequent Users",
+  "apiAnalyticPageBody_title_mostUsers": "Most Frequent Developers",
   "mostFrequentUsersTable_columnTitle_user": "User's API Key",
   "mostFrequentUsersTable_columnTitle_calls": "Calls",
   "mostFrequentUsersTable_columnTitle_path": "Request path",
