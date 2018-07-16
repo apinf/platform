@@ -30,7 +30,7 @@ Template.apiUmbrellaProxyForm.helpers({
     const apiId = this.api._id;
     const proxyBackend = ProxyBackends.findOne({ apiId });
 
-    if (proxyBackend.apiUmbrella.servers[0].port) {
+    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.servers[0].port) {
       return proxyBackend.apiUmbrella.servers[0].port;
     }
 
