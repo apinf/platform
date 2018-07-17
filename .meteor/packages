@@ -13,7 +13,6 @@ aldeed:autoform-bs-button-group-input
 aldeed:collection2
 aldeed:simple-schema
 aldeed:template-extension
-apinf:accounts-admin-ui
 apinf:accounts-fiware@0.1.1
 apinf:autoform-bs-datepicker
 apinf:fiware@0.1.1
@@ -95,3 +94,4 @@ aldeed:autoform-select2
 natestrauser:select2
 meteorhacks:aggregate
 apinf:api-umbrella
+apinf:accounts-admin-ui
