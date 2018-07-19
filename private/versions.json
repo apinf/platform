@@ -1,5 +1,6 @@
 {
-  "timestamp": "29-08-2014 23:16",
+  "version": "3.4",
   "branch": "master",
-  "commit": "3332f6dcbde57105a8dc353e5e878651cab89856"
+  "commit": "3332f6dcbde57105a8dc353e5e878651cab89856",
+  "tag": "1.2" 
 }

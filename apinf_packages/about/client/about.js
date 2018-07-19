@@ -1,19 +1,12 @@
 // Meteor packages imports
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-
-Template.about.helpers({
-  showVersion () {
-  	return 1.2;
-  },
-  showBranch () {
-    return  1.2;
-  },
-  showCommit () {
-    return  1.2
-  },
-  showTag () {
-    return  1.2
-  }
+Template.aboutApinf.onRendered(() => {
+  Meteor.call('fetchVersionData', (error, result) => {
+    $('#show_version').text(result.version);
+    $('#show_branch').text(result.branch);
+    $('#show_commit').text(result.commit);
+    $('#show_tag').text(result.tag);
+  });
 });
