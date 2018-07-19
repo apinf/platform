@@ -23,6 +23,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
       <ul class="nav navbar-nav" id="main-navbar">
         {{# if currentUser }}
+          <li class="{{ isActiveRoute 'overview' }} main-links">
+            <a href="{{ pathFor 'overview' }}" id="overview-button">
+              Overview
+            </a>
+          </li>
+        {{/ if }}
+        {{# if currentUser }}
           {{# if proxyIsDefined }}
             {{# if userCanViewDashboard }}
               <li class="{{ isActiveRoute 'dashboardPage' }} main-links">
