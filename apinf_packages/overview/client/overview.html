@@ -13,7 +13,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </li>
     </ul>
   </div>
-  <div class="container" id="account-overview">
+  <div class="container slide-up-animation" id="account-overview">
     <div class="row">
       <div class="col-md-8" id="account-overview_statistics">
         <div class="block-wrapper" style="height:300px;">
@@ -32,6 +32,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-md-12" id="account-overview_apis">
         <div class="block-wrapper" style="height:150px;">
           <h2 style="margin-top: 0;margin-bottom: 0;font-size: 16px;">Your APIs</h2>
+          <a href="{{ pathFor 'addApi' }}" class="btn btn-success pull-right" style="margin-top: -1.4em;">
+            Add new API
+          </a>
           <p style="color: #6d859e;">Latest updates</p>
         </div>
       </div>
