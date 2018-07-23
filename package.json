@@ -26,7 +26,6 @@
     "js-yaml": "^3.8.1",
     "json2csv": "^3.11.1",
     "limax": "^1.6.0",
-    "load-grunt-tasks": "^4.0.0",
     "locale-compare-polyfill": "0.0.2",
     "lodash": "^4.17.4",
     "markdown-it": "^8.4.1",
