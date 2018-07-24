@@ -49,7 +49,7 @@ MonitoringData.schema = new SimpleSchema({
     optional: true,
   },
   'responses.$.date': {
-    type: String,
+    type: Date,
     optional: true,
   },
   'responses.$.server_status_code': {

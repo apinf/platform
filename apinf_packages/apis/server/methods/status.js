@@ -27,6 +27,7 @@ Meteor.methods({
       // Create a monitoring data
       const monitoringData = {
         date: new Date(),
+        server_status_code: serverStatusCode,
       };
 
       // Update an api status
