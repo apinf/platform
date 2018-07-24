@@ -30,6 +30,7 @@ Meteor.methods({
         server_status_code: serverStatusCode,
       };
 
+
       // Update an api status
       Apis.update(apiId, { $set: { latestMonitoringStatusCode: serverStatusCode } });
 
