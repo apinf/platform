@@ -8,8 +8,8 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 FlowRouter.route('/overview', {
-  name: 'accountOverview',
+  name: 'overview',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'accountOverview' });
+    BlazeLayout.render('masterLayout', { main: 'overview' });
   },
 });
