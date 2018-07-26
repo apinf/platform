@@ -5,8 +5,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
-import { MonitoringSettings } from './';
-import { MonitoringData } from './';
+
+import { MonitoringSettings, MonitoringData } from './';
 
 MonitoringSettings.allow({
   insert (userId, data) {
@@ -39,31 +39,18 @@ MonitoringSettings.allow({
 });
 
 MonitoringData.allow({
-  insert (apiId) {
-    // Only allow API Managers or Administrators to insert
-
+  insert () {
     // Get API document
-    const api = Apis.findOne(apiId);
-
-    // Check if current user can insert the monitoring settings and return this value
     return true;
   },
   update (apiId) {
-    // Only allow API Managers or Administrators to update
-
     // Get API document
     const api = Apis.findOne(apiId);
-
-    // Check if current user can edit the monitoring settings and return this value
-    return true;
+    return api && true;
   },
   remove (apiId) {
-    // Only allow API Managers or Administrators to remove
-
     // Get API document
     const api = Apis.findOne(apiId);
-
-    // Check if current user can delete the monitoring settings and return this value
-    return true;
+    return api && true;
   },
 });
