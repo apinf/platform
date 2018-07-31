@@ -11,6 +11,11 @@ import { check } from 'meteor/check';
 import Apis from '/apinf_packages/apis/collection';
 import { MonitoringData } from '/apinf_packages/monitoring/collection';
 
+Meteor.publish('getApiStatuRecordsData', (apiId) => {
+  // Find all API Backends
+  return MonitoringData.find({apiId: apiId});
+});
+
 Meteor.methods({
   getApiStatus (apiId, url) {
     // Make sure apiId is a string

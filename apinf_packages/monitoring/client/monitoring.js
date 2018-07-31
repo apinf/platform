@@ -8,6 +8,8 @@ import { Template } from 'meteor/templating';
 
 // Collection imports
 import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
+import { MonitoringData } from '/apinf_packages/monitoring/collection';
+import Apis from '/apinf_packages/apis/collection';
 
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
@@ -18,11 +20,15 @@ Template.apiMonitoring.onCreated(function () {
 
   // Subscribe on Monitoring collection
   instance.subscribe('monitoringSettings', apiId);
+  instance.subscribe('getApiStatuRecordsData', apiId);
+
 });
 
 Template.apiMonitoring.onRendered(() => {
+
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
+
 });
 
 Template.apiMonitoring.helpers({
@@ -43,11 +49,18 @@ Template.apiMonitoring.helpers({
 
     // Look for existing monitoring document for this API
     const existingSettings = MonitoringSettings.findOne({ apiId });
-
+    
     if (existingSettings) {
       return 'update';
     }
 
     return 'insert';
   },
+  apiStatusData(){
+
+    const apiId = this.api._id;
+    const monitoringDatas = MonitoringData.findOne({apiId: apiId});
+    return monitoringDatas.responses;
+    
+  }
 });

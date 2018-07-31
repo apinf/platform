@@ -28,6 +28,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{> apiFeedback api=api feedbackItems=feedbackItems }}
         </div> <!-- /api-feedback -->
 
+        <div id="api-monitoring" class="tab-pane fade">
+         {{> apiMonitoring api=api }}
+        </div> <!-- /api-monitoring -->
+
         {{# if currentUser }}
           {{# if api.currentUserCanManage }}
             <div id="api-export" class="tab-pane fade">
