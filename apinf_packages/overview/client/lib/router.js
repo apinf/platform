@@ -13,3 +13,17 @@ FlowRouter.route('/overview', {
     BlazeLayout.render('masterLayout', { main: 'overview' });
   },
 });
+
+FlowRouter.route('/overview/plan', {
+  name: 'plan',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'plan' });
+  },
+});
+
+FlowRouter.route('/plans', {
+  name: 'plans',
+  action () {
+    BlazeLayout.render('masterLayout', { main: 'plans' });
+  },
+});
