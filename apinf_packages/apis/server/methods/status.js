@@ -12,8 +12,14 @@ import Apis from '/apinf_packages/apis/collection';
 import { MonitoringData } from '/apinf_packages/monitoring/collection';
 
 Meteor.publish('getApiStatuRecordsData', (apiId) => {
+  // Make sure apiId is a string
+  check(apiId, String);
   // Find all API Backends
-  return MonitoringData.find({apiId: apiId});
+  const startDate = new Date();
+  const lastDate = new Date();
+  lastDate.setDate(lastDate.getDate() - 2);
+  const query = { responses: { $elemMatch: { date: { $gte: startDate, $lte: lastDate } } } };
+  return MonitoringData.find({ apiId }, query);
 });
 
 Meteor.methods({
