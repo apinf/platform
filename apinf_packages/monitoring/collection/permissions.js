@@ -40,7 +40,6 @@ MonitoringSettings.allow({
 
 MonitoringData.allow({
   insert () {
-    // Get API document
     return true;
   },
   update (apiId) {

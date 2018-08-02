@@ -11,14 +11,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       Historical data on API availability
     </p>
     <table id="rtable">
-        <tr>
-          <th>Time</th>
-          <th>Status</th>
-          <th>Details</th>
-        </tr>
+      <tr>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Details</th>
+      </tr>
       <tbody>
-          {{# each apiStatusData }}
-        <tr>
+        {{# each apiStatusData }}
+          <tr>
             <td>{{ this.date }}</td>
             <td>
               {{# if apiStatusCode (this.server_status_code) }}
@@ -30,13 +30,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{/ if}}
             </td>
             <td>{{ this.server_status_code }}</td>
-        </tr>
-          {{/ each }}
+          </tr>
+        {{/ each }}
       </tbody>
     </table>
     
     <hr class="header-line">
-  {{/ if }}
+
+  {{/if }}
 
   <h3 class="panel-heading">
     {{_ "apiMonitoring_panelTitle_Monitoring" }}

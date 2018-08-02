@@ -18,7 +18,7 @@ Template.apiMonitoring.onCreated(function () {
 
   // Subscribe on Monitoring collection
   instance.subscribe('monitoringSettings', apiId);
-  instance.subscribe('getApiStatuRecordsData', apiId);
+  instance.subscribe('getApiStatuRecordData', apiId);
 });
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
@@ -50,10 +50,12 @@ Template.apiMonitoring.helpers({
     return 'insert';
   },
   apiStatusData () {
-    // Get API ID
     const apiId = this.api._id;
-    const monitoringDatas = MonitoringData.findOne({ apiId });
-    return monitoringDatas.responses;
+    const monitoringData = MonitoringData.findOne({ apiId });
+    if (monitoringData) {
+      return monitoringData.responses;
+    }
+    return [];
   },
   apiStatusCode (code) {
     return code === '200';
