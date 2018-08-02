@@ -45,7 +45,7 @@ export default function timelineChartsRequest (requestPath, dateRange) {
                 percentiles_response_time: {
                   percentiles: {
                     field: 'response_time',
-                    percents: [100, 95, 50, 75, 25, 0],
+                    percents: [100, 50, 75, 25, 0],
                   },
                 },
                 // Get status codes per each day

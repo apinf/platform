@@ -67,7 +67,7 @@ export default function aggregatedData (filtersPaths, fromDate, toDate) {
                 percentiles_response_time: {
                   percentiles: {
                     field: 'response_time',
-                    percents: [95, 50],
+                    percents: [100, 50, 75, 25, 0],
                   },
                 },
                 // Get status codes
