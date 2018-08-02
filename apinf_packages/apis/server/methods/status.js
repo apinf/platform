@@ -17,7 +17,7 @@ Meteor.publish('getApiStatuRecordData', (apiId) => {
   // Find all API Backends
   const startDate = new Date();
   const lastDate = new Date();
-  lastDate.setDate(lastDate.getDate() - 2);
+  lastDate.setDate(lastDate.getDate() - 1);
   const query = { responses: { $elemMatch: { date: { $gte: startDate, $lte: lastDate } } } };
   return MonitoringData.find({ apiId }, query);
 });
