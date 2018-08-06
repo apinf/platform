@@ -11,7 +11,7 @@ import { check } from 'meteor/check';
 import Apis from '/apinf_packages/apis/collection';
 import { MonitoringData } from '/apinf_packages/monitoring/collection';
 
-Meteor.publish('getApiStatuRecordData', (apiId) => {
+Meteor.publish('getApiStatusRecordData', (apiId) => {
   // Make sure apiId is a string
   check(apiId, String);
   // Find all API Backends

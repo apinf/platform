@@ -18,7 +18,7 @@ Template.apiMonitoring.onCreated(function () {
 
   // Subscribe on Monitoring collection
   instance.subscribe('monitoringSettings', apiId);
-  instance.subscribe('getApiStatuRecordData', apiId);
+  instance.subscribe('getApiStatusRecordData', apiId);
 });
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
