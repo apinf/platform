@@ -143,6 +143,10 @@ Meteor.methods({
             _id: '$prefix',
             requestNumber: { $sum: '$requestNumber' },
             sumMedianTime: { $sum: '$medianResponseTime' },
+            sumLongestResponseTime: { $sum: '$longestResponseTime' },
+            sumLongResponseTime: { $sum: '$longResponseTime' },
+            sumShortestResponseTime: { $sum: '$shortestResponseTime' },
+            sumShortResponseTime: { $sum: '$shortResponseTime' },
             sumUniqueUsers: { $sum: '$uniqueUsers' },
             successCallsCount: { $sum: '$successCallsCount' },
             errorCallsCount: { $sum: '$errorCallsCount' },
@@ -161,6 +165,10 @@ Meteor.methods({
       requestPathsData[dataset._id] = {
         prefix: dataset._id, // Just rename it
         medianResponseTime: parseInt(dataset.sumMedianTime / existedValuesCount, 10) || 0,
+        longestResponseTime: parseInt(dataset.sumLongestResponseTime / existedValuesCount, 10) || 0,
+        longResponseTime: parseInt(dataset.sumLongResponseTime / existedValuesCount, 10) || 0,
+        shortestResponseTime: parseInt(dataset.sumShortestResponseTime / existedValuesCount, 10) || 0,
+        shortResponseTime: parseInt(dataset.sumShortResponseTime / existedValuesCount, 10) || 0,
         avgUniqueUsers: parseInt(dataset.sumUniqueUsers / existedValuesCount, 10) || 0,
       };
 
@@ -246,6 +254,11 @@ Meteor.methods({
             _id: '$prefix',
             requestNumber: { $push: { date: '$date', value: '$requestNumber' } },
             medianTime: { $push: { date: '$date', value: '$medianResponseTime' } },
+            shortest: { $push: { date: '$date', value: '$shortestResponseTime' } },
+            short: { $push: { date: '$date', value: '$shortResponseTime' } },
+            long: { $push: { date: '$date', value: '$longResponseTime' } },
+            longest: { $push: { date: '$date', value: '$longestResponseTime' } },
+
             uniqueUsers: { $push: { date: '$date', value: '$uniqueUsers' } },
           },
         },
