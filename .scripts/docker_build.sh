@@ -7,9 +7,27 @@
 
 set -ev
 
+echo "docker_build.sh - kissa1"
+
+sudo apt-get install -y --no-install-recommends bsdtar
+sudo -i export tar='bsdtar'
+tar --version
+bsdtar --version
+
+#docker_build.sh - backup tar (i've no idea if this is needed) create symlink so that bsdtar is used
+which tar
+which bsdtar
+sudo cp $(which tar) $(which tar)~
+sudo ln -sf $(which bsdtar) $(which tar)
+tar --version
+
+docker build -t apinf/platform:$DOCKER_TAG .
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+
 if [ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_REPO_SLUG}" = "apinf/platform" ]
 then
-  docker build -t apinf/platform:$DOCKER_TAG .
-  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   docker push apinf/platform:$DOCKER_TAG
 fi
+
+#docker_build.sh - restore old tar
+sudo mv $(which tar)~ $(which tar)

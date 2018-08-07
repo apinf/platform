@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo ".travis_install_meteor - kissa1"
+
+
 # This is the Meteor install script!
 #
 # Are you looking at this in your web browser, and would like to install Meteor?
@@ -47,6 +50,14 @@ set -u
 # Let's display everything on stderr.
 exec 1>&2
 
+echo "df -h starts, woow!"
+df -h
+echo "df -h ends, woow!"
+echo "another df -h starts, woow!"
+echo df -h
+echo "another df -h ends, woow!"
+
+echo ".travis_install_meteor - kissa2"
 
 UNAME=$(uname)
 # Check to see if it starts with MINGW.
@@ -119,6 +130,8 @@ elif [ "$UNAME" = "Linux" ] ; then
   fi
 fi
 
+echo ".travis_install_meteor - kissa3"
+
 trap "echo Installation failed." EXIT
 
 if [ -z $HOME ] || [ ! -d $HOME ]; then
@@ -143,6 +156,8 @@ cleanUp() {
 
 # Remove temporary files now in case they exist.
 cleanUp
+
+echo ".travis_install_meteor - kissa4"
 
 # Make sure cleanUp gets called if we exit abnormally.
 trap cleanUp EXIT
@@ -179,6 +194,15 @@ do
 done
 set -e
 
+echo "df -h starts, woow!"
+df -h
+echo "df -h ends, woow!"
+echo "another df -h starts, woow!"
+echo df -h
+echo "another df -h ends, woow!"
+echo ".travis_install_meteor - kissa6"
+
+
 # bomb out if it didn't work, eg no net
 test -e "${TARBALL_FILE}"
 tar -xzf "$TARBALL_FILE" -C "$INSTALL_TMPDIR" -o
@@ -194,6 +218,8 @@ cleanUp
 
 echo
 echo "Meteor ${RELEASE} has been installed in your home directory (~/.meteor)."
+echo ".travis_install_meteor - kissa5"
+
 
 METEOR_SYMLINK_TARGET="$(readlink "$HOME/.meteor/meteor")"
 METEOR_TOOL_DIRECTORY="$(dirname "$METEOR_SYMLINK_TARGET")"
