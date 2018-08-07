@@ -145,6 +145,7 @@
   "apiIntro_steps_settings_intro": "Edit API settings from this tab. You can also delete API here.",
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
+  "apiIntro_steps_monitoring_data": "Start and stop API monitoring. When monitoring is on, the response statuses during latest 24 hours are displayed.",
   "apiIntro_quickTour_button_text": "Quick tour",
   "apiKeys_label": "API Key",
   "apiKeys_getApiKeyButton": "Get API key",
@@ -1270,6 +1271,7 @@
   "viewApi_Metadata_Title": "Metadata",
   "viewApi_Servers": "Servers",
   "viewApi_Title": "View API backend",
+  "viewApiNavigationMenu_monitoring": "Monitoring",
   "visibilityToggle_buttonPrivate": "Make Private",
   "visibilityToggle_buttonPublic": "Make Public"
 }

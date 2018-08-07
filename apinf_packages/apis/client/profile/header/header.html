@@ -110,6 +110,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
 
+          {{# if api.currentUserCanManage }}
+            <!-- Monitoring -->
+            <li id="api-monitoring-tab">
+              <a href="#api-monitoring" data-toggle="tab">
+                {{_ "viewApiNavigationMenu_monitoring" }}
+              </a>
+            </li>
+          {{/ if }}
+
           {{# if userShouldSeeBacklogTab }}
             <!-- Backlog -->
             <li id="api-backlog-tab">

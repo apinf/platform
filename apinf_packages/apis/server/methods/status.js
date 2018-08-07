@@ -11,6 +11,17 @@ import { check } from 'meteor/check';
 import Apis from '/apinf_packages/apis/collection';
 import { MonitoringData } from '/apinf_packages/monitoring/collection';
 
+Meteor.publish('getApiStatusRecordData', (apiId) => {
+  // Make sure apiId is a string
+  check(apiId, String);
+  // Find all API Backends
+  const startDate = new Date();
+  const lastDate = new Date();
+  lastDate.setDate(lastDate.getDate() - 1);
+  const query = { responses: { $elemMatch: { date: { $gte: startDate, $lte: lastDate } } } };
+  return MonitoringData.find({ apiId }, query);
+});
+
 Meteor.methods({
   getApiStatus (apiId, url) {
     // Make sure apiId is a string
@@ -27,7 +38,9 @@ Meteor.methods({
       // Create a monitoring data
       const monitoringData = {
         date: new Date(),
+        server_status_code: serverStatusCode,
       };
+
 
       // Update an api status
       Apis.update(apiId, { $set: { latestMonitoringStatusCode: serverStatusCode } });
