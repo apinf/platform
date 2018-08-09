@@ -41,8 +41,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <li>Support</li>
           </ul>
           <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
-            <a href="#" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-              Currently in use
+            <a href="#" class="choose-subscriptionPlan" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+              {{# unless evaluationPlan }}
+              Start using
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+              {{ else }}
+              Your current plan
+              {{/ unless }}
             </a>
           </div>
         </div>

@@ -62,6 +62,15 @@ const UserSchema = new SimpleSchema({
     blackbox: true,
     optional: true,
   },
+  subscriptionPlan: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'evaluation',
+      'starter',
+      'business',
+    ],
+  },
   updated_at: {
     type: Date,
     optional: true,
