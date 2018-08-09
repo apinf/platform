@@ -1,13 +1,21 @@
+<!-- Copyright 2018 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="plans">
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height: 60px;">
     <ul class="container list-inline catalog-header" style="margin-bottom: 0;">
-      <li class="col-md-8">
-        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px;">
+      <li class="col-md-12">
+        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px; display:inline;">
+          <a href="{{ pathFor 'overview' }}" style="font-weight:400;">
+            Account overview
+          </a>
+        </h1>
+        <i class="mdi mdi-chevron-right mdi-18px"></i>
+        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px; display:inline;">
           Apinf plans
         </h1>
-      </li>
-      <li class="col-md-4 text-right">
-        <a href="#" class="btn btn-success btn-success-special" style="margin-top: 1rem;">CONTACT SALES</a>
       </li>
     </ul>
   </div>
@@ -20,9 +28,62 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12" id="apinf-plans_overview">
-        <div class="block-wrapper" style="height:300px;">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 16px;">Choose the right plan for you</h2>
+      <h1 class="text-center" style="margin-top:2em;">Simple, transparent pricing. Always know what you'll pay</h1>
+      <div class="col-md-4" id="apinf-plans_overview">
+        <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
+          <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Starter</h2>
+          <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
+          <p class="text-center"><span style="font-size:3.2rem;color:#37474F;font-weight:600;">€99</span> per month</p>
+          <ul class="list-unstyled plan_features">
+            <li>Up to 1,000,00 calls</li>
+            <li>Unlimited private APIs</li>
+            <li>API monitoring</li>
+            <li>Support</li>
+          </ul>
+          <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
+            <a href="#" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+              Start using
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" id="apinf-plans_overview">
+        <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
+          <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Business</h2>
+          <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
+          <p class="text-center"><span style="font-size:3.2rem;color:#37474F;font-weight:600;">€299</span> per month</p>
+          <ul class="list-unstyled plan_features">
+            <li>Up to 10,000,00 calls</li>
+            <li>Unlimited private APIs</li>
+            <li>API monitoring</li>
+            <li>Support</li>
+          </ul>
+          <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
+            <a href="#" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; background-color: #19b934;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+              Start using
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" id="apinf-plans_overview">
+        <div class="block-wrapper" style="height: auto; background-color: #ffae3a; color: #fff;padding-top:0;">
+          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;color: #fff;text-align: center;padding-top: 2rem; padding-bottom: 2rem;">Enterprise</h2>
+          <hr style="opacity: 0.25; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
+          <p style="text-align:center; max-width:75%; margin:auto;">If you want to be the king or queen of your own domain, the dedicated platform is for you.</p>
+          <ul class="list-unstyled plan_features">
+            <li>Up to 10,000,00 calls</li>
+            <li>Unlimited private APIs</li>
+            <li>API monitoring</li>
+            <li>Support</li>
+          </ul>
+          <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
+            <a href="#" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; background-color: #f99d21;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+              Contact sales
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
