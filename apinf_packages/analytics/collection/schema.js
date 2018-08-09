@@ -21,6 +21,22 @@ const MetricsSchema = new SimpleSchema({
     type: Number,
     optional: true,
   },
+  shortestResponseTime: {
+    type: Number,
+    optional: true,
+  },
+  shortResponseTime: {
+    type: Number,
+    optional: true,
+  },
+  longResponseTime: {
+    type: Number,
+    optional: true,
+  },
+  longestResponseTime: {
+    type: Number,
+    optional: true,
+  },
   successCallsCount: {
     type: Number,
     optional: true,
@@ -80,22 +96,6 @@ AnalyticsData.schema = new SimpleSchema({
     optional: false,
   },
   medianResponseTime: {
-    type: Number,
-    optional: false,
-  },
-  shortestResponseTime: {
-    type: Number,
-    optional: false,
-  },
-  shortResponseTime: {
-    type: Number,
-    optional: false,
-  },
-  longResponseTime: {
-    type: Number,
-    optional: false,
-  },
-  longestResponseTime: {
     type: Number,
     optional: false,
   },

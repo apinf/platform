@@ -164,12 +164,18 @@ Meteor.methods({
       // Calculate average (mean) value of Response time and Uniques users during period
       requestPathsData[dataset._id] = {
         prefix: dataset._id, // Just rename it
-        medianResponseTime: parseInt(dataset.sumMedianTime / existedValuesCount, 10) || 0,
-        longestResponseTime: parseInt(dataset.sumLongestResponseTime / existedValuesCount, 10) || 0,
-        longResponseTime: parseInt(dataset.sumLongResponseTime / existedValuesCount, 10) || 0,
-        shortestResponseTime: parseInt(dataset.sumShortestResponseTime / existedValuesCount, 10) || 0,
-        shortResponseTime: parseInt(dataset.sumShortResponseTime / existedValuesCount, 10) || 0,
-        avgUniqueUsers: parseInt(dataset.sumUniqueUsers / existedValuesCount, 10) || 0,
+        medianResponseTime:
+          parseInt(dataset.sumMedianTime / existedValuesCount, 10) || 0,
+        longestResponseTime:
+          parseInt(dataset.sumLongestResponseTime / existedValuesCount, 10) || 0,
+        longResponseTime:
+          parseInt(dataset.sumLongResponseTime / existedValuesCount, 10) || 0,
+        shortestResponseTime:
+          parseInt(dataset.sumShortestResponseTime / existedValuesCount, 10) || 0,
+        shortResponseTime:
+          parseInt(dataset.sumShortResponseTime / existedValuesCount, 10) || 0,
+        avgUniqueUsers:
+          parseInt(dataset.sumUniqueUsers / existedValuesCount, 10) || 0,
       };
 
       Object.assign(requestPathsData[dataset._id], dataset);

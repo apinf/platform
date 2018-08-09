@@ -678,7 +678,7 @@
   "responseTimeTimeline_legendItem_95thPercentiles": "Longest 95%",
   "responseTimeTimeline_legendItem_longest": "Slowest",
   "responseTimeTimeline_legendItem_long": "Slow 75%",
-  "responseTimeTimeline_legendItem_median": "Medium 50%",
+  "responseTimeTimeline_legendItem_median": "Median 50%",
   "responseTimeTimeline_legendItem_short": "Fast 25%",
   "responseTimeTimeline_legendItem_shortest": "Fastest",
 

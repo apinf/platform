@@ -147,7 +147,7 @@ Meteor.methods({
           longest: arrayWithZeros(dates.length),
         };
       } else {
-        let index = 0
+        let index = 0;
         _.forEach(aggregatedData, (dataset) => {
           // Add a request path to list
           allRequestPaths.push(dataset.key);
@@ -162,10 +162,8 @@ Meteor.methods({
           const short = arrayWithZeros(dates.length);
           const long = arrayWithZeros(dates.length);
           const longest = arrayWithZeros(dates.length);
-
           dataset.requests_over_time.buckets.forEach(backendData => {
             // Format Date
-           
             success[index] = backendData.response_status.buckets.success.doc_count;
             redirect[index] = backendData.response_status.buckets.redirect.doc_count;
             fail[index] = backendData.response_status.buckets.fail.doc_count;
@@ -176,10 +174,9 @@ Meteor.methods({
             short[index] = backendData.percentiles_response_time.values['25.0'];
             long[index] = backendData.percentiles_response_time.values['75.0'];
             longest[index] = backendData.percentiles_response_time.values['100.0'];
-
           });
 
-          index = index + 1
+          index += 1;
 
           requestPathsData[dataset.key] = {
             dates,

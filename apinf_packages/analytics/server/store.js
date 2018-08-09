@@ -112,10 +112,6 @@ Meteor.methods({
         // Store data about summary statistic numbers
         const requestNumber = analyticsData.requests_number.value;
         const medianResponseTime = analyticsData.median_response_time.values['50.0'];
-        const shortestResponseTime = analyticsData.median_response_time.values['0.0'];
-        const shortResponseTime = analyticsData.median_response_time.values['25.0'];
-        const longResponseTime = analyticsData.median_response_time.values['75.0'];
-        const longestResponseTime = analyticsData.median_response_time.values['100.0'];
         const uniqueUsers = analyticsData.unique_users.buckets.length;
 
         // Store data about summary response status codes
@@ -191,10 +187,6 @@ Meteor.methods({
           prefix: frontedPrefix,
           requestNumber,
           medianResponseTime: parseInt(medianResponseTime, 10) || 0,
-          shortestResponseTime: parseInt(shortestResponseTime, 10) || 0,
-          shortResponseTime: parseInt(shortResponseTime, 10) || 0,
-          longResponseTime: parseInt(longResponseTime, 10) || 0,
-          longestResponseTime: parseInt(longestResponseTime, 10) || 0,
           uniqueUsers,
           successCallsCount: responseStatusCode.success.doc_count,
           redirectCallsCount: responseStatusCode.redirect.doc_count,
