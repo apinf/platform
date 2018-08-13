@@ -23,6 +23,6 @@ Template.linkTemplate.helpers({
     if (user) {
       return _.keys(user.services);
     }
-    return;
+    return false;
   },
 });
