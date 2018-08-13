@@ -18,6 +18,9 @@ Apis.schema = new SimpleSchema({
       // synchronization with proxy
       // distinct catalog entries
     unique: true,
+    autoform: {
+      placeholder: 'e.g. Tampere Bus Service',
+    },
   },
   description: {
     type: String,
@@ -31,6 +34,9 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
+    autoform: {
+      placeholder: 'e.g. https://tampere-bus-service.fi',
+    },
   },
   slug: {
     type: String,

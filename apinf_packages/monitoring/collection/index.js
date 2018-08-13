@@ -6,7 +6,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Mongo } from 'meteor/mongo';
 
-
 const MonitoringSettings = new Mongo.Collection('MonitoringSettings');
 const MonitoringData = new Mongo.Collection('MonitoringData');
 

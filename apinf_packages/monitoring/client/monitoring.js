@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
+import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
 // APInf import
 import convertStatusCode from '/apinf_packages/apis/client/profile/status/convert_status_code';
@@ -21,8 +21,8 @@ Template.apiMonitoring.onCreated(function () {
 
   // Subscribe on Monitoring collection
   instance.subscribe('monitoringSettings', apiId);
+  instance.subscribe('getApiStatusRecordData', apiId);
 });
-
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
@@ -49,40 +49,21 @@ Template.apiMonitoring.helpers({
 
     // Look for existing monitoring document for this API
     const existingSettings = MonitoringSettings.findOne({ apiId });
-
     if (existingSettings) {
       return 'update';
     }
 
     return 'insert';
   },
-  classList () {
-    // Get api
-    const api = Template.currentData().api;
-    // Get class name depending on the api status code
-    const { className } = convertStatusCode(api.latestMonitoringStatusCode);
-
-    // Create a new line using join
-    return [
-      `api-status-indicator-${api._id}`,
-      className,
-    ].join(' ');
+  apiStatusData () {
+    const apiId = this.api._id;
+    const monitoringData = MonitoringData.findOne({ apiId });
+    if (monitoringData) {
+      return monitoringData.responses;
+    }
+    return [];
   },
-  originalTitle () {
-    // Get api
-    const api = Template.currentData().api;
-
-    // Get original title depending on the api status code
-    const { statusText } = convertStatusCode(api.latestMonitoringStatusCode);
-
-    return statusText;
-  },
-  statusIcon () {
-    // Get api
-    const api = Template.currentData().api;
-
-    const { statusIcon } = convertStatusCode(api.latestMonitoringStatusCode);
-
-    return statusIcon;
+  apiStatusCode (code) {
+    return code === '200';
   },
 });

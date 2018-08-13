@@ -2,44 +2,49 @@
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
-
 <template name="apiMonitoring">
   {{# if apiMonitoringSettings.enabled }}
-    <h2 style="font-size:1.4em;margin-top:0;">
+    <h2 class="heading">
       Status Messages
     </h2>
-    <p style="color:#6d859e;">
+    <p class="sub-heading">
       Historical data on API availability
     </p>
-    <table class="rtable">
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Status</th>
-          <th>Details</th>
-        </tr>
-      </thead>
+    <table id="rtable">
+      <tr>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Details</th>
+      </tr>
       <tbody>
-        <tr>
-          <td>June 11, 2018 00:00 EEST</td>
-          <td>
-            <i class="mdi {{ statusIcon }} {{ classList }}" data-toggle="tooltip" data-placement="top" data-original-title="{{ originalTitle }}" style="font-size: 1.8rem;"></i>
-          </td>
-          <td>
-            {{ originalTitle }}
-          </td>
-        </tr>
+        {{# each apiStatusData }}
+          <tr>
+            <td>{{ this.date }}</td>
+            <td>
+              {{# if apiStatusCode (this.server_status_code) }}
+                <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
+                </span>
+              {{ else }}
+                <span class="glyphicon glyphicon-exclamation-sign failed" aria-hidden="true">
+                </span>
+              {{/ if}}
+            </td>
+            <td>{{ this.server_status_code }}</td>
+          </tr>
+        {{/ each }}
       </tbody>
     </table>
 
-    <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
-  {{/ if }}
+    <hr class="header-line">
 
-  <h3 style="font-size:16px; margin-top:0;">
+  {{/if }}
+
+  <h3 class="panel-heading">
+    <i class="fa fa-binoculars" aria-hidden="true"></i>
     {{_ "apiMonitoring_panelTitle_Monitoring" }}
   </h3>
-  <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}</p>
-  <div class="form-group" style="margin-bottom:0;">
+  <p class="monitoring-panel">{{_ "apiMonitoring_helpIcon_text" }}</p>
+  <div class="form-group">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
       <!-- hidden field, auto-value -->
       {{> afQuickField name='apiId' value=api._id type="hidden" }}
