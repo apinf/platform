@@ -1494,9 +1494,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         // structure for inserting a new ACL object
-=======
-        // structure for inserting new ACL object
->>>>>>> 1d67a549a15d10ff9a4d32f18274e68ba50617ee
         const aclFields = [{
           id: new Meteor.Collection.ObjectID().valueOf(),
           allow: bodyParams.allow,
@@ -1528,13 +1525,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         if (emqResponseError) {
           return errorMessagePayload(500, 'Settings insert to EMQ proxy failed.');
         }
-        // TODO: how to check result of operation and react
-=======
-        const emqResponse = Meteor.call('emqAclRequest',
-                                        'POST',
-                                        newProxyBackendData.proxyId,
-                                        newProxyBackendData.emq.settings.acl);
->>>>>>> 1d67a549a15d10ff9a4d32f18274e68ba50617ee
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
@@ -1546,7 +1536,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         return errorMessagePayload(500, 'Proxy connection for the API is not created.');
       }
 
-      // OK response with API data
+      // Send OK response with API data
       return {
         statusCode: 200,
         body: {
