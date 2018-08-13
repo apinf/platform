@@ -1493,7 +1493,7 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           return errorMessagePayload(400, 'Parameter "fromValue" is mandatory.');
         }
 
-        // structure for inserting new ACL object
+        // structure for inserting a new ACL object
         const aclFields = [{
           id: new Meteor.Collection.ObjectID().valueOf(),
           allow: bodyParams.allow,
@@ -1518,10 +1518,13 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         }
 
         // Send ACL settings to EMQ proxy
-        const emqResponse = Meteor.call('emqAclRequest',
-                                        'POST',
-                                        newProxyBackendData.proxyId,
-                                        newProxyBackendData.emq.settings.acl);
+        const emqResponseError = Meteor.call('emqAclRequest',
+                                             'POST',
+                                             newProxyBackendData.proxyId,
+                                             newProxyBackendData.emq.settings.acl);
+        if (emqResponseError) {
+          return errorMessagePayload(500, 'Settings insert to EMQ proxy failed.');
+        }
         // TODO: how to check result of operation and react
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
