@@ -140,7 +140,6 @@ Meteor.methods({
           fail: arrayWithZeros(dates.length),
           error: arrayWithZeros(dates.length),
           median: arrayWithZeros(dates.length),
-          percentiles95: arrayWithZeros(dates.length),
           shortest: arrayWithZeros(dates.length),
           short: arrayWithZeros(dates.length),
           long: arrayWithZeros(dates.length),
@@ -157,7 +156,6 @@ Meteor.methods({
           const fail = arrayWithZeros(dates.length);
           const error = arrayWithZeros(dates.length);
           const median = arrayWithZeros(dates.length);
-          const percentiles95 = arrayWithZeros(dates.length);
           const shortest = arrayWithZeros(dates.length);
           const short = arrayWithZeros(dates.length);
           const long = arrayWithZeros(dates.length);
@@ -173,7 +171,6 @@ Meteor.methods({
             fail[index] = backendData.response_status.buckets.fail.doc_count;
             error[index] = backendData.response_status.buckets.error.doc_count;
             median[index] = backendData.percentiles_response_time.values['50.0'];
-            percentiles95[index] = backendData.percentiles_response_time.values['95.0'];
             shortest[index] = backendData.percentiles_response_time.values['0.0'];
             short[index] = backendData.percentiles_response_time.values['25.0'];
             long[index] = backendData.percentiles_response_time.values['75.0'];
@@ -189,7 +186,6 @@ Meteor.methods({
             fail,
             error,
             median,
-            percentiles95,
             shortest,
             short,
             long,

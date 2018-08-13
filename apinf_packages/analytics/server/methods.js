@@ -68,10 +68,6 @@ Meteor.methods({
             short: { $push: { date: '$date', value: '$requestPathsData.shortResponseTime' } },
             long: { $push: { date: '$date', value: '$requestPathsData.longResponseTime' } },
             longest: { $push: { date: '$date', value: '$requestPathsData.longestResponseTime' } },
-            percentiles95Time: { $push: {
-              date: '$date',
-              value: '$requestPathsData.percentile95ResponseTime',
-            } },
           },
         },
       ]
@@ -90,7 +86,6 @@ Meteor.methods({
           short: dataset.short.map(x => x.value[index] || 0),
           long: dataset.long.map(x => x.value[index] || 0),
           longest: dataset.longest.map(x => x.value[index] || 0),
-          percentiles95: dataset.percentiles95Time.map(x => x.value[index] || 0),
         };
       });
       /* eslint-enable arrow-body-style */
