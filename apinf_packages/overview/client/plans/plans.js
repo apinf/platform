@@ -36,16 +36,48 @@ Template.plans.onRendered(() => {
 
 Template.plans.helpers({
   evaluationPlan () {
+    const subscriptionPlan = Meteor.user().subscriptionPlan;
+
+    if (subscriptionPlan === 'evaluation') {
+      return true;
+    }
+    return false;
+  },
+  starterPlan () {
+    const subscriptionPlan = Meteor.user().subscriptionPlan;
+
+    if (subscriptionPlan === 'starter') {
+      return true;
+    }
+    return false;
+  },
+  businessPlan () {
+    const subscriptionPlan = Meteor.user().subscriptionPlan;
+
+    if (subscriptionPlan === 'business') {
+      return true;
+    }
+    return false;
+  },
+  currentSubscriptionPlan () {
     return Meteor.user().subscriptionPlan;
   },
 });
 
 Template.plans.events({
-  'click .choose-subscriptionPlan': function () {
-    // Get API from template data
+  'click #apinf-plans_evaluation': function () {
     const userId = Meteor.user()._id;
 
-    // Set the isPublic property to the opposite of its current value
     Meteor.users.update(userId, { $set: { subscriptionPlan: 'evaluation' } });
+  },
+  'click #apinf-plans_starter': function () {
+    const userId = Meteor.user()._id;
+
+    Meteor.users.update(userId, { $set: { subscriptionPlan: 'starter' } });
+  },
+  'click #apinf-plans_business': function () {
+    const userId = Meteor.user()._id;
+
+    Meteor.users.update(userId, { $set: { subscriptionPlan: 'business' } });
   },
 });

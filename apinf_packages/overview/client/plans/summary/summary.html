@@ -6,13 +6,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="overviewPlan">
   <div class="account-plan" style="padding-top: 10px; padding-bottom: 10px;">
     <h3 class="account-plan_name" style="font-size: 14px; margin-top: 0; margin-bottom: 0;">
-      Evaluation Plan
+      {{ currentSubscriptionPlan }}
       <small class="account-plan_used" style="font-size:90%;color:#6d859e;">
         51% used
       </small>
     </h3>
     <a href="{{ pathFor 'plans' }}" class="btn btn-link account-plan_change" style="padding-right: 0; padding-bottom:0; text-transform: uppercase; font-size: 1.2rem; font-weight: 600;">
-      Upgrade plan
+      Change plan
     </a>
   </div>
 </template>

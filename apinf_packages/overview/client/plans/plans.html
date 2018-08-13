@@ -30,7 +30,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
     <div class="row">
       <h1 class="text-center" style="margin-top:2em;">Simple, transparent pricing. Always know what you'll pay</h1>
-      <div class="col-md-4" id="apinf-plans_overview">
+      <div class="col-md-4">
         <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
           <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Evaluation</h2>
           <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
@@ -42,18 +42,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <li>Support</li>
           </ul>
           <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
-            <a href="#" class="choose-subscriptionPlan" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-              {{# unless evaluationPlan }}
+            {{# unless evaluationPlan }}
+            <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
               Start using
               <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
-              {{ else }}
+            </button>
+            {{ else }}
+            <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
               Your current plan
-              {{/ unless }}
-            </a>
+            </button>
+            {{/ unless }}
           </div>
         </div>
       </div>
-      <div class="col-md-4" id="apinf-plans_overview">
+      <div class="col-md-4">
         <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
           <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Starter</h2>
           <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
@@ -65,14 +67,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <li>Support</li>
           </ul>
           <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
-            <a href="#" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; background-color: #19b934;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+            {{# unless starterPlan }}
+            <button id="apinf-plans_starter" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; background-color: #19b934; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
               Start using
               <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
-            </a>
+            </button>
+            {{ else }}
+            <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
+              Your current plan
+            </button>
+            {{/ unless }}
           </div>
         </div>
       </div>
-      <div class="col-md-4" id="apinf-plans_overview">
+      <div class="col-md-4">
         <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
           <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Business</h2>
           <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
@@ -84,10 +92,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <li>Support</li>
           </ul>
           <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
-            <a href="#" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; background-color: #19b934;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+            {{# unless businessPlan }}
+            <button id="apinf-plans_business" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; background-color: #19b934; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
               Start using
               <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
-            </a>
+            </button>
+            {{ else }}
+            <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
+              Your current plan
+            </button>
+            {{/ unless }}
           </div>
         </div>
       </div>
