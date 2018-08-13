@@ -4,60 +4,59 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 <template name="apiMonitoring">
   {{# if apiMonitoringSettings.enabled }}
-    <h2 class="heading">
-      Status Messages
-    </h2>
-    <p class="sub-heading">
-      Historical data on API availability
-    </p>
-    <table id="rtable">
+  <h2 style="font-size:1.4em;margin-top:0;">
+    Status Messages
+  </h2>
+  <p style="color:#6d859e;">
+    Historical data on API availability
+  </p>
+  <table class="rtable">
+    <thead>
       <tr>
         <th>Time</th>
         <th>Status</th>
         <th>Details</th>
       </tr>
-      <tbody>
-        {{# each apiStatusData }}
-          <tr>
-            <td>{{ this.date }}</td>
-            <td>
-              {{# if apiStatusCode (this.server_status_code) }}
-                <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
-                </span>
-              {{ else }}
-                <span class="glyphicon glyphicon-exclamation-sign failed" aria-hidden="true">
-                </span>
-              {{/ if}}
-            </td>
-            <td>{{ this.server_status_code }}</td>
-          </tr>
-        {{/ each }}
-      </tbody>
-    </table>
+    </thead>
+    <tbody>
+      {{# each apiStatusData }}
+      <tr>
+        <td>{{ this.date }}</td>
+        <td>
+          {{# if apiStatusCode (this.server_status_code) }}
+          <i class="mdi mdi-checkbox-marked-circle mdi-18px status-success"></i>
+          {{ else }}
+          <i class="mdi mdi-alert-circle mdi-18px status-warning"></i>
+          {{/ if }}
+        </td>
+        <td>{{ this.server_status_code }}</td>
+      </tr>
+      {{/ each }}
+    </tbody>
+  </table>
 
-    <hr class="header-line">
+  <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
 
-  {{/if }}
+  {{/ if }}
 
-  <h3 class="panel-heading">
-    <i class="fa fa-binoculars" aria-hidden="true"></i>
+  <h3 style="font-size:16px; margin-top:0;">
     {{_ "apiMonitoring_panelTitle_Monitoring" }}
   </h3>
-  <p class="monitoring-panel">{{_ "apiMonitoring_helpIcon_text" }}</p>
-  <div class="form-group">
+  <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}</p>
+  <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
-      <!-- hidden field, auto-value -->
-      {{> afQuickField name='apiId' value=api._id type="hidden" }}
-      {{> afQuickField name='enabled' }}
-      {{# if afFieldValueIs name='enabled' value=true }}
-        <label for="endpoint-monitor-field">
-          {{ afFieldLabelText name='url' }}
-        </label>
-        {{> afFieldInput name='url' }}
-      {{/ if }}
-      <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
-        {{_ "apiMonitoring_saveButton_text" }}
-      </button>
+    <!-- hidden field, auto-value -->
+    {{> afQuickField name='apiId' value=api._id type="hidden" }}
+    {{> afQuickField name='enabled' }}
+    {{# if afFieldValueIs name='enabled' value=true }}
+    <label for="endpoint-monitor-field">
+      {{ afFieldLabelText name='url' }}
+    </label>
+    {{> afFieldInput name='url' }}
+    {{/ if }}
+    <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
+      {{_ "apiMonitoring_saveButton_text" }}
+    </button>
     {{/ autoForm }}
   </div>
 </template>
