@@ -68,16 +68,22 @@ Template.plans.events({
   'click #apinf-plans_evaluation': function () {
     const userId = Meteor.user()._id;
 
-    Meteor.users.update(userId, { $set: { subscriptionPlan: 'evaluation' } });
+    if (confirm('Are you sure you want to change to this plan?')) {
+      Meteor.users.update(userId, { $set: { subscriptionPlan: 'evaluation' } });
+    }
   },
   'click #apinf-plans_starter': function () {
     const userId = Meteor.user()._id;
 
-    Meteor.users.update(userId, { $set: { subscriptionPlan: 'starter' } });
+    if (confirm('Are you sure you want to change to this plan?')) {
+      Meteor.users.update(userId, { $set: { subscriptionPlan: 'starter' } });
+    }
   },
   'click #apinf-plans_business': function () {
     const userId = Meteor.user()._id;
 
-    Meteor.users.update(userId, { $set: { subscriptionPlan: 'business' } });
+    if (confirm('Are you sure you want to change to this plan?')) {
+      Meteor.users.update(userId, { $set: { subscriptionPlan: 'business' } });
+    }
   },
 });

@@ -16,16 +16,16 @@ Template.overviewPlan.helpers({
 
     switch (subscriptionPlan) {
       case 'evaluation':
-        planType = 'Evaluation';
+        planType = 'Evaluation plan';
         break;
       case 'starter':
-        planType = 'Starter';
+        planType = 'Starter plan';
         break;
       case 'business':
-        planType = 'Business';
+        planType = 'Business plan';
         break;
       default:
-        planType = 'Evaluation';
+        planType = 'Evaluation plan';
     }
     return planType;
   },
