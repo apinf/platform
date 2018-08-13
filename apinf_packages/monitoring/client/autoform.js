@@ -17,6 +17,19 @@ import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/c
 
 AutoForm.hooks({
   apiMonitoringForm: {
+
+    formToDoc: (doc) => {
+      const api = Apis.findOne({ _id: doc.apiId });
+      doc.url = api.url + doc.url;
+      return doc;
+    },
+
+    formToModifier: (doc) => {
+      const api = Apis.findOne({ _id: doc.$set.apiId });
+      doc.$set.url = api.url + doc.$set.url;
+      return doc;
+    },
+
     before: {
       update: (doc) => {
         // Check form on validation

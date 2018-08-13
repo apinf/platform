@@ -53,7 +53,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <label for="endpoint-monitor-field">
           {{ afFieldLabelText name='url' }}
         </label>
-        {{> afFieldInput name='url' }}
+        <div class="input-group">
+        <!-- API url addon -->
+          <span class="input-group-addon" id="api-url">
+          {{ api.url }}
+          </span>
+          {{> afFieldInput name='url' value=apiUrlPath}}
+          </div>
       {{/ if }}
       <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
         {{_ "apiMonitoring_saveButton_text" }}

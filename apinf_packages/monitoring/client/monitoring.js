@@ -9,6 +9,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
+import URI from 'urijs';
+
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
   const instance = this;
@@ -59,5 +61,14 @@ Template.apiMonitoring.helpers({
   },
   apiStatusCode (code) {
     return code === '200';
+  },
+  apiUrlPath () {
+    const monitoringSettings = MonitoringSettings.findOne({ apiId: this.api._id });
+    let path;
+    if (monitoringSettings) {
+      const apiUrl = new URI(monitoringSettings.url);
+      path = apiUrl.path();
+    }
+    return path;
   },
 });
