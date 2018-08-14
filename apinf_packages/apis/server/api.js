@@ -996,3 +996,8 @@ CatalogV1.addRoute('apis/:id/documents', {
     },
   },
 });
+
+// Request /rest/v1/apis/:id/monitoring/
+CatalogV1.addRoute('apis/:id/monitoring', {
+
+});
