@@ -40,7 +40,7 @@ For API consumers APInf provides simple key management, key usage analytics and 
 
 # Testing
 
-For automated testing we use [Sauce Labs] (https://saucelabs.com).
+For automated testing we use [Sauce Labs](https://saucelabs.com).
 
 # Nightly build
 You can preview our latest version at [nightly.apinf.io](https://nightly.apinf.io). Feel free to register an account and test things out.
