@@ -21,6 +21,22 @@ const MetricsSchema = new SimpleSchema({
     type: Number,
     optional: true,
   },
+  shortestResponseTime: {
+    type: Number,
+    optional: true,
+  },
+  shortResponseTime: {
+    type: Number,
+    optional: true,
+  },
+  longResponseTime: {
+    type: Number,
+    optional: true,
+  },
+  longestResponseTime: {
+    type: Number,
+    optional: true,
+  },
   successCallsCount: {
     type: Number,
     optional: true,
