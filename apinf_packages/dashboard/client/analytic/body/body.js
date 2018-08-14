@@ -96,10 +96,10 @@ Template.apiAnalyticPageBody.onCreated(function () {
         instance.errorsStatisticsResponse.set(dataset);
       });
 
-      Meteor.call('lastUpdateTime', { proxyBackendId }, (error, result) => {
+    Meteor.call('lastUpdateTime', { proxyBackendId }, (error, result) => {
         // Save value
-        instance.lastUpdateTime.set(result);
-      });
+      instance.lastUpdateTime.set(result);
+    });
   });
 
   // Fetch data for Users table
