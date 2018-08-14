@@ -2,37 +2,41 @@
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
-
 <template name="apiMonitoring">
   {{# if apiMonitoringSettings.enabled }}
-    <h2 style="font-size:1.4em;margin-top:0;">
-      Status Messages
-    </h2>
-    <p style="color:#6d859e;">
-      Historical data on API availability
-    </p>
-    <table class="rtable">
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Status</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>June 11, 2018 00:00 EEST</td>
-          <td>
-            <i class="mdi {{ statusIcon }} {{ classList }}" data-toggle="tooltip" data-placement="top" data-original-title="{{ originalTitle }}" style="font-size: 1.8rem;"></i>
-          </td>
-          <td>
-            {{ originalTitle }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <h2 style="font-size:1.4em;margin-top:0;">
+    Status Messages
+  </h2>
+  <p style="color:#6d859e;">
+    Historical data on API availability
+  </p>
+  <table class="rtable">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{# each apiStatusData }}
+      <tr>
+        <td>{{ this.date }}</td>
+        <td>
+          {{# if apiStatusCode (this.server_status_code) }}
+          <i class="mdi mdi-checkbox-marked-circle mdi-18px status-success"></i>
+          {{ else }}
+          <i class="mdi mdi-alert-circle mdi-18px status-warning"></i>
+          {{/ if }}
+        </td>
+        <td>{{ this.server_status_code }}</td>
+      </tr>
+      {{/ each }}
+    </tbody>
+  </table>
 
-    <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
+  <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
+
   {{/ if }}
 
   <h3 style="font-size:16px; margin-top:0;">
@@ -41,18 +45,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}</p>
   <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
-      <!-- hidden field, auto-value -->
-      {{> afQuickField name='apiId' value=api._id type="hidden" }}
-      {{> afQuickField name='enabled' }}
-      {{# if afFieldValueIs name='enabled' value=true }}
-        <label for="endpoint-monitor-field">
-          {{ afFieldLabelText name='url' }}
-        </label>
-        {{> afFieldInput name='url' }}
-      {{/ if }}
-      <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
-        {{_ "apiMonitoring_saveButton_text" }}
-      </button>
+    <!-- hidden field, auto-value -->
+    {{> afQuickField name='apiId' value=api._id type="hidden" }}
+    {{> afQuickField name='enabled' }}
+    {{# if afFieldValueIs name='enabled' value=true }}
+    <label for="endpoint-monitor-field">
+      {{ afFieldLabelText name='url' }}
+    </label>
+    {{> afFieldInput name='url' }}
+    {{/ if }}
+    <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
+      {{_ "apiMonitoring_saveButton_text" }}
+    </button>
     {{/ autoForm }}
   </div>
 </template>

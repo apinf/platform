@@ -9,10 +9,9 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Login to apinf
-	confirm page loaded	Users
 	Go to login
-	Login to apinf	asdas	asdasd
-	confirm page loaded	Users
+	Login to apinf  asdas  asdasd
+	Wait Until Page Contains Element  id=footer-signout
 
 Change profile name (fail)
 	Go to profile
@@ -46,9 +45,19 @@ Go to homepage
 
 Go to login
 	Click Element 	id=frontpage-button
-	confirm page loaded	Users
+	Wait Until Page Contains Element  id=statisticswrap
 	Click Element	id=signin-button
-	confirm page loaded	Login
+	Wait Until Page Contains Element  id=at-btn
+
+Login to apinf
+	[Arguments]	${username}	${password}
+	Input Text	id=at-field-username_and_email	${username}
+	Input Password 	id=at-field-password	${password}
+	Click Button	id=at-btn
+
+confirm page loaded
+	[Arguments] 	${searchkey}
+	Wait Until Page Contains 	${searchkey}
 
 Go to profile
 	Click Element 	id=frontpage-button
@@ -63,16 +72,6 @@ Go to account
 	Click Element 	id=usermenu
 	Click Element	id=account-button
 	confirm page loaded	Update password
-
-Login to apinf
-	[Arguments]	${username}	${password}
-	Input Text	id=at-field-username_and_email	${username}
-	Input Password 	id=at-field-password	${password}
-	Click Button	id=at-btn
-
-confirm page loaded
-	[Arguments] 	${searchkey}
-	Wait Until Page Contains 	${searchkey}
 
 change profile data
 	[Arguments]	${username}	${Company}

@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardPage">
+  {{# if Template.subscriptionsReady }}
   <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height:60px;">
     <div class="container" style="padding-left: 0;padding-right: 0;">
       <div class="col-md-4">
@@ -11,9 +12,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{_ "dashboardPage_title_dashboard" }}
         </h1>
       </div>
-      {{# if Template.subscriptionsReady }}
-      <!-- Make sure an API is connected to proxy -->
-      {{# if proxyBackendsCount }}
       <!-- Make sure a user has any API -->
       {{# if managedApisCount }}
       <!-- Case when user has one API -->
@@ -21,12 +19,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# unless managedOneApi }}
         <div class="search" style="margin-top:1em;">
           <i class="fa fa-search"></i>
-          <input type="text" class="form-control pull-right" id="search-box" placeholder={{_ "dashboardPage_placeholderText_search" }} >
+          <input type="text" class="form-control pull-right" id="search-box" placeholder={{_ "dashboardPage_placeholderText_search" }}>
         </div>
         {{/ unless }}
       </div>
-      {{/ if }}
-      {{/ if }}
       {{/ if }}
       <div class="col-md-4 text-right dashboard-filter-buttons" style="margin-top: 1em;float:right;">
         {{# if Template.subscriptionsReady }}
@@ -36,41 +32,37 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
   </div>
 
-  {{# if Template.subscriptionsReady }}
-    <!-- Make sure an API is connected to proxy -->
-    {{# if proxyBackendsCount }}
-      <!-- Make sure a user has any API -->
-      {{# if managedApisCount }}
-        <!-- Case when user has one API -->
-        {{# if managedOneApi }}
-          <!-- Display directly API Analytic Page -->ˆ
-          <div class="container dashboard-summary-block" style="padding-top: 0;padding-bottom: 0;">
-            {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
-          </div>
-        {{ else }}
-          <div class="container dashboard-summary-block block-wrapper slide-up-animation" style="padding-top: 0;padding-bottom: 0;">
-            <!-- Display Dashboard page-->
-            {{> dashboardView searchValue=searchValue }}
-          </div>
-        {{/ if }} <!-- /managedOneApi -->
-      {{ else }}
-        <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
-          <!-- Display a message about "No managed API" -->
-          <div class="alert alert-warning alert-text" role="alert">
-            <h3>{{_ "dashboardPage_text_noApis" }}</h3>
-            <a href="{{ pathFor route='addApi' }}" class="btn btn-sm btn-success">{{_ 'dashboardPage_buttonText_addApi' }}</a>
-          </div>
-        </div>
-      {{/ if }} <!-- /managedApisCount -->
-    {{ else }}
-      <!-- Display a message about "No connected API" -->
-      <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
-        <div class="alert alert-warning alert-text" role="alert" style="margin-top: 20px;">
-          <p style="margin: 20px 30px;">{{_ 'dashboardPage_text_noProxyBackends' }}</p>
-        </div>
-      </div>
-    {{/ if }} <!-- /proxyBackendsExists -->
+  <!-- Make sure a user has any API -->
+  {{# if managedApisCount }}
+  <!-- Case when user has one API -->
+  {{# if managedOneApi }}
+  <!-- Display directly API Analytic Page -->ˆ
+  <div class="container dashboard-summary-block" style="padding-top: 0;padding-bottom: 0;">
+    {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+  </div>
   {{ else }}
-    {{> spinner }}
+  <div class="container dashboard-summary-block block-wrapper slide-up-animation" style="padding-top: 0;padding-bottom: 0;">
+    <!-- Display Dashboard page-->
+    {{> dashboardView searchValue=searchValue }}
+  </div>
+  {{/ if }} <!-- /managedOneApi -->
+  <!-- {{ else }}
+      Display a message about "No managed API"
+  <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
+    <div class="alert alert-warning alert-text" role="alert">
+      <h3>{{_ "dashboardPage_text_noApis" }}</h3>
+      <a href="{{ pathFor route='addApi' }}" class="btn btn-sm btn-success">{{_ 'dashboardPage_buttonText_addApi' }}</a>
+    </div>
+  </div> -->
+  {{/ if }} <!-- /managedApisCount -->
+  <!-- {{ else }}
+  Display a message about "No connected API"
+  <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
+    <div class="alert alert-warning alert-text" role="alert" style="margin-top: 20px;">
+      <p style="margin: 20px 30px;">{{_ 'dashboardPage_text_noProxyBackends' }}</p>
+    </div>
+  </div> -->
+  {{ else }}
+  {{> spinner }}
   {{/ if }} <!-- /subscriptionsReady -->
 </template>
