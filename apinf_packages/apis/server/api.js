@@ -999,5 +999,84 @@ CatalogV1.addRoute('apis/:id/documents', {
 
 // Request /rest/v1/apis/:id/monitoring/
 CatalogV1.addRoute('apis/:id/monitoring', {
+  get: {
+    authRequired: false,
+    swagger: {
+      tags: [
+        CatalogV1.swagger.tags.api,
+      ],
+      summary: 'TEXT',
+      description: 'TEXT',
+      parameters: [
+        CatalogV1.swagger.params.apiId,
+      ],
+      responses: {
+        200: {
+          description: 'TEXT',
+          schema: {
+            type: 'object',
+            properties: {
+              status: {
+                type: 'string',
+                example: 'Success',
+              },
+              data: {
+                $ref: '#/definitions/proxyConnectionResponse',
+              },
+            },
+          },
+        },
+        400: {
+          description: 'Bad Request. Erroneous or missing parameter.',
+        },
+        401: {
+          description: 'Authentication is required',
+        },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
+      },
+      security: [
+        {
+          userSecurityToken: [],
+          userId: [],
+        },
+      ],
+    },
+    action () {
+        // Get ID of API (URL parameter)
+      const apiId = this.urlParams.id;
+        // Get User ID
+      const userId = this.userId;
 
+        // API related checkings
+        // Get API document
+      const api = Apis.findOne(apiId);
+
+        // API must exist
+      if (!api) {
+          // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found.');
+      }
+
+        // Get API's Proxy connection data
+      const latestMonitoringStatusCode = api.latestMonitoringStatusCode;
+      if (!latestMonitoringStatusCode) {
+          // The Proxy backend doesn't exist
+        return errorMessagePayload(404, 'No monitoring found');
+      }
+
+        // OK response with Proxy backend data
+      return {
+        statusCode: 200,
+        body: {
+          status: 'success',
+          data: latestMonitoringStatusCode,
+        },
+      };
+    },
+  },
 });
