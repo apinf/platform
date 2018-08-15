@@ -30,21 +30,54 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
     <div class="row">
       <div class="col-md-6" id="account-overview_apis">
-        <div class="block-wrapper" style="height:300px;">
+        <div class="block-wrapper">
           <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
-            APIs
+            Your APIs
             <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
               <small style="color: #19B934; font-weight: 500;font-size:75%;">
                 Add new API
               </small>
             </a>
           </h2>
+          <div class="overviewUserApisList" style="margin-top:1em;">
+            {{> search_form }}
+            <a href="#">
+              <p class="secondary-link-color-wrapper">
+                <i class="mdi mdi-lock mdi-18px" style="position:relative; top:1px;"></i>
+                transporting&nbsp;/&nbsp;<strong>illya-test</strong>
+              </p>
+            </a>
+            <a href="#">
+              <p class="secondary-link-color-wrapper">
+                <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
+                illya&nbsp;/&nbsp;<strong>test0odcsdcdsc</strong>
+              </p>
+            </a>
+            <a href="#">
+              <p class="secondary-link-color-wrapper">
+                <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
+                admin&nbsp;/&nbsp;<strong>tema</strong>
+              </p>
+            </a>
+            <a href="#">
+              <p class="secondary-link-color-wrapper">
+                <i class="mdi mdi-lock mdi-18px" style="position:relative; top:1px;"></i>
+                boss&nbsp;/&nbsp;<strong>API for everything</strong>
+              </p>
+            </a>
+            <a href="#">
+              <p class="secondary-link-color-wrapper">
+                <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
+                bosch&nbsp;/&nbsp;<strong>just here testing</strong>
+              </p>
+            </a>
+          </div>
         </div>
       </div>
       <div class="col-md-6" id="account-overview_organizations">
         <div class="block-wrapper" style="height:300px;">
           <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
-            Organizations
+            Your organizations
           </h2>
         </div>
       </div>
