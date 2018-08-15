@@ -1,5 +1,22 @@
 <template name="apiAvailabilityComponent">
-  <div class="col-md-12" id="account-overview_apiAvailability">
+  <div>
+    <div class="block-wrapper">
+      <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
+        Plan usage
+        <small style="font-weight:600;float: right; text-transform: uppercase;">Business</small>
+      </h2>
+      <div style="margin-top:1em;">
+        <h3 style="margin-top: 0;margin-bottom: 0;font-size: 1.4rem;">
+          You have used 51% API calls this month
+        </h3>
+        <p style="color: #6d859e;">Last updated at August 15th 2018, 9:05 UTC</p>
+        <a href="{{ pathFor 'plans' }}" class="btn btn-link account-plan_change" style="padding-left: 0; padding-bottom:0; text-transform: uppercase; font-size: 1.2rem; font-weight: 600;">
+          Change plan
+        </a>
+      </div>
+    </div>
+  </div>
+  <div id="account-overview_apiAvailability">
     <div class="block-wrapper">
       <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">API availability</h2>
       <div class="lastStatusOnAllApis" style="margin-top:1em;">
