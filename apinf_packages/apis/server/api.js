@@ -1047,29 +1047,29 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       ],
     },
     action () {
-        // Get ID of API (URL parameter)
+      // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
-        // Get User ID
+      // Get User ID
       const userId = this.userId;
 
-        // API related checkings
-        // Get API document
+      // API related checkings
+      // Get API document
       const api = Apis.findOne(apiId);
 
-        // API must exist
+      // API must exist
       if (!api) {
-          // API doesn't exist
+        // API doesn't exist
         return errorMessagePayload(404, 'API with specified ID is not found.');
       }
 
-        // Get API's Proxy connection data
+      // Get API's latest monitoring status code
       const latestMonitoringStatusCode = api.latestMonitoringStatusCode;
       if (!latestMonitoringStatusCode) {
-          // The Proxy backend doesn't exist
+        // No monitoring is available
         return errorMessagePayload(404, 'No monitoring found');
       }
 
-        // OK response with Proxy backend data
+      // OK response with latest monitoring status code
       return {
         statusCode: 200,
         body: {
