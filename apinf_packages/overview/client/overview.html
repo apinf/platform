@@ -25,19 +25,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8" id="account-overview_status">
-        <div class="block-wrapper" style="height:300px;">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 16px;">Status</h2>
-        </div>
-      </div>
+      {{> apiAvailabilityComponent }}
       <div class="col-md-4" id="account-overview_apis">
         <div class="block-wrapper" style="height:300px;">
           <h2 style="margin-top: 0;margin-bottom: 0;font-size: 16px;">
-            Your APIs
+            APIs
             <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
-            <small style="color: #19B934; font-weight: 500;font-size:75%;">
-              Add new API
-            </small>
+              <small style="color: #19B934; font-weight: 500;font-size:75%;">
+                Add new API
+              </small>
             </a>
           </h2>
         </div>
