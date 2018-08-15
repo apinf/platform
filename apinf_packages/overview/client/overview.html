@@ -19,22 +19,38 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container slide-up-animation" id="account-overview">
     <div class="row">
       <div class="col-md-12" id="account-overview_statistics">
-        <div class="block-wrapper" style="height:300px;">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 16px;">Statistics</h2>
+        <div class="block-wrapper">
+          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">Statistics</h2>
+          <div style="margin-top:1em;">
+            <h3 style="margin-top: 0;margin-bottom: 0;font-size: 1.4rem;">
+              You have used 51% API calls this month
+            </h3>
+            <p style="color: #6d859e;">Last updated at August 15th 2018, 9:05 UTC</p>
+          </div>
+          <canvas id="test" height="20" width="100" style="margin-top: 2rem;"></canvas>
         </div>
       </div>
     </div>
     <div class="row">
       {{> apiAvailabilityComponent }}
-      <div class="col-md-4" id="account-overview_apis">
+    </div>
+    <div class="row">
+      <div class="col-md-6" id="account-overview_apis">
         <div class="block-wrapper" style="height:300px;">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 16px;">
+          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
             APIs
             <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
               <small style="color: #19B934; font-weight: 500;font-size:75%;">
                 Add new API
               </small>
             </a>
+          </h2>
+        </div>
+      </div>
+      <div class="col-md-6" id="account-overview_organizations">
+        <div class="block-wrapper" style="height:300px;">
+          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
+            Organizations
           </h2>
         </div>
       </div>
