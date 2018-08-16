@@ -271,6 +271,45 @@ CatalogV1.swagger = {
         },
       },
     },
+    apiMonitoring: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'api-id-value',
+        },
+        enabled: {
+          type: 'boolean',
+          example: 'true',
+        },
+        apiMonitoringResultList: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              responses: {
+                type: 'object',
+                description: 'text',
+                properties: {
+                  date: {
+                    type: 'string',
+                    example: 'text',
+                  },
+                  server_status_code: {
+                    type: 'string',
+                    example: 'text',
+                  },
+                  url: {
+                    type: 'string',
+                    example: 'url',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     loginRequest: {
       required: ['username', 'password'],
       properties: {
@@ -308,7 +347,6 @@ CatalogV1.swagger = {
         },
       },
     },
-
   },
 };
 
