@@ -70,7 +70,6 @@ const authentication = {
       },
     },
   },
-
   logout: {
     post: {
       tags: [
@@ -112,6 +111,5 @@ const authentication = {
     },
   },
 };
-
 
 export default authentication;
