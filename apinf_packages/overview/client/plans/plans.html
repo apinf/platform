@@ -8,12 +8,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <ul class="container list-inline catalog-header" style="margin-bottom: 0;">
       <li class="col-md-12">
         <h1 style="margin-top:0; margin-bottom:0; line-height: 60px; display:inline;">
-          <a href="{{ pathFor 'overview' }}" style="font-weight:400;">
-            Account overview
-          </a>
-        </h1>
-        <i class="mdi mdi-chevron-right mdi-18px"></i>
-        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px; display:inline;">
           Apinf plans
         </h1>
       </li>
@@ -21,23 +15,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
   <div class="container slide-up-animation" id="apinf-plans">
     <div class="row">
-      <h1 class="text-center" style="margin-top:2em;">Simple, transparent pricing. Always know what you'll pay</h1>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
           <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Evaluation</h2>
           <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
-          <p><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 40px;">Free</span></p>
-          <ul class="list-unstyled plan_features" style="padding-left: 30px;">
-            <li>30,000 API calls per month</li>
+          <p><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 20px;">Free</span></p>
+          <ul class="list-unstyled plan_features" style="padding-left: 10px;">
+            <li>30,000 API calls</li>
             <li>Unlimited private APIs</li>
             <li>API monitoring</li>
             <li>Support</li>
           </ul>
-          <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
+          <div style="text-align:center;">
             {{# unless evaluationPlan }}
-            <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
-              Start using
-              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+            <button class="btn btn-primary" id="apinf-plans_evaluation" style="width: 75%; height: 44px;">
+              Downgrade
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 2px; position: relative;"></i>
             </button>
             {{ else }}
             <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
@@ -47,22 +40,47 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
           <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Starter</h2>
           <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
-          <p style="font-size: 2rem;"><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 40px;">€299</span> / month</p>
-          <ul class="list-unstyled plan_features" style="padding-left: 30px;">
-            <li>10,000,00 API calls per month</li>
+          <p style="font-size: 2rem;"><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 20px;">€299</span> / month</p>
+          <ul class="list-unstyled plan_features" style="padding-left: 10px;">
+            <li>10,000,000 API calls</li>
             <li>Unlimited private APIs</li>
             <li>API monitoring</li>
             <li>Support</li>
           </ul>
-          <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
+          <div style="text-align:center;">
             {{# unless starterPlan }}
-            <button id="apinf-plans_starter" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; background-color: #19b934; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
-              Start using
-              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+            <button class="btn btn-primary" id="apinf-plans_starter" style="width: 75%; height: 44px;">
+              Upgrade
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 2px; position: relative;"></i>
+            </button>
+            {{ else }}
+            <button class="btn btn-default" id="apinf-plans_starter" style="width: 75%; height: 44px;">
+              Your current plan
+            </button>
+            {{/ unless }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
+          <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Business</h2>
+          <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
+          <p style="font-size: 2rem;"><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 20px;">€1499</span> / month</p>
+          <ul class="list-unstyled plan_features" style="padding-left: 10px;">
+            <li>200,000,000 API calls</li>
+            <li>Unlimited private APIs</li>
+            <li>API monitoring</li>
+            <li>Support</li>
+          </ul>
+          <div style="text-align:center;">
+            {{# unless businessPlan }}
+            <button class="btn btn-primary" id="apinf-plans_business" style="width: 75%; height: 44px;">
+              Upgrade
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 2px; position: relative;"></i>
             </button>
             {{ else }}
             <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
@@ -72,22 +90,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="block-wrapper" style="height:auto;padding-top:0;box-shadow: none;">
-          <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Business</h2>
+          <h2 class="text-center" style="margin-top: 0;margin-bottom: 0;font-size: 1.8rem;padding-top: 2rem; padding-bottom: 2rem;">Enterprise</h2>
           <hr style="border-color: #f1f5f8; margin-bottom: 2rem; border-width: 2px; margin-left: -20px; margin-right: -20px;">
-          <p style="font-size: 2rem;"><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 40px;">€1499</span> / month</p>
-          <ul class="list-unstyled plan_features" style="padding-left: 30px;">
-            <li>200,000,00 API calls per month</li>
+          <p style="font-size: 2rem;"><span style="font-size:3.2rem;color:#37474F;font-weight:600;padding-left: 20px;">€1499</span> / month</p>
+          <ul class="list-unstyled plan_features" style="padding-left: 10px;">
+            <li>200,000,000 API calls</li>
             <li>Unlimited private APIs</li>
             <li>API monitoring</li>
             <li>Support</li>
           </ul>
-          <div style="margin-left: -20px; margin-right: -20px; margin-bottom: -20px;">
+          <div style="text-align:center;">
             {{# unless businessPlan }}
-            <button id="apinf-plans_business" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; background-color: #19b934; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
-              Start using
+            <!-- <button id="apinf-plans_business" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #fff; background-color: #19b934; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">
+              Upgrade
               <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 1px; position: relative;"></i>
+            </button> -->
+            <button class="btn btn-primary" id="apinf-plans_business" style="width: 75%; height: 44px;">
+              Upgrade
+              <i class="mdi mdi-arrow-right mdi-18px" style="left: 5px; top: 2px; position: relative;"></i>
             </button>
             {{ else }}
             <button id="apinf-plans_evaluation" style="margin-top: 0; margin-bottom: 0; font-size: 1.6rem; color: #37474F; text-transform: uppercase; display: block; text-align: center; padding-top: 2rem; padding-bottom: 2rem; border-top: 2px solid #f1f5f8;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;border-left: none; border-right: none; border-bottom: none; width: 100%;">

@@ -11,9 +11,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           Account overview
         </h1>
       </li>
-      <!-- <li class="col-md-4 text-right">
-        {{> overviewPlan }}
-      </li> -->
     </ul>
   </div>
   <div class="container slide-up-animation" id="account-overview">
@@ -78,7 +75,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="block-wrapper" style="height:300px;">
           <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
             Your organizations
+            <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
+              <small style="color: #19B934; font-weight: 500;font-size:75%;">
+                Add new organization
+              </small>
+            </a>
           </h2>
+          <div class="overviewUserOrgsList" style="margin-top:1em;">
+            {{> search_form }}
+          </div>
         </div>
       </div>
     </div>
