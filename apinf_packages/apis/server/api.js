@@ -1021,7 +1021,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
                 example: 'Success',
               },
               data: {
-                $ref: '#/definitions/proxyConnectionResponse',
+                $ref: '#/definitions/apiResponse',
               },
             },
           },
