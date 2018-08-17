@@ -368,7 +368,7 @@ CatalogV1.swagger = {
         apiPort: {
           type: 'integer',
           format: 'int32',
-          example: '448',
+          example: '443',
         },
         disableApiKey: {
           type: 'string',
@@ -449,7 +449,7 @@ CatalogV1.swagger = {
         apiPort: {
           type: 'integer',
           format: 'int32',
-          example: '448',
+          example: '443',
         },
         disableApiKey: {
           type: 'string',
@@ -557,7 +557,7 @@ CatalogV1.swagger = {
                   port: {
                     type: 'integer',
                     format: 'int32',
-                    example: '448',
+                    example: '443',
                   },
                 },
               },
