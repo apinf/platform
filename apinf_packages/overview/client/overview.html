@@ -4,110 +4,111 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="overview">
-  <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height: 60px;">
-    <ul class="container list-inline catalog-header" style="margin-bottom: 0;">
-      <li class="col-md-12">
-        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px;">
-          Account overview
-        </h1>
-      </li>
-    </ul>
-  </div>
-  <div class="container slide-up-animation" id="account-overview">
+  <div class="container-fluid slide-up-animation" id="account-overview" style="padding-left: 35px; padding-right: 35px;">
     <div class="row">
-      <div class="col-md-12" id="account-overview_statistics">
-        <div class="block-wrapper">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">Statistics</h2>
-          <canvas id="test" height="20" width="100" style="margin-top: 2rem;"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      {{> apiAvailabilityComponent }}
-    </div>
-    <div class="row">
-      <div class="col-md-6" id="account-overview_apis">
-        <div class="block-wrapper">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
-            Your APIs
-            <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
-              <small style="color: #19B934; font-weight: 500;font-size:75%;">
-                Add new API
-              </small>
-            </a>
-          </h2>
-          <div class="overviewUserApisList" style="margin-top:1em;">
-            {{> search_form }}
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <i class="mdi mdi-lock mdi-18px" style="position:relative; top:1px;"></i>
-                transporting&nbsp;/&nbsp;<strong>illya-test</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
-                illya&nbsp;/&nbsp;<strong>test0odcsdcdsc</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
-                admin&nbsp;/&nbsp;<strong>tema</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <i class="mdi mdi-lock mdi-18px" style="position:relative; top:1px;"></i>
-                boss&nbsp;/&nbsp;<strong>API for everything</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
-                bosch&nbsp;/&nbsp;<strong>just here testing</strong>
-              </p>
-            </a>
+      <div class="padding-col-10px">
+        <div class="col-md-3">
+          <div class="col-md-12" id="account-overview_apis">
+            <div class="block-wrapper">
+              <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
+                Your APIs
+                <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
+                  <small style="color: #19B934; font-weight: 500;font-size:75%;">
+                    Add new API
+                  </small>
+                </a>
+              </h2>
+              <div class="overviewUserApisList" style="margin-top:1em;">
+                {{> search_form }}
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <i class="mdi mdi-lock mdi-18px" style="position:relative; top:1px;"></i>
+                    transporting&nbsp;/&nbsp;<strong>illya-test</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
+                    illya&nbsp;/&nbsp;<strong>test0odcsdcdsc</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
+                    admin&nbsp;/&nbsp;<strong>tema</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <i class="mdi mdi-lock mdi-18px" style="position:relative; top:1px;"></i>
+                    boss&nbsp;/&nbsp;<strong>API for everything</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <i class="mdi mdi-code-greater-than mdi-18px" style="position:relative; top:1px;color:#7c96a3;"></i>
+                    bosch&nbsp;/&nbsp;<strong>just here testing</strong>
+                  </p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12" id="account-overview_organizations">
+            <div class="block-wrapper">
+              <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
+                Your organizations
+                <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
+                  <small style="color: #19B934; font-weight: 500;font-size:75%;">
+                    Add new organization
+                  </small>
+                </a>
+              </h2>
+              <div class="overviewUserOrgsList" style="margin-top:1em;">
+                {{> search_form }}
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
+                    <strong style="margin-left:5px;">Apinf</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
+                    <strong style="margin-left:5px;">Transporting</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
+                    <strong style="margin-left:5px;">Google</strong>
+                  </p>
+                </a>
+                <a href="#">
+                  <p class="secondary-link-color-wrapper">
+                    <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
+                    <strong style="margin-left:5px;">Google</strong>
+                  </p>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6" id="account-overview_organizations">
-        <div class="block-wrapper">
-          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">
-            Your organizations
-            <a href="{{ pathFor 'addApi' }}" class="btn-link pull-right" style="height:auto; cursor:pointer; text-transform: uppercase; text-decoration:none;">
-              <small style="color: #19B934; font-weight: 500;font-size:75%;">
-                Add new organization
-              </small>
-            </a>
-          </h2>
-          <div class="overviewUserOrgsList" style="margin-top:1em;">
-            {{> search_form }}
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
-                <strong style="margin-left:5px;">Apinf</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
-                <strong style="margin-left:5px;">Transporting</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
-                <strong style="margin-left:5px;">Google</strong>
-              </p>
-            </a>
-            <a href="#">
-              <p class="secondary-link-color-wrapper">
-                <img src="http://localhost:3000/gridfs/OrganizationLogo/md5/11bc249825917abbf0992322b472152f" width="25px" style="border-radius:100%;">
-                <strong style="margin-left:5px;">Google</strong>
-              </p>
-            </a>
-          </div>
+      <div class="col-md-6" id="account-overview_statistics">
+        <div class="block-wrapper dashboard-summary-block">
+          <h2 style="margin-top: 0;margin-bottom: 0;font-size: 1.6rem;">Analytics</h2>
+          {{# if Template.subscriptionsReady }}
+          {{# if managedApisCount }}
+          {{> dashboardView }}
+          {{/ if }}
+          {{ else }}
+          {{> spinner }}
+          {{/ if }}
+        </div>
+      </div>
+      <div class="padding-col-10px">
+        <div class="col-md-3">
+          {{> apiAvailabilityComponent }}
         </div>
       </div>
     </div>

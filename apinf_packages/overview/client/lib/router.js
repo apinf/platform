@@ -7,9 +7,34 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-FlowRouter.route('/overview', {
+// APInf imports
+import signedIn from '/apinf_packages/core/client/lib/router';
+
+// Add route to signedIn group, requires user to sign in
+signedIn.route('/overview', {
+  // Get the empty query parameters on Enter
+  triggersEnter: [(context) => {
+    // Initialize the query parameters which can be calculated in code
+    // Do it to saving url consistent for the browser history
+    if (!context.queryParams.proxy_id) {
+      // Initialize proxy parameter if it doesn't specify
+      context.queryParams.proxy_id = null;
+    }
+
+    if (!context.queryParams.timeframe) {
+      // Initialize timeframe parameter if it doesn't specify
+      // Default value is 7
+      context.queryParams.timeframe = 7;
+    }
+
+    if (!context.queryParams.sort) {
+      // Initialize sort parameter if it doesn't specify
+      // Default value is 'name'
+      context.queryParams.sort = 'name';
+    }
+  }],
   name: 'overview',
-  action () {
+  action: () => {
     BlazeLayout.render('masterLayout', { main: 'overview' });
   },
 });
