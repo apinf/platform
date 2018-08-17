@@ -1049,8 +1049,6 @@ CatalogV1.addRoute('apis/:id/monitoring', {
     action () {
       // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
-      // Get User ID
-      const userId = this.userId;
 
       // API related checkings
       // Get API document
