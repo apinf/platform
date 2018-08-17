@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -36,31 +36,20 @@ const descriptionProxies = {
   - proxy description
   - proxy type
 
-  Depending on proxy type, there is information accordingly either about
-  apiUmbrella of EMQ
-  - API Umbrella
-    - proxy URL
-    - API key
-    - authentication token
-    - elastic search URL.
-
-  - EMQ
-    - brokerEndpoints
-      - Protocol
-      - Host
-      - Port
-      - TLS activation status
-    - httpApi
-    - elastic search URL
+  Default type for a proxy is apiUmbrella
+  - proxy URL
+  - API key
+  - authentication token
+  - elastic search URL.
 
   Example calls:
 
     GET /proxies
 
-  Result: Responds with HTTP code 200 and a list of available Proxies containing
+  Result: Response with HTTP code 200 and a list of available Proxies containing
   proxy information by proxy type.
 
-  If no proxies are defined, returns an empty list.
+  If no proxies are defined, an empty list is returned.
   `,
   // --------------------------------------------
   getProxy: `
@@ -74,22 +63,11 @@ const descriptionProxies = {
   - proxy description
   - proxy type.
 
-  Depending on proxy type, there is information accordingly either about
-  apiUmbrella of EMQ
-  - API Umbrella
-    - proxy URL
-    - API key
-    - authentication token
-    - elastic search URL.
-
-  - EMQ
-  - brokerEndpoints
-    - Protocol
-    - Host
-    - Port
-    - TLS activation status
-  - httpApi
-  - elastic search URL
+  Default proxy type is apiUmbrella
+  - proxy URL
+  - API key
+  - authentication token
+  - elastic search URL.
 
   Example calls:
 
@@ -109,7 +87,7 @@ const descriptionProxies = {
 
     DELETE /proxies/<proxy id>
 
-  Result: deletes the Proxy identified with <proxy id> and responds with HTTP code 204.
+  Result: deletes the Proxy, which is identified with <proxy id> and responds with HTTP code 204.
   A Proxy with connected backends cannot be removed.
   If match is not found, the operation is considered as a failure.
   `,
@@ -123,7 +101,7 @@ const descriptionProxies = {
   Parameters (all are mandatory)
   * name (must be unique)
   * description
-  * type = proxy type, [apiUmbrella | EMQ]
+  * type = proxy type, (default is apiUmbrella)
 
   Proxy type related parameters.
   The parameter set according to selected proxy type is mandatory.
@@ -134,16 +112,7 @@ const descriptionProxies = {
   - umbAuthToken = Authentication Token
   - esUrl = ElasticSearch URL
 
-  EMQ:
-  - emqHttpApi = Configuration API endpoint
-  - esUrl = ElasticSearch URL
-  - Broker Endpoint (one or several) consisting of:
-    - emqProtocol = protocol to be used [MQTT | MQTT over websockets]
-    - emqHost = Host URL
-    - emqPort = Port used in Host URL
-    - emqTLS = TLS activation (true | false)
-
-  Example call:
+    Example call:
 
     POST /proxies/
 
@@ -157,14 +126,6 @@ const descriptionProxies = {
   proxy's type can be modified.
   At least one parameter in set according to proxy type must be given.
   Parameters in wrong set must not be given.
-
-  With parameter *beIndex* it is indicated, which broker endpoint data is to be modified.
-  Also a new broker endpoint occurrence can be added to
-  - a hole in broker endpoint list (*beIndex* points to hole) or
-  - end of broker endpoint list (*beIndex* points to length of list)
-
-  With parameter *beIndexRemove* it is indicated, which broker endpoint data is to be removed.
-
 
   Note! Type of Proxy can not be changed.
 
@@ -186,18 +147,6 @@ const descriptionProxies = {
   - umbApiKey = API key
   - umbAuthToken = Authentication Token
   - esUrl = ElasticSearch URL
-
-  EMQ:
-  - emqHttpApi = Configuration API endpoint
-  - esUrl = ElasticSearch URL
-  - Broker Endpoint (one or several) consisting of:
-    - emqProtocol = protocol to be used [MQTT | MQTT over websockets]
-    - emqHost = Host URL
-    - emqPort = Port used in Host URL
-    - emqTLS = TLS activation [true | false]
-
-  - beIndex = indicates the broker endpoint occurrence, which data is modified or added
-  - beIndexRemove = indicates, which broker endpoint is to be removed
 
   Example call:
 

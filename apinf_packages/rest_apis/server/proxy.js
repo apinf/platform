@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
  This file is covered by the EUPL license.
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -96,8 +96,8 @@ ProxyV1.swagger = {
         },
         type: {
           type: 'string',
-          enum: ['apiUmbrella', 'emq'],
-          example: 'apiUmbrella | emq',
+          enum: ['apiUmbrella'],
+          example: 'apiUmbrella',
         },
         umbProxyUrl: {
           type: 'string',
@@ -120,32 +120,6 @@ ProxyV1.swagger = {
           description: 'A URL to ElasticSearch',
           format: 'url',
           example: 'http://url-to-elastic-search.com:port',
-        },
-        emqProtocol: {
-          type: 'string',
-          enum: ['MQTT', 'MQTT over websockets'],
-          description: 'Protocol is either MQTT or MQTT over websockets',
-          example: 'MQTT | MQTT over websockets',
-        },
-        emqHost: {
-          type: 'string',
-          format: 'url',
-          example: 'https://emq.host.com',
-        },
-        emqPort: {
-          type: 'integer',
-          format: 'int32',
-          example: '666',
-        },
-        emqTLS: {
-          type: 'string',
-          enum: ['true', 'false'],
-          example: 'true | false',
-        },
-        emqHttpApi: {
-          type: 'string',
-          format: 'url',
-          example: 'https://emq.httpapi.com',
         },
       },
     },
@@ -192,32 +166,6 @@ ProxyV1.swagger = {
           format: 'url',
           example: 'http://url-to-elastic-search.com:port',
         },
-        emqProtocol: {
-          type: 'string',
-          enum: ['MQTT', 'MQTT over websockets'],
-          description: 'Protocol is either MQTT or MQTT over websockets',
-          example: 'MQTT | MQTT over websockets',
-        },
-        emqHost: {
-          type: 'string',
-          format: 'url',
-          example: 'https://emq.host.com',
-        },
-        emqPort: {
-          type: 'integer',
-          format: 'int32',
-          example: '666',
-        },
-        emqTLS: {
-          type: 'string',
-          enum: ['true', 'false'],
-          example: 'true | false',
-        },
-        emqHttpApi: {
-          type: 'string',
-          format: 'url',
-          example: 'https://emq.httpapi.com',
-        },
       },
     },
     proxyResponse: {
@@ -257,48 +205,6 @@ ProxyV1.swagger = {
             elasticsearch: {
               type: 'string',
               example: 'https://search.address.and:port',
-            },
-          },
-        },
-        emq: {
-          type: 'object',
-          properties: {
-            brokerEndpoints: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  protocol: {
-                    type: 'string',
-                    format: 'url',
-                    example: 'MQTT',
-                  },
-                  host: {
-                    type: 'string',
-                    example: 'https://proxy.url',
-                  },
-                  port: {
-                    type: 'integer',
-                    format: 'int32',
-                    example: '14002',
-                  },
-                  tls: {
-                    type: 'string',
-                    example: 'true',
-                  },
-                },
-              },
-            },
-            httpApi: {
-              type: 'string',
-              format: 'url',
-              example: 'https://emq.httpapi.com',
-            },
-            elasticsearch: {
-              type: 'string',
-              description: 'A URL to ElasticSearch',
-              format: 'url',
-              example: 'http://url-to-elastic-search.com:port',
             },
           },
         },
