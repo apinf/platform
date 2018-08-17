@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
  This file is covered by the EUPL license.
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -99,7 +99,7 @@ ProxyV1.addCollection(Proxies, {
         const queryParams = this.queryParams;
         // Parse query parameters
         if (queryParams.type) {
-          const allowedTypes = ['apiUmbrella', 'emq'];
+          const allowedTypes = ['apiUmbrella'];
           if (!allowedTypes.includes(queryParams.type)) {
             return errorMessagePayload(400, 'Parameter "type" has erroneous value.',
             'type', queryParams.type);
@@ -275,8 +275,6 @@ ProxyV1.addCollection(Proxies, {
           name: bodyParams.name,
           type: bodyParams.type,
           'apiUmbrella.url': bodyParams.umbProxyUrl,
-          'emq.brokerEndpoints.$.protocol': bodyParams.emqProtocol,
-          'emq.brokerEndpoints.$.port': bodyParams.emqPort,
         };
 
         // Name is a mandatory field
@@ -307,17 +305,16 @@ ProxyV1.addCollection(Proxies, {
         if (!bodyParams.type) {
           return errorMessagePayload(400, 'Parameter "type" is mandatory.');
         }
-        // Type is either apiUmbrella or emq
+        // Type is apiUmbrella
         if (bodyParams.type) {
-          isValid = Proxies.simpleSchema().namedContext().validateOne(
-            validateFields, 'type');
-
-          if (!isValid) {
-            return errorMessagePayload(400, 'Erroneous Proxy type.');
+          const allowedTypes = ['apiUmbrella'];
+          if (!allowedTypes.includes(bodyParams.type)) {
+            return errorMessagePayload(400, 'Parameter "type" has erroneous value.',
+            'type', bodyParams.type);
           }
         }
 
-        // Check apiUmbrella elasticSearch URL, can be used in both cases
+        // Check apiUmbrella elasticSearch URL
         if (!bodyParams.esUrl) {
           return errorMessagePayload(400, 'Parameter "esUrl" is mandatory.');
         }
@@ -363,77 +360,6 @@ ProxyV1.addCollection(Proxies, {
           };
           // Add apiUmbrella data into proxy data
           proxyData.apiUmbrella = apiUmbrella;
-        } else {
-          // Here has to be EMQ parameters of broker endpoints in question
-          // Check mandatory Protocol
-          if (!bodyParams.emqProtocol) {
-            return errorMessagePayload(400, 'Parameter "emqProtocol" is mandatory.');
-          }
-          // Check URL validation
-          isValid = Proxies.simpleSchema().namedContext().validateOne(
-            validateFields, 'emq.brokerEndpoints.$.protocol');
-
-          if (!isValid) {
-            return errorMessagePayload(400, 'EMQ protocol not valid.');
-          }
-          // Check mandatory EMQ host
-          if (!bodyParams.emqHost) {
-            return errorMessagePayload(400, 'Parameter "emqHost" is mandatory.');
-          }
-          // regex missing from table, so check generally
-          if (!bodyParams.emqHost.match(re)) {
-            return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
-          }
-
-          // Check mandatory EMQ (host) port
-          if (!bodyParams.emqPort) {
-            return errorMessagePayload(400, 'Parameter "emqPort" is mandatory.');
-          }
-          // Check port validation
-          if (isNaN(bodyParams.emqPort) || bodyParams.emqPort < 0 || bodyParams.emqPort > 65535) {
-            return errorMessagePayload(400, 'Parameter "emqPort" has erroneous value.',
-            'emqPort', bodyParams.emqPort);
-          }
-
-          // Check mandatory EMQ TLS
-          if (!bodyParams.emqTLS) {
-            return errorMessagePayload(400, 'Parameter "emqTLS" is mandatory.');
-          }
-
-          if (bodyParams.emqTLS === 'true') {
-            bodyParams.emqTLS = true;
-          } else if (bodyParams.emqTLS === 'false') {
-            bodyParams.emqTLS = false;
-          } else {
-            return errorMessagePayload(400, 'Parameter "emqTLS" has erroneous value.');
-          }
-
-          // Check mandatory EMQ http API
-          if (!bodyParams.emqHttpApi) {
-            return errorMessagePayload(400, 'Parameter "emqHttpApi" is mandatory.');
-          }
-          // regex missing from table, so check generally
-          if (!bodyParams.emqHttpApi.match(re)) {
-            return errorMessagePayload(400, 'Parameter "emqHttpApi" is not valid.');
-          }
-
-          // Fill EMQ parameters
-          const emq = {};
-          const brokerEndpoints = [];
-          const brokerEndpoint = {
-            protocol: bodyParams.emqProtocol,
-            host: bodyParams.emqHost,
-            port: bodyParams.emqPort,
-            tls: bodyParams.emqTLS,
-          };
-
-          brokerEndpoints[0] = brokerEndpoint;
-          emq.brokerEndpoints = brokerEndpoints;
-          emq.httpApi = bodyParams.emqHttpApi;
-          emq.elasticsearch = bodyParams.esUrl;
-
-          // Add EMQ data into proxy data
-          proxyData.emq = emq;
         }
 
         // Insert Proxy data into collection
@@ -564,8 +490,6 @@ ProxyV1.addCollection(Proxies, {
           name: bodyParams.name,
           type: bodyParams.type,
           'apiUmbrella.url': bodyParams.umbProxyUrl,
-          'emq.brokerEndpoints.$.protocol': bodyParams.emqProtocol,
-          'emq.brokerEndpoints.$.port': bodyParams.emqPort,
         };
 
         // In update we do not need id of existing proxy's data
@@ -636,139 +560,6 @@ ProxyV1.addCollection(Proxies, {
           if (bodyParams.esUrl) {
             proxyData.apiUmbrella.elasticsearch = bodyParams.esUrl;
             delete bodyParams.esUrl;
-          }
-        } else {
-          // Based on current EMQ parameters
-          // Check EMQ http API
-          if (bodyParams.emqHttpApi) {
-            // regex missing from table, so check generally
-            if (!bodyParams.emqHttpApi.match(re)) {
-              return errorMessagePayload(400, 'Parameter "emqHttpApi" is not valid.');
-            }
-            proxyData.emq.httpApi = bodyParams.emqHttpApi;
-            delete bodyParams.emqHttpApi;
-          }
-
-          // Check is ElasticSearch URL was given
-          if (bodyParams.esUrl) {
-            proxyData.emq.elasticsearch = bodyParams.esUrl;
-            delete bodyParams.esUrl;
-          }
-          // Check if broker endpoint data is to be modified
-          // Count number of broker endpoints currently in DB
-          const countOfBE = proxyData.emq.brokerEndpoints.length;
-
-          // Is the beIndex given
-          if (bodyParams.beIndex) {
-            // Does the beIndex have correct value
-            if (isNaN(bodyParams.beIndex) ||
-                1 * bodyParams.beIndex < 0 ||
-                1 * bodyParams.beIndex > countOfBE) {
-              const detailLine = `Allowed range for 'beIndex' is 0 - ${countOfBE}`;
-              return errorMessagePayload(400, detailLine, 'beIndex', bodyParams.beIndex);
-            }
-            // At least one of broker endpoint values must be given with beIndex
-            if (!bodyParams.emqProtocol &&
-                !bodyParams.emqHost &&
-                !bodyParams.emqPort &&
-                !bodyParams.emqTLS) {
-              const detailLine = 'Broker endpoint index given without change values.';
-              return errorMessagePayload(400, detailLine);
-            }
-          }
-
-          // Is any broker endpoint data given
-          if (bodyParams.emqProtocol ||
-              bodyParams.emqHost ||
-              bodyParams.emqPort ||
-              bodyParams.emqTLS) {
-            // Also broker endpoint index must be given with broker endpoint data
-            if (!bodyParams.beIndex) {
-              return errorMessagePayload(400, 'Index for broker endpoint is missing.');
-            }
-
-            // Object for collecting input parameters for broker endpoint
-            let brokerEndpoint = {};
-            if (proxyData.emq.brokerEndpoints[bodyParams.beIndex]) {
-              // If broker endpoint exists, it is the basis, which we are updating
-              brokerEndpoint = proxyData.emq.brokerEndpoints[bodyParams.beIndex];
-            } else if (!bodyParams.emqProtocol ||
-                       !bodyParams.emqHost ||
-                       !bodyParams.emqPort ||
-                       !bodyParams.emqTLS) {
-              // BE does not exist, so we are creating a new one
-              // All related parameters are needed
-              return errorMessagePayload(400, 'All broker endpoint parameters are needed.');
-            }
-
-            // Check Protocol
-            if (bodyParams.emqProtocol) {
-              // Check URL validation
-              const isValid = Proxies.simpleSchema().namedContext().validateOne(
-                validateFields, 'emq.brokerEndpoints.$.protocol');
-
-              if (!isValid) {
-                return errorMessagePayload(400, 'EMQ protocol not valid.');
-              }
-              brokerEndpoint.protocol = bodyParams.emqProtocol;
-              delete bodyParams.emqProtocol;
-            }
-            // Check EMQ host
-            if (bodyParams.emqHost) {
-              // regex missing from table, so check generally
-              if (!bodyParams.emqHost.match(re)) {
-                return errorMessagePayload(400, 'Parameter "emqHost" is not valid.');
-              }
-              brokerEndpoint.host = bodyParams.emqHost;
-              delete bodyParams.emqHost;
-            }
-            // Check EMQ (host) port
-            if (bodyParams.emqPort) {
-              // Check port validation
-              if (isNaN(bodyParams.emqPort) ||
-                  bodyParams.emqPort < 0 ||
-                  bodyParams.emqPort > 65535) {
-                return errorMessagePayload(400, 'Parameter "emqPort" has erroneous value.',
-                'emqPort', bodyParams.emqPort);
-              }
-              brokerEndpoint.port = bodyParams.emqPort;
-              delete bodyParams.emqPort;
-            }
-            // Check EMQ TLS
-            if (bodyParams.emqTLS) {
-              if (bodyParams.emqTLS === 'true') {
-                bodyParams.emqTLS = true;
-              } else if (bodyParams.emqTLS === 'false') {
-                bodyParams.emqTLS = false;
-              } else {
-                return errorMessagePayload(400, 'Parameter "emqTLS" has erroneous value.');
-              }
-              brokerEndpoint.tls = bodyParams.emqTLS;
-              delete bodyParams.emqTLS;
-            }
-            // Fill newly filled or modified broker endpoint to proxy data
-            // using beIndex
-            proxyData.emq.brokerEndpoints[bodyParams.beIndex] = brokerEndpoint;
-            delete bodyParams.beIndex;
-          }
-
-          // Check if a broker endpoint is to be removed
-          if (bodyParams.beIndexRemove) {
-            // Check if beIndexRemove has correct value
-            if (isNaN(bodyParams.beIndexRemove) ||
-                1 * bodyParams.beIndexRemove < 0 ||
-                1 * bodyParams.beIndexRemove > (countOfBE - 1)) {
-              const detailLine = `Allowed range for "beIndexRemove" is 0 - ${countOfBE - 1}`;
-              return errorMessagePayload(400, detailLine, 'beIndexRemove',
-                bodyParams.beIndexRemove);
-            }
-            // Broker Endpoint to be removed must exist
-            if (!proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove]) {
-              return errorMessagePayload(400, 'Broker endpoint does not exist.');
-            }
-            // Remove the indicated broker endpoint
-            delete proxyData.emq.brokerEndpoints[bodyParams.beIndexRemove];
-            delete bodyParams.beIndexRemove;
           }
         }
         // If there are any parameters left, they are erroneous

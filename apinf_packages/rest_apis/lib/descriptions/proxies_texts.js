@@ -101,7 +101,7 @@ const descriptionProxies = {
   Parameters (all are mandatory)
   * name (must be unique)
   * description
-  * type = proxy type, (default is apiUmbrella)
+  * type = proxy type (apiUmbrella)
 
   Proxy type related parameters.
   The parameter set according to selected proxy type is mandatory.
