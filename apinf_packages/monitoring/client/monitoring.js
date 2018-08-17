@@ -53,9 +53,20 @@ Template.apiMonitoring.helpers({
   },
   apiStatusData () {
     const apiId = this.api._id;
-    const monitoringData = MonitoringData.findOne({ apiId });
+    const startDate = new Date();
+    const lastDate = new Date();
+    lastDate.setDate(lastDate.getDate() - 1);
+    const query = { responses: { $elemMatch: { date: { $gte: lastDate, $lte: startDate } } } };
+    const monitoringData = MonitoringData.findOne({ apiId: apiId  });
+    let responses = monitoringData.responses.filter(function(obj) {
+      if(obj.date >= lastDate && obj.date <= startDate) {
+        return true;
+      } else {
+        return false;
+      }
+    });
     if (monitoringData) {
-      return monitoringData.responses;
+      return responses
     }
     return [];
   },

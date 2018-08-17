@@ -17,16 +17,21 @@ import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/c
 
 AutoForm.hooks({
   apiMonitoringForm: {
-
+   
     formToDoc: (doc) => {
       const api = Apis.findOne({ _id: doc.apiId });
-      doc.url = api.url + doc.url;
+     
+       doc.url = api.url + doc.url;
+       doc.url.replace(/([^:]\/)\/+/g, "$1")
       return doc;
     },
 
     formToModifier: (doc) => {
       const api = Apis.findOne({ _id: doc.$set.apiId });
       doc.$set.url = api.url + doc.$set.url;
+      doc.$set.url = doc.$set.url.replace(/([^:]\/)\/+/g, "$1")
+      console.log(doc.$set)
+      
       return doc;
     },
 

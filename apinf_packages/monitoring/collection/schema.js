@@ -24,17 +24,22 @@ MonitoringSettings.schema = new SimpleSchema({
   },
   url: {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
+    regEx: new RegExp(/^[\w\-\.\?\$\*\+\'\)\(/:#@!&,;=]+$/),
     custom () {
-      const monitoringUrlEnabled = this.field('enabled').value;
-      const monitoringUrl = this.value;
-      let validation;
-
-      // Require editor host if apiDocumentationEditor.enabled is checked
-      if (monitoringUrlEnabled === true && !monitoringUrl) {
-        validation = 'required';
+      let monitoringUrlProper =  false
+      if(this.value.match(SimpleSchema.RegEx.Url)){
+        monitoringUrlProper = true
       }
-      return validation;
+
+      if(monitoringUrlProper === true){
+         const monitoringUrlEnabled = this.field('enabled').value;
+         const monitoringUrl = this.value;
+         let validation;
+          // Require editor host if apiDocumentationEditor.enabled is checked
+          if (monitoringUrlEnabled === true && !monitoringUrl) {
+            validation = 'required';
+          }
+      }
     },
   },
 });
