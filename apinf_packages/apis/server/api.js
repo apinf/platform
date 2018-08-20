@@ -1552,7 +1552,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       // _id and apiUmbrella id are not needed
       const proxyBackendId = proxyBackend._id;
       delete proxyBackend._id;
-      delete proxyBackend.apiUmbrella.id;
 
       // Get proxy document
       const proxy = Proxies.findOne(proxyBackend.proxyId);
@@ -1803,6 +1802,26 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       if (!createdProxyBackend) {
         // The Proxy backend doesn't exist
         return errorMessagePayload(500, 'Proxy connection for the API is not created.');
+      }
+
+      // Get API Umbrella configuration object from Proxy Backend
+      const apiUmbrellaBackend = createdProxyBackend.apiUmbrella;
+
+      const updateSuccess = Meteor.call('updateApiBackendOnApiUmbrella',
+        apiUmbrellaBackend, createdProxyBackend.proxyId);
+
+      if (updateSuccess.errors && updateSuccess.errors.default) {
+        return errorMessagePayload(updateSuccess.http_status,
+          updateSuccess.errors.default);
+      }
+
+      // Publish the API Backend on API Umbrella
+      const publishSuccess = Meteor.call('publishApiBackendOnApiUmbrella',
+        apiUmbrellaBackend.id, createdProxyBackend.proxyId);
+
+      if (publishSuccess.errors && publishSuccess.errors.default) {
+        return errorMessagePayload(publishSuccess.errors.http_status,
+                                   publishSuccess.errors.default);
       }
 
       // OK response with API data
