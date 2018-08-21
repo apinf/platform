@@ -1522,6 +1522,12 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
       ],
     },
     action () {
+      /* Note! With PUT method it is not possible to change proxy id,
+               i.e. to connect an API to another proxy.
+         Reason: Too complicated reverse operations in unsuccessful cases.
+                 May need architectural re-design in future.
+         Work-around for user: Use /DELETE and /POST methods
+      */
       // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
       // Get User ID
@@ -1548,9 +1554,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
         // The Proxy backend must exist
         return errorMessagePayload(400, 'The API must have a Proxy connection.');
       }
-
-      // store previous proxyBackend
-      const previousProxyBackend = proxyBackend;
 
       // _id and apiUmbrella id are not needed
       const proxyBackendId = proxyBackend._id;
@@ -1784,55 +1787,6 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           // Remove the indicated rate limit object
           proxyBackend.apiUmbrella.settings.rate_limits.splice(removeIndex, 1);
           delete bodyParams.removeIndex;
-        }
-
-        // Check if correct value is given for remove index
-        if (bodyParams.proxyId) {
-          // Want to connect to another proxy?
-          if (bodyParams.proxyId !== previousProxyBackend.proxyId) {
-            // Get proxy document
-            const currentProxy = Proxies.findOne(bodyParams.proxyId);
-
-            // proxy must exist
-            if (!currentProxy) {
-              return errorMessagePayload(404, 'Proxy with specified ID is not found.');
-            }
-
-            // proxy type must be apiUmbrella
-            if (currentProxy.type !== 'apiUmbrella') {
-              return errorMessagePayload(404, 'New proxy is wrong type.', 'Type', currentProxy.type);
-            }
-            // Delete info about old proxy from apiUmbrella
-            const deleteResponse = Meteor.call('deleteProxyBackend',
-                                                previousProxyBackend, false);
-            if (deleteResponse) {
-              return errorMessagePayload(500, 'Remove proxy backend failed on apiUmbrella',
-                                         'response', deleteResponse);
-            }
-
-            // Remove old apiUmbrellaId
-            delete proxyBackend.apiUmbrella.id;
-
-            // Insert corresponding proxy backend to apiUmbrella
-            const response = Meteor.call('createApiBackendOnApiUmbrella',
-              proxyBackend.apiUmbrella,
-              proxyBackend.proxyId);
-
-            // If response has errors object, notify about it
-            if (response.errors && response.errors.default) {
-              // Notify about error
-              return errorMessagePayload(500, 'Adding a backend on apiUmbrella failed',
-                                         'Response', response.errors.default[0]);
-            }
-
-            // Get the API Umbrella ID for newly created backend
-            const newUmbrellaBackendId = response.result.data.api.id;
-
-            // Attach the API Umbrella backend ID to backend document
-            proxyBackend.apiUmbrella.id = newUmbrellaBackendId;
-            proxyBackend.proxyId = bodyParams.proxyId;
-          }
-          delete bodyParams.proxyId;
         }
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
