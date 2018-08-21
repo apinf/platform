@@ -176,6 +176,7 @@ const descriptionApis = {
   * *apiPort* is port used on API server, default value for https is 443, http is 80.
   * *disableApiKey*, [false | true], true = skip API key requirement in Proxy
   * *rateLimitMode*, [unlimited | custom]
+  * *proxyId* is the id of new proxy, to which API connection is to be changed
 
   #### Parameters related to rate limit ####
 
