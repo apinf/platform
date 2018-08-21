@@ -56,17 +56,17 @@ Template.apiMonitoring.helpers({
     const startDate = new Date();
     const lastDate = new Date();
     lastDate.setDate(lastDate.getDate() - 1);
-    const query = { responses: { $elemMatch: { date: { $gte: lastDate, $lte: startDate } } } };
-    const monitoringData = MonitoringData.findOne({ apiId: apiId  });
-    let responses = monitoringData.responses.filter(function(obj) {
-      if(obj.date >= lastDate && obj.date <= startDate) {
-        return true;
-      } else {
-        return false;
+    const monitoringData = MonitoringData.findOne({ apiId });
+    // eslint-disable-next-line no-useless-escape
+    const responses = monitoringData.responses.filter((obj) => {
+      let result = false;
+      if (obj.date >= lastDate && obj.date <= startDate) {
+        result = true;
       }
+      return result;
     });
     if (monitoringData) {
-      return responses
+      return responses;
     }
     return [];
   },

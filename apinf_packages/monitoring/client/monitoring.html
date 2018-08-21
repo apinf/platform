@@ -13,22 +13,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <table id="rtable">
       <tr>
         <th>Time</th>
-        <th>End Point</th>
+        <th>Endpoint</th>
         <th>Status</th>
         <th>Details</th>
       </tr>
       <tbody>
-        {{# each apiStatusData }}
+        {{# each record in  apiStatusData }}
           <tr>
-            <td>{{ this.date }}</td>
-            <td>
-              <a href="#">
-                      {{ apiUrlPath }}
-              </a>
-    
+            <td>{{ record.date }}</td>
+            <td>           
+             <a href="{{ apiMonitoringSettings.url }}">{{ apiUrlPath }}</a>
             </td>
             <td>
-              {{# if apiStatusCode (this.server_status_code) }}
+              {{# if apiStatusCode (record.server_status_code) }}
                 <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
                 </span>
               {{ else }}
@@ -36,7 +33,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </span>
               {{/ if}}
             </td>
-            <td>{{ this.server_status_code }}</td>
+            <td>{{ record.server_status_code }}</td>
           </tr>
         {{/ each }}
       </tbody>
