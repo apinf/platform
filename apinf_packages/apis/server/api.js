@@ -1791,23 +1791,23 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
           // Want to connect to another proxy?
           if (bodyParams.proxyId !== previousProxyBackend.proxyId) {
             // Get proxy document
-            const proxy = Proxies.findOne(bodyParams.proxyId);
+            const currentProxy = Proxies.findOne(bodyParams.proxyId);
 
             // proxy must exist
-            if (!proxy) {
+            if (!currentProxy) {
               return errorMessagePayload(404, 'Proxy with specified ID is not found.');
             }
 
             // proxy type must be apiUmbrella
-            if (proxy.type !== 'apiUmbrella' ) {
-              return errorMessagePayload(404, 'New proxy is wrong type.', 'Type', proxy.type);
+            if (currentProxy.type !== 'apiUmbrella') {
+              return errorMessagePayload(404, 'New proxy is wrong type.', 'Type', currentProxy.type);
             }
             // Delete info about old proxy from apiUmbrella
             const deleteResponse = Meteor.call('deleteProxyBackend',
                                                 previousProxyBackend, false);
             if (deleteResponse) {
-              return errorMessagePayload(500, "Remove proxy backend failed on apiUmbrella",
-                                         "response", deleteResponse);
+              return errorMessagePayload(500, 'Remove proxy backend failed on apiUmbrella',
+                                         'response', deleteResponse);
             }
 
             // Remove old apiUmbrellaId
@@ -1821,8 +1821,8 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             // If response has errors object, notify about it
             if (response.errors && response.errors.default) {
               // Notify about error
-              return errorMessagePayload(500, "Adding a backend on apiUmbrella failed",
-                                         "Response", response.errors.default[0]);
+              return errorMessagePayload(500, 'Adding a backend on apiUmbrella failed',
+                                         'Response', response.errors.default[0]);
             }
 
             // Get the API Umbrella ID for newly created backend
@@ -1831,11 +1831,9 @@ CatalogV1.addRoute('apis/:id/proxyBackend', {
             // Attach the API Umbrella backend ID to backend document
             proxyBackend.apiUmbrella.id = newUmbrellaBackendId;
             proxyBackend.proxyId = bodyParams.proxyId;
-
           }
           delete bodyParams.proxyId;
         }
-
       } else {
         return errorMessagePayload(400, 'Unknown proxy type.');
       }
