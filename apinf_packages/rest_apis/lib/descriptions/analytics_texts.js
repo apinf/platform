@@ -270,6 +270,36 @@ You can have multiple proxies under one management.
   (on server time) to current moment is returned, not a complete 24 hour period.
   `,
   // --------------------------------------------
+  getAnalyticsApiIdRaw: `
+  ## List API analytics data within given period
+  Return analytics data records of API (of given id) within given period.
+  Following data is included in each record:
+
+  - response HTTP code
+  - response size
+  - timestamp
+
+  ## Approaches
+
+  ### Request parameters
+
+  API is identified with parameter **apiId**.
+
+  Period start date is given with parameter **startdate**. Period end date is given
+  with parameter **enddate**.
+  The given dates are included in period, from beginning of start date to end of end date
+  according to server time.
+
+  ### Response content
+  The response record contains following data
+  - the API URL (proxy base path)
+  - the used method
+  - HTTP code of response
+  - response size
+  - timestamp
+
+  `,
+  // --------------------------------------------
   apisBy: `
   Optional parameter to limit the search to APIs either in Organizations
   managed by user (value 'organization') or managed by user (value 'owner').

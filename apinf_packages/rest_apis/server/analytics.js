@@ -438,10 +438,33 @@ AnalyticsV1.swagger = {
         },
       },
     },
-
+    rawData: {
+      type: 'object',
+      properties: {
+        request_path: {
+          type: 'string',
+          example: 'https://apis-url-here/endpoint-name',
+        },
+        request_method: {
+          type: 'string',
+          example: 'GET | POST | PUT | DELETE',
+        },
+        response_status: {
+          type: 'integer',
+          example: '200',
+        },
+        response_size: {
+          type: 'integer',
+          example: '1324',
+        },
+        request_at: {
+          type: 'integer',
+          example: '1489580360900',
+        },
+      },
+    },
 
     // The schema defining the type used for the body parameter in POST or PUT method
-
 
   },
 };
