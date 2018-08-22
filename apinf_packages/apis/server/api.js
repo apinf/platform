@@ -14,6 +14,9 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import Apis from '/apinf_packages/apis/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import { MonitoringSettings,
+         MonitoringData } from '/apinf_packages/monitoring/collection';
+
 
 // APInf imports
 import CatalogV1 from '/apinf_packages/rest_apis/server/catalog';
@@ -1005,14 +1008,14 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       tags: [
         CatalogV1.swagger.tags.api,
       ],
-      summary: 'TEXT',
+      summary: 'Get latest Monitoring status of API',
       description: 'TEXT',
       parameters: [
         CatalogV1.swagger.params.apiId,
       ],
       responses: {
         200: {
-          description: 'TEXT',
+          description: 'Latest monitoring status of API',
           schema: {
             type: 'object',
             properties: {
@@ -1039,16 +1042,13 @@ CatalogV1.addRoute('apis/:id/monitoring', {
           description: 'API is not found',
         },
       },
-      security: [
-        {
-          userSecurityToken: [],
-          userId: [],
-        },
-      ],
     },
     action () {
+      const queryParams = this.queryParams;
       // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
+
+      console.log('this.urlParams = ', this.urlParams);
 
       // API related checkings
       // Get API document
@@ -1060,19 +1060,71 @@ CatalogV1.addRoute('apis/:id/monitoring', {
         return errorMessagePayload(404, 'API with specified ID is not found.');
       }
 
-      // Get API's latest monitoring status code
-      const latestMonitoringStatusCode = api.latestMonitoringStatusCode;
-      if (!latestMonitoringStatusCode) {
-        // No monitoring is available
-        return errorMessagePayload(404, 'No monitoring found');
+      // check if monitoring is enabled
+      const monitoringSettings = MonitoringSettings.findOne({ apiId });
+
+      console.log('monitoringSettings = ', monitoringSettings);
+
+      if (!monitoringSettings) {
+        return errorMessagePayload(404, 'API Monitoring has not been set up.');
       }
+
+      if (!monitoringSettings.enabled) {
+        return errorMessagePayload(404, 'API Monitoring is disabled.');
+      }
+
+      const statusList = queryParams.statusList;
+
+      let monitoringStatusList;
+
+      // Include
+      const options = {};
+      const includeFields = {};
+      includeFields.responses = [];
+      options.fields = includeFields;
+
+      if (statusList) {
+        // check if parameter value is correct
+        if (statusList !== 'true') {
+          const errorText = 'Bad Request. Status list parameter is erroneous or missing.';
+          return errorMessagePayload(400, errorText);
+        }
+        // user have admin rights
+        // Get Manager ID from header
+        const managerId = this.request.headers['x-user-id'];
+
+        // Check if requestor is administrator
+        const requestorIsAdmin = Roles.userIsInRole(managerId, ['admin']);
+
+        if (!requestorIsAdmin) {
+          return errorMessagePayload(403, 'User does not have permission');
+        }
+
+        // get list of monitoring statuses (2-24)
+        monitoringStatusList = MonitoringData.find(apiId, options).fetch();
+      } else {
+        // Get API's latest monitoring status code
+        const monitoringStatusListArray = MonitoringData.findOne({ apiId }).responses;
+        monitoringStatusList = monitoringStatusListArray[monitoringStatusListArray.length - 1];
+
+        if (!monitoringStatusList) {
+          // No monitoring is available
+          return errorMessagePayload(404, 'No API monitoring found');
+        }
+      }
+
+      const apiMonitoringResponse = {
+        _id: apiId,
+        enabled: monitoringSettings.enabled,
+        responses: monitoringStatusList,
+      };
 
       // OK response with latest monitoring status code
       return {
         statusCode: 200,
         body: {
           status: 'success',
-          data: latestMonitoringStatusCode,
+          data: apiMonitoringResponse,
         },
       };
     },
