@@ -10,4 +10,4 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // eslint-disable-next-line no-useless-escape
 export const apiMonitoringEndpointRegEx = new RegExp(/^[\w\-\.\?\$\*\+\'\)\(/:#@!&,;=]+$/);
 // eslint-disable-next-line no-useless-escape
-export const apiBasePathRegExEndPoint = new RegExp(/^\/[\w\-\?\.\$\*\+\)\'\(/:#@!&,;=]*$/);
+export const apiEndPointRegEx = new RegExp(/^\/[\w\-\?\.\$\*\+\)\'\(/:#@!&,;=]*$/);

@@ -14,6 +14,7 @@ import {
 } from '/apinf_packages/proxy_backends/collection/regex';
 import {
   apiMonitoringEndpointRegEx,
+  apiEndPointRegEx,
 } from '/apinf_packages/monitoring/collection/lib/regex';
 import contactPhone from '/apinf_packages/organizations/collection/regex';
 
@@ -25,6 +26,7 @@ const invalidProxyBasePathMessage = TAPi18n.__('invalidProxyBasePathMessage');
 const invalidApiBasePathMessage = TAPi18n.__('invalidApiBasePathMessage');
 const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
 const invalidApiMonitoringEndpointMessage = TAPi18n.__('invalidApiMonitoringEndpointMessage');
+const invalidApiEndpointMessage = TAPi18n.__('invalidApiEndpointMessage');
 
 SimpleSchema.messages({
   regEx: [
@@ -36,6 +38,7 @@ SimpleSchema.messages({
     { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
     { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
     { exp: contactPhone, msg: invalidContactPhoneMessage },
+    { exp: apiEndPointRegEx, msg: invalidApiEndpointMessage },
     { exp: apiMonitoringEndpointRegEx, msg: invalidApiMonitoringEndpointMessage },
   ],
 });

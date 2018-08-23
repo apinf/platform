@@ -18,16 +18,16 @@ import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/c
 AutoForm.hooks({
   apiMonitoringForm: {
     formToDoc: (doc) => {
-      const api = Apis.findOne({ _id: doc.apiId });
-      doc.url = api.url + doc.url;
-      doc.url.replace(/([^:]\/)\/+/g, '$1');
+      // doc.url =  doc.baseUrl + doc.endPoint;
+      doc.endPoint = doc.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
+      doc.url = (doc.url + doc.endPoint).replace(/([^:]\/)\/+/g, '$1');
       return doc;
     },
 
     formToModifier: (doc) => {
-      const api = Apis.findOne({ _id: doc.$set.apiId });
-      doc.$set.url = api.url + doc.$set.url;
-      doc.$set.url = doc.$set.url.replace(/([^:]\/)\/+/g, '$1');
+      // doc.$set.url = doc.$set.baseUrl + doc.$set.endPoint;
+      doc.$set.endPoint = doc.$set.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
+      doc.$set.url = (doc.$set.url + doc.$set.endPoint).replace(/([^:]\/)\/+/g, '$1');
       return doc;
     },
 
@@ -44,7 +44,8 @@ AutoForm.hooks({
 
           // Restart cron with new url
           if (monitoringData.enabled) {
-            Meteor.call('startCron', monitoringData.apiId, monitoringData.url);
+            Meteor.call('startCron',
+             monitoringData.apiId, monitoringData.url, monitoringData.endPoint);
           }
           // Success result
           return doc;
@@ -75,7 +76,7 @@ AutoForm.hooks({
           Apis.update(apiId, { $set: { monitoringId: result } });
 
           // Start Cron
-          Meteor.call('startCron', apiId, monitoring.url);
+          Meteor.call('startCron', apiId, monitoring.url, monitoring.endPoint);
         }
       },
     },
@@ -85,7 +86,8 @@ AutoForm.hooks({
 
       // If monitoring is enabled then get the API status immediately
       if (updateFormValues.enabled) {
-        Meteor.call('getApiStatus', updateFormValues.apiId, updateFormValues.url);
+        Meteor.call('getApiStatus',
+         updateFormValues.apiId, updateFormValues.url, updateFormValues.endPoint);
       }
 
       // Get success message translation
