@@ -14,6 +14,15 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   addApiForm: {
+    formToDoc: (doc) => {
+      const host = 'https://';
+      if (doc.url.substring(0, 8) !== host) {
+        doc.url = host + doc.url;
+        return doc;
+      }
+      return doc;
+    },
+
     before: {
       insert (api) {
         // Get current user ID
