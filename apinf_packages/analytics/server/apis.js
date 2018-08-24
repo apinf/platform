@@ -11,8 +11,12 @@ import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 // import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
+// Npm packages imports
+import _ from 'lodash';
+
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
+import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 import Organizations from '/apinf_packages/organizations/collection';
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
@@ -781,7 +785,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       // Error if "startDate" is not given
       if (!queryParams.fromDate) {
-        return errorMessagePayload(400, 'Parameter "fromDate" is mandatory');
+        return errorMessagePayload(400, 'Parameter \"fromDate\" is mandatory');
       }
 
       // Check that given start date is valid
@@ -791,7 +795,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       // start date can not be in future
       if (moment(queryParams.fromDate).valueOf() > moment(0, 'HH').valueOf()) {
-        const message = 'Parameter "fromDate" must be in past';
+        const message = 'Parameter \"fromDate\" must be in past';
         return errorMessagePayload(400, message);
       }
 
@@ -833,132 +837,71 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         ],
       });
 
-      console.log('proxyBackend=', proxyBackend);
-
       // Error if proxy backend for API does not exist
       if (!proxyBackend) {
         return errorMessagePayload(404, 'No Proxy Backend exists for API.');
       }
 
-      const proxyBackendId = proxyBackend._id;
+   //   const proxyBackendId = proxyBackend._id;
+      const requestPath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
+      console.log('proxyBackend=', proxyBackend);
+      console.log('requestPath=', requestPath);
 
-      // Get connected proxy url
-      const proxyUrl = proxyBackend.proxyUrl();
-      // Get proxy backend path
-      const frontendPrefix = proxyBackend.frontendPrefix();
+      let trafficData = [
+      ];
 
-      // Fill and return analytics data
-      const apiAnalyticsList = {};
+      // Get elasticSearch host address
+      const proxy = Proxies.findOne(proxyBackend.proxyId);
+      if (!proxy) {
+        return errorMessagePayload(404, 'No Proxy exists for API.');
+      }
 
-      const trafficData = {
-        request_path: 'http://www.polku.fi/kuljettu',
-        request_method: 'PUT',
-        response_status: '251',
-        response_size: '1324',
-        request_at: 'eilen puolenpäivän aikaan',
+      // Get URL of relevant ElasticSearch or an empty string on default
+      const elasticsearchHost = _.get(proxy, 'apiUmbrella.elasticsearch', '');
+      if (!elasticsearchHost) {
+        return errorMessagePayload(404, 'No ElasticSearch host address found for Proxy of API.');
+      }
 
-      };
-/*
+      const query = {
+        size: 10000,
+        body: {
+          _source: ["request_path", "request_method", "response_status", "response_size", "request_at"],
+          query: {
+            filtered: {
+              filter: {
+                and: [
+                  {
+                    range: {
+                      request_at: {
+                        gte: fromDate,
+                        lt: toDate,
+                      },
+                    },
+                  },
+                  {
+                    prefix: {
+                      request_path: requestPath,
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      }
+      // Send request to ElasticSearch. Sync call
+      const response = Meteor.call('getElasticsearchData', elasticsearchHost, query);
 
-      // KPI values for period
-      const currentPeriodDataset = Meteor.call('summaryStatisticNumber', {
-        proxyBackendId, fromDate, toDate });
-      // Fill summaries
-      apiAnalyticsList.kpi = {
-        requestCount: currentPeriodDataset[frontendPrefix].requestNumber,
-        medianResponseTime: currentPeriodDataset[frontendPrefix].medianResponseTime,
-        uniqueUsers: currentPeriodDataset[frontendPrefix].avgUniqueUsers,
-      };
+      if (!response) {
+        return errorMessagePayload(500, 'No answer from ElasticSearch.');
+      }
+   //   console.log('response=', response);
+   //   console.log('response.hits=', response.hits.hits[0]._source);
 
-      // Get trend data. Data of previous period is compared to current period data.
-      const comparisonData = Meteor.call('summaryStatisticTrend',
-      { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset);
-      // Fill response containing Comparison data
-      apiAnalyticsList.delta = {
-        requestCount: comparisonData[frontendPrefix].compareRequests,
-        medianResponseTime: comparisonData[frontendPrefix].compareResponse,
-        uniqueUsers: comparisonData[frontendPrefix].compareUsers,
-      };
-      apiAnalyticsList.frequentUsers = {};
-  */
-
-
-/*
-      // Get data for Errors table
-      const errorStatistics = Meteor.call('errorsStatisticsData', {
-        proxyBackendId, fromDate, toDate });
-      // console.log('errorStatistics=', errorStatistics);
-      // Get data, modify date and store it to list
-      const errorStatisticsList = errorStatistics.map(errorData => {
-        const errorStatisticsItem = {
-          timestamp: moment(errorData.date).format(),
-          httpCode: errorData.status,
-          calls: errorData.calls,
-          requestPath: errorData.requestPath,
-        };
-        return errorStatisticsItem;
+      response.hits.hits.forEach((hit) => {
+        // Copy data fields to response data
+        trafficData.push(hit._source);
       });
-      // Attach error data list to response
-      apiAnalyticsList.errorStatistics = errorStatisticsList;
-*/
-      // Get data about summary statistic for current period
-  /*    promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
-        .then((currentPeriodSummaryDataset) => {
-          // console.log('API currentPeriodDataset=', currentPeriodDataset);
-
-          // Get summary statistic data about previous period
-          const previousPeriodResponse = Meteor.call('summaryStatisticNumber', {
-            proxyBackendId, fromDate: previousFromDate, toDate: fromDate });
-
-          // console.log('API previousPeriodResponse=', previousPeriodResponse);
-
-          apiAnalyticsList.previousPeriodResponse = {
-            requestCount: previousPeriodResponse[frontendPrefix].requestNumber,
-            responseTime: previousPeriodResponse[frontendPrefix].medianResponseTime,
-            uniqueUsers: previousPeriodResponse[frontendPrefix].avgUniqueUsers,
-          };
-        }).catch((error) => {
-          throw new Meteor.Error(error);
-        });
-*/
-/*      // Get data about summary statistic for previous period
-      promisifyCall('summaryStatisticNumber', { proxyBackendId, previousFromDate, fromDate })
-        .then((previousPeriodDataset) => {
-          console.log('API previousPeriodDataset=', previousPeriodDataset);
-          // Fill summaries
-          apiAnalyticsList.delta = {
-            requestCount: previousPeriodDataset[frontendPrefix].requestNumber,
-            medianResponseTime: previousPeriodDataset[frontendPrefix].medianResponseTime,
-            uniqueUsers: previousPeriodDataset[frontendPrefix].avgUniqueUsers,
-          };
-        }).catch((error) => {
-          throw new Meteor.Error(error);
-        });
-*/
-/*
-        // Get data about summary statistic over time
-      Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
-        (error, dataset) => {
-          // console.log('1 API dataset=', dataset);
-          apiAnalyticsList.statistic = dataset;
-        });
-
-      // Get data about response status codes
-      Meteor.call('statusCodesData', { proxyBackendId, fromDate, toDate },
-        (error, dataset) => {
-          // console.log('2 API dataset=', dataset);
-          apiAnalyticsList.statusCode = dataset;
-        });
-
-      // Get data for Timeline charts
-      Meteor.call('timelineChartData', { proxyBackendId, fromDate, toDate },
-        (error, response) => {
-          if (error) throw new Error(error);
-          // console.log('3 API dataset=', response);
-          apiAnalyticsList.timelineChartData = response;
-        });
-*/
-      // console.log('melkein responsen lähettämisessä');
 
       // Construct response
       return {
