@@ -72,6 +72,13 @@ AnalyticsV1.swagger = {
       required: false,
       type: 'string',
     },
+    fromRawDate: {
+      name: 'fromDate',
+      in: 'query',
+      description: analyticsDescription.fromRawDate,
+      required: true,
+      type: 'string',
+    },
     interval: {
       name: 'interval',
       in: 'query',
@@ -79,6 +86,22 @@ AnalyticsV1.swagger = {
       required: false,
       type: 'string',
       enum: ['30', '60'],
+    },
+    login: {
+      name: 'user',
+      in: 'body',
+      description: 'User login data',
+      schema: {
+        $ref: '#/definitions/loginRequest',
+      },
+    },
+    managedAPIs: {
+      name: 'managedAPIs',
+      in: 'query',
+      description: 'Limit results to APIs which requesting user can manage.',
+      required: false,
+      type: 'string',
+      enum: ['true', 'false'],
     },
     optionalSearch: {
       name: 'q',
@@ -121,24 +144,13 @@ AnalyticsV1.swagger = {
       required: false,
       type: 'string',
     },
-
-    login: {
-      name: 'user',
-      in: 'body',
-      description: 'User login data',
-      schema: {
-        $ref: '#/definitions/loginRequest',
-      },
-    },
-    managedAPIs: {
-      name: 'managedAPIs',
+    toRawDate: {
+      name: 'toDate',
       in: 'query',
-      description: 'Limit results to APIs which requesting user can manage.',
+      description: analyticsDescription.toRawDate,
       required: false,
       type: 'string',
-      enum: ['true', 'false'],
     },
-
     url: {
       name: 'url',
       in: 'query',

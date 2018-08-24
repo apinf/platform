@@ -273,22 +273,19 @@ You can have multiple proxies under one management.
   getAnalyticsApiIdRaw: `
   ## List API analytics data within given period
   Return analytics data records of API (of given id) within given period.
-  Following data is included in each record:
-
-  - response HTTP code
-  - response size
-  - timestamp
 
   ## Approaches
 
   ### Request parameters
 
-  API is identified with parameter **apiId**.
+  - **apiId** identifies the API
 
-  Period start date is given with parameter **startdate**. Period end date is given
-  with parameter **enddate**.
+  - **fromDate** is the start date of period
+  - **toDate** is the end date of period.
+
   The given dates are included in period, from beginning of start date to end of end date
   according to server time.
+  In case toDate is not given, the period length is only one day, the start day.
 
   ### Response content
   The response record contains following data
@@ -311,6 +308,20 @@ You can have multiple proxies under one management.
   date: `
   Date of which detailed information is retrieved. Format: yyyy-mm-dd (Standard: ISO 8601).
   **Note!** If _period_ parameter is used, then _date_ parameter is obsolete.
+  `,
+  fromRawDate: `
+  Date of which the raw information is retrieved.
+  Given date is included in period from previous midnight (server time).
+  Format: yyyy-mm-dd (Standard: ISO 8601).
+  `,
+  interval: `
+  Granularity (in minutes) of the data within a day. Available options are:
+  - 30
+  - 60
+
+  If granularity interval is not given, default value is 24 hours (1440 minutes),
+  which is by the way the same as to use (1 - 30) option in parameter _period_.
+  **Note!** If _period_ parameter is used, then _interval_ parameter is obsolete.
   `,
   organizationId: `
   Optional parameter to limit the search to one Organization only.
@@ -349,14 +360,10 @@ You can have multiple proxies under one management.
 
   **Note!** Period formed with parameters startDate and Period can not contain current day.
   `,
-  interval: `
-  Granularity (in minutes) of the data within a day. Available options are:
-  - 30
-  - 60
-
-  If granularity interval is not given, default value is 24 hours (1440 minutes),
-  which is by the way the same as to use (1 - 30) option in parameter _period_.
-  **Note!** If _period_ parameter is used, then _interval_ parameter is obsolete.
+  toRawDate: `
+  Date of which the raw information period is ends.
+  Given date up to midnight (server time) is included in period.
+  Format: yyyy-mm-dd (Standard: ISO 8601).
   `,
 };
 

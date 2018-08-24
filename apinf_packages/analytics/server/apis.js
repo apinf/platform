@@ -708,7 +708,8 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       description: descriptionAnalytics.getAnalyticsApiIdRaw,
       parameters: [
         AnalyticsV1.swagger.params.apiId,
-        AnalyticsV1.swagger.params.date,
+        AnalyticsV1.swagger.params.fromRawDate,
+        AnalyticsV1.swagger.params.toRawDate,
       ],
       responses: {
         200: {
@@ -732,6 +733,12 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         400: {
           description: 'Bad Request. Erroneous or missing parameter.',
         },
+        403: {
+          description: 'User does not have permission',
+        },
+        404: {
+          description: 'API is not found',
+        },
       },
       security: [
         {
@@ -745,138 +752,78 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       // Error if no Manager ID from header
       const managerId = this.request.headers['x-user-id'];
       if (!managerId) {
-        return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id).');
+        return errorMessagePayload(400, 'Manager ID expected in header (X-User-Id)');
       }
 
-      // Error is API id, is missing
+      // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
       if (!apiId) {
-        return errorMessagePayload(404, 'API ID is missing');
+        return errorMessagePayload(400, 'API ID is missing');
       }
 
-      const queryParams = this.queryParams;
-
-      // Error if "date" or "interval" is given with "period"
-      if (queryParams.period && (queryParams.date || queryParams.interval)) {
-        return errorMessagePayload(400,
-          'Parameters "date" or "interval " can not be given with "period"!');
-      }
-
-      // Error if neither "period" nor "date" is given
-      if (!queryParams.period && !queryParams.date) {
-        return errorMessagePayload(400, 'Either parameter "date" or "period" must be given!');
-      }
-      // Begin and end dates for search
-      let fromDate;
-      let toDate;
-      let interval;
-      let previousFromDate;
-
-      // Is period given?
-      if (queryParams.period) {
-        // Default value for period is 0
-        let period = this.queryParams.period || 0;
-
-        // Error if "Period" is not integer
-        if (!Number.isInteger(period * 1)) {
-          const message = 'Parameter "period" has to be an integer.';
-          return errorMessagePayload(400, message, 'period', period);
-        }
-        period *= 1;
-
-        // Error if "Period" is not between 0 - 30
-        if (period > 30 || period < 0) {
-          const message = 'Parameter "period" value erroneous.';
-          return errorMessagePayload(400, message, 'period', period);
-        }
-        // Set beginning and end dates
-        if (period === 0) {
-          // Get today's data
-          // Get timestamp of today 00:00:00 Date time
-          fromDate = moment(0, 'HH').valueOf();
-          // Get timestamp of today 24:00:00 Date time (included value)
-          toDate = moment(fromDate).add(1, 'd').valueOf();
-          // Get timestamp of previous from date
-          previousFromDate = moment(fromDate).subtract(1, 'd').valueOf();
-        } else {
-          // Get period data from start to end of yesterday
-          // Get timestamp of today 00:00:00 Date time
-          toDate = moment(0, 'HH').valueOf();
-          // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-          fromDate = moment(toDate).subtract(period, 'd').valueOf();
-          // Get timestamp of previous from date
-          previousFromDate = moment(fromDate).subtract(period, 'd').valueOf();
-        }
-        // Default value in case of period is 1440 minutes = 24 hours
-        interval = 1440;
-      } else {
-        // Date is given
-        const date = this.queryParams.date;
-        // Error if "date" format is not according to ISO 8601
-        if (!moment(date).isValid()) {
-          const message = 'Parameter "date" must be a valid date.';
-          return errorMessagePayload(400, message, 'date', date);
-        }
-
-        // Get timestamp of startDate 00:00:00 Date time
-        fromDate = moment(date).valueOf();
-        // Error is "Date" is not in past
-        if (fromDate > moment(0, 'HH').valueOf()) {
-          const message = 'Parameter "date" must be in past.';
-          return errorMessagePayload(400, message);
-        }
-
-        // Error is "StartDate" is over 30 days in past
-        if (fromDate < moment(0, 'HH').subtract(30, 'days').valueOf()) {
-          const message = 'Parameter "date" must be max 30 days in past.';
-          return errorMessagePayload(400, message);
-        }
-        // Get timestamp of period after start 24:00:00 Date time (included value)
-        toDate = moment(fromDate).add(1, 'd').valueOf();
-
-        // Get timestamp of previous from date
-        previousFromDate = moment(fromDate).subtract(1, 'd').valueOf();
-
-        // Get given interval or default value
-        interval = queryParams.interval || 60;
-
-        if (interval) {
-          // Error if "interval" is not an integer
-          if (!Number.isInteger(interval * 1)) {
-            const message = 'Parameter "interval" has to be an integer.';
-            return errorMessagePayload(400, message, 'interval', interval);
-          }
-          interval *= 1;
-        }
-        const allowedIntervals = [30, 60];
-        // Error is "interval" is not accepted value
-        if (!allowedIntervals.includes(interval)) {
-          return errorMessagePayload(400, 'Parameter "interval" has erroneous value.',
-          'interval', interval);
-        }
-      }
-     /* console.log('prev_fromDate=', previousFromDate);
-      console.log('prev_fromDate=', moment(previousFromDate).format());
-
-      console.log('fromDate=', fromDate);
-      console.log('fromDate=', moment(fromDate).format());
-      console.log('toDate=', toDate);
-      console.log('toDate=', moment(toDate).format());
-      console.log('interval=', interval);
-     */
-
-      // Find API with specified ID
+      // API related checkings
+      // Get API document
       const api = Apis.findOne(apiId);
 
-      // Error if API doesn't exist
+      // API must exist
       if (!api) {
-        return errorMessagePayload(404, 'API with specified ID is not found.');
+        // API doesn't exist
+        return errorMessagePayload(404, 'API with specified ID is not found');
       }
 
       // Error if API exists but user can not manage
       if (!api.currentUserCanManage(managerId)) {
-        return errorMessagePayload(403, 'You do not have permission for this API.');
+        return errorMessagePayload(403, 'You do not have permission for this API');
       }
+
+      // get query parameters (at the end of URL)
+      const queryParams = this.queryParams;
+
+      // Error if "startDate" is not given
+      if (!queryParams.fromDate) {
+        return errorMessagePayload(400, 'Parameter "fromDate" is mandatory');
+      }
+
+      // Check that given start date is valid
+      if (!moment(queryParams.fromDate, "YYYY-MM-DD", true).isValid()) {
+        return errorMessagePayload(400, 'Give parameter "fromDate" in form YYYY-MM-DD');
+      }
+
+      // start date can not be in future
+      if (moment(queryParams.fromDate).valueOf() > moment(0, 'HH').valueOf()) {
+        const message = 'Parameter "fromDate" must be in past';
+        return errorMessagePayload(400, message);
+      }
+
+      // Get timestamp of startDate 00:00:00 Date time
+      const fromDate = moment(queryParams.fromDate).valueOf();
+
+      // placeholder for end of period
+      let toDate;
+
+      // Check validity of end date (if given)
+      if (queryParams.toDate) {
+        // Check that given end date is valid
+        if (!moment(queryParams.toDate, "YYYY-MM-DD", true).isValid()) {
+          return errorMessagePayload(400, 'Give parameter "toDate" as form YYYY-MM-DD');
+        }
+        // Start date must be before end date
+        if (queryParams.toDate < queryParams.fromDate) {
+          return errorMessagePayload(400, 'fromDate must be less than toDate');
+        }
+        // end date can not be in future
+        if (moment(queryParams.toDate).valueOf() > moment(0, 'HH').valueOf()) {
+          const message = 'Parameter "toDate" must be in past';
+          return errorMessagePayload(400, message);
+        }
+        toDate = moment(queryParams.toDate).add(1, 'd').valueOf();
+      } else {
+        // If not given, set end of period to be after start 24:00:00 Date time
+        toDate = moment(fromDate).add(1, 'd').valueOf();
+      }
+
+      console.log('fromDate=', fromDate);
+      console.log('toDate=', toDate);
 
       // Return API Proxy's URL, if it exists
       const proxyBackend = ProxyBackends.findOne({
@@ -885,6 +832,8 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
           { type: 'apiUmbrella' },
         ],
       });
+
+      console.log('proxyBackend=', proxyBackend);
 
       // Error if proxy backend for API does not exist
       if (!proxyBackend) {
@@ -901,6 +850,15 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       // Fill and return analytics data
       const apiAnalyticsList = {};
 
+      const trafficData = {
+        request_path: 'http://www.polku.fi/kuljettu',
+        request_method: 'PUT',
+        response_status: '251',
+        response_size: '1324',
+        request_at: 'eilen puolenpäivän aikaan',
+
+      };
+/*
       // Meta information
       apiAnalyticsList.meta = {
         proxyPath: proxyUrl.concat(frontendPrefix),
@@ -928,9 +886,11 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         medianResponseTime: comparisonData[frontendPrefix].compareResponse,
         uniqueUsers: comparisonData[frontendPrefix].compareUsers,
       };
-
       apiAnalyticsList.frequentUsers = {};
+  */
 
+
+/*
       // Get data for Errors table
       const errorStatistics = Meteor.call('errorsStatisticsData', {
         proxyBackendId, fromDate, toDate });
@@ -947,7 +907,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       });
       // Attach error data list to response
       apiAnalyticsList.errorStatistics = errorStatisticsList;
-
+*/
       // Get data about summary statistic for current period
   /*    promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
         .then((currentPeriodSummaryDataset) => {
@@ -982,7 +942,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
           throw new Meteor.Error(error);
         });
 */
-
+/*
         // Get data about summary statistic over time
       Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
         (error, dataset) => {
@@ -1004,7 +964,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
           // console.log('3 API dataset=', response);
           apiAnalyticsList.timelineChartData = response;
         });
-
+*/
       // console.log('melkein responsen lähettämisessä');
 
       // Construct response
@@ -1012,7 +972,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         statusCode: 200,
         body: {
           status: 'success',
-          data: apiAnalyticsList,
+          data: trafficData,
         },
       };
     },
