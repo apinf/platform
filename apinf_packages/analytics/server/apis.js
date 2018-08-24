@@ -859,13 +859,6 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       };
 /*
-      // Meta information
-      apiAnalyticsList.meta = {
-        proxyPath: proxyUrl.concat(frontendPrefix),
-        apiName: proxyBackend.apiUmbrella.name,
-        apiId: proxyBackend.apiId,
-        interval: 1440,
-      };
 
       // KPI values for period
       const currentPeriodDataset = Meteor.call('summaryStatisticNumber', {
