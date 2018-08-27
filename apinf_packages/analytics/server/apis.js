@@ -31,7 +31,7 @@ AnalyticsV1.swagger.meta.paths = {
   '/login': Authentication.login,
   '/logout': Authentication.logout,
 };
-
+/*
 // Request /rest/v1/myOrganizations for Organizations collection
 AnalyticsV1.addRoute('myOrganizations', {
   // Response contains a list of organizations
@@ -535,15 +535,6 @@ AnalyticsV1.addRoute('analytics/:id', {
           'interval', interval);
         }
       }
-     /* console.log('prev_fromDate=', previousFromDate);
-      console.log('prev_fromDate=', moment(previousFromDate).format());
-
-      console.log('fromDate=', fromDate);
-      console.log('fromDate=', moment(fromDate).format());
-      console.log('toDate=', toDate);
-      console.log('toDate=', moment(toDate).format());
-      console.log('interval=', interval);
-     */
 
       // Find API with specified ID
       const api = Apis.findOne(apiId);
@@ -614,7 +605,6 @@ AnalyticsV1.addRoute('analytics/:id', {
       // Get data for Errors table
       const errorStatistics = Meteor.call('errorsStatisticsData', {
         proxyBackendId, fromDate, toDate });
-      // console.log('errorStatistics=', errorStatistics);
       // Get data, modify date and store it to list
       const errorStatisticsList = errorStatistics.map(errorData => {
         const errorStatisticsItem = {
@@ -661,7 +651,7 @@ AnalyticsV1.addRoute('analytics/:id', {
         }).catch((error) => {
           throw new Meteor.Error(error);
         });
-*/
+* /
 
         // Get data about summary statistic over time
       Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
@@ -698,7 +688,7 @@ AnalyticsV1.addRoute('analytics/:id', {
     },
   },
 });
-
+*/
 
 // Request /rest/v1/analytics/{id}/raw for getting API's raw analytics data from apiUmbrella
 AnalyticsV1.addRoute('analytics/:id/raw', {
@@ -714,6 +704,8 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         AnalyticsV1.swagger.params.apiId,
         AnalyticsV1.swagger.params.fromRawDate,
         AnalyticsV1.swagger.params.toRawDate,
+        AnalyticsV1.swagger.params.skip,
+        AnalyticsV1.swagger.params.limit,
       ],
       responses: {
         200: {
@@ -728,7 +720,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
               data: {
                 type: 'array',
                 items: {
-                  $ref: '#/definitions/rawData',
+                  $ref: '#/definitions/rawDataResponse',
                 },
               },
             },
@@ -782,7 +774,6 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       // get query parameters (at the end of URL)
       const queryParams = this.queryParams;
-
       // Error if "startDate" is not given
       if (!queryParams.fromDate) {
         return errorMessagePayload(400, 'Parameter \"fromDate\" is mandatory');
@@ -826,9 +817,6 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         toDate = moment(fromDate).add(1, 'd').valueOf();
       }
 
-      console.log('fromDate=', fromDate);
-      console.log('toDate=', toDate);
-
       // Return API Proxy's URL, if it exists
       const proxyBackend = ProxyBackends.findOne({
         $and: [
@@ -844,11 +832,6 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
    //   const proxyBackendId = proxyBackend._id;
       const requestPath = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
-      console.log('proxyBackend=', proxyBackend);
-      console.log('requestPath=', requestPath);
-
-      let trafficData = [
-      ];
 
       // Get elasticSearch host address
       const proxy = Proxies.findOne(proxyBackend.proxyId);
@@ -862,8 +845,36 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         return errorMessagePayload(404, 'No ElasticSearch host address found for Proxy of API.');
       }
 
+      // Use default value if limit is not given
+      let limit = 10000;
+      if (queryParams.limit) {
+        limit = parseInt(queryParams.limit, 10);
+        if (!Number.isInteger(limit)) {
+          return errorMessagePayload(400,
+            'Bad query parameters value. Limit parameters only accept integer.');
+        }
+        if (limit < 1 || limit > 10000) {
+          return errorMessagePayload(400, 'Limit must be [1...10000].');
+        }
+      }
+
+      // Use default value for skip, if it is not given
+      let skip = 0;
+      if (queryParams.skip) {
+        // Make sure skip parameters only accept integer
+        skip = parseInt(queryParams.skip, 10);
+        if (!Number.isInteger(skip)) {
+          return errorMessagePayload(400,
+            'Bad query parameters value. Skip parameters only accept integer.');
+        }
+        if (skip < 1) {
+          return errorMessagePayload(400, 'Skip must be greater than 1.');
+        }
+      }
+
       const query = {
-        size: 10000,
+        size: limit,
+        from: skip,
         body: {
           _source: ["request_path", "request_method", "response_status", "response_size", "request_at"],
           query: {
@@ -895,12 +906,27 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       if (!response) {
         return errorMessagePayload(500, 'No answer from ElasticSearch.');
       }
-   //   console.log('response=', response);
-   //   console.log('response.hits=', response.hits.hits[0]._source);
+
+      let left = 0;
+      if ((limit + skip) <= response.hits.total) {
+        left = response.hits.total - limit - skip;
+      }
+
+      // General part of response
+      let trafficData = {
+        set: {
+          limit: limit,
+          skip: skip,
+          returned: response.hits.hits.length,
+          left: left,
+          found: response.hits.total,
+        },
+        data: [],
+      };
 
       response.hits.hits.forEach((hit) => {
         // Copy data fields to response data
-        trafficData.push(hit._source);
+        trafficData.data.push(hit._source);
       });
 
       // Construct response

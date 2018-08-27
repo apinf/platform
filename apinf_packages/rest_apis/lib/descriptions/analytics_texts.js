@@ -281,14 +281,23 @@ You can have multiple proxies under one management.
   - **apiId** identifies the API
 
   - **fromDate** is the start date of period
-  - **toDate** is the end date of period.
+  - **toDate** is the end date of period
+  - **limit** is (maximum) number of records in response, max. 10000
+  - **skip** is number of records to skip for pagination.
 
   The given dates are included in period, from beginning of start date to end of end date
   according to server time.
   In case toDate is not given, the period length is only one day, the start day.
 
   ### Response content
-  The response record contains following data
+  General information of response:
+  - limit is maximum number or records in response
+  - skip is number of records to skipped for pagination
+  - returned is number of records the response contains
+  - left is number of records not yet returned
+  - found is number of all records matching to search conditions
+
+  Following data is returned of each call of API in question:
   - the API URL (proxy base path)
   - the used method
   - HTTP code of response

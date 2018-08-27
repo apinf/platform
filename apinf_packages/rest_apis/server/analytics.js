@@ -87,6 +87,16 @@ AnalyticsV1.swagger = {
       type: 'string',
       enum: ['30', '60'],
     },
+    limit: {
+      name: 'limit',
+      in: 'query',
+      description: 'Maximum number of records to return in query.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
+      maximum: 50,
+    },
     login: {
       name: 'user',
       in: 'body',
@@ -136,6 +146,15 @@ AnalyticsV1.swagger = {
       minimum: 0,
       maximum: 30,
       default: '0',
+    },
+    skip: {
+      name: 'skip',
+      in: 'query',
+      description: 'Number of records to skip for pagination.',
+      required: false,
+      type: 'integer',
+      format: 'int32',
+      minimum: 0,
     },
     startDate: {
       name: 'startDate',
@@ -450,31 +469,61 @@ AnalyticsV1.swagger = {
         },
       },
     },
-    rawData: {
+    rawDataResponse: {
       type: 'object',
       properties: {
-        request_path: {
-          type: 'string',
-          example: 'https://apis-url-here/endpoint-name',
+        set: {
+          type: 'object',
+          properties: {
+            size: {
+              type: 'integer',
+              example: '100',
+            },
+            from: {
+              type: 'integer',
+              example: '200',
+            },
+            returned: {
+              type: 'integer',
+              example: '100',
+            },
+            left: {
+              type: 'integer',
+              example: '47',
+            },
+            found: {
+              type: 'integer',
+              example: '347',
+            },
+          },
         },
-        request_method: {
-          type: 'string',
-          example: 'GET | POST | PUT | DELETE',
-        },
-        response_status: {
-          type: 'integer',
-          example: '200',
-        },
-        response_size: {
-          type: 'integer',
-          example: '1324',
-        },
-        request_at: {
-          type: 'integer',
-          example: '1489580360900',
+        data: {
+          type: 'object',
+          properties: {
+            request_path: {
+              type: 'string',
+              example: 'https://apis-url-here/endpoint-name',
+            },
+            request_method: {
+              type: 'string',
+              example: 'GET | POST | PUT | DELETE',
+            },
+            response_status: {
+              type: 'integer',
+              example: '200',
+            },
+            response_size: {
+              type: 'integer',
+              example: '1324',
+            },
+            request_at: {
+              type: 'integer',
+              example: '1489580360900',
+            },
+          },
         },
       },
-    },
+    }
 
     // The schema defining the type used for the body parameter in POST or PUT method
 
