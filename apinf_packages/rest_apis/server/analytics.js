@@ -523,7 +523,7 @@ AnalyticsV1.swagger = {
           },
         },
       },
-    }
+    },
 
     // The schema defining the type used for the body parameter in POST or PUT method
 

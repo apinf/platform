@@ -18,8 +18,8 @@ import _ from 'lodash';
 import Apis from '/apinf_packages/apis/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
-import Organizations from '/apinf_packages/organizations/collection';
-import OrganizationApis from '/apinf_packages/organization_apis/collection';
+//import Organizations from '/apinf_packages/organizations/collection';
+//import OrganizationApis from '/apinf_packages/organization_apis/collection';
 
 // APInf imports
 import AnalyticsV1 from '/apinf_packages/rest_apis/server/analytics';
@@ -776,17 +776,17 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       const queryParams = this.queryParams;
       // Error if "startDate" is not given
       if (!queryParams.fromDate) {
-        return errorMessagePayload(400, 'Parameter \"fromDate\" is mandatory');
+        return errorMessagePayload(400, 'Parameter "fromDate" is mandatory');
       }
 
       // Check that given start date is valid
-      if (!moment(queryParams.fromDate, "YYYY-MM-DD", true).isValid()) {
+      if (!moment(queryParams.fromDate, 'YYYY-MM-DD', true).isValid()) {
         return errorMessagePayload(400, 'Give parameter "fromDate" in form YYYY-MM-DD');
       }
 
       // start date can not be in future
       if (moment(queryParams.fromDate).valueOf() > moment(0, 'HH').valueOf()) {
-        const message = 'Parameter \"fromDate\" must be in past';
+        const message = 'Parameter "fromDate" must be in past';
         return errorMessagePayload(400, message);
       }
 
@@ -799,7 +799,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       // Check validity of end date (if given)
       if (queryParams.toDate) {
         // Check that given end date is valid
-        if (!moment(queryParams.toDate, "YYYY-MM-DD", true).isValid()) {
+        if (!moment(queryParams.toDate, 'YYYY-MM-DD', true).isValid()) {
           return errorMessagePayload(400, 'Give parameter "toDate" as form YYYY-MM-DD');
         }
         // Start date must be before end date
@@ -876,7 +876,8 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         size: limit,
         from: skip,
         body: {
-          _source: ["request_path", "request_method", "response_status", "response_size", "request_at"],
+          _source: ['request_path', 'request_method', 'response_status',
+                    'response_size', 'request_at'],
           query: {
             filtered: {
               filter: {
@@ -899,7 +900,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
             },
           },
         },
-      }
+      };
       // Send request to ElasticSearch. Sync call
       const response = Meteor.call('getElasticsearchData', elasticsearchHost, query);
 
@@ -913,12 +914,12 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       }
 
       // General part of response
-      let trafficData = {
+      const trafficData = {
         set: {
-          limit: limit,
-          skip: skip,
+          limit,
+          skip,
           returned: response.hits.hits.length,
-          left: left,
+          left,
           found: response.hits.total,
         },
         data: [],
