@@ -927,6 +927,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       response.hits.hits.forEach((hit) => {
         // Copy data fields to response data
+        /*eslint no-underscore-dangle: ["error", { "allow": ["_source"] }]*/
         trafficData.data.push(hit._source);
       });
 
