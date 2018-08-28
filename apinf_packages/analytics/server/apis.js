@@ -820,7 +820,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       // Return API Proxy's URL, if it exists
       const proxyBackend = ProxyBackends.findOne({
         $and: [
-          /* eslint no-underscore-dangle: ["error", { "allow": ["_source"] }] */
+          /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
           { apiId: api._id },
           { type: 'apiUmbrella' },
         ],
