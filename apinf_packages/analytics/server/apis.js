@@ -18,8 +18,8 @@ import _ from 'lodash';
 import Apis from '/apinf_packages/apis/collection';
 import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
-//import Organizations from '/apinf_packages/organizations/collection';
-//import OrganizationApis from '/apinf_packages/organization_apis/collection';
+// import Organizations from '/apinf_packages/organizations/collection';
+// import OrganizationApis from '/apinf_packages/organization_apis/collection';
 
 // APInf imports
 import AnalyticsV1 from '/apinf_packages/rest_apis/server/analytics';
@@ -820,6 +820,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
       // Return API Proxy's URL, if it exists
       const proxyBackend = ProxyBackends.findOne({
         $and: [
+          /* eslint no-underscore-dangle: ["error", { "allow": ["_source"] }] */
           { apiId: api._id },
           { type: 'apiUmbrella' },
         ],
@@ -877,7 +878,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         from: skip,
         body: {
           _source: ['request_path', 'request_method', 'response_status',
-                    'response_size', 'request_at'],
+            'response_size', 'request_at'],
           query: {
             filtered: {
               filter: {
@@ -927,7 +928,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       response.hits.hits.forEach((hit) => {
         // Copy data fields to response data
-        /*eslint no-underscore-dangle: ["error", { "allow": ["_source"] }]*/
+        /* eslint no-underscore-dangle: ["error", { "allow": ["_source"] }] */
         trafficData.data.push(hit._source);
       });
 
