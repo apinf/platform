@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // APInf imports
-import { proxyBasePathRegEx, apiBasePathRegEx, apiRequiredHeaderRegEx } from '../regex';
+import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({
   duration: {
@@ -74,7 +74,6 @@ const SettingsSchema = new SimpleSchema({
   required_headers: {
     type: String,
     optional: true,
-    regEx: apiRequiredHeaderRegEx,
   },
 });
 
