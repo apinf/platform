@@ -11,3 +11,5 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 export const proxyBasePathRegEx = new RegExp(/^\/[\w\-\.\?\$\*\+\'\)\(/:#@!&,;=]+\/$/);
 // eslint-disable-next-line no-useless-escape
 export const apiBasePathRegEx = new RegExp(/^\/[\w\-\?\.\$\*\+\)\'\(/:#@!&,;=]*$/);
+// eslint-disable-next-line no-useless-escape
+export const apiRequiredHeaderRegEx = new RegExp(/([\w-]+): (.*)/g);

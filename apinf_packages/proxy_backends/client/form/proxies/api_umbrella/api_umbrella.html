@@ -153,5 +153,21 @@
       {{/if }}
     </div>
 
+    <!-- IDP App Id -->
+    <div class="col-md-12" id="advanced-settings">
+      {{> afQuickField
+        name="apiUmbrella.settings.idp_app_id"
+        placeholder="externalid1234"
+      }}
+    </div> 
+    
+    <!-- Required Headers -->
+    <div class="col-md-12" id="advanced-settings">
+      {{> afQuickField
+        name="apiUmbrella.settings.required_headers"
+        placeholder="X-Example-Header: value"
+      }}
+    </div>
+
   </div>
 </template>
