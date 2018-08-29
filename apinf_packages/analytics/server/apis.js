@@ -124,7 +124,7 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
 
       // start date can not be in future
       if (moment(queryParams.fromDate).valueOf() > moment(0, 'HH').valueOf()) {
-        const message = 'Parameter "fromDate" must be in past';
+        const message = 'Parameter "fromDate" can not be in future';
         return errorMessagePayload(400, message);
       }
 
@@ -142,17 +142,17 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         }
         // Start date must be before end date
         if (queryParams.toDate < queryParams.fromDate) {
-          return errorMessagePayload(400, 'fromDate must be less than toDate');
+          return errorMessagePayload(400, 'fromDate can not be after toDate');
         }
         // end date can not be in future
         if (moment(queryParams.toDate).valueOf() > moment(0, 'HH').valueOf()) {
-          const message = 'Parameter "toDate" must be in past';
+          const message = 'Parameter "toDate" can not be in future';
           return errorMessagePayload(400, message);
         }
         toDate = moment(queryParams.toDate).add(1, 'd').valueOf();
       } else {
-        // If not given, set end of period to be after start 24:00:00 Date time
-        toDate = moment(fromDate).add(1, 'd').valueOf();
+        // If not given, set end of period to be now
+        toDate = moment(0, 'HH').add(1, 'd').valueOf();
       }
 
       // Return API Proxy's URL, if it exists

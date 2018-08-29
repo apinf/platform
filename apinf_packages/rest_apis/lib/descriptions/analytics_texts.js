@@ -319,8 +319,8 @@ You can have multiple proxies under one management.
   **Note!** If _period_ parameter is used, then _date_ parameter is obsolete.
   `,
   fromRawDate: `
-  Date of which the raw information is retrieved.
-  Given date is included in period from previous midnight (server time).
+  Date from which the raw information retrieval period begins.
+  Given date is included in the period from previous midnight (server time).
   Format: yyyy-mm-dd (Standard: ISO 8601).
   `,
   interval: `
@@ -370,9 +370,10 @@ You can have multiple proxies under one management.
   **Note!** Period formed with parameters startDate and Period can not contain current day.
   `,
   toRawDate: `
-  Date of which the raw information period is ends.
-  Given date up to midnight (server time) is included in period.
+  Date to which the raw information retrieval period ends.
+  Given date is included in the period up to midnight (server time).
   Format: yyyy-mm-dd (Standard: ISO 8601).
+  If not given, the default value is now (the moment the command was given).
   `,
 };
 
