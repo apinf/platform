@@ -1048,9 +1048,6 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
 
-      console.log('this.urlParams = ', this.urlParams);
-
-      // API related checkings
       // Get API document
       const api = Apis.findOne(apiId);
 
@@ -1060,10 +1057,8 @@ CatalogV1.addRoute('apis/:id/monitoring', {
         return errorMessagePayload(404, 'API with specified ID is not found.');
       }
 
-      // check if monitoring is enabled
+      // Check if API monitoring is enabled
       const monitoringSettings = MonitoringSettings.findOne({ apiId });
-
-      console.log('monitoringSettings = ', monitoringSettings);
 
       if (!monitoringSettings) {
         return errorMessagePayload(404, 'API Monitoring has not been set up.');
@@ -1084,12 +1079,12 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       options.fields = includeFields;
 
       if (statusList) {
-        // check if parameter value is correct
+        // Check if parameter value is correct
         if (statusList !== 'true') {
           const errorText = 'Bad Request. Status list parameter is erroneous or missing.';
           return errorMessagePayload(400, errorText);
         }
-        // user have admin rights
+        // User have admin rights
         // Get Manager ID from header
         const managerId = this.request.headers['x-user-id'];
 
@@ -1100,7 +1095,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
           return errorMessagePayload(403, 'User does not have permission');
         }
 
-        // get list of monitoring statuses (2-24)
+        // Get list of monitoring statuses
         monitoringStatusList = MonitoringData.find(apiId, options).fetch();
       } else {
         // Get API's latest monitoring status code
