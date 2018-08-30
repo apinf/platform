@@ -19,15 +19,19 @@ AutoForm.hooks({
   apiMonitoringForm: {
     formToDoc: (doc) => {
       // doc.url =  doc.baseUrl + doc.endPoint;
-      doc.endPoint = doc.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
-      doc.url = (doc.url + doc.endPoint).replace(/([^:]\/)\/+/g, '$1');
+      if (doc.endPoint) {
+        doc.endPoint = doc.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
+        doc.url = (doc.url + doc.endPoint).replace(/([^:]\/)\/+/g, '$1');
+      }
       return doc;
     },
 
     formToModifier: (doc) => {
       // doc.$set.url = doc.$set.baseUrl + doc.$set.endPoint;
-      doc.$set.endPoint = doc.$set.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
-      doc.$set.url = (doc.$set.url + doc.$set.endPoint).replace(/([^:]\/)\/+/g, '$1');
+      if (doc.$set.endPoint) {
+        doc.$set.endPoint = doc.$set.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
+        doc.$set.url = (doc.$set.url + doc.$set.endPoint).replace(/([^:]\/)\/+/g, '$1');
+      }
       return doc;
     },
 

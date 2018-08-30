@@ -57,16 +57,19 @@ Template.apiMonitoring.helpers({
     const lastDate = new Date();
     lastDate.setDate(lastDate.getDate() - 1);
     const monitoringData = MonitoringData.findOne({ apiId });
-    // eslint-disable-next-line no-useless-escape
-    const responses = monitoringData.responses.filter((obj) => {
-      let result = false;
-      if (obj.date >= lastDate && obj.date <= startDate) {
-        result = true;
+
+    if (monitoringData && monitoringData.responses) {
+      // eslint-disable-next-line no-useless-escape
+      const responses = monitoringData.responses.filter((obj) => {
+        let result = false;
+        if (obj.date >= lastDate && obj.date <= startDate) {
+          result = true;
+        }
+        return result;
+      });
+      if (monitoringData) {
+        return responses;
       }
-      return result;
-    });
-    if (monitoringData) {
-      return responses;
     }
     return [];
   },
