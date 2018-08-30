@@ -6,119 +6,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 const descriptionAnalytics = {
   // --------------------------------------------
   general: `
-  ## What is APInf?
-
-  APinf is open source API management and marketplace application.
-Solution supports both REST and MQTT proxies.
-You can have multiple proxies under one management.
-
-  ----
-
-  **APInf - API management with free-tier. See more from https://www.apinf.com/pricing**
-
-  ----
-
-  ## **For API owners**
-
-  APInf provides you with a unified, simple interface for publishing
-  your APIs to the developer community and performing complex API management tasks.
-
-  It allows you to gain a better understanding of your API traffic.
-
-  Each organization has an organization page which provides single URL to promote to developers.
-
-  ----
-
   ## **APInf Analytics API**
 
   With APInf Analytics REST API you can retrieve general and detailed
   information about performance of your APIs.
   With this API you can for example to monitor your API performance or to
   export API performance data for external dashboard.
-
-  API performance data is available on two levels
-  - KPI level (**K**ey **P**erformace **I**ndicators)
-    - summaries, e.g. number of requests, response time, number of unique users
-  - Detailed level
-    - in addition to previous, e.g. trend compared between periods
-  and data per day with more granularity
-
-
-   ### Examples for each method to get you started
-
-  Examples assume you have logged in before calling the API.
-  Read about authentication below. It is also assumed,
-  that while connecting Analytics API to proxy, the "/rest/v1/"
-  is included in API base path and in Proxy base path the API is identified with "/analyze/".
-
-  **List APIs showing their Ids and Key Performance Indicator values**
-
-
-  #### GET /analytics
-
-  <pre>
-  curl -X GET https://apinf.io:3002/analyze/analytics
-    -H  "accept: application/json"
-    -H  "X-API-Key: my-api-key"
-    -H  "X-Auth-Token: my-auth-token"
-    -H  "X-User-Id: my-user-id"
-    -H  "content-type: application/json"
-  </pre>
-
-  **List my organizations**
-
-  Endpoint contains search as optional parameter.
-  You can use optional organization id in detailed requesting
-  analytics only for APIs related to specific organization.
-  Here's how to list all your organizations (and IDs) you are involved with.
-
-
-  #### GET /myOrganizations
-
-  <pre>
-  curl -X GET https://apinf.io:3002/analyze/myOrganizations
-    -H  "accept: application/json"
-    -H  "X-API-Key: my-api-key"
-    -H  "X-Auth-Token: my-auth-token"
-    -H  "X-User-Id: my-user-id"
-    -H  "content-type: application/json"
-  </pre>
-
-  **Show KPI values for APIs under one organization**
-
-  You can see KPI values for all APIs under one organization by
-  giving organizationId as parameter
-
-  #### GET /analytics?organizationId=2
-
-  <pre>
-  curl -X GET https://apinf.io:3002/analyze/my-organizations?organizationId=2
-    -H  "accept: application/json"
-    -H  "X-API-Key: my-api-key"
-    -H  "X-Auth-Token: my-auth-token"
-    -H  "X-User-Id: my-user-id"
-    -H  "content-type: application/json"
-  </pre>
-
-
-  **Show detailed analytics for one API**
-
-  You can see detailed analytics data for one API by adding
-  API Id as path parameter. With additional query parameters you can
-  limit the results. See /analytics/{apiID} endpoint for details.
-
-  #### GET /analytics/2
-
-
-  <pre>
-  curl -X GET https://apinf.io:3002/analyze/analytics/2
-    -H  "accept: application/json"
-    -H  "X-API-Key: my-api-key"
-    -H  "X-Auth-Token: my-auth-token"
-    -H  "X-User-Id: my-user-id"
-    -H  "content-type: application/json"
-  </pre>
-
 
   ## **Authentication**
 
