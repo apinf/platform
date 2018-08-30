@@ -298,11 +298,12 @@ You can have multiple proxies under one management.
   - found is number of all records matching to search conditions
 
   Following data is returned of each call of API in question:
-  - the API URL (proxy base path)
-  - the used method
-  - HTTP code of response
-  - response size
   - timestamp
+  - the used method
+  - response size
+  - HTTP code of response
+  - request query parameters (if exist)
+  - the API URL (proxy base path)
 
   `,
   // --------------------------------------------

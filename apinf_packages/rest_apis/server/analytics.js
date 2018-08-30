@@ -500,25 +500,29 @@ AnalyticsV1.swagger = {
         data: {
           type: 'object',
           properties: {
-            request_path: {
-              type: 'string',
-              example: 'https://apis-url-here/endpoint-name',
+            request_at: {
+              type: 'integer',
+              example: '1489580360900',
             },
             request_method: {
               type: 'string',
               example: 'GET | POST | PUT | DELETE',
             },
-            response_status: {
-              type: 'integer',
-              example: '200',
-            },
             response_size: {
               type: 'integer',
               example: '1324',
             },
-            request_at: {
+            response_status: {
               type: 'integer',
-              example: '1489580360900',
+              example: '200',
+            },
+            request_url_query: {
+              type: 'string',
+              example: 'q=api',
+            },
+            request_path: {
+              type: 'string',
+              example: 'https://apis-url-here/endpoint-name',
             },
           },
         },

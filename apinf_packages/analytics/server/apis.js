@@ -210,11 +210,13 @@ AnalyticsV1.addRoute('analytics/:id/raw', {
         }
       }
 
+      // Form query for certain fields
+      // Note! By giving "_source: true,", the complete content of each source document is gotten
       const query = {
         size: limit,
         from: skip,
         body: {
-          _source: ['request_path', 'request_method', 'response_status',
+          _source: ['request_path', 'request_url_query', 'request_method', 'response_status',
             'response_size', 'request_at'],
           query: {
             filtered: {
