@@ -9,9 +9,14 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 AutoForm.hooks({
   apiDetailsForm: {
     formToModifier: (doc) => {
-      const host = 'https://';
-      if (doc.$set.url.substring(0, 8) !== host) {
-        doc.$set.url = host + doc.$set.url;
+      const protocol1 = 'https://';
+      const protocol2 = 'http://';
+      if (doc.$set.url.substring(0, 8) === protocol1) {
+        return doc;
+      } else if (doc.$set.url.substring(0, 7) === protocol2) {
+        return doc;
+      } else if (doc.$set.url.substring(0, 8) !== protocol1) {
+        doc.$set.url = protocol1 + doc.$set.url;
         return doc;
       }
       return doc;

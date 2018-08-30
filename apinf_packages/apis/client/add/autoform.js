@@ -15,9 +15,14 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 AutoForm.hooks({
   addApiForm: {
     formToDoc: (doc) => {
-      const host = 'https://';
-      if (doc.url.substring(0, 8) !== host) {
-        doc.url = host + doc.url;
+      const protocol1 = 'https://';
+      const protocol2 = 'http://';
+      if (doc.url.substring(0, 8) === protocol1) {
+        return doc;
+      } else if (doc.url.substring(0, 7) === protocol2) {
+        return doc;
+      } else if (doc.url.substring(0, 8) !== protocol1) {
+        doc.url = protocol1 + doc.url;
         return doc;
       }
       return doc;
