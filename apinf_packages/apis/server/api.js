@@ -1933,7 +1933,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
         CatalogV1.swagger.tags.api,
       ],
       summary: 'Get latest Monitoring status of API',
-      description: 'TEXT',
+      description: 'In return user get object with latest API code status',
       parameters: [
         CatalogV1.swagger.params.apiId,
       ],
@@ -1969,10 +1969,13 @@ CatalogV1.addRoute('apis/:id/monitoring', {
     },
     action () {
       const queryParams = this.queryParams;
+
       // Get ID of API (URL parameter)
       const apiId = this.urlParams.id;
+
        // Get API document
       const api = Apis.findOne(apiId);
+
        // API must exist
       if (!api) {
         // API doesn't exist
@@ -1980,12 +1983,14 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       }
        // Check if API monitoring is enabled
       const monitoringSettings = MonitoringSettings.findOne({ apiId });
+
       if (!monitoringSettings) {
         return errorMessagePayload(404, 'API Monitoring has not been set up.');
       }
       if (!monitoringSettings.enabled) {
         return errorMessagePayload(404, 'API Monitoring is disabled.');
       }
+
       const statusList = queryParams.statusList;
       let monitoringStatusList;
        // Include
@@ -1993,6 +1998,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       const includeFields = {};
       includeFields.responses = [];
       options.fields = includeFields;
+
       if (statusList) {
         // Check if parameter value is correct
         if (statusList !== 'true') {
