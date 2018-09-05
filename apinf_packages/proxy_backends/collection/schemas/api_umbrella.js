@@ -37,6 +37,37 @@ const RateLimitSchema = new SimpleSchema({
 // Internationalize Rate limit schema texts
 RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
+const RequiredHeaderSetting = new SimpleSchema({
+  method: {
+    type: String,
+    optional: true,
+    allowedValues: [
+      'any',
+      'get',
+      'post',
+      'put',
+      'delete',
+      'head',
+      'trace',
+      'options',
+      'connect',
+      'patch',
+    ],
+    defaultValue: 'any',
+  },
+  regex: {
+    type: String,
+    optional: true,
+  },
+  required_headers: {
+    type: String,
+    optional: true,
+  },
+});
+
+// Internationalize Rate limit schema texts
+RequiredHeaderSetting.i18n('schemas.proxyBackends.apiUmbrella.settings.required_headers_setting');
+
 const SettingsSchema = new SimpleSchema({
   disable_api_key: {
     type: Boolean,
@@ -71,8 +102,8 @@ const SettingsSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  required_headers: {
-    type: String,
+  required_headers_settings: {
+    type: [RequiredHeaderSetting],
     optional: true,
   },
 });

@@ -1014,8 +1014,28 @@
           "idp_app_id": {
             "label": "IDP App Id"
           },
-          "required_headers": {
-            "label": "Required Headers"
+          "required_headers_settings": {
+            "label": "Required Header Setting"
+          },
+          "required_headers_setting": {
+            "method": {
+              "label": "Method",
+              "options": {
+                "any": "Any",
+                "get": "GET",
+                "post": "POST",
+                "put": "PUT",
+                "delete": "DELETE",
+                "head": "HEAD",
+                "trace": "TRACE",
+                "options": "OPTIONS",
+                "connect": "CONNECT",
+                "patch": "PATCH"
+              }
+            },
+            "required_headers": {
+              "label": "Required Headers"
+            }
           },
           "rate_limit_mode": {
             "label": "Rate limit mode",
