@@ -46,6 +46,28 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> updatePassword }}
           </div>
         </div>
+        <!--Adding new panel to add github and fiware account-->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "account_alternative_login_platform_title" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            <fieldset>
+              <div>
+                <h5>
+                  {{_ "account_non_github_login" }}
+                </h5>
+                {{> loginButtons}}
+              </div>
+              <div>
+                {{> linkTemplate}}
+              </div>
+           </fieldset>
+          </div>
+        </div>
+        <!--end-->
         <div class="panel panel-danger">
           <div class="panel-heading">
             <h3 class="panel-title">
