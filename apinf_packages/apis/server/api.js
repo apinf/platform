@@ -1933,7 +1933,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
         CatalogV1.swagger.tags.api,
       ],
       summary: 'Get latest Monitoring status of API',
-      description: 'In return user get object with latest API code status',
+      description: 'In return user gets object with latest API code status',
       parameters: [
         CatalogV1.swagger.params.apiId,
       ],
@@ -2014,7 +2014,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
           return errorMessagePayload(403, 'User does not have permission');
         }
          // Get list of monitoring statuses
-        monitoringStatusList = MonitoringData.find(apiId, options).fetch();
+        monitoringStatusList = MonitoringData.find({ apiId }, options).fetch();
       } else {
         // Get API's latest monitoring status code
         const monitoringStatusListArray = MonitoringData.findOne({ apiId }).responses;
