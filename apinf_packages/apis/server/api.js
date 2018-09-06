@@ -1936,6 +1936,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       description: 'In return user gets object with latest API code status',
       parameters: [
         CatalogV1.swagger.params.apiId,
+        CatalogV1.swagger.params.statusList,
       ],
       responses: {
         200: {
