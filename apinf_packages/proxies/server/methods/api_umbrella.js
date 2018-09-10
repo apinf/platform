@@ -122,7 +122,6 @@ Meteor.methods({
       response.errors = { default: [error.message] };
       response.http_status = 422;
     }
-
     return response;
   },
   updateApiBackendOnApiUmbrella (apiBackend, proxyId) {
