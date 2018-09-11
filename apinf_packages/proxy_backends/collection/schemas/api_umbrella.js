@@ -65,6 +65,9 @@ const SubSettings = new SimpleSchema({
   },
   'settings.required_headers_string': {
     type: String,
+    autoform: {
+      rows: 3,
+    },
     optional: true,
   },
 });
