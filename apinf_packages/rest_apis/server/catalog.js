@@ -148,10 +148,10 @@ CatalogV1.swagger = {
     statusList: {
       name: 'statusList',
       in: 'query',
-      description: 'Select if only current status is shown or list of statutes during period.',
+      description: 'Show list of statutes.',
       required: false,
       type: 'string',
-      enum: ['true', 'false'],
+      enum: ['true'],
     },
     url: {
       name: 'url',
