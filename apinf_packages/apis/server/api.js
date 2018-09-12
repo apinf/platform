@@ -2001,7 +2001,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       options.fields = includeFields;
 
       // Check if parameter value is correct
-      if (statusList !== 'true' && statusList !== 'false') {
+      if (statusList && statusList !== 'true' && statusList !== 'false') {
         const errorText = 'Bad Request. Status list parameter is erroneous or missing.';
         return errorMessagePayload(400, errorText);
       }
