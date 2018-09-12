@@ -2002,7 +2002,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       includeFields.responses = [];
       options.fields = includeFields;
 
-      if (statusList.toUpperCase() === 'TRUE') {
+      if (statusList && statusList.toUpperCase() === 'TRUE') {
         // User have admin rights
         // Get Manager ID from header
         const managerId = this.request.headers['x-user-id'];
