@@ -23,6 +23,12 @@ import requiredFieldsFilled from './required_fields';
 
 AutoForm.hooks({
   proxyBackendForm: {
+    formToModifier: (doc) => {
+      if (doc.$set['apiUmbrella.sub_settings']) {
+        doc.$set['apiUmbrella.sub_settings'] = _.compact(doc.$set['apiUmbrella.sub_settings']);
+      }
+      return doc;
+    },
     before: {
       insert (proxyBackend) {
         // TODO: Refactor this method. It is too long and complex

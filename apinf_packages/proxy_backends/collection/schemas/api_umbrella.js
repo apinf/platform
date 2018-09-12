@@ -42,7 +42,7 @@ const SubSettings = new SimpleSchema({
     type: String,
     optional: true,
     allowedValues: [
-      'ANY',
+      'any',
       'GET',
       'POST',
       'PUT',
@@ -53,7 +53,23 @@ const SubSettings = new SimpleSchema({
       'CONNECT',
       'PATCH',
     ],
-    defaultValue: 'ANY',
+    defaultValue: 'any',
+    autoform: {
+      options: () => {
+        return {
+          any: 'Any',
+          GET: 'GET',
+          POST: 'POST',
+          PUT: 'PUT',
+          DELETE: 'DELETE',
+          HEAD: 'HEAD',
+          TRACE: 'TRACE',
+          OPTIONS: 'OPTIONS',
+          CONNECT: 'CONNECT',
+          PATCH: 'PATCH',
+        };
+      },
+    },
   },
   regex: {
     type: String,
