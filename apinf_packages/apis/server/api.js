@@ -2015,7 +2015,8 @@ CatalogV1.addRoute('apis/:id/monitoring', {
           return errorMessagePayload(403, 'User does not have permission');
         }
          // Get list of monitoring statuses
-        monitoringStatusList = MonitoringData.find({ apiId }, options).fetch();
+        const monitoringStatusListArray = MonitoringData.find({ apiId }, options).fetch();
+        monitoringStatusList = monitoringStatusListArray[0].responses;
       } else {
         // Get API's latest monitoring status code
         const monitoringStatusListArray = MonitoringData.findOne({ apiId }).responses;
