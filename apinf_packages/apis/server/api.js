@@ -2001,12 +2001,12 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       options.fields = includeFields;
 
       // Check if parameter value is correct
-      if (statusList && statusList !== 'true' && statusList !== 'false') {
+      if (statusList !== 'true' && statusList !== 'false') {
         const errorText = 'Bad Request. Status list parameter is erroneous or missing.';
         return errorMessagePayload(400, errorText);
       }
 
-      if (statusList === 'true') {
+      if (statusList && statusList === 'true') {
         // User have admin rights
         // Get Manager ID from header
         const managerId = this.request.headers['x-user-id'];
