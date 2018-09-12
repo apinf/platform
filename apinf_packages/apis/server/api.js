@@ -1934,7 +1934,7 @@ CatalogV1.addRoute('apis/:id/monitoring', {
       ],
       summary: 'Get latest Monitoring status of API',
       description: `As default response in return user gets object with latest API code status.
-                    By providing parameter statuList with value true,
+                    By providing parameter statusList with value true,
                     user gets list of all stored statuses.`,
       parameters: [
         CatalogV1.swagger.params.apiId,
