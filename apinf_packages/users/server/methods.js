@@ -67,10 +67,4 @@ Meteor.methods({
 
     return Roles.userIsInRole(userId, ['admin']);
   },
-  '_accounts/unlink/service': function (userId, serviceName) {
-    // Make sure userId is a String
-    check(userId, String);
-    check(serviceName, String);
-    Accounts.unlinkService(userId, serviceName);
-  },
 });
