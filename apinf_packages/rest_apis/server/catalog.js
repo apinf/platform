@@ -145,6 +145,14 @@ CatalogV1.swagger = {
       format: 'int32',
       minimum: 0,
     },
+    statusList: {
+      name: 'statusList',
+      in: 'query',
+      description: 'Show list of statutes.',
+      required: false,
+      type: 'string',
+      enum: ['true'],
+    },
     url: {
       name: 'url',
       in: 'query',
@@ -291,6 +299,45 @@ CatalogV1.swagger = {
           items: {
             type: 'string',
             example: 'url-to-external-site',
+          },
+        },
+      },
+    },
+    apiMonitoring: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'api-id-value',
+        },
+        enabled: {
+          type: 'boolean',
+          example: 'true',
+        },
+        apiMonitoringResultList: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              responses: {
+                type: 'object',
+                description: 'text',
+                properties: {
+                  date: {
+                    type: 'string',
+                    example: 'text',
+                  },
+                  server_status_code: {
+                    type: 'string',
+                    example: 'text',
+                  },
+                  url: {
+                    type: 'string',
+                    example: 'url',
+                  },
+                },
+              },
+            },
           },
         },
       },
