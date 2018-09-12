@@ -145,6 +145,14 @@ CatalogV1.swagger = {
       format: 'int32',
       minimum: 0,
     },
+    statusList: {
+      name: 'statusList',
+      in: 'query',
+      description: 'Select if only current status is shown or list of statutes during period.',
+      required: false,
+      type: 'string',
+      enum: ['true', 'false'],
+    },
     url: {
       name: 'url',
       in: 'query',
