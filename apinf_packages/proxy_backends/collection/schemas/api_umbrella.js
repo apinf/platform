@@ -40,9 +40,8 @@ RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 const SubSettings = new SimpleSchema({
   http_method: {
     type: String,
-    optional: true,
+    optional: false,
     allowedValues: [
-      'any',
       'GET',
       'POST',
       'PUT',
@@ -53,27 +52,10 @@ const SubSettings = new SimpleSchema({
       'CONNECT',
       'PATCH',
     ],
-    defaultValue: 'any',
-    autoform: {
-      options: () => {
-        return {
-          any: 'Any',
-          GET: 'GET',
-          POST: 'POST',
-          PUT: 'PUT',
-          DELETE: 'DELETE',
-          HEAD: 'HEAD',
-          TRACE: 'TRACE',
-          OPTIONS: 'OPTIONS',
-          CONNECT: 'CONNECT',
-          PATCH: 'PATCH',
-        };
-      },
-    },
   },
   regex: {
     type: String,
-    optional: true,
+    optional: false,
   },
   settings: {
     type: Object,

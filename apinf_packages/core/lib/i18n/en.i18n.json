@@ -994,6 +994,11 @@
             }
           }
         },
+        "sub_settings": {
+          "http_method": {
+            "label": "Http Methods"
+          }
+        },
         "settings": {
           "append_query_string": {
             "label": "Append Query String Parameters"
@@ -1006,9 +1011,6 @@
           },
           "idp_app_id": {
             "label": "IDP App Id"
-          },
-          "required_headers_settings": {
-            "label": "Required Header Setting"
           },
           "rate_limit_mode": {
             "label": "Rate limit mode",
