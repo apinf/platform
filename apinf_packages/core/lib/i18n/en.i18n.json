@@ -437,6 +437,7 @@
   "invalidEmailMessage": "Must be a valid e-mail address",
   "invalidProxyBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
+  "invalidApiRequiredMessage": "Invalid input not allowed",
   "invalidContactPhoneMessage": "Must be a valid number. (0-9), +, -, space, / are allowed",
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_MoreInfo": "More info",
@@ -993,6 +994,11 @@
             }
           }
         },
+        "sub_settings": {
+          "http_method": {
+            "label": "Http Methods"
+          }
+        },
         "settings": {
           "append_query_string": {
             "label": "Append Query String Parameters"
@@ -1002,6 +1008,9 @@
           },
           "headers_string": {
             "label": "Set Request Headers"
+          },
+          "idp_app_id": {
+            "label": "IDP App Id"
           },
           "rate_limit_mode": {
             "label": "Rate limit mode",

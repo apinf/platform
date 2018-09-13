@@ -122,7 +122,6 @@ Meteor.methods({
       response.errors = { default: [error.message] };
       response.http_status = 422;
     }
-
     return response;
   },
   updateApiBackendOnApiUmbrella (apiBackend, proxyId) {
@@ -146,6 +145,11 @@ Meteor.methods({
       http_status: 204,
       errors: {},
     };
+
+    if (backend.api.sub_settings === undefined) {
+      // eslint-disable-next-line dot-notation
+      backend.api['sub_settings'] = [];
+    }
 
     try {
       // Get API Umbrella's endpoint
