@@ -18,11 +18,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ 'dashboardOverviewStatistic_text_successCalls' count=dataset.successCallsCount }}
           </p>
           <span class="text-danger">
-            {{# if timeframeYesterday }}
-              {{_ 'dashboardOverviewStatistic_text_errorCallsYesterday' count=dataset.errorCallsCount }}
-            {{ else }}
-              {{_ 'dashboardOverviewStatistic_text_errorCalls' count=dataset.errorCallsCount timeframe=timeframe }}
-            {{/ if }}
+            {{ errorCallsText dataset.errorCallsCount }}
           </span>
         </div>
       </div>
@@ -34,7 +30,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_requestsNumber' }}
           </span>
-          {{> requestsOverTime chartData=(getChartData 'requests') proxyBackendId=dataset.proxyBackendId }}
+          {{> requestsOverTime
+            chartData=(getChartData 'requests')
+            proxyBackendId=dataset.proxyBackendId
+            dateFormat=dateFormat
+          }}
           <div class="{{ arrowDirection 'requests' }}"></div>
           <span>{{ overviewComparing 'requests' }}</span>
         </div>
@@ -47,30 +47,48 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_responseTime' }}
           </span>
-          {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=dataset.proxyBackendId }}
+          {{> medianResponseTime
+            chartData=(getChartData 'time')
+            proxyBackendId=dataset.proxyBackendId
+            dateFormat=dateFormat
+          }}
           <div class="{{ arrowDirection 'time' }}"></div>
           <span>{{ overviewComparing 'time' }}</span>
         </div>
       </div>
       <div class="col-xs-12 col-md-3">
         <p class="overview-col-title">
-          {{_ 'dashboardOverviewStatistic_text_usersCount' count=dataset.avgUniqueUsers }} <sup>*</sup>
+          {{_ 'dashboardOverviewStatistic_text_usersCount' count=dataset.avgUniqueUsers }}
+          {{# if displayTextAverageUsers }}
+              <sup>*</sup>
+          {{/ if }}
         </p>
         <div class="form-group">
           <span class="overview-col-title">
             {{_ 'dashboardOverviewStatistic_chartTitle_uniqueUsers' }}
           </span>
-          {{> uniqueUsersOverTime chartData=(getChartData 'users') proxyBackendId=dataset.proxyBackendId }}
+          {{> uniqueUsersOverTime
+            chartData=(getChartData 'users')
+            proxyBackendId=dataset.proxyBackendId
+            dateFormat=dateFormat
+          }}
           <div class="{{ arrowDirection 'users' }}"></div>
           <span>{{ overviewComparing 'users' }}</span>
-          <div class="overview-help-text">
-            <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
-          </div>
+
+          <!-- For "Today" metrics for Users is not average, not display it -->
+          {{# if displayTextAverageUsers }}
+            <div class="overview-help-text">
+              <sup>*</sup> {{_ 'dashboardOverviewStatistic_helpText_averageUniqueUsers' }}
+            </div>
+          {{/ if }}
         </div>
 
         <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}" class="pull-right">
           {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
         </a>
+      </div>
+      <div class="overview-help-text">
+        {{_ 'dashboardOverviewStatistic_helpText_serverTimezone' servertimezone=(serverTimeZone)}}
       </div>
     </div>
   </div>

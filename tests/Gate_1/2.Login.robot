@@ -43,7 +43,7 @@ Log out of apinf
 	Logout of apinf
 	confirm page loaded	Sign In
 
-*** Keywords *** 
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
@@ -52,8 +52,8 @@ Go to login
 	confirm page loaded	Users
 	Click Element	id=signin-button
 	confirm page loaded	Login
-	
-Login to apinf	
+
+Login to apinf
 	[Arguments]	${username}	${password}
 	Input Text	id=at-field-username_and_email	${username}
 	Input Password 	id=at-field-password	${password}
@@ -71,4 +71,5 @@ Test reset password
 	Click Button	id=at-btn
 
 Logout of apinf
+	Focus		id=footer-signout
 	Click Element 	id=footer-signout

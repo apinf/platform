@@ -8,24 +8,24 @@ ${BROWSER} 	chrome
 ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
-Make new account no mail (fail)
+Make new account no mail (negative)
 	confirm page loaded	Users
 	Go to signup
 	Register to apinf	asdas	${EMPTY}	asdasd
 	Wait Until Page Contains	Required Field
 
-Make new account no password (fail)
+Make new account no password (negative)
 	Go to signup
 	Register to apinf	asdas	asd@asd.asd	${EMPTY}
 	Wait Until Page Contains	Required Field
 
-Make new account (pass)
+Make new account (positive)
 	Go to signup
 	Register to apinf	asdas	asd@asd.asd	asdasd
 	confirm page loaded	Users
 
-	
-*** Keywords *** 
+
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
@@ -48,4 +48,5 @@ confirm page loaded
 	Wait Until Page Contains 	${searchkey}
 
 Logout of apinf
+	Focus		id=footer-signout
 	Click Element 	id=footer-signout

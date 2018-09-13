@@ -19,11 +19,15 @@
   "account_delete_warning": "There's no coming back from this one",
   "account_delete_title": "Delete account",
   "account_details": "Account Details",
-  "accountPage_title_account": "Account",
+  "accountPage_title_account": "Account Settings",
   "addApiPage_title_addApi": "Add API",
   "addApi_button_text": "Add API",
   "addApi_header": "Add an API",
   "addApi_enterApiDetails": "Enter API details",
+  "addApi_descriptionFieldInfo": "The description will appear in in the API profile and API card in the catalog. Briefly describe what your API does and what information can user access using this API.",
+  "addApi_nameFieldInfo": "The name will appear in the API profile, API catalog and API Dashboard. Please provide a meaningful name to understand the type of the API at a glance.",
+  "addApi_urlFieldInfo": "Provide the base path of your API as a valid URL starting with 'https://..'. This will appear at proxy settings of the API profile.",
+  "addApi_ownerHelpText": "Your API will appear in the catalog with public visibility. You can change the visibility from the settings tab in the API profile.",
   "addApi_separateLineTitle_or": "or",
   "addApi_sectionTitle_importOpenApiSpecification": "Import OpenAPI Specification",
   "addApi_sectionTitle_importApiConfiguration": "Import API Configuration",
@@ -34,6 +38,7 @@
   "addBackend_simple_prefixInformation_helptext": "Enter frontend and backend paths, starting with '\/'",
   "addOrganizationManagerForm_button": "Add Manager",
   "addOrganizationManagerForm_helpText_usernameEmail": "Give either username or email address",
+  "apiAnalyticPageHeader_helpText_serverTimezone": "All chart data is displayed according to Server time. Timezone: __servertimezone__",
   "apiAnalyticPageHeader_labelText_proxyName": "Proxy: __name__",
   "apiAnalyticPageHeader_text_lastUpdateTime": "Last update was __time__",
   "apiAnalyticPageBody_text_requestsCount": "__count__ request",
@@ -140,6 +145,7 @@
   "apiIntro_steps_settings_intro": "Edit API settings from this tab. You can also delete API here.",
   "apiIntro_steps_welcome_intro": "Welcome",
   "apiIntro_skipLabel": "Skip",
+  "apiIntro_steps_monitoring_data": "Start and stop API monitoring. When monitoring is on, the response statuses during latest 24 hours are displayed.",
   "apiIntro_quickTour_button_text": "Quick tour",
   "apiKeys_label": "API Key",
   "apiKeys_getApiKeyButton": "Get API key",
@@ -192,8 +198,8 @@
   "apinf_noproxy_error": "Error: No proxy found",
   "apinf_noproxybackend_error": "Error: No proxy backend found",
   "apinf_usernotloggedin_error": "Error: Could not find signed-in user.",
-  "apiMonitoring_panelTitle_Monitoring": "API Monitoring",
-  "apiMonitoring_helpIcon_text": "Please provide a valid path to an endpoint to make actual API calls. API monitoring is done using HTTP requests. You can use GET method only so that accidental data insertion in your API is prevented.",
+  "apiMonitoring_panelTitle_Monitoring": "API Health Monitoring",
+  "apiMonitoring_helpIcon_text": "API Monitoring indicates current state of your API. API monitoring is done using HTTP requests. Choose one of your APIs GET method so that accidental data insertion in your API is prevented. When monitoring is setup, you will see a dot next to your API name indicating the health of your API based on calls made in monitoring.  Green = OK, Red = not OK.",
   "apiMonitoring_saveButton_text": "Save",
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
@@ -255,6 +261,7 @@
   "contactForm_submit": "Submit",
   "dashboardOverviewStatistic_text_requestPath": "Request path: __path__",
   "dashboardOverviewStatistic_text_successCalls": "2XX Calls: __count__",
+  "dashboardOverviewStatistic_text_errorCallsToday": "__count__ error in today",
   "dashboardOverviewStatistic_text_errorCallsYesterday": "__count__ error in last day",
   "dashboardOverviewStatistic_text_errorCalls": "__count__ errors in last __timeframe__ days",
   "dashboardOverviewStatistic_text_requestsCount": "__count__ request",
@@ -267,6 +274,7 @@
   "dashboardOverviewStatistic_chartTitle_uniqueUsers": "Unique API Users",
   "dashboardOverviewStatistic_linkText_viewDetails": "View details...",
   "dashboardOverviewStatistic_helpText_averageUniqueUsers": "The average unique users per selected period",
+  "dashboardOverviewStatistic_helpText_serverTimezone": "All chart data is displayed according to Server time. Timezone: __servertimezone__",
   "dashboardSummaryStatistic_columnTitle_apiName": "API name",
   "dashboardSummaryStatistic_columnTitle_requestsNumber": "Number of requests",
   "dashboardSummaryStatistic_columnTitle_responseTime": "Response time(median)",
@@ -285,7 +293,8 @@
   "dashboardPage_text_noProxyBackends": "You have not yet connected your API to a proxy. To see analytics of your API usage, browse your API from Catalog and configure a proxy from the API profile.",
   "dashboardView_text_noApisFound": "No APIs found with the specified name",
   "dashboardPage_placeholderText_search": "Search",
-  "dateRangePicker_optionText_yesterday": "Last 24 hours",
+  "dateRangePicker_optionText_today": "Today",
+  "dateRangePicker_optionText_yesterday": "Yesterday",
   "dateRangePicker_optionText_7days": "Last 7 Days",
   "dateRangePicker_optionText_28days": "Last 28 Days",
   "deleteAccount_closeButton": "Close",
@@ -428,6 +437,7 @@
   "invalidEmailMessage": "Must be a valid e-mail address",
   "invalidProxyBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
+  "invalidApiRequiredMessage": "Invalid input not allowed",
   "invalidContactPhoneMessage": "Must be a valid number. (0-9), +, -, space, / are allowed",
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_MoreInfo": "More info",
@@ -460,6 +470,7 @@
   "mostFrequentUsersTable_lintText_downloadFile": "Download all users",
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
+  "navbar_my_apis": "My APIs",
   "navbar_organizations": "Organizations",
   "navbar_dashboard": "Dashboard",
   "navbar_signIn": "Sign In",
@@ -655,15 +666,22 @@
   "removeProxy_errorMessage": "Error: Proxy removal failed",
   "removeProxy_buttonText_cancel": "Cancel",
   "requestTimeline_labelText_path": "Path",
+  "requestTimeline_xAxisTitle_hours": "Hours",
   "requestTimeline_xAxisTitle_days": "Days",
   "requestTimeline_yAxisTitle_requests": "API Requests",
   "requestTimeline_legendItem_allCalls": "All calls",
   "requestsOverTime_pointTitle_requests": "Requests",
   "responseTimeTimeline_labelText_path": "Path",
+  "responseTimeTimeline_xAxisTitle_hours": "Hours",
   "responseTimeTimeline_xAxisTitle_days": "Days",
   "responseTimeTimeline_yAxisTitle_time": "Time, ms",
-  "responseTimeTimeline_legendItem_95thPercentiles": "95th percentiles",
   "responseTimeTimeline_legendItem_median": "Median",
+  "responseTimeTimeline_legendItem_longest": "Slowest",
+  "responseTimeTimeline_legendItem_long": "Slow 75%",
+  "responseTimeTimeline_legendItem_median": "Median 50%",
+  "responseTimeTimeline_legendItem_short": "Fast 25%",
+  "responseTimeTimeline_legendItem_shortest": "Fastest",
+
   "schemas": {
     "apis": {
       "name": {
@@ -673,7 +691,7 @@
         "label": "Description"
       },
       "url": {
-        "label": "API Endpoint"
+        "label": "API Host URL"
       },
       "organizationId": {
         "label": "Connect API to organization"
@@ -906,6 +924,9 @@
         "host": {
           "label": "Host"
         }
+      },
+      "developmentFeatures": {
+        "label": "Enabled"
       }
     },
     "proxies": {
@@ -973,6 +994,11 @@
             }
           }
         },
+        "sub_settings": {
+          "http_method": {
+            "label": "Http Methods"
+          }
+        },
         "settings": {
           "append_query_string": {
             "label": "Append Query String Parameters"
@@ -982,6 +1008,9 @@
           },
           "headers_string": {
             "label": "Set Request Headers"
+          },
+          "idp_app_id": {
+            "label": "IDP App Id"
           },
           "rate_limit_mode": {
             "label": "Rate limit mode",
@@ -1164,7 +1193,7 @@
   "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
   "settingsPage_title_settings": "Settings",
   "settingsMenu_profile": "Profile",
-  "settingsMenu_account": "Account",
+  "settingsMenu_account": "Account Settings",
   "settingsMenu_branding": "Branding",
   "settingsMenu_settings": "Settings",
   "settingsMenu_proxies": "Proxies",
@@ -1182,8 +1211,11 @@
   "statusCheck_Elasticsearch": "Elasticsearch",
   "summaryComparing_trendDirection_lower": "lower",
   "summaryComparing_trendDirection_higher": "higher",
-  "summaryComparing_displayTrendInfo_yesterday": "__percentage__ __direction__ than yesterday",
-  "summaryComparing_displayTrendInfo_days": "__percentage__ __direction__ than last __day__ days",
+  "summaryComparing_displayTrendInfo_today": "__percentage__ __direction__ than yesterday",
+  "summaryComparing_displayTrendInfo_yesterday": "__percentage__ __direction__ than the previous day",
+  "summaryComparing_displayTrendInfo_days": "__percentage__ __direction__ than the previous __day__ days",
+  "summaryComparing_displayTrendInfo_noTrend": "same as the previous day",
+  "summaryComparing_displayTrendInfo_noTrendDays": "same as the previous __day__ days",
   "swaggerUi_swaggerDocumentInvalidText": "Swagger document is not valid.",
   "swaggerUi_alertText_Warning": "Warning!",
   "swaggerUi_alertText_mainText": "This application platform uses HTTPS. API requests from documentation will not work because API uses HTTP.",
@@ -1216,7 +1248,7 @@
   "uploadProjectLogo_acceptedExtensions": "Only .jpg, .jpeg, .png and .gif file formats are allowed.",
   "uploadProjectLogo_successfully_uploaded": "Your project logo successfully uploaded!",
   "uploadProjectLogo_successfully_deleted": "Your project logo successfully deleted!",
-  "userMenu_account": "Account",
+  "userMenu_account": "Account Settings",
   "userMenu_branding": "Branding",
   "userMenu_profile": "Profile",
   "userMenu_proxies": "Proxies",
@@ -1253,6 +1285,7 @@
   "viewApi_Metadata_Title": "Metadata",
   "viewApi_Servers": "Servers",
   "viewApi_Title": "View API backend",
+  "viewApiNavigationMenu_monitoring": "Monitoring",
   "visibilityToggle_buttonPrivate": "Make Private",
   "visibilityToggle_buttonPublic": "Make Public"
 }

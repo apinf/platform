@@ -32,7 +32,7 @@ Filter my bookmarks
 	Location Should Contain	By=my-bookmarks
 	Page Should Not Contain	Kappa
 
-*** Keywords *** 
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
@@ -42,7 +42,7 @@ Go to login
 	Click Element	id=signin-button
 	confirm page loaded	Login
 
-Login to apinf	
+Login to apinf
 	[Arguments]	${username}	${password}
 	Input Text	id=at-field-username_and_email	${username}
 	Input Password 	id=at-field-password	${password}
@@ -57,16 +57,14 @@ Go to api catalog
 Apis sorting
 	Select From List By Value	id=sort-select	bookmarkCount
 	Location Should Contain	By=bookmark
-	Click Element	id=sortDirection-descending
-	Location Should Contain	Direction=descending
+	Select From List By Value	id=sort-select	name-desc
+	Location Should Contain	name-desc
 	Select From List By Value	id=sort-select	created_at
 	Location Should Contain	By=created
-	Click Element	id=sortDirection-ascending
-	Location Should Contain	Direction=ascending
+	Select From List By Value	id=sort-select	name-asc
+	Location Should Contain	name-asc
 	Select From List By Value	id=sort-select	averageRating
 	Location Should Contain	By=average
-	Select From List By Value	id=sort-select	name
-	Location Should Contain	By=name
 
 Show my apis
 	Click Element	id=filterBy-my-apis
@@ -79,4 +77,5 @@ confirm page loaded
 	Wait Until Page Contains 	${searchkey}
 
 Logout of apinf
+	Focus		id=footer-signout
 	Click Element 	id=footer-signout

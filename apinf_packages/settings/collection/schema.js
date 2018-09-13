@@ -27,7 +27,6 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
     defaultValue: false,
-    label: 'Enabled',
   },
   mail: {
     type: Object,

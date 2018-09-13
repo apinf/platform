@@ -26,7 +26,7 @@ Delete api
 	Delete API
 	Page Should Not Contain	kissa
 
-*** Keywords *** 
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
@@ -36,7 +36,7 @@ Go to login
 	Click Element	id=signin-button
 	confirm page loaded	Login
 
-Login to apinf	
+Login to apinf
 	[Arguments]	${username}	${password}
 	Input Text	id=at-field-username_and_email	${username}
 	Input Password 	id=at-field-password	${password}
@@ -48,11 +48,13 @@ Go to api page
 setup proxy
 	Go To	http://localhost:3000/apis/kissa
 	Wait Until Page Contains	media
+	Sleep	0.3
 	Click Element	css=i.fa.fa-sitemap
 	Sleep	0.3
 	Input text	id=proxy-base-path-field	/gaagol/
 	Input text	id=api-base-path-field	/
 	Click Element	id=disable-apikey-box
+	Focus	id=save-proxy-button
 	Click Element	id=save-proxy-button
 	Wait Until Page Contains	Settings saved	10
 	Sleep	0.3
@@ -62,6 +64,7 @@ Delete API
 	Wait Until Page Contains	Feedback
 	Click Element	css=i.fa.fa-cog
 	Wait Until Element Is Visible	id=delete-api
+	Focus	id=delete-api
 	Click Element	id=delete-api
 	Wait Until Element Is Visible	id=modal-delete-api
 	Click Element	id=modal-delete-api
@@ -72,4 +75,5 @@ confirm page loaded
 	Wait Until Page Contains 	${searchkey}
 
 Logout of apinf
+	Focus		id=footer-signout
 	Click Element 	id=footer-signout

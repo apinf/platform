@@ -12,18 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </div>
 
     <div class="row">
-      <form id="search-form">
-        <div class="input-group">
-          <span class="input-group-addon">
-            <i class="fa fa-search"></i>
-          </span>
-          <input
-          type="text"
-          placeholder="{{_ 'searchPage_searchForm_placeholderText' }}"
-          class="form-control"
-          id="search-field" />
-        </div>
-      </form>
+      {{> search_form }}
       <p class="help-block">
         {{_ "searchPage_searchForm_helpText" }}
       </p>

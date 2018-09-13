@@ -7,7 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
+import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
@@ -18,8 +18,8 @@ Template.apiMonitoring.onCreated(function () {
 
   // Subscribe on Monitoring collection
   instance.subscribe('monitoringSettings', apiId);
+  instance.subscribe('getApiStatusRecordData', apiId);
 });
-
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
@@ -43,11 +43,21 @@ Template.apiMonitoring.helpers({
 
     // Look for existing monitoring document for this API
     const existingSettings = MonitoringSettings.findOne({ apiId });
-
     if (existingSettings) {
       return 'update';
     }
 
     return 'insert';
+  },
+  apiStatusData () {
+    const apiId = this.api._id;
+    const monitoringData = MonitoringData.findOne({ apiId });
+    if (monitoringData) {
+      return monitoringData.responses;
+    }
+    return [];
+  },
+  apiStatusCode (code) {
+    return code === '200';
   },
 });
