@@ -10,6 +10,8 @@ import { check } from 'meteor/check';
 // Npm packages imports
 import SwaggerParser from 'swagger-parser';
 
+import _ from 'lodash';
+
 Meteor.methods({
   // Parameter is URL or file path to Swagger file
   parsedSwaggerDocument (swaggerFileUrl) {
@@ -20,7 +22,13 @@ Meteor.methods({
       .then((result) => {
         // Parsed and validated successfully
         // Return parsed object
-        return result;
+        const schemes = _.get(result, 'schemes', []);
+        // Checking of scheme contains only http protocol
+        if (schemes[0] === 'http' && schemes.length === 1) {
+          // Set the document contains only http protocol
+          return true;
+        }
+        return false;
       })
       .catch((err) => {
         // Return error object

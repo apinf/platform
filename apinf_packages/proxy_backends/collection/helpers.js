@@ -44,6 +44,10 @@ ProxyBackends.helpers({
 
     return _.get(this, path, '');
   },
+  backendPrefix () {
+    const path = 'apiUmbrella.url_matches[0].backend_prefix';
+    return _.get(this, path, '');
+  },
   apiSlug () {
     // Get API ID
     const apiId = this.apiId;
