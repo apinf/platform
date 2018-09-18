@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { HTTP } from 'meteor/http';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -31,7 +32,7 @@ Meteor.methods({
     check(url, String);
 
     // Call HTTP request
-    Meteor.http.get(url, {}, (error, result) => {
+    HTTP.call('GET', url, {}, (error, result) => {
       // Set status code
       const serverStatusCode = result ? result.statusCode : 404;
 

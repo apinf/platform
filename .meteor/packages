@@ -3,10 +3,10 @@
 # 'meteor add' and 'meteor remove' will edit this fill for you,
 # but you can also edit it by hand.
 
-accounts-base@1.4.0
-accounts-github@1.4.0
+accounts-base@1.4.2
+accounts-github@1.4.1
 accounts-password@1.5.0
-accounts-ui@1.2.0
+accounts-ui@1.3.0
 alanning:roles
 aldeed:autoform
 aldeed:autoform-bs-button-group-input
@@ -22,12 +22,12 @@ arillo:flow-router-helpers
 benmgreene:moment-range
 blaze-html-templates@1.0.4
 cfs:filesystem
-check@1.2.5
+check@1.3.0
 dandv:jquery-rateit
 dburles:collection-helpers
 deepwell:bootstrap-datepicker2
-dynamic-import@0.2.0
-ecmascript@0.9.0
+dynamic-import@0.3.1
+ecmascript@0.10.6
 ejson@1.1.0
 email@1.2.3
 fastclick@1.0.13
@@ -36,7 +36,7 @@ froatsnook:valid-email
 github-config-ui@1.0.0
 gwendall:autoform-i18n
 harrison:papa-parse
-http@1.3.0
+http@1.4.0
 jquery@1.11.10
 juliancwirko:s-alert
 juliancwirko:s-alert-stackslide
@@ -48,11 +48,11 @@ kurounin:pagination@=1.0.21
 less@2.7.11
 logging@1.1.19
 matb33:collection-hooks
-meteor-base@1.2.0
+meteor-base@1.3.0
 meteorhacks:subs-manager
 michalvalasek:autoform-bootstrap-colorpicker
 mobile-experience@1.0.5
-mongo@1.3.0
+mongo@1.4.2
 nimble:restivus@=0.8.11
 olragon:uri-js
 pahans:inline-help
@@ -64,21 +64,21 @@ raix:handlebar-helpers
 raix:rssfeed
 raix:ui-dropped-event
 rajit:bootstrap3-datepicker
-random@1.0.10
+random@1.1.0
 reactive-dict@1.2.0
 reactive-var@1.0.11
-reload@1.1.11
+reload@1.2.0
 reywood:publish-composite
 sacha:spin
 service-configuration@1.0.11
 session@1.1.7
-shell-server@0.3.0
+shell-server@0.3.1
 simple:reactive-method
 softwarerero:accounts-t9n
 spacebars@1.0.12
 spiderable@1.0.14-release-testing.0
-standard-minifier-css@1.3.5
-standard-minifier-js@2.2.0
+standard-minifier-css@1.4.0
+standard-minifier-js@2.3.1
 tap:i18n
 tap:i18n-ui
 tmeasday:publish-counts
@@ -93,5 +93,6 @@ zimme:active-route
 aldeed:autoform-select2
 natestrauser:select2
 meteorhacks:aggregate
-apinf:api-umbrella
 apinf:accounts-admin-ui
+apinf:api-umbrella
+underscore

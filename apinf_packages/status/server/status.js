@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { HTTP } from 'meteor/http';
 
 Meteor.methods({
   statusCheck () {
@@ -20,7 +21,7 @@ Meteor.methods({
         const apinfHost = Meteor.absoluteUrl();
 
         // response object from apinf GET request
-        const apinfResponse = Meteor.http.call('GET', apinfHost);
+        const apinfResponse = HTTP.call('GET', apinfHost);
 
         // checks is the status code matches 200
         if (apinfResponse.statusCode === 200) {
@@ -51,7 +52,7 @@ Meteor.methods({
         const apiUmbrellaHost = Meteor.settings.apiUmbrella.host;
 
         // response object from API Umbrella GET request
-        const apiUmbrellaResponse = Meteor.http.call('GET', apiUmbrellaHost);
+        const apiUmbrellaResponse = HTTP.call('GET', apiUmbrellaHost);
 
         // checks is the status code matches 200
         if (apiUmbrellaResponse.statusCode === 200) {
@@ -83,7 +84,7 @@ Meteor.methods({
         const elasticsearchInstance = Meteor.settings.elasticsearch.host;
 
         // response object from elasticsearch GET request
-        const elasticsearchResponse = Meteor.http.call('GET', elasticsearchInstance);
+        const elasticsearchResponse = HTTP.call('GET', elasticsearchInstance);
 
         // checks is the status code matches 200
         if (elasticsearchResponse.statusCode === 200) {
