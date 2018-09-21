@@ -17,14 +17,14 @@ LoginPlatforms.schema = new SimpleSchema({
   },
   'githubConfiguration.clientId': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
   'githubConfiguration.secret': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
@@ -35,23 +35,69 @@ LoginPlatforms.schema = new SimpleSchema({
   },
   'fiwareConfiguration.clientId': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
   'fiwareConfiguration.secret': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
   'fiwareConfiguration.rootURL': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
+    },
+  },
+  oidcConfiguration: {
+    type: Object,
+    optional: true,
+  },
+  'oidcConfiguration.clientId': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'oidcConfiguration.secret': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'oidcConfiguration.serverUrl': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: 'https://secure-server.fi',
+    },
+  },
+  'oidcConfiguration.authorizationEndpoint': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: '/auth',
+    },
+  },
+  'oidcConfiguration.tokenEndpoint': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: '/token',
+    },
+  },
+  'oidcConfiguration.userinfoEndpoint': {
+    type: String,
+    optional: true,
+    autoform: {
+      placeholder: '/userInfo',
     },
   },
 });

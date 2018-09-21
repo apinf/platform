@@ -37,6 +37,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "settings_oidc" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='oidcConfiguration.clientId' id="oidc-id" }}
+            {{> afQuickField name='oidcConfiguration.secret' id="oidc-secret" }}
+            {{> afQuickField name='oidcConfiguration.serverUrl' id="oidc-server" }}
+            {{> afQuickField name='oidcConfiguration.authorizationEndpoint' id="oidc-authEp" }}
+            {{> afQuickField name='oidcConfiguration.tokenEndpoint' id="oidc-tokenEp" }}
+            {{> afQuickField name='oidcConfiguration.userinfoEndpoint' id="oidc-uInfoEp" }}
+          </div>
+        </div>
         <div id="form-buttons">
           <button
             type="submit"

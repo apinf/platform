@@ -13,6 +13,8 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
 import LoginPlatforms from '../collection';
+// Meteor contributed packages imports
+import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
 Template.loginPlatforms.onCreated(function () {
   const instance = this;
@@ -26,8 +28,28 @@ Template.loginPlatforms.onCreated(function () {
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
   });
+  // Check if there is some changes in Configuration
+  // If there are, update the LoginPlatform
+  promisifyCall('updateLoginPlatformsFromConfiguration')
+  .then(result => {
+    if (result) {
+      // Get settings form success message translation
+      const message = TAPi18n.__('settings_successMessage');
+      platformData = result;
+    }
+  })
+  .catch(err => {
+    if (err) {
+      // Get settings form success message translation
+      const message = TAPi18n.__('settings_errorMessage');
+      // Alert the user of successful save
+      sAlert.error(message, { timeout: 'none' });
+    }
+  });
+
   // Subscription to feedback collection
   instance.subscribe('loginPlatforms');
+
 });
 
 Template.loginPlatforms.helpers({
