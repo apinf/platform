@@ -1,10 +1,8 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-@import "/apinf_packages/core/client/style/bootstrap-variables.less";
-
-.introjs-bullets ul li a.active {
-  background: @brand-primary !important;
+.api-settings .input-group-addon {
+  background-color: #F5F5F5;
 }

@@ -14,6 +14,32 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import Branding from '/apinf_packages/branding/collection';
 import Apis from '../../collection';
 
+Template.addApi.onRendered(() => {
+  function checkForm() {
+    // here, "this" is an input element
+    var isValidForm = true;
+    $('#addApiForm').find(':input[required]:visible').each(function() {
+      if (!this.value.trim()) {
+        isValidForm = false;
+      }
+    });
+    $('#addApiForm').find('#submitapi-button').prop('disabled', !isValidForm);
+    return isValidForm;
+  }
+
+  $('#submitapi-button').closest('form')
+  // indirectly bind the handler to form
+  .submit(function() {
+    return checkForm.apply($(this).find(':input')[0]);
+  })
+  // look for input elements
+  .find(':input[required]:visible')
+  // bind the handler to input elements
+  .keyup(checkForm)
+  // immediately fire it to initialize buttons state
+  .keyup();
+});
+
 Template.addApi.onCreated(function () {
   const instance = this;
 

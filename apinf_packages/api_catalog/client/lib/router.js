@@ -14,35 +14,16 @@ FlowRouter.route('/apis', {
   // Get query parameters for Catalog page on Enter
   triggersEnter: [function (context) {
     if (!context.queryParams.sortBy) {
-      context.queryParams.sortBy = 'name-asc';
+      context.queryParams.sortBy = 'bookmarkCount';
     }
     if (!context.queryParams.viewMode) {
-      context.queryParams.viewMode = 'grid';
+      context.queryParams.viewMode = 'table';
     }
     if (!context.queryParams.filterBy && Meteor.userId()) {
       context.queryParams.filterBy = 'all';
     }
   }],
   name: 'apiCatalog',
-  action: () => {
-    BlazeLayout.render('masterLayout', { main: 'apiCatalog' });
-  },
-});
-
-FlowRouter.route('/myapis', {
-  // Get query parameters for Catalog page on Enter
-  triggersEnter: [function (context) {
-    if (!context.queryParams.sortBy) {
-      context.queryParams.sortBy = 'name-asc';
-    }
-    if (!context.queryParams.viewMode) {
-      context.queryParams.viewMode = 'grid';
-    }
-    if (!context.queryParams.filterBy && Meteor.userId()) {
-      context.queryParams.filterBy = 'my-apis';
-    }
-  }],
-  name: 'myApiCatalog',
   action: () => {
     BlazeLayout.render('masterLayout', { main: 'apiCatalog' });
   },

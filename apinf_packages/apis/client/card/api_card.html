@@ -23,25 +23,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{ api.name }}
         </h3>
       </a>
-      <p class="api-card-author text-center">
+      <p class="api-card-author text-center" style="margin-bottom: 0;">
         {{# if api.organization }}
           {{ api.organization.name }}
         {{ else }}
           {{ api.getApiManagersByName }}
         {{/ if }}
       </p>
-      <ul class="list-inline api-card-labels">
-        <li>
-          {{> apiLifecycleStatus api=api }}
-        </li>
-        <li>
-          {{# unless api.isPublic }}
-            <span class="label label-default">
-              {{_ "apiCard_labelText_private"}}
-            </span>
-          {{/ unless }}
-        </li>
-      </ul>
     </div>
     <div class="api-card-logo clearfix">
       <a href="{{ pathFor 'viewApi' slug=api.slug }}" title="{{ api.name }}">
@@ -58,7 +46,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if api.created_at }}
         <li class="time">
           <span title='{{ localeFormatDate api.created_at }}'>
-            <i class="fa fa-clock-o"></i>
+            <i class="mdi mdi-clock"></i>
             {{ dateInTimeAgoFormat api.created_at }}
           </span>
         </li>
@@ -90,7 +78,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                  data-placement="bottom"
                  title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
                 {{ api.bookmarkCount }}
-              <i class="fa fa-bookmark bookmark-default"></i>
+              <i class="fa fa-star bookmark-default" style="color:#FFD600;"></i>
             </div>
           {{/ if }}
         </li>

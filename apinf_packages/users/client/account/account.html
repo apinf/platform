@@ -4,68 +4,20 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="account">
-  <div class="container padded-container">
-    <div class="row">
-      {{> settingsMenu }}
-
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title">
-              {{_ "profile_Header" }}
-            </div>
-          </div>
-          <div class="panel-body">
-            {{# autoForm
-              id="updateProfile"
-              collection=usersCollection
-              doc=currentUser
-              type="update" }}
-              {{> afQuickField name="username" id="username" }}
-
-              <div class="form-group">
-                <label for="email">
-                  {{_ "profile_labelText_registeredEmail" }}
-                </label>
-                <p>{{ userEmail }}</p>
-              </div>
-              {{> afQuickField name="profile.company" id="company" }}
-              <button type="submit" class="btn btn-success profile-update" id="update-button">
-                {{_ "profile_UpdateButton" }}
-              </button>
-            {{/ autoForm }}
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {{_ "account_details" }}
-            </h3>
-          </div>
-          <div class="panel-body">
-            {{> updatePassword }}
-          </div>
-        </div>
-        <div class="panel panel-danger">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {{_ "account_delete_title" }}
-            </h3>
-          </div>
-          <div class="panel-body">
-            <p>
-              {{_ "account_delete_warning" }}
-            </p>
-            <p>
-              <a class="btn btn-danger" id="delete-account-button">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                &nbsp;
-                {{_ "account_delete_button_text" }}
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-md-6 block-wrapper col-md-offset-3">
+      {{> updatePassword }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 block-wrapper col-md-offset-3" style="border: 2px solid #cc1410;">
+      <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">Delete your account</h2>
+      <a class="btn btn-danger" id="delete-account-button">
+        {{_ "account_delete_button_text" }}
+      </a>
+      <p style="color:#6d859e;margin-top:1.5em;">
+        {{_ "account_delete_warning" }}
+      </p>
     </div>
   </div>
 </template>

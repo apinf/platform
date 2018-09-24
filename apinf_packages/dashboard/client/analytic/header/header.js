@@ -18,8 +18,6 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 Template.apiAnalyticPageHeader.onCreated(function () {
   const instance = this;
 
-  instance.lastUpdateTime = new ReactiveVar();
-
   // Get ID of current proxy backend
   const proxyBackendId = instance.data.proxyBackendId;
   // Get instance of Proxy Backend
@@ -29,18 +27,6 @@ Template.apiAnalyticPageHeader.onCreated(function () {
   // Get IDs of relevant API and Proxy
   instance.apiId = proxyBackend && proxyBackend.apiId;
   instance.proxyId = proxyBackend && proxyBackend.proxyId;
-
-  Meteor.call('lastUpdateTime', { proxyBackendId }, (error, result) => {
-    // Save value
-    instance.lastUpdateTime.set(result);
-  });
-
-  // get server timezone
-  instance.serverTimeZone = new ReactiveVar();
-  Meteor.call('getServerTimeZone', (error, result) => {
-    // Save value
-    instance.serverTimeZone.set(result);
-  });
 });
 
 Template.apiAnalyticPageHeader.helpers({
@@ -60,18 +46,5 @@ Template.apiAnalyticPageHeader.helpers({
     }
 
     return '';
-  },
-  lastUpdateTime () {
-    const instance = Template.instance();
-    return instance.lastUpdateTime.get();
-  },
-  serverTimeZone () {
-    const instance = Template.instance();
-    return instance.serverTimeZone.get();
-  },
-  displayLastUpdateTime () {
-    const timeframe = FlowRouter.getQueryParam('timeframe');
-    // Not display info about Last update if selected "Yesterday" or Today
-    return timeframe !== '48' && timeframe !== '12';
   },
 });

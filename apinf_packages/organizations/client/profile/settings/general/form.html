@@ -5,9 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationSettingsGeneral">
   <div class="setting-section">
-    <h3>
-      {{_ "organizationSettingsGeneral_title" }}
-    </h3>
 
     {{# autoForm
       collection=organizationCollection
@@ -20,7 +17,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='url' id="organisation-url" }}
       {{> afQuickField name='description' id="organisation-description" }}
 
-      <button type="submit" class="btn btn-success" id="save-org-general-settings">
+      <button type="submit" class="btn btn-success btn-success-special" id="save-org-general-settings">
         {{_ "organizationSettingsGeneral_saveButton_text" }}
       </button>
     {{/ autoForm }}

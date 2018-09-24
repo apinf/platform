@@ -29,21 +29,11 @@ Template.apiDetails.onCreated(function () {
 });
 
 Template.apiDetails.onRendered(() => {
-  // Initialize Clipboard copy button
-  const copyButton = new Clipboard('#copyApiUrl');
-
-  // Tooltip position
-  $('#copyApiUrl').tooltip({
-    trigger: 'click',
-    placement: 'bottom',
-  });
-
-  // Tell the user when copy is successful
-  copyButton.on('success', () => {
-    $('#copyApiUrl').tooltip('hide')
-      .attr('data-original-title', 'Copied!')
-      .tooltip('show');
-  });
+  // Initialize Clipboard copy buttons
+  const copyApiUrl = new Clipboard('#copyApiUrl');
+  const copyProxyUrl = new Clipboard('#copyProxyUrl');
+  const copyExampleOne = new Clipboard('#copyExampleOne');
+  const copyExampleTwo = new Clipboard('#copyExampleTwo');
 });
 
 Template.apiDetails.helpers({
@@ -125,5 +115,19 @@ Template.apiDetails.helpers({
     }
     // Return apiKey
     return apiKey;
+  },
+  displayLinkBlock () {
+    const api = this.api;
+    const apiDoc = this.apiDoc;
+
+    // Display block if a user is manager of current API or URL is set
+    return api.currentUserCanManage() || (apiDoc && apiDoc.otherUrl);
+  },
+  displayViewBlock () {
+    const api = this.api;
+    const instance = Template.instance();
+
+    // Display block if a user is manager of current API or swagger documentation is available
+    return api.currentUserCanManage() || instance.documentationExists.get();
   },
 });

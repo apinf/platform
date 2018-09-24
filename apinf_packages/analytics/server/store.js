@@ -215,9 +215,4 @@ Meteor.methods({
     // Return "date" value
     return analytics && analytics.date;
   },
-  getServerTimeZone () {
-    const serverTime = new Date();
-    const timeZone = serverTime.toString().substring(25);
-    return timeZone;
-  },
 });

@@ -20,6 +20,7 @@ import Apis from '/apinf_packages/apis/collection';
 import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
 import Branding from '/apinf_packages/branding/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 import 'locale-compare-polyfill';
 
@@ -77,7 +78,7 @@ Template.apiCatalog.onCreated(function () {
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Apis, {
     // Count of cards in catalog
-    perPage: 24,
+    perPage: 12,
     // Set sort by name on default
     sort: defaultSort,
     filters,
@@ -282,6 +283,33 @@ Template.apiCatalog.helpers({
   },
   apisCount () {
     return Template.instance().pagination.totalItems();
+  },
+  userCanAddApi () {
+    // Get settigns document
+    const settings = Settings.findOne();
+
+    if (settings) {
+      // Get access setting value
+      // If access field doesn't exist, these is false. Allow users to add an API on default
+      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
+
+      // Allow user to add an API because not only for admin
+      if (!onlyAdminsCanAddApis) {
+        return true;
+      }
+
+      // Otherwise check of user role
+      // Get current user Id
+      const userId = Meteor.userId();
+
+      // Check if current user is admin
+      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+      return userIsAdmin;
+    }
+    // Return true because no settings are set
+    // By default allowing all user to add an API
+    return true;
   },
 });
 

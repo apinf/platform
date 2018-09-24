@@ -9,6 +9,9 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
+// APInf import
+import convertStatusCode from '/apinf_packages/apis/client/profile/status/convert_status_code';
+
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
   const instance = this;
@@ -23,6 +26,9 @@ Template.apiMonitoring.onCreated(function () {
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
+
+  // Init tooltip
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 Template.apiMonitoring.helpers({

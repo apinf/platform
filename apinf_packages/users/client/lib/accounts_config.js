@@ -10,13 +10,13 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 // https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 AccountsTemplates.configure({
   /* Route configuration */
-  defaultLayout: 'masterLayout',
+  defaultLayout: 'atForm',
   defaultContentRegion: 'main',
   /* Behavior */
-  confirmPassword: true,
+  confirmPassword: false,
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
-  overrideLoginErrors: true,
+  overrideLoginErrors: false,
   lowercaseUsername: false,
   sendVerificationEmail: true,
   /* Appearance */
@@ -35,6 +35,15 @@ AccountsTemplates.configure({
   // Privacy Policy and Terms of Use
   privacyUrl: 'privacy-policy',
   termsUrl: 'terms-of-use',
+  texts: {
+    title: {
+      signUp: "Sign Up",
+    },
+    button: {
+      signIn: "Sign In",
+      signUp: "Sign Up",
+    },
+  },
 });
 
 // rearranging the fields on Sign-Up, so that username comes first.
@@ -72,8 +81,9 @@ AccountsTemplates.configureRoute('signIn', {
   layoutType: 'blaze',
   name: 'signIn',
   path: '/sign-in',
-  layoutTemplate: 'masterLayout',
+  layoutTemplate: 'atLayout',
   contentRegion: 'main',
+  redirect: '/apis',
 });
 
 // Sign up
@@ -81,6 +91,7 @@ AccountsTemplates.configureRoute('signUp', {
   layoutType: 'blaze',
   name: 'signUp',
   path: '/sign-up',
-  layoutTemplate: 'masterLayout',
+  layoutTemplate: 'atLayout',
   contentRegion: 'main',
+  redirect: '/apis',
 });

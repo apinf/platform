@@ -9,6 +9,58 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 .panel-hr {
   margin: 1em 0;
+  margin-bottom: 1.5em;
   border: 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+}
+
+.form-inline .form-control {
+  display: block !important;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.form-inline .control-label {
+  margin-bottom: 5px !important;
+  vertical-align: middle;
+}
+
+.form-inline .form-group {
+  display: block !important;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.list-group {
+  padding-left: 0;
+  margin-bottom: 10px !important;
+}
+
+.api-settings {
+  .nav-tabs { border-bottom: 1px solid #f2f2f2; }
+  .nav-tabs > li { padding-right: 30px; }
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+  .nav-tabs > li > a { border: none; color: #666; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 15px; }
+  .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #333 !important; background: transparent;}
+  .nav-tabs > li > a::after { content: ""; background: #333; height: 3px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+  .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+  .tab-nav > li > a::after { background: #333 none repeat; color: #fff; }
+  .tab-pane { padding-top: 1.5em; }
+}
+
+#disconnect-from-organization {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+  max-width: -moz-available; /* works only in firefox */
+  max-width: -webkit-fill-available; /* works only in chrome and safari */
+}
+
+.api-settings {
+  counter {
+    float: right;
+    color: #6d859e;
+  }  
 }

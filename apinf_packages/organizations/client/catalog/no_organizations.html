@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="noOrganizationsMessage">
-  <div class="alert alert-warning" role="alert">
+  <div class="block-wrapper">
     {{_ "organizationCatalog_text_noOrganizationIsAvailable" }}
     {{# if isInRole 'admin' }}
       {{_ "organizationCatalog_text_addOrganization" }}

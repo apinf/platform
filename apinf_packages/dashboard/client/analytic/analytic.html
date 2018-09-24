@@ -5,16 +5,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiAnalyticPage">
   <div class="api-view">
-    <div class="container">
-      {{# if Template.subscriptionsReady }}
-        {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
-        <div class="form-group">
-          {{> dateRangePicker }}
-        </div>
-        {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
-      {{ else }}
-        {{> spinner }}
-      {{/ if }} <!-- /subscriptionReady -->
+    {{# if Template.subscriptionsReady }}
+    <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height:60px;">
+      {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
     </div>
+    <div class="container">
+      {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+    </div>
+    {{ else }}
+    {{> spinner }}
+    {{/ if }} <!-- /subscriptionReady -->
   </div>
 </template>

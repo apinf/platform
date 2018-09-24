@@ -164,10 +164,17 @@ Template.organizationApis.events({
       sAlert.error(message, { timeout: 'none' });
     }
   },
-  'click [data-lifecycle]': (event) => {
-    // Get value of data-lifecycle
-    const selectedTag = event.currentTarget.dataset.lifecycle;
-    // Set value in query parameter
-    FlowRouter.setQueryParams({ lifecycle: selectedTag });
+  'click #edit': (event) => {
+    // Remove active class
+    $(`.secondary-menu_navigation .links li#organization-apis-tab`).removeClass('active');
+
+    // Add active class to settings tab link
+    $(`.secondary-menu_navigation .links li#organization-settings-tab`).addClass('active');
+
+    // Show settings tab
+    $(`.about-organization a[href='#settings']`).tab('show');
+
+    // Show hash value in url
+    window.location = `${event.currentTarget.hash}`;
   },
 });

@@ -5,10 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationSettingsContactInfo">
   <div class="setting-section">
-    <h3>
-      {{_ "organizationSettingsContactInfo_title" }}
-    </h3>
-
     {{# autoForm
       collection=organizationCollection
       doc=organization
@@ -20,7 +16,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='contact.phone' id="contact-phone" }}
       {{> afQuickField name='contact.email' id="contact-email" }}
 
-      <button type="submit" class="btn btn-success" id="save-org-contact-settings">
+      <button type="submit" class="btn btn-success btn-success-special" id="save-org-contact-settings">
         {{_ "organizationSettingsContactInfo_saveButton_text" }}
       </button>
     {{/ autoForm }}
