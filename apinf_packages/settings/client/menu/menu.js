@@ -23,7 +23,7 @@ Template.settingsMenu.onRendered(() => {
     let requiredSpace;
 
     // Get initial state
-    $vlinks.children().outerWidth( (i, w) => {
+    $vlinks.children().outerWidth((i, w) => {
       totalSpace += w;
       numOfItems += 1;
       breakWidths.push(totalSpace);
@@ -53,7 +53,7 @@ Template.settingsMenu.onRendered(() => {
     }
 
     // Window listeners
-    $(window).resize( () => {
+    $(window).resize(() => {
       check();
     });
 

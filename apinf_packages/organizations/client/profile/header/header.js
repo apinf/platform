@@ -52,7 +52,7 @@ Template.organizationProfileHeader.onRendered(function () {
     $(`.secondary-menu_navigation a[href='#${hashTabValue}']`).tab('show');
   }
   // Mobile menu
-  $( () => {
+  $(() => {
     // var $nav = $('nav.secondary-menu_navigation');
     const $btn = $('nav.secondary-menu_navigation button');
     const $vlinks = $('nav.secondary-menu_navigation .links');
@@ -67,7 +67,7 @@ Template.organizationProfileHeader.onRendered(function () {
     let requiredSpace;
 
     // Get initial state
-    $vlinks.children().outerWidth( (i, w) => {
+    $vlinks.children().outerWidth((i, w) => {
       totalSpace += w;
       numOfItems += 1;
       breakWidths.push(totalSpace);
@@ -96,7 +96,7 @@ Template.organizationProfileHeader.onRendered(function () {
     }
 
     // Window listeners
-    $(window).resize( () => {
+    $(window).resize(() => {
       check();
     });
 
