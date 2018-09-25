@@ -8,7 +8,7 @@ import { Template } from 'meteor/templating';
 
 Template.settingsMenu.onRendered(() => {
   // Mobile menu
-  $(function() {
+  $(() => {
     // var $nav = $('nav.secondary-menu_navigation');
     const $btn = $('nav.secondary-menu_navigation button');
     const $vlinks = $('nav.secondary-menu_navigation .links');
@@ -23,7 +23,7 @@ Template.settingsMenu.onRendered(() => {
     let requiredSpace;
 
     // Get initial state
-    $vlinks.children().outerWidth(function (i, w) {
+    $vlinks.children().outerWidth( (i, w) => {
       totalSpace += w;
       numOfItems += 1;
       breakWidths.push(totalSpace);
@@ -53,11 +53,11 @@ Template.settingsMenu.onRendered(() => {
     }
 
     // Window listeners
-    $(window).resize(function () {
+    $(window).resize( () => {
       check();
     });
 
-    $btn.on('click', function () {
+    $btn.on('click', () => {
       $hlinks.toggleClass('hidden');
     });
 
