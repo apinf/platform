@@ -110,7 +110,7 @@ Template.apiKey.events({
 
     // Get api Key from template data
     const apiKey = instance.$('#api-key').text();
-    //console.log(apiKey);
+    // console.log(apiKey);
 
     // Get all api list linked to a api key
     const apisList = instance.apisList.get();

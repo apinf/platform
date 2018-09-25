@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Npm packages imports
-import Clipboard from 'clipboard';
+// import Clipboard from 'clipboard';
 
 // Collection imports
 import ApiKeys from '/apinf_packages/api_keys/collection';
@@ -34,6 +34,7 @@ Template.apiDetails.onRendered(() => {
   //const copyProxyUrl = new Clipboard('#copyProxyUrl');
   //const copyExampleOne = new Clipboard('#copyExampleOne');
   //const copyExampleTwo = new Clipboard('#copyExampleTwo');
+  
 });
 
 Template.apiDetails.helpers({

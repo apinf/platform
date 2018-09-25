@@ -5,18 +5,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
-Template.settingsMenu.onRendered (() => {
+
+Template.settingsMenu.onRendered(() => {
   // Mobile menu
   $(function() {
-
-    //var $nav = $('nav.secondary-menu_navigation');
+    // var $nav = $('nav.secondary-menu_navigation');
     const $btn = $('nav.secondary-menu_navigation button');
     const $vlinks = $('nav.secondary-menu_navigation .links');
     const $hlinks = $('nav.secondary-menu_navigation .hidden-links');
 
     let numOfItems = 0;
     let totalSpace = 0;
-    let breakWidths = [];
+    const breakWidths = [];
 
     let availableSpace;
     let numOfVisibleItems;
@@ -30,7 +30,6 @@ Template.settingsMenu.onRendered (() => {
     });
 
     function check () {
-
       // Get instant state
       availableSpace = $vlinks.width() - 10;
       numOfVisibleItems = $vlinks.children().length;

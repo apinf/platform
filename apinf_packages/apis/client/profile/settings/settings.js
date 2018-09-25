@@ -8,6 +8,7 @@ import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { Counts } from 'meteor/tmeasday:publish-counts';
+
 Template.apiSettings.helpers({
   proxyIsConfigured () {
     // Get count of Proxies

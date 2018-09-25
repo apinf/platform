@@ -53,28 +53,26 @@ Template.organizationProfileHeader.onRendered(function () {
   }
   // Mobile menu
   $(function () {
-
-    //var $nav = $('nav.secondary-menu_navigation');
-    var $btn = $('nav.secondary-menu_navigation button');
-    var $vlinks = $('nav.secondary-menu_navigation .links');
-    var $hlinks = $('nav.secondary-menu_navigation .hidden-links');
+    // var $nav = $('nav.secondary-menu_navigation');
+    const $btn = $('nav.secondary-menu_navigation button');
+    const $vlinks = $('nav.secondary-menu_navigation .links');
+    const $hlinks = $('nav.secondary-menu_navigation .hidden-links');
 
     let numOfItems = 0;
     let totalSpace = 0;
-    let breakWidths = [];
+    const breakWidths = [];
 
     let availableSpace;
     let numOfVisibleItems;
     let requiredSpace;
 
     // Get initial state
-    $vlinks.children().outerWidth(function(i, w) {
+    $vlinks.children().outerWidth(function (i, w) {
       totalSpace += w;
       numOfItems += 1;
       breakWidths.push(totalSpace);
     });
-
-    function check() {
+    function check () {
 
       // Get instant state
       availableSpace = $vlinks.width() - 10;
@@ -99,7 +97,7 @@ Template.organizationProfileHeader.onRendered(function () {
     }
 
     // Window listeners
-    $(window).resize(function() {
+    $(window).resize(function () {
       check();
     });
 

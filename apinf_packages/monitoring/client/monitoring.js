@@ -10,7 +10,7 @@ import { Template } from 'meteor/templating';
 import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
 // APInf import
-//import convertStatusCode from '/apinf_packages/apis/client/profile/status/convert_status_code';
+//  import convertStatusCode from '/apinf_packages/apis/client/profile/status/convert_status_code';
 
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
