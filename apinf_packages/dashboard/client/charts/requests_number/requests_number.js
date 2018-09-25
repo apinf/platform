@@ -94,7 +94,6 @@ Template.requestTimeline.onRendered(function () {
   instance.autorun(() => {
     // Get analytics data
     const selectedPathData = instance.selectedPathData.get();
-    
     // Get Date format
     const dateFormat = Template.currentData().dateFormat;
 

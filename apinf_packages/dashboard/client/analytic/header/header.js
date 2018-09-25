@@ -5,10 +5,10 @@
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
+//import { Meteor } from 'meteor/meteor';
+//import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+//import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';

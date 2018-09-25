@@ -16,7 +16,7 @@ Template.apiSettingsDetails.onRendered(() => {
     count: 1000, // optional: if string, specifies attribute of target to use as value
     alertAt: 900, // optional: integer [defaults 20]
     warnAt: 700, // optional: integer [defaults 0]
-    stopAtLimit: true // optional: defaults to false
+    stopAtLimit: true, // optional: defaults to false
   });
 });
 

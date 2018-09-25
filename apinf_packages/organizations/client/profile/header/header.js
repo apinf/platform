@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
@@ -50,18 +51,21 @@ Template.organizationProfileHeader.onRendered(function () {
     // Show tab
     $(`.secondary-menu_navigation a[href='#${hashTabValue}']`).tab('show');
   }
-
   // Mobile menu
-  $(function() {
+  $(function () {
 
-    var $nav = $('nav.secondary-menu_navigation');
+    //var $nav = $('nav.secondary-menu_navigation');
     var $btn = $('nav.secondary-menu_navigation button');
     var $vlinks = $('nav.secondary-menu_navigation .links');
     var $hlinks = $('nav.secondary-menu_navigation .hidden-links');
 
-    var numOfItems = 0;
-    var totalSpace = 0;
-    var breakWidths = [];
+    let numOfItems = 0;
+    let totalSpace = 0;
+    let breakWidths = [];
+
+    let availableSpace;
+    let numOfVisibleItems;
+    let requiredSpace;
 
     // Get initial state
     $vlinks.children().outerWidth(function(i, w) {
@@ -69,8 +73,6 @@ Template.organizationProfileHeader.onRendered(function () {
       numOfItems += 1;
       breakWidths.push(totalSpace);
     });
-
-    var availableSpace, numOfVisibleItems, requiredSpace;
 
     function check() {
 
@@ -90,7 +92,7 @@ Template.organizationProfileHeader.onRendered(function () {
         numOfVisibleItems += 1;
       }
       // Update the button accordingly
-      $btn.attr("count", numOfItems - numOfVisibleItems);
+      $btn.attr('count', numOfItems - numOfVisibleItems);
       if (numOfVisibleItems === numOfItems) {
         $btn.addClass('hidden');
       } else $btn.removeClass('hidden');
@@ -101,7 +103,7 @@ Template.organizationProfileHeader.onRendered(function () {
       check();
     });
 
-    $btn.on('click', function() {
+    $btn.on('click', function () {
       $hlinks.toggleClass('hidden');
     });
 

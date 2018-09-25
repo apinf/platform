@@ -37,11 +37,11 @@ AccountsTemplates.configure({
   termsUrl: 'terms-of-use',
   texts: {
     title: {
-      signUp: "Sign Up",
+      signUp: 'Sign Up',
     },
     button: {
-      signIn: "Sign In",
-      signUp: "Sign Up",
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
     },
   },
 });

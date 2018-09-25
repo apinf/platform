@@ -30,10 +30,10 @@ Template.apiDetails.onCreated(function () {
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy buttons
-  const copyApiUrl = new Clipboard('#copyApiUrl');
-  const copyProxyUrl = new Clipboard('#copyProxyUrl');
-  const copyExampleOne = new Clipboard('#copyExampleOne');
-  const copyExampleTwo = new Clipboard('#copyExampleTwo');
+  //const copyApiUrl = new Clipboard('#copyApiUrl');
+  //const copyProxyUrl = new Clipboard('#copyProxyUrl');
+  //const copyExampleOne = new Clipboard('#copyExampleOne');
+  //const copyExampleTwo = new Clipboard('#copyExampleTwo');
 });
 
 Template.apiDetails.helpers({

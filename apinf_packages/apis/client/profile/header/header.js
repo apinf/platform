@@ -20,25 +20,25 @@ Template.viewApiPageHeader.onRendered(() => {
   }
 
   // Mobile menu
-  $(function() {
-
-    var $nav = $('nav.secondary-menu_navigation');
+  $(function () {
+    //var $nav = $('nav.secondary-menu_navigation');
     var $btn = $('nav.secondary-menu_navigation button');
     var $vlinks = $('nav.secondary-menu_navigation .links');
     var $hlinks = $('nav.secondary-menu_navigation .hidden-links');
 
-    var numOfItems = 0;
-    var totalSpace = 0;
-    var breakWidths = [];
+    let numOfItems = 0;
+    let totalSpace = 0;
+    let breakWidths = [];
 
+    let availableSpace;
+    let numOfVisibleItems;
+    let requiredSpace;
     // Get initial state
     $vlinks.children().outerWidth(function(i, w) {
       totalSpace += w;
       numOfItems += 1;
       breakWidths.push(totalSpace);
     });
-
-    var availableSpace, numOfVisibleItems, requiredSpace;
 
     function check() {
 
@@ -58,18 +58,18 @@ Template.viewApiPageHeader.onRendered(() => {
         numOfVisibleItems += 1;
       }
       // Update the button accordingly
-      $btn.attr("count", numOfItems - numOfVisibleItems);
+      $btn.attr('count', numOfItems - numOfVisibleItems);
       if (numOfVisibleItems === numOfItems) {
         $btn.addClass('hidden');
       } else $btn.removeClass('hidden');
     }
 
     // Window listeners
-    $(window).resize(function() {
+    $(window).resize(function () {
       check();
     });
 
-    $btn.on('click', function() {
+    $btn.on('click', function () {
       $hlinks.toggleClass('hidden');
     });
 
