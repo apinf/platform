@@ -27,6 +27,20 @@ AutoForm.hooks({
       if (doc.$set['apiUmbrella.sub_settings']) {
         doc.$set['apiUmbrella.sub_settings'] = _.compact(doc.$set['apiUmbrella.sub_settings']);
       }
+      if (doc.$set['apiUmbrella.settings.rate_limits']) {
+        for (let i = 0; i < doc.$set['apiUmbrella.settings.rate_limits'].length; i++) {
+          // eslint-disable-next-line dot-notation
+          if ((doc.$set['apiUmbrella.settings.rate_limits'][i]['duration'] === undefined) &&
+            // eslint-disable-next-line dot-notation
+            (doc.$set['apiUmbrella.settings.rate_limits'][i]['limit'] === undefined) &&
+            // eslint-disable-next-line dot-notation
+            (doc.$set['apiUmbrella.settings.rate_limits'][i]['limit_by'] === undefined)) {
+            delete doc.$set['apiUmbrella.settings.rate_limits'][i];
+          }
+        }
+        doc.$set['apiUmbrella.settings.rate_limits'] =
+        _.compact(doc.$set['apiUmbrella.settings.rate_limits']);
+      }
       return doc;
     },
     before: {
