@@ -81,24 +81,28 @@ LoginPlatforms.schema = new SimpleSchema({
   },
   'oidcConfiguration.authorizationEndpoint': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: '/auth',
     },
   },
   'oidcConfiguration.tokenEndpoint': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: '/token',
     },
   },
   'oidcConfiguration.userinfoEndpoint': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: '/userInfo',
     },
+  },
+  'oidcConfiguration.idTokenWhitelistFields': {
+    type: [String],
+    optional: true,
   },
 });
 
