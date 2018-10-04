@@ -13,7 +13,7 @@ AccountsTemplates.configure({
   defaultLayout: 'atForm',
   defaultContentRegion: 'main',
   /* Behavior */
-  confirmPassword: false,
+  confirmPassword: true,
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: false,
