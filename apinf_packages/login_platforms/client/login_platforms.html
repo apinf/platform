@@ -40,17 +40,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              {{_ "settings_oidc" }}
+              {{_ "settings_hsl" }}
             </h3>
           </div>
           <div class="panel-body">
-            {{> afQuickField name='oidcConfiguration.clientId' id="oidc-id" }}
-            {{> afQuickField name='oidcConfiguration.secret' id="oidc-secret" }}
-            {{> afQuickField name='oidcConfiguration.serverUrl' id="oidc-server" }}
-            {{> afQuickField name='oidcConfiguration.authorizationEndpoint' id="oidc-authEp" }}
-            {{> afQuickField name='oidcConfiguration.tokenEndpoint' id="oidc-tokenEp" }}
-            {{> afQuickField name='oidcConfiguration.userinfoEndpoint' id="oidc-uInfoEp" }}
-            {{> afQuickField name='oidcConfiguration.idTokenWhitelistFields' id="oidc-whitelist" }}
+            {{> afQuickField name='hslConfiguration.clientId' id="hsl-id" }}
+            {{> afQuickField name='hslConfiguration.secret' id="hsl-secret" }}
+            {{> afQuickField name='hslConfiguration.serverUrl' id="hsl-server" }}
+            {{> afQuickField name='hslConfiguration.authorizationEndpoint' id="hsl-authEp" }}
+            {{> afQuickField name='hslConfiguration.tokenEndpoint' id="hsl-tokenEp" }}
+            {{> afQuickField name='hslConfiguration.userinfoEndpoint' id="hsl-uInfoEp" }}
           </div>
         </div>
         <div id="form-buttons">

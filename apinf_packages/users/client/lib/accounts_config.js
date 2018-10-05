@@ -38,9 +38,10 @@ AccountsTemplates.configure({
   // Texts
   texts: {
     socialIcons: {
-        "fiware": "fa fa-rocket",
-        "oidc": "fa fa-rocket",
-    },
+        'fiware': 'fa fa-rocket',
+        'oidc': 'fa fa-rocket',
+      },
+ //   title: { 'oidc': 'HSL'},
   },
 });
 

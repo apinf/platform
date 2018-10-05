@@ -54,55 +54,51 @@ LoginPlatforms.schema = new SimpleSchema({
       placeholder: 'xxx',
     },
   },
-  oidcConfiguration: {
+  hslConfiguration: {
     type: Object,
     optional: true,
   },
-  'oidcConfiguration.clientId': {
+  'hslConfiguration.clientId': {
     type: String,
     optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
-  'oidcConfiguration.secret': {
+  'hslConfiguration.secret': {
     type: String,
     optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
-  'oidcConfiguration.serverUrl': {
+  'hslConfiguration.serverUrl': {
     type: String,
     optional: false,
     autoform: {
       placeholder: 'https://secure-server.fi',
     },
   },
-  'oidcConfiguration.authorizationEndpoint': {
+  'hslConfiguration.authorizationEndpoint': {
     type: String,
     optional: false,
     autoform: {
       placeholder: '/auth',
     },
   },
-  'oidcConfiguration.tokenEndpoint': {
+  'hslConfiguration.tokenEndpoint': {
     type: String,
     optional: false,
     autoform: {
       placeholder: '/token',
     },
   },
-  'oidcConfiguration.userinfoEndpoint': {
+  'hslConfiguration.userinfoEndpoint': {
     type: String,
     optional: false,
     autoform: {
       placeholder: '/userInfo',
     },
-  },
-  'oidcConfiguration.idTokenWhitelistFields': {
-    type: [String],
-    optional: true,
   },
 });
 

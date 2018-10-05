@@ -1,0 +1,19 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+/* Default id link, not working */
+#login-buttons-image-hsl {
+/*    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACQUlEQVQ4T5WTy2taQRTGv4kSXw0IoYIihCjFmhhfhUqW9a+o0I2LInTRRbtw05V2I9KQuuimi24KXQqChIhQQcQgGGNz0YpvMCG1yL1tGqvBZsKMIIXcjQcOcznnfL+ZOecOEUVx4/Ly8mQ6neqxhKlUKmltbc1Nut2uqJ/bEnJAkiTmEhEEgVqtViiVyjuAP70j/Pj6Htbglzu52WyGdrsNUq1Wqc1mk939+9sHPP7wTVM232g0QMrlMrXb7bIFndgcbAk3ZPP1eh2kVCrRra2tRcFoNEK1WoXf78fg3Rxsfl3H3t4e3G43dnd3wWrMZjNqtRpIsVhcAFKpFPL5PBfF43H8TDj49/2XAvb393F2dgaNRgNKKaLR6ByQz+epw+HAwcEBisUijEYjgsEg1Go1pA9ODtC/+MZFDCKKIo9FIhEIggCSy+Xozs4OYrEY2ChDoRAIIVww/ujhxdrnFTSbTX6Cfr+Pi4sLhMNhnJ6egmSzWepyuZBIJGAwGBAIBLiY2ezTI74qg2UoFIqFr6ys4OrqiveKHB4eckAmk8FgMMD29jZ8Ph8XKj4/5uu/ZyXZKXBAOp2mHo+H/0isD6zDOp0Om5ubsAuvcA+/8ffpkSygUqmApFIp6vV6+b2ZsNfrodVqYTgcwqXtwul04pfhiSzg+PgYJJlMUovFwhvIbHV1lTs70c3NDSaTCa6vr+8A2FvodDr8CmwuepPJtIDIbvdfkInPz89ZRCKFQmFjNBqdjMfjpZ6jVquV1tfX3bcYegI7CyIWlgAAAABJRU5ErkJggg==');*/
+}
+
+/* button id link */
+#at-hsl {
+  /* Linking now to develop environment, perhaps need to change to refer to product env or then use image data */
+  background-image: url(https://devel3.t5.fi/APP/connector/2/92/source/header-logo-hsl-92a1cce7c4b24c32df02f374e0169c54465cb208.png);
+  background-repeat: no-repeat;
+  background-color: rgb(25, 105, 175);
+  color: white;
+}
+

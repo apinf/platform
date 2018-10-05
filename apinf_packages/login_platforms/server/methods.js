@@ -52,23 +52,23 @@ const updateFunctions = {
     // Return status message
     return 'FIWARE configuration updated successfully';
   },
-  saveOidcConfiguration (settings) {
+  saveHslConfiguration (settings) {
     // remove existing configuration
     ServiceConfiguration.configurations.remove({
-      service: 'oidc',
+      service: 'hsl',
     });
 
     // Insert new service configuration if there are parameters given
-    if (settings.oidcConfiguration) {
+    if (settings.hslConfiguration) {
       ServiceConfiguration.configurations.insert({
-        service: 'oidc',
-        clientId: settings.oidcConfiguration.clientId,
-        secret: settings.oidcConfiguration.secret,
-        serverUrl: settings.oidcConfiguration.serverUrl,
-        authorizationEndpoint: settings.oidcConfiguration.authorizationEndpoint,
-        tokenEndpoint: settings.oidcConfiguration.tokenEndpoint,
-        userinfoEndpoint: settings.oidcConfiguration.userinfoEndpoint,
-        idTokenWhitelistFields: settings.oidcConfiguration.idTokenWhitelistFields || [],
+        service: 'hsl',
+        clientId: settings.hslConfiguration.clientId,
+        secret: settings.hslConfiguration.secret,
+        serverUrl: settings.hslConfiguration.serverUrl,
+        authorizationEndpoint: settings.hslConfiguration.authorizationEndpoint,
+        tokenEndpoint: settings.hslConfiguration.tokenEndpoint,
+        userinfoEndpoint: settings.hslConfiguration.userinfoEndpoint,
+   //     idTokenWhitelistFields: settings.hslConfiguration.idTokenWhitelistFields || [],
       });
     }
 
@@ -90,7 +90,7 @@ Meteor.methods({
       // Update configuration according to LoginPlatform data
       status = updateFunctions.saveGithubConfiguration(settings);
       status = updateFunctions.saveFiwareConfiguration(settings);
-      status = updateFunctions.saveOidcConfiguration(settings);
+      status = updateFunctions.saveHslConfiguration(settings);
     } catch (error) {
       // otherwise show an error
       const message = `Update gitHub configuration: ${error}`;
@@ -182,44 +182,41 @@ Meteor.methods({
         changesFound = true;
       }
       // Get parameters for OIDC from configuration DB
-      const configOidcParameters = ServiceConfiguration.configurations
-      .findOne({ service: 'oidc' });
+      const configHslParameters = ServiceConfiguration.configurations
+      .findOne({ service: 'hsl' });
 
       // Check OIDC
-      if (!configOidcParameters) {
+      if (!configHslParameters) {
         // Remove possible login parameters, if no configuration
-        if (loginParameters && loginParameters.oidcConfiguration) {
-          delete loginParameters.oidcConfiguration;
+        if (loginParameters && loginParameters.hslConfiguration) {
+          delete loginParameters.hslConfiguration;
           changesFound = true;
         }
       } else if (!loginParameters ||
-                !loginParameters.oidcConfiguration ||
-                loginParameters.oidcConfiguration.clientId !==
-                  configOidcParameters.clientId ||
-                loginParameters.oidcConfiguration.secret !==
-                  configOidcParameters.secret ||
-                loginParameters.oidcConfiguration.serverUrl !==
-                  configOidcParameters.serverUrl ||
-                loginParameters.oidcConfiguration.authorizationEndpoint !==
-                  configOidcParameters.authorizationEndpoint ||
-                loginParameters.oidcConfiguration.tokenEndpoint !==
-                  configOidcParameters.tokenEndpoint ||
-                loginParameters.oidcConfiguration.userinfoEndpoint !==
-                  configOidcParameters.userinfoEndpoint ||
-                loginParameters.oidcConfiguration.idTokenWhitelistFields !==
-                  configOidcParameters.idTokenWhitelistFields) {
+                !loginParameters.hslConfiguration ||
+                loginParameters.hslConfiguration.clientId !==
+                  configHslParameters.clientId ||
+                loginParameters.hslConfiguration.secret !==
+                  configHslParameters.secret ||
+                loginParameters.hslConfiguration.serverUrl !==
+                  configHslParameters.serverUrl ||
+                loginParameters.hslConfiguration.authorizationEndpoint !==
+                  configHslParameters.authorizationEndpoint ||
+                loginParameters.hslConfiguration.tokenEndpoint !==
+                  configHslParameters.tokenEndpoint ||
+                loginParameters.hslConfiguration.userinfoEndpoint !==
+                  configHslParameters.userinfoEndpoint ) {
         // values from configuration
-        const oidcConfiguration = {
-          clientId: configOidcParameters.clientId,
-          secret: configOidcParameters.secret,
-          serverUrl: configOidcParameters.serverUrl,
-          authorizationEndpoint: configOidcParameters.authorizationEndpoint,
-          tokenEndpoint: configOidcParameters.tokenEndpoint,
-          userinfoEndpoint: configOidcParameters.userinfoEndpoint,
-          idTokenWhitelistFields: configOidcParameters.idTokenWhitelistFields || [],
+        const hslConfiguration = {
+          clientId: configHslParameters.clientId,
+          secret: configHslParameters.secret,
+          serverUrl: configHslParameters.serverUrl,
+          authorizationEndpoint: configHslParameters.authorizationEndpoint,
+          tokenEndpoint: configHslParameters.tokenEndpoint,
+          userinfoEndpoint: configHslParameters.userinfoEndpoint,
         };
         // store OIDC values
-        loginParameters.oidcConfiguration = oidcConfiguration;
+        loginParameters.hslConfiguration = hslConfiguration;
         changesFound = true;
       }
 
@@ -242,11 +239,4 @@ Meteor.methods({
     return true;
   },
 });
-/*
-Meteor.loginWithOIDC({
-  requestPermissions: ['email']
-}, function (err) {
-  if (err)
-      console.log(err);
-});
-*/
+
