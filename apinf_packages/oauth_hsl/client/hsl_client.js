@@ -25,7 +25,7 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
     options = {};
   }
 
-  let config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
+  const config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
   if (!config) {
     credentialRequestCompleteCallback && credentialRequestCompleteCallback(
       new ServiceConfiguration.ConfigError('Service hsl not configured.'));
@@ -51,15 +51,15 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
   let loginUrl = config.serverUrl + config.authorizationEndpoint;
   // check if the loginUrl already contains a "?"
   let first = loginUrl.indexOf('?') === -1;
-  for (let k in options) {
+  Object.keys(options).forEach((key, index) => {
     if (first) {
       loginUrl += '?';
       first = false;
     } else {
       loginUrl += '&';
     }
-    loginUrl += encodeURIComponent(k) + '=' + encodeURIComponent(options[k]);
-  }
+    loginUrl += `${encodeURIComponent(key)}=${encodeURIComponent(options[key])}`;
+  });
 
   // pop-up window size
   options.popupOptions = options.popupOptions || {};
