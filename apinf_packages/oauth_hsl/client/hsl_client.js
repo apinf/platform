@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Npm packages imports
 import _ from 'lodash';
-import { Random } from 'meteor/random'
+import { Random } from 'meteor/random';
 
 Hsl = {};
 
@@ -28,9 +28,9 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
     return;
   }
 
-  let credentialToken = Random.secret();
-  let loginStyle = OAuth._loginStyle('hsl', config, options);
-  let scope = config.requestPermissions || ['openid', 'profile', 'email'];
+  const credentialToken = Random.secret();
+  const loginStyle = OAuth._loginStyle('hsl', config, options);
+  const scope = config.requestPermissions || ['openid', 'profile', 'email'];
 
   // options
   options = options || {};

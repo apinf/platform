@@ -5,22 +5,29 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
+import { HTTP } from 'meteor/http';
+
+// Meteor contributed packages imports
+import { ServiceConfiguration } from 'meteor/service-configuration';
+
+// Npm packages imports
+import _ from 'lodash';
 
 Hsl = {};
 
 OAuth.registerService('hsl', 2, null, function (query) {
 
-  let debug = false;
-  let token = getToken(query);
+  const debug = false;
+  const token = getToken(query);
   if (debug) console.log('XXX: register token:', token);
 
-  let accessToken = token.access_token || token.id_token;
-  let expiresAt = (+new Date) + (1000 * parseInt(token.expires_in, 10));
+  const accessToken = token.access_token || token.id_token;
+  const expiresAt = (+new Date) + (1000 * parseInt(token.expires_in, 10));
 
-  let userinfo = getUserInfo(accessToken);
+  const userinfo = getUserInfo(accessToken);
   if (debug) console.log('XXX: userinfo:', userinfo);
 
-  let serviceData = {};
+  const serviceData = {};
   serviceData.id = userinfo.sub;
   serviceData.username = userinfo.preferred_username;
   serviceData.fullname = userinfo.name;
@@ -29,7 +36,7 @@ OAuth.registerService('hsl', 2, null, function (query) {
   serviceData.email = userinfo.email;
 
   if (accessToken) {
-    let tokenContent = getTokenContent(accessToken);
+    const tokenContent = getTokenContent(accessToken);
   }
 
   if (token.refresh_token) {
@@ -37,7 +44,7 @@ OAuth.registerService('hsl', 2, null, function (query) {
   }
   if (debug) console.log('XXX: serviceData:', serviceData);
 
-  let profile = {};
+  const profile = {};
   profile.name = userinfo.displayName;
   profile.email = userinfo.email;
   if (debug) console.log('XXX: profile:', profile);
@@ -54,9 +61,9 @@ if (Meteor.release) {
 }
 
 let getToken = function (query) {
-  let debug = false;
-  let config = getConfiguration();
-  let serverTokenEndpoint = config.serverUrl + config.tokenEndpoint;
+  const debug = false;
+  const config = getConfiguration();
+  const serverTokenEndpoint = config.serverUrl + config.tokenEndpoint;
   let response;
 
   try {
@@ -91,9 +98,9 @@ let getToken = function (query) {
 };
 
 let getUserInfo = function (accessToken) {
-  let debug = false;
-  let config = getConfiguration();
-  let serverUserinfoEndpoint = config.serverUrl + config.userinfoEndpoint;
+  const debug = false;
+  const config = getConfiguration();
+  const serverUserinfoEndpoint = config.serverUrl + config.userinfoEndpoint;
   let response;
   try {
     response = HTTP.get(
@@ -101,12 +108,12 @@ let getUserInfo = function (accessToken) {
       {
         headers: {
           'User-Agent': userAgent,
-          'Authorization': 'Bearer ' + accessToken
+          Authorization: 'Bearer ' + accessToken,
         },
       }
     );
   } catch (err) {
-    throw _.extend(new Error('Failed to fetch userinfo from OIDC ' + 
+    throw _.extend(new Error('Failed to fetch userinfo from OIDC ' +
                               serverUserinfoEndpoint + ': ' + err.message),
                    { response: err.response });
   }
@@ -126,11 +133,11 @@ let getTokenContent = function (token) {
   let content = null;
   if (token) {
     try {
-      let parts = token.split('.');
-      let header = JSON.parse(new Buffer(parts[0], 'base64').toString());
+      const parts = token.split('.');
+      const header = JSON.parse(new Buffer(parts[0], 'base64').toString());
       content = JSON.parse(new Buffer(parts[1], 'base64').toString());
-      let signature = new Buffer(parts[2], 'base64');
-      let signed = parts[0] + '.' + parts[1];
+      const signature = new Buffer(parts[2], 'base64');
+      const signed = parts[0] + '.' + parts[1];
     } catch (err) {
       this.content = {
         exp: 0,
