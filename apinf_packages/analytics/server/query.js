@@ -38,6 +38,30 @@ export default function aggregatedData (filtersPaths, fromDate, toDate) {
                 percents: [50],
               },
             },
+            shortest_response_time: {
+              percentiles: {
+                field: 'response_time',
+                percents: [0],
+              },
+            },
+            short_response_time: {
+              percentiles: {
+                field: 'response_time',
+                percents: [25],
+              },
+            },
+            longest_response_time: {
+              percentiles: {
+                field: 'response_time',
+                percents: [100],
+              },
+            },
+            long_response_time: {
+              percentiles: {
+                field: 'response_time',
+                percents: [75],
+              },
+            },
             // Get number of unique users
             unique_users: {
               terms: {
@@ -67,7 +91,7 @@ export default function aggregatedData (filtersPaths, fromDate, toDate) {
                 percentiles_response_time: {
                   percentiles: {
                     field: 'response_time',
-                    percents: [95, 50],
+                    percents: [100, 50, 75, 25, 0],
                   },
                 },
                 // Get status codes

@@ -48,14 +48,21 @@ Template.responseTimeTimeline.onRendered(function () {
   const ctx = document.getElementById('response-time-timeline-chart').getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'bar',
+    type: 'line',
     // Data for displaying chart
     data: {
       labels: [],
       datasets: [],
     },
     // Configuration options
+
     options: {
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 20,
+        },
+      },
       scales: {
         xAxes: [
           {
@@ -105,18 +112,44 @@ Template.responseTimeTimeline.onRendered(function () {
       labels,
       datasets: [
         {
-          label: TAPi18n.__('responseTimeTimeline_legendItem_median'),
+          label: TAPi18n.__('responseTimeTimeline_legendItem_shortest'),
           backgroundColor: '#00A421',
-          borderColor: 'green',
+          borderColor: '#00A421',
           borderWidth: 1,
-          data: selectedPathData.median,
+          data: selectedPathData.shortest,
+          fill: false,
         },
         {
-          label: TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles'),
-          backgroundColor: '#C6C5C5',
-          borderColor: '#959595',
+          label: TAPi18n.__('responseTimeTimeline_legendItem_short'),
+          backgroundColor: '#A5D6A7',
+          borderColor: '#A5D6A7',
           borderWidth: 1,
-          data: selectedPathData.percentiles95,
+          data: selectedPathData.short,
+          fill: false,
+        },
+        {
+          label: TAPi18n.__('responseTimeTimeline_legendItem_median'),
+          backgroundColor: '#04519b',
+          borderColor: '#04519b',
+          borderWidth: 1,
+          data: selectedPathData.median,
+          fill: false,
+        },
+        {
+          label: TAPi18n.__('responseTimeTimeline_legendItem_long'),
+          backgroundColor: '#C6C5C5',
+          borderColor: '#C6C5C5',
+          borderWidth: 1,
+          data: selectedPathData.long,
+          fill: false,
+        },
+        {
+          label: TAPi18n.__('responseTimeTimeline_legendItem_longest'),
+          backgroundColor: '#b94848',
+          borderColor: '#b94848',
+          borderWidth: 1,
+          data: selectedPathData.longest,
+          fill: false,
         },
       ],
     };
@@ -144,9 +177,11 @@ Template.responseTimeTimeline.onRendered(function () {
     // Update translation
     scales.xAxes[0].scaleLabel.labelString = xAxesLabel;
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('responseTimeTimeline_yAxisTitle_time');
-    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
-    datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_95thPercentiles');
-
+    datasets[0].label = TAPi18n.__('responseTimeTimeline_legendItem_shortest');
+    datasets[1].label = TAPi18n.__('responseTimeTimeline_legendItem_short');
+    datasets[2].label = TAPi18n.__('responseTimeTimeline_legendItem_median');
+    datasets[3].label = TAPi18n.__('responseTimeTimeline_legendItem_long');
+    datasets[4].label = TAPi18n.__('responseTimeTimeline_legendItem_longest');
     // Update chart with new translation
     instance.chart.update();
   });
