@@ -3,6 +3,10 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Npm packages imports
+import _ from 'lodash';
+import { Random } from 'meteor/random'
+
 Hsl = {};
 
 // Request OpenID Connect credentials for the user
@@ -17,16 +21,16 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
     options = {};
   }
 
-  var config = ServiceConfiguration.configurations.findOne({service: 'hsl'});
+  let config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
   if (!config) {
     credentialRequestCompleteCallback && credentialRequestCompleteCallback(
       new ServiceConfiguration.ConfigError('Service hsl not configured.'));
     return;
   }
-  
-  var credentialToken = Random.secret();
-  var loginStyle = OAuth._loginStyle('hsl', config, options);
-  var scope = config.requestPermissions || ['openid', 'profile', 'email'];
+
+  let credentialToken = Random.secret();
+  let loginStyle = OAuth._loginStyle('hsl', config, options);
+  let scope = config.requestPermissions || ['openid', 'profile', 'email'];
 
   // options
   options = options || {};
@@ -36,37 +40,36 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
   options.state = OAuth._stateParam(loginStyle, credentialToken, options.redirectUrl);
   options.scope = scope.join(' ');
 
-  if (config.loginStyle && config.loginStyle == 'popup') {
+  if (config.loginStyle && config.loginStyle === 'popup') {
     options.display = 'popup';
   }
 
-  var loginUrl = config.serverUrl + config.authorizationEndpoint;
+  let loginUrl = config.serverUrl + config.authorizationEndpoint;
   // check if the loginUrl already contains a "?"
-  var first = loginUrl.indexOf('?') === -1;
-  for (var k in options) {
+  let first = loginUrl.indexOf('?') === -1;
+  for (let k in options) {
     if (first) {
       loginUrl += '?';
       first = false;
-    }
-    else {
-      loginUrl += '&'
+    } else {
+      loginUrl += '&';
     }
     loginUrl += encodeURIComponent(k) + '=' + encodeURIComponent(options[k]);
   }
 
   // pop-up window size
   options.popupOptions = options.popupOptions || {};
-  var popupOptions = {
-    width:  options.popupOptions.width || 320,
-    height: options.popupOptions.height || 450
+  const popupOptions = {
+    width: options.popupOptions.width || 320,
+    height: options.popupOptions.height || 450,
   };
 
   OAuth.launchLogin({
     loginService: 'hsl',
-    loginStyle: loginStyle,
-    loginUrl: loginUrl,
-    credentialRequestCompleteCallback: credentialRequestCompleteCallback,
-    credentialToken: credentialToken,
-    popupOptions: popupOptions,
+    loginStyle,
+    loginUrl,
+    credentialRequestCompleteCallback,
+    credentialToken,
+    popupOptions,
   });
 };

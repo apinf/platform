@@ -113,9 +113,6 @@ Meteor.methods({
 
     // Try if settings exist
     try {
-      // Check if some methods are not allowed
-      const notAllowedMethods = Settings.findOne();
-
       // Get loginPlatform data
       const loginParameters = LoginPlatforms.findOne() || {};
       if (loginParameters._id) {
@@ -205,7 +202,7 @@ Meteor.methods({
                 loginParameters.hslConfiguration.tokenEndpoint !==
                   configHslParameters.tokenEndpoint ||
                 loginParameters.hslConfiguration.userinfoEndpoint !==
-                  configHslParameters.userinfoEndpoint ) {
+                  configHslParameters.userinfoEndpoint) {
         // values from configuration
         const hslConfiguration = {
           clientId: configHslParameters.clientId,
