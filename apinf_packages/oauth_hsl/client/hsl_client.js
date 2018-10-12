@@ -6,6 +6,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Npm packages imports
 import _ from 'lodash';
 import { Random } from 'meteor/random';
+import { OAuth } from 'meteor/oauth';
+
+// Meteor contributed packages imports
+import { ServiceConfiguration } from 'meteor/service-configuration';
 
 Hsl = {};
 

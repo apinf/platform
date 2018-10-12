@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
+import { OAuth } from 'meteor/oauth';
 
 // Meteor contributed packages imports
 import { ServiceConfiguration } from 'meteor/service-configuration';
@@ -122,7 +123,7 @@ let getUserInfo = function (accessToken) {
 };
 
 let getConfiguration = function () {
-  let config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
+  const config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
   if (!config) {
     throw new ServiceConfiguration.ConfigError('Service hsl not configured.');
   }
