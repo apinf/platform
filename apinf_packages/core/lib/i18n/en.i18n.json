@@ -439,6 +439,7 @@
   "invalidApiBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiEndpointMessage": "Must begin with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiMonitoringEndpointMessage": "Invalid input not allowed",
+  "invalidApiRequiredMessage": "Invalid input not allowed",
   "invalidContactPhoneMessage": "Must be a valid number. (0-9), +, -, space, / are allowed",
   "latestApiBackends_Heading": "Latest APIs",
   "latestApiBackends_MoreInfo": "More info",
@@ -676,8 +677,13 @@
   "responseTimeTimeline_xAxisTitle_hours": "Hours",
   "responseTimeTimeline_xAxisTitle_days": "Days",
   "responseTimeTimeline_yAxisTitle_time": "Time, ms",
-  "responseTimeTimeline_legendItem_95thPercentiles": "95th percentiles",
   "responseTimeTimeline_legendItem_median": "Median",
+  "responseTimeTimeline_legendItem_longest": "Slowest",
+  "responseTimeTimeline_legendItem_long": "Slow 75%",
+  "responseTimeTimeline_legendItem_median": "Median 50%",
+  "responseTimeTimeline_legendItem_short": "Fast 25%",
+  "responseTimeTimeline_legendItem_shortest": "Fastest",
+
   "schemas": {
     "apis": {
       "name": {
@@ -990,6 +996,11 @@
             }
           }
         },
+        "sub_settings": {
+          "http_method": {
+            "label": "Http Methods"
+          }
+        },
         "settings": {
           "append_query_string": {
             "label": "Append Query String Parameters"
@@ -999,6 +1010,9 @@
           },
           "headers_string": {
             "label": "Set Request Headers"
+          },
+          "idp_app_id": {
+            "label": "IDP App Id"
           },
           "rate_limit_mode": {
             "label": "Rate limit mode",
