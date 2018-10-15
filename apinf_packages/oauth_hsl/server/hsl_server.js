@@ -14,6 +14,7 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 // Npm packages imports
 import _ from 'lodash';
 
+/*global Hsl*/
 Hsl = {};
 
 OAuth.registerService('hsl', 2, null, function (query) {
@@ -151,6 +152,7 @@ let getTokenContent = function (token) {
   return content;
 };
 
+/*global Hsl*/
 Hsl.retrieveCredential = function (credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };

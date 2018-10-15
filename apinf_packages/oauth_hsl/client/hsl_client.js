@@ -10,6 +10,7 @@ import { OAuth } from 'meteor/oauth';
 // Meteor contributed packages imports
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
+/*global Hsl*/
 Hsl = {};
 
 // Request OpenID Connect credentials for the user
@@ -17,6 +18,7 @@ Hsl = {};
 // @param credentialRequestCompleteCallback {Function} Callback function to call on
 //   completion. Takes one argument, credentialToken on success, or Error on
 //   error.
+/*global Hsl*/
 Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
   // support both (options, callback) and (callback).
   if (!credentialRequestCompleteCallback && typeof options === 'function') {
