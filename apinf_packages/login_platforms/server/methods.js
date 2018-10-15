@@ -10,7 +10,6 @@ import { Meteor } from 'meteor/meteor';
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
 // Collection imports
-import Settings from '/apinf_packages/settings/collection';
 import LoginPlatforms from '../collection';
 
 // Helper object to organize save functions for each service configuration

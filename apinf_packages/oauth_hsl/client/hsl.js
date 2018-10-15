@@ -16,6 +16,7 @@ Meteor.loginWithHsl = function (options, callback) {
     options = null;
   }
 
-  const credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
+  const credentialRequestCompleteCallback =
+    Accounts.oauth.credentialRequestCompleteHandler(callback);
   Hsl.requestCredential(options, credentialRequestCompleteCallback);
 };

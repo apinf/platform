@@ -86,12 +86,15 @@ let getToken = function (query) {
       }
     );
   } catch (err) {
-    throw _.extend(new Error('Failed to get token from OIDC ' + serverTokenEndpoint + ': ' + err.message),
+    const errMsg = `Failed to get token from OIDC ${serverTokenEndpoint}: ${err.message}`;
+    throw _.extend(new Error(errMsg),
       { response: err.response });
   }
   if (response.data.error) {
     // if the http response was a json object with an error attribute
-    throw new Error('Failed to complete handshake with OIDC ' + serverTokenEndpoint + ': ' + response.data.error);
+    const errorMsg = `Failed to complete handshake with OIDC
+     ${serverTokenEndpoint}: ${response.data.error}`;
+    throw new Error(errorMsg);
   } else {
     if (debug) console.log('XXX: getToken response: ', response.data);
     return response.data;
@@ -135,10 +138,10 @@ let getTokenContent = function (token) {
   if (token) {
     try {
       const parts = token.split('.');
-      const header = JSON.parse(new Buffer(parts[0], 'base64').toString());
+    //  const header = JSON.parse(new Buffer(parts[0], 'base64').toString());
       content = JSON.parse(new Buffer(parts[1], 'base64').toString());
-      const signature = new Buffer(parts[2], 'base64');
-      const signed = parts[0] + '.' + parts[1];
+    //  const signature = new Buffer(parts[2], 'base64');
+    //  const signed = parts[0] + '.' + parts[1];
     } catch (err) {
       this.content = {
         exp: 0,

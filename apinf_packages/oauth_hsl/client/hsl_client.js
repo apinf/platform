@@ -4,7 +4,6 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Npm packages imports
-import _ from 'lodash';
 import { Random } from 'meteor/random';
 import { OAuth } from 'meteor/oauth';
 
@@ -51,7 +50,7 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
   let loginUrl = config.serverUrl + config.authorizationEndpoint;
   // check if the loginUrl already contains a "?"
   let first = loginUrl.indexOf('?') === -1;
-  Object.keys(options).forEach((key, index) => {
+  Object.keys(options).forEach((key) => {
     if (first) {
       loginUrl += '?';
       first = false;
