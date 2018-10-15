@@ -36,7 +36,7 @@ Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn
   }
 
   const credentialToken = Random.secret();
-  /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+  /* eslint no-underscore-dangle: ["error", { "allowAfterOAuth": true }] */
   const loginStyle = OAuth._loginStyle('hsl', config, options);
   const scope = config.requestPermissions || ['openid', 'profile', 'email'];
 
@@ -44,9 +44,9 @@ Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn
   options = options || {};
   options.client_id = config.clientId;
   options.response_type = options.response_type || 'code';
-  /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+  /* eslint no-underscore-dangle: ["error", { "allowAfterOAuth": true }] */
   options.redirect_uri = OAuth._redirectUri('hsl', config);
-  /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+  /* eslint no-underscore-dangle: ["error", { "allowAfterOAuth": true }] */
   options.state = OAuth._stateParam(loginStyle, credentialToken, options.redirectUrl);
   options.scope = scope.join(' ');
 

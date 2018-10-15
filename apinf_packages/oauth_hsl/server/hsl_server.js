@@ -70,7 +70,7 @@ const getToken = function (query) {
           code: query.code,
           client_id: config.clientId,
           client_secret: OAuth.openSecret(config.secret),
-          /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+          /* eslint no-underscore-dangle: ["error", { "allowAfterOAuth": true }] */
           redirect_uri: OAuth._redirectUri('hsl', config),
           grant_type: 'authorization_code',
           state: query.state,
@@ -117,7 +117,7 @@ OAuth.registerService('hsl', 2, null, (query) => {
   if (debug) console.log('XXX: register token:', token);
 
   const accessToken = token.access_token || token.id_token;
-  const expiresAt = (+new Date) + (1000 * parseInt(token.expires_in, 10));
+  const expiresAt = (new Date) + (1000 * parseInt(token.expires_in, 10));
 
   const userinfo = getUserInfo(accessToken);
   if (debug) console.log('XXX: userinfo:', userinfo);
@@ -130,9 +130,11 @@ OAuth.registerService('hsl', 2, null, (query) => {
   serviceData.expiresAt = expiresAt;
   serviceData.email = userinfo.email;
 
+ /*
   if (accessToken) {
     const tokenContent = getTokenContent(accessToken);
   }
+  */
 
   if (token.refresh_token) {
     serviceData.refreshToken = token.refresh_token;
