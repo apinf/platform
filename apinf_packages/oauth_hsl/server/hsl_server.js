@@ -13,7 +13,7 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 // Npm packages imports
 import _ from 'lodash';
 
-/* global Hsl */
+/* global Hsl:true */
 Hsl = {};
 
 let userAgent = 'Meteor';
@@ -117,7 +117,7 @@ OAuth.registerService('hsl', 2, null, (query) => {
   if (debug) console.log('XXX: register token:', token);
 
   const accessToken = token.access_token || token.id_token;
-  const expiresAt = new Date + (1000 * parseInt(token.expires_in, 10));
+  const expiresAt = new Date() + (1000 * parseInt(token.expires_in, 10));
 
   const userinfo = getUserInfo(accessToken);
   if (debug) console.log('XXX: userinfo:', userinfo);
