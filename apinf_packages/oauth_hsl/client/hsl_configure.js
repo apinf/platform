@@ -8,9 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 Template.configureLoginServiceDialogForHsl.helpers({
-  siteUrl: function () {
-    return Meteor.absoluteUrl();
-  },
+  siteUrl: Meteor.absoluteUrl(),
 });
 
 Template.configureLoginServiceDialogForHsl.fields = function () {
