@@ -3,7 +3,6 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { OAuth } from 'meteor/oauth';
@@ -16,6 +15,16 @@ import _ from 'lodash';
 
 /*global Hsl*/
 Hsl = {};
+
+let getConfiguration = function () {
+  const config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
+  if (!config) {
+    throw new ServiceConfiguration.ConfigError('Service hsl not configured.');
+  }
+  return config;
+};
+
+// Meteor packages imports
 
 OAuth.registerService('hsl', 2, null, function (query) {
 
@@ -39,11 +48,11 @@ OAuth.registerService('hsl', 2, null, function (query) {
 
   if (accessToken) {
     const tokenContent = getTokenContent(accessToken);
-  }
+  }  
 
   if (token.refresh_token) {
     serviceData.refreshToken = token.refresh_token;
-  }
+  }  
   if (debug) console.log('XXX: serviceData:', serviceData);
 
   const profile = {};
@@ -54,13 +63,13 @@ OAuth.registerService('hsl', 2, null, function (query) {
   return {
     serviceData,
     options: { profile },
-  };
-});
+  };  
+});  
 
 let userAgent = 'Meteor';
 if (Meteor.release) {
   userAgent += '/' + Meteor.release;
-}
+}  
 
 let getToken = function (query) {
   const debug = false;
@@ -75,7 +84,7 @@ let getToken = function (query) {
         headers: {
           Accept: 'application/json',
           'User-Agent': userAgent,
-        },
+        },  
         params: {
           code: query.code,
           client_id: config.clientId,
@@ -83,24 +92,24 @@ let getToken = function (query) {
           redirect_uri: OAuth._redirectUri('hsl', config),
           grant_type: 'authorization_code',
           state: query.state,
-        },
-      }
-    );
+        },  
+      }  
+    );  
   } catch (err) {
     const errMsg = `Failed to get token from OIDC ${serverTokenEndpoint}: ${err.message}`;
     throw _.extend(new Error(errMsg),
       { response: err.response });
-  }
+  }    
   if (response.data.error) {
     // if the http response was a json object with an error attribute
     const errorMsg = `Failed to complete handshake with OIDC
      ${serverTokenEndpoint}: ${response.data.error}`;
-    throw new Error(errorMsg);
+    throw new Error(errorMsg); 
   } else {
     if (debug) console.log('XXX: getToken response: ', response.data);
     return response.data;
-  }
-};
+  }  
+};  
 
 let getUserInfo = function (accessToken) {
   const debug = false;
@@ -113,25 +122,16 @@ let getUserInfo = function (accessToken) {
       {
         headers: {
           'User-Agent': userAgent,
-          Authorization: 'Bearer ' + accessToken,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
   } catch (err) {
-    throw _.extend(new Error('Failed to fetch userinfo from OIDC ' +
-                              serverUserinfoEndpoint + ': ' + err.message),
-                   { response: err.response });
+    const errText = `Failed to fetch userinfo from OIDC ${serverUserinfoEndpoint}: ${err.message}`;
+    throw _.extend(new Error(errText), { response: err.response });
   }
   if (debug) console.log('XXX: getUserInfo response: ', response.data);
   return response.data;
-};
-
-let getConfiguration = function () {
-  const config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
-  if (!config) {
-    throw new ServiceConfiguration.ConfigError('Service hsl not configured.');
-  }
-  return config;
 };
 
 let getTokenContent = function (token) {
