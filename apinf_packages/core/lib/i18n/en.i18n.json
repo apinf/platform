@@ -217,6 +217,7 @@
   "bookmark_buttonText_bookmark": "Bookmark",
   "bookmark_buttonText_unbookmark": "Unbookmark",
   "branding_homeCustomBlock_helpIcon_text": "This field gives you the ability to add text and HTML/CSS custom code which will appear on the home page. In addition you may add HTML content like images, social media plugins, or YouTube video. Bootstrap classes are also available, e.g. you may use .container to center your content on a page.",
+  "branding_homeCustomBlock_title": "Custom HTML Block",
   "branding_panel_title": "Project Branding",
   "branding_projectLogoTitle_logoTitle": "Site Logo",
   "branding_projectCoverPhotoTitle_coverPhotoTitle": "Cover Image",

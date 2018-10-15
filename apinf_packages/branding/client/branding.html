@@ -17,6 +17,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <li><a href="#analytics" data-toggle="tab">Analytics</a></li>
         <li><a href="#privacy-terms" data-toggle="tab">Privacy & Terms</a></li>
         <li><a href="#social-media-links" data-toggle="tab">Social Media Links</a></li>
+        <li><a href="#custom-html-block" data-toggle="tab">Custom HTML Block</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="logo">
@@ -108,6 +109,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             collection=brandingCollection
             doc=branding }}
           {{> afQuickField name='socialMediaLinks' }}
+          <div id="form-buttons">
+            <button id="branding-update-button" type="submit" class="btn btn-primary">
+              {{_ "branding_update" }}
+            </button>
+          </div>
+          {{/ autoForm }}
+        </div>
+
+        <div class="tab-pane fade" id="custom-html-block">
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+          {{> afQuickField name='homeCustomBlock' id="custom-html" }}
           <div id="form-buttons">
             <button id="branding-update-button" type="submit" class="btn btn-primary">
               {{_ "branding_update" }}
