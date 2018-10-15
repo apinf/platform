@@ -92,7 +92,7 @@ const getToken = function (query) {
     return response.data;
   }
 };
-
+/*
 const getTokenContent = function (token) {
   let content = null;
   if (token) {
@@ -110,14 +110,14 @@ const getTokenContent = function (token) {
   }
   return content;
 };
-
+*/
 OAuth.registerService('hsl', 2, null, (query) => {
   const debug = false;
   const token = getToken(query);
   if (debug) console.log('XXX: register token:', token);
 
   const accessToken = token.access_token || token.id_token;
-  const expiresAt = (new Date) + (1000 * parseInt(token.expires_in, 10));
+  const expiresAt = new Date + (1000 * parseInt(token.expires_in, 10));
 
   const userinfo = getUserInfo(accessToken);
   if (debug) console.log('XXX: userinfo:', userinfo);
@@ -130,9 +130,9 @@ OAuth.registerService('hsl', 2, null, (query) => {
   serviceData.expiresAt = expiresAt;
   serviceData.email = userinfo.email;
 
- /*
+  /*
   if (accessToken) {
-    const tokenContent = getTokenContent(accessToken);
+    tokenContent = getTokenContent(accessToken);
   }
   */
 
