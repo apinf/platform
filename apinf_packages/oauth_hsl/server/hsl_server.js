@@ -70,7 +70,7 @@ const getToken = function (query) {
           code: query.code,
           client_id: config.clientId,
           client_secret: OAuth.openSecret(config.secret),
-          /* eslint no-underscore-dangle: ["error", { "allowAfterOAuth": true }] */
+          /* eslint no-underscore-dangle: ["error", { "allow": ["_redirectUri"] }] */
           redirect_uri: OAuth._redirectUri('hsl', config),
           grant_type: 'authorization_code',
           state: query.state,
