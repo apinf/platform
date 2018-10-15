@@ -13,8 +13,13 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 // Npm packages imports
 import _ from 'lodash';
 
-/*global Hsl*/
+/* global Hsl */
 Hsl = {};
+
+let userAgent = 'Meteor';
+if (Meteor.release) {
+  userAgent += `/${Meteor.release}`;
+}
 
 const getConfiguration = function () {
   const config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
@@ -60,34 +65,35 @@ const getToken = function (query) {
         headers: {
           Accept: 'application/json',
           'User-Agent': userAgent,
-        },  
+        },
         params: {
           code: query.code,
           client_id: config.clientId,
           client_secret: OAuth.openSecret(config.secret),
+          /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
           redirect_uri: OAuth._redirectUri('hsl', config),
           grant_type: 'authorization_code',
           state: query.state,
-        },  
-      }  
-    );  
+        },
+      }
+    );
   } catch (err) {
     const errMsg = `Failed to get token from OIDC ${serverTokenEndpoint}: ${err.message}`;
     throw _.extend(new Error(errMsg),
       { response: err.response });
-  }    
+  }
   if (response.data.error) {
     // if the http response was a json object with an error attribute
     const errorMsg = `Failed to complete handshake with OIDC
      ${serverTokenEndpoint}: ${response.data.error}`;
-    throw new Error(errorMsg); 
+    throw new Error(errorMsg);
   } else {
     if (debug) console.log('XXX: getToken response: ', response.data);
     return response.data;
-  }  
-}; 
+  }
+};
 
-let getTokenContent = function (token) {
+const getTokenContent = function (token) {
   let content = null;
   if (token) {
     try {
@@ -126,11 +132,11 @@ OAuth.registerService('hsl', 2, null, (query) => {
 
   if (accessToken) {
     const tokenContent = getTokenContent(accessToken);
-  }  
+  }
 
   if (token.refresh_token) {
     serviceData.refreshToken = token.refresh_token;
-  }  
+  }
   if (debug) console.log('XXX: serviceData:', serviceData);
 
   const profile = {};
@@ -141,15 +147,10 @@ OAuth.registerService('hsl', 2, null, (query) => {
   return {
     serviceData,
     options: { profile },
-  };  
-});  
+  };
+});
 
-let userAgent = 'Meteor';
-if (Meteor.release) {
-  userAgent += '/' + Meteor.release;
-}  
-
-/*global Hsl*/
+/* global Hsl */
 Hsl.retrieveCredential = function (credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };

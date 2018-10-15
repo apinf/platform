@@ -19,7 +19,9 @@ Hsl = {};
 //   completion. Takes one argument, credentialToken on success, or Error on
 //   error.
 /* exported Hsl */
-Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
+Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn) {
+  let options = optionsIn;
+  let credentialRequestCompleteCallback = credentialRequestCompleteCallbackIn;
   // support both (options, callback) and (callback).
   if (!credentialRequestCompleteCallback && typeof options === 'function') {
     credentialRequestCompleteCallback = options;
@@ -34,6 +36,7 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
   }
 
   const credentialToken = Random.secret();
+  /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
   const loginStyle = OAuth._loginStyle('hsl', config, options);
   const scope = config.requestPermissions || ['openid', 'profile', 'email'];
 
@@ -41,7 +44,9 @@ Hsl.requestCredential = function (options, credentialRequestCompleteCallback) {
   options = options || {};
   options.client_id = config.clientId;
   options.response_type = options.response_type || 'code';
+  /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
   options.redirect_uri = OAuth._redirectUri('hsl', config);
+  /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
   options.state = OAuth._stateParam(loginStyle, credentialToken, options.redirectUrl);
   options.scope = scope.join(' ');
 
