@@ -9,7 +9,9 @@ import { Accounts } from 'meteor/accounts-base';
 
 Accounts.oauth.registerService('hsl');
 
-Meteor.loginWithHsl = function (options, callback) {
+Meteor.loginWithHsl = function (optionsIn, callbackIn) {
+  let options = optionsIn;
+  let callback = callbackIn;
   // support a callback without options
   if (!callback && typeof options === 'function') {
     callback = options;
@@ -18,6 +20,6 @@ Meteor.loginWithHsl = function (options, callback) {
 
   const credentialRequestCompleteCallback =
     Accounts.oauth.credentialRequestCompleteHandler(callback);
-  /*global Hsl*/  
+  /* global Hsl */
   Hsl.requestCredential(options, credentialRequestCompleteCallback);
 };
