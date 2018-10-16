@@ -34,7 +34,7 @@ Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn
       new ServiceConfiguration.ConfigError('Service hsl not configured.'));
     return;
   }
-  /* eslint max-len: ["error", { "ignoreComments": true }] */
+  // eslint-disable-next-line
   /* eslint no-underscore-dangle: ["error", { "allow": ["_loginStyle", "_redirectUri", "_stateParam"]}] */
 
   const credentialToken = Random.secret();
