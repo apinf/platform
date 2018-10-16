@@ -30,8 +30,8 @@ Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn
 
   const config = ServiceConfiguration.configurations.findOne({ service: 'hsl' });
   if (!config) {
-    credentialRequestCompleteCallback && credentialRequestCompleteCallback(
-      new ServiceConfiguration.ConfigError('Service hsl not configured.'));
+    // eslint-disable-next-line
+    credentialRequestCompleteCallback && credentialRequestCompleteCallback(new ServiceConfiguration.ConfigError('Service hsl not configured.'));
     return;
   }
   // eslint-disable-next-line
