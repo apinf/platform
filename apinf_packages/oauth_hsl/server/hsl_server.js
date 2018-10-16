@@ -152,7 +152,7 @@ OAuth.registerService('hsl', 2, null, (query) => {
   };
 });
 
-/* global Hsl */
+/* global Hsl:true */
 Hsl.retrieveCredential = function (credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };
