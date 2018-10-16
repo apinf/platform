@@ -35,7 +35,7 @@ Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn
     return;
   }
   /* eslint max-len: ["error", { "ignoreComments": true }] */
-  /* eslint no-underscore-dangle: ["error", { "allow": ["_loginStyle", "_redirectUri"], "_stateParam"}] */
+  /* eslint no-underscore-dangle: ["error", { "allow": ["_loginStyle", "_redirectUri", "_stateParam"]}] */
 
   const credentialToken = Random.secret();
   const loginStyle = OAuth._loginStyle('hsl', config, options);
