@@ -34,8 +34,8 @@ Hsl.requestCredential = function (optionsIn, credentialRequestCompleteCallbackIn
       new ServiceConfiguration.ConfigError('Service hsl not configured.'));
     return;
   }
-  /* eslint no-underscore-dangle: 
-      ["error", { "allow": ["_loginStyle", "_redirectUri"], "_stateParam"}] */
+  /* eslint max-len: ["error", { "ignoreComments": true }] */
+  /* eslint no-underscore-dangle: ["error", { "allow": ["_loginStyle", "_redirectUri"], "_stateParam"}] */
 
   const credentialToken = Random.secret();
   const loginStyle = OAuth._loginStyle('hsl', config, options);
