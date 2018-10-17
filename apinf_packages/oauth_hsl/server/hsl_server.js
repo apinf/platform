@@ -7,6 +7,8 @@ import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { OAuth } from 'meteor/oauth';
 
+import { Base64 } from 'js-base64';
+
 // Meteor contributed packages imports
 import { ServiceConfiguration } from 'meteor/service-configuration';
 
@@ -92,7 +94,7 @@ const getToken = function (query) {
     return response.data;
   }
 };
-/*
+/* Not needed here, at least not now
 const getTokenContent = function (token) {
   let content = null;
   if (token) {
@@ -119,18 +121,34 @@ OAuth.registerService('hsl', 2, null, (query) => {
   const accessToken = token.access_token || token.id_token;
   const expiresAt = new Date() + (1000 * parseInt(token.expires_in, 10));
 
+  // id_token consists of three parts separated with a dot
+  const id_token = token.id_token.split(".");
+  // decode payload part
+  var decodedIdTokenPayload = Base64.decode(id_token[1]);
+  // JSONify payload in order to be able to refer to it
+  const decodedIdTokenPayloadJSON = JSON.parse(decodedIdTokenPayload);
+  if (debug) console.log('decoded_json', decodedIdTokenPayloadJSON)
+
+  if (debug) console.log('amr=', decodedIdTokenPayloadJSON.amr);
+  // Do not allow login without MFA
+  if (!decodedIdTokenPayloadJSON.amr.includes("mfa")) {
+    throw new Meteor.Error(403, "User has not MFA in use.");
+  }
+
   const userinfo = getUserInfo(accessToken);
   if (debug) console.log('XXX: userinfo:', userinfo);
 
   const serviceData = {};
+
   serviceData.id = userinfo.sub;
   serviceData.username = userinfo.preferred_username;
   serviceData.fullname = userinfo.name;
   serviceData.accessToken = userinfo.accessToken;
   serviceData.expiresAt = expiresAt;
   serviceData.email = userinfo.email;
+  serviceData.amr = decodedIdTokenPayloadJSON.amr;
 
-  /*
+  /* Not needed here, at least not now
   if (accessToken) {
     tokenContent = getTokenContent(accessToken);
   }
