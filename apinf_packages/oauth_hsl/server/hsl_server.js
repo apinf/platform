@@ -122,17 +122,17 @@ OAuth.registerService('hsl', 2, null, (query) => {
   const expiresAt = new Date() + (1000 * parseInt(token.expires_in, 10));
 
   // id_token consists of three parts separated with a dot
-  const id_token = token.id_token.split(".");
+  const idToken = token.id_token.split('.');
   // decode payload part
-  var decodedIdTokenPayload = Base64.decode(id_token[1]);
+  const decodedIdTokenPayload = Base64.decode(idToken[1]);
   // JSONify payload in order to be able to refer to it
   const decodedIdTokenPayloadJSON = JSON.parse(decodedIdTokenPayload);
-  if (debug) console.log('decoded_json', decodedIdTokenPayloadJSON)
+  if (debug) console.log('decoded_json', decodedIdTokenPayloadJSON);
 
   if (debug) console.log('amr=', decodedIdTokenPayloadJSON.amr);
   // Do not allow login without MFA
-  if (!decodedIdTokenPayloadJSON.amr.includes("mfa")) {
-    throw new Meteor.Error(403, "User has not MFA in use.");
+  if (!decodedIdTokenPayloadJSON.amr.includes('mfa')) {
+    throw new Meteor.Error(403, 'User has not MFA in use.');
   }
 
   const userinfo = getUserInfo(accessToken);
