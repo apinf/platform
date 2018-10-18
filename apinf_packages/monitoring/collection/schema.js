@@ -10,7 +10,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { MonitoringSettings, MonitoringData } from './';
 
 // APInf imports
-import { apiMonitoringEndpointRegEx, apiEndPointRegEx } from './lib/regex';
+import { apiMonitoringEndpointRegEx } from './lib/regex';
 
 // Describe collection for store data associate with monitoring settings
 MonitoringSettings.schema = new SimpleSchema({
@@ -28,7 +28,7 @@ MonitoringSettings.schema = new SimpleSchema({
   endPoint: {
     type: String,
     optional: true,
-    regEx: apiEndPointRegEx,
+    regEx: apiMonitoringEndpointRegEx,
   },
   url: {
     type: String,
