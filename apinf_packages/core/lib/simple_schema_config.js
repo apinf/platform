@@ -33,7 +33,7 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Domain, msg: invalidDomainMessage },
     { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
     { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
-    { exp: proxyBasePathFrontendPrefixRegEx, msg: proxyBackendForm_forbiddenPrefixMessage },
+    { exp: proxyBasePathRegEx, msg: proxyBackendForm_forbiddenPrefixMessage },
     { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
     { exp: apiRequiredHeaderRegEx, msg: invalidApiRequiredMessage },
     { exp: contactPhone, msg: invalidContactPhoneMessage },

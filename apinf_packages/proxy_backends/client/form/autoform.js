@@ -27,9 +27,9 @@ AutoForm.hooks({
       // console.log(doc.apiUmbrella.url_matches[0].frontend_prefix)
       // console.log(doc.apiUmbrella.url_matches[0])
       
-      if (doc.apiUmbrella.url_matches[0].frontend_prefix === "/signup/") {
-        // console.log('proxyBackendForm_forbiddenPrefixMessage');
-        const message = TAPi18n.__('proxyBackendForm_forbiddenPrefixMessage');
+      if (doc.apiUmbrella.url_matches[0].frontend_prefix === "/admin/") {
+         console.log('proxyBackendForm_forbiddenPrefixMessage');
+        // const message = TAPi18n.__('proxyBackendForm_forbiddenPrefixMessage');
         
       }
       return doc;
