@@ -23,6 +23,17 @@ import requiredFieldsFilled from './required_fields';
 
 AutoForm.hooks({
   proxyBackendForm: {
+    formToDoc: (doc) => {
+      // console.log(doc.apiUmbrella.url_matches[0].frontend_prefix)
+      // console.log(doc.apiUmbrella.url_matches[0])
+      
+      if (doc.apiUmbrella.url_matches[0].frontend_prefix === "/signup/") {
+        // console.log('proxyBackendForm_forbiddenPrefixMessage');
+        const message = TAPi18n.__('proxyBackendForm_forbiddenPrefixMessage');
+        
+      }
+      return doc;
+    },
     formToModifier: (doc) => {
       if (doc.$set['apiUmbrella.sub_settings']) {
         doc.$set['apiUmbrella.sub_settings'] = _.compact(doc.$set['apiUmbrella.sub_settings']);
