@@ -437,6 +437,7 @@
   "invalidEmailMessage": "Must be a valid e-mail address",
   "invalidProxyBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
+  "invalidApiMonitoringEndpointMessage": "Must begin with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiRequiredMessage": "Invalid input not allowed",
   "invalidContactPhoneMessage": "Must be a valid number. (0-9), +, -, space, / are allowed",
   "latestApiBackends_Heading": "Latest APIs",
