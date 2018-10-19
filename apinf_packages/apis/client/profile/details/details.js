@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Npm packages imports
-// import Clipboard from 'clipboard';
+import Clipboard from 'clipboard';
 
 // Collection imports
 import ApiKeys from '/apinf_packages/api_keys/collection';
@@ -30,10 +30,62 @@ Template.apiDetails.onCreated(function () {
 
 Template.apiDetails.onRendered(() => {
   // Initialize Clipboard copy buttons
-  // const copyApiUrl = new Clipboard('#copyApiUrl');
-  // const copyProxyUrl = new Clipboard('#copyProxyUrl');
-  // const copyExampleOne = new Clipboard('#copyExampleOne');
-  // const copyExampleTwo = new Clipboard('#copyExampleTwo');
+  const copyApiUrl = new Clipboard('#copyApiUrl');
+  const copyProxyUrl = new Clipboard('#copyProxyUrl');
+  const copyExampleOne = new Clipboard('#copyExampleOne');
+  const copyExampleTwo = new Clipboard('#copyExampleTwo');
+
+  // Tooltip position for copyApiUrl
+  $('#copyApiUrl').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyProxyUrl
+  $('#copyProxyUrl').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyExampleOne
+  $('#copyExampleOne').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyExampleTwo
+  $('#copyExampleTwo').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tell the user when copying API URL is successful
+  copyApiUrl.on('success', () => {
+    $('#copyApiUrl').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyProxyUrl.on('success', () => {
+    $('#copyProxyUrl').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyExampleOne.on('success', () => {
+    $('#copyExampleOne').tooltip('hide')
+      .attr('data-original-title', '')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyExampleTwo.on('success', () => {
+    $('#copyExampleTwo').tooltip('hide')
+      .attr('data-original-title', '')
+      .tooltip('show');
+  });
 });
 
 Template.apiDetails.helpers({
