@@ -143,6 +143,22 @@ Settings.schema = new SimpleSchema({
       return validation;
     },
   },
+  loginMethods: {
+    type: Object,
+    optional: true,
+  },
+  'loginMethods.fiware': {
+    type: Boolean,
+    optional: true,
+  },
+  'loginMethods.github': {
+    type: Boolean,
+    optional: true,
+  },
+  'loginMethods.hsl_id': {
+    type: Boolean,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)
