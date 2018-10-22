@@ -9,7 +9,7 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
-// importing packages
+//import from packages
 import URI from 'urijs';
 
 Template.apiMonitoring.onCreated(function () {
