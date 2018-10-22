@@ -14,9 +14,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <thead>
       <tr>
         <th>Time</th>
+        <th>Endpoint</th>
         <th>Status</th>
         <th>Details</th>
       </tr>
+     
+<!--  <<<<<<< apinf/merge-house-cleaning
     </thead>
     <tbody>
       {{# each apiStatusData }}
@@ -36,6 +39,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </table>
 
   <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
+======= -->
+
+      <tbody>
+        {{# each record in  apiStatusData }}
+          <tr>
+            <td>{{ record.date }}</td>
+            <td>           
+             <a href="{{ apiMonitoringSettings.url }}">{{ record.end_point }}</a>
+            </td>
+            <td>
+              {{# if apiStatusCode (record.server_status_code) }}
+                <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
+                </span>
+              {{ else }}
+                <span class="glyphicon glyphicon-exclamation-sign failed" aria-hidden="true">
+                </span>
+              {{/ if}}
+            </td>
+            <td>{{ record.server_status_code }}</td>
+          </tr>
+        {{/ each }}
+      </tbody>
+    </table>
+    
+    <hr class="header-line">
+<!--  >>>>>>> develop -->
 
   {{/ if }}
 
@@ -45,6 +74,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}</p>
   <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
+<!--  <<<<<<< apinf/merge-house-cleaning
     <!-- hidden field, auto-value -->
     {{> afQuickField name='apiId' value=api._id type="hidden" }}
     {{> afQuickField name='enabled' }}
@@ -57,6 +87,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
       {{_ "apiMonitoring_saveButton_text" }}
     </button>
+======= -->
+      <!-- hidden field, auto-value -->
+      {{> afQuickField name='apiId' value=api._id type="hidden" }}
+      {{> afQuickField name='enabled' }}
+      {{# if afFieldValueIs name='enabled' value=true }}
+      {{> afQuickField name='url' value=api.url type="hidden" }}
+        <label for="endpoint-monitor-field">
+          {{ afFieldLabelText name='endPoint' }}
+        </label>
+        <div class="input-group">
+        <!-- API url addon -->
+          <span class="input-group-addon" id="api-url">
+          {{ api.url }}
+          </span>
+          {{> afFieldInput name='endPoint' value=endPoint }}
+          </div>
+          {{# if afFieldIsInvalid name='endPoint' }}
+            <p class="text-danger">
+              {{{ afFieldMessage name='endPoint' }}}
+            </p>
+            {{/ if }}
+      {{/ if }}
+      <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
+        {{_ "apiMonitoring_saveButton_text" }}
+      </button>
+<!--  >>>>>>> develop -->
     {{/ autoForm }}
   </div>
 </template>
