@@ -9,12 +9,8 @@ import { Template } from 'meteor/templating';
 // Collection imports
 import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
 
-/*  <<<<<<< apinf/merge-house-cleaning
-// APInf import
-//  import convertStatusCode from '/apinf_packages/apis/client/profile/status/convert_status_code';
-======= */
+// importing packages
 import URI from 'urijs';
-/*  >>>>>>> develop */
 
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance

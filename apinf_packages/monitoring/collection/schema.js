@@ -38,11 +38,6 @@ MonitoringSettings.schema = new SimpleSchema({
       if (this.value.match(SimpleSchema.RegEx.Url)) {
         validation = true;
       }
-
-/*  <<<<<<< apinf/merge-house-cleaning
-      if (monitoringUrlEnabled === true && !monitoringUrl) {
-        validation = 'required';
-======= */
       if (validation === true) {
         const monitoringUrlEnabled = this.field('enabled').value;
         const monitoringUrl = this.value;
@@ -50,7 +45,6 @@ MonitoringSettings.schema = new SimpleSchema({
         if (monitoringUrlEnabled === true && !monitoringUrl) {
           validation = 'required';
         }
-/* >>>>>>> develop */
       }
       return validation;
     },
