@@ -26,13 +26,58 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='githubConfiguration.clientId' id="github-id" }}
       {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
 
-      <div id="form-buttons">
-        <button
-          type="submit"
-          class="btn btn-success btn-success-special"
-          id="save-settings">
-          {{_ "settings_save" }}
-        </button>
+      {{# autoForm
+        collection=loginPlatformsCollection
+        doc=editDoc
+        id="loginPlatforms"
+        type=formType }}
+      <div class="col-md-6 login-platforms-fields">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "settings_fiware" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='fiwareConfiguration.clientId' id="fiware-id" }}
+            {{> afQuickField name='fiwareConfiguration.secret' id="fiware-secret" }}
+            {{> afQuickField name='fiwareConfiguration.rootURL' id="fiware-rootURL" }}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "settings_github" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='githubConfiguration.clientId' id="github-id" }}
+            {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
+          </div>
+        </div>
+        <!--div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{_ "settings_hsl" }}
+            </h3>
+          </div>
+          <div class="panel-body">
+            {{> afQuickField name='hslConfiguration.clientId' id="hsl-id" }}
+            {{> afQuickField name='hslConfiguration.secret' id="hsl-secret" }}
+            {{> afQuickField name='hslConfiguration.serverUrl' id="hsl-server" }}
+            {{> afQuickField name='hslConfiguration.authorizationEndpoint' id="hsl-authEp" }}
+            {{> afQuickField name='hslConfiguration.tokenEndpoint' id="hsl-tokenEp" }}
+            {{> afQuickField name='hslConfiguration.userinfoEndpoint' id="hsl-uInfoEp" }}
+          </div>
+        </div-->
+        <div id="form-buttons">
+          <button
+            type="submit"
+            class="btn btn-lg btn-success"
+            id="save-settings">
+            {{_ "settings_save" }}
+          </button>
+        </div>
       </div>
     </div>
     {{/ autoForm }}

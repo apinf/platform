@@ -23,7 +23,7 @@ apinf:autoform-bs-datepicker@1.1.2
 apinf:bootstrap@3.3.7
 apinf:create-role-if-undefined@0.1.1
 apinf:first-admin@0.1.2
-apinf:fiware@0.1.3
+apinf:fiware@0.2.0
 apinf:restivus-swagger@0.4.0
 aramk:quill@0.1.1
 arillo:flow-router-helpers@0.5.2
