@@ -47,7 +47,6 @@ MonitoringSettings.schema = new SimpleSchema({
         if (monitoringUrlEnabled === true && !monitoringUrl) {
           validation = 'required';
         }
-
       }
       return validation;
     },
