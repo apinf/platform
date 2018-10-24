@@ -38,21 +38,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </a>
         </li>
         {{/ if }}
-        {{# unless isActiveRoute 'search'}}
-          <li>
-            <a type="button" class="icon-search" id="search-button">
-              <i class="fa fa-search toggle-search-icon"></i>
-              <i class="fa fa-times toggle-search-icon"></i>
-            </a>
-          </li>
-        {{/ unless}}
       </ul>
       <ul class="nav navbar-nav nanbar-left" id="main-navbar">
         {{# if currentUser }}
           {{# if proxyIsDefined }}
             {{# if userCanViewDashboard }}
-              <li class="{{ isActiveRoute 'dashboard' }}">
-                <a href="{{ pathFor 'dashboard' }}" id="dashboard-button">
+              <li class="{{ isActiveRoute 'dashboardPage' }}">
+                <a href="{{ pathFor 'dashboardPage' }}" id="dashboard-button">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i>
                   {{_ "navbar_dashboard" }}
                 </a>
@@ -74,6 +66,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "navbar_apis" }}
           </a>
         </li>
+        {{# if currentUser }}
+          <li class="{{ isActiveRoute 'myApiCatalog' }}">
+            <a href="{{ pathFor 'myApiCatalog' }}" id="apis-button">
+              <i class="fa fa-book" aria-hidden="true"></i>
+              {{_ "navbar_my_apis" }}
+            </a>
+          </li>
+        {{/ if }}
         <li class="{{ isActiveRoute 'organizationCatalog' }}">
           <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
             <i class="fa fa-address-card" aria-hidden="true"></i>

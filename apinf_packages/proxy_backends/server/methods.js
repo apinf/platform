@@ -73,7 +73,7 @@ Meteor.methods({
     // Get frontend prefix
     const frontendPrefix = proxyBackend.apiUmbrella.url_matches[0].frontend_prefix;
 
-    // Get document with specified forntend_prefix
+    // Get document with specified frontend prefix
     const documentExist = ProxyBackends.findOne({
       'apiUmbrella.url_matches.frontend_prefix': {
         $regex: frontendPrefix,

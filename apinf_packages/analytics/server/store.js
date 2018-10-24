@@ -130,8 +130,10 @@ Meteor.methods({
           const statusCodes = dataset.response_status.buckets;
           // Get data about response time in dimension
           const percentile50ResponseTime = dataset.percentiles_response_time.values['50.0'];
-          const percentile95ResponseTime = dataset.percentiles_response_time.values['95.0'];
-
+          const percentileShortestResponseTime = dataset.percentiles_response_time.values['0.0'];
+          const percentileShortResponseTime = dataset.percentiles_response_time.values['25.0'];
+          const percentileLongResponseTime = dataset.percentiles_response_time.values['75.0'];
+          const percentileLontestResponseTime = dataset.percentiles_response_time.values['100.0'];
           return {
             requestPath: dataset.key,
             successCallsCount: statusCodes.success.doc_count,
@@ -139,7 +141,10 @@ Meteor.methods({
             failCallsCount: statusCodes.fail.doc_count,
             errorCallsCount: statusCodes.error.doc_count,
             medianResponseTime: parseInt(percentile50ResponseTime, 10) || 0,
-            percentile95ResponseTime: parseInt(percentile95ResponseTime, 10) || 0,
+            shortestResponseTime: parseInt(percentileShortestResponseTime, 10) || 0,
+            shortResponseTime: parseInt(percentileShortResponseTime, 10) || 0,
+            longResponseTime: parseInt(percentileLongResponseTime, 10) || 0,
+            longestResponseTime: parseInt(percentileLontestResponseTime, 10) || 0,
           };
         });
 
@@ -209,5 +214,10 @@ Meteor.methods({
     const analytics = AnalyticsData.findOne(query, { sort: { date: -1 }, limit: 1 });
     // Return "date" value
     return analytics && analytics.date;
+  },
+  getServerTimeZone () {
+    const serverTime = new Date();
+    const timeZone = serverTime.toString().substring(25);
+    return timeZone;
   },
 });

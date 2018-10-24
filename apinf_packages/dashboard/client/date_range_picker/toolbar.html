@@ -5,14 +5,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="dateRangePicker">
   <select name="timeframe" class="form-control" id="date-range-picker">
-    <option value="1">
+    <option value="12">
+      {{_ 'dateRangePicker_optionText_today' }}
+    </option>
+    <option value="48">
       {{_ 'dateRangePicker_optionText_yesterday' }}
     </option>
     <option value="7">
       {{_ 'dateRangePicker_optionText_7days' }}
     </option>
-    <option value="30">
-      {{_ 'dateRangePicker_optionText_30days' }}
+    <option value="28">
+      {{_ 'dateRangePicker_optionText_28days' }}
     </option>
   </select>
 </template>

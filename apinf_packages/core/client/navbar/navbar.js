@@ -55,16 +55,6 @@ Template.navbar.onRendered(() => {
 });
 
 Template.navbar.helpers({
-  isSearchRoute () {
-    // Get name of current route from Router
-    const routeName = FlowRouter.getRouteName();
-
-    if (routeName === 'search') {
-      return true;
-    }
-
-    return false;
-  },
   uploadedProjectLogoLink () {
     // Check for existing branding
     const branding = Branding.findOne();
@@ -184,16 +174,6 @@ Template.navbar.helpers({
 });
 
 Template.navbar.events({
-  'click .icon-search': function () {
-    // Show/hide search field
-    $('.searchblock-toggle').slideToggle('fast');
-
-    // Toggle search icon
-    $('.toggle-search-icon').toggle();
-
-    // Set cursor to search field
-    $('#search-text').focus();
-  },
   'click #dashboard-button': function () {
     // Redirect to Dashboard
     FlowRouter.go('dashboardPage');

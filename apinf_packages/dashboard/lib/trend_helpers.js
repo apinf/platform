@@ -60,7 +60,7 @@ export function arrowDirection (parameter, bucket) {
   // If there is no trend
   if (comparison === 0 || comparison === undefined) {
     // Don't display an arrow indicating
-    return undefined;
+    return 'no-trend';
   }
 
   // If there is a positive trend
@@ -150,23 +150,41 @@ export function summaryComparing (parameter, bucket, timeframe) {
   let trend;
   let text = '';
 
-  // Make sure trend exists
-  if (direction && percentages) {
-    // If trend is positive
-    if (direction === 'arrow-up' || direction === 'arrow-up_time') {
-      // Metric is better
-      trend = TAPi18n.__('summaryComparing_trendDirection_higher');
+  // Case with No trend
+  if (direction === 'no-trend') {
+    if (timeframe === '12' || timeframe === '48') {
+      text = TAPi18n.__('summaryComparing_displayTrendInfo_noTrend');
     } else {
-      // Otherwise metric is worse
-      trend = TAPi18n.__('summaryComparing_trendDirection_lower');
+      text = TAPi18n.__('summaryComparing_displayTrendInfo_noTrendDays', { day: timeframe });
     }
 
-    const params = { percentage: percentages, direction: trend, day: timeframe };
-    // If comparison with 1 day then it is "yesterday"
-    // typeof timeframe is string
-    if (timeframe === '1') {
+    return text;
+  }
+
+  // If trend is positive
+  if (direction === 'arrow-up' || direction === 'arrow-up_time') {
+    // Metric is better
+    trend = TAPi18n.__('summaryComparing_trendDirection_higher');
+  } else {
+    // Otherwise metric is worse
+    trend = TAPi18n.__('summaryComparing_trendDirection_lower');
+  }
+
+  const params = { percentage: percentages, direction: trend, day: timeframe };
+
+  switch (timeframe) {
+    // "today" is selected
+    case '12': {
+      text = TAPi18n.__('summaryComparing_displayTrendInfo_today', params);
+      break;
+    }
+    // "yesterday" is selected
+    case '48': {
       text = TAPi18n.__('summaryComparing_displayTrendInfo_yesterday', params);
-    } else {
+      break;
+    }
+    // "Last N Days"
+    default: {
       text = TAPi18n.__('summaryComparing_displayTrendInfo_days', params);
     }
   }

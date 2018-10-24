@@ -15,6 +15,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 import Chart from 'chart.js';
 
+// APInf imports
+import { getLocaleDateFormat } from '/apinf_packages/core/helper_functions/format_date';
+
 Template.requestTimeline.onCreated(function () {
   const instance = this;
 
@@ -91,10 +94,15 @@ Template.requestTimeline.onRendered(function () {
   instance.autorun(() => {
     // Get analytics data
     const selectedPathData = instance.selectedPathData.get();
+    // Get Date format
+    const dateFormat = Template.currentData().dateFormat;
+
+    // Get locale date format
+    const localeDateFormat = getLocaleDateFormat(dateFormat);
 
     // Initialization
     const labels = selectedPathData.dates.map(date => {
-      return moment(date).format('MM/DD');
+      return moment(date).format(localeDateFormat);
     });
 
     // Update labels & data
@@ -139,10 +147,20 @@ Template.requestTimeline.onRendered(function () {
 
   // Reactive update Chart Axis translation
   instance.autorun(() => {
+    let xAxesLabel;
+    // Get Date format
+    const dateFormat = Template.currentData().dateFormat;
     const scales = instance.chart.options.scales;
 
+    // If it's Day format
+    if (dateFormat === 'L') {
+      xAxesLabel = TAPi18n.__('requestTimeline_xAxisTitle_days');
+    } else {
+      xAxesLabel = TAPi18n.__('requestTimeline_xAxisTitle_hours');
+    }
+
     // Update translation
-    scales.xAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_xAxisTitle_days');
+    scales.xAxes[0].scaleLabel.labelString = xAxesLabel;
     scales.yAxes[0].scaleLabel.labelString = TAPi18n.__('requestTimeline_yAxisTitle_requests');
 
     // Update chart with new translation

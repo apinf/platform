@@ -3,12 +3,11 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Node packages imports
-import slugs from 'limax';
-
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Random } from 'meteor/random';
+import { Email } from 'meteor/email';
 
 // Meteor contributed packages imports
 import { Accounts } from 'meteor/accounts-base';
@@ -21,6 +20,12 @@ import _ from 'lodash';
 import Apis from '/apinf_packages/apis/collection';
 import OrganizationApis from '/apinf_packages/organization_apis/collection';
 import Organizations from '/apinf_packages/organizations/collection';
+import Settings from '/apinf_packages/settings/collection';
+
+// APInf imports
+import {
+  mailSettingsValid,
+} from '/apinf_packages/core/helper_functions/validate_settings';
 
 Meteor.methods({
   getCurrentUserUnlinkedApis () {
@@ -63,10 +68,11 @@ Meteor.methods({
     // Get any user with matching email
     const userByEmail = Accounts.findUserByEmail(manager.user);
     // Get any user with matching username
-    const userByUsername = Accounts.findUserByUsername(manager.user);
+    // const userByUsername = Accounts.findUserByUsername(manager.user);
 
     // "User" field can be e-mail value or username value
-    const user = userByEmail || userByUsername;
+    // temporarily only with email
+    const user = userByEmail; /* || userByUsername */
 
     // No matching in both direction
     if (!user) {
@@ -78,10 +84,45 @@ Meteor.methods({
 
     // Check if user is already a manager
     const alreadyManager = organization.managerIds.includes(user._id);
-
     // Check if the user is already a manager
     if (alreadyManager) {
       throw new Meteor.Error('manager-already-exist');
+    } else {
+      // Construct object and assign manager ID
+      const emailVerification = {
+        managerIds: user._id,
+      };
+      // Ignore organization creator
+      if (organization.createdBy === user._id) {
+        // Assign default value for creator of organization
+        emailVerification.verified = true;
+        emailVerification.verificationToken = '';
+      } else {
+        // Send email verification code
+        const response = Meteor.call('sendEmailVerification', user._id, organization.slug);
+
+        // Check error status
+        if (response.status === 'failed') {
+          // Check error type
+          if (response.message === 'email-failed') {
+            throw new Meteor.Error('email-failed');
+          } else if (response.message === 'mail-setting-invalid') {
+            throw new Meteor.Error('email-failed-mail-setting-invalid');
+          }
+        }
+
+        // Assign response token and verified value
+        emailVerification.verified = false;
+        emailVerification.verificationToken = response.token;
+      }
+
+      // Add user ID to manager IDs field
+      const result = Organizations.update(manager.organizationId,
+        { $push: { managerIds: user._id, emailVerification } });
+
+      if (!result) {
+        throw new Meteor.Error('add-manager-fail');
+      }
     }
 
     // Add user ID to manager IDs field
@@ -95,11 +136,14 @@ Meteor.methods({
     check(userId, String);
 
     // Remove User ID from managers array
-    const result = Organizations.update({ _id: organizationId },
-      { $pull:
-         { managerIds: userId },
-      }
-     );
+    const result = Organizations.update({ _id: organizationId }, {
+      $pull: {
+        managerIds: userId,
+        emailVerification: {
+          managerIds: userId,
+        },
+      },
+    });
 
     return result;
   },
@@ -192,60 +236,112 @@ Meteor.methods({
       // Throw Organization error for client
       throw new Meteor.Error(`The Organization doesn't exist with parameter ${query}`);
     }
-    const organizationName = organization.name;
 
-    // Transliterates non-Latin scripts
-    const slug = slugs(organizationName, { tone: false });
+    // Get formed slug
+    const slugFormed = Meteor.call('formSlugFromName', 'Organizations', organization.name);
 
-    // Look for existing duplicate slug beginning of the newest one
-    const duplicateSlug = Organizations.findOne(
-      {
-        $or: [
-          { 'friendlySlugs.slug.base': slug },
-          { slug },
-        ],
-      },
-      { sort: { 'friendlySlugs.slug.index': -1 } }
-    );
+    // If formed slug true
+    if (slugFormed && typeof slugFormed === 'object') {
+      // Update new slug
+      Organizations.update({ name: organization.name }, {
+        $set: {
+          slug: slugFormed.slug,
+          'friendlySlugs.slug.base': slugFormed.friendlySlugs.slug.base,
+          'friendlySlugs.slug.index': slugFormed.friendlySlugs.slug.index,
+        },
+      });
 
-    // Initialize index value 0
-    let index = 0;
-    let newSlug = slug;
-    let slugBase = slug;
-
-    // If duplicate slug exists
-    if (duplicateSlug && duplicateSlug.friendlySlugs) {
-      // Return existing slug if organization name exists
-      if (organization._id === duplicateSlug._id
-        && slug === duplicateSlug.friendlySlugs.slug.base) {
-        return organization.slug;
-      }
-      // Set new index value
-      index = duplicateSlug.friendlySlugs.slug.index + 1;
-
-      // Get base slug value
-      slugBase = duplicateSlug.friendlySlugs.slug.base;
-
-      // Create new slug
-      newSlug = `${slugBase}-${index}`;
-    } else if (duplicateSlug && duplicateSlug.slug) {
-      // Set new index value
-      index += 1;
-
-      // Create new slug
-      newSlug = `${slugBase}-${index}`;
+      // Return the organization slug
+      return slugFormed.slug;
     }
 
-    // Update new slug
-    Organizations.update({ name: organizationName }, {
-      $set: {
-        slug: newSlug,
-        'friendlySlugs.slug.base': slugBase,
-        'friendlySlugs.slug.index': index,
-      },
-    });
+    // Return
+    return slugFormed;
+  },
+  sendEmailVerification (managerId, slug) {
+    // Make sure managerId is a String
+    check(managerId, String);
+    // Make sure slug is a String
+    check(slug, String);
 
-    // Return the API slug
-    return newSlug;
+    // Get Settings collection
+    const settings = Settings.findOne();
+    let token = '';
+    // Check if mail settings are provided
+    if (mailSettingsValid(settings)) {
+      const username = encodeURIComponent(settings.mail.username);
+      const password = encodeURIComponent(settings.mail.password);
+      const smtpHost = encodeURIComponent(settings.mail.smtpHost);
+      const smtpPort = encodeURIComponent(settings.mail.smtpPort);
+
+      // Set MAIL_URL env variable
+      // Note, this must be on one, long line for the URL to be valid
+      process.env.MAIL_URL = `smtp://${username}:${password}@${smtpHost}:${smtpPort}`;
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+      // Get User collection
+      const user = Meteor.users.findOne(managerId);
+      const sendEmailTo = user.emails[0].address;
+
+      // Create token
+      token = Random.secret();
+
+      // Get hostname
+      const hostname = Meteor.absoluteUrl();
+      const url = `${hostname}email-verify/${token}/${slug}`;
+
+      const message = `<p>To verify your email address visit the following link:</p>\n
+      <p><a href=${url}>${url}</a></p>`;
+
+      // try catch here
+      try {
+        // Send the e-mail
+        Email.send({
+          to: sendEmailTo,
+          from: settings.mail.fromEmail,
+          subject: 'Verify Your Email Address',
+          html: message,
+        });
+      } catch (e) {
+        return {
+          status: 'failed',
+          message: 'email-failed',
+        };
+      }
+    } else {
+      return {
+        status: 'failed',
+        message: 'mail-setting-invalid',
+      };
+    }
+
+    return {
+      token,
+      status: 'success',
+      message: 'email-send-successfully',
+    };
+  },
+  verifyToken (verificationToken) {
+    // Make sure verificationToken is a String
+    check(verificationToken, String);
+
+    // Get organization document
+    const organization = Organizations.findOne(
+      { 'emailVerification.verificationToken': verificationToken });
+
+    // Check organization
+    if (!organization) {
+      // Throw token error for client
+      throw new Meteor.Error('Verification failed. Authentication token does not exist in db.');
+    }
+
+    const resp = Organizations.update(
+      { 'emailVerification.verificationToken': verificationToken },
+      { $set: {
+        'emailVerification.$.verified': true,
+      },
+      });
+
+    return resp;
   },
 });

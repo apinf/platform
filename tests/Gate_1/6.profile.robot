@@ -9,10 +9,9 @@ ${HOMEPAGE} 	http://localhost:3000
 
 *** Test Cases ***
 Login to apinf
-	confirm page loaded	Users
 	Go to login
-	Login to apinf	asdas	asdasd
-	confirm page loaded	Users
+	Login to apinf  asdas  asdasd
+	Wait Until Page Contains Element  id=footer-signout
 
 Change profile name (fail)
 	Go to profile
@@ -39,32 +38,18 @@ Verify password and name change
 delete this account
 	Go to account
 	Delete account
-	
-*** Keywords *** 
+
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
 Go to login
 	Click Element 	id=frontpage-button
-	confirm page loaded	Users
+	Wait Until Page Contains Element  id=statisticswrap
 	Click Element	id=signin-button
-	confirm page loaded	Login
-	
-Go to profile
-	Click Element 	id=frontpage-button
-	confirm page loaded	Users
-	Click Element 	id=usermenu
-	Click Element	id=profile-button
-	confirm page loaded	Company
-	
-Go to account
-	Click Element 	id=frontpage-button
-	confirm page loaded	Users
-	Click Element 	id=usermenu
-	Click Element	id=account-button
-	confirm page loaded	Update password
+	Wait Until Page Contains Element  id=at-btn
 
-Login to apinf	
+Login to apinf
 	[Arguments]	${username}	${password}
 	Input Text	id=at-field-username_and_email	${username}
 	Input Password 	id=at-field-password	${password}
@@ -73,6 +58,20 @@ Login to apinf
 confirm page loaded
 	[Arguments] 	${searchkey}
 	Wait Until Page Contains 	${searchkey}
+
+Go to profile
+	Click Element 	id=frontpage-button
+	confirm page loaded	Users
+	Click Element 	id=usermenu
+	Click Element	id=account-button
+	confirm page loaded	Company
+
+Go to account
+	Click Element 	id=frontpage-button
+	confirm page loaded	Users
+	Click Element 	id=usermenu
+	Click Element	id=account-button
+	confirm page loaded	Update password
 
 change profile data
 	[Arguments]	${username}	${Company}
@@ -88,6 +87,7 @@ change account data
 	Click Button 	id=submit-password
 
 Logout of apinf
+	Focus	id=footer-signout
 	Click Element 	id=footer-signout
 
 Delete account

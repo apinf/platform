@@ -13,6 +13,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 import Chart from 'chart.js';
 
+// APInf imports
+import { getLocaleDateFormat } from '/apinf_packages/core/helper_functions/format_date';
+
 Template.requestsOverTime.onRendered(function () {
   const instance = this;
 
@@ -66,10 +69,14 @@ Template.requestsOverTime.onRendered(function () {
   instance.autorun(() => {
     // Get aggregated chart data
     const chartData = Template.currentData().chartData;
+    const dateFormat = Template.currentData().dateFormat;
+
+    // Get locale date format
+    const localeDateFormat = getLocaleDateFormat(dateFormat);
 
     // Get dates
     const labels = chartData.map(dataset => {
-      return moment(dataset.date).format('MM/DD');
+      return moment(dataset.date).format(localeDateFormat);
     });
 
     // Get data for chart

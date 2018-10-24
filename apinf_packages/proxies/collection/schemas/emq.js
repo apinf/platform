@@ -26,6 +26,9 @@ export default {
   },
   'emq.brokerEndpoints.$.port': {
     type: Number,
+    autoform: {
+      type: 'number',
+    },
   },
   'emq.brokerEndpoints.$.tls': {
     type: Boolean,

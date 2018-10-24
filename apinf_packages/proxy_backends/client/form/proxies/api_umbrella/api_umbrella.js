@@ -6,6 +6,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+
 // Npm packages imports
 import URI from 'urijs';
 
@@ -26,9 +28,14 @@ Template.apiUmbrellaProxyForm.helpers({
   apiPortHelper () {
     // Get API information
     const api = this.api;
-
     // Construct URL object for API URL
     const apiUrl = new URI(api.url);
+    const apiId = this.api._id;
+    const proxyBackend = ProxyBackends.findOne({ apiId });
+
+    if (proxyBackend && proxyBackend.apiUmbrella && proxyBackend.apiUmbrella.servers[0].port) {
+      return proxyBackend.apiUmbrella.servers[0].port;
+    }
 
     // Return the API URL protocol
     const protocol = apiUrl.protocol();

@@ -14,7 +14,7 @@ import { Client as ESClient } from 'elasticsearch';
 import Proxies from '../../proxies/collection';
 
 Meteor.methods({
-  getElasticsearchData (host, queryParams) {
+  async getElasticsearchData (host, queryParams) {
     // Make sure params are String type
     check(host, String);
     check(queryParams, Object);
@@ -22,18 +22,7 @@ Meteor.methods({
     // Initialize Elasticsearch client, using provided host value
     const esClient = new ESClient({ host });
 
-    return esClient
-      .ping({
-        // ping usually has a 5000ms timeout
-        requestTimeout: 5000,
-      })
-      .then(() => {
-        return esClient.search(queryParams);
-      })
-      .catch(error => {
-        // Throw an error
-        throw new Meteor.Error(error);
-      });
+    return await esClient.search(queryParams);
   },
   async emqElasticsearchPing () {
     const proxy = Proxies.findOne({ type: 'emq' });

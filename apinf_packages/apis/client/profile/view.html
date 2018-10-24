@@ -17,7 +17,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div> <!-- /api-backend-details -->
 
         <div id="api-documentation" class="tab-pane fade">
-          {{> apiDocumentation api=api apiDoc=apiDoc }}
+          {{> apiDocumentation api=api apiDoc=apiDoc  developmentFeatures=developmentFeatures }}
         </div> <!-- /api-documentation -->
 
         <div id="api-metadata" class="tab-pane fade">
@@ -27,6 +27,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <div id="api-feedback" class="tab-pane fade">
           {{> apiFeedback api=api feedbackItems=feedbackItems }}
         </div> <!-- /api-feedback -->
+
+        <div id="api-monitoring" class="tab-pane fade">
+          {{> apiMonitoring api=api }}
+        </div> <!-- /api-monitoring -->
 
         {{# if currentUser }}
           {{# if api.currentUserCanManage }}

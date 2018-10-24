@@ -44,6 +44,10 @@ ProxyBackends.helpers({
 
     return _.get(this, path, '');
   },
+  backendPrefix () {
+    const path = 'apiUmbrella.url_matches[0].backend_prefix';
+    return _.get(this, path, '');
+  },
   apiSlug () {
     // Get API ID
     const apiId = this.apiId;
@@ -60,5 +64,15 @@ ProxyBackends.helpers({
     }
 
     return apiSlug;
+  },
+  elasticsearchHost () {
+    // Get Proxy ID
+    const proxyId = this.proxyId;
+
+    // Get Proxy item
+    const proxy = Proxies.findOne(proxyId);
+
+    // Returns elasticsearch URL if it exists else returns an empty string
+    return _.get(proxy, 'apiUmbrella.elasticsearch', '');
   },
 });

@@ -7,7 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 
 // Collection imports
-import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
+import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
+
+import URI from 'urijs';
 
 Template.apiMonitoring.onCreated(function () {
   // Get reference of template instance
@@ -18,8 +20,8 @@ Template.apiMonitoring.onCreated(function () {
 
   // Subscribe on Monitoring collection
   instance.subscribe('monitoringSettings', apiId);
+  instance.subscribe('getApiStatusRecordData', apiId);
 });
-
 Template.apiMonitoring.onRendered(() => {
   // Show a small popup on clicking the help icon
   $('[data-toggle="popover"]').popover();
@@ -43,11 +45,44 @@ Template.apiMonitoring.helpers({
 
     // Look for existing monitoring document for this API
     const existingSettings = MonitoringSettings.findOne({ apiId });
-
     if (existingSettings) {
       return 'update';
     }
 
     return 'insert';
+  },
+  apiStatusData () {
+    const apiId = this.api._id;
+    const startDate = new Date();
+    const lastDate = new Date();
+    lastDate.setDate(lastDate.getDate() - 1);
+    const monitoringData = MonitoringData.findOne({ apiId });
+
+    if (monitoringData && monitoringData.responses) {
+      // eslint-disable-next-line no-useless-escape
+      const responses = monitoringData.responses.filter((obj) => {
+        let result = false;
+        if (obj.date >= lastDate && obj.date <= startDate) {
+          result = true;
+        }
+        return result;
+      });
+      if (monitoringData) {
+        return responses;
+      }
+    }
+    return [];
+  },
+  apiStatusCode (code) {
+    return code === '200';
+  },
+  apiUrlPath () {
+    const monitoringSettings = MonitoringSettings.findOne({ apiId: this.api._id });
+    let path;
+    if (monitoringSettings) {
+      const apiUrl = new URI(monitoringSettings.url);
+      path = apiUrl.path();
+    }
+    return path;
   },
 });

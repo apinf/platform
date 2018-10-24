@@ -11,6 +11,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
+            <div class="panel-title">
+              {{_ "profile_Header" }}
+            </div>
+          </div>
+          <div class="panel-body">
+            {{# autoForm
+              id="updateProfile"
+              collection=usersCollection
+              doc=currentUser
+              type="update" }}
+              {{> afQuickField name="username" id="username" }}
+
+              <div class="form-group">
+                <label for="email">
+                  {{_ "profile_labelText_registeredEmail" }}
+                </label>
+                <p>{{ userEmail }}</p>
+              </div>
+              {{> afQuickField name="profile.company" id="company" }}
+              <button type="submit" class="btn btn-success profile-update" id="update-button">
+                {{_ "profile_UpdateButton" }}
+              </button>
+            {{/ autoForm }}
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
             <h3 class="panel-title">
               {{_ "account_details" }}
             </h3>

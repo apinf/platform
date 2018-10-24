@@ -64,6 +64,42 @@ const RateLimitSchema = new SimpleSchema({
 // Internationalize Rate limit schema texts
 RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
+const SubSettings = new SimpleSchema({
+  http_method: {
+    type: String,
+    optional: false,
+    allowedValues: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'HEAD',
+      'TRACE',
+      'OPTIONS',
+      'CONNECT',
+      'PATCH',
+    ],
+  },
+  regex: {
+    type: String,
+    optional: false,
+  },
+  settings: {
+    type: Object,
+    optional: true,
+  },
+  'settings.required_headers_string': {
+    type: String,
+    autoform: {
+      rows: 3,
+    },
+    optional: true,
+  },
+});
+
+// Internationalize Rate limit schema texts
+SubSettings.i18n('schemas.proxyBackends.apiUmbrella.sub_settings');
+
 const SettingsSchema = new SimpleSchema({
   disable_api_key: {
     type: Boolean,
@@ -125,6 +161,10 @@ const SettingsSchema = new SimpleSchema({
     autoform: {
       rows: 3,
     },
+    optional: true,
+  },
+  idp_app_id: {
+    type: String,
     optional: true,
   },
 });
@@ -195,6 +235,10 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
   settings: {
     type: SettingsSchema,
+    optional: true,
+  },
+  sub_settings: {
+    type: [SubSettings],
     optional: true,
   },
 });

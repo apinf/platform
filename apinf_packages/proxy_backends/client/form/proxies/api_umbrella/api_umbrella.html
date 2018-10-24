@@ -148,6 +148,7 @@
         </div>
       {{/if }}
 
+<!-- from feature/mqtt-dashboard -->
       {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom-header" }}
         <div class="col-md-12" id="rate-limit-cost-header">
           {{> afQuickField name="apiUmbrella.settings.rate_limit_cost_header" }}
@@ -158,5 +159,21 @@
         </div>
       {{/ if }}
     </div>
+
+    <!-- IDP App Id -->
+    <div class="col-md-12" id="advanced-settings">
+      {{> afQuickField
+        name="apiUmbrella.settings.idp_app_id"
+        placeholder="externalid1234"
+      }}
+    </div> 
+    
+    <!-- RH Setting App Id -->
+    <div class="col-md-12 sub-settings">
+        {{> afQuickField
+          name="apiUmbrella.sub_settings"
+        }}
+    </div>
+
   </div>
 </template>

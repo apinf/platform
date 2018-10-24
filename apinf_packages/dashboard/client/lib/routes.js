@@ -36,7 +36,7 @@ signedIn.route('/dashboard', {
       context.queryParams.sort = 'name';
     }
   }],
-  name: 'dashboard',
+  name: 'dashboardPage',
   action () {
     BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'dashboardPage' });
   },

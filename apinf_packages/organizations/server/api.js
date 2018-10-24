@@ -236,6 +236,19 @@ ManagementV1.addRoute('organizations', {
         return errorMessagePayload(400, detailLine, 'id', idValue);
       }
 
+      // Get slug formed of name
+      const slugData = Meteor.call('formSlugFromName', 'Organizations', bodyParams.name);
+
+      // If formed slug true
+      if (slugData && typeof slugData === 'object') {
+        // Include slug
+        organizationData.slug = slugData.slug;
+        // Include friendlySlugs
+        organizationData.friendlySlugs = slugData.friendlySlugs;
+      } else {
+        return errorMessagePayload(500, 'Forming slug for Organization failed.');
+      }
+
       // Validate url
       isValid = Organizations.simpleSchema().namedContext().validateOne(
         organizationData, 'url');
@@ -323,10 +336,8 @@ ManagementV1.addRoute('organizations', {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
         }
       }
-      // TODO Add slug to Organization
-      //      Solve slug and add it into organizationData
-      // Can be implemented after issue 3389
 
+      // Insert query
       const organizationId = Organizations.insert(organizationData);
 
       // If insert failed, stop and send response
@@ -524,6 +535,18 @@ ManagementV1.addRoute('organizations/:id', {
           const idValue = `${duplicateOrganization._id}`;
           return errorMessagePayload(400, detailLine, 'id', idValue);
         }
+
+        // Get Formed slug
+        const slugData = Meteor.call('formSlugFromName', 'Organizations', bodyParams.name);
+        // Check slugData
+        if (slugData && typeof slugData === 'object') {
+          // Include slug
+          organizationData.slug = slugData.slug;
+          // Include friendlySlugs
+          organizationData.friendlySlugs = slugData.friendlySlugs;
+        } else {
+          return errorMessagePayload(500, 'Forming slug for Organization failed.');
+        }
       }
 
       // Validate url, if provided
@@ -615,10 +638,6 @@ ManagementV1.addRoute('organizations/:id', {
           return errorMessagePayload(400, 'Parameter "linkedIn" is erroneous');
         }
       }
-
-      // TODO Add slug to Organization in case Organization name is altered
-      //      Solve slug and add it into organizationData
-      // Can be implemented after issue 3389
 
       // Update Organization document
       const result = Organizations.update(organizationId, { $set: organizationData });

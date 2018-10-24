@@ -30,6 +30,7 @@ Template.apiIntro.onCreated(function () {
     const documentationTab = document.getElementById('api-documentation-tab');
     const metadataTab = document.getElementById('api-metadata-tab');
     const feedbackTab = document.getElementById('api-feedback-tab');
+    const monitoringTab = document.getElementById('api-monitoring-tab');
     const backlogTab = document.getElementById('api-backlog-tab');
     const exportTab = document.getElementById('api-export-tab');
     const settingsTab = document.getElementById('api-settings-tab');
@@ -76,6 +77,14 @@ Template.apiIntro.onCreated(function () {
       steps.push({
         element: '#api-feedback-tab',
         intro: TAPi18n.__('apiIntro_steps_feedback_intro'),
+      });
+    }
+    // Check for Monitoring Tab
+    if (monitoringTab) {
+      // Add export step to introduction tour
+      steps.push({
+        element: '#api-monitoring-tab',
+        intro: TAPi18n.__('apiIntro_steps_monitoring_data'),
       });
     }
 
