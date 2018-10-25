@@ -57,7 +57,7 @@ FlowRouter.route('/organizations/:orgSlug/', {
         let nameSlug;
         if (organizationProfile.name) {
           nameSlug = slugs(organizationProfile.name, { tone: false });
-        } 
+        }
 
         // Add RSS Link
         DocHead.addLink({
