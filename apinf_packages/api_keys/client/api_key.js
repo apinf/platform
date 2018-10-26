@@ -42,7 +42,7 @@ Template.apiKey.onCreated(function () {
   });
 });
 
-Template.apiKey.onRendered( () => {
+Template.apiKey.onRendered(() => {
   const apiKeyCopy = new Clipboard('#api-key-copy');
 
   // Tooltip position for copyApiUrl
