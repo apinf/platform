@@ -1,7 +1,10 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Node packages imports
+import slugs from 'limax';
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
@@ -50,22 +53,28 @@ FlowRouter.route('/organizations/:orgSlug/', {
     Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {
       // Check if Organization exists
       if (organizationProfile) {
+        // Transliterates special characters in Organization name
+        let nameSlug;
+        if (organizationProfile.name) {
+          nameSlug = slugs(organizationProfile.name, { tone: false });
+        }
+
         // Add RSS Link
         DocHead.addLink({
           rel: 'alternate',
           type: 'application/rss+xml',
           href: `/rss/organizations/?slug=${slug}`,
-          title: `RSS Feed for ${organizationProfile.name}`,
+          title: `RSS Feed for ${nameSlug}`,
         });
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
         DocHead.addMeta({ property: 'og:image', content: organizationProfile.logoUrl });
-        DocHead.addMeta({ property: 'og:title', content: organizationProfile.name });
+        DocHead.addMeta({ property: 'og:title', content: nameSlug });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
         // Twitter
         DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
-        DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
+        DocHead.addMeta({ property: 'twitter:title', content: nameSlug });
         DocHead.addMeta({ property: 'twitter:image', content: organizationProfile.logoUrl });
 
         BlazeLayout.render('masterLayout', { main: 'organizationProfile' });
