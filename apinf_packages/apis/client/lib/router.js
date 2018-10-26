@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
  // Node packages imports 
 import slugs from 'limax'; 
 
+
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
@@ -54,7 +55,9 @@ FlowRouter.route('/apis/:slug/', {
             rel: 'alternate',
             type: 'application/rss+xml',
             href: `/rss/apis/?slug=${slug}`,
+
             title: `RSS Feed for ${nameSlug }`,
+
           });
         }
 

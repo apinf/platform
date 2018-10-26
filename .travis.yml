@@ -4,7 +4,7 @@ group: deprecated-2017Q4
 
 language: node_js
 node_js:
-  - '4'
+  - '5'
 
 addons:
   apt:
@@ -30,6 +30,7 @@ services:
   - docker
 
 before_install:
+  - free -m
   - pwd
   - ls -la
   # Install meteor locally on CI

@@ -35,6 +35,11 @@ AccountsTemplates.configure({
   // Privacy Policy and Terms of Use
   privacyUrl: 'privacy-policy',
   termsUrl: 'terms-of-use',
+  // Texts
+  texts: {
+    socialIcons: {
+    },
+  },
 });
 
 // rearranging the fields on Sign-Up, so that username comes first.
