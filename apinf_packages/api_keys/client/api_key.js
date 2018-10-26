@@ -43,11 +43,26 @@ Template.apiKey.onCreated(function () {
 });
 
 Template.apiKey.onRendered(function () {
+  const apiKeyCopy = new Clipboard('#api-key-copy')
+
+  // Tooltip position for copyApiUrl
+  $('#api-key-copy').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tell the user when copying API URL is successful
+  apiKeyCopy.on('success', () => {
+    $('#api-key-copy').tooltip('hide')
+    .attr('data-original-title', 'Copied!')
+    .tooltip('show');
+  });
+  /*
   // Get reference of template instance
   const instance = this;
 
   // Initialize Clipboard copy button
-  instance.copyButton = new Clipboard('#copy-api-key');
+  instance.copyButton = new Clipboard('#api-key');
 
   // Tell the user when copy is successful
   instance.copyButton.on('success', (event) => {
@@ -58,7 +73,7 @@ Template.apiKey.onRendered(function () {
     sAlert.success(message);
     // Show success message only once
     event.clearSelection();
-  });
+  }); */
 });
 
 Template.apiKey.onDestroyed(function () {
