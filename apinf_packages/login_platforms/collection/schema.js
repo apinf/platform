@@ -17,14 +17,14 @@ LoginPlatforms.schema = new SimpleSchema({
   },
   'githubConfiguration.clientId': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
   'githubConfiguration.secret': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
@@ -35,23 +35,69 @@ LoginPlatforms.schema = new SimpleSchema({
   },
   'fiwareConfiguration.clientId': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
   'fiwareConfiguration.secret': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
     },
   },
   'fiwareConfiguration.rootURL': {
     type: String,
-    optional: true,
+    optional: false,
     autoform: {
       placeholder: 'xxx',
+    },
+  },
+  hslConfiguration: {
+    type: Object,
+    optional: true,
+  },
+  'hslConfiguration.clientId': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'hslConfiguration.secret': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: 'xxx',
+    },
+  },
+  'hslConfiguration.serverUrl': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: 'https://secure-server.fi',
+    },
+  },
+  'hslConfiguration.authorizationEndpoint': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: '/auth',
+    },
+  },
+  'hslConfiguration.tokenEndpoint': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: '/token',
+    },
+  },
+  'hslConfiguration.userinfoEndpoint': {
+    type: String,
+    optional: false,
+    autoform: {
+      placeholder: '/userInfo',
     },
   },
 });

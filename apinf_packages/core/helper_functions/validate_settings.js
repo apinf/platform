@@ -21,10 +21,25 @@ export function githubSettingsValid (LoginPlatforms) {
 export function fiwareSettingsValid (LoginPlatforms) {
   // Verifies if LoginPlatforms exists and if it has the fiwareConfiguration property
   if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.fiwareConfiguration) {
-    // Assigns object referece to variable for better readability
+    // Assigns object reference to variable for better readability
     const fiwareConfiguration = LoginPlatforms.fiwareConfiguration;
     // Verifies if fiwareConfiguration property has clientId, rootURL and secret
     if (fiwareConfiguration.clientId && fiwareConfiguration.secret && fiwareConfiguration.rootURL) {
+      // returns true if get to this point. It has all the required fields
+      return true;
+    }
+  }
+  // Returns false if LoginPlatforms does not have all the required fields
+  return false;
+}
+
+// Validates OIDC configuration on LoginPlatforms
+export function oidcSettingsValid (LoginPlatforms) {
+  // Verifies if LoginPlatforms exists and if it has the fiwareConfiguration property
+  if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.oidcConfiguration) {
+    // Verifies if oidcConfiguration property has clientId and secret
+    if (LoginPlatforms.oidcConfiguration.clientId &&
+        LoginPlatforms.oidcConfiguration.secret) {
       // returns true if get to this point. It has all the required fields
       return true;
     }
