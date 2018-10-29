@@ -3,9 +3,6 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-// Node packages imports
-import slugs from 'limax';
-
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 
