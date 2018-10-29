@@ -154,6 +154,15 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true,
     unique: true,
     regEx: proxyBasePathRegEx,
+    custom () {
+      let validation = null;
+      const admin = '/admin/';
+      const result = this.value.includes(admin);
+      if ((this.value === '/signup/') || (result)) {
+        validation = 'proxyBackendForm_forbiddenPrefixMessage';
+      }
+      return validation;
+    },
   },
   'url_matches.$.backend_prefix': {
     type: String,
@@ -183,6 +192,8 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
+SimpleSchema.messages({ proxyBackendForm_forbiddenPrefixMessage:
+  'You cannot use the following proxy base paths: / , /signup/ , /admin/ and /admin/...' });
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 

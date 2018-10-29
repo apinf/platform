@@ -20,7 +20,6 @@ const invalidIdMessage = TAPi18n.__('invalidIdMessage');
 const invalidDomainMessage = TAPi18n.__('invalidDomainMessage');
 const invalidEmailMessage = TAPi18n.__('invalidEmailMessage');
 const invalidProxyBasePathMessage = TAPi18n.__('invalidProxyBasePathMessage');
-const proxyBackendForm_forbiddenPrefixMessage = TAPi18n.__('proxyBackendForm_forbiddenPrefixMessage');
 const invalidApiBasePathMessage = TAPi18n.__('invalidApiBasePathMessage');
 const invalidApiRequiredMessage = TAPi18n.__('invalidApiRequiredMessage');
 const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
@@ -33,7 +32,6 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Domain, msg: invalidDomainMessage },
     { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
     { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
-    { exp: proxyBasePathRegEx, msg: proxyBackendForm_forbiddenPrefixMessage },
     { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
     { exp: apiRequiredHeaderRegEx, msg: invalidApiRequiredMessage },
     { exp: contactPhone, msg: invalidContactPhoneMessage },
