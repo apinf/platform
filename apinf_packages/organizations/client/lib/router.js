@@ -1,7 +1,10 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+// Node packages imports
+import slugs from 'limax';
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
@@ -50,6 +53,12 @@ FlowRouter.route('/organizations/:orgSlug/', {
     Meteor.call('getOrganizationProfile', slug, (error, organizationProfile) => {
       // Check if Organization exists
       if (organizationProfile) {
+        // Transliterates special characters in Organization name
+        let nameSlug;
+        if (organizationProfile.name) {
+          nameSlug = slugs(organizationProfile.name, { tone: false });
+        }
+
         // Add RSS Link
         DocHead.addLink({
           rel: 'alternate',

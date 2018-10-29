@@ -9,6 +9,10 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
+
+// Meteor contributed packages imports
+import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
@@ -26,6 +30,26 @@ Template.loginPlatforms.onCreated(function () {
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
   });
+  // Check if there is some changes in Configuration
+  // If there are, update the LoginPlatform
+  promisifyCall('updateLoginPlatformsFromConfiguration')
+  .then(result => {
+    if (result) {
+      // Get settings form success message translation
+      const message = TAPi18n.__('settings_successMessage');
+      // Alert the user of successful save
+      sAlert.success(message);
+    }
+  })
+  .catch(err => {
+    if (err) {
+      // Get settings form success message translation
+      const message = TAPi18n.__('settings_errorMessage');
+      // Alert the user of successful save
+      sAlert.error(message, { timeout: 'none' });
+    }
+  });
+
   // Subscription to feedback collection
   instance.subscribe('loginPlatforms');
 });
