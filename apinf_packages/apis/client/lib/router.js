@@ -38,17 +38,6 @@ FlowRouter.route('/apis/:slug/', {
     Meteor.call('getApiBySlug', slug, (error, api) => {
       // Check if API exists
       if (api) {
-        // Transliterates special characters
-
-        let nameSlug;
-        if (api.name) {
-          nameSlug = slugs(api.name, { tone: false });
-        }
-        let descriptionSlug;
-        if (api.description) {
-          descriptionSlug = slugs(api.description, { tone: false });
-        }
-
         // Add RSS Link (only for public apis)
         if (api.isPublic) {
           DocHead.addLink({
