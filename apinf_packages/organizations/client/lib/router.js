@@ -55,17 +55,17 @@ FlowRouter.route('/organizations/:orgSlug/', {
           rel: 'alternate',
           type: 'application/rss+xml',
           href: `/rss/organizations/?slug=${slug}`,
-          title: `RSS Feed for ${organizationProfile.name}`,
+          // title: `RSS Feed for ${organizationProfile.name}`,
         });
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
         DocHead.addMeta({ property: 'og:image', content: organizationProfile.logoUrl });
-        DocHead.addMeta({ property: 'og:title', content: organizationProfile.name });
+        // DocHead.addMeta({ property: 'og:title', content: organizationProfile.name });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
         // Twitter
         DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
-        DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
+        // DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
         DocHead.addMeta({ property: 'twitter:image', content: organizationProfile.logoUrl });
 
         BlazeLayout.render('masterLayout', { main: 'organizationProfile' });
