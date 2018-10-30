@@ -77,7 +77,7 @@ Meteor.methods({
           to: dateRange.onePeriodAgo,
         };
 
-        return promisifyCall('buildRequestTopicsTableData', topicsList, timeframe, 
+        return promisifyCall('buildRequestTopicsTableData', topicsList, timeframe,
                              'previous', previousDateRange);
       })
       .then(response => {
