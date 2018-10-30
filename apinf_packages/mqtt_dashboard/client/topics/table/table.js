@@ -85,7 +85,7 @@ Template.displayTopicsTable.onCreated(function () {
     });
 
     // Process data
-    // eslint-disable-line max-len
+    // eslint-disable-next-line
     Meteor.call('fetchRemainingTrafficData', topics, instance.timeframe, instance.dateRange, (error, result) => {
       // Mark is ready
       instance.remainingTrafficReady.set(true);
