@@ -204,6 +204,11 @@
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
   "apiProxy_headerText": "Proxy backend configuration",
+  "apiUmbrellaProxyForm_rateLimitMode_options": {
+    "custom": "Custom rate limits",
+    "unlimited": "Unlimited requests",
+    "custom-header": "Custom rate limits based on response header"
+  },
   "apiUserAuthorizationForm_addButton_text": "Add authorized user",
   "apiUserAuthorizationForm_header_text": "Add authorized user",
   "apiUserAuthorizationForm_helpText_usernameEmail": "Give either username or email address",
@@ -469,11 +474,16 @@
   "mostFrequentUsersTable_columnTitle_path": "Request path",
   "mostFrequentUsersTable_text_showOfUsers": "Show __count__ of __all__ users",
   "mostFrequentUsersTable_lintText_downloadFile": "Download all users",
+  "mqttDashboardNavbar_linkText_mqttDashboard": "MQTT Dashboard",
+  "mqttDashboardNavbar_linkText_topics": "Topics",
+  "mqttDashboardNavbar_linkText_acl": "ACL",
+  "mqttDashboardNavbar_linkText_restDashboard": "REST Dashboard",
   "navbar_addAPIBackend": "Add API",
   "navbar_apis": "APIs",
   "navbar_my_apis": "My APIs",
   "navbar_organizations": "Organizations",
   "navbar_dashboard": "Dashboard",
+  "navbar_mqttDashboard": "MQTT Dashboard",
   "navbar_signIn": "Sign In",
   "navbar_signUp": "Sign Up",
   "navbar_users": "Users",
@@ -626,6 +636,7 @@
   "proxyItem_apiKey": "API Key",
   "proxyItem_apiToken": "API Token",
   "proxyItem_elasticsearch": "Elasticsearch URL",
+  "proxyItem_postgresEndpoint": "Postgres Endpoint",
   "proxyItem_brokerEndpoints": "Broker Endpoints",
   "proxyItem_brokerEndpoints_table_protocol": "Protocol",
   "proxyItem_brokerEndpoints_table_host": "Host",
@@ -885,6 +896,12 @@
           "label": "Only platform administrators are allowed to add new Organizations"
         }
       },
+      "supportsGraphql": {
+        "label": "Enabled"
+      },
+      "developmentFeatures": {
+        "label": "Enabled"
+      },
       "mail": {
         "enabled": {
           "label": "Enabled"
@@ -1017,7 +1034,8 @@
             "label": "Rate limit mode",
             "options": {
               "custom": "Custom rate limits",
-              "unlimited": "Unlimited requests"
+              "unlimited": "Unlimited requests",
+              "custom-header": "Custom rate limits based on response header"
             }
           },
           "rate_limits": {
@@ -1194,6 +1212,7 @@
   "settings_sdkCode_generator": "SDK Code Generator",
   "settings_successMessage": "Settings saved",
   "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
+  "settings_title_supportsGraphql": "API Umbrella proxy supports GraphQL requests",
   "settingsPage_title_settings": "Settings",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account Settings",

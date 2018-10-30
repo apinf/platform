@@ -10,6 +10,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 FlowRouter.route('/', {
   name: 'home',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'home' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'home' });
   },
 });

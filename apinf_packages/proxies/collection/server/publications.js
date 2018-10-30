@@ -29,12 +29,18 @@ Meteor.publish('allProxies', function () {
 
 Meteor.publish('proxyCount', function () {
   // Publish count of proxies
-  Counts.publish(this, 'proxyCount', Proxies.find());
+  Counts.publish(this, 'proxyCount', Proxies.find({ type: 'apiUmbrella' }));
 });
 
-Meteor.publish('publicProxyDetails', () => {
+Meteor.publish('emqProxyCount', function () {
+  // Publish count of proxies
+  Counts.publish(this, 'emqProxyCount', Proxies.find({ type: 'emq' }));
+});
+
+Meteor.publish('publicProxyDetails', (type) => {
+  check(type, String);
   // Return all proxies with public data: name, url, type
-  return Proxies.find({}, {
+  return Proxies.find({ type }, {
     fields: {
       _id: 1,
       name: 1,
