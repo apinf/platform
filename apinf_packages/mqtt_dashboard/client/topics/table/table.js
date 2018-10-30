@@ -85,7 +85,8 @@ Template.displayTopicsTable.onCreated(function () {
     });
 
     // Process data
-    Meteor.call('fetchRemainingTrafficData', topics, instance.timeframe, instance.dateRange, (error, result) => {
+    Meteor.call('fetchRemainingTrafficData', topics, instance.timeframe, 
+                 instance.dateRange, (error, result) => {
       // Mark is ready
       instance.remainingTrafficReady.set(true);
 

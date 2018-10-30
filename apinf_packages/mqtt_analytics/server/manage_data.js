@@ -7,14 +7,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-// Collections imports
-import AnalyticsData from '/apinf_packages/analytics/collection';
-import ProxyBackends from '/apinf_packages/proxy_backends/collection';
-
-// Npm packages imports
-import _ from 'lodash';
-import moment from 'moment/moment';
-
 // APInf imports
 import EmqAnalyticsData from '../collection';
 import eventTypeConvert from '../lib/event_type_convert';

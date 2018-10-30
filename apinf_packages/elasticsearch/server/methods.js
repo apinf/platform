@@ -74,7 +74,7 @@ Meteor.methods({
     return new Promise((resolve, reject) => {
       HTTP.call('GET', url, { content, headers }, (error, response) => {
         if (response.statusCode === 200) resolve(response.data.responses);
-        reject(response.content)
+        reject(response.content);
       });
     });
   },

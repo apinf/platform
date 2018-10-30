@@ -22,12 +22,13 @@ Meteor.startup(() => {
 
   // Make sure EMQ Proxy exists, any Topic is stored & no analytics data exists
   if (proxy && topics.length > 0 && analyticsData === 0) {
+    // Later perhaps is a syncCall necessary
     // get data about last 60 days
-    const daysCount = 60;
+    // const daysCount = 60;
     // get data about last 48 hours
-    const hoursCount = 24;
+    // const hoursCount = 24;
     // Set the last day is "today"
-    const lastDayType = 'today';
+    // const lastDayType = 'today';
 
     // Make sync call
     // eslint-disable-next-line

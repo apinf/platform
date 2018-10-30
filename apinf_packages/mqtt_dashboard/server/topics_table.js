@@ -77,7 +77,8 @@ Meteor.methods({
           to: dateRange.onePeriodAgo,
         };
 
-        return promisifyCall('buildRequestTopicsTableData', topicsList, timeframe, 'previous', previousDateRange);
+        return promisifyCall('buildRequestTopicsTableData', topicsList, timeframe, 
+                             'previous', previousDateRange);
       })
       .then(response => {
         if (response[0].error) throw new Meteor.Error(response[0].error.type);
@@ -158,6 +159,6 @@ Meteor.methods({
 
         return { topicsData, trend };
       })
-      .catch(error => { console.log(error);throw new Meteor.Error(error); });
+      .catch(error => { console.log(error); throw new Meteor.Error(error); });
   },
 });

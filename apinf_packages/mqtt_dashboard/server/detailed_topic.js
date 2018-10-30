@@ -5,6 +5,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import _ from 'lodash';
 
 // Collection imports
 import StoredTopics from '../collection';
@@ -15,7 +16,6 @@ import {
   calculateSecondsCount,
   calculateBandwidthKbs,
 } from '../lib/helpers';
-import _ from 'lodash';
 import promisifyCall from '../../core/helper_functions/promisify_call';
 import {
   histogramTopicGeneralType,

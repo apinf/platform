@@ -61,6 +61,7 @@ Meteor.methods({
       clientFilters.filters[topic] = { term: { [field]: 0 } };
     });
 
+    // eslint-disable-line no-unused-vars
     const { proxyId, daysCount, hoursCount, lastDayType } = params;
 
     // Take last hoursCount hours
