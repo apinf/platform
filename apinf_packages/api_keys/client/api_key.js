@@ -76,12 +76,14 @@ Template.apiKey.onRendered(() => {
   }); */
 });
 
+/*
 Template.apiKey.onDestroyed(function () {
   // Get object of Clipboard
   const copyButton = this.copyButton;
   // Free up memory
   copyButton.destroy();
 });
+*/
 
 Template.apiKey.events({
   'click #get-api-key': function () {
