@@ -72,7 +72,7 @@ const updateFunctions = {
     }
 
     // Return status message
-    return 'OIDC configuration updated successfully';
+    return 'HSL configuration updated successfully';
   },
 };
 
