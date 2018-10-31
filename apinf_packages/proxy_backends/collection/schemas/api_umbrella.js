@@ -6,6 +6,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+import { TAPi18n } from 'meteor/tap:i18n';
+
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
 
@@ -159,7 +161,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
       const admin = '/admin/';
       const result = this.value.includes(admin);
       if ((this.value === '/signup/') || (result)) {
-        validation = 'proxyBackendForm_forbiddenPrefixMessage';
+        validation = 'invalidProxyBackendForm_forbiddenPrefixMessage';
       }
       return validation;
     },
@@ -192,8 +194,8 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
-SimpleSchema.messages({ proxyBackendForm_forbiddenPrefixMessage:
-  'You cannot use the following proxy base paths: / , /signup/ , /admin/ and /admin/...' });
+SimpleSchema.messages({ invalidProxyBackendForm_forbiddenPrefixMessage:
+  TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage') });
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 
