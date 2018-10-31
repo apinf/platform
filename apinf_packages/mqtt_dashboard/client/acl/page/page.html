@@ -1,0 +1,116 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="aclPage">
+  <div class="container layout-content">
+    <div class="row form-group">
+      <div class="col-xs-12">
+        <strong class="text-uppercase">
+          Access control rules
+        </strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        {{# if dataIsReady }}
+          {{# if error }}
+            <div class="alert alert-danger" role="alert">
+              <p>
+                <strong>
+                  No Access Control Rules are available.
+                </strong>
+                Make sure settings of Postgres is correct or Try to reload page
+              </p>
+            </div>
+          {{/ if }}
+
+          {{# unless error }}
+            {{# if aclRules }}
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Allow</th>
+                  <th>Access</th>
+                  <th>Topic</th>
+                  <th>Username</th>
+                  <th>IP Address</th>
+                  <th>Client ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {{# each rule in aclRules }}
+                    <tr class="acl-rule">
+                      <td class="text-capitalize">
+                        {{ allowValue rule.allow }}
+                      </td>
+                      <td class="text-capitalize">
+                        {{ accessValue rule.access }}
+                      </td>
+                      <td>
+                        {{ rule.topic }}
+                      </td>
+                      <td>
+                        {{ rule.username }}
+                      </td>
+                      <td>
+                        {{ rule.ipaddr }}
+                      </td>
+                      <td>
+                        <span class="pull-left">
+                          {{ rule.clientid }}
+                        </span>
+                        <div class="dropdown">
+                          <span
+                            class="dropdown-toggle pull-right"
+                            data-toggle="dropdown"
+                            role="button"
+                            id="acl-actions"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                          </span>
+                          <ul class="dropdown-menu pull-right">
+                            <li class="acl-edit" data-index="{{ @index }}">
+                              Edit
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li class="acl-delete text-danger" data-id="{{ rule.id }}" data-index="INDEX">
+                              Delete
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  {{/ each }}
+                </tbody>
+              </table>
+            {{ else }}
+              <div class="alert alert-warning" role="alert">
+                <p>
+                  <strong>
+                    No Access Control Rules exist.
+                  </strong>
+                  Add one using the button
+                </p>
+              </div>
+            {{/ if }}
+
+            {{# if formEdited }}
+              {{> addForm aclRule=selectedAclRule }}
+            {{ else }}
+              <button class="btn btn-success form-group" id="add-acl">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Add rule
+              </button>
+            {{/ if }}
+          {{/ unless }}
+        {{ else }}
+          {{> spinner }}
+        {{/ if }}
+      </div>
+    </div>
+  </div>
+</template>

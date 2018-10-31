@@ -17,7 +17,7 @@ FlowRouter.route('/apis/new', {
     // Check if API exists
     Meteor.call('currentUserCanAddApi', (error, canAdd) => {
       if (canAdd) {
-        BlazeLayout.render('masterLayout', { main: 'addApi' });
+        BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'addApi' });
       } else {
         FlowRouter.go('forbidden');
       }
@@ -60,7 +60,7 @@ FlowRouter.route('/apis/:slug/', {
         // Ensure current user has permissions to view backend
         Meteor.call('currentUserCanViewApi', slug, (canViewError, userCanViewApi) => {
           if (userCanViewApi) {
-            BlazeLayout.render('masterLayout', { main: 'viewApi' });
+            BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'viewApi' });
           } else {
             // User is not allowed to view API
             FlowRouter.go('forbidden');

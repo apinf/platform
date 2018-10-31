@@ -12,6 +12,6 @@ import signedIn from '/apinf_packages/core/client/lib/router';
 signedIn.route('/settings/proxies', {
   name: 'proxies',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'proxies' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'proxies' });
   },
 });

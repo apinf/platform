@@ -13,6 +13,6 @@ import signedIn from '/apinf_packages/core/client/lib/router';
 signedIn.route('/login-platforms', {
   name: 'login-platforms',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'loginPlatforms' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'loginPlatforms' });
   },
 });

@@ -10,6 +10,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 FlowRouter.route('/documentation/editor', {
   name: 'apiDocumentationEditor',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'apiDocumentationEditor' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'apiDocumentationEditor' });
   },
 });

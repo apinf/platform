@@ -43,7 +43,5 @@ Meteor.publish('singleSetting', (setting) => {
   querySettings.fields[setting] = 1;
 
   // Return a cursor containing only the requested setting from the Settings document
-  const cursor = Settings.find({}, querySettings);
-
-  return cursor;
+  return Settings.find({}, querySettings);
 });
