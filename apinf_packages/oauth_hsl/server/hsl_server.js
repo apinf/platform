@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { OAuth } from 'meteor/oauth';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import { Base64 } from 'js-base64';
 
@@ -47,7 +48,7 @@ const getUserInfo = function (accessToken) {
       }
     );
   } catch (err) {
-    const errText = `Failed to fetch userinfo from OIDC ${serverUserinfoEndpoint}: ${err.message}`;
+    const errText = `Failed to fetch userinfo from HSL ${serverUserinfoEndpoint}: ${err.message}`;
     throw _.extend(new Error(errText), { response: err.response });
   }
   if (debug) console.log('XXX: getUserInfo response: ', response.data);
@@ -80,13 +81,13 @@ const getToken = function (query) {
       }
     );
   } catch (err) {
-    const errMsg = `Failed to get token from OIDC ${serverTokenEndpoint}: ${err.message}`;
+    const errMsg = `Failed to get token from HSL ${serverTokenEndpoint}: ${err.message}`;
     throw _.extend(new Error(errMsg),
       { response: err.response });
   }
   if (response.data.error) {
     // if the http response was a json object with an error attribute
-    const errorMsg = `Failed to complete handshake with OIDC
+    const errorMsg = `Failed to complete handshake with HSL
      ${serverTokenEndpoint}: ${response.data.error}`;
     throw new Error(errorMsg);
   } else {
@@ -94,25 +95,7 @@ const getToken = function (query) {
     return response.data;
   }
 };
-/* Not needed here, at least not now
-const getTokenContent = function (token) {
-  let content = null;
-  if (token) {
-    try {
-      const parts = token.split('.');
-    //  const header = JSON.parse(new Buffer(parts[0], 'base64').toString());
-      content = JSON.parse(new Buffer(parts[1], 'base64').toString());
-    //  const signature = new Buffer(parts[2], 'base64');
-    //  const signed = parts[0] + '.' + parts[1];
-    } catch (err) {
-      this.content = {
-        exp: 0,
-      };
-    }
-  }
-  return content;
-};
-*/
+
 OAuth.registerService('hsl', 2, null, (query) => {
   const debug = false;
   const token = getToken(query);
@@ -132,7 +115,7 @@ OAuth.registerService('hsl', 2, null, (query) => {
   if (debug) console.log('amr=', decodedIdTokenPayloadJSON.amr);
   // Do not allow login without MFA
   if (!decodedIdTokenPayloadJSON.amr.includes('mfa')) {
-    throw new Meteor.Error(403, 'User has not MFA in use.');
+    throw new Meteor.Error(403, TAPi18n.__('oauthHslNoMfa'));
   }
 
   const userinfo = getUserInfo(accessToken);
@@ -147,12 +130,6 @@ OAuth.registerService('hsl', 2, null, (query) => {
   serviceData.expiresAt = expiresAt;
   serviceData.email = userinfo.email;
   serviceData.amr = decodedIdTokenPayloadJSON.amr;
-
-  /* Not needed here, at least not now
-  if (accessToken) {
-    tokenContent = getTokenContent(accessToken);
-  }
-  */
 
   if (token.refresh_token) {
     serviceData.refreshToken = token.refresh_token;

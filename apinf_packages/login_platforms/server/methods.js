@@ -92,7 +92,7 @@ Meteor.methods({
       status = updateFunctions.saveHslConfiguration(settings);
     } catch (error) {
       // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
+      const message = `Update login configuration failed: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
@@ -125,7 +125,7 @@ Meteor.methods({
       const configGithubParameters = ServiceConfiguration.configurations
       .findOne({ service: 'github' });
 
-      // Check Github
+      // Check Github against loginParameters, if existed
       if (!configGithubParameters) {
         // Remove possible login parameters, if no configuration
         if (loginParameters && loginParameters.githubConfiguration) {
@@ -152,7 +152,7 @@ Meteor.methods({
       const configFiwareParameters = ServiceConfiguration.configurations
       .findOne({ service: 'fiware' });
 
-      // Check Fiware
+      // Check Fiware against loginParameters, if existed
       if (!configFiwareParameters) {
         // Remove possible login parameters, if no configuration
         if (loginParameters && loginParameters.fiwareConfiguration) {
@@ -181,7 +181,7 @@ Meteor.methods({
       const configHslParameters = ServiceConfiguration.configurations
       .findOne({ service: 'hsl' });
 
-      // Check OIDC
+      // Check HSL against loginParameters, if existed
       if (!configHslParameters) {
         // Remove possible login parameters, if no configuration
         if (loginParameters && loginParameters.hslConfiguration) {

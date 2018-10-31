@@ -143,6 +143,7 @@ Settings.schema = new SimpleSchema({
       return validation;
     },
   },
+  // This is taken in use after the Next is merged
   loginMethods: {
     type: Object,
     optional: true,

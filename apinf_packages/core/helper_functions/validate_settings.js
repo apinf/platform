@@ -33,7 +33,7 @@ export function fiwareSettingsValid (LoginPlatforms) {
   return false;
 }
 
-// Validates OIDC configuration on LoginPlatforms
+// Validates HSL configuration on LoginPlatforms
 export function oidcSettingsValid (LoginPlatforms) {
   // Verifies if LoginPlatforms exists and if it has the fiwareConfiguration property
   if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.oidcConfiguration) {
