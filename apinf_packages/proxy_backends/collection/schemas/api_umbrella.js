@@ -34,7 +34,7 @@ const RateLimitSchema = new SimpleSchema({
     defaultValue: false,
   },
 });
-
+console.log('Second test on line 37');
 // Internationalize Rate limit schema texts
 RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
