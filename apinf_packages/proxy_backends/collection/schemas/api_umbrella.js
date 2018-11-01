@@ -7,7 +7,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 import { TAPi18n } from 'meteor/tap:i18n';
-
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
 
