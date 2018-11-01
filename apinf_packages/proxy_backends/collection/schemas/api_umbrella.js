@@ -9,7 +9,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
-
+console.log('Just testing');
 const RateLimitSchema = new SimpleSchema({
   duration: {
     type: Number,
