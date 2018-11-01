@@ -18,11 +18,34 @@ const RateLimitSchema = new SimpleSchema({
   limit_by: {
     type: String,
     optional: true,
-    allowedValues: [
-      'apiKey',
-      'ip',
-    ],
-    defaultValue: 'apiKey',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label: 'API Key',
+            value: 'apiKey',
+          },
+          {
+            label: 'IP Address',
+            value: 'ip',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label: 'Origin Header',
+            value: 'origin',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'apiKey',
+    },
   },
   limit: {
     type: Number,
@@ -84,11 +107,44 @@ const SettingsSchema = new SimpleSchema({
   rate_limit_mode: {
     type: String,
     optional: false,
-    allowedValues: [
-      'custom',
-      'unlimited',
-    ],
-    defaultValue: 'unlimited',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.unlimited');
+            },
+            value: 'unlimited',
+          },
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom');
+            },
+            value: 'custom',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom-header');
+            },
+            value: 'custom-header',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'unlimited',
+    },
+  },
+  rate_limit_cost_header: {
+    type: String,
+    optional: true,
   },
   rate_limits: {
     type: [RateLimitSchema],

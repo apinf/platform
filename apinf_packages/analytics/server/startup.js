@@ -60,6 +60,6 @@ Meteor.startup(() => {
 
   if (proxies.length > 0 && proxyBackendsCount > 0) {
     // Restart all cron tasks are related to fetching Analytics Data
-    Meteor.call('restartAnalyticsDataCron');
+    // Meteor.call('restartAnalyticsDataCron');
   }
 });

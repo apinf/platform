@@ -1,0 +1,27 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiSettingsAnalytics">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+        API Analytics
+      </h2>
+    </div>
+    <div class="panel-body">
+      {{# autoForm id="updateApiAnalytics" type="normal" schema=updateAnalyitcsSchema }}
+        <fieldset>
+          {{> afQuickField type="hidden" name='proxyBackendId' value=proxyBackend._id }}
+          {{> afQuickField type="hidden" name='lastDay' value='today' }}
+          {{> afQuickField name='daysCount' }}
+        </fieldset>
+        <button type="submit" class="btn btn-success">
+          Update
+        </button>
+      {{/ autoForm }}
+    </div>
+  </div>
+</template>

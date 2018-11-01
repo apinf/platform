@@ -29,8 +29,12 @@ Template.viewApi.onCreated(function () {
 
   // Subscribe to public proxy details
   templateInstance.subscribe('proxyCount');
-  // Subscribe to public proxy details for proxy form
-  templateInstance.subscribe('publicProxyDetails');
+  // Subscribe to public proxy details (particular type)
+  templateInstance.subscribe('publicProxyDetails', 'apiUmbrella');
+  // Subscribe to Settings "supportsGraphql"
+  templateInstance.subscribe('singleSetting', 'supportsGraphql');
+  // Subscribe to development Features settings
+  templateInstance.subscribe('singleSetting', 'developmentFeatures');
 
   // Using to get updated subscription
   templateInstance.autorun(() => {

@@ -12,6 +12,6 @@ import signedIn from '/apinf_packages/core/client/lib/router';
 signedIn.route('/settings', {
   name: 'settings',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'settings' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'settings' });
   },
 });
