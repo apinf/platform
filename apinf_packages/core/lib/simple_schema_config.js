@@ -10,8 +10,13 @@ import { TAPi18n } from 'meteor/tap:i18n';
 // APInf imports
 import {
   apiBasePathRegEx,
+  apiRequiredHeaderRegEx,
   proxyBasePathRegEx,
 } from '/apinf_packages/proxy_backends/collection/regex';
+import {
+  apiMonitoringEndpointRegEx,
+  apiEndPointRegEx,
+} from '/apinf_packages/monitoring/collection/lib/regex';
 import contactPhone from '/apinf_packages/organizations/collection/regex';
 
 const invalidUrlMessage = TAPi18n.__('invalidUrlMessage');
@@ -20,7 +25,10 @@ const invalidDomainMessage = TAPi18n.__('invalidDomainMessage');
 const invalidEmailMessage = TAPi18n.__('invalidEmailMessage');
 const invalidProxyBasePathMessage = TAPi18n.__('invalidProxyBasePathMessage');
 const invalidApiBasePathMessage = TAPi18n.__('invalidApiBasePathMessage');
+const invalidApiRequiredMessage = TAPi18n.__('invalidApiRequiredMessage');
 const invalidContactPhoneMessage = TAPi18n.__('invalidContactPhoneMessage');
+const invalidApiMonitoringEndpointMessage = TAPi18n.__('invalidApiMonitoringEndpointMessage');
+const invalidApiEndpointMessage = TAPi18n.__('invalidApiEndpointMessage');
 
 SimpleSchema.messages({
   regEx: [
@@ -31,6 +39,9 @@ SimpleSchema.messages({
     { exp: SimpleSchema.RegEx.Email, msg: invalidEmailMessage },
     { exp: proxyBasePathRegEx, msg: invalidProxyBasePathMessage },
     { exp: apiBasePathRegEx, msg: invalidApiBasePathMessage },
+    { exp: apiRequiredHeaderRegEx, msg: invalidApiRequiredMessage },
     { exp: contactPhone, msg: invalidContactPhoneMessage },
+    { exp: apiEndPointRegEx, msg: invalidApiEndpointMessage },
+    { exp: apiMonitoringEndpointRegEx, msg: invalidApiMonitoringEndpointMessage },
   ],
 });

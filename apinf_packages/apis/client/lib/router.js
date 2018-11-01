@@ -17,7 +17,7 @@ FlowRouter.route('/apis/new', {
     // Check if API exists
     Meteor.call('currentUserCanAddApi', (error, canAdd) => {
       if (canAdd) {
-        BlazeLayout.render('masterLayout', { main: 'addApi' });
+        BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'addApi' });
       } else {
         FlowRouter.go('forbidden');
       }
@@ -41,26 +41,26 @@ FlowRouter.route('/apis/:slug/', {
             rel: 'alternate',
             type: 'application/rss+xml',
             href: `/rss/apis/?slug=${slug}`,
-            title: `RSS Feed for ${api.name}`,
+            // title: `RSS Feed for ${api.name}`,
           });
         }
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
         DocHead.addMeta({ property: 'og:image', content: api.logoUrl });
-        DocHead.addMeta({ property: 'og:title', content: api.name });
-        DocHead.addMeta({ property: 'og:description', content: api.description });
+        // DocHead.addMeta({ property: 'og:title', content: api.name });
+        // DocHead.addMeta({ property: 'og:description', content: api.description });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
         // Twitter
         DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
-        DocHead.addMeta({ property: 'twitter:title', content: api.name });
-        DocHead.addMeta({ property: 'twitter:description', content: api.description });
+        // DocHead.addMeta({ property: 'twitter:title', content: api.name });
+        // DocHead.addMeta({ property: 'twitter:description', content: api.description });
         DocHead.addMeta({ property: 'twitter:image', content: api.logoUrl });
 
         // Ensure current user has permissions to view backend
         Meteor.call('currentUserCanViewApi', slug, (canViewError, userCanViewApi) => {
           if (userCanViewApi) {
-            BlazeLayout.render('masterLayout', { main: 'viewApi' });
+            BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'viewApi' });
           } else {
             // User is not allowed to view API
             FlowRouter.go('forbidden');

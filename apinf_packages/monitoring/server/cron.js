@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { Match, check } from 'meteor/check';
 
 // Meteor contributed packages imports
 import { SyncedCron } from 'meteor/percolate:synced-cron';
@@ -18,13 +18,14 @@ import Apis from '/apinf_packages/apis/collection';
 import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
 
 Meteor.methods({
-  startCron (apiId, url) {
+  startCron (apiId, url, endPoint) {
     // Make sure apiId is a String
     check(apiId, String);
-
     // Make sure url is a String
     check(url, String);
-
+    // Make sure endPoint is a String
+    // eslint-disable-next-line new-cap
+    check(endPoint, Match.Maybe(String));
     // Create unique name for Cron job
     const uniqueName = `Monitoring: ${apiId}`;
 
@@ -43,7 +44,7 @@ Meteor.methods({
       },
       job () {
         // Get API status using http request
-        Meteor.call('getApiStatus', apiId, url);
+        Meteor.call('getApiStatus', apiId, url, endPoint);
       },
     });
   },
@@ -67,8 +68,8 @@ Meteor.methods({
     _.forEach(monitoringEnabled, (data) => {
       // If enabled is true then switch the monitoring
       if (data.enabled) {
-        Meteor.call('getApiStatus', data.apiId, data.url);
-        Meteor.call('startCron', data.apiId, data.url);
+        Meteor.call('getApiStatus', data.apiId, data.url, data.endPoint);
+        Meteor.call('startCron', data.apiId, data.url, data.endPoint);
       }
     });
   },

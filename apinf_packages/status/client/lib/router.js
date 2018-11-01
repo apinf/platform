@@ -10,6 +10,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 FlowRouter.route('/status', {
   name: 'statusCheck',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'statusCheck' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'statusCheck' });
   },
 });
