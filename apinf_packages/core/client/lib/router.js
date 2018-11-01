@@ -24,7 +24,7 @@ const signedIn = FlowRouter.group({
 FlowRouter.route('/not-authorized', {
   name: 'notAuthorized',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'notAuthorized' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'notAuthorized' });
   },
 });
 
@@ -32,14 +32,14 @@ FlowRouter.route('/not-authorized', {
 FlowRouter.route('/forbidden', {
   name: 'forbidden',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'forbidden' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'forbidden' });
   },
 });
 
 // Define 404 route
 FlowRouter.notFound = {
   action () {
-    BlazeLayout.render('masterLayout', { main: 'notFound' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'notFound' });
   },
 };
 

@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -36,7 +36,7 @@ FlowRouter.route('/organizations', {
   }],
   name: 'organizationCatalog',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'organizationCatalog' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'organizationCatalog' });
   },
 });
 
@@ -55,20 +55,20 @@ FlowRouter.route('/organizations/:orgSlug/', {
           rel: 'alternate',
           type: 'application/rss+xml',
           href: `/rss/organizations/?slug=${slug}`,
-          title: `RSS Feed for ${organizationProfile.name}`,
+          // title: `RSS Feed for ${organizationProfile.name}`,
         });
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
         DocHead.addMeta({ property: 'og:image', content: organizationProfile.logoUrl });
-        DocHead.addMeta({ property: 'og:title', content: organizationProfile.name });
+        // DocHead.addMeta({ property: 'og:title', content: organizationProfile.name });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
         // Twitter
         DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
-        DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
+        // DocHead.addMeta({ property: 'twitter:title', content: organizationProfile.name });
         DocHead.addMeta({ property: 'twitter:image', content: organizationProfile.logoUrl });
 
-        BlazeLayout.render('masterLayout', { main: 'organizationProfile' });
+        BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'organizationProfile' });
       } else {
         // If Organization doesn't exist, show 'Not Found'
         FlowRouter.go('notFound');
