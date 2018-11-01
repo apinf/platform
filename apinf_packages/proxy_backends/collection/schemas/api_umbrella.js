@@ -9,7 +9,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
-console.log('Just testing');
+
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
+
 const RateLimitSchema = new SimpleSchema({
   duration: {
     type: Number,
@@ -57,8 +60,7 @@ const RateLimitSchema = new SimpleSchema({
     defaultValue: false,
   },
 });
-console.log('Second test on line 37');
-console.log('Second test on line 38');
+
 // Internationalize Rate limit schema texts
 RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
