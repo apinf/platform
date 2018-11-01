@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
+
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
 console.log('Just testing');
@@ -34,6 +35,7 @@ const RateLimitSchema = new SimpleSchema({
   },
 });
 console.log('Second test on line 37');
+console.log('Second test on line 38');
 // Internationalize Rate limit schema texts
 RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
