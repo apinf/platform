@@ -33,13 +33,13 @@ export function fiwareSettingsValid (LoginPlatforms) {
   return false;
 }
 
-// Validates OIDC configuration on LoginPlatforms
-export function oidcSettingsValid (LoginPlatforms) {
+// Validates HSL configuration on LoginPlatforms
+export function hslSettingsValid (LoginPlatforms) {
   // Verifies if LoginPlatforms exists and if it has the fiwareConfiguration property
-  if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.oidcConfiguration) {
-    // Verifies if oidcConfiguration property has clientId and secret
-    if (LoginPlatforms.oidcConfiguration.clientId &&
-        LoginPlatforms.oidcConfiguration.secret) {
+  if ((typeof LoginPlatforms !== 'undefined') && LoginPlatforms.hslConfiguration) {
+    // Verifies if hsl property has clientId and secret
+    if (LoginPlatforms.hslConfiguration.clientId &&
+        LoginPlatforms.hslConfiguration.secret) {
       // returns true if get to this point. It has all the required fields
       return true;
     }

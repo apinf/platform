@@ -492,6 +492,7 @@
   "notAuthorized_Title": "Not Authorized",
   "notFound_Message_Part1": "We could not find the page you were looking for.",
   "notFound_Title": "Oops! Page not found.",
+  "oauthHslNoMfa": "User has not MFA in use!", 
   "organizationApis_connectButton": "Connect",
   "organizationApisForm_successText": "The API and Organization are now connected.",
   "organizationCatalog_Title": "Organizations",

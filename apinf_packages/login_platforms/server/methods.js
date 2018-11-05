@@ -73,7 +73,7 @@ const updateFunctions = {
     }
 
     // Return status message
-    return 'OIDC configuration updated successfully';
+    return 'HSL configuration updated successfully';
   },
 };
 
@@ -178,11 +178,11 @@ Meteor.methods({
         loginParameters.fiwareConfiguration = fiwareConfiguration;
         changesFound = true;
       }
-      // Get parameters for OIDC from configuration DB
+      // Get parameters for HSL from configuration DB
       const configHslParameters = ServiceConfiguration.configurations
       .findOne({ service: 'hsl' });
 
-      // Check OIDC
+      // Check HSL
       if (!configHslParameters) {
         // Remove possible login parameters, if no configuration
         if (loginParameters && loginParameters.hslConfiguration) {
@@ -212,7 +212,7 @@ Meteor.methods({
           tokenEndpoint: configHslParameters.tokenEndpoint,
           userinfoEndpoint: configHslParameters.userinfoEndpoint,
         };
-        // store OIDC values
+        // store HSL values
         loginParameters.hslConfiguration = hslConfiguration;
         changesFound = true;
       }
