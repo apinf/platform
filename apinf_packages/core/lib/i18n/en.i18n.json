@@ -440,6 +440,7 @@
   "invalidIdMessage": "Must be a valid alphanumeric ID",
   "invalidDomainMessage": "Must be a valid domain",
   "invalidEmailMessage": "Must be a valid e-mail address",
+  "invalidProxyBackendForm_forbiddenPrefixMessage": "You cannot use the following proxy base paths: / , /signup/ , /admin/ and /admin/...",
   "invalidProxyBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiMonitoringEndpointMessage": "Must begin with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",

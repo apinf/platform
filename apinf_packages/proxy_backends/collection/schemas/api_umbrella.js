@@ -214,6 +214,15 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true,
     unique: true,
     regEx: proxyBasePathRegEx,
+    custom () {
+      let validation = null;
+      const admin = '/admin/';
+      const result = this.value.includes(admin);
+      if ((this.value === '/signup/') || (result)) {
+        validation = 'invalidProxyBackendForm_forbiddenPrefixMessage';
+      }
+      return validation;
+    },
   },
   'url_matches.$.backend_prefix': {
     type: String,
@@ -243,6 +252,8 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
+SimpleSchema.messages({ invalidProxyBackendForm_forbiddenPrefixMessage:
+  TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage') });
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 
