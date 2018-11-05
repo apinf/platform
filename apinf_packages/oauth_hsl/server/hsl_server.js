@@ -97,7 +97,7 @@ const getToken = function (query) {
 };
 
 OAuth.registerService('hsl', 2, null, (query) => {
-  const debug = true;
+  const debug = false;
   const token = getToken(query);
   if (debug) console.log('XXX: register token:', token);
 
@@ -115,7 +115,9 @@ OAuth.registerService('hsl', 2, null, (query) => {
   if (debug) console.log('amr=', decodedIdTokenPayloadJSON.amr);
   // Do not allow login without MFA
   if (!decodedIdTokenPayloadJSON.amr.includes('mfa')) {
-    throw new Meteor.Error(403, TAPi18n.__('oauthHslNoMfa'));
+    // eslint-disable-next-line
+    const message = TAPi18n.__('oauthHslNoMfa');
+    throw new Meteor.Error(403, message);
   }
 
   const userinfo = getUserInfo(accessToken);
