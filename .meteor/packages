@@ -96,4 +96,3 @@ meteorhacks:aggregate
 apinf:api-umbrella
 apinf:accounts-admin-ui
 oauth
-ostrio:base64

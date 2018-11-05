@@ -23,6 +23,7 @@
     "jquery": "^3.3.1",
     "jquery-bbq": "^1.0.0",
     "jquery.rateit": "^1.0.23",
+    "js-base64": "^2.4.9",
     "js-yaml": "^3.12.0",
     "json2csv": "^3.11.5",
     "limax": "1.6.0",
