@@ -68,7 +68,6 @@ const updateFunctions = {
         authorizationEndpoint: settings.hslConfiguration.authorizationEndpoint,
         tokenEndpoint: settings.hslConfiguration.tokenEndpoint,
         userinfoEndpoint: settings.hslConfiguration.userinfoEndpoint,
-   //     idTokenWhitelistFields: settings.hslConfiguration.idTokenWhitelistFields || [],
       });
     }
 
@@ -93,7 +92,7 @@ Meteor.methods({
       status = updateFunctions.saveHslConfiguration(settings);
     } catch (error) {
       // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
+      const message = `Error in update login method configuration: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
@@ -226,7 +225,7 @@ Meteor.methods({
       }
     } catch (error) {
       // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
+      const message = `Error in update login platform configuration: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
