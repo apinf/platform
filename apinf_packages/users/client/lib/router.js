@@ -44,7 +44,7 @@ FlowRouter.route('/verify-email/:token', {
 signedIn.route('/settings/account', {
   name: 'account',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'account' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'account' });
   },
 });
 
@@ -52,7 +52,7 @@ signedIn.route('/settings/account', {
 signedIn.route('/settings/profile', {
   name: 'profile',
   action () {
-    BlazeLayout.render('masterLayout', { main: 'profile' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'profile' });
   },
 });
 

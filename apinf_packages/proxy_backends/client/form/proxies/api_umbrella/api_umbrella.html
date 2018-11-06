@@ -32,9 +32,9 @@
 
       <!-- validation messages -->
       {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.frontend_prefix' }}
-      <p class="text-danger">
-        {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
-      </p>
+        <p class="text-danger">
+          {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
+        </p>
       {{/ if }}
 
       <!-- help text -->
@@ -78,9 +78,48 @@
           {{ api.url }} <b>/api_base_path/</b>
         </p>
       </div>
+
+      <!-- API port (servers.port) -->
+      <div class="form-group col-md-3" data-required="true">
+        <label for="api-port-field" id="api-port-field-label">
+          {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
+        </label>
+
+        {{> afFieldInput
+          name="apiUmbrella.servers.0.port"
+          value=apiPortHelper
+          class="form-control"
+          aria-describedby="api-port-field-label"
+          id="api-port-field"
+        }}
+
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
+          <p class="text-danger">
+            {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
+          </p>
+        {{/ if }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_apiPort_helpText" }}
+        </p>
+      </div>
     </div>
 
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+
+    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">API Key</label>
+    <!-- Disable API key checkbox -->
+    {{> afQuickField
+      name="apiUmbrella.settings.disable_api_key"
+      type="boolean-checkbox"
+      id="disable-apikey-box"
+    }}
+    <!-- help text -->
+    <p class="help-block" style="margin-top: -1em;">
+      {{_ "proxyBackendForm_disableApiKey_helpText" }}
+    </p>
 
     <!-- Rate limiting -->
     <div id="rate-limiting">
@@ -90,16 +129,23 @@
           firstOption=false
         }}
       </div>
-      {{#if afFieldValueIs
-        name="apiUmbrella.settings.rate_limit_mode"
-        value="custom"
-      }}
-      <div class="col-md-12" id="rate-limits">
-        {{> afQuickField
-          name="apiUmbrella.settings.rate_limits"
-        }}
-      </div>
+
+      {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom" }}
+        <div class="col-md-12" id="rate-limits">
+          {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
+        </div>
       {{/if }}
+
+      <!-- from feature/mqtt-dashboard -->
+      {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom-header" }}
+        <div class="col-md-12" id="rate-limit-cost-header">
+          {{> afQuickField name="apiUmbrella.settings.rate_limit_cost_header" }}
+        </div>
+
+        <div class="col-md-12" id="rate-limits">
+          {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
+        </div>
+      {{/ if }}
     </div>
 
     <!-- IDP App Id -->
@@ -116,20 +162,6 @@
           name="apiUmbrella.sub_settings"
         }}
     </div>
-
-    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
-
-    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">API Key</label>
-    <!-- Disable API key checkbox -->
-    {{> afQuickField
-      name="apiUmbrella.settings.disable_api_key"
-      type="boolean-checkbox"
-      id="disable-apikey-box"
-    }}
-    <!-- help text -->
-    <p class="help-block" style="margin-top: -1em;">
-      {{_ "proxyBackendForm_disableApiKey_helpText" }}
-    </p>
 
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
 

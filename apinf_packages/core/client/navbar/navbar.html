@@ -33,6 +33,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           {{/ if }}
         {{/ if }}
+        {{# if userCanViewMqttDashboard }}
+          <li>
+            <a href="{{ pathFor 'mqtt' }}">
+              <i class="fa fa-area-chart" aria-hidden="true"></i>
+              {{_ "navbar_mqttDashboard" }}
+            </a>
+          </li>
+        {{/ if }}
         <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
           <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
             {{_ "navbar_apis" }}

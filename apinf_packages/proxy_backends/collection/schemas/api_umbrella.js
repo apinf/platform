@@ -5,6 +5,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
+
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
 import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
@@ -17,11 +21,34 @@ const RateLimitSchema = new SimpleSchema({
   limit_by: {
     type: String,
     optional: true,
-    allowedValues: [
-      'apiKey',
-      'ip',
-    ],
-    defaultValue: 'apiKey',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label: 'API Key',
+            value: 'apiKey',
+          },
+          {
+            label: 'IP Address',
+            value: 'ip',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label: 'Origin Header',
+            value: 'origin',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'apiKey',
+    },
   },
   limit: {
     type: Number,
@@ -82,11 +109,44 @@ const SettingsSchema = new SimpleSchema({
   rate_limit_mode: {
     type: String,
     optional: false,
-    allowedValues: [
-      'custom',
-      'unlimited',
-    ],
-    defaultValue: 'unlimited',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.unlimited');
+            },
+            value: 'unlimited',
+          },
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom');
+            },
+            value: 'custom',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom-header');
+            },
+            value: 'custom-header',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'unlimited',
+    },
+  },
+  rate_limit_cost_header: {
+    type: String,
+    optional: true,
   },
   rate_limits: {
     type: [RateLimitSchema],
@@ -154,6 +214,15 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true,
     unique: true,
     regEx: proxyBasePathRegEx,
+    custom () {
+      let validation = null;
+      const admin = '/admin/';
+      const result = this.value.includes(admin);
+      if ((this.value === '/signup/') || (result)) {
+        validation = 'invalidProxyBackendForm_forbiddenPrefixMessage';
+      }
+      return validation;
+    },
   },
   'url_matches.$.backend_prefix': {
     type: String,
@@ -183,6 +252,8 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
+SimpleSchema.messages({ invalidProxyBackendForm_forbiddenPrefixMessage:
+  TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage') });
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 

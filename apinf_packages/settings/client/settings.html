@@ -18,17 +18,37 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='developmentFeatures' id="development-features" }}
       <div class="panel panel-default">
         <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_title_supportsGraphql" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='supportsGraphql' id="supports-graphql" }}
+          </span>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_sdkCode_generator" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
+          </span>
+        </div>
+        {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
+        <div class="panel panel-default">
+          <div class="panel-heading">
             <span class="panel-title">
               {{_ "settings_sdkCode_generator" }}
             </span>
             <span class="pull-right">
               {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
             </span>
-        </div>
-        {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
+          </div>
           <div class="panel-body">
             {{> afQuickField name='sdkCodeGenerator.host' id="SDK-host" }}
           </div>
+        </div>
         {{/ if }}
       </div>
       <div class="panel panel-default">

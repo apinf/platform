@@ -1,0 +1,44 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="addForm">
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="acl-add-form">
+        {{# with aclRule }}
+          <select name="allow" id="allow-options" class="form-control">
+            <option value="1">
+              Allow
+            </option>
+            <option value="0">
+              Deny
+            </option>
+          </select>
+          <select name="access" id="access-options" class="form-control">
+            <option value="1">
+              Subscribe
+            </option>
+            <option value="2">
+              Publish
+            </option>
+            <option value="3">
+              Both
+            </option>
+          </select>
+          <input name="topic" value="{{ topic }}" type="text" class="form-control" placeholder="Topic" id="topic-value">
+          <input name="username" value="{{ username }}" class="form-control" type="text" placeholder="username" >
+          <input name="clientid" value="{{ clientid }}" class="form-control" type="text" placeholder="Client1" >
+          <input class="form-control" type="text" placeholder="IP Address" name="ipaddr" value="{{ ipaddr }}">
+          <button type="submit" class="btn btn-success">
+            Save
+          </button>
+          <button type="button" class="btn btn-default cancel">
+            Cancel
+          </button>
+        {{/ with }}
+      </form>
+    </div>
+  </div>
+</template>
