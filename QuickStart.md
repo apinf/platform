@@ -8,4 +8,4 @@ After successful installation
 4) test
 
 How to use the GUI:
-GUI is designed to be self explanetory. 
+GUI is designed to be self explanatory. 
