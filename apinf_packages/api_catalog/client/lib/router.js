@@ -44,6 +44,6 @@ FlowRouter.route('/myapis', {
   }],
   name: 'myApiCatalog',
   action: () => {
-    BlazeLayout.render('masterLayout', { main: 'apiCatalog' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'apiCatalog' });
   },
 });
