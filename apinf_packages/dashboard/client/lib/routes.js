@@ -38,7 +38,7 @@ signedIn.route('/dashboard', {
   }],
   name: 'dashboardPage',
   action: () => {
-    BlazeLayout.render('masterLayout', { main: 'dashboardPage' });
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'dashboardPage' });
   },
 });
 
