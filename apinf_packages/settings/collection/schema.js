@@ -148,6 +148,8 @@ Settings.schema = new SimpleSchema({
       return validation;
     },
   },
+  // Following fields are used in Login methods' disable
+  // which is implemented after Next
   loginMethods: {
     type: Object,
     optional: true,

@@ -68,12 +68,11 @@ const updateFunctions = {
         authorizationEndpoint: settings.hslConfiguration.authorizationEndpoint,
         tokenEndpoint: settings.hslConfiguration.tokenEndpoint,
         userinfoEndpoint: settings.hslConfiguration.userinfoEndpoint,
-   //     idTokenWhitelistFields: settings.hslConfiguration.idTokenWhitelistFields || [],
       });
     }
 
     // Return status message
-    return 'OIDC configuration updated successfully';
+    return 'HSL configuration updated successfully';
   },
 };
 
@@ -93,7 +92,7 @@ Meteor.methods({
       status = updateFunctions.saveHslConfiguration(settings);
     } catch (error) {
       // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
+      const message = `Error in update login method configuration: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
@@ -109,7 +108,7 @@ Meteor.methods({
 
     // Variable to be returned to client
     let loginParameterId;
-    let changesFound = false;
+    let changesFound = '';
 
     // Try if settings exist
     try {
@@ -146,7 +145,7 @@ Meteor.methods({
         };
         // Store github parameters
         loginParameters.githubConfiguration = githubConfiguration;
-        changesFound = true;
+        changesFound = 'Github';
       }
 
       // Get parameters for fiware from configuration DB
@@ -176,13 +175,13 @@ Meteor.methods({
         };
         // Store fiware values
         loginParameters.fiwareConfiguration = fiwareConfiguration;
-        changesFound = true;
+        changesFound += ' Fiware';
       }
-      // Get parameters for OIDC from configuration DB
+      // Get parameters for HSL from configuration DB
       const configHslParameters = ServiceConfiguration.configurations
       .findOne({ service: 'hsl' });
 
-      // Check OIDC
+      // Check HSL
       if (!configHslParameters) {
         // Remove possible login parameters, if no configuration
         if (loginParameters && loginParameters.hslConfiguration) {
@@ -212,9 +211,9 @@ Meteor.methods({
           tokenEndpoint: configHslParameters.tokenEndpoint,
           userinfoEndpoint: configHslParameters.userinfoEndpoint,
         };
-        // store OIDC values
+        // store HSL values
         loginParameters.hslConfiguration = hslConfiguration;
-        changesFound = true;
+        changesFound += ' HSL';
       }
 
       // In case values were different, update Login values with Config values
@@ -226,14 +225,14 @@ Meteor.methods({
       }
     } catch (error) {
       // otherwise show an error
-      const message = `Update gitHub configuration: ${error}`;
+      const message = `Error in update login platform configuration: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
     }
 
-    // Return method status to the client
-    return true;
+    // Return method status to the client, so inform about successful update only after it is done
+    return changesFound;
   },
 });
 
