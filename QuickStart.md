@@ -12,7 +12,7 @@ This document helps you getting started with APInf API management.
 ### How to use the GUI: ###
 GUI is designed to be self explanatory, but check out this awesome getting started video on youtube!
 
-https://www.youtube.com/channel/UCCwk99yLblSAQFSPZqCGMnA
+https://www.youtube.com/watch?v=yCR6pCnTm5w&t=190s
 
 #### Contact ####
 contact info@apinf.io if you ran into trouble.
