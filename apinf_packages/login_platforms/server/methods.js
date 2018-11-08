@@ -108,7 +108,7 @@ Meteor.methods({
 
     // Variable to be returned to client
     let loginParameterId;
-    let changesFound = false;
+    let changesFound = '';
 
     // Try if settings exist
     try {
@@ -145,7 +145,7 @@ Meteor.methods({
         };
         // Store github parameters
         loginParameters.githubConfiguration = githubConfiguration;
-        changesFound = true;
+        changesFound = 'Github';
       }
 
       // Get parameters for fiware from configuration DB
@@ -175,7 +175,7 @@ Meteor.methods({
         };
         // Store fiware values
         loginParameters.fiwareConfiguration = fiwareConfiguration;
-        changesFound = true;
+        changesFound += ' Fiware';
       }
       // Get parameters for HSL from configuration DB
       const configHslParameters = ServiceConfiguration.configurations
@@ -213,7 +213,7 @@ Meteor.methods({
         };
         // store HSL values
         loginParameters.hslConfiguration = hslConfiguration;
-        changesFound = true;
+        changesFound += ' HSL';
       }
 
       // In case values were different, update Login values with Config values
@@ -231,8 +231,8 @@ Meteor.methods({
       throw new Meteor.Error(message);
     }
 
-    // Return method status to the client
-    return true;
+    // Return method status to the client, so inform about successful update only after it is done
+    return changesFound;
   },
 });
 

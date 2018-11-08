@@ -36,8 +36,8 @@ Template.loginPlatforms.onCreated(function () {
   .then(result => {
     if (result) {
       // Get settings form success message translation
-      const message = TAPi18n.__('settings_successMessage');
-      // Alert the user of successful save
+      const message = TAPi18n.__('loginPlatformsPageSettingsUpdatedMessage') + result;
+      // Alert the user of successful update
       sAlert.success(message);
     }
   })
