@@ -84,6 +84,9 @@ AccountsTemplates.configureRoute('signIn', {
   layoutTemplate: 'atLayout',
   contentRegion: 'main',
   redirect: '/apis',
+  layoutRegions: {
+    bar: 'navbar',
+  },
 });
 
 // Sign up
@@ -94,4 +97,7 @@ AccountsTemplates.configureRoute('signUp', {
   layoutTemplate: 'atLayout',
   contentRegion: 'main',
   redirect: '/apis',
+  layoutRegions: {
+    bar: 'navbar',
+  },
 });

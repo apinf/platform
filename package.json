@@ -1,6 +1,6 @@
 {
   "name": "apinf",
-  "version": "0.57.0",
+  "version": "0.58.0",
   "description": "API management portal and proxy.",
   "main": "index.js",
   "directories": {
@@ -23,6 +23,7 @@
     "jquery": "^3.3.1",
     "jquery-bbq": "^1.0.0",
     "jquery.rateit": "^1.0.23",
+    "js-base64": "^2.4.9",
     "js-yaml": "^3.12.0",
     "json2csv": "^3.11.5",
     "limax": "^1.6.0",
