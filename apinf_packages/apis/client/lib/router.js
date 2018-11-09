@@ -53,7 +53,7 @@ FlowRouter.route('/apis/:slug/', {
         DocHead.addMeta({ property: 'og:title', content: slug });
         // DocHead.addMeta({ property: 'og:description', content: api.description });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
-        
+
         // Twitter
         DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
         // XSS: in title, instead of name, let's use the slug
