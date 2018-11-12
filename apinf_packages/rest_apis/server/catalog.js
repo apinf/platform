@@ -342,43 +342,6 @@ CatalogV1.swagger = {
         },
       },
     },
-    loginRequest: {
-      required: ['username', 'password'],
-      properties: {
-        username: {
-          type: 'string',
-          description: 'Username',
-          example: 'johndoe',
-        },
-        password: {
-          type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
-        },
-      },
-    },
-    loginResponse: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            authToken: {
-              type: 'string',
-              example: 'auth-token-value',
-            },
-            userId: {
-              type: 'string',
-              example: 'user-id-value',
-            },
-          },
-        },
-      },
-    },
     proxyResponse: {
       type: 'object',
       properties: {
