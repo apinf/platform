@@ -4,11 +4,10 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="pricing">
-  <!--{{{ branding.homeCustomBlock }}}-->
   {{# if branding.homeCustomBlock }}
     <div class="container">
-      <h1>{{_ "branding_homeCustomBlock_title" }}</h1>
-        {{{ branding.homeCustomBlock }}}
+      <!--h1>{{_ "branding_homeCustomBlock_title" }}</h1-->
+      {{{ branding.homeCustomBlock }}}
     </div>
   {{ else }}
     {{> notFound }}
