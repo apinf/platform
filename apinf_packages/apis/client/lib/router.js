@@ -41,19 +41,23 @@ FlowRouter.route('/apis/:slug/', {
             rel: 'alternate',
             type: 'application/rss+xml',
             href: `/rss/apis/?slug=${slug}`,
-            // title: `RSS Feed for ${api.name}`,
+            // XSS: in title, instead of name, let's use the slug
+            title: `RSS Feed for ${slug}`,
           });
         }
 
         // Set Social Meta Tags
         // Facebook & LinkedIn
         DocHead.addMeta({ property: 'og:image', content: api.logoUrl });
-        // DocHead.addMeta({ property: 'og:title', content: api.name });
+        // XSS: in title, instead of name, let's use the slug
+        DocHead.addMeta({ property: 'og:title', content: slug });
         // DocHead.addMeta({ property: 'og:description', content: api.description });
         DocHead.addMeta({ property: 'og:url', content: window.location.href });
+
         // Twitter
         DocHead.addMeta({ property: 'twitter:card', content: 'summary' });
-        // DocHead.addMeta({ property: 'twitter:title', content: api.name });
+        // XSS: in title, instead of name, let's use the slug
+        DocHead.addMeta({ property: 'twitter:title', content: slug });
         // DocHead.addMeta({ property: 'twitter:description', content: api.description });
         DocHead.addMeta({ property: 'twitter:image', content: api.logoUrl });
 
