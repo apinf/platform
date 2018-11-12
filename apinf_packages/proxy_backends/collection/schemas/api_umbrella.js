@@ -218,7 +218,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
       let validation = null;
       const admin = '/admin/';
       const result = this.value.includes(admin);
-      if ((this.value === '/signup/') || (result)) {
+      if (this.value === '/signup/' || this.value === '/signin/' || result) {
         validation = 'invalidProxyBackendForm_forbiddenPrefixMessage';
       }
       return validation;
