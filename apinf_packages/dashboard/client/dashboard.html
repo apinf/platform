@@ -34,18 +34,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     <!-- Make sure a user has even one API -->
     {{# if managedApisCount }}
-      <!-- Case when user has one API -->
-      {{# if managedOneApi }}
-      <!-- Display directly API Analytic Page -->ˆ
-      <div class="container dashboard-summary-block" style="padding-top: 0;padding-bottom: 0;">
-        {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
-      </div>
-      {{ else }}
       <div class="container dashboard-summary-block block-wrapper slide-up-animation" style="padding-top: 0;padding-bottom: 0;">
         <!-- Display Dashboard page-->
         {{> dashboardView searchValue=searchValue }}
       </div>
-      {{/ if }} <!-- /managedOneApi -->
+
     <!--{{ else }}
       <!- -Display a message about "No managed API" - - >
       <div class="container dashboard-summary-block block-wrapper" style="padding-top: 0;padding-bottom: 0;">
