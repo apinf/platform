@@ -7,9 +7,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-Template.atOauth.onRendered(function () {
+Template.atOauth.onRendered(() => {
   // Show or hide existing OAuth method buttons according to values of settings
-  Meteor.call("getSettings", function (error, result) {
+  Meteor.call('getSettings', (error, result) => {
     if (error) throw new Meteor.Error(error);
     if (result) {
       // If Fiware is installed
