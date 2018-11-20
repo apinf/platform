@@ -20,7 +20,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{# if currentUser }}
         {{# if proxyUrl }}
           <h1>
-            Get Started <span style="font-weight:400;">with <span style="font-weight:500;">{{ api.name }}</span>.</span>
+            {{_ "apiDetails_getStarted_headerText" }} <span style="font-weight:400;">{{_ "apiDetails_getStarted_with" }} <span style="font-weight:500;">{{ api.name }}</span>.</span>
           </h1>
           <h2 id="api-url-title">
             {{# unless disableApiKey }}
@@ -35,8 +35,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <i id="copyProxyUrl" class="mdi mdi-content-copy pull-right" data-clipboard-target="#proxy-url" style="padding-left:5px;"></i>
           </span>
           <p style="color:#6d859e;margin-top:10px;">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
-            In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+            {{_ "apiDetails_baseUrl_message" }}
           </p>
           {{# if currentUser }}
             {{# if proxyUrl }}
@@ -45,41 +44,45 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <div style="margin-top:2em;">
                     <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1em;">
                       <span class="num">2</span>
-                      Authorization (X-Api-Key)
+                      {{_ "apiDetails_xApiKey_header" }}
                     </h2>
                     <span id="api-url" class="api-profile_details-text-wrapper">
                       {{ apiKey }}
                       <i id="copyApiUrl" class="mdi mdi-content-copy pull-right" data-clipboard-target="#api-url" style="padding-left:5px;"></i>
                     </span>
                     <p style="color:#6d859e;margin-top:10px;">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
-                      In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+                      {{_ "apiDetails_xApiKey_message1" }}
+                      <br>
+                      <br>
+                      <span style="font-style:italic;">
+                        {{_ "apiDetails_xApiKey_message2" }}
+                      </span>
                     </p>
                   </div>
                   <div style="margin-top:2em;">
                     <h2 style="font-size:16px;margin-top:0;margin-bottom:1em;">
                       <span class="num">3</span>
-                      Examples using API Key
+                      {{_ "apiDetails_apiKeyExample_header" }}
                     </h2>
                     {{# if proxyUrl }}
-                      <h3 style="font-size:14px;">GET Query Param</h3>
+                      <h3 style="font-size:14px;">{{_ "apiDetails_apiKeyExample_getQueryParam" }}</h3>
                       <span id="example-one" class="api-profile_details-text-wrapper">
                         curl <span style="color: #F44336;">'{{ proxyUrl }}?api_key={{ apiKey }}'</span>
                         <i id="copyExampleOne" class="mdi mdi-content-copy pull-right" data-clipboard-target="#example-one" style="padding-left:5px;"></i>
                       </span>
                       <p style="color:#6d859e;margin-top:10px;">
-                        Pass the API key into the api_key GET query string parameter. The GET query parameter may be used for non-GET requests (such as POST and PUT).
+                        {{_ "apiDetails_apiKeyExample_getQueryParam_message" }}
                       </p>
-                      <h3 style="font-size:14px;">HTTP Header</h3>
+                      <h3 style="font-size:14px;">{{_ "apiDetails_apiKeyExample_httpHeader" }}</h3>
                       <span id="example-two" class="api-profile_details-text-wrapper">
                         curl -H <span style="color: #F44336;">'X-Api-Key: {{ apiKey }}' '{{ proxyUrl }}'</span>
                         <i id="copyExampleTwo" class="mdi mdi-content-copy pull-right" data-clipboard-target="#example-two" style="padding-left:5px;"></i>
                       </span>
                       <p style="color:#6d859e;margin-top:10px;">
-                        Pass the API key into the X-Api-Key header.
+                        {{_ "apiDetails_apiKeyExample_httpHeader_message" }}
                       </p>
                     {{ else }}
-                      <span>API is not configured</span>
+                      <span>{{_ "apiDetails_apiIsNotConfigured_headingText" }}</span>
                     {{/ if }}
                   </div>
                 {{ else }}
@@ -98,11 +101,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{/ if }}
         {{ else }}
           <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-            API is not configured
+            {{_ "apiDetails_apiIsNotConfigured_headingText" }}
           </h2>
           <p style="color:#6d859e;margin-top:1.5em;">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar sagittis ipsum dignissim vehicula.
-            In luctus faucibus tortor at dignissim. Curabitur ut felis id erat tempus feugiat sit amet commodo nisi.
+            {{_ "apiDetails_apiIsNotConfigured_message" }}
+            <a href="#https://next.apinf.io/apis/apinf-management-rest-api" target="_blank">
+              {{_ "apiDetails_apiIsNotConfigured_exampleApi" }}
+            </a>
           </p>
         {{/ if }}
       {{ else }}
