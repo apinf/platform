@@ -45,6 +45,7 @@ cfs:filesystem@0.1.2
 cfs:http-methods@0.0.32
 cfs:storage-adapter@0.2.3
 check@1.2.5
+cleandersonlobo:mdi-icons@1.3.0
 coffeescript@1.12.7_1
 coffeescript-compiler@1.12.7_1
 dandv:jquery-rateit@1.0.22_2
@@ -177,4 +178,5 @@ useraccounts:flow-routing@1.14.2
 vsivsi:file-collection@1.3.8
 webapp@1.3.18
 webapp-hashing@1.0.9
+yasaricli:textcounter@0.0.1
 zimme:active-route@2.3.2

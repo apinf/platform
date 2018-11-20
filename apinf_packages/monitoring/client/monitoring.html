@@ -1,79 +1,80 @@
-<!-- Copyright 2017 Apinf Oy
+<!-- Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 <template name="apiMonitoring">
   {{# if apiMonitoringSettings.enabled }}
-    <h2 class="heading">
-      Status Messages
-    </h2>
-    <p class="sub-heading">
-      Historical data on API availability
-    </p>
-    <table id="rtable">
+  <h2 style="font-size:1.4em;margin-top:0;">
+    Status Messages
+  </h2>
+  <p style="color:#6d859e;">
+    Historical data on API availability
+  </p>
+  <table class="rtable">
+    <thead>
       <tr>
         <th>Time</th>
         <th>Endpoint</th>
         <th>Status</th>
         <th>Details</th>
       </tr>
-      <tbody>
-        {{# each record in  apiStatusData }}
-          <tr>
-            <td>{{ record.date }}</td>
-            <td>           
-             <a href="{{ apiMonitoringSettings.url }}">{{ record.end_point }}</a>
-            </td>
-            <td>
-              {{# if apiStatusCode (record.server_status_code) }}
-                <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
-                </span>
-              {{ else }}
-                <span class="glyphicon glyphicon-exclamation-sign failed" aria-hidden="true">
-                </span>
-              {{/ if}}
-            </td>
-            <td>{{ record.server_status_code }}</td>
-          </tr>
-        {{/ each }}
-      </tbody>
-    </table>
-    
-    <hr class="header-line">
+    </thead>
+    <tbody>
+      {{# each record in  apiStatusData }}
+        <tr>
+          <td>{{ record.date }}</td>
+          <td>
+            <a href="{{ apiMonitoringSettings.url }}">{{ record.end_point }}</a>
+          </td>
+          <td>
+            {{# if apiStatusCode (record.server_status_code) }}
+              <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
+              </span>
+            {{ else }}
+              <span class="glyphicon glyphicon-exclamation-sign failed" aria-hidden="true">
+              </span>
+            {{/ if}}
+          </td>
+          <td>{{ record.server_status_code }}</td>
+        </tr>
+      {{/ each }}
+    </tbody>
+  </table>
+  <hr class="header-line">
+  {{/ if }}
 
-  {{/if }}
-
-  <h3 class="panel-heading">
-    <i class="fa fa-binoculars" aria-hidden="true"></i>
+  <h3 style="font-size:16px; margin-top:0;">
     {{_ "apiMonitoring_panelTitle_Monitoring" }}
   </h3>
-  <p class="monitoring-panel">{{_ "apiMonitoring_helpIcon_text" }}</p>
-  <div class="form-group">
+  <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text" }}</p>
+  <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
-      <!-- hidden field, auto-value -->
-      {{> afQuickField name='apiId' value=api._id type="hidden" }}
-      {{> afQuickField name='enabled' }}
-      {{# if afFieldValueIs name='enabled' value=true }}
+
+    <!-- hidden field, auto-value -->
+    {{> afQuickField name='apiId' value=api._id type="hidden" }}
+    {{> afQuickField name='enabled' }}
+    {{# if afFieldValueIs name='enabled' value=true }}
       {{> afQuickField name='url' value=api.url type="hidden" }}
-        <label for="endpoint-monitor-field">
-          {{ afFieldLabelText name='endPoint' }}
-        </label>
-        <div class="input-group">
+      <label for="endpoint-monitor-field">
+        {{ afFieldLabelText name='endPoint' }}
+      </label>
+      <div class="input-group">
         <!-- API url addon -->
           <span class="input-group-addon" id="api-url">
           {{ api.url }}
           </span>
           {{> afFieldInput name='endPoint' value=endPoint }}
-          </div>
-          {{# if afFieldIsInvalid name='endPoint' }}
-            <p class="text-danger">
-              {{{ afFieldMessage name='endPoint' }}}
-            </p>
-            {{/ if }}
+      </div>
+      {{# if afFieldIsInvalid name='endPoint' }}
+        <p class="text-danger">
+          {{{ afFieldMessage name='endPoint' }}}
+        </p>
       {{/ if }}
-      <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
-        {{_ "apiMonitoring_saveButton_text" }}
-      </button>
+    {{/ if }}
+    <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
+      {{_ "apiMonitoring_saveButton_text" }}
+    </button>
+
     {{/ autoForm }}
   </div>
 </template>

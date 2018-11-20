@@ -3,9 +3,11 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
-<template name="apiIntro">
-  <!-- quick tour button -->
-  <button type="button" id="api-intro" class="btn btn-info btn-sm">
-    {{_ "apiIntro_quickTour_button_text" }}
-  </button>
+<template name="atLayout">
+  {{# if Template.subscriptionsReady }}
+    <div class="at-layout">
+      {{> Template.dynamic template=main }}
+      {{> sAlert }}
+    </div>
+  {{/ if }}
 </template>

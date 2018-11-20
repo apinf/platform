@@ -92,4 +92,25 @@ Meteor.methods({
       throw new Meteor.Error(message);
     }
   },
+
+  getSettings () {
+    // Try if settings exist
+    try {
+      // Get Settings collection
+      const settings = Settings.findOne();
+
+      // Enable/disable accounts email features based on email configuration
+      if (settings.loginMethods) {
+        return settings;
+      }
+    } catch (error) {
+      // otherwise prepare message about error
+      const message = `Update mail configuration: ${error}`;
+
+      // Show an error message
+      throw new Meteor.Error(message);
+    }
+    return false;
+  },
+
 });

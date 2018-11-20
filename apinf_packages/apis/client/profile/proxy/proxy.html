@@ -4,14 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiProxy">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        {{_ "apiProxy_headerText" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      {{> proxyBackend }}
-    </div>
-  </div>
+  <p style="color: #6d859e;margin-bottom: 1em;">
+    <span class="text-danger">{{_ "apiProxy_network_message_attention" }}&nbsp;</span>
+      {{_ "apiProxy_network_message" }}
+  </p>
+  {{> proxyBackend }}
 </template>

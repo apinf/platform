@@ -12,6 +12,7 @@ export default function convertStatusCode (serverStatusCode) {
   // Init variables
   let className = '';
   let statusText = '';
+  let statusIcon = '';
 
   // Computed an api status for Switch
   const apiStatus = Math.floor(serverStatusCode / 100);
@@ -35,10 +36,12 @@ export default function convertStatusCode (serverStatusCode) {
     case 2:
       className = 'status-success';
       statusText = TAPi18n.__('viewApiStatus_statusMessage_Success');
+      statusIcon = 'mdi-checkbox-marked-circle';
       break;
     // Redirection code
     case 3:
       className = 'status-success';
+      statusIcon = 'arrow-right-drop-circle';
       statusText = `
           ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${serverStatusCode}.
@@ -48,6 +51,7 @@ export default function convertStatusCode (serverStatusCode) {
     // Client Error code
     case 4:
       className = 'status-warning';
+      statusIcon = 'mdi-alert-circle';
       statusText = `
           ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${serverStatusCode}.
@@ -57,6 +61,7 @@ export default function convertStatusCode (serverStatusCode) {
     // Server Error code
     case 5:
       className = 'status-danger';
+      statusIcon = 'mdi-close-circle';
       statusText = `
           ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${serverStatusCode}.
@@ -69,5 +74,5 @@ export default function convertStatusCode (serverStatusCode) {
       break;
   }
 
-  return { className, statusText };
+  return { className, statusText, statusIcon };
 }

@@ -5,19 +5,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="search">
   <div class="container">
-    <div class="page-header">
+    <div class="row">
       <h1>
         {{_ "searchPage_pageHeader" }}
       </h1>
     </div>
-
     <div class="row">
       {{> search_form }}
       <p class="help-block">
         {{_ "searchPage_searchForm_helpText" }}
       </p>
     </div>
-
     <div id="search-results" class="row">
       {{# if searchResults }}
         <h3 id="search-results-title">
@@ -29,7 +27,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </em>
           </small>
         </h3>
-        {{> apiCatalogGrid apis=searchResults }}
+        {{> apiCatalogTable apis=searchResults }}
       {{ else }}
       <i>
         {{_ "searchPage_noResults" }}

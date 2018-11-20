@@ -4,18 +4,26 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiSettings">
-  {{> apiSettingsDetails api=api }}
+  <div class="api-settings">
+    <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">Settings</h2>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+      {{# if proxyIsConfigured }}
+        <li><a href="#network" data-toggle="tab">Network</a></li>
+      {{/ if }}
+    </ul>
 
-  {{> apiOrganization api=api }}
-
-  {{> apiSettingsVisibility api=api }}
-
-<!--- from feature/mqtt-dashboard -->
-  {{> apiMonitoring api=api }}
-
-  {{# if displayAnalyticsSettings }}
-    {{> apiSettingsAnalytics proxyBackend=proxyBackend }}
-  {{/ if }}
-
-  {{> apiSettingsDelete api=api }}
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="general">
+        {{> apiSettingsDetails api=api }}
+      </div>
+      {{# if proxyIsConfigured }}
+        <div class="tab-pane fade" id="network">
+          {{> apiProxy api=api  proxyBackend=proxyBackend }}
+        </div>
+      {{/ if }}
+    </div>
+  </div>
 </template>

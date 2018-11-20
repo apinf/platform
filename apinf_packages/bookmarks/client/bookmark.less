@@ -5,15 +5,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 @import "/apinf_packages/core/client/style/bootstrap-variables.less";
 
-.bookmark-default {
-  color: @gray;
-}
-
-.bookmark {
-  cursor: pointer;
-}
-
 .bookmarked {
   cursor: pointer;
-  color: @gray;
+  color: #FFD600;
+}
+
+.fa-star-o {
+  cursor: pointer;
+  color: #999;
+}
+
+.fa-star-o:hover {
+  cursor: pointer;
+  color: #FFD600;
+}
+
+.page-head-infoblock {
+  .bookmark-button {
+    top: 5px;
+    left: -25px;
+    position: absolute;
+    font-size: 16px;
+  }
+}
+
+.bookmark-counter {
+  font-size: 1em;
+  color: #999;
+  font-weight: 400;
 }

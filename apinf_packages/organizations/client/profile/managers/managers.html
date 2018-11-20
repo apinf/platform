@@ -1,0 +1,9 @@
+<template name="organizationProfileManagers">
+  <h2 style="font-size:1.4em;margin-top:0;">Managers</h2>
+  <p style="color:#6d859e;">
+    {{_ "organizationSettings_description_organizationManagers" }}
+  </p>
+  {{> organizationManagersList organization=organization }}
+  <hr style="color: rgba(59, 59, 88, 0.15); margin-right: -20px; margin-left: -20px; margin-top: 2em; margin-bottom: 2em;">
+  {{> addOrganizationManagerForm organization=organization }}
+</template>

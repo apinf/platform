@@ -4,41 +4,34 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="errorsStatisticTable">
-  <table class="table table-bordered table-hover table-statistic">
+  <table class="rtable table-statistic">
     <thead>
-    <tr>
-      <th>
-        {{_ 'errorsStatisticTable_columnTitle_date' }}
-      </th>
-      <th>
-        {{_ 'errorsStatisticTable_columnTitle_status' }}
-      </th>
-      <th>
-        {{_ 'errorsStatisticTable_columnTitle_calls' }}
-      </th>
-      <th>
-        {{_ 'errorsStatisticTable_columnTitle_path' }}
-      </th>
-    </tr>
+      <tr>
+        <th>{{_ 'errorsStatisticTable_columnTitle_date' }}</th>
+        <th>{{_ 'errorsStatisticTable_columnTitle_status' }}</th>
+        <th>
+          {{_ 'errorsStatisticTable_columnTitle_calls' }}
+        </th>
+        <th>
+          {{_ 'errorsStatisticTable_columnTitle_path' }}
+        </th>
+      </tr>
     </thead>
-
     <tbody>
-    {{# each error in errors }}
+      {{# each error in errors }}
       <tr>
         <td>{{ localeFormatDate error.date }}</td>
         <td>{{ error.status }}</td>
         <td>{{ error.calls }}</td>
         <td>{{ error.requestPath }}</td>
       </tr>
-    {{/ each }}
+      {{/ each }}
     </tbody>
   </table>
-  <div class="form-inline">
-    <div class="form-group">
+  <div class="form-inline" style="margin-top:1em;">
+    <div class="form-group pull-left">
       <span>
-        <strong>
-          {{_ 'errorsStatisticTable_text_showOfErrors' count=errors.length all=allErrorsCount }}
-        </strong>
+        {{_ 'errorsStatisticTable_text_showOfErrors' count=errors.length all=allErrorsCount }}
       </span>
     </div>
     <div class="form-group pull-right">

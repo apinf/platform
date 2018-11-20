@@ -5,10 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationSettingsPagination">
   <div class="setting-section">
-    <h3>
-      {{_ 'organizationSettingsPagination_panelTitle_contentManagement' }}
-    </h3>
-
      {{# autoForm
         collection=organizationsCollection
         doc=organization
@@ -20,7 +16,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
       {{> afQuickField  name='mediaPerPage' id="media-perpage" }}
 
-      <button type="submit" class="btn btn-primary" id="submit-button">
+      <button type="submit" class="btn btn-success btn-success-special" id="submit-button">
         {{_ "organizationSettingsPagination_saveButton" }}
       </button>
     {{/ autoForm }}

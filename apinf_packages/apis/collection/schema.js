@@ -26,10 +26,7 @@ Apis.schema = new SimpleSchema({
     type: String,
     max: 1000,
     autoform: {
-      rows: 3,
-      placeholder: `e.g. Plan your journey across Tampere city with latest bus information,
-      real-time vehicle location and inter zone routing. You can lookup bus times by line
-      and stoppage.`,
+      rows: 6,
     },
     optional: true,
   },
@@ -156,7 +153,7 @@ Apis.schema = new SimpleSchema({
   isPublic: {
     type: Boolean,
     optional: true,
-    defaultValue: true,
+    defaultValue: false,
   },
   'friendlySlugs.slug.base': {
     type: String,

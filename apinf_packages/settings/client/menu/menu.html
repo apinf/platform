@@ -4,45 +4,45 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="settingsMenu">
-  <div id="settings-menu" class="col-md-3">
-    <ul class="list-group">
-      <a
-        href="{{ pathFor route='account' }}"
-        class="list-group-item {{ isActiveRoute 'account' }}"
-        id="button-account">
-          {{_ "settingsMenu_account" }}
-          <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-      </a>
+<div class="container-fluid secondary-menu-block" style="height: 60px;">
+  <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="settings-menu">
+    <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
+      Platform preferences
+    </h1>
+    <ul class="links">
       {{# if isInRole 'admin' }}
+      <li class="{{ isActiveRoute 'branding' }}">
         <a
           href="{{ pathFor route='branding' }}"
-          class="list-group-item {{ isActiveRoute 'branding' }}"
           id="button-branding">
             {{_ "settingsMenu_branding" }}
-            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
+        </li>
+        <li class="{{ isActiveRoute 'settings' }}">
         <a
           href="{{ pathFor route='settings' }}"
-          class="list-group-item {{ isActiveRoute 'settings' }}"
           id="button-settings">
             {{_ "settingsMenu_settings" }}
-            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
+        </li>
+        <li class="{{ isActiveRoute 'proxies' }}">
         <a
           href="{{ pathFor route='proxies' }}"
-          class="list-group-item {{ isActiveRoute 'proxies' }}"
           id="button-proxies">
             {{_ "settingsMenu_proxies" }}
-            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
+        </li>
+        <li class="{{ isActiveRoute 'login-platforms' }}">
         <a
           href="{{ pathFor route='login-platforms' }}"
-          class="list-group-item {{ isActiveRoute 'login-platforms' }}"
           id="button-loginPlatforms">
             {{_ "settingsMenu_loginPlatforms" }}
-            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
         </a>
+      </li>
       {{/ if }}
     </ul>
-  </div>
+    <button>MENU</button>
+    <ul class='hidden-links hidden'></ul>
+  </nav>
+</div>
 </template>

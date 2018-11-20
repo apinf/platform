@@ -4,28 +4,35 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationManagersList">
-  <ul class="list-group">
-    {{# each organizationManagers }}
-      <li class="list-group-item">
-      <!-- temporarily outcomment because of issue 3437 -->
-      <!--  {{ username }}
-        ({{ email }}) -->
-        {{ email }}
-        <div class="pull-right">
+  <table class="rtable">
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Manager</td>
+        {{# each organizationManagers }}
+        <td>
+          {{ email }}
           {{# unless emailVerified }}
             <span class="label label-default">
             {{_ 'organizationSettings_listManager_emailUnverifiedLabel' }}
             </span>&nbsp;
           {{/ unless }}
+        </td>
+        <td>
           {{# if hasMultipleManagers }}
-            <button
-              id="remove-organization-manager"
-              class="btn btn-danger btn-xs">
-              <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-            </button>
+          <button class="btn btn-danger btn-xs" id="remove-organization-manager" style="height:auto;">
+            <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+          </button>
           {{/ if }}
-        </div>
-      </li>
-    {{/ each }}
-  </ul>
+        </td>
+        {{/ each }}
+      </tr>
+    </tbody>
+  </table>
 </template>

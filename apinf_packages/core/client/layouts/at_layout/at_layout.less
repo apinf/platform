@@ -1,0 +1,93 @@
+.at-layout {
+  .at-form {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .at-terms-link, .at-signin-link {
+    text-align: left;
+    color: #4c6072;
+  }
+
+  h1 {
+    padding-bottom: 3em;
+    padding-top: 5em;
+    padding-right: 1em;
+    padding-left: 3em;
+    color: #fff;
+    font-size: 4em;
+  }
+
+  small {
+    color: #fff;
+    font-size: 50%;
+    display: block;
+    margin-top: 1em;
+  }
+
+  .form-control {
+    height: 44px !important;
+    border-radius: 0 !important;
+  }
+
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 767px) {
+    .sign-up-welcome-block {
+      display: none;
+    }
+
+    .at-form {
+      max-width: 100%;
+      margin-top: 50px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  .main-navigation {
+    background-color: transparent;
+    height: 70px;
+
+    .navbar-nav > li > a {
+      color: #333;
+      text-transform: none;
+      font-size: 1.6rem;
+      letter-spacing: 0.6px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .navbar-nav > .main-links > a:hover,
+    .navbar-nav > .main-links > a:active {
+      background-color: transparent;
+      border-radius: 0;
+      text-decoration: underline;
+      color: inherit;
+    }
+  }
+}
