@@ -623,6 +623,7 @@
   "proxiesPage_title_proxies": "Proxies",
   "proxyBackendForm_advancedSettings_title": "Advanced settings",
   "proxyBackendForm_apiBasePath_helpText": "Base path added to all API requests. Example:",
+  "proxyBackendForm_apiKey_title": "API Key",
   "proxyBackendForm_apiPort_helpText": "Port number on API server",
   "proxyBackendForm_disableApiKey_helpText": "Allow users to call this API without an API key.",
   "proxyBackendForm_proxyBasePath_helpText": "Base path added to all Proxy requests. Example:",

@@ -109,7 +109,9 @@
 
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
 
-    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">API Key</label>
+    <label for="disable-apikey-box" style="color: #4c6072;font-weight: 500;">
+      {{_  "proxyBackendForm_apiKey_title" }}
+    </label>
     <!-- Disable API key checkbox -->
     {{> afQuickField
       name="apiUmbrella.settings.disable_api_key"
@@ -148,31 +150,36 @@
       {{/ if }}
     </div>
 
-    <!-- IDP App Id -->
-    <div class="col-md-12" id="advanced-settings">
-      {{> afQuickField
-        name="apiUmbrella.settings.idp_app_id"
-        placeholder="externalid1234"
-      }}
-    </div>
-
-    <!-- RH Setting App Id -->
-    <div class="col-md-12 sub-settings">
-        {{> afQuickField
-          name="apiUmbrella.sub_settings"
-        }}
-    </div>
-
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
-
+    
     <div data-toggle="collapse" data-target="#advance-proxy-settings">
-      <label style="color: #4c6072;font-weight: 500;font-size:1.6rem;">Advance settings</label>
-      <i class="mdi mdi-chevron-down mdi-18px pull-right"></i>
+      <label style="color: #4c6072;
+                    font-weight: 500;
+                    font-size:1.6rem;
+                    cursor: pointer;">
+        {{_ "proxyBackendForm_advancedSettings_title" }}
+      </label>
+      <i class="mdi mdi-chevron-down mdi-18px"></i>
     </div>
-
+    
     <div id="advance-proxy-settings" class="collapse" style="margin-top: 0.5em;">
-
-      <!-- Query String Parameters -->
+        
+      <!-- IDP App Id -->
+      <div class="col-md-12" id="advanced-settings">
+        {{> afQuickField
+          name="apiUmbrella.settings.idp_app_id"
+          placeholder="externalid1234"
+        }}
+      </div>
+  
+      <!-- RH Setting App Id -->
+      <div class="col-md-12 sub-settings">
+          {{> afQuickField
+            name="apiUmbrella.sub_settings"
+          }}
+      </div>
+  
+        <!-- Query String Parameters -->
       {{> afQuickField
         name="apiUmbrella.settings.append_query_string"
         placeholder="param1=value& param2=value"
