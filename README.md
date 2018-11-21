@@ -1,9 +1,18 @@
+# APInf API Management Framework
+
+[![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/api-management.svg)](https://www.fiware.org/developers/catalogue/)
+[![License badge](https://img.shields.io/github/license/apinf/platform.svg)](https://opensource.org/licenses/EUPL-1.1)
+[![Docker Pulls](https://img.shields.io/docker/pulls/apinf/platform.svg)](https://hub.docker.com/r/apinf/platform/)
+[![](https://img.shields.io/badge/tag-fiware-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware)
+<br>
+[![Build Status](https://travis-ci.org/apinf/platform.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/platform)
+![Status](https://nexus.lab.fiware.org/static/badges/statuses/apinf.svg)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-  - [Build](#build)
-  - [Docker image](#docker-image)
+- [Docker image](#docker-image)
 - [API Umbrella Dashboard](#api-umbrella-dashboard)
 - [Development status](#development-status)
 - [Automated testing](#testing)
@@ -14,14 +23,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/apinf/platform/develop/LICENSE)
 [![Docs Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://apinf.org/docs/)
 [![Gitter](https://img.shields.io/badge/GITTER-JOIN_CHAT_%E2%86%92-1dce73.svg)](https://gitter.im/apinf/public)
 [![Open Development Method badge](https://camo.githubusercontent.com/9065d5a7f38cb53b9934c0f1b15087e177360af6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446576656c6f706d656e742532304d6574686f642d4f70656e2d626c75652e737667)](https://opendevelopmentmethod.org/)
-
-## Build
-
-[![Build Status](https://travis-ci.org/apinf/platform.svg?branch=feature%2F631-nightly-deployment)](https://travis-ci.org/apinf/platform)
 
 ## Docker image
 
@@ -56,4 +60,12 @@ Please follow guidelines for community involvement in our [Code of Conduct](http
 More about APInf: [apinf.com](https://apinf.com).
 
 APInf saas service: [apinf.io](https://apinf.io).
+
+---
+
+## License
+
+APInf is licensed under the [EUPL-1.1](LICENSE) License.
+
+© 2018 APInf Oy
 
