@@ -628,7 +628,7 @@
   "proxyBackendForm_disableApiKey_helpText": "Allow users to call this API without an API key.",
   "proxyBackendForm_proxyBasePath_helpText": "Base path added to all Proxy requests. Example:",
   "proxyBackendForm_successMessage": "Settings saved.",
-  "proxyBackendForm_saveButton": "Save & Publish",
+  "proxyBackendForm_saveButton": "Save configuration",
   "proxyBackendForm_deleteButton": "Reset Configuration",
   "proxyBackendForm_deleteErrorMessage": "Delete failed on API Umbrella proxy",
   "proxyBackendForm_frontendPrefixNotUnique": "Frontend prefix already exists. Select another one.",
