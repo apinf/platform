@@ -1,0 +1,37 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAuthorizedUsersList">
+  <h2 style="font-size:1.4em;margin-top:0;">
+    Collaborators
+  </h2>
+  <p style="color:#6d859e;">
+    {{_ 'apiAuthorizedUsersList_authorizedUsers'}}
+  </p>
+  {{# if authorizedUsers }}
+    <table class="rtable">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Collaborator</td>
+          {{# each authorizedUsers }}
+          <td>{{ email }}</td>
+          <td>
+            <button class="remove-authorized-user btn btn-danger btn-xs" style="height:auto;">
+              <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+            </button>
+          </td>
+          {{/ each }}
+        </tr>
+      </tbody>
+    </table>
+  {{/ if }}
+</template>

@@ -6,7 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="organizationCard">
   <div class="panel organization-card">
     <div class="panel-heading organization-card-heading text-center">
-      <a href="{{ pathFor 'organizationProfile' slug=organization.slug }}">
+      <a href="{{ pathFor 'organizationProfile' orgSlug=organization.slug }}">
         <h3>
           {{ organization.name }}
         </h3>

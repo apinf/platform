@@ -13,6 +13,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 import Chart from 'chart.js';
 
+// APInf imports
+import { getLocaleDateFormat } from '/apinf_packages/core/helper_functions/format_date';
+
 Template.requestsOverTime.onRendered(function () {
   const instance = this;
 
@@ -24,7 +27,7 @@ Template.requestsOverTime.onRendered(function () {
   const ctx = document.querySelector(querySelector).getContext('2d');
   instance.chart = new Chart(ctx, {
     // The type of chart
-    type: 'bar',
+    type: 'line',
 
     // Data for displaying chart
     data: {
@@ -32,21 +35,29 @@ Template.requestsOverTime.onRendered(function () {
       datasets: [
         {
           label: TAPi18n.__('requestsOverTime_pointTitle_requests'),
-          backgroundColor: '#C6C5C5',
-          borderColor: '#959595',
-          borderWidth: 1,
+          backgroundColor: 'rgba(26, 117, 210, 0.2)',
+          borderColor: 'rgb(26, 117, 210)',
+          pointBackgroundColor: 'rgb(26, 117, 210)',
+          borderWidth: 2,
+          pointRadius: 3,
+          pointHoverRadius: 4,
         },
       ],
     },
 
     // Configuration options
     options: {
+      elements: {
+        line: {
+          tension: 0, // disables bezier curves
+        },
+      },
       legend: {
         display: false,
       },
       layout: {
         padding: {
-          left: 10,
+          left: 0,
         },
       },
       scales: {
@@ -54,9 +65,6 @@ Template.requestsOverTime.onRendered(function () {
           ticks: {
             beginAtZero: true,
           },
-        }],
-        xAxes: [{
-          maxBarThickness: 30,
         }],
       },
     },
@@ -66,10 +74,14 @@ Template.requestsOverTime.onRendered(function () {
   instance.autorun(() => {
     // Get aggregated chart data
     const chartData = Template.currentData().chartData;
+    const dateFormat = Template.currentData().dateFormat;
+
+    // Get locale date format
+    const localeDateFormat = getLocaleDateFormat(dateFormat);
 
     // Get dates
     const labels = chartData.map(dataset => {
-      return moment(dataset.date).format('MM/DD');
+      return moment(dataset.date).format(localeDateFormat);
     });
 
     // Get data for chart

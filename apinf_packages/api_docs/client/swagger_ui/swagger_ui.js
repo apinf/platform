@@ -11,9 +11,6 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
-// Npm packages import
-import _ from 'lodash';
-
 Template.swaggerUi.onCreated(() => {
   const instance = Template.instance();
   // Set flag on Data is not Ready
@@ -25,18 +22,14 @@ Template.swaggerUi.onCreated(() => {
   // Parsed swagger file
   Meteor.call('parsedSwaggerDocument', documentationURL, (error, result) => {
     if (error) {
-      sAlert.error(error);
+      sAlert.error(error, { timeout: 'none' });
       // Document is invalid
       instance.documentationValid = false;
     } else {
       // Document is valid
       instance.documentationValid = true;
-
-      // Get "schemes" property or set an empty array on default
-      const schemes = _.get(result, 'schemes', []);
-
       // Checking of scheme contains only http protocol
-      if (schemes[0] === 'http' && schemes.length === 1) {
+      if (result === true) {
         // Set the document contains only http protocol
         instance.useHttpProtocol = true;
       } else {

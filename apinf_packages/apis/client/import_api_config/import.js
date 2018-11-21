@@ -70,7 +70,7 @@ Template.importApiConfiguration.events({
       const message = TAPi18n.__('importApiConfiguration_errorMessage');
 
       // Notifies user if file extension is not as expected
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
 
       // Hide preview and reset data template value
       $('.file-preview').animate({ opacity: 0 }, 400, () => {
@@ -90,7 +90,7 @@ Template.importApiConfiguration.events({
       // Create a new API and get status about action
       Meteor.call('importApiConfigs', api, (err, status) => {
         // Error handing
-        if (err) sAlert.error(err.reason);
+        if (err) sAlert.error(err.reason, { timeout: 'none' });
 
         // Make sure status is successful
         if (status.isSuccessful) {
@@ -101,7 +101,7 @@ Template.importApiConfiguration.events({
           FlowRouter.go('viewApi', { slug: status.slug });
         } else {
           // Show message about error
-          sAlert.error(status.message);
+          sAlert.error(status.message, { timeout: 'none' });
         }
       });
     } catch (e) {
@@ -109,7 +109,7 @@ Template.importApiConfiguration.events({
       const message = TAPi18n.__('importApiConfiguration_jsonError_message');
 
       // Show message
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   },
 });

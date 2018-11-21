@@ -182,6 +182,9 @@ ManagementV1.addRoute('organizations', {
         403: {
           description: 'User does not have permission',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -222,6 +225,28 @@ ManagementV1.addRoute('organizations', {
 
       if (!isValid) {
         return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
+      }
+
+      // Organization with same name must not already exist
+      const duplicateOrganization = Organizations.findOne({ name: bodyParams.name });
+
+      if (duplicateOrganization) {
+        const detailLine = 'Duplicate: Organization with same name exists.';
+        const idValue = `${duplicateOrganization._id}`;
+        return errorMessagePayload(400, detailLine, 'id', idValue);
+      }
+
+      // Get slug formed of name
+      const slugData = Meteor.call('formSlugFromName', 'Organizations', bodyParams.name);
+
+      // If formed slug true
+      if (slugData && typeof slugData === 'object') {
+        // Include slug
+        organizationData.slug = slugData.slug;
+        // Include friendlySlugs
+        organizationData.friendlySlugs = slugData.friendlySlugs;
+      } else {
+        return errorMessagePayload(500, 'Forming slug for Organization failed.');
       }
 
       // Validate url
@@ -312,7 +337,13 @@ ManagementV1.addRoute('organizations', {
         }
       }
 
+      // Insert query
       const organizationId = Organizations.insert(organizationData);
+
+      // If insert failed, stop and send response
+      if (!organizationId) {
+        return errorMessagePayload(500, 'Insert organization failed. Organization not created!');
+      }
 
       return {
         statusCode: 201,
@@ -437,6 +468,9 @@ ManagementV1.addRoute('organizations/:id', {
         404: {
           description: 'Organization is not found',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -492,6 +526,26 @@ ManagementV1.addRoute('organizations/:id', {
 
         if (!isValid) {
           return errorMessagePayload(400, 'Parameter "name" is erroneous or missing');
+        }
+        // Organization with same name must not already exist
+        const duplicateOrganization = Organizations.findOne({ name: bodyParams.name });
+
+        if (duplicateOrganization) {
+          const detailLine = 'Duplicate: Organization with same name exists.';
+          const idValue = `${duplicateOrganization._id}`;
+          return errorMessagePayload(400, detailLine, 'id', idValue);
+        }
+
+        // Get Formed slug
+        const slugData = Meteor.call('formSlugFromName', 'Organizations', bodyParams.name);
+        // Check slugData
+        if (slugData && typeof slugData === 'object') {
+          // Include slug
+          organizationData.slug = slugData.slug;
+          // Include friendlySlugs
+          organizationData.friendlySlugs = slugData.friendlySlugs;
+        } else {
+          return errorMessagePayload(500, 'Forming slug for Organization failed.');
         }
       }
 
@@ -586,7 +640,12 @@ ManagementV1.addRoute('organizations/:id', {
       }
 
       // Update Organization document
-      Organizations.update(organizationId, { $set: organizationData });
+      const result = Organizations.update(organizationId, { $set: organizationData });
+
+      // Check if organization update failed
+      if (result === 0) {
+        return errorMessagePayload(500, 'Organization update failed');
+      }
 
       return {
         statusCode: 200,
@@ -622,6 +681,9 @@ ManagementV1.addRoute('organizations/:id', {
         404: {
           description: 'Organization is not found',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -652,7 +714,11 @@ ManagementV1.addRoute('organizations/:id', {
       }
 
       // Remove Organization document
-      Meteor.call('removeOrganization', organization._id);
+      const result = Meteor.call('removeOrganization', organization._id);
+
+      if (result === 0) {
+        return errorMessagePayload(500, 'Organization removing failed.');
+      }
 
       return {
         statusCode: 204,
@@ -861,6 +927,9 @@ ManagementV1.addRoute('organizations/:id/managers', {
             },
           },
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -872,6 +941,7 @@ ManagementV1.addRoute('organizations/:id/managers', {
     action () {
       // Get data from body parameters
       const bodyParams = this.bodyParams;
+
       // Get ID of Organization
       // Note! It can not be checked here, if this parameter is not provided,
       //       because in that case the parameters are shifted and endpoint is not found at all.
@@ -914,7 +984,13 @@ ManagementV1.addRoute('organizations/:id/managers', {
       }
 
       // Update Organization manager list
-      Organizations.update(organizationId, { $push: { managerIds: newManager._id } });
+      const result = Organizations.update(organizationId,
+        { $push: { managerIds: newManager._id } });
+
+      // If organization update failed
+      if (result === 0) {
+        return errorMessagePayload(500, 'Organization manager update failed');
+      }
 
       // Do not include password in response
       const options = {};
@@ -1123,6 +1199,9 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
         404: {
           description: 'Organization is not found',
         },
+        500: {
+          description: 'Internal server error',
+        },
       },
       security: [
         {
@@ -1173,7 +1252,11 @@ ManagementV1.addRoute('organizations/:id/managers/:managerId', {
       }
 
       // Remove user from organization manager list
-      Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
+      const result = Meteor.call('removeOrganizationManager', organizationId, removeManagerId);
+
+      if (result === 0) {
+        return errorMessagePayload(500, 'Removing manager id from organization failed.');
+      }
 
       return {
         statusCode: 204,

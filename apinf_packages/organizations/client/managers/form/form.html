@@ -4,21 +4,23 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="addOrganizationManagerForm">
-  <h3>
-    {{_ "addOrganizationManagerForm_title" }}
-  </h3>
-  <p>
-    {{_ "addOrganizationManagerForm_description" }}
-  </p>
-    {{# autoForm
+  {{# autoForm
     schema=managerSchema
     id="organizationManagerForm"
     class="form-inline"
     type="method"
-    meteormethod="addOrganizationManagerByEmail"}}
+    meteormethod="addOrganizationManager"}}
 
-    {{> afQuickField name='email' id="manager-email" }}
-    {{> afQuickField name='organizationId' value=organization._id type="hidden" }}
+    <fieldset>
+      <h3 style="font-size:16px; margin-top:0;">
+        Add new manager
+      </h3>
+      <p style="color:#6d859e;">
+        {{_ "addOrganizationManagerForm_helpText_usernameEmail" }}
+      </p>
+      {{> afQuickField name='user' id="manager" }}
+      {{> afQuickField name='organizationId' value=organization._id type="hidden" }}
+    </fieldset>
 
     <button type="submit" class="btn btn-primary" id="add-manager">
       {{_ "addOrganizationManagerForm_button" }}

@@ -17,7 +17,7 @@ Template.errorsStatisticTable.helpers({
     const errors = Template.currentData().errorsStatistic;
 
     // Get only first 6 items of list
-    return errors.slice(0, 6);
+    return errors.slice(0, 20);
   },
   allErrorsCount () {
     // Return count of all errors

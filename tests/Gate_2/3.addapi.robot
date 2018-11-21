@@ -23,9 +23,9 @@ Create new api no url (negative)
 
 Create new api (positive)
 	Create API	Kissa	${EMPTY}	https://www.google.com
-	confirm page loaded	Kappa
+	confirm page loaded	Kissa
 
-*** Keywords *** 
+*** Keywords ***
 Go to homepage
 	Open Browser	${HOMEPAGE} 	${BROWSER}
 
@@ -34,7 +34,7 @@ Go to login
 	Click Element 	id=frontpage-button
 	Click Element	id=signin-button
 
-Login to apinf	
+Login to apinf
 	[Arguments]	${username}	${password}
 	Input Text	id=at-field-username_and_email	${username}
 	Input Password 	id=at-field-password	${password}

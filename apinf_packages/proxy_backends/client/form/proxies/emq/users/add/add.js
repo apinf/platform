@@ -33,7 +33,7 @@ Template.addEmqUser.events({
     if (username && password) {
       // Call method to add user to EMQ proxy
       Meteor.call('addEmqUser', emqHttpApi, { username, password }, (err, res) => {
-        if (err) sAlert.error(err.message);
+        if (err) sAlert.error(err.message, { timeout: 'none' });
 
         // Check if user has really been added to EMQ
         if (res.username === username) {
@@ -63,7 +63,7 @@ Template.addEmqUser.events({
       const errorMessage =
       TAPi18n.__('proxyBackendForm_emqProxyForm_addEmqUser_errorMessage');
       // Show error message
-      sAlert.error(errorMessage);
+      sAlert.error(errorMessage, { timeout: 'none' });
     }
   },
 });

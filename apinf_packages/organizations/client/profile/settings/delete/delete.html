@@ -4,15 +4,17 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationSettingsDelete">
-  <div class="setting-section">
-    <h3>
-      {{_ 'organizationSettingsDelete_title' }}
-    </h3>
-    <p>
-      {{_ 'organizationSettingsDelete_text_information' }}
-    </p>
-    <button type="button" class="btn btn-danger" id="delete-organization">
-      {{_ 'organizationSettingsDelete_buttonText_delete' }}
-    </button>
+  <div class="row setting-section">
+    <div class="col-md-8">
+      <h2 style="font-size:16px; margin-top:0;">Delete this organization</h2>
+      <p>
+        {{_ 'organizationSettingsDelete_text_information' }}
+      </p>
+    </div>
+    <div class="col-md-4 text-right">
+      <button type="button" class="btn btn-danger" id="delete-organization">
+        {{_ 'organizationSettingsDelete_buttonText_delete' }}
+      </button>
+    </div>
   </div>
 </template>

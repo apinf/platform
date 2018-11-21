@@ -1,4 +1,7 @@
 sudo: false
+
+group: deprecated-2017Q4
+
 language: node_js
 node_js:
   - '4'
@@ -7,11 +10,8 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
-        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
     packages:
       - g++-4.8
-      - yarn
   chrome: stable
 
 branches:
@@ -30,8 +30,12 @@ services:
   - docker
 
 before_install:
+  - free -m
+  - pwd
+  - ls -la
   # Install meteor locally on CI
-  - if [ ! -e "$HOME/.meteor/meteor" ]; then cat $HOME/.travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
+  - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
+
 
 before_script:
   - yarn

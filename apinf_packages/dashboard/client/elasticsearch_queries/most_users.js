@@ -31,7 +31,7 @@ export default function mostUsersRequest (requestPath, dateRange) {
       aggregations: {
         most_frequent_users: {
           terms: {
-            field: 'user_email',
+            field: 'api_key',
             order: { _count: 'desc' },
           },
           aggs: {

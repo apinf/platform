@@ -9,6 +9,7 @@ import { check } from 'meteor/check';
 
 // Collections imports
 import AnalyticsData from '/apinf_packages/analytics/collection';
+import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -63,10 +64,10 @@ Meteor.methods({
             fail: { $push: { date: '$date', value: '$requestPathsData.failCallsCount' } },
             error: { $push: { date: '$date', value: '$requestPathsData.errorCallsCount' } },
             medianTime: { $push: { date: '$date', value: '$requestPathsData.medianResponseTime' } },
-            percentiles95Time: { $push: {
-              date: '$date',
-              value: '$requestPathsData.percentile95ResponseTime',
-            } },
+            shortest: { $push: { date: '$date', value: '$requestPathsData.shortestResponseTime' } },
+            short: { $push: { date: '$date', value: '$requestPathsData.shortResponseTime' } },
+            long: { $push: { date: '$date', value: '$requestPathsData.longResponseTime' } },
+            longest: { $push: { date: '$date', value: '$requestPathsData.longestResponseTime' } },
           },
         },
       ]
@@ -81,7 +82,10 @@ Meteor.methods({
           fail: dataset.fail.map(x => x.value[index] || 0),
           error: dataset.error.map(x => x.value[index] || 0),
           median: dataset.medianTime.map(x => x.value[index] || 0),
-          percentiles95: dataset.percentiles95Time.map(x => x.value[index] || 0),
+          shortest: dataset.shortest.map(x => x.value[index] || 0),
+          short: dataset.short.map(x => x.value[index] || 0),
+          long: dataset.long.map(x => x.value[index] || 0),
+          longest: dataset.longest.map(x => x.value[index] || 0),
         };
       });
       /* eslint-enable arrow-body-style */
@@ -107,21 +111,15 @@ Meteor.methods({
 
     return errors;
   },
-  summaryStatisticNumber (filter) {
+  summaryStatisticNumber (filter, proxyBackendIds) {
     check(filter, Object);
+    check(proxyBackendIds, Array);
 
     // Create query to $match
     const matchQuery = {
       date: { $gte: filter.fromDate, $lt: filter.toDate },
+      proxyBackendId: { $in: proxyBackendIds },
     };
-
-    if (filter.proxyId) {
-      // Fetch data for particular Proxy (and several Proxy Backends)
-      matchQuery.proxyId = filter.proxyId;
-    } else {
-      // Fetch data for particular Proxy Backend
-      matchQuery.proxyBackendId = filter.proxyBackendId;
-    }
 
     const requestPathsData = {};
 
@@ -140,60 +138,45 @@ Meteor.methods({
             _id: '$prefix',
             requestNumber: { $sum: '$requestNumber' },
             sumMedianTime: { $sum: '$medianResponseTime' },
+            sumLongestResponseTime: { $sum: '$longestResponseTime' },
+            sumLongResponseTime: { $sum: '$longResponseTime' },
+            sumShortestResponseTime: { $sum: '$shortestResponseTime' },
+            sumShortResponseTime: { $sum: '$shortResponseTime' },
             sumUniqueUsers: { $sum: '$uniqueUsers' },
             successCallsCount: { $sum: '$successCallsCount' },
-            redirectCallsCount: { $sum: '$redirectCallsCount' },
-            failCallsCount: { $sum: '$failCallsCount' },
             errorCallsCount: { $sum: '$errorCallsCount' },
           },
         },
       ]
     ).forEach(dataset => {
-      // Create query
-      const query = { prefix: dataset._id, date: matchQuery.date, requestNumber: { $ne: 0 } };
+      // Expend query
+      matchQuery.prefix = dataset._id;
+      matchQuery.requestNumber = { $ne: 0 };
 
-      if (filter.proxyId) {
-        query.proxyId = filter.proxyId;
-      } else {
-        query.proxyBackendId = filter.proxyBackendId;
-      }
-
-      // Get the number of date when requests were
-      const existedValuesCount = AnalyticsData.find(query).count();
+      // Get the number of date when requests were no 0
+      const existedValuesCount = AnalyticsData.find(matchQuery).count();
 
       // Calculate average (mean) value of Response time and Uniques users during period
       requestPathsData[dataset._id] = {
-        medianResponseTime: parseInt(dataset.sumMedianTime / existedValuesCount, 10) || 0,
-        avgUniqueUsers: parseInt(dataset.sumUniqueUsers / existedValuesCount, 10) || 0,
+        prefix: dataset._id, // Just rename it
+        medianResponseTime:
+          parseInt(dataset.sumMedianTime / existedValuesCount, 10) || 0,
+        longestResponseTime:
+          parseInt(dataset.sumLongestResponseTime / existedValuesCount, 10) || 0,
+        longResponseTime:
+          parseInt(dataset.sumLongResponseTime / existedValuesCount, 10) || 0,
+        shortestResponseTime:
+          parseInt(dataset.sumShortestResponseTime / existedValuesCount, 10) || 0,
+        shortResponseTime:
+          parseInt(dataset.sumShortResponseTime / existedValuesCount, 10) || 0,
+        avgUniqueUsers:
+          parseInt(dataset.sumUniqueUsers / existedValuesCount, 10) || 0,
       };
 
       Object.assign(requestPathsData[dataset._id], dataset);
     });
 
     return requestPathsData;
-  },
-  summaryStatisticTrend (filter, currentPeriodResponse) {
-    check(filter, Object);
-    check(currentPeriodResponse, Object);
-
-    // Get summary statistic data about previous period
-    const previousPeriodResponse = Meteor.call('summaryStatisticNumber', filter);
-
-    const comparisonData = {};
-
-    // Compare the current and previous periods data
-    _.mapKeys(currentPeriodResponse, (dataset, path) => {
-      const previousPeriodData = previousPeriodResponse[path] || {};
-
-      comparisonData[path] = {
-        compareRequests: calculateTrend(previousPeriodData.requestNumber, dataset.requestNumber),
-        compareResponse:
-          calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime),
-        compareUsers: calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers),
-      };
-    });
-
-    return comparisonData;
   },
   statusCodesData (filter) {
     check(filter, Object);
@@ -272,6 +255,11 @@ Meteor.methods({
             _id: '$prefix',
             requestNumber: { $push: { date: '$date', value: '$requestNumber' } },
             medianTime: { $push: { date: '$date', value: '$medianResponseTime' } },
+            shortest: { $push: { date: '$date', value: '$shortestResponseTime' } },
+            short: { $push: { date: '$date', value: '$shortResponseTime' } },
+            long: { $push: { date: '$date', value: '$longResponseTime' } },
+            longest: { $push: { date: '$date', value: '$longestResponseTime' } },
+
             uniqueUsers: { $push: { date: '$date', value: '$uniqueUsers' } },
           },
         },
@@ -281,5 +269,52 @@ Meteor.methods({
     });
 
     return requestPathsData;
+  },
+  totalNumberRequestsAndTrend (filter, proxyBackendIds) {
+    check(filter, Object);
+    check(proxyBackendIds, Array);
+
+    // Get data for Current period
+    const currentPeriodResponse =
+      Meteor.call('summaryStatisticNumber', filter, proxyBackendIds);
+
+    // Create date range filter for Previous period
+    const previousPeriodFilter = {
+      fromDate: filter.doublePeriodAgo,
+      toDate: filter.onePeriodAgo,
+    };
+
+    // Get data for Previous period
+    const previousPeriodResponse =
+      Meteor.call('summaryStatisticNumber', previousPeriodFilter, proxyBackendIds);
+
+    const response = [];
+
+    // Compare the current and previous periods data
+    _.mapKeys(currentPeriodResponse, (dataset, path) => {
+      const proxyBackend = ProxyBackends.findOne({
+        'apiUmbrella.url_matches.frontend_prefix': dataset.prefix,
+      });
+
+      if (proxyBackend) {
+        dataset.proxyBackendId = proxyBackend._id;
+        dataset.apiName = proxyBackend.apiName();
+        dataset.apiSlug = proxyBackend.apiSlug();
+        dataset.apiId = proxyBackend.apiId;
+      }
+
+      // Create a comparison data
+      const previousPeriodData = previousPeriodResponse[path] || {};
+      dataset.compareRequests =
+        calculateTrend(previousPeriodData.requestNumber, dataset.requestNumber);
+      dataset.compareResponse =
+        calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime);
+      dataset.compareUsers =
+        calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers);
+
+      response.push(dataset);
+    });
+
+    return response;
   },
 });

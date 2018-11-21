@@ -52,11 +52,8 @@ Meteor.methods({
     return api && api.currentUserCanManage();
   },
   myApisIds () {
-    // Get APIs are managed by current user
-    const myApis = Apis.find({ managerIds: { $in: [this.userId] } }, { _id: 1 }).fetch();
-
-    // Return list of IDs
-    return myApis.map(api => {
+    // Return IDs list of APIs are managed by current user
+    return Apis.find({ managerIds: { $in: [this.userId] } }).map(api => {
       return api._id;
     });
   },
@@ -64,35 +61,20 @@ Meteor.methods({
     // Make sure parameter exists and is Array
     check(myApis, Array);
 
-    // Get Organizations which are managed by current user
-    const managedOrganizations = Organizations.find(
-      { managerIds: { $in: [this.userId] } },
-      { _id: 1 }
-    ).fetch();
+    // Get Organizations IDs which are managed by current user
+    const managedOrganizationIds = Organizations
+      .find({ managerIds: { $in: [this.userId] } })
+      .map(organization => {
+        return organization._id;
+      });
 
-    // Make list of IDs
-    const organizationIds = managedOrganizations.map(organization => {
-      return organization._id;
-    });
-
-    // Get relations of organizations
-    const organizationApis = OrganizationApis.find(
-      { organizationId: { $in: organizationIds } },
-      { apiId: 1 }
-    ).fetch();
-
-    // Make list of IDs
-    const apiIds = organizationApis.map(organizationApi => {
-      return organizationApi.apiId;
-    });
-
-    // Get managed APIs of Organizations and no owned
-    const managedApis = Apis.find({ _id: { $in: apiIds, $nin: myApis } }, { _id: 1 }).fetch();
-
-    // Return list of IDs
-    return managedApis.map(api => {
-      return api._id;
-    });
+    // Get APIs IDs that are connected to the managed organizations
+    // and not managed by current user
+    return OrganizationApis
+      .find({ organizationId: { $in: managedOrganizationIds }, apiId: { $nin: myApis } })
+      .map(organizationApi => {
+        return organizationApi.apiId;
+      });
   },
   otherApisIds (myApis, managedApis) {
     // Check parameters are array
@@ -101,14 +83,16 @@ Meteor.methods({
 
     // Get APIs which are not managed by current user
     // And are not connected to Organizations which the current user is manager
-    const otherApis = Apis.find({ _id: { $nin: myApis.concat(managedApis) } }, { _id: 1 }).fetch();
-
-    // Return list of IDs
-    return otherApis.map(api => {
-      return api._id;
-    });
+    // Return IDs list of these APIs
+    return Apis
+      .find({ _id: { $nin: myApis.concat(managedApis) } })
+      .map(api => {
+        return api._id;
+      });
   },
-  groupingApiIds () {
+  groupingBackendIds (proxyId) {
+    check(proxyId, String);
+    let otherApis = [];
     // Placeholder to store ids
     const groupingIds = {
       myApis: [],
@@ -117,19 +101,115 @@ Meteor.methods({
     };
 
     // Get IDs of owned APIs
-    groupingIds.myApis = Meteor.call('myApisIds');
+    const myApis = Meteor.call('myApisIds');
     // Get IDs of managed APIs
-    groupingIds.managedApis = Meteor.call('managedApisIds', groupingIds.myApis);
-
+    const managedApis = Meteor.call('managedApisIds', myApis);
     // Make sure user is admin
     if (Roles.userIsInRole(this.userId, ['admin'])) {
       // Get IDs of other APIs
-      groupingIds.otherApis = Meteor.call('otherApisIds',
-        groupingIds.myApis, groupingIds.managedApis
-      );
+      otherApis = Meteor.call('otherApisIds', myApis, managedApis);
+      // Get related Proxy Backend IDs
+      groupingIds.otherApis = ProxyBackends
+        .find({ apiId: { $in: otherApis }, proxyId })
+        .map(backend => { return backend._id; });
     }
+
+    // Get related Proxy Backend IDs
+    groupingIds.myApis = ProxyBackends
+      .find({ apiId: { $in: myApis }, proxyId })
+      .map(backend => { return backend._id; });
+
+    groupingIds.managedApis = ProxyBackends
+      .find({ apiId: { $in: managedApis }, proxyId })
+      .map(backend => { return backend._id; });
 
     // Return all lists of IDs
     return groupingIds;
+  },
+  overviewChartsGeneral (params, proxyBackendIds) {
+    check(params, Object);
+    check(proxyBackendIds, Array);
+
+    let response;
+
+    // "Yesterday" or "Today"
+    if (params.timeframe === '48' || params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('overviewChartsDataFromElasticsearch', params, proxyBackendIds);
+    } else {
+      // Last N days
+      // Fetch from MongoDB
+      response = Meteor.call('overviewChartsData', params, proxyBackendIds);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  timelineChartsGeneral (params) {
+    check(params, Object);
+
+    let response;
+
+    // "Yesterday" or "Today"
+    if (params.timeframe === '48' || params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('timelineChartDataFromElasticsearch', params);
+    } else {
+      // Last N days
+      // Fetch from MongoDB
+      response = Meteor.call('timelineChartData', params);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  totalNumberAndTrendGeneral (params, proxyBackendIds) {
+    check(params, Object);
+    check(proxyBackendIds, Array);
+
+    let response;
+
+    // "Today"
+    if (params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('totalNumberRequestFromElasticsearch', params, proxyBackendIds);
+    } else {
+      // Last N days And Yesterday
+      // Fetch from MongoDB
+      response = Meteor.call('totalNumberRequestsAndTrend', params, proxyBackendIds);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  },
+  statusCodesGeneral (params) {
+    check(params, Object);
+
+    let response;
+
+    // "Today"
+    if (params.timeframe === '12') {
+      // Make ES request to aggregated by hour
+      response = Meteor.call('statusCodesFromElasticsearch', params);
+    } else {
+      // Last N days And Yesterday
+      // Fetch from MongoDB
+      response = Meteor.call('statusCodesData', params);
+    }
+
+    try {
+      return response;
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
   },
 });

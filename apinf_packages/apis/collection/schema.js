@@ -18,12 +18,15 @@ Apis.schema = new SimpleSchema({
       // synchronization with proxy
       // distinct catalog entries
     unique: true,
+    autoform: {
+      placeholder: 'e.g. Tampere Bus Service',
+    },
   },
   description: {
     type: String,
     max: 1000,
     autoform: {
-      rows: 3,
+      rows: 6,
     },
     optional: true,
   },
@@ -31,6 +34,9 @@ Apis.schema = new SimpleSchema({
     type: String,
     optional: false,
     regEx: SimpleSchema.RegEx.Url,
+    autoform: {
+      placeholder: 'e.g. https://tampere-bus-service.fi',
+    },
   },
   slug: {
     type: String,
@@ -147,7 +153,15 @@ Apis.schema = new SimpleSchema({
   isPublic: {
     type: Boolean,
     optional: true,
-    defaultValue: true,
+    defaultValue: false,
+  },
+  'friendlySlugs.slug.base': {
+    type: String,
+    optional: true,
+  },
+  'friendlySlugs.slug.index': {
+    type: Number,
+    optional: true,
   },
 });
 

@@ -39,6 +39,11 @@ Organizations.schema = new SimpleSchema({
     },
     optional: true,
   },
+  isPublic: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,
@@ -47,8 +52,29 @@ Organizations.schema = new SimpleSchema({
       label: false,
     },
   },
+  emailVerification: {
+    type: [Object],
+    optional: true,
+  },
+  'emailVerification.$.managerIds': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    autoform: {
+      type: 'hidden',
+      label: false,
+    },
+  },
+  'emailVerification.$.verified': {
+    type: Boolean,
+  },
+  'emailVerification.$.verificationToken': {
+    type: String,
+    optional: true,
+  },
   name: {
     type: String,
+    optional: false,
+    unique: true,
   },
   organizationLogoFileId: {
     type: String,
@@ -152,7 +178,14 @@ Organizations.schema = new SimpleSchema({
     defaultValue: [],
     maxCount: 4,
   },
-
+  'friendlySlugs.slug.base': {
+    type: String,
+    optional: true,
+  },
+  'friendlySlugs.slug.index': {
+    type: Number,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)

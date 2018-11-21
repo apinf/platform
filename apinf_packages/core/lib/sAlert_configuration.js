@@ -14,7 +14,8 @@ Meteor.startup(() => {
   if (Meteor.isClient) {
     config = sAlert.config({
       effect: 'stackslide',
-      position: 'bottom-right',
+      stack: false,
+      position: 'top',
       timeout: 3000,
       html: false,
     });

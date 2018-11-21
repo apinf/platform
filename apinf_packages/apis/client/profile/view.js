@@ -19,17 +19,22 @@ import Apis from '/apinf_packages/apis/collection';
 import Branding from '/apinf_packages/branding/collection';
 import Feedback from '/apinf_packages/feedback/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 Template.viewApi.onCreated(function () {
-   // Get reference to template instance
+  // Get reference to template instance
   const templateInstance = this;
 
   templateInstance.api = new ReactiveVar();
 
   // Subscribe to public proxy details
   templateInstance.subscribe('proxyCount');
-  // Subscribe to public proxy details for proxy form
-  templateInstance.subscribe('publicProxyDetails');
+  // Subscribe to public proxy details (particular type)
+  templateInstance.subscribe('publicProxyDetails', 'apiUmbrella');
+  // Subscribe to Settings "supportsGraphql"
+  templateInstance.subscribe('singleSetting', 'supportsGraphql');
+  // Subscribe to development Features settings
+  templateInstance.subscribe('singleSetting', 'developmentFeatures');
 
   // Using to get updated subscription
   templateInstance.autorun(() => {
@@ -138,6 +143,17 @@ Template.viewApi.helpers({
       // Proxy is defined
       return true;
     }
+    return false;
+  },
+  developmentFeatures () {
+    // Get settings
+    const settings = Settings.findOne();
+
+    // Make sure that Settings exist
+    if (settings) {
+      return settings.developmentFeatures;
+    }
+    // Otherwise return false
     return false;
   },
 });

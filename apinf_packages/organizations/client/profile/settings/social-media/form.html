@@ -5,10 +5,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="organizationSettingsSocialMedia">
   <div class="setting-section">
-    <h3>
-      {{_ "organizationSettingsSocialMedia_title" }}
-    </h3>
-
     {{# autoForm
       collection=organizationCollection
       doc=organization
@@ -21,7 +17,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='socialMedia.instagram' id="link-instagram" }}
       {{> afQuickField name='socialMedia.linkedIn' id="link-linkedin" }}
 
-      <button type="submit" class="btn btn-success" id="save-org-some-settings">
+      <button type="submit" class="btn btn-success btn-success-special" id="save-org-some-settings">
         {{_ "organizationSettingsSocialMedia_saveButton_text" }}
       </button>
     {{/ autoForm }}

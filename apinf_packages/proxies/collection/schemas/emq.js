@@ -26,17 +26,23 @@ export default {
   },
   'emq.brokerEndpoints.$.port': {
     type: Number,
+    autoform: {
+      type: 'number',
+    },
   },
   'emq.brokerEndpoints.$.tls': {
     type: Boolean,
   },
-  'emq.httpApi': {
-    type: String,
-    autoform: {
-      placeholder: 'https://user:pasword@host[:port][path]',
-    },
-  },
   'emq.elasticsearch': {
     type: String,
+    autoform: {
+      placeholder: 'http://host:9200',
+    },
+  },
+  'emq.postgresEndpoint': {
+    type: String,
+    autoform: {
+      placeholder: 'http://host:3000/mqtt_acl',
+    },
   },
 };

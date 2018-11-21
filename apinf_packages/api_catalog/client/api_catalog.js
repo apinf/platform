@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
+import { ReactiveVar } from 'meteor/reactive-var';
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -19,16 +20,25 @@ import Apis from '/apinf_packages/apis/collection';
 import ApiBookmarks from '/apinf_packages/bookmarks/collection';
 import ApiDocs from '/apinf_packages/api_docs/collection';
 import Branding from '/apinf_packages/branding/collection';
+import Settings from '/apinf_packages/settings/collection';
 
 import 'locale-compare-polyfill';
 
 // Npm packages imports
 import _ from 'lodash';
 
+// APInf imports
+import localisedSorting from '/apinf_packages/core/helper_functions/string_utils';
+
 Template.apiCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
+  // Init reactive var for search value with empty string for all results
+  instance.searchValue = new ReactiveVar('');
+
+  // Init the query reactive variable
+  instance.query = new ReactiveVar();
   instance.autorun(() => {
     // Get Branding collection content
     const branding = Branding.findOne();
@@ -68,7 +78,7 @@ Template.apiCatalog.onCreated(function () {
   // Set initial settings of pagination
   instance.pagination = new Meteor.Pagination(Apis, {
     // Count of cards in catalog
-    perPage: 24,
+    perPage: 12,
     // Set sort by name on default
     sort: defaultSort,
     filters,
@@ -198,6 +208,30 @@ Template.apiCatalog.onCreated(function () {
       currentFilters._id = { $in: apiIds };
     }
 
+    const searchValue = instance.searchValue.get();
+    // Construct query using regex using search value
+    instance.query.set({
+      $or: [
+        {
+          name: {
+            $regex: searchValue,
+            $options: 'i', // case-insensitive option
+          },
+        },
+        {
+          backend_host: {
+            $regex: searchValue,
+            $options: 'i', // case-insensitive option
+          },
+        },
+      ],
+    });
+    if (searchValue !== '') {
+      currentFilters = instance.query.get();
+    }
+    if (FlowRouter.current().route.name === 'myApiCatalog') {
+      currentFilters.managerIds = userId;
+    }
     instance.pagination.currentPage([Session.get('currentIndex')]);
     instance.pagination.filters(currentFilters);
   });
@@ -213,15 +247,14 @@ Template.apiCatalog.helpers({
   apis () {
     // Get apis collection via Pagination
     const apis = Template.instance().pagination.getPage();
-    // Get the language
-    const language = TAPi18n.getLanguage();
+
     // Get the sort via Pagination
     const sort = Template.instance().pagination.sort();
     // When sorted by name
     if (sort.name) {
       // use custom sort function with i18n support
       apis.sort((a, b) => {
-        return a.name.localeCompare(b.name, language) * sort.name;
+        return localisedSorting(a.name, b.name, sort.name);
       });
     }
     return apis;
@@ -251,6 +284,33 @@ Template.apiCatalog.helpers({
   apisCount () {
     return Template.instance().pagination.totalItems();
   },
+  userCanAddApi () {
+    // Get settigns document
+    const settings = Settings.findOne();
+
+    if (settings) {
+      // Get access setting value
+      // If access field doesn't exist, these is false. Allow users to add an API on default
+      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
+
+      // Allow user to add an API because not only for admin
+      if (!onlyAdminsCanAddApis) {
+        return true;
+      }
+
+      // Otherwise check of user role
+      // Get current user Id
+      const userId = Meteor.userId();
+
+      // Check if current user is admin
+      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+      return userIsAdmin;
+    }
+    // Return true because no settings are set
+    // By default allowing all user to add an API
+    return true;
+  },
 });
 
 Template.apiCatalog.events({
@@ -259,5 +319,21 @@ Template.apiCatalog.events({
     const selectedTag = event.currentTarget.dataset.lifecycle;
     // Set value in query parameter
     FlowRouter.setQueryParams({ lifecycle: selectedTag });
+  },
+  'keyup #search-field': function (event) {
+    event.preventDefault();
+    // Get reference to Template instance
+    const instance = Template.instance();
+    // Get search text from a text field.
+    const searchValue = instance.$('#search-field').val();
+    // Assign searchValue to a reactive variable
+    instance.searchValue.set(searchValue);
+    // Set query parameter to value of search text
+    FlowRouter.setQueryParams({ q: searchValue });
+    return false;
+  },
+  'submit #search-form': function (event) {
+    // Prevent the 'submit' event
+    event.preventDefault();
   },
 });

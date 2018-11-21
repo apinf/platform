@@ -1,0 +1,24 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+<template name="topicsPage">
+  <div class="container layout-content">
+    <div class="row baseline">
+      <div class="col-xs-12 col-sm-8">
+        <strong class="text-uppercase">
+          Explore topic trees
+        </strong>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <select class="form-control pull-right" id="search-topic-select"></select>
+      </div>
+    </div>
+
+    {{# if Template.subscriptionsReady }}
+      {{> displayTopicsTable mainPage=false newTopic=newTopic }}
+    {{ else }}
+      {{> spinner }}
+    {{/ if }}
+  </div>
+</template>

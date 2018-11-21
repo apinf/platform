@@ -16,13 +16,14 @@ aldeed:simple-schema@1.5.3
 aldeed:template-extension@4.1.0
 allow-deny@1.0.9
 amplify@1.0.0
-apinf:accounts-admin-ui@0.3.2
+apinf:accounts-admin-ui@0.3.4
 apinf:accounts-fiware@0.1.1
 apinf:api-umbrella@1.4.1
 apinf:autoform-bs-datepicker@1.1.2
+apinf:bootstrap@3.3.7
 apinf:create-role-if-undefined@0.1.1
 apinf:first-admin@0.1.2
-apinf:fiware@0.1.1
+apinf:fiware@0.2.0
 apinf:restivus-swagger@0.4.0
 aramk:quill@0.1.1
 arillo:flow-router-helpers@0.5.2
@@ -44,6 +45,7 @@ cfs:filesystem@0.1.2
 cfs:http-methods@0.0.32
 cfs:storage-adapter@0.2.3
 check@1.2.5
+cleandersonlobo:mdi-icons@1.3.0
 coffeescript@1.12.7_1
 coffeescript-compiler@1.12.7_1
 dandv:jquery-rateit@1.0.22_2
@@ -166,7 +168,6 @@ tmeasday:publish-counts@0.8.0
 todda00:friendly-slugs@0.6.0
 tracker@1.1.3
 trever:quill@0.0.5
-twbs:bootstrap@3.3.6
 u2622:persistent-session@0.4.4
 ui@1.0.13
 underscore@1.0.10
@@ -177,4 +178,5 @@ useraccounts:flow-routing@1.14.2
 vsivsi:file-collection@1.3.8
 webapp@1.3.18
 webapp-hashing@1.0.9
+yasaricli:textcounter@0.0.1
 zimme:active-route@2.3.2

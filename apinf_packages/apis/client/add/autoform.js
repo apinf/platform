@@ -10,9 +10,24 @@ import { Meteor } from 'meteor/meteor';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 AutoForm.hooks({
   addApiForm: {
+    formToDoc: (doc) => {
+      const protocol1 = 'https://';
+      const protocol2 = 'http://';
+      if (doc.url.substring(0, 8) === protocol1) {
+        return doc;
+      } else if (doc.url.substring(0, 7) === protocol2) {
+        return doc;
+      } else if (doc.url.substring(0, 8) !== protocol1) {
+        doc.url = protocol1 + doc.url;
+        return doc;
+      }
+      return doc;
+    },
+
     before: {
       insert (api) {
         // Get current user ID
@@ -29,13 +44,16 @@ AutoForm.hooks({
       },
     },
     onSuccess (formType, apiId) {
-      Meteor.call('getApiById', apiId, (error, api) => {
-        if (api && api.slug) {
-          // Redirect to newly added API
-          FlowRouter.go('viewApi', { slug: api.slug });
-        } else {
-          // Otherwise Redirect to API Catalog
+      // Add slug to api collection
+      Meteor.call('updateApiBySlug', { _id: apiId }, (error, slug) => {
+        if (error) {
+          // Show error message
+          sAlert.error(error, { timeout: 'none' });
+          // Redirect to API catalog
           FlowRouter.go('apiCatalog');
+        } else {
+          // Redirect to newly added API
+          FlowRouter.go('viewApi', { slug });
         }
       });
 

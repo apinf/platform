@@ -1,23 +1,26 @@
 /* Copyright 2017 Apinf Oy
- This file is covered by the EUPL license.
- You may obtain a copy of the licence at
- https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
-
-// Collection imports
-import ProxyBackends from '/apinf_packages/proxy_backends/collection';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // APInf imports
 import {
   arrowDirection,
   percentageValue,
 } from '/apinf_packages/dashboard/lib/trend_helpers';
+import localisedSorting from '/apinf_packages/core/helper_functions/string_utils';
+
+// Collections imports
+import Apis from '../../../../apis/collection';
 
 Template.dashboardSummaryStatistic.onCreated(function () {
   // Dictionary of Flags about display/not the overview part for current item
@@ -25,21 +28,70 @@ Template.dashboardSummaryStatistic.onCreated(function () {
 
   // Dictionary of Flags about display/not the overview part for current item
   instance.displayOverview = new ReactiveDict();
+  instance.sortedAnalyticsData = new ReactiveVar();
 
+  // Watching on Sort parameter
   instance.autorun(() => {
-    // Get API IDs
-    const apiIds = Template.currentData().apiIds;
+    let sortedAnalyticsData;
+    const sortParameter = FlowRouter.getQueryParam('sort');
 
-    // Update list of proxy backends
-    const proxyBackends = ProxyBackends.find({ apiId: { $in: apiIds } }).fetch();
+    const analyticsData = Template.currentData().analyticsData;
 
-    // Get the current language
-    const language = TAPi18n.getLanguage();
+    if (analyticsData) {
+      switch (sortParameter) {
+        case 'calls': {
+          // Sort by desc requests number
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return b.requestNumber - a.requestNumber;
+          });
+          break;
+        }
+        case 'users': {
+          // Sort by desc unique users count
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return b.avgUniqueUsers - a.avgUniqueUsers;
+          });
+          break;
+        }
+        case 'time': {
+          // Sort by desc median response time
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return b.medianResponseTime - a.medianResponseTime;
+          });
+          break;
+        }
+        default: {
+          // sort by name on default
+          sortedAnalyticsData = analyticsData.sort((a, b) => {
+            return localisedSorting(a.apiName, b.apiName);
+          });
+        }
+      }
+    }
 
-    // Sort by name
-    instance.proxyBackends = proxyBackends.sort((a, b) => {
-      return a.apiName().localeCompare(b.apiName(), language);
-    });
+    // Update
+    instance.sortedAnalyticsData.set(sortedAnalyticsData);
+  });
+
+  this.autorun(() => {
+    const analyticsData = Template.currentData().analyticsData;
+    const searchValue = Template.currentData().searchValue;
+
+    // Make sure analyticsData exist and searchValue is provided
+    if (searchValue && analyticsData) {
+      // Get API IDs that satisfy provided search value
+      const apiIds = Apis.find({
+        name: {
+          $regex: searchValue,
+          $options: 'i', // case-insensitive option
+        },
+      }).map(api => { return api._id; });
+
+      // Find in Analytics Dataset
+      this.searchResult = analyticsData.filter(dataset => {
+        return apiIds.indexOf(dataset.apiId) > -1;
+      });
+    }
   });
 });
 
@@ -57,13 +109,18 @@ Template.dashboardSummaryStatistic.helpers({
     const direction = arrowDirection(parameter, this);
 
     // Green color for text -  percentage value near arrow
-    if (direction === 'arrow-up' || direction === 'arrow-down_time') {
-      textColor = 'text-success';
+    if (direction === 'trending-up arrow-up' || direction === 'trending-down arrow-down_time') {
+      textColor = 'arrow-up';
     }
 
     // Red color for text - percentage value near arrow
-    if (direction === 'arrow-down' || direction === 'arrow-up_time') {
-      textColor = 'text-danger';
+    if (direction === 'trending-down arrow-down' || direction === 'trending-up arrow-up_time') {
+      textColor = 'arrow-down';
+    }
+
+    // Grey color for text
+    if (direction === 'no-trend') {
+      textColor = 'text-default';
     }
 
     return textColor;
@@ -73,73 +130,50 @@ Template.dashboardSummaryStatistic.helpers({
 
     return instance.displayOverview.get(parameter);
   },
-  proxyBackends () {
-    const instance = Template.instance();
-
-    // Sort by name
-    return instance.proxyBackends;
-  },
   tableTitle () {
     const title = Template.currentData().title;
 
     return TAPi18n.__(`dashboardSummaryStatistic_groupTitle_${title}`);
   },
-  getCount (path, param) {
-    const summaryStatisticResponse = Template.currentData().summaryStatisticResponse;
-    // Get summary statistics data that relates to provided Proxy Backend
-    const totalNumber = summaryStatisticResponse && summaryStatisticResponse[path];
+  sortedAnalyticsData () {
+    const searchValue = Template.currentData().searchValue;
 
-    let count;
+    // Case: SearchName is specified
+    if (searchValue) {
+      // Display search result
+      return Template.instance().searchResult;
+    }
+    // Otherwise: display all data
+    return Template.instance().sortedAnalyticsData.get();
+  },
+  displayTable () {
+    const searchValue = Template.currentData().searchValue;
 
-    switch (param) {
-      case 'success': {
-        count = totalNumber ? totalNumber.successCallsCount : 0;
-        break;
-      }
-      case 'error': {
-        count = totalNumber ? totalNumber.errorCallsCount : 0;
-        break;
-      }
-      case 'requests': {
-        count = totalNumber ? totalNumber.requestNumber : 0;
-        break;
-      }
-      case 'time': {
-        count = totalNumber ? totalNumber.medianResponseTime : 0;
-        break;
-      }
-      case 'users': {
-        count = totalNumber ? totalNumber.avgUniqueUsers : 0;
-        break;
-      }
-      default: {
-        count = 0;
-        break;
-      }
+    // Case: SearchName is specified
+    if (searchValue) {
+      // Get search data
+      const searchResult = Template.instance().searchResult;
+      // Display if table contains result
+      return searchResult && searchResult.length > 0;
     }
 
-    return count;
+    // Otherwise display table is analytics data is not empty
+    const analyticsData = Template.currentData().analyticsData;
+
+    return analyticsData && analyticsData.length > 0;
   },
-  comparisonData (path) {
-    const comparisonResponse = Template.currentData().comparisonStatisticResponse;
-    // Get comparison data that relates to provided Proxy Backend
-    const comparisonData = comparisonResponse && comparisonResponse[path];
+  count () {
+    const searchValue = Template.currentData().searchValue;
 
-    return comparisonData || {};
+    // Case: SearchName is specified
+    if (searchValue) {
+      // Display search result
+      return Template.instance().searchResult.length;
+    }
+    // Otherwise: display all data
+    return Template.currentData().analyticsData.length;
   },
-});
-
-Template.dashboardSummaryStatistic.events({
-  'click [data-id]': (event, templateInstance) => {
-    const target = event.currentTarget;
-
-    // Get status of specified Overview template (shown or not)
-    const display = templateInstance.displayOverview.get(target.dataset.id);
-
-    // Inverse the value
-    templateInstance.displayOverview.set(target.dataset.id, !display);
-
-    // Display or not the box-shadow for table line
-    target.classList.toggle('open');
+  localeString (number) {
+    return number.toLocaleString();
   },
 });

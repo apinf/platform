@@ -16,16 +16,15 @@ import Proxies from '/apinf_packages/proxies/collection';
 import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 
 // Npm packages imports
-import moment from 'moment';
 import _ from 'lodash';
 
 // APInf import
 import mostUsersRequest from '/apinf_packages/dashboard/client/elasticsearch_queries/most_users';
-import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
 import {
   arrowDirection,
   percentageValue,
   summaryComparing } from '/apinf_packages/dashboard/lib/trend_helpers';
+import getDateRange from '../../../../core/helper_functions/date_range';
 
 Template.apiAnalyticPageBody.onCreated(function () {
   const instance = this;
@@ -38,80 +37,76 @@ Template.apiAnalyticPageBody.onCreated(function () {
 
   // Init variables
   instance.overviewChartResponse = new ReactiveVar();
-  instance.summaryStatisticResponse = new ReactiveVar();
-  instance.comparisonStatisticResponse = new ReactiveVar();
+  instance.analyticsData = new ReactiveVar();
   instance.statusCodesResponse = new ReactiveVar();
   instance.timelineChartResponse = new ReactiveVar();
   instance.allRequestPaths = new ReactiveVar();
   instance.frequentUsersResponse = new ReactiveVar();
   instance.errorsStatisticsResponse = new ReactiveVar();
+  instance.lastUpdateTime = new ReactiveVar();
 
   instance.autorun(() => {
     const timeframe = FlowRouter.getQueryParam('timeframe');
 
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
+    const queryOption = getDateRange(timeframe);
 
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+    const params = {
+      proxyBackendId,
+      fromDate: queryOption.from,
+      toDate: queryOption.to,
+      interval: queryOption.interval,
+      timeframe,
+      onePeriodAgo: queryOption.onePeriodAgo,
+      doublePeriodAgo: queryOption.doublePeriodAgo,
+    };
 
-    // Get data about summary statistic for current period
-    promisifyCall('summaryStatisticNumber', { proxyBackendId, fromDate, toDate })
-      .then((currentPeriodDataset) => {
-        instance.summaryStatisticResponse.set(currentPeriodDataset);
+    // Get data for Overview charts
+    Meteor.call('overviewChartsGeneral',
+      params, [proxyBackendId], (error, dataset) => {
+        if (error) throw new Meteor.Error(error.message);
 
-        const previousFromDate = moment(fromDate).subtract(timeframe, 'd').valueOf();
-
-        // Get trend data is based on the current period data
-        Meteor.call('summaryStatisticTrend',
-          { proxyBackendId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset,
-          (err, compareResponse) => {
-            // Save the response about Comparison data
-            instance.comparisonStatisticResponse.set(compareResponse);
-          });
-      }).catch((error) => {
-        throw new Meteor.Error(error);
-      });
-
-    // Get data about summary statistic over time
-    Meteor.call('overviewChartsData', { proxyBackendId, fromDate, toDate },
-      (error, dataset) => {
         instance.overviewChartResponse.set(dataset);
       });
 
-    // Get data about response status codes
-    Meteor.call('statusCodesData', { proxyBackendId, fromDate, toDate },
-      (error, dataset) => {
-        instance.statusCodesResponse.set(dataset);
+    Meteor.call('totalNumberAndTrendGeneral',
+      params, [proxyBackendId], (error, result) => {
+        this.analyticsData.set(result);
       });
 
     // Get data for Timeline charts
-    Meteor.call('timelineChartData', { proxyBackendId, fromDate, toDate },
-      (error, response) => {
-        if (error) throw new Error(error);
+    Meteor.call('timelineChartsGeneral',
+      params, (error, dataset) => {
+        if (error) throw new Meteor.Error(error.message);
 
-        instance.timelineChartResponse.set(response.requestPathsData);
-        instance.allRequestPaths.set(response.allRequestPaths);
+        instance.timelineChartResponse.set(dataset.requestPathsData);
+        instance.allRequestPaths.set(dataset.allRequestPaths);
+      });
+
+    // Get data about response status codes
+    Meteor.call('statusCodesGeneral',
+      params, (error, dataset) => {
+        instance.statusCodesResponse.set(dataset);
       });
 
     // Get data for Errors table
-    Meteor.call('errorsStatisticsData', { proxyBackendId, fromDate, toDate },
-      (error, dataset) => {
+    Meteor.call('errorsStatisticsData',
+      params, (error, dataset) => {
         if (error) throw new Error(error);
 
         instance.errorsStatisticsResponse.set(dataset);
       });
+
+    Meteor.call('lastUpdateTime', { proxyBackendId }, (error, result) => {
+        // Save value
+      instance.lastUpdateTime.set(result);
+    });
   });
 
   // Fetch data for Users table
   instance.autorun(() => {
     const timeframe = FlowRouter.getQueryParam('timeframe');
 
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
-
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+    const queryOption = getDateRange(timeframe);
 
     // Get related instance of Proxy
     const proxy = Proxies.findOne(proxyBackend.proxyId);
@@ -121,11 +116,12 @@ Template.apiAnalyticPageBody.onCreated(function () {
 
     if (elasticsearchHost) {
       // Create a query. It depends on requestPath
-      const usersQuery = mostUsersRequest(instance.requestPath, { fromDate, toDate });
+      const usersQuery = mostUsersRequest(instance.requestPath,
+        { fromDate: queryOption.from, toDate: queryOption.to });
 
       // Send request to get data about most frequent users
-      Meteor.call('getElasticsearchData', elasticsearchHost, usersQuery,
-        (error, dataset) => {
+      Meteor.call('getElasticsearchData',
+        elasticsearchHost, usersQuery, (error, dataset) => {
           if (error) throw Meteor.Error(error);
 
           instance.frequentUsersResponse.set(dataset.aggregations);
@@ -135,21 +131,32 @@ Template.apiAnalyticPageBody.onCreated(function () {
 });
 
 Template.apiAnalyticPageBody.helpers({
-// TODO: Keep in mind to case with error result
   arrowDirection (parameter) {
+    const instance = Template.instance();
+
+    const dataset = instance.analyticsData.get();
+
     // Provide compared data
-    return arrowDirection(parameter, this);
+    return arrowDirection(parameter, dataset[0]);
   },
   percentages (parameter) {
+    const instance = Template.instance();
+
+    const dataset = instance.analyticsData.get() || [];
+
     // Provide compared data
-    return percentageValue(parameter, this);
+    return percentageValue(parameter, dataset[0]);
   },
   summaryComparing (parameter) {
+    const instance = Template.instance();
+
     // Get value of timeframe
     const currentTimeframe = FlowRouter.getQueryParam('timeframe');
 
+    const dataset = instance.analyticsData.get() || [];
+
     // Provide compared data
-    return summaryComparing(parameter, this, currentTimeframe);
+    return summaryComparing(parameter, dataset[0], currentTimeframe);
   },
   overviewChartResponse () {
     const instance = Template.instance();
@@ -157,36 +164,12 @@ Template.apiAnalyticPageBody.helpers({
     // Return boolean value of available overviewChart response
     return !!(instance.overviewChartResponse.get());
   },
-  getStatistics (param) {
+  analyticsData () {
     const instance = Template.instance();
-    const path = instance.requestPath;
+    const dataset = instance.analyticsData.get() || [];
 
-    const summaryStatisticResponse = instance.summaryStatisticResponse.get();
-    const summaryStatistic = summaryStatisticResponse && summaryStatisticResponse[path];
-
-    let count;
-
-    switch (param) {
-
-      case 'requests': {
-        count = summaryStatistic ? summaryStatistic.requestNumber : 0;
-        break;
-      }
-      case 'time': {
-        count = summaryStatistic ? summaryStatistic.medianResponseTime : 0;
-        break;
-      }
-      case 'users': {
-        count = summaryStatistic ? summaryStatistic.avgUniqueUsers : 0;
-        break;
-      }
-      default: {
-        count = 0;
-        break;
-      }
-    }
-
-    return count;
+    // Return boolean value of available analyticsData response
+    return dataset[0];
   },
   getChartData (param) {
     const instance = Template.instance();
@@ -217,15 +200,6 @@ Template.apiAnalyticPageBody.helpers({
     }
 
     return dataset;
-  },
-  comparisonData () {
-    const instance = Template.instance();
-    const path = instance.requestPath;
-
-    const comparisonResponse = instance.comparisonStatisticResponse.get();
-    const comparisonData = comparisonResponse && comparisonResponse[path];
-
-    return comparisonData || {};
   },
   getStatusCode (param) {
     const instance = Template.instance();
@@ -296,5 +270,31 @@ Template.apiAnalyticPageBody.helpers({
 
     // Return value of errors statistics
     return instance.errorsStatisticsResponse.get();
+  },
+  dateFormat () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+
+    if (timeframe === '12' || timeframe === '48') {
+      // Locale format of Hours * minutes
+      return 'LT';
+    }
+
+    // Otherwise It's Date format
+    return 'L';
+  },
+  displayTextAverageUsers () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Display text about "Average unique users" for each period except "Today"
+    return timeframe !== '12';
+  },
+  lastUpdateTime () {
+    const instance = Template.instance();
+
+    return instance.lastUpdateTime.get();
+  },
+  displayLastUpdateTime () {
+    const timeframe = FlowRouter.getQueryParam('timeframe');
+    // Not display info about Last update if selected "Yesterday" or Today
+    return timeframe !== '48' && timeframe !== '12';
   },
 });

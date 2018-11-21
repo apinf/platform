@@ -23,6 +23,26 @@ import requiredFieldsFilled from './required_fields';
 
 AutoForm.hooks({
   proxyBackendForm: {
+    formToModifier: (doc) => {
+      if (doc.$set['apiUmbrella.sub_settings']) {
+        doc.$set['apiUmbrella.sub_settings'] = _.compact(doc.$set['apiUmbrella.sub_settings']);
+      }
+      if (doc.$set['apiUmbrella.settings.rate_limits']) {
+        for (let i = 0; i < doc.$set['apiUmbrella.settings.rate_limits'].length; i++) {
+          // eslint-disable-next-line dot-notation
+          if ((doc.$set['apiUmbrella.settings.rate_limits'][i]['duration'] === undefined) &&
+            // eslint-disable-next-line dot-notation
+            (doc.$set['apiUmbrella.settings.rate_limits'][i]['limit'] === undefined) &&
+            // eslint-disable-next-line dot-notation
+            (doc.$set['apiUmbrella.settings.rate_limits'][i]['limit_by'] === undefined)) {
+            delete doc.$set['apiUmbrella.settings.rate_limits'][i];
+          }
+        }
+        doc.$set['apiUmbrella.settings.rate_limits'] =
+        _.compact(doc.$set['apiUmbrella.settings.rate_limits']);
+      }
+      return doc;
+    },
     before: {
       insert (proxyBackend) {
         // TODO: Refactor this method. It is too long and complex
@@ -38,7 +58,7 @@ AutoForm.hooks({
           if (!requiredFields) {
             // Alert the user of missing values
             const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
-            sAlert.error(errorMessage);
+            sAlert.error(errorMessage, { timeout: 'none' });
             // Cancel form
             return false;
           }
@@ -57,7 +77,7 @@ AutoForm.hooks({
                   // If response has errors object, notify about it
                 if (response.errors && response.errors.default) {
                   // Notify about error
-                  sAlert.error(response.errors.default[0]);
+                  sAlert.error(response.errors.default[0], { timeout: 'none' });
                     // return false;
                   form.result(false);
                 }
@@ -91,7 +111,7 @@ AutoForm.hooks({
             } else {
               // Alert the user of frontend prefix unique issue
               const errorMessage = TAPi18n.__('proxyBackendForm_frontendPrefixNotUnique');
-              sAlert.error(errorMessage);
+              sAlert.error(errorMessage, { timeout: 'none' });
               // Cancel form
               form.result(false);
             }
@@ -127,7 +147,7 @@ AutoForm.hooks({
           if (!requiredFields) {
             // Alert the user of missing values
             const errorMessage = TAPi18n.__('proxyBackendForm_requiredErrorMessage');
-            sAlert.error(errorMessage);
+            sAlert.error(errorMessage, { timeout: 'none' });
             // Cancel form
             return false;
           }
@@ -164,7 +184,7 @@ AutoForm.hooks({
               (error, response) => {
                 if (error) {
                   // Throw a Meteor error
-                  sAlert.error(error);
+                  sAlert.error(error, { timeout: 'none' });
                   // async return false;
                   form.result(false);
                 }
@@ -172,7 +192,7 @@ AutoForm.hooks({
                 // If response has errors object, notify about it
                 if (response.errors && response.errors.default) {
                   // Notify about error
-                  sAlert.error(response.errors.default[0]);
+                  sAlert.error(response.errors.default[0], { timeout: 'none' });
                   // async return false;
                   form.result(false);
                 }
@@ -190,7 +210,7 @@ AutoForm.hooks({
                     umbrellaBackendId, currentProxyBackend.proxyId,
                     (publishError) => {
                       if (publishError) {
-                        sAlert.error(publishError);
+                        sAlert.error(publishError, { timeout: 'none' });
                         // async return false;
                         form.result(false);
                       }
@@ -292,7 +312,7 @@ AutoForm.hooks({
             proxyBackend.emq.settings.acl,
           (err) => {
             if (err) {
-              sAlert.error(err);
+              sAlert.error(err, { timeout: 'none' });
             } else {
               // Get success message translation
               const message = TAPi18n.__('proxyBackendForm_successMessage');
@@ -311,7 +331,7 @@ AutoForm.hooks({
             proxyBackend.proxyId,
             proxyBackend.emq.settings.acl,
           (err) => {
-            if (err) sAlert.error(err);
+            if (err) sAlert.error(err, { timeout: 'none' });
           });
         }
 
@@ -323,7 +343,7 @@ AutoForm.hooks({
       }
     },
     onError (formType, error) {
-      sAlert.error(error.message);
+      sAlert.error(error.message, { timeout: 'none' });
     },
   },
 });

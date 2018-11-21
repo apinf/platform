@@ -23,6 +23,7 @@ Template.navbar.onCreated(function () {
   // Subscribe to project logo
   templateInstance.subscribe('projectLogo');
   templateInstance.subscribe('proxyCount');
+  templateInstance.subscribe('emqProxyCount');
 
   templateInstance.autorun(() => {
     // Check if user is logged in
@@ -54,16 +55,6 @@ Template.navbar.onRendered(() => {
 });
 
 Template.navbar.helpers({
-  isSearchRoute () {
-    // Get name of current route from Router
-    const routeName = FlowRouter.getRouteName();
-
-    if (routeName === 'search') {
-      return true;
-    }
-
-    return false;
-  },
   uploadedProjectLogoLink () {
     // Check for existing branding
     const branding = Branding.findOne();
@@ -111,33 +102,6 @@ Template.navbar.helpers({
 
     return false;
   },
-  userCanAddApi () {
-    // Get settigns document
-    const settings = Settings.findOne();
-
-    if (settings) {
-      // Get access setting value
-      // If access field doesn't exist, these is false. Allow users to add an API on default
-      const onlyAdminsCanAddApis = settings.access ? settings.access.onlyAdminsCanAddApis : false;
-
-      // Allow user to add an API because not only for admin
-      if (!onlyAdminsCanAddApis) {
-        return true;
-      }
-
-      // Otherwise check of user role
-      // Get current user Id
-      const userId = Meteor.userId();
-
-      // Check if current user is admin
-      const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
-
-      return userIsAdmin;
-    }
-    // Return true because no settings are set
-    // By default allowing all user to add an API
-    return true;
-  },
   userCanViewDashboard () {
     // Allow or not regular user to view Dashboard page
     // It depends on onlyAdminsCanAddApis settings
@@ -168,19 +132,24 @@ Template.navbar.helpers({
     // By default allowing all user to add an API
     return true;
   },
+  currentUser () {
+    return Meteor.user();
+  },
+  userCanViewMqttDashboard () {
+    // Get current user Id
+    const userId = Meteor.userId();
+    // User is admin
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    // Get count of EMQ Proxies
+    const proxyCount = Counts.get('emqProxyCount');
+
+    // Can view if he is Admin and Emq Proxy is defined
+    return userIsAdmin && proxyCount > 0;
+  },
 });
 
 Template.navbar.events({
-  'click .icon-search': function () {
-    // Show/hide search field
-    $('.searchblock-toggle').slideToggle('fast');
-
-    // Toggle search icon
-    $('.toggle-search-icon').toggle();
-
-    // Set cursor to search field
-    $('#search-text').focus();
-  },
   'click #dashboard-button': function () {
     // Redirect to Dashboard
     FlowRouter.go('dashboardPage');

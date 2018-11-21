@@ -1,0 +1,18 @@
+<!-- Copyright 2018 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="adminLayout">
+  {{# if Template.subscriptionsReady }}
+    <div class="admin-layout">
+      {{> Template.dynamic template=bar data=branding }}
+      <!--{{> navbar branding=branding }} -->
+      <div class="content-wrapper container block-wrapper">
+        {{> Template.dynamic template=main }}
+        {{> sAlert }}
+      </div>
+      {{> footer branding=branding }}
+    </div>
+  {{/ if }}
+</template>

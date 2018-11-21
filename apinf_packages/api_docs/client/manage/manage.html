@@ -12,7 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
           <h1 class="modal-title">
-            {{_ "manageApiDocumentationModal_Title" }}
+            {{_ "manageApiDocumentationModal_addDocumentation_title" }}
           </h1>
         </div>
         <div class="modal-body">
@@ -22,11 +22,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             id="apiDocumentationForm"
             type=formType }}
 
-            <legend>
-              {{> showHelp 'addApiDocumentation' }}
-              {{_ "manageApiDocumentationModal_addDocumentation_title" }}
-            </legend>
-            <p class="help-text">
+            <p style="color: #6d859e;">
+              {{_ 'manageApiDocumentationModal_hints_uploadApiDocumentation' }}
               {{_ 'manageApiDocumentationModal_helpText_useHttpsProtocol' }}
             </p>
             {{> afQuickField name="type" firstOption=false }}
@@ -41,8 +38,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                       <i class="fa fa-file-text-o" aria-hidden="true"></i>
                       {{ documentationFile.filename }}
                       <span class="pull-right">
-                    <button type="button" class="btn btn-xs btn-danger delete-documentation">
-                      <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                    <button type="button" class="btn btn-xs btn-danger delete-documentation" style="height:auto;">
+                      <i class="fa mdi mdi-delete" aria-hidden="true"></i>
                     </button>
                   </span>
                     </li>
@@ -58,26 +55,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               type="select-checkbox-inline"
               noselect=false
             }}
-            {{# if apiDocumentationEditorIsEnabled }}
-              <legend>
-                {{> showHelp 'documentation_editor_create_file' }}
-                {{_ "manageApiDocumentationModal_CreateDocumentation_Title" }}
-              </legend>
-              <a id="open-api-editor" class="btn btn-primary" href="/documentation/editor">
-                {{_ "manageApiDocumentationModal_openDocumentationEditor" }}
-              </a>
-            {{/ if }}
-            <legend>
-              {{> showHelp 'documentation_link' }}
-              {{_ "manageApiDocumentationModal_DocumentationLink_Title" }}
-            </legend>
-            {{> afQuickField name='otherUrl' }}
-            <button type="submit" class="btn btn-success" id="save-documentation-link">
-              {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
-            </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel-button">
-              {{_ "manageApiDocumentationModal_CreateDocumentation_CancelButton" }}
-            </button>
+            <div class="text-right">
+              <button type="submit" class="btn btn-success btn-success-special" id="save-documentation-link">
+                {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
+              </button>
+            </div>
             {{# if fileUploding }}
               {{> spinner }}
             {{/ if }}

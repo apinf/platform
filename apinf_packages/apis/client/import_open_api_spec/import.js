@@ -96,7 +96,7 @@ Template.importOpenApiSpecification.onCreated(function () {
 
   instance.errorCase = (message, fileId) => {
     // Display message
-    sAlert.error(message);
+    sAlert.error(message, { timeout: 'none' });
     // Remove uploaded DocumentFile
     instance.removeDocumentationFile(fileId);
     // Form isn't submitted because of error
@@ -207,7 +207,7 @@ Template.importOpenApiSpecification.events({
         // Get translated text
         const message = TAPi18n.__('importApiFile_invalidExtension_message');
         // Alert error Message
-        sAlert.error(message);
+        sAlert.error(message, { timeout: 'none' });
       }
     }
 
@@ -218,7 +218,7 @@ Template.importOpenApiSpecification.events({
       // Get translated text
       const message = TAPi18n.__('importOpenApiSpecification_message_provideSpecification');
       // Otherwise all fields are empty
-      sAlert.error(message);
+      sAlert.error(message, { timeout: 'none' });
     }
   },
 });

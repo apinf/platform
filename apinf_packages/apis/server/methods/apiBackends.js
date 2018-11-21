@@ -27,11 +27,34 @@ Meteor.methods({
     // Return the API
     return api;
   },
-  getApiById (id) {
-    // Make sure slug is a string
-    check(id, String);
+  updateApiBySlug (query) {
+    // Make sure query is a object
+    check(query, Object);
+    const api = Apis.findOne(query);
+    if (!api) {
+      // Throw API error for client
+      throw new Meteor.Error(`The API doesn't exists with parameter ${query}`);
+    }
 
-    // Look for API
-    return Apis.findOne(id);
+    // Get formed slug
+    const slugFormed = Meteor.call('formSlugFromName', 'Apis', api.name);
+
+    // If formed slug true
+    if (slugFormed && typeof slugFormed === 'object') {
+      // Update new slug
+      Apis.update({ name: api.name }, {
+        $set: {
+          slug: slugFormed.slug,
+          'friendlySlugs.slug.base': slugFormed.friendlySlugs.slug.base,
+          'friendlySlugs.slug.index': slugFormed.friendlySlugs.slug.index,
+        },
+      });
+
+      // Return the API slug
+      return slugFormed.slug;
+    }
+
+    // Return
+    return slugFormed;
   },
 });

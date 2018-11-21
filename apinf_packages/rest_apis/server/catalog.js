@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
  This file is covered by the EUPL license.
  You may obtain a copy of the licence at
  https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -47,6 +47,7 @@ CatalogV1.swagger = {
   tags: {
     authentication: 'Authentication',
     api: 'APIs',
+    proxy: 'Proxies',
   },
   params: {
     api: {
@@ -112,6 +113,29 @@ CatalogV1.swagger = {
       required: false,
       type: 'string',
     },
+    proxyConnectionRequestPost: {
+      name: 'proxyBackendPost',
+      in: 'body',
+      description: 'Proxy connection data',
+      schema: {
+        $ref: '#/definitions/proxyConnectionRequestPost',
+      },
+    },
+    proxyConnectionRequestPut: {
+      name: 'proxyBackendPut',
+      in: 'body',
+      description: 'Proxy connection data',
+      schema: {
+        $ref: '#/definitions/proxyConnectionRequestPut',
+      },
+    },
+    proxyId: {
+      name: 'proxyId',
+      in: 'body',
+      description: 'ID of Proxy',
+      required: true,
+      type: 'string',
+    },
     skip: {
       name: 'skip',
       in: 'query',
@@ -120,6 +144,21 @@ CatalogV1.swagger = {
       type: 'integer',
       format: 'int32',
       minimum: 0,
+    },
+    statusList: {
+      name: 'statusList',
+      in: 'query',
+      description: 'Show list of statutes.',
+      required: false,
+      type: 'string',
+      enum: ['true'],
+    },
+    url: {
+      name: 'url',
+      in: 'query',
+      description: 'Documentation link to be removed.',
+      required: false,
+      type: 'string',
     },
   },
   definitions: {
@@ -143,7 +182,7 @@ CatalogV1.swagger = {
         lifecycleStatus: {
           type: 'string',
           enum: ['design', 'development', 'testing', 'production', 'deprecated'],
-          example: 'design/development/testing/production/deprecated',
+          example: 'design | development | testing | production | deprecated',
         },
         isPublic: {
           type: 'string',
@@ -198,7 +237,7 @@ CatalogV1.swagger = {
         },
         lifecycleStatus: {
           type: 'string',
-          example: 'design/development/testing/production/deprecated',
+          example: 'design | development | testing | production | deprecated',
         },
         authorizedUserIds: {
           type: 'array',
@@ -255,54 +294,339 @@ CatalogV1.swagger = {
           example: 'link-address-to-specification',
         },
         externalDocumentation: {
-          type: 'string',
+          type: 'array',
           description: 'A URL to an external site page with API documentation',
-          example: 'url-to-external-site',
+          items: {
+            type: 'string',
+            example: 'url-to-external-site',
+          },
         },
       },
     },
-    loginRequest: {
-      required: ['username', 'password'],
-      properties: {
-        username: {
-          type: 'string',
-          description: 'Username',
-          example: 'johndoe',
-        },
-        password: {
-          type: 'string',
-          description: 'Password for user',
-          example: 'mypassword',
-        },
-      },
-    },
-    loginResponse: {
+    apiMonitoring: {
       type: 'object',
       properties: {
-        status: {
+        _id: {
           type: 'string',
-          example: 'success',
+          example: 'api-id-value',
         },
-        data: {
-          type: 'object',
-          properties: {
-            authToken: {
-              type: 'string',
-              example: 'auth-token-value',
-            },
-            userId: {
-              type: 'string',
-              example: 'user-id-value',
+        enabled: {
+          type: 'boolean',
+          example: 'true',
+        },
+        apiMonitoringResultList: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              responses: {
+                type: 'object',
+                description: 'text',
+                properties: {
+                  date: {
+                    type: 'string',
+                    example: 'text',
+                  },
+                  server_status_code: {
+                    type: 'string',
+                    example: 'text',
+                  },
+                  url: {
+                    type: 'string',
+                    example: 'url',
+                  },
+                },
+              },
             },
           },
         },
       },
     },
-
+    proxyResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'proxy-id-value',
+        },
+        name: {
+          type: 'string',
+          example: 'API Umbrella',
+        },
+        type: {
+          type: 'string',
+          example: 'apiUmbrella',
+        },
+      },
+    },
+    // The proxy schema for POST method
+    proxyConnectionRequestPost: {
+      required: ['frontendPrefix', 'backendPrefix', 'apiPort'],
+      properties: {
+        proxyId: {
+          type: 'string',
+          example: 'id-of-proxy',
+        },
+        frontendPrefix: {
+          type: 'string',
+          example: '/api_name/',
+        },
+        backendPrefix: {
+          type: 'string',
+          example: '/rest/v1/',
+        },
+        apiPort: {
+          type: 'integer',
+          format: 'int32',
+          example: '443',
+        },
+        disableApiKey: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        rateLimitMode: {
+          type: 'string',
+          enum: ['unlimited', 'custom'],
+          example: 'unlimited',
+        },
+        duration: {
+          type: 'integer',
+          format: 'int32',
+          example: '100',
+        },
+        limitBy: {
+          type: 'string',
+          enum: ['apiKey', 'ip'],
+          example: 'apiKey',
+        },
+        limit: {
+          type: 'integer',
+          format: 'int32',
+          example: '500',
+        },
+        showLimitInResponseHeaders: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        allow: {
+          type: 'string',
+          enum: ['deny', 'allow'],
+          example: 'deny',
+        },
+        access: {
+          type: 'string',
+          enum: ['subscribe', 'publish', 'both'],
+          example: 'subscribe',
+        },
+        topic: {
+          type: 'string',
+          example: 'certain-topic',
+        },
+        fromType: {
+          type: 'string',
+          enum: ['clientid', 'username', 'ipaddr'],
+          example: 'clientid',
+        },
+        fromValue: {
+          type: 'string',
+          example: '666',
+        },
+      },
+    },
+    // The proxy schema for PUT method
+    proxyConnectionRequestPut: {
+      properties: {
+        editIndex: {
+          type: 'integer',
+          format: 'int32',
+          example: '1',
+        },
+        removeIndex: {
+          type: 'integer',
+          format: 'int32',
+          example: '3',
+        },
+        frontendPrefix: {
+          type: 'string',
+          example: '/api_name/',
+        },
+        backendPrefix: {
+          type: 'string',
+          example: '/rest/v1/',
+        },
+        apiPort: {
+          type: 'integer',
+          format: 'int32',
+          example: '443',
+        },
+        disableApiKey: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        rateLimitMode: {
+          type: 'string',
+          enum: ['unlimited', 'custom'],
+          example: 'unlimited',
+        },
+        duration: {
+          type: 'integer',
+          format: 'int32',
+          example: '100',
+        },
+        limitBy: {
+          type: 'string',
+          enum: ['apiKey', 'ip'],
+          example: 'apiKey',
+        },
+        limit: {
+          type: 'integer',
+          format: 'int32',
+          example: '500',
+        },
+        showLimitInResponseHeaders: {
+          type: 'string',
+          enum: ['true', 'false'],
+          example: 'false',
+        },
+        allow: {
+          type: 'string',
+          enum: ['deny', 'allow'],
+          example: 'deny',
+        },
+        access: {
+          type: 'string',
+          enum: ['subscribe', 'publish', 'both'],
+          example: 'subscribe',
+        },
+        topic: {
+          type: 'string',
+          example: 'certain-topic',
+        },
+        fromType: {
+          type: 'string',
+          enum: ['clientid', 'username', 'ipaddr'],
+          example: 'clientid',
+        },
+        fromValue: {
+          type: 'string',
+          example: '666',
+        },
+      },
+    },
+    // The proxy backend response schema
+    proxyConnectionResponse: {
+      type: 'object',
+      properties: {
+        _id: {
+          type: 'string',
+          example: 'id-of-proxy-backend',
+        },
+        apiId: {
+          type: 'string',
+          example: 'id-of-connected-api',
+        },
+        proxyId: {
+          type: 'string',
+          example: 'id-of-proxy',
+        },
+        type: {
+          type: 'string',
+          example: 'apiUmberlla',
+        },
+        apiUmbrella: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'name-of-connected-api',
+            },
+            frontend_host: {
+              type: 'string',
+              example: 'url-of-proxy',
+            },
+            backend_host: {
+              type: 'string',
+              example: 'url-of-api',
+            },
+            backend_protocol: {
+              type: 'string',
+              example: 'http | https',
+            },
+            servers: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  host: {
+                    type: 'string',
+                    example: 'host-url-of-api',
+                  },
+                  port: {
+                    type: 'integer',
+                    format: 'int32',
+                    example: '443',
+                  },
+                },
+              },
+            },
+            balance_algorithm: {
+              type: 'string',
+              example: 'least_conn',
+            },
+            settings: {
+              type: 'object',
+              properties: {
+                disable_api_key: {
+                  type: 'string',
+                  example: 'false | true',
+                },
+                rate_limit_mode: {
+                  type: 'string',
+                  example: 'custom | unlimited',
+                },
+                rate_limits: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      duration: {
+                        type: 'integer',
+                        format: 'int32',
+                        example: '100',
+                      },
+                      limit_by: {
+                        type: 'string',
+                        example: 'apiKey',
+                      },
+                      limit: {
+                        type: 'integer',
+                        format: 'int32',
+                        example: '99',
+                      },
+                      response_headers: {
+                        type: 'string',
+                        example: 'false | true',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            id: {
+              type: 'string',
+              example: 'id-of-XXX',
+            },
+          },
+        },
+      },
+    },
   },
 };
 
-// Generate Swagger to route /rest/v1/api_catalog.json
+// Generate Swagger to route /rest/v1/catalog.json
 CatalogV1.addSwagger('catalog.json');
 
 export default CatalogV1;

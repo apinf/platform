@@ -11,95 +11,116 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// Npm packages imports
-import moment from 'moment';
+// Collection imports
+import Apis from '/apinf_packages/apis/collection';
 
-// APInf imports
-import promisifyCall from '/apinf_packages/core/helper_functions/promisify_call';
+// APInf import
+import getDateRange from '/apinf_packages/core/helper_functions/date_range';
 
 Template.dashboardView.onCreated(function () {
   // Get reference to template instance
   const instance = this;
 
-  instance.groupingIds = new ReactiveVar({
-    myApis: [],
-    managedApis: [],
-    otherApis: [],
-  });
+  instance.groupingIds = new ReactiveVar();
 
-  // Get API IDs for grouping
-  Meteor.call('groupingApiIds', (err, res) => {
-    instance.groupingIds.set(res);
+  instance.autorun(() => {
+    const proxyId = FlowRouter.getQueryParam('proxy_id');
+    if (proxyId) {
+      // Get Proxy backend IDs for grouping
+      Meteor.call('groupingBackendIds', proxyId, (err, res) => {
+        instance.groupingIds.set(res);
+      });
+    }
   });
 
   // Init variables
   instance.overviewChartResponse = new ReactiveVar();
-  instance.summaryStatisticResponse = new ReactiveVar();
-  instance.comparisonStatisticResponse = new ReactiveVar();
-  instance.statusCodesResponse = new ReactiveVar();
+  instance.analyticsDataMyApis = new ReactiveVar();
+  instance.analyticsDataManagedApis = new ReactiveVar();
+  instance.analyticsDataOtherApis = new ReactiveVar();
 
   instance.autorun(() => {
-    const proxyId = FlowRouter.getQueryParam('proxy_id');
+    const grouping = instance.groupingIds.get();
     const timeframe = FlowRouter.getQueryParam('timeframe');
+    const proxyId = FlowRouter.getQueryParam('proxy_id');
 
-    // Get timestamp of tomorrow 00:00:00 Date time (excluded value)
-    const toDate = moment(0, 'HH').add(1, 'd').valueOf();
+    if (grouping && timeframe && proxyId) {
+      const queryOption = getDateRange(timeframe);
 
-    // Get timestamp of timeframe ago 00:00:00 Date time (included value)
-    const fromDate = moment(toDate).subtract(timeframe, 'd').valueOf();
+      const params = {
+        proxyId,
+        fromDate: queryOption.from,
+        toDate: queryOption.to,
+        interval: queryOption.interval,
+        timeframe,
+        onePeriodAgo: queryOption.onePeriodAgo,
+        doublePeriodAgo: queryOption.doublePeriodAgo,
+        responseCode: true,
+      };
 
-    // Get data about summary statistic for current period
-    promisifyCall('summaryStatisticNumber', { proxyId, fromDate, toDate })
-      .then((currentPeriodDataset) => {
-        instance.summaryStatisticResponse.set(currentPeriodDataset);
+      const proxyBackendsIds = grouping.myApis.concat(
+        grouping.managedApis, grouping.otherApis
+      );
 
-        const previousFromDate = moment(fromDate).subtract(timeframe, 'd').valueOf();
+      // Get data for Overview charts
+      Meteor.call('overviewChartsGeneral',
+        params, proxyBackendsIds, (error, dataset) => {
+          if (error) throw new Meteor.Error(error.message);
 
-        // Get trend data is based on the current period data
-        Meteor.call('summaryStatisticTrend',
-          { proxyId, fromDate: previousFromDate, toDate: fromDate }, currentPeriodDataset,
-          (err, compareResponse) => {
-            // Save the response about Comparison data
-            instance.comparisonStatisticResponse.set(compareResponse);
-          });
-      }).catch((error) => {
-        throw new Meteor.Error(error);
-      });
+          instance.overviewChartResponse.set(dataset);
+        });
 
-    Meteor.call('overviewChartsData', { proxyId, fromDate, toDate }, (error, dataset) => {
-      instance.overviewChartResponse.set(dataset);
-    });
+      Meteor.call('totalNumberAndTrendGeneral',
+        params, grouping.myApis, (error, result) => {
+          if (error) throw new Meteor.Error(error.message);
 
-    Meteor.call('statusCodesData', { proxyId, fromDate, toDate }, (error, dataset) => {
-      instance.statusCodesResponse.set(dataset);
-    });
+          this.analyticsDataMyApis.set(result);
+        });
+
+      Meteor.call('totalNumberAndTrendGeneral',
+        params, grouping.managedApis, (error, result) => {
+          if (error) throw new Meteor.Error(error.message);
+
+          this.analyticsDataManagedApis.set(result);
+        });
+
+      Meteor.call('totalNumberAndTrendGeneral',
+        params, grouping.otherApis, (error, result) => {
+          if (error) throw new Meteor.Error(error.message);
+
+          this.analyticsDataOtherApis.set(result);
+        });
+    }
   });
 });
 
 Template.dashboardView.helpers({
-  grouping () {
-    const instance = Template.instance();
-    // Return object with IDs groups
-    return instance.groupingIds.get();
-  },
   overviewChartResponse () {
     const instance = Template.instance();
 
     return instance.overviewChartResponse.get();
   },
-  summaryStatisticResponse () {
-    const instance = Template.instance();
-
-    return instance.summaryStatisticResponse.get();
+  analyticsDataMyApis () {
+    return Template.instance().analyticsDataMyApis.get();
   },
-  comparisonStatisticResponse () {
-    const instance = Template.instance();
-
-    return instance.comparisonStatisticResponse.get();
+  analyticsDataManagedApis () {
+    return Template.instance().analyticsDataManagedApis.get();
   },
-  statusCodesResponse () {
-    const instance = Template.instance();
+  analyticsDataOtherApis () {
+    return Template.instance().analyticsDataOtherApis.get();
+  },
+  displayTables () {
+    const searchValue = Template.currentData().searchValue;
 
-    return instance.statusCodesResponse.get();
+    // Make sure searchValue exists
+    if (searchValue) {
+      const query = { name: { $regex: searchValue, $options: 'i' } };
+
+      // Display tables if result is not empty
+      return Apis.find(query).count() !== 0;
+    }
+
+    // Display tables by default
+    return true;
   },
 });

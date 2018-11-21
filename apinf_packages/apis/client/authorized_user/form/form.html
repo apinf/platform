@@ -1,0 +1,29 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiUserAuthorizationForm">
+  <h3 style="font-size:16px; margin-top:0;">
+    Add new collaborator
+  </h3>
+  <p style="color:#6d859e;">
+    Give either username or email address
+  </p>
+  {{# autoForm
+    schema=emailSchema
+    id="authorizedUserForm"
+    class="form-inline"
+    type="method"
+    meteormethod="addAuthorizedUser"
+  }}
+    <fieldset>
+      {{> afQuickField name='user' }}
+      {{> afQuickField name='apiId' value=api._id type="hidden" }}
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">
+      Add collaborator
+    </button>
+  {{/ autoForm }}
+</template>

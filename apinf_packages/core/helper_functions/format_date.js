@@ -16,9 +16,35 @@ import 'moment/min/locales.min';
   @param {string} dateFormat - Date format, eg. "LL" (default)
     "MMMM D, YYYY" for "en", "Do MMMM[ta] YYYY" for "fi"
 */
-export default function formatDate (date, dateFormat = 'LL') {
+export function formatDate (date, dateFormat = 'LL') {
   // Get current language
   const language = TAPi18n.getLanguage();
   // Return formatted date
   return moment(date).locale(language).format(dateFormat);
+}
+
+export function getLocaleDateFormat (dateFormat = 'L') {
+  // Use regex to define Finnish locale for different browsers
+  const regex = RegExp('fi*');
+
+  // Get locale
+  const locale = navigator.languages ? navigator.languages[0] :
+    (navigator.language || navigator.userLanguage);
+
+  moment.locale(locale);
+
+  // Get locale data
+  const localeData = moment.localeData();
+
+  let format = localeData.longDateFormat(dateFormat);
+
+  if (regex.test(locale)) {
+    // Remove year part (save the last dot)
+    format = format.replace(/YYYY/, '');
+  } else {
+    // Remove year part
+    format = format.replace(/.YYYY/, '');
+  }
+
+  return format;
 }

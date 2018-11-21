@@ -4,18 +4,17 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="forbidden">
-  <div class="container">
+  <div class="container text-center">
     <div class="error-page">
-      <h1 class="headline text-danger">
+      <h2 class="text-danger" style="font-size: 3em">
         {{_ "forbidden_Title" }}
-      </h1>
+      </h2>
       <div class="error-content">
         <p>
-          <i class="fa fa-warning text-danger"></i>
-          &nbsp;
           {{_ "forbidden_Message" }}
+          <br>
+          {{> goBackButton }}
         </p>
-        {{> goBackButton }}
       </div>
     </div>
   </div>

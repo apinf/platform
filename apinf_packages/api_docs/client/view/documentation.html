@@ -4,15 +4,13 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiDocumentation">
-  <div class="panel panel-default">
     {{# if Template.subscriptionsReady }}
-      <div class="panel-heading">
         <div class="pull-right">
           {{# if codegenServerExists }}
             {{# if documentationExists }}
               <button
                 id="sdk-code-generator"
-                class="btn btn-info btn-xs"
+                class="btn btn-default btn-xs"
                 data-toggle="tooltip"
                 title="{{_ 'apiDocumentation_tooltipSDKGeneratorButton' }}">
                 {{_ "apiDocumentation_sdkGenerateButton" }}
@@ -22,32 +20,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{# if api.currentUserCanManage }}
             {{# if displayEditor }}
               <button
-                class="btn btn-xs btn-info editor">
+                class="btn btn-xs btn-default editor">
                 <i class="fa fa-file-text-o"></i>&nbsp;
                 {{_ "apiDocumentation_buttonText_closeEditor" }}
               </button>
             {{ else }}
-              <button
-                class="btn btn-xs btn-info editor">
-                <i class="fa fa-file-text-o"></i>&nbsp;
-                {{_ "apiDocumentation_buttonText_openEditor" }}
-              </button>
+              {{# if developmentFeatures }}
+                <button
+                  class="btn btn-xs btn-info editor">
+                  <i class="fa fa-file-text-o"></i>&nbsp;
+                  {{_ "apiDocumentation_buttonText_openEditor" }}
+                </button>
+              {{/ if }}
             {{/ if }}
             <button
               id="manage-api-documentation"
-              class="btn btn-xs btn-info">
-              <i class="fa fa-pencil"></i>&nbsp;
+              class="btn btn-xs btn-default">
               {{_ "apiDocumentation_manageDocumentation_buttonText" }}
             </button>
           {{/ if }} <!-- /if currentUserCanManage -->
         </div>
-        <h2 id="documentation-title" class="panel-title clearfix">
-          {{_ "apiDocumentation_Title" }}
+        <h2 id="documentation-title" style="font-size:1.6em;display: inline;">
+          API Console
         </h2>
-      </div>
+        <hr style="margin-top:1em;" />
 
-      <div class="panel-body">
-        {{# if displayLinkBlock }}
+      <!-- <div class="panel-body"> -->
+        <!-- {{# if displayLinkBlock }}
           <div id="documentation-link-panel" class="panel panel-default">
             <div class="panel-heading">
               <h2 id="documentation-link-title" class="panel-title">
@@ -55,14 +54,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </h2>
             </div>
             <div class="panel-body">
-              <!-- Display link to remote documentation-->
               {{# if apiDoc.otherUrl }}
-                <div id="documentation-link" class="documentation-link">
-                  <i class="fa fa-external-link"></i>&nbsp;
-                  <a href="{{ apiDoc.otherUrl }}" target="_blank">
-                    {{ apiDoc.otherUrl }}
-                  </a>
-                </div>
+                {{# each link in apiDoc.otherUrl }}
+                  <div id="documentation-link" class="documentation-link">
+                    <i class="fa fa-external-link"></i>&nbsp;
+                    <a href="{{ link }}" target="_blank">
+                      {{ link }}
+                    </a>
+                  </div>
+                {{/ each }}
               {{ else }}
                 <i>
                   {{_ "apiDocumentation_No_Link_Manager_Message" }}
@@ -70,44 +70,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{/ if }}
             </div>
           </div>
-        {{/ if }}
+        {{/ if }} -->
 
         {{# if displayViewBlock }}
-          <div id="documentation-viewer-panel" class="panel panel-default">
-            <div class="panel-heading">
-              <a
-                tabindex="0"
-                class="pull-right"
-                role="button"
-                data-toggle="popover"
-                data-placement="left"
-                data-trigger="focus"
-                data-original-title="{{_ 'apiDocumentation_APICall_Warning_Title' }}"
-                data-content="{{_ 'apiDocumentation_APICall_Warning_Message' }}">
-                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-              </a>
-              <h2 id="documentation-viewer-title" class="panel-title">
-                {{_ "apiDocumentation_Viewer_Title" }}
-              </h2>
-            </div>
-            <div class="panel-body">
+          <div id="documentation-viewer-panel" style="margin-top:1em;">
               {{# if displayEditor }}
                 {{> openApiEditor api=api }}
               {{ else }}
                 {{# if documentationExists }}
                   {{> swaggerUi api=api }}
                 {{ else }}
-                  <i>
+                  <p>
                     {{_ "apiDocumentation_No_Swagger_Manager_Message" }}
-                  </i>
+                </p>
                 {{/ if }}
               {{/ if }}
-            </div>
           </div>
         {{/ if }}
-      </div>
     {{ else }}
       {{> spinner }}
     {{/ if }}<!-- /if template subscriptions ready -->
-  </div>
 </template>
