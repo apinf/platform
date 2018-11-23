@@ -1334,6 +1334,7 @@
   "userMenu_proxies": "Proxies",
   "userMenu_settings": "Settings",
   "userMenu_signout": "Sign out",
+  "userMenu_signedIn": "Signed in as",
   "userMenu_loginPlatforms": "Login Platforms",
   "userProfile_account_title": "Account information",
   "viewApiNavigationMenu_backlog": "Backlog",
